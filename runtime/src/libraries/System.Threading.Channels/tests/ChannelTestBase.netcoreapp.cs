@@ -114,34 +114,30 @@ namespace System.Threading.Channels.Tests
             int producedTotal = 0,
                 consumedTotal = 0;
             await Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    for (int i = 0; i < items; i++)
                     {
-                        for (int i = 0; i < items; i++)
-                        {
-                            await c.Writer.WriteAsync(i);
-                            producedTotal += i;
-                        }
-                        c.Writer.Complete();
+                        await c.Writer.WriteAsync(i);
+                        producedTotal += i;
                     }
-                ),
-                Task.Run(
-                    async () =>
+                    c.Writer.Complete();
+                }),
+                Task.Run(async () =>
+                {
+                    IAsyncEnumerator<int> e = c.Reader.ReadAllAsync().GetAsyncEnumerator();
+                    try
                     {
-                        IAsyncEnumerator<int> e = c.Reader.ReadAllAsync().GetAsyncEnumerator();
-                        try
+                        while (await e.MoveNextAsync())
                         {
-                            while (await e.MoveNextAsync())
-                            {
-                                consumedTotal += e.Current;
-                            }
-                        }
-                        finally
-                        {
-                            await e.DisposeAsync();
+                            consumedTotal += e.Current;
                         }
                     }
-                )
+                    finally
+                    {
+                        await e.DisposeAsync();
+                    }
+                })
             );
 
             Assert.Equal(producedTotal, consumedTotal);

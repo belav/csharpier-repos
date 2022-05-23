@@ -231,12 +231,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.Configure<HubOptions>(
-                        options =>
-                        {
-                            options.HandshakeTimeout = TimeSpan.FromMilliseconds(5);
-                        }
-                    );
+                    services.Configure<HubOptions>(options =>
+                    {
+                        options.HandshakeTimeout = TimeSpan.FromMilliseconds(5);
+                    });
                 },
                 LoggerFactory
             );
@@ -378,12 +376,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 loggerFactory: LoggerFactory,
                 builder =>
                 {
-                    builder.AddSignalR(
-                        o =>
-                        {
-                            o.MaximumReceiveMessageSize = 1;
-                        }
-                    );
+                    builder.AddSignalR(o =>
+                    {
+                        o.MaximumReceiveMessageSize = 1;
+                    });
                 }
             );
 
@@ -883,13 +879,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
 
             using (var client = new TestClient())
             {
-                var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-                    async () =>
-                    {
-                        var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
-                        await connectionHandlerTask.DefaultTimeout();
-                    }
-                );
+                var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                {
+                    var connectionHandlerTask = await client.ConnectAsync(connectionHandler);
+                    await connectionHandlerTask.DefaultTimeout();
+                });
                 Assert.Equal("Lifetime manager OnConnectedAsync failed.", exception.Message);
 
                 client.Dispose();
@@ -1144,12 +1138,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 builder =>
                 {
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = detailedErrors;
-                        }
-                    );
+                    builder.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = detailedErrors;
+                    });
                 },
                 LoggerFactory
             );
@@ -2689,12 +2681,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
         {
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 builder =>
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = detailedErrors;
-                        }
-                    ),
+                    builder.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = detailedErrors;
+                    }),
                 LoggerFactory
             );
             var connectionHandler = serviceProvider.GetService<
@@ -2810,19 +2800,17 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddAuthorization(
-                        options =>
-                        {
-                            options.AddPolicy(
-                                "test",
-                                policy =>
-                                {
-                                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                                    policy.AddAuthenticationSchemes("Default");
-                                }
-                            );
-                        }
-                    );
+                    services.AddAuthorization(options =>
+                    {
+                        options.AddPolicy(
+                            "test",
+                            policy =>
+                            {
+                                policy.RequireClaim(ClaimTypes.NameIdentifier);
+                                policy.AddAuthenticationSchemes("Default");
+                            }
+                        );
+                    });
                 },
                 LoggerFactory
             );
@@ -2856,19 +2844,17 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddAuthorization(
-                        options =>
-                        {
-                            options.AddPolicy(
-                                "test",
-                                policy =>
-                                {
-                                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                                    policy.AddAuthenticationSchemes("Default");
-                                }
-                            );
-                        }
-                    );
+                    services.AddAuthorization(options =>
+                    {
+                        options.AddPolicy(
+                            "test",
+                            policy =>
+                            {
+                                policy.RequireClaim(ClaimTypes.NameIdentifier);
+                                policy.AddAuthenticationSchemes("Default");
+                            }
+                        );
+                    });
                 },
                 LoggerFactory
             );
@@ -2981,19 +2967,17 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddAuthorization(
-                        options =>
-                        {
-                            options.AddPolicy(
-                                "test",
-                                policy =>
-                                {
-                                    policy.RequireClaim(ClaimTypes.NameIdentifier);
-                                    policy.AddAuthenticationSchemes("Default");
-                                }
-                            );
-                        }
-                    );
+                    services.AddAuthorization(options =>
+                    {
+                        options.AddPolicy(
+                            "test",
+                            policy =>
+                            {
+                                policy.RequireClaim(ClaimTypes.NameIdentifier);
+                                policy.AddAuthenticationSchemes("Default");
+                            }
+                        );
+                    });
 
                     services.AddSingleton<IAuthorizationHandler, TestAuthHandler>();
                 },
@@ -3040,15 +3024,13 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddNewtonsoftJsonProtocol(
-                            o =>
+                        .AddNewtonsoftJsonProtocol(o =>
+                        {
+                            o.PayloadSerializerSettings = new JsonSerializerSettings
                             {
-                                o.PayloadSerializerSettings = new JsonSerializerSettings
-                                {
-                                    ContractResolver = new DefaultContractResolver()
-                                };
-                            }
-                        );
+                                ContractResolver = new DefaultContractResolver()
+                            };
+                        });
                 },
                 LoggerFactory
             );
@@ -3120,18 +3102,16 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     services
                         .AddSignalR()
-                        .AddMessagePackProtocol(
-                            options =>
-                            {
-                                options.SerializerOptions =
-                                    MessagePackSerializerOptions.Standard.WithResolver(
-                                        CompositeResolver.Create(
-                                            new CustomFormatter(),
-                                            options.SerializerOptions.Resolver
-                                        )
-                                    );
-                            }
-                        );
+                        .AddMessagePackProtocol(options =>
+                        {
+                            options.SerializerOptions =
+                                MessagePackSerializerOptions.Standard.WithResolver(
+                                    CompositeResolver.Create(
+                                        new CustomFormatter(),
+                                        options.SerializerOptions.Resolver
+                                    )
+                                );
+                        });
                 },
                 LoggerFactory
             );
@@ -3175,12 +3155,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        o =>
-                        {
-                            o.SupportedProtocols = null;
-                        }
-                    );
+                    services.AddSignalR(o =>
+                    {
+                        o.SupportedProtocols = null;
+                    });
                 },
                 LoggerFactory
             );
@@ -3216,12 +3194,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        o =>
-                        {
-                            o.SupportedProtocols = new List<string>();
-                        }
-                    );
+                    services.AddSignalR(o =>
+                    {
+                        o.SupportedProtocols = new List<string>();
+                    });
                 },
                 LoggerFactory
             );
@@ -3255,20 +3231,18 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var firstRequest = true;
-            var userIdProvider = new TestUserIdProvider(
-                c =>
+            var userIdProvider = new TestUserIdProvider(c =>
+            {
+                if (firstRequest)
                 {
-                    if (firstRequest)
-                    {
-                        firstRequest = false;
-                        return "client1";
-                    }
-                    else
-                    {
-                        return "client2";
-                    }
+                    firstRequest = false;
+                    return "client1";
                 }
-            );
+                else
+                {
+                    return "client2";
+                }
+            });
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
@@ -3762,13 +3736,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.Configure<HubOptions>(
-                        options =>
-                        {
-                            options.ClientTimeoutInterval = TimeSpan.FromMilliseconds(0);
-                            options.MaximumParallelInvocationsPerClient = 1;
-                        }
-                    );
+                    services.Configure<HubOptions>(options =>
+                    {
+                        options.ClientTimeoutInterval = TimeSpan.FromMilliseconds(0);
+                        options.MaximumParallelInvocationsPerClient = 1;
+                    });
                     services.AddSingleton(tcsService);
                 },
                 LoggerFactory
@@ -3821,13 +3793,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.Configure<HubOptions>(
-                        options =>
-                        {
-                            options.ClientTimeoutInterval = TimeSpan.FromMilliseconds(0);
-                            options.MaximumParallelInvocationsPerClient = 2;
-                        }
-                    );
+                    services.Configure<HubOptions>(options =>
+                    {
+                        options.ClientTimeoutInterval = TimeSpan.FromMilliseconds(0);
+                        options.MaximumParallelInvocationsPerClient = 2;
+                    });
                     services.AddSingleton(tcsService);
                 },
                 LoggerFactory
@@ -3903,12 +3873,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 builder =>
                 {
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.EnableDetailedErrors = detailedErrors;
-                        }
-                    );
+                    builder.AddSignalR(options =>
+                    {
+                        options.EnableDetailedErrors = detailedErrors;
+                    });
                 },
                 LoggerFactory
             );
@@ -3948,12 +3916,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
             var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
                 services =>
                 {
-                    services.AddSignalR(
-                        options =>
-                        {
-                            options.MaximumParallelInvocationsPerClient = 1;
-                        }
-                    );
+                    services.AddSignalR(options =>
+                    {
+                        options.MaximumParallelInvocationsPerClient = 1;
+                    });
                 },
                 LoggerFactory
             );
@@ -4154,12 +4120,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     builder.AddSingleton(tcsService);
 
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.MaximumParallelInvocationsPerClient = 1;
-                        }
-                    );
+                    builder.AddSignalR(options =>
+                    {
+                        options.MaximumParallelInvocationsPerClient = 1;
+                    });
                 },
                 LoggerFactory
             );
@@ -4225,12 +4189,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     builder.AddSingleton(tcsService);
 
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.MaximumParallelInvocationsPerClient = 2;
-                        }
-                    );
+                    builder.AddSignalR(options =>
+                    {
+                        options.MaximumParallelInvocationsPerClient = 2;
+                    });
                 },
                 LoggerFactory
             );
@@ -4300,12 +4262,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                 {
                     builder.AddSingleton(tcsService);
 
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.MaximumParallelInvocationsPerClient = 2;
-                        }
-                    );
+                    builder.AddSignalR(options =>
+                    {
+                        options.MaximumParallelInvocationsPerClient = 2;
+                    });
                 },
                 LoggerFactory
             );
@@ -4392,12 +4352,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                     builder.AddSingleton(tcsService);
                     builder.AddSingleton(typeof(IHubActivator<>), typeof(CustomHubActivator<>));
 
-                    builder.AddSignalR(
-                        options =>
-                        {
-                            options.MaximumParallelInvocationsPerClient = 1;
-                        }
-                    );
+                    builder.AddSignalR(options =>
+                    {
+                        options.MaximumParallelInvocationsPerClient = 1;
+                    });
                 },
                 LoggerFactory
             );
@@ -4504,17 +4462,13 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
     [Fact]
     public async Task StreamUploadBufferCapacityBlocksOtherInvocations()
     {
-        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-            services =>
+        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
+        {
+            services.Configure<HubOptions>(options =>
             {
-                services.Configure<HubOptions>(
-                    options =>
-                    {
-                        options.StreamBufferCapacity = 1;
-                    }
-                );
-            }
-        );
+                options.StreamBufferCapacity = 1;
+            });
+        });
 
         var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
 
@@ -4539,13 +4493,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
                     .DefaultTimeout();
             }
 
-            var ex = await Assert.ThrowsAsync<TimeoutException>(
-                async () =>
-                {
-                    await client.SendInvocationAsync("Echo", "test");
-                    var result = (CompletionMessage)await client.ReadAsync().DefaultTimeout(5000);
-                }
-            );
+            var ex = await Assert.ThrowsAsync<TimeoutException>(async () =>
+            {
+                await client.SendInvocationAsync("Echo", "test");
+                var result = (CompletionMessage)await client.ReadAsync().DefaultTimeout(5000);
+            });
         }
     }
 
@@ -4700,23 +4652,19 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
     {
         // Use Auth as the delay injection point because it is one of the first things to run after the invocation message has been parsed
         var tcsService = new TcsService();
-        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-            services =>
+        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
+        {
+            services.AddAuthorization(options =>
             {
-                services.AddAuthorization(
-                    options =>
+                options.AddPolicy(
+                    "test",
+                    policy =>
                     {
-                        options.AddPolicy(
-                            "test",
-                            policy =>
-                            {
-                                policy.Requirements.Add(new DelayRequirement(tcsService));
-                            }
-                        );
+                        policy.Requirements.Add(new DelayRequirement(tcsService));
                     }
                 );
-            }
-        );
+            });
+        });
         var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
 
         using (var client = new TestClient())
@@ -4757,13 +4705,11 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
     public async Task UploadStreamDoesNotCountTowardsMaxInvocationLimit()
     {
         var tcsService = new TcsService();
-        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-            services =>
-            {
-                services.AddSignalR(options => options.MaximumParallelInvocationsPerClient = 1);
-                services.AddSingleton(tcsService);
-            }
-        );
+        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
+        {
+            services.AddSignalR(options => options.MaximumParallelInvocationsPerClient = 1);
+            services.AddSingleton(tcsService);
+        });
         var connectionHandler = serviceProvider.GetService<HubConnectionHandler<LongRunningHub>>();
 
         using (var client = new TestClient())
@@ -5803,12 +5749,10 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
     public async Task ClientsCallerPropertyCanBeUsedOutsideOfHub()
     {
         CallerService callerService = new CallerService();
-        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-            services =>
-            {
-                services.AddSingleton(callerService);
-            }
-        );
+        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(services =>
+        {
+            services.AddSingleton(callerService);
+        });
         var connectionHandler = serviceProvider.GetService<
             HubConnectionHandler<CallerServiceHub>
         >();
@@ -5909,26 +5853,20 @@ public class HubConnectionHandlerTests : VerifiableLoggedTest
     [Fact]
     public async Task SpecificHubOptionForMaximumReceiveMessageSizeIsUsedOverGlobalHubOption()
     {
-        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(
-            serviceBuilder =>
-            {
-                serviceBuilder
-                    .AddSignalR(
-                        o =>
-                        {
-                            // ConnectAsync would fail if this value was used
-                            o.MaximumReceiveMessageSize = 1;
-                        }
-                    )
-                    .AddHubOptions<MethodHub>(
-                        o =>
-                        {
-                            // null is treated as both no-limit and not set, this test verifies that we track if the user explicitly sets the value
-                            o.MaximumReceiveMessageSize = null;
-                        }
-                    );
-            }
-        );
+        var serviceProvider = HubConnectionHandlerTestUtils.CreateServiceProvider(serviceBuilder =>
+        {
+            serviceBuilder
+                .AddSignalR(o =>
+                {
+                    // ConnectAsync would fail if this value was used
+                    o.MaximumReceiveMessageSize = 1;
+                })
+                .AddHubOptions<MethodHub>(o =>
+                {
+                    // null is treated as both no-limit and not set, this test verifies that we track if the user explicitly sets the value
+                    o.MaximumReceiveMessageSize = null;
+                });
+        });
         var connectionHandler = serviceProvider.GetService<HubConnectionHandler<MethodHub>>();
 
         using (StartVerifiableLog())

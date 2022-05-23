@@ -40,13 +40,11 @@ namespace System.Diagnostics.Tests
 
         public static void Retry(Action func)
         {
-            Retry<object>(
-                () =>
-                {
-                    func();
-                    return null;
-                }
-            );
+            Retry<object>(() =>
+            {
+                func();
+                return null;
+            });
         }
 
         public static T Retry<T>(Func<T> func)

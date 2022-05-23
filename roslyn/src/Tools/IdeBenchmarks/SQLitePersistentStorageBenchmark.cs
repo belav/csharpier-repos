@@ -132,24 +132,20 @@ namespace IdeBenchmarks
                 if (_random.Next(0, 100) < ReadPercentage)
                 {
                     tasks.Add(
-                        Task.Run(
-                            async () =>
-                            {
-                                using var stream = await _storage.ReadStreamAsync(_document, name);
-                            }
-                        )
+                        Task.Run(async () =>
+                        {
+                            using var stream = await _storage.ReadStreamAsync(_document, name);
+                        })
                     );
                 }
                 else
                 {
                     tasks.Add(
-                        Task.Run(
-                            async () =>
-                            {
-                                using var stream = new MemoryStream(s_bytes);
-                                await _storage.WriteStreamAsync(_document, name, stream);
-                            }
-                        )
+                        Task.Run(async () =>
+                        {
+                            using var stream = new MemoryStream(s_bytes);
+                            await _storage.WriteStreamAsync(_document, name, stream);
+                        })
                     );
                 }
             }

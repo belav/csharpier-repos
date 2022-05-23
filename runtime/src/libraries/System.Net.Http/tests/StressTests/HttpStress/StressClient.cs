@@ -181,19 +181,17 @@ namespace HttpStress
             using HttpClient client = CreateHttpClient();
 
             // Spin up a thread dedicated to outputting stats for each defined interval
-            new Thread(
-                () =>
+            new Thread(() =>
+            {
+                while (!_cts.IsCancellationRequested)
                 {
-                    while (!_cts.IsCancellationRequested)
+                    Thread.Sleep(_config.DisplayInterval);
+                    lock (Console.Out)
                     {
-                        Thread.Sleep(_config.DisplayInterval);
-                        lock (Console.Out)
-                        {
-                            _aggregator.PrintCurrentResults(_stopwatch.Elapsed);
-                        }
+                        _aggregator.PrintCurrentResults(_stopwatch.Elapsed);
                     }
                 }
-            )
+            })
             {
                 IsBackground = true
             }.Start();

@@ -209,12 +209,10 @@ namespace System.Net.Mail.Tests
             string[] data = GetInvalidEmailTestData().Select(d => (string)d.First()).ToArray();
             string emails = string.Join(",", data);
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    MailAddressParser.ParseMultipleAddresses(emails);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                MailAddressParser.ParseMultipleAddresses(emails);
+            });
         }
 
         [Theory]

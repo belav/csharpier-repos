@@ -16,12 +16,10 @@ public class RequestBuilderTests
         server
             .CreateRequest("/")
             .AddHeader("Host", "MyHost:90")
-            .And(
-                request =>
-                {
-                    Assert.Equal("MyHost:90", request.Headers.Host.ToString());
-                }
-            );
+            .And(request =>
+            {
+                Assert.Equal("MyHost:90", request.Headers.Host.ToString());
+            });
     }
 
     [Fact]
@@ -32,13 +30,11 @@ public class RequestBuilderTests
         server
             .CreateRequest("/")
             .AddHeader("Content-Type", "Test/Value")
-            .And(
-                request =>
-                {
-                    Assert.NotNull(request.Content);
-                    Assert.Equal("Test/Value", request.Content.Headers.ContentType.ToString());
-                }
-            );
+            .And(request =>
+            {
+                Assert.NotNull(request.Content);
+                Assert.Equal("Test/Value", request.Content.Headers.ContentType.ToString());
+            });
     }
 
     [Fact]

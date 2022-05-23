@@ -591,18 +591,16 @@ public class HttpResponseStreamWriterTest
         ArrayPool<char> charPool
     )
     {
-        Assert.Throws<ArgumentNullException>(
-            () =>
-            {
-                var httpRequestStreamReader = new HttpResponseStreamWriter(
-                    stream,
-                    encoding,
-                    1,
-                    bytePool,
-                    charPool
-                );
-            }
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            var httpRequestStreamReader = new HttpResponseStreamWriter(
+                stream,
+                encoding,
+                1,
+                bytePool,
+                charPool
+            );
+        });
     }
 
     [Theory]
@@ -610,18 +608,16 @@ public class HttpResponseStreamWriterTest
     [InlineData(-1)]
     public static void NegativeOrZeroBufferSize_ExpectArgumentOutOfRangeException(int size)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                var httpRequestStreamReader = new HttpRequestStreamReader(
-                    new MemoryStream(),
-                    Encoding.UTF8,
-                    size,
-                    ArrayPool<byte>.Shared,
-                    ArrayPool<char>.Shared
-                );
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            var httpRequestStreamReader = new HttpRequestStreamReader(
+                new MemoryStream(),
+                Encoding.UTF8,
+                size,
+                ArrayPool<byte>.Shared,
+                ArrayPool<char>.Shared
+            );
+        });
     }
 
     [Fact]
@@ -629,18 +625,16 @@ public class HttpResponseStreamWriterTest
     {
         var mockStream = new Mock<Stream>();
         mockStream.Setup(m => m.CanWrite).Returns(false);
-        Assert.Throws<ArgumentException>(
-            () =>
-            {
-                var httpRequestStreamReader = new HttpRequestStreamReader(
-                    mockStream.Object,
-                    Encoding.UTF8,
-                    1,
-                    ArrayPool<byte>.Shared,
-                    ArrayPool<char>.Shared
-                );
-            }
-        );
+        Assert.Throws<ArgumentException>(() =>
+        {
+            var httpRequestStreamReader = new HttpRequestStreamReader(
+                mockStream.Object,
+                Encoding.UTF8,
+                1,
+                ArrayPool<byte>.Shared,
+                ArrayPool<char>.Shared
+            );
+        });
     }
 
     [Theory]
@@ -658,12 +652,10 @@ public class HttpResponseStreamWriterTest
         );
         httpResponseStreamWriter.Dispose();
 
-        Assert.Throws<ObjectDisposedException>(
-            () =>
-            {
-                action(httpResponseStreamWriter);
-            }
-        );
+        Assert.Throws<ObjectDisposedException>(() =>
+        {
+            action(httpResponseStreamWriter);
+        });
     }
 
     [Theory]
@@ -681,12 +673,10 @@ public class HttpResponseStreamWriterTest
         );
         httpResponseStreamWriter.Dispose();
 
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            () =>
-            {
-                return function(httpResponseStreamWriter);
-            }
-        );
+        await Assert.ThrowsAsync<ObjectDisposedException>(() =>
+        {
+            return function(httpResponseStreamWriter);
+        });
     }
 
     private class TestMemoryStream : MemoryStream

@@ -31,20 +31,18 @@ namespace System.Threading.Tests
         )
         {
             Exception backgroundEx = null;
-            var t = new Thread(
-                () =>
+            var t = new Thread(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        start();
-                    }
-                    catch (Exception ex)
-                    {
-                        backgroundEx = ex;
-                        Interlocked.MemoryBarrier();
-                    }
+                    start();
                 }
-            );
+                catch (Exception ex)
+                {
+                    backgroundEx = ex;
+                    Interlocked.MemoryBarrier();
+                }
+            });
             Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
             () =>
             {
@@ -75,20 +73,18 @@ namespace System.Threading.Tests
         )
         {
             Exception backgroundEx = null;
-            var t = new Thread(
-                parameter =>
+            var t = new Thread(parameter =>
+            {
+                try
                 {
-                    try
-                    {
-                        start(parameter);
-                    }
-                    catch (Exception ex)
-                    {
-                        backgroundEx = ex;
-                        Interlocked.MemoryBarrier();
-                    }
+                    start(parameter);
                 }
-            );
+                catch (Exception ex)
+                {
+                    backgroundEx = ex;
+                    Interlocked.MemoryBarrier();
+                }
+            });
             Action localCheckForThreadErrors = checkForThreadErrors = // cannot use ref or out parameters in lambda
             () =>
             {

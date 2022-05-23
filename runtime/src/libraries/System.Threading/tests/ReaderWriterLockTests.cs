@@ -120,14 +120,12 @@ namespace System.Threading.Tests
             trwl.RestoreLock(tlc, InvalidLockCookieExceptionHResult);
 
             // Lock cookie owned by another thread
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                {
-                    TestLockCookie tlc2 = trwl.UpgradeToWriterLock();
-                    tlc = tlc2.Clone();
-                    trwl.DowngradeFromWriterLock(tlc2);
-                }
-            );
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                TestLockCookie tlc2 = trwl.UpgradeToWriterLock();
+                tlc = tlc2.Clone();
+                trwl.DowngradeFromWriterLock(tlc2);
+            });
             trwl.AcquireWriterLock();
             trwl.DowngradeFromWriterLock(tlc, InvalidLockCookieExceptionHResult);
             trwl.ReleaseWriterLock();

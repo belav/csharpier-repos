@@ -57,27 +57,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UseLocalFunction
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                compilationContext =>
-                {
-                    var compilation = compilationContext.Compilation;
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                var compilation = compilationContext.Compilation;
 
-                    // Local functions are only available in C# 7.0 and above.  Don't offer this refactoring
-                    // in projects targeting a lesser version.
-                    if (((CSharpCompilation)compilation).LanguageVersion < LanguageVersion.CSharp7)
-                        return;
+                // Local functions are only available in C# 7.0 and above.  Don't offer this refactoring
+                // in projects targeting a lesser version.
+                if (((CSharpCompilation)compilation).LanguageVersion < LanguageVersion.CSharp7)
+                    return;
 
-                    var expressionType = compilation.GetTypeByMetadataName(
-                        typeof(Expression<>).FullName!
-                    );
-                    context.RegisterSyntaxNodeAction(
-                        ctx => SyntaxNodeAction(ctx, expressionType),
-                        SyntaxKind.SimpleLambdaExpression,
-                        SyntaxKind.ParenthesizedLambdaExpression,
-                        SyntaxKind.AnonymousMethodExpression
-                    );
-                }
-            );
+                var expressionType = compilation.GetTypeByMetadataName(
+                    typeof(Expression<>).FullName!
+                );
+                context.RegisterSyntaxNodeAction(
+                    ctx => SyntaxNodeAction(ctx, expressionType),
+                    SyntaxKind.SimpleLambdaExpression,
+                    SyntaxKind.ParenthesizedLambdaExpression,
+                    SyntaxKind.AnonymousMethodExpression
+                );
+            });
         }
 
         private void SyntaxNodeAction(

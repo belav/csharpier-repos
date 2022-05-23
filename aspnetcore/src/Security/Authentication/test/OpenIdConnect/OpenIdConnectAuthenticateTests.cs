@@ -20,22 +20,18 @@ public class OpenIdConnectAuthenticateTests
     public async Task RegularGetRequestToCallbackPathSkips()
     {
         // Arrange
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.CallbackPath = new PathString("/");
-                opt.SkipUnrecognizedRequests = true;
-                opt.ClientId = "Test Id";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.CallbackPath = new PathString("/");
+            opt.SkipUnrecognizedRequests = true;
+            opt.ClientId = "Test Id";
+        });
 
-        var server = settings.CreateTestServer(
-            handler: async context =>
-            {
-                await context.Response.WriteAsync("Hi from the callback path");
-            }
-        );
+        var server = settings.CreateTestServer(handler: async context =>
+        {
+            await context.Response.WriteAsync("Hi from the callback path");
+        });
 
         // Act
         var transaction = await server.SendAsync("/");
@@ -48,22 +44,18 @@ public class OpenIdConnectAuthenticateTests
     public async Task RegularPostRequestToCallbackPathSkips()
     {
         // Arrange
-        var settings = new TestSettings(
-            opt =>
-            {
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.CallbackPath = new PathString("/");
-                opt.SkipUnrecognizedRequests = true;
-                opt.ClientId = "Test Id";
-            }
-        );
+        var settings = new TestSettings(opt =>
+        {
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.CallbackPath = new PathString("/");
+            opt.SkipUnrecognizedRequests = true;
+            opt.ClientId = "Test Id";
+        });
 
-        var server = settings.CreateTestServer(
-            handler: async context =>
-            {
-                await context.Response.WriteAsync("Hi from the callback path");
-            }
-        );
+        var server = settings.CreateTestServer(handler: async context =>
+        {
+            await context.Response.WriteAsync("Hi from the callback path");
+        });
 
         // Act
         var request = new HttpRequestMessage(HttpMethod.Post, "/");
@@ -78,33 +70,30 @@ public class OpenIdConnectAuthenticateTests
     [Fact]
     public async Task ErrorResponseWithDetails()
     {
-        var settings = new TestSettings(
-            opt =>
+        var settings = new TestSettings(opt =>
+        {
+            opt.StateDataFormat = new TestStateDataFormat();
+            opt.Authority = TestServerBuilder.DefaultAuthority;
+            opt.ClientId = "Test Id";
+            opt.Events = new OpenIdConnectEvents()
             {
-                opt.StateDataFormat = new TestStateDataFormat();
-                opt.Authority = TestServerBuilder.DefaultAuthority;
-                opt.ClientId = "Test Id";
-                opt.Events = new OpenIdConnectEvents()
+                OnRemoteFailure = ctx =>
                 {
-                    OnRemoteFailure = ctx =>
-                    {
-                        var ex = ctx.Failure;
-                        Assert.True(ex.Data.Contains("error"), "error");
-                        Assert.True(ex.Data.Contains("error_description"), "error_description");
-                        Assert.True(ex.Data.Contains("error_uri"), "error_uri");
-                        Assert.Equal("itfailed", ex.Data["error"]);
-                        Assert.Equal("whyitfailed", ex.Data["error_description"]);
-                        Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                        ctx.Response.Redirect(
-                            "/error?FailureMessage="
-                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                        );
-                        ctx.HandleResponse();
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    var ex = ctx.Failure;
+                    Assert.True(ex.Data.Contains("error"), "error");
+                    Assert.True(ex.Data.Contains("error_description"), "error_description");
+                    Assert.True(ex.Data.Contains("error_uri"), "error_uri");
+                    Assert.Equal("itfailed", ex.Data["error"]);
+                    Assert.Equal("whyitfailed", ex.Data["error_description"]);
+                    Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
+                    ctx.Response.Redirect(
+                        "/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                    );
+                    ctx.HandleResponse();
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         var server = settings.CreateTestServer();
 

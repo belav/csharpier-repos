@@ -175,12 +175,10 @@ namespace System.Reflection.Tests
                     // Slight duplication of code her to allow use of Assert.Throws
                     if (exceptionExpected == true)
                     {
-                        Assert.Throws<AmbiguousMatchException>(
-                            () =>
-                            {
-                                PropertyInfo pi = type.AsType().GetRuntimeProperty(propertyName);
-                            }
-                        );
+                        Assert.Throws<AmbiguousMatchException>(() =>
+                        {
+                            PropertyInfo pi = type.AsType().GetRuntimeProperty(propertyName);
+                        });
                     }
                     else
                     {

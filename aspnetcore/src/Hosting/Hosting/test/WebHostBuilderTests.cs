@@ -102,23 +102,17 @@ public class WebHostBuilderTests
             .UseServer(server)
             .UseStartup<StartupCtorThrows>()
             .UseStartup<object>(context => throw new InvalidOperationException("This doesn't run"))
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                throw new InvalidOperationException("This doesn't run");
+            })
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    throw new InvalidOperationException("This doesn't run");
-                }
-            )
-            .Configure(
-                app =>
-                {
-                    app.Run(
-                        context =>
-                        {
-                            return context.Response.WriteAsync("This wins");
-                        }
-                    );
-                }
-            )
+                    return context.Response.WriteAsync("This wins");
+                });
+            })
             .Build();
         using (host)
         {
@@ -244,25 +238,19 @@ public class WebHostBuilderTests
     {
         var hostBuilder = builder
             .UseServer(new TestServer())
-            .ConfigureServices(
-                s =>
-                {
-                    s.AddTransient<ServiceD>();
-                    s.AddScoped<ServiceC>();
-                }
-            )
-            .Configure(
-                app =>
-                {
-                    app.ApplicationServices.GetRequiredService<ServiceC>();
-                }
-            )
-            .UseDefaultServiceProvider(
-                options =>
-                {
-                    options.ValidateScopes = true;
-                }
-            );
+            .ConfigureServices(s =>
+            {
+                s.AddTransient<ServiceD>();
+                s.AddScoped<ServiceC>();
+            })
+            .Configure(app =>
+            {
+                app.ApplicationServices.GetRequiredService<ServiceC>();
+            })
+            .UseDefaultServiceProvider(options =>
+            {
+                options.ValidateScopes = true;
+            });
 
         using var host = hostBuilder.Build();
         Assert.Throws<InvalidOperationException>(() => host.Start());
@@ -275,19 +263,15 @@ public class WebHostBuilderTests
         var configurationCallbackCalled = false;
         var hostBuilder = builder
             .UseServer(new TestServer())
-            .ConfigureServices(
-                s =>
-                {
-                    s.AddTransient<ServiceD>();
-                    s.AddScoped<ServiceC>();
-                }
-            )
-            .Configure(
-                app =>
-                {
-                    app.ApplicationServices.GetRequiredService<ServiceC>();
-                }
-            )
+            .ConfigureServices(s =>
+            {
+                s.AddTransient<ServiceD>();
+                s.AddScoped<ServiceC>();
+            })
+            .Configure(app =>
+            {
+                app.ApplicationServices.GetRequiredService<ServiceC>();
+            })
             .UseDefaultServiceProvider(
                 (context, options) =>
                 {
@@ -309,18 +293,14 @@ public class WebHostBuilderTests
     {
         var callCount = 0; //Verify ordering
         var hostBuilder = builder
-            .ConfigureLogging(
-                loggerFactory =>
-                {
-                    Assert.Equal(0, callCount++);
-                }
-            )
-            .ConfigureLogging(
-                loggerFactory =>
-                {
-                    Assert.Equal(1, callCount++);
-                }
-            )
+            .ConfigureLogging(loggerFactory =>
+            {
+                Assert.Equal(0, callCount++);
+            })
+            .ConfigureLogging(loggerFactory =>
+            {
+                Assert.Equal(1, callCount++);
+            })
             .UseServer(new TestServer())
             .UseStartup<StartupNoServices>();
 
@@ -494,13 +474,11 @@ public class WebHostBuilderTests
         var service = new DisposableService();
         var hostBuilder = new WebHostBuilder()
             .UseServer(new TestServer())
-            .ConfigureServices(
-                services =>
-                {
-                    // Added as a factory since instances are never disposed by the container
-                    services.AddSingleton(sp => service);
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                // Added as a factory since instances are never disposed by the container
+                services.AddSingleton(sp => service);
+            })
             .UseStartup<StartupWithResolvedDisposableThatThrows>();
 
         Assert.Throws<InvalidOperationException>(() => hostBuilder.Build());
@@ -530,20 +508,16 @@ public class WebHostBuilderTests
         var callCount = 0; // Verify ordering
         var hostBuilder = builder
             .UseServer(new TestServer())
-            .ConfigureServices(
-                services =>
-                {
-                    Assert.Equal(0, callCount++);
-                    services.AddTransient<ServiceA>();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    Assert.Equal(1, callCount++);
-                    services.AddTransient<ServiceB>();
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                Assert.Equal(0, callCount++);
+                services.AddTransient<ServiceA>();
+            })
+            .ConfigureServices(services =>
+            {
+                Assert.Equal(1, callCount++);
+                services.AddTransient<ServiceB>();
+            })
             .Configure(app => { });
 
         using (var host = hostBuilder.Build())
@@ -793,13 +767,11 @@ public class WebHostBuilderTests
     {
         builder.UseServer(new TestServer());
 
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                using var host = builder.Build();
-                host.Start();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            using var host = builder.Build();
+            host.Start();
+        });
 
         Assert.Contains("No application configured.", ex.Message);
     }
@@ -1080,31 +1052,25 @@ public class WebHostBuilderTests
     {
         var disposables = new List<DisposableService>();
 
-        var containerFactory = new ExternalContainerFactory(
-            services =>
+        var containerFactory = new ExternalContainerFactory(services =>
+        {
+            services.AddSingleton(sp =>
             {
-                services.AddSingleton(
-                    sp =>
-                    {
-                        var service = new DisposableService();
-                        disposables.Add(service);
-                        return service;
-                    }
-                );
-            }
-        );
+                var service = new DisposableService();
+                disposables.Add(service);
+                return service;
+            });
+        });
 
         var host = CreateWebHostBuilder()
             .UseStartup<StartupWithExternalServices>()
             .UseServer(new TestServer())
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<IServiceProviderFactory<IServiceCollection>>(
-                        containerFactory
-                    );
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<IServiceProviderFactory<IServiceCollection>>(
+                    containerFactory
+                );
+            })
             .Build();
 
         using (host)
@@ -1135,18 +1101,14 @@ public class WebHostBuilderTests
     [Fact]
     public void GenericWebHostThrowsOnBuild()
     {
-        var exception = Assert.Throws<NotSupportedException>(
-            () =>
+        var exception = Assert.Throws<NotSupportedException>(() =>
+        {
+            var hostBuilder = new HostBuilder().ConfigureWebHost(builder =>
             {
-                var hostBuilder = new HostBuilder().ConfigureWebHost(
-                    builder =>
-                    {
-                        builder.UseStartup<StartupNoServices>();
-                        builder.Build();
-                    }
-                );
-            }
-        );
+                builder.UseStartup<StartupNoServices>();
+                builder.Build();
+            });
+        });
 
         Assert.Equal(
             "Building this implementation of IWebHostBuilder is not supported.",
@@ -1157,18 +1119,14 @@ public class WebHostBuilderTests
     [Fact]
     public void GenericWebHostDoesNotSupportBuildingInConfigureServices()
     {
-        var hostBuilder = new HostBuilder().ConfigureWebHost(
-            builder =>
-            {
-                builder.UseStartup<StartupWithBuiltConfigureServices>();
-            }
-        );
-        var exception = Assert.Throws<NotSupportedException>(
-            () =>
-            {
-                hostBuilder.Build();
-            }
-        );
+        var hostBuilder = new HostBuilder().ConfigureWebHost(builder =>
+        {
+            builder.UseStartup<StartupWithBuiltConfigureServices>();
+        });
+        var exception = Assert.Throws<NotSupportedException>(() =>
+        {
+            hostBuilder.Build();
+        });
 
         Assert.Equal(
             $"ConfigureServices returning an {typeof(IServiceProvider)} isn't supported.",
@@ -1206,14 +1164,12 @@ public class WebHostBuilderTests
     {
         builder = builder
             .CaptureStartupErrors(false)
-            .Configure(
-                app =>
-                {
-                    var loggerFactory = app.ApplicationServices.GetService<ILoggerFactory>();
-                    var logger = loggerFactory.CreateLogger(nameof(WebHostBuilderTests));
-                    logger.LogInformation("From startup");
-                }
-            )
+            .Configure(app =>
+            {
+                var loggerFactory = app.ApplicationServices.GetService<ILoggerFactory>();
+                var logger = loggerFactory.CreateLogger(nameof(WebHostBuilderTests));
+                logger.LogInformation("From startup");
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1374,12 +1330,10 @@ public class WebHostBuilderTests
     {
         builder = builder
             .CaptureStartupErrors(true)
-            .Configure(
-                app =>
-                {
-                    throw new InvalidOperationException("Startup exception");
-                }
-            )
+            .Configure(app =>
+            {
+                throw new InvalidOperationException("Startup exception");
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1398,14 +1352,12 @@ public class WebHostBuilderTests
 
         builder = builder
             .CaptureStartupErrors(false)
-            .Configure(
-                app =>
-                {
-                    testSink = app.ApplicationServices.GetRequiredService<ITestSink>();
+            .Configure(app =>
+            {
+                testSink = app.ApplicationServices.GetRequiredService<ITestSink>();
 
-                    throw new InvalidOperationException("Startup exception");
-                }
-            )
+                throw new InvalidOperationException("Startup exception");
+            })
             .UseServer(new TestServer());
 
         using var host = builder.Build();
@@ -1449,34 +1401,30 @@ public class WebHostBuilderTests
     public async Task StartupFiltersDoNotRunIfNotApplicationConfigured(IWebHostBuilder builder)
     {
         var hostBuilder = builder
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<IStartupFilter, MyStartupFilter>();
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<IStartupFilter, MyStartupFilter>();
+            })
             .UseServer(new TestServer());
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-            {
-                using var host = hostBuilder.Build();
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+        {
+            using var host = hostBuilder.Build();
 
-                var filter = (MyStartupFilter)
-                    host.Services
-                        .GetServices<IStartupFilter>()
-                        .FirstOrDefault(s => s is MyStartupFilter);
-                Assert.NotNull(filter);
-                try
-                {
-                    await host.StartAsync();
-                }
-                finally
-                {
-                    Assert.False(filter.Executed);
-                }
+            var filter = (MyStartupFilter)
+                host.Services
+                    .GetServices<IStartupFilter>()
+                    .FirstOrDefault(s => s is MyStartupFilter);
+            Assert.NotNull(filter);
+            try
+            {
+                await host.StartAsync();
             }
-        );
+            finally
+            {
+                Assert.False(filter.Executed);
+            }
+        });
 
         Assert.Contains("No application configured.", exception.Message);
     }
@@ -1515,12 +1463,10 @@ public class WebHostBuilderTests
     {
         builder
             .Configure(app => { })
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddHostedService<ThrowingHostedService>();
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                services.AddHostedService<ThrowingHostedService>();
+            })
             .UseServer(new TestServer());
 
         using (var host = builder.Build())
@@ -1543,13 +1489,11 @@ public class WebHostBuilderTests
     {
         builder
             .Configure(app => { })
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddHostedService<ThrowingHostedService>();
-                    services.AddHostedService<NonThrowingHostedService>();
-                }
-            )
+            .ConfigureServices(services =>
+            {
+                services.AddHostedService<ThrowingHostedService>();
+                services.AddHostedService<NonThrowingHostedService>();
+            })
             .UseServer(new TestServer());
 
         using var host = builder.Build();
@@ -1575,14 +1519,12 @@ public class WebHostBuilderTests
     {
         builder
             .Configure(app => { })
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<StartOrder>();
-                    services.AddHostedService<MustBeStartedFirst>();
-                    services.AddSingleton<IServer, ServerMustBeStartedSecond>();
-                }
-            );
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<StartOrder>();
+                services.AddHostedService<MustBeStartedFirst>();
+                services.AddSingleton<IServer, ServerMustBeStartedSecond>();
+            });
 
         using var host = builder.Build();
         await host.StartAsync();
@@ -1868,25 +1810,23 @@ public class WebHostBuilderTests
                     "testhostingstartup_chain",
                     builder.GetSetting("testhostingstartup_chain") + "0"
                 )
-                .ConfigureServices(
-                    services =>
-                    {
-                        // This check is required because MVC still uses the
-                        // IWebHostEnvironment instance before the container is baked
+                .ConfigureServices(services =>
+                {
+                    // This check is required because MVC still uses the
+                    // IWebHostEnvironment instance before the container is baked
 #pragma warning disable CS0618 // Type or member is obsolete
-                        var heDescriptor = services.SingleOrDefault(
-                            s => s.ServiceType == typeof(IHostingEnvironment)
-                        );
-                        Assert.NotNull(heDescriptor);
-                        Assert.NotNull(heDescriptor.ImplementationInstance);
+                    var heDescriptor = services.SingleOrDefault(
+                        s => s.ServiceType == typeof(IHostingEnvironment)
+                    );
+                    Assert.NotNull(heDescriptor);
+                    Assert.NotNull(heDescriptor.ImplementationInstance);
 #pragma warning restore CS0618 // Type or member is obsolete
-                        var wheDescriptor = services.SingleOrDefault(
-                            s => s.ServiceType == typeof(IWebHostEnvironment)
-                        );
-                        Assert.NotNull(wheDescriptor);
-                        Assert.NotNull(wheDescriptor.ImplementationInstance);
-                    }
-                )
+                    var wheDescriptor = services.SingleOrDefault(
+                        s => s.ServiceType == typeof(IWebHostEnvironment)
+                    );
+                    Assert.NotNull(wheDescriptor);
+                    Assert.NotNull(wheDescriptor.ImplementationInstance);
+                })
                 .ConfigureServices(services => services.AddSingleton<ServiceA>())
                 .ConfigureServices(
                     services => services.AddSingleton<ITestSink>(loggerProvider.Sink)

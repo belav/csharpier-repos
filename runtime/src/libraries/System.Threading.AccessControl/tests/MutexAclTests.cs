@@ -73,18 +73,16 @@ namespace System.Threading.Tests
 
             if (PlatformDetection.IsNetFramework)
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        CreateAndVerifyMutex(
-                                initiallyOwned: true,
-                                name,
-                                GetBasicMutexSecurity(),
-                                expectedCreatedNew: true
-                            )
-                            .Dispose();
-                    }
-                );
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    CreateAndVerifyMutex(
+                            initiallyOwned: true,
+                            name,
+                            GetBasicMutexSecurity(),
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
+                });
             }
             else
             {
@@ -188,12 +186,10 @@ namespace System.Threading.Tests
         public void Mutex_OpenExisting_NameNotFound()
         {
             string name = "ThisShouldNotExist";
-            Assert.Throws<WaitHandleCannotBeOpenedException>(
-                () =>
-                {
-                    MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+            {
+                MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
+            });
 
             Assert.False(MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out _));
         }
@@ -202,12 +198,10 @@ namespace System.Threading.Tests
         public void Mutex_OpenExisting_NameInvalid()
         {
             string name = '\0'.ToString();
-            Assert.Throws<WaitHandleCannotBeOpenedException>(
-                () =>
-                {
-                    MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+            {
+                MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
+            });
 
             Assert.False(MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out _));
         }
@@ -216,12 +210,10 @@ namespace System.Threading.Tests
         public void Mutex_OpenExisting_PathNotFound()
         {
             string name = @"global\foo";
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
+            });
 
             Assert.False(MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out _));
         }
@@ -230,54 +222,42 @@ namespace System.Threading.Tests
         public void Mutex_OpenExisting_BadPathName()
         {
             string name = @"\\?\Path";
-            Assert.Throws<System.IO.IOException>(
-                () =>
-                {
-                    MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
-                }
-            );
-            Assert.Throws<System.IO.IOException>(
-                () =>
-                {
-                    MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out _);
-                }
-            );
+            Assert.Throws<System.IO.IOException>(() =>
+            {
+                MutexAcl.OpenExisting(name, MutexRights.FullControl).Dispose();
+            });
+            Assert.Throws<System.IO.IOException>(() =>
+            {
+                MutexAcl.TryOpenExisting(name, MutexRights.FullControl, out _);
+            });
         }
 
         [Fact]
         public void Mutex_OpenExisting_NullName()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    MutexAcl.OpenExisting(null, MutexRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                MutexAcl.OpenExisting(null, MutexRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    MutexAcl.TryOpenExisting(null, MutexRights.FullControl, out _);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                MutexAcl.TryOpenExisting(null, MutexRights.FullControl, out _);
+            });
         }
 
         [Fact]
         public void Mutex_OpenExisting_EmptyName()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    MutexAcl.OpenExisting(string.Empty, MutexRights.FullControl).Dispose();
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                MutexAcl.OpenExisting(string.Empty, MutexRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    MutexAcl.TryOpenExisting(string.Empty, MutexRights.FullControl, out _);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                MutexAcl.TryOpenExisting(string.Empty, MutexRights.FullControl, out _);
+            });
         }
 
         private MutexSecurity GetBasicMutexSecurity()

@@ -8,13 +8,11 @@ namespace AutoMapper.UnitTests.Bug
     public class ExistingArrays : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>();
-                    cfg.CreateMap<Source, DestWithIEnumerableInitializer>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+                cfg.CreateMap<Source, DestWithIEnumerableInitializer>();
+            });
 
         [Fact]
         public void should_map_array_inside_object()

@@ -76,13 +76,11 @@ public class AzureBlobSinkTests
             .Callback((ArraySegment<byte> s, CancellationToken ct) => buffers.Add(ToArray(s)))
             .Returns(Task.CompletedTask);
 
-        var sink = new TestBlobSink(
-            name =>
-            {
-                names.Add(name);
-                return blob.Object;
-            }
-        );
+        var sink = new TestBlobSink(name =>
+        {
+            names.Add(name);
+            return blob.Object;
+        });
         var logger = (BatchingLogger)sink.CreateLogger("Cat");
 
         await sink.IntervalControl.Pause;

@@ -3380,23 +3380,21 @@ namespace System.Web.Mvc.Test
 
             mockControllerContext
                 .Setup(c => c.HttpContext.Request.ValidateInput())
-                .Callback(
-                    () =>
+                .Callback(() =>
+                {
+                    if (!controller.ValidateRequest)
                     {
-                        if (!controller.ValidateRequest)
-                        {
-                            Assert.True(
-                                false,
-                                "ValidateRequest() should not be called if the controller opted out."
-                            );
-                        }
-                        if (validateInputCallback != null)
-                        {
-                            // signal to caller that ValidateInput was called
-                            validateInputCallback();
-                        }
+                        Assert.True(
+                            false,
+                            "ValidateRequest() should not be called if the controller opted out."
+                        );
                     }
-                );
+                    if (validateInputCallback != null)
+                    {
+                        // signal to caller that ValidateInput was called
+                        validateInputCallback();
+                    }
+                });
 
             mockControllerContext
                 .Setup(c => c.HttpContext.Session)

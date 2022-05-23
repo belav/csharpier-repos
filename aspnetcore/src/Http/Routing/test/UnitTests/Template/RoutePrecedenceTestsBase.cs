@@ -101,15 +101,13 @@ public abstract class RoutePrecedenceTestsBase
     [Fact]
     public void ComputeGenerated_TooManySegments_ThrowHumaneError()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                // Arrange & Act
-                ComputeGenerated(
-                    "{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}"
-                );
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            // Arrange & Act
+            ComputeGenerated(
+                "{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}"
+            );
+        });
 
         // Assert
         Assert.Equal(
@@ -121,15 +119,13 @@ public abstract class RoutePrecedenceTestsBase
     [Fact]
     public void ComputeMatched_TooManySegments_ThrowHumaneError()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                // Arrange & Act
-                ComputeMatched(
-                    "{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}"
-                );
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            // Arrange & Act
+            ComputeMatched(
+                "{a}/{b}/{c}/{d}/{e}/{f}/{g}/{h}/{i}/{j}/{k}/{l}/{m}/{n}/{o}/{p}/{q}/{r}/{s}/{t}/{u}/{v}/{w}/{x}/{y}/{z}/{a2}/{b2}/{b3}"
+            );
+        });
 
         // Assert
         Assert.Equal(

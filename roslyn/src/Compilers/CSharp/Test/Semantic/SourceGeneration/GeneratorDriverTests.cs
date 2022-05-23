@@ -2502,22 +2502,20 @@ class C { }
             List<Compilation> compilationsCalledFor = new List<Compilation>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        var filePaths = ctx.CompilationProvider
-                            .SelectMany((c, _) => c.SyntaxTrees)
-                            .Select((tree, _) => tree.FilePath);
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    var filePaths = ctx.CompilationProvider
+                        .SelectMany((c, _) => c.SyntaxTrees)
+                        .Select((tree, _) => tree.FilePath);
 
-                        ctx.RegisterSourceOutput(
-                            ctx.CompilationProvider,
-                            (spc, c) =>
-                            {
-                                compilationsCalledFor.Add(c);
-                            }
-                        );
-                    }
-                )
+                    ctx.RegisterSourceOutput(
+                        ctx.CompilationProvider,
+                        (spc, c) =>
+                        {
+                            compilationsCalledFor.Add(c);
+                        }
+                    );
+                })
             );
 
             // run the generator once, and check it was passed the compilation
@@ -2559,26 +2557,24 @@ class C { }
             List<AdditionalText> textsCalledFor = new List<AdditionalText>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        ctx.RegisterSourceOutput(
-                            ctx.CompilationProvider,
-                            (spc, c) =>
-                            {
-                                compilationsCalledFor.Add(c);
-                            }
-                        );
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    ctx.RegisterSourceOutput(
+                        ctx.CompilationProvider,
+                        (spc, c) =>
+                        {
+                            compilationsCalledFor.Add(c);
+                        }
+                    );
 
-                        ctx.RegisterSourceOutput(
-                            ctx.AdditionalTextsProvider,
-                            (spc, c) =>
-                            {
-                                textsCalledFor.Add(c);
-                            }
-                        );
-                    }
-                )
+                    ctx.RegisterSourceOutput(
+                        ctx.AdditionalTextsProvider,
+                        (spc, c) =>
+                        {
+                            textsCalledFor.Add(c);
+                        }
+                    );
+                })
             );
 
             // run the generator once, and check it was passed the compilation
@@ -2641,21 +2637,19 @@ class C { }
             List<Compilation> compilationsCalledFor = new List<Compilation>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        var compilationSource = ctx.CompilationProvider.WithComparer(
-                            new LambdaComparer<Compilation>((c1, c2) => true, 0)
-                        );
-                        ctx.RegisterSourceOutput(
-                            compilationSource,
-                            (spc, c) =>
-                            {
-                                compilationsCalledFor.Add(c);
-                            }
-                        );
-                    }
-                )
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    var compilationSource = ctx.CompilationProvider.WithComparer(
+                        new LambdaComparer<Compilation>((c1, c2) => true, 0)
+                    );
+                    ctx.RegisterSourceOutput(
+                        compilationSource,
+                        (spc, c) =>
+                        {
+                            compilationsCalledFor.Add(c);
+                        }
+                    );
+                })
             );
 
             // run the generator once, and check it was passed the compilation
@@ -2702,27 +2696,25 @@ class C { }
                 new List<(Compilation, ImmutableArray<AdditionalText>)>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        var compilationSource = ctx.CompilationProvider
-                            .Combine(ctx.AdditionalTextsProvider.Collect())
-                            // comparer that ignores the LHS (additional texts)
-                            .WithComparer(
-                                new LambdaComparer<(Compilation, ImmutableArray<AdditionalText>)>(
-                                    (c1, c2) => c1.Item1 == c2.Item1,
-                                    0
-                                )
-                            );
-                        ctx.RegisterSourceOutput(
-                            compilationSource,
-                            (spc, c) =>
-                            {
-                                calledFor.Add(c);
-                            }
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    var compilationSource = ctx.CompilationProvider
+                        .Combine(ctx.AdditionalTextsProvider.Collect())
+                        // comparer that ignores the LHS (additional texts)
+                        .WithComparer(
+                            new LambdaComparer<(Compilation, ImmutableArray<AdditionalText>)>(
+                                (c1, c2) => c1.Item1 == c2.Item1,
+                                0
+                            )
                         );
-                    }
-                )
+                    ctx.RegisterSourceOutput(
+                        compilationSource,
+                        (spc, c) =>
+                        {
+                            calledFor.Add(c);
+                        }
+                    );
+                })
             );
 
             // run the generator once, and check it was passed the compilation + additional texts
@@ -2773,24 +2765,22 @@ class C { }
             List<Compilation> compilationsCalledFor = new List<Compilation>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        var source = ctx.CompilationProvider;
-                        var source2 = ctx.CompilationProvider.Combine(source);
-                        var source3 = ctx.CompilationProvider.Combine(source2);
-                        var source4 = ctx.CompilationProvider.Combine(source3);
-                        var source5 = ctx.CompilationProvider.Combine(source4);
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    var source = ctx.CompilationProvider;
+                    var source2 = ctx.CompilationProvider.Combine(source);
+                    var source3 = ctx.CompilationProvider.Combine(source2);
+                    var source4 = ctx.CompilationProvider.Combine(source3);
+                    var source5 = ctx.CompilationProvider.Combine(source4);
 
-                        ctx.RegisterSourceOutput(
-                            source5,
-                            (spc, c) =>
-                            {
-                                compilationsCalledFor.Add(c.Item1);
-                            }
-                        );
-                    }
-                )
+                    ctx.RegisterSourceOutput(
+                        source5,
+                        (spc, c) =>
+                        {
+                            compilationsCalledFor.Add(c.Item1);
+                        }
+                    );
+                })
             );
 
             // run the generator and check that we didn't multiple register the generate source node through the combine
@@ -2940,18 +2930,16 @@ class C { }
             List<ParseOptions> parseOptionsCalledFor = new List<ParseOptions>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        ctx.RegisterSourceOutput(
-                            ctx.ParseOptionsProvider,
-                            (spc, p) =>
-                            {
-                                parseOptionsCalledFor.Add(p);
-                            }
-                        );
-                    }
-                )
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    ctx.RegisterSourceOutput(
+                        ctx.ParseOptionsProvider,
+                        (spc, p) =>
+                        {
+                            parseOptionsCalledFor.Add(p);
+                        }
+                    );
+                })
             );
 
             // run the generator once, and check it was passed the parse options
@@ -3006,16 +2994,13 @@ class C { }
             string? analyzerOptionsValue = string.Empty;
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        ctx.RegisterSourceOutput(
-                            ctx.AnalyzerConfigOptionsProvider,
-                            (spc, p) =>
-                                p.GlobalOptions.TryGetValue("test", out analyzerOptionsValue)
-                        );
-                    }
-                )
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    ctx.RegisterSourceOutput(
+                        ctx.AnalyzerConfigOptionsProvider,
+                        (spc, p) => p.GlobalOptions.TryGetValue("test", out analyzerOptionsValue)
+                    );
+                })
             );
 
             var builder = ImmutableDictionary<string, string>.Empty.ToBuilder();
@@ -3081,18 +3066,16 @@ class C { }
             List<string?> additionalTextPaths = new List<string?>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        ctx.RegisterSourceOutput(
-                            ctx.AdditionalTextsProvider.Select((t, _) => t.Path),
-                            (spc, p) =>
-                            {
-                                additionalTextPaths.Add(p);
-                            }
-                        );
-                    }
-                )
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    ctx.RegisterSourceOutput(
+                        ctx.AdditionalTextsProvider.Select((t, _) => t.Path),
+                        (spc, p) =>
+                        {
+                            additionalTextPaths.Add(p);
+                        }
+                    );
+                })
             );
 
             // run the generator once and check we saw the additional file
@@ -3152,29 +3135,27 @@ class C { }
             List<string?> additionalTextsContents = new List<string?>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        var texts = ctx.AdditionalTextsProvider;
-                        var paths = texts.Select((t, _) => t?.Path);
-                        var contents = texts.Select((t, _) => t?.GetText()?.ToString());
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    var texts = ctx.AdditionalTextsProvider;
+                    var paths = texts.Select((t, _) => t?.Path);
+                    var contents = texts.Select((t, _) => t?.GetText()?.ToString());
 
-                        ctx.RegisterSourceOutput(
-                            paths,
-                            (spc, p) =>
-                            {
-                                additionalTextPaths.Add(p);
-                            }
-                        );
-                        ctx.RegisterSourceOutput(
-                            contents,
-                            (spc, p) =>
-                            {
-                                additionalTextsContents.Add(p);
-                            }
-                        );
-                    }
-                )
+                    ctx.RegisterSourceOutput(
+                        paths,
+                        (spc, p) =>
+                        {
+                            additionalTextPaths.Add(p);
+                        }
+                    );
+                    ctx.RegisterSourceOutput(
+                        contents,
+                        (spc, p) =>
+                        {
+                            additionalTextsContents.Add(p);
+                        }
+                    );
+                })
             );
 
             // run the generator once and check we saw the additional file
@@ -3256,22 +3237,20 @@ class C { }
             compilation.VerifyDiagnostics();
             Assert.Single(compilation.SyntaxTrees);
 
-            var generator = new PipelineCallbackGenerator(
-                ctx =>
-                {
-                    ctx.RegisterPostInitializationOutput(
-                        (context) => context.AddSource("PostInit", "")
-                    );
-                    ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider,
-                        (context, ct) => context.AddSource("Source", "")
-                    );
-                    ctx.RegisterImplementationSourceOutput(
-                        ctx.CompilationProvider,
-                        (context, ct) => context.AddSource("Implementation", "")
-                    );
-                }
-            );
+            var generator = new PipelineCallbackGenerator(ctx =>
+            {
+                ctx.RegisterPostInitializationOutput(
+                    (context) => context.AddSource("PostInit", "")
+                );
+                ctx.RegisterSourceOutput(
+                    ctx.CompilationProvider,
+                    (context, ct) => context.AddSource("Source", "")
+                );
+                ctx.RegisterImplementationSourceOutput(
+                    ctx.CompilationProvider,
+                    (context, ct) => context.AddSource("Implementation", "")
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { generator.AsSourceGenerator() },
@@ -3335,18 +3314,16 @@ class C { }
             List<string?> referenceList = new List<string?>();
 
             var generator = new IncrementalGeneratorWrapper(
-                new PipelineCallbackGenerator(
-                    ctx =>
-                    {
-                        ctx.RegisterSourceOutput(
-                            ctx.MetadataReferencesProvider,
-                            (spc, r) =>
-                            {
-                                referenceList.Add(r.Display);
-                            }
-                        );
-                    }
-                )
+                new PipelineCallbackGenerator(ctx =>
+                {
+                    ctx.RegisterSourceOutput(
+                        ctx.MetadataReferencesProvider,
+                        (spc, r) =>
+                        {
+                            referenceList.Add(r.Display);
+                        }
+                    );
+                })
             );
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(

@@ -19,15 +19,13 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<SpecificDomain, Dto>();
-                    cfg.CreateMap<BaseDomain, Dto>()
-                        .ForMember(d => d.SpecificProperty, m => m.Ignore())
-                        .Include<SpecificDomain, Dto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<SpecificDomain, Dto>();
+                cfg.CreateMap<BaseDomain, Dto>()
+                    .ForMember(d => d.SpecificProperty, m => m.Ignore())
+                    .Include<SpecificDomain, Dto>();
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -52,15 +50,13 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<BaseDomain, Dto>()
-                        .ForMember(d => d.SpecificProperty, m => m.Ignore())
-                        .Include<SpecificDomain, Dto>();
-                    cfg.CreateMap<SpecificDomain, Dto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<BaseDomain, Dto>()
+                    .ForMember(d => d.SpecificProperty, m => m.Ignore())
+                    .Include<SpecificDomain, Dto>();
+                cfg.CreateMap<SpecificDomain, Dto>();
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -89,15 +85,13 @@ namespace AutoMapper.UnitTests.Bug
         public class ConcreteUserEntity : BaseUserEntity<string> { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(BaseUserDto<>), typeof(BaseUserEntity<>))
-                        .ForMember("Id", opt => opt.Ignore());
-                    cfg.CreateMap(typeof(ConcreteUserDto), typeof(ConcreteUserEntity))
-                        .IncludeBase(typeof(BaseUserDto<string>), typeof(BaseUserEntity<string>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(BaseUserDto<>), typeof(BaseUserEntity<>))
+                    .ForMember("Id", opt => opt.Ignore());
+                cfg.CreateMap(typeof(ConcreteUserDto), typeof(ConcreteUserEntity))
+                    .IncludeBase(typeof(BaseUserDto<string>), typeof(BaseUserEntity<string>));
+            });
 
         [Fact]
         public void Should_map_ok()

@@ -159,14 +159,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<PolygonEntity>().Property(e => e.Id).ValueGeneratedNever();
             modelBuilder.Entity<MultiLineStringEntity>().Property(e => e.Id).ValueGeneratedNever();
 
-            modelBuilder.Entity<GeoPointEntity>(
-                b =>
-                {
-                    b.Property(e => e.Id).ValueGeneratedNever();
-                    b.Property(e => e.Location)
-                        .HasConversion(new GeoPointConverter(GeometryFactory));
-                }
-            );
+            modelBuilder.Entity<GeoPointEntity>(b =>
+            {
+                b.Property(e => e.Id).ValueGeneratedNever();
+                b.Property(e => e.Location).HasConversion(new GeoPointConverter(GeometryFactory));
+            });
         }
 
         protected override void Seed(SpatialContext context) =>

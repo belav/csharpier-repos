@@ -18,28 +18,22 @@ public class CascadingParameterTest
     {
         // Arrange
         var renderer = new TestRenderer();
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<string>>(0);
-                builder.AddAttribute(1, "Value", "Hello");
-                builder.AddAttribute(
-                    2,
-                    "ChildContent",
-                    new RenderFragment(
-                        childBuilder =>
-                        {
-                            childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(
-                                0
-                            );
-                            childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
-                            childBuilder.CloseComponent();
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<string>>(0);
+            builder.AddAttribute(1, "Value", "Hello");
+            builder.AddAttribute(
+                2,
+                "ChildContent",
+                new RenderFragment(childBuilder =>
+                {
+                    childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(0);
+                    childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
+                    childBuilder.CloseComponent();
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Act/Assert
         var componentId = renderer.AssignRootComponentId(component);
@@ -72,28 +66,22 @@ public class CascadingParameterTest
         // Arrange
         var renderer = new TestRenderer();
         var regularParameterValue = "Initial value";
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<string>>(0);
-                builder.AddAttribute(1, "Value", "Hello");
-                builder.AddAttribute(
-                    2,
-                    "ChildContent",
-                    new RenderFragment(
-                        childBuilder =>
-                        {
-                            childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(
-                                0
-                            );
-                            childBuilder.AddAttribute(1, "RegularParameter", regularParameterValue);
-                            childBuilder.CloseComponent();
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<string>>(0);
+            builder.AddAttribute(1, "Value", "Hello");
+            builder.AddAttribute(
+                2,
+                "ChildContent",
+                new RenderFragment(childBuilder =>
+                {
+                    childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(0);
+                    childBuilder.AddAttribute(1, "RegularParameter", regularParameterValue);
+                    childBuilder.CloseComponent();
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Act 1: Render in initial state
         var componentId = renderer.AssignRootComponentId(component);
@@ -138,28 +126,22 @@ public class CascadingParameterTest
         // Arrange
         var providedValue = "Initial value";
         var renderer = new TestRenderer();
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<string>>(0);
-                builder.AddAttribute(1, "Value", providedValue);
-                builder.AddAttribute(
-                    2,
-                    "ChildContent",
-                    new RenderFragment(
-                        childBuilder =>
-                        {
-                            childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(
-                                0
-                            );
-                            childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
-                            childBuilder.CloseComponent();
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<string>>(0);
+            builder.AddAttribute(1, "Value", providedValue);
+            builder.AddAttribute(
+                2,
+                "ChildContent",
+                new RenderFragment(childBuilder =>
+                {
+                    childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(0);
+                    childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
+                    childBuilder.CloseComponent();
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Act 1: Initial render; capture nested component ID
         var componentId = renderer.AssignRootComponentId(component);
@@ -201,28 +183,22 @@ public class CascadingParameterTest
     {
         // Arrange
         var renderer = new TestRenderer();
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<string>>(0);
-                builder.AddAttribute(1, "Value", "Unchanging value");
-                builder.AddAttribute(
-                    2,
-                    "ChildContent",
-                    new RenderFragment(
-                        childBuilder =>
-                        {
-                            childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(
-                                0
-                            );
-                            childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
-                            childBuilder.CloseComponent();
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<string>>(0);
+            builder.AddAttribute(1, "Value", "Unchanging value");
+            builder.AddAttribute(
+                2,
+                "ChildContent",
+                new RenderFragment(childBuilder =>
+                {
+                    childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(0);
+                    childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
+                    childBuilder.CloseComponent();
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Act 1: Initial render
         var componentId = renderer.AssignRootComponentId(component);
@@ -252,49 +228,40 @@ public class CascadingParameterTest
         var providedValue = "Initial value";
         var displayNestedComponent = true;
         var renderer = new TestRenderer();
-        var component = new TestComponent(
-            builder =>
-            {
-                // At the outer level, have an unrelated fixed cascading value to show we can deal with combining both types
-                builder.OpenComponent<CascadingValue<int>>(0);
-                builder.AddAttribute(1, "Value", 123);
-                builder.AddAttribute(2, "IsFixed", true);
-                builder.AddAttribute(
-                    3,
-                    "ChildContent",
-                    new RenderFragment(
-                        builder2 =>
+        var component = new TestComponent(builder =>
+        {
+            // At the outer level, have an unrelated fixed cascading value to show we can deal with combining both types
+            builder.OpenComponent<CascadingValue<int>>(0);
+            builder.AddAttribute(1, "Value", 123);
+            builder.AddAttribute(2, "IsFixed", true);
+            builder.AddAttribute(
+                3,
+                "ChildContent",
+                new RenderFragment(builder2 =>
+                {
+                    // Then also have a non-fixed cascading value so we can show that unsubscription works
+                    builder2.OpenComponent<CascadingValue<string>>(0);
+                    builder2.AddAttribute(1, "Value", providedValue);
+                    builder2.AddAttribute(
+                        2,
+                        "ChildContent",
+                        new RenderFragment(builder3 =>
                         {
-                            // Then also have a non-fixed cascading value so we can show that unsubscription works
-                            builder2.OpenComponent<CascadingValue<string>>(0);
-                            builder2.AddAttribute(1, "Value", providedValue);
-                            builder2.AddAttribute(
-                                2,
-                                "ChildContent",
-                                new RenderFragment(
-                                    builder3 =>
-                                    {
-                                        if (displayNestedComponent)
-                                        {
-                                            builder3.OpenComponent<
-                                                SecondCascadingParameterConsumerComponent<
-                                                    string,
-                                                    int
-                                                >
-                                            >(0);
-                                            builder3.AddAttribute(1, "RegularParameter", "Goodbye");
-                                            builder3.CloseComponent();
-                                        }
-                                    }
-                                )
-                            );
-                            builder2.CloseComponent();
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+                            if (displayNestedComponent)
+                            {
+                                builder3.OpenComponent<
+                                    SecondCascadingParameterConsumerComponent<string, int>
+                                >(0);
+                                builder3.AddAttribute(1, "RegularParameter", "Goodbye");
+                                builder3.CloseComponent();
+                            }
+                        })
+                    );
+                    builder2.CloseComponent();
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Act 1: Initial render; capture nested component ID
         var componentId = renderer.AssignRootComponentId(component);
@@ -341,32 +308,26 @@ public class CascadingParameterTest
         var providedValue = "Initial value";
         var shouldIncludeChild = true;
         var renderer = new TestRenderer();
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<string>>(0);
-                builder.AddAttribute(1, "Value", providedValue);
-                builder.AddAttribute(2, "IsFixed", true);
-                builder.AddAttribute(
-                    3,
-                    "ChildContent",
-                    new RenderFragment(
-                        childBuilder =>
-                        {
-                            if (shouldIncludeChild)
-                            {
-                                childBuilder.OpenComponent<
-                                    CascadingParameterConsumerComponent<string>
-                                >(0);
-                                childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
-                                childBuilder.CloseComponent();
-                            }
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<string>>(0);
+            builder.AddAttribute(1, "Value", providedValue);
+            builder.AddAttribute(2, "IsFixed", true);
+            builder.AddAttribute(
+                3,
+                "ChildContent",
+                new RenderFragment(childBuilder =>
+                {
+                    if (shouldIncludeChild)
+                    {
+                        childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(0);
+                        childBuilder.AddAttribute(1, "RegularParameter", "Goodbye");
+                        childBuilder.CloseComponent();
+                    }
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Act 1: Initial render; capture nested component ID
         var componentId = renderer.AssignRootComponentId(component);
@@ -417,15 +378,13 @@ public class CascadingParameterTest
         // Arrange
         var renderer = new TestRenderer();
         var isFixed = false;
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<object>>(0);
-                builder.AddAttribute(1, "IsFixed", isFixed);
-                builder.AddAttribute(2, "Value", new object());
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<object>>(0);
+            builder.AddAttribute(1, "IsFixed", isFixed);
+            builder.AddAttribute(2, "Value", new object());
+            builder.CloseComponent();
+        });
         renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
@@ -441,18 +400,16 @@ public class CascadingParameterTest
         // Arrange
         var renderer = new TestRenderer();
         var isFixed = true;
-        var component = new TestComponent(
-            builder =>
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<object>>(0);
+            if (isFixed) // Showing also that "unset" is treated as "false"
             {
-                builder.OpenComponent<CascadingValue<object>>(0);
-                if (isFixed) // Showing also that "unset" is treated as "false"
-                {
-                    builder.AddAttribute(1, "IsFixed", true);
-                }
-                builder.AddAttribute(2, "Value", new object());
-                builder.CloseComponent();
+                builder.AddAttribute(1, "IsFixed", true);
             }
-        );
+            builder.AddAttribute(2, "Value", new object());
+            builder.CloseComponent();
+        });
         renderer.AssignRootComponentId(component);
         component.TriggerRender();
 
@@ -468,27 +425,21 @@ public class CascadingParameterTest
         // Arrange
         var providedValue = "Initial value";
         var renderer = new TestRenderer();
-        var component = new TestComponent(
-            builder =>
-            {
-                builder.OpenComponent<CascadingValue<string>>(0);
-                builder.AddAttribute(1, "Value", providedValue);
-                builder.AddAttribute(
-                    2,
-                    "ChildContent",
-                    new RenderFragment(
-                        childBuilder =>
-                        {
-                            childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(
-                                0
-                            );
-                            childBuilder.CloseComponent();
-                        }
-                    )
-                );
-                builder.CloseComponent();
-            }
-        );
+        var component = new TestComponent(builder =>
+        {
+            builder.OpenComponent<CascadingValue<string>>(0);
+            builder.AddAttribute(1, "Value", providedValue);
+            builder.AddAttribute(
+                2,
+                "ChildContent",
+                new RenderFragment(childBuilder =>
+                {
+                    childBuilder.OpenComponent<CascadingParameterConsumerComponent<string>>(0);
+                    childBuilder.CloseComponent();
+                })
+            );
+            builder.CloseComponent();
+        });
 
         // Initial render; capture nested component
         var componentId = renderer.AssignRootComponentId(component);

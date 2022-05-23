@@ -31240,21 +31240,19 @@ public record Test(
                 return GetAttributeStrings(
                     symbol
                         .GetAttributes()
-                        .Where(
-                            a =>
+                        .Where(a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
+
+                            return false;
+                        })
                 );
             }
         }
@@ -31333,21 +31331,19 @@ public record Test(
                 return GetAttributeStrings(
                     symbol
                         .GetAttributes()
-                        .Where(
-                            a =>
+                        .Where(a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
+
+                            return false;
+                        })
                 );
             }
         }
@@ -31412,18 +31408,16 @@ public record Test(
                 return GetAttributeStrings(
                     symbol
                         .GetAttributes()
-                        .Where(
-                            a =>
+                        .Where(a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                    return true;
                             }
-                        )
+
+                            return false;
+                        })
                 );
             }
         }
@@ -31515,21 +31509,19 @@ public record Test(
                 return GetAttributeStrings(
                     symbol
                         .GetAttributes()
-                        .Where(
-                            a =>
+                        .Where(a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
+
+                            return false;
+                        })
                 );
             }
         }
@@ -31621,21 +31613,19 @@ public record Test(
                 return GetAttributeStrings(
                     symbol
                         .GetAttributes()
-                        .Where(
-                            a =>
+                        .Where(a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "A":
-                                    case "B":
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "A":
+                                case "B":
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
+
+                            return false;
+                        })
                 );
             }
         }
@@ -31703,19 +31693,17 @@ public record Test(
                 return GetAttributeStrings(
                     symbol
                         .GetAttributes()
-                        .Where(
-                            a =>
+                        .Where(a =>
+                        {
+                            switch (a.AttributeClass!.Name)
                             {
-                                switch (a.AttributeClass!.Name)
-                                {
-                                    case "C":
-                                    case "D":
-                                        return true;
-                                }
-
-                                return false;
+                                case "C":
+                                case "D":
+                                    return true;
                             }
-                        )
+
+                            return false;
+                        })
                 );
             }
         }

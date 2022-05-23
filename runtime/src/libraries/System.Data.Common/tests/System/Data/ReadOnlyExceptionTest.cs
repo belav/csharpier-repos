@@ -41,20 +41,16 @@ namespace System.Data.Tests
             // ReadOnlyException - EndEdit
             //tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
             //tbl.Rows[0][0] = 99 ;
-            Assert.Throws<ReadOnlyException>(
-                () =>
-                {
-                    tbl.Rows[0][0] = 99;
-                }
-            );
+            Assert.Throws<ReadOnlyException>(() =>
+            {
+                tbl.Rows[0][0] = 99;
+            });
 
             // ReadOnlyException - ItemArray
-            Assert.Throws<ReadOnlyException>(
-                () =>
-                {
-                    tbl.Rows[0].ItemArray = new object[] { 99, "value", "value" };
-                }
-            );
+            Assert.Throws<ReadOnlyException>(() =>
+            {
+                tbl.Rows[0].ItemArray = new object[] { 99, "value", "value" };
+            });
 
             //check for string column
             tbl.Columns[0].ReadOnly = false;
@@ -63,20 +59,16 @@ namespace System.Data.Tests
             // ReadOnlyException - EndEdit
             //tbl.Rows[0].BeginEdit();   // this throw an exception but according to MSDN it shouldn't !!!
             //tbl.Rows[0][0] = 99 ;
-            Assert.Throws<ReadOnlyException>(
-                () =>
-                {
-                    tbl.Rows[0][1] = "NewValue";
-                }
-            );
+            Assert.Throws<ReadOnlyException>(() =>
+            {
+                tbl.Rows[0][1] = "NewValue";
+            });
 
             // ReadOnlyException - ItemArray
-            Assert.Throws<ReadOnlyException>(
-                () =>
-                {
-                    tbl.Rows[0].ItemArray = new object[] { 99, "value", "value" };
-                }
-            );
+            Assert.Throws<ReadOnlyException>(() =>
+            {
+                tbl.Rows[0].ItemArray = new object[] { 99, "value", "value" };
+            });
         }
     }
 }

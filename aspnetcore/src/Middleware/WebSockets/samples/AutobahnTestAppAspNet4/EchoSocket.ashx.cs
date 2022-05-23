@@ -19,12 +19,10 @@ namespace AutobahnTestAppAspNet4
         {
             if (context.IsWebSocketRequest)
             {
-                context.AcceptWebSocketRequest(
-                    async socketContext =>
-                    {
-                        await Echo(socketContext.WebSocket);
-                    }
-                );
+                context.AcceptWebSocketRequest(async socketContext =>
+                {
+                    await Echo(socketContext.WebSocket);
+                });
             }
             else
             {

@@ -30,19 +30,17 @@ public static class WebHostBuilderKestrelExtensions
     public static IWebHostBuilder UseKestrel(this IWebHostBuilder hostBuilder)
     {
         hostBuilder.UseQuic();
-        return hostBuilder.ConfigureServices(
-            services =>
-            {
-                // Don't override an already-configured transport
-                services.TryAddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
+        return hostBuilder.ConfigureServices(services =>
+        {
+            // Don't override an already-configured transport
+            services.TryAddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
 
-                services.AddTransient<
-                    IConfigureOptions<KestrelServerOptions>,
-                    KestrelServerOptionsSetup
-                >();
-                services.AddSingleton<IServer, KestrelServerImpl>();
-            }
-        );
+            services.AddTransient<
+                IConfigureOptions<KestrelServerOptions>,
+                KestrelServerOptionsSetup
+            >();
+            services.AddSingleton<IServer, KestrelServerImpl>();
+        });
     }
 
     /// <summary>
@@ -82,18 +80,16 @@ public static class WebHostBuilderKestrelExtensions
         Action<KestrelServerOptions> options
     )
     {
-        return hostBuilder.ConfigureServices(
-            services =>
-            {
-                services.TryAddEnumerable(
-                    ServiceDescriptor.Transient<
-                        IConfigureOptions<KestrelServerOptions>,
-                        KestrelServerOptionsSetup
-                    >()
-                );
-                services.Configure(options);
-            }
-        );
+        return hostBuilder.ConfigureServices(services =>
+        {
+            services.TryAddEnumerable(
+                ServiceDescriptor.Transient<
+                    IConfigureOptions<KestrelServerOptions>,
+                    KestrelServerOptionsSetup
+                >()
+            );
+            services.Configure(options);
+        });
     }
 
     /// <summary>
@@ -143,12 +139,10 @@ public static class WebHostBuilderKestrelExtensions
                         KestrelServerOptionsSetup
                     >()
                 );
-                services.Configure<KestrelServerOptions>(
-                    options =>
-                    {
-                        configureOptions(context, options);
-                    }
-                );
+                services.Configure<KestrelServerOptions>(options =>
+                {
+                    configureOptions(context, options);
+                });
             }
         );
     }

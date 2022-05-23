@@ -170,16 +170,14 @@ namespace System.Net.WebSockets.Client.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            Dictionary<string, string> headers =
-                                await LoopbackHelper.WebSocketHandshakeAsync(connection);
-                            Assert.NotNull(headers);
-                            Assert.True(headers.TryGetValue("Host", out string host));
-                            Assert.Equal(expectedHost, host);
-                        }
-                    ),
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        Dictionary<string, string> headers =
+                            await LoopbackHelper.WebSocketHandshakeAsync(connection);
+                        Assert.NotNull(headers);
+                        Assert.True(headers.TryGetValue("Host", out string host));
+                        Assert.Equal(expectedHost, host);
+                    }),
                 new LoopbackServer.Options { WebSocketEndpoint = true }
             );
         }
@@ -336,14 +334,10 @@ namespace System.Net.WebSockets.Client.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            Assert.NotNull(
-                                await LoopbackHelper.WebSocketHandshakeAsync(connection)
-                            );
-                        }
-                    ),
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
+                    }),
                 new LoopbackServer.Options { WebSocketEndpoint = true }
             );
         }
@@ -441,12 +435,10 @@ namespace System.Net.WebSockets.Client.Tests
                 {
                     try
                     {
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await releaseServer.Task;
-                            }
-                        );
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            await releaseServer.Task;
+                        });
                     }
                     // Ignore IO exception on server as there are race conditions when client is cancelling.
                     catch (IOException) { }

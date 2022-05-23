@@ -49,21 +49,19 @@ namespace System.Tests
         public void CurrentDirectory_SetToValidOtherDirectory()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Environment.CurrentDirectory = TestDirectory;
-                        Assert.Equal(Directory.GetCurrentDirectory(), Environment.CurrentDirectory);
+                .Invoke(() =>
+                {
+                    Environment.CurrentDirectory = TestDirectory;
+                    Assert.Equal(Directory.GetCurrentDirectory(), Environment.CurrentDirectory);
 
-                        if (!OperatingSystem.IsMacOS())
-                        {
-                            // On OSX, the temp directory /tmp/ is a symlink to /private/tmp, so setting the current
-                            // directory to a symlinked path will result in GetCurrentDirectory returning the absolute
-                            // path that followed the symlink.
-                            Assert.Equal(TestDirectory, Directory.GetCurrentDirectory());
-                        }
+                    if (!OperatingSystem.IsMacOS())
+                    {
+                        // On OSX, the temp directory /tmp/ is a symlink to /private/tmp, so setting the current
+                        // directory to a symlinked path will result in GetCurrentDirectory returning the absolute
+                        // path that followed the symlink.
+                        Assert.Equal(TestDirectory, Directory.GetCurrentDirectory());
                     }
-                )
+                })
                 .Dispose();
         }
 

@@ -29,14 +29,12 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                x =>
-                {
-                    x.CreateProjection<string, string>().ConvertUsing(s => _niceGreeting);
-                    x.CreateProjection<Source, Target>();
-                    x.CreateProjection<SourceChild, TargetChild>();
-                }
-            );
+            new MapperConfiguration(x =>
+            {
+                x.CreateProjection<string, string>().ConvertUsing(s => _niceGreeting);
+                x.CreateProjection<Source, Target>();
+                x.CreateProjection<SourceChild, TargetChild>();
+            });
         const string _niceGreeting = "Hello";
 
         [Fact]
@@ -96,14 +94,12 @@ namespace AutoMapper.UnitTests.Projection
 
         const string _niceGreeting = "Hello";
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                x =>
-                {
-                    x.CreateProjection<Source, Target>()
-                        .ConvertUsing(s => new Target { Greeting = _niceGreeting });
-                    x.CreateProjection<SourceChild, TargetChild>();
-                }
-            );
+            new MapperConfiguration(x =>
+            {
+                x.CreateProjection<Source, Target>()
+                    .ConvertUsing(s => new Target { Greeting = _niceGreeting });
+                x.CreateProjection<SourceChild, TargetChild>();
+            });
 
         [Fact]
         public void Should_work()
@@ -162,14 +158,12 @@ namespace AutoMapper.UnitTests.Projection
 
         const string _niceGreeting = "Hello";
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                x =>
-                {
-                    x.CreateProjection<Source, Target>();
-                    x.CreateProjection<SourceChild, TargetChild>()
-                        .ConvertUsing(s => new TargetChild { Greeting = _niceGreeting });
-                }
-            );
+            new MapperConfiguration(x =>
+            {
+                x.CreateProjection<Source, Target>();
+                x.CreateProjection<SourceChild, TargetChild>()
+                    .ConvertUsing(s => new TargetChild { Greeting = _niceGreeting });
+            });
 
         [Fact]
         public void Should_work()

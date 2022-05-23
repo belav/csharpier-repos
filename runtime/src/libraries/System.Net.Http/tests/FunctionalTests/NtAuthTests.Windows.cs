@@ -199,15 +199,13 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     await server
-                        .AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                Task t = useNtlm
-                                    ? HandleNtlmAuthenticationRequest(connection)
-                                    : HandleNegotiateAuthenticationRequest(connection);
-                                await t;
-                            }
-                        )
+                        .AcceptConnectionAsync(async connection =>
+                        {
+                            Task t = useNtlm
+                                ? HandleNtlmAuthenticationRequest(connection)
+                                : HandleNegotiateAuthenticationRequest(connection);
+                            await t;
+                        })
                         .ConfigureAwait(false);
                 }
             );

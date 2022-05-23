@@ -271,22 +271,20 @@ namespace AutoMapper.Configuration
 
         private void ReverseSourceMembers(MemberPath memberPath, LambdaExpression customExpression)
         {
-            ReverseMapExpression.TypeMapActions.Add(
-                reverseTypeMap =>
-                {
-                    var newDestination = Parameter(reverseTypeMap.DestinationType, "destination");
-                    var path = memberPath.Members.Chain(newDestination);
-                    var forPathLambda = Lambda(path, newDestination);
+            ReverseMapExpression.TypeMapActions.Add(reverseTypeMap =>
+            {
+                var newDestination = Parameter(reverseTypeMap.DestinationType, "destination");
+                var path = memberPath.Members.Chain(newDestination);
+                var forPathLambda = Lambda(path, newDestination);
 
-                    var pathMap = reverseTypeMap.FindOrCreatePathMapFor(
-                        forPathLambda,
-                        memberPath,
-                        reverseTypeMap
-                    );
+                var pathMap = reverseTypeMap.FindOrCreatePathMapFor(
+                    forPathLambda,
+                    memberPath,
+                    reverseTypeMap
+                );
 
-                    pathMap.CustomMapExpression = customExpression;
-                }
-            );
+                pathMap.CustomMapExpression = customExpression;
+            });
         }
 
         protected void ForSourceMemberCore(
@@ -372,18 +370,16 @@ namespace AutoMapper.Configuration
 
         public TMappingExpression BeforeMap(Action<TSource, TDestination> beforeFunction)
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => beforeFunction(src, dest);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => beforeFunction(src, dest);
 
-                    tm.AddBeforeMapAction(expr);
-                }
-            );
+                tm.AddBeforeMapAction(expr);
+            });
 
             return this as TMappingExpression;
         }
@@ -392,18 +388,16 @@ namespace AutoMapper.Configuration
             Action<TSource, TDestination, ResolutionContext> beforeFunction
         )
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => beforeFunction(src, dest, ctxt);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => beforeFunction(src, dest, ctxt);
 
-                    tm.AddBeforeMapAction(expr);
-                }
-            );
+                tm.AddBeforeMapAction(expr);
+            });
 
             return this as TMappingExpression;
         }
@@ -428,18 +422,16 @@ namespace AutoMapper.Configuration
 
         public TMappingExpression AfterMap(Action<TSource, TDestination> afterFunction)
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => afterFunction(src, dest);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => afterFunction(src, dest);
 
-                    tm.AddAfterMapAction(expr);
-                }
-            );
+                tm.AddAfterMapAction(expr);
+            });
 
             return this as TMappingExpression;
         }
@@ -448,18 +440,16 @@ namespace AutoMapper.Configuration
             Action<TSource, TDestination, ResolutionContext> afterFunction
         )
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => afterFunction(src, dest, ctxt);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Action<TSource, TDestination, ResolutionContext>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => afterFunction(src, dest, ctxt);
 
-                    tm.AddAfterMapAction(expr);
-                }
-            );
+                tm.AddAfterMapAction(expr);
+            });
 
             return this as TMappingExpression;
         }
@@ -473,24 +463,20 @@ namespace AutoMapper.Configuration
 
         public TMappingExpression DisableCtorValidation()
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    tm.DisableConstructorValidation = true;
-                }
-            );
+            TypeMapActions.Add(tm =>
+            {
+                tm.DisableConstructorValidation = true;
+            });
 
             return this as TMappingExpression;
         }
 
         public TMappingExpression ValidateMemberList(MemberList memberList)
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    tm.ConfiguredMemberList = memberList;
-                }
-            );
+            TypeMapActions.Add(tm =>
+            {
+                tm.ConfiguredMemberList = memberList;
+            });
             return this as TMappingExpression;
         }
 
@@ -541,15 +527,13 @@ namespace AutoMapper.Configuration
             Func<TSource, ResolutionContext, TDestination> ctor
         )
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Func<TSource, ResolutionContext, TDestination>> expr = (src, ctxt) =>
-                        ctor(src, ctxt);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Func<TSource, ResolutionContext, TDestination>> expr = (src, ctxt) =>
+                    ctor(src, ctxt);
 
-                    tm.CustomCtorFunction = expr;
-                }
-            );
+                tm.CustomCtorFunction = expr;
+            });
 
             return this as TMappingExpression;
         }
@@ -559,30 +543,32 @@ namespace AutoMapper.Configuration
 
         public void ConvertUsing(Func<TSource, TDestination, TDestination> mappingFunction)
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Func<TSource, TDestination, ResolutionContext, TDestination>> expr =
-                        (src, dest, ctxt) => mappingFunction(src, dest);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Func<TSource, TDestination, ResolutionContext, TDestination>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => mappingFunction(src, dest);
 
-                    tm.CustomMapFunction = expr;
-                }
-            );
+                tm.CustomMapFunction = expr;
+            });
         }
 
         public void ConvertUsing(
             Func<TSource, TDestination, ResolutionContext, TDestination> mappingFunction
         )
         {
-            TypeMapActions.Add(
-                tm =>
-                {
-                    Expression<Func<TSource, TDestination, ResolutionContext, TDestination>> expr =
-                        (src, dest, ctxt) => mappingFunction(src, dest, ctxt);
+            TypeMapActions.Add(tm =>
+            {
+                Expression<Func<TSource, TDestination, ResolutionContext, TDestination>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => mappingFunction(src, dest, ctxt);
 
-                    tm.CustomMapFunction = expr;
-                }
-            );
+                tm.CustomMapFunction = expr;
+            });
         }
 
         public void ConvertUsing(ITypeConverter<TSource, TDestination> converter)

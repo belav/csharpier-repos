@@ -21,36 +21,26 @@ public class Program
     private static IHostBuilder CreateWebHostBuilder(string[] args)
     {
         return new HostBuilder()
-            .ConfigureHostConfiguration(
-                config =>
-                {
-                    config.AddCommandLine(args);
-                }
-            )
-            .ConfigureLogging(
-                logging =>
-                {
-                    logging.AddConsole();
-                    logging.SetMinimumLevel(LogLevel.Debug);
-                }
-            )
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            o =>
-                            {
-                                o.ConfigureEndpointDefaults(
-                                    lo =>
-                                    {
-                                        lo.UseConnectionLogging();
-                                    }
-                                );
-                            }
-                        )
-                        .UseStartup<Startup>();
-                }
-            );
+            .ConfigureHostConfiguration(config =>
+            {
+                config.AddCommandLine(args);
+            })
+            .ConfigureLogging(logging =>
+            {
+                logging.AddConsole();
+                logging.SetMinimumLevel(LogLevel.Debug);
+            })
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(o =>
+                    {
+                        o.ConfigureEndpointDefaults(lo =>
+                        {
+                            lo.UseConnectionLogging();
+                        });
+                    })
+                    .UseStartup<Startup>();
+            });
     }
 }

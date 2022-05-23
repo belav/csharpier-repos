@@ -133,30 +133,22 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
             rm.Dispose(); // Multiple calls don't throw.
 
             Assert.True(content.IsDisposed);
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.Method = HttpMethod.Put;
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.RequestUri = null;
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.Version = new Version(1, 0);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.Content = null;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.Method = HttpMethod.Put;
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.RequestUri = null;
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.Version = new Version(1, 0);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.Content = null;
+            });
 
             // Property getters should still work after disposing.
             Assert.Equal(HttpMethod.Get, rm.Method);
@@ -341,24 +333,20 @@ namespace System.Runtime.InteropServices.JavaScript.Http.Tests
         public void Version_SetToNull_ThrowsArgumentNullException()
         {
             var rm = new HttpRequestMessage();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    rm.Version = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                rm.Version = null;
+            });
         }
 
         [Fact]
         public void Method_SetToNull_ThrowsArgumentNullException()
         {
             var rm = new HttpRequestMessage();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    rm.Method = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                rm.Method = null;
+            });
         }
 
         [Fact]

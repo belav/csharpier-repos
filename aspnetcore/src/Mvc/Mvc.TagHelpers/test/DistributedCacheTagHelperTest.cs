@@ -600,22 +600,18 @@ public class DistributedCacheTagHelperTest
 
         // Act
 
-        var task1 = Task.Run(
-            async () =>
-            {
-                await event1.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
-                await cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1);
-                event3.SetResult(0);
-            }
-        );
+        var task1 = Task.Run(async () =>
+        {
+            await event1.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
+            await cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1);
+            event3.SetResult(0);
+        });
 
-        var task2 = Task.Run(
-            async () =>
-            {
-                await event2.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
-                await cacheTagHelper2.ProcessAsync(tagHelperContext1, tagHelperOutput2);
-            }
-        );
+        var task2 = Task.Run(async () =>
+        {
+            await event2.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
+            await cacheTagHelper2.ProcessAsync(tagHelperContext1, tagHelperOutput2);
+        });
 
         event1.SetResult(0);
         await Task.WhenAll(task1, task2);
@@ -700,24 +696,20 @@ public class DistributedCacheTagHelperTest
 
         // Act
 
-        var task1 = Task.Run(
-            async () =>
-            {
-                await event1.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
-                await Assert.ThrowsAsync<Exception>(
-                    () => cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1)
-                );
-                event3.SetResult(0);
-            }
-        );
+        var task1 = Task.Run(async () =>
+        {
+            await event1.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
+            await Assert.ThrowsAsync<Exception>(
+                () => cacheTagHelper1.ProcessAsync(tagHelperContext1, tagHelperOutput1)
+            );
+            event3.SetResult(0);
+        });
 
-        var task2 = Task.Run(
-            async () =>
-            {
-                await event2.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
-                await cacheTagHelper2.ProcessAsync(tagHelperContext2, tagHelperOutput2);
-            }
-        );
+        var task2 = Task.Run(async () =>
+        {
+            await event2.Task.TimeoutAfter(TimeSpan.FromSeconds(5));
+            await cacheTagHelper2.ProcessAsync(tagHelperContext2, tagHelperOutput2);
+        });
 
         event1.SetResult(0);
         await Task.WhenAll(task1, task2);

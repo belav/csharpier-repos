@@ -268,13 +268,11 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             // Should throw if RegistryKey is closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.SetValue(valueName, int.MinValue, RegistryValueKind.DWord);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.SetValue(valueName, int.MinValue, RegistryValueKind.DWord);
+            });
         }
     }
 }

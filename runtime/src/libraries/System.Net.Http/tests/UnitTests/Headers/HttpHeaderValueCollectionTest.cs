@@ -104,12 +104,10 @@ namespace System.Net.Http.Tests
                 headers
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    collection.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.Add(null);
+            });
         }
 
         [Fact]
@@ -230,12 +228,10 @@ namespace System.Net.Http.Tests
             HttpResponseHeaders headers = new HttpResponseHeaders();
             string input = "Basic, D\rigest qop=\"auth\",algorithm=MD5-sess";
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.WwwAuthenticate.ParseAdd(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.WwwAuthenticate.ParseAdd(input);
+            });
         }
 
         [Fact]
@@ -357,12 +353,10 @@ namespace System.Net.Http.Tests
                 headers
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    collection.Contains(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.Contains(null);
+            });
         }
 
         [Fact]
@@ -615,24 +609,18 @@ namespace System.Net.Http.Tests
             collection.CopyTo(array, 0); // no exception
             Assert.Null(array[0]);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    collection.CopyTo(null, 0);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    collection.CopyTo(array, -1);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    collection.CopyTo(array, 2);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.CopyTo(null, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                collection.CopyTo(array, -1);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                collection.CopyTo(array, 2);
+            });
 
             headers.Add(knownStringHeader, "special");
             array = new string[0];
@@ -698,12 +686,10 @@ namespace System.Net.Http.Tests
                 headers
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    collection.Remove(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection.Remove(null);
+            });
         }
 
         [Fact]
@@ -1024,12 +1010,10 @@ namespace System.Net.Http.Tests
             collection.Add(new Uri("http://some/"));
 
             // When we add 'invalidValue' our MockValidator will throw.
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    collection.Add(invalidValue);
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                collection.Add(invalidValue);
+            });
         }
 
         [Fact]
@@ -1045,12 +1029,10 @@ namespace System.Net.Http.Tests
             );
 
             // When we remove 'invalidValue' our MockValidator will throw.
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    collection.Remove(invalidValue);
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                collection.Remove(invalidValue);
+            });
         }
 
         [Fact]

@@ -17,13 +17,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             modelBuilder.Entity<City>().Property(g => g.Location).HasColumnType("varchar(100)");
 
             // No support yet for DateOnly/TimeOnly (#24507)
-            modelBuilder.Entity<Mission>(
-                b =>
-                {
-                    b.Ignore(m => m.Date);
-                    b.Ignore(m => m.Time);
-                }
-            );
+            modelBuilder.Entity<Mission>(b =>
+            {
+                b.Ignore(m => m.Date);
+                b.Ignore(m => m.Time);
+            });
         }
     }
 }

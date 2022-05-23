@@ -504,15 +504,13 @@ namespace Microsoft.CodeAnalysis
             if (!this.SupportsCompilation)
                 return false;
 
-            var tasks = this.Documents.Select(
-                async d =>
-                {
-                    var index = await SyntaxTreeIndex
-                        .GetRequiredIndexAsync(d, cancellationToken)
-                        .ConfigureAwait(false);
-                    return predicate(index, cancellationToken);
-                }
-            );
+            var tasks = this.Documents.Select(async d =>
+            {
+                var index = await SyntaxTreeIndex
+                    .GetRequiredIndexAsync(d, cancellationToken)
+                    .ConfigureAwait(false);
+                return predicate(index, cancellationToken);
+            });
 
             var results = await Task.WhenAll(tasks).ConfigureAwait(false);
             return results.Any(b => b);

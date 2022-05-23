@@ -143,12 +143,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
                 throw Exceptions.ThrowEInvalidArg();
             }
 
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddAttributeArgument(LookupNode(), name, value, position);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddAttributeArgument(LookupNode(), name, value, position);
+            });
         }
 
         public new void Delete() => base.Delete();

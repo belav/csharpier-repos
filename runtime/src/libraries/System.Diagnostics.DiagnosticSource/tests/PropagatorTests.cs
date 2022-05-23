@@ -21,151 +21,144 @@ namespace System.Diagnostics.Tests
         public void TestAllPropagators()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.NotNull(DistributedContextPropagator.Current);
+                .Invoke(() =>
+                {
+                    Assert.NotNull(DistributedContextPropagator.Current);
 
-                        //
-                        // Default Propagator
-                        //
+                    //
+                    // Default Propagator
+                    //
 
-                        Assert.Same(
-                            DistributedContextPropagator.CreateDefaultPropagator(),
-                            DistributedContextPropagator.Current
-                        );
+                    Assert.Same(
+                        DistributedContextPropagator.CreateDefaultPropagator(),
+                        DistributedContextPropagator.Current
+                    );
 
-                        TestDefaultPropagatorUsingW3CActivity(
-                            DistributedContextPropagator.Current,
-                            "Legacy1=true",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>(
-                                    "     LegacyKey1     ",
-                                    "    LegacyValue1    "
-                                )
-                            }
-                        );
+                    TestDefaultPropagatorUsingW3CActivity(
+                        DistributedContextPropagator.Current,
+                        "Legacy1=true",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>(
+                                "     LegacyKey1     ",
+                                "    LegacyValue1    "
+                            )
+                        }
+                    );
 
-                        TestDefaultPropagatorUsingHierarchicalActivity(
-                            DistributedContextPropagator.Current,
-                            "Legacy2=true",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>("LegacyKey2", "LegacyValue2")
-                            }
-                        );
+                    TestDefaultPropagatorUsingHierarchicalActivity(
+                        DistributedContextPropagator.Current,
+                        "Legacy2=true",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>("LegacyKey2", "LegacyValue2")
+                        }
+                    );
 
-                        TestFields(DistributedContextPropagator.Current);
+                    TestFields(DistributedContextPropagator.Current);
 
-                        //
-                        // NoOutput Propagator
-                        //
+                    //
+                    // NoOutput Propagator
+                    //
 
-                        DistributedContextPropagator.Current =
-                            DistributedContextPropagator.CreateNoOutputPropagator();
-                        Assert.NotNull(DistributedContextPropagator.Current);
-                        TestNoOutputPropagatorUsingHierarchicalActivity(
-                            DistributedContextPropagator.Current,
-                            "ActivityState=1",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>("B1", "V1"),
-                                new KeyValuePair<string, string>(" B2 ", " V2 ")
-                            }
-                        );
+                    DistributedContextPropagator.Current =
+                        DistributedContextPropagator.CreateNoOutputPropagator();
+                    Assert.NotNull(DistributedContextPropagator.Current);
+                    TestNoOutputPropagatorUsingHierarchicalActivity(
+                        DistributedContextPropagator.Current,
+                        "ActivityState=1",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>("B1", "V1"),
+                            new KeyValuePair<string, string>(" B2 ", " V2 ")
+                        }
+                    );
 
-                        TestNoOutputPropagatorUsingHierarchicalActivity(
-                            DistributedContextPropagator.Current,
-                            "ActivityState=2",
-                            null
-                        );
+                    TestNoOutputPropagatorUsingHierarchicalActivity(
+                        DistributedContextPropagator.Current,
+                        "ActivityState=2",
+                        null
+                    );
 
-                        TestNoOutputPropagatorUsingW3CActivity(
-                            DistributedContextPropagator.Current,
-                            "ActivityState=1",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>(" B3 ", " V3"),
-                                new KeyValuePair<string, string>(" B4 ", " V4 "),
-                                new KeyValuePair<string, string>("B5", "V5")
-                            }
-                        );
+                    TestNoOutputPropagatorUsingW3CActivity(
+                        DistributedContextPropagator.Current,
+                        "ActivityState=1",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>(" B3 ", " V3"),
+                            new KeyValuePair<string, string>(" B4 ", " V4 "),
+                            new KeyValuePair<string, string>("B5", "V5")
+                        }
+                    );
 
-                        TestNoOutputPropagatorUsingW3CActivity(
-                            DistributedContextPropagator.Current,
-                            "ActivityState=2",
-                            null
-                        );
+                    TestNoOutputPropagatorUsingW3CActivity(
+                        DistributedContextPropagator.Current,
+                        "ActivityState=2",
+                        null
+                    );
 
-                        TestFields(DistributedContextPropagator.Current);
+                    TestFields(DistributedContextPropagator.Current);
 
-                        //
-                        // Pass Through Propagator
-                        //
+                    //
+                    // Pass Through Propagator
+                    //
 
-                        DistributedContextPropagator.Current =
-                            DistributedContextPropagator.CreatePassThroughPropagator();
-                        Assert.NotNull(DistributedContextPropagator.Current);
-                        TestPassThroughPropagatorUsingHierarchicalActivityWithParentChain(
-                            DistributedContextPropagator.Current,
-                            "PassThrough=true",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>(
-                                    "PassThroughKey1",
-                                    "PassThroughValue1"
-                                ),
-                                new KeyValuePair<string, string>(
-                                    "PassThroughKey2",
-                                    "PassThroughValue2"
-                                )
-                            }
-                        );
+                    DistributedContextPropagator.Current =
+                        DistributedContextPropagator.CreatePassThroughPropagator();
+                    Assert.NotNull(DistributedContextPropagator.Current);
+                    TestPassThroughPropagatorUsingHierarchicalActivityWithParentChain(
+                        DistributedContextPropagator.Current,
+                        "PassThrough=true",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>(
+                                "PassThroughKey1",
+                                "PassThroughValue1"
+                            ),
+                            new KeyValuePair<string, string>("PassThroughKey2", "PassThroughValue2")
+                        }
+                    );
 
-                        TestPassThroughPropagatorUsingHierarchicalActivityWithParentId(
-                            DistributedContextPropagator.Current,
-                            "PassThrough1=true",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>(
-                                    "PassThroughKey3",
-                                    "PassThroughValue3"
-                                ),
-                                new KeyValuePair<string, string>(
-                                    " PassThroughKey4 ",
-                                    " PassThroughValue4 "
-                                )
-                            }
-                        );
+                    TestPassThroughPropagatorUsingHierarchicalActivityWithParentId(
+                        DistributedContextPropagator.Current,
+                        "PassThrough1=true",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>(
+                                "PassThroughKey3",
+                                "PassThroughValue3"
+                            ),
+                            new KeyValuePair<string, string>(
+                                " PassThroughKey4 ",
+                                " PassThroughValue4 "
+                            )
+                        }
+                    );
 
-                        TestPassThroughPropagatorUsingW3CActivity(
-                            DistributedContextPropagator.Current,
-                            "PassThrough2=1",
-                            new List<KeyValuePair<string, string>>()
-                            {
-                                new KeyValuePair<string, string>(
-                                    "     PassThroughKey4     ",
-                                    "    PassThroughValue4    "
-                                )
-                            }
-                        );
+                    TestPassThroughPropagatorUsingW3CActivity(
+                        DistributedContextPropagator.Current,
+                        "PassThrough2=1",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>(
+                                "     PassThroughKey4     ",
+                                "    PassThroughValue4    "
+                            )
+                        }
+                    );
 
-                        TestPassThroughPropagatorWithNullCurrent(
-                            DistributedContextPropagator.Current
-                        );
+                    TestPassThroughPropagatorWithNullCurrent(DistributedContextPropagator.Current);
 
-                        TestFields(DistributedContextPropagator.Current);
+                    TestFields(DistributedContextPropagator.Current);
 
-                        //
-                        // Test Current
-                        //
+                    //
+                    // Test Current
+                    //
 
-                        Assert.Throws<ArgumentNullException>(
-                            () => DistributedContextPropagator.Current = null
-                        );
-                    }
-                )
+                    Assert.Throws<ArgumentNullException>(
+                        () => DistributedContextPropagator.Current = null
+                    );
+                })
                 .Dispose();
         }
 
@@ -798,57 +791,90 @@ namespace System.Diagnostics.Tests
         public void TestCustomPropagator()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        DistributedContextPropagator.Current = new CustomPropagator();
-                        using Activity a = CreateW3CActivity(
-                            "CustomW3C1",
-                            "CustomW3CState=1",
-                            new List<KeyValuePair<string, string>>()
+                .Invoke(() =>
+                {
+                    DistributedContextPropagator.Current = new CustomPropagator();
+                    using Activity a = CreateW3CActivity(
+                        "CustomW3C1",
+                        "CustomW3CState=1",
+                        new List<KeyValuePair<string, string>>()
+                        {
+                            new KeyValuePair<string, string>(" CustomKey1 ", "    CustomValue1  ")
+                        }
+                    );
+
+                    string traceParent = "x-" + a.Id;
+                    string traceState = "x-" + a.TraceStateString;
+                    string baggageString = "x=y, " + GetFormattedBaggage(a.Baggage);
+
+                    DistributedContextPropagator.Current.Inject(
+                        a,
+                        null,
+                        (object carrier, string fieldName, string value) =>
+                        {
+                            if (fieldName == CustomPropagator.XTraceParent)
                             {
-                                new KeyValuePair<string, string>(
-                                    " CustomKey1 ",
-                                    "    CustomValue1  "
-                                )
+                                Assert.Equal(traceParent, value);
+                                return;
                             }
-                        );
 
-                        string traceParent = "x-" + a.Id;
-                        string traceState = "x-" + a.TraceStateString;
-                        string baggageString = "x=y, " + GetFormattedBaggage(a.Baggage);
-
-                        DistributedContextPropagator.Current.Inject(
-                            a,
-                            null,
-                            (object carrier, string fieldName, string value) =>
+                            if (fieldName == CustomPropagator.XTraceState)
                             {
-                                if (fieldName == CustomPropagator.XTraceParent)
-                                {
-                                    Assert.Equal(traceParent, value);
-                                    return;
-                                }
-
-                                if (fieldName == CustomPropagator.XTraceState)
-                                {
-                                    Assert.Equal(traceState, value);
-                                    return;
-                                }
-
-                                if (fieldName == CustomPropagator.XBaggage)
-                                {
-                                    Assert.Equal(baggageString, value);
-                                    return;
-                                }
-
-                                Assert.False(
-                                    true,
-                                    $"Encountered wrong header name '{fieldName}' in the Custom Propagator"
-                                );
+                                Assert.Equal(traceState, value);
+                                return;
                             }
-                        );
 
-                        DistributedContextPropagator.Current.ExtractTraceIdAndState(
+                            if (fieldName == CustomPropagator.XBaggage)
+                            {
+                                Assert.Equal(baggageString, value);
+                                return;
+                            }
+
+                            Assert.False(
+                                true,
+                                $"Encountered wrong header name '{fieldName}' in the Custom Propagator"
+                            );
+                        }
+                    );
+
+                    DistributedContextPropagator.Current.ExtractTraceIdAndState(
+                        null,
+                        (
+                            object carrier,
+                            string fieldName,
+                            out string? fieldValue,
+                            out IEnumerable<string>? fieldValues
+                        ) =>
+                        {
+                            fieldValues = null;
+                            fieldValue = null;
+
+                            if (fieldName == CustomPropagator.XTraceParent)
+                            {
+                                fieldValue = traceParent;
+                                return;
+                            }
+
+                            if (fieldName == CustomPropagator.XTraceState)
+                            {
+                                fieldValue = traceState;
+                                return;
+                            }
+
+                            Assert.False(
+                                true,
+                                $"Encountered wrong header name '{fieldName}' in the Custom propagator"
+                            );
+                        },
+                        out string? traceId,
+                        out string? state
+                    );
+
+                    Assert.Equal(traceParent, traceId);
+                    Assert.Equal(traceState, state);
+
+                    IEnumerable<KeyValuePair<string, string?>>? b =
+                        DistributedContextPropagator.Current.ExtractBaggage(
                             null,
                             (
                                 object carrier,
@@ -857,68 +883,30 @@ namespace System.Diagnostics.Tests
                                 out IEnumerable<string>? fieldValues
                             ) =>
                             {
-                                fieldValues = null;
+                                Assert.Null(carrier);
                                 fieldValue = null;
+                                fieldValues = null;
 
-                                if (fieldName == CustomPropagator.XTraceParent)
+                                if (fieldName == CustomPropagator.XBaggage)
                                 {
-                                    fieldValue = traceParent;
-                                    return;
-                                }
-
-                                if (fieldName == CustomPropagator.XTraceState)
-                                {
-                                    fieldValue = traceState;
+                                    fieldValue = baggageString;
                                     return;
                                 }
 
                                 Assert.False(
                                     true,
-                                    $"Encountered wrong header name '{fieldName}' in the Custom propagator"
+                                    $"Encountered wrong header name '{fieldName}' in custom propagator"
                                 );
-                            },
-                            out string? traceId,
-                            out string? state
+                            }
                         );
 
-                        Assert.Equal(traceParent, traceId);
-                        Assert.Equal(traceState, state);
-
-                        IEnumerable<KeyValuePair<string, string?>>? b =
-                            DistributedContextPropagator.Current.ExtractBaggage(
-                                null,
-                                (
-                                    object carrier,
-                                    string fieldName,
-                                    out string? fieldValue,
-                                    out IEnumerable<string>? fieldValues
-                                ) =>
-                                {
-                                    Assert.Null(carrier);
-                                    fieldValue = null;
-                                    fieldValues = null;
-
-                                    if (fieldName == CustomPropagator.XBaggage)
-                                    {
-                                        fieldValue = baggageString;
-                                        return;
-                                    }
-
-                                    Assert.False(
-                                        true,
-                                        $"Encountered wrong header name '{fieldName}' in custom propagator"
-                                    );
-                                }
-                            );
-
-                        Assert.Equal(2, b.Count());
-                        Assert.Equal(new KeyValuePair<string, string>("x", "y"), b.ElementAt(0));
-                        Assert.Equal(
-                            new KeyValuePair<string, string>("CustomKey1", "CustomValue1"),
-                            b.ElementAt(1)
-                        );
-                    }
-                )
+                    Assert.Equal(2, b.Count());
+                    Assert.Equal(new KeyValuePair<string, string>("x", "y"), b.ElementAt(0));
+                    Assert.Equal(
+                        new KeyValuePair<string, string>("CustomKey1", "CustomValue1"),
+                        b.ElementAt(1)
+                    );
+                })
                 .Dispose();
         }
 

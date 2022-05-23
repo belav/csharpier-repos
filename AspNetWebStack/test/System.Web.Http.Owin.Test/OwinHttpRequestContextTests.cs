@@ -429,12 +429,10 @@ namespace System.Web.Http.Owin
             IPrincipal principal = null;
             owinRequestMock
                 .SetupSet((r) => r.User = It.IsAny<IPrincipal>())
-                .Callback<IPrincipal>(
-                    value =>
-                    {
-                        principal = value;
-                    }
-                );
+                .Callback<IPrincipal>(value =>
+                {
+                    principal = value;
+                });
             IOwinContext owinContext = CreateStubOwinContext(owinRequestMock.Object);
 
             using (HttpRequestMessage request = CreateRequest())

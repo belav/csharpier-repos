@@ -123,14 +123,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         private IVsEnumTaskItems GetErrorItems()
         {
-            return InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var errorList = GetGlobalService<SVsErrorList, IVsTaskList>();
-                    ErrorHandler.ThrowOnFailure(errorList.EnumTaskItems(out var items));
-                    return items;
-                }
-            );
+            return InvokeOnUIThread(cancellationToken =>
+            {
+                var errorList = GetGlobalService<SVsErrorList, IVsTaskList>();
+                ErrorHandler.ThrowOnFailure(errorList.EnumTaskItems(out var items));
+                return items;
+            });
         }
     }
 

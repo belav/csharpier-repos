@@ -253,57 +253,43 @@ namespace Microsoft.EntityFrameworkCore
                 context =>
                 {
                     newRoot = context.CreateProxy<Root>(e => e.AlternateId = Guid.NewGuid());
-                    new1 = context.CreateProxy<RequiredAk1>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = newRoot;
-                        }
-                    );
-                    new1d = context.CreateProxy<RequiredAk1Derived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = newRoot;
-                        }
-                    );
-                    new1dd = context.CreateProxy<RequiredAk1MoreDerived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = newRoot;
-                        }
-                    );
-                    new2a = context.CreateProxy<RequiredAk2>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = new1;
-                        }
-                    );
-                    new2b = context.CreateProxy<RequiredAk2>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = new1;
-                        }
-                    );
+                    new1 = context.CreateProxy<RequiredAk1>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = newRoot;
+                    });
+                    new1d = context.CreateProxy<RequiredAk1Derived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = newRoot;
+                    });
+                    new1dd = context.CreateProxy<RequiredAk1MoreDerived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = newRoot;
+                    });
+                    new2a = context.CreateProxy<RequiredAk2>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = new1;
+                    });
+                    new2b = context.CreateProxy<RequiredAk2>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = new1;
+                    });
                     new2ca = context.CreateProxy<RequiredComposite2>(e => e.Parent = new1);
                     new2cb = context.CreateProxy<RequiredComposite2>(e => e.Parent = new1);
-                    new2d = context.CreateProxy<RequiredAk2Derived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = new1;
-                        }
-                    );
-                    new2dd = context.CreateProxy<RequiredAk2MoreDerived>(
-                        e =>
-                        {
-                            e.AlternateId = Guid.NewGuid();
-                            e.Parent = new1;
-                        }
-                    );
+                    new2d = context.CreateProxy<RequiredAk2Derived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = new1;
+                    });
+                    new2dd = context.CreateProxy<RequiredAk2MoreDerived>(e =>
+                    {
+                        e.AlternateId = Guid.NewGuid();
+                        e.Parent = new1;
+                    });
 
                     if (useExistingEntities)
                     {

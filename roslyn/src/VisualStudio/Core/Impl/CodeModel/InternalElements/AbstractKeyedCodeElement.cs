@@ -84,19 +84,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             bool trackKinds = true
         )
         {
-            FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    // Sometimes, changing an element can result in needing to update its node key.
+            FileCodeModel.EnsureEditor(() =>
+            {
+                // Sometimes, changing an element can result in needing to update its node key.
 
-                    var node = LookupNode();
-                    var nodePath = new SyntaxPath(node, trackKinds);
+                var node = LookupNode();
+                var nodePath = new SyntaxPath(node, trackKinds);
 
-                    updater(node, value);
+                updater(node, value);
 
-                    ReacquireNodeKey(nodePath, CancellationToken.None);
-                }
-            );
+                ReacquireNodeKey(nodePath, CancellationToken.None);
+            });
         }
 
         protected override Document DeleteCore(Document document)
@@ -120,19 +118,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         protected override void SetName(string value)
         {
-            FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    var nodeKeyValidation = new NodeKeyValidation();
-                    nodeKeyValidation.AddFileCodeModel(this.FileCodeModel);
+            FileCodeModel.EnsureEditor(() =>
+            {
+                var nodeKeyValidation = new NodeKeyValidation();
+                nodeKeyValidation.AddFileCodeModel(this.FileCodeModel);
 
-                    var node = LookupNode();
+                var node = LookupNode();
 
-                    FileCodeModel.UpdateName(node, value);
+                FileCodeModel.UpdateName(node, value);
 
-                    nodeKeyValidation.RestoreKeys();
-                }
-            );
+                nodeKeyValidation.RestoreKeys();
+            });
         }
     }
 }

@@ -37,47 +37,41 @@ namespace System.Web.Razor.Generator
 
             if (!String.IsNullOrEmpty(target.Content) && !context.Host.DesignTimeMode)
             {
-                string code = context.BuildCodeString(
-                    cw =>
+                string code = context.BuildCodeString(cw =>
+                {
+                    if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
                     {
-                        if (
-                            context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-                        )
+                        if (!String.IsNullOrEmpty(context.TargetWriterName))
                         {
-                            if (!String.IsNullOrEmpty(context.TargetWriterName))
-                            {
-                                cw.WriteStartMethodInvoke(
-                                    context.Host.GeneratedClassContext.WriteLiteralToMethodName
-                                );
-                                cw.WriteSnippet(context.TargetWriterName);
-                                cw.WriteParameterSeparator();
-                            }
-                            else
-                            {
-                                cw.WriteStartMethodInvoke(
-                                    context.Host.GeneratedClassContext.WriteLiteralMethodName
-                                );
-                            }
-                        }
-                        cw.WriteStartMethodInvoke(
-                            context.Host.GeneratedClassContext.ResolveUrlMethodName
-                        );
-                        cw.WriteStringLiteral(target.Content);
-                        cw.WriteEndMethodInvoke();
-
-                        if (
-                            context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput
-                        )
-                        {
-                            cw.WriteEndMethodInvoke();
-                            cw.WriteEndStatement();
+                            cw.WriteStartMethodInvoke(
+                                context.Host.GeneratedClassContext.WriteLiteralToMethodName
+                            );
+                            cw.WriteSnippet(context.TargetWriterName);
+                            cw.WriteParameterSeparator();
                         }
                         else
                         {
-                            cw.WriteLineContinuation();
+                            cw.WriteStartMethodInvoke(
+                                context.Host.GeneratedClassContext.WriteLiteralMethodName
+                            );
                         }
                     }
-                );
+                    cw.WriteStartMethodInvoke(
+                        context.Host.GeneratedClassContext.ResolveUrlMethodName
+                    );
+                    cw.WriteStringLiteral(target.Content);
+                    cw.WriteEndMethodInvoke();
+
+                    if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
+                    {
+                        cw.WriteEndMethodInvoke();
+                        cw.WriteEndStatement();
+                    }
+                    else
+                    {
+                        cw.WriteLineContinuation();
+                    }
+                });
                 if (context.ExpressionRenderingMode == ExpressionRenderingMode.WriteToOutput)
                 {
                     context.AddStatement(code);

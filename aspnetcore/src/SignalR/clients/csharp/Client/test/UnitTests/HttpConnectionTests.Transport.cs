@@ -262,22 +262,20 @@ public partial class HttpConnectionTests
             // Set the long poll up to return a single message over a few polls.
             var requestCount = 0;
             var messageFragments = new[] { "This ", "is ", "a ", "test" };
-            testHttpHandler.OnLongPoll(
-                cancellationToken =>
+            testHttpHandler.OnLongPoll(cancellationToken =>
+            {
+                if (requestCount >= messageFragments.Length)
                 {
-                    if (requestCount >= messageFragments.Length)
-                    {
-                        return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
-                    }
-
-                    var resp = ResponseUtils.CreateResponse(
-                        HttpStatusCode.OK,
-                        messageFragments[requestCount]
-                    );
-                    requestCount += 1;
-                    return resp;
+                    return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
                 }
-            );
+
+                var resp = ResponseUtils.CreateResponse(
+                    HttpStatusCode.OK,
+                    messageFragments[requestCount]
+                );
+                requestCount += 1;
+                return resp;
+            });
             testHttpHandler.OnSocketSend(
                 (_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
             );

@@ -20,22 +20,18 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
             Assert.Equal(0, new TemporaryArray<int>().Count);
 
             Assert.Throws<IndexOutOfRangeException>(() => TemporaryArray<int>.Empty[-1]);
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    using var array = TemporaryArray<int>.Empty;
-                    array.AsRef()[-1] = 1;
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                using var array = TemporaryArray<int>.Empty;
+                array.AsRef()[-1] = 1;
+            });
 
             Assert.Throws<IndexOutOfRangeException>(() => TemporaryArray<int>.Empty[0]);
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    using var array = TemporaryArray<int>.Empty;
-                    array.AsRef()[0] = 1;
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                using var array = TemporaryArray<int>.Empty;
+                array.AsRef()[0] = 1;
+            });
 
             Assert.False(TemporaryArray<int>.Empty.GetEnumerator().MoveNext());
         }

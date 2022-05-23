@@ -312,12 +312,10 @@ namespace System.Data.Tests
         public void DataTableCollection_Add_D2()
         {
             var ds = new DataSet();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ds.Tables.Add((DataTable)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ds.Tables.Add((DataTable)null);
+            });
         }
 
         [Fact]

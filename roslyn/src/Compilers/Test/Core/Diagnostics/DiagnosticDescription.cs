@@ -52,17 +52,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             {
                 // We'll use IFormattable here, because it is more explicit than just calling .ToString()
                 // (and is closer to what the compiler actually does when displaying error messages)
-                _argumentsAsStrings = _arguments.Select(
-                    o =>
+                _argumentsAsStrings = _arguments.Select(o =>
+                {
+                    if (o is DiagnosticInfo embedded)
                     {
-                        if (o is DiagnosticInfo embedded)
-                        {
-                            return embedded.GetMessage(EnsureEnglishUICulture.PreferredOrNull);
-                        }
-
-                        return string.Format(EnsureEnglishUICulture.PreferredOrNull, "{0}", o);
+                        return embedded.GetMessage(EnsureEnglishUICulture.PreferredOrNull);
                     }
-                );
+
+                    return string.Format(EnsureEnglishUICulture.PreferredOrNull, "{0}", o);
+                });
             }
             return _argumentsAsStrings;
         }

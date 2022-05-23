@@ -204,14 +204,12 @@ namespace Microsoft.Extensions.Logging.Test
                 .Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
                 .Returns(logger.Object);
 
-            var factory = TestLoggerBuilder.Create(
-                builder =>
-                {
-                    builder.AddProvider(provider.Object);
-                    // Disable all logs
-                    builder.AddFilter(null, LogLevel.None);
-                }
-            );
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                // Disable all logs
+                builder.AddFilter(null, LogLevel.None);
+            });
 
             var newLogger = factory.CreateLogger("Logger");
             using (newLogger.BeginScope("Scope")) { }
@@ -231,15 +229,13 @@ namespace Microsoft.Extensions.Logging.Test
                 .Setup(loggerProvider => loggerProvider.CreateLogger(It.IsAny<string>()))
                 .Returns(logger.Object);
 
-            var factory = TestLoggerBuilder.Create(
-                builder =>
-                {
-                    builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(
-                        options => options.CaptureScopes = false
-                    );
-                }
-            );
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                builder.Services.Configure<LoggerFilterOptions>(
+                    options => options.CaptureScopes = false
+                );
+            });
 
             var newLogger = factory.CreateLogger("Logger");
             using (newLogger.BeginScope("Scope")) { }
@@ -267,15 +263,13 @@ namespace Microsoft.Extensions.Logging.Test
                     (IExternalScopeProvider scopeProvider) => externalScopeProvider = scopeProvider
                 );
 
-            var factory = TestLoggerBuilder.Create(
-                builder =>
-                {
-                    builder.AddProvider(provider.Object);
-                    builder.Services.Configure<LoggerFilterOptions>(
-                        options => options.CaptureScopes = false
-                    );
-                }
-            );
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                builder.Services.Configure<LoggerFilterOptions>(
+                    options => options.CaptureScopes = false
+                );
+            });
 
             var newLogger = factory.CreateLogger("Logger");
             int scopeCount = 0;
@@ -311,13 +305,11 @@ namespace Microsoft.Extensions.Logging.Test
                     (IExternalScopeProvider scopeProvider) => externalScopeProvider = scopeProvider
                 );
 
-            var factory = TestLoggerBuilder.Create(
-                builder =>
-                {
-                    builder.AddProvider(provider.Object);
-                    builder.AddConfiguration(config);
-                }
-            );
+            var factory = TestLoggerBuilder.Create(builder =>
+            {
+                builder.AddProvider(provider.Object);
+                builder.AddConfiguration(config);
+            });
 
             var newLogger = factory.CreateLogger("Logger");
             int scopeCount = 0;

@@ -90,30 +90,26 @@ namespace System.IO.Tests
             );
 
             await Task.WhenAll(
-                Task.Run(
-                    () =>
-                    {
-                        using var fs = new FileStream(
-                            fifoPath,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.ReadWrite
-                        );
-                        ReadByte(fs, 42);
-                    }
-                ),
-                Task.Run(
-                    () =>
-                    {
-                        using var fs = new FileStream(
-                            fifoPath,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.Read
-                        );
-                        WriteByte(fs, 42);
-                    }
-                )
+                Task.Run(() =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite
+                    );
+                    ReadByte(fs, 42);
+                }),
+                Task.Run(() =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
+                    WriteByte(fs, 42);
+                })
             );
         }
 
@@ -131,30 +127,26 @@ namespace System.IO.Tests
             );
 
             await Task.WhenAll(
-                Task.Run(
-                    async () =>
-                    {
-                        using var fs = new FileStream(
-                            fifoPath,
-                            FileMode.Open,
-                            FileAccess.Read,
-                            FileShare.ReadWrite
-                        );
-                        await ReadByteAsync(fs, 42);
-                    }
-                ),
-                Task.Run(
-                    async () =>
-                    {
-                        using var fs = new FileStream(
-                            fifoPath,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.Read
-                        );
-                        await WriteByteAsync(fs, 42);
-                    }
-                )
+                Task.Run(async () =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite
+                    );
+                    await ReadByteAsync(fs, 42);
+                }),
+                Task.Run(async () =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
+                    await WriteByteAsync(fs, 42);
+                })
             );
         }
 
@@ -237,48 +229,40 @@ namespace System.IO.Tests
 
         private static Lazy<IEnumerable<string>> AvailableDevicePaths = new Lazy<
             IEnumerable<string>
-        >(
-            () =>
-            {
-                List<string> paths = new();
-                FileStreamOptions options =
-                    new() { Access = FileAccess.Write, Share = FileShare.Write };
+        >(() =>
+        {
+            List<string> paths = new();
+            FileStreamOptions options =
+                new() { Access = FileAccess.Write, Share = FileShare.Write };
 
-                foreach (
-                    string devicePath in new[]
-                    {
-                        "/dev/tty",
-                        "/dev/console",
-                        "/dev/null",
-                        "/dev/zero"
-                    }
-                )
+            foreach (
+                string devicePath in new[] { "/dev/tty", "/dev/console", "/dev/null", "/dev/zero" }
+            )
+            {
+                if (!File.Exists(devicePath))
                 {
-                    if (!File.Exists(devicePath))
+                    continue;
+                }
+
+                try
+                {
+                    File.Open(devicePath, options).Dispose();
+                }
+                catch (Exception ex)
+                {
+                    if (ex is IOException || ex is UnauthorizedAccessException)
                     {
                         continue;
                     }
 
-                    try
-                    {
-                        File.Open(devicePath, options).Dispose();
-                    }
-                    catch (Exception ex)
-                    {
-                        if (ex is IOException || ex is UnauthorizedAccessException)
-                        {
-                            continue;
-                        }
-
-                        throw;
-                    }
-
-                    paths.Add(devicePath);
+                    throw;
                 }
 
-                return paths;
+                paths.Add(devicePath);
             }
-        );
+
+            return paths;
+        });
 
         public static IEnumerable<object[]> DevicePath_FileOptions_TestData()
         {

@@ -67,13 +67,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_query_shared_nonhierarchy()
         {
-            await InitializeAsync(
-                modelBuilder =>
-                {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Ignore<LicensedOperator>();
-                }
-            );
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Ignore<LicensedOperator>();
+            });
 
             using var context = CreateContext();
             Assert.Equal(5, context.Set<Operator>().ToList().Count);
@@ -82,14 +80,12 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_query_shared_nonhierarchy_with_nonshared_dependent()
         {
-            await InitializeAsync(
-                modelBuilder =>
-                {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Ignore<LicensedOperator>();
-                    modelBuilder.Entity<OperatorDetails>().ToTable("OperatorDetails");
-                }
-            );
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Ignore<LicensedOperator>();
+                modelBuilder.Entity<OperatorDetails>().ToTable("OperatorDetails");
+            });
 
             using var context = CreateContext();
             Assert.Equal(5, context.Set<Operator>().ToList().Count);
@@ -107,13 +103,11 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_query_shared_derived_nonhierarchy()
         {
-            await InitializeAsync(
-                modelBuilder =>
-                {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Ignore<SolidFuelTank>();
-                }
-            );
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Ignore<SolidFuelTank>();
+            });
 
             using var context = CreateContext();
             Assert.Equal(2, context.Set<FuelTank>().ToList().Count);
@@ -122,20 +116,16 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_query_shared_derived_nonhierarchy_all_required()
         {
-            await InitializeAsync(
-                modelBuilder =>
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Ignore<SolidFuelTank>();
+                modelBuilder.Entity<FuelTank>(eb =>
                 {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Ignore<SolidFuelTank>();
-                    modelBuilder.Entity<FuelTank>(
-                        eb =>
-                        {
-                            eb.Property(t => t.Capacity).IsRequired();
-                            eb.Property(t => t.FuelType).IsRequired();
-                        }
-                    );
-                }
-            );
+                    eb.Property(t => t.Capacity).IsRequired();
+                    eb.Property(t => t.FuelType).IsRequired();
+                });
+            });
 
             using var context = CreateContext();
             Assert.Equal(2, context.Set<FuelTank>().ToList().Count);
@@ -150,35 +140,29 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual Task Can_use_with_chained_relationships()
         {
-            return Test_roundtrip(
-                modelBuilder =>
+            return Test_roundtrip(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Entity<FuelTank>(eb =>
                 {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Entity<FuelTank>(
-                        eb =>
-                        {
-                            eb.Ignore(e => e.Vehicle);
-                        }
-                    );
-                }
-            );
+                    eb.Ignore(e => e.Vehicle);
+                });
+            });
         }
 
         [ConditionalFact]
         public virtual Task Can_use_with_fanned_relationships()
         {
-            return Test_roundtrip(
-                modelBuilder =>
-                {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder
-                        .Entity<CombustionEngine>()
-                        .HasOne(e => e.FuelTank)
-                        .WithOne()
-                        .HasForeignKey<FuelTank>(e => e.VehicleName);
-                    modelBuilder.Entity<FuelTank>(eb => eb.Ignore(e => e.Engine));
-                }
-            );
+            return Test_roundtrip(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder
+                    .Entity<CombustionEngine>()
+                    .HasOne(e => e.FuelTank)
+                    .WithOne()
+                    .HasForeignKey<FuelTank>(e => e.VehicleName);
+                modelBuilder.Entity<FuelTank>(eb => eb.Ignore(e => e.Engine));
+            });
         }
 
         [ConditionalFact]
@@ -188,18 +172,14 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder =>
                 {
                     OnModelCreating(modelBuilder);
-                    modelBuilder.Entity<Vehicle>(
-                        vb =>
-                        {
-                            vb.Property(v => v.SeatingCapacity).HasColumnName("SeatingCapacity");
-                        }
-                    );
-                    modelBuilder.Entity<Engine>(
-                        cb =>
-                        {
-                            cb.Property<int>("SeatingCapacity").HasColumnName("SeatingCapacity");
-                        }
-                    );
+                    modelBuilder.Entity<Vehicle>(vb =>
+                    {
+                        vb.Property(v => v.SeatingCapacity).HasColumnName("SeatingCapacity");
+                    });
+                    modelBuilder.Entity<Engine>(cb =>
+                    {
+                        cb.Property<int>("SeatingCapacity").HasColumnName("SeatingCapacity");
+                    });
                     modelBuilder
                         .Entity<CombustionEngine>()
                         .HasOne(e => e.FuelTank)
@@ -251,22 +231,18 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder =>
                 {
                     OnModelCreating(modelBuilder);
-                    modelBuilder.Entity<Vehicle>(
-                        vb =>
-                        {
-                            vb.Property(v => v.SeatingCapacity)
-                                .HasColumnName("SeatingCapacity")
-                                .IsConcurrencyToken();
-                        }
-                    );
-                    modelBuilder.Entity<Engine>(
-                        cb =>
-                        {
-                            cb.Property<int>("SeatingCapacity")
-                                .HasColumnName("SeatingCapacity")
-                                .IsConcurrencyToken();
-                        }
-                    );
+                    modelBuilder.Entity<Vehicle>(vb =>
+                    {
+                        vb.Property(v => v.SeatingCapacity)
+                            .HasColumnName("SeatingCapacity")
+                            .IsConcurrencyToken();
+                    });
+                    modelBuilder.Entity<Engine>(cb =>
+                    {
+                        cb.Property<int>("SeatingCapacity")
+                            .HasColumnName("SeatingCapacity")
+                            .IsConcurrencyToken();
+                    });
                     modelBuilder
                         .Entity<CombustionEngine>()
                         .HasOne(e => e.FuelTank)
@@ -356,18 +332,16 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_manipulate_entities_sharing_row_independently()
         {
-            await InitializeAsync(
-                modelBuilder =>
-                {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder
-                        .Entity<CombustionEngine>()
-                        .HasOne(e => e.FuelTank)
-                        .WithOne()
-                        .HasForeignKey<FuelTank>(e => e.VehicleName);
-                    modelBuilder.Entity<FuelTank>(eb => eb.Ignore(e => e.Engine));
-                }
-            );
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder
+                    .Entity<CombustionEngine>()
+                    .HasOne(e => e.FuelTank)
+                    .WithOne()
+                    .HasForeignKey<FuelTank>(e => e.VehicleName);
+                modelBuilder.Entity<FuelTank>(eb => eb.Ignore(e => e.Engine));
+            });
 
             PoweredVehicle streetcar;
             using (var context = CreateContext())
@@ -497,25 +471,21 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_change_dependent_instance_non_derived()
         {
-            await InitializeAsync(
-                modelBuilder =>
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Entity<Engine>().ToTable("Engines");
+                modelBuilder.Entity<FuelTank>(eb =>
                 {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Entity<Engine>().ToTable("Engines");
-                    modelBuilder.Entity<FuelTank>(
-                        eb =>
-                        {
-                            eb.ToTable("FuelTanks");
-                            eb.HasOne(e => e.Engine)
-                                .WithOne(e => e.FuelTank)
-                                .HasForeignKey<FuelTank>(e => e.VehicleName)
-                                .OnDelete(DeleteBehavior.Restrict);
-                        }
-                    );
-                    modelBuilder.Ignore<SolidFuelTank>();
-                    modelBuilder.Ignore<SolidRocket>();
-                }
-            );
+                    eb.ToTable("FuelTanks");
+                    eb.HasOne(e => e.Engine)
+                        .WithOne(e => e.FuelTank)
+                        .HasForeignKey<FuelTank>(e => e.VehicleName)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+                modelBuilder.Ignore<SolidFuelTank>();
+                modelBuilder.Ignore<SolidRocket>();
+            });
 
             using (var context = CreateContext())
             {
@@ -550,25 +520,21 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_change_principal_instance_non_derived()
         {
-            await InitializeAsync(
-                modelBuilder =>
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Entity<Engine>().ToTable("Engines");
+                modelBuilder.Entity<FuelTank>(eb =>
                 {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Entity<Engine>().ToTable("Engines");
-                    modelBuilder.Entity<FuelTank>(
-                        eb =>
-                        {
-                            eb.ToTable("FuelTanks");
-                            eb.HasOne(e => e.Engine)
-                                .WithOne(e => e.FuelTank)
-                                .HasForeignKey<FuelTank>(e => e.VehicleName)
-                                .OnDelete(DeleteBehavior.Restrict);
-                        }
-                    );
-                    modelBuilder.Ignore<SolidFuelTank>();
-                    modelBuilder.Ignore<SolidRocket>();
-                }
-            );
+                    eb.ToTable("FuelTanks");
+                    eb.HasOne(e => e.Engine)
+                        .WithOne(e => e.FuelTank)
+                        .HasForeignKey<FuelTank>(e => e.VehicleName)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+                modelBuilder.Ignore<SolidFuelTank>();
+                modelBuilder.Ignore<SolidRocket>();
+            });
 
             using (var context = CreateContext())
             {
@@ -606,25 +572,21 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual async Task Can_change_principal_and_dependent_instance_non_derived()
         {
-            await InitializeAsync(
-                modelBuilder =>
+            await InitializeAsync(modelBuilder =>
+            {
+                OnModelCreating(modelBuilder);
+                modelBuilder.Entity<Engine>().ToTable("Engines");
+                modelBuilder.Entity<FuelTank>(eb =>
                 {
-                    OnModelCreating(modelBuilder);
-                    modelBuilder.Entity<Engine>().ToTable("Engines");
-                    modelBuilder.Entity<FuelTank>(
-                        eb =>
-                        {
-                            eb.ToTable("FuelTanks");
-                            eb.HasOne(e => e.Engine)
-                                .WithOne(e => e.FuelTank)
-                                .HasForeignKey<FuelTank>(e => e.VehicleName)
-                                .OnDelete(DeleteBehavior.Restrict);
-                        }
-                    );
-                    modelBuilder.Ignore<SolidFuelTank>();
-                    modelBuilder.Ignore<SolidRocket>();
-                }
-            );
+                    eb.ToTable("FuelTanks");
+                    eb.HasOne(e => e.Engine)
+                        .WithOne(e => e.FuelTank)
+                        .HasForeignKey<FuelTank>(e => e.VehicleName)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+                modelBuilder.Ignore<SolidFuelTank>();
+                modelBuilder.Ignore<SolidRocket>();
+            });
 
             using (var context = CreateContext())
             {
@@ -768,14 +730,12 @@ namespace Microsoft.EntityFrameworkCore
 
         protected virtual void OnModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<Vehicle>(
-                eb =>
-                {
-                    eb.HasDiscriminator<string>("Discriminator");
-                    eb.Property<string>("Discriminator").HasColumnName("Discriminator");
-                    eb.ToTable("Vehicles");
-                }
-            );
+            modelBuilder.Entity<Vehicle>(eb =>
+            {
+                eb.HasDiscriminator<string>("Discriminator");
+                eb.Property<string>("Discriminator").HasColumnName("Discriminator");
+                eb.ToTable("Vehicles");
+            });
             modelBuilder.Entity<CompositeVehicle>();
 
             modelBuilder
@@ -790,23 +750,19 @@ namespace Microsoft.EntityFrameworkCore
 
         protected virtual void OnSharedModelCreating(ModelBuilder modelBuilder)
         {
-            modelBuilder.Entity<MeterReadingDetail>(
-                dob =>
-                {
-                    dob.ToTable("MeterReadings");
-                    dob.Property(o => o.ReadingStatus).HasColumnName("ReadingStatus");
-                }
-            );
-            modelBuilder.Entity<MeterReading>(
-                ob =>
-                {
-                    ob.ToTable("MeterReadings");
-                    ob.Property(o => o.ReadingStatus).HasColumnName("ReadingStatus");
-                    ob.HasOne(o => o.MeterReadingDetails)
-                        .WithOne()
-                        .HasForeignKey<MeterReadingDetail>(o => o.Id);
-                }
-            );
+            modelBuilder.Entity<MeterReadingDetail>(dob =>
+            {
+                dob.ToTable("MeterReadings");
+                dob.Property(o => o.ReadingStatus).HasColumnName("ReadingStatus");
+            });
+            modelBuilder.Entity<MeterReading>(ob =>
+            {
+                ob.ToTable("MeterReadings");
+                ob.Property(o => o.ReadingStatus).HasColumnName("ReadingStatus");
+                ob.HasOne(o => o.MeterReadingDetails)
+                    .WithOne()
+                    .HasForeignKey<MeterReadingDetail>(o => o.Id);
+            });
         }
 
         protected async Task InitializeAsync(Action<ModelBuilder> onModelCreating, bool seed = true)

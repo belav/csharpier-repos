@@ -31,34 +31,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         static GCManager()
         {
             // Allow disabling SustainedLowLatency by setting the reg key value to 0
-            System.Threading.Tasks.Task.Run(
-                () =>
+            System.Threading.Tasks.Task.Run(() =>
+            {
+                using (
+                    var root = VSRegistry.RegistryRoot(__VsLocalRegistryType.RegType_UserSettings)
+                )
                 {
-                    using (
-                        var root = VSRegistry.RegistryRoot(
-                            __VsLocalRegistryType.RegType_UserSettings
-                        )
-                    )
+                    if (root != null)
                     {
-                        if (root != null)
+                        using var key = root.OpenSubKey("Performance");
+                        const string name = "SustainedLowLatencyDuration";
+                        if (
+                            key != null
+                            && key.GetValue(name) != null
+                            && key.GetValueKind(name) == Microsoft.Win32.RegistryValueKind.DWord
+                        )
                         {
-                            using var key = root.OpenSubKey("Performance");
-                            const string name = "SustainedLowLatencyDuration";
-                            if (
-                                key != null
-                                && key.GetValue(name) != null
-                                && key.GetValueKind(name) == Microsoft.Win32.RegistryValueKind.DWord
-                            )
-                            {
-                                s_delayMilliseconds = (int)key.GetValue(name, s_delayMilliseconds);
-                                return;
-                            }
+                            s_delayMilliseconds = (int)key.GetValue(name, s_delayMilliseconds);
+                            return;
                         }
                     }
-
-                    s_delayMilliseconds = DefaultDelayMilliseconds;
                 }
-            );
+
+                s_delayMilliseconds = DefaultDelayMilliseconds;
+            });
         }
 
         /// <summary>

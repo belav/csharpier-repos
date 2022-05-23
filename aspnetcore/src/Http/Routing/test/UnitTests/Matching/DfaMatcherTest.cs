@@ -48,12 +48,10 @@ public class DfaMatcherTest
         var serviceCollection = new ServiceCollection()
             .AddLogging()
             .AddOptions()
-            .AddRouting(
-                options =>
-                {
-                    options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-                }
-            );
+            .AddRouting(options =>
+            {
+                options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+            });
 
         if (policies != null)
         {

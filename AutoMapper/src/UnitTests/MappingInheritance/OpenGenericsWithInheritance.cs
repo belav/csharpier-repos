@@ -26,13 +26,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Source), typeof(Target<>));
-                    cfg.CreateMap(typeof(Source), typeof(ITarget<>)).As(typeof(Target<>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Source), typeof(Target<>));
+                cfg.CreateMap(typeof(Source), typeof(ITarget<>)).As(typeof(Target<>));
+            });
 
         [Fact]
         public void Should_use_the_redirected_map()
@@ -80,18 +78,16 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<BarBase, BarModelBase>()
-                        .ForMember(d => d.Ignored, o => o.Ignore())
-                        .ForMember(d => d.MappedFrom, o => o.MapFrom(_ => "mappedFrom"))
-                        .Include(typeof(Bar<>), typeof(BarModel<>));
-                    cfg.CreateMap<Person, PersonModel>();
-                    cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
-                        .ForMember("DerivedMember", o => o.MapFrom("Id"));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<BarBase, BarModelBase>()
+                    .ForMember(d => d.Ignored, o => o.Ignore())
+                    .ForMember(d => d.MappedFrom, o => o.MapFrom(_ => "mappedFrom"))
+                    .Include(typeof(Bar<>), typeof(BarModel<>));
+                cfg.CreateMap<Person, PersonModel>();
+                cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
+                    .ForMember("DerivedMember", o => o.MapFrom("Id"));
+            });
 
         [Fact]
         public void Should_work()
@@ -157,18 +153,16 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(BarBase), typeof(BarModelBase))
-                        .ForMember("Ignored", o => o.Ignore())
-                        .ForMember("MappedFrom", o => o.MapFrom(_ => "mappedFrom"));
-                    cfg.CreateMap<Person, PersonModel>();
-                    cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
-                        .ForMember("DerivedMember", o => o.MapFrom("Id"))
-                        .IncludeBase(typeof(BarBase), typeof(BarModelBase));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(BarBase), typeof(BarModelBase))
+                    .ForMember("Ignored", o => o.Ignore())
+                    .ForMember("MappedFrom", o => o.MapFrom(_ => "mappedFrom"));
+                cfg.CreateMap<Person, PersonModel>();
+                cfg.CreateMap(typeof(Bar<>), typeof(BarModel<>))
+                    .ForMember("DerivedMember", o => o.MapFrom("Id"))
+                    .IncludeBase(typeof(BarBase), typeof(BarModelBase));
+            });
 
         [Fact]
         public void Should_work()
@@ -229,19 +223,17 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Entity, Model>();
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Entity, Model>();
 
-                    cfg.CreateMap(typeof(Entity<>), typeof(Model<>))
-                        .IncludeBase(typeof(Entity), typeof(Model));
+                cfg.CreateMap(typeof(Entity<>), typeof(Model<>))
+                    .IncludeBase(typeof(Entity), typeof(Model));
 
-                    cfg.CreateMap<SubEntity, SubModel>()
-                        .IncludeBase<Entity<int>, Model<int>>()
-                        .IncludeBase<Entity, Model>();
-                }
-            );
+                cfg.CreateMap<SubEntity, SubModel>()
+                    .IncludeBase<Entity<int>, Model<int>>()
+                    .IncludeBase<Entity, Model>();
+            });
 
         [Fact]
         public void Should_work()

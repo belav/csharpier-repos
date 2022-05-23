@@ -101,23 +101,21 @@ class Selenium
                 {
                     // Run in background.
                     var logs = driver.Manage().Logs;
-                    _ = Task.Run(
-                        async () =>
+                    _ = Task.Run(async () =>
+                    {
+                        while (!cancellationToken.IsCancellationRequested)
                         {
-                            while (!cancellationToken.IsCancellationRequested)
-                            {
-                                await Task.Delay(TimeSpan.FromSeconds(3));
+                            await Task.Delay(TimeSpan.FromSeconds(3));
 
-                                var consoleLogs = logs.GetLog(LogType.Browser);
-                                foreach (var entry in consoleLogs)
-                                {
-                                    Console.WriteLine(
-                                        $"[Browser Log]: {entry.Timestamp}: {entry.Message}"
-                                    );
-                                }
+                            var consoleLogs = logs.GetLog(LogType.Browser);
+                            foreach (var entry in consoleLogs)
+                            {
+                                Console.WriteLine(
+                                    $"[Browser Log]: {entry.Timestamp}: {entry.Message}"
+                                );
                             }
                         }
-                    );
+                    });
                 }
 
                 return driver;

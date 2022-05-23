@@ -59,12 +59,10 @@ namespace System.Net.Http.Tests
         {
             TransferCodingHeaderValue transferCoding = new TransferCodingHeaderValue("custom");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    transferCoding.Parameters.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                transferCoding.Parameters.Add(null);
+            });
         }
 
         [Fact]
@@ -404,12 +402,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    TransferCodingHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                TransferCodingHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 TransferCodingHeaderValue.TryParse(input, out TransferCodingHeaderValue result)
@@ -419,12 +415,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string transferCoding)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new TransferCodingHeaderValue(transferCoding);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new TransferCodingHeaderValue(transferCoding);
+            });
         }
 
         private static TransferCodingHeaderValue DummyCreator()

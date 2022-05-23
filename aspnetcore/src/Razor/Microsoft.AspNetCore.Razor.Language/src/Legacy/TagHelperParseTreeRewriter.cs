@@ -805,12 +805,10 @@ internal static class TagHelperParseTreeRewriter
         private bool IsPartOfStartTag(SyntaxNode node)
         {
             // Check if an ancestor is a start tag of a MarkupElement.
-            var parent = node.FirstAncestorOrSelf<SyntaxNode>(
-                n =>
-                {
-                    return n.Parent is MarkupElementSyntax element && element.StartTag == n;
-                }
-            );
+            var parent = node.FirstAncestorOrSelf<SyntaxNode>(n =>
+            {
+                return n.Parent is MarkupElementSyntax element && element.StartTag == n;
+            });
 
             return parent != null;
         }

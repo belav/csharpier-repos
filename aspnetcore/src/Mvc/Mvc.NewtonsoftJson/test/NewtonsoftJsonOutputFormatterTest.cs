@@ -67,12 +67,10 @@ public class NewtonsoftJsonOutputFormatterTest : JsonOutputFormatterTestBase
 
         var services = new ServiceCollection()
             .AddOptions()
-            .Configure<MvcNewtonsoftJsonOptions>(
-                o =>
-                {
-                    o.OutputFormatterMemoryBufferThreshold = 1;
-                }
-            )
+            .Configure<MvcNewtonsoftJsonOptions>(o =>
+            {
+                o.OutputFormatterMemoryBufferThreshold = 1;
+            })
             .BuildServiceProvider();
 
         outputFormatterContext.HttpContext.RequestServices = services;

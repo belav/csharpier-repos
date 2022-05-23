@@ -183,12 +183,10 @@ namespace System.Linq.Parallel.Tests
                 // The vast majority of the time, the operation returns a result instead of failing.
                 // Sufficient cores on a test machine may make the optimizer start enumerating the results.
                 int? result = null;
-                var exception = Record.Exception(
-                    () =>
-                    {
-                        result = operation.Item(DefaultStart, DefaultSize, source.Item).First();
-                    }
-                );
+                var exception = Record.Exception(() =>
+                {
+                    result = operation.Item(DefaultStart, DefaultSize, source.Item).First();
+                });
                 if (result.HasValue)
                 {
                     Assert.Null(exception);
@@ -227,14 +225,12 @@ namespace System.Linq.Parallel.Tests
                 // The vast majority of the time, the operation returns a result instead of failing.
                 // Sufficient cores on a test machine may make the optimizer start enumerating the results.
                 int? result = null;
-                var exception = Record.Exception(
-                    () =>
-                    {
-                        result = operation
-                            .Item(DefaultStart, DefaultSize, source.Item)
-                            .FirstOrDefault();
-                    }
-                );
+                var exception = Record.Exception(() =>
+                {
+                    result = operation
+                        .Item(DefaultStart, DefaultSize, source.Item)
+                        .FirstOrDefault();
+                });
                 if (result.HasValue)
                 {
                     Assert.Null(exception);
@@ -294,13 +290,11 @@ namespace System.Linq.Parallel.Tests
                 || operation.ToString().StartsWith("Union-Left")
             )
             {
-                AssertThrows.Wrapped<DeliberateTestException>(
-                    () =>
-                    {
-                        while (enumerator.MoveNext())
-                            ;
-                    }
-                );
+                AssertThrows.Wrapped<DeliberateTestException>(() =>
+                {
+                    while (enumerator.MoveNext())
+                        ;
+                });
             }
             else
             {

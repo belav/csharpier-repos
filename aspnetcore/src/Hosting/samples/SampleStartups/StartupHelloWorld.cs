@@ -28,12 +28,10 @@ public class StartupHelloWorld : StartupBase
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseKestrel().UseStartup<StartupHelloWorld>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseKestrel().UseStartup<StartupHelloWorld>();
+            })
             .Build();
 
         return host.RunAsync();

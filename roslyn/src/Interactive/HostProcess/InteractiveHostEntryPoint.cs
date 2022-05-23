@@ -28,15 +28,13 @@ namespace Microsoft.CodeAnalysis.Interactive
             Control? control = null;
             using (var resetEvent = new ManualResetEventSlim(false))
             {
-                var uiThread = new Thread(
-                    () =>
-                    {
-                        control = new Control();
-                        control.CreateControl();
-                        resetEvent.Set();
-                        Application.Run();
-                    }
-                );
+                var uiThread = new Thread(() =>
+                {
+                    control = new Control();
+                    control.CreateControl();
+                    resetEvent.Set();
+                    Application.Run();
+                });
 
                 uiThread.SetApartmentState(ApartmentState.STA);
                 uiThread.IsBackground = true;

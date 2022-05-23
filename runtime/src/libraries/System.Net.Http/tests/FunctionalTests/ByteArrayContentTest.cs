@@ -122,12 +122,10 @@ namespace System.Net.Http.Functional.Tests
             byte[] contentData = CreateSourceArray();
             var content = new ByteArrayContent(contentData);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task t = content.CopyToAsync(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task t = content.CopyToAsync(null);
+            });
         }
 
         [Fact]

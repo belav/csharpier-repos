@@ -130,12 +130,10 @@ namespace Moq.Tests
 
             var mock = new Mock<Foo>();
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.Setup(m => m.B).Returns("mocked B");
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.Setup(m => m.B).Returns("mocked B");
+            });
             var b = mock.Object.B;
 
             Assert.NotEqual("mocked B", b); // it simply shouldn't be possible for Moq to intercept a sealed property;
@@ -152,12 +150,10 @@ namespace Moq.Tests
 
             var mock = new Mock<Foo>();
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.Setup(m => m.D).Returns("mocked D");
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.Setup(m => m.D).Returns("mocked D");
+            });
             var d = mock.Object.D;
 
             Assert.NotEqual("mocked D", d); // it simply shouldn't be possible for Moq to intercept a sealed property;
@@ -169,12 +165,10 @@ namespace Moq.Tests
         {
             var mock = new Mock<Foo>();
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.SetupAllProperties();
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.SetupAllProperties();
+            });
 
             Assert.Null(exception);
         }

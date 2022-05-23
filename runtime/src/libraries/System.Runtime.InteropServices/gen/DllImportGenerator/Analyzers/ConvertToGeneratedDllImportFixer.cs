@@ -339,22 +339,17 @@ namespace Microsoft.Interop.Analyzers
         {
             AttributeArgumentListSyntax updatedArgList = attribute.ArgumentList.WithArguments(
                 SyntaxFactory.SeparatedList(
-                    attribute.ArgumentList.Arguments.OrderBy(
-                        arg =>
-                        {
-                            // Unnamed arguments first
-                            if (arg.NameEquals == null)
-                                return -1;
+                    attribute.ArgumentList.Arguments.OrderBy(arg =>
+                    {
+                        // Unnamed arguments first
+                        if (arg.NameEquals == null)
+                            return -1;
 
-                            // Named arguments in specified order, followed by any named arguments with no preferred order
-                            string name = arg.NameEquals.Name.Identifier.Text;
-                            int index = System.Array.IndexOf(
-                                s_preferredAttributeArgumentOrder,
-                                name
-                            );
-                            return index == -1 ? int.MaxValue : index;
-                        }
-                    )
+                        // Named arguments in specified order, followed by any named arguments with no preferred order
+                        string name = arg.NameEquals.Name.Identifier.Text;
+                        int index = System.Array.IndexOf(s_preferredAttributeArgumentOrder, name);
+                        return index == -1 ? int.MaxValue : index;
+                    })
                 )
             );
             return generator.ReplaceNode(attribute, attribute.ArgumentList, updatedArgList);

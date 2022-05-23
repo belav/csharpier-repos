@@ -135,30 +135,22 @@ namespace System.Net.Http.Functional.Tests
             rm.Dispose(); // Multiple calls don't throw.
 
             Assert.True(content.IsDisposed);
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.Method = HttpMethod.Put;
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.RequestUri = null;
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.Version = new Version(1, 0);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rm.Content = null;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.Method = HttpMethod.Put;
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.RequestUri = null;
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.Version = new Version(1, 0);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rm.Content = null;
+            });
 
             // Property getters should still work after disposing.
             Assert.Equal(HttpMethod.Get, rm.Method);
@@ -202,24 +194,20 @@ namespace System.Net.Http.Functional.Tests
         public void Version_SetToNull_ThrowsArgumentNullException()
         {
             var rm = new HttpRequestMessage();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    rm.Version = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                rm.Version = null;
+            });
         }
 
         [Fact]
         public void Method_SetToNull_ThrowsArgumentNullException()
         {
             var rm = new HttpRequestMessage();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    rm.Method = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                rm.Method = null;
+            });
         }
 
         [Fact]
@@ -300,25 +288,23 @@ namespace System.Net.Http.Functional.Tests
                         request.Method = new HttpMethod(method);
 
                         Task<HttpResponseMessage> requestTask = client.SendAsync(request);
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                var requestData = await connection
-                                    .ReadRequestDataAsync()
-                                    .ConfigureAwait(false);
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            var requestData = await connection
+                                .ReadRequestDataAsync()
+                                .ConfigureAwait(false);
 #if TARGET_BROWSER
-                                requestData = await connection.HandleCORSPreFlight(requestData);
+                            requestData = await connection.HandleCORSPreFlight(requestData);
 #endif
 
-                                Assert.DoesNotContain(
-                                    requestData.Headers,
-                                    line => line.Name.StartsWith("Content-length")
-                                );
+                            Assert.DoesNotContain(
+                                requestData.Headers,
+                                line => line.Name.StartsWith("Content-length")
+                            );
 
-                                await connection.SendResponseAsync();
-                                await requestTask;
-                            }
-                        );
+                            await connection.SendResponseAsync();
+                            await requestTask;
+                        });
                     }
                 );
             }
@@ -336,19 +322,17 @@ namespace System.Net.Http.Functional.Tests
 
                         Task<HttpResponseMessage> requestTask = client.SendAsync(request);
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                // Content-Length greater than 2GB.
-                                string response = LoopbackServer.GetConnectionCloseResponse(
-                                    HttpStatusCode.OK,
-                                    "Content-Length: 2167849215\r\n\r\n"
-                                );
-                                await connection.SendResponseAsync(response);
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            // Content-Length greater than 2GB.
+                            string response = LoopbackServer.GetConnectionCloseResponse(
+                                HttpStatusCode.OK,
+                                "Content-Length: 2167849215\r\n\r\n"
+                            );
+                            await connection.SendResponseAsync(response);
 
-                                await requestTask;
-                            }
-                        );
+                            await requestTask;
+                        });
 
                         using (HttpResponseMessage result = requestTask.Result)
                         {

@@ -368,12 +368,10 @@ namespace System.Net.Sockets.Tests
 
                 listenSocket.Listen(5);
 
-                Task t = Task.Run(
-                    () =>
-                    {
-                        DoAccept(listenSocket, 5);
-                    }
-                );
+                Task t = Task.Run(() =>
+                {
+                    DoAccept(listenSocket, 5);
+                });
 
                 // Loop, doing connections and pausing between
                 for (int i = 0; i < 5; i++)

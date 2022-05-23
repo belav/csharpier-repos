@@ -19,16 +19,14 @@ public class DotNetDispatcherTest
     [Fact]
     public void CannotInvokeWithEmptyAssemblyName()
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                DotNetDispatcher.Invoke(
-                    new TestJSRuntime(),
-                    new DotNetInvocationInfo(" ", "SomeMethod", default, default),
-                    "[]"
-                );
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo(" ", "SomeMethod", default, default),
+                "[]"
+            );
+        });
 
         Assert.StartsWith(
             "Property 'AssemblyName' cannot be null, empty, or whitespace.",
@@ -40,16 +38,14 @@ public class DotNetDispatcherTest
     [Fact]
     public void CannotInvokeWithEmptyMethodIdentifier()
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                DotNetDispatcher.Invoke(
-                    new TestJSRuntime(),
-                    new DotNetInvocationInfo("SomeAssembly", " ", default, default),
-                    "[]"
-                );
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo("SomeAssembly", " ", default, default),
+                "[]"
+            );
+        });
 
         Assert.StartsWith("Cannot be null, empty, or whitespace.", ex.Message);
         Assert.Equal("methodIdentifier", ex.ParamName);
@@ -59,16 +55,14 @@ public class DotNetDispatcherTest
     public void CannotInvokeMethodsOnUnloadedAssembly()
     {
         var assemblyName = "Some.Fake.Assembly";
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                DotNetDispatcher.Invoke(
-                    new TestJSRuntime(),
-                    new DotNetInvocationInfo(assemblyName, "SomeMethod", default, default),
-                    null
-                );
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo(assemblyName, "SomeMethod", default, default),
+                null
+            );
+        });
 
         Assert.Equal($"There is no loaded assembly with the name '{assemblyName}'.", ex.Message);
     }
@@ -87,16 +81,14 @@ public class DotNetDispatcherTest
     [InlineData("InstanceMethodWithoutAttribute")] // That's not really its identifier; just making the point that there's no way to invoke it
     public void CannotInvokeUnsuitableMethods(string methodIdentifier)
     {
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                DotNetDispatcher.Invoke(
-                    new TestJSRuntime(),
-                    new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, default, default),
-                    null
-                );
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            DotNetDispatcher.Invoke(
+                new TestJSRuntime(),
+                new DotNetInvocationInfo(thisAssemblyName, methodIdentifier, default, default),
+                null
+            );
+        });
 
         Assert.Equal(
             $"The assembly '{thisAssemblyName}' does not contain a public invokable method with [JSInvokableAttribute(\"{methodIdentifier}\")].",
@@ -593,21 +585,19 @@ public class DotNetDispatcherTest
         );
 
         // Act/Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(
-                        thisAssemblyName,
-                        "InvocableStaticWithParams",
-                        default,
-                        default
-                    ),
-                    argsJson
-                );
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(
+                    thisAssemblyName,
+                    "InvocableStaticWithParams",
+                    default,
+                    default
+                ),
+                argsJson
+            );
+        });
 
         Assert.Equal(
             "The call to 'InvocableStaticWithParams' expects '3' parameters, but received '2'.",
@@ -633,21 +623,19 @@ public class DotNetDispatcherTest
         );
 
         // Act/Assert
-        var ex = Assert.Throws<JsonException>(
-            () =>
-            {
-                DotNetDispatcher.Invoke(
-                    jsRuntime,
-                    new DotNetInvocationInfo(
-                        thisAssemblyName,
-                        "InvocableStaticWithParams",
-                        default,
-                        default
-                    ),
-                    argsJson
-                );
-            }
-        );
+        var ex = Assert.Throws<JsonException>(() =>
+        {
+            DotNetDispatcher.Invoke(
+                jsRuntime,
+                new DotNetInvocationInfo(
+                    thisAssemblyName,
+                    "InvocableStaticWithParams",
+                    default,
+                    default
+                ),
+                argsJson
+            );
+        });
 
         Assert.Equal(
             "Unexpected JSON token Number. Ensure that the call to `InvocableStaticWithParams' is supplied with exactly '3' parameters.",

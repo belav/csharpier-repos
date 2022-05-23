@@ -14,15 +14,13 @@ public partial class ConsoleEncoding
     public void InputEncoding_SetDefaultEncoding_Success()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    Encoding encoding = Encoding.GetEncoding(0);
-                    Console.InputEncoding = encoding;
-                    Assert.Equal(encoding, Console.InputEncoding);
-                    Assert.Equal((uint)encoding.CodePage, GetConsoleCP());
-                }
-            )
+            .Invoke(() =>
+            {
+                Encoding encoding = Encoding.GetEncoding(0);
+                Console.InputEncoding = encoding;
+                Assert.Equal(encoding, Console.InputEncoding);
+                Assert.Equal((uint)encoding.CodePage, GetConsoleCP());
+            })
             .Dispose();
     }
 
@@ -31,18 +29,16 @@ public partial class ConsoleEncoding
     public void InputEncoding_SetUnicodeEncoding_SilentlyIgnoredInternally()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    Encoding unicodeEncoding = Encoding.Unicode;
-                    Encoding oldEncoding = Console.InputEncoding;
-                    Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
+            .Invoke(() =>
+            {
+                Encoding unicodeEncoding = Encoding.Unicode;
+                Encoding oldEncoding = Console.InputEncoding;
+                Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
 
-                    Console.InputEncoding = unicodeEncoding;
-                    Assert.Equal(unicodeEncoding, Console.InputEncoding);
-                    Assert.Equal((uint)oldEncoding.CodePage, GetConsoleCP());
-                }
-            )
+                Console.InputEncoding = unicodeEncoding;
+                Assert.Equal(unicodeEncoding, Console.InputEncoding);
+                Assert.Equal((uint)oldEncoding.CodePage, GetConsoleCP());
+            })
             .Dispose();
     }
 
@@ -51,15 +47,13 @@ public partial class ConsoleEncoding
     public void OutputEncoding_SetDefaultEncoding_Success()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    Encoding encoding = Encoding.GetEncoding(0);
-                    Console.OutputEncoding = encoding;
-                    Assert.Equal(encoding, Console.OutputEncoding);
-                    Assert.Equal((uint)encoding.CodePage, GetConsoleOutputCP());
-                }
-            )
+            .Invoke(() =>
+            {
+                Encoding encoding = Encoding.GetEncoding(0);
+                Console.OutputEncoding = encoding;
+                Assert.Equal(encoding, Console.OutputEncoding);
+                Assert.Equal((uint)encoding.CodePage, GetConsoleOutputCP());
+            })
             .Dispose();
     }
 
@@ -68,18 +62,16 @@ public partial class ConsoleEncoding
     public void OutputEncoding_SetUnicodeEncoding_SilentlyIgnoredInternally()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    Encoding unicodeEncoding = Encoding.Unicode;
-                    Encoding oldEncoding = Console.OutputEncoding;
-                    Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
-                    Console.OutputEncoding = unicodeEncoding;
-                    Assert.Equal(unicodeEncoding, Console.OutputEncoding);
+            .Invoke(() =>
+            {
+                Encoding unicodeEncoding = Encoding.Unicode;
+                Encoding oldEncoding = Console.OutputEncoding;
+                Assert.NotEqual(unicodeEncoding.CodePage, oldEncoding.CodePage);
+                Console.OutputEncoding = unicodeEncoding;
+                Assert.Equal(unicodeEncoding, Console.OutputEncoding);
 
-                    Assert.Equal((uint)oldEncoding.CodePage, GetConsoleOutputCP());
-                }
-            )
+                Assert.Equal((uint)oldEncoding.CodePage, GetConsoleOutputCP());
+            })
             .Dispose();
     }
 

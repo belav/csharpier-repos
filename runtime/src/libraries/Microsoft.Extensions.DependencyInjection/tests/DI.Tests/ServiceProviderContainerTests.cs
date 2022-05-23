@@ -412,13 +412,11 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             var services = new ServiceCollection();
             services.AddSingleton<DisposeServiceProviderInCtor>();
             IServiceProvider sp = CreateServiceProvider(services);
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    // ctor disposes ServiceProvider
-                    var service = sp.GetRequiredService<DisposeServiceProviderInCtor>();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                // ctor disposes ServiceProvider
+                var service = sp.GetRequiredService<DisposeServiceProviderInCtor>();
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -432,25 +430,19 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             );
 
             var sp = CreateServiceProvider(services);
-            bool doesNotHang = Task.Run(
-                    () =>
+            bool doesNotHang = Task.Run(() =>
+                {
+                    SingleThreadedSynchronizationContext.Run(() =>
                     {
-                        SingleThreadedSynchronizationContext.Run(
-                            () =>
-                            {
-                                // Act
-                                Assert.Throws<ObjectDisposedException>(
-                                    () =>
-                                    {
-                                        // ctor disposes ServiceProvider
-                                        var service =
-                                            sp.GetRequiredService<DisposeServiceProviderInCtorAsyncDisposable>();
-                                    }
-                                );
-                            }
-                        );
-                    }
-                )
+                        // Act
+                        Assert.Throws<ObjectDisposedException>(() =>
+                        {
+                            // ctor disposes ServiceProvider
+                            var service =
+                                sp.GetRequiredService<DisposeServiceProviderInCtorAsyncDisposable>();
+                        });
+                    });
+                })
                 .Wait(TimeSpan.FromSeconds(10));
 
             Assert.True(doesNotHang);
@@ -468,25 +460,19 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
             );
 
             var sp = CreateServiceProvider(services);
-            bool doesNotHang = Task.Run(
-                    () =>
+            bool doesNotHang = Task.Run(() =>
+                {
+                    SingleThreadedSynchronizationContext.Run(() =>
                     {
-                        SingleThreadedSynchronizationContext.Run(
-                            () =>
-                            {
-                                // Act
-                                Assert.Throws<ObjectDisposedException>(
-                                    () =>
-                                    {
-                                        // ctor disposes ServiceProvider
-                                        var service =
-                                            sp.GetRequiredService<DisposeServiceProviderInCtorDisposable>();
-                                    }
-                                );
-                            }
-                        );
-                    }
-                )
+                        // Act
+                        Assert.Throws<ObjectDisposedException>(() =>
+                        {
+                            // ctor disposes ServiceProvider
+                            var service =
+                                sp.GetRequiredService<DisposeServiceProviderInCtorDisposable>();
+                        });
+                    });
+                })
                 .Wait(TimeSpan.FromSeconds(10));
 
             Assert.True(doesNotHang);
@@ -625,25 +611,21 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
 
                 sp = CreateServiceProvider(services);
 
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        outerSingleton = sp.GetRequiredService<OuterSingleton>();
-                    }
-                );
+                var t1 = Task.Run(() =>
+                {
+                    outerSingleton = sp.GetRequiredService<OuterSingleton>();
+                });
 
                 // Wait until mre2 gets set in InnerSingleton ctor
                 mreForThread2.WaitOne();
 
-                var t2 = Task.Run(
-                    () =>
-                    {
-                        mreForThread3.Set();
+                var t2 = Task.Run(() =>
+                {
+                    mreForThread3.Set();
 
-                        // This waits on InnerSingleton singleton lock that is taken in thread 1
-                        innerSingleton = sp.GetRequiredService<InnerSingleton>();
-                    }
-                );
+                    // This waits on InnerSingleton singleton lock that is taken in thread 1
+                    innerSingleton = sp.GetRequiredService<InnerSingleton>();
+                });
 
                 mreForThread3.WaitOne();
 
@@ -692,63 +674,55 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                 // Arrange
                 var services = new ServiceCollection();
 
-                var lazy = new Lazy<Thing1>(
-                    () =>
-                    {
-                        sb.Append("3");
-                        mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
+                var lazy = new Lazy<Thing1>(() =>
+                {
+                    sb.Append("3");
+                    mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
 
-                        // by this time, Thread 2 is holding a singleton lock for Thing2,
-                        // and Thread one holds the lazy lock
-                        // the call below to resolve Thing0 does not hang
-                        // since singletons do not share the same lock upon resolve anymore.
-                        thing0 = sp.GetRequiredService<Thing0>();
-                        return new Thing1(thing0);
-                    }
-                );
+                    // by this time, Thread 2 is holding a singleton lock for Thing2,
+                    // and Thread one holds the lazy lock
+                    // the call below to resolve Thing0 does not hang
+                    // since singletons do not share the same lock upon resolve anymore.
+                    thing0 = sp.GetRequiredService<Thing0>();
+                    return new Thing1(thing0);
+                });
 
                 services.AddSingleton<Thing0>();
-                services.AddTransient(
-                    sp =>
+                services.AddTransient(sp =>
+                {
+                    if (ThreadId == 2)
                     {
-                        if (ThreadId == 2)
-                        {
-                            sb.Append("1");
-                            mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
-                            mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
+                        sb.Append("1");
+                        mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
+                        mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
 
-                            sb.Append("4");
-                        }
-
-                        // Let Thread 1 over take Thread 2
-                        Thing1 value = lazy.Value;
-                        return value;
+                        sb.Append("4");
                     }
-                );
+
+                    // Let Thread 1 over take Thread 2
+                    Thing1 value = lazy.Value;
+                    return value;
+                });
                 services.AddSingleton<Thing2>();
 
                 sp = CreateServiceProvider(services);
 
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 1;
-                        using var scope1 = sp.CreateScope();
-                        mreForThread1.WaitOne(); // [a] Waits until thread 2 reaches the transient call to ensure it holds Thing2 singleton lock
+                var t1 = Task.Run(() =>
+                {
+                    ThreadId = 1;
+                    using var scope1 = sp.CreateScope();
+                    mreForThread1.WaitOne(); // [a] Waits until thread 2 reaches the transient call to ensure it holds Thing2 singleton lock
 
-                        sb.Append("2");
-                        thing1 = scope1.ServiceProvider.GetRequiredService<Thing1>();
-                    }
-                );
+                    sb.Append("2");
+                    thing1 = scope1.ServiceProvider.GetRequiredService<Thing1>();
+                });
 
-                var t2 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 2;
-                        using var scope2 = sp.CreateScope();
-                        thing2 = scope2.ServiceProvider.GetRequiredService<Thing2>();
-                    }
-                );
+                var t2 = Task.Run(() =>
+                {
+                    ThreadId = 2;
+                    using var scope2 = sp.CreateScope();
+                    thing2 = scope2.ServiceProvider.GetRequiredService<Thing2>();
+                });
 
                 // Act
                 await t1;
@@ -788,65 +762,53 @@ namespace Microsoft.Extensions.DependencyInjection.Tests
                     typeof(FakeOpenGenericService<>)
                 );
 
-                var lazy = new Lazy<Thing4>(
-                    () =>
+                var lazy = new Lazy<Thing4>(() =>
+                {
+                    sb.Append("3");
+                    mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
+
+                    thing3 = sp.GetRequiredService<Thing3>();
+                    return new Thing4(thing3);
+                });
+
+                services.AddTransient(sp =>
+                {
+                    if (ThreadId == 2)
                     {
-                        sb.Append("3");
-                        mreForThread2.Set(); // Now that thread 1 holds lazy lock, allow thread 2 to continue
+                        sb.Append("1");
+                        mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
+                        mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
 
-                        thing3 = sp.GetRequiredService<Thing3>();
-                        return new Thing4(thing3);
+                        sb.Append("4");
                     }
-                );
 
-                services.AddTransient(
-                    sp =>
-                    {
-                        if (ThreadId == 2)
-                        {
-                            sb.Append("1");
-                            mreForThread1.Set(); // [b] Allow thread 1 to continue execution and take the lazy lock
-                            mreForThread2.WaitOne(); // [c] Wait until thread 1 takes the lazy lock
-
-                            sb.Append("4");
-                        }
-
-                        // Let Thread 1 over take Thread 2
-                        Thing4 value = lazy.Value;
-                        return value;
-                    }
-                );
+                    // Let Thread 1 over take Thread 2
+                    Thing4 value = lazy.Value;
+                    return value;
+                });
                 services.AddSingleton<Thing5>();
 
                 sp = CreateServiceProvider(services);
 
                 // Act
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 1;
-                        using var scope1 = sp.CreateScope();
-                        mreForThread1.WaitOne(); // Waits until thread 2 reaches the transient call to ensure it holds Thing4 singleton lock
+                var t1 = Task.Run(() =>
+                {
+                    ThreadId = 1;
+                    using var scope1 = sp.CreateScope();
+                    mreForThread1.WaitOne(); // Waits until thread 2 reaches the transient call to ensure it holds Thing4 singleton lock
 
-                        sb.Append("2");
-                        constrainedThing4Services = sp.GetServices<
-                            IFakeOpenGenericService<Thing4>
-                        >()
-                            .ToList();
-                    }
-                );
+                    sb.Append("2");
+                    constrainedThing4Services = sp.GetServices<IFakeOpenGenericService<Thing4>>()
+                        .ToList();
+                });
 
-                var t2 = Task.Run(
-                    () =>
-                    {
-                        ThreadId = 2;
-                        using var scope2 = sp.CreateScope();
-                        constrainedThing5Services = sp.GetServices<
-                            IFakeOpenGenericService<Thing5>
-                        >()
-                            .ToList();
-                    }
-                );
+                var t2 = Task.Run(() =>
+                {
+                    ThreadId = 2;
+                    using var scope2 = sp.CreateScope();
+                    constrainedThing5Services = sp.GetServices<IFakeOpenGenericService<Thing5>>()
+                        .ToList();
+                });
 
                 // Act
                 await t1;

@@ -98,15 +98,13 @@ public class EndpointMetadataApiDescriptionProviderTest
     [Fact]
     public void AddsMultipleRequestFormatsFromMetadataWithRequestTypeAndOptionalBodyParameter()
     {
-        var apiDescription = GetApiDescription(
-            [Consumes(
-                typeof(InferredJsonClass),
-                "application/custom0",
-                "application/custom1",
-                IsOptional = true
-            )]
-            () => { }
-        );
+        var apiDescription = GetApiDescription([Consumes(
+            typeof(InferredJsonClass),
+            "application/custom0",
+            "application/custom1",
+            IsOptional = true
+        )]
+        () => { });
 
         Assert.Equal(2, apiDescription.SupportedRequestFormats.Count);
 

@@ -636,27 +636,21 @@ namespace Moq.Tests
             bool afterCalled = false;
 
             mock.Setup(foo => foo.Execute("ping"))
-                .Callback(
-                    () =>
-                    {
-                        Assert.False(returnsCalled);
-                        beforeCalled = true;
-                    }
-                )
-                .Returns(
-                    () =>
-                    {
-                        returnsCalled = true;
-                        return "ack";
-                    }
-                )
-                .Callback(
-                    () =>
-                    {
-                        Assert.True(returnsCalled);
-                        afterCalled = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    Assert.False(returnsCalled);
+                    beforeCalled = true;
+                })
+                .Returns(() =>
+                {
+                    returnsCalled = true;
+                    return "ack";
+                })
+                .Callback(() =>
+                {
+                    Assert.True(returnsCalled);
+                    afterCalled = true;
+                });
 
             Assert.Equal("ack", mock.Object.Execute("ping"));
 
@@ -672,13 +666,11 @@ namespace Moq.Tests
 
             mock.Setup(foo => foo.Execute(It.IsAny<string>()))
                 .Callback<string>(s => Assert.False(returnsCalled))
-                .Returns(
-                    () =>
-                    {
-                        returnsCalled = true;
-                        return "ack";
-                    }
-                )
+                .Returns(() =>
+                {
+                    returnsCalled = true;
+                    return "ack";
+                })
                 .Callback<string>(s => Assert.True(returnsCalled));
 
             mock.Object.Execute("ping");
@@ -833,12 +825,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             mock.Setup(m => m.Submit("good", "bad"))
                 .Returns(
-                    new InvocationFunc(
-                        invocation =>
-                        {
-                            throw new Exception("very bad"); // this used to be erroneously wrapped as a `TargetInvocationException`
-                        }
-                    )
+                    new InvocationFunc(invocation =>
+                    {
+                        throw new Exception("very bad"); // this used to be erroneously wrapped as a `TargetInvocationException`
+                    })
                 );
 
             var ex = Assert.Throws<Exception>(() => mock.Object.Submit("good", "bad"));

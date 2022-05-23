@@ -210,12 +210,10 @@ public class HttpRequestStreamTests
         pipeReader.StopAcceptingReads();
 
         // Validation for ReadAsync occurs in an async method in ReadOnlyPipeStream.
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () =>
-            {
-                await stream.ReadAsync(new byte[1], 0, 1);
-            }
-        );
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+        {
+            await stream.ReadAsync(new byte[1], 0, 1);
+        });
     }
 
     [Fact]
@@ -252,12 +250,10 @@ public class HttpRequestStreamTests
         pipeReader.StartAcceptingReads(null);
         pipeReader.StopAcceptingReads();
         // Validation for CopyToAsync occurs in an async method in ReadOnlyPipeStream.
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () =>
-            {
-                await stream.CopyToAsync(Mock.Of<Stream>());
-            }
-        );
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+        {
+            await stream.CopyToAsync(Mock.Of<Stream>());
+        });
     }
 
     [Fact]
@@ -266,12 +262,10 @@ public class HttpRequestStreamTests
         var pipeReader = new HttpRequestPipeReader();
         var stream = new HttpRequestStream(Mock.Of<IHttpBodyControlFeature>(), pipeReader);
         pipeReader.StartAcceptingReads(null);
-        Assert.Throws<ArgumentNullException>(
-            () =>
-            {
-                stream.CopyToAsync(null);
-            }
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            stream.CopyToAsync(null);
+        });
     }
 
     [Fact]
@@ -284,11 +278,9 @@ public class HttpRequestStreamTests
         );
         pipeReader.StartAcceptingReads(null);
         // This is technically a breaking change, to throw an ArgumentoutOfRangeException rather than an ArgumentException
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                stream.CopyToAsync(Mock.Of<Stream>(), 0);
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            stream.CopyToAsync(Mock.Of<Stream>(), 0);
+        });
     }
 }

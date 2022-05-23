@@ -23,13 +23,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(d => d.Child, o => o.MapAtRuntime());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().ForMember(d => d.Child, o => o.MapAtRuntime());
+            });
 
         [Fact]
         public void Should_overwrite_the_existing_child_destination()
@@ -57,12 +54,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -115,15 +110,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>(MemberList.Source)
-                        .ForMember(d => d.Child, opt => opt.UseDestinationValue());
-                    cfg.CreateMap<ChildSource, ChildDestination>(MemberList.Source)
-                        .ForMember(d => d.Name, opt => opt.UseDestinationValue());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>(MemberList.Source)
+                    .ForMember(d => d.Child, opt => opt.UseDestinationValue());
+                cfg.CreateMap<ChildSource, ChildDestination>(MemberList.Source)
+                    .ForMember(d => d.Name, opt => opt.UseDestinationValue());
+            });
 
         protected override void Because_of()
         {
@@ -184,13 +177,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<ChildSource, ChildDestination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<ChildSource, ChildDestination>();
+            });
 
         protected override void Because_of()
         {

@@ -110,13 +110,11 @@ namespace System.Web.Http.Cors
             var actionSelector = new Mock<IHttpActionSelector>();
             actionSelector
                 .Setup(s => s.SelectAction(It.IsAny<HttpControllerContext>()))
-                .Callback<HttpControllerContext>(
-                    context =>
-                    {
-                        Assert.False(((SampleController)context.Controller).Disposed);
-                        controllerContext = context;
-                    }
-                );
+                .Callback<HttpControllerContext>(context =>
+                {
+                    Assert.False(((SampleController)context.Controller).Disposed);
+                    controllerContext = context;
+                });
             config.Services.Replace(typeof(IHttpActionSelector), actionSelector.Object);
             request.SetConfiguration(config);
             IHttpRoute route = config.Routes.MapHttpRoute(

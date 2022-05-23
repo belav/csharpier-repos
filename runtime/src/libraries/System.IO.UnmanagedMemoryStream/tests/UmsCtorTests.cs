@@ -11,12 +11,10 @@ namespace System.IO.Tests
         [Fact]
         public static unsafe void CtorsThatFail()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    var ums = new UnmanagedMemoryStream(null, 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                var ums = new UnmanagedMemoryStream(null, 0);
+            });
 
             TestSafeBuffer nullBuffer = null;
             FakeSafeBuffer fakeBuffer = new FakeSafeBuffer(99);

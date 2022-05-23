@@ -179,12 +179,10 @@ namespace System.Linq.Tests
             var skipped = new FastInfiniteEnumerator<int>().SkipWhile((e, i) => true);
 
             using (var en = skipped.GetEnumerator())
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        while (en.MoveNext()) { }
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    while (en.MoveNext()) { }
+                });
         }
 
         [Fact]

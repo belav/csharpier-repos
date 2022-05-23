@@ -216,14 +216,12 @@ public class UsePathBaseExtensionsTests
     {
         HttpContext requestContext = CreateRequest(pathBase, requestPath);
         var builder = CreateBuilder().UsePathBase(registeredPathBase);
-        builder.Run(
-            context =>
-            {
-                context.Items["test.Path"] = context.Request.Path;
-                context.Items["test.PathBase"] = context.Request.PathBase;
-                return Task.FromResult(0);
-            }
-        );
+        builder.Run(context =>
+        {
+            context.Items["test.Path"] = context.Request.Path;
+            context.Items["test.PathBase"] = context.Request.PathBase;
+            return Task.FromResult(0);
+        });
         await builder.Build().Invoke(requestContext);
 
         // Assert path and pathBase are split after middleware

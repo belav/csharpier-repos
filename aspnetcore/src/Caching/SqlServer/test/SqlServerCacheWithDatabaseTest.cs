@@ -81,18 +81,16 @@ public class SqlServerCacheWithDatabaseTest
         var cache = GetSqlServerCache(GetCacheOptions(testClock));
 
         // Act & Assert
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            () =>
-            {
-                return cache.SetAsync(
-                    key,
-                    expectedValue,
-                    new DistributedCacheEntryOptions().SetAbsoluteExpiration(
-                        testClock.UtcNow.AddHours(-1)
-                    )
-                );
-            }
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(() =>
+        {
+            return cache.SetAsync(
+                key,
+                expectedValue,
+                new DistributedCacheEntryOptions().SetAbsoluteExpiration(
+                    testClock.UtcNow.AddHours(-1)
+                )
+            );
+        });
         Assert.Equal("The absolute expiration value must be in the future.", exception.Message);
     }
 

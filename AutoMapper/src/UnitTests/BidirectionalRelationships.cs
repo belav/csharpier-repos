@@ -13,14 +13,12 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private ParentDto _dto;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ParentModel, ParentDto>();
-                    cfg.CreateMap<ChildModel, ChildDto>();
-                    cfg.CreateMap<ChildrenStructModel, ChildrenStructDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ParentModel, ParentDto>();
+                cfg.CreateMap<ChildModel, ChildDto>();
+                cfg.CreateMap<ChildrenStructModel, ChildrenStructDto>();
+            });
 
         [Fact]
         public void Should_work()
@@ -87,13 +85,11 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private ParentDto _dto;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ParentModel, ParentDto>().PreserveReferences();
-                    cfg.CreateMap<ChildModel, ChildDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ParentModel, ParentDto>().PreserveReferences();
+                cfg.CreateMap<ChildModel, ChildDto>();
+            });
 
         protected override void Because_of()
         {
@@ -155,13 +151,11 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private ParentDto<int> _dto;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDto<>));
-                    cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDto<>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDto<>));
+                cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDto<>));
+            });
 
         protected override void Because_of()
         {
@@ -225,32 +219,30 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private static ParentModel _parent;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
+            new MapperConfiguration(cfg =>
+            {
+                _parent = new ParentModel { ID = 2 };
+
+                List<ChildModel> childModels = new List<ChildModel>
                 {
-                    _parent = new ParentModel { ID = 2 };
+                    new ChildModel { ID = 1, Parent = _parent }
+                };
 
-                    List<ChildModel> childModels = new List<ChildModel>
-                    {
-                        new ChildModel { ID = 1, Parent = _parent }
-                    };
+                Dictionary<int, ParentModel> parents = childModels.ToDictionary(
+                    x => x.ID,
+                    x => x.Parent
+                );
 
-                    Dictionary<int, ParentModel> parents = childModels.ToDictionary(
-                        x => x.ID,
-                        x => x.Parent
-                    );
+                cfg.CreateMap<int, ParentDto>()
+                    .ConvertUsing(new ChildIdToParentDtoConverter(parents));
+                cfg.CreateMap<int, List<ChildDto>>()
+                    .ConvertUsing(new ParentIdToChildDtoListConverter(childModels));
 
-                    cfg.CreateMap<int, ParentDto>()
-                        .ConvertUsing(new ChildIdToParentDtoConverter(parents));
-                    cfg.CreateMap<int, List<ChildDto>>()
-                        .ConvertUsing(new ParentIdToChildDtoListConverter(childModels));
-
-                    cfg.CreateMap<ParentModel, ParentDto>()
-                        .PreserveReferences()
-                        .ForMember(dest => dest.Children, opt => opt.MapFrom(src => src.ID));
-                    cfg.CreateMap<ChildModel, ChildDto>();
-                }
-            );
+                cfg.CreateMap<ParentModel, ParentDto>()
+                    .PreserveReferences()
+                    .ForMember(dest => dest.Children, opt => opt.MapFrom(src => src.ID));
+                cfg.CreateMap<ChildModel, ChildDto>();
+            });
 
         protected override void Because_of()
         {
@@ -347,13 +339,11 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private FooDto _dto;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Foo, FooDto>().PreserveReferences();
-                    cfg.CreateMap<Bar, BarDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Foo, FooDto>().PreserveReferences();
+                cfg.CreateMap<Bar, BarDto>();
+            });
 
         protected override void Because_of()
         {
@@ -397,17 +387,15 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private FooContainerModel _dto;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<FooModel, FooScreenModel>();
-                    cfg.CreateMap<FooModel, FooInputModel>();
-                    cfg.CreateMap<FooModel, FooContainerModel>()
-                        .PreserveReferences()
-                        .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
-                        .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FooModel, FooScreenModel>();
+                cfg.CreateMap<FooModel, FooInputModel>();
+                cfg.CreateMap<FooModel, FooContainerModel>()
+                    .PreserveReferences()
+                    .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
+                    .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
+            });
 
         protected override void Because_of()
         {
@@ -453,13 +441,11 @@ namespace AutoMapper.UnitTests.BidirectionalRelationships
         private ParentDto _dtoParent;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Parent, ParentDto>().PreserveReferences();
-                    cfg.CreateMap<Child, ChildDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Parent, ParentDto>().PreserveReferences();
+                cfg.CreateMap<Child, ChildDto>();
+            });
 
         protected override void Because_of()
         {

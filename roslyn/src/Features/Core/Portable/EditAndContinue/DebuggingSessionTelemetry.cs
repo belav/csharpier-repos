@@ -91,23 +91,21 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
             log(
                 FunctionId.Debugging_EncSession,
-                KeyValueLogMessage.Create(
-                    map =>
-                    {
-                        map["SolutionSessionId"] = data.SolutionSessionId
-                            .ToString("B")
-                            .ToUpperInvariant();
-                        map[SessionId] = debugSessionId;
-                        map["SessionCount"] = data.EditSessionData.Count(
-                            session => session.InBreakState
-                        );
-                        map["EmptySessionCount"] = data.EmptyEditSessionCount;
-                        map["HotReloadSessionCount"] = data.EditSessionData.Count(
-                            session => !session.InBreakState
-                        );
-                        map["EmptyHotReloadSessionCount"] = data.EmptyHotReloadEditSessionCount;
-                    }
-                )
+                KeyValueLogMessage.Create(map =>
+                {
+                    map["SolutionSessionId"] = data.SolutionSessionId
+                        .ToString("B")
+                        .ToUpperInvariant();
+                    map[SessionId] = debugSessionId;
+                    map["SessionCount"] = data.EditSessionData.Count(
+                        session => session.InBreakState
+                    );
+                    map["EmptySessionCount"] = data.EmptyEditSessionCount;
+                    map["HotReloadSessionCount"] = data.EditSessionData.Count(
+                        session => !session.InBreakState
+                    );
+                    map["EmptyHotReloadSessionCount"] = data.EmptyHotReloadEditSessionCount;
+                })
             );
 
             foreach (var editSessionData in data.EditSessionData)
@@ -116,53 +114,49 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
 
                 log(
                     FunctionId.Debugging_EncSession_EditSession,
-                    KeyValueLogMessage.Create(
-                        map =>
-                        {
-                            map[SessionId] = debugSessionId;
-                            map[EditSessionId] = editSessionId;
+                    KeyValueLogMessage.Create(map =>
+                    {
+                        map[SessionId] = debugSessionId;
+                        map[EditSessionId] = editSessionId;
 
-                            map["HadCompilationErrors"] = editSessionData.HadCompilationErrors;
-                            map["HadRudeEdits"] = editSessionData.HadRudeEdits;
+                        map["HadCompilationErrors"] = editSessionData.HadCompilationErrors;
+                        map["HadRudeEdits"] = editSessionData.HadRudeEdits;
 
-                            // Changes made to source code during the edit session were valid - they were significant and no rude edits were reported.
-                            // The changes still might fail to emit (see EmitDeltaErrorIdCount).
-                            map["HadValidChanges"] = editSessionData.HadValidChanges;
-                            map["HadValidInsignificantChanges"] =
-                                editSessionData.HadValidInsignificantChanges;
+                        // Changes made to source code during the edit session were valid - they were significant and no rude edits were reported.
+                        // The changes still might fail to emit (see EmitDeltaErrorIdCount).
+                        map["HadValidChanges"] = editSessionData.HadValidChanges;
+                        map["HadValidInsignificantChanges"] =
+                            editSessionData.HadValidInsignificantChanges;
 
-                            map["RudeEditsCount"] = editSessionData.RudeEdits.Length;
+                        map["RudeEditsCount"] = editSessionData.RudeEdits.Length;
 
-                            // Number of emit errors.
-                            map["EmitDeltaErrorIdCount"] = editSessionData.EmitErrorIds.Length;
+                        // Number of emit errors.
+                        map["EmitDeltaErrorIdCount"] = editSessionData.EmitErrorIds.Length;
 
-                            // False for Hot Reload session, true or missing for EnC session (missing in older data that did not have this property).
-                            map["InBreakState"] = editSessionData.InBreakState;
+                        // False for Hot Reload session, true or missing for EnC session (missing in older data that did not have this property).
+                        map["InBreakState"] = editSessionData.InBreakState;
 
-                            map["Capabilities"] = (int)editSessionData.Capabilities;
+                        map["Capabilities"] = (int)editSessionData.Capabilities;
 
-                            // Ids of all projects whose binaries were successfully updated during the session.
-                            map["ProjectIdsWithAppliedChanges"] = editSessionData.Committed
-                                ? editSessionData.ProjectsWithValidDelta.Select(
-                                    id => new PiiValue(id.ToString("B").ToUpperInvariant())
-                                )
-                                : "";
-                        }
-                    )
+                        // Ids of all projects whose binaries were successfully updated during the session.
+                        map["ProjectIdsWithAppliedChanges"] = editSessionData.Committed
+                            ? editSessionData.ProjectsWithValidDelta.Select(
+                                id => new PiiValue(id.ToString("B").ToUpperInvariant())
+                            )
+                            : "";
+                    })
                 );
 
                 foreach (var errorId in editSessionData.EmitErrorIds)
                 {
                     log(
                         FunctionId.Debugging_EncSession_EditSession_EmitDeltaErrorId,
-                        KeyValueLogMessage.Create(
-                            map =>
-                            {
-                                map[SessionId] = debugSessionId;
-                                map[EditSessionId] = editSessionId;
-                                map["ErrorId"] = errorId;
-                            }
-                        )
+                        KeyValueLogMessage.Create(map =>
+                        {
+                            map[SessionId] = debugSessionId;
+                            map[EditSessionId] = editSessionId;
+                            map["ErrorId"] = errorId;
+                        })
                     );
                 }
 
@@ -170,17 +164,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                 {
                     log(
                         FunctionId.Debugging_EncSession_EditSession_RudeEdit,
-                        KeyValueLogMessage.Create(
-                            map =>
-                            {
-                                map[SessionId] = debugSessionId;
-                                map[EditSessionId] = editSessionId;
+                        KeyValueLogMessage.Create(map =>
+                        {
+                            map[SessionId] = debugSessionId;
+                            map[EditSessionId] = editSessionId;
 
-                                map["RudeEditKind"] = editKind;
-                                map["RudeEditSyntaxKind"] = syntaxKind;
-                                map["RudeEditBlocking"] = editSessionData.HadRudeEdits;
-                            }
-                        )
+                            map["RudeEditKind"] = editKind;
+                            map["RudeEditSyntaxKind"] = syntaxKind;
+                            map["RudeEditBlocking"] = editSessionData.HadRudeEdits;
+                        })
                     );
                 }
             }

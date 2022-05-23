@@ -1214,60 +1214,63 @@ class C
         [Fact]
         public void NonAsyncLambda()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("async => async", options);
+            TestVersions(options =>
+            {
+                UsingNode("async => async", options);
 
-                    N(SyntaxKind.SimpleLambdaExpression);
+                N(SyntaxKind.SimpleLambdaExpression);
+                {
+                    N(SyntaxKind.Parameter);
                     {
-                        N(SyntaxKind.Parameter);
-                        {
-                            N(SyntaxKind.IdentifierToken);
-                        }
-                        N(SyntaxKind.EqualsGreaterThanToken);
-                        N(SyntaxKind.IdentifierName);
-                        {
-                            N(SyntaxKind.IdentifierToken);
-                        }
+                        N(SyntaxKind.IdentifierToken);
+                    }
+                    N(SyntaxKind.EqualsGreaterThanToken);
+                    N(SyntaxKind.IdentifierName);
+                    {
+                        N(SyntaxKind.IdentifierToken);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public void AsyncAsyncSimpleLambda()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("async async => async", options);
+            TestVersions(options =>
+            {
+                UsingNode("async async => async", options);
 
-                    N(SyntaxKind.SimpleLambdaExpression);
+                N(SyntaxKind.SimpleLambdaExpression);
+                {
+                    N(SyntaxKind.AsyncKeyword);
+                    N(SyntaxKind.Parameter);
                     {
-                        N(SyntaxKind.AsyncKeyword);
-                        N(SyntaxKind.Parameter);
-                        {
-                            N(SyntaxKind.IdentifierToken);
-                        }
-                        N(SyntaxKind.EqualsGreaterThanToken);
-                        N(SyntaxKind.IdentifierName);
-                        {
-                            N(SyntaxKind.IdentifierToken);
-                        }
+                        N(SyntaxKind.IdentifierToken);
+                    }
+                    N(SyntaxKind.EqualsGreaterThanToken);
+                    N(SyntaxKind.IdentifierName);
+                    {
+                        N(SyntaxKind.IdentifierToken);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public void AsyncAsyncAsyncAsyncAsyncSimpleLambda()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("async async => async async => async", options);
+            TestVersions(options =>
+            {
+                UsingNode("async async => async async => async", options);
 
+                N(SyntaxKind.SimpleLambdaExpression);
+                {
+                    N(SyntaxKind.AsyncKeyword);
+                    N(SyntaxKind.Parameter);
+                    {
+                        N(SyntaxKind.IdentifierToken);
+                    }
+                    N(SyntaxKind.EqualsGreaterThanToken);
                     N(SyntaxKind.SimpleLambdaExpression);
                     {
                         N(SyntaxKind.AsyncKeyword);
@@ -1276,138 +1279,121 @@ class C
                             N(SyntaxKind.IdentifierToken);
                         }
                         N(SyntaxKind.EqualsGreaterThanToken);
-                        N(SyntaxKind.SimpleLambdaExpression);
+                        N(SyntaxKind.IdentifierName);
                         {
-                            N(SyntaxKind.AsyncKeyword);
-                            N(SyntaxKind.Parameter);
-                            {
-                                N(SyntaxKind.IdentifierToken);
-                            }
-                            N(SyntaxKind.EqualsGreaterThanToken);
-                            N(SyntaxKind.IdentifierName);
-                            {
-                                N(SyntaxKind.IdentifierToken);
-                            }
+                            N(SyntaxKind.IdentifierToken);
                         }
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public void NonAsyncParenthesizedLambda()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("(async) => async", options);
+            TestVersions(options =>
+            {
+                UsingNode("(async) => async", options);
 
-                    N(SyntaxKind.ParenthesizedLambdaExpression);
+                N(SyntaxKind.ParenthesizedLambdaExpression);
+                {
+                    N(SyntaxKind.ParameterList);
                     {
-                        N(SyntaxKind.ParameterList);
-                        {
-                            N(SyntaxKind.OpenParenToken);
-                            N(SyntaxKind.Parameter);
-                            {
-                                N(SyntaxKind.IdentifierToken);
-                            }
-                            N(SyntaxKind.CloseParenToken);
-                        }
-                        N(SyntaxKind.EqualsGreaterThanToken);
-                        N(SyntaxKind.IdentifierName);
+                        N(SyntaxKind.OpenParenToken);
+                        N(SyntaxKind.Parameter);
                         {
                             N(SyntaxKind.IdentifierToken);
                         }
+                        N(SyntaxKind.CloseParenToken);
+                    }
+                    N(SyntaxKind.EqualsGreaterThanToken);
+                    N(SyntaxKind.IdentifierName);
+                    {
+                        N(SyntaxKind.IdentifierToken);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public void AsyncAsyncParenthesizedLambda()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("async (async) => async", options);
+            TestVersions(options =>
+            {
+                UsingNode("async (async) => async", options);
 
-                    N(SyntaxKind.ParenthesizedLambdaExpression);
+                N(SyntaxKind.ParenthesizedLambdaExpression);
+                {
+                    N(SyntaxKind.AsyncKeyword);
+                    N(SyntaxKind.ParameterList);
                     {
-                        N(SyntaxKind.AsyncKeyword);
-                        N(SyntaxKind.ParameterList);
-                        {
-                            N(SyntaxKind.OpenParenToken);
-                            N(SyntaxKind.Parameter);
-                            {
-                                N(SyntaxKind.IdentifierToken);
-                            }
-                            N(SyntaxKind.CloseParenToken);
-                        }
-                        N(SyntaxKind.EqualsGreaterThanToken);
-                        N(SyntaxKind.IdentifierName);
+                        N(SyntaxKind.OpenParenToken);
+                        N(SyntaxKind.Parameter);
                         {
                             N(SyntaxKind.IdentifierToken);
                         }
+                        N(SyntaxKind.CloseParenToken);
+                    }
+                    N(SyntaxKind.EqualsGreaterThanToken);
+                    N(SyntaxKind.IdentifierName);
+                    {
+                        N(SyntaxKind.IdentifierToken);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public void AsyncSimpleDelegate()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("async delegate { }", options);
+            TestVersions(options =>
+            {
+                UsingNode("async delegate { }", options);
 
-                    N(SyntaxKind.AnonymousMethodExpression);
+                N(SyntaxKind.AnonymousMethodExpression);
+                {
+                    N(SyntaxKind.AsyncKeyword);
+                    N(SyntaxKind.DelegateKeyword);
+                    N(SyntaxKind.Block);
                     {
-                        N(SyntaxKind.AsyncKeyword);
-                        N(SyntaxKind.DelegateKeyword);
-                        N(SyntaxKind.Block);
-                        {
-                            N(SyntaxKind.OpenBraceToken);
-                            N(SyntaxKind.CloseBraceToken);
-                        }
+                        N(SyntaxKind.OpenBraceToken);
+                        N(SyntaxKind.CloseBraceToken);
                     }
                 }
-            );
+            });
         }
 
         [Fact]
         public void AsyncParenthesizedDelegate()
         {
-            TestVersions(
-                options =>
-                {
-                    UsingNode("async delegate (int x) { }", options);
+            TestVersions(options =>
+            {
+                UsingNode("async delegate (int x) { }", options);
 
-                    N(SyntaxKind.AnonymousMethodExpression);
+                N(SyntaxKind.AnonymousMethodExpression);
+                {
+                    N(SyntaxKind.AsyncKeyword);
+                    N(SyntaxKind.DelegateKeyword);
+                    N(SyntaxKind.ParameterList);
                     {
-                        N(SyntaxKind.AsyncKeyword);
-                        N(SyntaxKind.DelegateKeyword);
-                        N(SyntaxKind.ParameterList);
+                        N(SyntaxKind.OpenParenToken);
+                        N(SyntaxKind.Parameter);
                         {
-                            N(SyntaxKind.OpenParenToken);
-                            N(SyntaxKind.Parameter);
+                            N(SyntaxKind.PredefinedType);
                             {
-                                N(SyntaxKind.PredefinedType);
-                                {
-                                    N(SyntaxKind.IntKeyword);
-                                }
-                                N(SyntaxKind.IdentifierToken);
+                                N(SyntaxKind.IntKeyword);
                             }
-                            N(SyntaxKind.CloseParenToken);
+                            N(SyntaxKind.IdentifierToken);
                         }
-                        N(SyntaxKind.Block);
-                        {
-                            N(SyntaxKind.OpenBraceToken);
-                            N(SyntaxKind.CloseBraceToken);
-                        }
+                        N(SyntaxKind.CloseParenToken);
+                    }
+                    N(SyntaxKind.Block);
+                    {
+                        N(SyntaxKind.OpenBraceToken);
+                        N(SyntaxKind.CloseBraceToken);
                     }
                 }
-            );
+            });
         }
 
         // Comment directly from CParser::IsAsyncMethod.

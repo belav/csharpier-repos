@@ -385,12 +385,10 @@ namespace System.Numerics.Tests
         private void TestConstructorArrayTooSmallException<T>() where T : struct
         {
             T[] values = GenerateRandomValuesForVector<T>().Skip(1).ToArray();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var vector = new Vector<T>(values);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var vector = new Vector<T>(values);
+            });
         }
 
         #region Tests for Span based constructor
@@ -939,12 +937,10 @@ namespace System.Numerics.Tests
         private void TestIndexerOutOfRange<T>() where T : struct
         {
             Vector<T> vector = Vector<T>.One;
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    T value = vector[Vector<T>.Count];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                T value = vector[Vector<T>.Count];
+            });
         }
         #endregion
 
@@ -2517,12 +2513,10 @@ namespace System.Numerics.Tests
         {
             T[] values1 = GenerateRandomValuesForVector<T>();
             Vector<T> vector = new Vector<T>(values1);
-            Assert.Throws<DivideByZeroException>(
-                () =>
-                {
-                    var result = vector / Vector<T>.Zero;
-                }
-            );
+            Assert.Throws<DivideByZeroException>(() =>
+            {
+                var result = vector / Vector<T>.Zero;
+            });
         }
 
         [Fact]

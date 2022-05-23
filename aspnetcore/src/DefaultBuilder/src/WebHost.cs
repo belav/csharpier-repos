@@ -216,15 +216,13 @@ public static class WebHost
             .ConfigureLogging(
                 (hostingContext, loggingBuilder) =>
                 {
-                    loggingBuilder.Configure(
-                        options =>
-                        {
-                            options.ActivityTrackingOptions =
-                                ActivityTrackingOptions.SpanId
-                                | ActivityTrackingOptions.TraceId
-                                | ActivityTrackingOptions.ParentId;
-                        }
-                    );
+                    loggingBuilder.Configure(options =>
+                    {
+                        options.ActivityTrackingOptions =
+                            ActivityTrackingOptions.SpanId
+                            | ActivityTrackingOptions.TraceId
+                            | ActivityTrackingOptions.ParentId;
+                    });
                     loggingBuilder.AddConfiguration(
                         hostingContext.Configuration.GetSection("Logging")
                     );
@@ -273,21 +271,19 @@ public static class WebHost
                 (hostingContext, services) =>
                 {
                     // Fallback
-                    services.PostConfigure<HostFilteringOptions>(
-                        options =>
+                    services.PostConfigure<HostFilteringOptions>(options =>
+                    {
+                        if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
                         {
-                            if (options.AllowedHosts == null || options.AllowedHosts.Count == 0)
-                            {
-                                // "AllowedHosts": "localhost;127.0.0.1;[::1]"
-                                var hosts = hostingContext.Configuration["AllowedHosts"]?.Split(
-                                    new[] { ';' },
-                                    StringSplitOptions.RemoveEmptyEntries
-                                );
-                                // Fall back to "*" to disable.
-                                options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
-                            }
+                            // "AllowedHosts": "localhost;127.0.0.1;[::1]"
+                            var hosts = hostingContext.Configuration["AllowedHosts"]?.Split(
+                                new[] { ';' },
+                                StringSplitOptions.RemoveEmptyEntries
+                            );
+                            // Fall back to "*" to disable.
+                            options.AllowedHosts = (hosts?.Length > 0 ? hosts : new[] { "*" });
                         }
-                    );
+                    });
                     // Change notification
                     services.AddSingleton<IOptionsChangeTokenSource<HostFilteringOptions>>(
                         new ConfigurationChangeTokenSource<HostFilteringOptions>(

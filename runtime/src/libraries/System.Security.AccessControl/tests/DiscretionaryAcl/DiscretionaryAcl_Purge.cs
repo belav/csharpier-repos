@@ -222,12 +222,10 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestPurge(discretionaryAcl, sid, aceCount);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestPurge(discretionaryAcl, sid, aceCount);
+            });
 
             //case 8,  1 explicit CompoundAce
             revision = 127;
@@ -249,12 +247,10 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestPurge(discretionaryAcl, sid, aceCount);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestPurge(discretionaryAcl, sid, aceCount);
+            });
 
             //case 9, 1 explicit ObjectAce
             revision = 127;
@@ -304,19 +300,17 @@ namespace System.Security.AccessControl.Tests
             int capacity = 0;
 
             //case 1, null Sid
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    revision = 127;
-                    capacity = 1;
-                    rawAcl = new RawAcl(revision, capacity);
-                    isContainer = true;
-                    isDS = false;
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                revision = 127;
+                capacity = 1;
+                rawAcl = new RawAcl(revision, capacity);
+                isContainer = true;
+                isDS = false;
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.Purge(null);
-                }
-            );
+                discretionaryAcl.Purge(null);
+            });
         }
     }
 }

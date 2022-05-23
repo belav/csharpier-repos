@@ -854,17 +854,15 @@ class D
             var baseActiveStatements = AsyncLazy.Create(ActiveStatementsMap.Empty);
             var capabilities = AsyncLazy.Create(EditAndContinueTestHelpers.Net5RuntimeCapabilities);
 
-            var analyzer = new CSharpEditAndContinueAnalyzer(
-                node =>
+            var analyzer = new CSharpEditAndContinueAnalyzer(node =>
+            {
+                if (node is CompilationUnitSyntax)
                 {
-                    if (node is CompilationUnitSyntax)
-                    {
-                        throw outOfMemory
-                            ? new OutOfMemoryException()
-                            : new NullReferenceException("NullRef!");
-                    }
+                    throw outOfMemory
+                        ? new OutOfMemoryException()
+                        : new NullReferenceException("NullRef!");
                 }
-            );
+            });
 
             var result = await analyzer.AnalyzeDocumentAsync(
                 oldProject,

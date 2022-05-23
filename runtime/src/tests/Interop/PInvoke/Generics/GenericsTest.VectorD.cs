@@ -143,15 +143,13 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            fixed (Vector<double>* pValues = &values[0])
             {
-                fixed (Vector<double>* pValues = &values[0])
-                {
-                    GenericsNative.AddVectorD128s(pValues, values.Length);
-                }
+                GenericsNative.AddVectorD128s(pValues, values.Length);
             }
-        );
+        });
 
         Assert.Throws<MarshalDirectiveException>(
             () => GenericsNative.AddVectorD128s(values, values.Length)
@@ -202,15 +200,13 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            fixed (Vector<double>* pValues = &values[0])
             {
-                fixed (Vector<double>* pValues = &values[0])
-                {
-                    GenericsNative.AddVectorD256s(pValues, values.Length);
-                }
+                GenericsNative.AddVectorD256s(pValues, values.Length);
             }
-        );
+        });
 
         Assert.Throws<MarshalDirectiveException>(
             () => GenericsNative.AddVectorD256s(values, values.Length)

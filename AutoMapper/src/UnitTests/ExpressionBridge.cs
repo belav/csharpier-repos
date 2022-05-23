@@ -121,30 +121,28 @@ namespace AutoMapper.UnitTests
 
             protected override void Establish_context()
             {
-                _config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Product, SimpleProductDto>()
-                            .ForMember(
-                                m => m.CategoryName,
-                                dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
-                            );
-                        cfg.CreateProjection<Product, ExtendedProductDto>()
-                            .ForMember(
-                                m => m.CategoryName,
-                                dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
-                            )
-                            .ForMember(m => m.BOM, dst => dst.MapFrom(p => p.BillOfMaterials));
-                        cfg.CreateProjection<BillOfMaterials, BillOfMaterialsDto>();
-                        cfg.CreateProjection<Product, ComplexProductDto>();
-                        cfg.CreateProjection<ProductSubcategory, ProductSubcategoryDto>();
-                        cfg.CreateProjection<ProductCategory, ProductCategoryDto>();
-                        cfg.CreateProjection<Product, AbstractProductDto>();
-                        cfg.CreateMap<ProductType, ProductTypeDto>()
-                            //.ConvertUsing(x => ProductTypeDto.GetProdType(x));
-                            .ConvertUsing<ProductTypeConverter>();
-                    }
-                );
+                _config = new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Product, SimpleProductDto>()
+                        .ForMember(
+                            m => m.CategoryName,
+                            dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
+                        );
+                    cfg.CreateProjection<Product, ExtendedProductDto>()
+                        .ForMember(
+                            m => m.CategoryName,
+                            dst => dst.MapFrom(p => p.ProductSubcategory.ProductCategory.Name)
+                        )
+                        .ForMember(m => m.BOM, dst => dst.MapFrom(p => p.BillOfMaterials));
+                    cfg.CreateProjection<BillOfMaterials, BillOfMaterialsDto>();
+                    cfg.CreateProjection<Product, ComplexProductDto>();
+                    cfg.CreateProjection<ProductSubcategory, ProductSubcategoryDto>();
+                    cfg.CreateProjection<ProductCategory, ProductCategoryDto>();
+                    cfg.CreateProjection<Product, AbstractProductDto>();
+                    cfg.CreateMap<ProductType, ProductTypeDto>()
+                        //.ConvertUsing(x => ProductTypeDto.GetProdType(x));
+                        .ConvertUsing<ProductTypeConverter>();
+                });
                 _simpleProductConversionLinq = _config
                     .Internal()
                     .ProjectionBuilder.GetMapExpression<Product, SimpleProductDto>();
@@ -282,13 +280,11 @@ namespace AutoMapper.UnitTests
                 private IQueryable<BEntity> _bei;
 
                 protected override MapperConfiguration Configuration { get; } =
-                    new MapperConfiguration(
-                        cfg =>
-                        {
-                            cfg.CreateProjection<BEntity, B>().MaxDepth(3);
-                            cfg.CreateProjection<AEntity, A>().MaxDepth(3);
-                        }
-                    );
+                    new MapperConfiguration(cfg =>
+                    {
+                        cfg.CreateProjection<BEntity, B>().MaxDepth(3);
+                        cfg.CreateProjection<AEntity, A>().MaxDepth(3);
+                    });
 
                 protected override void Because_of()
                 {

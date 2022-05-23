@@ -41,16 +41,14 @@ public class Startup
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseContentRoot(Directory.GetCurrentDirectory())
-                        .UseIISIntegration()
-                        .UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseContentRoot(Directory.GetCurrentDirectory())
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
             .Build();
 
         return host.RunAsync();

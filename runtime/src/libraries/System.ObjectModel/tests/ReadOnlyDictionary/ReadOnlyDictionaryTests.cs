@@ -775,12 +775,10 @@ namespace System.Collections.ObjectModel.Tests
         {
             // Verify get_Item with non-existing on Collection
             TKey nonExistingKey = _generateItem().Key;
-            Assert.Throws<KeyNotFoundException>(
-                () =>
-                {
-                    TValue itemValue = _collection[nonExistingKey];
-                }
-            );
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                TValue itemValue = _collection[nonExistingKey];
+            });
 
             //Verify that the collection was not mutated
             VerifyCollection(_collection, _expectedItems);

@@ -1770,13 +1770,11 @@ namespace System.Diagnostics.Tests
         public void Start_RedirectStandardOutput_StartAgain_DoesntThrow()
         {
             using (
-                Process process = CreateProcess(
-                    () =>
-                    {
-                        Console.WriteLine("hello world");
-                        return RemoteExecutor.SuccessExitCode;
-                    }
-                )
+                Process process = CreateProcess(() =>
+                {
+                    Console.WriteLine("hello world");
+                    return RemoteExecutor.SuccessExitCode;
+                })
             )
             {
                 process.StartInfo.RedirectStandardOutput = true;
@@ -1877,72 +1875,65 @@ namespace System.Diagnostics.Tests
         public void HandleCountChanges()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    RetryHelper.Execute(() =>
                     {
-                        RetryHelper.Execute(
-                            () =>
+                        using (Process p = Process.GetCurrentProcess())
+                        {
+                            // Warm up code paths
+                            p.Refresh();
+                            using (
+                                var tmpFile = File.Open(GetTestFilePath(), FileMode.OpenOrCreate)
+                            )
                             {
-                                using (Process p = Process.GetCurrentProcess())
+                                // Get the initial handle count
+                                p.Refresh();
+                                int handleCountAtStart = p.HandleCount;
+                                int handleCountAfterOpens;
+
+                                // Open a bunch of files and get a new handle count, then close the files
+                                var files = new List<FileStream>();
+                                try
                                 {
-                                    // Warm up code paths
-                                    p.Refresh();
-                                    using (
-                                        var tmpFile = File.Open(
-                                            GetTestFilePath(),
-                                            FileMode.OpenOrCreate
-                                        )
-                                    )
-                                    {
-                                        // Get the initial handle count
-                                        p.Refresh();
-                                        int handleCountAtStart = p.HandleCount;
-                                        int handleCountAfterOpens;
-
-                                        // Open a bunch of files and get a new handle count, then close the files
-                                        var files = new List<FileStream>();
-                                        try
-                                        {
-                                            files.AddRange(
-                                                Enumerable
-                                                    .Range(0, 50)
-                                                    .Select(
-                                                        _ =>
-                                                            File.Open(
-                                                                GetTestFilePath(),
-                                                                FileMode.OpenOrCreate
-                                                            )
+                                    files.AddRange(
+                                        Enumerable
+                                            .Range(0, 50)
+                                            .Select(
+                                                _ =>
+                                                    File.Open(
+                                                        GetTestFilePath(),
+                                                        FileMode.OpenOrCreate
                                                     )
-                                            );
-                                            p.Refresh();
-                                            handleCountAfterOpens = p.HandleCount;
-                                        }
-                                        finally
-                                        {
-                                            files.ForEach(f => f.Dispose());
-                                        }
-
-                                        // Get the handle count after closing all the files
-                                        p.Refresh();
-                                        int handleCountAtEnd = p.HandleCount;
-
-                                        Assert.InRange(
-                                            handleCountAfterOpens,
-                                            handleCountAtStart + 1,
-                                            int.MaxValue
-                                        );
-                                        Assert.InRange(
-                                            handleCountAtEnd,
-                                            handleCountAtStart,
-                                            handleCountAfterOpens - 1
-                                        );
-                                    }
+                                            )
+                                    );
+                                    p.Refresh();
+                                    handleCountAfterOpens = p.HandleCount;
                                 }
+                                finally
+                                {
+                                    files.ForEach(f => f.Dispose());
+                                }
+
+                                // Get the handle count after closing all the files
+                                p.Refresh();
+                                int handleCountAtEnd = p.HandleCount;
+
+                                Assert.InRange(
+                                    handleCountAfterOpens,
+                                    handleCountAtStart + 1,
+                                    int.MaxValue
+                                );
+                                Assert.InRange(
+                                    handleCountAtEnd,
+                                    handleCountAtStart,
+                                    handleCountAfterOpens - 1
+                                );
                             }
-                        );
-                        return RemoteExecutor.SuccessExitCode;
-                    }
-                )
+                        }
+                    });
+                    return RemoteExecutor.SuccessExitCode;
+                })
                 .Dispose();
         }
 
@@ -2729,19 +2720,17 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void Kill_EntireProcessTree_True_CalledOnTreeContainingCallingProcess_ThrowsInvalidOperationException()
         {
-            Process containingProcess = CreateProcess(
-                () =>
-                {
-                    Process parentProcess = CreateProcess(
-                        () => RunProcessAttemptingToKillEntireTreeOnParent()
-                    );
+            Process containingProcess = CreateProcess(() =>
+            {
+                Process parentProcess = CreateProcess(
+                    () => RunProcessAttemptingToKillEntireTreeOnParent()
+                );
 
-                    parentProcess.Start();
-                    parentProcess.WaitForExit();
+                parentProcess.Start();
+                parentProcess.WaitForExit();
 
-                    return parentProcess.ExitCode;
-                }
-            );
+                return parentProcess.ExitCode;
+            });
 
             containingProcess.Start();
             containingProcess.WaitForExit();
@@ -2808,13 +2797,11 @@ namespace System.Diagnostics.Tests
 
                 parentProcess.Kill(entireProcessTree: false);
 
-                await Helpers.RetryWithBackoff(
-                    () =>
-                    {
-                        var actual = tree.Select(p => p.HasExited).ToList();
-                        Assert.Equal(new[] { true, false, false }, actual);
-                    }
-                );
+                await Helpers.RetryWithBackoff(() =>
+                {
+                    var actual = tree.Select(p => p.HasExited).ToList();
+                    Assert.Equal(new[] { true, false, false }, actual);
+                });
             }
             finally
             {
@@ -2843,13 +2830,11 @@ namespace System.Diagnostics.Tests
 
                 parentProcess.Kill(entireProcessTree: true);
 
-                await Helpers.RetryWithBackoff(
-                    () =>
-                    {
-                        var actual = tree.Select(p => p.HasExited).ToList();
-                        Assert.Equal(new[] { true, true, true }, actual);
-                    }
-                );
+                await Helpers.RetryWithBackoff(() =>
+                {
+                    var actual = tree.Select(p => p.HasExited).ToList();
+                    Assert.Equal(new[] { true, true, true }, actual);
+                });
             }
             finally
             {
@@ -2912,35 +2897,33 @@ namespace System.Diagnostics.Tests
 
         private IReadOnlyList<Process> CreateProcessTree()
         {
-            (Process Value, string Message) rootResult = ListenForAnonymousPipeMessage(
-                rootPipeHandleString =>
+            (Process Value, string Message) rootResult =
+                ListenForAnonymousPipeMessage(rootPipeHandleString =>
                 {
                     Process root = CreateProcess(
                         rhs =>
                         {
                             (Process Value, string Message) child1Result =
-                                ListenForAnonymousPipeMessage(
-                                    child1PipeHandleString =>
-                                    {
-                                        Process child1 = CreateProcess(
-                                            c1hs =>
-                                            {
-                                                Process child2 = CreateProcess(() => WaitForever());
-                                                child2.Start();
+                                ListenForAnonymousPipeMessage(child1PipeHandleString =>
+                                {
+                                    Process child1 = CreateProcess(
+                                        c1hs =>
+                                        {
+                                            Process child2 = CreateProcess(() => WaitForever());
+                                            child2.Start();
 
-                                                SendMessage(child2.Id.ToString(), c1hs);
+                                            SendMessage(child2.Id.ToString(), c1hs);
 
-                                                return WaitForever();
-                                            },
-                                            child1PipeHandleString,
-                                            autoDispose: false
-                                        );
+                                            return WaitForever();
+                                        },
+                                        child1PipeHandleString,
+                                        autoDispose: false
+                                    );
 
-                                        child1.Start();
+                                    child1.Start();
 
-                                        return child1;
-                                    }
-                                );
+                                    return child1;
+                                });
 
                             var child1ProcessId = child1Result.Value.Id;
                             var child2ProcessId = child1Result.Message;
@@ -2955,8 +2938,7 @@ namespace System.Diagnostics.Tests
                     root.Start();
 
                     return root;
-                }
-            );
+                });
 
             IEnumerable<Process> childProcesses = rootResult.Message
                 .Split(';')

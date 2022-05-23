@@ -282,17 +282,13 @@ namespace Microsoft.EntityFrameworkCore
                             .HasForeignKey(x => x.AuthorId)
                 );
 
-                modelBuilder.Entity<Answer>(
-                    b =>
-                    {
-                        b.HasOne(x => x.Author)
-                            .WithMany(x => x.Answers)
-                            .HasForeignKey(x => x.AuthorId);
-                        b.HasOne(x => x.Question)
-                            .WithMany(x => x.Answers)
-                            .HasForeignKey(x => x.AuthorId);
-                    }
-                );
+                modelBuilder.Entity<Answer>(b =>
+                {
+                    b.HasOne(x => x.Author).WithMany(x => x.Answers).HasForeignKey(x => x.AuthorId);
+                    b.HasOne(x => x.Question)
+                        .WithMany(x => x.Answers)
+                        .HasForeignKey(x => x.AuthorId);
+                });
             }
         }
 
@@ -1038,27 +1034,23 @@ namespace Microsoft.EntityFrameworkCore
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<TestClass>(
-                    x =>
-                    {
-                        x.Property<string>("AssemblyName");
-                        x.HasKey("AssemblyName", nameof(TestClass.Name));
-                        x.HasOne(c => c.Assembly)
-                            .WithMany(a => a.Classes)
-                            .HasForeignKey("AssemblyName");
-                    }
-                );
+                modelBuilder.Entity<TestClass>(x =>
+                {
+                    x.Property<string>("AssemblyName");
+                    x.HasKey("AssemblyName", nameof(TestClass.Name));
+                    x.HasOne(c => c.Assembly)
+                        .WithMany(a => a.Classes)
+                        .HasForeignKey("AssemblyName");
+                });
 
-                modelBuilder.Entity<Test>(
-                    x =>
-                    {
-                        x.Property<string>("AssemblyName");
-                        x.HasOne(t => t.Class)
-                            .WithMany(c => c.Tests)
-                            .HasForeignKey("AssemblyName", "ClassName");
-                        x.HasKey("AssemblyName", "ClassName", nameof(Test.Name));
-                    }
-                );
+                modelBuilder.Entity<Test>(x =>
+                {
+                    x.Property<string>("AssemblyName");
+                    x.HasOne(t => t.Class)
+                        .WithMany(c => c.Tests)
+                        .HasForeignKey("AssemblyName", "ClassName");
+                    x.HasKey("AssemblyName", "ClassName", nameof(Test.Name));
+                });
             }
         }
     }

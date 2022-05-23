@@ -25,13 +25,11 @@ namespace System.Web.Http.Cors.Tracing
                             It.IsAny<CorsPolicy>()
                         )
                 )
-                .Returns(
-                    () =>
-                    {
-                        innerIsCalled = true;
-                        return new CorsResult();
-                    }
-                );
+                .Returns(() =>
+                {
+                    innerIsCalled = true;
+                    return new CorsResult();
+                });
             CorsEngineTracer tracer = new CorsEngineTracer(
                 corsEngineMock.Object,
                 traceWriterMock.Object

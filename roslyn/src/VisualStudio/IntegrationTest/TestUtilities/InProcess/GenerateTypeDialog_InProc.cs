@@ -111,23 +111,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .AccessListComboBox.SimulateSelectItemAsync(
-                                    JoinableTaskFactory,
-                                    accessibility
-                                )
-                        );
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .AccessListComboBox.SimulateSelectItemAsync(
+                                JoinableTaskFactory,
+                                accessibility
+                            )
+                    );
+                });
             }
         }
 
@@ -139,20 +137,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .KindListComboBox.SimulateSelectItemAsync(JoinableTaskFactory, kind)
-                        );
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .KindListComboBox.SimulateSelectItemAsync(JoinableTaskFactory, kind)
+                    );
+                });
             }
         }
 
@@ -164,23 +160,21 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .ProjectListComboBox.SimulateSelectItemAsync(
-                                    JoinableTaskFactory,
-                                    projectName
-                                )
-                        );
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .ProjectListComboBox.SimulateSelectItemAsync(
+                                JoinableTaskFactory,
+                                projectName
+                            )
+                    );
+                });
             }
         }
 
@@ -192,29 +186,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .CreateNewFileRadioButton.SimulateClickAsync(JoinableTaskFactory)
-                        );
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .CreateNewFileComboBox.SimulateSelectItemAsync(
-                                    JoinableTaskFactory,
-                                    newFileName,
-                                    mustExist: false
-                                )
-                        );
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .CreateNewFileRadioButton.SimulateClickAsync(JoinableTaskFactory)
+                    );
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .CreateNewFileComboBox.SimulateSelectItemAsync(
+                                JoinableTaskFactory,
+                                newFileName,
+                                mustExist: false
+                            )
+                    );
+                });
             }
         }
 
@@ -226,31 +218,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .AddToExistingFileRadioButton.SimulateClickAsync(
-                                    JoinableTaskFactory
-                                )
-                        );
-                        Contract.ThrowIfFalse(
-                            await dialog
-                                .GetTestAccessor()
-                                .AddToExistingFileComboBox.SimulateSelectItemAsync(
-                                    JoinableTaskFactory,
-                                    existingFileName,
-                                    mustExist: false
-                                )
-                        );
-                    }
-                );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .AddToExistingFileRadioButton.SimulateClickAsync(JoinableTaskFactory)
+                    );
+                    Contract.ThrowIfFalse(
+                        await dialog
+                            .GetTestAccessor()
+                            .AddToExistingFileComboBox.SimulateSelectItemAsync(
+                                JoinableTaskFactory,
+                                existingFileName,
+                                mustExist: false
+                            )
+                    );
+                });
             }
         }
 
@@ -262,20 +250,18 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                return JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
+                return JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        return dialog
-                            .GetTestAccessor()
-                            .CreateNewFileComboBox.Items.Cast<string>()
-                            .ToArray();
-                    }
-                );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    return dialog
+                        .GetTestAccessor()
+                        .CreateNewFileComboBox.Items.Cast<string>()
+                        .ToArray();
+                });
             }
         }
 

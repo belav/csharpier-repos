@@ -263,24 +263,18 @@ namespace System.IO.Tests
 
         private static void ValidateDisposedExceptions(StringWriter sw)
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    sw.Write('a');
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    sw.Write(new char[10], 0, 1);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    sw.Write("abc");
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sw.Write('a');
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sw.Write(new char[10], 0, 1);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sw.Write("abc");
+            });
         }
 
         [Fact]

@@ -29,13 +29,11 @@ public class ListenOptionsTests
             ApplicationServices = serviceProvider
         };
         var middlewareRan = false;
-        localhostListenOptions.Use(
-            next =>
-            {
-                middlewareRan = true;
-                return context => Task.CompletedTask;
-            }
-        );
+        localhostListenOptions.Use(next =>
+        {
+            middlewareRan = true;
+            return context => Task.CompletedTask;
+        });
 
         var clone = localhostListenOptions.Clone(IPAddress.IPv6Loopback);
         var app = clone.Build();

@@ -14,15 +14,13 @@
         {
             Database.SetInitializer(new Initializer());
 
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<TrainingCourse, TrainingCourseDto>()
-                        .Include<TrainingCourse, ParentTrainingCourseDto>();
-                    cfg.CreateMap<TrainingCourse, ParentTrainingCourseDto>();
-                    cfg.CreateMap<TrainingContent, TrainingContentDto>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TrainingCourse, TrainingCourseDto>()
+                    .Include<TrainingCourse, ParentTrainingCourseDto>();
+                cfg.CreateMap<TrainingCourse, ParentTrainingCourseDto>();
+                cfg.CreateMap<TrainingContent, TrainingContentDto>();
+            });
             config.AssertConfigurationIsValid();
 
             var context = new ClientContext();

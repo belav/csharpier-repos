@@ -130,12 +130,10 @@ namespace System.IO.Tests
         [Trait(XunitConstants.Category, XunitConstants.RequiresElevation)]
         public void Unix_NonExistentPath_ReadOnlyVolume()
         {
-            ReadOnly_FileSystemHelper(
-                readOnlyDirectory =>
-                {
-                    Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"));
-                }
-            );
+            ReadOnly_FileSystemHelper(readOnlyDirectory =>
+            {
+                Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"));
+            });
         }
 
         [ConditionalFact(nameof(IsBindMountSupported))]

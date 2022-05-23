@@ -12,12 +12,10 @@ internal class ClearCommand : ICommand
         command.Description = "Deletes all the application secrets";
         command.HelpOption();
 
-        command.OnExecute(
-            () =>
-            {
-                options.Command = new ClearCommand();
-            }
-        );
+        command.OnExecute(() =>
+        {
+            options.Command = new ClearCommand();
+        });
     }
 
     public void Execute(CommandContext context)

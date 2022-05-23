@@ -41,13 +41,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address.Zip", "12345");
-                UpdateRequest(request, data, "Address.File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address.Zip", "12345");
+            UpdateRequest(request, data, "Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -90,12 +88,10 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "Address.File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -143,12 +139,10 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "Parameter1.Address.File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "Parameter1.Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -206,13 +200,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Person.Address.Zip", "98056");
-                UpdateRequest(request, data, "Person.Address.File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Person.Address.Zip", "98056");
+            UpdateRequest(request, data, "Person.Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -298,13 +290,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
-                UpdateRequest(request, data, "fleet.Garage.Vehicles[0].Spec");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
+            UpdateRequest(request, data, "fleet.Garage.Vehicles[0].Spec");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -365,13 +355,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
-                UpdateRequest(request, data, "fleet.Garage.Vehicles[0].BackupVehicle.Spec");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("fleet.Garage.Name", "WestEnd");
+            UpdateRequest(request, data, "fleet.Garage.Vehicles[0].BackupVehicle.Spec");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -433,13 +421,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("GroupName", "TestGroup");
-                UpdateRequest(request, data, "Person.Address.File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("GroupName", "TestGroup");
+            UpdateRequest(request, data, "Person.Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -669,12 +655,10 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "CustomParameter");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "CustomParameter");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -752,13 +736,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("p.Name", "Accord");
-                UpdateRequest(request, data, "p.Specs");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("p.Name", "Accord");
+            UpdateRequest(request, data, "p.Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -812,14 +794,12 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("house.Garage.Cars[0].Name", "Accord");
-                UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
-                AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("house.Garage.Cars[0].Name", "Accord");
+            UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
+            AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -880,13 +860,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
-                AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
+            AddFormFile(request, data + 2, "house.Garage.Cars[1].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -943,12 +921,10 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "house.Garage.Cars[800].Specs");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "house.Garage.Cars[800].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -983,13 +959,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
-                AddFormFile(request, data + 2, "house.Garage.Cars[0].Specs");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "house.Garage.Cars[0].Specs");
+            AddFormFile(request, data + 2, "house.Garage.Cars[0].Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1046,13 +1020,11 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("p.Name", "Accord");
-                UpdateRequest(request, data, "p.Specs");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("p.Name", "Accord");
+            UpdateRequest(request, data, "p.Specs");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1101,14 +1073,12 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "FormFiles[0]");
-                AddFormFile(request, data + 2, "FormFiles[1]");
-                AddFormFile(request, data + 3, "FormFiles[1]");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "FormFiles[0]");
+            AddFormFile(request, data + 2, "FormFiles[1]");
+            AddFormFile(request, data + 3, "FormFiles[1]");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1153,14 +1123,12 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "FormFiles[0][0]");
-                AddFormFile(request, data + 2, "FormFiles[1][0]");
-                AddFormFile(request, data + 3, "FormFiles[1][0]");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "FormFiles[0][0]");
+            AddFormFile(request, data + 2, "FormFiles[1][0]");
+            AddFormFile(request, data + 3, "FormFiles[1][0]");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1199,14 +1167,12 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data + 1, "p.Level1.Container.FormFiles[0]");
-                AddFormFile(request, data + 2, "p.Level1.Container.FormFiles[1]");
-                AddFormFile(request, data + 3, "p.Level1.Container.FormFiles[1]");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data + 1, "p.Level1.Container.FormFiles[0]");
+            AddFormFile(request, data + 2, "p.Level1.Container.FormFiles[1]");
+            AddFormFile(request, data + 3, "p.Level1.Container.FormFiles[1]");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -1261,21 +1227,19 @@ public class FormFileModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(
-                    new Dictionary<string, string>
-                    {
-                        { "p.Dictionary[0].Key", "key0" },
-                        { "p.Dictionary[1].Key", "key1" },
-                        { "p.Dictionary[4000].Key", "key1" },
-                    }
-                );
-                UpdateRequest(request, data + 1, "p.Dictionary[0].Value");
-                AddFormFile(request, data + 2, "p.Dictionary[1].Value");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(
+                new Dictionary<string, string>
+                {
+                    { "p.Dictionary[0].Key", "key0" },
+                    { "p.Dictionary[1].Key", "key1" },
+                    { "p.Dictionary[4000].Key", "key1" },
+                }
+            );
+            UpdateRequest(request, data + 1, "p.Dictionary[0].Value");
+            AddFormFile(request, data + 2, "p.Dictionary[1].Value");
+        });
 
         var modelState = testContext.ModelState;
 

@@ -292,75 +292,71 @@ WHERE ((((((((([d].[SmallDateTime] IN ('1970-09-03T12:00:00', '1971-09-03T12:00:
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    c =>
-                    {
-                        c.Property(c => c.CustomerID).ValueGeneratedNever();
-                        c.Property(c => c.CustomerName).HasMaxLength(120).IsUnicode(false);
-                        c.HasData(
-                            new Customer
-                            {
-                                CustomerID = 1,
-                                CustomerName = "Sam Tippet",
-                                PostcodeID = 5
-                            },
-                            new Customer
-                            {
-                                CustomerID = 2,
-                                CustomerName = "William Greig",
-                                PostcodeID = 2
-                            },
-                            new Customer
-                            {
-                                CustomerID = 3,
-                                CustomerName = "Steve Jones",
-                                PostcodeID = 3
-                            },
-                            new Customer { CustomerID = 4, CustomerName = "Jim Warren" },
-                            new Customer
-                            {
-                                CustomerID = 5,
-                                CustomerName = "Andrew Smith",
-                                PostcodeID = 5
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Customer>(c =>
+                {
+                    c.Property(c => c.CustomerID).ValueGeneratedNever();
+                    c.Property(c => c.CustomerName).HasMaxLength(120).IsUnicode(false);
+                    c.HasData(
+                        new Customer
+                        {
+                            CustomerID = 1,
+                            CustomerName = "Sam Tippet",
+                            PostcodeID = 5
+                        },
+                        new Customer
+                        {
+                            CustomerID = 2,
+                            CustomerName = "William Greig",
+                            PostcodeID = 2
+                        },
+                        new Customer
+                        {
+                            CustomerID = 3,
+                            CustomerName = "Steve Jones",
+                            PostcodeID = 3
+                        },
+                        new Customer { CustomerID = 4, CustomerName = "Jim Warren" },
+                        new Customer
+                        {
+                            CustomerID = 5,
+                            CustomerName = "Andrew Smith",
+                            PostcodeID = 5
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<Postcode>(
-                    p =>
-                    {
-                        p.Property(c => c.PostcodeID).ValueGeneratedNever();
-                        p.Property(c => c.PostcodeValue).HasMaxLength(100).IsUnicode(false);
-                        p.Property(c => c.TownName).HasMaxLength(255).IsUnicode(false);
-                        p.HasData(
-                            new Postcode
-                            {
-                                PostcodeID = 2,
-                                PostcodeValue = "1000",
-                                TownName = "Town 1"
-                            },
-                            new Postcode
-                            {
-                                PostcodeID = 3,
-                                PostcodeValue = "2000",
-                                TownName = "Town 2"
-                            },
-                            new Postcode
-                            {
-                                PostcodeID = 4,
-                                PostcodeValue = "3000",
-                                TownName = "Town 3"
-                            },
-                            new Postcode
-                            {
-                                PostcodeID = 5,
-                                PostcodeValue = "4000",
-                                TownName = "Town 4"
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Postcode>(p =>
+                {
+                    p.Property(c => c.PostcodeID).ValueGeneratedNever();
+                    p.Property(c => c.PostcodeValue).HasMaxLength(100).IsUnicode(false);
+                    p.Property(c => c.TownName).HasMaxLength(255).IsUnicode(false);
+                    p.HasData(
+                        new Postcode
+                        {
+                            PostcodeID = 2,
+                            PostcodeValue = "1000",
+                            TownName = "Town 1"
+                        },
+                        new Postcode
+                        {
+                            PostcodeID = 3,
+                            PostcodeValue = "2000",
+                            TownName = "Town 2"
+                        },
+                        new Postcode
+                        {
+                            PostcodeID = 4,
+                            PostcodeValue = "3000",
+                            TownName = "Town 3"
+                        },
+                        new Postcode
+                        {
+                            PostcodeID = 5,
+                            PostcodeValue = "4000",
+                            TownName = "Town 4"
+                        }
+                    );
+                });
             }
 
             public DbSet<Customer> Customers { get; set; }
@@ -643,18 +639,16 @@ LEFT JOIN [Customer] AS [c] ON ([o].[CustomerFirstName] = [c].[FirstName]) AND (
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    m =>
-                    {
-                        m.ToTable("Customer");
-                        m.HasKey(c => new { c.FirstName, c.LastName });
-                        m.HasMany(c => c.Orders).WithOne(o => o.Customer);
-                        m.HasData(
-                            new Customer { FirstName = "Customer", LastName = "One" },
-                            new Customer { FirstName = "Customer", LastName = "Two" }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Customer>(m =>
+                {
+                    m.ToTable("Customer");
+                    m.HasKey(c => new { c.FirstName, c.LastName });
+                    m.HasMany(c => c.Orders).WithOne(o => o.Customer);
+                    m.HasData(
+                        new Customer { FirstName = "Customer", LastName = "One" },
+                        new Customer { FirstName = "Customer", LastName = "Two" }
+                    );
+                });
 
                 modelBuilder
                     .Entity<Order>()
@@ -788,23 +782,19 @@ LEFT JOIN [Customer] AS [c] ON ([o].[CustomerFirstName] = [c].[FirstName]) AND (
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Targaryen>(
-                    m =>
-                    {
-                        m.ToTable("Targaryen");
-                        m.HasKey(t => t.Id);
-                        m.HasMany(t => t.Dragons)
-                            .WithOne(d => d.Mother)
-                            .HasForeignKey(d => d.MotherId);
-                        m.HasOne(t => t.Details)
-                            .WithOne(d => d.Targaryen)
-                            .HasForeignKey<TargaryenDetails>(d => d.TargaryenId);
-                        m.HasData(
-                            new Targaryen { Id = 1, Name = "Aerys II" },
-                            new Targaryen { Id = 2, Name = "Daenerys" }
-                        );
-                    }
-                );
+                modelBuilder.Entity<Targaryen>(m =>
+                {
+                    m.ToTable("Targaryen");
+                    m.HasKey(t => t.Id);
+                    m.HasMany(t => t.Dragons).WithOne(d => d.Mother).HasForeignKey(d => d.MotherId);
+                    m.HasOne(t => t.Details)
+                        .WithOne(d => d.Targaryen)
+                        .HasForeignKey<TargaryenDetails>(d => d.TargaryenId);
+                    m.HasData(
+                        new Targaryen { Id = 1, Name = "Aerys II" },
+                        new Targaryen { Id = 2, Name = "Daenerys" }
+                    );
+                });
 
                 modelBuilder
                     .Entity<TargaryenDetails>()
@@ -958,17 +948,15 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer3758>(
-                    b =>
-                    {
-                        b.ToTable("Customer3758");
+                modelBuilder.Entity<Customer3758>(b =>
+                {
+                    b.ToTable("Customer3758");
 
-                        b.HasMany(e => e.Orders1).WithOne().HasForeignKey("CustomerId1");
-                        b.HasMany(e => e.Orders2).WithOne().HasForeignKey("CustomerId2");
-                        b.HasMany(e => e.Orders3).WithOne().HasForeignKey("CustomerId3");
-                        b.HasMany(e => e.Orders4).WithOne().HasForeignKey("CustomerId4");
-                    }
-                );
+                    b.HasMany(e => e.Orders1).WithOne().HasForeignKey("CustomerId1");
+                    b.HasMany(e => e.Orders2).WithOne().HasForeignKey("CustomerId2");
+                    b.HasMany(e => e.Orders3).WithOne().HasForeignKey("CustomerId3");
+                    b.HasMany(e => e.Orders4).WithOne().HasForeignKey("CustomerId4");
+                });
 
                 modelBuilder.Entity<Order3758>().ToTable("Order3758");
             }
@@ -1638,54 +1626,48 @@ Queen of the Andals and the Rhoynar and the First Men, Khaleesi of the Great Gra
             await Task.WhenAll(
                 Enumerable
                     .Range(0, 10)
-                    .Select(
-                        async i =>
-                        {
-                            using var ctx = contextFactory.CreateContext();
-                            var result = await ctx.Posts
-                                .Where(x => x.Blog.Id > 1)
-                                .Include(x => x.Blog)
-                                .ToListAsync();
+                    .Select(async i =>
+                    {
+                        using var ctx = contextFactory.CreateContext();
+                        var result = await ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .ToListAsync();
 
-                            Assert.Equal(198, result.Count);
-                        }
-                    )
+                        Assert.Equal(198, result.Count);
+                    })
             );
 
             await Task.WhenAll(
                 Enumerable
                     .Range(0, 10)
-                    .Select(
-                        async i =>
-                        {
-                            using var ctx = contextFactory.CreateContext();
-                            var result = await ctx.Posts
-                                .Where(x => x.Blog.Id > 1)
-                                .Include(x => x.Blog)
-                                .Include(x => x.Comments)
-                                .ToListAsync();
+                    .Select(async i =>
+                    {
+                        using var ctx = contextFactory.CreateContext();
+                        var result = await ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .Include(x => x.Comments)
+                            .ToListAsync();
 
-                            Assert.Equal(198, result.Count);
-                        }
-                    )
+                        Assert.Equal(198, result.Count);
+                    })
             );
 
             await Task.WhenAll(
                 Enumerable
                     .Range(0, 10)
-                    .Select(
-                        async i =>
-                        {
-                            using var ctx = contextFactory.CreateContext();
-                            var result = await ctx.Posts
-                                .Where(x => x.Blog.Id > 1)
-                                .Include(x => x.Blog)
-                                .ThenInclude(b => b.Author)
-                                .ToListAsync();
+                    .Select(async i =>
+                    {
+                        using var ctx = contextFactory.CreateContext();
+                        var result = await ctx.Posts
+                            .Where(x => x.Blog.Id > 1)
+                            .Include(x => x.Blog)
+                            .ThenInclude(b => b.Author)
+                            .ToListAsync();
 
-                            Assert.Equal(198, result.Count);
-                        }
-                    )
+                        Assert.Equal(198, result.Count);
+                    })
             );
         }
 
@@ -2645,20 +2627,18 @@ BEGIN
                 modelBuilder.Entity<PersonKid9038>().HasBaseType<Person9038>();
                 modelBuilder.Entity<PersonFamily9038>();
 
-                modelBuilder.Entity<PersonKid9038>(
-                    entity =>
-                    {
-                        entity.Property("Discriminator").HasMaxLength(63);
-                        entity.HasIndex("Discriminator");
+                modelBuilder.Entity<PersonKid9038>(entity =>
+                {
+                    entity.Property("Discriminator").HasMaxLength(63);
+                    entity.HasIndex("Discriminator");
 
-                        entity
-                            .HasOne(m => m.Teacher)
-                            .WithMany(m => m.Students)
-                            .HasForeignKey(m => m.TeacherId)
-                            .HasPrincipalKey(m => m.Id)
-                            .OnDelete(DeleteBehavior.Restrict);
-                    }
-                );
+                    entity
+                        .HasOne(m => m.Teacher)
+                        .WithMany(m => m.Students)
+                        .HasForeignKey(m => m.TeacherId)
+                        .HasPrincipalKey(m => m.Id)
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
             }
 
             public void Seed()
@@ -3377,14 +3357,12 @@ WHERE ([t].[Name] <> N'Bar') OR [t].[Name] IS NULL"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Blog11923>(
-                    b =>
-                    {
-                        b.HasMany(e => e.Posts1).WithOne().HasForeignKey("BlogId1");
-                        b.HasMany(e => e.Posts2).WithOne().HasForeignKey("BlogId2");
-                        b.HasMany(e => e.Posts3).WithOne().HasForeignKey("BlogId3");
-                    }
-                );
+                modelBuilder.Entity<Blog11923>(b =>
+                {
+                    b.HasMany(e => e.Posts1).WithOne().HasForeignKey("BlogId1");
+                    b.HasMany(e => e.Posts2).WithOne().HasForeignKey("BlogId2");
+                    b.HasMany(e => e.Posts3).WithOne().HasForeignKey("BlogId3");
+                });
 
                 modelBuilder.Entity<Post11923>();
             }
@@ -3580,14 +3558,12 @@ FROM [Prices] AS [p]"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Price11885>(
-                    b =>
-                    {
-                        b.Property(e => e.Price).HasColumnType("DECIMAL(18, 8)");
-                        b.Property(e => e.DecimalColumn).HasColumnType("DECIMAL(18, 2)");
-                        b.Property(e => e.NullableDecimalColumn).HasColumnType("DECIMAL(18, 2)");
-                    }
-                );
+                modelBuilder.Entity<Price11885>(b =>
+                {
+                    b.Property(e => e.Price).HasColumnType("DECIMAL(18, 8)");
+                    b.Property(e => e.DecimalColumn).HasColumnType("DECIMAL(18, 2)");
+                    b.Property(e => e.NullableDecimalColumn).HasColumnType("DECIMAL(18, 2)");
+                });
             }
 
             public void Seed()
@@ -5517,15 +5493,13 @@ WHERE [t].[Nombre] LIKE '%lla%'"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<TipoServicio9582>(
-                    builder =>
-                    {
-                        builder.HasKey(ts => ts.Id);
+                modelBuilder.Entity<TipoServicio9582>(builder =>
+                {
+                    builder.HasKey(ts => ts.Id);
 
-                        builder.Property(ts => ts.Id).IsRequired();
-                        builder.Property(ts => ts.Nombre).IsRequired().HasMaxLength(20);
-                    }
-                );
+                    builder.Property(ts => ts.Id).IsRequired();
+                    builder.Property(ts => ts.Nombre).IsRequired().HasMaxLength(20);
+                });
 
                 foreach (
                     var property in modelBuilder.Model
@@ -8133,22 +8107,20 @@ FROM [Entity21807] AS [e]"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Entity21807>(
-                    builder =>
-                    {
-                        builder.HasKey(x => x.Id);
+                modelBuilder.Entity<Entity21807>(builder =>
+                {
+                    builder.HasKey(x => x.Id);
 
-                        builder.OwnsOne(
-                            x => x.Contact,
-                            contact =>
-                            {
-                                contact.OwnsOne(c => c.Address);
-                            }
-                        );
+                    builder.OwnsOne(
+                        x => x.Contact,
+                        contact =>
+                        {
+                            contact.OwnsOne(c => c.Address);
+                        }
+                    );
 
-                        builder.Navigation(x => x.Contact).IsRequired();
-                    }
-                );
+                    builder.Navigation(x => x.Contact).IsRequired();
+                });
             }
 
             public void Seed()
@@ -8226,49 +8198,47 @@ ORDER BY [u].[Id] DESC"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<User22054>(
-                    builder =>
-                    {
-                        builder.HasKey(x => x.Id);
+                modelBuilder.Entity<User22054>(builder =>
+                {
+                    builder.HasKey(x => x.Id);
 
-                        builder.OwnsOne(
-                            x => x.Contact,
-                            contact =>
-                            {
-                                contact
-                                    .Property(e => e.SharedProperty)
-                                    .IsRequired()
-                                    .HasColumnName("SharedProperty");
+                    builder.OwnsOne(
+                        x => x.Contact,
+                        contact =>
+                        {
+                            contact
+                                .Property(e => e.SharedProperty)
+                                .IsRequired()
+                                .HasColumnName("SharedProperty");
 
-                                contact.OwnsOne(
-                                    c => c.Address,
-                                    address =>
-                                    {
-                                        address
-                                            .Property<string>("SharedProperty")
-                                            .IsRequired()
-                                            .HasColumnName("SharedProperty");
-                                    }
-                                );
-                            }
-                        );
+                            contact.OwnsOne(
+                                c => c.Address,
+                                address =>
+                                {
+                                    address
+                                        .Property<string>("SharedProperty")
+                                        .IsRequired()
+                                        .HasColumnName("SharedProperty");
+                                }
+                            );
+                        }
+                    );
 
-                        builder
-                            .OwnsOne(e => e.Data)
-                            .Property<byte[]>("RowVersion")
-                            .IsRowVersion()
-                            .IsRequired()
-                            .HasColumnType("TIMESTAMP")
-                            .HasColumnName("RowVersion");
+                    builder
+                        .OwnsOne(e => e.Data)
+                        .Property<byte[]>("RowVersion")
+                        .IsRowVersion()
+                        .IsRequired()
+                        .HasColumnType("TIMESTAMP")
+                        .HasColumnName("RowVersion");
 
-                        builder
-                            .Property(x => x.RowVersion)
-                            .HasColumnType("TIMESTAMP")
-                            .IsRowVersion()
-                            .IsRequired()
-                            .HasColumnName("RowVersion");
-                    }
-                );
+                    builder
+                        .Property(x => x.RowVersion)
+                        .HasColumnType("TIMESTAMP")
+                        .IsRowVersion()
+                        .IsRequired()
+                        .HasColumnName("RowVersion");
+                });
             }
 
             public void Seed()
@@ -8397,82 +8367,78 @@ ORDER BY [t].[Id] DESC, [t2].[Id], [t2].[Id0], [t2].[Id1]"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Aggregate14911>(
-                    builder =>
-                    {
-                        builder.ToTable("Aggregates");
-                        builder.HasKey(e => e.Id);
+                modelBuilder.Entity<Aggregate14911>(builder =>
+                {
+                    builder.ToTable("Aggregates");
+                    builder.HasKey(e => e.Id);
 
-                        builder.OwnsOne(
-                            e => e.FirstValueObject,
-                            dr =>
-                            {
-                                dr.OwnsMany(
-                                    d => d.SecondValueObjects,
-                                    c =>
-                                    {
-                                        c.ToTable("SecondValueObjects");
-                                        c.Property<int>("Id").IsRequired();
-                                        c.HasKey("Id");
-                                        c.OwnsOne(
-                                            b => b.FourthValueObject,
-                                            b =>
-                                            {
-                                                b.OwnsMany(
-                                                    t => t.FifthValueObjects,
-                                                    sp =>
-                                                    {
-                                                        sp.ToTable("FourthFifthValueObjects");
-                                                        sp.Property<int>("Id").IsRequired();
-                                                        sp.HasKey("Id");
-                                                        sp.Property(e => e.AnyValue).IsRequired();
-                                                        sp.WithOwner()
-                                                            .HasForeignKey("SecondValueObjectId");
-                                                    }
-                                                );
-                                            }
-                                        );
-                                        c.OwnsMany(
-                                            b => b.ThirdValueObjects,
-                                            b =>
-                                            {
-                                                b.ToTable("ThirdValueObjects");
-                                                b.Property<int>("Id").IsRequired();
-                                                b.HasKey("Id");
+                    builder.OwnsOne(
+                        e => e.FirstValueObject,
+                        dr =>
+                        {
+                            dr.OwnsMany(
+                                d => d.SecondValueObjects,
+                                c =>
+                                {
+                                    c.ToTable("SecondValueObjects");
+                                    c.Property<int>("Id").IsRequired();
+                                    c.HasKey("Id");
+                                    c.OwnsOne(
+                                        b => b.FourthValueObject,
+                                        b =>
+                                        {
+                                            b.OwnsMany(
+                                                t => t.FifthValueObjects,
+                                                sp =>
+                                                {
+                                                    sp.ToTable("FourthFifthValueObjects");
+                                                    sp.Property<int>("Id").IsRequired();
+                                                    sp.HasKey("Id");
+                                                    sp.Property(e => e.AnyValue).IsRequired();
+                                                    sp.WithOwner()
+                                                        .HasForeignKey("SecondValueObjectId");
+                                                }
+                                            );
+                                        }
+                                    );
+                                    c.OwnsMany(
+                                        b => b.ThirdValueObjects,
+                                        b =>
+                                        {
+                                            b.ToTable("ThirdValueObjects");
+                                            b.Property<int>("Id").IsRequired();
+                                            b.HasKey("Id");
 
-                                                b.OwnsOne(
-                                                    d => d.FourthValueObject,
-                                                    dpd =>
-                                                    {
-                                                        dpd.OwnsMany(
-                                                            d => d.FifthValueObjects,
-                                                            sp =>
-                                                            {
-                                                                sp.ToTable(
-                                                                    "ThirdFifthValueObjects"
+                                            b.OwnsOne(
+                                                d => d.FourthValueObject,
+                                                dpd =>
+                                                {
+                                                    dpd.OwnsMany(
+                                                        d => d.FifthValueObjects,
+                                                        sp =>
+                                                        {
+                                                            sp.ToTable("ThirdFifthValueObjects");
+                                                            sp.Property<int>("Id").IsRequired();
+                                                            sp.HasKey("Id");
+                                                            sp.Property(e => e.AnyValue)
+                                                                .IsRequired();
+                                                            sp.WithOwner()
+                                                                .HasForeignKey(
+                                                                    "ThirdValueObjectId"
                                                                 );
-                                                                sp.Property<int>("Id").IsRequired();
-                                                                sp.HasKey("Id");
-                                                                sp.Property(e => e.AnyValue)
-                                                                    .IsRequired();
-                                                                sp.WithOwner()
-                                                                    .HasForeignKey(
-                                                                        "ThirdValueObjectId"
-                                                                    );
-                                                            }
-                                                        );
-                                                    }
-                                                );
-                                                b.WithOwner().HasForeignKey("SecondValueObjectId");
-                                            }
-                                        );
-                                        c.WithOwner().HasForeignKey("AggregateId");
-                                    }
-                                );
-                            }
-                        );
-                    }
-                );
+                                                        }
+                                                    );
+                                                }
+                                            );
+                                            b.WithOwner().HasForeignKey("SecondValueObjectId");
+                                        }
+                                    );
+                                    c.WithOwner().HasForeignKey("AggregateId");
+                                }
+                            );
+                        }
+                    );
+                });
             }
 
             public void Seed()
@@ -11262,13 +11228,11 @@ ORDER BY [t].[Id]"
 
         protected override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             base.AddOptions(builder)
-                .ConfigureWarnings(
-                    w =>
-                    {
-                        w.Log(SqlServerEventId.ByteIdentityColumnWarning);
-                        w.Log(SqlServerEventId.DecimalTypeKeyWarning);
-                    }
-                );
+                .ConfigureWarnings(w =>
+                {
+                    w.Log(SqlServerEventId.ByteIdentityColumnWarning);
+                    w.Log(SqlServerEventId.DecimalTypeKeyWarning);
+                });
 
         protected override TestStore CreateTestStore() =>
             SqlServerTestStore.CreateInitialized(StoreName, multipleActiveResultSets: true);

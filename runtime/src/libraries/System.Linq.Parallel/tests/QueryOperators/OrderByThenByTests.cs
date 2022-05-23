@@ -717,13 +717,11 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item.OrderBy(x => new NotComparable(x));
-            AssertThrows.Wrapped<ArgumentException>(
-                () =>
-                {
-                    foreach (int i in query)
-                        ;
-                }
-            );
+            AssertThrows.Wrapped<ArgumentException>(() =>
+            {
+                foreach (int i in query)
+                    ;
+            });
             AssertThrows.Wrapped<ArgumentException>(() => query.ToList());
         }
 
@@ -793,13 +791,11 @@ namespace System.Linq.Parallel.Tests
         {
             _ = count;
             ParallelQuery<int> query = labeled.Item.OrderByDescending(x => new NotComparable(x));
-            AssertThrows.Wrapped<ArgumentException>(
-                () =>
-                {
-                    foreach (int i in query)
-                        ;
-                }
-            );
+            AssertThrows.Wrapped<ArgumentException>(() =>
+            {
+                foreach (int i in query)
+                    ;
+            });
             AssertThrows.Wrapped<ArgumentException>(() => query.ToList());
         }
 
@@ -924,19 +920,15 @@ namespace System.Linq.Parallel.Tests
             _ = count;
             ParallelQuery<int> query = labeled.Item
                 .WithDegreeOfParallelism(degree)
-                .OrderBy<int, int>(
-                    x =>
-                    {
-                        throw new DeliberateTestException();
-                    }
-                );
-
-            AggregateException ae = Assert.Throws<AggregateException>(
-                () =>
+                .OrderBy<int, int>(x =>
                 {
-                    foreach (int i in query) { }
-                }
-            );
+                    throw new DeliberateTestException();
+                });
+
+            AggregateException ae = Assert.Throws<AggregateException>(() =>
+            {
+                foreach (int i in query) { }
+            });
             Assert.All(ae.InnerExceptions, e => Assert.IsType<DeliberateTestException>(e));
         }
 
@@ -960,21 +952,17 @@ namespace System.Linq.Parallel.Tests
 
             ParallelQuery<int> query = labeled.Item
                 .WithDegreeOfParallelism(degree)
-                .OrderBy(
-                    x =>
-                    {
-                        if (Interlocked.Decrement(ref countdown) == 0)
-                            throw new DeliberateTestException();
-                        return x;
-                    }
-                );
-
-            AggregateException ae = Assert.Throws<AggregateException>(
-                () =>
+                .OrderBy(x =>
                 {
-                    foreach (int i in query) { }
-                }
-            );
+                    if (Interlocked.Decrement(ref countdown) == 0)
+                        throw new DeliberateTestException();
+                    return x;
+                });
+
+            AggregateException ae = Assert.Throws<AggregateException>(() =>
+            {
+                foreach (int i in query) { }
+            });
             Assert.Single(ae.InnerExceptions);
             Assert.All(ae.InnerExceptions, e => Assert.IsType<DeliberateTestException>(e));
         }
@@ -2025,13 +2013,11 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item
                 .OrderBy(x => 0)
                 .ThenBy(x => new NotComparable(x));
-            AssertThrows.Wrapped<ArgumentException>(
-                () =>
-                {
-                    foreach (int i in query)
-                        ;
-                }
-            );
+            AssertThrows.Wrapped<ArgumentException>(() =>
+            {
+                foreach (int i in query)
+                    ;
+            });
             AssertThrows.Wrapped<ArgumentException>(() => query.ToList());
         }
 
@@ -2105,13 +2091,11 @@ namespace System.Linq.Parallel.Tests
             ParallelQuery<int> query = labeled.Item
                 .OrderBy(x => 0)
                 .ThenByDescending(x => new NotComparable(x));
-            AssertThrows.Wrapped<ArgumentException>(
-                () =>
-                {
-                    foreach (int i in query)
-                        ;
-                }
-            );
+            AssertThrows.Wrapped<ArgumentException>(() =>
+            {
+                foreach (int i in query)
+                    ;
+            });
             AssertThrows.Wrapped<ArgumentException>(() => query.ToList());
         }
 

@@ -216,17 +216,15 @@ namespace System.Threading.Tasks.Tests
             Assert.Equal("4567", s);
 
             // Test Exception handling from beginMethod
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    t = Task.Factory.FromAsync(
-                        fac.StartWrite,
-                        fac.EndWrite,
-                        (string)null, // will cause null.Length to be dereferenced
-                        null
-                    );
-                }
-            );
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                t = Task.Factory.FromAsync(
+                    fac.StartWrite,
+                    fac.EndWrite,
+                    (string)null, // will cause null.Length to be dereferenced
+                    null
+                );
+            });
 
             // Test Exception handling from asynchronous logic
             f = Task<string>.Factory.FromAsync(
@@ -240,29 +238,25 @@ namespace System.Threading.Tasks.Tests
 
             Assert.Throws<AggregateException>(() => check = f.Result);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Task.Factory.FromAsync(
-                        fac.StartWrite,
-                        fac.EndWrite,
-                        null,
-                        TaskCreationOptions.LongRunning
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Task.Factory.FromAsync(
+                    fac.StartWrite,
+                    fac.EndWrite,
+                    null,
+                    TaskCreationOptions.LongRunning
+                );
+            });
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Task.Factory.FromAsync(
-                        fac.StartWrite,
-                        fac.EndWrite,
-                        null,
-                        TaskCreationOptions.PreferFairness
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Task.Factory.FromAsync(
+                    fac.StartWrite,
+                    fac.EndWrite,
+                    null,
+                    TaskCreationOptions.PreferFairness
+                );
+            });
 
             // Empty the buffer, then inject a few more characters into the buffer
             fac.ResetStateTo("0123456789");
@@ -282,12 +276,10 @@ namespace System.Threading.Tasks.Tests
                 }
             );
 
-            AggregateException ae = Assert.Throws<AggregateException>(
-                () =>
-                {
-                    asyncTask.Wait();
-                }
-            );
+            AggregateException ae = Assert.Throws<AggregateException>(() =>
+            {
+                asyncTask.Wait();
+            });
             Assert.Equal(typeof(TaskCanceledException), ae.InnerException.GetType());
             Assert.Equal(TaskStatus.Canceled, asyncTask.Status);
 
@@ -302,12 +294,10 @@ namespace System.Threading.Tasks.Tests
                 null
             );
 
-            ae = Assert.Throws<AggregateException>(
-                () =>
-                {
-                    asyncTask.Wait();
-                }
-            );
+            ae = Assert.Throws<AggregateException>(() =>
+            {
+                asyncTask.Wait();
+            });
             Assert.Equal(typeof(TaskCanceledException), ae.InnerException.GetType());
             Assert.Equal(TaskStatus.Canceled, asyncTask.Status);
 
@@ -321,12 +311,10 @@ namespace System.Threading.Tasks.Tests
                 }
             );
 
-            ae = Assert.Throws<AggregateException>(
-                () =>
-                {
-                    asyncTask.Wait();
-                }
-            );
+            ae = Assert.Throws<AggregateException>(() =>
+            {
+                asyncTask.Wait();
+            });
             Assert.Equal(typeof(TaskCanceledException), ae.InnerException.GetType());
             Assert.Equal(TaskStatus.Canceled, asyncTask.Status);
 
@@ -342,12 +330,10 @@ namespace System.Threading.Tasks.Tests
                 null
             );
 
-            ae = Assert.Throws<AggregateException>(
-                () =>
-                {
-                    asyncFuture.Wait();
-                }
-            );
+            ae = Assert.Throws<AggregateException>(() =>
+            {
+                asyncFuture.Wait();
+            });
             Assert.Equal(typeof(TaskCanceledException), ae.InnerException.GetType());
             Assert.Equal(TaskStatus.Canceled, asyncFuture.Status);
 
@@ -415,12 +401,10 @@ namespace System.Threading.Tasks.Tests
                 "RunAPMFactoryTests: Waiting on task w/ faulted FromAsync() calls.  If we hang, there is a problem"
             );
 
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    foo.Wait();
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                foo.Wait();
+            });
         }
 
         // This class is used in testing APM Factory tests.

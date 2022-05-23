@@ -48,48 +48,46 @@ namespace TaskCoverage
             for (int i = 0; i <= taskCount; i++)
             {
                 int j = i;
-                allTasks[i] = new Task(
-                    () =>
-                    {
-                        new TaskFactory(TaskScheduler.Current)
-                            .StartNew(() => { })
-                            .ContinueWith(
-                                (task, o) =>
+                allTasks[i] = new Task(() =>
+                {
+                    new TaskFactory(TaskScheduler.Current)
+                        .StartNew(() => { })
+                        .ContinueWith(
+                            (task, o) =>
+                            {
+                                int d = (int)o;
+                                Interlocked.Add(ref data, d);
+                            },
+                            j
+                        )
+                        .ContinueWith(
+                            (task, o) =>
+                            {
+                                int d = (int)o;
+                                Interlocked.Add(ref data, d);
+                                cts[d].Cancel();
+                                if (d <= taskCount)
                                 {
-                                    int d = (int)o;
-                                    Interlocked.Add(ref data, d);
-                                },
-                                j
-                            )
-                            .ContinueWith(
-                                (task, o) =>
-                                {
-                                    int d = (int)o;
-                                    Interlocked.Add(ref data, d);
-                                    cts[d].Cancel();
-                                    if (d <= taskCount)
-                                    {
-                                        throw new OperationCanceledException(cts[d].Token);
-                                    }
-                                    return "Done";
-                                },
-                                j,
-                                cts[j].Token
-                            )
-                            .ContinueWith(
-                                (task, o) =>
-                                {
-                                    int d = (int)o;
-                                    Interlocked.Add(ref data, d);
-                                },
-                                j,
-                                CancellationToken.None,
-                                TaskContinuationOptions.OnlyOnCanceled,
-                                TaskScheduler.Default
-                            )
-                            .Wait(int.MaxValue - 1, cts2.Token);
-                    }
-                );
+                                    throw new OperationCanceledException(cts[d].Token);
+                                }
+                                return "Done";
+                            },
+                            j,
+                            cts[j].Token
+                        )
+                        .ContinueWith(
+                            (task, o) =>
+                            {
+                                int d = (int)o;
+                                Interlocked.Add(ref data, d);
+                            },
+                            j,
+                            CancellationToken.None,
+                            TaskContinuationOptions.OnlyOnCanceled,
+                            TaskScheduler.Default
+                        )
+                        .Wait(int.MaxValue - 1, cts2.Token);
+                });
 
                 allTasks[i].Start(scheduler.ConcurrentScheduler);
             }
@@ -122,21 +120,17 @@ namespace TaskCoverage
             int? taskId12 = 0;
             int? taskId22 = 0;
 
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                    taskId1 = Task.CurrentId;
-                }
-            );
-            Task t2 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                    taskId2 = Task.CurrentId;
-                    cts.Cancel();
-                }
-            );
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                taskId1 = Task.CurrentId;
+            });
+            Task t2 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                taskId2 = Task.CurrentId;
+                cts.Cancel();
+            });
 
             List<Task<int?>> whenAllTaskResult = new List<Task<int?>>();
             List<Task> whenAllTask = new List<Task>();
@@ -222,46 +216,36 @@ namespace TaskCoverage
 
             CancellationTokenSource cts = new CancellationTokenSource();
 
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                }
-            );
-            Task t2 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                }
-            );
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
+            Task t2 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
 
-            Task<int?> t11 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre2.WaitOne();
-                    return Task.CurrentId;
-                }
-            );
-            Task<int?> t21 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre2.WaitOne();
-                    return Task.CurrentId;
-                }
-            );
+            Task<int?> t11 = Task.Factory.StartNew(() =>
+            {
+                mre2.WaitOne();
+                return Task.CurrentId;
+            });
+            Task<int?> t21 = Task.Factory.StartNew(() =>
+            {
+                mre2.WaitOne();
+                return Task.CurrentId;
+            });
 
             //waitAny with token and timeout
             Task[] waitAny = new Task[] { t1, t2 };
             int timeout = Task.WaitAny(waitAny, 1, cts.Token);
 
             //task whenany
-            Task.Factory.StartNew(
-                () =>
-                {
-                    Task.Delay(20);
-                    mre.Set();
-                }
-            );
+            Task.Factory.StartNew(() =>
+            {
+                Task.Delay(20);
+                mre.Set();
+            });
             List<Task> whenAnyTask = new List<Task>();
             whenAnyTask.Add(t1);
             whenAnyTask.Add(t2);
@@ -487,33 +471,25 @@ namespace TaskCoverage
             ManualResetEvent mre2 = new ManualResetEvent(false);
             ManualResetEvent mre3 = new ManualResetEvent(false);
 
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                }
-            );
-            Task<int> t11 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                    return 1;
-                }
-            );
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
+            Task<int> t11 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                return 1;
+            });
             t1.GetAwaiter()
-                .UnsafeOnCompleted(
-                    () =>
-                    {
-                        mre2.Set();
-                    }
-                );
+                .UnsafeOnCompleted(() =>
+                {
+                    mre2.Set();
+                });
             t11.GetAwaiter()
-                .UnsafeOnCompleted(
-                    () =>
-                    {
-                        mre3.Set();
-                    }
-                );
+                .UnsafeOnCompleted(() =>
+                {
+                    mre3.Set();
+                });
             mre.Set();
 
             Debug.WriteLine("Wait on the scenario to finish");
@@ -531,35 +507,27 @@ namespace TaskCoverage
             ManualResetEvent mre2 = new ManualResetEvent(false);
             ManualResetEvent mre3 = new ManualResetEvent(false);
 
-            Task t1 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                }
-            );
-            Task<int> t11 = Task.Factory.StartNew(
-                () =>
-                {
-                    mre.WaitOne();
-                    return 1;
-                }
-            );
+            Task t1 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+            });
+            Task<int> t11 = Task.Factory.StartNew(() =>
+            {
+                mre.WaitOne();
+                return 1;
+            });
             t1.ConfigureAwait(false)
                 .GetAwaiter()
-                .UnsafeOnCompleted(
-                    () =>
-                    {
-                        mre2.Set();
-                    }
-                );
+                .UnsafeOnCompleted(() =>
+                {
+                    mre2.Set();
+                });
             t11.ConfigureAwait(false)
                 .GetAwaiter()
-                .UnsafeOnCompleted(
-                    () =>
-                    {
-                        mre3.Set();
-                    }
-                );
+                .UnsafeOnCompleted(() =>
+                {
+                    mre3.Set();
+                });
             mre.Set();
 
             Debug.WriteLine("Wait on the scenario to finish");

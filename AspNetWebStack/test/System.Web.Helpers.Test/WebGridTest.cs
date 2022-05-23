@@ -1070,12 +1070,10 @@ namespace System.Web.Helpers.Test
         {
             var grid = new WebGrid(GetContext()).Bind(new[] { new { } });
             var row = grid.Rows.First();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var value = row["NotAColumn"];
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var value = row["NotAColumn"];
+            });
         }
 
         [Fact]
@@ -1083,12 +1081,10 @@ namespace System.Web.Helpers.Test
         {
             var grid = new WebGrid(GetContext()).Bind(new[] { new { P1 = 1, P2 = '2', P3 = "3" } });
             var row = grid.Rows.First();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var value = row[4];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var value = row[4];
+            });
         }
 
         [Fact]
@@ -1096,12 +1092,10 @@ namespace System.Web.Helpers.Test
         {
             var grid = new WebGrid(GetContext()).Bind(new[] { new { } });
             var row = grid.Rows.First();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var value = row[-1];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var value = row[-1];
+            });
         }
 
         [Fact]
@@ -1874,12 +1868,10 @@ namespace System.Web.Helpers.Test
                         "P3",
                         format: item =>
                         {
-                            return new HelperResult(
-                                tw =>
-                                {
-                                    tw.Write("<span>P3: " + item.P3 + "</span>");
-                                }
-                            );
+                            return new HelperResult(tw =>
+                            {
+                                tw.Write("<span>P3: " + item.P3 + "</span>");
+                            });
                         }
                     )
                 }

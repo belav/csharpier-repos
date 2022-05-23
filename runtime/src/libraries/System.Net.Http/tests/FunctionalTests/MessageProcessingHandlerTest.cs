@@ -43,12 +43,10 @@ namespace System.Net.Http.Functional.Tests
             var transport = new MockTransportHandler();
             var handler = new MockHandler(transport);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task t = handler.TestSendAsync(null, CancellationToken.None);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task t = handler.TestSendAsync(null, CancellationToken.None);
+            });
         }
 
         [Fact]
@@ -80,12 +78,10 @@ namespace System.Net.Http.Functional.Tests
         [Fact]
         public async Task SendAsync_InnerHandlerReturnsNullResponse_ThrowInvalidOperationExceptionWithoutCallingProcessRequest()
         {
-            var transport = new MockTransportHandler(
-                () =>
-                {
-                    return null;
-                }
-            );
+            var transport = new MockTransportHandler(() =>
+            {
+                return null;
+            });
             var handler = new MockHandler(transport);
 
             await Assert.ThrowsAsync<InvalidOperationException>(

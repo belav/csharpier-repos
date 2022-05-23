@@ -2728,14 +2728,12 @@ namespace Microsoft.EntityFrameworkCore
                 .GetTypeInfo()
                 .GetDeclaredMethods(nameof(ThenInclude))
                 .Where(mi => mi.GetGenericArguments().Count() == 3)
-                .Single(
-                    mi =>
-                    {
-                        var typeInfo = mi.GetParameters()[0].ParameterType.GenericTypeArguments[1];
-                        return typeInfo.IsGenericType
-                            && typeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>);
-                    }
-                );
+                .Single(mi =>
+                {
+                    var typeInfo = mi.GetParameters()[0].ParameterType.GenericTypeArguments[1];
+                    return typeInfo.IsGenericType
+                        && typeInfo.GetGenericTypeDefinition() == typeof(IEnumerable<>);
+                });
 
         internal static readonly MethodInfo ThenIncludeAfterReferenceMethodInfo =
             typeof(EntityFrameworkQueryableExtensions)

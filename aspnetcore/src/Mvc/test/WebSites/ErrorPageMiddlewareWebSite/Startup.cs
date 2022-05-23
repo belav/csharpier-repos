@@ -21,12 +21,10 @@ public class Startup
     {
         app.UseDeveloperExceptionPage();
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+        });
     }
 
     public static void Main(string[] args)

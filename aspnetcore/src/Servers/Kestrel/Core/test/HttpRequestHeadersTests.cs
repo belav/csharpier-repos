@@ -542,23 +542,21 @@ public class HttpRequestHeadersTests
 
                 headers.Reset();
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                        var nextSpan = Encoding.Latin1
-                            .GetBytes(headerValueUtf16Latin1CrossOver)
-                            .AsSpan();
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
+                    var nextSpan = Encoding.Latin1
+                        .GetBytes(headerValueUtf16Latin1CrossOver)
+                        .AsSpan();
 
-                        Assert.False(
-                            nextSpan.SequenceEqual(
-                                Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)
-                            )
-                        );
+                    Assert.False(
+                        nextSpan.SequenceEqual(
+                            Encoding.ASCII.GetBytes(headerValueUtf16Latin1CrossOver)
+                        )
+                    );
 
-                        headers.Append(headerName, nextSpan, checkForNewlineChars: false);
-                    }
-                );
+                    headers.Append(headerName, nextSpan, checkForNewlineChars: false);
+                });
             }
 
             // Reset back to Ascii
@@ -652,15 +650,13 @@ public class HttpRequestHeadersTests
 
             headers.Reset();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
-                    var valueSpan = Encoding.ASCII.GetBytes(valueString).AsSpan();
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var headerName = Encoding.ASCII.GetBytes(header.Name).AsSpan();
+                var valueSpan = Encoding.ASCII.GetBytes(valueString).AsSpan();
 
-                    headers.Append(headerName, valueSpan, checkForNewlineChars: false);
-                }
-            );
+                headers.Append(headerName, valueSpan, checkForNewlineChars: false);
+            });
 
             valueArray[i] = 'a';
         }
@@ -674,22 +670,20 @@ public class HttpRequestHeadersTests
         var cookieNameBytes = Encoding.ASCII.GetBytes(HeaderNames.Cookie);
         var headerValueBytes = Encoding.UTF8.GetBytes(headerValue);
 
-        var headers = new HttpRequestHeaders(
-            encodingSelector: headerName =>
+        var headers = new HttpRequestHeaders(encodingSelector: headerName =>
+        {
+            // For known headers, the HeaderNames value is passed in.
+            if (ReferenceEquals(headerName, HeaderNames.Accept))
             {
-                // For known headers, the HeaderNames value is passed in.
-                if (ReferenceEquals(headerName, HeaderNames.Accept))
-                {
-                    return Encoding.GetEncoding(
-                        "ASCII",
-                        EncoderFallback.ExceptionFallback,
-                        DecoderFallback.ExceptionFallback
-                    );
-                }
-
-                return Encoding.UTF8;
+                return Encoding.GetEncoding(
+                    "ASCII",
+                    EncoderFallback.ExceptionFallback,
+                    DecoderFallback.ExceptionFallback
+                );
             }
-        );
+
+            return Encoding.UTF8;
+        });
 
         Assert.Throws<InvalidOperationException>(
             () => headers.Append(acceptNameBytes, headerValueBytes, checkForNewlineChars: false)

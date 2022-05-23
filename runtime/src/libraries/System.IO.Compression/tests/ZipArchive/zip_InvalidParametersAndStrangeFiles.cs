@@ -20,12 +20,10 @@ namespace System.IO.Compression.Tests
         {
             try
             {
-                Assert.Throws<TException>(
-                    () =>
-                    {
-                        using (ZipArchive archive = constructor()) { }
-                    }
-                );
+                Assert.Throws<TException>(() =>
+                {
+                    using (ZipArchive archive = constructor()) { }
+                });
             }
             catch (Exception e)
             {
@@ -778,36 +776,16 @@ namespace System.IO.Compression.Tests
             using (ZipArchive archive = new ZipArchive(new MemoryStream(), ZipArchiveMode.Create))
             {
                 ZipArchiveEntry entry = archive.CreateEntry("test");
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        //"should throw on bad date"
-                        entry.LastWriteTime = new DateTimeOffset(
-                            1979,
-                            12,
-                            3,
-                            5,
-                            6,
-                            2,
-                            new TimeSpan()
-                        );
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        //"Should throw on bad date"
-                        entry.LastWriteTime = new DateTimeOffset(
-                            2980,
-                            12,
-                            3,
-                            5,
-                            6,
-                            2,
-                            new TimeSpan()
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    //"should throw on bad date"
+                    entry.LastWriteTime = new DateTimeOffset(1979, 12, 3, 5, 6, 2, new TimeSpan());
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    //"Should throw on bad date"
+                    entry.LastWriteTime = new DateTimeOffset(2980, 12, 3, 5, 6, 2, new TimeSpan());
+                });
             }
         }
 
@@ -1287,16 +1265,14 @@ namespace System.IO.Compression.Tests
                 archiveStream.Write(byte64KB, 0, byte64KB.Length);
 
                 // Open should not be possible because we can't find the EOCD in the max search length from the end
-                Assert.Throws<InvalidDataException>(
-                    () =>
-                    {
-                        ZipArchive archive = new ZipArchive(
-                            archiveStream,
-                            ZipArchiveMode.Read,
-                            leaveOpen: true
-                        );
-                    }
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                {
+                    ZipArchive archive = new ZipArchive(
+                        archiveStream,
+                        ZipArchiveMode.Read,
+                        leaveOpen: true
+                    );
+                });
 
                 // Create stream with 64KB of prepended garbage, then the above stream appended
                 // Attempting to create a ZipArchive should fail: no EOCD found
@@ -1305,12 +1281,10 @@ namespace System.IO.Compression.Tests
                     prependStream.Write(byte64KB, 0, byte64KB.Length);
                     archiveStream.WriteTo(prependStream);
 
-                    Assert.Throws<InvalidDataException>(
-                        () =>
-                        {
-                            ZipArchive archive = new ZipArchive(prependStream, ZipArchiveMode.Read);
-                        }
-                    );
+                    Assert.Throws<InvalidDataException>(() =>
+                    {
+                        ZipArchive archive = new ZipArchive(prependStream, ZipArchiveMode.Read);
+                    });
                 }
             }
         }

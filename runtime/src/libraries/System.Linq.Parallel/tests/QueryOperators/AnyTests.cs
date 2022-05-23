@@ -130,13 +130,11 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.Any(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.Any(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -145,23 +143,19 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.Any(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.Any(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.Any(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.Any(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -179,12 +173,10 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     UnorderedSources
                         .Default(1)
-                        .Any(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .Any(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>

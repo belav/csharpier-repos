@@ -29,14 +29,12 @@ namespace Microsoft.CodeAnalysis.UnusedReferences.ProjectAssets
             }
 
             var projectAssetsFileContents = await IOUtilities
-                .PerformIOAsync(
-                    async () =>
-                    {
-                        using var fileStream = File.OpenRead(projectAssetsFilePath);
-                        using var reader = new StreamReader(fileStream);
-                        return await reader.ReadToEndAsync().ConfigureAwait(false);
-                    }
-                )
+                .PerformIOAsync(async () =>
+                {
+                    using var fileStream = File.OpenRead(projectAssetsFilePath);
+                    using var reader = new StreamReader(fileStream);
+                    return await reader.ReadToEndAsync().ConfigureAwait(false);
+                })
                 .ConfigureAwait(false);
 
             if (projectAssetsFileContents is null)

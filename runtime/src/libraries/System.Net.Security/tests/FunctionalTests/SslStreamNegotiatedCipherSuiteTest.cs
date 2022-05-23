@@ -55,19 +55,17 @@ namespace System.Net.Security.Tests
             { SslProtocols.Tls, s_tls10And11CipherSuiteLookup },
         };
 
-        private static Lazy<bool> s_cipherSuitePolicySupported = new Lazy<bool>(
-            () =>
+        private static Lazy<bool> s_cipherSuitePolicySupported = new Lazy<bool>(() =>
+        {
+            try
             {
-                try
-                {
-                    new CipherSuitesPolicy(Array.Empty<TlsCipherSuite>());
-                    return true;
-                }
-                catch (PlatformNotSupportedException) { }
-
-                return false;
+                new CipherSuitesPolicy(Array.Empty<TlsCipherSuite>());
+                return true;
             }
-        );
+            catch (PlatformNotSupportedException) { }
+
+            return false;
+        });
 
         private static IReadOnlyList<TlsCipherSuite> SupportedNonTls13CipherSuites =
             GetSupportedNonTls13CipherSuites();

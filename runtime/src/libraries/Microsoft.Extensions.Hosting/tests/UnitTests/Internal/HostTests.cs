@@ -327,12 +327,10 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             var hostedService = new AsyncFakeHostedService();
             var builder = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<IHostedService>(hostedService);
-                    }
-                );
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IHostedService>(hostedService);
+                });
 
             using (var host = builder.Build())
             {
@@ -355,12 +353,10 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             var hostedService = new AsyncFakeHostedService();
             var builder = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<IHostedService>(hostedService);
-                    }
-                );
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IHostedService>(hostedService);
+                });
 
             using (var host = builder.Build())
             {
@@ -383,12 +379,10 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             var hostedService = new AsyncFakeHostedService();
             var builder = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<IHostedService>(hostedService);
-                    }
-                );
+                .ConfigureServices(services =>
+                {
+                    services.AddSingleton<IHostedService>(hostedService);
+                });
 
             using (var host = builder.Build())
             {
@@ -654,17 +648,13 @@ namespace Microsoft.Extensions.Hosting.Internal
             var service = new Mock<IHostedService>();
             service
                 .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-                .Returns<CancellationToken>(
-                    token =>
+                .Returns<CancellationToken>(token =>
+                {
+                    return Task.Run(() =>
                     {
-                        return Task.Run(
-                            () =>
-                            {
-                                token.WaitHandle.WaitOne();
-                            }
-                        );
-                    }
-                );
+                        token.WaitHandle.WaitOne();
+                    });
+                });
 
             using (
                 var host = CreateBuilder()
@@ -694,17 +684,13 @@ namespace Microsoft.Extensions.Hosting.Internal
             var service = new Mock<IHostedService>();
             service
                 .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-                .Returns<CancellationToken>(
-                    token =>
+                .Returns<CancellationToken>(token =>
+                {
+                    return Task.Run(() =>
                     {
-                        return Task.Run(
-                            () =>
-                            {
-                                token.WaitHandle.WaitOne();
-                            }
-                        );
-                    }
-                );
+                        token.WaitHandle.WaitOne();
+                    });
+                });
 
             using (
                 var host = CreateBuilder()
@@ -737,17 +723,13 @@ namespace Microsoft.Extensions.Hosting.Internal
             var service = new Mock<IHostedService>();
             service
                 .Setup(s => s.StopAsync(It.IsAny<CancellationToken>()))
-                .Returns<CancellationToken>(
-                    token =>
+                .Returns<CancellationToken>(token =>
+                {
+                    return Task.Run(() =>
                     {
-                        return Task.Run(
-                            () =>
-                            {
-                                token.WaitHandle.WaitOne();
-                            }
-                        );
-                    }
-                );
+                        token.WaitHandle.WaitOne();
+                    });
+                });
 
             using (
                 var host = CreateBuilder()
@@ -775,19 +757,15 @@ namespace Microsoft.Extensions.Hosting.Internal
         public async Task HostPropagatesExceptionsThrownWithBackgroundServiceExceptionBehaviorOfStopHost()
         {
             using IHost host = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddHostedService(
-                            _ => new AsyncThrowingService(Task.CompletedTask)
-                        );
-                        services.Configure<HostOptions>(
-                            options =>
-                                options.BackgroundServiceExceptionBehavior =
-                                    BackgroundServiceExceptionBehavior.StopHost
-                        );
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService(_ => new AsyncThrowingService(Task.CompletedTask));
+                    services.Configure<HostOptions>(
+                        options =>
+                            options.BackgroundServiceExceptionBehavior =
+                                BackgroundServiceExceptionBehavior.StopHost
+                    );
+                })
                 .Build();
 
             await Assert.ThrowsAsync<Exception>(() => host.StartAsync());
@@ -802,28 +780,26 @@ namespace Microsoft.Extensions.Hosting.Internal
             TaskCompletionSource<bool> otherTcs = new();
 
             using IHost host = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddHostedService(_ => new AsyncThrowingService(throwingTcs.Task));
-                        services.AddHostedService(
-                            _ =>
-                                new TestBackgroundService(
-                                    otherTcs.Task,
-                                    () =>
-                                    {
-                                        wasOtherServiceStarted = true;
-                                        throwingTcs.SetResult(true);
-                                    }
-                                )
-                        );
-                        services.Configure<HostOptions>(
-                            options =>
-                                options.BackgroundServiceExceptionBehavior =
-                                    BackgroundServiceExceptionBehavior.StopHost
-                        );
-                    }
-                )
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService(_ => new AsyncThrowingService(throwingTcs.Task));
+                    services.AddHostedService(
+                        _ =>
+                            new TestBackgroundService(
+                                otherTcs.Task,
+                                () =>
+                                {
+                                    wasOtherServiceStarted = true;
+                                    throwingTcs.SetResult(true);
+                                }
+                            )
+                    );
+                    services.Configure<HostOptions>(
+                        options =>
+                            options.BackgroundServiceExceptionBehavior =
+                                BackgroundServiceExceptionBehavior.StopHost
+                    );
+                })
                 .Build();
 
             var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
@@ -832,13 +808,11 @@ namespace Microsoft.Extensions.Hosting.Internal
             lifetime.ApplicationStarted.Register(() => wasStartedCalled = true);
 
             var wasStoppingCalled = false;
-            lifetime.ApplicationStopping.Register(
-                () =>
-                {
-                    wasStoppingCalled = true;
-                    otherTcs.SetResult(true);
-                }
-            );
+            lifetime.ApplicationStopping.Register(() =>
+            {
+                wasStoppingCalled = true;
+                otherTcs.SetResult(true);
+            });
 
             // Ensure all completions have been signaled before continuing
             await Task.WhenAll(host.StartAsync(), throwingTcs.Task, otherTcs.Task);
@@ -854,20 +828,18 @@ namespace Microsoft.Extensions.Hosting.Internal
             var backgroundDelayTaskSource = new TaskCompletionSource<bool>();
 
             using IHost host = CreateBuilder()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddHostedService(
-                            _ => new AsyncThrowingService(backgroundDelayTaskSource.Task)
-                        );
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService(
+                        _ => new AsyncThrowingService(backgroundDelayTaskSource.Task)
+                    );
 
-                        services.PostConfigure<HostOptions>(
-                            options =>
-                                options.BackgroundServiceExceptionBehavior =
-                                    BackgroundServiceExceptionBehavior.Ignore
-                        );
-                    }
-                )
+                    services.PostConfigure<HostOptions>(
+                        options =>
+                            options.BackgroundServiceExceptionBehavior =
+                                BackgroundServiceExceptionBehavior.Ignore
+                    );
+                })
                 .Build();
 
             var lifetime = host.Services.GetRequiredService<IHostApplicationLifetime>();
@@ -894,46 +866,37 @@ namespace Microsoft.Extensions.Hosting.Internal
                 var applicationStoppingCompletedBeforeApplicationStopped = false;
                 var applicationStoppedCompletedBeforeRunCompleted = false;
 
-                lifetime.ApplicationStarted.Register(
-                    () =>
-                    {
-                        applicationStartedEvent.Set();
-                    }
-                );
+                lifetime.ApplicationStarted.Register(() =>
+                {
+                    applicationStartedEvent.Set();
+                });
 
-                lifetime.ApplicationStopping.Register(
-                    () =>
-                    {
-                        // Check whether the applicationStartedEvent has been set
-                        applicationStartedCompletedBeforeApplicationStopping =
-                            applicationStartedEvent.IsSet;
+                lifetime.ApplicationStopping.Register(() =>
+                {
+                    // Check whether the applicationStartedEvent has been set
+                    applicationStartedCompletedBeforeApplicationStopping =
+                        applicationStartedEvent.IsSet;
 
-                        // Simulate work.
-                        Thread.Sleep(1000);
+                    // Simulate work.
+                    Thread.Sleep(1000);
 
-                        applicationStoppingEvent.Set();
-                    }
-                );
+                    applicationStoppingEvent.Set();
+                });
 
-                lifetime.ApplicationStopped.Register(
-                    () =>
-                    {
-                        // Check whether the applicationStoppingEvent has been set
-                        applicationStoppingCompletedBeforeApplicationStopped =
-                            applicationStoppingEvent.IsSet;
-                        applicationStoppedEvent.Set();
-                    }
-                );
+                lifetime.ApplicationStopped.Register(() =>
+                {
+                    // Check whether the applicationStoppingEvent has been set
+                    applicationStoppingCompletedBeforeApplicationStopped =
+                        applicationStoppingEvent.IsSet;
+                    applicationStoppedEvent.Set();
+                });
 
-                var runHostAndVerifyApplicationStopped = Task.Run(
-                    async () =>
-                    {
-                        await host.RunAsync();
-                        // Check whether the applicationStoppingEvent has been set
-                        applicationStoppedCompletedBeforeRunCompleted =
-                            applicationStoppedEvent.IsSet;
-                    }
-                );
+                var runHostAndVerifyApplicationStopped = Task.Run(async () =>
+                {
+                    await host.RunAsync();
+                    // Check whether the applicationStoppingEvent has been set
+                    applicationStoppedCompletedBeforeRunCompleted = applicationStoppedEvent.IsSet;
+                });
 
                 // Wait until application has started to shut down the host
                 Assert.True(applicationStartedEvent.Wait(5000));
@@ -1121,24 +1084,22 @@ namespace Microsoft.Extensions.Hosting.Internal
                                 _ => new DelegateHostedService(started, stopping, disposing)
                             );
 
-                            services.AddSingleton<IHostLifetime>(
-                                _ =>
-                                {
-                                    fakeHostLifetime = new FakeHostLifetime();
+                            services.AddSingleton<IHostLifetime>(_ =>
+                            {
+                                fakeHostLifetime = new FakeHostLifetime();
 
-                                    fakeHostLifetime.StopAction = () =>
-                                    {
-                                        Assert.Equal(1, startedCalls);
-                                        Assert.Equal(1, stoppingCalls);
-                                        Assert.True(
-                                            applicationLifetime
-                                                .ApplicationStopped
-                                                .IsCancellationRequested
-                                        );
-                                    };
-                                    return fakeHostLifetime;
-                                }
-                            );
+                                fakeHostLifetime.StopAction = () =>
+                                {
+                                    Assert.Equal(1, startedCalls);
+                                    Assert.Equal(1, stoppingCalls);
+                                    Assert.True(
+                                        applicationLifetime
+                                            .ApplicationStopped
+                                            .IsCancellationRequested
+                                    );
+                                };
+                                return fakeHostLifetime;
+                            });
                         }
                     )
                     .Build()
@@ -1340,12 +1301,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns((ConfigurationProvider)providerMock.Object);
 
             var host = CreateBuilder()
-                .ConfigureAppConfiguration(
-                    configuration =>
-                    {
-                        configuration.Add(sourceMock.Object);
-                    }
-                )
+                .ConfigureAppConfiguration(configuration =>
+                {
+                    configuration.Add(sourceMock.Object);
+                })
                 .Build();
 
             providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1367,12 +1326,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns((ConfigurationProvider)providerMock.Object);
 
             var host = CreateBuilder()
-                .ConfigureHostConfiguration(
-                    configuration =>
-                    {
-                        configuration.Add(sourceMock.Object);
-                    }
-                )
+                .ConfigureHostConfiguration(configuration =>
+                {
+                    configuration.Add(sourceMock.Object);
+                })
                 .Build();
 
             providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1454,12 +1411,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns((ConfigurationProvider)providerMock.Object);
 
             var host = CreateBuilder()
-                .ConfigureAppConfiguration(
-                    configuration =>
-                    {
-                        configuration.Add(sourceMock.Object);
-                    }
-                )
+                .ConfigureAppConfiguration(configuration =>
+                {
+                    configuration.Add(sourceMock.Object);
+                })
                 .Build();
 
             providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1481,12 +1436,10 @@ namespace Microsoft.Extensions.Hosting.Internal
                 .Returns((ConfigurationProvider)providerMock.Object);
 
             var host = CreateBuilder()
-                .ConfigureHostConfiguration(
-                    configuration =>
-                    {
-                        configuration.Add(sourceMock.Object);
-                    }
-                )
+                .ConfigureHostConfiguration(configuration =>
+                {
+                    configuration.Add(sourceMock.Object);
+                })
                 .Build();
 
             providerMock.Verify(c => c.Dispose(), Times.Never);
@@ -1501,19 +1454,17 @@ namespace Microsoft.Extensions.Hosting.Internal
         {
             var hostApplicationLifetimeMock = new Mock<IHostApplicationLifetime>();
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    CreateBuilder()
-                        .ConfigureServices(
-                            (hostContext, services) =>
-                            {
-                                services.AddSingleton(hostApplicationLifetimeMock.Object);
-                            }
-                        )
-                        .Build();
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                CreateBuilder()
+                    .ConfigureServices(
+                        (hostContext, services) =>
+                        {
+                            services.AddSingleton(hostApplicationLifetimeMock.Object);
+                        }
+                    )
+                    .Build();
+            });
         }
 
         /// <summary>
@@ -1536,12 +1487,10 @@ namespace Microsoft.Extensions.Hosting.Internal
             var backgroundDelayTaskSource = new TaskCompletionSource<bool>();
 
             using IHost host = CreateBuilder()
-                .ConfigureLogging(
-                    logging =>
-                    {
-                        logging.AddProvider(logger);
-                    }
-                )
+                .ConfigureLogging(logging =>
+                {
+                    logging.AddProvider(logger);
+                })
                 .ConfigureServices(
                     (hostContext, services) =>
                     {
@@ -1588,18 +1537,14 @@ namespace Microsoft.Extensions.Hosting.Internal
             TestLoggerProvider logger = new TestLoggerProvider();
 
             using IHost host = CreateBuilder()
-                .ConfigureLogging(
-                    logging =>
-                    {
-                        logging.AddProvider(logger);
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddHostedService<WorkerTemplateService>();
-                    }
-                )
+                .ConfigureLogging(logging =>
+                {
+                    logging.AddProvider(logger);
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<WorkerTemplateService>();
+                })
                 .Build();
 
             host.Start();
@@ -1622,18 +1567,14 @@ namespace Microsoft.Extensions.Hosting.Internal
             TestLoggerProvider logger = new TestLoggerProvider();
 
             using IHost host = CreateBuilder()
-                .ConfigureLogging(
-                    logging =>
-                    {
-                        logging.AddProvider(logger);
-                    }
-                )
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.AddHostedService<BackgroundServiceDoesNotCallBase>();
-                    }
-                )
+                .ConfigureLogging(logging =>
+                {
+                    logging.AddProvider(logger);
+                })
+                .ConfigureServices(services =>
+                {
+                    services.AddHostedService<BackgroundServiceDoesNotCallBase>();
+                })
                 .Build();
 
             host.Start();

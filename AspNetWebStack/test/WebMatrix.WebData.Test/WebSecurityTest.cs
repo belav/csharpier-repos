@@ -18,53 +18,51 @@ namespace WebMatrix.WebData.Test
         public void CreateUserAndAccount_WillAcceptBothObjectsAndDictionariesForExtendedParameters()
         {
             // since it is a static helper - you gotta love 'em
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    // we need that in order to make sure the Membership static class is initialized correctly
-                    var discard = Membership.Provider as ProviderBase;
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // we need that in order to make sure the Membership static class is initialized correctly
+                var discard = Membership.Provider as ProviderBase;
 
-                    // Arrange
-                    var providerMock = new Mock<ExtendedMembershipProvider>();
-                    providerMock
-                        .Setup(
-                            p =>
-                                p.CreateUserAndAccount(
-                                    It.IsAny<string>(),
-                                    It.IsAny<string>(),
-                                    It.IsAny<bool>(),
-                                    It.IsAny<IDictionary<string, object>>()
-                                )
-                        )
-                        .Returns(
-                            (
-                                string username,
-                                string password,
-                                bool requireConfirmation,
-                                IDictionary<string, object> values
-                            ) => "foo = " + values["foo"]
-                        );
-                    typeof(Membership)
-                        .GetField("s_Provider", BindingFlags.Static | BindingFlags.NonPublic)
-                        .SetValue(null, providerMock.Object);
-
-                    // Act
-                    var resultWithObject = WebSecurity.CreateUserAndAccount(
-                        "name",
-                        "pass",
-                        new { foo = "bar" }
+                // Arrange
+                var providerMock = new Mock<ExtendedMembershipProvider>();
+                providerMock
+                    .Setup(
+                        p =>
+                            p.CreateUserAndAccount(
+                                It.IsAny<string>(),
+                                It.IsAny<string>(),
+                                It.IsAny<bool>(),
+                                It.IsAny<IDictionary<string, object>>()
+                            )
+                    )
+                    .Returns(
+                        (
+                            string username,
+                            string password,
+                            bool requireConfirmation,
+                            IDictionary<string, object> values
+                        ) => "foo = " + values["foo"]
                     );
-                    var resultWithDictionary = WebSecurity.CreateUserAndAccount(
-                        "name",
-                        "pass",
-                        new Dictionary<string, object> { { "foo", "baz" } }
-                    );
+                typeof(Membership)
+                    .GetField("s_Provider", BindingFlags.Static | BindingFlags.NonPublic)
+                    .SetValue(null, providerMock.Object);
 
-                    // Assert
-                    Assert.Equal("foo = bar", resultWithObject);
-                    Assert.Equal("foo = baz", resultWithDictionary);
-                }
-            );
+                // Act
+                var resultWithObject = WebSecurity.CreateUserAndAccount(
+                    "name",
+                    "pass",
+                    new { foo = "bar" }
+                );
+                var resultWithDictionary = WebSecurity.CreateUserAndAccount(
+                    "name",
+                    "pass",
+                    new Dictionary<string, object> { { "foo", "baz" } }
+                );
+
+                // Assert
+                Assert.Equal("foo = bar", resultWithObject);
+                Assert.Equal("foo = baz", resultWithDictionary);
+            });
         }
 
         [Fact]

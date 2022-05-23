@@ -46,14 +46,12 @@ public class ClientStartup
                 app.UseStaticFiles();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapRazorPages();
-                        endpoints.MapControllers();
-                        endpoints.MapFallbackToFile("index.html");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapControllers();
+                    endpoints.MapFallbackToFile("index.html");
+                });
             }
         );
     }

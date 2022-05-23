@@ -24,25 +24,21 @@ public class Program
                     services.AddScoped<IAnotherService, AnotherService>();
                 }
             )
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    app.Run(
-                        context =>
-                        {
-                            try
-                            {
-                                context.RequestServices.GetService<IService<IAnotherService>>();
-                                return context.Response.WriteAsync("Success");
-                            }
-                            catch (Exception ex)
-                            {
-                                return context.Response.WriteAsync(ex.ToString());
-                            }
-                        }
-                    );
-                }
-            )
+                    try
+                    {
+                        context.RequestServices.GetService<IService<IAnotherService>>();
+                        return context.Response.WriteAsync("Success");
+                    }
+                    catch (Exception ex)
+                    {
+                        return context.Response.WriteAsync(ex.ToString());
+                    }
+                });
+            })
             .Build()
             .Run();
     }

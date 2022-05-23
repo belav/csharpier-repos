@@ -75,49 +75,47 @@ internal static class RequiredAttributeParser
             do
             {
                 var successfulParse = true;
-                ruleBuilder.Attribute(
-                    attributeBuilder =>
+                ruleBuilder.Attribute(attributeBuilder =>
+                {
+                    if (At('['))
                     {
-                        if (At('['))
+                        if (!TryParseCssSelector(attributeBuilder))
                         {
-                            if (!TryParseCssSelector(attributeBuilder))
-                            {
-                                successfulParse = false;
-                                return;
-                            }
-                        }
-                        else
-                        {
-                            ParsePlainSelector(attributeBuilder);
-                        }
-
-                        PassOptionalWhitespace();
-
-                        if (At(','))
-                        {
-                            _index++;
-
-                            if (!EnsureNotAtEnd(attributeBuilder))
-                            {
-                                successfulParse = false;
-                                return;
-                            }
-                        }
-                        else if (!AtEnd)
-                        {
-                            var diagnostic =
-                                RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeCharacter(
-                                    Current,
-                                    _requiredAttributes
-                                );
-                            attributeBuilder.Diagnostics.Add(diagnostic);
                             successfulParse = false;
                             return;
                         }
-
-                        PassOptionalWhitespace();
                     }
-                );
+                    else
+                    {
+                        ParsePlainSelector(attributeBuilder);
+                    }
+
+                    PassOptionalWhitespace();
+
+                    if (At(','))
+                    {
+                        _index++;
+
+                        if (!EnsureNotAtEnd(attributeBuilder))
+                        {
+                            successfulParse = false;
+                            return;
+                        }
+                    }
+                    else if (!AtEnd)
+                    {
+                        var diagnostic =
+                            RazorDiagnosticFactory.CreateTagHelper_InvalidRequiredAttributeCharacter(
+                                Current,
+                                _requiredAttributes
+                            );
+                        attributeBuilder.Diagnostics.Add(diagnostic);
+                        successfulParse = false;
+                        return;
+                    }
+
+                    PassOptionalWhitespace();
+                });
 
                 if (!successfulParse)
                 {

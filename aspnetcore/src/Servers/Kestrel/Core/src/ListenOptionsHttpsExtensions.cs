@@ -184,12 +184,10 @@ public static class ListenOptionsHttpsExtensions
             throw new ArgumentNullException(nameof(serverCertificate));
         }
 
-        return listenOptions.UseHttps(
-            options =>
-            {
-                options.ServerCertificate = serverCertificate;
-            }
-        );
+        return listenOptions.UseHttps(options =>
+        {
+            options.ServerCertificate = serverCertificate;
+        });
     }
 
     /// <summary>
@@ -215,13 +213,11 @@ public static class ListenOptionsHttpsExtensions
             throw new ArgumentNullException(nameof(configureOptions));
         }
 
-        return listenOptions.UseHttps(
-            options =>
-            {
-                options.ServerCertificate = serverCertificate;
-                configureOptions(options);
-            }
-        );
+        return listenOptions.UseHttps(options =>
+        {
+            options.ServerCertificate = serverCertificate;
+            configureOptions(options);
+        });
     }
 
     /// <summary>
@@ -290,15 +286,13 @@ public static class ListenOptionsHttpsExtensions
         listenOptions.IsTls = true;
         listenOptions.HttpsOptions = httpsOptions;
 
-        listenOptions.Use(
-            next =>
-            {
-                // Set the list of protocols from listen options
-                httpsOptions.HttpProtocols = listenOptions.Protocols;
-                var middleware = new HttpsConnectionMiddleware(next, httpsOptions, loggerFactory);
-                return middleware.OnConnectionAsync;
-            }
-        );
+        listenOptions.Use(next =>
+        {
+            // Set the list of protocols from listen options
+            httpsOptions.HttpProtocols = listenOptions.Protocols;
+            var middleware = new HttpsConnectionMiddleware(next, httpsOptions, loggerFactory);
+            return middleware.OnConnectionAsync;
+        });
 
         return listenOptions;
     }
@@ -398,19 +392,13 @@ public static class ListenOptionsHttpsExtensions
             ?? NullLoggerFactory.Instance;
 
         listenOptions.IsTls = true;
-        listenOptions.Use(
-            next =>
-            {
-                // Set the list of protocols from listen options
-                callbackOptions.HttpProtocols = listenOptions.Protocols;
-                var middleware = new HttpsConnectionMiddleware(
-                    next,
-                    callbackOptions,
-                    loggerFactory
-                );
-                return middleware.OnConnectionAsync;
-            }
-        );
+        listenOptions.Use(next =>
+        {
+            // Set the list of protocols from listen options
+            callbackOptions.HttpProtocols = listenOptions.Protocols;
+            var middleware = new HttpsConnectionMiddleware(next, callbackOptions, loggerFactory);
+            return middleware.OnConnectionAsync;
+        });
 
         return listenOptions;
     }

@@ -484,27 +484,21 @@ public class MapConnectionHandlerTests
     private IHost BuildWebHost(Action<IEndpointRouteBuilder> configure)
     {
         return new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddConnections();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(endpoints => configure(endpoints));
-                            }
-                        )
-                        .UseUrls("http://127.0.0.1:0");
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddConnections();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(endpoints => configure(endpoints));
+                    })
+                    .UseUrls("http://127.0.0.1:0");
+            })
             .Build();
     }
 
@@ -514,41 +508,28 @@ public class MapConnectionHandlerTests
     ) where TConnectionHandler : ConnectionHandler
     {
         return new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseUrls("http://127.0.0.1:0")
-                        .UseKestrel()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddConnections();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    routes =>
-                                    {
-                                        routes.MapConnectionHandler<TConnectionHandler>(
-                                            path,
-                                            configureOptions
-                                        );
-                                    }
-                                );
-                            }
-                        )
-                        .ConfigureLogging(
-                            factory =>
-                            {
-                                factory.AddXunit(_output, LogLevel.Trace);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseUrls("http://127.0.0.1:0")
+                    .UseKestrel()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddConnections();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(routes =>
+                        {
+                            routes.MapConnectionHandler<TConnectionHandler>(path, configureOptions);
+                        });
+                    })
+                    .ConfigureLogging(factory =>
+                    {
+                        factory.AddXunit(_output, LogLevel.Trace);
+                    });
+            })
             .Build();
     }
 }

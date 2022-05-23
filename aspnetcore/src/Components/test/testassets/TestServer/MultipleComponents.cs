@@ -47,13 +47,11 @@ public class MultipleComponents
                 app.UseBlazorFrameworkFiles();
                 app.UseStaticFiles();
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapRazorPages();
-                        endpoints.MapFallbackToPage("/Client/MultipleComponents");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapFallbackToPage("/Client/MultipleComponents");
+                });
             }
         );
 
@@ -66,14 +64,12 @@ public class MultipleComponents
                 app.UseAuthentication();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapRazorPages();
-                        endpoints.MapFallbackToPage("/MultipleComponents");
-                        endpoints.MapBlazorHub();
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapFallbackToPage("/MultipleComponents");
+                    endpoints.MapBlazorHub();
+                });
             }
         );
     }

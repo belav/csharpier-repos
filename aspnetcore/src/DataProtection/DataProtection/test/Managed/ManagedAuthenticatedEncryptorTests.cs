@@ -53,45 +53,37 @@ public class ManagedAuthenticatedEncryptorTests
         // Act & assert - 1
         // Ciphertext is too short to be a valid payload
         byte[] invalidCiphertext_tooShort = new byte[10];
-        Assert.Throws<CryptographicException>(
-            () =>
-            {
-                encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooShort), aad);
-            }
-        );
+        Assert.Throws<CryptographicException>(() =>
+        {
+            encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooShort), aad);
+        });
 
         // Act & assert - 2
         // Ciphertext has been manipulated
         byte[] invalidCiphertext_manipulated = (byte[])validCiphertext.Clone();
         invalidCiphertext_manipulated[0] ^= 0x01;
-        Assert.Throws<CryptographicException>(
-            () =>
-            {
-                encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_manipulated), aad);
-            }
-        );
+        Assert.Throws<CryptographicException>(() =>
+        {
+            encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_manipulated), aad);
+        });
 
         // Act & assert - 3
         // Ciphertext is too long
         byte[] invalidCiphertext_tooLong = validCiphertext.Concat(new byte[] { 0 }).ToArray();
-        Assert.Throws<CryptographicException>(
-            () =>
-            {
-                encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooLong), aad);
-            }
-        );
+        Assert.Throws<CryptographicException>(() =>
+        {
+            encryptor.Decrypt(new ArraySegment<byte>(invalidCiphertext_tooLong), aad);
+        });
 
         // Act & assert - 4
         // AAD is incorrect
-        Assert.Throws<CryptographicException>(
-            () =>
-            {
-                encryptor.Decrypt(
-                    new ArraySegment<byte>(validCiphertext),
-                    new ArraySegment<byte>(Encoding.UTF8.GetBytes("different aad"))
-                );
-            }
-        );
+        Assert.Throws<CryptographicException>(() =>
+        {
+            encryptor.Decrypt(
+                new ArraySegment<byte>(validCiphertext),
+                new ArraySegment<byte>(Encoding.UTF8.GetBytes("different aad"))
+            );
+        });
     }
 
     [Fact]

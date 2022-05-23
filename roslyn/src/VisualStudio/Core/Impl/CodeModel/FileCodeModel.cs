@@ -136,15 +136,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
                 // We don't want to block up file removal on the UI thread since we want that path to stay asynchronous.
                 CodeModelService.DetachFormatTrackingToBuffer(_invisibleEditor.TextBuffer);
 
-                State.ProjectCodeModelFactory.ScheduleDeferredCleanupTask(
-                    cancellationToken =>
-                    {
-                        // Ignore cancellationToken: we always need to call Dispose since it triggers the file save.
-                        _ = cancellationToken;
+                State.ProjectCodeModelFactory.ScheduleDeferredCleanupTask(cancellationToken =>
+                {
+                    // Ignore cancellationToken: we always need to call Dispose since it triggers the file save.
+                    _ = cancellationToken;
 
-                        _invisibleEditor.Dispose();
-                    }
-                );
+                    _invisibleEditor.Dispose();
+                });
             }
 
             base.Shutdown();
@@ -348,52 +346,46 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         internal void PerformEdit(Func<Document, Document> action)
         {
-            EnsureEditor(
-                () =>
+            EnsureEditor(() =>
+            {
+                Debug.Assert(_invisibleEditor != null);
+
+                var document = GetDocument();
+                var workspace = document.Project.Solution.Workspace;
+
+                var result = action(document);
+
+                var formatted = State.ThreadingContext.JoinableTaskFactory.Run(async () =>
                 {
-                    Debug.Assert(_invisibleEditor != null);
+                    var formatted = await Formatter
+                        .FormatAsync(result, Formatter.Annotation)
+                        .ConfigureAwait(true);
+                    formatted = await Formatter
+                        .FormatAsync(formatted, SyntaxAnnotation.ElasticAnnotation)
+                        .ConfigureAwait(true);
 
-                    var document = GetDocument();
-                    var workspace = document.Project.Solution.Workspace;
+                    return formatted;
+                });
 
-                    var result = action(document);
-
-                    var formatted = State.ThreadingContext.JoinableTaskFactory.Run(
-                        async () =>
-                        {
-                            var formatted = await Formatter
-                                .FormatAsync(result, Formatter.Annotation)
-                                .ConfigureAwait(true);
-                            formatted = await Formatter
-                                .FormatAsync(formatted, SyntaxAnnotation.ElasticAnnotation)
-                                .ConfigureAwait(true);
-
-                            return formatted;
-                        }
-                    );
-
-                    ApplyChanges(workspace, formatted);
-                }
-            );
+                ApplyChanges(workspace, formatted);
+            });
         }
 
         internal T PerformEdit<T>(Func<Document, Tuple<T, Document>> action) where T : SyntaxNode
         {
-            return EnsureEditor(
-                () =>
-                {
-                    Debug.Assert(_invisibleEditor != null);
+            return EnsureEditor(() =>
+            {
+                Debug.Assert(_invisibleEditor != null);
 
-                    var document = GetDocument();
-                    var workspace = document.Project.Solution.Workspace;
+                var document = GetDocument();
+                var workspace = document.Project.Solution.Workspace;
 
-                    var result = action(document);
+                var result = action(document);
 
-                    ApplyChanges(workspace, result.Item2);
+                ApplyChanges(workspace, result.Item2);
 
-                    return result.Item1;
-                }
-            );
+                return result.Item1;
+            });
         }
 
         private void ApplyChanges(Workspace workspace, Document document)
@@ -460,24 +452,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
         }
 
         internal SemanticModel GetSemanticModel() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(
-                () =>
-                {
-                    return GetDocument()
-                        .GetRequiredSemanticModelAsync(CancellationToken.None)
-                        .AsTask();
-                }
-            );
+            State.ThreadingContext.JoinableTaskFactory.Run(() =>
+            {
+                return GetDocument().GetRequiredSemanticModelAsync(CancellationToken.None).AsTask();
+            });
 
         internal Compilation GetCompilation() =>
-            State.ThreadingContext.JoinableTaskFactory.Run(
-                () =>
-                {
-                    return GetDocument().Project.GetRequiredCompilationAsync(
-                        CancellationToken.None
-                    );
-                }
-            );
+            State.ThreadingContext.JoinableTaskFactory.Run(() =>
+            {
+                return GetDocument().Project.GetRequiredCompilationAsync(CancellationToken.None);
+            });
 
         internal ProjectId GetProjectId() => GetDocumentId().ProjectId;
 
@@ -486,18 +470,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddAttribute(
-                        GetSyntaxRoot(),
-                        name,
-                        value,
-                        position,
-                        target: CodeModelService.AssemblyAttributeString
-                    );
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddAttribute(
+                    GetSyntaxRoot(),
+                    name,
+                    value,
+                    position,
+                    target: CodeModelService.AssemblyAttributeString
+                );
+            });
         }
 
         public EnvDTE.CodeClass AddClass(
@@ -508,19 +490,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access
         )
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddClass(
-                        GetSyntaxRoot(),
-                        name,
-                        position,
-                        bases,
-                        implementedInterfaces,
-                        access
-                    );
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddClass(
+                    GetSyntaxRoot(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeDelegate AddDelegate(
@@ -530,12 +510,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access
         )
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddDelegate(GetSyntaxRoot(), name, type, position, access);
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddDelegate(GetSyntaxRoot(), name, type, position, access);
+            });
         }
 
         public EnvDTE.CodeEnum AddEnum(
@@ -545,12 +523,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access
         )
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddEnum(GetSyntaxRoot(), name, position, bases, access);
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddEnum(GetSyntaxRoot(), name, position, bases, access);
+            });
         }
 
         public EnvDTE.CodeFunction AddFunction(
@@ -563,12 +539,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public EnvDTE80.CodeImport AddImport(string name, object position, string alias)
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddImport(GetSyntaxRoot(), name, position, alias);
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddImport(GetSyntaxRoot(), name, position, alias);
+            });
         }
 
         public EnvDTE.CodeInterface AddInterface(
@@ -578,22 +552,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access
         )
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddInterface(GetSyntaxRoot(), name, position, bases, access);
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddInterface(GetSyntaxRoot(), name, position, bases, access);
+            });
         }
 
         public EnvDTE.CodeNamespace AddNamespace(string name, object position)
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddNamespace(GetSyntaxRoot(), name, position);
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddNamespace(GetSyntaxRoot(), name, position);
+            });
         }
 
         public EnvDTE.CodeStruct AddStruct(
@@ -604,19 +574,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
             EnvDTE.vsCMAccess access
         )
         {
-            return EnsureEditor(
-                () =>
-                {
-                    return AddStruct(
-                        GetSyntaxRoot(),
-                        name,
-                        position,
-                        bases,
-                        implementedInterfaces,
-                        access
-                    );
-                }
-            );
+            return EnsureEditor(() =>
+            {
+                return AddStruct(
+                    GetSyntaxRoot(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeVariable AddVariable(

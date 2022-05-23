@@ -271,16 +271,14 @@ namespace Microsoft.CodeAnalysis.UnitTests.EditorConfig.StorageLocation
         {
             var editorConfigStorageLocation =
                 new NamingStylePreferenceEditorConfigStorageLocation();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    editorConfigStorageLocation.TryGetOption(
-                        new Dictionary<string, string>(),
-                        typeof(object),
-                        out var @object
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                editorConfigStorageLocation.TryGetOption(
+                    new Dictionary<string, string>(),
+                    typeof(object),
+                    out var @object
+                );
+            });
         }
     }
 }

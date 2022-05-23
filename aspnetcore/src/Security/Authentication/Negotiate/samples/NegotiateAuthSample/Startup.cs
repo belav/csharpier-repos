@@ -16,44 +16,40 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddAuthorization(
-            options =>
-            {
-                options.FallbackPolicy = options.DefaultPolicy;
-            }
-        );
+        services.AddAuthorization(options =>
+        {
+            options.FallbackPolicy = options.DefaultPolicy;
+        });
         services
             .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-            .AddNegotiate(
-                options =>
+            .AddNegotiate(options =>
+            {
+                if (OperatingSystem.IsLinux())
                 {
-                    if (OperatingSystem.IsLinux())
-                    {
-                        /*
-                        options.EnableLdap("DOMAIN.net");
+                    /*
+                    options.EnableLdap("DOMAIN.net");
 
-                        options.EnableLdap(settings =>
-                        {
-                            // Mandatory settings
-                            settings.Domain = "DOMAIN.com";
-                            // Optional settings
-                            settings.MachineAccountName = "machineName";
-                            settings.MachineAccountPassword = "PassW0rd";
-                            settings.IgnoreNestedGroups = true;
-                        });
-                        */
-                    }
-
-                    options.Events = new NegotiateEvents()
+                    options.EnableLdap(settings =>
                     {
-                        OnAuthenticationFailed = context =>
-                        {
-                            // context.SkipHandler();
-                            return Task.CompletedTask;
-                        }
-                    };
+                        // Mandatory settings
+                        settings.Domain = "DOMAIN.com";
+                        // Optional settings
+                        settings.MachineAccountName = "machineName";
+                        settings.MachineAccountPassword = "PassW0rd";
+                        settings.IgnoreNestedGroups = true;
+                    });
+                    */
                 }
-            );
+
+                options.Events = new NegotiateEvents()
+                {
+                    OnAuthenticationFailed = context =>
+                    {
+                        // context.SkipHandler();
+                        return Task.CompletedTask;
+                    }
+                };
+            });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)

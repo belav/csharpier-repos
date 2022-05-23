@@ -857,13 +857,11 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 if (_initializeSucceeded)
                 {
                     _lazyCompilationEventQueue = eventQueue;
-                    _lazyQueueRegistration = cancellationToken.Register(
-                        () =>
-                        {
-                            this.CompilationEventQueue.TryComplete();
-                            this.DiagnosticQueue.TryComplete();
-                        }
-                    );
+                    _lazyQueueRegistration = cancellationToken.Register(() =>
+                    {
+                        this.CompilationEventQueue.TryComplete();
+                        this.DiagnosticQueue.TryComplete();
+                    });
 
                     _lazyPrimaryTask = ExecutePrimaryAnalysisTaskAsync(
                             analysisScope,

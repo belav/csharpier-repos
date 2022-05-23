@@ -37,29 +37,25 @@ public static class IISDeploymentParameterExtensions
 
     public static void AddHttpsToServerConfig(this IISDeploymentParameters parameters)
     {
-        parameters.AddServerConfigAction(
-            element =>
-            {
-                element.Descendants("binding").Single().SetAttributeValue("protocol", "https");
+        parameters.AddServerConfigAction(element =>
+        {
+            element.Descendants("binding").Single().SetAttributeValue("protocol", "https");
 
-                element.Descendants("access").Single().SetAttributeValue("sslFlags", "None");
-            }
-        );
+            element.Descendants("access").Single().SetAttributeValue("sslFlags", "None");
+        });
     }
 
     public static void AddHttpsWithClientCertToServerConfig(this IISDeploymentParameters parameters)
     {
-        parameters.AddServerConfigAction(
-            element =>
-            {
-                element.Descendants("binding").Single().SetAttributeValue("protocol", "https");
+        parameters.AddServerConfigAction(element =>
+        {
+            element.Descendants("binding").Single().SetAttributeValue("protocol", "https");
 
-                element
-                    .Descendants("access")
-                    .Single()
-                    .SetAttributeValue("sslFlags", "Ssl, SslNegotiateCert");
-            }
-        );
+            element
+                .Descendants("access")
+                .Single()
+                .SetAttributeValue("sslFlags", "Ssl, SslNegotiateCert");
+        });
     }
 
     public static void SetWindowsAuth(this IISDeploymentParameters parameters, bool enabled = true)
@@ -72,21 +68,19 @@ public static class IISDeploymentParameterExtensions
         );
         parameters.EnableModule("WindowsAuthenticationModule", "%IIS_BIN%\\authsspi.dll");
 
-        parameters.AddServerConfigAction(
-            element =>
-            {
-                var windowsAuthentication = element
-                    .RequiredElement("system.webServer")
-                    .RequiredElement("security")
-                    .RequiredElement("authentication")
-                    .GetOrAdd("windowsAuthentication");
+        parameters.AddServerConfigAction(element =>
+        {
+            var windowsAuthentication = element
+                .RequiredElement("system.webServer")
+                .RequiredElement("security")
+                .RequiredElement("authentication")
+                .GetOrAdd("windowsAuthentication");
 
-                windowsAuthentication.SetAttributeValue("enabled", enabled);
-                var providers = windowsAuthentication.GetOrAdd("providers");
-                providers.GetOrAdd("add", "value", "Negotiate");
-                providers.GetOrAdd("add", "value", "NTLM");
-            }
-        );
+            windowsAuthentication.SetAttributeValue("enabled", enabled);
+            var providers = windowsAuthentication.GetOrAdd("providers");
+            providers.GetOrAdd("add", "value", "Negotiate");
+            providers.GetOrAdd("add", "value", "NTLM");
+        });
     }
 
     public static void SetAnonymousAuth(
@@ -94,34 +88,30 @@ public static class IISDeploymentParameterExtensions
         bool enabled = true
     )
     {
-        parameters.AddServerConfigAction(
-            element =>
-            {
-                element
-                    .RequiredElement("system.webServer")
-                    .RequiredElement("security")
-                    .RequiredElement("authentication")
-                    .GetOrAdd("anonymousAuthentication")
-                    .SetAttributeValue("enabled", enabled);
-            }
-        );
+        parameters.AddServerConfigAction(element =>
+        {
+            element
+                .RequiredElement("system.webServer")
+                .RequiredElement("security")
+                .RequiredElement("authentication")
+                .GetOrAdd("anonymousAuthentication")
+                .SetAttributeValue("enabled", enabled);
+        });
     }
 
     public static void SetBasicAuth(this IISDeploymentParameters parameters, bool enabled = true)
     {
         parameters.EnableModule("BasicAuthenticationModule", "%IIS_BIN%\\authbas.dll");
 
-        parameters.AddServerConfigAction(
-            element =>
-            {
-                element
-                    .RequiredElement("system.webServer")
-                    .RequiredElement("security")
-                    .RequiredElement("authentication")
-                    .GetOrAdd("basicAuthentication")
-                    .SetAttributeValue("enabled", enabled);
-            }
-        );
+        parameters.AddServerConfigAction(element =>
+        {
+            element
+                .RequiredElement("system.webServer")
+                .RequiredElement("security")
+                .RequiredElement("authentication")
+                .GetOrAdd("basicAuthentication")
+                .SetAttributeValue("enabled", enabled);
+        });
     }
 
     public static void EnsureSection(

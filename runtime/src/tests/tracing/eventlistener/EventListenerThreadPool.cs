@@ -54,12 +54,10 @@ namespace Tracing.Tests
                 Task[] tasks = new Task[100];
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Run(
-                        () =>
-                        {
-                            someNumber += 1;
-                        }
-                    );
+                    tasks[i] = Task.Run(() =>
+                    {
+                        someNumber += 1;
+                    });
                 }
 
                 listener.TPWaitEvent.WaitOne(TimeSpan.FromMinutes(3));

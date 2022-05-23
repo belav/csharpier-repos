@@ -80,19 +80,17 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.Internal().MaxExecutionPlanDepth = 2;
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<Source1, Destination1>();
-                    cfg.CreateMap<Source2, Destination2>();
-                    cfg.CreateMap<Source3, Destination3>();
-                    cfg.CreateMap<Source4, Destination4>();
-                    cfg.CreateMap<Source5, Destination5>();
-                    cfg.CreateMap<Source6, Destination6>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.Internal().MaxExecutionPlanDepth = 2;
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<Source1, Destination1>();
+                cfg.CreateMap<Source2, Destination2>();
+                cfg.CreateMap<Source3, Destination3>();
+                cfg.CreateMap<Source4, Destination4>();
+                cfg.CreateMap<Source5, Destination5>();
+                cfg.CreateMap<Source6, Destination6>();
+            });
 
         [Fact]
         public void Should_set_inline_accordingly()

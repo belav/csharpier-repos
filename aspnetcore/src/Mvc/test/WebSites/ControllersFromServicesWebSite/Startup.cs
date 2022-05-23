@@ -25,27 +25,25 @@ public class Startup
             .AddControllersWithViews()
             .ConfigureApplicationPartManager(manager => manager.ApplicationParts.Clear())
             .AddApplicationPart(typeof(TimeScheduleController).GetTypeInfo().Assembly)
-            .ConfigureApplicationPartManager(
-                manager =>
-                {
-                    manager.ApplicationParts.Add(
-                        new TypesPart(
-                            typeof(AnotherController),
-                            typeof(ComponentFromServicesViewComponent),
-                            typeof(InServicesTagHelper)
-                        )
-                    );
-
-                    foreach (
-                        var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
-                            Assembly.GetExecutingAssembly()
-                        )
+            .ConfigureApplicationPartManager(manager =>
+            {
+                manager.ApplicationParts.Add(
+                    new TypesPart(
+                        typeof(AnotherController),
+                        typeof(ComponentFromServicesViewComponent),
+                        typeof(InServicesTagHelper)
                     )
-                    {
-                        manager.ApplicationParts.Add(part);
-                    }
+                );
+
+                foreach (
+                    var part in CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts(
+                        Assembly.GetExecutingAssembly()
+                    )
+                )
+                {
+                    manager.ApplicationParts.Add(part);
                 }
-            )
+            })
             .AddControllersAsServices()
             .AddViewComponentsAsServices()
             .AddTagHelpersAsServices();
@@ -70,12 +68,10 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 
     public static void Main(string[] args)

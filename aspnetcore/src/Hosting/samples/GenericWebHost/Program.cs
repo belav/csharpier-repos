@@ -15,24 +15,20 @@ public class Program
     public static async Task Main(string[] args)
     {
         var host = Host.CreateDefaultBuilder()
-            .ConfigureWebHost(
-                builder =>
-                {
-                    builder
-                        .UseKestrel()
-                        .Configure(
-                            app =>
+            .ConfigureWebHost(builder =>
+            {
+                builder
+                    .UseKestrel()
+                    .Configure(app =>
+                    {
+                        app.Run(
+                            async (context) =>
                             {
-                                app.Run(
-                                    async (context) =>
-                                    {
-                                        await context.Response.WriteAsync("Hello World!");
-                                    }
-                                );
+                                await context.Response.WriteAsync("Hello World!");
                             }
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.RunAsync();

@@ -72,13 +72,11 @@ namespace System.Xml.Tests
             using (XmlWriter writer = XmlWriter.Create(ms, settings))
             {
                 writer.WriteStartDocument();
-                Assert.Throws<System.Text.EncoderFallbackException>(
-                    () =>
-                    {
-                        writer.WriteElementString(problematicString, "test");
-                        writer.Flush();
-                    }
-                );
+                Assert.Throws<System.Text.EncoderFallbackException>(() =>
+                {
+                    writer.WriteElementString(problematicString, "test");
+                    writer.Flush();
+                });
             }
         }
 
@@ -158,15 +156,11 @@ namespace System.Xml.Tests
             using (XmlWriter writer = XmlWriter.Create(ms, settings))
             {
                 writer.WriteStartDocumentAsync().Wait();
-                Exception exception = Assert.Throws<System.AggregateException>(
-                    () =>
-                    {
-                        writer
-                            .WriteElementStringAsync(null, problematicString, null, "test")
-                            .Wait();
-                        writer.FlushAsync().Wait();
-                    }
-                );
+                Exception exception = Assert.Throws<System.AggregateException>(() =>
+                {
+                    writer.WriteElementStringAsync(null, problematicString, null, "test").Wait();
+                    writer.FlushAsync().Wait();
+                });
 
                 Assert.Equal(
                     typeof(System.Text.EncoderFallbackException),

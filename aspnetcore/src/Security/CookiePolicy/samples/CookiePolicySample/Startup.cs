@@ -21,15 +21,13 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme).AddCookie();
-        services.Configure<CookiePolicyOptions>(
-            options =>
-            {
-                options.CheckConsentNeeded = context =>
-                    context.Request.PathBase.Equals("/NeedsConsent");
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            options.CheckConsentNeeded = context =>
+                context.Request.PathBase.Equals("/NeedsConsent");
 
-                options.OnAppendCookie = context => { };
-            }
-        );
+            options.OnAppendCookie = context => { };
+        });
     }
 
     public void Configure(IApplicationBuilder app)
@@ -44,53 +42,51 @@ public class Startup
 
     private void NestedApp(IApplicationBuilder app)
     {
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            var path = context.Request.Path;
+            switch (path)
             {
-                var path = context.Request.Path;
-                switch (path)
-                {
-                    case "/Login":
-                        var user = new ClaimsPrincipal(
-                            new ClaimsIdentity(
-                                new[] { new Claim(ClaimTypes.Name, "bob") },
-                                CookieAuthenticationDefaults.AuthenticationScheme
-                            )
-                        );
-                        await context.SignInAsync(user);
-                        break;
-                    case "/Logout":
-                        await context.SignOutAsync();
-                        break;
-                    case "/CreateTempCookie":
-                        context.Response.Cookies.Append("Temp", "1");
-                        break;
-                    case "/RemoveTempCookie":
-                        context.Response.Cookies.Delete("Temp");
-                        break;
-                    case "/CreateEssentialCookie":
-                        context.Response.Cookies.Append(
-                            "EssentialCookie",
-                            "2",
-                            new CookieOptions() { IsEssential = true }
-                        );
-                        break;
-                    case "/RemoveEssentialCookie":
-                        context.Response.Cookies.Delete("EssentialCookie");
-                        break;
-                    case "/GrantConsent":
-                        context.Features.Get<ITrackingConsentFeature>().GrantConsent();
-                        break;
-                    case "/WithdrawConsent":
-                        context.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
-                        break;
-                }
-
-                // TODO: Debug log when cookie is suppressed
-
-                await HomePage(context);
+                case "/Login":
+                    var user = new ClaimsPrincipal(
+                        new ClaimsIdentity(
+                            new[] { new Claim(ClaimTypes.Name, "bob") },
+                            CookieAuthenticationDefaults.AuthenticationScheme
+                        )
+                    );
+                    await context.SignInAsync(user);
+                    break;
+                case "/Logout":
+                    await context.SignOutAsync();
+                    break;
+                case "/CreateTempCookie":
+                    context.Response.Cookies.Append("Temp", "1");
+                    break;
+                case "/RemoveTempCookie":
+                    context.Response.Cookies.Delete("Temp");
+                    break;
+                case "/CreateEssentialCookie":
+                    context.Response.Cookies.Append(
+                        "EssentialCookie",
+                        "2",
+                        new CookieOptions() { IsEssential = true }
+                    );
+                    break;
+                case "/RemoveEssentialCookie":
+                    context.Response.Cookies.Delete("EssentialCookie");
+                    break;
+                case "/GrantConsent":
+                    context.Features.Get<ITrackingConsentFeature>().GrantConsent();
+                    break;
+                case "/WithdrawConsent":
+                    context.Features.Get<ITrackingConsentFeature>().WithdrawConsent();
+                    break;
             }
-        );
+
+            // TODO: Debug log when cookie is suppressed
+
+            await HomePage(context);
+        });
     }
 
     private async Task HomePage(HttpContext context)

@@ -99,18 +99,14 @@ namespace System.Net.Http.Tests
                     HeaderUtilities.CheckValidQuotedString("", "param");
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    HeaderUtilities.CheckValidQuotedString("\"x", "param");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    HeaderUtilities.CheckValidQuotedString("\"x\"y", "param");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                HeaderUtilities.CheckValidQuotedString("\"x", "param");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                HeaderUtilities.CheckValidQuotedString("\"x\"y", "param");
+            });
         }
 
         #region Helper methods

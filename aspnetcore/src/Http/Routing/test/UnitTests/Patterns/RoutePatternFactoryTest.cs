@@ -425,17 +425,15 @@ public class RoutePatternFactoryTest
         var original = RoutePatternFactory.Parse(template);
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                RoutePatternFactory.Pattern(
-                    original.RawText,
-                    defaults,
-                    constraints,
-                    original.PathSegments
-                );
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            RoutePatternFactory.Pattern(
+                original.RawText,
+                defaults,
+                constraints,
+                original.PathSegments
+            );
+        });
     }
 
     [Fact]
@@ -777,17 +775,10 @@ public class RoutePatternFactoryTest
         var requiredValues = new { area = "Admin", controller = "Store", action = "Index", };
 
         // Act
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var action = RoutePatternFactory.Parse(
-                    template,
-                    defaults,
-                    policies,
-                    requiredValues
-                );
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            var action = RoutePatternFactory.Parse(template, defaults, policies, requiredValues);
+        });
 
         // Assert
         Assert.Equal(

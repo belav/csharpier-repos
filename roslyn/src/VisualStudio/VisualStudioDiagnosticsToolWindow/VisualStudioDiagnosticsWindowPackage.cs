@@ -97,18 +97,16 @@ namespace Roslyn.VisualStudio.DiagnosticsWindow
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    await ShowToolWindowAsync(
-                            typeof(DiagnosticsWindow),
-                            id: 0,
-                            create: true,
-                            this.DisposalToken
-                        )
-                        .ConfigureAwait(true);
-                }
-            );
+            JoinableTaskFactory.RunAsync(async () =>
+            {
+                await ShowToolWindowAsync(
+                        typeof(DiagnosticsWindow),
+                        id: 0,
+                        create: true,
+                        this.DisposalToken
+                    )
+                    .ConfigureAwait(true);
+            });
         }
 
         /////////////////////////////////////////////////////////////////////////////

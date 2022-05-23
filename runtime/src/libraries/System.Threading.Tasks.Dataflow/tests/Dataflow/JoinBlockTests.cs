@@ -91,18 +91,14 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             Assert.Throws<ArgumentNullException>(() => new JoinBlock<int, int>(null));
             Assert.Throws<ArgumentNullException>(() => new JoinBlock<int, int, int>(null));
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    var ignored = new JoinBlock<int, int>().Target1.Completion;
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    var ignored = new JoinBlock<int, int, int>().Target3.Completion;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var ignored = new JoinBlock<int, int>().Target1.Completion;
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var ignored = new JoinBlock<int, int, int>().Target3.Completion;
+            });
             Assert.Throws<ArgumentNullException>(
                 () => new JoinBlock<int, int>().Target1.Fault(null)
             );

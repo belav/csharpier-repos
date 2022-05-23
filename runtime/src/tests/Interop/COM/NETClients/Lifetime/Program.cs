@@ -94,26 +94,24 @@ namespace NetClient
 
             // Run the test on a new STA thread since Nano Server doesn't support the STA
             // and as a result, the main application thread can't be made STA with the STAThread attribute
-            Thread staThread = new Thread(
-                () =>
+            Thread staThread = new Thread(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        // Initialization for all future tests
-                        Initialize();
-                        Assert.True(GetAllocationCount != null);
+                    // Initialization for all future tests
+                    Initialize();
+                    Assert.True(GetAllocationCount != null);
 
-                        Validate_COMServer_CleanUp();
-                        Validate_COMServer_DisableEagerCleanUp();
-                    }
-                    catch (Exception e)
-                    {
-                        Console.WriteLine($"Test Failure: {e}");
-                        result = 101;
-                    }
-                    result = 100;
+                    Validate_COMServer_CleanUp();
+                    Validate_COMServer_DisableEagerCleanUp();
                 }
-            );
+                catch (Exception e)
+                {
+                    Console.WriteLine($"Test Failure: {e}");
+                    result = 101;
+                }
+                result = 100;
+            });
 
             staThread.SetApartmentState(ApartmentState.STA);
             staThread.Start();

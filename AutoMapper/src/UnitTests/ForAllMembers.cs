@@ -21,18 +21,15 @@ namespace AutoMapper.UnitTests.ForAllMembers
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ForAllPropertyMaps(
-                        pm => pm.DestinationName.StartsWith("Other"),
-                        (pm, opt) =>
-                            opt.MapFrom(typeof(ConditionalValueResolver), pm.SourceMember.Name)
-                    );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ForAllPropertyMaps(
+                    pm => pm.DestinationName.StartsWith("Other"),
+                    (pm, opt) => opt.MapFrom(typeof(ConditionalValueResolver), pm.SourceMember.Name)
+                );
 
-                    cfg.CreateMap<Source, Dest>();
-                }
-            );
+                cfg.CreateMap<Source, Dest>();
+            });
 
         public class ConditionalValueResolver
             : IMemberValueResolver<object, object, DateTime, DateTime>

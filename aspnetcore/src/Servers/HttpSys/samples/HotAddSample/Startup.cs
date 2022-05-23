@@ -20,12 +20,10 @@ public class Startup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<HttpSysOptions>(
-            options =>
-            {
-                ServerOptions = options;
-            }
-        );
+        services.Configure<HttpSysOptions>(options =>
+        {
+            ServerOptions = options;
+        });
     }
 
     public HttpSysOptions ServerOptions { get; set; }
@@ -96,50 +94,44 @@ public class Startup
             }
         );
 
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            context.Response.ContentType = "text/html";
+            await context.Response.WriteAsync("<html><body>");
+            await context.Response.WriteAsync("Listening on these prefixes: <br>");
+            foreach (var prefix in addresses)
             {
-                context.Response.ContentType = "text/html";
-                await context.Response.WriteAsync("<html><body>");
-                await context.Response.WriteAsync("Listening on these prefixes: <br>");
-                foreach (var prefix in addresses)
-                {
-                    await context.Response.WriteAsync(
-                        "<a href=\""
-                            + prefix
-                            + "\">"
-                            + prefix
-                            + "</a> <a href=\"?remove="
-                            + prefix
-                            + "\">(remove)</a><br>"
-                    );
-                }
-
                 await context.Response.WriteAsync(
-                    "<form action=\""
-                        + context.Request.PathBase.ToUriComponent()
-                        + "\" method=\"GET\">"
+                    "<a href=\""
+                        + prefix
+                        + "\">"
+                        + prefix
+                        + "</a> <a href=\"?remove="
+                        + prefix
+                        + "\">(remove)</a><br>"
                 );
-                await context.Response.WriteAsync(
-                    "<input type=\"text\" name=\"add\" value=\"http://localhost:12348\" >"
-                );
-                await context.Response.WriteAsync("<input type=\"submit\" value=\"Add\">");
-                await context.Response.WriteAsync("</form>");
-
-                await context.Response.WriteAsync("</body></html>");
             }
-        );
+
+            await context.Response.WriteAsync(
+                "<form action=\"" + context.Request.PathBase.ToUriComponent() + "\" method=\"GET\">"
+            );
+            await context.Response.WriteAsync(
+                "<input type=\"text\" name=\"add\" value=\"http://localhost:12348\" >"
+            );
+            await context.Response.WriteAsync("<input type=\"submit\" value=\"Add\">");
+            await context.Response.WriteAsync("</form>");
+
+            await context.Response.WriteAsync("</body></html>");
+        });
     }
 
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseStartup<Startup>().UseHttpSys();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseStartup<Startup>().UseHttpSys();
+            })
             .ConfigureLogging(factory => factory.AddConsole())
             .Build();
 

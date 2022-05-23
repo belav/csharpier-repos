@@ -319,12 +319,10 @@ namespace System.Net.WebSockets.Client.Tests
                     $"Expected CloseSent or Closed, got {cws.State}"
                 );
                 Assert.True(string.IsNullOrEmpty(cws.CloseStatusDescription));
-                await Assert.ThrowsAnyAsync<WebSocketException>(
-                    async () =>
-                    {
-                        await cws.CloseOutputAsync(closeStatus, closeDescription, cts.Token);
-                    }
-                );
+                await Assert.ThrowsAnyAsync<WebSocketException>(async () =>
+                {
+                    await cws.CloseOutputAsync(closeStatus, closeDescription, cts.Token);
+                });
                 Assert.True(
                     cws.State == WebSocketState.CloseSent || cws.State == WebSocketState.Closed,
                     $"Expected CloseSent or Closed, got {cws.State}"
@@ -617,18 +615,16 @@ namespace System.Net.WebSockets.Client.Tests
                             );
 
                             var cancelCloseCts = new CancellationTokenSource();
-                            await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                                async () =>
-                                {
-                                    Task t = cws.CloseAsync(
-                                        WebSocketCloseStatus.NormalClosure,
-                                        null,
-                                        cancelCloseCts.Token
-                                    );
-                                    cancelCloseCts.Cancel();
-                                    await t;
-                                }
-                            );
+                            await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
+                            {
+                                Task t = cws.CloseAsync(
+                                    WebSocketCloseStatus.NormalClosure,
+                                    null,
+                                    cancelCloseCts.Token
+                                );
+                                cancelCloseCts.Cancel();
+                                await t;
+                            });
 
                             await Assert.ThrowsAnyAsync<OperationCanceledException>(
                                 () => receiveTask
@@ -641,16 +637,14 @@ namespace System.Net.WebSockets.Client.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            Dictionary<string, string> headers =
-                                await LoopbackHelper.WebSocketHandshakeAsync(connection);
-                            Assert.NotNull(headers);
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        Dictionary<string, string> headers =
+                            await LoopbackHelper.WebSocketHandshakeAsync(connection);
+                        Assert.NotNull(headers);
 
-                            await tcs.Task;
-                        }
-                    ),
+                        await tcs.Task;
+                    }),
                 new LoopbackServer.Options { WebSocketEndpoint = true }
             );
         }

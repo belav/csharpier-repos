@@ -469,15 +469,13 @@ namespace System.Data.Tests
         [Fact]
         public void Add_SDB4()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    dt.Constraints.Add("UniqueConstraint", dt.Columns["ParentId"], false);
-                    DataProvider.TryToBreakUniqueConstraint();
-                    Assert.Equal(2, dt.Select("ParentId=1").Length);
-                }
-            );
+            Assert.Throws<ConstraintException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.Constraints.Add("UniqueConstraint", dt.Columns["ParentId"], false);
+                DataProvider.TryToBreakUniqueConstraint();
+                Assert.Equal(2, dt.Select("ParentId=1").Length);
+            });
         }
 
         [Fact]

@@ -306,18 +306,16 @@ namespace Microsoft.CodeAnalysis.MSBuild.Build
             CancellationTokenRegistration registration = default;
             if (cancellationToken.CanBeCanceled)
             {
-                registration = cancellationToken.Register(
-                    () =>
-                    {
-                        // Note: We only ever expect that a single submission is being built,
-                        // even though we're calling CancelAllSubmissions(). If MSBuildWorkspace is
-                        // ever updated to support parallel builds, we'll likely need to update this code.
+                registration = cancellationToken.Register(() =>
+                {
+                    // Note: We only ever expect that a single submission is being built,
+                    // even though we're calling CancelAllSubmissions(). If MSBuildWorkspace is
+                    // ever updated to support parallel builds, we'll likely need to update this code.
 
-                        taskSource.TrySetCanceled();
-                        buildManager.CancelAllSubmissions();
-                        registration.Dispose();
-                    }
-                );
+                    taskSource.TrySetCanceled();
+                    buildManager.CancelAllSubmissions();
+                    registration.Dispose();
+                });
             }
 
             // execute build async

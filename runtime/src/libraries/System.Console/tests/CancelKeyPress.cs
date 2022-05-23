@@ -34,13 +34,11 @@ public partial class CancelKeyPressTests
         // xunit registers a CancelKeyPress handler at the beginning of the test run and never
         // unregisters it, thus we can't execute all of the removal code in the same process.
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    CanAddAndRemoveHandler();
-                    CanAddAndRemoveHandler(); // add and remove again
-                }
-            )
+            .Invoke(() =>
+            {
+                CanAddAndRemoveHandler();
+                CanAddAndRemoveHandler(); // add and remove again
+            })
             .Dispose();
     }
 }

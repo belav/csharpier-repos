@@ -825,18 +825,14 @@ namespace System.Dynamic.Tests
             Assert.Throws<RuntimeBinderException>(() => d[2, 4] = 1);
             Assert.Throws<RuntimeBinderException>(() => d["index"]);
             Assert.Throws<RuntimeBinderException>(() => d["index"] = 2);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    string val = d[23];
-                }
-            );
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int val = d[1, 2];
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                string val = d[23];
+            });
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int val = d[1, 2];
+            });
             Assert.Throws<RuntimeBinderException>(() => d[1, 2, 3]);
         }
 
@@ -847,12 +843,10 @@ namespace System.Dynamic.Tests
             d[0] = 1;
             Assert.Equal(1, d[0]);
             Assert.Throws<RuntimeBinderException>(() => d[0] = "One");
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    string val = d[0];
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                string val = d[0];
+            });
             Assert.Throws<RuntimeBinderException>(() => d["index"]);
         }
     }

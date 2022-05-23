@@ -56,13 +56,11 @@ public class ApplicationBuilderTests
     public void BuildDoesNotCallMatchedEndpointWhenTerminated()
     {
         var builder = new ApplicationBuilder(null);
-        builder.Run(
-            context =>
-            {
-                // Do not call next
-                return Task.CompletedTask;
-            }
-        );
+        builder.Run(context =>
+        {
+            // Do not call next
+            return Task.CompletedTask;
+        });
         var app = builder.Build();
 
         var endpointCalled = false;

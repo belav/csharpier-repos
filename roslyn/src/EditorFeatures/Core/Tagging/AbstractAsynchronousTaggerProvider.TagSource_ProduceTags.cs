@@ -334,21 +334,19 @@ namespace Microsoft.CodeAnalysis.Editor.Tagging
                 );
                 var spansToTag = _dataSource.GetSpansToTag(_textViewOpt, _subjectBuffer);
 
-                var spansAndDocumentsToTag = spansToTag.SelectAsArray(
-                    span =>
+                var spansAndDocumentsToTag = spansToTag.SelectAsArray(span =>
+                {
+                    if (!snapshotToDocumentMap.TryGetValue(span.Snapshot, out var document))
                     {
-                        if (!snapshotToDocumentMap.TryGetValue(span.Snapshot, out var document))
-                        {
-                            CheckSnapshot(span.Snapshot);
+                        CheckSnapshot(span.Snapshot);
 
-                            document = span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
-                            snapshotToDocumentMap[span.Snapshot] = document;
-                        }
-
-                        // document can be null if the buffer the given span is part of is not part of our workspace.
-                        return new DocumentSnapshotSpan(document, span);
+                        document = span.Snapshot.GetOpenDocumentInCurrentContextWithChanges();
+                        snapshotToDocumentMap[span.Snapshot] = document;
                     }
-                );
+
+                    // document can be null if the buffer the given span is part of is not part of our workspace.
+                    return new DocumentSnapshotSpan(document, span);
+                });
 
                 return spansAndDocumentsToTag;
             }

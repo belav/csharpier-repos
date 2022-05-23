@@ -29,29 +29,24 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString(),
-            new InspectingApplication(
-                features =>
-                {
-                    Assert.True(
-                        features.Get<IHttpRequestLifetimeFeature>().RequestAborted.CanBeCanceled
-                    );
-                    Assert.Equal(HttpProtocol.Http11, features.Get<IHttpRequestFeature>().Protocol);
-                    Assert.Equal("GET", features.Get<IHttpRequestFeature>().Method);
-                    Assert.Equal("https", features.Get<IHttpRequestFeature>().Scheme);
-                    Assert.Equal("/api/a%2Fb c", features.Get<IHttpRequestFeature>().Path);
-                    Assert.NotNull(features.Get<IHttpRequestFeature>().Body);
-                    Assert.NotNull(features.Get<IHttpRequestFeature>().Headers);
-                    Assert.NotNull(features.Get<IHttpResponseFeature>().Headers);
-                    Assert.NotNull(features.Get<IHttpResponseBodyFeature>().Stream);
-                    Assert.Equal(200, features.Get<IHttpResponseFeature>().StatusCode);
-                    Assert.Null(features.Get<IHttpResponseFeature>().ReasonPhrase);
-                    Assert.Equal(
-                        "example.com",
-                        features.Get<IHttpRequestFeature>().Headers["host"]
-                    );
-                    Assert.NotNull(features.Get<IHttpRequestLifetimeFeature>());
-                }
-            )
+            new InspectingApplication(features =>
+            {
+                Assert.True(
+                    features.Get<IHttpRequestLifetimeFeature>().RequestAborted.CanBeCanceled
+                );
+                Assert.Equal(HttpProtocol.Http11, features.Get<IHttpRequestFeature>().Protocol);
+                Assert.Equal("GET", features.Get<IHttpRequestFeature>().Method);
+                Assert.Equal("https", features.Get<IHttpRequestFeature>().Scheme);
+                Assert.Equal("/api/a%2Fb c", features.Get<IHttpRequestFeature>().Path);
+                Assert.NotNull(features.Get<IHttpRequestFeature>().Body);
+                Assert.NotNull(features.Get<IHttpRequestFeature>().Headers);
+                Assert.NotNull(features.Get<IHttpResponseFeature>().Headers);
+                Assert.NotNull(features.Get<IHttpResponseBodyFeature>().Stream);
+                Assert.Equal(200, features.Get<IHttpResponseFeature>().StatusCode);
+                Assert.Null(features.Get<IHttpResponseFeature>().ReasonPhrase);
+                Assert.Equal("example.com", features.Get<IHttpRequestFeature>().Headers["host"]);
+                Assert.NotNull(features.Get<IHttpRequestLifetimeFeature>());
+            })
         );
         var httpClient = new HttpClient(handler);
         await httpClient.GetAsync("https://example.com/api/a%2Fb%20c");
@@ -62,27 +57,25 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString("/A/Path/"),
-            new DummyApplication(
-                context =>
-                {
-                    // TODO: Assert.True(context.RequestAborted.CanBeCanceled);
-                    Assert.Equal(HttpProtocol.Http11, context.Request.Protocol);
-                    Assert.Equal("GET", context.Request.Method);
-                    Assert.Equal("https", context.Request.Scheme);
-                    Assert.Equal("/A/Path", context.Request.PathBase.Value);
-                    Assert.Equal("/and/file.txt", context.Request.Path.Value);
-                    Assert.Equal("?and=query", context.Request.QueryString.Value);
-                    Assert.NotNull(context.Request.Body);
-                    Assert.NotNull(context.Request.Headers);
-                    Assert.NotNull(context.Response.Headers);
-                    Assert.NotNull(context.Response.Body);
-                    Assert.Equal(200, context.Response.StatusCode);
-                    Assert.Null(context.Features.Get<IHttpResponseFeature>().ReasonPhrase);
-                    Assert.Equal("example.com", context.Request.Host.Value);
+            new DummyApplication(context =>
+            {
+                // TODO: Assert.True(context.RequestAborted.CanBeCanceled);
+                Assert.Equal(HttpProtocol.Http11, context.Request.Protocol);
+                Assert.Equal("GET", context.Request.Method);
+                Assert.Equal("https", context.Request.Scheme);
+                Assert.Equal("/A/Path", context.Request.PathBase.Value);
+                Assert.Equal("/and/file.txt", context.Request.Path.Value);
+                Assert.Equal("?and=query", context.Request.QueryString.Value);
+                Assert.NotNull(context.Request.Body);
+                Assert.NotNull(context.Request.Headers);
+                Assert.NotNull(context.Response.Headers);
+                Assert.NotNull(context.Response.Body);
+                Assert.Equal(200, context.Response.StatusCode);
+                Assert.Null(context.Features.Get<IHttpResponseFeature>().ReasonPhrase);
+                Assert.Equal("example.com", context.Request.Host.Value);
 
-                    return Task.FromResult(0);
-                }
-            )
+                return Task.FromResult(0);
+            })
         );
         var httpClient = new HttpClient(handler);
         return httpClient.GetAsync("https://example.com/A/Path/and/file.txt?and=query");
@@ -93,31 +86,26 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString("/A/Path/"),
-            new InspectingApplication(
-                features =>
-                {
-                    Assert.True(
-                        features.Get<IHttpRequestLifetimeFeature>().RequestAborted.CanBeCanceled
-                    );
-                    Assert.Equal(HttpProtocol.Http11, features.Get<IHttpRequestFeature>().Protocol);
-                    Assert.Equal("GET", features.Get<IHttpRequestFeature>().Method);
-                    Assert.Equal("https", features.Get<IHttpRequestFeature>().Scheme);
-                    Assert.Equal("/A/Path", features.Get<IHttpRequestFeature>().PathBase);
-                    Assert.Equal("/and/file.txt", features.Get<IHttpRequestFeature>().Path);
-                    Assert.Equal("?and=query", features.Get<IHttpRequestFeature>().QueryString);
-                    Assert.NotNull(features.Get<IHttpRequestFeature>().Body);
-                    Assert.NotNull(features.Get<IHttpRequestFeature>().Headers);
-                    Assert.NotNull(features.Get<IHttpResponseFeature>().Headers);
-                    Assert.NotNull(features.Get<IHttpResponseBodyFeature>().Stream);
-                    Assert.Equal(200, features.Get<IHttpResponseFeature>().StatusCode);
-                    Assert.Null(features.Get<IHttpResponseFeature>().ReasonPhrase);
-                    Assert.Equal(
-                        "example.com",
-                        features.Get<IHttpRequestFeature>().Headers["host"]
-                    );
-                    Assert.NotNull(features.Get<IHttpRequestLifetimeFeature>());
-                }
-            )
+            new InspectingApplication(features =>
+            {
+                Assert.True(
+                    features.Get<IHttpRequestLifetimeFeature>().RequestAborted.CanBeCanceled
+                );
+                Assert.Equal(HttpProtocol.Http11, features.Get<IHttpRequestFeature>().Protocol);
+                Assert.Equal("GET", features.Get<IHttpRequestFeature>().Method);
+                Assert.Equal("https", features.Get<IHttpRequestFeature>().Scheme);
+                Assert.Equal("/A/Path", features.Get<IHttpRequestFeature>().PathBase);
+                Assert.Equal("/and/file.txt", features.Get<IHttpRequestFeature>().Path);
+                Assert.Equal("?and=query", features.Get<IHttpRequestFeature>().QueryString);
+                Assert.NotNull(features.Get<IHttpRequestFeature>().Body);
+                Assert.NotNull(features.Get<IHttpRequestFeature>().Headers);
+                Assert.NotNull(features.Get<IHttpResponseFeature>().Headers);
+                Assert.NotNull(features.Get<IHttpResponseBodyFeature>().Stream);
+                Assert.Equal(200, features.Get<IHttpResponseFeature>().StatusCode);
+                Assert.Null(features.Get<IHttpResponseFeature>().ReasonPhrase);
+                Assert.Equal("example.com", features.Get<IHttpRequestFeature>().Headers["host"]);
+                Assert.NotNull(features.Get<IHttpRequestLifetimeFeature>());
+            })
         );
         var httpClient = new HttpClient(handler);
         return httpClient.GetAsync("https://example.com/A/Path/and/file.txt?and=query");
@@ -128,15 +116,13 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString(""),
-            new DummyApplication(
-                context =>
-                {
-                    Assert.Equal("", context.Request.PathBase.Value);
-                    Assert.Equal("/", context.Request.Path.Value);
+            new DummyApplication(context =>
+            {
+                Assert.Equal("", context.Request.PathBase.Value);
+                Assert.Equal("/", context.Request.Path.Value);
 
-                    return Task.FromResult(0);
-                }
-            )
+                return Task.FromResult(0);
+            })
         );
         var httpClient = new HttpClient(handler);
         return httpClient.GetAsync("https://example.com/");
@@ -149,15 +135,13 @@ public class ClientHandlerTests
             "Mozilla/5.0 (Windows NT 10.0; Win64; x64; rv:71.0) Gecko/20100101 Firefox/71.0";
         var handler = new ClientHandler(
             new PathString(""),
-            new DummyApplication(
-                context =>
-                {
-                    var actualResult = context.Request.Headers.UserAgent;
-                    Assert.Equal(userAgent, actualResult);
+            new DummyApplication(context =>
+            {
+                var actualResult = context.Request.Headers.UserAgent;
+                Assert.Equal(userAgent, actualResult);
 
-                    return Task.CompletedTask;
-                }
-            )
+                return Task.CompletedTask;
+            })
         );
         var httpClient = new HttpClient(handler);
         httpClient.DefaultRequestHeaders.Add(HeaderNames.UserAgent, userAgent);
@@ -171,16 +155,14 @@ public class ClientHandlerTests
         var contentBytes = Encoding.UTF8.GetBytes("This is a content!");
         var handler = new ClientHandler(
             new PathString(""),
-            new DummyApplication(
-                context =>
-                {
-                    Assert.True(context.Request.CanHaveBody());
-                    Assert.Equal(contentBytes.LongLength, context.Request.ContentLength);
-                    Assert.False(context.Request.Headers.ContainsKey(HeaderNames.TransferEncoding));
+            new DummyApplication(context =>
+            {
+                Assert.True(context.Request.CanHaveBody());
+                Assert.Equal(contentBytes.LongLength, context.Request.ContentLength);
+                Assert.False(context.Request.Headers.ContainsKey(HeaderNames.TransferEncoding));
 
-                    return Task.CompletedTask;
-                }
-            )
+                return Task.CompletedTask;
+            })
         );
         var httpClient = new HttpClient(handler);
         var content = new ByteArrayContent(contentBytes);
@@ -193,16 +175,14 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString(""),
-            new DummyApplication(
-                context =>
-                {
-                    Assert.False(context.Request.CanHaveBody());
-                    Assert.Null(context.Request.ContentLength);
-                    Assert.False(context.Request.Headers.ContainsKey(HeaderNames.TransferEncoding));
+            new DummyApplication(context =>
+            {
+                Assert.False(context.Request.CanHaveBody());
+                Assert.Null(context.Request.ContentLength);
+                Assert.False(context.Request.Headers.ContainsKey(HeaderNames.TransferEncoding));
 
-                    return Task.CompletedTask;
-                }
-            )
+                return Task.CompletedTask;
+            })
         );
         var httpClient = new HttpClient(handler);
 
@@ -214,16 +194,14 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString(""),
-            new DummyApplication(
-                context =>
-                {
-                    Assert.True(context.Request.CanHaveBody());
-                    Assert.Null(context.Request.ContentLength);
-                    Assert.Equal("chunked", context.Request.Headers.TransferEncoding);
+            new DummyApplication(context =>
+            {
+                Assert.True(context.Request.CanHaveBody());
+                Assert.Null(context.Request.ContentLength);
+                Assert.Equal("chunked", context.Request.Headers.TransferEncoding);
 
-                    return Task.CompletedTask;
-                }
-            )
+                return Task.CompletedTask;
+            })
         );
 
         var httpClient = new HttpClient(handler);
@@ -236,16 +214,14 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             new PathString(""),
-            new DummyApplication(
-                context =>
-                {
-                    Assert.True(context.Request.CanHaveBody());
-                    Assert.Null(context.Request.ContentLength);
-                    Assert.Equal("chunked", context.Request.Headers.TransferEncoding);
+            new DummyApplication(context =>
+            {
+                Assert.True(context.Request.CanHaveBody());
+                Assert.Null(context.Request.ContentLength);
+                Assert.Equal("chunked", context.Request.Headers.TransferEncoding);
 
-                    return Task.CompletedTask;
-                }
-            )
+                return Task.CompletedTask;
+            })
         );
 
         var httpClient = new HttpClient(handler);
@@ -265,23 +241,21 @@ public class ClientHandlerTests
 
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    context.Response.AppendTrailer("StartTrailer", "Value!");
+            new DummyApplication(async context =>
+            {
+                context.Response.AppendTrailer("StartTrailer", "Value!");
 
-                    await context.Response.WriteAsync("Hello World");
-                    await context.Response.Body.FlushAsync();
+                await context.Response.WriteAsync("Hello World");
+                await context.Response.Body.FlushAsync();
 
-                    // Pause writing response to ensure trailers are written at the end
-                    await tcs.Task;
+                // Pause writing response to ensure trailers are written at the end
+                await tcs.Task;
 
-                    await context.Response.WriteAsync("Bye World");
-                    await context.Response.Body.FlushAsync();
+                await context.Response.WriteAsync("Bye World");
+                await context.Response.Body.FlushAsync();
 
-                    context.Response.AppendTrailer("EndTrailer", "Value!");
-                }
-            )
+                context.Response.AppendTrailer("EndTrailer", "Value!");
+            })
         );
 
         var invoker = new HttpMessageInvoker(handler);
@@ -344,20 +318,18 @@ public class ClientHandlerTests
         bool? postHasStarted = null;
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    preHasStarted = context.Response.HasStarted;
+            new DummyApplication(async context =>
+            {
+                preHasStarted = context.Response.HasStarted;
 
-                    await context.Response.StartAsync();
+                await context.Response.StartAsync();
 
-                    postHasStarted = context.Response.HasStarted;
+                postHasStarted = context.Response.HasStarted;
 
-                    hasStartedTcs.TrySetResult(null);
+                hasStartedTcs.TrySetResult(null);
 
-                    await hasAssertedResponseTcs.Task;
-                }
-            )
+                await hasAssertedResponseTcs.Task;
+            })
         );
 
         var invoker = new HttpMessageInvoker(handler);
@@ -387,15 +359,13 @@ public class ClientHandlerTests
         int requestCount = 1;
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    int read = await context.Request.Body.ReadAsync(new byte[100], 0, 100);
-                    Assert.Equal(11, read);
+            new DummyApplication(async context =>
+            {
+                int read = await context.Request.Body.ReadAsync(new byte[100], 0, 100);
+                Assert.Equal(11, read);
 
-                    context.Response.Headers["TestHeader"] = "TestValue:" + requestCount++;
-                }
-            )
+                context.Response.Headers["TestHeader"] = "TestValue:" + requestCount++;
+            })
         );
 
         HttpMessageInvoker invoker = new HttpMessageInvoker(handler);
@@ -417,13 +387,11 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                context =>
-                {
-                    context.Response.Headers["TestHeader"] = "TestValue";
-                    return Task.FromResult(0);
-                }
-            )
+            new DummyApplication(context =>
+            {
+                context.Response.Headers["TestHeader"] = "TestValue";
+                return Task.FromResult(0);
+            })
         );
         var httpClient = new HttpClient(handler);
         HttpResponseMessage response = await httpClient.GetAsync("https://example.com/");
@@ -436,13 +404,11 @@ public class ClientHandlerTests
         ManualResetEvent block = new ManualResetEvent(false);
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                context =>
-                {
-                    block.WaitOne();
-                    return Task.FromResult(0);
-                }
-            )
+            new DummyApplication(context =>
+            {
+                block.WaitOne();
+                return Task.FromResult(0);
+            })
         );
         var httpClient = new HttpClient(handler);
         Task<HttpResponseMessage> task = httpClient.GetAsync("https://example.com/");
@@ -460,15 +426,13 @@ public class ClientHandlerTests
         );
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    context.Response.Headers["TestHeader"] = "TestValue";
-                    await context.Response.WriteAsync("BodyStarted,");
-                    await block.Task;
-                    await context.Response.WriteAsync("BodyFinished");
-                }
-            )
+            new DummyApplication(async context =>
+            {
+                context.Response.Headers["TestHeader"] = "TestValue";
+                await context.Response.WriteAsync("BodyStarted,");
+                await block.Task;
+                await context.Response.WriteAsync("BodyFinished");
+            })
         );
         var httpClient = new HttpClient(handler);
         HttpResponseMessage response = await httpClient.GetAsync(
@@ -488,15 +452,13 @@ public class ClientHandlerTests
         );
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    context.Response.Headers["TestHeader"] = "TestValue";
-                    await context.Response.Body.FlushAsync();
-                    await block.Task;
-                    await context.Response.WriteAsync("BodyFinished");
-                }
-            )
+            new DummyApplication(async context =>
+            {
+                context.Response.Headers["TestHeader"] = "TestValue";
+                await context.Response.Body.FlushAsync();
+                await block.Task;
+                await context.Response.WriteAsync("BodyFinished");
+            })
         );
         var httpClient = new HttpClient(handler);
         HttpResponseMessage response = await httpClient.GetAsync(
@@ -516,14 +478,12 @@ public class ClientHandlerTests
         );
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    context.Response.Headers["TestHeader"] = "TestValue";
-                    await context.Response.Body.FlushAsync();
-                    await block.Task;
-                }
-            )
+            new DummyApplication(async context =>
+            {
+                context.Response.Headers["TestHeader"] = "TestValue";
+                await context.Response.Body.FlushAsync();
+                await block.Task;
+            })
         );
         var httpClient = new HttpClient(handler);
         HttpResponseMessage response = await httpClient.GetAsync(
@@ -547,14 +507,12 @@ public class ClientHandlerTests
         );
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    context.Response.Headers["TestHeader"] = "TestValue";
-                    await context.Response.Body.FlushAsync();
-                    await block.Task;
-                }
-            )
+            new DummyApplication(async context =>
+            {
+                context.Response.Headers["TestHeader"] = "TestValue";
+                await context.Response.Body.FlushAsync();
+                await block.Task;
+            })
         );
         var httpClient = new HttpClient(handler);
         HttpResponseMessage response = await httpClient.GetAsync(
@@ -576,12 +534,10 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                context =>
-                {
-                    throw new InvalidOperationException("Test Exception");
-                }
-            )
+            new DummyApplication(context =>
+            {
+                throw new InvalidOperationException("Test Exception");
+            })
         );
         var httpClient = new HttpClient(handler);
         return Assert.ThrowsAsync<InvalidOperationException>(
@@ -601,15 +557,13 @@ public class ClientHandlerTests
         );
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
-                {
-                    context.Response.Headers["TestHeader"] = "TestValue";
-                    await context.Response.WriteAsync("BodyStarted");
-                    await block.Task;
-                    throw new InvalidOperationException("Test Exception");
-                }
-            )
+            new DummyApplication(async context =>
+            {
+                context.Response.Headers["TestHeader"] = "TestValue";
+                await context.Response.WriteAsync("BodyStarted");
+                await block.Task;
+                throw new InvalidOperationException("Test Exception");
+            })
         );
         var httpClient = new HttpClient(handler);
         HttpResponseMessage response = await httpClient.GetAsync(
@@ -629,18 +583,14 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                context =>
+            new DummyApplication(context =>
+            {
+                context.Response.OnStarting(() =>
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            throw new InvalidOperationException(new string('a', 1024 * 32));
-                        }
-                    );
-                    return context.Response.WriteAsync("Hello World");
-                }
-            )
+                    throw new InvalidOperationException(new string('a', 1024 * 32));
+                });
+                return context.Response.WriteAsync("Hello World");
+            })
         );
         var httpClient = new HttpClient(handler);
         return Assert.ThrowsAsync<InvalidOperationException>(
@@ -657,18 +607,14 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                context =>
+            new DummyApplication(context =>
+            {
+                context.Response.OnStarting(() =>
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            throw new InvalidOperationException(new string('a', 1024 * 32));
-                        }
-                    );
-                    return Task.CompletedTask;
-                }
-            )
+                    throw new InvalidOperationException(new string('a', 1024 * 32));
+                });
+                return Task.CompletedTask;
+            })
         );
         var httpClient = new HttpClient(handler);
         return Assert.ThrowsAsync<InvalidOperationException>(
@@ -685,27 +631,23 @@ public class ClientHandlerTests
     {
         var handler = new ClientHandler(
             PathString.Empty,
-            new DummyApplication(
-                async context =>
+            new DummyApplication(async context =>
+            {
+                context.Response.OnStarting(() =>
                 {
-                    context.Response.OnStarting(
-                        () =>
-                        {
-                            throw new InvalidOperationException(new string('a', 1024 * 32));
-                        }
-                    );
-                    try
-                    {
-                        await context.Response.WriteAsync("Hello World");
-                    }
-                    catch (Exception ex)
-                    {
-                        // This is no longer the first write, so it doesn't trigger OnStarting again.
-                        // The exception is large enough that it fills the pipe and stalls.
-                        await context.Response.WriteAsync(ex.ToString());
-                    }
+                    throw new InvalidOperationException(new string('a', 1024 * 32));
+                });
+                try
+                {
+                    await context.Response.WriteAsync("Hello World");
                 }
-            )
+                catch (Exception ex)
+                {
+                    // This is no longer the first write, so it doesn't trigger OnStarting again.
+                    // The exception is large enough that it fills the pipe and stalls.
+                    await context.Response.WriteAsync(ex.ToString());
+                }
+            })
         );
         var httpClient = new HttpClient(handler);
         return Assert.ThrowsAsync<InvalidOperationException>(
@@ -829,23 +771,17 @@ public class ClientHandlerTests
         // This logger will attempt to access information from HttpRequest once the HttpContext is created
         var logger = new VerifierLogger();
         var builder = new WebHostBuilder()
-            .ConfigureServices(
-                services =>
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<ILogger<IWebHost>>(logger);
+            })
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    services.AddSingleton<ILogger<IWebHost>>(logger);
-                }
-            )
-            .Configure(
-                app =>
-                {
-                    app.Run(
-                        context =>
-                        {
-                            return Task.FromResult(0);
-                        }
-                    );
-                }
-            );
+                    return Task.FromResult(0);
+                });
+            });
         var server = new TestServer(builder);
 
         // The HttpContext will be created and the logger will make sure that the HttpRequest exists and contains reasonable values

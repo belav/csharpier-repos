@@ -330,12 +330,10 @@ namespace System.Reflection.Tests
         [MemberData(nameof(BadResolveTypes))]
         public void ResolveTypeFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    Module.ResolveType(token);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                Module.ResolveType(token);
+            });
         }
 
         public static IEnumerable<MemberInfo> Methods =>
@@ -365,12 +363,10 @@ namespace System.Reflection.Tests
         [MemberData(nameof(BadResolveMethods))]
         public void ResolveMethodFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    Module.ResolveMethod(token);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                Module.ResolveMethod(token);
+            });
         }
 
         public static IEnumerable<MemberInfo> Fields =>
@@ -404,12 +400,10 @@ namespace System.Reflection.Tests
         [MemberData(nameof(BadResolveFields))]
         public void ResolveFieldFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    Module.ResolveField(token);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                Module.ResolveField(token);
+            });
         }
 
         public static IEnumerable<object[]> BadResolveStrings =>
@@ -424,12 +418,10 @@ namespace System.Reflection.Tests
         [MemberData(nameof(BadResolveStrings))]
         public void ResolveStringFail(int token)
         {
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    Module.ResolveString(token);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                Module.ResolveString(token);
+            });
         }
 
         [Fact]

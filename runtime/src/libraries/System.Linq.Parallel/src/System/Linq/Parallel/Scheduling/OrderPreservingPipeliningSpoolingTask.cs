@@ -180,29 +180,24 @@ namespace System.Linq.Parallel
             // Ensure all tasks in this query are parented under a common root. Because this
             // is a pipelined query, we detach it from the parent (to avoid blocking the calling
             // thread), and run the query on a separate thread.
-            Task rootTask = new Task(
-                () =>
+            Task rootTask = new Task(() =>
+            {
+                for (int i = 0; i < degreeOfParallelism; i++)
                 {
-                    for (int i = 0; i < degreeOfParallelism; i++)
-                    {
-                        QueryTask asyncTask = new OrderPreservingPipeliningSpoolingTask<
-                            TOutput,
-                            TKey
-                        >(
-                            partitions[i],
-                            groupState,
-                            consumerWaiting,
-                            producerWaiting,
-                            producerDone,
-                            i,
-                            buffers,
-                            bufferLocks[i],
-                            autoBuffered
-                        );
-                        asyncTask.RunAsynchronously(taskScheduler);
-                    }
+                    QueryTask asyncTask = new OrderPreservingPipeliningSpoolingTask<TOutput, TKey>(
+                        partitions[i],
+                        groupState,
+                        consumerWaiting,
+                        producerWaiting,
+                        producerDone,
+                        i,
+                        buffers,
+                        bufferLocks[i],
+                        autoBuffered
+                    );
+                    asyncTask.RunAsynchronously(taskScheduler);
                 }
-            );
+            });
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);

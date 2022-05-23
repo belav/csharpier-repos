@@ -26,13 +26,11 @@ namespace VoidMainWithExitCodeApp
                     break;
 
                 case 2: // set ExitCode, exit, and then set ExitCode from another foreground thread
-                    new Thread(
-                        () => // foreground thread
-                        {
-                            Thread.Sleep(1000); // time for Main to exit
-                            set_ExitCode.SetValue(null, exitCode); // TODO: Environment.ExitCode = exitCode;
-                        }
-                    ).Start();
+                    new Thread(() => // foreground thread
+                    {
+                        Thread.Sleep(1000); // time for Main to exit
+                        set_ExitCode.SetValue(null, exitCode); // TODO: Environment.ExitCode = exitCode;
+                    }).Start();
                     set_ExitCode.SetValue(null, exitCode - 1); // TODO: Environment.ExitCode = exitCode - 1;
                     break;
 

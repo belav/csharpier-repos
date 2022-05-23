@@ -12,13 +12,11 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public void NegativeTests()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.GetValue(null, TestData.DefaultValue);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.GetValue(null, TestData.DefaultValue);
+            });
         }
 
         [Fact]

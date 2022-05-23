@@ -12,41 +12,35 @@ class Driver
 
     static Thread GetThread1()
     {
-        return new Thread(
-            () =>
-            {
-                /* Exit bypassing completely the runtime */
-                if (
-                    Environment.OSVersion.Platform == PlatformID.Unix
-                    || Environment.OSVersion.Platform == PlatformID.MacOSX
-                )
-                    pthread_exit(IntPtr.Zero);
-                else
-                    ExitThread(IntPtr.Zero);
-            }
-        );
+        return new Thread(() =>
+        {
+            /* Exit bypassing completely the runtime */
+            if (
+                Environment.OSVersion.Platform == PlatformID.Unix
+                || Environment.OSVersion.Platform == PlatformID.MacOSX
+            )
+                pthread_exit(IntPtr.Zero);
+            else
+                ExitThread(IntPtr.Zero);
+        });
     }
 
     static Thread GetThread2()
     {
-        return new Thread(
-            () =>
-            {
-                /* Exit without returning from the ThreadStart delegate */
-                Thread.CurrentThread.Abort();
-            }
-        );
+        return new Thread(() =>
+        {
+            /* Exit without returning from the ThreadStart delegate */
+            Thread.CurrentThread.Abort();
+        });
     }
 
     static Thread GetThread3()
     {
-        return new Thread(
-            () =>
-            {
-                /* Exit by returning from the ThreadStart delegate */
-                return;
-            }
-        );
+        return new Thread(() =>
+        {
+            /* Exit by returning from the ThreadStart delegate */
+            return;
+        });
     }
 
     static Thread[] CreateThreads()

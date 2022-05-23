@@ -302,13 +302,11 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Pegasus>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Identifier);
-                        b.Property(e => e.Identifier).UseHiLo();
-                    }
-                );
+                modelBuilder.Entity<Pegasus>(b =>
+                {
+                    b.HasKey(e => e.Identifier);
+                    b.Property(e => e.Identifier).UseHiLo();
+                });
             }
         }
 
@@ -423,20 +421,18 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Unicon>(
-                    b =>
+                modelBuilder.Entity<Unicon>(b =>
+                {
+                    b.HasKey(e => e.Identifier);
+                    if (_useSequence)
                     {
-                        b.HasKey(e => e.Identifier);
-                        if (_useSequence)
-                        {
-                            b.Property(e => e.Identifier).UseHiLo();
-                        }
-                        else
-                        {
-                            b.Property(e => e.Identifier).UseIdentityColumn();
-                        }
+                        b.Property(e => e.Identifier).UseHiLo();
                     }
-                );
+                    else
+                    {
+                        b.Property(e => e.Identifier).UseIdentityColumn();
+                    }
+                });
             }
         }
 

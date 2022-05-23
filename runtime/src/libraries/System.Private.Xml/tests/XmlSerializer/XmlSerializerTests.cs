@@ -878,20 +878,16 @@ public static partial class XmlSerializerTests
         var expected = new SimpleType() { P1 = "p1 value", P2 = 123 };
         var serializer = new XmlSerializer(typeof(SimpleType));
         var writerTypes = new Type[] { typeof(TextWriter), typeof(XmlWriter) };
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                XmlWriter writer = null;
-                serializer.Serialize(writer, expected);
-            }
-        );
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                XmlReader reader = null;
-                serializer.Deserialize(reader);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            XmlWriter writer = null;
+            serializer.Serialize(writer, expected);
+        });
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            XmlReader reader = null;
+            serializer.Deserialize(reader);
+        });
         foreach (var writerType in writerTypes)
         {
             var stream = new MemoryStream();

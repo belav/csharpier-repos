@@ -306,89 +306,85 @@ namespace System.IO.Pipes.Tests
 
                     client.Connect();
 
-                    Task clientTask = Task.Run(
-                        () =>
+                    Task clientTask = Task.Run(() =>
+                    {
+                        client.Write(msg1, 0, msg1.Length);
+                        client.Write(msg2, 0, msg2.Length);
+                        client.Write(msg1, 0, msg1.Length);
+
+                        client.Write(msg1, 0, msg1.Length);
+                        client.Write(msg2, 0, msg2.Length);
+                        client.Write(msg1, 0, msg1.Length);
+
+                        int serverCount = client.NumberOfServerInstances;
+                        Assert.Equal(1, serverCount);
+                    });
+
+                    Task serverTask = Task.Run(async () =>
+                    {
+                        server.WaitForConnection();
+
+                        int len1 = server.Read(received1, 0, msg1.Length);
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1.Length, len1);
+                        Assert.Equal(msg1, received1);
+
+                        int len2 = server.Read(received2, 0, msg2.Length);
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg2.Length, len2);
+                        Assert.Equal(msg2, received2);
+
+                        int expectedRead = msg1.Length - 1;
+                        int len3 = server.Read(received3, 0, expectedRead); // read one less than message
+                        Assert.False(server.IsMessageComplete);
+                        Assert.Equal(expectedRead, len3);
+                        for (int i = 0; i < expectedRead; ++i)
                         {
-                            client.Write(msg1, 0, msg1.Length);
-                            client.Write(msg2, 0, msg2.Length);
-                            client.Write(msg1, 0, msg1.Length);
-
-                            client.Write(msg1, 0, msg1.Length);
-                            client.Write(msg2, 0, msg2.Length);
-                            client.Write(msg1, 0, msg1.Length);
-
-                            int serverCount = client.NumberOfServerInstances;
-                            Assert.Equal(1, serverCount);
+                            Assert.Equal(msg1[i], received3[i]);
                         }
-                    );
 
-                    Task serverTask = Task.Run(
-                        async () =>
+                        expectedRead = msg1.Length - expectedRead;
+                        Assert.Equal(expectedRead, server.Read(received3, len3, expectedRead));
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1, received3);
+
+                        Assert.Equal(
+                            msg1.Length,
+                            await server.ReadAsync(received4, 0, msg1.Length)
+                        );
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1, received4);
+
+                        Assert.Equal(
+                            msg2.Length,
+                            await server.ReadAsync(received5, 0, msg2.Length)
+                        );
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg2, received5);
+
+                        expectedRead = msg1.Length - 1;
+                        Assert.Equal(
+                            expectedRead,
+                            await server.ReadAsync(received6, 0, expectedRead)
+                        ); // read one less than message
+                        Assert.False(server.IsMessageComplete);
+                        for (int i = 0; i < expectedRead; ++i)
                         {
-                            server.WaitForConnection();
-
-                            int len1 = server.Read(received1, 0, msg1.Length);
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1.Length, len1);
-                            Assert.Equal(msg1, received1);
-
-                            int len2 = server.Read(received2, 0, msg2.Length);
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg2.Length, len2);
-                            Assert.Equal(msg2, received2);
-
-                            int expectedRead = msg1.Length - 1;
-                            int len3 = server.Read(received3, 0, expectedRead); // read one less than message
-                            Assert.False(server.IsMessageComplete);
-                            Assert.Equal(expectedRead, len3);
-                            for (int i = 0; i < expectedRead; ++i)
-                            {
-                                Assert.Equal(msg1[i], received3[i]);
-                            }
-
-                            expectedRead = msg1.Length - expectedRead;
-                            Assert.Equal(expectedRead, server.Read(received3, len3, expectedRead));
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1, received3);
-
-                            Assert.Equal(
-                                msg1.Length,
-                                await server.ReadAsync(received4, 0, msg1.Length)
-                            );
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1, received4);
-
-                            Assert.Equal(
-                                msg2.Length,
-                                await server.ReadAsync(received5, 0, msg2.Length)
-                            );
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg2, received5);
-
-                            expectedRead = msg1.Length - 1;
-                            Assert.Equal(
-                                expectedRead,
-                                await server.ReadAsync(received6, 0, expectedRead)
-                            ); // read one less than message
-                            Assert.False(server.IsMessageComplete);
-                            for (int i = 0; i < expectedRead; ++i)
-                            {
-                                Assert.Equal(msg1[i], received6[i]);
-                            }
-
-                            expectedRead = msg1.Length - expectedRead;
-                            Assert.Equal(
-                                expectedRead,
-                                await server.ReadAsync(
-                                    received6,
-                                    msg1.Length - expectedRead,
-                                    expectedRead
-                                )
-                            );
-                            Assert.True(server.IsMessageComplete);
-                            Assert.Equal(msg1, received6);
+                            Assert.Equal(msg1[i], received6[i]);
                         }
-                    );
+
+                        expectedRead = msg1.Length - expectedRead;
+                        Assert.Equal(
+                            expectedRead,
+                            await server.ReadAsync(
+                                received6,
+                                msg1.Length - expectedRead,
+                                expectedRead
+                            )
+                        );
+                        Assert.True(server.IsMessageComplete);
+                        Assert.Equal(msg1, received6);
+                    });
 
                     Assert.True(
                         Task.WaitAll(new[] { clientTask, serverTask }, TimeSpan.FromSeconds(15))
@@ -915,12 +911,10 @@ namespace System.IO.Pipes.Tests
             using (NamedPipeClientStream client = new NamedPipeClientStream(pipeName))
             {
                 Task waitingClient = client.ConnectAsync(92, cancellationToken);
-                await Assert.ThrowsAsync<TimeoutException>(
-                    () =>
-                    {
-                        return waitingClient;
-                    }
-                );
+                await Assert.ThrowsAsync<TimeoutException>(() =>
+                {
+                    return waitingClient;
+                });
             }
         }
 
@@ -970,12 +964,10 @@ namespace System.IO.Pipes.Tests
                 Assert.True(Task.WaitAll(clientAndServerTasks, timeout));
 
                 Task waitingClient = secondClient.ConnectAsync(94, cancellationToken);
-                await Assert.ThrowsAsync<TimeoutException>(
-                    () =>
-                    {
-                        return waitingClient;
-                    }
-                );
+                await Assert.ThrowsAsync<TimeoutException>(() =>
+                {
+                    return waitingClient;
+                });
             }
         }
 

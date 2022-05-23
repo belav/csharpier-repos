@@ -180,31 +180,29 @@ namespace System.Runtime.Tests
                 currentThread: true
             );
 
-            var t1 = new Thread(
-                () =>
-                {
-                    t1_beforeCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
-                        currentThread: true
-                    );
-                    t1_beforeCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
-                        currentThread: true
-                    );
-                    t1_beforeCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                        currentThread: true
-                    );
-                    long square = MakeAndInvokeDynamicSquareMethod(100);
-                    Assert.True(square == 10000);
-                    t1_afterCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
-                        currentThread: true
-                    );
-                    t1_afterCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
-                        currentThread: true
-                    );
-                    t1_afterCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
-                        currentThread: true
-                    );
-                }
-            );
+            var t1 = new Thread(() =>
+            {
+                t1_beforeCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
+                    currentThread: true
+                );
+                t1_beforeCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
+                    currentThread: true
+                );
+                t1_beforeCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
+                    currentThread: true
+                );
+                long square = MakeAndInvokeDynamicSquareMethod(100);
+                Assert.True(square == 10000);
+                t1_afterCompilationTime = System.Runtime.JitInfo.GetCompilationTime(
+                    currentThread: true
+                );
+                t1_afterCompiledILBytes = System.Runtime.JitInfo.GetCompiledILBytes(
+                    currentThread: true
+                );
+                t1_afterCompiledMethodCount = System.Runtime.JitInfo.GetCompiledMethodCount(
+                    currentThread: true
+                );
+            });
 
             t1.Start();
             t1.Join();

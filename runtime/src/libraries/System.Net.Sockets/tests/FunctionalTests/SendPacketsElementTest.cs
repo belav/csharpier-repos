@@ -13,35 +13,29 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void NullBufferCtor_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((byte[])null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((byte[])null);
+            });
         }
 
         [Fact]
         public void NullBufferCtorWithOffset_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((byte[])null, 0, 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((byte[])null, 0, 0);
+            });
         }
 
         [Fact]
         public void NullBufferCtorWithEndOfPacket_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    // Elements with null Buffers are ignored on Send
-                    new SendPacketsElement((byte[])null, 0, 0, true);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                // Elements with null Buffers are ignored on Send
+                new SendPacketsElement((byte[])null, 0, 0, true);
+            });
         }
 
         [Fact]
@@ -76,45 +70,37 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BufferCtorNegOffset_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement(new byte[10], -1, 11);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement(new byte[10], -1, 11);
+            });
         }
 
         [Fact]
         public void BufferCtorNegCount_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement(new byte[10], 0, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement(new byte[10], 0, -1);
+            });
         }
 
         [Fact]
         public void BufferCtorLargeOffset_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement(new byte[10], 11, 1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement(new byte[10], 11, 1);
+            });
         }
 
         [Fact]
         public void BufferCtorLargeCount_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement(new byte[10], 5, 10);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement(new byte[10], 5, 10);
+            });
         }
 
         [Fact]
@@ -332,24 +318,18 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileCtorNull_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((string)null);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((string)null, 0, 0);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((string)null, 0, 0, true);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((string)null);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((string)null, 0, 0);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((string)null, 0, 0, true);
+            });
         }
 
         [Fact]
@@ -407,35 +387,27 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileCtorNegOffset_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", -1, 11);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", -1, 11, true);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", -1, 11);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", -1, 11, true);
+            });
         }
 
         [Fact]
         public void FileCtorNegCount_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", 0, -1);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", 0, -1, true);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", 0, -1);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", 0, -1, true);
+            });
         }
 
         // File lengths are validated on send
@@ -467,18 +439,14 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileCtorNull_OffsetLong_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((string)null, 0L, 0);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((string)null, 0L, 0, true);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((string)null, 0L, 0);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((string)null, 0L, 0, true);
+            });
         }
 
         [Fact]
@@ -539,35 +507,27 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileCtorNegOffset_OffsetLong_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", -1L, 11);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", -1L, 11, true);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", -1L, 11);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", -1L, 11, true);
+            });
         }
 
         [Fact]
         public void FileCtorNegCount_OffsetLong_ArgumentOutOfRangeException()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", 0L, -1);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new SendPacketsElement("SomeFileName", 0L, -1, true);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", 0L, -1);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new SendPacketsElement("SomeFileName", 0L, -1, true);
+            });
         }
 
         [Fact]
@@ -597,12 +557,10 @@ namespace System.Net.Sockets.Tests
             Assert.Null(element.FileStream);
             Assert.Null(element.Buffer);
             Assert.Null(element.MemoryBuffer);
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    var ofset = element.Offset;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                var ofset = element.Offset;
+            });
             Assert.Equal(8, element.Count);
             Assert.Equal((long)int.MaxValue + 2, element.OffsetLong);
             Assert.True(element.EndOfPacket);
@@ -636,12 +594,10 @@ namespace System.Net.Sockets.Tests
             Assert.Null(element.FileStream);
             Assert.Null(element.Buffer);
             Assert.Null(element.MemoryBuffer);
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    var ofset = element.Offset;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                var ofset = element.Offset;
+            });
             Assert.Equal(4, element.Count);
             Assert.Equal((long)int.MaxValue + 6, element.OffsetLong);
             Assert.False(element.EndOfPacket);
@@ -655,24 +611,18 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void FileStreamCtorNull_Throws()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((FileStream)null);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((FileStream)null, 0, 0);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new SendPacketsElement((FileStream)null, 0, 0, true);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((FileStream)null);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((FileStream)null, 0, 0);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new SendPacketsElement((FileStream)null, 0, 0, true);
+            });
         }
 
         [Fact]
@@ -742,30 +692,22 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, -1, 11);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, -1, 11, true);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, -1L, 11);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, -1L, 11, true);
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, -1, 11);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, -1, 11, true);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, -1L, 11);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, -1L, 11, true);
+                });
             }
         }
 
@@ -780,30 +722,22 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, 0, -1);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, 0, -1, true);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, 0L, -1);
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, 0L, -1, true);
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, 0, -1);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, 0, -1, true);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, 0L, -1);
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    new SendPacketsElement(stream, 0L, -1, true);
+                });
             }
         }
 
@@ -814,12 +748,10 @@ namespace System.Net.Sockets.Tests
                 var stream = File.Create(Path.GetTempFileName(), 4096, FileOptions.DeleteOnClose)
             )
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        new SendPacketsElement(stream, 0, 10);
-                    }
-                );
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    new SendPacketsElement(stream, 0, 10);
+                });
             }
         }
 
@@ -861,12 +793,10 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(element.FileStream, stream);
                 Assert.Null(element.Buffer);
                 Assert.Null(element.MemoryBuffer);
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        var ofset = element.Offset;
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var ofset = element.Offset;
+                });
                 Assert.Equal(8, element.Count);
                 Assert.Equal((long)int.MaxValue + 2, element.OffsetLong);
                 Assert.True(element.EndOfPacket);
@@ -909,12 +839,10 @@ namespace System.Net.Sockets.Tests
                 Assert.Equal(element.FileStream, stream);
                 Assert.Null(element.Buffer);
                 Assert.Null(element.MemoryBuffer);
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        var ofset = element.Offset;
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    var ofset = element.Offset;
+                });
                 Assert.Equal(4, element.Count);
                 Assert.Equal((long)int.MaxValue + 6, element.OffsetLong);
                 Assert.False(element.EndOfPacket);

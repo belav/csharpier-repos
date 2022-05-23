@@ -66,12 +66,10 @@ namespace System.Web.Http.Filters
             bool onActionExecutingInvoked = false;
             filterMock
                 .Setup(f => f.OnAuthorization(It.IsAny<HttpActionContext>()))
-                .Callback(
-                    () =>
-                    {
-                        onActionExecutingInvoked = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    onActionExecutingInvoked = true;
+                });
             bool? flagWhenContinuationInvoked = null;
             Func<Task<HttpResponseMessage>> continuation = () =>
             {
@@ -104,12 +102,10 @@ namespace System.Web.Http.Filters
             HttpResponseMessage response = new HttpResponseMessage();
             filterMock
                 .Setup(f => f.OnAuthorization(It.IsAny<HttpActionContext>()))
-                .Callback<HttpActionContext>(
-                    c =>
-                    {
-                        c.Response = response;
-                    }
-                );
+                .Callback<HttpActionContext>(c =>
+                {
+                    c.Response = response;
+                });
 
             bool continuationCalled = false;
             var filter = (IAuthorizationFilter)filterMock.Object;

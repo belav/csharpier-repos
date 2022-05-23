@@ -24,12 +24,10 @@ using CreateMiddleware = Func<
 public class OwinExtensionTests
 {
     static readonly AppFunc notFound = env =>
-        new Task(
-            () =>
-            {
-                env["owin.ResponseStatusCode"] = 404;
-            }
-        );
+        new Task(() =>
+        {
+            env["owin.ResponseStatusCode"] = 404;
+        });
 
     [Fact]
     public async Task OwinConfigureServiceProviderAddsServices()
@@ -43,13 +41,11 @@ public class OwinExtensionTests
             applicationBuilder =>
             {
                 serviceProvider = applicationBuilder.ApplicationServices;
-                applicationBuilder.Run(
-                    context =>
-                    {
-                        fakeService = context.RequestServices.GetService<FakeService>();
-                        return Task.FromResult(0);
-                    }
-                );
+                applicationBuilder.Run(context =>
+                {
+                    fakeService = context.RequestServices.GetService<FakeService>();
+                    return Task.FromResult(0);
+                });
             },
             new ServiceCollection().AddSingleton(new FakeService()).BuildServiceProvider()
         );
@@ -79,14 +75,12 @@ public class OwinExtensionTests
             {
                 builderExecuted = true;
                 serviceProvider = applicationBuilder.ApplicationServices;
-                applicationBuilder.Run(
-                    context =>
-                    {
-                        applicationExecuted = true;
-                        fakeService = context.RequestServices.GetService<FakeService>();
-                        return Task.FromResult(0);
-                    }
-                );
+                applicationBuilder.Run(context =>
+                {
+                    applicationExecuted = true;
+                    fakeService = context.RequestServices.GetService<FakeService>();
+                    return Task.FromResult(0);
+                });
             },
             expectedServiceProvider
         );
@@ -111,21 +105,17 @@ public class OwinExtensionTests
         bool builderExecuted = false;
         bool applicationExecuted = false;
 
-        var builder = build.UseBuilder(
-            applicationBuilder =>
+        var builder = build.UseBuilder(applicationBuilder =>
+        {
+            builderExecuted = true;
+            serviceProvider = applicationBuilder.ApplicationServices;
+            applicationBuilder.Run(context =>
             {
-                builderExecuted = true;
-                serviceProvider = applicationBuilder.ApplicationServices;
-                applicationBuilder.Run(
-                    context =>
-                    {
-                        applicationExecuted = true;
-                        fakeService = context.RequestServices.GetService<FakeService>();
-                        return Task.FromResult(0);
-                    }
-                );
-            }
-        );
+                applicationExecuted = true;
+                fakeService = context.RequestServices.GetService<FakeService>();
+                return Task.FromResult(0);
+            });
+        });
 
         list.Reverse();
         await list.Aggregate(notFound, (next, middleware) => middleware(next))
@@ -145,22 +135,18 @@ public class OwinExtensionTests
         IDictionary<string, object> environment = null;
         var context = new DefaultHttpContext();
 
-        builder.UseOwin(
-            addToPipeline =>
+        builder.UseOwin(addToPipeline =>
+        {
+            addToPipeline(next =>
             {
-                addToPipeline(
-                    next =>
-                    {
-                        Assert.NotNull(next);
-                        return async env =>
-                        {
-                            environment = env;
-                            await next(env);
-                        };
-                    }
-                );
-            }
-        );
+                Assert.NotNull(next);
+                return async env =>
+                {
+                    environment = env;
+                    await next(env);
+                };
+            });
+        });
         await builder.Build().Invoke(context);
 
         // Dictionary contains context but does not contain "websocket.Accept" or "websocket.AcceptAlt" keys.

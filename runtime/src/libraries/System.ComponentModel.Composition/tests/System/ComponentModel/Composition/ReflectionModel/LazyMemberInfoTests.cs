@@ -173,12 +173,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
                         continue;
                     }
                     LazyMemberInfo lazy = new LazyMemberInfo(wrongMemberType, () => accessors);
-                    ExceptionAssert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            lazy.GetAccessors();
-                        }
-                    );
+                    ExceptionAssert.Throws<InvalidOperationException>(() =>
+                    {
+                        lazy.GetAccessors();
+                    });
                 }
             }
         }

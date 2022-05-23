@@ -19,12 +19,10 @@ namespace System.Net.Http.Tests
             Assert.Null(productInfo.Comment);
 
             ProductHeaderValue input = null;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new ProductInfoHeaderValue(input);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new ProductInfoHeaderValue(input);
+            });
         }
 
         [Fact]
@@ -49,24 +47,18 @@ namespace System.Net.Http.Tests
                     new ProductInfoHeaderValue((string)null);
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductInfoHeaderValue("invalid comment");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductInfoHeaderValue(" (leading space)");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ProductInfoHeaderValue("(trailing space) ");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductInfoHeaderValue("invalid comment");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductInfoHeaderValue(" (leading space)");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ProductInfoHeaderValue("(trailing space) ");
+            });
         }
 
         [Fact]
@@ -236,12 +228,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    ProductInfoHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                ProductInfoHeaderValue.Parse(input);
+            });
 
             Assert.False(ProductInfoHeaderValue.TryParse(input, out ProductInfoHeaderValue result));
             Assert.Null(result);

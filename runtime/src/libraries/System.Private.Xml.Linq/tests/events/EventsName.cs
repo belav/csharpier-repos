@@ -211,12 +211,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    toChange.Add(new XElement("Add", "Me"));
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                toChange.Add(new XElement("Add", "Me"));
+            });
             xDoc.Root.Verify();
             Assert.Null(toChange.Element("Add"));
         }
@@ -243,12 +241,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    toChange.Add(new XElement("Add", "Me"));
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                toChange.Add(new XElement("Add", "Me"));
+            });
             xDoc.Root.Verify();
             Assert.NotNull(toChange.Element("Add"));
         }

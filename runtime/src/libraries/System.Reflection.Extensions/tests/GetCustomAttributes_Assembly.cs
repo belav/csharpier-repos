@@ -93,15 +93,13 @@ namespace System.Reflection.Tests
             );
             Assert.Equal("System.Reflection.Tests.MyAttribute_Single single", attribute.ToString());
 
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute(
-                        thisAsm,
-                        typeof(MyAttribute_AllowMultiple)
-                    );
-                }
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute(
+                    thisAsm,
+                    typeof(MyAttribute_AllowMultiple)
+                );
+            });
         }
 
         [Fact]
@@ -166,12 +164,10 @@ namespace System.Reflection.Tests
             attribute = CustomAttributeExtensions.GetCustomAttribute<MyAttribute_Single>(thisAsm);
             Assert.Equal("System.Reflection.Tests.MyAttribute_Single single", attribute.ToString());
 
-            Assert.Throws<AmbiguousMatchException>(
-                () =>
-                {
-                    attribute = CustomAttributeExtensions.GetCustomAttribute<Attribute>(thisAsm);
-                }
-            );
+            Assert.Throws<AmbiguousMatchException>(() =>
+            {
+                attribute = CustomAttributeExtensions.GetCustomAttribute<Attribute>(thisAsm);
+            });
         }
 
         [Fact]

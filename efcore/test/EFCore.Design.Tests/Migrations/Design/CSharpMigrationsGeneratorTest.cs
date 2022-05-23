@@ -545,15 +545,13 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Design
 
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
-            modelBuilder.Entity<WithAnnotations>(
-                eb =>
-                {
-                    eb.HasDiscriminator<RawEnum>("EnumDiscriminator")
-                        .HasValue(RawEnum.A)
-                        .HasValue<Derived>(RawEnum.B);
-                    eb.Property<RawEnum>("EnumDiscriminator").HasConversion<int>();
-                }
-            );
+            modelBuilder.Entity<WithAnnotations>(eb =>
+            {
+                eb.HasDiscriminator<RawEnum>("EnumDiscriminator")
+                    .HasValue(RawEnum.A)
+                    .HasValue<Derived>(RawEnum.B);
+                eb.Property<RawEnum>("EnumDiscriminator").HasConversion<int>();
+            });
 
             var finalizedModel = modelBuilder.FinalizeModel(designTime: true);
 
@@ -834,15 +832,13 @@ namespace MyNamespace
 
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
             modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
-            modelBuilder.Entity<EntityWithConstructorBinding>(
-                x =>
-                {
-                    x.Property(e => e.Id);
+            modelBuilder.Entity<EntityWithConstructorBinding>(x =>
+            {
+                x.Property(e => e.Id);
 
-                    x.Property<Guid>("PropertyWithValueGenerator")
-                        .HasValueGenerator<GuidValueGenerator>();
-                }
-            );
+                x.Property<Guid>("PropertyWithValueGenerator")
+                    .HasValueGenerator<GuidValueGenerator>();
+            });
             modelBuilder.HasDbFunction(() => MyDbFunction());
 
             var model = modelBuilder.Model;
@@ -943,59 +939,56 @@ namespace MyNamespace
             var generator = CreateMigrationsCodeGenerator();
 
             var modelBuilder = RelationalTestHelpers.Instance.CreateConventionBuilder();
-            modelBuilder.Entity<EntityWithEveryPrimitive>(
-                eb =>
-                {
-                    eb.Property(e => e.Boolean).HasDefaultValue(false);
-                    eb.Property(e => e.Byte).HasDefaultValue(byte.MinValue);
-                    eb.Property(e => e.ByteArray).HasDefaultValue(new byte[] { 0 });
-                    eb.Property(e => e.Char).HasDefaultValue('0');
-                    eb.Property(e => e.DateTime).HasDefaultValue(DateTime.MinValue);
-                    eb.Property(e => e.DateTimeOffset).HasDefaultValue(DateTimeOffset.MinValue);
-                    eb.Property(e => e.Decimal).HasDefaultValue(decimal.MinValue);
-                    eb.Property(e => e.Double).HasDefaultValue(double.MinValue); //double.NegativeInfinity
-                    eb.Property(e => e.Enum).HasDefaultValue(Enum1.Default);
-                    eb.Property(e => e.NullableEnum)
-                        .HasDefaultValue(Enum1.Default)
-                        .HasConversion<string>();
-                    eb.Property(e => e.Guid).HasDefaultValue(Guid.NewGuid());
-                    eb.Property(e => e.Int16).HasDefaultValue(short.MaxValue);
-                    eb.Property(e => e.Int32).HasDefaultValue(int.MaxValue);
-                    eb.Property(e => e.Int64).HasDefaultValue(long.MaxValue);
-                    eb.Property(e => e.Single).HasDefaultValue(float.Epsilon);
-                    eb.Property(e => e.SByte).HasDefaultValue(sbyte.MinValue);
-                    eb.Property(e => e.String).HasDefaultValue("'\"'@\r\\\n");
-                    eb.Property(e => e.TimeSpan).HasDefaultValue(TimeSpan.MaxValue);
-                    eb.Property(e => e.UInt16).HasDefaultValue(ushort.MinValue);
-                    eb.Property(e => e.UInt32).HasDefaultValue(uint.MinValue);
-                    eb.Property(e => e.UInt64).HasDefaultValue(ulong.MinValue);
-                    eb.Property(e => e.NullableBoolean).HasDefaultValue(true);
-                    eb.Property(e => e.NullableByte).HasDefaultValue(byte.MaxValue);
-                    eb.Property(e => e.NullableChar).HasDefaultValue('\'');
-                    eb.Property(e => e.NullableDateTime).HasDefaultValue(DateTime.MaxValue);
-                    eb.Property(e => e.NullableDateTimeOffset)
-                        .HasDefaultValue(DateTimeOffset.MaxValue);
-                    eb.Property(e => e.NullableDecimal).HasDefaultValue(decimal.MaxValue);
-                    eb.Property(e => e.NullableDouble).HasDefaultValue(0.6822871999174);
-                    eb.Property(e => e.NullableEnum).HasDefaultValue(Enum1.One | Enum1.Two);
-                    eb.Property(e => e.NullableStringEnum)
-                        .HasDefaultValue(Enum1.One)
-                        .HasConversion<string>();
-                    eb.Property(e => e.NullableGuid).HasDefaultValue(new Guid());
-                    eb.Property(e => e.NullableInt16).HasDefaultValue(short.MinValue);
-                    eb.Property(e => e.NullableInt32).HasDefaultValue(int.MinValue);
-                    eb.Property(e => e.NullableInt64).HasDefaultValue(long.MinValue);
-                    eb.Property(e => e.NullableSingle).HasDefaultValue(0.3333333f);
-                    eb.Property(e => e.NullableSByte).HasDefaultValue(sbyte.MinValue);
-                    eb.Property(e => e.NullableTimeSpan)
-                        .HasDefaultValue(TimeSpan.MinValue.Add(new TimeSpan()));
-                    eb.Property(e => e.NullableUInt16).HasDefaultValue(ushort.MaxValue);
-                    eb.Property(e => e.NullableUInt32).HasDefaultValue(uint.MaxValue);
-                    eb.Property(e => e.NullableUInt64).HasDefaultValue(ulong.MaxValue);
+            modelBuilder.Entity<EntityWithEveryPrimitive>(eb =>
+            {
+                eb.Property(e => e.Boolean).HasDefaultValue(false);
+                eb.Property(e => e.Byte).HasDefaultValue(byte.MinValue);
+                eb.Property(e => e.ByteArray).HasDefaultValue(new byte[] { 0 });
+                eb.Property(e => e.Char).HasDefaultValue('0');
+                eb.Property(e => e.DateTime).HasDefaultValue(DateTime.MinValue);
+                eb.Property(e => e.DateTimeOffset).HasDefaultValue(DateTimeOffset.MinValue);
+                eb.Property(e => e.Decimal).HasDefaultValue(decimal.MinValue);
+                eb.Property(e => e.Double).HasDefaultValue(double.MinValue); //double.NegativeInfinity
+                eb.Property(e => e.Enum).HasDefaultValue(Enum1.Default);
+                eb.Property(e => e.NullableEnum)
+                    .HasDefaultValue(Enum1.Default)
+                    .HasConversion<string>();
+                eb.Property(e => e.Guid).HasDefaultValue(Guid.NewGuid());
+                eb.Property(e => e.Int16).HasDefaultValue(short.MaxValue);
+                eb.Property(e => e.Int32).HasDefaultValue(int.MaxValue);
+                eb.Property(e => e.Int64).HasDefaultValue(long.MaxValue);
+                eb.Property(e => e.Single).HasDefaultValue(float.Epsilon);
+                eb.Property(e => e.SByte).HasDefaultValue(sbyte.MinValue);
+                eb.Property(e => e.String).HasDefaultValue("'\"'@\r\\\n");
+                eb.Property(e => e.TimeSpan).HasDefaultValue(TimeSpan.MaxValue);
+                eb.Property(e => e.UInt16).HasDefaultValue(ushort.MinValue);
+                eb.Property(e => e.UInt32).HasDefaultValue(uint.MinValue);
+                eb.Property(e => e.UInt64).HasDefaultValue(ulong.MinValue);
+                eb.Property(e => e.NullableBoolean).HasDefaultValue(true);
+                eb.Property(e => e.NullableByte).HasDefaultValue(byte.MaxValue);
+                eb.Property(e => e.NullableChar).HasDefaultValue('\'');
+                eb.Property(e => e.NullableDateTime).HasDefaultValue(DateTime.MaxValue);
+                eb.Property(e => e.NullableDateTimeOffset).HasDefaultValue(DateTimeOffset.MaxValue);
+                eb.Property(e => e.NullableDecimal).HasDefaultValue(decimal.MaxValue);
+                eb.Property(e => e.NullableDouble).HasDefaultValue(0.6822871999174);
+                eb.Property(e => e.NullableEnum).HasDefaultValue(Enum1.One | Enum1.Two);
+                eb.Property(e => e.NullableStringEnum)
+                    .HasDefaultValue(Enum1.One)
+                    .HasConversion<string>();
+                eb.Property(e => e.NullableGuid).HasDefaultValue(new Guid());
+                eb.Property(e => e.NullableInt16).HasDefaultValue(short.MinValue);
+                eb.Property(e => e.NullableInt32).HasDefaultValue(int.MinValue);
+                eb.Property(e => e.NullableInt64).HasDefaultValue(long.MinValue);
+                eb.Property(e => e.NullableSingle).HasDefaultValue(0.3333333f);
+                eb.Property(e => e.NullableSByte).HasDefaultValue(sbyte.MinValue);
+                eb.Property(e => e.NullableTimeSpan)
+                    .HasDefaultValue(TimeSpan.MinValue.Add(new TimeSpan()));
+                eb.Property(e => e.NullableUInt16).HasDefaultValue(ushort.MaxValue);
+                eb.Property(e => e.NullableUInt32).HasDefaultValue(uint.MaxValue);
+                eb.Property(e => e.NullableUInt64).HasDefaultValue(ulong.MaxValue);
 
-                    eb.HasKey(e => e.Boolean);
-                }
-            );
+                eb.HasKey(e => e.Boolean);
+            });
 
             var finalizedModel = modelBuilder.FinalizeModel(designTime: true);
 

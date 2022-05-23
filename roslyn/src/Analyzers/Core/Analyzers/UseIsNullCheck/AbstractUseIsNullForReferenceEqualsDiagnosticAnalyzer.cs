@@ -33,41 +33,37 @@ namespace Microsoft.CodeAnalysis.UseIsNullCheck
             DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                var objectType = context.Compilation.GetSpecialType(SpecialType.System_Object);
+                if (objectType != null && IsLanguageVersionSupported(context.Compilation))
                 {
-                    var objectType = context.Compilation.GetSpecialType(SpecialType.System_Object);
-                    if (objectType != null && IsLanguageVersionSupported(context.Compilation))
+                    var referenceEqualsMethod = objectType
+                        .GetMembers(nameof(ReferenceEquals))
+                        .OfType<IMethodSymbol>()
+                        .FirstOrDefault(
+                            m =>
+                                m.DeclaredAccessibility == Accessibility.Public
+                                && m.Parameters.Length == 2
+                        );
+                    if (referenceEqualsMethod != null)
                     {
-                        var referenceEqualsMethod = objectType
-                            .GetMembers(nameof(ReferenceEquals))
-                            .OfType<IMethodSymbol>()
-                            .FirstOrDefault(
-                                m =>
-                                    m.DeclaredAccessibility == Accessibility.Public
-                                    && m.Parameters.Length == 2
-                            );
-                        if (referenceEqualsMethod != null)
-                        {
-                            var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-                            var unconstraintedGenericSupported = IsUnconstrainedGenericSupported(
-                                context.Compilation
-                            );
-                            context.RegisterSyntaxNodeAction(
-                                c =>
-                                    AnalyzeSyntax(
-                                        c,
-                                        referenceEqualsMethod,
-                                        unconstraintedGenericSupported
-                                    ),
-                                syntaxKinds.Convert<TLanguageKindEnum>(
-                                    syntaxKinds.InvocationExpression
-                                )
-                            );
-                        }
+                        var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
+                        var unconstraintedGenericSupported = IsUnconstrainedGenericSupported(
+                            context.Compilation
+                        );
+                        context.RegisterSyntaxNodeAction(
+                            c =>
+                                AnalyzeSyntax(
+                                    c,
+                                    referenceEqualsMethod,
+                                    unconstraintedGenericSupported
+                                ),
+                            syntaxKinds.Convert<TLanguageKindEnum>(syntaxKinds.InvocationExpression)
+                        );
                     }
                 }
-            );
+            });
 
         protected abstract bool IsLanguageVersionSupported(Compilation compilation);
         protected abstract bool IsUnconstrainedGenericSupported(Compilation compilation);

@@ -15,15 +15,12 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<FooBase, FooDto>()
-                        .ForMember(d => d.Value, opt => opt.MapFrom(src => 10));
-                    cfg.CreateMap<Foo, FooDto>()
-                        .ForMember(d => d.Value, opt => opt.MapFrom(src => 5));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FooBase, FooDto>()
+                    .ForMember(d => d.Value, opt => opt.MapFrom(src => 10));
+                cfg.CreateMap<Foo, FooDto>().ForMember(d => d.Value, opt => opt.MapFrom(src => 5));
+            });
 
         [Fact]
         public void Should_map_derived()

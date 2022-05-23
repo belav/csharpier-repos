@@ -13,13 +13,11 @@ public class MvcEncodedTestFixture<TStartup> : MvcTestFixture<TStartup> where TS
     protected override void ConfigureWebHost(IWebHostBuilder builder)
     {
         base.ConfigureWebHost(builder);
-        builder.ConfigureServices(
-            services =>
-            {
-                services.TryAddTransient<HtmlEncoder, HtmlTestEncoder>();
-                services.TryAddTransient<JavaScriptEncoder, JavaScriptTestEncoder>();
-                services.TryAddTransient<UrlEncoder, UrlTestEncoder>();
-            }
-        );
+        builder.ConfigureServices(services =>
+        {
+            services.TryAddTransient<HtmlEncoder, HtmlTestEncoder>();
+            services.TryAddTransient<JavaScriptEncoder, JavaScriptTestEncoder>();
+            services.TryAddTransient<UrlEncoder, UrlTestEncoder>();
+        });
     }
 }

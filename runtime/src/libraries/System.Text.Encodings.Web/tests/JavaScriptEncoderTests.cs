@@ -970,12 +970,10 @@ namespace System.Text.Encodings.Web.Tests
             // Arrange
             JavaScriptEncoder encoder = JavaScriptEncoder.Default;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    encoder.Encode(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]

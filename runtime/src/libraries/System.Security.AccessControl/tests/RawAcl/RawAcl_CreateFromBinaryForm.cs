@@ -223,44 +223,36 @@ namespace System.Security.AccessControl.Tests
             int offset = 0;
 
             //case 1, binaryForm is null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    binaryForm = null;
-                    offset = 0;
-                    rawAcl = new RawAcl(binaryForm, offset);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                binaryForm = null;
+                offset = 0;
+                rawAcl = new RawAcl(binaryForm, offset);
+            });
 
             //case 2, binaryForm is empty
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    binaryForm = new byte[0];
-                    offset = 0;
-                    rawAcl = new RawAcl(binaryForm, offset);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                binaryForm = new byte[0];
+                offset = 0;
+                rawAcl = new RawAcl(binaryForm, offset);
+            });
 
             //case 3, negative offset
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    binaryForm = new byte[100];
-                    offset = -1;
-                    rawAcl = new RawAcl(binaryForm, offset);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                binaryForm = new byte[100];
+                offset = -1;
+                rawAcl = new RawAcl(binaryForm, offset);
+            });
 
             //case 4, binaryForm length less than GenericAcl.HeaderLength
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    binaryForm = new byte[4];
-                    offset = 0;
-                    rawAcl = new RawAcl(binaryForm, offset);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                binaryForm = new byte[4];
+                offset = 0;
+                rawAcl = new RawAcl(binaryForm, offset);
+            });
 
             //case 5, a RawAcl of length 64K. RawAcl length = HeaderLength + all ACE's  length
             // = HeaderLength + (HeaderLength + OpaqueLength) * num_of_custom_ace
@@ -346,32 +338,26 @@ namespace System.Security.AccessControl.Tests
             );
 
             //case 8, array containing garbage
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    binaryForm = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-                    TestCreateFromBinaryForm(binaryForm, offset, revision, 1, 12);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                binaryForm = new byte[] { 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+                TestCreateFromBinaryForm(binaryForm, offset, revision, 1, 12);
+            });
 
             //case 9, array containing garbage
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    //binary form shows the length will be 1, actual length is 12
-                    binaryForm = new byte[] { 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
-                    TestCreateFromBinaryForm(binaryForm, offset, revision, 1, 12);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                //binary form shows the length will be 1, actual length is 12
+                binaryForm = new byte[] { 1, 1, 0, 1, 1, 1, 1, 1, 1, 1, 1, 1 };
+                TestCreateFromBinaryForm(binaryForm, offset, revision, 1, 12);
+            });
 
             //case 10, array containing garbage
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    binaryForm = new byte[] { 1, 1, 12, 0, 1, 1, 1, 1, 1, 1, 1, 1 };
-                    TestCreateFromBinaryForm(binaryForm, offset, revision, 1, 12);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                binaryForm = new byte[] { 1, 1, 12, 0, 1, 1, 1, 1, 1, 1, 1, 1 };
+                TestCreateFromBinaryForm(binaryForm, offset, revision, 1, 12);
+            });
         }
 
         private static bool TestCreateFromBinaryForm(

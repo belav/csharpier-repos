@@ -701,22 +701,20 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
             var solution = (EnvDTE80.Solution2)dte.Solution;
             return solution.Projects
                 .OfType<EnvDTE.Project>()
-                .First(
-                    project =>
-                    {
-                        ThreadHelper.ThrowIfNotOnUIThread();
-                        return string.Equals(
-                                project.FileName,
-                                nameOrFileName,
-                                StringComparison.OrdinalIgnoreCase
-                            )
-                            || string.Equals(
-                                project.Name,
-                                nameOrFileName,
-                                StringComparison.OrdinalIgnoreCase
-                            );
-                    }
-                );
+                .First(project =>
+                {
+                    ThreadHelper.ThrowIfNotOnUIThread();
+                    return string.Equals(
+                            project.FileName,
+                            nameOrFileName,
+                            StringComparison.OrdinalIgnoreCase
+                        )
+                        || string.Equals(
+                            project.Name,
+                            nameOrFileName,
+                            StringComparison.OrdinalIgnoreCase
+                        );
+                });
         }
 
         private sealed class SolutionEvents : IVsSolutionEvents, IAsyncDisposable

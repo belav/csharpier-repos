@@ -309,24 +309,22 @@ namespace Microsoft.CodeAnalysis.FileHeaders
             var lines = copyrightText.Split('\n');
             return string.Join(
                 newLineText,
-                lines.Select(
-                    line =>
+                lines.Select(line =>
+                {
+                    // Rewrite the lines of the header as comments without trailing whitespace.
+                    if (string.IsNullOrEmpty(line))
                     {
-                        // Rewrite the lines of the header as comments without trailing whitespace.
-                        if (string.IsNullOrEmpty(line))
-                        {
-                            // This is a blank line of the header. We want the prefix indicating the line is a comment, but no
-                            // additional trailing whitespace.
-                            return prefixWithLeadingSpaces;
-                        }
-                        else
-                        {
-                            // This is a normal line of the header. We want the prefix, followed by a single space, and then the
-                            // text of the header line.
-                            return prefixWithLeadingSpaces + " " + line;
-                        }
+                        // This is a blank line of the header. We want the prefix indicating the line is a comment, but no
+                        // additional trailing whitespace.
+                        return prefixWithLeadingSpaces;
                     }
-                )
+                    else
+                    {
+                        // This is a normal line of the header. We want the prefix, followed by a single space, and then the
+                        // text of the header line.
+                        return prefixWithLeadingSpaces + " " + line;
+                    }
+                })
             );
         }
 

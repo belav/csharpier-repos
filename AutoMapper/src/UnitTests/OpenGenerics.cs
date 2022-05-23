@@ -48,14 +48,12 @@ namespace AutoMapper.UnitTests
         class NonGenericDestination : Destination<string> { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Source), typeof(Destination<>))
-                        .As(typeof(NonGenericDestination));
-                    cfg.CreateMap(typeof(Source), typeof(NonGenericDestination));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Source), typeof(Destination<>))
+                    .As(typeof(NonGenericDestination));
+                cfg.CreateMap(typeof(Source), typeof(NonGenericDestination));
+            });
 
         [Fact]
         public void Should_work() =>
@@ -75,17 +73,15 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Source<>), typeof(Destination<string>));
-                    cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
-                        .ForAllMembers(o => o.Ignore());
-                    cfg.CreateMap(typeof(Source<string>), typeof(Destination<>))
-                        .ForAllMembers(o => o.Ignore());
-                    cfg.CreateMap(typeof(Source<int>), typeof(Destination<>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Source<>), typeof(Destination<string>));
+                cfg.CreateMap(typeof(Source<>), typeof(Destination<>))
+                    .ForAllMembers(o => o.Ignore());
+                cfg.CreateMap(typeof(Source<string>), typeof(Destination<>))
+                    .ForAllMembers(o => o.Ignore());
+                cfg.CreateMap(typeof(Source<int>), typeof(Destination<>));
+            });
 
         [Fact]
         public void Should_work()
@@ -170,17 +166,15 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
-                        .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<>)))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,>)));
-                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
-                        .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<,,>)))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,,,>)));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
+                    .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<>)))
+                    .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,>)));
+                cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
+                    .ForMember("MyKey", o => o.MapFrom(typeof(KeyResolver<,,>)))
+                    .ForMember("MyValue", o => o.MapFrom(typeof(ValueResolver<,,,>)));
+            });
 
         private class KeyResolver<TKey>
             : IValueResolver<KeyValuePair<TKey, int>, Destination, string>
@@ -266,17 +260,15 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
-                        .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<>), "Key"))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,>), "Value"));
-                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
-                        .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<,,>), "Key"))
-                        .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,,,>), "Value"));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
+                    .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<>), "Key"))
+                    .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,>), "Value"));
+                cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Destination<,>))
+                    .ForMember("MyKey", o => o.MapFrom(typeof(Resolver<,,>), "Key"))
+                    .ForMember("MyValue", o => o.MapFrom(typeof(Resolver<,,,>), "Value"));
+            });
 
         private class Resolver<TKey>
             : IMemberValueResolver<KeyValuePair<TKey, int>, Destination, int, string>
@@ -550,15 +542,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                mapper =>
-                {
-                    mapper
-                        .CreateMap(typeof(Foo<>), typeof(Bar<>))
-                        .ForMember("C", to => to.MapFrom("A"))
-                        .ForMember("D", to => to.MapFrom("B"));
-                }
-            );
+            new MapperConfiguration(mapper =>
+            {
+                mapper
+                    .CreateMap(typeof(Foo<>), typeof(Bar<>))
+                    .ForMember("C", to => to.MapFrom("A"))
+                    .ForMember("D", to => to.MapFrom("B"));
+            });
 
         [Fact]
         public void Can_remap_explicit_members()
@@ -585,14 +575,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                mapper =>
-                {
-                    mapper
-                        .CreateMap(typeof(Foo<>), typeof(Bar<>))
-                        .ForMember("Value2", to => to.MapFrom("Value1"));
-                }
-            );
+            new MapperConfiguration(mapper =>
+            {
+                mapper
+                    .CreateMap(typeof(Foo<>), typeof(Bar<>))
+                    .ForMember("Value2", to => to.MapFrom("Value1"));
+            });
 
         [Fact]
         public void Can_remap_explicit_members()
@@ -615,14 +603,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                mapper =>
-                {
-                    mapper
-                        .CreateMap(typeof(Foo<>), typeof(Bar<>))
-                        .ForMember("Value2", to => to.MapFrom("Value1"));
-                }
-            );
+            new MapperConfiguration(mapper =>
+            {
+                mapper
+                    .CreateMap(typeof(Foo<>), typeof(Bar<>))
+                    .ForMember("Value2", to => to.MapFrom("Value1"));
+            });
 
         [Fact]
         public void Can_remap_explicit_members()

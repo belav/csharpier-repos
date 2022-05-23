@@ -22,12 +22,10 @@ namespace System.Threading.Tasks.Tests
         {
             Task t = new Task(() => { });
             var c1 = t.ContinueWith(_ => { });
-            var c2 = t.ContinueWith(
-                _ =>
-                {
-                    return 42;
-                }
-            );
+            var c2 = t.ContinueWith(_ =>
+            {
+                return 42;
+            });
 
             Task<int> f = new Task<int>(() => 1);
             var c3 = f.ContinueWith(_ => { });
@@ -145,12 +143,10 @@ namespace System.Threading.Tasks.Tests
                     doneCount[0]++;
                 }
             );
-            Task c1 = t1.ContinueWith(
-                _ =>
-                {
-                    doneCount[1]++;
-                }
-            );
+            Task c1 = t1.ContinueWith(_ =>
+            {
+                doneCount[1]++;
+            });
             Task c2 = c1.ContinueWith(
                 _ =>
                 {
@@ -159,13 +155,11 @@ namespace System.Threading.Tasks.Tests
                 },
                 cts.Token
             );
-            Task c3 = c2.ContinueWith(
-                _ =>
-                {
-                    mres.WaitOne();
-                    doneCount[3]++;
-                }
-            );
+            Task c3 = c2.ContinueWith(_ =>
+            {
+                mres.WaitOne();
+                doneCount[3]++;
+            });
 
             Task c4 = c3.ContinueWith(
                 _ =>
@@ -178,13 +172,11 @@ namespace System.Threading.Tasks.Tests
                 TaskScheduler.Default
             );
 
-            Task c5 = c4.ContinueWith(
-                _ =>
-                {
-                    mres.WaitOne();
-                    doneCount[5]++;
-                }
-            );
+            Task c5 = c4.ContinueWith(_ =>
+            {
+                mres.WaitOne();
+                doneCount[5]++;
+            });
             EnsureCompletionStatus(
                 c2,
                 true,
@@ -596,114 +588,90 @@ namespace System.Threading.Tasks.Tests
             Task t1 = Task.Factory.StartNew(() => { });
             t1.Wait();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    t1.ContinueWith((Action<Task>)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                t1.ContinueWith((Action<Task>)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    t1.ContinueWith(_ => { }, (TaskScheduler)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                t1.ContinueWith(_ => { }, (TaskScheduler)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    t1.ContinueWith(
-                        _ => { },
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        (TaskScheduler)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                t1.ContinueWith(
+                    _ => { },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    (TaskScheduler)null
+                );
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    t1.ContinueWith((Func<Task, int>)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                t1.ContinueWith((Func<Task, int>)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    t1.ContinueWith(_ => 5, (TaskScheduler)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                t1.ContinueWith(_ => 5, (TaskScheduler)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    t1.ContinueWith(
-                        _ => 5,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        (TaskScheduler)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                t1.ContinueWith(
+                    _ => 5,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    (TaskScheduler)null
+                );
+            });
             //
             // Test exceptional behavior for continuations off of Task<int>s
             //
             Task<int> f1 = Task<int>.Factory.StartNew(() => 10);
             f1.Wait();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    f1.ContinueWith((Action<Task<int>>)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                f1.ContinueWith((Action<Task<int>>)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    f1.ContinueWith(_ => { }, (TaskScheduler)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                f1.ContinueWith(_ => { }, (TaskScheduler)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    f1.ContinueWith(
-                        _ => { },
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        (TaskScheduler)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                f1.ContinueWith(
+                    _ => { },
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    (TaskScheduler)null
+                );
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    f1.ContinueWith((Func<Task<int>, int>)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                f1.ContinueWith((Func<Task<int>, int>)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    f1.ContinueWith(_ => 5, (TaskScheduler)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                f1.ContinueWith(_ => 5, (TaskScheduler)null);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    f1.ContinueWith(
-                        _ => 5,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        (TaskScheduler)null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                f1.ContinueWith(
+                    _ => 5,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    (TaskScheduler)null
+                );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1555,40 +1523,38 @@ namespace System.Threading.Tasks.Tests
                 .StartNew(() => { })
                 .ContinueWith(
                     _ =>
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #1");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #2");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #3");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                Task.Factory.StartNew(
-                                    delegate
-                                    {
-                                        throw new Exception("uh oh #4");
-                                    },
-                                    TaskCreationOptions.AttachedToParent
-                                );
-                                return 1;
-                            }
-                        )
+                        Task.Factory.StartNew(() =>
+                        {
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #1");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #2");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #3");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            Task.Factory.StartNew(
+                                delegate
+                                {
+                                    throw new Exception("uh oh #4");
+                                },
+                                TaskCreationOptions.AttachedToParent
+                            );
+                            return 1;
+                        })
                 )
                 .Unwrap();
 
@@ -2370,49 +2336,42 @@ namespace System.Threading.Tasks.Tests
             };
 
             // Simultaneously start adding both "to be run" continuations and "to be canceled" continuations
-            Task taskA = Task.Factory.StartNew(
-                () =>
+            Task taskA = Task.Factory.StartNew(() =>
+            {
+                for (int i = 0; i < numCanceled; i++)
                 {
-                    for (int i = 0; i < numCanceled; i++)
-                    {
-                        // Use both synchronous and asynchronous continuations
-                        TaskContinuationOptions tco =
-                            ((i % 2) == 0)
-                                ? TaskContinuationOptions.None
-                                : TaskContinuationOptions.ExecuteSynchronously;
+                    // Use both synchronous and asynchronous continuations
+                    TaskContinuationOptions tco =
+                        ((i % 2) == 0)
+                            ? TaskContinuationOptions.None
+                            : TaskContinuationOptions.ExecuteSynchronously;
 
-                        // The cancelAction should run exactly once per "to be canceled" continuation -- either in the first continuation or,
-                        // if the first continuation is canceled, in the second continuation.
-                        cancelContinuations[i] = antecedent
-                            .ContinueWith(cancelAction, cts.Token, tco, TaskScheduler.Default)
-                            .ContinueWith(
-                                cancelAction,
-                                tco | TaskContinuationOptions.OnlyOnCanceled
-                            );
-                    }
+                    // The cancelAction should run exactly once per "to be canceled" continuation -- either in the first continuation or,
+                    // if the first continuation is canceled, in the second continuation.
+                    cancelContinuations[i] = antecedent
+                        .ContinueWith(cancelAction, cts.Token, tco, TaskScheduler.Default)
+                        .ContinueWith(cancelAction, tco | TaskContinuationOptions.OnlyOnCanceled);
                 }
-            );
+            });
 
-            Task taskB = Task.Factory.StartNew(
-                () =>
+            Task taskB = Task.Factory.StartNew(() =>
+            {
+                for (int i = 0; i < numLeftover; i++)
                 {
-                    for (int i = 0; i < numLeftover; i++)
-                    {
-                        // Use both synchronous and asynchronous continuations
-                        TaskContinuationOptions tco =
-                            ((i % 2) == 0)
-                                ? TaskContinuationOptions.None
-                                : TaskContinuationOptions.ExecuteSynchronously;
-                        normalContinuations[i] = antecedent.ContinueWith(normalAction, tco);
+                    // Use both synchronous and asynchronous continuations
+                    TaskContinuationOptions tco =
+                        ((i % 2) == 0)
+                            ? TaskContinuationOptions.None
+                            : TaskContinuationOptions.ExecuteSynchronously;
+                    normalContinuations[i] = antecedent.ContinueWith(normalAction, tco);
 
-                        // If you've hit completeAfter or cancelAfter, take the appropriate action
-                        if ((i + 1) == completeAfter)
-                            completionTcs.TrySetResult(); // Asynchronously completes the antecedent
-                        if ((i + 1) == cancelAfter)
-                            cancellationTcs.TrySetResult(); // Asynchronously initiates cancellation of "to be canceled" tasks
-                    }
+                    // If you've hit completeAfter or cancelAfter, take the appropriate action
+                    if ((i + 1) == completeAfter)
+                        completionTcs.TrySetResult(); // Asynchronously completes the antecedent
+                    if ((i + 1) == cancelAfter)
+                        cancellationTcs.TrySetResult(); // Asynchronously initiates cancellation of "to be canceled" tasks
                 }
-            );
+            });
 
             Task.WaitAll(taskA, taskB);
             Task.WaitAll(normalContinuations);

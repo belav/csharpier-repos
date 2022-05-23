@@ -17,18 +17,14 @@ public static class CustomBuilderExtensions
         Func<IServiceProvider, IXmlEncryptor> factory
     )
     {
-        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(
-            serviceProvider =>
+        builder.Services.AddSingleton<IConfigureOptions<KeyManagementOptions>>(serviceProvider =>
+        {
+            var instance = factory(serviceProvider);
+            return new ConfigureOptions<KeyManagementOptions>(options =>
             {
-                var instance = factory(serviceProvider);
-                return new ConfigureOptions<KeyManagementOptions>(
-                    options =>
-                    {
-                        options.XmlEncryptor = instance;
-                    }
-                );
-            }
-        );
+                options.XmlEncryptor = instance;
+            });
+        });
 
         return builder;
     }

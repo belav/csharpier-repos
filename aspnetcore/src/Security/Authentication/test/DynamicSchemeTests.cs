@@ -24,13 +24,11 @@ public class DynamicSchemeTests
     [Fact]
     public async Task OptionsAreConfiguredOnce()
     {
-        using var host = await CreateHost(
-            s =>
-            {
-                s.Configure<TestOptions>("One", o => o.Instance = new Singleton());
-                s.Configure<TestOptions>("Two", o => o.Instance = new Singleton());
-            }
-        );
+        using var host = await CreateHost(s =>
+        {
+            s.Configure<TestOptions>("One", o => o.Instance = new Singleton());
+            s.Configure<TestOptions>("Two", o => o.Instance = new Singleton());
+        });
         // Add One scheme
         using var server = host.GetTestServer();
         var response = await server.CreateClient().GetAsync("http://example.com/add/One");
@@ -165,73 +163,69 @@ public class DynamicSchemeTests
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Use(
-                                    async (context, next) =>
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    if (
+                                        req.Path.StartsWithSegments(
+                                            new PathString("/add"),
+                                            out var remainder
+                                        )
+                                    )
                                     {
-                                        var req = context.Request;
-                                        var res = context.Response;
-                                        if (
-                                            req.Path.StartsWithSegments(
-                                                new PathString("/add"),
-                                                out var remainder
-                                            )
-                                        )
-                                        {
-                                            var name = remainder.Value.Substring(1);
-                                            var auth =
-                                                context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-                                            var scheme = new AuthenticationScheme(
-                                                name,
-                                                name,
-                                                typeof(TestHandler)
-                                            );
-                                            auth.AddScheme(scheme);
-                                        }
-                                        else if (
-                                            req.Path.StartsWithSegments(
-                                                new PathString("/auth"),
-                                                out remainder
-                                            )
-                                        )
-                                        {
-                                            var name =
-                                                (remainder.Value.Length > 0)
-                                                    ? remainder.Value.Substring(1)
-                                                    : null;
-                                            var result = await context.AuthenticateAsync(name);
-                                            await res.DescribeAsync(result?.Ticket?.Principal);
-                                        }
-                                        else if (
-                                            req.Path.StartsWithSegments(
-                                                new PathString("/remove"),
-                                                out remainder
-                                            )
-                                        )
-                                        {
-                                            var name = remainder.Value.Substring(1);
-                                            var auth =
-                                                context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
-                                            auth.RemoveScheme(name);
-                                        }
-                                        else
-                                        {
-                                            await next(context);
-                                        }
+                                        var name = remainder.Value.Substring(1);
+                                        var auth =
+                                            context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                        var scheme = new AuthenticationScheme(
+                                            name,
+                                            name,
+                                            typeof(TestHandler)
+                                        );
+                                        auth.AddScheme(scheme);
                                     }
-                                );
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                configureServices?.Invoke(services);
-                                services.AddAuthentication();
-                            }
-                        )
+                                    else if (
+                                        req.Path.StartsWithSegments(
+                                            new PathString("/auth"),
+                                            out remainder
+                                        )
+                                    )
+                                    {
+                                        var name =
+                                            (remainder.Value.Length > 0)
+                                                ? remainder.Value.Substring(1)
+                                                : null;
+                                        var result = await context.AuthenticateAsync(name);
+                                        await res.DescribeAsync(result?.Ticket?.Principal);
+                                    }
+                                    else if (
+                                        req.Path.StartsWithSegments(
+                                            new PathString("/remove"),
+                                            out remainder
+                                        )
+                                    )
+                                    {
+                                        var name = remainder.Value.Substring(1);
+                                        var auth =
+                                            context.RequestServices.GetRequiredService<IAuthenticationSchemeProvider>();
+                                        auth.RemoveScheme(name);
+                                    }
+                                    else
+                                    {
+                                        await next(context);
+                                    }
+                                }
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            configureServices?.Invoke(services);
+                            services.AddAuthentication();
+                        })
             )
             .Build();
 

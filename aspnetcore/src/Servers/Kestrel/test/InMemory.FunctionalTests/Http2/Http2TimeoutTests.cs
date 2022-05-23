@@ -1089,14 +1089,12 @@ public class Http2TimeoutTests : Http2TestBase
         // Use non-default value to ensure the min request and response rates aren't mixed up.
         limits.MinRequestBodyDataRate = new MinDataRate(480, TimeSpan.FromSeconds(2.5));
 
-        await InitializeConnectionAsync(
-            context =>
-            {
-                // Completely disable rate limiting for this stream.
-                context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = null;
-                return _readRateApplication(context);
-            }
-        );
+        await InitializeConnectionAsync(context =>
+        {
+            // Completely disable rate limiting for this stream.
+            context.Features.Get<IHttpMinRequestBodyDataRateFeature>().MinDataRate = null;
+            return _readRateApplication(context);
+        });
 
         // _helloWorldBytes is 12 bytes, and 12 bytes / 240 bytes/sec = .05 secs which is far below the grace period.
         await StartStreamAsync(
@@ -1164,21 +1162,19 @@ public class Http2TimeoutTests : Http2TestBase
         // Use non-default value to ensure the min request and response rates aren't mixed up.
         limits.MinRequestBodyDataRate = new MinDataRate(480, TimeSpan.FromSeconds(2.5));
 
-        await InitializeConnectionAsync(
-            async context =>
-            {
-                var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
+        await InitializeConnectionAsync(async context =>
+        {
+            var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
 
-                if (streamId == 1)
-                {
-                    await backpressureTcs.Task;
-                }
-                else
-                {
-                    await _readRateApplication(context);
-                }
+            if (streamId == 1)
+            {
+                await backpressureTcs.Task;
             }
-        );
+            else
+            {
+                await _readRateApplication(context);
+            }
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: false);
         for (var i = 0; i < framesConnectionInWindow / 2; i++)

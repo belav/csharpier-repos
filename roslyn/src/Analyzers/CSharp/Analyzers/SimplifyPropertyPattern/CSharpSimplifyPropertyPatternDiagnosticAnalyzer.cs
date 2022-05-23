@@ -47,19 +47,17 @@ namespace Microsoft.CodeAnalysis.CSharp.SimplifyPropertyPattern
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                compilationContext =>
-                {
-                    // Dotted property patterns are only available in C# 10.0 and above.  Don't offer this refactoring
-                    // in projects targeting a lesser version.
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                // Dotted property patterns are only available in C# 10.0 and above.  Don't offer this refactoring
+                // in projects targeting a lesser version.
 
-                    var compilation = compilationContext.Compilation;
-                    if (((CSharpCompilation)compilation).LanguageVersion < LanguageVersion.CSharp10)
-                        return;
+                var compilation = compilationContext.Compilation;
+                if (((CSharpCompilation)compilation).LanguageVersion < LanguageVersion.CSharp10)
+                    return;
 
-                    context.RegisterSyntaxNodeAction(AnalyzeSubpattern, SyntaxKind.Subpattern);
-                }
-            );
+                context.RegisterSyntaxNodeAction(AnalyzeSubpattern, SyntaxKind.Subpattern);
+            });
         }
 
         private void AnalyzeSubpattern(SyntaxNodeAnalysisContext syntaxContext)

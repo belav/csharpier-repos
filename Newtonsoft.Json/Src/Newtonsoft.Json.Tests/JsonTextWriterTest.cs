@@ -1037,18 +1037,14 @@ Parameter name: value",
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                ExceptionAssert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        jsonWriter.WriteToken(null);
-                    }
-                );
-                ExceptionAssert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        jsonWriter.WriteToken(null, true);
-                    }
-                );
+                ExceptionAssert.Throws<ArgumentNullException>(() =>
+                {
+                    jsonWriter.WriteToken(null);
+                });
+                ExceptionAssert.Throws<ArgumentNullException>(() =>
+                {
+                    jsonWriter.WriteToken(null, true);
+                });
             }
         }
 

@@ -21,24 +21,20 @@ public class StartupForLinkGenerator
         services
             .AddMvc()
             .AddNewtonsoftJson()
-            .AddRazorPagesOptions(
-                options =>
-                {
-                    options.Conventions.AddFolderRouteModelConvention(
-                        "/PageRouteTransformer",
-                        model =>
-                        {
-                            pageRouteTransformerConvention.Apply(model);
-                        }
-                    );
-                }
-            );
-        services.AddRouting(
-            options =>
+            .AddRazorPagesOptions(options =>
             {
-                options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-            }
-        );
+                options.Conventions.AddFolderRouteModelConvention(
+                    "/PageRouteTransformer",
+                    model =>
+                    {
+                        pageRouteTransformerConvention.Apply(model);
+                    }
+                );
+            });
+        services.AddRouting(options =>
+        {
+            options.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+        });
 
         services.AddScoped<TestResponseGenerator>();
         services.AddSingleton<IActionContextAccessor, ActionContextAccessor>();
@@ -47,17 +43,15 @@ public class StartupForLinkGenerator
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapRazorPages();
 
-                endpoints.MapControllerRoute(
-                    "routewithnomvcparameters",
-                    "/routewithnomvcparameters/{custom}"
-                );
-            }
-        );
+            endpoints.MapControllerRoute(
+                "routewithnomvcparameters",
+                "/routewithnomvcparameters/{custom}"
+            );
+        });
     }
 }

@@ -51,18 +51,16 @@ namespace System.Threading.Tasks.Tests
 
             Task t = null;
 
-            Thread runner = new Thread(
-                () =>
+            Thread runner = new Thread(() =>
+            {
+                var state = new InvokeActionOnFinalization
                 {
-                    var state = new InvokeActionOnFinalization
-                    {
-                        Action = () => Volatile.Write(ref finalized, true)
-                    };
-                    var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
-                    t = Task.Run(() => { }); // run a task that'll capture EC
-                    al.Value = null;
-                }
-            )
+                    Action = () => Volatile.Write(ref finalized, true)
+                };
+                var al = new AsyncLocal<object>() { Value = state }; // ensure the object is stored in ExecutionContext
+                t = Task.Run(() => { }); // run a task that'll capture EC
+                al.Value = null;
+            })
             {
                 IsBackground = true
             };

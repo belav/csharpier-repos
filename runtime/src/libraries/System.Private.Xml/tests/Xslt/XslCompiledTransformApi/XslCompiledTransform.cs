@@ -2743,30 +2743,24 @@ namespace System.Xml.Tests
         [Fact]
         public void LoadNavigator4()
         {
-            var e = Assert.ThrowsAny<XsltException>(
-                () =>
-                {
-                    string expected =
-                        @"<?xml version=""1.0"" encoding=""utf-8""?><out>You are safe</out>";
+            var e = Assert.ThrowsAny<XsltException>(() =>
+            {
+                string expected =
+                    @"<?xml version=""1.0"" encoding=""utf-8""?><out>You are safe</out>";
 
-                    xslt = new XslCompiledTransform();
-                    XmlReader xrLoad = XmlReader.Create(FullFilePath("Bug80768.xsl"));
-                    XPathDocument xd = new XPathDocument(xrLoad, XmlSpace.Preserve);
+                xslt = new XslCompiledTransform();
+                XmlReader xrLoad = XmlReader.Create(FullFilePath("Bug80768.xsl"));
+                XPathDocument xd = new XPathDocument(xrLoad, XmlSpace.Preserve);
 
-                    xslt.Load(xd, XsltSettings.TrustedXslt, new XmlUrlResolver());
+                xslt.Load(xd, XsltSettings.TrustedXslt, new XmlUrlResolver());
 
-                    FileStream fs = new FileStream(
-                        _strOutFile,
-                        FileMode.Create,
-                        FileAccess.ReadWrite
-                    );
-                    XPathNavigator xn = new MyNavigator(FullFilePath("foo.xml"));
-                    xslt.Transform(xn, null, fs);
-                    fs.Dispose();
+                FileStream fs = new FileStream(_strOutFile, FileMode.Create, FileAccess.ReadWrite);
+                XPathNavigator xn = new MyNavigator(FullFilePath("foo.xml"));
+                xslt.Transform(xn, null, fs);
+                fs.Dispose();
 
-                    VerifyResult(expected);
-                }
-            );
+                VerifyResult(expected);
+            });
 
             Assert.Equal(
                 "Compiling JScript/CSharp scripts is not supported",

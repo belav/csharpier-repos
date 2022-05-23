@@ -236,17 +236,15 @@ public class LongPollingTransportTests : VerifiableLoggedTest
             {
                 await longPollingTransport.StartAsync(TestUri, TransferFormat.Binary);
 
-                var exception = await Assert.ThrowsAsync<HttpRequestException>(
-                    async () =>
+                var exception = await Assert.ThrowsAsync<HttpRequestException>(async () =>
+                {
+                    async Task ReadAsync()
                     {
-                        async Task ReadAsync()
-                        {
-                            await longPollingTransport.Input.ReadAsync();
-                        }
-
-                        await ReadAsync().DefaultTimeout();
+                        await longPollingTransport.Input.ReadAsync();
                     }
-                );
+
+                    await ReadAsync().DefaultTimeout();
+                });
                 Assert.Contains(" 500 ", exception.Message);
             }
             finally

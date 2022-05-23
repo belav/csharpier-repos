@@ -216,22 +216,18 @@ namespace System.IO.Compression.Tests
             archive.Dispose();
 
             //after disposed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    var x = archive.Entries;
-                }
-            ); //"Should not be able to get entries on disposed archive"
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                var x = archive.Entries;
+            }); //"Should not be able to get entries on disposed archive"
             Assert.Throws<NotSupportedException>(() => archive.CreateEntry("dirka")); //"should not be able to create on disposed archive"
 
             Assert.Throws<ObjectDisposedException>(() => e.Open()); //"should not be able to open on disposed archive"
             Assert.Throws<NotSupportedException>(() => e.Delete()); //"should not be able to delete on disposed archive"
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    e.LastWriteTime = new DateTimeOffset();
-                }
-            ); //"Should not be able to update on disposed archive"
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                e.LastWriteTime = new DateTimeOffset();
+            }); //"Should not be able to update on disposed archive"
 
             Assert.Throws<NotSupportedException>(() => s.ReadByte()); //"should not be able to read on disposed archive"
 

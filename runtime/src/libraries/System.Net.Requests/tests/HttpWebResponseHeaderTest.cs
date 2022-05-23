@@ -102,12 +102,10 @@ namespace System.Net.Tests
                     HttpWebResponse httpResponse = (HttpWebResponse)response;
                     httpResponse.Close();
 
-                    Assert.Throws<ObjectDisposedException>(
-                        () =>
-                        {
-                            httpResponse.GetResponseStream();
-                        }
-                    );
+                    Assert.Throws<ObjectDisposedException>(() =>
+                    {
+                        httpResponse.GetResponseStream();
+                    });
                 }
             );
         }

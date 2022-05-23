@@ -574,16 +574,12 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<CustomerGuid>(
-                    cb =>
-                    {
-                        cb.Property(c => c.Id).ToJsonProperty("id");
-                        cb.Property(c => c.PartitionKey)
-                            .HasConversion<string>()
-                            .ToJsonProperty("pk");
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                    }
-                );
+                modelBuilder.Entity<CustomerGuid>(cb =>
+                {
+                    cb.Property(c => c.Id).ToJsonProperty("id");
+                    cb.Property(c => c.PartitionKey).HasConversion<string>().ToJsonProperty("pk");
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                });
             }
         }
 
@@ -594,15 +590,13 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<CustomerDateTime>(
-                    cb =>
-                    {
-                        cb.Property(c => c.Id);
-                        cb.Property(c => c.PartitionKey).HasConversion<string>();
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                        cb.HasKey(c => new { c.Id, c.Name });
-                    }
-                );
+                modelBuilder.Entity<CustomerDateTime>(cb =>
+                {
+                    cb.Property(c => c.Id);
+                    cb.Property(c => c.PartitionKey).HasConversion<string>();
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                    cb.HasKey(c => new { c.Id, c.Name });
+                });
             }
         }
 
@@ -1416,14 +1410,12 @@ OFFSET 0 LIMIT 1"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    cb =>
-                    {
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                        cb.Property(c => c.PartitionKey).HasConversion<string>();
-                        cb.HasKey(c => new { c.Id, c.PartitionKey });
-                    }
-                );
+                modelBuilder.Entity<Customer>(cb =>
+                {
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                    cb.Property(c => c.PartitionKey).HasConversion<string>();
+                    cb.HasKey(c => new { c.Id, c.PartitionKey });
+                });
             }
         }
 
@@ -1445,20 +1437,18 @@ OFFSET 0 LIMIT 1"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    cb =>
-                    {
-                        cb.Property(StoreKeyConvention.DefaultIdPropertyName)
-                            .HasValueGeneratorFactory(
-                                typeof(CustomPartitionKeyIdValueGeneratorFactory)
-                            );
+                modelBuilder.Entity<Customer>(cb =>
+                {
+                    cb.Property(StoreKeyConvention.DefaultIdPropertyName)
+                        .HasValueGeneratorFactory(
+                            typeof(CustomPartitionKeyIdValueGeneratorFactory)
+                        );
 
-                        cb.Property(c => c.PartitionKey).HasConversion<string>();
+                    cb.Property(c => c.PartitionKey).HasConversion<string>();
 
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                        cb.HasKey(c => new { c.PartitionKey, c.Id });
-                    }
-                );
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                    cb.HasKey(c => new { c.PartitionKey, c.Id });
+                });
             }
         }
 
@@ -1469,18 +1459,16 @@ OFFSET 0 LIMIT 1"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    cb =>
-                    {
-                        cb.Property(StoreKeyConvention.DefaultIdPropertyName)
-                            .HasValueGenerator((Type)null);
+                modelBuilder.Entity<Customer>(cb =>
+                {
+                    cb.Property(StoreKeyConvention.DefaultIdPropertyName)
+                        .HasValueGenerator((Type)null);
 
-                        cb.Property(c => c.PartitionKey).HasConversion<string>();
+                    cb.Property(c => c.PartitionKey).HasConversion<string>();
 
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                        cb.HasKey(c => new { c.PartitionKey, c.Id });
-                    }
-                );
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                    cb.HasKey(c => new { c.PartitionKey, c.Id });
+                });
             }
         }
 
@@ -1502,14 +1490,12 @@ OFFSET 0 LIMIT 1"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    cb =>
-                    {
-                        cb.HasNoDiscriminator();
-                        cb.Property(c => c.Id).HasConversion<string>();
-                        cb.HasPartitionKey(c => c.Id);
-                    }
-                );
+                modelBuilder.Entity<Customer>(cb =>
+                {
+                    cb.HasNoDiscriminator();
+                    cb.Property(c => c.Id).HasConversion<string>();
+                    cb.HasPartitionKey(c => c.Id);
+                });
             }
         }
 
@@ -1520,15 +1506,13 @@ OFFSET 0 LIMIT 1"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<CustomerWithResourceId>(
-                    cb =>
-                    {
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                        cb.Property(c => c.PartitionKey).HasConversion<string>();
-                        cb.Property(c => c.id).HasConversion<string>();
-                        cb.HasKey(c => new { c.id });
-                    }
-                );
+                modelBuilder.Entity<CustomerWithResourceId>(cb =>
+                {
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                    cb.Property(c => c.PartitionKey).HasConversion<string>();
+                    cb.Property(c => c.id).HasConversion<string>();
+                    cb.HasKey(c => new { c.id });
+                });
             }
         }
 
@@ -1539,14 +1523,12 @@ OFFSET 0 LIMIT 1"
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<CustomerWithResourceId>(
-                    cb =>
-                    {
-                        cb.HasPartitionKey(c => c.PartitionKey);
-                        cb.Property(c => c.PartitionKey).HasConversion<string>();
-                        cb.HasKey(c => new { c.PartitionKey, c.id });
-                    }
-                );
+                modelBuilder.Entity<CustomerWithResourceId>(cb =>
+                {
+                    cb.HasPartitionKey(c => c.PartitionKey);
+                    cb.Property(c => c.PartitionKey).HasConversion<string>();
+                    cb.HasKey(c => new { c.PartitionKey, c.id });
+                });
             }
         }
 
@@ -1777,16 +1759,14 @@ OFFSET 0 LIMIT 1"
             var options = Fixture.CreateOptions();
 
             using var context = new ConflictingIncompatibleIdContext(options);
-            await Assert.ThrowsAnyAsync<Exception>(
-                async () =>
-                {
-                    await context.Database.EnsureCreatedAsync();
+            await Assert.ThrowsAnyAsync<Exception>(async () =>
+            {
+                await context.Database.EnsureCreatedAsync();
 
-                    context.Add(new ConflictingIncompatibleId { id = 42 });
+                context.Add(new ConflictingIncompatibleId { id = 42 });
 
-                    await context.SaveChangesAsync();
-                }
-            );
+                await context.SaveChangesAsync();
+            });
         }
 
         private class ConflictingIncompatibleId

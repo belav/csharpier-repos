@@ -139,12 +139,10 @@ namespace System.Security.AccessControl.Tests
             CommonSecurityDescriptor sd = null;
 
             // test case 1: rawSecurityDescriptor is null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    sd = new CommonSecurityDescriptor(true, true, (RawSecurityDescriptor)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                sd = new CommonSecurityDescriptor(true, true, (RawSecurityDescriptor)null);
+            });
         }
 
         [Theory]

@@ -275,12 +275,10 @@ public partial class ParameterViewTest
         );
 
         // Act/Assert
-        Assert.Throws<InvalidCastException>(
-            () =>
-            {
-                parameters.TryGetValue<bool>("my entry", out var value);
-            }
-        );
+        Assert.Throws<InvalidCastException>(() =>
+        {
+            parameters.TryGetValue<bool>("my entry", out var value);
+        });
     }
 
     [Fact]

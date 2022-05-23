@@ -33,14 +33,12 @@ namespace System.Threading.Tests
 
             ManualResetEventSlim mres = new ManualResetEventSlim();
 
-            Task.Run(
-                () =>
-                {
-                    for (int i = 0; i < 400; i++)
-                        ;
-                    cancellationTokenSource.Cancel();
-                }
-            );
+            Task.Run(() =>
+            {
+                for (int i = 0; i < 400; i++)
+                    ;
+                cancellationTokenSource.Cancel();
+            });
 
             //Now wait.. the wait should abort and an exception should be thrown
             EnsureOperationCanceledExceptionThrown(

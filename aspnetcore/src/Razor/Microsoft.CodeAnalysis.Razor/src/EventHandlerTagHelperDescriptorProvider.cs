@@ -154,131 +154,108 @@ internal class EventHandlerTagHelperDescriptorProvider : ITagHelperDescriptorPro
             // a C# property will crash trying to create the tooltips.
             builder.SetTypeName(entry.TypeName);
 
-            builder.TagMatchingRule(
-                rule =>
-                {
-                    rule.TagName = "*";
+            builder.TagMatchingRule(rule =>
+            {
+                rule.TagName = "*";
 
-                    rule.Attribute(
-                        a =>
-                        {
-                            a.Name = attributeName;
-                            a.NameComparisonMode = RequiredAttributeDescriptor
-                                .NameComparisonMode
-                                .FullMatch;
-                            a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                                bool.TrueString;
-                        }
-                    );
-                }
-            );
+                rule.Attribute(a =>
+                {
+                    a.Name = attributeName;
+                    a.NameComparisonMode = RequiredAttributeDescriptor.NameComparisonMode.FullMatch;
+                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+                });
+            });
 
             if (entry.EnablePreventDefault)
             {
-                builder.TagMatchingRule(
-                    rule =>
-                    {
-                        rule.TagName = "*";
+                builder.TagMatchingRule(rule =>
+                {
+                    rule.TagName = "*";
 
-                        rule.Attribute(
-                            a =>
-                            {
-                                a.Name = attributeName + ":preventDefault";
-                                a.NameComparisonMode = RequiredAttributeDescriptor
-                                    .NameComparisonMode
-                                    .FullMatch;
-                                a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                                    bool.TrueString;
-                            }
-                        );
-                    }
-                );
+                    rule.Attribute(a =>
+                    {
+                        a.Name = attributeName + ":preventDefault";
+                        a.NameComparisonMode = RequiredAttributeDescriptor
+                            .NameComparisonMode
+                            .FullMatch;
+                        a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+                    });
+                });
             }
 
             if (entry.EnableStopPropagation)
             {
-                builder.TagMatchingRule(
-                    rule =>
-                    {
-                        rule.TagName = "*";
+                builder.TagMatchingRule(rule =>
+                {
+                    rule.TagName = "*";
 
-                        rule.Attribute(
-                            a =>
-                            {
-                                a.Name = attributeName + ":stopPropagation";
-                                a.NameComparisonMode = RequiredAttributeDescriptor
-                                    .NameComparisonMode
-                                    .FullMatch;
-                                a.Metadata[ComponentMetadata.Common.DirectiveAttribute] =
-                                    bool.TrueString;
-                            }
-                        );
-                    }
-                );
+                    rule.Attribute(a =>
+                    {
+                        a.Name = attributeName + ":stopPropagation";
+                        a.NameComparisonMode = RequiredAttributeDescriptor
+                            .NameComparisonMode
+                            .FullMatch;
+                        a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+                    });
+                });
             }
 
-            builder.BindAttribute(
-                a =>
+            builder.BindAttribute(a =>
+            {
+                a.Documentation = string.Format(
+                    CultureInfo.CurrentCulture,
+                    ComponentResources.EventHandlerTagHelper_Documentation,
+                    attributeName,
+                    eventArgType
+                );
+
+                a.Name = attributeName;
+
+                // We want event handler directive attributes to default to C# context.
+                a.TypeName = $"Microsoft.AspNetCore.Components.EventCallback<{eventArgType}>";
+
+                // But make this weakly typed (don't type check) - delegates have their own type-checking
+                // logic that we don't want to interfere with.
+                a.Metadata.Add(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString);
+
+                a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
+
+                // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
+                // a C# property will crash trying to create the tooltips.
+                a.SetPropertyName(entry.Attribute);
+
+                if (entry.EnablePreventDefault)
                 {
-                    a.Documentation = string.Format(
-                        CultureInfo.CurrentCulture,
-                        ComponentResources.EventHandlerTagHelper_Documentation,
-                        attributeName,
-                        eventArgType
-                    );
-
-                    a.Name = attributeName;
-
-                    // We want event handler directive attributes to default to C# context.
-                    a.TypeName = $"Microsoft.AspNetCore.Components.EventCallback<{eventArgType}>";
-
-                    // But make this weakly typed (don't type check) - delegates have their own type-checking
-                    // logic that we don't want to interfere with.
-                    a.Metadata.Add(ComponentMetadata.Component.WeaklyTypedKey, bool.TrueString);
-
-                    a.Metadata[ComponentMetadata.Common.DirectiveAttribute] = bool.TrueString;
-
-                    // WTE has a bug 15.7p1 where a Tag Helper without a display-name that looks like
-                    // a C# property will crash trying to create the tooltips.
-                    a.SetPropertyName(entry.Attribute);
-
-                    if (entry.EnablePreventDefault)
+                    a.BindAttributeParameter(parameter =>
                     {
-                        a.BindAttributeParameter(
-                            parameter =>
-                            {
-                                parameter.Name = "preventDefault";
-                                parameter.TypeName = typeof(bool).FullName;
-                                parameter.Documentation = string.Format(
-                                    CultureInfo.CurrentCulture,
-                                    ComponentResources.EventHandlerTagHelper_PreventDefault_Documentation,
-                                    attributeName
-                                );
-
-                                parameter.SetPropertyName("PreventDefault");
-                            }
+                        parameter.Name = "preventDefault";
+                        parameter.TypeName = typeof(bool).FullName;
+                        parameter.Documentation = string.Format(
+                            CultureInfo.CurrentCulture,
+                            ComponentResources.EventHandlerTagHelper_PreventDefault_Documentation,
+                            attributeName
                         );
-                    }
 
-                    if (entry.EnableStopPropagation)
-                    {
-                        a.BindAttributeParameter(
-                            parameter =>
-                            {
-                                parameter.Name = "stopPropagation";
-                                parameter.TypeName = typeof(bool).FullName;
-                                parameter.Documentation = string.Format(
-                                    CultureInfo.CurrentCulture,
-                                    ComponentResources.EventHandlerTagHelper_StopPropagation_Documentation,
-                                    attributeName
-                                );
-
-                                parameter.SetPropertyName("StopPropagation");
-                            }
-                        );
-                    }
+                        parameter.SetPropertyName("PreventDefault");
+                    });
                 }
-            );
+
+                if (entry.EnableStopPropagation)
+                {
+                    a.BindAttributeParameter(parameter =>
+                    {
+                        parameter.Name = "stopPropagation";
+                        parameter.TypeName = typeof(bool).FullName;
+                        parameter.Documentation = string.Format(
+                            CultureInfo.CurrentCulture,
+                            ComponentResources.EventHandlerTagHelper_StopPropagation_Documentation,
+                            attributeName
+                        );
+
+                        parameter.SetPropertyName("StopPropagation");
+                    });
+                }
+            });
 
             results.Add(builder.Build());
         }

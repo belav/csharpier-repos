@@ -324,14 +324,12 @@ namespace Microsoft.CodeAnalysis
             this.ReferencesSupersedeLowerVersions = referencesSupersedeLowerVersions;
             this.PublicSign = publicSign;
 
-            _lazyErrors = new Lazy<ImmutableArray<Diagnostic>>(
-                () =>
-                {
-                    var builder = ArrayBuilder<Diagnostic>.GetInstance();
-                    ValidateOptions(builder);
-                    return builder.ToImmutableAndFree();
-                }
-            );
+            _lazyErrors = new Lazy<ImmutableArray<Diagnostic>>(() =>
+            {
+                var builder = ArrayBuilder<Diagnostic>.GetInstance();
+                ValidateOptions(builder);
+                return builder.ToImmutableAndFree();
+            });
         }
 
         internal bool CanReuseCompilationReferenceManager(CompilationOptions other)

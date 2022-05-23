@@ -67,20 +67,18 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .ToList()
             );
 
-            var throwingTask = Task.Run(
-                () =>
-                {
-                    synchronizationEvent.Wait();
-                    Assert.Equal(
-                        CoreStrings.ConcurrentMethodInvocation,
-                        Assert
-                            .Throws<InvalidOperationException>(
-                                () => context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers""")
-                            )
-                            .Message
-                    );
-                }
-            );
+            var throwingTask = Task.Run(() =>
+            {
+                synchronizationEvent.Wait();
+                Assert.Equal(
+                    CoreStrings.ConcurrentMethodInvocation,
+                    Assert
+                        .Throws<InvalidOperationException>(
+                            () => context.Database.ExecuteSqlRaw(@"SELECT * FROM ""Customers""")
+                        )
+                        .Message
+                );
+            });
 
             throwingTask.Wait();
 
@@ -252,23 +250,19 @@ namespace Microsoft.EntityFrameworkCore.Query
                         .ToList()
             );
 
-            var throwingTask = Task.Run(
-                async () =>
-                {
-                    synchronizationEvent.Wait();
-                    Assert.Equal(
-                        CoreStrings.ConcurrentMethodInvocation,
-                        (
-                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                () =>
-                                    context.Database.ExecuteSqlRawAsync(
-                                        @"SELECT * FROM ""Customers"""
-                                    )
-                            )
-                        ).Message
-                    );
-                }
-            );
+            var throwingTask = Task.Run(async () =>
+            {
+                synchronizationEvent.Wait();
+                Assert.Equal(
+                    CoreStrings.ConcurrentMethodInvocation,
+                    (
+                        await Assert.ThrowsAsync<InvalidOperationException>(
+                            () =>
+                                context.Database.ExecuteSqlRawAsync(@"SELECT * FROM ""Customers""")
+                        )
+                    ).Message
+                );
+            });
 
             await throwingTask;
 

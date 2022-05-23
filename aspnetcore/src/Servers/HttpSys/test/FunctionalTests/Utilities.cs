@@ -144,20 +144,16 @@ internal static class Utilities
     {
         var prefix = UrlPrefix.Create("http", "localhost", "0", basePath);
 
-        var builder = new HostBuilder().ConfigureWebHost(
-            webHostBuilder =>
-            {
-                webHostBuilder
-                    .UseHttpSys(
-                        options =>
-                        {
-                            options.UrlPrefixes.Add(prefix);
-                            configureOptions(options);
-                        }
-                    )
-                    .Configure(appBuilder => appBuilder.Run(app));
-            }
-        );
+        var builder = new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder
+                .UseHttpSys(options =>
+                {
+                    options.UrlPrefixes.Add(prefix);
+                    configureOptions(options);
+                })
+                .Configure(appBuilder => appBuilder.Run(app));
+        });
 
         var host = builder.Build();
 

@@ -66,19 +66,17 @@ namespace AutoMapper.IntegrationTests.Net4
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Entity, Model>();
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Entity, Model>();
 
-                    cfg.CreateMap<ChildEntity, ChildModelBase>()
-                        .Include<ChildEntity, ChildModel>()
-                        .ForMember(x => x.SomeValue, x => x.Ignore())
-                        .As<ChildModel>();
+                cfg.CreateMap<ChildEntity, ChildModelBase>()
+                    .Include<ChildEntity, ChildModel>()
+                    .ForMember(x => x.SomeValue, x => x.Ignore())
+                    .As<ChildModel>();
 
-                    cfg.CreateMap<ChildEntity, ChildModel>();
-                }
-            );
+                cfg.CreateMap<ChildEntity, ChildModel>();
+            });
 
         public class Entity
         {

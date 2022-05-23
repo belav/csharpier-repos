@@ -44,21 +44,17 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Server
 
             if (_azureSignalrConnectionString != null)
             {
-                app.UseAzureSignalR(
-                    routes =>
-                    {
-                        routes.MapHub<EchoHub>("/echo");
-                    }
-                );
+                app.UseAzureSignalR(routes =>
+                {
+                    routes.MapHub<EchoHub>("/echo");
+                });
             }
             else
             {
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapHub<EchoHub>("/echo");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapHub<EchoHub>("/echo");
+                });
             }
         }
     }

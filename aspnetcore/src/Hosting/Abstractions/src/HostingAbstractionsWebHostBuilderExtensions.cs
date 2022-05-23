@@ -89,14 +89,12 @@ public static class HostingAbstractionsWebHostBuilderExtensions
             throw new ArgumentNullException(nameof(server));
         }
 
-        return hostBuilder.ConfigureServices(
-            services =>
-            {
-                // It would be nicer if this was transient but we need to pass in the
-                // factory instance directly
-                services.AddSingleton(server);
-            }
-        );
+        return hostBuilder.ConfigureServices(services =>
+        {
+            // It would be nicer if this was transient but we need to pass in the
+            // factory instance directly
+            services.AddSingleton(server);
+        });
     }
 
     /// <summary>

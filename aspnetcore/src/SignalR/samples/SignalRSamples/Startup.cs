@@ -43,60 +43,58 @@ public class Startup
 
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapHub<DynamicChat>("/dynamic");
-                endpoints.MapHub<Chat>("/default");
-                endpoints.MapHub<Streaming>("/streaming");
-                endpoints.MapHub<UploadHub>("/uploading");
-                endpoints.MapHub<HubTChat>("/hubT");
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHub<DynamicChat>("/dynamic");
+            endpoints.MapHub<Chat>("/default");
+            endpoints.MapHub<Streaming>("/streaming");
+            endpoints.MapHub<UploadHub>("/uploading");
+            endpoints.MapHub<HubTChat>("/hubT");
 
-                endpoints.MapConnectionHandler<MessagesConnectionHandler>("/chat");
+            endpoints.MapConnectionHandler<MessagesConnectionHandler>("/chat");
 
-                endpoints.MapGet(
-                    "/deployment",
-                    async context =>
-                    {
-                        var attributes = Assembly
-                            .GetAssembly(typeof(Startup))
-                            .GetCustomAttributes<AssemblyMetadataAttribute>();
+            endpoints.MapGet(
+                "/deployment",
+                async context =>
+                {
+                    var attributes = Assembly
+                        .GetAssembly(typeof(Startup))
+                        .GetCustomAttributes<AssemblyMetadataAttribute>();
 
-                        context.Response.ContentType = "application/json";
-                        await using (
-                            var writer = new Utf8JsonWriter(
-                                context.Response.BodyWriter,
-                                _jsonWriterOptions
-                            )
+                    context.Response.ContentType = "application/json";
+                    await using (
+                        var writer = new Utf8JsonWriter(
+                            context.Response.BodyWriter,
+                            _jsonWriterOptions
                         )
+                    )
+                    {
+                        writer.WriteStartObject();
+                        var commitHash = string.Empty;
+
+                        foreach (var attribute in attributes)
                         {
-                            writer.WriteStartObject();
-                            var commitHash = string.Empty;
+                            writer.WriteString(attribute.Key, attribute.Value);
 
-                            foreach (var attribute in attributes)
+                            if (string.Equals(attribute.Key, "CommitHash"))
                             {
-                                writer.WriteString(attribute.Key, attribute.Value);
-
-                                if (string.Equals(attribute.Key, "CommitHash"))
-                                {
-                                    commitHash = attribute.Value;
-                                }
+                                commitHash = attribute.Value;
                             }
-
-                            if (!string.IsNullOrEmpty(commitHash))
-                            {
-                                writer.WriteString(
-                                    "GitHubUrl",
-                                    $"https://github.com/aspnet/SignalR/commit/{commitHash}"
-                                );
-                            }
-
-                            writer.WriteEndObject();
-                            await writer.FlushAsync();
                         }
+
+                        if (!string.IsNullOrEmpty(commitHash))
+                        {
+                            writer.WriteString(
+                                "GitHubUrl",
+                                $"https://github.com/aspnet/SignalR/commit/{commitHash}"
+                            );
+                        }
+
+                        writer.WriteEndObject();
+                        await writer.FlushAsync();
                     }
-                );
-            }
-        );
+                }
+            );
+        });
     }
 }

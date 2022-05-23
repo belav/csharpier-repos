@@ -254,12 +254,10 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBMPStringBytes(out ReadOnlyMemory<byte> contents);
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBMPStringBytes(out ReadOnlyMemory<byte> contents);
+            });
         }
 
         [Theory]
@@ -340,12 +338,10 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryCopyBMPStringBytes(outputData, out bytesWritten);
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryCopyBMPStringBytes(outputData, out bytesWritten);
+            });
 
             Assert.Equal(-1, bytesWritten);
             Assert.Equal(252, outputData[0]);
@@ -362,12 +358,10 @@ namespace System.Formats.Asn1.Tests.Reader
             int bytesWritten = -1;
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryCopyBMPString(outputData, out bytesWritten);
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryCopyBMPString(outputData, out bytesWritten);
+            });
 
             Assert.Equal(-1, bytesWritten);
             Assert.Equal('a', outputData[0]);
@@ -402,12 +396,10 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.ReadCharacterString(UniversalTagNumber.BMPString);
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.ReadCharacterString(UniversalTagNumber.BMPString);
+            });
         }
 
         [Theory]

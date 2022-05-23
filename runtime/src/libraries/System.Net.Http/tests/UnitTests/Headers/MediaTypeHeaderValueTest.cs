@@ -70,12 +70,10 @@ namespace System.Net.Http.Tests
         {
             MediaTypeHeaderValue mediaType = new MediaTypeHeaderValue("text/plain");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mediaType.Parameters.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mediaType.Parameters.Add(null);
+            });
         }
 
         [Fact]
@@ -452,12 +450,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    MediaTypeHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                MediaTypeHeaderValue.Parse(input);
+            });
 
             Assert.False(MediaTypeHeaderValue.TryParse(input, out MediaTypeHeaderValue result));
             Assert.Null(result);
@@ -465,12 +461,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string mediaType)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new MediaTypeHeaderValue(mediaType);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new MediaTypeHeaderValue(mediaType);
+            });
         }
 
         private static MediaTypeHeaderValue DummyCreator()

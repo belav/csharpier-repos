@@ -40,13 +40,11 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
         Action<FacebookOptions> configure
     )
     {
-        services.AddFacebook(
-            o =>
-            {
-                ConfigureDefaults(o);
-                configure.Invoke(o);
-            }
-        );
+        services.AddFacebook(o =>
+        {
+            ConfigureDefaults(o);
+            configure.Invoke(o);
+        });
     }
 
     protected override void ConfigureDefaults(FacebookOptions o)
@@ -110,21 +108,19 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 services
                     .AddAuthentication("External")
                     .AddCookie("External", o => { })
-                    .AddFacebook(
-                        o =>
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Events = new OAuthEvents
                         {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                            o.Events = new OAuthEvents
+                            OnRedirectToAuthorizationEndpoint = context =>
                             {
-                                OnRedirectToAuthorizationEndpoint = context =>
-                                {
-                                    context.Response.Redirect(context.RedirectUri + "&custom=test");
-                                    return Task.FromResult(0);
-                                }
-                            };
-                        }
-                    );
+                                context.Response.Redirect(context.RedirectUri + "&custom=test");
+                                return Task.FromResult(0);
+                            }
+                        };
+                    });
             },
             async context =>
             {
@@ -148,16 +144,14 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             {
                 services
                     .AddAuthentication()
-                    .AddFacebook(
-                        o =>
-                        {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                            o.Scope.Clear();
-                            o.Scope.Add("foo");
-                            o.Scope.Add("bar");
-                        }
-                    );
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Scope.Clear();
+                        o.Scope.Add("foo");
+                        o.Scope.Add("bar");
+                    });
             },
             async context =>
             {
@@ -183,16 +177,14 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             {
                 services
                     .AddAuthentication()
-                    .AddFacebook(
-                        o =>
-                        {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                            o.Scope.Clear();
-                            o.Scope.Add("foo");
-                            o.Scope.Add("bar");
-                        }
-                    );
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Scope.Clear();
+                        o.Scope.Add("foo");
+                        o.Scope.Add("bar");
+                    });
             },
             async context =>
             {
@@ -220,16 +212,14 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             {
                 services
                     .AddAuthentication()
-                    .AddFacebook(
-                        o =>
-                        {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                            o.Scope.Clear();
-                            o.Scope.Add("foo");
-                            o.Scope.Add("bar");
-                        }
-                    );
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.Scope.Clear();
+                        o.Scope.Add("foo");
+                        o.Scope.Add("bar");
+                    });
             },
             async context =>
             {
@@ -279,13 +269,11 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 services
                     .AddAuthentication()
                     .AddCookie("External", o => { })
-                    .AddFacebook(
-                        o =>
-                        {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                        }
-                    );
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                    });
             },
             handler: null
         );
@@ -329,14 +317,12 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 services
                     .AddAuthentication()
                     .AddCookie("External", o => { })
-                    .AddFacebook(
-                        o =>
-                        {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                            o.SignInScheme = "External";
-                        }
-                    );
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.SignInScheme = "External";
+                    });
             },
             handler: null
         );
@@ -363,20 +349,16 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
             services =>
             {
                 services
-                    .AddAuthentication(
-                        options =>
-                        {
-                            options.DefaultSignInScheme = "External";
-                        }
-                    )
+                    .AddAuthentication(options =>
+                    {
+                        options.DefaultSignInScheme = "External";
+                    })
                     .AddCookie()
-                    .AddFacebook(
-                        o =>
-                        {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                        }
-                    );
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                    });
             },
             async context =>
             {
@@ -413,59 +395,50 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 services
                     .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
                     .AddCookie()
-                    .AddFacebook(
-                        o =>
+                    .AddFacebook(o =>
+                    {
+                        o.AppId = "Test App Id";
+                        o.AppSecret = "Test App Secret";
+                        o.StateDataFormat = stateFormat;
+                        o.UserInformationEndpoint = customUserInfoEndpoint;
+                        o.BackchannelHttpHandler = new TestHttpMessageHandler
                         {
-                            o.AppId = "Test App Id";
-                            o.AppSecret = "Test App Secret";
-                            o.StateDataFormat = stateFormat;
-                            o.UserInformationEndpoint = customUserInfoEndpoint;
-                            o.BackchannelHttpHandler = new TestHttpMessageHandler
+                            Sender = req =>
                             {
-                                Sender = req =>
+                                if (
+                                    req.RequestUri.GetComponents(
+                                        UriComponents.SchemeAndServer | UriComponents.Path,
+                                        UriFormat.UriEscaped
+                                    ) == FacebookDefaults.TokenEndpoint
+                                )
                                 {
-                                    if (
-                                        req.RequestUri.GetComponents(
-                                            UriComponents.SchemeAndServer | UriComponents.Path,
-                                            UriFormat.UriEscaped
-                                        ) == FacebookDefaults.TokenEndpoint
-                                    )
-                                    {
-                                        var res = new HttpResponseMessage(HttpStatusCode.OK);
-                                        var graphResponse =
-                                            "{ \"access_token\": \"TestAuthToken\" }";
-                                        res.Content = new StringContent(
-                                            graphResponse,
-                                            Encoding.UTF8
-                                        );
-                                        return res;
-                                    }
-                                    if (
-                                        req.RequestUri.GetComponents(
-                                            UriComponents.SchemeAndServer | UriComponents.Path,
-                                            UriFormat.UriEscaped
-                                        )
-                                        == new Uri(customUserInfoEndpoint).GetComponents(
-                                            UriComponents.SchemeAndServer | UriComponents.Path,
-                                            UriFormat.UriEscaped
-                                        )
-                                    )
-                                    {
-                                        finalUserInfoEndpoint = req.RequestUri.ToString();
-                                        var res = new HttpResponseMessage(HttpStatusCode.OK);
-                                        var graphResponse =
-                                            "{ \"id\": \"TestProfileId\", \"name\": \"TestName\" }";
-                                        res.Content = new StringContent(
-                                            graphResponse,
-                                            Encoding.UTF8
-                                        );
-                                        return res;
-                                    }
-                                    return null;
+                                    var res = new HttpResponseMessage(HttpStatusCode.OK);
+                                    var graphResponse = "{ \"access_token\": \"TestAuthToken\" }";
+                                    res.Content = new StringContent(graphResponse, Encoding.UTF8);
+                                    return res;
                                 }
-                            };
-                        }
-                    );
+                                if (
+                                    req.RequestUri.GetComponents(
+                                        UriComponents.SchemeAndServer | UriComponents.Path,
+                                        UriFormat.UriEscaped
+                                    )
+                                    == new Uri(customUserInfoEndpoint).GetComponents(
+                                        UriComponents.SchemeAndServer | UriComponents.Path,
+                                        UriFormat.UriEscaped
+                                    )
+                                )
+                                {
+                                    finalUserInfoEndpoint = req.RequestUri.ToString();
+                                    var res = new HttpResponseMessage(HttpStatusCode.OK);
+                                    var graphResponse =
+                                        "{ \"id\": \"TestProfileId\", \"name\": \"TestName\" }";
+                                    res.Content = new StringContent(graphResponse, Encoding.UTF8);
+                                    return res;
+                                }
+                                return null;
+                            }
+                        };
+                    });
             },
             handler: null
         );
@@ -504,21 +477,19 @@ public class FacebookTests : RemoteAuthenticationTests<FacebookOptions>
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                configure?.Invoke(app);
-                                app.Use(
-                                    async (context, next) =>
+                        .Configure(app =>
+                        {
+                            configure?.Invoke(app);
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    if (handler == null || !await handler(context))
                                     {
-                                        if (handler == null || !await handler(context))
-                                        {
-                                            await next(context);
-                                        }
+                                        await next(context);
                                     }
-                                );
-                            }
-                        )
+                                }
+                            );
+                        })
                         .ConfigureServices(configureServices)
             )
             .Build();

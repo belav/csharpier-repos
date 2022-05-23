@@ -82,12 +82,10 @@ public class DefaultDisplayTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.NullDisplayText = "(null value)";
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "(null value)";
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
 
@@ -113,13 +111,11 @@ public class DefaultDisplayTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.HtmlEncode = htmlEncode;
-                    dd.SimpleDisplayProperty = "Property1";
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.HtmlEncode = htmlEncode;
+                dd.SimpleDisplayProperty = "Property1";
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider);
 
@@ -199,12 +195,10 @@ public class DefaultDisplayTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.HideSurroundingHtml = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.HideSurroundingHtml = true;
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider);
 
@@ -290,12 +284,10 @@ public class DefaultDisplayTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<string>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.HideSurroundingHtml = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.HideSurroundingHtml = true;
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider: provider);
         var viewData = html.ViewData;
@@ -489,12 +481,10 @@ public class DefaultDisplayTemplatesTest
         var view = new Mock<IView>();
         view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
             .Returns(
-                Task.Run(
-                    () =>
-                    {
-                        throw new ArgumentException(expectedMessage);
-                    }
-                )
+                Task.Run(() =>
+                {
+                    throw new ArgumentException(expectedMessage);
+                })
             );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine

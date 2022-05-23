@@ -15,13 +15,11 @@ namespace AutoMapper.UnitTests.Projection
 
         public ProjectEnumerableToArrayTest()
         {
-            _config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Movie, MovieDto>();
-                    cfg.CreateProjection<Actor, ActorDto>();
-                }
-            );
+            _config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Movie, MovieDto>();
+                cfg.CreateProjection<Actor, ActorDto>();
+            });
         }
 
         [Fact]

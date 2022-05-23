@@ -277,12 +277,10 @@ namespace System.Web.Http
                             It.IsAny<Action<TraceRecord>>()
                         )
                 )
-                .Callback(
-                    () =>
-                    {
-                        calledTrace = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    calledTrace = true;
+                });
 
             config.Services.Replace(typeof(ITraceWriter), mockTracer.Object);
             config.Initializer(config); // installs tracer on original config
@@ -328,12 +326,10 @@ namespace System.Web.Http
                             It.IsAny<Action<TraceRecord>>()
                         )
                 )
-                .Callback(
-                    () =>
-                    {
-                        calledTrace = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    calledTrace = true;
+                });
 
             config.Services.Replace(typeof(ITraceWriter), mockTracer.Object);
             config.Initializer(config); // installs tracer on original config
@@ -378,12 +374,10 @@ namespace System.Web.Http
                             It.IsAny<Action<TraceRecord>>()
                         )
                 )
-                .Callback(
-                    () =>
-                    {
-                        calledTrace = true;
-                    }
-                );
+                .Callback(() =>
+                {
+                    calledTrace = true;
+                });
 
             config.Initializer(config); // ensures TraceManager is called, but it will be a NOP
 

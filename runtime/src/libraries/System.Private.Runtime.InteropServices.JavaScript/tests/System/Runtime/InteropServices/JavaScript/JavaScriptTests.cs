@@ -393,26 +393,22 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                     throw new Exception("Test exception");
                 }
             );
-            var exc = Assert.Throws<JSException>(
-                () =>
-                {
-                    obj.Invoke("fireEvent", "test");
-                }
-            );
+            var exc = Assert.Throws<JSException>(() =>
+            {
+                obj.Invoke("fireEvent", "test");
+            });
             Assert.Contains("Test exception", exc.Message);
 
-            exc = Assert.Throws<JSException>(
-                () =>
-                {
-                    obj.AddEventListener(
-                        "throwError",
-                        (JSObject envt) =>
-                        {
-                            throw new Exception("Should not be called");
-                        }
-                    );
-                }
-            );
+            exc = Assert.Throws<JSException>(() =>
+            {
+                obj.AddEventListener(
+                    "throwError",
+                    (JSObject envt) =>
+                    {
+                        throw new Exception("Should not be called");
+                    }
+                );
+            });
             Assert.Contains("throwError throwing", exc.Message);
             obj.Invoke("fireEvent", "throwError");
         }
@@ -426,12 +422,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 throw new Exception("Should not be called");
             };
             obj.AddEventListener("test", del);
-            Assert.Throws<JSException>(
-                () =>
-                {
-                    obj.Invoke("fireEvent", "test");
-                }
-            );
+            Assert.Throws<JSException>(() =>
+            {
+                obj.Invoke("fireEvent", "test");
+            });
 
             obj.RemoveEventListener("test", del);
             obj.Invoke("fireEvent", "test");
@@ -475,12 +469,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
                 throw new Exception("Should not be called");
             };
             var handle = obj.AddEventListener("test", del);
-            Assert.Throws<JSException>(
-                () =>
-                {
-                    obj.Invoke("fireEvent", "test");
-                }
-            );
+            Assert.Throws<JSException>(() =>
+            {
+                obj.Invoke("fireEvent", "test");
+            });
 
             obj.RemoveEventListener("test", handle);
             obj.Invoke("fireEvent", "test");

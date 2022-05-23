@@ -93,12 +93,10 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    EventInfo ei = typeInfo.GetDeclaredEvent(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                EventInfo ei = typeInfo.GetDeclaredEvent(null);
+            });
         }
 
         // Verify GetDeclaredField() method
@@ -140,12 +138,10 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    FieldInfo fi = typeInfo.GetDeclaredField(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                FieldInfo fi = typeInfo.GetDeclaredField(null);
+            });
         }
 
         // Verify GetDeclaredMethod() method
@@ -187,12 +183,10 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    MethodInfo mi = typeInfo.GetDeclaredMethod(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                MethodInfo mi = typeInfo.GetDeclaredMethod(null);
+            });
         }
 
         // Verify  GetDeclaredMethods() method
@@ -244,12 +238,10 @@ namespace System.Reflection.Tests
             Type type = typeof(MethodPublicClass).Project();
             TypeInfo typeInfo = type.GetTypeInfo();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    TypeInfo nested_ti = typeInfo.GetDeclaredNestedType(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                TypeInfo nested_ti = typeInfo.GetDeclaredNestedType(null);
+            });
         }
 
         // Verify GetElementType() method

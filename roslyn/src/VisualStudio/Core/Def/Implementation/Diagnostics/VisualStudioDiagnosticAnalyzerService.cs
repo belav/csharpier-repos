@@ -224,18 +224,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             // The command is checked if RoslynPackage is loaded and the analysis scope for this command matches the
             // value saved for the solution.
-            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                {
-                    return RoslynPackage
-                        .GetOrLoadAsync(
-                            _threadingContext,
-                            (IAsyncServiceProvider)_serviceProvider,
-                            _threadingContext.DisposalToken
-                        )
-                        .AsTask();
-                }
-            );
+            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
+            {
+                return RoslynPackage
+                    .GetOrLoadAsync(
+                        _threadingContext,
+                        (IAsyncServiceProvider)_serviceProvider,
+                        _threadingContext.DisposalToken
+                    )
+                    .AsTask();
+            });
 
             if (roslynPackage is not null)
             {
@@ -320,18 +318,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
                 return;
             }
 
-            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(
-                () =>
-                {
-                    return RoslynPackage
-                        .GetOrLoadAsync(
-                            _threadingContext,
-                            (IAsyncServiceProvider)_serviceProvider,
-                            _threadingContext.DisposalToken
-                        )
-                        .AsTask();
-                }
-            );
+            var roslynPackage = _threadingContext.JoinableTaskFactory.Run(() =>
+            {
+                return RoslynPackage
+                    .GetOrLoadAsync(
+                        _threadingContext,
+                        (IAsyncServiceProvider)_serviceProvider,
+                        _threadingContext.DisposalToken
+                    )
+                    .AsTask();
+            });
 
             Assumes.Present(roslynPackage);
 
@@ -418,35 +414,33 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
             var asyncToken = _listener.BeginAsyncOperation(
                 $"{nameof(VisualStudioDiagnosticAnalyzerService)}_{nameof(RunAnalyzers)}"
             );
-            Task.Run(
-                    async () =>
+            Task.Run(async () =>
+                {
+                    try
                     {
-                        try
-                        {
-                            var onProjectAnalyzed =
-                                statusBarUpdater != null
-                                    ? statusBarUpdater.OnProjectAnalyzed
-                                    : (Action<Project>)((Project _) => { });
-                            await _diagnosticService
-                                .ForceAnalyzeAsync(
-                                    solution,
-                                    onProjectAnalyzed,
-                                    project?.Id,
-                                    CancellationToken.None
-                                )
-                                .ConfigureAwait(false);
+                        var onProjectAnalyzed =
+                            statusBarUpdater != null
+                                ? statusBarUpdater.OnProjectAnalyzed
+                                : (Action<Project>)((Project _) => { });
+                        await _diagnosticService
+                            .ForceAnalyzeAsync(
+                                solution,
+                                onProjectAnalyzed,
+                                project?.Id,
+                                CancellationToken.None
+                            )
+                            .ConfigureAwait(false);
 
-                            // If user has disabled live analyzer execution for any project(s), i.e. set RunAnalyzersDuringLiveAnalysis = false,
-                            // then ForceAnalyzeAsync will not cause analyzers to execute.
-                            // We explicitly fetch diagnostics for such projects and report these as "Host" diagnostics.
-                            HandleProjectsWithDisabledAnalysis();
-                        }
-                        finally
-                        {
-                            statusBarUpdater?.Dispose();
-                        }
+                        // If user has disabled live analyzer execution for any project(s), i.e. set RunAnalyzersDuringLiveAnalysis = false,
+                        // then ForceAnalyzeAsync will not cause analyzers to execute.
+                        // We explicitly fetch diagnostics for such projects and report these as "Host" diagnostics.
+                        HandleProjectsWithDisabledAnalysis();
                     }
-                )
+                    finally
+                    {
+                        statusBarUpdater?.Dispose();
+                    }
+                })
                 .CompletesAsyncOperation(asyncToken);
 
             return;
@@ -614,41 +608,39 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Diagnostics
 
             private void UpdateStatusCore()
             {
-                _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
+                _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+
+                    string message;
+                    int fInProgress;
+                    var analyzedProjectCount = (uint)_analyzedProjectCount;
+                    if (analyzedProjectCount == _totalProjectCount)
                     {
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-
-                        string message;
-                        int fInProgress;
-                        var analyzedProjectCount = (uint)_analyzedProjectCount;
-                        if (analyzedProjectCount == _totalProjectCount)
-                        {
-                            message = _statusMesageOnCompleted;
-                            fInProgress = 0;
-                        }
-                        else if (_disposed)
-                        {
-                            message = _statusMesageOnTerminated;
-                            fInProgress = 0;
-                        }
-                        else
-                        {
-                            message = _statusMessageWhileRunning;
-                            fInProgress = 1;
-                        }
-
-                        // Update the status bar progress and text.
-                        _statusBar.Progress(
-                            ref _statusBarCookie,
-                            fInProgress,
-                            message,
-                            analyzedProjectCount,
-                            _totalProjectCount
-                        );
-                        _statusBar.SetText(message);
+                        message = _statusMesageOnCompleted;
+                        fInProgress = 0;
                     }
-                );
+                    else if (_disposed)
+                    {
+                        message = _statusMesageOnTerminated;
+                        fInProgress = 0;
+                    }
+                    else
+                    {
+                        message = _statusMessageWhileRunning;
+                        fInProgress = 1;
+                    }
+
+                    // Update the status bar progress and text.
+                    _statusBar.Progress(
+                        ref _statusBarCookie,
+                        fInProgress,
+                        message,
+                        analyzedProjectCount,
+                        _totalProjectCount
+                    );
+                    _statusBar.SetText(message);
+                });
             }
         }
     }

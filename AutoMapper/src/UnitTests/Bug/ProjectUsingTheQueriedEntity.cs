@@ -21,13 +21,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Destination>()
-                        .ConvertUsing(s => new Destination { Number = 23 + s.Number });
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Destination>()
+                    .ConvertUsing(s => new Destination { Number = 23 + s.Number });
+            });
 
         protected override void Because_of()
         {

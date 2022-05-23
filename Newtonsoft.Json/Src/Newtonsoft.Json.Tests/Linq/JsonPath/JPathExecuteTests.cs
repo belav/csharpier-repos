@@ -90,20 +90,15 @@ namespace Newtonsoft.Json.Tests.Linq.JsonPath
                 )
             );
 
-            ExceptionAssert.Throws<RegexMatchTimeoutException>(
-                () =>
-                {
-                    regexBacktrackingData
-                        .SelectTokens(
-                            $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
-                            new JsonSelectSettings
-                            {
-                                RegexMatchTimeout = TimeSpan.FromSeconds(0.01)
-                            }
-                        )
-                        .ToArray();
-                }
-            );
+            ExceptionAssert.Throws<RegexMatchTimeoutException>(() =>
+            {
+                regexBacktrackingData
+                    .SelectTokens(
+                        $"[?(@.b =~ /{RegexBacktrackingPattern}/)]",
+                        new JsonSelectSettings { RegexMatchTimeout = TimeSpan.FromSeconds(0.01) }
+                    )
+                    .ToArray();
+            });
         }
 #endif
 

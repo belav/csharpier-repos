@@ -28,12 +28,10 @@ namespace System.Runtime.InteropServices.JavaScript.Tests
             for (int i = 0; i < count; i++)
             {
                 int j = i;
-                actions.Add(
-                    () =>
-                    {
-                        sum += j;
-                    }
-                );
+                actions.Add(() =>
+                {
+                    sum += j;
+                });
                 expected += j;
             }
 

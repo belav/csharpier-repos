@@ -39,39 +39,33 @@ builder.Services.AddScoped(
 #if (Hosted)
 builder.Services.AddApiAuthorization();
 #else
-builder.Services.AddOidcAuthentication(
-    options =>
-    {
+builder.Services.AddOidcAuthentication(options =>
+{
 #if(MissingAuthority)
     // Configure your authentication provider options here.
     // For more information, see https://aka.ms/blazor-standalone-auth
 #endif
-        builder.Configuration.Bind("Local", options.ProviderOptions);
-    }
-);
+    builder.Configuration.Bind("Local", options.ProviderOptions);
+});
 #endif
 #endif
 #if (IndividualB2CAuth)
-builder.Services.AddMsalAuthentication(
-    options =>
-    {
-        builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
+builder.Services.AddMsalAuthentication(options =>
+{
+    builder.Configuration.Bind("AzureAdB2C", options.ProviderOptions.Authentication);
 #if (Hosted)
     options.ProviderOptions.DefaultAccessTokenScopes.Add("https://qualified.domain.name/api.id.uri/api-scope");
 #endif
-    }
-);
+});
 #endif
 #if(OrganizationalAuth)
-builder.Services.AddMsalAuthentication(
-    options =>
-    {
-        builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
+builder.Services.AddMsalAuthentication(options =>
+{
+    builder.Configuration.Bind("AzureAd", options.ProviderOptions.Authentication);
 #if (Hosted)
     options.ProviderOptions.DefaultAccessTokenScopes.Add("api://api.id.uri/api-scope");
 #endif
-    }
-);
+});
 #endif
 
 await builder.Build().RunAsync();

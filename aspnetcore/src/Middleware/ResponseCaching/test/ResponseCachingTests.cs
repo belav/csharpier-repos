@@ -716,14 +716,12 @@ public class ResponseCachingTests
     [Fact]
     public async Task Serves304_IfIfModifiedSince_Satisfied()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-            {
-                context.Response.GetTypedHeaders().ETag = new EntityTagHeaderValue("\"E1\"");
-                context.Response.Headers.ContentLocation = "/";
-                context.Response.Headers.Vary = HeaderNames.From;
-            }
-        );
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+        {
+            context.Response.GetTypedHeaders().ETag = new EntityTagHeaderValue("\"E1\"");
+            context.Response.Headers.ContentLocation = "/";
+            context.Response.Headers.Vary = HeaderNames.From;
+        });
 
         foreach (var builder in builders)
         {
@@ -771,14 +769,12 @@ public class ResponseCachingTests
     [Fact]
     public async Task Serves304_IfIfNoneMatch_Satisfied()
     {
-        var builders = TestUtils.CreateBuildersWithResponseCaching(
-            contextAction: context =>
-            {
-                context.Response.GetTypedHeaders().ETag = new EntityTagHeaderValue("\"E1\"");
-                context.Response.Headers.ContentLocation = "/";
-                context.Response.Headers.Vary = HeaderNames.From;
-            }
-        );
+        var builders = TestUtils.CreateBuildersWithResponseCaching(contextAction: context =>
+        {
+            context.Response.GetTypedHeaders().ETag = new EntityTagHeaderValue("\"E1\"");
+            context.Response.Headers.ContentLocation = "/";
+            context.Response.Headers.Vary = HeaderNames.From;
+        });
 
         foreach (var builder in builders)
         {

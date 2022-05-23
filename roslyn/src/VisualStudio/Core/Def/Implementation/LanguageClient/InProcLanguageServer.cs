@@ -1104,19 +1104,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.LanguageClient
             };
 
             var asyncToken = _listener.BeginAsyncOperation(nameof(RequestExecutionQueue_Errored));
-            _errorShutdownTask = Task.Run(
-                    async () =>
-                    {
-                        _logger?.TraceInformation("Shutting down language server.");
+            _errorShutdownTask = Task.Run(async () =>
+                {
+                    _logger?.TraceInformation("Shutting down language server.");
 
-                        await _jsonRpc
-                            .NotifyWithParameterObjectAsync(Methods.WindowLogMessageName, message)
-                            .ConfigureAwait(false);
+                    await _jsonRpc
+                        .NotifyWithParameterObjectAsync(Methods.WindowLogMessageName, message)
+                        .ConfigureAwait(false);
 
-                        ShutdownImpl();
-                        ExitImpl();
-                    }
-                )
+                    ShutdownImpl();
+                    ExitImpl();
+                })
                 .CompletesAsyncOperation(asyncToken);
         }
 

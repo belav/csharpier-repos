@@ -23,18 +23,14 @@ namespace Microsoft.Extensions.Caching.Memory
         {
             var cacheEntryOptions = new MemoryCacheEntryOptions();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    cacheEntryOptions.Size = -1;
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    cacheEntryOptions.SetSize(-1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                cacheEntryOptions.Size = -1;
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                cacheEntryOptions.SetSize(-1);
+            });
         }
 
         [Fact]
@@ -44,18 +40,14 @@ namespace Microsoft.Extensions.Caching.Memory
 
             using (var cacheEntry = cache.CreateEntry(new object()))
             {
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        cacheEntry.Size = -1;
-                    }
-                );
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        cacheEntry.SetSize(-1);
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    cacheEntry.Size = -1;
+                });
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    cacheEntry.SetSize(-1);
+                });
             }
         }
 

@@ -550,19 +550,17 @@ namespace Microsoft.CodeAnalysis.ConvertAnonymousType
             // For every property, create a corresponding parameter, as well as an assignment
             // statement from that parameter to the property.
             var parameterToPropMap = new Dictionary<string, ISymbol>();
-            var parameters = properties.SelectAsArray(
-                prop =>
-                {
-                    var parameter = CodeGenerationSymbolFactory.CreateParameterSymbol(
-                        prop.Type,
-                        prop.Name.ToCamelCase(trimLeadingTypePrefix: false)
-                    );
+            var parameters = properties.SelectAsArray(prop =>
+            {
+                var parameter = CodeGenerationSymbolFactory.CreateParameterSymbol(
+                    prop.Type,
+                    prop.Name.ToCamelCase(trimLeadingTypePrefix: false)
+                );
 
-                    parameterToPropMap[parameter.Name] = prop;
+                parameterToPropMap[parameter.Name] = prop;
 
-                    return parameter;
-                }
-            );
+                return parameter;
+            });
 
             var assignmentStatements = generator.CreateAssignmentStatements(
                 semanticModel,

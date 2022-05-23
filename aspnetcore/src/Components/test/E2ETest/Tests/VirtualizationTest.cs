@@ -434,23 +434,19 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         // Scroll to the end of a medium list
         dataSetLengthSelector.SelectByText("1000");
         Browser.Equal(1000, dataSetLengthLastRendered);
-        Browser.True(
-            () =>
-            {
-                ScrollLeftToEnd(Browser, container);
-                ScrollTopToEnd(Browser, container);
-                return GetPeopleNames(container).Contains("Person 1000");
-            }
-        );
+        Browser.True(() =>
+        {
+            ScrollLeftToEnd(Browser, container);
+            ScrollTopToEnd(Browser, container);
+            return GetPeopleNames(container).Contains("Person 1000");
+        });
 
-        Browser.True(
-            () =>
-            {
-                ScrollLeftToEnd(Browser, container);
-                ScrollTopToBeginning(Browser, container);
-                return GetPeopleNames(container).Contains("Person 1");
-            }
-        );
+        Browser.True(() =>
+        {
+            ScrollLeftToEnd(Browser, container);
+            ScrollTopToBeginning(Browser, container);
+            return GetPeopleNames(container).Contains("Person 1");
+        });
     }
 
     [Theory]
@@ -478,13 +474,11 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         // Scroll to the end of a medium list
         dataSetLengthSelector.SelectByText("1000");
         Browser.Equal(1000, dataSetLengthLastRendered);
-        Browser.True(
-            () =>
-            {
-                ScrollTopToEnd(Browser, container);
-                return GetPeopleNames(container).Contains("Person 1000");
-            }
-        );
+        Browser.True(() =>
+        {
+            ScrollTopToEnd(Browser, container);
+            return GetPeopleNames(container).Contains("Person 1000");
+        });
 
         // Expand the data set
         dataSetLengthSelector.SelectByText("100000");
@@ -523,13 +517,11 @@ public class VirtualizationTest : ServerTestBase<ToggleExecutionModeServerFixtur
         // Scroll to the end of a very long list
         dataSetLengthSelector.SelectByText("100000");
         Browser.Equal(100000, dataSetLengthLastRendered);
-        Browser.True(
-            () =>
-            {
-                ScrollTopToEnd(Browser, container);
-                return GetPeopleNames(container).Contains("Person 100000");
-            }
-        );
+        Browser.True(() =>
+        {
+            ScrollTopToEnd(Browser, container);
+            return GetPeopleNames(container).Contains("Person 100000");
+        });
 
         // Now make the dataset much shorter
         // We should automatically have the scroll position reduced to the new maximum

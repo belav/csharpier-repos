@@ -40,13 +40,11 @@ public class FormCollectionModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address.Zip", "12345");
-                UpdateRequest(request, data, "Address.File");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address.Zip", "12345");
+            UpdateRequest(request, data, "Address.File");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -94,12 +92,10 @@ public class FormCollectionModelBindingIntegrationTest
         };
 
         var data = "Some Data Is Better Than No Data.";
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                UpdateRequest(request, data, "CustomParameter");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            UpdateRequest(request, data, "CustomParameter");
+        });
 
         var modelState = testContext.ModelState;
 

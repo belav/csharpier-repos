@@ -20,26 +20,20 @@ public class TestServerTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var builder = new WebHostBuilder()
-                .ConfigureServices(
-                    s =>
+                .ConfigureServices(s =>
+                {
+                    s.AddLogging();
+                    s.AddSingleton(LoggerFactory);
+                    s.AddSignalR();
+                })
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(endpoints =>
                     {
-                        s.AddLogging();
-                        s.AddSingleton(LoggerFactory);
-                        s.AddSignalR();
-                    }
-                )
-                .Configure(
-                    app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(
-                            endpoints =>
-                            {
-                                endpoints.MapHub<EchoHub>("/echo");
-                            }
-                        );
-                    }
-                );
+                        endpoints.MapHub<EchoHub>("/echo");
+                    });
+                });
             var server = new TestServer(builder);
 
             var webSocketFactoryCalled = false;
@@ -85,26 +79,20 @@ public class TestServerTests : VerifiableLoggedTest
         using (StartVerifiableLog())
         {
             var builder = new WebHostBuilder()
-                .ConfigureServices(
-                    s =>
+                .ConfigureServices(s =>
+                {
+                    s.AddLogging();
+                    s.AddSingleton(LoggerFactory);
+                    s.AddSignalR();
+                })
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(endpoints =>
                     {
-                        s.AddLogging();
-                        s.AddSingleton(LoggerFactory);
-                        s.AddSignalR();
-                    }
-                )
-                .Configure(
-                    app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(
-                            endpoints =>
-                            {
-                                endpoints.MapHub<EchoHub>("/echo");
-                            }
-                        );
-                    }
-                );
+                        endpoints.MapHub<EchoHub>("/echo");
+                    });
+                });
             var server = new TestServer(builder);
 
             var connectionBuilder = new HubConnectionBuilder().WithUrl(

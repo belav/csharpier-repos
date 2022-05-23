@@ -27,13 +27,11 @@ public class RouteViewTest
     [Fact]
     public void ThrowsIfNoRouteDataSupplied()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                // Throws synchronously, so no need to await
-                _ = _routeViewComponent.SetParametersAsync(ParameterView.Empty);
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            // Throws synchronously, so no need to await
+            _ = _routeViewComponent.SetParametersAsync(ParameterView.Empty);
+        });
 
         Assert.Equal(
             $"The {nameof(RouteView)} component requires a non-null value for the parameter {nameof(RouteView.RouteData)}.",

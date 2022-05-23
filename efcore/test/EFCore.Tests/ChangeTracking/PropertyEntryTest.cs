@@ -134,13 +134,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<User>(
-                    b =>
-                    {
-                        b.Property(e => e.Name).IsRequired();
-                        b.Property(e => e.LongName).IsRequired();
-                    }
-                );
+                modelBuilder.Entity<User>(b =>
+                {
+                    b.Property(e => e.Name).IsRequired();
+                    b.Property(e => e.LongName).IsRequired();
+                });
             }
         }
 
@@ -1236,33 +1234,27 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
             builder.HasChangeTrackingStrategy(fullNotificationStrategy);
 
-            builder.Entity<Wotty>(
-                b =>
-                {
-                    b.Property(e => e.RequiredPrimate).IsRequired();
-                    b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-                }
-            );
+            builder.Entity<Wotty>(b =>
+            {
+                b.Property(e => e.RequiredPrimate).IsRequired();
+                b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
+            });
 
-            builder.Entity<ObjectWotty>(
-                b =>
-                {
-                    b.Property(e => e.RequiredPrimate).IsRequired();
-                    b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
-                }
-            );
+            builder.Entity<ObjectWotty>(b =>
+            {
+                b.Property(e => e.RequiredPrimate).IsRequired();
+                b.HasChangeTrackingStrategy(ChangeTrackingStrategy.Snapshot);
+            });
 
             builder.Entity<NotifyingWotty>(
                 b => b.HasChangeTrackingStrategy(ChangeTrackingStrategy.ChangedNotifications)
             );
 
-            builder.Entity<FullyNotifyingWotty>(
-                b =>
-                {
-                    b.HasChangeTrackingStrategy(fullNotificationStrategy);
-                    b.Property(e => e.ConcurrentPrimate).IsConcurrencyToken();
-                }
-            );
+            builder.Entity<FullyNotifyingWotty>(b =>
+            {
+                b.HasChangeTrackingStrategy(fullNotificationStrategy);
+                b.Property(e => e.ConcurrentPrimate).IsConcurrencyToken();
+            });
 
             return finalize ? builder.Model.FinalizeModel() : (IModel)builder.Model;
         }

@@ -398,23 +398,19 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
             await Client.SelectAsync("test-selector-select", "BasicTestApp.ReliabilityComponent");
 
             // Act
-            await Client.ExpectCircuitError(
-                async () =>
-                {
-                    await Client.ClickAsync(id, expectRenderBatch: false);
-                }
-            );
+            await Client.ExpectCircuitError(async () =>
+            {
+                await Client.ClickAsync(id, expectRenderBatch: false);
+            });
 
             // Now if you try to click again, you will get *forcibly* disconnected for trying to talk to
             // a circuit that's gone.
-            await Client.ExpectCircuitErrorAndDisconnect(
-                async () =>
-                {
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        async () => await Client.ClickAsync(id, expectRenderBatch: false)
-                    );
-                }
-            );
+            await Client.ExpectCircuitErrorAndDisconnect(async () =>
+            {
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    async () => await Client.ClickAsync(id, expectRenderBatch: false)
+                );
+            });
 
             // Checking logs at the end to avoid race condition.
             Assert.Contains(
@@ -437,24 +433,19 @@ namespace Microsoft.AspNetCore.Components.E2ETest.ServerExecutionTests
 
             // Act - show then hide
             await Client.ClickAsync("dispose-throw");
-            await Client.ExpectCircuitError(
-                async () =>
-                {
-                    await Client.ClickAsync("dispose-throw", expectRenderBatch: false);
-                }
-            );
+            await Client.ExpectCircuitError(async () =>
+            {
+                await Client.ClickAsync("dispose-throw", expectRenderBatch: false);
+            });
 
             // Now if you try to click again, you will get *forcibly* disconnected for trying to talk to
             // a circuit that's gone.
-            await Client.ExpectCircuitErrorAndDisconnect(
-                async () =>
-                {
-                    await Assert.ThrowsAsync<TaskCanceledException>(
-                        async () =>
-                            await Client.ClickAsync("dispose-throw", expectRenderBatch: false)
-                    );
-                }
-            );
+            await Client.ExpectCircuitErrorAndDisconnect(async () =>
+            {
+                await Assert.ThrowsAsync<TaskCanceledException>(
+                    async () => await Client.ClickAsync("dispose-throw", expectRenderBatch: false)
+                );
+            });
 
             // Checking logs at the end to avoid race condition.
             Assert.Contains(

@@ -130,14 +130,12 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     server.Address
                 );
                 message.Version = new Version(2, 0);
-                message.Content = new StreamingContent(
-                    async s =>
-                    {
-                        requestStreamTcs.SetResult(s);
+                message.Content = new StreamingContent(async s =>
+                {
+                    requestStreamTcs.SetResult(s);
 
-                        await completeStreamTcs.Task;
-                    }
-                );
+                    await completeStreamTcs.Task;
+                });
 
                 Task<HttpResponseMessage> sendTask = client.SendAsync(
                     message,
@@ -200,14 +198,12 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     server.Address
                 );
                 message.Version = new Version(2, 0);
-                message.Content = new StreamingContent(
-                    async s =>
-                    {
-                        requestStreamTcs.SetResult(s);
+                message.Content = new StreamingContent(async s =>
+                {
+                    requestStreamTcs.SetResult(s);
 
-                        await completeStreamTcs.Task;
-                    }
-                );
+                    await completeStreamTcs.Task;
+                });
 
                 Task<HttpResponseMessage> sendTask = client.SendAsync(
                     message,
@@ -270,14 +266,12 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     server.Address
                 );
                 message.Version = new Version(2, 0);
-                message.Content = new StreamingContent(
-                    async s =>
-                    {
-                        requestStreamTcs.SetResult(s);
+                message.Content = new StreamingContent(async s =>
+                {
+                    requestStreamTcs.SetResult(s);
 
-                        await completeStreamTcs.Task;
-                    }
-                );
+                    await completeStreamTcs.Task;
+                });
 
                 Task<HttpResponseMessage> sendTask = client.SendAsync(
                     message,
@@ -350,16 +344,14 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     server.Address
                 );
                 message.Version = new Version(2, 0);
-                message.Content = new StreamingContent(
-                    async s =>
-                    {
-                        await s.WriteAsync(new byte[50]);
+                message.Content = new StreamingContent(async s =>
+                {
+                    await s.WriteAsync(new byte[50]);
 
-                        requestStreamTcs.SetResult(s);
+                    requestStreamTcs.SetResult(s);
 
-                        await completeStreamTcs.Task;
-                    }
-                );
+                    await completeStreamTcs.Task;
+                });
 
                 Task serverActions = RunServer();
 
@@ -414,12 +406,10 @@ namespace System.Net.Http.WinHttpHandlerFunctional.Tests
                     server.Address
                 );
                 message.Version = new Version(2, 0);
-                message.Content = new StreamingContent(
-                    async s =>
-                    {
-                        await completeStreamTcs.Task;
-                    }
-                );
+                message.Content = new StreamingContent(async s =>
+                {
+                    await completeStreamTcs.Task;
+                });
 
                 Task<HttpResponseMessage> sendTask = client.SendAsync(
                     message,

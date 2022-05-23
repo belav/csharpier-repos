@@ -397,8 +397,8 @@ public class MaxRequestBodySizeTests : LoggedTest
                 {
                     var buffer = new byte[11];
 #pragma warning disable CS0618 // Type or member is obsolete
-                    requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
-                        async () =>
+                    requestRejectedEx =
+                        await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
                         {
                             var count = 0;
@@ -406,8 +406,7 @@ public class MaxRequestBodySizeTests : LoggedTest
                             {
                                 count = await context.Request.Body.ReadAsync(buffer, 0, 11);
                             } while (count != 0);
-                        }
-                    );
+                        });
 
                     throw requestRejectedEx;
                 },
@@ -532,16 +531,15 @@ public class MaxRequestBodySizeTests : LoggedTest
                     else
                     {
 #pragma warning disable CS0618 // Type or member is obsolete
-                        requestRejectedEx = await Assert.ThrowsAsync<BadHttpRequestException>(
-                            async () =>
+                        requestRejectedEx =
+                            await Assert.ThrowsAsync<BadHttpRequestException>(async () =>
 #pragma warning restore CS0618 // Type or member is obsolete
                             {
                                 do
                                 {
                                     count = await context.Request.Body.ReadAsync(buffer, 0, 11);
                                 } while (count != 0);
-                            }
-                        );
+                            });
 
                         throw requestRejectedEx;
                     }

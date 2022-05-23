@@ -2953,12 +2953,10 @@ public static partial class DataContractSerializerTests
         DataContractSerializer dcs = new DataContractSerializer(list.GetType());
 
         MemoryStream ms = new MemoryStream();
-        Assert.Throws<InvalidDataContractException>(
-            () =>
-            {
-                dcs.WriteObject(ms, c);
-            }
-        );
+        Assert.Throws<InvalidDataContractException>(() =>
+        {
+            dcs.WriteObject(ms, c);
+        });
     }
 
     /*
@@ -3363,12 +3361,10 @@ public static partial class DataContractSerializerTests
             }
             else
             {
-                Assert.Throws<SerializationException>(
-                    () =>
-                    {
-                        serializer.ReadObject(reader);
-                    }
-                );
+                Assert.Throws<SerializationException>(() =>
+                {
+                    serializer.ReadObject(reader);
+                });
             }
         }
     }
@@ -3411,32 +3407,28 @@ public static partial class DataContractSerializerTests
     public static void DCS_EnumerableInterfaceGetOnlyCollection()
     {
         // Expect exception in deserialization process
-        Assert.Throws<InvalidDataContractException>(
-            () =>
-            {
-                var obj = new TypeWithEnumerableInterfaceGetOnlyCollection(
-                    new List<string>() { "item1", "item2", "item3" }
-                );
-                DataContractSerializerHelper.SerializeAndDeserialize(
-                    obj,
-                    @"<TypeWithEnumerableInterfaceGetOnlyCollection xmlns=""http://schemas.datacontract.org/2004/07/"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Items xmlns:a=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><a:string>item1</a:string><a:string>item2</a:string><a:string>item3</a:string></Items></TypeWithEnumerableInterfaceGetOnlyCollection>"
-                );
-            }
-        );
+        Assert.Throws<InvalidDataContractException>(() =>
+        {
+            var obj = new TypeWithEnumerableInterfaceGetOnlyCollection(
+                new List<string>() { "item1", "item2", "item3" }
+            );
+            DataContractSerializerHelper.SerializeAndDeserialize(
+                obj,
+                @"<TypeWithEnumerableInterfaceGetOnlyCollection xmlns=""http://schemas.datacontract.org/2004/07/"" xmlns:i=""http://www.w3.org/2001/XMLSchema-instance""><Items xmlns:a=""http://schemas.microsoft.com/2003/10/Serialization/Arrays""><a:string>item1</a:string><a:string>item2</a:string><a:string>item3</a:string></Items></TypeWithEnumerableInterfaceGetOnlyCollection>"
+            );
+        });
     }
 
     [Fact]
     public static void DCS_RecursiveCollection()
     {
-        Assert.Throws<InvalidDataContractException>(
-            () =>
-            {
-                (new DataContractSerializer(typeof(RecursiveCollection))).WriteObject(
-                    new MemoryStream(),
-                    new RecursiveCollection()
-                );
-            }
-        );
+        Assert.Throws<InvalidDataContractException>(() =>
+        {
+            (new DataContractSerializer(typeof(RecursiveCollection))).WriteObject(
+                new MemoryStream(),
+                new RecursiveCollection()
+            );
+        });
     }
 
     [Fact]
@@ -6861,12 +6853,10 @@ public static partial class DataContractSerializerTests
             object o = td.Instantiate();
             DataContractSerializer dcs = new DataContractSerializer(o.GetType());
             MemoryStream ms = new MemoryStream();
-            Assert.Throws<InvalidDataContractException>(
-                () =>
-                {
-                    dcs.WriteObject(ms, o);
-                }
-            );
+            Assert.Throws<InvalidDataContractException>(() =>
+            {
+                dcs.WriteObject(ms, o);
+            });
         }
     }
 
@@ -6882,21 +6872,17 @@ public static partial class DataContractSerializerTests
             ms.Seek(0L, SeekOrigin.Begin);
             if (td.Type.Equals(typeof(Invalid_Class_KnownType_Invalid_Type)))
             {
-                Assert.Throws<SerializationException>(
-                    () =>
-                    {
-                        dcs.ReadObject(ms);
-                    }
-                );
+                Assert.Throws<SerializationException>(() =>
+                {
+                    dcs.ReadObject(ms);
+                });
             }
             else
             {
-                Assert.Throws<InvalidDataContractException>(
-                    () =>
-                    {
-                        dcs.ReadObject(ms);
-                    }
-                );
+                Assert.Throws<InvalidDataContractException>(() =>
+                {
+                    dcs.ReadObject(ms);
+                });
             }
         }
     }
@@ -7040,19 +7026,17 @@ public static partial class DataContractSerializerTests
     [Fact]
     public static void DCS_DifferentCollectionsOfSameTypeAsKnownTypes()
     {
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                (
-                    new DataContractSerializer(
-                        typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
-                    )
-                ).WriteObject(
-                    new MemoryStream(),
-                    new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
-                );
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            (
+                new DataContractSerializer(
+                    typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
+                )
+            ).WriteObject(
+                new MemoryStream(),
+                new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
+            );
+        });
     }
 
     [Fact]
@@ -7072,12 +7056,10 @@ public static partial class DataContractSerializerTests
             }
         );
 
-        Assert.Throws<System.Runtime.Serialization.SerializationException>(
-            () =>
-            {
-                dcs.ReadObject(reader);
-            }
-        );
+        Assert.Throws<System.Runtime.Serialization.SerializationException>(() =>
+        {
+            dcs.ReadObject(reader);
+        });
     }
 
     private static T DeserializeString<T>(

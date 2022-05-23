@@ -203,13 +203,11 @@ namespace System.Data.Tests
             _tbl.Columns.Add(col);
 
             //Duplicate name exception
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    col2.ColumnName = "abc";
-                    _tbl.Columns.Add(col2);
-                }
-            );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                col2.ColumnName = "abc";
+                _tbl.Columns.Add(col2);
+            });
 
             // Make sure case matters in duplicate checks
             col3.ColumnName = "ABC";
@@ -298,14 +296,12 @@ namespace System.Data.Tests
         [Fact]
         public void ChangeTypeAfterSettingDefaultValue()
         {
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    DataColumn col = new DataColumn("foo", typeof(SqlBoolean));
-                    col.DefaultValue = true;
-                    col.DataType = typeof(int);
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                DataColumn col = new DataColumn("foo", typeof(SqlBoolean));
+                col.DefaultValue = true;
+                col.DataType = typeof(int);
+            });
         }
 
         [Fact]

@@ -31,28 +31,26 @@ public class RouterMiddlewareTest
 
         var routeHandlerExecuted = false;
 
-        var handler = new RouteHandler(
-            context =>
-            {
-                routeHandlerExecuted = true;
+        var handler = new RouteHandler(context =>
+        {
+            routeHandlerExecuted = true;
 
-                var routingFeature = context.Features.Get<IRoutingFeature>();
+            var routingFeature = context.Features.Get<IRoutingFeature>();
 
-                Assert.NotNull(routingFeature);
-                Assert.NotNull(context.Features.Get<IRouteValuesFeature>());
+            Assert.NotNull(routingFeature);
+            Assert.NotNull(context.Features.Get<IRouteValuesFeature>());
 
-                Assert.Single(routingFeature.RouteData.Values);
-                Assert.Single(context.Request.RouteValues);
-                Assert.True(routingFeature.RouteData.Values.ContainsKey("id"));
-                Assert.True(context.Request.RouteValues.ContainsKey("id"));
-                Assert.Equal("10", routingFeature.RouteData.Values["id"]);
-                Assert.Equal("10", context.Request.RouteValues["id"]);
-                Assert.Equal("10", context.GetRouteValue("id"));
-                Assert.Same(routingFeature.RouteData, context.GetRouteData());
+            Assert.Single(routingFeature.RouteData.Values);
+            Assert.Single(context.Request.RouteValues);
+            Assert.True(routingFeature.RouteData.Values.ContainsKey("id"));
+            Assert.True(context.Request.RouteValues.ContainsKey("id"));
+            Assert.Equal("10", routingFeature.RouteData.Values["id"]);
+            Assert.Equal("10", context.Request.RouteValues["id"]);
+            Assert.Equal("10", context.GetRouteValue("id"));
+            Assert.Same(routingFeature.RouteData, context.GetRouteData());
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
 
         var route = new Route(handler, "/foo/{id}", Mock.Of<IInlineConstraintResolver>());
 

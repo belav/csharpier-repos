@@ -86,28 +86,23 @@ public class Program
         {
             BenchmarkResultTask = new TaskCompletionSource<BenchmarkResult>();
             using var runCancellationToken = new CancellationTokenSource(timeForEachRun);
-            using var registration = runCancellationToken.Token.Register(
-                () =>
+            using var registration = runCancellationToken.Token.Register(() =>
+            {
+                string exceptionMessage = $"Timed out after {timeForEachRun}.";
+                try
                 {
-                    string exceptionMessage = $"Timed out after {timeForEachRun}.";
-                    try
-                    {
-                        var innerHtml = browser
-                            .FindElement(By.CssSelector(":first-child"))
-                            .GetAttribute("innerHTML");
-                        exceptionMessage +=
-                            Environment.NewLine
-                            + "Browser state: "
-                            + Environment.NewLine
-                            + innerHtml;
-                    }
-                    catch
-                    {
-                        // Do nothing;
-                    }
-                    BenchmarkResultTask.TrySetException(new TimeoutException(exceptionMessage));
+                    var innerHtml = browser
+                        .FindElement(By.CssSelector(":first-child"))
+                        .GetAttribute("innerHTML");
+                    exceptionMessage +=
+                        Environment.NewLine + "Browser state: " + Environment.NewLine + innerHtml;
                 }
-            );
+                catch
+                {
+                    // Do nothing;
+                }
+                BenchmarkResultTask.TrySetException(new TimeoutException(exceptionMessage));
+            });
 
             var results = await BenchmarkResultTask.Task;
 
@@ -339,21 +334,19 @@ public class Program
         var isDone = new ManualResetEvent(false);
 
         ExceptionDispatchInfo edi = null;
-        Task.Run(
-            () =>
+        Task.Run(() =>
+        {
+            try
             {
-                try
-                {
-                    action();
-                }
-                catch (Exception ex)
-                {
-                    edi = ExceptionDispatchInfo.Capture(ex);
-                }
-
-                isDone.Set();
+                action();
             }
-        );
+            catch (Exception ex)
+            {
+                edi = ExceptionDispatchInfo.Capture(ex);
+            }
+
+            isDone.Set();
+        });
 
         if (!isDone.WaitOne(TimeSpan.FromSeconds(30)))
         {

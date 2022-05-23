@@ -24,17 +24,15 @@ public class RazorViewEngineOptionsTest
             "/MvcViews/Shared/{0}.cshtml"
         };
         var builder = new MvcBuilder(services, new ApplicationPartManager());
-        builder.AddRazorOptions(
-            options =>
-            {
-                options.AreaViewLocationFormats.Clear();
+        builder.AddRazorOptions(options =>
+        {
+            options.AreaViewLocationFormats.Clear();
 
-                foreach (var location in areaViewLocations)
-                {
-                    options.AreaViewLocationFormats.Add(location);
-                }
+            foreach (var location in areaViewLocations)
+            {
+                options.AreaViewLocationFormats.Add(location);
             }
-        );
+        });
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RazorViewEngineOptions>>();
 
@@ -52,17 +50,15 @@ public class RazorViewEngineOptionsTest
         var services = new ServiceCollection().AddOptions();
         var viewLocations = new[] { "/MvcViews/{1}/{0}.cshtml", "/MvcViews/Shared/{0}.cshtml" };
         var builder = new MvcBuilder(services, new ApplicationPartManager());
-        builder.AddRazorOptions(
-            options =>
-            {
-                options.ViewLocationFormats.Clear();
+        builder.AddRazorOptions(options =>
+        {
+            options.ViewLocationFormats.Clear();
 
-                foreach (var location in viewLocations)
-                {
-                    options.ViewLocationFormats.Add(location);
-                }
+            foreach (var location in viewLocations)
+            {
+                options.ViewLocationFormats.Add(location);
             }
-        );
+        });
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RazorViewEngineOptions>>();
 

@@ -4433,29 +4433,23 @@ WHERE [b].[Id] = 13"
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<MappedDataTypes>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Int);
-                        b.Property(e => e.Int).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<MappedDataTypes>(b =>
+                {
+                    b.HasKey(e => e.Int);
+                    b.Property(e => e.Int).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<MappedSquareDataTypes>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Int);
-                        b.Property(e => e.Int).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<MappedSquareDataTypes>(b =>
+                {
+                    b.HasKey(e => e.Int);
+                    b.Property(e => e.Int).ValueGeneratedNever();
+                });
 
-                modelBuilder.Entity<MappedNullableDataTypes>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Int);
-                        b.Property(e => e.Int).ValueGeneratedNever();
-                    }
-                );
+                modelBuilder.Entity<MappedNullableDataTypes>(b =>
+                {
+                    b.HasKey(e => e.Int);
+                    b.Property(e => e.Int).ValueGeneratedNever();
+                });
 
                 modelBuilder.Entity<MappedDataTypesWithIdentity>();
                 modelBuilder.Entity<MappedNullableDataTypesWithIdentity>();
@@ -4489,66 +4483,58 @@ WHERE [b].[Id] = 13"
                 modelBuilder.Entity<MappedScaledDataTypesWithIdentity>();
                 modelBuilder.Entity<MappedPrecisionAndScaledDataTypesWithIdentity>();
 
-                modelBuilder.Entity<MappedSizedSeparatelyDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.StringAsChar3).HasMaxLength(3);
-                        b.Property(e => e.StringAsCharacter3).HasMaxLength(3);
-                        b.Property(e => e.StringAsVarchar3).HasMaxLength(3);
-                        b.Property(e => e.StringAsCharVarying3).HasMaxLength(3);
-                        b.Property(e => e.StringAsCharacterVarying3).HasMaxLength(3);
-                        b.Property(e => e.StringAsNchar3).HasMaxLength(3);
-                        b.Property(e => e.StringAsNationalCharacter3).HasMaxLength(3);
-                        b.Property(e => e.StringAsNvarchar3).HasMaxLength(3);
-                        b.Property(e => e.StringAsNationalCharVarying3).HasMaxLength(3);
-                        b.Property(e => e.StringAsNationalCharacterVarying3).HasMaxLength(3);
-                        b.Property(e => e.BytesAsBinary3).HasMaxLength(3);
-                        b.Property(e => e.BytesAsVarbinary3).HasMaxLength(3);
-                        b.Property(e => e.BytesAsBinaryVarying3).HasMaxLength(3);
-                        b.Property(e => e.CharAsVarchar3).HasMaxLength(3);
-                        b.Property(e => e.CharAsAsCharVarying3).HasMaxLength(3);
-                        b.Property(e => e.CharAsCharacterVarying3).HasMaxLength(3);
-                        b.Property(e => e.CharAsNvarchar3).HasMaxLength(3);
-                        b.Property(e => e.CharAsNationalCharVarying3).HasMaxLength(3);
-                        b.Property(e => e.CharAsNationalCharacterVarying3).HasMaxLength(3);
-                    }
-                );
+                modelBuilder.Entity<MappedSizedSeparatelyDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.StringAsChar3).HasMaxLength(3);
+                    b.Property(e => e.StringAsCharacter3).HasMaxLength(3);
+                    b.Property(e => e.StringAsVarchar3).HasMaxLength(3);
+                    b.Property(e => e.StringAsCharVarying3).HasMaxLength(3);
+                    b.Property(e => e.StringAsCharacterVarying3).HasMaxLength(3);
+                    b.Property(e => e.StringAsNchar3).HasMaxLength(3);
+                    b.Property(e => e.StringAsNationalCharacter3).HasMaxLength(3);
+                    b.Property(e => e.StringAsNvarchar3).HasMaxLength(3);
+                    b.Property(e => e.StringAsNationalCharVarying3).HasMaxLength(3);
+                    b.Property(e => e.StringAsNationalCharacterVarying3).HasMaxLength(3);
+                    b.Property(e => e.BytesAsBinary3).HasMaxLength(3);
+                    b.Property(e => e.BytesAsVarbinary3).HasMaxLength(3);
+                    b.Property(e => e.BytesAsBinaryVarying3).HasMaxLength(3);
+                    b.Property(e => e.CharAsVarchar3).HasMaxLength(3);
+                    b.Property(e => e.CharAsAsCharVarying3).HasMaxLength(3);
+                    b.Property(e => e.CharAsCharacterVarying3).HasMaxLength(3);
+                    b.Property(e => e.CharAsNvarchar3).HasMaxLength(3);
+                    b.Property(e => e.CharAsNationalCharVarying3).HasMaxLength(3);
+                    b.Property(e => e.CharAsNationalCharacterVarying3).HasMaxLength(3);
+                });
 
-                modelBuilder.Entity<MappedScaledSeparatelyDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.FloatAsFloat3).HasPrecision(3);
-                        b.Property(e => e.FloatAsDoublePrecision3).HasPrecision(3);
-                        b.Property(e => e.FloatAsFloat25).HasPrecision(25);
-                        b.Property(e => e.FloatAsDoublePrecision25).HasPrecision(25);
-                        b.Property(e => e.DateTimeOffsetAsDatetimeoffset3).HasPrecision(3);
-                        b.Property(e => e.DateTimeAsDatetime23).HasPrecision(3);
-                        b.Property(e => e.DecimalAsDecimal3).HasPrecision(3);
-                        b.Property(e => e.DecimalAsDec3).HasPrecision(3);
-                        b.Property(e => e.DecimalAsNumeric3).HasPrecision(3);
-                    }
-                );
+                modelBuilder.Entity<MappedScaledSeparatelyDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.FloatAsFloat3).HasPrecision(3);
+                    b.Property(e => e.FloatAsDoublePrecision3).HasPrecision(3);
+                    b.Property(e => e.FloatAsFloat25).HasPrecision(25);
+                    b.Property(e => e.FloatAsDoublePrecision25).HasPrecision(25);
+                    b.Property(e => e.DateTimeOffsetAsDatetimeoffset3).HasPrecision(3);
+                    b.Property(e => e.DateTimeAsDatetime23).HasPrecision(3);
+                    b.Property(e => e.DecimalAsDecimal3).HasPrecision(3);
+                    b.Property(e => e.DecimalAsDec3).HasPrecision(3);
+                    b.Property(e => e.DecimalAsNumeric3).HasPrecision(3);
+                });
 
-                modelBuilder.Entity<DoubleDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Double3).HasPrecision(3);
-                        b.Property(e => e.Double25).HasPrecision(25);
-                    }
-                );
+                modelBuilder.Entity<DoubleDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Double3).HasPrecision(3);
+                    b.Property(e => e.Double25).HasPrecision(25);
+                });
 
-                modelBuilder.Entity<MappedPrecisionAndScaledSeparatelyDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.DecimalAsDecimal52).HasPrecision(5, 2);
-                        b.Property(e => e.DecimalAsDec52).HasPrecision(5, 2);
-                        b.Property(e => e.DecimalAsNumeric52).HasPrecision(5, 2);
-                    }
-                );
+                modelBuilder.Entity<MappedPrecisionAndScaledSeparatelyDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.DecimalAsDecimal52).HasPrecision(5, 2);
+                    b.Property(e => e.DecimalAsDec52).HasPrecision(5, 2);
+                    b.Property(e => e.DecimalAsNumeric52).HasPrecision(5, 2);
+                });
             }
 
             public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder)

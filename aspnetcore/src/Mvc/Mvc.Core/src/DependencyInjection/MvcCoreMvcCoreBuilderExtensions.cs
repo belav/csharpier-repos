@@ -200,16 +200,14 @@ public static class MvcCoreMvcCoreBuilderExtensions
             throw new ArgumentNullException(nameof(assembly));
         }
 
-        builder.ConfigureApplicationPartManager(
-            manager =>
+        builder.ConfigureApplicationPartManager(manager =>
+        {
+            var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
+            foreach (var applicationPart in partFactory.GetApplicationParts(assembly))
             {
-                var partFactory = ApplicationPartFactory.GetApplicationPartFactory(assembly);
-                foreach (var applicationPart in partFactory.GetApplicationParts(assembly))
-                {
-                    manager.ApplicationParts.Add(applicationPart);
-                }
+                manager.ApplicationParts.Add(applicationPart);
             }
-        );
+        });
 
         return builder;
     }

@@ -98,12 +98,10 @@ public static class AuthorizationEndpointConventionBuilderExtensions
     public static TBuilder AllowAnonymous<TBuilder>(this TBuilder builder)
         where TBuilder : IEndpointConventionBuilder
     {
-        builder.Add(
-            endpointBuilder =>
-            {
-                endpointBuilder.Metadata.Add(_allowAnonymousMetadata);
-            }
-        );
+        builder.Add(endpointBuilder =>
+        {
+            endpointBuilder.Metadata.Add(_allowAnonymousMetadata);
+        });
         return builder;
     }
 
@@ -112,14 +110,12 @@ public static class AuthorizationEndpointConventionBuilderExtensions
         IEnumerable<IAuthorizeData> authorizeData
     ) where TBuilder : IEndpointConventionBuilder
     {
-        builder.Add(
-            endpointBuilder =>
+        builder.Add(endpointBuilder =>
+        {
+            foreach (var data in authorizeData)
             {
-                foreach (var data in authorizeData)
-                {
-                    endpointBuilder.Metadata.Add(data);
-                }
+                endpointBuilder.Metadata.Add(data);
             }
-        );
+        });
     }
 }

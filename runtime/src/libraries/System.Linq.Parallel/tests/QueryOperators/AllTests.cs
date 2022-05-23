@@ -103,13 +103,11 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.All(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.All(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
         }
 
@@ -118,23 +116,19 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.All(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.All(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.All(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.All(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
         }
 
@@ -151,12 +145,10 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     UnorderedSources
                         .Default(1)
-                        .All(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .All(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
         }
 

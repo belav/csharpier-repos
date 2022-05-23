@@ -124,12 +124,10 @@ public class PageDirectiveTest
     private RazorEngine CreateEngine()
     {
         return RazorProjectEngine
-            .Create(
-                b =>
-                {
-                    PageDirective.Register(b);
-                }
-            )
+            .Create(b =>
+            {
+                PageDirective.Register(b);
+            })
             .Engine;
     }
 

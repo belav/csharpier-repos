@@ -18,12 +18,10 @@ namespace System.Net.Http.Tests
             Assert.Equal(new TimeSpan(0, 0, 3), retryCondition.Delta);
             Assert.Null(retryCondition.Date);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new RetryConditionHeaderValue(new TimeSpan(1234567, 0, 0));
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new RetryConditionHeaderValue(new TimeSpan(1234567, 0, 0));
+            });
         }
 
         [Fact]
@@ -224,12 +222,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    RetryConditionHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                RetryConditionHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 RetryConditionHeaderValue.TryParse(input, out RetryConditionHeaderValue result)

@@ -32,12 +32,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Model, Dto>().ForMember(d => d.CompanyName, o => o.Ignore());
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Model, Dto>().ForMember(d => d.CompanyName, o => o.Ignore());
+            });
 
         protected override void Because_of()
         {

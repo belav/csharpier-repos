@@ -80,13 +80,11 @@ namespace System.Security.Cryptography.Tests
             {
                 hash.Dispose();
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        // Not returning or awaiting the Task, it never got created.
-                        hash.ComputeHashAsync(stream);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    // Not returning or awaiting the Task, it never got created.
+                    hash.ComputeHashAsync(stream);
+                });
             }
         }
 

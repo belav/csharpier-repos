@@ -110,33 +110,28 @@ namespace System.Net.WebSockets.Client.Tests
                     );
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            var extensionsReply = CreateDeflateOptionsHeader(
-                                new WebSocketDeflateOptions
-                                {
-                                    ClientMaxWindowBits = clientWindowBits - 1,
-                                    ClientContextTakeover = clientContextTakeover,
-                                    ServerMaxWindowBits = serverWindowBits - 1,
-                                    ServerContextTakeover = serverContextTakover
-                                }
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        var extensionsReply = CreateDeflateOptionsHeader(
+                            new WebSocketDeflateOptions
+                            {
+                                ClientMaxWindowBits = clientWindowBits - 1,
+                                ClientContextTakeover = clientContextTakeover,
+                                ServerMaxWindowBits = serverWindowBits - 1,
+                                ServerContextTakeover = serverContextTakover
+                            }
+                        );
+                        Dictionary<string, string> headers =
+                            await LoopbackHelper.WebSocketHandshakeAsync(
+                                connection,
+                                extensionsReply
                             );
-                            Dictionary<string, string> headers =
-                                await LoopbackHelper.WebSocketHandshakeAsync(
-                                    connection,
-                                    extensionsReply
-                                );
-                            Assert.NotNull(headers);
-                            Assert.True(
-                                headers.TryGetValue(
-                                    "Sec-WebSocket-Extensions",
-                                    out string extensions
-                                )
-                            );
-                            Assert.Equal(expected, extensions);
-                        }
-                    ),
+                        Assert.NotNull(headers);
+                        Assert.True(
+                            headers.TryGetValue("Sec-WebSocket-Extensions", out string extensions)
+                        );
+                        Assert.Equal(expected, extensions);
+                    }),
                 new LoopbackServer.Options { WebSocketEndpoint = true }
             );
         }

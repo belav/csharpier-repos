@@ -92,13 +92,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Source), typeof(Dest))
-                        .ForCtorParam("thing", opt => opt.MapFrom(src => ((Source)src).Value));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Source), typeof(Dest))
+                    .ForCtorParam("thing", opt => opt.MapFrom(src => ((Source)src).Value));
+            });
 
         [Fact]
         public void Should_redirect_value()
@@ -154,70 +152,58 @@ namespace AutoMapper.UnitTests
         public void Should_throw_on_nonexistent_parameter()
         {
             Action configuration = () =>
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value))
-                            .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
-                    }
-                );
-            configuration.ShouldThrowException<AutoMapperConfigurationException>(
-                exception =>
+                new MapperConfiguration(cfg =>
                 {
-                    exception.Message.ShouldContain(
-                        "does not have a constructor with a parameter named 'think'.",
-                        Case.Sensitive
-                    );
-                    exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
-                }
-            );
+                    cfg.CreateMap<Source, Dest>()
+                        .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value))
+                        .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
+                });
+            configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
+            {
+                exception.Message.ShouldContain(
+                    "does not have a constructor with a parameter named 'think'.",
+                    Case.Sensitive
+                );
+                exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
+            });
         }
 
         [Fact]
         public void Should_throw_when_no_constructor_is_present()
         {
             Action configuration = () =>
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, DestWithNoConstructor>()
-                            .ForMember(dest => dest.Value1, opt => opt.MapFrom(src => src.Value))
-                            .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
-                    }
-                );
-
-            configuration.ShouldThrowException<AutoMapperConfigurationException>(
-                exception =>
+                new MapperConfiguration(cfg =>
                 {
-                    exception.Message.ShouldContain("does not have a constructor.", Case.Sensitive);
-                    exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
-                }
-            );
+                    cfg.CreateMap<Source, DestWithNoConstructor>()
+                        .ForMember(dest => dest.Value1, opt => opt.MapFrom(src => src.Value))
+                        .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
+                });
+
+            configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
+            {
+                exception.Message.ShouldContain("does not have a constructor.", Case.Sensitive);
+                exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
+            });
         }
 
         [Fact]
         public void Should_throw_when_parameter_is_misspelt()
         {
             Action configuration = () =>
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
-                    }
-                );
-
-            configuration.ShouldThrowException<AutoMapperConfigurationException>(
-                exception =>
+                new MapperConfiguration(cfg =>
                 {
-                    exception.Message.ShouldContain(
-                        "does not have a constructor with a parameter named 'think'.",
-                        Case.Sensitive
-                    );
-                    exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
-                }
-            );
+                    cfg.CreateMap<Source, Dest>()
+                        .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
+                });
+
+            configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
+            {
+                exception.Message.ShouldContain(
+                    "does not have a constructor with a parameter named 'think'.",
+                    Case.Sensitive
+                );
+                exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
+            });
         }
     }
 }

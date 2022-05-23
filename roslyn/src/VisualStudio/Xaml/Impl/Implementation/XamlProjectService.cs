@@ -93,14 +93,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Xaml
                 }
                 else
                 {
-                    return _threadingContext.JoinableTaskFactory.Run(
-                        async () =>
-                        {
-                            await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    return _threadingContext.JoinableTaskFactory.Run(async () =>
+                    {
+                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                            return EnsureDocument(filePath);
-                        }
-                    );
+                        return EnsureDocument(filePath);
+                    });
                 }
             }
         }

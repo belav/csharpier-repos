@@ -2027,12 +2027,10 @@ public class [|C|]
             var namespaceSymbol = CodeGenerationSymbolFactory.CreateNamespaceSymbol("Outerspace");
 
             using var context = TestContext.Create();
-            await Assert.ThrowsAsync<ArgumentException>(
-                async () =>
-                {
-                    await context.GenerateSourceAsync(namespaceSymbol);
-                }
-            );
+            await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await context.GenerateSourceAsync(namespaceSymbol);
+            });
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.MetadataAsSource)]

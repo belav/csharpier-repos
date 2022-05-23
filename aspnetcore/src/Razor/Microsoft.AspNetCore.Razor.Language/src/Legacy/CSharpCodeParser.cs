@@ -443,18 +443,16 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     )
     {
         using (
-            PushSpanContextConfig(
-                spanContext =>
-                {
-                    spanContext.EditHandler = new ImplicitExpressionEditHandler(
-                        LanguageTokenizeString,
-                        Keywords,
-                        acceptTrailingDot: IsNested
-                    );
-                    spanContext.EditHandler.AcceptedCharacters = acceptedCharacters;
-                    spanContext.ChunkGenerator = new ExpressionChunkGenerator();
-                }
-            )
+            PushSpanContextConfig(spanContext =>
+            {
+                spanContext.EditHandler = new ImplicitExpressionEditHandler(
+                    LanguageTokenizeString,
+                    Keywords,
+                    acceptTrailingDot: IsNested
+                );
+                spanContext.EditHandler.AcceptedCharacters = acceptedCharacters;
+                spanContext.ChunkGenerator = new ExpressionChunkGenerator();
+            })
         )
         {
             do
@@ -2034,28 +2032,26 @@ internal class CSharpCodeParser : TokenizerBackedParser<CSharpTokenizer>
     {
         var currentIdentifierLength = 0;
         var expectingDot = false;
-        var tokens = ReadWhile(
-            token =>
+        var tokens = ReadWhile(token =>
+        {
+            var type = token.Kind;
+            if (
+                (expectingDot && type == SyntaxKind.Dot)
+                || (!expectingDot && type == SyntaxKind.Identifier)
+            )
             {
-                var type = token.Kind;
-                if (
-                    (expectingDot && type == SyntaxKind.Dot)
-                    || (!expectingDot && type == SyntaxKind.Identifier)
-                )
-                {
-                    expectingDot = !expectingDot;
-                    return true;
-                }
-
-                if (type != SyntaxKind.Whitespace && type != SyntaxKind.NewLine)
-                {
-                    expectingDot = false;
-                    currentIdentifierLength += token.Content.Length;
-                }
-
-                return false;
+                expectingDot = !expectingDot;
+                return true;
             }
-        );
+
+            if (type != SyntaxKind.Whitespace && type != SyntaxKind.NewLine)
+            {
+                expectingDot = false;
+                currentIdentifierLength += token.Content.Length;
+            }
+
+            return false;
+        });
 
         identifierLength = currentIdentifierLength;
         var validQualifiedIdentifier = expectingDot;

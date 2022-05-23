@@ -545,17 +545,15 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal
                     var predicateBody = Expression.AndAlso(
                         outerKey is NewArrayExpression newArrayExpression
                             ? newArrayExpression.Expressions
-                                .Select(
-                                    e =>
-                                    {
-                                        var left = (e as UnaryExpression)?.Operand ?? e;
+                                .Select(e =>
+                                {
+                                    var left = (e as UnaryExpression)?.Operand ?? e;
 
-                                        return Expression.NotEqual(
-                                            left,
-                                            Expression.Constant(null, left.Type)
-                                        );
-                                    }
-                                )
+                                    return Expression.NotEqual(
+                                        left,
+                                        Expression.Constant(null, left.Type)
+                                    );
+                                })
                                 .Aggregate((l, r) => Expression.AndAlso(l, r))
                             : Expression.NotEqual(
                                 outerKey,

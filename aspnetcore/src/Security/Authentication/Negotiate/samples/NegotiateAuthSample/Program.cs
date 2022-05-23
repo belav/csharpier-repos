@@ -17,26 +17,22 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder =>
-                {
-                    if (
-                        string.Equals(
-                            "HttpSys",
-                            webBuilder.GetSetting("server"),
-                            StringComparison.OrdinalIgnoreCase
-                        )
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                if (
+                    string.Equals(
+                        "HttpSys",
+                        webBuilder.GetSetting("server"),
+                        StringComparison.OrdinalIgnoreCase
                     )
+                )
+                {
+                    webBuilder.UseHttpSys(options =>
                     {
-                        webBuilder.UseHttpSys(
-                            options =>
-                            {
-                                options.Authentication.AllowAnonymous = true;
-                                options.Authentication.Schemes = AuthenticationSchemes.Negotiate;
-                            }
-                        );
-                    }
-                    webBuilder.UseStartup<Startup>();
+                        options.Authentication.AllowAnonymous = true;
+                        options.Authentication.Schemes = AuthenticationSchemes.Negotiate;
+                    });
                 }
-            );
+                webBuilder.UseStartup<Startup>();
+            });
 }

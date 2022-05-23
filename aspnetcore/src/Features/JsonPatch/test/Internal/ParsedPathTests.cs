@@ -36,11 +36,9 @@ public class ParsedPathTests
     public void PathWithInvalidEscapeSequenceShouldFail(string path)
     {
         // Arrange, Act & Assert
-        Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                var parsedPath = new ParsedPath(path);
-            }
-        );
+        Assert.Throws<JsonPatchException>(() =>
+        {
+            var parsedPath = new ParsedPath(path);
+        });
     }
 }

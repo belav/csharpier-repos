@@ -34,30 +34,28 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                         CommandOptionType.SingleValue
                     );
 
-                    cmd.OnExecute(
-                        () =>
+                    cmd.OnExecute(() =>
+                    {
+                        LogLevel logLevel = Defaults.LogLevel;
+
+                        if (
+                            logLevelOption.HasValue()
+                            && !Enum.TryParse(logLevelOption.Value(), out logLevel)
+                        )
                         {
-                            LogLevel logLevel = Defaults.LogLevel;
-
-                            if (
-                                logLevelOption.HasValue()
-                                && !Enum.TryParse(logLevelOption.Value(), out logLevel)
-                            )
-                            {
-                                return InvalidArg(logLevelOption);
-                            }
-
-                            if (
-                                azureSignalRConnectionString.HasValue()
-                                && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
-                            )
-                            {
-                                return InvalidArg(azureSignalRConnectionString);
-                            }
-
-                            return Execute(logLevel, azureSignalRConnectionString.Value());
+                            return InvalidArg(logLevelOption);
                         }
-                    );
+
+                        if (
+                            azureSignalRConnectionString.HasValue()
+                            && string.IsNullOrWhiteSpace(azureSignalRConnectionString.Value())
+                        )
+                        {
+                            return InvalidArg(azureSignalRConnectionString);
+                        }
+
+                        return Execute(logLevel, azureSignalRConnectionString.Value());
+                    });
                 }
             );
         }
@@ -88,12 +86,10 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
 
             var host = new WebHostBuilder()
                 .UseConfiguration(config)
-                .ConfigureLogging(
-                    loggerFactory =>
-                    {
-                        loggerFactory.AddConsole().SetMinimumLevel(logLevel);
-                    }
-                )
+                .ConfigureLogging(loggerFactory =>
+                {
+                    loggerFactory.AddConsole().SetMinimumLevel(logLevel);
+                })
                 .UseKestrel()
                 .UseStartup<Startup>();
 

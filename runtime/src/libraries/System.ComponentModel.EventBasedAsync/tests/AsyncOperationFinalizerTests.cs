@@ -14,15 +14,13 @@ namespace System.ComponentModel.Tests
         public void Finalizer_OperationCompleted_DoesNotCallOperationCompleted()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Completed();
+                .Invoke(() =>
+                {
+                    Completed();
 
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                    }
-                )
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
+                })
                 .Dispose();
         }
 
@@ -45,18 +43,16 @@ namespace System.ComponentModel.Tests
         public void Finalizer_OperationNotCompleted_CompletesOperation()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        var tracker = new OperationCompletedTracker();
-                        NotCompleted(tracker);
+                .Invoke(() =>
+                {
+                    var tracker = new OperationCompletedTracker();
+                    NotCompleted(tracker);
 
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
+                    GC.Collect();
+                    GC.WaitForPendingFinalizers();
 
-                        Assert.True(tracker.OperationDidComplete);
-                    }
-                )
+                    Assert.True(tracker.OperationDidComplete);
+                })
                 .Dispose();
         }
 

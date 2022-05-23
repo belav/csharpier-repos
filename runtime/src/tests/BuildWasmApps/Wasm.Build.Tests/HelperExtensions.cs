@@ -91,13 +91,11 @@ namespace Wasm.Build.Tests
             if (hosts == RunHost.None)
                 return data.Select(d => d.Append((object?)Path.GetRandomFileName()));
 
-            return data.SelectMany(
-                d =>
-                {
-                    string runId = Path.GetRandomFileName();
-                    return hostsEnumerable.Select(o => d.Append((object?)o).Append((object?)runId));
-                }
-            );
+            return data.SelectMany(d =>
+            {
+                string runId = Path.GetRandomFileName();
+                return hostsEnumerable.Select(o => d.Append((object?)o).Append((object?)runId));
+            });
         }
 
         public static void UpdateTo(

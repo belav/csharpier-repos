@@ -34,23 +34,19 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<AccessState>(
-                    b =>
-                    {
-                        b.Property(e => e.AccessStateId).ValueGeneratedNever();
-                        b.HasData(new AccessState { AccessStateId = 1 });
-                    }
-                );
+                modelBuilder.Entity<AccessState>(b =>
+                {
+                    b.Property(e => e.AccessStateId).ValueGeneratedNever();
+                    b.HasData(new AccessState { AccessStateId = 1 });
+                });
 
-                modelBuilder.Entity<Cruiser>(
-                    b =>
-                    {
-                        b.Property(e => e.IdUserState).HasDefaultValue(1);
-                        b.HasOne(e => e.UserState)
-                            .WithMany(e => e.Users)
-                            .HasForeignKey(e => e.IdUserState);
-                    }
-                );
+                modelBuilder.Entity<Cruiser>(b =>
+                {
+                    b.Property(e => e.IdUserState).HasDefaultValue(1);
+                    b.HasOne(e => e.UserState)
+                        .WithMany(e => e.Users)
+                        .HasForeignKey(e => e.IdUserState);
+                });
             }
         }
     }

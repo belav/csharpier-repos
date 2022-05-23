@@ -64,17 +64,15 @@ namespace System.CommandLine.Invocation
                 .Where(tuple => tuple.distance <= _maxLevenshteinDistance)
                 .OrderBy(tuple => tuple.distance)
                 .ThenByDescending(tuple => GetStartsWithDistance(token, tuple.possibleMatch))
-                .TakeWhile(
-                    tuple =>
+                .TakeWhile(tuple =>
+                {
+                    var (_, distance) = tuple;
+                    if (bestDistance is null)
                     {
-                        var (_, distance) = tuple;
-                        if (bestDistance is null)
-                        {
-                            bestDistance = distance;
-                        }
-                        return distance == bestDistance;
+                        bestDistance = distance;
                     }
-                )
+                    return distance == bestDistance;
+                })
                 .Select(tuple => tuple.possibleMatch);
         }
 

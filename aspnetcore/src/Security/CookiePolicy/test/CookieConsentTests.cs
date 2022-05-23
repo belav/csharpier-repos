@@ -713,26 +713,20 @@ public class CookieConsentTests
     )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseCookiePolicy();
-                                app.Run(handleRequest);
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.Configure(configureOptions);
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseCookiePolicy();
+                        app.Run(handleRequest);
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            })
             .Build();
 
         var server = host.GetTestServer();

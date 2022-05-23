@@ -20,14 +20,12 @@ namespace Activator
         {
             Console.WriteLine($"Running {nameof(InvalidInterfaceRequest)}...");
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    var notIClassFactory = new Guid("ED53F949-63E4-43B5-A13D-5655478AADD5");
-                    var cxt = new ComActivationContext() { InterfaceId = notIClassFactory };
-                    ComActivator.GetClassFactoryForType(cxt);
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                var notIClassFactory = new Guid("ED53F949-63E4-43B5-A13D-5655478AADD5");
+                var cxt = new ComActivationContext() { InterfaceId = notIClassFactory };
+                ComActivator.GetClassFactoryForType(cxt);
+            });
         }
 
         static void NonrootedAssemblyPath(bool builtInComDisabled)

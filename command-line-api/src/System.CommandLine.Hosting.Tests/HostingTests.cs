@@ -44,13 +44,11 @@ namespace System.CommandLine.Hosting.Tests
             InvocationContext invocationContext = null;
 
             var parser = new CommandLineBuilder()
-                .UseHost(
-                    host =>
-                    {
-                        if (host.Properties.TryGetValue(typeof(InvocationContext), out var ctx))
-                            invocationContext = ctx as InvocationContext;
-                    }
-                )
+                .UseHost(host =>
+                {
+                    if (host.Properties.TryGetValue(typeof(InvocationContext), out var ctx))
+                        invocationContext = ctx as InvocationContext;
+                })
                 .Build();
 
             parser.InvokeAsync(Array.Empty<string>()).GetAwaiter().GetResult();
@@ -108,20 +106,15 @@ namespace System.CommandLine.Hosting.Tests
                 new RootCommand { Handler = CommandHandler.Create<IHost>(Execute), }
             )
                 .EnableLegacyDoubleDashBehavior()
-                .UseHost(
-                    host =>
+                .UseHost(host =>
+                {
+                    var invocation = (InvocationContext)host.Properties[typeof(InvocationContext)];
+                    var args = invocation.ParseResult.UnparsedTokens.ToArray();
+                    host.ConfigureHostConfiguration(config =>
                     {
-                        var invocation = (InvocationContext)
-                            host.Properties[typeof(InvocationContext)];
-                        var args = invocation.ParseResult.UnparsedTokens.ToArray();
-                        host.ConfigureHostConfiguration(
-                            config =>
-                            {
-                                config.AddCommandLine(args);
-                            }
-                        );
-                    }
-                )
+                        config.AddCommandLine(args);
+                    });
+                })
                 .Build();
 
             parser.InvokeAsync(commandLineArgs).GetAwaiter().GetResult();
@@ -148,21 +141,17 @@ namespace System.CommandLine.Hosting.Tests
                 new RootCommand { Handler = CommandHandler.Create<IHost>(Execute), }
             )
                 .EnableLegacyDoubleDashBehavior()
-                .UseHost(
-                    args =>
+                .UseHost(args =>
+                {
+                    var host = new HostBuilder();
+
+                    host.ConfigureHostConfiguration(config =>
                     {
-                        var host = new HostBuilder();
+                        config.AddCommandLine(args);
+                    });
 
-                        host.ConfigureHostConfiguration(
-                            config =>
-                            {
-                                config.AddCommandLine(args);
-                            }
-                        );
-
-                        return host;
-                    }
-                )
+                    return host;
+                })
                 .Build();
 
             parser.InvokeAsync(commandLineArgs).GetAwaiter().GetResult();
@@ -213,17 +202,13 @@ namespace System.CommandLine.Hosting.Tests
             );
 
             int result = new CommandLineBuilder(rootCmd)
-                .UseHost(
-                    host =>
+                .UseHost(host =>
+                {
+                    host.ConfigureServices(services =>
                     {
-                        host.ConfigureServices(
-                            services =>
-                            {
-                                services.AddOptions<MyOptions>().BindCommandLine();
-                            }
-                        );
-                    }
-                )
+                        services.AddOptions<MyOptions>().BindCommandLine();
+                    });
+                })
                 .Build()
                 .Invoke(commandLine);
 
@@ -267,14 +252,12 @@ namespace System.CommandLine.Hosting.Tests
         {
             bool ctxAsserted = false;
             var parser = new CommandLineBuilder()
-                .UseHost(
-                    hostBuilder =>
-                    {
-                        InvocationContext ctx = hostBuilder.GetInvocationContext();
-                        ctx.Should().NotBeNull();
-                        ctxAsserted = true;
-                    }
-                )
+                .UseHost(hostBuilder =>
+                {
+                    InvocationContext ctx = hostBuilder.GetInvocationContext();
+                    ctx.Should().NotBeNull();
+                    ctxAsserted = true;
+                })
                 .Build();
 
             _ = parser.Invoke(string.Empty);
@@ -286,19 +269,17 @@ namespace System.CommandLine.Hosting.Tests
         {
             bool ctxAsserted = false;
             var parser = new CommandLineBuilder()
-                .UseHost(
-                    hostBuilder =>
-                    {
-                        hostBuilder.ConfigureServices(
-                            (hostingCtx, services) =>
-                            {
-                                InvocationContext invocationCtx = hostingCtx.GetInvocationContext();
-                                invocationCtx.Should().NotBeNull();
-                                ctxAsserted = true;
-                            }
-                        );
-                    }
-                )
+                .UseHost(hostBuilder =>
+                {
+                    hostBuilder.ConfigureServices(
+                        (hostingCtx, services) =>
+                        {
+                            InvocationContext invocationCtx = hostingCtx.GetInvocationContext();
+                            invocationCtx.Should().NotBeNull();
+                            ctxAsserted = true;
+                        }
+                    );
+                })
                 .Build();
 
             _ = parser.Invoke(string.Empty);
@@ -319,12 +300,10 @@ namespace System.CommandLine.Hosting.Tests
                         return next(context);
                     }
                 )
-                .UseHost(
-                    hostBuilder =>
-                    {
-                        ctxHosting = hostBuilder.GetInvocationContext();
-                    }
-                )
+                .UseHost(hostBuilder =>
+                {
+                    ctxHosting = hostBuilder.GetInvocationContext();
+                })
                 .Build();
 
             _ = parser.Invoke(string.Empty);
@@ -346,17 +325,15 @@ namespace System.CommandLine.Hosting.Tests
                         return next(context);
                     }
                 )
-                .UseHost(
-                    hostBuilder =>
-                    {
-                        hostBuilder.ConfigureServices(
-                            (hostingCtx, services) =>
-                            {
-                                ctxConfigureServices = hostingCtx.GetInvocationContext();
-                            }
-                        );
-                    }
-                )
+                .UseHost(hostBuilder =>
+                {
+                    hostBuilder.ConfigureServices(
+                        (hostingCtx, services) =>
+                        {
+                            ctxConfigureServices = hostingCtx.GetInvocationContext();
+                        }
+                    );
+                })
                 .Build();
 
             _ = parser.Invoke(string.Empty);
@@ -369,12 +346,10 @@ namespace System.CommandLine.Hosting.Tests
         {
             var hostBuilder = new HostBuilder();
             hostBuilder
-                .Invoking(
-                    b =>
-                    {
-                        _ = b.GetInvocationContext();
-                    }
-                )
+                .Invoking(b =>
+                {
+                    _ = b.GetInvocationContext();
+                })
                 .Should()
                 .Throw<InvalidOperationException>();
         }
@@ -383,18 +358,16 @@ namespace System.CommandLine.Hosting.Tests
         public static void GetInvocationContext_in_ConfigureServices_throws_if_not_within_invocation()
         {
             new HostBuilder()
-                .Invoking(
-                    b =>
-                    {
-                        b.ConfigureServices(
-                            (hostingCtx, services) =>
-                            {
-                                _ = hostingCtx.GetInvocationContext();
-                            }
-                        );
-                        _ = b.Build();
-                    }
-                )
+                .Invoking(b =>
+                {
+                    b.ConfigureServices(
+                        (hostingCtx, services) =>
+                        {
+                            _ = hostingCtx.GetInvocationContext();
+                        }
+                    );
+                    _ = b.Build();
+                })
                 .Should()
                 .Throw<InvalidOperationException>();
         }

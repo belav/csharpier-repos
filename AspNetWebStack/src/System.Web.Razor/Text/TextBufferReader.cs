@@ -67,12 +67,10 @@ namespace System.Web.Razor.Text
         {
             BacktrackContext context = new BacktrackContext() { Location = CurrentLocation };
             _bookmarks.Push(context);
-            return new DisposableAction(
-                () =>
-                {
-                    EndLookahead(context);
-                }
-            );
+            return new DisposableAction(() =>
+            {
+                EndLookahead(context);
+            });
         }
 
         public override void CancelBacktrack()

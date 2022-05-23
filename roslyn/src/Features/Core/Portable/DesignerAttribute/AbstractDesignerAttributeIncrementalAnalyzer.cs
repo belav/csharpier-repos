@@ -120,16 +120,14 @@ namespace Microsoft.CodeAnalysis.DesignerAttribute
                 .ConfigureAwait(false);
 
             var changedData = latestData
-                .Where(
-                    d =>
-                    {
-                        _documentToLastReportedInformation.TryGetValue(
-                            d.document.Id,
-                            out var existingInfo
-                        );
-                        return existingInfo.category != d.data.Category;
-                    }
-                )
+                .Where(d =>
+                {
+                    _documentToLastReportedInformation.TryGetValue(
+                        d.document.Id,
+                        out var existingInfo
+                    );
+                    return existingInfo.category != d.data.Category;
+                })
                 .ToImmutableArray();
 
             if (!changedData.IsEmpty)

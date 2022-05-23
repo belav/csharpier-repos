@@ -35,23 +35,20 @@ internal class DefaultRazorProjectFileSystem : RazorProjectFileSystem
         return directory
             .EnumerateFiles("*.cshtml", SearchOption.AllDirectories)
             .Concat(directory.EnumerateFiles("*.razor", SearchOption.AllDirectories))
-            .Select(
-                file =>
-                {
-                    var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
-                    var filePath =
-                        "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
+            .Select(file =>
+            {
+                var relativePhysicalPath = file.FullName.Substring(absoluteBasePath.Length + 1); // Include leading separator
+                var filePath = "/" + relativePhysicalPath.Replace(Path.DirectorySeparatorChar, '/');
 
-                    return new DefaultRazorProjectItem(
-                        basePath,
-                        filePath,
-                        relativePhysicalPath,
-                        fileKind: null,
-                        file,
-                        cssScope: null
-                    );
-                }
-            );
+                return new DefaultRazorProjectItem(
+                    basePath,
+                    filePath,
+                    relativePhysicalPath,
+                    fileKind: null,
+                    file,
+                    cssScope: null
+                );
+            });
     }
 
     public override RazorProjectItem GetItem(string path, string fileKind)

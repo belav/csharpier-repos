@@ -27,12 +27,10 @@ namespace AutoMapper.UnitTests
                 .Range(0, 5)
                 .Select(
                     i =>
-                        Task.Factory.StartNew(
-                            () =>
-                            {
-                                new MapperConfiguration(c => c.CreateMap<Source, Destination>());
-                            }
-                        )
+                        Task.Factory.StartNew(() =>
+                        {
+                            new MapperConfiguration(c => c.CreateMap<Source, Destination>());
+                        })
                 )
                 .ToArray();
             try
@@ -41,16 +39,14 @@ namespace AutoMapper.UnitTests
             }
             catch (AggregateException ex)
             {
-                ex.Handle(
-                    e =>
+                ex.Handle(e =>
+                {
+                    if (e is InvalidOperationException)
                     {
-                        if (e is InvalidOperationException)
-                        {
-                            throw e;
-                        }
-                        return false;
+                        throw e;
                     }
-                );
+                    return false;
+                });
             }
         }
     }

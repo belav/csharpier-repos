@@ -101,21 +101,19 @@ namespace Microsoft.CodeAnalysis.Formatting
                                 && n.Span.IntersectsWith(span)
                                 && !span.Contains(n.Span)
                         )
-                        .Do(
-                            n =>
+                        .Do(n =>
+                        {
+                            _formattingRules.AddIndentBlockOperations(list, n);
+                            foreach (var element in list)
                             {
-                                _formattingRules.AddIndentBlockOperations(list, n);
-                                foreach (var element in list)
+                                if (element != null)
                                 {
-                                    if (element != null)
-                                    {
-                                        operations.Add(element);
-                                    }
+                                    operations.Add(element);
                                 }
-
-                                list.Clear();
                             }
-                        );
+
+                            list.Clear();
+                        });
 
                     // found some. use these as initial indentation
                     if (operations.Any(o => o.TextSpan.Contains(span)))

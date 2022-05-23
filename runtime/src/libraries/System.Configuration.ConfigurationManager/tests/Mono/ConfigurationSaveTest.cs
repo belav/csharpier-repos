@@ -202,19 +202,17 @@ namespace MonoTests.System.Configuration
         {
             var label = new TestLabel(name);
 
-            TestUtil.RunWithTempFile(
-                filename =>
-                {
-                    var fileMap = new ExeConfigurationFileMap();
-                    fileMap.ExeConfigFilename = filename;
-                    var config = ConfigurationManager.OpenMappedExeConfiguration(
-                        fileMap,
-                        ConfigurationUserLevel.None
-                    );
+            TestUtil.RunWithTempFile(filename =>
+            {
+                var fileMap = new ExeConfigurationFileMap();
+                fileMap.ExeConfigFilename = filename;
+                var config = ConfigurationManager.OpenMappedExeConfiguration(
+                    fileMap,
+                    ConfigurationUserLevel.None
+                );
 
-                    func(config, label);
-                }
-            );
+                func(config, label);
+            });
         }
 
         private static void Run<TConfig>(string name, TestFunction func)

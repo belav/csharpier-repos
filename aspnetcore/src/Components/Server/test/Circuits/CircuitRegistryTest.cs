@@ -344,22 +344,18 @@ public class CircuitRegistryTest
         var newId = "new-connection";
 
         // Act
-        var disconnect = Task.Run(
-            () =>
-            {
-                var task = registry.DisconnectAsync(circuitHost, circuitHost.Client.ConnectionId);
-                tcs.SetResult(0);
-                return task;
-            }
-        );
-        var connect = Task.Run(
-            async () =>
-            {
-                registry.BeforeDisconnect.Set();
-                await tcs.Task;
-                await registry.ConnectAsync(circuitHost.CircuitId, client, newId, default);
-            }
-        );
+        var disconnect = Task.Run(() =>
+        {
+            var task = registry.DisconnectAsync(circuitHost, circuitHost.Client.ConnectionId);
+            tcs.SetResult(0);
+            return task;
+        });
+        var connect = Task.Run(async () =>
+        {
+            registry.BeforeDisconnect.Set();
+            await tcs.Task;
+            await registry.ConnectAsync(circuitHost.CircuitId, client, newId, default);
+        });
         registry.BeforeDisconnect.Set();
         await Task.WhenAll(disconnect, connect);
 

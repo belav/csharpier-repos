@@ -1018,17 +1018,15 @@ namespace System.Threading.Tasks.Tests
             // Test that illegal LongRunning | ExecuteSynchronously combination results in an exception.
             Task dummy = Task.Factory.StartNew(delegate { });
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Task.Factory.ContinueWhenAll(
-                        new Task[] { dummy },
-                        _ => { },
-                        TaskContinuationOptions.LongRunning
-                            | TaskContinuationOptions.ExecuteSynchronously
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Task.Factory.ContinueWhenAll(
+                    new Task[] { dummy },
+                    _ => { },
+                    TaskContinuationOptions.LongRunning
+                        | TaskContinuationOptions.ExecuteSynchronously
+                );
+            });
 
             dummy.Wait();
 
@@ -1038,81 +1036,64 @@ namespace System.Threading.Tasks.Tests
             {
                 makeCWAllTaskArrays(smallSize, largeSize, out smallTaskArray, out largeTaskArray);
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            delegate(Task[] finishedArray) { },
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            (TaskScheduler)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        delegate(Task[] finishedArray) { },
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        (TaskScheduler)null
+                    );
+                });
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            delegate(Task[] finishedArray) { },
-                            TaskContinuationOptions.NotOnFaulted
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        delegate(Task[] finishedArray) { },
+                        TaskContinuationOptions.NotOnFaulted
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(smallTaskArray, (Action<Task[]>)null);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll(smallTaskArray, (Action<Task[]>)null);
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            (Action<Task[]>)null,
-                            CancellationToken.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        (Action<Task[]>)null,
+                        CancellationToken.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            (Action<Task[]>)null,
-                            TaskContinuationOptions.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        (Action<Task[]>)null,
+                        TaskContinuationOptions.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            (Action<Task[]>)null,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        (Action<Task[]>)null,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll(
-                            (Task[])null,
-                            delegate(Task[] finishedArray) { }
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll((Task[])null, delegate(Task[] finishedArray) { });
+                });
 
                 smallTaskArray[0] = null;
 
@@ -1140,78 +1121,64 @@ namespace System.Threading.Tasks.Tests
             {
                 makeCWAllTaskArrays(smallSize, largeSize, out smallTaskArray, out largeTaskArray);
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallTaskArray,
-                            finishedArray => 10,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            (TaskScheduler)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallTaskArray,
+                        finishedArray => 10,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        (TaskScheduler)null
+                    );
+                });
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallTaskArray,
-                            finishedArray => 10,
-                            TaskContinuationOptions.NotOnFaulted
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallTaskArray,
+                        finishedArray => 10,
+                        TaskContinuationOptions.NotOnFaulted
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(smallTaskArray, (Func<Task[], int>)null);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(smallTaskArray, (Func<Task[], int>)null);
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallTaskArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallTaskArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallTaskArray,
-                            (Func<Task[], int>)null,
-                            TaskContinuationOptions.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallTaskArray,
+                        (Func<Task[], int>)null,
+                        TaskContinuationOptions.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallTaskArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallTaskArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>((Task[])null, finishedArray => 10);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>((Task[])null, finishedArray => 10);
+                });
 
                 smallTaskArray[0] = null;
 
@@ -1231,78 +1198,64 @@ namespace System.Threading.Tasks.Tests
             {
                 makeCWAllTaskArrays(smallSize, largeSize, out smallTaskArray, out largeTaskArray);
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            finishedArray => 10,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            (TaskScheduler)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        finishedArray => 10,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        (TaskScheduler)null
+                    );
+                });
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            finishedArray => 10,
-                            TaskContinuationOptions.NotOnFaulted
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        finishedArray => 10,
+                        TaskContinuationOptions.NotOnFaulted
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll(smallTaskArray, (Func<Task[], int>)null);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll(smallTaskArray, (Func<Task[], int>)null);
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            (Func<Task[], int>)null,
-                            TaskContinuationOptions.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        (Func<Task[], int>)null,
+                        TaskContinuationOptions.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll(
-                            smallTaskArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll(
+                        smallTaskArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll((Task[])null, finishedArray => 10);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll((Task[])null, finishedArray => 10);
+                });
 
                 smallTaskArray[0] = null;
 
@@ -1327,81 +1280,64 @@ namespace System.Threading.Tasks.Tests
                     out largeFutureArray
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            finishedArray => { },
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            (TaskScheduler)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        finishedArray => { },
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        (TaskScheduler)null
+                    );
+                });
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            finishedArray => { },
-                            TaskContinuationOptions.NotOnFaulted
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        finishedArray => { },
+                        TaskContinuationOptions.NotOnFaulted
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Action<Task<int>[]>)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(smallFutureArray, (Action<Task<int>[]>)null);
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Action<Task<int>[]>)null,
-                            CancellationToken.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Action<Task<int>[]>)null,
+                        CancellationToken.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Action<Task<int>[]>)null,
-                            TaskContinuationOptions.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Action<Task<int>[]>)null,
+                        TaskContinuationOptions.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Action<Task<int>[]>)null,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Action<Task<int>[]>)null,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int>((Task<int>[])null, finishedArray => { });
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int>((Task<int>[])null, finishedArray => { });
+                });
 
                 smallFutureArray[0] = null;
 
@@ -1426,84 +1362,67 @@ namespace System.Threading.Tasks.Tests
                     out largeFutureArray
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            smallFutureArray,
-                            finishedArray => 10,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            (TaskScheduler)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>(
+                        smallFutureArray,
+                        finishedArray => 10,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        (TaskScheduler)null
+                    );
+                });
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            smallFutureArray,
-                            finishedArray => 10,
-                            TaskContinuationOptions.NotOnFaulted
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>(
+                        smallFutureArray,
+                        finishedArray => 10,
+                        TaskContinuationOptions.NotOnFaulted
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null,
-                            TaskContinuationOptions.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null,
+                        TaskContinuationOptions.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.Factory.ContinueWhenAll<int, int>(
-                            (Task<int>[])null,
-                            finishedArray => 10
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.Factory.ContinueWhenAll<int, int>((Task<int>[])null, finishedArray => 10);
+                });
 
                 smallFutureArray[0] = null;
 
@@ -1528,84 +1447,67 @@ namespace System.Threading.Tasks.Tests
                     out largeFutureArray
                 );
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            finishedArray => 10,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            (TaskScheduler)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        finishedArray => 10,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        (TaskScheduler)null
+                    );
+                });
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            finishedArray => 10,
-                            TaskContinuationOptions.NotOnFaulted
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        finishedArray => 10,
+                        TaskContinuationOptions.NotOnFaulted
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null,
-                            TaskContinuationOptions.None
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null,
+                        TaskContinuationOptions.None
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            smallFutureArray,
-                            (Func<Task[], int>)null,
-                            CancellationToken.None,
-                            TaskContinuationOptions.None,
-                            TaskScheduler.Default
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>(
+                        smallFutureArray,
+                        (Func<Task[], int>)null,
+                        CancellationToken.None,
+                        TaskContinuationOptions.None,
+                        TaskScheduler.Default
+                    );
+                });
 
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task<int>.Factory.ContinueWhenAll<int>(
-                            (Task<int>[])null,
-                            finishedArray => 10
-                        );
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task<int>.Factory.ContinueWhenAll<int>((Task<int>[])null, finishedArray => 10);
+                });
 
                 smallFutureArray[0] = null;
 
@@ -1637,32 +1539,30 @@ namespace System.Threading.Tasks.Tests
             catch (AggregateException ae)
             {
                 ae.Flatten()
-                    .Handle(
-                        e =>
+                    .Handle(e =>
+                    {
+                        var tce = e as TaskCanceledException;
+                        if (tce == null)
                         {
-                            var tce = e as TaskCanceledException;
-                            if (tce == null)
-                            {
-                                Assert.True(
-                                    false,
-                                    string.Format(
-                                        "    > FAILED!  Pre-canceled result threw non-TCE from Wait()"
-                                    )
-                                );
-                            }
-                            else if (tce.CancellationToken != correctToken)
-                            {
-                                Assert.True(
-                                    false,
-                                    string.Format(
-                                        "    > FAILED!  Pre-canceled result threw TCE w/ wrong token"
-                                    )
-                                );
-                            }
-
-                            return true;
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "    > FAILED!  Pre-canceled result threw non-TCE from Wait()"
+                                )
+                            );
                         }
-                    );
+                        else if (tce.CancellationToken != correctToken)
+                        {
+                            Assert.True(
+                                false,
+                                string.Format(
+                                    "    > FAILED!  Pre-canceled result threw TCE w/ wrong token"
+                                )
+                            );
+                        }
+
+                        return true;
+                    });
             }
         }
 

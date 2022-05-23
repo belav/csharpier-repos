@@ -297,95 +297,77 @@ public class WebApplicationTests
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.WebHost.ConfigureAppConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) }
-                            }
-                        );
-                    }
-                )
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.ApplicationKey, nameof(WebApplicationTests) }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.WebHost.ConfigureAppConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.EnvironmentKey, envName }
-                            }
-                        );
-                    }
-                )
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.EnvironmentKey, envName }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.WebHost.ConfigureAppConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.ContentRootKey, contentRoot }
-                            }
-                        );
-                    }
-                )
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.ContentRootKey, contentRoot }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.WebHost.ConfigureAppConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.WebRootKey, webRoot }
-                            }
-                        );
-                    }
-                )
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string> { { WebHostDefaults.WebRootKey, webRoot } }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.WebHost.ConfigureAppConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { WebHostDefaults.HostingStartupAssembliesKey, "hosting" }
-                            }
-                        );
-                    }
-                )
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.HostingStartupAssembliesKey, "hosting" }
+                        }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.WebHost.ConfigureAppConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                {
-                                    WebHostDefaults.HostingStartupExcludeAssembliesKey,
-                                    "hostingexclude"
-                                }
-                            }
-                        );
-                    }
-                )
+                builder.WebHost.ConfigureAppConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string>
+                        {
+                            { WebHostDefaults.HostingStartupExcludeAssembliesKey, "hostingexclude" }
+                        }
+                    );
+                })
         );
     }
 
@@ -849,17 +831,12 @@ public class WebApplicationTests
 
         Assert.Throws<NotSupportedException>(
             () =>
-                builder.Host.ConfigureHostConfiguration(
-                    builder =>
-                    {
-                        builder.AddInMemoryCollection(
-                            new Dictionary<string, string>
-                            {
-                                { HostDefaults.ApplicationKey, "myapp" }
-                            }
-                        );
-                    }
-                )
+                builder.Host.ConfigureHostConfiguration(builder =>
+                {
+                    builder.AddInMemoryCollection(
+                        new Dictionary<string, string> { { HostDefaults.ApplicationKey, "myapp" } }
+                    );
+                })
         );
 
         Assert.Throws<NotSupportedException>(() => builder.Host.UseEnvironment(envName));
@@ -891,44 +868,34 @@ public class WebApplicationTests
     {
         // This mimics what WebApplicationFactory<T> does and runs configure
         // services callbacks
-        using var listener = new HostingListener(
-            hostBuilder =>
+        using var listener = new HostingListener(hostBuilder =>
+        {
+            hostBuilder.ConfigureHostConfiguration(config =>
             {
-                hostBuilder.ConfigureHostConfiguration(
-                    config =>
-                    {
-                        config.AddInMemoryCollection(
-                            new Dictionary<string, string>() { { "A", "A" }, { "B", "B" }, }
-                        );
-                    }
+                config.AddInMemoryCollection(
+                    new Dictionary<string, string>() { { "A", "A" }, { "B", "B" }, }
                 );
+            });
 
-                hostBuilder.ConfigureAppConfiguration(
-                    config =>
-                    {
-                        config.AddInMemoryCollection(
-                            new Dictionary<string, string>() { { "C", "C" }, { "D", "D" }, }
-                        );
-                    }
+            hostBuilder.ConfigureAppConfiguration(config =>
+            {
+                config.AddInMemoryCollection(
+                    new Dictionary<string, string>() { { "C", "C" }, { "D", "D" }, }
                 );
+            });
 
-                hostBuilder.ConfigureWebHost(
-                    builder =>
-                    {
-                        builder.UseSetting("E", "E");
+            hostBuilder.ConfigureWebHost(builder =>
+            {
+                builder.UseSetting("E", "E");
 
-                        builder.ConfigureAppConfiguration(
-                            config =>
-                            {
-                                config.AddInMemoryCollection(
-                                    new Dictionary<string, string>() { { "F", "F" }, }
-                                );
-                            }
-                        );
-                    }
-                );
-            }
-        );
+                builder.ConfigureAppConfiguration(config =>
+                {
+                    config.AddInMemoryCollection(
+                        new Dictionary<string, string>() { { "F", "F" }, }
+                    );
+                });
+            });
+        });
 
         var builder = WebApplication.CreateBuilder();
 
@@ -954,31 +921,21 @@ public class WebApplicationTests
     {
         // This mimics what WebApplicationFactory<T> does and runs configure
         // services callbacks
-        using var listener = new HostingListener(
-            hostBuilder =>
+        using var listener = new HostingListener(hostBuilder =>
+        {
+            hostBuilder.ConfigureHostConfiguration(config =>
             {
-                hostBuilder.ConfigureHostConfiguration(
-                    config =>
-                    {
-                        // Clearing here would not remove the app config added via builder.Configuration.
-                        config.AddInMemoryCollection(
-                            new Dictionary<string, string>() { { "A", "A" }, }
-                        );
-                    }
-                );
+                // Clearing here would not remove the app config added via builder.Configuration.
+                config.AddInMemoryCollection(new Dictionary<string, string>() { { "A", "A" }, });
+            });
 
-                hostBuilder.ConfigureAppConfiguration(
-                    config =>
-                    {
-                        // This clears both the chained host configuration and chained builder.Configuration.
-                        config.Sources.Clear();
-                        config.AddInMemoryCollection(
-                            new Dictionary<string, string>() { { "B", "B" }, }
-                        );
-                    }
-                );
-            }
-        );
+            hostBuilder.ConfigureAppConfiguration(config =>
+            {
+                // This clears both the chained host configuration and chained builder.Configuration.
+                config.Sources.Clear();
+                config.AddInMemoryCollection(new Dictionary<string, string>() { { "B", "B" }, });
+            });
+        });
 
         var builder = WebApplication.CreateBuilder();
 
@@ -1007,13 +964,11 @@ public class WebApplicationTests
 
         // This mimics what WebApplicationFactory<T> does and runs configure
         // services callbacks
-        using var listener = new HostingListener(
-            hostBuilder =>
-            {
-                hostBuilder.ConfigureHostConfiguration(config => config.AddJsonStream(jsonAStream));
-                hostBuilder.ConfigureAppConfiguration(config => config.AddJsonStream(jsonBStream));
-            }
-        );
+        using var listener = new HostingListener(hostBuilder =>
+        {
+            hostBuilder.ConfigureHostConfiguration(config => config.AddJsonStream(jsonAStream));
+            hostBuilder.ConfigureAppConfiguration(config => config.AddJsonStream(jsonBStream));
+        });
 
         var builder = WebApplication.CreateBuilder();
         await using var app = builder.Build();
@@ -1032,13 +987,11 @@ public class WebApplicationTests
 
         // This mimics what WebApplicationFactory<T> does and runs configure
         // services callbacks
-        using var listener = new HostingListener(
-            hostBuilder =>
-            {
-                hostBuilder.ConfigureHostConfiguration(config => config.Add(hostConfigSource));
-                hostBuilder.ConfigureAppConfiguration(config => config.Add(appConfigSource));
-            }
-        );
+        using var listener = new HostingListener(hostBuilder =>
+        {
+            hostBuilder.ConfigureHostConfiguration(config => config.Add(hostConfigSource));
+            hostBuilder.ConfigureAppConfiguration(config => config.Add(appConfigSource));
+        });
 
         var builder = WebApplication.CreateBuilder();
 
@@ -1066,14 +1019,12 @@ public class WebApplicationTests
     {
         // This mimics what WebApplicationFactory<T> does and runs configure
         // services callbacks
-        using var listener = new HostingListener(
-            hostBuilder =>
-            {
-                hostBuilder.ConfigureAppConfiguration(
-                    config => config.Add(new RandomConfigurationSource())
-                );
-            }
-        );
+        using var listener = new HostingListener(hostBuilder =>
+        {
+            hostBuilder.ConfigureAppConfiguration(
+                config => config.Add(new RandomConfigurationSource())
+            );
+        });
 
         var builder = WebApplication.CreateBuilder();
         await using var app = builder.Build();
@@ -1100,12 +1051,10 @@ public class WebApplicationTests
     public async Task WebApplicationConfiguration_HostFilterOptionsAreReloadable()
     {
         var builder = WebApplication.CreateBuilder();
-        var host = builder.WebHost.ConfigureAppConfiguration(
-            configBuilder =>
-            {
-                configBuilder.Add(new ReloadableMemorySource());
-            }
-        );
+        var host = builder.WebHost.ConfigureAppConfiguration(configBuilder =>
+        {
+            configBuilder.Add(new ReloadableMemorySource());
+        });
         await using var app = builder.Build();
 
         var config = app.Services.GetRequiredService<IConfiguration>();
@@ -1117,12 +1066,10 @@ public class WebApplicationTests
         var changed = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        monitor.OnChange(
-            newOptions =>
-            {
-                changed.TrySetResult(0);
-            }
-        );
+        monitor.OnChange(newOptions =>
+        {
+            changed.TrySetResult(0);
+        });
 
         config["AllowedHosts"] = "NewHost";
 
@@ -1191,13 +1138,11 @@ public class WebApplicationTests
         builder.Configuration["FORWARDEDHEADERS_ENABLED"] = "true";
         await using var app = builder.Build();
 
-        app.Run(
-            context =>
-            {
-                Assert.Equal("https", context.Request.Scheme);
-                return Task.CompletedTask;
-            }
-        );
+        app.Run(context =>
+        {
+            Assert.Equal("https", context.Request.Scheme);
+            return Task.CompletedTask;
+        });
 
         await app.StartAsync();
 
@@ -1242,17 +1187,13 @@ public class WebApplicationTests
     {
         // This mimics what WebApplicationFactory<T> does and runs configure
         // services callbacks
-        using var listener = new HostingListener(
-            hostBuilder =>
+        using var listener = new HostingListener(hostBuilder =>
+        {
+            hostBuilder.ConfigureServices(services =>
             {
-                hostBuilder.ConfigureServices(
-                    services =>
-                    {
-                        services.AddSingleton<IService, Service>();
-                    }
-                );
-            }
-        );
+                services.AddSingleton<IService, Service>();
+            });
+        });
 
         var builder = WebApplication.CreateBuilder();
 
@@ -1646,13 +1587,11 @@ public class WebApplicationTests
 
         app.MapGet("/", () => "Hello World!").WithDisplayName("One");
 
-        app.UseEndpoints(
-            routes =>
-            {
-                routes.MapGet("/hi", () => "Hi World").WithDisplayName("Two");
-                routes.MapGet("/heyo", () => "Heyo World").WithDisplayName("Three");
-            }
-        );
+        app.UseEndpoints(routes =>
+        {
+            routes.MapGet("/hi", () => "Hi World").WithDisplayName("Two");
+            routes.MapGet("/heyo", () => "Heyo World").WithDisplayName("Three");
+        });
 
         app.Start();
 
@@ -1684,12 +1623,10 @@ public class WebApplicationTests
 
         app.MapGet("/", () => "Hello World").WithDisplayName("One");
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGet("/hi", () => "Hello Endpoints").WithDisplayName("Two");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/hi", () => "Hello Endpoints").WithDisplayName("Two");
+        });
 
         app.UseRouting();
         app.UseEndpoints(_ => { });
@@ -1744,22 +1681,20 @@ public class WebApplicationTests
         var chosenRoute = string.Empty;
         app.MapGet("/", () => "Hello World!").WithDisplayName("One");
 
-        app.UseEndpoints(
-            routes =>
-            {
-                routes
-                    .MapGet(
-                        "/hi",
-                        async c =>
-                        {
-                            chosenRoute = c.GetEndpoint()?.DisplayName;
-                            await c.Response.WriteAsync("Hello World");
-                        }
-                    )
-                    .WithDisplayName("Two");
-                routes.MapGet("/heyo", () => "Heyo World").WithDisplayName("Three");
-            }
-        );
+        app.UseEndpoints(routes =>
+        {
+            routes
+                .MapGet(
+                    "/hi",
+                    async c =>
+                    {
+                        chosenRoute = c.GetEndpoint()?.DisplayName;
+                        await c.Response.WriteAsync("Hello World");
+                    }
+                )
+                .WithDisplayName("Two");
+            routes.MapGet("/heyo", () => "Heyo World").WithDisplayName("Three");
+        });
 
         var newBuilder = ((IApplicationBuilder)app).New();
         Assert.False(
@@ -1767,31 +1702,29 @@ public class WebApplicationTests
         );
 
         newBuilder.UseRouting();
-        newBuilder.UseEndpoints(
-            endpoints =>
-            {
-                endpoints
-                    .MapGet(
-                        "/h3",
-                        async c =>
-                        {
-                            chosenRoute = c.GetEndpoint()?.DisplayName;
-                            await c.Response.WriteAsync("Hello World");
-                        }
-                    )
-                    .WithDisplayName("Four");
-                endpoints
-                    .MapGet(
-                        "hi",
-                        async c =>
-                        {
-                            chosenRoute = c.GetEndpoint()?.DisplayName;
-                            await c.Response.WriteAsync("Hi New");
-                        }
-                    )
-                    .WithDisplayName("Five");
-            }
-        );
+        newBuilder.UseEndpoints(endpoints =>
+        {
+            endpoints
+                .MapGet(
+                    "/h3",
+                    async c =>
+                    {
+                        chosenRoute = c.GetEndpoint()?.DisplayName;
+                        await c.Response.WriteAsync("Hello World");
+                    }
+                )
+                .WithDisplayName("Four");
+            endpoints
+                .MapGet(
+                    "hi",
+                    async c =>
+                    {
+                        chosenRoute = c.GetEndpoint()?.DisplayName;
+                        await c.Response.WriteAsync("Hi New");
+                    }
+                )
+                .WithDisplayName("Five");
+        });
         var branch = newBuilder.Build();
         app.Run(c => branch(c));
 
@@ -2175,12 +2108,10 @@ public class WebApplicationTests
         builder.WebHost.UseTestServer();
         await using var app = builder.Build();
 
-        app.Use(
-            next =>
-            {
-                return context => context.Response.WriteAsync("Hello World");
-            }
-        );
+        app.Use(next =>
+        {
+            return context => context.Response.WriteAsync("Hello World");
+        });
 
         await app.StartAsync();
 
@@ -2466,13 +2397,11 @@ public class WebApplicationTests
             return app =>
             {
                 next(app);
-                app.Run(
-                    context =>
-                    {
-                        context.Response.StatusCode = 418; // I'm a teapot
-                        return Task.CompletedTask;
-                    }
-                );
+                app.Run(context =>
+                {
+                    context.Response.StatusCode = 418; // I'm a teapot
+                    return Task.CompletedTask;
+                });
             };
         }
     }
@@ -2485,21 +2414,19 @@ public class WebApplicationTests
             {
                 app.UseRouting();
                 next(app);
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints
-                            .MapGet(
-                                "/1",
-                                async c =>
-                                {
-                                    c.Response.StatusCode = 203;
-                                    await c.Response.WriteAsync("Hello Filter");
-                                }
-                            )
-                            .WithDisplayName("Two");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints
+                        .MapGet(
+                            "/1",
+                            async c =>
+                            {
+                                c.Response.StatusCode = 203;
+                                await c.Response.WriteAsync("Hello Filter");
+                            }
+                        )
+                        .WithDisplayName("Two");
+                });
             };
         }
     }

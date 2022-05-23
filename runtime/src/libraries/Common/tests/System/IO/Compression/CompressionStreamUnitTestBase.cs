@@ -33,12 +33,10 @@ namespace System.IO.Compression
                         rand.NextBytes(buffer);
                         task = compressor.WriteAsync(buffer, 0, buffer.Length);
                     }
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            compressor.FlushAsync();
-                        }
-                    ); // "overlapping flushes"
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        compressor.FlushAsync();
+                    }); // "overlapping flushes"
                 }
                 finally
                 {
@@ -75,12 +73,10 @@ namespace System.IO.Compression
                     readStream.ReadHit = false;
                     task = decompressor.ReadAsync(buffer, 0, 32);
                     Assert.True(readStream.ReadHit);
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            decompressor.FlushAsync();
-                        }
-                    ); // "overlapping read"
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        decompressor.FlushAsync();
+                    }); // "overlapping read"
                 }
                 finally
                 {
@@ -123,12 +119,10 @@ namespace System.IO.Compression
                         task = zip.FlushAsync();
                     }
 
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            zip.FlushAsync();
-                        }
-                    ); // "overlapping flushes"
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        zip.FlushAsync();
+                    }); // "overlapping flushes"
                 }
                 finally
                 {
@@ -494,12 +488,10 @@ namespace System.IO.Compression
                     CompressionMode.Decompress
                 )
             )
-                await Assert.ThrowsAsync<InvalidDataException>(
-                    async () =>
-                    {
-                        await decompressor.ReadAsync(new Memory<byte>(new byte[1024]));
-                    }
-                );
+                await Assert.ThrowsAsync<InvalidDataException>(async () =>
+                {
+                    await decompressor.ReadAsync(new Memory<byte>(new byte[1024]));
+                });
 
             using (
                 var decompressor = CreateStream(

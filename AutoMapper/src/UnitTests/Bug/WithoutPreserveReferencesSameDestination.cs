@@ -70,14 +70,12 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<EntityTwo, DtoTwo>();
-                    cfg.CreateMap<EntityOne, DtoOne>();
-                    cfg.CreateMap<EntityOne, DtoThree>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<EntityTwo, DtoTwo>();
+                cfg.CreateMap<EntityOne, DtoOne>();
+                cfg.CreateMap<EntityOne, DtoThree>();
+            });
 
         [Fact]
         public void Should_use_the_right_map()

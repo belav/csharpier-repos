@@ -29,13 +29,11 @@ namespace Microsoft.Win32.RegistryTests
             );
 
             // get handle of disposed RegistryKey
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    return TestRegistryKey.Handle;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                return TestRegistryKey.Handle;
+            });
         }
 
         [Fact]
@@ -43,28 +41,24 @@ namespace Microsoft.Win32.RegistryTests
         {
             const string subKeyName = "TestKeyThatWillBeDeleted";
             //Try getting registrykey from handle for key that has been deleted.
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    RegistryKey rk = TestRegistryKey.CreateSubKey(subKeyName);
-                    SafeRegistryHandle handle = rk.Handle;
-                    TestRegistryKey.DeleteSubKey(subKeyName);
-                    rk = RegistryKey.FromHandle(handle, RegistryView.Default);
-                    rk.CreateSubKey("TestThrows");
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                RegistryKey rk = TestRegistryKey.CreateSubKey(subKeyName);
+                SafeRegistryHandle handle = rk.Handle;
+                TestRegistryKey.DeleteSubKey(subKeyName);
+                rk = RegistryKey.FromHandle(handle, RegistryView.Default);
+                rk.CreateSubKey("TestThrows");
+            });
 
             //Try getting handle on deleted key.
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    RegistryKey rk = TestRegistryKey.CreateSubKey(subKeyName);
-                    TestRegistryKey.DeleteSubKey(subKeyName);
-                    SafeRegistryHandle handle = rk.Handle;
-                    rk = RegistryKey.FromHandle(handle, RegistryView.Default);
-                    rk.CreateSubKey("TestThrows");
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                RegistryKey rk = TestRegistryKey.CreateSubKey(subKeyName);
+                TestRegistryKey.DeleteSubKey(subKeyName);
+                SafeRegistryHandle handle = rk.Handle;
+                rk = RegistryKey.FromHandle(handle, RegistryView.Default);
+                rk.CreateSubKey("TestThrows");
+            });
         }
     }
 }

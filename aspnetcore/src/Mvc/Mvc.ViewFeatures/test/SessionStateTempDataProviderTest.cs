@@ -29,12 +29,10 @@ public class SessionStateTempDataProviderTest
         var testProvider = CreateTempDataProvider();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                testProvider.LoadTempData(GetHttpContext(sessionEnabled: false));
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            testProvider.LoadTempData(GetHttpContext(sessionEnabled: false));
+        });
     }
 
     [Fact]
@@ -44,12 +42,10 @@ public class SessionStateTempDataProviderTest
         var testProvider = CreateTempDataProvider();
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                testProvider.SaveTempData(GetHttpContext(sessionEnabled: false), Dictionary);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            testProvider.SaveTempData(GetHttpContext(sessionEnabled: false), Dictionary);
+        });
     }
 
     [Fact]

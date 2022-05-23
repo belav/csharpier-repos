@@ -15,12 +15,10 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<From, To>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<From, To>();
+            });
 
         protected override void Because_of()
         {

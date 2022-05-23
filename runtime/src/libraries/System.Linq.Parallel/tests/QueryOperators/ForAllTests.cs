@@ -51,12 +51,10 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     ParallelEnumerable
                         .Range(0, 1)
-                        .ForAll(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .ForAll(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>

@@ -38,14 +38,12 @@ public class HasValidatorsValidationMetadataProviderIntegrationTest
         // Arrange
         var serviceCollection = new ServiceCollection();
         serviceCollection.AddLogging();
-        serviceCollection.AddMvc(
-            mvcOptions =>
-            {
-                mvcOptions.ModelMetadataDetailsProviders.Add(
-                    new SuppressChildValidationMetadataProvider(typeof(IQueryable))
-                );
-            }
-        );
+        serviceCollection.AddMvc(mvcOptions =>
+        {
+            mvcOptions.ModelMetadataDetailsProviders.Add(
+                new SuppressChildValidationMetadataProvider(typeof(IQueryable))
+            );
+        });
         var services = serviceCollection.BuildServiceProvider();
 
         // Act

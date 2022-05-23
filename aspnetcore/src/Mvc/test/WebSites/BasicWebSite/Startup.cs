@@ -31,20 +31,18 @@ public class Startup
         app.UseMiddleware<RequestIdMiddleware>();
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllerRoute(
-                    name: "ActionAsMethod",
-                    pattern: "{controller}/{action}",
-                    defaults: new { controller = "Home", action = "Index" }
-                );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllerRoute(
+                name: "ActionAsMethod",
+                pattern: "{controller}/{action}",
+                defaults: new { controller = "Home", action = "Index" }
+            );
 
-                endpoints.MapControllerRoute(
-                    name: "PageRoute",
-                    pattern: "{controller}/{action}/{page}"
-                );
-            }
-        );
+            endpoints.MapControllerRoute(
+                name: "PageRoute",
+                pattern: "{controller}/{action}/{page}"
+            );
+        });
     }
 }

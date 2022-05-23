@@ -173,129 +173,117 @@ namespace System.Security.AccessControl.Tests
             int index = 0;
 
             // case 1, no ACE, get index at -1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = -1;
-                    discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
-                    verifierGAce = discretionaryAcl[index];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = -1;
+                discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
+                verifierGAce = discretionaryAcl[index];
+            });
 
             //case 2, get index at Count
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
-                    index = discretionaryAcl.Count;
-                    verifierGAce = discretionaryAcl[index];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
+                index = discretionaryAcl.Count;
+                verifierGAce = discretionaryAcl[index];
+            });
 
             //case 3, set index at -1
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
-                    index = -1;
-                    owner = "BG";
-                    gAce = new CommonAce(
-                        AceFlags.SuccessfulAccess,
-                        AceQualifier.SystemAudit,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    discretionaryAcl[index] = gAce;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
+                index = -1;
+                owner = "BG";
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                discretionaryAcl[index] = gAce;
+            });
 
             //case 4, set index at Count
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    discretionaryAcl = new DiscretionaryAcl(true, false, rawAcl);
-                    index = discretionaryAcl.Count;
-                    owner = "BG";
-                    gAce = new CommonAce(
-                        AceFlags.SuccessfulAccess,
-                        AceQualifier.SystemAudit,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    discretionaryAcl[index] = gAce;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                discretionaryAcl = new DiscretionaryAcl(true, false, rawAcl);
+                index = discretionaryAcl.Count;
+                owner = "BG";
+                gAce = new CommonAce(
+                    AceFlags.SuccessfulAccess,
+                    AceQualifier.SystemAudit,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                discretionaryAcl[index] = gAce;
+            });
 
             //case 5, set null Ace
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    gAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, gAce);
-                    discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
-                    index = 0;
-                    gAce = null;
-                    discretionaryAcl[index] = gAce;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, gAce);
+                discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
+                index = 0;
+                gAce = null;
+                discretionaryAcl[index] = gAce;
+            });
 
             //case 6, set index at 0
             //case 5, set null Ace
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    owner = "BG";
-                    gAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, gAce);
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                owner = "BG";
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, gAce);
 
-                    discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
-                    index = 0;
-                    owner = "BA";
-                    gAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    discretionaryAcl[index] = gAce;
-                }
-            );
+                discretionaryAcl = new DiscretionaryAcl(false, false, rawAcl);
+                index = 0;
+                owner = "BA";
+                gAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                discretionaryAcl[index] = gAce;
+            });
         }
     }
 }

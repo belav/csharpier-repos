@@ -517,18 +517,14 @@ namespace Microsoft.Extensions.Caching.Memory
                             async e2 =>
                             {
                                 await Task.WhenAll(
-                                    Task.Run(
-                                        () =>
-                                        {
-                                            value3 = cache.Set(key3, Guid.NewGuid(), t3);
-                                        }
-                                    ),
-                                    Task.Run(
-                                        () =>
-                                        {
-                                            value4 = cache.Set(key4, Guid.NewGuid(), t4);
-                                        }
-                                    )
+                                    Task.Run(() =>
+                                    {
+                                        value3 = cache.Set(key3, Guid.NewGuid(), t3);
+                                    }),
+                                    Task.Run(() =>
+                                    {
+                                        value4 = cache.Set(key4, Guid.NewGuid(), t4);
+                                    })
                                 );
 
                                 return Guid.NewGuid();

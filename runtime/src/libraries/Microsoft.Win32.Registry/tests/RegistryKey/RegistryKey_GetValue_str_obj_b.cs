@@ -21,17 +21,11 @@ namespace Microsoft.Win32.RegistryTests
                 () => TestRegistryKey.GetValue(null, null, (RegistryValueOptions)2)
             );
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.GetValue(
-                        null,
-                        TestData.DefaultValue,
-                        RegistryValueOptions.None
-                    );
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.GetValue(null, TestData.DefaultValue, RegistryValueOptions.None);
+            });
         }
 
         [Fact]

@@ -41,12 +41,10 @@ internal class Startup
 
         app.UseRouting();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapFallbackToFile("index.html");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapFallbackToFile("index.html");
+        });
     }
 
     private static void EnableConfiguredPathbase(

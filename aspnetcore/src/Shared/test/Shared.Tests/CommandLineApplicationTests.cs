@@ -21,13 +21,11 @@ public class CommandLineApplicationTests
             "test",
             c =>
             {
-                c.OnExecute(
-                    () =>
-                    {
-                        called = true;
-                        return 5;
-                    }
-                );
+                c.OnExecute(() =>
+                {
+                    called = true;
+                    return 5;
+                });
             }
         );
 
@@ -892,13 +890,11 @@ public class CommandLineApplicationTests
         app.Command(
             "run",
             c =>
-                c.OnExecute(
-                    () =>
-                    {
-                        commandRan = true;
-                        return 0;
-                    }
-                )
+                c.OnExecute(() =>
+                {
+                    commandRan = true;
+                    return 0;
+                })
         );
         app.OnExecute(() => 0);
 
@@ -920,13 +916,11 @@ public class CommandLineApplicationTests
         app.Command(
             "run",
             c =>
-                c.OnExecute(
-                    () =>
-                    {
-                        commandRan = true;
-                        return 0;
-                    }
-                )
+                c.OnExecute(() =>
+                {
+                    commandRan = true;
+                    return 0;
+                })
         );
         app.OnExecute(() => 0);
 
@@ -955,13 +949,11 @@ public class CommandLineApplicationTests
             "subcmd",
             c =>
             {
-                c.OnExecute(
-                    () =>
-                    {
-                        optionAValue = optionA.Value();
-                        return 0;
-                    }
-                );
+                c.OnExecute(() =>
+                {
+                    optionAValue = optionA.Value();
+                    return 0;
+                });
             }
         );
 
@@ -1058,15 +1050,13 @@ public class CommandLineApplicationTests
                             inherited: true
                         );
                         s2.HelpOption("-h|--help");
-                        s2.OnExecute(
-                            () =>
-                            {
-                                globalOptionValue = g.Value();
-                                nest1OptionValue = n1.Value();
-                                nest2OptionValue = n2.Value();
-                                return 0;
-                            }
-                        );
+                        s2.OnExecute(() =>
+                        {
+                            globalOptionValue = g.Value();
+                            nest1OptionValue = n1.Value();
+                            nest2OptionValue = n2.Value();
+                            return 0;
+                        });
                     }
                 );
             }

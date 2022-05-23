@@ -72,46 +72,41 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIndexOrRangeOperator
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                startContext =>
+            context.RegisterCompilationStartAction(startContext =>
+            {
+                // We're going to be checking every property-reference and invocation in the
+                // compilation. Cache information we compute in this object so we don't have to
+                // continually recompute it.
+                var compilation = startContext.Compilation;
+                if (!InfoCache.TryCreate(compilation, out var infoCache))
+                    return;
+
+                // Register to hear property references, so we can hear about calls to indexers
+                // like: s[s.Length - n]
+                context.RegisterOperationAction(
+                    c => AnalyzePropertyReference(c, infoCache),
+                    OperationKind.PropertyReference
+                );
+
+                // Register to hear about methods for: s.Get(s.Length - n)
+                context.RegisterOperationAction(
+                    c => AnalyzeInvocation(c, infoCache),
+                    OperationKind.Invocation
+                );
+
+                var arrayType = compilation.GetSpecialType(SpecialType.System_Array);
+                var arrayLengthProperty = TryGetNoArgInt32Property(arrayType, nameof(Array.Length));
+
+                if (arrayLengthProperty != null)
                 {
-                    // We're going to be checking every property-reference and invocation in the
-                    // compilation. Cache information we compute in this object so we don't have to
-                    // continually recompute it.
-                    var compilation = startContext.Compilation;
-                    if (!InfoCache.TryCreate(compilation, out var infoCache))
-                        return;
-
-                    // Register to hear property references, so we can hear about calls to indexers
-                    // like: s[s.Length - n]
+                    // Array indexing is represented with a different operation kind.  Register
+                    // specifically for that.
                     context.RegisterOperationAction(
-                        c => AnalyzePropertyReference(c, infoCache),
-                        OperationKind.PropertyReference
+                        c => AnalyzeArrayElementReference(c, infoCache, arrayLengthProperty),
+                        OperationKind.ArrayElementReference
                     );
-
-                    // Register to hear about methods for: s.Get(s.Length - n)
-                    context.RegisterOperationAction(
-                        c => AnalyzeInvocation(c, infoCache),
-                        OperationKind.Invocation
-                    );
-
-                    var arrayType = compilation.GetSpecialType(SpecialType.System_Array);
-                    var arrayLengthProperty = TryGetNoArgInt32Property(
-                        arrayType,
-                        nameof(Array.Length)
-                    );
-
-                    if (arrayLengthProperty != null)
-                    {
-                        // Array indexing is represented with a different operation kind.  Register
-                        // specifically for that.
-                        context.RegisterOperationAction(
-                            c => AnalyzeArrayElementReference(c, infoCache, arrayLengthProperty),
-                            OperationKind.ArrayElementReference
-                        );
-                    }
                 }
-            );
+            });
         }
 
         private void AnalyzeInvocation(OperationAnalysisContext context, InfoCache infoCache)

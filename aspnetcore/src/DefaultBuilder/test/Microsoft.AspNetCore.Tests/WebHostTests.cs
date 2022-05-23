@@ -39,12 +39,10 @@ public class WebHostTests
         var host = WebHost
             .CreateDefaultBuilder()
             .Configure(app => { })
-            .ConfigureAppConfiguration(
-                configBuilder =>
-                {
-                    configBuilder.Add(new ReloadableMemorySource());
-                }
-            )
+            .ConfigureAppConfiguration(configBuilder =>
+            {
+                configBuilder.Add(new ReloadableMemorySource());
+            })
             .Build();
         var config = host.Services.GetRequiredService<IConfiguration>();
         var monitor = host.Services.GetRequiredService<IOptionsMonitor<HostFilteringOptions>>();
@@ -55,12 +53,10 @@ public class WebHostTests
         var changed = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        monitor.OnChange(
-            newOptions =>
-            {
-                changed.SetResult(0);
-            }
-        );
+        monitor.OnChange(newOptions =>
+        {
+            changed.SetResult(0);
+        });
 
         config["AllowedHosts"] = "NewHost";
 
@@ -74,34 +70,25 @@ public class WebHostTests
     {
         using var host = WebHost
             .CreateDefaultBuilder()
-            .ConfigureAppConfiguration(
-                configBuilder =>
-                {
-                    configBuilder.AddInMemoryCollection(
-                        new[]
-                        {
-                            new KeyValuePair<string, string>("FORWARDEDHEADERS_ENABLED", "true"),
-                        }
-                    );
-                }
-            )
+            .ConfigureAppConfiguration(configBuilder =>
+            {
+                configBuilder.AddInMemoryCollection(
+                    new[] { new KeyValuePair<string, string>("FORWARDEDHEADERS_ENABLED", "true"), }
+                );
+            })
             .UseTestServer()
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                Assert.True(
+                    app.Properties.ContainsKey("ForwardedHeadersAdded"),
+                    "Forwarded Headers"
+                );
+                app.Run(context =>
                 {
-                    Assert.True(
-                        app.Properties.ContainsKey("ForwardedHeadersAdded"),
-                        "Forwarded Headers"
-                    );
-                    app.Run(
-                        context =>
-                        {
-                            Assert.Equal("https", context.Request.Scheme);
-                            return Task.CompletedTask;
-                        }
-                    );
-                }
-            )
+                    Assert.Equal("https", context.Request.Scheme);
+                    return Task.CompletedTask;
+                });
+            })
             .Build();
 
         await host.StartAsync();

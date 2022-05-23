@@ -549,32 +549,30 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAsync();
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
 
-                            await connection.WriteStringAsync(
-                                $"HTTP/1.1 200 OK{lineEnding}Transfer-Encoding: chunked{lineEnding}{lineEnding}"
+                        await connection.WriteStringAsync(
+                            $"HTTP/1.1 200 OK{lineEnding}Transfer-Encoding: chunked{lineEnding}{lineEnding}"
+                        );
+                        for (int bytesSent = 0; bytesSent < expectedData.Length; )
+                        {
+                            int bytesRemaining = expectedData.Length - bytesSent;
+                            int bytesToSend = rand.Next(
+                                1,
+                                Math.Min(bytesRemaining, maxChunkSize + 1)
                             );
-                            for (int bytesSent = 0; bytesSent < expectedData.Length; )
-                            {
-                                int bytesRemaining = expectedData.Length - bytesSent;
-                                int bytesToSend = rand.Next(
-                                    1,
-                                    Math.Min(bytesRemaining, maxChunkSize + 1)
-                                );
-                                await connection.WriteStringAsync($"{bytesToSend:X}{lineEnding}");
-                                await connection.Stream.WriteAsync(
-                                    new Memory<byte>(expectedData, bytesSent, bytesToSend)
-                                );
-                                await connection.WriteStringAsync(lineEnding);
-                                bytesSent += bytesToSend;
-                            }
-                            await connection.WriteStringAsync($"0{lineEnding}");
+                            await connection.WriteStringAsync($"{bytesToSend:X}{lineEnding}");
+                            await connection.Stream.WriteAsync(
+                                new Memory<byte>(expectedData, bytesSent, bytesToSend)
+                            );
                             await connection.WriteStringAsync(lineEnding);
+                            bytesSent += bytesToSend;
                         }
-                    );
+                        await connection.WriteStringAsync($"0{lineEnding}");
+                        await connection.WriteStringAsync(lineEnding);
+                    });
                 }
             );
         }

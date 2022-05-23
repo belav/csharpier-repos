@@ -33,12 +33,10 @@ namespace System.IO.Tests
             )
             {
                 fs.SafeFileHandle.Dispose();
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        fs.CopyToAsync(new MemoryStream());
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    fs.CopyToAsync(new MemoryStream());
+                });
             }
 
             using (
@@ -54,12 +52,10 @@ namespace System.IO.Tests
             {
                 fs.Write(TestBuffer, 0, TestBuffer.Length);
                 fs.SafeFileHandle.Dispose();
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        fs.CopyToAsync(new MemoryStream()).Wait();
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    fs.CopyToAsync(new MemoryStream()).Wait();
+                });
             }
         }
 

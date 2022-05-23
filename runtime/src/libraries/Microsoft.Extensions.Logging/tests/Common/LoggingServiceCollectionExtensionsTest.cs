@@ -15,13 +15,11 @@ namespace Microsoft.Extensions.Logging.Test
             var services = new ServiceCollection();
 
             var callbackCalled = false;
-            var loggerBuilder = services.AddLogging(
-                builder =>
-                {
-                    callbackCalled = true;
-                    Assert.Same(services, builder.Services);
-                }
-            );
+            var loggerBuilder = services.AddLogging(builder =>
+            {
+                callbackCalled = true;
+                Assert.Same(services, builder.Services);
+            });
             Assert.True(callbackCalled);
         }
 

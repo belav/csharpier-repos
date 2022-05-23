@@ -967,13 +967,11 @@ namespace System.Drawing.Tests
             )
             {
                 RemoteExecutor
-                    .Invoke(
-                        () =>
-                        {
-                            AppContext.SetSwitch(DontSupportPngFramesInIcons, false);
-                            VerifyPng();
-                        }
-                    )
+                    .Invoke(() =>
+                    {
+                        AppContext.SetSwitch(DontSupportPngFramesInIcons, false);
+                        VerifyPng();
+                    })
                     .Dispose();
             }
             else
@@ -1012,13 +1010,11 @@ namespace System.Drawing.Tests
             )
             {
                 RemoteExecutor
-                    .Invoke(
-                        () =>
-                        {
-                            AppContext.SetSwitch(DontSupportPngFramesInIcons, true);
-                            VerifyPngNotSupported();
-                        }
-                    )
+                    .Invoke(() =>
+                    {
+                        AppContext.SetSwitch(DontSupportPngFramesInIcons, true);
+                        VerifyPngNotSupported();
+                    })
                     .Dispose();
             }
             else

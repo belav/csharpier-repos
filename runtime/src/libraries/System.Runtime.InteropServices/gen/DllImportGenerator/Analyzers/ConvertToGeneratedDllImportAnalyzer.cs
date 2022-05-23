@@ -44,36 +44,32 @@ namespace Microsoft.Interop.Analyzers
             // Don't analyze generated code
             context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
             context.EnableConcurrentExecution();
-            context.RegisterCompilationStartAction(
-                compilationContext =>
+            context.RegisterCompilationStartAction(compilationContext =>
+            {
+                // Nothing to do if the GeneratedDllImportAttribute is not in the compilation
+                INamedTypeSymbol? generatedDllImportAttrType =
+                    compilationContext.Compilation.GetTypeByMetadataName(
+                        TypeNames.GeneratedDllImportAttribute
+                    );
+                if (generatedDllImportAttrType == null)
+                    return;
+
+                var knownUnsupportedTypes = new List<ITypeSymbol>(s_unsupportedTypeNames.Length);
+                foreach (string typeName in s_unsupportedTypeNames)
                 {
-                    // Nothing to do if the GeneratedDllImportAttribute is not in the compilation
-                    INamedTypeSymbol? generatedDllImportAttrType =
-                        compilationContext.Compilation.GetTypeByMetadataName(
-                            TypeNames.GeneratedDllImportAttribute
-                        );
-                    if (generatedDllImportAttrType == null)
-                        return;
-
-                    var knownUnsupportedTypes = new List<ITypeSymbol>(
-                        s_unsupportedTypeNames.Length
-                    );
-                    foreach (string typeName in s_unsupportedTypeNames)
+                    INamedTypeSymbol? unsupportedType =
+                        compilationContext.Compilation.GetTypeByMetadataName(typeName);
+                    if (unsupportedType != null)
                     {
-                        INamedTypeSymbol? unsupportedType =
-                            compilationContext.Compilation.GetTypeByMetadataName(typeName);
-                        if (unsupportedType != null)
-                        {
-                            knownUnsupportedTypes.Add(unsupportedType);
-                        }
+                        knownUnsupportedTypes.Add(unsupportedType);
                     }
-
-                    compilationContext.RegisterSymbolAction(
-                        symbolContext => AnalyzeSymbol(symbolContext, knownUnsupportedTypes),
-                        SymbolKind.Method
-                    );
                 }
-            );
+
+                compilationContext.RegisterSymbolAction(
+                    symbolContext => AnalyzeSymbol(symbolContext, knownUnsupportedTypes),
+                    SymbolKind.Method
+                );
+            });
         }
 
         private static void AnalyzeSymbol(

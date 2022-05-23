@@ -185,13 +185,11 @@ namespace System.Memory.Tests
         {
             ReadOnlySequence<byte> buffer = Factory.CreateOfSize(10);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Span<byte> span = new byte[5];
-                    buffer.CopyTo(span);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Span<byte> span = new byte[5];
+                buffer.CopyTo(span);
+            });
         }
 
         [Fact]

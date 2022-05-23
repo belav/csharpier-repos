@@ -46,12 +46,10 @@ namespace System.Security.Cryptography.Encryption.TripleDes.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.Throws<CryptographicException>(
-                        () =>
-                        {
-                            tdes.FeedbackSize = feedbackSize;
-                        }
-                    );
+                    Assert.Throws<CryptographicException>(() =>
+                    {
+                        tdes.FeedbackSize = feedbackSize;
+                    });
                 }
                 else
                 {

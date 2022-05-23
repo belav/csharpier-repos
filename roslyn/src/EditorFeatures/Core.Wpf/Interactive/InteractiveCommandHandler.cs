@@ -109,13 +109,11 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
             else
             {
                 Action action = null;
-                action = new Action(
-                    () =>
-                    {
-                        window.ReadyForInput -= action;
-                        CopyToWindow(window, args, context);
-                    }
-                );
+                action = new Action(() =>
+                {
+                    window.ReadyForInput -= action;
+                    CopyToWindow(window, args, context);
+                });
 
                 window.ReadyForInput += action;
             }

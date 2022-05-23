@@ -30,14 +30,12 @@ namespace Microsoft.Web.Mvc.Test
                     MockAsyncResult asyncResult = new MockAsyncResult(
                         false /* completedSynchronously */
                     );
-                    ThreadPool.QueueUserWorkItem(
-                        _ =>
-                        {
-                            Assert.Equal(1, asyncManager.OutstandingOperations.Count);
-                            callback(asyncResult);
-                            waitHandle.Set();
-                        }
-                    );
+                    ThreadPool.QueueUserWorkItem(_ =>
+                    {
+                        Assert.Equal(1, asyncManager.OutstandingOperations.Count);
+                        callback(asyncResult);
+                        waitHandle.Set();
+                    });
                     return asyncResult;
                 };
                 Action<IAsyncResult> endDelegate = delegate
@@ -75,13 +73,11 @@ namespace Microsoft.Web.Mvc.Test
                     MockAsyncResult asyncResult = new MockAsyncResult(
                         false /* completedSynchronously */
                     );
-                    ThreadPool.QueueUserWorkItem(
-                        _ =>
-                        {
-                            callback(asyncResult);
-                            waitHandle.Set();
-                        }
-                    );
+                    ThreadPool.QueueUserWorkItem(_ =>
+                    {
+                        callback(asyncResult);
+                        waitHandle.Set();
+                    });
                     return asyncResult;
                 };
                 Action<IAsyncResult> endDelegate = delegate

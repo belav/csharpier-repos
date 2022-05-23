@@ -828,17 +828,15 @@ namespace System.Diagnostics.Metrics.Tests
         public void AggregatorLimitReached_Multisize_NoLabel()
         {
             int count = 1;
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(
-                () =>
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
+            {
+                if (count > 0)
                 {
-                    if (count > 0)
-                    {
-                        count--;
-                        return new LastValue();
-                    }
-                    return null;
+                    count--;
+                    return new LastValue();
                 }
-            );
+                return null;
+            });
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red")
@@ -858,17 +856,15 @@ namespace System.Diagnostics.Metrics.Tests
         public void AggregatorLimitReached_Multisize_TwoLabel()
         {
             int count = 1;
-            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(
-                () =>
+            AggregatorStore<LastValue> store = new AggregatorStore<LastValue>(() =>
+            {
+                if (count > 0)
                 {
-                    if (count > 0)
-                    {
-                        count--;
-                        return new LastValue();
-                    }
-                    return null;
+                    count--;
+                    return new LastValue();
                 }
-            );
+                return null;
+            });
             KeyValuePair<string, object?>[] labels1 = new KeyValuePair<string, object?>[]
             {
                 new KeyValuePair<string, object?>("color", "red")

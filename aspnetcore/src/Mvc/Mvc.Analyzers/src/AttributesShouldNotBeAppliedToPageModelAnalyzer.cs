@@ -22,22 +22,20 @@ public class AttributesShouldNotBeAppliedToPageModelAnalyzer : DiagnosticAnalyze
         context.EnableConcurrentExecution();
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-        context.RegisterCompilationStartAction(
-            compilationStartAnalysisContext =>
+        context.RegisterCompilationStartAction(compilationStartAnalysisContext =>
+        {
+            var typeCache = new TypeCache(compilationStartAnalysisContext.Compilation);
+            if (
+                typeCache.PageModelAttribute == null
+                || typeCache.PageModelAttribute.TypeKind == TypeKind.Error
+            )
             {
-                var typeCache = new TypeCache(compilationStartAnalysisContext.Compilation);
-                if (
-                    typeCache.PageModelAttribute == null
-                    || typeCache.PageModelAttribute.TypeKind == TypeKind.Error
-                )
-                {
-                    // No-op if we can't find types we care about.
-                    return;
-                }
-
-                InitializeWorker(compilationStartAnalysisContext, typeCache);
+                // No-op if we can't find types we care about.
+                return;
             }
-        );
+
+            InitializeWorker(compilationStartAnalysisContext, typeCache);
+        });
     }
 
     private void InitializeWorker(

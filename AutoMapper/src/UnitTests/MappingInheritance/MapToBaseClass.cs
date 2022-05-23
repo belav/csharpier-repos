@@ -15,13 +15,11 @@
         public class B : A { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Input, A>().Include<Input, B>();
-                    c.CreateMap<Input, B>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Input, A>().Include<Input, B>();
+                c.CreateMap<Input, B>();
+            });
 
         protected override void Because_of()
         {
@@ -46,14 +44,12 @@
         class DestinationDerived : Destination { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
-                    c.CreateMap<SourceDerived, DestinationDerived>();
-                    c.CreateMap<SourceDerived, Destination>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
+                c.CreateMap<SourceDerived, DestinationDerived>();
+                c.CreateMap<SourceDerived, Destination>();
+            });
 
         [Fact]
         public void ExplicitMapShouldApply() =>
@@ -73,15 +69,13 @@
         class DestinationConcrete : Destination { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
-                    c.CreateMap<SourceDerived, Destination>().As<DestinationConcrete>();
-                    c.CreateMap<SourceDerived, DestinationDerived>();
-                    c.CreateMap<SourceDerived, DestinationConcrete>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Source, Destination>().Include<SourceDerived, DestinationDerived>();
+                c.CreateMap<SourceDerived, Destination>().As<DestinationConcrete>();
+                c.CreateMap<SourceDerived, DestinationDerived>();
+                c.CreateMap<SourceDerived, DestinationConcrete>();
+            });
 
         [Fact]
         public void RedirectedMapShouldApply() =>

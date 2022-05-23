@@ -41,23 +41,19 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
                 {
                     var commandArgument = cmd.Argument("<COMMAND>", "The command to get help for.");
 
-                    cmd.OnExecute(
-                        () =>
-                        {
-                            app.ShowHelp(commandArgument.Value);
-                            return 0;
-                        }
-                    );
+                    cmd.OnExecute(() =>
+                    {
+                        app.ShowHelp(commandArgument.Value);
+                        return 0;
+                    });
                 }
             );
 
-            app.OnExecute(
-                () =>
-                {
-                    app.ShowHelp();
-                    return 0;
-                }
-            );
+            app.OnExecute(() =>
+            {
+                app.ShowHelp();
+                return 0;
+            });
 
             app.Execute(args);
         }

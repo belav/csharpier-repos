@@ -1420,8 +1420,43 @@ namespace Microsoft.EntityFrameworkCore.Query
                     if (requiredNonPkProperties.Count > 0)
                     {
                         condition = requiredNonPkProperties
-                            .Select(
-                                p =>
+                            .Select(p =>
+                            {
+                                var comparison = Expression.Call(
+                                    _objectEqualsMethodInfo,
+                                    Expression.Convert(
+                                        CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                        typeof(object)
+                                    ),
+                                    Expression.Convert(
+                                        Expression.Constant(null, p.ClrType.MakeNullable()),
+                                        typeof(object)
+                                    )
+                                );
+
+                                return nodeType == ExpressionType.Equal
+                                    ? (Expression)comparison
+                                    : Expression.Not(comparison);
+                            })
+                            .Aggregate(
+                                (l, r) =>
+                                    nodeType == ExpressionType.Equal
+                                        ? Expression.OrElse(l, r)
+                                        : Expression.AndAlso(l, r)
+                            );
+                    }
+
+                    var allNonPrincipalSharedNonPkProperties =
+                        entityType1.GetNonPrincipalSharedNonPkProperties(table);
+                    // We don't need condition for nullable property if there exist at least one required property which is non shared.
+                    if (
+                        allNonPrincipalSharedNonPkProperties.Count != 0
+                        && allNonPrincipalSharedNonPkProperties.All(p => p.IsNullable)
+                    )
+                    {
+                        var atLeastOneNonNullValueInNullablePropertyCondition =
+                            allNonPrincipalSharedNonPkProperties
+                                .Select(p =>
                                 {
                                     var comparison = Expression.Call(
                                         _objectEqualsMethodInfo,
@@ -1441,49 +1476,7 @@ namespace Microsoft.EntityFrameworkCore.Query
                                     return nodeType == ExpressionType.Equal
                                         ? (Expression)comparison
                                         : Expression.Not(comparison);
-                                }
-                            )
-                            .Aggregate(
-                                (l, r) =>
-                                    nodeType == ExpressionType.Equal
-                                        ? Expression.OrElse(l, r)
-                                        : Expression.AndAlso(l, r)
-                            );
-                    }
-
-                    var allNonPrincipalSharedNonPkProperties =
-                        entityType1.GetNonPrincipalSharedNonPkProperties(table);
-                    // We don't need condition for nullable property if there exist at least one required property which is non shared.
-                    if (
-                        allNonPrincipalSharedNonPkProperties.Count != 0
-                        && allNonPrincipalSharedNonPkProperties.All(p => p.IsNullable)
-                    )
-                    {
-                        var atLeastOneNonNullValueInNullablePropertyCondition =
-                            allNonPrincipalSharedNonPkProperties
-                                .Select(
-                                    p =>
-                                    {
-                                        var comparison = Expression.Call(
-                                            _objectEqualsMethodInfo,
-                                            Expression.Convert(
-                                                CreatePropertyAccessExpression(
-                                                    nonNullEntityReference,
-                                                    p
-                                                ),
-                                                typeof(object)
-                                            ),
-                                            Expression.Convert(
-                                                Expression.Constant(null, p.ClrType.MakeNullable()),
-                                                typeof(object)
-                                            )
-                                        );
-
-                                        return nodeType == ExpressionType.Equal
-                                            ? (Expression)comparison
-                                            : Expression.Not(comparison);
-                                    }
-                                )
+                                })
                                 .Aggregate(
                                     (l, r) =>
                                         nodeType == ExpressionType.Equal
@@ -1534,26 +1527,24 @@ namespace Microsoft.EntityFrameworkCore.Query
 
                 result = Visit(
                     primaryKeyProperties1
-                        .Select(
-                            p =>
-                            {
-                                var comparison = Expression.Call(
-                                    _objectEqualsMethodInfo,
-                                    Expression.Convert(
-                                        CreatePropertyAccessExpression(nonNullEntityReference, p),
-                                        typeof(object)
-                                    ),
-                                    Expression.Convert(
-                                        Expression.Constant(null, p.ClrType.MakeNullable()),
-                                        typeof(object)
-                                    )
-                                );
+                        .Select(p =>
+                        {
+                            var comparison = Expression.Call(
+                                _objectEqualsMethodInfo,
+                                Expression.Convert(
+                                    CreatePropertyAccessExpression(nonNullEntityReference, p),
+                                    typeof(object)
+                                ),
+                                Expression.Convert(
+                                    Expression.Constant(null, p.ClrType.MakeNullable()),
+                                    typeof(object)
+                                )
+                            );
 
-                                return nodeType == ExpressionType.Equal
-                                    ? (Expression)comparison
-                                    : Expression.Not(comparison);
-                            }
-                        )
+                            return nodeType == ExpressionType.Equal
+                                ? (Expression)comparison
+                                : Expression.Not(comparison);
+                        })
                         .Aggregate(
                             (l, r) =>
                                 nodeType == ExpressionType.Equal
@@ -1625,26 +1616,24 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             result = Visit(
                 primaryKeyProperties
-                    .Select(
-                        p =>
-                        {
-                            var comparison = Expression.Call(
-                                _objectEqualsMethodInfo,
-                                Expression.Convert(
-                                    CreatePropertyAccessExpression(left, p),
-                                    typeof(object)
-                                ),
-                                Expression.Convert(
-                                    CreatePropertyAccessExpression(right, p),
-                                    typeof(object)
-                                )
-                            );
+                    .Select(p =>
+                    {
+                        var comparison = Expression.Call(
+                            _objectEqualsMethodInfo,
+                            Expression.Convert(
+                                CreatePropertyAccessExpression(left, p),
+                                typeof(object)
+                            ),
+                            Expression.Convert(
+                                CreatePropertyAccessExpression(right, p),
+                                typeof(object)
+                            )
+                        );
 
-                            return nodeType == ExpressionType.Equal
-                                ? (Expression)comparison
-                                : Expression.Not(comparison);
-                        }
-                    )
+                        return nodeType == ExpressionType.Equal
+                            ? (Expression)comparison
+                            : Expression.Not(comparison);
+                    })
                     .Aggregate(
                         (l, r) =>
                             nodeType == ExpressionType.Equal

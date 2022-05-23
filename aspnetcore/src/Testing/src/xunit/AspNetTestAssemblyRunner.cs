@@ -31,42 +31,40 @@ public class AspNetTestAssemblyRunner : XunitTestAssemblyRunner
         await base.AfterTestAssemblyStartingAsync();
 
         // Find all the AssemblyFixtureAttributes on the test assembly
-        await Aggregator.RunAsync(
-            async () =>
+        await Aggregator.RunAsync(async () =>
+        {
+            var fixturesAttributes = ((IReflectionAssemblyInfo)TestAssembly.Assembly).Assembly
+                .GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
+                .Cast<AssemblyFixtureAttribute>()
+                .ToList();
+
+            // Instantiate all the fixtures
+            foreach (var fixtureAttribute in fixturesAttributes)
             {
-                var fixturesAttributes = ((IReflectionAssemblyInfo)TestAssembly.Assembly).Assembly
-                    .GetCustomAttributes(typeof(AssemblyFixtureAttribute), false)
-                    .Cast<AssemblyFixtureAttribute>()
-                    .ToList();
-
-                // Instantiate all the fixtures
-                foreach (var fixtureAttribute in fixturesAttributes)
+                var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(
+                    new[] { typeof(IMessageSink) }
+                );
+                object instance = null;
+                if (ctorWithDiagnostics != null)
                 {
-                    var ctorWithDiagnostics = fixtureAttribute.FixtureType.GetConstructor(
-                        new[] { typeof(IMessageSink) }
+                    instance = Activator.CreateInstance(
+                        fixtureAttribute.FixtureType,
+                        DiagnosticMessageSink
                     );
-                    object instance = null;
-                    if (ctorWithDiagnostics != null)
-                    {
-                        instance = Activator.CreateInstance(
-                            fixtureAttribute.FixtureType,
-                            DiagnosticMessageSink
-                        );
-                    }
-                    else
-                    {
-                        instance = Activator.CreateInstance(fixtureAttribute.FixtureType);
-                    }
+                }
+                else
+                {
+                    instance = Activator.CreateInstance(fixtureAttribute.FixtureType);
+                }
 
-                    _assemblyFixtureMappings[fixtureAttribute.FixtureType] = instance;
+                _assemblyFixtureMappings[fixtureAttribute.FixtureType] = instance;
 
-                    if (instance is IAsyncLifetime asyncInit)
-                    {
-                        await asyncInit.InitializeAsync();
-                    }
+                if (instance is IAsyncLifetime asyncInit)
+                {
+                    await asyncInit.InitializeAsync();
                 }
             }
-        );
+        });
     }
 
     protected override async Task BeforeTestAssemblyFinishedAsync()

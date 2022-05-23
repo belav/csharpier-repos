@@ -570,12 +570,10 @@ namespace System.IO.Pipelines.Tests
         {
             // Starts the execution of a task on a non thread pool thread
             Task task = null;
-            var thread = new Thread(
-                () =>
-                {
-                    task = func();
-                }
-            );
+            var thread = new Thread(() =>
+            {
+                task = func();
+            });
             thread.Start();
             thread.Join();
             return task;

@@ -32,18 +32,16 @@ public class ModelPrefixSelectionIntegrationTest
             ParameterType = typeof(Person1),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // This will cause selection of the "parameter" prefix.
-                request.QueryString = new QueryString("?parameter=");
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // This will cause selection of the "parameter" prefix.
+            request.QueryString = new QueryString("?parameter=");
 
-                // This value won't be used, because we select the "parameter" prefix.
-                request.Form = new FormCollection(
-                    new Dictionary<string, StringValues>() { { "Name", "Billy" }, }
-                );
-            }
-        );
+            // This value won't be used, because we select the "parameter" prefix.
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues>() { { "Name", "Billy" }, }
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -79,18 +77,16 @@ public class ModelPrefixSelectionIntegrationTest
             BindingInfo = new BindingInfo() { BindingSource = BindingSource.Query, },
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // This will cause selection of the "parameter" prefix.
-                request.QueryString = new QueryString("?parameter=");
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // This will cause selection of the "parameter" prefix.
+            request.QueryString = new QueryString("?parameter=");
 
-                // This value won't be used, because we select the "parameter" prefix.
-                request.Form = new FormCollection(
-                    new Dictionary<string, StringValues>() { { "Name", "Billy" }, }
-                );
-            }
-        );
+            // This value won't be used, because we select the "parameter" prefix.
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues>() { { "Name", "Billy" }, }
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -125,13 +121,11 @@ public class ModelPrefixSelectionIntegrationTest
             ParameterType = typeof(Person3),
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // This can't be used because of [FromForm] on the property.
-                request.QueryString = new QueryString("?Name=");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // This can't be used because of [FromForm] on the property.
+            request.QueryString = new QueryString("?Name=");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -167,18 +161,16 @@ public class ModelPrefixSelectionIntegrationTest
             BindingInfo = new BindingInfo() { BindingSource = BindingSource.Query, },
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // This will only match empty prefix, but can't be used because of [FromForm] on the property.
-                request.QueryString = new QueryString("?Name=");
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // This will only match empty prefix, but can't be used because of [FromForm] on the property.
+            request.QueryString = new QueryString("?Name=");
 
-                // This value won't be used to select a prefix, because we're only looking at the query string.
-                request.Form = new FormCollection(
-                    new Dictionary<string, StringValues>() { { "parameter", string.Empty }, }
-                );
-            }
-        );
+            // This value won't be used to select a prefix, because we're only looking at the query string.
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues>() { { "parameter", string.Empty }, }
+            );
+        });
 
         var modelState = testContext.ModelState;
 
@@ -214,15 +206,13 @@ public class ModelPrefixSelectionIntegrationTest
             BindingInfo = new BindingInfo() { BindingSource = BindingSource.Query, },
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                // This value won't be used to select a prefix, because we're only looking at the query string.
-                request.Form = new FormCollection(
-                    new Dictionary<string, StringValues>() { { "parameter", string.Empty }, }
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            // This value won't be used to select a prefix, because we're only looking at the query string.
+            request.Form = new FormCollection(
+                new Dictionary<string, StringValues>() { { "parameter", string.Empty }, }
+            );
+        });
 
         var modelState = testContext.ModelState;
 

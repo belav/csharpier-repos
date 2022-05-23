@@ -41,12 +41,10 @@ public class MetadataAttributePassTest
 
         var irDocument = new DocumentIntermediateNode()
         {
-            Options = RazorCodeGenerationOptions.Create(
-                o =>
-                {
-                    o.SuppressMetadataAttributes = true;
-                }
-            ),
+            Options = RazorCodeGenerationOptions.Create(o =>
+            {
+                o.SuppressMetadataAttributes = true;
+            }),
         };
 
         // Act
@@ -69,12 +67,10 @@ public class MetadataAttributePassTest
         var irDocument = new DocumentIntermediateNode()
         {
             DocumentKind = ComponentDocumentClassifierPass.ComponentDocumentKind,
-            Options = RazorCodeGenerationOptions.Create(
-                o =>
-                {
-                    o.SuppressMetadataAttributes = true;
-                }
-            ),
+            Options = RazorCodeGenerationOptions.Create(o =>
+            {
+                o.SuppressMetadataAttributes = true;
+            }),
         };
 
         // Act
@@ -423,12 +419,10 @@ public class MetadataAttributePassTest
     private static RazorEngine CreateEngine()
     {
         return RazorProjectEngine
-            .Create(
-                b =>
-                {
-                    b.Features.Add(new DefaultMetadataIdentifierFeature());
-                }
-            )
+            .Create(b =>
+            {
+                b.Features.Add(new DefaultMetadataIdentifierFeature());
+            })
             .Engine;
     }
 }

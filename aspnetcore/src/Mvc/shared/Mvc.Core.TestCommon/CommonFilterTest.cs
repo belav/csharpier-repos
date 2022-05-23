@@ -69,25 +69,21 @@ public class CommonFilterTest
 
         mock.As<IActionFilter>()
             .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
-            .Callback<ActionExecutingContext>(
-                c =>
-                {
-                    mock.ToString();
-                    c.Result = new NoOpResult();
-                }
-            );
+            .Callback<ActionExecutingContext>(c =>
+            {
+                mock.ToString();
+                c.Result = new NoOpResult();
+            });
 
         mock.As<IActionFilter>()
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
             .Verifiable();
 
         var context = CreateActionExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ActionExecutionDelegate(
-            () =>
-            {
-                throw null;
-            }
-        ); // This won't run
+        var next = new ActionExecutionDelegate(() =>
+        {
+            throw null;
+        }); // This won't run
 
         // Act
         await mock.As<IAsyncActionFilter>().Object.OnActionExecutionAsync(context, next);
@@ -155,13 +151,11 @@ public class CommonFilterTest
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    mock.ToString();
-                    c.Result = new NoOpResult();
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                mock.ToString();
+                c.Result = new NoOpResult();
+            });
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
@@ -201,25 +195,21 @@ public class CommonFilterTest
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    mock.ToString();
-                    c.Cancel = true;
-                }
-            );
+            .Callback<ResultExecutingContext>(c =>
+            {
+                mock.ToString();
+                c.Cancel = true;
+            });
 
         mock.As<IResultFilter>()
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
             .Verifiable();
 
         var context = CreateResultExecutingContext(mock.As<IFilterMetadata>().Object);
-        var next = new ResultExecutionDelegate(
-            () =>
-            {
-                throw null;
-            }
-        ); // This won't run
+        var next = new ResultExecutionDelegate(() =>
+        {
+            throw null;
+        }); // This won't run
 
         // Act
         await mock.As<IAsyncResultFilter>().Object.OnResultExecutionAsync(context, next);

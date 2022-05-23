@@ -373,25 +373,23 @@ namespace System.Net.Sockets.Tests
                 Task<Socket> serverAccept = server.AcceptAsync();
                 await Task.WhenAll(serverAccept, client.ConnectAsync(endPoint));
 
-                Task clientReceives = Task.Run(
-                    async () =>
+                Task clientReceives = Task.Run(async () =>
+                {
+                    byte[] buffer = new byte[readBufferSize];
+                    while (true)
                     {
-                        byte[] buffer = new byte[readBufferSize];
-                        while (true)
+                        int bytesRead = await client.ReceiveAsync(
+                            new Memory<byte>(buffer),
+                            SocketFlags.None
+                        );
+                        if (bytesRead == 0)
                         {
-                            int bytesRead = await client.ReceiveAsync(
-                                new Memory<byte>(buffer),
-                                SocketFlags.None
-                            );
-                            if (bytesRead == 0)
-                            {
-                                break;
-                            }
-                            Assert.InRange(bytesRead, 1, writeBuffer.Length - readData.Length);
-                            readData.Write(buffer, 0, bytesRead);
+                            break;
                         }
+                        Assert.InRange(bytesRead, 1, writeBuffer.Length - readData.Length);
+                        readData.Write(buffer, 0, bytesRead);
                     }
-                );
+                });
 
                 using (Socket accepted = await serverAccept)
                 {
@@ -711,43 +709,41 @@ namespace System.Net.Sockets.Tests
                 return;
             }
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        using (
-                            Socket socket = new Socket(
-                                AddressFamily.Unix,
-                                SocketType.Stream,
-                                ProtocolType.Unspecified
-                            )
+                .Invoke(() =>
+                {
+                    using (
+                        Socket socket = new Socket(
+                            AddressFamily.Unix,
+                            SocketType.Stream,
+                            ProtocolType.Unspecified
                         )
+                    )
+                    {
+                        // Bind to a relative path.
+                        string path = GetRandomNonExistingFilePath();
+                        string wd = Path.GetDirectoryName(path);
+                        Directory.SetCurrentDirectory(wd);
+                        socket.Bind(new UnixDomainSocketEndPoint(Path.GetFileName(path)));
+                        Assert.True(File.Exists(path));
+
+                        string otherDir = GetRandomNonExistingFilePath();
+                        Directory.CreateDirectory(otherDir);
+                        try
                         {
-                            // Bind to a relative path.
-                            string path = GetRandomNonExistingFilePath();
-                            string wd = Path.GetDirectoryName(path);
+                            // Change to another directory.
+                            Directory.SetCurrentDirectory(Path.GetDirectoryName(path));
+
+                            // Dispose deletes file from original path.
+                            socket.Dispose();
+                            Assert.False(File.Exists(path));
+                        }
+                        finally
+                        {
                             Directory.SetCurrentDirectory(wd);
-                            socket.Bind(new UnixDomainSocketEndPoint(Path.GetFileName(path)));
-                            Assert.True(File.Exists(path));
-
-                            string otherDir = GetRandomNonExistingFilePath();
-                            Directory.CreateDirectory(otherDir);
-                            try
-                            {
-                                // Change to another directory.
-                                Directory.SetCurrentDirectory(Path.GetDirectoryName(path));
-
-                                // Dispose deletes file from original path.
-                                socket.Dispose();
-                                Assert.False(File.Exists(path));
-                            }
-                            finally
-                            {
-                                Directory.SetCurrentDirectory(wd);
-                                Directory.Delete(otherDir);
-                            }
+                            Directory.Delete(otherDir);
                         }
                     }
-                )
+                })
                 .Dispose();
         }
 

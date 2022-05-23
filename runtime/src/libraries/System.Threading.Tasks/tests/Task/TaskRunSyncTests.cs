@@ -75,18 +75,16 @@ namespace System.Threading.Tasks.Tests
             _threads = new Task[numberOfThreads];
             for (int i = 0; i < numberOfThreads; i++)
             {
-                _threads[i] = Task.Run(
-                    () =>
+                _threads[i] = Task.Run(() =>
+                {
+                    foreach (var task in _tasks.GetConsumingEnumerable())
                     {
-                        foreach (var task in _tasks.GetConsumingEnumerable())
+                        if (task.Status == TaskStatus.WaitingToRun)
                         {
-                            if (task.Status == TaskStatus.WaitingToRun)
-                            {
-                                ExecuteTask(task);
-                            }
+                            ExecuteTask(task);
                         }
                     }
-                );
+                });
             }
         }
 

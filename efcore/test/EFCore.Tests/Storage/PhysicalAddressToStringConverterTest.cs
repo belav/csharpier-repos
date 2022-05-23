@@ -57,12 +57,10 @@ namespace Microsoft.EntityFrameworkCore.Storage
                 new PhysicalAddressToStringConverter().ConvertFromProviderExpression.Compile();
             var physicalAddress = Encoding.UTF8.GetString(bytesPhysicalAddressInvalid);
 
-            var exception = Assert.Throws<FormatException>(
-                () =>
-                {
-                    converter(physicalAddress);
-                }
-            );
+            var exception = Assert.Throws<FormatException>(() =>
+            {
+                converter(physicalAddress);
+            });
 
             Assert.Equal(
                 $"An invalid physical address was specified: '{physicalAddress}'.",

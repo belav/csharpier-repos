@@ -223,14 +223,12 @@ class Class
             var stmts = mDecl.Body.Statements;
 
             var invokedMethods = stmts
-                .Select(
-                    stmt =>
-                    {
-                        var exprStmt = (ExpressionStatementSyntax)stmt;
-                        var semanticInfo = model.GetSymbolInfo(exprStmt.Expression);
-                        return (IMethodSymbol)semanticInfo.Symbol;
-                    }
-                )
+                .Select(stmt =>
+                {
+                    var exprStmt = (ExpressionStatementSyntax)stmt;
+                    var semanticInfo = model.GetSymbolInfo(exprStmt.Expression);
+                    return (IMethodSymbol)semanticInfo.Symbol;
+                })
                 .ToArray();
 
             Assert.Equal(6, invokedMethods.Length);

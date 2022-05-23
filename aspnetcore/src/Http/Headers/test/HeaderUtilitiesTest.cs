@@ -290,22 +290,18 @@ public class HeaderUtilitiesTest
     [InlineData("\r")]
     public void SetAndEscapeValue_ControlCharactersThrowFormatException(string input)
     {
-        Assert.Throws<FormatException>(
-            () =>
-            {
-                var actual = HeaderUtilities.EscapeAsQuotedString(input);
-            }
-        );
+        Assert.Throws<FormatException>(() =>
+        {
+            var actual = HeaderUtilities.EscapeAsQuotedString(input);
+        });
     }
 
     [Fact]
     public void SetAndEscapeValue_ThrowsFormatExceptionOnDelCharacter()
     {
-        Assert.Throws<FormatException>(
-            () =>
-            {
-                var actual = HeaderUtilities.EscapeAsQuotedString($"{(char)0x7F}");
-            }
-        );
+        Assert.Throws<FormatException>(() =>
+        {
+            var actual = HeaderUtilities.EscapeAsQuotedString($"{(char)0x7F}");
+        });
     }
 }

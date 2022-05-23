@@ -114,12 +114,10 @@ namespace System.Threading.Tests
             Assert.Throws<ObjectDisposedException>(() => mres.Wait(0));
             // Failure Case: The object has been disposed, should throw ObjectDisposedException.
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    WaitHandle handle = mres.WaitHandle;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                WaitHandle handle = mres.WaitHandle;
+            });
             // Failure Case: The object has been disposed, should throw ObjectDisposedException.
 
             mres = new ManualResetEventSlim(false);

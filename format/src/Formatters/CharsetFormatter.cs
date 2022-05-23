@@ -33,25 +33,23 @@ namespace Microsoft.CodeAnalysis.Tools.Formatters
             CancellationToken cancellationToken
         )
         {
-            return Task.Run(
-                () =>
+            return Task.Run(() =>
+            {
+                if (
+                    !TryGetCharset(analyzerConfigOptions, out var encoding)
+                    || sourceText.Encoding?.Equals(encoding) == true
+                    || IsEncodingEquivalent(sourceText, encoding)
+                )
                 {
-                    if (
-                        !TryGetCharset(analyzerConfigOptions, out var encoding)
-                        || sourceText.Encoding?.Equals(encoding) == true
-                        || IsEncodingEquivalent(sourceText, encoding)
-                    )
-                    {
-                        return sourceText;
-                    }
-
-                    return SourceText.From(
-                        sourceText.ToString(),
-                        encoding,
-                        sourceText.ChecksumAlgorithm
-                    );
+                    return sourceText;
                 }
-            );
+
+                return SourceText.From(
+                    sourceText.ToString(),
+                    encoding,
+                    sourceText.ChecksumAlgorithm
+                );
+            });
         }
 
         private static bool IsEncodingEquivalent(SourceText sourceText, Encoding encoding)

@@ -459,12 +459,10 @@ namespace System.IO.Pipelines.Tests
                 pipe.Reader
                     .ReadAsync()
                     .GetAwaiter()
-                    .OnCompleted(
-                        () =>
-                        {
-                            tcs.TrySetResult(val.Value);
-                        }
-                    );
+                    .OnCompleted(() =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    });
 
                 val.Value = 20;
 
@@ -529,12 +527,10 @@ namespace System.IO.Pipelines.Tests
                 pipe.Writer
                     .FlushAsync()
                     .GetAwaiter()
-                    .OnCompleted(
-                        () =>
-                        {
-                            tcs.TrySetResult(val.Value);
-                        }
-                    );
+                    .OnCompleted(() =>
+                    {
+                        tcs.TrySetResult(val.Value);
+                    });
 
                 val.Value = 20;
 
@@ -567,28 +563,22 @@ namespace System.IO.Pipelines.Tests
         public async Task ReadingCanBeCanceled()
         {
             var cts = new CancellationTokenSource();
-            cts.Token.Register(
-                () =>
-                {
-                    _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
-                }
-            );
+            cts.Token.Register(() =>
+            {
+                _pipe.Writer.Complete(new OperationCanceledException(cts.Token));
+            });
 
-            Task ignore = Task.Run(
-                async () =>
-                {
-                    await Task.Delay(1000);
-                    cts.Cancel();
-                }
-            );
+            Task ignore = Task.Run(async () =>
+            {
+                await Task.Delay(1000);
+                cts.Cancel();
+            });
 
-            await Assert.ThrowsAsync<OperationCanceledException>(
-                async () =>
-                {
-                    ReadResult result = await _pipe.Reader.ReadAsync();
-                    ReadOnlySequence<byte> buffer = result.Buffer;
-                }
-            );
+            await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+            {
+                ReadResult result = await _pipe.Reader.ReadAsync();
+                ReadOnlySequence<byte> buffer = result.Buffer;
+            });
         }
 
         [Fact]

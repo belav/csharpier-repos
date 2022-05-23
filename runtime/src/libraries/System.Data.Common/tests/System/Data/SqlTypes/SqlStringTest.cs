@@ -182,35 +182,31 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void CtorArgumentOutOfRangeException1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    SqlString TestString = new SqlString(
-                        2057,
-                        SqlCompareOptions.BinarySort,
-                        new byte[2] { 113, 100 },
-                        2,
-                        1
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                SqlString TestString = new SqlString(
+                    2057,
+                    SqlCompareOptions.BinarySort,
+                    new byte[2] { 113, 100 },
+                    2,
+                    1
+                );
+            });
         }
 
         [Fact]
         public void CtorArgumentOutOfRangeException2()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    SqlString TestString = new SqlString(
-                        2057,
-                        SqlCompareOptions.BinarySort,
-                        new byte[2] { 113, 100 },
-                        0,
-                        4
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                SqlString TestString = new SqlString(
+                    2057,
+                    SqlCompareOptions.BinarySort,
+                    new byte[2] { 113, 100 },
+                    0,
+                    4
+                );
+            });
         }
 
         // Test public fields
@@ -448,151 +444,125 @@ namespace System.Data.Tests.SqlTypes
         [Fact]
         public void ConversionBoolFormatException1()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    bool test = _test1.ToSqlBoolean().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                bool test = _test1.ToSqlBoolean().Value;
+            });
         }
 
         [Fact]
         public void ConversionByteFormatException()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    byte test = _test1.ToSqlByte().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                byte test = _test1.ToSqlByte().Value;
+            });
         }
 
         [Fact]
         public void ConversionDecimalFormatException1()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    decimal d = _test1.ToSqlDecimal().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                decimal d = _test1.ToSqlDecimal().Value;
+            });
         }
 
         [Fact]
         public void ConversionDecimalFormatException2()
         {
             SqlString String9E300 = new SqlString("9E+300");
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlDecimal test = String9E300.ToSqlDecimal();
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlDecimal test = String9E300.ToSqlDecimal();
+            });
         }
 
         [Fact]
         public void ConversionGuidFormatException()
         {
             SqlString String9E300 = new SqlString("9E+300");
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlGuid test = String9E300.ToSqlGuid();
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlGuid test = String9E300.ToSqlGuid();
+            });
         }
 
         [Fact]
         public void ConversionInt16FormatException()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlString String9E300 = new SqlString("9E+300");
-                    SqlInt16 test = String9E300.ToSqlInt16().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlString String9E300 = new SqlString("9E+300");
+                SqlInt16 test = String9E300.ToSqlInt16().Value;
+            });
         }
 
         [Fact]
         public void ConversionInt32FormatException1()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlString String9E300 = new SqlString("9E+300");
-                    SqlInt32 test = String9E300.ToSqlInt32().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlString String9E300 = new SqlString("9E+300");
+                SqlInt32 test = String9E300.ToSqlInt32().Value;
+            });
         }
 
         [Fact]
         public void ConversionInt32FormatException2()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlInt32 test = _test1.ToSqlInt32().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlInt32 test = _test1.ToSqlInt32().Value;
+            });
         }
 
         [Fact]
         public void ConversionInt64FormatException()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlString String9E300 = new SqlString("9E+300");
-                    SqlInt64 test = String9E300.ToSqlInt64().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlString String9E300 = new SqlString("9E+300");
+                SqlInt64 test = String9E300.ToSqlInt64().Value;
+            });
         }
 
         [Fact]
         public void ConversionIntMoneyFormatException2()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    SqlString String9E300 = new SqlString("9E+300");
-                    SqlMoney test = String9E300.ToSqlMoney().Value;
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                SqlString String9E300 = new SqlString("9E+300");
+                SqlMoney test = String9E300.ToSqlMoney().Value;
+            });
         }
 
         [Fact]
         public void ConversionByteOverflowException()
         {
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    SqlByte b = (new SqlString("2500")).ToSqlByte();
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                SqlByte b = (new SqlString("2500")).ToSqlByte();
+            });
         }
 
         [Fact]
         public void ConversionDoubleOverflowException()
         {
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    SqlDouble test = (new SqlString("4e400")).ToSqlDouble();
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                SqlDouble test = (new SqlString("4e400")).ToSqlDouble();
+            });
         }
 
         [Fact]
         public void ConversionSingleOverflowException()
         {
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    SqlString String9E300 = new SqlString("9E+300");
-                    SqlSingle test = String9E300.ToSqlSingle().Value;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                SqlString String9E300 = new SqlString("9E+300");
+                SqlSingle test = String9E300.ToSqlSingle().Value;
+            });
         }
 
         [Fact]

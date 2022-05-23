@@ -54,12 +54,10 @@ namespace System.IO.FileSystem.DriveInfoTests
             };
 
             // Test Null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new DriveInfo(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new DriveInfo(null);
+            });
 
             // Test Valid DriveLetter
             var validDriveLetter = GetValidDriveLettersOnMachine().First();
@@ -312,12 +310,10 @@ namespace System.IO.FileSystem.DriveInfoTests
             {
                 if (adrive.IsReady)
                 {
-                    Exception e = Assert.ThrowsAny<Exception>(
-                        () =>
-                        {
-                            adrive.VolumeLabel = null;
-                        }
-                    );
+                    Exception e = Assert.ThrowsAny<Exception>(() =>
+                    {
+                        adrive.VolumeLabel = null;
+                    });
                     Assert.True(
                         e is UnauthorizedAccessException
                             || e is IOException

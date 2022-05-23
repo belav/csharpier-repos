@@ -18,13 +18,11 @@ namespace System.Net.Http.Functional.Tests
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static Task GetAndDropResponse(HttpClient client, Uri url)
         {
-            return Task.Run(
-                async () =>
-                {
-                    // Get the response stream, but don't dispose it or return it. Just drop it.
-                    await client.GetStreamAsync(url);
-                }
-            );
+            return Task.Run(async () =>
+            {
+                // Get the response stream, but don't dispose it or return it. Just drop it.
+                await client.GetStreamAsync(url);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.SupportsAlpn))]
@@ -51,28 +49,26 @@ namespace System.Net.Http.Functional.Tests
                         }
                     },
                     server =>
-                        server.AcceptConnectionAsync(
-                            async connection =>
+                        server.AcceptConnectionAsync(async connection =>
+                        {
+                            try
                             {
-                                try
-                                {
-                                    HttpRequestData data = await connection.ReadRequestDataAsync(
-                                        readBody: false
-                                    );
-                                    await connection.SendResponseHeadersAsync(
-                                        headers: new HttpHeaderData[]
-                                        {
-                                            new HttpHeaderData("SomeHeaderName", "AndValue")
-                                        }
-                                    );
-                                    await connection.WaitForCancellationAsync();
-                                }
-                                finally
-                                {
-                                    Volatile.Write(ref stopGCs, true);
-                                }
+                                HttpRequestData data = await connection.ReadRequestDataAsync(
+                                    readBody: false
+                                );
+                                await connection.SendResponseHeadersAsync(
+                                    headers: new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData("SomeHeaderName", "AndValue")
+                                    }
+                                );
+                                await connection.WaitForCancellationAsync();
                             }
-                        )
+                            finally
+                            {
+                                Volatile.Write(ref stopGCs, true);
+                            }
+                        })
                 );
             }
         }

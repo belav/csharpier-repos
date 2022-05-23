@@ -35,28 +35,22 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseAuthorization();
-                                app.UseEndpoints(b => b.Map("/", TestDelegate));
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddAuthorization();
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseAuthorization();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate));
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddAuthorization();
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -73,28 +67,22 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseAuthorization();
-                                app.UseEndpoints(b => b.Map("/", TestDelegate));
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddAuthorization();
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseAuthorization();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate));
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddAuthorization();
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -111,35 +99,27 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseAuthorization();
-                                app.UseEndpoints(
-                                    b => b.Map("/", TestDelegate).RequireAuthorization()
-                                );
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddAuthorization(
-                        options =>
-                            options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                                .RequireAssertion(_ => true)
-                                .Build()
-                    );
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseAuthorization();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate).RequireAuthorization());
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddAuthorization(
+                    options =>
+                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                            .RequireAssertion(_ => true)
+                            .Build()
+                );
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -156,34 +136,26 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    b => b.Map("/", TestDelegate).RequireAuthorization()
-                                );
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddAuthorization(
-                        options =>
-                            options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                                .RequireAssertion(_ => true)
-                                .Build()
-                    );
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate).RequireAuthorization());
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddAuthorization(
+                    options =>
+                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                            .RequireAssertion(_ => true)
+                            .Build()
+                );
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -201,28 +173,20 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    b => b.Map("/", TestDelegate).RequireAuthorization()
-                                );
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate).RequireAuthorization());
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -239,35 +203,27 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthorization();
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    b => b.Map("/", TestDelegate).RequireAuthorization()
-                                );
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddAuthorization(
-                        options =>
-                            options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                                .RequireAssertion(_ => true)
-                                .Build()
-                    );
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseAuthorization();
+                        app.UseRouting();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate).RequireAuthorization());
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddAuthorization(
+                    options =>
+                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                            .RequireAssertion(_ => true)
+                            .Build()
+                );
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -285,35 +241,27 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    b => b.Map("/", TestDelegate).RequireAuthorization()
-                                );
-                                app.UseAuthorization();
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddAuthorization(
-                        options =>
-                            options.DefaultPolicy = new AuthorizationPolicyBuilder()
-                                .RequireAssertion(_ => true)
-                                .Build()
-                    );
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseEndpoints(b => b.Map("/", TestDelegate).RequireAuthorization());
+                        app.UseAuthorization();
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddAuthorization(
+                    options =>
+                        options.DefaultPolicy = new AuthorizationPolicyBuilder()
+                            .RequireAssertion(_ => true)
+                            .Build()
+                );
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -331,32 +279,26 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRouting();
-                                app.UseCors();
-                                app.UseEndpoints(
-                                    b =>
-                                        b.Map("/", TestDelegate)
-                                            .RequireCors(policy => policy.AllowAnyOrigin())
-                                );
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddCors();
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseRouting();
+                        app.UseCors();
+                        app.UseEndpoints(
+                            b =>
+                                b.Map("/", TestDelegate)
+                                    .RequireCors(policy => policy.AllowAnyOrigin())
+                        );
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddCors();
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();
@@ -373,32 +315,26 @@ public class EndpointRoutingIntegrationTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
-                            {
-                                app.UseCors();
-                                app.UseRouting();
-                                app.UseEndpoints(
-                                    b =>
-                                        b.Map("/", TestDelegate)
-                                            .RequireCors(policy => policy.AllowAnyOrigin())
-                                );
-                            }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddCors();
-                    services.AddRouting();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseCors();
+                        app.UseRouting();
+                        app.UseEndpoints(
+                            b =>
+                                b.Map("/", TestDelegate)
+                                    .RequireCors(policy => policy.AllowAnyOrigin())
+                        );
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddCors();
+                services.AddRouting();
+            })
             .Build();
 
         using var server = host.GetTestServer();

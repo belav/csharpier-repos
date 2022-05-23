@@ -133,13 +133,11 @@ namespace Microsoft.CodeAnalysis.Remote
                     // log telemetry that service hub started
                     RoslynLogger.Log(
                         FunctionId.RemoteHost_Connect,
-                        KeyValueLogMessage.Create(
-                            m =>
-                            {
-                                m["Host"] = hostProcessId;
-                                m["InstanceId"] = InstanceId;
-                            }
-                        )
+                        KeyValueLogMessage.Create(m =>
+                        {
+                            m["Host"] = hostProcessId;
+                            m["InstanceId"] = InstanceId;
+                        })
                     );
 
 #if DEBUG

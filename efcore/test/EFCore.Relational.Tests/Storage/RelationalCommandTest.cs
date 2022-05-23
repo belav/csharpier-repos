@@ -111,14 +111,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var fakeDbConnection = new FakeDbConnection(
                 ConnectionString,
-                new FakeCommandExecutor(
-                    executeNonQuery: c =>
-                    {
-                        executeNonQueryCount++;
-                        disposeCount = c.DisposeCount;
-                        return 1;
-                    }
-                )
+                new FakeCommandExecutor(executeNonQuery: c =>
+                {
+                    executeNonQueryCount++;
+                    disposeCount = c.DisposeCount;
+                    return 1;
+                })
             );
 
             var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(
@@ -211,14 +209,12 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var fakeDbConnection = new FakeDbConnection(
                 ConnectionString,
-                new FakeCommandExecutor(
-                    executeScalar: c =>
-                    {
-                        executeScalarCount++;
-                        disposeCount = c.DisposeCount;
-                        return "ExecuteScalar Result";
-                    }
-                )
+                new FakeCommandExecutor(executeScalar: c =>
+                {
+                    executeScalarCount++;
+                    disposeCount = c.DisposeCount;
+                    return "ExecuteScalar Result";
+                })
             );
 
             var optionsExtension = new FakeRelationalOptionsExtension().WithConnection(

@@ -2472,12 +2472,10 @@ namespace System.Text.RegularExpressions.Tests
                 RegexOptions.None,
                 TimeSpan.FromMilliseconds(10)
             );
-            Assert.Throws<RegexMatchTimeoutException>(
-                () =>
-                {
-                    re.Match(input);
-                }
-            );
+            Assert.Throws<RegexMatchTimeoutException>(() =>
+            {
+                re.Match(input);
+            });
         }
 
         [Theory]

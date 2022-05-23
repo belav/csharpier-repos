@@ -21,13 +21,11 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Dest>()
-                        .ForMember(dest => dest.Value, opt => opt.MapFrom(src => 5));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>()
+                    .ForMember(dest => dest.Value, opt => opt.MapFrom(src => 5));
+            });
 
         protected override void Because_of()
         {

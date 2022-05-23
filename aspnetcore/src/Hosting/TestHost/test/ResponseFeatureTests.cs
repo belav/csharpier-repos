@@ -49,18 +49,16 @@ public class ResponseFeatureTests
         responseInformation.HasStarted = true;
 
         // Act & Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                responseInformation.OnStarting(
-                    (status) =>
-                    {
-                        return Task.FromResult(string.Empty);
-                    },
-                    state: "string"
-                );
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            responseInformation.OnStarting(
+                (status) =>
+                {
+                    return Task.FromResult(string.Empty);
+                },
+                state: "string"
+            );
+        });
     }
 
     [Fact]

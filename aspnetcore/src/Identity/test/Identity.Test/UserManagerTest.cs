@@ -1466,12 +1466,10 @@ public class UserManagerTest
         var store = new Mock<IUserLockoutStore<PocoUser>>();
         store
             .Setup(x => x.ResetAccessFailedCountAsync(user, It.IsAny<CancellationToken>()))
-            .Returns(
-                () =>
-                {
-                    throw new Exception();
-                }
-            );
+            .Returns(() =>
+            {
+                throw new Exception();
+            });
         var manager = MockHelpers.TestUserManager(store.Object);
 
         IdentityResultAssert.IsSuccess(await manager.ResetAccessFailedCountAsync(user));

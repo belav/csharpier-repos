@@ -75,12 +75,10 @@ namespace System.IO.ManualTests
             );
             originStream.CopyTo(destinationStream, 1);
 
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    destinationStream.Dispose();
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                destinationStream.Dispose();
+            });
         }
 
         [ConditionalFact(nameof(ManualTestsEnabled))]

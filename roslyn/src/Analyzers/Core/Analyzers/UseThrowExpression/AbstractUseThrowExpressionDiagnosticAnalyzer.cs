@@ -69,23 +69,21 @@ namespace Microsoft.CodeAnalysis.UseThrowExpression
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                startContext =>
+            context.RegisterCompilationStartAction(startContext =>
+            {
+                if (!IsSupported(startContext.Compilation))
                 {
-                    if (!IsSupported(startContext.Compilation))
-                    {
-                        return;
-                    }
-
-                    var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
-                        "System.Linq.Expressions.Expression`1"
-                    );
-                    startContext.RegisterOperationAction(
-                        operationContext => AnalyzeOperation(operationContext, expressionTypeOpt),
-                        OperationKind.Throw
-                    );
+                    return;
                 }
-            );
+
+                var expressionTypeOpt = startContext.Compilation.GetTypeByMetadataName(
+                    "System.Linq.Expressions.Expression`1"
+                );
+                startContext.RegisterOperationAction(
+                    operationContext => AnalyzeOperation(operationContext, expressionTypeOpt),
+                    OperationKind.Throw
+                );
+            });
         }
 
         private void AnalyzeOperation(

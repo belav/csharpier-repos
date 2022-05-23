@@ -201,27 +201,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             }
 
             // This pattern ensures that we are called whenever the build starts/completes even if it is already in progress.
-            KnownUIContexts.SolutionBuildingContext.WhenActivated(
-                () =>
+            KnownUIContexts.SolutionBuildingContext.WhenActivated(() =>
+            {
+                KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
+                    object _,
+                    UIContextChangedEventArgs e
+                ) =>
                 {
-                    KnownUIContexts.SolutionBuildingContext.UIContextChanged += (
-                        object _,
-                        UIContextChangedEventArgs e
-                    ) =>
+                    if (e.Activated)
                     {
-                        if (e.Activated)
-                        {
-                            ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
-                        }
-                        else
-                        {
-                            ExternalErrorDiagnosticUpdateSource.OnSolutionBuildCompleted();
-                        }
-                    };
+                        ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
+                    }
+                    else
+                    {
+                        ExternalErrorDiagnosticUpdateSource.OnSolutionBuildCompleted();
+                    }
+                };
 
-                    ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
-                }
-            );
+                ExternalErrorDiagnosticUpdateSource.OnSolutionBuildStarted();
+            });
 
             _isExternalErrorDiagnosticUpdateSourceSubscribedToSolutionBuildEvents = true;
         }
@@ -2076,17 +2074,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             var asyncToken = listenerProvider
                 .GetListener()
                 .BeginAsyncOperation(nameof(RefreshProjectExistsUIContextForLanguage));
-            _threadingContext.RunWithShutdownBlockAsync(
-                async cancellationToken =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        cancellationToken
-                    );
-                    RefreshProjectExistsUIContextForLanguage(languageName);
-                    asyncToken.Dispose();
-                }
-            );
+            _threadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
+            {
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    alwaysYield: true,
+                    cancellationToken
+                );
+                RefreshProjectExistsUIContextForLanguage(languageName);
+                asyncToken.Dispose();
+            });
         }
 
         private sealed class ProjectReferenceInformation

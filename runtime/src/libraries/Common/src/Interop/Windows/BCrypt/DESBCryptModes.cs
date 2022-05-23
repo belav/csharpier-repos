@@ -32,19 +32,17 @@ namespace Internal.Cryptography
 
         private static Lazy<SafeAlgorithmHandle> OpenDesAlgorithm(string cipherMode)
         {
-            return new Lazy<SafeAlgorithmHandle>(
-                () =>
-                {
-                    SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
-                        Cng.BCRYPT_DES_ALGORITHM,
-                        null,
-                        Cng.OpenAlgorithmProviderFlags.NONE
-                    );
-                    hAlg.SetCipherMode(cipherMode);
+            return new Lazy<SafeAlgorithmHandle>(() =>
+            {
+                SafeAlgorithmHandle hAlg = Cng.BCryptOpenAlgorithmProvider(
+                    Cng.BCRYPT_DES_ALGORITHM,
+                    null,
+                    Cng.OpenAlgorithmProviderFlags.NONE
+                );
+                hAlg.SetCipherMode(cipherMode);
 
-                    return hAlg;
-                }
-            );
+                return hAlg;
+            });
         }
     }
 }

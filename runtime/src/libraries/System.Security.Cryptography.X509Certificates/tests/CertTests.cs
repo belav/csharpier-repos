@@ -29,28 +29,24 @@ namespace System.Security.Cryptography.X509Certificates.Tests
         {
             X509Certificate2 cert = new X509Certificate2(TestFiles.MicrosoftRootCertFile);
 
-            Thread subjThread = new Thread(
-                static state =>
-                {
-                    X509Certificate2 c = (X509Certificate2)state;
+            Thread subjThread = new Thread(static state =>
+            {
+                X509Certificate2 c = (X509Certificate2)state;
 
-                    try
-                    {
-                        _ = c.Subject;
-                    }
-                    catch
-                    {
-                        // managed exceptions are okay, we are looking for runtime crashes.
-                    }
-                }
-            );
-
-            Thread disposeThread = new Thread(
-                static state =>
+                try
                 {
-                    ((X509Certificate2)state).Dispose();
+                    _ = c.Subject;
                 }
-            );
+                catch
+                {
+                    // managed exceptions are okay, we are looking for runtime crashes.
+                }
+            });
+
+            Thread disposeThread = new Thread(static state =>
+            {
+                ((X509Certificate2)state).Dispose();
+            });
 
             subjThread.Start(cert);
             disposeThread.Start(cert);

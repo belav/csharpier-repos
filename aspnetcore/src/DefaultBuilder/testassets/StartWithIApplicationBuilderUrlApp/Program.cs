@@ -24,15 +24,12 @@ public class Program
                 "http://127.0.0.1:0",
                 app =>
                 {
-                    app.Run(
-                        async context =>
-                        {
-                            var env =
-                                context.RequestServices.GetRequiredService<IHostEnvironment>();
-                            await context.Response.WriteAsync(env.ApplicationName);
-                            messageSent.Set();
-                        }
-                    );
+                    app.Run(async context =>
+                    {
+                        var env = context.RequestServices.GetRequiredService<IHostEnvironment>();
+                        await context.Response.WriteAsync(env.ApplicationName);
+                        messageSent.Set();
+                    });
                 }
             )
         )

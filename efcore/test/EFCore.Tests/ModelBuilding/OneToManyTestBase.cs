@@ -68,26 +68,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<OneToManyPrincipalWithField>(
-                    e =>
-                    {
-                        e.Property(p => p.Id);
-                        e.Property(p => p.AlternateKey);
-                        e.Property(p => p.Name);
-                        e.HasKey(p => p.Id);
-                    }
-                );
-                modelBuilder.Entity<DependentWithField>(
-                    e =>
-                    {
-                        e.Property(d => d.DependentWithFieldId);
-                        e.Property(d => d.OneToManyPrincipalId);
-                        e.Property(d => d.AnotherOneToManyPrincipalId);
-                        e.Ignore(d => d.ManyToManyPrincipals);
-                        e.Ignore(d => d.OneToOnePrincipal);
-                        e.HasKey(d => d.DependentWithFieldId);
-                    }
-                );
+                modelBuilder.Entity<OneToManyPrincipalWithField>(e =>
+                {
+                    e.Property(p => p.Id);
+                    e.Property(p => p.AlternateKey);
+                    e.Property(p => p.Name);
+                    e.HasKey(p => p.Id);
+                });
+                modelBuilder.Entity<DependentWithField>(e =>
+                {
+                    e.Property(d => d.DependentWithFieldId);
+                    e.Property(d => d.OneToManyPrincipalId);
+                    e.Property(d => d.AnotherOneToManyPrincipalId);
+                    e.Ignore(d => d.ManyToManyPrincipals);
+                    e.Ignore(d => d.OneToOnePrincipal);
+                    e.HasKey(d => d.DependentWithFieldId);
+                });
 
                 modelBuilder
                     .Entity<DependentWithField>()
@@ -1886,13 +1882,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
                 modelBuilder.Entity<Whoopper>().HasKey(c => new { c.Id1, c.Id2 });
-                modelBuilder.Entity<Tomato>(
-                    b =>
-                    {
-                        b.Property(e => e.BurgerId1);
-                        b.Property(e => e.BurgerId2);
-                    }
-                );
+                modelBuilder.Entity<Tomato>(b =>
+                {
+                    b.Property(e => e.BurgerId1);
+                    b.Property(e => e.BurgerId2);
+                });
                 modelBuilder.Ignore<ToastedBun>();
                 modelBuilder.Ignore<Mustard>();
 
@@ -2143,37 +2137,31 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var model = modelBuilder.Model;
                 modelBuilder.Ignore<OrderDetails>();
                 modelBuilder.Entity<Customer>();
-                modelBuilder.Entity<Order>(
-                    eb =>
-                    {
-                        eb.HasKey(c => new { c.OrderId, c.CustomerId });
-                    }
-                );
+                modelBuilder.Entity<Order>(eb =>
+                {
+                    eb.HasKey(c => new { c.OrderId, c.CustomerId });
+                });
 
                 modelBuilder.Ignore<ProductCategory>();
-                modelBuilder.Entity<Category>(
-                    eb =>
-                    {
-                        eb.HasKey(c => new { c.Id, c.Name });
-                    }
-                );
+                modelBuilder.Entity<Category>(eb =>
+                {
+                    eb.HasKey(c => new { c.Id, c.Name });
+                });
 
-                modelBuilder.Entity<Product>(
-                    eb =>
-                    {
-                        eb.Ignore(p => p.Categories);
-                        eb.HasOne(p => p.Order)
-                            .WithMany(o => o.Products)
-                            .HasForeignKey("CommonId", "OrderId");
-                        eb.HasOne<Category>()
-                            .WithMany(c => c.Products)
-                            .HasForeignKey("CommonId", "Category")
-                            .IsRequired();
+                modelBuilder.Entity<Product>(eb =>
+                {
+                    eb.Ignore(p => p.Categories);
+                    eb.HasOne(p => p.Order)
+                        .WithMany(o => o.Products)
+                        .HasForeignKey("CommonId", "OrderId");
+                    eb.HasOne<Category>()
+                        .WithMany(c => c.Products)
+                        .HasForeignKey("CommonId", "Category")
+                        .IsRequired();
 
-                        eb.HasIndex("Id", "OrderId").IsUnique();
-                        eb.HasKey("Id", "CommonId");
-                    }
-                );
+                    eb.HasIndex("Id", "OrderId").IsUnique();
+                    eb.HasKey("Id", "CommonId");
+                });
 
                 modelBuilder.FinalizeModel();
 
@@ -2601,12 +2589,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Entity<Alpha>();
-                modelBuilder.Entity<Beta>(
-                    b =>
-                    {
-                        b.HasOne(e => e.FirstNav).WithMany().HasForeignKey("ShadowId");
-                    }
-                );
+                modelBuilder.Entity<Beta>(b =>
+                {
+                    b.HasOne(e => e.FirstNav).WithMany().HasForeignKey("ShadowId");
+                });
 
                 modelBuilder.FinalizeModel();
 
@@ -2794,20 +2780,16 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Creates_one_to_many_relationship_with_single_ref_as_dependent_to_principal_if_no_matching_properties_either_side()
             {
                 var modelBuilder = CreateModelBuilder();
-                modelBuilder.Entity<OneToOnePrincipalEntity>(
-                    b =>
-                    {
-                        b.Ignore(e => e.NavOneToOneDependentEntityId);
-                        b.Ignore(e => e.OneToOneDependentEntityId);
-                    }
-                );
-                modelBuilder.Entity<OneToOneDependentEntity>(
-                    b =>
-                    {
-                        b.Ignore(e => e.NavOneToOnePrincipalEntityId);
-                        b.Ignore(e => e.OneToOnePrincipalEntityId);
-                    }
-                );
+                modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                {
+                    b.Ignore(e => e.NavOneToOneDependentEntityId);
+                    b.Ignore(e => e.OneToOneDependentEntityId);
+                });
+                modelBuilder.Entity<OneToOneDependentEntity>(b =>
+                {
+                    b.Ignore(e => e.NavOneToOnePrincipalEntityId);
+                    b.Ignore(e => e.OneToOnePrincipalEntityId);
+                });
 
                 modelBuilder
                     .Entity<OneToOneDependentEntity>()
@@ -2831,13 +2813,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Creates_one_to_many_relationship_with_single_ref_as_dependent_to_principal_if_matching_navigation_name_properties_are_on_navigation_side()
             {
                 var modelBuilder = CreateModelBuilder();
-                modelBuilder.Entity<OneToOnePrincipalEntity>(
-                    b =>
-                    {
-                        b.Ignore(e => e.NavOneToOneDependentEntityId);
-                        b.Ignore(e => e.OneToOneDependentEntityId);
-                    }
-                );
+                modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                {
+                    b.Ignore(e => e.NavOneToOneDependentEntityId);
+                    b.Ignore(e => e.OneToOneDependentEntityId);
+                });
                 modelBuilder.Entity<OneToOneDependentEntity>(
                     b => b.Ignore(e => e.OneToOnePrincipalEntityId)
                 );
@@ -2868,13 +2848,11 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             public virtual void Creates_one_to_many_relationship_with_single_ref_as_dependent_to_principal_if_matching_entity_name_properties_are_on_navigation_side()
             {
                 var modelBuilder = CreateModelBuilder();
-                modelBuilder.Entity<OneToOnePrincipalEntity>(
-                    b =>
-                    {
-                        b.Ignore(e => e.NavOneToOneDependentEntityId);
-                        b.Ignore(e => e.OneToOneDependentEntityId);
-                    }
-                );
+                modelBuilder.Entity<OneToOnePrincipalEntity>(b =>
+                {
+                    b.Ignore(e => e.NavOneToOneDependentEntityId);
+                    b.Ignore(e => e.OneToOneDependentEntityId);
+                });
                 modelBuilder.Entity<OneToOneDependentEntity>(
                     b => b.Ignore(e => e.NavOneToOnePrincipalEntityId)
                 );
@@ -3195,14 +3173,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Discount>(
-                    entity =>
-                    {
-                        entity.HasNoKey();
+                modelBuilder.Entity<Discount>(entity =>
+                {
+                    entity.HasNoKey();
 
-                        entity.HasOne(d => d.Store).WithMany();
-                    }
-                );
+                    entity.HasOne(d => d.Store).WithMany();
+                });
 
                 var model = modelBuilder.FinalizeModel();
 

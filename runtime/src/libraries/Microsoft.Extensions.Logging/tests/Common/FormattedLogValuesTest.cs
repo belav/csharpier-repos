@@ -99,13 +99,11 @@ namespace Microsoft.Extensions.Logging.Test
         [InlineData("{foo bar}}")]
         public void LogValues_With_UnbalancedBraces(string format)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    var logValues = new FormattedLogValues(format, new object[] { "arg1" });
-                    logValues.ToString();
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                var logValues = new FormattedLogValues(format, new object[] { "arg1" });
+                logValues.ToString();
+            });
         }
 
         [Fact]

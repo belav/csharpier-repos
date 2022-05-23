@@ -30,14 +30,12 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ConstructServicesUsing(t => new Res());
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(d => d.Value, o => o.MapFrom<IRes>());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ConstructServicesUsing(t => new Res());
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.Value, o => o.MapFrom<IRes>());
+            });
     }
 
     public class InitializeNRE : AutoMapperSpecBase
@@ -61,11 +59,9 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<TestEntity, TestViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<TestEntity, TestViewModel>();
+            });
     }
 }

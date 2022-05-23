@@ -31,12 +31,10 @@ namespace System.Web.Razor.Text
         public static LookaheadToken BeginLookahead(this ITextBuffer self)
         {
             int start = self.Position;
-            return new LookaheadToken(
-                () =>
-                {
-                    self.Position = start;
-                }
-            );
+            return new LookaheadToken(() =>
+            {
+                self.Position = start;
+            });
         }
 
         public static string ReadToEnd(this ITextBuffer self)

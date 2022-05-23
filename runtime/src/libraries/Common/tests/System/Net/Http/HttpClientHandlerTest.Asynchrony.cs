@@ -41,74 +41,70 @@ namespace System.Net.Http.Functional.Tests
                     await LoopbackServer.CreateClientAndServerAsync(
                         uri =>
                         {
-                            return Task.Run(
-                                () => // allow client and server to run concurrently even though this is all synchronous/blocking
-                                {
-                                    var sc = new TrackingSynchronizationContext();
-                                    SynchronizationContext.SetSynchronizationContext(sc);
+                            return Task.Run(() => // allow client and server to run concurrently even though this is all synchronous/blocking
+                            {
+                                var sc = new TrackingSynchronizationContext();
+                                SynchronizationContext.SetSynchronizationContext(sc);
 
-                                    using (HttpClient client = CreateHttpClient())
+                                using (HttpClient client = CreateHttpClient())
+                                {
+                                    if (responseHeadersRead)
                                     {
-                                        if (responseHeadersRead)
-                                        {
-                                            using (
-                                                HttpResponseMessage resp = client
-                                                    .GetAsync(
-                                                        uri,
-                                                        HttpCompletionOption.ResponseHeadersRead
-                                                    )
-                                                    .GetAwaiter()
-                                                    .GetResult()
-                                            )
-                                            using (
-                                                Stream respStream = resp.Content
-                                                    .ReadAsStreamAsync()
-                                                    .GetAwaiter()
-                                                    .GetResult()
-                                            )
-                                            {
-                                                byte[] buffer = new byte[0x1000];
-                                                while (
-                                                    respStream
-                                                        .ReadAsync(buffer, 0, buffer.Length)
-                                                        .GetAwaiter()
-                                                        .GetResult() > 0
+                                        using (
+                                            HttpResponseMessage resp = client
+                                                .GetAsync(
+                                                    uri,
+                                                    HttpCompletionOption.ResponseHeadersRead
                                                 )
-                                                    ;
-                                            }
-                                        }
-                                        else
+                                                .GetAwaiter()
+                                                .GetResult()
+                                        )
+                                        using (
+                                            Stream respStream = resp.Content
+                                                .ReadAsStreamAsync()
+                                                .GetAwaiter()
+                                                .GetResult()
+                                        )
                                         {
-                                            client.GetStringAsync(uri).GetAwaiter().GetResult();
+                                            byte[] buffer = new byte[0x1000];
+                                            while (
+                                                respStream
+                                                    .ReadAsync(buffer, 0, buffer.Length)
+                                                    .GetAwaiter()
+                                                    .GetResult() > 0
+                                            )
+                                                ;
                                         }
                                     }
-
-                                    Assert.True(
-                                        sc.CallStacks.Count == 0,
-                                        "Sync Ctx used: "
-                                            + string.Join(
-                                                Environment.NewLine + Environment.NewLine,
-                                                sc.CallStacks
-                                            )
-                                    );
+                                    else
+                                    {
+                                        client.GetStringAsync(uri).GetAwaiter().GetResult();
+                                    }
                                 }
-                            );
+
+                                Assert.True(
+                                    sc.CallStacks.Count == 0,
+                                    "Sync Ctx used: "
+                                        + string.Join(
+                                            Environment.NewLine + Environment.NewLine,
+                                            sc.CallStacks
+                                        )
+                                );
+                            });
                         },
                         async server =>
                         {
-                            await server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    await connection.ReadRequestHeaderAsync();
-                                    await connection.WriteStringAsync(
-                                        LoopbackServer.GetContentModeResponse(
-                                            contentMode,
-                                            string.Concat(Enumerable.Repeat('s', 10_000)),
-                                            connectionClose: true
-                                        )
-                                    );
-                                }
-                            );
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                await connection.ReadRequestHeaderAsync();
+                                await connection.WriteStringAsync(
+                                    LoopbackServer.GetContentModeResponse(
+                                        contentMode,
+                                        string.Concat(Enumerable.Repeat('s', 10_000)),
+                                        connectionClose: true
+                                    )
+                                );
+                            });
                         },
                         new LoopbackServer.Options { StreamWrapper = s => new DribbleStream(s) }
                     );

@@ -43,79 +43,77 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Root24777>(
-                    b =>
-                    {
-                        b.ToTable(nameof(Root24777));
-                        b.HasKey(x => x.Id);
-                        b.OwnsOne(
-                            x => x.ModdleA,
-                            ob =>
-                            {
-                                ob.ToTable(nameof(ModdleA24777));
-                                ob.HasKey(x => x.Id);
-                                ob.WithOwner().HasForeignKey(e => e.RootId);
-                                ob.OwnsMany(
-                                    x => x.Leaves,
-                                    oob =>
-                                    {
-                                        oob.ToTable(nameof(Leaf24777));
-                                        oob.HasKey(
-                                            x =>
-                                                new
-                                                {
-                                                    ProductCommissionRulesetId = x.ModdleAId,
-                                                    x.UnitThreshold
-                                                }
-                                        );
-                                        oob.WithOwner().HasForeignKey(e => e.ModdleAId);
-                                        oob.HasData(
-                                            new Leaf24777 { ModdleAId = 1, UnitThreshold = 1 },
-                                            new Leaf24777 { ModdleAId = 3, UnitThreshold = 1 },
-                                            new Leaf24777 { ModdleAId = 3, UnitThreshold = 15 }
-                                        );
-                                    }
-                                );
+                modelBuilder.Entity<Root24777>(b =>
+                {
+                    b.ToTable(nameof(Root24777));
+                    b.HasKey(x => x.Id);
+                    b.OwnsOne(
+                        x => x.ModdleA,
+                        ob =>
+                        {
+                            ob.ToTable(nameof(ModdleA24777));
+                            ob.HasKey(x => x.Id);
+                            ob.WithOwner().HasForeignKey(e => e.RootId);
+                            ob.OwnsMany(
+                                x => x.Leaves,
+                                oob =>
+                                {
+                                    oob.ToTable(nameof(Leaf24777));
+                                    oob.HasKey(
+                                        x =>
+                                            new
+                                            {
+                                                ProductCommissionRulesetId = x.ModdleAId,
+                                                x.UnitThreshold
+                                            }
+                                    );
+                                    oob.WithOwner().HasForeignKey(e => e.ModdleAId);
+                                    oob.HasData(
+                                        new Leaf24777 { ModdleAId = 1, UnitThreshold = 1 },
+                                        new Leaf24777 { ModdleAId = 3, UnitThreshold = 1 },
+                                        new Leaf24777 { ModdleAId = 3, UnitThreshold = 15 }
+                                    );
+                                }
+                            );
 
-                                ob.HasData(
-                                    new ModdleA24777 { Id = 1, RootId = 1 },
-                                    new ModdleA24777 { Id = 2, RootId = 2 },
-                                    new ModdleA24777 { Id = 3, RootId = 3 }
-                                );
-                            }
-                        );
+                            ob.HasData(
+                                new ModdleA24777 { Id = 1, RootId = 1 },
+                                new ModdleA24777 { Id = 2, RootId = 2 },
+                                new ModdleA24777 { Id = 3, RootId = 3 }
+                            );
+                        }
+                    );
 
-                        b.OwnsOne(
-                            x => x.MiddleB,
-                            ob =>
-                            {
-                                ob.ToTable(nameof(MiddleB24777));
-                                ob.HasKey(x => x.Id);
-                                ob.WithOwner().HasForeignKey(e => e.RootId);
-                                ob.HasData(
-                                    new MiddleB24777
-                                    {
-                                        Id = 1,
-                                        RootId = 1,
-                                        Enabled = true
-                                    },
-                                    new MiddleB24777
-                                    {
-                                        Id = 2,
-                                        RootId = 3,
-                                        Enabled = true
-                                    }
-                                );
-                            }
-                        );
+                    b.OwnsOne(
+                        x => x.MiddleB,
+                        ob =>
+                        {
+                            ob.ToTable(nameof(MiddleB24777));
+                            ob.HasKey(x => x.Id);
+                            ob.WithOwner().HasForeignKey(e => e.RootId);
+                            ob.HasData(
+                                new MiddleB24777
+                                {
+                                    Id = 1,
+                                    RootId = 1,
+                                    Enabled = true
+                                },
+                                new MiddleB24777
+                                {
+                                    Id = 2,
+                                    RootId = 3,
+                                    Enabled = true
+                                }
+                            );
+                        }
+                    );
 
-                        b.HasData(
-                            new Root24777 { Id = 1 },
-                            new Root24777 { Id = 2 },
-                            new Root24777 { Id = 3 }
-                        );
-                    }
-                );
+                    b.HasData(
+                        new Root24777 { Id = 1 },
+                        new Root24777 { Id = 2 },
+                        new Root24777 { Id = 3 }
+                    );
+                });
             }
         }
 

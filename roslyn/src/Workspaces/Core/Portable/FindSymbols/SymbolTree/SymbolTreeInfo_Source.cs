@@ -123,15 +123,13 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             // to be ordered by Guid (which is not consistent across VS sessions).
             var textChecksumsTasks = projectState.DocumentStates.States.Values
                 .OrderBy(state => state.FilePath, StringComparer.Ordinal)
-                .Select(
-                    async state =>
-                    {
-                        var documentStateChecksum = await state
-                            .GetStateChecksumsAsync(cancellationToken)
-                            .ConfigureAwait(false);
-                        return documentStateChecksum.Text;
-                    }
-                );
+                .Select(async state =>
+                {
+                    var documentStateChecksum = await state
+                        .GetStateChecksumsAsync(cancellationToken)
+                        .ConfigureAwait(false);
+                    return documentStateChecksum.Text;
+                });
 
             var compilationOptionsChecksum = projectStateChecksums.CompilationOptions;
             var parseOptionsChecksum = projectStateChecksums.ParseOptions;

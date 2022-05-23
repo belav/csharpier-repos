@@ -20,12 +20,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_CanHandleSingleLengthAddTagHelperDirective()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(new TagHelperDescriptor[0]);
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(new TagHelperDescriptor[0]);
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
         var expectedDiagnostics = new[]
@@ -71,12 +69,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_CanHandleSingleLengthRemoveTagHelperDirective()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(new TagHelperDescriptor[0]);
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(new TagHelperDescriptor[0]);
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
         var expectedDiagnostics = new[]
@@ -122,12 +118,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_CanHandleSingleLengthTagHelperPrefix()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(new TagHelperDescriptor[0]);
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(new TagHelperDescriptor[0]);
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
         var expectedDiagnostics = new[]
@@ -177,26 +171,24 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_RewritesTagHelpers()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(
-                    new[]
-                    {
-                        CreateTagHelperDescriptor(
-                            tagName: "form",
-                            typeName: "TestFormTagHelper",
-                            assemblyName: "TestAssembly"
-                        ),
-                        CreateTagHelperDescriptor(
-                            tagName: "input",
-                            typeName: "TestInputTagHelper",
-                            assemblyName: "TestAssembly"
-                        ),
-                    }
-                );
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(
+                new[]
+                {
+                    CreateTagHelperDescriptor(
+                        tagName: "form",
+                        typeName: "TestFormTagHelper",
+                        assemblyName: "TestAssembly"
+                    ),
+                    CreateTagHelperDescriptor(
+                        tagName: "input",
+                        typeName: "TestInputTagHelper",
+                        assemblyName: "TestAssembly"
+                    ),
+                }
+            );
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
@@ -376,12 +368,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
             }
         );
 
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(new[] { descriptor });
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(new[] { descriptor });
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
@@ -444,12 +434,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
             }
         );
 
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(new[] { descriptor });
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(new[] { descriptor });
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
@@ -554,12 +542,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_NoopsWhenNoTagHelperDescriptorsAreResolved()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.Features.Add(new TestTagHelperFeature());
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.Features.Add(new TestTagHelperFeature());
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
@@ -582,12 +568,10 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_SetsTagHelperDocumentContext()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.Features.Add(new TestTagHelperFeature());
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.Features.Add(new TestTagHelperFeature());
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
@@ -610,26 +594,24 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
     public void Execute_CombinesErrorsOnRewritingErrors()
     {
         // Arrange
-        var projectEngine = RazorProjectEngine.Create(
-            builder =>
-            {
-                builder.AddTagHelpers(
-                    new[]
-                    {
-                        CreateTagHelperDescriptor(
-                            tagName: "form",
-                            typeName: "TestFormTagHelper",
-                            assemblyName: "TestAssembly"
-                        ),
-                        CreateTagHelperDescriptor(
-                            tagName: "input",
-                            typeName: "TestInputTagHelper",
-                            assemblyName: "TestAssembly"
-                        ),
-                    }
-                );
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(builder =>
+        {
+            builder.AddTagHelpers(
+                new[]
+                {
+                    CreateTagHelperDescriptor(
+                        tagName: "form",
+                        typeName: "TestFormTagHelper",
+                        assemblyName: "TestAssembly"
+                    ),
+                    CreateTagHelperDescriptor(
+                        tagName: "input",
+                        typeName: "TestInputTagHelper",
+                        assemblyName: "TestAssembly"
+                    ),
+                }
+            );
+        });
 
         var phase = new DefaultRazorTagHelperBinderPhase() { Engine = projectEngine.Engine, };
 
@@ -1661,13 +1643,11 @@ public class DefaultRazorTagHelperBinderPhaseTest : RazorProjectEngineTestBase
         {
             foreach (var ruleBuilder in ruleBuilders)
             {
-                builder.TagMatchingRuleDescriptor(
-                    innerRuleBuilder =>
-                    {
-                        innerRuleBuilder.RequireTagName(tagName);
-                        ruleBuilder(innerRuleBuilder);
-                    }
-                );
+                builder.TagMatchingRuleDescriptor(innerRuleBuilder =>
+                {
+                    innerRuleBuilder.RequireTagName(tagName);
+                    ruleBuilder(innerRuleBuilder);
+                });
             }
         }
         else

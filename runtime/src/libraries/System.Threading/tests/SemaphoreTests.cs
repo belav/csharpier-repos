@@ -214,13 +214,11 @@ namespace System.Threading.Tests
 
             Assert.Throws<PlatformNotSupportedException>(() => new Semaphore(0, 1, name));
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                {
-                    bool createdNew;
-                    new Semaphore(0, 1, name, out createdNew).Dispose();
-                }
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
+                bool createdNew;
+                new Semaphore(0, 1, name, out createdNew).Dispose();
+            });
         }
 
         [Fact]

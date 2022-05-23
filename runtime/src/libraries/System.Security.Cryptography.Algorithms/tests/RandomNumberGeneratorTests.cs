@@ -100,17 +100,15 @@ namespace System.Security.Cryptography.RNG.Tests
                     taskArrays[iTask] = new byte[RandomSize];
                     byte[] taskLocal = taskArrays[iTask];
 
-                    tasks[iTask] = Task.Run(
-                        () =>
-                        {
-                            sync.WaitOne();
+                    tasks[iTask] = Task.Run(() =>
+                    {
+                        sync.WaitOne();
 
-                            for (int i = 0; i < PerTaskIterationCount; i++)
-                            {
-                                rng.GetBytes(taskLocal);
-                            }
+                        for (int i = 0; i < PerTaskIterationCount; i++)
+                        {
+                            rng.GetBytes(taskLocal);
                         }
-                    );
+                    });
                 }
 
                 // Ready? Set() Go!

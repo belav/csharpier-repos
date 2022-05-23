@@ -59,13 +59,11 @@ public class HttpsTests : LoggedTest
             5001,
             options =>
             {
-                options.UseHttps(
-                    opt =>
-                    {
-                        // The default cert is applied after UseHttps.
-                        Assert.Null(opt.ServerCertificate);
-                    }
-                );
+                options.UseHttps(opt =>
+                {
+                    // The default cert is applied after UseHttps.
+                    Assert.Null(opt.ServerCertificate);
+                });
             }
         );
         Assert.False(serverOptions.IsDevCertLoaded);
@@ -127,28 +125,24 @@ public class HttpsTests : LoggedTest
     public void ConfigureHttpsDefaultsNeverLoadsDefaultCert()
     {
         var serverOptions = CreateServerOptions();
-        serverOptions.ConfigureHttpsDefaults(
-            options =>
-            {
-                Assert.Null(options.ServerCertificate);
-                options.ServerCertificate = _x509Certificate2;
-                options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+        serverOptions.ConfigureHttpsDefaults(options =>
+        {
+            Assert.Null(options.ServerCertificate);
+            options.ServerCertificate = _x509Certificate2;
+            options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
         serverOptions.ListenLocalhost(
             5000,
             options =>
             {
-                options.UseHttps(
-                    opt =>
-                    {
-                        Assert.Equal(_x509Certificate2, opt.ServerCertificate);
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.ClientCertificateMode
-                        );
-                    }
-                );
+                options.UseHttps(opt =>
+                {
+                    Assert.Equal(_x509Certificate2, opt.ServerCertificate);
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.ClientCertificateMode
+                    );
+                });
             }
         );
         // Never lazy loaded
@@ -160,33 +154,29 @@ public class HttpsTests : LoggedTest
     public void ConfigureCertSelectorNeverLoadsDefaultCert()
     {
         var serverOptions = CreateServerOptions();
-        serverOptions.ConfigureHttpsDefaults(
-            options =>
+        serverOptions.ConfigureHttpsDefaults(options =>
+        {
+            Assert.Null(options.ServerCertificate);
+            Assert.Null(options.ServerCertificateSelector);
+            options.ServerCertificateSelector = (features, name) =>
             {
-                Assert.Null(options.ServerCertificate);
-                Assert.Null(options.ServerCertificateSelector);
-                options.ServerCertificateSelector = (features, name) =>
-                {
-                    return _x509Certificate2;
-                };
-                options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
-            }
-        );
+                return _x509Certificate2;
+            };
+            options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
+        });
         serverOptions.ListenLocalhost(
             5000,
             options =>
             {
-                options.UseHttps(
-                    opt =>
-                    {
-                        Assert.Null(opt.ServerCertificate);
-                        Assert.NotNull(opt.ServerCertificateSelector);
-                        Assert.Equal(
-                            ClientCertificateMode.RequireCertificate,
-                            opt.ClientCertificateMode
-                        );
-                    }
-                );
+                options.UseHttps(opt =>
+                {
+                    Assert.Null(opt.ServerCertificate);
+                    Assert.NotNull(opt.ServerCertificateSelector);
+                    Assert.Equal(
+                        ClientCertificateMode.RequireCertificate,
+                        opt.ClientCertificateMode
+                    );
+                });
             }
         );
         // Never lazy loaded
@@ -457,13 +447,11 @@ public class HttpsTests : LoggedTest
                 testContext,
                 listenOptions =>
                 {
-                    listenOptions.UseHttps(
-                        o =>
-                        {
-                            o.ServerCertificate = new X509Certificate2(_x509Certificate2);
-                            o.HandshakeTimeout = TimeSpan.FromMilliseconds(100);
-                        }
-                    );
+                    listenOptions.UseHttps(o =>
+                    {
+                        o.ServerCertificate = new X509Certificate2(_x509Certificate2);
+                        o.HandshakeTimeout = TimeSpan.FromMilliseconds(100);
+                    });
                 }
             )
         )
@@ -593,12 +581,10 @@ public class HttpsTests : LoggedTest
                 testContext,
                 serverOptions =>
                 {
-                    serverOptions.ConfigureHttpsDefaults(
-                        https =>
-                        {
-                            https.ServerCertificate = _x509Certificate2;
-                        }
-                    );
+                    serverOptions.ConfigureHttpsDefaults(https =>
+                    {
+                        https.ServerCertificate = _x509Certificate2;
+                    });
                     serverOptions.ListenLocalhost(
                         5001,
                         listenOptions =>
@@ -680,31 +666,29 @@ public class HttpsTests : LoggedTest
 
         var testContext = new TestServiceContext(LoggerFactory);
         testContext.ServerOptions = serverOptions;
-        var ex = await Assert.ThrowsAsync<IOException>(
-            async () =>
-            {
-                await using var server = new TestServer(
-                    context => Task.CompletedTask,
-                    testContext,
-                    serverOptions =>
-                    {
-                        serverOptions.ListenLocalhost(
-                            5001,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http3;
-                            }
-                        );
-                    },
-                    services =>
-                    {
-                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(
-                            multiplexedConnectionListenerFactory
-                        );
-                    }
-                );
-            }
-        );
+        var ex = await Assert.ThrowsAsync<IOException>(async () =>
+        {
+            await using var server = new TestServer(
+                context => Task.CompletedTask,
+                testContext,
+                serverOptions =>
+                {
+                    serverOptions.ListenLocalhost(
+                        5001,
+                        listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http3;
+                        }
+                    );
+                },
+                services =>
+                {
+                    services.AddSingleton<IMultiplexedConnectionListenerFactory>(
+                        multiplexedConnectionListenerFactory
+                    );
+                }
+            );
+        });
 
         Assert.False(bindCalled);
         Assert.Equal("HTTP/3 requires HTTPS.", ex.InnerException.InnerException.Message);
@@ -725,31 +709,29 @@ public class HttpsTests : LoggedTest
 
         var testContext = new TestServiceContext(LoggerFactory);
         testContext.ServerOptions = serverOptions;
-        var ex = await Assert.ThrowsAsync<IOException>(
-            async () =>
-            {
-                await using var server = new TestServer(
-                    context => Task.CompletedTask,
-                    testContext,
-                    serverOptions =>
-                    {
-                        serverOptions.ListenLocalhost(
-                            5001,
-                            listenOptions =>
-                            {
-                                listenOptions.Protocols = HttpProtocols.Http3;
-                            }
-                        );
-                    },
-                    services =>
-                    {
-                        services.AddSingleton<IMultiplexedConnectionListenerFactory>(
-                            multiplexedConnectionListenerFactory
-                        );
-                    }
-                );
-            }
-        );
+        var ex = await Assert.ThrowsAsync<IOException>(async () =>
+        {
+            await using var server = new TestServer(
+                context => Task.CompletedTask,
+                testContext,
+                serverOptions =>
+                {
+                    serverOptions.ListenLocalhost(
+                        5001,
+                        listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http3;
+                        }
+                    );
+                },
+                services =>
+                {
+                    services.AddSingleton<IMultiplexedConnectionListenerFactory>(
+                        multiplexedConnectionListenerFactory
+                    );
+                }
+            );
+        });
 
         Assert.False(bindCalled);
         Assert.Equal("HTTP/3 requires HTTPS.", ex.InnerException.InnerException.Message);
@@ -887,17 +869,15 @@ public class HttpsTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 listenOptions =>
                 {
-                    listenOptions.UseHttps(
-                        httpsOptions =>
+                    listenOptions.UseHttps(httpsOptions =>
+                    {
+                        httpsOptions.ServerCertificate = testCert;
+                        httpsOptions.OnAuthenticate = (connectionContext, authOptions) =>
                         {
-                            httpsOptions.ServerCertificate = testCert;
-                            httpsOptions.OnAuthenticate = (connectionContext, authOptions) =>
-                            {
-                                Assert.Same(testCert, authOptions.ServerCertificate);
-                                onAuthenticateCalled = true;
-                            };
-                        }
-                    );
+                            Assert.Same(testCert, authOptions.ServerCertificate);
+                            onAuthenticateCalled = true;
+                        };
+                    });
                 }
             )
         )
@@ -938,21 +918,19 @@ public class HttpsTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 listenOptions =>
                 {
-                    listenOptions.UseHttps(
-                        httpsOptions =>
+                    listenOptions.UseHttps(httpsOptions =>
+                    {
+                        httpsOptions.ServerCertificateSelector = (_, __) =>
+                            throw new NotImplementedException();
+                        httpsOptions.OnAuthenticate = (connectionContext, authOptions) =>
                         {
-                            httpsOptions.ServerCertificateSelector = (_, __) =>
-                                throw new NotImplementedException();
-                            httpsOptions.OnAuthenticate = (connectionContext, authOptions) =>
-                            {
-                                Assert.Null(authOptions.ServerCertificate);
-                                Assert.NotNull(authOptions.ServerCertificateSelectionCallback);
-                                authOptions.ServerCertificate = testCert;
-                                authOptions.ServerCertificateSelectionCallback = null;
-                                onAuthenticateCalled = true;
-                            };
-                        }
-                    );
+                            Assert.Null(authOptions.ServerCertificate);
+                            Assert.NotNull(authOptions.ServerCertificateSelectionCallback);
+                            authOptions.ServerCertificate = testCert;
+                            authOptions.ServerCertificateSelectionCallback = null;
+                            onAuthenticateCalled = true;
+                        };
+                    });
                 }
             )
         )

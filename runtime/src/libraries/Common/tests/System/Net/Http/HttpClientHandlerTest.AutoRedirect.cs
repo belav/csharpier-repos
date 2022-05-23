@@ -160,8 +160,8 @@ namespace System.Net.Http.Functional.Tests
                             async (redirServer, redirUrl) =>
                             {
                                 // Original URL will redirect to a different URL
-                                Task serverTask = origServer.AcceptConnectionAsync(
-                                    async connection =>
+                                Task serverTask =
+                                    origServer.AcceptConnectionAsync(async connection =>
                                     {
                                         // Send Connection: close so the client will close connection after request is sent,
                                         // meaning we can just read to the end to get the content
@@ -171,8 +171,7 @@ namespace System.Net.Http.Functional.Tests
                                         );
                                         connection.Socket.Shutdown(SocketShutdown.Send);
                                         await connection.ReadToEndAsync();
-                                    }
-                                );
+                                    });
 
                                 await Task.WhenAny(getResponseTask, serverTask);
                                 Assert.False(
@@ -184,8 +183,8 @@ namespace System.Net.Http.Functional.Tests
                                 // Redirected URL answers with success
                                 List<string> receivedRequest = null;
                                 string receivedContent = null;
-                                Task serverTask2 = redirServer.AcceptConnectionAsync(
-                                    async connection =>
+                                Task serverTask2 =
+                                    redirServer.AcceptConnectionAsync(async connection =>
                                     {
                                         // Send Connection: close so the client will close connection after request is sent,
                                         // meaning we can just read to the end to get the content
@@ -195,8 +194,7 @@ namespace System.Net.Http.Functional.Tests
                                             );
                                         connection.Socket.Shutdown(SocketShutdown.Send);
                                         receivedContent = await connection.ReadToEndAsync();
-                                    }
-                                );
+                                    });
 
                                 await TestHelper.WhenAllCompletedOrAnyFailed(
                                     getResponseTask,

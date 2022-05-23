@@ -13,13 +13,11 @@ namespace Microsoft.Win32.RegistryTests
         [Fact]
         public void ShoudThrowIfDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.GetValueNames();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.GetValueNames();
+            });
         }
 
         [Fact]

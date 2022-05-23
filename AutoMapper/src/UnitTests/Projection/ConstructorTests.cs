@@ -57,19 +57,17 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Destination>()
-                        .ForCtorParam("item", o => o.MapFrom(s => s.Items.FirstOrDefault()));
-                    cfg.CreateProjection<SourceItem, DestinationItem>()
-                        .ForCtorParam(
-                            "destinationValue",
-                            o => o.MapFrom(s => s.Values.FirstOrDefault())
-                        );
-                    cfg.CreateProjection<SourceValue, DestinationValue>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Destination>()
+                    .ForCtorParam("item", o => o.MapFrom(s => s.Items.FirstOrDefault()));
+                cfg.CreateProjection<SourceItem, DestinationItem>()
+                    .ForCtorParam(
+                        "destinationValue",
+                        o => o.MapFrom(s => s.Values.FirstOrDefault())
+                    );
+                cfg.CreateProjection<SourceValue, DestinationValue>();
+            });
 
         [Fact]
         public void Should_construct_correctly()
@@ -159,15 +157,13 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Users, UserDto>()
-                        .ForMember(d => d.AddressDto, e => e.MapFrom(s => s.FkAddress));
-                    cfg.CreateProjection<Addresses, AddressDto>()
-                        .ConstructUsing(a => new AddressDto(a.Id, a.Address));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Users, UserDto>()
+                    .ForMember(d => d.AddressDto, e => e.MapFrom(s => s.FkAddress));
+                cfg.CreateProjection<Addresses, AddressDto>()
+                    .ConstructUsing(a => new AddressDto(a.Id, a.Address));
+            });
 
         [Fact]
         public void Should_work() =>
@@ -206,14 +202,12 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AddIgnoreMapAttribute();
-                    cfg.CreateProjection<Source, Dest>()
-                        .ConstructUsing(src => new Dest(src.Value + 10));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AddIgnoreMapAttribute();
+                cfg.CreateProjection<Source, Dest>()
+                    .ConstructUsing(src => new Dest(src.Value + 10));
+            });
 
         protected override void Because_of()
         {
@@ -257,13 +251,11 @@ namespace AutoMapper.UnitTests.Projection
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<A, DtoA>();
-                    cfg.CreateProjection<B, DtoB>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<A, DtoA>();
+                cfg.CreateProjection<B, DtoB>();
+            });
 
         [Fact]
         public void Should_project_ok() =>

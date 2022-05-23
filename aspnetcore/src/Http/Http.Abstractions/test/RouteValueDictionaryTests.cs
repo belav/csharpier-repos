@@ -400,12 +400,10 @@ public class RouteValueDictionaryTests
             + $"case-insensitive comparisons.";
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var dictionary = new RouteValueDictionary(obj);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            var dictionary = new RouteValueDictionary(obj);
+        });
 
         // Ignoring case to make sure we're not testing reflection's ordering.
         Assert.Equal(message, exception.Message, ignoreCase: true);

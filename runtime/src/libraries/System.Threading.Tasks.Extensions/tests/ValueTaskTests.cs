@@ -940,38 +940,36 @@ namespace System.Threading.Tasks.Tests
         [InlineData(CtorMode.ValueTaskSource)]
         public async Task NonGeneric_Awaiter_ContinuesOnCapturedContext(CtorMode mode)
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+
+                var tsc = new TrackingSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(tsc);
+                try
                 {
-                    var tcs = new TaskCompletionSource(
-                        TaskCreationOptions.RunContinuationsAsynchronously
-                    );
+                    ValueTask t =
+                        mode == CtorMode.Result
+                            ? new ValueTask()
+                            : mode == CtorMode.Task
+                                ? new ValueTask(Task.CompletedTask)
+                                : new ValueTask(
+                                    ManualResetValueTaskSourceFactory.Completed(0, null),
+                                    0
+                                );
 
-                    var tsc = new TrackingSynchronizationContext();
-                    SynchronizationContext.SetSynchronizationContext(tsc);
-                    try
-                    {
-                        ValueTask t =
-                            mode == CtorMode.Result
-                                ? new ValueTask()
-                                : mode == CtorMode.Task
-                                    ? new ValueTask(Task.CompletedTask)
-                                    : new ValueTask(
-                                        ManualResetValueTaskSourceFactory.Completed(0, null),
-                                        0
-                                    );
-
-                        t.GetAwaiter().OnCompleted(() => tcs.SetResult());
-                    }
-                    finally
-                    {
-                        SynchronizationContext.SetSynchronizationContext(null);
-                    }
-
-                    await tcs.Task;
-                    Assert.Equal(1, tsc.Posts);
+                    t.GetAwaiter().OnCompleted(() => tcs.SetResult());
                 }
-            );
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
+
+                await tcs.Task;
+                Assert.Equal(1, tsc.Posts);
+            });
         }
 
         [Theory]
@@ -982,44 +980,40 @@ namespace System.Threading.Tasks.Tests
         [InlineData(CtorMode.ValueTaskSource, true)]
         public async Task Generic_Awaiter_ContinuesOnCapturedContext(CtorMode mode, bool sync)
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+
+                var tsc = new TrackingSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(tsc);
+                try
                 {
-                    var tcs = new TaskCompletionSource(
-                        TaskCreationOptions.RunContinuationsAsynchronously
-                    );
+                    ValueTask<int> t =
+                        mode == CtorMode.Result
+                            ? new ValueTask<int>(42)
+                            : mode == CtorMode.Task
+                                ? new ValueTask<int>(
+                                    sync ? Task.FromResult(42) : Task.Delay(1).ContinueWith(_ => 42)
+                                )
+                                : new ValueTask<int>(
+                                    sync
+                                        ? ManualResetValueTaskSourceFactory.Completed(42, null)
+                                        : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
+                                    0
+                                );
 
-                    var tsc = new TrackingSynchronizationContext();
-                    SynchronizationContext.SetSynchronizationContext(tsc);
-                    try
-                    {
-                        ValueTask<int> t =
-                            mode == CtorMode.Result
-                                ? new ValueTask<int>(42)
-                                : mode == CtorMode.Task
-                                    ? new ValueTask<int>(
-                                        sync
-                                            ? Task.FromResult(42)
-                                            : Task.Delay(1).ContinueWith(_ => 42)
-                                    )
-                                    : new ValueTask<int>(
-                                        sync
-                                            ? ManualResetValueTaskSourceFactory.Completed(42, null)
-                                            : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
-                                        0
-                                    );
-
-                        t.GetAwaiter().OnCompleted(() => tcs.SetResult());
-                    }
-                    finally
-                    {
-                        SynchronizationContext.SetSynchronizationContext(null);
-                    }
-
-                    await tcs.Task;
-                    Assert.Equal(1, tsc.Posts);
+                    t.GetAwaiter().OnCompleted(() => tcs.SetResult());
                 }
-            );
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
+
+                await tcs.Task;
+                Assert.Equal(1, tsc.Posts);
+            });
         }
 
         [Theory]
@@ -1039,42 +1033,40 @@ namespace System.Threading.Tasks.Tests
             bool sync
         )
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+
+                var tsc = new TrackingSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(tsc);
+                try
                 {
-                    var tcs = new TaskCompletionSource(
-                        TaskCreationOptions.RunContinuationsAsynchronously
-                    );
+                    ValueTask t =
+                        mode == CtorMode.Result
+                            ? new ValueTask()
+                            : mode == CtorMode.Task
+                                ? new ValueTask(sync ? Task.CompletedTask : Task.Delay(1))
+                                : new ValueTask(
+                                    sync
+                                        ? ManualResetValueTaskSourceFactory.Completed(0, null)
+                                        : ManualResetValueTaskSourceFactory.Delay(42, 0, null),
+                                    0
+                                );
 
-                    var tsc = new TrackingSynchronizationContext();
-                    SynchronizationContext.SetSynchronizationContext(tsc);
-                    try
-                    {
-                        ValueTask t =
-                            mode == CtorMode.Result
-                                ? new ValueTask()
-                                : mode == CtorMode.Task
-                                    ? new ValueTask(sync ? Task.CompletedTask : Task.Delay(1))
-                                    : new ValueTask(
-                                        sync
-                                            ? ManualResetValueTaskSourceFactory.Completed(0, null)
-                                            : ManualResetValueTaskSourceFactory.Delay(42, 0, null),
-                                        0
-                                    );
-
-                        t.ConfigureAwait(continueOnCapturedContext)
-                            .GetAwaiter()
-                            .OnCompleted(() => tcs.SetResult());
-                    }
-                    finally
-                    {
-                        SynchronizationContext.SetSynchronizationContext(null);
-                    }
-
-                    await tcs.Task;
-                    Assert.Equal(continueOnCapturedContext ? 1 : 0, tsc.Posts);
+                    t.ConfigureAwait(continueOnCapturedContext)
+                        .GetAwaiter()
+                        .OnCompleted(() => tcs.SetResult());
                 }
-            );
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
+
+                await tcs.Task;
+                Assert.Equal(continueOnCapturedContext ? 1 : 0, tsc.Posts);
+            });
         }
 
         [Theory]
@@ -1094,46 +1086,42 @@ namespace System.Threading.Tasks.Tests
             bool sync
         )
         {
-            await Task.Run(
-                async () =>
+            await Task.Run(async () =>
+            {
+                var tcs = new TaskCompletionSource(
+                    TaskCreationOptions.RunContinuationsAsynchronously
+                );
+
+                var tsc = new TrackingSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(tsc);
+                try
                 {
-                    var tcs = new TaskCompletionSource(
-                        TaskCreationOptions.RunContinuationsAsynchronously
-                    );
+                    ValueTask<int> t =
+                        mode == CtorMode.Result
+                            ? new ValueTask<int>(42)
+                            : mode == CtorMode.Task
+                                ? new ValueTask<int>(
+                                    sync ? Task.FromResult(42) : Task.Delay(1).ContinueWith(_ => 42)
+                                )
+                                : new ValueTask<int>(
+                                    sync
+                                        ? ManualResetValueTaskSourceFactory.Completed(42, null)
+                                        : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
+                                    0
+                                );
 
-                    var tsc = new TrackingSynchronizationContext();
-                    SynchronizationContext.SetSynchronizationContext(tsc);
-                    try
-                    {
-                        ValueTask<int> t =
-                            mode == CtorMode.Result
-                                ? new ValueTask<int>(42)
-                                : mode == CtorMode.Task
-                                    ? new ValueTask<int>(
-                                        sync
-                                            ? Task.FromResult(42)
-                                            : Task.Delay(1).ContinueWith(_ => 42)
-                                    )
-                                    : new ValueTask<int>(
-                                        sync
-                                            ? ManualResetValueTaskSourceFactory.Completed(42, null)
-                                            : ManualResetValueTaskSourceFactory.Delay(1, 42, null),
-                                        0
-                                    );
-
-                        t.ConfigureAwait(continueOnCapturedContext)
-                            .GetAwaiter()
-                            .OnCompleted(() => tcs.SetResult());
-                    }
-                    finally
-                    {
-                        SynchronizationContext.SetSynchronizationContext(null);
-                    }
-
-                    await tcs.Task;
-                    Assert.Equal(continueOnCapturedContext ? 1 : 0, tsc.Posts);
+                    t.ConfigureAwait(continueOnCapturedContext)
+                        .GetAwaiter()
+                        .OnCompleted(() => tcs.SetResult());
                 }
-            );
+                finally
+                {
+                    SynchronizationContext.SetSynchronizationContext(null);
+                }
+
+                await tcs.Task;
+                Assert.Equal(continueOnCapturedContext ? 1 : 0, tsc.Posts);
+            });
         }
 
         [Fact]
@@ -1589,12 +1577,10 @@ namespace System.Threading.Tasks.Tests
             void Validate(IValueTaskSource vts)
             {
                 var vt = new ValueTask(vts, 0);
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        vt.AsTask();
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    vt.AsTask();
+                });
             }
 
             Validate(
@@ -1628,12 +1614,10 @@ namespace System.Threading.Tasks.Tests
             void Validate(IValueTaskSource<int> vts)
             {
                 var vt = new ValueTask<int>(vts, 0);
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        vt.AsTask();
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    vt.AsTask();
+                });
             }
 
             Validate(
@@ -1750,13 +1734,11 @@ namespace System.Threading.Tasks.Tests
                 .GetType()
                 .GetField("_obj", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(vtBoxed, null);
-            Record.Exception(
-                () =>
-                {
-                    bool completed = ((ValueTask)vtBoxed).IsCompleted;
-                    ((ValueTask)vtBoxed).GetAwaiter().GetResult();
-                }
-            );
+            Record.Exception(() =>
+            {
+                bool completed = ((ValueTask)vtBoxed).IsCompleted;
+                ((ValueTask)vtBoxed).GetAwaiter().GetResult();
+            });
 
             // _obj is a Task but other fields are from result construction
             vtBoxed = new ValueTask();
@@ -1764,13 +1746,11 @@ namespace System.Threading.Tasks.Tests
                 .GetType()
                 .GetField("_obj", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(vtBoxed, Task.CompletedTask);
-            Record.Exception(
-                () =>
-                {
-                    bool completed = ((ValueTask)vtBoxed).IsCompleted;
-                    ((ValueTask)vtBoxed).GetAwaiter().GetResult();
-                }
-            );
+            Record.Exception(() =>
+            {
+                bool completed = ((ValueTask)vtBoxed).IsCompleted;
+                ((ValueTask)vtBoxed).GetAwaiter().GetResult();
+            });
 
             // _obj is an IValueTaskSource but other fields are from Task construction
             vtBoxed = new ValueTask(Task.CompletedTask);
@@ -1778,13 +1758,11 @@ namespace System.Threading.Tasks.Tests
                 .GetType()
                 .GetField("_obj", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(vtBoxed, ManualResetValueTaskSourceFactory.Completed(42));
-            Record.Exception(
-                () =>
-                {
-                    bool completed = ((ValueTask)vtBoxed).IsCompleted;
-                    ((ValueTask)vtBoxed).GetAwaiter().GetResult();
-                }
-            );
+            Record.Exception(() =>
+            {
+                bool completed = ((ValueTask)vtBoxed).IsCompleted;
+                ((ValueTask)vtBoxed).GetAwaiter().GetResult();
+            });
         }
 
         [Fact]
@@ -1800,13 +1778,11 @@ namespace System.Threading.Tasks.Tests
                 .GetType()
                 .GetField("_obj", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(vtBoxed, null);
-            Record.Exception(
-                () =>
-                {
-                    bool completed = ((ValueTask)vtBoxed).IsCompleted;
-                    ((ValueTask)vtBoxed).GetAwaiter().GetResult();
-                }
-            );
+            Record.Exception(() =>
+            {
+                bool completed = ((ValueTask)vtBoxed).IsCompleted;
+                ((ValueTask)vtBoxed).GetAwaiter().GetResult();
+            });
 
             // _obj is a Task but other fields are from result construction
             vtBoxed = new ValueTask<int>(42);
@@ -1814,13 +1790,11 @@ namespace System.Threading.Tasks.Tests
                 .GetType()
                 .GetField("_obj", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(vtBoxed, Task.FromResult(42));
-            Record.Exception(
-                () =>
-                {
-                    bool completed = ((ValueTask)vtBoxed).IsCompleted;
-                    ((ValueTask)vtBoxed).GetAwaiter().GetResult();
-                }
-            );
+            Record.Exception(() =>
+            {
+                bool completed = ((ValueTask)vtBoxed).IsCompleted;
+                ((ValueTask)vtBoxed).GetAwaiter().GetResult();
+            });
 
             // _obj is an IValueTaskSource but other fields are from Task construction
             vtBoxed = new ValueTask<int>(Task.FromResult(42));
@@ -1828,13 +1802,11 @@ namespace System.Threading.Tasks.Tests
                 .GetType()
                 .GetField("_obj", BindingFlags.NonPublic | BindingFlags.Instance)
                 .SetValue(vtBoxed, ManualResetValueTaskSourceFactory.Completed(42));
-            Record.Exception(
-                () =>
-                {
-                    bool completed = ((ValueTask)vtBoxed).IsCompleted;
-                    ((ValueTask)vtBoxed).GetAwaiter().GetResult();
-                }
-            );
+            Record.Exception(() =>
+            {
+                bool completed = ((ValueTask)vtBoxed).IsCompleted;
+                ((ValueTask)vtBoxed).GetAwaiter().GetResult();
+            });
         }
 
         [Fact]

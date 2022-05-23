@@ -82,12 +82,10 @@ internal class ActionSelectionTable<TItem>
             // we don't use version for endpoints
             version: 0,
             // Exclude RouteEndpoints - we only process inert endpoints here.
-            items: endpoints.Where(
-                e =>
-                {
-                    return e.GetType() == typeof(Endpoint);
-                }
-            ),
+            items: endpoints.Where(e =>
+            {
+                return e.GetType() == typeof(Endpoint);
+            }),
             getRouteKeys: e => e.Metadata.GetMetadata<ActionDescriptor>()?.RouteValues?.Keys,
             getRouteValue: (e, key) =>
             {

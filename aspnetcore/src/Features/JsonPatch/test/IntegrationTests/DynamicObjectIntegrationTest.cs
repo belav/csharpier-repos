@@ -62,12 +62,10 @@ public class DynamicObjectIntegrationTest
         patchDocument.Add("DynamicProperty/OtherProperty/IntProperty", 1);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(nestedObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(nestedObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -167,12 +165,10 @@ public class DynamicObjectIntegrationTest
         patchDocument.Remove("Simpleobject/stringProperty");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(dynamicTestObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(dynamicTestObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -234,12 +230,10 @@ public class DynamicObjectIntegrationTest
         patchDocument.Test("Nested/IntegerList/0", 2);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(dynamicTestObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(dynamicTestObject);
+        });
 
         // Assert
         Assert.Equal(

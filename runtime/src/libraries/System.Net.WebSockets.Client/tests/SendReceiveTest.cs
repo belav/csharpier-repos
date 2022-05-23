@@ -698,24 +698,20 @@ namespace System.Net.WebSockets.Client.Tests
                     );
 
                     // Start listening for incoming connections on the server side.
-                    Task acceptTask = server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Complete the WebSocket upgrade. After this is done, the client-side ConnectAsync should complete.
-                            Assert.NotNull(
-                                await LoopbackHelper.WebSocketHandshakeAsync(connection)
-                            );
+                    Task acceptTask = server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Complete the WebSocket upgrade. After this is done, the client-side ConnectAsync should complete.
+                        Assert.NotNull(await LoopbackHelper.WebSocketHandshakeAsync(connection));
 
-                            // Wait for client-side ConnectAsync to complete and for a pending ReceiveAsync to be posted.
-                            await pendingReceiveAsyncPosted.Task.WaitAsync(
-                                TimeSpan.FromMilliseconds(TimeOutMilliseconds)
-                            );
+                        // Wait for client-side ConnectAsync to complete and for a pending ReceiveAsync to be posted.
+                        await pendingReceiveAsyncPosted.Task.WaitAsync(
+                            TimeSpan.FromMilliseconds(TimeOutMilliseconds)
+                        );
 
-                            // Close the underlying connection prematurely (without sending a WebSocket Close frame).
-                            connection.Socket.Shutdown(SocketShutdown.Both);
-                            connection.Socket.Close();
-                        }
-                    );
+                        // Close the underlying connection prematurely (without sending a WebSocket Close frame).
+                        connection.Socket.Shutdown(SocketShutdown.Both);
+                        connection.Socket.Close();
+                    });
 
                     // Initiate a connection attempt.
                     var cts = new CancellationTokenSource(TimeOutMilliseconds);

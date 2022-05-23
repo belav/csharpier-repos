@@ -53,19 +53,12 @@ namespace System.Web.Helpers.AntiXsrf.Test
                 ex.Message
             );
 
-            ex = Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    string dummy1,
-                        dummy2;
-                    worker.GetTokens(
-                        mockHttpContext.Object,
-                        "cookie-token",
-                        out dummy1,
-                        out dummy2
-                    );
-                }
-            );
+            ex = Assert.Throws<InvalidOperationException>(() =>
+            {
+                string dummy1,
+                    dummy2;
+                worker.GetTokens(mockHttpContext.Object, "cookie-token", out dummy1, out dummy2);
+            });
             Assert.Equal(
                 @"The anti-forgery system has the configuration value AntiForgeryConfig.RequireSsl = true, but the current request is not an SSL request.",
                 ex.Message

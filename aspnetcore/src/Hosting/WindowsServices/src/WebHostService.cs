@@ -47,15 +47,13 @@ public class WebHostService : ServiceBase
         // race conditions.
         _host.Services
             .GetRequiredService<IHostApplicationLifetime>()
-            .ApplicationStopping.Register(
-                () =>
+            .ApplicationStopping.Register(() =>
+            {
+                if (!_stopRequestedByWindows)
                 {
-                    if (!_stopRequestedByWindows)
-                    {
-                        Stop();
-                    }
+                    Stop();
                 }
-            );
+            });
     }
 
     /// <inheritdoc />

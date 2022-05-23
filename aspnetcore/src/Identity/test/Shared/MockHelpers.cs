@@ -98,15 +98,13 @@ public static class MockHelpers
 
     public static ILookupNormalizer MockLookupNormalizer()
     {
-        var normalizerFunc = new Func<string, string>(
-            i =>
-            {
-                if (i == null)
-                    return null;
-                else
-                    return Convert.ToBase64String(Encoding.UTF8.GetBytes(i)).ToUpperInvariant();
-            }
-        );
+        var normalizerFunc = new Func<string, string>(i =>
+        {
+            if (i == null)
+                return null;
+            else
+                return Convert.ToBase64String(Encoding.UTF8.GetBytes(i)).ToUpperInvariant();
+        });
         var lookupNormalizer = new Mock<ILookupNormalizer>();
         lookupNormalizer.Setup(i => i.NormalizeName(It.IsAny<string>())).Returns(normalizerFunc);
         lookupNormalizer.Setup(i => i.NormalizeEmail(It.IsAny<string>())).Returns(normalizerFunc);

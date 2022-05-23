@@ -54,40 +54,38 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         ) : base(threadingContext, assertIsForeground: false)
         {
             _editorAdaptersFactoryService = editorAdaptersFactoryService;
-            ThreadingContext.RunWithShutdownBlockAsync(
-                async cancellationToken =>
-                {
-                    await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        cancellationToken
-                    );
+            ThreadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
+            {
+                await ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    cancellationToken
+                );
 
-                    var monitorSelectionService = (IVsMonitorSelection?)
-                        await asyncServiceProvider
-                            .GetServiceAsync(typeof(SVsShellMonitorSelection))
-                            .ConfigureAwait(true);
-                    Assumes.Present(monitorSelectionService);
+                var monitorSelectionService = (IVsMonitorSelection?)
+                    await asyncServiceProvider
+                        .GetServiceAsync(typeof(SVsShellMonitorSelection))
+                        .ConfigureAwait(true);
+                Assumes.Present(monitorSelectionService);
 
-                    // No need to track windows if we are shutting down
-                    cancellationToken.ThrowIfCancellationRequested();
+                // No need to track windows if we are shutting down
+                cancellationToken.ThrowIfCancellationRequested();
 
-                    if (
-                        ErrorHandler.Succeeded(
-                            monitorSelectionService.GetCurrentElementValue(
-                                (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
-                                out var value
-                            )
+                if (
+                    ErrorHandler.Succeeded(
+                        monitorSelectionService.GetCurrentElementValue(
+                            (uint)VSConstants.VSSELELEMID.SEID_DocumentFrame,
+                            out var value
                         )
                     )
+                )
+                {
+                    if (value is IVsWindowFrame windowFrame)
                     {
-                        if (value is IVsWindowFrame windowFrame)
-                        {
-                            TrackNewActiveWindowFrame(windowFrame);
-                        }
+                        TrackNewActiveWindowFrame(windowFrame);
                     }
-
-                    monitorSelectionService.AdviseSelectionEvents(this, out var _);
                 }
-            );
+
+                monitorSelectionService.AdviseSelectionEvents(this, out var _);
+            });
         }
 
         /// <summary>

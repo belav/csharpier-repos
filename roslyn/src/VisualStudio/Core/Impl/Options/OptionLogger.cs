@@ -36,14 +36,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             object currentValue
         )
         {
-            return KeyValueLogMessage.Create(
-                m =>
-                {
-                    m[Name] = optionKey.Option.Name;
-                    m[Language] = optionKey.Language ?? All;
-                    m[Change] = CreateOptionValue(oldValue, currentValue);
-                }
-            );
+            return KeyValueLogMessage.Create(m =>
+            {
+                m[Name] = optionKey.Option.Name;
+                m[Language] = optionKey.Language ?? All;
+                m[Change] = CreateOptionValue(oldValue, currentValue);
+            });
         }
 
         private static string CreateOptionValue(object oldValue, object currentValue)

@@ -556,12 +556,10 @@ namespace System.Security.AccessControl.Tests
             RawAcl rawAcl = null;
 
             //case 1, rawAcl = null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                systemAcl = new SystemAcl(isContainer, isDS, rawAcl);
+            });
         }
     }
 }

@@ -116,30 +116,28 @@ namespace System.Net.Http.Functional.Tests
 
                     await TestHelper.WhenAllCompletedOrAnyFailed(
                         client.GetStringAsync(url),
-                        server.AcceptConnectionAsync(
-                            async connection =>
+                        server.AcceptConnectionAsync(async connection =>
+                        {
+                            SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
+                            if (serverExpectsClientCertificate)
                             {
-                                SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
-                                if (serverExpectsClientCertificate)
-                                {
-                                    _output.WriteLine(
-                                        "Client cert: {0}",
-                                        new X509Certificate2(
-                                            sslStream.RemoteCertificate.Export(X509ContentType.Cert)
-                                        ).GetNameInfo(X509NameType.SimpleName, false)
-                                    );
-                                    Assert.Equal(cert, sslStream.RemoteCertificate);
-                                }
-                                else
-                                {
-                                    Assert.Null(sslStream.RemoteCertificate);
-                                }
-
-                                await connection.ReadRequestHeaderAndSendResponseAsync(
-                                    additionalHeaders: "Connection: close\r\n"
+                                _output.WriteLine(
+                                    "Client cert: {0}",
+                                    new X509Certificate2(
+                                        sslStream.RemoteCertificate.Export(X509ContentType.Cert)
+                                    ).GetNameInfo(X509NameType.SimpleName, false)
                                 );
+                                Assert.Equal(cert, sslStream.RemoteCertificate);
                             }
-                        )
+                            else
+                            {
+                                Assert.Null(sslStream.RemoteCertificate);
+                            }
+
+                            await connection.ReadRequestHeaderAndSendResponseAsync(
+                                additionalHeaders: "Connection: close\r\n"
+                            );
+                        })
                     );
                 },
                 options
@@ -166,17 +164,15 @@ namespace System.Net.Http.Functional.Tests
             {
                 await TestHelper.WhenAllCompletedOrAnyFailed(
                     client.GetStringAsync(url),
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
-                            Assert.Equal(cert, sslStream.RemoteCertificate);
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
+                        Assert.Equal(cert, sslStream.RemoteCertificate);
 
-                            await connection.ReadRequestHeaderAndSendResponseAsync(
-                                additionalHeaders: "Connection: close\r\n"
-                            );
-                        }
-                    )
+                        await connection.ReadRequestHeaderAndSendResponseAsync(
+                            additionalHeaders: "Connection: close\r\n"
+                        );
+                    })
                 );
             }
             ;
@@ -238,13 +234,11 @@ namespace System.Net.Http.Functional.Tests
                     async server =>
                     {
                         Task clientTask = client.GetStringAsync(server.Address);
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            }
-                        );
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            SslStream sslStream = Assert.IsType<SslStream>(connection.Stream);
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        });
 
                         await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed();
                     },

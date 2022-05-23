@@ -6,17 +6,15 @@ namespace AutoMapper.UnitTests.Bug
     public class SettersInBaseClasses : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, GrandGrandChild>();
-                    cfg.CreateMap<Source, GrandChild>();
-                    cfg.CreateMap<Source, Child>();
-                    cfg.CreateMap<Source, GrandGrandChildPrivate>();
-                    cfg.CreateMap<Source, GrandChildPrivate>();
-                    cfg.CreateMap<Source, ChildPrivate>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, GrandGrandChild>();
+                cfg.CreateMap<Source, GrandChild>();
+                cfg.CreateMap<Source, Child>();
+                cfg.CreateMap<Source, GrandGrandChildPrivate>();
+                cfg.CreateMap<Source, GrandChildPrivate>();
+                cfg.CreateMap<Source, ChildPrivate>();
+            });
 
         [Fact]
         public void PublicSetterInParentWorks()

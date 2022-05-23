@@ -84,13 +84,11 @@ class B
                 for (int j = 0; j < tasks.Length; j++)
                 {
                     int startAt = i + j + 1;
-                    tasks[j] = Task.Run(
-                        () =>
-                        {
-                            MatchAll(matcher, members, startAt);
-                            Thread.Sleep(10);
-                        }
-                    );
+                    tasks[j] = Task.Run(() =>
+                    {
+                        MatchAll(matcher, members, startAt);
+                        Thread.Sleep(10);
+                    });
                 }
                 Task.WaitAll(tasks);
             }

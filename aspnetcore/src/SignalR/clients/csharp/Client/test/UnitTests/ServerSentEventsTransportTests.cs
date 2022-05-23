@@ -464,14 +464,12 @@ public class ServerSentEventsTransportTests : VerifiableLoggedTest
                                         It.IsAny<CancellationToken>()
                                     )
                             )
-                            .Returns(
-                                async () =>
-                                {
-                                    await readTcs.Task;
+                            .Returns(async () =>
+                            {
+                                await readTcs.Task;
 
-                                    throw new TaskCanceledException();
-                                }
-                            );
+                                throw new TaskCanceledException();
+                            });
                         mockStream.Setup(s => s.CanRead).Returns(true);
                         return new HttpResponseMessage
                         {

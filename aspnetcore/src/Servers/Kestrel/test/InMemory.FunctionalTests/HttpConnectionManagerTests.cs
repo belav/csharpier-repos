@@ -36,18 +36,14 @@ public class HttpConnectionManagerTests : LoggedTest
         // Use a custom logger for callback instead of TestSink because TestSink keeps references
         // to types when logging, prevents garbage collection, and makes the test fail.
         factory.AddProvider(
-            new CallbackLoggerProvider(
-                eventId =>
+            new CallbackLoggerProvider(eventId =>
+            {
+                if (eventId.Name == "ApplicationNeverCompleted")
                 {
-                    if (eventId.Name == "ApplicationNeverCompleted")
-                    {
-                        Logger.LogInformation(
-                            "Releasing ApplicationNeverCompleted log wait handle."
-                        );
-                        logWh.Release();
-                    }
+                    Logger.LogInformation("Releasing ApplicationNeverCompleted log wait handle.");
+                    logWh.Release();
                 }
-            )
+            })
         );
 
         var testContext = new TestServiceContext(factory);

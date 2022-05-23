@@ -1372,15 +1372,13 @@ namespace System.Data.Tests
         )]
         public void ConflictAttributeDataTable()
         {
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    // attribute "data" becomes DataTable, and when column "data"
-                    // appears, it cannot be DataColumn, since the name is
-                    // already allocated for DataTable.
-                    DataSet ds = GetDataSet(_xml21, null);
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                // attribute "data" becomes DataTable, and when column "data"
+                // appears, it cannot be DataColumn, since the name is
+                // already allocated for DataTable.
+                DataSet ds = GetDataSet(_xml21, null);
+            });
         }
 
         [ConditionalFact(
@@ -1389,20 +1387,18 @@ namespace System.Data.Tests
         )]
         public void ConflictExistingPrimaryKey()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    // <wrong>The 'col' DataTable tries to create another primary key (and fails)</wrong> The data violates key constraint.
-                    var ds = new DataSet();
-                    ds.Tables.Add(new DataTable("table"));
-                    DataColumn c = new DataColumn("pk");
-                    ds.Tables[0].Columns.Add(c);
-                    ds.Tables[0].PrimaryKey = new DataColumn[] { c };
-                    XmlTextReader xtr = new XmlTextReader(_xml22, XmlNodeType.Document, null);
-                    xtr.Read();
-                    ds.ReadXml(xtr, XmlReadMode.InferSchema);
-                }
-            );
+            Assert.Throws<ConstraintException>(() =>
+            {
+                // <wrong>The 'col' DataTable tries to create another primary key (and fails)</wrong> The data violates key constraint.
+                var ds = new DataSet();
+                ds.Tables.Add(new DataTable("table"));
+                DataColumn c = new DataColumn("pk");
+                ds.Tables[0].Columns.Add(c);
+                ds.Tables[0].PrimaryKey = new DataColumn[] { c };
+                XmlTextReader xtr = new XmlTextReader(_xml22, XmlNodeType.Document, null);
+                xtr.Read();
+                ds.ReadXml(xtr, XmlReadMode.InferSchema);
+            });
         }
 
         [Fact]

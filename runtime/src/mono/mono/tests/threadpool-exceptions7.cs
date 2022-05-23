@@ -13,20 +13,16 @@ class Test
     static void OtherDomain()
     {
         AppDomain domain = AppDomain.CreateDomain("test");
-        ThreadPool.QueueUserWorkItem(
-            unused =>
+        ThreadPool.QueueUserWorkItem(unused =>
+        {
+            domain.DoCallBack(() =>
             {
-                domain.DoCallBack(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData("key", "checked");
+                AppDomain.CurrentDomain.SetData("key", "checked");
 
-                        // This will get a ThreadAbortedException
-                        Thread.Sleep(10000);
-                    }
-                );
-            }
-        );
+                // This will get a ThreadAbortedException
+                Thread.Sleep(10000);
+            });
+        });
 
         if (!SpinWait.SpinUntil(() => domain.GetData("key") as string == "checked", 10000))
             Environment.Exit(4);

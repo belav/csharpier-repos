@@ -28,13 +28,11 @@ namespace AutoMapper.UnitTests.Bug
         public interface ISome { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Thing, ThingDto>();
-                    cfg.CreateMap<IItem, ItemDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Thing, ThingDto>();
+                cfg.CreateMap<IItem, ItemDto>();
+            });
 
         protected override void Because_of()
         {

@@ -39,13 +39,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(d => d.Json, o => o.MapFrom(s => new JObject(s.JsonString)));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.Json, o => o.MapFrom(s => new JObject(s.JsonString)));
+            });
 
         protected override void Because_of()
         {
@@ -171,11 +169,9 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
     }
 }

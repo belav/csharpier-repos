@@ -38,13 +38,11 @@ public static class ObservableExtensions
         var abortRegistration = connectionAborted.Register(() => channel.Writer.TryComplete());
 
         // Complete the subscription on the reader completing
-        channel.Reader.Completion.ContinueWith(
-            task =>
-            {
-                disposable.Dispose();
-                abortRegistration.Dispose();
-            }
-        );
+        channel.Reader.Completion.ContinueWith(task =>
+        {
+            disposable.Dispose();
+            abortRegistration.Dispose();
+        });
 
         return channel.Reader;
     }

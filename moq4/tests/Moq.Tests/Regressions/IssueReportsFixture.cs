@@ -1042,13 +1042,11 @@ namespace Moq.Tests.Regressions
             {
                 var infiniteLoopTimeout = TimeSpan.FromSeconds(5);
 
-                var timedOut = !Task.Run(
-                        () =>
-                        {
-                            var fn = Mock.Of<Func<int>>(f => f() == 42);
-                            Assert.Equal(42, fn());
-                        }
-                    )
+                var timedOut = !Task.Run(() =>
+                    {
+                        var fn = Mock.Of<Func<int>>(f => f() == 42);
+                        Assert.Equal(42, fn());
+                    })
                     .Wait(infiniteLoopTimeout);
 
                 Assert.False(timedOut);
@@ -2046,12 +2044,10 @@ namespace Moq.Tests.Regressions
 
                 var triggerObjectCreation = mockDbContext.Object;
 
-                var exception = Record.Exception(
-                    () =>
-                    {
-                        mockDbContext.Verify(m => m.SaveChanges(), Times.Once);
-                    }
-                );
+                var exception = Record.Exception(() =>
+                {
+                    mockDbContext.Verify(m => m.SaveChanges(), Times.Once);
+                });
 
                 //Should have thrown verify exception because no calls were made
                 Assert.IsType<MockException>(exception);
@@ -3341,25 +3337,21 @@ namespace Moq.Tests.Regressions
             [Fact]
             public void Setup_ToString_before_Name()
             {
-                this.TestImpl(
-                    contentMock =>
-                    {
-                        contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
-                        contentMock.Setup(c => c.Name);
-                    }
-                );
+                this.TestImpl(contentMock =>
+                {
+                    contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
+                    contentMock.Setup(c => c.Name);
+                });
             }
 
             [Fact]
             public void Setup_ToString_after_Name()
             {
-                this.TestImpl(
-                    contentMock =>
-                    {
-                        contentMock.Setup(c => c.Name);
-                        contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
-                    }
-                );
+                this.TestImpl(contentMock =>
+                {
+                    contentMock.Setup(c => c.Name);
+                    contentMock.Setup(c => c.ToString()).Returns(toStringReturnValue);
+                });
             }
 
             private void TestImpl(Action<Mock<IContent>> setup)

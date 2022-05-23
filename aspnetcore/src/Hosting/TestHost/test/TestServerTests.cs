@@ -31,21 +31,17 @@ public class TestServerTests
     public async Task GenericRawCreateAndStartHost_GetTestServer()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<IServer>(
-                                    serviceProvider => new TestServer(serviceProvider)
-                                );
-                            }
-                        )
-                        .Configure(app => { });
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<IServer>(
+                            serviceProvider => new TestServer(serviceProvider)
+                        );
+                    })
+                    .Configure(app => { });
+            })
             .Build();
         await host.StartAsync();
 
@@ -57,12 +53,10 @@ public class TestServerTests
     public async Task GenericCreateAndStartHost_GetTestServer()
     {
         using var host = await new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder.UseTestServer().Configure(app => { });
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder.UseTestServer().Configure(app => { });
+            })
             .StartAsync();
 
         var response = await host.GetTestServer().CreateClient().GetAsync("/");
@@ -73,12 +67,10 @@ public class TestServerTests
     public async Task GenericCreateAndStartHost_GetTestClient()
     {
         using var host = await new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder.UseTestServer().Configure(app => { });
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder.UseTestServer().Configure(app => { });
+            })
             .StartAsync();
 
         var response = await host.GetTestClient().GetAsync("/");
@@ -89,12 +81,10 @@ public class TestServerTests
     public async Task UseTestServerRegistersNoopHostLifetime()
     {
         using var host = await new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder.UseTestServer().Configure(app => { });
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder.UseTestServer().Configure(app => { });
+            })
             .StartAsync();
 
         Assert.IsType<NoopHostLifetime>(host.Services.GetService<IHostLifetime>());
@@ -120,12 +110,10 @@ public class TestServerTests
     [Fact]
     public void DoesNotCaptureStartupErrorsByDefault()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
-            {
-                throw new InvalidOperationException();
-            }
-        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            throw new InvalidOperationException();
+        });
 
         Assert.Throws<InvalidOperationException>(() => new TestServer(builder));
     }
@@ -199,12 +187,10 @@ public class TestServerTests
     {
         var builder = new WebHostBuilder()
             .CaptureStartupErrors(true)
-            .Configure(
-                app =>
-                {
-                    throw new InvalidOperationException();
-                }
-            );
+            .Configure(app =>
+            {
+                throw new InvalidOperationException();
+            });
 
         // Does not throw
         new TestServer(builder);
@@ -216,12 +202,10 @@ public class TestServerTests
         var testService = new TestService();
         var builder = new WebHostBuilder()
             .Configure(app => { })
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton(testService);
-                }
-            );
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton(testService);
+            });
         var server = new TestServer(builder);
 
         Assert.Equal(testService, server.Host.Services.GetRequiredService<TestService>());
@@ -230,19 +214,15 @@ public class TestServerTests
     [Fact]
     public async Task RequestServicesAutoCreated()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(
-                    context =>
-                    {
-                        return context.Response.WriteAsync(
-                            "RequestServices:" + (context.RequestServices != null)
-                        );
-                    }
+                return context.Response.WriteAsync(
+                    "RequestServices:" + (context.RequestServices != null)
                 );
-            }
-        );
+            });
+        });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -252,20 +232,16 @@ public class TestServerTests
     [Fact]
     public async Task DispoingTheRequestBodyDoesNotDisposeClientStreams()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async context =>
             {
-                app.Run(
-                    async context =>
-                    {
-                        using (var sr = new StreamReader(context.Request.Body))
-                        {
-                            await context.Response.WriteAsync(await sr.ReadToEndAsync());
-                        }
-                    }
-                );
-            }
-        );
+                using (var sr = new StreamReader(context.Request.Body))
+                {
+                    await context.Response.WriteAsync(await sr.ReadToEndAsync());
+                }
+            });
+        });
         var server = new TestServer(builder);
 
         var stream = new ThrowOnDisposeStream();
@@ -289,14 +265,12 @@ public class TestServerTests
         public void Configure(IApplicationBuilder app)
         {
             var applicationServices = app.ApplicationServices;
-            app.Run(
-                async context =>
-                {
-                    await context.Response.WriteAsync(
-                        "ApplicationServicesEqual:" + (applicationServices == Services)
-                    );
-                }
-            );
+            app.Run(async context =>
+            {
+                await context.Response.WriteAsync(
+                    "ApplicationServicesEqual:" + (applicationServices == Services)
+                );
+            });
         }
     }
 
@@ -316,17 +290,15 @@ public class TestServerTests
         var url = "http://localhost:8000/appName/serviceName";
         var builder = new WebHostBuilder()
             .UseUrls(url)
-            .Configure(
-                applicationBuilder =>
-                {
-                    var serverAddressesFeature =
-                        applicationBuilder.ServerFeatures.Get<IServerAddressesFeature>();
-                    Assert.Contains(
-                        serverAddressesFeature.Addresses,
-                        s => string.Equals(s, url, StringComparison.Ordinal)
-                    );
-                }
-            );
+            .Configure(applicationBuilder =>
+            {
+                var serverAddressesFeature =
+                    applicationBuilder.ServerFeatures.Get<IServerAddressesFeature>();
+                Assert.Contains(
+                    serverAddressesFeature.Addresses,
+                    s => string.Equals(s, url, StringComparison.Ordinal)
+                );
+            });
 
         var featureCollection = new FeatureCollection();
         featureCollection.Set<IServerAddressesFeature>(new ServerAddressesFeature());
@@ -381,15 +353,13 @@ public class TestServerTests
         // Arrange
         var testService = new TestService();
         using var host = await new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder
-                        .UseTestServer()
-                        .ConfigureServices(services => services.AddSingleton(testService))
-                        .Configure(_ => { });
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services => services.AddSingleton(testService))
+                    .Configure(_ => { });
+            })
             .StartAsync();
 
         // Act
@@ -406,21 +376,17 @@ public class TestServerTests
         // Arrange
         var baseAddress = new Uri("http://localhost/test");
         using var host = await new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder
-                        .UseTestServer(
-                            options =>
-                            {
-                                options.AllowSynchronousIO = true;
-                                options.PreserveExecutionContext = true;
-                                options.BaseAddress = baseAddress;
-                            }
-                        )
-                        .Configure(_ => { });
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder
+                    .UseTestServer(options =>
+                    {
+                        options.AllowSynchronousIO = true;
+                        options.PreserveExecutionContext = true;
+                        options.BaseAddress = baseAddress;
+                    })
+                    .Configure(_ => { });
+            })
             .StartAsync();
 
         // Act
@@ -473,24 +439,18 @@ public class TestServerTests
     public async Task ExistingRequestServicesWillNotBeReplaced()
     {
         var builder = new WebHostBuilder()
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    app.Run(
-                        context =>
-                        {
-                            var service = context.RequestServices.GetService<TestService>();
-                            return context.Response.WriteAsync("Found:" + (service != null));
-                        }
-                    );
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddTransient<IStartupFilter, RequestServicesFilter>();
-                }
-            );
+                    var service = context.RequestServices.GetService<TestService>();
+                    return context.Response.WriteAsync("Found:" + (service != null));
+                });
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddTransient<IStartupFilter, RequestServicesFilter>();
+            });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -500,23 +460,19 @@ public class TestServerTests
     [Fact]
     public async Task CanSetCustomServiceProvider()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(
-                    context =>
-                    {
-                        context.RequestServices = new ServiceCollection()
-                            .AddTransient<TestService>()
-                            .BuildServiceProvider();
+                context.RequestServices = new ServiceCollection()
+                    .AddTransient<TestService>()
+                    .BuildServiceProvider();
 
-                        var s = context.RequestServices.GetRequiredService<TestService>();
+                var s = context.RequestServices.GetRequiredService<TestService>();
 
-                        return context.Response.WriteAsync("Success");
-                    }
-                );
-            }
-        );
+                return context.Response.WriteAsync("Success");
+            });
+        });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -559,26 +515,20 @@ public class TestServerTests
     {
         var appServices = new ServiceCollection().BuildServiceProvider();
         var builder = new WebHostBuilder()
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    app.Run(
-                        context =>
-                        {
-                            Assert.Equal(appServices, context.RequestServices);
-                            return context.Response.WriteAsync("Success");
-                        }
-                    );
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<IStartupFilter>(
-                        new ReplaceServiceProvidersFeatureFilter(appServices, appServices)
-                    );
-                }
-            );
+                    Assert.Equal(appServices, context.RequestServices);
+                    return context.Response.WriteAsync("Success");
+                });
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<IStartupFilter>(
+                    new ReplaceServiceProvidersFeatureFilter(appServices, appServices)
+                );
+            });
         var server = new TestServer(builder);
 
         var result = await server.CreateClient().GetStringAsync("/path");
@@ -611,24 +561,18 @@ public class TestServerTests
     public async Task WillReplaceServiceProviderFeatureWithNullRequestServices()
     {
         var builder = new WebHostBuilder()
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    app.Run(
-                        context =>
-                        {
-                            Assert.Null(context.RequestServices);
-                            return context.Response.WriteAsync("Success");
-                        }
-                    );
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddTransient<IStartupFilter, NullServiceProvidersFeatureFilter>();
-                }
-            );
+                    Assert.Null(context.RequestServices);
+                    return context.Response.WriteAsync("Success");
+                });
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddTransient<IStartupFilter, NullServiceProvidersFeatureFilter>();
+            });
         var server = new TestServer(builder);
 
         var result = await server.CreateClient().GetStringAsync("/path");
@@ -638,20 +582,14 @@ public class TestServerTests
     [Fact]
     public async Task CanAccessLogger()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(
-                    context =>
-                    {
-                        var logger = app.ApplicationServices.GetRequiredService<
-                            ILogger<HttpContext>
-                        >();
-                        return context.Response.WriteAsync("FoundLogger:" + (logger != null));
-                    }
-                );
-            }
-        );
+                var logger = app.ApplicationServices.GetRequiredService<ILogger<HttpContext>>();
+                return context.Response.WriteAsync("FoundLogger:" + (logger != null));
+            });
+        });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -662,27 +600,21 @@ public class TestServerTests
     public async Task CanAccessHttpContext()
     {
         var builder = new WebHostBuilder()
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    app.Run(
-                        context =>
-                        {
-                            var accessor =
-                                app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
-                            return context.Response.WriteAsync(
-                                "HasContext:" + (accessor.HttpContext != null)
-                            );
-                        }
+                    var accessor =
+                        app.ApplicationServices.GetRequiredService<IHttpContextAccessor>();
+                    return context.Response.WriteAsync(
+                        "HasContext:" + (accessor.HttpContext != null)
                     );
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-                }
-            );
+                });
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+            });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -703,28 +635,21 @@ public class TestServerTests
     public async Task CanAddNewHostServices()
     {
         var builder = new WebHostBuilder()
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                app.Run(context =>
                 {
-                    app.Run(
-                        context =>
-                        {
-                            var accessor =
-                                app.ApplicationServices.GetRequiredService<ContextHolder>();
-                            return context.Response.WriteAsync(
-                                "HasContext:" + (accessor.Accessor.HttpContext != null)
-                            );
-                        }
+                    var accessor = app.ApplicationServices.GetRequiredService<ContextHolder>();
+                    return context.Response.WriteAsync(
+                        "HasContext:" + (accessor.Accessor.HttpContext != null)
                     );
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
-                    services.AddSingleton<ContextHolder>();
-                }
-            );
+                });
+            })
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<IHttpContextAccessor, HttpContextAccessor>();
+                services.AddSingleton<ContextHolder>();
+            });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -734,17 +659,13 @@ public class TestServerTests
     [Fact]
     public async Task CreateInvokesApp()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(
-                    context =>
-                    {
-                        return context.Response.WriteAsync("CreateInvokesApp");
-                    }
-                );
-            }
-        );
+                return context.Response.WriteAsync("CreateInvokesApp");
+            });
+        });
         var server = new TestServer(builder);
 
         string result = await server.CreateClient().GetStringAsync("/path");
@@ -754,18 +675,14 @@ public class TestServerTests
     [Fact]
     public async Task DisposeStreamIgnored()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async context =>
             {
-                app.Run(
-                    async context =>
-                    {
-                        await context.Response.WriteAsync("Response");
-                        context.Response.Body.Dispose();
-                    }
-                );
-            }
-        );
+                await context.Response.WriteAsync("Response");
+                context.Response.Body.Dispose();
+            });
+        });
         var server = new TestServer(builder);
 
         HttpResponseMessage result = await server.CreateClient().GetAsync("/");
@@ -776,18 +693,14 @@ public class TestServerTests
     [Fact]
     public async Task DisposedServerThrows()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(async context =>
             {
-                app.Run(
-                    async context =>
-                    {
-                        await context.Response.WriteAsync("Response");
-                        context.Response.Body.Dispose();
-                    }
-                );
-            }
-        );
+                await context.Response.WriteAsync("Response");
+                context.Response.Body.Dispose();
+            });
+        });
         var server = new TestServer(builder);
 
         HttpResponseMessage result = await server.CreateClient().GetAsync("/");
@@ -801,27 +714,21 @@ public class TestServerTests
     [Fact]
     public async Task CancelAborts()
     {
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(context =>
             {
-                app.Run(
-                    context =>
-                    {
-                        TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
-                        tcs.SetCanceled();
-                        return tcs.Task;
-                    }
-                );
-            }
-        );
+                TaskCompletionSource<int> tcs = new TaskCompletionSource<int>();
+                tcs.SetCanceled();
+                return tcs.Task;
+            });
+        });
         var server = new TestServer(builder);
 
-        await Assert.ThrowsAsync<TaskCanceledException>(
-            async () =>
-            {
-                string result = await server.CreateClient().GetStringAsync("/path");
-            }
-        );
+        await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+        {
+            string result = await server.CreateClient().GetStringAsync("/path");
+        });
     }
 
     [Fact]
@@ -850,19 +757,14 @@ public class TestServerTests
     {
         DiagnosticListener diagnosticListener = null;
 
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+            app.Run(context =>
             {
-                diagnosticListener =
-                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                app.Run(
-                    context =>
-                    {
-                        return context.Response.WriteAsync("Hello World");
-                    }
-                );
-            }
-        );
+                return context.Response.WriteAsync("Hello World");
+            });
+        });
         var server = new TestServer(builder);
 
         var listener = new TestDiagnosticListener();
@@ -882,19 +784,14 @@ public class TestServerTests
     public async Task ExceptionDiagnosticAvailable()
     {
         DiagnosticListener diagnosticListener = null;
-        var builder = new WebHostBuilder().Configure(
-            app =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            diagnosticListener = app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+            app.Run(context =>
             {
-                diagnosticListener =
-                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                app.Run(
-                    context =>
-                    {
-                        throw new Exception("Test exception");
-                    }
-                );
-            }
-        );
+                throw new Exception("Test exception");
+            });
+        });
         var server = new TestServer(builder);
 
         var listener = new TestDiagnosticListener();
@@ -1025,24 +922,20 @@ public class TestServerTests
 
         public void Configure(IApplicationBuilder app)
         {
-            app.Run(
-                context =>
-                {
-                    var service = app.ApplicationServices.GetRequiredService<SimpleService>();
-                    return context.Response.WriteAsync("FoundService:" + (service != null));
-                }
-            );
+            app.Run(context =>
+            {
+                var service = app.ApplicationServices.GetRequiredService<SimpleService>();
+                return context.Response.WriteAsync("FoundService:" + (service != null));
+            });
         }
 
         public void ConfigureFoo(IApplicationBuilder app)
         {
-            app.Run(
-                context =>
-                {
-                    var service = app.ApplicationServices.GetService<SimpleService>();
-                    return context.Response.WriteAsync("FoundFoo:" + (service != null));
-                }
-            );
+            app.Run(context =>
+            {
+                var service = app.ApplicationServices.GetService<SimpleService>();
+                return context.Response.WriteAsync("FoundFoo:" + (service != null));
+            });
         }
     }
 }

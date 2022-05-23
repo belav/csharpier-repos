@@ -267,18 +267,16 @@ namespace Newtonsoft.Json.Utilities
                     {
                         MethodInfo mb = builderTypeDefinition
                             .GetMethods()
-                            .FirstOrDefault(
-                                m =>
-                                {
-                                    ParameterInfo[] parameters = m.GetParameters();
+                            .FirstOrDefault(m =>
+                            {
+                                ParameterInfo[] parameters = m.GetParameters();
 
-                                    return m.Name == "CreateRange"
-                                        && parameters.Length == 1
-                                        && parameters[0].ParameterType.IsGenericType()
-                                        && parameters[0].ParameterType.GetGenericTypeDefinition()
-                                            == typeof(IEnumerable<>);
-                                }
-                            );
+                                return m.Name == "CreateRange"
+                                    && parameters.Length == 1
+                                    && parameters[0].ParameterType.IsGenericType()
+                                    && parameters[0].ParameterType.GetGenericTypeDefinition()
+                                        == typeof(IEnumerable<>);
+                            });
                         if (mb != null)
                         {
                             createdType = createdTypeDefinition.MakeGenericType(

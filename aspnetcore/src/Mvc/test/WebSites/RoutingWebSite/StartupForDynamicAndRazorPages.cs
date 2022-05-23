@@ -30,13 +30,11 @@ public class StartupForDynamicAndRazorPages
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapRazorPages();
-                endpoints.MapDynamicControllerRoute<Transformer>("{language}/{**slug}");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapRazorPages();
+            endpoints.MapDynamicControllerRoute<Transformer>("{language}/{**slug}");
+        });
     }
 
     private class Transformer : DynamicRouteValueTransformer

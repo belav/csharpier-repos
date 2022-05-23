@@ -259,16 +259,14 @@ internal partial class MessagePump : IServer
     {
         void RegisterCancelation()
         {
-            cancellationToken.Register(
-                () =>
+            cancellationToken.Register(() =>
+            {
+                if (Interlocked.Exchange(ref _shutdownSignalCompleted, 1) == 0)
                 {
-                    if (Interlocked.Exchange(ref _shutdownSignalCompleted, 1) == 0)
-                    {
-                        Log.StopCancelled(_logger, _outstandingRequests);
-                        _shutdownSignal.TrySetResult();
-                    }
+                    Log.StopCancelled(_logger, _outstandingRequests);
+                    _shutdownSignal.TrySetResult();
                 }
-            );
+            });
         }
 
         if (Interlocked.Exchange(ref _stopping, 1) == 1)

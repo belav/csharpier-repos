@@ -39,19 +39,17 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.HtmlEncoder = new HtmlTestEncoder();
-                v.Write("Hello Prefix");
-                v.StartTagHelperWritingScope(encoder: null);
-                v.Write("Hello from Output");
-                v.ViewContext.Writer.Write("Hello from view context writer");
-                var scopeValue = v.EndTagHelperWritingScope();
-                v.Write("From Scope: ");
-                v.Write(scopeValue);
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.HtmlEncoder = new HtmlTestEncoder();
+            v.Write("Hello Prefix");
+            v.StartTagHelperWritingScope(encoder: null);
+            v.Write("Hello from Output");
+            v.ViewContext.Writer.Write("Hello from view context writer");
+            var scopeValue = v.EndTagHelperWritingScope();
+            v.Write("From Scope: ");
+            v.Write(scopeValue);
+        });
 
         // Act
         await page.ExecuteAsync();
@@ -70,18 +68,16 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.HtmlEncoder = new HtmlTestEncoder();
-                v.Write("Hello Prefix");
-                v.StartTagHelperWritingScope(encoder: null);
-                v.Write("Hello In Scope");
-                var scopeValue = v.EndTagHelperWritingScope();
-                v.Write("From Scope: ");
-                v.Write(scopeValue);
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.HtmlEncoder = new HtmlTestEncoder();
+            v.Write("Hello Prefix");
+            v.StartTagHelperWritingScope(encoder: null);
+            v.Write("Hello In Scope");
+            var scopeValue = v.EndTagHelperWritingScope();
+            v.Write("From Scope: ");
+            v.Write(scopeValue);
+        });
 
         // Act
         await page.ExecuteAsync();
@@ -99,26 +95,24 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.HtmlEncoder = new HtmlTestEncoder();
-                v.Write("Hello Prefix");
-                v.StartTagHelperWritingScope(encoder: null);
-                v.Write("Hello In Scope Pre Nest");
+        var page = CreatePage(v =>
+        {
+            v.HtmlEncoder = new HtmlTestEncoder();
+            v.Write("Hello Prefix");
+            v.StartTagHelperWritingScope(encoder: null);
+            v.Write("Hello In Scope Pre Nest");
 
-                v.StartTagHelperWritingScope(encoder: null);
-                v.Write("Hello In Nested Scope");
-                var scopeValue1 = v.EndTagHelperWritingScope();
+            v.StartTagHelperWritingScope(encoder: null);
+            v.Write("Hello In Nested Scope");
+            var scopeValue1 = v.EndTagHelperWritingScope();
 
-                v.Write("Hello In Scope Post Nest");
-                var scopeValue2 = v.EndTagHelperWritingScope();
+            v.Write("Hello In Scope Post Nest");
+            var scopeValue2 = v.EndTagHelperWritingScope();
 
-                v.Write("From Scopes: ");
-                v.Write(scopeValue2);
-                v.Write(scopeValue1);
-            }
-        );
+            v.Write("From Scopes: ");
+            v.Write(scopeValue2);
+            v.Write(scopeValue1);
+        });
 
         // Act
         await page.ExecuteAsync();
@@ -137,14 +131,12 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            async v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-                v.StartTagHelperWritingScope(encoder: null);
-                await v.FlushAsync();
-            }
-        );
+        var page = CreatePage(async v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+            v.StartTagHelperWritingScope(encoder: null);
+            await v.FlushAsync();
+        });
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
@@ -160,12 +152,10 @@ public class RazorPageTest
     {
         // Arrange
         var encoder = Mock.Of<HtmlEncoder>();
-        var page = CreatePage(
-            v =>
-            {
-                v.StartTagHelperWritingScope(encoder);
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.StartTagHelperWritingScope(encoder);
+        });
 
         // Act
         await page.ExecuteAsync();
@@ -178,12 +168,10 @@ public class RazorPageTest
     public async Task StartTagHelperWritingScope_DoesNotSetHtmlEncoderToNull()
     {
         // Arrange
-        var page = CreatePage(
-            v =>
-            {
-                v.StartTagHelperWritingScope(encoder: null);
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.StartTagHelperWritingScope(encoder: null);
+        });
         var originalEncoder = page.HtmlEncoder;
 
         // Act
@@ -199,12 +187,10 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.EndTagHelperWritingScope();
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.EndTagHelperWritingScope();
+        });
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
@@ -216,19 +202,17 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.HtmlEncoder = new HtmlTestEncoder();
-                v.StartTagHelperWritingScope(encoder: null);
-                v.Write("Hello World!");
-                var returnValue = v.EndTagHelperWritingScope();
+        var page = CreatePage(v =>
+        {
+            v.HtmlEncoder = new HtmlTestEncoder();
+            v.StartTagHelperWritingScope(encoder: null);
+            v.Write("Hello World!");
+            var returnValue = v.EndTagHelperWritingScope();
 
-                // Assert
-                var content = Assert.IsType<DefaultTagHelperContent>(returnValue);
-                Assert.Equal("HtmlEncode[[Hello World!]]", content.GetContent());
-            }
-        );
+            // Assert
+            var content = Assert.IsType<DefaultTagHelperContent>(returnValue);
+            Assert.Equal("HtmlEncode[[Hello World!]]", content.GetContent());
+        });
 
         // Act & Assert
         await page.ExecuteAsync();
@@ -238,14 +222,12 @@ public class RazorPageTest
     public async Task EndWriteTagHelperAttribute_RestoresPageWriter()
     {
         // Arrange
-        var page = CreatePage(
-            v =>
-            {
-                v.BeginWriteTagHelperAttribute();
-                v.Write("Hello World!");
-                v.EndWriteTagHelperAttribute();
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.BeginWriteTagHelperAttribute();
+            v.Write("Hello World!");
+            v.EndWriteTagHelperAttribute();
+        });
         var originalWriter = page.Output;
 
         // Act
@@ -261,19 +243,17 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.HtmlEncoder = new HtmlTestEncoder();
-                v.BeginWriteTagHelperAttribute();
-                v.Write("Hello World!");
-                var returnValue = v.EndWriteTagHelperAttribute();
+        var page = CreatePage(v =>
+        {
+            v.HtmlEncoder = new HtmlTestEncoder();
+            v.BeginWriteTagHelperAttribute();
+            v.Write("Hello World!");
+            var returnValue = v.EndWriteTagHelperAttribute();
 
-                // Assert
-                var content = Assert.IsType<string>(returnValue);
-                Assert.Equal("HtmlEncode[[Hello World!]]", content);
-            }
-        );
+            // Assert
+            var content = Assert.IsType<string>(returnValue);
+            Assert.Equal("HtmlEncode[[Hello World!]]", content);
+        });
 
         // Act & Assert
         await page.ExecuteAsync();
@@ -284,14 +264,12 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.BeginWriteTagHelperAttribute();
-                v.BeginWriteTagHelperAttribute();
-                v.Write("Hello World!");
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.BeginWriteTagHelperAttribute();
+            v.BeginWriteTagHelperAttribute();
+            v.Write("Hello World!");
+        });
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
@@ -450,13 +428,11 @@ public class RazorPageTest
     {
         // Arrange
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.DefineSection("qux", _nullRenderAsyncDelegate);
-                v.DefineSection("qux", _nullRenderAsyncDelegate);
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.DefineSection("qux", _nullRenderAsyncDelegate);
+            v.DefineSection("qux", _nullRenderAsyncDelegate);
+        });
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(() => page.ExecuteAsync());
@@ -469,12 +445,10 @@ public class RazorPageTest
         // Arrange
         var expected = "Hello world";
         var viewContext = CreateViewContext();
-        var page = CreatePage(
-            v =>
-            {
-                v.Write(v.RenderSection("bar"));
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.Write(v.RenderSection("bar"));
+        });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "bar", () => page.Output.WriteAsync(expected) }
@@ -492,13 +466,11 @@ public class RazorPageTest
     {
         // Arrange
         Exception ex = null;
-        var page = CreatePage(
-            v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-                ex = Assert.Throws<InvalidOperationException>(() => v.RenderSection("bar"));
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+            ex = Assert.Throws<InvalidOperationException>(() => v.RenderSection("bar"));
+        });
 
         // Act & Assert
         await page.ExecuteAsync();
@@ -563,12 +535,10 @@ public class RazorPageTest
     public void IsSectionDefined_ThrowsIfPreviousSectionWritersIsNotRegistered()
     {
         // Arrange
-        var page = CreatePage(
-            v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+        });
         page.ExecuteAsync();
 
         // Act & Assert
@@ -584,14 +554,12 @@ public class RazorPageTest
     {
         // Arrange
         bool? actual = null;
-        var page = CreatePage(
-            v =>
-            {
-                actual = v.IsSectionDefined("foo");
-                v.RenderSection("baz");
-                v.RenderBodyPublic();
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            actual = v.IsSectionDefined("foo");
+            v.RenderSection("baz");
+            v.RenderBodyPublic();
+        });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "baz", _nullRenderAsyncDelegate }
@@ -610,14 +578,12 @@ public class RazorPageTest
     {
         // Arrange
         bool? actual = null;
-        var page = CreatePage(
-            v =>
-            {
-                actual = v.IsSectionDefined("baz");
-                v.RenderSection("baz");
-                v.RenderBodyPublic();
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            actual = v.IsSectionDefined("baz");
+            v.RenderSection("baz");
+            v.RenderBodyPublic();
+        });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "baz", _nullRenderAsyncDelegate }
@@ -636,14 +602,12 @@ public class RazorPageTest
     {
         // Arrange
         var expected = new HelperResult(NullAsyncWrite);
-        var page = CreatePage(
-            v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-                v.RenderSection("header");
-                v.RenderSection("header");
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+            v.RenderSection("header");
+            v.RenderSection("header");
+        });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "header", _nullRenderAsyncDelegate }
@@ -663,14 +627,12 @@ public class RazorPageTest
     {
         // Arrange
         var expected = new HelperResult(NullAsyncWrite);
-        var page = CreatePage(
-            async v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-                await v.RenderSectionAsync("header");
-                await v.RenderSectionAsync("header");
-            }
-        );
+        var page = CreatePage(async v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+            await v.RenderSectionAsync("header");
+            await v.RenderSectionAsync("header");
+        });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "header", _nullRenderAsyncDelegate }
@@ -690,14 +652,12 @@ public class RazorPageTest
     {
         // Arrange
         var expected = new HelperResult(NullAsyncWrite);
-        var page = CreatePage(
-            async v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-                v.RenderSection("header");
-                await v.RenderSectionAsync("header");
-            }
-        );
+        var page = CreatePage(async v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+            v.RenderSection("header");
+            await v.RenderSectionAsync("header");
+        });
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
             { "header", _nullRenderAsyncDelegate }
@@ -717,13 +677,11 @@ public class RazorPageTest
     {
         // Arrange
         var expected = new HelperResult(NullAsyncWrite);
-        var page = CreatePage(
-            async v =>
-            {
-                v.Path = "/Views/TestPath/Test.cshtml";
-                await v.RenderSectionAsync("header");
-            }
-        );
+        var page = CreatePage(async v =>
+        {
+            v.Path = "/Views/TestPath/Test.cshtml";
+            await v.RenderSectionAsync("header");
+        });
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(page.ExecuteAsync);
@@ -820,13 +778,11 @@ public class RazorPageTest
     {
         // Arrange
         var path = "page-path";
-        var page = CreatePage(
-            async p =>
-            {
-                p.IgnoreSection("ignored");
-                p.Write(await p.RenderSectionAsync("not-ignored-section"));
-            }
-        );
+        var page = CreatePage(async p =>
+        {
+            p.IgnoreSection("ignored");
+            p.Write(await p.RenderSectionAsync("not-ignored-section"));
+        });
         page.Path = path;
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
@@ -848,13 +804,11 @@ public class RazorPageTest
         // Arrange
         var sectionA = "sectionA";
         var sectionB = "sectionB";
-        var page = CreatePage(
-            v =>
-            {
-                v.RenderSection(sectionA);
-                v.RenderSection(sectionB);
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.RenderSection(sectionA);
+            v.RenderSection(sectionB);
+        });
         page.BodyContent = new HtmlString("some content");
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
@@ -881,18 +835,16 @@ public class RazorPageTest
             "Footer section",
             "Layout end"
         );
-        var page = CreatePage(
-            async v =>
-            {
-                v.WriteLiteral("Layout start" + Environment.NewLine);
-                v.Write(v.RenderSection("header"));
-                v.Write(await v.RenderSectionAsync("async-header"));
-                v.Write(v.RenderBodyPublic());
-                v.Write(await v.RenderSectionAsync("async-footer"));
-                v.Write(v.RenderSection("footer"));
-                v.WriteLiteral("Layout end");
-            }
-        );
+        var page = CreatePage(async v =>
+        {
+            v.WriteLiteral("Layout start" + Environment.NewLine);
+            v.Write(v.RenderSection("header"));
+            v.Write(await v.RenderSectionAsync("async-header"));
+            v.Write(v.RenderBodyPublic());
+            v.Write(await v.RenderSectionAsync("async-footer"));
+            v.Write(v.RenderSection("footer"));
+            v.WriteLiteral("Layout end");
+        });
         page.BodyContent = new HtmlString("body content" + Environment.NewLine);
         page.PreviousSectionWriters = new Dictionary<string, RenderAsyncDelegate>
         {
@@ -920,13 +872,11 @@ public class RazorPageTest
         var factory = new Mock<IUrlHelperFactory>();
         factory.Setup(f => f.GetUrlHelper(It.IsAny<ActionContext>())).Returns(helper.Object);
 
-        var page = CreatePage(
-            v =>
-            {
-                v.HtmlEncoder = new HtmlTestEncoder();
-                v.Write(v.Href("url"));
-            }
-        );
+        var page = CreatePage(v =>
+        {
+            v.HtmlEncoder = new HtmlTestEncoder();
+            v.Write(v.Href("url"));
+        });
         var services = new Mock<IServiceProvider>();
         services.Setup(s => s.GetService(typeof(IUrlHelperFactory))).Returns(factory.Object);
         page.Context.RequestServices = services.Object;
@@ -1517,12 +1467,10 @@ public class RazorPageTest
         var buffer = new ViewBuffer(new TestViewBufferScope(), string.Empty, pageSize: 32);
         var writer = new ViewBufferTextWriter(buffer, Encoding.UTF8);
 
-        var page = CreatePage(
-            p =>
-            {
-                p.Write(new HtmlString("Hello world"));
-            }
-        );
+        var page = CreatePage(p =>
+        {
+            p.Write(new HtmlString("Hello world"));
+        });
         page.ViewContext.Writer = writer;
 
         // Act
@@ -1557,12 +1505,10 @@ public class RazorPageTest
         if (executeAction != null)
         {
             view.Setup(v => v.ExecuteAsync())
-                .Returns(
-                    () =>
-                    {
-                        return executeAction(view.Object);
-                    }
-                );
+                .Returns(() =>
+                {
+                    return executeAction(view.Object);
+                });
         }
 
         view.Object.ViewContext = context;

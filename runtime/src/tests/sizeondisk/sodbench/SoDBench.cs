@@ -693,46 +693,44 @@ namespace SoDBench
                     parser
                         .ParseArguments<SoDBenchOptions>(args)
                         .WithParsed(parsed => options = parsed)
-                        .WithNotParsed(
-                            errors =>
+                        .WithNotParsed(errors =>
+                        {
+                            foreach (Error error in errors)
                             {
-                                foreach (Error error in errors)
+                                switch (error.Tag)
                                 {
-                                    switch (error.Tag)
-                                    {
-                                        case ErrorType.MissingValueOptionError:
-                                            throw new ArgumentException(
-                                                $"Missing value option for command line argument '{(error as MissingValueOptionError).NameInfo.NameText}'"
-                                            );
-                                        case ErrorType.HelpRequestedError:
-                                            Console.WriteLine(Usage());
-                                            Environment.Exit(0);
-                                            break;
-                                        case ErrorType.VersionRequestedError:
-                                            Console.WriteLine(
-                                                new AssemblyName(
-                                                    typeof(SoDBenchOptions)
-                                                        .GetTypeInfo()
-                                                        .Assembly.FullName
-                                                ).Version
-                                            );
-                                            Environment.Exit(0);
-                                            break;
-                                        case ErrorType.BadFormatTokenError:
-                                        case ErrorType.UnknownOptionError:
-                                        case ErrorType.MissingRequiredOptionError:
-                                        case ErrorType.MutuallyExclusiveSetError:
-                                        case ErrorType.BadFormatConversionError:
-                                        case ErrorType.SequenceOutOfRangeError:
-                                        case ErrorType.RepeatedOptionError:
-                                        case ErrorType.NoVerbSelectedError:
-                                        case ErrorType.BadVerbSelectedError:
-                                        case ErrorType.HelpVerbRequestedError:
-                                            break;
-                                    }
+                                    case ErrorType.MissingValueOptionError:
+                                        throw new ArgumentException(
+                                            $"Missing value option for command line argument '{(error as MissingValueOptionError).NameInfo.NameText}'"
+                                        );
+                                    case ErrorType.HelpRequestedError:
+                                        Console.WriteLine(Usage());
+                                        Environment.Exit(0);
+                                        break;
+                                    case ErrorType.VersionRequestedError:
+                                        Console.WriteLine(
+                                            new AssemblyName(
+                                                typeof(SoDBenchOptions)
+                                                    .GetTypeInfo()
+                                                    .Assembly.FullName
+                                            ).Version
+                                        );
+                                        Environment.Exit(0);
+                                        break;
+                                    case ErrorType.BadFormatTokenError:
+                                    case ErrorType.UnknownOptionError:
+                                    case ErrorType.MissingRequiredOptionError:
+                                    case ErrorType.MutuallyExclusiveSetError:
+                                    case ErrorType.BadFormatConversionError:
+                                    case ErrorType.SequenceOutOfRangeError:
+                                    case ErrorType.RepeatedOptionError:
+                                    case ErrorType.NoVerbSelectedError:
+                                    case ErrorType.BadVerbSelectedError:
+                                    case ErrorType.HelpVerbRequestedError:
+                                        break;
                                 }
                             }
-                        );
+                        });
 
                     if (
                         options != null

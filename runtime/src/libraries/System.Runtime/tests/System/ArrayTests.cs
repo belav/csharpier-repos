@@ -1454,12 +1454,10 @@ namespace System.Tests
         {
             int[] result = Array.ConvertAll(
                 new int[] { },
-                new Converter<int, int>(
-                    i =>
-                    {
-                        throw new InvalidOperationException();
-                    }
-                )
+                new Converter<int, int>(i =>
+                {
+                    throw new InvalidOperationException();
+                })
             );
             Assert.Equal(new int[] { }, result);
 
@@ -9701,12 +9699,10 @@ namespace System.Tests
         public static unsafe void GetEnumerator_ArrayOfPointers_ThrowsNotSupportedException()
         {
             Array nonEmptyArray = new int*[2];
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    foreach (object obj in nonEmptyArray) { }
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                foreach (object obj in nonEmptyArray) { }
+            });
 
             Array emptyArray = new int*[0];
             foreach (object obj in emptyArray) { }

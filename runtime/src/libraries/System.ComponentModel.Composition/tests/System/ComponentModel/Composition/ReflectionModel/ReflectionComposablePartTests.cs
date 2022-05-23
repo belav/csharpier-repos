@@ -296,12 +296,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             part.SetImport(definition, Enumerable.Empty<Export>());
             part.Activate();
 
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    part.SetImport(definition, Enumerable.Empty<Export>());
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                part.SetImport(definition, Enumerable.Empty<Export>());
+            });
         }
 
         [Fact]
@@ -361,12 +359,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreatePart(new MySharedPartExport());
             var import = part.ImportDefinitions.First();
 
-            CompositionAssert.ThrowsPart(
-                () =>
-                {
-                    part.SetImport(import, CreateSimpleExports("21"));
-                }
-            );
+            CompositionAssert.ThrowsPart(() =>
+            {
+                part.SetImport(import, CreateSimpleExports("21"));
+            });
         }
 
         [Fact]
@@ -444,12 +440,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
             var part = CreatePart(typeof(SimpleConstructorInjectedObject));
             var definition = part.ExportDefinitions.First();
 
-            ExceptionAssert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    part.GetExportedValue(definition);
-                }
-            );
+            ExceptionAssert.Throws<InvalidOperationException>(() =>
+            {
+                part.GetExportedValue(definition);
+            });
         }
 
         [Fact]
@@ -459,12 +453,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var definition = part.ExportDefinitions.First();
 
-            CompositionAssert.ThrowsPart(
-                () =>
-                {
-                    part.GetExportedValue(definition);
-                }
-            );
+            CompositionAssert.ThrowsPart(() =>
+            {
+                part.GetExportedValue(definition);
+            });
         }
 
         [Fact]
@@ -474,12 +466,10 @@ namespace System.ComponentModel.Composition.ReflectionModel
 
             var definition = part.ExportDefinitions.First();
 
-            CompositionAssert.ThrowsPart<NotImplementedException>(
-                () =>
-                {
-                    part.GetExportedValue(definition);
-                }
-            );
+            CompositionAssert.ThrowsPart<NotImplementedException>(() =>
+            {
+                part.GetExportedValue(definition);
+            });
         }
 
         [Fact]

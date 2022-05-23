@@ -244,21 +244,19 @@ namespace System.Collections.Concurrent.Tests
                         .Range(0, threadsCount)
                         .Select(
                             threadNum =>
-                                ThreadFactory.StartNew(
-                                    () =>
+                                ThreadFactory.StartNew(() =>
+                                {
+                                    b.SignalAndWait();
+                                    for (int j = 0; j < itemsPerThread; j++)
                                     {
-                                        b.SignalAndWait();
-                                        for (int j = 0; j < itemsPerThread; j++)
+                                        int data;
+                                        if (take ? c.TryTake(out data) : TryPeek(c, out data))
                                         {
-                                            int data;
-                                            if (take ? c.TryTake(out data) : TryPeek(c, out data))
-                                            {
-                                                Interlocked.Increment(ref successes);
-                                                Assert.NotEqual(0, data); // shouldn't be default(T)
-                                            }
+                                            Interlocked.Increment(ref successes);
+                                            Assert.NotEqual(0, data); // shouldn't be default(T)
                                         }
                                     }
-                                )
+                                })
                         )
                         .ToArray()
                 );
@@ -331,15 +329,13 @@ namespace System.Collections.Concurrent.Tests
             {
                 // Create a thread that adds items to the collection
                 ThreadFactory
-                    .StartNew(
-                        () =>
+                    .StartNew(() =>
+                    {
+                        for (int j = i; j < i + 100; j++)
                         {
-                            for (int j = i; j < i + 100; j++)
-                            {
-                                Assert.True(c.TryAdd(j));
-                            }
+                            Assert.True(c.TryAdd(j));
                         }
-                    )
+                    })
                     .GetAwaiter()
                     .GetResult();
 
@@ -408,27 +404,23 @@ namespace System.Collections.Concurrent.Tests
             var cts = new CancellationTokenSource();
 
             // Consumer repeatedly calls IsEmpty until it's told to stop
-            Task consumer = Task.Run(
-                () =>
-                {
-                    while (!cts.IsCancellationRequested)
-                        Assert.False(IsEmpty(c));
-                }
-            );
+            Task consumer = Task.Run(() =>
+            {
+                while (!cts.IsCancellationRequested)
+                    Assert.False(IsEmpty(c));
+            });
 
             // Producer adds/takes a bunch of items, then tells the consumer to stop
-            Task producer = Task.Run(
-                () =>
+            Task producer = Task.Run(() =>
+            {
+                int ignored;
+                for (int i = 1; i <= items; i++)
                 {
-                    int ignored;
-                    for (int i = 1; i <= items; i++)
-                    {
-                        Assert.True(c.TryAdd(i));
-                        Assert.True(c.TryTake(out ignored));
-                    }
-                    cts.Cancel();
+                    Assert.True(c.TryAdd(i));
+                    Assert.True(c.TryTake(out ignored));
                 }
-            );
+                cts.Cancel();
+            });
 
             Task.WaitAll(producer, consumer);
         }
@@ -588,17 +580,15 @@ namespace System.Collections.Concurrent.Tests
                 .Range(0, numThreadsPerConsumerProducer)
                 .Select(
                     _ =>
-                        ThreadFactory.StartNew(
-                            () =>
+                        ThreadFactory.StartNew(() =>
+                        {
+                            for (int i = 1; i <= numItemsPerThread; i++)
                             {
-                                for (int i = 1; i <= numItemsPerThread; i++)
-                                {
-                                    for (int j = 0; j < producerSpin; j++)
-                                        dummy *= j; // spin a little
-                                    bc.Add(i);
-                                }
+                                for (int j = 0; j < producerSpin; j++)
+                                    dummy *= j; // spin a little
+                                bc.Add(i);
                             }
-                        )
+                        })
                 )
                 .ToArray();
 
@@ -606,21 +596,19 @@ namespace System.Collections.Concurrent.Tests
                 .Range(0, numThreadsPerConsumerProducer)
                 .Select(
                     _ =>
-                        ThreadFactory.StartNew(
-                            () =>
+                        ThreadFactory.StartNew(() =>
+                        {
+                            for (int i = 0; i < numItemsPerThread; i++)
                             {
-                                for (int i = 0; i < numItemsPerThread; i++)
-                                {
-                                    const int TimeoutMs = 100000;
-                                    int item;
-                                    Assert.True(
-                                        bc.TryTake(out item, TimeoutMs),
-                                        $"Couldn't get {i}th item after {TimeoutMs}ms"
-                                    );
-                                    Assert.NotEqual(0, item);
-                                }
+                                const int TimeoutMs = 100000;
+                                int item;
+                                Assert.True(
+                                    bc.TryTake(out item, TimeoutMs),
+                                    $"Couldn't get {i}th item after {TimeoutMs}ms"
+                                );
+                                Assert.NotEqual(0, item);
                             }
-                        )
+                        })
                 )
                 .ToArray();
 
@@ -853,32 +841,30 @@ namespace System.Collections.Concurrent.Tests
                     .Range(0, b.ParticipantCount)
                     .Select(
                         _ =>
-                            ThreadFactory.StartNew(
-                                () =>
+                            ThreadFactory.StartNew(() =>
+                            {
+                                b.SignalAndWait();
+
+                                int count = 0;
+                                var rand = new Random();
+
+                                while (DateTime.UtcNow < end)
                                 {
-                                    b.SignalAndWait();
-
-                                    int count = 0;
-                                    var rand = new Random();
-
-                                    while (DateTime.UtcNow < end)
+                                    if (rand.NextDouble() < .5)
                                     {
-                                        if (rand.NextDouble() < .5)
-                                        {
-                                            Assert.True(c.TryAdd(rand.Next()));
-                                            count++;
-                                        }
-                                        else
-                                        {
-                                            int item;
-                                            if (c.TryTake(out item))
-                                                count--;
-                                        }
+                                        Assert.True(c.TryAdd(rand.Next()));
+                                        count++;
                                     }
-
-                                    return count;
+                                    else
+                                    {
+                                        int item;
+                                        if (c.TryTake(out item))
+                                            count--;
+                                    }
                                 }
-                            )
+
+                                return count;
+                            })
                     )
                     .ToArray();
                 Task.WaitAll(tasks);
@@ -931,53 +917,49 @@ namespace System.Collections.Concurrent.Tests
 
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds);
 
-            Task<long> addsTakes = ThreadFactory.StartNew(
-                () =>
+            Task<long> addsTakes = ThreadFactory.StartNew(() =>
+            {
+                long total = 0;
+                while (DateTime.UtcNow < end)
                 {
-                    long total = 0;
-                    while (DateTime.UtcNow < end)
+                    for (int i = 1; i <= MaxCount; i++)
                     {
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            Assert.True(c.TryAdd(i));
-                            total++;
-                        }
-
-                        int item;
-                        if (TryPeek(c, out item))
-                        {
-                            Assert.InRange(item, 1, MaxCount);
-                        }
-
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            if (c.TryTake(out item))
-                            {
-                                total--;
-                                Assert.InRange(item, 1, MaxCount);
-                            }
-                        }
+                        Assert.True(c.TryAdd(i));
+                        total++;
                     }
-                    return total;
-                }
-            );
 
-            Task<long> takesFromOtherThread = ThreadFactory.StartNew(
-                () =>
-                {
-                    long total = 0;
                     int item;
-                    while (DateTime.UtcNow < end)
+                    if (TryPeek(c, out item))
+                    {
+                        Assert.InRange(item, 1, MaxCount);
+                    }
+
+                    for (int i = 1; i <= MaxCount; i++)
                     {
                         if (c.TryTake(out item))
                         {
-                            total++;
+                            total--;
                             Assert.InRange(item, 1, MaxCount);
                         }
                     }
-                    return total;
                 }
-            );
+                return total;
+            });
+
+            Task<long> takesFromOtherThread = ThreadFactory.StartNew(() =>
+            {
+                long total = 0;
+                int item;
+                while (DateTime.UtcNow < end)
+                {
+                    if (c.TryTake(out item))
+                    {
+                        total++;
+                        Assert.InRange(item, 1, MaxCount);
+                    }
+                }
+                return total;
+            });
 
             WaitAllOrAnyFailed(addsTakes, takesFromOtherThread);
             long remaining = addsTakes.Result - takesFromOtherThread.Result;
@@ -1000,48 +982,44 @@ namespace System.Collections.Concurrent.Tests
 
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds);
 
-            Task<long> addsTakes = ThreadFactory.StartNew(
-                () =>
+            Task<long> addsTakes = ThreadFactory.StartNew(() =>
+            {
+                long total = 0;
+                while (DateTime.UtcNow < end)
                 {
-                    long total = 0;
-                    while (DateTime.UtcNow < end)
+                    for (int i = 1; i <= MaxCount; i++)
                     {
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            Assert.True(c.TryAdd(new LargeStruct(i)));
-                            total++;
-                        }
-
-                        LargeStruct item;
-                        Assert.True(TryPeek(c, out item));
-                        Assert.InRange(item.Value, 1, MaxCount);
-
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            if (c.TryTake(out item))
-                            {
-                                total--;
-                                Assert.InRange(item.Value, 1, MaxCount);
-                            }
-                        }
+                        Assert.True(c.TryAdd(new LargeStruct(i)));
+                        total++;
                     }
-                    return total;
-                }
-            );
 
-            Task peeksFromOtherThread = ThreadFactory.StartNew(
-                () =>
-                {
                     LargeStruct item;
-                    while (DateTime.UtcNow < end)
+                    Assert.True(TryPeek(c, out item));
+                    Assert.InRange(item.Value, 1, MaxCount);
+
+                    for (int i = 1; i <= MaxCount; i++)
                     {
-                        if (TryPeek(c, out item))
+                        if (c.TryTake(out item))
                         {
+                            total--;
                             Assert.InRange(item.Value, 1, MaxCount);
                         }
                     }
                 }
-            );
+                return total;
+            });
+
+            Task peeksFromOtherThread = ThreadFactory.StartNew(() =>
+            {
+                LargeStruct item;
+                while (DateTime.UtcNow < end)
+                {
+                    if (TryPeek(c, out item))
+                    {
+                        Assert.InRange(item.Value, 1, MaxCount);
+                    }
+                }
+            });
 
             WaitAllOrAnyFailed(addsTakes, peeksFromOtherThread);
             Assert.Equal(0, addsTakes.Result);
@@ -1060,24 +1038,22 @@ namespace System.Collections.Concurrent.Tests
 
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds);
 
-            Task addsTakes = ThreadFactory.StartNew(
-                () =>
+            Task addsTakes = ThreadFactory.StartNew(() =>
+            {
+                while (DateTime.UtcNow < end)
                 {
-                    while (DateTime.UtcNow < end)
+                    for (int i = 1; i <= MaxCount; i++)
                     {
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            Assert.True(c.TryAdd(i));
-                        }
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            int item;
-                            Assert.True(c.TryTake(out item));
-                            Assert.InRange(item, 1, MaxCount);
-                        }
+                        Assert.True(c.TryAdd(i));
+                    }
+                    for (int i = 1; i <= MaxCount; i++)
+                    {
+                        int item;
+                        Assert.True(c.TryTake(out item));
+                        Assert.InRange(item, 1, MaxCount);
                     }
                 }
-            );
+            });
 
             while (DateTime.UtcNow < end)
             {
@@ -1108,24 +1084,22 @@ namespace System.Collections.Concurrent.Tests
 
             DateTime end = DateTime.UtcNow + TimeSpan.FromSeconds(seconds);
 
-            Task addsTakes = ThreadFactory.StartNew(
-                () =>
+            Task addsTakes = ThreadFactory.StartNew(() =>
+            {
+                while (DateTime.UtcNow < end)
                 {
-                    while (DateTime.UtcNow < end)
+                    for (int i = 1; i <= MaxCount; i++)
                     {
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            Assert.True(c.TryAdd(i));
-                        }
-                        for (int i = 1; i <= MaxCount; i++)
-                        {
-                            int item;
-                            Assert.True(c.TryTake(out item));
-                            Assert.InRange(item, 1, MaxCount);
-                        }
+                        Assert.True(c.TryAdd(i));
+                    }
+                    for (int i = 1; i <= MaxCount; i++)
+                    {
+                        int item;
+                        Assert.True(c.TryTake(out item));
+                        Assert.InRange(item, 1, MaxCount);
                     }
                 }
-            );
+            });
 
             while (DateTime.UtcNow < end)
             {

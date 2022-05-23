@@ -36,20 +36,18 @@ public class KeyValuePairModelBinderProviderTest
         var provider = new KeyValuePairModelBinderProvider();
 
         var context = new TestModelBinderProviderContext(typeof(KeyValuePair<string, int>));
-        context.OnCreatingBinder(
-            m =>
+        context.OnCreatingBinder(m =>
+        {
+            if (m.ModelType == typeof(string) || m.ModelType == typeof(int))
             {
-                if (m.ModelType == typeof(string) || m.ModelType == typeof(int))
-                {
-                    return Mock.Of<IModelBinder>();
-                }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
+                return Mock.Of<IModelBinder>();
             }
-        );
+            else
+            {
+                Assert.False(true, "Not the right model type");
+                return null;
+            }
+        });
 
         // Act
         var result = provider.GetBinder(context);

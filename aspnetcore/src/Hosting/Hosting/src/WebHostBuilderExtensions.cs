@@ -55,15 +55,13 @@ public static class WebHostBuilderExtensions
         return hostBuilder.ConfigureServices(
             (context, services) =>
             {
-                services.AddSingleton<IStartup>(
-                    sp =>
-                    {
-                        return new DelegateStartup(
-                            sp.GetRequiredService<IServiceProviderFactory<IServiceCollection>>(),
-                            (app => configureApp(app))
-                        );
-                    }
-                );
+                services.AddSingleton<IStartup>(sp =>
+                {
+                    return new DelegateStartup(
+                        sp.GetRequiredService<IServiceProviderFactory<IServiceCollection>>(),
+                        (app => configureApp(app))
+                    );
+                });
             }
         );
     }
@@ -100,15 +98,13 @@ public static class WebHostBuilderExtensions
         return hostBuilder.ConfigureServices(
             (context, services) =>
             {
-                services.AddSingleton<IStartup>(
-                    sp =>
-                    {
-                        return new DelegateStartup(
-                            sp.GetRequiredService<IServiceProviderFactory<IServiceCollection>>(),
-                            (app => configureApp(context, app))
-                        );
-                    }
-                );
+                services.AddSingleton<IStartup>(sp =>
+                {
+                    return new DelegateStartup(
+                        sp.GetRequiredService<IServiceProviderFactory<IServiceCollection>>(),
+                        (app => configureApp(context, app))
+                    );
+                });
             }
         );
     }
@@ -204,32 +200,30 @@ public static class WebHostBuilderExtensions
 
         hostBuilder.UseSetting(WebHostDefaults.ApplicationKey, startupAssemblyName);
 
-        return hostBuilder.ConfigureServices(
-            services =>
+        return hostBuilder.ConfigureServices(services =>
+        {
+            if (typeof(IStartup).IsAssignableFrom(startupType))
             {
-                if (typeof(IStartup).IsAssignableFrom(startupType))
-                {
-                    services.AddSingleton(typeof(IStartup), startupType);
-                }
-                else
-                {
-                    services.AddSingleton(
-                        typeof(IStartup),
-                        sp =>
-                        {
-                            var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
-                            return new ConventionBasedStartup(
-                                StartupLoader.LoadMethods(
-                                    sp,
-                                    startupType,
-                                    hostingEnvironment.EnvironmentName
-                                )
-                            );
-                        }
-                    );
-                }
+                services.AddSingleton(typeof(IStartup), startupType);
             }
-        );
+            else
+            {
+                services.AddSingleton(
+                    typeof(IStartup),
+                    sp =>
+                    {
+                        var hostingEnvironment = sp.GetRequiredService<IHostEnvironment>();
+                        return new ConventionBasedStartup(
+                            StartupLoader.LoadMethods(
+                                sp,
+                                startupType,
+                                hostingEnvironment.EnvironmentName
+                            )
+                        );
+                    }
+                );
+            }
+        });
     }
 
     /// <summary>

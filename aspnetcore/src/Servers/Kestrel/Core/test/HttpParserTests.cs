@@ -350,14 +350,12 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(
-            () =>
+        var exception = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-                var reader = new SequenceReader<byte>(buffer);
-                parser.ParseHeaders(requestHandler, ref reader);
-            }
-        );
+        {
+            var reader = new SequenceReader<byte>(buffer);
+            parser.ParseHeaders(requestHandler, ref reader);
+        });
 
         Assert.Equal(expectedExceptionMessage, exception.Message);
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
@@ -402,14 +400,12 @@ public class HttpParserTests : LoggedTest
         buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes("Header: value\n\r\n"));
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        exception = Assert.Throws<BadHttpRequestException>(
-            () =>
+        exception = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-                var reader = new SequenceReader<byte>(buffer);
-                parser.ParseHeaders(requestHandler, ref reader);
-            }
-        );
+        {
+            var reader = new SequenceReader<byte>(buffer);
+            parser.ParseHeaders(requestHandler, ref reader);
+        });
 
         Assert.Equal(
             CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(string.Empty),
@@ -469,19 +465,11 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var badHttpRequestException = Assert.Throws<BadHttpRequestException>(
-            () =>
+        var badHttpRequestException = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-                ParseRequestLine(
-                    parser,
-                    requestHandler,
-                    buffer,
-                    out var consumed,
-                    out var examined
-                );
-            }
-        );
+        {
+            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined);
+        });
 
         Assert.Equal(badHttpRequestException.StatusCode, StatusCodes.Status400BadRequest);
         Assert.Equal(RequestRejectionReason.TlsOverHttpError, badHttpRequestException.Reason);
@@ -499,14 +487,12 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(
-            () =>
+        var exception = Assert.Throws<BadHttpRequestException>(() =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            {
-                var reader = new SequenceReader<byte>(buffer);
-                parser.ParseHeaders(requestHandler, ref reader);
-            }
-        );
+        {
+            var reader = new SequenceReader<byte>(buffer);
+            parser.ParseHeaders(requestHandler, ref reader);
+        });
 
         Assert.Equal(expectedExceptionMessage, exception.Message);
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);

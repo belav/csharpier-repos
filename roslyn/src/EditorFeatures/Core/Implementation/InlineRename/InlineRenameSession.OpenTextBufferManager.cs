@@ -943,30 +943,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     var snapshot = openTextBufferManager._subjectBuffer.CurrentSnapshot;
 
                     var containingSpans = openTextBufferManager._referenceSpanToLinkedRenameSpanMap
-                        .Select(
-                            kvp =>
-                            {
-                                // GetSpanInView() can return an empty collection if the tracking span isn't mapped to anything
-                                // in the current view, specifically a `@model SomeModelClass` directive in a Razor file.
-                                var ss = textView
-                                    .GetSpanInView(kvp.Value.TrackingSpan.GetSpan(snapshot))
-                                    .FirstOrDefault();
-                                if (
-                                    ss != default
-                                    && (
-                                        ss.IntersectsWith(selection.ActivePoint.Position)
-                                        || ss.IntersectsWith(selection.AnchorPoint.Position)
-                                    )
+                        .Select(kvp =>
+                        {
+                            // GetSpanInView() can return an empty collection if the tracking span isn't mapped to anything
+                            // in the current view, specifically a `@model SomeModelClass` directive in a Razor file.
+                            var ss = textView
+                                .GetSpanInView(kvp.Value.TrackingSpan.GetSpan(snapshot))
+                                .FirstOrDefault();
+                            if (
+                                ss != default
+                                && (
+                                    ss.IntersectsWith(selection.ActivePoint.Position)
+                                    || ss.IntersectsWith(selection.AnchorPoint.Position)
                                 )
-                                {
-                                    return Tuple.Create(kvp.Key, ss);
-                                }
-                                else
-                                {
-                                    return null;
-                                }
+                            )
+                            {
+                                return Tuple.Create(kvp.Key, ss);
                             }
-                        )
+                            else
+                            {
+                                return null;
+                            }
+                        })
                         .WhereNotNull();
 
                     foreach (var tuple in containingSpans)

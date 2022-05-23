@@ -12,13 +12,11 @@ namespace Microsoft.Win32.RegistryTests
         public void NegativeTests()
         {
             // Should throw if RegistryKey is closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Close();
-                    TestRegistryKey.GetAccessControl();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Close();
+                TestRegistryKey.GetAccessControl();
+            });
         }
 
         [Fact]

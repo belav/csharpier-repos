@@ -53,121 +53,115 @@ namespace HttpStress
                 // 1. Create a self-signed cert and install it into your local personal store, e.g. New-SelfSignedCertificate -DnsName "localhost" -CertStoreLocation "cert:\LocalMachine\My"
                 // 2. Pre-register the URL prefix, e.g. netsh http add urlacl url=https://localhost:5001/ user=Users
                 // 3. Register the cert, e.g. netsh http add sslcert ipport=[::1]:5001 certhash=THUMBPRINTFROMABOVE appid="{some-guid}"
-                host = host.UseHttpSys(
-                    hso =>
-                    {
-                        hso.UrlPrefixes.Add(ServerUri);
-                        hso.Authentication.Schemes = Microsoft
-                            .AspNetCore
-                            .Server
-                            .HttpSys
-                            .AuthenticationSchemes
-                            .None;
-                        hso.Authentication.AllowAnonymous = true;
-                        hso.MaxConnections = null;
-                        hso.MaxRequestBodySize = null;
-                    }
-                );
+                host = host.UseHttpSys(hso =>
+                {
+                    hso.UrlPrefixes.Add(ServerUri);
+                    hso.Authentication.Schemes = Microsoft
+                        .AspNetCore
+                        .Server
+                        .HttpSys
+                        .AuthenticationSchemes
+                        .None;
+                    hso.Authentication.AllowAnonymous = true;
+                    hso.MaxConnections = null;
+                    hso.MaxRequestBodySize = null;
+                });
             }
             else
             {
                 // Use Kestrel, and configure it for HTTPS with a self-signed test certificate.
-                host = host.UseKestrel(
-                    ko =>
+                host = host.UseKestrel(ko =>
+                {
+                    // conservative estimation based on https://github.com/dotnet/aspnetcore/blob/caa910ceeba5f2b2c02c47a23ead0ca31caea6f0/src/Servers/Kestrel/Core/src/Internal/Http2/Http2Stream.cs#L204
+                    ko.Limits.MaxRequestLineSize = Math.Max(
+                        ko.Limits.MaxRequestLineSize,
+                        configuration.MaxRequestUriSize + 100
+                    );
+                    ko.Limits.MaxRequestHeaderCount = Math.Max(
+                        ko.Limits.MaxRequestHeaderCount,
+                        configuration.MaxRequestHeaderCount
+                    );
+                    ko.Limits.MaxRequestHeadersTotalSize = Math.Max(
+                        ko.Limits.MaxRequestHeadersTotalSize,
+                        configuration.MaxRequestHeaderTotalSize
+                    );
+
+                    ko.Limits.Http2.MaxStreamsPerConnection =
+                        configuration.ServerMaxConcurrentStreams
+                        ?? ko.Limits.Http2.MaxStreamsPerConnection;
+                    ko.Limits.Http2.MaxFrameSize =
+                        configuration.ServerMaxFrameSize ?? ko.Limits.Http2.MaxFrameSize;
+                    ko.Limits.Http2.InitialConnectionWindowSize =
+                        configuration.ServerInitialConnectionWindowSize
+                        ?? ko.Limits.Http2.InitialConnectionWindowSize;
+                    ko.Limits.Http2.MaxRequestHeaderFieldSize =
+                        configuration.ServerMaxRequestHeaderFieldSize
+                        ?? ko.Limits.Http2.MaxRequestHeaderFieldSize;
+
+                    switch (hostname)
                     {
-                        // conservative estimation based on https://github.com/dotnet/aspnetcore/blob/caa910ceeba5f2b2c02c47a23ead0ca31caea6f0/src/Servers/Kestrel/Core/src/Internal/Http2/Http2Stream.cs#L204
-                        ko.Limits.MaxRequestLineSize = Math.Max(
-                            ko.Limits.MaxRequestLineSize,
-                            configuration.MaxRequestUriSize + 100
-                        );
-                        ko.Limits.MaxRequestHeaderCount = Math.Max(
-                            ko.Limits.MaxRequestHeaderCount,
-                            configuration.MaxRequestHeaderCount
-                        );
-                        ko.Limits.MaxRequestHeadersTotalSize = Math.Max(
-                            ko.Limits.MaxRequestHeadersTotalSize,
-                            configuration.MaxRequestHeaderTotalSize
-                        );
+                        case "+":
+                        case "*":
+                            ko.ListenAnyIP(port, ConfigureListenOptions);
+                            break;
+                        default:
+                            IPAddress iPAddress = Dns.GetHostAddresses(hostname).First();
+                            ko.Listen(iPAddress, port, ConfigureListenOptions);
+                            break;
+                    }
 
-                        ko.Limits.Http2.MaxStreamsPerConnection =
-                            configuration.ServerMaxConcurrentStreams
-                            ?? ko.Limits.Http2.MaxStreamsPerConnection;
-                        ko.Limits.Http2.MaxFrameSize =
-                            configuration.ServerMaxFrameSize ?? ko.Limits.Http2.MaxFrameSize;
-                        ko.Limits.Http2.InitialConnectionWindowSize =
-                            configuration.ServerInitialConnectionWindowSize
-                            ?? ko.Limits.Http2.InitialConnectionWindowSize;
-                        ko.Limits.Http2.MaxRequestHeaderFieldSize =
-                            configuration.ServerMaxRequestHeaderFieldSize
-                            ?? ko.Limits.Http2.MaxRequestHeaderFieldSize;
-
-                        switch (hostname)
+                    void ConfigureListenOptions(ListenOptions listenOptions)
+                    {
+                        if (scheme == "https")
                         {
-                            case "+":
-                            case "*":
-                                ko.ListenAnyIP(port, ConfigureListenOptions);
-                                break;
-                            default:
-                                IPAddress iPAddress = Dns.GetHostAddresses(hostname).First();
-                                ko.Listen(iPAddress, port, ConfigureListenOptions);
-                                break;
+                            // Create self-signed cert for server.
+                            using (RSA rsa = RSA.Create())
+                            {
+                                var certReq = new CertificateRequest(
+                                    "CN=contoso.com",
+                                    rsa,
+                                    HashAlgorithmName.SHA256,
+                                    RSASignaturePadding.Pkcs1
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509BasicConstraintsExtension(false, false, 0, false)
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509EnhancedKeyUsageExtension(
+                                        new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                        false
+                                    )
+                                );
+                                certReq.CertificateExtensions.Add(
+                                    new X509KeyUsageExtension(
+                                        X509KeyUsageFlags.DigitalSignature,
+                                        false
+                                    )
+                                );
+                                X509Certificate2 cert = certReq.CreateSelfSigned(
+                                    DateTimeOffset.UtcNow.AddMonths(-1),
+                                    DateTimeOffset.UtcNow.AddMonths(1)
+                                );
+                                if (OperatingSystem.IsWindows())
+                                {
+                                    cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
+                                }
+                                listenOptions.UseHttps(cert);
+                            }
+                            if (configuration.HttpVersion == HttpVersion.Version30)
+                            {
+                                listenOptions.Protocols = HttpProtocols.Http3;
+                            }
                         }
-
-                        void ConfigureListenOptions(ListenOptions listenOptions)
+                        else
                         {
-                            if (scheme == "https")
-                            {
-                                // Create self-signed cert for server.
-                                using (RSA rsa = RSA.Create())
-                                {
-                                    var certReq = new CertificateRequest(
-                                        "CN=contoso.com",
-                                        rsa,
-                                        HashAlgorithmName.SHA256,
-                                        RSASignaturePadding.Pkcs1
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509BasicConstraintsExtension(false, false, 0, false)
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509EnhancedKeyUsageExtension(
-                                            new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                                            false
-                                        )
-                                    );
-                                    certReq.CertificateExtensions.Add(
-                                        new X509KeyUsageExtension(
-                                            X509KeyUsageFlags.DigitalSignature,
-                                            false
-                                        )
-                                    );
-                                    X509Certificate2 cert = certReq.CreateSelfSigned(
-                                        DateTimeOffset.UtcNow.AddMonths(-1),
-                                        DateTimeOffset.UtcNow.AddMonths(1)
-                                    );
-                                    if (OperatingSystem.IsWindows())
-                                    {
-                                        cert = new X509Certificate2(
-                                            cert.Export(X509ContentType.Pfx)
-                                        );
-                                    }
-                                    listenOptions.UseHttps(cert);
-                                }
-                                if (configuration.HttpVersion == HttpVersion.Version30)
-                                {
-                                    listenOptions.Protocols = HttpProtocols.Http3;
-                                }
-                            }
-                            else
-                            {
-                                listenOptions.Protocols =
-                                    configuration.HttpVersion == HttpVersion.Version20
-                                        ? HttpProtocols.Http2
-                                        : HttpProtocols.Http1;
-                            }
+                            listenOptions.Protocols =
+                                configuration.HttpVersion == HttpVersion.Version20
+                                    ? HttpProtocols.Http2
+                                    : HttpProtocols.Http1;
                         }
                     }
-                );
+                });
             }
             ;
 
@@ -213,13 +207,11 @@ namespace HttpStress
 
             host = host.UseSerilog()
                 // Set up how each request should be handled by the server.
-                .Configure(
-                    app =>
-                    {
-                        app.UseRouting();
-                        app.UseEndpoints(MapRoutes);
-                    }
-                );
+                .Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseEndpoints(MapRoutes);
+                });
 
             _webHost = host.Build();
             _webHost.Start();

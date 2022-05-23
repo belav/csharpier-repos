@@ -178,16 +178,14 @@ public class DefaultHubDispatcherBenchmark
         {
             var channel = Channel.CreateUnbounded<int>();
 
-            _ = Task.Run(
-                async () =>
+            _ = Task.Run(async () =>
+            {
+                for (var i = 0; i < count; i++)
                 {
-                    for (var i = 0; i < count; i++)
-                    {
-                        await channel.Writer.WriteAsync(i);
-                    }
-                    channel.Writer.Complete();
+                    await channel.Writer.WriteAsync(i);
                 }
-            );
+                channel.Writer.Complete();
+            });
 
             return channel.Reader;
         }

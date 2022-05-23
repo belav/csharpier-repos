@@ -1247,71 +1247,64 @@ namespace System.Net.Security.Tests
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(t1, t2);
 
-                Task writer = Task.Run(
-                    () =>
+                Task writer = Task.Run(() =>
+                {
+                    Memory<byte> data = new Memory<byte>(dataToCopy);
+                    while (data.Length > 0)
                     {
-                        Memory<byte> data = new Memory<byte>(dataToCopy);
-                        while (data.Length > 0)
+                        int writeLength = Math.Min(data.Length, writeBufferSize);
+                        if (useAsync)
                         {
-                            int writeLength = Math.Min(data.Length, writeBufferSize);
-                            if (useAsync)
-                            {
-                                server
-                                    .WriteAsync(data.Slice(0, writeLength))
-                                    .GetAwaiter()
-                                    .GetResult();
-                            }
-                            else
-                            {
-                                server.Write(data.Span.Slice(0, writeLength));
-                            }
-
-                            data = data.Slice(Math.Min(writeBufferSize, data.Length));
+                            server.WriteAsync(data.Slice(0, writeLength)).GetAwaiter().GetResult();
+                        }
+                        else
+                        {
+                            server.Write(data.Span.Slice(0, writeLength));
                         }
 
-                        server.ShutdownAsync().GetAwaiter().GetResult();
+                        data = data.Slice(Math.Min(writeBufferSize, data.Length));
                     }
-                );
 
-                Task reader = Task.Run(
-                    () =>
+                    server.ShutdownAsync().GetAwaiter().GetResult();
+                });
+
+                Task reader = Task.Run(() =>
+                {
+                    Memory<byte> readBuffer = new Memory<byte>(dataReceived);
+                    int totalLength = 0;
+                    int readLength;
+
+                    while (true)
                     {
-                        Memory<byte> readBuffer = new Memory<byte>(dataReceived);
-                        int totalLength = 0;
-                        int readLength;
-
-                        while (true)
+                        if (useAsync)
                         {
-                            if (useAsync)
-                            {
-                                readLength = client
-                                    .ReadAsync(readBuffer.Slice(totalLength, readBufferSize))
-                                    .GetAwaiter()
-                                    .GetResult();
-                            }
-                            else
-                            {
-                                readLength = client.Read(
-                                    readBuffer.Span.Slice(totalLength, readBufferSize)
-                                );
-                            }
-
-                            if (readLength == 0)
-                            {
-                                break;
-                            }
-
-                            totalLength += readLength;
-                            Assert.True(totalLength <= bufferSize);
+                            readLength = client
+                                .ReadAsync(readBuffer.Slice(totalLength, readBufferSize))
+                                .GetAwaiter()
+                                .GetResult();
+                        }
+                        else
+                        {
+                            readLength = client.Read(
+                                readBuffer.Span.Slice(totalLength, readBufferSize)
+                            );
                         }
 
-                        Assert.Equal(bufferSize, totalLength);
-                        AssertExtensions.SequenceEqual(
-                            dataToCopy.AsSpan(),
-                            dataReceived.AsSpan().Slice(0, totalLength)
-                        );
+                        if (readLength == 0)
+                        {
+                            break;
+                        }
+
+                        totalLength += readLength;
+                        Assert.True(totalLength <= bufferSize);
                     }
-                );
+
+                    Assert.Equal(bufferSize, totalLength);
+                    AssertExtensions.SequenceEqual(
+                        dataToCopy.AsSpan(),
+                        dataReceived.AsSpan().Slice(0, totalLength)
+                    );
+                });
 
                 await TestConfiguration.WhenAllOrAnyFailedWithTimeout(writer, reader);
             }

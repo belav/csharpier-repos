@@ -91,12 +91,10 @@ namespace System.Web.Razor.Text
                 Location = CurrentLocation
             };
             _backtrackStack.Push(context);
-            return new DisposableAction(
-                () =>
-                {
-                    EndLookahead(context);
-                }
-            );
+            return new DisposableAction(() =>
+            {
+                EndLookahead(context);
+            });
         }
 
         // REVIEW: This really doesn't sound like the best name for this...

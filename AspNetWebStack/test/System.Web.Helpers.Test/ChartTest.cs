@@ -902,13 +902,11 @@ namespace System.Web.Helpers.Test
         )
         {
             bool actionCalled = false;
-            chart.ExecuteChartAction(
-                c =>
-                {
-                    action(c);
-                    actionCalled = true;
-                }
-            );
+            chart.ExecuteChartAction(c =>
+            {
+                action(c);
+                actionCalled = true;
+            });
             Assert.True(actionCalled);
         }
 

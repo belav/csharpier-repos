@@ -39,13 +39,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 _ => { },
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.ToView("Orders");
-                            x.OwnsOne(y => y.Shipping);
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.ToView("Orders");
+                        x.OwnsOne(y => y.Shipping);
+                    }),
                 upOperations => Assert.Equal(0, upOperations.Count)
             );
         }
@@ -56,14 +54,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 _ => { },
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.ToView("Orders");
-                            x.OwnsOne(y => y.Billing);
-                            x.OwnsOne(y => y.Shipping);
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.ToView("Orders");
+                        x.OwnsOne(y => y.Billing);
+                        x.OwnsOne(y => y.Shipping);
+                    }),
                 upOperations => Assert.Equal(0, upOperations.Count)
             );
         }
@@ -602,13 +598,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 _ => { },
                 modelBuilder =>
-                    modelBuilder.Entity<CreateTableEntity1>(
-                        b =>
-                        {
-                            b.Property(e => e.C).HasColumnName("C");
-                            b.Property(e => e.A).HasColumnName("C");
-                        }
-                    ),
+                    modelBuilder.Entity<CreateTableEntity1>(b =>
+                    {
+                        b.Property(e => e.C).HasColumnName("C");
+                        b.Property(e => e.A).HasColumnName("C");
+                    }),
                 operations =>
                 {
                     var operation = Assert.IsType<CreateTableOperation>(Assert.Single(operations));
@@ -844,14 +838,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 _ => { },
                 modelBuilder =>
-                    modelBuilder.Entity<CreateTableEntity1>(
-                        b =>
-                        {
-                            b.Property(e => e.C).HasColumnOrder(3);
-                            b.Property(e => e.B).HasColumnOrder(1);
-                            b.Property(e => e.A).HasColumnOrder(2);
-                        }
-                    ),
+                    modelBuilder.Entity<CreateTableEntity1>(b =>
+                    {
+                        b.Property(e => e.C).HasColumnOrder(3);
+                        b.Property(e => e.B).HasColumnOrder(1);
+                        b.Property(e => e.A).HasColumnOrder(2);
+                    }),
                 operations =>
                 {
                     var operation = Assert.IsType<CreateTableOperation>(Assert.Single(operations));
@@ -8041,46 +8033,38 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 common =>
                 {
-                    common.Entity<Animal>(
-                        x =>
-                        {
-                            x.Property<int>("Id");
-                            x.Property<string>("Name");
-                            x.Property<int>("Discriminator");
+                    common.Entity<Animal>(x =>
+                    {
+                        x.Property<int>("Id");
+                        x.Property<string>("Name");
+                        x.Property<int>("Discriminator");
 
-                            x.HasDiscriminator<int>("Discriminator").HasValue(1).HasValue<Eagle>(2);
+                        x.HasDiscriminator<int>("Discriminator").HasValue(1).HasValue<Eagle>(2);
 
-                            x.ToTable("Animal", "dbo");
-                            x.HasData(new { Id = 42 });
-                        }
-                    );
+                        x.ToTable("Animal", "dbo");
+                        x.HasData(new { Id = 42 });
+                    });
 
-                    common.Entity<Eagle>(
-                        x =>
-                        {
-                            x.HasBaseType<Animal>();
-                            x.HasData(new { Id = 41 });
-                        }
-                    );
+                    common.Entity<Eagle>(x =>
+                    {
+                        x.HasBaseType<Animal>();
+                        x.HasData(new { Id = 41 });
+                    });
                 },
                 source =>
-                    source.Entity<Animal>(
-                        x =>
-                        {
-                            x.HasData(new Animal { Id = 43, Name = "Bob" });
-                        }
-                    ),
+                    source.Entity<Animal>(x =>
+                    {
+                        x.HasData(new Animal { Id = 43, Name = "Bob" });
+                    }),
                 target =>
-                    target.Entity<Shark>(
-                        x =>
-                        {
-                            x.HasBaseType<Animal>();
+                    target.Entity<Shark>(x =>
+                    {
+                        x.HasBaseType<Animal>();
 
-                            x.HasDiscriminator<int>("Discriminator").HasValue(3);
+                        x.HasDiscriminator<int>("Discriminator").HasValue(3);
 
-                            x.HasData(new Shark { Id = 43, Name = "Bob" });
-                        }
-                    ),
+                        x.HasData(new Shark { Id = 43, Name = "Bob" });
+                    }),
                 upOps =>
                     Assert.Collection(
                         upOps,
@@ -9434,45 +9418,40 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 target =>
                 {
-                    target.Entity<SomeEntity>(
-                        builder =>
+                    target.Entity<SomeEntity>(builder =>
+                    {
+                        builder.HasAlternateKey(x => x.Guid);
+                        builder.Property(x => x.Id).ValueGeneratedNever();
+
+                        var data = new[]
                         {
-                            builder.HasAlternateKey(x => x.Guid);
-                            builder.Property(x => x.Id).ValueGeneratedNever();
+                            new SomeEntity(1L, new Guid("74520CF7-0C78-447C-8FE0-ED97A16A13F5"))
+                        };
 
-                            var data = new[]
-                            {
-                                new SomeEntity(1L, new Guid("74520CF7-0C78-447C-8FE0-ED97A16A13F5"))
-                            };
+                        var owned = data.Select(x => new { SomeEntityId = x.Id, }).ToArray();
 
-                            var owned = data.Select(x => new { SomeEntityId = x.Id, }).ToArray();
+                        builder.OwnsOne(x => x.OwnedEntity).HasData(owned);
+                        builder.HasData(data);
+                    });
 
-                            builder.OwnsOne(x => x.OwnedEntity).HasData(owned);
-                            builder.HasData(data);
-                        }
-                    );
+                    target.Entity<ApplicationUser>(builder =>
+                    {
+                        builder.HasAlternateKey(x => x.Guid);
 
-                    target.Entity<ApplicationUser>(
-                        builder =>
+                        var data = new[]
                         {
-                            builder.HasAlternateKey(x => x.Guid);
-
-                            var data = new[]
+                            new ApplicationUser()
                             {
-                                new ApplicationUser()
-                                {
-                                    Id = 12345,
-                                    Guid = new Guid("4C85B629-732A-4724-AA33-6E8108134BAE")
-                                }
-                            };
+                                Id = 12345,
+                                Guid = new Guid("4C85B629-732A-4724-AA33-6E8108134BAE")
+                            }
+                        };
 
-                            var owned = data.Select(x => new { ApplicationUserId = x.Id, })
-                                .ToArray();
+                        var owned = data.Select(x => new { ApplicationUserId = x.Id, }).ToArray();
 
-                            builder.OwnsOne(x => x.OwnedEntity).HasData(owned);
-                            builder.HasData(data);
-                        }
-                    );
+                        builder.OwnsOne(x => x.OwnedEntity).HasData(owned);
+                        builder.HasData(data);
+                    });
                 },
                 target => { },
                 source => { },
@@ -10459,89 +10438,76 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         [ConditionalFact]
         public void SeedData_with_shadow_navigation_properties()
         {
-            SeedData_with_navigation_properties(
-                target =>
-                {
-                    target.Entity(
-                        "Blog",
-                        x =>
-                        {
-                            x.Property<int>("BlogId");
-                            x.Property<string>("Url");
-                            x.HasData(
-                                new { BlogId = 32, Url = "updated.url" },
-                                new { BlogId = 38, Url = "newblog.url" },
-                                new { BlogId = 316, Url = "nowitexists.blog" }
-                            );
-                        }
-                    );
-                    target.Entity(
-                        "Post",
-                        x =>
-                        {
-                            x.Property<int>("PostId");
-                            x.Property<string>("Title");
-                            x.HasOne("Blog", "Blog")
-                                .WithMany("Posts")
-                                .HasForeignKey("BlogId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                            x.HasData(
-                                new
-                                {
-                                    PostId = 416,
-                                    Title = "Post To Non-existent BlogId",
-                                    BlogId = 316
-                                },
-                                new { PostId = 545, Title = "Updated Title", BlogId = 38 },
-                                new { PostId = 546, Title = "New Post", BlogId = 32 }
-                            );
-                        }
-                    );
-                }
-            );
+            SeedData_with_navigation_properties(target =>
+            {
+                target.Entity(
+                    "Blog",
+                    x =>
+                    {
+                        x.Property<int>("BlogId");
+                        x.Property<string>("Url");
+                        x.HasData(
+                            new { BlogId = 32, Url = "updated.url" },
+                            new { BlogId = 38, Url = "newblog.url" },
+                            new { BlogId = 316, Url = "nowitexists.blog" }
+                        );
+                    }
+                );
+                target.Entity(
+                    "Post",
+                    x =>
+                    {
+                        x.Property<int>("PostId");
+                        x.Property<string>("Title");
+                        x.HasOne("Blog", "Blog")
+                            .WithMany("Posts")
+                            .HasForeignKey("BlogId")
+                            .OnDelete(DeleteBehavior.Cascade);
+                        x.HasData(
+                            new
+                            {
+                                PostId = 416,
+                                Title = "Post To Non-existent BlogId",
+                                BlogId = 316
+                            },
+                            new { PostId = 545, Title = "Updated Title", BlogId = 38 },
+                            new { PostId = 546, Title = "New Post", BlogId = 32 }
+                        );
+                    }
+                );
+            });
         }
 
         [ConditionalFact]
         public void SeedData_with_CLR_navigation_properties()
         {
-            SeedData_with_navigation_properties(
-                target =>
+            SeedData_with_navigation_properties(target =>
+            {
+                target.Entity<Blog>(x =>
                 {
-                    target.Entity<Blog>(
-                        x =>
-                        {
-                            x.Property<int>("BlogId");
-                            x.Property<string>("Url");
-                            x.HasData(
-                                new { BlogId = 32, Url = "updated.url" },
-                                new { BlogId = 38, Url = "newblog.url" },
-                                new { BlogId = 316, Url = "nowitexists.blog" }
-                            );
-                        }
+                    x.Property<int>("BlogId");
+                    x.Property<string>("Url");
+                    x.HasData(
+                        new { BlogId = 32, Url = "updated.url" },
+                        new { BlogId = 38, Url = "newblog.url" },
+                        new { BlogId = 316, Url = "nowitexists.blog" }
                     );
-                    target.Entity<Post>(
-                        x =>
-                        {
-                            x.Property<int>("PostId");
-                            x.Property<string>("Title");
-                            x.HasOne(p => p.Blog)
-                                .WithMany("Posts")
-                                .HasForeignKey("BlogId")
-                                .OnDelete(DeleteBehavior.Cascade);
-                            x.HasData(
-                                new
-                                {
-                                    PostId = 416,
-                                    Title = "Post To Non-existent BlogId",
-                                    BlogId = 316
-                                },
-                                new { PostId = 545, Title = "Updated Title", BlogId = 38 },
-                                new { PostId = 546, Title = "New Post", BlogId = 32 }
-                            );
-                        }
+                });
+                target.Entity<Post>(x =>
+                {
+                    x.Property<int>("PostId");
+                    x.Property<string>("Title");
+                    x.HasOne(p => p.Blog)
+                        .WithMany("Posts")
+                        .HasForeignKey("BlogId")
+                        .OnDelete(DeleteBehavior.Cascade);
+                    x.HasData(
+                        new { PostId = 416, Title = "Post To Non-existent BlogId", BlogId = 316 },
+                        new { PostId = 545, Title = "Updated Title", BlogId = 38 },
+                        new { PostId = 546, Title = "New Post", BlogId = 32 }
                     );
-                }
-            );
+                });
+            });
         }
 
         private void SeedData_with_navigation_properties(Action<ModelBuilder> buildTargetAction)
@@ -10755,13 +10721,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 common =>
-                    common.Entity<Order>(
-                        x =>
-                        {
-                            x.OwnsOne(y => y.Billing);
-                            x.OwnsOne(y => y.Shipping);
-                        }
-                    ),
+                    common.Entity<Order>(x =>
+                    {
+                        x.OwnsOne(y => y.Billing);
+                        x.OwnsOne(y => y.Shipping);
+                    }),
                 source => source.Entity<Order>().OwnsOne(y => y.Shipping).Ignore("AddressLine2"),
                 target => { },
                 upOperations =>
@@ -10794,13 +10758,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                         .Ignore(x => x.AddressLine2)
                         .OwnsOne(y => y.Billing),
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.OwnsOne(y => y.Billing);
-                            x.OwnsOne(y => y.Shipping);
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.OwnsOne(y => y.Billing);
+                        x.OwnsOne(y => y.Shipping);
+                    }),
                 upOperations =>
                 {
                     Assert.Equal(2, upOperations.Count);
@@ -10835,13 +10797,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 source => source.Entity<Customer>().Ignore(c => c.Orders).OwnsOne(y => y.Mailing),
                 target =>
                     target
-                        .Entity<Order>(
-                            x =>
-                            {
-                                x.OwnsOne(y => y.Billing);
-                                x.OwnsOne(y => y.Shipping);
-                            }
-                        )
+                        .Entity<Order>(x =>
+                        {
+                            x.OwnsOne(y => y.Billing);
+                            x.OwnsOne(y => y.Shipping);
+                        })
                         .Entity<Customer>()
                         .Ignore(c => c.Orders)
                         .OwnsOne(y => y.Mailing),
@@ -10860,17 +10820,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 common => common.Ignore<Customer>(),
                 _ => { },
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.Property<int>("_secretId");
-                            x.HasData(new Order(42) { Id = 1 });
-                            x.OwnsOne(y => y.Billing)
-                                .HasData(new { OrderId = 1, AddressLine1 = "billing" });
-                            x.OwnsOne(y => y.Shipping)
-                                .HasData(new { OrderId = 1, AddressLine2 = "shipping" });
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.Property<int>("_secretId");
+                        x.HasData(new Order(42) { Id = 1 });
+                        x.OwnsOne(y => y.Billing)
+                            .HasData(new { OrderId = 1, AddressLine1 = "billing" });
+                        x.OwnsOne(y => y.Shipping)
+                            .HasData(new { OrderId = 1, AddressLine2 = "shipping" });
+                    }),
                 upOps =>
                     Assert.Collection(
                         upOps,
@@ -10914,17 +10872,15 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 common =>
                 {
                     common.Ignore<Customer>();
-                    common.Entity<Order>(
-                        x =>
-                        {
-                            x.Property<int>("_secretId");
-                            x.HasData(new Order(42) { Id = 1 });
-                            x.OwnsOne(y => y.Billing)
-                                .HasData(new { OrderId = 1, AddressLine1 = "billing" });
-                            x.OwnsOne(y => y.Shipping)
-                                .HasData(new { OrderId = 1, AddressLine2 = "shipping" });
-                        }
-                    );
+                    common.Entity<Order>(x =>
+                    {
+                        x.Property<int>("_secretId");
+                        x.HasData(new Order(42) { Id = 1 });
+                        x.OwnsOne(y => y.Billing)
+                            .HasData(new { OrderId = 1, AddressLine1 = "billing" });
+                        x.OwnsOne(y => y.Shipping)
+                            .HasData(new { OrderId = 1, AddressLine2 = "shipping" });
+                    });
                 },
                 _ => { },
                 _ => { },
@@ -10939,29 +10895,27 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 common =>
                 {
-                    common.Entity<Customer>(
-                        c =>
-                        {
-                            c.Ignore(x => x.Mailing);
+                    common.Entity<Customer>(c =>
+                    {
+                        c.Ignore(x => x.Mailing);
 
-                            c.HasKey(x => x.Id);
-                            c.HasData(new Customer { Id = 1 });
+                        c.HasKey(x => x.Id);
+                        c.HasData(new Customer { Id = 1 });
 
-                            c.OwnsMany(
-                                y => y.Orders,
-                                x =>
-                                {
-                                    x.Ignore(o => o.Billing);
-                                    x.Ignore(o => o.Shipping);
+                        c.OwnsMany(
+                            y => y.Orders,
+                            x =>
+                            {
+                                x.Ignore(o => o.Billing);
+                                x.Ignore(o => o.Shipping);
 
-                                    x.WithOwner().HasForeignKey("CustomerId");
+                                x.WithOwner().HasForeignKey("CustomerId");
 
-                                    x.HasKey("CustomerId", "Id");
-                                    x.HasData(new { Id = 2, CustomerId = 1 });
-                                }
-                            );
-                        }
-                    );
+                                x.HasKey("CustomerId", "Id");
+                                x.HasData(new { Id = 2, CustomerId = 1 });
+                            }
+                        );
+                    });
                 },
                 _ => { },
                 _ => { },
@@ -10977,46 +10931,42 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 common =>
                 {
-                    common.Entity<Customer>(
-                        c =>
-                        {
-                            c.Ignore(x => x.Mailing);
+                    common.Entity<Customer>(c =>
+                    {
+                        c.Ignore(x => x.Mailing);
 
-                            c.HasKey(x => x.Id);
-                            c.HasData(new Customer { Id = 1 });
+                        c.HasKey(x => x.Id);
+                        c.HasData(new Customer { Id = 1 });
 
-                            c.OwnsMany(
-                                y => y.Orders,
-                                x =>
-                                {
-                                    x.Ignore(o => o.Billing);
-                                    x.Ignore(o => o.Shipping);
+                        c.OwnsMany(
+                            y => y.Orders,
+                            x =>
+                            {
+                                x.Ignore(o => o.Billing);
+                                x.Ignore(o => o.Shipping);
 
-                                    x.WithOwner().HasForeignKey("CustomerId");
+                                x.WithOwner().HasForeignKey("CustomerId");
 
-                                    x.HasKey("CustomerId", "Id");
-                                    x.HasData(new { Id = 2, CustomerId = 1 });
-                                }
-                            );
-                        }
-                    );
+                                x.HasKey("CustomerId", "Id");
+                                x.HasData(new { Id = 2, CustomerId = 1 });
+                            }
+                        );
+                    });
                 },
                 _ => { },
                 target =>
                 {
-                    target.Entity<Customer>(
-                        c =>
-                        {
-                            c.OwnsMany(
-                                y => y.Orders,
-                                x =>
-                                {
-                                    x.ToTable("Order", t => t.ExcludeFromMigrations());
-                                }
-                            );
-                            c.ToTable("Customer", t => t.ExcludeFromMigrations());
-                        }
-                    );
+                    target.Entity<Customer>(c =>
+                    {
+                        c.OwnsMany(
+                            y => y.Orders,
+                            x =>
+                            {
+                                x.ToTable("Order", t => t.ExcludeFromMigrations());
+                            }
+                        );
+                        c.ToTable("Customer", t => t.ExcludeFromMigrations());
+                    });
                 },
                 Assert.Empty,
                 Assert.Empty,
@@ -11211,13 +11161,11 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 source => source.Entity<OldOrder>().ToTable("Order").OwnsOne(o => o.Billing),
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.OwnsOne(o => o.Billing);
-                            x.OwnsOne(o => o.Shipping);
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.OwnsOne(o => o.Billing);
+                        x.OwnsOne(o => o.Shipping);
+                    }),
                 operations =>
                 {
                     Assert.Equal(2, operations.Count);
@@ -11240,22 +11188,18 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 source =>
-                    source.Entity<Order>(
-                        x =>
-                        {
-                            x.OwnsOne(o => o.Billing).Property<int>("OldZip");
-                            x.Ignore(o => o.Shipping);
-                        }
-                    ),
+                    source.Entity<Order>(x =>
+                    {
+                        x.OwnsOne(o => o.Billing).Property<int>("OldZip");
+                        x.Ignore(o => o.Shipping);
+                    }),
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.Property<int>("NotZip");
-                            x.OwnsOne(o => o.Billing).Property<int>("NewZip");
-                            x.Ignore(o => o.Shipping);
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.Property<int>("NotZip");
+                        x.OwnsOne(o => o.Billing).Property<int>("NewZip");
+                        x.Ignore(o => o.Shipping);
+                    }),
                 operations =>
                 {
                     Assert.Equal(2, operations.Count);
@@ -11277,23 +11221,19 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
         {
             Execute(
                 source =>
-                    source.Entity<Order>(
-                        x =>
-                        {
-                            x.Property<DateTime>("OldDate");
-                            x.OwnsOne(o => o.Billing);
-                            x.Ignore(o => o.Shipping);
-                        }
-                    ),
+                    source.Entity<Order>(x =>
+                    {
+                        x.Property<DateTime>("OldDate");
+                        x.OwnsOne(o => o.Billing);
+                        x.Ignore(o => o.Shipping);
+                    }),
                 target =>
-                    target.Entity<Order>(
-                        x =>
-                        {
-                            x.Property<DateTime>("NewDate");
-                            x.OwnsOne(o => o.Billing).Property<DateTime>("AnotherDate");
-                            x.Ignore(o => o.Shipping);
-                        }
-                    ),
+                    target.Entity<Order>(x =>
+                    {
+                        x.Property<DateTime>("NewDate");
+                        x.OwnsOne(o => o.Billing).Property<DateTime>("AnotherDate");
+                        x.Ignore(o => o.Shipping);
+                    }),
                 operations =>
                 {
                     Assert.Equal(2, operations.Count);
@@ -11389,19 +11329,17 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
             Execute(
                 _ => { },
                 target =>
-                    target.Entity<Customer13300>(
-                        builder =>
-                        {
-                            builder.OwnsOne(
-                                o => o.Created,
-                                sa => sa.Property(p => p.Reason).HasMaxLength(255).IsUnicode(false)
-                            );
+                    target.Entity<Customer13300>(builder =>
+                    {
+                        builder.OwnsOne(
+                            o => o.Created,
+                            sa => sa.Property(p => p.Reason).HasMaxLength(255).IsUnicode(false)
+                        );
 
-                            builder.Property(x => x.TenantId).IsRequired();
-                            builder.HasKey(x => new { x.TenantId, x.ProviderKey });
-                            builder.Property(x => x.ProviderKey).HasMaxLength(50).IsUnicode(false);
-                        }
-                    ),
+                        builder.Property(x => x.TenantId).IsRequired();
+                        builder.HasKey(x => new { x.TenantId, x.ProviderKey });
+                        builder.Property(x => x.ProviderKey).HasMaxLength(50).IsUnicode(false);
+                    }),
                 operations =>
                 {
                     var createTableOperation = Assert.IsType<CreateTableOperation>(
@@ -11479,14 +11417,12 @@ namespace Microsoft.EntityFrameworkCore.Migrations.Internal
                 target =>
                 {
                     target.Entity<Principal>();
-                    target.Entity<Dependent>(
-                        b =>
-                        {
-                            b.Property<int>("ShadowPk");
-                            b.Property<int>("AnotherShadowProperty");
-                            b.HasKey("Id1", "Id2", "Id3", "ShadowPk");
-                        }
-                    );
+                    target.Entity<Dependent>(b =>
+                    {
+                        b.Property<int>("ShadowPk");
+                        b.Property<int>("AnotherShadowProperty");
+                        b.HasKey("Id1", "Id2", "Id3", "ShadowPk");
+                    });
                 },
                 operations =>
                 {

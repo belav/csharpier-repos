@@ -98,21 +98,17 @@ public class InteropClient : IDisposable
         this.options = options;
 
         var services = new ServiceCollection();
-        services.AddLogging(
-            configure =>
+        services.AddLogging(configure =>
+        {
+            configure.SetMinimumLevel(LogLevel.Trace);
+            configure.AddConsole(loggerOptions =>
             {
-                configure.SetMinimumLevel(LogLevel.Trace);
-                configure.AddConsole(
-                    loggerOptions =>
-                    {
 #pragma warning disable CS0618 // Type or member is obsolete
-                        loggerOptions.IncludeScopes = true;
-                        loggerOptions.DisableColors = true;
+                loggerOptions.IncludeScopes = true;
+                loggerOptions.DisableColors = true;
 #pragma warning restore CS0618 // Type or member is obsolete
-                    }
-                );
-            }
-        );
+            });
+        });
 
         serviceProvider = services.BuildServiceProvider();
 
@@ -129,21 +125,19 @@ public class InteropClient : IDisposable
         var parserResult = Parser.Default
             .ParseArguments<ClientOptions>(args)
             .WithNotParsed(errors => Environment.Exit(1))
-            .WithParsed(
-                options =>
-                {
-                    Console.WriteLine("Use TLS: " + options.UseTls);
-                    Console.WriteLine("Use Test CA: " + options.UseTestCa);
-                    Console.WriteLine("Client type: " + options.ClientType);
-                    Console.WriteLine("Server host: " + options.ServerHost);
-                    Console.WriteLine("Server port: " + options.ServerPort);
+            .WithParsed(options =>
+            {
+                Console.WriteLine("Use TLS: " + options.UseTls);
+                Console.WriteLine("Use Test CA: " + options.UseTestCa);
+                Console.WriteLine("Client type: " + options.ClientType);
+                Console.WriteLine("Server host: " + options.ServerHost);
+                Console.WriteLine("Server port: " + options.ServerPort);
 
-                    using (var interopClient = new InteropClient(options))
-                    {
-                        interopClient.Run().GetAwaiter().GetResult();
-                    }
+                using (var interopClient = new InteropClient(options))
+                {
+                    interopClient.Run().GetAwaiter().GetResult();
                 }
-            );
+            });
     }
 
     private async Task Run()

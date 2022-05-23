@@ -472,19 +472,17 @@ Newtonsoft.Json Error: 0 : Error!
             for (int i = 0; i < 20; i++)
             {
                 tasks.Add(
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        for (int j = 0; j < 1005; j++)
                         {
-                            for (int j = 0; j < 1005; j++)
-                            {
-                                traceWriter.Trace(
-                                    TraceLevel.Verbose,
-                                    (j + 1).ToString(CultureInfo.InvariantCulture),
-                                    null
-                                );
-                            }
+                            traceWriter.Trace(
+                                TraceLevel.Verbose,
+                                (j + 1).ToString(CultureInfo.InvariantCulture),
+                                null
+                            );
                         }
-                    )
+                    })
                 );
             }
 
@@ -503,33 +501,29 @@ Newtonsoft.Json Error: 0 : Error!
             MemoryTraceWriter traceWriter = new MemoryTraceWriter();
 
             tasks.Add(
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    for (int j = 0; j < 10005; j++)
                     {
-                        for (int j = 0; j < 10005; j++)
-                        {
-                            traceWriter.Trace(
-                                TraceLevel.Verbose,
-                                (j + 1).ToString(CultureInfo.InvariantCulture),
-                                null
-                            );
-                        }
+                        traceWriter.Trace(
+                            TraceLevel.Verbose,
+                            (j + 1).ToString(CultureInfo.InvariantCulture),
+                            null
+                        );
                     }
-                )
+                })
             );
 
             string s = null;
 
             tasks.Add(
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    for (int j = 0; j < 10005; j++)
                     {
-                        for (int j = 0; j < 10005; j++)
-                        {
-                            s = traceWriter.ToString();
-                        }
+                        s = traceWriter.ToString();
                     }
-                )
+                })
             );
 
             await Task.WhenAll(tasks);

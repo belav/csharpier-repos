@@ -180,40 +180,30 @@ internal class TestUtils
         foreach (var requestDelegate in requestDelegates)
         {
             // Test with in memory ResponseCache
-            yield return new HostBuilder().ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
+            yield return new HostBuilder().ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddResponseCaching(responseCachingOptions =>
+                        {
+                            if (options != null)
                             {
-                                services.AddResponseCaching(
-                                    responseCachingOptions =>
-                                    {
-                                        if (options != null)
-                                        {
-                                            responseCachingOptions.MaximumBodySize =
-                                                options.MaximumBodySize;
-                                            responseCachingOptions.UseCaseSensitivePaths =
-                                                options.UseCaseSensitivePaths;
-                                            responseCachingOptions.SystemClock =
-                                                options.SystemClock;
-                                        }
-                                    }
-                                );
+                                responseCachingOptions.MaximumBodySize = options.MaximumBodySize;
+                                responseCachingOptions.UseCaseSensitivePaths =
+                                    options.UseCaseSensitivePaths;
+                                responseCachingOptions.SystemClock = options.SystemClock;
                             }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                configureDelegate(app);
-                                app.UseResponseCaching();
-                                app.Run(requestDelegate);
-                            }
-                        );
-                }
-            );
+                        });
+                    })
+                    .Configure(app =>
+                    {
+                        configureDelegate(app);
+                        app.UseResponseCaching();
+                        app.Run(requestDelegate);
+                    });
+            });
         }
     }
 

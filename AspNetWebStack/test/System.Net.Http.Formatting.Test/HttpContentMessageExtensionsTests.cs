@@ -552,13 +552,11 @@ namespace System.Net.Http
                 )
             };
 
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                {
-                    HttpContent content = CreateContent(false, response, "sample body");
-                    return content.ReadAsHttpResponseMessageAsync();
-                }
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+            {
+                HttpContent content = CreateContent(false, response, "sample body");
+                return content.ReadAsHttpResponseMessageAsync();
+            });
         }
 
         [Fact]
@@ -575,13 +573,11 @@ namespace System.Net.Http
                 )
             };
 
-            return Assert.ThrowsAsync<InvalidOperationException>(
-                () =>
-                {
-                    HttpContent content = CreateContent(true, request, "sample body");
-                    return content.ReadAsHttpRequestMessageAsync();
-                }
-            );
+            return Assert.ThrowsAsync<InvalidOperationException>(() =>
+            {
+                HttpContent content = CreateContent(true, request, "sample body");
+                return content.ReadAsHttpRequestMessageAsync();
+            });
         }
 
         [Fact]

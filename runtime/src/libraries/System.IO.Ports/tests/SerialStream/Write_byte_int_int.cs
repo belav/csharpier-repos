@@ -305,13 +305,11 @@ namespace System.IO.Ports.Tests
                     0x64
                 };
 
-                Task writingTask = Task.Run(
-                    () =>
-                    {
-                        com1.BaseStream.Write(msg, 0, msg.Length);
-                        com1.BaseStream.Flush();
-                    }
-                );
+                Task writingTask = Task.Run(() =>
+                {
+                    com1.BaseStream.Write(msg, 0, msg.Length);
+                    com1.BaseStream.Flush();
+                });
 
                 byte[] bytes = new byte[msg.Length];
                 int totalBytesRead = 0;

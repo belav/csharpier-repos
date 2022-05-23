@@ -106,21 +106,19 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.Internal()
-                        .AddMemberConfiguration()
-                        .AddName<SourceToDestinationNameMapperAttributesMember>();
-                    cfg.CreateProfile(
-                        "New Profile",
-                        profile =>
-                        {
-                            profile.CreateMap<Category, CategoryDto>();
-                        }
-                    );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.Internal()
+                    .AddMemberConfiguration()
+                    .AddName<SourceToDestinationNameMapperAttributesMember>();
+                cfg.CreateProfile(
+                    "New Profile",
+                    profile =>
+                    {
+                        profile.CreateMap<Category, CategoryDto>();
+                    }
+                );
+            });
 
         [Fact]
         public void Sould_Map_MapToAttribute_To_Property_With_Matching_Name()

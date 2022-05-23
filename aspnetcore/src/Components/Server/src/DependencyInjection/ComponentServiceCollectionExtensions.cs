@@ -52,13 +52,11 @@ public static class ComponentServiceCollectionExtensions
         // the Server-Side Blazor context and thus aren't exposed.
         services
             .AddSignalR()
-            .AddHubOptions<ComponentHub>(
-                options =>
-                {
-                    options.SupportedProtocols.Clear();
-                    options.SupportedProtocols.Add(BlazorPackHubProtocol.ProtocolName);
-                }
-            );
+            .AddHubOptions<ComponentHub>(options =>
+            {
+                options.SupportedProtocols.Clear();
+                options.SupportedProtocols.Add(BlazorPackHubProtocol.ProtocolName);
+            });
 
         // Register the Blazor specific hub protocol
         services.TryAddEnumerable(

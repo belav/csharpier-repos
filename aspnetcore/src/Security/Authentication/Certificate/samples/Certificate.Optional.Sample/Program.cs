@@ -20,45 +20,39 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                    webBuilder.ConfigureKestrel(
-                        (context, options) =>
-                        {
-                            // Kestrel can't have different ssl settings for different hosts on the same IP because there's no way to change them based on SNI.
-                            // https://github.com/dotnet/runtime/issues/31097
-                            options.Listen(
-                                IPAddress.Parse(HostWithoutCert),
-                                5001,
-                                listenOptions =>
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+                webBuilder.ConfigureKestrel(
+                    (context, options) =>
+                    {
+                        // Kestrel can't have different ssl settings for different hosts on the same IP because there's no way to change them based on SNI.
+                        // https://github.com/dotnet/runtime/issues/31097
+                        options.Listen(
+                            IPAddress.Parse(HostWithoutCert),
+                            5001,
+                            listenOptions =>
+                            {
+                                listenOptions.UseHttps(httpsOptions =>
                                 {
-                                    listenOptions.UseHttps(
-                                        httpsOptions =>
-                                        {
-                                            httpsOptions.ClientCertificateMode =
-                                                ClientCertificateMode.NoCertificate;
-                                        }
-                                    );
-                                }
-                            );
-                            options.Listen(
-                                IPAddress.Parse(HostWithCert),
-                                5001,
-                                listenOptions =>
+                                    httpsOptions.ClientCertificateMode =
+                                        ClientCertificateMode.NoCertificate;
+                                });
+                            }
+                        );
+                        options.Listen(
+                            IPAddress.Parse(HostWithCert),
+                            5001,
+                            listenOptions =>
+                            {
+                                listenOptions.UseHttps(httpsOptions =>
                                 {
-                                    listenOptions.UseHttps(
-                                        httpsOptions =>
-                                        {
-                                            httpsOptions.ClientCertificateMode =
-                                                ClientCertificateMode.RequireCertificate;
-                                        }
-                                    );
-                                }
-                            );
-                        }
-                    );
-                }
-            );
+                                    httpsOptions.ClientCertificateMode =
+                                        ClientCertificateMode.RequireCertificate;
+                                });
+                            }
+                        );
+                    }
+                );
+            });
 }

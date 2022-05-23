@@ -203,32 +203,26 @@ class C
         {
             var source = TestResource.AllInOneCSharpCode;
 
-            await ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(
-                async analyzer =>
-                {
-                    using var workspace = TestWorkspace.CreateCSharp(
-                        source,
-                        TestOptions.Regular,
-                        composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
-                    );
+            await ThrowingDiagnosticAnalyzer<SyntaxKind>.VerifyAnalyzerEngineIsSafeAgainstExceptionsAsync(async analyzer =>
+            {
+                using var workspace = TestWorkspace.CreateCSharp(
+                    source,
+                    TestOptions.Regular,
+                    composition: s_compositionWithMockDiagnosticUpdateSourceRegistrationService
+                );
 
-                    var analyzerReference = new AnalyzerImageReference(
-                        ImmutableArray.Create(analyzer)
-                    );
-                    workspace.TryApplyChanges(
-                        workspace.CurrentSolution.WithAnalyzerReferences(
-                            new[] { analyzerReference }
-                        )
-                    );
+                var analyzerReference = new AnalyzerImageReference(ImmutableArray.Create(analyzer));
+                workspace.TryApplyChanges(
+                    workspace.CurrentSolution.WithAnalyzerReferences(new[] { analyzerReference })
+                );
 
-                    var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
-                    return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
-                        workspace,
-                        document,
-                        new TextSpan(0, document.GetTextAsync().Result.Length)
-                    );
-                }
-            );
+                var document = workspace.CurrentSolution.Projects.Single().Documents.Single();
+                return await DiagnosticProviderTestUtilities.GetAllDiagnosticsAsync(
+                    workspace,
+                    document,
+                    new TextSpan(0, document.GetTextAsync().Result.Length)
+                );
+            });
         }
 
         [WorkItem(908621, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/908621")]

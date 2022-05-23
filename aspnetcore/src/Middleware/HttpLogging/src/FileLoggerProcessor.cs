@@ -76,38 +76,36 @@ internal partial class FileLoggerProcessor : IAsyncDisposable
         _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
         _flushInterval = loggerOptions.FlushInterval;
         _fields = loggerOptions.LoggingFields;
-        _options.OnChange(
-            options =>
+        _options.OnChange(options =>
+        {
+            lock (_pathLock)
             {
-                lock (_pathLock)
+                // Clear the cached settings.
+                loggerOptions = options;
+
+                // Move to a new file if the fields have changed
+                if (_fields != loggerOptions.LoggingFields)
                 {
-                    // Clear the cached settings.
-                    loggerOptions = options;
-
-                    // Move to a new file if the fields have changed
-                    if (_fields != loggerOptions.LoggingFields)
+                    _fileNumber++;
+                    if (_fileNumber >= W3CLoggerOptions.MaxFileCount)
                     {
-                        _fileNumber++;
-                        if (_fileNumber >= W3CLoggerOptions.MaxFileCount)
-                        {
-                            _maxFilesReached = true;
-                            Log.MaxFilesReached(_logger);
-                        }
-                        _fields = loggerOptions.LoggingFields;
+                        _maxFilesReached = true;
+                        Log.MaxFilesReached(_logger);
                     }
-
-                    if (!string.IsNullOrEmpty(loggerOptions.LogDirectory))
-                    {
-                        _path = loggerOptions.LogDirectory;
-                    }
-
-                    _fileName = loggerOptions.FileName;
-                    _maxFileSize = loggerOptions.FileSizeLimit;
-                    _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
-                    _flushInterval = loggerOptions.FlushInterval;
+                    _fields = loggerOptions.LoggingFields;
                 }
+
+                if (!string.IsNullOrEmpty(loggerOptions.LogDirectory))
+                {
+                    _path = loggerOptions.LogDirectory;
+                }
+
+                _fileName = loggerOptions.FileName;
+                _maxFileSize = loggerOptions.FileSizeLimit;
+                _maxRetainedFiles = loggerOptions.RetainedFileCountLimit;
+                _flushInterval = loggerOptions.FlushInterval;
             }
-        );
+        });
 
         _today = SystemDateTime.Now;
 

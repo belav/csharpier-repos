@@ -377,12 +377,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    child.Remove();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                child.Remove();
+            });
             element.Verify();
         }
 
@@ -404,12 +402,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    child.Remove();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                child.Remove();
+            });
             element.Verify();
         }
     }
@@ -525,12 +521,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.RemoveNodes();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.RemoveNodes();
+            });
             element.Verify();
             Assert.NotNull(element.Element("Add"));
         }
@@ -554,12 +548,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.RemoveNodes();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.RemoveNodes();
+            });
             element.Verify();
         }
 
@@ -582,12 +574,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.RemoveAttributes();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.RemoveAttributes();
+            });
             element.Verify();
         }
     }

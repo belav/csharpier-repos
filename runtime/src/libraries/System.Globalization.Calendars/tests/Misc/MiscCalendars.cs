@@ -13,24 +13,18 @@ namespace System.Globalization.Tests
             Calendar hCal = new HebrewCalendar();
             DateTime dTest = hCal.ToDateTime(5360, 04, 14, 0, 0, 0, 0);
             Assert.True(dTest.Equals(new DateTime(1600, 1, 1)));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    dTest = hCal.ToDateTime(0, 03, 25, 0, 0, 0, 0);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    dTest = hCal.ToDateTime(10000, 03, 25, 0, 0, 0, 0);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    dTest = hCal.ToDateTime(5000, 0, 25, 0, 0, 0, 0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                dTest = hCal.ToDateTime(0, 03, 25, 0, 0, 0, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                dTest = hCal.ToDateTime(10000, 03, 25, 0, 0, 0, 0);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                dTest = hCal.ToDateTime(5000, 0, 25, 0, 0, 0, 0);
+            });
         }
 
         [Fact]

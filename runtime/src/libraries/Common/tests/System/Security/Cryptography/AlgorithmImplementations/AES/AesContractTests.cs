@@ -124,12 +124,10 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.Throws<CryptographicException>(
-                        () =>
-                        {
-                            aes.FeedbackSize = feedbackSize;
-                        }
-                    );
+                    Assert.Throws<CryptographicException>(() =>
+                    {
+                        aes.FeedbackSize = feedbackSize;
+                    });
                 }
                 else
                 {

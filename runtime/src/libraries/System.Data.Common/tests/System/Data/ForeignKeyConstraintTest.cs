@@ -280,12 +280,10 @@ namespace System.Data.Tests
             localTable.Columns.Add("Col2", typeof(bool));
 
             //Null
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(null, (DataColumn)null);
-                }
-            );
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                fkc = new ForeignKeyConstraint(null, (DataColumn)null);
+            });
 
             //zero length collection
             AssertExtensions.Throws<ArgumentException>(
@@ -297,31 +295,25 @@ namespace System.Data.Tests
             );
 
             //different datasets
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0], localTable.Columns[0]);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0], localTable.Columns[0]);
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0], localTable.Columns[1]);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0], localTable.Columns[1]);
+            });
 
             // Cannot create a Key from Columns that belong to
             // different tables.
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(
-                        new DataColumn[] { _ds.Tables[0].Columns[0], _ds.Tables[0].Columns[1] },
-                        new DataColumn[] { localTable.Columns[1], _ds.Tables[1].Columns[0] }
-                    );
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                fkc = new ForeignKeyConstraint(
+                    new DataColumn[] { _ds.Tables[0].Columns[0], _ds.Tables[0].Columns[1] },
+                    new DataColumn[] { localTable.Columns[1], _ds.Tables[1].Columns[0] }
+                );
+            });
         }
 
         [Fact]
@@ -348,15 +340,13 @@ namespace System.Data.Tests
                 _ds.Tables[0].Columns[2],
                 _ds.Tables[1].Columns[0]
             };
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(
-                        difTable,
-                        new DataColumn[] { _ds.Tables[0].Columns[1], _ds.Tables[0].Columns[0] }
-                    );
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                fkc = new ForeignKeyConstraint(
+                    difTable,
+                    new DataColumn[] { _ds.Tables[0].Columns[1], _ds.Tables[0].Columns[0] }
+                );
+            });
 
             //parent columns and child columns should be the same length
             //ArgumentException
@@ -378,15 +368,10 @@ namespace System.Data.Tests
             );
 
             //InvalidOperation: Parent and child are the same column.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    fkc = new ForeignKeyConstraint(
-                        _ds.Tables[0].Columns[0],
-                        _ds.Tables[0].Columns[0]
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                fkc = new ForeignKeyConstraint(_ds.Tables[0].Columns[0], _ds.Tables[0].Columns[0]);
+            });
         }
 
         [Fact]

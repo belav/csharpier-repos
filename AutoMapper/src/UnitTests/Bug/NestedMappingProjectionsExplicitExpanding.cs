@@ -42,16 +42,14 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<FuEntity, Fu>()
-                        .ForMember(dest => dest.Man, opt => opt.ExplicitExpansion());
-                    cfg.CreateProjection<ManEntity, Man>()
-                        .ForMember(dest => dest.Chu, opt => opt.ExplicitExpansion());
-                    cfg.CreateProjection<ChuEntity, Chu>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<FuEntity, Fu>()
+                    .ForMember(dest => dest.Man, opt => opt.ExplicitExpansion());
+                cfg.CreateProjection<ManEntity, Man>()
+                    .ForMember(dest => dest.Chu, opt => opt.ExplicitExpansion());
+                cfg.CreateProjection<ChuEntity, Chu>();
+            });
 
         protected override void Because_of()
         {

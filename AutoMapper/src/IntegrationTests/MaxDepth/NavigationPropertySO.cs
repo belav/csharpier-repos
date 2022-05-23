@@ -87,13 +87,11 @@ namespace AutoMapper.IntegrationTests.Net4
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
-                    cfg.CreateProjection<Cust, CustDTO>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerDTO>().MaxDepth(1);
+                cfg.CreateProjection<Cust, CustDTO>();
+            });
 
         [Fact]
         public void Can_map_with_projection()

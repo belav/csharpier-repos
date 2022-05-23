@@ -91,12 +91,10 @@ public class NameValueHeaderValueTest
         pair0.Value = "othervalue";
         Assert.Equal("othervalue", pair0.Value);
         Assert.Null(pair1.Value.Value);
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                pair1.Value = "othervalue";
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            pair1.Value = "othervalue";
+        });
     }
 
     [Fact]
@@ -129,12 +127,10 @@ public class NameValueHeaderValueTest
         pair0.Value = "othervalue";
         Assert.Equal("othervalue", pair0.Value);
         Assert.Equal("value", pair1.Value);
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                pair1.Value = "othervalue";
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            pair1.Value = "othervalue";
+        });
     }
 
     [Fact]
@@ -157,20 +153,16 @@ public class NameValueHeaderValueTest
     public void Value_CallSetterWithInvalidValues_Throw()
     {
         // Just verify that the setter calls the same validation the ctor invokes.
-        Assert.Throws<FormatException>(
-            () =>
-            {
-                var x = new NameValueHeaderValue("name");
-                x.Value = " x ";
-            }
-        );
-        Assert.Throws<FormatException>(
-            () =>
-            {
-                var x = new NameValueHeaderValue("name");
-                x.Value = "x y";
-            }
-        );
+        Assert.Throws<FormatException>(() =>
+        {
+            var x = new NameValueHeaderValue("name");
+            x.Value = " x ";
+        });
+        Assert.Throws<FormatException>(() =>
+        {
+            var x = new NameValueHeaderValue("name");
+            x.Value = "x y";
+        });
     }
 
     [Fact]

@@ -1131,17 +1131,15 @@ public class DefaultHtmlGeneratorTest
         var antiforgery = new Mock<IAntiforgery>();
         antiforgery
             .Setup(mock => mock.GetAndStoreTokens(It.IsAny<DefaultHttpContext>()))
-            .Returns(
-                () =>
-                {
-                    return new AntiforgeryTokenSet(
-                        "requestToken",
-                        "cookieToken",
-                        "formFieldName",
-                        "headerName"
-                    );
-                }
-            );
+            .Returns(() =>
+            {
+                return new AntiforgeryTokenSet(
+                    "requestToken",
+                    "cookieToken",
+                    "formFieldName",
+                    "headerName"
+                );
+            });
 
         var attributeProvider = new DefaultValidationHtmlAttributeProvider(
             mvcViewOptionsAccessor.Object,

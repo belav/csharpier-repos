@@ -133,25 +133,23 @@ public class AssemblyTestLog : IDisposable
             logStart.ToString("s", CultureInfo.InvariantCulture)
         );
 
-        return new Disposable(
-            () =>
-            {
-                stopwatch.Stop();
-                _globalLogger.LogInformation(
-                    "Finished test {testName} in {duration}s",
-                    testName,
-                    stopwatch.Elapsed.TotalSeconds
-                );
-                logger.LogInformation(
-                    "Finished test {testName} in {duration}s",
-                    testName,
-                    stopwatch.Elapsed.TotalSeconds
-                );
-                scope.Dispose();
-                factory.Dispose();
-                (serviceProvider as IDisposable)?.Dispose();
-            }
-        );
+        return new Disposable(() =>
+        {
+            stopwatch.Stop();
+            _globalLogger.LogInformation(
+                "Finished test {testName} in {duration}s",
+                testName,
+                stopwatch.Elapsed.TotalSeconds
+            );
+            logger.LogInformation(
+                "Finished test {testName} in {duration}s",
+                testName,
+                stopwatch.Elapsed.TotalSeconds
+            );
+            scope.Dispose();
+            factory.Dispose();
+            (serviceProvider as IDisposable)?.Dispose();
+        });
     }
 
     [SuppressMessage(
@@ -306,23 +304,21 @@ public class AssemblyTestLog : IDisposable
         }
 
         var serviceCollection = new ServiceCollection();
-        serviceCollection.AddLogging(
-            builder =>
+        serviceCollection.AddLogging(builder =>
+        {
+            builder.SetMinimumLevel(minLogLevel);
+
+            if (output != null)
             {
-                builder.SetMinimumLevel(minLogLevel);
-
-                if (output != null)
-                {
-                    builder.AddXunit(output, minLogLevel, logStart);
-                }
-
-                if (serilogLoggerProvider != null)
-                {
-                    // Use a factory so that the container will dispose it
-                    builder.Services.AddSingleton<ILoggerProvider>(_ => serilogLoggerProvider);
-                }
+                builder.AddXunit(output, minLogLevel, logStart);
             }
-        );
+
+            if (serilogLoggerProvider != null)
+            {
+                // Use a factory so that the container will dispose it
+                builder.Services.AddSingleton<ILoggerProvider>(_ => serilogLoggerProvider);
+            }
+        });
 
         return serviceCollection.BuildServiceProvider();
     }
@@ -344,19 +340,17 @@ public class AssemblyTestLog : IDisposable
 
         var serviceCollection = new ServiceCollection();
 
-        serviceCollection.AddLogging(
-            builder =>
-            {
-                // Global logging, when it's written, is expected to be outputted. So set the log level to minimum.
-                builder.SetMinimumLevel(LogLevel.Trace);
+        serviceCollection.AddLogging(builder =>
+        {
+            // Global logging, when it's written, is expected to be outputted. So set the log level to minimum.
+            builder.SetMinimumLevel(LogLevel.Trace);
 
-                if (serilogLoggerProvider != null)
-                {
-                    // Use a factory so that the container will dispose it
-                    builder.Services.AddSingleton<ILoggerProvider>(_ => serilogLoggerProvider);
-                }
+            if (serilogLoggerProvider != null)
+            {
+                // Use a factory so that the container will dispose it
+                builder.Services.AddSingleton<ILoggerProvider>(_ => serilogLoggerProvider);
             }
-        );
+        });
 
         var serviceProvider = serviceCollection.BuildServiceProvider();
         var loggerFactory = serviceProvider.GetRequiredService<ILoggerFactory>();

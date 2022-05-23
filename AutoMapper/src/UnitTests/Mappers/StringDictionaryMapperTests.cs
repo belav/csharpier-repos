@@ -215,12 +215,10 @@ namespace AutoMapper.UnitTests.Mappers
         public void Should_throw_when_mapping()
         {
             Should
-                .Throw<AutoMapperMappingException>(
-                    () =>
-                    {
-                        Mapper.Map<Destination>(_source);
-                    }
-                )
+                .Throw<AutoMapperMappingException>(() =>
+                {
+                    Mapper.Map<Destination>(_source);
+                })
                 .InnerException.ShouldBeOfType<AutoMapperMappingException>()
                 .Types.ShouldBe(
                     new TypePair(typeof(IDictionary<string, object>), typeof(Destination))

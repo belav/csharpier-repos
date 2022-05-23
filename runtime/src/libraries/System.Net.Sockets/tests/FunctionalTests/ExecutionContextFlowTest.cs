@@ -809,79 +809,75 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public Task ExecutionContext_FlowsOnlyOnceAcrossAsyncOperations()
         {
-            return Task.Run(
-                async () => // escape xunit's sync ctx
+            return Task.Run(async () => // escape xunit's sync ctx
+            {
+                using (
+                    var listener = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
+                using (
+                    var client = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    )
+                )
                 {
-                    using (
-                        var listener = new Socket(
-                            AddressFamily.InterNetwork,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        )
-                    )
-                    using (
-                        var client = new Socket(
-                            AddressFamily.InterNetwork,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        )
-                    )
+                    listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                    listener.Listen(1);
+
+                    client.Connect(listener.LocalEndPoint);
+                    using (Socket server = listener.Accept())
                     {
-                        listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                        listener.Listen(1);
-
-                        client.Connect(listener.LocalEndPoint);
-                        using (Socket server = listener.Accept())
+                        var stackLog = new StringBuilder();
+                        int executionContextChanges = 0;
+                        var asyncLocal = new AsyncLocal<int>(_ =>
                         {
-                            var stackLog = new StringBuilder();
-                            int executionContextChanges = 0;
-                            var asyncLocal = new AsyncLocal<int>(
-                                _ =>
-                                {
-                                    lock (stackLog)
-                                    {
-                                        executionContextChanges++;
-                                        stackLog.AppendLine(
-                                            $"#{executionContextChanges}: {Environment.StackTrace}"
-                                        );
-                                    }
-                                }
+                            lock (stackLog)
+                            {
+                                executionContextChanges++;
+                                stackLog.AppendLine(
+                                    $"#{executionContextChanges}: {Environment.StackTrace}"
+                                );
+                            }
+                        });
+                        Assert.Equal(0, executionContextChanges);
+
+                        int numAwaits = 20;
+                        for (int i = 1; i <= numAwaits; i++)
+                        {
+                            asyncLocal.Value = i;
+
+                            await new AwaitWithOnCompletedInvocation<int>(
+                                client.ReceiveAsync(
+                                    new Memory<byte>(new byte[1]),
+                                    SocketFlags.None
+                                ),
+                                () => server.Send(new byte[1])
                             );
-                            Assert.Equal(0, executionContextChanges);
 
-                            int numAwaits = 20;
-                            for (int i = 1; i <= numAwaits; i++)
-                            {
-                                asyncLocal.Value = i;
+                            Assert.Equal(i, asyncLocal.Value);
+                        }
 
-                                await new AwaitWithOnCompletedInvocation<int>(
-                                    client.ReceiveAsync(
-                                        new Memory<byte>(new byte[1]),
-                                        SocketFlags.None
-                                    ),
-                                    () => server.Send(new byte[1])
-                                );
-
-                                Assert.Equal(i, asyncLocal.Value);
-                            }
-
-                            // This doesn't count EC changes where EC.Run is passed the same context
-                            // as is current, but it's the best we can track via public API.
-                            try
-                            {
-                                Assert.InRange(executionContextChanges, 1, numAwaits * 3); // at most: 1 / AsyncLocal change + 1 / suspend + 1 / resume
-                            }
-                            catch (Exception e)
-                            {
-                                throw new Exception(
-                                    $"{nameof(executionContextChanges)} == {executionContextChanges} with log: {stackLog.ToString()}",
-                                    e
-                                );
-                            }
+                        // This doesn't count EC changes where EC.Run is passed the same context
+                        // as is current, but it's the best we can track via public API.
+                        try
+                        {
+                            Assert.InRange(executionContextChanges, 1, numAwaits * 3); // at most: 1 / AsyncLocal change + 1 / suspend + 1 / resume
+                        }
+                        catch (Exception e)
+                        {
+                            throw new Exception(
+                                $"{nameof(executionContextChanges)} == {executionContextChanges} with log: {stackLog.ToString()}",
+                                e
+                            );
                         }
                     }
                 }
-            );
+            });
         }
 
         private readonly struct AwaitWithOnCompletedInvocation<T> : ICriticalNotifyCompletion

@@ -40,13 +40,11 @@ class Driver
 
             mre = new ManualResetEvent(false);
 
-            thread = new Thread(
-                () =>
-                {
-                    for (int j = 0; j < total; ++j)
-                        new P(i, mre);
-                }
-            );
+            thread = new Thread(() =>
+            {
+                for (int j = 0; j < total; ++j)
+                    new P(i, mre);
+            });
             thread.Start();
             thread.Join();
 

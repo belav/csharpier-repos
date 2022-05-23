@@ -52,40 +52,38 @@ public partial class CancelKeyPressTests
         }
 
         RemoteExecutor
-            .Invoke(
-                () =>
+            .Invoke(() =>
+            {
+                var mre = new ManualResetEventSlim();
+                var tcs = new TaskCompletionSource();
+
+                // CancelKeyPress is triggered by SIGINT/SIGQUIT
+                Console.CancelKeyPress += (sender, e) =>
                 {
-                    var mre = new ManualResetEventSlim();
-                    var tcs = new TaskCompletionSource();
+                    tcs.SetResult();
+                    // Block CancelKeyPress
+                    Assert.True(mre.Wait(WaitFailTestTimeoutSeconds * 1000));
+                };
 
-                    // CancelKeyPress is triggered by SIGINT/SIGQUIT
-                    Console.CancelKeyPress += (sender, e) =>
-                    {
-                        tcs.SetResult();
-                        // Block CancelKeyPress
-                        Assert.True(mre.Wait(WaitFailTestTimeoutSeconds * 1000));
-                    };
+                // Generate CancelKeyPress
+                Assert.Equal(0, kill(Environment.ProcessId, SIGINT));
+                // Wait till we block CancelKeyPress
+                Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
 
-                    // Generate CancelKeyPress
-                    Assert.Equal(0, kill(Environment.ProcessId, SIGINT));
-                    // Wait till we block CancelKeyPress
-                    Assert.True(tcs.Task.Wait(WaitFailTestTimeoutSeconds * 1000));
-
-                    // Create a process and wait for it to exit.
-                    using (
-                        RemoteInvokeHandle handle = RemoteExecutor.Invoke(
-                            () => RemoteExecutor.SuccessExitCode
-                        )
+                // Create a process and wait for it to exit.
+                using (
+                    RemoteInvokeHandle handle = RemoteExecutor.Invoke(
+                        () => RemoteExecutor.SuccessExitCode
                     )
-                    {
-                        // Process exit is detected on SIGCHLD
-                        Assert.Equal(RemoteExecutor.SuccessExitCode, handle.ExitCode);
-                    }
-
-                    // Release CancelKeyPress
-                    mre.Set();
+                )
+                {
+                    // Process exit is detected on SIGCHLD
+                    Assert.Equal(RemoteExecutor.SuccessExitCode, handle.ExitCode);
                 }
-            )
+
+                // Release CancelKeyPress
+                mre.Set();
+            })
             .Dispose();
     }
 

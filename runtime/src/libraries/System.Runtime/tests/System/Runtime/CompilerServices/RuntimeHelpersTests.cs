@@ -415,30 +415,24 @@ namespace System.Runtime.CompilerServices.Tests
             Assert.Equal(new int[] { 2, 3, 4, 5 }, RuntimeHelpers.GetSubArray(a, range));
 
             range = new Range(Index.FromStart(0), Index.FromStart(a.Length + 1));
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    int[] array = RuntimeHelpers.GetSubArray(a, range);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                int[] array = RuntimeHelpers.GetSubArray(a, range);
+            });
         }
 
         [Fact]
         [SkipOnMono("Not presently implemented on Mono")]
         public static void AllocateTypeAssociatedMemoryInvalidArguments()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    RuntimeHelpers.AllocateTypeAssociatedMemory(null, 10);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(RuntimeHelpersTests), -1);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                RuntimeHelpers.AllocateTypeAssociatedMemory(null, 10);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                RuntimeHelpers.AllocateTypeAssociatedMemory(typeof(RuntimeHelpersTests), -1);
+            });
         }
 
         [Fact]

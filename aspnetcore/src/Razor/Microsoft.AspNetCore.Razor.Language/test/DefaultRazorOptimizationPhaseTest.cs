@@ -20,15 +20,13 @@ public class DefaultRazorOptimizationPhaseTest
         var first = Mock.Of<IRazorOptimizationPass>(p => p.Order == 15);
         var second = Mock.Of<IRazorOptimizationPass>(p => p.Order == 17);
 
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
 
-                b.Features.Add(second);
-                b.Features.Add(first);
-            }
-        );
+            b.Features.Add(second);
+            b.Features.Add(first);
+        });
 
         // Assert
         Assert.Collection(phase.Passes, p => Assert.Same(first, p), p => Assert.Same(second, p));
@@ -70,37 +68,31 @@ public class DefaultRazorOptimizationPhaseTest
         firstPass.SetupProperty(m => m.Engine);
         firstPass
             .Setup(m => m.Execute(codeDocument, originalNode))
-            .Callback(
-                () =>
-                {
-                    originalNode.Children.Add(firstPassNode);
-                }
-            );
+            .Callback(() =>
+            {
+                originalNode.Children.Add(firstPassNode);
+            });
 
         var secondPass = new Mock<IRazorOptimizationPass>(MockBehavior.Strict);
         secondPass.SetupGet(m => m.Order).Returns(1);
         secondPass.SetupProperty(m => m.Engine);
         secondPass
             .Setup(m => m.Execute(codeDocument, originalNode))
-            .Callback(
-                () =>
-                {
-                    // Works only when the first pass has run before this.
-                    originalNode.Children[0].Children.Add(secondPassNode);
-                }
-            );
+            .Callback(() =>
+            {
+                // Works only when the first pass has run before this.
+                originalNode.Children[0].Children.Add(secondPassNode);
+            });
 
         var phase = new DefaultRazorOptimizationPhase();
 
-        var engine = RazorProjectEngine.CreateEmpty(
-            b =>
-            {
-                b.Phases.Add(phase);
+        var engine = RazorProjectEngine.CreateEmpty(b =>
+        {
+            b.Phases.Add(phase);
 
-                b.Features.Add(firstPass.Object);
-                b.Features.Add(secondPass.Object);
-            }
-        );
+            b.Features.Add(firstPass.Object);
+            b.Features.Add(secondPass.Object);
+        });
 
         // Act
         phase.Execute(codeDocument);

@@ -69,12 +69,10 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapFallbackToPage("/Index");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapFallbackToPage("/Index");
+        });
     }
 }

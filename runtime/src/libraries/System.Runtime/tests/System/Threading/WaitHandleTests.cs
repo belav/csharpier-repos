@@ -143,15 +143,13 @@ namespace System.Threading.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public static void WaitAny_MaxHandles_STA()
         {
-            Thread t = new Thread(
-                () =>
-                {
-                    Assert.Equal(0, WaitHandle.WaitAny(CreateManualResetEvents(63)));
-                    Assert.Throws<NotSupportedException>(
-                        () => WaitHandle.WaitAny(CreateManualResetEvents(64))
-                    );
-                }
-            );
+            Thread t = new Thread(() =>
+            {
+                Assert.Equal(0, WaitHandle.WaitAny(CreateManualResetEvents(63)));
+                Assert.Throws<NotSupportedException>(
+                    () => WaitHandle.WaitAny(CreateManualResetEvents(64))
+                );
+            });
             t.SetApartmentState(ApartmentState.STA);
             t.Start();
             t.Join();

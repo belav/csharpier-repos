@@ -1541,24 +1541,20 @@ namespace System.Net.Http.Functional.Tests
 
             await new[]
             {
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    using (HttpResponseMessage response = await client.GetAsync(server.Address))
                     {
-                        using (HttpResponseMessage response = await client.GetAsync(server.Address))
-                        {
-                            Assert.Equal(HttpStatusCode.OK, response.StatusCode);
-                            Assert.Equal(0, (await response.Content.ReadAsByteArrayAsync()).Length);
-                        }
+                        Assert.Equal(HttpStatusCode.OK, response.StatusCode);
+                        Assert.Equal(0, (await response.Content.ReadAsByteArrayAsync()).Length);
                     }
-                ),
-                Task.Run(
-                    async () =>
-                    {
-                        connection = await server.EstablishConnectionAsync();
-                        streamId = await connection.ReadRequestHeaderAsync();
-                        await connection.SendDefaultResponseAsync(streamId);
-                    }
-                )
+                }),
+                Task.Run(async () =>
+                {
+                    connection = await server.EstablishConnectionAsync();
+                    streamId = await connection.ReadRequestHeaderAsync();
+                    await connection.SendDefaultResponseAsync(streamId);
+                })
             }.WhenAllOrAnyFailed(TestHelper.PassingTestTimeoutMilliseconds);
 
             return (streamId, connection);
@@ -2790,12 +2786,10 @@ namespace System.Net.Http.Functional.Tests
             responseStream.Dispose();
 
             // Attempting to read now should throw ObjectDisposedException
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () =>
-                {
-                    await responseStream.ReadAsync(readBuffer);
-                }
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            {
+                await responseStream.ReadAsync(readBuffer);
+            });
         }
 
         private async Task SendAndReceiveRequestDataAsync(
@@ -2826,12 +2820,10 @@ namespace System.Net.Http.Functional.Tests
             Assert.Equal(0, dataFrame.Data.Length);
 
             // Attempting to write now should throw ObjectDisposedException
-            await Assert.ThrowsAsync<ObjectDisposedException>(
-                async () =>
-                {
-                    await requestStream.WriteAsync(new byte[1]);
-                }
-            );
+            await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+            {
+                await requestStream.WriteAsync(new byte[1]);
+            });
         }
 
         [Fact]
@@ -3320,8 +3312,8 @@ namespace System.Net.Http.Functional.Tests
                     await Task.Delay(3000);
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
+                    Exception e =
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
                         {
                             await SendAndReceiveRequestDataAsync(
                                 contentBytes,
@@ -3329,8 +3321,7 @@ namespace System.Net.Http.Functional.Tests
                                 connection,
                                 streamId
                             );
-                        }
-                    );
+                        });
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -3440,17 +3431,15 @@ namespace System.Net.Http.Functional.Tests
                     );
 
                     // Attempting to write on the request body should now fail with IOException.
-                    Exception e = await Assert.ThrowsAnyAsync<IOException>(
-                        async () =>
-                        {
-                            await SendAndReceiveRequestDataAsync(
-                                contentBytes,
-                                requestStream,
-                                connection,
-                                streamId
-                            );
-                        }
-                    );
+                    Exception e = await Assert.ThrowsAnyAsync<IOException>(async () =>
+                    {
+                        await SendAndReceiveRequestDataAsync(
+                            contentBytes,
+                            requestStream,
+                            connection,
+                            streamId
+                        );
+                    });
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -3552,8 +3541,8 @@ namespace System.Net.Http.Functional.Tests
                     await Task.Delay(500);
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
+                    Exception e =
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
                         {
                             await SendAndReceiveRequestDataAsync(
                                 contentBytes,
@@ -3561,8 +3550,7 @@ namespace System.Net.Http.Functional.Tests
                                 connection,
                                 streamId
                             );
-                        }
-                    );
+                        });
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -3673,8 +3661,8 @@ namespace System.Net.Http.Functional.Tests
                     await Task.Delay(500);
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
+                    Exception e =
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
                         {
                             await SendAndReceiveRequestDataAsync(
                                 contentBytes,
@@ -3682,8 +3670,7 @@ namespace System.Net.Http.Functional.Tests
                                 connection,
                                 streamId
                             );
-                        }
-                    );
+                        });
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -3868,8 +3855,8 @@ namespace System.Net.Http.Functional.Tests
                     await connection.PingPong();
 
                     // Attempting to write on the request body should now fail with OperationCanceledException.
-                    Exception e = await Assert.ThrowsAnyAsync<OperationCanceledException>(
-                        async () =>
+                    Exception e =
+                        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () =>
                         {
                             await SendAndReceiveRequestDataAsync(
                                 contentBytes,
@@ -3877,8 +3864,7 @@ namespace System.Net.Http.Functional.Tests
                                 connection,
                                 streamId
                             );
-                        }
-                    );
+                        });
 
                     // Propagate the exception to the request stream serialization task.
                     // This allows the request processing to complete.
@@ -4213,42 +4199,40 @@ namespace System.Net.Http.Functional.Tests
                             uri.ToString().Replace("http://", "https://")
                         );
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                // negotiate TLS with ALPN H/2
-                                var sslStream = new SslStream(
-                                    connection.Stream,
-                                    false,
-                                    delegate
-                                    {
-                                        return true;
-                                    }
-                                );
-                                SslServerAuthenticationOptions options =
-                                    new SslServerAuthenticationOptions();
-                                options.ServerCertificate =
-                                    Net.Test.Common.Configuration.Certificates.GetServerCertificate();
-                                options.ApplicationProtocols = new List<SslApplicationProtocol>()
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            // negotiate TLS with ALPN H/2
+                            var sslStream = new SslStream(
+                                connection.Stream,
+                                false,
+                                delegate
                                 {
-                                    SslApplicationProtocol.Http2
-                                };
-                                options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
+                                    return true;
+                                }
+                            );
+                            SslServerAuthenticationOptions options =
+                                new SslServerAuthenticationOptions();
+                            options.ServerCertificate =
+                                Net.Test.Common.Configuration.Certificates.GetServerCertificate();
+                            options.ApplicationProtocols = new List<SslApplicationProtocol>()
+                            {
+                                SslApplicationProtocol.Http2
+                            };
+                            options.ApplicationProtocols.Add(SslApplicationProtocol.Http2);
 
-                                // Negotiate TLS.
-                                await sslStream
-                                    .AuthenticateAsServerAsync(options, CancellationToken.None)
-                                    .ConfigureAwait(false);
+                            // Negotiate TLS.
+                            await sslStream
+                                .AuthenticateAsServerAsync(options, CancellationToken.None)
+                                .ConfigureAwait(false);
 
-                                // Send back HTTP/1.1 response
-                                await sslStream.WriteAsync(
-                                    Encoding.ASCII.GetBytes(
-                                        "HTTP/1.1 400 Unrecognized request\r\n\r\n"
-                                    ),
-                                    CancellationToken.None
-                                );
-                            }
-                        );
+                            // Send back HTTP/1.1 response
+                            await sslStream.WriteAsync(
+                                Encoding.ASCII.GetBytes(
+                                    "HTTP/1.1 400 Unrecognized request\r\n\r\n"
+                                ),
+                                CancellationToken.None
+                            );
+                        });
 
                         Exception e = await Assert.ThrowsAsync<HttpRequestException>(
                             () => requestTask
@@ -4409,8 +4393,8 @@ namespace System.Net.Http.Functional.Tests
                     // An exception will be thrown by either GetAsync or ReadAsStringAsync once
                     // the inbound window size has been exceeded. Which one depends on how quickly
                     // ProcessIncomingFramesAsync() can read data off the socket.
-                    Exception requestException = await Assert.ThrowsAsync<HttpRequestException>(
-                        async () =>
+                    Exception requestException =
+                        await Assert.ThrowsAsync<HttpRequestException>(async () =>
                         {
                             using HttpClient client = CreateHttpClient();
                             using HttpResponseMessage response = await client.GetAsync(
@@ -4422,8 +4406,7 @@ namespace System.Net.Http.Functional.Tests
                             await semaphore.WaitAsync(10000);
 
                             await response.Content.ReadAsStringAsync();
-                        }
-                    );
+                        });
 
                     // A Http2ConnectionException will be present somewhere in the inner exceptions.
                     // Its location depends on which method threw the exception.

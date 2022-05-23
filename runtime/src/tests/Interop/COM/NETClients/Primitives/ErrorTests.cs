@@ -27,48 +27,34 @@ namespace NetClient
         {
             Console.WriteLine($"Verify expected exception from HRESULT");
 
-            Assert.Throws<NotImplementedException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)0x80004001));
-                }
-            );
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)0x80004003));
-                }
-            );
-            Assert.Throws<UnauthorizedAccessException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)0x80070005));
-                }
-            );
-            Assert.Throws<OutOfMemoryException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)0x8007000E));
-                }
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)0x80070057));
-                }
-            );
-            Assert.Throws<COMException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)0x8000ffff));
-                }
-            );
-            Assert.Throws<COMException>(
-                () =>
-                {
-                    this.server.Throw_HResult(unchecked((int)-1));
-                }
-            );
+            Assert.Throws<NotImplementedException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80004001));
+            });
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80004003));
+            });
+            Assert.Throws<UnauthorizedAccessException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80070005));
+            });
+            Assert.Throws<OutOfMemoryException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x8007000E));
+            });
+            Assert.Throws<ArgumentException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x80070057));
+            });
+            Assert.Throws<COMException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)0x8000ffff));
+            });
+            Assert.Throws<COMException>(() =>
+            {
+                this.server.Throw_HResult(unchecked((int)-1));
+            });
         }
 
         private void VerifyReturnHResult()

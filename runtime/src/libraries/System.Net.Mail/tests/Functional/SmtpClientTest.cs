@@ -336,36 +336,34 @@ namespace System.Net.Mail.Tests
         )]
         public void TestZeroTimeout()
         {
-            var testTask = Task.Run(
-                () =>
-                {
-                    using (
-                        Socket serverSocket = new Socket(
-                            AddressFamily.InterNetwork,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        )
+            var testTask = Task.Run(() =>
+            {
+                using (
+                    Socket serverSocket = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
                     )
-                    {
-                        serverSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                        serverSocket.Listen(1);
+                )
+                {
+                    serverSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                    serverSocket.Listen(1);
 
-                        SmtpClient smtpClient = new SmtpClient(
-                            "localhost",
-                            (serverSocket.LocalEndPoint as IPEndPoint).Port
-                        );
-                        smtpClient.Timeout = 0;
+                    SmtpClient smtpClient = new SmtpClient(
+                        "localhost",
+                        (serverSocket.LocalEndPoint as IPEndPoint).Port
+                    );
+                    smtpClient.Timeout = 0;
 
-                        MailMessage msg = new MailMessage(
-                            "foo@example.com",
-                            "bar@example.com",
-                            "hello",
-                            "test"
-                        );
-                        Assert.Throws<SmtpException>(() => smtpClient.Send(msg));
-                    }
+                    MailMessage msg = new MailMessage(
+                        "foo@example.com",
+                        "bar@example.com",
+                        "hello",
+                        "test"
+                    );
+                    Assert.Throws<SmtpException>(() => smtpClient.Send(msg));
                 }
-            );
+            });
             // Abort in order to get a coredump if this test takes too long.
             if (!testTask.Wait(TimeSpan.FromMinutes(5)))
             {

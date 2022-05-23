@@ -15,15 +15,11 @@ public class DynamicComponentTest
     [Fact]
     public void RejectsUnknownParameters()
     {
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var parameters = new Dictionary<string, object> { { "unknownparameter", 123 } };
-                _ = new DynamicComponent().SetParametersAsync(
-                    ParameterView.FromDictionary(parameters)
-                );
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            var parameters = new Dictionary<string, object> { { "unknownparameter", 123 } };
+            _ = new DynamicComponent().SetParametersAsync(ParameterView.FromDictionary(parameters));
+        });
 
         Assert.StartsWith(
             $"{nameof(DynamicComponent)} does not accept a parameter with the name 'unknownparameter'.",

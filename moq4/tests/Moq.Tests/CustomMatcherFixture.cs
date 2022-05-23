@@ -39,24 +39,22 @@ namespace Moq.Tests
         public TValue Between<TValue>(TValue from, TValue to, Range rangeKind)
             where TValue : IComparable
         {
-            return Match.Create<TValue>(
-                value =>
+            return Match.Create<TValue>(value =>
+            {
+                if (value == null)
                 {
-                    if (value == null)
-                    {
-                        return false;
-                    }
-
-                    if (rangeKind == Range.Exclusive)
-                    {
-                        return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
-                    }
-                    else
-                    {
-                        return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
-                    }
+                    return false;
                 }
-            );
+
+                if (rangeKind == Range.Exclusive)
+                {
+                    return value.CompareTo(from) > 0 && value.CompareTo(to) < 0;
+                }
+                else
+                {
+                    return value.CompareTo(from) >= 0 && value.CompareTo(to) <= 0;
+                }
+            });
         }
 
         public interface IFoo

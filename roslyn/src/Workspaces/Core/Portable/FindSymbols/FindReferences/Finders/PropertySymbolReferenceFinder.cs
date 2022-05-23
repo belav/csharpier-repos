@@ -141,20 +141,18 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
                 var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
                 var semanticFacts = document.GetRequiredLanguageService<ISemanticFactsService>();
 
-                nameReferences = nameReferences.WhereAsArray(
-                    loc =>
-                    {
-                        var accessors = GetReferencedAccessorSymbols(
-                            syntaxFacts,
-                            semanticFacts,
-                            semanticModel,
-                            symbol,
-                            loc.Node,
-                            cancellationToken
-                        );
-                        return accessors.IsEmpty;
-                    }
-                );
+                nameReferences = nameReferences.WhereAsArray(loc =>
+                {
+                    var accessors = GetReferencedAccessorSymbols(
+                        syntaxFacts,
+                        semanticFacts,
+                        semanticModel,
+                        symbol,
+                        loc.Node,
+                        cancellationToken
+                    );
+                    return accessors.IsEmpty;
+                });
             }
 
             var forEachReferences = IsForEachProperty(symbol)

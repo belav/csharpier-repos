@@ -417,43 +417,39 @@ namespace System.Tests
                 // does concats and the other that mutates the array concurrently.  This isn't
                 // guaranteed to trigger the special case, but it typically does.
                 Task.WaitAll(
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        b.SignalAndWait();
+                        while (!cts.IsCancellationRequested)
                         {
-                            b.SignalAndWait();
-                            while (!cts.IsCancellationRequested)
+                            string result = string.Concat(inputs);
+                            Assert.True(
+                                result == "abcdef"
+                                    || result == "abc"
+                                    || result == "def"
+                                    || result == "",
+                                $"result == {result}"
+                            );
+                        }
+                    }),
+                    Task.Run(() =>
+                    {
+                        b.SignalAndWait();
+                        try
+                        {
+                            for (int iter = 0; iter < 100000000; iter++)
                             {
-                                string result = string.Concat(inputs);
-                                Assert.True(
-                                    result == "abcdef"
-                                        || result == "abc"
-                                        || result == "def"
-                                        || result == "",
-                                    $"result == {result}"
-                                );
+                                Volatile.Write(ref inputs[0], null);
+                                Volatile.Write(ref inputs[1], null);
+                                Volatile.Write(ref inputs[0], "abc");
+                                Volatile.Write(ref inputs[1], "def");
                             }
                         }
-                    ),
-                    Task.Run(
-                        () =>
+                        finally
                         {
-                            b.SignalAndWait();
-                            try
-                            {
-                                for (int iter = 0; iter < 100000000; iter++)
-                                {
-                                    Volatile.Write(ref inputs[0], null);
-                                    Volatile.Write(ref inputs[1], null);
-                                    Volatile.Write(ref inputs[0], "abc");
-                                    Volatile.Write(ref inputs[1], "def");
-                                }
-                            }
-                            finally
-                            {
-                                cts.Cancel();
-                            }
+                            cts.Cancel();
                         }
-                    )
+                    })
                 );
             }
         }

@@ -39,25 +39,19 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Response.Headers.Location
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(context.Response.Headers.Location)
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -85,25 +79,21 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -135,25 +125,21 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -181,25 +167,19 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Response.Headers.Location
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(context.Response.Headers.Location)
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -231,19 +211,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -275,19 +251,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -318,19 +290,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -361,29 +329,25 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -411,29 +375,25 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -461,29 +421,25 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Scheme
-                                                + "://"
-                                                + context.Request.Host
-                                                + context.Request.Path
-                                                + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Scheme
+                                        + "://"
+                                        + context.Request.Host
+                                        + context.Request.Path
+                                        + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -511,25 +467,21 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -557,25 +509,21 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(
-                                            context.Request.Path + context.Request.QueryString
-                                        )
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context =>
+                                context.Response.WriteAsync(
+                                    context.Request.Path + context.Request.QueryString
+                                )
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -611,19 +559,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -656,19 +600,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -704,19 +644,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -753,19 +689,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -800,23 +732,18 @@ public class MiddlewareTests
                         </rewrite>";
         var options = new RewriteOptions().AddIISUrlRewrite(new StringReader(xml));
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(context.Request.GetEncodedUrl())
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context => context.Response.WriteAsync(context.Request.GetEncodedUrl())
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -862,23 +789,18 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(context.Request.GetEncodedUrl())
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context => context.Response.WriteAsync(context.Request.GetEncodedUrl())
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -906,19 +828,15 @@ public class MiddlewareTests
             )
         );
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -968,23 +886,18 @@ public class MiddlewareTests
 
         var options = new RewriteOptions().Add(ruleBuilder.Build());
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseRewriter(options);
-                                app.Run(
-                                    context =>
-                                        context.Response.WriteAsync(context.Request.GetEncodedUrl())
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseRewriter(options);
+                        app.Run(
+                            context => context.Response.WriteAsync(context.Request.GetEncodedUrl())
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();

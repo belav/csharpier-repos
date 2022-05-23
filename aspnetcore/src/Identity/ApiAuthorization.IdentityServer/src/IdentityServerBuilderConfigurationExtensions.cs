@@ -104,29 +104,25 @@ public static class IdentityServerBuilderConfigurationExtensions
             ServiceDescriptor.Singleton<
                 IConfigureOptions<ApiAuthorizationOptions>,
                 ConfigureApiResources
-            >(
-                sp =>
-                {
-                    var logger = sp.GetRequiredService<ILogger<ConfigureApiResources>>();
-                    var effectiveConfig =
-                        configuration
-                        ?? sp.GetRequiredService<IConfiguration>()
-                            .GetSection("IdentityServer:Resources");
-                    var localApiDescriptor = sp.GetService<IIdentityServerJwtDescriptor>();
-                    return new ConfigureApiResources(effectiveConfig, localApiDescriptor, logger);
-                }
-            )
+            >(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<ConfigureApiResources>>();
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>()
+                        .GetSection("IdentityServer:Resources");
+                var localApiDescriptor = sp.GetService<IIdentityServerJwtDescriptor>();
+                return new ConfigureApiResources(effectiveConfig, localApiDescriptor, logger);
+            })
         );
 
         // We take over the setup for the API resources as Identity Server registers the enumerable as a singleton
         // and that prevents normal composition.
-        builder.Services.AddSingleton<IEnumerable<ApiResource>>(
-            sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
-                return options.Value.ApiResources;
-            }
-        );
+        builder.Services.AddSingleton<IEnumerable<ApiResource>>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
+            return options.Value.ApiResources;
+        });
 
         return builder;
     }
@@ -136,13 +132,11 @@ public static class IdentityServerBuilderConfigurationExtensions
     {
         // We take over the setup for the API resources as Identity Server registers the enumerable as a singleton
         // and that prevents normal composition.
-        builder.Services.AddSingleton<IEnumerable<ApiScope>>(
-            sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
-                return options.Value.ApiScopes;
-            }
-        );
+        builder.Services.AddSingleton<IEnumerable<ApiScope>>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
+            return options.Value.ApiScopes;
+        });
 
         builder.Services.TryAddEnumerable(
             ServiceDescriptor.Singleton<
@@ -181,28 +175,24 @@ public static class IdentityServerBuilderConfigurationExtensions
             ServiceDescriptor.Singleton<
                 IConfigureOptions<ApiAuthorizationOptions>,
                 ConfigureIdentityResources
-            >(
-                sp =>
-                {
-                    var logger = sp.GetRequiredService<ILogger<ConfigureIdentityResources>>();
-                    var effectiveConfig =
-                        configuration
-                        ?? sp.GetRequiredService<IConfiguration>()
-                            .GetSection("IdentityServer:Identity");
-                    return new ConfigureIdentityResources(effectiveConfig, logger);
-                }
-            )
+            >(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<ConfigureIdentityResources>>();
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>()
+                        .GetSection("IdentityServer:Identity");
+                return new ConfigureIdentityResources(effectiveConfig, logger);
+            })
         );
 
         // We take over the setup for the identity resources as Identity Server registers the enumerable as a singleton
         // and that prevents normal composition.
-        builder.Services.AddSingleton<IEnumerable<IdentityResource>>(
-            sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
-                return options.Value.IdentityResources;
-            }
-        );
+        builder.Services.AddSingleton<IEnumerable<IdentityResource>>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
+            return options.Value.IdentityResources;
+        });
 
         return builder;
     }
@@ -241,27 +231,22 @@ public static class IdentityServerBuilderConfigurationExtensions
             ServiceDescriptor.Singleton<
                 IConfigureOptions<ApiAuthorizationOptions>,
                 ConfigureClients
-            >(
-                sp =>
-                {
-                    var logger = sp.GetRequiredService<ILogger<ConfigureClients>>();
-                    var effectiveConfig =
-                        configuration
-                        ?? sp.GetRequiredService<IConfiguration>()
-                            .GetSection("IdentityServer:Clients");
-                    return new ConfigureClients(effectiveConfig, logger);
-                }
-            )
+            >(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<ConfigureClients>>();
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>().GetSection("IdentityServer:Clients");
+                return new ConfigureClients(effectiveConfig, logger);
+            })
         );
 
         // We take over the setup for the clients as Identity Server registers the enumerable as a singleton and that prevents normal composition.
-        builder.Services.AddSingleton<IEnumerable<Client>>(
-            sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
-                return options.Value.Clients;
-            }
-        );
+        builder.Services.AddSingleton<IEnumerable<Client>>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
+            return options.Value.Clients;
+        });
 
         return builder;
     }
@@ -294,53 +279,47 @@ public static class IdentityServerBuilderConfigurationExtensions
             ServiceDescriptor.Singleton<
                 IConfigureOptions<ApiAuthorizationOptions>,
                 ConfigureSigningCredentials
-            >(
-                sp =>
-                {
-                    var logger = sp.GetRequiredService<ILogger<ConfigureSigningCredentials>>();
-                    var effectiveConfig =
-                        configuration
-                        ?? sp.GetRequiredService<IConfiguration>().GetSection(KeySectionName);
-                    return new ConfigureSigningCredentials(effectiveConfig, logger);
-                }
-            )
+            >(sp =>
+            {
+                var logger = sp.GetRequiredService<ILogger<ConfigureSigningCredentials>>();
+                var effectiveConfig =
+                    configuration
+                    ?? sp.GetRequiredService<IConfiguration>().GetSection(KeySectionName);
+                return new ConfigureSigningCredentials(effectiveConfig, logger);
+            })
         );
 
         // We take over the setup for the credentials store as Identity Server registers a singleton
-        builder.Services.AddSingleton<ISigningCredentialStore>(
-            sp =>
-            {
-                var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
-                return new InMemorySigningCredentialsStore(options.Value.SigningCredential);
-            }
-        );
+        builder.Services.AddSingleton<ISigningCredentialStore>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
+            return new InMemorySigningCredentialsStore(options.Value.SigningCredential);
+        });
 
         // We take over the setup for the validation keys store as Identity Server registers a singleton
-        builder.Services.AddSingleton<IValidationKeysStore>(
-            sp =>
+        builder.Services.AddSingleton<IValidationKeysStore>(sp =>
+        {
+            var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
+            var signingCredential = options.Value.SigningCredential;
+
+            if (signingCredential is null)
             {
-                var options = sp.GetRequiredService<IOptions<ApiAuthorizationOptions>>();
-                var signingCredential = options.Value.SigningCredential;
-
-                if (signingCredential is null)
-                {
-                    throw new InvalidOperationException(
-                        $"No signing credential is configured by the '{KeySectionName}' configuration section."
-                    );
-                }
-
-                return new InMemoryValidationKeysStore(
-                    new[]
-                    {
-                        new SecurityKeyInfo
-                        {
-                            Key = signingCredential.Key,
-                            SigningAlgorithm = signingCredential.Algorithm
-                        }
-                    }
+                throw new InvalidOperationException(
+                    $"No signing credential is configured by the '{KeySectionName}' configuration section."
                 );
             }
-        );
+
+            return new InMemoryValidationKeysStore(
+                new[]
+                {
+                    new SecurityKeyInfo
+                    {
+                        Key = signingCredential.Key,
+                        SigningAlgorithm = signingCredential.Algorithm
+                    }
+                }
+            );
+        });
 
         return builder;
     }

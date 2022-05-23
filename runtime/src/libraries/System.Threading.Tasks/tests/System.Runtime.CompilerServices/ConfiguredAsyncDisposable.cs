@@ -25,13 +25,11 @@ namespace System.Runtime.CompilerServices.Tests
             var tcs = new TaskCompletionSource<int>();
             var vt = new ValueTask(tcs.Task);
 
-            var d = new CustomAsyncDisposable(
-                () =>
-                {
-                    invokeCount++;
-                    return vt;
-                }
-            );
+            var d = new CustomAsyncDisposable(() =>
+            {
+                invokeCount++;
+                return vt;
+            });
 
             Assert.Equal(
                 vt.ConfigureAwait(continueOnCapturedContext),

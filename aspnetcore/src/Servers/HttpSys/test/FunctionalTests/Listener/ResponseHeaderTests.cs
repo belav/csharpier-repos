@@ -262,42 +262,32 @@ public class ResponseHeaderTests : IDisposable
 
             var responseHeaders = context.Response.Headers;
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    responseHeaders[key] = value;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                responseHeaders[key] = value;
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    responseHeaders[key] = new StringValues(new[] { "valid", value });
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                responseHeaders[key] = new StringValues(new[] { "valid", value });
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var kvp = new KeyValuePair<string, StringValues>(key, value);
-                    ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var kvp = new KeyValuePair<string, StringValues>(key, value);
+                ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var kvp = new KeyValuePair<string, StringValues>(key, value);
-                    ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var kvp = new KeyValuePair<string, StringValues>(key, value);
+                ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
+            });
 
             context.Dispose();
 

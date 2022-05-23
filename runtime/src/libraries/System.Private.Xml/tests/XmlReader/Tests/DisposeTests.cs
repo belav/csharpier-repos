@@ -183,13 +183,11 @@ namespace System.Xml.Tests
                         reader.Dispose();
                         if (closeInput)
                         {
-                            Assert.Throws<ObjectDisposedException>(
-                                () =>
-                                {
-                                    s.Position = 0;
-                                    s.ReadByte();
-                                }
-                            );
+                            Assert.Throws<ObjectDisposedException>(() =>
+                            {
+                                s.Position = 0;
+                                s.ReadByte();
+                            });
                         }
                         else
                         {

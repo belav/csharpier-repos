@@ -42,13 +42,11 @@ namespace AutoMapper.UnitTests.MappingInheritance
         class Override<T> : Destination<T> { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap(typeof(Source<>), typeof(Override<>));
-                    c.CreateMap(typeof(Source<>), typeof(Destination<>)).As(typeof(Override<>));
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap(typeof(Source<>), typeof(Override<>));
+                c.CreateMap(typeof(Source<>), typeof(Destination<>)).As(typeof(Override<>));
+            });
     }
 
     public class AsShouldWorkOnlyWithDerivedTypes
@@ -65,14 +63,12 @@ namespace AutoMapper.UnitTests.MappingInheritance
                     new MapperConfiguration(
                         c => c.CreateMap(typeof(Source), typeof(Destination)).As(typeof(Source))
                     )
-            ).ShouldThrowException<ArgumentOutOfRangeException>(
-                ex =>
-                {
-                    ex.Message.ShouldStartWith(
-                        $"{typeof(Source)} is not derived from {typeof(Destination)}."
-                    );
-                }
-            );
+            ).ShouldThrowException<ArgumentOutOfRangeException>(ex =>
+            {
+                ex.Message.ShouldStartWith(
+                    $"{typeof(Source)} is not derived from {typeof(Destination)}."
+                );
+            });
         }
     }
 
@@ -112,14 +108,12 @@ namespace AutoMapper.UnitTests.MappingInheritance
                 Customer = new Customer() { Id = 1, Name = "A" }
             };
 
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Order, OrderDTO>();
-                    cfg.CreateMap<Customer, CustomerDTO>();
-                    cfg.CreateMap<Customer, CustomerStubDTO>().As<CustomerDTO>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Order, OrderDTO>();
+                cfg.CreateMap<Customer, CustomerDTO>();
+                cfg.CreateMap<Customer, CustomerStubDTO>().As<CustomerDTO>();
+            });
             var orderDto = config.CreateMapper().Map<Order, OrderDTO>(order);
 
             var customerDto = (CustomerDTO)orderDto.Customer;
@@ -163,15 +157,12 @@ namespace AutoMapper.UnitTests.MappingInheritance
             {
                 Customer = new Customer() { Id = 1, Name = "A" }
             };
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Order), typeof(OrderDTO));
-                    cfg.CreateMap(typeof(Customer), typeof(CustomerDTO));
-                    cfg.CreateMap(typeof(Customer), typeof(CustomerStubDTO))
-                        .As(typeof(CustomerDTO));
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Order), typeof(OrderDTO));
+                cfg.CreateMap(typeof(Customer), typeof(CustomerDTO));
+                cfg.CreateMap(typeof(Customer), typeof(CustomerStubDTO)).As(typeof(CustomerDTO));
+            });
             var orderDto = config.CreateMapper().Map<Order, OrderDTO>(order);
 
             var customerDto = (CustomerDTO)orderDto.Customer;
@@ -217,15 +208,12 @@ namespace AutoMapper.UnitTests.MappingInheritance
         {
             get
             {
-                return new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap(typeof(NodeDto<>), typeof(NodeModel<>));
-                        cfg.CreateMap(typeof(NodeDto<>), typeof(INodeModel<>))
-                            .As(typeof(NodeModel<>));
-                        cfg.CreateMap(typeof(INodeModel<>), typeof(NodeModel<>));
-                    }
-                );
+                return new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap(typeof(NodeDto<>), typeof(NodeModel<>));
+                    cfg.CreateMap(typeof(NodeDto<>), typeof(INodeModel<>)).As(typeof(NodeModel<>));
+                    cfg.CreateMap(typeof(INodeModel<>), typeof(NodeModel<>));
+                });
             }
         }
 

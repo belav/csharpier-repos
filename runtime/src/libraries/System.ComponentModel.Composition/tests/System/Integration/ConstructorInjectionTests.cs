@@ -100,12 +100,10 @@ namespace Tests.Integration
             // After rejection changes that are incompatible with existing assumptions are no
             // longer silently ignored.  The batch attempting to make this change is rejected
             // with a ChangeRejectedException
-            Assert.Throws<ChangeRejectedException>(
-                () =>
-                {
-                    container.Compose(batch);
-                }
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+            {
+                container.Compose(batch);
+            });
 
             // The collection which is a constructor import should not be rebound
             Assert.Equal(a.Values, new int[3] { 1, 2, 3 });
@@ -114,12 +112,10 @@ namespace Tests.Integration
             // After rejection changes that are incompatible with existing assumptions are no
             // longer silently ignored.  The batch attempting to make this change is rejected
             // with a ChangeRejectedException
-            Assert.Throws<ChangeRejectedException>(
-                () =>
-                {
-                    container.Compose(batch);
-                }
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+            {
+                container.Compose(batch);
+            });
 
             // The collection which is a constructor import should not be rebound
             Assert.Equal(a.Values, new int[3] { 1, 2, 3 });
@@ -143,12 +139,10 @@ namespace Tests.Integration
             // After rejection part definitions in catalogs whose dependencies cannot be
             // satisfied are now silently ignored, turning this into a cardinality
             // exception for the GetExportedValue call
-            Assert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<ClassWithNotFoundConstructorArgs>();
-                }
-            );
+            Assert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<ClassWithNotFoundConstructorArgs>();
+            });
         }
 
         [Fact]

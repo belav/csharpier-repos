@@ -12,15 +12,13 @@ namespace Microsoft.AspNet.Facebook
     public static class GlobalFacebookConfiguration
     {
         private static readonly Lazy<FacebookConfiguration> _configuration =
-            new Lazy<FacebookConfiguration>(
-                () =>
-                {
-                    FacebookConfiguration config = new FacebookConfiguration();
-                    config.ClientProvider = new DefaultFacebookClientProvider(config);
-                    config.PermissionService = new DefaultFacebookPermissionService(config);
-                    return config;
-                }
-            );
+            new Lazy<FacebookConfiguration>(() =>
+            {
+                FacebookConfiguration config = new FacebookConfiguration();
+                config.ClientProvider = new DefaultFacebookClientProvider(config);
+                config.PermissionService = new DefaultFacebookPermissionService(config);
+                return config;
+            });
 
         /// <summary>
         /// Gets the global <see cref="FacebookConfiguration"/>.

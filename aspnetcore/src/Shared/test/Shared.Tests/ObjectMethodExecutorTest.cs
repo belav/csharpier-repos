@@ -524,13 +524,11 @@ public class ObjectMethodExecutorTest
             _result = result;
 
             // Simulate a brief delay before completion
-            ThreadPool.QueueUserWorkItem(
-                _ =>
-                {
-                    Thread.Sleep(100);
-                    SetCompleted();
-                }
-            );
+            ThreadPool.QueueUserWorkItem(_ =>
+            {
+                Thread.Sleep(100);
+                SetCompleted();
+            });
         }
 
         private void SetCompleted()

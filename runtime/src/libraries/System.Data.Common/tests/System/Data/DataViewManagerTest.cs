@@ -90,13 +90,11 @@ namespace System.Data.Tests
         public void SpecifyNonExistentTable()
         {
             DataViewManager m = new DataViewManager(null);
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    m.DataViewSettingCollectionString =
-                        "<DataViewSettingCollectionString><table1-1 RowFilter='a=b' /></DataViewSettingCollectionString>";
-                }
-            );
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                m.DataViewSettingCollectionString =
+                    "<DataViewSettingCollectionString><table1-1 RowFilter='a=b' /></DataViewSettingCollectionString>";
+            });
         }
 
         [Fact]

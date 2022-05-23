@@ -193,13 +193,11 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.Single(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.Single(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -208,13 +206,11 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.SingleOrDefault(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.SingleOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -223,23 +219,19 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.Single(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.Single(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.Single(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.Single(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -248,23 +240,19 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.SingleOrDefault(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.SingleOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.SingleOrDefault(
-                        x =>
-                        {
-                            canceler();
-                            return false;
-                        }
-                    )
+                    source.SingleOrDefault(x =>
+                    {
+                        canceler();
+                        return false;
+                    })
             );
         }
 
@@ -289,23 +277,19 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     ParallelEnumerable
                         .Range(0, 1)
-                        .Single(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .Single(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     ParallelEnumerable
                         .Range(0, 1)
-                        .SingleOrDefault(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .SingleOrDefault(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
         }
 

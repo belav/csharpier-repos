@@ -48,87 +48,83 @@ namespace System.Threading.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/31977", TestRuntimes.Mono)]
         public static void WaitNotificationTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
-                {
-                    var tsc = new TestSynchronizationContext();
-                    SynchronizationContext.SetSynchronizationContext(tsc);
-                    Assert.Same(tsc, SynchronizationContext.Current);
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                var tsc = new TestSynchronizationContext();
+                SynchronizationContext.SetSynchronizationContext(tsc);
+                Assert.Same(tsc, SynchronizationContext.Current);
 
-                    var e = new ManualResetEvent(false);
-                    tsc.WaitAction = () => e.Set();
-                    Assert.False(tsc.IsWaitNotificationRequired());
-                    Assert.False(e.WaitOne(0));
-                    tsc.SetWaitNotificationRequired();
-                    Assert.True(tsc.IsWaitNotificationRequired());
-                    Assert.True(e.WaitOne(0));
+                var e = new ManualResetEvent(false);
+                tsc.WaitAction = () => e.Set();
+                Assert.False(tsc.IsWaitNotificationRequired());
+                Assert.False(e.WaitOne(0));
+                tsc.SetWaitNotificationRequired();
+                Assert.True(tsc.IsWaitNotificationRequired());
+                Assert.True(e.WaitOne(0));
 
-                    var mres = new ManualResetEventSlim();
-                    tsc.WaitAction = () => mres.Set();
-                    mres.Reset();
-                    mres.CheckedWait();
+                var mres = new ManualResetEventSlim();
+                tsc.WaitAction = () => mres.Set();
+                mres.Reset();
+                mres.CheckedWait();
 
-                    e.Reset();
-                    tsc.WaitAction = () => e.Set();
-                    SynchronizationContext.SetSynchronizationContext(
-                        new TestSynchronizationContext()
-                    );
-                    Assert.False(e.WaitOne(0));
-                    SynchronizationContext.SetSynchronizationContext(tsc);
-                    Assert.True(e.WaitOne(0));
-                    e.Reset();
-                    e.CheckedWait();
+                e.Reset();
+                tsc.WaitAction = () => e.Set();
+                SynchronizationContext.SetSynchronizationContext(new TestSynchronizationContext());
+                Assert.False(e.WaitOne(0));
+                SynchronizationContext.SetSynchronizationContext(tsc);
+                Assert.True(e.WaitOne(0));
+                e.Reset();
+                e.CheckedWait();
 
-                    e.Reset();
-                    var lockObj = new object();
-                    var lockAcquiredFromBackground = new AutoResetEvent(false);
-                    Action waitForThread;
-                    Thread t = ThreadTestHelpers.CreateGuardedThread(
-                        out waitForThread,
-                        () =>
+                e.Reset();
+                var lockObj = new object();
+                var lockAcquiredFromBackground = new AutoResetEvent(false);
+                Action waitForThread;
+                Thread t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitForThread,
+                    () =>
+                    {
+                        lock (lockObj)
                         {
-                            lock (lockObj)
-                            {
-                                lockAcquiredFromBackground.Set();
-                                e.CheckedWait();
-                            }
+                            lockAcquiredFromBackground.Set();
+                            e.CheckedWait();
                         }
-                    );
-                    t.IsBackground = true;
-                    t.Start();
-                    lockAcquiredFromBackground.CheckedWait();
-                    Assert.True(
-                        Monitor.TryEnter(lockObj, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
-                    );
-                    Monitor.Exit(lockObj);
-                    waitForThread();
+                    }
+                );
+                t.IsBackground = true;
+                t.Start();
+                lockAcquiredFromBackground.CheckedWait();
+                Assert.True(
+                    Monitor.TryEnter(lockObj, ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                );
+                Monitor.Exit(lockObj);
+                waitForThread();
 
-                    e.Reset();
-                    var m = new Mutex();
-                    t = ThreadTestHelpers.CreateGuardedThread(
-                        out waitForThread,
-                        () =>
+                e.Reset();
+                var m = new Mutex();
+                t = ThreadTestHelpers.CreateGuardedThread(
+                    out waitForThread,
+                    () =>
+                    {
+                        m.CheckedWait();
+                        try
                         {
-                            m.CheckedWait();
-                            try
-                            {
-                                lockAcquiredFromBackground.Set();
-                                e.CheckedWait();
-                            }
-                            finally
-                            {
-                                m.ReleaseMutex();
-                            }
+                            lockAcquiredFromBackground.Set();
+                            e.CheckedWait();
                         }
-                    );
-                    t.IsBackground = true;
-                    t.Start();
-                    lockAcquiredFromBackground.CheckedWait();
-                    m.CheckedWait();
-                    m.ReleaseMutex();
-                    waitForThread();
-                }
-            );
+                        finally
+                        {
+                            m.ReleaseMutex();
+                        }
+                    }
+                );
+                t.IsBackground = true;
+                t.Start();
+                lockAcquiredFromBackground.CheckedWait();
+                m.CheckedWait();
+                m.ReleaseMutex();
+                waitForThread();
+            });
         }
 
         private class TestSynchronizationContext : SynchronizationContext

@@ -103,16 +103,14 @@ public class RazorPageCreateTagHelperTest
                         )
                     )
             )
-            .Returns<Type>(
-                serviceType =>
-                {
-                    var enumerableType = serviceType.GetGenericArguments().First();
-                    return typeof(Enumerable)
-                        .GetMethod("Empty")
-                        .MakeGenericMethod(enumerableType)
-                        .Invoke(null, null);
-                }
-            );
+            .Returns<Type>(serviceType =>
+            {
+                var enumerableType = serviceType.GetGenericArguments().First();
+                return typeof(Enumerable)
+                    .GetMethod("Empty")
+                    .MakeGenericMethod(enumerableType)
+                    .Invoke(null, null);
+            });
         var httpContext = new Mock<HttpContext>();
         httpContext.SetupGet(c => c.RequestServices).Returns(serviceProvider.Object);
 

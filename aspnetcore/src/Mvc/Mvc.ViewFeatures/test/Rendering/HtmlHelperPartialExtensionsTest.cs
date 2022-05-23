@@ -81,14 +81,12 @@ public class HtmlHelperPartialExtensionsTest
         var helper = new Mock<IHtmlHelper>();
         helper
             .Setup(h => h.PartialAsync("test", It.IsAny<object>(), It.IsAny<ViewDataDictionary>()))
-            .Callback(
-                () =>
-                {
-                    // Workaround for compilation issue with Moq.
-                    helper.ToString();
-                    throw expected;
-                }
-            );
+            .Callback(() =>
+            {
+                // Workaround for compilation issue with Moq.
+                helper.ToString();
+                throw expected;
+            });
         helper
             .SetupGet(h => h.ViewData)
             .Returns(new ViewDataDictionary(new EmptyModelMetadataProvider()));
@@ -187,14 +185,12 @@ public class HtmlHelperPartialExtensionsTest
                 h =>
                     h.RenderPartialAsync("test", It.IsAny<object>(), It.IsAny<ViewDataDictionary>())
             )
-            .Callback(
-                () =>
-                {
-                    // Workaround for compilation issue with Moq.
-                    helper.ToString();
-                    throw expected;
-                }
-            );
+            .Callback(() =>
+            {
+                // Workaround for compilation issue with Moq.
+                helper.ToString();
+                throw expected;
+            });
         helper
             .SetupGet(h => h.ViewData)
             .Returns(new ViewDataDictionary(new EmptyModelMetadataProvider()));

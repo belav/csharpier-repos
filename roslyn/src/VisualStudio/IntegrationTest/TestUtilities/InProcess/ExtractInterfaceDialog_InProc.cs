@@ -167,18 +167,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                return JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
+                return JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
 
-                        return dialog.DestinationControl.fileNameTextBox.Text;
-                    }
-                );
+                    return dialog.DestinationControl.fileNameTextBox.Text;
+                });
             }
         }
 
@@ -190,28 +188,26 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                return JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
+                return JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
 
-                        var memberSelectionList = dialog.GetTestAccessor().Members;
-                        var comListItems = memberSelectionList.Items;
-                        var listItems = Enumerable
-                            .Range(0, comListItems.Count)
-                            .Select(comListItems.GetItemAt);
+                    var memberSelectionList = dialog.GetTestAccessor().Members;
+                    var comListItems = memberSelectionList.Items;
+                    var listItems = Enumerable
+                        .Range(0, comListItems.Count)
+                        .Select(comListItems.GetItemAt);
 
-                        return listItems
-                            .Cast<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
-                            .Where(viewModel => viewModel.IsChecked)
-                            .Select(viewModel => viewModel.SymbolName)
-                            .ToArray();
-                    }
-                );
+                    return listItems
+                        .Cast<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
+                        .Where(viewModel => viewModel.IsChecked)
+                        .Select(viewModel => viewModel.SymbolName)
+                        .ToArray();
+                });
             }
         }
 
@@ -223,26 +219,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
-                        );
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
 
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
 
-                        var memberSelectionList = dialog.GetTestAccessor().Members;
-                        var items = memberSelectionList.Items
-                            .Cast<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
-                            .ToArray();
-                        var itemViewModel = items.Single(x => x.SymbolName == item);
-                        itemViewModel.IsChecked = !itemViewModel.IsChecked;
+                    var memberSelectionList = dialog.GetTestAccessor().Members;
+                    var items = memberSelectionList.Items
+                        .Cast<ExtractInterfaceDialogViewModel.MemberSymbolViewModel>()
+                        .ToArray();
+                    var itemViewModel = items.Single(x => x.SymbolName == item);
+                    itemViewModel.IsChecked = !itemViewModel.IsChecked;
 
-                        // Wait for changes to propagate
-                        await Task.Yield();
-                    }
-                );
+                    // Wait for changes to propagate
+                    await Task.Yield();
+                });
             }
         }
 

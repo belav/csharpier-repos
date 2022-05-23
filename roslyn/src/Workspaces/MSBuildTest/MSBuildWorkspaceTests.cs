@@ -1343,13 +1343,11 @@ class C1
             CreateFiles(GetSimpleCSharpSolutionFiles());
             var solutionFilePath = GetSolutionFileName("NonExistentSolution.sln");
 
-            await Assert.ThrowsAsync<FileNotFoundException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenSolutionAsync(solutionFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<FileNotFoundException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenSolutionAsync(solutionFilePath);
+            });
         }
 
         [
@@ -1363,13 +1361,11 @@ class C1
                 @"http://localhost/Invalid/InvalidSolution.sln"
             );
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenSolutionAsync(solutionFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenSolutionAsync(solutionFilePath);
+            });
         }
 
         [
@@ -1641,14 +1637,12 @@ class C1
 
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    workspace.SkipUnrecognizedProjects = false;
-                    await workspace.OpenSolutionAsync(solutionFilePath);
-                }
-            );
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                workspace.SkipUnrecognizedProjects = false;
+                await workspace.OpenSolutionAsync(solutionFilePath);
+            });
 
             var noProjFullFileName = GetSolutionFileName(NoProjFileName);
             var expected = string.Format(
@@ -1673,16 +1667,14 @@ class C1
             CreateFiles(GetSimpleCSharpSolutionFiles());
             var solutionFilePath = GetSolutionFileName(@"TestSolution.sln");
 
-            var e = await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace(
-                        MefHostServices.Create(_defaultAssembliesWithoutCSharp)
-                    );
-                    workspace.SkipUnrecognizedProjects = false;
-                    await workspace.OpenSolutionAsync(solutionFilePath);
-                }
-            );
+            var e = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace(
+                    MefHostServices.Create(_defaultAssembliesWithoutCSharp)
+                );
+                workspace.SkipUnrecognizedProjects = false;
+                await workspace.OpenSolutionAsync(solutionFilePath);
+            });
 
             var projFileName = GetSolutionFileName(@"CSharpProject\CSharpProject.csproj");
             var expected = string.Format(
@@ -1757,13 +1749,11 @@ class C1
                 @"http://localhost/Invalid/InvalidProject.csproj"
             );
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenProjectAsync(projectFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenProjectAsync(projectFilePath);
+            });
         }
 
         [
@@ -1775,13 +1765,11 @@ class C1
             CreateFiles(GetSimpleCSharpSolutionFiles());
             var projectFilePath = GetSolutionFileName(@"CSharpProject\NonExistentProject.csproj");
 
-            await Assert.ThrowsAsync<FileNotFoundException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenProjectAsync(projectFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<FileNotFoundException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenProjectAsync(projectFilePath);
+            });
         }
 
         [
@@ -1828,14 +1816,12 @@ class C1
                 @"VisualBasicProject\VisualBasicProject.vbproj"
             );
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    workspace.SkipUnrecognizedProjects = false;
-                    await workspace.OpenProjectAsync(projectFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                workspace.SkipUnrecognizedProjects = false;
+                await workspace.OpenProjectAsync(projectFilePath);
+            });
         }
 
         [
@@ -1882,14 +1868,12 @@ class C1
                 @"VisualBasicProject\VisualBasicProject.vbproj"
             );
 
-            await Assert.ThrowsAsync<FileNotFoundException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    workspace.SkipUnrecognizedProjects = false;
-                    await workspace.OpenProjectAsync(projectFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<FileNotFoundException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                workspace.SkipUnrecognizedProjects = false;
+                await workspace.OpenProjectAsync(projectFilePath);
+            });
         }
 
         [
@@ -1944,14 +1928,12 @@ class C1
                 @"VisualBasicProject\VisualBasicProject.vbproj"
             );
 
-            await Assert.ThrowsAsync<InvalidOperationException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    workspace.SkipUnrecognizedProjects = false;
-                    await workspace.OpenProjectAsync(projectFilePath);
-                }
-            );
+            await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                workspace.SkipUnrecognizedProjects = false;
+                await workspace.OpenProjectAsync(projectFilePath);
+            });
         }
 
         [
@@ -3309,14 +3291,12 @@ class C1
             var expectedEventKind = WorkspaceChangeKind.DocumentChanged;
             var originalSolution = workspace.CurrentSolution;
 
-            using var eventWaiter = workspace.VerifyWorkspaceChangedEvent(
-                args =>
-                {
-                    Assert.Equal(expectedEventKind, args.Kind);
-                    Assert.NotNull(args.NewSolution);
-                    Assert.NotSame(originalSolution, args.NewSolution);
-                }
-            );
+            using var eventWaiter = workspace.VerifyWorkspaceChangedEvent(args =>
+            {
+                Assert.Equal(expectedEventKind, args.Kind);
+                Assert.NotNull(args.NewSolution);
+                Assert.NotSame(originalSolution, args.NewSolution);
+            });
             // change document text (should fire SolutionChanged event)
             var doc = workspace.CurrentSolution.Projects.First().Documents.First();
             var text = await doc.GetTextAsync();
@@ -3354,14 +3334,12 @@ class C1
             var expectedEventKind = WorkspaceChangeKind.DocumentChanged;
             var originalSolution = workspace.CurrentSolution;
 
-            using var eventWanter = workspace.VerifyWorkspaceChangedEvent(
-                args =>
-                {
-                    Assert.Equal(expectedEventKind, args.Kind);
-                    Assert.NotNull(args.NewSolution);
-                    Assert.NotSame(originalSolution, args.NewSolution);
-                }
-            );
+            using var eventWanter = workspace.VerifyWorkspaceChangedEvent(args =>
+            {
+                Assert.Equal(expectedEventKind, args.Kind);
+                Assert.NotNull(args.NewSolution);
+                Assert.NotSame(originalSolution, args.NewSolution);
+            });
             // change document text (should fire SolutionChanged event)
             var doc = workspace.CurrentSolution.Projects.First().Documents.First();
             var text = await doc.GetTextAsync();
@@ -3805,13 +3783,11 @@ class C1
 
             // open for read-write so no-one else can read
             var projectFile = GetSolutionFileName(@"CSharpProject\NoProject.csproj");
-            await Assert.ThrowsAsync<FileNotFoundException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenProjectAsync(projectFile);
-                }
-            );
+            await Assert.ThrowsAsync<FileNotFoundException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenProjectAsync(projectFile);
+            });
         }
 
         [
@@ -3824,13 +3800,11 @@ class C1
 
             // open for read-write so no-one else can read
             var solutionFile = GetSolutionFileName(@"NoSolution.sln");
-            await Assert.ThrowsAsync<FileNotFoundException>(
-                async () =>
-                {
-                    using var workspace = CreateMSBuildWorkspace();
-                    await workspace.OpenSolutionAsync(solutionFile);
-                }
-            );
+            await Assert.ThrowsAsync<FileNotFoundException>(async () =>
+            {
+                using var workspace = CreateMSBuildWorkspace();
+                await workspace.OpenSolutionAsync(solutionFile);
+            });
         }
 
         [

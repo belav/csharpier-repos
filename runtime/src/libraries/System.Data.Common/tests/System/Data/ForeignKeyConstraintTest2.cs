@@ -346,12 +346,10 @@ namespace System.Data.Tests
             // Rule = None, Delete Exception
             fc.DeleteRule = Rule.None;
             //Exception = "Cannot delete this row because constraints are enforced on relation Constraint1, and deleting this row will strand child rows."
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    dtParent.Rows.Find(1).Delete();
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                dtParent.Rows.Find(1).Delete();
+            });
 
             // Rule = None, Delete succeed
             fc.DeleteRule = Rule.None;
@@ -485,12 +483,10 @@ namespace System.Data.Tests
         [Fact]
         public void Ctor_DclmDclm1()
         {
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    ForeignKeyConstraint fc = new ForeignKeyConstraint(null, (DataColumn)null);
-                }
-            );
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(null, (DataColumn)null);
+            });
         }
 
         [Fact]
@@ -558,27 +554,25 @@ namespace System.Data.Tests
         [Fact]
         public void UpdateRule2()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    DataSet ds = GetNewDataSet();
-                    ds.Tables[0].PrimaryKey = null;
-                    ForeignKeyConstraint fc = new ForeignKeyConstraint(
-                        ds.Tables[0].Columns[0],
-                        ds.Tables[1].Columns[0]
-                    );
-                    fc.UpdateRule = Rule.None;
-                    ds.Tables[1].Constraints.Add(fc);
+            Assert.Throws<ConstraintException>(() =>
+            {
+                DataSet ds = GetNewDataSet();
+                ds.Tables[0].PrimaryKey = null;
+                ForeignKeyConstraint fc = new ForeignKeyConstraint(
+                    ds.Tables[0].Columns[0],
+                    ds.Tables[1].Columns[0]
+                );
+                fc.UpdateRule = Rule.None;
+                ds.Tables[1].Constraints.Add(fc);
 
-                    //Changing parent row
+                //Changing parent row
 
-                    ds.Tables[0].Rows[0]["ParentId"] = 5;
-                    /*ds.Tables[0].AcceptChanges();
-                    ds.Tables[1].AcceptChanges();
-                    //Checking the table
-                    Compare(ds.Tables[1].Select("ParentId=8").Length ,0);*/
-                }
-            );
+                ds.Tables[0].Rows[0]["ParentId"] = 5;
+                /*ds.Tables[0].AcceptChanges();
+                ds.Tables[1].AcceptChanges();
+                //Checking the table
+                Compare(ds.Tables[1].Select("ParentId=8").Length ,0);*/
+            });
         }
 
         [Fact]

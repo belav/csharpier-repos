@@ -231,19 +231,14 @@ namespace System.Net.Http.Functional.Tests
                                         },
                                         async server =>
                                         {
-                                            await server.AcceptConnectionAsync(
-                                                async connection =>
-                                                {
-                                                    await WaitForEventCountersAsync(events);
-                                                    await connection.ReadRequestDataAsync();
-                                                    await connection.SendResponseAsync(
-                                                        content: new string(
-                                                            'a',
-                                                            ResponseContentLength
-                                                        )
-                                                    );
-                                                }
-                                            );
+                                            await server.AcceptConnectionAsync(async connection =>
+                                            {
+                                                await WaitForEventCountersAsync(events);
+                                                await connection.ReadRequestDataAsync();
+                                                await connection.SendResponseAsync(
+                                                    content: new string('a', ResponseContentLength)
+                                                );
+                                            });
                                         }
                                     );
 
@@ -432,19 +427,17 @@ namespace System.Net.Http.Functional.Tests
                                         },
                                         async server =>
                                         {
-                                            await server.AcceptConnectionAsync(
-                                                async connection =>
-                                                {
-                                                    await connection.ReadRequestDataAsync();
-                                                    await WaitForEventCountersAsync(events);
-                                                    cts.Cancel();
-                                                    Assert.True(
-                                                        await semaphore.WaitAsync(
-                                                            TimeSpan.FromSeconds(30)
-                                                        )
-                                                    );
-                                                }
-                                            );
+                                            await server.AcceptConnectionAsync(async connection =>
+                                            {
+                                                await connection.ReadRequestDataAsync();
+                                                await WaitForEventCountersAsync(events);
+                                                cts.Cancel();
+                                                Assert.True(
+                                                    await semaphore.WaitAsync(
+                                                        TimeSpan.FromSeconds(30)
+                                                    )
+                                                );
+                                            });
                                         }
                                     );
 
@@ -576,19 +569,14 @@ namespace System.Net.Http.Functional.Tests
                                         },
                                         async server =>
                                         {
-                                            await server.AcceptConnectionAsync(
-                                                async connection =>
-                                                {
-                                                    await WaitForEventCountersAsync(events);
-                                                    await connection.ReadRequestDataAsync();
-                                                    await connection.SendResponseAsync(
-                                                        content: new string(
-                                                            'a',
-                                                            ResponseContentLength
-                                                        )
-                                                    );
-                                                }
-                                            );
+                                            await server.AcceptConnectionAsync(async connection =>
+                                            {
+                                                await WaitForEventCountersAsync(events);
+                                                await connection.ReadRequestDataAsync();
+                                                await connection.SendResponseAsync(
+                                                    content: new string('a', ResponseContentLength)
+                                                );
+                                            });
                                         }
                                     );
 

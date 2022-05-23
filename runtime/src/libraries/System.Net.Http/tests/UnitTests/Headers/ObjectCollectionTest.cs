@@ -18,12 +18,10 @@ namespace System.Net.Http.Tests
             c.Add("value1");
             c.Add("value2");
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    c.Add(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                c.Add(null);
+            });
 
             Assert.Equal(2, c.Count);
             Assert.True(c.Contains("value2"));
@@ -34,12 +32,10 @@ namespace System.Net.Http.Tests
 
             c.Add("value1");
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    c.Add(null);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                c.Add(null);
+            });
         }
 
         [Fact]

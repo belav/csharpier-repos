@@ -163,12 +163,10 @@ namespace System.Web.WebPages.Test
         {
             var contents = "test";
             var httpContext = Utils.CreateTestContext().Object;
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    throw new InvalidOperationException(contents);
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                throw new InvalidOperationException(contents);
+            });
             var e = Assert.Throws<HttpUnhandledException>(
                 () => new WebPageHttpHandler(page).ProcessRequestInternal(httpContext)
             );
@@ -181,12 +179,10 @@ namespace System.Web.WebPages.Test
         {
             var contents = "test";
             var httpContext = Utils.CreateTestContext().Object;
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    throw new SecurityException(contents);
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                throw new SecurityException(contents);
+            });
             Assert.Throws<SecurityException>(
                 () => new WebPageHttpHandler(page).ProcessRequestInternal(httpContext),
                 contents

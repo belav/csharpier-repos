@@ -94,71 +94,69 @@ namespace Microsoft.NET.HostModel.AppHost
 
             try
             {
-                RetryUtil.RetryOnIOError(
-                    () =>
+                RetryUtil.RetryOnIOError(() =>
+                {
+                    FileStream appHostSourceStream = null;
+                    MemoryMappedFile memoryMappedFile = null;
+                    MemoryMappedViewAccessor memoryMappedViewAccessor = null;
+                    try
                     {
-                        FileStream appHostSourceStream = null;
-                        MemoryMappedFile memoryMappedFile = null;
-                        MemoryMappedViewAccessor memoryMappedViewAccessor = null;
-                        try
-                        {
-                            // Open the source host file.
-                            appHostSourceStream = new FileStream(
-                                appHostSourceFilePath,
-                                FileMode.Open,
-                                FileAccess.Read,
-                                FileShare.Read
-                            );
-                            memoryMappedFile = MemoryMappedFile.CreateFromFile(
-                                appHostSourceStream,
-                                null,
-                                0,
-                                MemoryMappedFileAccess.Read,
-                                HandleInheritability.None,
-                                true
-                            );
-                            memoryMappedViewAccessor = memoryMappedFile.CreateViewAccessor(
-                                0,
-                                0,
-                                MemoryMappedFileAccess.CopyOnWrite
-                            );
+                        // Open the source host file.
+                        appHostSourceStream = new FileStream(
+                            appHostSourceFilePath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read
+                        );
+                        memoryMappedFile = MemoryMappedFile.CreateFromFile(
+                            appHostSourceStream,
+                            null,
+                            0,
+                            MemoryMappedFileAccess.Read,
+                            HandleInheritability.None,
+                            true
+                        );
+                        memoryMappedViewAccessor = memoryMappedFile.CreateViewAccessor(
+                            0,
+                            0,
+                            MemoryMappedFileAccess.CopyOnWrite
+                        );
 
-                            // Get the size of the source app host to ensure that we don't write extra data to the destination.
-                            // On Windows, the size of the view accessor is rounded up to the next page boundary.
-                            long sourceAppHostLength = appHostSourceStream.Length;
+                        // Get the size of the source app host to ensure that we don't write extra data to the destination.
+                        // On Windows, the size of the view accessor is rounded up to the next page boundary.
+                        long sourceAppHostLength = appHostSourceStream.Length;
 
-                            // Transform the host file in-memory.
-                            RewriteAppHost(memoryMappedViewAccessor);
+                        // Transform the host file in-memory.
+                        RewriteAppHost(memoryMappedViewAccessor);
 
-                            // Save the transformed host.
-                            using (
-                                FileStream fileStream = new FileStream(
-                                    appHostDestinationFilePath,
-                                    FileMode.Create
-                                )
+                        // Save the transformed host.
+                        using (
+                            FileStream fileStream = new FileStream(
+                                appHostDestinationFilePath,
+                                FileMode.Create
                             )
-                            {
-                                BinaryUtils.WriteToStream(
-                                    memoryMappedViewAccessor,
-                                    fileStream,
-                                    sourceAppHostLength
-                                );
+                        )
+                        {
+                            BinaryUtils.WriteToStream(
+                                memoryMappedViewAccessor,
+                                fileStream,
+                                sourceAppHostLength
+                            );
 
-                                // Remove the signature from MachO hosts.
-                                if (!appHostIsPEImage)
-                                {
-                                    MachOUtils.RemoveSignature(fileStream);
-                                }
+                            // Remove the signature from MachO hosts.
+                            if (!appHostIsPEImage)
+                            {
+                                MachOUtils.RemoveSignature(fileStream);
                             }
                         }
-                        finally
-                        {
-                            memoryMappedViewAccessor?.Dispose();
-                            memoryMappedFile?.Dispose();
-                            appHostSourceStream?.Dispose();
-                        }
                     }
-                );
+                    finally
+                    {
+                        memoryMappedViewAccessor?.Dispose();
+                        memoryMappedFile?.Dispose();
+                        appHostSourceStream?.Dispose();
+                    }
+                });
 
                 RetryUtil.RetryOnWin32Error(UpdateResources);
 

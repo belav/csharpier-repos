@@ -176,12 +176,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new NoOverridesImportDefinition();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    var constraint = definition.Constraint;
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                var constraint = definition.Constraint;
+            });
         }
 
         [Fact]
@@ -189,12 +187,10 @@ namespace System.ComponentModel.Composition
         {
             var definition = new NoOverridesImportDefinition();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    definition.ToString();
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                definition.ToString();
+            });
         }
 
         [Fact]

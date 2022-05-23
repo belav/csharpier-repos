@@ -373,13 +373,11 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<ComplexOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.Boolean = false;
-                        o.Integer = 11;
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.Boolean = false;
+                    o.Integer = 11;
+                })
                 .Validate(o => o.Boolean)
                 .Validate(o => o.Integer > 12);
 
@@ -401,14 +399,12 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<ComplexOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.Boolean = false;
-                        o.Integer = 11;
-                        o.Virtual = "wut";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.Boolean = false;
+                    o.Integer = 11;
+                    o.Virtual = "wut";
+                })
                 .Validate(o => o.Boolean)
                 .Validate(o => o.Virtual == null, "Virtual")
                 .Validate(o => o.Integer > 12, "Integer");
@@ -735,14 +731,12 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<ComplexOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.Boolean = false;
-                        o.Integer = 11;
-                        o.Virtual = "wut";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.Boolean = false;
+                    o.Integer = 11;
+                    o.Virtual = "wut";
+                })
                 .Validate(o => o.Boolean)
                 .Validate(o => o.Virtual == null, "Virtual")
                 .Validate(o => o.Integer > 12, "Integer");
@@ -831,15 +825,13 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<AnnotatedOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.StringLength = "111111";
-                        o.IntRange = 10;
-                        o.Custom = "nowhere";
-                        o.Dep1 = "Not dep2";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.StringLength = "111111";
+                    o.IntRange = 10;
+                    o.Custom = "nowhere";
+                    o.Dep1 = "Not dep2";
+                })
                 .ValidateDataAnnotations();
 
             var sp = services.BuildServiceProvider();
@@ -865,15 +857,13 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<AnnotatedOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.StringLength = "111111";
-                        o.IntRange = 10;
-                        o.Custom = "nowhere";
-                        o.Dep1 = "Not dep2";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.StringLength = "111111";
+                    o.IntRange = 10;
+                    o.Custom = "nowhere";
+                    o.Dep1 = "Not dep2";
+                })
                 .ValidateDataAnnotations()
                 .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");
 
@@ -907,15 +897,13 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<AnnotatedOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.StringLength = "111111";
-                        o.IntRange = 10;
-                        o.Custom = "nowhere";
-                        o.Dep1 = "Not dep2";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.StringLength = "111111";
+                    o.IntRange = 10;
+                    o.Custom = "nowhere";
+                    o.Dep1 = "Not dep2";
+                })
                 .ValidateDataAnnotations()
                 .ValidateOnStart();
 
@@ -949,15 +937,13 @@ namespace Microsoft.Extensions.Options.Tests
 
             services
                 .AddOptions<AnnotatedOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.StringLength = "111111";
-                        o.IntRange = 10;
-                        o.Custom = "nowhere";
-                        o.Dep1 = "Not dep2";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.StringLength = "111111";
+                    o.IntRange = 10;
+                    o.Custom = "nowhere";
+                    o.Dep1 = "Not dep2";
+                })
                 .ValidateDataAnnotations()
                 .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!")
                 .ValidateOnStart();
@@ -994,15 +980,13 @@ namespace Microsoft.Extensions.Options.Tests
             services
                 .AddOptions<AnnotatedOptions>()
                 .ValidateOnStart()
-                .Configure(
-                    o =>
-                    {
-                        o.StringLength = "111111";
-                        o.IntRange = 10;
-                        o.Custom = "nowhere";
-                        o.Dep1 = "Not dep2";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.StringLength = "111111";
+                    o.IntRange = 10;
+                    o.Custom = "nowhere";
+                    o.Dep1 = "Not dep2";
+                })
                 .ValidateDataAnnotations()
                 .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");
 
@@ -1036,17 +1020,15 @@ namespace Microsoft.Extensions.Options.Tests
             var services = new ServiceCollection();
             services
                 .AddOptions<AnnotatedOptions>()
-                .Configure(
-                    o =>
-                    {
-                        o.Required = "required";
-                        o.StringLength = "1111";
-                        o.IntRange = 0;
-                        o.Custom = "USA";
-                        o.Dep1 = "dep";
-                        o.Dep2 = "dep";
-                    }
-                )
+                .Configure(o =>
+                {
+                    o.Required = "required";
+                    o.StringLength = "1111";
+                    o.IntRange = 0;
+                    o.Custom = "USA";
+                    o.Dep1 = "dep";
+                    o.Dep2 = "dep";
+                })
                 .ValidateDataAnnotations()
                 .ValidateOnStart()
                 .Validate(o => o.Custom != "nowhere", "I don't want to go to nowhere!");

@@ -307,16 +307,14 @@ public class Http3RequestTests : LoggedTest
     public async Task POST_ServerCompletesWithoutReadingRequestBody_ClientGetsResponse()
     {
         // Arrange
-        var builder = CreateHostBuilder(
-            async context =>
-            {
-                var body = context.Request.Body;
+        var builder = CreateHostBuilder(async context =>
+        {
+            var body = context.Request.Body;
 
-                var data = await body.ReadAtLeastLengthAsync(TestData.Length).DefaultTimeout();
+            var data = await body.ReadAtLeastLengthAsync(TestData.Length).DefaultTimeout();
 
-                await context.Response.Body.WriteAsync(data);
-            }
-        );
+            await context.Response.Body.WriteAsync(data);
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -374,13 +372,11 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        Logger.LogInformation("Server received cancellation");
-                        cancelledTcs.SetResult();
-                    }
-                );
+                context.RequestAborted.Register(() =>
+                {
+                    Logger.LogInformation("Server received cancellation");
+                    cancelledTcs.SetResult();
+                });
 
                 var body = context.Request.Body;
 
@@ -609,16 +605,14 @@ public class Http3RequestTests : LoggedTest
     public async Task POST_Expect100Continue_Get100Continue()
     {
         // Arrange
-        var builder = CreateHostBuilder(
-            async context =>
-            {
-                var body = context.Request.Body;
+        var builder = CreateHostBuilder(async context =>
+        {
+            var body = context.Request.Body;
 
-                var data = await body.ReadAtLeastLengthAsync(TestData.Length).DefaultTimeout();
+            var data = await body.ReadAtLeastLengthAsync(TestData.Length).DefaultTimeout();
 
-                await context.Response.Body.WriteAsync(data);
-            }
-        );
+            await context.Response.Body.WriteAsync(data);
+        });
 
         using (var host = builder.Build())
         using (
@@ -678,22 +672,18 @@ public class Http3RequestTests : LoggedTest
         object persistedState = null;
         var requestCount = 0;
 
-        var builder = CreateHostBuilder(
-            context =>
+        var builder = CreateHostBuilder(context =>
+        {
+            requestCount++;
+            var persistentStateCollection = context.Features.Get<IPersistentStateFeature>().State;
+            if (persistentStateCollection.TryGetValue("Counter", out var value))
             {
-                requestCount++;
-                var persistentStateCollection = context.Features
-                    .Get<IPersistentStateFeature>()
-                    .State;
-                if (persistentStateCollection.TryGetValue("Counter", out var value))
-                {
-                    persistedState = value;
-                }
-                persistentStateCollection["Counter"] = requestCount;
-
-                return Task.CompletedTask;
+                persistedState = value;
             }
-        );
+            persistentStateCollection["Counter"] = requestCount;
+
+            return Task.CompletedTask;
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -761,13 +751,11 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        Logger.LogInformation("Server received request aborted.");
-                        cancelledTcs.SetResult();
-                    }
-                );
+                context.RequestAborted.Register(() =>
+                {
+                    Logger.LogInformation("Server received request aborted.");
+                    cancelledTcs.SetResult();
+                });
 
                 var requestBody = context.Request.Body;
                 var responseBody = context.Response.Body;
@@ -979,13 +967,11 @@ public class Http3RequestTests : LoggedTest
         var builder = CreateHostBuilder(
             async context =>
             {
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        Logger.LogInformation("Server received request aborted.");
-                        cancelledTcs.SetResult();
-                    }
-                );
+                context.RequestAborted.Register(() =>
+                {
+                    Logger.LogInformation("Server received request aborted.");
+                    cancelledTcs.SetResult();
+                });
 
                 var responseBody = context.Response.Body;
                 await responseBody.WriteAsync(TestData);
@@ -1040,28 +1026,26 @@ public class Http3RequestTests : LoggedTest
     public async Task StreamResponseContent_DelayAndTrailers_ClientSuccess()
     {
         // Arrange
-        var builder = CreateHostBuilder(
-            async context =>
+        var builder = CreateHostBuilder(async context =>
+        {
+            var feature = context.Features.Get<IHttpResponseTrailersFeature>();
+
+            for (var i = 1; i < 200; i++)
             {
-                var feature = context.Features.Get<IHttpResponseTrailersFeature>();
-
-                for (var i = 1; i < 200; i++)
-                {
-                    feature.Trailers.Append($"trailer-{i}", new string('!', i));
-                }
-
-                Logger.LogInformation($"Server trailer count: {feature.Trailers.Count}");
-
-                await context.Request.BodyReader.ReadAtLeastAsync(TestData.Length);
-
-                for (var i = 0; i < 3; i++)
-                {
-                    await context.Response.BodyWriter.WriteAsync(TestData);
-
-                    await Task.Delay(TimeSpan.FromMilliseconds(10));
-                }
+                feature.Trailers.Append($"trailer-{i}", new string('!', i));
             }
-        );
+
+            Logger.LogInformation($"Server trailer count: {feature.Trailers.Count}");
+
+            await context.Request.BodyReader.ReadAtLeastAsync(TestData.Length);
+
+            for (var i = 0; i < 3; i++)
+            {
+                await context.Response.BodyWriter.WriteAsync(TestData);
+
+                await Task.Delay(TimeSpan.FromMilliseconds(10));
+            }
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -1111,15 +1095,13 @@ public class Http3RequestTests : LoggedTest
         string connectionId = null;
         string traceId = null;
 
-        var builder = CreateHostBuilder(
-            context =>
-            {
-                connectionId = context.Connection.Id;
-                traceId = context.TraceIdentifier;
+        var builder = CreateHostBuilder(context =>
+        {
+            connectionId = context.Connection.Id;
+            traceId = context.TraceIdentifier;
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -1173,27 +1155,25 @@ public class Http3RequestTests : LoggedTest
         string request2HeaderValue = null;
         var requestCount = 0;
 
-        var builder = CreateHostBuilder(
-            context =>
+        var builder = CreateHostBuilder(context =>
+        {
+            requestCount++;
+
+            if (requestCount == 1)
             {
-                requestCount++;
-
-                if (requestCount == 1)
-                {
-                    request1HeaderValue = context.Request.Headers.UserAgent;
-                }
-                else if (requestCount == 2)
-                {
-                    request2HeaderValue = context.Request.Headers.UserAgent;
-                }
-                else
-                {
-                    throw new InvalidOperationException();
-                }
-
-                return Task.CompletedTask;
+                request1HeaderValue = context.Request.Headers.UserAgent;
             }
-        );
+            else if (requestCount == 2)
+            {
+                request2HeaderValue = context.Request.Headers.UserAgent;
+            }
+            else
+            {
+                throw new InvalidOperationException();
+            }
+
+            return Task.CompletedTask;
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -1241,20 +1221,18 @@ public class Http3RequestTests : LoggedTest
         // Arrange
         var requestCount = 0;
         var contexts = new List<HttpContext>();
-        var builder = CreateHostBuilder(
-            async context =>
+        var builder = CreateHostBuilder(async context =>
+        {
+            contexts.Add(context);
+            requestCount++;
+            Logger.LogInformation($"Server received request {requestCount}");
+            if (requestCount == 1)
             {
-                contexts.Add(context);
-                requestCount++;
-                Logger.LogInformation($"Server received request {requestCount}");
-                if (requestCount == 1)
-                {
-                    await context.Response.CompleteAsync();
+                await context.Response.CompleteAsync();
 
-                    context.Features.Get<IHttpResetFeature>().Reset(256);
-                }
+                context.Features.Get<IHttpResetFeature>().Reset(256);
             }
-        );
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -1387,19 +1365,17 @@ public class Http3RequestTests : LoggedTest
                         listenOptions.UseHttps();
 
                         IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
-                        multiplexedConnectionBuilder.Use(
-                            next =>
+                        multiplexedConnectionBuilder.Use(next =>
+                        {
+                            return context =>
                             {
-                                return context =>
-                                {
-                                    connectionStartedTcs.SetResult();
-                                    context.ConnectionClosed.Register(
-                                        () => connectionClosedTcs.SetResult()
-                                    );
-                                    return next(context);
-                                };
-                            }
-                        );
+                                connectionStartedTcs.SetResult();
+                                context.ConnectionClosed.Register(
+                                    () => connectionClosedTcs.SetResult()
+                                );
+                                return next(context);
+                            };
+                        });
                     }
                 );
             }
@@ -1458,31 +1434,29 @@ public class Http3RequestTests : LoggedTest
                 TaskCreationOptions.RunContinuationsAsynchronously
             );
 
-        var builder = CreateHostBuilder(
-            context =>
+        var builder = CreateHostBuilder(context =>
+        {
+            switch (context.Request.Path.ToString())
             {
-                switch (context.Request.Path.ToString())
-                {
-                    case "/1":
-                        connectionStartedTcs1.SetResult(
-                            context.Features.Get<IConnectionLifetimeNotificationFeature>()
-                        );
-                        return syncPoint1.WaitToContinue();
-                    case "/2":
-                        connectionStartedTcs2.SetResult(
-                            context.Features.Get<IConnectionLifetimeNotificationFeature>()
-                        );
-                        return Task.CompletedTask;
-                    case "/3":
-                        connectionStartedTcs3.SetResult(
-                            context.Features.Get<IConnectionLifetimeNotificationFeature>()
-                        );
-                        return Task.CompletedTask;
-                    default:
-                        throw new InvalidOperationException();
-                }
+                case "/1":
+                    connectionStartedTcs1.SetResult(
+                        context.Features.Get<IConnectionLifetimeNotificationFeature>()
+                    );
+                    return syncPoint1.WaitToContinue();
+                case "/2":
+                    connectionStartedTcs2.SetResult(
+                        context.Features.Get<IConnectionLifetimeNotificationFeature>()
+                    );
+                    return Task.CompletedTask;
+                case "/3":
+                    connectionStartedTcs3.SetResult(
+                        context.Features.Get<IConnectionLifetimeNotificationFeature>()
+                    );
+                    return Task.CompletedTask;
+                default:
+                    throw new InvalidOperationException();
             }
-        );
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())
@@ -1603,16 +1577,14 @@ public class Http3RequestTests : LoggedTest
                         listenOptions.UseHttps();
 
                         IMultiplexedConnectionBuilder multiplexedConnectionBuilder = listenOptions;
-                        multiplexedConnectionBuilder.Use(
-                            next =>
+                        multiplexedConnectionBuilder.Use(next =>
+                        {
+                            return context =>
                             {
-                                return context =>
-                                {
-                                    connectionStartedTcs.SetResult(context);
-                                    return next(context);
-                                };
-                            }
-                        );
+                                connectionStartedTcs.SetResult(context);
+                                return next(context);
+                            };
+                        });
                     }
                 );
             }
@@ -1693,17 +1665,15 @@ public class Http3RequestTests : LoggedTest
         int? localPort = null;
 
         // Arrange
-        var builder = CreateHostBuilder(
-            context =>
-            {
-                connectionId = context.Connection.Id;
-                remoteAddress = context.Connection.RemoteIpAddress;
-                remotePort = context.Connection.RemotePort;
-                localAddress = context.Connection.LocalIpAddress;
-                localPort = context.Connection.LocalPort;
-                return Task.CompletedTask;
-            }
-        );
+        var builder = CreateHostBuilder(context =>
+        {
+            connectionId = context.Connection.Id;
+            remoteAddress = context.Connection.RemoteIpAddress;
+            remotePort = context.Connection.RemotePort;
+            localAddress = context.Connection.LocalIpAddress;
+            localPort = context.Connection.LocalPort;
+            return Task.CompletedTask;
+        });
 
         using (var host = builder.Build())
         using (var client = Http3Helpers.CreateClient())

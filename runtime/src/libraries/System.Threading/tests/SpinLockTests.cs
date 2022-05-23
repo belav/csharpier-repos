@@ -284,13 +284,11 @@ namespace System.Threading.Tests
                 // Test recursive locks
                 slock.Enter(ref lockTaken);
                 Assert.True(lockTaken);
-                Assert.Throws<LockRecursionException>(
-                    () =>
-                    {
-                        bool dummy = false;
-                        slock.Enter(ref dummy);
-                    }
-                );
+                Assert.Throws<LockRecursionException>(() =>
+                {
+                    bool dummy = false;
+                    slock.Enter(ref dummy);
+                });
 
                 slock.Exit();
                 Assert.False(slock.IsHeldByCurrentThread);
@@ -299,25 +297,21 @@ namespace System.Threading.Tests
 
             #region timeout > int.max
             // Test invalid argument handling, too long timeout
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    bool lt = false;
-                    slock.TryEnter(TimeSpan.MaxValue, ref lt);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                bool lt = false;
+                slock.TryEnter(TimeSpan.MaxValue, ref lt);
+            });
 
             #endregion timeout > int.max
 
             #region Timeout > int.max
             // Test invalid argument handling, timeout < -1
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    bool lt = false;
-                    slock.TryEnter(-2, ref lt);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                bool lt = false;
+                slock.TryEnter(-2, ref lt);
+            });
 
             #endregion Timeout > int.max
         }
@@ -353,12 +347,10 @@ namespace System.Threading.Tests
             // Failure Case: Enter didn't throw AE when isTaken is true
 
             slock = new SpinLock(false);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    bool iHeld = slock.IsHeldByCurrentThread;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                bool iHeld = slock.IsHeldByCurrentThread;
+            });
             // Failure Case: IsHeldByCurrentThread didn't throw IOE when the thread tracking is disabled
         }
     }

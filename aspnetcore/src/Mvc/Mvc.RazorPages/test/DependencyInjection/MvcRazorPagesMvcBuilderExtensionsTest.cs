@@ -22,13 +22,11 @@ public class MvcRazorPagesMvcBuilderExtensionsTest
         var applicationModelConvention = Mock.Of<IPageApplicationModelConvention>();
         var routeModelConvention = Mock.Of<IPageRouteModelConvention>();
         var builder = new MvcBuilder(services, new ApplicationPartManager());
-        builder.AddRazorPagesOptions(
-            options =>
-            {
-                options.Conventions.Add(applicationModelConvention);
-                options.Conventions.Add(routeModelConvention);
-            }
-        );
+        builder.AddRazorPagesOptions(options =>
+        {
+            options.Conventions.Add(applicationModelConvention);
+            options.Conventions.Add(routeModelConvention);
+        });
         var serviceProvider = services.BuildServiceProvider();
         var accessor = serviceProvider.GetRequiredService<IOptions<RazorPagesOptions>>();
 

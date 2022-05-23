@@ -164,12 +164,10 @@ namespace System.Threading.Tests
         public static async Task RemovingWaitingParticipants()
         {
             Barrier b = new Barrier(4);
-            Task t = Task.Run(
-                () =>
-                {
-                    b.SignalAndWait();
-                }
-            );
+            Task t = Task.Run(() =>
+            {
+                b.SignalAndWait();
+            });
 
             while (b.ParticipantsRemaining > 3)
             {
@@ -339,24 +337,18 @@ namespace System.Threading.Tests
             Task[] threads = new Task[participants];
             for (int i = 0; i < threads.Length; i++)
             {
-                threads[i] = Task.Run(
-                    () =>
+                threads[i] = Task.Run(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            barrier.SignalAndWait();
-                        }
-                        catch (BarrierPostPhaseException ex)
-                        {
-                            if (
-                                ex.InnerException
-                                    .GetType()
-                                    .Equals(typeof(InvalidOperationException))
-                            )
-                                Interlocked.Increment(ref succeededCount);
-                        }
+                        barrier.SignalAndWait();
                     }
-                );
+                    catch (BarrierPostPhaseException ex)
+                    {
+                        if (ex.InnerException.GetType().Equals(typeof(InvalidOperationException)))
+                            Interlocked.Increment(ref succeededCount);
+                    }
+                });
             }
 
             foreach (Task t in threads)
@@ -371,19 +363,17 @@ namespace System.Threading.Tests
             threads = new Task[participants];
             for (int i = 0; i < threads.Length; i++)
             {
-                threads[i] = Task.Run(
-                    () =>
+                threads[i] = Task.Run(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            barrier.SignalAndWait();
-                        }
-                        catch (BarrierPostPhaseException)
-                        {
-                            Interlocked.Decrement(ref succeededCount);
-                        }
+                        barrier.SignalAndWait();
                     }
-                );
+                    catch (BarrierPostPhaseException)
+                    {
+                        Interlocked.Decrement(ref succeededCount);
+                    }
+                });
             }
             foreach (Task t in threads)
                 t.Wait();
@@ -422,17 +412,15 @@ namespace System.Threading.Tests
                 var src = new CancellationTokenSource();
                 for (int i = 0; i < tasks.Length; i++)
                 {
-                    tasks[i] = Task.Run(
-                        () =>
+                    tasks[i] = Task.Run(() =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                if (b.SignalAndWait(-1, src.Token))
-                                    src.Cancel();
-                            }
-                            catch (OperationCanceledException) { }
+                            if (b.SignalAndWait(-1, src.Token))
+                                src.Cancel();
                         }
-                    );
+                        catch (OperationCanceledException) { }
+                    });
                 }
                 Task.WaitAll(tasks);
             }
@@ -445,14 +433,12 @@ namespace System.Threading.Tests
             for (int j = 0; j < 10; j++)
             {
                 Barrier b = new Barrier(2);
-                var t1 = Task.Run(
-                    () =>
-                    {
-                        b.SignalAndWait();
-                        b.RemoveParticipant();
-                        b.SignalAndWait();
-                    }
-                );
+                var t1 = Task.Run(() =>
+                {
+                    b.SignalAndWait();
+                    b.RemoveParticipant();
+                    b.SignalAndWait();
+                });
 
                 var t2 = Task.Run(() => b.SignalAndWait());
                 Task.WaitAll(t1, t2);

@@ -16,15 +16,13 @@ namespace Microsoft.AspNetCore.Hosting
     {
         public static IWebHostBuilder UseQuic(this IWebHostBuilder hostBuilder)
         {
-            return hostBuilder.ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<
-                        IMultiplexedConnectionListenerFactory,
-                        QuicTransportFactory
-                    >();
-                }
-            );
+            return hostBuilder.ConfigureServices(services =>
+            {
+                services.AddSingleton<
+                    IMultiplexedConnectionListenerFactory,
+                    QuicTransportFactory
+                >();
+            });
         }
 
         public static IWebHostBuilder UseQuic(
@@ -34,12 +32,10 @@ namespace Microsoft.AspNetCore.Hosting
         {
             return hostBuilder
                 .UseQuic()
-                .ConfigureServices(
-                    services =>
-                    {
-                        services.Configure(configureOptions);
-                    }
-                );
+                .ConfigureServices(services =>
+                {
+                    services.Configure(configureOptions);
+                });
         }
     }
 }

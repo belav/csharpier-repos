@@ -99,16 +99,14 @@ namespace System.Runtime.InteropServices.Tests
         public void SetMessageSendCallback_AlreadySet()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        var (msgSend, func) = msgSendOverrides[0];
-                        ObjectiveCMarshal.SetMessageSendCallback(msgSend, func);
-                        Assert.Throws<InvalidOperationException>(
-                            () => ObjectiveCMarshal.SetMessageSendCallback(msgSend, func)
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    var (msgSend, func) = msgSendOverrides[0];
+                    ObjectiveCMarshal.SetMessageSendCallback(msgSend, func);
+                    Assert.Throws<InvalidOperationException>(
+                        () => ObjectiveCMarshal.SetMessageSendCallback(msgSend, func)
+                    );
+                })
                 .Dispose();
         }
 

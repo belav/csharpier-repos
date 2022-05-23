@@ -1724,22 +1724,20 @@ namespace System.Security.Cryptography.X509Certificates.Tests.RevocationTests
                     }
                 }
 
-                RetryHelper.Execute(
-                    () =>
+                RetryHelper.Execute(() =>
+                {
+                    using (ChainHolder holder = new ChainHolder())
                     {
-                        using (ChainHolder holder = new ChainHolder())
-                        {
-                            X509Chain chain = holder.Chain;
-                            chain.ChainPolicy.CustomTrustStore.Add(rootCert);
-                            chain.ChainPolicy.ExtraStore.Add(intermediateCert);
-                            chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
-                            chain.ChainPolicy.VerificationTime = endEntity.NotBefore.AddMinutes(1);
-                            chain.ChainPolicy.UrlRetrievalTimeout = s_urlRetrievalLimit;
+                        X509Chain chain = holder.Chain;
+                        chain.ChainPolicy.CustomTrustStore.Add(rootCert);
+                        chain.ChainPolicy.ExtraStore.Add(intermediateCert);
+                        chain.ChainPolicy.TrustMode = X509ChainTrustMode.CustomRootTrust;
+                        chain.ChainPolicy.VerificationTime = endEntity.NotBefore.AddMinutes(1);
+                        chain.ChainPolicy.UrlRetrievalTimeout = s_urlRetrievalLimit;
 
-                            callback(root, intermediate, endEntity, holder, responder);
-                        }
+                        callback(root, intermediate, endEntity, holder, responder);
                     }
-                );
+                });
             }
         }
 

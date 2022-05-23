@@ -858,24 +858,18 @@ class ADerived2: A
             ).Type;
 
             ISymbol nullSymbol = null;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    compilation.IsSymbolAccessibleWithin(classA, nullSymbol);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    compilation.IsSymbolAccessibleWithin(nullSymbol, classA);
-                }
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    compilation.IsSymbolAccessibleWithin(classA, pubField);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                compilation.IsSymbolAccessibleWithin(classA, nullSymbol);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                compilation.IsSymbolAccessibleWithin(nullSymbol, classA);
+            });
+            Assert.Throws<ArgumentException>(() =>
+            {
+                compilation.IsSymbolAccessibleWithin(classA, pubField);
+            });
 
             Assert.True(Symbol.IsSymbolAccessible(classA.GetSymbol(), classB.GetSymbol()));
             Assert.True(compilation.IsSymbolAccessibleWithin(classA, classB));
@@ -1018,12 +1012,10 @@ class Other
             INamespaceSymbol otherGlobalNS = otherC.GlobalNamespace;
             INamedTypeSymbol classOther =
                 otherGlobalNS.GetMembers("Other").Single() as INamedTypeSymbol;
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    compilation.IsSymbolAccessibleWithin(classA, classOther);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                compilation.IsSymbolAccessibleWithin(classA, classOther);
+            });
         }
 
         [Fact]
@@ -1136,18 +1128,14 @@ internal class InFriendCompilation
             INamedTypeSymbol InFriendCompilation =
                 c3.GlobalNamespace.GetMember("InFriendCompilation") as INamedTypeSymbol;
             Compilation compilation3 = c3;
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    compilation3.IsSymbolAccessibleWithin(Outer, InOtherCompilation);
-                }
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    compilation3.IsSymbolAccessibleWithin(Outer, InFriendCompilation);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                compilation3.IsSymbolAccessibleWithin(Outer, InOtherCompilation);
+            });
+            Assert.Throws<ArgumentException>(() =>
+            {
+                compilation3.IsSymbolAccessibleWithin(Outer, InFriendCompilation);
+            });
         }
 
         [Fact]

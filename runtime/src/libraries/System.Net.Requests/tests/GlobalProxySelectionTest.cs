@@ -33,52 +33,50 @@ namespace System.Net.Tests
         public void Select_Success()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        var myProxy = new MyWebProxy();
+                .Invoke(() =>
+                {
+                    var myProxy = new MyWebProxy();
 
 #pragma warning disable 0618 //GlobalProxySelection is Deprecated.
-                        Assert.NotNull(GlobalProxySelection.Select);
-                        // On .NET Framework, the default value for Select property
-                        // is an internal WebRequest.WebProxyWrapper object which
-                        // works similarly to DefaultWebProxy but is not the same object.
-                        Assert.Equal(GlobalProxySelection.Select, WebRequest.DefaultWebProxy);
+                    Assert.NotNull(GlobalProxySelection.Select);
+                    // On .NET Framework, the default value for Select property
+                    // is an internal WebRequest.WebProxyWrapper object which
+                    // works similarly to DefaultWebProxy but is not the same object.
+                    Assert.Equal(GlobalProxySelection.Select, WebRequest.DefaultWebProxy);
 #pragma warning restore 0618
 
-                        WebRequest.DefaultWebProxy = myProxy;
+                    WebRequest.DefaultWebProxy = myProxy;
 
-                        Assert.Equal(WebRequest.DefaultWebProxy, myProxy);
+                    Assert.Equal(WebRequest.DefaultWebProxy, myProxy);
 #pragma warning disable 0618 //GlobalProxySelection is Deprecated.
-                        Assert.Equal(GlobalProxySelection.Select, myProxy);
+                    Assert.Equal(GlobalProxySelection.Select, myProxy);
 #pragma warning restore 0618
 
-                        // GlobalProxySelection will return an instance of the internal class EmptyWebProxy instead of null.
-                        WebRequest.DefaultWebProxy = null;
+                    // GlobalProxySelection will return an instance of the internal class EmptyWebProxy instead of null.
+                    WebRequest.DefaultWebProxy = null;
 
-                        Assert.Null(WebRequest.DefaultWebProxy);
+                    Assert.Null(WebRequest.DefaultWebProxy);
 #pragma warning disable 0618 //GlobalProxySelection is Deprecated.
-                        Assert.NotNull(GlobalProxySelection.Select);
-                        Assert.True(GlobalProxySelection.Select.IsBypassed(null)); // This is true for EmptyWebProxy, but not for most proxies
+                    Assert.NotNull(GlobalProxySelection.Select);
+                    Assert.True(GlobalProxySelection.Select.IsBypassed(null)); // This is true for EmptyWebProxy, but not for most proxies
 
-                        GlobalProxySelection.Select = myProxy;
+                    GlobalProxySelection.Select = myProxy;
 #pragma warning restore 0618
 
-                        Assert.Equal(WebRequest.DefaultWebProxy, myProxy);
+                    Assert.Equal(WebRequest.DefaultWebProxy, myProxy);
 #pragma warning disable 0618 //GlobalProxySelection is Deprecated.
-                        Assert.Equal(GlobalProxySelection.Select, myProxy);
+                    Assert.Equal(GlobalProxySelection.Select, myProxy);
 
-                        // GlobalProxySelection will return an instance of the internal class EmptyWebProxy instead of null.
-                        GlobalProxySelection.Select = null;
+                    // GlobalProxySelection will return an instance of the internal class EmptyWebProxy instead of null.
+                    GlobalProxySelection.Select = null;
 #pragma warning restore 0618
 
-                        Assert.Null(WebRequest.DefaultWebProxy);
+                    Assert.Null(WebRequest.DefaultWebProxy);
 #pragma warning disable 0618  //GlobalProxySelection is Deprecated.
-                        Assert.NotNull(GlobalProxySelection.Select);
-                        Assert.True(GlobalProxySelection.Select.IsBypassed(null)); // This is true for EmptyWebProxy, but not for most proxies
+                    Assert.NotNull(GlobalProxySelection.Select);
+                    Assert.True(GlobalProxySelection.Select.IsBypassed(null)); // This is true for EmptyWebProxy, but not for most proxies
 #pragma warning restore 0618
-                    }
-                )
+                })
                 .Dispose();
         }
 

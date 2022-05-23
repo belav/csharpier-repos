@@ -651,14 +651,12 @@ public static class Ext
                     params PublicNullableAnnotation[] expectedAnnotations
                 )
                 {
-                    var actualAnnotations = methods.Select(
-                        m =>
-                        {
-                            var result = m.ReceiverType.NullableAnnotation;
-                            Assert.Equal(result, m.ReceiverNullableAnnotation);
-                            return result;
-                        }
-                    );
+                    var actualAnnotations = methods.Select(m =>
+                    {
+                        var result = m.ReceiverType.NullableAnnotation;
+                        Assert.Equal(result, m.ReceiverNullableAnnotation);
+                        return result;
+                    });
                     AssertEx.Equal(expectedAnnotations, actualAnnotations);
                 }
             }
@@ -1230,15 +1228,13 @@ public interface IB<T, U, V>
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>();
             var actualAnnotations = invocations
-                .Select(
-                    inv =>
-                    {
-                        var method = (IMethodSymbol)model.GetSymbolInfo(inv).Symbol;
-                        var result = method.TypeArguments.Single().NullableAnnotation;
-                        Assert.Equal(result, method.TypeArgumentNullableAnnotations.Single());
-                        return result;
-                    }
-                )
+                .Select(inv =>
+                {
+                    var method = (IMethodSymbol)model.GetSymbolInfo(inv).Symbol;
+                    var result = method.TypeArguments.Single().NullableAnnotation;
+                    Assert.Equal(result, method.TypeArgumentNullableAnnotations.Single());
+                    return result;
+                })
                 .ToArray();
             var expectedAnnotations = new[]
             {
@@ -1296,15 +1292,13 @@ class C
                 .DescendantNodes()
                 .OfType<VariableDeclaratorSyntax>();
             var actualAnnotations = variables
-                .Select(
-                    v =>
-                    {
-                        var localSymbol = (ILocalSymbol)model.GetDeclaredSymbol(v);
-                        var result = localSymbol.Type.NullableAnnotation;
-                        Assert.Equal(result, localSymbol.NullableAnnotation);
-                        return result;
-                    }
-                )
+                .Select(v =>
+                {
+                    var localSymbol = (ILocalSymbol)model.GetDeclaredSymbol(v);
+                    var result = localSymbol.Type.NullableAnnotation;
+                    Assert.Equal(result, localSymbol.NullableAnnotation);
+                    return result;
+                })
                 .ToArray();
 
             var expectedAnnotations = new[]

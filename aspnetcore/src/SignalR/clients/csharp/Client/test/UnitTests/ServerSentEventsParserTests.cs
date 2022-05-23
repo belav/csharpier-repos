@@ -80,17 +80,15 @@ public class ServerSentEventsParserTests
         var readableBuffer = new ReadOnlySequence<byte>(buffer);
         var parser = new ServerSentEventsMessageParser();
 
-        var ex = Assert.Throws<FormatException>(
-            () =>
-            {
-                parser.ParseMessage(
-                    readableBuffer,
-                    out var consumed,
-                    out var examined,
-                    out var message
-                );
-            }
-        );
+        var ex = Assert.Throws<FormatException>(() =>
+        {
+            parser.ParseMessage(
+                readableBuffer,
+                out var consumed,
+                out var examined,
+                out var message
+            );
+        });
         Assert.Equal(expectedExceptionMessage, ex.Message);
     }
 

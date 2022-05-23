@@ -34,12 +34,10 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 
     public static void Main(string[] args)

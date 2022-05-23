@@ -193,19 +193,17 @@ internal partial class RemoteJSRuntime : JSRuntime
         // start the stream. We'll give it a maximum of 10 seconds to do so, after which we give up
         // and discard it.
         var cancellationToken = new CancellationTokenSource(TimeSpan.FromSeconds(10)).Token;
-        cancellationToken.Register(
-            () =>
+        cancellationToken.Register(() =>
+        {
+            // If by now the stream hasn't been claimed for sending, stop tracking it
+            if (
+                _pendingDotNetToJSStreams.TryRemove(streamId, out var timedOutStream)
+                && !timedOutStream.LeaveOpen
+            )
             {
-                // If by now the stream hasn't been claimed for sending, stop tracking it
-                if (
-                    _pendingDotNetToJSStreams.TryRemove(streamId, out var timedOutStream)
-                    && !timedOutStream.LeaveOpen
-                )
-                {
-                    timedOutStream.Stream.Dispose();
-                }
+                timedOutStream.Stream.Dispose();
             }
-        );
+        });
 
         await _clientProxy.SendAsync("JS.BeginTransmitStream", streamId);
     }

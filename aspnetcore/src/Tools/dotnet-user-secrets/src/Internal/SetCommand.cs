@@ -38,35 +38,33 @@ Examples:
         var nameArg = command.Argument("[name]", "Name of the secret");
         var valueArg = command.Argument("[value]", "Value of the secret");
 
-        command.OnExecute(
-            () =>
+        command.OnExecute(() =>
+        {
+            if (console.IsInputRedirected && nameArg.Value == null)
             {
-                if (console.IsInputRedirected && nameArg.Value == null)
-                {
-                    options.Command = new FromStdInStrategy();
-                }
-                else
-                {
-                    if (string.IsNullOrEmpty(nameArg.Value))
-                    {
-                        throw new CommandParsingException(
-                            command,
-                            Resources.FormatError_MissingArgument("name")
-                        );
-                    }
-
-                    if (valueArg.Value == null)
-                    {
-                        throw new CommandParsingException(
-                            command,
-                            Resources.FormatError_MissingArgument("value")
-                        );
-                    }
-
-                    options.Command = new ForOneValueStrategy(nameArg.Value, valueArg.Value);
-                }
+                options.Command = new FromStdInStrategy();
             }
-        );
+            else
+            {
+                if (string.IsNullOrEmpty(nameArg.Value))
+                {
+                    throw new CommandParsingException(
+                        command,
+                        Resources.FormatError_MissingArgument("name")
+                    );
+                }
+
+                if (valueArg.Value == null)
+                {
+                    throw new CommandParsingException(
+                        command,
+                        Resources.FormatError_MissingArgument("value")
+                    );
+                }
+
+                options.Command = new ForOneValueStrategy(nameArg.Value, valueArg.Value);
+            }
+        });
     }
 
     public class FromStdInStrategy : ICommand

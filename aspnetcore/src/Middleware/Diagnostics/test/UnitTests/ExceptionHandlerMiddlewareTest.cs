@@ -25,14 +25,12 @@ public class ExceptionHandlerMiddlewareTest
         );
         httpContext.Request.RouteValues["John"] = "Doe";
 
-        var optionsAccessor = CreateOptionsAccessor(
-            exceptionHandler: context =>
-            {
-                Assert.Empty(context.Request.RouteValues);
-                Assert.Null(context.GetEndpoint());
-                return Task.CompletedTask;
-            }
-        );
+        var optionsAccessor = CreateOptionsAccessor(exceptionHandler: context =>
+        {
+            Assert.Empty(context.Request.RouteValues);
+            Assert.Null(context.GetEndpoint());
+            return Task.CompletedTask;
+        });
         var middleware = CreateMiddleware(
             _ => throw new InvalidOperationException(),
             optionsAccessor
@@ -55,16 +53,14 @@ public class ExceptionHandlerMiddlewareTest
         httpContext.SetEndpoint(endpoint);
         httpContext.Request.RouteValues["John"] = "Doe";
 
-        var optionsAccessor = CreateOptionsAccessor(
-            exceptionHandler: context =>
-            {
-                var feature = context.Features.Get<IExceptionHandlerPathFeature>();
-                Assert.Equal(endpoint, feature.Endpoint);
-                Assert.Equal("Doe", feature.RouteValues["John"]);
+        var optionsAccessor = CreateOptionsAccessor(exceptionHandler: context =>
+        {
+            var feature = context.Features.Get<IExceptionHandlerPathFeature>();
+            Assert.Equal(endpoint, feature.Endpoint);
+            Assert.Equal("Doe", feature.RouteValues["John"]);
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
         var middleware = CreateMiddleware(
             _ => throw new InvalidOperationException(),
             optionsAccessor

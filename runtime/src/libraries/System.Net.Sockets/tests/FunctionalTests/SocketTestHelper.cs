@@ -101,51 +101,47 @@ namespace System.Net.Sockets.Tests
             ArraySegment<byte> buffer,
             EndPoint endPoint
         ) =>
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                int received = s.ReceiveFrom(
+                    buffer.Array,
+                    buffer.Offset,
+                    buffer.Count,
+                    SocketFlags.None,
+                    ref endPoint
+                );
+                return new SocketReceiveFromResult
                 {
-                    int received = s.ReceiveFrom(
-                        buffer.Array,
-                        buffer.Offset,
-                        buffer.Count,
-                        SocketFlags.None,
-                        ref endPoint
-                    );
-                    return new SocketReceiveFromResult
-                    {
-                        ReceivedBytes = received,
-                        RemoteEndPoint = endPoint
-                    };
-                }
-            );
+                    ReceivedBytes = received,
+                    RemoteEndPoint = endPoint
+                };
+            });
 
         public override Task<SocketReceiveMessageFromResult> ReceiveMessageFromAsync(
             Socket s,
             ArraySegment<byte> buffer,
             EndPoint endPoint
         ) =>
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                SocketFlags socketFlags = SocketFlags.None;
+                IPPacketInformation ipPacketInformation;
+                int received = s.ReceiveMessageFrom(
+                    buffer.Array,
+                    buffer.Offset,
+                    buffer.Count,
+                    ref socketFlags,
+                    ref endPoint,
+                    out ipPacketInformation
+                );
+                return new SocketReceiveMessageFromResult
                 {
-                    SocketFlags socketFlags = SocketFlags.None;
-                    IPPacketInformation ipPacketInformation;
-                    int received = s.ReceiveMessageFrom(
-                        buffer.Array,
-                        buffer.Offset,
-                        buffer.Count,
-                        ref socketFlags,
-                        ref endPoint,
-                        out ipPacketInformation
-                    );
-                    return new SocketReceiveMessageFromResult
-                    {
-                        ReceivedBytes = received,
-                        SocketFlags = socketFlags,
-                        RemoteEndPoint = endPoint,
-                        PacketInformation = ipPacketInformation
-                    };
-                }
-            );
+                    ReceivedBytes = received,
+                    SocketFlags = socketFlags,
+                    RemoteEndPoint = endPoint,
+                    PacketInformation = ipPacketInformation
+                };
+            });
 
         public override Task<int> SendAsync(Socket s, ArraySegment<byte> buffer) =>
             Task.Run(() => s.Send(buffer.Array, buffer.Offset, buffer.Count, SocketFlags.None));
@@ -186,23 +182,19 @@ namespace System.Net.Sockets.Tests
     public sealed class SocketHelperSyncForceNonBlocking : SocketHelperArraySync
     {
         public override Task<Socket> AcceptAsync(Socket s) =>
-            Task.Run(
-                () =>
-                {
-                    Socket accepted = s.Accept();
-                    accepted.ForceNonBlocking(true);
-                    return accepted;
-                }
-            );
+            Task.Run(() =>
+            {
+                Socket accepted = s.Accept();
+                accepted.ForceNonBlocking(true);
+                return accepted;
+            });
 
         public override Task ConnectAsync(Socket s, EndPoint endPoint) =>
-            Task.Run(
-                () =>
-                {
-                    s.ForceNonBlocking(true);
-                    s.Connect(endPoint);
-                }
-            );
+            Task.Run(() =>
+            {
+                s.ForceNonBlocking(true);
+                s.Connect(endPoint);
+            });
 
         public override void Listen(Socket s, int backlog)
         {
@@ -871,12 +863,10 @@ namespace System.Net.Sockets.Tests
             }
             else
             {
-                return Assert.Throws<TException>(
-                    () =>
-                    {
-                        _ = testCode();
-                    }
-                );
+                return Assert.Throws<TException>(() =>
+                {
+                    _ = testCode();
+                });
             }
         }
     }
@@ -899,17 +889,15 @@ namespace System.Net.Sockets.Tests
             ArraySegment<byte> buffer,
             EndPoint endPoint
         ) =>
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                int received = s.ReceiveFrom((Span<byte>)buffer, ref endPoint);
+                return new SocketReceiveFromResult
                 {
-                    int received = s.ReceiveFrom((Span<byte>)buffer, ref endPoint);
-                    return new SocketReceiveFromResult
-                    {
-                        ReceivedBytes = received,
-                        RemoteEndPoint = endPoint,
-                    };
-                }
-            );
+                    ReceivedBytes = received,
+                    RemoteEndPoint = endPoint,
+                };
+            });
 
         public override Task<int> SendToAsync(
             Socket s,
@@ -922,26 +910,24 @@ namespace System.Net.Sockets.Tests
             ArraySegment<byte> buffer,
             EndPoint endPoint
         ) =>
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                SocketFlags socketFlags = SocketFlags.None;
+                IPPacketInformation ipPacketInformation;
+                int received = s.ReceiveMessageFrom(
+                    (Span<byte>)buffer,
+                    ref socketFlags,
+                    ref endPoint,
+                    out ipPacketInformation
+                );
+                return new SocketReceiveMessageFromResult
                 {
-                    SocketFlags socketFlags = SocketFlags.None;
-                    IPPacketInformation ipPacketInformation;
-                    int received = s.ReceiveMessageFrom(
-                        (Span<byte>)buffer,
-                        ref socketFlags,
-                        ref endPoint,
-                        out ipPacketInformation
-                    );
-                    return new SocketReceiveMessageFromResult
-                    {
-                        ReceivedBytes = received,
-                        SocketFlags = socketFlags,
-                        RemoteEndPoint = endPoint,
-                        PacketInformation = ipPacketInformation
-                    };
-                }
-            );
+                    ReceivedBytes = received,
+                    SocketFlags = socketFlags,
+                    RemoteEndPoint = endPoint,
+                    PacketInformation = ipPacketInformation
+                };
+            });
 
         public override Task SendFileAsync(
             Socket s,
@@ -960,24 +946,20 @@ namespace System.Net.Sockets.Tests
         public override bool ValidatesArrayArguments => false;
 
         public override Task<Socket> AcceptAsync(Socket s) =>
-            Task.Run(
-                () =>
-                {
-                    s.ForceNonBlocking(true);
-                    Socket accepted = s.Accept();
-                    accepted.ForceNonBlocking(true);
-                    return accepted;
-                }
-            );
+            Task.Run(() =>
+            {
+                s.ForceNonBlocking(true);
+                Socket accepted = s.Accept();
+                accepted.ForceNonBlocking(true);
+                return accepted;
+            });
 
         public override Task ConnectAsync(Socket s, EndPoint endPoint) =>
-            Task.Run(
-                () =>
-                {
-                    s.ForceNonBlocking(true);
-                    s.Connect(endPoint);
-                }
-            );
+            Task.Run(() =>
+            {
+                s.ForceNonBlocking(true);
+                s.Connect(endPoint);
+            });
 
         public override void ConfigureNonBlocking(Socket s) => s.ForceNonBlocking(true);
     }

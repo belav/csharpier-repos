@@ -143,23 +143,19 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.Count(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.Count(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.EventuallyCanceled(
                 (source, canceler) =>
-                    source.LongCount(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.LongCount(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
         }
 
@@ -168,43 +164,35 @@ namespace System.Linq.Parallel.Tests
         {
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.Count(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.Count(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.OtherTokenCanceled(
                 (source, canceler) =>
-                    source.LongCount(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.LongCount(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.Count(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.Count(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
             AssertThrows.SameTokenNotCanceled(
                 (source, canceler) =>
-                    source.LongCount(
-                        x =>
-                        {
-                            canceler();
-                            return true;
-                        }
-                    )
+                    source.LongCount(x =>
+                    {
+                        canceler();
+                        return true;
+                    })
             );
         }
 
@@ -225,23 +213,19 @@ namespace System.Linq.Parallel.Tests
                 () =>
                     ParallelEnumerable
                         .Range(0, 1)
-                        .Count(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .Count(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
             AssertThrows.Wrapped<DeliberateTestException>(
                 () =>
                     ParallelEnumerable
                         .Range(0, 1)
-                        .LongCount(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .LongCount(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
         }
 

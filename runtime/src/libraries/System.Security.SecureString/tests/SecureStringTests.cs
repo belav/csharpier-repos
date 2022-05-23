@@ -534,83 +534,77 @@ namespace System.Security.Tests
                         .Range(0, Environment.ProcessorCount)
                         .Select(
                             _ =>
-                                Task.Run(
-                                    () =>
+                                Task.Run(() =>
+                                {
+                                    var rand = new Random(Task.CurrentId.Value);
+                                    while (DateTimeOffset.UtcNow < end)
                                     {
-                                        var rand = new Random(Task.CurrentId.Value);
-                                        while (DateTimeOffset.UtcNow < end)
+                                        char c = (char)rand.Next(0, char.MaxValue);
+                                        switch (rand.Next(12))
                                         {
-                                            char c = (char)rand.Next(0, char.MaxValue);
-                                            switch (rand.Next(12))
-                                            {
-                                                case 0:
-                                                    ss.AppendChar(c);
-                                                    break;
-                                                case 1:
-                                                    ss.InsertAt(0, c);
-                                                    break;
-                                                case 2:
-                                                    try
-                                                    {
-                                                        ss.SetAt(0, c);
-                                                    }
-                                                    catch (ArgumentOutOfRangeException) { }
-                                                    break;
-                                                case 3:
-                                                    ss.Copy().Dispose();
-                                                    break;
-                                                case 4:
-                                                    Assert.InRange(
-                                                        ss.Length,
-                                                        0,
-                                                        ushort.MaxValue + 1
-                                                    );
-                                                    break;
-                                                case 5:
-                                                    ss.Clear();
-                                                    break;
-                                                case 6:
-                                                    try
-                                                    {
-                                                        ss.RemoveAt(0);
-                                                    }
-                                                    catch (ArgumentOutOfRangeException) { }
-                                                    break;
-                                                case 7:
-                                                    Assert.False(ss.IsReadOnly());
-                                                    break;
-                                                case 8:
-                                                    Marshal.ZeroFreeCoTaskMemAnsi(
-                                                        SecureStringMarshal.SecureStringToCoTaskMemAnsi(
-                                                            ss
-                                                        )
-                                                    );
-                                                    break;
-                                                case 9:
-                                                    Marshal.ZeroFreeCoTaskMemUnicode(
-                                                        SecureStringMarshal.SecureStringToCoTaskMemUnicode(
-                                                            ss
-                                                        )
-                                                    );
-                                                    break;
-                                                case 10:
-                                                    Marshal.ZeroFreeGlobalAllocAnsi(
-                                                        SecureStringMarshal.SecureStringToGlobalAllocAnsi(
-                                                            ss
-                                                        )
-                                                    );
-                                                    break;
-                                                case 11:
-                                                    Marshal.ZeroFreeGlobalAllocUnicode(
-                                                        SecureStringMarshal.SecureStringToGlobalAllocUnicode(
-                                                            ss
-                                                        )
-                                                    );
-                                                    break;
-                                            }
+                                            case 0:
+                                                ss.AppendChar(c);
+                                                break;
+                                            case 1:
+                                                ss.InsertAt(0, c);
+                                                break;
+                                            case 2:
+                                                try
+                                                {
+                                                    ss.SetAt(0, c);
+                                                }
+                                                catch (ArgumentOutOfRangeException) { }
+                                                break;
+                                            case 3:
+                                                ss.Copy().Dispose();
+                                                break;
+                                            case 4:
+                                                Assert.InRange(ss.Length, 0, ushort.MaxValue + 1);
+                                                break;
+                                            case 5:
+                                                ss.Clear();
+                                                break;
+                                            case 6:
+                                                try
+                                                {
+                                                    ss.RemoveAt(0);
+                                                }
+                                                catch (ArgumentOutOfRangeException) { }
+                                                break;
+                                            case 7:
+                                                Assert.False(ss.IsReadOnly());
+                                                break;
+                                            case 8:
+                                                Marshal.ZeroFreeCoTaskMemAnsi(
+                                                    SecureStringMarshal.SecureStringToCoTaskMemAnsi(
+                                                        ss
+                                                    )
+                                                );
+                                                break;
+                                            case 9:
+                                                Marshal.ZeroFreeCoTaskMemUnicode(
+                                                    SecureStringMarshal.SecureStringToCoTaskMemUnicode(
+                                                        ss
+                                                    )
+                                                );
+                                                break;
+                                            case 10:
+                                                Marshal.ZeroFreeGlobalAllocAnsi(
+                                                    SecureStringMarshal.SecureStringToGlobalAllocAnsi(
+                                                        ss
+                                                    )
+                                                );
+                                                break;
+                                            case 11:
+                                                Marshal.ZeroFreeGlobalAllocUnicode(
+                                                    SecureStringMarshal.SecureStringToGlobalAllocUnicode(
+                                                        ss
+                                                    )
+                                                );
+                                                break;
                                         }
                                     }
-                                )
+                                })
                         )
                         .ToArray()
                 );

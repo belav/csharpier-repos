@@ -27,13 +27,11 @@ namespace AutoMapper.UnitTests.ValueTypes
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>().MaxDepth(2);
-                    cfg.CreateMap<InnerSource, InnerDestination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().MaxDepth(2);
+                cfg.CreateMap<InnerSource, InnerDestination>();
+            });
 
         [Fact]
         public void Should_work()
@@ -62,12 +60,10 @@ namespace AutoMapper.UnitTests.ValueTypes
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -146,15 +142,12 @@ namespace AutoMapper.UnitTests.ValueTypes
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<string, int>().ConvertUsing((string s) => Convert.ToInt32(s));
-                    cfg.CreateMap<string, int?>()
-                        .ConvertUsing((string s) => (int?)Convert.ToInt32(s));
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<string, int>().ConvertUsing((string s) => Convert.ToInt32(s));
+                cfg.CreateMap<string, int?>().ConvertUsing((string s) => (int?)Convert.ToInt32(s));
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {

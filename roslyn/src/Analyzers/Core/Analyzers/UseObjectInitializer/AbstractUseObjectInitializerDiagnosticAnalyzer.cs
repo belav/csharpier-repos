@@ -50,20 +50,18 @@ namespace Microsoft.CodeAnalysis.UseObjectInitializer
         protected override void InitializeWorker(AnalysisContext context)
         {
             var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                if (!AreObjectInitializersSupported(context.Compilation))
                 {
-                    if (!AreObjectInitializersSupported(context.Compilation))
-                    {
-                        return;
-                    }
-
-                    context.RegisterSyntaxNodeAction(
-                        AnalyzeNode,
-                        syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.ObjectCreationExpression)
-                    );
+                    return;
                 }
-            );
+
+                context.RegisterSyntaxNodeAction(
+                    AnalyzeNode,
+                    syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.ObjectCreationExpression)
+                );
+            });
         }
 
         protected abstract bool AreObjectInitializersSupported(Compilation compilation);

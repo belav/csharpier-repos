@@ -85,19 +85,17 @@ public class RendererSynchronizationContextTest
         var e2 = new ManualResetEventSlim();
         var e3 = new ManualResetEventSlim();
 
-        var task = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
@@ -137,19 +135,17 @@ public class RendererSynchronizationContextTest
         var e2 = new ManualResetEventSlim();
         var e3 = new ManualResetEventSlim();
 
-        var task = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
@@ -199,19 +195,17 @@ public class RendererSynchronizationContextTest
         var e1 = new ManualResetEventSlim();
         var e2 = new ManualResetEventSlim();
 
-        var task = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
@@ -263,20 +257,18 @@ public class RendererSynchronizationContextTest
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
-        var task2 = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e3.Set();
-                        Assert.True(e4.Wait(Timeout), "timeout");
-                        capturedThread = Thread.CurrentThread;
-                    },
-                    null
-                );
-            }
-        );
+        var task2 = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e3.Set();
+                    Assert.True(e4.Wait(Timeout), "timeout");
+                    capturedThread = Thread.CurrentThread;
+                },
+                null
+            );
+        });
 
         e2.Set();
         await task1;
@@ -397,38 +389,34 @@ public class RendererSynchronizationContextTest
         var e4 = new ManualResetEventSlim();
 
         // Force task2 to execute in the background
-        var task1 = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task1 = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
         // Act
         //
         // Dispatch this on the background thread because otherwise it would block.
-        var task2 = Task.Run(
-            () =>
-            {
-                e3.Set();
-                context.Send(
-                    (_) =>
-                    {
-                        e4.Set();
-                    },
-                    null
-                );
-            }
-        );
+        var task2 = Task.Run(() =>
+        {
+            e3.Set();
+            context.Send(
+                (_) =>
+                {
+                    e4.Set();
+                },
+                null
+            );
+        });
 
         // Assert
         Assert.True(e3.Wait(Timeout), "timeout");
@@ -485,12 +473,10 @@ public class RendererSynchronizationContextTest
         Thread capturedThread = null;
 
         // Act
-        var task = context.InvokeAsync(
-            () =>
-            {
-                capturedThread = Thread.CurrentThread;
-            }
-        );
+        var task = context.InvokeAsync(() =>
+        {
+            capturedThread = Thread.CurrentThread;
+        });
 
         // Assert
         await task;
@@ -509,30 +495,26 @@ public class RendererSynchronizationContextTest
         var e2 = new ManualResetEventSlim();
         var e3 = new ManualResetEventSlim();
 
-        var task1 = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task1 = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
-        var task2 = context.InvokeAsync(
-            () =>
-            {
-                capturedThread = Thread.CurrentThread;
+        var task2 = context.InvokeAsync(() =>
+        {
+            capturedThread = Thread.CurrentThread;
 
-                e3.Set();
-            }
-        );
+            e3.Set();
+        });
 
         // Assert
         Assert.False(e2.IsSet);
@@ -593,12 +575,10 @@ public class RendererSynchronizationContextTest
         var thread = Thread.CurrentThread;
 
         // Act
-        var task = context.InvokeAsync(
-            () =>
-            {
-                return Thread.CurrentThread;
-            }
-        );
+        var task = context.InvokeAsync(() =>
+        {
+            return Thread.CurrentThread;
+        });
 
         // Assert
         Assert.Same(thread, await task);
@@ -615,30 +595,26 @@ public class RendererSynchronizationContextTest
         var e2 = new ManualResetEventSlim();
         var e3 = new ManualResetEventSlim();
 
-        var task1 = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task1 = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
-        var task2 = context.InvokeAsync(
-            () =>
-            {
-                e3.Set();
+        var task2 = context.InvokeAsync(() =>
+        {
+            e3.Set();
 
-                return Thread.CurrentThread;
-            }
-        );
+            return Thread.CurrentThread;
+        });
 
         // Assert
         Assert.False(e2.IsSet);
@@ -699,13 +675,11 @@ public class RendererSynchronizationContextTest
         Thread capturedThread = null;
 
         // Act
-        var task = context.InvokeAsync(
-            () =>
-            {
-                capturedThread = Thread.CurrentThread;
-                return Task.CompletedTask;
-            }
-        );
+        var task = context.InvokeAsync(() =>
+        {
+            capturedThread = Thread.CurrentThread;
+            return Task.CompletedTask;
+        });
 
         // Assert
         await task;
@@ -724,31 +698,27 @@ public class RendererSynchronizationContextTest
         var e2 = new ManualResetEventSlim();
         var e3 = new ManualResetEventSlim();
 
-        var task1 = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task1 = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
-        var task2 = context.InvokeAsync(
-            () =>
-            {
-                capturedThread = Thread.CurrentThread;
+        var task2 = context.InvokeAsync(() =>
+        {
+            capturedThread = Thread.CurrentThread;
 
-                e3.Set();
-                return Task.CompletedTask;
-            }
-        );
+            e3.Set();
+            return Task.CompletedTask;
+        });
 
         // Assert
         Assert.False(e2.IsSet);
@@ -767,12 +737,10 @@ public class RendererSynchronizationContextTest
         var context = new RendererSynchronizationContext();
 
         // Act
-        var task = context.InvokeAsync(
-            () =>
-            {
-                throw new InvalidTimeZoneException();
-            }
-        );
+        var task = context.InvokeAsync(() =>
+        {
+            throw new InvalidTimeZoneException();
+        });
 
         // Assert
         await Assert.ThrowsAsync<InvalidTimeZoneException>(async () => await task);
@@ -785,12 +753,10 @@ public class RendererSynchronizationContextTest
         var context = new RendererSynchronizationContext();
 
         // Act
-        var task = context.InvokeAsync(
-            () =>
-            {
-                throw new OperationCanceledException();
-            }
-        );
+        var task = context.InvokeAsync(() =>
+        {
+            throw new OperationCanceledException();
+        });
 
         // Assert
         Assert.Equal(TaskStatus.Canceled, task.Status);
@@ -805,12 +771,10 @@ public class RendererSynchronizationContextTest
         var thread = Thread.CurrentThread;
 
         // Act
-        var task = context.InvokeAsync(
-            () =>
-            {
-                return Task.FromResult(Thread.CurrentThread);
-            }
-        );
+        var task = context.InvokeAsync(() =>
+        {
+            return Task.FromResult(Thread.CurrentThread);
+        });
 
         // Assert
         Assert.Same(thread, await task);
@@ -827,30 +791,26 @@ public class RendererSynchronizationContextTest
         var e2 = new ManualResetEventSlim();
         var e3 = new ManualResetEventSlim();
 
-        var task1 = Task.Run(
-            () =>
-            {
-                context.Send(
-                    (_) =>
-                    {
-                        e1.Set();
-                        Assert.True(e2.Wait(Timeout), "timeout");
-                    },
-                    null
-                );
-            }
-        );
+        var task1 = Task.Run(() =>
+        {
+            context.Send(
+                (_) =>
+                {
+                    e1.Set();
+                    Assert.True(e2.Wait(Timeout), "timeout");
+                },
+                null
+            );
+        });
 
         Assert.True(e1.Wait(Timeout), "timeout");
 
-        var task2 = context.InvokeAsync(
-            () =>
-            {
-                e3.Set();
+        var task2 = context.InvokeAsync(() =>
+        {
+            e3.Set();
 
-                return Task.FromResult(Thread.CurrentThread);
-            }
-        );
+            return Task.FromResult(Thread.CurrentThread);
+        });
 
         // Assert
         Assert.False(e2.IsSet);
@@ -914,15 +874,13 @@ public class RendererSynchronizationContextTest
         await Task.Yield();
         actual = "First";
 
-        var invokeTask = context.InvokeAsync(
-            async () =>
-            {
-                // When the sync context is idle, queued work items start synchronously
-                actual += " Second";
-                await Task.Delay(250);
-                actual += " Fourth";
-            }
-        );
+        var invokeTask = context.InvokeAsync(async () =>
+        {
+            // When the sync context is idle, queued work items start synchronously
+            actual += " Second";
+            await Task.Delay(250);
+            actual += " Fourth";
+        });
 
         actual += " Third";
         await invokeTask;

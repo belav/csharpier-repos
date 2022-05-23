@@ -70,15 +70,13 @@ public class DocumentClassifierPassBaseTest : RazorProjectEngineTestBase
 
         var pass = new TestDocumentClassifierPass();
         pass.Engine = RazorProjectEngine
-            .CreateEmpty(
-                b =>
+            .CreateEmpty(b =>
+            {
+                for (var i = 0; i < expected.Length; i++)
                 {
-                    for (var i = 0; i < expected.Length; i++)
-                    {
-                        b.AddTargetExtension(expected[i]);
-                    }
+                    b.AddTargetExtension(expected[i]);
                 }
-            )
+            })
             .Engine;
 
         ICodeTargetExtension[] extensions = null;

@@ -290,12 +290,10 @@ public class MultipartReaderTests
     public void MultipartReader_BufferSizeMustBeLargerThanBoundary_Throws()
     {
         var stream = MakeStream(ThreePartBody);
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                var reader = new MultipartReader(Boundary, stream, 5);
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            var reader = new MultipartReader(Boundary, stream, 5);
+        });
     }
 
     [Fact]
@@ -325,13 +323,11 @@ public class MultipartReaderTests
         read = section.Body.Read(buffer, 0, buffer.Length);
         Assert.Equal("Content of a.txt.\r\n", GetString(buffer, read));
 
-        await Assert.ThrowsAsync<IOException>(
-            async () =>
-            {
-                // we'll be unable to ensure enough bytes are buffered to even contain a final boundary
-                section = await reader.ReadNextSectionAsync();
-            }
-        );
+        await Assert.ThrowsAsync<IOException>(async () =>
+        {
+            // we'll be unable to ensure enough bytes are buffered to even contain a final boundary
+            section = await reader.ReadNextSectionAsync();
+        });
     }
 
     [Fact]

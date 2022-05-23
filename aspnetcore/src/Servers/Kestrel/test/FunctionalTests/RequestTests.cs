@@ -77,61 +77,52 @@ public class RequestTests : LoggedTest
 
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel(
-                            options =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel(options =>
+                    {
+                        options.Limits.MaxRequestBodySize = contentLength;
+                        options.Limits.MinRequestBodyDataRate = null;
+                    })
+                    .UseUrls("http://127.0.0.1:0/")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            // Read the full request body
+                            long total = 0;
+                            var receivedBytes = new byte[bufferLength];
+                            var received = 0;
+                            while (
+                                (
+                                    received = await context.Request.Body.ReadAsync(
+                                        receivedBytes,
+                                        0,
+                                        receivedBytes.Length
+                                    )
+                                ) > 0
+                            )
                             {
-                                options.Limits.MaxRequestBodySize = contentLength;
-                                options.Limits.MinRequestBodyDataRate = null;
-                            }
-                        )
-                        .UseUrls("http://127.0.0.1:0/")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
+                                if (checkBytes)
+                                {
+                                    for (var i = 0; i < received; i++)
                                     {
-                                        // Read the full request body
-                                        long total = 0;
-                                        var receivedBytes = new byte[bufferLength];
-                                        var received = 0;
-                                        while (
-                                            (
-                                                received = await context.Request.Body.ReadAsync(
-                                                    receivedBytes,
-                                                    0,
-                                                    receivedBytes.Length
-                                                )
-                                            ) > 0
-                                        )
-                                        {
-                                            if (checkBytes)
-                                            {
-                                                for (var i = 0; i < received; i++)
-                                                {
-                                                    // Do not use Assert.Equal here, it is to slow for this hot path
-                                                    Assert.True(
-                                                        (byte)((total + i) % 256)
-                                                            == receivedBytes[i],
-                                                        "Data received is incorrect"
-                                                    );
-                                                }
-                                            }
-
-                                            total += received;
-                                        }
-
-                                        await context.Response.WriteAsync($"bytesRead: {total}");
+                                        // Do not use Assert.Equal here, it is to slow for this hot path
+                                        Assert.True(
+                                            (byte)((total + i) % 256) == receivedBytes[i],
+                                            "Data received is incorrect"
+                                        );
                                     }
-                                );
+                                }
+
+                                total += received;
                             }
-                        );
-                }
-            )
+
+                            await context.Response.WriteAsync($"bytesRead: {total}");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -193,25 +184,19 @@ public class RequestTests : LoggedTest
     {
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await context.Response.WriteAsync("hello, world");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            await context.Response.WriteAsync("hello, world");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -475,37 +460,31 @@ public class RequestTests : LoggedTest
 
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        requestStarted.Release();
-                                        Assert.True(
-                                            await connectionReset.WaitAsync(_semaphoreWaitTimeout)
-                                        );
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(
+                        app =>
+                            app.Run(async context =>
+                            {
+                                requestStarted.Release();
+                                Assert.True(await connectionReset.WaitAsync(_semaphoreWaitTimeout));
 
-                                        try
-                                        {
-                                            await context.Request.Body.ReadAsync(new byte[1], 0, 1);
-                                        }
-                                        catch (ConnectionResetException)
-                                        {
-                                            expectedExceptionThrown = true;
-                                        }
+                                try
+                                {
+                                    await context.Request.Body.ReadAsync(new byte[1], 0, 1);
+                                }
+                                catch (ConnectionResetException)
+                                {
+                                    expectedExceptionThrown = true;
+                                }
 
-                                        appDone.Release();
-                                    }
-                                )
-                        );
-                }
-            )
+                                appDone.Release();
+                            })
+                    );
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -544,27 +523,23 @@ public class RequestTests : LoggedTest
         var requestAborted = new SemaphoreSlim(0);
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    async context =>
-                                    {
-                                        appStarted.Release();
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(
+                        app =>
+                            app.Run(async context =>
+                            {
+                                appStarted.Release();
 
-                                        var token = context.RequestAborted;
-                                        token.Register(() => requestAborted.Release(2));
-                                        await requestAborted.WaitAsync().DefaultTimeout();
-                                    }
-                                )
-                        );
-                }
-            )
+                                var token = context.RequestAborted;
+                                token.Register(() => requestAborted.Release(2));
+                                await requestAborted.WaitAsync().DefaultTimeout();
+                            })
+                    );
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -595,24 +570,20 @@ public class RequestTests : LoggedTest
     {
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0")
-                        .Configure(
-                            app =>
-                                app.Run(
-                                    context =>
-                                    {
-                                        context.Abort();
-                                        return Task.CompletedTask;
-                                    }
-                                )
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0")
+                    .Configure(
+                        app =>
+                            app.Run(context =>
+                            {
+                                context.Abort();
+                                return Task.CompletedTask;
+                            })
+                    );
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())
@@ -1031,36 +1002,30 @@ public class RequestTests : LoggedTest
     {
         var builder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls($"http://{registerAddress}:0")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls($"http://{registerAddress}:0")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            var connection = context.Connection;
+                            await context.Response.WriteAsync(
+                                JsonConvert.SerializeObject(
+                                    new
                                     {
-                                        var connection = context.Connection;
-                                        await context.Response.WriteAsync(
-                                            JsonConvert.SerializeObject(
-                                                new
-                                                {
-                                                    RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
-                                                    RemotePort = connection.RemotePort,
-                                                    LocalIPAddress = connection.LocalIpAddress?.ToString(),
-                                                    LocalPort = connection.LocalPort
-                                                }
-                                            )
-                                        );
+                                        RemoteIPAddress = connection.RemoteIpAddress?.ToString(),
+                                        RemotePort = connection.RemotePort,
+                                        LocalIPAddress = connection.LocalIpAddress?.ToString(),
+                                        LocalPort = connection.LocalPort
                                     }
-                                );
-                            }
-                        );
-                }
-            )
+                                )
+                            );
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = builder.Build())

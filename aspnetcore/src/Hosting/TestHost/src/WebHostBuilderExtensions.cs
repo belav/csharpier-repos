@@ -25,13 +25,11 @@ public static class WebHostBuilderExtensions
     /// <returns>The <see cref="IWebHostBuilder"/>.</returns>
     public static IWebHostBuilder UseTestServer(this IWebHostBuilder builder)
     {
-        return builder.ConfigureServices(
-            services =>
-            {
-                services.AddSingleton<IHostLifetime, NoopHostLifetime>();
-                services.AddSingleton<IServer, TestServer>();
-            }
-        );
+        return builder.ConfigureServices(services =>
+        {
+            services.AddSingleton<IHostLifetime, NoopHostLifetime>();
+            services.AddSingleton<IServer, TestServer>();
+        });
     }
 
     /// <summary>
@@ -45,14 +43,12 @@ public static class WebHostBuilderExtensions
         Action<TestServerOptions> configureOptions
     )
     {
-        return builder.ConfigureServices(
-            services =>
-            {
-                services.Configure(configureOptions);
-                services.AddSingleton<IHostLifetime, NoopHostLifetime>();
-                services.AddSingleton<IServer, TestServer>();
-            }
-        );
+        return builder.ConfigureServices(services =>
+        {
+            services.Configure(configureOptions);
+            services.AddSingleton<IHostLifetime, NoopHostLifetime>();
+            services.AddSingleton<IServer, TestServer>();
+        });
     }
 
     /// <summary>

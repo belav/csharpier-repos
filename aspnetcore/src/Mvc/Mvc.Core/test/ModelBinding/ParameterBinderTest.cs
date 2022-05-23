@@ -161,33 +161,27 @@ public class ParameterBinderTest
             var provider1 = new TestModelMetadataProvider();
             provider1
                 .ForParameter(parameter)
-                .ValidationDetails(
-                    d =>
-                    {
-                        d.IsRequired = true;
-                        d.ValidatorMetadata.Add(attribute);
-                    }
-                );
+                .ValidationDetails(d =>
+                {
+                    d.IsRequired = true;
+                    d.ValidatorMetadata.Add(attribute);
+                });
             provider1
                 .ForProperty(typeof(Family), nameof(Family.Mom))
-                .ValidationDetails(
-                    d =>
-                    {
-                        d.IsRequired = true;
-                        d.ValidatorMetadata.Add(attribute);
-                    }
-                );
+                .ValidationDetails(d =>
+                {
+                    d.IsRequired = true;
+                    d.ValidatorMetadata.Add(attribute);
+                });
 
             var provider2 = new TestModelMetadataProvider();
             provider2
                 .ForType(typeof(Person))
-                .ValidationDetails(
-                    d =>
-                    {
-                        d.IsRequired = true;
-                        d.ValidatorMetadata.Add(attribute);
-                    }
-                );
+                .ValidationDetails(d =>
+                {
+                    d.IsRequired = true;
+                    d.ValidatorMetadata.Add(attribute);
+                });
 
             return new TheoryData<RequiredAttribute, ParameterDescriptor, ModelMetadata>
             {
@@ -818,13 +812,11 @@ public class ParameterBinderTest
         var mockBinder = new Mock<IModelBinder>(MockBehavior.Strict);
         mockBinder
             .Setup(o => o.BindModelAsync(It.IsAny<ModelBindingContext>()))
-            .Returns<ModelBindingContext>(
-                context =>
-                {
-                    context.Result = modelBinderResult;
-                    return Task.CompletedTask;
-                }
-            );
+            .Returns<ModelBindingContext>(context =>
+            {
+                context.Result = modelBinderResult;
+                return Task.CompletedTask;
+            });
         return mockBinder.Object;
     }
 
@@ -867,16 +859,14 @@ public class ParameterBinderTest
         var validatorProvider = new Mock<IModelValidatorProvider>();
         validatorProvider
             .Setup(p => p.CreateValidators(It.IsAny<ModelValidatorProviderContext>()))
-            .Callback<ModelValidatorProviderContext>(
-                context =>
+            .Callback<ModelValidatorProviderContext>(context =>
+            {
+                foreach (var result in context.Results)
                 {
-                    foreach (var result in context.Results)
-                    {
-                        result.Validator = validator;
-                        result.IsReusable = true;
-                    }
+                    result.Validator = validator;
+                    result.IsReusable = true;
                 }
-            );
+            });
         return validatorProvider.Object;
     }
 

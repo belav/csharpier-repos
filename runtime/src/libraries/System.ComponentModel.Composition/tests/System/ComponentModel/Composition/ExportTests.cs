@@ -174,12 +174,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    export.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                export.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -187,12 +185,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", (IDictionary<string, object>)null, () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    export.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                export.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -200,12 +196,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", new Dictionary<string, object>(), () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    export.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                export.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -242,12 +236,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    export.Definition.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                export.Definition.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -255,12 +247,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", (IDictionary<string, object>)null, () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    export.Definition.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                export.Definition.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -268,12 +258,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new Export("ContractName", new Dictionary<string, object>(), () => null);
 
-            ExceptionAssert.Throws<NotSupportedException>(
-                () =>
-                {
-                    export.Definition.Metadata["Value"] = "Value";
-                }
-            );
+            ExceptionAssert.Throws<NotSupportedException>(() =>
+            {
+                export.Definition.Metadata["Value"] = "Value";
+            });
         }
 
         [Fact]
@@ -365,12 +353,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new NoOverridesExport();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    var definition = export.Definition;
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                var definition = export.Definition;
+            });
         }
 
         [Fact]
@@ -378,12 +364,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new NoOverridesExport();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    var definition = export.Metadata;
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                var definition = export.Metadata;
+            });
         }
 
         [Fact]
@@ -391,12 +375,10 @@ namespace System.ComponentModel.Composition
         {
             var export = new NoOverridesExport();
 
-            ExceptionAssert.Throws<NotImplementedException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<NotImplementedException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -423,13 +405,11 @@ namespace System.ComponentModel.Composition
         {
             int count = 0;
 
-            var export = new DerivedExport(
-                () =>
-                {
-                    count++;
-                    return count;
-                }
-            );
+            var export = new DerivedExport(() =>
+            {
+                count++;
+                return count;
+            });
 
             Assert.Equal(1, export.Value);
             Assert.Equal(1, export.Value);

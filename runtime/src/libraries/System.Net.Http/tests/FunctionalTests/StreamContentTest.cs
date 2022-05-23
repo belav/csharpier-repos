@@ -83,12 +83,10 @@ namespace System.Net.Http.Functional.Tests
         {
             var source = new MockStream(new byte[10]);
             var content = new StreamContent(source);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Task t = content.CopyToAsync(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                Task t = content.CopyToAsync(null);
+            });
         }
 
         [Fact]
@@ -136,12 +134,10 @@ namespace System.Net.Http.Functional.Tests
 
             // Note that the InvalidOperationException is thrown in CopyToAsync(). It is not thrown inside the task.
             var destination2 = new MemoryStream();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    Task t = content.CopyToAsync(destination2);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                Task t = content.CopyToAsync(destination2);
+            });
         }
 
         [Fact]
@@ -282,12 +278,10 @@ namespace System.Net.Http.Functional.Tests
             contentReadStream.Seek(0, SeekOrigin.Begin);
             Assert.Equal(1, source.SeekCount);
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    contentReadStream.WriteTimeout = 5;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                contentReadStream.WriteTimeout = 5;
+            });
             Assert.Throws<NotSupportedException>(() => contentReadStream.WriteTimeout.ToString());
             Assert.Throws<NotSupportedException>(() => contentReadStream.Flush());
             Assert.Throws<NotSupportedException>(() => contentReadStream.SetLength(1));

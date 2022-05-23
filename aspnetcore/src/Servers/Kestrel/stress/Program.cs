@@ -569,50 +569,45 @@ public class Program
         WebHost
             .CreateDefaultBuilder()
             //Use Kestrel, and configure it for HTTPS with a self - signed test certificate.
-            .UseKestrel(
-                ko =>
-                {
-                    ko.ListenLocalhost(
-                        HttpsPort,
-                        listenOptions =>
+            .UseKestrel(ko =>
+            {
+                ko.ListenLocalhost(
+                    HttpsPort,
+                    listenOptions =>
+                    {
+                        using (RSA rsa = RSA.Create())
                         {
-                            using (RSA rsa = RSA.Create())
+                            var certReq = new CertificateRequest(
+                                $"CN={LocalhostName}",
+                                rsa,
+                                HashAlgorithmName.SHA256,
+                                RSASignaturePadding.Pkcs1
+                            );
+                            certReq.CertificateExtensions.Add(
+                                new X509BasicConstraintsExtension(false, false, 0, false)
+                            );
+                            certReq.CertificateExtensions.Add(
+                                new X509EnhancedKeyUsageExtension(
+                                    new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
+                                    false
+                                )
+                            );
+                            certReq.CertificateExtensions.Add(
+                                new X509KeyUsageExtension(X509KeyUsageFlags.DigitalSignature, false)
+                            );
+                            X509Certificate2 cert = certReq.CreateSelfSigned(
+                                DateTimeOffset.UtcNow.AddMonths(-1),
+                                DateTimeOffset.UtcNow.AddMonths(1)
+                            );
+                            if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
                             {
-                                var certReq = new CertificateRequest(
-                                    $"CN={LocalhostName}",
-                                    rsa,
-                                    HashAlgorithmName.SHA256,
-                                    RSASignaturePadding.Pkcs1
-                                );
-                                certReq.CertificateExtensions.Add(
-                                    new X509BasicConstraintsExtension(false, false, 0, false)
-                                );
-                                certReq.CertificateExtensions.Add(
-                                    new X509EnhancedKeyUsageExtension(
-                                        new OidCollection { new Oid("1.3.6.1.5.5.7.3.1") },
-                                        false
-                                    )
-                                );
-                                certReq.CertificateExtensions.Add(
-                                    new X509KeyUsageExtension(
-                                        X509KeyUsageFlags.DigitalSignature,
-                                        false
-                                    )
-                                );
-                                X509Certificate2 cert = certReq.CreateSelfSigned(
-                                    DateTimeOffset.UtcNow.AddMonths(-1),
-                                    DateTimeOffset.UtcNow.AddMonths(1)
-                                );
-                                if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
-                                {
-                                    cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
-                                }
-                                listenOptions.UseHttps(cert);
+                                cert = new X509Certificate2(cert.Export(X509ContentType.Pfx));
                             }
+                            listenOptions.UseHttps(cert);
                         }
-                    );
-                }
-            )
+                    }
+                );
+            })
             // Output only warnings and errors from Kestrel
             .ConfigureLogging(
                 log =>
@@ -622,135 +617,126 @@ public class Program
                     )
             )
             // Set up how each request should be handled by the server.
-            .Configure(
-                app =>
+            .Configure(app =>
+            {
+                var head = new[] { "HEAD" };
+                app.UseRouting();
+                app.UseEndpoints(endpoints =>
                 {
-                    var head = new[] { "HEAD" };
-                    app.UseRouting();
-                    app.UseEndpoints(
-                        endpoints =>
+                    endpoints.MapGet(
+                        "/",
+                        async context =>
                         {
-                            endpoints.MapGet(
-                                "/",
-                                async context =>
-                                {
-                                    // Get requests just send back the requested content.
-                                    await context.Response.WriteAsync(contentSource);
-                                }
-                            );
-                            endpoints.MapGet(
-                                "/slow",
-                                async context =>
-                                {
-                                    // Sends back the content a character at a time.
-                                    for (int i = 0; i < contentSource.Length; i++)
-                                    {
-                                        await context.Response.WriteAsync(
-                                            contentSource[i].ToString()
-                                        );
-                                        await context.Response.Body.FlushAsync();
-                                    }
-                                }
-                            );
-                            endpoints.MapGet(
-                                "/headers",
-                                async context =>
-                                {
-                                    // Get request but with a bunch of extra headers
-                                    for (int i = 0; i < 20; i++)
-                                    {
-                                        context.Response.Headers.Add(
-                                            "CustomHeader" + i,
-                                            new StringValues(
-                                                Enumerable
-                                                    .Range(0, i)
-                                                    .Select(id => "value" + id)
-                                                    .ToArray()
-                                            )
-                                        );
-                                    }
-                                    await context.Response.WriteAsync(contentSource);
-                                    if (context.Response.SupportsTrailers())
-                                    {
-                                        for (int i = 0; i < 10; i++)
-                                        {
-                                            context.Response.AppendTrailer(
-                                                "CustomTrailer" + i,
-                                                new StringValues(
-                                                    Enumerable
-                                                        .Range(0, i)
-                                                        .Select(id => "value" + id)
-                                                        .ToArray()
-                                                )
-                                            );
-                                        }
-                                    }
-                                }
-                            );
-                            endpoints.MapGet(
-                                "/abort",
-                                async context =>
-                                {
-                                    // Server writes some content, then aborts the connection
-                                    await context.Response.WriteAsync(
-                                        contentSource.Substring(0, contentSource.Length / 2)
-                                    );
-                                    context.Abort();
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/",
-                                async context =>
-                                {
-                                    // Post echos back the requested content, first buffering it all server-side, then sending it all back.
-                                    var s = new MemoryStream();
-                                    await context.Request.Body.CopyToAsync(s);
-                                    s.Position = 0;
-                                    await s.CopyToAsync(context.Response.Body);
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/duplex",
-                                async context =>
-                                {
-                                    // Echos back the requested content in a full duplex manner.
-                                    await context.Request.Body.CopyToAsync(context.Response.Body);
-                                }
-                            );
-                            endpoints.MapPost(
-                                "/duplexSlow",
-                                async context =>
-                                {
-                                    // Echos back the requested content in a full duplex manner, but one byte at a time.
-                                    var buffer = new byte[1];
-                                    while ((await context.Request.Body.ReadAsync(buffer)) != 0)
-                                    {
-                                        await context.Response.Body.WriteAsync(buffer);
-                                    }
-                                }
-                            );
-                            endpoints.MapMethods(
-                                "/",
-                                head,
-                                context =>
-                                {
-                                    // Just set the max content length on the response.
-                                    context.Response.Headers.ContentLength = maxContentLength;
-                                    return Task.CompletedTask;
-                                }
-                            );
-                            endpoints.MapPut(
-                                "/",
-                                async context =>
-                                {
-                                    // Read the full request but don't send back a response body.
-                                    await context.Request.Body.CopyToAsync(Stream.Null);
-                                }
-                            );
+                            // Get requests just send back the requested content.
+                            await context.Response.WriteAsync(contentSource);
                         }
                     );
-                }
-            )
+                    endpoints.MapGet(
+                        "/slow",
+                        async context =>
+                        {
+                            // Sends back the content a character at a time.
+                            for (int i = 0; i < contentSource.Length; i++)
+                            {
+                                await context.Response.WriteAsync(contentSource[i].ToString());
+                                await context.Response.Body.FlushAsync();
+                            }
+                        }
+                    );
+                    endpoints.MapGet(
+                        "/headers",
+                        async context =>
+                        {
+                            // Get request but with a bunch of extra headers
+                            for (int i = 0; i < 20; i++)
+                            {
+                                context.Response.Headers.Add(
+                                    "CustomHeader" + i,
+                                    new StringValues(
+                                        Enumerable.Range(0, i).Select(id => "value" + id).ToArray()
+                                    )
+                                );
+                            }
+                            await context.Response.WriteAsync(contentSource);
+                            if (context.Response.SupportsTrailers())
+                            {
+                                for (int i = 0; i < 10; i++)
+                                {
+                                    context.Response.AppendTrailer(
+                                        "CustomTrailer" + i,
+                                        new StringValues(
+                                            Enumerable
+                                                .Range(0, i)
+                                                .Select(id => "value" + id)
+                                                .ToArray()
+                                        )
+                                    );
+                                }
+                            }
+                        }
+                    );
+                    endpoints.MapGet(
+                        "/abort",
+                        async context =>
+                        {
+                            // Server writes some content, then aborts the connection
+                            await context.Response.WriteAsync(
+                                contentSource.Substring(0, contentSource.Length / 2)
+                            );
+                            context.Abort();
+                        }
+                    );
+                    endpoints.MapPost(
+                        "/",
+                        async context =>
+                        {
+                            // Post echos back the requested content, first buffering it all server-side, then sending it all back.
+                            var s = new MemoryStream();
+                            await context.Request.Body.CopyToAsync(s);
+                            s.Position = 0;
+                            await s.CopyToAsync(context.Response.Body);
+                        }
+                    );
+                    endpoints.MapPost(
+                        "/duplex",
+                        async context =>
+                        {
+                            // Echos back the requested content in a full duplex manner.
+                            await context.Request.Body.CopyToAsync(context.Response.Body);
+                        }
+                    );
+                    endpoints.MapPost(
+                        "/duplexSlow",
+                        async context =>
+                        {
+                            // Echos back the requested content in a full duplex manner, but one byte at a time.
+                            var buffer = new byte[1];
+                            while ((await context.Request.Body.ReadAsync(buffer)) != 0)
+                            {
+                                await context.Response.Body.WriteAsync(buffer);
+                            }
+                        }
+                    );
+                    endpoints.MapMethods(
+                        "/",
+                        head,
+                        context =>
+                        {
+                            // Just set the max content length on the response.
+                            context.Response.Headers.ContentLength = maxContentLength;
+                            return Task.CompletedTask;
+                        }
+                    );
+                    endpoints.MapPut(
+                        "/",
+                        async context =>
+                        {
+                            // Read the full request but don't send back a response body.
+                            await context.Request.Body.CopyToAsync(Stream.Null);
+                        }
+                    );
+                });
+            })
             .Build()
             .Start();
 
@@ -789,58 +775,52 @@ public class Program
             }
 
             // Spin up a thread dedicated to outputting stats for each defined interval
-            new Thread(
-                () =>
+            new Thread(() =>
+            {
+                while (true)
                 {
-                    while (true)
+                    Thread.Sleep(DisplayIntervalMilliseconds);
+                    lock (Console.Out)
                     {
-                        Thread.Sleep(DisplayIntervalMilliseconds);
-                        lock (Console.Out)
+                        Console.ForegroundColor = ConsoleColor.Cyan;
+                        Console.Write("[" + DateTime.Now + "]");
+                        Console.ResetColor();
+                        Console.WriteLine(
+                            " Total: " + total.ToString("N0", CultureInfo.InvariantCulture)
+                        );
+
+                        if (reuseAddressFailure > 0)
+                        {
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.WriteLine(
+                                "~~ Reuse address failures: "
+                                    + reuseAddressFailure.ToString(
+                                        "N0",
+                                        CultureInfo.InvariantCulture
+                                    )
+                                    + "~~"
+                            );
+                            Console.ResetColor();
+                        }
+
+                        for (int i = 0; i < clientOperations.Length; i++)
                         {
                             Console.ForegroundColor = ConsoleColor.Cyan;
-                            Console.Write("[" + DateTime.Now + "]");
+                            Console.Write("\t" + clientOperations[i].Item1.PadRight(30));
                             Console.ResetColor();
-                            Console.WriteLine(
-                                " Total: " + total.ToString("N0", CultureInfo.InvariantCulture)
-                            );
-
-                            if (reuseAddressFailure > 0)
-                            {
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.WriteLine(
-                                    "~~ Reuse address failures: "
-                                        + reuseAddressFailure.ToString(
-                                            "N0",
-                                            CultureInfo.InvariantCulture
-                                        )
-                                        + "~~"
-                                );
-                                Console.ResetColor();
-                            }
-
-                            for (int i = 0; i < clientOperations.Length; i++)
-                            {
-                                Console.ForegroundColor = ConsoleColor.Cyan;
-                                Console.Write("\t" + clientOperations[i].Item1.PadRight(30));
-                                Console.ResetColor();
-                                Console.ForegroundColor = ConsoleColor.Green;
-                                Console.Write("Success: ");
-                                Console.ResetColor();
-                                Console.Write(
-                                    success[i].ToString("N0", CultureInfo.InvariantCulture)
-                                );
-                                Console.ForegroundColor = ConsoleColor.DarkRed;
-                                Console.Write("\tFail: ");
-                                Console.ResetColor();
-                                Console.WriteLine(
-                                    fail[i].ToString("N0", CultureInfo.InvariantCulture)
-                                );
-                            }
-                            Console.WriteLine();
+                            Console.ForegroundColor = ConsoleColor.Green;
+                            Console.Write("Success: ");
+                            Console.ResetColor();
+                            Console.Write(success[i].ToString("N0", CultureInfo.InvariantCulture));
+                            Console.ForegroundColor = ConsoleColor.DarkRed;
+                            Console.Write("\tFail: ");
+                            Console.ResetColor();
+                            Console.WriteLine(fail[i].ToString("N0", CultureInfo.InvariantCulture));
                         }
+                        Console.WriteLine();
                     }
                 }
-            )
+            })
             {
                 IsBackground = true
             }.Start();
@@ -851,56 +831,53 @@ public class Program
                     .Range(0, concurrentRequests)
                     .Select(
                         taskNum =>
-                            Task.Run(
-                                async () =>
+                            Task.Run(async () =>
+                            {
+                                var clientContext = new ClientContext(
+                                    client,
+                                    taskNum: taskNum,
+                                    seed: seed
+                                );
+                                // TODO make 50000 configurable based on time.
+                                for (long i = taskNum; i < 500000; i++)
                                 {
-                                    var clientContext = new ClientContext(
-                                        client,
-                                        taskNum: taskNum,
-                                        seed: seed
-                                    );
-                                    // TODO make 50000 configurable based on time.
-                                    for (long i = taskNum; i < 500000; i++)
+                                    long opIndex = i % clientOperations.Length;
+                                    (string operation, Func<ClientContext, Task> func) =
+                                        clientOperations[opIndex];
+                                    try
                                     {
-                                        long opIndex = i % clientOperations.Length;
-                                        (string operation, Func<ClientContext, Task> func) =
-                                            clientOperations[opIndex];
-                                        try
-                                        {
-                                            await func(clientContext);
+                                        await func(clientContext);
 
-                                            Increment(ref success[opIndex]);
+                                        Increment(ref success[opIndex]);
+                                    }
+                                    catch (Exception e)
+                                    {
+                                        Increment(ref fail[opIndex]);
+
+                                        if (
+                                            e is HttpRequestException hre
+                                            && hre.InnerException is SocketException se
+                                            && se.SocketErrorCode == SocketError.AddressAlreadyInUse
+                                        )
+                                        {
+                                            Interlocked.Increment(ref reuseAddressFailure);
                                         }
-                                        catch (Exception e)
+                                        else
                                         {
-                                            Increment(ref fail[opIndex]);
-
-                                            if (
-                                                e is HttpRequestException hre
-                                                && hre.InnerException is SocketException se
-                                                && se.SocketErrorCode
-                                                    == SocketError.AddressAlreadyInUse
-                                            )
+                                            lock (Console.Out)
                                             {
-                                                Interlocked.Increment(ref reuseAddressFailure);
-                                            }
-                                            else
-                                            {
-                                                lock (Console.Out)
-                                                {
-                                                    Console.ForegroundColor = ConsoleColor.Yellow;
-                                                    Console.WriteLine(
-                                                        $"Error from iteration {i} ({operation}) in task {taskNum} with {success.Sum()} successes / {fail.Sum()} fails:"
-                                                    );
-                                                    Console.ResetColor();
-                                                    Console.WriteLine(e);
-                                                    Console.WriteLine();
-                                                }
+                                                Console.ForegroundColor = ConsoleColor.Yellow;
+                                                Console.WriteLine(
+                                                    $"Error from iteration {i} ({operation}) in task {taskNum} with {success.Sum()} successes / {fail.Sum()} fails:"
+                                                );
+                                                Console.ResetColor();
+                                                Console.WriteLine(e);
+                                                Console.WriteLine();
                                             }
                                         }
                                     }
                                 }
-                            )
+                            })
                     )
                     .ToArray()
             );

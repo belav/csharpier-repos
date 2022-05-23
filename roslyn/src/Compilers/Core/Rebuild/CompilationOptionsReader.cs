@@ -359,29 +359,26 @@ namespace Microsoft.CodeAnalysis.Rebuild
             }
 
             var result = metadataReader.ManifestResources
-                .Select(
-                    handle =>
-                    {
-                        var resource = metadataReader.GetManifestResource(handle);
-                        var name = metadataReader.GetString(resource.Name);
+                .Select(handle =>
+                {
+                    var resource = metadataReader.GetManifestResource(handle);
+                    var name = metadataReader.GetString(resource.Name);
 
-                        var resourceStart =
-                            PeReader.GetEntireImage().Pointer + resourcesOffset + resource.Offset;
-                        var length = *(int*)resourceStart;
-                        var contentPtr = resourceStart + sizeof(int);
-                        var content = new byte[length];
-                        Marshal.Copy(new IntPtr(contentPtr), content, 0, length);
+                    var resourceStart =
+                        PeReader.GetEntireImage().Pointer + resourcesOffset + resource.Offset;
+                    var length = *(int*)resourceStart;
+                    var contentPtr = resourceStart + sizeof(int);
+                    var content = new byte[length];
+                    Marshal.Copy(new IntPtr(contentPtr), content, 0, length);
 
-                        var isPublic =
-                            (resource.Attributes & ManifestResourceAttributes.Public) != 0;
-                        var description = new ResourceDescription(
-                            name,
-                            dataProvider: () => new MemoryStream(content),
-                            isPublic
-                        );
-                        return description;
-                    }
-                )
+                    var isPublic = (resource.Attributes & ManifestResourceAttributes.Public) != 0;
+                    var description = new ResourceDescription(
+                        name,
+                        dataProvider: () => new MemoryStream(content),
+                        isPublic
+                    );
+                    return description;
+                })
                 .ToArray();
 
             return result;

@@ -2148,101 +2148,83 @@ ORDER BY ""b"".""Id"", ""b0"".""Id"""
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<MappedDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Integer).HasColumnType("Integer");
-                        b.Property(e => e.Real).HasColumnType("Real");
-                        b.Property(e => e.Text).HasColumnType("Text").IsRequired();
-                        b.Property(e => e.Blob).HasColumnType("Blob").IsRequired();
-                        b.Property(e => e.SomeString).HasColumnType("SomeString").IsRequired();
-                        b.Property(e => e.Int).HasColumnType("Int");
-                    }
-                );
+                modelBuilder.Entity<MappedDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Integer).HasColumnType("Integer");
+                    b.Property(e => e.Real).HasColumnType("Real");
+                    b.Property(e => e.Text).HasColumnType("Text").IsRequired();
+                    b.Property(e => e.Blob).HasColumnType("Blob").IsRequired();
+                    b.Property(e => e.SomeString).HasColumnType("SomeString").IsRequired();
+                    b.Property(e => e.Int).HasColumnType("Int");
+                });
 
-                modelBuilder.Entity<MappedNullableDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Integer).HasColumnType("Integer");
-                        b.Property(e => e.Real).HasColumnType("Real");
-                        b.Property(e => e.Text).HasColumnType("Text");
-                        b.Property(e => e.Blob).HasColumnType("Blob");
-                        b.Property(e => e.SomeString).HasColumnType("SomeString");
-                        b.Property(e => e.Int).HasColumnType("Int");
-                    }
-                );
+                modelBuilder.Entity<MappedNullableDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Integer).HasColumnType("Integer");
+                    b.Property(e => e.Real).HasColumnType("Real");
+                    b.Property(e => e.Text).HasColumnType("Text");
+                    b.Property(e => e.Blob).HasColumnType("Blob");
+                    b.Property(e => e.SomeString).HasColumnType("SomeString");
+                    b.Property(e => e.Int).HasColumnType("Int");
+                });
 
-                modelBuilder.Entity<MappedSizedDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Nvarchar).HasColumnType("nvarchar(3)");
-                        b.Property(e => e.Binary).HasColumnType("varbinary(3)");
-                    }
-                );
+                modelBuilder.Entity<MappedSizedDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Nvarchar).HasColumnType("nvarchar(3)");
+                    b.Property(e => e.Binary).HasColumnType("varbinary(3)");
+                });
 
-                modelBuilder.Entity<MappedScaledDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Float).HasColumnType("real(3)");
-                        b.Property(e => e.Datetimeoffset).HasColumnType("datetimeoffset(3)");
-                        b.Property(e => e.Datetime2).HasColumnType("datetime2(3)");
-                        b.Property(e => e.Decimal).HasColumnType("decimal(3)");
-                    }
-                );
+                modelBuilder.Entity<MappedScaledDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Float).HasColumnType("real(3)");
+                    b.Property(e => e.Datetimeoffset).HasColumnType("datetimeoffset(3)");
+                    b.Property(e => e.Datetime2).HasColumnType("datetime2(3)");
+                    b.Property(e => e.Decimal).HasColumnType("decimal(3)");
+                });
 
-                modelBuilder.Entity<MappedPrecisionAndScaledDataTypes>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                        b.Property(e => e.Decimal).HasColumnType("decimal(5, 2)");
-                    }
-                );
+                modelBuilder.Entity<MappedPrecisionAndScaledDataTypes>(b =>
+                {
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                    b.Property(e => e.Decimal).HasColumnType("decimal(5, 2)");
+                });
 
-                modelBuilder.Entity<MappedDataTypesWithIdentity>(
-                    b =>
-                    {
-                        b.Property(e => e.Integer).HasColumnType("Integer");
-                        b.Property(e => e.Real).HasColumnType("Real");
-                        b.Property(e => e.Text).HasColumnType("Text").IsRequired();
-                        b.Property(e => e.Blob).HasColumnType("Blob").IsRequired();
-                        b.Property(e => e.SomeString).HasColumnType("SomeString").IsRequired();
-                        b.Property(e => e.Int).HasColumnType("Int");
-                    }
-                );
+                modelBuilder.Entity<MappedDataTypesWithIdentity>(b =>
+                {
+                    b.Property(e => e.Integer).HasColumnType("Integer");
+                    b.Property(e => e.Real).HasColumnType("Real");
+                    b.Property(e => e.Text).HasColumnType("Text").IsRequired();
+                    b.Property(e => e.Blob).HasColumnType("Blob").IsRequired();
+                    b.Property(e => e.SomeString).HasColumnType("SomeString").IsRequired();
+                    b.Property(e => e.Int).HasColumnType("Int");
+                });
 
-                modelBuilder.Entity<MappedNullableDataTypesWithIdentity>(
-                    b =>
-                    {
-                        b.Property(e => e.Integer).HasColumnType("Integer");
-                        b.Property(e => e.Real).HasColumnType("Real");
-                        b.Property(e => e.Text).HasColumnType("Text");
-                        b.Property(e => e.Blob).HasColumnType("Blob");
-                        b.Property(e => e.SomeString).HasColumnType("SomeString");
-                        b.Property(e => e.Int).HasColumnType("Int");
-                    }
-                );
+                modelBuilder.Entity<MappedNullableDataTypesWithIdentity>(b =>
+                {
+                    b.Property(e => e.Integer).HasColumnType("Integer");
+                    b.Property(e => e.Real).HasColumnType("Real");
+                    b.Property(e => e.Text).HasColumnType("Text");
+                    b.Property(e => e.Blob).HasColumnType("Blob");
+                    b.Property(e => e.SomeString).HasColumnType("SomeString");
+                    b.Property(e => e.Int).HasColumnType("Int");
+                });
 
-                modelBuilder.Entity<MappedSizedDataTypesWithIdentity>(
-                    b =>
-                    {
-                        b.Property(e => e.Nvarchar).HasColumnType("nvarchar(3)");
-                        b.Property(e => e.Binary).HasColumnType("varbinary(3)");
-                    }
-                );
+                modelBuilder.Entity<MappedSizedDataTypesWithIdentity>(b =>
+                {
+                    b.Property(e => e.Nvarchar).HasColumnType("nvarchar(3)");
+                    b.Property(e => e.Binary).HasColumnType("varbinary(3)");
+                });
 
-                modelBuilder.Entity<MappedScaledDataTypesWithIdentity>(
-                    b =>
-                    {
-                        b.Property(e => e.Float).HasColumnType("real(3)");
-                        b.Property(e => e.Datetimeoffset).HasColumnType("datetimeoffset(3)");
-                        b.Property(e => e.Datetime2).HasColumnType("datetime2(3)");
-                        b.Property(e => e.Decimal).HasColumnType("decimal(3)");
-                    }
-                );
+                modelBuilder.Entity<MappedScaledDataTypesWithIdentity>(b =>
+                {
+                    b.Property(e => e.Float).HasColumnType("real(3)");
+                    b.Property(e => e.Datetimeoffset).HasColumnType("datetimeoffset(3)");
+                    b.Property(e => e.Datetime2).HasColumnType("datetime2(3)");
+                    b.Property(e => e.Decimal).HasColumnType("decimal(3)");
+                });
 
                 modelBuilder.Entity<MappedPrecisionAndScaledDataTypesWithIdentity>(
                     b => b.Property(e => e.Decimal).HasColumnType("decimal(5, 2)")

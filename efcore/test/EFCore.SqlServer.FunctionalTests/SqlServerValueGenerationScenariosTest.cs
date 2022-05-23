@@ -91,13 +91,11 @@ namespace Microsoft.EntityFrameworkCore
 
                 modelBuilder.UseHiLo();
 
-                modelBuilder.Entity<Blog>(
-                    eb =>
-                    {
-                        eb.HasAlternateKey(b => new { b.OtherId });
-                        eb.Property(b => b.OtherId).ValueGeneratedOnAdd();
-                    }
-                );
+                modelBuilder.Entity<Blog>(eb =>
+                {
+                    eb.HasAlternateKey(b => new { b.OtherId });
+                    eb.Property(b => b.OtherId).ValueGeneratedOnAdd();
+                });
             }
         }
 
@@ -640,30 +638,25 @@ namespace Microsoft.EntityFrameworkCore
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Blog>(
-                    b =>
-                    {
-                        b.Property(e => e.CreatedOn).HasDefaultValueSql("getdate()");
-                        b.Property(e => e.GeometryCollection)
-                            .HasDefaultValue(GeometryFactory.CreateGeometryCollection());
+                modelBuilder.Entity<Blog>(b =>
+                {
+                    b.Property(e => e.CreatedOn).HasDefaultValueSql("getdate()");
+                    b.Property(e => e.GeometryCollection)
+                        .HasDefaultValue(GeometryFactory.CreateGeometryCollection());
 
-                        b.HasData(
-                            new Blog
-                            {
-                                Id = 9979,
-                                Name = "W Unicorns",
-                                CreatedOn = new DateTime(1974, 8, 3, 0, 10, 0),
-                                NeedsConverter = new NeedsConverter(111),
-                                GeometryCollection = GeometryFactory.CreateGeometryCollection(
-                                    new Geometry[]
-                                    {
-                                        GeometryFactory.CreatePoint(new Coordinate(1, 2))
-                                    }
-                                )
-                            }
-                        );
-                    }
-                );
+                    b.HasData(
+                        new Blog
+                        {
+                            Id = 9979,
+                            Name = "W Unicorns",
+                            CreatedOn = new DateTime(1974, 8, 3, 0, 10, 0),
+                            NeedsConverter = new NeedsConverter(111),
+                            GeometryCollection = GeometryFactory.CreateGeometryCollection(
+                                new Geometry[] { GeometryFactory.CreatePoint(new Coordinate(1, 2)) }
+                            )
+                        }
+                    );
+                });
             }
         }
 
@@ -955,13 +948,11 @@ END"
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<GuidBlog>(
-                    eb =>
-                    {
-                        eb.HasAlternateKey(e => e.NotId);
-                        eb.Property(e => e.NotId).ValueGeneratedOnAdd();
-                    }
-                );
+                modelBuilder.Entity<GuidBlog>(eb =>
+                {
+                    eb.HasAlternateKey(e => e.NotId);
+                    eb.Property(e => e.NotId).ValueGeneratedOnAdd();
+                });
             }
         }
 
@@ -1036,13 +1027,11 @@ END"
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<GuidBlog>(
-                    eb =>
-                    {
-                        eb.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
-                        eb.Property(e => e.NotId).HasDefaultValueSql("newsequentialid()");
-                    }
-                );
+                modelBuilder.Entity<GuidBlog>(eb =>
+                {
+                    eb.Property(e => e.Id).HasDefaultValueSql("newsequentialid()");
+                    eb.Property(e => e.NotId).HasDefaultValueSql("newsequentialid()");
+                });
             }
         }
 

@@ -267,18 +267,14 @@ namespace System.IO.Tests
 
             Assert.Throws<ObjectDisposedException>(() => reader.Read(Span<char>.Empty));
             Assert.Throws<ObjectDisposedException>(() => reader.ReadBlock(Span<char>.Empty));
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    reader.ReadAsync(Memory<char>.Empty);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    reader.ReadBlockAsync(Memory<char>.Empty);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                reader.ReadAsync(Memory<char>.Empty);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                reader.ReadBlockAsync(Memory<char>.Empty);
+            });
         }
 
         [Fact]
@@ -297,24 +293,18 @@ namespace System.IO.Tests
 
         private static void ValidateDisposedExceptions(StringReader sr)
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    sr.Peek();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    sr.Read();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    sr.Read(new char[10], 0, 1);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sr.Peek();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sr.Read();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                sr.Read(new char[10], 0, 1);
+            });
         }
     }
 }

@@ -125,17 +125,15 @@ namespace System.Linq.Parallel.Tests
                 int count = Math.Max(0, Math.Min(_count - start, partitionSize));
                 partitions[i] = Enumerable
                     .Range(start, count)
-                    .Select(
-                        elemIndex =>
+                    .Select(elemIndex =>
+                    {
+                        if (!_keysOrderedInEachPartition)
                         {
-                            if (!_keysOrderedInEachPartition)
-                            {
-                                elemIndex = _count - 1 - elemIndex;
-                            }
-                            long key = _keysNormalized ? elemIndex : (elemIndex * 2);
-                            return new KeyValuePair<long, int>(key, _start + elemIndex);
+                            elemIndex = _count - 1 - elemIndex;
                         }
-                    )
+                        long key = _keysNormalized ? elemIndex : (elemIndex * 2);
+                        return new KeyValuePair<long, int>(key, _start + elemIndex);
+                    })
                     .GetEnumerator();
             }
             return partitions;

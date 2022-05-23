@@ -79,30 +79,28 @@ namespace System.Web.Http
         )]
         private static Lazy<HttpConfiguration> CreateConfiguration()
         {
-            return new Lazy<HttpConfiguration>(
-                () =>
-                {
-                    HttpConfiguration config = new HttpConfiguration(
-                        new HostedHttpRouteCollection(RouteTable.Routes)
-                    );
-                    ServicesContainer services = config.Services;
-                    Contract.Assert(services != null);
-                    services.Replace(typeof(IAssembliesResolver), new WebHostAssembliesResolver());
-                    services.Replace(
-                        typeof(IHttpControllerTypeResolver),
-                        new WebHostHttpControllerTypeResolver()
-                    );
-                    services.Replace(
-                        typeof(IHostBufferPolicySelector),
-                        new WebHostBufferPolicySelector()
-                    );
-                    services.Replace(
-                        typeof(IExceptionHandler),
-                        new WebHostExceptionHandler(services.GetExceptionHandler())
-                    );
-                    return config;
-                }
-            );
+            return new Lazy<HttpConfiguration>(() =>
+            {
+                HttpConfiguration config = new HttpConfiguration(
+                    new HostedHttpRouteCollection(RouteTable.Routes)
+                );
+                ServicesContainer services = config.Services;
+                Contract.Assert(services != null);
+                services.Replace(typeof(IAssembliesResolver), new WebHostAssembliesResolver());
+                services.Replace(
+                    typeof(IHttpControllerTypeResolver),
+                    new WebHostHttpControllerTypeResolver()
+                );
+                services.Replace(
+                    typeof(IHostBufferPolicySelector),
+                    new WebHostBufferPolicySelector()
+                );
+                services.Replace(
+                    typeof(IExceptionHandler),
+                    new WebHostExceptionHandler(services.GetExceptionHandler())
+                );
+                return config;
+            });
         }
 
         private static Lazy<HttpMessageHandler> CreateDefaultHandler()

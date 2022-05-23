@@ -96,23 +96,21 @@ namespace System.Net.Http.Functional.Tests
             using HttpClient client = CreateHttpClient(HttpVersion.Version20);
 
             Task<HttpResponseMessage> firstResponseTask = client.GetAsync(firstServer.Address);
-            Task serverTask = Task.Run(
-                async () =>
-                {
-                    using Http2LoopbackConnection connection =
-                        await firstServer.EstablishConnectionAsync();
+            Task serverTask = Task.Run(async () =>
+            {
+                using Http2LoopbackConnection connection =
+                    await firstServer.EstablishConnectionAsync();
 
-                    int streamId = await connection.ReadRequestHeaderAsync();
-                    await connection.WriteFrameAsync(
-                        new AltSvcFrame(
-                            $"https://{firstServer.Address.IdnHost}:{firstServer.Address.Port}",
-                            $"h3=\"{secondServer.Address.IdnHost}:{secondServer.Address.Port}\"",
-                            streamId: 0
-                        )
-                    );
-                    await connection.SendDefaultResponseAsync(streamId);
-                }
-            );
+                int streamId = await connection.ReadRequestHeaderAsync();
+                await connection.WriteFrameAsync(
+                    new AltSvcFrame(
+                        $"https://{firstServer.Address.IdnHost}:{firstServer.Address.Port}",
+                        $"h3=\"{secondServer.Address.IdnHost}:{secondServer.Address.Port}\"",
+                        streamId: 0
+                    )
+                );
+                await connection.SendDefaultResponseAsync(streamId);
+            });
 
             await new[] { firstResponseTask, serverTask }.WhenAllOrAnyFailed(30_000);
 
@@ -136,24 +134,22 @@ namespace System.Net.Http.Functional.Tests
             using HttpClient client = CreateHttpClient(HttpVersion.Version20);
 
             Task<HttpResponseMessage> firstResponseTask = client.GetAsync(firstServer.Address);
-            Task serverTask = Task.Run(
-                async () =>
-                {
-                    using Http2LoopbackConnection connection =
-                        await firstServer.EstablishConnectionAsync();
+            Task serverTask = Task.Run(async () =>
+            {
+                using Http2LoopbackConnection connection =
+                    await firstServer.EstablishConnectionAsync();
 
-                    int streamId = await connection.ReadRequestHeaderAsync();
-                    await connection.SendDefaultResponseHeadersAsync(streamId);
-                    await connection.WriteFrameAsync(
-                        new AltSvcFrame(
-                            "",
-                            $"h3=\"{secondServer.Address.IdnHost}:{secondServer.Address.Port}\"",
-                            streamId
-                        )
-                    );
-                    await connection.SendResponseDataAsync(streamId, Array.Empty<byte>(), true);
-                }
-            );
+                int streamId = await connection.ReadRequestHeaderAsync();
+                await connection.SendDefaultResponseHeadersAsync(streamId);
+                await connection.WriteFrameAsync(
+                    new AltSvcFrame(
+                        "",
+                        $"h3=\"{secondServer.Address.IdnHost}:{secondServer.Address.Port}\"",
+                        streamId
+                    )
+                );
+                await connection.SendResponseDataAsync(streamId, Array.Empty<byte>(), true);
+            });
 
             await new[] { firstResponseTask, serverTask }.WhenAllOrAnyFailed(30_000);
 

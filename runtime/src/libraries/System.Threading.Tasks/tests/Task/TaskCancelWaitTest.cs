@@ -221,16 +221,14 @@ namespace System.Threading.Tasks.Tests.CancelWait
             {
                 //root task had the token source cancelled
                 case API.Cancel:
-                    _taskTree.Traversal(
-                        current =>
-                        {
-                            if (current.Task == null)
-                                return;
+                    _taskTree.Traversal(current =>
+                    {
+                        if (current.Task == null)
+                            return;
 
-                            VerifyCancel(current);
-                            VerifyResult(current);
-                        }
-                    );
+                        VerifyCancel(current);
+                        VerifyResult(current);
+                    });
                     Assert.Null(_caughtException);
                     break;
 
@@ -239,28 +237,24 @@ namespace System.Threading.Tasks.Tests.CancelWait
                     //will be true if the root cancelled itself - through its workload
                     if (_taskTree.CancellationToken.IsCancellationRequested)
                     {
-                        _taskTree.Traversal(
-                            current =>
-                            {
-                                if (current.Task == null)
-                                    return;
+                        _taskTree.Traversal(current =>
+                        {
+                            if (current.Task == null)
+                                return;
 
-                                VerifyTaskCanceledException(current);
-                            }
-                        );
+                            VerifyTaskCanceledException(current);
+                        });
                     }
                     else
                     {
-                        _taskTree.Traversal(
-                            current =>
-                            {
-                                if (current.Task == null)
-                                    return;
+                        _taskTree.Traversal(current =>
+                        {
+                            if (current.Task == null)
+                                return;
 
-                                VerifyWait(current);
-                                VerifyResult(current);
-                            }
-                        );
+                            VerifyWait(current);
+                            VerifyResult(current);
+                        });
                     }
                     break;
 

@@ -329,16 +329,14 @@ namespace System.Net.Http.Functional.Tests
                     {
                         await TestHelper.WhenAllCompletedOrAnyFailed(
                             client.GetAsync(url),
-                            server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    Assert.Equal(
-                                        SslProtocols.Tls12,
-                                        Assert.IsType<SslStream>(connection.Stream).SslProtocol
-                                    );
-                                    await connection.ReadRequestHeaderAndSendResponseAsync();
-                                }
-                            )
+                            server.AcceptConnectionAsync(async connection =>
+                            {
+                                Assert.Equal(
+                                    SslProtocols.Tls12,
+                                    Assert.IsType<SslStream>(connection.Stream).SslProtocol
+                                );
+                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                            })
                         );
                     },
                     options

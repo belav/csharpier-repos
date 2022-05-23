@@ -87,14 +87,12 @@ public class BindingInfoTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType(modelType)
-            .BindingDetails(
-                metadata =>
-                {
-                    metadata.BindingSource = BindingSource.Special;
-                    metadata.BinderType = typeof(SimpleTypeModelBinder);
-                    metadata.BinderModelName = "Different";
-                }
-            );
+            .BindingDetails(metadata =>
+            {
+                metadata.BindingSource = BindingSource.Special;
+                metadata.BinderType = typeof(SimpleTypeModelBinder);
+                metadata.BinderModelName = "Different";
+            });
         var modelMetadata = provider.GetMetadataForType(modelType);
 
         // Act
@@ -120,14 +118,12 @@ public class BindingInfoTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType(modelType)
-            .BindingDetails(
-                metadata =>
-                {
-                    metadata.BindingSource = BindingSource.Special;
-                    metadata.BinderType = typeof(SimpleTypeModelBinder);
-                    metadata.BinderModelName = "Different";
-                }
-            );
+            .BindingDetails(metadata =>
+            {
+                metadata.BindingSource = BindingSource.Special;
+                metadata.BinderType = typeof(SimpleTypeModelBinder);
+                metadata.BinderModelName = "Different";
+            });
         var modelMetadata = provider.GetMetadataForType(modelType);
 
         // Act
@@ -149,12 +145,10 @@ public class BindingInfoTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType(modelType)
-            .BindingDetails(
-                metadata =>
-                {
-                    metadata.BinderType = typeof(ComplexObjectModelBinder);
-                }
-            );
+            .BindingDetails(metadata =>
+            {
+                metadata.BinderType = typeof(ComplexObjectModelBinder);
+            });
         var modelMetadata = provider.GetMetadataForType(modelType);
 
         // Act
@@ -179,12 +173,10 @@ public class BindingInfoTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType(modelType)
-            .BindingDetails(
-                metadata =>
-                {
-                    metadata.BindingSource = BindingSource.Services;
-                }
-            );
+            .BindingDetails(metadata =>
+            {
+                metadata.BindingSource = BindingSource.Services;
+            });
         var modelMetadata = provider.GetMetadataForType(modelType);
 
         // Act
@@ -210,12 +202,10 @@ public class BindingInfoTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType(modelType)
-            .BindingDetails(
-                metadata =>
-                {
-                    metadata.PropertyFilterProvider = propertyFilterProvider;
-                }
-            );
+            .BindingDetails(metadata =>
+            {
+                metadata.PropertyFilterProvider = propertyFilterProvider;
+            });
         var modelMetadata = provider.GetMetadataForType(modelType);
 
         // Act

@@ -36,12 +36,10 @@ namespace Microsoft.Extensions.Hosting
                 hostBuilder.ConfigureServices(
                     (hostContext, services) =>
                     {
-                        services.Configure<ConsoleLoggerOptions>(
-                            options =>
-                            {
-                                options.FormatterName = ConsoleFormatterNames.Systemd;
-                            }
-                        );
+                        services.Configure<ConsoleLoggerOptions>(options =>
+                        {
+                            options.FormatterName = ConsoleFormatterNames.Systemd;
+                        });
 
                         // IsSystemdService() will never return true for android/browser/iOS/tvOS
 #pragma warning disable CA1416 // Validate platform compatibility

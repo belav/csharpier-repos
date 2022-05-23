@@ -19,30 +19,22 @@ namespace CoreXml.Test.XLinq
         public static void ArgumentValidation()
         {
             // Verify that ArgumentNullExceptions are thrown when passing null to LoadAsync and SaveAsync
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    XDocument.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new XDocument().SaveAsync((XmlWriter)null, CancellationToken.None);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    XElement.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new XElement("Name").SaveAsync((XmlWriter)null, CancellationToken.None);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                XDocument.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new XDocument().SaveAsync((XmlWriter)null, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                XElement.LoadAsync((XmlReader)null, LoadOptions.None, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new XElement("Name").SaveAsync((XmlWriter)null, CancellationToken.None);
+            });
         }
 
         [Fact]

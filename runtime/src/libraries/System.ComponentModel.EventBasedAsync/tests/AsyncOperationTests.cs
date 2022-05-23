@@ -15,17 +15,15 @@ namespace System.ComponentModel.EventBasedAsync.Tests
         public static void Noop()
         {
             // Test that a simple AsyncOperation can be dispatched and completed via AsyncOperationManager
-            Task.Run(
-                    () =>
-                    {
-                        var operation = new TestAsyncOperation(op => { });
-                        operation.Wait();
+            Task.Run(() =>
+                {
+                    var operation = new TestAsyncOperation(op => { });
+                    operation.Wait();
 
-                        Assert.True(operation.Completed);
-                        Assert.False(operation.Cancelled);
-                        Assert.Null(operation.Exception);
-                    }
-                )
+                    Assert.True(operation.Completed);
+                    Assert.False(operation.Cancelled);
+                    Assert.Null(operation.Exception);
+                })
                 .GetAwaiter()
                 .GetResult();
         }
@@ -33,25 +31,22 @@ namespace System.ComponentModel.EventBasedAsync.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void ThrowAfterAsyncComplete()
         {
-            Task.Run(
-                    () =>
-                    {
-                        var operation = new TestAsyncOperation(op => { });
-                        operation.Wait();
+            Task.Run(() =>
+                {
+                    var operation = new TestAsyncOperation(op => { });
+                    operation.Wait();
 
-                        SendOrPostCallback noopCallback = state => { };
-                        Assert.Throws<InvalidOperationException>(
-                            () => operation.AsyncOperation.Post(noopCallback, null)
-                        );
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                                operation.AsyncOperation.PostOperationCompleted(noopCallback, null)
-                        );
-                        Assert.Throws<InvalidOperationException>(
-                            () => operation.AsyncOperation.OperationCompleted()
-                        );
-                    }
-                )
+                    SendOrPostCallback noopCallback = state => { };
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.AsyncOperation.Post(noopCallback, null)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.AsyncOperation.PostOperationCompleted(noopCallback, null)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.AsyncOperation.OperationCompleted()
+                    );
+                })
                 .GetAwaiter()
                 .GetResult();
         }
@@ -59,24 +54,20 @@ namespace System.ComponentModel.EventBasedAsync.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public static void ThrowAfterSynchronousComplete()
         {
-            Task.Run(
-                    () =>
-                    {
-                        var operation = AsyncOperationManager.CreateOperation(null);
-                        operation.OperationCompleted();
+            Task.Run(() =>
+                {
+                    var operation = AsyncOperationManager.CreateOperation(null);
+                    operation.OperationCompleted();
 
-                        SendOrPostCallback noopCallback = state => { };
-                        Assert.Throws<InvalidOperationException>(
-                            () => operation.Post(noopCallback, null)
-                        );
-                        Assert.Throws<InvalidOperationException>(
-                            () => operation.PostOperationCompleted(noopCallback, null)
-                        );
-                        Assert.Throws<InvalidOperationException>(
-                            () => operation.OperationCompleted()
-                        );
-                    }
-                )
+                    SendOrPostCallback noopCallback = state => { };
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.Post(noopCallback, null)
+                    );
+                    Assert.Throws<InvalidOperationException>(
+                        () => operation.PostOperationCompleted(noopCallback, null)
+                    );
+                    Assert.Throws<InvalidOperationException>(() => operation.OperationCompleted());
+                })
                 .GetAwaiter()
                 .GetResult();
         }
@@ -85,27 +76,23 @@ namespace System.ComponentModel.EventBasedAsync.Tests
         public static void Cancel()
         {
             // Test that cancellation gets passed all the way through PostOperationCompleted(callback, AsyncCompletedEventArgs)
-            Task.Run(
-                    () =>
-                    {
-                        var cancelEvent = new ManualResetEventSlim();
-                        var operation = new TestAsyncOperation(
-                            op =>
-                            {
-                                Assert.True(
-                                    cancelEvent.Wait(TimeSpan.FromSeconds(SpinTimeoutSeconds))
-                                );
-                            },
-                            cancelEvent: cancelEvent
-                        );
+            Task.Run(() =>
+                {
+                    var cancelEvent = new ManualResetEventSlim();
+                    var operation = new TestAsyncOperation(
+                        op =>
+                        {
+                            Assert.True(cancelEvent.Wait(TimeSpan.FromSeconds(SpinTimeoutSeconds)));
+                        },
+                        cancelEvent: cancelEvent
+                    );
 
-                        operation.Cancel();
-                        operation.Wait();
-                        Assert.True(operation.Completed);
-                        Assert.True(operation.Cancelled);
-                        Assert.Null(operation.Exception);
-                    }
-                )
+                    operation.Cancel();
+                    operation.Wait();
+                    Assert.True(operation.Completed);
+                    Assert.True(operation.Cancelled);
+                    Assert.Null(operation.Exception);
+                })
                 .GetAwaiter()
                 .GetResult();
         }
@@ -114,19 +101,15 @@ namespace System.ComponentModel.EventBasedAsync.Tests
         public static void Throw()
         {
             // Test that exceptions get passed all the way through PostOperationCompleted(callback, AsyncCompletedEventArgs)
-            Task.Run(
-                    () =>
+            Task.Run(() =>
+                {
+                    var operation = new TestAsyncOperation(op =>
                     {
-                        var operation = new TestAsyncOperation(
-                            op =>
-                            {
-                                throw new TestException("Test throw");
-                            }
-                        );
+                        throw new TestException("Test throw");
+                    });
 
-                        Assert.Throws<TestException>(() => operation.Wait());
-                    }
-                )
+                    Assert.Throws<TestException>(() => operation.Wait());
+                })
                 .GetAwaiter()
                 .GetResult();
         }

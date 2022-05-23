@@ -15,19 +15,17 @@ class Driver
 
         ManualResetEvent mre = new ManualResetEvent(false);
 
-        ThreadPool.QueueUserWorkItem(
-            _ =>
+        ThreadPool.QueueUserWorkItem(_ =>
+        {
+            try
             {
-                try
-                {
-                    throw new CustomException();
-                }
-                finally
-                {
-                    mre.Set();
-                }
+                throw new CustomException();
             }
-        );
+            finally
+            {
+                mre.Set();
+            }
+        });
 
         if (!mre.WaitOne(5000))
             Environment.Exit(2);

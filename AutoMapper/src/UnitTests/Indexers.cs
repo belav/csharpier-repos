@@ -25,12 +25,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {

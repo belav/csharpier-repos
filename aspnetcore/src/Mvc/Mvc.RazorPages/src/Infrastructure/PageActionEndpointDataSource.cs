@@ -90,16 +90,14 @@ internal class PageActionEndpointDataSource : ActionEndpointDataSourceBase
                         );
                     }
                 )
-                .Add(
-                    b =>
-                    {
-                        ((RouteEndpointBuilder)b).Order = order.Value;
-                        b.Metadata.Add(
-                            new DynamicPageRouteValueTransformerMetadata(transformerType, state)
-                        );
-                        b.Metadata.Add(new PageEndpointDataSourceIdMetadata(DataSourceId));
-                    }
-                );
+                .Add(b =>
+                {
+                    ((RouteEndpointBuilder)b).Order = order.Value;
+                    b.Metadata.Add(
+                        new DynamicPageRouteValueTransformerMetadata(transformerType, state)
+                    );
+                    b.Metadata.Add(new PageEndpointDataSourceIdMetadata(DataSourceId));
+                });
         }
     }
 }

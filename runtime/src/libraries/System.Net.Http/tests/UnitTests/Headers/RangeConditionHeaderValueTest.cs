@@ -19,12 +19,10 @@ namespace System.Net.Http.Tests
             Assert.Null(rangeCondition.Date);
 
             EntityTagHeaderValue input = null;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new RangeConditionHeaderValue(input);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new RangeConditionHeaderValue(input);
+            });
         }
 
         [Fact]
@@ -224,12 +222,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    RangeConditionHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                RangeConditionHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 RangeConditionHeaderValue.TryParse(input, out RangeConditionHeaderValue result)

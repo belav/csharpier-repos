@@ -84,15 +84,13 @@ public class IdentityOptionsTest
         var services = new ServiceCollection();
         services
             .AddAuthentication()
-            .AddIdentityCookies(
-                o =>
-                {
-                    o.ApplicationCookie.Configure(a => a.Cookie.Name = "a");
-                    o.ExternalCookie.Configure(a => a.Cookie.Name = "b");
-                    o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Name = "c");
-                    o.TwoFactorUserIdCookie.Configure(a => a.Cookie.Name = "d");
-                }
-            );
+            .AddIdentityCookies(o =>
+            {
+                o.ApplicationCookie.Configure(a => a.Cookie.Name = "a");
+                o.ExternalCookie.Configure(a => a.Cookie.Name = "b");
+                o.TwoFactorRememberMeCookie.Configure(a => a.Cookie.Name = "c");
+                o.TwoFactorUserIdCookie.Configure(a => a.Cookie.Name = "d");
+            });
         var serviceProvider = services.BuildServiceProvider();
 
         var options = serviceProvider.GetRequiredService<

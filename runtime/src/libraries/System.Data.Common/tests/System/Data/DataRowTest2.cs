@@ -2414,33 +2414,29 @@ namespace System.Data.Tests
         [Fact]
         public void DataRow_RowError2()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    DataTable dt1 = DataProvider.CreateUniqueConstraint();
+            Assert.Throws<ConstraintException>(() =>
+            {
+                DataTable dt1 = DataProvider.CreateUniqueConstraint();
 
-                    dt1.BeginLoadData();
+                dt1.BeginLoadData();
 
-                    DataRow dr = dt1.NewRow();
-                    dr[0] = 3;
-                    dt1.Rows.Add(dr);
-                    dt1.EndLoadData();
-                }
-            );
+                DataRow dr = dt1.NewRow();
+                dr[0] = 3;
+                dt1.Rows.Add(dr);
+                dt1.EndLoadData();
+            });
         }
 
         [Fact]
         public void DataRow_RowError3()
         {
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    DataSet ds = DataProvider.CreateForeignConstraint();
-                    ds.Tables[0].BeginLoadData();
-                    ds.Tables[0].Rows[0][0] = 10;
-                    ds.Tables[0].EndLoadData(); //Foreign constraint violation
-                }
-            );
+            Assert.Throws<ConstraintException>(() =>
+            {
+                DataSet ds = DataProvider.CreateForeignConstraint();
+                ds.Tables[0].BeginLoadData();
+                ds.Tables[0].Rows[0][0] = 10;
+                ds.Tables[0].EndLoadData(); //Foreign constraint violation
+            });
         }
 
         [Fact]
@@ -2609,20 +2605,18 @@ namespace System.Data.Tests
             drArrResult = drChild.GetParentRows(dRel, DataRowVersion.Default);
             Assert.Equal(drArrExcepted, drArrResult);
 
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    DataTable dtOtherParent = DataProvider.CreateParentDataTable();
-                    DataTable dtOtherChild = DataProvider.CreateChildDataTable();
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                DataTable dtOtherParent = DataProvider.CreateParentDataTable();
+                DataTable dtOtherChild = DataProvider.CreateChildDataTable();
 
-                    DataRelation drl = new DataRelation(
-                        "newRelation",
-                        dtOtherParent.Columns[0],
-                        dtOtherChild.Columns[0]
-                    );
-                    drChild.GetParentRows(drl, DataRowVersion.Current);
-                }
-            );
+                DataRelation drl = new DataRelation(
+                    "newRelation",
+                    dtOtherParent.Columns[0],
+                    dtOtherChild.Columns[0]
+                );
+                drChild.GetParentRows(drl, DataRowVersion.Current);
+            });
         }
 
         [Fact]
@@ -2701,31 +2695,27 @@ namespace System.Data.Tests
 
             DataTable dt1 = DataProvider.CreateUniqueConstraint();
 
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    dt1.BeginLoadData();
+            Assert.Throws<ConstraintException>(() =>
+            {
+                dt1.BeginLoadData();
 
-                    dr = dt1.NewRow();
-                    dr[0] = 3;
-                    dt1.Rows.Add(dr);
-                    dt1.EndLoadData();
-                }
-            );
+                dr = dt1.NewRow();
+                dr[0] = 3;
+                dt1.Rows.Add(dr);
+                dt1.EndLoadData();
+            });
             Assert.Equal(2, dt1.GetErrors().Length);
             Assert.True(dt1.GetErrors()[0].RowError.Length > 10);
             Assert.True(dt1.GetErrors()[1].RowError.Length > 10);
 
             DataSet ds = DataProvider.CreateForeignConstraint();
-            Assert.Throws<ConstraintException>(
-                () =>
-                {
-                    ds.Tables[0].BeginLoadData();
-                    ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
-                    //ds.Tables[0].AcceptChanges();
-                    ds.Tables[0].EndLoadData();
-                }
-            );
+            Assert.Throws<ConstraintException>(() =>
+            {
+                ds.Tables[0].BeginLoadData();
+                ds.Tables[0].Rows[0][0] = 10; //Foreign constraint violation
+                //ds.Tables[0].AcceptChanges();
+                ds.Tables[0].EndLoadData();
+            });
             Assert.Equal(3, ds.Tables[1].GetErrors().Length);
             for (int index = 0; index < 3; index++)
             {

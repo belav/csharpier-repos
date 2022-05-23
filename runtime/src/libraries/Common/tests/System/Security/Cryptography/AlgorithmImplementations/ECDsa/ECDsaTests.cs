@@ -357,13 +357,11 @@ namespace System.Security.Cryptography.EcDsa.Tests
             }
 
             // Either set_KeySize or SignData should throw.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    ecdsa.KeySize = 384;
-                    SignData(ecdsa, data, HashAlgorithmName.SHA256);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                ecdsa.KeySize = 384;
+                SignData(ecdsa, data, HashAlgorithmName.SHA256);
+            });
         }
 
         protected virtual void UseAfterDispose(ECDsa ecdsa, byte[] data, byte[] sig)

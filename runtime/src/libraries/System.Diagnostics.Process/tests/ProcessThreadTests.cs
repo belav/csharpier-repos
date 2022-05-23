@@ -53,13 +53,11 @@ namespace System.Diagnostics.Tests
             ManualResetEventSlim mre = new ManualResetEventSlim();
             for (int i = 0; i < numOfThreads; i++)
             {
-                new Thread(
-                    () =>
-                    {
-                        counter.Signal();
-                        mre.Wait();
-                    }
-                )
+                new Thread(() =>
+                {
+                    counter.Signal();
+                    mre.Wait();
+                })
                 {
                     IsBackground = true
                 }.Start();

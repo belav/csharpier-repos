@@ -598,22 +598,18 @@ public class GlobbingUrlBuilderTest
         var matcher = new Mock<Matcher>();
         matcher
             .Setup(m => m.AddInclude(It.IsAny<string>()))
-            .Returns<string>(
-                pattern =>
-                {
-                    includePatterns.Add(pattern);
-                    return matcher.Object;
-                }
-            );
+            .Returns<string>(pattern =>
+            {
+                includePatterns.Add(pattern);
+                return matcher.Object;
+            });
         matcher
             .Setup(m => m.AddExclude(It.IsAny<string>()))
-            .Returns<string>(
-                pattern =>
-                {
-                    excludePatterns.Add(pattern);
-                    return matcher.Object;
-                }
-            );
+            .Returns<string>(pattern =>
+            {
+                excludePatterns.Add(pattern);
+                return matcher.Object;
+            });
         var patternMatchingResult = new PatternMatchingResult(Enumerable.Empty<FilePatternMatch>());
         matcher.Setup(m => m.Execute(It.IsAny<DirectoryInfoBase>())).Returns(patternMatchingResult);
         return matcher.Object;

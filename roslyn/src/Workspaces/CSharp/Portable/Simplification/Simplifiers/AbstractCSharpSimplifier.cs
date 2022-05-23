@@ -464,16 +464,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Simplification.Simplifiers
             SemanticModel semanticModel
         )
         {
-            var nameOfInvocationExpr = expression.FirstAncestorOrSelf<InvocationExpressionSyntax>(
-                invocationExpr =>
+            var nameOfInvocationExpr =
+                expression.FirstAncestorOrSelf<InvocationExpressionSyntax>(invocationExpr =>
                 {
                     return invocationExpr.Expression is IdentifierNameSyntax identifierName
                         && identifierName.Identifier.Text == "nameof"
                         && semanticModel.GetConstantValue(invocationExpr).HasValue
                         && semanticModel.GetTypeInfo(invocationExpr).Type.SpecialType
                             == SpecialType.System_String;
-                }
-            );
+                });
 
             return nameOfInvocationExpr != null;
         }

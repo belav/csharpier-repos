@@ -318,12 +318,10 @@ namespace System.IO.Packaging.Tests
                 )
             )
             {
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        package.DeleteRelationship("ab:23");
-                    }
-                );
+                Assert.Throws<XmlException>(() =>
+                {
+                    package.DeleteRelationship("ab:23");
+                });
             }
             fiGuidName.Delete();
         }
@@ -451,12 +449,10 @@ namespace System.IO.Packaging.Tests
                         );
                         PackagePart documentPart = package.GetPart(documentUri);
 
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                            {
-                                var styleRelation2 = documentPart.GetRelationship("dummyId");
-                            }
-                        );
+                        Assert.Throws<InvalidOperationException>(() =>
+                        {
+                            var styleRelation2 = documentPart.GetRelationship("dummyId");
+                        });
                     }
                 }
             }
@@ -497,13 +493,11 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 Package package = Package.Open(ms, FileMode.Create, FileAccess.ReadWrite);
                 PackagePart packagePartDocument = null;
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        packagePartDocument = package.CreatePart(partUriDocument2, "image/jpeg");
-                        packagePartDocument = package.CreatePart(partUriDocument, "image/jpeg");
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    packagePartDocument = package.CreatePart(partUriDocument2, "image/jpeg");
+                    packagePartDocument = package.CreatePart(partUriDocument, "image/jpeg");
+                });
             }
         }
 
@@ -729,14 +723,12 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
-                    Assert.Throws<XmlException>(
-                        () =>
-                        {
-                            PackageProperties pp = package.PackageProperties;
-                            DateTime? c = pp.Created;
-                            DateTime? m = pp.Modified;
-                        }
-                    );
+                    Assert.Throws<XmlException>(() =>
+                    {
+                        PackageProperties pp = package.PackageProperties;
+                        DateTime? c = pp.Created;
+                        DateTime? m = pp.Modified;
+                    });
                 }
             }
         }
@@ -791,12 +783,10 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
-                    Assert.Throws<FileFormatException>(
-                        () =>
-                        {
-                            PackageProperties pp = package.PackageProperties;
-                        }
-                    );
+                    Assert.Throws<FileFormatException>(() =>
+                    {
+                        PackageProperties pp = package.PackageProperties;
+                    });
                 }
             }
         }
@@ -816,12 +806,10 @@ namespace System.IO.Packaging.Tests
                 ms.Write(ba, 0, ba.Length);
                 using (Package package = Package.Open(ms, FileMode.Open, FileAccess.ReadWrite))
                 {
-                    Assert.Throws<FileFormatException>(
-                        () =>
-                        {
-                            PackageProperties pp = package.PackageProperties;
-                        }
-                    );
+                    Assert.Throws<FileFormatException>(() =>
+                    {
+                        PackageProperties pp = package.PackageProperties;
+                    });
                 }
             }
         }
@@ -2911,16 +2899,14 @@ namespace System.IO.Packaging.Tests
             File.WriteAllBytes(tempGuidName.FullName, ba);
 
             // Truncate is invalid
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Package package = Package.Open(
-                        tempGuidName.FullName,
-                        FileMode.Truncate,
-                        FileAccess.ReadWrite
-                    );
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Package package = Package.Open(
+                    tempGuidName.FullName,
+                    FileMode.Truncate,
+                    FileAccess.ReadWrite
+                );
+            });
             tempGuidName.Delete();
         }
 
@@ -2932,16 +2918,14 @@ namespace System.IO.Packaging.Tests
             File.WriteAllBytes(tempGuidName.FullName, ba);
 
             // Truncate is invalid
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    Package package = Package.Open(
-                        tempGuidName.FullName,
-                        FileMode.Truncate,
-                        FileAccess.Write
-                    );
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                Package package = Package.Open(
+                    tempGuidName.FullName,
+                    FileMode.Truncate,
+                    FileAccess.Write
+                );
+            });
             tempGuidName.Delete();
         }
 
@@ -2995,35 +2979,29 @@ namespace System.IO.Packaging.Tests
 
                 var mainPart = package.GetPart(documentUri);
 
-                Assert.Throws<IOException>(
-                    () =>
+                Assert.Throws<IOException>(() =>
+                {
+                    using (Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.Read))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.Read)
-                        )
-                        {
-                            XDocument xd = XDocument.Load(partStream);
-                            Assert.Equal(0, xd.DescendantNodes().Count());
-                        }
+                        XDocument xd = XDocument.Load(partStream);
+                        Assert.Equal(0, xd.DescendantNodes().Count());
                     }
-                );
+                });
 
                 // opening in create mode clears the part, so no data in it.
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.Create,
-                                FileAccess.ReadWrite
-                            )
+                Assert.Throws<XmlException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(
+                            FileMode.Create,
+                            FileAccess.ReadWrite
                         )
-                        {
-                            XDocument xd = XDocument.Load(partStream);
-                            Assert.Equal(0, xd.DescendantNodes().Count());
-                        }
+                    )
+                    {
+                        XDocument xd = XDocument.Load(partStream);
+                        Assert.Equal(0, xd.DescendantNodes().Count());
                     }
-                );
+                });
 
                 using (
                     Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.ReadWrite)
@@ -3307,21 +3285,19 @@ namespace System.IO.Packaging.Tests
                     sw.Write(s_DocumentXml);
                 }
 
-                Assert.Throws<XmlException>(
-                    () =>
-                    {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.OpenOrCreate,
-                                FileAccess.Read
-                            )
+                Assert.Throws<XmlException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(
+                            FileMode.OpenOrCreate,
+                            FileAccess.Read
                         )
-                        {
-                            XDocument xd = XDocument.Load(partStream);
-                            Assert.Equal(0, xd.DescendantNodes().Count());
-                        }
+                    )
+                    {
+                        XDocument xd = XDocument.Load(partStream);
+                        Assert.Equal(0, xd.DescendantNodes().Count());
                     }
-                );
+                });
             }
 
             tempGuidName.Delete();
@@ -3431,36 +3407,32 @@ namespace System.IO.Packaging.Tests
                     XDocument xd = XDocument.Load(partStream);
                     Assert.Equal(13, xd.DescendantNodes().Count());
                 }
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.OpenOrCreate,
-                                FileAccess.Write
-                            )
+                Assert.Throws<IOException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(
+                            FileMode.OpenOrCreate,
+                            FileAccess.Write
                         )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
+                    )
+                    using (StreamWriter sw = new StreamWriter(partStream))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.OpenOrCreate,
-                                FileAccess.ReadWrite
-                            )
-                        )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
+                        sw.Write(s_DocumentXml);
                     }
-                );
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(
+                            FileMode.OpenOrCreate,
+                            FileAccess.ReadWrite
+                        )
+                    )
+                    using (StreamWriter sw = new StreamWriter(partStream))
+                    {
+                        sw.Write(s_DocumentXml);
+                    }
+                });
             }
 
             tempGuidName.Delete();
@@ -3493,36 +3465,29 @@ namespace System.IO.Packaging.Tests
 
                 var mainPart = package.GetPart(documentUri);
 
-                Assert.Throws<IOException>(
-                    () =>
+                Assert.Throws<IOException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.Write)
+                    )
+                    using (StreamWriter sw = new StreamWriter(partStream))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.Create,
-                                FileAccess.Write
-                            )
-                        )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
+                        sw.Write(s_DocumentXml);
                     }
-                );
-                Assert.Throws<IOException>(
-                    () =>
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(
+                            FileMode.Create,
+                            FileAccess.ReadWrite
+                        )
+                    )
+                    using (StreamWriter sw = new StreamWriter(partStream))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.Create,
-                                FileAccess.ReadWrite
-                            )
-                        )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
+                        sw.Write(s_DocumentXml);
                     }
-                );
+                });
             }
 
             tempGuidName.Delete();
@@ -3555,18 +3520,14 @@ namespace System.IO.Packaging.Tests
 
                 var mainPart = package.GetPart(documentUri);
 
-                Assert.Throws<IOException>(
-                    () =>
+                Assert.Throws<IOException>(() =>
+                {
+                    using (Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.Read))
+                    using (StreamWriter sw = new StreamWriter(partStream))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(FileMode.Create, FileAccess.Read)
-                        )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
+                        sw.Write(s_DocumentXml);
                     }
-                );
+                });
             }
 
             tempGuidName.Delete();
@@ -3600,21 +3561,16 @@ namespace System.IO.Packaging.Tests
                 var mainPart = package.GetPart(documentUri);
 
                 // can't open a part for ReadWrite when the package is open for Read
-                Assert.Throws<IOException>(
-                    () =>
+                Assert.Throws<IOException>(() =>
+                {
+                    using (
+                        Stream partStream = mainPart.GetStream(FileMode.Open, FileAccess.ReadWrite)
+                    )
+                    using (StreamWriter sw = new StreamWriter(partStream))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(
-                                FileMode.Open,
-                                FileAccess.ReadWrite
-                            )
-                        )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
+                        sw.Write(s_DocumentXml);
                     }
-                );
+                });
             }
 
             tempGuidName.Delete();
@@ -3647,18 +3603,14 @@ namespace System.IO.Packaging.Tests
 
                 var mainPart = package.GetPart(documentUri);
 
-                Assert.Throws<IOException>(
-                    () =>
+                Assert.Throws<IOException>(() =>
+                {
+                    using (Stream partStream = mainPart.GetStream(FileMode.Open, FileAccess.Write))
+                    using (StreamWriter sw = new StreamWriter(partStream))
                     {
-                        using (
-                            Stream partStream = mainPart.GetStream(FileMode.Open, FileAccess.Write)
-                        )
-                        using (StreamWriter sw = new StreamWriter(partStream))
-                        {
-                            sw.Write(s_DocumentXml);
-                        }
+                        sw.Write(s_DocumentXml);
                     }
-                );
+                });
             }
 
             tempGuidName.Delete();
@@ -3908,21 +3860,19 @@ namespace System.IO.Packaging.Tests
                     sw.Write(s_DocumentXml);
                 }
 
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        using (
-                            Stream partStream = packagePartDocument.GetStream(
-                                FileMode.Create,
-                                FileAccess.Read
-                            )
+                Assert.Throws<IOException>(() =>
+                {
+                    using (
+                        Stream partStream = packagePartDocument.GetStream(
+                            FileMode.Create,
+                            FileAccess.Read
                         )
-                        {
-                            XDocument xd = XDocument.Load(partStream);
-                            Assert.Equal(0, xd.DescendantNodes().Count());
-                        }
+                    )
+                    {
+                        XDocument xd = XDocument.Load(partStream);
+                        Assert.Equal(0, xd.DescendantNodes().Count());
                     }
-                );
+                });
             }
             tempGuidName.Delete();
         }
@@ -3994,16 +3944,14 @@ namespace System.IO.Packaging.Tests
         public void T112_String_CreateNew_Read_Create_Read()
         {
             var tempGuidName = GetTempFileInfoWithExtension(".docx");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    Package package = Package.Open(
-                        tempGuidName.FullName,
-                        FileMode.CreateNew,
-                        FileAccess.Read
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Package package = Package.Open(
+                    tempGuidName.FullName,
+                    FileMode.CreateNew,
+                    FileAccess.Read
+                );
+            });
             tempGuidName.Delete();
         }
 
@@ -4431,42 +4379,34 @@ namespace System.IO.Packaging.Tests
                     CompressionOption.Normal
                 );
 
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        Stream partStream = packagePartDocument.GetStream(
-                            FileMode.Create,
-                            FileAccess.Read
-                        );
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        Stream partStream = packagePartDocument.GetStream(
-                            FileMode.CreateNew,
-                            FileAccess.Read
-                        );
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        Stream partStream = packagePartDocument.GetStream(
-                            FileMode.Truncate,
-                            FileAccess.Read
-                        );
-                    }
-                );
-                Assert.Throws<IOException>(
-                    () =>
-                    {
-                        Stream partStream = packagePartDocument.GetStream(
-                            FileMode.Append,
-                            FileAccess.Read
-                        );
-                    }
-                );
+                Assert.Throws<IOException>(() =>
+                {
+                    Stream partStream = packagePartDocument.GetStream(
+                        FileMode.Create,
+                        FileAccess.Read
+                    );
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    Stream partStream = packagePartDocument.GetStream(
+                        FileMode.CreateNew,
+                        FileAccess.Read
+                    );
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    Stream partStream = packagePartDocument.GetStream(
+                        FileMode.Truncate,
+                        FileAccess.Read
+                    );
+                });
+                Assert.Throws<IOException>(() =>
+                {
+                    Stream partStream = packagePartDocument.GetStream(
+                        FileMode.Append,
+                        FileAccess.Read
+                    );
+                });
             }
             tempGuidName.Delete();
         }
@@ -4475,16 +4415,14 @@ namespace System.IO.Packaging.Tests
         public void T100_String_Create_Read_Star()
         {
             var tempGuidName = GetTempFileInfoWithExtension(".docx");
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    Package package = Package.Open(
-                        tempGuidName.FullName,
-                        FileMode.Create,
-                        FileAccess.Read
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                Package package = Package.Open(
+                    tempGuidName.FullName,
+                    FileMode.Create,
+                    FileAccess.Read
+                );
+            });
             tempGuidName.Delete();
         }
 
@@ -5006,13 +4944,11 @@ namespace System.IO.Packaging.Tests
                 packageUriWithPart.ToString()
             );
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    string badFragment = "abc";
-                    PackUriHelper.Create(packageUri, partUri, badFragment);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                string badFragment = "abc";
+                PackUriHelper.Create(packageUri, partUri, badFragment);
+            });
         }
 
         private const string DocumentRelationshipType =

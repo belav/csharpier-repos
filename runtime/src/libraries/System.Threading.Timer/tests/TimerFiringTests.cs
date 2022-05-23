@@ -163,18 +163,16 @@ namespace System.Threading.Tests
         [Fact]
         public void Timer_ChangeToDelete_DoesntFire()
         {
-            RetryHelper.Execute(
-                () =>
+            RetryHelper.Execute(() =>
+            {
+                const int DueTime = 1000;
+                var mres = new ManualResetEventSlim();
+                using (var t = new Timer(_ => mres.Set(), null, DueTime, -1))
                 {
-                    const int DueTime = 1000;
-                    var mres = new ManualResetEventSlim();
-                    using (var t = new Timer(_ => mres.Set(), null, DueTime, -1))
-                    {
-                        t.Change(Timeout.Infinite, Timeout.Infinite);
-                        Assert.False(mres.Wait(DueTime * 2));
-                    }
+                    t.Change(Timeout.Infinite, Timeout.Infinite);
+                    Assert.False(mres.Wait(DueTime * 2));
                 }
-            );
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -372,19 +370,14 @@ namespace System.Threading.Tests
         {
             await Task.WhenAll(
                 from p in Enumerable.Range(0, Environment.ProcessorCount)
-                select Task.Run(
-                    async () =>
-                    {
-                        await Task.WhenAll(
-                            from i in Enumerable.Range(1, 1_000)
-                            select DueTimeAsync(i)
-                        );
-                        await Task.WhenAll(
-                            from i in Enumerable.Range(1, 1_000)
-                            select DueTimeAsync(1_001 - i)
-                        );
-                    }
-                )
+                select Task.Run(async () =>
+                {
+                    await Task.WhenAll(from i in Enumerable.Range(1, 1_000) select DueTimeAsync(i));
+                    await Task.WhenAll(
+                        from i in Enumerable.Range(1, 1_000)
+                        select DueTimeAsync(1_001 - i)
+                    );
+                })
             );
         }
 
@@ -394,19 +387,17 @@ namespace System.Threading.Tests
         {
             await Task.WhenAll(
                 from p in Enumerable.Range(0, Environment.ProcessorCount)
-                select Task.Run(
-                    async () =>
-                    {
-                        await Task.WhenAll(
-                            from i in Enumerable.Range(1, 400)
-                            select PeriodAsync(period: i, iterations: 3)
-                        );
-                        await Task.WhenAll(
-                            from i in Enumerable.Range(1, 400)
-                            select PeriodAsync(period: 401 - i, iterations: 3)
-                        );
-                    }
-                )
+                select Task.Run(async () =>
+                {
+                    await Task.WhenAll(
+                        from i in Enumerable.Range(1, 400)
+                        select PeriodAsync(period: i, iterations: 3)
+                    );
+                    await Task.WhenAll(
+                        from i in Enumerable.Range(1, 400)
+                        select PeriodAsync(period: 401 - i, iterations: 3)
+                    );
+                })
             );
         }
 
@@ -439,41 +430,37 @@ namespace System.Threading.Tests
                     long totalTimers = 0;
                     await Task.WhenAll(
                         from p in Enumerable.Range(0, Environment.ProcessorCount)
-                        select Task.Run(
-                            async () =>
-                            {
-                                await Task.WhenAll(
-                                    from dueTimeTemplate in dueTimes
-                                    from dueTime in Enumerable.Repeat(dueTimeTemplate, 10)
-                                    select Task.Run(
-                                        async () =>
-                                        {
-                                            var sw = new Stopwatch();
-                                            for (int i = 1; i <= 1_000 / dueTime; i++)
-                                            {
-                                                sw.Restart();
-                                                await DueTimeAsync(dueTime);
-                                                sw.Stop();
+                        select Task.Run(async () =>
+                        {
+                            await Task.WhenAll(
+                                from dueTimeTemplate in dueTimes
+                                from dueTime in Enumerable.Repeat(dueTimeTemplate, 10)
+                                select Task.Run(async () =>
+                                {
+                                    var sw = new Stopwatch();
+                                    for (int i = 1; i <= 1_000 / dueTime; i++)
+                                    {
+                                        sw.Restart();
+                                        await DueTimeAsync(dueTime);
+                                        sw.Stop();
 
-                                                Interlocked.Increment(ref totalTimers);
-                                                if (
-                                                    Math.Abs(sw.ElapsedMilliseconds - dueTime)
-                                                    > MillisecondsPadding
+                                        Interlocked.Increment(ref totalTimers);
+                                        if (
+                                            Math.Abs(sw.ElapsedMilliseconds - dueTime)
+                                            > MillisecondsPadding
+                                        )
+                                        {
+                                            outOfRange.Enqueue(
+                                                new KeyValuePair<int, long>(
+                                                    dueTime,
+                                                    sw.ElapsedMilliseconds
                                                 )
-                                                {
-                                                    outOfRange.Enqueue(
-                                                        new KeyValuePair<int, long>(
-                                                            dueTime,
-                                                            sw.ElapsedMilliseconds
-                                                        )
-                                                    );
-                                                }
-                                            }
+                                            );
                                         }
-                                    )
-                                );
-                            }
-                        )
+                                    }
+                                })
+                            );
+                        })
                     );
 
                     double percOutOfRange = (double)outOfRange.Count / totalTimers * 100;
@@ -582,13 +569,11 @@ namespace System.Threading.Tests
         {
             var tcs = new TaskCompletionSource();
             using (
-                var t = new Timer(
-                    _ =>
-                    {
-                        if (Interlocked.Decrement(ref iterations) == 0)
-                            tcs.SetResult();
-                    }
-                )
+                var t = new Timer(_ =>
+                {
+                    if (Interlocked.Decrement(ref iterations) == 0)
+                        tcs.SetResult();
+                })
             ) // rely on Timer(TimerCallback) rooting itself
             {
                 t.Change(period, period);

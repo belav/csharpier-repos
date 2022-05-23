@@ -782,27 +782,25 @@ namespace System.Threading.Tests
         public void WaitAsync_Timeout_NoUnhandledException()
         {
             RemoteExecutor
-                .Invoke(
-                    async () =>
+                .Invoke(async () =>
+                {
+                    Exception error = null;
+                    TaskScheduler.UnobservedTaskException += (s, e) =>
+                        Volatile.Write(ref error, e.Exception);
+
+                    var sem = new SemaphoreSlim(0);
+                    for (int i = 0; i < 2; ++i)
                     {
-                        Exception error = null;
-                        TaskScheduler.UnobservedTaskException += (s, e) =>
-                            Volatile.Write(ref error, e.Exception);
-
-                        var sem = new SemaphoreSlim(0);
-                        for (int i = 0; i < 2; ++i)
-                        {
-                            await sem.WaitAsync(1);
-                            GC.Collect();
-                            GC.WaitForPendingFinalizers();
-                        }
-
-                        if (Volatile.Read(ref error) is Exception e)
-                        {
-                            throw e;
-                        }
+                        await sem.WaitAsync(1);
+                        GC.Collect();
+                        GC.WaitForPendingFinalizers();
                     }
-                )
+
+                    if (Volatile.Read(ref error) is Exception e)
+                    {
+                        throw e;
+                    }
+                })
                 .Dispose();
         }
     }

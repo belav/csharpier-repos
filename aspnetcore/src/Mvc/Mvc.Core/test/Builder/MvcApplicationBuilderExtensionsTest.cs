@@ -49,15 +49,10 @@ public class MvcApplicationBuilderExtensionsTest
         var appBuilder = new ApplicationBuilder(serviceProvider);
 
         // Act
-        appBuilder.UseMvc(
-            routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                );
-            }
-        );
+        appBuilder.UseMvc(routes =>
+        {
+            routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+        });
 
         var endpointDataSource =
             appBuilder.ApplicationServices.GetRequiredService<EndpointDataSource>();
@@ -77,20 +72,16 @@ public class MvcApplicationBuilderExtensionsTest
         var appBuilder = new ApplicationBuilder(serviceProvider);
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            appBuilder.UseMvc(routes =>
             {
-                appBuilder.UseMvc(
-                    routes =>
-                    {
-                        routes.MapRoute(
-                            name: "default",
-                            template: "{controller=Home}/{action=Index}/{id?}"
-                        );
-                    }
+                routes.MapRoute(
+                    name: "default",
+                    template: "{controller=Home}/{action=Index}/{id?}"
                 );
-            }
-        );
+            });
+        });
 
         var expected =
             "Endpoint Routing does not support 'IApplicationBuilder.UseMvc(...)'. To use "

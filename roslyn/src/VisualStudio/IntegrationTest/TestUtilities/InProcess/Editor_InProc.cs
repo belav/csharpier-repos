@@ -110,38 +110,36 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public bool IsUseSuggestionModeOn()
         {
-            return ExecuteOnActiveView(
-                textView =>
+            return ExecuteOnActiveView(textView =>
+            {
+                var featureServiceFactory = GetComponentModelService<IFeatureServiceFactory>();
+                var subjectBuffer = GetBufferContainingCaret(textView);
+
+                var options = textView.Options.GlobalOptions;
+                EditorOptionKey<bool> optionKey;
+                bool defaultOption;
+                if (IsDebuggerTextView(textView))
                 {
-                    var featureServiceFactory = GetComponentModelService<IFeatureServiceFactory>();
-                    var subjectBuffer = GetBufferContainingCaret(textView);
-
-                    var options = textView.Options.GlobalOptions;
-                    EditorOptionKey<bool> optionKey;
-                    bool defaultOption;
-                    if (IsDebuggerTextView(textView))
-                    {
-                        optionKey = new EditorOptionKey<bool>(
-                            PredefinedCompletionNames.SuggestionModeInDebuggerCompletionOptionName
-                        );
-                        defaultOption = true;
-                    }
-                    else
-                    {
-                        optionKey = new EditorOptionKey<bool>(
-                            PredefinedCompletionNames.SuggestionModeInCompletionOptionName
-                        );
-                        defaultOption = false;
-                    }
-
-                    if (!options.IsOptionDefined(optionKey, localScopeOnly: false))
-                    {
-                        return defaultOption;
-                    }
-
-                    return options.GetOptionValue(optionKey);
+                    optionKey = new EditorOptionKey<bool>(
+                        PredefinedCompletionNames.SuggestionModeInDebuggerCompletionOptionName
+                    );
+                    defaultOption = true;
                 }
-            );
+                else
+                {
+                    optionKey = new EditorOptionKey<bool>(
+                        PredefinedCompletionNames.SuggestionModeInCompletionOptionName
+                    );
+                    defaultOption = false;
+                }
+
+                if (!options.IsOptionDefined(optionKey, localScopeOnly: false))
+                {
+                    return defaultOption;
+                }
+
+                return options.GetOptionValue(optionKey);
+            });
 
             bool IsDebuggerTextView(IWpfTextView textView) => textView.Roles.Contains("DEBUGVIEW");
         }
@@ -164,18 +162,16 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             {
                 // For blocking completion mode, make sure we don't have responsive completion interfering when
                 // integration tests run slowly.
-                ExecuteOnActiveView(
-                    view =>
-                    {
-                        var options = view.Options.GlobalOptions;
-                        options.SetOptionValue(DefaultOptions.ResponsiveCompletionOptionId, false);
+                ExecuteOnActiveView(view =>
+                {
+                    var options = view.Options.GlobalOptions;
+                    options.SetOptionValue(DefaultOptions.ResponsiveCompletionOptionId, false);
 
-                        var latencyGuardOptionKey = new EditorOptionKey<bool>(
-                            "EnableTypingLatencyGuard"
-                        );
-                        options.SetOptionValue(latencyGuardOptionKey, false);
-                    }
-                );
+                    var latencyGuardOptionKey = new EditorOptionKey<bool>(
+                        "EnableTypingLatencyGuard"
+                    );
+                    options.SetOptionValue(latencyGuardOptionKey, false);
+                });
             }
         }
 
@@ -230,14 +226,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         public string GetText() => ExecuteOnActiveView(view => view.TextSnapshot.GetText());
 
         public void SetText(string text) =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var textSnapshot = view.TextSnapshot;
-                    var replacementSpan = new SnapshotSpan(textSnapshot, 0, textSnapshot.Length);
-                    view.TextBuffer.Replace(replacementSpan, text);
-                }
-            );
+            ExecuteOnActiveView(view =>
+            {
+                var textSnapshot = view.TextSnapshot;
+                var replacementSpan = new SnapshotSpan(textSnapshot, 0, textSnapshot.Length);
+                view.TextBuffer.Replace(replacementSpan, text);
+            });
 
         public void SelectText(string text)
         {
@@ -258,119 +252,101 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         }
 
         public void ReplaceText(string oldText, string newText) =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var textSnapshot = view.TextSnapshot;
-                    SelectText(oldText);
-                    var replacementSpan = new SnapshotSpan(
-                        textSnapshot,
-                        view.Selection.Start.Position,
-                        view.Selection.End.Position - view.Selection.Start.Position
-                    );
-                    view.TextBuffer.Replace(replacementSpan, newText);
-                }
-            );
+            ExecuteOnActiveView(view =>
+            {
+                var textSnapshot = view.TextSnapshot;
+                SelectText(oldText);
+                var replacementSpan = new SnapshotSpan(
+                    textSnapshot,
+                    view.Selection.Start.Position,
+                    view.Selection.End.Position - view.Selection.Start.Position
+                );
+                view.TextBuffer.Replace(replacementSpan, newText);
+            });
 
         public string GetCurrentLineText() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var subjectBuffer = view.GetBufferContainingCaret();
-                    var bufferPosition = view.Caret.Position.BufferPosition;
-                    var line = bufferPosition.GetContainingLine();
+            ExecuteOnActiveView(view =>
+            {
+                var subjectBuffer = view.GetBufferContainingCaret();
+                var bufferPosition = view.Caret.Position.BufferPosition;
+                var line = bufferPosition.GetContainingLine();
 
-                    return line.GetText();
-                }
-            );
+                return line.GetText();
+            });
 
         public int GetLine() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                        out var lineNumber,
-                        out var characterIndex
-                    );
-                    return lineNumber;
-                }
-            );
+            ExecuteOnActiveView(view =>
+            {
+                view.Caret.Position.BufferPosition.GetLineAndCharacter(
+                    out var lineNumber,
+                    out var characterIndex
+                );
+                return lineNumber;
+            });
 
         public int GetColumn() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    view.Caret.Position.BufferPosition.GetLineAndCharacter(
-                        out var lineNumber,
-                        out var characterIndex
-                    );
-                    return characterIndex;
-                }
-            );
+            ExecuteOnActiveView(view =>
+            {
+                view.Caret.Position.BufferPosition.GetLineAndCharacter(
+                    out var lineNumber,
+                    out var characterIndex
+                );
+                return characterIndex;
+            });
 
         public string GetLineTextBeforeCaret() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var subjectBuffer = view.GetBufferContainingCaret();
-                    var bufferPosition = view.Caret.Position.BufferPosition;
-                    var line = bufferPosition.GetContainingLine();
-                    var text = line.GetText();
+            ExecuteOnActiveView(view =>
+            {
+                var subjectBuffer = view.GetBufferContainingCaret();
+                var bufferPosition = view.Caret.Position.BufferPosition;
+                var line = bufferPosition.GetContainingLine();
+                var text = line.GetText();
 
-                    return text.Substring(0, bufferPosition.Position - line.Start);
-                }
-            );
+                return text.Substring(0, bufferPosition.Position - line.Start);
+            });
 
         public string GetLineTextAfterCaret() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var subjectBuffer = view.GetBufferContainingCaret();
-                    var bufferPosition = view.Caret.Position.BufferPosition;
-                    var line = bufferPosition.GetContainingLine();
-                    var text = line.GetText();
+            ExecuteOnActiveView(view =>
+            {
+                var subjectBuffer = view.GetBufferContainingCaret();
+                var bufferPosition = view.Caret.Position.BufferPosition;
+                var line = bufferPosition.GetContainingLine();
+                var text = line.GetText();
 
-                    return text.Substring(bufferPosition.Position - line.Start);
-                }
-            );
+                return text.Substring(bufferPosition.Position - line.Start);
+            });
 
         public string GetSelectedText() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var subjectBuffer = view.GetBufferContainingCaret();
-                    Contract.ThrowIfNull(subjectBuffer);
+            ExecuteOnActiveView(view =>
+            {
+                var subjectBuffer = view.GetBufferContainingCaret();
+                Contract.ThrowIfNull(subjectBuffer);
 
-                    var selectedSpan = view.Selection.SelectedSpans[0];
-                    return subjectBuffer.CurrentSnapshot.GetText(selectedSpan);
-                }
-            );
+                var selectedSpan = view.Selection.SelectedSpans[0];
+                return subjectBuffer.CurrentSnapshot.GetText(selectedSpan);
+            });
 
         public void MoveCaret(int position) =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var subjectBuffer = view.GetBufferContainingCaret();
-                    Contract.ThrowIfNull(subjectBuffer);
+            ExecuteOnActiveView(view =>
+            {
+                var subjectBuffer = view.GetBufferContainingCaret();
+                Contract.ThrowIfNull(subjectBuffer);
 
-                    var point = new SnapshotPoint(subjectBuffer.CurrentSnapshot, position);
+                var point = new SnapshotPoint(subjectBuffer.CurrentSnapshot, position);
 
-                    view.Caret.MoveTo(point);
-                }
-            );
+                view.Caret.MoveTo(point);
+            });
 
         /// <remarks>
         /// This method does not wait for async operations before
         /// querying the editor
         /// </remarks>
         public bool IsSignatureHelpActive() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var broker = GetComponentModelService<ISignatureHelpBroker>();
-                    return broker.IsSignatureHelpActive(view);
-                }
-            );
+            ExecuteOnActiveView(view =>
+            {
+                var broker = GetComponentModelService<ISignatureHelpBroker>();
+                return broker.IsSignatureHelpActive(view);
+            });
 
         public string[] GetErrorTags() => GetTags<IErrorTag>();
 
@@ -389,23 +365,20 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 filter = Filter;
             }
 
-            return ExecuteOnActiveView(
-                view =>
-                {
-                    var viewTagAggregatorFactory =
-                        GetComponentModelService<IViewTagAggregatorFactoryService>();
-                    var aggregator = viewTagAggregatorFactory.CreateTagAggregator<TTag>(view);
-                    var tags = aggregator
-                        .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
-                        .Where(t => filter(t.Tag))
-                        .Cast<IMappingTagSpan<ITag>>();
-                    return tags.Select(
-                            tag =>
-                                $"{tag.Tag}:{PrintSpan(tag.Span.GetSpans(view.TextBuffer).Single())}"
-                        )
-                        .ToArray();
-                }
-            );
+            return ExecuteOnActiveView(view =>
+            {
+                var viewTagAggregatorFactory =
+                    GetComponentModelService<IViewTagAggregatorFactoryService>();
+                var aggregator = viewTagAggregatorFactory.CreateTagAggregator<TTag>(view);
+                var tags = aggregator
+                    .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
+                    .Where(t => filter(t.Tag))
+                    .Cast<IMappingTagSpan<ITag>>();
+                return tags.Select(
+                        tag => $"{tag.Tag}:{PrintSpan(tag.Span.GetSpans(view.TextBuffer).Single())}"
+                    )
+                    .ToArray();
+            });
         }
 
         /// <remarks>
@@ -413,78 +386,70 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         /// querying the editor
         /// </remarks>
         public Signature[] GetSignatures() =>
-            ExecuteOnActiveView(
-                view =>
+            ExecuteOnActiveView(view =>
+            {
+                var broker = GetComponentModelService<ISignatureHelpBroker>();
+
+                var sessions = broker.GetSessions(view);
+                if (sessions.Count != 1)
                 {
-                    var broker = GetComponentModelService<ISignatureHelpBroker>();
-
-                    var sessions = broker.GetSessions(view);
-                    if (sessions.Count != 1)
-                    {
-                        throw new InvalidOperationException(
-                            $"Expected exactly one session in the signature help, but found {sessions.Count}"
-                        );
-                    }
-
-                    return sessions[0].Signatures.Select(s => new Signature(s)).ToArray();
+                    throw new InvalidOperationException(
+                        $"Expected exactly one session in the signature help, but found {sessions.Count}"
+                    );
                 }
-            );
+
+                return sessions[0].Signatures.Select(s => new Signature(s)).ToArray();
+            });
 
         /// <remarks>
         /// This method does not wait for async operations before
         /// querying the editor
         /// </remarks>
         public Signature GetCurrentSignature() =>
-            ExecuteOnActiveView(
-                view =>
+            ExecuteOnActiveView(view =>
+            {
+                var broker = GetComponentModelService<ISignatureHelpBroker>();
+
+                var sessions = broker.GetSessions(view);
+                if (sessions.Count != 1)
                 {
-                    var broker = GetComponentModelService<ISignatureHelpBroker>();
-
-                    var sessions = broker.GetSessions(view);
-                    if (sessions.Count != 1)
-                    {
-                        throw new InvalidOperationException(
-                            $"Expected exactly one session in the signature help, but found {sessions.Count}"
-                        );
-                    }
-
-                    return new Signature(sessions[0].SelectedSignature);
+                    throw new InvalidOperationException(
+                        $"Expected exactly one session in the signature help, but found {sessions.Count}"
+                    );
                 }
-            );
+
+                return new Signature(sessions[0].SelectedSignature);
+            });
 
         public bool IsCaretOnScreen() =>
-            ExecuteOnActiveView(
-                view =>
-                {
-                    var caret = view.Caret;
+            ExecuteOnActiveView(view =>
+            {
+                var caret = view.Caret;
 
-                    return caret.Left >= view.ViewportLeft
-                        && caret.Right <= view.ViewportRight
-                        && caret.Top >= view.ViewportTop
-                        && caret.Bottom <= view.ViewportBottom;
-                }
-            );
+                return caret.Left >= view.ViewportLeft
+                    && caret.Right <= view.ViewportRight
+                    && caret.Top >= view.ViewportTop
+                    && caret.Bottom <= view.ViewportBottom;
+            });
 
         public ClassifiedToken[] GetLightbulbPreviewClassifications(string menuText)
         {
-            return ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            return ThreadHelper.JoinableTaskFactory.Run(async () =>
+            {
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var view = GetActiveTextView();
-                    var broker = GetComponentModel().GetService<ILightBulbBroker>();
-                    var classifierAggregatorService =
-                        GetComponentModelService<IViewClassifierAggregatorService>();
-                    return await GetLightbulbPreviewClassificationsAsync(
-                            menuText,
-                            broker,
-                            view,
-                            classifierAggregatorService
-                        )
-                        .ConfigureAwait(false);
-                }
-            );
+                var view = GetActiveTextView();
+                var broker = GetComponentModel().GetService<ILightBulbBroker>();
+                var classifierAggregatorService =
+                    GetComponentModelService<IViewClassifierAggregatorService>();
+                return await GetLightbulbPreviewClassificationsAsync(
+                        menuText,
+                        broker,
+                        view,
+                        classifierAggregatorService
+                    )
+                    .ConfigureAwait(false);
+            });
         }
 
         private async Task<ClassifiedToken[]> GetLightbulbPreviewClassificationsAsync(
@@ -724,17 +689,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 try
                 {
                     var mainForm = (Form)designerHost.RootComponent;
-                    InvokeOnUIThread(
-                        cancellationToken =>
-                        {
-                            var newControl = (System.Windows.Forms.Button)
-                                designerHost.CreateComponent(
-                                    typeof(System.Windows.Forms.Button),
-                                    buttonName
-                                );
-                            newControl.Parent = mainForm;
-                        }
-                    );
+                    InvokeOnUIThread(cancellationToken =>
+                    {
+                        var newControl = (System.Windows.Forms.Button)
+                            designerHost.CreateComponent(
+                                typeof(System.Windows.Forms.Button),
+                                buttonName
+                            );
+                        newControl.Parent = mainForm;
+                    });
                     waitHandle.WaitOne();
                 }
                 finally
@@ -763,14 +726,12 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 try
                 {
-                    InvokeOnUIThread(
-                        cancellationToken =>
-                        {
-                            designerHost.DestroyComponent(
-                                designerHost.Container.Components[buttonName]
-                            );
-                        }
-                    );
+                    InvokeOnUIThread(cancellationToken =>
+                    {
+                        designerHost.DestroyComponent(
+                            designerHost.Container.Components[buttonName]
+                        );
+                    });
                     waitHandle.WaitOne();
                 }
                 finally
@@ -827,26 +788,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 try
                 {
-                    InvokeOnUIThread(
-                        cancellationToken =>
+                    InvokeOnUIThread(cancellationToken =>
+                    {
+                        var button = designerHost.Container.Components[buttonName];
+                        var properties = TypeDescriptor.GetProperties(button);
+                        var property = properties[propertyName];
+                        if (propertyTypeName == null)
                         {
-                            var button = designerHost.Container.Components[buttonName];
-                            var properties = TypeDescriptor.GetProperties(button);
-                            var property = properties[propertyName];
-                            if (propertyTypeName == null)
-                            {
-                                property.SetValue(button, propertyValue);
-                            }
-                            else
-                            {
-                                var enumPropertyValue = GetEnumPropertyValue(
-                                    propertyTypeName,
-                                    propertyValue
-                                );
-                                property.SetValue(button, enumPropertyValue);
-                            }
+                            property.SetValue(button, propertyValue);
                         }
-                    );
+                        else
+                        {
+                            var enumPropertyValue = GetEnumPropertyValue(
+                                propertyTypeName,
+                                propertyValue
+                            );
+                            property.SetValue(button, enumPropertyValue);
+                        }
+                    });
                     waitHandle.WaitOne();
                 }
                 finally
@@ -878,19 +837,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
                 try
                 {
-                    InvokeOnUIThread(
-                        cancellationToken =>
-                        {
-                            var button = designerHost.Container.Components[buttonName];
-                            var eventBindingService = (IEventBindingService)
-                                button.Site.GetService(typeof(IEventBindingService));
-                            var events = TypeDescriptor.GetEvents(button);
-                            var eventProperty = eventBindingService.GetEventProperty(
-                                events.Find(eventName, ignoreCase: true)
-                            );
-                            eventProperty.SetValue(button, eventHandlerName);
-                        }
-                    );
+                    InvokeOnUIThread(cancellationToken =>
+                    {
+                        var button = designerHost.Container.Components[buttonName];
+                        var eventBindingService = (IEventBindingService)
+                            button.Site.GetService(typeof(IEventBindingService));
+                        var events = TypeDescriptor.GetEvents(button);
+                        var eventProperty = eventBindingService.GetEventProperty(
+                            events.Find(eventName, ignoreCase: true)
+                        );
+                        eventProperty.SetValue(button, eventHandlerName);
+                    });
                     waitHandle.WaitOne();
                 }
                 finally
@@ -932,87 +889,79 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public string[] GetOutliningSpans()
         {
-            return ExecuteOnActiveView(
-                view =>
-                {
-                    var manager = GetComponentModelService<IOutliningManagerService>()
-                        .GetOutliningManager(view);
-                    var span = new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length);
-                    var regions = manager.GetAllRegions(span);
-                    return regions
-                        .OrderBy(s => s.Extent.GetStartPoint(view.TextSnapshot))
-                        .Select(r => PrintSpan(r.Extent.GetSpan(view.TextSnapshot)))
-                        .ToArray();
-                }
-            );
+            return ExecuteOnActiveView(view =>
+            {
+                var manager = GetComponentModelService<IOutliningManagerService>()
+                    .GetOutliningManager(view);
+                var span = new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length);
+                var regions = manager.GetAllRegions(span);
+                return regions
+                    .OrderBy(s => s.Extent.GetStartPoint(view.TextSnapshot))
+                    .Select(r => PrintSpan(r.Extent.GetSpan(view.TextSnapshot)))
+                    .ToArray();
+            });
         }
 
         public List<string> GetF1Keywords()
         {
-            return InvokeOnUIThread(
-                cancellationToken =>
+            return InvokeOnUIThread(cancellationToken =>
+            {
+                var results = new List<string>();
+                GetActiveVsTextView().GetBuffer(out var textLines);
+                Marshal.ThrowExceptionForHR(
+                    textLines.GetLanguageServiceID(out var languageServiceGuid)
+                );
+                Marshal.ThrowExceptionForHR(
+                    Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.QueryService(
+                        languageServiceGuid,
+                        out var languageService
+                    )
+                );
+                var languageContextProvider = (IVsLanguageContextProvider)languageService;
+
+                var monitorUserContext = GetGlobalService<
+                    SVsMonitorUserContext,
+                    IVsMonitorUserContext
+                >();
+                Marshal.ThrowExceptionForHR(
+                    monitorUserContext.CreateEmptyContext(out var emptyUserContext)
+                );
+                Marshal.ThrowExceptionForHR(
+                    GetActiveVsTextView().GetCaretPos(out var line, out var column)
+                );
+                var span = new TextManager.Interop.TextSpan()
                 {
-                    var results = new List<string>();
-                    GetActiveVsTextView().GetBuffer(out var textLines);
-                    Marshal.ThrowExceptionForHR(
-                        textLines.GetLanguageServiceID(out var languageServiceGuid)
-                    );
-                    Marshal.ThrowExceptionForHR(
-                        Microsoft.VisualStudio.Shell.ServiceProvider.GlobalProvider.QueryService(
-                            languageServiceGuid,
-                            out var languageService
-                        )
-                    );
-                    var languageContextProvider = (IVsLanguageContextProvider)languageService;
+                    iStartLine = line,
+                    iStartIndex = column,
+                    iEndLine = line,
+                    iEndIndex = column
+                };
 
-                    var monitorUserContext = GetGlobalService<
-                        SVsMonitorUserContext,
-                        IVsMonitorUserContext
-                    >();
-                    Marshal.ThrowExceptionForHR(
-                        monitorUserContext.CreateEmptyContext(out var emptyUserContext)
+                Marshal.ThrowExceptionForHR(
+                    languageContextProvider.UpdateLanguageContext(
+                        0,
+                        textLines,
+                        new[] { span },
+                        emptyUserContext
+                    )
+                );
+                Marshal.ThrowExceptionForHR(
+                    emptyUserContext.CountAttributes("keyword", VSConstants.S_FALSE, out var count)
+                );
+                for (var i = 0; i < count; i++)
+                {
+                    emptyUserContext.GetAttribute(
+                        i,
+                        "keyword",
+                        VSConstants.S_FALSE,
+                        out var key,
+                        out var value
                     );
-                    Marshal.ThrowExceptionForHR(
-                        GetActiveVsTextView().GetCaretPos(out var line, out var column)
-                    );
-                    var span = new TextManager.Interop.TextSpan()
-                    {
-                        iStartLine = line,
-                        iStartIndex = column,
-                        iEndLine = line,
-                        iEndIndex = column
-                    };
-
-                    Marshal.ThrowExceptionForHR(
-                        languageContextProvider.UpdateLanguageContext(
-                            0,
-                            textLines,
-                            new[] { span },
-                            emptyUserContext
-                        )
-                    );
-                    Marshal.ThrowExceptionForHR(
-                        emptyUserContext.CountAttributes(
-                            "keyword",
-                            VSConstants.S_FALSE,
-                            out var count
-                        )
-                    );
-                    for (var i = 0; i < count; i++)
-                    {
-                        emptyUserContext.GetAttribute(
-                            i,
-                            "keyword",
-                            VSConstants.S_FALSE,
-                            out var key,
-                            out var value
-                        );
-                        results.Add(value);
-                    }
-
-                    return results;
+                    results.Add(value);
                 }
-            );
+
+                return results;
+            });
         }
 
         public void GoToDefinition() => ExecuteCommand(WellKnownCommandNames.Edit_GoToDefinition);
@@ -1028,33 +977,27 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         ///     [s1.Start, s1.Length, s2.Start, s2.Length, ...]
         /// </returns>
         public int[] GetTagSpans(string tagId) =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var view = GetActiveTextView();
-                    var tagAggregatorFactory = GetComponentModel()
-                        .GetService<IViewTagAggregatorFactoryService>();
-                    var tagAggregator = tagAggregatorFactory.CreateTagAggregator<ITextMarkerTag>(
-                        view
-                    );
-                    var matchingTags = tagAggregator
-                        .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
-                        .Where(t => t.Tag.Type == tagId);
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var view = GetActiveTextView();
+                var tagAggregatorFactory = GetComponentModel()
+                    .GetService<IViewTagAggregatorFactoryService>();
+                var tagAggregator = tagAggregatorFactory.CreateTagAggregator<ITextMarkerTag>(view);
+                var matchingTags = tagAggregator
+                    .GetTags(new SnapshotSpan(view.TextSnapshot, 0, view.TextSnapshot.Length))
+                    .Where(t => t.Tag.Type == tagId);
 
-                    return matchingTags
-                        .Select(t => t.Span.GetSpans(view.TextBuffer).Single().Span.ToTextSpan())
-                        .SelectMany(t => new List<int> { t.Start, t.Length })
-                        .ToArray();
-                }
-            );
+                return matchingTags
+                    .Select(t => t.Span.GetSpans(view.TextBuffer).Single().Span.ToTextSpan())
+                    .SelectMany(t => new List<int> { t.Start, t.Length })
+                    .ToArray();
+            });
 
         public void SendExplicitFocus() =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var view = GetActiveVsTextView();
-                    view.SendExplicitFocus();
-                }
-            );
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var view = GetActiveVsTextView();
+                view.SendExplicitFocus();
+            });
     }
 }

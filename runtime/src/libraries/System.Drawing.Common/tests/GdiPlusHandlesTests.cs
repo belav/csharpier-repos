@@ -19,37 +19,35 @@ namespace System.Drawing.Tests
         public static void GraphicsDrawIconDoesNotLeakHandles()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    const int handleTreshold = 1;
+                    using Bitmap bmp = new(100, 100);
+                    using Icon ico = new(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico"));
+
+                    IntPtr hdc = Helpers.GetDC(Helpers.GetForegroundWindow());
+                    using Graphics graphicsFromHdc = Graphics.FromHdc(hdc);
+
+                    using Process currentProcess = Process.GetCurrentProcess();
+                    IntPtr processHandle = currentProcess.Handle;
+
+                    int initialHandles = Helpers.GetGuiResources(processHandle, 0);
+                    ValidateNoWin32Error(initialHandles);
+
+                    for (int i = 0; i < 5000; i++)
                     {
-                        const int handleTreshold = 1;
-                        using Bitmap bmp = new(100, 100);
-                        using Icon ico = new(Helpers.GetTestBitmapPath("16x16_one_entry_4bit.ico"));
-
-                        IntPtr hdc = Helpers.GetDC(Helpers.GetForegroundWindow());
-                        using Graphics graphicsFromHdc = Graphics.FromHdc(hdc);
-
-                        using Process currentProcess = Process.GetCurrentProcess();
-                        IntPtr processHandle = currentProcess.Handle;
-
-                        int initialHandles = Helpers.GetGuiResources(processHandle, 0);
-                        ValidateNoWin32Error(initialHandles);
-
-                        for (int i = 0; i < 5000; i++)
-                        {
-                            graphicsFromHdc.DrawIcon(ico, 100, 100);
-                        }
-
-                        int finalHandles = Helpers.GetGuiResources(processHandle, 0);
-                        ValidateNoWin32Error(finalHandles);
-
-                        Assert.InRange(
-                            finalHandles,
-                            initialHandles - handleTreshold,
-                            initialHandles + handleTreshold
-                        );
+                        graphicsFromHdc.DrawIcon(ico, 100, 100);
                     }
-                )
+
+                    int finalHandles = Helpers.GetGuiResources(processHandle, 0);
+                    ValidateNoWin32Error(finalHandles);
+
+                    Assert.InRange(
+                        finalHandles,
+                        initialHandles - handleTreshold,
+                        initialHandles + handleTreshold
+                    );
+                })
                 .Dispose();
         }
 

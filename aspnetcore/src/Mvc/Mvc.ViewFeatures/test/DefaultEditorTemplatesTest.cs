@@ -332,13 +332,11 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.NullDisplayText = "Null Display Text";
-                    dd.SimpleDisplayProperty = "Property1";
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "Null Display Text";
+                dd.SimpleDisplayProperty = "Property1";
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(provider: provider);
 
@@ -375,14 +373,12 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DefaultTemplatesUtilities.ObjectTemplateModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.HtmlEncode = htmlEncode;
-                    dd.NullDisplayText = "Null Display Text";
-                    dd.SimpleDisplayProperty = "Property1";
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.HtmlEncode = htmlEncode;
+                dd.NullDisplayText = "Null Display Text";
+                dd.SimpleDisplayProperty = "Property1";
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider: provider);
 
@@ -460,12 +456,10 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.HideSurroundingHtml = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.HideSurroundingHtml = true;
+            });
 
         var model = new DefaultTemplatesUtilities.ObjectTemplateModel
         {
@@ -561,12 +555,10 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<string>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.HideSurroundingHtml = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.HideSurroundingHtml = true;
+            });
 
         var html = DefaultTemplatesUtilities.GetHtmlHelper(model, provider: provider);
 
@@ -791,12 +783,10 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = templateName;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = templateName;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -857,12 +847,10 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = templateName;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = templateName;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -922,12 +910,10 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.TemplateHint = templateName;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.TemplateHint = templateName;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -988,12 +974,10 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForProperty<DefaultTemplatesUtilities.ObjectTemplateModel>("Property1")
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.TemplateHint = templateName;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.TemplateHint = templateName;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -1194,14 +1178,12 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DateTimeOffset>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = dataTypeName;
-                    dd.EditFormatString = editFormatString; // What [DataType] does for given type.
-                    dd.HasNonDefaultEditFormat = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = dataTypeName;
+                dd.EditFormatString = editFormatString; // What [DataType] does for given type.
+                dd.HasNonDefaultEditFormat = true;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -1288,14 +1270,12 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DateTimeOffset>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = dataTypeName;
-                    dd.EditFormatString = editFormatString; // What [DataType] does for given type.
-                    dd.HasNonDefaultEditFormat = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = dataTypeName;
+                dd.EditFormatString = editFormatString; // What [DataType] does for given type.
+                dd.HasNonDefaultEditFormat = true;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -1382,14 +1362,12 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DateTime>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = dataTypeName;
-                    dd.EditFormatString = editFormatString; // What [DataType] does for given type.
-                    dd.HasNonDefaultEditFormat = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = dataTypeName;
+                dd.EditFormatString = editFormatString; // What [DataType] does for given type.
+                dd.HasNonDefaultEditFormat = true;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -1474,14 +1452,12 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DateTime>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = dataTypeName;
-                    dd.EditFormatString = editFormatString; // What [DataType] does for given type.
-                    dd.HasNonDefaultEditFormat = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = dataTypeName;
+                dd.EditFormatString = editFormatString; // What [DataType] does for given type.
+                dd.HasNonDefaultEditFormat = true;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -1565,14 +1541,12 @@ public class DefaultEditorTemplatesTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<DateTimeOffset>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.DataTypeName = dataTypeName;
-                    dd.EditFormatString = "Formatted as {0:O}"; // What [DataType] does for given type.
-                    dd.HasNonDefaultEditFormat = true;
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.DataTypeName = dataTypeName;
+                dd.EditFormatString = "Formatted as {0:O}"; // What [DataType] does for given type.
+                dd.HasNonDefaultEditFormat = true;
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper(
             model,
@@ -1730,12 +1704,10 @@ public class DefaultEditorTemplatesTest
         var view = new Mock<IView>();
         view.Setup(v => v.RenderAsync(It.IsAny<ViewContext>()))
             .Returns(
-                Task.Run(
-                    () =>
-                    {
-                        throw new FormatException(expectedMessage);
-                    }
-                )
+                Task.Run(() =>
+                {
+                    throw new FormatException(expectedMessage);
+                })
             );
         var viewEngine = new Mock<ICompositeViewEngine>(MockBehavior.Strict);
         viewEngine

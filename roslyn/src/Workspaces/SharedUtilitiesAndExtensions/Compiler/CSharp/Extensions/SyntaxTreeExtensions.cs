@@ -113,12 +113,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions
 
             return token
                 .GetAncestors<TypeDeclarationSyntax>()
-                .Where(
-                    t =>
-                    {
-                        return BaseTypeDeclarationContainsPosition(t, position);
-                    }
-                );
+                .Where(t =>
+                {
+                    return BaseTypeDeclarationContainsPosition(t, position);
+                });
         }
 
         private static bool BaseTypeDeclarationContainsPosition(

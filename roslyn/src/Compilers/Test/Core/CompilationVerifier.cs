@@ -92,14 +92,12 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
                 }
 
                 return AssemblyMetadata.Create(
-                    images.Select(
-                        image =>
-                        {
-                            var metadata = ModuleMetadata.CreateFromImage(image);
-                            metadata.Module.PretendThereArentNoPiaLocalTypes();
-                            return metadata;
-                        }
-                    )
+                    images.Select(image =>
+                    {
+                        var metadata = ModuleMetadata.CreateFromImage(image);
+                        metadata.Module.PretendThereArentNoPiaLocalTypes();
+                        return metadata;
+                    })
                 );
             }
         }

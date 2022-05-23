@@ -245,12 +245,10 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
 
         Action<IServiceCollection> configureServices = s =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configureServices, endpoint1, endpoint2);
@@ -282,12 +280,10 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
 
         Action<IServiceCollection> configureServices = s =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.ConstraintMap["slugify"] = typeof(SlugifyParameterTransformer);
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configureServices, endpoint1, endpoint2);
@@ -432,12 +428,10 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
 
         Action<IServiceCollection> configure = (s) =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configure, endpoint);
@@ -464,12 +458,10 @@ public class DefaultLinkGeneratorTest : LinkGeneratorTestBase
 
         Action<IServiceCollection> configure = (s) =>
         {
-            s.Configure<RouteOptions>(
-                o =>
-                {
-                    o.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
-                }
-            );
+            s.Configure<RouteOptions>(o =>
+            {
+                o.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
+            });
         };
 
         var linkGenerator = CreateLinkGenerator(configure, endpoint);

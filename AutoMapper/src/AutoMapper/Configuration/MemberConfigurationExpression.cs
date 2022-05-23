@@ -118,48 +118,37 @@ namespace AutoMapper.Configuration
 
         public void MapFrom<TResult>(Func<TSource, TDestination, TResult> mappingFunction)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, ResolutionContext, TResult>
-                    > expr = (src, dest, destMember, ctxt) => mappingFunction(src, dest);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, TMember, ResolutionContext, TResult>> expr =
+                    (src, dest, destMember, ctxt) => mappingFunction(src, dest);
 
-                    pm.CustomMapFunction = expr;
-                }
-            );
+                pm.CustomMapFunction = expr;
+            });
         }
 
         public void MapFrom<TResult>(Func<TSource, TDestination, TMember, TResult> mappingFunction)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, ResolutionContext, TResult>
-                    > expr = (src, dest, destMember, ctxt) =>
-                        mappingFunction(src, dest, destMember);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, TMember, ResolutionContext, TResult>> expr =
+                    (src, dest, destMember, ctxt) => mappingFunction(src, dest, destMember);
 
-                    pm.CustomMapFunction = expr;
-                }
-            );
+                pm.CustomMapFunction = expr;
+            });
         }
 
         public void MapFrom<TResult>(
             Func<TSource, TDestination, TMember, ResolutionContext, TResult> mappingFunction
         )
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, ResolutionContext, TResult>
-                    > expr = (src, dest, destMember, ctxt) =>
-                        mappingFunction(src, dest, destMember, ctxt);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, TMember, ResolutionContext, TResult>> expr =
+                    (src, dest, destMember, ctxt) => mappingFunction(src, dest, destMember, ctxt);
 
-                    pm.CustomMapFunction = expr;
-                }
-            );
+                pm.CustomMapFunction = expr;
+            });
         }
 
         public void MapFrom<TSourceMember>(Expression<Func<TSource, TSourceMember>> mapExpression)
@@ -183,139 +172,121 @@ namespace AutoMapper.Configuration
             Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool> condition
         )
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
-                    > expr = (src, dest, srcMember, destMember, ctxt) =>
-                        condition(src, dest, srcMember, destMember, ctxt);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<
+                    Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
+                > expr = (src, dest, srcMember, destMember, ctxt) =>
+                    condition(src, dest, srcMember, destMember, ctxt);
 
-                    pm.Condition = expr;
-                }
-            );
+                pm.Condition = expr;
+            });
         }
 
         public void Condition(Func<TSource, TDestination, TMember, TMember, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
-                    > expr = (src, dest, srcMember, destMember, ctxt) =>
-                        condition(src, dest, srcMember, destMember);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<
+                    Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
+                > expr = (src, dest, srcMember, destMember, ctxt) =>
+                    condition(src, dest, srcMember, destMember);
 
-                    pm.Condition = expr;
-                }
-            );
+                pm.Condition = expr;
+            });
         }
 
         public void Condition(Func<TSource, TDestination, TMember, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
-                    > expr = (src, dest, srcMember, destMember, ctxt) =>
-                        condition(src, dest, srcMember);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<
+                    Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
+                > expr = (src, dest, srcMember, destMember, ctxt) =>
+                    condition(src, dest, srcMember);
 
-                    pm.Condition = expr;
-                }
-            );
+                pm.Condition = expr;
+            });
         }
 
         public void Condition(Func<TSource, TDestination, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
-                    > expr = (src, dest, srcMember, destMember, ctxt) => condition(src, dest);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<
+                    Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
+                > expr = (src, dest, srcMember, destMember, ctxt) => condition(src, dest);
 
-                    pm.Condition = expr;
-                }
-            );
+                pm.Condition = expr;
+            });
         }
 
         public void Condition(Func<TSource, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
-                    > expr = (src, dest, srcMember, destMember, ctxt) => condition(src);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<
+                    Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
+                > expr = (src, dest, srcMember, destMember, ctxt) => condition(src);
 
-                    pm.Condition = expr;
-                }
-            );
+                pm.Condition = expr;
+            });
         }
 
         public void PreCondition(Func<TSource, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => condition(src);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => condition(src);
 
-                    pm.PreCondition = expr;
-                }
-            );
+                pm.PreCondition = expr;
+            });
         }
 
         public void PreCondition(Func<ResolutionContext, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => condition(ctxt);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => condition(ctxt);
 
-                    pm.PreCondition = expr;
-                }
-            );
+                pm.PreCondition = expr;
+            });
         }
 
         public void PreCondition(Func<TSource, ResolutionContext, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => condition(src, ctxt);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => condition(src, ctxt);
 
-                    pm.PreCondition = expr;
-                }
-            );
+                pm.PreCondition = expr;
+            });
         }
 
         public void PreCondition(Func<TSource, TDestination, ResolutionContext, bool> condition)
         {
-            PropertyMapActions.Add(
-                pm =>
-                {
-                    Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
-                        src,
-                        dest,
-                        ctxt
-                    ) => condition(src, dest, ctxt);
+            PropertyMapActions.Add(pm =>
+            {
+                Expression<Func<TSource, TDestination, ResolutionContext, bool>> expr = (
+                    src,
+                    dest,
+                    ctxt
+                ) => condition(src, dest, ctxt);
 
-                    pm.PreCondition = expr;
-                }
-            );
+                pm.PreCondition = expr;
+            });
         }
 
         public void AddTransform(Expression<Func<TMember, TMember>> transformer) =>
@@ -334,16 +305,14 @@ namespace AutoMapper.Configuration
         public void Ignore() => Ignore(ignorePaths: true);
 
         public void Ignore(bool ignorePaths) =>
-            PropertyMapActions.Add(
-                pm =>
+            PropertyMapActions.Add(pm =>
+            {
+                pm.Ignored = true;
+                if (ignorePaths && pm.TypeMap.PathMaps.Count > 0)
                 {
-                    pm.Ignored = true;
-                    if (ignorePaths && pm.TypeMap.PathMaps.Count > 0)
-                    {
-                        pm.TypeMap.IgnorePaths(DestinationMember);
-                    }
+                    pm.TypeMap.IgnorePaths(DestinationMember);
                 }
-            );
+            });
 
         public void AllowNull() => SetAllowNull(true);
 

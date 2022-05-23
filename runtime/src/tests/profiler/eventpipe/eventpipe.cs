@@ -107,12 +107,10 @@ namespace EventPipeTests
                     };
 
                     Thread processingThread = new Thread(
-                        new ThreadStart(
-                            () =>
-                            {
-                                source.Process();
-                            }
-                        )
+                        new ThreadStart(() =>
+                        {
+                            source.Process();
+                        })
                     );
                     processingThread.Start();
 

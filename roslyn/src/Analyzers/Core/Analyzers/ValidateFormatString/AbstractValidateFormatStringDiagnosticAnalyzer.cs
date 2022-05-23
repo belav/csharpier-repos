@@ -76,24 +76,22 @@ namespace Microsoft.CodeAnalysis.ValidateFormatString
                 GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
             );
 
-            context.RegisterCompilationStartAction(
-                startContext =>
+            context.RegisterCompilationStartAction(startContext =>
+            {
+                var formatProviderType = startContext.Compilation.GetTypeByMetadataName(
+                    typeof(System.IFormatProvider).FullName!
+                );
+                if (formatProviderType == null)
                 {
-                    var formatProviderType = startContext.Compilation.GetTypeByMetadataName(
-                        typeof(System.IFormatProvider).FullName!
-                    );
-                    if (formatProviderType == null)
-                    {
-                        return;
-                    }
-
-                    var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
-                    startContext.RegisterSyntaxNodeAction(
-                        c => AnalyzeNode(c, formatProviderType),
-                        syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.InvocationExpression)
-                    );
+                    return;
                 }
-            );
+
+                var syntaxKinds = GetSyntaxFacts().SyntaxKinds;
+                startContext.RegisterSyntaxNodeAction(
+                    c => AnalyzeNode(c, formatProviderType),
+                    syntaxKinds.Convert<TSyntaxKind>(syntaxKinds.InvocationExpression)
+                );
+            });
         }
 
         [PerformanceSensitive(

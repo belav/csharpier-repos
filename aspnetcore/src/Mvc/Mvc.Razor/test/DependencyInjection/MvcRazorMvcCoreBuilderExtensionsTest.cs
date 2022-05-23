@@ -58,12 +58,10 @@ public class MvcRazorMvcCoreBuilderExtensionsTest
         var services = new ServiceCollection();
         var builder = services
             .AddMvcCore()
-            .ConfigureApplicationPartManager(
-                manager =>
-                {
-                    manager.ApplicationParts.Add(new TestApplicationPart());
-                }
-            );
+            .ConfigureApplicationPartManager(manager =>
+            {
+                manager.ApplicationParts.Add(new TestApplicationPart());
+            });
 
         // Act
         builder.AddTagHelpersAsServices();

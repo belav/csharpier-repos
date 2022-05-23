@@ -185,26 +185,24 @@ namespace Microsoft.CodeAnalysis.Host
             // set the background analysis scope to only analyze active files.
             var compilationTasks = allProjectIds
                 .Select(solution.GetProject)
-                .Select(
-                    async p =>
+                .Select(async p =>
+                {
+                    if (p is null)
+                        return null;
+
+                    if (
+                        SolutionCrawlerOptions.GetBackgroundAnalysisScope(p)
+                            == BackgroundAnalysisScope.ActiveFile
+                        && p.Id != activeProject
+                    )
                     {
-                        if (p is null)
-                            return null;
-
-                        if (
-                            SolutionCrawlerOptions.GetBackgroundAnalysisScope(p)
-                                == BackgroundAnalysisScope.ActiveFile
-                            && p.Id != activeProject
-                        )
-                        {
-                            // For open files with Active File analysis scope, only build the compilation if the project is
-                            // active.
-                            return null;
-                        }
-
-                        return await p.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                        // For open files with Active File analysis scope, only build the compilation if the project is
+                        // active.
+                        return null;
                     }
-                )
+
+                    return await p.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+                })
                 .ToArray();
             return Task.WhenAll(compilationTasks)
                 .SafeContinueWith(

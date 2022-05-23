@@ -4188,13 +4188,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.NonGenericOptions(nameof(NonGenericOptions2)),
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            serviceScope.ServiceProvider.GetService<NonGenericOptions1>();
-                            serviceScope.ServiceProvider.GetService<NonGenericOptions2>();
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        serviceScope.ServiceProvider.GetService<NonGenericOptions1>();
+                        serviceScope.ServiceProvider.GetService<NonGenericOptions2>();
+                    })
                     .Message
             );
         }

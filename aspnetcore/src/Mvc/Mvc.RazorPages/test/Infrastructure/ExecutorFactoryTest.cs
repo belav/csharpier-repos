@@ -255,12 +255,10 @@ public class ExecutorFactoryTest
 
         public async Task VoidTaskReturningHandler()
         {
-            await Task.Run(
-                () =>
-                {
-                    SideEffects = true;
-                }
-            );
+            await Task.Run(() =>
+            {
+                SideEffects = true;
+            });
         }
 
         public Task<IActionResult> GenericTaskHandler() =>
@@ -300,12 +298,10 @@ public class ExecutorFactoryTest
 
         public async Task VoidTaskReturningHandler()
         {
-            await Task.Run(
-                () =>
-                {
-                    SideEffects = true;
-                }
-            );
+            await Task.Run(() =>
+            {
+                SideEffects = true;
+            });
         }
 
         public Task<IActionResult> GenericTaskHandler() =>

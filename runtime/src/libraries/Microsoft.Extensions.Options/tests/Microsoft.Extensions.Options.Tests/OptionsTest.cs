@@ -348,12 +348,10 @@ namespace Microsoft.Extensions.Options.Tests
         public void Options_CanOverrideForSpecificTOptions()
         {
             var services = new ServiceCollection();
-            services.Configure<FakeOptions>(
-                options =>
-                {
-                    options.Message = "Initial value";
-                }
-            );
+            services.Configure<FakeOptions>(options =>
+            {
+                options.Message = "Initial value";
+            });
 
             services.AddSingleton(Options.Create(new FakeOptions { Message = "Override" }));
 

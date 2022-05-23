@@ -63,16 +63,14 @@ public class InstrumentationPassIntegrationTest : IntegrationTestBase
             )
         };
 
-        var engine = CreateProjectEngine(
-            b =>
-            {
-                b.AddTagHelpers(descriptors);
-                b.Features.Add(new InstrumentationPass());
+        var engine = CreateProjectEngine(b =>
+        {
+            b.AddTagHelpers(descriptors);
+            b.Features.Add(new InstrumentationPass());
 
-                // This test includes templates
-                b.AddTargetExtension(new TemplateTargetExtension());
-            }
-        );
+            // This test includes templates
+            b.AddTargetExtension(new TemplateTargetExtension());
+        });
 
         var projectItem = CreateProjectItemFromFile();
 

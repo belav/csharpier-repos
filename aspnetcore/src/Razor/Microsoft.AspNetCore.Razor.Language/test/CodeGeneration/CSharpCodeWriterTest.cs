@@ -402,13 +402,11 @@ public class CSharpCodeWriterTest
     public void CSharpCodeWriter_RespectTabSetting()
     {
         // Arrange
-        var options = RazorCodeGenerationOptions.Create(
-            o =>
-            {
-                o.IndentWithTabs = true;
-                o.IndentSize = 4;
-            }
-        );
+        var options = RazorCodeGenerationOptions.Create(o =>
+        {
+            o.IndentWithTabs = true;
+            o.IndentSize = 4;
+        });
 
         var writer = new CodeWriter(Environment.NewLine, options);
 
@@ -439,13 +437,11 @@ public class CSharpCodeWriterTest
     public void CSharpCodeWriter_RespectSpaceSetting()
     {
         // Arrange
-        var options = RazorCodeGenerationOptions.Create(
-            o =>
-            {
-                o.IndentWithTabs = false;
-                o.IndentSize = 4;
-            }
-        );
+        var options = RazorCodeGenerationOptions.Create(o =>
+        {
+            o.IndentWithTabs = false;
+            o.IndentSize = 4;
+        });
 
         var writer = new CodeWriter(Environment.NewLine, options);
 

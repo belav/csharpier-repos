@@ -172,13 +172,11 @@ public class WebAssemblyAuthenticationTests : ServerTestBase<AspNetSiteServerFix
 
         var claims = Browser
             .FindElements(By.CssSelector("p.claim"))
-            .Select(
-                e =>
-                {
-                    var pair = e.Text.Split(":");
-                    return (pair[0].Trim(), pair[1].Trim());
-                }
-            )
+            .Select(e =>
+            {
+                var pair = e.Text.Split(":");
+                return (pair[0].Trim(), pair[1].Trim());
+            })
             .Where(c => !new[] { "s_hash", "auth_time", "sid", "sub" }.Contains(c.Item1))
             .OrderBy(o => o.Item1)
             .ToArray();

@@ -54,18 +54,16 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         var (server, _) = serverAndNames[i];
                         int serverIndex = i;
                         tasks.Add(
-                            Task.Run(
-                                async () =>
-                                {
-                                    Stream stream = await server.AcceptAsync();
-                                    IpcAdvertise advertise = IpcAdvertise.Parse(stream);
-                                    lock (sync)
-                                        advertisements.Add(advertise);
-                                    Logger.logger.Log(
-                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                    );
-                                }
-                            )
+                            Task.Run(async () =>
+                            {
+                                Stream stream = await server.AcceptAsync();
+                                IpcAdvertise advertise = IpcAdvertise.Parse(stream);
+                                lock (sync)
+                                    advertisements.Add(advertise);
+                                Logger.logger.Log(
+                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                );
+                            })
                         );
                     }
 
@@ -150,19 +148,17 @@ namespace Tracing.Tests.DiagnosticPortValidation
 
                     var mre = new ManualResetEvent(false);
 
-                    Task readerTask = Task.Run(
-                        async () =>
-                        {
-                            Logger.logger.Log($"Creating EventPipeEventSource");
-                            using var source = new EventPipeEventSource(eventStream);
-                            var parser = new ClrPrivateTraceEventParser(source);
-                            parser.StartupEEStartupStart += (eventData) => mre.Set();
-                            Logger.logger.Log($"Created EventPipeEventSource");
-                            Logger.logger.Log($"Starting processing");
-                            await Task.Run(() => source.Process());
-                            Logger.logger.Log($"Finished processing");
-                        }
-                    );
+                    Task readerTask = Task.Run(async () =>
+                    {
+                        Logger.logger.Log($"Creating EventPipeEventSource");
+                        using var source = new EventPipeEventSource(eventStream);
+                        var parser = new ClrPrivateTraceEventParser(source);
+                        parser.StartupEEStartupStart += (eventData) => mre.Set();
+                        Logger.logger.Log($"Created EventPipeEventSource");
+                        Logger.logger.Log($"Starting processing");
+                        await Task.Run(() => source.Process());
+                        Logger.logger.Log($"Finished processing");
+                    });
 
                     for (int i = 0; i < s_NumberOfPorts; i++)
                     {
@@ -269,19 +265,17 @@ namespace Tracing.Tests.DiagnosticPortValidation
 
                     var mre = new ManualResetEvent(false);
 
-                    Task readerTask = Task.Run(
-                        async () =>
-                        {
-                            Logger.logger.Log($"Creating EventPipeEventSource");
-                            using var source = new EventPipeEventSource(eventStream);
-                            var parser = new ClrPrivateTraceEventParser(source);
-                            parser.StartupEEStartupStart += (eventData) => mre.Set();
-                            Logger.logger.Log($"Created EventPipeEventSource");
-                            Logger.logger.Log($"Starting processing");
-                            await Task.Run(() => source.Process());
-                            Logger.logger.Log($"Finished processing");
-                        }
-                    );
+                    Task readerTask = Task.Run(async () =>
+                    {
+                        Logger.logger.Log($"Creating EventPipeEventSource");
+                        using var source = new EventPipeEventSource(eventStream);
+                        var parser = new ClrPrivateTraceEventParser(source);
+                        parser.StartupEEStartupStart += (eventData) => mre.Set();
+                        Logger.logger.Log($"Created EventPipeEventSource");
+                        Logger.logger.Log($"Starting processing");
+                        await Task.Run(() => source.Process());
+                        Logger.logger.Log($"Finished processing");
+                    });
 
                     fSuccess &= !mre.WaitOne(0);
                     Logger.logger.Log($"Runtime HAS NOT resumed (expects: true): {fSuccess}");
@@ -404,18 +398,16 @@ namespace Tracing.Tests.DiagnosticPortValidation
                         var (server, _) = serverAndNames[i];
                         int serverIndex = i;
                         tasks.Add(
-                            Task.Run(
-                                async () =>
-                                {
-                                    Stream stream = await server.AcceptAsync();
-                                    IpcAdvertise advertise = IpcAdvertise.Parse(stream);
-                                    lock (sync)
-                                        advertisements.Add(advertise);
-                                    Logger.logger.Log(
-                                        $"Server {serverIndex} got advertise {advertise.ToString()}"
-                                    );
-                                }
-                            )
+                            Task.Run(async () =>
+                            {
+                                Stream stream = await server.AcceptAsync();
+                                IpcAdvertise advertise = IpcAdvertise.Parse(stream);
+                                lock (sync)
+                                    advertisements.Add(advertise);
+                                Logger.logger.Log(
+                                    $"Server {serverIndex} got advertise {advertise.ToString()}"
+                                );
+                            })
                         );
                     }
 

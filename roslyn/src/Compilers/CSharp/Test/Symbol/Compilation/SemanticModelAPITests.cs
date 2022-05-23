@@ -713,13 +713,11 @@ class Program
             var program = staticProgramField.Declaration.Type;
             var model = compilation.GetSemanticModel(tree1);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    // tree2 not in the compilation
-                    var lookup = model.GetSymbolInfo(program);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // tree2 not in the compilation
+                var lookup = model.GetSymbolInfo(program);
+            });
         }
 
         [Fact]

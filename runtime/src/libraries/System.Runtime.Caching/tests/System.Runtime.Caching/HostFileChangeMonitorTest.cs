@@ -53,45 +53,35 @@ namespace MonoTests.System.Runtime.Caching
             string relPath = Path.Combine("relative", "file", "path");
             var paths = new List<string> { relPath };
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    new HostFileChangeMonitor(paths);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                new HostFileChangeMonitor(paths);
+            });
 
             paths.Clear();
             paths.Add(null);
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    new HostFileChangeMonitor(paths);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                new HostFileChangeMonitor(paths);
+            });
 
             paths.Clear();
             paths.Add(string.Empty);
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    new HostFileChangeMonitor(paths);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                new HostFileChangeMonitor(paths);
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    new HostFileChangeMonitor(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                new HostFileChangeMonitor(null);
+            });
 
             paths.Clear();
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    new HostFileChangeMonitor(paths);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                new HostFileChangeMonitor(paths);
+            });
         }
 
         [Fact]
@@ -121,12 +111,10 @@ namespace MonoTests.System.Runtime.Caching
             // at System.Runtime.Caching.HostFileChangeMonitor.InitDisposableMembers()
             // at System.Runtime.Caching.HostFileChangeMonitor..ctor(IList`1 filePaths)
             // at MonoTests.System.Runtime.Caching.HostFileChangeMonitorTest.Constructor_MissingFiles() in c:\users\grendel\documents\visual studio 2010\Projects\System.Runtime.Caching.Test\System.Runtime.Caching.Test\System.Runtime.Caching\HostFileChangeMonitorTest.cs:line 68
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    new HostFileChangeMonitor(paths);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                new HostFileChangeMonitor(paths);
+            });
 
             missingFile = Path.GetFullPath(Guid.NewGuid().ToString("N"));
 

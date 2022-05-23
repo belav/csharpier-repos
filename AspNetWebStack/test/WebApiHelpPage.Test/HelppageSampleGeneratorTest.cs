@@ -382,12 +382,10 @@ namespace WebApiHelpPageWebHost.UnitTest
                             It.IsAny<TransportContext>()
                         )
                 )
-                .Returns(
-                    () =>
-                    {
-                        throw new ApplicationException("formatter failed.");
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new ApplicationException("formatter failed.");
+                });
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             InvalidSample sampleNotProvided = Assert.IsType<InvalidSample>(
                 sampleGenerator.WriteSampleObjectUsingFormatter(
@@ -509,12 +507,10 @@ namespace WebApiHelpPageWebHost.UnitTest
                             It.IsAny<TransportContext>()
                         )
                 )
-                .Returns(
-                    () =>
-                    {
-                        throw new AggregateException(new FormatException("Invalid format."));
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new AggregateException(new FormatException("Invalid format."));
+                });
             HelpPageSampleGenerator sampleGenerator = new HelpPageSampleGenerator();
             InvalidSample sampleNotProvided = Assert.IsType<InvalidSample>(
                 sampleGenerator.WriteSampleObjectUsingFormatter(

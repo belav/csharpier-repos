@@ -103,57 +103,52 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 _serviceProvider = serviceProvider;
                 _threadingContext = threadingContext;
 
-                _loadHubClientPackage = _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        // Use the disposal token, since the caller's cancellation token will apply instead to the
-                        // JoinAsync operation in GetProgressStageStatusAsync.
-                        await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true,
-                            _threadingContext.DisposalToken
-                        );
+                _loadHubClientPackage = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    // Use the disposal token, since the caller's cancellation token will apply instead to the
+                    // JoinAsync operation in GetProgressStageStatusAsync.
+                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        _threadingContext.DisposalToken
+                    );
 
-                        // Make sure the HubClient package is loaded, since we rely on it for proffered OOP services
-                        var shell = await _serviceProvider
-                            .GetServiceAsync<SVsShell, IVsShell7>()
-                            .ConfigureAwait(true);
-                        Assumes.Present(shell);
+                    // Make sure the HubClient package is loaded, since we rely on it for proffered OOP services
+                    var shell = await _serviceProvider
+                        .GetServiceAsync<SVsShell, IVsShell7>()
+                        .ConfigureAwait(true);
+                    Assumes.Present(shell);
 
-                        await shell.LoadPackageAsync(Guids.GlobalHubClientPackageGuid);
-                    }
-                );
+                    await shell.LoadPackageAsync(Guids.GlobalHubClientPackageGuid);
+                });
 
-                _progressStageStatus = _threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
-                    {
-                        // pre-emptively make sure event is subscribed. if APIs are called before it is done, calls will be blocked
-                        // until event subscription is done
-                        using var asyncToken = listener.BeginAsyncOperation(
-                            "StatusChanged_EventSubscription"
-                        );
+                _progressStageStatus = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    // pre-emptively make sure event is subscribed. if APIs are called before it is done, calls will be blocked
+                    // until event subscription is done
+                    using var asyncToken = listener.BeginAsyncOperation(
+                        "StatusChanged_EventSubscription"
+                    );
 
-                        await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true,
-                            _threadingContext.DisposalToken
-                        );
-                        var service = await serviceProvider
-                            .GetServiceAsync<
-                                SVsOperationProgress,
-                                IVsOperationProgressStatusService
-                            >(throwOnFailure: false)
-                            .ConfigureAwait(true);
-                        if (service is null)
-                            return null;
+                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true,
+                        _threadingContext.DisposalToken
+                    );
+                    var service = await serviceProvider
+                        .GetServiceAsync<SVsOperationProgress, IVsOperationProgressStatusService>(
+                            throwOnFailure: false
+                        )
+                        .ConfigureAwait(true);
+                    if (service is null)
+                        return null;
 
-                        var status = service.GetStageStatusForSolutionLoad(
-                            CommonOperationProgressStageIds.Intellisense
-                        );
-                        status.PropertyChanged += (_, _) =>
-                            StatusChanged?.Invoke(this, EventArgs.Empty);
+                    var status = service.GetStageStatusForSolutionLoad(
+                        CommonOperationProgressStageIds.Intellisense
+                    );
+                    status.PropertyChanged += (_, _) =>
+                        StatusChanged?.Invoke(this, EventArgs.Empty);
 
-                        return status;
-                    }
-                );
+                    return status;
+                });
             }
 
             // unfortunately, IVsOperationProgressStatusService requires UI thread to let project system to proceed to next stages.

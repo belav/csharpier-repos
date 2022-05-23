@@ -563,12 +563,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.AddFirst("");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.AddFirst("");
+            });
             element.Verify();
         }
 
@@ -590,12 +588,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.AddFirst(child);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.AddFirst(child);
+            });
             element.Verify();
             Assert.Null(element.Element("Add"));
         }
@@ -924,12 +920,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.Add("");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.Add("");
+            });
             element.Verify();
         }
 
@@ -951,12 +945,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.Add(child);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.Add(child);
+            });
             element.Verify();
             Assert.Null(element.Element("Add"));
         }
@@ -979,12 +971,10 @@ namespace CoreXml.Test.XLinq.FunctionalTests.EventsTests
                 }
             );
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    element.Add(child);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                element.Add(child);
+            });
             element.Verify();
             Assert.Null(element.Attribute("Add"));
         }

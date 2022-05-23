@@ -37,27 +37,25 @@ public static class Program
             )
         )
         {
-            builder.UseHttpSys(
-                options =>
-                {
-                    if (
-                        string.Equals(
-                            builder.GetSetting("environment")
-                                ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
-                            "NtlmAuthentication",
-                            StringComparison.OrdinalIgnoreCase
-                        )
+            builder.UseHttpSys(options =>
+            {
+                if (
+                    string.Equals(
+                        builder.GetSetting("environment")
+                            ?? Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT"),
+                        "NtlmAuthentication",
+                        StringComparison.OrdinalIgnoreCase
                     )
-                    {
-                        // Set up NTLM authentication for HttpSys as follows.
-                        // For IIS and IISExpress use inetmgr to setup NTLM authentication on the application or
-                        // modify the applicationHost.config to enable NTLM.
-                        options.Authentication.AllowAnonymous = true;
-                        options.Authentication.Schemes =
-                            AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM;
-                    }
+                )
+                {
+                    // Set up NTLM authentication for HttpSys as follows.
+                    // For IIS and IISExpress use inetmgr to setup NTLM authentication on the application or
+                    // modify the applicationHost.config to enable NTLM.
+                    options.Authentication.AllowAnonymous = true;
+                    options.Authentication.Schemes =
+                        AuthenticationSchemes.Negotiate | AuthenticationSchemes.NTLM;
                 }
-            );
+            });
         }
 
         var host = builder.Build();

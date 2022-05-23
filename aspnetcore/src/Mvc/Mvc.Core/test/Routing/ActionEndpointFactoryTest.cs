@@ -26,12 +26,10 @@ public class ActionEndpointFactoryTest
 
         var routeOptionsSetup = new MvcCoreRouteOptionsSetup();
         serviceCollection.Configure<RouteOptions>(routeOptionsSetup.Configure);
-        serviceCollection.AddRouting(
-            options =>
-            {
-                options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
-            }
-        );
+        serviceCollection.AddRouting(options =>
+        {
+            options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
+        });
 
         Services = serviceCollection.BuildServiceProvider();
         Factory = new ActionEndpointFactory(

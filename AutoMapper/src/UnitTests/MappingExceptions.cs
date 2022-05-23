@@ -18,12 +18,10 @@ namespace AutoMapper.UnitTests.MappingExceptions
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+            });
 
         [Fact]
         public void Should_provide_a_contextual_exception()
@@ -71,13 +69,11 @@ namespace AutoMapper.UnitTests.MappingExceptions
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>()
-                        .ForPath(d => d.SubValue.Value, opt => opt.MapFrom(src => src.Value));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>()
+                    .ForPath(d => d.SubValue.Value, opt => opt.MapFrom(src => src.Value));
+            });
 
         [Fact]
         public void Should_provide_a_contextual_exception()

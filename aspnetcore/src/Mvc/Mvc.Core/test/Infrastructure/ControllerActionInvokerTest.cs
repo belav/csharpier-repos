@@ -579,16 +579,14 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         filter.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
         filter
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
-            .Callback<ActionExecutedContext>(
-                c =>
-                {
-                    context = c;
+            .Callback<ActionExecutedContext>(c =>
+            {
+                context = c;
 
-                    // Handle the exception so the test doesn't throw.
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
-                }
-            )
+                // Handle the exception so the test doesn't throw.
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object, exception: Exception);
@@ -615,27 +613,23 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         filter1.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
         filter1
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
-            .Callback<ActionExecutedContext>(
-                c =>
-                {
-                    context = c;
+            .Callback<ActionExecutedContext>(c =>
+            {
+                context = c;
 
-                    // Handle the exception so the test doesn't throw.
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
-                }
-            )
+                // Handle the exception so the test doesn't throw.
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var filter2 = new Mock<IActionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>()))
-            .Callback<ActionExecutingContext>(
-                c =>
-                {
-                    throw exception;
-                }
-            )
+            .Callback<ActionExecutingContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object });
@@ -686,12 +680,10 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
         filter2.Setup(f => f.OnActionExecuting(It.IsAny<ActionExecutingContext>())).Verifiable();
         filter2
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
-            .Callback<ActionExecutedContext>(
-                c =>
-                {
-                    throw exception;
-                }
-            )
+            .Callback<ActionExecutedContext>(c =>
+            {
+                throw exception;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new IFilterMetadata[] { filter1.Object, filter2.Object });
@@ -731,16 +723,14 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
             .Verifiable();
         actionFilter
             .Setup(f => f.OnActionExecuted(It.IsAny<ActionExecutedContext>()))
-            .Callback<ActionExecutedContext>(
-                c =>
-                {
-                    // Handle the exception so the test doesn't throw.
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
+            .Callback<ActionExecutedContext>(c =>
+            {
+                // Handle the exception so the test doesn't throw.
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
 
-                    c.Result = result.Object;
-                }
-            )
+                c.Result = result.Object;
+            })
             .Verifiable();
 
         var resultFilter = new Mock<IResultFilter>(MockBehavior.Strict);
@@ -2039,12 +2029,10 @@ public class ControllerActionInvokerTest : CommonResourceInvokerTest
 
         formatter
             .Setup(f => f.WriteAsync(It.IsAny<OutputFormatterWriteContext>()))
-            .Returns<OutputFormatterWriteContext>(
-                async c =>
-                {
-                    await c.HttpContext.Response.WriteAsync(c.Object.ToString());
-                }
-            );
+            .Returns<OutputFormatterWriteContext>(async c =>
+            {
+                await c.HttpContext.Response.WriteAsync(c.Object.ToString());
+            });
 
         options.Value.OutputFormatters.Add(formatter.Object);
 

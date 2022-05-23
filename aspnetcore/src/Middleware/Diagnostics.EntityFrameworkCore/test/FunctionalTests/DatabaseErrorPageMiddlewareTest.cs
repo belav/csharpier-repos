@@ -29,20 +29,18 @@ public class DatabaseErrorPageMiddlewareTest
     public async Task Successful_requests_pass_thru()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                        .Configure(
-                            app =>
-                                app.UseDatabaseErrorPage()
+                    .Configure(
+                        app =>
+                            app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
-                                    .UseMiddleware<SuccessMiddleware>()
-                        );
-                }
-            )
+                                .UseMiddleware<SuccessMiddleware>()
+                    );
+            })
             .Build();
 
         await host.StartAsync();
@@ -70,20 +68,18 @@ public class DatabaseErrorPageMiddlewareTest
     public async Task Non_database_exceptions_pass_thru()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
 #pragma warning disable CS0618 // Type or member is obsolete
-                        .Configure(
-                            app =>
-                                app.UseDatabaseErrorPage()
+                    .Configure(
+                        app =>
+                            app.UseDatabaseErrorPage()
 #pragma warning restore CS0618 // Type or member is obsolete
-                                    .UseMiddleware<ExceptionMiddleware>()
-                        );
-                }
-            )
+                                .UseMiddleware<ExceptionMiddleware>()
+                    );
+            })
             .Build();
 
         await host.StartAsync();
@@ -433,39 +429,31 @@ public class DatabaseErrorPageMiddlewareTest
         using (var database = SqlTestStore.CreateScratch())
         {
             using var host = new HostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseTestServer()
-                            .Configure(
-                                app =>
-                                {
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(app =>
+                        {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                    app.UseDatabaseErrorPage(
-                                        new DatabaseErrorPageOptions
-                                        {
-                                            MigrationsEndPointPath = new PathString(
-                                                migrationsEndpoint
-                                            )
-                                        }
-                                    );
-#pragma warning restore CS0618 // Type or member is obsolete
-
-                                    app.UseMiddleware<PendingMigrationsMiddleware>();
-                                }
-                            )
-                            .ConfigureServices(
-                                services =>
+                            app.UseDatabaseErrorPage(
+                                new DatabaseErrorPageOptions
                                 {
-                                    services.AddDbContext<BloggingContextWithMigrations>(
-                                        optionsBuilder =>
-                                            optionsBuilder.UseSqlite(database.ConnectionString)
-                                    );
+                                    MigrationsEndPointPath = new PathString(migrationsEndpoint)
                                 }
                             );
-                    }
-                )
+#pragma warning restore CS0618 // Type or member is obsolete
+
+                            app.UseMiddleware<PendingMigrationsMiddleware>();
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddDbContext<BloggingContextWithMigrations>(
+                                optionsBuilder =>
+                                    optionsBuilder.UseSqlite(database.ConnectionString)
+                            );
+                        });
+                })
                 .Build();
 
             await host.StartAsync();
@@ -494,27 +482,23 @@ public class DatabaseErrorPageMiddlewareTest
         var logProvider = new TestLoggerProvider();
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                app.UseDatabaseErrorPage();
+                        app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
-                                app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
+                        app.UseMiddleware<ContextNotRegisteredInServicesMiddleware>();
 #pragma warning disable CS0618 // Type or member is obsolete
-                                app.ApplicationServices
-                                    .GetService<ILoggerFactory>()
-                                    .AddProvider(logProvider);
+                        app.ApplicationServices
+                            .GetService<ILoggerFactory>()
+                            .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
-                            }
-                        );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -672,41 +656,34 @@ public class DatabaseErrorPageMiddlewareTest
     ) where TContext : DbContext
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                app.UseDatabaseErrorPage();
+                        app.UseDatabaseErrorPage();
 #pragma warning restore CS0618 // Type or member is obsolete
 
-                                app.UseMiddleware<TMiddleware>();
+                        app.UseMiddleware<TMiddleware>();
 
-                                if (logProvider != null)
-                                {
+                        if (logProvider != null)
+                        {
 #pragma warning disable CS0618 // Type or member is obsolete
-                                    app.ApplicationServices
-                                        .GetService<ILoggerFactory>()
-                                        .AddProvider(logProvider);
+                            app.ApplicationServices
+                                .GetService<ILoggerFactory>()
+                                .AddProvider(logProvider);
 #pragma warning restore CS0618 // Type or member is obsolete
-                                }
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddDbContext<TContext>(
-                                    optionsBuilder =>
-                                        optionsBuilder.UseSqlite(database.ConnectionString)
-                                );
-                            }
+                        }
+                    })
+                    .ConfigureServices(services =>
+                    {
+                        services.AddDbContext<TContext>(
+                            optionsBuilder => optionsBuilder.UseSqlite(database.ConnectionString)
                         );
-                }
-            )
+                    });
+            })
             .Build();
 
         await host.StartAsync();

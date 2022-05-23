@@ -59,14 +59,12 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyRemainderString(Print(tempByteArray1) + Print(tempByteArray2) + "bRemainder");
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyRemainderString(
-                            Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder"
-                        );
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyRemainderString(
+                        Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder"
+                    );
+                });
             }
 
             // Remainder Method - One small BigIntegers and zero
@@ -76,14 +74,12 @@ namespace System.Numerics.Tests
                 tempByteArray2 = new byte[] { 0 };
                 VerifyRemainderString(Print(tempByteArray1) + Print(tempByteArray2) + "bRemainder");
 
-                Assert.Throws<DivideByZeroException>(
-                    () =>
-                    {
-                        VerifyRemainderString(
-                            Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder"
-                        );
-                    }
-                );
+                Assert.Throws<DivideByZeroException>(() =>
+                {
+                    VerifyRemainderString(
+                        Print(tempByteArray2) + Print(tempByteArray1) + "bRemainder"
+                    );
+                });
             }
         }
 

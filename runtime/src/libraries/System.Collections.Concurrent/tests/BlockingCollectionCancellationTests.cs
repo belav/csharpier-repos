@@ -118,33 +118,31 @@ namespace System.Collections.Concurrent.Tests
                 // A delay could be used to attempt to force the right timing, but not for an inner loop test.
                 CancellationTokenSource cs = new CancellationTokenSource();
                 Task.Run(() => cs.Cancel());
-                Assert.Throws<OperationCanceledException>(
-                    () =>
+                Assert.Throws<OperationCanceledException>(() =>
+                {
+                    switch (test)
                     {
-                        switch (test)
-                        {
-                            case 0:
-                                BlockingCollection<int>.AddToAny(new[] { bc1, bc2 }, 42, cs.Token);
-                                break;
-                            case 1:
-                                BlockingCollection<int>.TryAddToAny(
-                                    new[] { bc1, bc2 },
-                                    42,
-                                    Timeout.Infinite,
-                                    cs.Token
-                                );
-                                break;
-                            case 2:
-                                BlockingCollection<int>.TryAddToAny(
-                                    new[] { bc1, bc2 },
-                                    42,
-                                    (int)TimeSpan.FromDays(1).TotalMilliseconds,
-                                    cs.Token
-                                );
-                                break;
-                        }
+                        case 0:
+                            BlockingCollection<int>.AddToAny(new[] { bc1, bc2 }, 42, cs.Token);
+                            break;
+                        case 1:
+                            BlockingCollection<int>.TryAddToAny(
+                                new[] { bc1, bc2 },
+                                42,
+                                Timeout.Infinite,
+                                cs.Token
+                            );
+                            break;
+                        case 2:
+                            BlockingCollection<int>.TryAddToAny(
+                                new[] { bc1, bc2 },
+                                42,
+                                (int)TimeSpan.FromDays(1).TotalMilliseconds,
+                                cs.Token
+                            );
+                            break;
                     }
-                );
+                });
                 Assert.True(cs.IsCancellationRequested);
             }
         }
@@ -158,16 +156,14 @@ namespace System.Collections.Concurrent.Tests
 
             var cs = new CancellationTokenSource();
             int total = 0;
-            Assert.Throws<OperationCanceledException>(
-                () =>
+            Assert.Throws<OperationCanceledException>(() =>
+            {
+                foreach (int item in bc.GetConsumingEnumerable(cs.Token))
                 {
-                    foreach (int item in bc.GetConsumingEnumerable(cs.Token))
-                    {
-                        total += item;
-                        cs.Cancel();
-                    }
+                    total += item;
+                    cs.Cancel();
                 }
-            );
+            });
             Assert.True(cs.IsCancellationRequested);
             Assert.Equal(expected: 1, actual: total);
         }

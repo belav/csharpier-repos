@@ -39,15 +39,13 @@ public class StartupBlockingOnStart : StartupBase
         var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseConfiguration(config)
-                        .UseKestrel()
-                        .UseStartup<StartupBlockingOnStart>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseConfiguration(config)
+                    .UseKestrel()
+                    .UseStartup<StartupBlockingOnStart>();
+            })
             .Build();
 
         using (host)

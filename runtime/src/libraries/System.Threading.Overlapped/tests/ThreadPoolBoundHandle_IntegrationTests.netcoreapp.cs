@@ -18,14 +18,12 @@ public partial class ThreadPoolBoundHandleTests
         long changeInCompletedWorkItemCount = 0;
         try
         {
-            ThreadTestHelpers.WaitForCondition(
-                () =>
-                {
-                    changeInCompletedWorkItemCount =
-                        ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount;
-                    return changeInCompletedWorkItemCount >= 2;
-                }
-            );
+            ThreadTestHelpers.WaitForCondition(() =>
+            {
+                changeInCompletedWorkItemCount =
+                    ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount;
+                return changeInCompletedWorkItemCount >= 2;
+            });
         }
         catch (Exception ex)
         {

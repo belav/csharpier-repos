@@ -201,24 +201,20 @@ public static class ModelBindingTestHelper
         }
         else if (updateOptions != null || mvcOptions != null)
         {
-            serviceCollection.AddSingleton(
-                services =>
-                {
-                    var optionsAccessor = services.GetRequiredService<IOptions<MvcOptions>>();
-                    return TestModelMetadataProvider.CreateProvider(
-                        optionsAccessor.Value.ModelMetadataDetailsProviders
-                    );
-                }
-            );
+            serviceCollection.AddSingleton(services =>
+            {
+                var optionsAccessor = services.GetRequiredService<IOptions<MvcOptions>>();
+                return TestModelMetadataProvider.CreateProvider(
+                    optionsAccessor.Value.ModelMetadataDetailsProviders
+                );
+            });
         }
         else
         {
-            serviceCollection.AddSingleton<IModelMetadataProvider>(
-                services =>
-                {
-                    return TestModelMetadataProvider.CreateDefaultProvider();
-                }
-            );
+            serviceCollection.AddSingleton<IModelMetadataProvider>(services =>
+            {
+                return TestModelMetadataProvider.CreateDefaultProvider();
+            });
         }
 
         if (mvcOptions != null)

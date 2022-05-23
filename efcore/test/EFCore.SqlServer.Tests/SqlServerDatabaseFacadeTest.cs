@@ -47,12 +47,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.RecursiveOnConfiguring,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            var _ = context.Model; // Trigger context initialization
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        var _ = context.Model; // Trigger context initialization
+                    })
                     .Message
             );
         }
@@ -107,12 +105,10 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.RecursiveOnConfiguring,
                 Assert
-                    .Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            var _ = context.Model; // Trigger context initialization
-                        }
-                    )
+                    .Throws<InvalidOperationException>(() =>
+                    {
+                        var _ = context.Model; // Trigger context initialization
+                    })
                     .Message
             );
         }

@@ -255,24 +255,20 @@ namespace System.Tests
         {
             int counter = 0; // set in test function
 
-            var fint = new Func<int>(
-                () =>
-                {
-                    if (++counter < 5)
-                        throw new Exception();
-                    else
-                        return counter;
-                }
-            );
-            var fobj = new Func<string>(
-                () =>
-                {
-                    if (++counter < 5)
-                        throw new Exception();
-                    else
-                        return counter.ToString();
-                }
-            );
+            var fint = new Func<int>(() =>
+            {
+                if (++counter < 5)
+                    throw new Exception();
+                else
+                    return counter;
+            });
+            var fobj = new Func<string>(() =>
+            {
+                if (++counter < 5)
+                    throw new Exception();
+                else
+                    return counter.ToString();
+            });
 
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint), ref counter, 0);
             Value_ExceptionRecovery_IntImpl(new Lazy<int>(fint, true), ref counter, 0);
@@ -337,12 +333,10 @@ namespace System.Tests
         {
             yield return new object[]
             {
-                new Lazy<int>(
-                    () =>
-                    {
-                        throw new MyException(99);
-                    }
-                )
+                new Lazy<int>(() =>
+                {
+                    throw new MyException(99);
+                })
             };
             yield return new object[]
             {
@@ -468,12 +462,10 @@ namespace System.Tests
         {
             yield return new object[]
             {
-                new Lazy<int>(
-                    () =>
-                    {
-                        throw new MyException(99);
-                    }
-                )
+                new Lazy<int>(() =>
+                {
+                    throw new MyException(99);
+                })
             };
             yield return new object[]
             {

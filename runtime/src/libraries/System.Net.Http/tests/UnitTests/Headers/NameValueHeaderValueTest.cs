@@ -96,13 +96,11 @@ namespace System.Net.Http.Tests
         public void Value_CallSetterWithInvalidValues_Throw()
         {
             // Just verify that the setter calls the same validation the ctor invokes.
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    var x = new NameValueHeaderValue("name");
-                    x.Value = " x ";
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                var x = new NameValueHeaderValue("name");
+                x.Value = " x ";
+            });
         }
 
         [Fact]
@@ -419,12 +417,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    NameValueHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                NameValueHeaderValue.Parse(input);
+            });
 
             Assert.False(NameValueHeaderValue.TryParse(input, out NameValueHeaderValue result));
             Assert.Null(result);
@@ -438,12 +434,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string name, string value)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new NameValueHeaderValue(name, value);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new NameValueHeaderValue(name, value);
+            });
         }
 
         private static NameValueHeaderValue DummyCreator()

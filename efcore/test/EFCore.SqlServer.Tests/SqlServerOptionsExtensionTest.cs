@@ -20,15 +20,13 @@ namespace Microsoft.EntityFrameworkCore
             var tasks = new Task[Environment.ProcessorCount];
             for (var i = 0; i < tasks.Length; i++)
             {
-                tasks[i] = Task.Factory.StartNew(
-                    () =>
+                tasks[i] = Task.Factory.StartNew(() =>
+                {
+                    using (var ctx = new EmptyContext())
                     {
-                        using (var ctx = new EmptyContext())
-                        {
-                            Assert.NotNull(ctx.Model.GetRelationalDependencies());
-                        }
+                        Assert.NotNull(ctx.Model.GetRelationalDependencies());
                     }
-                );
+                });
             }
 
             Task.WaitAll(tasks);

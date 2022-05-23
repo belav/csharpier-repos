@@ -20,14 +20,12 @@ namespace System.Diagnostics.Tests
                 int targetThreadId = 0;
 
                 // Launch a thread whose priority we'll manipulate.
-                var t = new Thread(
-                    () =>
-                    {
-                        targetThreadId = GetCurrentThreadId();
-                        b.SignalAndWait();
-                        b.SignalAndWait(); // wait until the main test is done targeting this thread
-                    }
-                );
+                var t = new Thread(() =>
+                {
+                    targetThreadId = GetCurrentThreadId();
+                    b.SignalAndWait();
+                    b.SignalAndWait(); // wait until the main test is done targeting this thread
+                });
                 t.IsBackground = true;
                 t.Start();
 

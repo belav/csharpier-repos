@@ -92,12 +92,10 @@ namespace System.Data.Tests
 
             dv.AllowDelete = false;
             // AllowDelete false- Exception
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    dv.Delete(0);
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                dv.Delete(0);
+            });
 
             dv.AllowDelete = true;
             int RowsCount = dv.Count;
@@ -126,12 +124,10 @@ namespace System.Data.Tests
             dv.AllowEdit = false;
 
             // AllowEdit false - exception
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    dv[0][2] = "aaa";
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                dv[0][2] = "aaa";
+            });
 
             dv.AllowEdit = true;
 
@@ -158,12 +154,10 @@ namespace System.Data.Tests
             Assert.False(dv.AllowNew);
 
             // AllowNew - exception
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    dv.AddNew();
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                dv.AddNew();
+            });
 
             dv.AllowNew = true;
             int RowsCount = dv.Count;
@@ -243,12 +237,10 @@ namespace System.Data.Tests
             drvResult = new DataRowView[dv.Count - 1];
 
             // CopyTo smaller array, check exception
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    dv.CopyTo(drvResult, 0);
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                dv.CopyTo(drvResult, 0);
+            });
         }
 
         [Fact]
@@ -345,12 +337,10 @@ namespace System.Data.Tests
 
             dv.Sort = "String1,ChildId";
             // Find = wrong sort, can not find
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    dvArr = dv.FindRows(new object[] { "3", "3-String1" });
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                dvArr = dv.FindRows(new object[] { "3", "3-String1" });
+            });
 
             dv.Sort = "ChildId,String1";
 
@@ -458,12 +448,10 @@ namespace System.Data.Tests
 
             dv.Sort = "String1,ParentId";
             // Find = wrong sort, can not find
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    FindResult = dv.Find(new object[] { "3", "3-String1" });
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                FindResult = dv.Find(new object[] { "3", "3-String1" });
+            });
 
             dv.Sort = "ParentId,String1";
             // Find
@@ -695,30 +683,24 @@ namespace System.Data.Tests
 
             //EvaluateException
             // RowFilter - check EvaluateException
-            Assert.Throws<EvaluateException>(
-                () =>
-                {
-                    dv.RowFilter = "Col=1";
-                }
-            );
+            Assert.Throws<EvaluateException>(() =>
+            {
+                dv.RowFilter = "Col=1";
+            });
 
             //SyntaxErrorException 1
             // RowFilter - check SyntaxErrorException 1
-            Assert.Throws<SyntaxErrorException>(
-                () =>
-                {
-                    dv.RowFilter = "sum('something')";
-                }
-            );
+            Assert.Throws<SyntaxErrorException>(() =>
+            {
+                dv.RowFilter = "sum('something')";
+            });
 
             //SyntaxErrorException 2
             // RowFilter - check SyntaxErrorException 2
-            Assert.Throws<SyntaxErrorException>(
-                () =>
-                {
-                    dv.RowFilter = "HH**!";
-                }
-            );
+            Assert.Throws<SyntaxErrorException>(() =>
+            {
+                dv.RowFilter = "HH**!";
+            });
         }
 
         [Fact]
@@ -890,28 +872,22 @@ namespace System.Data.Tests
             Assert.True(CompareSortedRowsByParentAndChildId(dv, drArrTable));
 
             // IndexOutOfRangeException - 1
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    dv.Sort = "something";
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                dv.Sort = "something";
+            });
 
             // IndexOutOfRangeException - 2
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    dv.Sort = "ColumnId Desc Asc";
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                dv.Sort = "ColumnId Desc Asc";
+            });
 
             // IndexOutOfRangeException - 3
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    dv.Sort = "ColumnId blabla";
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                dv.Sort = "ColumnId blabla";
+            });
         }
 
         private bool CompareSortedRowsByParentAndChildId(DataView dv, DataRow[] drTable)
@@ -941,12 +917,10 @@ namespace System.Data.Tests
             Assert.Null(dv.Table);
 
             // DataException - bind to table with no name
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    dv.Table = dt;
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                dv.Table = dt;
+            });
 
             dt.TableName = "myTable";
             // DataTable!=null
@@ -983,24 +957,20 @@ namespace System.Data.Tests
             DataTable dt = new DataTable("myTable");
 
             // ctor - missing column CutomerID Exception
-            Assert.Throws<EvaluateException>(
-                () => // also IndexOutOfRangeException?
-                {
-                    //exception: System.Data.EvaluateException: Cannot find column [CustomerId]
-                    dv = new DataView(dt, "CustomerId > 100", "Age", DataViewRowState.Added);
-                }
-            );
+            Assert.Throws<EvaluateException>(() => // also IndexOutOfRangeException?
+            {
+                //exception: System.Data.EvaluateException: Cannot find column [CustomerId]
+                dv = new DataView(dt, "CustomerId > 100", "Age", DataViewRowState.Added);
+            });
 
             dt.Columns.Add(new DataColumn("CustomerId"));
 
             // ctor - missing column Age Exception
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    //exception: System.Data.EvaluateException: Cannot find column [Age]
-                    dv = new DataView(dt, "CustomerId > 100", "Age", DataViewRowState.Added);
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                //exception: System.Data.EvaluateException: Cannot find column [Age]
+                dv = new DataView(dt, "CustomerId > 100", "Age", DataViewRowState.Added);
+            });
         }
 
         [Fact]

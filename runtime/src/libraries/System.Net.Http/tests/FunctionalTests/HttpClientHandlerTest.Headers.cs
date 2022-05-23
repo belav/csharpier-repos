@@ -350,13 +350,11 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestDataAsync();
-                            await connection.SendResponseAsync(HttpStatusCode.OK, headers);
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestDataAsync();
+                        await connection.SendResponseAsync(HttpStatusCode.OK, headers);
+                    });
                 }
             );
         }

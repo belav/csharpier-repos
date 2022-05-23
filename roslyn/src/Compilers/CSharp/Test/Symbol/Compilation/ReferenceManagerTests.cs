@@ -1708,12 +1708,10 @@ public class A
                     syntaxTrees: new[] { tree },
                     options: options
                 );
-                Assert.Throws<TestException>(
-                    () =>
-                    {
-                        var a = c.Assembly;
-                    }
-                );
+                Assert.Throws<TestException>(() =>
+                {
+                    var a = c.Assembly;
+                });
             }
         }
 

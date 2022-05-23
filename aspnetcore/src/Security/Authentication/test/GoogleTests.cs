@@ -42,13 +42,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
         Action<GoogleOptions> configure
     )
     {
-        services.AddGoogle(
-            o =>
-            {
-                ConfigureDefaults(o);
-                configure.Invoke(o);
-            }
-        );
+        services.AddGoogle(o =>
+        {
+            ConfigureDefaults(o);
+            configure.Invoke(o);
+        });
     }
 
     protected override void ConfigureDefaults(GoogleOptions o)
@@ -61,13 +59,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ChallengeWillTriggerRedirection()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -91,13 +87,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task SignInThrows()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signIn");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -106,13 +100,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task SignOutThrows()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signOut");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -121,13 +113,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ForbidThrows()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signOut");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -136,13 +126,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task Challenge401WillNotTriggerRedirection()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/401");
         Assert.Equal(HttpStatusCode.Unauthorized, transaction.Response.StatusCode);
@@ -151,13 +139,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ChallengeWillSetCorrelationCookie()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
         Assert.Contains(
@@ -169,13 +155,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ChallengeWillSetDefaultScope()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -381,21 +365,19 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ChallengeWillTriggerApplyRedirectEvent()
     {
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.Events = new OAuthEvents
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.Events = new OAuthEvents
+                OnRedirectToAuthorizationEndpoint = context =>
                 {
-                    OnRedirectToAuthorizationEndpoint = context =>
-                    {
-                        context.Response.Redirect(context.RedirectUri + "&custom=test");
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    context.Response.Redirect(context.RedirectUri + "&custom=test");
+                    return Task.FromResult(0);
+                }
+            };
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/challenge");
         Assert.Equal(HttpStatusCode.Redirect, transaction.Response.StatusCode);
@@ -431,13 +413,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ReplyPathWithoutStateQueryStringWillBeRejected()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
         using var server = host.GetTestServer();
         var error = await Assert.ThrowsAnyAsync<Exception>(
             () => server.SendAsync("https://example.com/signin-google?code=TestCode")
@@ -450,25 +430,23 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [InlineData(false)]
     public async Task ReplyPathWithAccessDeniedErrorFails(bool redirect)
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = new TestStateDataFormat();
-                o.Events = redirect
-                    ? new OAuthEvents()
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = new TestStateDataFormat();
+            o.Events = redirect
+                ? new OAuthEvents()
+                {
+                    OnAccessDenied = ctx =>
                     {
-                        OnAccessDenied = ctx =>
-                        {
-                            ctx.Response.Redirect("/error?FailureMessage=AccessDenied");
-                            ctx.HandleResponse();
-                            return Task.FromResult(0);
-                        }
+                        ctx.Response.Redirect("/error?FailureMessage=AccessDenied");
+                        ctx.HandleResponse();
+                        return Task.FromResult(0);
                     }
-                    : new OAuthEvents();
-            }
-        );
+                }
+                : new OAuthEvents();
+        });
         using var server = host.GetTestServer();
         var sendTask = server.SendAsync(
             "https://example.com/signin-google?error=access_denied&error_description=SoBad&error_uri=foobar&state=protected_state",
@@ -496,28 +474,26 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task ReplyPathWithAccessDeniedError_AllowsCustomizingPath()
     {
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = new TestStateDataFormat();
+            o.AccessDeniedPath = "/access-denied";
+            o.Events = new OAuthEvents()
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = new TestStateDataFormat();
-                o.AccessDeniedPath = "/access-denied";
-                o.Events = new OAuthEvents()
+                OnAccessDenied = ctx =>
                 {
-                    OnAccessDenied = ctx =>
-                    {
-                        Assert.Equal("/access-denied", ctx.AccessDeniedPath.Value);
-                        Assert.Equal("http://testhost/redirect", ctx.ReturnUrl);
-                        Assert.Equal("ReturnUrl", ctx.ReturnUrlParameter);
-                        ctx.AccessDeniedPath = "/custom-denied-page";
-                        ctx.ReturnUrl = "http://www.google.com/";
-                        ctx.ReturnUrlParameter = "rurl";
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    Assert.Equal("/access-denied", ctx.AccessDeniedPath.Value);
+                    Assert.Equal("http://testhost/redirect", ctx.ReturnUrl);
+                    Assert.Equal("ReturnUrl", ctx.ReturnUrlParameter);
+                    ctx.AccessDeniedPath = "/custom-denied-page";
+                    ctx.ReturnUrl = "http://www.google.com/";
+                    ctx.ReturnUrlParameter = "rurl";
+                    return Task.FromResult(0);
+                }
+            };
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync(
             "https://example.com/signin-google?error=access_denied&error_description=SoBad&error_uri=foobar&state=protected_state",
@@ -535,42 +511,39 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     {
         var accessDeniedCalled = false;
         var remoteFailureCalled = false;
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = new TestStateDataFormat();
+            o.Events = new OAuthEvents()
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = new TestStateDataFormat();
-                o.Events = new OAuthEvents()
+                OnAccessDenied = ctx =>
                 {
-                    OnAccessDenied = ctx =>
-                    {
-                        Assert.Null(ctx.AccessDeniedPath.Value);
-                        Assert.Equal("http://testhost/redirect", ctx.ReturnUrl);
-                        Assert.Equal("ReturnUrl", ctx.ReturnUrlParameter);
-                        accessDeniedCalled = true;
-                        return Task.FromResult(0);
-                    },
-                    OnRemoteFailure = ctx =>
-                    {
-                        var ex = ctx.Failure;
-                        Assert.True(ex.Data.Contains("error"), "error");
-                        Assert.True(ex.Data.Contains("error_description"), "error_description");
-                        Assert.True(ex.Data.Contains("error_uri"), "error_uri");
-                        Assert.Equal("access_denied", ex.Data["error"]);
-                        Assert.Equal("whyitfailed", ex.Data["error_description"]);
-                        Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                        remoteFailureCalled = true;
-                        ctx.Response.Redirect(
-                            "/error?FailureMessage="
-                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                        );
-                        ctx.HandleResponse();
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    Assert.Null(ctx.AccessDeniedPath.Value);
+                    Assert.Equal("http://testhost/redirect", ctx.ReturnUrl);
+                    Assert.Equal("ReturnUrl", ctx.ReturnUrlParameter);
+                    accessDeniedCalled = true;
+                    return Task.FromResult(0);
+                },
+                OnRemoteFailure = ctx =>
+                {
+                    var ex = ctx.Failure;
+                    Assert.True(ex.Data.Contains("error"), "error");
+                    Assert.True(ex.Data.Contains("error_description"), "error_description");
+                    Assert.True(ex.Data.Contains("error_uri"), "error_uri");
+                    Assert.Equal("access_denied", ex.Data["error"]);
+                    Assert.Equal("whyitfailed", ex.Data["error_description"]);
+                    Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
+                    remoteFailureCalled = true;
+                    ctx.Response.Redirect(
+                        "/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                    );
+                    ctx.HandleResponse();
+                    return Task.FromResult(0);
+                }
+            };
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync(
             "https://example.com/signin-google?error=access_denied&error_description=whyitfailed&error_uri=https://example.com/fail&state=protected_state",
@@ -590,35 +563,33 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [InlineData(false)]
     public async Task ReplyPathWithErrorFails(bool redirect)
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = new TestStateDataFormat();
-                o.Events = redirect
-                    ? new OAuthEvents()
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = new TestStateDataFormat();
+            o.Events = redirect
+                ? new OAuthEvents()
+                {
+                    OnRemoteFailure = ctx =>
                     {
-                        OnRemoteFailure = ctx =>
-                        {
-                            var ex = ctx.Failure;
-                            Assert.True(ex.Data.Contains("error"), "error");
-                            Assert.True(ex.Data.Contains("error_description"), "error_description");
-                            Assert.True(ex.Data.Contains("error_uri"), "error_uri");
-                            Assert.Equal("itfailed", ex.Data["error"]);
-                            Assert.Equal("whyitfailed", ex.Data["error_description"]);
-                            Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
-                            ctx.Response.Redirect(
-                                "/error?FailureMessage="
-                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                            );
-                            ctx.HandleResponse();
-                            return Task.FromResult(0);
-                        }
+                        var ex = ctx.Failure;
+                        Assert.True(ex.Data.Contains("error"), "error");
+                        Assert.True(ex.Data.Contains("error_description"), "error_description");
+                        Assert.True(ex.Data.Contains("error_uri"), "error_uri");
+                        Assert.Equal("itfailed", ex.Data["error"]);
+                        Assert.Equal("whyitfailed", ex.Data["error_description"]);
+                        Assert.Equal("https://example.com/fail", ex.Data["error_uri"]);
+                        ctx.Response.Redirect(
+                            "/error?FailureMessage="
+                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                        );
+                        ctx.HandleResponse();
+                        return Task.FromResult(0);
                     }
-                    : new OAuthEvents();
-            }
-        );
+                }
+                : new OAuthEvents();
+        });
         using var server = host.GetTestServer();
         var sendTask = server.SendAsync(
             "https://example.com/signin-google?error=itfailed&error_description=whyitfailed&error_uri=https://example.com/fail&state=protected_state",
@@ -656,20 +627,18 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.SaveTokens = true;
+            o.StateDataFormat = stateFormat;
+            if (claimsIssuer != null)
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.SaveTokens = true;
-                o.StateDataFormat = stateFormat;
-                if (claimsIssuer != null)
-                {
-                    o.ClaimsIssuer = claimsIssuer;
-                }
-                o.BackchannelHttpHandler = CreateBackchannel();
+                o.ClaimsIssuer = claimsIssuer;
             }
-        );
+            o.BackchannelHttpHandler = CreateBackchannel();
+        });
 
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
@@ -732,38 +701,33 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.BackchannelHttpHandler = new TestHttpMessageHandler
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.BackchannelHttpHandler = new TestHttpMessageHandler
+                Sender = req =>
                 {
-                    Sender = req =>
+                    return ReturnJsonResponse(new { Error = "Error" }, HttpStatusCode.BadRequest);
+                }
+            };
+            o.Events = redirect
+                ? new OAuthEvents()
+                {
+                    OnRemoteFailure = ctx =>
                     {
-                        return ReturnJsonResponse(
-                            new { Error = "Error" },
-                            HttpStatusCode.BadRequest
+                        ctx.Response.Redirect(
+                            "/error?FailureMessage="
+                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
                         );
+                        ctx.HandleResponse();
+                        return Task.FromResult(0);
                     }
-                };
-                o.Events = redirect
-                    ? new OAuthEvents()
-                    {
-                        OnRemoteFailure = ctx =>
-                        {
-                            ctx.Response.Redirect(
-                                "/error?FailureMessage="
-                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                            );
-                            ctx.HandleResponse();
-                            return Task.FromResult(0);
-                        }
-                    }
-                    : new OAuthEvents();
-            }
-        );
+                }
+                : new OAuthEvents();
+        });
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
         var correlationValue = "TestCorrelationId";
@@ -809,35 +773,33 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.BackchannelHttpHandler = new TestHttpMessageHandler
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.BackchannelHttpHandler = new TestHttpMessageHandler
+                Sender = req =>
                 {
-                    Sender = req =>
+                    return ReturnJsonResponse(new object());
+                }
+            };
+            o.Events = redirect
+                ? new OAuthEvents()
+                {
+                    OnRemoteFailure = ctx =>
                     {
-                        return ReturnJsonResponse(new object());
+                        ctx.Response.Redirect(
+                            "/error?FailureMessage="
+                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                        );
+                        ctx.HandleResponse();
+                        return Task.FromResult(0);
                     }
-                };
-                o.Events = redirect
-                    ? new OAuthEvents()
-                    {
-                        OnRemoteFailure = ctx =>
-                        {
-                            ctx.Response.Redirect(
-                                "/error?FailureMessage="
-                                    + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                            );
-                            ctx.HandleResponse();
-                            return Task.FromResult(0);
-                        }
-                    }
-                    : new OAuthEvents();
-            }
-        );
+                }
+                : new OAuthEvents();
+        });
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
         var correlationValue = "TestCorrelationId";
@@ -875,37 +837,35 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.BackchannelHttpHandler = CreateBackchannel();
+            o.Events = new OAuthEvents
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.BackchannelHttpHandler = CreateBackchannel();
-                o.Events = new OAuthEvents
+                OnCreatingTicket = context =>
                 {
-                    OnCreatingTicket = context =>
-                    {
-                        var refreshToken = context.RefreshToken;
-                        context.Principal.AddIdentity(
-                            new ClaimsIdentity(
-                                new Claim[]
-                                {
-                                    new Claim(
-                                        "RefreshToken",
-                                        refreshToken,
-                                        ClaimValueTypes.String,
-                                        "Google"
-                                    )
-                                },
-                                "Google"
-                            )
-                        );
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    var refreshToken = context.RefreshToken;
+                    context.Principal.AddIdentity(
+                        new ClaimsIdentity(
+                            new Claim[]
+                            {
+                                new Claim(
+                                    "RefreshToken",
+                                    refreshToken,
+                                    ClaimValueTypes.String,
+                                    "Google"
+                                )
+                            },
+                            "Google"
+                        )
+                    );
+                    return Task.FromResult(0);
+                }
+            };
+        });
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
         var correlationValue = "TestCorrelationId";
@@ -941,23 +901,21 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.BackchannelHttpHandler = CreateBackchannel();
+            o.Events = new OAuthEvents
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.BackchannelHttpHandler = CreateBackchannel();
-                o.Events = new OAuthEvents
+                OnTicketReceived = context =>
                 {
-                    OnTicketReceived = context =>
-                    {
-                        context.Properties.RedirectUri = null;
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    context.Properties.RedirectUri = null;
+                    return Task.FromResult(0);
+                }
+            };
+        });
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
         var correlationValue = "TestCorrelationId";
@@ -987,46 +945,38 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.AccessType = "offline";
+            o.Events = new OAuthEvents()
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.AccessType = "offline";
-                o.Events = new OAuthEvents()
+                OnCreatingTicket = context =>
                 {
-                    OnCreatingTicket = context =>
-                    {
-                        Assert.Equal("Test Access Token", context.AccessToken);
-                        Assert.Equal("Test Refresh Token", context.RefreshToken);
-                        Assert.Equal(TimeSpan.FromSeconds(3600), context.ExpiresIn);
-                        Assert.Equal(
-                            "Test email",
-                            context.Identity.FindFirst(ClaimTypes.Email)?.Value
-                        );
-                        Assert.Equal(
-                            "Test User ID",
-                            context.Identity.FindFirst(ClaimTypes.NameIdentifier)?.Value
-                        );
-                        Assert.Equal(
-                            "Test Name",
-                            context.Identity.FindFirst(ClaimTypes.Name)?.Value
-                        );
-                        Assert.Equal(
-                            "Test Family Name",
-                            context.Identity.FindFirst(ClaimTypes.Surname)?.Value
-                        );
-                        Assert.Equal(
-                            "Test Given Name",
-                            context.Identity.FindFirst(ClaimTypes.GivenName)?.Value
-                        );
-                        return Task.FromResult(0);
-                    }
-                };
-                o.BackchannelHttpHandler = CreateBackchannel();
-            }
-        );
+                    Assert.Equal("Test Access Token", context.AccessToken);
+                    Assert.Equal("Test Refresh Token", context.RefreshToken);
+                    Assert.Equal(TimeSpan.FromSeconds(3600), context.ExpiresIn);
+                    Assert.Equal("Test email", context.Identity.FindFirst(ClaimTypes.Email)?.Value);
+                    Assert.Equal(
+                        "Test User ID",
+                        context.Identity.FindFirst(ClaimTypes.NameIdentifier)?.Value
+                    );
+                    Assert.Equal("Test Name", context.Identity.FindFirst(ClaimTypes.Name)?.Value);
+                    Assert.Equal(
+                        "Test Family Name",
+                        context.Identity.FindFirst(ClaimTypes.Surname)?.Value
+                    );
+                    Assert.Equal(
+                        "Test Given Name",
+                        context.Identity.FindFirst(ClaimTypes.GivenName)?.Value
+                    );
+                    return Task.FromResult(0);
+                }
+            };
+            o.BackchannelHttpHandler = CreateBackchannel();
+        });
 
         var properties = new AuthenticationProperties();
         var correlationKey = ".xsrf";
@@ -1050,13 +1000,11 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
     [Fact]
     public async Task NoStateCausesException()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+        });
 
         //Post a message to the Google middleware
         using var server = host.GetTestServer();
@@ -1074,25 +1022,22 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.Events = new OAuthEvents()
             {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.Events = new OAuthEvents()
+                OnRemoteFailure = ctx =>
                 {
-                    OnRemoteFailure = ctx =>
-                    {
-                        ctx.Response.Redirect(
-                            "/error?FailureMessage="
-                                + UrlEncoder.Default.Encode(ctx.Failure.Message)
-                        );
-                        ctx.HandleResponse();
-                        return Task.FromResult(0);
-                    }
-                };
-            }
-        );
+                    ctx.Response.Redirect(
+                        "/error?FailureMessage=" + UrlEncoder.Default.Encode(ctx.Failure.Message)
+                    );
+                    ctx.HandleResponse();
+                    return Task.FromResult(0);
+                }
+            };
+        });
 
         //Post a message to the Google middleware
         using var server = host.GetTestServer();
@@ -1114,16 +1059,14 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.SaveTokens = true;
-                o.BackchannelHttpHandler = CreateBackchannel();
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.SaveTokens = true;
+            o.BackchannelHttpHandler = CreateBackchannel();
+        });
 
         // Skip the challenge step, go directly to the callback path
 
@@ -1169,16 +1112,14 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.SaveTokens = true;
-                o.BackchannelHttpHandler = CreateBackchannel();
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.SaveTokens = true;
+            o.BackchannelHttpHandler = CreateBackchannel();
+        });
 
         // Skip the challenge step, go directly to the callback path
 
@@ -1224,16 +1165,14 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.SaveTokens = true;
-                o.BackchannelHttpHandler = CreateBackchannel();
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.SaveTokens = true;
+            o.BackchannelHttpHandler = CreateBackchannel();
+        });
 
         // Skip the challenge step, go directly to the callback path
 
@@ -1275,16 +1214,14 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 "GoogleTest"
             )
         );
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ClientId = "Test Id";
-                o.ClientSecret = "Test Secret";
-                o.StateDataFormat = stateFormat;
-                o.SaveTokens = true;
-                o.BackchannelHttpHandler = CreateBackchannel();
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ClientId = "Test Id";
+            o.ClientSecret = "Test Secret";
+            o.StateDataFormat = stateFormat;
+            o.SaveTokens = true;
+            o.BackchannelHttpHandler = CreateBackchannel();
+        });
 
         // Skip the challenge step, go directly to the callback path
 
@@ -1396,126 +1333,112 @@ public class GoogleTests : RemoteAuthenticationTests<GoogleOptions>
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Use(
-                                    async (context, next) =>
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    if (req.Path == new PathString("/challenge"))
                                     {
-                                        var req = context.Request;
-                                        var res = context.Response;
-                                        if (req.Path == new PathString("/challenge"))
-                                        {
-                                            await context.ChallengeAsync();
-                                        }
-                                        else if (req.Path == new PathString("/challengeFacebook"))
-                                        {
-                                            await context.ChallengeAsync("Facebook");
-                                        }
-                                        else if (req.Path == new PathString("/tokens"))
-                                        {
-                                            var result = await context.AuthenticateAsync(
-                                                TestExtensions.CookieAuthenticationScheme
-                                            );
-                                            var tokens = result.Properties.GetTokens();
-                                            await res.DescribeAsync(tokens);
-                                        }
-                                        else if (req.Path == new PathString("/me"))
-                                        {
-                                            await res.DescribeAsync(context.User);
-                                        }
-                                        else if (req.Path == new PathString("/authenticate"))
-                                        {
-                                            var result = await context.AuthenticateAsync(
-                                                TestExtensions.CookieAuthenticationScheme
-                                            );
-                                            await res.DescribeAsync(result.Principal);
-                                        }
-                                        else if (req.Path == new PathString("/authenticateGoogle"))
-                                        {
-                                            var result = await context.AuthenticateAsync("Google");
-                                            await res.DescribeAsync(result?.Principal);
-                                        }
-                                        else if (
-                                            req.Path == new PathString("/authenticateFacebook")
-                                        )
-                                        {
-                                            var result = await context.AuthenticateAsync(
-                                                "Facebook"
-                                            );
-                                            await res.DescribeAsync(result?.Principal);
-                                        }
-                                        else if (req.Path == new PathString("/unauthorized"))
-                                        {
-                                            // Simulate Authorization failure
-                                            var result = await context.AuthenticateAsync("Google");
-                                            await context.ChallengeAsync("Google");
-                                        }
-                                        else if (req.Path == new PathString("/unauthorizedAuto"))
-                                        {
-                                            var result = await context.AuthenticateAsync("Google");
-                                            await context.ChallengeAsync("Google");
-                                        }
-                                        else if (req.Path == new PathString("/401"))
-                                        {
-                                            res.StatusCode = 401;
-                                        }
-                                        else if (req.Path == new PathString("/signIn"))
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () =>
-                                                    context.SignInAsync(
-                                                        "Google",
-                                                        new ClaimsPrincipal()
-                                                    )
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/signOut"))
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.SignOutAsync("Google")
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/forbid"))
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.ForbidAsync("Google")
-                                            );
-                                        }
-                                        else if (testpath != null)
-                                        {
-                                            await testpath(context);
-                                        }
-                                        else
-                                        {
-                                            await next(context);
-                                        }
+                                        await context.ChallengeAsync();
                                     }
-                                );
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
-                                services
-                                    .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                                    .AddCookie(
-                                        TestExtensions.CookieAuthenticationScheme,
-                                        o =>
-                                            o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
-                                    )
-                                    .AddGoogle(configureOptions)
-                                    .AddFacebook(
-                                        o =>
-                                        {
-                                            o.ClientId = "Test ClientId";
-                                            o.ClientSecret = "Test AppSecrent";
-                                        }
-                                    );
-                            }
-                        )
+                                    else if (req.Path == new PathString("/challengeFacebook"))
+                                    {
+                                        await context.ChallengeAsync("Facebook");
+                                    }
+                                    else if (req.Path == new PathString("/tokens"))
+                                    {
+                                        var result = await context.AuthenticateAsync(
+                                            TestExtensions.CookieAuthenticationScheme
+                                        );
+                                        var tokens = result.Properties.GetTokens();
+                                        await res.DescribeAsync(tokens);
+                                    }
+                                    else if (req.Path == new PathString("/me"))
+                                    {
+                                        await res.DescribeAsync(context.User);
+                                    }
+                                    else if (req.Path == new PathString("/authenticate"))
+                                    {
+                                        var result = await context.AuthenticateAsync(
+                                            TestExtensions.CookieAuthenticationScheme
+                                        );
+                                        await res.DescribeAsync(result.Principal);
+                                    }
+                                    else if (req.Path == new PathString("/authenticateGoogle"))
+                                    {
+                                        var result = await context.AuthenticateAsync("Google");
+                                        await res.DescribeAsync(result?.Principal);
+                                    }
+                                    else if (req.Path == new PathString("/authenticateFacebook"))
+                                    {
+                                        var result = await context.AuthenticateAsync("Facebook");
+                                        await res.DescribeAsync(result?.Principal);
+                                    }
+                                    else if (req.Path == new PathString("/unauthorized"))
+                                    {
+                                        // Simulate Authorization failure
+                                        var result = await context.AuthenticateAsync("Google");
+                                        await context.ChallengeAsync("Google");
+                                    }
+                                    else if (req.Path == new PathString("/unauthorizedAuto"))
+                                    {
+                                        var result = await context.AuthenticateAsync("Google");
+                                        await context.ChallengeAsync("Google");
+                                    }
+                                    else if (req.Path == new PathString("/401"))
+                                    {
+                                        res.StatusCode = 401;
+                                    }
+                                    else if (req.Path == new PathString("/signIn"))
+                                    {
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () =>
+                                                context.SignInAsync("Google", new ClaimsPrincipal())
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/signOut"))
+                                    {
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () => context.SignOutAsync("Google")
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/forbid"))
+                                    {
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () => context.ForbidAsync("Google")
+                                        );
+                                    }
+                                    else if (testpath != null)
+                                    {
+                                        await testpath(context);
+                                    }
+                                    else
+                                    {
+                                        await next(context);
+                                    }
+                                }
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddTransient<IClaimsTransformation, ClaimsTransformer>();
+                            services
+                                .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
+                                .AddCookie(
+                                    TestExtensions.CookieAuthenticationScheme,
+                                    o => o.ForwardChallenge = GoogleDefaults.AuthenticationScheme
+                                )
+                                .AddGoogle(configureOptions)
+                                .AddFacebook(o =>
+                                {
+                                    o.ClientId = "Test ClientId";
+                                    o.ClientSecret = "Test AppSecrent";
+                                });
+                        })
             )
             .Build();
 

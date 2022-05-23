@@ -19,17 +19,15 @@ namespace Microsoft.Extensions.FileSystemGlobbing.Tests.PatternContexts
             var pattern = MockLinearPatternBuilder.New().Add("a").Build();
             var context = new PatternContextLinearInclude(pattern);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    context.Declare(
-                        (segment, last) =>
-                        {
-                            Assert.False(true, "No segment should be declared.");
-                        }
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                context.Declare(
+                    (segment, last) =>
+                    {
+                        Assert.False(true, "No segment should be declared.");
+                    }
+                );
+            });
         }
 
         [Theory]

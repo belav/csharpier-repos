@@ -98,14 +98,12 @@ namespace Moq
             Exception exception
         ) where TMock : class
         {
-            return mock.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<bool>();
-                    tcs.SetException(exception);
-                    return tcs.Task;
-                }
-            );
+            return mock.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<bool>();
+                tcs.SetException(exception);
+                return tcs.Task;
+            });
         }
 
         /// <summary>
@@ -120,14 +118,12 @@ namespace Moq
             Exception exception
         ) where TMock : class
         {
-            return mock.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<TResult>();
-                    tcs.SetException(exception);
-                    return tcs.Task;
-                }
-            );
+            return mock.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<TResult>();
+                tcs.SetException(exception);
+                return tcs.Task;
+            });
         }
 
         /// <summary>
@@ -142,14 +138,12 @@ namespace Moq
             Exception exception
         ) where TMock : class
         {
-            return mock.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<TResult>();
-                    tcs.SetException(exception);
-                    return new ValueTask<TResult>(tcs.Task);
-                }
-            );
+            return mock.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<TResult>();
+                tcs.SetException(exception);
+                return new ValueTask<TResult>(tcs.Task);
+            });
         }
 
         private static readonly Random Random = new Random();
@@ -373,12 +367,10 @@ namespace Moq
         {
             Guard.Positive(delay);
 
-            return mock.Returns(
-                () =>
-                {
-                    return Task.Delay(delay).ContinueWith(t => value);
-                }
-            );
+            return mock.Returns(() =>
+            {
+                return Task.Delay(delay).ContinueWith(t => value);
+            });
         }
 
         private static IReturnsResult<TMock> DelayedResult<TMock, TResult>(
@@ -389,12 +381,10 @@ namespace Moq
         {
             Guard.Positive(delay);
 
-            return mock.Returns(
-                () =>
-                {
-                    return new ValueTask<TResult>(Task.Delay(delay).ContinueWith(t => value));
-                }
-            );
+            return mock.Returns(() =>
+            {
+                return new ValueTask<TResult>(Task.Delay(delay).ContinueWith(t => value));
+            });
         }
 
         private static IReturnsResult<TMock> DelayedException<TMock, TResult>(
@@ -405,14 +395,12 @@ namespace Moq
         {
             Guard.Positive(delay);
 
-            return mock.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<TResult>();
-                    Task.Delay(delay).ContinueWith(task => tcs.SetException(exception));
-                    return tcs.Task;
-                }
-            );
+            return mock.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<TResult>();
+                Task.Delay(delay).ContinueWith(task => tcs.SetException(exception));
+                return tcs.Task;
+            });
         }
 
         private static IReturnsResult<TMock> DelayedException<TMock, TResult>(
@@ -423,14 +411,12 @@ namespace Moq
         {
             Guard.Positive(delay);
 
-            return mock.Returns(
-                () =>
-                {
-                    var tcs = new TaskCompletionSource<TResult>();
-                    Task.Delay(delay).ContinueWith(task => tcs.SetException(exception));
-                    return new ValueTask<TResult>(tcs.Task);
-                }
-            );
+            return mock.Returns(() =>
+            {
+                var tcs = new TaskCompletionSource<TResult>();
+                Task.Delay(delay).ContinueWith(task => tcs.SetException(exception));
+                return new ValueTask<TResult>(tcs.Task);
+            });
         }
     }
 }

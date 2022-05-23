@@ -39,14 +39,12 @@ public class DefaultRazorIntermediateNodeLoweringPhaseIntegrationTest
         var callback = new Mock<IConfigureRazorCodeGenerationOptionsFeature>();
         callback
             .Setup(c => c.Configure(It.IsAny<RazorCodeGenerationOptionsBuilder>()))
-            .Callback<RazorCodeGenerationOptionsBuilder>(
-                o =>
-                {
-                    o.IndentSize = 17;
-                    o.IndentWithTabs = true;
-                    o.SuppressChecksum = true;
-                }
-            );
+            .Callback<RazorCodeGenerationOptionsBuilder>(o =>
+            {
+                o.IndentSize = 17;
+                o.IndentWithTabs = true;
+                o.SuppressChecksum = true;
+            });
 
         // Act
         var documentNode = Lower(

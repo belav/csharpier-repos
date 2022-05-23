@@ -92,30 +92,22 @@ public partial class Program
         IsTrue(IsValueTypeRef(ref _varGenericStructStr));
         IsTrue(IsValueTypeRef(ref _varEnum));
 
-        ThrowsNRE(
-            () =>
-            {
-                IsValueType(_varNullableIntNull);
-            }
-        );
-        ThrowsNRE(
-            () =>
-            {
-                IsValueType(_varStringNull);
-            }
-        );
-        ThrowsNRE(
-            () =>
-            {
-                IsValueTypeRef(ref _varNullableIntNull);
-            }
-        );
-        ThrowsNRE(
-            () =>
-            {
-                IsValueTypeRef(ref _varStringNull);
-            }
-        );
+        ThrowsNRE(() =>
+        {
+            IsValueType(_varNullableIntNull);
+        });
+        ThrowsNRE(() =>
+        {
+            IsValueType(_varStringNull);
+        });
+        ThrowsNRE(() =>
+        {
+            IsValueTypeRef(ref _varNullableIntNull);
+        });
+        ThrowsNRE(() =>
+        {
+            IsValueTypeRef(ref _varStringNull);
+        });
 
         TestIsAssignableFrom();
 

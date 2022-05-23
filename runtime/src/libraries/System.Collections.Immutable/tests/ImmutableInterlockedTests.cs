@@ -18,373 +18,347 @@ namespace System.Collections.Immutable.Tests
         [Fact]
         public void Update_StartWithNull()
         {
-            UpdateHelper<ImmutableList<int>>(
-                func =>
-                {
-                    ImmutableList<int> list = null;
-                    Assert.True(
-                        func(
-                            ref list,
-                            l =>
-                            {
-                                Assert.Null(l);
-                                return ImmutableList.Create(1);
-                            }
-                        )
-                    );
-                    Assert.Equal(1, list.Count);
-                    Assert.Equal(1, list[0]);
-                }
-            );
+            UpdateHelper<ImmutableList<int>>(func =>
+            {
+                ImmutableList<int> list = null;
+                Assert.True(
+                    func(
+                        ref list,
+                        l =>
+                        {
+                            Assert.Null(l);
+                            return ImmutableList.Create(1);
+                        }
+                    )
+                );
+                Assert.Equal(1, list.Count);
+                Assert.Equal(1, list[0]);
+            });
         }
 
         [Fact]
         public void UpdateArray_StartWithDefault()
         {
-            UpdateArrayHelper<int>(
-                func =>
-                {
-                    ImmutableArray<int> array = default;
-                    Assert.True(
-                        func(
-                            ref array,
-                            l =>
-                            {
-                                Assert.Equal(default, l);
-                                return ImmutableArray.Create(1);
-                            }
-                        )
-                    );
-                    Assert.Equal(1, array.Length);
-                    Assert.Equal(1, array[0]);
-                }
-            );
+            UpdateArrayHelper<int>(func =>
+            {
+                ImmutableArray<int> array = default;
+                Assert.True(
+                    func(
+                        ref array,
+                        l =>
+                        {
+                            Assert.Equal(default, l);
+                            return ImmutableArray.Create(1);
+                        }
+                    )
+                );
+                Assert.Equal(1, array.Length);
+                Assert.Equal(1, array[0]);
+            });
         }
 
         [Fact]
         public void UpdateArray_StartWithEmpty()
         {
-            UpdateArrayHelper<int>(
-                func =>
-                {
-                    ImmutableArray<int> array = ImmutableArray<int>.Empty;
-                    Assert.True(
-                        func(
-                            ref array,
-                            l =>
-                            {
-                                Assert.Equal(0, l.Length);
-                                return ImmutableArray.Create(1);
-                            }
-                        )
-                    );
-                    Assert.Equal(1, array.Length);
-                    Assert.Equal(1, array[0]);
-                }
-            );
+            UpdateArrayHelper<int>(func =>
+            {
+                ImmutableArray<int> array = ImmutableArray<int>.Empty;
+                Assert.True(
+                    func(
+                        ref array,
+                        l =>
+                        {
+                            Assert.Equal(0, l.Length);
+                            return ImmutableArray.Create(1);
+                        }
+                    )
+                );
+                Assert.Equal(1, array.Length);
+                Assert.Equal(1, array[0]);
+            });
         }
 
         [Fact]
         public void Update_IncrementalUpdate()
         {
-            UpdateHelper<ImmutableList<int>>(
-                func =>
-                {
-                    ImmutableList<int> list = ImmutableList.Create(1);
-                    Assert.True(func(ref list, l => l.Add(2)));
-                    Assert.Equal(2, list.Count);
-                    Assert.Equal(1, list[0]);
-                    Assert.Equal(2, list[1]);
-                }
-            );
+            UpdateHelper<ImmutableList<int>>(func =>
+            {
+                ImmutableList<int> list = ImmutableList.Create(1);
+                Assert.True(func(ref list, l => l.Add(2)));
+                Assert.Equal(2, list.Count);
+                Assert.Equal(1, list[0]);
+                Assert.Equal(2, list[1]);
+            });
         }
 
         [Fact]
         public void UpdateArray_IncrementalUpdate()
         {
-            UpdateArrayHelper<int>(
-                func =>
-                {
-                    ImmutableArray<int> array = ImmutableArray.Create(1);
-                    Assert.True(func(ref array, l => l.Add(2)));
-                    Assert.Equal(2, array.Length);
-                    Assert.Equal(1, array[0]);
-                    Assert.Equal(2, array[1]);
-                }
-            );
+            UpdateArrayHelper<int>(func =>
+            {
+                ImmutableArray<int> array = ImmutableArray.Create(1);
+                Assert.True(func(ref array, l => l.Add(2)));
+                Assert.Equal(2, array.Length);
+                Assert.Equal(1, array[0]);
+                Assert.Equal(2, array[1]);
+            });
         }
 
         [Fact]
         public void Update_FuncThrowsThrough()
         {
-            UpdateHelper<ImmutableList<int>>(
-                func =>
-                {
-                    ImmutableList<int> list = ImmutableList.Create(1);
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                            func(
-                                ref list,
-                                l =>
-                                {
-                                    throw new InvalidOperationException();
-                                }
-                            )
-                    );
-                }
-            );
+            UpdateHelper<ImmutableList<int>>(func =>
+            {
+                ImmutableList<int> list = ImmutableList.Create(1);
+                Assert.Throws<InvalidOperationException>(
+                    () =>
+                        func(
+                            ref list,
+                            l =>
+                            {
+                                throw new InvalidOperationException();
+                            }
+                        )
+                );
+            });
         }
 
         [Fact]
         public void UpdateArray_FuncThrowsThrough()
         {
-            UpdateArrayHelper<int>(
-                func =>
-                {
-                    ImmutableArray<int> array = ImmutableArray.Create(42);
-                    Assert.Throws<InvalidOperationException>(
-                        () => func(ref array, l => throw new InvalidOperationException())
-                    );
-                }
-            );
+            UpdateArrayHelper<int>(func =>
+            {
+                ImmutableArray<int> array = ImmutableArray.Create(42);
+                Assert.Throws<InvalidOperationException>(
+                    () => func(ref array, l => throw new InvalidOperationException())
+                );
+            });
         }
 
         [Fact]
         public void Update_NoEffectualChange()
         {
-            UpdateHelper<ImmutableList<int>>(
-                func =>
-                {
-                    ImmutableList<int> list = ImmutableList.Create<int>(1);
-                    Assert.False(func(ref list, l => l));
-                }
-            );
+            UpdateHelper<ImmutableList<int>>(func =>
+            {
+                ImmutableList<int> list = ImmutableList.Create<int>(1);
+                Assert.False(func(ref list, l => l));
+            });
         }
 
         [Fact]
         public void UpdateArray_NoEffectualChange()
         {
-            UpdateArrayHelper<int>(
-                func =>
-                {
-                    ImmutableArray<int> array = ImmutableArray.Create(42);
-                    Assert.False(func(ref array, l => l));
-                }
-            );
+            UpdateArrayHelper<int>(func =>
+            {
+                ImmutableArray<int> array = ImmutableArray.Create(42);
+                Assert.False(func(ref array, l => l));
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void Update_HighConcurrency()
         {
-            UpdateHelper<ImmutableList<int>>(
-                func =>
+            UpdateHelper<ImmutableList<int>>(func =>
+            {
+                ImmutableList<int> list = ImmutableList.Create<int>();
+                int concurrencyLevel = Environment.ProcessorCount;
+                int iterations = 500;
+                Task[] tasks = new Task[concurrencyLevel];
+                var barrier = new Barrier(tasks.Length);
+                for (int i = 0; i < tasks.Length; i++)
                 {
-                    ImmutableList<int> list = ImmutableList.Create<int>();
-                    int concurrencyLevel = Environment.ProcessorCount;
-                    int iterations = 500;
-                    Task[] tasks = new Task[concurrencyLevel];
-                    var barrier = new Barrier(tasks.Length);
-                    for (int i = 0; i < tasks.Length; i++)
-                    {
-                        tasks[i] = Task.Factory.StartNew(
-                            delegate
+                    tasks[i] = Task.Factory.StartNew(
+                        delegate
+                        {
+                            // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
+                            barrier.SignalAndWait();
+
+                            for (int j = 0; j < iterations; j++)
                             {
-                                // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
-                                barrier.SignalAndWait();
-
-                                for (int j = 0; j < iterations; j++)
-                                {
-                                    Assert.True(func(ref list, l => l.Add(l.Count)));
-                                }
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        );
-                    }
-
-                    Task.WaitAll(tasks);
-                    Assert.Equal(concurrencyLevel * iterations, list.Count);
-                    for (int i = 0; i < list.Count; i++)
-                    {
-                        Assert.Equal(i, list[i]);
-                    }
+                                Assert.True(func(ref list, l => l.Add(l.Count)));
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
                 }
-            );
+
+                Task.WaitAll(tasks);
+                Assert.Equal(concurrencyLevel * iterations, list.Count);
+                for (int i = 0; i < list.Count; i++)
+                {
+                    Assert.Equal(i, list[i]);
+                }
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void UpdateArray_HighConcurrency()
         {
-            UpdateArrayHelper<int>(
-                func =>
+            UpdateArrayHelper<int>(func =>
+            {
+                ImmutableArray<int> array = ImmutableArray.Create<int>();
+                int concurrencyLevel = Environment.ProcessorCount;
+                int iterations = 500;
+                Task[] tasks = new Task[concurrencyLevel];
+                var barrier = new Barrier(tasks.Length);
+                for (int i = 0; i < tasks.Length; i++)
                 {
-                    ImmutableArray<int> array = ImmutableArray.Create<int>();
-                    int concurrencyLevel = Environment.ProcessorCount;
-                    int iterations = 500;
-                    Task[] tasks = new Task[concurrencyLevel];
-                    var barrier = new Barrier(tasks.Length);
-                    for (int i = 0; i < tasks.Length; i++)
-                    {
-                        tasks[i] = Task.Factory.StartNew(
-                            delegate
+                    tasks[i] = Task.Factory.StartNew(
+                        delegate
+                        {
+                            // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
+                            barrier.SignalAndWait();
+
+                            for (int j = 0; j < iterations; j++)
                             {
-                                // Maximize concurrency by blocking this thread until all the other threads are ready to go as well.
-                                barrier.SignalAndWait();
-
-                                for (int j = 0; j < iterations; j++)
-                                {
-                                    Assert.True(func(ref array, l => l.Add(l.Length)));
-                                }
-                            },
-                            CancellationToken.None,
-                            TaskCreationOptions.LongRunning,
-                            TaskScheduler.Default
-                        );
-                    }
-
-                    Task.WaitAll(tasks);
-                    Assert.Equal(concurrencyLevel * iterations, array.Length);
-                    for (int i = 0; i < array.Length; i++)
-                    {
-                        Assert.Equal(i, array[i]);
-                    }
+                                Assert.True(func(ref array, l => l.Add(l.Length)));
+                            }
+                        },
+                        CancellationToken.None,
+                        TaskCreationOptions.LongRunning,
+                        TaskScheduler.Default
+                    );
                 }
-            );
+
+                Task.WaitAll(tasks);
+                Assert.Equal(concurrencyLevel * iterations, array.Length);
+                for (int i = 0; i < array.Length; i++)
+                {
+                    Assert.Equal(i, array[i]);
+                }
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void Update_CarefullyScheduled()
         {
-            UpdateHelper<ImmutableHashSet<int>>(
-                func =>
-                {
-                    var set = ImmutableHashSet.Create<int>();
-                    var task2TransformEntered = new AutoResetEvent(false);
-                    var task1TransformExited = new AutoResetEvent(false);
+            UpdateHelper<ImmutableHashSet<int>>(func =>
+            {
+                var set = ImmutableHashSet.Create<int>();
+                var task2TransformEntered = new AutoResetEvent(false);
+                var task1TransformExited = new AutoResetEvent(false);
 
-                    var task1 = Task.Run(
-                        delegate
-                        {
-                            int transform1ExecutionCounter = 0;
-                            func(
-                                ref set,
-                                s =>
+                var task1 = Task.Run(
+                    delegate
+                    {
+                        int transform1ExecutionCounter = 0;
+                        func(
+                            ref set,
+                            s =>
+                            {
+                                Assert.Equal(1, ++transform1ExecutionCounter);
+                                task2TransformEntered.WaitOne();
+                                return s.Add(1);
+                            }
+                        );
+                        task1TransformExited.Set();
+                        Assert.Equal(1, transform1ExecutionCounter);
+                    }
+                );
+
+                var task2 = Task.Run(
+                    delegate
+                    {
+                        int transform2ExecutionCounter = 0;
+                        func(
+                            ref set,
+                            s =>
+                            {
+                                switch (++transform2ExecutionCounter)
                                 {
-                                    Assert.Equal(1, ++transform1ExecutionCounter);
-                                    task2TransformEntered.WaitOne();
-                                    return s.Add(1);
+                                    case 1:
+                                        task2TransformEntered.Set();
+                                        task1TransformExited.WaitOne();
+                                        Assert.True(s.IsEmpty);
+                                        break;
+                                    case 2:
+                                        Assert.True(s.Contains(1));
+                                        Assert.Equal(1, s.Count);
+                                        break;
                                 }
-                            );
-                            task1TransformExited.Set();
-                            Assert.Equal(1, transform1ExecutionCounter);
-                        }
-                    );
 
-                    var task2 = Task.Run(
-                        delegate
-                        {
-                            int transform2ExecutionCounter = 0;
-                            func(
-                                ref set,
-                                s =>
-                                {
-                                    switch (++transform2ExecutionCounter)
-                                    {
-                                        case 1:
-                                            task2TransformEntered.Set();
-                                            task1TransformExited.WaitOne();
-                                            Assert.True(s.IsEmpty);
-                                            break;
-                                        case 2:
-                                            Assert.True(s.Contains(1));
-                                            Assert.Equal(1, s.Count);
-                                            break;
-                                    }
+                                return s.Add(2);
+                            }
+                        );
 
-                                    return s.Add(2);
-                                }
-                            );
+                        // Verify that this transform had to execute twice.
+                        Assert.Equal(2, transform2ExecutionCounter);
+                    }
+                );
 
-                            // Verify that this transform had to execute twice.
-                            Assert.Equal(2, transform2ExecutionCounter);
-                        }
-                    );
-
-                    // Wait for all tasks and rethrow any exceptions.
-                    Task.WaitAll(task1, task2);
-                    Assert.Equal(2, set.Count);
-                    Assert.True(set.Contains(1));
-                    Assert.True(set.Contains(2));
-                }
-            );
+                // Wait for all tasks and rethrow any exceptions.
+                Task.WaitAll(task1, task2);
+                Assert.Equal(2, set.Count);
+                Assert.True(set.Contains(1));
+                Assert.True(set.Contains(2));
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
         public void UpdateArray_CarefullyScheduled()
         {
-            UpdateArrayHelper<int>(
-                func =>
-                {
-                    var array = ImmutableArray.Create<int>();
-                    var task2TransformEntered = new AutoResetEvent(false);
-                    var task1TransformExited = new AutoResetEvent(false);
+            UpdateArrayHelper<int>(func =>
+            {
+                var array = ImmutableArray.Create<int>();
+                var task2TransformEntered = new AutoResetEvent(false);
+                var task1TransformExited = new AutoResetEvent(false);
 
-                    var task1 = Task.Run(
-                        delegate
-                        {
-                            int transform1ExecutionCounter = 0;
-                            func(
-                                ref array,
-                                s =>
+                var task1 = Task.Run(
+                    delegate
+                    {
+                        int transform1ExecutionCounter = 0;
+                        func(
+                            ref array,
+                            s =>
+                            {
+                                Assert.Equal(1, ++transform1ExecutionCounter);
+                                task2TransformEntered.WaitOne();
+                                return s.Add(1);
+                            }
+                        );
+                        task1TransformExited.Set();
+                        Assert.Equal(1, transform1ExecutionCounter);
+                    }
+                );
+
+                var task2 = Task.Run(
+                    delegate
+                    {
+                        int transform2ExecutionCounter = 0;
+                        func(
+                            ref array,
+                            s =>
+                            {
+                                switch (++transform2ExecutionCounter)
                                 {
-                                    Assert.Equal(1, ++transform1ExecutionCounter);
-                                    task2TransformEntered.WaitOne();
-                                    return s.Add(1);
+                                    case 1:
+                                        task2TransformEntered.Set();
+                                        task1TransformExited.WaitOne();
+                                        Assert.True(s.IsEmpty);
+                                        break;
+                                    case 2:
+                                        Assert.True(s.Contains(1));
+                                        Assert.Equal(1, s.Length);
+                                        break;
                                 }
-                            );
-                            task1TransformExited.Set();
-                            Assert.Equal(1, transform1ExecutionCounter);
-                        }
-                    );
 
-                    var task2 = Task.Run(
-                        delegate
-                        {
-                            int transform2ExecutionCounter = 0;
-                            func(
-                                ref array,
-                                s =>
-                                {
-                                    switch (++transform2ExecutionCounter)
-                                    {
-                                        case 1:
-                                            task2TransformEntered.Set();
-                                            task1TransformExited.WaitOne();
-                                            Assert.True(s.IsEmpty);
-                                            break;
-                                        case 2:
-                                            Assert.True(s.Contains(1));
-                                            Assert.Equal(1, s.Length);
-                                            break;
-                                    }
+                                return s.Add(2);
+                            }
+                        );
 
-                                    return s.Add(2);
-                                }
-                            );
+                        // Verify that this transform had to execute twice.
+                        Assert.Equal(2, transform2ExecutionCounter);
+                    }
+                );
 
-                            // Verify that this transform had to execute twice.
-                            Assert.Equal(2, transform2ExecutionCounter);
-                        }
-                    );
-
-                    // Wait for all tasks and rethrow any exceptions.
-                    Task.WaitAll(task1, task2);
-                    Assert.Equal(2, array.Length);
-                    Assert.True(array.Contains(1));
-                    Assert.True(array.Contains(2));
-                }
-            );
+                // Wait for all tasks and rethrow any exceptions.
+                Task.WaitAll(task1, task2);
+                Assert.Equal(2, array.Length);
+                Assert.True(array.Contains(1));
+                Assert.True(array.Contains(2));
+            });
         }
 
         [Fact]

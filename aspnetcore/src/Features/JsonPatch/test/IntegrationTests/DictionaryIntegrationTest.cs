@@ -167,12 +167,10 @@ public class DictionaryTest
         patchDocument.Test($"/DictionaryOfStringToCustomer/{key1}/Name", "Mike");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(model);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(model);
+        });
 
         // Assert
         Assert.Equal(

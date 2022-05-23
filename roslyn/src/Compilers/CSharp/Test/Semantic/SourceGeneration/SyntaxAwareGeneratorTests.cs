@@ -242,42 +242,34 @@ class C { }
                 CancellationToken.None
             );
             init.RegisterForSyntaxNotifications(() => new TestSyntaxReceiver());
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    init.RegisterForSyntaxNotifications(() => new TestSyntaxReceiver());
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                init.RegisterForSyntaxNotifications(() => new TestSyntaxReceiver());
+            });
 
             // ISyntaxContextReceiver + ISyntaxContextReceiver
             init = new GeneratorInitializationContext(CancellationToken.None);
             init.RegisterForSyntaxNotifications(() => new TestSyntaxContextReceiver());
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    init.RegisterForSyntaxNotifications(() => new TestSyntaxContextReceiver());
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                init.RegisterForSyntaxNotifications(() => new TestSyntaxContextReceiver());
+            });
 
             // ISyntaxContextReceiver + ISyntaxReceiver
             init = new GeneratorInitializationContext(CancellationToken.None);
             init.RegisterForSyntaxNotifications(() => new TestSyntaxContextReceiver());
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    init.RegisterForSyntaxNotifications(() => new TestSyntaxReceiver());
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                init.RegisterForSyntaxNotifications(() => new TestSyntaxReceiver());
+            });
 
             // ISyntaxReceiver + ISyntaxContextReceiver
             init = new GeneratorInitializationContext(CancellationToken.None);
             init.RegisterForSyntaxNotifications(() => new TestSyntaxReceiver());
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    init.RegisterForSyntaxNotifications(() => new TestSyntaxContextReceiver());
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                init.RegisterForSyntaxNotifications(() => new TestSyntaxContextReceiver());
+            });
         }
 
         [Fact]
@@ -1178,25 +1170,23 @@ class C
             );
             compilation.VerifyDiagnostics();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                        }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1238,37 +1228,35 @@ class classD
             );
             compilation.VerifyDiagnostics();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                        }
-                    );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                    }
+                );
 
-                    var source2 = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is ClassDeclarationSyntax fds,
-                        (c, _) => ((ClassDeclarationSyntax)c.Node).Identifier.ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source2,
-                        (spc, className) =>
-                        {
-                            spc.AddSource(className, "");
-                        }
-                    );
-                }
-            );
+                var source2 = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is ClassDeclarationSyntax fds,
+                    (c, _) => ((ClassDeclarationSyntax)c.Node).Identifier.ValueText
+                );
+                context.RegisterSourceOutput(
+                    source2,
+                    (spc, className) =>
+                    {
+                        spc.AddSource(className, "");
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1306,26 +1294,24 @@ class C
             compilation.VerifyDiagnostics();
 
             List<string> fieldsCalledFor = new List<string>();
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                            fieldsCalledFor.Add(fieldName);
-                        }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                        fieldsCalledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1399,26 +1385,24 @@ class D
             compilation.VerifyDiagnostics();
 
             List<string> fieldsCalledFor = new List<string>();
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                            fieldsCalledFor.Add(fieldName);
-                        }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                        fieldsCalledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1488,26 +1472,24 @@ class D
             compilation.VerifyDiagnostics();
 
             List<string> fieldsCalledFor = new List<string>();
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                            fieldsCalledFor.Add(fieldName);
-                        }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                        fieldsCalledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1577,26 +1559,24 @@ class E
             compilation.VerifyDiagnostics();
 
             List<string> fieldsCalledFor = new List<string>();
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                            fieldsCalledFor.Add(fieldName);
-                        }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                        fieldsCalledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1676,37 +1656,35 @@ class E
             List<string> fieldsCalledFor = new List<string>();
             List<string> syntaxFieldsCalledFor = new List<string>();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) =>
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) =>
+                    {
+                        if (c is FieldDeclarationSyntax fds)
                         {
-                            if (c is FieldDeclarationSyntax fds)
-                            {
-                                syntaxFieldsCalledFor.Add(
-                                    fds.Declaration.Variables[0].Identifier.ValueText
-                                );
-                                return true;
-                            }
-                            return false;
-                        },
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            spc.AddSource(fieldName, "");
-                            fieldsCalledFor.Add(fieldName);
+                            syntaxFieldsCalledFor.Add(
+                                fds.Declaration.Variables[0].Identifier.ValueText
+                            );
+                            return true;
                         }
-                    );
-                }
-            );
+                        return false;
+                    },
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        spc.AddSource(fieldName, "");
+                        fieldsCalledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1807,26 +1785,24 @@ class C
             compilation.VerifyDiagnostics();
 
             List<string> calledFor = new List<string>();
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                .Identifier
-                                .ValueText
-                    );
-                    source = source.WithComparer(new LambdaComparer<string>((a, b) => true));
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            calledFor.Add(fieldName);
-                        }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                        ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText
+                );
+                source = source.WithComparer(new LambdaComparer<string>((a, b) => true));
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        calledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1870,30 +1846,28 @@ class C
 
             List<string> syntaxCalledFor = new List<string>();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                        {
-                            syntaxCalledFor.Add(
-                                ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                    .Identifier
-                                    .ValueText
-                            );
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                    {
+                        syntaxCalledFor.Add(
+                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
                                 .Identifier
-                                .ValueText;
-                        }
-                    );
-                    source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
-                    source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
-                    source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
-                    source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
-                    context.RegisterSourceOutput(source, (spc, fieldName) => { });
-                }
-            );
+                                .ValueText
+                        );
+                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText;
+                    }
+                );
+                source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
+                source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
+                source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
+                source = source.WithComparer(new LambdaComparer<string>((a, b) => false));
+                context.RegisterSourceOutput(source, (spc, fieldName) => { });
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -1941,44 +1915,42 @@ class C
             List<string> noCompareCalledFor = new List<string>();
             List<string> compareCalledFor = new List<string>();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                        {
-                            syntaxCalledFor.Add(
-                                ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                    .Identifier
-                                    .ValueText
-                            );
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                    {
+                        syntaxCalledFor.Add(
+                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
                                 .Identifier
-                                .ValueText;
-                        }
-                    );
+                                .ValueText
+                        );
+                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText;
+                    }
+                );
 
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            noCompareCalledFor.Add(fieldName);
-                        }
-                    );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        noCompareCalledFor.Add(fieldName);
+                    }
+                );
 
-                    var comparerSource = source.WithComparer(
-                        new LambdaComparer<string>((a, b) => true)
-                    );
-                    context.RegisterSourceOutput(
-                        comparerSource,
-                        (spc, fieldName) =>
-                        {
-                            compareCalledFor.Add(fieldName);
-                        }
-                    );
-                }
-            );
+                var comparerSource = source.WithComparer(
+                    new LambdaComparer<string>((a, b) => true)
+                );
+                context.RegisterSourceOutput(
+                    comparerSource,
+                    (spc, fieldName) =>
+                    {
+                        compareCalledFor.Add(fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -2038,41 +2010,39 @@ class C
             List<string> output1CalledFor = new List<string>();
             List<string> output2CalledFor = new List<string>();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                        {
-                            syntaxCalledFor.Add(
-                                ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                    .Identifier
-                                    .ValueText
-                            );
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                    {
+                        syntaxCalledFor.Add(
+                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
                                 .Identifier
-                                .ValueText;
-                        }
-                    );
+                                .ValueText
+                        );
+                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText;
+                    }
+                );
 
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            output1CalledFor.Add("Output1_" + fieldName);
-                        }
-                    );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        output1CalledFor.Add("Output1_" + fieldName);
+                    }
+                );
 
-                    context.RegisterSourceOutput(
-                        source,
-                        (spc, fieldName) =>
-                        {
-                            output2CalledFor.Add("Output2_" + fieldName);
-                        }
-                    );
-                }
-            );
+                context.RegisterSourceOutput(
+                    source,
+                    (spc, fieldName) =>
+                    {
+                        output2CalledFor.Add("Output2_" + fieldName);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -2116,38 +2086,36 @@ class C
             List<string> syntaxCalledFor = new List<string>();
             List<string> outputCalledFor = new List<string>();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                        {
-                            syntaxCalledFor.Add(
-                                ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                    .Identifier
-                                    .ValueText
-                            );
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                    {
+                        syntaxCalledFor.Add(
+                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
                                 .Identifier
-                                .ValueText;
-                        }
-                    );
+                                .ValueText
+                        );
+                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText;
+                    }
+                );
 
-                    var source2 = source
-                        .Combine(context.AdditionalTextsProvider.Collect())
-                        .Combine(context.AnalyzerConfigOptionsProvider)
-                        .Combine(context.ParseOptionsProvider);
+                var source2 = source
+                    .Combine(context.AdditionalTextsProvider.Collect())
+                    .Combine(context.AnalyzerConfigOptionsProvider)
+                    .Combine(context.ParseOptionsProvider);
 
-                    context.RegisterSourceOutput(
-                        source2,
-                        (spc, output) =>
-                        {
-                            outputCalledFor.Add(output.Left.Left.Left);
-                        }
-                    );
-                }
-            );
+                context.RegisterSourceOutput(
+                    source2,
+                    (spc, output) =>
+                    {
+                        outputCalledFor.Add(output.Left.Left.Left);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -2184,39 +2152,37 @@ class C
             List<string> syntaxCalledFor = new List<string>();
             List<string> outputCalledFor = new List<string>();
 
-            var testGenerator = new PipelineCallbackGenerator(
-                context =>
-                {
-                    var source = context.SyntaxProvider.CreateSyntaxProvider(
-                        (c, _) => c is FieldDeclarationSyntax fds,
-                        (c, _) =>
-                        {
-                            syntaxCalledFor.Add(
-                                ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
-                                    .Identifier
-                                    .ValueText
-                            );
-                            return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+            var testGenerator = new PipelineCallbackGenerator(context =>
+            {
+                var source = context.SyntaxProvider.CreateSyntaxProvider(
+                    (c, _) => c is FieldDeclarationSyntax fds,
+                    (c, _) =>
+                    {
+                        syntaxCalledFor.Add(
+                            ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
                                 .Identifier
-                                .ValueText;
-                        }
-                    );
+                                .ValueText
+                        );
+                        return ((FieldDeclarationSyntax)c.Node).Declaration.Variables[0]
+                            .Identifier
+                            .ValueText;
+                    }
+                );
 
-                    var comparerSource = source.WithComparer(
-                        new LambdaComparer<string>((a, b) => false)
-                    );
+                var comparerSource = source.WithComparer(
+                    new LambdaComparer<string>((a, b) => false)
+                );
 
-                    // now join the two sources together
-                    var joinedSource = source.Combine(comparerSource.Collect());
-                    context.RegisterSourceOutput(
-                        joinedSource,
-                        (spc, fieldName) =>
-                        {
-                            outputCalledFor.Add(fieldName.Left);
-                        }
-                    );
-                }
-            );
+                // now join the two sources together
+                var joinedSource = source.Combine(comparerSource.Collect());
+                context.RegisterSourceOutput(
+                    joinedSource,
+                    (spc, fieldName) =>
+                    {
+                        outputCalledFor.Add(fieldName.Left);
+                    }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -2259,23 +2225,21 @@ class C
             Assert.Single(compilation.SyntaxTrees);
 
             var exception = new Exception("Test Exception");
-            var testGenerator = new PipelineCallbackGenerator(
-                ctx =>
-                {
-                    ctx.RegisterSourceOutput(
-                        ctx.SyntaxProvider.CreateSyntaxProvider(
-                            (s, _) =>
-                            {
-                                if (s is AssignmentExpressionSyntax)
-                                    throw exception;
-                                return true;
-                            },
-                            (c, _) => c.Node
-                        ),
-                        (spc, s) => { }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(ctx =>
+            {
+                ctx.RegisterSourceOutput(
+                    ctx.SyntaxProvider.CreateSyntaxProvider(
+                        (s, _) =>
+                        {
+                            if (s is AssignmentExpressionSyntax)
+                                throw exception;
+                            return true;
+                        },
+                        (c, _) => c.Node
+                    ),
+                    (spc, s) => { }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -2329,18 +2293,16 @@ class C
             Assert.Single(compilation.SyntaxTrees);
 
             var exception = new Exception("Test Exception");
-            var testGenerator = new PipelineCallbackGenerator(
-                ctx =>
-                {
-                    ctx.RegisterSourceOutput(
-                        ctx.SyntaxProvider.CreateSyntaxProvider<object>(
-                            (s, _) => s is AssignmentExpressionSyntax,
-                            (c, _) => throw exception
-                        ),
-                        (spc, s) => { }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(ctx =>
+            {
+                ctx.RegisterSourceOutput(
+                    ctx.SyntaxProvider.CreateSyntaxProvider<object>(
+                        (s, _) => s is AssignmentExpressionSyntax,
+                        (c, _) => throw exception
+                    ),
+                    (spc, s) => { }
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[] { new IncrementalGeneratorWrapper(testGenerator) },
@@ -2394,28 +2356,24 @@ class C
             Assert.Single(compilation.SyntaxTrees);
 
             var exception = new Exception("Test Exception");
-            var testGenerator = new PipelineCallbackGenerator(
-                ctx =>
-                {
-                    ctx.RegisterSourceOutput(
-                        ctx.SyntaxProvider.CreateSyntaxProvider<object>(
-                            (s, _) => s is AssignmentExpressionSyntax,
-                            (c, _) => throw exception
-                        ),
-                        (spc, s) => { }
-                    );
-                }
-            );
+            var testGenerator = new PipelineCallbackGenerator(ctx =>
+            {
+                ctx.RegisterSourceOutput(
+                    ctx.SyntaxProvider.CreateSyntaxProvider<object>(
+                        (s, _) => s is AssignmentExpressionSyntax,
+                        (c, _) => throw exception
+                    ),
+                    (spc, s) => { }
+                );
+            });
 
-            var testGenerator2 = new PipelineCallbackGenerator2(
-                ctx =>
-                {
-                    ctx.RegisterSourceOutput(
-                        ctx.CompilationProvider,
-                        (spc, s) => spc.AddSource("test", "")
-                    );
-                }
-            );
+            var testGenerator2 = new PipelineCallbackGenerator2(ctx =>
+            {
+                ctx.RegisterSourceOutput(
+                    ctx.CompilationProvider,
+                    (spc, s) => spc.AddSource("test", "")
+                );
+            });
 
             GeneratorDriver driver = CSharpGeneratorDriver.Create(
                 new[]

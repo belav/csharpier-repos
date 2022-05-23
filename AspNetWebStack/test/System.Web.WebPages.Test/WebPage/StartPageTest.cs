@@ -72,21 +72,17 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InitPageLayoutTest()
         {
-            var init = Utils.CreateStartPage(
-                p =>
-                {
-                    p.Layout = "Layout.cshtml";
-                    p.Write(" this is the init page ");
-                    Assert.Equal("~/Layout.cshtml", p.Layout);
-                }
-            );
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "IndexCshtmlPage";
-                    p.Write("hello world");
-                }
-            );
+            var init = Utils.CreateStartPage(p =>
+            {
+                p.Layout = "Layout.cshtml";
+                p.Write(" this is the init page ");
+                Assert.Equal("~/Layout.cshtml", p.Layout);
+            });
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "IndexCshtmlPage";
+                p.Write("hello world");
+            });
             var layoutPage = Utils.CreatePage(
                 p =>
                 {
@@ -112,15 +108,13 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InitPageNullLayoutPageTest()
         {
-            var init1 = Utils.CreateStartPage(
-                p =>
-                {
-                    p.Layout = "~/Layout.cshtml";
-                    p.WriteLiteral("<init1>");
-                    p.RunPage();
-                    p.WriteLiteral("</init1>");
-                }
-            );
+            var init1 = Utils.CreateStartPage(p =>
+            {
+                p.Layout = "~/Layout.cshtml";
+                p.WriteLiteral("<init1>");
+                p.RunPage();
+                p.WriteLiteral("</init1>");
+            });
             var init2path = "~/folder1/_pagestart.cshtml";
             var init2 = Utils.CreateStartPage(
                 p =>
@@ -148,23 +142,19 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void PageSetsNullLayoutPageTest()
         {
-            var init1 = Utils.CreateStartPage(
-                p =>
-                {
-                    p.Layout = "~/Layout.cshtml";
-                    p.WriteLiteral("<init1>");
-                    p.RunPage();
-                    p.WriteLiteral("</init1>");
-                }
-            );
+            var init1 = Utils.CreateStartPage(p =>
+            {
+                p.Layout = "~/Layout.cshtml";
+                p.WriteLiteral("<init1>");
+                p.RunPage();
+                p.WriteLiteral("</init1>");
+            });
             var layoutPage = Utils.CreatePage(p => p.Write("layout page"), "~/Layout.cshtml");
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = null;
-                    p.Write("hello world");
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = null;
+                p.Write("hello world");
+            });
             Utils.AssignObjectFactoriesAndDisplayModeProvider(init1, layoutPage, page);
             init1.ChildPage = page;
             var result = Utils.RenderWebPage(page, init1);
@@ -174,23 +164,19 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void PageSetsEmptyLayoutPageTest()
         {
-            var init1 = Utils.CreateStartPage(
-                p =>
-                {
-                    p.Layout = "~/Layout.cshtml";
-                    p.WriteLiteral("<init1>");
-                    p.RunPage();
-                    p.WriteLiteral("</init1>");
-                }
-            );
+            var init1 = Utils.CreateStartPage(p =>
+            {
+                p.Layout = "~/Layout.cshtml";
+                p.WriteLiteral("<init1>");
+                p.RunPage();
+                p.WriteLiteral("</init1>");
+            });
             var layoutPage = Utils.CreatePage(p => p.Write("layout page"), "~/Layout.cshtml");
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = "";
-                    p.Write("hello world");
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = "";
+                p.Write("hello world");
+            });
             Utils.AssignObjectFactoriesAndDisplayModeProvider(init1, layoutPage, page);
             init1.ChildPage = page;
             var result = Utils.RenderWebPage(page, init1);
@@ -210,14 +196,12 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void RunPageTest()
         {
-            var init = Utils.CreateStartPage(
-                p =>
-                {
-                    p.Write("init page start ");
-                    p.RunPage();
-                    p.Write(" init page end");
-                }
-            );
+            var init = Utils.CreateStartPage(p =>
+            {
+                p.Write("init page start ");
+                p.RunPage();
+                p.Write(" init page end");
+            });
             var page = Utils.CreatePage(p => p.Write("hello world"));
 
             init.ChildPage = page;
@@ -244,14 +228,12 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void NestedRunPageTest()
         {
-            var init1 = Utils.CreateStartPage(
-                p =>
-                {
-                    p.WriteLiteral("<init1>");
-                    p.RunPage();
-                    p.WriteLiteral("</init1>");
-                }
-            );
+            var init1 = Utils.CreateStartPage(p =>
+            {
+                p.WriteLiteral("<init1>");
+                p.RunPage();
+                p.WriteLiteral("</init1>");
+            });
             var init2path = "~/folder1/_pagestart.cshtml";
             var init2 = Utils.CreateStartPage(
                 p =>
@@ -321,13 +303,11 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void RenderPageTest()
         {
-            var init = Utils.CreateStartPage(
-                p =>
-                {
-                    p.Write("init page ");
-                    p.Write(p.RenderPage("subpage.cshtml", "init_data"));
-                }
-            );
+            var init = Utils.CreateStartPage(p =>
+            {
+                p.Write("init page ");
+                p.Write(p.RenderPage("subpage.cshtml", "init_data"));
+            });
             var subpagePath = "~/subpage.cshtml";
             var subpage = Utils.CreatePage(
                 p =>
@@ -366,28 +346,24 @@ namespace System.Web.WebPages.Test
         // <init>hello world Exception: exception from index.cshtml</init>
         public void InitCatchExceptionTest()
         {
-            var init = Utils.CreateStartPage(
-                p =>
+            var init = Utils.CreateStartPage(p =>
+            {
+                p.WriteLiteral("<init>");
+                try
                 {
-                    p.WriteLiteral("<init>");
-                    try
-                    {
-                        p.RunPage();
-                    }
-                    catch (Exception e)
-                    {
-                        p.Write("Exception: " + e.Message);
-                    }
-                    p.WriteLiteral("</init>");
+                    p.RunPage();
                 }
-            );
-            var page = Utils.CreatePage(
-                p =>
+                catch (Exception e)
                 {
-                    p.WriteLiteral("hello world ");
-                    throw new InvalidOperationException("exception from index.cshtml");
+                    p.Write("Exception: " + e.Message);
                 }
-            );
+                p.WriteLiteral("</init>");
+            });
+            var page = Utils.CreatePage(p =>
+            {
+                p.WriteLiteral("hello world ");
+                throw new InvalidOperationException("exception from index.cshtml");
+            });
 
             init.ChildPage = page;
 
@@ -409,35 +385,33 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void ExecuteWithinInitTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                Utils.CreateHttpRuntime("/subfolder1/website1");
+                new HostingEnvironment();
+                var stringSet = Activator.CreateInstance(
+                    typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"),
+                    true
+                );
+                typeof(BuildManager)
+                    .GetField(
+                        "_forbiddenTopLevelDirectories",
+                        BindingFlags.Instance | BindingFlags.NonPublic
+                    )
+                    .SetValue(new MockInitPage().GetBuildManager(), stringSet);
+                ;
+
+                var init = new MockInitPage()
                 {
-                    Utils.CreateHttpRuntime("/subfolder1/website1");
-                    new HostingEnvironment();
-                    var stringSet = Activator.CreateInstance(
-                        typeof(BuildManager).Assembly.GetType("System.Web.Util.StringSet"),
-                        true
-                    );
-                    typeof(BuildManager)
-                        .GetField(
-                            "_forbiddenTopLevelDirectories",
-                            BindingFlags.Instance | BindingFlags.NonPublic
-                        )
-                        .SetValue(new MockInitPage().GetBuildManager(), stringSet);
-                    ;
+                    VirtualPath = "~/_pagestart.cshtml",
+                    ExecuteAction = p => { },
+                };
+                var page = Utils.CreatePage(p => { });
 
-                    var init = new MockInitPage()
-                    {
-                        VirtualPath = "~/_pagestart.cshtml",
-                        ExecuteAction = p => { },
-                    };
-                    var page = Utils.CreatePage(p => { });
+                Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
 
-                    Utils.AssignObjectFactoriesAndDisplayModeProvider(page, init);
-
-                    var result = Utils.RenderWebPage(page);
-                }
-            );
+                var result = Utils.RenderWebPage(page);
+            });
         }
 
         [Fact]

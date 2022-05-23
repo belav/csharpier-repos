@@ -23,83 +23,71 @@ public partial class Startup
 {
     private void WebSocketNotUpgradable(IApplicationBuilder app)
     {
-        app.Run(
-            context =>
-            {
-                var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
-                Assert.False(upgradeFeature.IsUpgradableRequest);
-                return Task.CompletedTask;
-            }
-        );
+        app.Run(context =>
+        {
+            var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
+            Assert.False(upgradeFeature.IsUpgradableRequest);
+            return Task.CompletedTask;
+        });
     }
 
     private void WebSocketUpgradable(IApplicationBuilder app)
     {
-        app.Run(
-            context =>
-            {
-                var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
-                Assert.True(upgradeFeature.IsUpgradableRequest);
-                return Task.CompletedTask;
-            }
-        );
+        app.Run(context =>
+        {
+            var upgradeFeature = context.Features.Get<IHttpUpgradeFeature>();
+            Assert.True(upgradeFeature.IsUpgradableRequest);
+            return Task.CompletedTask;
+        });
     }
 
     private void WebSocketReadBeforeUpgrade(IApplicationBuilder app)
     {
-        app.Run(
-            async context =>
-            {
-                var singleByteArray = new byte[1];
-                Assert.Equal(0, await context.Request.Body.ReadAsync(singleByteArray, 0, 1));
+        app.Run(async context =>
+        {
+            var singleByteArray = new byte[1];
+            Assert.Equal(0, await context.Request.Body.ReadAsync(singleByteArray, 0, 1));
 
-                var ws = await Upgrade(context);
-                await SendMessages(ws, "Yay");
-            }
-        );
+            var ws = await Upgrade(context);
+            await SendMessages(ws, "Yay");
+        });
     }
 
     private void WebSocketEcho(IApplicationBuilder app)
     {
-        app.Run(
-            async context =>
-            {
-                var ws = await Upgrade(context);
+        app.Run(async context =>
+        {
+            var ws = await Upgrade(context);
 #if FORWARDCOMPAT
-                var appLifetime =
-                    app.ApplicationServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
+            var appLifetime =
+                app.ApplicationServices.GetRequiredService<Microsoft.AspNetCore.Hosting.IApplicationLifetime>();
 #else
-                var appLifetime =
-                    app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
+            var appLifetime =
+                app.ApplicationServices.GetRequiredService<IHostApplicationLifetime>();
 #endif
 
-                await Echo(ws, appLifetime.ApplicationStopping);
-            }
-        );
+            await Echo(ws, appLifetime.ApplicationStopping);
+        });
     }
 
     private void WebSocketLifetimeEvents(IApplicationBuilder app)
     {
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            var messages = new List<string>();
+
+            context.Response.OnStarting(() =>
             {
-                var messages = new List<string>();
+                context.Response.Headers["custom-header"] = "value";
+                messages.Add("OnStarting");
+                return Task.CompletedTask;
+            });
 
-                context.Response.OnStarting(
-                    () =>
-                    {
-                        context.Response.Headers["custom-header"] = "value";
-                        messages.Add("OnStarting");
-                        return Task.CompletedTask;
-                    }
-                );
+            var ws = await Upgrade(context);
+            messages.Add("Upgraded");
 
-                var ws = await Upgrade(context);
-                messages.Add("Upgraded");
-
-                await SendMessages(ws, messages.ToArray());
-            }
-        );
+            await SendMessages(ws, messages.ToArray());
+        });
     }
 
     private static async Task SendMessages(WebSocket webSocket, params string[] messages)

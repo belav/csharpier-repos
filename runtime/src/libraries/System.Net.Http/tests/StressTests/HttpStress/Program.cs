@@ -446,13 +446,11 @@ namespace HttpStress
                 var cts = new System.Threading.CancellationTokenSource(
                     delay: maxExecutionTime.Value
                 );
-                cts.Token.Register(
-                    () =>
-                    {
-                        Console.WriteLine("Max execution time elapsed");
-                        tcs.TrySetResult(false);
-                    }
-                );
+                cts.Token.Register(() =>
+                {
+                    Console.WriteLine("Max execution time elapsed");
+                    tcs.TrySetResult(false);
+                });
             }
 
             await tcs.Task;

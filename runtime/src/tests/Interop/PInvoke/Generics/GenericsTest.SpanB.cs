@@ -37,12 +37,10 @@ unsafe partial class GenericsTest
 
         Assert.Throws<MarshalDirectiveException>(() => GenericsNative.AddSpanB(default, default));
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-            {
-                Span<bool> value = default;
-                GenericsNative.AddSpanBs(in value, 1);
-            }
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            Span<bool> value = default;
+            GenericsNative.AddSpanBs(in value, 1);
+        });
     }
 }

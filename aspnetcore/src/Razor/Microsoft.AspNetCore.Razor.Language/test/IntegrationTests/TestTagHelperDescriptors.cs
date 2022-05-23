@@ -798,13 +798,11 @@ public class TestTagHelperDescriptors
         {
             foreach (var ruleBuilder in ruleBuilders)
             {
-                builder.TagMatchingRuleDescriptor(
-                    innerRuleBuilder =>
-                    {
-                        innerRuleBuilder.RequireTagName(tagName);
-                        ruleBuilder(innerRuleBuilder);
-                    }
-                );
+                builder.TagMatchingRuleDescriptor(innerRuleBuilder =>
+                {
+                    innerRuleBuilder.RequireTagName(tagName);
+                    ruleBuilder(innerRuleBuilder);
+                });
             }
         }
         else

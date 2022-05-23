@@ -128,30 +128,28 @@ namespace System.Media.Test
                 listener.Listen(1);
                 var ep = (IPEndPoint)listener.LocalEndPoint;
 
-                Task serverTask = Task.Run(
-                    async () =>
-                    {
-                        using (Socket server = await listener.AcceptAsync())
-                        using (var serverStream = new NetworkStream(server))
-                        using (var reader = new StreamReader(new NetworkStream(server)))
-                        using (
-                            FileStream sourceStream = File.OpenRead(
-                                sourceLocation.Replace("file://", "")
-                            )
+                Task serverTask = Task.Run(async () =>
+                {
+                    using (Socket server = await listener.AcceptAsync())
+                    using (var serverStream = new NetworkStream(server))
+                    using (var reader = new StreamReader(new NetworkStream(server)))
+                    using (
+                        FileStream sourceStream = File.OpenRead(
+                            sourceLocation.Replace("file://", "")
                         )
-                        {
-                            string line;
-                            while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()))
-                                ;
-                            byte[] header = Encoding.UTF8.GetBytes(
-                                $"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n"
-                            );
-                            serverStream.Write(header, 0, header.Length);
-                            await sourceStream.CopyToAsync(serverStream);
-                            server.Shutdown(SocketShutdown.Both);
-                        }
+                    )
+                    {
+                        string line;
+                        while (!string.IsNullOrEmpty(line = await reader.ReadLineAsync()))
+                            ;
+                        byte[] header = Encoding.UTF8.GetBytes(
+                            $"HTTP/1.1 200 OK\r\nContent-Length: {sourceStream.Length}\r\n\r\n"
+                        );
+                        serverStream.Write(header, 0, header.Length);
+                        await sourceStream.CopyToAsync(serverStream);
+                        server.Shutdown(SocketShutdown.Both);
                     }
-                );
+                });
 
                 var tcs = new TaskCompletionSource<AsyncCompletedEventArgs>();
                 player.LoadCompleted += (s, e) => tcs.TrySetResult(e);

@@ -370,29 +370,27 @@ namespace System.Text.Tests
 
             public UnsafeLazyDelegate(string methodName)
             {
-                _lazyDelegate = new Lazy<TDelegate>(
-                    () =>
-                    {
-                        Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
+                _lazyDelegate = new Lazy<TDelegate>(() =>
+                {
+                    Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
 
-                        // Get the MethodInfo for the target method
+                    // Get the MethodInfo for the target method
 
-                        MethodInfo methodInfo = GetLatin1UtilityType()
-                            .GetMethod(
-                                methodName,
-                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                            );
-                        Assert.NotNull(methodInfo);
+                    MethodInfo methodInfo = GetLatin1UtilityType()
+                        .GetMethod(
+                            methodName,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                        );
+                    Assert.NotNull(methodInfo);
 
-                        // Construct the TDelegate pointing to this method
+                    // Construct the TDelegate pointing to this method
 
-                        return (TDelegate)
-                            Activator.CreateInstance(
-                                typeof(TDelegate),
-                                new object[] { null, methodInfo.MethodHandle.GetFunctionPointer() }
-                            );
-                    }
-                );
+                    return (TDelegate)
+                        Activator.CreateInstance(
+                            typeof(TDelegate),
+                            new object[] { null, methodInfo.MethodHandle.GetFunctionPointer() }
+                        );
+                });
             }
 
             public TDelegate Delegate => _lazyDelegate.Value;

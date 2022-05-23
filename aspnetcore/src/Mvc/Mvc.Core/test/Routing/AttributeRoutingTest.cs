@@ -75,12 +75,10 @@ public class AttributeRoutingTest
         var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            }
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
+        {
+            await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+        });
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -115,12 +113,10 @@ public class AttributeRoutingTest
         var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            }
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
+        {
+            await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+        });
 
         Assert.Equal(expectedMessage, ex.Message);
     }
@@ -158,12 +154,10 @@ public class AttributeRoutingTest
         var route = AttributeRouting.CreateAttributeMegaRoute(services);
 
         // Act & Assert
-        var ex = await Assert.ThrowsAsync<RouteCreationException>(
-            async () =>
-            {
-                await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
-            }
-        );
+        var ex = await Assert.ThrowsAsync<RouteCreationException>(async () =>
+        {
+            await route.RouteAsync(new RouteContext(new DefaultHttpContext()));
+        });
 
         Assert.Equal(expectedMessage, ex.Message);
     }

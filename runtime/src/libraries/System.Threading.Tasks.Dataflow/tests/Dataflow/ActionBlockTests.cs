@@ -529,19 +529,15 @@ namespace System.Threading.Tasks.Dataflow.Tests
         {
             int sumOfOdds = 0;
 
-            var ab = new ActionBlock<int>(
-                i =>
+            var ab = new ActionBlock<int>(i =>
+            {
+                if ((i % 2) == 0)
+                    return null;
+                return Task.Run(() =>
                 {
-                    if ((i % 2) == 0)
-                        return null;
-                    return Task.Run(
-                        () =>
-                        {
-                            sumOfOdds += i;
-                        }
-                    );
-                }
-            );
+                    sumOfOdds += i;
+                });
+            });
 
             const int MaxValue = 10;
             ab.PostRange(0, MaxValue);

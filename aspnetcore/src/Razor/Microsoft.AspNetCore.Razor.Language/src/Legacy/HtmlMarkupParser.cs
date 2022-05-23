@@ -1988,18 +1988,16 @@ internal class HtmlMarkupParser : TokenizerBackedParser<HtmlTokenizer>
     internal SyntaxToken AcceptAllButLastDoubleHyphens()
     {
         var lastDoubleHyphen = CurrentToken;
-        AcceptWhile(
-            s =>
+        AcceptWhile(s =>
+        {
+            if (NextIs(SyntaxKind.DoubleHyphen))
             {
-                if (NextIs(SyntaxKind.DoubleHyphen))
-                {
-                    lastDoubleHyphen = s;
-                    return true;
-                }
-
-                return false;
+                lastDoubleHyphen = s;
+                return true;
             }
-        );
+
+            return false;
+        });
 
         NextToken();
 

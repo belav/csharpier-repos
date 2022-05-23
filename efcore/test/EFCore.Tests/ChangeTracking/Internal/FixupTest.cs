@@ -4156,30 +4156,24 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Product>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.CategoryId);
-                        b.HasMany(e => e.SpecialOffers).WithOne(e => e.Product);
-                    }
-                );
+                modelBuilder.Entity<Product>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.CategoryId);
+                    b.HasMany(e => e.SpecialOffers).WithOne(e => e.Product);
+                });
 
-                modelBuilder.Entity<Category>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.HasMany(e => e.Products).WithOne(e => e.Category);
-                    }
-                );
+                modelBuilder.Entity<Category>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.HasMany(e => e.Products).WithOne(e => e.Category);
+                });
 
-                modelBuilder.Entity<SpecialOffer>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.ProductId);
-                    }
-                );
+                modelBuilder.Entity<SpecialOffer>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.ProductId);
+                });
 
                 modelBuilder
                     .Entity<CategoryPN>()
@@ -4199,23 +4193,19 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
                     .WithMany()
                     .HasForeignKey(e => e.CategoryId);
 
-                modelBuilder.Entity<Parent>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.HasOne(e => e.Child)
-                            .WithOne(e => e.Parent)
-                            .HasForeignKey<Child>(e => e.ParentId);
-                    }
-                );
+                modelBuilder.Entity<Parent>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.HasOne(e => e.Child)
+                        .WithOne(e => e.Parent)
+                        .HasForeignKey<Child>(e => e.ParentId);
+                });
 
-                modelBuilder.Entity<Child>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.ParentId);
-                    }
-                );
+                modelBuilder.Entity<Child>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.ParentId);
+                });
 
                 modelBuilder
                     .Entity<ParentPN>()
@@ -4308,16 +4298,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<TestClass>(
-                    x =>
-                    {
-                        x.Property<string>("AssemblyName");
-                        x.HasKey("AssemblyName", nameof(TestClass.Name));
-                        x.HasOne(c => c.Assembly)
-                            .WithMany(a => a.Classes)
-                            .HasForeignKey("AssemblyName");
-                    }
-                );
+                modelBuilder.Entity<TestClass>(x =>
+                {
+                    x.Property<string>("AssemblyName");
+                    x.HasKey("AssemblyName", nameof(TestClass.Name));
+                    x.HasOne(c => c.Assembly)
+                        .WithMany(a => a.Classes)
+                        .HasForeignKey("AssemblyName");
+                });
             }
         }
 

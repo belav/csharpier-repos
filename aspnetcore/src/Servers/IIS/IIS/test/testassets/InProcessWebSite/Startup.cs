@@ -200,13 +200,11 @@ public partial class Startup
     {
         builder.UseResponseCompression();
         // write random bytes to check that compressed data is passed through
-        builder.Run(
-            async context =>
-            {
-                context.Response.ContentType = "text/html";
-                await context.Response.Body.WriteAsync(new byte[100], 0, 100);
-            }
-        );
+        builder.Run(async context =>
+        {
+            context.Response.ContentType = "text/html";
+            await context.Response.Body.WriteAsync(new byte[100], 0, 100);
+        });
     }
 
     [DllImport("kernel32.dll")]
@@ -1483,41 +1481,39 @@ public partial class Startup
     public async Task OnCompletedHttpContext(HttpContext context)
     {
         // This shouldn't block the response or the server from shutting down.
-        context.Response.OnCompleted(
-            async () =>
+        context.Response.OnCompleted(async () =>
+        {
+            var context = _httpContextAccessor.HttpContext;
+
+            await Task.Delay(500);
+            // Access all fields of the connection after final flush.
+            try
             {
-                var context = _httpContextAccessor.HttpContext;
+                _ = context.Connection.RemoteIpAddress;
+                _ = context.Connection.LocalIpAddress;
+                _ = context.Connection.Id;
+                _ = context.Connection.ClientCertificate;
+                _ = context.Connection.LocalPort;
+                _ = context.Connection.RemotePort;
 
-                await Task.Delay(500);
-                // Access all fields of the connection after final flush.
-                try
-                {
-                    _ = context.Connection.RemoteIpAddress;
-                    _ = context.Connection.LocalIpAddress;
-                    _ = context.Connection.Id;
-                    _ = context.Connection.ClientCertificate;
-                    _ = context.Connection.LocalPort;
-                    _ = context.Connection.RemotePort;
+                _ = context.Request.ContentLength;
+                _ = context.Request.Headers;
+                _ = context.Request.Query;
+                _ = context.Request.Body;
+                _ = context.Request.ContentType;
 
-                    _ = context.Request.ContentLength;
-                    _ = context.Request.Headers;
-                    _ = context.Request.Query;
-                    _ = context.Request.Body;
-                    _ = context.Request.ContentType;
-
-                    _ = context.Response.StatusCode;
-                    _ = context.Response.Body;
-                    _ = context.Response.Headers;
-                    _ = context.Response.ContentType;
-                }
-                catch (Exception ex)
-                {
-                    _onCompletedHttpContext.TrySetResult(ex);
-                }
-
-                _onCompletedHttpContext.TrySetResult(null);
+                _ = context.Response.StatusCode;
+                _ = context.Response.Body;
+                _ = context.Response.Headers;
+                _ = context.Response.ContentType;
             }
-        );
+            catch (Exception ex)
+            {
+                _onCompletedHttpContext.TrySetResult(ex);
+            }
+
+            _onCompletedHttpContext.TrySetResult(null);
+        });
 
         await context.Response.WriteAsync("SlowOnCompleted");
     }
@@ -1641,12 +1637,10 @@ public partial class Startup
 
     public Task OnCompletedThrows(HttpContext httpContext)
     {
-        httpContext.Response.OnCompleted(
-            () =>
-            {
-                throw new Exception();
-            }
-        );
+        httpContext.Response.OnCompleted(() =>
+        {
+            throw new Exception();
+        });
 
         return Task.CompletedTask;
     }

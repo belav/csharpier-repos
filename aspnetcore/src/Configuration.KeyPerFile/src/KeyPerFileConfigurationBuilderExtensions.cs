@@ -54,18 +54,16 @@ public static class KeyPerFileConfigurationBuilderExtensions
         bool optional,
         bool reloadOnChange
     ) =>
-        builder.AddKeyPerFile(
-            source =>
+        builder.AddKeyPerFile(source =>
+        {
+            // Only try to set the file provider if its not optional or the directory exists
+            if (!optional || Directory.Exists(directoryPath))
             {
-                // Only try to set the file provider if its not optional or the directory exists
-                if (!optional || Directory.Exists(directoryPath))
-                {
-                    source.FileProvider = new PhysicalFileProvider(directoryPath);
-                }
-                source.Optional = optional;
-                source.ReloadOnChange = reloadOnChange;
+                source.FileProvider = new PhysicalFileProvider(directoryPath);
             }
-        );
+            source.Optional = optional;
+            source.ReloadOnChange = reloadOnChange;
+        });
 
     /// <summary>
     /// Adds configuration using files from a directory. File names are used as the key,

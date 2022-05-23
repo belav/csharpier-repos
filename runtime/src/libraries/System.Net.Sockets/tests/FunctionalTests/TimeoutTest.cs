@@ -91,12 +91,10 @@ namespace System.Net.Sockets.Tests
 
                 long start = Environment.TickCount64;
 
-                SocketException sockEx = Assert.Throws<SocketException>(
-                    () =>
-                    {
-                        acceptedSocket.Receive(new byte[1]);
-                    }
-                );
+                SocketException sockEx = Assert.Throws<SocketException>(() =>
+                {
+                    acceptedSocket.Receive(new byte[1]);
+                });
 
                 long elapsed = Environment.TickCount64 - start;
                 Assert.Equal(SocketError.TimedOut, sockEx.SocketErrorCode);

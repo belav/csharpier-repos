@@ -854,116 +854,104 @@ public class ClientCertificateAuthenticationTests
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.Use(
-                                    (context, next) =>
+                        .Configure(app =>
+                        {
+                            app.Use(
+                                (context, next) =>
+                                {
+                                    if (clientCertificate != null)
                                     {
-                                        if (clientCertificate != null)
-                                        {
-                                            context.Connection.ClientCertificate =
-                                                clientCertificate;
-                                        }
-                                        return next(context);
+                                        context.Connection.ClientCertificate = clientCertificate;
                                     }
-                                );
-
-                                if (wireUpHeaderMiddleware)
-                                {
-                                    app.UseCertificateForwarding();
+                                    return next(context);
                                 }
+                            );
 
-                                app.UseAuthentication();
-
-                                app.Run(
-                                    async (context) =>
-                                    {
-                                        var request = context.Request;
-                                        var response = context.Response;
-
-                                        var authenticationResult =
-                                            await context.AuthenticateAsync();
-
-                                        if (authenticationResult.Succeeded)
-                                        {
-                                            response.StatusCode = (int)HttpStatusCode.OK;
-                                            response.ContentType = "text/xml";
-
-                                            await response.WriteAsync("<claims>");
-                                            foreach (Claim claim in context.User.Claims)
-                                            {
-                                                await response.WriteAsync(
-                                                    $"<claim Type=\"{claim.Type}\" Issuer=\"{claim.Issuer}\">{claim.Value}</claim>"
-                                                );
-                                            }
-                                            await response.WriteAsync("</claims>");
-                                        }
-                                        else
-                                        {
-                                            await context.ChallengeAsync();
-                                        }
-                                    }
-                                );
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
+                            if (wireUpHeaderMiddleware)
                             {
-                                AuthenticationBuilder authBuilder;
-                                if (configureOptions != null)
-                                {
-                                    authBuilder = services
-                                        .AddAuthentication(
-                                            CertificateAuthenticationDefaults.AuthenticationScheme
-                                        )
-                                        .AddCertificate(
-                                            options =>
-                                            {
-                                                options.CustomTrustStore =
-                                                    configureOptions.CustomTrustStore;
-                                                options.ChainTrustValidationMode =
-                                                    configureOptions.ChainTrustValidationMode;
-                                                options.AllowedCertificateTypes =
-                                                    configureOptions.AllowedCertificateTypes;
-                                                options.Events = configureOptions.Events;
-                                                options.ValidateCertificateUse =
-                                                    configureOptions.ValidateCertificateUse;
-                                                options.RevocationFlag =
-                                                    configureOptions.RevocationFlag;
-                                                options.RevocationMode =
-                                                    configureOptions.RevocationMode;
-                                                options.ValidateValidityPeriod =
-                                                    configureOptions.ValidateValidityPeriod;
-                                                options.AdditionalChainCertificates =
-                                                    configureOptions.AdditionalChainCertificates;
-                                            }
-                                        );
-                                }
-                                else
-                                {
-                                    authBuilder = services
-                                        .AddAuthentication(
-                                            CertificateAuthenticationDefaults.AuthenticationScheme
-                                        )
-                                        .AddCertificate();
-                                }
-                                if (useCache)
-                                {
-                                    authBuilder.AddCertificateCache();
-                                }
-
-                                if (wireUpHeaderMiddleware && !string.IsNullOrEmpty(headerName))
-                                {
-                                    services.AddCertificateForwarding(
-                                        options =>
-                                        {
-                                            options.CertificateHeader = headerName;
-                                        }
-                                    );
-                                }
+                                app.UseCertificateForwarding();
                             }
-                        )
+
+                            app.UseAuthentication();
+
+                            app.Run(
+                                async (context) =>
+                                {
+                                    var request = context.Request;
+                                    var response = context.Response;
+
+                                    var authenticationResult = await context.AuthenticateAsync();
+
+                                    if (authenticationResult.Succeeded)
+                                    {
+                                        response.StatusCode = (int)HttpStatusCode.OK;
+                                        response.ContentType = "text/xml";
+
+                                        await response.WriteAsync("<claims>");
+                                        foreach (Claim claim in context.User.Claims)
+                                        {
+                                            await response.WriteAsync(
+                                                $"<claim Type=\"{claim.Type}\" Issuer=\"{claim.Issuer}\">{claim.Value}</claim>"
+                                            );
+                                        }
+                                        await response.WriteAsync("</claims>");
+                                    }
+                                    else
+                                    {
+                                        await context.ChallengeAsync();
+                                    }
+                                }
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            AuthenticationBuilder authBuilder;
+                            if (configureOptions != null)
+                            {
+                                authBuilder = services
+                                    .AddAuthentication(
+                                        CertificateAuthenticationDefaults.AuthenticationScheme
+                                    )
+                                    .AddCertificate(options =>
+                                    {
+                                        options.CustomTrustStore =
+                                            configureOptions.CustomTrustStore;
+                                        options.ChainTrustValidationMode =
+                                            configureOptions.ChainTrustValidationMode;
+                                        options.AllowedCertificateTypes =
+                                            configureOptions.AllowedCertificateTypes;
+                                        options.Events = configureOptions.Events;
+                                        options.ValidateCertificateUse =
+                                            configureOptions.ValidateCertificateUse;
+                                        options.RevocationFlag = configureOptions.RevocationFlag;
+                                        options.RevocationMode = configureOptions.RevocationMode;
+                                        options.ValidateValidityPeriod =
+                                            configureOptions.ValidateValidityPeriod;
+                                        options.AdditionalChainCertificates =
+                                            configureOptions.AdditionalChainCertificates;
+                                    });
+                            }
+                            else
+                            {
+                                authBuilder = services
+                                    .AddAuthentication(
+                                        CertificateAuthenticationDefaults.AuthenticationScheme
+                                    )
+                                    .AddCertificate();
+                            }
+                            if (useCache)
+                            {
+                                authBuilder.AddCertificateCache();
+                            }
+
+                            if (wireUpHeaderMiddleware && !string.IsNullOrEmpty(headerName))
+                            {
+                                services.AddCertificateForwarding(options =>
+                                {
+                                    options.CertificateHeader = headerName;
+                                });
+                            }
+                        })
             )
             .Build();
 

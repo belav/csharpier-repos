@@ -4303,40 +4303,36 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using var synchronizationEvent = new ManualResetEventSlim(false);
             using var blockingSemaphore = new SemaphoreSlim(0);
-            var blockingTask = Task.Run(
-                () =>
+            var blockingTask = Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        context.Customers
-                            .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
-                            .ToList();
-                    }
-                    finally
-                    {
-                        synchronizationEvent.Set();
-                    }
+                    context.Customers
+                        .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                        .ToList();
                 }
-            );
+                finally
+                {
+                    synchronizationEvent.Set();
+                }
+            });
 
-            var throwingTask = Task.Run(
-                async () =>
-                {
-                    synchronizationEvent.Wait(TimeSpan.FromMinutes(5));
-                    Assert.Equal(
-                        CoreStrings.ConcurrentMethodInvocation,
-                        (
-                            async
-                                ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                    () => context.Customers.ToListAsync()
-                                )
-                                : Assert.Throws<InvalidOperationException>(
-                                    () => context.Customers.ToList()
-                                )
-                        ).Message
-                    );
-                }
-            );
+            var throwingTask = Task.Run(async () =>
+            {
+                synchronizationEvent.Wait(TimeSpan.FromMinutes(5));
+                Assert.Equal(
+                    CoreStrings.ConcurrentMethodInvocation,
+                    (
+                        async
+                            ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                () => context.Customers.ToListAsync()
+                            )
+                            : Assert.Throws<InvalidOperationException>(
+                                () => context.Customers.ToList()
+                            )
+                    ).Message
+                );
+            });
 
             await throwingTask;
 
@@ -4354,40 +4350,36 @@ namespace Microsoft.EntityFrameworkCore.Query
 
             using var synchronizationEvent = new ManualResetEventSlim(false);
             using var blockingSemaphore = new SemaphoreSlim(0);
-            var blockingTask = Task.Run(
-                () =>
+            var blockingTask = Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        context.Customers
-                            .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
-                            .ToList();
-                    }
-                    finally
-                    {
-                        synchronizationEvent.Set();
-                    }
+                    context.Customers
+                        .Select(c => Process(c, synchronizationEvent, blockingSemaphore))
+                        .ToList();
                 }
-            );
+                finally
+                {
+                    synchronizationEvent.Set();
+                }
+            });
 
-            var throwingTask = Task.Run(
-                async () =>
-                {
-                    synchronizationEvent.Wait(TimeSpan.FromMinutes(5));
-                    Assert.Equal(
-                        CoreStrings.ConcurrentMethodInvocation,
-                        (
-                            async
-                                ? await Assert.ThrowsAsync<InvalidOperationException>(
-                                    () => context.Customers.FirstAsync()
-                                )
-                                : Assert.Throws<InvalidOperationException>(
-                                    () => context.Customers.First()
-                                )
-                        ).Message
-                    );
-                }
-            );
+            var throwingTask = Task.Run(async () =>
+            {
+                synchronizationEvent.Wait(TimeSpan.FromMinutes(5));
+                Assert.Equal(
+                    CoreStrings.ConcurrentMethodInvocation,
+                    (
+                        async
+                            ? await Assert.ThrowsAsync<InvalidOperationException>(
+                                () => context.Customers.FirstAsync()
+                            )
+                            : Assert.Throws<InvalidOperationException>(
+                                () => context.Customers.First()
+                            )
+                    ).Message
+                );
+            });
 
             await throwingTask;
 

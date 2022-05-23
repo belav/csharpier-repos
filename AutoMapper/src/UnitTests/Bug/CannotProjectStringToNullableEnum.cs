@@ -27,14 +27,12 @@ namespace AutoMapper.UnitTests.Bug
         [Fact]
         public void Should_project_string_to_nullable_enum()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<string, DummyTypes?>()
-                        .ConvertUsing(s => (DummyTypes)System.Enum.Parse(typeof(DummyTypes), s));
-                    cfg.CreateProjection<DummySource, DummyDestination>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<string, DummyTypes?>()
+                    .ConvertUsing(s => (DummyTypes)System.Enum.Parse(typeof(DummyTypes), s));
+                cfg.CreateProjection<DummySource, DummyDestination>();
+            });
 
             config.AssertConfigurationIsValid();
 

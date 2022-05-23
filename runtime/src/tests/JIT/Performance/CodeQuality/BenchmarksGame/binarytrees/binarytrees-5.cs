@@ -49,31 +49,29 @@ namespace BenchmarksGame
             {
                 var iterationCount = 1 << (maxDepth - depth + MinDepth);
                 var depthCopy = depth; // To make sure closure value doesn't change
-                tasks[ti] = Task.Run(
-                    () =>
+                tasks[ti] = Task.Run(() =>
+                {
+                    var count = 0;
+                    if (depthCopy >= 17)
                     {
-                        var count = 0;
-                        if (depthCopy >= 17)
-                        {
-                            // Parallelized computation for relatively large tasks
-                            var miniTasks = new Task<int>[iterationCount];
-                            for (var i = 0; i < iterationCount; i++)
-                                miniTasks[i] = Task.Run(
-                                    () => TreeNode.CreateTree(depthCopy).CountNodes()
-                                );
-                            Task.WaitAll(miniTasks);
-                            for (var i = 0; i < iterationCount; i++)
-                                count += miniTasks[i].Result;
-                        }
-                        else
-                        {
-                            // Sequential computation for smaller tasks
-                            for (var i = 0; i < iterationCount; i++)
-                                count += TreeNode.CreateTree(depthCopy).CountNodes();
-                        }
-                        return $"{iterationCount}\t trees of depth {depthCopy}\t check: {count}";
+                        // Parallelized computation for relatively large tasks
+                        var miniTasks = new Task<int>[iterationCount];
+                        for (var i = 0; i < iterationCount; i++)
+                            miniTasks[i] = Task.Run(
+                                () => TreeNode.CreateTree(depthCopy).CountNodes()
+                            );
+                        Task.WaitAll(miniTasks);
+                        for (var i = 0; i < iterationCount; i++)
+                            count += miniTasks[i].Result;
                     }
-                );
+                    else
+                    {
+                        // Sequential computation for smaller tasks
+                        for (var i = 0; i < iterationCount; i++)
+                            count += TreeNode.CreateTree(depthCopy).CountNodes();
+                    }
+                    return $"{iterationCount}\t trees of depth {depthCopy}\t check: {count}";
+                });
             }
             Task.WaitAll(tasks);
 

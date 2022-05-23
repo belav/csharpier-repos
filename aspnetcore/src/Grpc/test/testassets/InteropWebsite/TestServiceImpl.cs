@@ -80,15 +80,13 @@ public class TestServiceImpl : TestService.TestServiceBase
         await EnsureEchoMetadataAsync(context);
 
         int sum = 0;
-        await requestStream.ForEachAsync(
-            request =>
-            {
-                EnsureCompression(request.ExpectCompressed, context);
+        await requestStream.ForEachAsync(request =>
+        {
+            EnsureCompression(request.ExpectCompressed, context);
 
-                sum += request.Payload.Body.Length;
-                return Task.CompletedTask;
-            }
-        );
+            sum += request.Payload.Body.Length;
+            return Task.CompletedTask;
+        });
         return new StreamingInputCallResponse { AggregatedPayloadSize = sum };
     }
 
@@ -100,20 +98,18 @@ public class TestServiceImpl : TestService.TestServiceBase
     {
         await EnsureEchoMetadataAsync(context);
 
-        await requestStream.ForEachAsync(
-            async request =>
+        await requestStream.ForEachAsync(async request =>
+        {
+            EnsureEchoStatus(request.ResponseStatus, context);
+            foreach (var responseParam in request.ResponseParameters)
             {
-                EnsureEchoStatus(request.ResponseStatus, context);
-                foreach (var responseParam in request.ResponseParameters)
+                var response = new StreamingOutputCallResponse
                 {
-                    var response = new StreamingOutputCallResponse
-                    {
-                        Payload = CreateZerosPayload(responseParam.Size)
-                    };
-                    await responseStream.WriteAsync(response);
-                }
+                    Payload = CreateZerosPayload(responseParam.Size)
+                };
+                await responseStream.WriteAsync(response);
             }
-        );
+        });
     }
 
     public override Task HalfDuplexCall(

@@ -34,14 +34,12 @@ public class DefaultModelBindingContextTest
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
             .ForType<object>()
-            .BindingDetails(
-                d =>
-                {
-                    d.BindingSource = BindingSource.Custom;
-                    d.BinderType = typeof(TestModelBinder);
-                    d.BinderModelName = "custom";
-                }
-            );
+            .BindingDetails(d =>
+            {
+                d.BindingSource = BindingSource.Custom;
+                d.BinderType = typeof(TestModelBinder);
+                d.BinderModelName = "custom";
+            });
 
         var newModelMetadata = metadataProvider.GetMetadataForType(typeof(object));
 

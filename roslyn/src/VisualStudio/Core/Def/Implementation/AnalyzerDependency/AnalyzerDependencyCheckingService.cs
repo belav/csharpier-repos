@@ -251,14 +251,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             Logger.Log(
                 FunctionId.AnalyzerDependencyCheckingService_LogConflict,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m["Identity"] = conflict.Identity.ToString();
-                        m["Analyzer1"] = conflict.AnalyzerFilePath1;
-                        m["Analyzer2"] = conflict.AnalyzerFilePath2;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m["Identity"] = conflict.Identity.ToString();
+                    m["Analyzer1"] = conflict.AnalyzerFilePath1;
+                    m["Analyzer2"] = conflict.AnalyzerFilePath2;
+                })
             );
         }
 
@@ -266,13 +264,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
         {
             Logger.Log(
                 FunctionId.AnalyzerDependencyCheckingService_LogMissingDependency,
-                KeyValueLogMessage.Create(
-                    m =>
-                    {
-                        m["Analyzer"] = missingDependency.AnalyzerPath;
-                        m["Identity"] = missingDependency.DependencyIdentity;
-                    }
-                )
+                KeyValueLogMessage.Create(m =>
+                {
+                    m["Analyzer"] = missingDependency.AnalyzerPath;
+                    m["Identity"] = missingDependency.DependencyIdentity;
+                })
             );
         }
 

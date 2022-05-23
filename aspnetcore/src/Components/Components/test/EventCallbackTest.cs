@@ -196,12 +196,10 @@ public class EventCallbackTest
         );
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return callback.InvokeAsync(new StringBuilder());
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return callback.InvokeAsync(new StringBuilder());
+        });
     }
 
     [Fact]
@@ -364,12 +362,10 @@ public class EventCallbackTest
         );
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentException>(
-            () =>
-            {
-                return callback.InvokeAsync(new StringBuilder());
-            }
-        );
+        await Assert.ThrowsAsync<ArgumentException>(() =>
+        {
+            return callback.InvokeAsync(new StringBuilder());
+        });
     }
 
     [Fact]

@@ -30,32 +30,24 @@ namespace System.Data.Tests.Common
         {
             IList list = new DataTableMappingCollection();
             var mapping = new DataTableMapping("source", "dataSet");
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    var x = list[0];
-                }
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    list[0] = mapping;
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                var x = list[0];
+            });
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                list[0] = mapping;
+            });
             list.Add(mapping);
             Assert.Same(mapping, list[0]);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    list[0] = null;
-                }
-            );
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    list[0] = "invalid";
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                list[0] = null;
+            });
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                list[0] = "invalid";
+            });
             list[0] = new DataTableMapping("source2", "dataSet2");
             Assert.NotSame(mapping, list[0]);
         }
@@ -64,33 +56,25 @@ namespace System.Data.Tests.Common
         public void ITableMappingCollectionIndexer()
         {
             ITableMappingCollection collection = new DataTableMappingCollection();
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    var x = collection["source"];
-                }
-            );
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    collection["source"] = new DataTableMapping();
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                var x = collection["source"];
+            });
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                collection["source"] = new DataTableMapping();
+            });
             ITableMapping mapping = collection.Add("source", "dataSet");
             Assert.Same(mapping, collection["source"]);
             Assert.Same(mapping, collection.GetByDataSetTable("dataSet"));
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    collection["source"] = null;
-                }
-            );
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    collection["source"] = "invalid";
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                collection["source"] = null;
+            });
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                collection["source"] = "invalid";
+            });
             ITableMapping mapping2 = new DataTableMapping("source2", "dataSet2");
             collection["source"] = mapping2;
             Assert.Single(collection);

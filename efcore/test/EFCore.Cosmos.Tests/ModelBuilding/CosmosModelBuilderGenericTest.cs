@@ -63,16 +63,14 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     c => c.Properties<string>().HaveConversion<byte[]>()
                 );
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.Property(e => e.Up);
-                        b.Property(e => e.Down);
-                        b.Property<int>("Charm");
-                        b.Property<string>("Strange");
-                        b.Property<string>("__id").HasConversion((Type)null);
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.Property(e => e.Up);
+                    b.Property(e => e.Down);
+                    b.Property<int>("Charm");
+                    b.Property<string>("Strange");
+                    b.Property<string>("__id").HasConversion((Type)null);
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = (IReadOnlyEntityType)model.FindEntityType(typeof(Quarks));
@@ -90,19 +88,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Quarks>(
-                    b =>
-                    {
-                        b.HasKey(e => e.Id);
-                        b.Property(e => e.Up).ValueGeneratedOnAddOrUpdate();
-                        b.Property(e => e.Down).ValueGeneratedNever();
-                        b.Property<int>("Charm").Metadata.ValueGenerated =
-                            ValueGenerated.OnUpdateSometimes;
-                        b.Property<string>("Strange").ValueGeneratedNever();
-                        b.Property<int>("Top").ValueGeneratedOnAddOrUpdate();
-                        b.Property<string>("Bottom").ValueGeneratedOnUpdate();
-                    }
-                );
+                modelBuilder.Entity<Quarks>(b =>
+                {
+                    b.HasKey(e => e.Id);
+                    b.Property(e => e.Up).ValueGeneratedOnAddOrUpdate();
+                    b.Property(e => e.Down).ValueGeneratedNever();
+                    b.Property<int>("Charm").Metadata.ValueGenerated =
+                        ValueGenerated.OnUpdateSometimes;
+                    b.Property<string>("Strange").ValueGeneratedNever();
+                    b.Property<int>("Top").ValueGeneratedOnAddOrUpdate();
+                    b.Property<string>("Bottom").ValueGeneratedOnUpdate();
+                });
 
                 var model = modelBuilder.FinalizeModel();
                 var entityType = model.FindEntityType(typeof(Quarks));
@@ -470,21 +466,17 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<OneToManyNavPrincipal>();
                 modelBuilder.Ignore<OneToOneNavPrincipal>();
 
-                modelBuilder.Entity<ManyToManyNavPrincipal>(
-                    mb =>
-                    {
-                        mb.Property<string>("PartitionId");
-                        mb.HasPartitionKey("PartitionId");
-                    }
-                );
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
 
-                modelBuilder.Entity<NavDependent>(
-                    mb =>
-                    {
-                        mb.Property<string>("PartitionId");
-                        mb.HasPartitionKey("PartitionId");
-                    }
-                );
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
 
                 modelBuilder
                     .Entity<ManyToManyNavPrincipal>()
@@ -526,22 +518,18 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<OneToManyNavPrincipal>();
                 modelBuilder.Ignore<OneToOneNavPrincipal>();
 
-                modelBuilder.Entity<ManyToManyNavPrincipal>(
-                    mb =>
-                    {
-                        mb.Ignore(e => e.Dependents);
-                        mb.Property<string>("PartitionId");
-                        mb.HasPartitionKey("PartitionId");
-                    }
-                );
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Ignore(e => e.Dependents);
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
 
-                modelBuilder.Entity<NavDependent>(
-                    mb =>
-                    {
-                        mb.Property<string>("PartitionId");
-                        mb.HasPartitionKey("PartitionId");
-                    }
-                );
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
 
                 modelBuilder
                     .Entity<ManyToManyNavPrincipal>()
@@ -568,37 +556,29 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Ignore<OneToManyNavPrincipal>();
                 modelBuilder.Ignore<OneToOneNavPrincipal>();
 
-                modelBuilder.Entity<ManyToManyNavPrincipal>(
-                    mb =>
-                    {
-                        mb.Property<string>("PartitionId");
-                        mb.HasPartitionKey("PartitionId");
-                    }
-                );
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
 
-                modelBuilder.Entity<NavDependent>(
-                    mb =>
-                    {
-                        mb.Property<string>("PartitionId");
-                        mb.HasPartitionKey("PartitionId");
-                    }
-                );
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("PartitionId");
+                    mb.HasPartitionKey("PartitionId");
+                });
 
-                modelBuilder.Entity<ManyToManyNavPrincipal>(
-                    mb =>
-                    {
-                        mb.Property<string>("Partition2Id");
-                        mb.HasPartitionKey("Partition2Id");
-                    }
-                );
+                modelBuilder.Entity<ManyToManyNavPrincipal>(mb =>
+                {
+                    mb.Property<string>("Partition2Id");
+                    mb.HasPartitionKey("Partition2Id");
+                });
 
-                modelBuilder.Entity<NavDependent>(
-                    mb =>
-                    {
-                        mb.Property<string>("Partition2Id");
-                        mb.HasPartitionKey("Partition2Id");
-                    }
-                );
+                modelBuilder.Entity<NavDependent>(mb =>
+                {
+                    mb.Property<string>("Partition2Id");
+                    mb.HasPartitionKey("Partition2Id");
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -680,15 +660,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<OneToOneOwnerWithField>(
-                    e =>
-                    {
-                        e.Property(p => p.Id);
-                        e.Property(p => p.AlternateKey);
-                        e.Property(p => p.Description);
-                        e.HasKey(p => p.Id);
-                    }
-                );
+                modelBuilder.Entity<OneToOneOwnerWithField>(e =>
+                {
+                    e.Property(p => p.Id);
+                    e.Property(p => p.AlternateKey);
+                    e.Property(p => p.Description);
+                    e.HasKey(p => p.Id);
+                });
 
                 var model = modelBuilder.FinalizeModel();
 

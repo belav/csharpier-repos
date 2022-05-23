@@ -120,13 +120,11 @@ public abstract partial class JSRuntime : IJSRuntime, IDisposable
         var tcs = new TaskCompletionSource<TValue>();
         if (cancellationToken.CanBeCanceled)
         {
-            _cancellationRegistrations[taskId] = cancellationToken.Register(
-                () =>
-                {
-                    tcs.TrySetCanceled(cancellationToken);
-                    CleanupTasksAndRegistrations(taskId);
-                }
-            );
+            _cancellationRegistrations[taskId] = cancellationToken.Register(() =>
+            {
+                tcs.TrySetCanceled(cancellationToken);
+                CleanupTasksAndRegistrations(taskId);
+            });
         }
         _pendingTasks[taskId] = tcs;
 

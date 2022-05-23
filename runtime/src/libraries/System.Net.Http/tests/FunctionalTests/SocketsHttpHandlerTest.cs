@@ -35,16 +35,14 @@ namespace System.Net.Http.Functional.Tests
         {
             await LoopbackServerFactory.CreateClientAndServerAsync(
                 uri =>
-                    Task.Run(
-                        () =>
+                    Task.Run(() =>
+                    {
+                        using (ExecutionContext.SuppressFlow())
+                        using (HttpClient client = CreateHttpClient())
                         {
-                            using (ExecutionContext.SuppressFlow())
-                            using (HttpClient client = CreateHttpClient())
-                            {
-                                client.GetStringAsync(uri).GetAwaiter().GetResult();
-                            }
+                            client.GetStringAsync(uri).GetAwaiter().GetResult();
                         }
-                    ),
+                    }),
                 async server =>
                 {
                     await server.AcceptConnectionSendResponseAndCloseAsync();
@@ -86,13 +84,11 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestHeaderAndSendResponseAsync();
-                            await clientCompleted.Task;
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAndSendResponseAsync();
+                        await clientCompleted.Task;
+                    });
                 }
             );
         }
@@ -287,32 +283,30 @@ namespace System.Net.Http.Functional.Tests
                             Task<string> request1 = client.GetStringAsync(uri);
                             Task<string> request2 = client.GetStringAsync(uri);
 
-                            await server.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    Task secondResponse = server.AcceptConnectionAsync(
-                                        connection2 =>
-                                            connection2.ReadRequestHeaderAndSendCustomResponseAsync(
-                                                LoopbackServer.GetConnectionCloseResponse()
-                                            )
-                                    );
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                Task secondResponse = server.AcceptConnectionAsync(
+                                    connection2 =>
+                                        connection2.ReadRequestHeaderAndSendCustomResponseAsync(
+                                            LoopbackServer.GetConnectionCloseResponse()
+                                        )
+                                );
 
-                                    // Wait a small amount of time before sending the first response, so the connection lifetime will expire.
-                                    Debug.Assert(lifetimeMilliseconds < 100);
-                                    await Task.Delay(1000);
+                                // Wait a small amount of time before sending the first response, so the connection lifetime will expire.
+                                Debug.Assert(lifetimeMilliseconds < 100);
+                                await Task.Delay(1000);
 
-                                    // Second request should not have completed yet, as we haven't completed the first yet.
-                                    Assert.False(request2.IsCompleted);
-                                    Assert.False(secondResponse.IsCompleted);
+                                // Second request should not have completed yet, as we haven't completed the first yet.
+                                Assert.False(request2.IsCompleted);
+                                Assert.False(secondResponse.IsCompleted);
 
-                                    // Send the first response and wait for the first request to complete.
-                                    await connection.ReadRequestHeaderAndSendResponseAsync();
-                                    await request1;
+                                // Send the first response and wait for the first request to complete.
+                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                                await request1;
 
-                                    // Now the second request should complete.
-                                    await secondResponse.WaitAsync(TestHelper.PassingTestTimeout);
-                                }
-                            );
+                                // Now the second request should complete.
+                                await secondResponse.WaitAsync(TestHelper.PassingTestTimeout);
+                            });
                         }
                     );
                 }
@@ -511,14 +505,12 @@ namespace System.Net.Http.Functional.Tests
                 {
                     string content = new string('a', totalSize);
                     string response = LoopbackServer.GetContentModeResponse(mode, content);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        server.ListenSocket.Close(); // Shut down the listen socket so attempts at additional connections would fail on the client
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(response);
+                    });
                 }
             );
         }
@@ -565,31 +557,29 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     string content = new string('a', totalSize);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            try
-                            {
-                                await connection.WriteStringAsync(
-                                    LoopbackServer.GetContentModeResponse(
-                                        mode,
-                                        content,
-                                        connectionClose: false
-                                    )
-                                );
-                            }
-                            catch (Exception) { } // Eat errors from client disconnect.
-
-                            await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            await connection.WriteStringAsync(
                                 LoopbackServer.GetContentModeResponse(
                                     mode,
                                     content,
-                                    connectionClose: true
+                                    connectionClose: false
                                 )
                             );
                         }
-                    );
+                        catch (Exception) { } // Eat errors from client disconnect.
+
+                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(
+                            LoopbackServer.GetContentModeResponse(
+                                mode,
+                                content,
+                                connectionClose: true
+                            )
+                        );
+                    });
                 }
             );
         }
@@ -638,32 +628,30 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     string content = new string('a', ContentLength);
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        string response = LoopbackServer.GetContentModeResponse(
+                            mode,
+                            content,
+                            connectionClose: false
+                        );
+                        await connection.ReadRequestHeaderAsync();
+                        try
                         {
-                            string response = LoopbackServer.GetContentModeResponse(
-                                mode,
-                                content,
-                                connectionClose: false
+                            // Write out only part of the response
+                            await connection.WriteStringAsync(
+                                response.Substring(0, response.Length / 2)
                             );
-                            await connection.ReadRequestHeaderAsync();
-                            try
-                            {
-                                // Write out only part of the response
-                                await connection.WriteStringAsync(
-                                    response.Substring(0, response.Length / 2)
-                                );
-                            }
-                            catch (Exception) { } // Eat errors from client disconnect.
-
-                            response = LoopbackServer.GetContentModeResponse(
-                                mode,
-                                content,
-                                connectionClose: true
-                            );
-                            await server.AcceptConnectionSendCustomResponseAndCloseAsync(response);
                         }
-                    );
+                        catch (Exception) { } // Eat errors from client disconnect.
+
+                        response = LoopbackServer.GetContentModeResponse(
+                            mode,
+                            content,
+                            connectionClose: true
+                        );
+                        await server.AcceptConnectionSendCustomResponseAndCloseAsync(response);
+                    });
                 }
             );
         }
@@ -1532,40 +1520,26 @@ namespace System.Net.Http.Functional.Tests
                                     Assert.Throws<ArgumentOutOfRangeException>(
                                         () => clientStream.CopyTo(Stream.Null, 0)
                                     );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(null, 100, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(Stream.Null, 0, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(Stream.Null, -1, default);
-                                        }
-                                    );
-                                    Assert.Throws<NotSupportedException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(
-                                                nonWritableStream,
-                                                100,
-                                                default
-                                            );
-                                        }
-                                    );
-                                    Assert.Throws<ObjectDisposedException>(
-                                        () =>
-                                        {
-                                            clientStream.CopyToAsync(disposedStream, 100, default);
-                                        }
-                                    );
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(null, 100, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(Stream.Null, 0, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(Stream.Null, -1, default);
+                                    });
+                                    Assert.Throws<NotSupportedException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(nonWritableStream, 100, default);
+                                    });
+                                    Assert.Throws<ObjectDisposedException>(() =>
+                                    {
+                                        clientStream.CopyToAsync(disposedStream, 100, default);
+                                    });
                                     Assert.Throws<ArgumentNullException>(
                                         () => clientStream.Read(null, 0, 100)
                                     );
@@ -1599,36 +1573,26 @@ namespace System.Net.Http.Functional.Tests
                                     Assert.Throws<ArgumentNullException>(
                                         () => clientStream.EndRead(null)
                                     );
-                                    Assert.Throws<ArgumentNullException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(null, 0, 100, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], -1, 1, default);
-                                        }
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], 2, 1, default);
-                                        }
-                                    );
-                                    Assert.Throws<ArgumentOutOfRangeException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], 0, -1, default);
-                                        }
-                                    );
-                                    Assert.ThrowsAny<ArgumentException>(
-                                        () =>
-                                        {
-                                            clientStream.ReadAsync(new byte[1], 0, 2, default);
-                                        }
-                                    );
+                                    Assert.Throws<ArgumentNullException>(() =>
+                                    {
+                                        clientStream.ReadAsync(null, 0, 100, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], -1, 1, default);
+                                    });
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], 2, 1, default);
+                                    });
+                                    Assert.Throws<ArgumentOutOfRangeException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], 0, -1, default);
+                                    });
+                                    Assert.ThrowsAny<ArgumentException>(() =>
+                                    {
+                                        clientStream.ReadAsync(new byte[1], 0, 2, default);
+                                    });
 
                                     // Validate writing APIs on clientStream
 
@@ -1874,16 +1838,14 @@ namespace System.Net.Http.Functional.Tests
 
                         // Make multiple requests iteratively.
 
-                        Task serverTask1 = server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.WriteStringAsync(
-                                    LoopbackServer.GetHttpResponse(connectionClose: false)
-                                        + "here is a bunch of garbage"
-                                );
-                                await releaseServer.Task; // keep connection alive on the server side
-                            }
-                        );
+                        Task serverTask1 = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.WriteStringAsync(
+                                LoopbackServer.GetHttpResponse(connectionClose: false)
+                                    + "here is a bunch of garbage"
+                            );
+                            await releaseServer.Task; // keep connection alive on the server side
+                        });
                         await client.GetStringAsync(uri);
 
                         Task serverTask2 = server.AcceptConnectionSendCustomResponseAndCloseAsync(
@@ -1919,27 +1881,23 @@ namespace System.Net.Http.Functional.Tests
 
                         // Make first request.
                         Task<string> request1 = client.GetStringAsync(uri);
-                        await server.AcceptConnectionAsync(
-                            async connection1 =>
+                        await server.AcceptConnectionAsync(async connection1 =>
+                        {
+                            await connection1.ReadRequestHeaderAndSendCustomResponseAsync(
+                                responseBody
+                            );
+                            await request1;
+
+                            // Make second request and expect it to be served from a different connection.
+                            Task<string> request2 = client.GetStringAsync(uri);
+                            await server.AcceptConnectionAsync(async connection2 =>
                             {
-                                await connection1.ReadRequestHeaderAndSendCustomResponseAsync(
+                                await connection2.ReadRequestHeaderAndSendCustomResponseAsync(
                                     responseBody
                                 );
-                                await request1;
-
-                                // Make second request and expect it to be served from a different connection.
-                                Task<string> request2 = client.GetStringAsync(uri);
-                                await server.AcceptConnectionAsync(
-                                    async connection2 =>
-                                    {
-                                        await connection2.ReadRequestHeaderAndSendCustomResponseAsync(
-                                            responseBody
-                                        );
-                                        await request2;
-                                    }
-                                );
-                            }
-                        );
+                                await request2;
+                            });
+                        });
                     }
                 );
             }
@@ -1973,26 +1931,22 @@ namespace System.Net.Http.Functional.Tests
                         {
                             // Make first request.
                             Task<string> request1 = client.GetStringAsync(uri);
-                            await server.AcceptConnectionAsync(
-                                async connection =>
+                            await server.AcceptConnectionAsync(async connection =>
+                            {
+                                await connection.ReadRequestHeaderAndSendResponseAsync();
+                                await request1;
+
+                                // Wait a small amount of time before making the second request, to give the first request time to timeout.
+                                await Task.Delay(100);
+
+                                // Make second request and expect it to be served from a different connection.
+                                Task<string> request2 = client.GetStringAsync(uri);
+                                await server.AcceptConnectionAsync(async connection2 =>
                                 {
-                                    await connection.ReadRequestHeaderAndSendResponseAsync();
-                                    await request1;
-
-                                    // Wait a small amount of time before making the second request, to give the first request time to timeout.
-                                    await Task.Delay(100);
-
-                                    // Make second request and expect it to be served from a different connection.
-                                    Task<string> request2 = client.GetStringAsync(uri);
-                                    await server.AcceptConnectionAsync(
-                                        async connection2 =>
-                                        {
-                                            await connection2.ReadRequestHeaderAndSendResponseAsync();
-                                            await request2;
-                                        }
-                                    );
-                                }
-                            );
+                                    await connection2.ReadRequestHeaderAndSendResponseAsync();
+                                    await request2;
+                                });
+                            });
                         }
                     );
                 }
@@ -2101,15 +2055,13 @@ namespace System.Net.Http.Functional.Tests
                                 }
                             },
                             server =>
-                                server.AcceptConnectionAsync(
-                                    async connection =>
-                                    {
-                                        await connection.ReadRequestHeaderAndSendResponseAsync(
-                                            content: "hello world"
-                                        );
-                                        await releaseServer.Task;
-                                    }
-                                ),
+                                server.AcceptConnectionAsync(async connection =>
+                                {
+                                    await connection.ReadRequestHeaderAndSendResponseAsync(
+                                        content: "hello world"
+                                    );
+                                    await releaseServer.Task;
+                                }),
                             new LoopbackServer.Options { UseSsl = bool.Parse(secureString) }
                         );
                     },
@@ -2201,19 +2153,17 @@ namespace System.Net.Http.Functional.Tests
                                 $"http://notarealserver.com/"
                             );
 
-                            await proxyServer.AcceptConnectionAsync(
-                                async connection =>
-                                {
-                                    // Get first request, no body for GET.
-                                    await connection
-                                        .ReadRequestHeaderAndSendCustomResponseAsync(responseBody)
-                                        .ConfigureAwait(false);
-                                    // Client should send another request after being rejected with 407.
-                                    await connection
-                                        .ReadRequestHeaderAndSendResponseAsync(content: "OK")
-                                        .ConfigureAwait(false);
-                                }
-                            );
+                            await proxyServer.AcceptConnectionAsync(async connection =>
+                            {
+                                // Get first request, no body for GET.
+                                await connection
+                                    .ReadRequestHeaderAndSendCustomResponseAsync(responseBody)
+                                    .ConfigureAwait(false);
+                                // Client should send another request after being rejected with 407.
+                                await connection
+                                    .ReadRequestHeaderAndSendResponseAsync(content: "OK")
+                                    .ConfigureAwait(false);
+                            });
 
                             string response = await request;
                             Assert.Equal("OK", response);
@@ -3607,45 +3557,38 @@ namespace System.Net.Http.Functional.Tests
 
             GenericLoopbackOptions options = new GenericLoopbackOptions() { UseSsl = useSsl };
 
-            Task serverTask = Task.Run(
-                async () =>
-                {
-                    using GenericLoopbackConnection loopbackConnection =
-                        await LoopbackServerFactory.CreateConnectionAsync(
-                            socket: null,
-                            serverStream,
-                            options
-                        );
-                    await loopbackConnection.InitializeConnectionAsync();
-
-                    HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
-                    await loopbackConnection.SendResponseAsync(content: "foo");
-
-                    Assert.Equal("/foo", requestData.Path);
-                }
-            );
-
-            Task clientTask = Task.Run(
-                async () =>
-                {
-                    using HttpClientHandler handler = CreateHttpClientHandler();
-                    handler.ServerCertificateCustomValidationCallback =
-                        TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
+            Task serverTask = Task.Run(async () =>
+            {
+                using GenericLoopbackConnection loopbackConnection =
+                    await LoopbackServerFactory.CreateConnectionAsync(
+                        socket: null,
+                        serverStream,
+                        options
                     );
-                    socketsHandler.ConnectCallback = (context, token) =>
-                        new ValueTask<Stream>(clientStream);
+                await loopbackConnection.InitializeConnectionAsync();
 
-                    using HttpClient client = CreateHttpClient(handler);
-                    client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
+                await loopbackConnection.SendResponseAsync(content: "foo");
 
-                    string response = await client.GetStringAsync(
-                        $"{(options.UseSsl ? "https" : "http")}://nowhere.invalid/foo"
-                    );
-                    Assert.Equal("foo", response);
-                }
-            );
+                Assert.Equal("/foo", requestData.Path);
+            });
+
+            Task clientTask = Task.Run(async () =>
+            {
+                using HttpClientHandler handler = CreateHttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = TestHelper.AllowAllCertificates;
+                var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
+                socketsHandler.ConnectCallback = (context, token) =>
+                    new ValueTask<Stream>(clientStream);
+
+                using HttpClient client = CreateHttpClient(handler);
+                client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+
+                string response = await client.GetStringAsync(
+                    $"{(options.UseSsl ? "https" : "http")}://nowhere.invalid/foo"
+                );
+                Assert.Equal("foo", response);
+            });
 
             await new[] { serverTask, clientTask }.WhenAllOrAnyFailed(60_000);
         }
@@ -4044,97 +3987,90 @@ namespace System.Net.Http.Functional.Tests
             listenSocket.Bind(new IPEndPoint(IPAddress.Loopback, 0));
             listenSocket.Listen();
 
-            Task clientTask = Task.Run(
-                async () =>
+            Task clientTask = Task.Run(async () =>
+            {
+                using HttpClientHandler handler = CreateHttpClientHandler();
+                handler.ServerCertificateCustomValidationCallback = TestHelper.AllowAllCertificates;
+                var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(handler);
+                socketsHandler.PlaintextStreamFilter = async (context, token) =>
                 {
-                    using HttpClientHandler handler = CreateHttpClientHandler();
-                    handler.ServerCertificateCustomValidationCallback =
-                        TestHelper.AllowAllCertificates;
-                    var socketsHandler = (SocketsHttpHandler)GetUnderlyingSocketsHttpHandler(
-                        handler
-                    );
-                    socketsHandler.PlaintextStreamFilter = async (context, token) =>
-                    {
-                        await context.PlaintextStream.WriteAsync(RequestPrefix);
+                    await context.PlaintextStream.WriteAsync(RequestPrefix);
 
-                        byte[] buffer = new byte[ResponsePrefix.Length];
-                        await context.PlaintextStream.ReadAsync(buffer);
-                        Assert.True(buffer.SequenceEqual(ResponsePrefix));
+                    byte[] buffer = new byte[ResponsePrefix.Length];
+                    await context.PlaintextStream.ReadAsync(buffer);
+                    Assert.True(buffer.SequenceEqual(ResponsePrefix));
 
-                        return context.PlaintextStream;
-                    };
+                    return context.PlaintextStream;
+                };
 
-                    using HttpClient client = CreateHttpClient(handler);
-                    client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
+                using HttpClient client = CreateHttpClient(handler);
+                client.DefaultVersionPolicy = HttpVersionPolicy.RequestVersionExact;
 
-                    string response = await client.GetStringAsync(
-                        $"{(useSsl ? "https" : "http")}://{listenSocket.LocalEndPoint}/foo"
-                    );
-                    Assert.Equal("foo", response);
-                }
-            );
+                string response = await client.GetStringAsync(
+                    $"{(useSsl ? "https" : "http")}://{listenSocket.LocalEndPoint}/foo"
+                );
+                Assert.Equal("foo", response);
+            });
 
-            Task serverTask = Task.Run(
-                async () =>
+            Task serverTask = Task.Run(async () =>
+            {
+                Socket serverSocket = await listenSocket.AcceptAsync();
+                Stream serverStream = new NetworkStream(serverSocket, ownsSocket: true);
+
+                if (useSsl)
                 {
-                    Socket serverSocket = await listenSocket.AcceptAsync();
-                    Stream serverStream = new NetworkStream(serverSocket, ownsSocket: true);
-
-                    if (useSsl)
-                    {
-                        var sslStream = new SslStream(
-                            serverStream,
-                            false,
-                            delegate
-                            {
-                                return true;
-                            }
-                        );
-
-                        using (
-                            X509Certificate2 cert =
-                                System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
-                        )
+                    var sslStream = new SslStream(
+                        serverStream,
+                        false,
+                        delegate
                         {
-                            SslServerAuthenticationOptions options =
-                                new SslServerAuthenticationOptions();
-
-                            options.EnabledSslProtocols = SslProtocols.Tls12;
-
-                            var protocols = new List<SslApplicationProtocol>();
-                            protocols.Add(SslApplicationProtocol.Http2);
-                            options.ApplicationProtocols = protocols;
-
-                            options.ServerCertificate = cert;
-
-                            await sslStream
-                                .AuthenticateAsServerAsync(options, CancellationToken.None)
-                                .ConfigureAwait(false);
+                            return true;
                         }
+                    );
 
-                        serverStream = sslStream;
+                    using (
+                        X509Certificate2 cert =
+                            System.Net.Test.Common.Configuration.Certificates.GetServerCertificate()
+                    )
+                    {
+                        SslServerAuthenticationOptions options =
+                            new SslServerAuthenticationOptions();
+
+                        options.EnabledSslProtocols = SslProtocols.Tls12;
+
+                        var protocols = new List<SslApplicationProtocol>();
+                        protocols.Add(SslApplicationProtocol.Http2);
+                        options.ApplicationProtocols = protocols;
+
+                        options.ServerCertificate = cert;
+
+                        await sslStream
+                            .AuthenticateAsServerAsync(options, CancellationToken.None)
+                            .ConfigureAwait(false);
                     }
 
-                    byte[] buffer = new byte[RequestPrefix.Length];
-                    await serverStream.ReadAsync(buffer);
-                    Assert.True(buffer.SequenceEqual(RequestPrefix));
-
-                    await serverStream.WriteAsync(ResponsePrefix);
-
-                    using GenericLoopbackConnection loopbackConnection =
-                        await LoopbackServerFactory.CreateConnectionAsync(
-                            socket: null,
-                            serverStream,
-                            new GenericLoopbackOptions() { UseSsl = false }
-                        );
-                    await loopbackConnection.InitializeConnectionAsync();
-
-                    HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
-                    Assert.Equal("/foo", requestData.Path);
-
-                    await loopbackConnection.SendResponseAsync(content: "foo");
+                    serverStream = sslStream;
                 }
-            );
+
+                byte[] buffer = new byte[RequestPrefix.Length];
+                await serverStream.ReadAsync(buffer);
+                Assert.True(buffer.SequenceEqual(RequestPrefix));
+
+                await serverStream.WriteAsync(ResponsePrefix);
+
+                using GenericLoopbackConnection loopbackConnection =
+                    await LoopbackServerFactory.CreateConnectionAsync(
+                        socket: null,
+                        serverStream,
+                        new GenericLoopbackOptions() { UseSsl = false }
+                    );
+                await loopbackConnection.InitializeConnectionAsync();
+
+                HttpRequestData requestData = await loopbackConnection.ReadRequestDataAsync();
+                Assert.Equal("/foo", requestData.Path);
+
+                await loopbackConnection.SendResponseAsync(content: "foo");
+            });
 
             await new Task[] { clientTask, serverTask }.WhenAllOrAnyFailed();
         }

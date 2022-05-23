@@ -119,13 +119,11 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
 
                 modelBuilder.Entity<CompositeNotStoreGenerated>().HasKey(e => new { e.Id1, e.Id2 });
 
-                modelBuilder.Entity<CompositeStoreGenerated>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id1, e.Id2 });
-                        b.Property(e => e.Id2).ValueGeneratedOnAdd();
-                    }
-                );
+                modelBuilder.Entity<CompositeStoreGenerated>(b =>
+                {
+                    b.HasKey(e => new { e.Id1, e.Id2 });
+                    b.Property(e => e.Id2).ValueGeneratedOnAdd();
+                });
             }
         }
 

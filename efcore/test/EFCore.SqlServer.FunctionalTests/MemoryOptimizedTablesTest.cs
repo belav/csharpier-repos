@@ -76,17 +76,15 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<FastUn>(
-                    eb =>
-                    {
-                        eb.IsMemoryOptimized();
-                        eb.HasIndex(e => e.Name).IsUnique();
-                        eb.HasOne(e => e.BigUn)
-                            .WithMany(e => e.FastUns)
-                            .IsRequired()
-                            .OnDelete(DeleteBehavior.Restrict);
-                    }
-                );
+                modelBuilder.Entity<FastUn>(eb =>
+                {
+                    eb.IsMemoryOptimized();
+                    eb.HasIndex(e => e.Name).IsUnique();
+                    eb.HasOne(e => e.BigUn)
+                        .WithMany(e => e.FastUns)
+                        .IsRequired()
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
 
                 modelBuilder.Entity<BigUn>().IsMemoryOptimized();
             }

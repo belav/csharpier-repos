@@ -3055,14 +3055,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         public void Can_get_property_indexes()
         {
             var modelBuilder = new ModelBuilder();
-            modelBuilder.Entity<Customer>(
-                eb =>
-                {
-                    eb.Property(c => c.Name);
-                    eb.Property<int>("Id_");
-                    eb.Property<int>("Mane_");
-                }
-            );
+            modelBuilder.Entity<Customer>(eb =>
+            {
+                eb.Property(c => c.Name);
+                eb.Property<int>("Id_");
+                eb.Property<int>("Mane_");
+            });
 
             var entityType = modelBuilder.FinalizeModel().FindEntityType(typeof(Customer));
 
@@ -3632,38 +3630,36 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var modelBuilder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            modelBuilder.Entity<Application>(
-                entity =>
-                {
-                    entity.OwnsOne(
-                        x => x.Attitude,
-                        amb =>
-                        {
-                            amb.OwnsOne(
-                                x => x.FirstTest,
-                                mb =>
-                                {
-                                    mb.OwnsOne(a => a.Tester);
-                                }
-                            );
-                        }
-                    );
+            modelBuilder.Entity<Application>(entity =>
+            {
+                entity.OwnsOne(
+                    x => x.Attitude,
+                    amb =>
+                    {
+                        amb.OwnsOne(
+                            x => x.FirstTest,
+                            mb =>
+                            {
+                                mb.OwnsOne(a => a.Tester);
+                            }
+                        );
+                    }
+                );
 
-                    entity.OwnsOne(
-                        x => x.Rejection,
-                        amb =>
-                        {
-                            amb.OwnsOne(
-                                x => x.FirstTest,
-                                mb =>
-                                {
-                                    mb.OwnsOne(a => a.Tester);
-                                }
-                            );
-                        }
-                    );
-                }
-            );
+                entity.OwnsOne(
+                    x => x.Rejection,
+                    amb =>
+                    {
+                        amb.OwnsOne(
+                            x => x.FirstTest,
+                            mb =>
+                            {
+                                mb.OwnsOne(a => a.Tester);
+                            }
+                        );
+                    }
+                );
+            });
 
             Assert.Equal(
                 new[]
@@ -3679,58 +3675,56 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
                 GetTypeNames()
             );
 
-            modelBuilder.Entity<ApplicationVersion>(
-                entity =>
-                {
-                    Assert.Equal(
-                        new[]
-                        {
-                            "Application",
-                            "ApplicationVersion",
-                            "Attitude",
-                            "Attitude.FirstTest#FirstTest",
-                            "Attitude.FirstTest#FirstTest.Tester#SpecialistStaff",
-                            "Rejection",
-                            "Rejection.FirstTest#FirstTest",
-                            "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
-                        },
-                        GetTypeNames()
-                    );
+            modelBuilder.Entity<ApplicationVersion>(entity =>
+            {
+                Assert.Equal(
+                    new[]
+                    {
+                        "Application",
+                        "ApplicationVersion",
+                        "Attitude",
+                        "Attitude.FirstTest#FirstTest",
+                        "Attitude.FirstTest#FirstTest.Tester#SpecialistStaff",
+                        "Rejection",
+                        "Rejection.FirstTest#FirstTest",
+                        "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
+                    },
+                    GetTypeNames()
+                );
 
-                    entity.OwnsOne(
-                        x => x.Attitude,
-                        amb =>
-                        {
-                            amb.OwnsOne(
-                                x => x.FirstTest,
-                                mb =>
-                                {
-                                    mb.OwnsOne(a => a.Tester);
-                                }
-                            );
+                entity.OwnsOne(
+                    x => x.Attitude,
+                    amb =>
+                    {
+                        amb.OwnsOne(
+                            x => x.FirstTest,
+                            mb =>
+                            {
+                                mb.OwnsOne(a => a.Tester);
+                            }
+                        );
 
-                            var typeNames = GetTypeNames();
-                            Assert.Equal(
-                                new[]
-                                {
-                                    "Application",
-                                    "Application.Attitude#Attitude", // Attitude becomes shared
-                                    "Application.Attitude#Attitude.FirstTest#FirstTest", // Attitude becomes shared
-                                    "Application.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff", // Attitude becomes shared
-                                    "ApplicationVersion",
-                                    "ApplicationVersion.Attitude#Attitude", // Attitude becomes shared
-                                    "ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest", // Attitude becomes shared
-                                    "ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff", // Attitude becomes shared
-                                    "Rejection",
-                                    "Rejection.FirstTest#FirstTest",
-                                    "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
-                                },
-                                typeNames
-                            );
-                        }
-                    );
-                }
-            );
+                        var typeNames = GetTypeNames();
+                        Assert.Equal(
+                            new[]
+                            {
+                                "Application",
+                                "Application.Attitude#Attitude", // Attitude becomes shared
+                                "Application.Attitude#Attitude.FirstTest#FirstTest", // Attitude becomes shared
+                                "Application.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff", // Attitude becomes shared
+                                "ApplicationVersion",
+                                "ApplicationVersion.Attitude#Attitude", // Attitude becomes shared
+                                "ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest", // Attitude becomes shared
+                                "ApplicationVersion.Attitude#Attitude.FirstTest#FirstTest.Tester#SpecialistStaff", // Attitude becomes shared
+                                "Rejection",
+                                "Rejection.FirstTest#FirstTest",
+                                "Rejection.FirstTest#FirstTest.Tester#SpecialistStaff"
+                            },
+                            typeNames
+                        );
+                    }
+                );
+            });
 
             var model = modelBuilder.FinalizeModel();
             var entityTypes = model.GetEntityTypes();
@@ -4159,20 +4153,18 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal
         {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            builder.Entity<FullNotificationEntity>(
-                b =>
-                {
-                    b.HasOne(e => e.ReferenceNav).WithMany().HasForeignKey(e => e.AnotherEntityId);
+            builder.Entity<FullNotificationEntity>(b =>
+            {
+                b.HasOne(e => e.ReferenceNav).WithMany().HasForeignKey(e => e.AnotherEntityId);
 
-                    b.HasMany(e => e.CollectionNav).WithOne();
+                b.HasMany(e => e.CollectionNav).WithOne();
 
-                    b.Property(e => e.Token).IsConcurrencyToken();
+                b.Property(e => e.Token).IsConcurrencyToken();
 
-                    b.HasIndex(e => e.Index);
+                b.HasIndex(e => e.Index);
 
-                    b.HasIndex(e => e.UniqueIndex).IsUnique();
-                }
-            );
+                b.HasIndex(e => e.UniqueIndex).IsUnique();
+            });
 
             return (Model)builder.Model;
         }

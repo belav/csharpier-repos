@@ -173,12 +173,10 @@ namespace Microsoft.CodeAnalysis.CodeFixes.AddExplicitCast
                 // If the number of potential conversion types is larger than options we could show, report telemetry
                 Logger.Log(
                     FunctionId.CodeFixes_AddExplicitCast,
-                    KeyValueLogMessage.Create(
-                        m =>
-                        {
-                            m["NumberOfCandidates"] = potentialConversionTypes.Length;
-                        }
-                    )
+                    KeyValueLogMessage.Create(m =>
+                    {
+                        m["NumberOfCandidates"] = potentialConversionTypes.Length;
+                    })
                 );
             }
         }

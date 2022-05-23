@@ -105,47 +105,44 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             {
                 Logger.Log(
                     FunctionId.DiagnosticAnalyzerDriver_AnalyzerTypeCount,
-                    KeyValueLogMessage.Create(
-                        m =>
+                    KeyValueLogMessage.Create(m =>
+                    {
+                        m["Id"] = correlationId;
+
+                        var analyzerName = analyzerType.FullName;
+
+                        if (analyzerInfo.IsTelemetryCollectionAllowed)
                         {
-                            m["Id"] = correlationId;
-
-                            var analyzerName = analyzerType.FullName;
-
-                            if (analyzerInfo.IsTelemetryCollectionAllowed)
-                            {
-                                // log analyzer name and exception as is:
-                                m["Analyzer.Name"] = analyzerName;
-                            }
-                            else
-                            {
-                                // annonymize analyzer and exception names:
-                                m["Analyzer.NameHashCode"] = ComputeSha256Hash(analyzerName);
-                            }
-
-                            m["Analyzer.CodeBlock"] = analyzerInfo.CodeBlockActionsCount;
-                            m["Analyzer.CodeBlockStart"] = analyzerInfo.CodeBlockStartActionsCount;
-                            m["Analyzer.CodeBlockEnd"] = analyzerInfo.CodeBlockEndActionsCount;
-                            m["Analyzer.Compilation"] = analyzerInfo.CompilationActionsCount;
-                            m["Analyzer.CompilationStart"] =
-                                analyzerInfo.CompilationStartActionsCount;
-                            m["Analyzer.CompilationEnd"] = analyzerInfo.CompilationEndActionsCount;
-                            m["Analyzer.SemanticModel"] = analyzerInfo.SemanticModelActionsCount;
-                            m["Analyzer.SyntaxNode"] = analyzerInfo.SyntaxNodeActionsCount;
-                            m["Analyzer.SyntaxTree"] = analyzerInfo.SyntaxTreeActionsCount;
-                            m["Analyzer.AdditionalFile"] = analyzerInfo.AdditionalFileActionsCount;
-                            m["Analyzer.Operation"] = analyzerInfo.OperationActionsCount;
-                            m["Analyzer.OperationBlock"] = analyzerInfo.OperationBlockActionsCount;
-                            m["Analyzer.OperationBlockStart"] =
-                                analyzerInfo.OperationBlockStartActionsCount;
-                            m["Analyzer.OperationBlockEnd"] =
-                                analyzerInfo.OperationBlockEndActionsCount;
-                            m["Analyzer.Symbol"] = analyzerInfo.SymbolActionsCount;
-                            m["Analyzer.SymbolStart"] = analyzerInfo.SymbolStartActionsCount;
-                            m["Analyzer.SymbolEnd"] = analyzerInfo.SymbolEndActionsCount;
-                            m["Analyzer.Suppression"] = analyzerInfo.SuppressionActionsCount;
+                            // log analyzer name and exception as is:
+                            m["Analyzer.Name"] = analyzerName;
                         }
-                    )
+                        else
+                        {
+                            // annonymize analyzer and exception names:
+                            m["Analyzer.NameHashCode"] = ComputeSha256Hash(analyzerName);
+                        }
+
+                        m["Analyzer.CodeBlock"] = analyzerInfo.CodeBlockActionsCount;
+                        m["Analyzer.CodeBlockStart"] = analyzerInfo.CodeBlockStartActionsCount;
+                        m["Analyzer.CodeBlockEnd"] = analyzerInfo.CodeBlockEndActionsCount;
+                        m["Analyzer.Compilation"] = analyzerInfo.CompilationActionsCount;
+                        m["Analyzer.CompilationStart"] = analyzerInfo.CompilationStartActionsCount;
+                        m["Analyzer.CompilationEnd"] = analyzerInfo.CompilationEndActionsCount;
+                        m["Analyzer.SemanticModel"] = analyzerInfo.SemanticModelActionsCount;
+                        m["Analyzer.SyntaxNode"] = analyzerInfo.SyntaxNodeActionsCount;
+                        m["Analyzer.SyntaxTree"] = analyzerInfo.SyntaxTreeActionsCount;
+                        m["Analyzer.AdditionalFile"] = analyzerInfo.AdditionalFileActionsCount;
+                        m["Analyzer.Operation"] = analyzerInfo.OperationActionsCount;
+                        m["Analyzer.OperationBlock"] = analyzerInfo.OperationBlockActionsCount;
+                        m["Analyzer.OperationBlockStart"] =
+                            analyzerInfo.OperationBlockStartActionsCount;
+                        m["Analyzer.OperationBlockEnd"] =
+                            analyzerInfo.OperationBlockEndActionsCount;
+                        m["Analyzer.Symbol"] = analyzerInfo.SymbolActionsCount;
+                        m["Analyzer.SymbolStart"] = analyzerInfo.SymbolStartActionsCount;
+                        m["Analyzer.SymbolEnd"] = analyzerInfo.SymbolEndActionsCount;
+                        m["Analyzer.Suppression"] = analyzerInfo.SuppressionActionsCount;
+                    })
                 );
             }
         }

@@ -40,14 +40,10 @@ public class BasicIntegrationTest : IntegrationTestBase
     public void CustomDirective()
     {
         // Arrange
-        var projectEngine = CreateProjectEngine(
-            b =>
-            {
-                b.AddDirective(
-                    DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine)
-                );
-            }
-        );
+        var projectEngine = CreateProjectEngine(b =>
+        {
+            b.AddDirective(DirectiveDescriptor.CreateDirective("test", DirectiveKind.SingleLine));
+        });
 
         var projectItem = CreateProjectItemFromFile();
 

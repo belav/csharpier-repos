@@ -862,50 +862,46 @@ namespace Microsoft.Data.Sqlite
             var selectedSignal = new AutoResetEvent(initialState: false);
 
             return Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    using (var connection = new SqliteConnection(connectionString))
                     {
-                        using (var connection = new SqliteConnection(connectionString))
+                        connection.Open();
+                        if (extendedErrorCode)
                         {
-                            connection.Open();
-                            if (extendedErrorCode)
-                            {
-                                sqlite3_extended_result_codes(connection.Handle, 1);
-                            }
+                            sqlite3_extended_result_codes(connection.Handle, 1);
+                        }
 
-                            connection.ExecuteNonQuery(
-                                "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
-                            );
+                        connection.ExecuteNonQuery(
+                            "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                        );
 
-                            using (connection.ExecuteReader("SELECT * FROM Data;"))
-                            {
-                                selectedSignal.Set();
+                        using (connection.ExecuteReader("SELECT * FROM Data;"))
+                        {
+                            selectedSignal.Set();
 
-                                await Task.Delay(1000);
-                            }
+                            await Task.Delay(1000);
                         }
                     }
-                ),
-                Task.Run(
-                    () =>
+                }),
+                Task.Run(() =>
+                {
+                    using (var connection = new SqliteConnection(connectionString))
                     {
-                        using (var connection = new SqliteConnection(connectionString))
+                        connection.Open();
+                        if (extendedErrorCode)
                         {
-                            connection.Open();
-                            if (extendedErrorCode)
-                            {
-                                sqlite3_extended_result_codes(connection.Handle, 1);
-                            }
-
-                            selectedSignal.WaitOne();
-
-                            var command = connection.CreateCommand();
-                            command.CommandText = "DROP TABLE Data;";
-
-                            command.ExecuteNonQuery();
+                            sqlite3_extended_result_codes(connection.Handle, 1);
                         }
+
+                        selectedSignal.WaitOne();
+
+                        var command = connection.CreateCommand();
+                        command.CommandText = "DROP TABLE Data;";
+
+                        command.ExecuteNonQuery();
                     }
-                )
+                })
             );
         }
 
@@ -919,42 +915,38 @@ namespace Microsoft.Data.Sqlite
             try
             {
                 await Task.WhenAll(
-                    Task.Run(
-                        async () =>
+                    Task.Run(async () =>
+                    {
+                        using (var connection = new SqliteConnection(connectionString))
                         {
-                            using (var connection = new SqliteConnection(connectionString))
+                            connection.Open();
+
+                            connection.ExecuteNonQuery(
+                                "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
+                            );
+
+                            using (connection.ExecuteReader("SELECT * FROM Data;"))
                             {
-                                connection.Open();
+                                selectedSignal.Set();
 
-                                connection.ExecuteNonQuery(
-                                    "CREATE TABLE Data (Value); INSERT INTO Data VALUES (0);"
-                                );
-
-                                using (connection.ExecuteReader("SELECT * FROM Data;"))
-                                {
-                                    selectedSignal.Set();
-
-                                    await Task.Delay(1000);
-                                }
+                                await Task.Delay(1000);
                             }
                         }
-                    ),
-                    Task.Run(
-                        () =>
+                    }),
+                    Task.Run(() =>
+                    {
+                        using (var connection = new SqliteConnection(connectionString))
                         {
-                            using (var connection = new SqliteConnection(connectionString))
-                            {
-                                connection.Open();
+                            connection.Open();
 
-                                selectedSignal.WaitOne();
+                            selectedSignal.WaitOne();
 
-                                var command = connection.CreateCommand();
-                                command.CommandText = "DROP TABLE Data;";
+                            var command = connection.CreateCommand();
+                            command.CommandText = "DROP TABLE Data;";
 
-                                command.ExecuteNonQuery();
-                            }
+                            command.ExecuteNonQuery();
                         }
-                    )
+                    })
                 );
             }
             finally

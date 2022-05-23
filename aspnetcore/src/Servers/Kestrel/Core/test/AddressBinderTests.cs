@@ -318,17 +318,15 @@ public class AddressBinderTests
             ApplicationServices = services.BuildServiceProvider()
         };
 
-        options.ConfigureEndpointDefaults(
-            e =>
+        options.ConfigureEndpointDefaults(e =>
+        {
+            if (e.IPEndPoint.Port == 5001)
             {
-                if (e.IPEndPoint.Port == 5001)
-                {
-                    e.UseHttps(
-                        new HttpsConnectionAdapterOptions { ServerCertificate = x509Certificate2 }
-                    );
-                }
+                e.UseHttps(
+                    new HttpsConnectionAdapterOptions { ServerCertificate = x509Certificate2 }
+                );
             }
-        );
+        });
 
         var endpoints = new List<ListenOptions>();
 

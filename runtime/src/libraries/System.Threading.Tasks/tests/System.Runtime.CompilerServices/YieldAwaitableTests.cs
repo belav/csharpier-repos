@@ -33,16 +33,14 @@ namespace System.Threading.Tasks.Tests
                         ya.IsCompleted,
                         "RunAsyncYieldAwaiterTests     > FAILURE. YieldAwaiter.IsCompleted should always be false."
                     );
-                    ya.OnCompleted(
-                        () =>
-                        {
-                            Assert.True(
-                                ValidateCorrectContextSynchronizationContext.t_isPostedInContext,
-                                "RunAsyncYieldAwaiterTests     > FAILURE. Expected to post in target context."
-                            );
-                            mres.Set();
-                        }
-                    );
+                    ya.OnCompleted(() =>
+                    {
+                        Assert.True(
+                            ValidateCorrectContextSynchronizationContext.t_isPostedInContext,
+                            "RunAsyncYieldAwaiterTests     > FAILURE. Expected to post in target context."
+                        );
+                        mres.Set();
+                    });
                     mres.Wait();
                     ya.GetResult();
                     SynchronizationContext.SetSynchronizationContext(null);
@@ -73,16 +71,14 @@ namespace System.Threading.Tasks.Tests
                     ya.IsCompleted,
                     "RunAsyncYieldAwaiterTests     > FAILURE. YieldAwaiter.IsCompleted should always be false."
                 );
-                ya.OnCompleted(
-                    () =>
-                    {
-                        Assert.True(
-                            ValidateCorrectContextSynchronizationContext.t_isPostedInContext,
-                            "     > FAILURE. Expected to post in target context."
-                        );
-                        mres.Set();
-                    }
-                );
+                ya.OnCompleted(() =>
+                {
+                    Assert.True(
+                        ValidateCorrectContextSynchronizationContext.t_isPostedInContext,
+                        "     > FAILURE. Expected to post in target context."
+                    );
+                    mres.Set();
+                });
                 mres.Wait();
                 ya.GetResult();
                 SynchronizationContext.SetSynchronizationContext(null);
@@ -115,16 +111,14 @@ namespace System.Threading.Tasks.Tests
                                     ya.IsCompleted,
                                     "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
                                 );
-                                ya.OnCompleted(
-                                    () =>
-                                    {
-                                        Assert.True(
-                                            TaskScheduler.Current is QUWITaskScheduler,
-                                            "     > FAILURE. Expected to queue into target scheduler."
-                                        );
-                                        mres.Set();
-                                    }
-                                );
+                                ya.OnCompleted(() =>
+                                {
+                                    Assert.True(
+                                        TaskScheduler.Current is QUWITaskScheduler,
+                                        "     > FAILURE. Expected to queue into target scheduler."
+                                    );
+                                    mres.Set();
+                                });
                                 mres.Wait();
                                 ya.GetResult();
                             }
@@ -173,16 +167,14 @@ namespace System.Threading.Tasks.Tests
                                     ya.IsCompleted,
                                     "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
                                 );
-                                ya.OnCompleted(
-                                    () =>
-                                    {
-                                        Assert.True(
-                                            TaskScheduler.Current is QUWITaskScheduler,
-                                            "     > FAILURE. Expected to queue into target scheduler."
-                                        );
-                                        mres.Set();
-                                    }
-                                );
+                                ya.OnCompleted(() =>
+                                {
+                                    Assert.True(
+                                        TaskScheduler.Current is QUWITaskScheduler,
+                                        "     > FAILURE. Expected to queue into target scheduler."
+                                    );
+                                    mres.Set();
+                                });
                                 mres.Wait();
                                 ya.GetResult();
                             }
@@ -227,16 +219,14 @@ namespace System.Threading.Tasks.Tests
                     ya.IsCompleted,
                     "     > FAILURE. YieldAwaiter.IsCompleted should always be false."
                 );
-                ya.OnCompleted(
-                    () =>
-                    {
-                        Assert.True(
-                            ValidateCorrectContextSynchronizationContext.t_isPostedInContext,
-                            "     > FAILURE. Expected to post in target context."
-                        );
-                        mres.Set();
-                    }
-                );
+                ya.OnCompleted(() =>
+                {
+                    Assert.True(
+                        ValidateCorrectContextSynchronizationContext.t_isPostedInContext,
+                        "     > FAILURE. Expected to post in target context."
+                    );
+                    mres.Set();
+                });
                 mres.Wait();
                 ya.GetResult();
                 SynchronizationContext.SetSynchronizationContext(null);
@@ -252,12 +242,10 @@ namespace System.Threading.Tasks.Tests
                 new ValidateCorrectContextSynchronizationContext()
             );
             var ya = Task.Yield().GetAwaiter();
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    ya.OnCompleted(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                ya.OnCompleted(null);
+            });
             SynchronizationContext.SetSynchronizationContext(null);
         }
 
@@ -311,14 +299,12 @@ namespace System.Threading.Tasks.Tests
             public override void Post(SendOrPostCallback d, object state)
             {
                 Interlocked.Increment(ref PostCount);
-                Task.Run(
-                    () =>
-                    {
-                        t_isPostedInContext = true;
-                        d(state);
-                        t_isPostedInContext = false;
-                    }
-                );
+                Task.Run(() =>
+                {
+                    t_isPostedInContext = true;
+                    d(state);
+                    t_isPostedInContext = false;
+                });
             }
 
             public override void Send(SendOrPostCallback d, object state)

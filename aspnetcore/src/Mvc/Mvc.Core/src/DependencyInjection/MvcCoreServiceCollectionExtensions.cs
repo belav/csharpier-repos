@@ -257,29 +257,25 @@ public static class MvcCoreServiceCollectionExtensions
         // The DefaultModelMetadataProvider does significant caching and should be a singleton.
         services.TryAddSingleton<IModelMetadataProvider, DefaultModelMetadataProvider>();
         services.TryAdd(
-            ServiceDescriptor.Transient<ICompositeMetadataDetailsProvider>(
-                s =>
-                {
-                    var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
-                    return new DefaultCompositeMetadataDetailsProvider(
-                        options.ModelMetadataDetailsProviders
-                    );
-                }
-            )
-        );
-        services.TryAddSingleton<IModelBinderFactory, ModelBinderFactory>();
-        services.TryAddSingleton<IObjectModelValidator>(
-            s =>
+            ServiceDescriptor.Transient<ICompositeMetadataDetailsProvider>(s =>
             {
                 var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
-                var metadataProvider = s.GetRequiredService<IModelMetadataProvider>();
-                return new DefaultObjectValidator(
-                    metadataProvider,
-                    options.ModelValidatorProviders,
-                    options
+                return new DefaultCompositeMetadataDetailsProvider(
+                    options.ModelMetadataDetailsProviders
                 );
-            }
+            })
         );
+        services.TryAddSingleton<IModelBinderFactory, ModelBinderFactory>();
+        services.TryAddSingleton<IObjectModelValidator>(s =>
+        {
+            var options = s.GetRequiredService<IOptions<MvcOptions>>().Value;
+            var metadataProvider = s.GetRequiredService<IModelMetadataProvider>();
+            return new DefaultObjectValidator(
+                metadataProvider,
+                options.ModelValidatorProviders,
+                options
+            );
+        });
         services.TryAddSingleton<ClientValidatorCache>();
         services.TryAddSingleton<ParameterBinder>();
 

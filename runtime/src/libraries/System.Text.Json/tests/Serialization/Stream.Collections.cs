@@ -414,15 +414,13 @@ namespace System.Text.Json.Serialization.Tests
         {
             foreach (Type type in CollectionTestTypes.DictionaryTypes<string>())
             {
-                Assert.ThrowsAsync<JsonException>(
-                    async () =>
+                Assert.ThrowsAsync<JsonException>(async () =>
+                {
+                    using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
                     {
-                        using (var memoryStream = new MemoryStream(Encoding.UTF8.GetBytes(json)))
-                        {
-                            await JsonSerializer.DeserializeAsync(memoryStream, type);
-                        }
+                        await JsonSerializer.DeserializeAsync(memoryStream, type);
                     }
-                );
+                });
             }
         }
 

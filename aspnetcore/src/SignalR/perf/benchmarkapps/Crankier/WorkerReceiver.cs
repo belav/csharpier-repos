@@ -31,50 +31,46 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
             }
 
             _receiveMessageCts = new CancellationTokenSource();
-            Task.Run(
-                async () =>
+            Task.Run(async () =>
+            {
+                while (!_receiveMessageCts.Token.IsCancellationRequested)
                 {
-                    while (!_receiveMessageCts.Token.IsCancellationRequested)
+                    var messageString = await _reader.ReadLineAsync();
+                    try
                     {
-                        var messageString = await _reader.ReadLineAsync();
-                        try
-                        {
-                            var message = JsonConvert.DeserializeObject<Message>(messageString);
+                        var message = JsonConvert.DeserializeObject<Message>(messageString);
 
-                            switch (message.Command.ToLowerInvariant())
-                            {
-                                case "ping":
-                                    await _worker.PingAsync(message.Value["Value"].ToObject<int>());
-                                    break;
-                                case "connect":
-                                    await _worker.ConnectAsync(
-                                        message.Value["TargetAddress"].ToObject<string>(),
-                                        message.Value[
-                                            "TransportType"
-                                        ].ToObject<HttpTransportType>(),
-                                        message.Value["NumberOfConnections"].ToObject<int>()
-                                    );
-                                    break;
-                                case "starttest":
-                                    await _worker.StartTestAsync(
-                                        TimeSpan.FromMilliseconds(
-                                            message.Value.Value<double>("SendInterval")
-                                        ),
-                                        message.Value["SendBytes"].ToObject<int>()
-                                    );
-                                    break;
-                                case "stop":
-                                    await _worker.StopAsync();
-                                    break;
-                            }
-                        }
-                        catch (Exception ex)
+                        switch (message.Command.ToLowerInvariant())
                         {
-                            Trace.WriteLine(ex.Message);
+                            case "ping":
+                                await _worker.PingAsync(message.Value["Value"].ToObject<int>());
+                                break;
+                            case "connect":
+                                await _worker.ConnectAsync(
+                                    message.Value["TargetAddress"].ToObject<string>(),
+                                    message.Value["TransportType"].ToObject<HttpTransportType>(),
+                                    message.Value["NumberOfConnections"].ToObject<int>()
+                                );
+                                break;
+                            case "starttest":
+                                await _worker.StartTestAsync(
+                                    TimeSpan.FromMilliseconds(
+                                        message.Value.Value<double>("SendInterval")
+                                    ),
+                                    message.Value["SendBytes"].ToObject<int>()
+                                );
+                                break;
+                            case "stop":
+                                await _worker.StopAsync();
+                                break;
                         }
                     }
+                    catch (Exception ex)
+                    {
+                        Trace.WriteLine(ex.Message);
+                    }
                 }
-            );
+            });
         }
 
         public void Stop()

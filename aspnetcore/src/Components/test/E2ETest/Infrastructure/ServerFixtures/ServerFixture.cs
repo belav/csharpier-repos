@@ -24,22 +24,20 @@ public abstract class ServerFixture : IDisposable
 
     public ServerFixture()
     {
-        _rootUriInitializer = new Lazy<Uri>(
-            () =>
+        _rootUriInitializer = new Lazy<Uri>(() =>
+        {
+            var uri = new Uri(StartAndGetRootUri());
+            if (E2ETestOptions.Instance.SauceTest)
             {
-                var uri = new Uri(StartAndGetRootUri());
-                if (E2ETestOptions.Instance.SauceTest)
-                {
-                    uri = new UriBuilder(
-                        uri.Scheme,
-                        E2ETestOptions.Instance.Sauce.HostName,
-                        uri.Port
-                    ).Uri;
-                }
-
-                return uri;
+                uri = new UriBuilder(
+                    uri.Scheme,
+                    E2ETestOptions.Instance.Sauce.HostName,
+                    uri.Port
+                ).Uri;
             }
-        );
+
+            return uri;
+        });
     }
 
     public abstract void Dispose();
@@ -75,21 +73,19 @@ public abstract class ServerFixture : IDisposable
         var isDone = new ManualResetEvent(false);
 
         ExceptionDispatchInfo edi = null;
-        new Thread(
-            () =>
+        new Thread(() =>
+        {
+            try
             {
-                try
-                {
-                    action();
-                }
-                catch (Exception ex)
-                {
-                    edi = ExceptionDispatchInfo.Capture(ex);
-                }
-
-                isDone.Set();
+                action();
             }
-        ).Start();
+            catch (Exception ex)
+            {
+                edi = ExceptionDispatchInfo.Capture(ex);
+            }
+
+            isDone.Set();
+        }).Start();
 
         if (!isDone.WaitOne(TimeSpan.FromSeconds(10)))
         {

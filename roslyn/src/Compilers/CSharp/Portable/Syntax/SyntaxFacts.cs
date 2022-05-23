@@ -542,24 +542,22 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Do not descend into functions
             return node.DescendantNodesAndSelf(child => !IsNestedFunction(child))
-                .Any(
-                    node =>
+                .Any(node =>
+                {
+                    switch (node)
                     {
-                        switch (node)
-                        {
-                            case AwaitExpressionSyntax _:
-                            case LocalDeclarationStatementSyntax local
-                                when local.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
-                            case CommonForEachStatementSyntax @foreach
-                                when @foreach.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
-                            case UsingStatementSyntax @using
-                                when @using.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
-                                return true;
-                            default:
-                                return false;
-                        }
+                        case AwaitExpressionSyntax _:
+                        case LocalDeclarationStatementSyntax local
+                            when local.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                        case CommonForEachStatementSyntax @foreach
+                            when @foreach.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                        case UsingStatementSyntax @using
+                            when @using.AwaitKeyword.IsKind(SyntaxKind.AwaitKeyword):
+                            return true;
+                        default:
+                            return false;
                     }
-                );
+                });
         }
 
         internal static bool IsNestedFunction(SyntaxNode child)
@@ -580,17 +578,14 @@ namespace Microsoft.CodeAnalysis.CSharp
         {
             // Do not descend into functions and expressions
             return node is object
-                && node.DescendantNodesAndSelf(
-                        child =>
-                        {
-                            Debug.Assert(
-                                ReferenceEquals(node, child)
-                                    || child
-                                        is not (MemberDeclarationSyntax or TypeDeclarationSyntax)
-                            );
-                            return !IsNestedFunction(child) && !(node is ExpressionSyntax);
-                        }
-                    )
+                && node.DescendantNodesAndSelf(child =>
+                    {
+                        Debug.Assert(
+                            ReferenceEquals(node, child)
+                                || child is not (MemberDeclarationSyntax or TypeDeclarationSyntax)
+                        );
+                        return !IsNestedFunction(child) && !(node is ExpressionSyntax);
+                    })
                     .Any(n => n is YieldStatementSyntax);
         }
 

@@ -11,47 +11,43 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void InitializeApplicationTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    var moduleEvents = new ModuleEvents();
-                    var app = new MyHttpApplication();
-                    WebPageHttpModule.InitializeApplication(
-                        app,
-                        moduleEvents.OnApplicationPostResolveRequestCache,
-                        moduleEvents.Initialize
-                    );
-                    Assert.True(moduleEvents.CalledInitialize);
-                }
-            );
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var moduleEvents = new ModuleEvents();
+                var app = new MyHttpApplication();
+                WebPageHttpModule.InitializeApplication(
+                    app,
+                    moduleEvents.OnApplicationPostResolveRequestCache,
+                    moduleEvents.Initialize
+                );
+                Assert.True(moduleEvents.CalledInitialize);
+            });
         }
 
         [Fact]
         public void StartApplicationTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    var moduleEvents = new ModuleEvents();
-                    var app = new MyHttpApplication();
-                    WebPageHttpModule.StartApplication(
-                        app,
-                        moduleEvents.ExecuteStartPage,
-                        moduleEvents.ApplicationStart
-                    );
-                    Assert.Equal(1, moduleEvents.CalledExecuteStartPage);
-                    Assert.Equal(1, moduleEvents.CalledApplicationStart);
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var moduleEvents = new ModuleEvents();
+                var app = new MyHttpApplication();
+                WebPageHttpModule.StartApplication(
+                    app,
+                    moduleEvents.ExecuteStartPage,
+                    moduleEvents.ApplicationStart
+                );
+                Assert.Equal(1, moduleEvents.CalledExecuteStartPage);
+                Assert.Equal(1, moduleEvents.CalledApplicationStart);
 
-                    // Call a second time to make sure the methods are only called once
-                    WebPageHttpModule.StartApplication(
-                        app,
-                        moduleEvents.ExecuteStartPage,
-                        moduleEvents.ApplicationStart
-                    );
-                    Assert.Equal(1, moduleEvents.CalledExecuteStartPage);
-                    Assert.Equal(1, moduleEvents.CalledApplicationStart);
-                }
-            );
+                // Call a second time to make sure the methods are only called once
+                WebPageHttpModule.StartApplication(
+                    app,
+                    moduleEvents.ExecuteStartPage,
+                    moduleEvents.ApplicationStart
+                );
+                Assert.Equal(1, moduleEvents.CalledExecuteStartPage);
+                Assert.Equal(1, moduleEvents.CalledApplicationStart);
+            });
         }
 
         public class MyHttpApplication : HttpApplication

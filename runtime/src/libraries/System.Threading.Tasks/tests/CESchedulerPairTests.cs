@@ -165,27 +165,23 @@ namespace System.Threading.Tasks.Tests
                 //by sleeping we simulate some non trivial work that takes time and causes the concurrentexclusive scheduler Task
                 //to stay around for addition work.
                 taskList.Add(
-                    readers.StartNew(
-                        () =>
-                        {
-                            var sw = new SpinWait();
-                            while (!sw.NextSpinWillYield)
-                                sw.SpinOnce();
-                        }
-                    )
+                    readers.StartNew(() =>
+                    {
+                        var sw = new SpinWait();
+                        while (!sw.NextSpinWillYield)
+                            sw.SpinOnce();
+                    })
                 );
             }
             // Schedule work where each item must be run when no other items are running
             for (int i = 0; i < 10; i++)
                 taskList.Add(
-                    writers.StartNew(
-                        () =>
-                        {
-                            var sw = new SpinWait();
-                            while (!sw.NextSpinWillYield)
-                                sw.SpinOnce();
-                        }
-                    )
+                    writers.StartNew(() =>
+                    {
+                        var sw = new SpinWait();
+                        while (!sw.NextSpinWillYield)
+                            sw.SpinOnce();
+                    })
                 );
 
             //Wait on the tasks to finish to ensure that the ConcurrentExclusiveSchedulerPair created can schedule and execute tasks without issues
@@ -374,13 +370,11 @@ namespace System.Threading.Tasks.Tests
             ManualResetEvent blockMainThreadEvent = new ManualResetEvent(false);
 
             //Add a reader tasks that would block
-            readers.StartNew(
-                () =>
-                {
-                    blockMainThreadEvent.Set();
-                    blockReaderTaskEvent.WaitOne();
-                }
-            );
+            readers.StartNew(() =>
+            {
+                blockMainThreadEvent.Set();
+                blockReaderTaskEvent.WaitOne();
+            });
             blockMainThreadEvent.WaitOne(); // wait for the blockedTask to start execution
 
             //Now add more reader tasks
@@ -419,13 +413,11 @@ namespace System.Threading.Tasks.Tests
             ManualResetEvent blockMre = new ManualResetEvent(false);
 
             //Schedule a concurrent task and ensure that it is executed, just for fun
-            Task<bool> conTask = readers.StartNew<bool>(
-                () =>
-                {
-                    new ManualResetEvent(false).WaitOne(10);
-                    return true;
-                }
-            );
+            Task<bool> conTask = readers.StartNew<bool>(() =>
+            {
+                new ManualResetEvent(false).WaitOne(10);
+                return true;
+            });
             conTask.Wait();
             Assert.True(
                 conTask.Result,
@@ -433,27 +425,23 @@ namespace System.Threading.Tasks.Tests
             );
 
             //Now scehdule an exclusive task that is blocked(thereby preventing other concurrent tasks to finish)
-            Task<bool> exclusiveTask = writers.StartNew<bool>(
-                () =>
-                {
-                    blockMainThreadEvent.Set();
-                    blockExclusiveTaskEvent.WaitOne();
-                    return true;
-                }
-            );
+            Task<bool> exclusiveTask = writers.StartNew<bool>(() =>
+            {
+                blockMainThreadEvent.Set();
+                blockExclusiveTaskEvent.WaitOne();
+                return true;
+            });
 
             //With exclusive task in execution mode, schedule a number of concurrent tasks and ensure they are not executed
             blockMainThreadEvent.WaitOne();
             List<Task> taskList = new List<Task>();
             for (int i = 0; i < 20; i++)
                 taskList.Add(
-                    readers.StartNew<bool>(
-                        () =>
-                        {
-                            blockMre.WaitOne(10);
-                            return true;
-                        }
-                    )
+                    readers.StartNew<bool>(() =>
+                    {
+                        blockMre.WaitOne(10);
+                        return true;
+                    })
                 );
 
             foreach (Task task in taskList)
@@ -825,21 +813,17 @@ namespace System.Threading.Tasks.Tests
             {
                 case "StartNew":
                     for (int i = 0; i < taskCount; i++)
-                        new TaskFactory(scheduler).StartNew(
-                            () =>
-                            {
-                                work();
-                            }
-                        );
+                        new TaskFactory(scheduler).StartNew(() =>
+                        {
+                            work();
+                        });
                     break;
                 case "Start":
                     for (int i = 0; i < taskCount; i++)
-                        new Task(
-                            () =>
-                            {
-                                work();
-                            }
-                        ).Start(scheduler);
+                        new Task(() =>
+                        {
+                            work();
+                        }).Start(scheduler);
                     break;
                 case "ContinueWith":
                     for (int i = 0; i < taskCount; i++)

@@ -37,19 +37,15 @@ struct Gen<T>
 
         for (int i = 0; i < Test_EnterExit14.nThreads; i++)
         {
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper.Consumer(monitorT);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper.Consumer(monitorT);
+            });
 
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper2.Consumer(monitorU);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper2.Consumer(monitorU);
+            });
         }
 
         for (int i = 0; i < 6; i++)

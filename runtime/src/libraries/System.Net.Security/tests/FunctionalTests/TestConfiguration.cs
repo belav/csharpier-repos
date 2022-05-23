@@ -50,54 +50,52 @@ namespace System.Net.Security.Tests
         public static Task WhenAllOrAnyFailedWithTimeout(params Task[] tasks) =>
             tasks.WhenAllOrAnyFailed(PassingTestTimeoutMilliseconds);
 
-        private static Lazy<bool> s_supportsNullEncryption = new Lazy<bool>(
-            () =>
+        private static Lazy<bool> s_supportsNullEncryption = new Lazy<bool>(() =>
+        {
+            // On Windows, null ciphers (no encryption) are supported.
+            if (OperatingSystem.IsWindows())
             {
-                // On Windows, null ciphers (no encryption) are supported.
-                if (OperatingSystem.IsWindows())
-                {
-                    return true;
-                }
+                return true;
+            }
 
-                // On macOS and Android, the null cipher (no encryption) is not supported.
-                if (OperatingSystem.IsMacOS() || OperatingSystem.IsAndroid())
-                {
-                    return false;
-                }
+            // On macOS and Android, the null cipher (no encryption) is not supported.
+            if (OperatingSystem.IsMacOS() || OperatingSystem.IsAndroid())
+            {
+                return false;
+            }
 
-                // On Unix, it depends on how openssl was built.  So we ask openssl if it has any.
-                try
-                {
-                    using (
-                        Process p = Process.Start(
-                            new ProcessStartInfo("openssl", "ciphers NULL")
-                            {
-                                RedirectStandardOutput = true,
-                                RedirectStandardError = true
-                            }
-                        )
+            // On Unix, it depends on how openssl was built.  So we ask openssl if it has any.
+            try
+            {
+                using (
+                    Process p = Process.Start(
+                        new ProcessStartInfo("openssl", "ciphers NULL")
+                        {
+                            RedirectStandardOutput = true,
+                            RedirectStandardError = true
+                        }
                     )
-                    {
-                        // On some platforms (openSUSE 13.2 is one example), doing this query can print error messages to standard error
-                        // when the tests are run via MSBuild, this error message gets picked up and treated as an error from the test itself
-                        // causing the task to fail.  We don't actually care about the error text at all, so we just ignore it.
-                        p.ErrorDataReceived += (
-                            (
-                                object sendingProcess,
-                                DataReceivedEventArgs errorText
-                            ) => { /* ignore */
-                            }
-                        );
-                        p.BeginErrorReadLine();
-
-                        return p.StandardOutput.ReadToEnd().Trim().Length > 0;
-                    }
-                }
-                catch
+                )
                 {
-                    return false;
+                    // On some platforms (openSUSE 13.2 is one example), doing this query can print error messages to standard error
+                    // when the tests are run via MSBuild, this error message gets picked up and treated as an error from the test itself
+                    // causing the task to fail.  We don't actually care about the error text at all, so we just ignore it.
+                    p.ErrorDataReceived += (
+                        (
+                            object sendingProcess,
+                            DataReceivedEventArgs errorText
+                        ) => { /* ignore */
+                        }
+                    );
+                    p.BeginErrorReadLine();
+
+                    return p.StandardOutput.ReadToEnd().Trim().Length > 0;
                 }
             }
-        );
+            catch
+            {
+                return false;
+            }
+        });
     }
 }

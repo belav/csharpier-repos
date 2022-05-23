@@ -35,13 +35,11 @@ public class TransportsServerStartup : ServerStartup
                 app.UseStaticFiles();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapBlazorHub();
-                        endpoints.MapFallbackToPage("/_ServerHost");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapBlazorHub();
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
             }
         );
 
@@ -52,23 +50,19 @@ public class TransportsServerStartup : ServerStartup
                 app.UseStaticFiles();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapBlazorHub(configureOptions: options =>
                     {
-                        endpoints.MapBlazorHub(
-                            configureOptions: options =>
-                            {
-                                options.Transports = Microsoft
-                                    .AspNetCore
-                                    .Http
-                                    .Connections
-                                    .HttpTransportType
-                                    .LongPolling;
-                            }
-                        );
-                        endpoints.MapFallbackToPage("/_ServerHost");
-                    }
-                );
+                        options.Transports = Microsoft
+                            .AspNetCore
+                            .Http
+                            .Connections
+                            .HttpTransportType
+                            .LongPolling;
+                    });
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
             }
         );
 
@@ -79,23 +73,19 @@ public class TransportsServerStartup : ServerStartup
                 app.UseStaticFiles();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapBlazorHub(configureOptions: options =>
                     {
-                        endpoints.MapBlazorHub(
-                            configureOptions: options =>
-                            {
-                                options.Transports = Microsoft
-                                    .AspNetCore
-                                    .Http
-                                    .Connections
-                                    .HttpTransportType
-                                    .WebSockets;
-                            }
-                        );
-                        endpoints.MapFallbackToPage("/_ServerHost");
-                    }
-                );
+                        options.Transports = Microsoft
+                            .AspNetCore
+                            .Http
+                            .Connections
+                            .HttpTransportType
+                            .WebSockets;
+                    });
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
             }
         );
     }

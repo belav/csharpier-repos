@@ -265,117 +265,101 @@ namespace System.Security.AccessControl.Tests
 
             // case 1, no ACE, get index at -1
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = -1;
-                    verifierGenericAce = rawAcl[index];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = -1;
+                verifierGenericAce = rawAcl[index];
+            });
 
             //case 2, get index at Count
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = rawAcl.Count;
-                    verifierGenericAce = rawAcl[index];
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = rawAcl.Count;
+                verifierGenericAce = rawAcl[index];
+            });
 
             //case 3, set index at -1
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = -1;
-                    owner = "BA";
-                    genericAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl[index] = genericAce;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = -1;
+                owner = "BA";
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl[index] = genericAce;
+            });
             //case 4, set index at Count
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = rawAcl.Count;
-                    owner = "BA";
-                    genericAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl[index] = genericAce;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = rawAcl.Count;
+                owner = "BA";
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl[index] = genericAce;
+            });
             //case 5, set null Ace
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    rawAcl = new RawAcl(1, 1);
-                    index = 0;
-                    genericAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, genericAce);
-                    genericAce = null;
-                    rawAcl[index] = genericAce;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                rawAcl = new RawAcl(1, 1);
+                index = 0;
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, genericAce);
+                genericAce = null;
+                rawAcl[index] = genericAce;
+            });
             //case 6, set Ace causing binarylength overflow
 
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    byte[] opaque = new byte[GenericAcl.MaxBinaryLength + 1 - 8 - 4];
-                    rawAcl = new RawAcl(1, 1);
-                    index = 0;
-                    genericAce = new CommonAce(
-                        AceFlags.None,
-                        AceQualifier.AccessAllowed,
-                        1,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
-                        ),
-                        false,
-                        null
-                    );
-                    rawAcl.InsertAce(0, genericAce);
-                    genericAce = new CustomAce(
-                        AceType.MaxDefinedAceType + 1,
-                        (AceFlags)223,
-                        opaque
-                    );
-                    rawAcl[index] = genericAce;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                byte[] opaque = new byte[GenericAcl.MaxBinaryLength + 1 - 8 - 4];
+                rawAcl = new RawAcl(1, 1);
+                index = 0;
+                genericAce = new CommonAce(
+                    AceFlags.None,
+                    AceQualifier.AccessAllowed,
+                    1,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(owner)
+                    ),
+                    false,
+                    null
+                );
+                rawAcl.InsertAce(0, genericAce);
+                genericAce = new CustomAce(AceType.MaxDefinedAceType + 1, (AceFlags)223, opaque);
+                rawAcl[index] = genericAce;
+            });
         }
     }
 }

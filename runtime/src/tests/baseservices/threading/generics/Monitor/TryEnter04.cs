@@ -24,12 +24,10 @@ struct Gen<T>
 
         for (int i = 0; i < Test_TryEnter04.nThreads; i++)
         {
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper.ConsumerTryEnter(monitor, 100);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper.ConsumerTryEnter(monitor, 100);
+            });
         }
 
         for (int i = 0; i < 6; i++)

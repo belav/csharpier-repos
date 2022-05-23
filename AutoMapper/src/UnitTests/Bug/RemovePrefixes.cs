@@ -18,13 +18,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ClearPrefixes();
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ClearPrefixes();
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_not_map_with_default_postfix()

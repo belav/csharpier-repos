@@ -1395,22 +1395,20 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveTest1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    float width = 100.0f;
-                    float height = 200.0f;
-                    float zNearPlane = 0.0f;
-                    float zFarPlane = 0.0f;
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                float width = 100.0f;
+                float height = 200.0f;
+                float zNearPlane = 0.0f;
+                float zFarPlane = 0.0f;
 
-                    Matrix4x4 actual = Matrix4x4.CreatePerspective(
-                        width,
-                        height,
-                        zNearPlane,
-                        zFarPlane
-                    );
-                }
-            );
+                Matrix4x4 actual = Matrix4x4.CreatePerspective(
+                    width,
+                    height,
+                    zNearPlane,
+                    zFarPlane
+                );
+            });
         }
 
         // A test for CreatePerspective (float, float, float, float)
@@ -1418,12 +1416,10 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveTest2()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 actual = Matrix4x4.CreatePerspective(10, 10, -10, 10);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 actual = Matrix4x4.CreatePerspective(10, 10, -10, 10);
+            });
         }
 
         // A test for CreatePerspective (float, float, float, float)
@@ -1431,12 +1427,10 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveTest3()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 actual = Matrix4x4.CreatePerspective(10, 10, 10, -10);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 actual = Matrix4x4.CreatePerspective(10, 10, 10, -10);
+            });
         }
 
         // A test for CreatePerspective (float, float, float, float)
@@ -1444,12 +1438,10 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveTest4()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 actual = Matrix4x4.CreatePerspective(10, 10, 10, 1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 actual = Matrix4x4.CreatePerspective(10, 10, 10, 1);
+            });
         }
 
         // A test for CreatePerspectiveFieldOfView (float, float, float, float)
@@ -1486,12 +1478,10 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveFieldOfViewTest1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(-1, 1, 1, 10);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(-1, 1, 1, 10);
+            });
         }
 
         // A test for CreatePerspectiveFieldOfView (float, float, float, float)
@@ -1499,17 +1489,15 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveFieldOfViewTest2()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
-                        MathHelper.Pi + 0.01f,
-                        1,
-                        1,
-                        10
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
+                    MathHelper.Pi + 0.01f,
+                    1,
+                    1,
+                    10
+                );
+            });
         }
 
         // A test for CreatePerspectiveFieldOfView (float, float, float, float)
@@ -1517,17 +1505,15 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveFieldOfViewTest3()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
-                        MathHelper.PiOver4,
-                        1,
-                        -1,
-                        10
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
+                    MathHelper.PiOver4,
+                    1,
+                    -1,
+                    10
+                );
+            });
         }
 
         // A test for CreatePerspectiveFieldOfView (float, float, float, float)
@@ -1535,17 +1521,15 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveFieldOfViewTest4()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
-                        MathHelper.PiOver4,
-                        1,
-                        1,
-                        -10
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
+                    MathHelper.PiOver4,
+                    1,
+                    1,
+                    -10
+                );
+            });
         }
 
         // A test for CreatePerspectiveFieldOfView (float, float, float, float)
@@ -1553,17 +1537,15 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveFieldOfViewTest5()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
-                        MathHelper.PiOver4,
-                        1,
-                        10,
-                        1
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Matrix4x4 mtx = Matrix4x4.CreatePerspectiveFieldOfView(
+                    MathHelper.PiOver4,
+                    1,
+                    10,
+                    1
+                );
+            });
         }
 
         // A test for CreatePerspectiveOffCenter (float, float, float, float, float, float)
@@ -1606,23 +1588,21 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveOffCenterTest1()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    float left = 10.0f,
-                        right = 90.0f,
-                        bottom = 20.0f,
-                        top = 180.0f;
-                    Matrix4x4 actual = Matrix4x4.CreatePerspectiveOffCenter(
-                        left,
-                        right,
-                        bottom,
-                        top,
-                        -1,
-                        10
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                float left = 10.0f,
+                    right = 90.0f,
+                    bottom = 20.0f,
+                    top = 180.0f;
+                Matrix4x4 actual = Matrix4x4.CreatePerspectiveOffCenter(
+                    left,
+                    right,
+                    bottom,
+                    top,
+                    -1,
+                    10
+                );
+            });
         }
 
         // A test for CreatePerspectiveOffCenter (float, float, float, float, float, float)
@@ -1630,23 +1610,21 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveOffCenterTest2()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    float left = 10.0f,
-                        right = 90.0f,
-                        bottom = 20.0f,
-                        top = 180.0f;
-                    Matrix4x4 actual = Matrix4x4.CreatePerspectiveOffCenter(
-                        left,
-                        right,
-                        bottom,
-                        top,
-                        1,
-                        -10
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                float left = 10.0f,
+                    right = 90.0f,
+                    bottom = 20.0f,
+                    top = 180.0f;
+                Matrix4x4 actual = Matrix4x4.CreatePerspectiveOffCenter(
+                    left,
+                    right,
+                    bottom,
+                    top,
+                    1,
+                    -10
+                );
+            });
         }
 
         // A test for CreatePerspectiveOffCenter (float, float, float, float, float, float)
@@ -1654,23 +1632,21 @@ namespace System.Numerics.Tests
         [Fact]
         public void Matrix4x4CreatePerspectiveOffCenterTest3()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    float left = 10.0f,
-                        right = 90.0f,
-                        bottom = 20.0f,
-                        top = 180.0f;
-                    Matrix4x4 actual = Matrix4x4.CreatePerspectiveOffCenter(
-                        left,
-                        right,
-                        bottom,
-                        top,
-                        10,
-                        1
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                float left = 10.0f,
+                    right = 90.0f,
+                    bottom = 20.0f,
+                    top = 180.0f;
+                Matrix4x4 actual = Matrix4x4.CreatePerspectiveOffCenter(
+                    left,
+                    right,
+                    bottom,
+                    top,
+                    10,
+                    1
+                );
+            });
         }
 
         // A test for Invert (Matrix4x4)

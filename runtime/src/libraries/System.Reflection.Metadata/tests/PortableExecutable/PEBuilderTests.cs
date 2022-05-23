@@ -684,19 +684,17 @@ namespace System.Reflection.PortableExecutable.Tests
                 FieldAttributes.Assembly,
                 metadata.GetOrAddString("_sumCache"),
                 metadata.GetOrAddBlob(
-                    BuildSignature(
-                        e =>
-                        {
-                            var inst = e.FieldSignature()
-                                .GenericInstantiation(
-                                    genericType: dictionaryTypeRef,
-                                    genericArgumentCount: 2,
-                                    isValueType: false
-                                );
-                            inst.AddArgument().Int32();
-                            inst.AddArgument().Object();
-                        }
-                    )
+                    BuildSignature(e =>
+                    {
+                        var inst = e.FieldSignature()
+                            .GenericInstantiation(
+                                genericType: dictionaryTypeRef,
+                                genericArgumentCount: 2,
+                                isValueType: false
+                            );
+                        inst.AddArgument().Int32();
+                        inst.AddArgument().Object();
+                    })
                 )
             );
 

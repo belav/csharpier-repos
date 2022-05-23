@@ -70,13 +70,11 @@ namespace System.Net.Mime.Tests
         public void SmtpDateTime_InvalidInput_ShouldThrowException(string input)
         {
             var smtpDt = new SmtpDateTime(DateTime.Now);
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    string timeZoneOffset;
-                    DateTime results = smtpDt.ParseValue(input, out timeZoneOffset);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                string timeZoneOffset;
+                DateTime results = smtpDt.ParseValue(input, out timeZoneOffset);
+            });
         }
 
         [Fact]

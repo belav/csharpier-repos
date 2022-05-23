@@ -4090,12 +4090,10 @@ namespace System.Tests
             TimeZoneInfo local = TimeZoneInfo.Local;
 
             TimeZoneInfo.ClearCachedData();
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    TimeZoneInfo.ConvertTime(DateTime.Now, local, cst);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                TimeZoneInfo.ConvertTime(DateTime.Now, local, cst);
+            });
         }
 
         [Fact]
@@ -4140,15 +4138,13 @@ namespace System.Tests
         public static void ConvertTimeFromUtc()
         {
             // destination timezone is null
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    DateTime dt = TimeZoneInfo.ConvertTimeFromUtc(
-                        new DateTime(2007, 5, 3, 11, 8, 0),
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DateTime dt = TimeZoneInfo.ConvertTimeFromUtc(
+                    new DateTime(2007, 5, 3, 11, 8, 0),
+                    null
+                );
+            });
 
             // destination timezone is UTC
             DateTime now = DateTime.UtcNow;
@@ -4210,15 +4206,13 @@ namespace System.Tests
         public static void ConvertTimeFromToUtc_UnixOnly()
         {
             // DateTime Kind is Local
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    DateTime dt = TimeZoneInfo.ConvertTimeFromUtc(
-                        new DateTime(2007, 5, 3, 11, 8, 0, DateTimeKind.Local),
-                        TimeZoneInfo.Local
-                    );
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                DateTime dt = TimeZoneInfo.ConvertTimeFromUtc(
+                    new DateTime(2007, 5, 3, 11, 8, 0, DateTimeKind.Local),
+                    TimeZoneInfo.Local
+                );
+            });
 
             TimeZoneInfo london = CreateCustomLondonTimeZone();
 
@@ -5140,27 +5134,25 @@ namespace System.Tests
         public static void IsIanaIdWithNotCacheTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Assert.Equal(
-                            !s_isWindows
-                                || TimeZoneInfo.Local.Id.Equals(
-                                    "Utc",
-                                    StringComparison.OrdinalIgnoreCase
-                                ),
-                            TimeZoneInfo.Local.HasIanaId
-                        );
+                .Invoke(() =>
+                {
+                    Assert.Equal(
+                        !s_isWindows
+                            || TimeZoneInfo.Local.Id.Equals(
+                                "Utc",
+                                StringComparison.OrdinalIgnoreCase
+                            ),
+                        TimeZoneInfo.Local.HasIanaId
+                    );
 
-                        TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(
-                            "W. Europe Standard Time"
-                        );
-                        Assert.False(tzi.HasIanaId);
+                    TimeZoneInfo tzi = TimeZoneInfo.FindSystemTimeZoneById(
+                        "W. Europe Standard Time"
+                    );
+                    Assert.False(tzi.HasIanaId);
 
-                        tzi = TimeZoneInfo.FindSystemTimeZoneById("Europe/Berlin");
-                        Assert.True(tzi.HasIanaId);
-                    }
-                )
+                    tzi = TimeZoneInfo.FindSystemTimeZoneById("Europe/Berlin");
+                    Assert.True(tzi.HasIanaId);
+                })
                 .Dispose();
         }
 
@@ -5280,39 +5272,31 @@ namespace System.Tests
         public static void TestNameWithInvariantCulture()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        // We call ICU to get the names. When passing invariant culture name to ICU, it fail and we'll use the abbreviated names at that time.
-                        // We fixed this issue by avoid sending the invariant culture name to ICU and this test is confirming we work fine at that time.
-                        CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
-                        TimeZoneInfo.ClearCachedData();
+                .Invoke(() =>
+                {
+                    // We call ICU to get the names. When passing invariant culture name to ICU, it fail and we'll use the abbreviated names at that time.
+                    // We fixed this issue by avoid sending the invariant culture name to ICU and this test is confirming we work fine at that time.
+                    CultureInfo.CurrentUICulture = CultureInfo.InvariantCulture;
+                    TimeZoneInfo.ClearCachedData();
 
-                        TimeZoneInfo pacific = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
+                    TimeZoneInfo pacific = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
 
-                        Assert.True(
-                            pacific.StandardName.IndexOf(
-                                "Pacific",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0,
-                            $"'{pacific.StandardName}' is not the expected standard name for Pacific time zone"
-                        );
-                        Assert.True(
-                            pacific.DaylightName.IndexOf(
-                                "Pacific",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0,
-                            $"'{pacific.DaylightName}' is not the expected daylight name for Pacific time zone"
-                        );
-                        Assert.True(
-                            pacific.DisplayName.IndexOf(
-                                "Pacific",
-                                StringComparison.OrdinalIgnoreCase
-                            ) >= 0,
-                            $"'{pacific.DisplayName}' is not the expected display name for Pacific time zone"
-                        );
-                    }
-                )
+                    Assert.True(
+                        pacific.StandardName.IndexOf("Pacific", StringComparison.OrdinalIgnoreCase)
+                            >= 0,
+                        $"'{pacific.StandardName}' is not the expected standard name for Pacific time zone"
+                    );
+                    Assert.True(
+                        pacific.DaylightName.IndexOf("Pacific", StringComparison.OrdinalIgnoreCase)
+                            >= 0,
+                        $"'{pacific.DaylightName}' is not the expected daylight name for Pacific time zone"
+                    );
+                    Assert.True(
+                        pacific.DisplayName.IndexOf("Pacific", StringComparison.OrdinalIgnoreCase)
+                            >= 0,
+                        $"'{pacific.DisplayName}' is not the expected display name for Pacific time zone"
+                    );
+                })
                 .Dispose();
         }
 
@@ -5326,33 +5310,31 @@ namespace System.Tests
         public static void TestWindowsNlsDisplayNames()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        CultureInfo[] cultures = s_CulturesForWindowsNlsDisplayNamesTest;
+                .Invoke(() =>
+                {
+                    CultureInfo[] cultures = s_CulturesForWindowsNlsDisplayNamesTest;
 
-                        CultureInfo.CurrentUICulture = cultures[0];
-                        TimeZoneInfo.ClearCachedData();
-                        TimeZoneInfo tz1 = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
+                    CultureInfo.CurrentUICulture = cultures[0];
+                    TimeZoneInfo.ClearCachedData();
+                    TimeZoneInfo tz1 = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
 
-                        CultureInfo.CurrentUICulture = cultures[1];
-                        TimeZoneInfo.ClearCachedData();
-                        TimeZoneInfo tz2 = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
+                    CultureInfo.CurrentUICulture = cultures[1];
+                    TimeZoneInfo.ClearCachedData();
+                    TimeZoneInfo tz2 = TimeZoneInfo.FindSystemTimeZoneById(s_strPacific);
 
-                        Assert.True(
-                            tz1.DisplayName != tz2.DisplayName,
-                            $"The display name '{tz1.DisplayName}' should be different between {cultures[0].Name} and {cultures[1].Name}."
-                        );
-                        Assert.True(
-                            tz1.StandardName != tz2.StandardName,
-                            $"The standard name '{tz1.StandardName}' should be different between {cultures[0].Name} and {cultures[1].Name}."
-                        );
-                        Assert.True(
-                            tz1.DaylightName != tz2.DaylightName,
-                            $"The daylight name '{tz1.DaylightName}' should be different between {cultures[0].Name} and {cultures[1].Name}."
-                        );
-                    }
-                )
+                    Assert.True(
+                        tz1.DisplayName != tz2.DisplayName,
+                        $"The display name '{tz1.DisplayName}' should be different between {cultures[0].Name} and {cultures[1].Name}."
+                    );
+                    Assert.True(
+                        tz1.StandardName != tz2.StandardName,
+                        $"The standard name '{tz1.StandardName}' should be different between {cultures[0].Name} and {cultures[1].Name}."
+                    );
+                    Assert.True(
+                        tz1.DaylightName != tz2.DaylightName,
+                        $"The daylight name '{tz1.DaylightName}' should be different between {cultures[0].Name} and {cultures[1].Name}."
+                    );
+                })
                 .Dispose();
         }
 
@@ -5835,31 +5817,29 @@ namespace System.Tests
             TimeZoneInfo.AdjustmentRule[] adjustmentRules = null
         ) where TException : Exception
         {
-            Assert.ThrowsAny<TException>(
-                () =>
+            Assert.ThrowsAny<TException>(() =>
+            {
+                if (daylightDisplayName == null && adjustmentRules == null)
                 {
-                    if (daylightDisplayName == null && adjustmentRules == null)
-                    {
-                        TimeZoneInfo.CreateCustomTimeZone(
-                            id,
-                            baseUtcOffset,
-                            displayName,
-                            standardDisplayName
-                        );
-                    }
-                    else
-                    {
-                        TimeZoneInfo.CreateCustomTimeZone(
-                            id,
-                            baseUtcOffset,
-                            displayName,
-                            standardDisplayName,
-                            daylightDisplayName,
-                            adjustmentRules
-                        );
-                    }
+                    TimeZoneInfo.CreateCustomTimeZone(
+                        id,
+                        baseUtcOffset,
+                        displayName,
+                        standardDisplayName
+                    );
                 }
-            );
+                else
+                {
+                    TimeZoneInfo.CreateCustomTimeZone(
+                        id,
+                        baseUtcOffset,
+                        displayName,
+                        standardDisplayName,
+                        daylightDisplayName,
+                        adjustmentRules
+                    );
+                }
+            });
         }
 
         //  This helper class is used to retrieve information about installed OS languages from Windows.

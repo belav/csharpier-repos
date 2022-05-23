@@ -116,13 +116,11 @@ namespace BlazorServerWeb_CSharp
                 .AddControllersWithViews()
                 .AddMicrosoftIdentityUI();
 
-            services.AddAuthorization(
-                options =>
-                {
-                    // By default, all incoming requests will be authorized according to the default policy
-                    options.FallbackPolicy = options.DefaultPolicy;
-                }
-            );
+            services.AddAuthorization(options =>
+            {
+                // By default, all incoming requests will be authorized according to the default policy
+                options.FallbackPolicy = options.DefaultPolicy;
+            });
 
 #endif
             services.AddRazorPages();
@@ -173,16 +171,14 @@ namespace BlazorServerWeb_CSharp
             app.UseAuthorization();
 
 #endif
-            app.UseEndpoints(
-                endpoints =>
-                {
+            app.UseEndpoints(endpoints =>
+            {
 #if (OrganizationalAuth || IndividualAuth)
-                    endpoints.MapControllers();
+                endpoints.MapControllers();
 #endif
-                    endpoints.MapBlazorHub();
-                    endpoints.MapFallbackToPage("/_Host");
-                }
-            );
+                endpoints.MapBlazorHub();
+                endpoints.MapFallbackToPage("/_Host");
+            });
         }
     }
 }

@@ -405,19 +405,17 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             {
                 ECParameters param = EccTestData.GetNistP256ExplicitTestData();
 
-                Assert.Throws<PlatformNotSupportedException>(
-                    () =>
+                Assert.Throws<PlatformNotSupportedException>(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            ecdh.ImportParameters(param);
-                        }
-                        catch (CryptographicException e)
-                        {
-                            throw new PlatformNotSupportedException("Converting exception", e);
-                        }
+                        ecdh.ImportParameters(param);
                     }
-                );
+                    catch (CryptographicException e)
+                    {
+                        throw new PlatformNotSupportedException("Converting exception", e);
+                    }
+                });
             }
         }
 

@@ -278,15 +278,13 @@ namespace System.Net.Http.Functional.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            connectionAccepted = true;
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"Host: {host}", headers);
-                        }
-                    )
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        connectionAccepted = true;
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"Host: {host}", headers);
+                    })
             );
 
             Assert.True(connectionAccepted);
@@ -337,15 +335,13 @@ namespace System.Net.Http.Functional.Tests
                     }
                 },
                 server =>
-                    server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            connectionAccepted = true;
-                            List<string> headers =
-                                await connection.ReadRequestHeaderAndSendResponseAsync();
-                            Assert.Contains($"Host: {host}", headers);
-                        }
-                    ),
+                    server.AcceptConnectionAsync(async connection =>
+                    {
+                        connectionAccepted = true;
+                        List<string> headers =
+                            await connection.ReadRequestHeaderAndSendResponseAsync();
+                        Assert.Contains($"Host: {host}", headers);
+                    }),
                 options
             );
 
@@ -1198,15 +1194,13 @@ namespace System.Net.Http.Functional.Tests
                             + $"{chunkSize}\r\n";
 
                         var tcs = new TaskCompletionSource<bool>();
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                await connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                    partialResponse
-                                );
-                                await tcs.Task;
-                            }
-                        );
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                partialResponse
+                            );
+                            await tcs.Task;
+                        });
 
                         await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(url));
                         tcs.SetResult(true);
@@ -1269,25 +1263,23 @@ namespace System.Net.Http.Functional.Tests
 
                         var cts = new CancellationTokenSource();
                         var tcs = new TaskCompletionSource<bool>();
-                        Task serverTask = server.AcceptConnectionAsync(
-                            async connection =>
+                        Task serverTask = server.AcceptConnectionAsync(async connection =>
+                        {
+                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                                "HTTP/1.1 200 OK\r\n"
+                                    + LoopbackServer.CorsHeaders
+                                    + "Transfer-Encoding: chunked\r\n\r\n"
+                            );
+                            try
                             {
-                                await connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                    "HTTP/1.1 200 OK\r\n"
-                                        + LoopbackServer.CorsHeaders
-                                        + "Transfer-Encoding: chunked\r\n\r\n"
-                                );
-                                try
+                                while (!cts.IsCancellationRequested) // infinite to make sure implementation doesn't OOM
                                 {
-                                    while (!cts.IsCancellationRequested) // infinite to make sure implementation doesn't OOM
-                                    {
-                                        await connection.WriteStringAsync(new string(' ', 10000));
-                                        await Task.Delay(1);
-                                    }
+                                    await connection.WriteStringAsync(new string(' ', 10000));
+                                    await Task.Delay(1);
                                 }
-                                catch { }
                             }
-                        );
+                            catch { }
+                        });
 
                         await Assert.ThrowsAsync<HttpRequestException>(() => client.GetAsync(url));
                         cts.Cancel();
@@ -1338,45 +1330,43 @@ namespace System.Net.Http.Functional.Tests
                             HttpCompletionOption.ResponseHeadersRead
                         );
 
-                        await server.AcceptConnectionAsync(
-                            async connection =>
-                            {
-                                HttpRequestData requestData =
-                                    await connection.ReadRequestDataAsync();
+                        await server.AcceptConnectionAsync(async connection =>
+                        {
+                            HttpRequestData requestData = await connection.ReadRequestDataAsync();
 #if TARGET_BROWSER
-                                await connection.HandleCORSPreFlight(requestData);
+                            await connection.HandleCORSPreFlight(requestData);
 #endif
-                                await connection.WriteStringAsync(
-                                    "HTTP/1.1 200 OK\r\n"
-                                        + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
-                                        + LoopbackServer.CorsHeaders
-                                        + "Content-Length: 16000\r\n"
-                                        + "\r\n"
-                                        + "less than 16000 bytes"
-                                );
+                            await connection.WriteStringAsync(
+                                "HTTP/1.1 200 OK\r\n"
+                                    + $"Date: {DateTimeOffset.UtcNow:R}\r\n"
+                                    + LoopbackServer.CorsHeaders
+                                    + "Content-Length: 16000\r\n"
+                                    + "\r\n"
+                                    + "less than 16000 bytes"
+                            );
 
-                                using (HttpResponseMessage response = await getResponse)
-                                {
-                                    var buffer = new byte[8000];
-                                    using (
-                                        Stream clientStream =
-                                            await response.Content.ReadAsStreamAsync(TestAsync)
+                            using (HttpResponseMessage response = await getResponse)
+                            {
+                                var buffer = new byte[8000];
+                                using (
+                                    Stream clientStream = await response.Content.ReadAsStreamAsync(
+                                        TestAsync
                                     )
-                                    {
-                                        int bytesRead = await clientStream.ReadAsync(
-                                            buffer,
-                                            0,
-                                            buffer.Length
-                                        );
-                                        _output.WriteLine($"Bytes read from stream: {bytesRead}");
-                                        Assert.True(
-                                            bytesRead < buffer.Length,
-                                            "bytesRead should be less than buffer.Length"
-                                        );
-                                    }
+                                )
+                                {
+                                    int bytesRead = await clientStream.ReadAsync(
+                                        buffer,
+                                        0,
+                                        buffer.Length
+                                    );
+                                    _output.WriteLine($"Bytes read from stream: {bytesRead}");
+                                    Assert.True(
+                                        bytesRead < buffer.Length,
+                                        "bytesRead should be less than buffer.Length"
+                                    );
                                 }
                             }
-                        );
+                        });
                     }
                 }
             );
@@ -1495,36 +1485,26 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Throws<ArgumentOutOfRangeException>(
                                 () => responseStream.CopyTo(Stream.Null, 0)
                             );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, 0, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, -1, default);
-                                }
-                            );
-                            Assert.Throws<NotSupportedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(nonWritableStream, 100, default);
-                                }
-                            );
-                            Assert.Throws<ObjectDisposedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(disposedStream, 100, default);
-                                }
-                            );
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, 0, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, -1, default);
+                            });
+                            Assert.Throws<NotSupportedException>(() =>
+                            {
+                                responseStream.CopyToAsync(nonWritableStream, 100, default);
+                            });
+                            Assert.Throws<ObjectDisposedException>(() =>
+                            {
+                                responseStream.CopyToAsync(disposedStream, 100, default);
+                            });
                             if (PlatformDetection.IsNotBrowser)
                             {
                                 Assert.Throws<ArgumentNullException>(
@@ -1561,36 +1541,26 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Throws<ArgumentNullException>(
                                 () => responseStream.EndRead(null)
                             );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(null, 0, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], -1, 1, default);
-                                }
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], 2, 1, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], 0, -1, default);
-                                }
-                            );
-                            Assert.ThrowsAny<ArgumentException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(new byte[1], 0, 2, default);
-                                }
-                            );
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.ReadAsync(null, 0, 100, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], -1, 1, default);
+                            });
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], 2, 1, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], 0, -1, default);
+                            });
+                            Assert.ThrowsAny<ArgumentException>(() =>
+                            {
+                                responseStream.ReadAsync(new byte[1], 0, 2, default);
+                            });
 
                             // Various forms of reading
                             var buffer = new byte[1];
@@ -1740,52 +1710,50 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestDataAsync();
+                        switch (chunked)
                         {
-                            await connection.ReadRequestDataAsync();
-                            switch (chunked)
-                            {
-                                case true:
-                                    await connection.SendResponseAsync(
-                                        HttpStatusCode.OK,
-                                        headers: new HttpHeaderData[]
-                                        {
-                                            new HttpHeaderData("Transfer-Encoding", "chunked")
-                                        },
-                                        isFinal: false
-                                    );
-                                    await connection.SendResponseBodyAsync(
-                                        "3\r\nhel\r\n8\r\nlo world\r\n0\r\n\r\n"
-                                    );
-                                    break;
+                            case true:
+                                await connection.SendResponseAsync(
+                                    HttpStatusCode.OK,
+                                    headers: new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData("Transfer-Encoding", "chunked")
+                                    },
+                                    isFinal: false
+                                );
+                                await connection.SendResponseBodyAsync(
+                                    "3\r\nhel\r\n8\r\nlo world\r\n0\r\n\r\n"
+                                );
+                                break;
 
-                                case false:
-                                    await connection.SendResponseAsync(
-                                        HttpStatusCode.OK,
-                                        headers: new HttpHeaderData[]
-                                        {
-                                            new HttpHeaderData("Content-Length", "11")
-                                        },
-                                        content: "hello world"
-                                    );
-                                    break;
+                            case false:
+                                await connection.SendResponseAsync(
+                                    HttpStatusCode.OK,
+                                    headers: new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData("Content-Length", "11")
+                                    },
+                                    content: "hello world"
+                                );
+                                break;
 
-                                case null:
-                                    // This inject Content-Length header with null value to hint Loopback code to not include one automatically.
-                                    await connection.SendResponseAsync(
-                                        HttpStatusCode.OK,
-                                        headers: new HttpHeaderData[]
-                                        {
-                                            new HttpHeaderData("Content-Length", null)
-                                        },
-                                        isFinal: false
-                                    );
-                                    await connection.SendResponseBodyAsync("hello world");
-                                    break;
-                            }
+                            case null:
+                                // This inject Content-Length header with null value to hint Loopback code to not include one automatically.
+                                await connection.SendResponseAsync(
+                                    HttpStatusCode.OK,
+                                    headers: new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData("Content-Length", null)
+                                    },
+                                    isFinal: false
+                                );
+                                await connection.SendResponseBodyAsync("hello world");
+                                break;
                         }
-                    );
+                    });
                 }
             );
         }
@@ -1867,36 +1835,26 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Throws<ArgumentOutOfRangeException>(
                                 () => responseStream.CopyTo(Stream.Null, 0)
                             );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, 0, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentOutOfRangeException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(Stream.Null, -1, default);
-                                }
-                            );
-                            Assert.Throws<NotSupportedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(nonWritableStream, 100, default);
-                                }
-                            );
-                            Assert.Throws<ObjectDisposedException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(disposedStream, 100, default);
-                                }
-                            );
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, 0, default);
+                            });
+                            Assert.Throws<ArgumentOutOfRangeException>(() =>
+                            {
+                                responseStream.CopyToAsync(Stream.Null, -1, default);
+                            });
+                            Assert.Throws<NotSupportedException>(() =>
+                            {
+                                responseStream.CopyToAsync(nonWritableStream, 100, default);
+                            });
+                            Assert.Throws<ObjectDisposedException>(() =>
+                            {
+                                responseStream.CopyToAsync(disposedStream, 100, default);
+                            });
                             Assert.Throws<ArgumentNullException>(
                                 () => responseStream.Read(null, 0, 100)
                             );
@@ -1930,42 +1888,30 @@ namespace System.Net.Http.Functional.Tests
                             Assert.Throws<ArgumentNullException>(
                                 () => responseStream.EndRead(null)
                             );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyTo(null);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.CopyToAsync(null, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.Read(null, 0, 100);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.ReadAsync(null, 0, 100, default);
-                                }
-                            );
-                            Assert.Throws<ArgumentNullException>(
-                                () =>
-                                {
-                                    responseStream.BeginRead(null, 0, 100, null, null);
-                                }
-                            );
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyTo(null);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.CopyToAsync(null, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.Read(null, 0, 100);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.ReadAsync(null, 0, 100, default);
+                            });
+                            Assert.Throws<ArgumentNullException>(() =>
+                            {
+                                responseStream.BeginRead(null, 0, 100, null, null);
+                            });
 
                             // Empty reads
                             var buffer = new byte[1];
@@ -2034,28 +1980,26 @@ namespace System.Net.Http.Functional.Tests
                                     );
 
                                     // First server connects but doesn't send any response yet
-                                    Task serverTask1 = server1.AcceptConnectionAsync(
-                                        async connection1 =>
+                                    Task serverTask1 =
+                                        server1.AcceptConnectionAsync(async connection1 =>
                                         {
                                             await unblockServers.Task;
-                                        }
-                                    );
+                                        });
 
                                     // Second server connects and sends some but not all headers
-                                    Task serverTask2 = server2.AcceptConnectionAsync(
-                                        async connection2 =>
+                                    Task serverTask2 =
+                                        server2.AcceptConnectionAsync(async connection2 =>
                                         {
                                             await connection2.ReadRequestDataAsync();
                                             await connection2.SendPartialResponseHeadersAsync(
                                                 HttpStatusCode.OK
                                             );
                                             await unblockServers.Task;
-                                        }
-                                    );
+                                        });
 
                                     // Third server connects and sends all headers and some but not all of the body
-                                    Task serverTask3 = server3.AcceptConnectionAsync(
-                                        async connection3 =>
+                                    Task serverTask3 =
+                                        server3.AcceptConnectionAsync(async connection3 =>
                                         {
                                             await connection3.ReadRequestDataAsync();
                                             await connection3.SendResponseAsync(
@@ -2075,8 +2019,7 @@ namespace System.Net.Http.Functional.Tests
                                                 "1234567890",
                                                 isFinal: true
                                             );
-                                        }
-                                    );
+                                        });
 
                                     // Make three requests
                                     Task<HttpResponseMessage> get1,
@@ -2203,34 +2146,26 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            HttpRequestData requestData = await connection.ReadRequestDataAsync();
-                            Assert.Equal(
-                                "100-continue",
-                                requestData.GetSingleHeaderValue("Expect")
-                            );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        HttpRequestData requestData = await connection.ReadRequestDataAsync();
+                        Assert.Equal("100-continue", requestData.GetSingleHeaderValue("Expect"));
 
-                            await connection.SendResponseAsync(
-                                HttpStatusCode.Continue,
-                                isFinal: false
-                            );
-                            await connection.SendResponseAsync(
-                                HttpStatusCode.OK,
-                                new HttpHeaderData[]
-                                {
-                                    new HttpHeaderData(
-                                        "Content-Length",
-                                        ExpectedContent.Length.ToString()
-                                    )
-                                },
-                                isFinal: false
-                            );
-                            await connection.SendResponseBodyAsync(ExpectedContent);
-                            await clientCompleted.Task; // make sure server closing the connection isn't what let the client complete
-                        }
-                    );
+                        await connection.SendResponseAsync(HttpStatusCode.Continue, isFinal: false);
+                        await connection.SendResponseAsync(
+                            HttpStatusCode.OK,
+                            new HttpHeaderData[]
+                            {
+                                new HttpHeaderData(
+                                    "Content-Length",
+                                    ExpectedContent.Length.ToString()
+                                )
+                            },
+                            isFinal: false
+                        );
+                        await connection.SendResponseBodyAsync(ExpectedContent);
+                        await clientCompleted.Task; // make sure server closing the connection isn't what let the client complete
+                    });
                 }
             );
         }
@@ -2317,51 +2252,49 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Send 100-Continue responses with additional headers.
-                            HttpRequestData requestData = await connection.ReadRequestDataAsync(
-                                readBody: true
-                            );
-                            await connection.SendResponseAsync(
-                                responseStatusCode,
-                                headers: new HttpHeaderData[]
-                                {
-                                    new HttpHeaderData("Cookie", "ignore_cookie=choco1"),
-                                    new HttpHeaderData("Content-type", "text/xml"),
-                                    new HttpHeaderData("Set-Cookie", SetCookieIgnored1)
-                                },
-                                isFinal: false
-                            );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Send 100-Continue responses with additional headers.
+                        HttpRequestData requestData = await connection.ReadRequestDataAsync(
+                            readBody: true
+                        );
+                        await connection.SendResponseAsync(
+                            responseStatusCode,
+                            headers: new HttpHeaderData[]
+                            {
+                                new HttpHeaderData("Cookie", "ignore_cookie=choco1"),
+                                new HttpHeaderData("Content-type", "text/xml"),
+                                new HttpHeaderData("Set-Cookie", SetCookieIgnored1)
+                            },
+                            isFinal: false
+                        );
 
-                            await connection.SendResponseAsync(
-                                responseStatusCode,
-                                headers: new HttpHeaderData[]
-                                {
-                                    new HttpHeaderData("Cookie", "ignore_cookie=choco2"),
-                                    new HttpHeaderData("Content-type", "text/plain"),
-                                    new HttpHeaderData("Set-Cookie", SetCookieIgnored2)
-                                },
-                                isFinal: false
-                            );
+                        await connection.SendResponseAsync(
+                            responseStatusCode,
+                            headers: new HttpHeaderData[]
+                            {
+                                new HttpHeaderData("Cookie", "ignore_cookie=choco2"),
+                                new HttpHeaderData("Content-type", "text/plain"),
+                                new HttpHeaderData("Set-Cookie", SetCookieIgnored2)
+                            },
+                            isFinal: false
+                        );
 
-                            Assert.Equal(TestString, Encoding.ASCII.GetString(requestData.Body));
+                        Assert.Equal(TestString, Encoding.ASCII.GetString(requestData.Body));
 
-                            // Send final status code.
-                            await connection.SendResponseAsync(
-                                HttpStatusCode.OK,
-                                headers: new HttpHeaderData[]
-                                {
-                                    new HttpHeaderData("Cookie", CookieHeaderExpected),
-                                    new HttpHeaderData("Content-type", ContentTypeHeaderExpected),
-                                    new HttpHeaderData("Set-Cookie", SetCookieExpected)
-                                }
-                            );
+                        // Send final status code.
+                        await connection.SendResponseAsync(
+                            HttpStatusCode.OK,
+                            headers: new HttpHeaderData[]
+                            {
+                                new HttpHeaderData("Cookie", CookieHeaderExpected),
+                                new HttpHeaderData("Content-type", ContentTypeHeaderExpected),
+                                new HttpHeaderData("Set-Cookie", SetCookieExpected)
+                            }
+                        );
 
-                            await clientFinished.Task;
-                        }
-                    );
+                        await clientFinished.Task;
+                    });
                 }
             );
         }
@@ -2412,25 +2345,23 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Send unexpected 1xx responses.
-                            HttpRequestData requestData = await connection.ReadRequestDataAsync(
-                                readBody: false
-                            );
-                            await connection.SendResponseAsync(responseStatusCode, isFinal: false);
-                            await connection.SendResponseAsync(responseStatusCode, isFinal: false);
-                            await connection.SendResponseAsync(responseStatusCode, isFinal: false);
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Send unexpected 1xx responses.
+                        HttpRequestData requestData = await connection.ReadRequestDataAsync(
+                            readBody: false
+                        );
+                        await connection.SendResponseAsync(responseStatusCode, isFinal: false);
+                        await connection.SendResponseAsync(responseStatusCode, isFinal: false);
+                        await connection.SendResponseAsync(responseStatusCode, isFinal: false);
 
-                            byte[] body = await connection.ReadRequestBodyAsync();
-                            Assert.Equal(TestString, Encoding.ASCII.GetString(body));
+                        byte[] body = await connection.ReadRequestBodyAsync();
+                        Assert.Equal(TestString, Encoding.ASCII.GetString(body));
 
-                            // Send final status code.
-                            await connection.SendResponseAsync(HttpStatusCode.OK);
-                            await clientFinished.Task;
-                        }
-                    );
+                        // Send final status code.
+                        await connection.SendResponseAsync(HttpStatusCode.OK);
+                        await clientFinished.Task;
+                    });
                 }
             );
         }
@@ -2477,27 +2408,25 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestDataAsync(readBody: false);
+                        // Send multiple 100-Continue responses.
+                        for (int count = 0; count < 4; count++)
                         {
-                            await connection.ReadRequestDataAsync(readBody: false);
-                            // Send multiple 100-Continue responses.
-                            for (int count = 0; count < 4; count++)
-                            {
-                                await connection.SendResponseAsync(
-                                    HttpStatusCode.Continue,
-                                    isFinal: false
-                                );
-                            }
-
-                            byte[] body = await connection.ReadRequestBodyAsync();
-                            Assert.Equal(TestString, Encoding.ASCII.GetString(body));
-
-                            // Send final status code.
-                            await connection.SendResponseAsync(HttpStatusCode.OK);
-                            await clientFinished.Task;
+                            await connection.SendResponseAsync(
+                                HttpStatusCode.Continue,
+                                isFinal: false
+                            );
                         }
-                    );
+
+                        byte[] body = await connection.ReadRequestBodyAsync();
+                        Assert.Equal(TestString, Encoding.ASCII.GetString(body));
+
+                        // Send final status code.
+                        await connection.SendResponseAsync(HttpStatusCode.OK);
+                        await clientFinished.Task;
+                    });
                 }
             );
         }
@@ -2548,17 +2477,15 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        try
                         {
-                            try
-                            {
-                                await connection.ReadRequestDataAsync(readBody: true);
-                            }
-                            catch { } // Eat errors from client disconnect.
-                            await clientFinished.Task.WaitAsync(TimeSpan.FromMinutes(2));
+                            await connection.ReadRequestDataAsync(readBody: true);
                         }
-                    );
+                        catch { } // Eat errors from client disconnect.
+                        await clientFinished.Task.WaitAsync(TimeSpan.FromMinutes(2));
+                    });
                 }
             );
         }
@@ -2615,28 +2542,26 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.ReadRequestDataAsync(readBody: false);
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestDataAsync(readBody: false);
 
-                            await connection.SendResponseAsync(
-                                HttpStatusCode.OK,
-                                headers: new HttpHeaderData[]
-                                {
-                                    new HttpHeaderData("Content-Length", $"{ResponseString.Length}")
-                                },
-                                isFinal: false
-                            );
+                        await connection.SendResponseAsync(
+                            HttpStatusCode.OK,
+                            headers: new HttpHeaderData[]
+                            {
+                                new HttpHeaderData("Content-Length", $"{ResponseString.Length}")
+                            },
+                            isFinal: false
+                        );
 
-                            byte[] body = await connection.ReadRequestBodyAsync();
-                            Assert.Equal(RequestString, Encoding.ASCII.GetString(body));
+                        byte[] body = await connection.ReadRequestBodyAsync();
+                        Assert.Equal(RequestString, Encoding.ASCII.GetString(body));
 
-                            await connection.SendResponseBodyAsync(ResponseString);
+                        await connection.SendResponseBodyAsync(ResponseString);
 
-                            await clientFinished.Task;
-                        }
-                    );
+                        await clientFinished.Task;
+                    });
                 }
             );
         }
@@ -2675,18 +2600,16 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            // Send a valid 101 Switching Protocols response.
-                            await connection.ReadRequestHeaderAndSendCustomResponseAsync(
-                                "HTTP/1.1 101 Switching Protocols\r\n"
-                                    + "Upgrade: websocket\r\n"
-                                    + "Connection: Upgrade\r\n\r\n"
-                            );
-                            await clientFinished.Task;
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        // Send a valid 101 Switching Protocols response.
+                        await connection.ReadRequestHeaderAndSendCustomResponseAsync(
+                            "HTTP/1.1 101 Switching Protocols\r\n"
+                                + "Upgrade: websocket\r\n"
+                                + "Connection: Upgrade\r\n\r\n"
+                        );
+                        await clientFinished.Task;
+                    });
                 }
             );
         }
@@ -2706,20 +2629,15 @@ namespace System.Net.Http.Functional.Tests
             await LoopbackServer.CreateServerAsync(
                 async (server, uri) =>
                 {
-                    Task responseTask = server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            var buffer = new byte[1000];
-                            while (
-                                await connection.ReadAsync(
-                                    new Memory<byte>(buffer),
-                                    0,
-                                    buffer.Length
-                                ) != 0
-                            )
-                                ;
-                        }
-                    );
+                    Task responseTask = server.AcceptConnectionAsync(async connection =>
+                    {
+                        var buffer = new byte[1000];
+                        while (
+                            await connection.ReadAsync(new Memory<byte>(buffer), 0, buffer.Length)
+                            != 0
+                        )
+                            ;
+                    });
 
                     using (HttpClient client = CreateHttpClient())
                     {

@@ -253,24 +253,18 @@ namespace System.Net.Sockets.Tests
                 () => udpClient.Send(new ReadOnlySpan<byte>(), "localhost", 0)
             );
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    udpClient.SendAsync(null, 0, remoteEP);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    udpClient.SendAsync(null, 0);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    udpClient.SendAsync(null, 0, "localhost", 0);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                udpClient.SendAsync(null, 0, remoteEP);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                udpClient.SendAsync(null, 0);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                udpClient.SendAsync(null, 0, "localhost", 0);
+            });
 
             Assert.Throws<ObjectDisposedException>(
                 () => udpClient.SendAsync(new ReadOnlyMemory<byte>(), remoteEP)
@@ -282,12 +276,10 @@ namespace System.Net.Sockets.Tests
                 () => udpClient.SendAsync(new ReadOnlyMemory<byte>(), "localhost", 0)
             );
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    udpClient.ReceiveAsync();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                udpClient.ReceiveAsync();
+            });
             Assert.Throws<ObjectDisposedException>(() => udpClient.ReceiveAsync(default));
         }
 
@@ -543,12 +535,10 @@ namespace System.Net.Sockets.Tests
                             new IPEndPoint(IPAddress.Loopback, 0)
                         )
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        udpClient.SendAsync(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, 0));
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    udpClient.SendAsync(new byte[1], 1, new IPEndPoint(IPAddress.Loopback, 0));
+                });
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         udpClient.SendAsync(
@@ -571,12 +561,10 @@ namespace System.Net.Sockets.Tests
                 Assert.Throws<InvalidOperationException>(
                     () => udpClient.Send(new ReadOnlySpan<byte>(new byte[1]), "localhost", 0)
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        udpClient.SendAsync(new byte[1], 1, "localhost", 0);
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    udpClient.SendAsync(new byte[1], 1, "localhost", 0);
+                });
                 Assert.Throws<InvalidOperationException>(
                     () => udpClient.SendAsync(new ReadOnlyMemory<byte>(new byte[1]), "localhost", 0)
                 );
@@ -587,12 +575,10 @@ namespace System.Net.Sockets.Tests
                 Assert.Throws<InvalidOperationException>(
                     () => udpClient.Send(new ReadOnlySpan<byte>(new byte[1]), null, UnusedPort)
                 );
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        udpClient.SendAsync(new byte[1], 1, null, UnusedPort);
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    udpClient.SendAsync(new byte[1], 1, null, UnusedPort);
+                });
                 Assert.Throws<InvalidOperationException>(
                     () =>
                         udpClient.SendAsync(new ReadOnlyMemory<byte>(new byte[1]), null, UnusedPort)

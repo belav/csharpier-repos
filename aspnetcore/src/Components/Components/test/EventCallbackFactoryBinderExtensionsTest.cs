@@ -59,12 +59,10 @@ public class EventCallbackFactoryBinderExtensionsTest
         var binder = EventCallback.Factory.CreateBinder(component, setter, 17);
 
         // Act
-        await Assert.ThrowsAsync<InvalidTimeZoneException>(
-            () =>
-            {
-                return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
-            }
-        );
+        await Assert.ThrowsAsync<InvalidTimeZoneException>(() =>
+        {
+            return binder.InvokeAsync(new ChangeEventArgs() { Value = "18", });
+        });
 
         Assert.Equal(1, component.Count);
     }

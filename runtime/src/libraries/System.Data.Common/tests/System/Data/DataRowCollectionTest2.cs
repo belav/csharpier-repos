@@ -139,13 +139,11 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Add_D3()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    dt.Rows.Add((DataRow)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.Rows.Add((DataRow)null);
+            });
         }
 
         [Fact]
@@ -209,13 +207,11 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Add_O4()
         {
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    dt.Rows.Add((object[])null);
-                }
-            );
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                dt.Rows.Add((object[])null);
+            });
         }
 
         [Fact]
@@ -291,14 +287,12 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Clear2()
         {
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    DataSet ds = DataProvider.CreateForeignConstraint();
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                DataSet ds = DataProvider.CreateForeignConstraint();
 
-                    ds.Tables[0].Rows.Clear(); //Try to clear the parent table
-                }
-            );
+                ds.Tables[0].Rows.Clear(); //Try to clear the parent table
+            });
         }
 
         [Fact]
@@ -314,13 +308,11 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Contains_O2()
         {
-            Assert.Throws<MissingPrimaryKeyException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    Assert.False(dt.Rows.Contains(1));
-                }
-            );
+            Assert.Throws<MissingPrimaryKeyException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                Assert.False(dt.Rows.Contains(1));
+            });
         }
 
         [Fact]
@@ -373,14 +365,12 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Find_O2()
         {
-            Assert.Throws<MissingPrimaryKeyException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
+            Assert.Throws<MissingPrimaryKeyException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
 
-                    Assert.Null(dt.Rows.Find(1));
-                }
-            );
+                Assert.Null(dt.Rows.Find(1));
+            });
         }
 
         [Fact]
@@ -453,15 +443,13 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_InsertAt_DI4()
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
-                    DataRow dr = GetNewDataRow(dt);
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
+                DataRow dr = GetNewDataRow(dt);
 
-                    dt.Rows.InsertAt(dr, -1);
-                }
-            );
+                dt.Rows.InsertAt(dr, -1);
+            });
         }
 
         private DataRow GetNewDataRow(DataTable dt)
@@ -492,14 +480,12 @@ namespace System.Data.Tests
         [Fact]
         public void DataRowCollection_Item2()
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    DataTable dt = DataProvider.CreateParentDataTable();
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                DataTable dt = DataProvider.CreateParentDataTable();
 
-                    DataRow dr = dt.Rows[-1];
-                }
-            );
+                DataRow dr = dt.Rows[-1];
+            });
         }
     }
 }

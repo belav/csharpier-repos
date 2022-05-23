@@ -14,12 +14,10 @@ public class PasswordHasherTest
     public void Ctor_InvalidCompatMode_Throws()
     {
         // Act & assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                new PasswordHasher(compatMode: (PasswordHasherCompatibilityMode)(-1));
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            new PasswordHasher(compatMode: (PasswordHasherCompatibilityMode)(-1));
+        });
         Assert.Equal("The provided PasswordHasherCompatibilityMode is invalid.", ex.Message);
     }
 
@@ -29,12 +27,10 @@ public class PasswordHasherTest
     public void Ctor_InvalidIterCount_Throws(int iterCount)
     {
         // Act & assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                new PasswordHasher(iterCount: iterCount);
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            new PasswordHasher(iterCount: iterCount);
+        });
         Assert.Equal("The iteration count must be a positive integer.", ex.Message);
     }
 

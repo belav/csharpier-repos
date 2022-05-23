@@ -184,40 +184,30 @@ namespace Microsoft.CodeAnalysis.UnitTests
             // Do a relatively cheap concurrent stress test of the backing MemoryMappedFile management
             var tasks = Enumerable
                 .Range(1, 257)
-                .Select(
-                    async i =>
+                .Select(async i =>
+                {
+                    for (var j = 1; j < 5; j++)
                     {
-                        for (var j = 1; j < 5; j++)
-                        {
-                            using ITemporaryStreamStorage storage1 = service.CreateTemporaryStreamStorage(
-                                    CancellationToken.None
-                                ),
-                                storage2 = service.CreateTemporaryStreamStorage(
-                                    CancellationToken.None
-                                );
-                            var storage3 = service.CreateTemporaryStreamStorage(
+                        using ITemporaryStreamStorage storage1 = service.CreateTemporaryStreamStorage(
                                 CancellationToken.None
-                            ); // let the finalizer run for this instance
+                            ),
+                            storage2 = service.CreateTemporaryStreamStorage(CancellationToken.None);
+                        var storage3 = service.CreateTemporaryStreamStorage(CancellationToken.None); // let the finalizer run for this instance
 
-                            storage1.WriteStream(
-                                new MemoryStream(buffer.GetBuffer(), 0, 1024 * i - 1)
-                            );
-                            storage2.WriteStream(new MemoryStream(buffer.GetBuffer(), 0, 1024 * i));
-                            storage3.WriteStream(
-                                new MemoryStream(buffer.GetBuffer(), 0, 1024 * i + 1)
-                            );
+                        storage1.WriteStream(new MemoryStream(buffer.GetBuffer(), 0, 1024 * i - 1));
+                        storage2.WriteStream(new MemoryStream(buffer.GetBuffer(), 0, 1024 * i));
+                        storage3.WriteStream(new MemoryStream(buffer.GetBuffer(), 0, 1024 * i + 1));
 
-                            await Task.Yield();
+                        await Task.Yield();
 
-                            using Stream s1 = storage1.ReadStream(),
-                                s2 = storage2.ReadStream(),
-                                s3 = storage3.ReadStream();
-                            Assert.Equal(1024 * i - 1, s1.Length);
-                            Assert.Equal(1024 * i, s2.Length);
-                            Assert.Equal(1024 * i + 1, s3.Length);
-                        }
+                        using Stream s1 = storage1.ReadStream(),
+                            s2 = storage2.ReadStream(),
+                            s3 = storage3.ReadStream();
+                        Assert.Equal(1024 * i - 1, s1.Length);
+                        Assert.Equal(1024 * i, s2.Length);
+                        Assert.Equal(1024 * i + 1, s3.Length);
                     }
-                );
+                });
 
             Task.WaitAll(tasks.ToArray());
             GC.Collect(2);

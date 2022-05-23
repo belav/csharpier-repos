@@ -32,12 +32,10 @@ using Goo = System.Data;"
         public void Name()
         {
             var import = GetCodeImport(1);
-            Assert.Throws<COMException>(
-                () =>
-                {
-                    var value = import.Name;
-                }
-            );
+            Assert.Throws<COMException>(() =>
+            {
+                var value = import.Name;
+            });
         }
 
         [WpfFact]
@@ -45,12 +43,10 @@ using Goo = System.Data;"
         public void FullName()
         {
             var import = GetCodeImport(1);
-            Assert.Throws<COMException>(
-                () =>
-                {
-                    var value = import.FullName;
-                }
-            );
+            Assert.Throws<COMException>(() =>
+            {
+                var value = import.FullName;
+            });
         }
 
         [WpfFact]

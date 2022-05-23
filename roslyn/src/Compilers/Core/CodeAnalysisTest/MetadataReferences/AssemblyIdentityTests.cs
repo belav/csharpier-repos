@@ -193,12 +193,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void FromAssemblyDefinitionInvalidParameters()
         {
             Assembly asm = null;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    AssemblyIdentity.FromAssemblyDefinition(asm);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                AssemblyIdentity.FromAssemblyDefinition(asm);
+            });
         }
 
         [Fact]

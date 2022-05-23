@@ -221,139 +221,119 @@ namespace System.Web.WebPages.Deployment.Test
         [Fact]
         public void GetVersionReturnsLowerVersionIfSpecifiedInConfig()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange - Load v2 Config
+                Assembly asm = Assembly.LoadFrom(
+                    Path.Combine(
+                        _tempPath,
+                        @"ConfigTestAssemblies\V2_Signed\System.Web.WebPages.Deployment.dll"
+                    )
+                );
+                Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
+                Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+
+                using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
                 {
-                    // Arrange - Load v2 Config
-                    Assembly asm = Assembly.LoadFrom(
-                        Path.Combine(
-                            _tempPath,
-                            @"ConfigTestAssemblies\V2_Signed\System.Web.WebPages.Deployment.dll"
-                        )
-                    );
-                    Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
-                    Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+                    string path = Path.Combine(_tempPath, @"ConfigTestSites\CshtmlFileConfigV1");
 
-                    using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
-                    {
-                        string path = Path.Combine(
-                            _tempPath,
-                            @"ConfigTestSites\CshtmlFileConfigV1"
-                        );
+                    // Act
+                    Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
+                    Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(path);
 
-                        // Act
-                        Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
-                        Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(
-                            path
-                        );
-
-                        // Assert
-                        Assert.Equal(new Version(1, 0, 0, 0), ver);
-                        Assert.Equal(new Version(1, 0, 0, 0), explicitVersion);
-                    }
+                    // Assert
+                    Assert.Equal(new Version(1, 0, 0, 0), ver);
+                    Assert.Equal(new Version(1, 0, 0, 0), explicitVersion);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GetVersionReturnsLowerVersionIfSpecifiedInConfigAndNotExplicitlyDisabled()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange - Load v2 Config
+                Assembly asm = Assembly.LoadFrom(
+                    Path.Combine(
+                        _tempPath,
+                        @"ConfigTestAssemblies\V2_Signed\System.Web.WebPages.Deployment.dll"
+                    )
+                );
+                Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
+                Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+
+                using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
                 {
-                    // Arrange - Load v2 Config
-                    Assembly asm = Assembly.LoadFrom(
-                        Path.Combine(
-                            _tempPath,
-                            @"ConfigTestAssemblies\V2_Signed\System.Web.WebPages.Deployment.dll"
-                        )
-                    );
-                    Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
-                    Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+                    string path = Path.Combine(_tempPath, @"ConfigTestSites\NoCshtmlConfigV1");
 
-                    using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
-                    {
-                        string path = Path.Combine(_tempPath, @"ConfigTestSites\NoCshtmlConfigV1");
+                    // Act
+                    Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
+                    Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(path);
 
-                        // Act
-                        Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
-                        Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(
-                            path
-                        );
-
-                        // Assert
-                        Assert.Equal(new Version(1, 0, 0, 0), ver);
-                        Assert.Equal(new Version(1, 0, 0, 0), explicitVersion);
-                    }
+                    // Assert
+                    Assert.Equal(new Version(1, 0, 0, 0), ver);
+                    Assert.Equal(new Version(1, 0, 0, 0), explicitVersion);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GetVersionIgnoresUnsignedConfigDll()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange - Load v2 Config
+                Assembly asm = Assembly.LoadFrom(
+                    Path.Combine(
+                        _tempPath,
+                        @"ConfigTestAssemblies\V2_Unsigned\System.Web.WebPages.Deployment.dll"
+                    )
+                );
+                Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
+                Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+
+                using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
                 {
-                    // Arrange - Load v2 Config
-                    Assembly asm = Assembly.LoadFrom(
-                        Path.Combine(
-                            _tempPath,
-                            @"ConfigTestAssemblies\V2_Unsigned\System.Web.WebPages.Deployment.dll"
-                        )
+                    // Act
+                    Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(
+                        Path.Combine(_tempPath, @"ConfigTestSites\CshtmlFileNoVersion")
                     );
-                    Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
-                    Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
 
-                    using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
-                    {
-                        // Act
-                        Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(
-                            Path.Combine(_tempPath, @"ConfigTestSites\CshtmlFileNoVersion")
-                        );
-
-                        // Assert
-                        Assert.Equal(new Version("1.0.0.0"), ver);
-                    }
+                    // Assert
+                    Assert.Equal(new Version("1.0.0.0"), ver);
                 }
-            );
+            });
         }
 
         [Fact]
         public void GetVersionReturnsV1IfCshtmlFilePresentButNoVersionIsSpecifiedInConfigOrBin()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange - Load v2 Config
+                Assembly asm = Assembly.LoadFrom(
+                    Path.Combine(
+                        _tempPath,
+                        @"ConfigTestAssemblies\V2_Signed\System.Web.WebPages.Deployment.dll"
+                    )
+                );
+                Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
+                Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+
+                using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
                 {
-                    // Arrange - Load v2 Config
-                    Assembly asm = Assembly.LoadFrom(
-                        Path.Combine(
-                            _tempPath,
-                            @"ConfigTestAssemblies\V2_Signed\System.Web.WebPages.Deployment.dll"
-                        )
-                    );
-                    Assert.Equal(new Version(2, 0, 0, 0), asm.GetName().Version);
-                    Assert.Equal("System.Web.WebPages.Deployment", asm.GetName().Name);
+                    string path = Path.Combine(_tempPath, @"ConfigTestSites\CshtmlFileNoVersion");
 
-                    using (WebUtils.CreateHttpRuntime(@"~\foo", "."))
-                    {
-                        string path = Path.Combine(
-                            _tempPath,
-                            @"ConfigTestSites\CshtmlFileNoVersion"
-                        );
+                    // Act
+                    Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
+                    Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(path);
 
-                        // Act
-                        Version ver = WebPagesDeployment.GetVersionWithoutEnabledCheck(path);
-                        Version explicitVersion = WebPagesDeployment.GetExplicitWebPagesVersion(
-                            path
-                        );
-
-                        // Assert
-                        Assert.Equal(new Version("1.0.0.0"), ver);
-                        Assert.Null(explicitVersion);
-                    }
+                    // Assert
+                    Assert.Equal(new Version("1.0.0.0"), ver);
+                    Assert.Null(explicitVersion);
                 }
-            );
+            });
         }
 
         [Fact]

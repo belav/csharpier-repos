@@ -376,12 +376,10 @@ namespace System.Tests
             // On runtimes where the generic Activator is implemented with special codegen intrinsics, we might allocate
             // an uninitialized instance of the object before we realize there's no default constructor to run.
             // Make sure this has no observable side effects.
-            Assert.ThrowsAny<MissingMemberException>(
-                () =>
-                {
-                    Activator.CreateInstance<TypeWithPrivateDefaultCtorAndFinalizer>();
-                }
-            );
+            Assert.ThrowsAny<MissingMemberException>(() =>
+            {
+                Activator.CreateInstance<TypeWithPrivateDefaultCtorAndFinalizer>();
+            });
 
             GC.Collect();
             GC.WaitForPendingFinalizers();
@@ -1642,24 +1640,19 @@ namespace System.Tests
         public static void CreateInstanceAssemblyResolve()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.AssemblyResolve += (
-                            object sender,
-                            ResolveEventArgs args
-                        ) =>
-                            Assembly.LoadFile(
-                                Path.Combine(
-                                    Directory.GetCurrentDirectory(),
-                                    "TestLoadAssembly.dll"
-                                )
-                            );
-                        Assert.Throws<FileLoadException>(
-                            () => Activator.CreateInstance(",,,,", "PublicClassSample")
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.AssemblyResolve += (
+                        object sender,
+                        ResolveEventArgs args
+                    ) =>
+                        Assembly.LoadFile(
+                            Path.Combine(Directory.GetCurrentDirectory(), "TestLoadAssembly.dll")
                         );
-                    }
-                )
+                    Assert.Throws<FileLoadException>(
+                        () => Activator.CreateInstance(",,,,", "PublicClassSample")
+                    );
+                })
                 .Dispose();
         }
 

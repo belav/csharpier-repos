@@ -701,13 +701,11 @@ namespace System.Linq.Parallel.Tests
             Labeled<Func<ParallelQuery<int>, Action, ParallelQuery<int>>> operation
         )
         {
-            AssertThrows.AlreadyCanceled(
-                source =>
-                {
-                    foreach (int i in operation.Item(source, () => { }))
-                        ;
-                }
-            );
+            AssertThrows.AlreadyCanceled(source =>
+            {
+                foreach (int i in operation.Item(source, () => { }))
+                    ;
+            });
         }
 
         [Theory]

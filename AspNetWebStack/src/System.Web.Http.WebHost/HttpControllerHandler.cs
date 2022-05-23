@@ -47,21 +47,16 @@ namespace System.Web.Http.WebHost
 
         private static readonly Lazy<Action<HttpContextBase>> _suppressRedirectAction = new Lazy<
             Action<HttpContextBase>
-        >(
-            () =>
+        >(() =>
+        {
+            // If the behavior is explicitly disabled, do nothing
+            if (!SuppressFormsAuthRedirectHelper.GetEnabled(WebConfigurationManager.AppSettings))
             {
-                // If the behavior is explicitly disabled, do nothing
-                if (
-                    !SuppressFormsAuthRedirectHelper.GetEnabled(WebConfigurationManager.AppSettings)
-                )
-                {
-                    return httpContext => { };
-                }
-
-                return httpContext =>
-                    httpContext.Response.SuppressFormsAuthenticationRedirect = true;
+                return httpContext => { };
             }
-        );
+
+            return httpContext => httpContext.Response.SuppressFormsAuthenticationRedirect = true;
+        });
 
         private static readonly Lazy<IHostBufferPolicySelector> _bufferPolicySelector =
             new Lazy<IHostBufferPolicySelector>(
@@ -347,89 +342,83 @@ namespace System.Web.Http.WebHost
         {
             if (bufferInput)
             {
-                return new LazyStreamContent(
-                    () =>
+                return new LazyStreamContent(() =>
+                {
+                    if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.None)
                     {
-                        if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.None)
+                        return new SeekableBufferedRequestStream(requestBase);
+                    }
+                    else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Classic)
+                    {
+                        requestBase.InputStream.Position = 0;
+                        return requestBase.InputStream;
+                    }
+                    else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Buffered)
+                    {
+                        if (requestBase.GetBufferedInputStream().Position > 0)
                         {
-                            return new SeekableBufferedRequestStream(requestBase);
-                        }
-                        else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Classic)
-                        {
+                            // If GetBufferedInputStream() was completely read, we can continue accessing it via Request.InputStream.
+                            // If it was partially read, accessing InputStream will throw, but at that point we have no
+                            // way of recovering.
                             requestBase.InputStream.Position = 0;
                             return requestBase.InputStream;
                         }
-                        else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Buffered)
-                        {
-                            if (requestBase.GetBufferedInputStream().Position > 0)
-                            {
-                                // If GetBufferedInputStream() was completely read, we can continue accessing it via Request.InputStream.
-                                // If it was partially read, accessing InputStream will throw, but at that point we have no
-                                // way of recovering.
-                                requestBase.InputStream.Position = 0;
-                                return requestBase.InputStream;
-                            }
-                            return new SeekableBufferedRequestStream(requestBase);
-                        }
-                        else
-                        {
-                            Contract.Assert(
-                                requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless
-                            );
-                            throw new InvalidOperationException(
-                                String.Format(
-                                    CultureInfo.CurrentCulture,
-                                    SRResources.RequestBodyAlreadyReadInMode,
-                                    ReadEntityBodyMode.Bufferless
-                                )
-                            );
-                        }
+                        return new SeekableBufferedRequestStream(requestBase);
                     }
-                );
+                    else
+                    {
+                        Contract.Assert(
+                            requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless
+                        );
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                SRResources.RequestBodyAlreadyReadInMode,
+                                ReadEntityBodyMode.Bufferless
+                            )
+                        );
+                    }
+                });
             }
             else
             {
-                return new LazyStreamContent(
-                    () =>
+                return new LazyStreamContent(() =>
+                {
+                    if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.None)
                     {
-                        if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.None)
-                        {
-                            return requestBase.GetBufferlessInputStream();
-                        }
-                        else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Classic)
-                        {
-                            // The user intended that the request be read in a bufferless manner, but we are starting with a buffered stream.
-                            // To maintain compatibility with legacy behavior, we'll throw in this case.
-                            throw new InvalidOperationException(
-                                SRResources.RequestStreamCannotBeReadBufferless
-                            );
-                        }
-                        else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless)
-                        {
-                            Stream bufferlessInputStream = requestBase.GetBufferlessInputStream();
-                            if (bufferlessInputStream.Position > 0)
-                            {
-                                throw new InvalidOperationException(
-                                    SRResources.RequestBodyAlreadyRead
-                                );
-                            }
-                            return bufferlessInputStream;
-                        }
-                        else
-                        {
-                            Contract.Assert(
-                                requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Buffered
-                            );
-                            throw new InvalidOperationException(
-                                String.Format(
-                                    CultureInfo.CurrentCulture,
-                                    SRResources.RequestBodyAlreadyReadInMode,
-                                    ReadEntityBodyMode.Buffered
-                                )
-                            );
-                        }
+                        return requestBase.GetBufferlessInputStream();
                     }
-                );
+                    else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Classic)
+                    {
+                        // The user intended that the request be read in a bufferless manner, but we are starting with a buffered stream.
+                        // To maintain compatibility with legacy behavior, we'll throw in this case.
+                        throw new InvalidOperationException(
+                            SRResources.RequestStreamCannotBeReadBufferless
+                        );
+                    }
+                    else if (requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Bufferless)
+                    {
+                        Stream bufferlessInputStream = requestBase.GetBufferlessInputStream();
+                        if (bufferlessInputStream.Position > 0)
+                        {
+                            throw new InvalidOperationException(SRResources.RequestBodyAlreadyRead);
+                        }
+                        return bufferlessInputStream;
+                    }
+                    else
+                    {
+                        Contract.Assert(
+                            requestBase.ReadEntityBodyMode == ReadEntityBodyMode.Buffered
+                        );
+                        throw new InvalidOperationException(
+                            String.Format(
+                                CultureInfo.CurrentCulture,
+                                SRResources.RequestBodyAlreadyReadInMode,
+                                ReadEntityBodyMode.Buffered
+                            )
+                        );
+                    }
+                });
             }
         }
 

@@ -332,19 +332,17 @@ public class HeaderModelBinderIntegrationTest
             ParameterType = typeof(Product)
         };
 
-        var testContext = GetModelBindingTestContext(
-            request =>
-            {
-                request.Headers.Add("NoCommaString", "someValue");
-                request.Headers.Add("OneCommaSeparatedString", "one, two, three");
-                request.Headers.Add("IntProperty", "10");
-                request.Headers.Add("NullableIntProperty", "300");
-                request.Headers.Add("ArrayOfString", "first, second");
-                request.Headers.Add("EnumerableOfDouble", "10.51, 45.44");
-                request.Headers.Add("ListOfEnum", "Sedan, Coupe");
-                request.Headers.Add("ListOfOrderWithTypeConverter", "10");
-            }
-        );
+        var testContext = GetModelBindingTestContext(request =>
+        {
+            request.Headers.Add("NoCommaString", "someValue");
+            request.Headers.Add("OneCommaSeparatedString", "one, two, three");
+            request.Headers.Add("IntProperty", "10");
+            request.Headers.Add("NullableIntProperty", "300");
+            request.Headers.Add("ArrayOfString", "first, second");
+            request.Headers.Add("EnumerableOfDouble", "10.51, 45.44");
+            request.Headers.Add("ListOfEnum", "Sedan, Coupe");
+            request.Headers.Add("ListOfOrderWithTypeConverter", "10");
+        });
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder(
             testContext.HttpContext.RequestServices
         );

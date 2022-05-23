@@ -70,37 +70,29 @@ public class Program
                 AssertEquals(test7Value, test8Value);
             }
 
-            ThrowsNRE(
-                () =>
-                {
-                    ref long nullref = ref Unsafe.NullRef<long>();
-                    InterlockedImpl.XAnd64(ref nullref, testData[i]);
-                }
-            );
+            ThrowsNRE(() =>
+            {
+                ref long nullref = ref Unsafe.NullRef<long>();
+                InterlockedImpl.XAnd64(ref nullref, testData[i]);
+            });
 
-            ThrowsNRE(
-                () =>
-                {
-                    ref long nullref = ref Unsafe.NullRef<long>();
-                    InterlockedImpl.XAnd64_noret(ref nullref, testData[i]);
-                }
-            );
+            ThrowsNRE(() =>
+            {
+                ref long nullref = ref Unsafe.NullRef<long>();
+                InterlockedImpl.XAnd64_noret(ref nullref, testData[i]);
+            });
 
-            ThrowsNRE(
-                () =>
-                {
-                    ref long nullref = ref Unsafe.NullRef<long>();
-                    InterlockedImpl.XOr64(ref nullref, testData[i]);
-                }
-            );
+            ThrowsNRE(() =>
+            {
+                ref long nullref = ref Unsafe.NullRef<long>();
+                InterlockedImpl.XOr64(ref nullref, testData[i]);
+            });
 
-            ThrowsNRE(
-                () =>
-                {
-                    ref long nullref = ref Unsafe.NullRef<long>();
-                    InterlockedImpl.XOr64_noret(ref nullref, testData[i]);
-                }
-            );
+            ThrowsNRE(() =>
+            {
+                ref long nullref = ref Unsafe.NullRef<long>();
+                InterlockedImpl.XOr64_noret(ref nullref, testData[i]);
+            });
         }
 
         return s_RetCode;

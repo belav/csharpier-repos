@@ -12,13 +12,11 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void NullReturnTypeThrows()
         {
-            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    Utf8JsonReader reader = default;
-                    JsonSerializer.Deserialize(ref reader, returnType: null);
-                }
-            );
+            ArgumentNullException ex = Assert.Throws<ArgumentNullException>(() =>
+            {
+                Utf8JsonReader reader = default;
+                JsonSerializer.Deserialize(ref reader, returnType: null);
+            });
 
             Assert.Contains("returnType", ex.ToString());
 
@@ -81,23 +79,19 @@ namespace System.Text.Json.Serialization.Tests
 
             var serializerOptions = new JsonSerializerOptions { MaxDepth = 5, };
 
-            Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8, readerOptions);
-                    JsonSerializer.Deserialize(ref reader, typeof(int[][]), serializerOptions);
-                }
-            );
+            Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(utf8, readerOptions);
+                JsonSerializer.Deserialize(ref reader, typeof(int[][]), serializerOptions);
+            });
 
             var state = new JsonReaderState(readerOptions);
 
-            Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
-                    JsonSerializer.Deserialize(ref reader, typeof(int[][]), serializerOptions);
-                }
-            );
+            Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state);
+                JsonSerializer.Deserialize(ref reader, typeof(int[][]), serializerOptions);
+            });
 
             readerOptions = new JsonReaderOptions { MaxDepth = 5, };
 
@@ -123,21 +117,17 @@ namespace System.Text.Json.Serialization.Tests
 
             var serializerOptions = new JsonSerializerOptions { AllowTrailingCommas = true, };
 
-            Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8);
-                    JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
-                }
-            );
+            Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(utf8);
+                JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
+            });
 
-            Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state: default);
-                    JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
-                }
-            );
+            Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state: default);
+                JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
+            });
 
             var readerOptions = new JsonReaderOptions { AllowTrailingCommas = true };
 
@@ -164,21 +154,17 @@ namespace System.Text.Json.Serialization.Tests
                 ReadCommentHandling = JsonCommentHandling.Skip,
             };
 
-            Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8);
-                    JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
-                }
-            );
+            Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(utf8);
+                JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
+            });
 
-            Assert.Throws<JsonException>(
-                () =>
-                {
-                    var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state: default);
-                    JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
-                }
-            );
+            Assert.Throws<JsonException>(() =>
+            {
+                var reader = new Utf8JsonReader(utf8, isFinalBlock: false, state: default);
+                JsonSerializer.Deserialize(ref reader, typeof(int[]), serializerOptions);
+            });
 
             var readerOptions = new JsonReaderOptions
             {
@@ -519,21 +505,17 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ReadDefaultReader()
         {
-            Assert.ThrowsAny<JsonException>(
-                () =>
-                {
-                    Utf8JsonReader reader = default;
-                    JsonSerializer.Deserialize(ref reader, typeof(int));
-                }
-            );
+            Assert.ThrowsAny<JsonException>(() =>
+            {
+                Utf8JsonReader reader = default;
+                JsonSerializer.Deserialize(ref reader, typeof(int));
+            });
 
-            Assert.ThrowsAny<JsonException>(
-                () =>
-                {
-                    Utf8JsonReader reader = default;
-                    JsonSerializer.Deserialize<int>(ref reader);
-                }
-            );
+            Assert.ThrowsAny<JsonException>(() =>
+            {
+                Utf8JsonReader reader = default;
+                JsonSerializer.Deserialize<int>(ref reader);
+            });
         }
 
         [Fact]
@@ -873,21 +855,17 @@ namespace System.Text.Json.Serialization.Tests
 
                 if (expectedThrow)
                 {
-                    Assert.Throws<JsonException>(
-                        () =>
-                        {
-                            var reader = new Utf8JsonReader(utf8, readerOptions);
-                            JsonSerializer.Deserialize<DeepArray>(ref reader, options);
-                        }
-                    );
+                    Assert.Throws<JsonException>(() =>
+                    {
+                        var reader = new Utf8JsonReader(utf8, readerOptions);
+                        JsonSerializer.Deserialize<DeepArray>(ref reader, options);
+                    });
 
-                    Assert.Throws<JsonException>(
-                        () =>
-                        {
-                            var reader = new Utf8JsonReader(utf8, readerOptions);
-                            JsonSerializer.Deserialize<IContent>(ref reader, options);
-                        }
-                    );
+                    Assert.Throws<JsonException>(() =>
+                    {
+                        var reader = new Utf8JsonReader(utf8, readerOptions);
+                        JsonSerializer.Deserialize<IContent>(ref reader, options);
+                    });
                 }
                 else
                 {

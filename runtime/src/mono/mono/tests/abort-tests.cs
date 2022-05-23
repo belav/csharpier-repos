@@ -9,29 +9,27 @@ public class Tests
         bool failed_abort = false;
         bool finished = false;
 
-        Thread thr = new Thread(
-            () =>
+        Thread thr = new Thread(() =>
+        {
+            try
             {
                 try
                 {
-                    try
-                    {
-                        Thread.CurrentThread.Abort();
-                    }
-                    finally
-                    {
-                        called_finally = true;
-                        Thread.CurrentThread.Abort();
-                        failed_abort = true;
-                    }
+                    Thread.CurrentThread.Abort();
                 }
-                catch (ThreadAbortException)
+                finally
                 {
-                    Thread.ResetAbort();
+                    called_finally = true;
+                    Thread.CurrentThread.Abort();
+                    failed_abort = true;
                 }
-                finished = true;
             }
-        );
+            catch (ThreadAbortException)
+            {
+                Thread.ResetAbort();
+            }
+            finished = true;
+        });
 
         thr.Start();
         thr.Join();

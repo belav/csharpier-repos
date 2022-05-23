@@ -1252,17 +1252,15 @@ namespace System.IO.Tests
                 watcher.Filters.Add(fileTwo.Name);
 
                 var cts = new CancellationTokenSource();
-                Task modifier = Task.Run(
-                    () =>
+                Task modifier = Task.Run(() =>
+                {
+                    string otherFilter = Guid.NewGuid().ToString("N");
+                    while (!cts.IsCancellationRequested)
                     {
-                        string otherFilter = Guid.NewGuid().ToString("N");
-                        while (!cts.IsCancellationRequested)
-                        {
-                            watcher.Filters.Add(otherFilter);
-                            watcher.Filters.RemoveAt(2);
-                        }
+                        watcher.Filters.Add(otherFilter);
+                        watcher.Filters.RemoveAt(2);
                     }
-                );
+                });
 
                 ExpectEvent(
                     watcher,

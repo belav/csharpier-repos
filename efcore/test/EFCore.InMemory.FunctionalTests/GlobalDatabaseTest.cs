@@ -209,21 +209,17 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Foo>(
-                    b =>
-                    {
-                        b.OwnsOne(e => e.Goo1);
-                        b.OwnsOne(e => e.Goo2);
-                    }
-                );
+                modelBuilder.Entity<Foo>(b =>
+                {
+                    b.OwnsOne(e => e.Goo1);
+                    b.OwnsOne(e => e.Goo2);
+                });
 
-                modelBuilder.Entity<Boo>(
-                    b =>
-                    {
-                        b.OwnsOne(e => e.Goo1);
-                        b.OwnsOne(e => e.Goo2);
-                    }
-                );
+                modelBuilder.Entity<Boo>(b =>
+                {
+                    b.OwnsOne(e => e.Goo1);
+                    b.OwnsOne(e => e.Goo2);
+                });
             }
 
             public DbSet<Foo> Foos { get; set; }

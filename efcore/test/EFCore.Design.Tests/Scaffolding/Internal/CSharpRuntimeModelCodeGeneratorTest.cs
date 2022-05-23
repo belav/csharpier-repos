@@ -289,16 +289,14 @@ namespace TestNamespace
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<object>(
-                    e =>
-                    {
-                        e.Property<int>("Id");
-                        e.HasKey("Id");
-                        e.Metadata.SetInMemoryQuery(
-                            (Expression<Func<IQueryable<object>>>)(() => Set<object>())
-                        );
-                    }
-                );
+                modelBuilder.Entity<object>(e =>
+                {
+                    e.Property<int>("Id");
+                    e.HasKey("Id");
+                    e.Metadata.SetInMemoryQuery(
+                        (Expression<Func<IQueryable<object>>>)(() => Set<object>())
+                    );
+                });
             }
         }
 
@@ -2411,140 +2409,127 @@ namespace TestNamespace
                     .UseCollation("pi-PI")
                     .UseIdentityColumns(3, 2);
 
-                modelBuilder.Entity<PrincipalBase>(
-                    eb =>
-                    {
-                        eb.Property(e => e.Id)
-                            .UseIdentityColumn(2, 3)
-                            .IsSparse()
-                            .Metadata.SetColumnName(
-                                "DerivedId",
-                                StoreObjectIdentifier.Table("PrincipalDerived")
-                            );
-                        eb.Property(e => e.AlternateId)
-                            .IsRequired()
-                            .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction)
-                            .HasColumnType("geometry")
-                            .HasDefaultValue(
-                                NtsGeometryServices.Instance
-                                    .CreateGeometryFactory(srid: 0)
-                                    .CreatePoint(new CoordinateZM(0, 0, 0, 0))
-                            )
-                            .HasConversion<
-                                CastingConverter<Point, Point>,
-                                CustomValueComparer<Point>
-                            >();
-
-                        eb.HasIndex(e => e.AlternateId, "AlternateIndex")
-                            .IsUnique()
-                            .HasDatabaseName("AIX")
-                            .HasFilter("AlternateId <> NULL")
-                            .IsClustered()
-                            .IsCreatedOnline()
-                            .HasFillFactor(40)
-                            .IncludeProperties(e => e.Id);
-
-                        eb.HasIndex(e => new { e.AlternateId, e.Id });
-
-                        eb.HasKey(e => new { e.Id, e.AlternateId }).HasName("PK").IsClustered();
-
-                        eb.HasAlternateKey(e => e.Id);
-
-                        eb.OwnsOne(
-                            e => e.Owned,
-                            ob =>
-                            {
-                                ob.HasChangeTrackingStrategy(
-                                    ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
-                                );
-                                ob.UsePropertyAccessMode(PropertyAccessMode.Field);
-                            }
+                modelBuilder.Entity<PrincipalBase>(eb =>
+                {
+                    eb.Property(e => e.Id)
+                        .UseIdentityColumn(2, 3)
+                        .IsSparse()
+                        .Metadata.SetColumnName(
+                            "DerivedId",
+                            StoreObjectIdentifier.Table("PrincipalDerived")
                         );
+                    eb.Property(e => e.AlternateId)
+                        .IsRequired()
+                        .UsePropertyAccessMode(PropertyAccessMode.FieldDuringConstruction)
+                        .HasColumnType("geometry")
+                        .HasDefaultValue(
+                            NtsGeometryServices.Instance
+                                .CreateGeometryFactory(srid: 0)
+                                .CreatePoint(new CoordinateZM(0, 0, 0, 0))
+                        )
+                        .HasConversion<
+                            CastingConverter<Point, Point>,
+                            CustomValueComparer<Point>
+                        >();
 
-                        eb.Navigation(e => e.Owned)
-                            .IsRequired()
-                            .HasField("_ownedField")
-                            .UsePropertyAccessMode(PropertyAccessMode.Field);
+                    eb.HasIndex(e => e.AlternateId, "AlternateIndex")
+                        .IsUnique()
+                        .HasDatabaseName("AIX")
+                        .HasFilter("AlternateId <> NULL")
+                        .IsClustered()
+                        .IsCreatedOnline()
+                        .HasFillFactor(40)
+                        .IncludeProperties(e => e.Id);
 
-                        eb.HasData(new PrincipalBase { Id = 1, AlternateId = new Point(0, 0) });
+                    eb.HasIndex(e => new { e.AlternateId, e.Id });
 
-                        eb.ToTable("PrincipalBase", "mySchema");
-                    }
-                );
+                    eb.HasKey(e => new { e.Id, e.AlternateId }).HasName("PK").IsClustered();
 
-                modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(
-                    eb =>
-                    {
-                        eb.HasOne(e => e.Dependent)
-                            .WithOne(e => e.Principal)
-                            .HasForeignKey<DependentBase<byte?>>()
-                            .OnDelete(DeleteBehavior.ClientNoAction);
+                    eb.HasAlternateKey(e => e.Id);
 
-                        eb.Navigation(e => e.Dependent).AutoInclude();
-
-                        eb.OwnsMany(
-                            typeof(OwnedType).FullName,
-                            "ManyOwned",
-                            ob =>
-                            {
-                                ob.IsMemoryOptimized();
-                                ob.ToTable("ManyOwned", t => t.ExcludeFromMigrations());
-                            }
-                        );
-
-                        eb.HasMany(e => e.Principals)
-                            .WithMany(
-                                e => (ICollection<PrincipalDerived<DependentBase<byte?>>>)e.Deriveds
-                            )
-                            .UsingEntity(
-                                jb =>
-                                {
-                                    jb.HasComment("Join table");
-                                    jb.Property<byte[]>("rowid")
-                                        .IsRowVersion()
-                                        .HasComment("RowVersion")
-                                        .UseCollation("ri")
-                                        .HasColumnOrder(1);
-                                }
+                    eb.OwnsOne(
+                        e => e.Owned,
+                        ob =>
+                        {
+                            ob.HasChangeTrackingStrategy(
+                                ChangeTrackingStrategy.ChangingAndChangedNotificationsWithOriginalValues
                             );
+                            ob.UsePropertyAccessMode(PropertyAccessMode.Field);
+                        }
+                    );
 
-                        eb.Navigation(e => e.Principals).AutoInclude();
+                    eb.Navigation(e => e.Owned)
+                        .IsRequired()
+                        .HasField("_ownedField")
+                        .UsePropertyAccessMode(PropertyAccessMode.Field);
 
-                        eb.ToTable("PrincipalDerived");
-                    }
-                );
+                    eb.HasData(new PrincipalBase { Id = 1, AlternateId = new Point(0, 0) });
 
-                modelBuilder.Entity<DependentBase<byte?>>(
-                    eb =>
-                    {
-                        eb.Property<byte?>("Id");
+                    eb.ToTable("PrincipalBase", "mySchema");
+                });
 
-                        eb.HasKey(new[] { "PrincipalId", "PrincipalAlternateId" });
+                modelBuilder.Entity<PrincipalDerived<DependentBase<byte?>>>(eb =>
+                {
+                    eb.HasOne(e => e.Dependent)
+                        .WithOne(e => e.Principal)
+                        .HasForeignKey<DependentBase<byte?>>()
+                        .OnDelete(DeleteBehavior.ClientNoAction);
 
-                        eb.HasOne<PrincipalBase>()
-                            .WithOne()
-                            .HasForeignKey<DependentBase<byte?>>("PrincipalId")
-                            .HasPrincipalKey<PrincipalBase>(e => e.Id);
+                    eb.Navigation(e => e.Dependent).AutoInclude();
 
-                        eb.ToTable("PrincipalDerived");
+                    eb.OwnsMany(
+                        typeof(OwnedType).FullName,
+                        "ManyOwned",
+                        ob =>
+                        {
+                            ob.IsMemoryOptimized();
+                            ob.ToTable("ManyOwned", t => t.ExcludeFromMigrations());
+                        }
+                    );
 
-                        eb.HasDiscriminator<Enum1>("EnumDiscriminator")
-                            .HasValue(Enum1.One)
-                            .HasValue<DependentDerived<byte?>>(Enum1.Two);
-                    }
-                );
+                    eb.HasMany(e => e.Principals)
+                        .WithMany(
+                            e => (ICollection<PrincipalDerived<DependentBase<byte?>>>)e.Deriveds
+                        )
+                        .UsingEntity(jb =>
+                        {
+                            jb.HasComment("Join table");
+                            jb.Property<byte[]>("rowid")
+                                .IsRowVersion()
+                                .HasComment("RowVersion")
+                                .UseCollation("ri")
+                                .HasColumnOrder(1);
+                        });
 
-                modelBuilder.Entity<DependentDerived<byte?>>(
-                    eb =>
-                    {
-                        eb.Property<string>("Data")
-                            .HasMaxLength(20)
-                            .IsFixedLength()
-                            .IsUnicode(false);
+                    eb.Navigation(e => e.Principals).AutoInclude();
 
-                        eb.Property<decimal>("Money").HasPrecision(9, 3);
-                    }
-                );
+                    eb.ToTable("PrincipalDerived");
+                });
+
+                modelBuilder.Entity<DependentBase<byte?>>(eb =>
+                {
+                    eb.Property<byte?>("Id");
+
+                    eb.HasKey(new[] { "PrincipalId", "PrincipalAlternateId" });
+
+                    eb.HasOne<PrincipalBase>()
+                        .WithOne()
+                        .HasForeignKey<DependentBase<byte?>>("PrincipalId")
+                        .HasPrincipalKey<PrincipalBase>(e => e.Id);
+
+                    eb.ToTable("PrincipalDerived");
+
+                    eb.HasDiscriminator<Enum1>("EnumDiscriminator")
+                        .HasValue(Enum1.One)
+                        .HasValue<DependentDerived<byte?>>(Enum1.Two);
+                });
+
+                modelBuilder.Entity<DependentDerived<byte?>>(eb =>
+                {
+                    eb.Property<string>("Data").HasMaxLength(20).IsFixedLength().IsUnicode(false);
+
+                    eb.Property<decimal>("Money").HasPrecision(9, 3);
+                });
             }
         }
 
@@ -3393,13 +3378,11 @@ namespace TestNamespace
                     .IncrementsBy(2)
                     .StartsAt(-4);
 
-                modelBuilder.Entity<Data>(
-                    eb =>
-                    {
-                        eb.Property<int>("Id").UseHiLo("HL", "S");
-                        eb.HasKey("Id");
-                    }
-                );
+                modelBuilder.Entity<Data>(eb =>
+                {
+                    eb.Property<int>("Id").UseHiLo("HL", "S");
+                    eb.HasKey("Id");
+                });
             }
         }
 
@@ -3562,16 +3545,14 @@ namespace TestNamespace
             {
                 base.OnModelCreating(modelBuilder);
 
-                modelBuilder.Entity<Data>(
-                    eb =>
-                    {
-                        eb.Property<int>("Id");
-                        eb.HasKey("Id");
+                modelBuilder.Entity<Data>(eb =>
+                {
+                    eb.Property<int>("Id");
+                    eb.HasKey("Id");
 
-                        eb.HasCheckConstraint("idConstraint", "Id <> 0");
-                        eb.HasCheckConstraint("anotherConstraint", "Id <> -1");
-                    }
-                );
+                    eb.HasCheckConstraint("idConstraint", "Id <> 0");
+                    eb.HasCheckConstraint("anotherConstraint", "Id <> -1");
+                });
             }
         }
 
@@ -3755,15 +3736,13 @@ namespace Microsoft.EntityFrameworkCore.Metadata
             {
                 modelBuilder.Model.RemoveAnnotation(CoreAnnotationNames.ProductVersion);
 
-                modelBuilder.Entity<Data>(
-                    eb =>
-                    {
-                        eb.Property<int>("Id");
-                        eb.HasKey("Id");
+                modelBuilder.Entity<Data>(eb =>
+                {
+                    eb.Property<int>("Id");
+                    eb.HasKey("Id");
 
-                        eb.Property<Point>("Point").HasSrid(1101);
-                    }
-                );
+                    eb.Property<Point>("Point").HasSrid(1101);
+                });
             }
         }
 
@@ -4069,19 +4048,17 @@ namespace TestNamespace
 
                 modelBuilder.HasDefaultContainer("Default");
 
-                modelBuilder.Entity<Data>(
-                    eb =>
-                    {
-                        eb.Property<int>("Id");
-                        eb.Property<long?>("PartitionId").HasConversion<string>();
-                        eb.HasPartitionKey("PartitionId");
-                        eb.HasKey("Id", "PartitionId");
-                        eb.ToContainer("DataContainer");
-                        eb.UseETagConcurrency();
-                        eb.HasNoDiscriminator();
-                        eb.Property(d => d.Blob).ToJsonProperty("JsonBlob");
-                    }
-                );
+                modelBuilder.Entity<Data>(eb =>
+                {
+                    eb.Property<int>("Id");
+                    eb.Property<long?>("PartitionId").HasConversion<string>();
+                    eb.HasPartitionKey("PartitionId");
+                    eb.HasKey("Id", "PartitionId");
+                    eb.ToContainer("DataContainer");
+                    eb.UseETagConcurrency();
+                    eb.HasNoDiscriminator();
+                    eb.Property(d => d.Blob).ToJsonProperty("JsonBlob");
+                });
             }
         }
 
@@ -4236,12 +4213,10 @@ namespace Microsoft.EntityFrameworkCore.Scaffolding.TestModel.Internal
 
             modelBuilder.Entity<Scaffolding.Internal.Index>();
             modelBuilder.Entity<TestModels.AspNetIdentity.IdentityUser>();
-            modelBuilder.Entity<IdentityUser>(
-                eb =>
-                {
-                    eb.HasDiscriminator().HasValue("DerivedIdentityUser");
-                }
-            );
+            modelBuilder.Entity<IdentityUser>(eb =>
+            {
+                eb.HasDiscriminator().HasValue("DerivedIdentityUser");
+            });
             modelBuilder.Entity<Scaffolding.Internal.Internal>();
         }
     }

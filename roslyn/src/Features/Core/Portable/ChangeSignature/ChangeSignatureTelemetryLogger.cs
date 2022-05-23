@@ -224,34 +224,32 @@ namespace Microsoft.CodeAnalysis.ChangeSignature
         {
             Logger.Log(
                 FunctionId.ChangeSignature_Data,
-                KeyValueLogMessage.Create(
-                    m =>
+                KeyValueLogMessage.Create(m =>
+                {
+                    foreach (var kv in s_logAggregator)
                     {
-                        foreach (var kv in s_logAggregator)
-                        {
-                            var info = ((ActionInfo)kv.Key).ToString("f");
-                            m[info] = kv.Value.GetCount();
-                        }
-
-                        foreach (var kv in s_statisticLogAggregator)
-                        {
-                            var info = ((ActionInfo)kv.Key).ToString("f");
-                            var statistics = kv.Value.GetStatisticResult();
-
-                            m[CreateProperty(info, Maximum)] = statistics.Maximum;
-                            m[CreateProperty(info, Minimum)] = statistics.Minimum;
-                            m[CreateProperty(info, Mean)] = statistics.Mean;
-                        }
-
-                        foreach (var kv in s_histogramLogAggregator)
-                        {
-                            var info = ((ActionInfo)kv.Key).ToString("f");
-                            m[$"{info}.BucketSize"] = kv.Value.BucketSize;
-                            m[$"{info}.MaxBucketValue"] = kv.Value.MaxBucketValue;
-                            m[$"{info}.Buckets"] = kv.Value.GetBucketsAsString();
-                        }
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        m[info] = kv.Value.GetCount();
                     }
-                )
+
+                    foreach (var kv in s_statisticLogAggregator)
+                    {
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        var statistics = kv.Value.GetStatisticResult();
+
+                        m[CreateProperty(info, Maximum)] = statistics.Maximum;
+                        m[CreateProperty(info, Minimum)] = statistics.Minimum;
+                        m[CreateProperty(info, Mean)] = statistics.Mean;
+                    }
+
+                    foreach (var kv in s_histogramLogAggregator)
+                    {
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        m[$"{info}.BucketSize"] = kv.Value.BucketSize;
+                        m[$"{info}.MaxBucketValue"] = kv.Value.MaxBucketValue;
+                        m[$"{info}.Buckets"] = kv.Value.GetBucketsAsString();
+                    }
+                })
             );
         }
 

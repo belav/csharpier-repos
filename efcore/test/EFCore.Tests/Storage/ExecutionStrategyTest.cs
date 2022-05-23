@@ -895,15 +895,13 @@ namespace Microsoft.EntityFrameworkCore.Storage
 
             var executionCount = 0;
 
-            executionStrategyMock.Execute(
-                () =>
+            executionStrategyMock.Execute(() =>
+            {
+                if (executionCount++ < 1)
                 {
-                    if (executionCount++ < 1)
-                    {
-                        throw new DbUpdateConcurrencyException("");
-                    }
+                    throw new DbUpdateConcurrencyException("");
                 }
-            );
+            });
 
             Assert.Equal(2, executionCount);
         }

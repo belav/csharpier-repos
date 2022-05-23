@@ -242,17 +242,15 @@ public class ModelDirectiveTest : RazorProjectEngineTestBase
 
     private RazorEngine CreateEngineCore(bool designTime = false)
     {
-        return CreateProjectEngine(
-            b =>
-            {
-                // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
-                b.AddDirective(ModelDirective.Directive);
+        return CreateProjectEngine(b =>
+        {
+            // Notice we're not registering the ModelDirective.Pass here so we can run it on demand.
+            b.AddDirective(ModelDirective.Directive);
 
-                b.Features.Add(new RazorPageDocumentClassifierPass());
-                b.Features.Add(new MvcViewDocumentClassifierPass());
-                b.Features.Add(new DesignTimeOptionsFeature(designTime));
-            }
-        ).Engine;
+            b.Features.Add(new RazorPageDocumentClassifierPass());
+            b.Features.Add(new MvcViewDocumentClassifierPass());
+            b.Features.Add(new DesignTimeOptionsFeature(designTime));
+        }).Engine;
     }
 
     private DocumentIntermediateNode CreateIRDocument(

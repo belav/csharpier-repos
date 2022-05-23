@@ -118,13 +118,11 @@ namespace Microsoft.CodeAnalysis.Editor.Interactive
         )
         {
             // Capture and clear exising submission buffers. Independent of other operations that occur on restart.
-            _ = _threadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
-                    CaptureClassificationSpans();
-                }
-            );
+            _ = _threadingContext.JoinableTaskFactory.RunAsync(async () =>
+            {
+                await _threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                CaptureClassificationSpans();
+            });
         }
 
         public IInteractiveWindow? CurrentWindow

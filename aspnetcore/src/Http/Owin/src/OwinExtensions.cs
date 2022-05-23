@@ -150,12 +150,10 @@ public static class OwinExtensions
     {
         return next =>
         {
-            var app = middleware(
-                httpContext =>
-                {
-                    return next(httpContext.Features.Get<IOwinEnvironmentFeature>().Environment);
-                }
-            );
+            var app = middleware(httpContext =>
+            {
+                return next(httpContext.Features.Get<IOwinEnvironmentFeature>().Environment);
+            });
 
             return env =>
             {

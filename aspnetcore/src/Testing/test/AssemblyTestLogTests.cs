@@ -325,24 +325,19 @@ public class AssemblyTestLogTests : LoggedTest
             Environment.NewLine,
             input
                 .Split(new[] { Environment.NewLine }, StringSplitOptions.None)
-                .Select(
-                    line =>
-                    {
-                        var strippedPrefix =
-                            line.IndexOf('[') >= 0 ? line.Substring(line.IndexOf('[')) : line;
+                .Select(line =>
+                {
+                    var strippedPrefix =
+                        line.IndexOf('[') >= 0 ? line.Substring(line.IndexOf('[')) : line;
 
-                        var strippedDuration = DurationRegex.Replace(strippedPrefix, "DURATION");
-                        var strippedTimestamp = TimestampRegex.Replace(
-                            strippedDuration,
-                            "TIMESTAMP"
-                        );
-                        var strippedTimestampOffset = TimestampOffsetRegex.Replace(
-                            strippedTimestamp,
-                            "OFFSET"
-                        );
-                        return strippedTimestampOffset;
-                    }
-                )
+                    var strippedDuration = DurationRegex.Replace(strippedPrefix, "DURATION");
+                    var strippedTimestamp = TimestampRegex.Replace(strippedDuration, "TIMESTAMP");
+                    var strippedTimestampOffset = TimestampOffsetRegex.Replace(
+                        strippedTimestamp,
+                        "OFFSET"
+                    );
+                    return strippedTimestampOffset;
+                })
         );
     }
 }

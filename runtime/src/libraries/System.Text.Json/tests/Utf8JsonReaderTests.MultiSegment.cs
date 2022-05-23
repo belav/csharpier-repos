@@ -52,30 +52,28 @@ namespace System.Text.Json.Tests
                 secondMem.Length
             );
 
-            Assert.ThrowsAny<JsonException>(
-                () =>
-                {
-                    var json = new Utf8JsonReader(sequence, isFinalBlock: true, state: default);
+            Assert.ThrowsAny<JsonException>(() =>
+            {
+                var json = new Utf8JsonReader(sequence, isFinalBlock: true, state: default);
 
-                    Assert.Equal(0, json.BytesConsumed);
-                    Assert.Equal(0, json.TokenStartIndex);
-                    Assert.Equal(0, json.CurrentDepth);
-                    Assert.Equal(JsonTokenType.None, json.TokenType);
-                    Assert.NotEqual(default, json.Position);
-                    Assert.False(json.HasValueSequence);
-                    Assert.True(json.ValueSpan.SequenceEqual(default));
-                    Assert.True(json.ValueSequence.IsEmpty);
+                Assert.Equal(0, json.BytesConsumed);
+                Assert.Equal(0, json.TokenStartIndex);
+                Assert.Equal(0, json.CurrentDepth);
+                Assert.Equal(JsonTokenType.None, json.TokenType);
+                Assert.NotEqual(default, json.Position);
+                Assert.False(json.HasValueSequence);
+                Assert.True(json.ValueSpan.SequenceEqual(default));
+                Assert.True(json.ValueSequence.IsEmpty);
 
-                    Assert.Equal(64, json.CurrentState.Options.MaxDepth);
-                    Assert.False(json.CurrentState.Options.AllowTrailingCommas);
-                    Assert.Equal(
-                        JsonCommentHandling.Disallow,
-                        json.CurrentState.Options.CommentHandling
-                    );
+                Assert.Equal(64, json.CurrentState.Options.MaxDepth);
+                Assert.False(json.CurrentState.Options.AllowTrailingCommas);
+                Assert.Equal(
+                    JsonCommentHandling.Disallow,
+                    json.CurrentState.Options.CommentHandling
+                );
 
-                    json.Read(); // this should throw
-                }
-            );
+                json.Read(); // this should throw
+            });
         }
 
         [Theory]
@@ -1143,21 +1141,15 @@ namespace System.Text.Json.Tests
             int segmentSize
         )
         {
-            Assert.ThrowsAny<JsonException>(
-                () =>
-                {
-                    ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(
-                        utf8BomAndValue,
-                        segmentSize
-                    );
-                    var json = new Utf8JsonReader(
-                        sequence,
-                        isFinalBlock: isFinalBlock,
-                        state: default
-                    );
-                    json.Read();
-                }
-            );
+            Assert.ThrowsAny<JsonException>(() =>
+            {
+                ReadOnlySequence<byte> sequence = JsonTestHelper.GetSequence(
+                    utf8BomAndValue,
+                    segmentSize
+                );
+                var json = new Utf8JsonReader(sequence, isFinalBlock: isFinalBlock, state: default);
+                json.Read();
+            });
         }
 
         [Fact]

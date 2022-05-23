@@ -24,12 +24,10 @@ namespace System.Net.Http.Tests
         public void Accept_AddInvalidValueUsingUnusualCasing_ParserRetrievedUsingCaseInsensitiveComparison()
         {
             // Use uppercase header name to make sure the parser gets retrieved using case-insensitive comparison.
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add("AcCePt", "this is invalid");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add("AcCePt", "this is invalid");
+            });
         }
 
         [Fact]
@@ -467,12 +465,10 @@ namespace System.Net.Http.Tests
                 "Header store should not contain a header 'Host' after setting it to null."
             );
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Host = "invalid host";
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Host = "invalid host";
+            });
         }
 
         [Fact]
@@ -1371,12 +1367,10 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Connection_AddInvalidValue_Throw()
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Connection.Add("this is invalid");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Connection.Add("this is invalid");
+            });
         }
 
         [Fact]
@@ -1937,66 +1931,46 @@ namespace System.Net.Http.Tests
             // Try adding content headers. Use different casing to make sure case-insensitive comparison
             // is used.
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Allow", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Encoding", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Language", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("content-length", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Location", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-MD5", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Content-Range", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("CONTENT-TYPE", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Expires", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.Add("Last-Modified", "v");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Allow", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Language", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("content-length", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Location", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-MD5", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Content-Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("CONTENT-TYPE", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Expires", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.Add("Last-Modified", "v");
+            });
         }
     }
 }

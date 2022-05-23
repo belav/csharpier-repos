@@ -245,13 +245,11 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.DependencyResolution
             using (
                 TestApp app = NetCoreAppBuilder
                     .PortableForNETCoreApp(SharedState.FrameworkReferenceApp)
-                    .WithProject(
-                        p =>
-                        {
-                            p.WithAssemblyGroup(null, g => g.WithMainAssembly());
-                            assetsCustomizer?.Invoke(p);
-                        }
-                    )
+                    .WithProject(p =>
+                    {
+                        p.WithAssemblyGroup(null, g => g.WithMainAssembly());
+                        assetsCustomizer?.Invoke(p);
+                    })
                     .WithCustomizer(appCustomizer)
                     .Build()
             )

@@ -21,13 +21,11 @@ internal static class CommandLineApplicationExtensions
         );
 
     public static void OnExecute(this CommandLineApplication app, Action action) =>
-        app.OnExecute(
-            () =>
-            {
-                action();
-                return 0;
-            }
-        );
+        app.OnExecute(() =>
+        {
+            action();
+            return 0;
+        });
 
     public static CommandOption Option(
         this CommandLineApplication command,

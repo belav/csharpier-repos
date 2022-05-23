@@ -205,14 +205,12 @@ namespace System.Net.Test.Common
 
             // Note, we assume there's no request body.
             // We'll close the connection after reading the request header and sending the response.
-            await AcceptConnectionAsync(
-                    async connection =>
-                    {
-                        lines = await connection
-                            .ReadRequestHeaderAndSendCustomResponseAsync(response)
-                            .ConfigureAwait(false);
-                    }
-                )
+            await AcceptConnectionAsync(async connection =>
+                {
+                    lines = await connection
+                        .ReadRequestHeaderAndSendCustomResponseAsync(response)
+                        .ConfigureAwait(false);
+                })
                 .ConfigureAwait(false);
 
             return lines;
@@ -226,14 +224,12 @@ namespace System.Net.Test.Common
 
             // Note, we assume there's no request body.
             // We'll close the connection after reading the request header and sending the response.
-            await AcceptConnectionAsync(
-                    async connection =>
-                    {
-                        lines = await connection
-                            .ReadRequestHeaderAndSendCustomResponseAsync(response)
-                            .ConfigureAwait(false);
-                    }
-                )
+            await AcceptConnectionAsync(async connection =>
+                {
+                    lines = await connection
+                        .ReadRequestHeaderAndSendCustomResponseAsync(response)
+                        .ConfigureAwait(false);
+                })
                 .ConfigureAwait(false);
 
             return lines;
@@ -249,18 +245,16 @@ namespace System.Net.Test.Common
 
             // Note, we assume there's no request body.
             // We'll close the connection after reading the request header and sending the response.
-            await AcceptConnectionAsync(
-                    async connection =>
-                    {
-                        lines = await connection
-                            .ReadRequestHeaderAndSendResponseAsync(
-                                statusCode,
-                                additionalHeaders + "Connection: close\r\n",
-                                content
-                            )
-                            .ConfigureAwait(false);
-                    }
-                )
+            await AcceptConnectionAsync(async connection =>
+                {
+                    lines = await connection
+                        .ReadRequestHeaderAndSendResponseAsync(
+                            statusCode,
+                            additionalHeaders + "Connection: close\r\n",
+                            content
+                        )
+                        .ConfigureAwait(false);
+                })
                 .ConfigureAwait(false);
 
             return lines;

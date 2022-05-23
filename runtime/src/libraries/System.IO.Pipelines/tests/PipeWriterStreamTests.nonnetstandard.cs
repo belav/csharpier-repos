@@ -116,18 +116,14 @@ namespace System.IO.Pipelines.Tests
             Assert.True(stream.CanWrite);
             Assert.False(stream.CanSeek);
             Assert.False(stream.CanRead);
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    long length = stream.Length;
-                }
-            );
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    long position = stream.Position;
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long length = stream.Length;
+            });
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                long position = stream.Position;
+            });
             Assert.Throws<NotSupportedException>(() => stream.Seek(0, SeekOrigin.Begin));
             Assert.Throws<NotSupportedException>(() => stream.Read(new byte[10], 0, 10));
             await Assert.ThrowsAsync<NotSupportedException>(

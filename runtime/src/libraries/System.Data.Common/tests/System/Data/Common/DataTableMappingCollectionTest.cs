@@ -68,13 +68,11 @@ namespace System.Data.Tests.Common
         [Fact]
         public void AddException1()
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    DataTableMappingCollection c = new DataTableMappingCollection();
-                    _tableMapCollection.Add(c);
-                }
-            );
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                DataTableMappingCollection c = new DataTableMappingCollection();
+                _tableMapCollection.Add(c);
+            });
         }
 
         [Fact]
@@ -245,17 +243,15 @@ namespace System.Data.Tests.Common
         [Fact]
         public void GetTableMappingBySchemaActionException1()
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    DataTableMappingCollection.GetTableMappingBySchemaAction(
-                        _tableMapCollection,
-                        "sourceCustomers",
-                        "dataSetCustomers",
-                        MissingMappingAction.Error
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataTableMappingCollection.GetTableMappingBySchemaAction(
+                    _tableMapCollection,
+                    "sourceCustomers",
+                    "dataSetCustomers",
+                    MissingMappingAction.Error
+                );
+            });
         }
 
         [Fact]
@@ -306,14 +302,12 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveException1()
         {
-            Assert.Throws<InvalidCastException>(
-                () =>
-                {
-                    string te = "testingdata";
-                    _tableMapCollection.AddRange(_tabs);
-                    _tableMapCollection.Remove(te);
-                }
-            );
+            Assert.Throws<InvalidCastException>(() =>
+            {
+                string te = "testingdata";
+                _tableMapCollection.AddRange(_tabs);
+                _tableMapCollection.Remove(te);
+            });
         }
 
         [Fact]
@@ -351,12 +345,10 @@ namespace System.Data.Tests.Common
         [Fact]
         public void RemoveAtException1()
         {
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    _tableMapCollection.RemoveAt(3);
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                _tableMapCollection.RemoveAt(3);
+            });
         }
 
         [Fact]

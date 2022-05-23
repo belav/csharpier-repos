@@ -10,12 +10,10 @@ class Program
     static int Main(string[] args)
     {
         ServiceCollection services = new ServiceCollection();
-        services.Configure<OptionsA>(
-            o =>
-            {
-                o.OptionValue = 99;
-            }
-        );
+        services.Configure<OptionsA>(o =>
+        {
+            o.OptionValue = 99;
+        });
         services.ConfigureOptions<OptionsAPostConfigure>();
         services
             .AddOptions<OptionsB>()

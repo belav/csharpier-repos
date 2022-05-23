@@ -37,62 +37,58 @@ namespace System.Net.Sockets.Tests
                 var receivedChecksums = new uint?[DatagramsToSend];
                 int receivedDatagrams = 0;
 
-                Task receiverTask = Task.Run(
-                    async () =>
+                Task receiverTask = Task.Run(async () =>
+                {
+                    for (; receivedDatagrams < DatagramsToSend; receivedDatagrams++)
                     {
-                        for (; receivedDatagrams < DatagramsToSend; receivedDatagrams++)
-                        {
-                            UdpReceiveResult result = await left.ReceiveAsync();
+                        UdpReceiveResult result = await left.ReceiveAsync();
 
-                            receiverAck.Set();
-                            Assert.True(senderAck.Wait(AckTimeout));
-                            senderAck.Reset();
+                        receiverAck.Set();
+                        Assert.True(senderAck.Wait(AckTimeout));
+                        senderAck.Reset();
 
-                            Assert.Equal(DatagramSize, result.Buffer.Length);
-                            Assert.Equal(rightEndpoint, result.RemoteEndPoint);
+                        Assert.Equal(DatagramSize, result.Buffer.Length);
+                        Assert.Equal(rightEndpoint, result.RemoteEndPoint);
 
-                            int datagramId = (int)result.Buffer[0];
-                            Assert.Null(receivedChecksums[datagramId]);
+                        int datagramId = (int)result.Buffer[0];
+                        Assert.Null(receivedChecksums[datagramId]);
 
-                            receivedChecksums[datagramId] = Fletcher32.Checksum(
-                                result.Buffer,
-                                0,
-                                result.Buffer.Length
-                            );
-                        }
+                        receivedChecksums[datagramId] = Fletcher32.Checksum(
+                            result.Buffer,
+                            0,
+                            result.Buffer.Length
+                        );
                     }
-                );
+                });
 
                 var sentChecksums = new uint[DatagramsToSend];
                 int sentDatagrams = 0;
 
-                Task senderTask = Task.Run(
-                    async () =>
+                Task senderTask = Task.Run(async () =>
+                {
+                    var random = new Random();
+                    var sendBuffer = new byte[DatagramSize];
+
+                    for (; sentDatagrams < DatagramsToSend; sentDatagrams++)
                     {
-                        var random = new Random();
-                        var sendBuffer = new byte[DatagramSize];
+                        random.NextBytes(sendBuffer);
+                        sendBuffer[0] = (byte)sentDatagrams;
 
-                        for (; sentDatagrams < DatagramsToSend; sentDatagrams++)
-                        {
-                            random.NextBytes(sendBuffer);
-                            sendBuffer[0] = (byte)sentDatagrams;
+                        int sent = useMemoryOverload
+                            ? await right.SendAsync(
+                                new ReadOnlyMemory<byte>(sendBuffer),
+                                leftEndpoint
+                            )
+                            : await right.SendAsync(sendBuffer, DatagramSize, leftEndpoint);
 
-                            int sent = useMemoryOverload
-                                ? await right.SendAsync(
-                                    new ReadOnlyMemory<byte>(sendBuffer),
-                                    leftEndpoint
-                                )
-                                : await right.SendAsync(sendBuffer, DatagramSize, leftEndpoint);
+                        Assert.True(receiverAck.Wait(AckTimeout));
+                        receiverAck.Reset();
+                        senderAck.Set();
 
-                            Assert.True(receiverAck.Wait(AckTimeout));
-                            receiverAck.Reset();
-                            senderAck.Set();
-
-                            Assert.Equal(DatagramSize, sent);
-                            sentChecksums[sentDatagrams] = Fletcher32.Checksum(sendBuffer, 0, sent);
-                        }
+                        Assert.Equal(DatagramSize, sent);
+                        sentChecksums[sentDatagrams] = Fletcher32.Checksum(sendBuffer, 0, sent);
                     }
-                );
+                });
 
                 await (new[] { receiverTask, senderTask }).WhenAllOrAnyFailed(TestTimeout);
                 for (int i = 0; i < DatagramsToSend; i++)

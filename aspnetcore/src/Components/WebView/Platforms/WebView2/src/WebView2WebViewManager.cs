@@ -51,13 +51,11 @@ namespace Microsoft.AspNetCore.Components.WebView.WebView2
         /// <inheritdoc />
         protected override void NavigateCore(Uri absoluteUri)
         {
-            _ = Dispatcher.InvokeAsync(
-                async () =>
-                {
-                    await _webviewReadyTask;
-                    _webview.Source = absoluteUri;
-                }
-            );
+            _ = Dispatcher.InvokeAsync(async () =>
+            {
+                await _webviewReadyTask;
+                _webview.Source = absoluteUri;
+            });
         }
 
         /// <inheritdoc />

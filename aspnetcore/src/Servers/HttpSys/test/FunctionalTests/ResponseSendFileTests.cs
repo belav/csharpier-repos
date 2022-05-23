@@ -742,21 +742,19 @@ public class ResponseSendFileTests
                         // before it throws an IOException, but there's a race depending on when the disconnect is noticed.
                         // Passing our own token to skip that.
                         using var cts = new CancellationTokenSource();
-                        await Assert.ThrowsAsync<IOException>(
-                            async () =>
+                        await Assert.ThrowsAsync<IOException>(async () =>
+                        {
+                            // It can take several tries before Send notices the disconnect.
+                            for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                // It can take several tries before Send notices the disconnect.
-                                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                                {
-                                    await httpContext.Response.SendFileAsync(
-                                        AbsoluteFilePath,
-                                        0,
-                                        null,
-                                        cts.Token
-                                    );
-                                }
+                                await httpContext.Response.SendFileAsync(
+                                    AbsoluteFilePath,
+                                    0,
+                                    null,
+                                    cts.Token
+                                );
                             }
-                        );
+                        });
 
                         await Assert.ThrowsAsync<ObjectDisposedException>(
                             () =>
@@ -879,21 +877,19 @@ public class ResponseSendFileTests
 
                     try
                     {
-                        await Assert.ThrowsAsync<IOException>(
-                            async () =>
+                        await Assert.ThrowsAsync<IOException>(async () =>
+                        {
+                            // It can take several tries before Write notices the disconnect.
+                            for (int i = 0; i < Utilities.WriteRetryLimit; i++)
                             {
-                                // It can take several tries before Write notices the disconnect.
-                                for (int i = 0; i < Utilities.WriteRetryLimit; i++)
-                                {
-                                    await httpContext.Response.SendFileAsync(
-                                        AbsoluteFilePath,
-                                        0,
-                                        null,
-                                        cts.Token
-                                    );
-                                }
+                                await httpContext.Response.SendFileAsync(
+                                    AbsoluteFilePath,
+                                    0,
+                                    null,
+                                    cts.Token
+                                );
                             }
-                        );
+                        });
 
                         testComplete.SetResult(0);
                     }

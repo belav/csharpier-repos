@@ -14,14 +14,12 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
         {
-            string generatedCode = context.BuildCodeString(
-                cw =>
-                {
-                    cw.WriteStartLambdaExpression(ItemParameterName);
-                    cw.WriteStartConstructor(context.Host.GeneratedClassContext.TemplateTypeName);
-                    cw.WriteStartLambdaDelegate(TemplateWriterName);
-                }
-            );
+            string generatedCode = context.BuildCodeString(cw =>
+            {
+                cw.WriteStartLambdaExpression(ItemParameterName);
+                cw.WriteStartConstructor(context.Host.GeneratedClassContext.TemplateTypeName);
+                cw.WriteStartLambdaDelegate(TemplateWriterName);
+            });
 
             context.MarkEndOfGeneratedCode();
             context.BufferStatementFragment(generatedCode);
@@ -33,14 +31,12 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
         {
-            string generatedCode = context.BuildCodeString(
-                cw =>
-                {
-                    cw.WriteEndLambdaDelegate();
-                    cw.WriteEndConstructor();
-                    cw.WriteEndLambdaExpression();
-                }
-            );
+            string generatedCode = context.BuildCodeString(cw =>
+            {
+                cw.WriteEndLambdaDelegate();
+                cw.WriteEndConstructor();
+                cw.WriteEndLambdaExpression();
+            });
 
             context.BufferStatementFragment(generatedCode);
             context.TargetWriterName = _oldTargetWriter;

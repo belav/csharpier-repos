@@ -12,12 +12,10 @@ public class VersionStartup
 {
     public void ConfigureServices(IServiceCollection services)
     {
-        services.AddSignalR(
-            options =>
-            {
-                options.EnableDetailedErrors = true;
-            }
-        );
+        services.AddSignalR(options =>
+        {
+            options.EnableDetailedErrors = true;
+        });
 
         services.RemoveAll<IHubProtocol>();
         services.TryAddEnumerable(
@@ -32,11 +30,9 @@ public class VersionStartup
         app.UseRouting();
         app.UseAuthentication();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapHub<VersionHub>("/version");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapHub<VersionHub>("/version");
+        });
     }
 }

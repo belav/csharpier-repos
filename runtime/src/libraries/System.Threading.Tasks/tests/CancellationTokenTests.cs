@@ -113,74 +113,60 @@ namespace System.Threading.Tasks.Tests
         public static void CancellationToken_EqualityAndDispose()
         {
             //hashcode.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    cts.Token.GetHashCode();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                cts.Token.GetHashCode();
+            });
 
             //x.Equals(y)
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    cts.Token.Equals(new CancellationToken());
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                cts.Token.Equals(new CancellationToken());
+            });
 
             //x.Equals(y)
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    new CancellationToken().Equals(cts.Token);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                new CancellationToken().Equals(cts.Token);
+            });
 
             //x==y
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    bool result = cts.Token == new CancellationToken();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                bool result = cts.Token == new CancellationToken();
+            });
 
             //x==y
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    bool result = new CancellationToken() == cts.Token;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                bool result = new CancellationToken() == cts.Token;
+            });
 
             //x!=y
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    bool result = cts.Token != new CancellationToken();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                bool result = cts.Token != new CancellationToken();
+            });
 
             //x!=y
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    CancellationTokenSource cts = new CancellationTokenSource();
-                    cts.Dispose();
-                    bool result = new CancellationToken() != cts.Token;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                CancellationTokenSource cts = new CancellationTokenSource();
+                cts.Dispose();
+                bool result = new CancellationToken() != cts.Token;
+            });
         }
 
         [Fact]
@@ -375,12 +361,10 @@ namespace System.Threading.Tasks.Tests
 
             CancellationToken token = tokenSource.Token;
 
-            Task.Run(
-                () =>
-                {
-                    tokenSource.Cancel(); //Signal
-                }
-            );
+            Task.Run(() =>
+            {
+                tokenSource.Cancel(); //Signal
+            });
 
             token.WaitHandle.WaitOne();
 
@@ -630,20 +614,13 @@ namespace System.Threading.Tasks.Tests
             ManualResetEvent mre = new ManualResetEvent(false);
             ManualResetEvent mre2 = new ManualResetEvent(false);
 
-            Task t = new Task(
-                () =>
-                {
-                    WaitHandle.WaitAll(
-                        new WaitHandle[]
-                        {
-                            tokenSource.Token.WaitHandle,
-                            signal2.Token.WaitHandle,
-                            mre
-                        }
-                    );
-                    mre2.Set();
-                }
-            );
+            Task t = new Task(() =>
+            {
+                WaitHandle.WaitAll(
+                    new WaitHandle[] { tokenSource.Token.WaitHandle, signal2.Token.WaitHandle, mre }
+                );
+                mre2.Set();
+            });
 
             t.Start();
             tokenSource.Cancel();
@@ -675,44 +652,38 @@ namespace System.Threading.Tasks.Tests
 
             // Main test body
             ArgumentException caughtException = null;
-            token.Register(
-                () =>
-                {
-                    throw new InvalidOperationException();
-                }
-            );
+            token.Register(() =>
+            {
+                throw new InvalidOperationException();
+            });
 
-            token.Register(
-                () =>
-                {
-                    throw new ArgumentException();
-                }
-            ); // !!NOTE: Due to LIFO ordering, this delegate should be the only one to run.
+            token.Register(() =>
+            {
+                throw new ArgumentException();
+            }); // !!NOTE: Due to LIFO ordering, this delegate should be the only one to run.
 
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        tokenSource.Cancel(true);
-                    }
-                    catch (ArgumentException ex)
-                    {
-                        caughtException = ex;
-                    }
-                    catch (Exception ex)
-                    {
-                        Assert.True(
-                            false,
-                            string.Format(
-                                "Cancel_ThrowOnFirstException:  The wrong exception type was thrown. ex="
-                                    + ex
-                            )
-                        );
-                    }
-                    mre_CancelHasBeenEnacted.Set();
+                    tokenSource.Cancel(true);
                 }
-            );
+                catch (ArgumentException ex)
+                {
+                    caughtException = ex;
+                }
+                catch (Exception ex)
+                {
+                    Assert.True(
+                        false,
+                        string.Format(
+                            "Cancel_ThrowOnFirstException:  The wrong exception type was thrown. ex="
+                                + ex
+                        )
+                    );
+                }
+                mre_CancelHasBeenEnacted.Set();
+            });
 
             mre_CancelHasBeenEnacted.WaitOne();
             Assert.NotNull(caughtException);
@@ -728,33 +699,27 @@ namespace System.Threading.Tasks.Tests
 
             // Main test body
             AggregateException caughtException = null;
-            token.Register(
-                () =>
-                {
-                    throw new ArgumentException();
-                }
-            );
-            token.Register(
-                () =>
-                {
-                    throw new InvalidOperationException();
-                }
-            );
+            token.Register(() =>
+            {
+                throw new ArgumentException();
+            });
+            token.Register(() =>
+            {
+                throw new InvalidOperationException();
+            });
 
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        tokenSource.Cancel(false);
-                    }
-                    catch (AggregateException ex)
-                    {
-                        caughtException = ex;
-                    }
-                    mre_CancelHasBeenEnacted.Set();
+                    tokenSource.Cancel(false);
                 }
-            );
+                catch (AggregateException ex)
+                {
+                    caughtException = ex;
+                }
+                mre_CancelHasBeenEnacted.Set();
+            });
 
             mre_CancelHasBeenEnacted.WaitOne();
             Assert.NotNull(caughtException);
@@ -918,12 +883,10 @@ namespace System.Threading.Tasks.Tests
             );
             Exception caughtException = null;
 
-            cts2.Token.Register(
-                () =>
-                {
-                    throw new ObjectDisposedException("myException");
-                }
-            );
+            cts2.Token.Register(() =>
+            {
+                throw new ObjectDisposedException("myException");
+            });
 
             try
             {
@@ -987,12 +950,10 @@ namespace System.Threading.Tasks.Tests
             CancellationToken ct = cts.Token;
 
             CancellationTokenRegistration ctr1 = ct.Register(() => { });
-            ct.Register(
-                () =>
-                {
-                    ctr1.Dispose();
-                }
-            );
+            ct.Register(() =>
+            {
+                ctr1.Dispose();
+            });
 
             cts.Cancel();
             Debug.WriteLine("  - Completed OK.");
@@ -1192,26 +1153,24 @@ namespace System.Threading.Tasks.Tests
                 // results in Dispose(false) getting called, we'll catch the issue.
                 GC.Collect();
                 GC.WaitForPendingFinalizers();
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        // Accessing the Token property should throw an ObjectDisposedException
-                        if (c.Token.CanBeCanceled)
-                            Assert.True(
-                                false,
-                                string.Format(
-                                    "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
-                                )
-                            );
-                        else
-                            Assert.True(
-                                false,
-                                string.Format(
-                                    "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
-                                )
-                            );
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    // Accessing the Token property should throw an ObjectDisposedException
+                    if (c.Token.CanBeCanceled)
+                        Assert.True(
+                            false,
+                            string.Format(
+                                "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
+                            )
+                        );
+                    else
+                        Assert.True(
+                            false,
+                            string.Format(
+                                "DerivedCancellationTokenSource: Accessing the Token property should throw an ObjectDisposedException, but it did not."
+                            )
+                        );
+                });
             }
         }
 
@@ -1291,36 +1250,28 @@ namespace System.Threading.Tasks.Tests
             TimeSpan bigTimeSpan = TimeSpan.FromMilliseconds(uint.MaxValue);
             TimeSpan reasonableTimeSpan = new TimeSpan(0, 0, 1);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new CancellationTokenSource(-2);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new CancellationTokenSource(bigTimeSpan);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new CancellationTokenSource(-2);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new CancellationTokenSource(bigTimeSpan);
+            });
 
             var cts = new CancellationTokenSource(TimeSpan.FromMilliseconds(uint.MaxValue - 1));
             Assert.False(cts.IsCancellationRequested);
             cts.Dispose();
 
             cts = new CancellationTokenSource();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    cts.CancelAfter(-2);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    cts.CancelAfter(bigTimeSpan);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                cts.CancelAfter(-2);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                cts.CancelAfter(bigTimeSpan);
+            });
 
             cts = new CancellationTokenSource();
             cts.CancelAfter(TimeSpan.FromMilliseconds(uint.MaxValue - 1));
@@ -1328,18 +1279,14 @@ namespace System.Threading.Tasks.Tests
             cts.Dispose();
 
             cts.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    cts.CancelAfter(1);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    cts.CancelAfter(reasonableTimeSpan);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                cts.CancelAfter(1);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                cts.CancelAfter(reasonableTimeSpan);
+            });
         }
 
         [Fact]
@@ -1413,13 +1360,11 @@ namespace System.Threading.Tasks.Tests
             // the testSyncContext will track that it was used when the delegate is invoked.
             token.Register(() => { }, true);
 
-            Task.Run(
-                () =>
-                {
-                    tokenSource.Cancel();
-                    mre_CancelHasBeenEnacted.Set();
-                }
-            );
+            Task.Run(() =>
+            {
+                tokenSource.Cancel();
+                mre_CancelHasBeenEnacted.Set();
+            });
 
             mre_CancelHasBeenEnacted.WaitOne();
             Assert.True(
@@ -1457,20 +1402,18 @@ namespace System.Threading.Tasks.Tests
                 true
             );
 
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        tokenSource.Cancel();
-                    }
-                    catch (AggregateException ex)
-                    {
-                        caughtException = ex;
-                    }
-                    mre_CancelHasBeenEnacted.Set();
+                    tokenSource.Cancel();
                 }
-            );
+                catch (AggregateException ex)
+                {
+                    caughtException = ex;
+                }
+                mre_CancelHasBeenEnacted.Set();
+            });
 
             mre_CancelHasBeenEnacted.WaitOne();
             Assert.True(
@@ -1514,20 +1457,18 @@ namespace System.Threading.Tasks.Tests
                 true
             );
 
-            Task.Run(
-                () =>
+            Task.Run(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        tokenSource.Cancel(true);
-                    }
-                    catch (ArgumentException ex)
-                    {
-                        caughtException = ex;
-                    }
-                    mre_CancelHasBeenEnacted.Set();
+                    tokenSource.Cancel(true);
                 }
-            );
+                catch (ArgumentException ex)
+                {
+                    caughtException = ex;
+                }
+                mre_CancelHasBeenEnacted.Set();
+            });
 
             mre_CancelHasBeenEnacted.WaitOne();
             Assert.True(
@@ -1670,13 +1611,11 @@ namespace System.Threading.Tasks.Tests
             bool ctr1Invoked = false;
             CancellationTokenRegistration ctr1 = cts.Token.Register(() => ctr1Invoked = true);
 
-            CancellationTokenRegistration ctr2 = cts.Token.Register(
-                () =>
-                {
-                    ctr2running.Set();
-                    ctr2blocked.Wait();
-                }
-            );
+            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
+            {
+                ctr2running.Set();
+                ctr2blocked.Wait();
+            });
 
             // Cancel.  This will trigger ctr2 to run, then ctr1, then ctr0.
             Task.Run(() => cts.Cancel());
@@ -1745,13 +1684,11 @@ namespace System.Threading.Tasks.Tests
             using (var barrier = new Barrier(2))
             {
                 var cts = new CancellationTokenSource();
-                CancellationTokenRegistration ctr = cts.Token.Register(
-                    () =>
-                    {
-                        barrier.SignalAndWait();
-                        barrier.SignalAndWait();
-                    }
-                );
+                CancellationTokenRegistration ctr = cts.Token.Register(() =>
+                {
+                    barrier.SignalAndWait();
+                    barrier.SignalAndWait();
+                });
 
                 Task.Run(() => cts.Cancel());
 
@@ -1776,13 +1713,11 @@ namespace System.Threading.Tasks.Tests
             bool ctr1Invoked = false;
             CancellationTokenRegistration ctr1 = cts.Token.Register(() => ctr1Invoked = true);
 
-            CancellationTokenRegistration ctr2 = cts.Token.Register(
-                () =>
-                {
-                    ctr2running.Set();
-                    ctr2blocked.Wait();
-                }
-            );
+            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
+            {
+                ctr2running.Set();
+                ctr2blocked.Wait();
+            });
 
             // Cancel.  This will trigger ctr2 to run, then ctr1, then ctr0.
             Task.Run(() => cts.Cancel());
@@ -1870,40 +1805,36 @@ namespace System.Threading.Tasks.Tests
             DateTime end = DateTime.UtcNow.AddSeconds(4);
             bool run = true;
             Task.WaitAll(
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    try
                     {
-                        try
+                        while (Volatile.Read(ref run) && DateTime.UtcNow < end)
                         {
-                            while (Volatile.Read(ref run) && DateTime.UtcNow < end)
-                            {
-                                reg = cts.Token.Register(() => { });
-                                reg.Unregister();
-                                reg = default;
-                            }
-                        }
-                        finally
-                        {
-                            Volatile.Write(ref run, false);
+                            reg = cts.Token.Register(() => { });
+                            reg.Unregister();
+                            reg = default;
                         }
                     }
-                ),
-                Task.Run(
-                    () =>
+                    finally
                     {
-                        try
+                        Volatile.Write(ref run, false);
+                    }
+                }),
+                Task.Run(() =>
+                {
+                    try
+                    {
+                        while (Volatile.Read(ref run) && DateTime.UtcNow < end)
                         {
-                            while (Volatile.Read(ref run) && DateTime.UtcNow < end)
-                            {
-                                reg.Unregister();
-                            }
-                        }
-                        finally
-                        {
-                            Volatile.Write(ref run, false);
+                            reg.Unregister();
                         }
                     }
-                )
+                    finally
+                    {
+                        Volatile.Write(ref run, false);
+                    }
+                })
             );
 
             // Validating that no exception is thrown.
@@ -1994,13 +1925,11 @@ namespace System.Threading.Tasks.Tests
             using (var barrier = new Barrier(2))
             {
                 var cts = new CancellationTokenSource();
-                CancellationTokenRegistration ctr = cts.Token.Register(
-                    () =>
-                    {
-                        barrier.SignalAndWait();
-                        barrier.SignalAndWait();
-                    }
-                );
+                CancellationTokenRegistration ctr = cts.Token.Register(() =>
+                {
+                    barrier.SignalAndWait();
+                    barrier.SignalAndWait();
+                });
 
                 Task ignored = Task.Run(() => cts.Cancel());
 
@@ -2027,13 +1956,11 @@ namespace System.Threading.Tasks.Tests
             bool ctr1Invoked = false;
             CancellationTokenRegistration ctr1 = cts.Token.Register(() => ctr1Invoked = true);
 
-            CancellationTokenRegistration ctr2 = cts.Token.Register(
-                () =>
-                {
-                    ctr2running.Set();
-                    ctr2blocked.Wait();
-                }
-            );
+            CancellationTokenRegistration ctr2 = cts.Token.Register(() =>
+            {
+                ctr2running.Set();
+                ctr2blocked.Wait();
+            });
 
             // Cancel.  This will trigger ctr2 to run, then ctr1, then ctr0.
             Task ignored = Task.Run(() => cts.Cancel());

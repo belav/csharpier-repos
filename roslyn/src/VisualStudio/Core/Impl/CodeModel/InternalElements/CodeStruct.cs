@@ -88,19 +88,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddClass(
-                        LookupNode(),
-                        name,
-                        position,
-                        bases,
-                        implementedInterfaces,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddClass(
+                    LookupNode(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeDelegate AddDelegate(
@@ -110,12 +108,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddDelegate(LookupNode(), name, type, position, access);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddDelegate(LookupNode(), name, type, position, access);
+            });
         }
 
         public EnvDTE.CodeEnum AddEnum(
@@ -125,12 +121,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddEnum(LookupNode(), name, position, bases, access);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddEnum(LookupNode(), name, position, bases, access);
+            });
         }
 
         public EnvDTE80.CodeEvent AddEvent(
@@ -141,19 +135,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddEvent(
-                        LookupNode(),
-                        name,
-                        fullDelegateName,
-                        createPropertyStyleEvent,
-                        position,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddEvent(
+                    LookupNode(),
+                    name,
+                    fullDelegateName,
+                    createPropertyStyleEvent,
+                    position,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeFunction AddFunction(
@@ -165,19 +157,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object location
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddFunction(
-                        LookupNode(),
-                        name,
-                        kind,
-                        type,
-                        position,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddFunction(LookupNode(), name, kind, type, position, access);
+            });
         }
 
         public EnvDTE.CodeProperty AddProperty(
@@ -189,19 +172,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object location
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddProperty(
-                        LookupNode(),
-                        getterName,
-                        putterName,
-                        type,
-                        position,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddProperty(
+                    LookupNode(),
+                    getterName,
+                    putterName,
+                    type,
+                    position,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeStruct AddStruct(
@@ -212,19 +193,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddStruct(
-                        LookupNode(),
-                        name,
-                        position,
-                        bases,
-                        implementedInterfaces,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddStruct(
+                    LookupNode(),
+                    name,
+                    position,
+                    bases,
+                    implementedInterfaces,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeVariable AddVariable(
@@ -235,12 +214,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object location
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddVariable(LookupNode(), name, type, position, access);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddVariable(LookupNode(), name, type, position, access);
+            });
         }
     }
 }

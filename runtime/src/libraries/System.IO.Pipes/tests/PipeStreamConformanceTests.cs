@@ -327,12 +327,10 @@ namespace System.IO.Pipes.Tests
                         () => server.Write(buffer, 0, buffer.Length)
                     );
                     Assert.Throws<InvalidOperationException>(() => server.WriteByte(5));
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            server.WriteAsync(buffer, 0, buffer.Length);
-                        }
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        server.WriteAsync(buffer, 0, buffer.Length);
+                    });
                 }
                 else
                 {
@@ -340,12 +338,10 @@ namespace System.IO.Pipes.Tests
                         () => server.Read(buffer, 0, buffer.Length)
                     );
                     Assert.Throws<InvalidOperationException>(() => server.ReadByte());
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            server.ReadAsync(buffer, 0, buffer.Length);
-                        }
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        server.ReadAsync(buffer, 0, buffer.Length);
+                    });
                 }
             }
 
@@ -379,12 +375,10 @@ namespace System.IO.Pipes.Tests
                         // Pipe is broken
                         Assert.Throws<IOException>(() => client.Write(buffer, 0, buffer.Length));
                         Assert.Throws<IOException>(() => client.WriteByte(5));
-                        Assert.Throws<IOException>(
-                            () =>
-                            {
-                                client.WriteAsync(buffer, 0, buffer.Length);
-                            }
-                        );
+                        Assert.Throws<IOException>(() =>
+                        {
+                            client.WriteAsync(buffer, 0, buffer.Length);
+                        });
                         Assert.Throws<IOException>(() => client.Flush());
                         Assert.Throws<IOException>(() => client.NumberOfServerInstances);
                     }
@@ -458,12 +452,10 @@ namespace System.IO.Pipes.Tests
                         () => server.Write(buffer, 0, buffer.Length)
                     );
                     Assert.Throws<InvalidOperationException>(() => server.WriteByte(5));
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            server.WriteAsync(buffer, 0, buffer.Length);
-                        }
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        server.WriteAsync(buffer, 0, buffer.Length);
+                    });
                 }
                 else
                 {
@@ -473,12 +465,10 @@ namespace System.IO.Pipes.Tests
                         () => server.Read(buffer, 0, buffer.Length)
                     );
                     Assert.Throws<InvalidOperationException>(() => server.ReadByte());
-                    Assert.Throws<InvalidOperationException>(
-                        () =>
-                        {
-                            server.ReadAsync(buffer, 0, buffer.Length);
-                        }
-                    );
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        server.ReadAsync(buffer, 0, buffer.Length);
+                    });
                 }
             }
 
@@ -501,12 +491,10 @@ namespace System.IO.Pipes.Tests
                     () => client.Read(buffer, 0, buffer.Length)
                 );
                 Assert.Throws<InvalidOperationException>(() => client.ReadByte());
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        client.ReadAsync(buffer, 0, buffer.Length);
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    client.ReadAsync(buffer, 0, buffer.Length);
+                });
                 Assert.Throws<InvalidOperationException>(() => client.ReadMode);
                 Assert.Throws<InvalidOperationException>(
                     () => client.ReadMode = PipeTransmissionMode.Byte
@@ -519,12 +507,10 @@ namespace System.IO.Pipes.Tests
                     () => client.Write(buffer, 0, buffer.Length)
                 );
                 Assert.Throws<InvalidOperationException>(() => client.WriteByte(5));
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        client.WriteAsync(buffer, 0, buffer.Length);
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    client.WriteAsync(buffer, 0, buffer.Length);
+                });
             }
 
             Assert.Throws<InvalidOperationException>(() => client.NumberOfServerInstances);

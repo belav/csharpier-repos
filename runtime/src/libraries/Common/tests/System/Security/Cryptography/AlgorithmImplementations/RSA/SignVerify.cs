@@ -225,13 +225,11 @@ namespace System.Security.Cryptography.Rsa.Tests
             Assert.Throws<ObjectDisposedException>(() => VerifyHash(rsa, sig, data, alg, padding));
 
             // Either set_KeySize or SignData should throw.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    rsa.KeySize = 1024 + 64;
-                    SignData(rsa, data, alg, padding);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                rsa.KeySize = 1024 + 64;
+                SignData(rsa, data, alg, padding);
+            });
         }
 
         [Fact]

@@ -1408,27 +1408,23 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                         declaredSymbol,
                         executableCodeBlocks,
                         (codeBlocks) =>
-                            codeBlocks.SelectMany(
-                                cb =>
-                                {
-                                    var filter = semanticModel.GetSyntaxNodesToAnalyzeFilter(
-                                        cb,
-                                        declaredSymbol
-                                    );
+                            codeBlocks.SelectMany(cb =>
+                            {
+                                var filter = semanticModel.GetSyntaxNodesToAnalyzeFilter(
+                                    cb,
+                                    declaredSymbol
+                                );
 
-                                    if (filter is object)
-                                    {
-                                        return cb.DescendantNodesAndSelf(
-                                                descendIntoChildren: filter
-                                            )
-                                            .Where(filter);
-                                    }
-                                    else
-                                    {
-                                        return cb.DescendantNodesAndSelf();
-                                    }
+                                if (filter is object)
+                                {
+                                    return cb.DescendantNodesAndSelf(descendIntoChildren: filter)
+                                        .Where(filter);
                                 }
-                            ),
+                                else
+                                {
+                                    return cb.DescendantNodesAndSelf();
+                                }
+                            }),
                         semanticModel,
                         getKind,
                         analyzerState?.CodeBlockAnalysisState,

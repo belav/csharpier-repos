@@ -60,55 +60,51 @@ public partial class StartupAnalyzer : DiagnosticAnalyzer
                 var options = new OptionsAnalyzer(builder);
                 var middleware = new MiddlewareAnalyzer(builder);
 
-                context.RegisterOperationBlockStartAction(
-                    context =>
+                context.RegisterOperationBlockStartAction(context =>
+                {
+                    if (context.OwningSymbol.Kind != SymbolKind.Method)
                     {
-                        if (context.OwningSymbol.Kind != SymbolKind.Method)
-                        {
-                            return;
-                        }
-
-                        var method = (IMethodSymbol)context.OwningSymbol;
-                        var isConfigureServices = StartupFacts.IsConfigureServices(symbols, method);
-                        if (isConfigureServices)
-                        {
-                            OnConfigureServicesMethodFound(method);
-                        }
-
-                        // In the future we can consider looking at more methods, but for now limit to Main, implicit Main, and Configure* methods
-                        var isMain = SymbolEqualityComparer.Default.Equals(
-                            entryPoint,
-                            context.OwningSymbol
-                        );
-
-                        if (isConfigureServices || isMain)
-                        {
-                            services.AnalyzeConfigureServices(context);
-                            options.AnalyzeConfigureServices(context);
-                        }
-
-                        var isConfigure = StartupFacts.IsConfigure(symbols, method);
-                        if (isConfigure)
-                        {
-                            OnConfigureMethodFound(method);
-                        }
-                        if (isConfigure || isMain)
-                        {
-                            middleware.AnalyzeConfigureMethod(context);
-                        }
+                        return;
                     }
-                );
+
+                    var method = (IMethodSymbol)context.OwningSymbol;
+                    var isConfigureServices = StartupFacts.IsConfigureServices(symbols, method);
+                    if (isConfigureServices)
+                    {
+                        OnConfigureServicesMethodFound(method);
+                    }
+
+                    // In the future we can consider looking at more methods, but for now limit to Main, implicit Main, and Configure* methods
+                    var isMain = SymbolEqualityComparer.Default.Equals(
+                        entryPoint,
+                        context.OwningSymbol
+                    );
+
+                    if (isConfigureServices || isMain)
+                    {
+                        services.AnalyzeConfigureServices(context);
+                        options.AnalyzeConfigureServices(context);
+                    }
+
+                    var isConfigure = StartupFacts.IsConfigure(symbols, method);
+                    if (isConfigure)
+                    {
+                        OnConfigureMethodFound(method);
+                    }
+                    if (isConfigure || isMain)
+                    {
+                        middleware.AnalyzeConfigureMethod(context);
+                    }
+                });
 
                 // Run after analyses have had a chance to finish to add diagnostics.
-                context.RegisterSymbolEndAction(
-                    context =>
-                    {
-                        var analysis = builder.Build();
-                        new UseMvcAnalyzer(analysis).AnalyzeSymbol(context);
-                        new BuildServiceProviderAnalyzer(analysis).AnalyzeSymbol(context);
-                        new UseAuthorizationAnalyzer(analysis).AnalyzeSymbol(context);
-                    }
-                );
+                context.RegisterSymbolEndAction(context =>
+                {
+                    var analysis = builder.Build();
+                    new UseMvcAnalyzer(analysis).AnalyzeSymbol(context);
+                    new BuildServiceProviderAnalyzer(analysis).AnalyzeSymbol(context);
+                    new UseAuthorizationAnalyzer(analysis).AnalyzeSymbol(context);
+                });
             },
             SymbolKind.NamedType
         );

@@ -154,13 +154,11 @@ class Driver
             {
                 var task = available_tests[generatorIdx++ % available_tests.Length].Item1;
                 int steps = rand.Next(minTpSteps, maxTpSteps);
-                ThreadPool.QueueUserWorkItem(
-                    _ =>
-                    {
-                        task(steps);
-                        Interlocked.Decrement(ref pendingJobs);
-                    }
-                );
+                ThreadPool.QueueUserWorkItem(_ =>
+                {
+                    task(steps);
+                    Interlocked.Decrement(ref pendingJobs);
+                });
                 Interlocked.Increment(ref pendingJobs);
             }
             Thread.Sleep(1);

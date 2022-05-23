@@ -36,24 +36,18 @@ namespace System.Net.Http.Tests
                     new ViaHeaderValue("", "host");
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("x y", "h");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("x ", "h");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue(" x", "h");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("x y", "h");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("x ", "h");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue(" x", "h");
+            });
             AssertExtensions.Throws<ArgumentException>(
                 "receivedBy",
                 () =>
@@ -68,24 +62,18 @@ namespace System.Net.Http.Tests
                     new ViaHeaderValue("1.1", "");
                 }
             );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "x y");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "x ");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", " x");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "x y");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "x ");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", " x");
+            });
         }
 
         [Fact]
@@ -97,24 +85,18 @@ namespace System.Net.Http.Tests
             Assert.Equal("HTTP", via.ProtocolName);
             Assert.Null(via.Comment);
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "h", "x y");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "h", "x ");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "h", " x");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "h", "x y");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "h", "x ");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "h", " x");
+            });
         }
 
         [Fact]
@@ -126,18 +108,14 @@ namespace System.Net.Http.Tests
             Assert.Equal("HTTP", via.ProtocolName);
             Assert.Equal("(comment)", via.Comment);
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "h", "p", "(x");
-                }
-            );
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new ViaHeaderValue("v", "h", "p", "x)");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "h", "p", "(x");
+            });
+            Assert.Throws<FormatException>(() =>
+            {
+                new ViaHeaderValue("v", "h", "p", "x)");
+            });
         }
 
         [Fact]
@@ -368,12 +346,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    ViaHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                ViaHeaderValue.Parse(input);
+            });
 
             Assert.False(ViaHeaderValue.TryParse(input, out ViaHeaderValue result));
             Assert.Null(result);

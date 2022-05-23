@@ -442,12 +442,10 @@ namespace System.IO.Ports.Tests
 
         private void VerifyLongTimeout(WriteMethodDelegate writeMethod, SerialPort com1)
         {
-            var t = new Task(
-                () =>
-                {
-                    writeMethod(com1.BaseStream);
-                }
-            );
+            var t = new Task(() =>
+            {
+                writeMethod(com1.BaseStream);
+            });
 
             t.Start();
             Thread.Sleep(DEFAULT_WAIT_LONG_TIMEOUT);

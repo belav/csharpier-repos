@@ -29,19 +29,17 @@ namespace System.Threading.Tasks.Sources.Tests
         {
             var vts = new ManualResetValueTaskSource<T>();
             Task.Delay(delayMs)
-                .ContinueWith(
-                    _ =>
+                .ContinueWith(_ =>
+                {
+                    if (error != null)
                     {
-                        if (error != null)
-                        {
-                            vts.SetException(error);
-                        }
-                        else
-                        {
-                            vts.SetResult(result);
-                        }
+                        vts.SetException(error);
                     }
-                );
+                    else
+                    {
+                        vts.SetResult(result);
+                    }
+                });
             return vts;
         }
     }

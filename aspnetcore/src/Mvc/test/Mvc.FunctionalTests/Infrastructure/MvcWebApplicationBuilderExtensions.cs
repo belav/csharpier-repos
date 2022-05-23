@@ -36,17 +36,13 @@ public static class MvcWebApplicationBuilderExtensions
             throw new ArgumentNullException(nameof(uiCulture));
         }
 
-        builder.ConfigureServices(
-            services =>
-            {
-                services.TryAddSingleton(
-                    new TestCulture { Culture = culture, UICulture = uiCulture }
-                );
-                services.TryAddEnumerable(
-                    ServiceDescriptor.Singleton<IStartupFilter, CultureReplacerStartupFilter>()
-                );
-            }
-        );
+        builder.ConfigureServices(services =>
+        {
+            services.TryAddSingleton(new TestCulture { Culture = culture, UICulture = uiCulture });
+            services.TryAddEnumerable(
+                ServiceDescriptor.Singleton<IStartupFilter, CultureReplacerStartupFilter>()
+            );
+        });
 
         return builder;
     }

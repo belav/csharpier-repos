@@ -45,12 +45,10 @@ namespace System.Net.Http
             HttpContent content = new StringContent(String.Empty);
             HttpContentHeaders headers = FormattingUtilities.CreateEmptyContentHeaders();
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    provider.GetStream(content, headers);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                provider.GetStream(content, headers);
+            });
         }
 
         [Fact]

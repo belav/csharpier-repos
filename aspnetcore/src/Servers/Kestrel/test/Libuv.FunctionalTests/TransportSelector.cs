@@ -16,19 +16,14 @@ namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests
         )
         {
 #pragma warning disable CS0618
-            return new HostBuilder().ConfigureWebHost(
-                webHostBuilder =>
+            return new HostBuilder().ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseLibuv(options =>
                 {
-                    webHostBuilder.UseLibuv(
-                        options =>
-                        {
-                            options.MemoryPoolFactory =
-                                memoryPoolFactory ?? options.MemoryPoolFactory;
-                            options.MaxReadBufferSize = maxReadBufferSize;
-                        }
-                    );
-                }
-            );
+                    options.MemoryPoolFactory = memoryPoolFactory ?? options.MemoryPoolFactory;
+                    options.MaxReadBufferSize = maxReadBufferSize;
+                });
+            });
 #pragma warning restore CS0618
         }
     }

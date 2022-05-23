@@ -71,41 +71,37 @@ namespace System.Transactions.Tests
         [Fact]
         public void Vol1_Dur0_Fail2()
         {
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                IntResourceManager irm = new IntResourceManager(1);
+
+                irm.FailPrepare = true;
+
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    IntResourceManager irm = new IntResourceManager(1);
+                    irm.Value = 2;
 
-                    irm.FailPrepare = true;
-
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        irm.Value = 2;
-
-                        scope.Complete();
-                    }
+                    scope.Complete();
                 }
-            );
+            });
         }
 
         [Fact]
         public void Vol1_Dur0_Fail3()
         {
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                IntResourceManager irm = new IntResourceManager(1);
+                irm.UseSingle = true;
+                irm.FailSPC = true;
+
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    IntResourceManager irm = new IntResourceManager(1);
-                    irm.UseSingle = true;
-                    irm.FailSPC = true;
+                    irm.Value = 2;
 
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        irm.Value = 2;
-
-                        scope.Complete();
-                    }
+                    scope.Complete();
                 }
-            );
+            });
         }
 
         #endregion
@@ -186,17 +182,15 @@ namespace System.Transactions.Tests
             irm.Type = ResourceManagerType.Durable;
             irm.FailSPC = true;
             irm.UseSingle = true;
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        irm.Value = 2;
+                    irm.Value = 2;
 
-                        scope.Complete();
-                    }
+                    scope.Complete();
                 }
-            );
+            });
             irm.Check(1, 0, 0, 0, 0, 0, 0, "irm");
         }
         #endregion
@@ -253,20 +247,18 @@ namespace System.Transactions.Tests
 
             /* Durable RM irm[0] does Abort on SPC, so
              * all volatile RMs get Rollback */
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        irm[0].Value = 2;
-                        irm[1].Value = 6;
-                        irm[2].Value = 10;
-                        irm[3].Value = 14;
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
+                    irm[2].Value = 10;
+                    irm[3].Value = 14;
 
-                        scope.Complete();
-                    }
+                    scope.Complete();
                 }
-            );
+            });
             irm[0].CheckSPC("irm [0]");
             /* Volatile RMs get 2PC Prepare, and then get rolled back */
             for (int i = 1; i < 4; i++)
@@ -293,20 +285,18 @@ namespace System.Transactions.Tests
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        irm[0].Value = 2;
-                        irm[1].Value = 6;
-                        irm[2].Value = 10;
-                        irm[3].Value = 14;
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
+                    irm[2].Value = 10;
+                    irm[3].Value = 14;
 
-                        scope.Complete();
-                    }
+                    scope.Complete();
                 }
-            );
+            });
             irm[0].Check(0, 0, 0, 1, 0, 0, 0, "irm [0]");
 
             /* irm [1] & [2] get prepare,
@@ -334,18 +324,16 @@ namespace System.Transactions.Tests
 
             /* Durable RM irm[2] does on SPC, so
              * all volatile RMs get Rollback */
-            TransactionAbortedException e = Assert.Throws<TransactionAbortedException>(
-                () =>
+            TransactionAbortedException e = Assert.Throws<TransactionAbortedException>(() =>
+            {
+                using (TransactionScope scope = new TransactionScope())
                 {
-                    using (TransactionScope scope = new TransactionScope())
-                    {
-                        irm[0].Value = 2;
-                        irm[1].Value = 6;
+                    irm[0].Value = 2;
+                    irm[1].Value = 6;
 
-                        scope.Complete();
-                    }
+                    scope.Complete();
                 }
-            );
+            });
             Assert.IsType<NotSupportedException>(e.InnerException);
 
             irm[0].Check(1, 0, 0, 0, 0, 0, 0, "irm [0]");

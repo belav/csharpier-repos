@@ -48,29 +48,24 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<FlowChart, FlowChartModel>();
-                    cfg.CreateMap<FlowNode, FlowNodeModel>()
-                        .Include<FlowStep, FlowNodeModel>()
-                        .Include<FlowDecision, FlowNodeModel>()
-                        .Include(typeof(FlowSwitch<>), typeof(FlowNodeModel))
-                        .ForMember(d => d.Connections, o => o.Ignore());
-                    cfg.CreateMap<FlowStep, FlowNodeModel>()
-                        .ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.Next }));
-                    cfg.CreateMap<FlowDecision, FlowNodeModel>()
-                        .ForMember(
-                            d => d.Connections,
-                            o => o.MapFrom(s => new[] { s.True, s.False })
-                        );
-                    cfg.CreateMap(typeof(FlowSwitch<>), typeof(FlowNodeModel));
-                    cfg.CreateMap<FlowNode, Connection>()
-                        .ForMember(d => d.Node, o => o.MapFrom(s => s));
-                    cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Connection))
-                        .ForMember("Node", o => o.MapFrom("Key"));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FlowChart, FlowChartModel>();
+                cfg.CreateMap<FlowNode, FlowNodeModel>()
+                    .Include<FlowStep, FlowNodeModel>()
+                    .Include<FlowDecision, FlowNodeModel>()
+                    .Include(typeof(FlowSwitch<>), typeof(FlowNodeModel))
+                    .ForMember(d => d.Connections, o => o.Ignore());
+                cfg.CreateMap<FlowStep, FlowNodeModel>()
+                    .ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.Next }));
+                cfg.CreateMap<FlowDecision, FlowNodeModel>()
+                    .ForMember(d => d.Connections, o => o.MapFrom(s => new[] { s.True, s.False }));
+                cfg.CreateMap(typeof(FlowSwitch<>), typeof(FlowNodeModel));
+                cfg.CreateMap<FlowNode, Connection>()
+                    .ForMember(d => d.Node, o => o.MapFrom(s => s));
+                cfg.CreateMap(typeof(KeyValuePair<,>), typeof(Connection))
+                    .ForMember("Node", o => o.MapFrom("Key"));
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -124,19 +119,17 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(CDataTypeModel<>), typeof(CDataTypeDTO<>)).ReverseMap();
-                    cfg.CreateMap(typeof(CFieldDefinitionModel<>), typeof(CFieldDefinitionDTO<>))
-                        .ReverseMap();
-                    cfg.CreateMap(
-                            typeof(CComponentDefinitionModel<>),
-                            typeof(CComponentDefinitionDTO<>)
-                        )
-                        .ReverseMap();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(CDataTypeModel<>), typeof(CDataTypeDTO<>)).ReverseMap();
+                cfg.CreateMap(typeof(CFieldDefinitionModel<>), typeof(CFieldDefinitionDTO<>))
+                    .ReverseMap();
+                cfg.CreateMap(
+                        typeof(CComponentDefinitionModel<>),
+                        typeof(CComponentDefinitionDTO<>)
+                    )
+                    .ReverseMap();
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -204,15 +197,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<InnerSource, InnerDestination>();
-                    cfg.CreateMap<OtherInnerSource, OtherInnerDestination>();
-                    cfg.CreateMap<Item, Item>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<InnerSource, InnerDestination>();
+                cfg.CreateMap<OtherInnerSource, OtherInnerDestination>();
+                cfg.CreateMap<Item, Item>();
+            });
 
         [Fact]
         public void Should_not_set_preserve_references()
@@ -268,14 +259,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Article, ArticleViewModel>();
-                    cfg.CreateMap<Supplier, SupplierViewModel>();
-                    cfg.CreateMap<Contact, ContactViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Article, ArticleViewModel>();
+                cfg.CreateMap<Supplier, SupplierViewModel>();
+                cfg.CreateMap<Contact, ContactViewModel>();
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -335,15 +324,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Article, ArticleViewModel>();
-                    cfg.CreateMap<Supplier, SupplierViewModel>();
-                    cfg.CreateMap<Contact, ContactViewModel>()
-                        .ForPath(d => d.Suppliers1, o => o.MapFrom(s => s.Suppliers));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Article, ArticleViewModel>();
+                cfg.CreateMap<Supplier, SupplierViewModel>();
+                cfg.CreateMap<Contact, ContactViewModel>()
+                    .ForPath(d => d.Suppliers1, o => o.MapFrom(s => s.Suppliers));
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -389,20 +376,18 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Supplier, SupplierViewModel>()
-                        .ForPath(
-                            d => d.Contact.Supplier1,
-                            o =>
-                            {
-                                o.MapFrom(s => s.Contact.Supplier);
-                                o.Ignore();
-                            }
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Supplier, SupplierViewModel>()
+                    .ForPath(
+                        d => d.Contact.Supplier1,
+                        o =>
+                        {
+                            o.MapFrom(s => s.Contact.Supplier);
+                            o.Ignore();
+                        }
+                    );
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -420,13 +405,11 @@ namespace AutoMapper.UnitTests
         private ParentDto _dto;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ParentModel, ParentDto>();
-                    cfg.CreateMap<ChildModel, ChildDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ParentModel, ParentDto>();
+                cfg.CreateMap<ChildModel, ChildDto>();
+            });
 
         protected override void Because_of()
         {
@@ -591,13 +574,11 @@ namespace AutoMapper.UnitTests
         private FooDto _dto;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Foo, FooDto>();
-                    cfg.CreateMap<Bar, BarDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Foo, FooDto>();
+                cfg.CreateMap<Bar, BarDto>();
+            });
 
         protected override void Because_of()
         {
@@ -641,16 +622,14 @@ namespace AutoMapper.UnitTests
         private FooContainerModel _dto;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<FooModel, FooScreenModel>();
-                    cfg.CreateMap<FooModel, FooInputModel>();
-                    cfg.CreateMap<FooModel, FooContainerModel>()
-                        .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
-                        .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<FooModel, FooScreenModel>();
+                cfg.CreateMap<FooModel, FooInputModel>();
+                cfg.CreateMap<FooModel, FooContainerModel>()
+                    .ForMember(dest => dest.Input, opt => opt.MapFrom(src => src))
+                    .ForMember(dest => dest.Screen, opt => opt.MapFrom(src => src));
+            });
 
         protected override void Because_of()
         {
@@ -696,13 +675,11 @@ namespace AutoMapper.UnitTests
         private ParentDto _dtoParent;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Parent, ParentDto>();
-                    cfg.CreateMap<Child, ChildDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Parent, ParentDto>();
+                cfg.CreateMap<Child, ChildDto>();
+            });
 
         protected override void Because_of()
         {

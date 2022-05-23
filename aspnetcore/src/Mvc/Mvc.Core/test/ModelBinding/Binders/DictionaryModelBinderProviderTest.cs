@@ -38,24 +38,22 @@ public class DictionaryModelBinderProviderTest
         var provider = new DictionaryModelBinderProvider();
 
         var context = new TestModelBinderProviderContext(modelType);
-        context.OnCreatingBinder(
-            m =>
+        context.OnCreatingBinder(m =>
+        {
+            if (
+                m.ModelType == typeof(KeyValuePair<string, int>)
+                || m.ModelType == typeof(int)
+                || m.ModelType == typeof(string)
+            )
             {
-                if (
-                    m.ModelType == typeof(KeyValuePair<string, int>)
-                    || m.ModelType == typeof(int)
-                    || m.ModelType == typeof(string)
-                )
-                {
-                    return Mock.Of<IModelBinder>();
-                }
-                else
-                {
-                    Assert.False(true, "Not the right model type");
-                    return null;
-                }
+                return Mock.Of<IModelBinder>();
             }
-        );
+            else
+            {
+                Assert.False(true, "Not the right model type");
+                return null;
+            }
+        });
 
         // Act
         var result = provider.GetBinder(context);

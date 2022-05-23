@@ -284,12 +284,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.CookieUsePolicy = (CookieUsePolicy)100;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.CookieUsePolicy = (CookieUsePolicy)100;
+            });
         }
 
         [Fact]
@@ -401,12 +399,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.WindowsProxyUsePolicy = (WindowsProxyUsePolicy)100;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.WindowsProxyUsePolicy = (WindowsProxyUsePolicy)100;
+            });
         }
 
         [Fact]
@@ -487,24 +483,20 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void MaxAutomaticRedirections_SetZero_ThrowsArgumentOutOfRangeException()
         {
             var handler = new WinHttpHandler();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.MaxAutomaticRedirections = 0;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.MaxAutomaticRedirections = 0;
+            });
         }
 
         [Fact]
         public void MaxAutomaticRedirections_SetNegativeValue_ThrowsArgumentOutOfRangeException()
         {
             var handler = new WinHttpHandler();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.MaxAutomaticRedirections = -1;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.MaxAutomaticRedirections = -1;
+            });
         }
 
         [Fact]
@@ -528,24 +520,20 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         public void MaxConnectionsPerServer_SetZero_ThrowsArgumentOutOfRangeException()
         {
             var handler = new WinHttpHandler();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.MaxConnectionsPerServer = 0;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.MaxConnectionsPerServer = 0;
+            });
         }
 
         [Fact]
         public void MaxConnectionsPerServer_SetNegativeValue_ThrowsArgumentOutOfRangeException()
         {
             var handler = new WinHttpHandler();
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.MaxConnectionsPerServer = -1;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.MaxConnectionsPerServer = -1;
+            });
         }
 
         [Fact]
@@ -573,12 +561,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.ReceiveDataTimeout = TimeSpan.FromMinutes(-10);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.ReceiveDataTimeout = TimeSpan.FromMinutes(-10);
+            });
         }
 
         [Fact]
@@ -586,12 +572,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.ReceiveDataTimeout = TimeSpan.FromMilliseconds(int.MaxValue + 1.0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.ReceiveDataTimeout = TimeSpan.FromMilliseconds(int.MaxValue + 1.0);
+            });
         }
 
         [Fact]
@@ -599,12 +583,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.ReceiveDataTimeout = TimeSpan.FromSeconds(0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.ReceiveDataTimeout = TimeSpan.FromSeconds(0);
+            });
         }
 
         [Fact]
@@ -625,12 +607,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.ReceiveHeadersTimeout = TimeSpan.FromMinutes(-10);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.ReceiveHeadersTimeout = TimeSpan.FromMinutes(-10);
+            });
         }
 
         [Fact]
@@ -638,12 +618,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.ReceiveHeadersTimeout = TimeSpan.FromMilliseconds(int.MaxValue + 1.0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.ReceiveHeadersTimeout = TimeSpan.FromMilliseconds(int.MaxValue + 1.0);
+            });
         }
 
         [Fact]
@@ -651,12 +629,10 @@ namespace System.Net.Http.WinHttpHandlerUnitTests
         {
             var handler = new WinHttpHandler();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    handler.ReceiveHeadersTimeout = TimeSpan.FromSeconds(0);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                handler.ReceiveHeadersTimeout = TimeSpan.FromSeconds(0);
+            });
         }
 
         [Fact]

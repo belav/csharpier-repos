@@ -362,26 +362,24 @@ End Module"
             await ApplyEnvironmentVariables(
                 new[] { new KeyValuePair<string, string>("TMPDIR", newTempDir.Path) },
                 async () =>
-                    await Task.Run(
-                        async () =>
-                        {
-                            using var serverData = await ServerUtil.CreateServer(_logger);
-                            var result = RunCommandLineCompiler(
-                                CSharpCompilerClientExecutable,
-                                $"/shared:{serverData.PipeName} /nologo hello.cs",
-                                _tempDirectory,
-                                s_helloWorldSrcCs,
-                                shouldRunOnServer: true
-                            );
-                            VerifyResultAndOutput(result, _tempDirectory, "Hello, world.");
+                    await Task.Run(async () =>
+                    {
+                        using var serverData = await ServerUtil.CreateServer(_logger);
+                        var result = RunCommandLineCompiler(
+                            CSharpCompilerClientExecutable,
+                            $"/shared:{serverData.PipeName} /nologo hello.cs",
+                            _tempDirectory,
+                            s_helloWorldSrcCs,
+                            shouldRunOnServer: true
+                        );
+                        VerifyResultAndOutput(result, _tempDirectory, "Hello, world.");
 
-                            var listener = await serverData.Complete();
-                            Assert.Equal(
-                                CompletionData.RequestCompleted,
-                                listener.CompletionDataList.Single()
-                            );
-                        }
-                    )
+                        var listener = await serverData.Complete();
+                        Assert.Equal(
+                            CompletionData.RequestCompleted,
+                            listener.CompletionDataList.Single()
+                        );
+                    })
             );
         }
 
@@ -1372,24 +1370,22 @@ End Module";
                 $"/shared:{pipeName} /nologo {sourceFile} /out:{exeFileName}{additionalArgument}";
             var filesInDirectory = new Dictionary<string, string>() { { sourceFile, sourceText } };
 
-            return Task.Run(
-                () =>
-                {
-                    var result = RunCommandLineCompiler(
-                        language,
-                        string.Join(" ", arguments),
-                        compilationDir,
-                        filesInDirectory: filesInDirectory
-                    );
+            return Task.Run(() =>
+            {
+                var result = RunCommandLineCompiler(
+                    language,
+                    string.Join(" ", arguments),
+                    compilationDir,
+                    filesInDirectory: filesInDirectory
+                );
 
-                    Assert.Equal(0, result.ExitCode);
+                Assert.Equal(0, result.ExitCode);
 
-                    // Run the EXE and verify it prints the desired output.
-                    var exeFile = GetResultFile(compilationDir, exeFileName);
-                    RunCompilerOutput(exeFile, $"{prefix} Hello number {i}");
-                    return exeFile;
-                }
-            );
+                // Run the EXE and verify it prints the desired output.
+                var exeFile = GetResultFile(compilationDir, exeFileName);
+                RunCompilerOutput(exeFile, $"{prefix} Hello number {i}");
+                return exeFile;
+            });
         }
 
         [WorkItem(997372, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/997372")]

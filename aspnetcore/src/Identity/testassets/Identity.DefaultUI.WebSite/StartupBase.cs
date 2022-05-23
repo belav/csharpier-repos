@@ -33,13 +33,11 @@ public class StartupBase<TUser, TContext>
     // This method gets called by the runtime. Use this method to add services to the container.
     public virtual void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<CookiePolicyOptions>(
-            options =>
-            {
-                // This lambda determines whether user consent for non-essential cookies is needed for a given request.
-                options.CheckConsentNeeded = context => true;
-            }
-        );
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            // This lambda determines whether user consent for non-essential cookies is needed for a given request.
+            options.CheckConsentNeeded = context => true;
+        });
 
         services.AddDbContext<TContext>(
             options =>
@@ -89,13 +87,11 @@ public class StartupBase<TUser, TContext>
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapRazorPages();
+        });
     }
 
     public static void DisableFilePolling(IWebHostEnvironment env)

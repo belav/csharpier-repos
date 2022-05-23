@@ -18,61 +18,53 @@ namespace Microsoft.EntityFrameworkCore
         [ConditionalFact]
         public virtual void Optional_one_to_one_relationships_are_one_to_one()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var root = context.Set<Root>().Single(IsTheRoot);
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    root.OptionalSingle = context.CreateProxy<OptionalSingle1>();
+                root.OptionalSingle = context.CreateProxy<OptionalSingle1>();
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalFact]
         public virtual void Required_one_to_one_relationships_are_one_to_one()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var root = context.Set<Root>().Single(IsTheRoot);
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    root.RequiredSingle = context.CreateProxy<RequiredSingle1>();
+                root.RequiredSingle = context.CreateProxy<RequiredSingle1>();
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalFact]
         public virtual void Optional_one_to_one_with_AK_relationships_are_one_to_one()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var root = context.Set<Root>().Single(IsTheRoot);
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    root.OptionalSingleAk = context.CreateProxy<OptionalSingleAk1>();
+                root.OptionalSingleAk = context.CreateProxy<OptionalSingleAk1>();
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalFact]
         public virtual void Required_one_to_one_with_AK_relationships_are_one_to_one()
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    var root = context.Set<Root>().Single(IsTheRoot);
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    root.RequiredSingleAk = context.CreateProxy<RequiredSingleAk1>();
+                root.RequiredSingleAk = context.CreateProxy<RequiredSingleAk1>();
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalTheory]
@@ -275,78 +267,74 @@ namespace Microsoft.EntityFrameworkCore
             Root oldRoot;
             RequiredSingle2 new2 = null;
             RequiredSingle1 new1 = null;
-            ExecuteWithStrategyInTransaction(
-                context =>
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                oldRoot = LoadRoot(context);
+
+                if (!DoesLazyLoading)
                 {
-                    oldRoot = LoadRoot(context);
-
-                    if (!DoesLazyLoading)
-                    {
-                        context.Entry(oldRoot).Reference(e => e.RequiredSingle).Load();
-                    }
-
-                    old1 = oldRoot.RequiredSingle;
-
-                    if (!DoesLazyLoading)
-                    {
-                        context.Entry(old1).Reference(e => e.Single).Load();
-                    }
-
-                    old2 = oldRoot.RequiredSingle.Single;
-
-                    context.Entry(oldRoot).State = EntityState.Detached;
-                    context.Entry(old1).State = EntityState.Detached;
-                    context.Entry(old2).State = EntityState.Detached;
-
-                    new2 = context.CreateProxy<RequiredSingle2>();
-                    new1 = context.CreateProxy<RequiredSingle1>(e => e.Single = new2);
+                    context.Entry(oldRoot).Reference(e => e.RequiredSingle).Load();
                 }
-            );
 
-            ExecuteWithStrategyInTransaction(
-                context =>
+                old1 = oldRoot.RequiredSingle;
+
+                if (!DoesLazyLoading)
                 {
-                    var root = context
-                        .Set<Root>()
-                        .Include(e => e.RequiredSingle.Single)
-                        .Single(IsTheRoot);
-
-                    context.Entry(root.RequiredSingle.Single).State = EntityState.Deleted;
-                    context.Entry(root.RequiredSingle).State = EntityState.Deleted;
-
-                    if ((changeMechanism & ChangeMechanism.Principal) != 0)
-                    {
-                        root.RequiredSingle = new1;
-                    }
-
-                    if ((changeMechanism & ChangeMechanism.Dependent) != 0)
-                    {
-                        context.Add(new1);
-                        new1.Root = root;
-                    }
-
-                    if ((changeMechanism & ChangeMechanism.Fk) != 0)
-                    {
-                        context.Add(new1);
-                        new1.Id = root.Id;
-                    }
-
-                    Assert.True(context.ChangeTracker.HasChanges());
-
-                    context.SaveChanges();
-
-                    Assert.False(context.ChangeTracker.HasChanges());
-
-                    Assert.Equal(root.Id, new1.Id);
-                    Assert.Equal(new1.Id, new2.Id);
-                    Assert.Same(root, new1.Root);
-                    Assert.Same(new1, new2.Back);
-
-                    Assert.NotNull(old1.Root);
-                    Assert.Same(old1, old2.Back);
-                    Assert.Equal(old1.Id, old2.Id);
+                    context.Entry(old1).Reference(e => e.Single).Load();
                 }
-            );
+
+                old2 = oldRoot.RequiredSingle.Single;
+
+                context.Entry(oldRoot).State = EntityState.Detached;
+                context.Entry(old1).State = EntityState.Detached;
+                context.Entry(old2).State = EntityState.Detached;
+
+                new2 = context.CreateProxy<RequiredSingle2>();
+                new1 = context.CreateProxy<RequiredSingle1>(e => e.Single = new2);
+            });
+
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                var root = context
+                    .Set<Root>()
+                    .Include(e => e.RequiredSingle.Single)
+                    .Single(IsTheRoot);
+
+                context.Entry(root.RequiredSingle.Single).State = EntityState.Deleted;
+                context.Entry(root.RequiredSingle).State = EntityState.Deleted;
+
+                if ((changeMechanism & ChangeMechanism.Principal) != 0)
+                {
+                    root.RequiredSingle = new1;
+                }
+
+                if ((changeMechanism & ChangeMechanism.Dependent) != 0)
+                {
+                    context.Add(new1);
+                    new1.Root = root;
+                }
+
+                if ((changeMechanism & ChangeMechanism.Fk) != 0)
+                {
+                    context.Add(new1);
+                    new1.Id = root.Id;
+                }
+
+                Assert.True(context.ChangeTracker.HasChanges());
+
+                context.SaveChanges();
+
+                Assert.False(context.ChangeTracker.HasChanges());
+
+                Assert.Equal(root.Id, new1.Id);
+                Assert.Equal(new1.Id, new2.Id);
+                Assert.Same(root, new1.Root);
+                Assert.Same(new1, new2.Back);
+
+                Assert.NotNull(old1.Root);
+                Assert.Same(old1, old2.Back);
+                Assert.Equal(old1.Id, old2.Id);
+            });
         }
 
         [ConditionalTheory]
@@ -396,29 +384,23 @@ namespace Microsoft.EntityFrameworkCore
                     new2d = context.CreateProxy<RequiredNonPkSingle2Derived>();
                     new2dd = context.CreateProxy<RequiredNonPkSingle2MoreDerived>();
                     new1 = context.CreateProxy<RequiredNonPkSingle1>(e => e.Single = new2);
-                    new1d = context.CreateProxy<RequiredNonPkSingle1Derived>(
-                        e =>
-                        {
-                            e.Single = new2d;
-                            e.Root = context.CreateProxy<Root>();
-                        }
-                    );
-                    new1dd = context.CreateProxy<RequiredNonPkSingle1MoreDerived>(
-                        e =>
-                        {
-                            e.Single = new2dd;
-                            e.Root = context.CreateProxy<Root>();
-                            e.DerivedRoot = context.CreateProxy<Root>();
-                        }
-                    );
-                    newRoot = context.CreateProxy<Root>(
-                        e =>
-                        {
-                            e.RequiredNonPkSingle = new1;
-                            e.RequiredNonPkSingleDerived = new1d;
-                            e.RequiredNonPkSingleMoreDerived = new1dd;
-                        }
-                    );
+                    new1d = context.CreateProxy<RequiredNonPkSingle1Derived>(e =>
+                    {
+                        e.Single = new2d;
+                        e.Root = context.CreateProxy<Root>();
+                    });
+                    new1dd = context.CreateProxy<RequiredNonPkSingle1MoreDerived>(e =>
+                    {
+                        e.Single = new2dd;
+                        e.Root = context.CreateProxy<Root>();
+                        e.DerivedRoot = context.CreateProxy<Root>();
+                    });
+                    newRoot = context.CreateProxy<Root>(e =>
+                    {
+                        e.RequiredNonPkSingle = new1;
+                        e.RequiredNonPkSingleDerived = new1d;
+                        e.RequiredNonPkSingleMoreDerived = new1dd;
+                    });
 
                     if (useExistingEntities)
                     {
@@ -923,29 +905,27 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.KeyReadOnly("Id", typeof(RequiredSingle1).Name),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
+                            .Throws<InvalidOperationException>(() =>
+                            {
+                                if ((changeMechanism & ChangeMechanism.Principal) != 0)
                                 {
-                                    if ((changeMechanism & ChangeMechanism.Principal) != 0)
-                                    {
-                                        newRoot.RequiredSingle = root.RequiredSingle;
-                                    }
-
-                                    if ((changeMechanism & ChangeMechanism.Dependent) != 0)
-                                    {
-                                        root.RequiredSingle.Root = newRoot;
-                                    }
-
-                                    if ((changeMechanism & ChangeMechanism.Fk) != 0)
-                                    {
-                                        root.RequiredSingle.Id = newRoot.Id;
-                                    }
-
                                     newRoot.RequiredSingle = root.RequiredSingle;
-
-                                    context.SaveChanges();
                                 }
-                            )
+
+                                if ((changeMechanism & ChangeMechanism.Dependent) != 0)
+                                {
+                                    root.RequiredSingle.Root = newRoot;
+                                }
+
+                                if ((changeMechanism & ChangeMechanism.Fk) != 0)
+                                {
+                                    root.RequiredSingle.Id = newRoot.Id;
+                                }
+
+                                newRoot.RequiredSingle = root.RequiredSingle;
+
+                                context.SaveChanges();
+                            })
                             .Message
                     );
                 }

@@ -773,15 +773,13 @@ namespace System.Xml.Tests
             DocType docType
         )
         {
-            TestUsingTemporaryCopyOfResolverDocument(
-                () =>
-                {
-                    LoadXSL(absoluteUriXslFile, inputType, readerType);
-                    xslt.XmlResolver = new XmlUrlResolver();
-                    Transform("fruits.xml", transformType, docType);
-                    VerifyResult(@"<?xml version=""1.0"" encoding=""utf-8""?><result>123</result>");
-                }
-            );
+            TestUsingTemporaryCopyOfResolverDocument(() =>
+            {
+                LoadXSL(absoluteUriXslFile, inputType, readerType);
+                xslt.XmlResolver = new XmlUrlResolver();
+                Transform("fruits.xml", transformType, docType);
+                VerifyResult(@"<?xml version=""1.0"" encoding=""utf-8""?><result>123</result>");
+            });
         }
     }
 
@@ -4069,14 +4067,12 @@ namespace System.Xml.Tests
             DocType docType
         )
         {
-            TestUsingTemporaryCopyOfResolverDocument(
-                () =>
-                {
-                    LoadXSL(absoluteUriXslFile, inputType, readerType);
-                    TransformResolver("fruits.xml", transformType, docType, new XmlUrlResolver());
-                    VerifyResult(@"<?xml version=""1.0"" encoding=""utf-8""?><result>123</result>");
-                }
-            );
+            TestUsingTemporaryCopyOfResolverDocument(() =>
+            {
+                LoadXSL(absoluteUriXslFile, inputType, readerType);
+                TransformResolver("fruits.xml", transformType, docType, new XmlUrlResolver());
+                VerifyResult(@"<?xml version=""1.0"" encoding=""utf-8""?><result>123</result>");
+            });
         }
     }
 

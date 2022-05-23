@@ -45,34 +45,32 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
         protected override void TelemetrySessionInitialized()
         {
-            _ = Task.Run(
-                async () =>
+            _ = Task.Run(async () =>
+            {
+                var client = await RemoteHostClient
+                    .TryGetClientAsync(_workspace, CancellationToken.None)
+                    .ConfigureAwait(false);
+                if (client == null)
                 {
-                    var client = await RemoteHostClient
-                        .TryGetClientAsync(_workspace, CancellationToken.None)
-                        .ConfigureAwait(false);
-                    if (client == null)
-                    {
-                        return;
-                    }
-
-                    var settings = SerializeCurrentSessionSettings();
-                    Contract.ThrowIfNull(settings);
-
-                    // initialize session in the remote service
-                    _ = await client
-                        .TryInvokeAsync<IRemoteProcessTelemetryService>(
-                            (service, cancellationToken) =>
-                                service.InitializeTelemetrySessionAsync(
-                                    Process.GetCurrentProcess().Id,
-                                    settings,
-                                    cancellationToken
-                                ),
-                            CancellationToken.None
-                        )
-                        .ConfigureAwait(false);
+                    return;
                 }
-            );
+
+                var settings = SerializeCurrentSessionSettings();
+                Contract.ThrowIfNull(settings);
+
+                // initialize session in the remote service
+                _ = await client
+                    .TryInvokeAsync<IRemoteProcessTelemetryService>(
+                        (service, cancellationToken) =>
+                            service.InitializeTelemetrySessionAsync(
+                                Process.GetCurrentProcess().Id,
+                                settings,
+                                cancellationToken
+                            ),
+                        CancellationToken.None
+                    )
+                    .ConfigureAwait(false);
+            });
         }
     }
 }

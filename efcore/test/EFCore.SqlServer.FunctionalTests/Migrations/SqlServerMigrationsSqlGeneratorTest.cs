@@ -241,13 +241,11 @@ ALTER TABLE [People] ALTER COLUMN [Id] int NOT NULL;
                 modelBuilder =>
                     modelBuilder
                         .HasAnnotation(CoreAnnotationNames.ProductVersion, "1.0.0-rtm")
-                        .Entity<Person>(
-                            x =>
-                            {
-                                x.Property<string>("Name").HasMaxLength(30);
-                                x.HasIndex("Name");
-                            }
-                        ),
+                        .Entity<Person>(x =>
+                        {
+                            x.Property<string>("Name").HasMaxLength(30);
+                            x.HasIndex("Name");
+                        }),
                 new AlterColumnOperation
                 {
                     Table = "Person",
@@ -278,13 +276,11 @@ ALTER TABLE [Person] ALTER COLUMN [Name] nvarchar(30) NULL;
                 modelBuilder =>
                     modelBuilder
                         .HasAnnotation(CoreAnnotationNames.ProductVersion, "1.1.0")
-                        .Entity<Person>(
-                            x =>
-                            {
-                                x.Property<string>("Name").HasMaxLength(30);
-                                x.HasIndex("Name");
-                            }
-                        ),
+                        .Entity<Person>(x =>
+                        {
+                            x.Property<string>("Name").HasMaxLength(30);
+                            x.HasIndex("Name");
+                        }),
                 new AlterColumnOperation
                 {
                     Table = "Person",
@@ -328,13 +324,11 @@ CREATE INDEX [IX_Person_Name] ON [Person] ([Name]);
                 modelBuilder =>
                     modelBuilder
                         .HasAnnotation(CoreAnnotationNames.ProductVersion, "2.1.0")
-                        .Entity<Person>(
-                            x =>
-                            {
-                                x.Property<string>("Name");
-                                x.HasIndex("Name");
-                            }
-                        ),
+                        .Entity<Person>(x =>
+                        {
+                            x.Property<string>("Name");
+                            x.HasIndex("Name");
+                        }),
                 new AlterColumnOperation
                 {
                     Table = "Person",

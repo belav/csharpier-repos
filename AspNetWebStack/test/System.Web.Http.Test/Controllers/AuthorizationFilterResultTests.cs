@@ -36,13 +36,11 @@ namespace System.Web.Http.Controllers
             Mock<IHttpActionResult> innerResultMock = new Mock<IHttpActionResult>();
             innerResultMock
                 .Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>()))
-                .Returns(
-                    () =>
-                    {
-                        log.Add("innerAction");
-                        return Task.FromResult<HttpResponseMessage>(null);
-                    }
-                );
+                .Returns(() =>
+                {
+                    log.Add("innerAction");
+                    return Task.FromResult<HttpResponseMessage>(null);
+                });
             IHttpActionResult innerResult = innerResultMock.Object;
             var filters = new IAuthorizationFilter[]
             {

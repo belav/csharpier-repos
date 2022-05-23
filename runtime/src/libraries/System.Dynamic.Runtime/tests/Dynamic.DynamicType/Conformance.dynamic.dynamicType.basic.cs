@@ -10360,50 +10360,42 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             result += Verify.Eval(() => TestBinaryOp(d => null + d, "+"), "binary +");
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni1 = null;
-                            int? ni = ni1 + null;
-                            return d + ni;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni1 = null;
+                        int? ni = ni1 + null;
+                        return d + ni;
+                    }),
                 "binary /"
             );
             result += Verify.Eval(() => TestResultIsNull(d => d - (null - null)), "binary -");
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            dynamic d2 = null * null;
-                            return d * d2;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        dynamic d2 = null * null;
+                        return d * d2;
+                    }),
                 "binary *"
             );
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni = null / null;
-                            return ni / d;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni = null / null;
+                        return ni / d;
+                    }),
                 "binary /"
             );
             result += Verify.Eval(() => TestResultIsNull(d => null % d), "binary %");
             result += Verify.Eval(() => TestResultIsNull(d => d << (null << null)), "binary <<");
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni = null >> null;
-                            return d >> ni;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni = null >> null;
+                        return d >> ni;
+                    }),
                 "binary >>"
             );
             result += Verify.Eval(() => TestBinaryOpRelation(d => d == null), "binary ==");
@@ -10412,24 +10404,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             result += Verify.Eval(() => TestBinaryOpRelation(d => !(d > null)), "binary >");
             result += Verify.Eval(
                 () =>
-                    TestBinaryOpRelation(
-                        d =>
-                        {
-                            dynamic d2 = null;
-                            return !(d >= d2);
-                        }
-                    ),
+                    TestBinaryOpRelation(d =>
+                    {
+                        dynamic d2 = null;
+                        return !(d >= d2);
+                    }),
                 "binary >="
             );
             result += Verify.Eval(
                 () =>
-                    TestBinaryOpRelation(
-                        d =>
-                        {
-                            int? ni = null;
-                            return !(ni < d);
-                        }
-                    ),
+                    TestBinaryOpRelation(d =>
+                    {
+                        int? ni = null;
+                        return !(ni < d);
+                    }),
                 "binary <"
             );
             result += Verify.Eval(() => TestBinaryOpRelation(d => !(null <= d)), "binary <=");
@@ -10439,14 +10427,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             // but "ni & null" will get null
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni1 = null;
-                            int? ni = ni1 ^ null;
-                            return ni ^ d;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni1 = null;
+                        int? ni = ni1 ^ null;
+                        return ni ^ d;
+                    }),
                 "binary ^"
             );
             return result;
@@ -10524,24 +10510,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             result += Verify.Eval(() => TestResultIsNull(d => d -= (null - null)), "compound -=");
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            dynamic d2 = null * null;
-                            return d *= d2;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        dynamic d2 = null * null;
+                        return d *= d2;
+                    }),
                 "compound *="
             );
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni = null / null;
-                            return d /= ni;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni = null / null;
+                        return d /= ni;
+                    }),
                 "compound /="
             );
             result += Verify.Eval(() => TestResultIsNull(d => d %= null), "compound %=");
@@ -10551,13 +10533,11 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             );
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni = null >> null;
-                            return d >>= ni;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni = null >> null;
+                        return d >>= ni;
+                    }),
                 "compound >>="
             );
             result += Verify.Eval(() => TestBinaryOp(d => d &= null, "&="), "compound &=");
@@ -10575,14 +10555,12 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             );
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni1 = null;
-                            int? ni = ni1 ^ null;
-                            return d ^= ni;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni1 = null;
+                        int? ni = ni1 ^ null;
+                        return d ^= ni;
+                    }),
                 "compound ^="
             );
             result += Verify.Eval(
@@ -10611,24 +10589,20 @@ namespace ManagedTests.DynamicCSharp.Conformance.dynamic.dynamicType.basic.opera
             );
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            int? ni = null;
-                            return true ? ni : d;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        int? ni = null;
+                        return true ? ni : d;
+                    }),
                 "conditional ?: with second and third are null"
             );
             result += Verify.Eval(
                 () =>
-                    TestResultIsNull(
-                        d =>
-                        {
-                            dynamic d2 = null;
-                            return false ? d2 : d;
-                        }
-                    ),
+                    TestResultIsNull(d =>
+                    {
+                        dynamic d2 = null;
+                        return false ? d2 : d;
+                    }),
                 "conditional ?: with second and third are null"
             );
             return result;

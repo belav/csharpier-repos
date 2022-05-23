@@ -19,12 +19,10 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignInHandler>("B", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignInHandler>("B", "whatever");
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -40,13 +38,11 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.DefaultScheme = "B";
-                    o.AddScheme<SignInHandler>("B", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.DefaultScheme = "B";
+                o.AddScheme<SignInHandler>("B", "whatever");
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -62,14 +58,12 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignInHandler>("signin", "whatever");
-                    o.AddScheme<Handler>("foobly", "whatever");
-                    o.DefaultSignInScheme = "signin";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignInHandler>("signin", "whatever");
+                o.AddScheme<Handler>("foobly", "whatever");
+                o.DefaultSignInScheme = "signin";
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -83,14 +77,12 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<Handler>("challenge", "whatever");
-                    o.AddScheme<Handler>("foobly", "whatever");
-                    o.DefaultChallengeScheme = "challenge";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<Handler>("challenge", "whatever");
+                o.AddScheme<Handler>("foobly", "whatever");
+                o.DefaultChallengeScheme = "challenge";
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -104,21 +96,19 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignInHandler>("A", "whatever");
-                    o.AddScheme<SignInHandler>("B", "whatever");
-                    o.AddScheme<SignInHandler>("C", "whatever");
-                    o.AddScheme<SignInHandler>("Def", "whatever");
-                    o.DefaultScheme = "Def";
-                    o.DefaultChallengeScheme = "A";
-                    o.DefaultForbidScheme = "B";
-                    o.DefaultSignInScheme = "C";
-                    o.DefaultSignOutScheme = "A";
-                    o.DefaultAuthenticateScheme = "C";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignInHandler>("A", "whatever");
+                o.AddScheme<SignInHandler>("B", "whatever");
+                o.AddScheme<SignInHandler>("C", "whatever");
+                o.AddScheme<SignInHandler>("Def", "whatever");
+                o.DefaultScheme = "Def";
+                o.DefaultChallengeScheme = "A";
+                o.DefaultForbidScheme = "B";
+                o.DefaultSignInScheme = "C";
+                o.DefaultSignOutScheme = "A";
+                o.DefaultAuthenticateScheme = "C";
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -134,13 +124,11 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<Handler>("signin", "whatever");
-                    o.DefaultSignInScheme = "signin";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<Handler>("signin", "whatever");
+                o.DefaultSignInScheme = "signin";
+            })
             .BuildServiceProvider();
 
         var provider = services.GetRequiredService<IAuthenticationSchemeProvider>();
@@ -152,13 +140,11 @@ public class AuthenticationSchemeProviderTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<Handler>("signin", "whatever");
-                    o.AddScheme<Handler>("signin", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<Handler>("signin", "whatever");
+                o.AddScheme<Handler>("signin", "whatever");
+            })
             .BuildServiceProvider();
 
         var error = Assert.Throws<InvalidOperationException>(

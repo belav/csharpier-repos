@@ -198,17 +198,15 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
 
         private void OnStopRude()
         {
-            Walk(
-                ptr =>
+            Walk(ptr =>
+            {
+                var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
+                if (handle != _post)
                 {
-                    var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
-                    if (handle != _post)
-                    {
-                        // handle can be null because UvMemory.FromIntPtr looks up a weak reference
-                        handle?.Dispose();
-                    }
+                    // handle can be null because UvMemory.FromIntPtr looks up a weak reference
+                    handle?.Dispose();
                 }
-            );
+            });
         }
 
         private void OnStopImmediate()
@@ -347,14 +345,12 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal
                 // Calling ReadStop makes the handle as in-active which means the loop can
                 // end while there's still valid handles around. This makes loop.Dispose throw
                 // with an EBUSY. To avoid that, we walk all of the handles and dispose them.
-                Walk(
-                    ptr =>
-                    {
-                        var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
-                        // handle can be null because UvMemory.FromIntPtr looks up a weak reference
-                        handle?.Dispose();
-                    }
-                );
+                Walk(ptr =>
+                {
+                    var handle = UvMemory.FromIntPtr<UvHandle>(ptr);
+                    // handle can be null because UvMemory.FromIntPtr looks up a weak reference
+                    handle?.Dispose();
+                });
 
                 // Ensure the Dispose operations complete in the event loop.
                 _loop.Run();

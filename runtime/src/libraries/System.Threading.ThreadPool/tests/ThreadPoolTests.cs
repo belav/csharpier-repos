@@ -43,35 +43,33 @@ namespace System.Threading.ThreadPools.Tests
         private static void ConcurrentInitializeTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    int processorCount = Environment.ProcessorCount;
+                    var countdownEvent = new CountdownEvent(processorCount);
+                    Action threadMain = () =>
                     {
-                        int processorCount = Environment.ProcessorCount;
-                        var countdownEvent = new CountdownEvent(processorCount);
-                        Action threadMain = () =>
-                        {
-                            countdownEvent.Signal();
-                            countdownEvent.Wait(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
-                            Assert.True(ThreadPool.SetMinThreads(processorCount, processorCount));
-                        };
+                        countdownEvent.Signal();
+                        countdownEvent.Wait(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
+                        Assert.True(ThreadPool.SetMinThreads(processorCount, processorCount));
+                    };
 
-                        var waitForThreadArray = new Action[processorCount];
-                        for (int i = 0; i < processorCount; ++i)
-                        {
-                            var t = ThreadTestHelpers.CreateGuardedThread(
-                                out waitForThreadArray[i],
-                                threadMain
-                            );
-                            t.IsBackground = true;
-                            t.Start();
-                        }
-
-                        foreach (Action waitForThread in waitForThreadArray)
-                        {
-                            waitForThread();
-                        }
+                    var waitForThreadArray = new Action[processorCount];
+                    for (int i = 0; i < processorCount; ++i)
+                    {
+                        var t = ThreadTestHelpers.CreateGuardedThread(
+                            out waitForThreadArray[i],
+                            threadMain
+                        );
+                        t.IsBackground = true;
+                        t.Start();
                     }
-                )
+
+                    foreach (Action waitForThread in waitForThreadArray)
+                    {
+                        waitForThread();
+                    }
+                })
                 .Dispose();
         }
 
@@ -112,101 +110,89 @@ namespace System.Threading.ThreadPools.Tests
         public static void SetMinMaxThreadsTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    int minw,
+                        minc,
+                        maxw,
+                        maxc;
+                    ThreadPool.GetMinThreads(out minw, out minc);
+                    ThreadPool.GetMaxThreads(out maxw, out maxc);
+
+                    try
                     {
-                        int minw,
-                            minc,
-                            maxw,
-                            maxc;
-                        ThreadPool.GetMinThreads(out minw, out minc);
-                        ThreadPool.GetMaxThreads(out maxw, out maxc);
+                        int mint = Environment.ProcessorCount * 2;
+                        int maxt = mint + 1;
+                        ThreadPool.SetMinThreads(mint, mint);
+                        ThreadPool.SetMaxThreads(maxt, maxt);
 
-                        try
-                        {
-                            int mint = Environment.ProcessorCount * 2;
-                            int maxt = mint + 1;
-                            ThreadPool.SetMinThreads(mint, mint);
-                            ThreadPool.SetMaxThreads(maxt, maxt);
+                        Assert.False(ThreadPool.SetMinThreads(maxt + 1, mint));
+                        Assert.False(ThreadPool.SetMinThreads(mint, maxt + 1));
+                        Assert.False(ThreadPool.SetMinThreads(MaxPossibleThreadCount, mint));
+                        Assert.False(ThreadPool.SetMinThreads(mint, MaxPossibleThreadCount));
+                        Assert.False(ThreadPool.SetMinThreads(MaxPossibleThreadCount + 1, mint));
+                        Assert.False(ThreadPool.SetMinThreads(mint, MaxPossibleThreadCount + 1));
+                        Assert.False(ThreadPool.SetMinThreads(-1, mint));
+                        Assert.False(ThreadPool.SetMinThreads(mint, -1));
 
-                            Assert.False(ThreadPool.SetMinThreads(maxt + 1, mint));
-                            Assert.False(ThreadPool.SetMinThreads(mint, maxt + 1));
-                            Assert.False(ThreadPool.SetMinThreads(MaxPossibleThreadCount, mint));
-                            Assert.False(ThreadPool.SetMinThreads(mint, MaxPossibleThreadCount));
-                            Assert.False(
-                                ThreadPool.SetMinThreads(MaxPossibleThreadCount + 1, mint)
-                            );
-                            Assert.False(
-                                ThreadPool.SetMinThreads(mint, MaxPossibleThreadCount + 1)
-                            );
-                            Assert.False(ThreadPool.SetMinThreads(-1, mint));
-                            Assert.False(ThreadPool.SetMinThreads(mint, -1));
+                        Assert.False(ThreadPool.SetMaxThreads(mint - 1, maxt));
+                        Assert.False(ThreadPool.SetMaxThreads(maxt, mint - 1));
 
-                            Assert.False(ThreadPool.SetMaxThreads(mint - 1, maxt));
-                            Assert.False(ThreadPool.SetMaxThreads(maxt, mint - 1));
+                        VerifyMinThreads(mint, mint);
+                        VerifyMaxThreads(maxt, maxt);
 
-                            VerifyMinThreads(mint, mint);
-                            VerifyMaxThreads(maxt, maxt);
+                        Assert.True(
+                            ThreadPool.SetMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount)
+                        );
+                        VerifyMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
+                        Assert.True(
+                            ThreadPool.SetMaxThreads(
+                                MaxPossibleThreadCount + 1,
+                                MaxPossibleThreadCount + 1
+                            )
+                        );
+                        VerifyMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
+                        Assert.Equal(
+                            PlatformDetection.IsNetFramework,
+                            ThreadPool.SetMaxThreads(-1, -1)
+                        );
+                        VerifyMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
 
-                            Assert.True(
-                                ThreadPool.SetMaxThreads(
-                                    MaxPossibleThreadCount,
-                                    MaxPossibleThreadCount
-                                )
-                            );
-                            VerifyMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
-                            Assert.True(
-                                ThreadPool.SetMaxThreads(
-                                    MaxPossibleThreadCount + 1,
-                                    MaxPossibleThreadCount + 1
-                                )
-                            );
-                            VerifyMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
-                            Assert.Equal(
-                                PlatformDetection.IsNetFramework,
-                                ThreadPool.SetMaxThreads(-1, -1)
-                            );
-                            VerifyMaxThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
+                        Assert.True(
+                            ThreadPool.SetMinThreads(MaxPossibleThreadCount, MaxPossibleThreadCount)
+                        );
+                        VerifyMinThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
 
-                            Assert.True(
-                                ThreadPool.SetMinThreads(
-                                    MaxPossibleThreadCount,
-                                    MaxPossibleThreadCount
-                                )
-                            );
-                            VerifyMinThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
+                        Assert.False(
+                            ThreadPool.SetMinThreads(
+                                MaxPossibleThreadCount + 1,
+                                MaxPossibleThreadCount
+                            )
+                        );
+                        Assert.False(
+                            ThreadPool.SetMinThreads(
+                                MaxPossibleThreadCount,
+                                MaxPossibleThreadCount + 1
+                            )
+                        );
+                        Assert.False(ThreadPool.SetMinThreads(-1, MaxPossibleThreadCount));
+                        Assert.False(ThreadPool.SetMinThreads(MaxPossibleThreadCount, -1));
+                        VerifyMinThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
 
-                            Assert.False(
-                                ThreadPool.SetMinThreads(
-                                    MaxPossibleThreadCount + 1,
-                                    MaxPossibleThreadCount
-                                )
-                            );
-                            Assert.False(
-                                ThreadPool.SetMinThreads(
-                                    MaxPossibleThreadCount,
-                                    MaxPossibleThreadCount + 1
-                                )
-                            );
-                            Assert.False(ThreadPool.SetMinThreads(-1, MaxPossibleThreadCount));
-                            Assert.False(ThreadPool.SetMinThreads(MaxPossibleThreadCount, -1));
-                            VerifyMinThreads(MaxPossibleThreadCount, MaxPossibleThreadCount);
-
-                            Assert.True(ThreadPool.SetMinThreads(0, 0));
-                            Assert.True(ThreadPool.SetMaxThreads(1, 1));
-                            VerifyMaxThreads(1, 1);
-                            Assert.True(ThreadPool.SetMinThreads(1, 1));
-                            VerifyMinThreads(1, 1);
-                        }
-                        finally
-                        {
-                            Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
-                            VerifyMaxThreads(maxw, maxc);
-                            Assert.True(ThreadPool.SetMinThreads(minw, minc));
-                            VerifyMinThreads(minw, minc);
-                        }
+                        Assert.True(ThreadPool.SetMinThreads(0, 0));
+                        Assert.True(ThreadPool.SetMaxThreads(1, 1));
+                        VerifyMaxThreads(1, 1);
+                        Assert.True(ThreadPool.SetMinThreads(1, 1));
+                        VerifyMinThreads(1, 1);
                     }
-                )
+                    finally
+                    {
+                        Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
+                        VerifyMaxThreads(maxw, maxc);
+                        Assert.True(ThreadPool.SetMinThreads(minw, minc));
+                        VerifyMinThreads(minw, minc);
+                    }
+                })
                 .Dispose();
         }
 
@@ -214,33 +200,31 @@ namespace System.Threading.ThreadPools.Tests
         public static void SetMinMaxThreadsTest_ChangedInDotNetCore()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int minw,
-                            minc,
-                            maxw,
-                            maxc;
-                        ThreadPool.GetMinThreads(out minw, out minc);
-                        ThreadPool.GetMaxThreads(out maxw, out maxc);
+                .Invoke(() =>
+                {
+                    int minw,
+                        minc,
+                        maxw,
+                        maxc;
+                    ThreadPool.GetMinThreads(out minw, out minc);
+                    ThreadPool.GetMaxThreads(out maxw, out maxc);
 
-                        try
-                        {
-                            Assert.True(ThreadPool.SetMinThreads(0, 0));
-                            VerifyMinThreads(1, 1);
-                            Assert.False(ThreadPool.SetMaxThreads(0, 1));
-                            Assert.False(ThreadPool.SetMaxThreads(1, 0));
-                            VerifyMaxThreads(maxw, maxc);
-                        }
-                        finally
-                        {
-                            Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
-                            VerifyMaxThreads(maxw, maxc);
-                            Assert.True(ThreadPool.SetMinThreads(minw, minc));
-                            VerifyMinThreads(minw, minc);
-                        }
+                    try
+                    {
+                        Assert.True(ThreadPool.SetMinThreads(0, 0));
+                        VerifyMinThreads(1, 1);
+                        Assert.False(ThreadPool.SetMaxThreads(0, 1));
+                        Assert.False(ThreadPool.SetMaxThreads(1, 0));
+                        VerifyMaxThreads(maxw, maxc);
                     }
-                )
+                    finally
+                    {
+                        Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
+                        VerifyMaxThreads(maxw, maxc);
+                        Assert.True(ThreadPool.SetMinThreads(minw, minc));
+                        VerifyMinThreads(minw, minc);
+                    }
+                })
                 .Dispose();
 
             // Verify that SetMinThreads() and SetMaxThreads() return false when trying to set a different value from what is
@@ -290,46 +274,44 @@ namespace System.Threading.ThreadPools.Tests
         public static void SetMinThreadsTo0Test()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    int minw,
+                        minc,
+                        maxw,
+                        maxc;
+                    ThreadPool.GetMinThreads(out minw, out minc);
+                    ThreadPool.GetMaxThreads(out maxw, out maxc);
+
+                    try
                     {
-                        int minw,
-                            minc,
-                            maxw,
-                            maxc;
-                        ThreadPool.GetMinThreads(out minw, out minc);
-                        ThreadPool.GetMaxThreads(out maxw, out maxc);
+                        Assert.True(ThreadPool.SetMinThreads(0, minc));
+                        Assert.True(ThreadPool.SetMaxThreads(1, maxc));
 
-                        try
+                        int count = 0;
+                        var done = new ManualResetEvent(false);
+                        WaitCallback callback = null;
+                        callback = state =>
                         {
-                            Assert.True(ThreadPool.SetMinThreads(0, minc));
-                            Assert.True(ThreadPool.SetMaxThreads(1, maxc));
-
-                            int count = 0;
-                            var done = new ManualResetEvent(false);
-                            WaitCallback callback = null;
-                            callback = state =>
+                            ++count;
+                            if (count > 100)
                             {
-                                ++count;
-                                if (count > 100)
-                                {
-                                    done.Set();
-                                }
-                                else
-                                {
-                                    ThreadPool.QueueUserWorkItem(callback);
-                                }
-                            };
-                            ThreadPool.QueueUserWorkItem(callback);
-                            done.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
-                        }
-                        finally
-                        {
-                            Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
-                            Assert.True(ThreadPool.SetMinThreads(minw, minc));
-                        }
+                                done.Set();
+                            }
+                            else
+                            {
+                                ThreadPool.QueueUserWorkItem(callback);
+                            }
+                        };
+                        ThreadPool.QueueUserWorkItem(callback);
+                        done.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds);
                     }
-                )
+                    finally
+                    {
+                        Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
+                        Assert.True(ThreadPool.SetMinThreads(minw, minc));
+                    }
+                })
                 .Dispose();
         }
 
@@ -535,12 +517,10 @@ namespace System.Threading.ThreadPools.Tests
             {
                 int localI = i;
                 ThreadPool.UnsafeQueueUserWorkItem(
-                    new SimpleWorkItem(
-                        () =>
-                        {
-                            tasks[localI].TrySetResult();
-                        }
-                    ),
+                    new SimpleWorkItem(() =>
+                    {
+                        tasks[localI].TrySetResult();
+                    }),
                     preferLocal
                 );
             }
@@ -559,15 +539,13 @@ namespace System.Threading.ThreadPools.Tests
             const int Iters = 100;
             int remaining = Iters;
             var tcs = new TaskCompletionSource();
-            var workItem = new SimpleWorkItem(
-                () =>
+            var workItem = new SimpleWorkItem(() =>
+            {
+                if (Interlocked.Decrement(ref remaining) == 0)
                 {
-                    if (Interlocked.Decrement(ref remaining) == 0)
-                    {
-                        tcs.TrySetResult();
-                    }
+                    tcs.TrySetResult();
                 }
-            );
+            });
             for (int i = 0; i < Iters; i++)
             {
                 ThreadPool.UnsafeQueueUserWorkItem(workItem, preferLocal);
@@ -588,13 +566,11 @@ namespace System.Threading.ThreadPools.Tests
             var al = new AsyncLocal<int> { Value = 42 };
             var tcs = new TaskCompletionSource();
             ThreadPool.UnsafeQueueUserWorkItem(
-                new SimpleWorkItem(
-                    () =>
-                    {
-                        Assert.Equal(0, al.Value);
-                        tcs.TrySetResult();
-                    }
-                ),
+                new SimpleWorkItem(() =>
+                {
+                    Assert.Equal(0, al.Value);
+                    tcs.TrySetResult();
+                }),
                 preferLocal
             );
             await tcs.Task;
@@ -624,158 +600,150 @@ namespace System.Threading.ThreadPools.Tests
         public void MetricsTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    int processorCount = Environment.ProcessorCount;
+                    if (processorCount <= 2)
                     {
-                        int processorCount = Environment.ProcessorCount;
-                        if (processorCount <= 2)
+                        return;
+                    }
+
+                    bool waitForWorkStart = false;
+                    var workStarted = new AutoResetEvent(false);
+                    var localWorkScheduled = new AutoResetEvent(false);
+                    int completeWork = 0;
+                    int queuedWorkCount = 0;
+                    var allWorkCompleted = new ManualResetEvent(false);
+                    Exception backgroundEx = null;
+                    Action work = () =>
+                    {
+                        if (waitForWorkStart)
                         {
-                            return;
+                            workStarted.Set();
                         }
-
-                        bool waitForWorkStart = false;
-                        var workStarted = new AutoResetEvent(false);
-                        var localWorkScheduled = new AutoResetEvent(false);
-                        int completeWork = 0;
-                        int queuedWorkCount = 0;
-                        var allWorkCompleted = new ManualResetEvent(false);
-                        Exception backgroundEx = null;
-                        Action work = () =>
+                        try
                         {
-                            if (waitForWorkStart)
-                            {
-                                workStarted.Set();
-                            }
-                            try
-                            {
-                                // Blocking can affect thread pool thread injection heuristics, so don't block, pretend like a
-                                // long-running CPU-bound work item
-                                ThreadTestHelpers.WaitForConditionWithoutRelinquishingTimeSlice(
-                                    () => Interlocked.CompareExchange(ref completeWork, 0, 0) != 0
-                                );
-                            }
-                            catch (Exception ex)
-                            {
-                                Interlocked.CompareExchange(ref backgroundEx, ex, null);
-                            }
-                            finally
-                            {
-                                if (Interlocked.Decrement(ref queuedWorkCount) == 0)
-                                {
-                                    allWorkCompleted.Set();
-                                }
-                            }
-                        };
-                        WaitCallback threadPoolGlobalWork = data => work();
-                        Action<object> threadPoolLocalWork = data => work();
-                        WaitCallback scheduleThreadPoolLocalWork = data =>
+                            // Blocking can affect thread pool thread injection heuristics, so don't block, pretend like a
+                            // long-running CPU-bound work item
+                            ThreadTestHelpers.WaitForConditionWithoutRelinquishingTimeSlice(
+                                () => Interlocked.CompareExchange(ref completeWork, 0, 0) != 0
+                            );
+                        }
+                        catch (Exception ex)
                         {
-                            try
-                            {
-                                int n = (int)data;
-                                for (int i = 0; i < n; ++i)
-                                {
-                                    ThreadPool.QueueUserWorkItem(
-                                        threadPoolLocalWork,
-                                        null,
-                                        preferLocal: true
-                                    );
-                                    if (waitForWorkStart)
-                                    {
-                                        workStarted.CheckedWait();
-                                    }
-                                }
-                            }
-                            catch (Exception ex)
-                            {
-                                Interlocked.CompareExchange(ref backgroundEx, ex, null);
-                            }
-                            finally
-                            {
-                                localWorkScheduled.Set();
-                            }
-                        };
-
-                        var signaledEvent = new ManualResetEvent(true);
-                        var timers = new List<Timer>();
-                        int totalWorkCountToQueue = 0;
-                        Action scheduleWork = () =>
+                            Interlocked.CompareExchange(ref backgroundEx, ex, null);
+                        }
+                        finally
                         {
-                            Assert.True(queuedWorkCount < totalWorkCountToQueue);
-
-                            int workCount = (totalWorkCountToQueue - queuedWorkCount) / 2;
-                            if (workCount > 0)
+                            if (Interlocked.Decrement(ref queuedWorkCount) == 0)
                             {
-                                queuedWorkCount += workCount;
+                                allWorkCompleted.Set();
+                            }
+                        }
+                    };
+                    WaitCallback threadPoolGlobalWork = data => work();
+                    Action<object> threadPoolLocalWork = data => work();
+                    WaitCallback scheduleThreadPoolLocalWork = data =>
+                    {
+                        try
+                        {
+                            int n = (int)data;
+                            for (int i = 0; i < n; ++i)
+                            {
                                 ThreadPool.QueueUserWorkItem(
-                                    scheduleThreadPoolLocalWork,
-                                    workCount
+                                    threadPoolLocalWork,
+                                    null,
+                                    preferLocal: true
                                 );
-                                localWorkScheduled.CheckedWait();
-                            }
-
-                            for (; queuedWorkCount < totalWorkCountToQueue; ++queuedWorkCount)
-                            {
-                                ThreadPool.QueueUserWorkItem(threadPoolGlobalWork);
                                 if (waitForWorkStart)
                                 {
                                     workStarted.CheckedWait();
                                 }
                             }
-                        };
-
-                        Interlocked.MemoryBarrierProcessWide(); // get a reasonably accurate value for the following
-                        long initialCompletedWorkItemCount = ThreadPool.CompletedWorkItemCount;
-
-                        try
+                        }
+                        catch (Exception ex)
                         {
-                            // Schedule some simultaneous work that would all be scheduled and verify the thread count
-                            totalWorkCountToQueue = processorCount - 2;
-                            Assert.True(totalWorkCountToQueue >= 1);
-                            waitForWorkStart = true;
-                            scheduleWork();
-                            Assert.True(ThreadPool.ThreadCount >= totalWorkCountToQueue);
-
-                            int runningWorkItemCount = queuedWorkCount;
-
-                            // Schedule more work that would not all be scheduled and roughly verify the pending work item count
-                            totalWorkCountToQueue = processorCount * 64;
-                            waitForWorkStart = false;
-                            scheduleWork();
-                            int minExpectedPendingWorkCount = Math.Max(
-                                1,
-                                queuedWorkCount - runningWorkItemCount * 8
-                            );
-                            ThreadTestHelpers.WaitForCondition(
-                                () => ThreadPool.PendingWorkItemCount >= minExpectedPendingWorkCount
-                            );
+                            Interlocked.CompareExchange(ref backgroundEx, ex, null);
                         }
                         finally
                         {
-                            // Complete the work
-                            Interlocked.Exchange(ref completeWork, 1);
+                            localWorkScheduled.Set();
                         }
+                    };
 
-                        // Wait for work items to exit, for counting
-                        allWorkCompleted.CheckedWait();
-                        backgroundEx = Interlocked.CompareExchange(ref backgroundEx, null, null);
-                        if (backgroundEx != null)
+                    var signaledEvent = new ManualResetEvent(true);
+                    var timers = new List<Timer>();
+                    int totalWorkCountToQueue = 0;
+                    Action scheduleWork = () =>
+                    {
+                        Assert.True(queuedWorkCount < totalWorkCountToQueue);
+
+                        int workCount = (totalWorkCountToQueue - queuedWorkCount) / 2;
+                        if (workCount > 0)
                         {
-                            throw new AggregateException(backgroundEx);
+                            queuedWorkCount += workCount;
+                            ThreadPool.QueueUserWorkItem(scheduleThreadPoolLocalWork, workCount);
+                            localWorkScheduled.CheckedWait();
                         }
 
-                        // Verify the completed work item count
-                        ThreadTestHelpers.WaitForCondition(
-                            () =>
+                        for (; queuedWorkCount < totalWorkCountToQueue; ++queuedWorkCount)
+                        {
+                            ThreadPool.QueueUserWorkItem(threadPoolGlobalWork);
+                            if (waitForWorkStart)
                             {
-                                Interlocked.MemoryBarrierProcessWide(); // get a reasonably accurate value for the following
-                                return ThreadPool.CompletedWorkItemCount
-                                        - initialCompletedWorkItemCount
-                                    >= totalWorkCountToQueue;
+                                workStarted.CheckedWait();
                             }
+                        }
+                    };
+
+                    Interlocked.MemoryBarrierProcessWide(); // get a reasonably accurate value for the following
+                    long initialCompletedWorkItemCount = ThreadPool.CompletedWorkItemCount;
+
+                    try
+                    {
+                        // Schedule some simultaneous work that would all be scheduled and verify the thread count
+                        totalWorkCountToQueue = processorCount - 2;
+                        Assert.True(totalWorkCountToQueue >= 1);
+                        waitForWorkStart = true;
+                        scheduleWork();
+                        Assert.True(ThreadPool.ThreadCount >= totalWorkCountToQueue);
+
+                        int runningWorkItemCount = queuedWorkCount;
+
+                        // Schedule more work that would not all be scheduled and roughly verify the pending work item count
+                        totalWorkCountToQueue = processorCount * 64;
+                        waitForWorkStart = false;
+                        scheduleWork();
+                        int minExpectedPendingWorkCount = Math.Max(
+                            1,
+                            queuedWorkCount - runningWorkItemCount * 8
+                        );
+                        ThreadTestHelpers.WaitForCondition(
+                            () => ThreadPool.PendingWorkItemCount >= minExpectedPendingWorkCount
                         );
                     }
-                )
+                    finally
+                    {
+                        // Complete the work
+                        Interlocked.Exchange(ref completeWork, 1);
+                    }
+
+                    // Wait for work items to exit, for counting
+                    allWorkCompleted.CheckedWait();
+                    backgroundEx = Interlocked.CompareExchange(ref backgroundEx, null, null);
+                    if (backgroundEx != null)
+                    {
+                        throw new AggregateException(backgroundEx);
+                    }
+
+                    // Verify the completed work item count
+                    ThreadTestHelpers.WaitForCondition(() =>
+                    {
+                        Interlocked.MemoryBarrierProcessWide(); // get a reasonably accurate value for the following
+                        return ThreadPool.CompletedWorkItemCount - initialCompletedWorkItemCount
+                            >= totalWorkCountToQueue;
+                    });
+                })
                 .Dispose();
         }
 
@@ -913,90 +881,88 @@ namespace System.Threading.ThreadPools.Tests
         public static void WorkerThreadStateResetTest()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    ThreadPool.GetMinThreads(out int minw, out int minc);
+                    ThreadPool.GetMaxThreads(out int maxw, out int maxc);
+                    try
                     {
-                        ThreadPool.GetMinThreads(out int minw, out int minc);
-                        ThreadPool.GetMaxThreads(out int maxw, out int maxc);
-                        try
+                        // Use maximum one worker thread to have all work items below run on the same thread
+                        Assert.True(ThreadPool.SetMinThreads(1, minc));
+                        Assert.True(ThreadPool.SetMaxThreads(1, maxc));
+
+                        var done = new AutoResetEvent(false);
+                        string failureMessage = string.Empty;
+                        WaitCallback setNameWorkItem = null;
+                        WaitCallback verifyNameWorkItem = null;
+                        WaitCallback setIsBackgroundWorkItem = null;
+                        WaitCallback verifyIsBackgroundWorkItem = null;
+                        WaitCallback setPriorityWorkItem = null;
+                        WaitCallback verifyPriorityWorkItem = null;
+
+                        setNameWorkItem = _ =>
                         {
-                            // Use maximum one worker thread to have all work items below run on the same thread
-                            Assert.True(ThreadPool.SetMinThreads(1, minc));
-                            Assert.True(ThreadPool.SetMaxThreads(1, maxc));
+                            Thread.CurrentThread.Name = nameof(WorkerThreadStateResetTest);
+                            ThreadPool.QueueUserWorkItem(verifyNameWorkItem);
+                        };
 
-                            var done = new AutoResetEvent(false);
-                            string failureMessage = string.Empty;
-                            WaitCallback setNameWorkItem = null;
-                            WaitCallback verifyNameWorkItem = null;
-                            WaitCallback setIsBackgroundWorkItem = null;
-                            WaitCallback verifyIsBackgroundWorkItem = null;
-                            WaitCallback setPriorityWorkItem = null;
-                            WaitCallback verifyPriorityWorkItem = null;
-
-                            setNameWorkItem = _ =>
-                            {
-                                Thread.CurrentThread.Name = nameof(WorkerThreadStateResetTest);
-                                ThreadPool.QueueUserWorkItem(verifyNameWorkItem);
-                            };
-
-                            verifyNameWorkItem = _ =>
-                            {
-                                Thread currentThread = Thread.CurrentThread;
-                                if (currentThread.Name == nameof(WorkerThreadStateResetTest))
-                                {
-                                    failureMessage +=
-                                        $"Name was not reset: {currentThread.Name}{Environment.NewLine}";
-                                }
-                                ThreadPool.QueueUserWorkItem(setIsBackgroundWorkItem);
-                            };
-
-                            setIsBackgroundWorkItem = _ =>
-                            {
-                                Thread.CurrentThread.IsBackground = false;
-                                ThreadPool.QueueUserWorkItem(verifyIsBackgroundWorkItem);
-                            };
-
-                            verifyIsBackgroundWorkItem = _ =>
-                            {
-                                Thread currentThread = Thread.CurrentThread;
-                                if (!currentThread.IsBackground)
-                                {
-                                    failureMessage +=
-                                        $"IsBackground was not reset: {currentThread.IsBackground}{Environment.NewLine}";
-                                    currentThread.IsBackground = true;
-                                }
-                                ThreadPool.QueueUserWorkItem(setPriorityWorkItem);
-                            };
-
-                            setPriorityWorkItem = _ =>
-                            {
-                                Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
-                                ThreadPool.QueueUserWorkItem(verifyPriorityWorkItem);
-                            };
-
-                            verifyPriorityWorkItem = _ =>
-                            {
-                                Thread currentThread = Thread.CurrentThread;
-                                if (currentThread.Priority != ThreadPriority.Normal)
-                                {
-                                    failureMessage +=
-                                        $"Priority was not reset: {currentThread.Priority}{Environment.NewLine}";
-                                    currentThread.Priority = ThreadPriority.Normal;
-                                }
-                                done.Set();
-                            };
-
-                            ThreadPool.QueueUserWorkItem(setNameWorkItem);
-                            done.CheckedWait();
-                            Assert.Equal(string.Empty, failureMessage);
-                        }
-                        finally
+                        verifyNameWorkItem = _ =>
                         {
-                            Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
-                            Assert.True(ThreadPool.SetMinThreads(minw, minc));
-                        }
+                            Thread currentThread = Thread.CurrentThread;
+                            if (currentThread.Name == nameof(WorkerThreadStateResetTest))
+                            {
+                                failureMessage +=
+                                    $"Name was not reset: {currentThread.Name}{Environment.NewLine}";
+                            }
+                            ThreadPool.QueueUserWorkItem(setIsBackgroundWorkItem);
+                        };
+
+                        setIsBackgroundWorkItem = _ =>
+                        {
+                            Thread.CurrentThread.IsBackground = false;
+                            ThreadPool.QueueUserWorkItem(verifyIsBackgroundWorkItem);
+                        };
+
+                        verifyIsBackgroundWorkItem = _ =>
+                        {
+                            Thread currentThread = Thread.CurrentThread;
+                            if (!currentThread.IsBackground)
+                            {
+                                failureMessage +=
+                                    $"IsBackground was not reset: {currentThread.IsBackground}{Environment.NewLine}";
+                                currentThread.IsBackground = true;
+                            }
+                            ThreadPool.QueueUserWorkItem(setPriorityWorkItem);
+                        };
+
+                        setPriorityWorkItem = _ =>
+                        {
+                            Thread.CurrentThread.Priority = ThreadPriority.AboveNormal;
+                            ThreadPool.QueueUserWorkItem(verifyPriorityWorkItem);
+                        };
+
+                        verifyPriorityWorkItem = _ =>
+                        {
+                            Thread currentThread = Thread.CurrentThread;
+                            if (currentThread.Priority != ThreadPriority.Normal)
+                            {
+                                failureMessage +=
+                                    $"Priority was not reset: {currentThread.Priority}{Environment.NewLine}";
+                                currentThread.Priority = ThreadPriority.Normal;
+                            }
+                            done.Set();
+                        };
+
+                        ThreadPool.QueueUserWorkItem(setNameWorkItem);
+                        done.CheckedWait();
+                        Assert.Equal(string.Empty, failureMessage);
                     }
-                )
+                    finally
+                    {
+                        Assert.True(ThreadPool.SetMaxThreads(maxw, maxc));
+                        Assert.True(ThreadPool.SetMinThreads(minw, minc));
+                    }
+                })
                 .Dispose();
         }
 
@@ -1004,53 +970,49 @@ namespace System.Threading.ThreadPools.Tests
         public static void SettingMinWorkerThreadsWillCreateThreadsUpToMinimum()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    ThreadPool.GetMinThreads(out int minWorkerThreads, out int minIocpThreads);
+                    ThreadPool.GetMaxThreads(out int maxWorkerThreads, out int maxIocpThreads);
+
+                    AutoResetEvent allWorkItemsExceptOneStarted = new AutoResetEvent(false);
+                    AutoResetEvent allWorkItemsStarted = new AutoResetEvent(false);
+                    ManualResetEvent unblockWorkItems = new ManualResetEvent(false);
+                    int startedWorkItemCount = 0;
+                    WaitCallback workItem = _ =>
                     {
-                        ThreadPool.GetMinThreads(out int minWorkerThreads, out int minIocpThreads);
-                        ThreadPool.GetMaxThreads(out int maxWorkerThreads, out int maxIocpThreads);
-
-                        AutoResetEvent allWorkItemsExceptOneStarted = new AutoResetEvent(false);
-                        AutoResetEvent allWorkItemsStarted = new AutoResetEvent(false);
-                        ManualResetEvent unblockWorkItems = new ManualResetEvent(false);
-                        int startedWorkItemCount = 0;
-                        WaitCallback workItem = _ =>
+                        int newStartedWorkItemCount = Interlocked.Increment(
+                            ref startedWorkItemCount
+                        );
+                        if (newStartedWorkItemCount == minWorkerThreads)
                         {
-                            int newStartedWorkItemCount = Interlocked.Increment(
-                                ref startedWorkItemCount
-                            );
-                            if (newStartedWorkItemCount == minWorkerThreads)
-                            {
-                                allWorkItemsExceptOneStarted.Set();
-                            }
-                            else if (newStartedWorkItemCount == minWorkerThreads + 1)
-                            {
-                                allWorkItemsStarted.Set();
-                            }
-
-                            unblockWorkItems.CheckedWait();
-                        };
-
-                        ThreadPool.SetMaxThreads(minWorkerThreads, maxIocpThreads);
-                        for (int i = 0; i < minWorkerThreads + 1; ++i)
+                            allWorkItemsExceptOneStarted.Set();
+                        }
+                        else if (newStartedWorkItemCount == minWorkerThreads + 1)
                         {
-                            ThreadPool.QueueUserWorkItem(workItem);
+                            allWorkItemsStarted.Set();
                         }
 
-                        allWorkItemsExceptOneStarted.CheckedWait();
-                        Assert.False(
-                            allWorkItemsStarted.WaitOne(
-                                ThreadTestHelpers.ExpectedTimeoutMilliseconds
-                            )
-                        );
+                        unblockWorkItems.CheckedWait();
+                    };
 
-                        Assert.True(ThreadPool.SetMaxThreads(minWorkerThreads + 1, maxIocpThreads));
-                        Assert.True(ThreadPool.SetMinThreads(minWorkerThreads + 1, minIocpThreads));
-                        allWorkItemsStarted.CheckedWait();
-
-                        unblockWorkItems.Set();
+                    ThreadPool.SetMaxThreads(minWorkerThreads, maxIocpThreads);
+                    for (int i = 0; i < minWorkerThreads + 1; ++i)
+                    {
+                        ThreadPool.QueueUserWorkItem(workItem);
                     }
-                )
+
+                    allWorkItemsExceptOneStarted.CheckedWait();
+                    Assert.False(
+                        allWorkItemsStarted.WaitOne(ThreadTestHelpers.ExpectedTimeoutMilliseconds)
+                    );
+
+                    Assert.True(ThreadPool.SetMaxThreads(minWorkerThreads + 1, maxIocpThreads));
+                    Assert.True(ThreadPool.SetMinThreads(minWorkerThreads + 1, minIocpThreads));
+                    allWorkItemsStarted.CheckedWait();
+
+                    unblockWorkItems.Set();
+                })
                 .Dispose();
         }
 
@@ -1092,66 +1054,62 @@ namespace System.Threading.ThreadPools.Tests
             // Run in a separate process to test in a clean thread pool environment such that work items queued by the test
             // would cause the thread pool to create threads
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    var done = new AutoResetEvent(false);
+
+                    // Create an AsyncLocal with value change notifications, this changes the EC on this thread to non-default
+                    var asyncLocal = new AsyncLocal<int>(e =>
                     {
-                        var done = new AutoResetEvent(false);
+                        // There is nothing in this test that should cause a thread's EC to change due to EC flow
+                        Assert.False(e.ThreadContextChanged);
 
-                        // Create an AsyncLocal with value change notifications, this changes the EC on this thread to non-default
-                        var asyncLocal = new AsyncLocal<int>(
-                            e =>
-                            {
-                                // There is nothing in this test that should cause a thread's EC to change due to EC flow
-                                Assert.False(e.ThreadContextChanged);
+                        // Record a side-effect from AsyncLocal value changes caused by flow. This is mainly because AsyncLocal
+                        // value change notifications can have side-effects like impersonation, we want to ensure that not only the
+                        // AsyncLocal's value is correct, but also that the side-effect matches the value, confirming that any value
+                        // changes cause matching notifications.
+                        t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect =
+                            e.CurrentValue;
+                    });
+                    asyncLocal.Value = 1;
 
-                                // Record a side-effect from AsyncLocal value changes caused by flow. This is mainly because AsyncLocal
-                                // value change notifications can have side-effects like impersonation, we want to ensure that not only the
-                                // AsyncLocal's value is correct, but also that the side-effect matches the value, confirming that any value
-                                // changes cause matching notifications.
-                                t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect =
-                                    e.CurrentValue;
-                            }
-                        );
-                        asyncLocal.Value = 1;
+                    ThreadPool.UnsafeQueueUserWorkItem(
+                        _ =>
+                        {
+                            // The EC should not have flowed. If the EC had flowed, the assertion in the value change notification would
+                            // fail. Just for additional verification, check the side-effect as well.
+                            Assert.Equal(
+                                0,
+                                t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect
+                            );
 
-                        ThreadPool.UnsafeQueueUserWorkItem(
-                            _ =>
-                            {
-                                // The EC should not have flowed. If the EC had flowed, the assertion in the value change notification would
-                                // fail. Just for additional verification, check the side-effect as well.
-                                Assert.Equal(
-                                    0,
-                                    t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect
-                                );
+                            done.Set();
+                        },
+                        null
+                    );
+                    done.CheckedWait();
 
-                                done.Set();
-                            },
-                            null
-                        );
-                        done.CheckedWait();
+                    ThreadPool.UnsafeRegisterWaitForSingleObject(
+                        done,
+                        (_, timedOut) =>
+                        {
+                            Assert.True(timedOut);
 
-                        ThreadPool.UnsafeRegisterWaitForSingleObject(
-                            done,
-                            (_, timedOut) =>
-                            {
-                                Assert.True(timedOut);
+                            // The EC should not have flowed. If the EC had flowed, the assertion in the value change notification would
+                            // fail. Just for additional verification, check the side-effect as well.
+                            Assert.Equal(
+                                0,
+                                t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect
+                            );
 
-                                // The EC should not have flowed. If the EC had flowed, the assertion in the value change notification would
-                                // fail. Just for additional verification, check the side-effect as well.
-                                Assert.Equal(
-                                    0,
-                                    t_ThreadPoolThreadCreationDoesNotTransferExecutionContext_asyncLocalSideEffect
-                                );
-
-                                done.Set();
-                            },
-                            null,
-                            0,
-                            true
-                        );
-                        done.CheckedWait();
-                    }
-                )
+                            done.Set();
+                        },
+                        null,
+                        0,
+                        true
+                    );
+                    done.CheckedWait();
+                })
                 .Dispose();
         }
 
@@ -1161,82 +1119,76 @@ namespace System.Threading.ThreadPools.Tests
             // Run in a separate process to test in a clean thread pool environment such that work items queued by the test
             // would cause the thread pool to create threads
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    // All but the last of these work items will block and the last queued work item would release the blocking.
+                    // Without cooperative blocking, this would lead to starvation after <proc count> work items run. Since
+                    // starvation adds threads at a rate of at most 2 per second, the extra 120 work items would take roughly 60
+                    // seconds to get unblocked and since the test waits for 30 seconds it would time out. Cooperative blocking is
+                    // configured below to increase the rate of thread injection for testing purposes while getting a decent amount
+                    // of coverage for its behavior. With cooperative blocking as configured below, the test should finish within a
+                    // few seconds.
+                    int processorCount = Environment.ProcessorCount;
+                    int workItemCount = processorCount + 120;
+                    SetBlockingConfigValue("ThreadsToAddWithoutDelay_ProcCountFactor", 1);
+                    SetBlockingConfigValue("MaxDelayMs", 1);
+
+                    var allWorkItemsUnblocked = new AutoResetEvent(false);
+
+                    // Run a second iteration for some extra coverage. Iterations after the first one would be much faster because
+                    // the necessary number of threads would already have been created by then, and would not add much to the test
+                    // time.
+                    for (int iterationIndex = 0; iterationIndex < 2; ++iterationIndex)
                     {
-                        // All but the last of these work items will block and the last queued work item would release the blocking.
-                        // Without cooperative blocking, this would lead to starvation after <proc count> work items run. Since
-                        // starvation adds threads at a rate of at most 2 per second, the extra 120 work items would take roughly 60
-                        // seconds to get unblocked and since the test waits for 30 seconds it would time out. Cooperative blocking is
-                        // configured below to increase the rate of thread injection for testing purposes while getting a decent amount
-                        // of coverage for its behavior. With cooperative blocking as configured below, the test should finish within a
-                        // few seconds.
-                        int processorCount = Environment.ProcessorCount;
-                        int workItemCount = processorCount + 120;
-                        SetBlockingConfigValue("ThreadsToAddWithoutDelay_ProcCountFactor", 1);
-                        SetBlockingConfigValue("MaxDelayMs", 1);
+                        var tcs = new TaskCompletionSource<int>();
+                        int unblockedThreadCount = 0;
 
-                        var allWorkItemsUnblocked = new AutoResetEvent(false);
-
-                        // Run a second iteration for some extra coverage. Iterations after the first one would be much faster because
-                        // the necessary number of threads would already have been created by then, and would not add much to the test
-                        // time.
-                        for (int iterationIndex = 0; iterationIndex < 2; ++iterationIndex)
+                        Action<int> blockingWorkItem = _ =>
                         {
-                            var tcs = new TaskCompletionSource<int>();
-                            int unblockedThreadCount = 0;
-
-                            Action<int> blockingWorkItem = _ =>
+                            tcs.Task.Wait();
+                            if (
+                                Interlocked.Increment(ref unblockedThreadCount) == workItemCount - 1
+                            )
                             {
-                                tcs.Task.Wait();
-                                if (
-                                    Interlocked.Increment(ref unblockedThreadCount)
-                                    == workItemCount - 1
-                                )
-                                {
-                                    allWorkItemsUnblocked.Set();
-                                }
-                            };
-
-                            for (int i = 0; i < workItemCount - 1; ++i)
-                            {
-                                ThreadPool.UnsafeQueueUserWorkItem(
-                                    blockingWorkItem,
-                                    0,
-                                    preferLocal: false
-                                );
+                                allWorkItemsUnblocked.Set();
                             }
+                        };
 
-                            Action<int> unblockingWorkItem = _ => tcs.SetResult(0);
+                        for (int i = 0; i < workItemCount - 1; ++i)
+                        {
                             ThreadPool.UnsafeQueueUserWorkItem(
-                                unblockingWorkItem,
+                                blockingWorkItem,
                                 0,
                                 preferLocal: false
                             );
-                            Assert.True(allWorkItemsUnblocked.WaitOne(30_000));
                         }
 
-                        void SetBlockingConfigValue(string name, int value) =>
-                            AppContextSetData(
-                                "System.Threading.ThreadPool.Blocking." + name,
-                                value
-                            );
-
-                        void AppContextSetData(string name, object value)
-                        {
-                            typeof(AppContext).InvokeMember(
-                                "SetData",
-                                BindingFlags.ExactBinding
-                                    | BindingFlags.InvokeMethod
-                                    | BindingFlags.Public
-                                    | BindingFlags.Static,
-                                null,
-                                null,
-                                new object[] { name, value }
-                            );
-                        }
+                        Action<int> unblockingWorkItem = _ => tcs.SetResult(0);
+                        ThreadPool.UnsafeQueueUserWorkItem(
+                            unblockingWorkItem,
+                            0,
+                            preferLocal: false
+                        );
+                        Assert.True(allWorkItemsUnblocked.WaitOne(30_000));
                     }
-                )
+
+                    void SetBlockingConfigValue(string name, int value) =>
+                        AppContextSetData("System.Threading.ThreadPool.Blocking." + name, value);
+
+                    void AppContextSetData(string name, object value)
+                    {
+                        typeof(AppContext).InvokeMember(
+                            "SetData",
+                            BindingFlags.ExactBinding
+                                | BindingFlags.InvokeMethod
+                                | BindingFlags.Public
+                                | BindingFlags.Static,
+                            null,
+                            null,
+                            new object[] { name, value }
+                        );
+                    }
+                })
                 .Dispose();
         }
 
@@ -1245,62 +1197,55 @@ namespace System.Threading.ThreadPools.Tests
         {
             // Avoid contaminating the main process' environment
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    try
                     {
-                        try
-                        {
-                            // The test is run affinitized to at most 2 processors for more frequent repros. The actual test process below
-                            // will inherit the affinity.
-                            Process testParentProcess = Process.GetCurrentProcess();
-                            testParentProcess.ProcessorAffinity =
-                                (nint)testParentProcess.ProcessorAffinity & 0x3;
-                        }
-                        catch (PlatformNotSupportedException)
-                        {
-                            // Processor affinity is not supported on some platforms, try to run the test anyway
-                        }
-
-                        RemoteExecutor
-                            .Invoke(
-                                () =>
-                                {
-                                    const uint TestDurationMs = 4000;
-
-                                    var done = new ManualResetEvent(false);
-                                    int startTimeMs = Environment.TickCount;
-                                    Action<object> completingTask = data =>
-                                        ((TaskCompletionSource<int>)data).SetResult(0);
-                                    Action repeatingTask = null;
-                                    repeatingTask = () =>
-                                    {
-                                        if (
-                                            (uint)(Environment.TickCount - startTimeMs)
-                                            >= TestDurationMs
-                                        )
-                                        {
-                                            done.Set();
-                                            return;
-                                        }
-
-                                        Task.Run(repeatingTask);
-
-                                        var tcs = new TaskCompletionSource<int>();
-                                        Task.Factory.StartNew(completingTask, tcs);
-                                        tcs.Task.Wait();
-                                    };
-
-                                    for (int i = 0; i < Environment.ProcessorCount; ++i)
-                                    {
-                                        Task.Run(repeatingTask);
-                                    }
-
-                                    done.CheckedWait();
-                                }
-                            )
-                            .Dispose();
+                        // The test is run affinitized to at most 2 processors for more frequent repros. The actual test process below
+                        // will inherit the affinity.
+                        Process testParentProcess = Process.GetCurrentProcess();
+                        testParentProcess.ProcessorAffinity =
+                            (nint)testParentProcess.ProcessorAffinity & 0x3;
                     }
-                )
+                    catch (PlatformNotSupportedException)
+                    {
+                        // Processor affinity is not supported on some platforms, try to run the test anyway
+                    }
+
+                    RemoteExecutor
+                        .Invoke(() =>
+                        {
+                            const uint TestDurationMs = 4000;
+
+                            var done = new ManualResetEvent(false);
+                            int startTimeMs = Environment.TickCount;
+                            Action<object> completingTask = data =>
+                                ((TaskCompletionSource<int>)data).SetResult(0);
+                            Action repeatingTask = null;
+                            repeatingTask = () =>
+                            {
+                                if ((uint)(Environment.TickCount - startTimeMs) >= TestDurationMs)
+                                {
+                                    done.Set();
+                                    return;
+                                }
+
+                                Task.Run(repeatingTask);
+
+                                var tcs = new TaskCompletionSource<int>();
+                                Task.Factory.StartNew(completingTask, tcs);
+                                tcs.Task.Wait();
+                            };
+
+                            for (int i = 0; i < Environment.ProcessorCount; ++i)
+                            {
+                                Task.Run(repeatingTask);
+                            }
+
+                            done.CheckedWait();
+                        })
+                        .Dispose();
+                })
                 .Dispose();
         }
 

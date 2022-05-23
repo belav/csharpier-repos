@@ -613,14 +613,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
         [Fact]
         public async Task TestCancellationExceptionsIgnored()
         {
-            var t = new TransformBlock<int, int>(
-                i =>
-                {
-                    if ((i % 2) == 0)
-                        throw new OperationCanceledException();
-                    return i;
-                }
-            );
+            var t = new TransformBlock<int, int>(i =>
+            {
+                if ((i % 2) == 0)
+                    throw new OperationCanceledException();
+                return i;
+            });
             t.PostRange(0, 2);
             t.Complete();
             for (int i = 0; i < 2; i++)
@@ -678,13 +676,11 @@ namespace System.Threading.Tasks.Dataflow.Tests
                         : new TransformBlock<object, object>((Func<object, object>)f);
                 var tcs = new TaskCompletionSource<bool>();
 
-                ActionBlock<object> a = new ActionBlock<object>(
-                    x =>
-                    {
-                        Assert.Equal(expected: test == 1, actual: x is Task<object>);
-                        tcs.SetResult(true);
-                    }
-                );
+                ActionBlock<object> a = new ActionBlock<object>(x =>
+                {
+                    Assert.Equal(expected: test == 1, actual: x is Task<object>);
+                    tcs.SetResult(true);
+                });
 
                 tf.LinkTo(a);
                 tf.Post(new object());

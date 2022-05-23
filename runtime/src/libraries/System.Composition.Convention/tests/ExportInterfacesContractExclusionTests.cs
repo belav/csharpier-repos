@@ -57,13 +57,11 @@ namespace System.Composition.Convention.Tests
             var builder = new ConventionBuilder();
             builder
                 .ForType<ClassWithLifetimeConcerns>()
-                .ExportInterfaces(
-                    i =>
-                    {
-                        seenInterfaces.Add(i);
-                        return true;
-                    }
-                );
+                .ExportInterfaces(i =>
+                {
+                    seenInterfaces.Add(i);
+                    return true;
+                });
 
             IEnumerable<ExportAttribute> attributes = GetExportAttributes(
                 builder,

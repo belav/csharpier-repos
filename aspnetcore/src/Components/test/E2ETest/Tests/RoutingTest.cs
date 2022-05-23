@@ -428,12 +428,10 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         Browser.True(() => Browser.Url.EndsWith("/Other", StringComparison.Ordinal));
 
         // Because this was a full-page load, our element references should no longer be valid
-        Assert.Throws<StaleElementReferenceException>(
-            () =>
-            {
-                testSelector.SelectedOption.GetAttribute("value");
-            }
-        );
+        Assert.Throws<StaleElementReferenceException>(() =>
+        {
+            testSelector.SelectedOption.GetAttribute("value");
+        });
     }
 
     [Fact]

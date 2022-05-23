@@ -258,20 +258,18 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
                 );
             var listener = listenerProvider.GetListener(FeatureAttribute.LightBulb);
 
-            var task = JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    using var _ = listener.BeginAsyncOperation(nameof(ApplyLightBulbActionAsync));
+            var task = JoinableTaskFactory.RunAsync(async () =>
+            {
+                using var _ = listener.BeginAsyncOperation(nameof(ApplyLightBulbActionAsync));
 
-                    await JoinableTaskFactory.SwitchToMainThreadAsync(
-                        alwaysYield: true,
-                        cancellationToken
-                    );
+                await JoinableTaskFactory.SwitchToMainThreadAsync(
+                    alwaysYield: true,
+                    cancellationToken
+                );
 
-                    var activeTextView = await GetActiveTextViewAsync(cancellationToken);
-                    return await lightBulbAction(activeTextView, cancellationToken);
-                }
-            );
+                var activeTextView = await GetActiveTextViewAsync(cancellationToken);
+                return await lightBulbAction(activeTextView, cancellationToken);
+            });
 
             if (blockUntilComplete)
             {

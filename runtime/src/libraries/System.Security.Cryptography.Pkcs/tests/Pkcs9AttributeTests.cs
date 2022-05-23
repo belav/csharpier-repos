@@ -99,25 +99,23 @@ namespace System.Security.Cryptography.Pkcs.Tests
         [Fact]
         public static void InputDateTimeAsX509TimeBetween1950And2049_Utc()
         {
-            var exception = Record.Exception(
-                () =>
-                {
-                    DateTime dt = new DateTime(1950, 1, 1, 00, 00, 00, DateTimeKind.Utc);
-                    Pkcs9SigningTime st = new Pkcs9SigningTime(dt);
-                    dt = new DateTime(2049, 12, 31, 23, 59, 59, DateTimeKind.Utc);
-                    st = new Pkcs9SigningTime(dt);
+            var exception = Record.Exception(() =>
+            {
+                DateTime dt = new DateTime(1950, 1, 1, 00, 00, 00, DateTimeKind.Utc);
+                Pkcs9SigningTime st = new Pkcs9SigningTime(dt);
+                dt = new DateTime(2049, 12, 31, 23, 59, 59, DateTimeKind.Utc);
+                st = new Pkcs9SigningTime(dt);
 
-                    dt = new DateTime(1950, 1, 2);
-                    st = new Pkcs9SigningTime(dt);
-                    dt = new DateTime(2049, 12, 30);
-                    st = new Pkcs9SigningTime(dt);
+                dt = new DateTime(1950, 1, 2);
+                st = new Pkcs9SigningTime(dt);
+                dt = new DateTime(2049, 12, 30);
+                st = new Pkcs9SigningTime(dt);
 
-                    dt = new DateTime(1950, 1, 2, 00, 00, 00, DateTimeKind.Local);
-                    st = new Pkcs9SigningTime(dt);
-                    dt = new DateTime(2049, 12, 30, 23, 59, 59, DateTimeKind.Local);
-                    st = new Pkcs9SigningTime(dt);
-                }
-            );
+                dt = new DateTime(1950, 1, 2, 00, 00, 00, DateTimeKind.Local);
+                st = new Pkcs9SigningTime(dt);
+                dt = new DateTime(2049, 12, 30, 23, 59, 59, DateTimeKind.Local);
+                st = new Pkcs9SigningTime(dt);
+            });
             Assert.Null(exception);
         }
 

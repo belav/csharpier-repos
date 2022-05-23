@@ -29,13 +29,11 @@ public class ResponseBodyTests
                     var startingTcs = new TaskCompletionSource<int>(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     await httpContext.Response.StartAsync();
                     Assert.True(httpContext.Response.HasStarted);
                     Assert.True(httpContext.Response.Headers.IsReadOnly);
@@ -72,13 +70,11 @@ public class ResponseBodyTests
                     var startingTcs = new TaskCompletionSource<int>(
                         TaskCreationOptions.RunContinuationsAsynchronously
                     );
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            startingTcs.SetResult(0);
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        startingTcs.SetResult(0);
+                        return Task.CompletedTask;
+                    });
                     await httpContext.Response.CompleteAsync();
                     Assert.True(httpContext.Response.HasStarted);
                     Assert.True(httpContext.Response.Headers.IsReadOnly);

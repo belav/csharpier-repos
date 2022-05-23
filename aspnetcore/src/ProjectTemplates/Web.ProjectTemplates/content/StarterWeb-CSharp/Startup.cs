@@ -104,15 +104,11 @@ namespace Company.WebApplication1
 #endif
 #if (OrganizationalAuth)
 
-            services.AddControllersWithViews(
-                options =>
-                {
-                    var policy = new AuthorizationPolicyBuilder()
-                        .RequireAuthenticatedUser()
-                        .Build();
-                    options.Filters.Add(new AuthorizeFilter(policy));
-                }
-            );
+            services.AddControllersWithViews(options =>
+            {
+                var policy = new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build();
+                options.Filters.Add(new AuthorizeFilter(policy));
+            });
 #else
             services.AddControllersWithViews();
 #endif
@@ -153,18 +149,16 @@ namespace Company.WebApplication1
 #endif
             app.UseAuthorization();
 
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller=Home}/{action=Index}/{id?}"
-                    );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller=Home}/{action=Index}/{id?}"
+                );
 #if (OrganizationalAuth || IndividualAuth)
-                    endpoints.MapRazorPages();
+                endpoints.MapRazorPages();
 #endif
-                }
-            );
+            });
         }
     }
 }

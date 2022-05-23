@@ -76,30 +76,28 @@ namespace Microsoft.AspNetCore.SignalR.Crankier
 
         private Task WriteConnectionStatusAsync(CancellationToken cancellationToken)
         {
-            return Task.Run(
-                async () =>
+            return Task.Run(async () =>
+            {
+                var peakConnections = 0;
+                while (!cancellationToken.IsCancellationRequested)
                 {
-                    var peakConnections = 0;
-                    while (!cancellationToken.IsCancellationRequested)
+                    var statusDictionary = _agent.GetWorkerStatus();
+
+                    // Total things up
+                    var status = new StatusInformation();
+                    foreach (var value in statusDictionary.Values)
                     {
-                        var statusDictionary = _agent.GetWorkerStatus();
-
-                        // Total things up
-                        var status = new StatusInformation();
-                        foreach (var value in statusDictionary.Values)
-                        {
-                            status = status.Add(value);
-                        }
-
-                        peakConnections = Math.Max(peakConnections, status.ConnectedCount);
-                        status.PeakConnections = peakConnections;
-
-                        Trace.WriteLine(JsonConvert.SerializeObject(status));
-
-                        await Task.Delay(1000);
+                        status = status.Add(value);
                     }
+
+                    peakConnections = Math.Max(peakConnections, status.ConnectedCount);
+                    status.PeakConnections = peakConnections;
+
+                    Trace.WriteLine(JsonConvert.SerializeObject(status));
+
+                    await Task.Delay(1000);
                 }
-            );
+            });
         }
 
         public Task PongWorkerAsync(int workerId, int value)

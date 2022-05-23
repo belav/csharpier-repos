@@ -754,26 +754,22 @@ public abstract class ComponentRenderingTestBase
         // Mark first item as done; observe the remaining incomplete item appears unchecked
         // because the diff algorithm explicitly unchecks it
         appElement.FindElement(By.CssSelector(".incomplete-items .item-isdone")).Click();
-        Browser.True(
-            () =>
-            {
-                var incompleteLIs = appElement.FindElements(incompleteItemsSelector);
-                return incompleteLIs.Count == 1
-                    && !incompleteLIs[0].FindElement(By.CssSelector(".item-isdone")).Selected;
-            }
-        );
+        Browser.True(() =>
+        {
+            var incompleteLIs = appElement.FindElements(incompleteItemsSelector);
+            return incompleteLIs.Count == 1
+                && !incompleteLIs[0].FindElement(By.CssSelector(".item-isdone")).Selected;
+        });
 
         // Mark first done item as not done; observe the remaining complete item appears checked
         // because the diff algorithm explicitly re-checks it
         appElement.FindElement(By.CssSelector(".complete-items .item-isdone")).Click();
-        Browser.True(
-            () =>
-            {
-                var completeLIs = appElement.FindElements(completeItemsSelector);
-                return completeLIs.Count == 2
-                    && completeLIs[0].FindElement(By.CssSelector(".item-isdone")).Selected;
-            }
-        );
+        Browser.True(() =>
+        {
+            var completeLIs = appElement.FindElements(completeItemsSelector);
+            return completeLIs.Count == 2
+                && completeLIs[0].FindElement(By.CssSelector(".item-isdone")).Selected;
+        });
     }
 
     [Fact]

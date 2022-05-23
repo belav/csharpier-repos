@@ -37,12 +37,10 @@ public class StartupWhereReadingRequestBodyThrows
         );
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 
     private class ThrowingStream : Stream

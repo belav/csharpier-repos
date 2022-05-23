@@ -322,29 +322,21 @@ namespace ComWrappersTests
 
             // Validate reuse of a wrapper fails.
             IntPtr trackerObjRaw2 = MockReferenceTrackerRuntime.CreateTrackerObject();
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    cw.GetOrRegisterObjectForComInstance(
-                        trackerObjRaw2,
-                        CreateObjectFlags.None,
-                        nativeWrapper2
-                    );
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                cw.GetOrRegisterObjectForComInstance(
+                    trackerObjRaw2,
+                    CreateObjectFlags.None,
+                    nativeWrapper2
+                );
+            });
             Marshal.Release(trackerObjRaw2);
 
             // Validate passing null wrapper fails.
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    cw.GetOrRegisterObjectForComInstance(
-                        trackerObjRaw,
-                        CreateObjectFlags.None,
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                cw.GetOrRegisterObjectForComInstance(trackerObjRaw, CreateObjectFlags.None, null);
+            });
         }
 
         static void ValidateExternalWrapperCacheCleanUp()
@@ -418,17 +410,15 @@ namespace ComWrappersTests
             // indicating the scenario is aggregaion.
             var invalidInstance = new IntPtr(1);
             var invalidInner = new IntPtr(2);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    cw.GetOrRegisterObjectForComInstance(
-                        invalidInstance,
-                        CreateObjectFlags.None,
-                        new object(),
-                        invalidInner
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                cw.GetOrRegisterObjectForComInstance(
+                    invalidInstance,
+                    CreateObjectFlags.None,
+                    new object(),
+                    invalidInner
+                );
+            });
         }
 
         static void ValidateIUnknownImpls() => TestComWrappers.ValidateIUnknownImpls();
@@ -496,16 +486,11 @@ namespace ComWrappersTests
 
             var wrapper = new BadComWrappers();
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    wrapper.ComputeVtablesMode = BadComWrappers.FailureMode.ReturnInvalid;
-                    wrapper.GetOrCreateComInterfaceForObject(
-                        new Test(),
-                        CreateComInterfaceFlags.None
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                wrapper.ComputeVtablesMode = BadComWrappers.FailureMode.ReturnInvalid;
+                wrapper.GetOrCreateComInterfaceForObject(new Test(), CreateComInterfaceFlags.None);
+            });
 
             try
             {
@@ -519,13 +504,11 @@ namespace ComWrappersTests
 
             IntPtr trackerObjRaw = MockReferenceTrackerRuntime.CreateTrackerObject();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    wrapper.CreateObjectMode = BadComWrappers.FailureMode.ReturnInvalid;
-                    wrapper.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.None);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                wrapper.CreateObjectMode = BadComWrappers.FailureMode.ReturnInvalid;
+                wrapper.GetOrCreateObjectForComInstance(trackerObjRaw, CreateObjectFlags.None);
+            });
 
             try
             {

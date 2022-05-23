@@ -5901,24 +5901,22 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
             ) => optionsBuilder.UseInMemoryDatabase(_databaseName);
 
             protected internal override void OnModelCreating(ModelBuilder builder) =>
-                builder.Entity<User>(
-                    m =>
-                    {
-                        m.HasKey(x => x.UserId);
-                        m.OwnsMany(
-                                x => x.Roles,
-                                b =>
-                                {
-                                    b.Property<Guid>("RoleAssignmentId");
-                                    b.HasKey("RoleAssignmentId");
-                                    b.Property(x => x.Value);
-                                    b.Property<Guid>("UserId");
-                                    b.WithOwner().HasForeignKey("UserId");
-                                }
-                            )
-                            .UsePropertyAccessMode(PropertyAccessMode.Field);
-                    }
-                );
+                builder.Entity<User>(m =>
+                {
+                    m.HasKey(x => x.UserId);
+                    m.OwnsMany(
+                            x => x.Roles,
+                            b =>
+                            {
+                                b.Property<Guid>("RoleAssignmentId");
+                                b.HasKey("RoleAssignmentId");
+                                b.Property(x => x.Value);
+                                b.Property<Guid>("UserId");
+                                b.WithOwner().HasForeignKey("UserId");
+                            }
+                        )
+                        .UsePropertyAccessMode(PropertyAccessMode.Field);
+                });
         }
 
         private class Parent : IComparable<Parent>
@@ -6075,246 +6073,242 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Parent>(
-                    pb =>
-                    {
-                        pb.Property(p => p.Id).ValueGeneratedNever();
-                        pb.OwnsOne(
-                            p => p.Child1,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                modelBuilder.Entity<Parent>(pb =>
+                {
+                    pb.Property(p => p.Id).ValueGeneratedNever();
+                    pb.OwnsOne(
+                        p => p.Child1,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
-                                    }
-                                );
-                            }
-                        );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                                }
+                            );
+                        }
+                    );
 
-                        pb.OwnsOne(
-                            p => p.Child2,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                    pb.OwnsOne(
+                        p => p.Child2,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
-                                    }
-                                );
-                            }
-                        );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                                }
+                            );
+                        }
+                    );
 
-                        pb.OwnsMany(
-                            p => p.ChildCollection1,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                    pb.OwnsMany(
+                        p => p.ChildCollection1,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner(c => c.Parent)
-                                            .HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner(c => c.Parent)
+                                        .HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner(c => c.Parent)
-                                            .HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
-                            }
-                        );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner(c => c.Parent)
+                                        .HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
+                        }
+                    );
 
-                        pb.OwnsMany(
-                            p => p.ChildCollection2,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
+                    pb.OwnsMany(
+                        p => p.ChildCollection2,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner(c => c.Parent).HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner(c => c.Parent)
-                                            .HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner(c => c.Parent)
+                                        .HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner(c => c.Parent)
-                                            .HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
-                            }
-                        );
-                    }
-                );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner(c => c.Parent)
+                                        .HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
+                        }
+                    );
+                });
 
-                modelBuilder.Entity<ParentPN>(
-                    pb =>
-                    {
-                        pb.Property(p => p.Id).ValueGeneratedNever();
+                modelBuilder.Entity<ParentPN>(pb =>
+                {
+                    pb.Property(p => p.Id).ValueGeneratedNever();
 
-                        pb.OwnsOne(
-                            p => p.Child1,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner().HasForeignKey("ParentId");
+                    pb.OwnsOne(
+                        p => p.Child1,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner().HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner().HasForeignKey("ParentId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner().HasForeignKey("ParentId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner().HasForeignKey("ParentId");
-                                    }
-                                );
-                            }
-                        );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner().HasForeignKey("ParentId");
+                                }
+                            );
+                        }
+                    );
 
-                        pb.OwnsOne(
-                            p => p.Child2,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner().HasForeignKey("ParentId");
+                    pb.OwnsOne(
+                        p => p.Child2,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner().HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner().HasForeignKey("ParentId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner().HasForeignKey("ParentId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.WithOwner().HasForeignKey("ParentId");
-                                    }
-                                );
-                            }
-                        );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.WithOwner().HasForeignKey("ParentId");
+                                }
+                            );
+                        }
+                    );
 
-                        pb.OwnsMany(
-                            p => p.ChildCollection1,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner().HasForeignKey("ParentId");
+                    pb.OwnsMany(
+                        p => p.ChildCollection1,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner().HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner().HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner().HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
-                            }
-                        );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
+                        }
+                    );
 
-                        pb.OwnsMany(
-                            p => p.ChildCollection2,
-                            cb =>
-                            {
-                                cb.Property<int?>("ParentId");
-                                cb.WithOwner().HasForeignKey("ParentId");
+                    pb.OwnsMany(
+                        p => p.ChildCollection2,
+                        cb =>
+                        {
+                            cb.Property<int?>("ParentId");
+                            cb.WithOwner().HasForeignKey("ParentId");
 
-                                cb.OwnsOne(
-                                    c => c.SubChild,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner().HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
+                            cb.OwnsOne(
+                                c => c.SubChild,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
 
-                                cb.OwnsMany(
-                                    c => c.SubChildCollection,
-                                    sb =>
-                                    {
-                                        sb.Property<int>("ParentId");
-                                        sb.Property<int>("ChildId");
-                                        sb.WithOwner().HasForeignKey("ParentId", "ChildId");
-                                    }
-                                );
-                            }
-                        );
-                    }
-                );
+                            cb.OwnsMany(
+                                c => c.SubChildCollection,
+                                sb =>
+                                {
+                                    sb.Property<int>("ParentId");
+                                    sb.Property<int>("ChildId");
+                                    sb.WithOwner().HasForeignKey("ParentId", "ChildId");
+                                }
+                            );
+                        }
+                    );
+                });
 
                 modelBuilder
                     .Entity<Thing>()

@@ -48,15 +48,10 @@ public static class MvcApplicationBuilderExtensions
             throw new ArgumentNullException(nameof(app));
         }
 
-        return app.UseMvc(
-            routes =>
-            {
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}"
-                );
-            }
-        );
+        return app.UseMvc(routes =>
+        {
+            routes.MapRoute(name: "default", template: "{controller=Home}/{action=Index}/{id?}");
+        });
     }
 
     /// <summary>

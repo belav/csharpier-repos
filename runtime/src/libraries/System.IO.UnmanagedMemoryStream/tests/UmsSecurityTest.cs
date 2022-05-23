@@ -25,12 +25,10 @@ public class UmsSecurityTests
             Assert.Equal(expected: (IntPtr)bytePtr, actual: (IntPtr)stream.PositionPointer);
 
             // Make sure that moving earlier than the beginning of the stream throws
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    stream.PositionPointer = stream.PositionPointer - 1;
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                stream.PositionPointer = stream.PositionPointer - 1;
+            });
 
             // Make sure that moving later than the length can be done but then
             // fails appropriately during reads and writes, and that the stream's

@@ -502,13 +502,11 @@ namespace Microsoft.EntityFrameworkCore
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.HasKey(c => c.CustomerID);
-                        b.ToTable("Customers");
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.HasKey(c => c.CustomerID);
+                    b.ToTable("Customers");
+                });
             }
         }
 
@@ -600,13 +598,11 @@ namespace Microsoft.EntityFrameworkCore
                     .UseInternalServiceProvider(_serviceProvider);
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-                modelBuilder.Entity<Customer>(
-                    b =>
-                    {
-                        b.HasKey(c => c.CustomerID);
-                        b.ToTable("Customers");
-                    }
-                );
+                modelBuilder.Entity<Customer>(b =>
+                {
+                    b.HasKey(c => c.CustomerID);
+                    b.ToTable("Customers");
+                });
         }
     }
 }

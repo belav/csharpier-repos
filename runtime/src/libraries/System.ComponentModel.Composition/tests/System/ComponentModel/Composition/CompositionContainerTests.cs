@@ -472,12 +472,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string>();
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string>();
+            });
         }
 
         [Fact]
@@ -485,12 +483,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string>("Contract");
+            });
         }
 
         [Fact]
@@ -498,12 +494,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string, object>();
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string, object>();
+            });
         }
 
         [Fact]
@@ -511,12 +505,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string, object>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string, object>("Contract");
+            });
         }
 
         [Fact]
@@ -529,12 +521,10 @@ namespace System.ComponentModel.Composition
                 ImportCardinality.ExactlyOne
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExports(definition);
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -622,12 +612,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>();
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<string>();
+            });
         }
 
         [Fact]
@@ -635,12 +623,10 @@ namespace System.ComponentModel.Composition
         {
             var container = CreateCompositionContainer();
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<string>("Contract");
+            });
         }
 
         [Fact]
@@ -909,12 +895,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport(ContractFromType(typeof(string)), "Value1", "Value2")
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string>();
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string>();
+            });
         }
 
         [Fact]
@@ -924,12 +908,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport("Contract", "Value1", "Value2")
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string>("Contract");
+            });
         }
 
         [Fact]
@@ -939,12 +921,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport(ContractFromType(typeof(string)), "Value1", "Value2")
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string, object>();
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string, object>();
+            });
         }
 
         [Fact]
@@ -954,12 +934,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport("Contract", "Value1", "Value2")
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExport<string, object>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExport<string, object>("Contract");
+            });
         }
 
         [Fact]
@@ -974,12 +952,10 @@ namespace System.ComponentModel.Composition
                 ImportCardinality.ExactlyOne
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExports(definition);
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -1081,12 +1057,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport(typeof(string), "Value1", "Value2")
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>();
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<string>();
+            });
         }
 
         [Fact]
@@ -1096,12 +1070,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport("Contract", "Value1", "Value2")
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<string>("Contract");
+            });
         }
 
         [Fact]
@@ -1161,12 +1133,10 @@ namespace System.ComponentModel.Composition
                 ImportCardinality.ExactlyOne
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExports(definition);
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -1218,12 +1188,10 @@ namespace System.ComponentModel.Composition
 
             var export = container.GetExport<string>();
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1235,12 +1203,10 @@ namespace System.ComponentModel.Composition
 
             var export = container.GetExport<string>("Contract");
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1250,12 +1216,10 @@ namespace System.ComponentModel.Composition
 
             var export = container.GetExport<string, object>();
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1267,12 +1231,10 @@ namespace System.ComponentModel.Composition
 
             var export = container.GetExport<string, object>("Contract");
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1288,12 +1250,10 @@ namespace System.ComponentModel.Composition
 
             var export = exports.ElementAt(0);
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1307,12 +1267,10 @@ namespace System.ComponentModel.Composition
 
             var export = exports.ElementAt(0);
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1328,12 +1286,10 @@ namespace System.ComponentModel.Composition
 
             var export = exports.ElementAt(0);
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1347,12 +1303,10 @@ namespace System.ComponentModel.Composition
 
             var export = exports.ElementAt(0);
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1368,12 +1322,10 @@ namespace System.ComponentModel.Composition
 
             var export = exports.ElementAt(0);
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    var value = export.Value;
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                var value = export.Value;
+            });
         }
 
         [Fact]
@@ -1381,12 +1333,10 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create(new MicroExport(typeof(string), new object()));
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>();
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                container.GetExportedValue<string>();
+            });
         }
 
         [Fact]
@@ -1396,12 +1346,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport("Contract", typeof(string), new object())
             );
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                container.GetExportedValue<string>("Contract");
+            });
         }
 
         [Fact]
@@ -1409,12 +1357,10 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create(new MicroExport(typeof(string), new object()));
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    container.GetExportedValueOrDefault<string>();
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                container.GetExportedValueOrDefault<string>();
+            });
         }
 
         [Fact]
@@ -1424,12 +1370,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport("Contract", typeof(string), new object())
             );
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    container.GetExportedValueOrDefault<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                container.GetExportedValueOrDefault<string>("Contract");
+            });
         }
 
         [Fact]
@@ -1437,12 +1381,10 @@ namespace System.ComponentModel.Composition
         {
             var container = ContainerFactory.Create(new MicroExport(typeof(string), new object()));
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    container.GetExportedValues<string>();
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                container.GetExportedValues<string>();
+            });
         }
 
         [Fact]
@@ -1452,12 +1394,10 @@ namespace System.ComponentModel.Composition
                 new MicroExport("Contract", typeof(string), new object())
             );
 
-            ExceptionAssert.Throws<CompositionContractMismatchException>(
-                () =>
-                {
-                    container.GetExportedValues<string>("Contract");
-                }
-            );
+            ExceptionAssert.Throws<CompositionContractMismatchException>(() =>
+            {
+                container.GetExportedValues<string>("Contract");
+            });
         }
 
         [Fact]
@@ -2058,12 +1998,10 @@ namespace System.ComponentModel.Composition
                 ImportCardinality.ExactlyOne
             );
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExports(definition);
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExports(definition);
+            });
         }
 
         [Fact]
@@ -2264,12 +2202,10 @@ namespace System.ComponentModel.Composition
 
             Assert.Equal(0, importer.ValueType);
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<int>("ValueType");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<int>("ValueType");
+            });
         }
 
         [Fact]
@@ -2285,12 +2221,10 @@ namespace System.ComponentModel.Composition
 
             Assert.Null(importer.NullableValueType);
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<int>("NullableValueType");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<int>("NullableValueType");
+            });
         }
 
         [Fact]
@@ -2306,12 +2240,10 @@ namespace System.ComponentModel.Composition
 
             Assert.Null(importer.ReferenceType);
 
-            ExceptionAssert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    container.GetExportedValue<int>("ReferenceType");
-                }
-            );
+            ExceptionAssert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                container.GetExportedValue<int>("ReferenceType");
+            });
         }
 
         [Fact]
@@ -2505,15 +2437,13 @@ namespace System.ComponentModel.Composition
         {
             bool finalizerCalled = false;
 
-            var container = ContainerFactory.CreateDisposable(
-                disposing =>
+            var container = ContainerFactory.CreateDisposable(disposing =>
+            {
+                if (!disposing)
                 {
-                    if (!disposing)
-                    {
-                        finalizerCalled = true;
-                    }
+                    finalizerCalled = true;
                 }
-            );
+            });
 
             container.Dispose();
 
@@ -2527,12 +2457,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void Dispose_CallsDisposeBoolWithTrue()
         {
-            var container = ContainerFactory.CreateDisposable(
-                disposing =>
-                {
-                    Assert.True(disposing);
-                }
-            );
+            var container = ContainerFactory.CreateDisposable(disposing =>
+            {
+                Assert.True(disposing);
+            });
 
             container.Dispose();
         }
@@ -2542,12 +2470,10 @@ namespace System.ComponentModel.Composition
         {
             int disposeCount = 0;
 
-            var container = ContainerFactory.CreateDisposable(
-                disposing =>
-                {
-                    disposeCount++;
-                }
-            );
+            var container = ContainerFactory.CreateDisposable(disposing =>
+            {
+                disposeCount++;
+            });
 
             container.Dispose();
 
@@ -2814,20 +2740,16 @@ namespace System.ComponentModel.Composition
             CompositionBatch batch = new CompositionBatch();
             batch.AddPart(exporter);
             container.Compose(batch);
-            CallbackExecuteCodeDuringCompose callback = new CallbackExecuteCodeDuringCompose(
-                () =>
+            CallbackExecuteCodeDuringCompose callback = new CallbackExecuteCodeDuringCompose(() =>
+            {
+                using (CompositionContainer innerContainer = new CompositionContainer(container))
                 {
-                    using (
-                        CompositionContainer innerContainer = new CompositionContainer(container)
-                    )
-                    {
-                        CompositionBatch nestedBatch = new CompositionBatch();
-                        nestedBatch.AddPart(innerImporter);
-                        innerContainer.Compose(nestedBatch);
-                    }
-                    Assert.Equal(42, innerImporter.Value);
+                    CompositionBatch nestedBatch = new CompositionBatch();
+                    nestedBatch.AddPart(innerImporter);
+                    innerContainer.Compose(nestedBatch);
                 }
-            );
+                Assert.Equal(42, innerImporter.Value);
+            });
 
             batch = new CompositionBatch();
             batch.AddParts(outerImporter, callback);

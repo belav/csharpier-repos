@@ -16,22 +16,20 @@ public static class Program
         var config = new ConfigurationBuilder().AddCommandLine(args).Build();
 
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .ConfigureLogging(
-                            (_, factory) =>
-                            {
-                                factory.AddConsole();
-                                factory.AddFilter("Console", level => level >= LogLevel.Warning);
-                            }
-                        )
-                        .UseKestrel()
-                        .UseConfiguration(config)
-                        .UseStartup("LocalizationWebsite");
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .ConfigureLogging(
+                        (_, factory) =>
+                        {
+                            factory.AddConsole();
+                            factory.AddFilter("Console", level => level >= LogLevel.Warning);
+                        }
+                    )
+                    .UseKestrel()
+                    .UseConfiguration(config)
+                    .UseStartup("LocalizationWebsite");
+            })
             .Build();
 
         return host.RunAsync();

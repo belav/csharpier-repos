@@ -97,14 +97,12 @@ namespace AutoMapper.UnitTests.Mappers
     public class When_adding_a_custom_mapper : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ClassA, ClassB>()
-                        .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
-                    cfg.Internal().Mappers.Add(new TestObjectMapper());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ClassA, ClassB>()
+                    .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
+                cfg.Internal().Mappers.Add(new TestObjectMapper());
+            });
 
         [Fact]
         public void Should_have_valid_configuration()
@@ -167,14 +165,12 @@ namespace AutoMapper.UnitTests.Mappers
         ClassB _destination;
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ClassA, ClassB>()
-                        .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
-                    cfg.Internal().Mappers.Add(new TestObjectMapper());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ClassA, ClassB>()
+                    .ForMember(dest => dest.Destination, opt => opt.MapFrom(src => src.Source));
+                cfg.Internal().Mappers.Add(new TestObjectMapper());
+            });
 
         protected override void Because_of()
         {
@@ -268,13 +264,11 @@ namespace AutoMapper.UnitTests.Mappers
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.Internal().Mappers.Insert(0, new EnumMapper());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.Internal().Mappers.Insert(0, new EnumMapper());
+            });
 
         protected override void Because_of()
         {

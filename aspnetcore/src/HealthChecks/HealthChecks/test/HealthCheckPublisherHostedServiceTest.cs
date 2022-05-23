@@ -676,14 +676,12 @@ public class HealthCheckPublisherHostedServiceTest
 
         // Choosing big values for tests to make sure that we're not dependent on the defaults.
         // All of the tests that rely on the timer will set their own values for speed.
-        serviceCollection.Configure<HealthCheckPublisherOptions>(
-            options =>
-            {
-                options.Delay = TimeSpan.FromMinutes(5);
-                options.Period = TimeSpan.FromMinutes(5);
-                options.Timeout = TimeSpan.FromMinutes(5);
-            }
-        );
+        serviceCollection.Configure<HealthCheckPublisherOptions>(options =>
+        {
+            options.Delay = TimeSpan.FromMinutes(5);
+            options.Period = TimeSpan.FromMinutes(5);
+            options.Timeout = TimeSpan.FromMinutes(5);
+        });
 
         if (publishers != null)
         {

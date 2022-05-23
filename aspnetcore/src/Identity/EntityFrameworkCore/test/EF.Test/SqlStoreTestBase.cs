@@ -37,16 +37,14 @@ public abstract class SqlStoreTestBase<TUser, TRole, TKey>
     protected virtual void SetupAddIdentity(IServiceCollection services)
     {
         services
-            .AddIdentityCore<TUser>(
-                options =>
-                {
-                    options.Password.RequireDigit = false;
-                    options.Password.RequireLowercase = false;
-                    options.Password.RequireNonAlphanumeric = false;
-                    options.Password.RequireUppercase = false;
-                    options.User.AllowedUserNameCharacters = null;
-                }
-            )
+            .AddIdentityCore<TUser>(options =>
+            {
+                options.Password.RequireDigit = false;
+                options.Password.RequireLowercase = false;
+                options.Password.RequireNonAlphanumeric = false;
+                options.Password.RequireUppercase = false;
+                options.User.AllowedUserNameCharacters = null;
+            })
             .AddRoles<TRole>()
             .AddDefaultTokenProviders()
             .AddEntityFrameworkStores<TestDbContext>();

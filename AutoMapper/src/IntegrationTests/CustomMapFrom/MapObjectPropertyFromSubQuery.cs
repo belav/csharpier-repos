@@ -75,22 +75,20 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>()
-                        .ForMember(
-                            dst => dst.Name,
-                            opt => opt.MapFrom(src => src.LastName != null ? src : null)
-                        )
-                        .ForMember(
-                            dst => dst.FirstItem,
-                            opt => opt.MapFrom(src => src.Items.FirstOrDefault())
-                        );
-                    cfg.CreateProjection<Customer, CustomerNameModel>();
-                    cfg.CreateProjection<Item, ItemModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>()
+                    .ForMember(
+                        dst => dst.Name,
+                        opt => opt.MapFrom(src => src.LastName != null ? src : null)
+                    )
+                    .ForMember(
+                        dst => dst.FirstItem,
+                        opt => opt.MapFrom(src => src.Items.FirstOrDefault())
+                    );
+                cfg.CreateProjection<Customer, CustomerNameModel>();
+                cfg.CreateProjection<Item, ItemModel>();
+            });
 
         [Fact]
         public void Should_work()
@@ -166,21 +164,19 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>()
-                        .ForMember(
-                            dst => dst.Name,
-                            opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null)
-                        )
-                        .ForMember(
-                            dst => dst.FirstItem,
-                            opt => opt.MapFrom(src => src.Items.FirstOrDefault())
-                        );
-                    cfg.CreateProjection<Item, ItemModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>()
+                    .ForMember(
+                        dst => dst.Name,
+                        opt => opt.MapFrom(src => src.LastName != null ? src.LastName : null)
+                    )
+                    .ForMember(
+                        dst => dst.FirstItem,
+                        opt => opt.MapFrom(src => src.Items.FirstOrDefault())
+                    );
+                cfg.CreateProjection<Item, ItemModel>();
+            });
 
         [Fact]
         public void Should_work()
@@ -199,29 +195,27 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQueryTypeNameMax : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(
-                            d => d.Price,
-                            o =>
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                )
-                        );
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(
+                        d => d.Price,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            )
+                    );
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_cache_the_subquery()
@@ -347,32 +341,30 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQueryExplicitExpansion : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(
-                            d => d.Price,
-                            o =>
-                            {
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                );
-                                o.ExplicitExpansion();
-                            }
-                        );
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(
+                        d => d.Price,
+                        o =>
+                        {
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            );
+                            o.ExplicitExpansion();
+                        }
+                    );
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -471,29 +463,27 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQuery : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(
-                            d => d.Price,
-                            o =>
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                )
-                        );
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(
+                        d => d.Price,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            )
+                    );
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_cache_the_subquery()
@@ -597,30 +587,28 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQueryWithInnerObject : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(
-                            d => d.Price,
-                            o =>
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                )
-                        );
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(
+                        d => d.Price,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            )
+                    );
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_cache_the_subquery()
@@ -744,30 +732,28 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQueryWithCollection : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(
-                            d => d.Price,
-                            o =>
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                )
-                        );
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(
+                        d => d.Price,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            )
+                    );
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_cache_the_subquery()
@@ -880,32 +866,30 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQueryWithCollectionSameName : NonValidatingSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<ProductArticle, ProductArticleModel>();
-                    cfg.CreateProjection<Product, ProductModel>()
-                        .ForMember(d => d.ArticlesModel, o => o.MapFrom(s => s))
-                        .ForMember(
-                            d => d.Articles,
-                            o =>
-                                o.MapFrom(
-                                    source =>
-                                        source.Articles
-                                            .Where(
-                                                x =>
-                                                    x.IsDefault
-                                                    && x.NationId == 1
-                                                    && source.ECommercePublished
-                                            )
-                                            .FirstOrDefault()
-                                )
-                        );
-                    cfg.CreateProjection<Product, ArticlesModel>();
-                    cfg.CreateProjection<Article, PriceModel>()
-                        .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<ProductArticle, ProductArticleModel>();
+                cfg.CreateProjection<Product, ProductModel>()
+                    .ForMember(d => d.ArticlesModel, o => o.MapFrom(s => s))
+                    .ForMember(
+                        d => d.Articles,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Articles
+                                        .Where(
+                                            x =>
+                                                x.IsDefault
+                                                && x.NationId == 1
+                                                && source.ECommercePublished
+                                        )
+                                        .FirstOrDefault()
+                            )
+                    );
+                cfg.CreateProjection<Product, ArticlesModel>();
+                cfg.CreateProjection<Article, PriceModel>()
+                    .ForMember(d => d.RegionId, o => o.MapFrom(s => s.NationId));
+            });
 
         [Fact]
         public void Should_cache_the_subquery()
@@ -1117,25 +1101,23 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<CableEnd, CableEndModel>()
-                        .ForMember(
-                            dest => dest.DataHallId,
-                            opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId)
-                        );
-                    cfg.CreateProjection<Cable, CableListModel>()
-                        .ForMember(
-                            dest => dest.AEnd,
-                            opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A"))
-                        )
-                        .ForMember(
-                            dest => dest.AnotherEnd,
-                            opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B"))
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<CableEnd, CableEndModel>()
+                    .ForMember(
+                        dest => dest.DataHallId,
+                        opt => opt.MapFrom(src => src.Rack.DataHall.DataCentreId)
+                    );
+                cfg.CreateProjection<Cable, CableListModel>()
+                    .ForMember(
+                        dest => dest.AEnd,
+                        opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "A"))
+                    )
+                    .ForMember(
+                        dest => dest.AnotherEnd,
+                        opt => opt.MapFrom(src => src.Ends.FirstOrDefault(x => x.Name == "B"))
+                    );
+            });
 
         [Fact]
         public void Should_project_ok()
@@ -1153,22 +1135,17 @@ namespace AutoMapper.IntegrationTests
     public class MapObjectPropertyFromSubQueryCustomSource : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Owner, OwnerDto>();
-                    cfg.CreateProjection<Brand, BrandDto>()
-                        .ForMember(
-                            dest => dest.Owner,
-                            opt => opt.MapFrom(src => src.Owners.FirstOrDefault())
-                        );
-                    cfg.CreateProjection<ProductReview, ProductReviewDto>()
-                        .ForMember(
-                            dest => dest.Brand,
-                            opt => opt.MapFrom(src => src.Product.Brand)
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Owner, OwnerDto>();
+                cfg.CreateProjection<Brand, BrandDto>()
+                    .ForMember(
+                        dest => dest.Owner,
+                        opt => opt.MapFrom(src => src.Owners.FirstOrDefault())
+                    );
+                cfg.CreateProjection<ProductReview, ProductReviewDto>()
+                    .ForMember(dest => dest.Brand, opt => opt.MapFrom(src => src.Product.Brand));
+            });
 
         public class Owner
         {

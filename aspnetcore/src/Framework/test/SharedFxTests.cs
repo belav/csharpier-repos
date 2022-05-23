@@ -328,17 +328,15 @@ public class SharedFxTests
         _output.WriteLine(string.Join('\n', expectedAssemblies.OrderBy(i => i)));
 
         var actualAssemblies = runtimeListEntries
-            .Select(
-                i =>
-                {
-                    var filePath = i.Attribute("Path").Value;
-                    var fileParts = filePath.Split('/');
-                    var fileName = fileParts[fileParts.Length - 1];
-                    return fileName.EndsWith(".dll", StringComparison.Ordinal)
-                        ? fileName.Substring(0, fileName.Length - 4)
-                        : fileName;
-                }
-            )
+            .Select(i =>
+            {
+                var filePath = i.Attribute("Path").Value;
+                var fileParts = filePath.Split('/');
+                var fileName = fileParts[fileParts.Length - 1];
+                return fileName.EndsWith(".dll", StringComparison.Ordinal)
+                    ? fileName.Substring(0, fileName.Length - 4)
+                    : fileName;
+            })
             .ToHashSet();
 
         var missing = expectedAssemblies.Except(actualAssemblies);

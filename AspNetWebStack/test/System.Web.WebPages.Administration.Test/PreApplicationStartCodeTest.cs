@@ -12,21 +12,19 @@ namespace System.Web.WebPages.Administration.Test
         [Fact]
         public void StartTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    var adminPackageAssembly = typeof(PreApplicationStartCode).Assembly;
-                    AppDomainUtils.SetPreAppStartStage();
-                    PreApplicationStartCode.Start();
-                    // Call a second time to ensure multiple calls do not cause issues
-                    PreApplicationStartCode.Start();
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var adminPackageAssembly = typeof(PreApplicationStartCode).Assembly;
+                AppDomainUtils.SetPreAppStartStage();
+                PreApplicationStartCode.Start();
+                // Call a second time to ensure multiple calls do not cause issues
+                PreApplicationStartCode.Start();
 
-                    // TODO: Need a way to see if the module was actually registered
-                    var registeredAssemblies = ApplicationPart.GetRegisteredParts().ToList();
-                    ApplicationPart part = Assert.Single(registeredAssemblies);
-                    part.Assembly.Equals(adminPackageAssembly);
-                }
-            );
+                // TODO: Need a way to see if the module was actually registered
+                var registeredAssemblies = ApplicationPart.GetRegisteredParts().ToList();
+                ApplicationPart part = Assert.Single(registeredAssemblies);
+                part.Assembly.Equals(adminPackageAssembly);
+            });
         }
 
         [Fact]

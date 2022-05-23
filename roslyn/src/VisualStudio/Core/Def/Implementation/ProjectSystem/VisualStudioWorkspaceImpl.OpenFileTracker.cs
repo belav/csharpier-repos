@@ -162,76 +162,73 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 _foregroundAffinitization.AssertIsForeground();
 
-                _workspace.ApplyChangeToWorkspace(
-                    w =>
+                _workspace.ApplyChangeToWorkspace(w =>
+                {
+                    var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
+                        moniker
+                    );
+                    if (documentIds.IsDefaultOrEmpty)
                     {
-                        var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
-                        if (documentIds.IsDefaultOrEmpty)
-                        {
-                            return;
-                        }
+                        return;
+                    }
 
-                        if (documentIds.All(w.IsDocumentOpen))
-                        {
-                            return;
-                        }
+                    if (documentIds.All(w.IsDocumentOpen))
+                    {
+                        return;
+                    }
 
-                        ProjectId activeContextProjectId;
+                    ProjectId activeContextProjectId;
 
-                        if (documentIds.Length == 1)
-                        {
-                            activeContextProjectId = documentIds.Single().ProjectId;
-                        }
-                        else
-                        {
-                            activeContextProjectId =
-                                GetActiveContextProjectIdAndWatchHierarchies_NoLock(
-                                    moniker,
-                                    documentIds.Select(d => d.ProjectId),
-                                    hierarchy
-                                );
-                        }
+                    if (documentIds.Length == 1)
+                    {
+                        activeContextProjectId = documentIds.Single().ProjectId;
+                    }
+                    else
+                    {
+                        activeContextProjectId =
+                            GetActiveContextProjectIdAndWatchHierarchies_NoLock(
+                                moniker,
+                                documentIds.Select(d => d.ProjectId),
+                                hierarchy
+                            );
+                    }
 
-                        var textContainer = textBuffer.AsTextContainer();
+                    var textContainer = textBuffer.AsTextContainer();
 
-                        foreach (var documentId in documentIds)
+                    foreach (var documentId in documentIds)
+                    {
+                        if (
+                            !w.IsDocumentOpen(documentId)
+                            && !_workspace._documentsNotFromFiles.Contains(documentId)
+                        )
                         {
-                            if (
-                                !w.IsDocumentOpen(documentId)
-                                && !_workspace._documentsNotFromFiles.Contains(documentId)
-                            )
+                            var isCurrentContext = documentId.ProjectId == activeContextProjectId;
+                            if (w.CurrentSolution.ContainsDocument(documentId))
                             {
-                                var isCurrentContext =
-                                    documentId.ProjectId == activeContextProjectId;
-                                if (w.CurrentSolution.ContainsDocument(documentId))
-                                {
-                                    w.OnDocumentOpened(documentId, textContainer, isCurrentContext);
-                                }
-                                else if (w.CurrentSolution.ContainsAdditionalDocument(documentId))
-                                {
-                                    w.OnAdditionalDocumentOpened(
-                                        documentId,
-                                        textContainer,
-                                        isCurrentContext
-                                    );
-                                }
-                                else
-                                {
-                                    Debug.Assert(
-                                        w.CurrentSolution.ContainsAnalyzerConfigDocument(documentId)
-                                    );
-                                    w.OnAnalyzerConfigDocumentOpened(
-                                        documentId,
-                                        textContainer,
-                                        isCurrentContext
-                                    );
-                                }
+                                w.OnDocumentOpened(documentId, textContainer, isCurrentContext);
+                            }
+                            else if (w.CurrentSolution.ContainsAdditionalDocument(documentId))
+                            {
+                                w.OnAdditionalDocumentOpened(
+                                    documentId,
+                                    textContainer,
+                                    isCurrentContext
+                                );
+                            }
+                            else
+                            {
+                                Debug.Assert(
+                                    w.CurrentSolution.ContainsAnalyzerConfigDocument(documentId)
+                                );
+                                w.OnAnalyzerConfigDocumentOpened(
+                                    documentId,
+                                    textContainer,
+                                    isCurrentContext
+                                );
                             }
                         }
                     }
-                );
+                });
             }
 
             private ProjectId GetActiveContextProjectIdAndWatchHierarchies_NoLock(
@@ -345,32 +342,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
             {
                 _foregroundAffinitization.AssertIsForeground();
 
-                _workspace.ApplyChangeToWorkspace(
-                    w =>
+                _workspace.ApplyChangeToWorkspace(w =>
+                {
+                    var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
+                        moniker
+                    );
+                    if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
                     {
-                        var documentIds = _workspace.CurrentSolution.GetDocumentIdsWithFilePath(
-                            moniker
-                        );
-                        if (documentIds.IsDefaultOrEmpty || documentIds.Length == 1)
-                        {
-                            return;
-                        }
-
-                        if (!documentIds.All(w.IsDocumentOpen))
-                        {
-                            return;
-                        }
-
-                        var activeProjectId = GetActiveContextProjectIdAndWatchHierarchies_NoLock(
-                            moniker,
-                            documentIds.Select(d => d.ProjectId),
-                            hierarchy
-                        );
-                        w.OnDocumentContextUpdated(
-                            documentIds.First(d => d.ProjectId == activeProjectId)
-                        );
+                        return;
                     }
-                );
+
+                    if (!documentIds.All(w.IsDocumentOpen))
+                    {
+                        return;
+                    }
+
+                    var activeProjectId = GetActiveContextProjectIdAndWatchHierarchies_NoLock(
+                        moniker,
+                        documentIds.Select(d => d.ProjectId),
+                        hierarchy
+                    );
+                    w.OnDocumentContextUpdated(
+                        documentIds.First(d => d.ProjectId == activeProjectId)
+                    );
+                });
             }
 
             private void RefreshContextsForHierarchyPropertyChange(IVsHierarchy hierarchy)
@@ -399,50 +394,48 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
 
                 UnsubscribeFromWatchedHierarchies(moniker);
 
-                _workspace.ApplyChangeToWorkspace(
-                    w =>
+                _workspace.ApplyChangeToWorkspace(w =>
+                {
+                    var documentIds = w.CurrentSolution.GetDocumentIdsWithFilePath(moniker);
+                    if (documentIds.IsDefaultOrEmpty)
                     {
-                        var documentIds = w.CurrentSolution.GetDocumentIdsWithFilePath(moniker);
-                        if (documentIds.IsDefaultOrEmpty)
-                        {
-                            return;
-                        }
+                        return;
+                    }
 
-                        foreach (var documentId in documentIds)
+                    foreach (var documentId in documentIds)
+                    {
+                        if (
+                            w.IsDocumentOpen(documentId)
+                            && !_workspace._documentsNotFromFiles.Contains(documentId)
+                        )
                         {
-                            if (
-                                w.IsDocumentOpen(documentId)
-                                && !_workspace._documentsNotFromFiles.Contains(documentId)
-                            )
+                            if (w.CurrentSolution.ContainsDocument(documentId))
                             {
-                                if (w.CurrentSolution.ContainsDocument(documentId))
-                                {
-                                    w.OnDocumentClosed(
-                                        documentId,
-                                        new FileTextLoader(moniker, defaultEncoding: null)
-                                    );
-                                }
-                                else if (w.CurrentSolution.ContainsAdditionalDocument(documentId))
-                                {
-                                    w.OnAdditionalDocumentClosed(
-                                        documentId,
-                                        new FileTextLoader(moniker, defaultEncoding: null)
-                                    );
-                                }
-                                else
-                                {
-                                    Debug.Assert(
-                                        w.CurrentSolution.ContainsAnalyzerConfigDocument(documentId)
-                                    );
-                                    w.OnAnalyzerConfigDocumentClosed(
-                                        documentId,
-                                        new FileTextLoader(moniker, defaultEncoding: null)
-                                    );
-                                }
+                                w.OnDocumentClosed(
+                                    documentId,
+                                    new FileTextLoader(moniker, defaultEncoding: null)
+                                );
+                            }
+                            else if (w.CurrentSolution.ContainsAdditionalDocument(documentId))
+                            {
+                                w.OnAdditionalDocumentClosed(
+                                    documentId,
+                                    new FileTextLoader(moniker, defaultEncoding: null)
+                                );
+                            }
+                            else
+                            {
+                                Debug.Assert(
+                                    w.CurrentSolution.ContainsAnalyzerConfigDocument(documentId)
+                                );
+                                w.OnAnalyzerConfigDocumentClosed(
+                                    documentId,
+                                    new FileTextLoader(moniker, defaultEncoding: null)
+                                );
                             }
                         }
                     }
-                );
+                });
             }
 
             /// <summary>
@@ -499,14 +492,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem
                         nameof(QueueCheckForFilesBeingOpen)
                     );
 
-                    Task.Run(
-                            async () =>
-                            {
-                                await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
+                    Task.Run(async () =>
+                        {
+                            await _foregroundAffinitization.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                                ProcessQueuedWorkOnUIThread();
-                            }
-                        )
+                            ProcessQueuedWorkOnUIThread();
+                        })
                         .CompletesAsyncOperation(asyncToken);
                 }
             }

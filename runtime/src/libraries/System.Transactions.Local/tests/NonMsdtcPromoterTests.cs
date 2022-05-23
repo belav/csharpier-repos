@@ -1530,37 +1530,30 @@ namespace System.Transactions.Tests
             MyEnlistment vol = null;
             NonMSDTCPromoterEnlistment pspe = null;
 
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                using (TransactionScope ts = new TransactionScope())
                 {
-                    using (TransactionScope ts = new TransactionScope())
+                    vol = CreateVolatileEnlistment(volCompleted, null, enlistmentOptions, false);
+
+                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                        NonMsdtcPromoterTests.PromoterType1,
+                        NonMsdtcPromoterTests.PromotedToken1,
+                        pspeCompleted,
+                        /*nonMSDTC = */true,
+                        /*tx = */null,
+                        /*spcResponse=*/TransactionStatus.Committed,
+                        /*expectRejection=*/false
+                    );
+
+                    if (promote)
                     {
-                        vol = CreateVolatileEnlistment(
-                            volCompleted,
-                            null,
-                            enlistmentOptions,
-                            false
-                        );
-
-                        pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                            NonMsdtcPromoterTests.PromoterType1,
-                            NonMsdtcPromoterTests.PromotedToken1,
-                            pspeCompleted,
-                            /*nonMSDTC = */true,
-                            /*tx = */null,
-                            /*spcResponse=*/TransactionStatus.Committed,
-                            /*expectRejection=*/false
-                        );
-
-                        if (promote)
-                        {
-                            Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
-                        }
-
-                        ts.Complete();
+                        Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1);
                     }
+
+                    ts.Complete();
                 }
-            );
+            });
 
             Assert.True(
                 volCompleted.WaitOne(TimeSpan.FromSeconds(5))
@@ -1718,45 +1711,43 @@ namespace System.Transactions.Tests
             AutoResetEvent pspeCompleted = new AutoResetEvent(false);
             NonMSDTCPromoterEnlistment pspe = null;
 
-            Assert.Throws<TransactionAbortedException>(
-                () =>
+            Assert.Throws<TransactionAbortedException>(() =>
+            {
+                CommittableTransaction tx = new CommittableTransaction(TimeSpan.FromSeconds(1));
+
+                pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
+                    NonMsdtcPromoterTests.PromoterType1,
+                    NonMsdtcPromoterTests.PromotedToken1,
+                    pspeCompleted,
+                    /*nonMSDTC = */true,
+                    tx,
+                    /*spcResponse=*/TransactionStatus.Committed,
+                    /*expectRejection=*/false
+                );
+
+                if (promote)
                 {
-                    CommittableTransaction tx = new CommittableTransaction(TimeSpan.FromSeconds(1));
-
-                    pspe = (NonMSDTCPromoterEnlistment)CreatePSPEEnlistment(
-                        NonMsdtcPromoterTests.PromoterType1,
-                        NonMsdtcPromoterTests.PromotedToken1,
-                        pspeCompleted,
-                        /*nonMSDTC = */true,
-                        tx,
-                        /*spcResponse=*/TransactionStatus.Committed,
-                        /*expectRejection=*/false
-                    );
-
-                    if (promote)
-                    {
-                        Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1, tx);
-                    }
-
-                    NoStressTrace(
-                        string.Format(
-                            "There will be a 3 second delay here - {0}",
-                            DateTime.Now.ToString()
-                        )
-                    );
-
-                    Task.Delay(TimeSpan.FromSeconds(3)).Wait();
-
-                    NoStressTrace(
-                        string.Format(
-                            "Woke up from sleep. Attempting Commit - {0}",
-                            DateTime.Now.ToString()
-                        )
-                    );
-
-                    tx.Commit();
+                    Promote(testCaseDescription, NonMsdtcPromoterTests.PromotedToken1, tx);
                 }
-            );
+
+                NoStressTrace(
+                    string.Format(
+                        "There will be a 3 second delay here - {0}",
+                        DateTime.Now.ToString()
+                    )
+                );
+
+                Task.Delay(TimeSpan.FromSeconds(3)).Wait();
+
+                NoStressTrace(
+                    string.Format(
+                        "Woke up from sleep. Attempting Commit - {0}",
+                        DateTime.Now.ToString()
+                    )
+                );
+
+                tx.Commit();
+            });
 
             Assert.True(pspeCompleted.WaitOne(TimeSpan.FromSeconds(5)));
 
@@ -2785,12 +2776,10 @@ namespace System.Transactions.Tests
             );
             durable.TransactionToEnlist = Transaction.Current;
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () => // SubordinateTransaction promotes to MSDTC
-                {
-                    subTx.EnlistDurable(Guid.NewGuid(), durable, EnlistmentOptions.None);
-                }
-            );
+            Assert.Throws<PlatformNotSupportedException>(() => // SubordinateTransaction promotes to MSDTC
+            {
+                subTx.EnlistDurable(Guid.NewGuid(), durable, EnlistmentOptions.None);
+            });
         }
     }
 }

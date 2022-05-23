@@ -79,24 +79,22 @@ namespace AutoMapper.IntegrationTests.Net4
             : AutoMapperSpecBase
         {
             protected override MapperConfiguration Configuration =>
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateProjection<Customer, CustomerViewModel>()
-                            .ForMember(
-                                x => x.FullAddress,
-                                o =>
-                                    o.MapFrom(
-                                        c =>
-                                            c.Address.Street
-                                            + ", "
-                                            + c.Address.City
-                                            + " "
-                                            + c.Address.State
-                                    )
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateProjection<Customer, CustomerViewModel>()
+                        .ForMember(
+                            x => x.FullAddress,
+                            o =>
+                                o.MapFrom(
+                                    c =>
+                                        c.Address.Street
+                                        + ", "
+                                        + c.Address.City
+                                        + " "
+                                        + c.Address.State
+                                )
+                        );
+                });
 
             [Fact]
             public void can_map_with_projection()
@@ -120,22 +118,18 @@ namespace AutoMapper.IntegrationTests.Net4
                         )
                         .ToList();
 
-                    customerVms.ForEach(
-                        x =>
-                        {
-                            x.FullAddress.ShouldNotBeNull();
-                            x.FullAddress.ShouldNotBeEmpty();
-                        }
-                    );
+                    customerVms.ForEach(x =>
+                    {
+                        x.FullAddress.ShouldNotBeNull();
+                        x.FullAddress.ShouldNotBeEmpty();
+                    });
 
                     customerVms = ProjectTo<CustomerViewModel>(context.Customers).ToList();
-                    customerVms.ForEach(
-                        x =>
-                        {
-                            x.FullAddress.ShouldNotBeNull();
-                            x.FullAddress.ShouldNotBeEmpty();
-                        }
-                    );
+                    customerVms.ForEach(x =>
+                    {
+                        x.FullAddress.ShouldNotBeNull();
+                        x.FullAddress.ShouldNotBeEmpty();
+                    });
                 }
             }
         }

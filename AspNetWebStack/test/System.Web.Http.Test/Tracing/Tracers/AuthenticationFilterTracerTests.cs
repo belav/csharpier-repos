@@ -44,12 +44,10 @@ namespace System.Web.Http.Tracing.Tracers
                             expectedCancellationToken
                         )
                 )
-                .Callback(
-                    () =>
-                    {
-                        calls++;
-                    }
-                )
+                .Callback(() =>
+                {
+                    calls++;
+                })
                 .Returns(() => Task.FromResult<object>(null));
             IAuthenticationFilter filter = mock.Object;
             ITraceWriter tracer = CreateStubTracer();
@@ -255,12 +253,10 @@ namespace System.Web.Http.Tracing.Tracers
             Mock<IAuthenticationFilter> mock = new Mock<IAuthenticationFilter>();
             int calls = 0;
             mock.Setup(f => f.ChallengeAsync(expectedChallengeContext, expectedCancellationToken))
-                .Callback(
-                    () =>
-                    {
-                        calls++;
-                    }
-                )
+                .Callback(() =>
+                {
+                    calls++;
+                })
                 .Returns(() => Task.FromResult(expectedResult));
             IAuthenticationFilter filter = mock.Object;
             ITraceWriter tracer = CreateStubTracer();

@@ -315,17 +315,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     .Services
                     .ThreadingPolicy;
 
-                var result = threadingService.ExecuteSynchronously(
-                    async () =>
-                    {
-                        var configuredProject = await browseObjectContext.UnconfiguredProject
-                            .GetSuggestedConfiguredProjectAsync()
-                            .ConfigureAwait(false);
-                        return await configuredProject!.Services.PackageReferences!
-                            .AddAsync(packageName, version)
-                            .ConfigureAwait(false);
-                    }
-                );
+                var result = threadingService.ExecuteSynchronously(async () =>
+                {
+                    var configuredProject = await browseObjectContext.UnconfiguredProject
+                        .GetSuggestedConfiguredProjectAsync()
+                        .ConfigureAwait(false);
+                    return await configuredProject!.Services.PackageReferences!
+                        .AddAsync(packageName, version)
+                        .ConfigureAwait(false);
+                });
             }
             else
             {
@@ -347,17 +345,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                     .Services
                     .ThreadingPolicy;
 
-                threadingService.ExecuteSynchronously(
-                    async () =>
-                    {
-                        var configuredProject = await browseObjectContext.UnconfiguredProject
-                            .GetSuggestedConfiguredProjectAsync()
-                            .ConfigureAwait(false);
-                        await configuredProject!.Services.PackageReferences!
-                            .RemoveAsync(packageName)
-                            .ConfigureAwait(false);
-                    }
-                );
+                threadingService.ExecuteSynchronously(async () =>
+                {
+                    var configuredProject = await browseObjectContext.UnconfiguredProject
+                        .GetSuggestedConfiguredProjectAsync()
+                        .ConfigureAwait(false);
+                    await configuredProject!.Services.PackageReferences!
+                        .RemoveAsync(packageName)
+                        .ConfigureAwait(false);
+                });
             }
             else
             {
@@ -491,32 +487,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             var directoriesToDelete = new List<string>();
             var dte = GetDTE();
 
-            InvokeOnUIThread(
-                cancellationToken =>
+            InvokeOnUIThread(cancellationToken =>
+            {
+                if (dte.Solution != null)
                 {
-                    if (dte.Solution != null)
+                    // Save the full path to each project in the solution. This is so we can
+                    // cleanup any folders after the solution is closed.
+                    foreach (EnvDTE.Project project in dte.Solution.Projects)
                     {
-                        // Save the full path to each project in the solution. This is so we can
-                        // cleanup any folders after the solution is closed.
-                        foreach (EnvDTE.Project project in dte.Solution.Projects)
+                        if (!string.IsNullOrEmpty(project.FullName))
                         {
-                            if (!string.IsNullOrEmpty(project.FullName))
-                            {
-                                directoriesToDelete.Add(Path.GetDirectoryName(project.FullName));
-                            }
-                        }
-
-                        // Save the full path to the solution. This is so we can cleanup any folders after the solution is closed.
-                        // The solution might be zero-impact and thus has no name, so deal with that
-                        var solutionFullName = dte.Solution.FullName;
-
-                        if (!string.IsNullOrEmpty(solutionFullName))
-                        {
-                            directoriesToDelete.Add(Path.GetDirectoryName(solutionFullName));
+                            directoriesToDelete.Add(Path.GetDirectoryName(project.FullName));
                         }
                     }
+
+                    // Save the full path to the solution. This is so we can cleanup any folders after the solution is closed.
+                    // The solution might be zero-impact and thus has no name, so deal with that
+                    var solutionFullName = dte.Solution.FullName;
+
+                    if (!string.IsNullOrEmpty(solutionFullName))
+                    {
+                        directoriesToDelete.Add(Path.GetDirectoryName(solutionFullName));
+                    }
                 }
-            );
+            });
 
             if (dte.Debugger.CurrentMode != EnvDTE.dbgDebugMode.dbgDesignMode)
             {
@@ -635,12 +629,10 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
             public void Dispose()
             {
-                InvokeOnUIThread(
-                    cancellationToken =>
-                    {
-                        ErrorHandler.ThrowOnFailure(_solution.UnadviseSolutionEvents(_cookie));
-                    }
-                );
+                InvokeOnUIThread(cancellationToken =>
+                {
+                    ErrorHandler.ThrowOnFailure(_solution.UnadviseSolutionEvents(_cookie));
+                });
             }
 
             public int OnAfterOpenProject(IVsHierarchy pHierarchy, int fAdded)
@@ -759,38 +751,36 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
         {
             void SetText(string text)
             {
-                InvokeOnUIThread(
-                    cancellationToken =>
-                    {
-                        // The active text view might not have finished composing yet, waiting for the application to 'idle'
-                        // means that it is done pumping messages (including WM_PAINT) and the window should return the correct text view
-                        WaitForApplicationIdle(Helper.HangMitigatingTimeout);
+                InvokeOnUIThread(cancellationToken =>
+                {
+                    // The active text view might not have finished composing yet, waiting for the application to 'idle'
+                    // means that it is done pumping messages (including WM_PAINT) and the window should return the correct text view
+                    WaitForApplicationIdle(Helper.HangMitigatingTimeout);
 
-                        var vsTextManager = GetGlobalService<SVsTextManager, IVsTextManager>();
-                        var hresult = vsTextManager.GetActiveView(
-                            fMustHaveFocus: 1,
-                            pBuffer: null,
-                            ppView: out var vsTextView
-                        );
-                        Marshal.ThrowExceptionForHR(hresult);
-                        var activeVsTextView = (IVsUserData)vsTextView;
+                    var vsTextManager = GetGlobalService<SVsTextManager, IVsTextManager>();
+                    var hresult = vsTextManager.GetActiveView(
+                        fMustHaveFocus: 1,
+                        pBuffer: null,
+                        ppView: out var vsTextView
+                    );
+                    Marshal.ThrowExceptionForHR(hresult);
+                    var activeVsTextView = (IVsUserData)vsTextView;
 
-                        hresult = activeVsTextView.GetData(
-                            Editor_InProc.IWpfTextViewId,
-                            out var wpfTextViewHost
-                        );
-                        Marshal.ThrowExceptionForHR(hresult);
+                    hresult = activeVsTextView.GetData(
+                        Editor_InProc.IWpfTextViewId,
+                        out var wpfTextViewHost
+                    );
+                    Marshal.ThrowExceptionForHR(hresult);
 
-                        var view = ((IWpfTextViewHost)wpfTextViewHost).TextView;
-                        var textSnapshot = view.TextSnapshot;
-                        var replacementSpan = new Text.SnapshotSpan(
-                            textSnapshot,
-                            0,
-                            textSnapshot.Length
-                        );
-                        view.TextBuffer.Replace(replacementSpan, text);
-                    }
-                );
+                    var view = ((IWpfTextViewHost)wpfTextViewHost).TextView;
+                    var textSnapshot = view.TextSnapshot;
+                    var replacementSpan = new Text.SnapshotSpan(
+                        textSnapshot,
+                        0,
+                        textSnapshot.Length
+                    );
+                    view.TextBuffer.Replace(replacementSpan, text);
+                });
             }
 
             OpenFile(projectName, fileName);
@@ -1120,25 +1110,23 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void OpenFileWithDesigner(string projectName, string relativeFilePath)
         {
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var filePath = GetAbsolutePathForProjectRelativeFilePath(
-                        projectName,
-                        relativeFilePath
-                    );
-                    VsShellUtilities.OpenDocument(
-                        ServiceProvider.GlobalProvider,
-                        filePath,
-                        VSConstants.LOGVIEWID.Designer_guid,
-                        out _,
-                        out _,
-                        out var windowFrame,
-                        out _
-                    );
-                    ErrorHandler.ThrowOnFailure(windowFrame.Show());
-                }
-            );
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var filePath = GetAbsolutePathForProjectRelativeFilePath(
+                    projectName,
+                    relativeFilePath
+                );
+                VsShellUtilities.OpenDocument(
+                    ServiceProvider.GlobalProvider,
+                    filePath,
+                    VSConstants.LOGVIEWID.Designer_guid,
+                    out _,
+                    out _,
+                    out var windowFrame,
+                    out _
+                );
+                ErrorHandler.ThrowOnFailure(windowFrame.Show());
+            });
         }
 
         public void OpenFile(string projectName, string relativeFilePath)
@@ -1187,35 +1175,33 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             bool saveFile
         )
         {
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var filePath = GetAbsolutePathForProjectRelativeFilePath(
-                        projectName,
-                        relativeFilePath
-                    );
-                    if (
-                        !VsShellUtilities.IsDocumentOpen(
-                            ServiceProvider.GlobalProvider,
-                            filePath,
-                            logicalView,
-                            out _,
-                            out _,
-                            out var windowFrame
-                        )
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var filePath = GetAbsolutePathForProjectRelativeFilePath(
+                    projectName,
+                    relativeFilePath
+                );
+                if (
+                    !VsShellUtilities.IsDocumentOpen(
+                        ServiceProvider.GlobalProvider,
+                        filePath,
+                        logicalView,
+                        out _,
+                        out _,
+                        out var windowFrame
                     )
-                    {
-                        throw new InvalidOperationException(
-                            $"File '{filePath}' is not open in logical view '{logicalView}'"
-                        );
-                    }
-
-                    var frameClose = saveFile
-                        ? __FRAMECLOSE.FRAMECLOSE_SaveIfDirty
-                        : __FRAMECLOSE.FRAMECLOSE_NoSave;
-                    ErrorHandler.ThrowOnFailure(windowFrame.CloseFrame((uint)frameClose));
+                )
+                {
+                    throw new InvalidOperationException(
+                        $"File '{filePath}' is not open in logical view '{logicalView}'"
+                    );
                 }
-            );
+
+                var frameClose = saveFile
+                    ? __FRAMECLOSE.FRAMECLOSE_SaveIfDirty
+                    : __FRAMECLOSE.FRAMECLOSE_NoSave;
+                ErrorHandler.ThrowOnFailure(windowFrame.CloseFrame((uint)frameClose));
+            });
         }
 
         private EnvDTE.Document GetOpenDocument(string projectName, string relativeFilePath)

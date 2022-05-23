@@ -1837,12 +1837,10 @@ public static partial class DataContractJsonSerializerTests
                 writer.Flush();
                 ms.Position = 0;
 
-                Assert.Throws<SerializationException>(
-                    () =>
-                    {
-                        serializer.ReadObject(ms);
-                    }
-                );
+                Assert.Throws<SerializationException>(() =>
+                {
+                    serializer.ReadObject(ms);
+                });
             }
         }
     }
@@ -2280,12 +2278,10 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_DeserializeEmptyString()
     {
         var serializer = new DataContractJsonSerializer(typeof(object));
-        Assert.Throws<SerializationException>(
-            () =>
-            {
-                serializer.ReadObject(new MemoryStream());
-            }
-        );
+        Assert.Throws<SerializationException>(() =>
+        {
+            serializer.ReadObject(new MemoryStream());
+        });
     }
 
     [Fact]
@@ -2518,15 +2514,13 @@ public static partial class DataContractJsonSerializerTests
     public static void DCJS_EnumerableInterfaceGetOnlyCollection()
     {
         // Expect exception in deserialization process
-        Assert.Throws<InvalidDataContractException>(
-            () =>
-            {
-                var obj = new TypeWithEnumerableInterfaceGetOnlyCollection(
-                    new List<string>() { "item1", "item2", "item3" }
-                );
-                SerializeAndDeserialize(obj, @"{""Items"":[""item1"",""item2"",""item3""]}");
-            }
-        );
+        Assert.Throws<InvalidDataContractException>(() =>
+        {
+            var obj = new TypeWithEnumerableInterfaceGetOnlyCollection(
+                new List<string>() { "item1", "item2", "item3" }
+            );
+            SerializeAndDeserialize(obj, @"{""Items"":[""item1"",""item2"",""item3""]}");
+        });
     }
 
     [Fact]
@@ -2571,15 +2565,13 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_RecursiveCollection()
     {
-        Assert.Throws<InvalidDataContractException>(
-            () =>
-            {
-                (new DataContractJsonSerializer(typeof(RecursiveCollection))).WriteObject(
-                    new MemoryStream(),
-                    new RecursiveCollection()
-                );
-            }
-        );
+        Assert.Throws<InvalidDataContractException>(() =>
+        {
+            (new DataContractJsonSerializer(typeof(RecursiveCollection))).WriteObject(
+                new MemoryStream(),
+                new RecursiveCollection()
+            );
+        });
     }
 
     [Fact]
@@ -3891,15 +3883,13 @@ public static partial class DataContractJsonSerializerTests
     {
         foreach (NativeJsonTestData td in NativeJsonTestData.Json_InvalidTypes)
         {
-            Assert.Throws<InvalidDataContractException>(
-                () =>
-                {
-                    object o = td.Instantiate();
-                    DataContractJsonSerializer dcs = new DataContractJsonSerializer(o.GetType());
-                    MemoryStream ms = new MemoryStream();
-                    dcs.WriteObject(ms, o);
-                }
-            );
+            Assert.Throws<InvalidDataContractException>(() =>
+            {
+                object o = td.Instantiate();
+                DataContractJsonSerializer dcs = new DataContractJsonSerializer(o.GetType());
+                MemoryStream ms = new MemoryStream();
+                dcs.WriteObject(ms, o);
+            });
         }
     }
 
@@ -3949,19 +3939,17 @@ public static partial class DataContractJsonSerializerTests
     [Fact]
     public static void DCJS_DifferentCollectionsOfSameTypeAsKnownTypes()
     {
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                (
-                    new DataContractSerializer(
-                        typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
-                    )
-                ).WriteObject(
-                    new MemoryStream(),
-                    new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
-                );
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            (
+                new DataContractSerializer(
+                    typeof(TypeWithKnownTypesOfCollectionsWithConflictingXmlName)
+                )
+            ).WriteObject(
+                new MemoryStream(),
+                new TypeWithKnownTypesOfCollectionsWithConflictingXmlName()
+            );
+        });
     }
 
     private static T SerializeAndDeserialize<T>(

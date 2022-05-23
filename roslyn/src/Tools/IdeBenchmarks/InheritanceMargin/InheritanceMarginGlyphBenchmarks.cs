@@ -93,33 +93,31 @@ namespace IdeBenchmarks.InheritanceMargin
         [Benchmark]
         public void BenchmarkGlyphRefresh()
         {
-            RunOnUIThread(
-                () =>
+            RunOnUIThread(() =>
+            {
+                for (var i = 0; i < Iterations; i++)
                 {
-                    for (var i = 0; i < Iterations; i++)
+                    // Add & remove glyphs from the Canvas, which simulates the real refreshing scenanrio when user is scrolling up/down.
+                    for (var j = 0; j < _tags.Length; j++)
                     {
-                        // Add & remove glyphs from the Canvas, which simulates the real refreshing scenanrio when user is scrolling up/down.
-                        for (var j = 0; j < _tags.Length; j++)
-                        {
-                            var tag = _tags[j];
-                            var glyph = new InheritanceMarginGlyph(
-                                _threadingContext,
-                                _streamingFindUsagesPresenter,
-                                _classificationTypeMap,
-                                _classificationFormatMap,
-                                _operationExecutor,
-                                tag,
-                                _mockTextView,
-                                _listener
-                            );
-                            Canvas.SetTop(glyph, j * WidthAndHeightOfGlyph);
-                            _canvas.Children.Add(glyph);
-                        }
-                        _canvas.Measure(new Size(WidthAndHeightOfGlyph, HeightOfCanvas));
-                        _canvas.Children.Clear();
+                        var tag = _tags[j];
+                        var glyph = new InheritanceMarginGlyph(
+                            _threadingContext,
+                            _streamingFindUsagesPresenter,
+                            _classificationTypeMap,
+                            _classificationFormatMap,
+                            _operationExecutor,
+                            tag,
+                            _mockTextView,
+                            _listener
+                        );
+                        Canvas.SetTop(glyph, j * WidthAndHeightOfGlyph);
+                        _canvas.Children.Add(glyph);
                     }
+                    _canvas.Measure(new Size(WidthAndHeightOfGlyph, HeightOfCanvas));
+                    _canvas.Children.Clear();
                 }
-            );
+            });
         }
 
         private async Task PrepareGlyphRequiredDataAsync(CancellationToken cancellationToken)
@@ -161,13 +159,11 @@ namespace IdeBenchmarks.InheritanceMargin
         private void RunOnUIThread(Action action)
         {
 #pragma warning disable VSTHRD001 // Only used for Benchmark purpose
-            _wpfApp.Dispatcher.Invoke(
-                () =>
+            _wpfApp.Dispatcher.Invoke(() =>
 #pragma warning restore VSTHRD001
-                {
-                    action?.Invoke();
-                }
-            );
+            {
+                action?.Invoke();
+            });
         }
 
         private Task SetupWpfApplicaitonAsync()
@@ -175,27 +171,25 @@ namespace IdeBenchmarks.InheritanceMargin
             if (Application.Current == null)
             {
                 var tcs = new TaskCompletionSource<bool>();
-                var mainThread = new Thread(
-                    () =>
+                var mainThread = new Thread(() =>
+                {
+                    _wpfApp = new Application();
+                    _wpfApp.MainWindow = new Window();
+                    _wpfApp.Startup += (sender, args) =>
                     {
-                        _wpfApp = new Application();
-                        _wpfApp.MainWindow = new Window();
-                        _wpfApp.Startup += (sender, args) =>
-                        {
-                            tcs.SetResult(true);
-                        };
+                        tcs.SetResult(true);
+                    };
 
-                        _canvas = new Canvas()
-                        {
-                            ClipToBounds = true,
-                            Width = WidthAndHeightOfGlyph,
-                            Height = HeightOfCanvas
-                        };
+                    _canvas = new Canvas()
+                    {
+                        ClipToBounds = true,
+                        Width = WidthAndHeightOfGlyph,
+                        Height = HeightOfCanvas
+                    };
 
-                        _wpfApp.MainWindow.Content = _canvas;
-                        _wpfApp.Run();
-                    }
-                );
+                    _wpfApp.MainWindow.Content = _canvas;
+                    _wpfApp.Run();
+                });
 
                 mainThread.SetApartmentState(ApartmentState.STA);
                 mainThread.Start();

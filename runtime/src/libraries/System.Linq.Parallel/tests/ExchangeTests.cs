@@ -324,14 +324,12 @@ namespace System.Linq.Parallel.Tests
             _ = rightCount;
             ParallelQuery<int> query = left.Item
                 .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
-                .Select(
-                    x =>
-                    {
-                        if (x == 4)
-                            throw new DeliberateTestException();
-                        return x;
-                    }
-                )
+                .Select(x =>
+                {
+                    if (x == 4)
+                        throw new DeliberateTestException();
+                    return x;
+                })
                 .Zip(right.Item, (a, b) => a + b)
                 .AsParallel()
                 .WithExecutionMode(ParallelExecutionMode.ForceParallelism);
@@ -368,14 +366,12 @@ namespace System.Linq.Parallel.Tests
                 .Create(
                     left.Item
                         .WithExecutionMode(ParallelExecutionMode.ForceParallelism)
-                        .Select(
-                            x =>
-                            {
-                                if (x == 4)
-                                    throw new DeliberateTestException();
-                                return x;
-                            }
-                        )
+                        .Select(x =>
+                        {
+                            if (x == 4)
+                                throw new DeliberateTestException();
+                            return x;
+                        })
                         .Zip(right.Item, (a, b) => a + b)
                 )
                 .AsParallel();

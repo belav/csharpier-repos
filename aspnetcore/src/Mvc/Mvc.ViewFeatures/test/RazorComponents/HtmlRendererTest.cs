@@ -24,13 +24,11 @@ public class HtmlRendererTest
         var expectedHtml = new[] { "<", "p", ">", "</", "p", ">" };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
@@ -53,14 +51,12 @@ public class HtmlRendererTest
         var expectedHtml = new[] { "<", "p", ">", "Hello world!", "</", "p", ">" };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddContent(1, "Hello world!");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddContent(1, "Hello world!");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
@@ -83,14 +79,12 @@ public class HtmlRendererTest
         var expectedHtml = new[] { "<", "p", ">", "&lt;Hello world!&gt;", "</", "p", ">" };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddContent(1, "<Hello world!>");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddContent(1, "<Hello world!>");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
@@ -113,14 +107,12 @@ public class HtmlRendererTest
         var expectedHtml = new[] { "<", "p", ">", "<span>Hello world!</span>", "</", "p", ">" };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddMarkupContent(1, "<span>Hello world!</span>");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddMarkupContent(1, "<span>Hello world!</span>");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
         var htmlRenderer = GetHtmlRenderer(serviceProvider);
@@ -158,15 +150,13 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddAttribute(1, "class", "lead");
-                        rtb.AddContent(2, "Hello world!");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddAttribute(1, "class", "lead");
+                    rtb.AddContent(2, "Hello world!");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -211,23 +201,21 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddAttribute(1, "class", "test1");
-                        rtb.AddAttribute(2, "another", "another-value");
-                        rtb.AddMultipleAttributes(
-                            3,
-                            new Dictionary<string, object>()
-                            {
-                                { "Class", "test2" }, // Matching is case-insensitive.
-                            }
-                        );
-                        rtb.AddContent(4, "Hello world!");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddAttribute(1, "class", "test1");
+                    rtb.AddAttribute(2, "another", "another-value");
+                    rtb.AddMultipleAttributes(
+                        3,
+                        new Dictionary<string, object>()
+                        {
+                            { "Class", "test2" }, // Matching is case-insensitive.
+                        }
+                    );
+                    rtb.AddContent(4, "Hello world!");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -266,15 +254,13 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddAttribute(1, "class", "<lead");
-                        rtb.AddContent(2, "Hello world!");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddAttribute(1, "class", "<lead");
+                    rtb.AddContent(2, "Hello world!");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -298,14 +284,12 @@ public class HtmlRendererTest
         var expectedHtml = new[] { "<", "input", " ", "disabled", " />" };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "input");
-                        rtb.AddAttribute(1, "disabled", true);
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "input");
+                    rtb.AddAttribute(1, "disabled", true);
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -329,14 +313,12 @@ public class HtmlRendererTest
         var expectedHtml = new[] { "<", "input", " />" };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "input");
-                        rtb.AddAttribute(1, "disabled", false);
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "input");
+                    rtb.AddAttribute(1, "disabled", false);
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -375,16 +357,14 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.OpenElement(1, "span");
-                        rtb.AddContent(2, "Hello world!");
-                        rtb.CloseElement();
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.OpenElement(1, "span");
+                    rtb.AddContent(2, "Hello world!");
+                    rtb.CloseElement();
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -430,19 +410,17 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.OpenElement(1, "span");
-                        rtb.AddContent(2, "Hello world!");
-                        rtb.CloseElement();
-                        rtb.OpenElement(3, "span");
-                        rtb.AddContent(4, "Bye Bye world!");
-                        rtb.CloseElement();
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.OpenElement(1, "span");
+                    rtb.AddContent(2, "Hello world!");
+                    rtb.CloseElement();
+                    rtb.OpenElement(3, "span");
+                    rtb.AddContent(4, "Bye Bye world!");
+                    rtb.CloseElement();
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -474,34 +452,32 @@ public class HtmlRendererTest
             + "</p>";
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.OpenElement(1, "select");
+                    rtb.AddAttribute(2, "unrelated-attribute-before", "a");
+                    rtb.AddAttribute(3, "value", "b");
+                    rtb.AddAttribute(4, "unrelated-attribute-after", "c");
+
+                    foreach (var optionValue in new[] { "a", "b", "c" })
                     {
-                        rtb.OpenElement(0, "p");
-                        rtb.OpenElement(1, "select");
-                        rtb.AddAttribute(2, "unrelated-attribute-before", "a");
-                        rtb.AddAttribute(3, "value", "b");
-                        rtb.AddAttribute(4, "unrelated-attribute-after", "c");
-
-                        foreach (var optionValue in new[] { "a", "b", "c" })
-                        {
-                            rtb.OpenElement(5, "option");
-                            rtb.AddAttribute(6, "unrelated-attribute", "a");
-                            rtb.AddAttribute(7, "value", optionValue);
-                            rtb.AddContent(8, $"Pick value {optionValue}");
-                            rtb.CloseElement(); // option
-                        }
-
-                        rtb.CloseElement(); // select
-
-                        rtb.OpenElement(9, "option"); // To show other value-matching options don't get marked as selected
-                        rtb.AddAttribute(10, "value", "b");
-                        rtb.AddContent(11, "unrelated option");
+                        rtb.OpenElement(5, "option");
+                        rtb.AddAttribute(6, "unrelated-attribute", "a");
+                        rtb.AddAttribute(7, "value", optionValue);
+                        rtb.AddContent(8, $"Pick value {optionValue}");
                         rtb.CloseElement(); // option
-
-                        rtb.CloseElement(); // p
                     }
-                )
+
+                    rtb.CloseElement(); // select
+
+                    rtb.OpenElement(9, "option"); // To show other value-matching options don't get marked as selected
+                    rtb.AddAttribute(10, "value", "b");
+                    rtb.AddContent(11, "unrelated option");
+                    rtb.CloseElement(); // option
+
+                    rtb.CloseElement(); // p
+                })
             )
             .BuildServiceProvider();
 
@@ -530,25 +506,23 @@ public class HtmlRendererTest
             + "</select>";
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "select");
+                    rtb.AddAttribute(1, "value", "beta");
+
+                    foreach (var optionValue in new[] { "alpha", "beta", "gamma" })
                     {
-                        rtb.OpenElement(0, "select");
-                        rtb.AddAttribute(1, "value", "beta");
-
-                        foreach (var optionValue in new[] { "alpha", "beta", "gamma" })
-                        {
-                            rtb.OpenElement(2, "optgroup");
-                            rtb.OpenElement(3, "option");
-                            rtb.AddAttribute(4, "value", optionValue);
-                            rtb.AddContent(5, optionValue);
-                            rtb.CloseElement(); // option
-                            rtb.CloseElement(); // optgroup
-                        }
-
-                        rtb.CloseElement(); // select
+                        rtb.OpenElement(2, "optgroup");
+                        rtb.OpenElement(3, "option");
+                        rtb.AddAttribute(4, "value", optionValue);
+                        rtb.AddContent(5, optionValue);
+                        rtb.CloseElement(); // option
+                        rtb.CloseElement(); // optgroup
                     }
-                )
+
+                    rtb.CloseElement(); // select
+                })
             )
             .BuildServiceProvider();
 
@@ -594,19 +568,17 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.OpenElement(1, "span");
-                        rtb.AddContent(2, "Hello world!");
-                        rtb.CloseElement();
-                        rtb.CloseElement();
-                        rtb.OpenComponent(3, typeof(ChildComponent));
-                        rtb.AddAttribute(4, "Value", "Child content!");
-                        rtb.CloseComponent();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.OpenElement(1, "span");
+                    rtb.AddContent(2, "Hello world!");
+                    rtb.CloseElement();
+                    rtb.CloseElement();
+                    rtb.OpenComponent(3, typeof(ChildComponent));
+                    rtb.AddAttribute(4, "Value", "Child content!");
+                    rtb.CloseComponent();
+                })
             )
             .BuildServiceProvider();
 
@@ -652,20 +624,18 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.OpenElement(1, "span");
-                        rtb.AddContent(2, "Hello world!");
-                        rtb.CloseElement();
-                        rtb.CloseElement();
-                        rtb.OpenComponent(3, typeof(ChildComponent));
-                        rtb.AddAttribute(4, "Value", "Child content!");
-                        rtb.AddComponentReferenceCapture(5, cr => { });
-                        rtb.CloseComponent();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.OpenElement(1, "span");
+                    rtb.AddContent(2, "Hello world!");
+                    rtb.CloseElement();
+                    rtb.CloseElement();
+                    rtb.OpenComponent(3, typeof(ChildComponent));
+                    rtb.AddAttribute(4, "Value", "Child content!");
+                    rtb.AddComponentReferenceCapture(5, cr => { });
+                    rtb.CloseComponent();
+                })
             )
             .BuildServiceProvider();
 
@@ -768,20 +738,18 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.OpenElement(1, "span");
-                        rtb.AddContent(
-                            2,
-                            // This internally creates a region frame.
-                            rf => rf.AddContent(0, "Hello world!")
-                        );
-                        rtb.CloseElement();
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.OpenElement(1, "span");
+                    rtb.AddContent(
+                        2,
+                        // This internally creates a region frame.
+                        rf => rf.AddContent(0, "Hello world!")
+                    );
+                    rtb.CloseElement();
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -820,21 +788,19 @@ public class HtmlRendererTest
         };
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddElementReferenceCapture(1, er => { });
-                        rtb.OpenElement(2, "span");
-                        rtb.AddContent(
-                            3,
-                            // This internally creates a region frame.
-                            rf => rf.AddContent(0, "Hello world!")
-                        );
-                        rtb.CloseElement();
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddElementReferenceCapture(1, er => { });
+                    rtb.OpenElement(2, "span");
+                    rtb.AddContent(
+                        3,
+                        // This internally creates a region frame.
+                        rf => rf.AddContent(0, "Hello world!")
+                    );
+                    rtb.CloseElement();
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
 
@@ -955,14 +921,12 @@ public class HtmlRendererTest
         // Arrange
         var serviceProvider = new ServiceCollection()
             .AddSingleton(
-                new RenderFragment(
-                    rtb =>
-                    {
-                        rtb.OpenElement(0, "p");
-                        rtb.AddMarkupContent(1, "<span>Hello world!</span>");
-                        rtb.CloseElement();
-                    }
-                )
+                new RenderFragment(rtb =>
+                {
+                    rtb.OpenElement(0, "p");
+                    rtb.AddMarkupContent(1, "<span>Hello world!</span>");
+                    rtb.CloseElement();
+                })
             )
             .BuildServiceProvider();
         var renderer = GetHtmlRenderer(serviceProvider);

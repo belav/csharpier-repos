@@ -363,13 +363,11 @@ public class AuthorizationMiddlewareTests
         // Arrange
         HttpContext resource = null;
         var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(
-                c =>
-                {
-                    resource = c.Resource as HttpContext;
-                    return true;
-                }
-            )
+            .RequireAssertion(c =>
+            {
+                resource = c.Resource as HttpContext;
+                return true;
+            })
             .Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);
@@ -399,13 +397,11 @@ public class AuthorizationMiddlewareTests
         // Arrange
         object resource = null;
         var policy = new AuthorizationPolicyBuilder()
-            .RequireAssertion(
-                c =>
-                {
-                    resource = c.Resource;
-                    return true;
-                }
-            )
+            .RequireAssertion(c =>
+            {
+                resource = c.Resource;
+                return true;
+            })
             .Build();
         var policyProvider = new Mock<IAuthorizationPolicyProvider>();
         policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(policy);

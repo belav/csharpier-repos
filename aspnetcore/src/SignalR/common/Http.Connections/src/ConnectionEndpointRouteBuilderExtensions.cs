@@ -73,17 +73,15 @@ public static class ConnectionEndpointRouteBuilderExtensions
         );
 
         var attributes = typeof(TConnectionHandler).GetCustomAttributes(inherit: true);
-        conventionBuilder.Add(
-            e =>
+        conventionBuilder.Add(e =>
+        {
+            // Add all attributes on the ConnectionHandler has metadata (this will allow for things like)
+            // auth attributes and cors attributes to work seamlessly
+            foreach (var item in attributes)
             {
-                // Add all attributes on the ConnectionHandler has metadata (this will allow for things like)
-                // auth attributes and cors attributes to work seamlessly
-                foreach (var item in attributes)
-                {
-                    e.Metadata.Add(item);
-                }
+                e.Metadata.Add(item);
             }
-        );
+        });
 
         return conventionBuilder;
     }
@@ -138,16 +136,14 @@ public static class ConnectionEndpointRouteBuilderExtensions
         var compositeConventionBuilder = new CompositeEndpointConventionBuilder(conventionBuilders);
 
         // Add metadata to all of Endpoints
-        compositeConventionBuilder.Add(
-            e =>
+        compositeConventionBuilder.Add(e =>
+        {
+            // Add the authorization data as metadata
+            foreach (var data in options.AuthorizationData)
             {
-                // Add the authorization data as metadata
-                foreach (var data in options.AuthorizationData)
-                {
-                    e.Metadata.Add(data);
-                }
+                e.Metadata.Add(data);
             }
-        );
+        });
 
         return new ConnectionEndpointRouteBuilder(compositeConventionBuilder);
     }

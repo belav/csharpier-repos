@@ -403,13 +403,11 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.AddingProxyTypeAsEntityType("Castle.Proxies.ClassToBeProxiedProxy"),
                 Assert
-                    .Throws<ArgumentException>(
-                        () =>
-                        {
-                            var context = new CannotAddProxyTypeToModel();
-                            context.Set<ClassToBeProxied>().Add(new ClassToBeProxied { Id = 0 });
-                        }
-                    )
+                    .Throws<ArgumentException>(() =>
+                    {
+                        var context = new CannotAddProxyTypeToModel();
+                        context.Set<ClassToBeProxied>().Add(new ClassToBeProxied { Id = 0 });
+                    })
                     .Message
             );
         }
@@ -527,21 +525,17 @@ namespace Microsoft.EntityFrameworkCore
             {
                 modelBuilder.Entity<March82GGtp>();
 
-                modelBuilder.Entity<March881>(
-                    b =>
-                    {
-                        b.Property(e => e.Id);
-                        b.Property(e => e.Sponsor);
-                    }
-                );
+                modelBuilder.Entity<March881>(b =>
+                {
+                    b.Property(e => e.Id);
+                    b.Property(e => e.Sponsor);
+                });
 
-                modelBuilder.Entity<WilliamsFw14>(
-                    b =>
-                    {
-                        b.Property(e => e.Id);
-                        b.Property(e => e.Sponsor);
-                    }
-                );
+                modelBuilder.Entity<WilliamsFw14>(b =>
+                {
+                    b.Property(e => e.Id);
+                    b.Property(e => e.Sponsor);
+                });
 
                 modelBuilder.SharedTypeEntity<SharedTypeEntityType>("STET1");
                 modelBuilder.SharedTypeEntity<SharedTypeEntityType>("STET2");

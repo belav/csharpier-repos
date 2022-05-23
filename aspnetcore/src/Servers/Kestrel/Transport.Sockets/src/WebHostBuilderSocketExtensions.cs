@@ -24,12 +24,10 @@ public static class WebHostBuilderSocketExtensions
     /// </returns>
     public static IWebHostBuilder UseSockets(this IWebHostBuilder hostBuilder)
     {
-        return hostBuilder.ConfigureServices(
-            services =>
-            {
-                services.AddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
-            }
-        );
+        return hostBuilder.ConfigureServices(services =>
+        {
+            services.AddSingleton<IConnectionListenerFactory, SocketTransportFactory>();
+        });
     }
 
     /// <summary>
@@ -51,11 +49,9 @@ public static class WebHostBuilderSocketExtensions
     {
         return hostBuilder
             .UseSockets()
-            .ConfigureServices(
-                services =>
-                {
-                    services.Configure(configureOptions);
-                }
-            );
+            .ConfigureServices(services =>
+            {
+                services.Configure(configureOptions);
+            });
     }
 }

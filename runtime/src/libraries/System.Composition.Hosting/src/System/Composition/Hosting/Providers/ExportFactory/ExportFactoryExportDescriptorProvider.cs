@@ -74,23 +74,18 @@ namespace System.Composition.Hosting.Providers.ExportFactory
                                 return ExportDescriptor.Create(
                                     (c, o) =>
                                     {
-                                        return new ExportFactory<TProduct>(
-                                            () =>
-                                            {
-                                                var lifetimeContext = new LifetimeContext(
-                                                    c,
-                                                    boundaries
-                                                );
-                                                return Tuple.Create<TProduct, Action>(
-                                                    (TProduct)
-                                                        CompositionOperation.Run(
-                                                            lifetimeContext,
-                                                            da
-                                                        ),
-                                                    lifetimeContext.Dispose
-                                                );
-                                            }
-                                        );
+                                        return new ExportFactory<TProduct>(() =>
+                                        {
+                                            var lifetimeContext = new LifetimeContext(
+                                                c,
+                                                boundaries
+                                            );
+                                            return Tuple.Create<TProduct, Action>(
+                                                (TProduct)
+                                                    CompositionOperation.Run(lifetimeContext, da),
+                                                lifetimeContext.Dispose
+                                            );
+                                        });
                                     },
                                     dsc.Metadata
                                 );

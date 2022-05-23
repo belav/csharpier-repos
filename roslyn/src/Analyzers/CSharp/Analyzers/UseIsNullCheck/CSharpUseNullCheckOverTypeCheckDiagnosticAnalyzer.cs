@@ -38,27 +38,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UseIsNullCheck
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                if (
+                    ((CSharpCompilation)context.Compilation).LanguageVersion
+                    < LanguageVersion.CSharp9
+                )
                 {
-                    if (
-                        ((CSharpCompilation)context.Compilation).LanguageVersion
-                        < LanguageVersion.CSharp9
-                    )
-                    {
-                        return;
-                    }
-
-                    context.RegisterOperationAction(
-                        c => AnalyzeIsTypeOperation(c),
-                        OperationKind.IsType
-                    );
-                    context.RegisterOperationAction(
-                        c => AnalyzeNegatedPatternOperation(c),
-                        OperationKind.NegatedPattern
-                    );
+                    return;
                 }
-            );
+
+                context.RegisterOperationAction(
+                    c => AnalyzeIsTypeOperation(c),
+                    OperationKind.IsType
+                );
+                context.RegisterOperationAction(
+                    c => AnalyzeNegatedPatternOperation(c),
+                    OperationKind.NegatedPattern
+                );
+            });
         }
 
         private static bool ShouldAnalyze(

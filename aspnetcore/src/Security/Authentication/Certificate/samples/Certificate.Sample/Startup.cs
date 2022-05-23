@@ -21,40 +21,38 @@ public class Startup
     {
         services
             .AddAuthentication(CertificateAuthenticationDefaults.AuthenticationScheme)
-            .AddCertificate(
-                options =>
+            .AddCertificate(options =>
+            {
+                options.Events = new CertificateAuthenticationEvents
                 {
-                    options.Events = new CertificateAuthenticationEvents
+                    OnCertificateValidated = context =>
                     {
-                        OnCertificateValidated = context =>
+                        var claims = new[]
                         {
-                            var claims = new[]
-                            {
-                                new Claim(
-                                    ClaimTypes.NameIdentifier,
-                                    context.ClientCertificate.Subject,
-                                    ClaimValueTypes.String,
-                                    context.Options.ClaimsIssuer
-                                ),
-                                new Claim(
-                                    ClaimTypes.Name,
-                                    context.ClientCertificate.Subject,
-                                    ClaimValueTypes.String,
-                                    context.Options.ClaimsIssuer
-                                )
-                            };
+                            new Claim(
+                                ClaimTypes.NameIdentifier,
+                                context.ClientCertificate.Subject,
+                                ClaimValueTypes.String,
+                                context.Options.ClaimsIssuer
+                            ),
+                            new Claim(
+                                ClaimTypes.Name,
+                                context.ClientCertificate.Subject,
+                                ClaimValueTypes.String,
+                                context.Options.ClaimsIssuer
+                            )
+                        };
 
-                            context.Principal = new ClaimsPrincipal(
-                                new ClaimsIdentity(claims, context.Scheme.Name)
-                            );
-                            context.Success();
+                        context.Principal = new ClaimsPrincipal(
+                            new ClaimsIdentity(claims, context.Scheme.Name)
+                        );
+                        context.Success();
 
-                            return Task.CompletedTask;
-                        }
-                    };
-                    // Adding a ICertificateValidationCache will result in certificate auth caching the results, the default implementation uses a memory cache
-                }
-            )
+                        return Task.CompletedTask;
+                    }
+                };
+                // Adding a ICertificateValidationCache will result in certificate auth caching the results, the default implementation uses a memory cache
+            })
             .AddCertificateCache();
 
         services.AddAuthorization();
@@ -70,17 +68,15 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.Map(
-                    "{*url}",
-                    context =>
-                    {
-                        return context.Response.WriteAsync($"Hello {context.User.Identity.Name}");
-                    }
-                );
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.Map(
+                "{*url}",
+                context =>
+                {
+                    return context.Response.WriteAsync($"Hello {context.User.Identity.Name}");
+                }
+            );
+        });
     }
 }

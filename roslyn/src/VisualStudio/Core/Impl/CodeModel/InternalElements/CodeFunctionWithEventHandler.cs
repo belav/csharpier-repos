@@ -58,17 +58,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             var node = LookupNode();
             var semanticModel = GetSemanticModel();
 
-            FileCodeModel.PerformEdit(
-                document =>
-                {
-                    return CodeModelService.AddHandlesClause(
-                        document,
-                        bstrEventName,
-                        node,
-                        CancellationToken.None
-                    );
-                }
-            );
+            FileCodeModel.PerformEdit(document =>
+            {
+                return CodeModelService.AddHandlesClause(
+                    document,
+                    bstrEventName,
+                    node,
+                    CancellationToken.None
+                );
+            });
 
             return VSConstants.S_OK;
         }
@@ -78,17 +76,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             var node = LookupNode();
             var semanticModel = GetSemanticModel();
 
-            FileCodeModel.PerformEdit(
-                document =>
-                {
-                    return CodeModelService.RemoveHandlesClause(
-                        document,
-                        bstrEventName,
-                        node,
-                        CancellationToken.None
-                    );
-                }
-            );
+            FileCodeModel.PerformEdit(document =>
+            {
+                return CodeModelService.RemoveHandlesClause(
+                    document,
+                    bstrEventName,
+                    node,
+                    CancellationToken.None
+                );
+            });
 
             return VSConstants.S_OK;
         }

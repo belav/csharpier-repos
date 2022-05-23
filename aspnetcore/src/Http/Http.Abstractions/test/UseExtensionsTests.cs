@@ -35,14 +35,12 @@ public class UseExtensionsTests
                 return next(context);
             }
         );
-        builder.Run(
-            context =>
-            {
-                Assert.True(secondCalled);
-                lastCalled = true;
-                return Task.CompletedTask;
-            }
-        );
+        builder.Run(context =>
+        {
+            Assert.True(secondCalled);
+            lastCalled = true;
+            return Task.CompletedTask;
+        });
 
         // Act
         await builder.Build().Invoke(context);
@@ -73,16 +71,14 @@ public class UseExtensionsTests
                 throw await Assert.ThrowsAsync<Exception>(() => next(context));
             }
         );
-        builder.Run(
-            context =>
+        builder.Run(context =>
+        {
+            if (shouldThrow)
             {
-                if (shouldThrow)
-                {
-                    throw new Exception("From Use");
-                }
-                return Task.CompletedTask;
+                throw new Exception("From Use");
             }
-        );
+            return Task.CompletedTask;
+        });
 
         // Act & Assert
         var ex = await Assert.ThrowsAsync<Exception>(() => builder.Build().Invoke(context));

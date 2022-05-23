@@ -634,13 +634,11 @@ public partial class HubConnectionTests
             using (StartVerifiableLog())
             {
                 var onStartCalled = false;
-                var connection = new TestConnection(
-                    onStart: () =>
-                    {
-                        onStartCalled = true;
-                        return Task.CompletedTask;
-                    }
-                );
+                var connection = new TestConnection(onStart: () =>
+                {
+                    onStartCalled = true;
+                    return Task.CompletedTask;
+                });
                 var hubConnection = CreateHubConnection(connection, loggerFactory: LoggerFactory);
                 try
                 {

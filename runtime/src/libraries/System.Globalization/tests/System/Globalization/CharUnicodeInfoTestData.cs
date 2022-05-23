@@ -11,24 +11,22 @@ namespace System.Globalization.Tests
     {
         private static readonly Lazy<List<CharUnicodeInfoTestCase>> s_testCases = new Lazy<
             List<CharUnicodeInfoTestCase>
-        >(
-            () =>
+        >(() =>
+        {
+            List<CharUnicodeInfoTestCase> testCases = new List<CharUnicodeInfoTestCase>();
+            string fileName = "UnicodeData.txt";
+            Stream stream = typeof(CharUnicodeInfoTestData)
+                .GetTypeInfo()
+                .Assembly.GetManifestResourceStream(fileName);
+            using (StreamReader reader = new StreamReader(stream))
             {
-                List<CharUnicodeInfoTestCase> testCases = new List<CharUnicodeInfoTestCase>();
-                string fileName = "UnicodeData.txt";
-                Stream stream = typeof(CharUnicodeInfoTestData)
-                    .GetTypeInfo()
-                    .Assembly.GetManifestResourceStream(fileName);
-                using (StreamReader reader = new StreamReader(stream))
+                while (!reader.EndOfStream)
                 {
-                    while (!reader.EndOfStream)
-                    {
-                        Parse(testCases, reader.ReadLine());
-                    }
+                    Parse(testCases, reader.ReadLine());
                 }
-                return testCases;
             }
-        );
+            return testCases;
+        });
 
         public static List<CharUnicodeInfoTestCase> TestCases => s_testCases.Value;
 

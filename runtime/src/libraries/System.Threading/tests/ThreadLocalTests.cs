@@ -100,22 +100,20 @@ namespace System.Threading.Tests
         public static void RunThreadLocalTest4_Value_NegativeCases()
         {
             ThreadLocal<string> tlocal = null;
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    int x = 0;
-                    tlocal = new ThreadLocal<string>(
-                        delegate
-                        {
-                            if (x++ < 5)
-                                return tlocal.Value;
-                            else
-                                return "Test";
-                        }
-                    );
-                    string str = tlocal.Value;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                int x = 0;
+                tlocal = new ThreadLocal<string>(
+                    delegate
+                    {
+                        if (x++ < 5)
+                            return tlocal.Value;
+                        else
+                            return "Test";
+                    }
+                );
+                string str = tlocal.Value;
+            });
         }
 
         [ConditionalFact(nameof(IsThreadingAndPreciseGcSupported))]
@@ -164,28 +162,22 @@ namespace System.Threading.Tests
 
             tl.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    string tmp = tl.Value;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                string tmp = tl.Value;
+            });
             // Failure Case: The Value property of the disposed ThreadLocal object should throw ODE
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    bool tmp = tl.IsValueCreated;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                bool tmp = tl.IsValueCreated;
+            });
             // Failure Case: The IsValueCreated property of the disposed ThreadLocal object should throw ODE
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    string tmp = tl.ToString();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                string tmp = tl.ToString();
+            });
             // Failure Case: The ToString method of the disposed ThreadLocal object should throw ODE
         }
 

@@ -123,46 +123,43 @@ public static class ExceptionHandlerExtensions
             && routeBuilder is not null
         )
         {
-            return app.Use(
-                next =>
+            return app.Use(next =>
+            {
+                var loggerFactory = app.ApplicationServices.GetRequiredService<ILoggerFactory>();
+                var diagnosticListener =
+                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+
+                if (options is null)
                 {
-                    var loggerFactory =
-                        app.ApplicationServices.GetRequiredService<ILoggerFactory>();
-                    var diagnosticListener =
-                        app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-
-                    if (options is null)
-                    {
-                        options = app.ApplicationServices.GetRequiredService<
-                            IOptions<ExceptionHandlerOptions>
-                        >();
-                    }
-
-                    if (
-                        !string.IsNullOrEmpty(options.Value.ExceptionHandlingPath)
-                        && options.Value.ExceptionHandler is null
-                    )
-                    {
-                        // start a new middleware pipeline
-                        var builder = app.New();
-                        // use the old routing pipeline if it exists so we preserve all the routes and matching logic
-                        // ((IApplicationBuilder)WebApplication).New() does not copy globalRouteBuilderKey automatically like it does for all other properties.
-                        builder.Properties[globalRouteBuilderKey] = routeBuilder;
-                        builder.UseRouting();
-                        // apply the next middleware
-                        builder.Run(next);
-                        // store the pipeline for the error case
-                        options.Value.ExceptionHandler = builder.Build();
-                    }
-
-                    return new ExceptionHandlerMiddleware(
-                        next,
-                        loggerFactory,
-                        options,
-                        diagnosticListener
-                    ).Invoke;
+                    options = app.ApplicationServices.GetRequiredService<
+                        IOptions<ExceptionHandlerOptions>
+                    >();
                 }
-            );
+
+                if (
+                    !string.IsNullOrEmpty(options.Value.ExceptionHandlingPath)
+                    && options.Value.ExceptionHandler is null
+                )
+                {
+                    // start a new middleware pipeline
+                    var builder = app.New();
+                    // use the old routing pipeline if it exists so we preserve all the routes and matching logic
+                    // ((IApplicationBuilder)WebApplication).New() does not copy globalRouteBuilderKey automatically like it does for all other properties.
+                    builder.Properties[globalRouteBuilderKey] = routeBuilder;
+                    builder.UseRouting();
+                    // apply the next middleware
+                    builder.Run(next);
+                    // store the pipeline for the error case
+                    options.Value.ExceptionHandler = builder.Build();
+                }
+
+                return new ExceptionHandlerMiddleware(
+                    next,
+                    loggerFactory,
+                    options,
+                    diagnosticListener
+                ).Invoke;
+            });
         }
 
         if (options is null)

@@ -257,25 +257,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.UnusedReference
             CancellationToken cancellationToken
         )
         {
-            var unusedReferences = ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    var projectReferences = await _lazyReferenceCleanupService.Value
-                        .GetProjectReferencesAsync(projectFilePath, cancellationToken)
-                        .ConfigureAwait(true);
-                    var unusedReferenceAnalysisService =
-                        solution.Workspace.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
-                    return await unusedReferenceAnalysisService
-                        .GetUnusedReferencesAsync(
-                            solution,
-                            projectFilePath,
-                            projectAssetsFile,
-                            projectReferences,
-                            cancellationToken
-                        )
-                        .ConfigureAwait(true);
-                }
-            );
+            var unusedReferences = ThreadHelper.JoinableTaskFactory.Run(async () =>
+            {
+                var projectReferences = await _lazyReferenceCleanupService.Value
+                    .GetProjectReferencesAsync(projectFilePath, cancellationToken)
+                    .ConfigureAwait(true);
+                var unusedReferenceAnalysisService =
+                    solution.Workspace.Services.GetRequiredService<IUnusedReferenceAnalysisService>();
+                return await unusedReferenceAnalysisService
+                    .GetUnusedReferencesAsync(
+                        solution,
+                        projectFilePath,
+                        projectAssetsFile,
+                        projectReferences,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(true);
+            });
 
             var referenceUpdates = unusedReferences
                 .Select(

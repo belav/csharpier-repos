@@ -588,21 +588,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         {
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Weak>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.Id, e.HeroId });
-                        b.HasOne(e => e.Hero).WithMany(e => e.Weaks).HasForeignKey(e => e.HeroId);
-                    }
-                );
+                modelBuilder.Entity<Weak>(b =>
+                {
+                    b.HasKey(e => new { e.Id, e.HeroId });
+                    b.HasOne(e => e.Hero).WithMany(e => e.Weaks).HasForeignKey(e => e.HeroId);
+                });
 
-                modelBuilder.Entity<Mike>(
-                    b =>
-                    {
-                        b.OwnsOne(e => e.TheHero);
-                        b.OwnsMany(e => e.TheStreets);
-                    }
-                );
+                modelBuilder.Entity<Mike>(b =>
+                {
+                    b.OwnsOne(e => e.TheHero);
+                    b.OwnsMany(e => e.TheStreets);
+                });
             }
 
             protected internal override void OnConfiguring(
@@ -2098,20 +2094,17 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     .Property(e => e.Id)
                     .HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
 
-                modelBuilder.Entity<Mat>(
-                    b =>
-                    {
-                        b.Property(e => e.Id)
-                            .HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
-                        b.HasMany(e => e.Cats)
-                            .WithMany(e => e.Mats)
-                            .UsingEntity<CatMat>(
-                                ts => ts.HasOne<Cat>().WithMany(),
-                                ts => ts.HasOne<Mat>().WithMany()
-                            )
-                            .HasKey(ts => new { ts.CatId, ts.MatId });
-                    }
-                );
+                modelBuilder.Entity<Mat>(b =>
+                {
+                    b.Property(e => e.Id).HasValueGenerator<InMemoryIntegerValueGenerator<int>>();
+                    b.HasMany(e => e.Cats)
+                        .WithMany(e => e.Mats)
+                        .UsingEntity<CatMat>(
+                            ts => ts.HasOne<Cat>().WithMany(),
+                            ts => ts.HasOne<Mat>().WithMany()
+                        )
+                        .HasKey(ts => new { ts.CatId, ts.MatId });
+                });
             }
         }
 
@@ -3288,14 +3281,12 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
         private class TheShadows : DbContext
         {
             protected internal override void OnModelCreating(ModelBuilder modelBuilder) =>
-                modelBuilder.Entity<Dark>(
-                    b =>
-                    {
-                        b.Property<int>("Id").ValueGeneratedOnAdd();
-                        b.Property<int>("SomeInt");
-                        b.Property<string>("SomeString");
-                    }
-                );
+                modelBuilder.Entity<Dark>(b =>
+                {
+                    b.Property<int>("Id").ValueGeneratedOnAdd();
+                    b.Property<int>("SomeInt");
+                    b.Property<string>("SomeString");
+                });
 
             protected internal override void OnConfiguring(
                 DbContextOptionsBuilder optionsBuilder
@@ -3505,73 +3496,63 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking
                     .WithOne(e => e.Product)
                     .HasForeignKey<ProductDetails>(e => e.Id);
 
-                modelBuilder.Entity<OrderDetails>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.OrderId, e.ProductId });
-                        b.HasOne(e => e.Order)
-                            .WithMany(e => e.OrderDetails)
-                            .HasForeignKey(e => e.OrderId);
-                        b.HasOne(e => e.Product)
-                            .WithMany(e => e.OrderDetails)
-                            .HasForeignKey(e => e.ProductId);
-                    }
-                );
+                modelBuilder.Entity<OrderDetails>(b =>
+                {
+                    b.HasKey(e => new { e.OrderId, e.ProductId });
+                    b.HasOne(e => e.Order)
+                        .WithMany(e => e.OrderDetails)
+                        .HasForeignKey(e => e.OrderId);
+                    b.HasOne(e => e.Product)
+                        .WithMany(e => e.OrderDetails)
+                        .HasForeignKey(e => e.ProductId);
+                });
 
                 modelBuilder.Entity<OptionalProduct>();
 
-                modelBuilder.Entity<PrincipalNN>(
-                    b =>
-                    {
-                        b.HasOne(e => e.DependentNN)
-                            .WithOne(e => e.PrincipalNN)
-                            .HasForeignKey<DependentNN>(e => e.Id);
+                modelBuilder.Entity<PrincipalNN>(b =>
+                {
+                    b.HasOne(e => e.DependentNN)
+                        .WithOne(e => e.PrincipalNN)
+                        .HasForeignKey<DependentNN>(e => e.Id);
 
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
                 modelBuilder.Entity<DependentNN>().Property(e => e.Id).ValueGeneratedNever();
 
-                modelBuilder.Entity<PrincipalGG>(
-                    b =>
-                    {
-                        b.HasOne(e => e.DependentGG)
-                            .WithOne(e => e.PrincipalGG)
-                            .HasForeignKey<DependentGG>(e => e.Id);
+                modelBuilder.Entity<PrincipalGG>(b =>
+                {
+                    b.HasOne(e => e.DependentGG)
+                        .WithOne(e => e.PrincipalGG)
+                        .HasForeignKey<DependentGG>(e => e.Id);
 
-                        b.Property(e => e.Id).ValueGeneratedOnAdd();
-                    }
-                );
+                    b.Property(e => e.Id).ValueGeneratedOnAdd();
+                });
 
                 modelBuilder.Entity<DependentGG>().Property(e => e.Id).ValueGeneratedOnAdd();
 
-                modelBuilder.Entity<PrincipalNG>(
-                    b =>
-                    {
-                        b.HasOne(e => e.DependentNG)
-                            .WithOne(e => e.PrincipalNG)
-                            .HasForeignKey<DependentNG>(e => e.Id);
+                modelBuilder.Entity<PrincipalNG>(b =>
+                {
+                    b.HasOne(e => e.DependentNG)
+                        .WithOne(e => e.PrincipalNG)
+                        .HasForeignKey<DependentNG>(e => e.Id);
 
-                        b.Property(e => e.Id).ValueGeneratedNever();
-                    }
-                );
+                    b.Property(e => e.Id).ValueGeneratedNever();
+                });
 
                 modelBuilder
                     .Entity<DependentNG>()
                     .Property(e => e.Id)
                     .HasValueGenerator<DummyValueGenerator>();
 
-                modelBuilder.Entity<PrincipalGN>(
-                    b =>
-                    {
-                        b.HasOne(e => e.DependentGN)
-                            .WithOne(e => e.PrincipalGN)
-                            .HasForeignKey<DependentGN>(e => e.Id);
+                modelBuilder.Entity<PrincipalGN>(b =>
+                {
+                    b.HasOne(e => e.DependentGN)
+                        .WithOne(e => e.PrincipalGN)
+                        .HasForeignKey<DependentGN>(e => e.Id);
 
-                        b.Property(e => e.Id).ValueGeneratedOnAdd();
-                    }
-                );
+                    b.Property(e => e.Id).ValueGeneratedOnAdd();
+                });
 
                 modelBuilder.Entity<DependentGN>().Property(e => e.Id).ValueGeneratedNever();
             }

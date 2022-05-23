@@ -20,13 +20,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(d => d.Value, o => o.MapFrom(s => s.Value));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.Value, o => o.MapFrom(s => s.Value));
+            });
 
         protected override void Because_of()
         {

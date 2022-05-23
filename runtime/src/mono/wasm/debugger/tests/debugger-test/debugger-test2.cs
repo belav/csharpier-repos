@@ -83,18 +83,16 @@ public class InspectTask
         );
         try
         {
-            await getJsonTask.ContinueWith(
-                t =>
-                {
-                    int a = 10;
-                    Console.WriteLine(a);
-                    if (t.IsCompletedSuccessfully)
-                        forecasts = t.Result;
+            await getJsonTask.ContinueWith(t =>
+            {
+                int a = 10;
+                Console.WriteLine(a);
+                if (t.IsCompletedSuccessfully)
+                    forecasts = t.Result;
 
-                    if (t.IsFaulted)
-                        throw t.Exception!;
-                }
-            );
+                if (t.IsFaulted)
+                    throw t.Exception!;
+            });
         }
         catch (Exception ex)
         {

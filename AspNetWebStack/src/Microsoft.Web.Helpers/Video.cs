@@ -503,70 +503,66 @@ namespace Microsoft.Web.Helpers
             objectAttr["classid"] = objectClassId;
             objectAttr["codebase"] = objectCodeBase;
 
-            return new HelperResult(
-                tw =>
+            return new HelperResult(tw =>
+            {
+                tw.Write("<object ");
+                foreach (var a in objectAttr.OrderBy(a => a.Key, StringComparer.OrdinalIgnoreCase))
                 {
-                    tw.Write("<object ");
-                    foreach (
-                        var a in objectAttr.OrderBy(a => a.Key, StringComparer.OrdinalIgnoreCase)
-                    )
-                    {
-                        var value = (a.Value == null) ? null : a.Value.ToString();
-                        WriteIfNotNullOrEmpty(tw, a.Key, value);
-                    }
-                    tw.WriteLine(">");
+                    var value = (a.Value == null) ? null : a.Value.ToString();
+                    WriteIfNotNullOrEmpty(tw, a.Key, value);
+                }
+                tw.WriteLine(">");
 
-                    // object parameters
-                    if (!String.IsNullOrEmpty(pathParamName))
+                // object parameters
+                if (!String.IsNullOrEmpty(pathParamName))
+                {
+                    tw.WriteLine(
+                        "<param name=\"{0}\" value=\"{1}\" />",
+                        HttpUtility.HtmlAttributeEncode(pathParamName),
+                        HttpUtility.HtmlAttributeEncode(HttpUtility.UrlPathEncode(path))
+                    );
+                }
+                if (parameters != null)
+                {
+                    foreach (var p in parameters)
                     {
                         tw.WriteLine(
                             "<param name=\"{0}\" value=\"{1}\" />",
-                            HttpUtility.HtmlAttributeEncode(pathParamName),
-                            HttpUtility.HtmlAttributeEncode(HttpUtility.UrlPathEncode(path))
+                            HttpUtility.HtmlAttributeEncode(p.Key),
+                            HttpUtility.HtmlAttributeEncode(p.Value.ToString())
                         );
                     }
+                }
+
+                if (!String.IsNullOrEmpty(embedContentType))
+                {
+                    tw.Write(
+                        "<embed src=\"{0}\" ",
+                        HttpUtility.HtmlAttributeEncode(HttpUtility.UrlPathEncode(path))
+                    );
+                    WriteIfNotNullOrEmpty(tw, "width", width);
+                    WriteIfNotNullOrEmpty(tw, "height", height);
+                    WriteIfNotNullOrEmpty(tw, "name", embedName);
+                    WriteIfNotNullOrEmpty(tw, "type", embedContentType);
                     if (parameters != null)
                     {
                         foreach (var p in parameters)
                         {
-                            tw.WriteLine(
-                                "<param name=\"{0}\" value=\"{1}\" />",
-                                HttpUtility.HtmlAttributeEncode(p.Key),
+                            tw.Write(
+                                "{0}=\"{1}\" ",
+                                HttpUtility.HtmlEncode(p.Key),
                                 HttpUtility.HtmlAttributeEncode(p.Value.ToString())
                             );
                         }
                     }
-
-                    if (!String.IsNullOrEmpty(embedContentType))
-                    {
-                        tw.Write(
-                            "<embed src=\"{0}\" ",
-                            HttpUtility.HtmlAttributeEncode(HttpUtility.UrlPathEncode(path))
-                        );
-                        WriteIfNotNullOrEmpty(tw, "width", width);
-                        WriteIfNotNullOrEmpty(tw, "height", height);
-                        WriteIfNotNullOrEmpty(tw, "name", embedName);
-                        WriteIfNotNullOrEmpty(tw, "type", embedContentType);
-                        if (parameters != null)
-                        {
-                            foreach (var p in parameters)
-                            {
-                                tw.Write(
-                                    "{0}=\"{1}\" ",
-                                    HttpUtility.HtmlEncode(p.Key),
-                                    HttpUtility.HtmlAttributeEncode(p.Value.ToString())
-                                );
-                            }
-                        }
-                        tw.WriteLine("/>");
-                    }
-                    if (plugin != null)
-                    {
-                        plugin(tw);
-                    }
-                    tw.WriteLine("</object>");
+                    tw.WriteLine("/>");
                 }
-            );
+                if (plugin != null)
+                {
+                    plugin(tw);
+                }
+                tw.WriteLine("</object>");
+            });
         }
 
         private static string ValidatePath(

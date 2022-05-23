@@ -791,12 +791,10 @@ namespace System.Web.Mvc.Test
                             It.IsAny<RouteValueDictionary>()
                         )
                 )
-                .Callback(
-                    () =>
-                    {
-                        invocationCount++;
-                    }
-                );
+                .Callback(() =>
+                {
+                    invocationCount++;
+                });
 
             Controller controller = controllerMock.Object;
 
@@ -927,12 +925,10 @@ namespace System.Web.Mvc.Test
             Mock<Controller> controllerMock = new Mock<Controller>();
             controllerMock
                 .Setup(c => c.RedirectToRoute(It.IsAny<string>(), It.IsAny<RouteValueDictionary>()))
-                .Callback(
-                    () =>
-                    {
-                        invocationCount++;
-                    }
-                );
+                .Callback(() =>
+                {
+                    invocationCount++;
+                });
 
             Controller controller = controllerMock.Object;
 

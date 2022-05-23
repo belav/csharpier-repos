@@ -81,12 +81,10 @@ namespace System.Net.Sockets.Tests
                     sock.Connect(new IPEndPoint(_serverAddress, port));
                     sock.Dispose();
 
-                    Assert.Throws<ObjectDisposedException>(
-                        () =>
-                        {
-                            sock.SendPacketsAsync(new SocketAsyncEventArgs());
-                        }
-                    );
+                    Assert.Throws<ObjectDisposedException>(() =>
+                    {
+                        sock.SendPacketsAsync(new SocketAsyncEventArgs());
+                    });
                 }
             }
         }
@@ -131,14 +129,12 @@ namespace System.Net.Sockets.Tests
             );
             // Needs to be connected before send
 
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    socket.SendPacketsAsync(
-                        new SocketAsyncEventArgs { SendPacketsElements = new SendPacketsElement[0] }
-                    );
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                socket.SendPacketsAsync(
+                    new SocketAsyncEventArgs { SendPacketsElements = new SendPacketsElement[0] }
+                );
+            });
         }
 
         [Fact]
@@ -373,25 +369,21 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SendPacketsElement_MissingDirectoryName_Throws()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    // Existence is validated on send
-                    SendPackets(new SendPacketsElement(Path.Combine("nodir", "nofile")), 0);
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                // Existence is validated on send
+                SendPackets(new SendPacketsElement(Path.Combine("nodir", "nofile")), 0);
+            });
         }
 
         [Fact]
         public void SendPacketsElement_MissingFile_Throws()
         {
-            Assert.Throws<FileNotFoundException>(
-                () =>
-                {
-                    // Existence is validated on send
-                    SendPackets(new SendPacketsElement("DoesntExit"), 0);
-                }
-            );
+            Assert.Throws<FileNotFoundException>(() =>
+            {
+                // Existence is validated on send
+                SendPackets(new SendPacketsElement("DoesntExit"), 0);
+            });
         }
 
         [Fact]
@@ -940,12 +932,10 @@ namespace System.Net.Sockets.Tests
                     {
                         case TransmitFileOptions.Disconnect:
                             // Sending data again throws with socket shut down error.
-                            Assert.Throws<SocketException>(
-                                () =>
-                                {
-                                    sock.Send(new byte[1] { 01 });
-                                }
-                            );
+                            Assert.Throws<SocketException>(() =>
+                            {
+                                sock.Send(new byte[1] { 01 });
+                            });
                             break;
                         case TransmitFileOptions.ReuseSocket & TransmitFileOptions.Disconnect:
                             // Able to send data again with reuse socket flag set.

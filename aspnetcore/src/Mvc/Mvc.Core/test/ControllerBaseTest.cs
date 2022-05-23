@@ -2741,21 +2741,19 @@ public class ControllerBaseTest
         // Arrange
         var metadataProvider = new EmptyModelMetadataProvider();
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Empty(context.ModelName);
-                Assert.Same(
-                    valueProvider,
-                    Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
-                );
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Empty(context.ModelName);
+            Assert.Same(
+                valueProvider,
+                Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
+            );
 
-                // Include and exclude should be null, resulting in property
-                // being included.
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
-            }
-        );
+            // Include and exclude should be null, resulting in property
+            // being included.
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+        });
 
         var controller = GetController(binder, valueProvider);
         var model = new MyModel();
@@ -2775,20 +2773,18 @@ public class ControllerBaseTest
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(
-                    valueProvider,
-                    Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
-                );
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(
+                valueProvider,
+                Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
+            );
 
-                // Include and exclude should be null, resulting in property
-                // being included.
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
-            }
-        );
+            // Include and exclude should be null, resulting in property
+            // being included.
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+        });
 
         var controller = GetController(binder, valueProvider);
         var model = new MyModel();
@@ -2807,17 +2803,15 @@ public class ControllerBaseTest
         var modelName = "mymodel";
 
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(valueProvider, context.ValueProvider);
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(valueProvider, context.ValueProvider);
 
-                // Include and exclude should be null, resulting in property
-                // being included.
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
-            }
-        );
+            // Include and exclude should be null, resulting in property
+            // being included.
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+        });
 
         var controller = GetController(binder, valueProvider: null);
         var model = new MyModel();
@@ -2866,21 +2860,19 @@ public class ControllerBaseTest
             || string.Equals(m.PropertyName, "Include2", StringComparison.OrdinalIgnoreCase);
 
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(
-                    valueProvider,
-                    Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
-                );
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(
+                valueProvider,
+                Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
+            );
 
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include2"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include2"]));
 
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
-            }
-        );
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
+        });
 
         var controller = GetController(binder, valueProvider);
         var model = new MyModel();
@@ -2903,18 +2895,16 @@ public class ControllerBaseTest
             || string.Equals(m.PropertyName, "Include2", StringComparison.OrdinalIgnoreCase);
 
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(valueProvider, context.ValueProvider);
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(valueProvider, context.ValueProvider);
 
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include2"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include2"]));
 
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
-            }
-        );
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
+        });
         var controller = GetController(binder, valueProvider: null);
 
         var model = new MyModel();
@@ -2935,21 +2925,19 @@ public class ControllerBaseTest
         var valueProvider = new Mock<IValueProvider>();
         valueProvider.Setup(v => v.ContainsPrefix(prefix)).Returns(true);
 
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(
-                    valueProvider.Object,
-                    Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
-                );
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(
+                valueProvider.Object,
+                Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
+            );
 
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
 
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
-            }
-        );
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
+        });
 
         var controller = GetController(binder, valueProvider.Object);
         var model = new MyModel();
@@ -2972,18 +2960,16 @@ public class ControllerBaseTest
         var valueProvider = new Mock<IValueProvider>();
         valueProvider.Setup(v => v.ContainsPrefix(prefix)).Returns(true);
 
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(valueProvider.Object, context.ValueProvider);
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(valueProvider.Object, context.ValueProvider);
 
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
 
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
-            }
-        );
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
+        });
 
         var controller = GetController(binder, valueProvider: null);
         var model = new MyModel();
@@ -3013,18 +2999,16 @@ public class ControllerBaseTest
 
         var valueProvider = Mock.Of<IValueProvider>();
 
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(valueProvider, context.ValueProvider);
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(valueProvider, context.ValueProvider);
 
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include2"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Include2"]));
 
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
-                Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
-            }
-        );
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude1"]));
+            Assert.False(context.PropertyFilter(context.ModelMetadata.Properties["Exclude2"]));
+        });
 
         var controller = GetController(binder, valueProvider: null);
 
@@ -3051,20 +3035,18 @@ public class ControllerBaseTest
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(
-                    valueProvider,
-                    Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
-                );
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(
+                valueProvider,
+                Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
+            );
 
-                // Include and exclude should be null, resulting in property
-                // being included.
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
-            }
-        );
+            // Include and exclude should be null, resulting in property
+            // being included.
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+        });
 
         var controller = GetController(binder, valueProvider);
         var model = new MyModel();
@@ -3084,20 +3066,18 @@ public class ControllerBaseTest
 
         var metadataProvider = new EmptyModelMetadataProvider();
         var valueProvider = Mock.Of<IValueProvider>();
-        var binder = new StubModelBinder(
-            context =>
-            {
-                Assert.Same(
-                    valueProvider,
-                    Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
-                );
+        var binder = new StubModelBinder(context =>
+        {
+            Assert.Same(
+                valueProvider,
+                Assert.IsType<CompositeValueProvider>(context.ValueProvider)[0]
+            );
 
-                // Include and exclude should be null, resulting in property
-                // being included.
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
-                Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
-            }
-        );
+            // Include and exclude should be null, resulting in property
+            // being included.
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property1"]));
+            Assert.True(context.PropertyFilter(context.ModelMetadata.Properties["Property2"]));
+        });
 
         var controller = GetController(binder, valueProvider);
         MyModel model = new MyDerivedModel();

@@ -38,14 +38,12 @@ namespace Microsoft.EntityFrameworkCore
         private void AssertGenerator<TExpected>(string propertyName, bool setSequences = false)
         {
             var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-            builder.Entity<AnEntity>(
-                b =>
-                {
-                    b.Property(e => e.Custom).HasValueGenerator<CustomValueGenerator>();
-                    b.Property(propertyName).ValueGeneratedOnAdd();
-                    b.HasKey(propertyName);
-                }
-            );
+            builder.Entity<AnEntity>(b =>
+            {
+                b.Property(e => e.Custom).HasValueGenerator<CustomValueGenerator>();
+                b.Property(propertyName).ValueGeneratedOnAdd();
+                b.HasKey(propertyName);
+            });
 
             if (setSequences)
             {
@@ -71,13 +69,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Returns_temp_guid_generator_when_default_sql_set()
         {
             var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-            builder.Entity<AnEntity>(
-                b =>
-                {
-                    b.Property(e => e.Guid).HasDefaultValueSql("newid()");
-                    b.HasKey(e => e.Guid);
-                }
-            );
+            builder.Entity<AnEntity>(b =>
+            {
+                b.Property(e => e.Guid).HasDefaultValueSql("newid()");
+                b.HasKey(e => e.Guid);
+            });
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
@@ -94,13 +90,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Returns_temp_string_generator_when_default_sql_set()
         {
             var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-            builder.Entity<AnEntity>(
-                b =>
-                {
-                    b.Property(e => e.String).ValueGeneratedOnAdd().HasDefaultValueSql("Foo");
-                    b.HasKey(e => e.String);
-                }
-            );
+            builder.Entity<AnEntity>(b =>
+            {
+                b.Property(e => e.String).ValueGeneratedOnAdd().HasDefaultValueSql("Foo");
+                b.HasKey(e => e.String);
+            });
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
@@ -117,13 +111,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Returns_temp_binary_generator_when_default_sql_set()
         {
             var builder = SqlServerTestHelpers.Instance.CreateConventionBuilder();
-            builder.Entity<AnEntity>(
-                b =>
-                {
-                    b.HasKey(e => e.Binary);
-                    b.Property(e => e.Binary).HasDefaultValueSql("Foo").ValueGeneratedOnAdd();
-                }
-            );
+            builder.Entity<AnEntity>(b =>
+            {
+                b.HasKey(e => e.Binary);
+                b.Property(e => e.Binary).HasDefaultValueSql("Foo").ValueGeneratedOnAdd();
+            });
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 
@@ -176,13 +168,11 @@ namespace Microsoft.EntityFrameworkCore
         public void Throws_for_unsupported_combinations()
         {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
-            builder.Entity<AnEntity>(
-                b =>
-                {
-                    b.Property(e => e.Random).ValueGeneratedOnAdd();
-                    b.HasKey(e => e.Random);
-                }
-            );
+            builder.Entity<AnEntity>(b =>
+            {
+                b.Property(e => e.Random).ValueGeneratedOnAdd();
+                b.HasKey(e => e.Random);
+            });
             var model = builder.FinalizeModel();
             var entityType = model.FindEntityType(typeof(AnEntity));
 

@@ -46,12 +46,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     context.Response.OnStarting(() => Task.Run(() => onStartingCalled = true));
                     context.Response.OnCompleted(
                         () =>
-                            Task.Run(
-                                () =>
-                                {
-                                    onCompletedTcs.SetResult();
-                                }
-                            )
+                            Task.Run(() =>
+                            {
+                                onCompletedTcs.SetResult();
+                            })
                     );
 
                     // Prevent OnStarting call (see HttpProtocol.ProcessRequestsAsync()).
@@ -377,12 +375,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.Response.OnCompleted(
-                        async () =>
-                        {
-                            await delayTcs.Task;
-                        }
-                    );
+                    context.Response.OnCompleted(async () =>
+                    {
+                        await delayTcs.Task;
+                    });
                     await context.Response.WriteAsync("hello, world");
                 },
                 new TestServiceContext(LoggerFactory)
@@ -423,12 +419,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                 {
                     httpContext.Response.OnCompleted(
                         () =>
-                            Task.Run(
-                                () =>
-                                {
-                                    onCompletedTcs.SetResult();
-                                }
-                            )
+                            Task.Run(() =>
+                            {
+                                onCompletedTcs.SetResult();
+                            })
                     );
                     return Task.CompletedTask;
                 },
@@ -1094,12 +1088,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.RequestAborted.Register(
-                        () =>
-                        {
-                            requestAborted.SetResult();
-                        }
-                    );
+                    httpContext.RequestAborted.Register(() =>
+                    {
+                        requestAborted.SetResult();
+                    });
 
                     httpContext.Response.ContentLength = 12;
                     await httpContext.Response.WriteAsync("hello,");
@@ -1637,14 +1629,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        // Change response to chunked
+                        httpContext.Response.ContentLength = null;
+                        return Task.CompletedTask;
+                    });
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
@@ -1688,14 +1678,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        // Change response to chunked
+                        httpContext.Response.ContentLength = null;
+                        return Task.CompletedTask;
+                    });
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
@@ -1739,14 +1727,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        // Change response to chunked
+                        httpContext.Response.ContentLength = null;
+                        return Task.CompletedTask;
+                    });
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
@@ -1799,14 +1785,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        // Change response to chunked
+                        httpContext.Response.ContentLength = null;
+                        return Task.CompletedTask;
+                    });
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
@@ -1854,14 +1838,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        // Change response to chunked
+                        httpContext.Response.ContentLength = null;
+                        return Task.CompletedTask;
+                    });
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
@@ -1900,14 +1882,12 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async httpContext =>
                 {
-                    httpContext.Response.OnStarting(
-                        () =>
-                        {
-                            // Change response to chunked
-                            httpContext.Response.ContentLength = null;
-                            return Task.CompletedTask;
-                        }
-                    );
+                    httpContext.Response.OnStarting(() =>
+                    {
+                        // Change response to chunked
+                        httpContext.Response.ContentLength = null;
+                        return Task.CompletedTask;
+                    });
 
                     var response = Encoding.ASCII.GetBytes("hello, world");
                     httpContext.Response.ContentLength = response.Length - 1;
@@ -4817,12 +4797,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
         );
         mockHttpContextFactory
             .Setup(f => f.Dispose(It.IsAny<HttpContext>()))
-            .Callback<HttpContext>(
-                c =>
-                {
-                    disposedTcs.TrySetResult(c.Response.StatusCode);
-                }
-            );
+            .Callback<HttpContext>(c =>
+            {
+                disposedTcs.TrySetResult(c.Response.StatusCode);
+            });
 
         await using (
             var server = new TestServer(

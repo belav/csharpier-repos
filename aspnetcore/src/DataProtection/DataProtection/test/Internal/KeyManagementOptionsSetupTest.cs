@@ -86,27 +86,22 @@ public class KeyManagementOptionsSetupTest
 
     private static void RunTest(Dictionary<string, object> regValues, KeyManagementOptions options)
     {
-        WithUniqueTempRegKey(
-            registryKey =>
+        WithUniqueTempRegKey(registryKey =>
+        {
+            foreach (var entry in regValues)
             {
-                foreach (var entry in regValues)
-                {
-                    registryKey.SetValue(entry.Key, entry.Value);
-                }
-
-                var policyResolver = new RegistryPolicyResolver(
-                    registryKey,
-                    activator: SimpleActivator.DefaultWithoutServices
-                );
-
-                var setup = new KeyManagementOptionsSetup(
-                    NullLoggerFactory.Instance,
-                    policyResolver
-                );
-
-                setup.Configure(options);
+                registryKey.SetValue(entry.Key, entry.Value);
             }
-        );
+
+            var policyResolver = new RegistryPolicyResolver(
+                registryKey,
+                activator: SimpleActivator.DefaultWithoutServices
+            );
+
+            var setup = new KeyManagementOptionsSetup(NullLoggerFactory.Instance, policyResolver);
+
+            setup.Configure(options);
+        });
     }
 
     /// <summary>
@@ -127,20 +122,18 @@ public class KeyManagementOptionsSetupTest
         }
     }
 
-    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(
-        () =>
+    private static readonly Lazy<RegistryKey> LazyHkcuTempKey = new Lazy<RegistryKey>(() =>
+    {
+        try
         {
-            try
-            {
-                return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
-            }
-            catch
-            {
-                // swallow all failures
-                return null;
-            }
+            return Registry.CurrentUser.CreateSubKey(@"SOFTWARE\Microsoft\ASP.NET\temp");
         }
-    );
+        catch
+        {
+            // swallow all failures
+            return null;
+        }
+    });
 
     private class ConditionalRunTestOnlyIfHkcuRegistryAvailable : Attribute, ITestCondition
     {

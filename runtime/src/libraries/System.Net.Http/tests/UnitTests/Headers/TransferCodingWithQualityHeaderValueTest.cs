@@ -122,12 +122,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    TransferCodingWithQualityHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                TransferCodingWithQualityHeaderValue.Parse(input);
+            });
 
             Assert.False(
                 TransferCodingWithQualityHeaderValue.TryParse(

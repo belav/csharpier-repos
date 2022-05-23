@@ -15,16 +15,14 @@ namespace AutoMapper.UnitTests.Projection.MapFromTest
         [Fact]
         public void Should_not_fail()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<UserModel, UserDto>()
-                        .ForMember(
-                            dto => dto.FullName,
-                            opt => opt.MapFrom(src => src.LastName + " " + src.FirstName)
-                        );
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<UserModel, UserDto>()
+                    .ForMember(
+                        dto => dto.FullName,
+                        opt => opt.MapFrom(src => src.LastName + " " + src.FirstName)
+                    );
+            });
 
             typeof(NullReferenceException).ShouldNotBeThrownBy(
                 () => config.Internal().ProjectionBuilder.GetMapExpression<UserModel, UserDto>()

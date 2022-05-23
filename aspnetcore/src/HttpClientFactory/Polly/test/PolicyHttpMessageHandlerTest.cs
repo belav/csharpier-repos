@@ -217,12 +217,10 @@ public class PolicyHttpMessageHandlerTest
         var expected = new HttpResponseMessage();
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-            {
-                await handler.SendAsync(new HttpRequestMessage(), CancellationToken.None);
-            }
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+        {
+            await handler.SendAsync(new HttpRequestMessage(), CancellationToken.None);
+        });
 
         // Assert
         Assert.Equal(
@@ -352,12 +350,10 @@ public class PolicyHttpMessageHandlerTest
         var request = new HttpRequestMessage();
 
         // Act
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-            {
-                await handler.SendAsync(request, CancellationToken.None);
-            }
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+        {
+            await handler.SendAsync(request, CancellationToken.None);
+        });
 
         // Assert
         Assert.Null(request.GetPolicyExecutionContext()); // We do clean up a context we generated, when the policy selector throws.
@@ -380,12 +376,10 @@ public class PolicyHttpMessageHandlerTest
         var request = new HttpRequestMessage();
 
         // Act
-        var exception = await Assert.ThrowsAsync<OperationCanceledException>(
-            async () =>
-            {
-                await handler.SendAsync(request, CancellationToken.None);
-            }
-        );
+        var exception = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+        {
+            await handler.SendAsync(request, CancellationToken.None);
+        });
 
         // Assert
         Assert.NotNull(context); // The handler did generate a context for the execution.
@@ -413,15 +407,13 @@ public class PolicyHttpMessageHandlerTest
             var token = cts.Token;
             token.Register(() => throw new OperationCanceledException(token));
 
-            SingleThreadedSynchronizationContext.Run(
-                () =>
-                {
-                    // Act
-                    var request = new HttpRequestMessage();
-                    handler.SendAsync(request, CancellationToken.None).GetAwaiter().GetResult();
-                    hangs = false;
-                }
-            );
+            SingleThreadedSynchronizationContext.Run(() =>
+            {
+                // Act
+                var request = new HttpRequestMessage();
+                handler.SendAsync(request, CancellationToken.None).GetAwaiter().GetResult();
+                hangs = false;
+            });
         }
 
         // Assert

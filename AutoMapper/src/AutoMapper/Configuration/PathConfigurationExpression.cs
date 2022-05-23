@@ -89,13 +89,11 @@ namespace AutoMapper.Configuration
                     nameof(sourceExpression),
                     $"{nameof(sourceExpression)} may not be null when mapping {DestinationMember.Name} from {typeof(TSource)} to {typeof(TDestination)}."
                 );
-            PathMapActions.Add(
-                pm =>
-                {
-                    pm.CustomMapExpression = sourceExpression;
-                    pm.Ignored = false;
-                }
-            );
+            PathMapActions.Add(pm =>
+            {
+                pm.CustomMapExpression = sourceExpression;
+                pm.Ignored = false;
+            });
         }
 
         public void Configure(TypeMap typeMap)
@@ -153,23 +151,21 @@ namespace AutoMapper.Configuration
         public void Condition(
             Func<ConditionParameters<TSource, TDestination, TMember>, bool> condition
         ) =>
-            PathMapActions.Add(
-                pm =>
-                {
-                    Expression<
-                        Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
-                    > expr = (src, dest, srcMember, destMember, ctxt) =>
-                        condition(
-                            new ConditionParameters<TSource, TDestination, TMember>(
-                                src,
-                                dest,
-                                srcMember,
-                                destMember,
-                                ctxt
-                            )
-                        );
-                    pm.Condition = expr;
-                }
-            );
+            PathMapActions.Add(pm =>
+            {
+                Expression<
+                    Func<TSource, TDestination, TMember, TMember, ResolutionContext, bool>
+                > expr = (src, dest, srcMember, destMember, ctxt) =>
+                    condition(
+                        new ConditionParameters<TSource, TDestination, TMember>(
+                            src,
+                            dest,
+                            srcMember,
+                            destMember,
+                            ctxt
+                        )
+                    );
+                pm.Condition = expr;
+            });
     }
 }

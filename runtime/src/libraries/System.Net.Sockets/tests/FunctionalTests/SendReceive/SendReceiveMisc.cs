@@ -30,33 +30,31 @@ namespace System.Net.Sockets.Tests
                 server.Listen(1);
 
                 var sendBuffer = new byte[SegmentCount];
-                Task serverProcessingTask = Task.Run(
-                    () =>
+                Task serverProcessingTask = Task.Run(() =>
+                {
+                    using (Socket acceptSocket = server.Accept())
                     {
-                        using (Socket acceptSocket = server.Accept())
+                        // send data as SegmentCount (> IOV_MAX) 1-byte segments.
+                        var sendSegments = new List<ArraySegment<byte>>();
+                        for (int i = 0; i < SegmentCount; i++)
                         {
-                            // send data as SegmentCount (> IOV_MAX) 1-byte segments.
-                            var sendSegments = new List<ArraySegment<byte>>();
-                            for (int i = 0; i < SegmentCount; i++)
-                            {
-                                sendBuffer[i] = (byte)i;
-                                sendSegments.Add(new ArraySegment<byte>(sendBuffer, i, 1));
-                            }
-                            SocketError error;
-                            // Send blocks until all segments are sent.
-                            int bytesSent = acceptSocket.Send(
-                                sendSegments,
-                                SocketFlags.None,
-                                out error
-                            );
-
-                            Assert.Equal(SegmentCount, bytesSent);
-                            Assert.Equal(SocketError.Success, error);
-
-                            acceptSocket.Shutdown(SocketShutdown.Send);
+                            sendBuffer[i] = (byte)i;
+                            sendSegments.Add(new ArraySegment<byte>(sendBuffer, i, 1));
                         }
+                        SocketError error;
+                        // Send blocks until all segments are sent.
+                        int bytesSent = acceptSocket.Send(
+                            sendSegments,
+                            SocketFlags.None,
+                            out error
+                        );
+
+                        Assert.Equal(SegmentCount, bytesSent);
+                        Assert.Equal(SocketError.Success, error);
+
+                        acceptSocket.Shutdown(SocketShutdown.Send);
                     }
-                );
+                });
 
                 using (
                     var client = new Socket(
@@ -167,41 +165,39 @@ namespace System.Net.Sockets.Tests
 
             Barrier b = new Barrier(2);
 
-            Task receiveTask = Task.Run(
-                () =>
+            Task receiveTask = Task.Run(() =>
+            {
+                using (receiver)
                 {
-                    using (receiver)
+                    var receiveBuffer = new byte[SegmentCount];
+                    var receiveSegments = new List<ArraySegment<byte>>();
+                    for (int i = 0; i < SegmentCount; i++)
                     {
-                        var receiveBuffer = new byte[SegmentCount];
-                        var receiveSegments = new List<ArraySegment<byte>>();
-                        for (int i = 0; i < SegmentCount; i++)
-                        {
-                            receiveSegments.Add(new ArraySegment<byte>(receiveBuffer, i, 1));
-                        }
-                        // receive data as SegmentCount (> IOV_MAX) 1-byte segments.
-                        SocketError error;
-                        // Signal we are ready to receive.
-                        b.SignalAndWait();
-                        int bytesReceived = receiver.Receive(
-                            receiveSegments,
-                            SocketFlags.None,
-                            out error
-                        );
+                        receiveSegments.Add(new ArraySegment<byte>(receiveBuffer, i, 1));
+                    }
+                    // receive data as SegmentCount (> IOV_MAX) 1-byte segments.
+                    SocketError error;
+                    // Signal we are ready to receive.
+                    b.SignalAndWait();
+                    int bytesReceived = receiver.Receive(
+                        receiveSegments,
+                        SocketFlags.None,
+                        out error
+                    );
 
-                        if (error == SocketError.Success)
-                        {
-                            // platform received message in > IOV_MAX segments
-                            Assert.Equal(SegmentCount, bytesReceived);
-                        }
-                        else
-                        {
-                            // platform returns EMSGSIZE
-                            Assert.Equal(SocketError.MessageSize, error);
-                            Assert.Equal(0, bytesReceived);
-                        }
+                    if (error == SocketError.Success)
+                    {
+                        // platform received message in > IOV_MAX segments
+                        Assert.Equal(SegmentCount, bytesReceived);
+                    }
+                    else
+                    {
+                        // platform returns EMSGSIZE
+                        Assert.Equal(SocketError.MessageSize, error);
+                        Assert.Equal(0, bytesReceived);
                     }
                 }
-            );
+            });
 
             using (sender)
             {

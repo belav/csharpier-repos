@@ -35,14 +35,12 @@ public class SqlServerCacheServicesExtensionsTest
         services.AddScoped(typeof(IDistributedCache), sp => Mock.Of<IDistributedCache>());
 
         // Act
-        services.AddDistributedSqlServerCache(
-            options =>
-            {
-                options.ConnectionString = "Fake";
-                options.SchemaName = "Fake";
-                options.TableName = "Fake";
-            }
-        );
+        services.AddDistributedSqlServerCache(options =>
+        {
+            options.ConnectionString = "Fake";
+            options.SchemaName = "Fake";
+            options.TableName = "Fake";
+        });
 
         // Assert
         var serviceProvider = services.BuildServiceProvider();

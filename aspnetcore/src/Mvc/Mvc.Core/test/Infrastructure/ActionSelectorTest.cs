@@ -514,12 +514,10 @@ public class ActionSelectorTest
             + $"ambiguity. Matching actions: {actionNames}";
 
         // Act
-        Assert.Throws<AmbiguousActionException>(
-            () =>
-            {
-                selector.SelectBestCandidate(routeContext, actions);
-            }
-        );
+        Assert.Throws<AmbiguousActionException>(() =>
+        {
+            selector.SelectBestCandidate(routeContext, actions);
+        });
 
         // Assert
         Assert.Empty(sink.Scopes);
@@ -843,12 +841,10 @@ public class ActionSelectorTest
         context.RouteData.Values.Add("action", "Buy");
 
         // Act
-        var ex = Assert.Throws<AmbiguousActionException>(
-            () =>
-            {
-                selector.SelectBestCandidate(context, actions);
-            }
-        );
+        var ex = Assert.Throws<AmbiguousActionException>(() =>
+        {
+            selector.SelectBestCandidate(context, actions);
+        });
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);

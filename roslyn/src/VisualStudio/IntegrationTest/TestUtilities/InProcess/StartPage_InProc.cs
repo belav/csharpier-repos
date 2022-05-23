@@ -22,67 +22,57 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public bool IsEnabled()
         {
-            return InvokeOnUIThread(
-                cancellationToken =>
+            return InvokeOnUIThread(cancellationToken =>
+            {
+                var property = GetProperty();
+                if (new Version(property.DTE.Version).Major == 16)
                 {
-                    var property = GetProperty();
-                    if (new Version(property.DTE.Version).Major == 16)
-                    {
-                        return (int)property.Value == VS2019ShowStartWindow;
-                    }
-                    else
-                    {
-                        return (int)property.Value == ShowStartPage;
-                    }
+                    return (int)property.Value == VS2019ShowStartWindow;
                 }
-            );
+                else
+                {
+                    return (int)property.Value == ShowStartPage;
+                }
+            });
         }
 
         public void SetEnabled(bool enabled)
         {
-            InvokeOnUIThread(
-                cancellationToken =>
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var property = GetProperty();
+                if (new Version(property.DTE.Version).Major == 16)
                 {
-                    var property = GetProperty();
-                    if (new Version(property.DTE.Version).Major == 16)
-                    {
-                        property.Value = enabled
-                            ? VS2019ShowStartWindow
-                            : VS2019ShowEmptyEnvironment;
-                    }
-                    else
-                    {
-                        property.Value = enabled ? ShowStartPage : ShowEmptyEnvironment;
-                    }
+                    property.Value = enabled ? VS2019ShowStartWindow : VS2019ShowEmptyEnvironment;
                 }
-            );
+                else
+                {
+                    property.Value = enabled ? ShowStartPage : ShowEmptyEnvironment;
+                }
+            });
         }
 
         public bool CloseWindow()
         {
-            return InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var uiShell = GetGlobalService<SVsUIShell, IVsUIShell>();
-                    if (
-                        ErrorHandler.Failed(
-                            uiShell.FindToolWindow(
-                                (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
-                                new Guid(ToolWindowGuids80.StartPage),
-                                out var frame
-                            )
+            return InvokeOnUIThread(cancellationToken =>
+            {
+                var uiShell = GetGlobalService<SVsUIShell, IVsUIShell>();
+                if (
+                    ErrorHandler.Failed(
+                        uiShell.FindToolWindow(
+                            (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
+                            new Guid(ToolWindowGuids80.StartPage),
+                            out var frame
                         )
                     )
-                    {
-                        return false;
-                    }
-
-                    ErrorHandler.ThrowOnFailure(
-                        frame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave)
-                    );
-                    return true;
+                )
+                {
+                    return false;
                 }
-            );
+
+                ErrorHandler.ThrowOnFailure(frame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave));
+                return true;
+            });
         }
 
         private EnvDTE.Property GetProperty() =>

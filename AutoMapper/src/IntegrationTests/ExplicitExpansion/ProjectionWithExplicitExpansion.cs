@@ -117,38 +117,36 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Source, Dto>()
-                        .ForMember(dto => dto.Desc, conf => conf.ExplicitExpansion())
-                        .ForMember(dto => dto.Name, conf => conf.ExplicitExpansion())
-                        .ForMember(
-                            dto => dto.InnerDescFlattened,
-                            conf =>
-                            {
-                                conf.ExplicitExpansion();
-                                conf.MapFrom(_ => _.Inner.Ides);
-                            }
-                        )
-                        .ForMember(
-                            dto => dto.InnerFlattenedNonKey,
-                            conf =>
-                            {
-                                conf.ExplicitExpansion();
-                                conf.MapFrom(_ => _.Inner.Ide1);
-                            }
-                        )
-                        .ForMember(
-                            dto => dto.DeepFlattened,
-                            conf =>
-                            {
-                                conf.ExplicitExpansion();
-                                conf.MapFrom(_ => _.Inner.Deep.Dide);
-                            }
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Source, Dto>()
+                    .ForMember(dto => dto.Desc, conf => conf.ExplicitExpansion())
+                    .ForMember(dto => dto.Name, conf => conf.ExplicitExpansion())
+                    .ForMember(
+                        dto => dto.InnerDescFlattened,
+                        conf =>
+                        {
+                            conf.ExplicitExpansion();
+                            conf.MapFrom(_ => _.Inner.Ides);
+                        }
+                    )
+                    .ForMember(
+                        dto => dto.InnerFlattenedNonKey,
+                        conf =>
+                        {
+                            conf.ExplicitExpansion();
+                            conf.MapFrom(_ => _.Inner.Ide1);
+                        }
+                    )
+                    .ForMember(
+                        dto => dto.DeepFlattened,
+                        conf =>
+                        {
+                            conf.ExplicitExpansion();
+                            conf.MapFrom(_ => _.Inner.Deep.Dide);
+                        }
+                    );
+            });
 
         [Fact]
         public void NoExplicitExpansion()

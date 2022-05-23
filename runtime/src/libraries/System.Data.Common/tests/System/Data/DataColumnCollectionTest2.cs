@@ -496,13 +496,11 @@ namespace System.Data.Tests
             DataTable dt = new DataTable();
             DataColumn col = new DataColumn("col1", Type.GetType("System.String"));
             dt.Columns.Add(col);
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    DataColumn col1 = new DataColumn("col1", Type.GetType("System.String"));
-                    dt.Columns.Add(col1);
-                }
-            );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                DataColumn col1 = new DataColumn("col1", Type.GetType("System.String"));
+                dt.Columns.Add(col1);
+            });
         }
 
         [Fact]
@@ -519,12 +517,10 @@ namespace System.Data.Tests
         {
             DataTable dt = new DataTable();
             dt.Columns.Add("col1");
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    dt.Columns.Add("col1");
-                }
-            );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                dt.Columns.Add("col1");
+            });
         }
 
         [Fact]
@@ -543,12 +539,10 @@ namespace System.Data.Tests
         public void AddRange_DataColumn2()
         {
             DataTable dt = new DataTable();
-            Assert.Throws<DuplicateNameException>(
-                () =>
-                {
-                    dt.Columns.AddRange(GetBadDataColumArray());
-                }
-            );
+            Assert.Throws<DuplicateNameException>(() =>
+            {
+                dt.Columns.AddRange(GetBadDataColumArray());
+            });
         }
 
         [Fact]
@@ -624,12 +618,10 @@ namespace System.Data.Tests
             }
             Assert.Equal(6, counter);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    DataColumn col = (DataColumn)myEnumerator.Current;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                DataColumn col = (DataColumn)myEnumerator.Current;
+            });
         }
 
         [Fact] // this [Int32]
@@ -799,12 +791,10 @@ namespace System.Data.Tests
             Assert.Equal(originalColumnCount - 1, dt.Columns.Count);
             Assert.True(_eventOccurred);
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    dt.Columns.RemoveAt(-1);
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                dt.Columns.RemoveAt(-1);
+            });
         }
 
         [Fact]

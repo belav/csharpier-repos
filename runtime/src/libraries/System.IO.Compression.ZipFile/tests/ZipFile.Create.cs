@@ -224,12 +224,10 @@ namespace System.IO.Compression.Tests
 
             using (ZipArchive archive = ZipFile.OpenRead(bad("CDoffsetInBoundsWrong.zip")))
             {
-                Assert.Throws<InvalidDataException>(
-                    () =>
-                    {
-                        var x = archive.Entries;
-                    }
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                {
+                    var x = archive.Entries;
+                });
             }
 
             using (
@@ -246,12 +244,10 @@ namespace System.IO.Compression.Tests
 
             using (ZipArchive archive = ZipFile.OpenRead(bad("numberOfEntriesDifferent.zip")))
             {
-                Assert.Throws<InvalidDataException>(
-                    () =>
-                    {
-                        var x = archive.Entries;
-                    }
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                {
+                    var x = archive.Entries;
+                });
             }
             using (
                 TempFile testArchive = CreateTempCopyFile(

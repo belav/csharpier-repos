@@ -174,15 +174,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<Node>(
-                    b =>
-                    {
-                        b.HasKey(e => new { e.ListId, e.PreviousNodeId });
-                        b.HasOne(e => e.NextNode)
-                            .WithOne(e => e.PreviousNode)
-                            .HasForeignKey<Node>(e => new { e.ListId, e.NextNodeId });
-                    }
-                );
+                modelBuilder.Entity<Node>(b =>
+                {
+                    b.HasKey(e => new { e.ListId, e.PreviousNodeId });
+                    b.HasOne(e => e.NextNode)
+                        .WithOne(e => e.PreviousNode)
+                        .HasForeignKey<Node>(e => new { e.ListId, e.NextNodeId });
+                });
 
                 var contextOptions = new DbContextOptionsBuilder()
                     .UseModel(modelBuilder.Model.FinalizeModel())

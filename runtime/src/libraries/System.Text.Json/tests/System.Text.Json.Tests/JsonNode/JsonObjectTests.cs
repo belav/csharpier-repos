@@ -809,136 +809,116 @@ namespace System.Text.Json.Nodes.Tests
             int index = 0;
 
             // Exception string sample: "Collection was modified; enumeration operation may not execute"
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (KeyValuePair<string, JsonNode?> node in jObject)
                 {
-                    foreach (KeyValuePair<string, JsonNode?> node in jObject)
-                    {
-                        index++;
-                        jObject.Add("New_A", index);
-                    }
+                    index++;
+                    jObject.Add("New_A", index);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (KeyValuePair<string, JsonNode?> node in jObject)
                 {
-                    foreach (KeyValuePair<string, JsonNode?> node in jObject)
-                    {
-                        index++;
-                        jObject.Remove(node.Key);
-                    }
+                    index++;
+                    jObject.Remove(node.Key);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
             IEnumerable iEnumerable = jObject;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (KeyValuePair<string, JsonNode?> node in iEnumerable)
                 {
-                    foreach (KeyValuePair<string, JsonNode?> node in iEnumerable)
-                    {
-                        index++;
-                        jObject.Add("New_B", index);
-                    }
+                    index++;
+                    jObject.Add("New_B", index);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (KeyValuePair<string, JsonNode?> node in iEnumerable)
                 {
-                    foreach (KeyValuePair<string, JsonNode?> node in iEnumerable)
-                    {
-                        index++;
-                        jObject.Remove(node.Key);
-                    }
+                    index++;
+                    jObject.Remove(node.Key);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             IDictionary<string, JsonNode?> iDictionary = jObject;
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (string str in iDictionary.Keys)
                 {
-                    foreach (string str in iDictionary.Keys)
-                    {
-                        index++;
-                        jObject.Add("New_C", index);
-                    }
+                    index++;
+                    jObject.Add("New_C", index);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (string str in (IEnumerable)iDictionary.Keys)
                 {
-                    foreach (string str in (IEnumerable)iDictionary.Keys)
-                    {
-                        index++;
-                        jObject.Add("New_D", index);
-                    }
+                    index++;
+                    jObject.Add("New_D", index);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (string str in iDictionary.Keys)
                 {
-                    foreach (string str in iDictionary.Keys)
-                    {
-                        index++;
-                        jObject.Remove(str);
-                    }
+                    index++;
+                    jObject.Remove(str);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (JsonNode node in iDictionary.Values)
                 {
-                    foreach (JsonNode node in iDictionary.Values)
-                    {
-                        index++;
-                        jObject.Add("New_E", index);
-                    }
+                    index++;
+                    jObject.Add("New_E", index);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (JsonNode node in (IEnumerable)iDictionary.Values)
                 {
-                    foreach (JsonNode node in (IEnumerable)iDictionary.Values)
-                    {
-                        index++;
-                        jObject.Add("New_F", index);
-                    }
+                    index++;
+                    jObject.Add("New_F", index);
                 }
-            );
+            });
             Assert.Equal(1, index);
 
             index = 0;
-            Assert.Throws<InvalidOperationException>(
-                () =>
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                foreach (JsonNode node in iDictionary.Values)
                 {
-                    foreach (JsonNode node in iDictionary.Values)
-                    {
-                        index++;
-                        jObject.Clear();
-                    }
+                    index++;
+                    jObject.Clear();
                 }
-            );
+            });
             Assert.Equal(1, index);
         }
     }

@@ -456,12 +456,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.AddAttribute(0, "name", "value");
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.AddAttribute(0, "name", "value");
+        });
     }
 
     [Fact]
@@ -471,12 +469,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.AddAttribute(0, "name", new Action<string>(text => { }));
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.AddAttribute(0, "name", new Action<string>(text => { }));
+        });
     }
 
     [Fact]
@@ -486,14 +482,12 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenElement(0, "some element");
-                builder.AddContent(1, "hello");
-                builder.AddAttribute(2, "name", "value");
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenElement(0, "some element");
+            builder.AddContent(1, "hello");
+            builder.AddAttribute(2, "name", "value");
+        });
     }
 
     [Fact]
@@ -503,14 +497,12 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenElement(0, "some element");
-                builder.AddContent(1, "hello");
-                builder.AddAttribute(2, "name", new Action<EventArgs>(eventInfo => { }));
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenElement(0, "some element");
+            builder.AddContent(1, "hello");
+            builder.AddAttribute(2, "name", new Action<EventArgs>(eventInfo => { }));
+        });
     }
 
     [Fact]
@@ -520,13 +512,11 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenRegion(0);
-                builder.AddAttribute(1, "name", "value");
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenRegion(0);
+            builder.AddAttribute(1, "name", "value");
+        });
     }
 
     [Fact]
@@ -536,14 +526,12 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenElement(0, "some element");
-                builder.AddElementReferenceCapture(1, _ => { });
-                builder.AddAttribute(2, "name", "value");
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenElement(0, "some element");
+            builder.AddElementReferenceCapture(1, _ => { });
+            builder.AddAttribute(2, "name", "value");
+        });
     }
 
     [Fact]
@@ -553,14 +541,12 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenComponent<TestComponent>(0);
-                builder.AddComponentReferenceCapture(1, _ => { });
-                builder.AddAttribute(2, "name", "value");
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenComponent<TestComponent>(0);
+            builder.AddComponentReferenceCapture(1, _ => { });
+            builder.AddAttribute(2, "name", "value");
+        });
     }
 
     [Fact]
@@ -712,12 +698,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.AddElementReferenceCapture(0, _ => { });
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.AddElementReferenceCapture(0, _ => { });
+        });
     }
 
     [Fact]
@@ -727,13 +711,11 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenComponent<TestComponent>(0);
-                builder.AddElementReferenceCapture(1, _ => { });
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenComponent<TestComponent>(0);
+            builder.AddElementReferenceCapture(1, _ => { });
+        });
     }
 
     [Fact]
@@ -743,13 +725,11 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenRegion(0);
-                builder.AddElementReferenceCapture(1, _ => { });
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenRegion(0);
+            builder.AddElementReferenceCapture(1, _ => { });
+        });
     }
 
     [Fact]
@@ -811,12 +791,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.AddComponentReferenceCapture(0, _ => { });
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.AddComponentReferenceCapture(0, _ => { });
+        });
     }
 
     [Fact]
@@ -826,13 +804,11 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenElement(0, "myelement");
-                builder.AddComponentReferenceCapture(1, _ => { });
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenElement(0, "myelement");
+            builder.AddComponentReferenceCapture(1, _ => { });
+        });
     }
 
     [Fact]
@@ -842,13 +818,11 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.OpenRegion(0);
-                builder.AddComponentReferenceCapture(1, _ => { });
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.OpenRegion(0);
+            builder.AddComponentReferenceCapture(1, _ => { });
+        });
     }
 
     [Fact]
@@ -1687,12 +1661,10 @@ public class RenderTreeBuilderTest
         var builder = new RenderTreeBuilder();
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.SetKey(new object());
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.SetKey(new object());
+        });
         Assert.Equal("Cannot set a key outside the scope of a component or element.", ex.Message);
     }
 
@@ -1705,12 +1677,10 @@ public class RenderTreeBuilderTest
         // Act/Assert
         builder.OpenElement(0, "some element");
         builder.OpenRegion(1);
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                builder.SetKey(new object());
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            builder.SetKey(new object());
+        });
         Assert.Equal(
             $"Cannot set a key on a frame of type {RenderTreeFrameType.Region}.",
             ex.Message

@@ -23,12 +23,10 @@ namespace System.Threading.Tasks.Tests
                 Task tInner = null;
 
                 // Test Run(Action)
-                Task t1 = Task.Run(
-                    () =>
-                    {
-                        tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                    }
-                );
+                Task t1 = Task.Run(() =>
+                {
+                    tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                });
                 Debug.WriteLine(
                     "RunRunTests - AttachToParentIgnored:      -- Waiting on outer Task.  If we hang, that's a failure"
                 );
@@ -37,13 +35,11 @@ namespace System.Threading.Tasks.Tests
                 tInner.Wait();
 
                 // Test Run(Func<int>)
-                Task<int> f1 = Task.Run(
-                    () =>
-                    {
-                        tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                        return 42;
-                    }
-                );
+                Task<int> f1 = Task.Run(() =>
+                {
+                    tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    return 42;
+                });
                 Debug.WriteLine(
                     "RunRunTests - AttachToParentIgnored:      -- Waiting on outer Task<int>.  If we hang, that's a failure"
                 );
@@ -52,14 +48,12 @@ namespace System.Threading.Tasks.Tests
                 tInner.Wait();
 
                 // Test Run(Func<Task>)
-                Task t2 = Task.Run(
-                    () =>
-                    {
-                        tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
-                        Task returnTask = Task.Factory.StartNew(() => { });
-                        return returnTask;
-                    }
-                );
+                Task t2 = Task.Run(() =>
+                {
+                    tInner = new Task(() => { }, TaskCreationOptions.AttachedToParent);
+                    Task returnTask = Task.Factory.StartNew(() => { });
+                    return returnTask;
+                });
                 Debug.WriteLine(
                     "RunRunTests - AttachToParentIgnored:      -- Waiting on outer Task (unwrap-style).  If we hang, that's a failure"
                 );
@@ -69,21 +63,19 @@ namespace System.Threading.Tasks.Tests
 
                 Task<int> fInner = null;
                 // Test Run(Func<Task<int>>)
-                Task<int> f2 = Task.Run(
-                    () =>
-                    {
-                        // Make sure AttachedToParent is ignored for futures as well as tasks
-                        fInner = new Task<int>(
-                            () =>
-                            {
-                                return 42;
-                            },
-                            TaskCreationOptions.AttachedToParent
-                        );
-                        Task<int> returnTask = Task<int>.Factory.StartNew(() => 11);
-                        return returnTask;
-                    }
-                );
+                Task<int> f2 = Task.Run(() =>
+                {
+                    // Make sure AttachedToParent is ignored for futures as well as tasks
+                    fInner = new Task<int>(
+                        () =>
+                        {
+                            return 42;
+                        },
+                        TaskCreationOptions.AttachedToParent
+                    );
+                    Task<int> returnTask = Task<int>.Factory.StartNew(() => 11);
+                    return returnTask;
+                });
                 Debug.WriteLine(
                     "RunRunTests - AttachToParentIgnored: Waiting on outer Task<int> (unwrap-style).  If we hang, that's a failure"
                 );
@@ -96,12 +88,10 @@ namespace System.Threading.Tasks.Tests
             // Test basic functionality w/o cancellation token
             //
             int count = 0;
-            Task task1 = Task.Run(
-                () =>
-                {
-                    count = 1;
-                }
-            );
+            Task task1 = Task.Run(() =>
+            {
+                count = 1;
+            });
             Debug.WriteLine("RunRunTests: waiting for a task.  If we hang, something went wrong.");
             task1.Wait();
             Assert.True(count == 1, "    > FAILED.  Task completed but did not run.");
@@ -110,12 +100,10 @@ namespace System.Threading.Tasks.Tests
                 "    > FAILED.  Task did not end in RanToCompletion state."
             );
 
-            Task<int> future1 = Task.Run(
-                () =>
-                {
-                    return 7;
-                }
-            );
+            Task<int> future1 = Task.Run(() =>
+            {
+                return 7;
+            });
             Debug.WriteLine(
                 "RunRunTests - Basic w/o CT: waiting for a future.  If we hang, something went wrong."
             );
@@ -126,17 +114,13 @@ namespace System.Threading.Tasks.Tests
                 "    > FAILED.  Future did not end in RanToCompletion state."
             );
 
-            task1 = Task.Run(
-                () =>
+            task1 = Task.Run(() =>
+            {
+                return Task.Run(() =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            count = 11;
-                        }
-                    );
-                }
-            );
+                    count = 11;
+                });
+            });
             Debug.WriteLine(
                 "RunRunTests - Basic w/o CT: waiting for a task(unwrapped).  If we hang, something went wrong."
             );
@@ -147,12 +131,10 @@ namespace System.Threading.Tasks.Tests
                 "    > FAILED.  Task(unwrapped) did not end in RanToCompletion state."
             );
 
-            future1 = Task.Run(
-                () =>
-                {
-                    return Task.Run(() => 17);
-                }
-            );
+            future1 = Task.Run(() =>
+            {
+                return Task.Run(() => 17);
+            });
             Debug.WriteLine(
                 "RunRunTests - Basic w/o CT: waiting for a future(unwrapped).  If we hang, something went wrong."
             );
@@ -208,12 +190,10 @@ namespace System.Threading.Tasks.Tests
             task2 = Task.Run(
                 () =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            count = 31;
-                        }
-                    );
+                    return Task.Run(() =>
+                    {
+                        count = 31;
+                    });
                 },
                 token
             );
@@ -266,12 +246,10 @@ namespace System.Threading.Tasks.Tests
             Debug.WriteLine(
                 "RunRunTests: waiting for a task w/ canceled token.  If we hang, something went wrong."
             );
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    task3.Wait();
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                task3.Wait();
+            });
             Assert.False(
                 count == 41,
                 "    > FAILED.  Task w/ canceled token ran when it should not have."
@@ -292,12 +270,10 @@ namespace System.Threading.Tasks.Tests
             Debug.WriteLine(
                 "RunRunTests: waiting for a future w/ canceled token.  If we hang, something went wrong."
             );
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    future3.Wait();
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                future3.Wait();
+            });
             Assert.False(
                 count == 47,
                 "    > FAILED.  Future w/ canceled token ran when it should not have."
@@ -310,24 +286,20 @@ namespace System.Threading.Tasks.Tests
             task3 = Task.Run(
                 () =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            count = 51;
-                        }
-                    );
+                    return Task.Run(() =>
+                    {
+                        count = 51;
+                    });
                 },
                 token
             );
             Debug.WriteLine(
                 "RunRunTests: waiting for a task(unwrapped) w/ canceled token.  If we hang, something went wrong."
             );
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    task3.Wait();
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                task3.Wait();
+            });
             Assert.False(
                 count == 51,
                 "    > FAILED.  Task(unwrapped) w/ canceled token ran when it should not have."
@@ -340,25 +312,21 @@ namespace System.Threading.Tasks.Tests
             future3 = Task.Run(
                 () =>
                 {
-                    return Task.Run(
-                        () =>
-                        {
-                            count = 57;
-                            return count;
-                        }
-                    );
+                    return Task.Run(() =>
+                    {
+                        count = 57;
+                        return count;
+                    });
                 },
                 token
             );
             Debug.WriteLine(
                 "RunRunTests: waiting for a future(unwrapped) w/ canceled token.  If we hang, something went wrong."
             );
-            Assert.Throws<AggregateException>(
-                () =>
-                {
-                    future3.Wait();
-                }
-            );
+            Assert.Throws<AggregateException>(() =>
+            {
+                future3.Wait();
+            });
             Assert.False(
                 count == 57,
                 "    > FAILED.  Future(unwrapped) w/ canceled token ran when it should not have."
@@ -384,12 +352,10 @@ namespace System.Threading.Tasks.Tests
                 Task alreadyCompletedTask = Task.Factory.StartNew(() => { });
                 alreadyCompletedTask.Wait();
 
-                Task alreadyFaultedTask = Task.Factory.StartNew(
-                    () =>
-                    {
-                        throw new Exception("FAULTED!");
-                    }
-                );
+                Task alreadyFaultedTask = Task.Factory.StartNew(() =>
+                {
+                    throw new Exception("FAULTED!");
+                });
                 try
                 {
                     alreadyFaultedTask.Wait();
@@ -451,14 +417,12 @@ namespace System.Threading.Tasks.Tests
                 alreadyCompletedTask.Wait();
                 bool doIt = true;
 
-                Task<int> alreadyFaultedTask = Task<int>.Factory.StartNew(
-                    () =>
-                    {
-                        if (doIt)
-                            throw new Exception("FAULTED!");
-                        return 42;
-                    }
-                );
+                Task<int> alreadyFaultedTask = Task<int>.Factory.StartNew(() =>
+                {
+                    if (doIt)
+                        throw new Exception("FAULTED!");
+                    return 42;
+                });
                 try
                 {
                     alreadyFaultedTask.Wait();
@@ -530,31 +494,29 @@ namespace System.Threading.Tasks.Tests
                 CancellationToken token1 = cts1.Token;
 
                 int something = 0;
-                Task t1 = Task.Run(
-                    () =>
-                    {
-                        if (scenario == UnwrappedScenario.ThrowExceptionInDelegate)
-                            throw new Exception("thrownInDelegate");
-                        if (scenario == UnwrappedScenario.ThrowOceInDelegate)
-                            throw new OperationCanceledException("thrownInDelegate");
-                        return Task.Run(
-                            () =>
+                Task t1 = Task.Run(() =>
+                {
+                    if (scenario == UnwrappedScenario.ThrowExceptionInDelegate)
+                        throw new Exception("thrownInDelegate");
+                    if (scenario == UnwrappedScenario.ThrowOceInDelegate)
+                        throw new OperationCanceledException("thrownInDelegate");
+                    return Task.Run(
+                        () =>
+                        {
+                            if (scenario == UnwrappedScenario.ThrowExceptionInTask)
+                                throw new Exception("thrownInTask");
+                            if (scenario == UnwrappedScenario.ThrowTargetOceInTask)
                             {
-                                if (scenario == UnwrappedScenario.ThrowExceptionInTask)
-                                    throw new Exception("thrownInTask");
-                                if (scenario == UnwrappedScenario.ThrowTargetOceInTask)
-                                {
-                                    cts1.Cancel();
-                                    throw new OperationCanceledException(token1);
-                                }
-                                if (scenario == UnwrappedScenario.ThrowOtherOceInTask)
-                                    throw new OperationCanceledException(CancellationToken.None);
-                                something = 1;
-                            },
-                            token1
-                        );
-                    }
-                );
+                                cts1.Cancel();
+                                throw new OperationCanceledException(token1);
+                            }
+                            if (scenario == UnwrappedScenario.ThrowOtherOceInTask)
+                                throw new OperationCanceledException(CancellationToken.None);
+                            something = 1;
+                        },
+                        token1
+                    );
+                });
 
                 bool cancellationExpected =
                     (scenario == UnwrappedScenario.ThrowOceInDelegate)
@@ -614,31 +576,29 @@ namespace System.Threading.Tasks.Tests
                 CancellationTokenSource cts2 = new CancellationTokenSource();
                 CancellationToken token2 = cts2.Token;
 
-                Task<int> f1 = Task.Run(
-                    () =>
-                    {
-                        if (scenario == UnwrappedScenario.ThrowExceptionInDelegate)
-                            throw new Exception("thrownInDelegate");
-                        if (scenario == UnwrappedScenario.ThrowOceInDelegate)
-                            throw new OperationCanceledException("thrownInDelegate");
-                        return Task.Run(
-                            () =>
+                Task<int> f1 = Task.Run(() =>
+                {
+                    if (scenario == UnwrappedScenario.ThrowExceptionInDelegate)
+                        throw new Exception("thrownInDelegate");
+                    if (scenario == UnwrappedScenario.ThrowOceInDelegate)
+                        throw new OperationCanceledException("thrownInDelegate");
+                    return Task.Run(
+                        () =>
+                        {
+                            if (scenario == UnwrappedScenario.ThrowExceptionInTask)
+                                throw new Exception("thrownInTask");
+                            if (scenario == UnwrappedScenario.ThrowTargetOceInTask)
                             {
-                                if (scenario == UnwrappedScenario.ThrowExceptionInTask)
-                                    throw new Exception("thrownInTask");
-                                if (scenario == UnwrappedScenario.ThrowTargetOceInTask)
-                                {
-                                    cts2.Cancel();
-                                    throw new OperationCanceledException(token2);
-                                }
-                                if (scenario == UnwrappedScenario.ThrowOtherOceInTask)
-                                    throw new OperationCanceledException(CancellationToken.None);
-                                return 10;
-                            },
-                            token2
-                        );
-                    }
-                );
+                                cts2.Cancel();
+                                throw new OperationCanceledException(token2);
+                            }
+                            if (scenario == UnwrappedScenario.ThrowOtherOceInTask)
+                                throw new OperationCanceledException(CancellationToken.None);
+                            return 10;
+                        },
+                        token2
+                    );
+                });
 
                 try
                 {
@@ -850,22 +810,16 @@ namespace System.Threading.Tasks.Tests
                 }
 
                 // Make sure we handle invalid exceptions correctly
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        Task.FromException<int>(null);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    Task.FromException<int>(null);
+                });
 
                 // Make sure we throw from waiting on a faulted task
-                Assert.Throws<AggregateException>(
-                    () =>
-                    {
-                        var result = Task.FromException<object>(
-                            new InvalidOperationException()
-                        ).Result;
-                    }
-                );
+                Assert.Throws<AggregateException>(() =>
+                {
+                    var result = Task.FromException<object>(new InvalidOperationException()).Result;
+                });
             }
         }
 
@@ -1103,18 +1057,14 @@ namespace System.Threading.Tasks.Tests
             //
             // Test for exceptions
             //
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Task.Delay(-2);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    Task.Delay(new TimeSpan(1000, 0, 0, 0));
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Task.Delay(-2);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                Task.Delay(new TimeSpan(1000, 0, 0, 0));
+            });
 
             CancellationTokenSource cts = new CancellationTokenSource();
             CancellationToken token = cts.Token;
@@ -1147,12 +1097,10 @@ namespace System.Threading.Tasks.Tests
 
             Task task8 = Task.Delay(-1, cts2.Token);
             Task task9 = Task.Delay(new TimeSpan(1, 0, 0, 0), cts2.Token);
-            Task.Factory.StartNew(
-                () =>
-                {
-                    cts2.Cancel();
-                }
-            );
+            Task.Factory.StartNew(() =>
+            {
+                cts2.Cancel();
+            });
 
             Debug.WriteLine(
                 "RunDelayTests:    > Waiting for infinite-delayed, eventually-canceled tasks to complete.  If we hang, something went wrong."
@@ -1440,18 +1388,14 @@ namespace System.Threading.Tasks.Tests
                         TaskScheduler tsInner1 = null,
                             tsInner2 = null;
 
-                        Task tInner = Task.Factory.StartNew(
-                            () =>
-                            {
-                                tsInner1 = TaskScheduler.Current;
-                            }
-                        );
-                        Task continuation = tInner.ContinueWith(
-                            _ =>
-                            {
-                                tsInner2 = TaskScheduler.Current;
-                            }
-                        );
+                        Task tInner = Task.Factory.StartNew(() =>
+                        {
+                            tsInner1 = TaskScheduler.Current;
+                        });
+                        Task continuation = tInner.ContinueWith(_ =>
+                        {
+                            tsInner2 = TaskScheduler.Current;
+                        });
 
                         Task.WaitAll(tInner, continuation);
 
@@ -1506,12 +1450,10 @@ namespace System.Threading.Tasks.Tests
         public static void RunHideSchedulerTests_Negative()
         {
             // Test that HideScheduler is flagged as an illegal option when creating a TCS
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    new TaskCompletionSource<int>(TaskCreationOptions.HideScheduler);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                new TaskCompletionSource<int>(TaskCreationOptions.HideScheduler);
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsThreadingSupported))]
@@ -1605,95 +1547,75 @@ namespace System.Threading.Tasks.Tests
         public static void RunBasicFutureTest_Negative()
         {
             Task<int> future = new Task<int>(() => 1);
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith(
-                        (Action<Task<int>, object>)null,
-                        null,
-                        CancellationToken.None
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith(
-                        (Action<Task<int>, object>)null,
-                        null,
-                        TaskContinuationOptions.None
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith(
-                        (Action<Task<int>, object>)null,
-                        null,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        TaskScheduler.Default
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith(
-                        (t, s) => { },
-                        null,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith((Action<Task<int>, object>)null, null, CancellationToken.None);
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith(
+                    (Action<Task<int>, object>)null,
+                    null,
+                    TaskContinuationOptions.None
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith(
+                    (Action<Task<int>, object>)null,
+                    null,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith(
+                    (t, s) => { },
+                    null,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    null
+                );
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith<int>(
-                        (Func<Task<int>, object, int>)null,
-                        null,
-                        CancellationToken.None
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith<int>(
-                        (Func<Task<int>, object, int>)null,
-                        null,
-                        TaskContinuationOptions.None
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith<int>(
-                        (Func<Task<int>, object, int>)null,
-                        null,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        TaskScheduler.Default
-                    );
-                }
-            );
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    future.ContinueWith<int>(
-                        (t, s) => 2,
-                        null,
-                        CancellationToken.None,
-                        TaskContinuationOptions.None,
-                        null
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith<int>(
+                    (Func<Task<int>, object, int>)null,
+                    null,
+                    CancellationToken.None
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith<int>(
+                    (Func<Task<int>, object, int>)null,
+                    null,
+                    TaskContinuationOptions.None
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith<int>(
+                    (Func<Task<int>, object, int>)null,
+                    null,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    TaskScheduler.Default
+                );
+            });
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                future.ContinueWith<int>(
+                    (t, s) => 2,
+                    null,
+                    CancellationToken.None,
+                    TaskContinuationOptions.None,
+                    null
+                );
+            });
         }
 
         #region Helper Methods / Classes

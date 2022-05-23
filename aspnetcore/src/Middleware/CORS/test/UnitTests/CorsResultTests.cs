@@ -30,12 +30,10 @@ public class CorsResultTest
         var result = new CorsResult();
 
         // Act
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                result.PreflightMaxAge = TimeSpan.FromSeconds(-1);
-            }
-        );
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            result.PreflightMaxAge = TimeSpan.FromSeconds(-1);
+        });
 
         // Assert
         Assert.Equal(

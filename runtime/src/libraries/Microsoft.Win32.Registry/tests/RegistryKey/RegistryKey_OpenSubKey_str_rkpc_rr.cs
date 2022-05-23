@@ -70,17 +70,15 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             // Should throw if RegistryKey closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.OpenSubKey(
-                        TestRegistryKeyName,
-                        RegistryKeyPermissionCheck.Default,
-                        rights: RegistryRights.FullControl
-                    );
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.OpenSubKey(
+                    TestRegistryKeyName,
+                    RegistryKeyPermissionCheck.Default,
+                    rights: RegistryRights.FullControl
+                );
+            });
         }
 
         [Fact]

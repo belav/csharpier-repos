@@ -454,16 +454,14 @@ namespace System.Security.Cryptography.Cng.Tests
             }
         }
 
-        private static readonly Lazy<bool> s_isAdministrator = new Lazy<bool>(
-            () =>
+        private static readonly Lazy<bool> s_isAdministrator = new Lazy<bool>(() =>
+        {
+            using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
             {
-                using (WindowsIdentity identity = WindowsIdentity.GetCurrent())
-                {
-                    WindowsPrincipal principal = new WindowsPrincipal(identity);
-                    return principal.IsInRole(WindowsBuiltInRole.Administrator);
-                }
+                WindowsPrincipal principal = new WindowsPrincipal(identity);
+                return principal.IsInRole(WindowsBuiltInRole.Administrator);
             }
-        );
+        });
 
         internal static bool IsAdministrator => s_isAdministrator.Value;
 

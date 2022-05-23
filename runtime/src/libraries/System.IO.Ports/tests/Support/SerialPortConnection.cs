@@ -150,29 +150,27 @@ namespace Legacy.Support
 
                 var testBlock = new byte[probeLength];
 
-                Task t = Task.Run(
-                    () =>
+                Task t = Task.Run(() =>
+                {
+                    int lastHardwareCapacity = -1;
+                    for (int i = 0; i < 10; i++)
                     {
-                        int lastHardwareCapacity = -1;
-                        for (int i = 0; i < 10; i++)
-                        {
-                            int queuedLength = com.BytesToWrite;
-                            int hardwareCapacity = testBlock.Length - queuedLength;
+                        int queuedLength = com.BytesToWrite;
+                        int hardwareCapacity = testBlock.Length - queuedLength;
 
-                            if (hardwareCapacity == lastHardwareCapacity)
-                            {
-                                // We've had two readings the same
-                                measuredHardwareCapacity = hardwareCapacity;
-                                break;
-                            }
-                            // We're still pushing stuff out - wait for two readings the same
-                            lastHardwareCapacity = hardwareCapacity;
-                            Thread.Sleep(10);
+                        if (hardwareCapacity == lastHardwareCapacity)
+                        {
+                            // We've had two readings the same
+                            measuredHardwareCapacity = hardwareCapacity;
+                            break;
                         }
-                        com.Handshake = Handshake.None;
-                        com.DiscardOutBuffer();
+                        // We're still pushing stuff out - wait for two readings the same
+                        lastHardwareCapacity = hardwareCapacity;
+                        Thread.Sleep(10);
                     }
-                );
+                    com.Handshake = Handshake.None;
+                    com.DiscardOutBuffer();
+                });
 
                 try
                 {

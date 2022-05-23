@@ -18,12 +18,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Add("NewProperty", 4);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -42,12 +40,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Add("Nested/NewInt", 1);
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -66,12 +62,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Add("StringProperty", "B");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -90,12 +84,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Remove("Test");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal("The property at path 'Test' could not be updated.", exception.Message);
@@ -111,12 +103,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Replace("StringProperty", "AnotherStringProperty");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -135,12 +125,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Move("StringProperty", "AnotherStringProperty");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -172,12 +160,10 @@ public class AnonymousObjectIntegrationTest
         patchDocument.Test("StringProperty", "B");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(

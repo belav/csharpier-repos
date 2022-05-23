@@ -99,13 +99,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.SectionDelimiter = "--";
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.SectionDelimiter = "--";
+            })
             .Build();
 
         Assert.Equal("SecretValue0", config["Secret0:Key"]);
@@ -141,13 +139,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.IgnoreCondition = null;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.IgnoreCondition = null;
+            })
             .Build();
 
         Assert.Equal("SecretValue0", config["ignore.Secret0"]);
@@ -165,13 +161,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.IgnoreCondition = s => true;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.IgnoreCondition = s => true;
+            })
             .Build();
 
         Assert.Empty(config.AsEnumerable());
@@ -187,13 +181,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.IgnorePrefix = "me";
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.IgnorePrefix = "me";
+            })
             .Build();
 
         Assert.Null(config["meSecret0"]);
@@ -211,13 +203,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.IgnorePrefix = null;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.IgnorePrefix = null;
+            })
             .Build();
 
         Assert.Equal("SecretValue0", config["ignore.Secret0"]);
@@ -270,13 +260,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.ReloadOnChange = true;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.ReloadOnChange = true;
+            })
             .Build();
 
         Assert.Equal("SecretValue1", config["Secret1"]);
@@ -301,13 +289,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.ReloadOnChange = false;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.ReloadOnChange = false;
+            })
             .Build();
 
         Assert.Equal("SecretValue1", config["Secret1"]);
@@ -328,14 +314,12 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider();
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.ReloadOnChange = true;
-                    o.Optional = true;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.ReloadOnChange = true;
+                o.Optional = true;
+            })
             .Build();
 
         Assert.Empty(config.AsEnumerable());
@@ -358,13 +342,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.ReloadOnChange = true;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.ReloadOnChange = true;
+            })
             .Build();
 
         var changeToken = config.GetReloadToken();
@@ -395,13 +377,11 @@ public class KeyPerFileTests
         );
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.ReloadOnChange = true;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.ReloadOnChange = true;
+            })
             .Build();
 
         var changeToken = config.GetReloadToken();
@@ -424,14 +404,12 @@ public class KeyPerFileTests
         var testFileProvider = new TestFileProvider();
 
         var config = new ConfigurationBuilder()
-            .AddKeyPerFile(
-                o =>
-                {
-                    o.FileProvider = testFileProvider;
-                    o.ReloadOnChange = true;
-                    o.Optional = true;
-                }
-            )
+            .AddKeyPerFile(o =>
+            {
+                o.FileProvider = testFileProvider;
+                o.ReloadOnChange = true;
+                o.Optional = true;
+            })
             .Build();
 
         var changeToken = config.GetReloadToken();

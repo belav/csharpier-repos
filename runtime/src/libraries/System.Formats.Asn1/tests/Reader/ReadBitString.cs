@@ -84,26 +84,22 @@ namespace System.Formats.Asn1.Tests.Reader
             byte[] inputData = inputHex.HexToByteArray();
             AsnReader reader = new AsnReader(inputData, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadPrimitiveBitString(
-                        out int unusedBitCount,
-                        out ReadOnlyMemory<byte> contents
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        new byte[inputData.Length],
-                        out int unusedBitCount,
-                        out int written
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    new byte[inputData.Length],
+                    out int unusedBitCount,
+                    out int written
+                );
+            });
 
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
         }
@@ -125,26 +121,22 @@ namespace System.Formats.Asn1.Tests.Reader
 
             AsnReader reader = new AsnReader(input, AsnEncodingRules.CER);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadPrimitiveBitString(
-                        out int unusedBitCount,
-                        out ReadOnlyMemory<byte> contents
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadPrimitiveBitString(
+                    out int unusedBitCount,
+                    out ReadOnlyMemory<byte> contents
+                );
+            });
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        new byte[input.Length],
-                        out int unusedBitCount,
-                        out int written
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    new byte[input.Length],
+                    out int unusedBitCount,
+                    out int written
+                );
+            });
 
             Assert.Throws<AsnContentException>(() => reader.ReadBitString(out int unusedBitCount));
         }
@@ -275,16 +267,14 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadBitString(
-                        Span<byte>.Empty,
-                        out int unusedBitCount,
-                        out int bytesWritten
-                    );
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadBitString(
+                    Span<byte>.Empty,
+                    out int unusedBitCount,
+                    out int bytesWritten
+                );
+            });
         }
 
         private static void ReadBitString_Throws(AsnEncodingRules ruleSet, byte[] input)

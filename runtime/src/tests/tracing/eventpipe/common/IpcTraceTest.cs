@@ -209,128 +209,115 @@ namespace Tracing.Tests.Common
             // the sources we want to listen for may not have been enabled yet.
             // We'll use this sentinel EventSource to check if Enable has finished
             ManualResetEvent sentinelEventReceived = new ManualResetEvent(false);
-            var sentinelTask = new Task(
-                () =>
+            var sentinelTask = new Task(() =>
+            {
+                Logger.logger.Log("Started sending sentinel events...");
+                while (!sentinelEventReceived.WaitOne(50))
                 {
-                    Logger.logger.Log("Started sending sentinel events...");
-                    while (!sentinelEventReceived.WaitOne(50))
-                    {
-                        SentinelEventSource.Log.SentinelEvent();
-                    }
-                    Logger.logger.Log("Stopped sending sentinel events");
+                    SentinelEventSource.Log.SentinelEvent();
                 }
-            );
+                Logger.logger.Log("Stopped sending sentinel events");
+            });
             sentinelTask.Start();
 
             int processId = Process.GetCurrentProcess().Id;
             object threadSync = new object(); // for locking eventpipeSessionId access
             ulong eventpipeSessionId = 0;
             Func<int> optionalTraceValidationCallback = null;
-            var readerTask = new Task(
-                () =>
-                {
-                    Logger.logger.Log("Connecting to EventPipe...");
-                    using (
-                        var eventPipeStream = new StreamProxy(
-                            EventPipeClient.CollectTracing(
-                                processId,
-                                _sessionConfiguration,
-                                out var sessionId
-                            )
+            var readerTask = new Task(() =>
+            {
+                Logger.logger.Log("Connecting to EventPipe...");
+                using (
+                    var eventPipeStream = new StreamProxy(
+                        EventPipeClient.CollectTracing(
+                            processId,
+                            _sessionConfiguration,
+                            out var sessionId
                         )
                     )
+                )
+                {
+                    if (sessionId == 0)
                     {
-                        if (sessionId == 0)
+                        Logger.logger.Log("Failed to connect to EventPipe!");
+                        throw new ApplicationException("Failed to connect to EventPipe");
+                    }
+                    Logger.logger.Log($"Connected to EventPipe with sessionID '0x{sessionId:x}'");
+
+                    lock (threadSync)
+                    {
+                        eventpipeSessionId = sessionId;
+                    }
+
+                    Logger.logger.Log("Creating EventPipeEventSource...");
+                    using (EventPipeEventSource source = new EventPipeEventSource(eventPipeStream))
+                    {
+                        Logger.logger.Log("EventPipeEventSource created");
+
+                        source.Dynamic.All += (eventData) =>
                         {
-                            Logger.logger.Log("Failed to connect to EventPipe!");
-                            throw new ApplicationException("Failed to connect to EventPipe");
-                        }
-                        Logger.logger.Log(
-                            $"Connected to EventPipe with sessionID '0x{sessionId:x}'"
-                        );
-
-                        lock (threadSync)
-                        {
-                            eventpipeSessionId = sessionId;
-                        }
-
-                        Logger.logger.Log("Creating EventPipeEventSource...");
-                        using (
-                            EventPipeEventSource source = new EventPipeEventSource(eventPipeStream)
-                        )
-                        {
-                            Logger.logger.Log("EventPipeEventSource created");
-
-                            source.Dynamic.All += (eventData) =>
-                            {
-                                try
-                                {
-                                    if (eventData.ProviderName == "SentinelEventSource")
-                                    {
-                                        if (!sentinelEventReceived.WaitOne(0))
-                                            Logger.logger.Log("Saw sentinel event");
-                                        sentinelEventReceived.Set();
-                                    }
-                                    else if (
-                                        _actualEventCounts.TryGetValue(
-                                            eventData.ProviderName,
-                                            out _
-                                        )
-                                    )
-                                    {
-                                        _actualEventCounts[eventData.ProviderName]++;
-                                    }
-                                    else
-                                    {
-                                        Logger.logger.Log(
-                                            $"Saw new provider '{eventData.ProviderName}'"
-                                        );
-                                        _actualEventCounts[eventData.ProviderName] = 1;
-                                    }
-                                }
-                                catch (Exception e)
-                                {
-                                    Logger.logger.Log(
-                                        "Exception in Dynamic.All callback " + e.ToString()
-                                    );
-                                }
-                            };
-                            Logger.logger.Log("Dynamic.All callback registered");
-
-                            if (_optionalTraceValidator != null)
-                            {
-                                Logger.logger.Log("Running optional trace validator");
-                                optionalTraceValidationCallback = _optionalTraceValidator(source);
-                                Logger.logger.Log("Finished running optional trace validator");
-                            }
-
-                            Logger.logger.Log("Starting stream processing...");
                             try
                             {
-                                source.Process();
+                                if (eventData.ProviderName == "SentinelEventSource")
+                                {
+                                    if (!sentinelEventReceived.WaitOne(0))
+                                        Logger.logger.Log("Saw sentinel event");
+                                    sentinelEventReceived.Set();
+                                }
+                                else if (
+                                    _actualEventCounts.TryGetValue(eventData.ProviderName, out _)
+                                )
+                                {
+                                    _actualEventCounts[eventData.ProviderName]++;
+                                }
+                                else
+                                {
+                                    Logger.logger.Log(
+                                        $"Saw new provider '{eventData.ProviderName}'"
+                                    );
+                                    _actualEventCounts[eventData.ProviderName] = 1;
+                                }
                             }
                             catch (Exception e)
                             {
                                 Logger.logger.Log(
-                                    $"Exception thrown while reading; dumping culprit stream to disk..."
+                                    "Exception in Dynamic.All callback " + e.ToString()
                                 );
-                                eventPipeStream.DumpStreamToDisk();
-                                // rethrow it to fail the test
-                                throw e;
                             }
-                            Logger.logger.Log("Stopping stream processing");
-                            Logger.logger.Log($"Dropped {source.EventsLost} events");
+                        };
+                        Logger.logger.Log("Dynamic.All callback registered");
+
+                        if (_optionalTraceValidator != null)
+                        {
+                            Logger.logger.Log("Running optional trace validator");
+                            optionalTraceValidationCallback = _optionalTraceValidator(source);
+                            Logger.logger.Log("Finished running optional trace validator");
                         }
+
+                        Logger.logger.Log("Starting stream processing...");
+                        try
+                        {
+                            source.Process();
+                        }
+                        catch (Exception e)
+                        {
+                            Logger.logger.Log(
+                                $"Exception thrown while reading; dumping culprit stream to disk..."
+                            );
+                            eventPipeStream.DumpStreamToDisk();
+                            // rethrow it to fail the test
+                            throw e;
+                        }
+                        Logger.logger.Log("Stopping stream processing");
+                        Logger.logger.Log($"Dropped {source.EventsLost} events");
                     }
                 }
-            );
+            });
 
-            var waitSentinelEventTask = new Task(
-                () =>
-                {
-                    sentinelEventReceived.WaitOne();
-                }
-            );
+            var waitSentinelEventTask = new Task(() =>
+            {
+                sentinelEventReceived.WaitOne();
+            });
 
             readerTask.Start();
             waitSentinelEventTask.Start();
@@ -342,17 +329,15 @@ namespace Tracing.Tests.Common
             _eventGeneratingAction();
             Logger.logger.Log("Stopping event generating action");
 
-            var stopTask = Task.Run(
-                () =>
+            var stopTask = Task.Run(() =>
+            {
+                Logger.logger.Log("Sending StopTracing command...");
+                lock (threadSync) // eventpipeSessionId
                 {
-                    Logger.logger.Log("Sending StopTracing command...");
-                    lock (threadSync) // eventpipeSessionId
-                    {
-                        EventPipeClient.StopTracing(processId, eventpipeSessionId);
-                    }
-                    Logger.logger.Log("Finished StopTracing command");
+                    EventPipeClient.StopTracing(processId, eventpipeSessionId);
                 }
-            );
+                Logger.logger.Log("Finished StopTracing command");
+            });
 
             // Should throw if the reader task throws any exceptions
             Task.WaitAll(readerTask, stopTask);

@@ -29,26 +29,21 @@ public class Startup
     public void ConfigureServices(IServiceCollection services)
     {
         services
-            .AddAuthentication(
-                sharedOptions =>
-                {
-                    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    sharedOptions.DefaultSignInScheme =
-                        CookieAuthenticationDefaults.AuthenticationScheme;
-                    sharedOptions.DefaultChallengeScheme =
-                        WsFederationDefaults.AuthenticationScheme;
-                }
-            )
-            .AddWsFederation(
-                options =>
-                {
-                    options.Wtrealm = "https://Tratcheroutlook.onmicrosoft.com/WsFedSample";
-                    options.MetadataAddress =
-                        "https://login.windows.net/cdc690f9-b6b8-4023-813a-bae7143d1f87/FederationMetadata/2007-06/FederationMetadata.xml";
-                    // options.CallbackPath = "/";
-                    // options.SkipUnrecognizedRequests = true;
-                }
-            )
+            .AddAuthentication(sharedOptions =>
+            {
+                sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                sharedOptions.DefaultSignInScheme =
+                    CookieAuthenticationDefaults.AuthenticationScheme;
+                sharedOptions.DefaultChallengeScheme = WsFederationDefaults.AuthenticationScheme;
+            })
+            .AddWsFederation(options =>
+            {
+                options.Wtrealm = "https://Tratcheroutlook.onmicrosoft.com/WsFedSample";
+                options.MetadataAddress =
+                    "https://login.windows.net/cdc690f9-b6b8-4023-813a-bae7143d1f87/FederationMetadata/2007-06/FederationMetadata.xml";
+                // options.CallbackPath = "/";
+                // options.SkipUnrecognizedRequests = true;
+            })
             .AddCookie();
     }
 
@@ -57,128 +52,124 @@ public class Startup
         app.UseDeveloperExceptionPage();
         app.UseAuthentication();
 
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            if (context.Request.Path.Equals("/signedout"))
             {
-                if (context.Request.Path.Equals("/signedout"))
-                {
-                    await WriteHtmlAsync(
-                        context.Response,
-                        async res =>
-                        {
-                            await res.WriteAsync($"<h1>You have been signed out.</h1>");
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/signout"))
-                {
-                    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                    await WriteHtmlAsync(
-                        context.Response,
-                        async res =>
-                        {
-                            await context.Response.WriteAsync(
-                                $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
-                            );
-                            await context.Response.WriteAsync(
-                                "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/signout-remote"))
-                {
-                    // Redirects
-                    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                    await context.SignOutAsync(
-                        WsFederationDefaults.AuthenticationScheme,
-                        new AuthenticationProperties() { RedirectUri = "/signedout" }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/Account/AccessDenied"))
-                {
-                    await WriteHtmlAsync(
-                        context.Response,
-                        async res =>
-                        {
-                            await context.Response.WriteAsync(
-                                $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
-                            );
-                            await context.Response.WriteAsync(
-                                "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                // DefaultAuthenticateScheme causes User to be set
-                var user = context.User;
-
-                // This is what [Authorize] calls
-                // var user = await context.AuthenticateAsync();
-
-                // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)] calls
-                // var user = await context.AuthenticateAsync(WsFederationDefaults.AuthenticationScheme);
-
-                // Not authenticated
-                if (user == null || !user.Identities.Any(identity => identity.IsAuthenticated))
-                {
-                    // This is what [Authorize] calls
-                    await context.ChallengeAsync();
-
-                    // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)] calls
-                    // await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-
-                    return;
-                }
-
-                // Authenticated, but not authorized
-                if (
-                    context.Request.Path.Equals("/restricted")
-                    && !user.Identities.Any(identity => identity.HasClaim("special", "true"))
-                )
-                {
-                    await context.ForbidAsync();
-                    return;
-                }
-
                 await WriteHtmlAsync(
                     context.Response,
-                    async response =>
+                    async res =>
                     {
-                        await response.WriteAsync(
-                            $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
-                        );
-                        await response.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
-                        );
-                        await response.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
-                        );
-                        await response.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
-                        );
+                        await res.WriteAsync($"<h1>You have been signed out.</h1>");
+                        await res.WriteAsync("<a class=\"btn btn-link\" href=\"/\">Sign In</a>");
+                    }
+                );
+                return;
+            }
 
-                        await response.WriteAsync("<h2>Claims:</h2>");
-                        await WriteTableHeader(
-                            response,
-                            new string[] { "Claim Type", "Value" },
-                            context.User.Claims.Select(c => new string[] { c.Type, c.Value })
+            if (context.Request.Path.Equals("/signout"))
+            {
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                await WriteHtmlAsync(
+                    context.Response,
+                    async res =>
+                    {
+                        await context.Response.WriteAsync(
+                            $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
+                        );
+                        await context.Response.WriteAsync(
+                            "<a class=\"btn btn-link\" href=\"/\">Sign In</a>"
                         );
                     }
                 );
+                return;
             }
-        );
+
+            if (context.Request.Path.Equals("/signout-remote"))
+            {
+                // Redirects
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                await context.SignOutAsync(
+                    WsFederationDefaults.AuthenticationScheme,
+                    new AuthenticationProperties() { RedirectUri = "/signedout" }
+                );
+                return;
+            }
+
+            if (context.Request.Path.Equals("/Account/AccessDenied"))
+            {
+                await WriteHtmlAsync(
+                    context.Response,
+                    async res =>
+                    {
+                        await context.Response.WriteAsync(
+                            $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
+                        );
+                        await context.Response.WriteAsync(
+                            "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
+                        );
+                    }
+                );
+                return;
+            }
+
+            // DefaultAuthenticateScheme causes User to be set
+            var user = context.User;
+
+            // This is what [Authorize] calls
+            // var user = await context.AuthenticateAsync();
+
+            // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)] calls
+            // var user = await context.AuthenticateAsync(WsFederationDefaults.AuthenticationScheme);
+
+            // Not authenticated
+            if (user == null || !user.Identities.Any(identity => identity.IsAuthenticated))
+            {
+                // This is what [Authorize] calls
+                await context.ChallengeAsync();
+
+                // This is what [Authorize(ActiveAuthenticationSchemes = WsFederationDefaults.AuthenticationScheme)] calls
+                // await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+
+                return;
+            }
+
+            // Authenticated, but not authorized
+            if (
+                context.Request.Path.Equals("/restricted")
+                && !user.Identities.Any(identity => identity.HasClaim("special", "true"))
+            )
+            {
+                await context.ForbidAsync();
+                return;
+            }
+
+            await WriteHtmlAsync(
+                context.Response,
+                async response =>
+                {
+                    await response.WriteAsync(
+                        $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
+                    );
+                    await response.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
+                    );
+                    await response.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
+                    );
+                    await response.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
+                    );
+
+                    await response.WriteAsync("<h2>Claims:</h2>");
+                    await WriteTableHeader(
+                        response,
+                        new string[] { "Claim Type", "Value" },
+                        context.User.Claims.Select(c => new string[] { c.Type, c.Value })
+                    );
+                }
+            );
+        });
     }
 
     private static async Task WriteHtmlAsync(

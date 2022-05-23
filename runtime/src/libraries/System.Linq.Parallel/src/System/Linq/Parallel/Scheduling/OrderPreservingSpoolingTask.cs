@@ -91,41 +91,39 @@ namespace System.Linq.Parallel
             >.GenerateSortHelpers(partitions, groupState);
 
             // Ensure all tasks in this query are parented under a common root.
-            Task rootTask = new Task(
-                () =>
+            Task rootTask = new Task(() =>
+            {
+                // Create tasks that will enumerate the partitions in parallel.  We'll use the current
+                // thread for one task and then block before returning to the caller, until all results
+                // have been accumulated. Pipelining is not supported by sort merges.
+                for (int i = 0; i < maxToRunInParallel; i++)
                 {
-                    // Create tasks that will enumerate the partitions in parallel.  We'll use the current
-                    // thread for one task and then block before returning to the caller, until all results
-                    // have been accumulated. Pipelining is not supported by sort merges.
-                    for (int i = 0; i < maxToRunInParallel; i++)
-                    {
-                        TraceHelpers.TraceInfo(
-                            "OrderPreservingSpoolingTask::Spool: Running partition[{0}] asynchronously",
-                            i
-                        );
-                        QueryTask asyncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
-                            i,
-                            groupState,
-                            results,
-                            sortHelpers[i]
-                        );
-                        asyncTask.RunAsynchronously(taskScheduler);
-                    }
-
-                    // Run one task synchronously on the current thread.
                     TraceHelpers.TraceInfo(
-                        "OrderPreservingSpoolingTask::Spool: Running partition[{0}] synchronously",
-                        maxToRunInParallel
+                        "OrderPreservingSpoolingTask::Spool: Running partition[{0}] asynchronously",
+                        i
                     );
-                    QueryTask syncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
-                        maxToRunInParallel,
+                    QueryTask asyncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
+                        i,
                         groupState,
                         results,
-                        sortHelpers[maxToRunInParallel]
+                        sortHelpers[i]
                     );
-                    syncTask.RunSynchronously(taskScheduler);
+                    asyncTask.RunAsynchronously(taskScheduler);
                 }
-            );
+
+                // Run one task synchronously on the current thread.
+                TraceHelpers.TraceInfo(
+                    "OrderPreservingSpoolingTask::Spool: Running partition[{0}] synchronously",
+                    maxToRunInParallel
+                );
+                QueryTask syncTask = new OrderPreservingSpoolingTask<TInputOutput, TKey>(
+                    maxToRunInParallel,
+                    groupState,
+                    results,
+                    sortHelpers[maxToRunInParallel]
+                );
+                syncTask.RunSynchronously(taskScheduler);
+            });
 
             // Begin the query on the calling thread.
             groupState.QueryBegin(rootTask);

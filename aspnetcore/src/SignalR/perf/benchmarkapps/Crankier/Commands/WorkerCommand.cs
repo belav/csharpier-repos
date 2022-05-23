@@ -30,27 +30,25 @@ namespace Microsoft.AspNetCore.SignalR.Crankier.Commands
                         CommandOptionType.NoValue
                     );
 
-                    cmd.OnExecute(
-                        async () =>
+                    cmd.OnExecute(async () =>
+                    {
+                        if (!agentOption.HasValue())
                         {
-                            if (!agentOption.HasValue())
-                            {
-                                return MissingRequiredArg(agentOption);
-                            }
-
-                            if (!int.TryParse(agentOption.Value(), out var agentPid))
-                            {
-                                return InvalidArg(agentOption);
-                            }
-
-                            if (waitForDebuggerOption.HasValue())
-                            {
-                                SpinWait.SpinUntil(() => Debugger.IsAttached);
-                            }
-
-                            return await Execute(agentPid);
+                            return MissingRequiredArg(agentOption);
                         }
-                    );
+
+                        if (!int.TryParse(agentOption.Value(), out var agentPid))
+                        {
+                            return InvalidArg(agentOption);
+                        }
+
+                        if (waitForDebuggerOption.HasValue())
+                        {
+                            SpinWait.SpinUntil(() => Debugger.IsAttached);
+                        }
+
+                        return await Execute(agentPid);
+                    });
                 }
             );
         }

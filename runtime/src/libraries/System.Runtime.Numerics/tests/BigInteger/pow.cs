@@ -176,36 +176,30 @@ namespace System.Numerics.Tests
             byte[] tempByteArray2 = new byte[0];
 
             // Pow Method - 1^(-1)
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    VerifyPowString(
-                        BigInteger.MinusOne.ToString() + " " + BigInteger.One.ToString() + " bPow"
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                VerifyPowString(
+                    BigInteger.MinusOne.ToString() + " " + BigInteger.One.ToString() + " bPow"
+                );
+            });
 
             // Pow Method - 0^(-1)
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    VerifyPowString(
-                        BigInteger.MinusOne.ToString() + " " + BigInteger.Zero.ToString() + " bPow"
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                VerifyPowString(
+                    BigInteger.MinusOne.ToString() + " " + BigInteger.Zero.ToString() + " bPow"
+                );
+            });
 
             // Pow Method - Negative Exponent
             for (int i = 0; i < s_samples; i++)
             {
                 tempByteArray1 = GetRandomNegByteArray(s_random, 2);
                 tempByteArray2 = GetRandomByteArray(s_random, 2);
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        VerifyPowString(Print(tempByteArray1) + Print(tempByteArray2) + "bPow");
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    VerifyPowString(Print(tempByteArray1) + Print(tempByteArray2) + "bPow");
+                });
             }
         }
 

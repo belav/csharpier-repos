@@ -83,12 +83,10 @@ namespace System.Net.Sockets.Tests
                 )
             )
             {
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        socket.DualMode = true;
-                    }
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    socket.DualMode = true;
+                });
             }
         }
     }
@@ -104,12 +102,10 @@ namespace System.Net.Sockets.Tests
             {
                 socket.DualMode = false;
 
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        socket.Connect(IPAddress.Loopback, UnusedPort);
-                    }
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    socket.Connect(IPAddress.Loopback, UnusedPort);
+                });
             }
         }
 
@@ -200,18 +196,16 @@ namespace System.Net.Sockets.Tests
             IPAddress listenOn
         )
         {
-            Assert.ThrowsAny<SocketException>(
-                () =>
+            Assert.ThrowsAny<SocketException>(() =>
+            {
+                DualModeConnect_IPAddressToHost_Helper(connectTo, listenOn, false);
+                if (!OperatingSystem.IsWindows())
                 {
+                    // On Unix, socket assignment is random (not incremental) and there is a small chance the
+                    // listening socket was created in another test currently running. Try the test one more time.
                     DualModeConnect_IPAddressToHost_Helper(connectTo, listenOn, false);
-                    if (!OperatingSystem.IsWindows())
-                    {
-                        // On Unix, socket assignment is random (not incremental) and there is a small chance the
-                        // listening socket was created in another test currently running. Try the test one more time.
-                        DualModeConnect_IPAddressToHost_Helper(connectTo, listenOn, false);
-                    }
                 }
-            );
+            });
         }
     }
 
@@ -226,12 +220,10 @@ namespace System.Net.Sockets.Tests
             {
                 socket.DualMode = false;
 
-                Assert.ThrowsAny<SocketException>(
-                    () =>
-                    {
-                        socket.Connect(new IPEndPoint(IPAddress.Loopback, UnusedPort));
-                    }
-                );
+                Assert.ThrowsAny<SocketException>(() =>
+                {
+                    socket.Connect(new IPEndPoint(IPAddress.Loopback, UnusedPort));
+                });
             }
         }
 
@@ -326,18 +318,16 @@ namespace System.Net.Sockets.Tests
             IPAddress listenOn
         )
         {
-            Assert.ThrowsAny<SocketException>(
-                () =>
+            Assert.ThrowsAny<SocketException>(() =>
+            {
+                DualModeConnect_IPEndPointToHost_Helper(connectTo, listenOn, false);
+                if (!OperatingSystem.IsWindows())
                 {
+                    // On Unix, socket assignment is random (not incremental) and there is a small chance the
+                    // listening socket was created in another test currently running. Try the test one more time.
                     DualModeConnect_IPEndPointToHost_Helper(connectTo, listenOn, false);
-                    if (!OperatingSystem.IsWindows())
-                    {
-                        // On Unix, socket assignment is random (not incremental) and there is a small chance the
-                        // listening socket was created in another test currently running. Try the test one more time.
-                        DualModeConnect_IPEndPointToHost_Helper(connectTo, listenOn, false);
-                    }
                 }
-            );
+            });
         }
     }
 
@@ -462,12 +452,10 @@ namespace System.Net.Sockets.Tests
             {
                 socket.DualMode = false;
 
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        socket.BeginConnect(IPAddress.Loopback, UnusedPort, null, null);
-                    }
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    socket.BeginConnect(IPAddress.Loopback, UnusedPort, null, null);
+                });
             }
         }
 
@@ -548,22 +536,16 @@ namespace System.Net.Sockets.Tests
             IPAddress listenOn
         )
         {
-            SocketException e = await Assert.ThrowsAnyAsync<SocketException>(
-                async () =>
+            SocketException e = await Assert.ThrowsAnyAsync<SocketException>(async () =>
+            {
+                await DualModeBeginConnect_IPAddressToHost_Helper(connectTo, listenOn, false);
+                if (!OperatingSystem.IsWindows())
                 {
+                    // On Unix, socket assignment is random (not incremental) and there is a small chance the
+                    // listening socket was created in another test currently running. Try the test one more time.
                     await DualModeBeginConnect_IPAddressToHost_Helper(connectTo, listenOn, false);
-                    if (!OperatingSystem.IsWindows())
-                    {
-                        // On Unix, socket assignment is random (not incremental) and there is a small chance the
-                        // listening socket was created in another test currently running. Try the test one more time.
-                        await DualModeBeginConnect_IPAddressToHost_Helper(
-                            connectTo,
-                            listenOn,
-                            false
-                        );
-                    }
                 }
-            );
+            });
             Assert.NotEmpty(e.Message);
         }
     }
@@ -737,12 +719,10 @@ namespace System.Net.Sockets.Tests
             {
                 SocketAsyncEventArgs args = new SocketAsyncEventArgs();
                 args.RemoteEndPoint = new IPEndPoint(IPAddress.Loopback, UnusedPort);
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        socket.ConnectAsync(args);
-                    }
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    socket.ConnectAsync(args);
+                });
             }
         }
 
@@ -842,18 +822,16 @@ namespace System.Net.Sockets.Tests
             IPAddress listenOn
         )
         {
-            Assert.ThrowsAny<SocketException>(
-                () =>
+            Assert.ThrowsAny<SocketException>(() =>
+            {
+                DualModeConnectAsync_IPEndPointToHost_Helper(connectTo, listenOn, false);
+                if (!OperatingSystem.IsWindows())
                 {
+                    // On Unix, socket assignment is random (not incremental) and there is a small chance the
+                    // listening socket was created in another test currently running. Try the test one more time.
                     DualModeConnectAsync_IPEndPointToHost_Helper(connectTo, listenOn, false);
-                    if (!OperatingSystem.IsWindows())
-                    {
-                        // On Unix, socket assignment is random (not incremental) and there is a small chance the
-                        // listening socket was created in another test currently running. Try the test one more time.
-                        DualModeConnectAsync_IPEndPointToHost_Helper(connectTo, listenOn, false);
-                    }
                 }
-            );
+            });
         }
 
         [ConditionalTheory(nameof(LocalhostIsBothIPv4AndIPv6))]
@@ -933,21 +911,19 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void Socket_BindV4IPEndPoint_Throws()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    using (
-                        Socket socket = new Socket(
-                            AddressFamily.InterNetworkV6,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        )
+            Assert.Throws<SocketException>(() =>
+            {
+                using (
+                    Socket socket = new Socket(
+                        AddressFamily.InterNetworkV6,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
                     )
-                    {
-                        socket.Bind(new IPEndPoint(IPAddress.Loopback, UnusedBindablePort));
-                    }
+                )
+                {
+                    socket.Bind(new IPEndPoint(IPAddress.Loopback, UnusedBindablePort));
                 }
-            );
+            });
         }
 
         [Fact] // Base Case; BSoD on Win7, Win8 with IPv4 uninstalled
@@ -999,12 +975,10 @@ namespace System.Net.Sockets.Tests
             {
                 serverSocket.DualMode = false;
                 serverSocket.BindToAnonymousPort(IPAddress.IPv6Any);
-                Assert.Throws<SocketException>(
-                    () =>
-                    {
-                        serverSocket.DualMode = true;
-                    }
-                );
+                Assert.Throws<SocketException>(() =>
+                {
+                    serverSocket.DualMode = true;
+                });
             }
         }
     }
@@ -1041,36 +1015,30 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // https://github.com/dotnet/runtime/issues/16265
         public void AcceptV6BoundToSpecificV4_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    Accept_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                Accept_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // https://github.com/dotnet/runtime/issues/16265
         public void AcceptV4BoundToSpecificV6_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    Accept_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                Accept_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // https://github.com/dotnet/runtime/issues/16265
         public void AcceptV6BoundToAnyV4_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    Accept_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                Accept_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
@@ -1126,36 +1094,30 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void BeginAcceptV6BoundToSpecificV4_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    DualModeConnect_BeginAccept_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                DualModeConnect_BeginAccept_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void BeginAcceptV4BoundToSpecificV6_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    DualModeConnect_BeginAccept_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                DualModeConnect_BeginAccept_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void BeginAcceptV6BoundToAnyV4_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    DualModeConnect_BeginAccept_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                DualModeConnect_BeginAccept_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
@@ -1249,36 +1211,30 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void AcceptAsyncV6BoundToSpecificV4_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    DualModeConnect_AcceptAsync_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                DualModeConnect_AcceptAsync_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void AcceptAsyncV4BoundToSpecificV6_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    DualModeConnect_AcceptAsync_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                DualModeConnect_AcceptAsync_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void AcceptAsyncV6BoundToAnyV4_CantConnect()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    DualModeConnect_AcceptAsync_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                DualModeConnect_AcceptAsync_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
@@ -1388,12 +1344,10 @@ namespace System.Net.Sockets.Tests
             using (Socket socket = new Socket(SocketType.Dgram, ProtocolType.Udp))
             {
                 socket.DualMode = false;
-                Assert.Throws<SocketException>(
-                    () =>
-                    {
-                        socket.SendTo(new byte[1], new IPEndPoint(IPAddress.Loopback, UnusedPort));
-                    }
-                );
+                Assert.Throws<SocketException>(() =>
+                {
+                    socket.SendTo(new byte[1], new IPEndPoint(IPAddress.Loopback, UnusedPort));
+                });
             }
         }
 
@@ -1433,34 +1387,30 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void SendToV4IPEndPointToV6Host_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    DualModeSendTo_IPEndPointToHost_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        false,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                DualModeSendTo_IPEndPointToHost_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    false,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void SendToV6IPEndPointToV4Host_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    DualModeSendTo_IPEndPointToHost_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        false,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                DualModeSendTo_IPEndPointToHost_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    false,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -1524,24 +1474,22 @@ namespace System.Net.Sockets.Tests
             {
                 socket.DualMode = false;
 
-                Assert.Throws<SocketException>(
-                    () =>
-                    {
-                        // [ActiveIssue("https://github.com/dotnet/runtime/issues/47905")]
-                        // TODO: When fixing the issue above, revert this test to check that the exception is being thrown in BeginSendTo
-                        // without the need to call EndSendTo.
-                        IAsyncResult result = socket.BeginSendTo(
-                            new byte[1],
-                            0,
-                            1,
-                            SocketFlags.None,
-                            new IPEndPoint(IPAddress.Loopback, UnusedPort),
-                            null,
-                            null
-                        );
-                        socket.EndSendTo(result);
-                    }
-                );
+                Assert.Throws<SocketException>(() =>
+                {
+                    // [ActiveIssue("https://github.com/dotnet/runtime/issues/47905")]
+                    // TODO: When fixing the issue above, revert this test to check that the exception is being thrown in BeginSendTo
+                    // without the need to call EndSendTo.
+                    IAsyncResult result = socket.BeginSendTo(
+                        new byte[1],
+                        0,
+                        1,
+                        SocketFlags.None,
+                        new IPEndPoint(IPAddress.Loopback, UnusedPort),
+                        null,
+                        null
+                    );
+                    socket.EndSendTo(result);
+                });
             }
         }
 
@@ -1592,33 +1540,29 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void BeginSendToV4IPEndPointToV6Host_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    DualModeBeginSendTo_EndPointToHost_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        false,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                DualModeBeginSendTo_EndPointToHost_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    false,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         public void BeginSendToV6IPEndPointToV4Host_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    DualModeBeginSendTo_EndPointToHost_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        false,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                DualModeBeginSendTo_EndPointToHost_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    false,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -1768,34 +1712,30 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void SendToAsyncV4IPEndPointToV6Host_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    DualModeSendToAsync_IPEndPointToHost_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        false,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                DualModeSendToAsync_IPEndPointToHost_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    false,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use
         public void SendToAsyncV6IPEndPointToV4Host_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    DualModeSendToAsync_IPEndPointToHost_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        false,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                DualModeSendToAsync_IPEndPointToHost_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    false,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -1957,12 +1897,10 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void ReceiveFromV6BoundToSpecificV4_NotReceived()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    ReceiveFrom_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                ReceiveFrom_Helper(IPAddress.Loopback, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
@@ -1971,12 +1909,10 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void ReceiveFromV4BoundToSpecificV6_NotReceived()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    ReceiveFrom_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                ReceiveFrom_Helper(IPAddress.IPv6Loopback, IPAddress.Loopback);
+            });
         }
 
         [Fact]
@@ -1985,12 +1921,10 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void ReceiveFromV6BoundToAnyV4_NotReceived()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    ReceiveFrom_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                ReceiveFrom_Helper(IPAddress.Any, IPAddress.IPv6Loopback);
+            });
         }
 
         [Fact]
@@ -2127,16 +2061,14 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void BeginReceiveFromV6BoundToSpecificV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    BeginReceiveFrom_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                BeginReceiveFrom_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -2145,16 +2077,14 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void BeginReceiveFromV4BoundToSpecificV6_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    BeginReceiveFrom_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                BeginReceiveFrom_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -2163,16 +2093,14 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)]
         public void BeginReceiveFromV6BoundToAnyV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    BeginReceiveFrom_Helper(
-                        IPAddress.Any,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                BeginReceiveFrom_Helper(
+                    IPAddress.Any,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -2327,48 +2255,42 @@ namespace System.Net.Sockets.Tests
         [SkipOnPlatform(TestPlatforms.OSX, "ReceiveFromAsync not supported on OSX")]
         public void ReceiveFromAsyncV6BoundToSpecificV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    ReceiveFromAsync_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                ReceiveFromAsync_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.OSX, "ReceiveFromAsync not supported on OSX")]
         public void ReceiveFromAsyncV4BoundToSpecificV6_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    ReceiveFromAsync_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                ReceiveFromAsync_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         [SkipOnPlatform(TestPlatforms.OSX, "ReceiveFromAsync not supported on OSX")]
         public void ReceiveFromAsyncV6BoundToAnyV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    ReceiveFromAsync_Helper(
-                        IPAddress.Any,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                ReceiveFromAsync_Helper(
+                    IPAddress.Any,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -2600,48 +2522,42 @@ namespace System.Net.Sockets.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use; ReceiveMessageFrom not supported on OSX
         public void ReceiveMessageFromV6BoundToSpecificV4_NotReceived()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    ReceiveMessageFrom_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                ReceiveMessageFrom_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use; ReceiveMessageFrom not supported on OSX
         public void ReceiveMessageFromV4BoundToSpecificV6_NotReceived()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    ReceiveMessageFrom_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                ReceiveMessageFrom_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // Binds to a specific port on 'connectTo' which on Unix may already be in use; ReceiveMessageFrom not supported on OSX
         public void ReceiveMessageFromV6BoundToAnyV4_NotReceived()
         {
-            Assert.Throws<SocketException>(
-                () =>
-                {
-                    ReceiveMessageFrom_Helper(
-                        IPAddress.Any,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<SocketException>(() =>
+            {
+                ReceiveMessageFrom_Helper(
+                    IPAddress.Any,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -2754,44 +2670,40 @@ namespace System.Net.Sockets.Tests
 
                 if (OperatingSystem.IsWindows())
                 {
-                    Assert.Throws<SocketException>(
-                        () =>
-                        {
-                            // This is a false start.
-                            // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.receivemessagefrom
-                            // "...the returned IPPacketInformation object will only be valid for packets which arrive at the
-                            // local computer after the socket option has been set. If a socket is sent packets between when
-                            // it is bound to a local endpoint (explicitly by the Bind method or implicitly by one of the Connect,
-                            // ConnectAsync, SendTo, or SendToAsync methods) and its first call to the ReceiveMessageFrom method,
-                            // calls to ReceiveMessageFrom method will return invalid IPPacketInformation objects for these packets."
-                            received = serverSocket.ReceiveMessageFrom(
-                                new byte[1],
-                                0,
-                                1,
-                                ref socketFlags,
-                                ref receivedFrom,
-                                out ipPacketInformation
-                            );
-                        }
-                    );
+                    Assert.Throws<SocketException>(() =>
+                    {
+                        // This is a false start.
+                        // https://docs.microsoft.com/en-us/dotnet/api/system.net.sockets.socket.receivemessagefrom
+                        // "...the returned IPPacketInformation object will only be valid for packets which arrive at the
+                        // local computer after the socket option has been set. If a socket is sent packets between when
+                        // it is bound to a local endpoint (explicitly by the Bind method or implicitly by one of the Connect,
+                        // ConnectAsync, SendTo, or SendToAsync methods) and its first call to the ReceiveMessageFrom method,
+                        // calls to ReceiveMessageFrom method will return invalid IPPacketInformation objects for these packets."
+                        received = serverSocket.ReceiveMessageFrom(
+                            new byte[1],
+                            0,
+                            1,
+                            ref socketFlags,
+                            ref receivedFrom,
+                            out ipPacketInformation
+                        );
+                    });
                 }
                 else
                 {
                     // *nix may throw either a SocketException or ArgumentException in this case, depending on how the IP stack
                     // behaves w.r.t. dual-mode sockets bound to IPv6-specific addresses.
-                    Assert.ThrowsAny<Exception>(
-                        () =>
-                        {
-                            received = serverSocket.ReceiveMessageFrom(
-                                new byte[1],
-                                0,
-                                1,
-                                ref socketFlags,
-                                ref receivedFrom,
-                                out ipPacketInformation
-                            );
-                        }
-                    );
+                    Assert.ThrowsAny<Exception>(() =>
+                    {
+                        received = serverSocket.ReceiveMessageFrom(
+                            new byte[1],
+                            0,
+                            1,
+                            ref socketFlags,
+                            ref receivedFrom,
+                            out ipPacketInformation
+                        );
+                    });
                 }
 
                 serverSocket.ReceiveTimeout = expectedToTimeout
@@ -2932,16 +2844,14 @@ namespace System.Net.Sockets.Tests
         [SkipOnPlatform(TestPlatforms.OSX, "BeginReceiveMessageFrom not supported on OSX")]
         public void BeginReceiveMessageFromV6BoundToSpecificV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    BeginReceiveMessageFrom_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                BeginReceiveMessageFrom_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -2951,16 +2861,14 @@ namespace System.Net.Sockets.Tests
         )]
         public void BeginReceiveMessageFromV4BoundToSpecificV6_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    BeginReceiveMessageFrom_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                BeginReceiveMessageFrom_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         // NOTE: on Linux, the OS IP stack changes a dual-mode socket back to a
@@ -2991,16 +2899,14 @@ namespace System.Net.Sockets.Tests
         [SkipOnPlatform(TestPlatforms.OSX, "BeginReceiveMessageFrom not supported on OSX")]
         public void BeginReceiveMessageFromV6BoundToAnyV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    BeginReceiveMessageFrom_Helper(
-                        IPAddress.Any,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                BeginReceiveMessageFrom_Helper(
+                    IPAddress.Any,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -3164,16 +3070,14 @@ namespace System.Net.Sockets.Tests
         [SkipOnPlatform(TestPlatforms.OSX, "ReceiveMessageFromAsync not supported on OSX")]
         public void ReceiveMessageFromAsyncV6BoundToSpecificV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    ReceiveMessageFromAsync_Helper(
-                        IPAddress.Loopback,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                ReceiveMessageFromAsync_Helper(
+                    IPAddress.Loopback,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]
@@ -3183,16 +3087,14 @@ namespace System.Net.Sockets.Tests
         )]
         public void ReceiveMessageFromAsyncV4BoundToSpecificV6_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    ReceiveMessageFromAsync_Helper(
-                        IPAddress.IPv6Loopback,
-                        IPAddress.Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                ReceiveMessageFromAsync_Helper(
+                    IPAddress.IPv6Loopback,
+                    IPAddress.Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         // NOTE: on Linux, the OS IP stack changes a dual-mode socket back to a
@@ -3219,16 +3121,14 @@ namespace System.Net.Sockets.Tests
         [SkipOnPlatform(TestPlatforms.OSX, "ReceiveMessageFromAsync not supported on OSX")]
         public void ReceiveMessageFromAsyncV6BoundToAnyV4_NotReceived()
         {
-            Assert.Throws<TimeoutException>(
-                () =>
-                {
-                    ReceiveMessageFromAsync_Helper(
-                        IPAddress.Any,
-                        IPAddress.IPv6Loopback,
-                        expectedToTimeout: true
-                    );
-                }
-            );
+            Assert.Throws<TimeoutException>(() =>
+            {
+                ReceiveMessageFromAsync_Helper(
+                    IPAddress.Any,
+                    IPAddress.IPv6Loopback,
+                    expectedToTimeout: true
+                );
+            });
         }
 
         [Fact]

@@ -208,21 +208,19 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         wl,
                         inspectionContext,
                         () =>
-                            wl.ContinueWith(
-                                () =>
-                                {
-                                    var enumContext = DkmEvaluationResultEnumContext.Create(
-                                        index,
-                                        evaluationResult.StackFrame,
-                                        inspectionContext,
-                                        new EnumContextDataItem(evaluationResult)
-                                    );
-                                    completionRoutine(
-                                        new DkmGetChildrenAsyncResult(initialChildren, enumContext)
-                                    );
-                                    rows.Free();
-                                }
-                            ),
+                            wl.ContinueWith(() =>
+                            {
+                                var enumContext = DkmEvaluationResultEnumContext.Create(
+                                    index,
+                                    evaluationResult.StackFrame,
+                                    inspectionContext,
+                                    new EnumContextDataItem(evaluationResult)
+                                );
+                                completionRoutine(
+                                    new DkmGetChildrenAsyncResult(initialChildren, enumContext)
+                                );
+                                rows.Free();
+                            }),
                         onException
                     )
             );
@@ -285,13 +283,11 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
                         wl,
                         inspectionContext,
                         () =>
-                            wl.ContinueWith(
-                                () =>
-                                {
-                                    completionRoutine(new DkmEvaluationEnumAsyncResult(results));
-                                    rows.Free();
-                                }
-                            ),
+                            wl.ContinueWith(() =>
+                            {
+                                completionRoutine(new DkmEvaluationEnumAsyncResult(results));
+                                rows.Free();
+                            }),
                         onException
                     )
             );

@@ -24,14 +24,12 @@ public class Startup
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-                endpoints.MapFallbackToPage("/Fallback");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapRazorPages();
+            endpoints.MapFallbackToPage("/Fallback");
+        });
     }
 
     public static void Main(string[] args)

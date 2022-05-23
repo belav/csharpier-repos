@@ -118,41 +118,37 @@ namespace Microsoft.CodeAnalysis.Tools.Utilities
                 // We must call WaitForExit to make sure we've received all OutputDataReceived/ErrorDataReceived calls
                 // or else we'll be returning a list we're still modifying. For paranoia, we'll start a task here rather
                 // than enter right back into the Process type and start a wait which isn't guaranteed to be safe.
-                Task.Run(
-                    () =>
-                    {
-                        process.WaitForExit();
-                        var result = new ProcessResult(
-                            process,
-                            process.ExitCode,
-                            new ReadOnlyCollection<string>(outputLines),
-                            new ReadOnlyCollection<string>(errorLines)
-                        );
-                        tcs.TrySetResult(result);
-                    }
-                );
+                Task.Run(() =>
+                {
+                    process.WaitForExit();
+                    var result = new ProcessResult(
+                        process,
+                        process.ExitCode,
+                        new ReadOnlyCollection<string>(outputLines),
+                        new ReadOnlyCollection<string>(errorLines)
+                    );
+                    tcs.TrySetResult(result);
+                });
             };
 
-            _ = cancellationToken.Register(
-                () =>
+            _ = cancellationToken.Register(() =>
+            {
+                if (tcs.TrySetCanceled())
                 {
-                    if (tcs.TrySetCanceled())
+                    // If the underlying process is still running, we should kill it
+                    if (!process.HasExited)
                     {
-                        // If the underlying process is still running, we should kill it
-                        if (!process.HasExited)
+                        try
                         {
-                            try
-                            {
-                                process.Kill();
-                            }
-                            catch (InvalidOperationException)
-                            {
-                                // Ignore, since the process is already dead
-                            }
+                            process.Kill();
+                        }
+                        catch (InvalidOperationException)
+                        {
+                            // Ignore, since the process is already dead
                         }
                     }
                 }
-            );
+            });
 
             process.Start();
             onProcessStartHandler?.Invoke(process);

@@ -481,14 +481,10 @@ namespace System.Data.Tests
             DataSet ds = GetDataSet();
             DataTable dt = new DataTable();
             dt.Columns.Add("ParentId");
-            Assert.Throws<InvalidConstraintException>(
-                () =>
-                {
-                    ds.Relations.Add(
-                        new DataRelation("rel1", dt.Columns[0], ds.Tables[0].Columns[0])
-                    );
-                }
-            );
+            Assert.Throws<InvalidConstraintException>(() =>
+            {
+                ds.Relations.Add(new DataRelation("rel1", dt.Columns[0], ds.Tables[0].Columns[0]));
+            });
         }
 
         [Fact]
@@ -622,12 +618,10 @@ namespace System.Data.Tests
             Assert.Equal(0, ds.Relations.Count);
             Assert.Equal(2, _changesCounter);
 
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    ds.Relations.RemoveAt(-1);
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                ds.Relations.RemoveAt(-1);
+            });
         }
     }
 }

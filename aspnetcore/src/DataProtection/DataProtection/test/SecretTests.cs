@@ -265,12 +265,10 @@ public unsafe class SecretTests
         secret.Dispose();
 
         // Act & assert
-        Assert.Throws<ObjectDisposedException>(
-            testCode: () =>
-            {
-                byte* pBuffer = stackalloc byte[16];
-                secret.WriteSecretIntoBuffer(pBuffer, 16);
-            }
-        );
+        Assert.Throws<ObjectDisposedException>(testCode: () =>
+        {
+            byte* pBuffer = stackalloc byte[16];
+            secret.WriteSecretIntoBuffer(pBuffer, 16);
+        });
     }
 }

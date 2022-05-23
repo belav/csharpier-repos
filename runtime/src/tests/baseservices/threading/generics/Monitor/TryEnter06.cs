@@ -24,19 +24,15 @@ struct Gen<T>
         {
             // 	new MonitorDelegateTS(myHelper.ConsumerTryEnter).BeginInvoke(monitorT,100,null,null);
             // 	new MonitorDelegateTS(myHelper2.ConsumerTryEnter).BeginInvoke(monitorU,100,null,null);
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper.ConsumerTryEnter(monitorT, 100);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper.ConsumerTryEnter(monitorT, 100);
+            });
 
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper2.ConsumerTryEnter(monitorU, 100);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper2.ConsumerTryEnter(monitorU, 100);
+            });
         }
 
         for (int i = 0; i < 6; i++)

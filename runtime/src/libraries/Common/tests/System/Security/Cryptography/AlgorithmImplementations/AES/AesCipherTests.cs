@@ -2225,24 +2225,22 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 aes.Key = s_aes256Key;
                 aes.IV = s_aes256CbcIv;
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        using (MemoryStream input = new MemoryStream(encryptedBytes))
-                        using (
-                            CryptoStream cryptoStream = new CryptoStream(
-                                input,
-                                aes.CreateDecryptor(),
-                                CryptoStreamMode.Read
-                            )
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    using (MemoryStream input = new MemoryStream(encryptedBytes))
+                    using (
+                        CryptoStream cryptoStream = new CryptoStream(
+                            input,
+                            aes.CreateDecryptor(),
+                            CryptoStreamMode.Read
                         )
-                        using (MemoryStream output = new MemoryStream())
-                        {
-                            cryptoStream.CopyTo(output);
-                            decryptedBytes = output.ToArray();
-                        }
+                    )
+                    using (MemoryStream output = new MemoryStream())
+                    {
+                        cryptoStream.CopyTo(output);
+                        decryptedBytes = output.ToArray();
                     }
-                );
+                });
             }
         }
 
@@ -2366,24 +2364,22 @@ namespace System.Security.Cryptography.Encryption.Aes.Tests
                 aes.Mode = CipherMode.ECB;
                 aes.Key = key;
 
-                Assert.Throws<CryptographicException>(
-                    () =>
-                    {
-                        using (MemoryStream input = new MemoryStream(encryptedBytes))
-                        using (
-                            CryptoStream cryptoStream = new CryptoStream(
-                                input,
-                                aes.CreateDecryptor(),
-                                CryptoStreamMode.Read
-                            )
+                Assert.Throws<CryptographicException>(() =>
+                {
+                    using (MemoryStream input = new MemoryStream(encryptedBytes))
+                    using (
+                        CryptoStream cryptoStream = new CryptoStream(
+                            input,
+                            aes.CreateDecryptor(),
+                            CryptoStreamMode.Read
                         )
-                        using (MemoryStream output = new MemoryStream())
-                        {
-                            cryptoStream.CopyTo(output);
-                            decryptedBytes = output.ToArray();
-                        }
+                    )
+                    using (MemoryStream output = new MemoryStream())
+                    {
+                        cryptoStream.CopyTo(output);
+                        decryptedBytes = output.ToArray();
                     }
-                );
+                });
             }
         }
 

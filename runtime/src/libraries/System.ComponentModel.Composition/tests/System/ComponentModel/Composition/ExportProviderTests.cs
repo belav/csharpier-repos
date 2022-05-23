@@ -15,12 +15,10 @@ namespace System.ComponentModel.Composition
         {
             var provider = ExportProviderFactory.Create();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    provider.GetExports((ImportDefinition)null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                provider.GetExports((ImportDefinition)null);
+            });
         }
 
         [Fact]
@@ -28,13 +26,11 @@ namespace System.ComponentModel.Composition
         {
             var provider = ExportProviderFactory.Create();
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    IEnumerable<Export> exports;
-                    provider.TryGetExports((ImportDefinition)null, null, out exports);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                IEnumerable<Export> exports;
+                provider.TryGetExports((ImportDefinition)null, null, out exports);
+            });
         }
 
         [Fact]
@@ -45,12 +41,10 @@ namespace System.ComponentModel.Composition
             IEnumerable<Export> exports = new Export[0];
             IEnumerable<Export> results = exports;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    provider.TryGetExports((ImportDefinition)null, null, out results);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                provider.TryGetExports((ImportDefinition)null, null, out results);
+            });
 
             Assert.Same(exports, results);
         }

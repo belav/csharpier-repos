@@ -24,12 +24,10 @@ namespace System.Net.Http.Tests
             _headers = new HttpContentHeaders(new ComputeLengthHttpContent(() => 15));
 
             // Use uppercase header name to make sure the parser gets retrieved using case-insensitive comparison.
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    _headers.Add("CoNtEnT-LeNgTh", "this is invalid");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                _headers.Add("CoNtEnT-LeNgTh", "this is invalid");
+            });
         }
 
         [Fact]
@@ -55,12 +53,10 @@ namespace System.Net.Http.Tests
         public void ContentLength_SetCustomValue_TryComputeLengthNotInvoked()
         {
             _headers = new HttpContentHeaders(
-                new ComputeLengthHttpContent(
-                    () =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                )
+                new ComputeLengthHttpContent(() =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                })
             );
 
             _headers.ContentLength = 27;
@@ -81,12 +77,10 @@ namespace System.Net.Http.Tests
         public void ContentLength_UseAddMethod_AddedValueCanBeRetrievedUsingProperty()
         {
             _headers = new HttpContentHeaders(
-                new ComputeLengthHttpContent(
-                    () =>
-                    {
-                        throw new ShouldNotBeInvokedException();
-                    }
-                )
+                new ComputeLengthHttpContent(() =>
+                {
+                    throw new ShouldNotBeInvokedException();
+                })
             );
             _headers.TryAddWithoutValidation(HttpKnownHeaderNames.ContentLength, " 68 ");
 
@@ -508,230 +502,156 @@ namespace System.Net.Http.Tests
         {
             // Try adding request, response, and general _headers. Use different casing to make sure case-insensitive
             // comparison is used.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Accept-Ranges", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("age", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("ETag", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Location", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Proxy-Authenticate", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Retry-After", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Server", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Vary", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("WWW-Authenticate", "v");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Ranges", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("age", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("ETag", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Location", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Proxy-Authenticate", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Retry-After", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Server", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Vary", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("WWW-Authenticate", "v");
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Accept", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Accept-Charset", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Accept-Encoding", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Accept-Language", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Authorization", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Expect", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("From", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Host", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("If-Match", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("If-Modified-Since", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("If-None-Match", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("If-Range", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("If-Unmodified-Since", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Max-Forwards", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Proxy-Authorization", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Range", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Referer", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("TE", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("User-Agent", "v");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Charset", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Accept-Language", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Authorization", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Expect", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("From", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Host", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Match", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Modified-Since", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-None-Match", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("If-Unmodified-Since", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Max-Forwards", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Proxy-Authorization", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Range", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Referer", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("TE", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("User-Agent", "v");
+            });
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Cache-Control", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Connection", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Date", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Pragma", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Trailer", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Transfer-Encoding", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Upgrade", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Via", "v");
-                }
-            );
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    _headers.Add("Warning", "v");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Cache-Control", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Connection", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Date", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Pragma", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Trailer", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Transfer-Encoding", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Upgrade", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Via", "v");
+            });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                _headers.Add("Warning", "v");
+            });
         }
 
         private sealed class ComputeLengthHttpContent : HttpContent

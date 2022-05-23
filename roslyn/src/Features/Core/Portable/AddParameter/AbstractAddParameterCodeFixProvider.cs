@@ -392,20 +392,15 @@ namespace Microsoft.CodeAnalysis.AddParameter
                     data => data.CreateChangedSolutionCascading != null
                 );
                 var cascadingActions = ImmutableArray.CreateRange<CodeAction>(
-                    cascading.Select(
-                        data =>
-                        {
-                            var title = GetCodeFixTitle(
-                                FeaturesResources.Add_to_0,
-                                data.Method,
-                                includeParameters: true
-                            );
-                            return new MyCodeAction(
-                                title: title,
-                                data.CreateChangedSolutionCascading
-                            );
-                        }
-                    )
+                    cascading.Select(data =>
+                    {
+                        var title = GetCodeFixTitle(
+                            FeaturesResources.Add_to_0,
+                            data.Method,
+                            includeParameters: true
+                        );
+                        return new MyCodeAction(title: title, data.CreateChangedSolutionCascading);
+                    })
                 );
 
                 var aMethod = codeFixData.First().Method; // We need to term the MethodGroup and need an arbitrary IMethodSymbol to do so.

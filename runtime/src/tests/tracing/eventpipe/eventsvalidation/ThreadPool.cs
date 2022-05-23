@@ -51,17 +51,15 @@ namespace Tracing.Tests.GCFinalizers
             Task[] tasks = new Task[50];
             for (int i = 0; i < 50; i++)
             {
-                tasks[i] = Task.Run(
-                    async () =>
-                    {
-                        long total = 0;
-                        await Task.Delay(10);
-                        var rnd = new Random();
-                        for (int n = 1; n <= 100; n++)
-                            total += rnd.Next(0, 100);
-                        return total;
-                    }
-                );
+                tasks[i] = Task.Run(async () =>
+                {
+                    long total = 0;
+                    await Task.Delay(10);
+                    var rnd = new Random();
+                    for (int n = 1; n <= 100; n++)
+                        total += rnd.Next(0, 100);
+                    return total;
+                });
             }
             Task.WaitAll(tasks);
         };

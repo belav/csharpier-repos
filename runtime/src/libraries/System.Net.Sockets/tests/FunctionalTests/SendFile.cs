@@ -185,37 +185,35 @@ namespace System.Net.Sockets.Tests
 
             int bytesReceived = 0;
             var receivedChecksum = new Fletcher32();
-            var serverTask = Task.Run(
-                () =>
+            var serverTask = Task.Run(() =>
+            {
+                using (server)
                 {
-                    using (server)
+                    Socket remote = server.Accept();
+                    Assert.NotNull(remote);
+
+                    using (remote)
                     {
-                        Socket remote = server.Accept();
-                        Assert.NotNull(remote);
-
-                        using (remote)
+                        var recvBuffer = new byte[256];
+                        while (true)
                         {
-                            var recvBuffer = new byte[256];
-                            while (true)
+                            int received = remote.Receive(
+                                recvBuffer,
+                                0,
+                                recvBuffer.Length,
+                                SocketFlags.None
+                            );
+                            if (received == 0)
                             {
-                                int received = remote.Receive(
-                                    recvBuffer,
-                                    0,
-                                    recvBuffer.Length,
-                                    SocketFlags.None
-                                );
-                                if (received == 0)
-                                {
-                                    break;
-                                }
-
-                                bytesReceived += received;
-                                receivedChecksum.Add(recvBuffer, 0, received);
+                                break;
                             }
+
+                            bytesReceived += received;
+                            receivedChecksum.Add(recvBuffer, 0, received);
                         }
                     }
                 }
-            );
+            });
 
             // Run client
             EndPoint serverEndpoint = server.LocalEndPoint;
@@ -349,27 +347,25 @@ namespace System.Net.Sockets.Tests
                         SocketTestExtensions.CreateConnectedSocketPair();
                     using (socket2)
                     {
-                        Task socketOperation = Task.Run(
-                            async () =>
-                            {
-                                // Create a large file that will cause SendFile to block until the peer starts reading.
-                                using var tempFile = TempFile.Create();
-                                using (
-                                    var fs = new FileStream(
-                                        tempFile.Path,
-                                        FileMode.CreateNew,
-                                        FileAccess.Write
-                                    )
+                        Task socketOperation = Task.Run(async () =>
+                        {
+                            // Create a large file that will cause SendFile to block until the peer starts reading.
+                            using var tempFile = TempFile.Create();
+                            using (
+                                var fs = new FileStream(
+                                    tempFile.Path,
+                                    FileMode.CreateNew,
+                                    FileAccess.Write
                                 )
-                                {
-                                    fs.SetLength(
-                                        20 * 1024 * 1024 /* 20MB */
-                                    );
-                                }
-
-                                await SendFileAsync(socket1, tempFile.Path);
+                            )
+                            {
+                                fs.SetLength(
+                                    20 * 1024 * 1024 /* 20MB */
+                                );
                             }
-                        );
+
+                            await SendFileAsync(socket1, tempFile.Path);
+                        });
 
                         // Wait a little so the operation is started.
                         await Task.Delay(msDelay);
@@ -675,20 +671,18 @@ namespace System.Net.Sockets.Tests
             await new Task[]
             {
                 SendFileAsync(server, tmpFile.Path),
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    byte[] buffer = new byte[100_000];
+                    long count = 0;
+                    while (count < FileLength)
                     {
-                        byte[] buffer = new byte[100_000];
-                        long count = 0;
-                        while (count < FileLength)
-                        {
-                            int received = client.Receive(buffer);
-                            Assert.NotEqual(0, received);
-                            count += received;
-                        }
-                        Assert.Equal(0, client.Available);
+                        int received = client.Receive(buffer);
+                        Assert.NotEqual(0, received);
+                        count += received;
                     }
-                )
+                    Assert.Equal(0, client.Available);
+                })
             }.WhenAllOrAnyFailed();
         }
     }

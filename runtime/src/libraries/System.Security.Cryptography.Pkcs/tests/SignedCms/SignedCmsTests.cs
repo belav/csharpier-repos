@@ -1499,12 +1499,10 @@ namespace System.Security.Cryptography.Pkcs.Tests
             SignedCms signedCms = new SignedCms();
             signedCms.Decode(SignedDocuments.RsaPkcs1SignedSha1DeclaredSha256WithRsa);
 
-            Assert.Throws<CryptographicException>(
-                () =>
-                {
-                    signedCms.CheckSignature(true);
-                }
-            );
+            Assert.Throws<CryptographicException>(() =>
+            {
+                signedCms.CheckSignature(true);
+            });
         }
 
         [Theory]

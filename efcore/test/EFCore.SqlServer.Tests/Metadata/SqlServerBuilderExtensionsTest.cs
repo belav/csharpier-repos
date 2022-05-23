@@ -409,14 +409,12 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            modelBuilder.Entity<Customer>(
-                eb =>
-                {
-                    eb.Property(e => e.Id).HasDefaultValue(1);
-                    eb.Property(e => e.Name).HasComputedColumnSql("Default");
-                    eb.Property(e => e.Offset).HasDefaultValueSql("Now");
-                }
-            );
+            modelBuilder.Entity<Customer>(eb =>
+            {
+                eb.Property(e => e.Id).HasDefaultValue(1);
+                eb.Property(e => e.Name).HasComputedColumnSql("Default");
+                eb.Property(e => e.Offset).HasDefaultValueSql("Now");
+            });
 
             modelBuilder.UseIdentityColumns();
 
@@ -789,15 +787,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata
         {
             var modelBuilder = CreateConventionModelBuilder();
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    modelBuilder
-                        .Entity(typeof(Customer))
-                        .HasIndex("Name")
-                        .HasFillFactor(fillFactor);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                modelBuilder.Entity(typeof(Customer)).HasIndex("Name").HasFillFactor(fillFactor);
+            });
         }
 
         private void AssertIsGeneric(EntityTypeBuilder<Customer> _) { }

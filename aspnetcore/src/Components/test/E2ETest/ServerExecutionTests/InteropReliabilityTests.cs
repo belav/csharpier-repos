@@ -246,17 +246,15 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
-        await Client.ExpectRenderBatch(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync(
-                    "EndInvokeJSFromDotNet",
-                    id,
-                    true,
-                    $"[{id}, true, \"{{\"]"
-                );
-            }
-        );
+        await Client.ExpectRenderBatch(async () =>
+        {
+            await Client.HubConnection.InvokeAsync(
+                "EndInvokeJSFromDotNet",
+                id,
+                true,
+                $"[{id}, true, \"{{\"]"
+            );
+        });
 
         var text = Assert.Single(
             Client.FindElementById("errormessage-malformed").Children.OfType<TextNode>(),
@@ -280,17 +278,15 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
-        await Client.ExpectRenderBatch(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync(
-                    "EndInvokeJSFromDotNet",
-                    id,
-                    true,
-                    $"[{id}, true, null]"
-                );
-            }
-        );
+        await Client.ExpectRenderBatch(async () =>
+        {
+            await Client.HubConnection.InvokeAsync(
+                "EndInvokeJSFromDotNet",
+                id,
+                true,
+                $"[{id}, true, null]"
+            );
+        });
 
         Assert.Single(
             Client.FindElementById("errormessage-success").Children.OfType<TextNode>(),
@@ -315,17 +311,15 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
-        await Client.ExpectRenderBatch(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync(
-                    "EndInvokeJSFromDotNet",
-                    id,
-                    false,
-                    $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
-                );
-            }
-        );
+        await Client.ExpectRenderBatch(async () =>
+        {
+            await Client.HubConnection.InvokeAsync(
+                "EndInvokeJSFromDotNet",
+                id,
+                false,
+                $"[{id}, false, \"There was an error invoking sendFailureCallbackReturn\"]"
+            );
+        });
 
         Assert.Single(
             Client.FindElementById("errormessage-failure").Children.OfType<TextNode>(),
@@ -354,17 +348,15 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         Assert.NotEqual(default, call);
 
         var id = call.AsyncHandle;
-        await Client.ExpectCircuitError(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync(
-                    "EndInvokeJSFromDotNet",
-                    id,
-                    true,
-                    $"[{id}, true, }}"
-                );
-            }
-        );
+        await Client.ExpectCircuitError(async () =>
+        {
+            await Client.HubConnection.InvokeAsync(
+                "EndInvokeJSFromDotNet",
+                id,
+                true,
+                $"[{id}, true, }}"
+            );
+        });
 
         // A completely malformed payload like the one above never gets to the application.
         Assert.Single(
@@ -375,14 +367,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         var entry = Assert.Single(Logs, l => l.EventId.Name == "EndInvokeDispatchException");
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
 
-        await Client.ExpectCircuitErrorAndDisconnect(
-            async () =>
-            {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
-                );
-            }
-        );
+        await Client.ExpectCircuitErrorAndDisconnect(async () =>
+        {
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
+        });
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
@@ -437,12 +427,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Arrange
 
         // Act
-        await Client.ExpectCircuitError(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync("DispatchBrowserEvent", null, null);
-            }
-        );
+        await Client.ExpectCircuitError(async () =>
+        {
+            await Client.HubConnection.InvokeAsync("DispatchBrowserEvent", null, null);
+        });
 
         var entry = Assert.Single(
             Logs,
@@ -451,14 +439,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
 
         // Taking any other action will fail because the circuit is disposed.
-        await Client.ExpectCircuitErrorAndDisconnect(
-            async () =>
-            {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
-                );
-            }
-        );
+        await Client.ExpectCircuitErrorAndDisconnect(async () =>
+        {
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
+        });
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
@@ -467,16 +453,14 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Arrange
 
         // Act
-        await Client.ExpectCircuitError(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync(
-                    "DispatchBrowserEvent",
-                    "{Invalid:{\"payload}",
-                    "{}"
-                );
-            }
-        );
+        await Client.ExpectCircuitError(async () =>
+        {
+            await Client.HubConnection.InvokeAsync(
+                "DispatchBrowserEvent",
+                "{Invalid:{\"payload}",
+                "{}"
+            );
+        });
 
         var entry = Assert.Single(
             Logs,
@@ -485,14 +469,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         Assert.Equal(LogLevel.Debug, entry.LogLevel);
 
         // Taking any other action will fail because the circuit is disposed.
-        await Client.ExpectCircuitErrorAndDisconnect(
-            async () =>
-            {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
-                );
-            }
-        );
+        await Client.ExpectCircuitErrorAndDisconnect(async () =>
+        {
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
+        });
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
@@ -507,19 +489,17 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             EventName = "click",
         };
 
-        await Client.ExpectCircuitError(
-            async () =>
-            {
-                await Client.HubConnection.InvokeAsync(
-                    "DispatchBrowserEvent",
-                    JsonSerializer.Serialize(
-                        browserDescriptor,
-                        TestJsonSerializerOptionsProvider.Options
-                    ),
-                    "{Invalid:{\"payload}"
-                );
-            }
-        );
+        await Client.ExpectCircuitError(async () =>
+        {
+            await Client.HubConnection.InvokeAsync(
+                "DispatchBrowserEvent",
+                JsonSerializer.Serialize(
+                    browserDescriptor,
+                    TestJsonSerializerOptionsProvider.Options
+                ),
+                "{Invalid:{\"payload}"
+            );
+        });
 
         Assert.Contains(
             Logs,
@@ -531,14 +511,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         );
 
         // Taking any other action will fail because the circuit is disposed.
-        await Client.ExpectCircuitErrorAndDisconnect(
-            async () =>
-            {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
-                );
-            }
-        );
+        await Client.ExpectCircuitErrorAndDisconnect(async () =>
+        {
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
+        });
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
@@ -554,12 +532,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
             EventName = "click",
         };
 
-        await Client.ExpectCircuitError(
-            async () =>
-            {
-                await Client.DispatchEventAsync(browserDescriptor, mouseEventArgs);
-            }
-        );
+        await Client.ExpectCircuitError(async () =>
+        {
+            await Client.DispatchEventAsync(browserDescriptor, mouseEventArgs);
+        });
 
         Assert.Contains(
             Logs,
@@ -573,14 +549,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         );
 
         // Taking any other action will fail because the circuit is disposed.
-        await Client.ExpectCircuitErrorAndDisconnect(
-            async () =>
-            {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
-                );
-            }
-        );
+        await Client.ExpectCircuitErrorAndDisconnect(async () =>
+        {
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
+        });
     }
 
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/19666")]
@@ -589,12 +563,10 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
         // Arrange
 
         // Act
-        await Client.ExpectCircuitError(
-            async () =>
-            {
-                await Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: false);
-            }
-        );
+        await Client.ExpectCircuitError(async () =>
+        {
+            await Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: false);
+        });
 
         Assert.Contains(
             Logs,
@@ -606,14 +578,12 @@ public class InteropReliabilityTests : IgnitorTest<ServerStartup>
 
         // Now if you try to click again, you will get *forcibly* disconnected for trying to talk to
         // a circuit that's gone.
-        await Client.ExpectCircuitErrorAndDisconnect(
-            async () =>
-            {
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
-                );
-            }
-        );
+        await Client.ExpectCircuitErrorAndDisconnect(async () =>
+        {
+            await Assert.ThrowsAsync<TaskCanceledException>(
+                () => Client.ClickAsync("event-handler-throw-sync", expectRenderBatch: true)
+            );
+        });
     }
 
     private Task ValidateClientKeepsWorking(

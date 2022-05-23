@@ -109,15 +109,13 @@ namespace System.Net.Http.Tests
         [Fact]
         public void Quality_LessThanZero_Throw()
         {
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
-                        "application/xml",
-                        -0.01
-                    );
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                MediaTypeWithQualityHeaderValue mediaType = new MediaTypeWithQualityHeaderValue(
+                    "application/xml",
+                    -0.01
+                );
+            });
         }
 
         [Fact]
@@ -127,12 +125,10 @@ namespace System.Net.Http.Tests
                 "application/xml"
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mediaType.Quality = 1.01;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mediaType.Quality = 1.01;
+            });
         }
 
         [Fact]
@@ -222,12 +218,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    MediaTypeWithQualityHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                MediaTypeWithQualityHeaderValue.Parse(input);
+            });
 
             MediaTypeWithQualityHeaderValue result = null;
             Assert.False(MediaTypeWithQualityHeaderValue.TryParse(input, out result));

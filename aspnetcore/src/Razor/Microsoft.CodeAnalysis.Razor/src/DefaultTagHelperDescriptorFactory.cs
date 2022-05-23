@@ -118,42 +118,33 @@ internal class DefaultTagHelperDescriptorFactory
                 name = name.Substring(0, name.Length - TagHelperNameEnding.Length);
             }
 
-            descriptorBuilder.TagMatchingRule(
-                ruleBuilder =>
-                {
-                    var htmlCasedName = HtmlConventions.ToHtmlCase(name);
-                    ruleBuilder.TagName = htmlCasedName;
-                }
-            );
+            descriptorBuilder.TagMatchingRule(ruleBuilder =>
+            {
+                var htmlCasedName = HtmlConventions.ToHtmlCase(name);
+                ruleBuilder.TagName = htmlCasedName;
+            });
 
             return;
         }
 
         foreach (var targetElementAttribute in targetElementAttributes)
         {
-            descriptorBuilder.TagMatchingRule(
-                ruleBuilder =>
-                {
-                    var tagName = HtmlTargetElementAttribute_Tag(targetElementAttribute);
-                    ruleBuilder.TagName = tagName;
+            descriptorBuilder.TagMatchingRule(ruleBuilder =>
+            {
+                var tagName = HtmlTargetElementAttribute_Tag(targetElementAttribute);
+                ruleBuilder.TagName = tagName;
 
-                    var parentTag = HtmlTargetElementAttribute_ParentTag(targetElementAttribute);
-                    ruleBuilder.ParentTag = parentTag;
+                var parentTag = HtmlTargetElementAttribute_ParentTag(targetElementAttribute);
+                ruleBuilder.ParentTag = parentTag;
 
-                    var tagStructure = HtmlTargetElementAttribute_TagStructure(
-                        targetElementAttribute
-                    );
-                    ruleBuilder.TagStructure = tagStructure;
+                var tagStructure = HtmlTargetElementAttribute_TagStructure(targetElementAttribute);
+                ruleBuilder.TagStructure = tagStructure;
 
-                    var requiredAttributeString = HtmlTargetElementAttribute_Attributes(
-                        targetElementAttribute
-                    );
-                    RequiredAttributeParser.AddRequiredAttributes(
-                        requiredAttributeString,
-                        ruleBuilder
-                    );
-                }
-            );
+                var requiredAttributeString = HtmlTargetElementAttribute_Attributes(
+                    targetElementAttribute
+                );
+                RequiredAttributeParser.AddRequiredAttributes(requiredAttributeString, ruleBuilder);
+            });
         }
     }
 
@@ -167,12 +158,10 @@ internal class DefaultTagHelperDescriptorFactory
                 continue;
             }
 
-            builder.BindAttribute(
-                attributeBuilder =>
-                {
-                    ConfigureBoundAttribute(attributeBuilder, property, type);
-                }
-            );
+            builder.BindAttribute(attributeBuilder =>
+            {
+                ConfigureBoundAttribute(attributeBuilder, property, type);
+            });
         }
     }
 

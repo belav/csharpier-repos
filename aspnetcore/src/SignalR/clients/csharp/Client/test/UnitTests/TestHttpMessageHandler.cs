@@ -131,23 +131,21 @@ public class TestHttpMessageHandler : HttpMessageHandler
         testHttpMessageHandler.OnSocketSend(
             (_, __) => ResponseUtils.CreateResponse(HttpStatusCode.Accepted)
         );
-        testHttpMessageHandler.OnLongPoll(
-            async cancellationToken =>
-            {
-                var cts = CancellationTokenSource.CreateLinkedTokenSource(
-                    cancellationToken,
-                    deleteCts.Token
-                );
+        testHttpMessageHandler.OnLongPoll(async cancellationToken =>
+        {
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                cancellationToken,
+                deleteCts.Token
+            );
 
-                // Just block until canceled
-                var tcs = new TaskCompletionSource();
-                using (cts.Token.Register(() => tcs.TrySetResult()))
-                {
-                    await tcs.Task;
-                }
-                return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
+            // Just block until canceled
+            var tcs = new TaskCompletionSource();
+            using (cts.Token.Register(() => tcs.TrySetResult()))
+            {
+                await tcs.Task;
             }
-        );
+            return ResponseUtils.CreateResponse(HttpStatusCode.NoContent);
+        });
         testHttpMessageHandler.OnRequest(
             (request, next, cancellationToken) =>
             {
@@ -181,19 +179,13 @@ public class TestHttpMessageHandler : HttpMessageHandler
             _middleware.Add(middleware);
         }
 
-        OnRequestCore(
-            next =>
+        OnRequestCore(next =>
+        {
+            return (request, cancellationToken) =>
             {
-                return (request, cancellationToken) =>
-                {
-                    return handler(
-                        request,
-                        () => next(request, cancellationToken),
-                        cancellationToken
-                    );
-                };
-            }
-        );
+                return handler(request, () => next(request, cancellationToken), cancellationToken);
+            };
+        });
     }
 
     public void OnGet(

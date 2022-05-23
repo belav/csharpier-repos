@@ -35,6 +35,7 @@ class Tests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
+
     public static int test_0_sin_precision()
     {
         double d1 = Math.Sin(1);

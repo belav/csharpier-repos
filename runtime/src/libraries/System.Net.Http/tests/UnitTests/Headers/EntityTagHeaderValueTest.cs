@@ -247,12 +247,10 @@ namespace System.Net.Http.Tests
 
         private void CheckInvalidParse(string input)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    EntityTagHeaderValue.Parse(input);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                EntityTagHeaderValue.Parse(input);
+            });
 
             Assert.False(EntityTagHeaderValue.TryParse(input, out EntityTagHeaderValue result));
             Assert.Null(result);
@@ -260,12 +258,10 @@ namespace System.Net.Http.Tests
 
         private static void AssertFormatException(string tag)
         {
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    new EntityTagHeaderValue(tag);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                new EntityTagHeaderValue(tag);
+            });
         }
         #endregion
     }

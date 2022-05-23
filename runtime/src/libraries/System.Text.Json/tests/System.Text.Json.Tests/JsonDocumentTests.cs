@@ -2008,29 +2008,23 @@ namespace System.Text.Json.Tests
                 Assert.Throws<ObjectDisposedException>(() => root.GetBoolean());
                 Assert.Throws<ObjectDisposedException>(() => root.GetRawText());
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        using var writer = new Utf8JsonWriter(buffer);
-                        root.WriteTo(writer);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    using var writer = new Utf8JsonWriter(buffer);
+                    root.WriteTo(writer);
+                });
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        using var writer = new Utf8JsonWriter(buffer);
-                        doc.WriteTo(writer);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    using var writer = new Utf8JsonWriter(buffer);
+                    doc.WriteTo(writer);
+                });
 
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
-                    {
-                        using var writer = new Utf8JsonWriter(buffer);
-                        property.WriteTo(writer);
-                    }
-                );
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    using var writer = new Utf8JsonWriter(buffer);
+                    property.WriteTo(writer);
+                });
             }
         }
 
@@ -2079,14 +2073,12 @@ namespace System.Text.Json.Tests
             Assert.Throws<InvalidOperationException>(() => root.GetBoolean());
             Assert.Throws<InvalidOperationException>(() => root.GetRawText());
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    var buffer = new ArrayBufferWriter<byte>(1024);
-                    using var writer = new Utf8JsonWriter(buffer);
-                    root.WriteTo(writer);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                var buffer = new ArrayBufferWriter<byte>(1024);
+                using var writer = new Utf8JsonWriter(buffer);
+                root.WriteTo(writer);
+            });
         }
 
         [Fact]
@@ -3217,13 +3209,11 @@ namespace System.Text.Json.Tests
         [Fact]
         public static void ParseDefaultReader()
         {
-            Assert.ThrowsAny<JsonException>(
-                () =>
-                {
-                    Utf8JsonReader reader = default;
-                    JsonDocument.ParseValue(ref reader);
-                }
-            );
+            Assert.ThrowsAny<JsonException>(() =>
+            {
+                Utf8JsonReader reader = default;
+                JsonDocument.ParseValue(ref reader);
+            });
 
             {
                 Utf8JsonReader reader = default;

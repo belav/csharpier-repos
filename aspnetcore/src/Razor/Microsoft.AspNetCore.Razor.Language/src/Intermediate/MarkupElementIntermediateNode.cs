@@ -19,16 +19,14 @@ public sealed class MarkupElementIntermediateNode : IntermediateNode
     public IEnumerable<SetKeyIntermediateNode> SetKeys => Children.OfType<SetKeyIntermediateNode>();
 
     public IEnumerable<IntermediateNode> Body =>
-        Children.Where(
-            c =>
-            {
-                return c as ComponentAttributeIntermediateNode == null
-                    && c as HtmlAttributeIntermediateNode == null
-                    && c as SplatIntermediateNode == null
-                    && c as SetKeyIntermediateNode == null
-                    && c as ReferenceCaptureIntermediateNode == null;
-            }
-        );
+        Children.Where(c =>
+        {
+            return c as ComponentAttributeIntermediateNode == null
+                && c as HtmlAttributeIntermediateNode == null
+                && c as SplatIntermediateNode == null
+                && c as SetKeyIntermediateNode == null
+                && c as ReferenceCaptureIntermediateNode == null;
+        });
 
     public override IntermediateNodeCollection Children { get; } = new IntermediateNodeCollection();
 

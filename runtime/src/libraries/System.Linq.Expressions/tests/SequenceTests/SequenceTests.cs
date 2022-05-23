@@ -1412,17 +1412,15 @@ namespace System.Linq.Expressions.Tests
 
             UnaryExpression result = Expression.UnaryPlus(ce);
 
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    //unary Plus Operator
-                    byte val = 10;
-                    Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
-                        Expression.UnaryPlus(Expression.Constant(val, typeof(byte))),
-                        Enumerable.Empty<ParameterExpression>()
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                //unary Plus Operator
+                byte val = 10;
+                Expression<Func<byte>> e = Expression.Lambda<Func<byte>>(
+                    Expression.UnaryPlus(Expression.Constant(val, typeof(byte))),
+                    Enumerable.Empty<ParameterExpression>()
+                );
+            });
 
             //User-defined objects
             Complex comp = new Complex(10, 20);
@@ -2181,14 +2179,12 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void ConvertNullToInt(bool useInterpreter)
         {
-            Assert.Throws<NullReferenceException>(
-                () =>
-                {
-                    Expression<Func<ValueType, int>> e = v => (int)v;
-                    Func<ValueType, int> f = e.Compile(useInterpreter);
-                    f(null);
-                }
-            );
+            Assert.Throws<NullReferenceException>(() =>
+            {
+                Expression<Func<ValueType, int>> e = v => (int)v;
+                Func<ValueType, int> f = e.Compile(useInterpreter);
+                f(null);
+            });
         }
 
         [Theory]
@@ -3117,62 +3113,56 @@ namespace System.Linq.Expressions.Tests
         [ClassData(typeof(CompilationTypes))]
         public static void ShiftULong(bool useInterpreter)
         {
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
-                        Expression.RightShift(
-                            Expression.Constant((ulong)5, typeof(ulong)),
-                            Expression.Constant((ulong)1, typeof(ulong))
-                        ),
-                        Enumerable.Empty<ParameterExpression>()
-                    );
-                    Func<ulong> f = e.Compile(useInterpreter);
-                    f();
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                Expression<Func<ulong>> e = Expression.Lambda<Func<ulong>>(
+                    Expression.RightShift(
+                        Expression.Constant((ulong)5, typeof(ulong)),
+                        Expression.Constant((ulong)1, typeof(ulong))
+                    ),
+                    Enumerable.Empty<ParameterExpression>()
+                );
+                Func<ulong> f = e.Compile(useInterpreter);
+                f();
+            });
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         public static void MultiplyMinInt(bool useInterpreter)
         {
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    Func<long> f = Expression
-                        .Lambda<Func<long>>(
-                            Expression.MultiplyChecked(
-                                Expression.Constant((long)-1, typeof(long)),
-                                Expression.Constant(long.MinValue, typeof(long))
-                            ),
-                            Enumerable.Empty<ParameterExpression>()
-                        )
-                        .Compile(useInterpreter);
-                    f();
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                Func<long> f = Expression
+                    .Lambda<Func<long>>(
+                        Expression.MultiplyChecked(
+                            Expression.Constant((long)-1, typeof(long)),
+                            Expression.Constant(long.MinValue, typeof(long))
+                        ),
+                        Enumerable.Empty<ParameterExpression>()
+                    )
+                    .Compile(useInterpreter);
+                f();
+            });
         }
 
         [Theory]
         [ClassData(typeof(CompilationTypes))]
         public static void MultiplyMinInt2(bool useInterpreter)
         {
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    Func<long> f = Expression
-                        .Lambda<Func<long>>(
-                            Expression.MultiplyChecked(
-                                Expression.Constant(long.MinValue, typeof(long)),
-                                Expression.Constant((long)-1, typeof(long))
-                            ),
-                            Enumerable.Empty<ParameterExpression>()
-                        )
-                        .Compile(useInterpreter);
-                    f();
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                Func<long> f = Expression
+                    .Lambda<Func<long>>(
+                        Expression.MultiplyChecked(
+                            Expression.Constant(long.MinValue, typeof(long)),
+                            Expression.Constant((long)-1, typeof(long))
+                        ),
+                        Enumerable.Empty<ParameterExpression>()
+                    )
+                    .Compile(useInterpreter);
+                f();
+            });
         }
 
         [Theory]

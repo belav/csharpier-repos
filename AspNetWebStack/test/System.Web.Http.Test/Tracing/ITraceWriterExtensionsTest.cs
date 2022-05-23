@@ -1709,12 +1709,10 @@ namespace System.Web.Http.Tracing
                             {
                                 throw aggregateException;
                             }
-                            Task task = new Task(
-                                () =>
-                                {
-                                    throw aggregateException;
-                                }
-                            );
+                            Task task = new Task(() =>
+                            {
+                                throw aggregateException;
+                            });
                             task.Start();
                             return task;
                         },
@@ -2010,12 +2008,10 @@ namespace System.Web.Http.Tracing
                             {
                                 throw aggregateException;
                             }
-                            Task<int> task = new Task<int>(
-                                () =>
-                                {
-                                    throw aggregateException;
-                                }
-                            );
+                            Task<int> task = new Task<int>(() =>
+                            {
+                                throw aggregateException;
+                            });
                             task.Start();
                             return task;
                         },

@@ -55,22 +55,20 @@ public class HostingApplicationDiagnosticsTests
         var stopFired = false;
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
+            new CallbackDiagnosticListener(pair =>
+            {
+                // This should not fire
+                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
                 {
-                    // This should not fire
-                    if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
-                    {
-                        startFired = true;
-                    }
-
-                    // This should not fire
-                    if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
-                    {
-                        stopFired = true;
-                    }
+                    startFired = true;
                 }
-            ),
+
+                // This should not fire
+                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
+                {
+                    stopFired = true;
+                }
+            }),
             (s, o, arg3) =>
             {
                 // The events are off
@@ -102,15 +100,13 @@ public class HostingApplicationDiagnosticsTests
         bool isEnabledStartFired = false;
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
-                {
-                    eventsFired |= pair.Key.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    );
-                }
-            ),
+            new CallbackDiagnosticListener(pair =>
+            {
+                eventsFired |= pair.Key.StartsWith(
+                    "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                    StringComparison.Ordinal
+                );
+            }),
             (s, o, arg3) =>
             {
                 if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn")
@@ -147,15 +143,13 @@ public class HostingApplicationDiagnosticsTests
         bool isEnabledActivityFired = false;
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
-                {
-                    eventsFired |= pair.Key.StartsWith(
-                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                        StringComparison.Ordinal
-                    );
-                }
-            ),
+            new CallbackDiagnosticListener(pair =>
+            {
+                eventsFired |= pair.Key.StartsWith(
+                    "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                    StringComparison.Ordinal
+                );
+            }),
             (s, o, arg3) =>
             {
                 if (s == "Microsoft.AspNetCore.Hosting.HttpRequestIn")
@@ -193,22 +187,20 @@ public class HostingApplicationDiagnosticsTests
         bool startCalled = false;
 
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
+            new CallbackDiagnosticListener(pair =>
+            {
+                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
                 {
-                    if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Start")
-                    {
-                        startCalled = true;
-                        Assert.NotNull(pair.Value);
-                        Assert.NotNull(Activity.Current);
-                        Assert.Equal(
-                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                            Activity.Current.OperationName
-                        );
-                        AssertProperty<HttpContext>(pair.Value, "HttpContext");
-                    }
+                    startCalled = true;
+                    Assert.NotNull(pair.Value);
+                    Assert.NotNull(Activity.Current);
+                    Assert.Equal(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        Activity.Current.OperationName
+                    );
+                    AssertProperty<HttpContext>(pair.Value, "HttpContext");
                 }
-            )
+            })
         );
 
         hostingApplication.CreateContext(features);
@@ -227,23 +219,21 @@ public class HostingApplicationDiagnosticsTests
 
         bool endCalled = false;
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
+            new CallbackDiagnosticListener(pair =>
+            {
+                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
                 {
-                    if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
-                    {
-                        endCalled = true;
+                    endCalled = true;
 
-                        Assert.NotNull(Activity.Current);
-                        Assert.True(Activity.Current.Duration > TimeSpan.Zero);
-                        Assert.Equal(
-                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                            Activity.Current.OperationName
-                        );
-                        AssertProperty<HttpContext>(pair.Value, "HttpContext");
-                    }
+                    Assert.NotNull(Activity.Current);
+                    Assert.True(Activity.Current.Duration > TimeSpan.Zero);
+                    Assert.Equal(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        Activity.Current.OperationName
+                    );
+                    AssertProperty<HttpContext>(pair.Value, "HttpContext");
                 }
-            )
+            })
         );
 
         var context = hostingApplication.CreateContext(features);
@@ -262,22 +252,20 @@ public class HostingApplicationDiagnosticsTests
 
         bool endCalled = false;
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
+            new CallbackDiagnosticListener(pair =>
+            {
+                if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
                 {
-                    if (pair.Key == "Microsoft.AspNetCore.Hosting.HttpRequestIn.Stop")
-                    {
-                        endCalled = true;
-                        Assert.NotNull(Activity.Current);
-                        Assert.True(Activity.Current.Duration > TimeSpan.Zero);
-                        Assert.Equal(
-                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                            Activity.Current.OperationName
-                        );
-                        AssertProperty<HttpContext>(pair.Value, "HttpContext");
-                    }
+                    endCalled = true;
+                    Assert.NotNull(Activity.Current);
+                    Assert.True(Activity.Current.Duration > TimeSpan.Zero);
+                    Assert.Equal(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        Activity.Current.OperationName
+                    );
+                    AssertProperty<HttpContext>(pair.Value, "HttpContext");
                 }
-            )
+            })
         );
 
         var context = hostingApplication.CreateContext(features);
@@ -296,20 +284,18 @@ public class HostingApplicationDiagnosticsTests
 
         bool endCalled = false;
         diagnosticListener.Subscribe(
-            new CallbackDiagnosticListener(
-                pair =>
+            new CallbackDiagnosticListener(pair =>
+            {
+                if (pair.Key == "Microsoft.AspNetCore.Hosting.UnhandledException")
                 {
-                    if (pair.Key == "Microsoft.AspNetCore.Hosting.UnhandledException")
-                    {
-                        endCalled = true;
-                        Assert.NotNull(Activity.Current);
-                        Assert.Equal(
-                            "Microsoft.AspNetCore.Hosting.HttpRequestIn",
-                            Activity.Current.OperationName
-                        );
-                    }
+                    endCalled = true;
+                    Assert.NotNull(Activity.Current);
+                    Assert.Equal(
+                        "Microsoft.AspNetCore.Hosting.HttpRequestIn",
+                        Activity.Current.OperationName
+                    );
                 }
-            )
+            })
         );
 
         var context = hostingApplication.CreateContext(features);

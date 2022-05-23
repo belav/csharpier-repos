@@ -636,16 +636,14 @@ namespace Microsoft.EntityFrameworkCore.ChangeTracking.Internal
         {
             var builder = InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
-            builder.Entity<FullNotificationEntity>(
-                b =>
-                {
-                    b.Ignore(e => e.NotMapped);
-                    b.HasMany(e => e.RelatedCollection)
-                        .WithOne(e => e.Related)
-                        .HasForeignKey(e => e.Fk);
-                    b.HasChangeTrackingStrategy(changeTrackingStrategy);
-                }
-            );
+            builder.Entity<FullNotificationEntity>(b =>
+            {
+                b.Ignore(e => e.NotMapped);
+                b.HasMany(e => e.RelatedCollection)
+                    .WithOne(e => e.Related)
+                    .HasForeignKey(e => e.Fk);
+                b.HasChangeTrackingStrategy(changeTrackingStrategy);
+            });
 
             return builder.Model.FinalizeModel();
         }

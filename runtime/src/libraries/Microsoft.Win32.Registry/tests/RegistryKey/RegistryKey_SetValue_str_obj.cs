@@ -47,13 +47,11 @@ namespace Microsoft.Win32.RegistryTests
             );
 
             // Should throw if RegistryKey closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.SetValue("TestValue", 42);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.SetValue("TestValue", 42);
+            });
         }
 
         public static IEnumerable<object[]> TestValueTypes

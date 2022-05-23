@@ -47,16 +47,14 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
         base.ConfigureWebHost(builder);
         builder.UseStartup<TStartup>();
 
-        builder.ConfigureServices(
-            sc =>
-            {
-                sc.SetupTestDatabase<TContext>(_connection)
-                    .AddMvc()
-                    // Mark the cookie as essential for right now, as Identity uses it on
-                    // several places to pass important data in post-redirect-get flows.
-                    .AddCookieTempDataProvider(o => o.Cookie.IsEssential = true);
-            }
-        );
+        builder.ConfigureServices(sc =>
+        {
+            sc.SetupTestDatabase<TContext>(_connection)
+                .AddMvc()
+                // Mark the cookie as essential for right now, as Identity uses it on
+                // several places to pass important data in post-redirect-get flows.
+                .AddCookieTempDataProvider(o => o.Cookie.IsEssential = true);
+        });
 
         UpdateApplicationParts(builder);
     }
@@ -103,88 +101,86 @@ public class ServerFactory<TStartup, TContext> : WebApplicationFactory<TStartup>
 
         var mvcBuilder = services
             .AddMvc()
-            .ConfigureApplicationPartManager(
-                partManager =>
+            .ConfigureApplicationPartManager(partManager =>
+            {
+                var thisAssembly = typeof(IdentityBuilderUIExtensions).Assembly;
+                var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(
+                    thisAssembly,
+                    throwOnError: true
+                );
+                var relatedParts = relatedAssemblies.ToDictionary(
+                    ra => ra,
+                    CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts
+                );
+
+                var selectedFrameworkAssembly = _assemblyMap[
+                    framework == "V4" ? UIFramework.Bootstrap4 : UIFramework.Bootstrap5
+                ];
+
+                foreach (var kvp in relatedParts)
                 {
-                    var thisAssembly = typeof(IdentityBuilderUIExtensions).Assembly;
-                    var relatedAssemblies = RelatedAssemblyAttribute.GetRelatedAssemblies(
-                        thisAssembly,
-                        throwOnError: true
-                    );
-                    var relatedParts = relatedAssemblies.ToDictionary(
-                        ra => ra,
-                        CompiledRazorAssemblyApplicationPartFactory.GetDefaultApplicationParts
-                    );
-
-                    var selectedFrameworkAssembly = _assemblyMap[
-                        framework == "V4" ? UIFramework.Bootstrap4 : UIFramework.Bootstrap5
-                    ];
-
-                    foreach (var kvp in relatedParts)
+                    var assemblyName = kvp.Key.GetName().Name;
+                    if (!IsAssemblyForFramework(selectedFrameworkAssembly, assemblyName))
                     {
-                        var assemblyName = kvp.Key.GetName().Name;
-                        if (!IsAssemblyForFramework(selectedFrameworkAssembly, assemblyName))
-                        {
-                            RemoveParts(partManager, kvp.Value);
-                        }
-                        else
-                        {
-                            AddParts(partManager, kvp.Value);
-                        }
+                        RemoveParts(partManager, kvp.Value);
                     }
-                    bool IsAssemblyForFramework(string frameworkAssembly, string assemblyName) =>
-                        string.Equals(
-                            assemblyName,
-                            frameworkAssembly,
-                            StringComparison.OrdinalIgnoreCase
-                        );
-                    void RemoveParts(
-                        ApplicationPartManager manager,
-                        IEnumerable<ApplicationPart> partsToRemove
-                    )
+                    else
                     {
-                        for (var i = 0; i < manager.ApplicationParts.Count; i++)
-                        {
-                            var part = manager.ApplicationParts[i];
-                            if (
-                                partsToRemove.Any(
-                                    p =>
-                                        string.Equals(
-                                            p.Name,
-                                            part.Name,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                )
-                            )
-                            {
-                                manager.ApplicationParts.Remove(part);
-                            }
-                        }
+                        AddParts(partManager, kvp.Value);
                     }
-                    void AddParts(
-                        ApplicationPartManager manager,
-                        IEnumerable<ApplicationPart> partsToAdd
-                    )
+                }
+                bool IsAssemblyForFramework(string frameworkAssembly, string assemblyName) =>
+                    string.Equals(
+                        assemblyName,
+                        frameworkAssembly,
+                        StringComparison.OrdinalIgnoreCase
+                    );
+                void RemoveParts(
+                    ApplicationPartManager manager,
+                    IEnumerable<ApplicationPart> partsToRemove
+                )
+                {
+                    for (var i = 0; i < manager.ApplicationParts.Count; i++)
                     {
-                        foreach (var part in partsToAdd)
-                        {
-                            if (
-                                !manager.ApplicationParts.Any(
-                                    p =>
-                                        p.GetType() == part.GetType()
-                                        && string.Equals(
-                                            p.Name,
-                                            part.Name,
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                )
+                        var part = manager.ApplicationParts[i];
+                        if (
+                            partsToRemove.Any(
+                                p =>
+                                    string.Equals(
+                                        p.Name,
+                                        part.Name,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
                             )
-                            {
-                                manager.ApplicationParts.Add(part);
-                            }
+                        )
+                        {
+                            manager.ApplicationParts.Remove(part);
                         }
                     }
                 }
-            );
+                void AddParts(
+                    ApplicationPartManager manager,
+                    IEnumerable<ApplicationPart> partsToAdd
+                )
+                {
+                    foreach (var part in partsToAdd)
+                    {
+                        if (
+                            !manager.ApplicationParts.Any(
+                                p =>
+                                    p.GetType() == part.GetType()
+                                    && string.Equals(
+                                        p.Name,
+                                        part.Name,
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                            )
+                        )
+                        {
+                            manager.ApplicationParts.Add(part);
+                        }
+                    }
+                }
+            });
     }
 }

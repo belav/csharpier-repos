@@ -59,12 +59,10 @@ public class TestApplicationErrorLogger : ILogger
     {
         Scopes.Enqueue(state);
 
-        return new Disposable(
-            () =>
-            {
-                Scopes.TryDequeue(out _);
-            }
-        );
+        return new Disposable(() =>
+        {
+            Scopes.TryDequeue(out _);
+        });
     }
 
     public bool IsEnabled(LogLevel logLevel)

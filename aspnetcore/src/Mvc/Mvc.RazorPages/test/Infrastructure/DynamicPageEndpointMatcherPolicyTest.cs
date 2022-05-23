@@ -72,16 +72,14 @@ public class DynamicPageEndpointMatcherPolicyTest
 
         var services = new ServiceCollection();
         services.AddRouting();
-        services.AddTransient<CustomTransformer>(
-            s =>
-            {
-                var transformer = new CustomTransformer();
-                transformer.Transform = (c, values, state) => Transform(c, values, state);
-                transformer.Filter = (c, values, state, endpoints) =>
-                    Filter(c, values, state, endpoints);
-                return transformer;
-            }
-        );
+        services.AddTransient<CustomTransformer>(s =>
+        {
+            var transformer = new CustomTransformer();
+            transformer.Transform = (c, values, state) => Transform(c, values, state);
+            transformer.Filter = (c, values, state, endpoints) =>
+                Filter(c, values, state, endpoints);
+            return transformer;
+        });
         Services = services.BuildServiceProvider();
 
         Comparer = Services.GetRequiredService<EndpointMetadataComparer>();

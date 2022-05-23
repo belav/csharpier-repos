@@ -71,18 +71,16 @@ public class ModelBinderFactoryTest
         // There isn't a provider that can handle WidgetId.
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
+            new TestModelBinderProvider(c =>
+            {
+                if (c.Metadata.ModelType == typeof(Widget))
                 {
-                    if (c.Metadata.ModelType == typeof(Widget))
-                    {
-                        Assert.NotNull(c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]));
-                        return Mock.Of<IModelBinder>();
-                    }
-
-                    return null;
+                    Assert.NotNull(c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]));
+                    return Mock.Of<IModelBinder>();
                 }
-            )
+
+                return null;
+            })
         );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
@@ -112,17 +110,15 @@ public class ModelBinderFactoryTest
 
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
+            new TestModelBinderProvider(c =>
+            {
+                if (c.Metadata.ModelType == typeof(WidgetId))
                 {
-                    if (c.Metadata.ModelType == typeof(WidgetId))
-                    {
-                        return modelBinder;
-                    }
-
-                    return null;
+                    return modelBinder;
                 }
-            )
+
+                return null;
+            })
         );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
@@ -148,22 +144,20 @@ public class ModelBinderFactoryTest
 
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
+            new TestModelBinderProvider(c =>
+            {
+                if (c.Metadata.ModelType == typeof(Widget))
                 {
-                    if (c.Metadata.ModelType == typeof(Widget))
-                    {
-                        Assert.NotNull(c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]));
-                        return Mock.Of<IModelBinder>();
-                    }
-                    else if (c.Metadata.ModelType == typeof(WidgetId))
-                    {
-                        return Mock.Of<IModelBinder>();
-                    }
-
-                    return null;
+                    Assert.NotNull(c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]));
+                    return Mock.Of<IModelBinder>();
                 }
-            )
+                else if (c.Metadata.ModelType == typeof(WidgetId))
+                {
+                    return Mock.Of<IModelBinder>();
+                }
+
+                return null;
+            })
         );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
@@ -190,21 +184,19 @@ public class ModelBinderFactoryTest
 
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
+            new TestModelBinderProvider(c =>
+            {
+                var currentCallCount = ++callCount;
+                Assert.Equal(typeof(Employee), c.Metadata.ModelType);
+                var binder = c.CreateBinder(c.Metadata.Properties[nameof(Employee.Manager)]);
+
+                if (currentCallCount == 2)
                 {
-                    var currentCallCount = ++callCount;
-                    Assert.Equal(typeof(Employee), c.Metadata.ModelType);
-                    var binder = c.CreateBinder(c.Metadata.Properties[nameof(Employee.Manager)]);
-
-                    if (currentCallCount == 2)
-                    {
-                        Assert.IsType<PlaceholderBinder>(binder);
-                    }
-
-                    return Mock.Of<IModelBinder>();
+                    Assert.IsType<PlaceholderBinder>(binder);
                 }
-            )
+
+                return Mock.Of<IModelBinder>();
+            })
         );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
@@ -229,13 +221,11 @@ public class ModelBinderFactoryTest
 
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    Assert.Equal(typeof(Employee), c.Metadata.ModelType);
-                    return Mock.Of<IModelBinder>();
-                }
-            )
+            new TestModelBinderProvider(c =>
+            {
+                Assert.Equal(typeof(Employee), c.Metadata.ModelType);
+                return Mock.Of<IModelBinder>();
+            })
         );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
@@ -261,13 +251,11 @@ public class ModelBinderFactoryTest
 
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Add(
-            new TestModelBinderProvider(
-                c =>
-                {
-                    Assert.Equal(typeof(Employee), c.Metadata.ModelType);
-                    return Mock.Of<IModelBinder>();
-                }
-            )
+            new TestModelBinderProvider(c =>
+            {
+                Assert.Equal(typeof(Employee), c.Metadata.ModelType);
+                return Mock.Of<IModelBinder>();
+            })
         );
 
         var factory = new ModelBinderFactory(metadataProvider, options, GetServices());
@@ -353,41 +341,37 @@ public class ModelBinderFactoryTest
         var metadataProvider = new TestModelMetadataProvider();
         metadataProvider
             .ForType<Employee>()
-            .BindingDetails(
-                binding =>
+            .BindingDetails(binding =>
+            {
+                binding.BinderModelName = bindingMetadata.BinderModelName;
+                binding.BinderType = bindingMetadata.BinderType;
+                binding.BindingSource = bindingMetadata.BindingSource;
+                if (bindingMetadata.PropertyFilterProvider != null)
                 {
-                    binding.BinderModelName = bindingMetadata.BinderModelName;
-                    binding.BinderType = bindingMetadata.BinderType;
-                    binding.BindingSource = bindingMetadata.BindingSource;
-                    if (bindingMetadata.PropertyFilterProvider != null)
-                    {
-                        binding.PropertyFilterProvider = bindingMetadata.PropertyFilterProvider;
-                    }
+                    binding.PropertyFilterProvider = bindingMetadata.PropertyFilterProvider;
                 }
-            );
+            });
 
         var modelBinder = Mock.Of<IModelBinder>();
-        var modelBinderProvider = new TestModelBinderProvider(
-            context =>
-            {
-                Assert.Equal(typeof(Employee), context.Metadata.ModelType);
+        var modelBinderProvider = new TestModelBinderProvider(context =>
+        {
+            Assert.Equal(typeof(Employee), context.Metadata.ModelType);
 
-                Assert.NotNull(context.BindingInfo);
-                Assert.Equal(
-                    expectedInfo.BinderModelName,
-                    context.BindingInfo.BinderModelName,
-                    StringComparer.Ordinal
-                );
-                Assert.Equal(expectedInfo.BinderType, context.BindingInfo.BinderType);
-                Assert.Equal(expectedInfo.BindingSource, context.BindingInfo.BindingSource);
-                Assert.Same(
-                    expectedInfo.PropertyFilterProvider,
-                    context.BindingInfo.PropertyFilterProvider
-                );
+            Assert.NotNull(context.BindingInfo);
+            Assert.Equal(
+                expectedInfo.BinderModelName,
+                context.BindingInfo.BinderModelName,
+                StringComparer.Ordinal
+            );
+            Assert.Equal(expectedInfo.BinderType, context.BindingInfo.BinderType);
+            Assert.Equal(expectedInfo.BindingSource, context.BindingInfo.BindingSource);
+            Assert.Same(
+                expectedInfo.PropertyFilterProvider,
+                context.BindingInfo.PropertyFilterProvider
+            );
 
-                return modelBinder;
-            }
-        );
+            return modelBinder;
+        });
 
         var options = Options.Create(new MvcOptions());
         options.Value.ModelBinderProviders.Insert(0, modelBinderProvider);
@@ -416,35 +400,31 @@ public class ModelBinderFactoryTest
 
         IModelBinder inner = null;
 
-        var widgetProvider = new TestModelBinderProvider(
-            c =>
+        var widgetProvider = new TestModelBinderProvider(c =>
+        {
+            if (c.Metadata.ModelType == typeof(Widget))
             {
-                if (c.Metadata.ModelType == typeof(Widget))
+                var binder = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
+                if (inner == null)
                 {
-                    var binder = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
-                    if (inner == null)
-                    {
-                        inner = binder;
-                    }
-                    else
-                    {
-                        Assert.Same(inner, binder);
-                    }
-
-                    return Mock.Of<IModelBinder>();
+                    inner = binder;
+                }
+                else
+                {
+                    Assert.Same(inner, binder);
                 }
 
-                return null;
-            }
-        );
-
-        var widgetIdProvider = new TestModelBinderProvider(
-            c =>
-            {
-                Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
                 return Mock.Of<IModelBinder>();
             }
-        );
+
+            return null;
+        });
+
+        var widgetIdProvider = new TestModelBinderProvider(c =>
+        {
+            Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
+            return Mock.Of<IModelBinder>();
+        });
 
         options.Value.ModelBinderProviders.Add(widgetProvider);
         options.Value.ModelBinderProviders.Add(widgetIdProvider);
@@ -478,36 +458,32 @@ public class ModelBinderFactoryTest
 
         IModelBinder inner = null;
 
-        var widgetProvider = new TestModelBinderProvider(
-            c =>
+        var widgetProvider = new TestModelBinderProvider(c =>
+        {
+            if (c.Metadata.ModelType == typeof(Widget))
             {
-                if (c.Metadata.ModelType == typeof(Widget))
+                var binder = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
+                Assert.IsType<NoOpBinder>(binder);
+                if (inner == null)
                 {
-                    var binder = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
-                    Assert.IsType<NoOpBinder>(binder);
-                    if (inner == null)
-                    {
-                        inner = binder;
-                    }
-                    else
-                    {
-                        Assert.Same(inner, binder);
-                    }
-
-                    return Mock.Of<IModelBinder>();
+                    inner = binder;
+                }
+                else
+                {
+                    Assert.Same(inner, binder);
                 }
 
-                return null;
+                return Mock.Of<IModelBinder>();
             }
-        );
 
-        var widgetIdProvider = new TestModelBinderProvider(
-            c =>
-            {
-                Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
-                return null;
-            }
-        );
+            return null;
+        });
+
+        var widgetIdProvider = new TestModelBinderProvider(c =>
+        {
+            Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
+            return null;
+        });
 
         options.Value.ModelBinderProviders.Add(widgetProvider);
         options.Value.ModelBinderProviders.Add(widgetIdProvider);
@@ -543,26 +519,22 @@ public class ModelBinderFactoryTest
 
         IModelBinder inner = null;
 
-        var widgetProvider = new TestModelBinderProvider(
-            c =>
+        var widgetProvider = new TestModelBinderProvider(c =>
+        {
+            if (c.Metadata.ModelType == typeof(Widget))
             {
-                if (c.Metadata.ModelType == typeof(Widget))
-                {
-                    inner = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
-                    return Mock.Of<IModelBinder>();
-                }
-
-                return null;
-            }
-        );
-
-        var widgetIdProvider = new TestModelBinderProvider(
-            c =>
-            {
-                Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
+                inner = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
                 return Mock.Of<IModelBinder>();
             }
-        );
+
+            return null;
+        });
+
+        var widgetIdProvider = new TestModelBinderProvider(c =>
+        {
+            Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
+            return Mock.Of<IModelBinder>();
+        });
 
         options.Value.ModelBinderProviders.Add(widgetProvider);
         options.Value.ModelBinderProviders.Add(widgetIdProvider);
@@ -607,27 +579,23 @@ public class ModelBinderFactoryTest
         IModelBinder inner = null;
         IModelBinder innerInner = null;
 
-        var widgetProvider = new TestModelBinderProvider(
-            c =>
+        var widgetProvider = new TestModelBinderProvider(c =>
+        {
+            if (c.Metadata.ModelType == typeof(Widget))
             {
-                if (c.Metadata.ModelType == typeof(Widget))
-                {
-                    inner = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
-                    return Mock.Of<IModelBinder>();
-                }
-
-                return null;
+                inner = c.CreateBinder(c.Metadata.Properties[nameof(Widget.Id)]);
+                return Mock.Of<IModelBinder>();
             }
-        );
 
-        var widgetIdProvider = new TestModelBinderProvider(
-            c =>
-            {
-                Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
-                innerInner = c.CreateBinder(c.Metadata);
-                return null;
-            }
-        );
+            return null;
+        });
+
+        var widgetIdProvider = new TestModelBinderProvider(c =>
+        {
+            Assert.Equal(typeof(WidgetId), c.Metadata.ModelType);
+            innerInner = c.CreateBinder(c.Metadata);
+            return null;
+        });
 
         options.Value.ModelBinderProviders.Add(widgetProvider);
         options.Value.ModelBinderProviders.Add(widgetIdProvider);

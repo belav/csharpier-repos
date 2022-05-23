@@ -325,20 +325,18 @@ namespace Microsoft.CodeAnalysis.CSharp.EditAndContinue.UnitTests
 
             AssertEx.Equal(
                 expectedNames,
-                entityHandles.Select(
-                    handle =>
-                    {
-                        var genEntityHandle = aggregator.GetGenerationHandle(
-                            toHandle(handle),
-                            out int typeGeneration
-                        );
-                        var nameHandle = getName(readers[typeGeneration], genEntityHandle);
+                entityHandles.Select(handle =>
+                {
+                    var genEntityHandle = aggregator.GetGenerationHandle(
+                        toHandle(handle),
+                        out int typeGeneration
+                    );
+                    var nameHandle = getName(readers[typeGeneration], genEntityHandle);
 
-                        var genNameHandle = (StringHandle)
-                            aggregator.GetGenerationHandle(nameHandle, out int nameGeneration);
-                        return readers[nameGeneration].GetString(genNameHandle);
-                    }
-                )
+                    var genNameHandle = (StringHandle)
+                        aggregator.GetGenerationHandle(nameHandle, out int nameGeneration);
+                    return readers[nameGeneration].GetString(genNameHandle);
+                })
             );
         }
 

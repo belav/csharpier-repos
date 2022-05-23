@@ -479,15 +479,13 @@ namespace System.ComponentModel.Composition.Hosting
                     {
                         var capturedDefinition = definition;
                         DisposePart(null, removedPart!, atomicComposition);
-                        atomicComposition.AddCompleteActionAllowNull(
-                            () =>
+                        atomicComposition.AddCompleteActionAllowNull(() =>
+                        {
+                            using (_lock.LockStateForWrite())
                             {
-                                using (_lock.LockStateForWrite())
-                                {
-                                    _activatedParts.Remove(capturedDefinition);
-                                }
+                                _activatedParts.Remove(capturedDefinition);
                             }
-                        );
+                        });
                     }
                 }
 
@@ -673,37 +671,33 @@ namespace System.ComponentModel.Composition.Hosting
             }
             if (exportedValue != null)
             {
-                atomicComposition.AddCompleteActionAllowNull(
-                    () =>
-                    {
-                        AllowPartCollection(exportedValue);
-                    }
-                );
+                atomicComposition.AddCompleteActionAllowNull(() =>
+                {
+                    AllowPartCollection(exportedValue);
+                });
             }
 
             if (catalogPart.Part is IDisposable diposablePart)
             {
-                atomicComposition.AddCompleteActionAllowNull(
-                    () =>
-                    {
-                        bool removed = false;
+                atomicComposition.AddCompleteActionAllowNull(() =>
+                {
+                    bool removed = false;
 
+                    if (_isDisposed)
+                        return;
+                    using (_lock.LockStateForWrite())
+                    {
                         if (_isDisposed)
                             return;
-                        using (_lock.LockStateForWrite())
-                        {
-                            if (_isDisposed)
-                                return;
 
-                            removed = _partsToDispose.Remove(diposablePart);
-                        }
-
-                        if (removed)
-                        {
-                            diposablePart.Dispose();
-                        }
+                        removed = _partsToDispose.Remove(diposablePart);
                     }
-                );
+
+                    if (removed)
+                    {
+                        diposablePart.Dispose();
+                    }
+                });
             }
         }
 
@@ -859,22 +853,20 @@ namespace System.ComponentModel.Composition.Hosting
                     // The non-shared parts will only be used for rejection purposes only but
                     // the shared parts will be handed out when requested via GetExports as
                     // well as be used for rejection purposes.
-                    localAtomicComposition.AddCompleteActionAllowNull(
-                        () =>
+                    localAtomicComposition.AddCompleteActionAllowNull(() =>
+                    {
+                        using (_lock.LockStateForWrite())
                         {
-                            using (_lock.LockStateForWrite())
+                            if (!_activatedParts.ContainsKey(definition))
                             {
-                                if (!_activatedParts.ContainsKey(definition))
+                                _activatedParts.Add(definition, new CatalogPart(newPart));
+                                if (newPart is IDisposable newDisposablePart)
                                 {
-                                    _activatedParts.Add(definition, new CatalogPart(newPart));
-                                    if (newPart is IDisposable newDisposablePart)
-                                    {
-                                        _partsToDispose.Add(newDisposablePart);
-                                    }
+                                    _partsToDispose.Add(newDisposablePart);
                                 }
                             }
                         }
-                    );
+                    });
 
                     // Success! Complete any recursive work that was conditioned on this part's validation
                     localAtomicComposition.Complete();
@@ -890,17 +882,15 @@ namespace System.ComponentModel.Composition.Hosting
             // If we've reached this point then this part has been rejected so we need to
             // record the rejection in our parent composition or execute it immediately if
             // one doesn't exist.
-            parentAtomicComposition.AddCompleteActionAllowNull(
-                () =>
+            parentAtomicComposition.AddCompleteActionAllowNull(() =>
+            {
+                using (_lock.LockStateForWrite())
                 {
-                    using (_lock.LockStateForWrite())
-                    {
-                        _rejectedParts.Add(definition);
-                    }
-
-                    CompositionTrace.PartDefinitionRejected(definition, exception);
+                    _rejectedParts.Add(definition);
                 }
-            );
+
+                CompositionTrace.PartDefinitionRejected(definition, exception);
+            });
             if (parentAtomicComposition != null)
             {
                 UpdateAtomicCompositionQueryForPartEquals(
@@ -973,17 +963,15 @@ namespace System.ComponentModel.Composition.Hosting
                         // Capture the local so that the closure below refers to the current definition
                         // in the loop and not the value of 'partDefinition' when the closure executes
                         var capturedPartDefinition = partDefinition;
-                        localAtomicComposition.AddCompleteAction(
-                            () =>
+                        localAtomicComposition.AddCompleteAction(() =>
+                        {
+                            using (_lock.LockStateForWrite())
                             {
-                                using (_lock.LockStateForWrite())
-                                {
-                                    _rejectedParts.Remove(capturedPartDefinition);
-                                }
-
-                                CompositionTrace.PartDefinitionResurrected(capturedPartDefinition);
+                                _rejectedParts.Remove(capturedPartDefinition);
                             }
-                        );
+
+                            CompositionTrace.PartDefinitionResurrected(capturedPartDefinition);
+                        });
                     }
                 }
 

@@ -35,15 +35,13 @@ namespace System.Composition.Hosting.Providers.Metadata
                 );
 
             var ti = typeof(TMetadata).GetTypeInfo();
-            var dictionaryConstructor = ti.DeclaredConstructors.SingleOrDefault(
-                ci =>
-                {
-                    var ps = ci.GetParameters();
-                    return ci.IsPublic
-                        && ps.Length == 1
-                        && ps[0].ParameterType == typeof(IDictionary<string, object>);
-                }
-            );
+            var dictionaryConstructor = ti.DeclaredConstructors.SingleOrDefault(ci =>
+            {
+                var ps = ci.GetParameters();
+                return ci.IsPublic
+                    && ps.Length == 1
+                    && ps[0].ParameterType == typeof(IDictionary<string, object>);
+            });
 
             if (dictionaryConstructor != null)
             {

@@ -172,18 +172,16 @@ namespace Microsoft.EntityFrameworkCore
                         (
                             await Assert.ThrowsAsync<RetryLimitExceededException>(
                                 () =>
-                                    executionStrategyMock.ExecuteAsync(
-                                        () =>
+                                    executionStrategyMock.ExecuteAsync(() =>
+                                    {
+                                        if (executionCount++ < 3)
                                         {
-                                            if (executionCount++ < 3)
-                                            {
-                                                throw new ArgumentOutOfRangeException();
-                                            }
-
-                                            Assert.True(false);
-                                            return Task.FromResult(1);
+                                            throw new ArgumentOutOfRangeException();
                                         }
-                                    )
+
+                                        Assert.True(false);
+                                        return Task.FromResult(1);
+                                    })
                             )
                         ).InnerException
                     );
@@ -194,18 +192,16 @@ namespace Microsoft.EntityFrameworkCore
                         Assert
                             .Throws<RetryLimitExceededException>(
                                 () =>
-                                    executionStrategyMock.Execute(
-                                        () =>
+                                    executionStrategyMock.Execute(() =>
+                                    {
+                                        if (executionCount++ < 3)
                                         {
-                                            if (executionCount++ < 3)
-                                            {
-                                                throw new ArgumentOutOfRangeException();
-                                            }
-
-                                            Assert.True(false);
-                                            return 0;
+                                            throw new ArgumentOutOfRangeException();
                                         }
-                                    )
+
+                                        Assert.True(false);
+                                        return 0;
+                                    })
                             )
                             .InnerException
                     );

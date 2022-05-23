@@ -327,19 +327,17 @@ namespace Microsoft.CSharp.RuntimeBinder.Semantics
 
             CType pDestType = ChooseArrayIndexType(pOp2);
             ExpressionBinder binder = this;
-            Expr transformedIndices = pOp2.Map(
-                x =>
-                {
-                    Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
-                    return pDestType == pIntType
-                        ? pTemp
-                        : ExprFactoryCreateCastWithSuppressedMessage(
-                            EXPRFLAG.EXF_INDEXEXPR,
-                            pDestType,
-                            pTemp
-                        );
-                }
-            );
+            Expr transformedIndices = pOp2.Map(x =>
+            {
+                Expr pTemp = binder.MustConvertWithSuppressedMessage(x, pDestType);
+                return pDestType == pIntType
+                    ? pTemp
+                    : ExprFactoryCreateCastWithSuppressedMessage(
+                        EXPRFLAG.EXF_INDEXEXPR,
+                        pDestType,
+                        pTemp
+                    );
+            });
 
             // Allocate a new expression, the type is the element type of the array.
             // Array index operations are always lvalues.

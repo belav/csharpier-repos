@@ -19,37 +19,33 @@ public class PolicyTests
     [Fact]
     public async Task CanDispatch()
     {
-        using var server = await CreateServer(
-            services =>
-            {
-                services
-                    .AddLogging()
-                    .AddAuthentication(
-                        o =>
-                        {
-                            o.AddScheme<TestHandler>("auth1", "auth1");
-                            o.AddScheme<TestHandler>("auth2", "auth2");
-                            o.AddScheme<TestHandler>("auth3", "auth3");
-                        }
-                    )
-                    .AddPolicyScheme(
-                        "policy1",
-                        "policy1",
-                        p =>
-                        {
-                            p.ForwardDefault = "auth1";
-                        }
-                    )
-                    .AddPolicyScheme(
-                        "policy2",
-                        "policy2",
-                        p =>
-                        {
-                            p.ForwardAuthenticate = "auth2";
-                        }
-                    );
-            }
-        );
+        using var server = await CreateServer(services =>
+        {
+            services
+                .AddLogging()
+                .AddAuthentication(o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("auth2", "auth2");
+                    o.AddScheme<TestHandler>("auth3", "auth3");
+                })
+                .AddPolicyScheme(
+                    "policy1",
+                    "policy1",
+                    p =>
+                    {
+                        p.ForwardDefault = "auth1";
+                    }
+                )
+                .AddPolicyScheme(
+                    "policy2",
+                    "policy2",
+                    p =>
+                    {
+                        p.ForwardAuthenticate = "auth2";
+                    }
+                );
+        });
 
         var transaction = await server.SendAsync("http://example.com/auth/policy1");
         Assert.Equal("auth1", transaction.FindClaimValue(ClaimTypes.NameIdentifier, "auth1"));
@@ -72,13 +68,11 @@ public class PolicyTests
     {
         var services = new ServiceCollection().AddOptions().AddLogging();
         services
-            .AddAuthentication(
-                o =>
-                {
-                    o.AddScheme<TestHandler>("auth1", "auth1");
-                    o.AddScheme<TestHandler2>("auth2", "auth2");
-                }
-            )
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
             .AddPolicyScheme(
                 "forward",
                 "forward",
@@ -135,13 +129,11 @@ public class PolicyTests
     {
         var services = new ServiceCollection().AddOptions().AddLogging();
         services
-            .AddAuthentication(
-                o =>
-                {
-                    o.AddScheme<TestHandler>("auth1", "auth1");
-                    o.AddScheme<TestHandler2>("auth2", "auth2");
-                }
-            )
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
             .AddPolicyScheme(
                 "forward",
                 "forward",
@@ -198,13 +190,11 @@ public class PolicyTests
     {
         var services = new ServiceCollection().AddOptions().AddLogging();
         services
-            .AddAuthentication(
-                o =>
-                {
-                    o.AddScheme<TestHandler>("auth1", "auth1");
-                    o.AddScheme<TestHandler2>("auth2", "auth2");
-                }
-            )
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
             .AddPolicyScheme(
                 "forward",
                 "forward",
@@ -266,13 +256,11 @@ public class PolicyTests
     {
         var services = new ServiceCollection().AddOptions().AddLogging();
         services
-            .AddAuthentication(
-                o =>
-                {
-                    o.AddScheme<TestHandler>("auth1", "auth1");
-                    o.AddScheme<TestHandler2>("auth2", "auth2");
-                }
-            )
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
             .AddPolicyScheme("forward", "forward", p => p.ForwardDefault = "auth1");
 
         var handler1 = new TestHandler();
@@ -321,13 +309,11 @@ public class PolicyTests
     {
         var services = new ServiceCollection().AddOptions().AddLogging();
         services
-            .AddAuthentication(
-                o =>
-                {
-                    o.AddScheme<TestHandler>("auth1", "auth1");
-                    o.AddScheme<TestHandler2>("auth2", "auth2");
-                }
-            )
+            .AddAuthentication(o =>
+            {
+                o.AddScheme<TestHandler>("auth1", "auth1");
+                o.AddScheme<TestHandler2>("auth2", "auth2");
+            })
             .AddPolicyScheme(
                 "forward",
                 "forward",
@@ -383,29 +369,24 @@ public class PolicyTests
     [Fact]
     public async Task CanDynamicTargetBasedOnQueryString()
     {
-        using var server = await CreateServer(
-            services =>
-            {
-                services
-                    .AddAuthentication(
-                        o =>
-                        {
-                            o.AddScheme<TestHandler>("auth1", "auth1");
-                            o.AddScheme<TestHandler>("auth2", "auth2");
-                            o.AddScheme<TestHandler>("auth3", "auth3");
-                        }
-                    )
-                    .AddPolicyScheme(
-                        "dynamic",
-                        "dynamic",
-                        p =>
-                        {
-                            p.ForwardDefaultSelector = c =>
-                                c.Request.QueryString.Value.Substring(1);
-                        }
-                    );
-            }
-        );
+        using var server = await CreateServer(services =>
+        {
+            services
+                .AddAuthentication(o =>
+                {
+                    o.AddScheme<TestHandler>("auth1", "auth1");
+                    o.AddScheme<TestHandler>("auth2", "auth2");
+                    o.AddScheme<TestHandler>("auth3", "auth3");
+                })
+                .AddPolicyScheme(
+                    "dynamic",
+                    "dynamic",
+                    p =>
+                    {
+                        p.ForwardDefaultSelector = c => c.Request.QueryString.Value.Substring(1);
+                    }
+                );
+        });
 
         var transaction = await server.SendAsync("http://example.com/auth/dynamic?auth1");
         Assert.Equal("auth1", transaction.FindClaimValue(ClaimTypes.NameIdentifier, "auth1"));
@@ -543,50 +524,44 @@ public class PolicyTests
     )
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .Configure(
-                            app =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .Configure(app =>
+                    {
+                        app.UseAuthentication();
+                        app.Use(
+                            async (context, next) =>
                             {
-                                app.UseAuthentication();
-                                app.Use(
-                                    async (context, next) =>
-                                    {
-                                        var req = context.Request;
-                                        var res = context.Response;
-                                        if (
-                                            req.Path.StartsWithSegments(
-                                                new PathString("/auth"),
-                                                out var remainder
-                                            )
-                                        )
-                                        {
-                                            var name =
-                                                (remainder.Value.Length > 0)
-                                                    ? remainder.Value.Substring(1)
-                                                    : null;
-                                            var result = await context.AuthenticateAsync(name);
-                                            await res.DescribeAsync(result?.Ticket?.Principal);
-                                        }
-                                        else
-                                        {
-                                            await next(context);
-                                        }
-                                    }
-                                );
+                                var req = context.Request;
+                                var res = context.Response;
+                                if (
+                                    req.Path.StartsWithSegments(
+                                        new PathString("/auth"),
+                                        out var remainder
+                                    )
+                                )
+                                {
+                                    var name =
+                                        (remainder.Value.Length > 0)
+                                            ? remainder.Value.Substring(1)
+                                            : null;
+                                    var result = await context.AuthenticateAsync(name);
+                                    await res.DescribeAsync(result?.Ticket?.Principal);
+                                }
+                                else
+                                {
+                                    await next(context);
+                                }
                             }
-                        )
-                        .UseTestServer();
-                }
-            )
-            .ConfigureServices(
-                services =>
-                {
-                    configure?.Invoke(services);
-                }
-            )
+                        );
+                    })
+                    .UseTestServer();
+            })
+            .ConfigureServices(services =>
+            {
+                configure?.Invoke(services);
+            })
             .Build();
 
         var server = host.GetTestServer();

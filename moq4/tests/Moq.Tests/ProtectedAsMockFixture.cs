@@ -24,12 +24,10 @@ namespace Moq.Tests
         [Fact]
         public void Setup_throws_when_expression_null()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.Setup(null);
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                this.protectedMock.Setup(null);
+            });
 
             Assert.IsType<ArgumentNullException>(actual);
         }
@@ -37,12 +35,10 @@ namespace Moq.Tests
         [Fact]
         public void Setup_throws_ArgumentException_when_expression_contains_nonexistent_method()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.Setup(m => m.NonExistentMethod());
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                this.protectedMock.Setup(m => m.NonExistentMethod());
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Contains("does not have matching protected member", actual.Message);
@@ -51,12 +47,10 @@ namespace Moq.Tests
         [Fact]
         public void Setup_throws_ArgumentException_when_expression_contains_nonexistent_property()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.Setup(m => m.NonExistentProperty);
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                this.protectedMock.Setup(m => m.NonExistentProperty);
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Contains("does not have matching protected member", actual.Message);
@@ -208,12 +202,10 @@ namespace Moq.Tests
         [Fact]
         public void SetupProperty_cannot_setup_readonly_property()
         {
-            var exception = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.SetupProperty(m => m.ReadOnlyPropertyImpl);
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                this.protectedMock.SetupProperty(m => m.ReadOnlyPropertyImpl);
+            });
 
             Assert.NotNull(exception);
         }
@@ -229,12 +221,10 @@ namespace Moq.Tests
 
             var actual = new List<int>();
             actual.Add(this.mock.Object.ReadOnlyProperty);
-            var exception = Record.Exception(
-                () =>
-                {
-                    actual.Add(this.mock.Object.ReadOnlyProperty);
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                actual.Add(this.mock.Object.ReadOnlyProperty);
+            });
             actual.Add(this.mock.Object.ReadOnlyProperty);
 
             Assert.Equal(new[] { 1, 3 }, actual);
@@ -252,12 +242,10 @@ namespace Moq.Tests
 
             this.mock.Object.DoSomething();
             this.mock.Object.DoSomething();
-            var exception = Record.Exception(
-                () =>
-                {
-                    this.mock.Object.DoSomething();
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                this.mock.Object.DoSomething();
+            });
             this.mock.Object.DoSomething();
 
             Assert.IsType<InvalidOperationException>(exception);
@@ -372,12 +360,10 @@ namespace Moq.Tests
         [Fact]
         public void Verify_throws_if_invocation_not_occurred()
         {
-            var exception = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.Verify(m => m.DoSomethingImpl());
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                this.protectedMock.Verify(m => m.DoSomethingImpl());
+            });
 
             Assert.IsType<MockException>(exception);
         }
@@ -398,16 +384,14 @@ namespace Moq.Tests
             this.mock.Object.DoSomething();
             this.mock.Object.DoSomething();
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.Verify(
-                        m => m.DoSomethingImpl(),
-                        Times.Exactly(3),
-                        "Wasn't called three times."
-                    );
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                this.protectedMock.Verify(
+                    m => m.DoSomethingImpl(),
+                    Times.Exactly(3),
+                    "Wasn't called three times."
+                );
+            });
 
             Assert.IsType<MockException>(exception);
             Assert.Contains("Wasn't called three times.", exception.Message);
@@ -438,27 +422,23 @@ namespace Moq.Tests
         {
             var _ = this.mock.Object.ReadOnlyProperty;
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.VerifyGet(m => m.ReadOnlyPropertyImpl, Times.AtLeast(2));
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                this.protectedMock.VerifyGet(m => m.ReadOnlyPropertyImpl, Times.AtLeast(2));
+            });
         }
 
         [Fact]
         public void VerifyGet_includes_failure_message_in_exception()
         {
-            var exception = Record.Exception(
-                () =>
-                {
-                    this.protectedMock.VerifyGet(
-                        m => m.ReadOnlyPropertyImpl,
-                        Times.Once(),
-                        "Was not queried."
-                    );
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                this.protectedMock.VerifyGet(
+                    m => m.ReadOnlyPropertyImpl,
+                    Times.Once(),
+                    "Was not queried."
+                );
+            });
 
             Assert.IsType<MockException>(exception);
             Assert.Contains("Was not queried.", exception.Message);

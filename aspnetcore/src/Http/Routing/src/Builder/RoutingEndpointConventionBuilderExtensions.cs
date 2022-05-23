@@ -34,12 +34,10 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(hosts));
         }
 
-        builder.Add(
-            endpointBuilder =>
-            {
-                endpointBuilder.Metadata.Add(new HostAttribute(hosts));
-            }
-        );
+        builder.Add(endpointBuilder =>
+        {
+            endpointBuilder.Metadata.Add(new HostAttribute(hosts));
+        });
         return builder;
     }
 
@@ -58,12 +56,10 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(builder));
         }
 
-        builder.Add(
-            b =>
-            {
-                b.DisplayName = displayName;
-            }
-        );
+        builder.Add(b =>
+        {
+            b.DisplayName = displayName;
+        });
 
         return builder;
     }
@@ -90,12 +86,10 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(func));
         }
 
-        builder.Add(
-            b =>
-            {
-                b.DisplayName = func(b);
-            }
-        );
+        builder.Add(b =>
+        {
+            b.DisplayName = func(b);
+        });
 
         return builder;
     }
@@ -120,15 +114,13 @@ public static class RoutingEndpointConventionBuilderExtensions
             throw new ArgumentNullException(nameof(items));
         }
 
-        builder.Add(
-            b =>
+        builder.Add(b =>
+        {
+            foreach (var item in items)
             {
-                foreach (var item in items)
-                {
-                    b.Metadata.Add(item);
-                }
+                b.Metadata.Add(item);
             }
-        );
+        });
 
         return builder;
     }

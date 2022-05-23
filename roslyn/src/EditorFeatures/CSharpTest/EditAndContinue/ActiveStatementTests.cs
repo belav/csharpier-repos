@@ -12581,20 +12581,18 @@ class C
 
             var edits = GetTopEdits(src1, src2);
             var active = GetActiveStatements(src1, src2);
-            var validator = new CSharpEditAndContinueTestHelpers(
-                faultInjector: node =>
+            var validator = new CSharpEditAndContinueTestHelpers(faultInjector: node =>
+            {
+                if (
+                    node.Parent is MethodDeclarationSyntax methodDecl
+                    && methodDecl.Identifier.Text == "G"
+                )
                 {
-                    if (
-                        node.Parent is MethodDeclarationSyntax methodDecl
-                        && methodDecl.Identifier.Text == "G"
-                    )
-                    {
-                        throw outOfMemory
-                            ? new OutOfMemoryException()
-                            : new NullReferenceException("NullRef!");
-                    }
+                    throw outOfMemory
+                        ? new OutOfMemoryException()
+                        : new NullReferenceException("NullRef!");
                 }
-            );
+            });
 
             var expectedDiagnostic = outOfMemory
                 ? Diagnostic(

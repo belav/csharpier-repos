@@ -352,12 +352,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections
                         );
                         var set2 = new HashSet<string>(
                             spans
-                                .Where(
-                                    t =>
-                                    {
-                                        return span.OverlapsWith(new Span(t.Item1, t.Item2));
-                                    }
-                                )
+                                .Where(t =>
+                                {
+                                    return span.OverlapsWith(new Span(t.Item1, t.Item2));
+                                })
                                 .Select(t => t.Item3)
                         );
                         Assert.True(set1.SetEquals(set2));
@@ -367,12 +365,10 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Collections
                         );
                         var set4 = new HashSet<string>(
                             spans
-                                .Where(
-                                    t =>
-                                    {
-                                        return span.IntersectsWith(new Span(t.Item1, t.Item2));
-                                    }
-                                )
+                                .Where(t =>
+                                {
+                                    return span.IntersectsWith(new Span(t.Item1, t.Item2));
+                                })
                                 .Select(t => t.Item3)
                         );
                         Assert.True(set3.SetEquals(set4));

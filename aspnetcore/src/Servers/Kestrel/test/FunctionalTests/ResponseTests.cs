@@ -53,38 +53,32 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0/")
-                        .Configure(
-                            app =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0/")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            var bytes = new byte[1024];
+                            for (int i = 0; i < bytes.Length; i++)
                             {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        var bytes = new byte[1024];
-                                        for (int i = 0; i < bytes.Length; i++)
-                                        {
-                                            bytes[i] = (byte)i;
-                                        }
+                                bytes[i] = (byte)i;
+                            }
 
-                                        context.Response.ContentLength = bytes.Length * 1024;
+                            context.Response.ContentLength = bytes.Length * 1024;
 
-                                        for (int i = 0; i < 1024; i++)
-                                        {
-                                            await context.Response.BodyWriter.WriteAsync(
-                                                new Memory<byte>(bytes, 0, bytes.Length)
-                                            );
-                                        }
-                                    }
+                            for (int i = 0; i < 1024; i++)
+                            {
+                                await context.Response.BodyWriter.WriteAsync(
+                                    new Memory<byte>(bytes, 0, bytes.Length)
                                 );
                             }
-                        );
-                }
-            )
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -124,27 +118,21 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
     {
         var hostBuilder = TransportSelector
             .GetHostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseUrls("http://127.0.0.1:0/")
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(
-                                    async context =>
-                                    {
-                                        context.Response.Headers.Add(headerName, headerValue);
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseUrls("http://127.0.0.1:0/")
+                    .Configure(app =>
+                    {
+                        app.Run(async context =>
+                        {
+                            context.Response.Headers.Add(headerName, headerValue);
 
-                                        await context.Response.WriteAsync("");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+                            await context.Response.WriteAsync("");
+                        });
+                    });
+            })
             .ConfigureServices(AddTestLogging);
 
         using (var host = hostBuilder.Build())
@@ -720,12 +708,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
             var server = new TestServer(
                 async context =>
                 {
-                    context.RequestAborted.Register(
-                        () =>
-                        {
-                            aborted.SetResult();
-                        }
-                    );
+                    context.RequestAborted.Register(() =>
+                    {
+                        aborted.SetResult();
+                    });
 
                     context.Response.ContentLength = chunks * chunkSize;
 
@@ -841,12 +827,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted.SetResult();
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted.SetResult();
+            });
 
             try
             {
@@ -878,16 +862,14 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
                     ""
                 );
 
-                var sendTask = Task.Run(
-                    async () =>
+                var sendTask = Task.Run(async () =>
+                {
+                    for (var i = 0; i < bufferCount; i++)
                     {
-                        for (var i = 0; i < bufferCount; i++)
-                        {
-                            await connection.Stream.WriteAsync(buffer, 0, buffer.Length);
-                            await Task.Delay(10);
-                        }
+                        await connection.Stream.WriteAsync(buffer, 0, buffer.Length);
+                        await Task.Delay(10);
                     }
-                );
+                });
 
                 // Don't use the 5 second timeout for debug builds. This can actually take a while.
                 await requestAborted.Task.DefaultTimeout(TimeSpan.FromSeconds(30));
@@ -938,12 +920,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted = true;
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted = true;
+            });
 
             for (var i = 0; i < chunkCount; i++)
             {
@@ -1029,12 +1009,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted = true;
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted = true;
+            });
 
             context.Response.Headers[$"X-Custom-Header"] = headerStringValues;
             context.Response.ContentLength = 0;
@@ -1120,12 +1098,10 @@ public class ResponseTests : TestApplicationErrorLoggerLoggedTest
 
         async Task App(HttpContext context)
         {
-            context.RequestAborted.Register(
-                () =>
-                {
-                    requestAborted = true;
-                }
-            );
+            context.RequestAborted.Register(() =>
+            {
+                requestAborted = true;
+            });
 
             for (var i = 0; i < chunkCount; i++)
             {

@@ -208,13 +208,11 @@ public class TestClientTests
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost:12345");
         httpRequest.Version = new Version(2, 0);
-        httpRequest.Content = new PushContent(
-            async stream =>
-            {
-                requestStream = stream;
-                await requestStreamSyncPoint.WaitToContinue();
-            }
-        );
+        httpRequest.Content = new PushContent(async stream =>
+        {
+            requestStream = stream;
+            await requestStreamSyncPoint.WaitToContinue();
+        });
 
         // Act
         var response = await client
@@ -301,13 +299,11 @@ public class TestClientTests
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost:12345");
         httpRequest.Version = new Version(2, 0);
-        httpRequest.Content = new PushContent(
-            async stream =>
-            {
-                requestStream = stream;
-                await requestStreamSyncPoint.WaitToContinue();
-            }
-        );
+        httpRequest.Content = new PushContent(async stream =>
+        {
+            requestStream = stream;
+            await requestStreamSyncPoint.WaitToContinue();
+        });
 
         // Act
         var response = await client
@@ -364,13 +360,11 @@ public class TestClientTests
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost:12345");
         httpRequest.Version = new Version(2, 0);
-        httpRequest.Content = new PushContent(
-            async stream =>
-            {
-                requestStream = stream;
-                await requestStreamTcs.Task;
-            }
-        );
+        httpRequest.Content = new PushContent(async stream =>
+        {
+            requestStream = stream;
+            await requestStreamTcs.Task;
+        });
 
         // Act
         var response = await client
@@ -387,23 +381,21 @@ public class TestClientTests
         Assert.Equal("POST Response", Encoding.UTF8.GetString(buffer, 0, length));
 
         // Send large content and block on back pressure
-        var writeTask = Task.Run(
-            async () =>
+        var writeTask = Task.Run(async () =>
+        {
+            try
             {
-                try
-                {
-                    await requestStream
-                        .WriteAsync(Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50)))
-                        .AsTask()
-                        .DefaultTimeout();
-                    requestStreamTcs.SetResult(null);
-                }
-                catch (Exception ex)
-                {
-                    requestStreamTcs.SetException(ex);
-                }
+                await requestStream
+                    .WriteAsync(Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50)))
+                    .AsTask()
+                    .DefaultTimeout();
+                requestStreamTcs.SetResult(null);
             }
-        );
+            catch (Exception ex)
+            {
+                requestStreamTcs.SetException(ex);
+            }
+        });
 
         responseEndingSyncPoint.Continue();
 
@@ -437,13 +429,11 @@ public class TestClientTests
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost:12345");
         httpRequest.Version = new Version(2, 0);
-        httpRequest.Content = new PushContent(
-            async stream =>
-            {
-                requestStream = stream;
-                await requestStreamTcs.Task;
-            }
-        );
+        httpRequest.Content = new PushContent(async stream =>
+        {
+            requestStream = stream;
+            await requestStreamTcs.Task;
+        });
 
         // Act
         var response = await client
@@ -457,13 +447,11 @@ public class TestClientTests
         Assert.Equal("true", response.Headers.GetValues("test-header").Single());
 
         // Read response
-        var ex = await Assert.ThrowsAsync<IOException>(
-            async () =>
-            {
-                byte[] buffer = new byte[1024];
-                var length = await responseContent.ReadAsync(buffer).AsTask().DefaultTimeout();
-            }
-        );
+        var ex = await Assert.ThrowsAsync<IOException>(async () =>
+        {
+            byte[] buffer = new byte[1024];
+            var length = await responseContent.ReadAsync(buffer).AsTask().DefaultTimeout();
+        });
         Assert.Equal(
             "An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.",
             ex.InnerException.Message
@@ -495,13 +483,11 @@ public class TestClientTests
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost:12345");
         httpRequest.Version = new Version(2, 0);
-        httpRequest.Content = new PushContent(
-            async stream =>
-            {
-                requestStream = stream;
-                await requestStreamTcs.Task;
-            }
-        );
+        httpRequest.Content = new PushContent(async stream =>
+        {
+            requestStream = stream;
+            await requestStreamTcs.Task;
+        });
 
         // Act
         var response = await client
@@ -550,13 +536,11 @@ public class TestClientTests
 
         var httpRequest = new HttpRequestMessage(HttpMethod.Post, "http://localhost:12345");
         httpRequest.Version = new Version(2, 0);
-        httpRequest.Content = new PushContent(
-            async stream =>
-            {
-                requestStream = stream;
-                await requestStreamSyncPoint.WaitToContinue();
-            }
-        );
+        httpRequest.Content = new PushContent(async stream =>
+        {
+            requestStream = stream;
+            await requestStreamSyncPoint.WaitToContinue();
+        });
 
         // Act
         var response = await client
@@ -652,18 +636,14 @@ public class TestClientTests
             }
         };
         var builder = new WebHostBuilder()
-            .ConfigureServices(
-                services =>
-                {
-                    services.AddSingleton<ILogger<IWebHost>>(logger);
-                }
-            )
-            .Configure(
-                app =>
-                {
-                    app.Run(appDelegate);
-                }
-            );
+            .ConfigureServices(services =>
+            {
+                services.AddSingleton<ILogger<IWebHost>>(logger);
+            })
+            .Configure(app =>
+            {
+                app.Run(appDelegate);
+            });
         var server = new TestServer(builder);
 
         // Act
@@ -761,12 +741,10 @@ public class TestClientTests
                 }
             }
         };
-        var builder = new WebHostBuilder().Configure(
-            app =>
-            {
-                app.Run(appDelegate);
-            }
-        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(appDelegate);
+        });
         var server = new TestServer(builder);
 
         // Act
@@ -885,12 +863,10 @@ public class TestClientTests
                 websocket.Dispose();
             }
         };
-        var builder = new WebHostBuilder().Configure(
-            app =>
-            {
-                app.Run(appDelegate);
-            }
-        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(appDelegate);
+        });
         var server = new TestServer(builder);
 
         // Act
@@ -941,12 +917,10 @@ public class TestClientTests
                 }
             }
         };
-        var builder = new WebHostBuilder().Configure(
-            app =>
-            {
-                app.Run(appDelegate);
-            }
-        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(appDelegate);
+        });
         var server = new TestServer(builder);
 
         // Act
@@ -1022,22 +996,20 @@ public class TestClientTests
         var tcs = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
         var builder = new WebHostBuilder().Configure(
             app =>
-                app.Run(
-                    async ctx =>
+                app.Run(async ctx =>
+                {
+                    try
                     {
-                        try
-                        {
-                            await Task.Delay(TimeSpan.FromSeconds(30), ctx.RequestAborted);
-                            tcs.SetResult(0);
-                        }
-                        catch (Exception e)
-                        {
-                            tcs.SetException(e);
-                            return;
-                        }
-                        throw new InvalidOperationException("The request was not aborted");
+                        await Task.Delay(TimeSpan.FromSeconds(30), ctx.RequestAborted);
+                        tcs.SetResult(0);
                     }
-                )
+                    catch (Exception e)
+                    {
+                        tcs.SetException(e);
+                        return;
+                    }
+                    throw new InvalidOperationException("The request was not aborted");
+                })
         );
         using var server = new TestServer(builder);
         using var client = server.CreateClient();
@@ -1059,18 +1031,16 @@ public class TestClientTests
         asyncLocal.Value = value;
 
         object capturedValue = null;
-        var builder = new WebHostBuilder().Configure(
-            app =>
-            {
-                app.Run(
-                    (context) =>
-                    {
-                        capturedValue = asyncLocal.Value;
-                        return context.Response.WriteAsync("Done");
-                    }
-                );
-            }
-        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(
+                (context) =>
+                {
+                    capturedValue = asyncLocal.Value;
+                    return context.Response.WriteAsync("Done");
+                }
+            );
+        });
         var server = new TestServer(builder);
         var client = server.CreateClient();
 
@@ -1087,18 +1057,16 @@ public class TestClientTests
         asyncLocal.Value = value;
 
         object capturedValue = null;
-        var builder = new WebHostBuilder().Configure(
-            app =>
-            {
-                app.Run(
-                    (context) =>
-                    {
-                        capturedValue = asyncLocal.Value;
-                        return context.Response.WriteAsync("Done");
-                    }
-                );
-            }
-        );
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(
+                (context) =>
+                {
+                    capturedValue = asyncLocal.Value;
+                    return context.Response.WriteAsync("Done");
+                }
+            );
+        });
         var server = new TestServer(builder) { PreserveExecutionContext = true };
         var client = server.CreateClient();
 
@@ -1192,30 +1160,26 @@ public class TestClientTests
     {
         using (
             var testServer = new TestServer(
-                new WebHostBuilder().Configure(
-                    app =>
+                new WebHostBuilder().Configure(app =>
+                {
+                    app.UseWebSockets();
+                    app.Run(async c =>
                     {
-                        app.UseWebSockets();
-                        app.Run(
-                            async c =>
-                            {
-                                var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
-                                // Feature needs to exist for SignalR to verify that the server supports WebSockets
-                                Assert.NotNull(upgradeFeature);
-                                Assert.False(upgradeFeature.IsUpgradableRequest);
-                                await Assert.ThrowsAsync<NotSupportedException>(
-                                    () => upgradeFeature.UpgradeAsync()
-                                );
-
-                                var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
-                                Assert.NotNull(webSocketFeature);
-                                Assert.False(webSocketFeature.IsWebSocketRequest);
-
-                                await c.Response.WriteAsync("test");
-                            }
+                        var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
+                        // Feature needs to exist for SignalR to verify that the server supports WebSockets
+                        Assert.NotNull(upgradeFeature);
+                        Assert.False(upgradeFeature.IsUpgradableRequest);
+                        await Assert.ThrowsAsync<NotSupportedException>(
+                            () => upgradeFeature.UpgradeAsync()
                         );
-                    }
-                )
+
+                        var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
+                        Assert.NotNull(webSocketFeature);
+                        Assert.False(webSocketFeature.IsWebSocketRequest);
+
+                        await c.Response.WriteAsync("test");
+                    });
+                })
             )
         )
         {

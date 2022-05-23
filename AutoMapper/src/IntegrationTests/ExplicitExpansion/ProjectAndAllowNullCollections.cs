@@ -122,19 +122,17 @@ namespace AutoMapper.IntegrationTests.Net4
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.AllowNullCollections = true;
+            new MapperConfiguration(c =>
+            {
+                c.AllowNullCollections = true;
 
-                    c.CreateProjection<Foo, FooDto>()
-                        .ForMember(d => d.Bars, o => o.ExplicitExpansion())
-                        .ForMember(d => d.Bazs, o => o.ExplicitExpansion());
+                c.CreateProjection<Foo, FooDto>()
+                    .ForMember(d => d.Bars, o => o.ExplicitExpansion())
+                    .ForMember(d => d.Bazs, o => o.ExplicitExpansion());
 
-                    c.CreateProjection<Bar, BarDto>();
-                    c.CreateProjection<Baz, BazDto>();
-                }
-            );
+                c.CreateProjection<Bar, BarDto>();
+                c.CreateProjection<Baz, BazDto>();
+            });
 
         [Fact]
         public void Should_work()

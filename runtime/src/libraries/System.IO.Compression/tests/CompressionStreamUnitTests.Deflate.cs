@@ -61,12 +61,10 @@ namespace System.IO.Compression
             {
                 int _bufferSize = 2048;
                 var bytes = new byte[_bufferSize];
-                Assert.Throws<InvalidDataException>(
-                    () =>
-                    {
-                        cs.Read(bytes, 0, _bufferSize);
-                    }
-                );
+                Assert.Throws<InvalidDataException>(() =>
+                {
+                    cs.Read(bytes, 0, _bufferSize);
+                });
             }
         }
 

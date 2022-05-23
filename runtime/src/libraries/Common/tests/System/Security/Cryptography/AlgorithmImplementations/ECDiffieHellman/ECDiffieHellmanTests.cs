@@ -184,13 +184,11 @@ namespace System.Security.Cryptography.EcDiffieHellman.Tests
             );
 
             // Either set_KeySize or the ExportParameters should throw.
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    key.KeySize = 384;
-                    key.ExportParameters(false);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                key.KeySize = 384;
+                key.ExportParameters(false);
+            });
         }
 
 #if NETCOREAPP

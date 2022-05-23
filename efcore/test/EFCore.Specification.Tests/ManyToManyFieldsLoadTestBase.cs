@@ -720,19 +720,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(left.TwoSkip), nameof(EntityOne)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await collectionEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                collectionEntry.Load();
-                            }
+                            await collectionEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            collectionEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }

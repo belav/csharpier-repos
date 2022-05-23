@@ -15,16 +15,14 @@ namespace System.Drawing
     public class ColorConverter : TypeConverter
     {
         private static readonly Lazy<StandardValuesCollection> s_valuesLazy =
-            new Lazy<StandardValuesCollection>(
-                () =>
-                {
-                    // We must take the value from each hashtable and combine them.
-                    var set = new HashSet<Color>(ColorTable.Colors.Values);
-                    return new StandardValuesCollection(
-                        set.OrderBy(c => c, new ColorComparer()).ToList()
-                    );
-                }
-            );
+            new Lazy<StandardValuesCollection>(() =>
+            {
+                // We must take the value from each hashtable and combine them.
+                var set = new HashSet<Color>(ColorTable.Colors.Values);
+                return new StandardValuesCollection(
+                    set.OrderBy(c => c, new ColorComparer()).ToList()
+                );
+            });
 
         public ColorConverter() { }
 

@@ -180,37 +180,29 @@ namespace Microsoft.EntityFrameworkCore
             context.ChangeTracker.LazyLoadingEnabled = false;
 
             var left = ExpectLazyLoading
-                ? context.CreateProxy<EntityOne>(
-                    b =>
+                ? context.CreateProxy<EntityOne>(b =>
+                {
+                    b.Id = 7776;
+                    b.TwoSkip = new ObservableCollection<EntityTwo> { new() { Id = 7777 } };
+                    b.TwoSkipShared = new ObservableCollection<EntityTwo> { new() { Id = 7778 } };
+                    b.SelfSkipPayloadLeft = new ObservableCollection<EntityOne>
                     {
-                        b.Id = 7776;
-                        b.TwoSkip = new ObservableCollection<EntityTwo> { new() { Id = 7777 } };
-                        b.TwoSkipShared = new ObservableCollection<EntityTwo>
-                        {
-                            new() { Id = 7778 }
-                        };
-                        b.SelfSkipPayloadLeft = new ObservableCollection<EntityOne>
-                        {
-                            new() { Id = 7779 }
-                        };
-                        b.SelfSkipPayloadRight = new ObservableCollection<EntityOne>
-                        {
-                            new() { Id = 7780 }
-                        };
-                        b.BranchSkip = new ObservableCollection<EntityBranch>
-                        {
-                            new() { Id = 7781 }
-                        };
-                        b.ThreeSkipPayloadFull = new ObservableCollection<EntityThree>
-                        {
-                            new() { Id = 7782 }
-                        };
-                        b.ThreeSkipPayloadFullShared = new ObservableCollection<EntityThree>
-                        {
-                            new() { Id = 7783 }
-                        };
-                    }
-                )
+                        new() { Id = 7779 }
+                    };
+                    b.SelfSkipPayloadRight = new ObservableCollection<EntityOne>
+                    {
+                        new() { Id = 7780 }
+                    };
+                    b.BranchSkip = new ObservableCollection<EntityBranch> { new() { Id = 7781 } };
+                    b.ThreeSkipPayloadFull = new ObservableCollection<EntityThree>
+                    {
+                        new() { Id = 7782 }
+                    };
+                    b.ThreeSkipPayloadFullShared = new ObservableCollection<EntityThree>
+                    {
+                        new() { Id = 7783 }
+                    };
+                })
                 : new EntityOne
                 {
                     Id = 7776,
@@ -829,19 +821,17 @@ namespace Microsoft.EntityFrameworkCore
             Assert.Equal(
                 CoreStrings.CannotLoadDetached(nameof(left.TwoSkip), nameof(EntityOne)),
                 (
-                    await Assert.ThrowsAsync<InvalidOperationException>(
-                        async () =>
+                    await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+                    {
+                        if (async)
                         {
-                            if (async)
-                            {
-                                await collectionEntry.LoadAsync();
-                            }
-                            else
-                            {
-                                collectionEntry.Load();
-                            }
+                            await collectionEntry.LoadAsync();
                         }
-                    )
+                        else
+                        {
+                            collectionEntry.Load();
+                        }
+                    })
                 ).Message
             );
         }

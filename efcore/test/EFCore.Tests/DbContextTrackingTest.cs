@@ -2192,13 +2192,11 @@ namespace Microsoft.EntityFrameworkCore
 
             protected internal override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Parent77>(
-                    b =>
-                    {
-                        b.HasMany<Optional77>().WithOne(e => e.Parent77);
-                        b.HasMany<Required77>().WithOne(e => e.Parent77);
-                    }
-                );
+                modelBuilder.Entity<Parent77>(b =>
+                {
+                    b.HasMany<Optional77>().WithOne(e => e.Parent77);
+                    b.HasMany<Required77>().WithOne(e => e.Parent77);
+                });
             }
         }
 

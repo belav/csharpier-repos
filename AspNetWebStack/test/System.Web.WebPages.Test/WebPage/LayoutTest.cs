@@ -159,14 +159,12 @@ namespace System.Web.WebPages.Test
                 layout1Path
             );
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "MyPage";
-                    p.Layout = "Layout1.cshtml";
-                    p.WriteLiteral("hello world");
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "MyPage";
+                p.Layout = "Layout1.cshtml";
+                p.WriteLiteral("hello world");
+            });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
 
@@ -279,28 +277,26 @@ namespace System.Web.WebPages.Test
                 layout1Path
             );
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "MyPage";
-                    p.Layout = "Layout1.cshtml";
-                    p.DefineSection(
-                        "header1",
-                        () =>
-                        {
-                            p.WriteLiteral("index header");
-                        }
-                    );
-                    p.WriteLiteral("hello world");
-                    p.DefineSection(
-                        "footer1",
-                        () =>
-                        {
-                            p.WriteLiteral("index footer");
-                        }
-                    );
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "MyPage";
+                p.Layout = "Layout1.cshtml";
+                p.DefineSection(
+                    "header1",
+                    () =>
+                    {
+                        p.WriteLiteral("index header");
+                    }
+                );
+                p.WriteLiteral("hello world");
+                p.DefineSection(
+                    "footer1",
+                    () =>
+                    {
+                        p.WriteLiteral("index footer");
+                    }
+                );
+            });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
 
@@ -366,19 +362,17 @@ namespace System.Web.WebPages.Test
                 layout1Path
             );
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = "Layout1.cshtml";
-                    p.DefineSection(
-                        "body",
-                        () =>
-                        {
-                            p.WriteLiteral("body in index");
-                        }
-                    );
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = "Layout1.cshtml";
+                p.DefineSection(
+                    "body",
+                    () =>
+                    {
+                        p.WriteLiteral("body in index");
+                    }
+                );
+            });
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layout1, layout2);
 
@@ -426,13 +420,11 @@ namespace System.Web.WebPages.Test
         public void MissingLayoutPageTest()
         {
             var layoutPage = "Layout.cshtml";
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.PageData["Title"] = "MyPage";
-                    p.Layout = layoutPage;
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.PageData["Title"] = "MyPage";
+                p.Layout = layoutPage;
+            });
             var layoutPath1 = "~/Layout.cshtml";
 
             Assert.Throws<HttpException>(
@@ -486,12 +478,10 @@ namespace System.Web.WebPages.Test
         public void RenderBodyCalledDirectlyTest()
         {
             // A Page that is not a layout page calls the RenderBody method
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.RenderBody();
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.RenderBody();
+            });
             Assert.Throws<HttpException>(
                 () => Utils.RenderWebPage(page),
                 String.Format(
@@ -507,12 +497,10 @@ namespace System.Web.WebPages.Test
         public void RenderSectionCalledDirectlyTest()
         {
             // A Page that is not a layout page calls the RenderBody method
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.RenderSection("");
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.RenderSection("");
+            });
             Assert.Throws<HttpException>(
                 () => Utils.RenderWebPage(page),
                 String.Format(
@@ -529,14 +517,12 @@ namespace System.Web.WebPages.Test
         {
             // The page calls DefineSection more than once on the same name
             var sectionName = "header";
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = "Layout.cshtml";
-                    p.DefineSection(sectionName, () => { });
-                    p.DefineSection(sectionName, () => { });
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = "Layout.cshtml";
+                p.DefineSection(sectionName, () => { });
+                p.DefineSection(sectionName, () => { });
+            });
 
             Assert.Throws<HttpException>(
                 () => Utils.RenderWebPage(page),
@@ -555,14 +541,12 @@ namespace System.Web.WebPages.Test
             var name1 = "section1";
             var name2 = "SecTion1";
 
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = "Layout.cshtml";
-                    p.DefineSection(name1, () => { });
-                    p.DefineSection(name2, () => { });
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = "Layout.cshtml";
+                p.DefineSection(name1, () => { });
+                p.DefineSection(name2, () => { });
+            });
 
             Assert.Throws<HttpException>(
                 () => Utils.RenderWebPage(page),
@@ -711,13 +695,11 @@ namespace System.Web.WebPages.Test
         {
             var layoutPath = "~/Layout.js";
             var contents = "hello world";
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = layoutPath;
-                    p.Write(contents);
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = layoutPath;
+                p.Write(contents);
+            });
             var layoutPage = new object();
 
             var objectFactory = new Mock<IVirtualPathFactory>();
@@ -753,13 +735,11 @@ namespace System.Web.WebPages.Test
         {
             var layoutPath = "~/Layout.js";
             var contents = "hello world";
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.Layout = layoutPath;
-                    p.Write(contents);
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.Layout = layoutPath;
+                p.Write(contents);
+            });
             var layoutPage = Utils.CreatePage(p => p.WriteLiteral(p.RenderBody()), layoutPath);
 
             Utils.AssignObjectFactoriesAndDisplayModeProvider(page, layoutPage);
@@ -856,20 +836,18 @@ namespace System.Web.WebPages.Test
         {
             //Dev10 bug 928341 - a page that has a layout page, and the page calls RenderPage should not cause an error
             var layoutPagePath = "~/layout.cshtml";
-            var page = Utils.CreatePage(
-                p =>
-                {
-                    p.DefineSection(
-                        "foo",
-                        () =>
-                        {
-                            p.Write("This is foo");
-                        }
-                    );
-                    p.Write(p.RenderPage("bar.cshtml"));
-                    p.Layout = layoutPagePath;
-                }
-            );
+            var page = Utils.CreatePage(p =>
+            {
+                p.DefineSection(
+                    "foo",
+                    () =>
+                    {
+                        p.Write("This is foo");
+                    }
+                );
+                p.Write(p.RenderPage("bar.cshtml"));
+                p.Layout = layoutPagePath;
+            });
             var layoutPage = Utils.CreatePage(
                 p =>
                 {

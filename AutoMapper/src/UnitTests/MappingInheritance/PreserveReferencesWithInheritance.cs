@@ -69,22 +69,20 @@ namespace AutoMapper.UnitTests
         List<Target.Member> _destination;
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source.Instance, Target.Instance>()
-                        .Include<Source.Class, Target.Class>()
-                        .Include<Source.Member, Target.Member>();
-                    cfg.CreateMap<Source.Member, Target.Member>()
-                        .Include<Source.Property, Target.Property>()
-                        .Include<Source.Parameter, Target.Parameter>()
-                        .Include<Source.Field, Target.Field>();
-                    cfg.CreateMap<Source.Class, Target.Class>();
-                    cfg.CreateMap<Source.Property, Target.Property>();
-                    cfg.CreateMap<Source.Parameter, Target.Parameter>();
-                    cfg.CreateMap<Source.Field, Target.Field>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source.Instance, Target.Instance>()
+                    .Include<Source.Class, Target.Class>()
+                    .Include<Source.Member, Target.Member>();
+                cfg.CreateMap<Source.Member, Target.Member>()
+                    .Include<Source.Property, Target.Property>()
+                    .Include<Source.Parameter, Target.Parameter>()
+                    .Include<Source.Field, Target.Field>();
+                cfg.CreateMap<Source.Class, Target.Class>();
+                cfg.CreateMap<Source.Property, Target.Property>();
+                cfg.CreateMap<Source.Parameter, Target.Parameter>();
+                cfg.CreateMap<Source.Field, Target.Field>();
+            });
 
         protected override void Because_of()
         {

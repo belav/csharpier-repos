@@ -103,18 +103,16 @@ namespace System.Web.Http
         public async Task ProcessBatchAsync_CallsRegisterForDispose()
         {
             List<IDisposable> expectedResourcesForDisposal = new List<IDisposable>();
-            MockHttpServer server = new MockHttpServer(
-                request =>
+            MockHttpServer server = new MockHttpServer(request =>
+            {
+                var tmpContent = new StringContent(String.Empty);
+                request.RegisterForDispose(tmpContent);
+                expectedResourcesForDisposal.Add(tmpContent);
+                return new HttpResponseMessage
                 {
-                    var tmpContent = new StringContent(String.Empty);
-                    request.RegisterForDispose(tmpContent);
-                    expectedResourcesForDisposal.Add(tmpContent);
-                    return new HttpResponseMessage
-                    {
-                        Content = new StringContent(request.RequestUri.AbsoluteUri)
-                    };
-                }
-            );
+                    Content = new StringContent(request.RequestUri.AbsoluteUri)
+                };
+            });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
             HttpRequestMessage batchRequest = new HttpRequestMessage
             {
@@ -167,15 +165,13 @@ namespace System.Web.Http
         [Fact]
         public async Task ExecuteRequestMessagesAsync_CallsInvokerForEachRequest()
         {
-            MockHttpServer server = new MockHttpServer(
-                request =>
+            MockHttpServer server = new MockHttpServer(request =>
+            {
+                return new HttpResponseMessage
                 {
-                    return new HttpResponseMessage
-                    {
-                        Content = new StringContent(request.RequestUri.AbsoluteUri)
-                    };
-                }
-            );
+                    Content = new StringContent(request.RequestUri.AbsoluteUri)
+                };
+            });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
@@ -197,18 +193,16 @@ namespace System.Web.Http
         public async Task ExecuteRequestMessagesAsync_DisposesResponseInCaseOfException()
         {
             List<DisposableResponseMessage> responses = new List<DisposableResponseMessage>();
-            MockHttpServer server = new MockHttpServer(
-                request =>
+            MockHttpServer server = new MockHttpServer(request =>
+            {
+                if (request.Method == HttpMethod.Put)
                 {
-                    if (request.Method == HttpMethod.Put)
-                    {
-                        throw new InvalidOperationException();
-                    }
-                    var response = new DisposableResponseMessage();
-                    responses.Add(response);
-                    return response;
+                    throw new InvalidOperationException();
                 }
-            );
+                var response = new DisposableResponseMessage();
+                responses.Add(response);
+                return response;
+            });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server);
             HttpRequestMessage[] requests = new HttpRequestMessage[]
             {
@@ -233,17 +227,15 @@ namespace System.Web.Http
         {
             List<HttpRequestMessage> completedRequests = new List<HttpRequestMessage>();
 
-            MockHttpServer server = new MockHttpServer(
-                async request =>
+            MockHttpServer server = new MockHttpServer(async request =>
+            {
+                if (request.Method == HttpMethod.Get)
                 {
-                    if (request.Method == HttpMethod.Get)
-                    {
-                        await Task.Delay(2000);
-                    }
-                    completedRequests.Add(request);
-                    return new HttpResponseMessage();
+                    await Task.Delay(2000);
                 }
-            );
+                completedRequests.Add(request);
+                return new HttpResponseMessage();
+            });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server)
             {
                 ExecutionOrder = BatchExecutionOrder.NonSequential
@@ -266,17 +258,15 @@ namespace System.Web.Http
         {
             List<HttpRequestMessage> completedRequests = new List<HttpRequestMessage>();
 
-            MockHttpServer server = new MockHttpServer(
-                async request =>
+            MockHttpServer server = new MockHttpServer(async request =>
+            {
+                if (request.Method == HttpMethod.Get)
                 {
-                    if (request.Method == HttpMethod.Get)
-                    {
-                        await Task.Delay(2000);
-                    }
-                    completedRequests.Add(request);
-                    return new HttpResponseMessage();
+                    await Task.Delay(2000);
                 }
-            );
+                completedRequests.Add(request);
+                return new HttpResponseMessage();
+            });
             DefaultHttpBatchHandler batchHandler = new DefaultHttpBatchHandler(server)
             {
                 ExecutionOrder = BatchExecutionOrder.Sequential

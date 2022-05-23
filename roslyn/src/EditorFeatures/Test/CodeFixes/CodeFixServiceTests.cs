@@ -551,20 +551,18 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeFixes
 
                 public override void Initialize(AnalysisContext context)
                 {
-                    context.RegisterSyntaxTreeAction(
-                        c =>
+                    context.RegisterSyntaxTreeAction(c =>
+                    {
+                        foreach (var descriptor in SupportedDiagnostics)
                         {
-                            foreach (var descriptor in SupportedDiagnostics)
-                            {
-                                c.ReportDiagnostic(
-                                    Diagnostic.Create(
-                                        descriptor,
-                                        c.Tree.GetLocation(TextSpan.FromBounds(0, 0))
-                                    )
-                                );
-                            }
+                            c.ReportDiagnostic(
+                                Diagnostic.Create(
+                                    descriptor,
+                                    c.Tree.GetLocation(TextSpan.FromBounds(0, 0))
+                                )
+                            );
                         }
-                    );
+                    });
                 }
             }
         }

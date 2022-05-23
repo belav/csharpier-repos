@@ -103,112 +103,100 @@ namespace Microsoft.WebAssembly.Diagnostics
         )
         {
             Uri devToolsHost = options.DevToolsUrl;
-            app.UseRouter(
-                router =>
+            app.UseRouter(router =>
+            {
+                router.MapGet("/", Copy);
+                router.MapGet("/favicon.ico", Copy);
+                router.MapGet("json", RewriteArray);
+                router.MapGet("json/list", RewriteArray);
+                router.MapGet("json/version", RewriteSingle);
+                router.MapGet("json/new", RewriteSingle);
+                router.MapGet("devtools/page/{pageId}", ConnectProxy);
+                router.MapGet("devtools/browser/{pageId}", ConnectProxy);
+
+                string GetEndpoint(HttpContext context)
                 {
-                    router.MapGet("/", Copy);
-                    router.MapGet("/favicon.ico", Copy);
-                    router.MapGet("json", RewriteArray);
-                    router.MapGet("json/list", RewriteArray);
-                    router.MapGet("json/version", RewriteSingle);
-                    router.MapGet("json/new", RewriteSingle);
-                    router.MapGet("devtools/page/{pageId}", ConnectProxy);
-                    router.MapGet("devtools/browser/{pageId}", ConnectProxy);
+                    HttpRequest request = context.Request;
+                    PathString requestPath = request.Path;
+                    return $"{devToolsHost.Scheme}://{devToolsHost.Authority}{request.Path}{request.QueryString}";
+                }
 
-                    string GetEndpoint(HttpContext context)
+                async Task Copy(HttpContext context)
+                {
+                    using (var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) })
                     {
-                        HttpRequest request = context.Request;
-                        PathString requestPath = request.Path;
-                        return $"{devToolsHost.Scheme}://{devToolsHost.Authority}{request.Path}{request.QueryString}";
-                    }
-
-                    async Task Copy(HttpContext context)
-                    {
-                        using (
-                            var httpClient = new HttpClient { Timeout = TimeSpan.FromSeconds(5) }
-                        )
-                        {
-                            HttpResponseMessage response = await httpClient.GetAsync(
-                                GetEndpoint(context)
-                            );
-                            context.Response.ContentType =
-                                response.Content.Headers.ContentType.ToString();
-                            if ((response.Content.Headers.ContentLength ?? 0) > 0)
-                                context.Response.ContentLength = response
-                                    .Content
-                                    .Headers
-                                    .ContentLength;
-                            byte[] bytes = await response.Content.ReadAsByteArrayAsync();
-                            await context.Response.Body.WriteAsync(bytes);
-                        }
-                    }
-
-                    async Task RewriteSingle(HttpContext context)
-                    {
-                        Dictionary<string, string> version = await ProxyGetJsonAsync<
-                            Dictionary<string, string>
-                        >(GetEndpoint(context));
-                        context.Response.ContentType = "application/json";
-                        await context.Response.WriteAsync(
-                            JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
+                        HttpResponseMessage response = await httpClient.GetAsync(
+                            GetEndpoint(context)
                         );
-                    }
-
-                    async Task RewriteArray(HttpContext context)
-                    {
-                        Dictionary<string, string>[] tabs = await ProxyGetJsonAsync<Dictionary<
-                                string,
-                                string
-                            >[]>(GetEndpoint(context));
-                        Dictionary<string, string>[] alteredTabs = tabs.Select(
-                                t => mapFunc(t, context, devToolsHost)
-                            )
-                            .ToArray();
-                        context.Response.ContentType = "application/json";
-                        await context.Response.WriteAsync(JsonSerializer.Serialize(alteredTabs));
-                    }
-
-                    async Task ConnectProxy(HttpContext context)
-                    {
-                        if (!context.WebSockets.IsWebSocketRequest)
-                        {
-                            context.Response.StatusCode = 400;
-                            return;
-                        }
-
-                        var endpoint = new Uri(
-                            $"ws://{devToolsHost.Authority}{context.Request.Path}"
-                        );
-                        try
-                        {
-                            using ILoggerFactory loggerFactory = LoggerFactory.Create(
-                                builder =>
-                                    builder
-                                        .AddSimpleConsole(options => options.SingleLine = true)
-                                        .AddFilter(null, LogLevel.Information)
-                            );
-
-                            context.Request.Query.TryGetValue(
-                                "urlSymbolServer",
-                                out StringValues urlSymbolServerList
-                            );
-                            var proxy = new DebuggerProxy(
-                                loggerFactory,
-                                urlSymbolServerList.ToList()
-                            );
-
-                            System.Net.WebSockets.WebSocket ideSocket =
-                                await context.WebSockets.AcceptWebSocketAsync();
-
-                            await proxy.Run(endpoint, ideSocket);
-                        }
-                        catch (Exception e)
-                        {
-                            Console.WriteLine("got exception {0}", e);
-                        }
+                        context.Response.ContentType =
+                            response.Content.Headers.ContentType.ToString();
+                        if ((response.Content.Headers.ContentLength ?? 0) > 0)
+                            context.Response.ContentLength = response.Content.Headers.ContentLength;
+                        byte[] bytes = await response.Content.ReadAsByteArrayAsync();
+                        await context.Response.Body.WriteAsync(bytes);
                     }
                 }
-            );
+
+                async Task RewriteSingle(HttpContext context)
+                {
+                    Dictionary<string, string> version = await ProxyGetJsonAsync<
+                        Dictionary<string, string>
+                    >(GetEndpoint(context));
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync(
+                        JsonSerializer.Serialize(mapFunc(version, context, devToolsHost))
+                    );
+                }
+
+                async Task RewriteArray(HttpContext context)
+                {
+                    Dictionary<string, string>[] tabs = await ProxyGetJsonAsync<Dictionary<
+                            string,
+                            string
+                        >[]>(GetEndpoint(context));
+                    Dictionary<string, string>[] alteredTabs = tabs.Select(
+                            t => mapFunc(t, context, devToolsHost)
+                        )
+                        .ToArray();
+                    context.Response.ContentType = "application/json";
+                    await context.Response.WriteAsync(JsonSerializer.Serialize(alteredTabs));
+                }
+
+                async Task ConnectProxy(HttpContext context)
+                {
+                    if (!context.WebSockets.IsWebSocketRequest)
+                    {
+                        context.Response.StatusCode = 400;
+                        return;
+                    }
+
+                    var endpoint = new Uri($"ws://{devToolsHost.Authority}{context.Request.Path}");
+                    try
+                    {
+                        using ILoggerFactory loggerFactory = LoggerFactory.Create(
+                            builder =>
+                                builder
+                                    .AddSimpleConsole(options => options.SingleLine = true)
+                                    .AddFilter(null, LogLevel.Information)
+                        );
+
+                        context.Request.Query.TryGetValue(
+                            "urlSymbolServer",
+                            out StringValues urlSymbolServerList
+                        );
+                        var proxy = new DebuggerProxy(loggerFactory, urlSymbolServerList.ToList());
+
+                        System.Net.WebSockets.WebSocket ideSocket =
+                            await context.WebSockets.AcceptWebSocketAsync();
+
+                        await proxy.Run(endpoint, ideSocket);
+                    }
+                    catch (Exception e)
+                    {
+                        Console.WriteLine("got exception {0}", e);
+                    }
+                }
+            });
             return app;
         }
 

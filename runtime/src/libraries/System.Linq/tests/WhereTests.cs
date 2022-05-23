@@ -488,13 +488,11 @@ namespace System.Linq.Tests
             IEnumerable<int> source = Enumerable.Empty<int>();
             bool wasSelectorCalled = false;
 
-            IEnumerable<int> result = source.Where(
-                value =>
-                {
-                    wasSelectorCalled = true;
-                    return true;
-                }
-            );
+            IEnumerable<int> result = source.Where(value =>
+            {
+                wasSelectorCalled = true;
+                return true;
+            });
 
             Assert.Equal(0, result.Count());
             Assert.False(wasSelectorCalled);
@@ -1164,12 +1162,10 @@ namespace System.Linq.Tests
         {
             var infiniteWhere = new FastInfiniteEnumerator<int>().Where((e, i) => true);
             using (var en = infiniteWhere.GetEnumerator())
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        while (en.MoveNext()) { }
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    while (en.MoveNext()) { }
+                });
         }
 
         [Fact]

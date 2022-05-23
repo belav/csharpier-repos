@@ -416,12 +416,10 @@ namespace System.Web.Helpers
             var imageFormat = ConvertStringToChartImageFormat(format);
             using (MemoryStream stream = new MemoryStream())
             {
-                ExecuteChartAction(
-                    c =>
-                    {
-                        c.SaveImage(stream, imageFormat);
-                    }
-                );
+                ExecuteChartAction(c =>
+                {
+                    c.SaveImage(stream, imageFormat);
+                });
                 return stream.ToArray();
             }
         }
@@ -461,13 +459,11 @@ namespace System.Web.Helpers
             var imageFormat = ConvertStringToChartImageFormat(format);
 
             _path = VirtualPathUtil.MapPath(httpContext, path);
-            ExecuteChartAction(
-                c =>
-                {
-                    c.RenderType = RenderType.ImageTag;
-                    c.SaveImage(FileName, imageFormat);
-                }
-            );
+            ExecuteChartAction(c =>
+            {
+                c.RenderType = RenderType.ImageTag;
+                c.SaveImage(FileName, imageFormat);
+            });
             return this;
         }
 
@@ -517,12 +513,10 @@ namespace System.Web.Helpers
                 );
             }
 
-            ExecuteChartAction(
-                c =>
-                {
-                    c.SaveXml(VirtualPathUtil.MapPath(httpContext, path));
-                }
-            );
+            ExecuteChartAction(c =>
+            {
+                c.SaveXml(VirtualPathUtil.MapPath(httpContext, path));
+            });
             return this;
         }
 

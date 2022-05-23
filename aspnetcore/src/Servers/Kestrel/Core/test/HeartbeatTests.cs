@@ -38,13 +38,11 @@ public class HeartbeatTests : LoggedTest
 
         heartbeatHandler
             .Setup(h => h.OnHeartbeat(now))
-            .Callback(
-                () =>
-                {
-                    handlerStartedTcs.SetResult();
-                    handlerMre.Wait();
-                }
-            );
+            .Callback(() =>
+            {
+                handlerStartedTcs.SetResult();
+                handlerMre.Wait();
+            });
         debugger.Setup(d => d.IsAttached).Returns(false);
 
         Task blockedHeartbeatTask;
@@ -99,13 +97,11 @@ public class HeartbeatTests : LoggedTest
 
         heartbeatHandler
             .Setup(h => h.OnHeartbeat(now))
-            .Callback(
-                () =>
-                {
-                    handlerStartedTcs.SetResult();
-                    handlerMre.Wait();
-                }
-            );
+            .Callback(() =>
+            {
+                handlerStartedTcs.SetResult();
+                handlerMre.Wait();
+            });
 
         debugger.Setup(d => d.IsAttached).Returns(true);
 

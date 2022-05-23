@@ -68,13 +68,11 @@ namespace Microsoft.EntityFrameworkCore.Query
             {
                 base.OnModelCreating(modelBuilder, context);
 
-                modelBuilder.Entity<MappedCustomer>(
-                    e =>
-                    {
-                        e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
-                        e.Metadata.SetTableName("Customers");
-                    }
-                );
+                modelBuilder.Entity<MappedCustomer>(e =>
+                {
+                    e.Property(c => c.CompanyName2).Metadata.SetColumnName("CompanyName");
+                    e.Metadata.SetTableName("Customers");
+                });
             }
         }
     }

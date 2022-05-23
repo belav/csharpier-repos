@@ -18,12 +18,10 @@ public class HttpRequestPipeReaderTests
         pipeReader.StopAcceptingReads();
 
         // Validation for ReadAsync occurs in an async method in ReadOnlyPipeStream.
-        await Assert.ThrowsAsync<ObjectDisposedException>(
-            async () =>
-            {
-                await pipeReader.ReadAsync();
-            }
-        );
+        await Assert.ThrowsAsync<ObjectDisposedException>(async () =>
+        {
+            await pipeReader.ReadAsync();
+        });
     }
 
     [Fact]

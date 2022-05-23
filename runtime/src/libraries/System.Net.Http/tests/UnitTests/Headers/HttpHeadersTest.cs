@@ -450,12 +450,10 @@ namespace System.Net.Http.Tests
             MockHeaders headers = new MockHeaders();
             string[] values = null;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    headers.TryAddWithoutValidation(headers.Descriptor, values);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                headers.TryAddWithoutValidation(headers.Descriptor, values);
+            });
         }
 
         [Theory]
@@ -480,12 +478,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(headerName, "value");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(headerName, "value");
+            });
         }
 
         [Fact]
@@ -536,12 +532,10 @@ namespace System.Net.Http.Tests
         {
             // Since Add() immediately parses the value, it will throw an exception if the value is invalid.
             MockHeaders headers = new MockHeaders();
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(headers.Descriptor, invalidHeaderValue);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(headers.Descriptor, invalidHeaderValue);
+            });
 
             // Make sure the header did not get added to the store.
             Assert.False(
@@ -556,12 +550,10 @@ namespace System.Net.Http.Tests
             MockHeaders headers = new MockHeaders();
             headers.Add(headers.Descriptor, rawPrefix);
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(headers.Descriptor, invalidHeaderValue);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(headers.Descriptor, invalidHeaderValue);
+            });
 
             // Make sure the header did not get removed due to the failed add.
             Assert.True(
@@ -577,12 +569,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(headers.Descriptor, new string[] { invalidHeaderValue });
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(headers.Descriptor, new string[] { invalidHeaderValue });
+            });
 
             // Make sure the header did not get added since we just tried to add an invalid value.
             Assert.False(
@@ -597,15 +587,13 @@ namespace System.Net.Http.Tests
             MockHeaders headers = new MockHeaders();
             headers.Add(headers.Descriptor, rawPrefix + "1");
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(
-                        headers.Descriptor,
-                        new string[] { rawPrefix + "2", invalidHeaderValue }
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(
+                    headers.Descriptor,
+                    new string[] { rawPrefix + "2", invalidHeaderValue }
+                );
+            });
 
             // Make sure the header did not get removed due to the failed add. Note that the first value in the array
             // is valid, so it gets added. I.e. we have 2 values.
@@ -623,15 +611,13 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(
-                        headers.Descriptor,
-                        new string[] { rawPrefix + "1", invalidHeaderValue }
-                    );
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(
+                    headers.Descriptor,
+                    new string[] { rawPrefix + "1", invalidHeaderValue }
+                );
+            });
 
             // Make sure the header got added due to the valid add. Note that the first value in the array
             // is valid, so it gets added.
@@ -673,12 +659,10 @@ namespace System.Net.Http.Tests
 
             headers.Add(headers.Descriptor, rawPrefix + "1");
             // Can only add headers once.
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(headers.Descriptor, rawPrefix + "2");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(headers.Descriptor, rawPrefix + "2");
+            });
 
             // Verify that the first header value is still there.
             Assert.Equal(1, headers.First().Value.Count());
@@ -796,12 +780,10 @@ namespace System.Net.Http.Tests
             MockHeaders headers = new MockHeaders(parser);
 
             headers.TryAddWithoutValidation(headers.Descriptor, rawPrefix + "1");
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Add(headers.Descriptor, rawPrefix + "2");
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Add(headers.Descriptor, rawPrefix + "2");
+            });
         }
 
         [Fact]
@@ -869,12 +851,10 @@ namespace System.Net.Http.Tests
             MockHeaders headers = new MockHeaders();
             string[] values = null;
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    headers.Add(headers.Descriptor, values);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                headers.Add(headers.Descriptor, values);
+            });
         }
 
         [Fact]
@@ -1182,12 +1162,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Remove(headerName);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Remove(headerName);
+            });
         }
 
         [Fact]
@@ -1338,12 +1316,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.GetValues(headerName);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.GetValues(headerName);
+            });
         }
 
         [Fact]
@@ -1352,12 +1328,10 @@ namespace System.Net.Http.Tests
             MockHeaders headers = new MockHeaders();
 
             // Get header values from uninitialized store (store collection is null). This will throw.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.GetValues("doesntexist");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.GetValues("doesntexist");
+            });
         }
 
         [Fact]
@@ -1367,12 +1341,10 @@ namespace System.Net.Http.Tests
             headers.Add("custom1", "customValue1");
 
             // Get header values for non-existing header (but other headers exist in the store).
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    headers.GetValues("doesntexist");
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                headers.GetValues("doesntexist");
+            });
         }
 
         [Fact]
@@ -1748,12 +1720,10 @@ namespace System.Net.Http.Tests
         {
             MockHeaders headers = new MockHeaders();
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    headers.Contains(headerName);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                headers.Contains(headerName);
+            });
         }
 
         [Fact]

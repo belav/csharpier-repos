@@ -81,12 +81,10 @@ namespace System.ComponentModel.Composition
             var provider = CreateAggregateExportProvider();
             provider.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    var providers = provider.Providers;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                var providers = provider.Providers;
+            });
         }
 
         private AggregateExportProvider CreateAggregateExportProvider()

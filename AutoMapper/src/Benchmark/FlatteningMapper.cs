@@ -14,14 +14,12 @@ namespace Benchmark.Flattening
 
         public void Initialize()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Address, Address>();
-                    cfg.CreateMap<Address, AddressDTO>();
-                    cfg.CreateMap<Customer, CustomerDTO>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Address, Address>();
+                cfg.CreateMap<Address, AddressDTO>();
+                cfg.CreateMap<Customer, CustomerDTO>();
+            });
             config.AssertConfigurationIsValid();
             _mapper = config.CreateMapper();
             _customer = new Customer()
@@ -282,13 +280,11 @@ namespace Benchmark.Flattening
 
         public void Initialize()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Foo, FooDest>();
-                    cfg.CreateMap<InnerFoo, InnerFooDest>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Foo, FooDest>();
+                cfg.CreateMap<InnerFoo, InnerFooDest>();
+            });
             config.AssertConfigurationIsValid();
             _mapper = config.CreateMapper();
             _foo = Foo.New();
@@ -516,22 +512,20 @@ namespace Benchmark.Flattening
 
         public void Initialize()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Model1, Dto1>();
-                    cfg.CreateMap<Model2, Dto2>();
-                    cfg.CreateMap<Model3, Dto3>();
-                    cfg.CreateMap<Model4, Dto4>();
-                    cfg.CreateMap<Model5, Dto5>();
-                    cfg.CreateMap<Model6, Dto6>();
-                    cfg.CreateMap<Model7, Dto7>();
-                    cfg.CreateMap<Model8, Dto8>();
-                    cfg.CreateMap<Model9, Dto9>();
-                    cfg.CreateMap<Model10, Dto10>();
-                    cfg.CreateMap<ModelObject, ModelDto>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Model1, Dto1>();
+                cfg.CreateMap<Model2, Dto2>();
+                cfg.CreateMap<Model3, Dto3>();
+                cfg.CreateMap<Model4, Dto4>();
+                cfg.CreateMap<Model5, Dto5>();
+                cfg.CreateMap<Model6, Dto6>();
+                cfg.CreateMap<Model7, Dto7>();
+                cfg.CreateMap<Model8, Dto8>();
+                cfg.CreateMap<Model9, Dto9>();
+                cfg.CreateMap<Model10, Dto10>();
+                cfg.CreateMap<ModelObject, ModelDto>();
+            });
             config.AssertConfigurationIsValid();
             _mapper = config.CreateMapper();
             _source = new ModelObject

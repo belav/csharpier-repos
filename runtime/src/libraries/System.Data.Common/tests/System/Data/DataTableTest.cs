@@ -818,27 +818,23 @@ Assert.False(true);
             DataRelation dr = new DataRelation("DR", table.Columns[0], table1.Columns[0]);
             set.Relations.Add(dr);
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    // Set to a different sensitivity than before: this breaks the DataRelation constraint
-                    // because it is not the sensitivity of the related table
-                    table.CaseSensitive = true;
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // Set to a different sensitivity than before: this breaks the DataRelation constraint
+                // because it is not the sensitivity of the related table
+                table.CaseSensitive = true;
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    // Set to a different culture than before: this breaks the DataRelation constraint
-                    // because it is not the locale of the related table
-                    CultureInfo cultureInfo =
-                        table.Locale.Name == "en-US"
-                            ? new CultureInfo("en-GB")
-                            : new CultureInfo("en-US");
-                    table.Locale = cultureInfo;
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                // Set to a different culture than before: this breaks the DataRelation constraint
+                // because it is not the locale of the related table
+                CultureInfo cultureInfo =
+                    table.Locale.Name == "en-US"
+                        ? new CultureInfo("en-GB")
+                        : new CultureInfo("en-US");
+                table.Locale = cultureInfo;
+            });
 
             Assert.Throws<DataException>(() => table.Prefix = "Prefix#1");
         }
@@ -1016,12 +1012,10 @@ Assert.False(true);
         {
             DataTable table1 = new DataTable("Table1");
 
-            Assert.Throws<EvaluateException>(
-                () =>
-                {
-                    DataColumn c1 = table1.Columns.Add("c1", typeof(string), "'hello ' + c2"); /* Should cause an exception */
-                }
-            );
+            Assert.Throws<EvaluateException>(() =>
+            {
+                DataColumn c1 = table1.Columns.Add("c1", typeof(string), "'hello ' + c2"); /* Should cause an exception */
+            });
         }
 
         [Fact]

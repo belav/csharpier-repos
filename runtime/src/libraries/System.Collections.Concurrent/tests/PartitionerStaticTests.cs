@@ -70,12 +70,10 @@ namespace System.Collections.Concurrent.Tests
             Assert.NotNull(d);
 
             d.Dispose();
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    var enum1 = partition.GetEnumerator();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                var enum1 = partition.GetEnumerator();
+            });
         }
 
         /// <summary>
@@ -110,12 +108,10 @@ namespace System.Collections.Concurrent.Tests
             OrderablePartitioner<int> partitioner;
             for (int algorithm = 0; algorithm < 5; algorithm++)
             {
-                Assert.Throws<ArgumentNullException>(
-                    () =>
-                    {
-                        partitioner = PartitioningWithAlgorithm<int>(null, algorithm);
-                    }
-                );
+                Assert.Throws<ArgumentNullException>(() =>
+                {
+                    partitioner = PartitioningWithAlgorithm<int>(null, algorithm);
+                });
             }
             // Test NotSupportedException of Reset: already tested in RunTestWithAlgorithm
             // Test InvalidOperationException: already tested in TestPartitioningCore
@@ -130,12 +126,10 @@ namespace System.Collections.Concurrent.Tests
             {
                 partitioner = PartitioningWithAlgorithm<int>(data, algorithm);
 
-                Assert.Throws<ArgumentOutOfRangeException>(
-                    () =>
-                    {
-                        var partitions1 = partitioner.GetOrderablePartitions(0);
-                    }
-                );
+                Assert.Throws<ArgumentOutOfRangeException>(() =>
+                {
+                    var partitions1 = partitioner.GetOrderablePartitions(0);
+                });
             }
         }
 
@@ -289,56 +283,52 @@ namespace System.Collections.Concurrent.Tests
             for (int i = 0; i < partitionCount; i++)
             {
                 int my_i = i;
-                threadArray[i] = Task.Run(
-                    () =>
+                threadArray[i] = Task.Run(() =>
+                {
+                    int localOffset = 0;
+                    int lastElement = -1;
+
+                    //variables to compute key/value consistency for static partitioning.
+                    int quotient,
+                        remainder;
+                    quotient = dataSize / partitionCount;
+                    remainder = dataSize % partitionCount;
+                    Assert.Throws<InvalidOperationException>(() =>
                     {
-                        int localOffset = 0;
-                        int lastElement = -1;
+                        var temp = partitions[my_i].Current;
+                    });
 
-                        //variables to compute key/value consistency for static partitioning.
-                        int quotient,
-                            remainder;
-                        quotient = dataSize / partitionCount;
-                        remainder = dataSize % partitionCount;
-                        Assert.Throws<InvalidOperationException>(
-                            () =>
-                            {
-                                var temp = partitions[my_i].Current;
-                            }
-                        );
+                    while (partitions[my_i].MoveNext())
+                    {
+                        int key = (int)partitions[my_i].Current.Key,
+                            value = partitions[my_i].Current.Value;
 
-                        while (partitions[my_i].MoveNext())
+                        Assert.Equal(key, value);
+
+                        boolarray[key] = true;
+                        Interlocked.Increment(ref enumCount);
+
+                        //todo: check if keys are ordered increasingly within each partition.
+                        keysOrderedWithinPartition &= (lastElement >= key);
+                        lastElement = key;
+
+                        //Only check this with static partitioning
+                        //check keys are ordered across the partitions
+                        if (staticPartitioning)
                         {
-                            int key = (int)partitions[my_i].Current.Key,
-                                value = partitions[my_i].Current.Value;
-
-                            Assert.Equal(key, value);
-
-                            boolarray[key] = true;
-                            Interlocked.Increment(ref enumCount);
-
-                            //todo: check if keys are ordered increasingly within each partition.
-                            keysOrderedWithinPartition &= (lastElement >= key);
-                            lastElement = key;
-
-                            //Only check this with static partitioning
-                            //check keys are ordered across the partitions
-                            if (staticPartitioning)
-                            {
-                                int originalPosition;
-                                if (my_i < remainder)
-                                    originalPosition = localOffset + my_i * (quotient + 1);
-                                else
-                                    originalPosition =
-                                        localOffset
-                                        + remainder * (quotient + 1)
-                                        + (my_i - remainder) * quotient;
-                                keysOrderedAcrossPartitions &= originalPosition == value;
-                            }
-                            localOffset++;
+                            int originalPosition;
+                            if (my_i < remainder)
+                                originalPosition = localOffset + my_i * (quotient + 1);
+                            else
+                                originalPosition =
+                                    localOffset
+                                    + remainder * (quotient + 1)
+                                    + (my_i - remainder) * quotient;
+                            keysOrderedAcrossPartitions &= originalPosition == value;
                         }
+                        localOffset++;
                     }
-                );
+                });
             }
 
             Task.WaitAll(threadArray);

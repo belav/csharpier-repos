@@ -162,45 +162,37 @@ class Hello
             var mutexName = BuildServerConnection.GetServerMutexName(pipeName);
             var host = new TestableClientConnectionHost();
             bool? wasServerMutexOpen = null;
-            host.Add(
-                () =>
+            host.Add(() =>
+            {
+                // Use a thread instead of Task to guarantee this code runs on a different
+                // thread and we can validate the mutex state.
+                var tcs = new TaskCompletionSource<IClientConnection>();
+                var thread = new Thread(_ =>
                 {
-                    // Use a thread instead of Task to guarantee this code runs on a different
-                    // thread and we can validate the mutex state.
-                    var tcs = new TaskCompletionSource<IClientConnection>();
-                    var thread = new Thread(
-                        _ =>
-                        {
-                            wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(
-                                mutexName
-                            );
+                    wasServerMutexOpen = BuildServerConnection.WasServerMutexOpen(mutexName);
 
-                            var client = new TestableClientConnection()
-                            {
-                                ReadBuildRequestFunc = _ =>
-                                    Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
-                                WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
-                            };
-                            tcs.SetResult(client);
-                        }
-                    );
-
-                    thread.Start();
-                    return tcs.Task;
-                }
-            );
-
-            host.Add(
-                () =>
-                {
                     var client = new TestableClientConnection()
                     {
-                        ReadBuildRequestFunc = _ => Task.FromResult(BuildRequest.CreateShutdown()),
+                        ReadBuildRequestFunc = _ =>
+                            Task.FromResult(ProtocolUtil.EmptyCSharpBuildRequest),
                         WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
                     };
-                    return Task.FromResult<IClientConnection>(client);
-                }
-            );
+                    tcs.SetResult(client);
+                });
+
+                thread.Start();
+                return tcs.Task;
+            });
+
+            host.Add(() =>
+            {
+                var client = new TestableClientConnection()
+                {
+                    ReadBuildRequestFunc = _ => Task.FromResult(BuildRequest.CreateShutdown()),
+                    WriteBuildResponseFunc = (r, _) => Task.CompletedTask,
+                };
+                return Task.FromResult<IClientConnection>(client);
+            });
 
             var result = BuildServerController.CreateAndRunServer(
                 pipeName,

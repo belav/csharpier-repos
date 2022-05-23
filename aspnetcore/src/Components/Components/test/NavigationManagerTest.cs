@@ -51,12 +51,10 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager();
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                navigationManager.Initialize(baseUri, absoluteUri);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            navigationManager.Initialize(baseUri, absoluteUri);
+        });
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
@@ -72,12 +70,10 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                navigationManager.ToBaseRelativePath(absoluteUri);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            navigationManager.ToBaseRelativePath(absoluteUri);
+        });
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",
@@ -96,12 +92,10 @@ public class NavigationManagerTest
     {
         var navigationManager = new TestNavigationManager(baseUri);
 
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                navigationManager.ToBaseRelativePath(absoluteUri);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            navigationManager.ToBaseRelativePath(absoluteUri);
+        });
 
         Assert.Equal(
             $"The URI '{absoluteUri}' is not contained by the base URI '{baseUri}'.",

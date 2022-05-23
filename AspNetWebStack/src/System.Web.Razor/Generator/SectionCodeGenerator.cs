@@ -17,30 +17,26 @@ namespace System.Web.Razor.Generator
 
         public override void GenerateStartBlockCode(Block target, CodeGeneratorContext context)
         {
-            string startBlock = context.BuildCodeString(
-                cw =>
-                {
-                    cw.WriteStartMethodInvoke(
-                        context.Host.GeneratedClassContext.DefineSectionMethodName
-                    );
-                    cw.WriteStringLiteral(SectionName);
-                    cw.WriteParameterSeparator();
-                    cw.WriteStartLambdaDelegate();
-                }
-            );
+            string startBlock = context.BuildCodeString(cw =>
+            {
+                cw.WriteStartMethodInvoke(
+                    context.Host.GeneratedClassContext.DefineSectionMethodName
+                );
+                cw.WriteStringLiteral(SectionName);
+                cw.WriteParameterSeparator();
+                cw.WriteStartLambdaDelegate();
+            });
             context.AddStatement(startBlock);
         }
 
         public override void GenerateEndBlockCode(Block target, CodeGeneratorContext context)
         {
-            string startBlock = context.BuildCodeString(
-                cw =>
-                {
-                    cw.WriteEndLambdaDelegate();
-                    cw.WriteEndMethodInvoke();
-                    cw.WriteEndStatement();
-                }
-            );
+            string startBlock = context.BuildCodeString(cw =>
+            {
+                cw.WriteEndLambdaDelegate();
+                cw.WriteEndMethodInvoke();
+                cw.WriteEndStatement();
+            });
             context.AddStatement(startBlock);
         }
 

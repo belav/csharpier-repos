@@ -306,13 +306,11 @@ namespace Microsoft.Extensions.Primitives
                 var registration = _cts.Token.Register(callback, state);
                 RegistrationCalls++;
 
-                return new DisposableAction(
-                    () =>
-                    {
-                        DisposeCalls++;
-                        registration.Dispose();
-                    }
-                );
+                return new DisposableAction(() =>
+                {
+                    DisposeCalls++;
+                    registration.Dispose();
+                });
             }
 
             private class DisposableAction : IDisposable

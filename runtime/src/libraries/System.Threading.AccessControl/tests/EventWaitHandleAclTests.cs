@@ -77,19 +77,17 @@ namespace System.Threading.Tests
         {
             string prefixedName = @"GLOBAL\" + GetRandomName();
 
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    CreateEventWaitHandle(
-                            initialState: true,
-                            mode: EventResetMode.AutoReset,
-                            prefixedName,
-                            expectedSecurity: GetBasicEventWaitHandleSecurity(),
-                            expectedCreatedNew: true
-                        )
-                        .Dispose();
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                CreateEventWaitHandle(
+                        initialState: true,
+                        mode: EventResetMode.AutoReset,
+                        prefixedName,
+                        expectedSecurity: GetBasicEventWaitHandleSecurity(),
+                        expectedCreatedNew: true
+                    )
+                    .Dispose();
+            });
         }
 
         // The documentation says MAX_PATH is the length limit for name, but it won't throw any errors:
@@ -109,19 +107,17 @@ namespace System.Threading.Tests
 
             if (PlatformDetection.IsNetFramework)
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        CreateEventWaitHandle(
-                                initialState: true,
-                                mode,
-                                name,
-                                security,
-                                expectedCreatedNew: true
-                            )
-                            .Dispose();
-                    }
-                );
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    CreateEventWaitHandle(
+                            initialState: true,
+                            mode,
+                            name,
+                            security,
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
+                });
             }
             else
             {
@@ -147,19 +143,17 @@ namespace System.Threading.Tests
         {
             if (PlatformDetection.IsNetFramework)
             {
-                Assert.Throws<ArgumentException>(
-                    () =>
-                    {
-                        CreateEventWaitHandle(
-                                initialState: true,
-                                mode,
-                                GetRandomName(),
-                                GetBasicEventWaitHandleSecurity(),
-                                expectedCreatedNew: true
-                            )
-                            .Dispose();
-                    }
-                );
+                Assert.Throws<ArgumentException>(() =>
+                {
+                    CreateEventWaitHandle(
+                            initialState: true,
+                            mode,
+                            GetRandomName(),
+                            GetBasicEventWaitHandleSecurity(),
+                            expectedCreatedNew: true
+                        )
+                        .Dispose();
+                });
             }
             else
             {
@@ -281,14 +275,10 @@ namespace System.Threading.Tests
         public void EventWaitHandle_OpenExisting_NameNotFound()
         {
             string name = "ThisShouldNotExist";
-            Assert.Throws<WaitHandleCannotBeOpenedException>(
-                () =>
-                {
-                    EventWaitHandleAcl
-                        .OpenExisting(name, EventWaitHandleRights.FullControl)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+            {
+                EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
+            });
 
             Assert.False(
                 EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _)
@@ -299,14 +289,10 @@ namespace System.Threading.Tests
         public void EventWaitHandle_OpenExisting_NameInvalid()
         {
             string name = '\0'.ToString();
-            Assert.Throws<WaitHandleCannotBeOpenedException>(
-                () =>
-                {
-                    EventWaitHandleAcl
-                        .OpenExisting(name, EventWaitHandleRights.FullControl)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<WaitHandleCannotBeOpenedException>(() =>
+            {
+                EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
+            });
 
             Assert.False(
                 EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _)
@@ -317,14 +303,10 @@ namespace System.Threading.Tests
         public void EventWaitHandle_OpenExisting_PathNotFound()
         {
             string name = @"global\foo";
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    EventWaitHandleAcl
-                        .OpenExisting(name, EventWaitHandleRights.FullControl)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
+            });
 
             Assert.False(
                 EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _)
@@ -335,73 +317,49 @@ namespace System.Threading.Tests
         public void EventWaitHandle_OpenExisting_BadPathName()
         {
             string name = @"\\?\Path";
-            Assert.Throws<System.IO.IOException>(
-                () =>
-                {
-                    EventWaitHandleAcl
-                        .OpenExisting(name, EventWaitHandleRights.FullControl)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<System.IO.IOException>(() =>
+            {
+                EventWaitHandleAcl.OpenExisting(name, EventWaitHandleRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<System.IO.IOException>(
-                () =>
-                {
-                    EventWaitHandleAcl.TryOpenExisting(
-                        name,
-                        EventWaitHandleRights.FullControl,
-                        out _
-                    );
-                }
-            );
+            Assert.Throws<System.IO.IOException>(() =>
+            {
+                EventWaitHandleAcl.TryOpenExisting(name, EventWaitHandleRights.FullControl, out _);
+            });
         }
 
         [Fact]
         public void EventWaitHandle_OpenExisting_NullName()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    EventWaitHandleAcl
-                        .OpenExisting(null, EventWaitHandleRights.FullControl)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                EventWaitHandleAcl.OpenExisting(null, EventWaitHandleRights.FullControl).Dispose();
+            });
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    EventWaitHandleAcl.TryOpenExisting(
-                        null,
-                        EventWaitHandleRights.FullControl,
-                        out _
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                EventWaitHandleAcl.TryOpenExisting(null, EventWaitHandleRights.FullControl, out _);
+            });
         }
 
         [Fact]
         public void EventWaitHandle_OpenExisting_EmptyName()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    EventWaitHandleAcl
-                        .OpenExisting(string.Empty, EventWaitHandleRights.FullControl)
-                        .Dispose();
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                EventWaitHandleAcl
+                    .OpenExisting(string.Empty, EventWaitHandleRights.FullControl)
+                    .Dispose();
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    EventWaitHandleAcl.TryOpenExisting(
-                        string.Empty,
-                        EventWaitHandleRights.FullControl,
-                        out _
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                EventWaitHandleAcl.TryOpenExisting(
+                    string.Empty,
+                    EventWaitHandleRights.FullControl,
+                    out _
+                );
+            });
         }
 
         private EventWaitHandleSecurity GetBasicEventWaitHandleSecurity()

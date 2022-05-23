@@ -62,37 +62,31 @@ namespace Microsoft.Web.Helpers.Test
         [Fact]
         public void GetProviderHtml_DoesNotContainBadRazorCompilation()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    // Arrange
-                    var stubbedContext = new Mock<HttpContextBase>();
-                    var contextItems = new Hashtable();
-                    stubbedContext.SetupGet(x => x.Items).Returns(contextItems);
-                    Maps.GetCurrentHttpContext = () => stubbedContext.Object;
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Arrange
+                var stubbedContext = new Mock<HttpContextBase>();
+                var contextItems = new Hashtable();
+                stubbedContext.SetupGet(x => x.Items).Returns(contextItems);
+                Maps.GetCurrentHttpContext = () => stubbedContext.Object;
 
-                    // Act
-                    string bingResults = Maps.GetBingHtml(
-                            "somekey",
-                            latitude: "100",
-                            longitude: "10"
-                        )
-                        .ToHtmlString();
-                    string googleResults = Maps.GetGoogleHtml(latitude: "100", longitude: "10")
-                        .ToHtmlString();
-                    string mapQuestResults = Maps.GetMapQuestHtml(
-                            "somekey",
-                            latitude: "100",
-                            longitude: "10"
-                        )
-                        .ToHtmlString();
+                // Act
+                string bingResults = Maps.GetBingHtml("somekey", latitude: "100", longitude: "10")
+                    .ToHtmlString();
+                string googleResults = Maps.GetGoogleHtml(latitude: "100", longitude: "10")
+                    .ToHtmlString();
+                string mapQuestResults = Maps.GetMapQuestHtml(
+                        "somekey",
+                        latitude: "100",
+                        longitude: "10"
+                    )
+                    .ToHtmlString();
 
-                    // Assert
-                    Assert.DoesNotContain("<text>", bingResults);
-                    Assert.DoesNotContain("<text>", googleResults);
-                    Assert.DoesNotContain("<text>", mapQuestResults);
-                }
-            );
+                // Assert
+                Assert.DoesNotContain("<text>", bingResults);
+                Assert.DoesNotContain("<text>", googleResults);
+                Assert.DoesNotContain("<text>", mapQuestResults);
+            });
         }
     }
 }

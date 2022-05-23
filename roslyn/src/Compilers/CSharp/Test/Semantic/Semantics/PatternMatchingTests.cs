@@ -5616,16 +5616,14 @@ public class Program738490379
                 .Range(0, numTasks)
                 .Select(
                     t =>
-                        Task.Run(
-                            () =>
+                        Task.Run(() =>
+                        {
+                            int k = dt + t * numTestsPerTask;
+                            for (int i = 1; i < numTestsPerTask; i++)
                             {
-                                int k = dt + t * numTestsPerTask;
-                                for (int i = 1; i < numTestsPerTask; i++)
-                                {
-                                    PatternMatchingFuzz(i + k);
-                                }
+                                PatternMatchingFuzz(i + k);
                             }
-                        )
+                        })
                 );
             Task.WaitAll(tasks.ToArray());
         }

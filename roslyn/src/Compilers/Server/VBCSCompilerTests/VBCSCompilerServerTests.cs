@@ -108,29 +108,27 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     bool created = false;
                     bool connected = false;
 
-                    var thread = new Thread(
-                        () =>
-                        {
-                            using (
-                                var mutex = BuildServerConnection.OpenOrCreateMutex(
-                                    name: mutexName,
-                                    createdNew: out created
-                                )
+                    var thread = new Thread(() =>
+                    {
+                        using (
+                            var mutex = BuildServerConnection.OpenOrCreateMutex(
+                                name: mutexName,
+                                createdNew: out created
                             )
-                            using (var stream = NamedPipeUtil.CreateServer(pipeName))
-                            {
-                                readyMre.Set();
+                        )
+                        using (var stream = NamedPipeUtil.CreateServer(pipeName))
+                        {
+                            readyMre.Set();
 
-                                // Get a client connection and then immediately close it.  Don't give any response.
-                                stream.WaitForConnection();
-                                connected = true;
-                                stream.Close();
+                            // Get a client connection and then immediately close it.  Don't give any response.
+                            stream.WaitForConnection();
+                            connected = true;
+                            stream.Close();
 
-                                doneMre.WaitOne();
-                                mutex.Dispose();
-                            }
+                            doneMre.WaitOne();
+                            mutex.Dispose();
                         }
-                    );
+                    });
 
                     // Block until the mutex and named pipe is setup.
                     thread.Start();
@@ -165,29 +163,27 @@ namespace Microsoft.CodeAnalysis.CompilerServer.UnitTests
                     bool created = false;
                     bool connected = false;
 
-                    var thread = new Thread(
-                        () =>
+                    var thread = new Thread(() =>
+                    {
+                        using (var stream = NamedPipeUtil.CreateServer(pipeName))
                         {
-                            using (var stream = NamedPipeUtil.CreateServer(pipeName))
-                            {
-                                var mutex = BuildServerConnection.OpenOrCreateMutex(
-                                    name: mutexName,
-                                    createdNew: out created
-                                );
-                                readyMre.Set();
+                            var mutex = BuildServerConnection.OpenOrCreateMutex(
+                                name: mutexName,
+                                createdNew: out created
+                            );
+                            readyMre.Set();
 
-                                stream.WaitForConnection();
-                                connected = true;
+                            stream.WaitForConnection();
+                            connected = true;
 
-                                // Client is waiting for a response.  Close the mutex now.  Then close the connection
-                                // so the client gets an error.
-                                mutex.Dispose();
-                                stream.Close();
+                            // Client is waiting for a response.  Close the mutex now.  Then close the connection
+                            // so the client gets an error.
+                            mutex.Dispose();
+                            stream.Close();
 
-                                doneMre.WaitOne();
-                            }
+                            doneMre.WaitOne();
                         }
-                    );
+                    });
 
                     // Block until the mutex and named pipe is setup.
                     thread.Start();

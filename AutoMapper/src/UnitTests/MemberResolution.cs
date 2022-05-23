@@ -65,15 +65,12 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, DtoObject>()
-                            .Include<ModelSubObject, DtoSubObject>();
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, DtoObject>().Include<ModelSubObject, DtoSubObject>();
 
-                        cfg.CreateMap<ModelSubObject, DtoSubObject>();
-                    }
-                );
+                    cfg.CreateMap<ModelSubObject, DtoSubObject>();
+                });
 
             protected override void Because_of()
             {
@@ -127,15 +124,12 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, DtoObject>()
-                            .Include<ModelSubObject, DtoSubObject>();
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, DtoObject>().Include<ModelSubObject, DtoSubObject>();
 
-                        cfg.CreateMap<ModelSubObject, DtoSubObject>();
-                    }
-                );
+                    cfg.CreateMap<ModelSubObject, DtoSubObject>();
+                });
 
             protected override void Because_of()
             {
@@ -177,15 +171,13 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<IModelObject, DtoObject>()
-                            .Include<ModelSubObject, DtoSubObject>();
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<IModelObject, DtoObject>()
+                        .Include<ModelSubObject, DtoSubObject>();
 
-                        cfg.CreateMap<ModelSubObject, DtoSubObject>();
-                    }
-                );
+                    cfg.CreateMap<ModelSubObject, DtoSubObject>();
+                });
 
             protected override void Because_of()
             {
@@ -249,17 +241,15 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Model, DtoModel>();
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Model, DtoModel>();
 
-                        cfg.CreateMap<IModelObject, DtoObject>()
-                            .Include<ModelSubObject, DtoSubObject>();
+                    cfg.CreateMap<IModelObject, DtoObject>()
+                        .Include<ModelSubObject, DtoSubObject>();
 
-                        cfg.CreateMap<ModelSubObject, DtoSubObject>();
-                    }
-                );
+                    cfg.CreateMap<ModelSubObject, DtoSubObject>();
+                });
 
             [Fact]
             public void Should_map_object_to_sub_object()
@@ -313,12 +303,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -406,12 +394,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -499,12 +485,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -579,13 +563,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(x => x.Ignored, opt => opt.Ignore());
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(x => x.Ignored, opt => opt.Ignore());
+                });
 
             [Fact]
             public void Should_not_report_it_as_unmapped()
@@ -640,12 +622,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -696,12 +676,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -748,13 +726,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                        cfg.CreateMap<ModelSubObject, ModelSubDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                    cfg.CreateMap<ModelSubObject, ModelSubDto>();
+                });
 
             protected override void Because_of()
             {
@@ -800,12 +776,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -881,46 +855,37 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>()
-                            .ForMember(dto => dto.Splorg, opt => opt.MapFrom(m => m.Blarg))
-                            .ForMember(
-                                dto => dto.SomeMethod,
-                                opt => opt.MapFrom(m => m.IAmSomeMethod())
-                            )
-                            .ForMember(
-                                dto => dto.SubNarf,
-                                opt => opt.MapFrom(m => m.SomeWeirdSubObject.Narf)
-                            )
-                            .ForMember(
-                                dto => dto.SubValue,
-                                opt => opt.MapFrom(m => m.SomeWeirdSubObject.SomeSubValue())
-                            )
-                            .ForMember(
-                                dto => dto.GrandChildInt,
-                                opt => opt.MapFrom(m => m.SomeWeirdSubObject.SubSub.Norf)
-                            )
-                            .ForMember(
-                                dto => dto.GrandChildString,
-                                opt =>
-                                    opt.MapFrom(m => m.SomeWeirdSubObject.SubSub.SomeSubSubValue())
-                            )
-                            .ForMember(
-                                dto => dto.MoreBlarg,
-                                opt => opt.MapFrom(m => m.SomeMethodToGetMoreBlarg())
-                            )
-                            .ForMember(
-                                dto => dto.BlargPlus3,
-                                opt => opt.MapFrom(m => m.Blarg.Plus(3))
-                            )
-                            .ForMember(
-                                dto => dto.BlargMinus2,
-                                opt => opt.MapFrom(m => m.Blarg - 2)
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>()
+                        .ForMember(dto => dto.Splorg, opt => opt.MapFrom(m => m.Blarg))
+                        .ForMember(
+                            dto => dto.SomeMethod,
+                            opt => opt.MapFrom(m => m.IAmSomeMethod())
+                        )
+                        .ForMember(
+                            dto => dto.SubNarf,
+                            opt => opt.MapFrom(m => m.SomeWeirdSubObject.Narf)
+                        )
+                        .ForMember(
+                            dto => dto.SubValue,
+                            opt => opt.MapFrom(m => m.SomeWeirdSubObject.SomeSubValue())
+                        )
+                        .ForMember(
+                            dto => dto.GrandChildInt,
+                            opt => opt.MapFrom(m => m.SomeWeirdSubObject.SubSub.Norf)
+                        )
+                        .ForMember(
+                            dto => dto.GrandChildString,
+                            opt => opt.MapFrom(m => m.SomeWeirdSubObject.SubSub.SomeSubSubValue())
+                        )
+                        .ForMember(
+                            dto => dto.MoreBlarg,
+                            opt => opt.MapFrom(m => m.SomeMethodToGetMoreBlarg())
+                        )
+                        .ForMember(dto => dto.BlargPlus3, opt => opt.MapFrom(m => m.Blarg.Plus(3)))
+                        .ForMember(dto => dto.BlargMinus2, opt => opt.MapFrom(m => m.Blarg - 2));
+                });
 
             protected override void Because_of()
             {
@@ -1071,19 +1036,17 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap(typeof(Order), typeof(OrderDTO))
-                            .ForMember("CurrentState", map => map.MapFrom("Status"))
-                            .ForMember("Contact", map => map.MapFrom(new StringCAPS(), "Customer"))
-                            .ForMember(
-                                "Tracking",
-                                map => map.MapFrom(typeof(StringLower), "ShippingCode")
-                            )
-                            .ForMember("Postal", map => map.MapFrom(new StringPadder(6), "Zip"));
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap(typeof(Order), typeof(OrderDTO))
+                        .ForMember("CurrentState", map => map.MapFrom("Status"))
+                        .ForMember("Contact", map => map.MapFrom(new StringCAPS(), "Customer"))
+                        .ForMember(
+                            "Tracking",
+                            map => map.MapFrom(typeof(StringLower), "ShippingCode")
+                        )
+                        .ForMember("Postal", map => map.MapFrom(new StringPadder(6), "Zip"));
+                });
 
             protected override void Because_of()
             {
@@ -1144,12 +1107,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1187,12 +1148,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Category, CategoryDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Category, CategoryDto>();
+                });
 
             protected override void Because_of()
             {
@@ -1258,12 +1217,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap(typeof(Source), typeof(Destination));
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap(typeof(Source), typeof(Destination));
+                });
 
             protected override void Because_of()
             {
@@ -1298,15 +1255,12 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
-                        cfg.DestinationMemberNamingConvention =
-                            new LowerUnderscoreNamingConvention();
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.SourceMemberNamingConvention = new LowerUnderscoreNamingConvention();
+                    cfg.DestinationMemberNamingConvention = new LowerUnderscoreNamingConvention();
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1352,13 +1306,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizePrefixes("Foo");
-                        cfg.AddProfile<ChildProfile>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizePrefixes("Foo");
+                    cfg.AddProfile<ChildProfile>();
+                });
 
             protected override void Because_of()
             {
@@ -1399,13 +1351,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizePrefixes("Foo");
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizePrefixes("Foo");
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1446,13 +1396,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizePrefixes("Foo");
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizePrefixes("Foo");
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1493,13 +1441,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizePostfixes("Foo");
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizePostfixes("Foo");
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1549,14 +1495,12 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizePrefixes("Foo");
-                        cfg.RecognizePostfixes("Bar");
-                        cfg.AddProfile<ChildProfile>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizePrefixes("Foo");
+                    cfg.RecognizePostfixes("Bar");
+                    cfg.AddProfile<ChildProfile>();
+                });
 
             protected override void Because_of()
             {
@@ -1597,14 +1541,12 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizePrefixes("Foo");
-                        cfg.RecognizePostfixes("Bar");
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizePrefixes("Foo");
+                    cfg.RecognizePostfixes("Bar");
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1639,12 +1581,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1675,13 +1615,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.ReplaceMemberName("Foo", "Bar");
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.ReplaceMemberName("Foo", "Bar");
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1712,13 +1650,11 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.RecognizeDestinationPrefixes("Foo", "Bar");
-                        cfg.CreateMap<Source, Destination>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.RecognizeDestinationPrefixes("Foo", "Bar");
+                    cfg.CreateMap<Source, Destination>();
+                });
 
             protected override void Because_of()
             {
@@ -1763,12 +1699,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {

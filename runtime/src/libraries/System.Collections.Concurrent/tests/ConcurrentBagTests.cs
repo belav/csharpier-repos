@@ -218,19 +218,17 @@ namespace System.Collections.Concurrent.Tests
                     itemProduced = new AutoResetEvent(false)
             )
             {
-                Task t = Task.Run(
-                    () =>
+                Task t = Task.Run(() =>
+                {
+                    for (int i = 0; i < Iterations; i++)
                     {
-                        for (int i = 0; i < Iterations; i++)
-                        {
-                            itemProduced.WaitOne();
-                            int item;
-                            Assert.True(bag.TryTake(out item));
-                            Assert.Equal(i, item); // Testing an implementation detail rather than guaranteed ordering
-                            itemConsumed.Set();
-                        }
+                        itemProduced.WaitOne();
+                        int item;
+                        Assert.True(bag.TryTake(out item));
+                        Assert.Equal(i, item); // Testing an implementation detail rather than guaranteed ordering
+                        itemConsumed.Set();
                     }
-                );
+                });
 
                 for (int i = initialCount; i < Iterations + initialCount; i++)
                 {
@@ -299,14 +297,12 @@ namespace System.Collections.Concurrent.Tests
             {
                 bag.Add(i + initialCount);
                 ThreadFactory
-                    .StartNew(
-                        () =>
-                        {
-                            int item;
-                            Assert.True(bag.TryTake(out item));
-                            Assert.Equal(item, i);
-                        }
-                    )
+                    .StartNew(() =>
+                    {
+                        int item;
+                        Assert.True(bag.TryTake(out item));
+                        Assert.Equal(item, i);
+                    })
                     .GetAwaiter()
                     .GetResult();
                 Assert.Equal(Enumerable.Range(i + 1, initialCount).Reverse(), bag.ToArray());

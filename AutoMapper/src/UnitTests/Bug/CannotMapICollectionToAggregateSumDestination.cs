@@ -22,12 +22,10 @@ namespace AutoMapper.UnitTests.Bug
         public void Should_map_icollection_to_aggregate_sum_destination()
         {
             // arrange
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<DummySource, DummyDestination>();
-                }
-            );
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<DummySource, DummyDestination>();
+            });
 
             // act
             // do nothing

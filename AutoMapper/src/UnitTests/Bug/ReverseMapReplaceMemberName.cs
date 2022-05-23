@@ -22,14 +22,12 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.ReplaceMemberName("Account", "User");
-                    cfg.ReplaceMemberName("User", "Account");
-                    cfg.CreateMap<Source, Destination>().ReverseMap();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.ReplaceMemberName("Account", "User");
+                cfg.ReplaceMemberName("User", "Account");
+                cfg.CreateMap<Source, Destination>().ReverseMap();
+            });
 
         protected override void Because_of()
         {
@@ -73,12 +71,10 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AddProfile<MyProfile>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<MyProfile>();
+            });
 
         protected override void Because_of()
         {

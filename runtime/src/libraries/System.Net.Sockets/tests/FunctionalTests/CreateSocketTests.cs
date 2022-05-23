@@ -570,56 +570,54 @@ namespace System.Net.Sockets.Tests
         )]
         public async Task Ctor_SafeHandle_Listening_Success(bool shareSafeHandle)
         {
-            await Task.Run(
-                    async () =>
+            await Task.Run(async () =>
+                {
+                    using var listener = new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    );
+                    listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
+                    listener.Listen();
+
+                    using var listenerCopy = new Socket(
+                        shareSafeHandle
+                            ? listener.SafeHandle
+                            : new SafeSocketHandle(listener.Handle, ownsHandle: false)
+                    );
+                    Assert.False(listenerCopy.Connected);
+                    // This will throw if _isListening is set internally. (before reaching any real code)
+                    Assert.Throws<InvalidOperationException>(
+                        () => listenerCopy.Connect(new IPEndPoint(IPAddress.Loopback, 0))
+                    );
+
+                    Assert.Equal(listener.AddressFamily, listenerCopy.AddressFamily);
+                    Assert.Equal(listener.Handle, listenerCopy.Handle);
+                    Assert.Equal(listener.IsBound, listenerCopy.IsBound);
+                    Assert.Equal(listener.LocalEndPoint, listenerCopy.LocalEndPoint);
+                    Assert.Equal(listener.ProtocolType, listenerCopy.ProtocolType);
+                    Assert.Equal(listener.SocketType, listenerCopy.SocketType);
+
+                    foreach (Socket listenerSocket in new[] { listener, listenerCopy })
                     {
-                        using var listener = new Socket(
-                            AddressFamily.InterNetwork,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        );
-                        listener.Bind(new IPEndPoint(IPAddress.Loopback, 0));
-                        listener.Listen();
-
-                        using var listenerCopy = new Socket(
-                            shareSafeHandle
-                                ? listener.SafeHandle
-                                : new SafeSocketHandle(listener.Handle, ownsHandle: false)
-                        );
-                        Assert.False(listenerCopy.Connected);
-                        // This will throw if _isListening is set internally. (before reaching any real code)
-                        Assert.Throws<InvalidOperationException>(
-                            () => listenerCopy.Connect(new IPEndPoint(IPAddress.Loopback, 0))
-                        );
-
-                        Assert.Equal(listener.AddressFamily, listenerCopy.AddressFamily);
-                        Assert.Equal(listener.Handle, listenerCopy.Handle);
-                        Assert.Equal(listener.IsBound, listenerCopy.IsBound);
-                        Assert.Equal(listener.LocalEndPoint, listenerCopy.LocalEndPoint);
-                        Assert.Equal(listener.ProtocolType, listenerCopy.ProtocolType);
-                        Assert.Equal(listener.SocketType, listenerCopy.SocketType);
-
-                        foreach (Socket listenerSocket in new[] { listener, listenerCopy })
-                        {
-                            using (
-                                var client1 = new Socket(
-                                    AddressFamily.InterNetwork,
-                                    SocketType.Stream,
-                                    ProtocolType.Tcp
-                                )
+                        using (
+                            var client1 = new Socket(
+                                AddressFamily.InterNetwork,
+                                SocketType.Stream,
+                                ProtocolType.Tcp
                             )
+                        )
+                        {
+                            Task connect1 = client1.ConnectAsync(listenerSocket.LocalEndPoint);
+                            using (Socket server1 = listenerSocket.Accept())
                             {
-                                Task connect1 = client1.ConnectAsync(listenerSocket.LocalEndPoint);
-                                using (Socket server1 = listenerSocket.Accept())
-                                {
-                                    await connect1;
-                                    server1.Send(new byte[] { 42 });
-                                    Assert.Equal(1, client1.Receive(new byte[1]));
-                                }
+                                await connect1;
+                                server1.Send(new byte[] { 42 });
+                                Assert.Equal(1, client1.Receive(new byte[1]));
                             }
                         }
                     }
-                )
+                })
                 .WaitAsync(TestSettings.PassingTestTimeout);
         }
 

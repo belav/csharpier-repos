@@ -254,15 +254,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel
 
         public void ScheduleDeferredCleanupTask(Action<CancellationToken> a)
         {
-            _ = _threadingContext.RunWithShutdownBlockAsync(
-                async cancellationToken =>
-                {
-                    await _threadingContext.JoinableTaskFactory.StartOnIdle(
-                        () => a(cancellationToken),
-                        VsTaskRunContext.UIThreadNormalPriority
-                    );
-                }
-            );
+            _ = _threadingContext.RunWithShutdownBlockAsync(async cancellationToken =>
+            {
+                await _threadingContext.JoinableTaskFactory.StartOnIdle(
+                    () => a(cancellationToken),
+                    VsTaskRunContext.UIThreadNormalPriority
+                );
+            });
         }
     }
 }

@@ -95,68 +95,61 @@ public class Startup
 
     public void ConfigureServices(IServiceCollection services)
     {
-        services.Configure<CookiePolicyOptions>(
-            options =>
-            {
-                options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
-                options.OnAppendCookie = cookieContext =>
-                    CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-                options.OnDeleteCookie = cookieContext =>
-                    CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
-            }
-        );
+        services.Configure<CookiePolicyOptions>(options =>
+        {
+            options.MinimumSameSitePolicy = SameSiteMode.Unspecified;
+            options.OnAppendCookie = cookieContext =>
+                CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+            options.OnDeleteCookie = cookieContext =>
+                CheckSameSite(cookieContext.Context, cookieContext.CookieOptions);
+        });
 
         services
-            .AddAuthentication(
-                sharedOptions =>
-                {
-                    sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
-                    sharedOptions.DefaultChallengeScheme =
-                        OpenIdConnectDefaults.AuthenticationScheme;
-                }
-            )
+            .AddAuthentication(sharedOptions =>
+            {
+                sharedOptions.DefaultScheme = CookieAuthenticationDefaults.AuthenticationScheme;
+                sharedOptions.DefaultChallengeScheme = OpenIdConnectDefaults.AuthenticationScheme;
+            })
             .AddCookie()
-            .AddOpenIdConnect(
-                o =>
+            .AddOpenIdConnect(o =>
+            {
+                /*
+                o.ClientId = Configuration["oidc:clientid"];
+                o.ClientSecret = Configuration["oidc:clientsecret"]; // for code flow
+                o.Authority = Configuration["oidc:authority"];
+                */
+                // https://github.com/IdentityServer/IdentityServer4.Demo/blob/master/src/IdentityServer4Demo/Config.cs
+                o.ClientId = "hybrid";
+                o.ClientSecret = "secret"; // for code flow
+                o.Authority = "https://demo.identityserver.io/";
+
+                o.ResponseType = OpenIdConnectResponseType.CodeIdToken;
+                o.SaveTokens = true;
+                o.GetClaimsFromUserInfoEndpoint = true;
+                o.AccessDeniedPath = "/access-denied-from-remote";
+                o.MapInboundClaims = false;
+
+                // o.ClaimActions.MapAllExcept("aud", "iss", "iat", "nbf", "exp", "aio", "c_hash", "uti", "nonce");
+
+                o.Events = new OpenIdConnectEvents()
                 {
-                    /*
-                    o.ClientId = Configuration["oidc:clientid"];
-                    o.ClientSecret = Configuration["oidc:clientsecret"]; // for code flow
-                    o.Authority = Configuration["oidc:authority"];
-                    */
-                    // https://github.com/IdentityServer/IdentityServer4.Demo/blob/master/src/IdentityServer4Demo/Config.cs
-                    o.ClientId = "hybrid";
-                    o.ClientSecret = "secret"; // for code flow
-                    o.Authority = "https://demo.identityserver.io/";
-
-                    o.ResponseType = OpenIdConnectResponseType.CodeIdToken;
-                    o.SaveTokens = true;
-                    o.GetClaimsFromUserInfoEndpoint = true;
-                    o.AccessDeniedPath = "/access-denied-from-remote";
-                    o.MapInboundClaims = false;
-
-                    // o.ClaimActions.MapAllExcept("aud", "iss", "iat", "nbf", "exp", "aio", "c_hash", "uti", "nonce");
-
-                    o.Events = new OpenIdConnectEvents()
+                    OnAuthenticationFailed = c =>
                     {
-                        OnAuthenticationFailed = c =>
-                        {
-                            c.HandleResponse();
+                        c.HandleResponse();
 
-                            c.Response.StatusCode = 500;
-                            c.Response.ContentType = "text/plain";
-                            if (Environment.IsDevelopment())
-                            {
-                                // Debug only, in production do not share exceptions with the remote host.
-                                return c.Response.WriteAsync(c.Exception.ToString());
-                            }
-                            return c.Response.WriteAsync(
-                                "An error occurred processing your authentication."
-                            );
+                        c.Response.StatusCode = 500;
+                        c.Response.ContentType = "text/plain";
+                        if (Environment.IsDevelopment())
+                        {
+                            // Debug only, in production do not share exceptions with the remote host.
+                            return c.Response.WriteAsync(c.Exception.ToString());
                         }
-                    };
-                }
-            );
+                        return c.Response.WriteAsync(
+                            "An error occurred processing your authentication."
+                        );
+                    }
+                };
+            });
     }
 
     public void Configure(
@@ -168,289 +161,276 @@ public class Startup
         app.UseCookiePolicy(); // Before UseAuthentication or anything else that writes cookies.
         app.UseAuthentication();
 
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            var response = context.Response;
+
+            if (context.Request.Path.Equals("/signedout"))
             {
-                var response = context.Response;
-
-                if (context.Request.Path.Equals("/signedout"))
-                {
-                    await WriteHtmlAsync(
-                        response,
-                        async res =>
-                        {
-                            await res.WriteAsync($"<h1>You have been signed out.</h1>");
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/\">Home</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/signout"))
-                {
-                    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                    await WriteHtmlAsync(
-                        response,
-                        async res =>
-                        {
-                            await res.WriteAsync(
-                                $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
-                            );
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/\">Home</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/signout-remote"))
-                {
-                    // Redirects
-                    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                    await context.SignOutAsync(
-                        OpenIdConnectDefaults.AuthenticationScheme,
-                        new AuthenticationProperties() { RedirectUri = "/signedout" }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/access-denied-from-remote"))
-                {
-                    await WriteHtmlAsync(
-                        response,
-                        async res =>
-                        {
-                            await res.WriteAsync(
-                                $"<h1>Access Denied error received from the remote authorization server</h1>"
-                            );
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/\">Home</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/Account/AccessDenied"))
-                {
-                    await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-                    await WriteHtmlAsync(
-                        response,
-                        async res =>
-                        {
-                            await res.WriteAsync(
-                                $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
-                            );
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
-                            );
-                            await res.WriteAsync(
-                                "<a class=\"btn btn-default\" href=\"/\">Home</a>"
-                            );
-                        }
-                    );
-                    return;
-                }
-
-                // DefaultAuthenticateScheme causes User to be set
-                // var user = context.User;
-
-                // This is what [Authorize] calls
-                var userResult = await context.AuthenticateAsync();
-                var user = userResult.Principal;
-                var props = userResult.Properties;
-
-                // This is what [Authorize(ActiveAuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)] calls
-                // var user = await context.AuthenticateAsync(OpenIdConnectDefaults.AuthenticationScheme);
-
-                // Not authenticated
-                if (user == null || !user.Identities.Any(identity => identity.IsAuthenticated))
-                {
-                    // This is what [Authorize] calls
-                    await context.ChallengeAsync();
-
-                    // This is what [Authorize(ActiveAuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)] calls
-                    // await context.ChallengeAsync(OpenIdConnectDefaults.AuthenticationScheme);
-
-                    return;
-                }
-
-                // Authenticated, but not authorized
-                if (
-                    context.Request.Path.Equals("/restricted")
-                    && !user.Identities.Any(identity => identity.HasClaim("special", "true"))
-                )
-                {
-                    await context.ForbidAsync();
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/refresh"))
-                {
-                    var refreshToken = props.GetTokenValue("refresh_token");
-
-                    if (string.IsNullOrEmpty(refreshToken))
+                await WriteHtmlAsync(
+                    response,
+                    async res =>
                     {
-                        await WriteHtmlAsync(
-                            response,
-                            async res =>
-                            {
-                                await res.WriteAsync($"No refresh_token is available.<br>");
-                                await res.WriteAsync(
-                                    "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
-                                );
-                            }
-                        );
-
-                        return;
+                        await res.WriteAsync($"<h1>You have been signed out.</h1>");
+                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
                     }
+                );
+                return;
+            }
 
-                    var options = optionsMonitor.Get(OpenIdConnectDefaults.AuthenticationScheme);
-                    var metadata = await options.ConfigurationManager.GetConfigurationAsync(
-                        context.RequestAborted
-                    );
-
-                    var pairs = new Dictionary<string, string>()
-                    {
-                        { "client_id", options.ClientId },
-                        { "client_secret", options.ClientSecret },
-                        { "grant_type", "refresh_token" },
-                        { "refresh_token", refreshToken }
-                    };
-                    var content = new FormUrlEncodedContent(pairs);
-                    var tokenResponse = await options.Backchannel.PostAsync(
-                        metadata.TokenEndpoint,
-                        content,
-                        context.RequestAborted
-                    );
-                    tokenResponse.EnsureSuccessStatusCode();
-
-                    using (
-                        var payload = JsonDocument.Parse(
-                            await tokenResponse.Content.ReadAsStringAsync()
-                        )
-                    )
-                    {
-                        // Persist the new acess token
-                        props.UpdateTokenValue(
-                            "access_token",
-                            payload.RootElement.GetString("access_token")
-                        );
-                        props.UpdateTokenValue(
-                            "refresh_token",
-                            payload.RootElement.GetString("refresh_token")
-                        );
-                        if (
-                            payload.RootElement.TryGetProperty("expires_in", out var property)
-                            && property.TryGetInt32(out var seconds)
-                        )
-                        {
-                            var expiresAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(seconds);
-                            props.UpdateTokenValue(
-                                "expires_at",
-                                expiresAt.ToString("o", CultureInfo.InvariantCulture)
-                            );
-                        }
-                        await context.SignInAsync(user, props);
-
-                        await WriteHtmlAsync(
-                            response,
-                            async res =>
-                            {
-                                await res.WriteAsync($"<h1>Refreshed.</h1>");
-                                await res.WriteAsync(
-                                    "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
-                                );
-                                await res.WriteAsync(
-                                    "<a class=\"btn btn-default\" href=\"/\">Home</a>"
-                                );
-
-                                await res.WriteAsync("<h2>Tokens:</h2>");
-                                await WriteTableHeader(
-                                    res,
-                                    new string[] { "Token Type", "Value" },
-                                    props
-                                        .GetTokens()
-                                        .Select(token => new string[] { token.Name, token.Value })
-                                );
-
-                                await res.WriteAsync("<h2>Payload:</h2>");
-                                await res.WriteAsync(
-                                    HtmlEncoder.Default
-                                        .Encode(payload.ToString())
-                                        .Replace(",", ",<br>") + "<br>"
-                                );
-                            }
-                        );
-                    }
-
-                    return;
-                }
-
-                if (context.Request.Path.Equals("/login-challenge"))
-                {
-                    // Challenge the user authentication, and force a login prompt by overwriting the
-                    // "prompt". This could be used for example to require the user to re-enter their
-                    // credentials at the authentication provider, to add an extra confirmation layer.
-                    await context.ChallengeAsync(
-                        OpenIdConnectDefaults.AuthenticationScheme,
-                        new OpenIdConnectChallengeProperties()
-                        {
-                            Prompt = "login",
-
-                            // it is also possible to specify different scopes, e.g.
-                            // Scope = new string[] { "openid", "profile", "other" }
-                        }
-                    );
-
-                    return;
-                }
-
+            if (context.Request.Path.Equals("/signout"))
+            {
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
                 await WriteHtmlAsync(
                     response,
                     async res =>
                     {
                         await res.WriteAsync(
-                            $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
+                            $"<h1>Signed out {HtmlEncode(context.User.Identity.Name)}</h1>"
                         );
+                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
+                    }
+                );
+                return;
+            }
+
+            if (context.Request.Path.Equals("/signout-remote"))
+            {
+                // Redirects
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                await context.SignOutAsync(
+                    OpenIdConnectDefaults.AuthenticationScheme,
+                    new AuthenticationProperties() { RedirectUri = "/signedout" }
+                );
+                return;
+            }
+
+            if (context.Request.Path.Equals("/access-denied-from-remote"))
+            {
+                await WriteHtmlAsync(
+                    response,
+                    async res =>
+                    {
                         await res.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
+                            $"<h1>Access Denied error received from the remote authorization server</h1>"
                         );
+                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
+                    }
+                );
+                return;
+            }
+
+            if (context.Request.Path.Equals("/Account/AccessDenied"))
+            {
+                await context.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                await WriteHtmlAsync(
+                    response,
+                    async res =>
+                    {
                         await res.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
-                        );
-                        await res.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/login-challenge\">Login challenge</a>"
+                            $"<h1>Access Denied for user {HtmlEncode(context.User.Identity.Name)} to resource '{HtmlEncode(context.Request.Query["ReturnUrl"])}'</h1>"
                         );
                         await res.WriteAsync(
                             "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
                         );
-                        await res.WriteAsync(
-                            "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
-                        );
-
-                        await res.WriteAsync("<h2>Claims:</h2>");
-                        await WriteTableHeader(
-                            res,
-                            new string[] { "Claim Type", "Value" },
-                            context.User.Claims.Select(c => new string[] { c.Type, c.Value })
-                        );
-
-                        await res.WriteAsync("<h2>Tokens:</h2>");
-                        await WriteTableHeader(
-                            res,
-                            new string[] { "Token Type", "Value" },
-                            props
-                                .GetTokens()
-                                .Select(token => new string[] { token.Name, token.Value })
-                        );
+                        await res.WriteAsync("<a class=\"btn btn-default\" href=\"/\">Home</a>");
                     }
                 );
+                return;
             }
-        );
+
+            // DefaultAuthenticateScheme causes User to be set
+            // var user = context.User;
+
+            // This is what [Authorize] calls
+            var userResult = await context.AuthenticateAsync();
+            var user = userResult.Principal;
+            var props = userResult.Properties;
+
+            // This is what [Authorize(ActiveAuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)] calls
+            // var user = await context.AuthenticateAsync(OpenIdConnectDefaults.AuthenticationScheme);
+
+            // Not authenticated
+            if (user == null || !user.Identities.Any(identity => identity.IsAuthenticated))
+            {
+                // This is what [Authorize] calls
+                await context.ChallengeAsync();
+
+                // This is what [Authorize(ActiveAuthenticationSchemes = OpenIdConnectDefaults.AuthenticationScheme)] calls
+                // await context.ChallengeAsync(OpenIdConnectDefaults.AuthenticationScheme);
+
+                return;
+            }
+
+            // Authenticated, but not authorized
+            if (
+                context.Request.Path.Equals("/restricted")
+                && !user.Identities.Any(identity => identity.HasClaim("special", "true"))
+            )
+            {
+                await context.ForbidAsync();
+                return;
+            }
+
+            if (context.Request.Path.Equals("/refresh"))
+            {
+                var refreshToken = props.GetTokenValue("refresh_token");
+
+                if (string.IsNullOrEmpty(refreshToken))
+                {
+                    await WriteHtmlAsync(
+                        response,
+                        async res =>
+                        {
+                            await res.WriteAsync($"No refresh_token is available.<br>");
+                            await res.WriteAsync(
+                                "<a class=\"btn btn-link\" href=\"/signout\">Sign Out</a>"
+                            );
+                        }
+                    );
+
+                    return;
+                }
+
+                var options = optionsMonitor.Get(OpenIdConnectDefaults.AuthenticationScheme);
+                var metadata = await options.ConfigurationManager.GetConfigurationAsync(
+                    context.RequestAborted
+                );
+
+                var pairs = new Dictionary<string, string>()
+                {
+                    { "client_id", options.ClientId },
+                    { "client_secret", options.ClientSecret },
+                    { "grant_type", "refresh_token" },
+                    { "refresh_token", refreshToken }
+                };
+                var content = new FormUrlEncodedContent(pairs);
+                var tokenResponse = await options.Backchannel.PostAsync(
+                    metadata.TokenEndpoint,
+                    content,
+                    context.RequestAborted
+                );
+                tokenResponse.EnsureSuccessStatusCode();
+
+                using (
+                    var payload = JsonDocument.Parse(
+                        await tokenResponse.Content.ReadAsStringAsync()
+                    )
+                )
+                {
+                    // Persist the new acess token
+                    props.UpdateTokenValue(
+                        "access_token",
+                        payload.RootElement.GetString("access_token")
+                    );
+                    props.UpdateTokenValue(
+                        "refresh_token",
+                        payload.RootElement.GetString("refresh_token")
+                    );
+                    if (
+                        payload.RootElement.TryGetProperty("expires_in", out var property)
+                        && property.TryGetInt32(out var seconds)
+                    )
+                    {
+                        var expiresAt = DateTimeOffset.UtcNow + TimeSpan.FromSeconds(seconds);
+                        props.UpdateTokenValue(
+                            "expires_at",
+                            expiresAt.ToString("o", CultureInfo.InvariantCulture)
+                        );
+                    }
+                    await context.SignInAsync(user, props);
+
+                    await WriteHtmlAsync(
+                        response,
+                        async res =>
+                        {
+                            await res.WriteAsync($"<h1>Refreshed.</h1>");
+                            await res.WriteAsync(
+                                "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
+                            );
+                            await res.WriteAsync(
+                                "<a class=\"btn btn-default\" href=\"/\">Home</a>"
+                            );
+
+                            await res.WriteAsync("<h2>Tokens:</h2>");
+                            await WriteTableHeader(
+                                res,
+                                new string[] { "Token Type", "Value" },
+                                props
+                                    .GetTokens()
+                                    .Select(token => new string[] { token.Name, token.Value })
+                            );
+
+                            await res.WriteAsync("<h2>Payload:</h2>");
+                            await res.WriteAsync(
+                                HtmlEncoder.Default.Encode(payload.ToString()).Replace(",", ",<br>")
+                                    + "<br>"
+                            );
+                        }
+                    );
+                }
+
+                return;
+            }
+
+            if (context.Request.Path.Equals("/login-challenge"))
+            {
+                // Challenge the user authentication, and force a login prompt by overwriting the
+                // "prompt". This could be used for example to require the user to re-enter their
+                // credentials at the authentication provider, to add an extra confirmation layer.
+                await context.ChallengeAsync(
+                    OpenIdConnectDefaults.AuthenticationScheme,
+                    new OpenIdConnectChallengeProperties()
+                    {
+                        Prompt = "login",
+
+                        // it is also possible to specify different scopes, e.g.
+                        // Scope = new string[] { "openid", "profile", "other" }
+                    }
+                );
+
+                return;
+            }
+
+            await WriteHtmlAsync(
+                response,
+                async res =>
+                {
+                    await res.WriteAsync(
+                        $"<h1>Hello Authenticated User {HtmlEncode(user.Identity.Name)}</h1>"
+                    );
+                    await res.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/refresh\">Refresh tokens</a>"
+                    );
+                    await res.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/restricted\">Restricted</a>"
+                    );
+                    await res.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/login-challenge\">Login challenge</a>"
+                    );
+                    await res.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/signout\">Sign Out</a>"
+                    );
+                    await res.WriteAsync(
+                        "<a class=\"btn btn-default\" href=\"/signout-remote\">Sign Out Remote</a>"
+                    );
+
+                    await res.WriteAsync("<h2>Claims:</h2>");
+                    await WriteTableHeader(
+                        res,
+                        new string[] { "Claim Type", "Value" },
+                        context.User.Claims.Select(c => new string[] { c.Type, c.Value })
+                    );
+
+                    await res.WriteAsync("<h2>Tokens:</h2>");
+                    await WriteTableHeader(
+                        res,
+                        new string[] { "Token Type", "Value" },
+                        props.GetTokens().Select(token => new string[] { token.Name, token.Value })
+                    );
+                }
+            );
+        });
     }
 
     private static async Task WriteHtmlAsync(

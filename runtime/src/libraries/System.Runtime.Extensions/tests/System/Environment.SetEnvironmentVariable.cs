@@ -92,43 +92,37 @@ namespace System.Tests
         public void EnvironmentVariableTooLarge_Throws()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    string longVar;
+                    string val = "Test_SetEnvironmentVariable_EnvironmentVariableTooLarge_Throws";
+
+                    try
                     {
-                        string longVar;
-                        string val =
-                            "Test_SetEnvironmentVariable_EnvironmentVariableTooLarge_Throws";
-
-                        try
-                        {
-                            // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
-                            var count =
-                                (
-                                    Environment.Is64BitProcess
-                                        ? 1024 * 1024 * 1024
-                                        : 512 * 1024 * 1024
-                                ) - 64;
-                            longVar = new string('c', count);
-                        }
-                        catch (OutOfMemoryException)
-                        {
-                            // not enough memory to allocate a string at test time
-                            return RemoteExecutor.SuccessExitCode;
-                        }
-
-                        try
-                        {
-                            Environment.SetEnvironmentVariable(longVar, val);
-                            // no exception is ok since we cannot construct an argument long enough to break the function
-                            // in that particular environment
-                        }
-                        catch (OutOfMemoryException)
-                        {
-                            // expected
-                        }
+                        // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
+                        var count =
+                            (Environment.Is64BitProcess ? 1024 * 1024 * 1024 : 512 * 1024 * 1024)
+                            - 64;
+                        longVar = new string('c', count);
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // not enough memory to allocate a string at test time
                         return RemoteExecutor.SuccessExitCode;
                     }
-                )
+
+                    try
+                    {
+                        Environment.SetEnvironmentVariable(longVar, val);
+                        // no exception is ok since we cannot construct an argument long enough to break the function
+                        // in that particular environment
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // expected
+                    }
+                    return RemoteExecutor.SuccessExitCode;
+                })
                 .Dispose();
         }
 
@@ -137,43 +131,38 @@ namespace System.Tests
         public void EnvironmentVariableValueTooLarge_Throws()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    string var =
+                        "Test_SetEnvironmentVariable_EnvironmentVariableValueTooLarge_Throws";
+                    string longVal;
+
+                    try
                     {
-                        string var =
-                            "Test_SetEnvironmentVariable_EnvironmentVariableValueTooLarge_Throws";
-                        string longVal;
-
-                        try
-                        {
-                            // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
-                            var count =
-                                (
-                                    Environment.Is64BitProcess
-                                        ? 1024 * 1024 * 1024
-                                        : 512 * 1024 * 1024
-                                ) - 64;
-                            longVal = new string('c', count);
-                        }
-                        catch (OutOfMemoryException)
-                        {
-                            // not enough memory to allocate a string at test time
-                            return RemoteExecutor.SuccessExitCode;
-                        }
-
-                        try
-                        {
-                            Environment.SetEnvironmentVariable(var, longVal);
-                            // no exception is ok since we cannot construct an argument long enough to break the function
-                            // in that particular environment
-                        }
-                        catch (OutOfMemoryException)
-                        {
-                            // expected
-                        }
+                        // string slightly less than 2 GiB (1 GiB for x86) so the constructor doesn't fail
+                        var count =
+                            (Environment.Is64BitProcess ? 1024 * 1024 * 1024 : 512 * 1024 * 1024)
+                            - 64;
+                        longVal = new string('c', count);
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // not enough memory to allocate a string at test time
                         return RemoteExecutor.SuccessExitCode;
                     }
-                )
+
+                    try
+                    {
+                        Environment.SetEnvironmentVariable(var, longVal);
+                        // no exception is ok since we cannot construct an argument long enough to break the function
+                        // in that particular environment
+                    }
+                    catch (OutOfMemoryException)
+                    {
+                        // expected
+                    }
+                    return RemoteExecutor.SuccessExitCode;
+                })
                 .Dispose();
         }
 

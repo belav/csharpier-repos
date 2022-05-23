@@ -42,12 +42,10 @@ public class RouteHandlerOptionsTests
     {
         var services = new ServiceCollection();
 
-        services.Configure<RouteHandlerOptions>(
-            options =>
-            {
-                options.ThrowOnBadRequest = true;
-            }
-        );
+        services.Configure<RouteHandlerOptions>(options =>
+        {
+            options.ThrowOnBadRequest = true;
+        });
 
         services.AddSingleton<IHostEnvironment>(
             new HostEnvironment { EnvironmentName = "Production", }

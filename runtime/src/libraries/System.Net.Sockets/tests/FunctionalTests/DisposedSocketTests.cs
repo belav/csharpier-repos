@@ -63,12 +63,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetBlocking_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().Blocking = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().Blocking = true;
+            });
         }
 
         [Fact]
@@ -80,12 +78,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetExclusiveAddressUse_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().ExclusiveAddressUse = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().ExclusiveAddressUse = true;
+            });
         }
 
         [Fact]
@@ -97,12 +93,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetReceiveBufferSize_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().ReceiveBufferSize = 1;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().ReceiveBufferSize = 1;
+            });
         }
 
         [Fact]
@@ -114,12 +108,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetSendBufferSize_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().SendBufferSize = 1;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().SendBufferSize = 1;
+            });
         }
 
         [Fact]
@@ -131,12 +123,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetReceiveTimeout_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().ReceiveTimeout = 1;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().ReceiveTimeout = 1;
+            });
         }
 
         [Fact]
@@ -148,12 +138,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetSendTimeout_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().SendTimeout = 1;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().SendTimeout = 1;
+            });
         }
 
         [Fact]
@@ -165,12 +153,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetLingerState_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().LingerState = new LingerOption(true, 1);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().LingerState = new LingerOption(true, 1);
+            });
         }
 
         [Fact]
@@ -182,12 +168,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetNoDelay_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().NoDelay = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().NoDelay = true;
+            });
         }
 
         [Fact]
@@ -201,12 +185,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetTtl_IPv4_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket(AddressFamily.InterNetwork).Ttl = 1;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket(AddressFamily.InterNetwork).Ttl = 1;
+            });
         }
 
         [Fact]
@@ -220,12 +202,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetTtl_IPv6_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket(AddressFamily.InterNetworkV6).Ttl = 1;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket(AddressFamily.InterNetworkV6).Ttl = 1;
+            });
         }
 
         [Fact]
@@ -237,12 +217,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetDontFragment_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().DontFragment = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().DontFragment = true;
+            });
         }
 
         [Fact]
@@ -256,12 +234,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetMulticastLoopback_IPv4_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket(AddressFamily.InterNetwork).MulticastLoopback = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket(AddressFamily.InterNetwork).MulticastLoopback = true;
+            });
         }
 
         [Fact]
@@ -275,12 +251,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetMulticastLoopback_IPv6_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket(AddressFamily.InterNetworkV6).MulticastLoopback = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket(AddressFamily.InterNetworkV6).MulticastLoopback = true;
+            });
         }
 
         [Fact]
@@ -292,12 +266,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetEnableBroadcast_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket().EnableBroadcast = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket().EnableBroadcast = true;
+            });
         }
 
         [Fact]
@@ -311,12 +283,10 @@ namespace System.Net.Sockets.Tests
         [Fact]
         public void SetDualMode_Throws_ObjectDisposed()
         {
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    GetDisposedSocket(AddressFamily.InterNetworkV6).DualMode = true;
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                GetDisposedSocket(AddressFamily.InterNetworkV6).DualMode = true;
+            });
         }
 
         [Fact]
@@ -1090,14 +1060,12 @@ namespace System.Net.Sockets.Tests
             await RetryHelper
                 .ExecuteAsync(
                     () =>
-                        Task.Run(
-                            () =>
-                            {
-                                GC.Collect();
-                                GC.WaitForPendingFinalizers();
-                                Assert.Equal(0, handles.Count(h => h.IsAlive));
-                            }
-                        )
+                        Task.Run(() =>
+                        {
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                            Assert.Equal(0, handles.Count(h => h.IsAlive));
+                        })
                 )
                 .WaitAsync(timeout);
         }

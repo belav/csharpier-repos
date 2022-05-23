@@ -37,13 +37,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Source, Destination>();
-                    c.CreateMap<SourceItem, DestinationItem>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Source, Destination>();
+                c.CreateMap<SourceItem, DestinationItem>();
+            });
 
         [Fact]
         public void Should_overwrite_the_existing_list()
@@ -87,14 +85,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.CreateMap<Source, Destination>()
-                        .ForMember(d => d.Items, o => o.MapAtRuntime());
-                    c.CreateMap<SourceItem, DestinationItem>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.CreateMap<Source, Destination>().ForMember(d => d.Items, o => o.MapAtRuntime());
+                c.CreateMap<SourceItem, DestinationItem>();
+            });
 
         protected override void Because_of()
         {
@@ -248,13 +243,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<SourceItem, DestinationItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<SourceItem, DestinationItem>();
+            });
 
         protected override void Because_of()
         {
@@ -293,13 +286,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<SourceItem, DestinationItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<SourceItem, DestinationItem>();
+            });
 
         protected override void Because_of()
         {
@@ -369,12 +360,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -403,12 +392,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -439,12 +426,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -495,12 +480,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -551,12 +534,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of() =>
             _destination = Mapper.Map<Destination>(
@@ -592,12 +573,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of() =>
             Mapper.Map(
@@ -634,12 +613,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -688,12 +665,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -728,12 +703,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -768,12 +741,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -811,12 +782,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -866,14 +835,12 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(dest => dest.Values, opt => opt.UseDestinationValue());
-                    cfg.CreateMap<SourceItem, DestItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.Values, opt => opt.UseDestinationValue());
+                cfg.CreateMap<SourceItem, DestItem>();
+            });
 
         protected override void Because_of()
         {
@@ -928,14 +895,12 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(dest => dest.Values, opt => opt.UseDestinationValue());
-                    cfg.CreateMap<SourceItem, DestItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.Values, opt => opt.UseDestinationValue());
+                cfg.CreateMap<SourceItem, DestItem>();
+            });
 
         protected override void Because_of()
         {
@@ -984,13 +949,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<SourceItem, DestItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<SourceItem, DestItem>();
+            });
 
         [Fact]
         public void Should_clear_the_list_before_mapping()
@@ -1026,13 +989,11 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<SourceItem, DestItem>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<SourceItem, DestItem>();
+            });
 
         [Fact]
         public void Should_clear_the_list_before_mapping()
@@ -1059,12 +1020,10 @@ namespace AutoMapper.UnitTests.ArraysAndLists
         private List<string> _mappedStrings = new List<string>();
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = true;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = true;
+            });
 
         protected override void Because_of()
         {

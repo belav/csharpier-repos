@@ -558,18 +558,16 @@ namespace System.Collections.Generic
 
             count += index; // Make `count` the upper bound.
 
-            InOrderTreeWalk(
-                node =>
+            InOrderTreeWalk(node =>
+            {
+                if (index >= count)
                 {
-                    if (index >= count)
-                    {
-                        return false;
-                    }
-
-                    array[index++] = node.Item;
-                    return true;
+                    return false;
                 }
-            );
+
+                array[index++] = node.Item;
+                return true;
+            });
         }
 
         void ICollection.CopyTo(Array array, int index)
@@ -618,13 +616,11 @@ namespace System.Collections.Generic
 
                 try
                 {
-                    InOrderTreeWalk(
-                        node =>
-                        {
-                            objects[index++] = node.Item;
-                            return true;
-                        }
-                    );
+                    InOrderTreeWalk(node =>
+                    {
+                        objects[index++] = node.Item;
+                        return true;
+                    });
                 }
                 catch (ArrayTypeMismatchException)
                 {
@@ -1565,16 +1561,14 @@ namespace System.Collections.Generic
             }
             List<T> matches = new List<T>(this.Count);
 
-            BreadthFirstTreeWalk(
-                n =>
+            BreadthFirstTreeWalk(n =>
+            {
+                if (match(n.Item))
                 {
-                    if (match(n.Item))
-                    {
-                        matches.Add(n.Item);
-                    }
-                    return true;
+                    matches.Add(n.Item);
                 }
-            );
+                return true;
+            });
 
             // Enumerate the results of the breadth-first walk in reverse in an attempt to lower cost.
             int actuallyRemoved = 0;

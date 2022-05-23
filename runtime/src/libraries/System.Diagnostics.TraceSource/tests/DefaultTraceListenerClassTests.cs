@@ -146,18 +146,16 @@ namespace System.Diagnostics.TraceSourceTests
         public void EntryAssemblyName_Default_IncludedInTrace()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        var listener = new TestDefaultTraceListener();
-                        Trace.Listeners.Add(listener);
-                        Trace.TraceError("hello world");
-                        Assert.Equal(
-                            Assembly.GetEntryAssembly()?.GetName().Name + " Error: 0 : hello world",
-                            listener.Output.Trim()
-                        );
-                    }
-                )
+                .Invoke(() =>
+                {
+                    var listener = new TestDefaultTraceListener();
+                    Trace.Listeners.Add(listener);
+                    Trace.TraceError("hello world");
+                    Assert.Equal(
+                        Assembly.GetEntryAssembly()?.GetName().Name + " Error: 0 : hello world",
+                        listener.Output.Trim()
+                    );
+                })
                 .Dispose();
         }
 
@@ -165,17 +163,15 @@ namespace System.Diagnostics.TraceSourceTests
         public void EntryAssemblyName_Null_NotIncludedInTrace()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        MakeAssemblyGetEntryAssemblyReturnNull();
+                .Invoke(() =>
+                {
+                    MakeAssemblyGetEntryAssemblyReturnNull();
 
-                        var listener = new TestDefaultTraceListener();
-                        Trace.Listeners.Add(listener);
-                        Trace.TraceError("hello world");
-                        Assert.Equal("Error: 0 : hello world", listener.Output.Trim());
-                    }
-                )
+                    var listener = new TestDefaultTraceListener();
+                    Trace.Listeners.Add(listener);
+                    Trace.TraceError("hello world");
+                    Assert.Equal("Error: 0 : hello world", listener.Output.Trim());
+                })
                 .Dispose();
         }
 

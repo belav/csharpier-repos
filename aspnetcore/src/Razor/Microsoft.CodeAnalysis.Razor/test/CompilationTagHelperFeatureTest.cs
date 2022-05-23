@@ -75,14 +75,12 @@ public class CompilationTagHelperFeatureTest
             .Callback<TagHelperDescriptorProviderContext>(c => compilation = c.GetCompilation())
             .Verifiable();
 
-        var engine = RazorProjectEngine.Create(
-            configure =>
-            {
-                configure.Features.Add(new DefaultMetadataReferenceFeature());
-                configure.Features.Add(provider.Object);
-                configure.Features.Add(new CompilationTagHelperFeature());
-            }
-        );
+        var engine = RazorProjectEngine.Create(configure =>
+        {
+            configure.Features.Add(new DefaultMetadataReferenceFeature());
+            configure.Features.Add(provider.Object);
+            configure.Features.Add(new CompilationTagHelperFeature());
+        });
 
         var feature = engine.EngineFeatures.OfType<CompilationTagHelperFeature>().First();
 
@@ -112,16 +110,12 @@ public class CompilationTagHelperFeatureTest
             MetadataReference.CreateFromFile(typeof(ITagHelper).Assembly.Location),
         };
 
-        var engine = RazorProjectEngine.Create(
-            configure =>
-            {
-                configure.Features.Add(
-                    new DefaultMetadataReferenceFeature { References = references }
-                );
-                configure.Features.Add(provider.Object);
-                configure.Features.Add(new CompilationTagHelperFeature());
-            }
-        );
+        var engine = RazorProjectEngine.Create(configure =>
+        {
+            configure.Features.Add(new DefaultMetadataReferenceFeature { References = references });
+            configure.Features.Add(provider.Object);
+            configure.Features.Add(new CompilationTagHelperFeature());
+        });
 
         var feature = engine.EngineFeatures.OfType<CompilationTagHelperFeature>().First();
 

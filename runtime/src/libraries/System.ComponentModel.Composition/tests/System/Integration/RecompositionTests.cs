@@ -70,12 +70,10 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(
-                () =>
-                {
-                    container.Compose(batch);
-                }
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+            {
+                container.Compose(batch);
+            });
 
             Assert.Equal(-21, importer.Value);
         }
@@ -109,12 +107,10 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(
-                () =>
-                {
-                    container.Compose(batch);
-                }
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+            {
+                container.Compose(batch);
+            });
 
             Assert.Equal(-21, importer.Value);
         }
@@ -153,12 +149,10 @@ namespace Tests.Integration
             batch.AddExportedValue("Value", 42);
             // After rejection batch failures throw ChangeRejectedException to indicate that
             // the failure did not affect the container
-            Assert.Throws<ChangeRejectedException>(
-                () =>
-                {
-                    container.Compose(batch);
-                }
-            );
+            Assert.Throws<ChangeRejectedException>(() =>
+            {
+                container.Compose(batch);
+            });
 
             Assert.Equal(-21, importer.NonRecomposableValue);
             // The batch rejection means that the recomposable value shouldn't change either

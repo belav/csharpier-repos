@@ -20,12 +20,10 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap(typeof(Source<>), typeof(Dest<>));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap(typeof(Source<>), typeof(Dest<>));
+            });
 
         protected override void Because_of()
         {

@@ -141,20 +141,18 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("the-command") { new Option("--one"), new Option("--two") };
 
-            command.AddValidator(
-                commandResult =>
+            command.AddValidator(commandResult =>
+            {
+                if (
+                    commandResult.Children.ContainsAlias("--one")
+                    && commandResult.Children.ContainsAlias("--two")
+                )
                 {
-                    if (
-                        commandResult.Children.ContainsAlias("--one")
-                        && commandResult.Children.ContainsAlias("--two")
-                    )
-                    {
-                        return "Options '--one' and '--two' cannot be used together.";
-                    }
-
-                    return null;
+                    return "Options '--one' and '--two' cannot be used together.";
                 }
-            );
+
+                return null;
+            });
 
             var result = command.Parse("the-command --one --two");
 
@@ -169,14 +167,12 @@ namespace System.CommandLine.Tests
         {
             var option = new Option<int>("-x");
 
-            option.AddValidator(
-                r =>
-                {
-                    var value = r.GetValueOrDefault<int>();
+            option.AddValidator(r =>
+            {
+                var value = r.GetValueOrDefault<int>();
 
-                    return $"Option {r.Token.Value} cannot be set to {value}";
-                }
-            );
+                return $"Option {r.Token.Value} cannot be set to {value}";
+            });
 
             var command = new RootCommand { option };
 
@@ -194,14 +190,12 @@ namespace System.CommandLine.Tests
         {
             var argument = new Argument<int>("x");
 
-            argument.AddValidator(
-                r =>
-                {
-                    var value = r.GetValueOrDefault<int>();
+            argument.AddValidator(r =>
+            {
+                var value = r.GetValueOrDefault<int>();
 
-                    return $"Argument {r.Argument.Name} cannot be set to {value}";
-                }
-            );
+                return $"Argument {r.Argument.Name} cannot be set to {value}";
+            });
 
             var command = new RootCommand { argument };
 
@@ -224,31 +218,25 @@ namespace System.CommandLine.Tests
             var argumentValidatorWasCalled = false;
 
             var option = new Option<string>("-o");
-            option.AddValidator(
-                _ =>
-                {
-                    optionValidatorWasCalled = true;
-                    return null;
-                }
-            );
+            option.AddValidator(_ =>
+            {
+                optionValidatorWasCalled = true;
+                return null;
+            });
 
             var argument = new Argument<string>("the-arg");
-            argument.AddValidator(
-                _ =>
-                {
-                    argumentValidatorWasCalled = true;
-                    return null;
-                }
-            );
+            argument.AddValidator(_ =>
+            {
+                argumentValidatorWasCalled = true;
+                return null;
+            });
 
             var rootCommand = new RootCommand { option, argument };
-            rootCommand.AddValidator(
-                _ =>
-                {
-                    commandValidatorWasCalled = true;
-                    return null;
-                }
-            );
+            rootCommand.AddValidator(_ =>
+            {
+                commandValidatorWasCalled = true;
+                return null;
+            });
 
             rootCommand.Invoke(commandLine);
 
@@ -265,12 +253,10 @@ namespace System.CommandLine.Tests
         )
         {
             var option = new Option<FileInfo>("--file");
-            option.AddValidator(
-                r =>
-                {
-                    return "Invoked validator";
-                }
-            );
+            option.AddValidator(r =>
+            {
+                return "Invoked validator";
+            });
 
             var subCommand = new Command("subcommand");
             var rootCommand = new RootCommand { subCommand };

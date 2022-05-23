@@ -18,12 +18,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             [Fact]
             public void Should_map_successfully()
@@ -43,13 +41,11 @@ namespace AutoMapper.UnitTests
             public class ModelObject { }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.AllowNullDestinationValues = false;
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.AllowNullDestinationValues = false;
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             [Fact]
             public void Should_always_provide_a_dto()
@@ -77,12 +73,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -113,12 +107,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -151,12 +143,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -186,12 +176,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             [Fact]
             public void Should_throw_a_mapping_exception()
@@ -221,12 +209,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -268,12 +254,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -318,12 +302,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -362,12 +344,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>();
+                });
 
             protected override void Because_of()
             {
@@ -406,16 +386,14 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<ModelObject, ModelDto>()
-                            .ForMember(
-                                dest => dest.SomeOtherValue2,
-                                opt => opt.MapFrom(src => src.SomeOtherValue)
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<ModelObject, ModelDto>()
+                        .ForMember(
+                            dest => dest.SomeOtherValue2,
+                            opt => opt.MapFrom(src => src.SomeOtherValue)
+                        );
+                });
 
             protected override void Because_of()
             {
@@ -451,12 +429,10 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>();
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>();
+                });
 
             protected override void Because_of()
             {

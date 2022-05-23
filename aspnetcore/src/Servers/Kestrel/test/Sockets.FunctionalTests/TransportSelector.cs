@@ -15,17 +15,13 @@ public static class TransportSelector
         long? maxReadBufferSize = null
     )
     {
-        return new HostBuilder().ConfigureWebHost(
-            webHostBuilder =>
+        return new HostBuilder().ConfigureWebHost(webHostBuilder =>
+        {
+            webHostBuilder.UseSockets(options =>
             {
-                webHostBuilder.UseSockets(
-                    options =>
-                    {
-                        options.MemoryPoolFactory = memoryPoolFactory ?? options.MemoryPoolFactory;
-                        options.MaxReadBufferSize = maxReadBufferSize;
-                    }
-                );
-            }
-        );
+                options.MemoryPoolFactory = memoryPoolFactory ?? options.MemoryPoolFactory;
+                options.MaxReadBufferSize = maxReadBufferSize;
+            });
+        });
     }
 }

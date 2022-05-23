@@ -32,15 +32,13 @@ namespace System.IO.Tests
         {
             // We're checking that we're maintaining the original path
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        Environment.CurrentDirectory = TestDirectory;
-                        string subdir = Path.GetRandomFileName();
-                        DirectoryInfo info = Create(subdir);
-                        Assert.Equal(subdir, info.ToString());
-                    }
-                )
+                .Invoke(() =>
+                {
+                    Environment.CurrentDirectory = TestDirectory;
+                    string subdir = Path.GetRandomFileName();
+                    DirectoryInfo info = Create(subdir);
+                    Assert.Equal(subdir, info.ToString());
+                })
                 .Dispose();
         }
 
@@ -536,24 +534,20 @@ namespace System.IO.Tests
         [PlatformSpecific(TestPlatforms.Windows)] // testing drive labels
         public void NonExistentDriveAsPath_ThrowsDirectoryNotFoundException()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    Create(IOServices.GetNonExistentDrive());
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                Create(IOServices.GetNonExistentDrive());
+            });
         }
 
         [Fact]
         [PlatformSpecific(TestPlatforms.Windows)] // testing drive labels
         public void SubdirectoryOnNonExistentDriveAsPath_ThrowsDirectoryNotFoundException()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    Create(Path.Combine(IOServices.GetNonExistentDrive(), "Subdirectory"));
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                Create(Path.Combine(IOServices.GetNonExistentDrive(), "Subdirectory"));
+            });
         }
 
         [Fact]
@@ -570,12 +564,10 @@ namespace System.IO.Tests
                 return;
             }
 
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    Create(drive);
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                Create(drive);
+            });
         }
 
         [Fact]
@@ -593,12 +585,10 @@ namespace System.IO.Tests
             }
 
             // 'Device is not ready'
-            Assert.Throws<IOException>(
-                () =>
-                {
-                    Create(Path.Combine(drive, "Subdirectory"));
-                }
-            );
+            Assert.Throws<IOException>(() =>
+            {
+                Create(Path.Combine(drive, "Subdirectory"));
+            });
         }
 
 #if !TEST_WINRT // Cannot set current directory to root from appcontainer with it's default ACL

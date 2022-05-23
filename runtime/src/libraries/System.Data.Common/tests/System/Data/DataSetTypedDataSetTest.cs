@@ -684,12 +684,10 @@ namespace System.Data.Tests
             Assert.Equal(i + 1, tblOrders.Rows.Count);
 
             //check StrongTypingException
-            Assert.Throws<StrongTypingException>(
-                () =>
-                {
-                    DateTime d = drOrders.ShippedDate; //drOrders.ShippedDate = null, will raise exception
-                }
-            );
+            Assert.Throws<StrongTypingException>(() =>
+            {
+                DateTime d = drOrders.ShippedDate; //drOrders.ShippedDate = null, will raise exception
+            });
 
             //check the new row AutoIncrement field - NewTableNameRow
             i = (int)tblOrders.Rows[tblOrders.Rows.Count - 2][0];
@@ -719,12 +717,10 @@ namespace System.Data.Tests
             Assert.True(tblOrders.OrderIDColumn.ReadOnly);
 
             //read only exception
-            Assert.Throws<ReadOnlyException>(
-                () =>
-                {
-                    tblOrders[0].OrderID = 99;
-                }
-            );
+            Assert.Throws<ReadOnlyException>(() =>
+            {
+                tblOrders[0].OrderID = 99;
+            });
 
             tblOrders.AcceptChanges();
 

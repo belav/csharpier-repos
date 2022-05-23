@@ -108,18 +108,14 @@ public class Startup
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseKestrel().UseAzureAppServices().UseStartup<Startup>();
-                }
-            )
-            .ConfigureLogging(
-                factory =>
-                {
-                    factory.AddConsole();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseKestrel().UseAzureAppServices().UseStartup<Startup>();
+            })
+            .ConfigureLogging(factory =>
+            {
+                factory.AddConsole();
+            })
             .Build();
 
         return host.RunAsync();

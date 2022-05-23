@@ -88,16 +88,14 @@ public class DynamicControllerEndpointMatcherPolicyTest
 
         var services = new ServiceCollection();
         services.AddRouting();
-        services.AddTransient<CustomTransformer>(
-            s =>
-            {
-                var transformer = new CustomTransformer();
-                transformer.Transform = (c, values, state) => Transform(c, values, state);
-                transformer.Filter = (c, values, state, candidates) =>
-                    Filter(c, values, state, candidates);
-                return transformer;
-            }
-        );
+        services.AddTransient<CustomTransformer>(s =>
+        {
+            var transformer = new CustomTransformer();
+            transformer.Transform = (c, values, state) => Transform(c, values, state);
+            transformer.Filter = (c, values, state, candidates) =>
+                Filter(c, values, state, candidates);
+            return transformer;
+        });
         Services = services.BuildServiceProvider();
 
         Comparer = Services.GetRequiredService<EndpointMetadataComparer>();

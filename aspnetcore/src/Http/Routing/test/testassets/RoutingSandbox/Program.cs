@@ -62,22 +62,18 @@ public class Program
         }
 
         return new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseKestrel()
-                        .UseIISIntegration()
-                        .UseContentRoot(Environment.CurrentDirectory)
-                        .UseStartup(startupType);
-                }
-            )
-            .ConfigureLogging(
-                b =>
-                {
-                    b.AddConsole();
-                    b.SetMinimumLevel(LogLevel.Critical);
-                }
-            );
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseKestrel()
+                    .UseIISIntegration()
+                    .UseContentRoot(Environment.CurrentDirectory)
+                    .UseStartup(startupType);
+            })
+            .ConfigureLogging(b =>
+            {
+                b.AddConsole();
+                b.SetMinimumLevel(LogLevel.Critical);
+            });
     }
 }

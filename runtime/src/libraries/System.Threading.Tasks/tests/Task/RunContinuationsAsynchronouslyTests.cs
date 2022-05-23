@@ -56,33 +56,31 @@ namespace System.Threading.Tasks.Tests
             Func<Task, Task> getIntermediateContinuation
         )
         {
-            Task t = Task.Run(
-                () => // run test off of xunit's thread so as not to be confused by its TaskScheduler or SynchronizationContext
-                {
-                    int callingThreadId = Environment.CurrentManagedThreadId;
+            Task t = Task.Run(() => // run test off of xunit's thread so as not to be confused by its TaskScheduler or SynchronizationContext
+            {
+                int callingThreadId = Environment.CurrentManagedThreadId;
 
-                    var tcs = new TaskCompletionSource<Task>(
-                        useRunContinuationsAsynchronously
-                            ? TaskCreationOptions.RunContinuationsAsynchronously
-                            : TaskCreationOptions.None
+                var tcs = new TaskCompletionSource<Task>(
+                    useRunContinuationsAsynchronously
+                        ? TaskCreationOptions.RunContinuationsAsynchronously
+                        : TaskCreationOptions.None
+                );
+
+                Task cont = getIntermediateContinuation(tcs.Task)
+                    .ContinueWith(
+                        _ =>
+                            Assert.NotEqual(
+                                useRunContinuationsAsynchronously,
+                                callingThreadId == Environment.CurrentManagedThreadId
+                            ),
+                        TaskContinuationOptions.ExecuteSynchronously
                     );
 
-                    Task cont = getIntermediateContinuation(tcs.Task)
-                        .ContinueWith(
-                            _ =>
-                                Assert.NotEqual(
-                                    useRunContinuationsAsynchronously,
-                                    callingThreadId == Environment.CurrentManagedThreadId
-                                ),
-                            TaskContinuationOptions.ExecuteSynchronously
-                        );
+                tcs.SetResult(Task.CompletedTask);
 
-                    tcs.SetResult(Task.CompletedTask);
-
-                    ((IAsyncResult)cont).AsyncWaitHandle.WaitOne(); // ensure we don't inline as part of waiting
-                    cont.GetAwaiter().GetResult(); // propagate any errors
-                }
-            );
+                ((IAsyncResult)cont).AsyncWaitHandle.WaitOne(); // ensure we don't inline as part of waiting
+                cont.GetAwaiter().GetResult(); // propagate any errors
+            });
             ((IAsyncResult)t).AsyncWaitHandle.WaitOne(); // ensure we don't inline as part of waiting
             t.GetAwaiter().GetResult(); // propagate any errors
         }

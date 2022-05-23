@@ -431,26 +431,24 @@ namespace System.ComponentModel.Composition
         public void Message_ShouldFormatCountOfRootCausesUsingTheCurrentCulture()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    IEnumerable<CultureInfo> cultures = Expectations.GetCulturesForFormatting();
+                    foreach (CultureInfo culture in cultures)
                     {
-                        IEnumerable<CultureInfo> cultures = Expectations.GetCulturesForFormatting();
-                        foreach (CultureInfo culture in cultures)
+                        // Save old culture and set a fixed culture for object instantiation
+                        using (new ThreadCultureChange(culture, culture))
                         {
-                            // Save old culture and set a fixed culture for object instantiation
-                            using (new ThreadCultureChange(culture, culture))
-                            {
-                                CompositionError[] errors = CreateCompositionErrors(1000);
-                                CompositionException exception = CreateCompositionException(errors);
-                                AssertMessage(exception, 1000, culture);
+                            CompositionError[] errors = CreateCompositionErrors(1000);
+                            CompositionException exception = CreateCompositionException(errors);
+                            AssertMessage(exception, 1000, culture);
 
-                                errors = CreateCompositionErrors(1);
-                                exception = CreateCompositionException(errors);
-                                AssertMessage(exception, 1, culture);
-                            }
+                            errors = CreateCompositionErrors(1);
+                            exception = CreateCompositionException(errors);
+                            AssertMessage(exception, 1, culture);
                         }
                     }
-                )
+                })
                 .Dispose();
         }
 

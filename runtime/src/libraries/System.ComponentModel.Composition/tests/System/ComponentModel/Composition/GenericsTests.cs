@@ -783,12 +783,10 @@ namespace System.ComponentModel.Composition
         {
             var catalog = new TypeCatalog(typeof(ANonGenericB<>));
             var container = new CompositionContainer(catalog);
-            Assert.Throws<ImportCardinalityMismatchException>(
-                () =>
-                {
-                    var b = container.GetExportedValue<IBar>();
-                }
-            );
+            Assert.Throws<ImportCardinalityMismatchException>(() =>
+            {
+                var b = container.GetExportedValue<IBar>();
+            });
         }
 
         [Fact]

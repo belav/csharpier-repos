@@ -473,13 +473,11 @@ public class KestrelServerTests
                         .Returns(new ValueTask<ConnectionContext>((ConnectionContext)null));
                     mockTransport
                         .Setup(transport => transport.UnbindAsync(It.IsAny<CancellationToken>()))
-                        .Returns(
-                            async () =>
-                            {
-                                await unbind.WaitAsync();
-                                throw unbindException;
-                            }
-                        );
+                        .Returns(async () =>
+                        {
+                            await unbind.WaitAsync();
+                            throw unbindException;
+                        });
                     mockTransport.Setup(transport => transport.EndPoint).Returns(e);
 
                     return new ValueTask<IConnectionListener>(mockTransport.Object);
@@ -582,13 +580,11 @@ public class KestrelServerTests
         Assert.False(stopTask1.IsCompleted);
         Assert.False(stopTask2.IsCompleted);
 
-        var continuationTask = Task.Run(
-            async () =>
-            {
-                await stopTask2;
-                stopTask1.Wait();
-            }
-        );
+        var continuationTask = Task.Run(async () =>
+        {
+            await stopTask2;
+            stopTask1.Wait();
+        });
 
         unbindTcs.SetResult();
 

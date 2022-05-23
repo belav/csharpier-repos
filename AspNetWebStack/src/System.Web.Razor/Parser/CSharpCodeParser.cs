@@ -358,18 +358,16 @@ namespace System.Web.Razor.Parser
             Context.CurrentBlock.CodeGenerator = new ExpressionCodeGenerator();
 
             using (
-                PushSpanConfig(
-                    span =>
-                    {
-                        span.EditHandler = new ImplicitExpressionEditHandler(
-                            Language.TokenizeString,
-                            Keywords,
-                            acceptTrailingDot: IsNested
-                        );
-                        span.EditHandler.AcceptedCharacters = AcceptedCharacters.NonWhiteSpace;
-                        span.CodeGenerator = new ExpressionCodeGenerator();
-                    }
-                )
+                PushSpanConfig(span =>
+                {
+                    span.EditHandler = new ImplicitExpressionEditHandler(
+                        Language.TokenizeString,
+                        Keywords,
+                        acceptTrailingDot: IsNested
+                    );
+                    span.EditHandler.AcceptedCharacters = AcceptedCharacters.NonWhiteSpace;
+                    span.CodeGenerator = new ExpressionCodeGenerator();
+                })
             )
             {
                 do

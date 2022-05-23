@@ -96,12 +96,10 @@ CommonKey3:CommonKey4=IniValue6";
         public void ThrowsOnFileNotFoundWhenNotIgnored()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(
-                c =>
-                {
-                    c.Path = Path.Combine(_fileSystem.RootPath, _jsonFile);
-                }
-            );
+            configurationBuilder.AddJsonFile(c =>
+            {
+                c.Path = Path.Combine(_fileSystem.RootPath, _jsonFile);
+            });
 
             Assert.Throws<FileNotFoundException>(() => configurationBuilder.Build());
         }
@@ -110,18 +108,16 @@ CommonKey3:CommonKey4=IniValue6";
         public void CanHandleExceptionIfFileNotFound()
         {
             var configurationBuilder = new ConfigurationBuilder();
-            configurationBuilder.AddJsonFile(
-                c =>
+            configurationBuilder.AddJsonFile(c =>
+            {
+                c.Path = Path.Combine(_fileSystem.RootPath, _jsonFile);
+                c.OnLoadException = e =>
                 {
-                    c.Path = Path.Combine(_fileSystem.RootPath, _jsonFile);
-                    c.OnLoadException = e =>
-                    {
-                        e.Ignore = true;
-                        var exception = e.Exception as FileNotFoundException;
-                        Assert.NotNull(exception);
-                    };
-                }
-            );
+                    e.Ignore = true;
+                    var exception = e.Exception as FileNotFoundException;
+                    Assert.NotNull(exception);
+                };
+            });
 
             configurationBuilder.Build();
         }
@@ -554,13 +550,11 @@ IniKey1=IniValue2"
             };
 
             CreateBuilder()
-                .AddJsonFile(
-                    s =>
-                    {
-                        s.Path = "error.json";
-                        s.OnLoadException = jsonLoadError;
-                    }
-                )
+                .AddJsonFile(s =>
+                {
+                    s.Path = "error.json";
+                    s.OnLoadException = jsonLoadError;
+                })
                 .Build();
 
             Assert.NotNull(provider);

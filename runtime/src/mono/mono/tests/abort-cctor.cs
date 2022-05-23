@@ -68,22 +68,20 @@ class Driver
         Driver.mre1.Reset();
         Driver.mre2.Reset();
 
-        Thread thread = new Thread(
-            () =>
+        Thread thread = new Thread(() =>
+        {
+            try
             {
-                try
-                {
-                    StaticConstructor1.Init();
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("StaticConstructor1::init caught exception {0}", e);
-
-                    if (!(e is ThreadAbortException))
-                        throw;
-                }
+                StaticConstructor1.Init();
             }
-        );
+            catch (Exception e)
+            {
+                Console.WriteLine("StaticConstructor1::init caught exception {0}", e);
+
+                if (!(e is ThreadAbortException))
+                    throw;
+            }
+        });
 
         thread.Start();
 
@@ -142,22 +140,20 @@ class Driver
         Driver.mre1.Reset();
         Driver.mre2.Reset();
 
-        Thread thread = new Thread(
-            () =>
+        Thread thread = new Thread(() =>
+        {
+            try
             {
-                try
-                {
-                    StaticConstructor2.Init();
-                }
-                catch (TypeInitializationException e)
-                {
-                    Console.WriteLine(e);
-
-                    if (!(e.InnerException is StaticConstructor2Exception))
-                        throw;
-                }
+                StaticConstructor2.Init();
             }
-        );
+            catch (TypeInitializationException e)
+            {
+                Console.WriteLine(e);
+
+                if (!(e.InnerException is StaticConstructor2Exception))
+                    throw;
+            }
+        });
 
         thread.Start();
 
@@ -222,23 +218,21 @@ class Driver
         Driver.mre1.Reset();
         Driver.mre2.Reset();
 
-        Thread thread = new Thread(
-            () =>
+        Thread thread = new Thread(() =>
+        {
+            try
             {
-                try
-                {
-                    StaticConstructor3.Init();
-                    Console.WriteLine("cctor3 didn't throw?!?!");
-                    /* StaticConstructor3 self aborted */
-                    Environment.Exit(7);
-                }
-                catch (ThreadAbortException e)
-                {
-                    Console.WriteLine("TEST 3: aborted {0}", e);
-                    catched_abort = true;
-                }
+                StaticConstructor3.Init();
+                Console.WriteLine("cctor3 didn't throw?!?!");
+                /* StaticConstructor3 self aborted */
+                Environment.Exit(7);
             }
-        );
+            catch (ThreadAbortException e)
+            {
+                Console.WriteLine("TEST 3: aborted {0}", e);
+                catched_abort = true;
+            }
+        });
 
         thread.Start();
 
@@ -330,29 +324,27 @@ class Driver
         Driver.mre1.Reset();
         Driver.mre2.Reset();
 
-        Thread thread = new Thread(
-            () =>
+        Thread thread = new Thread(() =>
+        {
+            try
             {
-                try
+                try { }
+                finally
                 {
-                    try { }
-                    finally
-                    {
-                        StaticConstructor4.Init();
-                        Console.WriteLine("Test 4: After the cctor");
-                        got_to_the_end_of_the_finally = true;
-                    }
-                }
-                catch (Exception e)
-                {
-                    Console.WriteLine("StaticConstructor4::init caught exception {0}", e);
-                    if (!(e is ThreadAbortException))
-                        throw;
-                    if (!got_to_the_end_of_the_finally)
-                        throw new Exception("Test 4: did not get to the end of the cctor");
+                    StaticConstructor4.Init();
+                    Console.WriteLine("Test 4: After the cctor");
+                    got_to_the_end_of_the_finally = true;
                 }
             }
-        );
+            catch (Exception e)
+            {
+                Console.WriteLine("StaticConstructor4::init caught exception {0}", e);
+                if (!(e is ThreadAbortException))
+                    throw;
+                if (!got_to_the_end_of_the_finally)
+                    throw new Exception("Test 4: did not get to the end of the cctor");
+            }
+        });
 
         thread.Start();
 
@@ -409,20 +401,18 @@ class Driver
         bool catched_abort = false;
         Driver.mre1.Reset();
         Driver.mre2.Reset();
-        Thread thread = new Thread(
-            () =>
+        Thread thread = new Thread(() =>
+        {
+            try
             {
-                try
-                {
-                    new StaticConstructor5();
-                }
-                catch (ThreadAbortException)
-                {
-                    Console.WriteLine("Catched thread abort");
-                    catched_abort = true;
-                }
+                new StaticConstructor5();
             }
-        );
+            catch (ThreadAbortException)
+            {
+                Console.WriteLine("Catched thread abort");
+                catched_abort = true;
+            }
+        });
         thread.Start();
 
         Driver.mre1.WaitOne();
@@ -484,12 +474,10 @@ class Driver
 
     public static void Test6()
     {
-        Thread thread = new Thread(
-            () =>
-            {
-                new StaticConstructor6();
-            }
-        );
+        Thread thread = new Thread(() =>
+        {
+            new StaticConstructor6();
+        });
 
         thread.Start();
         Driver.sema1.Wait();

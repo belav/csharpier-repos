@@ -24,40 +24,38 @@ namespace System.Net.Http.Functional.Tests
             CreateServer(authSchemes);
 
             // Start listening for requests.
-            _serverTask = Task.Run(
-                async () =>
+            _serverTask = Task.Run(async () =>
+            {
+                try
                 {
-                    try
+                    while (true)
                     {
-                        while (true)
+                        HttpListenerContext context = await _listener.GetContextAsync();
+
+                        bool noAccess = (context.Request.RawUrl == NoAccessUrl);
+                        if (noAccess)
                         {
-                            HttpListenerContext context = await _listener.GetContextAsync();
-
-                            bool noAccess = (context.Request.RawUrl == NoAccessUrl);
-                            if (noAccess)
-                            {
-                                context.Response.AddHeader("Www-Authenticate", "Negotiate");
-                            }
-
-                            context.Response.StatusCode = noAccess ? 401 : 200;
-                            context.Response.ContentLength64 = 0;
-                            context.Response.OutputStream.Close();
+                            context.Response.AddHeader("Www-Authenticate", "Negotiate");
                         }
-                    }
-                    catch (HttpListenerException)
-                    {
-                        // Ignore.
-                    }
-                    catch (ObjectDisposedException)
-                    {
-                        // Ignore.
-                    }
-                    catch (InvalidOperationException)
-                    {
-                        // Ignore.
+
+                        context.Response.StatusCode = noAccess ? 401 : 200;
+                        context.Response.ContentLength64 = 0;
+                        context.Response.OutputStream.Close();
                     }
                 }
-            );
+                catch (HttpListenerException)
+                {
+                    // Ignore.
+                }
+                catch (ObjectDisposedException)
+                {
+                    // Ignore.
+                }
+                catch (InvalidOperationException)
+                {
+                    // Ignore.
+                }
+            });
         }
 
         public void Dispose()

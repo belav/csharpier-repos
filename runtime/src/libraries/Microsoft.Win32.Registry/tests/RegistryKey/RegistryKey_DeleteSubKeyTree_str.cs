@@ -37,13 +37,11 @@ namespace Microsoft.Win32.RegistryTests
             }
 
             // Should throw if RegistryKey is closed
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    TestRegistryKey.Dispose();
-                    TestRegistryKey.DeleteSubKeyTree(name);
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                TestRegistryKey.Dispose();
+                TestRegistryKey.DeleteSubKeyTree(name);
+            });
         }
 
         [Fact]

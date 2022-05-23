@@ -1167,15 +1167,13 @@ public class ComponentRendererTest
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            _renderHandle.Render(
-                builder =>
-                {
-                    var s = 0;
-                    builder.OpenElement(s++, "h1");
-                    builder.AddContent(s++, "Hello world!");
-                    builder.CloseElement();
-                }
-            );
+            _renderHandle.Render(builder =>
+            {
+                var s = 0;
+                builder.OpenElement(s++, "h1");
+                builder.AddContent(s++, "Hello world!");
+                builder.CloseElement();
+            });
             return Task.CompletedTask;
         }
     }

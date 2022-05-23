@@ -38,23 +38,21 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryDiscardDesignation
 
         protected override void InitializeWorker(AnalysisContext context)
         {
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                if (
+                    ((CSharpCompilation)context.Compilation).LanguageVersion
+                    < LanguageVersion.CSharp9
+                )
                 {
-                    if (
-                        ((CSharpCompilation)context.Compilation).LanguageVersion
-                        < LanguageVersion.CSharp9
-                    )
-                    {
-                        return;
-                    }
-
-                    context.RegisterSyntaxNodeAction(
-                        AnalyzeDiscardDesignation,
-                        SyntaxKind.DiscardDesignation
-                    );
+                    return;
                 }
-            );
+
+                context.RegisterSyntaxNodeAction(
+                    AnalyzeDiscardDesignation,
+                    SyntaxKind.DiscardDesignation
+                );
+            });
         }
 
         private void AnalyzeDiscardDesignation(SyntaxNodeAnalysisContext context)

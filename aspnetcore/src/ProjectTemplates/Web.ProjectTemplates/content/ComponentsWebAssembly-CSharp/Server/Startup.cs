@@ -138,14 +138,12 @@ namespace ComponentsWebAssembly_CSharp.Server
             app.UseAuthorization();
 
 #endif
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapRazorPages();
-                    endpoints.MapControllers();
-                    endpoints.MapFallbackToFile("index.html");
-                }
-            );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapRazorPages();
+                endpoints.MapControllers();
+                endpoints.MapFallbackToFile("index.html");
+            });
         }
     }
 }

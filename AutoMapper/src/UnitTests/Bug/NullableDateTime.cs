@@ -24,20 +24,18 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            m => m.Foo,
-                            opt =>
-                            {
-                                opt.Condition(src => src.Bars != null && src.Bars.Length > 0);
-                                opt.MapFrom(src => src.Bars.Min(b => b.Bar));
-                            }
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(
+                        m => m.Foo,
+                        opt =>
+                        {
+                            opt.Condition(src => src.Bars != null && src.Bars.Length > 0);
+                            opt.MapFrom(src => src.Bars.Min(b => b.Bar));
+                        }
+                    );
+            });
     }
 
     public class FromDateToNullableDateTime : AutoMapperSpecBase
@@ -58,13 +56,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(d => d.FiredDate, o => o.MapFrom(s => s.HiredDate.Date));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(d => d.FiredDate, o => o.MapFrom(s => s.HiredDate.Date));
+            });
 
         protected override void Because_of()
         {
@@ -94,16 +90,14 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.CreateMap<DateTime, DateTime?>()
-                        .ConvertUsing(
-                            source => source == new DateTime(1900, 1, 1) ? (DateTime?)null : source
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<DateTime, DateTime?>()
+                    .ConvertUsing(
+                        source => source == new DateTime(1900, 1, 1) ? (DateTime?)null : source
+                    );
+            });
 
         protected override void Because_of()
         {

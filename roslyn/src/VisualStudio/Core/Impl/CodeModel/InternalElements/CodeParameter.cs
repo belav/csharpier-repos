@@ -161,12 +161,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         public EnvDTE.CodeAttribute AddAttribute(string name, string value, object position)
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddAttribute(LookupNode(), name, value, position);
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddAttribute(LookupNode(), name, value, position);
+            });
         }
 
         void IParameterKind.SetParameterPassingMode(PARAMETER_PASSING_MODE passingMode) =>

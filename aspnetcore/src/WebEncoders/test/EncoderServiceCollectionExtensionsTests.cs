@@ -42,13 +42,11 @@ public class EncoderServiceCollectionExtensionsTests
         var serviceCollection = new ServiceCollection();
 
         // Act
-        serviceCollection.AddWebEncoders(
-            options =>
-            {
-                options.TextEncoderSettings = new TextEncoderSettings();
-                options.TextEncoderSettings.AllowCharacters("ace".ToCharArray()); // only these three chars are allowed
-            }
-        );
+        serviceCollection.AddWebEncoders(options =>
+        {
+            options.TextEncoderSettings = new TextEncoderSettings();
+            options.TextEncoderSettings.AllowCharacters("ace".ToCharArray()); // only these three chars are allowed
+        });
 
         // Assert
         var serviceProvider = serviceCollection.BuildServiceProvider();
@@ -76,13 +74,11 @@ public class EncoderServiceCollectionExtensionsTests
         serviceCollection.AddSingleton<HtmlEncoder, HtmlTestEncoder>();
         serviceCollection.AddSingleton<JavaScriptEncoder, JavaScriptTestEncoder>();
         // we don't register an existing URL encoder
-        serviceCollection.AddWebEncoders(
-            options =>
-            {
-                options.TextEncoderSettings = new TextEncoderSettings();
-                options.TextEncoderSettings.AllowCharacters("ace".ToCharArray()); // only these three chars are allowed
-            }
-        );
+        serviceCollection.AddWebEncoders(options =>
+        {
+            options.TextEncoderSettings = new TextEncoderSettings();
+            options.TextEncoderSettings.AllowCharacters("ace".ToCharArray()); // only these three chars are allowed
+        });
 
         // Assert
         var serviceProvider = serviceCollection.BuildServiceProvider();

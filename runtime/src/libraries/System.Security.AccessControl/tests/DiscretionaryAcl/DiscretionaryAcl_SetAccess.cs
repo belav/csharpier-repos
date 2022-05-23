@@ -338,26 +338,24 @@ namespace System.Security.AccessControl.Tests
             );
 
             //Case 5, null sid
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
-                    accessControlType = 1;
-                    accessMask = 1;
-                    inheritanceFlags = 3;
-                    propagationFlags = 3;
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
-                    discretionaryAcl.SetAccess(
-                        (AccessControlType)accessControlType,
-                        null,
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
+                accessControlType = 1;
+                accessMask = 1;
+                inheritanceFlags = 3;
+                propagationFlags = 3;
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                discretionaryAcl.SetAccess(
+                    (AccessControlType)accessControlType,
+                    null,
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case6, all the ACEs in the Dacl are non-qualified ACE, no replacement
 
@@ -389,22 +387,20 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestSetAccess(
-                        discretionaryAcl,
-                        rawAcl,
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestSetAccess(
+                    discretionaryAcl,
+                    rawAcl,
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 7, set without replacement, exceed binary length boundary, throw exception
 
@@ -435,20 +431,18 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    discretionaryAcl.SetAccess(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                discretionaryAcl.SetAccess(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 8, set without replacement, not exceed binary length boundary
 
@@ -480,52 +474,48 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestSetAccess(
-                        discretionaryAcl,
-                        rawAcl,
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask + 1,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestSetAccess(
+                    discretionaryAcl,
+                    rawAcl,
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask + 1,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
 
             //Case 9, set Ace of NOT(AccessControlType.Allow |AccessControlType.Denied) to the DiscretionaryAcl with no ACE,
             // should throw appropriate exception for wrong parameter, bug#287188
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    isContainer = true;
-                    isDS = false;
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                isContainer = true;
+                isDS = false;
 
-                    inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
-                    propagationFlags = 2; //PropagationFlags.InheritOnly
+                inheritanceFlags = 1; //InheritanceFlags.ContainerInherit
+                propagationFlags = 2; //PropagationFlags.InheritOnly
 
-                    accessControlType = 100;
-                    sid = "BA";
-                    accessMask = 1;
+                accessControlType = 100;
+                sid = "BA";
+                accessMask = 1;
 
-                    rawAcl = new RawAcl(0, 1);
-                    discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
+                rawAcl = new RawAcl(0, 1);
+                discretionaryAcl = new DiscretionaryAcl(isContainer, isDS, rawAcl);
 
-                    discretionaryAcl.SetAccess(
-                        (AccessControlType)accessControlType,
-                        new SecurityIdentifier(
-                            Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
-                        ),
-                        accessMask,
-                        (InheritanceFlags)inheritanceFlags,
-                        (PropagationFlags)propagationFlags
-                    );
-                }
-            );
+                discretionaryAcl.SetAccess(
+                    (AccessControlType)accessControlType,
+                    new SecurityIdentifier(
+                        Utils.TranslateStringConstFormatSidToStandardFormatSid(sid)
+                    ),
+                    accessMask,
+                    (InheritanceFlags)inheritanceFlags,
+                    (PropagationFlags)propagationFlags
+                );
+            });
         }
     }
 }

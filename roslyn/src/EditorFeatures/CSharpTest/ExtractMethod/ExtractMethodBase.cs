@@ -90,13 +90,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ExtractMethod
             using (var workspace = TestWorkspace.CreateCSharp(codeWithMarker))
             {
                 Assert.NotNull(
-                    await Record.ExceptionAsync(
-                        async () =>
-                        {
-                            var testDocument = workspace.Documents.Single();
-                            var tree = await ExtractMethodAsync(workspace, testDocument);
-                        }
-                    )
+                    await Record.ExceptionAsync(async () =>
+                    {
+                        var testDocument = workspace.Documents.Single();
+                        var tree = await ExtractMethodAsync(workspace, testDocument);
+                    })
                 );
             }
         }

@@ -55,12 +55,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
         public void Indexer1()
         {
             var data = Create(String.Empty);
-            Assert.Throws<IndexOutOfRangeException>(
-                () =>
-                {
-                    var value = data[-1];
-                }
-            );
+            Assert.Throws<IndexOutOfRangeException>(() =>
+            {
+                var value = data[-1];
+            });
         }
 
         [Fact]

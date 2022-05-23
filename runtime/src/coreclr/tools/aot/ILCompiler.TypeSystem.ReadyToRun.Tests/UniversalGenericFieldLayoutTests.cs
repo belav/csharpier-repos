@@ -44,18 +44,14 @@ namespace TypeSystemTests
         [Fact]
         public void LayoutIntTests()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    return new LayoutInt(int.MinValue);
-                }
-            );
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    return new LayoutInt(-1);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                return new LayoutInt(int.MinValue);
+            });
+            Assert.Throws<ArgumentException>(() =>
+            {
+                return new LayoutInt(-1);
+            });
 
             Assert.Equal(LayoutInt.Zero, new LayoutInt(0));
             Assert.Equal(LayoutInt.One, new LayoutInt(1));
@@ -79,12 +75,10 @@ namespace TypeSystemTests
             Assert.Equal(0, new LayoutInt(0).AsInt);
             Assert.Equal(1, new LayoutInt(1).AsInt);
             Assert.Equal(Int32.MaxValue, new LayoutInt(Int32.MaxValue).AsInt);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    return LayoutInt.Indeterminate.AsInt;
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                return LayoutInt.Indeterminate.AsInt;
+            });
 
             Assert.Equal(
                 LayoutInt.Indeterminate,
@@ -93,18 +87,14 @@ namespace TypeSystemTests
             Assert.Equal(LayoutInt.Indeterminate, LayoutInt.One + LayoutInt.Indeterminate);
             Assert.Equal(LayoutInt.Indeterminate, LayoutInt.Indeterminate + LayoutInt.One);
             Assert.Equal(new LayoutInt(2), LayoutInt.One + LayoutInt.One);
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    return new LayoutInt(int.MaxValue) + LayoutInt.One;
-                }
-            );
-            Assert.Throws<OverflowException>(
-                () =>
-                {
-                    return new LayoutInt(int.MaxValue) + LayoutInt.One;
-                }
-            );
+            Assert.Throws<OverflowException>(() =>
+            {
+                return new LayoutInt(int.MaxValue) + LayoutInt.One;
+            });
+            Assert.Throws<OverflowException>(() =>
+            {
+                return new LayoutInt(int.MaxValue) + LayoutInt.One;
+            });
 
             Assert.Equal(LayoutInt.One, LayoutInt.Max(LayoutInt.One, LayoutInt.Zero));
             Assert.Equal(LayoutInt.One, LayoutInt.Max(LayoutInt.Zero, LayoutInt.One));

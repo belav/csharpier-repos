@@ -1251,12 +1251,10 @@ private global::Microsoft.AspNetCore.Razor.Runtime.TagHelpers.TagHelperScopeMana
 
     private DocumentIntermediateNode LowerDesignTime(RazorCodeDocument codeDocument)
     {
-        var projectEngine = RazorProjectEngine.Create(
-            b =>
-            {
-                b.Features.Add(new DesignTimeOptionsFeature(designTime: true));
-            }
-        );
+        var projectEngine = RazorProjectEngine.Create(b =>
+        {
+            b.Features.Add(new DesignTimeOptionsFeature(designTime: true));
+        });
 
         return Lower(codeDocument, projectEngine);
     }

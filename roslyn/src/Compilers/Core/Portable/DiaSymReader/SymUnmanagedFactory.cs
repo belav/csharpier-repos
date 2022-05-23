@@ -88,30 +88,28 @@ namespace Microsoft.DiaSymReader
 #if !NET20
         private static readonly Lazy<Func<string, string>> s_lazyGetEnvironmentVariable = new Lazy<
             Func<string, string>
-        >(
-            () =>
+        >(() =>
+        {
+            try
             {
-                try
+                foreach (
+                    var method in typeof(Environment)
+                        .GetTypeInfo()
+                        .GetDeclaredMethods("GetEnvironmentVariable")
+                )
                 {
-                    foreach (
-                        var method in typeof(Environment)
-                            .GetTypeInfo()
-                            .GetDeclaredMethods("GetEnvironmentVariable")
-                    )
+                    var parameters = method.GetParameters();
+                    if (parameters.Length == 1 && parameters[0].ParameterType == typeof(string))
                     {
-                        var parameters = method.GetParameters();
-                        if (parameters.Length == 1 && parameters[0].ParameterType == typeof(string))
-                        {
-                            return (Func<string, string>)
-                                method.CreateDelegate(typeof(Func<string, string>));
-                        }
+                        return (Func<string, string>)
+                            method.CreateDelegate(typeof(Func<string, string>));
                     }
                 }
-                catch { }
-
-                return null;
             }
-        );
+            catch { }
+
+            return null;
+        });
 #endif
 
         // internal for testing

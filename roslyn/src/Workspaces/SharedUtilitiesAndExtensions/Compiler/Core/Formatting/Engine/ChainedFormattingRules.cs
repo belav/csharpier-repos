@@ -150,27 +150,25 @@ namespace Microsoft.CodeAnalysis.Formatting
         )
         {
             return rules
-                .Where(
-                    rule =>
+                .Where(rule =>
+                {
+                    var type = GetTypeImplementingMethod(rule, name);
+                    if (type == typeof(AbstractFormattingRule))
                     {
-                        var type = GetTypeImplementingMethod(rule, name);
-                        if (type == typeof(AbstractFormattingRule))
+                        return false;
+                    }
+
+                    if (type == typeof(CompatAbstractFormattingRule))
+                    {
+                        type = GetTypeImplementingMethod(rule, name + "Slow");
+                        if (type == typeof(CompatAbstractFormattingRule))
                         {
                             return false;
                         }
-
-                        if (type == typeof(CompatAbstractFormattingRule))
-                        {
-                            type = GetTypeImplementingMethod(rule, name + "Slow");
-                            if (type == typeof(CompatAbstractFormattingRule))
-                            {
-                                return false;
-                            }
-                        }
-
-                        return true;
                     }
-                )
+
+                    return true;
+                })
                 .ToImmutableArray();
         }
 

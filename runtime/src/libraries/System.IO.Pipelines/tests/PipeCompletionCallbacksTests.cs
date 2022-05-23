@@ -324,12 +324,10 @@ namespace System.IO.Pipelines.Tests
             ValueTaskAwaiter<FlushResult> awaiter = buffer.FlushAsync().GetAwaiter();
 
             Assert.False(awaiter.IsCompleted);
-            awaiter.OnCompleted(
-                () =>
-                {
-                    continuationRan = true;
-                }
-            );
+            awaiter.OnCompleted(() =>
+            {
+                continuationRan = true;
+            });
             pipe.Reader.Complete();
 
             Assert.True(callbackRan);
@@ -639,12 +637,10 @@ namespace System.IO.Pipelines.Tests
             Assert.False(awaiter.IsCompleted);
             awaiter
                 .GetAwaiter()
-                .OnCompleted(
-                    () =>
-                    {
-                        continuationRan = true;
-                    }
-                );
+                .OnCompleted(() =>
+                {
+                    continuationRan = true;
+                });
             pipe.Writer.Complete();
 
             Assert.True(callbackRan);

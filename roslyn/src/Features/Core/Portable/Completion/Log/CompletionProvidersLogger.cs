@@ -139,36 +139,34 @@ namespace Microsoft.CodeAnalysis.Completion.Log
         {
             Logger.Log(
                 FunctionId.Intellisense_CompletionProviders_Data,
-                KeyValueLogMessage.Create(
-                    m =>
+                KeyValueLogMessage.Create(m =>
+                {
+                    foreach (var kv in s_statisticLogAggregator)
                     {
-                        foreach (var kv in s_statisticLogAggregator)
-                        {
-                            var info = ((ActionInfo)kv.Key).ToString("f");
-                            var statistics = kv.Value.GetStatisticResult();
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        var statistics = kv.Value.GetStatisticResult();
 
-                            m[CreateProperty(info, Max)] = statistics.Maximum;
-                            m[CreateProperty(info, Min)] = statistics.Minimum;
-                            m[CreateProperty(info, Mean)] = statistics.Mean;
-                            m[CreateProperty(info, Range)] = statistics.Range;
-                            m[CreateProperty(info, Count)] = statistics.Count;
-                        }
-
-                        foreach (var kv in s_logAggregator)
-                        {
-                            var info = ((ActionInfo)kv.Key).ToString("f");
-                            m[info] = kv.Value.GetCount();
-                        }
-
-                        foreach (var kv in s_histogramLogAggregator)
-                        {
-                            var info = ((ActionInfo)kv.Key).ToString("f");
-                            m[$"{info}.BucketSize"] = kv.Value.BucketSize;
-                            m[$"{info}.MaxBucketValue"] = kv.Value.MaxBucketValue;
-                            m[$"{info}.Buckets"] = kv.Value.GetBucketsAsString();
-                        }
+                        m[CreateProperty(info, Max)] = statistics.Maximum;
+                        m[CreateProperty(info, Min)] = statistics.Minimum;
+                        m[CreateProperty(info, Mean)] = statistics.Mean;
+                        m[CreateProperty(info, Range)] = statistics.Range;
+                        m[CreateProperty(info, Count)] = statistics.Count;
                     }
-                )
+
+                    foreach (var kv in s_logAggregator)
+                    {
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        m[info] = kv.Value.GetCount();
+                    }
+
+                    foreach (var kv in s_histogramLogAggregator)
+                    {
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        m[$"{info}.BucketSize"] = kv.Value.BucketSize;
+                        m[$"{info}.MaxBucketValue"] = kv.Value.MaxBucketValue;
+                        m[$"{info}.Buckets"] = kv.Value.GetBucketsAsString();
+                    }
+                })
             );
         }
 

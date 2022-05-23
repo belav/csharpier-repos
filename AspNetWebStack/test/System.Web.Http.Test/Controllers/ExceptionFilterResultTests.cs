@@ -539,12 +539,10 @@ namespace System.Web.Http.Controllers
             );
             actionResultMock
                 .Setup(r => r.ExecuteAsync(It.IsAny<CancellationToken>()))
-                .Returns(
-                    () =>
-                    {
-                        return task;
-                    }
-                );
+                .Returns(() =>
+                {
+                    return task;
+                });
             return actionResultMock.Object;
         }
 

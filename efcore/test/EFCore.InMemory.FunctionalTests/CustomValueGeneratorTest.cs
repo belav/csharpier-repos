@@ -54,17 +54,15 @@ namespace Microsoft.EntityFrameworkCore
                     .UseInMemoryDatabase(nameof(CustomValueGeneratorContext));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-                modelBuilder.Entity<SomeEntity>(
-                    b =>
-                    {
-                        b.HasAlternateKey(e => new { e.SpecialId, e.SpecialString });
-                        b.Property(e => e.SpecialId)
-                            .HasAnnotation("SpecialGuid", true)
-                            .ValueGeneratedOnAdd();
+                modelBuilder.Entity<SomeEntity>(b =>
+                {
+                    b.HasAlternateKey(e => new { e.SpecialId, e.SpecialString });
+                    b.Property(e => e.SpecialId)
+                        .HasAnnotation("SpecialGuid", true)
+                        .ValueGeneratedOnAdd();
 
-                        b.Property(e => e.SpecialString).ValueGeneratedOnAdd();
-                    }
-                );
+                    b.Property(e => e.SpecialString).ValueGeneratedOnAdd();
+                });
         }
 
         [ConditionalFact]
@@ -102,16 +100,14 @@ namespace Microsoft.EntityFrameworkCore
                     .UseInMemoryDatabase(nameof(CustomValueGeneratorContextAnnotateType));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-                modelBuilder.Entity<SomeEntity>(
-                    b =>
-                    {
-                        b.Property(e => e.Id).HasValueGenerator<SequentialGuidValueGenerator>();
-                        b.Property(e => e.SpecialId)
-                            .HasValueGenerator(typeof(CustomGuidValueGenerator));
-                        b.Property(e => e.SpecialString)
-                            .HasValueGenerator<SomeEntityStringValueGenerator>();
-                    }
-                );
+                modelBuilder.Entity<SomeEntity>(b =>
+                {
+                    b.Property(e => e.Id).HasValueGenerator<SequentialGuidValueGenerator>();
+                    b.Property(e => e.SpecialId)
+                        .HasValueGenerator(typeof(CustomGuidValueGenerator));
+                    b.Property(e => e.SpecialString)
+                        .HasValueGenerator<SomeEntityStringValueGenerator>();
+                });
         }
 
         [ConditionalFact]
@@ -149,23 +145,20 @@ namespace Microsoft.EntityFrameworkCore
                     .UseInMemoryDatabase(nameof(CustomValueGeneratorContextAnnotateFactory));
 
             protected override void OnModelCreating(ModelBuilder modelBuilder) =>
-                modelBuilder.Entity<SomeEntity>(
-                    b =>
-                    {
-                        var factory = new CustomValueGeneratorFactory();
+                modelBuilder.Entity<SomeEntity>(b =>
+                {
+                    var factory = new CustomValueGeneratorFactory();
 
-                        b.Property(e => e.Id).HasValueGenerator(factory.Create);
+                    b.Property(e => e.Id).HasValueGenerator(factory.Create);
 
-                        b.Property(e => e.SpecialId)
-                            .Metadata.SetValueGeneratorFactory(factory.Create);
+                    b.Property(e => e.SpecialId).Metadata.SetValueGeneratorFactory(factory.Create);
 
-                        b.Property(e => e.SpecialId)
-                            .HasAnnotation("SpecialGuid", true)
-                            .ValueGeneratedOnAdd();
+                    b.Property(e => e.SpecialId)
+                        .HasAnnotation("SpecialGuid", true)
+                        .ValueGeneratedOnAdd();
 
-                        b.Property(e => e.SpecialString).HasValueGenerator(factory.Create);
-                    }
-                );
+                    b.Property(e => e.SpecialString).HasValueGenerator(factory.Create);
+                });
         }
 
         private class SomeEntity

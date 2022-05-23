@@ -585,30 +585,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
                 var method = model.GetDeclaredSymbol(methodSyntax);
 
                 var expectedTypes = annotations.SelectAsArray(annotation => annotation.Text);
-                var actualTypes = annotations.SelectAsArray(
-                    annotation =>
-                    {
-                        var typeInfo = model.GetTypeInfoAndVerifyIOperation(annotation.Expression);
-                        Assert.NotEqual(
-                            CodeAnalysis.NullableFlowState.None,
-                            typeInfo.Nullability.FlowState
-                        );
-                        // https://github.com/dotnet/roslyn/issues/35035: After refactoring symboldisplay, we should be able to just call something like typeInfo.Type.ToDisplayString(typeInfo.Nullability.FlowState, TypeWithState.TestDisplayFormat)
-                        var type = TypeWithState
-                            .Create(
-                                (
-                                    annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type
-                                ).GetSymbol(),
-                                (
-                                    annotation.IsConverted
-                                        ? typeInfo.ConvertedNullability
-                                        : typeInfo.Nullability
-                                ).FlowState.ToInternalFlowState()
-                            )
-                            .ToTypeWithAnnotations(compilation);
-                        return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);
-                    }
-                );
+                var actualTypes = annotations.SelectAsArray(annotation =>
+                {
+                    var typeInfo = model.GetTypeInfoAndVerifyIOperation(annotation.Expression);
+                    Assert.NotEqual(
+                        CodeAnalysis.NullableFlowState.None,
+                        typeInfo.Nullability.FlowState
+                    );
+                    // https://github.com/dotnet/roslyn/issues/35035: After refactoring symboldisplay, we should be able to just call something like typeInfo.Type.ToDisplayString(typeInfo.Nullability.FlowState, TypeWithState.TestDisplayFormat)
+                    var type = TypeWithState
+                        .Create(
+                            (
+                                annotation.IsConverted ? typeInfo.ConvertedType : typeInfo.Type
+                            ).GetSymbol(),
+                            (
+                                annotation.IsConverted
+                                    ? typeInfo.ConvertedNullability
+                                    : typeInfo.Nullability
+                            ).FlowState.ToInternalFlowState()
+                        )
+                        .ToTypeWithAnnotations(compilation);
+                    return type.ToDisplayString(TypeWithAnnotations.TestDisplayFormat);
+                });
                 // Consider reporting the correct source with annotations on mismatch.
                 AssertEx.Equal(expectedTypes, actualTypes, message: method.ToTestDisplayString());
             }

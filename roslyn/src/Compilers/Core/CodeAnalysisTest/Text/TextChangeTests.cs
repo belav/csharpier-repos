@@ -128,12 +128,10 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 new TextChange(new TextSpan(6, 7), "Universe"),
                 new TextChange(new TextSpan(0, 5), "Halo")
             };
-            Assert.ThrowsAny<ArgumentException>(
-                () =>
-                {
-                    var newText = text.WithChanges(changes);
-                }
-            );
+            Assert.ThrowsAny<ArgumentException>(() =>
+            {
+                var newText = text.WithChanges(changes);
+            });
         }
 
         [Fact]

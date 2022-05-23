@@ -23,23 +23,21 @@ public class TopLevelParameterNameAnalyzer : DiagnosticAnalyzer
         context.EnableConcurrentExecution();
         context.ConfigureGeneratedCodeAnalysis(GeneratedCodeAnalysisFlags.None);
 
-        context.RegisterCompilationStartAction(
-            compilationStartAnalysisContext =>
-            {
-                if (
-                    !SymbolCache.TryCreate(
-                        compilationStartAnalysisContext.Compilation,
-                        out var typeCache
-                    )
+        context.RegisterCompilationStartAction(compilationStartAnalysisContext =>
+        {
+            if (
+                !SymbolCache.TryCreate(
+                    compilationStartAnalysisContext.Compilation,
+                    out var typeCache
                 )
-                {
-                    // No-op if we can't find types we care about.
-                    return;
-                }
-
-                InitializeWorker(compilationStartAnalysisContext, typeCache);
+            )
+            {
+                // No-op if we can't find types we care about.
+                return;
             }
-        );
+
+            InitializeWorker(compilationStartAnalysisContext, typeCache);
+        });
     }
 
     private void InitializeWorker(

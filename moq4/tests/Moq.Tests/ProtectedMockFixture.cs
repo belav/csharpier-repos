@@ -56,12 +56,10 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupVoidMethodNotFound()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    new Mock<FooBase>().Protected().Setup("Foo");
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                new Mock<FooBase>().Protected().Setup("Foo");
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Equal(
@@ -73,12 +71,10 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupResultMethodNotFound()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    new Mock<FooBase>().Protected().Setup<int>("Foo");
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                new Mock<FooBase>().Protected().Setup<int>("Foo");
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Equal(
@@ -90,12 +86,10 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfSetupIncompatibleArgumentSupplied()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    new Mock<FooBase>().Protected().Setup<string>("StringArg", ItExpr.IsAny<int>());
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                new Mock<FooBase>().Protected().Setup<string>("StringArg", ItExpr.IsAny<int>());
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Equal(
@@ -588,12 +582,10 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifyVoidMethodNotFound()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    new Mock<FooBase>().Protected().Verify("Foo", Times.Once());
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                new Mock<FooBase>().Protected().Verify("Foo", Times.Once());
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Equal(
@@ -605,12 +597,10 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifyResultMethodNotFound()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    new Mock<FooBase>().Protected().Verify<int>("Foo", Times.Once());
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                new Mock<FooBase>().Protected().Verify<int>("Foo", Times.Once());
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Equal(
@@ -622,14 +612,12 @@ namespace Moq.Tests
         [Fact]
         public void ThrowsIfVerifyIncompatibleArgumentSupplied()
         {
-            var actual = Record.Exception(
-                () =>
-                {
-                    new Mock<FooBase>()
-                        .Protected()
-                        .Verify<string>("StringArg", Times.Once(), ItExpr.IsAny<int>());
-                }
-            );
+            var actual = Record.Exception(() =>
+            {
+                new Mock<FooBase>()
+                    .Protected()
+                    .Verify<string>("StringArg", Times.Once(), ItExpr.IsAny<int>());
+            });
 
             Assert.IsType<ArgumentException>(actual);
             Assert.Equal(

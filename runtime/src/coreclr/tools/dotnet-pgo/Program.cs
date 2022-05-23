@@ -899,14 +899,12 @@ namespace Microsoft.Diagnostics.Tools.Pgo
             {
                 int lowerLimit = i * columnWidth;
                 int upperLimit = i * columnWidth + columnWidth;
-                int count = likelihoods.Count(
-                    l =>
-                    {
-                        if (i == 0) // inclusive for [0..
-                            return l <= upperLimit;
-                        return l > lowerLimit && l <= upperLimit;
-                    }
-                );
+                int count = likelihoods.Count(l =>
+                {
+                    if (i == 0) // inclusive for [0..
+                        return l <= upperLimit;
+                    return l > lowerLimit && l <= upperLimit;
+                });
 
                 int shareWidth = (int)Math.Round((double)count / likelihoods.Length * tableWidth);
                 Console.Write(i == 0 ? "  [" : "  ("); // inclusive for [0..

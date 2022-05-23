@@ -748,13 +748,11 @@ public class ServerTests
                 options.RequestQueueName = queueName;
             }
         );
-        using var attachedServer = Utilities.CreatePump(
-            options =>
-            {
-                options.RequestQueueName = queueName;
-                options.RequestQueueMode = RequestQueueMode.Attach;
-            }
-        );
+        using var attachedServer = Utilities.CreatePump(options =>
+        {
+            options.RequestQueueName = queueName;
+            options.RequestQueueMode = RequestQueueMode.Attach;
+        });
         await attachedServer.StartAsync(
             new DummyApplication(context => Task.CompletedTask),
             default

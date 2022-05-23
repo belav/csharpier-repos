@@ -27,26 +27,21 @@ public static class WebHostBuilderHttpSysExtensions
     [SupportedOSPlatform("windows")]
     public static IWebHostBuilder UseHttpSys(this IWebHostBuilder hostBuilder)
     {
-        return hostBuilder.ConfigureServices(
-            services =>
+        return hostBuilder.ConfigureServices(services =>
+        {
+            services.AddSingleton<IServer, MessagePump>();
+            services.AddTransient<AuthenticationHandler>();
+            services.AddSingleton<IServerIntegratedAuth>(services =>
             {
-                services.AddSingleton<IServer, MessagePump>();
-                services.AddTransient<AuthenticationHandler>();
-                services.AddSingleton<IServerIntegratedAuth>(
-                    services =>
-                    {
-                        var options = services.GetRequiredService<IOptions<HttpSysOptions>>().Value;
-                        return new ServerIntegratedAuth()
-                        {
-                            IsEnabled =
-                                options.Authentication.Schemes != AuthenticationSchemes.None,
-                            AuthenticationScheme = HttpSysDefaults.AuthenticationScheme,
-                        };
-                    }
-                );
-                services.AddAuthenticationCore();
-            }
-        );
+                var options = services.GetRequiredService<IOptions<HttpSysOptions>>().Value;
+                return new ServerIntegratedAuth()
+                {
+                    IsEnabled = options.Authentication.Schemes != AuthenticationSchemes.None,
+                    AuthenticationScheme = HttpSysDefaults.AuthenticationScheme,
+                };
+            });
+            services.AddAuthenticationCore();
+        });
     }
 
     /// <summary>
@@ -69,11 +64,9 @@ public static class WebHostBuilderHttpSysExtensions
     {
         return hostBuilder
             .UseHttpSys()
-            .ConfigureServices(
-                services =>
-                {
-                    services.Configure(options);
-                }
-            );
+            .ConfigureServices(services =>
+            {
+                services.Configure(options);
+            });
     }
 }

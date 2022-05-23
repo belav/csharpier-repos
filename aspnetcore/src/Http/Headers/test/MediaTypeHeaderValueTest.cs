@@ -166,12 +166,10 @@ public class MediaTypeHeaderValueTest
 
         Assert.False(mediaType0.IsReadOnly);
         Assert.True(mediaType1.IsReadOnly);
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                mediaType1.MediaType = "some/value";
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            mediaType1.MediaType = "some/value";
+        });
     }
 
     [Fact]

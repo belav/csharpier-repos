@@ -21,15 +21,13 @@ public class RequestLifetimeTests
         var requestAborted = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                httpContext.RequestAborted.Register(() => requestAborted.SetResult(0));
-                httpContext.Abort();
+        using var host = await CreateHost(async httpContext =>
+        {
+            httpContext.RequestAborted.Register(() => requestAborted.SetResult(0));
+            httpContext.Abort();
 
-                await requestAborted.Task.DefaultTimeout();
-            }
-        );
+            await requestAborted.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         var ex = await Assert.ThrowsAsync<Exception>(
@@ -45,13 +43,11 @@ public class RequestLifetimeTests
         var abortReceived = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                httpContext.Abort();
-                await abortReceived.Task.DefaultTimeout();
-            }
-        );
+        using var host = await CreateHost(async httpContext =>
+        {
+            httpContext.Abort();
+            await abortReceived.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         var ex = await Assert.ThrowsAsync<Exception>(
@@ -70,15 +66,13 @@ public class RequestLifetimeTests
         var abortReceived = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                await httpContext.Response.Body.FlushAsync();
-                await responseReceived.Task.DefaultTimeout();
-                httpContext.Abort();
-                await abortReceived.Task.DefaultTimeout();
-            }
-        );
+        using var host = await CreateHost(async httpContext =>
+        {
+            await httpContext.Response.Body.FlushAsync();
+            await responseReceived.Task.DefaultTimeout();
+            httpContext.Abort();
+            await abortReceived.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         var response = await client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead);
@@ -101,15 +95,13 @@ public class RequestLifetimeTests
         var abortReceived = new TaskCompletionSource<int>(
             TaskCreationOptions.RunContinuationsAsynchronously
         );
-        using var host = await CreateHost(
-            async httpContext =>
-            {
-                await httpContext.Response.WriteAsync("Hello World");
-                await responseReceived.Task.DefaultTimeout();
-                httpContext.Abort();
-                await abortReceived.Task.DefaultTimeout();
-            }
-        );
+        using var host = await CreateHost(async httpContext =>
+        {
+            await httpContext.Response.WriteAsync("Hello World");
+            await responseReceived.Task.DefaultTimeout();
+            httpContext.Abort();
+            await abortReceived.Task.DefaultTimeout();
+        });
 
         var client = host.GetTestServer().CreateClient();
         using var response = await client.GetAsync("/", HttpCompletionOption.ResponseHeadersRead);
@@ -128,19 +120,15 @@ public class RequestLifetimeTests
     private Task<IHost> CreateHost(RequestDelegate appDelegate)
     {
         return new HostBuilder()
-            .ConfigureWebHost(
-                webBuilder =>
-                {
-                    webBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(appDelegate);
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webBuilder =>
+            {
+                webBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.Run(appDelegate);
+                    });
+            })
             .StartAsync();
     }
 }

@@ -38,20 +38,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertSwitchStatementToExpression
             ) { }
 
         protected override void InitializeWorker(AnalysisContext context) =>
-            context.RegisterCompilationStartAction(
-                context =>
+            context.RegisterCompilationStartAction(context =>
+            {
+                if (
+                    ((CSharpCompilation)context.Compilation).LanguageVersion
+                    < LanguageVersion.CSharp8
+                )
                 {
-                    if (
-                        ((CSharpCompilation)context.Compilation).LanguageVersion
-                        < LanguageVersion.CSharp8
-                    )
-                    {
-                        return;
-                    }
-
-                    context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.SwitchStatement);
+                    return;
                 }
-            );
+
+                context.RegisterSyntaxNodeAction(AnalyzeSyntax, SyntaxKind.SwitchStatement);
+            });
 
         private void AnalyzeSyntax(SyntaxNodeAnalysisContext context)
         {

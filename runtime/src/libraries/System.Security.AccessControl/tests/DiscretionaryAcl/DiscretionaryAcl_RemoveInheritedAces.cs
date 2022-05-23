@@ -160,12 +160,10 @@ namespace System.Security.AccessControl.Tests
 
             //After Mark changes design to make ACL with any CustomAce, CompoundAce uncanonical and
             //forbid the modification on uncanonical ACL, this case will throw InvalidOperationException
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    TestRemoveInheritedAces(discretionaryAcl);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                TestRemoveInheritedAces(discretionaryAcl);
+            });
 
             //case 4,  all inherited CommonAce, ObjectAce, CompoundAce, CustomAce
             revision = 127;

@@ -355,21 +355,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                () =>
-                {
-                    local.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnStarting(() =>
+            {
+                local.Value++;
+                return Task.CompletedTask;
+            });
 
-            context.Response.OnCompleted(
-                () =>
-                {
-                    local.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnCompleted(() =>
+            {
+                local.Value++;
+                return Task.CompletedTask;
+            });
 
             local.Value++;
             context.Response.ContentLength = 1;
@@ -396,21 +392,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                () =>
-                {
-                    local.Value.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnStarting(() =>
+            {
+                local.Value.Value++;
+                return Task.CompletedTask;
+            });
 
-            context.Response.OnCompleted(
-                () =>
-                {
-                    local.Value.Value++;
-                    return Task.CompletedTask;
-                }
-            );
+            context.Response.OnCompleted(() =>
+            {
+                local.Value.Value++;
+                return Task.CompletedTask;
+            });
 
             local.Value.Value++;
             context.Response.ContentLength = 1;
@@ -435,21 +427,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(1, local.Value);
-                }
-            );
+            context.Response.OnStarting(async () =>
+            {
+                local.Value++;
+                Assert.Equal(1, local.Value);
+            });
 
-            context.Response.OnCompleted(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(1, local.Value);
-                }
-            );
+            context.Response.OnCompleted(async () =>
+            {
+                local.Value++;
+                Assert.Equal(1, local.Value);
+            });
 
             context.Response.ContentLength = 1;
             return context.Response.WriteAsync($"{value}");
@@ -471,21 +459,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
-                }
-            );
+            context.Response.OnStarting(async () =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
+            });
 
-            context.Response.OnCompleted(
-                async () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
-                }
-            );
+            context.Response.OnCompleted(async () =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
+            });
 
             local.Value++;
             Assert.Equal(1, local.Value);
@@ -516,21 +500,17 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value.Value;
             Assert.Equal(0, value); // Start
 
-            context.Response.OnStarting(
-                async () =>
-                {
-                    local.Value.Value++;
-                    Assert.Equal(2, local.Value.Value); // Second
-                }
-            );
+            context.Response.OnStarting(async () =>
+            {
+                local.Value.Value++;
+                Assert.Equal(2, local.Value.Value); // Second
+            });
 
-            context.Response.OnCompleted(
-                async () =>
-                {
-                    local.Value.Value++;
-                    Assert.Equal(4, local.Value.Value); // Fourth
-                }
-            );
+            context.Response.OnCompleted(async () =>
+            {
+                local.Value.Value++;
+                Assert.Equal(4, local.Value.Value); // Fourth
+            });
 
             local.Value.Value++;
             Assert.Equal(1, local.Value.Value); // First
@@ -559,25 +539,21 @@ public class RequestTests : TestApplicationErrorLoggerLoggedTest
             var value = local.Value;
             Assert.Equal(0, value);
 
-            context.Response.OnStarting(
-                () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
+            context.Response.OnStarting(() =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
 
-                    return Task.CompletedTask;
-                }
-            );
+                return Task.CompletedTask;
+            });
 
-            context.Response.OnCompleted(
-                () =>
-                {
-                    local.Value++;
-                    Assert.Equal(2, local.Value);
+            context.Response.OnCompleted(() =>
+            {
+                local.Value++;
+                Assert.Equal(2, local.Value);
 
-                    return Task.CompletedTask;
-                }
-            );
+                return Task.CompletedTask;
+            });
 
             local.Value++;
             Assert.Equal(1, local.Value);

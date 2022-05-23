@@ -593,16 +593,14 @@ namespace System.CommandLine.Tests.Binding
             );
 
             var parser = new CommandLineBuilder(rootCommand)
-                .AddMiddleware(
-                    context =>
-                    {
-                        var binder = new ModelBinder<ClassWithSetter<int>>();
+                .AddMiddleware(context =>
+                {
+                    var binder = new ModelBinder<ClassWithSetter<int>>();
 
-                        binder.BindMemberFromValue(instance => instance.Value, _ => 456);
+                    binder.BindMemberFromValue(instance => instance.Value, _ => 456);
 
-                        context.BindingContext.AddModelBinder(binder);
-                    }
-                )
+                    context.BindingContext.AddModelBinder(binder);
+                })
                 .Build();
 
             parser.Invoke("--value 123");
@@ -622,16 +620,14 @@ namespace System.CommandLine.Tests.Binding
             );
 
             var parser = new CommandLineBuilder(rootCommand)
-                .AddMiddleware(
-                    context =>
-                    {
-                        var binder = new ModelBinder<ClassWithSetter<int>>();
+                .AddMiddleware(context =>
+                {
+                    var binder = new ModelBinder<ClassWithSetter<int>>();
 
-                        binder.BindMemberFromValue(instance => instance.Value, _ => 456);
+                    binder.BindMemberFromValue(instance => instance.Value, _ => 456);
 
-                        context.BindingContext.AddModelBinder(binder);
-                    }
-                )
+                    context.BindingContext.AddModelBinder(binder);
+                })
                 .Build();
 
             parser.Invoke("123");
@@ -747,13 +743,11 @@ namespace System.CommandLine.Tests.Binding
 
             DeployOptions boundOptions = null;
 
-            rootCommand.Handler = CommandHandler.Create<DeployOptions>(
-                options =>
-                {
-                    boundOptions = options;
-                    return 0;
-                }
-            );
+            rootCommand.Handler = CommandHandler.Create<DeployOptions>(options =>
+            {
+                boundOptions = options;
+                return 0;
+            });
 
             rootCommand.Invoke("-1 value");
 

@@ -31,14 +31,12 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Bar, BarDto>();
-                    cfg.CreateMap<Foo, FooDto>()
-                        .ForMember(dest => dest.Bar, opts => opts.NullSubstitute(new Bar()));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Bar, BarDto>();
+                cfg.CreateMap<Foo, FooDto>()
+                    .ForMember(dest => dest.Bar, opts => opts.NullSubstitute(new Bar()));
+            });
 
         protected override void Because_of()
         {

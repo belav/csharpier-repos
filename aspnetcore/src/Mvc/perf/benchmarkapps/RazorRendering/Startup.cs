@@ -23,13 +23,11 @@ public class Startup
     {
         app.UseRouting();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapRazorPages();
+        });
     }
 
     private static List<DataA> DataA = GenerateDataA();

@@ -98,20 +98,18 @@ namespace Company.WebApplication1
 #if (!NoAuth)
             app.UseAuthorization();
 #endif
-            app.UseEndpoints(
-                endpoints =>
-                {
-                    endpoints.MapControllerRoute(
-                        name: "default",
-                        pattern: "{controller}/{action=Index}/{id?}"
-                    );
+            app.UseEndpoints(endpoints =>
+            {
+                endpoints.MapControllerRoute(
+                    name: "default",
+                    pattern: "{controller}/{action=Index}/{id?}"
+                );
 #if (IndividualLocalAuth)
-                    endpoints.MapRazorPages();
+                endpoints.MapRazorPages();
 #endif
 
-                    endpoints.MapFallbackToFile("index.html");
-                }
-            );
+                endpoints.MapFallbackToFile("index.html");
+            });
         }
     }
 }

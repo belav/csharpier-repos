@@ -18,19 +18,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
             new CSharpInteractiveWindow_InProc();
 
         protected override IInteractiveWindow AcquireInteractiveWindow() =>
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var componentModel = GetComponentModel();
-                    var vsInteractiveWindowProvider =
-                        componentModel.GetService<CSharpVsInteractiveWindowProvider>();
-                    var vsInteractiveWindow = vsInteractiveWindowProvider.Open(
-                        instanceId: 0,
-                        focus: true
-                    );
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var componentModel = GetComponentModel();
+                var vsInteractiveWindowProvider =
+                    componentModel.GetService<CSharpVsInteractiveWindowProvider>();
+                var vsInteractiveWindow = vsInteractiveWindowProvider.Open(
+                    instanceId: 0,
+                    focus: true
+                );
 
-                    return vsInteractiveWindow.InteractiveWindow;
-                }
-            );
+                return vsInteractiveWindow.InteractiveWindow;
+            });
     }
 }

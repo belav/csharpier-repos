@@ -32,24 +32,19 @@ internal static class MockExtensions
                         typeName
                     )
             )
-            .Returns(
-                () =>
-                {
-                    var mockDeserializer =
-                        new Mock<IAuthenticatedEncryptorDescriptorDeserializer>();
-                    mockDeserializer
-                        .Setup(o => o.ImportFromXml(It.IsAny<XElement>()))
-                        .Returns<XElement>(
-                            el =>
-                            {
-                                // Only return the descriptor if the XML matches
-                                XmlAssert.Equal(xml, el);
-                                return descriptor;
-                            }
-                        );
-                    return mockDeserializer.Object;
-                }
-            );
+            .Returns(() =>
+            {
+                var mockDeserializer = new Mock<IAuthenticatedEncryptorDescriptorDeserializer>();
+                mockDeserializer
+                    .Setup(o => o.ImportFromXml(It.IsAny<XElement>()))
+                    .Returns<XElement>(el =>
+                    {
+                        // Only return the descriptor if the XML matches
+                        XmlAssert.Equal(xml, el);
+                        return descriptor;
+                    });
+                return mockDeserializer.Object;
+            });
     }
 
     /// <summary>
@@ -65,22 +60,18 @@ internal static class MockExtensions
     {
         mockActivator
             .Setup(o => o.CreateInstance(typeof(IXmlDecryptor), typeName))
-            .Returns(
-                () =>
-                {
-                    var mockDecryptor = new Mock<IXmlDecryptor>();
-                    mockDecryptor
-                        .Setup(o => o.Decrypt(It.IsAny<XElement>()))
-                        .Returns<XElement>(
-                            el =>
-                            {
-                                // Only return the descriptor if the XML matches
-                                XmlAssert.Equal(expectedInputXml, el);
-                                return XElement.Parse(outputXml);
-                            }
-                        );
-                    return mockDecryptor.Object;
-                }
-            );
+            .Returns(() =>
+            {
+                var mockDecryptor = new Mock<IXmlDecryptor>();
+                mockDecryptor
+                    .Setup(o => o.Decrypt(It.IsAny<XElement>()))
+                    .Returns<XElement>(el =>
+                    {
+                        // Only return the descriptor if the XML matches
+                        XmlAssert.Equal(expectedInputXml, el);
+                        return XElement.Parse(outputXml);
+                    });
+                return mockDecryptor.Object;
+            });
     }
 }

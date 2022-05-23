@@ -94,16 +94,14 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    exception = context.Exception;
-                    resultFromAction = context.Result;
+            .Callback<ExceptionContext>(context =>
+            {
+                exception = context.Exception;
+                resultFromAction = context.Result;
 
-                    // Handle the exception
-                    context.Result = expected.Object;
-                }
-            )
+                // Handle the exception
+                context.Result = expected.Object;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object }, exception: Exception);
@@ -139,16 +137,14 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IAsyncExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    exception = context.Exception;
-                    resultFromAction = context.Result;
+            .Callback<ExceptionContext>(context =>
+            {
+                exception = context.Exception;
+                resultFromAction = context.Result;
 
-                    // Handle the exception
-                    context.Result = expected.Object;
-                }
-            )
+                // Handle the exception
+                context.Result = expected.Object;
+            })
             .Returns<ExceptionContext>((context) => Task.FromResult(true))
             .Verifiable();
 
@@ -174,13 +170,11 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    filter2.ToString();
-                    context.Exception = null;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                filter2.ToString();
+                context.Exception = null;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object }, exception: Exception);
@@ -207,13 +201,11 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.Result = result.Object;
-                    context.Exception = null;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.Result = result.Object;
+                context.Exception = null;
+            })
             .Verifiable();
 
         // Result filters are never used when an exception bubbles up to exception filters.
@@ -242,12 +234,10 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.ExceptionHandled = true;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(new[] { filter1.Object, filter2.Object }, exception: Exception);
@@ -274,13 +264,11 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.Result = result.Object;
-                    context.ExceptionHandled = true;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.Result = result.Object;
+                context.ExceptionHandled = true;
+            })
             .Verifiable();
 
         // Result filters are never used when an exception bubbles up to exception filters.
@@ -309,12 +297,10 @@ public abstract class CommonResourceInvokerTest
 
         filter2
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.Exception = null;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.Exception = null;
+            })
             .Returns<ExceptionContext>((context) => Task.FromResult(true))
             .Verifiable();
 
@@ -343,13 +329,11 @@ public abstract class CommonResourceInvokerTest
 
         filter2
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.Exception = null;
-                    context.Result = result.Object;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.Exception = null;
+                context.Result = result.Object;
+            })
             .Returns<ExceptionContext>((context) => Task.FromResult(true))
             .Verifiable();
 
@@ -379,12 +363,10 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IAsyncExceptionFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.ExceptionHandled = true;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.ExceptionHandled = true;
+            })
             .Returns<ExceptionContext>((context) => Task.FromResult(true))
             .Verifiable();
 
@@ -415,13 +397,11 @@ public abstract class CommonResourceInvokerTest
 
         filter2
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.ExceptionHandled = true;
-                    context.Result = result.Object;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.ExceptionHandled = true;
+                context.Result = result.Object;
+            })
             .Returns<ExceptionContext>((context) => Task.FromResult(true))
             .Verifiable();
 
@@ -455,12 +435,10 @@ public abstract class CommonResourceInvokerTest
         var filter1 = new Mock<IAsyncExceptionFilter>(MockBehavior.Strict);
         filter1
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    context.Result = result.Object;
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                context.Result = result.Object;
+            })
             .Returns<ExceptionContext>((context) => Task.FromResult(true))
             .Verifiable();
 
@@ -726,24 +704,20 @@ public abstract class CommonResourceInvokerTest
         var exceptionFilter = new Mock<IExceptionFilter>(MockBehavior.Strict);
         exceptionFilter
             .Setup(f => f.OnException(It.IsAny<ExceptionContext>()))
-            .Callback<ExceptionContext>(
-                context =>
-                {
-                    // Mark as handled
-                    context.Result = new EmptyResult();
-                }
-            )
+            .Callback<ExceptionContext>(context =>
+            {
+                // Mark as handled
+                context.Result = new EmptyResult();
+            })
             .Verifiable();
 
         var authorizationFilter1 = new Mock<IAuthorizationFilter>(MockBehavior.Strict);
         authorizationFilter1
             .Setup(f => f.OnAuthorization(It.IsAny<AuthorizationFilterContext>()))
-            .Callback<AuthorizationFilterContext>(
-                c =>
-                {
-                    throw expected;
-                }
-            )
+            .Callback<AuthorizationFilterContext>(c =>
+            {
+                throw expected;
+            })
             .Verifiable();
 
         // None of these filters should run
@@ -875,13 +849,11 @@ public abstract class CommonResourceInvokerTest
         var filter2 = new Mock<IResultFilter>(MockBehavior.Strict);
         filter2
             .Setup(f => f.OnResultExecuting(It.IsAny<ResultExecutingContext>()))
-            .Callback<ResultExecutingContext>(
-                c =>
-                {
-                    filter2.ToString();
-                    c.Cancel = true;
-                }
-            )
+            .Callback<ResultExecutingContext>(c =>
+            {
+                filter2.ToString();
+                c.Cancel = true;
+            })
             .Verifiable();
 
         var filter3 = new Mock<IResultFilter>(MockBehavior.Strict);
@@ -1110,16 +1082,14 @@ public abstract class CommonResourceInvokerTest
 
         filter
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
-            .Callback<ResultExecutedContext>(
-                c =>
-                {
-                    context = c;
+            .Callback<ResultExecutedContext>(c =>
+            {
+                context = c;
 
-                    // Handle the exception
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
-                }
-            )
+                // Handle the exception
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var invoker = CreateInvoker(filter.Object);
@@ -1205,16 +1175,14 @@ public abstract class CommonResourceInvokerTest
             .Verifiable();
         resultFilter1
             .Setup(f => f.OnResultExecuted(It.IsAny<ResultExecutedContext>()))
-            .Callback<ResultExecutedContext>(
-                c =>
-                {
-                    context = c;
+            .Callback<ResultExecutedContext>(c =>
+            {
+                context = c;
 
-                    // Handle the exception
-                    Assert.False(c.ExceptionHandled);
-                    c.ExceptionHandled = true;
-                }
-            )
+                // Handle the exception
+                Assert.False(c.ExceptionHandled);
+                c.ExceptionHandled = true;
+            })
             .Verifiable();
 
         var resultFilter2 = new Mock<IResultFilter>(MockBehavior.Strict);
@@ -2447,13 +2415,11 @@ public abstract class CommonResourceInvokerTest
         var exceptionFilter = new Mock<IAsyncExceptionFilter>(MockBehavior.Strict);
         exceptionFilter
             .Setup(f => f.OnExceptionAsync(It.IsAny<ExceptionContext>()))
-            .Returns<ExceptionContext>(
-                c =>
-                {
-                    c.Result = Result;
-                    return Task.CompletedTask;
-                }
-            );
+            .Returns<ExceptionContext>(c =>
+            {
+                c.Result = Result;
+                return Task.CompletedTask;
+            });
 
         var invoker = CreateInvoker(
             new IFilterMetadata[] { exceptionFilter.Object, resultFilter.Object, },

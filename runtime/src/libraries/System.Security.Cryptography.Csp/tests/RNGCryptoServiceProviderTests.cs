@@ -123,12 +123,10 @@ namespace System.Security.Cryptography.RNG.Tests
             using (new RNGCryptoServiceProvider((string)null)) { }
             using (new RNGCryptoServiceProvider((CspParameters)null)) { }
 
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
-                {
-                    using (new RNGCryptoServiceProvider(new CspParameters())) { }
-                }
-            );
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
+                using (new RNGCryptoServiceProvider(new CspParameters())) { }
+            });
         }
     }
 }

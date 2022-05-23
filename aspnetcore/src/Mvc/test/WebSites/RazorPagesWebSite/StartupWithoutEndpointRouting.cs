@@ -20,20 +20,15 @@ public class StartupWithoutEndpointRouting
         services
             .AddMvc(options => options.EnableEndpointRouting = false)
             .AddMvcLocalization()
-            .AddRazorPagesOptions(
-                options =>
-                {
-                    options.Conventions.AuthorizePage("/HelloWorldWithAuth");
-                    options.Conventions.AuthorizeFolder("/Pages/Admin");
-                    options.Conventions.AllowAnonymousToPage("/Pages/Admin/Login");
-                    options.Conventions.AddPageRoute(
-                        "/HelloWorldWithRoute",
-                        "Different-Route/{text}"
-                    );
-                    options.Conventions.AddPageRoute("/Pages/NotTheRoot", string.Empty);
-                    options.Conventions.Add(new CustomModelTypeConvention());
-                }
-            )
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AuthorizePage("/HelloWorldWithAuth");
+                options.Conventions.AuthorizeFolder("/Pages/Admin");
+                options.Conventions.AllowAnonymousToPage("/Pages/Admin/Login");
+                options.Conventions.AddPageRoute("/HelloWorldWithRoute", "Different-Route/{text}");
+                options.Conventions.AddPageRoute("/Pages/NotTheRoot", string.Empty);
+                options.Conventions.Add(new CustomModelTypeConvention());
+            })
             .WithRazorPagesAtContentRoot();
     }
 

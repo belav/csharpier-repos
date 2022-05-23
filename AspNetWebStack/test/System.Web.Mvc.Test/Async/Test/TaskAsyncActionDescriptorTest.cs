@@ -644,17 +644,15 @@ namespace System.Web.Mvc.Async.Test
 
             public Task<string> GenericTaskException(string taskId, bool throwException)
             {
-                return Task.Factory.StartNew(
-                    () =>
+                return Task.Factory.StartNew(() =>
+                {
+                    if (throwException)
                     {
-                        if (throwException)
-                        {
-                            ThrowException();
-                        }
-                        ;
-                        return taskId;
+                        ThrowException();
                     }
-                );
+                    ;
+                    return taskId;
+                });
             }
 
             private void ThrowException()
@@ -665,22 +663,18 @@ namespace System.Web.Mvc.Async.Test
             [Authorize]
             public Task SimpleTask(bool doWork)
             {
-                return Task.Factory.StartNew(
-                    () =>
-                    {
-                        WorkDone = doWork;
-                    }
-                );
+                return Task.Factory.StartNew(() =>
+                {
+                    WorkDone = doWork;
+                });
             }
 
             public Task SimpleTaskException(bool doWork)
             {
-                return Task.Factory.StartNew(
-                    () =>
-                    {
-                        ThrowException();
-                    }
-                );
+                return Task.Factory.StartNew(() =>
+                {
+                    ThrowException();
+                });
             }
 
             public Task<ActionResult> TaskTimeoutWithNullParam(

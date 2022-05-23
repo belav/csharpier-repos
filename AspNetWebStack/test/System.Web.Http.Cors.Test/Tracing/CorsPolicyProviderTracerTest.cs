@@ -24,13 +24,11 @@ namespace System.Web.Http.Cors.Tracing
                     f =>
                         f.GetCorsPolicyAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
                 )
-                .Returns(
-                    () =>
-                    {
-                        innerIsCalled = true;
-                        return Task.FromResult(new CorsPolicy());
-                    }
-                );
+                .Returns(() =>
+                {
+                    innerIsCalled = true;
+                    return Task.FromResult(new CorsPolicy());
+                });
             CorsPolicyProviderTracer tracer = new CorsPolicyProviderTracer(
                 policyProviderMock.Object,
                 traceWriterMock.Object

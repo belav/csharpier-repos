@@ -661,21 +661,19 @@ public class OAuthTests : RemoteAuthenticationTests<OAuthOptions>
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Use(
-                                    async (context, next) =>
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    if (handler == null || !await handler(context))
                                     {
-                                        if (handler == null || !await handler(context))
-                                        {
-                                            await next(context);
-                                        }
+                                        await next(context);
                                     }
-                                );
-                            }
-                        )
+                                }
+                            );
+                        })
                         .ConfigureServices(configureServices)
             )
             .Build();

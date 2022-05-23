@@ -1222,12 +1222,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             mock.When(() => true).Setup(m => m.Submit()).Verifiable();
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.Verify();
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.Verify();
+            });
 
             Assert.Null(exception);
         }
@@ -1238,12 +1236,10 @@ namespace Moq.Tests
             var mock = new Mock<IFoo>();
             mock.When(() => true).Setup(m => m.Submit());
 
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.VerifyAll();
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.VerifyAll();
+            });
 
             Assert.Null(exception);
         }
@@ -1257,12 +1253,10 @@ namespace Moq.Tests
             mock.SetupGet(m => m.Value).Verifiable("setup for getter");
 
             var _ = mock.Object.Value;
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.VerifyAll();
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.VerifyAll();
+            });
 
             Assert.IsAssignableFrom<MockException>(exception);
             Assert.Contains("setup for setter:", exception.Message);
@@ -1277,12 +1271,10 @@ namespace Moq.Tests
             mock.SetupSet(m => m.Value).Verifiable("setup for setter");
 
             mock.Object.Value = 42;
-            var exception = Record.Exception(
-                () =>
-                {
-                    mock.VerifyAll();
-                }
-            );
+            var exception = Record.Exception(() =>
+            {
+                mock.VerifyAll();
+            });
 
             Assert.IsAssignableFrom<MockException>(exception);
             Assert.Contains("setup for getter:", exception.Message);

@@ -97,12 +97,10 @@ public class StackObjectPoolTest
         var stackObjectPool = new StackObjectPool<object>(10, () => new object());
 
         // Act/Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                stackObjectPool.Return(new object());
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            stackObjectPool.Return(new object());
+        });
         Assert.Equal("There are no outstanding instances to return.", ex.Message);
     }
 
@@ -115,12 +113,10 @@ public class StackObjectPoolTest
         var instance2 = stackObjectPool.Get();
 
         // Act/Assert
-        var ex = Assert.Throws<ArgumentException>(
-            () =>
-            {
-                stackObjectPool.Return(instance1);
-            }
-        );
+        var ex = Assert.Throws<ArgumentException>(() =>
+        {
+            stackObjectPool.Return(instance1);
+        });
         Assert.Equal(
             "Attempting to return wrong pooled instance. Get/Return calls must form a stack.",
             ex.Message

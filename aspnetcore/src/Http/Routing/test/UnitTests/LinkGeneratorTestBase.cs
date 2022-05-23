@@ -60,18 +60,16 @@ public abstract class LinkGeneratorTestBase
         AddAdditionalServices(services);
         configureServices?.Invoke(services);
 
-        services.Configure<RouteOptions>(
-            o =>
+        services.Configure<RouteOptions>(o =>
+        {
+            if (dataSources != null)
             {
-                if (dataSources != null)
+                foreach (var dataSource in dataSources)
                 {
-                    foreach (var dataSource in dataSources)
-                    {
-                        o.EndpointDataSources.Add(dataSource);
-                    }
+                    o.EndpointDataSources.Add(dataSource);
                 }
             }
-        );
+        });
 
         var serviceProvider = services.BuildServiceProvider();
         var routeOptions = serviceProvider.GetRequiredService<IOptions<RouteOptions>>();

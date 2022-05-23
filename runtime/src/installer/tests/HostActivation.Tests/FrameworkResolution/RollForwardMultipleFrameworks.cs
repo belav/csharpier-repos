@@ -1514,15 +1514,13 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.FrameworkResolution
                     {
                         dotnetCustomizer
                             .Framework(HighWare)
-                            .RuntimeConfig(
-                                runtimeConfig =>
-                                {
-                                    runtimeConfig.RemoveFramework(MicrosoftNETCoreApp);
-                                    runtimeConfig
-                                        .GetFramework(MiddleWare)
-                                        .WithRollForward(higherFxRollForward);
-                                }
-                            );
+                            .RuntimeConfig(runtimeConfig =>
+                            {
+                                runtimeConfig.RemoveFramework(MicrosoftNETCoreApp);
+                                runtimeConfig
+                                    .GetFramework(MiddleWare)
+                                    .WithRollForward(higherFxRollForward);
+                            });
                         dotnetCustomizer
                             .Framework(MiddleWare)
                             .RuntimeConfig(

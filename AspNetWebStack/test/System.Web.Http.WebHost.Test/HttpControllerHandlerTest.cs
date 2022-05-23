@@ -2559,62 +2559,56 @@ namespace System.Web.Http.WebHost
 
             requestBaseMock
                 .Setup(m => m.GetBufferedInputStream())
-                .Returns(
-                    () =>
+                .Returns(() =>
+                {
+                    if (
+                        readEntityBodyMode == ReadEntityBodyMode.None
+                        || readEntityBodyMode == ReadEntityBodyMode.Buffered
+                    )
                     {
-                        if (
-                            readEntityBodyMode == ReadEntityBodyMode.None
-                            || readEntityBodyMode == ReadEntityBodyMode.Buffered
-                        )
-                        {
-                            readEntityBodyMode = ReadEntityBodyMode.Buffered;
-                            return getStream();
-                        }
-                        throw new InvalidOperationException();
+                        readEntityBodyMode = ReadEntityBodyMode.Buffered;
+                        return getStream();
                     }
-                );
+                    throw new InvalidOperationException();
+                });
 
             requestBaseMock
                 .SetupGet(m => m.InputStream)
-                .Returns(
-                    () =>
+                .Returns(() =>
+                {
+                    if (
+                        readEntityBodyMode == ReadEntityBodyMode.None
+                        || readEntityBodyMode == ReadEntityBodyMode.Classic
+                    )
                     {
-                        if (
-                            readEntityBodyMode == ReadEntityBodyMode.None
-                            || readEntityBodyMode == ReadEntityBodyMode.Classic
-                        )
-                        {
-                            readEntityBodyMode = ReadEntityBodyMode.Classic;
-                            return getStream();
-                        }
-                        else if (readEntityBodyMode == ReadEntityBodyMode.Buffered)
-                        {
-                            Stream stream = getStream();
-                            if (stream.Position == stream.Length)
-                            {
-                                return stream;
-                            }
-                        }
-                        throw new InvalidOperationException();
+                        readEntityBodyMode = ReadEntityBodyMode.Classic;
+                        return getStream();
                     }
-                );
+                    else if (readEntityBodyMode == ReadEntityBodyMode.Buffered)
+                    {
+                        Stream stream = getStream();
+                        if (stream.Position == stream.Length)
+                        {
+                            return stream;
+                        }
+                    }
+                    throw new InvalidOperationException();
+                });
 
             requestBaseMock
                 .Setup(m => m.GetBufferlessInputStream())
-                .Returns(
-                    () =>
+                .Returns(() =>
+                {
+                    if (
+                        readEntityBodyMode == ReadEntityBodyMode.None
+                        || readEntityBodyMode == ReadEntityBodyMode.Bufferless
+                    )
                     {
-                        if (
-                            readEntityBodyMode == ReadEntityBodyMode.None
-                            || readEntityBodyMode == ReadEntityBodyMode.Bufferless
-                        )
-                        {
-                            readEntityBodyMode = ReadEntityBodyMode.Bufferless;
-                            return getStream();
-                        }
-                        throw new InvalidOperationException();
+                        readEntityBodyMode = ReadEntityBodyMode.Bufferless;
+                        return getStream();
                     }
-                );
+                    throw new InvalidOperationException();
+                });
             return requestBaseMock.Object;
         }
 

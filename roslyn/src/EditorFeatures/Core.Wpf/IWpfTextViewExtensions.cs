@@ -15,26 +15,24 @@ namespace Microsoft.CodeAnalysis.Editor.Shared.Extensions
         {
             void firstLayout(object sender, TextViewLayoutChangedEventArgs args)
             {
-                threadingContext.JoinableTaskFactory.RunAsync(
-                    async () =>
+                threadingContext.JoinableTaskFactory.RunAsync(async () =>
+                {
+                    await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                        alwaysYield: true
+                    );
+
+                    var newHeight = view.LineHeight * view.TextBuffer.CurrentSnapshot.LineCount;
+                    if (IsGreater(newHeight, view.VisualElement.Height))
                     {
-                        await threadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                            alwaysYield: true
-                        );
-
-                        var newHeight = view.LineHeight * view.TextBuffer.CurrentSnapshot.LineCount;
-                        if (IsGreater(newHeight, view.VisualElement.Height))
-                        {
-                            view.VisualElement.Height = newHeight;
-                        }
-
-                        var newWidth = view.MaxTextRightCoordinate;
-                        if (IsGreater(newWidth, view.VisualElement.Width))
-                        {
-                            view.VisualElement.Width = newWidth;
-                        }
+                        view.VisualElement.Height = newHeight;
                     }
-                );
+
+                    var newWidth = view.MaxTextRightCoordinate;
+                    if (IsGreater(newWidth, view.VisualElement.Width))
+                    {
+                        view.VisualElement.Width = newWidth;
+                    }
+                });
 
                 view.LayoutChanged -= firstLayout;
             }

@@ -127,12 +127,10 @@ namespace System.Linq.Parallel.Tests
                         "OrderBy",
                         (start, count, s) =>
                             s(start, count)
-                                .OrderBy<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .OrderBy<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "OrderBy-Comparer",
@@ -142,12 +140,10 @@ namespace System.Linq.Parallel.Tests
                         "OrderByDescending",
                         (start, count, s) =>
                             s(start, count)
-                                .OrderByDescending<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .OrderByDescending<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "OrderByDescending-Comparer",
@@ -159,12 +155,10 @@ namespace System.Linq.Parallel.Tests
                         (start, count, s) =>
                             s(start, count)
                                 .OrderBy(x => 0)
-                                .ThenBy<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .ThenBy<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "ThenBy-Comparer",
@@ -176,12 +170,10 @@ namespace System.Linq.Parallel.Tests
                         (start, count, s) =>
                             s(start, count)
                                 .OrderBy(x => 0)
-                                .ThenByDescending<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .ThenByDescending<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "ThenByDescending-Comparer",
@@ -568,12 +560,10 @@ namespace System.Linq.Parallel.Tests
                         "GroupBy",
                         (start, count, s) =>
                             s(start, count)
-                                .GroupBy<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .GroupBy<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                                 .Select(g => g.Key)
                     ),
                     Label(
@@ -613,12 +603,10 @@ namespace System.Linq.Parallel.Tests
                         "Select",
                         (start, count, s) =>
                             s(start, count)
-                                .Select<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .Select<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "Select-Index",
@@ -635,12 +623,10 @@ namespace System.Linq.Parallel.Tests
                         "SelectMany",
                         (start, count, s) =>
                             s(start, count)
-                                .SelectMany<int, int>(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .SelectMany<int, int>(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "SelectMany-Index",
@@ -681,12 +667,10 @@ namespace System.Linq.Parallel.Tests
                         "SkipWhile",
                         (start, count, s) =>
                             s(start, count)
-                                .SkipWhile(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .SkipWhile(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "SkipWhile-Index",
@@ -703,12 +687,10 @@ namespace System.Linq.Parallel.Tests
                         "TakeWhile",
                         (start, count, s) =>
                             s(start, count)
-                                .TakeWhile(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .TakeWhile(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "TakeWhile-Index",
@@ -725,12 +707,10 @@ namespace System.Linq.Parallel.Tests
                         "Where",
                         (start, count, s) =>
                             s(start, count)
-                                .Where(
-                                    x =>
-                                    {
-                                        throw new DeliberateTestException();
-                                    }
-                                )
+                                .Where(x =>
+                                {
+                                    throw new DeliberateTestException();
+                                })
                     ),
                     Label(
                         "Where-Index",
@@ -784,13 +764,11 @@ namespace System.Linq.Parallel.Tests
                 Labeled.Label<Func<ParallelQuery<int>, Action, ParallelQuery<int>>>(
                     "SelectMany",
                     (source, cancel) =>
-                        source.SelectMany(
-                            x =>
-                            {
-                                cancel();
-                                return new[] { x };
-                            }
-                        )
+                        source.SelectMany(x =>
+                        {
+                            cancel();
+                            return new[] { x };
+                        })
                 )
             };
             yield return new object[]
@@ -842,13 +820,11 @@ namespace System.Linq.Parallel.Tests
                 Labeled.Label<Func<ParallelQuery<int>, Action, ParallelQuery<int>>>(
                     "SkipWhile",
                     (source, cancel) =>
-                        source.SkipWhile(
-                            x =>
-                            {
-                                cancel();
-                                return true;
-                            }
-                        )
+                        source.SkipWhile(x =>
+                        {
+                            cancel();
+                            return true;
+                        })
                 )
             };
             yield return new object[]
@@ -870,13 +846,11 @@ namespace System.Linq.Parallel.Tests
                 Labeled.Label<Func<ParallelQuery<int>, Action, ParallelQuery<int>>>(
                     "TakeWhile",
                     (source, cancel) =>
-                        source.TakeWhile(
-                            x =>
-                            {
-                                cancel();
-                                return true;
-                            }
-                        )
+                        source.TakeWhile(x =>
+                        {
+                            cancel();
+                            return true;
+                        })
                 )
             };
             yield return new object[]
@@ -898,13 +872,11 @@ namespace System.Linq.Parallel.Tests
                 Labeled.Label<Func<ParallelQuery<int>, Action, ParallelQuery<int>>>(
                     "Where",
                     (source, cancel) =>
-                        source.Where(
-                            x =>
-                            {
-                                cancel();
-                                return true;
-                            }
-                        )
+                        source.Where(x =>
+                        {
+                            cancel();
+                            return true;
+                        })
                 )
             };
             yield return new object[]
@@ -1164,12 +1136,10 @@ namespace System.Linq.Parallel.Tests
                 "Failing",
                 (start, count, s) =>
                     s(start, count)
-                        .Select<int, int>(
-                            x =>
-                            {
-                                throw new DeliberateTestException();
-                            }
-                        )
+                        .Select<int, int>(x =>
+                        {
+                            throw new DeliberateTestException();
+                        })
             );
 
             foreach (Labeled<Operation> operation in BinaryOperatorSources(LabeledDefaultSource))

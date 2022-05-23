@@ -20,27 +20,21 @@ public class DeveloperExceptionPageMiddlewareTest
         // Arrange
         DiagnosticListener diagnosticListener = null;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                diagnosticListener =
-                                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        diagnosticListener =
+                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -64,25 +58,19 @@ public class DeveloperExceptionPageMiddlewareTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -108,25 +96,19 @@ public class DeveloperExceptionPageMiddlewareTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -153,25 +135,19 @@ public class DeveloperExceptionPageMiddlewareTest
 
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new BadHttpRequestException("Not found!", statusCode);
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new BadHttpRequestException("Not found!", statusCode);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -193,34 +169,26 @@ public class DeveloperExceptionPageMiddlewareTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    ExceptionMessageFilter
-                                >();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionMessageFilter
+                        >();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -239,42 +207,34 @@ public class DeveloperExceptionPageMiddlewareTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    PassThroughExceptionFilter
-                                >();
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    AlwaysBadFormatExceptionFilter
-                                >();
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    ExceptionMessageFilter
-                                >();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            PassThroughExceptionFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            AlwaysBadFormatExceptionFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionMessageFilter
+                        >();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -295,42 +255,34 @@ public class DeveloperExceptionPageMiddlewareTest
     {
         // Arrange
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    AlwaysThrowSameMessageFilter
-                                >();
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    ExceptionMessageFilter
-                                >();
-                                services.AddSingleton<
-                                    IDeveloperPageExceptionFilter,
-                                    ExceptionToStringFilter
-                                >();
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .ConfigureServices(services =>
+                    {
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            AlwaysThrowSameMessageFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionMessageFilter
+                        >();
+                        services.AddSingleton<
+                            IDeveloperPageExceptionFilter,
+                            ExceptionToStringFilter
+                        >();
+                    })
+                    .Configure(app =>
+                    {
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -467,27 +419,21 @@ public class DeveloperExceptionPageMiddlewareTest
         // Arrange
         DiagnosticListener diagnosticListener = null;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                diagnosticListener =
-                                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new CustomCompilationException(failures);
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        diagnosticListener =
+                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new CustomCompilationException(failures);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();

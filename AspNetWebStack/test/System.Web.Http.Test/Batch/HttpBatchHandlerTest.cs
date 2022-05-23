@@ -169,17 +169,15 @@ namespace System.Web.Http
                 .Setup(
                     h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
                 )
-                .Returns(
-                    () =>
-                    {
-                        throw new HttpResponseException(
-                            new HttpResponseMessage(HttpStatusCode.BadRequest)
-                            {
-                                Content = new StringContent("HttpResponseException Error.")
-                            }
-                        );
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new HttpResponseException(
+                        new HttpResponseMessage(HttpStatusCode.BadRequest)
+                        {
+                            Content = new StringContent("HttpResponseException Error.")
+                        }
+                    );
+                });
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
             var response = await invoker.SendAsync(
@@ -402,12 +400,10 @@ namespace System.Web.Http
                 .Setup(
                     h => h.ProcessBatchAsync(It.IsAny<HttpRequestMessage>(), CancellationToken.None)
                 )
-                .Returns(
-                    () =>
-                    {
-                        throw new InvalidOperationException();
-                    }
-                );
+                .Returns(() =>
+                {
+                    throw new InvalidOperationException();
+                });
             HttpMessageInvoker invoker = new HttpMessageInvoker(handler.Object);
 
             var response = await invoker.SendAsync(

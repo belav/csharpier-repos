@@ -213,12 +213,10 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.TryReadOctetString(Span<byte>.Empty, out int bytesWritten);
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.TryReadOctetString(Span<byte>.Empty, out int bytesWritten);
+            });
         }
 
         private static void ReadOctetStringBytes_Throws_Helper(
@@ -228,12 +226,10 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             AsnReader reader = new AsnReader(input, ruleSet);
 
-            Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    reader.ReadOctetString();
-                }
-            );
+            Assert.Throws<AsnContentException>(() =>
+            {
+                reader.ReadOctetString();
+            });
         }
 
         [Theory]

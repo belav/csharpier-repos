@@ -112,15 +112,13 @@ namespace System.Tests
             Assert.Throws<PlatformNotSupportedException>(
                 () => new ArgIterator(new RuntimeArgumentHandle())
             );
-            Assert.Throws<PlatformNotSupportedException>(
-                () =>
+            Assert.Throws<PlatformNotSupportedException>(() =>
+            {
+                fixed (void* p = "test")
                 {
-                    fixed (void* p = "test")
-                    {
-                        new ArgIterator(new RuntimeArgumentHandle(), p);
-                    }
+                    new ArgIterator(new RuntimeArgumentHandle(), p);
                 }
-            );
+            });
             Assert.Throws<PlatformNotSupportedException>(() => new ArgIterator().End());
             Assert.Throws<PlatformNotSupportedException>(
                 () => new ArgIterator().Equals(new object())

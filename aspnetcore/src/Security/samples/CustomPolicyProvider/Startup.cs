@@ -28,13 +28,11 @@ public class Startup
         // custom authorization policy behavior of the sample
         services
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
-            .AddCookie(
-                options =>
-                {
-                    options.AccessDeniedPath = "/account/denied";
-                    options.LoginPath = "/account/signin";
-                }
-            );
+            .AddCookie(options =>
+            {
+                options.AccessDeniedPath = "/account/denied";
+                options.LoginPath = "/account/signin";
+            });
     }
 
     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
@@ -44,11 +42,9 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+        });
     }
 }

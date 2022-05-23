@@ -54,12 +54,10 @@ public class AuthorizationAppBuilderExtensionsTests
         var app = new ApplicationBuilder(new ServiceCollection().BuildServiceProvider());
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                app.UseAuthorization();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            app.UseAuthorization();
+        });
 
         // Assert
         Assert.Equal(

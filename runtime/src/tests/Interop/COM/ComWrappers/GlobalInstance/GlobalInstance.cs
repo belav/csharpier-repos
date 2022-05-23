@@ -269,20 +269,16 @@ namespace ComWrappersTests.GlobalInstance
 
             var wrappers1 = GlobalComWrappers.Instance;
             ComWrappers.RegisterForMarshalling(wrappers1);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForMarshalling(wrappers1);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForMarshalling(wrappers1);
+            });
 
             var wrappers2 = new GlobalComWrappers();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForMarshalling(wrappers2);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForMarshalling(wrappers2);
+            });
         }
 
         private static void ValidateRegisterForTrackerSupport()
@@ -291,20 +287,16 @@ namespace ComWrappersTests.GlobalInstance
 
             var wrappers1 = GlobalComWrappers.Instance;
             ComWrappers.RegisterForTrackerSupport(wrappers1);
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForTrackerSupport(wrappers1);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForTrackerSupport(wrappers1);
+            });
 
             var wrappers2 = new GlobalComWrappers();
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    ComWrappers.RegisterForTrackerSupport(wrappers2);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                ComWrappers.RegisterForTrackerSupport(wrappers2);
+            });
         }
 
         private static void ValidateMarshalAPIs(bool validateUseRegistered)

@@ -87,14 +87,12 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
             var done = false;
             var asyncToken = listener.BeginAsyncOperation("Test");
-            var task = new Task(
-                () =>
-                {
-                    signal.Set();
-                    sleepHelper.Sleep(TimeSpan.FromSeconds(1));
-                    done = true;
-                }
-            );
+            var task = new Task(() =>
+            {
+                signal.Set();
+                sleepHelper.Sleep(TimeSpan.FromSeconds(1));
+                done = true;
+            });
             task.CompletesAsyncOperation(asyncToken);
             task.Start(TaskScheduler.Default);
 
@@ -111,24 +109,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
 
             var done = false;
             var asyncToken1 = listener.BeginAsyncOperation("Test");
-            var task = new Task(
-                () =>
-                {
-                    signal.Set();
-                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+            var task = new Task(() =>
+            {
+                signal.Set();
+                sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
 
-                    var asyncToken2 = listener.BeginAsyncOperation("Test");
-                    var queuedTask = new Task(
-                        () =>
-                        {
-                            sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                            done = true;
-                        }
-                    );
-                    queuedTask.CompletesAsyncOperation(asyncToken2);
-                    queuedTask.Start(TaskScheduler.Default);
-                }
-            );
+                var asyncToken2 = listener.BeginAsyncOperation("Test");
+                var queuedTask = new Task(() =>
+                {
+                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                    done = true;
+                });
+                queuedTask.CompletesAsyncOperation(asyncToken2);
+                queuedTask.Start(TaskScheduler.Default);
+            });
 
             task.CompletesAsyncOperation(asyncToken1);
             task.Start(TaskScheduler.Default);
@@ -148,24 +142,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             var done = false;
             var continued = false;
             var asyncToken1 = listener.BeginAsyncOperation("Test");
-            var task = new Task(
-                () =>
+            var task = new Task(() =>
+            {
+                signal.Set();
+                sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                var asyncToken2 = listener.BeginAsyncOperation("Test");
+                var queuedTask = new Task(() =>
                 {
-                    signal.Set();
-                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                    var asyncToken2 = listener.BeginAsyncOperation("Test");
-                    var queuedTask = new Task(
-                        () =>
-                        {
-                            sleepHelper.Sleep(s_unexpectedDelay);
-                            continued = true;
-                        }
-                    );
-                    asyncToken2.Dispose();
-                    queuedTask.Start(TaskScheduler.Default);
-                    done = true;
-                }
-            );
+                    sleepHelper.Sleep(s_unexpectedDelay);
+                    continued = true;
+                });
+                asyncToken2.Dispose();
+                queuedTask.Start(TaskScheduler.Default);
+                done = true;
+            });
             task.CompletesAsyncOperation(asyncToken1);
             task.Start(TaskScheduler.Default);
 
@@ -185,22 +175,20 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             var outerDone = false;
             var innerDone = false;
             var asyncToken1 = listener.BeginAsyncOperation("Test");
-            var task = new Task(
-                () =>
+            var task = new Task(() =>
+            {
+                signal.Set();
+                sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+
+                using (listener.BeginAsyncOperation("Test"))
                 {
-                    signal.Set();
                     sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-
-                    using (listener.BeginAsyncOperation("Test"))
-                    {
-                        sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                        innerDone = true;
-                    }
-
-                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                    outerDone = true;
+                    innerDone = true;
                 }
-            );
+
+                sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                outerDone = true;
+            });
             task.CompletesAsyncOperation(asyncToken1);
             task.Start(TaskScheduler.Default);
 
@@ -222,35 +210,29 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             var secondQueuedDone = false;
 
             var asyncToken1 = listener.BeginAsyncOperation("Test");
-            var task = new Task(
-                () =>
-                {
-                    signal.Set();
-                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+            var task = new Task(() =>
+            {
+                signal.Set();
+                sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
 
-                    var asyncToken2 = listener.BeginAsyncOperation("Test");
-                    var firstQueueTask = new Task(
-                        () =>
-                        {
-                            sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                            var asyncToken3 = listener.BeginAsyncOperation("Test");
-                            var secondQueueTask = new Task(
-                                () =>
-                                {
-                                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
-                                    secondQueuedDone = true;
-                                }
-                            );
-                            secondQueueTask.CompletesAsyncOperation(asyncToken3);
-                            secondQueueTask.Start(TaskScheduler.Default);
-                            firstQueuedDone = true;
-                        }
-                    );
-                    firstQueueTask.CompletesAsyncOperation(asyncToken2);
-                    firstQueueTask.Start(TaskScheduler.Default);
-                    outerDone = true;
-                }
-            );
+                var asyncToken2 = listener.BeginAsyncOperation("Test");
+                var firstQueueTask = new Task(() =>
+                {
+                    sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                    var asyncToken3 = listener.BeginAsyncOperation("Test");
+                    var secondQueueTask = new Task(() =>
+                    {
+                        sleepHelper.Sleep(TimeSpan.FromMilliseconds(500));
+                        secondQueuedDone = true;
+                    });
+                    secondQueueTask.CompletesAsyncOperation(asyncToken3);
+                    secondQueueTask.Start(TaskScheduler.Default);
+                    firstQueuedDone = true;
+                });
+                firstQueueTask.CompletesAsyncOperation(asyncToken2);
+                firstQueueTask.Start(TaskScheduler.Default);
+                outerDone = true;
+            });
             task.CompletesAsyncOperation(asyncToken1);
             task.Start(TaskScheduler.Default);
 
@@ -272,36 +254,30 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Utilities
             var queuedFinished = new TaskCompletionSource<VoidResult>();
             var cancelledFinished = new TaskCompletionSource<VoidResult>();
             var asyncToken1 = listener.BeginAsyncOperation("Test");
-            var task = new Task(
-                () =>
+            var task = new Task(() =>
+            {
+                using (listener.BeginAsyncOperation("Test"))
                 {
-                    using (listener.BeginAsyncOperation("Test"))
+                    var cancelledTask = new Task(() =>
                     {
-                        var cancelledTask = new Task(
-                            () =>
-                            {
-                                sleepHelper.Sleep(TimeSpan.FromSeconds(10));
-                                cancelledFinished.SetResult(default);
-                            }
-                        );
+                        sleepHelper.Sleep(TimeSpan.FromSeconds(10));
+                        cancelledFinished.SetResult(default);
+                    });
 
-                        signal.Set();
-                        cancelledTask.Start(TaskScheduler.Default);
-                    }
-
-                    // Now that we've canceled the first request, queue another one to make sure we wait for it.
-                    var asyncToken2 = listener.BeginAsyncOperation("Test");
-                    var queuedTask = new Task(
-                        () =>
-                        {
-                            queuedFinished.SetResult(default);
-                        }
-                    );
-                    queuedTask.CompletesAsyncOperation(asyncToken2);
-                    queuedTask.Start(TaskScheduler.Default);
-                    done.SetResult(default);
+                    signal.Set();
+                    cancelledTask.Start(TaskScheduler.Default);
                 }
-            );
+
+                // Now that we've canceled the first request, queue another one to make sure we wait for it.
+                var asyncToken2 = listener.BeginAsyncOperation("Test");
+                var queuedTask = new Task(() =>
+                {
+                    queuedFinished.SetResult(default);
+                });
+                queuedTask.CompletesAsyncOperation(asyncToken2);
+                queuedTask.Start(TaskScheduler.Default);
+                done.SetResult(default);
+            });
             task.CompletesAsyncOperation(asyncToken1);
             task.Start(TaskScheduler.Default);
 

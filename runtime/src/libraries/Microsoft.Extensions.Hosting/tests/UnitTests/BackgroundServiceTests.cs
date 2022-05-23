@@ -149,20 +149,16 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             protected override Task ExecuteAsync(CancellationToken stoppingToken)
             {
-                stoppingToken.Register(
-                    () =>
-                    {
-                        TokenCalls++;
-                        throw new InvalidOperationException();
-                    }
-                );
+                stoppingToken.Register(() =>
+                {
+                    TokenCalls++;
+                    throw new InvalidOperationException();
+                });
 
-                stoppingToken.Register(
-                    () =>
-                    {
-                        TokenCalls++;
-                    }
-                );
+                stoppingToken.Register(() =>
+                {
+                    TokenCalls++;
+                });
 
                 return new TaskCompletionSource<object>().Task;
             }

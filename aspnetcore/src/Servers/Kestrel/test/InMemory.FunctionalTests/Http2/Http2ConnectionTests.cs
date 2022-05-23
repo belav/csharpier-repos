@@ -65,12 +65,10 @@ public class Http2ConnectionTests : Http2TestBase
     {
         _clientSettings.InitialWindowSize = 0;
 
-        await InitializeConnectionAsync(
-            c =>
-            {
-                return c.Response.Body.WriteAsync(new byte[1]).AsTask();
-            }
-        );
+        await InitializeConnectionAsync(c =>
+        {
+            return c.Response.Body.WriteAsync(new byte[1]).AsTask();
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
@@ -103,16 +101,14 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task FlowControl_OneStream_CorrectlyAwaited()
     {
-        await InitializeConnectionAsync(
-            async c =>
-            {
-                // Send headers
-                await c.Response.Body.FlushAsync();
+        await InitializeConnectionAsync(async c =>
+        {
+            // Send headers
+            await c.Response.Body.FlushAsync();
 
-                // Send large data (1 larger than window size)
-                await c.Response.Body.WriteAsync(new byte[65540]);
-            }
-        );
+            // Send large data (1 larger than window size)
+            await c.Response.Body.WriteAsync(new byte[65540]);
+        });
 
         // Ensure the connection window size is large enough
         await SendWindowUpdateAsync(streamId: 0, 65537);
@@ -320,25 +316,23 @@ public class Http2ConnectionTests : Http2TestBase
         var requestCount = 0;
         IHeaderDictionary trailersFirst = null;
         IHeaderDictionary trailersLast = null;
-        await InitializeConnectionAsync(
-            context =>
-            {
-                requestCount++;
+        await InitializeConnectionAsync(context =>
+        {
+            requestCount++;
 
-                var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
-                if (requestCount == 1)
-                {
-                    trailersFirst = new ResponseTrailersWrapper(trailersFeature.Trailers);
-                    trailersFeature.Trailers = trailersFirst;
-                }
-                else
-                {
-                    trailersLast = trailersFeature.Trailers;
-                }
-                trailersFeature.Trailers["trailer-" + requestCount] = "true";
-                return Task.CompletedTask;
+            var trailersFeature = context.Features.Get<IHttpResponseTrailersFeature>();
+            if (requestCount == 1)
+            {
+                trailersFirst = new ResponseTrailersWrapper(trailersFeature.Trailers);
+                trailersFeature.Trailers = trailersFirst;
             }
-        );
+            else
+            {
+                trailersLast = trailersFeature.Trailers;
+            }
+            trailersFeature.Trailers["trailer-" + requestCount] = "true";
+            return Task.CompletedTask;
+        });
 
         await StartStreamAsync(1, requestHeaders, endStream: true);
 
@@ -413,13 +407,11 @@ public class Http2ConnectionTests : Http2TestBase
         // Add stream to Http2Connection._completedStreams inline with SetResult().
         var serverTcs = new TaskCompletionSource();
 
-        await InitializeConnectionAsync(
-            async context =>
-            {
-                await serverTcs.Task;
-                await _echoApplication(context);
-            }
-        );
+        await InitializeConnectionAsync(async context =>
+        {
+            await serverTcs.Task;
+            await _echoApplication(context);
+        });
 
         Assert.Equal(0, _connection.StreamPool.Count);
 
@@ -517,21 +509,17 @@ public class Http2ConnectionTests : Http2TestBase
         object persistedState = null;
         var requestCount = 0;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            requestCount++;
+            var persistentStateCollection = context.Features.Get<IPersistentStateFeature>().State;
+            if (persistentStateCollection.TryGetValue("Counter", out var value))
             {
-                requestCount++;
-                var persistentStateCollection = context.Features
-                    .Get<IPersistentStateFeature>()
-                    .State;
-                if (persistentStateCollection.TryGetValue("Counter", out var value))
-                {
-                    persistedState = value;
-                }
-                persistentStateCollection["Counter"] = requestCount;
-                await appDelegateTcs.Task;
+                persistedState = value;
             }
-        );
+            persistentStateCollection["Counter"] = requestCount;
+            await appDelegateTcs.Task;
+        });
 
         Assert.Equal(0, _connection.StreamPool.Count);
 
@@ -602,17 +590,15 @@ public class Http2ConnectionTests : Http2TestBase
         // Add (or don't add) stream to Http2Connection._completedStreams inline with SetResult().
         var serverTcs = new TaskCompletionSource();
 
-        await InitializeConnectionAsync(
-            async context =>
-            {
-                await serverTcs.Task.DefaultTimeout();
+        await InitializeConnectionAsync(async context =>
+        {
+            await serverTcs.Task.DefaultTimeout();
 
-                await context.Response.WriteAsync("Content");
-                throw new InvalidOperationException(
-                    "Put the stream into an invalid state by throwing after writing to response."
-                );
-            }
-        );
+            await context.Response.WriteAsync("Content");
+            throw new InvalidOperationException(
+                "Put the stream into an invalid state by throwing after writing to response."
+            );
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
@@ -708,12 +694,10 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task StreamPool_UnusedExpiredStream_RemovedFromPool()
     {
-        await InitializeConnectionAsync(
-            async context =>
-            {
-                await _echoApplication(context);
-            }
-        );
+        await InitializeConnectionAsync(async context =>
+        {
+            await _echoApplication(context);
+        });
 
         Assert.Equal(0, _connection.StreamPool.Count);
 
@@ -1344,26 +1328,24 @@ public class Http2ConnectionTests : Http2TestBase
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            var data = new byte[10];
+            var read = await context.Request.Body.ReadAsync(new byte[10], 0, 10);
+            if (context.Features.Get<IHttp2StreamIdFeature>().StreamId == 1)
             {
-                var data = new byte[10];
-                var read = await context.Request.Body.ReadAsync(new byte[10], 0, 10);
-                if (context.Features.Get<IHttp2StreamIdFeature>().StreamId == 1)
-                {
-                    stream1Read.TrySetResult();
+                stream1Read.TrySetResult();
 
-                    await stream1ReadFinished.Task.DefaultTimeout();
-                }
-                else
-                {
-                    stream3Read.TrySetResult();
-
-                    await stream3ReadFinished.Task.DefaultTimeout();
-                }
-                await context.Response.Body.WriteAsync(data, 0, read);
+                await stream1ReadFinished.Task.DefaultTimeout();
             }
-        );
+            else
+            {
+                stream3Read.TrySetResult();
+
+                await stream3ReadFinished.Task.DefaultTimeout();
+            }
+            await context.Response.Body.WriteAsync(data, 0, read);
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: false);
         await StartStreamAsync(3, _browserRequestHeaders, endStream: false);
@@ -1612,33 +1594,28 @@ public class Http2ConnectionTests : Http2TestBase
         // Grow the client stream windows so no stream WINDOW_UPDATEs need to be sent.
         _clientSettings.InitialWindowSize = int.MaxValue;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            await context.Response.BodyWriter.FlushAsync();
+            var readResult = await context.Request.BodyReader.ReadAsync();
+            while (readResult.Buffer.Length != _maxData.Length * 4)
             {
-                await context.Response.BodyWriter.FlushAsync();
-                var readResult = await context.Request.BodyReader.ReadAsync();
-                while (readResult.Buffer.Length != _maxData.Length * 4)
-                {
-                    context.Request.BodyReader.AdvanceTo(
-                        readResult.Buffer.Start,
-                        readResult.Buffer.End
-                    );
-                    readResult = await context.Request.BodyReader.ReadAsync();
-                }
-
                 context.Request.BodyReader.AdvanceTo(
                     readResult.Buffer.Start,
                     readResult.Buffer.End
                 );
-
                 readResult = await context.Request.BodyReader.ReadAsync();
-                Assert.Equal(readResult.Buffer.Length, _maxData.Length * 5);
-
-                await context.Response.BodyWriter.WriteAsync(readResult.Buffer.ToArray());
-
-                context.Request.BodyReader.AdvanceTo(readResult.Buffer.End);
             }
-        );
+
+            context.Request.BodyReader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
+
+            readResult = await context.Request.BodyReader.ReadAsync();
+            Assert.Equal(readResult.Buffer.Length, _maxData.Length * 5);
+
+            await context.Response.BodyWriter.WriteAsync(readResult.Buffer.ToArray());
+
+            context.Request.BodyReader.AdvanceTo(readResult.Buffer.End);
+        });
 
         // Grow the client connection windows so no connection WINDOW_UPDATEs need to be sent.
         await SendWindowUpdateAsync(
@@ -1897,17 +1874,15 @@ public class Http2ConnectionTests : Http2TestBase
         var firstRequestBlock = new TaskCompletionSource();
         var firstRequestReceived = new TaskCompletionSource();
         var makeFirstRequestWait = false;
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            if (!makeFirstRequestWait)
             {
-                if (!makeFirstRequestWait)
-                {
-                    makeFirstRequestWait = true;
-                    firstRequestReceived.SetResult();
-                    await firstRequestBlock.Task.DefaultTimeout();
-                }
+                makeFirstRequestWait = true;
+                firstRequestReceived.SetResult();
+                await firstRequestBlock.Task.DefaultTimeout();
             }
-        );
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
         await SendRstStreamAsync(1);
@@ -1986,12 +1961,10 @@ public class Http2ConnectionTests : Http2TestBase
         _serviceContext.ServerOptions.Limits.Http2.MaxStreamsPerConnection =
             maxStreamsPerConnection;
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        await InitializeConnectionAsync(
-            async context =>
-            {
-                await tcs.Task.DefaultTimeout();
-            }
-        );
+        await InitializeConnectionAsync(async context =>
+        {
+            await tcs.Task.DefaultTimeout();
+        });
 
         var streamId = 1;
         for (var i = 0; i < sentStreams - 1; i++)
@@ -2122,30 +2095,28 @@ public class Http2ConnectionTests : Http2TestBase
         // Double the stream window to be 128KiB so it doesn't interfere with the rest of the test.
         _clientSettings.InitialWindowSize = Http2PeerSettings.DefaultInitialWindowSize * 2;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
+
+            try
             {
-                var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
-
-                try
+                if (streamId == 1)
                 {
-                    if (streamId == 1)
+                    for (var i = 0; i < expectedFullFrameCountBeforeBackpressure + 1; i++)
                     {
-                        for (var i = 0; i < expectedFullFrameCountBeforeBackpressure + 1; i++)
-                        {
-                            await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
-                        }
+                        await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                     }
+                }
 
-                    _runningStreams[streamId].SetResult();
-                }
-                catch (Exception ex)
-                {
-                    _runningStreams[streamId].SetException(ex);
-                    throw;
-                }
+                _runningStreams[streamId].SetResult();
             }
-        );
+            catch (Exception ex)
+            {
+                _runningStreams[streamId].SetException(ex);
+                throw;
+            }
+        });
 
         // Start one stream that consumes the entire connection output window.
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
@@ -2219,25 +2190,23 @@ public class Http2ConnectionTests : Http2TestBase
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        await InitializeConnectionAsync(
-                async context =>
+        await InitializeConnectionAsync(async context =>
+            {
+                // Exceed connection window size
+                await context.Response.WriteAsync(new string('!', 65536));
+
+                await connectionAbortedTcs.Task;
+
+                try
                 {
-                    // Exceed connection window size
-                    await context.Response.WriteAsync(new string('!', 65536));
-
-                    await connectionAbortedTcs.Task;
-
-                    try
-                    {
-                        context.Abort();
-                        requestAbortedTcs.SetResult();
-                    }
-                    catch (Exception ex)
-                    {
-                        requestAbortedTcs.SetException(ex);
-                    }
+                    context.Abort();
+                    requestAbortedTcs.SetResult();
                 }
-            )
+                catch (Exception ex)
+                {
+                    requestAbortedTcs.SetException(ex);
+                }
+            })
             .DefaultTimeout();
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true).DefaultTimeout();
@@ -2539,23 +2508,21 @@ public class Http2ConnectionTests : Http2TestBase
             TaskCreationOptions.RunContinuationsAsynchronously
         );
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            if (!firstRequestReceived.Task.IsCompleted)
             {
-                if (!firstRequestReceived.Task.IsCompleted)
-                {
-                    firstRequestReceived.TrySetResult();
+                firstRequestReceived.TrySetResult();
 
-                    await finishFirstRequest.Task.DefaultTimeout();
-                }
-                else
-                {
-                    secondRequestReceived.TrySetResult();
-
-                    await finishSecondRequest.Task.DefaultTimeout();
-                }
+                await finishFirstRequest.Task.DefaultTimeout();
             }
-        );
+            else
+            {
+                secondRequestReceived.TrySetResult();
+
+                await finishSecondRequest.Task.DefaultTimeout();
+            }
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
@@ -2641,16 +2608,14 @@ public class Http2ConnectionTests : Http2TestBase
     [Fact]
     public async Task HEADERS_ResponseSetsIgnoreIndexAndNeverIndexValues_HeadersParsed()
     {
-        await InitializeConnectionAsync(
-            c =>
-            {
-                c.Response.ContentLength = 0;
-                c.Response.Headers.SetCookie = "SetCookie!";
-                c.Response.Headers.ContentDisposition = "ContentDisposition!";
+        await InitializeConnectionAsync(c =>
+        {
+            c.Response.ContentLength = 0;
+            c.Response.Headers.SetCookie = "SetCookie!";
+            c.Response.Headers.ContentDisposition = "ContentDisposition!";
 
-                return Task.CompletedTask;
-            }
-        );
+            return Task.CompletedTask;
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
@@ -3535,60 +3500,56 @@ public class Http2ConnectionTests : Http2TestBase
         // Double the stream window to be 128KiB so it doesn't interfere with the rest of the test.
         _clientSettings.InitialWindowSize = Http2PeerSettings.DefaultInitialWindowSize * 2;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
+
+            var abortedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var writeTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+
+            context.RequestAborted.Register(() =>
             {
-                var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
-
-                var abortedTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-                var writeTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
-                    }
-                );
-
-                try
+                lock (_abortedStreamIdsLock)
                 {
-                    writeTasks[streamId] = writeTcs.Task;
-
-                    // Flush headers even if the body can't yet be written because of flow control.
-                    await context.Response.Body.FlushAsync();
-
-                    for (var i = 0; i < expectedFullFrameCountBeforeBackpressure; i++)
-                    {
-                        await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
-                    }
-
-                    await context.Response.Body.WriteAsync(
-                        _maxData,
-                        0,
-                        remainingBytesBeforeBackpressure + 1
-                    );
-
-                    writeTcs.SetResult();
-
-                    await abortedTcs.Task;
-
-                    _runningStreams[streamId].SetResult();
+                    _abortedStreamIds.Add(streamId);
+                    abortedTcs.SetResult();
                 }
-                catch (Exception ex)
+            });
+
+            try
+            {
+                writeTasks[streamId] = writeTcs.Task;
+
+                // Flush headers even if the body can't yet be written because of flow control.
+                await context.Response.Body.FlushAsync();
+
+                for (var i = 0; i < expectedFullFrameCountBeforeBackpressure; i++)
                 {
-                    _runningStreams[streamId].SetException(ex);
-                    throw;
+                    await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                 }
+
+                await context.Response.Body.WriteAsync(
+                    _maxData,
+                    0,
+                    remainingBytesBeforeBackpressure + 1
+                );
+
+                writeTcs.SetResult();
+
+                await abortedTcs.Task;
+
+                _runningStreams[streamId].SetResult();
             }
-        );
+            catch (Exception ex)
+            {
+                _runningStreams[streamId].SetException(ex);
+                throw;
+            }
+        });
 
         // Start one stream that consumes the entire connection output window.
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
@@ -3677,50 +3638,46 @@ public class Http2ConnectionTests : Http2TestBase
         // This only affects the stream windows. The connection-level window is always initialized at 64KiB.
         _clientSettings.InitialWindowSize = (uint)initialWindowSize;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
+
+            var abortedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var writeTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+
+            context.RequestAborted.Register(() =>
             {
-                var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
-
-                var abortedTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-                var writeTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
-                    }
-                );
-
-                try
+                lock (_abortedStreamIdsLock)
                 {
-                    writeTasks[streamId] = writeTcs.Task;
-                    await context.Response.Body.WriteAsync(
-                        _helloWorldBytes,
-                        0,
-                        _helloWorldBytes.Length
-                    );
-                    writeTcs.SetResult();
-
-                    await abortedTcs.Task;
-
-                    _runningStreams[streamId].SetResult();
+                    _abortedStreamIds.Add(streamId);
+                    abortedTcs.SetResult();
                 }
-                catch (Exception ex)
-                {
-                    _runningStreams[streamId].SetException(ex);
-                    throw;
-                }
+            });
+
+            try
+            {
+                writeTasks[streamId] = writeTcs.Task;
+                await context.Response.Body.WriteAsync(
+                    _helloWorldBytes,
+                    0,
+                    _helloWorldBytes.Length
+                );
+                writeTcs.SetResult();
+
+                await abortedTcs.Task;
+
+                _runningStreams[streamId].SetResult();
             }
-        );
+            catch (Exception ex)
+            {
+                _runningStreams[streamId].SetException(ex);
+                throw;
+            }
+        });
 
         async Task VerifyStreamBackpressure(int streamId, int headersLength)
         {
@@ -4715,60 +4672,56 @@ public class Http2ConnectionTests : Http2TestBase
         // Double the stream window to be 128KiB so it doesn't interfere with the rest of the test.
         _clientSettings.InitialWindowSize = Http2PeerSettings.DefaultInitialWindowSize * 2;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
+
+            var abortedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var writeTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+
+            context.RequestAborted.Register(() =>
             {
-                var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
-
-                var abortedTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-                var writeTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
-                    }
-                );
-
-                try
+                lock (_abortedStreamIdsLock)
                 {
-                    writeTasks[streamId] = writeTcs.Task;
-
-                    // Flush headers even if the body can't yet be written because of flow control.
-                    await context.Response.Body.FlushAsync();
-
-                    for (var i = 0; i < expectedFullFrameCountBeforeBackpressure; i++)
-                    {
-                        await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
-                    }
-
-                    await context.Response.Body.WriteAsync(
-                        _maxData,
-                        0,
-                        remainingBytesBeforeBackpressure + 1
-                    );
-
-                    writeTcs.SetResult();
-
-                    await abortedTcs.Task;
-
-                    _runningStreams[streamId].SetResult();
+                    _abortedStreamIds.Add(streamId);
+                    abortedTcs.SetResult();
                 }
-                catch (Exception ex)
+            });
+
+            try
+            {
+                writeTasks[streamId] = writeTcs.Task;
+
+                // Flush headers even if the body can't yet be written because of flow control.
+                await context.Response.Body.FlushAsync();
+
+                for (var i = 0; i < expectedFullFrameCountBeforeBackpressure; i++)
                 {
-                    _runningStreams[streamId].SetException(ex);
-                    throw;
+                    await context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
                 }
+
+                await context.Response.Body.WriteAsync(
+                    _maxData,
+                    0,
+                    remainingBytesBeforeBackpressure + 1
+                );
+
+                writeTcs.SetResult();
+
+                await abortedTcs.Task;
+
+                _runningStreams[streamId].SetResult();
             }
-        );
+            catch (Exception ex)
+            {
+                _runningStreams[streamId].SetException(ex);
+                throw;
+            }
+        });
 
         // Start one stream that consumes the entire connection output window.
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
@@ -4839,50 +4792,46 @@ public class Http2ConnectionTests : Http2TestBase
         // This only affects the stream windows. The connection-level window is always initialized at 64KiB.
         _clientSettings.InitialWindowSize = (uint)initialWindowSize;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
+
+            var abortedTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+            var writeTcs = new TaskCompletionSource(
+                TaskCreationOptions.RunContinuationsAsynchronously
+            );
+
+            context.RequestAborted.Register(() =>
             {
-                var streamId = context.Features.Get<IHttp2StreamIdFeature>().StreamId;
-
-                var abortedTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-                var writeTcs = new TaskCompletionSource(
-                    TaskCreationOptions.RunContinuationsAsynchronously
-                );
-
-                context.RequestAborted.Register(
-                    () =>
-                    {
-                        lock (_abortedStreamIdsLock)
-                        {
-                            _abortedStreamIds.Add(streamId);
-                            abortedTcs.SetResult();
-                        }
-                    }
-                );
-
-                try
+                lock (_abortedStreamIdsLock)
                 {
-                    writeTasks[streamId] = writeTcs.Task;
-                    await context.Response.Body.WriteAsync(
-                        _helloWorldBytes,
-                        0,
-                        _helloWorldBytes.Length
-                    );
-                    writeTcs.SetResult();
-
-                    await abortedTcs.Task;
-
-                    _runningStreams[streamId].SetResult();
+                    _abortedStreamIds.Add(streamId);
+                    abortedTcs.SetResult();
                 }
-                catch (Exception ex)
-                {
-                    _runningStreams[streamId].SetException(ex);
-                    throw;
-                }
+            });
+
+            try
+            {
+                writeTasks[streamId] = writeTcs.Task;
+                await context.Response.Body.WriteAsync(
+                    _helloWorldBytes,
+                    0,
+                    _helloWorldBytes.Length
+                );
+                writeTcs.SetResult();
+
+                await abortedTcs.Task;
+
+                _runningStreams[streamId].SetResult();
             }
-        );
+            catch (Exception ex)
+            {
+                _runningStreams[streamId].SetException(ex);
+                throw;
+            }
+        });
 
         async Task VerifyStreamBackpressure(int streamId, int headersLength)
         {
@@ -5133,45 +5082,37 @@ public class Http2ConnectionTests : Http2TestBase
         // Double the stream window to be 128KiB so it doesn't interfere with the rest of the test.
         _clientSettings.InitialWindowSize = Http2PeerSettings.DefaultInitialWindowSize * 2;
 
-        await InitializeConnectionAsync(
-            async context =>
+        await InitializeConnectionAsync(async context =>
+        {
+            try
             {
-                try
+                // Flush the headers so expectingDataSem is released.
+                await context.Response.Body.FlushAsync();
+
+                for (var i = 0; i < expectedFullFrameCountBeforeBackpressure; i++)
                 {
-                    // Flush the headers so expectingDataSem is released.
-                    await context.Response.Body.FlushAsync();
-
-                    for (var i = 0; i < expectedFullFrameCountBeforeBackpressure; i++)
-                    {
-                        await expectingDataSem.WaitAsync();
-                        Assert.True(
-                            context.Response.Body
-                                .WriteAsync(_maxData, 0, _maxData.Length)
-                                .IsCompleted
-                        );
-                    }
-
                     await expectingDataSem.WaitAsync();
-                    var lastWriteTask = context.Response.Body.WriteAsync(
-                        _maxData,
-                        0,
-                        _maxData.Length
+                    Assert.True(
+                        context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length).IsCompleted
                     );
-
-                    Assert.False(lastWriteTask.IsCompleted);
-                    backpressureObservedTcs.TrySetResult();
-
-                    await lastWriteTask;
-                    backpressureReleasedTcs.TrySetResult();
                 }
-                catch (Exception ex)
-                {
-                    backpressureObservedTcs.TrySetException(ex);
-                    backpressureReleasedTcs.TrySetException(ex);
-                    throw;
-                }
+
+                await expectingDataSem.WaitAsync();
+                var lastWriteTask = context.Response.Body.WriteAsync(_maxData, 0, _maxData.Length);
+
+                Assert.False(lastWriteTask.IsCompleted);
+                backpressureObservedTcs.TrySetResult();
+
+                await lastWriteTask;
+                backpressureReleasedTcs.TrySetResult();
             }
-        );
+            catch (Exception ex)
+            {
+                backpressureObservedTcs.TrySetException(ex);
+                backpressureReleasedTcs.TrySetException(ex);
+                throw;
+            }
+        });
 
         await StartStreamAsync(1, _browserRequestHeaders, endStream: true);
 
@@ -6343,18 +6284,16 @@ public class Http2ConnectionTests : Http2TestBase
             new KeyValuePair<string, string>(HeaderNames.Scheme, "http"),
         };
 
-        await InitializeConnectionAsync(
-            async context =>
-            {
-                var buffer = new byte[2];
-                var result = await context.Request.BodyReader.ReadAsync().DefaultTimeout();
-                Assert.True(result.IsCompleted);
-                result.Buffer.CopyTo(buffer);
-                context.Request.BodyReader.AdvanceTo(result.Buffer.Start, result.Buffer.End);
+        await InitializeConnectionAsync(async context =>
+        {
+            var buffer = new byte[2];
+            var result = await context.Request.BodyReader.ReadAsync().DefaultTimeout();
+            Assert.True(result.IsCompleted);
+            result.Buffer.CopyTo(buffer);
+            context.Request.BodyReader.AdvanceTo(result.Buffer.Start, result.Buffer.End);
 
-                tcs.SetResult(buffer);
-            }
-        );
+            tcs.SetResult(buffer);
+        });
 
         var streamPayload = new byte[2] { 42, 24 };
         await StartStreamAsync(1, headers, endStream: false);

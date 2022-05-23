@@ -47,29 +47,27 @@ namespace Microsoft.AspNetCore.SignalR.Tests
                 errorMessage += Environment.NewLine;
                 errorMessage += string.Join(
                     Environment.NewLine,
-                    results.Select(
-                        record =>
-                        {
-                            var r = record.Write;
+                    results.Select(record =>
+                    {
+                        var r = record.Write;
 
-                            string lineMessage =
-                                r.LoggerName
-                                + " - "
-                                + r.EventId.ToString()
-                                + " - "
-                                + r.Formatter(r.State, r.Exception);
-                            if (r.Exception != null)
-                            {
-                                lineMessage += Environment.NewLine;
-                                lineMessage += "===================";
-                                lineMessage += Environment.NewLine;
-                                lineMessage += r.Exception;
-                                lineMessage += Environment.NewLine;
-                                lineMessage += "===================";
-                            }
-                            return lineMessage;
+                        string lineMessage =
+                            r.LoggerName
+                            + " - "
+                            + r.EventId.ToString()
+                            + " - "
+                            + r.Formatter(r.State, r.Exception);
+                        if (r.Exception != null)
+                        {
+                            lineMessage += Environment.NewLine;
+                            lineMessage += "===================";
+                            lineMessage += Environment.NewLine;
+                            lineMessage += r.Exception;
+                            lineMessage += Environment.NewLine;
+                            lineMessage += "===================";
                         }
-                    )
+                        return lineMessage;
+                    })
                 );
 
                 throw new Exception(errorMessage);

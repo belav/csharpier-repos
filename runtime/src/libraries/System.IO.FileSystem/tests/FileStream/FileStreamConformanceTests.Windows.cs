@@ -126,23 +126,19 @@ namespace System.IO.Tests
     {
         public static bool CanShareFiles => _canShareFiles.Value;
 
-        private static Lazy<bool> _canShareFiles = new Lazy<bool>(
-            () =>
+        private static Lazy<bool> _canShareFiles = new Lazy<bool>(() =>
+        {
+            if (!PlatformDetection.IsWindowsAndElevated || PlatformDetection.IsWindowsNanoServer)
             {
-                if (
-                    !PlatformDetection.IsWindowsAndElevated || PlatformDetection.IsWindowsNanoServer
-                )
-                {
-                    return false;
-                }
-
-                // the "Server Service" allows for file sharing. It can be disabled on some of our CI machines.
-                using (ServiceController sharingService = new ServiceController("Server"))
-                {
-                    return sharingService.Status == ServiceControllerStatus.Running;
-                }
+                return false;
             }
-        );
+
+            // the "Server Service" allows for file sharing. It can be disabled on some of our CI machines.
+            using (ServiceController sharingService = new ServiceController("Server"))
+            {
+                return sharingService.Status == ServiceControllerStatus.Running;
+            }
+        });
 
         protected override string GetTestFilePath(
             int? index = null,

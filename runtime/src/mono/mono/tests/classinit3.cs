@@ -14,17 +14,15 @@ namespace integer_test
             var testThreads = new Thread[100];
             for (Int16 i = 0; i < testThreads.Length; ++i)
             {
-                testThreads[i] = new Thread(
-                    () =>
+                testThreads[i] = new Thread(() =>
+                {
+                    _trigger.WaitOne();
+                    for (Int16 index = 0; index < 1000; ++index)
                     {
-                        _trigger.WaitOne();
-                        for (Int16 index = 0; index < 1000; ++index)
-                        {
-                            var val = index.ToString();
-                            GC.KeepAlive(val);
-                        }
+                        var val = index.ToString();
+                        GC.KeepAlive(val);
                     }
-                );
+                });
                 testThreads[i].Start();
             }
             Console.WriteLine("setting event");

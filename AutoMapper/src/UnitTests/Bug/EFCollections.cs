@@ -27,13 +27,11 @@ namespace AutoMapper.UnitTests.Bug
         public class DestChild { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>();
-                    cfg.CreateMap<Child, DestChild>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+                cfg.CreateMap<Child, DestChild>();
+            });
 
         protected override void Because_of()
         {

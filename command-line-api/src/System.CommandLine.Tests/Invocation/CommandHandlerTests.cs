@@ -202,12 +202,10 @@ namespace System.CommandLine.Tests.Invocation
             int? boundAge = default;
 
             var command = new Command("command") { new Option<int?>("--age") };
-            command.Handler = CommandHandler.Create<int?>(
-                age =>
-                {
-                    boundAge = age;
-                }
-            );
+            command.Handler = CommandHandler.Create<int?>(age =>
+            {
+                boundAge = age;
+            });
 
             await command.InvokeAsync("command --age 425", _console);
 
@@ -221,13 +219,11 @@ namespace System.CommandLine.Tests.Invocation
             int? boundAge = default;
 
             var command = new Command("command") { new Option<int?>("--age") };
-            command.Handler = CommandHandler.Create<int?>(
-                age =>
-                {
-                    wasCalled = true;
-                    boundAge = age;
-                }
-            );
+            command.Handler = CommandHandler.Create<int?>(age =>
+            {
+                wasCalled = true;
+                boundAge = age;
+            });
 
             await command.InvokeAsync("command", _console);
 
@@ -242,12 +238,10 @@ namespace System.CommandLine.Tests.Invocation
             var tempPath = Path.GetTempPath();
 
             var command = new Command("command") { new Option<DirectoryInfo>("--dir") };
-            command.Handler = CommandHandler.Create<DirectoryInfo>(
-                dir =>
-                {
-                    boundDirectoryInfo = dir;
-                }
-            );
+            command.Handler = CommandHandler.Create<DirectoryInfo>(dir =>
+            {
+                boundDirectoryInfo = dir;
+            });
 
             await command.InvokeAsync($"command --dir \"{tempPath}\"", _console);
 
@@ -262,12 +256,10 @@ namespace System.CommandLine.Tests.Invocation
             var option = new Option<int>("-x");
 
             var command = new Command("command") { option };
-            command.Handler = CommandHandler.Create<ParseResult>(
-                result =>
-                {
-                    boundParseResult = result;
-                }
-            );
+            command.Handler = CommandHandler.Create<ParseResult>(result =>
+            {
+                boundParseResult = result;
+            });
 
             await command.InvokeAsync("command -x 123", _console);
 
@@ -281,12 +273,10 @@ namespace System.CommandLine.Tests.Invocation
 
             var option = new Option<int>("-x");
             var command = new Command("command") { option };
-            command.Handler = CommandHandler.Create<BindingContext>(
-                context =>
-                {
-                    boundContext = context;
-                }
-            );
+            command.Handler = CommandHandler.Create<BindingContext>(context =>
+            {
+                boundContext = context;
+            });
 
             await command.InvokeAsync("command -x 123", _console);
 
@@ -297,12 +287,10 @@ namespace System.CommandLine.Tests.Invocation
         public async Task Method_parameters_of_type_IConsole_receive_the_current_console_instance()
         {
             var command = new Command("command") { new Option<int>("-x") };
-            command.Handler = CommandHandler.Create<IConsole>(
-                console =>
-                {
-                    console.Out.Write("Hello!");
-                }
-            );
+            command.Handler = CommandHandler.Create<IConsole>(console =>
+            {
+                console.Out.Write("Hello!");
+            });
 
             await command.InvokeAsync("command", _console);
 
@@ -317,12 +305,10 @@ namespace System.CommandLine.Tests.Invocation
             var option = new Option<int>("-x");
 
             var command = new Command("command") { option };
-            command.Handler = CommandHandler.Create<InvocationContext>(
-                context =>
-                {
-                    boundContext = context;
-                }
-            );
+            command.Handler = CommandHandler.Create<InvocationContext>(context =>
+            {
+                boundContext = context;
+            });
 
             await command.InvokeAsync("command -x 123", _console);
 

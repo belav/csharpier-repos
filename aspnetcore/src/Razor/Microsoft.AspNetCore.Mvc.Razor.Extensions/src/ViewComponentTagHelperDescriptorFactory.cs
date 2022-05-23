@@ -73,13 +73,11 @@ internal class ViewComponentTagHelperDescriptorFactory
         if (TryFindInvokeMethod(type, out var method, out var diagnostic))
         {
             var methodParameters = method.Parameters;
-            descriptorBuilder.TagMatchingRule(
-                ruleBuilder =>
-                {
-                    ruleBuilder.TagName = tagName;
-                    AddRequiredAttributes(methodParameters, ruleBuilder);
-                }
-            );
+            descriptorBuilder.TagMatchingRule(ruleBuilder =>
+            {
+                ruleBuilder.TagName = tagName;
+                AddRequiredAttributes(methodParameters, ruleBuilder);
+            });
 
             AddBoundAttributes(methodParameters, displayName, descriptorBuilder);
         }
@@ -247,13 +245,11 @@ internal class ViewComponentTagHelperDescriptorFactory
             {
                 // Set required attributes only for non-indexer attributes. Indexer attributes can't be required attributes
                 // because there are two ways of setting values for the attribute.
-                builder.Attribute(
-                    attributeBuilder =>
-                    {
-                        var lowerKebabName = HtmlConventions.ToHtmlCase(parameter.Name);
-                        attributeBuilder.Name = lowerKebabName;
-                    }
-                );
+                builder.Attribute(attributeBuilder =>
+                {
+                    var lowerKebabName = HtmlConventions.ToHtmlCase(parameter.Name);
+                    attributeBuilder.Name = lowerKebabName;
+                });
             }
         }
     }
@@ -274,32 +270,27 @@ internal class ViewComponentTagHelperDescriptorFactory
                 simpleName = typeName;
             }
 
-            builder.BindAttribute(
-                attributeBuilder =>
-                {
-                    attributeBuilder.Name = lowerKebabName;
-                    attributeBuilder.TypeName = typeName;
-                    attributeBuilder.DisplayName =
-                        $"{simpleName} {containingDisplayName}.{parameter.Name}";
-                    attributeBuilder.SetPropertyName(parameter.Name);
+            builder.BindAttribute(attributeBuilder =>
+            {
+                attributeBuilder.Name = lowerKebabName;
+                attributeBuilder.TypeName = typeName;
+                attributeBuilder.DisplayName =
+                    $"{simpleName} {containingDisplayName}.{parameter.Name}";
+                attributeBuilder.SetPropertyName(parameter.Name);
 
-                    if (parameter.Type.TypeKind == TypeKind.Enum)
+                if (parameter.Type.TypeKind == TypeKind.Enum)
+                {
+                    attributeBuilder.IsEnum = true;
+                }
+                else
+                {
+                    var dictionaryValueType = GetIndexerValueTypeName(parameter);
+                    if (dictionaryValueType != null)
                     {
-                        attributeBuilder.IsEnum = true;
-                    }
-                    else
-                    {
-                        var dictionaryValueType = GetIndexerValueTypeName(parameter);
-                        if (dictionaryValueType != null)
-                        {
-                            attributeBuilder.AsDictionary(
-                                lowerKebabName + "-",
-                                dictionaryValueType
-                            );
-                        }
+                        attributeBuilder.AsDictionary(lowerKebabName + "-", dictionaryValueType);
                     }
                 }
-            );
+            });
         }
     }
 

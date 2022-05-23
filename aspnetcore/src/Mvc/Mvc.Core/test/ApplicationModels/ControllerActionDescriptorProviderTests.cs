@@ -492,12 +492,10 @@ public class ControllerActionDescriptorProviderTests
             + "Error: The route template '[invalid/syntax' has invalid syntax. A replacement token is not closed.";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                provider.GetDescriptors();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            provider.GetDescriptors();
+        });
 
         // Assert
         VerifyMultiLineError(expectedMessage, ex.Message, unorderedStart: 2, unorderedLineCount: 6);
@@ -909,12 +907,10 @@ public class ControllerActionDescriptorProviderTests
             + $"Action: '{sameNameType.FullName}.PatchItems ({assemblyName})' - Template: 'Items'";
 
         // Act
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                provider.GetDescriptors();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            provider.GetDescriptors();
+        });
 
         // Assert
         Assert.Equal(expectedMessage, ex.Message);
@@ -1060,12 +1056,10 @@ public class ControllerActionDescriptorProviderTests
             + " in a route or within a constraint, use '[[' or ']]' instead.";
 
         // Act & Assert
-        var ex = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                provider.GetDescriptors();
-            }
-        );
+        var ex = Assert.Throws<InvalidOperationException>(() =>
+        {
+            provider.GetDescriptors();
+        });
         Assert.Equal(expectedMessage, ex.Message);
     }
 
@@ -1332,42 +1326,34 @@ public class ControllerActionDescriptorProviderTests
         var applicationConvention = new Mock<IApplicationModelConvention>();
         applicationConvention
             .Setup(c => c.Apply(It.IsAny<ApplicationModel>()))
-            .Callback(
-                () =>
-                {
-                    Assert.Equal(0, sequence++);
-                }
-            );
+            .Callback(() =>
+            {
+                Assert.Equal(0, sequence++);
+            });
 
         var controllerConvention = new Mock<IControllerModelConvention>();
         controllerConvention
             .Setup(c => c.Apply(It.IsAny<ControllerModel>()))
-            .Callback(
-                () =>
-                {
-                    Assert.Equal(1, sequence++);
-                }
-            );
+            .Callback(() =>
+            {
+                Assert.Equal(1, sequence++);
+            });
 
         var actionConvention = new Mock<IActionModelConvention>();
         actionConvention
             .Setup(c => c.Apply(It.IsAny<ActionModel>()))
-            .Callback(
-                () =>
-                {
-                    Assert.Equal(2, sequence++);
-                }
-            );
+            .Callback(() =>
+            {
+                Assert.Equal(2, sequence++);
+            });
 
         var parameterConvention = new Mock<IParameterModelConvention>();
         parameterConvention
             .Setup(c => c.Apply(It.IsAny<ParameterModel>()))
-            .Callback(
-                () =>
-                {
-                    Assert.Equal(3, sequence++);
-                }
-            );
+            .Callback(() =>
+            {
+                Assert.Equal(3, sequence++);
+            });
 
         var options = Options.Create(new MvcOptions());
         options.Value.Conventions.Add(applicationConvention.Object);

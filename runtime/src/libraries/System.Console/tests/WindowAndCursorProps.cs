@@ -273,12 +273,10 @@ public class WindowAndCursorProps
     public static void Title_SetUnix_Success()
     {
         RemoteExecutor
-            .Invoke(
-                () =>
-                {
-                    Console.Title = "Title set by unit test";
-                }
-            )
+            .Invoke(() =>
+            {
+                Console.Title = "Title set by unit test";
+            })
             .Dispose();
     }
 

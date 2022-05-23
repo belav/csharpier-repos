@@ -13,12 +13,10 @@ namespace Microsoft.EntityFrameworkCore
 
         public override DbContextOptionsBuilder AddOptions(DbContextOptionsBuilder builder) =>
             base.AddOptions(builder)
-                .ConfigureWarnings(
-                    w =>
-                    {
-                        w.Log(SqlServerEventId.DecimalTypeKeyWarning);
-                    }
-                );
+                .ConfigureWarnings(w =>
+                {
+                    w.Log(SqlServerEventId.DecimalTypeKeyWarning);
+                });
 
         protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
         {

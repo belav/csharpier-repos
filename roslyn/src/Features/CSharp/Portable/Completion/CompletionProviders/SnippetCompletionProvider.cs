@@ -236,26 +236,22 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.Providers
                 );
             }
 
-            return snippets.SelectAsArray(
-                snippet =>
-                {
-                    var rules = isTupleContext ? s_tupleRules : CompletionItemRules.Default;
-                    rules = rules.WithFormatOnCommit(service.ShouldFormatSnippet(snippet));
+            return snippets.SelectAsArray(snippet =>
+            {
+                var rules = isTupleContext ? s_tupleRules : CompletionItemRules.Default;
+                rules = rules.WithFormatOnCommit(service.ShouldFormatSnippet(snippet));
 
-                    return CommonCompletionItem.Create(
-                        displayText: isPreProcessorContext
-                            ? snippet.Shortcut[1..]
-                            : snippet.Shortcut,
-                        displayTextSuffix: "",
-                        sortText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
-                        description: (
-                            snippet.Title + Environment.NewLine + snippet.Description
-                        ).ToSymbolDisplayParts(),
-                        glyph: Glyph.Snippet,
-                        rules: rules
-                    );
-                }
-            );
+                return CommonCompletionItem.Create(
+                    displayText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
+                    displayTextSuffix: "",
+                    sortText: isPreProcessorContext ? snippet.Shortcut[1..] : snippet.Shortcut,
+                    description: (
+                        snippet.Title + Environment.NewLine + snippet.Description
+                    ).ToSymbolDisplayParts(),
+                    glyph: Glyph.Snippet,
+                    rules: rules
+                );
+            });
         }
     }
 }

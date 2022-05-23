@@ -30,12 +30,10 @@ internal class W3CLogger : IAsyncDisposable
     {
         _options = options;
         _loggingFields = _options.CurrentValue.LoggingFields;
-        _options.OnChange(
-            options =>
-            {
-                _loggingFields = options.LoggingFields;
-            }
-        );
+        _options.OnChange(options =>
+        {
+            _loggingFields = options.LoggingFields;
+        });
         _messageQueue = InitializeMessageQueue(_options, environment, factory);
     }
 

@@ -86,12 +86,10 @@ namespace Microsoft.CodeAnalysis.UnitTests.Collections
         [Fact]
         public void Constructo_NullIEnumerable_ThrowsArgumentNullException()
         {
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    SegmentedList<T> _list = new SegmentedList<T>(null!);
-                }
-            ); //"Expected ArgumentnUllException for null items"
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                SegmentedList<T> _list = new SegmentedList<T>(null!);
+            }); //"Expected ArgumentnUllException for null items"
         }
     }
 }

@@ -50,12 +50,10 @@ namespace System.Security.Cryptography.Pkcs.EnvelopedCmsTests.Tests
             RSAEncryptionPadding oaepMd5Padding = RSAEncryptionPadding.CreateOaep(
                 HashAlgorithmName.MD5
             );
-            Assert.ThrowsAny<CryptographicException>(
-                () =>
-                {
-                    EncodeKeyTransl_Rsa2048(oaepMd5Padding, Certificates.RSA2048Sha256KeyTransfer1);
-                }
-            );
+            Assert.ThrowsAny<CryptographicException>(() =>
+            {
+                EncodeKeyTransl_Rsa2048(oaepMd5Padding, Certificates.RSA2048Sha256KeyTransfer1);
+            });
         }
 
         public static IEnumerable<object[]> TestKeyTransEncryptedKey_RsaAlgorithmTypes

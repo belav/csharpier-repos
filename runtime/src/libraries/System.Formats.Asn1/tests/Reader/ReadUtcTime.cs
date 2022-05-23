@@ -212,13 +212,11 @@ namespace System.Formats.Asn1.Tests.Reader
         {
             byte[] inputData = "17113030303030303030303030302D31353030".HexToByteArray();
 
-            var exception = Assert.Throws<AsnContentException>(
-                () =>
-                {
-                    AsnReader reader = new AsnReader(inputData, AsnEncodingRules.BER);
-                    reader.ReadUtcTime();
-                }
-            );
+            var exception = Assert.Throws<AsnContentException>(() =>
+            {
+                AsnReader reader = new AsnReader(inputData, AsnEncodingRules.BER);
+                reader.ReadUtcTime();
+            });
 
             Assert.NotNull(exception.InnerException);
             Assert.IsType<ArgumentOutOfRangeException>(exception.InnerException);

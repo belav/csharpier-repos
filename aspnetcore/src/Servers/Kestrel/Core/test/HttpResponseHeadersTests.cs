@@ -108,44 +108,32 @@ public class HttpResponseHeadersTests
     {
         var responseHeaders = new HttpResponseHeaders();
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IHeaderDictionary)responseHeaders)[key] = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IHeaderDictionary)responseHeaders)[key] = value;
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IHeaderDictionary)responseHeaders)[key] = new StringValues(
-                    new[] { "valid", value }
-                );
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IHeaderDictionary)responseHeaders)[key] = new StringValues(new[] { "valid", value });
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IDictionary<string, StringValues>)responseHeaders)[key] = value;
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var kvp = new KeyValuePair<string, StringValues>(key, value);
-                ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            var kvp = new KeyValuePair<string, StringValues>(key, value);
+            ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var kvp = new KeyValuePair<string, StringValues>(key, value);
-                ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            var kvp = new KeyValuePair<string, StringValues>(key, value);
+            ((IDictionary<string, StringValues>)responseHeaders).Add(key, value);
+        });
     }
 
     [Theory]
@@ -165,20 +153,16 @@ public class HttpResponseHeadersTests
         var responseHeaders = (IHeaderDictionary)new HttpResponseHeaders();
 
         // Known special header
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                responseHeaders.Allow = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            responseHeaders.Allow = value;
+        });
 
         // Unknown header fallback
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                responseHeaders.Accept = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            responseHeaders.Accept = value;
+        });
     }
 
     [Theory]
@@ -195,59 +179,45 @@ public class HttpResponseHeadersTests
         var responseHeaders = new HttpResponseHeaders(_ => Encoding.UTF8);
 
         // Known special header
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IHeaderDictionary)responseHeaders).Allow = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IHeaderDictionary)responseHeaders).Allow = value;
+        });
 
         // Unknown header fallback
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IHeaderDictionary)responseHeaders).Accept = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IHeaderDictionary)responseHeaders).Accept = value;
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IHeaderDictionary)responseHeaders)["Unknown"] = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IHeaderDictionary)responseHeaders)["Unknown"] = value;
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(
-                    new[] { "valid", value }
-                );
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IHeaderDictionary)responseHeaders)["Unknown"] = new StringValues(
+                new[] { "valid", value }
+            );
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                ((IDictionary<string, StringValues>)responseHeaders)["Unknown"] = value;
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            ((IDictionary<string, StringValues>)responseHeaders)["Unknown"] = value;
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
-                ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
+            ((ICollection<KeyValuePair<string, StringValues>>)responseHeaders).Add(kvp);
+        });
 
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
-                ((IDictionary<string, StringValues>)responseHeaders).Add("Unknown", value);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            var kvp = new KeyValuePair<string, StringValues>("Unknown", value);
+            ((IDictionary<string, StringValues>)responseHeaders).Add("Unknown", value);
+        });
     }
 
     [Theory]

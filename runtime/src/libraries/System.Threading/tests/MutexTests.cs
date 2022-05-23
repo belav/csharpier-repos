@@ -264,21 +264,19 @@ namespace System.Threading.Tests
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotInAppContainer))] // Can't create global objects in appcontainer
         public void Ctor_ImpersonateAnonymousAndTryCreateGlobalMutexTest()
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                if (!ImpersonateAnonymousToken(GetCurrentThread()))
                 {
-                    if (!ImpersonateAnonymousToken(GetCurrentThread()))
-                    {
-                        // Impersonation is not allowed in the current context, this test is inappropriate in such a case
-                        return;
-                    }
-
-                    Assert.Throws<UnauthorizedAccessException>(
-                        () => new Mutex(false, "Global\\" + Guid.NewGuid().ToString("N"))
-                    );
-                    Assert.True(RevertToSelf());
+                    // Impersonation is not allowed in the current context, this test is inappropriate in such a case
+                    return;
                 }
-            );
+
+                Assert.Throws<UnauthorizedAccessException>(
+                    () => new Mutex(false, "Global\\" + Guid.NewGuid().ToString("N"))
+                );
+                Assert.True(RevertToSelf());
+            });
         }
 
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsInAppContainer))] // Can't create global objects in appcontainer
@@ -471,230 +469,214 @@ namespace System.Threading.Tests
             bool abandonDuringWait
         )
         {
-            ThreadTestHelpers.RunTestInBackgroundThread(
-                () =>
+            ThreadTestHelpers.RunTestInBackgroundThread(() =>
+            {
+                using (var m = new Mutex(false, name))
+                using (
+                    Mutex m2 =
+                        waitCount == 1 ? null : new Mutex(false, name == null ? null : name + "_2")
+                )
+                using (
+                    ManualResetEvent e =
+                        waitCount == 1
+                            ? null
+                            : new ManualResetEvent(isNotAbandonedWaitObjectSignaled)
+                )
+                using (
+                    ManualResetEvent threadReadyForAbandon = abandonDuringWait
+                        ? new ManualResetEvent(false)
+                        : null
+                )
+                using (
+                    ManualResetEvent abandonSoon = abandonDuringWait
+                        ? new ManualResetEvent(false)
+                        : null
+                )
                 {
-                    using (var m = new Mutex(false, name))
-                    using (
-                        Mutex m2 =
-                            waitCount == 1
-                                ? null
-                                : new Mutex(false, name == null ? null : name + "_2")
-                    )
-                    using (
-                        ManualResetEvent e =
-                            waitCount == 1
-                                ? null
-                                : new ManualResetEvent(isNotAbandonedWaitObjectSignaled)
-                    )
-                    using (
-                        ManualResetEvent threadReadyForAbandon = abandonDuringWait
-                            ? new ManualResetEvent(false)
-                            : null
-                    )
-                    using (
-                        ManualResetEvent abandonSoon = abandonDuringWait
-                            ? new ManualResetEvent(false)
-                            : null
-                    )
+                    WaitHandle[] waitHandles = null;
+                    if (waitType != WaitHandleWaitType.WaitOne)
                     {
-                        WaitHandle[] waitHandles = null;
-                        if (waitType != WaitHandleWaitType.WaitOne)
+                        waitHandles = new WaitHandle[waitCount];
+                        if (waitCount == 1)
                         {
-                            waitHandles = new WaitHandle[waitCount];
-                            if (waitCount == 1)
-                            {
-                                waitHandles[0] = m;
-                            }
-                            else
-                            {
-                                waitHandles[notAbandonedWaitIndex] = e;
-                                waitHandles[notAbandonedWaitIndex == 0 ? 1 : 0] = m;
-                                waitHandles[notAbandonedWaitIndex == 2 ? 1 : 2] = m2;
-                            }
-                        }
-
-                        Thread t = ThreadTestHelpers.CreateGuardedThread(
-                            out Action waitForThread,
-                            () =>
-                            {
-                                Assert.True(m.WaitOne(0));
-                                if (m2 != null)
-                                {
-                                    Assert.True(m2.WaitOne(0));
-                                }
-
-                                if (abandonDuringWait)
-                                {
-                                    threadReadyForAbandon.Set();
-                                    abandonSoon.CheckedWait();
-                                    Thread.Sleep(ThreadTestHelpers.ExpectedTimeoutMilliseconds);
-                                }
-
-                                // don't release the mutexes; abandon them on this thread
-                            }
-                        );
-                        t.IsBackground = true;
-                        t.Start();
-
-                        if (abandonDuringWait)
-                        {
-                            threadReadyForAbandon.CheckedWait();
-                            abandonSoon.Set();
+                            waitHandles[0] = m;
                         }
                         else
                         {
-                            waitForThread();
+                            waitHandles[notAbandonedWaitIndex] = e;
+                            waitHandles[notAbandonedWaitIndex == 0 ? 1 : 0] = m;
+                            waitHandles[notAbandonedWaitIndex == 2 ? 1 : 2] = m2;
                         }
+                    }
 
-                        AbandonedMutexException ame;
-                        switch (waitType)
+                    Thread t = ThreadTestHelpers.CreateGuardedThread(
+                        out Action waitForThread,
+                        () =>
                         {
-                            case WaitHandleWaitType.WaitOne:
-                                ame = AssertExtensions.Throws<AbandonedMutexException, bool>(
+                            Assert.True(m.WaitOne(0));
+                            if (m2 != null)
+                            {
+                                Assert.True(m2.WaitOne(0));
+                            }
+
+                            if (abandonDuringWait)
+                            {
+                                threadReadyForAbandon.Set();
+                                abandonSoon.CheckedWait();
+                                Thread.Sleep(ThreadTestHelpers.ExpectedTimeoutMilliseconds);
+                            }
+
+                            // don't release the mutexes; abandon them on this thread
+                        }
+                    );
+                    t.IsBackground = true;
+                    t.Start();
+
+                    if (abandonDuringWait)
+                    {
+                        threadReadyForAbandon.CheckedWait();
+                        abandonSoon.Set();
+                    }
+                    else
+                    {
+                        waitForThread();
+                    }
+
+                    AbandonedMutexException ame;
+                    switch (waitType)
+                    {
+                        case WaitHandleWaitType.WaitOne:
+                            ame = AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                            );
+                            Assert.Equal(-1, ame.MutexIndex);
+                            Assert.Null(ame.Mutex);
+                            break;
+
+                        case WaitHandleWaitType.WaitAny:
+                            if (
+                                waitCount != 1
+                                && isNotAbandonedWaitObjectSignaled
+                                && notAbandonedWaitIndex == 0
+                            )
+                            {
+                                Assert.Equal(0, WaitHandle.WaitAny(waitHandles, 0));
+                                AssertExtensions.Throws<AbandonedMutexException, bool>(
                                     () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
                                 );
-                                Assert.Equal(-1, ame.MutexIndex);
-                                Assert.Null(ame.Mutex);
+                                AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                    () =>
+                                        m2.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
+                                );
                                 break;
+                            }
 
-                            case WaitHandleWaitType.WaitAny:
-                                if (
-                                    waitCount != 1
-                                    && isNotAbandonedWaitObjectSignaled
-                                    && notAbandonedWaitIndex == 0
-                                )
+                            if (
+                                waitCount != 1
+                                && isNotAbandonedWaitObjectSignaled
+                                && notAbandonedWaitIndex != 0
+                            )
+                            {
+                                ame = Assert.Throws<AbandonedMutexException>(() =>
                                 {
-                                    Assert.Equal(0, WaitHandle.WaitAny(waitHandles, 0));
-                                    AssertExtensions.Throws<AbandonedMutexException, bool>(
-                                        () =>
-                                            m.WaitOne(
-                                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                            )
-                                    );
+                                    ThreadTestHelpers.WaitForCondition(() =>
+                                    {
+                                        // Actually expecting an exception from WaitAny(), but there may be a delay before
+                                        // the mutex is actually released and abandoned. If there is no exception, the
+                                        // WaitAny() must have succeeded due to the event being signaled.
+                                        int r = WaitHandle.WaitAny(
+                                            waitHandles,
+                                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                                        );
+                                        Assert.Equal(notAbandonedWaitIndex, r);
+                                        return false;
+                                    });
+                                });
+                            }
+                            else
+                            {
+                                ame = AssertExtensions.Throws<AbandonedMutexException, int>(
+                                    () =>
+                                        WaitHandle.WaitAny(
+                                            waitHandles,
+                                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                                        )
+                                );
+                            }
+
+                            // Due to a potential delay in abandoning mutexes, either mutex may have been seen to be
+                            // abandoned first
+                            Assert.True(ame.Mutex == m || (m2 != null && ame.Mutex == m2));
+                            int mIndex = waitCount != 1 && notAbandonedWaitIndex == 0 ? 1 : 0;
+                            int m2Index = waitCount != 1 && notAbandonedWaitIndex == 2 ? 1 : 2;
+                            if (ame.Mutex == m)
+                            {
+                                Assert.Equal(mIndex, ame.MutexIndex);
+                            }
+                            else
+                            {
+                                Assert.True(
+                                    !isNotAbandonedWaitObjectSignaled
+                                        || m2Index < notAbandonedWaitIndex
+                                );
+                                Assert.Equal(m2Index, ame.MutexIndex);
+                            }
+
+                            // Verify that the other mutex also gets abandoned
+                            if (ame.MutexIndex == mIndex)
+                            {
+                                if (m2 != null)
+                                {
                                     AssertExtensions.Throws<AbandonedMutexException, bool>(
                                         () =>
                                             m2.WaitOne(
                                                 ThreadTestHelpers.UnexpectedTimeoutMilliseconds
                                             )
                                     );
-                                    break;
                                 }
-
-                                if (
-                                    waitCount != 1
-                                    && isNotAbandonedWaitObjectSignaled
-                                    && notAbandonedWaitIndex != 0
-                                )
-                                {
-                                    ame = Assert.Throws<AbandonedMutexException>(
-                                        () =>
-                                        {
-                                            ThreadTestHelpers.WaitForCondition(
-                                                () =>
-                                                {
-                                                    // Actually expecting an exception from WaitAny(), but there may be a delay before
-                                                    // the mutex is actually released and abandoned. If there is no exception, the
-                                                    // WaitAny() must have succeeded due to the event being signaled.
-                                                    int r = WaitHandle.WaitAny(
-                                                        waitHandles,
-                                                        ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                                    );
-                                                    Assert.Equal(notAbandonedWaitIndex, r);
-                                                    return false;
-                                                }
-                                            );
-                                        }
-                                    );
-                                }
-                                else
-                                {
-                                    ame = AssertExtensions.Throws<AbandonedMutexException, int>(
-                                        () =>
-                                            WaitHandle.WaitAny(
-                                                waitHandles,
-                                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                            )
-                                    );
-                                }
-
-                                // Due to a potential delay in abandoning mutexes, either mutex may have been seen to be
-                                // abandoned first
-                                Assert.True(ame.Mutex == m || (m2 != null && ame.Mutex == m2));
-                                int mIndex = waitCount != 1 && notAbandonedWaitIndex == 0 ? 1 : 0;
-                                int m2Index = waitCount != 1 && notAbandonedWaitIndex == 2 ? 1 : 2;
-                                if (ame.Mutex == m)
-                                {
-                                    Assert.Equal(mIndex, ame.MutexIndex);
-                                }
-                                else
-                                {
-                                    Assert.True(
-                                        !isNotAbandonedWaitObjectSignaled
-                                            || m2Index < notAbandonedWaitIndex
-                                    );
-                                    Assert.Equal(m2Index, ame.MutexIndex);
-                                }
-
-                                // Verify that the other mutex also gets abandoned
-                                if (ame.MutexIndex == mIndex)
-                                {
-                                    if (m2 != null)
-                                    {
-                                        AssertExtensions.Throws<AbandonedMutexException, bool>(
-                                            () =>
-                                                m2.WaitOne(
-                                                    ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                                )
-                                        );
-                                    }
-                                }
-                                else
-                                {
-                                    AssertExtensions.Throws<AbandonedMutexException, bool>(
-                                        () =>
-                                            m.WaitOne(
-                                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                            )
-                                    );
-                                }
-
-                                break;
-
-                            case WaitHandleWaitType.WaitAll:
-                                if (waitCount != 1 && !isNotAbandonedWaitObjectSignaled)
-                                {
-                                    Assert.False(
-                                        WaitHandle.WaitAll(
-                                            waitHandles,
-                                            ThreadTestHelpers.ExpectedTimeoutMilliseconds * 2
-                                        )
-                                    );
-                                    Assert.True(e.Set());
-                                }
-
-                                ame = AssertExtensions.Throws<AbandonedMutexException, bool>(
-                                    () =>
-                                        WaitHandle.WaitAll(
-                                            waitHandles,
-                                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                                        )
+                            }
+                            else
+                            {
+                                AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                    () => m.WaitOne(ThreadTestHelpers.UnexpectedTimeoutMilliseconds)
                                 );
-                                Assert.Equal(-1, ame.MutexIndex);
-                                Assert.Null(ame.Mutex);
-                                break;
-                        }
+                            }
 
-                        if (abandonDuringWait)
-                        {
-                            waitForThread();
-                        }
+                            break;
 
-                        m.ReleaseMutex();
-                        m2?.ReleaseMutex();
+                        case WaitHandleWaitType.WaitAll:
+                            if (waitCount != 1 && !isNotAbandonedWaitObjectSignaled)
+                            {
+                                Assert.False(
+                                    WaitHandle.WaitAll(
+                                        waitHandles,
+                                        ThreadTestHelpers.ExpectedTimeoutMilliseconds * 2
+                                    )
+                                );
+                                Assert.True(e.Set());
+                            }
+
+                            ame = AssertExtensions.Throws<AbandonedMutexException, bool>(
+                                () =>
+                                    WaitHandle.WaitAll(
+                                        waitHandles,
+                                        ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                                    )
+                            );
+                            Assert.Equal(-1, ame.MutexIndex);
+                            Assert.Null(ame.Mutex);
+                            break;
                     }
+
+                    if (abandonDuringWait)
+                    {
+                        waitForThread();
+                    }
+
+                    m.ReleaseMutex();
+                    m2?.ReleaseMutex();
                 }
-            );
+            });
         }
 
         public static IEnumerable<object[]> CrossProcess_NamedMutex_ProtectedFileAccessAtomic_MemberData()
@@ -713,57 +695,53 @@ namespace System.Threading.Tests
             string fileName = GetTestFilePath();
             try
             {
-                ThreadTestHelpers.RunTestInBackgroundThread(
-                    () =>
-                    {
-                        string mutexName = prefix + Guid.NewGuid().ToString("N");
+                ThreadTestHelpers.RunTestInBackgroundThread(() =>
+                {
+                    string mutexName = prefix + Guid.NewGuid().ToString("N");
 
-                        Action<string, string> otherProcess = (m, f) =>
+                    Action<string, string> otherProcess = (m, f) =>
+                    {
+                        using (var mutex = Mutex.OpenExisting(m))
                         {
-                            using (var mutex = Mutex.OpenExisting(m))
+                            mutex.CheckedWait();
+                            try
+                            {
+                                File.WriteAllText(f, "0");
+                            }
+                            finally
+                            {
+                                mutex.ReleaseMutex();
+                            }
+
+                            IncrementValueInFileNTimes(mutex, f, 10);
+                        }
+                    };
+
+                    using (var mutex = new Mutex(false, mutexName))
+                    using (var remote = RemoteExecutor.Invoke(otherProcess, mutexName, fileName))
+                    {
+                        SpinWait.SpinUntil(
+                            () =>
                             {
                                 mutex.CheckedWait();
                                 try
                                 {
-                                    File.WriteAllText(f, "0");
+                                    return File.Exists(fileName)
+                                        && int.TryParse(File.ReadAllText(fileName), out _);
                                 }
                                 finally
                                 {
                                     mutex.ReleaseMutex();
                                 }
+                            },
+                            ThreadTestHelpers.UnexpectedTimeoutMilliseconds
+                        );
 
-                                IncrementValueInFileNTimes(mutex, f, 10);
-                            }
-                        };
-
-                        using (var mutex = new Mutex(false, mutexName))
-                        using (
-                            var remote = RemoteExecutor.Invoke(otherProcess, mutexName, fileName)
-                        )
-                        {
-                            SpinWait.SpinUntil(
-                                () =>
-                                {
-                                    mutex.CheckedWait();
-                                    try
-                                    {
-                                        return File.Exists(fileName)
-                                            && int.TryParse(File.ReadAllText(fileName), out _);
-                                    }
-                                    finally
-                                    {
-                                        mutex.ReleaseMutex();
-                                    }
-                                },
-                                ThreadTestHelpers.UnexpectedTimeoutMilliseconds
-                            );
-
-                            IncrementValueInFileNTimes(mutex, fileName, 10);
-                        }
-
-                        Assert.Equal(20, int.Parse(File.ReadAllText(fileName)));
+                        IncrementValueInFileNTimes(mutex, fileName, 10);
                     }
-                );
+
+                    Assert.Equal(20, int.Parse(File.ReadAllText(fileName)));
+                });
             }
             catch (Exception ex) when (File.Exists(fileName))
             {
@@ -841,19 +819,17 @@ namespace System.Threading.Tests
                 // Create a new mutex object with the same name and acquire it. There can be a delay between Thread.Join() above
                 // returning and for T0 to abandon its mutex, keep trying to also verify that the mutex object is actually
                 // destroyed and created new again.
-                SpinWait.SpinUntil(
-                    () =>
+                SpinWait.SpinUntil(() =>
+                {
+                    using (m = new Mutex(true, mutexName, out bool createdNew))
                     {
-                        using (m = new Mutex(true, mutexName, out bool createdNew))
+                        if (createdNew)
                         {
-                            if (createdNew)
-                            {
-                                m.ReleaseMutex();
-                            }
-                            return createdNew;
+                            m.ReleaseMutex();
                         }
+                        return createdNew;
                     }
-                );
+                });
             }
         }
 

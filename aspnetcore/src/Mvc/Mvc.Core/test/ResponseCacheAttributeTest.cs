@@ -393,12 +393,10 @@ public class ResponseCacheAttributeTest
         var context = GetActionExecutingContext(filter);
 
         // Act & Assert
-        var exception = Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                filter.OnActionExecuting(context);
-            }
-        );
+        var exception = Assert.Throws<InvalidOperationException>(() =>
+        {
+            filter.OnActionExecuting(context);
+        });
         Assert.Equal(
             "If the 'NoStore' property is not set to true, 'Duration' property must be specified.",
             exception.Message

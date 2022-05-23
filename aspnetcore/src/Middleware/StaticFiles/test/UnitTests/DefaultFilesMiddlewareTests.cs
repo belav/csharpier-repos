@@ -90,20 +90,18 @@ public class DefaultFilesMiddlewareTests
             )
         )
         {
-            using var host = await StaticFilesTestServer.Create(
-                app =>
-                {
-                    app.UseDefaultFiles(
-                        new DefaultFilesOptions
-                        {
-                            RequestPath = new PathString(baseUrl),
-                            FileProvider = fileProvider,
-                            RedirectToAppendTrailingSlash = appendTrailingSlash
-                        }
-                    );
-                    app.Run(context => context.Response.WriteAsync(context.Request.Path.Value));
-                }
-            );
+            using var host = await StaticFilesTestServer.Create(app =>
+            {
+                app.UseDefaultFiles(
+                    new DefaultFilesOptions
+                    {
+                        RequestPath = new PathString(baseUrl),
+                        FileProvider = fileProvider,
+                        RedirectToAppendTrailingSlash = appendTrailingSlash
+                    }
+                );
+                app.Run(context => context.Response.WriteAsync(context.Request.Path.Value));
+            });
             using var server = host.GetTestServer();
 
             var response = await server.CreateClient().GetAsync(requestUrl);
@@ -244,20 +242,18 @@ public class DefaultFilesMiddlewareTests
             )
         )
         {
-            using var host = await StaticFilesTestServer.Create(
-                app =>
-                {
-                    app.UseDefaultFiles(
-                        new DefaultFilesOptions
-                        {
-                            RequestPath = new PathString(baseUrl),
-                            FileProvider = fileProvider,
-                            RedirectToAppendTrailingSlash = appendTrailingSlash
-                        }
-                    );
-                    app.Run(context => context.Response.WriteAsync(context.Request.Path.Value));
-                }
-            );
+            using var host = await StaticFilesTestServer.Create(app =>
+            {
+                app.UseDefaultFiles(
+                    new DefaultFilesOptions
+                    {
+                        RequestPath = new PathString(baseUrl),
+                        FileProvider = fileProvider,
+                        RedirectToAppendTrailingSlash = appendTrailingSlash
+                    }
+                );
+                app.Run(context => context.Response.WriteAsync(context.Request.Path.Value));
+            });
             using var server = host.GetTestServer();
 
             var response = await server.CreateClient().GetAsync(requestUrl);

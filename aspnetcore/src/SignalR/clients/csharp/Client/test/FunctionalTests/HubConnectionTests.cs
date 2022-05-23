@@ -760,19 +760,14 @@ public class HubConnectionTests : FunctionalTestBase
                 var cts = new CancellationTokenSource();
                 cts.Cancel();
 
-                var ex = Assert.ThrowsAsync<OperationCanceledException>(
-                    async () =>
+                var ex = Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                {
+                    var stream = connection.StreamAsync<int>("Stream", 5, cts.Token);
+                    await foreach (var streamValue in stream)
                     {
-                        var stream = connection.StreamAsync<int>("Stream", 5, cts.Token);
-                        await foreach (var streamValue in stream)
-                        {
-                            Assert.True(
-                                false,
-                                "Expected an exception from the streaming invocation."
-                            );
-                        }
+                        Assert.True(false, "Expected an exception from the streaming invocation.");
                     }
-                );
+                });
             }
             catch (Exception ex)
             {
@@ -817,16 +812,14 @@ public class HubConnectionTests : FunctionalTestBase
                 var results = new List<int>();
 
                 var enumerator = stream.GetAsyncEnumerator();
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    async () =>
+                await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                {
+                    while (await enumerator.MoveNextAsync())
                     {
-                        while (await enumerator.MoveNextAsync())
-                        {
-                            results.Add(enumerator.Current);
-                            cts.Cancel();
-                        }
+                        results.Add(enumerator.Current);
+                        cts.Cancel();
                     }
-                );
+                });
 
                 Assert.True(results.Count > 0 && results.Count < 1000);
             }
@@ -873,18 +866,13 @@ public class HubConnectionTests : FunctionalTestBase
             {
                 await connection.StartAsync().DefaultTimeout();
                 var asyncEnumerable = connection.StreamAsync<int>("StreamException");
-                var ex = await Assert.ThrowsAsync<HubException>(
-                    async () =>
+                var ex = await Assert.ThrowsAsync<HubException>(async () =>
+                {
+                    await foreach (var streamValue in asyncEnumerable)
                     {
-                        await foreach (var streamValue in asyncEnumerable)
-                        {
-                            Assert.True(
-                                false,
-                                "Expected an exception from the streaming invocation."
-                            );
-                        }
+                        Assert.True(false, "Expected an exception from the streaming invocation.");
                     }
-                );
+                });
 
                 Assert.Equal(
                     "An unexpected error occurred invoking 'StreamException' on the server. InvalidOperationException: Error occurred while streaming.",
@@ -1200,23 +1188,21 @@ public class HubConnectionTests : FunctionalTestBase
                 var results = new List<int>();
                 var stream = clientStreamData();
                 var cts = new CancellationTokenSource();
-                var ex = await Assert.ThrowsAsync<OperationCanceledException>(
-                    async () =>
-                    {
-                        var channel = await connection
-                            .StreamAsChannelAsync<int>("StreamEchoInt", stream, cts.Token)
-                            .DefaultTimeout();
+                var ex = await Assert.ThrowsAsync<OperationCanceledException>(async () =>
+                {
+                    var channel = await connection
+                        .StreamAsChannelAsync<int>("StreamEchoInt", stream, cts.Token)
+                        .DefaultTimeout();
 
-                        while (await channel.WaitToReadAsync())
+                    while (await channel.WaitToReadAsync())
+                    {
+                        while (channel.TryRead(out var item))
                         {
-                            while (channel.TryRead(out var item))
-                            {
-                                results.Add(item);
-                                cts.Cancel();
-                            }
+                            results.Add(item);
+                            cts.Cancel();
                         }
                     }
-                );
+                });
 
                 Assert.True(results.Count > 0 && results.Count < 1000);
                 Assert.True(cts.IsCancellationRequested);
@@ -1263,16 +1249,14 @@ public class HubConnectionTests : FunctionalTestBase
                 var cts = new CancellationTokenSource();
 
                 var enumerator = stream.GetAsyncEnumerator(cts.Token);
-                await Assert.ThrowsAsync<TaskCanceledException>(
-                    async () =>
+                await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+                {
+                    while (await enumerator.MoveNextAsync())
                     {
-                        while (await enumerator.MoveNextAsync())
-                        {
-                            results.Add(enumerator.Current);
-                            cts.Cancel();
-                        }
+                        results.Add(enumerator.Current);
+                        cts.Cancel();
                     }
-                );
+                });
 
                 Assert.True(results.Count > 0 && results.Count < 1000);
             }
@@ -1911,14 +1895,12 @@ public class HubConnectionTests : FunctionalTestBase
 
         var protocol = HubProtocols[protocolName];
         await using (
-            var server = await StartServer<Startup>(
-                write =>
-                {
-                    return write.EventId.Name == "FailedWritingMessage"
-                        || write.EventId.Name == "ReceivedCloseWithError"
-                        || write.EventId.Name == "ShutdownWithError";
-                }
-            )
+            var server = await StartServer<Startup>(write =>
+            {
+                return write.EventId.Name == "FailedWritingMessage"
+                    || write.EventId.Name == "ReceivedCloseWithError"
+                    || write.EventId.Name == "ShutdownWithError";
+            })
         )
         {
             var connection = CreateHubConnection(
@@ -1994,14 +1976,12 @@ public class HubConnectionTests : FunctionalTestBase
 
         var protocol = HubProtocols[protocolName];
         await using (
-            var server = await StartServer<Startup>(
-                write =>
-                {
-                    return write.EventId.Name == "FailedWritingMessage"
-                        || write.EventId.Name == "ReceivedCloseWithError"
-                        || write.EventId.Name == "ShutdownWithError";
-                }
-            )
+            var server = await StartServer<Startup>(write =>
+            {
+                return write.EventId.Name == "FailedWritingMessage"
+                    || write.EventId.Name == "ReceivedCloseWithError"
+                    || write.EventId.Name == "ShutdownWithError";
+            })
         )
         {
             var connection = CreateHubConnection(
@@ -2773,12 +2753,10 @@ public class HubConnectionTests : FunctionalTestBase
                 .WithUrl(server.Url + HubPaths.First(), HttpTransportType.WebSockets)
                 .WithAutomaticReconnect();
 
-            connectionBuilder.Services.Configure<HttpConnectionOptions>(
-                o =>
-                {
-                    o.SkipNegotiation = true;
-                }
-            );
+            connectionBuilder.Services.Configure<HttpConnectionOptions>(o =>
+            {
+                o.SkipNegotiation = true;
+            });
 
             var connection = connectionBuilder.Build();
 

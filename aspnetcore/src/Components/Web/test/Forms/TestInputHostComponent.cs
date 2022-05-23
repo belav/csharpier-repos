@@ -29,21 +29,19 @@ internal class TestInputHostComponent<TValue, TComponent> : AutoRenderComponent
         builder.AddAttribute(
             2,
             "ChildContent",
-            new RenderFragment(
-                childBuilder =>
-                {
-                    childBuilder.OpenComponent<TComponent>(0);
-                    childBuilder.AddAttribute(0, "Value", Value);
-                    childBuilder.AddAttribute(
-                        1,
-                        "ValueChanged",
-                        EventCallback.Factory.Create(this, ValueChanged)
-                    );
-                    childBuilder.AddAttribute(2, "ValueExpression", ValueExpression);
-                    childBuilder.AddMultipleAttributes(3, AdditionalAttributes);
-                    childBuilder.CloseComponent();
-                }
-            )
+            new RenderFragment(childBuilder =>
+            {
+                childBuilder.OpenComponent<TComponent>(0);
+                childBuilder.AddAttribute(0, "Value", Value);
+                childBuilder.AddAttribute(
+                    1,
+                    "ValueChanged",
+                    EventCallback.Factory.Create(this, ValueChanged)
+                );
+                childBuilder.AddAttribute(2, "ValueExpression", ValueExpression);
+                childBuilder.AddMultipleAttributes(3, AdditionalAttributes);
+                childBuilder.CloseComponent();
+            })
         );
         builder.CloseComponent();
     }

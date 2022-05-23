@@ -761,14 +761,12 @@ public class RuntimeViewCompilerTest
 
         // Act
         var task1 = Task.Run(() => compiler.CompileAsync(path));
-        var task2 = Task.Run(
-            () =>
-            {
-                // Event 4
-                Assert.True(resetEvent2.WaitOne(waitDuration));
-                return compiler.CompileAsync(path);
-            }
-        );
+        var task2 = Task.Run(() =>
+        {
+            // Event 4
+            Assert.True(resetEvent2.WaitOne(waitDuration));
+            return compiler.CompileAsync(path);
+        });
 
         // Event 1
         resetEvent1.Set();

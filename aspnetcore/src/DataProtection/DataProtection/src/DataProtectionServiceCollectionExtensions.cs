@@ -101,27 +101,27 @@ public static class DataProtectionServiceCollectionExtensions
         services.TryAddSingleton<IDefaultKeyResolver, DefaultKeyResolver>();
         services.TryAddSingleton<IKeyRingProvider, KeyRingProvider>();
 
-        services.TryAddSingleton<IDataProtectionProvider>(
-            s =>
+        services.TryAddSingleton<IDataProtectionProvider>(s =>
+        {
+            var dpOptions = s.GetRequiredService<IOptions<DataProtectionOptions>>();
+            var keyRingProvider = s.GetRequiredService<IKeyRingProvider>();
+            var loggerFactory = s.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
+
+            IDataProtectionProvider dataProtectionProvider = new KeyRingBasedDataProtectionProvider(
+                keyRingProvider,
+                loggerFactory
+            );
+
+            // Link the provider to the supplied discriminator
+            if (!string.IsNullOrEmpty(dpOptions.Value.ApplicationDiscriminator))
             {
-                var dpOptions = s.GetRequiredService<IOptions<DataProtectionOptions>>();
-                var keyRingProvider = s.GetRequiredService<IKeyRingProvider>();
-                var loggerFactory = s.GetService<ILoggerFactory>() ?? NullLoggerFactory.Instance;
-
-                IDataProtectionProvider dataProtectionProvider =
-                    new KeyRingBasedDataProtectionProvider(keyRingProvider, loggerFactory);
-
-                // Link the provider to the supplied discriminator
-                if (!string.IsNullOrEmpty(dpOptions.Value.ApplicationDiscriminator))
-                {
-                    dataProtectionProvider = dataProtectionProvider.CreateProtector(
-                        dpOptions.Value.ApplicationDiscriminator
-                    );
-                }
-
-                return dataProtectionProvider;
+                dataProtectionProvider = dataProtectionProvider.CreateProtector(
+                    dpOptions.Value.ApplicationDiscriminator
+                );
             }
-        );
+
+            return dataProtectionProvider;
+        });
 
         services.TryAddSingleton<ICertificateResolver, CertificateResolver>();
     }

@@ -13,28 +13,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
     {
         public void EnableTestTelemetryChannel()
         {
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
+            InvokeOnUIThread(cancellationToken =>
+            {
+                TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
 
-                    LoggerTestChannel.Instance.Clear();
+                LoggerTestChannel.Instance.Clear();
 
-                    TelemetryService.AttachTestChannel(LoggerTestChannel.Instance);
-                }
-            );
+                TelemetryService.AttachTestChannel(LoggerTestChannel.Instance);
+            });
         }
 
         public void DisableTestTelemetryChannel()
         {
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
+            InvokeOnUIThread(cancellationToken =>
+            {
+                TelemetryService.DetachTestChannel(LoggerTestChannel.Instance);
 
-                    LoggerTestChannel.Instance.Clear();
-                }
-            );
+                LoggerTestChannel.Instance.Clear();
+            });
         }
 
         public bool TryWaitForTelemetryEvents(string[] names) =>

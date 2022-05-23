@@ -122,22 +122,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>().Property(a => a.Id).ValueGeneratedNever();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.Property(c => c.Identity)
-                        .UseIdentityColumn(2, 3)
-                        .HasColumnName(nameof(Cat.Identity));
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.Property(d => d.Identity)
-                        .UseIdentityColumn(2, 3)
-                        .HasColumnName(nameof(Dog.Identity));
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.Property(c => c.Identity)
+                    .UseIdentityColumn(2, 3)
+                    .HasColumnName(nameof(Cat.Identity));
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.Property(d => d.Identity)
+                    .UseIdentityColumn(2, 3)
+                    .HasColumnName(nameof(Dog.Identity));
+            });
 
             Validate(modelBuilder);
         }
@@ -147,22 +143,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.Property(c => c.Identity)
-                        .UseIdentityColumn()
-                        .HasColumnName(nameof(Cat.Identity));
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.Property(d => d.Identity)
-                        .UseIdentityColumn(2)
-                        .HasColumnName(nameof(Dog.Identity));
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.Property(c => c.Identity)
+                    .UseIdentityColumn()
+                    .HasColumnName(nameof(Cat.Identity));
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.Property(d => d.Identity)
+                    .UseIdentityColumn(2)
+                    .HasColumnName(nameof(Dog.Identity));
+            });
 
             VerifyError(
                 SqlServerStrings.DuplicateColumnIdentitySeedMismatch(
@@ -182,22 +174,18 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.Property(c => c.Identity)
-                        .UseIdentityColumn()
-                        .HasColumnName(nameof(Cat.Identity));
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.Property(d => d.Identity)
-                        .UseIdentityColumn(increment: 2)
-                        .HasColumnName(nameof(Dog.Identity));
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.Property(c => c.Identity)
+                    .UseIdentityColumn()
+                    .HasColumnName(nameof(Cat.Identity));
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.Property(d => d.Identity)
+                    .UseIdentityColumn(increment: 2)
+                    .HasColumnName(nameof(Dog.Identity));
+            });
 
             VerifyError(
                 SqlServerStrings.DuplicateColumnIdentityIncrementMismatch(
@@ -227,21 +215,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Passes_for_duplicate_column_names_with_HiLoSequence()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.ToTable("Animal");
-                    cb.Property(c => c.Id).UseHiLo();
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.ToTable("Animal");
-                    db.Property(d => d.Id).UseHiLo();
-                    db.HasOne<Cat>().WithOne().HasForeignKey<Dog>(d => d.Id);
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.ToTable("Animal");
+                cb.Property(c => c.Id).UseHiLo();
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.ToTable("Animal");
+                db.Property(d => d.Id).UseHiLo();
+                db.HasOne<Cat>().WithOne().HasForeignKey<Dog>(d => d.Id);
+            });
 
             Validate(modelBuilder);
         }
@@ -250,21 +234,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Detects_duplicate_column_names_with_different_HiLoSequence_name()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.ToTable("Animal");
-                    cb.Property(c => c.Id).UseHiLo("foo");
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.ToTable("Animal");
-                    db.Property(d => d.Id).UseHiLo();
-                    db.HasOne<Cat>().WithOne().HasForeignKey<Dog>(d => d.Id);
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.ToTable("Animal");
+                cb.Property(c => c.Id).UseHiLo("foo");
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.ToTable("Animal");
+                db.Property(d => d.Id).UseHiLo();
+                db.HasOne<Cat>().WithOne().HasForeignKey<Dog>(d => d.Id);
+            });
 
             VerifyError(
                 SqlServerStrings.DuplicateColumnSequenceMismatch(
@@ -283,21 +263,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         public virtual void Detects_duplicate_column_name_with_different_HiLoSequence_schema()
         {
             var modelBuilder = CreateConventionalModelBuilder();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.ToTable("Animal");
-                    cb.Property(c => c.Id).UseHiLo("foo", "dbo");
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.ToTable("Animal");
-                    db.Property(d => d.Id).UseHiLo("foo", "dba");
-                    db.HasOne<Cat>().WithOne().HasForeignKey<Dog>(d => d.Id);
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.ToTable("Animal");
+                cb.Property(c => c.Id).UseHiLo("foo", "dbo");
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.ToTable("Animal");
+                db.Property(d => d.Id).UseHiLo("foo", "dba");
+                db.HasOne<Cat>().WithOne().HasForeignKey<Dog>(d => d.Id);
+            });
 
             VerifyError(
                 SqlServerStrings.DuplicateColumnSequenceMismatch(
@@ -317,21 +293,17 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.Property(c => c.Id).ValueGeneratedNever();
-                    cb.Property(c => c.Identity)
-                        .UseIdentityColumn()
-                        .HasColumnName(nameof(Cat.Identity));
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.Property(d => d.Identity).UseHiLo().HasColumnName(nameof(Dog.Identity));
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.Property(c => c.Id).ValueGeneratedNever();
+                cb.Property(c => c.Identity)
+                    .UseIdentityColumn()
+                    .HasColumnName(nameof(Cat.Identity));
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.Property(d => d.Identity).UseHiLo().HasColumnName(nameof(Dog.Identity));
+            });
 
             VerifyError(
                 SqlServerStrings.DuplicateColumnNameValueGenerationStrategyMismatch(
@@ -351,20 +323,16 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure
         {
             var modelBuilder = CreateConventionalModelBuilder();
             modelBuilder.Entity<Animal>();
-            modelBuilder.Entity<Cat>(
-                cb =>
-                {
-                    cb.ToTable("Animal");
-                    cb.Property(c => c.Breed).HasColumnName(nameof(Cat.Breed)).IsSparse();
-                }
-            );
-            modelBuilder.Entity<Dog>(
-                db =>
-                {
-                    db.ToTable("Animal");
-                    db.Property(d => d.Breed).HasColumnName(nameof(Dog.Breed));
-                }
-            );
+            modelBuilder.Entity<Cat>(cb =>
+            {
+                cb.ToTable("Animal");
+                cb.Property(c => c.Breed).HasColumnName(nameof(Cat.Breed)).IsSparse();
+            });
+            modelBuilder.Entity<Dog>(db =>
+            {
+                db.ToTable("Animal");
+                db.Property(d => d.Breed).HasColumnName(nameof(Dog.Breed));
+            });
 
             VerifyError(
                 SqlServerStrings.DuplicateColumnSparsenessMismatch(

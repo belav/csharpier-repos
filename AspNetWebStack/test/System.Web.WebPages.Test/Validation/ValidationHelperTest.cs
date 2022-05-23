@@ -489,19 +489,17 @@ namespace System.Web.WebPages.Validation.Test
             var oddValidator = new Mock<IValidator>();
             oddValidator
                 .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
-                .Returns<ValidationContext>(
-                    v =>
-                    {
-                        var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                        var value = Int32.Parse(context.Request.Form["foo"]);
+                .Returns<ValidationContext>(v =>
+                {
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    var value = Int32.Parse(context.Request.Form["foo"]);
 
-                        if (value % 2 != 0)
-                        {
-                            return ValidationResult.Success;
-                        }
-                        return new ValidationResult(message);
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
                     }
-                )
+                    return new ValidationResult(message);
+                })
                 .Verifiable();
             ValidationHelper validationHelper = GetValidationHelper(GetContext(new { foo = "6" }));
 
@@ -524,22 +522,20 @@ namespace System.Web.WebPages.Validation.Test
             var oddValidator = new Mock<IValidator>();
             oddValidator
                 .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
-                .Returns<ValidationContext>(
-                    v =>
+                .Returns<ValidationContext>(v =>
+                {
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    if (context.Request.Form["foo"].IsEmpty())
                     {
-                        var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                        if (context.Request.Form["foo"].IsEmpty())
-                        {
-                            return ValidationResult.Success;
-                        }
-                        int value = context.Request.Form["foo"].AsInt();
-                        if (value % 2 != 0)
-                        {
-                            return ValidationResult.Success;
-                        }
-                        return new ValidationResult(message);
+                        return ValidationResult.Success;
                     }
-                )
+                    int value = context.Request.Form["foo"].AsInt();
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
                 .Verifiable();
             ValidationHelper validationHelper = GetValidationHelper(
                 GetContext(new { foo = "", bar = "" })
@@ -564,22 +560,20 @@ namespace System.Web.WebPages.Validation.Test
             var oddValidator = new Mock<IValidator>();
             oddValidator
                 .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
-                .Returns<ValidationContext>(
-                    v =>
+                .Returns<ValidationContext>(v =>
+                {
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    if (context.Request.Form["foo"].IsEmpty())
                     {
-                        var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                        if (context.Request.Form["foo"].IsEmpty())
-                        {
-                            return ValidationResult.Success;
-                        }
-                        int value = context.Request.Form["foo"].AsInt();
-                        if (value % 2 != 0)
-                        {
-                            return ValidationResult.Success;
-                        }
-                        return new ValidationResult(message);
+                        return ValidationResult.Success;
                     }
-                )
+                    int value = context.Request.Form["foo"].AsInt();
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
                 .Verifiable();
             ValidationHelper validationHelper = GetValidationHelper(
                 GetContext(new { foo = "4", bar = "" })
@@ -605,22 +599,20 @@ namespace System.Web.WebPages.Validation.Test
             var oddValidator = new Mock<IValidator>();
             oddValidator
                 .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
-                .Returns<ValidationContext>(
-                    v =>
+                .Returns<ValidationContext>(v =>
+                {
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    if (context.Request.Form["foo"].IsEmpty())
                     {
-                        var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                        if (context.Request.Form["foo"].IsEmpty())
-                        {
-                            return ValidationResult.Success;
-                        }
-                        int value = context.Request.Form["foo"].AsInt();
-                        if (value % 2 != 0)
-                        {
-                            return ValidationResult.Success;
-                        }
-                        return new ValidationResult(message);
+                        return ValidationResult.Success;
                     }
-                )
+                    int value = context.Request.Form["foo"].AsInt();
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
                 .Verifiable();
             ValidationHelper validationHelper = GetValidationHelper(
                 GetContext(new { foo = "5", bar = "2" })
@@ -644,22 +636,20 @@ namespace System.Web.WebPages.Validation.Test
             var oddValidator = new Mock<IValidator>();
             oddValidator
                 .Setup(c => c.Validate(It.IsAny<ValidationContext>()))
-                .Returns<ValidationContext>(
-                    v =>
+                .Returns<ValidationContext>(v =>
+                {
+                    var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
+                    int value;
+                    if (!Int32.TryParse(context.Request.Form["foo"], out value))
                     {
-                        var context = Assert.IsAssignableFrom<HttpContextBase>(v.ObjectInstance);
-                        int value;
-                        if (!Int32.TryParse(context.Request.Form["foo"], out value))
-                        {
-                            return ValidationResult.Success;
-                        }
-                        if (value % 2 != 0)
-                        {
-                            return ValidationResult.Success;
-                        }
-                        return new ValidationResult(message);
+                        return ValidationResult.Success;
                     }
-                )
+                    if (value % 2 != 0)
+                    {
+                        return ValidationResult.Success;
+                    }
+                    return new ValidationResult(message);
+                })
                 .Verifiable();
             ValidationHelper validationHelper = GetValidationHelper(
                 GetContext(new { foo = "3", bar = "" })

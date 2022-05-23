@@ -72,20 +72,16 @@ namespace Microsoft.Extensions.DependencyInjection
                 throw new ArgumentNullException(nameof(configureClient));
             }
 
-            builder.Services.AddTransient<IConfigureOptions<HttpClientFactoryOptions>>(
-                services =>
-                {
-                    return new ConfigureNamedOptions<HttpClientFactoryOptions>(
-                        builder.Name,
-                        (options) =>
-                        {
-                            options.HttpClientActions.Add(
-                                client => configureClient(services, client)
-                            );
-                        }
-                    );
-                }
-            );
+            builder.Services.AddTransient<IConfigureOptions<HttpClientFactoryOptions>>(services =>
+            {
+                return new ConfigureNamedOptions<HttpClientFactoryOptions>(
+                    builder.Name,
+                    (options) =>
+                    {
+                        options.HttpClientActions.Add(client => configureClient(services, client));
+                    }
+                );
+            });
 
             return builder;
         }
@@ -557,16 +553,13 @@ namespace Microsoft.Extensions.DependencyInjection
         {
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder.Services.AddTransient<TClient>(
-                s =>
-                {
-                    IHttpClientFactory httpClientFactory =
-                        s.GetRequiredService<IHttpClientFactory>();
-                    HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
+            builder.Services.AddTransient<TClient>(s =>
+            {
+                IHttpClientFactory httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
+                HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
 
-                    return factory(httpClient);
-                }
-            );
+                return factory(httpClient);
+            });
 
             return builder;
         }
@@ -628,16 +621,13 @@ namespace Microsoft.Extensions.DependencyInjection
 
             ReserveClient(builder, typeof(TClient), builder.Name, validateSingleType);
 
-            builder.Services.AddTransient<TClient>(
-                s =>
-                {
-                    IHttpClientFactory httpClientFactory =
-                        s.GetRequiredService<IHttpClientFactory>();
-                    HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
+            builder.Services.AddTransient<TClient>(s =>
+            {
+                IHttpClientFactory httpClientFactory = s.GetRequiredService<IHttpClientFactory>();
+                HttpClient httpClient = httpClientFactory.CreateClient(builder.Name);
 
-                    return factory(httpClient, s);
-                }
-            );
+                return factory(httpClient, s);
+            });
 
             return builder;
         }

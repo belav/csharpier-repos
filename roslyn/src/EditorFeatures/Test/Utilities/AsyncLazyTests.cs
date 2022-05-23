@@ -57,14 +57,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                 cacheResult: true
             );
 
-            var thrownException = Assert.Throws<OperationCanceledException>(
-                () =>
-                {
-                    // Do a first request. Even though we will get a cancellation during the evaluation,
-                    // since we handed a result back, that result must be cached.
-                    doGetValue(lazy, requestCancellationTokenSource.Token);
-                }
-            );
+            var thrownException = Assert.Throws<OperationCanceledException>(() =>
+            {
+                // Do a first request. Even though we will get a cancellation during the evaluation,
+                // since we handed a result back, that result must be cached.
+                doGetValue(lazy, requestCancellationTokenSource.Token);
+            });
 
             // And a second request. We'll let this one complete normally.
             var secondRequestResult = doGetValue(lazy, CancellationToken.None);

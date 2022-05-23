@@ -51,12 +51,10 @@ namespace System.Net.Http.Tests
             TransferCodingHeaderParser parser = TransferCodingHeaderParser.MultipleValueParser;
             int index = 0;
 
-            Assert.Throws<FormatException>(
-                () =>
-                {
-                    parser.ParseValue("custom;=value", null, ref index);
-                }
-            );
+            Assert.Throws<FormatException>(() =>
+            {
+                parser.ParseValue("custom;=value", null, ref index);
+            });
         }
 
         [Fact]

@@ -238,22 +238,13 @@ namespace System.Net.Sockets.Tests
 
                                 SocketHelperBase socketHelper = GetHelperBase(connectMethod);
 
-                                Exception ex = await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
-                                    {
-                                        Task connectTask = socketHelper.ConnectAsync(
-                                            client,
-                                            endPoint
-                                        );
-                                        await WaitForEventAsync(events, "ConnectStart");
-                                        Task disposeTask = Task.Run(() => client.Dispose());
-                                        await new[]
-                                        {
-                                            connectTask,
-                                            disposeTask
-                                        }.WhenAllOrAnyFailed();
-                                    }
-                                );
+                                Exception ex = await Assert.ThrowsAnyAsync<Exception>(async () =>
+                                {
+                                    Task connectTask = socketHelper.ConnectAsync(client, endPoint);
+                                    await WaitForEventAsync(events, "ConnectStart");
+                                    Task disposeTask = Task.Run(() => client.Dispose());
+                                    await new[] { connectTask, disposeTask }.WhenAllOrAnyFailed();
+                                });
 
                                 if (ex is SocketException se)
                                 {
@@ -308,20 +299,14 @@ namespace System.Net.Sockets.Tests
                                 server.Bind(new IPEndPoint(IPAddress.Loopback, 0));
                                 server.Listen();
 
-                                await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
-                                    {
-                                        Task acceptTask = GetHelperBase(acceptMethod)
-                                            .AcceptAsync(server);
-                                        await WaitForEventAsync(events, "AcceptStart");
-                                        Task disposeTask = Task.Run(() => server.Dispose());
-                                        await new[]
-                                        {
-                                            acceptTask,
-                                            disposeTask
-                                        }.WhenAllOrAnyFailed();
-                                    }
-                                );
+                                await Assert.ThrowsAnyAsync<Exception>(async () =>
+                                {
+                                    Task acceptTask = GetHelperBase(acceptMethod)
+                                        .AcceptAsync(server);
+                                    await WaitForEventAsync(events, "AcceptStart");
+                                    Task disposeTask = Task.Run(() => server.Dispose());
+                                    await new[] { acceptTask, disposeTask }.WhenAllOrAnyFailed();
+                                });
 
                                 await WaitForEventAsync(events, "AcceptStop");
 
@@ -377,50 +362,46 @@ namespace System.Net.Sockets.Tests
                             {
                                 using var client = new Socket(SocketType.Stream, ProtocolType.Tcp);
 
-                                await Assert.ThrowsAnyAsync<Exception>(
-                                    async () =>
+                                await Assert.ThrowsAnyAsync<Exception>(async () =>
+                                {
+                                    switch (connectMethod)
                                     {
-                                        switch (connectMethod)
-                                        {
-                                            case "Task":
-                                                using (var cts = new CancellationTokenSource())
-                                                {
-                                                    ValueTask connectTask = client.ConnectAsync(
-                                                        endPoint,
-                                                        cts.Token
-                                                    );
-                                                    await WaitForEventAsync(events, "ConnectStart");
-                                                    cts.Cancel();
-                                                    await connectTask;
-                                                }
-                                                break;
+                                        case "Task":
+                                            using (var cts = new CancellationTokenSource())
+                                            {
+                                                ValueTask connectTask = client.ConnectAsync(
+                                                    endPoint,
+                                                    cts.Token
+                                                );
+                                                await WaitForEventAsync(events, "ConnectStart");
+                                                cts.Cancel();
+                                                await connectTask;
+                                            }
+                                            break;
 
-                                            case "Eap":
-                                                using (var saea = new SocketAsyncEventArgs())
+                                        case "Eap":
+                                            using (var saea = new SocketAsyncEventArgs())
+                                            {
+                                                var tcs = new TaskCompletionSource();
+                                                saea.RemoteEndPoint = endPoint;
+                                                saea.Completed += (_, __) =>
                                                 {
-                                                    var tcs = new TaskCompletionSource();
-                                                    saea.RemoteEndPoint = endPoint;
-                                                    saea.Completed += (_, __) =>
-                                                    {
-                                                        Assert.NotEqual(
-                                                            SocketError.Success,
-                                                            saea.SocketError
-                                                        );
-                                                        tcs.SetException(
-                                                            new SocketException(
-                                                                (int)saea.SocketError
-                                                            )
-                                                        );
-                                                    };
-                                                    Assert.True(client.ConnectAsync(saea));
-                                                    await WaitForEventAsync(events, "ConnectStart");
-                                                    Socket.CancelConnectAsync(saea);
-                                                    await tcs.Task;
-                                                }
-                                                break;
-                                        }
+                                                    Assert.NotEqual(
+                                                        SocketError.Success,
+                                                        saea.SocketError
+                                                    );
+                                                    tcs.SetException(
+                                                        new SocketException((int)saea.SocketError)
+                                                    );
+                                                };
+                                                Assert.True(client.ConnectAsync(saea));
+                                                await WaitForEventAsync(events, "ConnectStart");
+                                                Socket.CancelConnectAsync(saea);
+                                                await tcs.Task;
+                                            }
+                                            break;
                                     }
-                                );
+                                });
 
                                 await WaitForEventAsync(events, "ConnectStop");
 
@@ -449,89 +430,87 @@ namespace System.Net.Sockets.Tests
         public void EventSource_EventsRaisedAsExpected()
         {
             RemoteExecutor
-                .Invoke(
-                    async () =>
-                    {
-                        using (
-                            var listener = new TestEventListener(
-                                "System.Net.Sockets",
-                                EventLevel.Verbose,
-                                0.1
-                            )
+                .Invoke(async () =>
+                {
+                    using (
+                        var listener = new TestEventListener(
+                            "System.Net.Sockets",
+                            EventLevel.Verbose,
+                            0.1
                         )
-                        {
-                            listener.AddActivityTracking();
+                    )
+                    {
+                        listener.AddActivityTracking();
 
-                            var events =
-                                new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
-                            await listener.RunWithCallbackAsync(
-                                e => events.Enqueue((e, e.ActivityId)),
-                                async () =>
-                                {
-                                    // Invoke several tests to execute code paths while tracing is enabled
+                        var events =
+                            new ConcurrentQueue<(EventWrittenEventArgs Event, Guid ActivityId)>();
+                        await listener.RunWithCallbackAsync(
+                            e => events.Enqueue((e, e.ActivityId)),
+                            async () =>
+                            {
+                                // Invoke several tests to execute code paths while tracing is enabled
 
-                                    await new SendReceive_Sync(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, false)
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Sync(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, true)
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Sync(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Sync(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceive_Task(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, false)
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Task(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, true)
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Task(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Task(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceive_Eap(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, false)
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Eap(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, true)
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Eap(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Eap(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceive_Apm(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, false)
-                                        .ConfigureAwait(false);
-                                    await new SendReceive_Apm(null)
-                                        .SendRecv_Stream_TCP(IPAddress.Loopback, true)
-                                        .ConfigureAwait(false);
+                                await new SendReceive_Apm(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, false)
+                                    .ConfigureAwait(false);
+                                await new SendReceive_Apm(null)
+                                    .SendRecv_Stream_TCP(IPAddress.Loopback, true)
+                                    .ConfigureAwait(false);
 
-                                    await new SendReceiveUdpClient()
-                                        .SendToRecvFromAsync_Datagram_UDP_UdpClient(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .ConfigureAwait(false);
-                                    await new SendReceiveUdpClient()
-                                        .SendToRecvFromAsync_Datagram_UDP_UdpClient(
-                                            IPAddress.Loopback,
-                                            false
-                                        )
-                                        .ConfigureAwait(false);
+                                await new SendReceiveUdpClient()
+                                    .SendToRecvFromAsync_Datagram_UDP_UdpClient(
+                                        IPAddress.Loopback,
+                                        false
+                                    )
+                                    .ConfigureAwait(false);
+                                await new SendReceiveUdpClient()
+                                    .SendToRecvFromAsync_Datagram_UDP_UdpClient(
+                                        IPAddress.Loopback,
+                                        false
+                                    )
+                                    .ConfigureAwait(false);
 
-                                    await new NetworkStreamTest()
-                                        .CopyToAsync_AllDataCopied(4096, true)
-                                        .ConfigureAwait(false);
-                                    await new NetworkStreamTest()
-                                        .Timeout_Roundtrips()
-                                        .ConfigureAwait(false);
+                                await new NetworkStreamTest()
+                                    .CopyToAsync_AllDataCopied(4096, true)
+                                    .ConfigureAwait(false);
+                                await new NetworkStreamTest()
+                                    .Timeout_Roundtrips()
+                                    .ConfigureAwait(false);
 
-                                    await WaitForEventCountersAsync(events);
-                                }
-                            );
+                                await WaitForEventCountersAsync(events);
+                            }
+                        );
 
-                            VerifyEvents(events, connect: true, expectedCount: 10);
-                            VerifyEventCounters(
-                                events,
-                                connectCount: 10,
-                                shouldHaveTransferedBytes: true,
-                                shouldHaveDatagrams: true
-                            );
-                        }
+                        VerifyEvents(events, connect: true, expectedCount: 10);
+                        VerifyEventCounters(
+                            events,
+                            connectCount: 10,
+                            shouldHaveTransferedBytes: true,
+                            shouldHaveDatagrams: true
+                        );
                     }
-                )
+                })
                 .Dispose();
         }
 

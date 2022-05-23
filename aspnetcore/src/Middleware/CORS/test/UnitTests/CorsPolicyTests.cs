@@ -48,12 +48,10 @@ public class CorsPolicyTest
         var policy = new CorsPolicy();
 
         // Act
-        var exception = Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                policy.PreflightMaxAge = TimeSpan.FromSeconds(-12);
-            }
-        );
+        var exception = Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            policy.PreflightMaxAge = TimeSpan.FromSeconds(-12);
+        });
 
         // Assert
         Assert.Equal(

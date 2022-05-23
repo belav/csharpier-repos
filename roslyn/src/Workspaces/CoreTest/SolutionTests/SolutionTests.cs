@@ -2375,14 +2375,12 @@ namespace Microsoft.CodeAnalysis.UnitTests
                         Assert.NotNull(referencedMetadata);
                         if (referencedMetadata is CompilationReference compilationReference)
                         {
-                            compilation.References.Single(
-                                r =>
-                                {
-                                    var cr = r as CompilationReference;
-                                    return cr != null
-                                        && cr.Compilation == compilationReference.Compilation;
-                                }
-                            );
+                            compilation.References.Single(r =>
+                            {
+                                var cr = r as CompilationReference;
+                                return cr != null
+                                    && cr.Compilation == compilationReference.Compilation;
+                            });
                         }
                     }
                 }

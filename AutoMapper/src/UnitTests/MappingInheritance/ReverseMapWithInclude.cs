@@ -19,14 +19,12 @@
         [Fact]
         public void Should_map_correctly()
         {
-            var config = new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Animal, AnimalDto>().Include<Duck, DuckDto>();
+            var config = new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Animal, AnimalDto>().Include<Duck, DuckDto>();
 
-                    cfg.CreateMap<Duck, DuckDto>().ReverseMap();
-                }
-            );
+                cfg.CreateMap<Duck, DuckDto>().ReverseMap();
+            });
 
             var aDuck = new DuckProxyClassFoo();
 
@@ -56,18 +54,16 @@
         public class ConcreteSource : Source { }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(dest => dest.Name, conf => conf.MapFrom(source => source.Title))
-                        .ReverseMap()
-                        .ForMember(dest => dest.Title, conf => conf.MapFrom(source => source.Name));
-                    cfg.CreateMap<ConcreteSource, ConcreteDestination>()
-                        .IncludeBase<Source, Destination>()
-                        .ReverseMap();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(dest => dest.Name, conf => conf.MapFrom(source => source.Title))
+                    .ReverseMap()
+                    .ForMember(dest => dest.Title, conf => conf.MapFrom(source => source.Name));
+                cfg.CreateMap<ConcreteSource, ConcreteDestination>()
+                    .IncludeBase<Source, Destination>()
+                    .ReverseMap();
+            });
 
         protected override void Because_of()
         {

@@ -12,52 +12,48 @@ class Driver
             mutexes[i] = new Mutex();
         }
 
-        Thread thread1 = new Thread(
-            () =>
+        Thread thread1 = new Thread(() =>
+        {
+            for (int i = 0; i < 1; i++)
             {
-                for (int i = 0; i < 1; i++)
+                int idx = -1;
+                try
                 {
-                    int idx = -1;
-                    try
-                    {
-                        idx = WaitHandle.WaitAny(mutexes);
-                        Console.WriteLine($"Thread 1 iter: {i} with mutex: {idx}");
-                    }
-                    finally
-                    {
-                        if (idx != -1)
-                            mutexes[idx].ReleaseMutex();
-                    }
+                    idx = WaitHandle.WaitAny(mutexes);
+                    Console.WriteLine($"Thread 1 iter: {i} with mutex: {idx}");
                 }
-
-                Console.WriteLine("Thread 1 ended");
+                finally
+                {
+                    if (idx != -1)
+                        mutexes[idx].ReleaseMutex();
+                }
             }
-        );
+
+            Console.WriteLine("Thread 1 ended");
+        });
 
         thread1.Start();
         thread1.Join();
 
-        Thread thread2 = new Thread(
-            () =>
+        Thread thread2 = new Thread(() =>
+        {
+            for (int i = 0; i < 1000; i++)
             {
-                for (int i = 0; i < 1000; i++)
+                int idx = -1;
+                try
                 {
-                    int idx = -1;
-                    try
-                    {
-                        idx = WaitHandle.WaitAny(mutexes);
-                        Console.WriteLine($"Thread 2 iter: {i} with mutex: {idx}");
-                    }
-                    finally
-                    {
-                        if (idx != -1)
-                            mutexes[idx].ReleaseMutex();
-                    }
+                    idx = WaitHandle.WaitAny(mutexes);
+                    Console.WriteLine($"Thread 2 iter: {i} with mutex: {idx}");
                 }
-
-                Console.WriteLine("Thread 2 ended");
+                finally
+                {
+                    if (idx != -1)
+                        mutexes[idx].ReleaseMutex();
+                }
             }
-        );
+
+            Console.WriteLine("Thread 2 ended");
+        });
 
         thread2.Start();
         thread2.Join();

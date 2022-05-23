@@ -20,15 +20,11 @@ namespace Microsoft.EntityFrameworkCore
         [MemberData(nameof(IsAsyncData))]
         public virtual async Task SaveChanges(bool async)
         {
-            await ConcurrencyDetectorTest(
-                async c =>
-                {
-                    c.Products.Add(
-                        new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" }
-                    );
-                    return async ? await c.SaveChangesAsync() : c.SaveChanges();
-                }
-            );
+            await ConcurrencyDetectorTest(async c =>
+            {
+                c.Products.Add(new Product { Id = 3, Name = "Unicorn Horseshoe Protection Pack" });
+                return async ? await c.SaveChangesAsync() : c.SaveChanges();
+            });
 
             using var ctx = CreateContext();
             var newProduct = await ctx.Products.FindAsync(3);

@@ -21,29 +21,23 @@ public class MiddlewareAnalysisTests
         DiagnosticListener diagnosticListener = null;
 
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                diagnosticListener =
-                                    app.ApplicationServices.GetRequiredService<DiagnosticListener>();
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        diagnosticListener =
+                            app.ApplicationServices.GetRequiredService<DiagnosticListener>();
 
-                                app.UseDeveloperExceptionPage();
-                                app.Run(
-                                    context =>
-                                    {
-                                        throw new Exception("Test exception");
-                                    }
-                                );
-                            }
-                        )
-                        .ConfigureServices(services => services.AddMiddlewareAnalysis());
-                }
-            )
+                        app.UseDeveloperExceptionPage();
+                        app.Run(context =>
+                        {
+                            throw new Exception("Test exception");
+                        });
+                    })
+                    .ConfigureServices(services => services.AddMiddlewareAnalysis());
+            })
             .Build();
 
         await host.StartAsync();

@@ -108,25 +108,23 @@ namespace System.Net.Http.Functional.Tests
                     var content = new ByteArrayContent(new byte[numBytes]);
                     Task<HttpResponseMessage> postAsync = client.PostAsync(url, content);
 
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            byte[] postData = new byte[numBytes];
-                            while (
-                                !string.IsNullOrEmpty(
-                                    await connection.ReadLineAsync().ConfigureAwait(false)
-                                )
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        byte[] postData = new byte[numBytes];
+                        while (
+                            !string.IsNullOrEmpty(
+                                await connection.ReadLineAsync().ConfigureAwait(false)
                             )
-                                ;
-                            Assert.Equal(
-                                numBytes,
-                                await connection.ReadBlockAsync(postData, 0, numBytes)
-                            );
+                        )
+                            ;
+                        Assert.Equal(
+                            numBytes,
+                            await connection.ReadBlockAsync(postData, 0, numBytes)
+                        );
 
-                            await connection.WriteStringAsync(responseText).ConfigureAwait(false);
-                            connection.Socket.Shutdown(SocketShutdown.Send);
-                        }
-                    );
+                        await connection.WriteStringAsync(responseText).ConfigureAwait(false);
+                        connection.Socket.Shutdown(SocketShutdown.Send);
+                    });
 
                     (await postAsync.ConfigureAwait(false)).Dispose();
                 }

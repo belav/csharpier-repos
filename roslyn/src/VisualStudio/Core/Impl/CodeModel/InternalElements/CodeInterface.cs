@@ -70,19 +70,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddFunction(
-                        LookupNode(),
-                        name,
-                        kind,
-                        type,
-                        position,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddFunction(LookupNode(), name, kind, type, position, access);
+            });
         }
 
         public EnvDTE.CodeProperty AddProperty(
@@ -94,19 +85,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             object location
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    return FileCodeModel.AddProperty(
-                        LookupNode(),
-                        getterName,
-                        putterName,
-                        type,
-                        position,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                return FileCodeModel.AddProperty(
+                    LookupNode(),
+                    getterName,
+                    putterName,
+                    type,
+                    position,
+                    access
+                );
+            });
         }
 
         public EnvDTE80.CodeEvent AddEvent(
@@ -117,20 +106,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
             EnvDTE.vsCMAccess access
         )
         {
-            return FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    // Note: C# always creates field-like events in interfaces
-                    return FileCodeModel.AddEvent(
-                        LookupNode(),
-                        name,
-                        fullDelegateName,
-                        false,
-                        position,
-                        access
-                    );
-                }
-            );
+            return FileCodeModel.EnsureEditor(() =>
+            {
+                // Note: C# always creates field-like events in interfaces
+                return FileCodeModel.AddEvent(
+                    LookupNode(),
+                    name,
+                    fullDelegateName,
+                    false,
+                    position,
+                    access
+                );
+            });
         }
 
         public EnvDTE.CodeElements Parts

@@ -442,36 +442,34 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
         )
         {
             // remove all diagnostics for the document
-            AnalyzerService.RaiseBulkDiagnosticsUpdated(
-                raiseEvents =>
+            AnalyzerService.RaiseBulkDiagnosticsUpdated(raiseEvents =>
+            {
+                foreach (var stateSet in stateSets)
                 {
-                    foreach (var stateSet in stateSets)
-                    {
-                        // clear all doucment diagnostics
-                        RaiseDiagnosticsRemoved(
-                            documentId,
-                            solution: null,
-                            stateSet,
-                            AnalysisKind.Syntax,
-                            raiseEvents
-                        );
-                        RaiseDiagnosticsRemoved(
-                            documentId,
-                            solution: null,
-                            stateSet,
-                            AnalysisKind.Semantic,
-                            raiseEvents
-                        );
-                        RaiseDiagnosticsRemoved(
-                            documentId,
-                            solution: null,
-                            stateSet,
-                            AnalysisKind.NonLocal,
-                            raiseEvents
-                        );
-                    }
+                    // clear all doucment diagnostics
+                    RaiseDiagnosticsRemoved(
+                        documentId,
+                        solution: null,
+                        stateSet,
+                        AnalysisKind.Syntax,
+                        raiseEvents
+                    );
+                    RaiseDiagnosticsRemoved(
+                        documentId,
+                        solution: null,
+                        stateSet,
+                        AnalysisKind.Semantic,
+                        raiseEvents
+                    );
+                    RaiseDiagnosticsRemoved(
+                        documentId,
+                        solution: null,
+                        stateSet,
+                        AnalysisKind.NonLocal,
+                        raiseEvents
+                    );
                 }
-            );
+            });
         }
 
         public Task RemoveProjectAsync(ProjectId projectId, CancellationToken cancellation)
@@ -496,21 +494,19 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 if (changed)
                 {
                     // remove all diagnostics for the project
-                    AnalyzerService.RaiseBulkDiagnosticsUpdated(
-                        raiseEvents =>
+                    AnalyzerService.RaiseBulkDiagnosticsUpdated(raiseEvents =>
+                    {
+                        foreach (var stateSet in stateSets)
                         {
-                            foreach (var stateSet in stateSets)
-                            {
-                                // clear all project diagnostics
-                                RaiseDiagnosticsRemoved(
-                                    projectId,
-                                    solution: null,
-                                    stateSet,
-                                    raiseEvents
-                                );
-                            }
+                            // clear all project diagnostics
+                            RaiseDiagnosticsRemoved(
+                                projectId,
+                                solution: null,
+                                stateSet,
+                                raiseEvents
+                            );
                         }
-                    );
+                    });
                 }
             }
 
@@ -674,80 +670,52 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                 return;
             }
 
-            AnalyzerService.RaiseBulkDiagnosticsUpdated(
-                raiseEvents =>
+            AnalyzerService.RaiseBulkDiagnosticsUpdated(raiseEvents =>
+            {
+                foreach (var stateSet in stateSets)
                 {
-                    foreach (var stateSet in stateSets)
+                    var analyzer = stateSet.Analyzer;
+
+                    var oldAnalysisResult = GetResultOrEmpty(
+                        oldResult,
+                        analyzer,
+                        project.Id,
+                        VersionStamp.Default
+                    );
+                    var newAnalysisResult = GetResultOrEmpty(
+                        newResult,
+                        analyzer,
+                        project.Id,
+                        VersionStamp.Default
+                    );
+
+                    // Perf - 4 different cases.
+                    // upper 3 cases can be removed and it will still work. but this is hot path so if we can bail out
+                    // without any allocations, that's better.
+                    if (oldAnalysisResult.IsEmpty && newAnalysisResult.IsEmpty)
                     {
-                        var analyzer = stateSet.Analyzer;
+                        // nothing to do
+                        continue;
+                    }
 
-                        var oldAnalysisResult = GetResultOrEmpty(
-                            oldResult,
-                            analyzer,
-                            project.Id,
-                            VersionStamp.Default
-                        );
-                        var newAnalysisResult = GetResultOrEmpty(
-                            newResult,
-                            analyzer,
-                            project.Id,
-                            VersionStamp.Default
-                        );
-
-                        // Perf - 4 different cases.
-                        // upper 3 cases can be removed and it will still work. but this is hot path so if we can bail out
-                        // without any allocations, that's better.
-                        if (oldAnalysisResult.IsEmpty && newAnalysisResult.IsEmpty)
-                        {
-                            // nothing to do
-                            continue;
-                        }
-
-                        if (!oldAnalysisResult.IsEmpty && newAnalysisResult.IsEmpty)
-                        {
-                            RoslynDebug.Assert(oldAnalysisResult.DocumentIds != null);
-
-                            // remove old diagnostics
-                            RaiseProjectDiagnosticsRemoved(
-                                stateSet,
-                                oldAnalysisResult.ProjectId,
-                                oldAnalysisResult.DocumentIds,
-                                handleActiveFile: false,
-                                raiseEvents
-                            );
-                            continue;
-                        }
-
-                        if (oldAnalysisResult.IsEmpty && !newAnalysisResult.IsEmpty)
-                        {
-                            // add new diagnostics
-                            RaiseProjectDiagnosticsCreated(
-                                project,
-                                stateSet,
-                                oldAnalysisResult,
-                                newAnalysisResult,
-                                raiseEvents
-                            );
-                            continue;
-                        }
-
-                        // both old and new has items in them. update existing items
+                    if (!oldAnalysisResult.IsEmpty && newAnalysisResult.IsEmpty)
+                    {
                         RoslynDebug.Assert(oldAnalysisResult.DocumentIds != null);
-                        RoslynDebug.Assert(newAnalysisResult.DocumentIds != null);
 
-                        // first remove ones no longer needed.
-                        var documentsToRemove = oldAnalysisResult.DocumentIds.Except(
-                            newAnalysisResult.DocumentIds
-                        );
+                        // remove old diagnostics
                         RaiseProjectDiagnosticsRemoved(
                             stateSet,
                             oldAnalysisResult.ProjectId,
-                            documentsToRemove,
+                            oldAnalysisResult.DocumentIds,
                             handleActiveFile: false,
                             raiseEvents
                         );
+                        continue;
+                    }
 
-                        // next update or create new ones
+                    if (oldAnalysisResult.IsEmpty && !newAnalysisResult.IsEmpty)
+                    {
+                        // add new diagnostics
                         RaiseProjectDiagnosticsCreated(
                             project,
                             stateSet,
@@ -755,9 +723,35 @@ namespace Microsoft.CodeAnalysis.Diagnostics.EngineV2
                             newAnalysisResult,
                             raiseEvents
                         );
+                        continue;
                     }
+
+                    // both old and new has items in them. update existing items
+                    RoslynDebug.Assert(oldAnalysisResult.DocumentIds != null);
+                    RoslynDebug.Assert(newAnalysisResult.DocumentIds != null);
+
+                    // first remove ones no longer needed.
+                    var documentsToRemove = oldAnalysisResult.DocumentIds.Except(
+                        newAnalysisResult.DocumentIds
+                    );
+                    RaiseProjectDiagnosticsRemoved(
+                        stateSet,
+                        oldAnalysisResult.ProjectId,
+                        documentsToRemove,
+                        handleActiveFile: false,
+                        raiseEvents
+                    );
+
+                    // next update or create new ones
+                    RaiseProjectDiagnosticsCreated(
+                        project,
+                        stateSet,
+                        oldAnalysisResult,
+                        newAnalysisResult,
+                        raiseEvents
+                    );
                 }
-            );
+            });
         }
 
         private void RaiseDocumentDiagnosticsIfNeeded(

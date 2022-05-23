@@ -226,14 +226,12 @@ namespace System.IO.Tests
         [Trait(XunitConstants.Category, XunitConstants.RequiresElevation)]
         public void Unix_NotFoundDirectory_ReadOnlyVolume()
         {
-            ReadOnly_FileSystemHelper(
-                readOnlyDirectory =>
-                {
-                    Assert.Throws<DirectoryNotFoundException>(
-                        () => Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"))
-                    );
-                }
-            );
+            ReadOnly_FileSystemHelper(readOnlyDirectory =>
+            {
+                Assert.Throws<DirectoryNotFoundException>(
+                    () => Delete(Path.Combine(readOnlyDirectory, "DoesNotExist"))
+                );
+            });
         }
         #endregion
     }

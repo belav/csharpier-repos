@@ -25,24 +25,20 @@ public class EventTests
     public async Task OnChallenge_Fires()
     {
         var eventInvoked = false;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnChallenge = context =>
                 {
-                    OnChallenge = context =>
-                    {
-                        // Not changed yet
-                        eventInvoked = true;
-                        Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
-                        Assert.False(
-                            context.Response.Headers.ContainsKey(HeaderNames.WWWAuthenticate)
-                        );
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    // Not changed yet
+                    eventInvoked = true;
+                    Assert.Equal(StatusCodes.Status200OK, context.Response.StatusCode);
+                    Assert.False(context.Response.Headers.ContainsKey(HeaderNames.WWWAuthenticate));
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(server, "/Authenticate", new TestConnection());
@@ -54,21 +50,19 @@ public class EventTests
     [Fact]
     public async Task OnChallenge_Handled()
     {
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnChallenge = context =>
                 {
-                    OnChallenge = context =>
-                    {
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers.WWWAuthenticate = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                    context.Response.Headers.WWWAuthenticate = "Teapot";
+                    context.HandleResponse();
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(server, "/Authenticate", new TestConnection());
@@ -80,21 +74,19 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromException_Fires()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        Assert.IsType<InvalidOperationException>(context.Exception);
-                        Assert.Equal("InvalidBlob", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    Assert.IsType<InvalidOperationException>(context.Exception);
+                    Assert.Equal("InvalidBlob", context.Exception.Message);
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var ex = await Assert.ThrowsAsync<InvalidOperationException>(
@@ -107,21 +99,19 @@ public class EventTests
     [Fact]
     public async Task OnAuthenticationFailed_FromException_Handled()
     {
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers.WWWAuthenticate = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                    context.Response.Headers.WWWAuthenticate = "Teapot";
+                    context.HandleResponse();
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate InvalidBlob");
@@ -133,21 +123,19 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromOtherBlobError_Fires()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        Assert.IsType<Exception>(context.Exception);
-                        Assert.Equal("A test other error occurred", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    Assert.IsType<Exception>(context.Exception);
+                    Assert.Equal("A test other error occurred", context.Exception.Message);
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var ex = await Assert.ThrowsAsync<Exception>(
@@ -161,22 +149,20 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromOtherBlobError_Handled()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers.WWWAuthenticate = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                    context.Response.Headers.WWWAuthenticate = "Teapot";
+                    context.HandleResponse();
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate OtherError");
@@ -189,21 +175,19 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromCredentialError_Fires()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        Assert.IsType<Exception>(context.Exception);
-                        Assert.Equal("A test credential error occurred", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    Assert.IsType<Exception>(context.Exception);
+                    Assert.Equal("A test credential error occurred", context.Exception.Message);
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var response = await SendAsync(
@@ -220,22 +204,20 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromCredentialError_Handled()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers.WWWAuthenticate = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                    context.Response.Headers.WWWAuthenticate = "Teapot";
+                    context.HandleResponse();
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(
@@ -253,21 +235,19 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromClientError_Fires()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        Assert.IsType<Exception>(context.Exception);
-                        Assert.Equal("A test client error occurred", context.Exception.Message);
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    Assert.IsType<Exception>(context.Exception);
+                    Assert.Equal("A test client error occurred", context.Exception.Message);
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var response = await SendAsync(
@@ -284,22 +264,20 @@ public class EventTests
     public async Task OnAuthenticationFailed_FromClientError_Handled()
     {
         var eventInvoked = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticationFailed = context =>
                 {
-                    OnAuthenticationFailed = context =>
-                    {
-                        eventInvoked++;
-                        context.Response.StatusCode = StatusCodes.Status418ImATeapot;
-                        context.Response.Headers.WWWAuthenticate = "Teapot";
-                        context.HandleResponse();
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    eventInvoked++;
+                    context.Response.StatusCode = StatusCodes.Status418ImATeapot;
+                    context.Response.Headers.WWWAuthenticate = "Teapot";
+                    context.HandleResponse();
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(server, "/404", new TestConnection(), "Negotiate ClientError");
@@ -312,24 +290,22 @@ public class EventTests
     public async Task OnAuthenticated_FiresOncePerRequest()
     {
         var callCount = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.PersistKerberosCredentials = true;
+            options.Events = new NegotiateEvents()
             {
-                options.PersistKerberosCredentials = true;
-                options.Events = new NegotiateEvents()
+                OnAuthenticated = context =>
                 {
-                    OnAuthenticated = context =>
-                    {
-                        var identity = context.Principal.Identity;
-                        Assert.True(identity.IsAuthenticated);
-                        Assert.Equal("name", identity.Name);
-                        Assert.Equal("Kerberos", identity.AuthenticationType);
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    var identity = context.Principal.Identity;
+                    Assert.True(identity.IsAuthenticated);
+                    Assert.Equal("name", identity.Name);
+                    Assert.Equal("Kerberos", identity.AuthenticationType);
+                    callCount++;
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var testConnection = new TestConnection();
@@ -344,20 +320,18 @@ public class EventTests
     public async Task OnAuthenticated_Success_Continues()
     {
         var callCount = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticated = context =>
                 {
-                    OnAuthenticated = context =>
-                    {
-                        context.Success();
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    context.Success();
+                    callCount++;
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         await KerberosStage1And2Auth(server, new TestConnection());
@@ -368,20 +342,18 @@ public class EventTests
     public async Task OnAuthenticated_NoResult_SuppresesCredentials()
     {
         var callCount = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticated = context =>
                 {
-                    OnAuthenticated = context =>
-                    {
-                        context.NoResult();
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    context.NoResult();
+                    callCount++;
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(
@@ -399,20 +371,18 @@ public class EventTests
     public async Task OnAuthenticated_Fail_SuppresesCredentials()
     {
         var callCount = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnAuthenticated = context =>
                 {
-                    OnAuthenticated = context =>
-                    {
-                        callCount++;
-                        context.Fail("Event error.");
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    callCount++;
+                    context.Fail("Event error.");
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         var result = await SendAsync(
@@ -430,19 +400,17 @@ public class EventTests
     public async Task OnRetrieveLdapClaims_DoesNotFireWhenLdapDisabled()
     {
         var callCount = 0;
-        using var host = await CreateHostAsync(
-            options =>
+        using var host = await CreateHostAsync(options =>
+        {
+            options.Events = new NegotiateEvents()
             {
-                options.Events = new NegotiateEvents()
+                OnRetrieveLdapClaims = context =>
                 {
-                    OnRetrieveLdapClaims = context =>
-                    {
-                        callCount++;
-                        return Task.CompletedTask;
-                    }
-                };
-            }
-        );
+                    callCount++;
+                    return Task.CompletedTask;
+                }
+            };
+        });
         var server = host.GetTestServer();
 
         await KerberosStage1And2Auth(server, new TestConnection());
@@ -492,28 +460,22 @@ public class EventTests
                     services
                         .AddRouting()
                         .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                        .AddNegotiate(
-                            options =>
-                            {
-                                options.StateFactory = new TestNegotiateStateFactory();
-                                configureOptions?.Invoke(options);
-                            }
-                        )
-            )
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer();
-                    webHostBuilder.Configure(
-                        app =>
+                        .AddNegotiate(options =>
                         {
-                            app.UseRouting();
-                            app.UseAuthentication();
-                            app.UseEndpoints(ConfigureEndpoints);
-                        }
-                    );
-                }
-            );
+                            options.StateFactory = new TestNegotiateStateFactory();
+                            configureOptions?.Invoke(options);
+                        })
+            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer();
+                webHostBuilder.Configure(app =>
+                {
+                    app.UseRouting();
+                    app.UseAuthentication();
+                    app.UseEndpoints(ConfigureEndpoints);
+                });
+            });
 
         return await builder.StartAsync();
     }
@@ -554,21 +516,19 @@ public class EventTests
         string authorizationHeader = null
     )
     {
-        return server.SendAsync(
-            context =>
+        return server.SendAsync(context =>
+        {
+            context.Request.Path = path;
+            if (!string.IsNullOrEmpty(authorizationHeader))
             {
-                context.Request.Path = path;
-                if (!string.IsNullOrEmpty(authorizationHeader))
-                {
-                    context.Request.Headers.Authorization = authorizationHeader;
-                }
-                if (connection != null)
-                {
-                    context.Features.Set<IConnectionItemsFeature>(connection);
-                    context.Features.Set<IConnectionCompleteFeature>(connection);
-                }
+                context.Request.Headers.Authorization = authorizationHeader;
             }
-        );
+            if (connection != null)
+            {
+                context.Features.Set<IConnectionItemsFeature>(connection);
+                context.Features.Set<IConnectionCompleteFeature>(connection);
+            }
+        });
     }
 
     private class TestConnection : IConnectionItemsFeature, IConnectionCompleteFeature

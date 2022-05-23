@@ -388,17 +388,15 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
 
             var parseOptions = TestOptions.RegularPreview;
 
-            var trees = sources.Select(
-                source =>
-                {
-                    var sourceText = SourceText.From(
-                        new MemoryStream(encoding.GetBytes(source.content)),
-                        encoding,
-                        checksumAlgorithm: SourceHashAlgorithm.Sha256
-                    );
-                    return SyntaxFactory.ParseSyntaxTree(sourceText, parseOptions, source.filePath);
-                }
-            );
+            var trees = sources.Select(source =>
+            {
+                var sourceText = SourceText.From(
+                    new MemoryStream(encoding.GetBytes(source.content)),
+                    encoding,
+                    checksumAlgorithm: SourceHashAlgorithm.Sha256
+                );
+                return SyntaxFactory.ParseSyntaxTree(sourceText, parseOptions, source.filePath);
+            });
 
             Compilation compilation = CSharpTestBase.CreateCompilation(
                 trees.ToArray(),
@@ -487,21 +485,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
         {
             foreach (var reader in readers)
             {
-                Assert.Throws<ObjectDisposedException>(
-                    () =>
+                Assert.Throws<ObjectDisposedException>(() =>
+                {
+                    if (reader is MetadataReaderProvider md)
                     {
-                        if (reader is MetadataReaderProvider md)
-                        {
-                            md.GetMetadataReader();
-                        }
-                        else
-                        {
-                            (
-                                (DebugInformationReaderProvider)reader
-                            ).CreateEditAndContinueMethodDebugInfoReader();
-                        }
+                        md.GetMetadataReader();
                     }
-                );
+                    else
+                    {
+                        (
+                            (DebugInformationReaderProvider)reader
+                        ).CreateEditAndContinueMethodDebugInfoReader();
+                    }
+                });
             }
         }
 
@@ -6055,56 +6051,51 @@ class C
 
             var tasks = Enumerable
                 .Range(0, 10)
-                .Select(
-                    async i =>
-                    {
-                        var sessionId = await encService.StartDebuggingSessionAsync(
-                            solution,
-                            _debuggerService,
-                            captureMatchingDocuments: ImmutableArray<DocumentId>.Empty,
-                            captureAllMatchingDocuments: true,
-                            reportDiagnostics: true,
-                            CancellationToken.None
-                        );
+                .Select(async i =>
+                {
+                    var sessionId = await encService.StartDebuggingSessionAsync(
+                        solution,
+                        _debuggerService,
+                        captureMatchingDocuments: ImmutableArray<DocumentId>.Empty,
+                        captureAllMatchingDocuments: true,
+                        reportDiagnostics: true,
+                        CancellationToken.None
+                    );
 
-                        var solution1 = solution.WithDocumentText(
-                            documentIdA,
-                            SourceText.From(
-                                "class C { void M() { System.Console.WriteLine(" + i + "); } }",
-                                Encoding.UTF8
-                            )
-                        );
+                    var solution1 = solution.WithDocumentText(
+                        documentIdA,
+                        SourceText.From(
+                            "class C { void M() { System.Console.WriteLine(" + i + "); } }",
+                            Encoding.UTF8
+                        )
+                    );
 
-                        var result1 = await encService.EmitSolutionUpdateAsync(
-                            sessionId,
-                            solution1,
-                            s_noActiveSpans,
-                            CancellationToken.None
-                        );
-                        Assert.Empty(result1.Diagnostics);
-                        Assert.Equal(1, result1.ModuleUpdates.Updates.Length);
-                        encService.DiscardSolutionUpdate(sessionId);
+                    var result1 = await encService.EmitSolutionUpdateAsync(
+                        sessionId,
+                        solution1,
+                        s_noActiveSpans,
+                        CancellationToken.None
+                    );
+                    Assert.Empty(result1.Diagnostics);
+                    Assert.Equal(1, result1.ModuleUpdates.Updates.Length);
+                    encService.DiscardSolutionUpdate(sessionId);
 
-                        var solution2 = solution1.WithDocumentText(
-                            documentIdA,
-                            SourceText.From(source3, Encoding.UTF8)
-                        );
+                    var solution2 = solution1.WithDocumentText(
+                        documentIdA,
+                        SourceText.From(source3, Encoding.UTF8)
+                    );
 
-                        var result2 = await encService.EmitSolutionUpdateAsync(
-                            sessionId,
-                            solution2,
-                            s_noActiveSpans,
-                            CancellationToken.None
-                        );
-                        Assert.Equal(
-                            "CS0103",
-                            result2.Diagnostics.Single().Diagnostics.Single().Id
-                        );
-                        Assert.Empty(result2.ModuleUpdates.Updates);
+                    var result2 = await encService.EmitSolutionUpdateAsync(
+                        sessionId,
+                        solution2,
+                        s_noActiveSpans,
+                        CancellationToken.None
+                    );
+                    Assert.Equal("CS0103", result2.Diagnostics.Single().Diagnostics.Single().Id);
+                    Assert.Empty(result2.ModuleUpdates.Updates);
 
-                        encService.EndDebuggingSession(sessionId, out var _);
-                    }
-                );
+                    encService.EndDebuggingSession(sessionId, out var _);
+                });
 
             await Task.WhenAll(tasks);
 

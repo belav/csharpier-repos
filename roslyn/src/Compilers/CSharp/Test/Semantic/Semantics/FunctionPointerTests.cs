@@ -2640,13 +2640,11 @@ unsafe class C
             var invocationTypes = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(
-                    s =>
-                    {
-                        var symbolInfo = model.GetSymbolInfo(s);
-                        return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.Single();
-                    }
-                )
+                .Select(s =>
+                {
+                    var symbolInfo = model.GetSymbolInfo(s);
+                    return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.Single();
+                })
                 .Cast<IMethodSymbol>()
                 .Select(m => m!.TypeArguments.Single().ToTestDisplayString())
                 .ToList();
@@ -2730,13 +2728,11 @@ unsafe class C
             var invocationTypes = tree.GetRoot()
                 .DescendantNodes()
                 .OfType<InvocationExpressionSyntax>()
-                .Select(
-                    s =>
-                    {
-                        var symbolInfo = model.GetSymbolInfo(s);
-                        return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.Single();
-                    }
-                )
+                .Select(s =>
+                {
+                    var symbolInfo = model.GetSymbolInfo(s);
+                    return symbolInfo.Symbol ?? symbolInfo.CandidateSymbols.Single();
+                })
                 .Cast<IMethodSymbol>()
                 .Select(m => m!.TypeArguments.Single().ToTestDisplayString())
                 .ToList();

@@ -15,93 +15,77 @@ namespace System.Web.WebPages.Test
         [Fact]
         public void StartPageBasicTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
                 {
-                    var page = new ApplicationStartPageTest().CreateStartPage(
-                        p =>
-                        {
-                            p.AppState["x"] = "y";
-                            p.WriteLiteral("test");
-                        }
-                    );
-                    page.ExecuteInternal();
-                    Assert.Equal("y", page.ApplicationState["x"]);
-                    Assert.Equal("test", ApplicationStartPage.Markup.ToHtmlString());
-                }
-            );
+                    p.AppState["x"] = "y";
+                    p.WriteLiteral("test");
+                });
+                page.ExecuteInternal();
+                Assert.Equal("y", page.ApplicationState["x"]);
+                Assert.Equal("test", ApplicationStartPage.Markup.ToHtmlString());
+            });
         }
 
         [Fact]
         public void StartPageDynamicAppStateBasicTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
                 {
-                    var page = new ApplicationStartPageTest().CreateStartPage(
-                        p =>
-                        {
-                            p.App.x = "y";
-                            p.WriteLiteral("test");
-                        }
-                    );
-                    page.ExecuteInternal();
-                    Assert.Equal("y", page.ApplicationState["x"]);
-                    Assert.Equal("y", page.App["x"]);
-                    Assert.Equal("y", page.App.x);
-                    Assert.Equal("test", ApplicationStartPage.Markup.ToHtmlString());
-                }
-            );
+                    p.App.x = "y";
+                    p.WriteLiteral("test");
+                });
+                page.ExecuteInternal();
+                Assert.Equal("y", page.ApplicationState["x"]);
+                Assert.Equal("y", page.App["x"]);
+                Assert.Equal("y", page.App.x);
+                Assert.Equal("test", ApplicationStartPage.Markup.ToHtmlString());
+            });
         }
 
         [Fact]
         public void ExceptionTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var msg = "This is an error message";
+                var e = new InvalidOperationException(msg);
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
                 {
-                    var msg = "This is an error message";
-                    var e = new InvalidOperationException(msg);
-                    var page = new ApplicationStartPageTest().CreateStartPage(
-                        p =>
-                        {
-                            throw e;
-                        }
-                    );
-                    var ex = Assert.Throws<HttpException>(() => page.ExecuteStartPage());
-                    Assert.Equal(msg, ex.InnerException.Message);
-                    Assert.Equal(e, ApplicationStartPage.Exception);
-                }
-            );
+                    throw e;
+                });
+                var ex = Assert.Throws<HttpException>(() => page.ExecuteStartPage());
+                Assert.Equal(msg, ex.InnerException.Message);
+                Assert.Equal(e, ApplicationStartPage.Exception);
+            });
         }
 
         [Fact]
         public void HtmlEncodeTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    // Set HideRequestResponse to true to simulate the condition in IIS 7/7.5
-                    var context = new HttpContext(
-                        new HttpRequest("default.cshtml", "http://localhost/default.cshtml", null),
-                        new HttpResponse(new StringWriter(new StringBuilder()))
-                    );
-                    var hideRequestResponse = typeof(HttpContext).GetField(
-                        "HideRequestResponse",
-                        BindingFlags.NonPublic | BindingFlags.Instance
-                    );
-                    hideRequestResponse.SetValue(context, true);
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                // Set HideRequestResponse to true to simulate the condition in IIS 7/7.5
+                var context = new HttpContext(
+                    new HttpRequest("default.cshtml", "http://localhost/default.cshtml", null),
+                    new HttpResponse(new StringWriter(new StringBuilder()))
+                );
+                var hideRequestResponse = typeof(HttpContext).GetField(
+                    "HideRequestResponse",
+                    BindingFlags.NonPublic | BindingFlags.Instance
+                );
+                hideRequestResponse.SetValue(context, true);
 
-                    HttpContext.Current = context;
-                    var page = new ApplicationStartPageTest().CreateStartPage(
-                        p =>
-                        {
-                            p.Write("test");
-                        }
-                    );
-                    page.ExecuteStartPage();
-                }
-            );
+                HttpContext.Current = context;
+                var page = new ApplicationStartPageTest().CreateStartPage(p =>
+                {
+                    p.Write("test");
+                });
+                page.ExecuteStartPage();
+            });
         }
 
         [Fact]
@@ -115,55 +99,46 @@ namespace System.Web.WebPages.Test
         public void SetVirtualPathTest()
         {
             var page = new MockStartPage();
-            Assert.Throws<NotSupportedException>(
-                () =>
-                {
-                    page.VirtualPath = "~/hello.cshtml";
-                }
-            );
+            Assert.Throws<NotSupportedException>(() =>
+            {
+                page.VirtualPath = "~/hello.cshtml";
+            });
         }
 
         [Fact]
         public void ExecuteStartPageTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    var startPage = new MockStartPage()
-                    {
-                        ExecuteAction = p => p.AppState["x"] = "y"
-                    };
-                    var objectFactory = GetMockVirtualPathFactory(startPage);
-                    ApplicationStartPage.ExecuteStartPage(
-                        new WebPageHttpApplication(),
-                        p => { },
-                        objectFactory,
-                        new string[] { "cshtml", "vbhtml" }
-                    );
-                    Assert.Equal("y", startPage.ApplicationState["x"]);
-                }
-            );
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var startPage = new MockStartPage() { ExecuteAction = p => p.AppState["x"] = "y" };
+                var objectFactory = GetMockVirtualPathFactory(startPage);
+                ApplicationStartPage.ExecuteStartPage(
+                    new WebPageHttpApplication(),
+                    p => { },
+                    objectFactory,
+                    new string[] { "cshtml", "vbhtml" }
+                );
+                Assert.Equal("y", startPage.ApplicationState["x"]);
+            });
         }
 
         [Fact]
         public void ExecuteStartPageDynamicAppStateTest()
         {
-            AppDomainUtils.RunInSeparateAppDomain(
-                () =>
-                {
-                    var startPage = new MockStartPage() { ExecuteAction = p => p.App.x = "y" };
-                    var objectFactory = GetMockVirtualPathFactory(startPage);
-                    ApplicationStartPage.ExecuteStartPage(
-                        new WebPageHttpApplication(),
-                        p => { },
-                        objectFactory,
-                        new string[] { "cshtml", "vbhtml" }
-                    );
-                    Assert.Equal("y", startPage.ApplicationState["x"]);
-                    Assert.Equal("y", startPage.App.x);
-                    Assert.Equal("y", startPage.App["x"]);
-                }
-            );
+            AppDomainUtils.RunInSeparateAppDomain(() =>
+            {
+                var startPage = new MockStartPage() { ExecuteAction = p => p.App.x = "y" };
+                var objectFactory = GetMockVirtualPathFactory(startPage);
+                ApplicationStartPage.ExecuteStartPage(
+                    new WebPageHttpApplication(),
+                    p => { },
+                    objectFactory,
+                    new string[] { "cshtml", "vbhtml" }
+                );
+                Assert.Equal("y", startPage.ApplicationState["x"]);
+                Assert.Equal("y", startPage.App.x);
+                Assert.Equal("y", startPage.App["x"]);
+            });
         }
 
         public class MockStartPage : ApplicationStartPage

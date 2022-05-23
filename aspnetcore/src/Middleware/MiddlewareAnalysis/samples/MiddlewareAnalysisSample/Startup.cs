@@ -49,36 +49,30 @@ public class Startup
             "/map",
             subApp =>
             {
-                subApp.Run(
-                    context =>
-                    {
-                        return context.Response.WriteAsync("Hello World");
-                    }
-                );
+                subApp.Run(context =>
+                {
+                    return context.Response.WriteAsync("Hello World");
+                });
             }
         );
 
         // Low level anonymous method inline middleware, named Diagnostics.Middleware.Analysis.Startup+<>c by default
-        app.Use(
-            next =>
+        app.Use(next =>
+        {
+            return context =>
             {
-                return context =>
-                {
-                    return next(context);
-                };
-            }
-        );
+                return next(context);
+            };
+        });
 
         app.Map(
             "/throw",
             throwApp =>
             {
-                throwApp.Run(
-                    context =>
-                    {
-                        throw new Exception("Application Exception");
-                    }
-                );
+                throwApp.Run(context =>
+                {
+                    throw new Exception("Application Exception");
+                });
             }
         );
 
@@ -118,22 +112,20 @@ public class Startup
     public static Task Main(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .ConfigureLogging(
-                            (_, factory) =>
-                            {
-                                factory.AddConsole();
-                                factory.AddFilter("Console", level => level >= LogLevel.Debug);
-                            }
-                        )
-                        .UseKestrel()
-                        .UseIISIntegration()
-                        .UseStartup<Startup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .ConfigureLogging(
+                        (_, factory) =>
+                        {
+                            factory.AddConsole();
+                            factory.AddFilter("Console", level => level >= LogLevel.Debug);
+                        }
+                    )
+                    .UseKestrel()
+                    .UseIISIntegration()
+                    .UseStartup<Startup>();
+            })
             .Build();
 
         return host.RunAsync();

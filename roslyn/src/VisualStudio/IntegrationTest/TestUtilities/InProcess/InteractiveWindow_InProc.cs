@@ -174,17 +174,15 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void Reset(bool waitForPrompt = true)
         {
-            ThreadHelper.JoinableTaskFactory.Run(
-                async () =>
-                {
-                    await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
+            ThreadHelper.JoinableTaskFactory.Run(async () =>
+            {
+                await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
-                    var interactiveWindow = AcquireInteractiveWindow();
-                    var operations = (IInteractiveWindowOperations)interactiveWindow;
-                    var result = await operations.ResetAsync();
-                    Contract.ThrowIfFalse(result.IsSuccessful);
-                }
-            );
+                var interactiveWindow = AcquireInteractiveWindow();
+                var operations = (IInteractiveWindowOperations)interactiveWindow;
+                var result = await operations.ResetAsync();
+                Contract.ThrowIfFalse(result.IsSuccessful);
+            });
 
             if (waitForPrompt)
             {
@@ -202,26 +200,24 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
 
         public void CloseWindow()
         {
-            InvokeOnUIThread(
-                cancellationToken =>
-                {
-                    var shell = GetGlobalService<SVsUIShell, IVsUIShell>();
-                    if (
-                        ErrorHandler.Succeeded(
-                            shell.FindToolWindow(
-                                (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
-                                _windowId,
-                                out var windowFrame
-                            )
+            InvokeOnUIThread(cancellationToken =>
+            {
+                var shell = GetGlobalService<SVsUIShell, IVsUIShell>();
+                if (
+                    ErrorHandler.Succeeded(
+                        shell.FindToolWindow(
+                            (uint)__VSFINDTOOLWIN.FTW_fFrameOnly,
+                            _windowId,
+                            out var windowFrame
                         )
                     )
-                    {
-                        ErrorHandler.ThrowOnFailure(
-                            windowFrame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave)
-                        );
-                    }
+                )
+                {
+                    ErrorHandler.ThrowOnFailure(
+                        windowFrame.CloseFrame((uint)__FRAMECLOSE.FRAMECLOSE_NoSave)
+                    );
                 }
-            );
+            });
         }
 
         public void ShowWindow(bool waitForPrompt = true)

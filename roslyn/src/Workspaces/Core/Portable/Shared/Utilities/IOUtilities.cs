@@ -15,13 +15,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
     {
         public static void PerformIO(Action action)
         {
-            PerformIO<object>(
-                () =>
-                {
-                    action();
-                    return null;
-                }
-            );
+            PerformIO<object>(() =>
+            {
+                action();
+                return null;
+            });
         }
 
         public static T PerformIO<T>(Func<T> function, T defaultValue = default)

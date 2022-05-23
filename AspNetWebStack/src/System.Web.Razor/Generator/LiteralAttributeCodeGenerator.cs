@@ -40,35 +40,29 @@ namespace System.Web.Razor.Generator
             }
             ExpressionRenderingMode oldMode = context.ExpressionRenderingMode;
             context.BufferStatementFragment(
-                context.BuildCodeString(
-                    cw =>
+                context.BuildCodeString(cw =>
+                {
+                    cw.WriteParameterSeparator();
+                    cw.WriteStartMethodInvoke("Tuple.Create");
+                    cw.WriteLocationTaggedString(Prefix);
+                    cw.WriteParameterSeparator();
+                    if (ValueGenerator != null)
                     {
-                        cw.WriteParameterSeparator();
-                        cw.WriteStartMethodInvoke("Tuple.Create");
-                        cw.WriteLocationTaggedString(Prefix);
-                        cw.WriteParameterSeparator();
-                        if (ValueGenerator != null)
-                        {
-                            cw.WriteStartMethodInvoke(
-                                "Tuple.Create",
-                                "System.Object",
-                                "System.Int32"
-                            );
-                            context.ExpressionRenderingMode = ExpressionRenderingMode.InjectCode;
-                        }
-                        else
-                        {
-                            cw.WriteLocationTaggedString(Value);
-                            cw.WriteParameterSeparator();
-                            // literal: true - This attribute value is a literal value
-                            cw.WriteBooleanLiteral(true);
-                            cw.WriteEndMethodInvoke();
-
-                            // In VB, we need a line continuation
-                            cw.WriteLineContinuation();
-                        }
+                        cw.WriteStartMethodInvoke("Tuple.Create", "System.Object", "System.Int32");
+                        context.ExpressionRenderingMode = ExpressionRenderingMode.InjectCode;
                     }
-                )
+                    else
+                    {
+                        cw.WriteLocationTaggedString(Value);
+                        cw.WriteParameterSeparator();
+                        // literal: true - This attribute value is a literal value
+                        cw.WriteBooleanLiteral(true);
+                        cw.WriteEndMethodInvoke();
+
+                        // In VB, we need a line continuation
+                        cw.WriteLineContinuation();
+                    }
+                })
             );
             if (ValueGenerator != null)
             {
@@ -76,25 +70,23 @@ namespace System.Web.Razor.Generator
                 context.FlushBufferedStatement();
                 context.ExpressionRenderingMode = oldMode;
                 context.AddStatement(
-                    context.BuildCodeString(
-                        cw =>
-                        {
-                            cw.WriteParameterSeparator();
-                            cw.WriteSnippet(
-                                ValueGenerator.Location.AbsoluteIndex.ToString(
-                                    CultureInfo.CurrentCulture
-                                )
-                            );
-                            cw.WriteEndMethodInvoke();
-                            cw.WriteParameterSeparator();
-                            // literal: false - This attribute value is not a literal value, it is dynamically generated
-                            cw.WriteBooleanLiteral(false);
-                            cw.WriteEndMethodInvoke();
+                    context.BuildCodeString(cw =>
+                    {
+                        cw.WriteParameterSeparator();
+                        cw.WriteSnippet(
+                            ValueGenerator.Location.AbsoluteIndex.ToString(
+                                CultureInfo.CurrentCulture
+                            )
+                        );
+                        cw.WriteEndMethodInvoke();
+                        cw.WriteParameterSeparator();
+                        // literal: false - This attribute value is not a literal value, it is dynamically generated
+                        cw.WriteBooleanLiteral(false);
+                        cw.WriteEndMethodInvoke();
 
-                            // In VB, we need a line continuation
-                            cw.WriteLineContinuation();
-                        }
-                    )
+                        // In VB, we need a line continuation
+                        cw.WriteLineContinuation();
+                    })
                 );
             }
             else

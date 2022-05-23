@@ -26,19 +26,17 @@ public class ServerStartup
     public void ConfigureServices(IServiceCollection services)
     {
         services.AddMvc();
-        services.AddServerSideBlazor(
-            options =>
-            {
-                options.RootComponents.MaxJSRootComponents = 5; // To make it easier to test
-                options.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>(
-                    "my-dynamic-root-component"
-                );
-                options.RootComponents.RegisterForJavaScript<BasicTestApp.JavaScriptRootComponentParameterTypes>(
-                    "component-with-many-parameters",
-                    javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
-                );
-            }
-        );
+        services.AddServerSideBlazor(options =>
+        {
+            options.RootComponents.MaxJSRootComponents = 5; // To make it easier to test
+            options.RootComponents.RegisterForJavaScript<BasicTestApp.DynamicallyAddedRootComponent>(
+                "my-dynamic-root-component"
+            );
+            options.RootComponents.RegisterForJavaScript<BasicTestApp.JavaScriptRootComponentParameterTypes>(
+                "component-with-many-parameters",
+                javaScriptInitializer: "myJsRootComponentInitializers.testInitializer"
+            );
+        });
         services.AddSingleton<ResourceRequestLog>();
 
         // Since tests run in parallel, we use an ephemeral key provider to avoid filesystem
@@ -87,14 +85,12 @@ public class ServerStartup
                 app.UseStaticFiles();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapBlazorHub();
-                        endpoints.MapControllerRoute("mvc", "{controller}/{action}");
-                        endpoints.MapFallbackToPage("/_ServerHost");
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapBlazorHub();
+                    endpoints.MapControllerRoute("mvc", "{controller}/{action}");
+                    endpoints.MapFallbackToPage("/_ServerHost");
+                });
             }
         );
     }

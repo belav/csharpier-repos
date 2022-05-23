@@ -103,32 +103,30 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
             foreach (var syntaxTree in compilation.SyntaxTrees)
             {
                 tasks.Add(
-                    Task.Run(
-                        async () =>
-                        {
-                            var semanticModel = compilation.GetSemanticModel(syntaxTree);
+                    Task.Run(async () =>
+                    {
+                        var semanticModel = compilation.GetSemanticModel(syntaxTree);
 
-                            // We generate the document contents into an in-memory copy, and then write that out at once at the end. This
-                            // allows us to collect everything and avoid a lot of fine-grained contention on the write to the single
-                            // LSIF file. Because of the rule that vertices must be written before they're used by an edge, we'll flush any top-
-                            // level symbol result sets made first, since the document contents will point to that. Parallel calls to CopyAndEmpty
-                            // are allowed and might flush other unrelated stuff at the same time, but there's no harm -- the "causality" ordering
-                            // is preserved.
-                            var documentWriter = new BatchingLsifJsonWriter(_lsifJsonWriter);
-                            var documentId = await GenerateForDocumentAsync(
-                                semanticModel,
-                                languageServices,
-                                options,
-                                topLevelSymbolsResultSetTracker,
-                                documentWriter,
-                                _idFactory
-                            );
-                            topLevelSymbolsWriter.FlushToUnderlyingAndEmpty();
-                            documentWriter.FlushToUnderlyingAndEmpty();
+                        // We generate the document contents into an in-memory copy, and then write that out at once at the end. This
+                        // allows us to collect everything and avoid a lot of fine-grained contention on the write to the single
+                        // LSIF file. Because of the rule that vertices must be written before they're used by an edge, we'll flush any top-
+                        // level symbol result sets made first, since the document contents will point to that. Parallel calls to CopyAndEmpty
+                        // are allowed and might flush other unrelated stuff at the same time, but there's no harm -- the "causality" ordering
+                        // is preserved.
+                        var documentWriter = new BatchingLsifJsonWriter(_lsifJsonWriter);
+                        var documentId = await GenerateForDocumentAsync(
+                            semanticModel,
+                            languageServices,
+                            options,
+                            topLevelSymbolsResultSetTracker,
+                            documentWriter,
+                            _idFactory
+                        );
+                        topLevelSymbolsWriter.FlushToUnderlyingAndEmpty();
+                        documentWriter.FlushToUnderlyingAndEmpty();
 
-                            documentIds.Add(documentId);
-                        }
-                    )
+                        documentIds.Add(documentId);
+                    })
                 );
             }
 
@@ -205,34 +203,27 @@ namespace Microsoft.CodeAnalysis.LanguageServerIndexFormat.Generator
                 semanticModel.Compilation,
                 idFactory
             );
-            var symbolResultsTracker = new DelegatingResultSetTracker(
-                symbol =>
+            var symbolResultsTracker = new DelegatingResultSetTracker(symbol =>
+            {
+                if (symbol.Kind is SymbolKind.Local or SymbolKind.RangeVariable or SymbolKind.Label)
                 {
-                    if (
-                        symbol.Kind
-                        is SymbolKind.Local
-                            or SymbolKind.RangeVariable
-                            or SymbolKind.Label
-                    )
-                    {
-                        // These symbols can go in the document local one because they can't escape methods
-                        return documentLocalSymbolsResultSetTracker;
-                    }
-                    else if (
-                        symbol.ContainingType != null
-                        && symbol.DeclaredAccessibility == Accessibility.Private
-                        && symbol.ContainingType.Locations.Length == 1
-                    )
-                    {
-                        // This is a private member in a class that isn't partial, so it can't escape the file
-                        return documentLocalSymbolsResultSetTracker;
-                    }
-                    else
-                    {
-                        return topLevelSymbolsResultSetTracker;
-                    }
+                    // These symbols can go in the document local one because they can't escape methods
+                    return documentLocalSymbolsResultSetTracker;
                 }
-            );
+                else if (
+                    symbol.ContainingType != null
+                    && symbol.DeclaredAccessibility == Accessibility.Private
+                    && symbol.ContainingType.Locations.Length == 1
+                )
+                {
+                    // This is a private member in a class that isn't partial, so it can't escape the file
+                    return documentLocalSymbolsResultSetTracker;
+                }
+                else
+                {
+                    return topLevelSymbolsResultSetTracker;
+                }
+            });
 
             // We will walk the file token-by-token, making a range for each one and then attaching information for it
             var rangeVertices = new List<Id<Graph.Range>>();

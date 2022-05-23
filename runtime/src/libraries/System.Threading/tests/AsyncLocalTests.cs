@@ -132,19 +132,17 @@ namespace System.Threading.Tests
             bool gotNotification = false;
             bool expectNotification = false;
 
-            AsyncLocal<int> local = new AsyncLocal<int>(
-                args =>
-                {
-                    gotNotification = true;
+            AsyncLocal<int> local = new AsyncLocal<int>(args =>
+            {
+                gotNotification = true;
 
-                    Assert.True(expectNotification);
-                    expectNotification = false;
+                Assert.True(expectNotification);
+                expectNotification = false;
 
-                    Assert.Equal(args.ThreadContextChanged, expectThreadContextChange);
-                    Assert.Equal(args.PreviousValue, expectedPreviousValue);
-                    Assert.Equal(args.CurrentValue, expectedCurrentValue);
-                }
-            );
+                Assert.Equal(args.ThreadContextChanged, expectThreadContextChange);
+                Assert.Equal(args.PreviousValue, expectedPreviousValue);
+                Assert.Equal(args.CurrentValue, expectedCurrentValue);
+            });
 
             expectNotification = true;
             local.Value = 1;
@@ -220,19 +218,17 @@ namespace System.Threading.Tests
             bool gotNotification = false;
             bool expectNotification = false;
 
-            AsyncLocal<int> local = new AsyncLocal<int>(
-                args =>
-                {
-                    gotNotification = true;
+            AsyncLocal<int> local = new AsyncLocal<int>(args =>
+            {
+                gotNotification = true;
 
-                    Assert.True(expectNotification);
-                    expectNotification = false;
+                Assert.True(expectNotification);
+                expectNotification = false;
 
-                    Assert.Equal(args.ThreadContextChanged, expectThreadContextChange);
-                    Assert.Equal(args.PreviousValue, expectedPreviousValue);
-                    Assert.Equal(args.CurrentValue, expectedCurrentValue);
-                }
-            );
+                Assert.Equal(args.ThreadContextChanged, expectThreadContextChange);
+                Assert.Equal(args.PreviousValue, expectedPreviousValue);
+                Assert.Equal(args.CurrentValue, expectedCurrentValue);
+            });
 
             expectNotification = true;
             local.Value = 1;
@@ -300,19 +296,17 @@ namespace System.Threading.Tests
             bool gotNotification = false;
             bool expectNotification = false;
 
-            AsyncLocal<int> local = new AsyncLocal<int>(
-                args =>
-                {
-                    gotNotification = true;
+            AsyncLocal<int> local = new AsyncLocal<int>(args =>
+            {
+                gotNotification = true;
 
-                    Assert.True(expectNotification);
-                    expectNotification = false;
+                Assert.True(expectNotification);
+                expectNotification = false;
 
-                    Assert.Equal(args.ThreadContextChanged, expectThreadContextChange);
-                    Assert.Equal(args.PreviousValue, expectedPreviousValue);
-                    Assert.Equal(args.CurrentValue, expectedCurrentValue);
-                }
-            );
+                Assert.Equal(args.ThreadContextChanged, expectThreadContextChange);
+                Assert.Equal(args.PreviousValue, expectedPreviousValue);
+                Assert.Equal(args.CurrentValue, expectedCurrentValue);
+            });
 
             ExecutionContext ec = ExecutionContext.Capture();
 
@@ -372,12 +366,10 @@ namespace System.Threading.Tests
             // to keep the thread-local value in sync with the async-local value.
             //
             ThreadLocal<int> tls = new ThreadLocal<int>();
-            AsyncLocal<int> als = new AsyncLocal<int>(
-                args =>
-                {
-                    tls.Value = args.CurrentValue;
-                }
-            );
+            AsyncLocal<int> als = new AsyncLocal<int>(args =>
+            {
+                tls.Value = args.CurrentValue;
+            });
 
             Assert.Equal(tls.Value, als.Value);
 
@@ -387,63 +379,57 @@ namespace System.Threading.Tests
             als.Value = 2;
             Assert.Equal(tls.Value, als.Value);
 
-            await Run(
-                async () =>
+            await Run(async () =>
+            {
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(2, als.Value);
+
+                als.Value = 3;
+                Assert.Equal(tls.Value, als.Value);
+
+                Task t = Run(async () =>
                 {
                     Assert.Equal(tls.Value, als.Value);
-                    Assert.Equal(2, als.Value);
-
-                    als.Value = 3;
-                    Assert.Equal(tls.Value, als.Value);
-
-                    Task t = Run(
-                        async () =>
-                        {
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(3, als.Value);
-
-                            als.Value = 4;
-
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(4, als.Value);
-
-                            await Task.Run(
-                                () =>
-                                {
-                                    Assert.Equal(tls.Value, als.Value);
-                                    Assert.Equal(4, als.Value);
-
-                                    als.Value = 5;
-
-                                    Assert.Equal(tls.Value, als.Value);
-                                    Assert.Equal(5, als.Value);
-                                }
-                            );
-
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(4, als.Value);
-
-                            als.Value = 6;
-
-                            Assert.Equal(tls.Value, als.Value);
-                            Assert.Equal(6, als.Value);
-                        }
-                    );
-
-                    Assert.Equal(tls.Value, als.Value);
                     Assert.Equal(3, als.Value);
 
-                    await Task.Yield();
+                    als.Value = 4;
 
                     Assert.Equal(tls.Value, als.Value);
-                    Assert.Equal(3, als.Value);
+                    Assert.Equal(4, als.Value);
 
-                    await t;
+                    await Task.Run(() =>
+                    {
+                        Assert.Equal(tls.Value, als.Value);
+                        Assert.Equal(4, als.Value);
+
+                        als.Value = 5;
+
+                        Assert.Equal(tls.Value, als.Value);
+                        Assert.Equal(5, als.Value);
+                    });
 
                     Assert.Equal(tls.Value, als.Value);
-                    Assert.Equal(3, als.Value);
-                }
-            );
+                    Assert.Equal(4, als.Value);
+
+                    als.Value = 6;
+
+                    Assert.Equal(tls.Value, als.Value);
+                    Assert.Equal(6, als.Value);
+                });
+
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(3, als.Value);
+
+                await Task.Yield();
+
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(3, als.Value);
+
+                await t;
+
+                Assert.Equal(tls.Value, als.Value);
+                Assert.Equal(3, als.Value);
+            });
 
             Assert.Equal(tls.Value, als.Value);
             Assert.Equal(2, als.Value);
@@ -454,25 +440,21 @@ namespace System.Threading.Tests
         {
             int valueToSet = 0;
             AsyncLocal<int> local = null;
-            local = new AsyncLocal<int>(
-                args =>
-                {
-                    if (args.ThreadContextChanged)
-                        local.Value = valueToSet;
-                }
-            );
+            local = new AsyncLocal<int>(args =>
+            {
+                if (args.ThreadContextChanged)
+                    local.Value = valueToSet;
+            });
 
             valueToSet = 2;
             local.Value = 1;
             Assert.Equal(1, local.Value);
 
-            await Run(
-                async () =>
-                {
-                    local.Value = 3;
-                    valueToSet = 4;
-                }
-            );
+            await Run(async () =>
+            {
+                local.Value = 3;
+                valueToSet = 4;
+            });
 
             Assert.Equal(4, local.Value);
         }
@@ -484,14 +466,12 @@ namespace System.Threading.Tests
 
             local.Value = 42;
 
-            await Run(
-                async () =>
-                {
-                    SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
-                    Assert.Equal(42, local.Value);
-                    local.Value = 12;
-                }
-            );
+            await Run(async () =>
+            {
+                SynchronizationContext.SetSynchronizationContext(new SynchronizationContext());
+                Assert.Equal(42, local.Value);
+                local.Value = 12;
+            });
 
             Assert.Equal(42, local.Value);
         }

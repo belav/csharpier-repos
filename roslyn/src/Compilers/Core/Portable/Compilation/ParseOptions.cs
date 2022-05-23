@@ -42,14 +42,12 @@ namespace Microsoft.CodeAnalysis
             this.Kind = kind.MapSpecifiedToEffectiveKind();
             this.DocumentationMode = documentationMode;
 
-            _lazyErrors = new Lazy<ImmutableArray<Diagnostic>>(
-                () =>
-                {
-                    var builder = ArrayBuilder<Diagnostic>.GetInstance();
-                    ValidateOptions(builder);
-                    return builder.ToImmutableAndFree();
-                }
-            );
+            _lazyErrors = new Lazy<ImmutableArray<Diagnostic>>(() =>
+            {
+                var builder = ArrayBuilder<Diagnostic>.GetInstance();
+                ValidateOptions(builder);
+                return builder.ToImmutableAndFree();
+            });
         }
 
         /// <summary>

@@ -173,21 +173,19 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.InProcess
                 )
             )
             {
-                JoinableTaskFactory.Run(
-                    async () =>
-                    {
-                        await JoinableTaskFactory.SwitchToMainThreadAsync(
-                            cancellationTokenSource.Token
+                JoinableTaskFactory.Run(async () =>
+                {
+                    await JoinableTaskFactory.SwitchToMainThreadAsync(
+                        cancellationTokenSource.Token
+                    );
+                    var dialog = await GetDialogAsync(cancellationTokenSource.Token);
+                    var members = dialog.GetTestAccessor().Members;
+                    members.SelectedItem = dialog
+                        .GetTestAccessor()
+                        .ViewModel.AllParameters.Single(
+                            p => p.ShortAutomationText == parameterName
                         );
-                        var dialog = await GetDialogAsync(cancellationTokenSource.Token);
-                        var members = dialog.GetTestAccessor().Members;
-                        members.SelectedItem = dialog
-                            .GetTestAccessor()
-                            .ViewModel.AllParameters.Single(
-                                p => p.ShortAutomationText == parameterName
-                            );
-                    }
-                );
+                });
             }
         }
 

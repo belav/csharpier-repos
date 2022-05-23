@@ -64,26 +64,22 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
                 var model = modelBuilder.Model;
 
-                modelBuilder.Entity<OneToManyPrincipalWithField>(
-                    e =>
-                    {
-                        e.Property(p => p.Id);
-                        e.Property(p => p.AlternateKey);
-                        e.Property(p => p.Name);
-                        e.HasKey(p => p.Id);
-                    }
-                );
-                modelBuilder.Entity<DependentWithField>(
-                    e =>
-                    {
-                        e.Property(d => d.DependentWithFieldId);
-                        e.Property(d => d.OneToManyPrincipalId);
-                        e.Property(d => d.AnotherOneToManyPrincipalId);
-                        e.Ignore(d => d.ManyToManyPrincipals);
-                        e.Ignore(d => d.OneToOnePrincipal);
-                        e.HasKey(d => d.DependentWithFieldId);
-                    }
-                );
+                modelBuilder.Entity<OneToManyPrincipalWithField>(e =>
+                {
+                    e.Property(p => p.Id);
+                    e.Property(p => p.AlternateKey);
+                    e.Property(p => p.Name);
+                    e.HasKey(p => p.Id);
+                });
+                modelBuilder.Entity<DependentWithField>(e =>
+                {
+                    e.Property(d => d.DependentWithFieldId);
+                    e.Property(d => d.OneToManyPrincipalId);
+                    e.Property(d => d.AnotherOneToManyPrincipalId);
+                    e.Ignore(d => d.ManyToManyPrincipals);
+                    e.Ignore(d => d.OneToOnePrincipal);
+                    e.HasKey(d => d.DependentWithFieldId);
+                });
 
                 modelBuilder
                     .Entity<OneToManyPrincipalWithField>()
@@ -1338,17 +1334,15 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<User13300>(
-                    m =>
-                    {
-                        m.Property<string>("_email");
+                modelBuilder.Entity<User13300>(m =>
+                {
+                    m.Property<string>("_email");
 
-                        m.HasMany<Profile13300>("_profiles")
-                            .WithOne("User")
-                            .HasForeignKey("Email")
-                            .HasPrincipalKey("_email");
-                    }
-                );
+                    m.HasMany<Profile13300>("_profiles")
+                        .WithOne("User")
+                        .HasForeignKey("Email")
+                        .HasPrincipalKey("_email");
+                });
 
                 modelBuilder.Entity<Profile13300>().Property<string>("Email");
 
@@ -2225,12 +2219,10 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 modelBuilder.Entity<Beta>();
                 modelBuilder.Ignore<Theta>();
 
-                modelBuilder.Entity<Alpha>(
-                    b =>
-                    {
-                        b.HasMany<Beta>().WithOne(e => e.FirstNav).HasForeignKey("ShadowId");
-                    }
-                );
+                modelBuilder.Entity<Alpha>(b =>
+                {
+                    b.HasMany<Beta>().WithOne(e => e.FirstNav).HasForeignKey("ShadowId");
+                });
 
                 modelBuilder.FinalizeModel();
 

@@ -23,13 +23,11 @@ public class ProblemDetailsJsonConverterTest
         var converter = new ProblemDetailsJsonConverter();
 
         // Act & Assert
-        var ex = Record.Exception(
-            () =>
-            {
-                var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
-                converter.Read(ref reader, typeof(ProblemDetails), JsonSerializerOptions);
-            }
-        );
+        var ex = Record.Exception(() =>
+        {
+            var reader = new Utf8JsonReader(Encoding.UTF8.GetBytes(json));
+            converter.Read(ref reader, typeof(ProblemDetails), JsonSerializerOptions);
+        });
         Assert.IsAssignableFrom<JsonException>(ex);
     }
 

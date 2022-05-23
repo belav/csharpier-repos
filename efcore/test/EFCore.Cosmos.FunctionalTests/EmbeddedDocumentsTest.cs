@@ -633,36 +633,30 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
 
             protected override void OnModelCreating(ModelBuilder modelBuilder)
             {
-                modelBuilder.Entity<Vehicle>(
-                    eb =>
-                    {
-                        eb.HasKey(e => e.Name);
-                        eb.OwnsOne(v => v.Operator).OwnsOne(v => v.Details);
-                    }
-                );
+                modelBuilder.Entity<Vehicle>(eb =>
+                {
+                    eb.HasKey(e => e.Name);
+                    eb.OwnsOne(v => v.Operator).OwnsOne(v => v.Details);
+                });
                 modelBuilder.Entity<PoweredVehicle>();
 
-                modelBuilder.Entity<Engine>(
-                    eb =>
-                    {
-                        eb.HasKey(e => e.VehicleName);
-                        eb.HasOne(e => e.Vehicle)
-                            .WithOne(e => e.Engine)
-                            .HasForeignKey<Engine>(e => e.VehicleName);
-                    }
-                );
+                modelBuilder.Entity<Engine>(eb =>
+                {
+                    eb.HasKey(e => e.VehicleName);
+                    eb.HasOne(e => e.Vehicle)
+                        .WithOne(e => e.Engine)
+                        .HasForeignKey<Engine>(e => e.VehicleName);
+                });
 
-                modelBuilder.Entity<FuelTank>(
-                    eb =>
-                    {
-                        eb.HasKey(e => e.VehicleName);
-                        eb.HasOne(e => e.Engine)
-                            .WithOne(e => e.FuelTank)
-                            .HasForeignKey<FuelTank>(e => e.VehicleName)
-                            .OnDelete(DeleteBehavior.Restrict);
-                        eb.HasOne(e => e.Vehicle).WithOne().HasForeignKey<FuelTank>("VehicleName1");
-                    }
-                );
+                modelBuilder.Entity<FuelTank>(eb =>
+                {
+                    eb.HasKey(e => e.VehicleName);
+                    eb.HasOne(e => e.Engine)
+                        .WithOne(e => e.FuelTank)
+                        .HasForeignKey<FuelTank>(e => e.VehicleName)
+                        .OnDelete(DeleteBehavior.Restrict);
+                    eb.HasOne(e => e.Vehicle).WithOne().HasForeignKey<FuelTank>("VehicleName1");
+                });
 
                 modelBuilder.Entity<ContinuousCombustionEngine>();
                 modelBuilder.Entity<IntermittentCombustionEngine>();

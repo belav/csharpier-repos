@@ -88,13 +88,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
 
         protected void UpdateNode<T>(Action<SyntaxNode, T> updater, T value)
         {
-            FileCodeModel.EnsureEditor(
-                () =>
-                {
-                    var node = LookupNode();
-                    updater(node, value);
-                }
-            );
+            FileCodeModel.EnsureEditor(() =>
+            {
+                var node = LookupNode();
+                updater(node, value);
+            });
         }
 
         public abstract EnvDTE.vsCMElement Kind { get; }
@@ -267,12 +265,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.CodeModel.Inter
         /// </summary>
         internal void Delete()
         {
-            FileCodeModel.PerformEdit(
-                document =>
-                {
-                    return DeleteCore(document);
-                }
-            );
+            FileCodeModel.PerformEdit(document =>
+            {
+                return DeleteCore(document);
+            });
         }
 
         [SuppressMessage(

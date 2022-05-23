@@ -527,88 +527,84 @@ namespace Newtonsoft.Json.Serialization
         private MemberInfo GetExtensionDataMemberForType(Type type)
         {
             IEnumerable<MemberInfo> members = GetClassHierarchyForType(type)
-                .SelectMany(
-                    baseType =>
-                    {
-                        IList<MemberInfo> m = new List<MemberInfo>();
-                        m.AddRange(
-                            baseType.GetProperties(
-                                BindingFlags.Public
-                                    | BindingFlags.NonPublic
-                                    | BindingFlags.Instance
-                                    | BindingFlags.DeclaredOnly
-                            )
-                        );
-                        m.AddRange(
-                            baseType.GetFields(
-                                BindingFlags.Public
-                                    | BindingFlags.NonPublic
-                                    | BindingFlags.Instance
-                                    | BindingFlags.DeclaredOnly
-                            )
-                        );
-
-                        return m;
-                    }
-                );
-
-            MemberInfo extensionDataMember = members.LastOrDefault(
-                m =>
+                .SelectMany(baseType =>
                 {
-                    MemberTypes memberType = m.MemberType();
-                    if (memberType != MemberTypes.Property && memberType != MemberTypes.Field)
-                    {
-                        return false;
-                    }
-
-                    // last instance of attribute wins on type if there are multiple
-                    if (!m.IsDefined(typeof(JsonExtensionDataAttribute), false))
-                    {
-                        return false;
-                    }
-
-                    if (!ReflectionUtils.CanReadMemberValue(m, true))
-                    {
-                        throw new JsonException(
-                            "Invalid extension data attribute on '{0}'. Member '{1}' must have a getter.".FormatWith(
-                                CultureInfo.InvariantCulture,
-                                GetClrTypeFullName(m.DeclaringType),
-                                m.Name
-                            )
-                        );
-                    }
-
-                    Type t = ReflectionUtils.GetMemberUnderlyingType(m);
-
-                    if (
-                        ReflectionUtils.ImplementsGenericDefinition(
-                            t,
-                            typeof(IDictionary<,>),
-                            out Type? dictionaryType
+                    IList<MemberInfo> m = new List<MemberInfo>();
+                    m.AddRange(
+                        baseType.GetProperties(
+                            BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.Instance
+                                | BindingFlags.DeclaredOnly
                         )
-                    )
-                    {
-                        Type keyType = dictionaryType.GetGenericArguments()[0];
-                        Type valueType = dictionaryType.GetGenericArguments()[1];
-
-                        if (
-                            keyType.IsAssignableFrom(typeof(string))
-                            && valueType.IsAssignableFrom(typeof(JToken))
+                    );
+                    m.AddRange(
+                        baseType.GetFields(
+                            BindingFlags.Public
+                                | BindingFlags.NonPublic
+                                | BindingFlags.Instance
+                                | BindingFlags.DeclaredOnly
                         )
-                        {
-                            return true;
-                        }
-                    }
+                    );
 
+                    return m;
+                });
+
+            MemberInfo extensionDataMember = members.LastOrDefault(m =>
+            {
+                MemberTypes memberType = m.MemberType();
+                if (memberType != MemberTypes.Property && memberType != MemberTypes.Field)
+                {
+                    return false;
+                }
+
+                // last instance of attribute wins on type if there are multiple
+                if (!m.IsDefined(typeof(JsonExtensionDataAttribute), false))
+                {
+                    return false;
+                }
+
+                if (!ReflectionUtils.CanReadMemberValue(m, true))
+                {
                     throw new JsonException(
-                        "Invalid extension data attribute on '{0}'. Member '{1}' type must implement IDictionary<string, JToken>.".FormatWith(
+                        "Invalid extension data attribute on '{0}'. Member '{1}' must have a getter.".FormatWith(
                             CultureInfo.InvariantCulture,
                             GetClrTypeFullName(m.DeclaringType),
                             m.Name
                         )
                     );
                 }
-            );
+
+                Type t = ReflectionUtils.GetMemberUnderlyingType(m);
+
+                if (
+                    ReflectionUtils.ImplementsGenericDefinition(
+                        t,
+                        typeof(IDictionary<,>),
+                        out Type? dictionaryType
+                    )
+                )
+                {
+                    Type keyType = dictionaryType.GetGenericArguments()[0];
+                    Type valueType = dictionaryType.GetGenericArguments()[1];
+
+                    if (
+                        keyType.IsAssignableFrom(typeof(string))
+                        && valueType.IsAssignableFrom(typeof(JToken))
+                    )
+                    {
+                        return true;
+                    }
+                }
+
+                throw new JsonException(
+                    "Invalid extension data attribute on '{0}'. Member '{1}' type must implement IDictionary<string, JToken>.".FormatWith(
+                        CultureInfo.InvariantCulture,
+                        GetClrTypeFullName(m.DeclaringType),
+                        m.Name
+                    )
+                );
+            });
 
             return extensionDataMember;
         }

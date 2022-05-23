@@ -868,8 +868,8 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                         // translate active statements from base solution to the new solution, if the documents they are contained in changed:
                         foreach (var (projectId, index) in indices)
                         {
-                            spans[index] = documentBaseActiveStatements.SelectAsArray(
-                                activeStatement =>
+                            spans[index] =
+                                documentBaseActiveStatements.SelectAsArray(activeStatement =>
                                 {
                                     LinePositionSpan span;
                                     DocumentId? unmappedDocumentId;
@@ -897,8 +897,7 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
                                         activeStatement.Flags,
                                         unmappedDocumentId
                                     );
-                                }
-                            );
+                                });
                         }
                     }
                 }

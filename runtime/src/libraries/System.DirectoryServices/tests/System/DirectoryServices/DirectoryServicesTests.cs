@@ -442,12 +442,10 @@ namespace System.DirectoryServices.Tests
         {
             using (DirectoryEntry de = new DirectoryEntry("SomeWrongPath"))
             {
-                Assert.Throws<COMException>(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                Assert.Throws<COMException>(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -461,12 +459,10 @@ namespace System.DirectoryServices.Tests
         {
             using (DirectoryEntry de = new DirectoryEntry(LdapConfiguration.Configuration.LdapPath))
             {
-                CheckSpecificException(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                CheckSpecificException(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -486,12 +482,10 @@ namespace System.DirectoryServices.Tests
                 )
             )
             {
-                CheckSpecificException(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                CheckSpecificException(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";
@@ -507,12 +501,10 @@ namespace System.DirectoryServices.Tests
                 )
             )
             {
-                CheckSpecificException(
-                    () =>
-                    {
-                        foreach (var e in de.Children) { }
-                    }
-                );
+                CheckSpecificException(() =>
+                {
+                    foreach (var e in de.Children) { }
+                });
                 using (DirectorySearcher ds = new DirectorySearcher(de))
                 {
                     ds.Filter = $"(objectClass=*)";

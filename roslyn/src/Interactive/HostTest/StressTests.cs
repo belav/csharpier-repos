@@ -41,23 +41,19 @@ namespace Microsoft.CodeAnalysis.UnitTests.Interactive
                 InteractiveHostPlatform.Desktop64
             );
 
-            host.InteractiveHostProcessCreated += new Action<Process>(
-                proc =>
+            host.InteractiveHostProcessCreated += new Action<Process>(proc =>
+            {
+                _ = Task.Run(async () =>
                 {
-                    _ = Task.Run(
-                        async () =>
-                        {
-                            await Task.Delay(milliseconds).ConfigureAwait(false);
+                    await Task.Delay(milliseconds).ConfigureAwait(false);
 
-                            try
-                            {
-                                proc.Kill();
-                            }
-                            catch { }
-                        }
-                    );
-                }
-            );
+                    try
+                    {
+                        proc.Kill();
+                    }
+                    catch { }
+                });
+            });
 
             await host.ResetAsync(options).ConfigureAwait(false);
 

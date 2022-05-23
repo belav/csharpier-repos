@@ -1168,18 +1168,14 @@ Parameter name: value",
         {
             using (JsonWriter jsonWriter = new JsonTextWriter(new StringWriter()))
             {
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(
-                    async () =>
-                    {
-                        await jsonWriter.WriteTokenAsync(null);
-                    }
-                );
-                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(
-                    async () =>
-                    {
-                        await jsonWriter.WriteTokenAsync(null, true);
-                    }
-                );
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () =>
+                {
+                    await jsonWriter.WriteTokenAsync(null);
+                });
+                await ExceptionAssert.ThrowsAsync<ArgumentNullException>(async () =>
+                {
+                    await jsonWriter.WriteTokenAsync(null, true);
+                });
             }
         }
 

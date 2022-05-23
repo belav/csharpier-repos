@@ -26,14 +26,12 @@ public static class DbUtil
 
         services.AddHttpContextAccessor();
 
-        services.AddDbContext<TContext>(
-            options =>
-            {
-                options
-                    .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
-                    .UseSqlite(connection);
-            }
-        );
+        services.AddDbContext<TContext>(options =>
+        {
+            options
+                .ConfigureWarnings(b => b.Log(CoreEventId.ManyServiceProvidersCreatedWarning))
+                .UseSqlite(connection);
+        });
 
         return services;
     }

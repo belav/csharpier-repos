@@ -17,12 +17,10 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<BaseHandler>("base", "whatever");
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -40,12 +38,10 @@ public class AuthenticationServiceTests
         var transform = new RunOnce();
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<BaseHandler>("base", "whatever");
+            })
             .AddSingleton<IClaimsTransformation>(transform)
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
@@ -67,12 +63,10 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<BaseHandler>("base", "whatever");
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -89,12 +83,10 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<BaseHandler>("base", "whatever");
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -111,12 +103,10 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignInHandler>("signin", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignInHandler>("signin", "whatever");
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -136,13 +126,11 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignInHandler>("signin", "whatever");
-                    o.RequireAuthenticatedSignIn = false;
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignInHandler>("signin", "whatever");
+                o.RequireAuthenticatedSignIn = false;
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -160,15 +148,13 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<UberHandler>("uber", "whatever");
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                    o.AddScheme<SignInHandler>("signin", "whatever");
-                    o.AddScheme<SignOutHandler>("signout", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<UberHandler>("uber", "whatever");
+                o.AddScheme<BaseHandler>("base", "whatever");
+                o.AddScheme<SignInHandler>("signin", "whatever");
+                o.AddScheme<SignOutHandler>("signout", "whatever");
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -210,15 +196,13 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<UberHandler>("uber", "whatever");
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                    o.AddScheme<SignInHandler>("signin", "whatever");
-                    o.AddScheme<SignOutHandler>("signout", "whatever");
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<UberHandler>("uber", "whatever");
+                o.AddScheme<BaseHandler>("base", "whatever");
+                o.AddScheme<SignInHandler>("signin", "whatever");
+                o.AddScheme<SignOutHandler>("signout", "whatever");
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -238,13 +222,11 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<BaseHandler>("base", "whatever");
-                    o.DefaultScheme = "base";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<BaseHandler>("base", "whatever");
+                o.DefaultScheme = "base";
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -265,13 +247,11 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<UberHandler>("base", "whatever");
-                    o.DefaultScheme = "base";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<UberHandler>("base", "whatever");
+                o.DefaultScheme = "base";
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -288,13 +268,11 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignInHandler>("base", "whatever");
-                    o.DefaultScheme = "base";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignInHandler>("base", "whatever");
+                o.DefaultScheme = "base";
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -311,13 +289,11 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<SignOutHandler>("base", "whatever");
-                    o.DefaultScheme = "base";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<SignOutHandler>("base", "whatever");
+                o.DefaultScheme = "base";
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;
@@ -337,13 +313,11 @@ public class AuthenticationServiceTests
     {
         var services = new ServiceCollection()
             .AddOptions()
-            .AddAuthenticationCore(
-                o =>
-                {
-                    o.AddScheme<ForbidHandler>("forbid", "whatever");
-                    o.DefaultForbidScheme = "forbid";
-                }
-            )
+            .AddAuthenticationCore(o =>
+            {
+                o.AddScheme<ForbidHandler>("forbid", "whatever");
+                o.DefaultForbidScheme = "forbid";
+            })
             .BuildServiceProvider();
         var context = new DefaultHttpContext();
         context.RequestServices = services;

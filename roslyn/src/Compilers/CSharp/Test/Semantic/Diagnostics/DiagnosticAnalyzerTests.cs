@@ -1305,23 +1305,21 @@ public class B
 
             public override void Initialize(AnalysisContext context)
             {
-                context.RegisterCompilationAction(
-                    compilationContext =>
+                context.RegisterCompilationAction(compilationContext =>
+                {
+                    try
                     {
-                        try
-                        {
-                            ThrownException = null;
-                            compilationContext.ReportDiagnostic(
-                                CodeAnalysis.Diagnostic.Create(UnsupportedDescriptor, Location.None)
-                            );
-                        }
-                        catch (Exception e)
-                        {
-                            ThrownException = e;
-                            throw;
-                        }
+                        ThrownException = null;
+                        compilationContext.ReportDiagnostic(
+                            CodeAnalysis.Diagnostic.Create(UnsupportedDescriptor, Location.None)
+                        );
                     }
-                );
+                    catch (Exception e)
+                    {
+                        ThrownException = e;
+                        throw;
+                    }
+                });
             }
         }
 
@@ -3420,18 +3418,16 @@ public class Class
                     _operationKinds
                 );
 
-                context.RegisterCompilationEndAction(
-                    endContext =>
-                    {
-                        // Summary diagnostic about received callbacks.
-                        var diagnostic = CodeAnalysis.Diagnostic.Create(
-                            Summary,
-                            Location.None,
-                            sortedCallbackEntityNames.Join(",")
-                        );
-                        endContext.ReportDiagnostic(diagnostic);
-                    }
-                );
+                context.RegisterCompilationEndAction(endContext =>
+                {
+                    // Summary diagnostic about received callbacks.
+                    var diagnostic = CodeAnalysis.Diagnostic.Create(
+                        Summary,
+                        Location.None,
+                        sortedCallbackEntityNames.Join(",")
+                    );
+                    endContext.ReportDiagnostic(diagnostic);
+                });
             }
 
             private void ReportNodeDiagnostics(SyntaxNode node, Action<Diagnostic> addDiagnostic)

@@ -98,12 +98,10 @@ namespace System.Net.Sockets.Tests
         public static void Ctor_SocketType_ProtocolType()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        new Socket(SocketType.Stream, ProtocolType.Tcp).Dispose();
-                    }
-                )
+                .Invoke(() =>
+                {
+                    new Socket(SocketType.Stream, ProtocolType.Tcp).Dispose();
+                })
                 .Dispose();
         }
 
@@ -111,38 +109,34 @@ namespace System.Net.Sockets.Tests
         public static void Ctor_AddressFamily_SocketType_ProtocolType()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        new Socket(
-                            AddressFamily.InterNetwork,
-                            SocketType.Stream,
-                            ProtocolType.Tcp
-                        ).Dispose();
-                    }
-                )
+                .Invoke(() =>
+                {
+                    new Socket(
+                        AddressFamily.InterNetwork,
+                        SocketType.Stream,
+                        ProtocolType.Tcp
+                    ).Dispose();
+                })
                 .Dispose();
         }
 
         [Fact]
         public static void Ctor_SafeHandle() =>
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        using var pipe = new AnonymousPipeServerStream();
-                        SocketException se = Assert.Throws<SocketException>(
-                            () =>
-                                new Socket(
-                                    new SafeSocketHandle(
-                                        pipe.ClientSafePipeHandle.DangerousGetHandle(),
-                                        ownsHandle: false
-                                    )
+                .Invoke(() =>
+                {
+                    using var pipe = new AnonymousPipeServerStream();
+                    SocketException se = Assert.Throws<SocketException>(
+                        () =>
+                            new Socket(
+                                new SafeSocketHandle(
+                                    pipe.ClientSafePipeHandle.DangerousGetHandle(),
+                                    ownsHandle: false
                                 )
-                        );
-                        Assert.Equal(SocketError.NotSocket, se.SocketErrorCode);
-                    }
-                )
+                            )
+                    );
+                    Assert.Equal(SocketError.NotSocket, se.SocketErrorCode);
+                })
                 .Dispose();
     }
 }

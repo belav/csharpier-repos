@@ -251,12 +251,10 @@ namespace System.Text.Encodings.Web.Tests
         {
             // Arrange
             HtmlEncoder encoder = HtmlEncoder.Default;
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    encoder.Encode(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                encoder.Encode(null);
+            });
         }
 
         [Fact]

@@ -209,12 +209,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Tests
         {
             var listenOptions = new ListenOptions(new IPEndPoint(IPAddress.Loopback, 0));
             var serviceContext = new TestServiceContext();
-            var testApplication = new DummyApplication(
-                context =>
-                {
-                    return context.Response.WriteAsync("Hello World");
-                }
-            );
+            var testApplication = new DummyApplication(context =>
+            {
+                return context.Response.WriteAsync("Hello World");
+            });
 
             listenOptions.UseHttpServer(serviceContext, testApplication, Core.HttpProtocols.Http1);
 

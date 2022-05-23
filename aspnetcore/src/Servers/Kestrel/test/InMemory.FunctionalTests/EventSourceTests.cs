@@ -333,16 +333,14 @@ public class EventSourceTests : LoggedTest
                 new TestServiceContext(LoggerFactory),
                 listenOptions =>
                 {
-                    listenOptions.Use(
-                        next =>
+                    listenOptions.Use(next =>
+                    {
+                        return connectionContext =>
                         {
-                            return connectionContext =>
-                            {
-                                connectionId = connectionContext.ConnectionId;
-                                return next(connectionContext);
-                            };
-                        }
-                    );
+                            connectionId = connectionContext.ConnectionId;
+                            return next(connectionContext);
+                        };
+                    });
 
                     listenOptions.UseHttps(_x509Certificate2);
                 }
@@ -446,27 +444,23 @@ public class EventSourceTests : LoggedTest
                 serviceContext,
                 listenOptions =>
                 {
-                    listenOptions.Use(
-                        next =>
+                    listenOptions.Use(next =>
+                    {
+                        return connectionContext =>
                         {
-                            return connectionContext =>
-                            {
-                                connectionId = connectionContext.ConnectionId;
-                                return next(connectionContext);
-                            };
-                        }
-                    );
+                            connectionId = connectionContext.ConnectionId;
+                            return next(connectionContext);
+                        };
+                    });
 
-                    listenOptions.Use(
-                        next =>
-                        {
-                            return new ConnectionLimitMiddleware<ConnectionContext>(
-                                c => next(c),
-                                connectionLimit: 0,
-                                serviceContext.Log
-                            ).OnConnectionAsync;
-                        }
-                    );
+                    listenOptions.Use(next =>
+                    {
+                        return new ConnectionLimitMiddleware<ConnectionContext>(
+                            c => next(c),
+                            connectionLimit: 0,
+                            serviceContext.Log
+                        ).OnConnectionAsync;
+                    });
                 }
             )
         )

@@ -88,17 +88,11 @@ namespace AutoMapper.IntegrationTests.Net4
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Sem, SemDto>()
-                        .MaxDepth(1)
-                        .ConstructUsing(s => new SemDto());
-                    cfg.CreateProjection<Art, ArtDto>()
-                        .MaxDepth(1)
-                        .ConstructUsing(s => new ArtDto());
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Sem, SemDto>().MaxDepth(1).ConstructUsing(s => new SemDto());
+                cfg.CreateProjection<Art, ArtDto>().MaxDepth(1).ConstructUsing(s => new ArtDto());
+            });
 
         protected override void Because_of()
         {

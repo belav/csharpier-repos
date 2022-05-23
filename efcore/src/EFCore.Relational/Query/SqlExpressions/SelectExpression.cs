@@ -704,15 +704,13 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                                                 New(
                                                     typeof(InvalidOperationException)
                                                         .GetConstructors()
-                                                        .Single(
-                                                            ci =>
-                                                            {
-                                                                var parameters = ci.GetParameters();
-                                                                return parameters.Length == 1
-                                                                    && parameters[0].ParameterType
-                                                                        == typeof(string);
-                                                            }
-                                                        ),
+                                                        .Single(ci =>
+                                                        {
+                                                            var parameters = ci.GetParameters();
+                                                            return parameters.Length == 1
+                                                                && parameters[0].ParameterType
+                                                                    == typeof(string);
+                                                        }),
                                                     Constant(CoreStrings.SequenceContainsNoElements)
                                                 )
                                             ),
@@ -2405,13 +2403,11 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions
                     )
                     {
                         // Fetch the table for the type which is defining the navigation since dependent would be in that table
-                        tableExpressionBase = selectExpression.Tables.First(
-                            e =>
-                            {
-                                var t = (TableExpression)UnwrapJoinExpression(e);
-                                return t.Name == table.Name && t.Schema == table.Schema;
-                            }
-                        );
+                        tableExpressionBase = selectExpression.Tables.First(e =>
+                        {
+                            var t = (TableExpression)UnwrapJoinExpression(e);
+                            return t.Name == table.Name && t.Schema == table.Schema;
+                        });
                     }
 
                     var propertyExpressions = new Dictionary<IProperty, ColumnExpression>();

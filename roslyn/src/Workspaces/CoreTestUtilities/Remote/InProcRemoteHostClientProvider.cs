@@ -58,21 +58,19 @@ namespace Microsoft.CodeAnalysis.Remote.Testing
                 Type[]? additionalRemoteParts
             ) : base(assetStorage)
             {
-                LazyWorkspace = new Lazy<RemoteWorkspace>(
-                    () =>
-                    {
-                        var hostServices = FeaturesTestCompositions.RemoteHost
-                            .AddParts(additionalRemoteParts)
-                            .GetHostServices();
+                LazyWorkspace = new Lazy<RemoteWorkspace>(() =>
+                {
+                    var hostServices = FeaturesTestCompositions.RemoteHost
+                        .AddParts(additionalRemoteParts)
+                        .GetHostServices();
 
-                        // We want to allow references to source generators to be shared between the "in proc" and "remote" workspaces and
-                        // MEF compositions, so tell the serializer service to use the same map for this "remote" workspace as the in-proc one.
-                        ((IMefHostExportProvider)hostServices)
-                            .GetExportedValue<TestSerializerService.Factory>()
-                            .SharedTestGeneratorReferences = sharedTestGeneratorReferences;
-                        return new RemoteWorkspace(hostServices, WorkspaceKind.RemoteWorkspace);
-                    }
-                );
+                    // We want to allow references to source generators to be shared between the "in proc" and "remote" workspaces and
+                    // MEF compositions, so tell the serializer service to use the same map for this "remote" workspace as the in-proc one.
+                    ((IMefHostExportProvider)hostServices)
+                        .GetExportedValue<TestSerializerService.Factory>()
+                        .SharedTestGeneratorReferences = sharedTestGeneratorReferences;
+                    return new RemoteWorkspace(hostServices, WorkspaceKind.RemoteWorkspace);
+                });
             }
 
             public Lazy<RemoteWorkspace> LazyWorkspace { get; }

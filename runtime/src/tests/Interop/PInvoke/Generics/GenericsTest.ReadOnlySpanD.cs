@@ -45,12 +45,10 @@ unsafe partial class GenericsTest
             () => GenericsNative.AddReadOnlySpanD(default, default)
         );
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
-            {
-                ReadOnlySpan<double> value = default;
-                GenericsNative.AddReadOnlySpanDs(in value, 1);
-            }
-        );
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            ReadOnlySpan<double> value = default;
+            GenericsNative.AddReadOnlySpanDs(in value, 1);
+        });
     }
 }

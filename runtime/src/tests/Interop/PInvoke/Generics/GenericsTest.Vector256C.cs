@@ -284,15 +284,13 @@ unsafe partial class GenericsTest
             default,
         };
 
-        Assert.Throws<MarshalDirectiveException>(
-            () =>
+        Assert.Throws<MarshalDirectiveException>(() =>
+        {
+            fixed (Vector256<char>* pValues = &values[0])
             {
-                fixed (Vector256<char>* pValues = &values[0])
-                {
-                    GenericsNative.AddVector256Cs(pValues, values.Length);
-                }
+                GenericsNative.AddVector256Cs(pValues, values.Length);
             }
-        );
+        });
 
         Assert.Throws<MarshalDirectiveException>(
             () => GenericsNative.AddVector256Cs(values, values.Length)

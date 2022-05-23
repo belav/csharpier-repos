@@ -3043,17 +3043,15 @@ public class C { public static FrameworkName Goo() { return null; }}";
                 new[] { MscorlibRef },
                 compilationOptions
             );
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    CSharpCompilation.Create(
-                        assemblyName,
-                        new[] { tree1, tree3 },
-                        new[] { MscorlibRef },
-                        compilationOptions
-                    );
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                CSharpCompilation.Create(
+                    assemblyName,
+                    new[] { tree1, tree3 },
+                    new[] { MscorlibRef },
+                    compilationOptions
+                );
+            });
         }
 
         [Fact]
@@ -3708,14 +3706,12 @@ public class C { public static FrameworkName Goo() { return null; }}";
         {
             return type.GetMembers()
                 .OfType<IPropertySymbol>()
-                .SelectAsArray(
-                    p =>
-                    {
-                        var result = p.Type.NullableAnnotation;
-                        Assert.Equal(result, p.NullableAnnotation);
-                        return result;
-                    }
-                );
+                .SelectAsArray(p =>
+                {
+                    var result = p.Type.NullableAnnotation;
+                    Assert.Equal(result, p.NullableAnnotation);
+                    return result;
+                });
         }
 
         [Fact]

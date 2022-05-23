@@ -114,18 +114,16 @@ namespace Microsoft.CodeAnalysis.CodeFixes
                 .GetDocumentDiagnosticsToFixAsync()
                 .ConfigureAwait(false);
 
-            var filtered = documentToDiagnostics.Where(
-                kvp =>
-                {
-                    if (kvp.Key.Project != fixAllContext.Project)
-                        return false;
+            var filtered = documentToDiagnostics.Where(kvp =>
+            {
+                if (kvp.Key.Project != fixAllContext.Project)
+                    return false;
 
-                    if (fixAllContext.Document != null && fixAllContext.Document != kvp.Key)
-                        return false;
+                if (fixAllContext.Document != null && fixAllContext.Document != kvp.Key)
+                    return false;
 
-                    return true;
-                }
-            );
+                return true;
+            });
 
             return filtered.ToImmutableDictionary();
         }

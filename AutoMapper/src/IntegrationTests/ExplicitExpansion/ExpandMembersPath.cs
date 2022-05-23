@@ -13,57 +13,46 @@ namespace AutoMapper.IntegrationTests.Net4
     public class ExpandMembersPath : AutoMapperSpecBase
     {
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    var mappingClass1 = cfg.CreateProjection<Class1, Class1DTO>();
-                    mappingClass1.ForMember(dest => dest.IdDTO, opt => opt.MapFrom(src => src.Id));
-                    mappingClass1.ForMember(
-                        dest => dest.NameDTO,
-                        opt => opt.MapFrom(src => src.Name)
-                    );
-                    mappingClass1.ForMember(
-                        dest => dest.Class2DTO,
-                        opt =>
-                        {
-                            opt.MapFrom(src => src.Class2);
-                            opt.ExplicitExpansion();
-                        }
-                    );
+            new MapperConfiguration(cfg =>
+            {
+                var mappingClass1 = cfg.CreateProjection<Class1, Class1DTO>();
+                mappingClass1.ForMember(dest => dest.IdDTO, opt => opt.MapFrom(src => src.Id));
+                mappingClass1.ForMember(dest => dest.NameDTO, opt => opt.MapFrom(src => src.Name));
+                mappingClass1.ForMember(
+                    dest => dest.Class2DTO,
+                    opt =>
+                    {
+                        opt.MapFrom(src => src.Class2);
+                        opt.ExplicitExpansion();
+                    }
+                );
 
-                    var mappingClass2 = cfg.CreateProjection<Class2, Class2DTO>();
-                    mappingClass2.ForMember(dest => dest.IdDTO, opt => opt.MapFrom(src => src.Id));
-                    mappingClass2.ForMember(
-                        dest => dest.NameDTO,
-                        opt => opt.MapFrom(src => src.Name)
-                    );
-                    mappingClass2.ForMember(
-                        dest => dest.Class3DTO,
-                        opt =>
-                        {
-                            opt.MapFrom(src => src.Class3);
-                            opt.ExplicitExpansion();
-                        }
-                    );
+                var mappingClass2 = cfg.CreateProjection<Class2, Class2DTO>();
+                mappingClass2.ForMember(dest => dest.IdDTO, opt => opt.MapFrom(src => src.Id));
+                mappingClass2.ForMember(dest => dest.NameDTO, opt => opt.MapFrom(src => src.Name));
+                mappingClass2.ForMember(
+                    dest => dest.Class3DTO,
+                    opt =>
+                    {
+                        opt.MapFrom(src => src.Class3);
+                        opt.ExplicitExpansion();
+                    }
+                );
 
-                    var mappingClass3 = cfg.CreateProjection<Class3, Class3DTO>();
-                    mappingClass3.ForMember(dest => dest.IdDTO, opt => opt.MapFrom(src => src.Id));
-                    mappingClass3.ForMember(
-                        dest => dest.NameDTO,
-                        opt => opt.MapFrom(src => src.Name)
-                    );
+                var mappingClass3 = cfg.CreateProjection<Class3, Class3DTO>();
+                mappingClass3.ForMember(dest => dest.IdDTO, opt => opt.MapFrom(src => src.Id));
+                mappingClass3.ForMember(dest => dest.NameDTO, opt => opt.MapFrom(src => src.Name));
 
-                    //This is the trouble mapping
-                    mappingClass3.ForMember(
-                        dest => dest.Class2DTO,
-                        opt =>
-                        {
-                            opt.MapFrom(src => src.Class2);
-                            opt.ExplicitExpansion();
-                        }
-                    );
-                }
-            );
+                //This is the trouble mapping
+                mappingClass3.ForMember(
+                    dest => dest.Class2DTO,
+                    opt =>
+                    {
+                        opt.MapFrom(src => src.Class2);
+                        opt.ExplicitExpansion();
+                    }
+                );
+            });
 
         [Fact]
         public void Should_expand_all_members_in_path()

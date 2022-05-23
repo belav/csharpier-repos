@@ -1877,33 +1877,27 @@ namespace System.Reflection.Emit.Tests
             DynamicILInfo dynamicILInfo = method.GetDynamicILInfo();
             var bytes = new byte[] { 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02, 0x02 };
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* bytesPtr = bytes)
                 {
-                    fixed (byte* bytesPtr = bytes)
-                    {
-                        dynamicILInfo.SetCode(bytesPtr, -1, 8);
-                    }
+                    dynamicILInfo.SetCode(bytesPtr, -1, 8);
                 }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* bytesPtr = bytes)
                 {
-                    fixed (byte* bytesPtr = bytes)
-                    {
-                        dynamicILInfo.SetExceptions(bytesPtr, -1);
-                    }
+                    dynamicILInfo.SetExceptions(bytesPtr, -1);
                 }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* bytesPtr = bytes)
                 {
-                    fixed (byte* bytesPtr = bytes)
-                    {
-                        dynamicILInfo.SetLocalSignature(bytesPtr, -1);
-                    }
+                    dynamicILInfo.SetLocalSignature(bytesPtr, -1);
                 }
-            );
+            });
         }
 
         [Theory]

@@ -38,36 +38,33 @@ public static class HttpClientSlim
     )]
     public static async Task<string> GetStringAsync(Uri requestUri, bool validateCertificate = true)
     {
-        return await RetryRequest(
-            async () =>
+        return await RetryRequest(async () =>
+        {
+            using (
+                var stream = await GetStream(requestUri, validateCertificate).ConfigureAwait(false)
+            )
             {
                 using (
-                    var stream = await GetStream(requestUri, validateCertificate)
-                        .ConfigureAwait(false)
+                    var writer = new StreamWriter(
+                        stream,
+                        Encoding.ASCII,
+                        bufferSize: 1024,
+                        leaveOpen: true
+                    )
                 )
                 {
-                    using (
-                        var writer = new StreamWriter(
-                            stream,
-                            Encoding.ASCII,
-                            bufferSize: 1024,
-                            leaveOpen: true
-                        )
-                    )
-                    {
-                        await writer
-                            .WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n")
-                            .ConfigureAwait(false);
-                        await writer
-                            .WriteAsync($"Host: {GetHost(requestUri)}\r\n")
-                            .ConfigureAwait(false);
-                        await writer.WriteAsync("\r\n").ConfigureAwait(false);
-                    }
-
-                    return await ReadResponse(stream).ConfigureAwait(false);
+                    await writer
+                        .WriteAsync($"GET {requestUri.PathAndQuery} HTTP/1.0\r\n")
+                        .ConfigureAwait(false);
+                    await writer
+                        .WriteAsync($"Host: {GetHost(requestUri)}\r\n")
+                        .ConfigureAwait(false);
+                    await writer.WriteAsync("\r\n").ConfigureAwait(false);
                 }
+
+                return await ReadResponse(stream).ConfigureAwait(false);
             }
-        );
+        });
     }
 
     internal static string GetHost(Uri requestUri)
@@ -112,41 +109,39 @@ public static class HttpClientSlim
         bool validateCertificate = true
     )
     {
-        return await RetryRequest(
-            async () =>
+        return await RetryRequest(async () =>
+        {
+            using (var stream = await GetStream(requestUri, validateCertificate))
             {
-                using (var stream = await GetStream(requestUri, validateCertificate))
-                {
-                    using (
-                        var writer = new StreamWriter(
-                            stream,
-                            Encoding.ASCII,
-                            bufferSize: 1024,
-                            leaveOpen: true
-                        )
+                using (
+                    var writer = new StreamWriter(
+                        stream,
+                        Encoding.ASCII,
+                        bufferSize: 1024,
+                        leaveOpen: true
                     )
-                    {
-                        await writer
-                            .WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n")
-                            .ConfigureAwait(false);
-                        await writer
-                            .WriteAsync($"Host: {requestUri.Authority}\r\n")
-                            .ConfigureAwait(false);
-                        await writer
-                            .WriteAsync($"Content-Type: {content.Headers.ContentType}\r\n")
-                            .ConfigureAwait(false);
-                        await writer
-                            .WriteAsync($"Content-Length: {content.Headers.ContentLength}\r\n")
-                            .ConfigureAwait(false);
-                        await writer.WriteAsync("\r\n").ConfigureAwait(false);
-                    }
-
-                    await content.CopyToAsync(stream).ConfigureAwait(false);
-
-                    return await ReadResponse(stream).ConfigureAwait(false);
+                )
+                {
+                    await writer
+                        .WriteAsync($"POST {requestUri.PathAndQuery} HTTP/1.0\r\n")
+                        .ConfigureAwait(false);
+                    await writer
+                        .WriteAsync($"Host: {requestUri.Authority}\r\n")
+                        .ConfigureAwait(false);
+                    await writer
+                        .WriteAsync($"Content-Type: {content.Headers.ContentType}\r\n")
+                        .ConfigureAwait(false);
+                    await writer
+                        .WriteAsync($"Content-Length: {content.Headers.ContentLength}\r\n")
+                        .ConfigureAwait(false);
+                    await writer.WriteAsync("\r\n").ConfigureAwait(false);
                 }
+
+                await content.CopyToAsync(stream).ConfigureAwait(false);
+
+                return await ReadResponse(stream).ConfigureAwait(false);
             }
-        );
+        });
     }
 
     private static async Task<string> ReadResponse(Stream stream)

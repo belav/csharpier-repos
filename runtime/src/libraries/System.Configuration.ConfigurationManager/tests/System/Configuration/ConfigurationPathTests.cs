@@ -102,16 +102,11 @@ namespace System.ConfigurationTests
         public void NoErrorWhenCustomAppConfigIsSpecifiedAndItDoesNotExist()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppDomain.CurrentDomain.SetData(
-                            "APP_CONFIG_FILE",
-                            "non-existing-file.config"
-                        );
-                        Assert.Null(ConfigurationManager.AppSettings["AnySetting"]);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppDomain.CurrentDomain.SetData("APP_CONFIG_FILE", "non-existing-file.config");
+                    Assert.Null(ConfigurationManager.AppSettings["AnySetting"]);
+                })
                 .Dispose();
         }
 

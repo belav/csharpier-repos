@@ -568,18 +568,16 @@ public class ActionSelectionTableTest
         IReadOnlyList<ActionDescriptor> actions
     )
     {
-        var endpoints = actions.Select(
-            a =>
-            {
-                var metadata = new List<object>(a.EndpointMetadata ?? Array.Empty<object>());
-                metadata.Add(a);
-                return new Endpoint(
-                    requestDelegate: context => Task.CompletedTask,
-                    metadata: new EndpointMetadataCollection(metadata),
-                    displayName: a.DisplayName
-                );
-            }
-        );
+        var endpoints = actions.Select(a =>
+        {
+            var metadata = new List<object>(a.EndpointMetadata ?? Array.Empty<object>());
+            metadata.Add(a);
+            return new Endpoint(
+                requestDelegate: context => Task.CompletedTask,
+                metadata: new EndpointMetadataCollection(metadata),
+                displayName: a.DisplayName
+            );
+        });
 
         return ActionSelectionTable<ActionDescriptor>.Create(endpoints);
     }

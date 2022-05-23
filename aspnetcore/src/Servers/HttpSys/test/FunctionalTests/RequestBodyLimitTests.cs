@@ -250,23 +250,19 @@ public class RequestBodyLimitTests
                     Assert.False(feature.IsReadOnly);
                     Assert.Equal(11, httpContext.Request.ContentLength);
                     byte[] input = new byte[100];
-                    var ex = Assert.Throws<BadHttpRequestException>(
-                        () =>
-                        {
-                            var t = httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                        }
-                    );
+                    var ex = Assert.Throws<BadHttpRequestException>(() =>
+                    {
+                        var t = httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                    });
                     Assert.Equal(
                         "The request's Content-Length 11 is larger than the request body size limit 10.",
                         ex.Message
                     );
                     Assert.Equal(StatusCodes.Status413PayloadTooLarge, ex.StatusCode);
-                    ex = Assert.Throws<BadHttpRequestException>(
-                        () =>
-                        {
-                            var t = httpContext.Request.Body.ReadAsync(input, 0, input.Length);
-                        }
-                    );
+                    ex = Assert.Throws<BadHttpRequestException>(() =>
+                    {
+                        var t = httpContext.Request.Body.ReadAsync(input, 0, input.Length);
+                    });
                     Assert.Equal(
                         "The request's Content-Length 11 is larger than the request body size limit 10.",
                         ex.Message

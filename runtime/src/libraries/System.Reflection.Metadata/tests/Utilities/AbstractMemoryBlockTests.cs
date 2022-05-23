@@ -257,31 +257,29 @@ namespace System.Reflection.Internal.Tests
                 pinnedObjects[i] = new PinnedObject(new byte[4]);
             }
 
-            var worker = new ThreadStart(
-                () =>
+            var worker = new ThreadStart(() =>
+            {
+                for (int k = 0; k < 2; k++)
                 {
-                    for (int k = 0; k < 2; k++)
+                    for (int i = 0; i < nativeBlocks.Length; i++)
                     {
-                        for (int i = 0; i < nativeBlocks.Length; i++)
-                        {
-                            nativeBlocks[i].Dispose();
-                            Thread.Yield();
-                        }
+                        nativeBlocks[i].Dispose();
+                        Thread.Yield();
+                    }
 
-                        for (int i = 0; i < memoryMappedBlocks.Length; i++)
-                        {
-                            memoryMappedBlocks[i].Dispose();
-                            Thread.Yield();
-                        }
+                    for (int i = 0; i < memoryMappedBlocks.Length; i++)
+                    {
+                        memoryMappedBlocks[i].Dispose();
+                        Thread.Yield();
+                    }
 
-                        for (int i = 0; i < pinnedObjects.Length; i++)
-                        {
-                            pinnedObjects[i].Dispose();
-                            Thread.Yield();
-                        }
+                    for (int i = 0; i < pinnedObjects.Length; i++)
+                    {
+                        pinnedObjects[i].Dispose();
+                        Thread.Yield();
                     }
                 }
-            );
+            });
 
             var t1 = new Thread(worker);
             var t2 = new Thread(worker);

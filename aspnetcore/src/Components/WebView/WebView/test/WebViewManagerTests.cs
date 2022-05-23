@@ -171,14 +171,12 @@ public class WebViewManagerTests
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            _handle.Render(
-                builder =>
-                {
-                    builder.OpenElement(0, "p");
-                    builder.AddContent(1, "Hello world!");
-                    builder.CloseElement();
-                }
-            );
+            _handle.Render(builder =>
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, "Hello world!");
+                builder.CloseElement();
+            });
 
             return Task.CompletedTask;
         }
@@ -198,14 +196,12 @@ public class WebViewManagerTests
 
         public Task SetParametersAsync(ParameterView parameters)
         {
-            _handle.Render(
-                builder =>
-                {
-                    builder.OpenElement(0, "p");
-                    builder.AddContent(1, "Hello world!");
-                    builder.CloseElement();
-                }
-            );
+            _handle.Render(builder =>
+            {
+                builder.OpenElement(0, "p");
+                builder.AddContent(1, "Hello world!");
+                builder.CloseElement();
+            });
 
             return Task.CompletedTask;
         }

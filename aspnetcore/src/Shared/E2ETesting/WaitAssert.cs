@@ -138,21 +138,19 @@ public static class WaitAssert
         TResult result = default;
         try
         {
-            new WebDriverWait(driver, timeout).Until(
-                _ =>
+            new WebDriverWait(driver, timeout).Until(_ =>
+            {
+                try
                 {
-                    try
-                    {
-                        result = assertion();
-                        return true;
-                    }
-                    catch (Exception e)
-                    {
-                        lastException = e;
-                        return false;
-                    }
+                    result = assertion();
+                    return true;
                 }
-            );
+                catch (Exception e)
+                {
+                    lastException = e;
+                    return false;
+                }
+            });
         }
         catch (WebDriverTimeoutException)
         {

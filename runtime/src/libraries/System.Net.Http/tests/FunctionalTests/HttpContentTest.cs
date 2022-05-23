@@ -72,12 +72,10 @@ namespace System.Net.Http.Functional.Tests
             );
 
             var m = new MemoryStream();
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    content.CopyToAsync(m);
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                content.CopyToAsync(m);
+            });
         }
 
         [Fact]
@@ -115,12 +113,10 @@ namespace System.Net.Http.Functional.Tests
 
             // The HttpContent derived class (MockContent in our case) must return a Task object when WriteToAsync()
             // is called. If not, HttpContent will throw.
-            Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    content.CopyToAsync(m);
-                }
-            );
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                content.CopyToAsync(m);
+            });
         }
 
         [Fact]
@@ -495,12 +491,10 @@ namespace System.Net.Http.Functional.Tests
                 MockOptions.ThrowInAsyncSerializeMethods
             );
 
-            Assert.Throws<MockException>(
-                () =>
-                {
-                    content.LoadIntoBufferAsync();
-                }
-            );
+            Assert.Throws<MockException>(() =>
+            {
+                content.LoadIntoBufferAsync();
+            });
         }
 
         [Fact]
@@ -671,48 +665,34 @@ namespace System.Net.Http.Functional.Tests
 
             var m = new MemoryStream();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.CopyToAsync(m);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.CopyTo(m, null, default);
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsByteArrayAsync();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsStringAsync();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsStreamAsync();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.ReadAsStream();
-                }
-            );
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    content.LoadIntoBufferAsync();
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.CopyToAsync(m);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.CopyTo(m, null, default);
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsByteArrayAsync();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsStringAsync();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsStreamAsync();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.ReadAsStream();
+            });
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                content.LoadIntoBufferAsync();
+            });
 
             // Note that we don't throw when users access the Headers property. This is useful e.g. to be able to
             // read the headers of a content, even though the content is already disposed. Note that the .NET guidelines
@@ -801,23 +781,21 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.SendResponseAsync(
+                            LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
+                        );
+                        await Task.Delay(250);
+                        cts.Cancel();
+                        await Task.Delay(500);
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.SendResponseAsync(
-                                LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
-                            );
-                            await Task.Delay(250);
-                            cts.Cancel();
-                            await Task.Delay(500);
-                            try
-                            {
-                                await connection.SendResponseAsync(new string('a', 100));
-                            }
-                            catch { }
+                            await connection.SendResponseAsync(new string('a', 100));
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }
@@ -903,23 +881,21 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.ReadRequestHeaderAsync();
+                        await connection.SendResponseAsync(
+                            LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
+                        );
+                        await Task.Delay(250);
+                        cts.Cancel();
+                        await Task.Delay(500);
+                        try
                         {
-                            await connection.ReadRequestHeaderAsync();
-                            await connection.SendResponseAsync(
-                                LoopbackServer.GetHttpResponseHeaders(contentLength: 100)
-                            );
-                            await Task.Delay(250);
-                            cts.Cancel();
-                            await Task.Delay(500);
-                            try
-                            {
-                                await connection.SendResponseAsync(new string('a', 100));
-                            }
-                            catch { }
+                            await connection.SendResponseAsync(new string('a', 100));
                         }
-                    );
+                        catch { }
+                    });
                 }
             );
         }
@@ -1165,13 +1141,11 @@ namespace System.Net.Http.Functional.Tests
                     throw _customException;
                 }
 
-                return Task.Run(
-                    () =>
-                    {
-                        CheckThrow();
-                        return stream.WriteAsync(_mockData, 0, _mockData.Length);
-                    }
-                );
+                return Task.Run(() =>
+                {
+                    CheckThrow();
+                    return stream.WriteAsync(_mockData, 0, _mockData.Length);
+                });
             }
 
             protected override Stream CreateContentReadStream(CancellationToken cancellationToken)

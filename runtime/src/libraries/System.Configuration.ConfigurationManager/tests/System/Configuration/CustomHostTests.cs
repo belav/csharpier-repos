@@ -21,23 +21,21 @@ namespace System.Configuration.Tests
         public void FilePathIsPopulatedCorrectly()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        MakeAssemblyGetEntryAssemblyReturnNull();
+                .Invoke(() =>
+                {
+                    MakeAssemblyGetEntryAssemblyReturnNull();
 
-                        string expectedFilePathEnding = RuntimeInformation.IsOSPlatform(
-                            OSPlatform.Windows
-                        )
-                            ? "dotnet.exe.config"
-                            : "dotnet.config";
+                    string expectedFilePathEnding = RuntimeInformation.IsOSPlatform(
+                        OSPlatform.Windows
+                    )
+                        ? "dotnet.exe.config"
+                        : "dotnet.config";
 
-                        Configuration config = ConfigurationManager.OpenExeConfiguration(
-                            ConfigurationUserLevel.None
-                        );
-                        Assert.EndsWith(expectedFilePathEnding, config.FilePath);
-                    }
-                )
+                    Configuration config = ConfigurationManager.OpenExeConfiguration(
+                        ConfigurationUserLevel.None
+                    );
+                    Assert.EndsWith(expectedFilePathEnding, config.FilePath);
+                })
                 .Dispose();
         }
 

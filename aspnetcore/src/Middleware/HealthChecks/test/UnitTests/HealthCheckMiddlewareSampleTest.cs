@@ -16,12 +16,10 @@ public class HealthCheckMiddlewareSampleTest
     public async Task BasicStartup()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer().UseStartup<HealthChecksSample.BasicStartup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer().UseStartup<HealthChecksSample.BasicStartup>();
+            })
             .Build();
 
         await host.StartAsync();
@@ -39,14 +37,10 @@ public class HealthCheckMiddlewareSampleTest
     public async Task CustomWriterStartup()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .UseStartup<HealthChecksSample.CustomWriterStartup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer().UseStartup<HealthChecksSample.CustomWriterStartup>();
+            })
             .Build();
 
         await host.StartAsync();
@@ -65,14 +59,12 @@ public class HealthCheckMiddlewareSampleTest
     public async Task LivenessProbeStartup_Liveness()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .UseStartup<HealthChecksSample.LivenessProbeStartup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .UseStartup<HealthChecksSample.LivenessProbeStartup>();
+            })
             .Build();
 
         await host.StartAsync();
@@ -90,14 +82,12 @@ public class HealthCheckMiddlewareSampleTest
     public async Task LivenessProbeStartup_Readiness()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .UseStartup<HealthChecksSample.LivenessProbeStartup>();
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .UseStartup<HealthChecksSample.LivenessProbeStartup>();
+            })
             .Build();
 
         await host.StartAsync();

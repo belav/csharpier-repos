@@ -17,23 +17,19 @@ namespace System.IO.Tests
         [Fact]
         public void FileSystemWatcher_Directory_EmptyPath()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    using (var watcher = new FileSystemWatcher("")) { }
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                using (var watcher = new FileSystemWatcher("")) { }
+            });
         }
 
         [Fact]
         public void FileSystemWatcher_Directory_PathNotExists()
         {
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    using (var watcher = new FileSystemWatcher(GetTestFilePath())) { }
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                using (var watcher = new FileSystemWatcher(GetTestFilePath())) { }
+            });
         }
 
         [Fact]

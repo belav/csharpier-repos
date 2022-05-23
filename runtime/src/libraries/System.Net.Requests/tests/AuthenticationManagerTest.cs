@@ -45,16 +45,14 @@ namespace System.Net.Tests
         public void Register_Unregister_ModuleCountUnchanged()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int initialCount = GetModuleCount();
-                        IAuthenticationModule module = new CustomModule();
-                        AuthenticationManager.Register(module);
-                        AuthenticationManager.Unregister(module);
-                        Assert.Equal(initialCount, GetModuleCount());
-                    }
-                )
+                .Invoke(() =>
+                {
+                    int initialCount = GetModuleCount();
+                    IAuthenticationModule module = new CustomModule();
+                    AuthenticationManager.Register(module);
+                    AuthenticationManager.Unregister(module);
+                    Assert.Equal(initialCount, GetModuleCount());
+                })
                 .Dispose();
         }
 
@@ -62,16 +60,14 @@ namespace System.Net.Tests
         public void Register_UnregisterByScheme_ModuleCountUnchanged()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        int initialCount = GetModuleCount();
-                        IAuthenticationModule module = new CustomModule();
-                        AuthenticationManager.Register(module);
-                        AuthenticationManager.Unregister("custom");
-                        Assert.Equal(initialCount, GetModuleCount());
-                    }
-                )
+                .Invoke(() =>
+                {
+                    int initialCount = GetModuleCount();
+                    IAuthenticationModule module = new CustomModule();
+                    AuthenticationManager.Register(module);
+                    AuthenticationManager.Unregister("custom");
+                    Assert.Equal(initialCount, GetModuleCount());
+                })
                 .Dispose();
         }
 
@@ -91,17 +87,15 @@ namespace System.Net.Tests
             Assert.Null(AuthenticationManager.CredentialPolicy);
 
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        ICredentialPolicy cp = new DummyCredentialPolicy();
-                        AuthenticationManager.CredentialPolicy = cp;
-                        Assert.Same(cp, AuthenticationManager.CredentialPolicy);
+                .Invoke(() =>
+                {
+                    ICredentialPolicy cp = new DummyCredentialPolicy();
+                    AuthenticationManager.CredentialPolicy = cp;
+                    Assert.Same(cp, AuthenticationManager.CredentialPolicy);
 
-                        AuthenticationManager.CredentialPolicy = null;
-                        Assert.Null(AuthenticationManager.CredentialPolicy);
-                    }
-                )
+                    AuthenticationManager.CredentialPolicy = null;
+                    Assert.Null(AuthenticationManager.CredentialPolicy);
+                })
                 .Dispose();
         }
 
@@ -116,21 +110,19 @@ namespace System.Net.Tests
             );
 
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        string theKey = "http://www.contoso.com";
-                        string theValue = "HTTP/www.contoso.com";
-                        AuthenticationManager.CustomTargetNameDictionary.Add(theKey, theValue);
-                        Assert.Equal(
-                            theValue,
-                            AuthenticationManager.CustomTargetNameDictionary[theKey]
-                        );
+                .Invoke(() =>
+                {
+                    string theKey = "http://www.contoso.com";
+                    string theValue = "HTTP/www.contoso.com";
+                    AuthenticationManager.CustomTargetNameDictionary.Add(theKey, theValue);
+                    Assert.Equal(
+                        theValue,
+                        AuthenticationManager.CustomTargetNameDictionary[theKey]
+                    );
 
-                        AuthenticationManager.CustomTargetNameDictionary.Clear();
-                        Assert.Equal(0, AuthenticationManager.CustomTargetNameDictionary.Count);
-                    }
-                )
+                    AuthenticationManager.CustomTargetNameDictionary.Clear();
+                    Assert.Equal(0, AuthenticationManager.CustomTargetNameDictionary.Count);
+                })
                 .Dispose();
         }
 

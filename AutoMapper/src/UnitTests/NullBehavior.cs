@@ -33,15 +33,13 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.DoNotAllowNull());
-                    cfg.CreateMap<InnerSource, InnerDestination>();
-                    cfg.AllowNullDestinationValues = true;
-                    cfg.AllowNullCollections = true;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.DoNotAllowNull());
+                cfg.CreateMap<InnerSource, InnerDestination>();
+                cfg.AllowNullDestinationValues = true;
+                cfg.AllowNullCollections = true;
+            });
 
         [Fact]
         public void Should_map_to_non_null()
@@ -77,15 +75,13 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
-                    cfg.CreateMap<InnerSource, InnerDestination>();
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.AllowNullCollections = false;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
+                cfg.CreateMap<InnerSource, InnerDestination>();
+                cfg.AllowNullDestinationValues = false;
+                cfg.AllowNullCollections = false;
+            });
 
         [Fact]
         public void Should_map_to_null()
@@ -125,17 +121,15 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
-                    cfg.CreateMap<SourceDerived, DestinationDerived>()
-                        .IncludeBase<Source, Destination>();
-                    cfg.CreateMap<InnerSource, InnerDestination>();
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.AllowNullCollections = false;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
+                cfg.CreateMap<SourceDerived, DestinationDerived>()
+                    .IncludeBase<Source, Destination>();
+                cfg.CreateMap<InnerSource, InnerDestination>();
+                cfg.AllowNullDestinationValues = false;
+                cfg.AllowNullCollections = false;
+            });
 
         [Fact]
         public void Should_map_to_null()
@@ -175,18 +169,16 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
-                    cfg.CreateMap<SourceDerived, DestinationDerived>()
-                        .IncludeBase<Source, Destination>()
-                        .ForAllMembers(o => o.DoNotAllowNull());
-                    cfg.CreateMap<InnerSource, InnerDestination>();
-                    cfg.AllowNullDestinationValues = true;
-                    cfg.AllowNullCollections = true;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>().ForAllMembers(o => o.AllowNull());
+                cfg.CreateMap<SourceDerived, DestinationDerived>()
+                    .IncludeBase<Source, Destination>()
+                    .ForAllMembers(o => o.DoNotAllowNull());
+                cfg.CreateMap<InnerSource, InnerDestination>();
+                cfg.AllowNullDestinationValues = true;
+                cfg.AllowNullCollections = true;
+            });
 
         [Fact]
         public void Should_map_to_non_null()
@@ -235,13 +227,11 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                    cfg.AllowNullDestinationValues = false;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+                cfg.AllowNullDestinationValues = false;
+            });
 
         [Fact]
         public void Should_map_to_non_null() =>
@@ -332,13 +322,11 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.AllowNullCollections = true;
-                    c.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.AllowNullCollections = true;
+                c.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_map_to_null()
@@ -377,14 +365,12 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.CreateMap<ILink, LinkImpl>();
-                    cfg.CreateMap<ElementSource, ElementDestination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = false;
+                cfg.CreateMap<ILink, LinkImpl>();
+                cfg.CreateMap<ElementSource, ElementDestination>();
+            });
 
         protected override void Because_of()
         {
@@ -427,13 +413,11 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ILink, LinkImpl>().ReverseMap();
-                    cfg.CreateMap<ElementSource, ElementDestination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ILink, LinkImpl>().ReverseMap();
+                cfg.CreateMap<ElementSource, ElementDestination>();
+            });
 
         protected override void Because_of()
         {
@@ -482,14 +466,12 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.CreateMap<ModelObject, ModelDto>();
-                    cfg.CreateMap<ModelSubObject, ModelSubDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = false;
+                cfg.CreateMap<ModelObject, ModelDto>();
+                cfg.CreateMap<ModelSubObject, ModelSubDto>();
+            });
 
         protected override void Because_of()
         {
@@ -572,28 +554,23 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = true;
-                    cfg.CreateMap<ModelSubObject, ModelSubDto>();
-                    cfg.CreateMap<ModelObject, ModelDto>()
-                        .ForMember(
-                            d => d.SubExpressionName,
-                            opt =>
-                                opt.MapFrom(
-                                    src =>
-                                        src.Subs
-                                            .FirstOrDefault(spt => spt.Sub.Something == src.Id)
-                                            .Something
-                                )
-                        )
-                        .ForMember(
-                            d => d.NullableMapFrom,
-                            opt => opt.MapFrom(s => s.Sub.Something)
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = true;
+                cfg.CreateMap<ModelSubObject, ModelSubDto>();
+                cfg.CreateMap<ModelObject, ModelDto>()
+                    .ForMember(
+                        d => d.SubExpressionName,
+                        opt =>
+                            opt.MapFrom(
+                                src =>
+                                    src.Subs
+                                        .FirstOrDefault(spt => spt.Sub.Something == src.Id)
+                                        .Something
+                            )
+                    )
+                    .ForMember(d => d.NullableMapFrom, opt => opt.MapFrom(s => s.Sub.Something));
+            });
 
         protected override void Because_of()
         {
@@ -677,38 +654,34 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = false;
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = false;
 
-                    cfg.CreateProfile(
-                        "Foo",
-                        p =>
-                        {
-                            p.AllowNullDestinationValues = true;
-                            p.CreateMap<ModelSubObject, ModelSubDto>();
-                            p.CreateMap<ModelObject, ModelDto>()
-                                .ForMember(
-                                    d => d.SubExpressionName,
-                                    opt =>
-                                        opt.MapFrom(
-                                            src =>
-                                                src.Subs
-                                                    .FirstOrDefault(
-                                                        spt => spt.Sub.Something == src.Id
-                                                    )
-                                                    .Something
-                                        )
-                                )
-                                .ForMember(
-                                    d => d.NullableMapFrom,
-                                    opt => opt.MapFrom(s => s.Sub.Something)
-                                );
-                        }
-                    );
-                }
-            );
+                cfg.CreateProfile(
+                    "Foo",
+                    p =>
+                    {
+                        p.AllowNullDestinationValues = true;
+                        p.CreateMap<ModelSubObject, ModelSubDto>();
+                        p.CreateMap<ModelObject, ModelDto>()
+                            .ForMember(
+                                d => d.SubExpressionName,
+                                opt =>
+                                    opt.MapFrom(
+                                        src =>
+                                            src.Subs
+                                                .FirstOrDefault(spt => spt.Sub.Something == src.Id)
+                                                .Something
+                                    )
+                            )
+                            .ForMember(
+                                d => d.NullableMapFrom,
+                                opt => opt.MapFrom(s => s.Sub.Something)
+                            );
+                    }
+                );
+            });
 
         protected override void Because_of()
         {
@@ -776,20 +749,18 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProfile(
-                        "MapsNulls",
-                        p =>
-                        {
-                            p.AllowNullDestinationValues = false;
-                            p.CreateMap<NullSource, NullDestination>();
-                        }
-                    );
-                    cfg.CreateMap<DefaultSource, DefaultDestination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProfile(
+                    "MapsNulls",
+                    p =>
+                    {
+                        p.AllowNullDestinationValues = false;
+                        p.CreateMap<NullSource, NullDestination>();
+                    }
+                );
+                cfg.CreateMap<DefaultSource, DefaultDestination>();
+            });
 
         protected override void Because_of()
         {
@@ -842,17 +813,15 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>()
-                        .ForMember(
-                            dest => dest.Name,
-                            opt => opt.MapFrom<NullResolver, string>(src => src.MyName)
-                        );
-                    _source = new Source();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForMember(
+                        dest => dest.Name,
+                        opt => opt.MapFrom<NullResolver, string>(src => src.MyName)
+                    );
+                _source = new Source();
+            });
 
         protected override void Because_of()
         {
@@ -886,17 +855,12 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AllowNullDestinationValues = false;
-                    cfg.CreateMap<Source, Dest>()
-                        .ForMember(
-                            dest => dest.OtherValue,
-                            opt => opt.MapFrom(src => src.Sub.Value)
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AllowNullDestinationValues = false;
+                cfg.CreateMap<Source, Dest>()
+                    .ForMember(dest => dest.OtherValue, opt => opt.MapFrom(src => src.Sub.Value));
+            });
 
         protected override void Because_of()
         {
@@ -941,13 +905,11 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<bool?, string>().ConvertUsing<NullableBoolToLabel>();
-                    cfg.CreateMap<Foo, FooViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<bool?, string>().ConvertUsing<NullableBoolToLabel>();
+                cfg.CreateMap<Foo, FooViewModel>();
+            });
 
         protected override void Because_of()
         {
@@ -987,13 +949,11 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Dest>();
-                    cfg.AllowNullCollections = true;
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+                cfg.AllowNullCollections = true;
+            });
 
         protected override void Because_of()
         {
@@ -1065,19 +1025,17 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProfile(
-                        "MyProfile",
-                        p =>
-                        {
-                            p.CreateMap<Source, Dest>().ForAllMembers(o => o.MapAtRuntime());
-                            p.AllowNullCollections = true;
-                        }
-                    );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProfile(
+                    "MyProfile",
+                    p =>
+                    {
+                        p.CreateMap<Source, Dest>().ForAllMembers(o => o.MapAtRuntime());
+                        p.AllowNullCollections = true;
+                    }
+                );
+            });
 
         protected override void Because_of()
         {
@@ -1154,19 +1112,17 @@ namespace AutoMapper.UnitTests.NullBehavior
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProfile(
-                        "MyProfile",
-                        p =>
-                        {
-                            p.CreateMap<Source, Dest>();
-                            p.AllowNullCollections = true;
-                        }
-                    );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProfile(
+                    "MyProfile",
+                    p =>
+                    {
+                        p.CreateMap<Source, Dest>();
+                        p.AllowNullCollections = true;
+                    }
+                );
+            });
 
         protected override void Because_of()
         {
@@ -1223,12 +1179,10 @@ namespace AutoMapper.UnitTests.NullBehavior
         public class ModelObject { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<ModelObject, ModelDto>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<ModelObject, ModelDto>();
+            });
 
         [Fact]
         public void Should_populate_dto_items_with_a_value()

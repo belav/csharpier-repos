@@ -54,12 +54,10 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>();
+            });
 
         [Fact]
         public void Can_map_with_projection()
@@ -119,12 +117,10 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>();
+            });
 
         [Fact]
         public void Can_map_with_projection()

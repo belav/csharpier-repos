@@ -76,15 +76,13 @@ namespace System.Drawing.Tests
         public void UnixSupportDisabledThrows()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
-                    {
-                        AppContext.SetSwitch("System.Drawing.EnableUnixSupport", false);
-                        TypeInitializationException exception =
-                            Assert.Throws<TypeInitializationException>(() => new Bitmap(100, 100));
-                        Assert.IsType<PlatformNotSupportedException>(exception.InnerException);
-                    }
-                )
+                .Invoke(() =>
+                {
+                    AppContext.SetSwitch("System.Drawing.EnableUnixSupport", false);
+                    TypeInitializationException exception =
+                        Assert.Throws<TypeInitializationException>(() => new Bitmap(100, 100));
+                    Assert.IsType<PlatformNotSupportedException>(exception.InnerException);
+                })
                 .Dispose();
         }
 

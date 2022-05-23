@@ -187,12 +187,10 @@ namespace System.Composition.Hosting.Core
 
             _instancesUndergoingInitialization.Add(sharingId, result);
 
-            operation.AddPostCompositionAction(
-                () =>
-                {
-                    _sharedPartInstances.Add(sharingId, result);
-                }
-            );
+            operation.AddPostCompositionAction(() =>
+            {
+                _sharedPartInstances.Add(sharingId, result);
+            });
 
             return result;
         }

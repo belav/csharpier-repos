@@ -282,14 +282,12 @@ namespace System.ComponentModel.Composition
         [ActiveIssue("https://github.com/dotnet/runtime/issues/24240")]
         public void AddAssembly1_TooLongPathNameArgument_ShouldThrowPathTooLongException()
         {
-            Assert.Throws<PathTooLongException>(
-                () =>
-                {
-                    var c1 = new DirectoryCatalog(
-                        @"c:\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\myassembly.dll"
-                    );
-                }
-            );
+            Assert.Throws<PathTooLongException>(() =>
+            {
+                var c1 = new DirectoryCatalog(
+                    @"c:\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\This is a very long path\And Just to make sure\We will continue to make it very long\myassembly.dll"
+                );
+            });
         }
 
         [Fact]
@@ -632,14 +630,10 @@ namespace System.ComponentModel.Composition
         [Fact]
         public void AddDirectoryNotFoundException()
         {
-            Assert.Throws<DirectoryNotFoundException>(
-                () =>
-                {
-                    var cat = new DirectoryCatalog(
-                        "Directory That Should Never Exist tadfasdfasdfsdf"
-                    );
-                }
-            );
+            Assert.Throws<DirectoryNotFoundException>(() =>
+            {
+                var cat = new DirectoryCatalog("Directory That Should Never Exist tadfasdfasdfsdf");
+            });
         }
 
         [Fact]

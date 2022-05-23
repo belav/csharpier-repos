@@ -230,12 +230,10 @@ namespace System.Linq.Tests
                 (e, i) => Enumerable.Empty<int>()
             );
             using (var en = selected.GetEnumerator())
-                Assert.Throws<OverflowException>(
-                    () =>
-                    {
-                        while (en.MoveNext()) { }
-                    }
-                );
+                Assert.Throws<OverflowException>(() =>
+                {
+                    while (en.MoveNext()) { }
+                });
         }
 
         [Fact]
@@ -575,13 +573,11 @@ namespace System.Linq.Tests
             int[] timesCalledMap = new int[count];
 
             IEnumerable<int> source = Enumerable.Range(0, 10);
-            IEnumerable<int> iterator = source.SelectMany(
-                index =>
-                {
-                    timesCalledMap[index]++;
-                    return new[] { index };
-                }
-            );
+            IEnumerable<int> iterator = source.SelectMany(index =>
+            {
+                timesCalledMap[index]++;
+                return new[] { index };
+            });
 
             // Iteration
             foreach (int index in iterator)

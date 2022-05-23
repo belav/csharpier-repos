@@ -33,13 +33,11 @@ namespace AutoMapper.UnitTests
             [Fact]
             public void Should_call_the_validator()
             {
-                var config = new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.Internal().Validator(Validator);
-                        cfg.CreateMap<Source, Dest>();
-                    }
-                );
+                var config = new MapperConfiguration(cfg =>
+                {
+                    cfg.Internal().Validator(Validator);
+                    cfg.CreateMap<Source, Dest>();
+                });
 
                 config.AssertConfigurationIsValid();
 
@@ -86,17 +84,15 @@ namespace AutoMapper.UnitTests
             private static bool? _validated;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        Func<Source, Destination, Destination> mappingFunction = (
-                            source,
-                            destination
-                        ) => new Destination();
-                        cfg.CreateMap<Source, Destination>().ConvertUsing(mappingFunction);
-                        cfg.Internal().Validator(SetValidated);
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    Func<Source, Destination, Destination> mappingFunction = (
+                        source,
+                        destination
+                    ) => new Destination();
+                    cfg.CreateMap<Source, Destination>().ConvertUsing(mappingFunction);
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {
@@ -127,13 +123,11 @@ namespace AutoMapper.UnitTests
             private static bool? _validated;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>().ConvertUsing<CustomTypeConverter>();
-                        cfg.Internal().Validator(SetValidated);
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().ConvertUsing<CustomTypeConverter>();
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {
@@ -176,14 +170,11 @@ namespace AutoMapper.UnitTests
             private static bool? _validated;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>()
-                            .ConvertUsing(new CustomTypeConverter());
-                        cfg.Internal().Validator(SetValidated);
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().ConvertUsing(new CustomTypeConverter());
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {
@@ -226,15 +217,13 @@ namespace AutoMapper.UnitTests
             private static bool? _validated;
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        Expression<Func<Source, Destination>> mappingExpression = source =>
-                            new Destination();
-                        cfg.CreateMap<Source, Destination>().ConvertUsing(mappingExpression);
-                        cfg.Internal().Validator(SetValidated);
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    Expression<Func<Source, Destination>> mappingExpression = source =>
+                        new Destination();
+                    cfg.CreateMap<Source, Destination>().ConvertUsing(mappingExpression);
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {

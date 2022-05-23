@@ -94,15 +94,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
 
                 modelBuilder.Ignore<Product>();
                 modelBuilder.Owned<OneToOneOwnedWithField>();
-                modelBuilder.Entity<OneToOneOwnerWithField>(
-                    e =>
-                    {
-                        e.Property(p => p.Id);
-                        e.Property(p => p.AlternateKey);
-                        e.Property(p => p.Description);
-                        e.HasKey(p => p.Id);
-                    }
-                );
+                modelBuilder.Entity<OneToOneOwnerWithField>(e =>
+                {
+                    e.Property(p => p.Id);
+                    e.Property(p => p.AlternateKey);
+                    e.Property(p => p.Description);
+                    e.HasKey(p => p.Id);
+                });
 
                 modelBuilder
                     .Entity<OneToOneOwnerWithField>()
@@ -164,15 +162,13 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                 var modelBuilder = CreateModelBuilder();
 
                 modelBuilder.Owned<OneToManyOwnedWithField>();
-                modelBuilder.Entity<OneToManyOwnerWithField>(
-                    e =>
-                    {
-                        e.Property(p => p.Id);
-                        e.Property(p => p.AlternateKey);
-                        e.Property(p => p.Description);
-                        e.HasKey(p => p.Id);
-                    }
-                );
+                modelBuilder.Entity<OneToManyOwnerWithField>(e =>
+                {
+                    e.Property(p => p.Id);
+                    e.Property(p => p.AlternateKey);
+                    e.Property(p => p.Description);
+                    e.HasKey(p => p.Id);
+                });
 
                 modelBuilder
                     .Entity<OneToManyOwnerWithField>()
@@ -1327,14 +1323,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     model
                         .GetEntityTypes()
                         .SelectMany(e => e.GetDeclaredNavigations())
-                        .Where(
-                            n =>
-                            {
-                                var targetType = n.TargetEntityType.ClrType;
-                                return targetType != typeof(DetailsBase)
-                                    && typeof(DetailsBase).IsAssignableFrom(targetType);
-                            }
-                        )
+                        .Where(n =>
+                        {
+                            var targetType = n.TargetEntityType.ClrType;
+                            return targetType != typeof(DetailsBase)
+                                && typeof(DetailsBase).IsAssignableFrom(targetType);
+                        })
                 );
                 Assert.Single(owned.GetForeignKeys());
                 Assert.Equal(
@@ -1371,14 +1365,12 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
                     model
                         .GetEntityTypes()
                         .SelectMany(e => e.GetDeclaredNavigations())
-                        .Where(
-                            n =>
-                            {
-                                var targetType = n.TargetEntityType.ClrType;
-                                return targetType != typeof(DetailsBase)
-                                    && typeof(DetailsBase).IsAssignableFrom(targetType);
-                            }
-                        )
+                        .Where(n =>
+                        {
+                            var targetType = n.TargetEntityType.ClrType;
+                            return targetType != typeof(DetailsBase)
+                                && typeof(DetailsBase).IsAssignableFrom(targetType);
+                        })
                 );
                 Assert.Single(owned.GetForeignKeys());
                 Assert.Single(model.FindEntityTypes(typeof(DetailsBase)));
@@ -2231,36 +2223,34 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<OwnerOfSharedType>(
-                    b =>
-                    {
-                        b.OwnsOne(
-                            "Shared1",
-                            e => e.Reference,
-                            sb =>
-                            {
-                                sb.IndexerProperty<int>("Value");
-                            }
-                        );
-                        b.OwnsMany("Shared2", e => e.Collection).IndexerProperty<bool>("IsDeleted");
-                        b.OwnsOne(
-                            e => e.OwnedNavigation,
-                            o =>
-                            {
-                                o.OwnsOne(
-                                    "Shared3",
-                                    e => e.Reference,
-                                    sb =>
-                                    {
-                                        sb.IndexerProperty<int>("NestedValue");
-                                    }
-                                );
-                                o.OwnsMany("Shared4", e => e.Collection)
-                                    .IndexerProperty<long>("NestedLong");
-                            }
-                        );
-                    }
-                );
+                modelBuilder.Entity<OwnerOfSharedType>(b =>
+                {
+                    b.OwnsOne(
+                        "Shared1",
+                        e => e.Reference,
+                        sb =>
+                        {
+                            sb.IndexerProperty<int>("Value");
+                        }
+                    );
+                    b.OwnsMany("Shared2", e => e.Collection).IndexerProperty<bool>("IsDeleted");
+                    b.OwnsOne(
+                        e => e.OwnedNavigation,
+                        o =>
+                        {
+                            o.OwnsOne(
+                                "Shared3",
+                                e => e.Reference,
+                                sb =>
+                                {
+                                    sb.IndexerProperty<int>("NestedValue");
+                                }
+                            );
+                            o.OwnsMany("Shared4", e => e.Collection)
+                                .IndexerProperty<long>("NestedLong");
+                        }
+                    );
+                });
 
                 var model = modelBuilder.FinalizeModel();
 
@@ -2302,26 +2292,24 @@ namespace Microsoft.EntityFrameworkCore.ModelBuilding
             {
                 var modelBuilder = CreateModelBuilder();
 
-                modelBuilder.Entity<OwnerOfSharedType>(
-                    b =>
-                    {
-                        b.OwnsOne("Shared1", e => e.Reference);
-                        b.OwnsOne("Shared1", e => e.Reference);
+                modelBuilder.Entity<OwnerOfSharedType>(b =>
+                {
+                    b.OwnsOne("Shared1", e => e.Reference);
+                    b.OwnsOne("Shared1", e => e.Reference);
 
-                        Assert.Equal(
-                            CoreStrings.ClashingNamedOwnedType(
-                                "Shared1",
-                                nameof(OwnerOfSharedType),
-                                nameof(OwnerOfSharedType.Collection)
-                            ),
-                            Assert
-                                .Throws<InvalidOperationException>(
-                                    () => b.OwnsMany("Shared1", e => e.Collection)
-                                )
-                                .Message
-                        );
-                    }
-                );
+                    Assert.Equal(
+                        CoreStrings.ClashingNamedOwnedType(
+                            "Shared1",
+                            nameof(OwnerOfSharedType),
+                            nameof(OwnerOfSharedType.Collection)
+                        ),
+                        Assert
+                            .Throws<InvalidOperationException>(
+                                () => b.OwnsMany("Shared1", e => e.Collection)
+                            )
+                            .Message
+                    );
+                });
             }
         }
     }

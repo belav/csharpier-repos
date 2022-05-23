@@ -160,49 +160,47 @@ namespace JitBench
                 parser
                     .ParseArguments<CommandLineOptions>(args)
                     .WithParsed(parsed => options = parsed)
-                    .WithNotParsed(
-                        errors =>
+                    .WithNotParsed(errors =>
+                    {
+                        foreach (Error error in errors)
                         {
-                            foreach (Error error in errors)
+                            switch (error.Tag)
                             {
-                                switch (error.Tag)
-                                {
-                                    case ErrorType.MissingValueOptionError:
-                                        throw new ArgumentException(
-                                            $"Missing value option for command line argument '{(error as MissingValueOptionError).NameInfo.NameText}'"
-                                        );
-                                    case ErrorType.HelpRequestedError:
-                                        Console.WriteLine(Usage());
-                                        Environment.Exit(0);
-                                        break;
-                                    case ErrorType.VersionRequestedError:
-                                        Console.WriteLine(
-                                            new AssemblyName(
-                                                typeof(CommandLineOptions)
-                                                    .GetTypeInfo()
-                                                    .Assembly.FullName
-                                            ).Version
-                                        );
-                                        Environment.Exit(0);
-                                        break;
-                                    case ErrorType.BadFormatTokenError:
-                                    case ErrorType.UnknownOptionError:
-                                    case ErrorType.MissingRequiredOptionError:
-                                        throw new ArgumentException(
-                                            $"Missing required  command line argument '{(error as MissingRequiredOptionError).NameInfo.NameText}'"
-                                        );
-                                    case ErrorType.MutuallyExclusiveSetError:
-                                    case ErrorType.BadFormatConversionError:
-                                    case ErrorType.SequenceOutOfRangeError:
-                                    case ErrorType.RepeatedOptionError:
-                                    case ErrorType.NoVerbSelectedError:
-                                    case ErrorType.BadVerbSelectedError:
-                                    case ErrorType.HelpVerbRequestedError:
-                                        break;
-                                }
+                                case ErrorType.MissingValueOptionError:
+                                    throw new ArgumentException(
+                                        $"Missing value option for command line argument '{(error as MissingValueOptionError).NameInfo.NameText}'"
+                                    );
+                                case ErrorType.HelpRequestedError:
+                                    Console.WriteLine(Usage());
+                                    Environment.Exit(0);
+                                    break;
+                                case ErrorType.VersionRequestedError:
+                                    Console.WriteLine(
+                                        new AssemblyName(
+                                            typeof(CommandLineOptions)
+                                                .GetTypeInfo()
+                                                .Assembly.FullName
+                                        ).Version
+                                    );
+                                    Environment.Exit(0);
+                                    break;
+                                case ErrorType.BadFormatTokenError:
+                                case ErrorType.UnknownOptionError:
+                                case ErrorType.MissingRequiredOptionError:
+                                    throw new ArgumentException(
+                                        $"Missing required  command line argument '{(error as MissingRequiredOptionError).NameInfo.NameText}'"
+                                    );
+                                case ErrorType.MutuallyExclusiveSetError:
+                                case ErrorType.BadFormatConversionError:
+                                case ErrorType.SequenceOutOfRangeError:
+                                case ErrorType.RepeatedOptionError:
+                                case ErrorType.NoVerbSelectedError:
+                                case ErrorType.BadVerbSelectedError:
+                                case ErrorType.HelpVerbRequestedError:
+                                    break;
                             }
                         }
-                    );
+                    });
                 return options;
             }
         }

@@ -25,8 +25,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                 var result = s_isInCommandLineMode;
                 if (result == 0)
                 {
-                    s_isInCommandLineMode = result = ThreadHelper.JoinableTaskFactory.Run(
-                        async () =>
+                    s_isInCommandLineMode = result =
+                        ThreadHelper.JoinableTaskFactory.Run(async () =>
                         {
                             await ThreadHelper.JoinableTaskFactory.SwitchToMainThreadAsync();
 
@@ -45,8 +45,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Utilities
                                 && (bool)result
                                 ? 1
                                 : -1;
-                        }
-                    );
+                        });
                 }
 
                 return result == 1;

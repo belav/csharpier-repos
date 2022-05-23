@@ -41,13 +41,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         Action<TwitterOptions> configure
     )
     {
-        services.AddTwitter(
-            o =>
-            {
-                ConfigureDefaults(o);
-                configure.Invoke(o);
-            }
-        );
+        services.AddTwitter(o =>
+        {
+            ConfigureDefaults(o);
+            configure.Invoke(o);
+        });
     }
 
     protected override void ConfigureDefaults(TwitterOptions o)
@@ -98,12 +96,10 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
     [Fact]
     public async Task ThrowsIfClientIdMissing()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ConsumerSecret = "Test Consumer Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ConsumerSecret = "Test Consumer Secret";
+        });
 
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -119,12 +115,10 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
     [Fact]
     public async Task ThrowsIfClientSecretMissing()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ConsumerKey = "Test Consumer Key";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ConsumerKey = "Test Consumer Key";
+        });
 
         using var server = host.GetTestServer();
         await Assert.ThrowsAsync<ArgumentException>(
@@ -136,13 +130,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
     [Fact]
     public async Task BadSignInWillThrow()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ConsumerKey = "Test Consumer Key";
-                o.ConsumerSecret = "Test Consumer Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ConsumerKey = "Test Consumer Key";
+            o.ConsumerSecret = "Test Consumer Secret";
+        });
 
         // Send a bogus sign in
         using var server = host.GetTestServer();
@@ -155,13 +147,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
     [Fact]
     public async Task SignInThrows()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ConsumerKey = "Test Consumer Key";
-                o.ConsumerSecret = "Test Consumer Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ConsumerKey = "Test Consumer Key";
+            o.ConsumerSecret = "Test Consumer Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signIn");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -170,13 +160,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
     [Fact]
     public async Task SignOutThrows()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ConsumerKey = "Test Consumer Key";
-                o.ConsumerSecret = "Test Consumer Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ConsumerKey = "Test Consumer Key";
+            o.ConsumerSecret = "Test Consumer Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signOut");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -185,13 +173,11 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
     [Fact]
     public async Task ForbidThrows()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.ConsumerKey = "Test Consumer Key";
-                o.ConsumerSecret = "Test Consumer Secret";
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.ConsumerKey = "Test Consumer Key";
+            o.ConsumerSecret = "Test Consumer Secret";
+        });
         using var server = host.GetTestServer();
         var transaction = await server.SendAsync("https://example.com/signOut");
         Assert.Equal(HttpStatusCode.OK, transaction.Response.StatusCode);
@@ -346,12 +332,10 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         );
         using var server = host.GetTestServer();
 
-        var exception = await Assert.ThrowsAsync<InvalidOperationException>(
-            async () =>
-            {
-                await server.SendAsync("http://example.com/challenge");
-            }
-        );
+        var exception = await Assert.ThrowsAsync<InvalidOperationException>(async () =>
+        {
+            await server.SendAsync("http://example.com/challenge");
+        });
 
         var expectedErrorMessage =
             "An error has occurred while calling the Twitter API, error's returned:"
@@ -382,12 +366,10 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
         );
         using var server = host.GetTestServer();
 
-        await Assert.ThrowsAsync<HttpRequestException>(
-            async () =>
-            {
-                await server.SendAsync("http://example.com/challenge");
-            }
-        );
+        await Assert.ThrowsAsync<HttpRequestException>(async () =>
+        {
+            await server.SendAsync("http://example.com/challenge");
+        });
     }
 
     [Fact]
@@ -658,76 +640,70 @@ public class TwitterTests : RemoteAuthenticationTests<TwitterOptions>
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Use(
-                                    async (context, next) =>
-                                    {
-                                        var req = context.Request;
-                                        var res = context.Response;
-                                        if (req.Path == new PathString("/signIn"))
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () =>
-                                                    context.SignInAsync(
-                                                        "Twitter",
-                                                        new ClaimsPrincipal()
-                                                    )
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/signOut"))
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.SignOutAsync("Twitter")
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/forbid"))
-                                        {
-                                            await Assert.ThrowsAsync<InvalidOperationException>(
-                                                () => context.ForbidAsync("Twitter")
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/me"))
-                                        {
-                                            await res.DescribeAsync(context.User);
-                                        }
-                                        else if (req.Path == new PathString("/tokens"))
-                                        {
-                                            var result = await context.AuthenticateAsync(
-                                                TestExtensions.CookieAuthenticationScheme
-                                            );
-                                            var tokens = result.Properties.GetTokens();
-                                            await res.DescribeAsync(tokens);
-                                        }
-                                        else if (handler == null || !await handler(context))
-                                        {
-                                            await next(context);
-                                        }
-                                    }
-                                );
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                Action<TwitterOptions> wrapOptions = o =>
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
                                 {
-                                    o.SignInScheme = "External";
-                                    options(o);
-                                };
-                                services
-                                    .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
-                                    .AddCookie(
-                                        TestExtensions.CookieAuthenticationScheme,
-                                        o =>
-                                            o.ForwardChallenge =
-                                                TwitterDefaults.AuthenticationScheme
-                                    )
-                                    .AddTwitter(wrapOptions);
-                            }
-                        )
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    if (req.Path == new PathString("/signIn"))
+                                    {
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () =>
+                                                context.SignInAsync(
+                                                    "Twitter",
+                                                    new ClaimsPrincipal()
+                                                )
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/signOut"))
+                                    {
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () => context.SignOutAsync("Twitter")
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/forbid"))
+                                    {
+                                        await Assert.ThrowsAsync<InvalidOperationException>(
+                                            () => context.ForbidAsync("Twitter")
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/me"))
+                                    {
+                                        await res.DescribeAsync(context.User);
+                                    }
+                                    else if (req.Path == new PathString("/tokens"))
+                                    {
+                                        var result = await context.AuthenticateAsync(
+                                            TestExtensions.CookieAuthenticationScheme
+                                        );
+                                        var tokens = result.Properties.GetTokens();
+                                        await res.DescribeAsync(tokens);
+                                    }
+                                    else if (handler == null || !await handler(context))
+                                    {
+                                        await next(context);
+                                    }
+                                }
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            Action<TwitterOptions> wrapOptions = o =>
+                            {
+                                o.SignInScheme = "External";
+                                options(o);
+                            };
+                            services
+                                .AddAuthentication(TestExtensions.CookieAuthenticationScheme)
+                                .AddCookie(
+                                    TestExtensions.CookieAuthenticationScheme,
+                                    o => o.ForwardChallenge = TwitterDefaults.AuthenticationScheme
+                                )
+                                .AddTwitter(wrapOptions);
+                        })
             )
             .Build();
 

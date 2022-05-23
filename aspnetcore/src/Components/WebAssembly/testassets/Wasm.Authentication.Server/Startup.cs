@@ -43,13 +43,11 @@ public class Startup
 
         services
             .AddIdentityServer()
-            .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(
-                options =>
-                {
-                    options.IdentityResources["openid"].UserClaims.Add("role");
-                    options.ApiResources.Single().UserClaims.Add("role");
-                }
-            );
+            .AddApiAuthorization<ApplicationUser, ApplicationDbContext>(options =>
+            {
+                options.IdentityResources["openid"].UserClaims.Add("role");
+                options.ApiResources.Single().UserClaims.Add("role");
+            });
 
         // Need to do this as it maps "role" to ClaimTypes.Role and causes issues
         JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Remove("role");
@@ -79,14 +77,12 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapRazorPages();
 
-                endpoints.MapFallbackToFile("index.html");
-            }
-        );
+            endpoints.MapFallbackToFile("index.html");
+        });
     }
 }

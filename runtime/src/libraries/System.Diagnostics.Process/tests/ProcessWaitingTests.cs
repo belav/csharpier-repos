@@ -607,33 +607,25 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public void WaitChain()
         {
-            Process root = CreateProcess(
-                () =>
+            Process root = CreateProcess(() =>
+            {
+                Process child1 = CreateProcess(() =>
                 {
-                    Process child1 = CreateProcess(
-                        () =>
-                        {
-                            Process child2 = CreateProcess(
-                                () =>
-                                {
-                                    Process child3 = CreateProcess(
-                                        () => RemoteExecutor.SuccessExitCode
-                                    );
-                                    child3.Start();
-                                    Assert.True(child3.WaitForExit(WaitInMS));
-                                    return child3.ExitCode;
-                                }
-                            );
-                            child2.Start();
-                            Assert.True(child2.WaitForExit(WaitInMS));
-                            return child2.ExitCode;
-                        }
-                    );
-                    child1.Start();
-                    Assert.True(child1.WaitForExit(WaitInMS));
-                    return child1.ExitCode;
-                }
-            );
+                    Process child2 = CreateProcess(() =>
+                    {
+                        Process child3 = CreateProcess(() => RemoteExecutor.SuccessExitCode);
+                        child3.Start();
+                        Assert.True(child3.WaitForExit(WaitInMS));
+                        return child3.ExitCode;
+                    });
+                    child2.Start();
+                    Assert.True(child2.WaitForExit(WaitInMS));
+                    return child2.ExitCode;
+                });
+                child1.Start();
+                Assert.True(child1.WaitForExit(WaitInMS));
+                return child1.ExitCode;
+            });
             root.Start();
             Assert.True(root.WaitForExit(WaitInMS));
             Assert.Equal(RemoteExecutor.SuccessExitCode, root.ExitCode);
@@ -642,48 +634,40 @@ namespace System.Diagnostics.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public async Task WaitAsyncChain()
         {
-            Process root = CreateProcess(
-                async () =>
+            Process root = CreateProcess(async () =>
+            {
+                Process child1 = CreateProcess(async () =>
                 {
-                    Process child1 = CreateProcess(
-                        async () =>
+                    Process child2 = CreateProcess(async () =>
+                    {
+                        Process child3 = CreateProcess(() => RemoteExecutor.SuccessExitCode);
+                        child3.Start();
+                        using (var cts = new CancellationTokenSource(WaitInMS))
                         {
-                            Process child2 = CreateProcess(
-                                async () =>
-                                {
-                                    Process child3 = CreateProcess(
-                                        () => RemoteExecutor.SuccessExitCode
-                                    );
-                                    child3.Start();
-                                    using (var cts = new CancellationTokenSource(WaitInMS))
-                                    {
-                                        await child3.WaitForExitAsync(cts.Token);
-                                        Assert.True(child3.HasExited);
-                                    }
-
-                                    return child3.ExitCode;
-                                }
-                            );
-                            child2.Start();
-                            using (var cts = new CancellationTokenSource(WaitInMS))
-                            {
-                                await child2.WaitForExitAsync(cts.Token);
-                                Assert.True(child2.HasExited);
-                            }
-
-                            return child2.ExitCode;
+                            await child3.WaitForExitAsync(cts.Token);
+                            Assert.True(child3.HasExited);
                         }
-                    );
-                    child1.Start();
+
+                        return child3.ExitCode;
+                    });
+                    child2.Start();
                     using (var cts = new CancellationTokenSource(WaitInMS))
                     {
-                        await child1.WaitForExitAsync(cts.Token);
-                        Assert.True(child1.HasExited);
+                        await child2.WaitForExitAsync(cts.Token);
+                        Assert.True(child2.HasExited);
                     }
 
-                    return child1.ExitCode;
+                    return child2.ExitCode;
+                });
+                child1.Start();
+                using (var cts = new CancellationTokenSource(WaitInMS))
+                {
+                    await child1.WaitForExitAsync(cts.Token);
+                    Assert.True(child1.HasExited);
                 }
-            );
+
+                return child1.ExitCode;
+            });
             root.Start();
             using (var cts = new CancellationTokenSource(WaitInMS))
             {

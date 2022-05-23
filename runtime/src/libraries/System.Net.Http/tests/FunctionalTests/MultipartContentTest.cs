@@ -490,12 +490,10 @@ namespace System.Net.Http.Functional.Tests
                 Assert.Throws<NotSupportedException>(
                     () => s.Write(new Span<byte>(new byte[1], 0, 0))
                 );
-                Assert.Throws<NotSupportedException>(
-                    () =>
-                    {
-                        s.WriteAsync(new byte[1], 0, 0);
-                    }
-                );
+                Assert.Throws<NotSupportedException>(() =>
+                {
+                    s.WriteAsync(new byte[1], 0, 0);
+                });
                 Assert.Throws<NotSupportedException>(() => s.SetLength(1));
             }
         }

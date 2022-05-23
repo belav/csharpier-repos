@@ -468,25 +468,23 @@ namespace System.Text.Tests
 
             public UnsafeLazyDelegate(string methodName)
             {
-                _lazyDelegate = new Lazy<TDelegate>(
-                    () =>
-                    {
-                        Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
+                _lazyDelegate = new Lazy<TDelegate>(() =>
+                {
+                    Assert.True(typeof(TDelegate).IsSubclassOf(typeof(MulticastDelegate)));
 
-                        // Get the MethodInfo for the target method
+                    // Get the MethodInfo for the target method
 
-                        MethodInfo methodInfo = GetAsciiUtilityType()
-                            .GetMethod(
-                                methodName,
-                                BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
-                            );
-                        Assert.NotNull(methodInfo);
+                    MethodInfo methodInfo = GetAsciiUtilityType()
+                        .GetMethod(
+                            methodName,
+                            BindingFlags.Public | BindingFlags.NonPublic | BindingFlags.Static
+                        );
+                    Assert.NotNull(methodInfo);
 
-                        // Construct the TDelegate pointing to this method
+                    // Construct the TDelegate pointing to this method
 
-                        return methodInfo.CreateDelegate<TDelegate>();
-                    }
-                );
+                    return methodInfo.CreateDelegate<TDelegate>();
+                });
             }
 
             public TDelegate Delegate => _lazyDelegate.Value;

@@ -115,12 +115,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new TypeWithEvent();
             Assert.Throws<RuntimeBinderException>(() => d.Event = 3);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int x = d.Event;
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int x = d.Event;
+            });
         }
 
         [Fact]
@@ -142,12 +140,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = null;
             Assert.Throws<RuntimeBinderException>(() => d.Value = 3);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int x = d.Value;
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int x = d.Value;
+            });
         }
 
         [Fact]
@@ -155,12 +151,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new List<int>();
             Assert.Throws<RuntimeBinderException>(() => d.Add(1).ToString());
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int i = d.Add(1);
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int i = d.Add(1);
+            });
         }
 
         [Fact]
@@ -168,12 +162,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new List<int>();
             Assert.Throws<RuntimeBinderException>(() => d.Add = 42);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int i = d.Add;
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int i = d.Add;
+            });
         }
 
         [Fact]
@@ -181,12 +173,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
         {
             dynamic d = new List<int>();
             Assert.Throws<RuntimeBinderException>(() => d.Add = 42);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int i = d.Add;
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int i = d.Add;
+            });
         }
 
         [Fact]
@@ -476,12 +466,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Throws<RuntimeBinderException>(() => d.Inner<int>());
             Assert.Throws<RuntimeBinderException>(() => d.Inner());
             Assert.Throws<RuntimeBinderException>(() => d.Inner = 2);
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int i = d.Inner<int>();
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int i = d.Inner<int>();
+            });
         }
 
         [Fact]
@@ -495,12 +483,10 @@ namespace Microsoft.CSharp.RuntimeBinder.Tests
             Assert.Throws<RuntimeBinderException>(() => d.T);
             Assert.Throws<RuntimeBinderException>(() => d.T());
             Assert.Throws<RuntimeBinderException>(() => d.T<int>());
-            Assert.Throws<RuntimeBinderException>(
-                () =>
-                {
-                    int i = d.T;
-                }
-            );
+            Assert.Throws<RuntimeBinderException>(() =>
+            {
+                int i = d.T;
+            });
         }
 
         public class BaseForOuterWithMethod

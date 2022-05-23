@@ -77,25 +77,23 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         [ConditionalFact]
         public async Task Should_throw_if_specified_region_is_wrong()
         {
-            var exception = await Assert.ThrowsAsync<ArgumentException>(
-                async () =>
-                {
-                    await using var testDatabase = CosmosTestStore.CreateInitialized(
-                        DatabaseName,
-                        o => o.Region("FakeRegion")
-                    );
-                    var options = CreateOptions(testDatabase);
+            var exception = await Assert.ThrowsAsync<ArgumentException>(async () =>
+            {
+                await using var testDatabase = CosmosTestStore.CreateInitialized(
+                    DatabaseName,
+                    o => o.Region("FakeRegion")
+                );
+                var options = CreateOptions(testDatabase);
 
-                    var customer = new Customer { Id = 42, Name = "Theon" };
+                var customer = new Customer { Id = 42, Name = "Theon" };
 
-                    using var context = new CustomerContext(options);
-                    context.Database.EnsureCreated();
+                using var context = new CustomerContext(options);
+                context.Database.EnsureCreated();
 
-                    context.Add(customer);
+                context.Add(customer);
 
-                    context.SaveChanges();
-                }
-            );
+                context.SaveChanges();
+            });
             Assert.Equal("Current location is not a valid Azure region.", exception.Message);
         }
 
@@ -123,25 +121,23 @@ namespace Microsoft.EntityFrameworkCore.Cosmos
         [ConditionalFact]
         public async Task Should_throw_if_specified_connection_mode_is_wrong()
         {
-            var exception = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(
-                async () =>
-                {
-                    await using var testDatabase = CosmosTestStore.CreateInitialized(
-                        DatabaseName,
-                        o => o.ConnectionMode((ConnectionMode)123456)
-                    );
-                    var options = CreateOptions(testDatabase);
+            var exception = await Assert.ThrowsAsync<ArgumentOutOfRangeException>(async () =>
+            {
+                await using var testDatabase = CosmosTestStore.CreateInitialized(
+                    DatabaseName,
+                    o => o.ConnectionMode((ConnectionMode)123456)
+                );
+                var options = CreateOptions(testDatabase);
 
-                    var customer = new Customer { Id = 42, Name = "Theon" };
+                var customer = new Customer { Id = 42, Name = "Theon" };
 
-                    using var context = new CustomerContext(options);
-                    context.Database.EnsureCreated();
+                using var context = new CustomerContext(options);
+                context.Database.EnsureCreated();
 
-                    context.Add(customer);
+                context.Add(customer);
 
-                    context.SaveChanges();
-                }
-            );
+                context.SaveChanges();
+            });
         }
 
         private DbContextOptions CreateOptions(

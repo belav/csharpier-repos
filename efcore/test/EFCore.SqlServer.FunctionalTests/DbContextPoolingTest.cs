@@ -1058,39 +1058,37 @@ namespace Microsoft.EntityFrameworkCore
         [InlineData(true, true)]
         public async Task State_manager_is_reset(bool useInterface, bool async)
         {
-            var weakRef = await Scoper(
-                async () =>
-                {
-                    var serviceProvider = useInterface
-                        ? BuildServiceProvider<IPooledContext, PooledContext>()
-                        : BuildServiceProvider<PooledContext>();
+            var weakRef = await Scoper(async () =>
+            {
+                var serviceProvider = useInterface
+                    ? BuildServiceProvider<IPooledContext, PooledContext>()
+                    : BuildServiceProvider<PooledContext>();
 
-                    var serviceScope = serviceProvider.CreateScope();
-                    var scopedProvider = serviceScope.ServiceProvider;
+                var serviceScope = serviceProvider.CreateScope();
+                var scopedProvider = serviceScope.ServiceProvider;
 
-                    var context1 = useInterface
-                        ? (PooledContext)scopedProvider.GetService<IPooledContext>()
-                        : scopedProvider.GetService<PooledContext>();
+                var context1 = useInterface
+                    ? (PooledContext)scopedProvider.GetService<IPooledContext>()
+                    : scopedProvider.GetService<PooledContext>();
 
-                    var entity = context1.Customers.First(c => c.CustomerId == "ALFKI");
+                var entity = context1.Customers.First(c => c.CustomerId == "ALFKI");
 
-                    Assert.Single(context1.ChangeTracker.Entries());
+                Assert.Single(context1.ChangeTracker.Entries());
 
-                    await Dispose(serviceScope, async);
+                await Dispose(serviceScope, async);
 
-                    serviceScope = serviceProvider.CreateScope();
-                    scopedProvider = serviceScope.ServiceProvider;
+                serviceScope = serviceProvider.CreateScope();
+                scopedProvider = serviceScope.ServiceProvider;
 
-                    var context2 = useInterface
-                        ? (PooledContext)scopedProvider.GetService<IPooledContext>()
-                        : scopedProvider.GetService<PooledContext>();
+                var context2 = useInterface
+                    ? (PooledContext)scopedProvider.GetService<IPooledContext>()
+                    : scopedProvider.GetService<PooledContext>();
 
-                    Assert.Same(context1, context2);
-                    Assert.Empty(context2.ChangeTracker.Entries());
+                Assert.Same(context1, context2);
+                Assert.Empty(context2.ChangeTracker.Entries());
 
-                    return new WeakReference(entity);
-                }
-            );
+                return new WeakReference(entity);
+            });
 
             GC.Collect();
 
@@ -1109,31 +1107,29 @@ namespace Microsoft.EntityFrameworkCore
             bool withDependencyInjection
         )
         {
-            var weakRef = await Scoper(
-                async () =>
-                {
-                    var factory = BuildFactory<PooledContext>(withDependencyInjection);
+            var weakRef = await Scoper(async () =>
+            {
+                var factory = BuildFactory<PooledContext>(withDependencyInjection);
 
-                    var context1 = async
-                        ? await factory.CreateDbContextAsync()
-                        : factory.CreateDbContext();
+                var context1 = async
+                    ? await factory.CreateDbContextAsync()
+                    : factory.CreateDbContext();
 
-                    var entity = context1.Customers.First(c => c.CustomerId == "ALFKI");
+                var entity = context1.Customers.First(c => c.CustomerId == "ALFKI");
 
-                    Assert.Single(context1.ChangeTracker.Entries());
+                Assert.Single(context1.ChangeTracker.Entries());
 
-                    await Dispose(context1, async);
+                await Dispose(context1, async);
 
-                    var context2 = async
-                        ? await factory.CreateDbContextAsync()
-                        : factory.CreateDbContext();
+                var context2 = async
+                    ? await factory.CreateDbContextAsync()
+                    : factory.CreateDbContext();
 
-                    Assert.Same(context1, context2);
-                    Assert.Empty(context2.ChangeTracker.Entries());
+                Assert.Same(context1, context2);
+                Assert.Empty(context2.ChangeTracker.Entries());
 
-                    return new WeakReference(entity);
-                }
-            );
+                return new WeakReference(entity);
+            });
 
             GC.Collect();
 
@@ -1533,24 +1529,22 @@ namespace Microsoft.EntityFrameworkCore
                     .Range(0, 10)
                     .Select(
                         _ =>
-                            Task.Run(
-                                async () =>
+                            Task.Run(async () =>
+                            {
+                                for (var j = 0; j < 1_000_000; j++)
                                 {
-                                    for (var j = 0; j < 1_000_000; j++)
-                                    {
-                                        var ctx = factory.CreateDbContext();
+                                    var ctx = factory.CreateDbContext();
 
-                                        if (async)
-                                        {
-                                            await ctx.DisposeAsync();
-                                        }
-                                        else
-                                        {
-                                            ctx.Dispose();
-                                        }
+                                    if (async)
+                                    {
+                                        await ctx.DisposeAsync();
+                                    }
+                                    else
+                                    {
+                                        ctx.Dispose();
                                     }
                                 }
-                            )
+                            })
                     )
             );
         }

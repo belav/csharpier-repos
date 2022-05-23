@@ -320,20 +320,16 @@ public partial class HttpConnectionTests
                 var httpHandler = new TestHttpMessageHandler();
 
                 var longPollResult = new TaskCompletionSource<HttpResponseMessage>();
-                httpHandler.OnLongPoll(
-                    cancellationToken =>
+                httpHandler.OnLongPoll(cancellationToken =>
+                {
+                    cancellationToken.Register(() =>
                     {
-                        cancellationToken.Register(
-                            () =>
-                            {
-                                longPollResult.TrySetResult(
-                                    ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
-                                );
-                            }
+                        longPollResult.TrySetResult(
+                            ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
                         );
-                        return longPollResult.Task;
-                    }
-                );
+                    });
+                    return longPollResult.Task;
+                });
                 httpHandler.OnLongPollDelete(
                     cancellationToken => ResponseUtils.CreateResponse(HttpStatusCode.NoContent)
                 );
@@ -503,14 +499,12 @@ public partial class HttpConnectionTests
                 await WithConnectionAsync(
                     CreateConnection(
                         httpHandler,
-                        transport: new TestTransport(
-                            onTransportStart: () =>
-                            {
-                                // Cancel the token when the transport is starting  which will fail the startTask.
-                                cts.Cancel();
-                                return Task.CompletedTask;
-                            }
-                        )
+                        transport: new TestTransport(onTransportStart: () =>
+                        {
+                            // Cancel the token when the transport is starting  which will fail the startTask.
+                            cts.Cancel();
+                            return Task.CompletedTask;
+                        })
                     ),
                     async (connection) =>
                     {
@@ -541,13 +535,11 @@ public partial class HttpConnectionTests
                 await WithConnectionAsync(
                     CreateConnection(
                         httpHandler,
-                        transport: new TestTransport(
-                            onTransportStart: () =>
-                            {
-                                transportStartCalled = true;
-                                return Task.CompletedTask;
-                            }
-                        )
+                        transport: new TestTransport(onTransportStart: () =>
+                        {
+                            transportStartCalled = true;
+                            return Task.CompletedTask;
+                        })
                     ),
                     async (connection) =>
                     {

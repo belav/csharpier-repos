@@ -16,12 +16,10 @@ public class Startup
             .AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
             .AddCookie(options => options.LoginPath = "/Login");
 
-        services.AddRazorPages(
-            options =>
-            {
-                options.Conventions.AuthorizeFolder("/Admin");
-            }
-        );
+        services.AddRazorPages(options =>
+        {
+            options.Conventions.AuthorizeFolder("/Admin");
+        });
     }
 
     public void Configure(IApplicationBuilder app)
@@ -31,12 +29,10 @@ public class Startup
         app.UseAuthentication();
         app.UseAuthorization();
 
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapRazorPages();
+        });
     }
 }

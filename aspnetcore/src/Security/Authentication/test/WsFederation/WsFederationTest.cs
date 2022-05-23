@@ -50,25 +50,21 @@ public class WsFederationTest
                     builder
                         .UseTestServer()
                         .Configure(ConfigureApp)
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services
-                                    .AddAuthentication(
-                                        sharedOptions =>
-                                        {
-                                            sharedOptions.DefaultScheme =
-                                                CookieAuthenticationDefaults.AuthenticationScheme;
-                                            sharedOptions.DefaultSignInScheme =
-                                                CookieAuthenticationDefaults.AuthenticationScheme;
-                                            sharedOptions.DefaultChallengeScheme =
-                                                WsFederationDefaults.AuthenticationScheme;
-                                        }
-                                    )
-                                    .AddCookie()
-                                    .AddWsFederation();
-                            }
-                        )
+                        .ConfigureServices(services =>
+                        {
+                            services
+                                .AddAuthentication(sharedOptions =>
+                                {
+                                    sharedOptions.DefaultScheme =
+                                        CookieAuthenticationDefaults.AuthenticationScheme;
+                                    sharedOptions.DefaultSignInScheme =
+                                        CookieAuthenticationDefaults.AuthenticationScheme;
+                                    sharedOptions.DefaultChallengeScheme =
+                                        WsFederationDefaults.AuthenticationScheme;
+                                })
+                                .AddCookie()
+                                .AddWsFederation();
+                        })
             )
             .Build();
 
@@ -257,42 +253,34 @@ public class WsFederationTest
                 builder =>
                     builder
                         .UseTestServer()
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddSingleton<MyWsFedEvents>();
-                                services
-                                    .AddAuthentication(
-                                        sharedOptions =>
-                                        {
-                                            sharedOptions.DefaultScheme =
-                                                CookieAuthenticationDefaults.AuthenticationScheme;
-                                            sharedOptions.DefaultSignInScheme =
-                                                CookieAuthenticationDefaults.AuthenticationScheme;
-                                            sharedOptions.DefaultChallengeScheme =
-                                                WsFederationDefaults.AuthenticationScheme;
-                                        }
-                                    )
-                                    .AddCookie()
-                                    .AddWsFederation(
-                                        options =>
-                                        {
-                                            options.Wtrealm = "http://Automation1";
-                                            options.MetadataAddress =
-                                                "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
-                                            options.BackchannelHttpHandler =
-                                                new WaadMetadataDocumentHandler();
-                                            options.EventsType = typeof(MyWsFedEvents);
-                                        }
-                                    );
-                            }
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.Run(context => context.ChallengeAsync());
-                            }
-                        )
+                        .ConfigureServices(services =>
+                        {
+                            services.AddSingleton<MyWsFedEvents>();
+                            services
+                                .AddAuthentication(sharedOptions =>
+                                {
+                                    sharedOptions.DefaultScheme =
+                                        CookieAuthenticationDefaults.AuthenticationScheme;
+                                    sharedOptions.DefaultSignInScheme =
+                                        CookieAuthenticationDefaults.AuthenticationScheme;
+                                    sharedOptions.DefaultChallengeScheme =
+                                        WsFederationDefaults.AuthenticationScheme;
+                                })
+                                .AddCookie()
+                                .AddWsFederation(options =>
+                                {
+                                    options.Wtrealm = "http://Automation1";
+                                    options.MetadataAddress =
+                                        "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
+                                    options.BackchannelHttpHandler =
+                                        new WaadMetadataDocumentHandler();
+                                    options.EventsType = typeof(MyWsFedEvents);
+                                });
+                        })
+                        .Configure(app =>
+                        {
+                            app.Run(context => context.ChallengeAsync());
+                        })
             )
             .Build();
 
@@ -357,138 +345,126 @@ public class WsFederationTest
                     builder
                         .UseTestServer()
                         .Configure(ConfigureApp)
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services
-                                    .AddAuthentication(
-                                        sharedOptions =>
+                        .ConfigureServices(services =>
+                        {
+                            services
+                                .AddAuthentication(sharedOptions =>
+                                {
+                                    sharedOptions.DefaultScheme =
+                                        CookieAuthenticationDefaults.AuthenticationScheme;
+                                    sharedOptions.DefaultSignInScheme =
+                                        CookieAuthenticationDefaults.AuthenticationScheme;
+                                    sharedOptions.DefaultChallengeScheme =
+                                        WsFederationDefaults.AuthenticationScheme;
+                                })
+                                .AddCookie()
+                                .AddWsFederation(options =>
+                                {
+                                    options.Wtrealm = "http://Automation1";
+                                    options.MetadataAddress =
+                                        "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
+                                    options.BackchannelHttpHandler =
+                                        new WaadMetadataDocumentHandler();
+                                    options.StateDataFormat = new CustomStateDataFormat();
+                                    options.SecurityTokenHandlers =
+                                        new List<ISecurityTokenValidator>()
                                         {
-                                            sharedOptions.DefaultScheme =
-                                                CookieAuthenticationDefaults.AuthenticationScheme;
-                                            sharedOptions.DefaultSignInScheme =
-                                                CookieAuthenticationDefaults.AuthenticationScheme;
-                                            sharedOptions.DefaultChallengeScheme =
-                                                WsFederationDefaults.AuthenticationScheme;
-                                        }
-                                    )
-                                    .AddCookie()
-                                    .AddWsFederation(
-                                        options =>
+                                            new TestSecurityTokenValidator()
+                                        };
+                                    options.UseTokenLifetime = false;
+                                    options.AllowUnsolicitedLogins = allowUnsolicited;
+                                    options.Events = new WsFederationEvents()
+                                    {
+                                        OnMessageReceived = context =>
                                         {
-                                            options.Wtrealm = "http://Automation1";
-                                            options.MetadataAddress =
-                                                "https://login.windows.net/4afbc689-805b-48cf-a24c-d4aa3248a248/federationmetadata/2007-06/federationmetadata.xml";
-                                            options.BackchannelHttpHandler =
-                                                new WaadMetadataDocumentHandler();
-                                            options.StateDataFormat = new CustomStateDataFormat();
-                                            options.SecurityTokenHandlers =
-                                                new List<ISecurityTokenValidator>()
-                                                {
-                                                    new TestSecurityTokenValidator()
-                                                };
-                                            options.UseTokenLifetime = false;
-                                            options.AllowUnsolicitedLogins = allowUnsolicited;
-                                            options.Events = new WsFederationEvents()
+                                            if (
+                                                !context.ProtocolMessage.Parameters.TryGetValue(
+                                                    "suppressWctx",
+                                                    out var suppress
+                                                )
+                                            )
                                             {
-                                                OnMessageReceived = context =>
-                                                {
-                                                    if (
-                                                        !context.ProtocolMessage.Parameters.TryGetValue(
-                                                            "suppressWctx",
-                                                            out var suppress
-                                                        )
-                                                    )
-                                                    {
-                                                        Assert.True(
-                                                            context.ProtocolMessage.Wctx.Equals(
-                                                                "customValue"
-                                                            ),
-                                                            "wctx is not my custom value"
-                                                        );
-                                                    }
-                                                    context.HttpContext.Items["MessageReceived"] =
-                                                        true;
-                                                    return Task.FromResult(0);
-                                                },
-                                                OnRedirectToIdentityProvider = context =>
-                                                {
-                                                    if (context.ProtocolMessage.IsSignInMessage)
-                                                    {
-                                                        // Sign in message
-                                                        context.ProtocolMessage.Wctx =
-                                                            "customValue";
-                                                    }
+                                                Assert.True(
+                                                    context.ProtocolMessage.Wctx.Equals(
+                                                        "customValue"
+                                                    ),
+                                                    "wctx is not my custom value"
+                                                );
+                                            }
+                                            context.HttpContext.Items["MessageReceived"] = true;
+                                            return Task.FromResult(0);
+                                        },
+                                        OnRedirectToIdentityProvider = context =>
+                                        {
+                                            if (context.ProtocolMessage.IsSignInMessage)
+                                            {
+                                                // Sign in message
+                                                context.ProtocolMessage.Wctx = "customValue";
+                                            }
 
-                                                    return Task.FromResult(0);
-                                                },
-                                                OnSecurityTokenReceived = context =>
-                                                {
+                                            return Task.FromResult(0);
+                                        },
+                                        OnSecurityTokenReceived = context =>
+                                        {
+                                            context.HttpContext.Items["SecurityTokenReceived"] =
+                                                true;
+                                            return Task.FromResult(0);
+                                        },
+                                        OnSecurityTokenValidated = context =>
+                                        {
+                                            Assert.True(
+                                                (bool)context.HttpContext.Items["MessageReceived"],
+                                                "MessageReceived notification not invoked"
+                                            );
+                                            Assert.True(
+                                                (bool)
                                                     context.HttpContext.Items[
                                                         "SecurityTokenReceived"
-                                                    ] = true;
-                                                    return Task.FromResult(0);
-                                                },
-                                                OnSecurityTokenValidated = context =>
-                                                {
-                                                    Assert.True(
-                                                        (bool)
-                                                            context.HttpContext.Items[
-                                                                "MessageReceived"
-                                                            ],
-                                                        "MessageReceived notification not invoked"
-                                                    );
-                                                    Assert.True(
-                                                        (bool)
-                                                            context.HttpContext.Items[
-                                                                "SecurityTokenReceived"
-                                                            ],
-                                                        "SecurityTokenReceived notification not invoked"
-                                                    );
+                                                    ],
+                                                "SecurityTokenReceived notification not invoked"
+                                            );
 
-                                                    if (context.Principal != null)
-                                                    {
-                                                        var identity =
-                                                            context.Principal.Identities.Single();
-                                                        identity.AddClaim(
-                                                            new Claim("ReturnEndpoint", "true")
-                                                        );
-                                                        identity.AddClaim(
-                                                            new Claim("Authenticated", "true")
-                                                        );
-                                                        identity.AddClaim(
-                                                            new Claim(
-                                                                identity.RoleClaimType,
-                                                                "Guest",
-                                                                ClaimValueTypes.String
-                                                            )
-                                                        );
-                                                    }
+                                            if (context.Principal != null)
+                                            {
+                                                var identity =
+                                                    context.Principal.Identities.Single();
+                                                identity.AddClaim(
+                                                    new Claim("ReturnEndpoint", "true")
+                                                );
+                                                identity.AddClaim(
+                                                    new Claim("Authenticated", "true")
+                                                );
+                                                identity.AddClaim(
+                                                    new Claim(
+                                                        identity.RoleClaimType,
+                                                        "Guest",
+                                                        ClaimValueTypes.String
+                                                    )
+                                                );
+                                            }
 
-                                                    return Task.FromResult(0);
-                                                },
-                                                OnAuthenticationFailed = context =>
-                                                {
-                                                    context.HttpContext.Items[
-                                                        "AuthenticationFailed"
-                                                    ] = true;
-                                                    //Change the request url to something different and skip Wsfed. This new url will handle the request and let us know if this notification was invoked.
-                                                    context.HttpContext.Request.Path =
-                                                        new PathString("/AuthenticationFailed");
-                                                    context.SkipHandler();
-                                                    return Task.FromResult(0);
-                                                },
-                                                OnRemoteSignOut = context =>
-                                                {
-                                                    context.Response.Headers["EventHeader"] =
-                                                        "OnRemoteSignOut";
-                                                    return Task.FromResult(0);
-                                                }
-                                            };
+                                            return Task.FromResult(0);
+                                        },
+                                        OnAuthenticationFailed = context =>
+                                        {
+                                            context.HttpContext.Items["AuthenticationFailed"] =
+                                                true;
+                                            //Change the request url to something different and skip Wsfed. This new url will handle the request and let us know if this notification was invoked.
+                                            context.HttpContext.Request.Path = new PathString(
+                                                "/AuthenticationFailed"
+                                            );
+                                            context.SkipHandler();
+                                            return Task.FromResult(0);
+                                        },
+                                        OnRemoteSignOut = context =>
+                                        {
+                                            context.Response.Headers["EventHeader"] =
+                                                "OnRemoteSignOut";
+                                            return Task.FromResult(0);
                                         }
-                                    );
-                            }
-                        )
+                                    };
+                                });
+                        })
             )
             .Build();
 
@@ -504,12 +480,10 @@ public class WsFederationTest
             mapped =>
             {
                 mapped.UseAuthentication();
-                mapped.Run(
-                    async context =>
-                    {
-                        await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-                    }
-                );
+                mapped.Run(async context =>
+                {
+                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+                });
             }
         );
 
@@ -519,27 +493,25 @@ public class WsFederationTest
             "/Logout",
             subApp =>
             {
-                subApp.Run(
-                    async context =>
+                subApp.Run(async context =>
+                {
+                    if (context.User.Identity.IsAuthenticated)
                     {
-                        if (context.User.Identity.IsAuthenticated)
+                        var authProperties = new AuthenticationProperties()
                         {
-                            var authProperties = new AuthenticationProperties()
-                            {
-                                RedirectUri = context.Request.GetEncodedUrl()
-                            };
-                            await context.SignOutAsync(
-                                WsFederationDefaults.AuthenticationScheme,
-                                authProperties
-                            );
-                            await context.Response.WriteAsync("Signing out...");
-                        }
-                        else
-                        {
-                            await context.Response.WriteAsync("SignedOut");
-                        }
+                            RedirectUri = context.Request.GetEncodedUrl()
+                        };
+                        await context.SignOutAsync(
+                            WsFederationDefaults.AuthenticationScheme,
+                            authProperties
+                        );
+                        await context.Response.WriteAsync("Signing out...");
                     }
-                );
+                    else
+                    {
+                        await context.Response.WriteAsync("SignedOut");
+                    }
+                });
             }
         );
 
@@ -547,12 +519,10 @@ public class WsFederationTest
             "/AuthenticationFailed",
             subApp =>
             {
-                subApp.Run(
-                    async context =>
-                    {
-                        await context.Response.WriteAsync("AuthenticationFailed");
-                    }
-                );
+                subApp.Run(async context =>
+                {
+                    await context.Response.WriteAsync("AuthenticationFailed");
+                });
             }
         );
 
@@ -560,12 +530,10 @@ public class WsFederationTest
             "/signout-wsfed",
             subApp =>
             {
-                subApp.Run(
-                    async context =>
-                    {
-                        await context.Response.WriteAsync("signout-wsfed");
-                    }
-                );
+                subApp.Run(async context =>
+                {
+                    await context.Response.WriteAsync("signout-wsfed");
+                });
             }
         );
 
@@ -573,53 +541,47 @@ public class WsFederationTest
             "/mapped-challenge",
             subApp =>
             {
-                subApp.Run(
-                    async context =>
-                    {
-                        await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-                    }
-                );
+                subApp.Run(async context =>
+                {
+                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+                });
             }
         );
 
-        app.Run(
-            async context =>
+        app.Run(async context =>
+        {
+            var result = context.AuthenticateAsync();
+            if (context.User == null || !context.User.Identity.IsAuthenticated)
             {
-                var result = context.AuthenticateAsync();
-                if (context.User == null || !context.User.Identity.IsAuthenticated)
+                await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
+                await context.Response.WriteAsync("Unauthorized");
+            }
+            else
+            {
+                var identity = context.User.Identities.Single();
+                if (
+                    identity.NameClaimType == "Name_Failed"
+                    && identity.RoleClaimType == "Role_Failed"
+                )
                 {
-                    await context.ChallengeAsync(WsFederationDefaults.AuthenticationScheme);
-                    await context.Response.WriteAsync("Unauthorized");
+                    context.Response.StatusCode = 500;
+                    await context.Response.WriteAsync("SignIn_Failed");
+                }
+                else if (
+                    !identity.HasClaim("Authenticated", "true")
+                    || !identity.HasClaim("ReturnEndpoint", "true")
+                    || !identity.HasClaim(identity.RoleClaimType, "Guest")
+                )
+                {
+                    await context.Response.WriteAsync("Provider not invoked");
+                    return;
                 }
                 else
                 {
-                    var identity = context.User.Identities.Single();
-                    if (
-                        identity.NameClaimType == "Name_Failed"
-                        && identity.RoleClaimType == "Role_Failed"
-                    )
-                    {
-                        context.Response.StatusCode = 500;
-                        await context.Response.WriteAsync("SignIn_Failed");
-                    }
-                    else if (
-                        !identity.HasClaim("Authenticated", "true")
-                        || !identity.HasClaim("ReturnEndpoint", "true")
-                        || !identity.HasClaim(identity.RoleClaimType, "Guest")
-                    )
-                    {
-                        await context.Response.WriteAsync("Provider not invoked");
-                        return;
-                    }
-                    else
-                    {
-                        await context.Response.WriteAsync(
-                            WsFederationDefaults.AuthenticationScheme
-                        );
-                    }
+                    await context.Response.WriteAsync(WsFederationDefaults.AuthenticationScheme);
                 }
             }
-        );
+        });
     }
 
     private class WaadMetadataDocumentHandler : HttpMessageHandler

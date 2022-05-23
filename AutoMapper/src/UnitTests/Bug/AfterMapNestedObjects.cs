@@ -28,13 +28,11 @@ namespace AutoMapper.UnitTests.Bug
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Inner, InnerDTO>();
-                    cfg.CreateMap<Outer, OuterDTO>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Inner, InnerDTO>();
+                cfg.CreateMap<Outer, OuterDTO>();
+            });
 
         protected override void Because_of()
         {

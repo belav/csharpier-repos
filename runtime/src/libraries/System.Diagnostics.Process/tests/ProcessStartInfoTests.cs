@@ -154,13 +154,11 @@ namespace System.Diagnostics.Tests
             Assert.Null(stringout);
 
             //Exception not thrown with invalid key
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    string stringout1 = null;
-                    environment.TryGetValue(null, out stringout1);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                string stringout1 = null;
+                environment.TryGetValue(null, out stringout1);
+            });
 
             //Exception not thrown with invalid key
             Assert.Throws<ArgumentNullException>(() => environment.Add(null, "NewValue2"));
@@ -173,12 +171,10 @@ namespace System.Diagnostics.Tests
             environment.Remove("NewKey98"); //2nd occurrence should not assert
 
             //Exception not thrown with null key
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    environment.Remove(null);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                environment.Remove(null);
+            });
 
             //"Exception not thrown with null key"
             Assert.Throws<KeyNotFoundException>(() => environment["1bB"]);
@@ -243,12 +239,10 @@ namespace System.Diagnostics.Tests
             Assert.StartsWith("NewKey", kvpa[8].Key);
 
             //Exception not thrown with null key
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    environment.CopyTo(kvpa, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                environment.CopyTo(kvpa, -1);
+            });
 
             //Exception not thrown with null key
             AssertExtensions.Throws<ArgumentException>(
@@ -260,13 +254,11 @@ namespace System.Diagnostics.Tests
             );
 
             //Exception not thrown with null key
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    KeyValuePair<string, string>[] kvpanull = null;
-                    environment.CopyTo(kvpanull, 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                KeyValuePair<string, string>[] kvpanull = null;
+                environment.CopyTo(kvpanull, 0);
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
@@ -275,15 +267,13 @@ namespace System.Diagnostics.Tests
             const string name = "b5a715d3-d74f-465d-abb7-2abe844750c9";
             Environment.SetEnvironmentVariable(name, "parent-process-value");
 
-            Process p = CreateProcess(
-                () =>
-                {
-                    if (Environment.GetEnvironmentVariable(name) != "child-process-value")
-                        return 1;
+            Process p = CreateProcess(() =>
+            {
+                if (Environment.GetEnvironmentVariable(name) != "child-process-value")
+                    return 1;
 
-                    return RemoteExecutor.SuccessExitCode;
-                }
-            );
+                return RemoteExecutor.SuccessExitCode;
+            });
             p.StartInfo.Environment.Add(name, "child-process-value");
             p.Start();
 
@@ -303,26 +293,24 @@ namespace System.Diagnostics.Tests
             {
                 // Schedule a process to see what env vars it gets.  Have it write out those variables
                 // to its output stream so we can read them.
-                Process p = CreateProcess(
-                    () =>
-                    {
-                        Console.Write(
-                            string.Join(
-                                ItemSeparator,
-                                Environment
-                                    .GetEnvironmentVariables()
-                                    .Cast<DictionaryEntry>()
-                                    .Select(
-                                        e =>
-                                            Convert.ToBase64String(
-                                                Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
-                                            )
-                                    )
-                            )
-                        );
-                        return RemoteExecutor.SuccessExitCode;
-                    }
-                );
+                Process p = CreateProcess(() =>
+                {
+                    Console.Write(
+                        string.Join(
+                            ItemSeparator,
+                            Environment
+                                .GetEnvironmentVariables()
+                                .Cast<DictionaryEntry>()
+                                .Select(
+                                    e =>
+                                        Convert.ToBase64String(
+                                            Encoding.UTF8.GetBytes(e.Key + "=" + e.Value)
+                                        )
+                                )
+                        )
+                    );
+                    return RemoteExecutor.SuccessExitCode;
+                });
                 p.StartInfo.StandardOutputEncoding = Encoding.UTF8;
                 p.StartInfo.RedirectStandardOutput = true;
                 p.Start();
@@ -1085,20 +1073,16 @@ namespace System.Diagnostics.Tests
             Assert.Equal(2, index);
 
             //Key not found
-            Assert.Throws<KeyNotFoundException>(
-                () =>
-                {
-                    string stringout = environmentVariables["NewKey99"];
-                }
-            );
+            Assert.Throws<KeyNotFoundException>(() =>
+            {
+                string stringout = environmentVariables["NewKey99"];
+            });
 
             //Exception not thrown with invalid key
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    string stringout = environmentVariables[null];
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                string stringout = environmentVariables[null];
+            });
 
             //Exception not thrown with invalid key
             Assert.Throws<ArgumentNullException>(() => environmentVariables.Add(null, "NewValue2"));
@@ -1137,12 +1121,10 @@ namespace System.Diagnostics.Tests
             Assert.Equal("NewKey", kvpa[6].Key);
             Assert.Equal("newvalue", kvpa[6].Value);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    environmentVariables.CopyTo(kvpa, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                environmentVariables.CopyTo(kvpa, -1);
+            });
 
             AssertExtensions.Throws<ArgumentException>(
                 null,
@@ -1152,13 +1134,11 @@ namespace System.Diagnostics.Tests
                 }
             );
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    KeyValuePair<string, string>[] kvpanull = null;
-                    environmentVariables.CopyTo(kvpanull, 0);
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                KeyValuePair<string, string>[] kvpanull = null;
+                environmentVariables.CopyTo(kvpanull, 0);
+            });
         }
 
         [Theory]

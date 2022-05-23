@@ -76,13 +76,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var route = new Route(
@@ -133,13 +131,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var constraint = new CapturingConstraint();
@@ -190,13 +186,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var route = new Route(
@@ -235,13 +229,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var route = new Route(
@@ -280,13 +272,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var route = new Route(
@@ -323,13 +313,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var constraints = new Dictionary<string, object>();
@@ -378,13 +366,11 @@ public class RouteTest
         var mockTarget = new Mock<IRouter>(MockBehavior.Strict);
         mockTarget
             .Setup(s => s.RouteAsync(It.IsAny<RouteContext>()))
-            .Callback<RouteContext>(
-                ctx =>
-                {
-                    routeValues = ctx.RouteData.Values;
-                    ctx.Handler = NullHandler;
-                }
-            )
+            .Callback<RouteContext>(ctx =>
+            {
+                routeValues = ctx.RouteData.Values;
+                ctx.Handler = NullHandler;
+            })
             .Returns(Task.FromResult(true));
 
         var route = new Route(

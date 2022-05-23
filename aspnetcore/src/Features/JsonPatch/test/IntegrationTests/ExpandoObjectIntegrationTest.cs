@@ -141,12 +141,10 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Test("Test", "TestValue");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -166,12 +164,10 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Test("Test", "TestValue");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -274,12 +270,10 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Remove("NonExisting");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -319,12 +313,10 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Remove("test");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(
@@ -366,12 +358,10 @@ public class ExpandoObjectIntegrationTest
         patchDocument.Remove("test");
 
         // Act
-        var exception = Assert.Throws<JsonPatchException>(
-            () =>
-            {
-                patchDocument.ApplyTo(targetObject);
-            }
-        );
+        var exception = Assert.Throws<JsonPatchException>(() =>
+        {
+            patchDocument.ApplyTo(targetObject);
+        });
 
         // Assert
         Assert.Equal(

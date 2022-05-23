@@ -19,12 +19,10 @@ namespace AutoMapper.UnitTests.Bug
         public class SomeObject { }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_not_validate()

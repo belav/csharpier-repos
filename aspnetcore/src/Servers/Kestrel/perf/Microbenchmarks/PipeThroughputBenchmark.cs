@@ -26,30 +26,26 @@ public class PipeThroughputBenchmark
     [Benchmark(OperationsPerInvoke = InnerLoopCount)]
     public void ParseLiveAspNetTwoTasks()
     {
-        var writing = Task.Run(
-            async () =>
+        var writing = Task.Run(async () =>
+        {
+            for (int i = 0; i < InnerLoopCount; i++)
             {
-                for (int i = 0; i < InnerLoopCount; i++)
-                {
-                    _pipe.Writer.GetMemory(_writeLength);
-                    _pipe.Writer.Advance(_writeLength);
-                    await _pipe.Writer.FlushAsync();
-                }
+                _pipe.Writer.GetMemory(_writeLength);
+                _pipe.Writer.Advance(_writeLength);
+                await _pipe.Writer.FlushAsync();
             }
-        );
+        });
 
-        var reading = Task.Run(
-            async () =>
+        var reading = Task.Run(async () =>
+        {
+            long remaining = InnerLoopCount * _writeLength;
+            while (remaining != 0)
             {
-                long remaining = InnerLoopCount * _writeLength;
-                while (remaining != 0)
-                {
-                    var result = await _pipe.Reader.ReadAsync();
-                    remaining -= result.Buffer.Length;
-                    _pipe.Reader.AdvanceTo(result.Buffer.End, result.Buffer.End);
-                }
+                var result = await _pipe.Reader.ReadAsync();
+                remaining -= result.Buffer.Length;
+                _pipe.Reader.AdvanceTo(result.Buffer.End, result.Buffer.End);
             }
-        );
+        });
 
         Task.WaitAll(writing, reading);
     }

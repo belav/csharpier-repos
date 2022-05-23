@@ -220,12 +220,10 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSend;
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        _ = com1.RtsEnable;
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    _ = com1.RtsEnable;
+                });
             }
         }
 
@@ -246,12 +244,10 @@ namespace System.IO.Ports.Tests
                 com1.Open();
                 com1.Handshake = Handshake.RequestToSendXOnXOff;
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        _ = com1.RtsEnable;
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    _ = com1.RtsEnable;
+                });
             }
         }
 

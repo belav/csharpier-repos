@@ -1290,20 +1290,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Extensions.ContextQuery
             }
 
             var symbols = semanticModelOpt.LookupName(nameToken, cancellationToken);
-            return symbols.Any(
-                s =>
+            return symbols.Any(s =>
+            {
+                switch (s)
                 {
-                    switch (s)
-                    {
-                        case INamedTypeSymbol nt:
-                            return nt.Arity > 0;
-                        case IMethodSymbol m:
-                            return m.Arity > 0;
-                        default:
-                            return false;
-                    }
+                    case INamedTypeSymbol nt:
+                        return nt.Arity > 0;
+                    case IMethodSymbol m:
+                        return m.Arity > 0;
+                    default:
+                        return false;
                 }
-            );
+            });
         }
 
         public static bool IsParameterModifierContext(

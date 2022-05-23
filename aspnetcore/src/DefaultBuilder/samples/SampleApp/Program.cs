@@ -95,18 +95,14 @@ public class Program
     {
         // Using a application builder
         using (
-            WebHost.StartWith(
-                app =>
+            WebHost.StartWith(app =>
+            {
+                app.UseStaticFiles();
+                app.Run(async context =>
                 {
-                    app.UseStaticFiles();
-                    app.Run(
-                        async context =>
-                        {
-                            await context.Response.WriteAsync("Hello, World!");
-                        }
-                    );
-                }
-            )
+                    await context.Response.WriteAsync("Hello, World!");
+                });
+            })
         )
         {
             //host.WaitForShutdown(); // TODO: https://github.com/aspnet/Hosting/issues/1022
@@ -129,18 +125,14 @@ public class Program
     private static void HostBuilderWithWebHost(string[] args)
     {
         var host = new HostBuilder()
-            .ConfigureAppConfiguration(
-                config =>
-                {
-                    config.AddCommandLine(args);
-                }
-            )
-            .ConfigureWebHostDefaults(
-                builder =>
-                {
-                    builder.UseStartup<Startup>();
-                }
-            )
+            .ConfigureAppConfiguration(config =>
+            {
+                config.AddCommandLine(args);
+            })
+            .ConfigureWebHostDefaults(builder =>
+            {
+                builder.UseStartup<Startup>();
+            })
             .Build();
 
         host.Run();
@@ -153,10 +145,8 @@ public class Program
 
     public static IHostBuilder CreateHostBuilder(string[] args) =>
         Host.CreateDefaultBuilder(args)
-            .ConfigureWebHostDefaults(
-                webBuilder =>
-                {
-                    webBuilder.UseStartup<Startup>();
-                }
-            );
+            .ConfigureWebHostDefaults(webBuilder =>
+            {
+                webBuilder.UseStartup<Startup>();
+            });
 }

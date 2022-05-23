@@ -6920,16 +6920,14 @@ Path '', line 1, position 1."
         [Test]
         public void DeserializeUnexpectedEndInt()
         {
-            ExceptionAssert.Throws<JsonException>(
-                () =>
-                {
-                    string json =
-                        @"{
+            ExceptionAssert.Throws<JsonException>(() =>
+            {
+                string json =
+                    @"{
   ""PreProperty"": ";
 
-                    JsonConvert.DeserializeObject<TestObjects.MyClass>(json);
-                }
-            );
+                JsonConvert.DeserializeObject<TestObjects.MyClass>(json);
+            });
         }
 
         [Test]

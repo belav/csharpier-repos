@@ -124,13 +124,11 @@ namespace System.CommandLine.Tests
             [Fact]
             public void Validation_failure_message_can_be_specified_when_parsing_tokens()
             {
-                var argument = new Argument<FileSystemInfo>(
-                    result =>
-                    {
-                        result.ErrorMessage = "oops!";
-                        return null;
-                    }
-                );
+                var argument = new Argument<FileSystemInfo>(result =>
+                {
+                    result.ErrorMessage = "oops!";
+                    return null;
+                });
 
                 argument
                     .Parse("x")
@@ -201,12 +199,10 @@ namespace System.CommandLine.Tests
             [Fact]
             public void custom_parsing_of_sequence_value_from_an_argument_with_multiple_tokens()
             {
-                var argument = new Argument<IEnumerable<int>>(
-                    result =>
-                    {
-                        return result.Tokens.Select(t => int.Parse(t.Value)).ToArray();
-                    }
-                );
+                var argument = new Argument<IEnumerable<int>>(result =>
+                {
+                    return result.Tokens.Select(t => int.Parse(t.Value)).ToArray();
+                });
 
                 argument
                     .Parse("1 2 3")

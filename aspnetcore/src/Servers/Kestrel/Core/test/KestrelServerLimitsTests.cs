@@ -20,12 +20,10 @@ public class KestrelServerLimitsTests
     [InlineData(long.MinValue)]
     public void MaxResponseBufferSizeInvalid(long value)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                (new KestrelServerLimits()).MaxResponseBufferSize = value;
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            (new KestrelServerLimits()).MaxResponseBufferSize = value;
+        });
     }
 
     [Theory]
@@ -51,12 +49,10 @@ public class KestrelServerLimitsTests
     [InlineData(0)]
     public void MaxRequestBufferSizeInvalid(int value)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                (new KestrelServerLimits()).MaxRequestBufferSize = value;
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            (new KestrelServerLimits()).MaxRequestBufferSize = value;
+        });
     }
 
     [Theory]
@@ -81,12 +77,10 @@ public class KestrelServerLimitsTests
     [InlineData(0)]
     public void MaxRequestLineSizeInvalid(int value)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                (new KestrelServerLimits()).MaxRequestLineSize = value;
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            (new KestrelServerLimits()).MaxRequestLineSize = value;
+        });
     }
 
     [Theory]
@@ -139,12 +133,10 @@ public class KestrelServerLimitsTests
     [InlineData(0)]
     public void MaxRequestHeaderCountInvalid(int value)
     {
-        Assert.Throws<ArgumentOutOfRangeException>(
-            () =>
-            {
-                (new KestrelServerLimits()).MaxRequestHeaderCount = value;
-            }
-        );
+        Assert.Throws<ArgumentOutOfRangeException>(() =>
+        {
+            (new KestrelServerLimits()).MaxRequestHeaderCount = value;
+        });
     }
 
     [Theory]

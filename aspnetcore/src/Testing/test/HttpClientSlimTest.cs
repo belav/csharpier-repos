@@ -115,28 +115,26 @@ public class HttpClientSlimTest
 
         _ = listener
             .GetContextAsync()
-            .ContinueWith(
-                async task =>
+            .ContinueWith(async task =>
+            {
+                var context = task.Result;
+                context.Response.StatusCode = statusCode;
+
+                if (handler == null)
                 {
-                    var context = task.Result;
-                    context.Response.StatusCode = statusCode;
-
-                    if (handler == null)
-                    {
-                        await context.Response.OutputStream.WriteAsync(
-                            _defaultResponse,
-                            0,
-                            _defaultResponse.Length
-                        );
-                    }
-                    else
-                    {
-                        await handler(context);
-                    }
-
-                    context.Response.Close();
+                    await context.Response.OutputStream.WriteAsync(
+                        _defaultResponse,
+                        0,
+                        _defaultResponse.Length
+                    );
                 }
-            );
+                else
+                {
+                    await handler(context);
+                }
+
+                context.Response.Close();
+            });
 
         return listener;
     }

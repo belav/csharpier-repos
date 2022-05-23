@@ -1098,19 +1098,17 @@ public class ModelMetadataProviderTest
         {
             var entries = base.CreatePropertyDetails(key);
             return entries
-                .Select(
-                    e =>
-                    {
-                        return new DefaultMetadataDetails(
-                            e.Key,
-                            new ModelAttributes(
-                                e.ModelAttributes.TypeAttributes,
-                                _attributes.Concat(e.ModelAttributes.PropertyAttributes),
-                                Array.Empty<object>()
-                            )
-                        );
-                    }
-                )
+                .Select(e =>
+                {
+                    return new DefaultMetadataDetails(
+                        e.Key,
+                        new ModelAttributes(
+                            e.ModelAttributes.TypeAttributes,
+                            _attributes.Concat(e.ModelAttributes.PropertyAttributes),
+                            Array.Empty<object>()
+                        )
+                    );
+                })
                 .ToArray();
         }
     }

@@ -38,12 +38,10 @@ namespace System.Security.Cryptography.Encryption.RC2.Tests
                 {
                     // there are some key sizes that are invalid for any of the modes,
                     // so the exception is thrown in the setter
-                    Assert.Throws<CryptographicException>(
-                        () =>
-                        {
-                            rc2.FeedbackSize = feedbackSize;
-                        }
-                    );
+                    Assert.Throws<CryptographicException>(() =>
+                    {
+                        rc2.FeedbackSize = feedbackSize;
+                    });
                 }
                 else
                 {

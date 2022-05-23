@@ -169,12 +169,10 @@ namespace System.Net.Http.Functional.Tests
                 },
                 async server =>
                 {
-                    await server.AcceptConnectionAsync(
-                        async connection =>
-                        {
-                            await connection.HandleRequestAsync();
-                        }
-                    );
+                    await server.AcceptConnectionAsync(async connection =>
+                    {
+                        await connection.HandleRequestAsync();
+                    });
                 }
             );
         }

@@ -46,12 +46,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person3)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person3();
@@ -94,12 +92,10 @@ public class ActionParameterIntegrationTest
             Name = "prefix",
             ParameterType = typeof(Person6)
         };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -143,12 +139,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         var model = new Person4();
@@ -193,12 +187,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person5)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
         // Act
@@ -232,12 +224,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person3)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -275,12 +265,10 @@ public class ActionParameterIntegrationTest
             BindingInfo = new BindingInfo { BinderModelName = "prefix" },
             ParameterType = typeof(Person6)
         };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -321,12 +309,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person4)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -365,12 +351,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(Person5)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("prefix.Address[0].Street", "SomeStreet");
+        });
 
         var modelState = testContext.ModelState;
 
@@ -399,14 +383,12 @@ public class ActionParameterIntegrationTest
         var parameterType = typeof(Class1);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString
-                    .Create("Name", "James")
-                    .Add("Property1.City", "Seattle");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString
+                .Create("Name", "James")
+                .Add("Property1.City", "Seattle");
+        });
         var modelState = testContext.ModelState;
 
         // Act & Assert
@@ -436,12 +418,10 @@ public class ActionParameterIntegrationTest
         var parameterType = typeof(ActionParameter_DefaultValueConstructor);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Name", "James");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Name", "James");
+        });
         var modelState = testContext.ModelState;
 
         // Act
@@ -572,12 +552,10 @@ public class ActionParameterIntegrationTest
             typeof(ActionParameter_MultipleConstructorsWithDefaultValues_NoParameterlessConstructorModel);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Name", "James");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Name", "James");
+        });
         var modelState = testContext.ModelState;
 
         // Act & Assert
@@ -607,12 +585,10 @@ public class ActionParameterIntegrationTest
         var parameterType = typeof(ActionParameter_RecordTypeWithMultipleConstructors);
         var parameterBinder = ModelBindingTestHelper.GetParameterBinder();
         var parameter = new ParameterDescriptor() { Name = "p", ParameterType = parameterType };
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create("Name", "James").Add("Age", "29");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create("Name", "James").Add("Age", "29");
+        });
         var modelState = testContext.ModelState;
 
         // Act & Assert
@@ -673,12 +649,10 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(int)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(parameter.Name, "123");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(parameter.Name, "123");
+        });
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -710,15 +684,13 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(ModelWithIValidatableObject)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(
-                    nameof(ModelWithIValidatableObject.FirstName),
-                    "TestName"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(
+                nameof(ModelWithIValidatableObject.FirstName),
+                "TestName"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -759,18 +731,16 @@ public class ActionParameterIntegrationTest
             ParameterType = typeof(int)
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            if (input.HasValue)
             {
-                if (input.HasValue)
-                {
-                    request.QueryString = QueryString.Create(
-                        parameter.Name,
-                        input.Value.ToString(CultureInfo.InvariantCulture)
-                    );
-                }
+                request.QueryString = QueryString.Create(
+                    parameter.Name,
+                    input.Value.ToString(CultureInfo.InvariantCulture)
+                );
             }
-        );
+        });
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -820,15 +790,13 @@ public class ActionParameterIntegrationTest
             ParameterType = parameterInfo.ParameterType
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            if (input != null)
             {
-                if (input != null)
-                {
-                    request.QueryString = QueryString.Create(parameter.Name, input);
-                }
+                request.QueryString = QueryString.Create(parameter.Name, input);
             }
-        );
+        });
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -867,15 +835,13 @@ public class ActionParameterIntegrationTest
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                request.QueryString = QueryString.Create(
-                    nameof(ModelWithIValidatableObject.FirstName),
-                    "Billy"
-                );
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            request.QueryString = QueryString.Create(
+                nameof(ModelWithIValidatableObject.FirstName),
+                "Billy"
+            );
+        });
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();
@@ -916,16 +882,14 @@ public class ActionParameterIntegrationTest
             ParameterType = parameterInfo.ParameterType,
         };
 
-        var testContext = ModelBindingTestHelper.GetTestContext(
-            request =>
-            {
-                var key = ModelNames.CreatePropertyModelName(
-                    parameter.Name,
-                    nameof(ModelWithIValidatableObject.FirstName)
-                );
-                request.QueryString = QueryString.Create(key, "Billy");
-            }
-        );
+        var testContext = ModelBindingTestHelper.GetTestContext(request =>
+        {
+            var key = ModelNames.CreatePropertyModelName(
+                parameter.Name,
+                nameof(ModelWithIValidatableObject.FirstName)
+            );
+            request.QueryString = QueryString.Create(key, "Billy");
+        });
 
         var modelState = testContext.ModelState;
         var modelMetadataProvider = TestModelMetadataProvider.CreateDefaultProvider();

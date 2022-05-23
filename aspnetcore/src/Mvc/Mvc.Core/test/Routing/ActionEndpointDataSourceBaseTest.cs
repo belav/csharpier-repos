@@ -108,15 +108,13 @@ public abstract class ActionEndpointDataSourceBaseTest
         CancellationTokenSource cts = null;
         actionDescriptorCollectionProviderMock
             .Setup(m => m.GetChangeToken())
-            .Returns(
-                () =>
-                {
-                    cts = new CancellationTokenSource();
-                    var changeToken = new CancellationChangeToken(cts.Token);
+            .Returns(() =>
+            {
+                cts = new CancellationTokenSource();
+                var changeToken = new CancellationChangeToken(cts.Token);
 
-                    return changeToken;
-                }
-            );
+                return changeToken;
+            });
 
         var dataSource = CreateDataSource(actionDescriptorCollectionProviderMock.Object);
 
@@ -184,12 +182,10 @@ public abstract class ActionEndpointDataSourceBaseTest
 
         var routeOptionsSetup = new MvcCoreRouteOptionsSetup();
         services.Configure<RouteOptions>(routeOptionsSetup.Configure);
-        services.AddRouting(
-            options =>
-            {
-                options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
-            }
-        );
+        services.AddRouting(options =>
+        {
+            options.ConstraintMap["upper-case"] = typeof(UpperCaseParameterTransform);
+        });
 
         var serviceProvider = services.BuildServiceProvider();
 

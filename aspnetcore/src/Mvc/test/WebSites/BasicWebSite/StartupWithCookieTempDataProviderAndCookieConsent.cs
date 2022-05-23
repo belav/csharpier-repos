@@ -13,12 +13,10 @@ public class StartupWithCookieTempDataProviderAndCookieConsent
     {
         services.AddMvc().AddNewtonsoftJson();
 
-        services.Configure<CookiePolicyOptions>(
-            o =>
-            {
-                o.CheckConsentNeeded = httpContext => true;
-            }
-        );
+        services.Configure<CookiePolicyOptions>(o =>
+        {
+            o.CheckConsentNeeded = httpContext => true;
+        });
 
         services.ConfigureBaseWebSiteAuthPolicies();
     }
@@ -29,12 +27,10 @@ public class StartupWithCookieTempDataProviderAndCookieConsent
 
         app.UseCookiePolicy();
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDefaultControllerRoute();
-                endpoints.MapRazorPages();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDefaultControllerRoute();
+            endpoints.MapRazorPages();
+        });
     }
 }

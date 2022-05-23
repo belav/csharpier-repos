@@ -36,28 +36,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                d => d.Value1,
-                                opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
-                            )
-                            .ForMember(
-                                d => d.Value2,
-                                opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
-                            )
-                            .ForMember(
-                                d => d.Value3,
-                                opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
-                            )
-                            .ForMember(
-                                d => d.Value4,
-                                opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            d => d.Value1,
+                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                        )
+                        .ForMember(
+                            d => d.Value2,
+                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                        )
+                        .ForMember(
+                            d => d.Value3,
+                            opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
+                        )
+                        .ForMember(
+                            d => d.Value4,
+                            opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -110,40 +108,38 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                d => d.ValueFoo1,
-                                opt =>
-                                    opt.ConvertUsing<EightDigitIntToStringConverter, int>(
-                                        src => src.Value1
-                                    )
-                            )
-                            .ForMember(
-                                d => d.ValueFoo2,
-                                opt =>
-                                    opt.ConvertUsing<EightDigitIntToStringConverter, int>(
-                                        src => src.Value2
-                                    )
-                            )
-                            .ForMember(
-                                d => d.ValueFoo3,
-                                opt =>
-                                    opt.ConvertUsing<FourDigitIntToStringConverter, int>(
-                                        src => src.Value3
-                                    )
-                            )
-                            .ForMember(
-                                d => d.ValueFoo4,
-                                opt =>
-                                    opt.ConvertUsing<FourDigitIntToStringConverter, int>(
-                                        src => src.Value4
-                                    )
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            d => d.ValueFoo1,
+                            opt =>
+                                opt.ConvertUsing<EightDigitIntToStringConverter, int>(
+                                    src => src.Value1
+                                )
+                        )
+                        .ForMember(
+                            d => d.ValueFoo2,
+                            opt =>
+                                opt.ConvertUsing<EightDigitIntToStringConverter, int>(
+                                    src => src.Value2
+                                )
+                        )
+                        .ForMember(
+                            d => d.ValueFoo3,
+                            opt =>
+                                opt.ConvertUsing<FourDigitIntToStringConverter, int>(
+                                    src => src.Value3
+                                )
+                        )
+                        .ForMember(
+                            d => d.ValueFoo4,
+                            opt =>
+                                opt.ConvertUsing<FourDigitIntToStringConverter, int>(
+                                    src => src.Value4
+                                )
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -197,28 +193,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                "Value1",
-                                opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
-                            )
-                            .ForMember(
-                                "Value2",
-                                opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
-                            )
-                            .ForMember(
-                                "Value3",
-                                opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
-                            )
-                            .ForMember(
-                                "Value4",
-                                opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            "Value1",
+                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                        )
+                        .ForMember(
+                            "Value2",
+                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>()
+                        )
+                        .ForMember(
+                            "Value3",
+                            opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
+                        )
+                        .ForMember(
+                            "Value4",
+                            opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>()
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -272,32 +266,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                "ValueFoo1",
-                                opt =>
-                                    opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value1")
-                            )
-                            .ForMember(
-                                "ValueFoo2",
-                                opt =>
-                                    opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value2")
-                            )
-                            .ForMember(
-                                "ValueFoo3",
-                                opt =>
-                                    opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value3")
-                            )
-                            .ForMember(
-                                "ValueFoo4",
-                                opt =>
-                                    opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value4")
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            "ValueFoo1",
+                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value1")
+                        )
+                        .ForMember(
+                            "ValueFoo2",
+                            opt => opt.ConvertUsing<EightDigitIntToStringConverter, int>("Value2")
+                        )
+                        .ForMember(
+                            "ValueFoo3",
+                            opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value3")
+                        )
+                        .ForMember(
+                            "ValueFoo4",
+                            opt => opt.ConvertUsing<FourDigitIntToStringConverter, int>("Value4")
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -351,28 +339,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap(typeof(Source), typeof(Dest))
-                            .ForMember(
-                                "Value1",
-                                opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
-                            )
-                            .ForMember(
-                                "Value2",
-                                opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
-                            )
-                            .ForMember(
-                                "Value3",
-                                opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
-                            )
-                            .ForMember(
-                                "Value4",
-                                opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap(typeof(Source), typeof(Dest))
+                        .ForMember(
+                            "Value1",
+                            opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
+                        )
+                        .ForMember(
+                            "Value2",
+                            opt => opt.ConvertUsing(typeof(EightDigitIntToStringConverter))
+                        )
+                        .ForMember(
+                            "Value3",
+                            opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
+                        )
+                        .ForMember(
+                            "Value4",
+                            opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter))
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -426,44 +412,28 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap(typeof(Source), typeof(Dest))
-                            .ForMember(
-                                "ValueFoo1",
-                                opt =>
-                                    opt.ConvertUsing(
-                                        typeof(EightDigitIntToStringConverter),
-                                        "Value1"
-                                    )
-                            )
-                            .ForMember(
-                                "ValueFoo2",
-                                opt =>
-                                    opt.ConvertUsing(
-                                        typeof(EightDigitIntToStringConverter),
-                                        "Value2"
-                                    )
-                            )
-                            .ForMember(
-                                "ValueFoo3",
-                                opt =>
-                                    opt.ConvertUsing(
-                                        typeof(FourDigitIntToStringConverter),
-                                        "Value3"
-                                    )
-                            )
-                            .ForMember(
-                                "ValueFoo4",
-                                opt =>
-                                    opt.ConvertUsing(
-                                        typeof(FourDigitIntToStringConverter),
-                                        "Value4"
-                                    )
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap(typeof(Source), typeof(Dest))
+                        .ForMember(
+                            "ValueFoo1",
+                            opt =>
+                                opt.ConvertUsing(typeof(EightDigitIntToStringConverter), "Value1")
+                        )
+                        .ForMember(
+                            "ValueFoo2",
+                            opt =>
+                                opt.ConvertUsing(typeof(EightDigitIntToStringConverter), "Value2")
+                        )
+                        .ForMember(
+                            "ValueFoo3",
+                            opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter), "Value3")
+                        )
+                        .ForMember(
+                            "ValueFoo4",
+                            opt => opt.ConvertUsing(typeof(FourDigitIntToStringConverter), "Value4")
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -517,28 +487,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                d => d.Value1,
-                                opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
-                            )
-                            .ForMember(
-                                d => d.Value2,
-                                opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
-                            )
-                            .ForMember(
-                                d => d.Value3,
-                                opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
-                            )
-                            .ForMember(
-                                d => d.Value4,
-                                opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            d => d.Value1,
+                            opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                        )
+                        .ForMember(
+                            d => d.Value2,
+                            opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                        )
+                        .ForMember(
+                            d => d.Value3,
+                            opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
+                        )
+                        .ForMember(
+                            d => d.Value4,
+                            opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -592,44 +560,42 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                d => d.ValueFoo1,
-                                opt =>
-                                    opt.ConvertUsing(
-                                        new EightDigitIntToStringConverter(),
-                                        src => src.Value1
-                                    )
-                            )
-                            .ForMember(
-                                d => d.ValueFoo2,
-                                opt =>
-                                    opt.ConvertUsing(
-                                        new EightDigitIntToStringConverter(),
-                                        src => src.Value2
-                                    )
-                            )
-                            .ForMember(
-                                d => d.ValueFoo3,
-                                opt =>
-                                    opt.ConvertUsing(
-                                        new FourDigitIntToStringConverter(),
-                                        src => src.Value3
-                                    )
-                            )
-                            .ForMember(
-                                d => d.ValueFoo4,
-                                opt =>
-                                    opt.ConvertUsing(
-                                        new FourDigitIntToStringConverter(),
-                                        src => src.Value4
-                                    )
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            d => d.ValueFoo1,
+                            opt =>
+                                opt.ConvertUsing(
+                                    new EightDigitIntToStringConverter(),
+                                    src => src.Value1
+                                )
+                        )
+                        .ForMember(
+                            d => d.ValueFoo2,
+                            opt =>
+                                opt.ConvertUsing(
+                                    new EightDigitIntToStringConverter(),
+                                    src => src.Value2
+                                )
+                        )
+                        .ForMember(
+                            d => d.ValueFoo3,
+                            opt =>
+                                opt.ConvertUsing(
+                                    new FourDigitIntToStringConverter(),
+                                    src => src.Value3
+                                )
+                        )
+                        .ForMember(
+                            d => d.ValueFoo4,
+                            opt =>
+                                opt.ConvertUsing(
+                                    new FourDigitIntToStringConverter(),
+                                    src => src.Value4
+                                )
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -683,28 +649,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                "Value1",
-                                opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
-                            )
-                            .ForMember(
-                                "Value2",
-                                opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
-                            )
-                            .ForMember(
-                                "Value3",
-                                opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
-                            )
-                            .ForMember(
-                                "Value4",
-                                opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            "Value1",
+                            opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                        )
+                        .ForMember(
+                            "Value2",
+                            opt => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                        )
+                        .ForMember(
+                            "Value3",
+                            opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
+                        )
+                        .ForMember(
+                            "Value4",
+                            opt => opt.ConvertUsing(new FourDigitIntToStringConverter())
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -758,32 +722,26 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                "ValueFoo1",
-                                opt =>
-                                    opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value1")
-                            )
-                            .ForMember(
-                                "ValueFoo2",
-                                opt =>
-                                    opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value2")
-                            )
-                            .ForMember(
-                                "ValueFoo3",
-                                opt =>
-                                    opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value3")
-                            )
-                            .ForMember(
-                                "ValueFoo4",
-                                opt =>
-                                    opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value4")
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            "ValueFoo1",
+                            opt => opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value1")
+                        )
+                        .ForMember(
+                            "ValueFoo2",
+                            opt => opt.ConvertUsing(new EightDigitIntToStringConverter(), "Value2")
+                        )
+                        .ForMember(
+                            "ValueFoo3",
+                            opt => opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value3")
+                        )
+                        .ForMember(
+                            "ValueFoo4",
+                            opt => opt.ConvertUsing(new FourDigitIntToStringConverter(), "Value4")
+                        );
+                });
 
             [Fact]
             public void Should_apply_converters()
@@ -834,19 +792,15 @@ namespace AutoMapper.UnitTests
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>();
-                        cfg.CreateMap<OtherSource, OtherDest>();
-                        cfg.ForAllPropertyMaps(
-                            pm =>
-                                pm.SourceType == typeof(int)
-                                && pm.DestinationType == typeof(string),
-                            (pm, opt) => opt.ConvertUsing(new EightDigitIntToStringConverter())
-                        );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>();
+                    cfg.CreateMap<OtherSource, OtherDest>();
+                    cfg.ForAllPropertyMaps(
+                        pm => pm.SourceType == typeof(int) && pm.DestinationType == typeof(string),
+                        (pm, opt) => opt.ConvertUsing(new EightDigitIntToStringConverter())
+                    );
+                });
 
             [Fact]
             public void Should_apply_converters()

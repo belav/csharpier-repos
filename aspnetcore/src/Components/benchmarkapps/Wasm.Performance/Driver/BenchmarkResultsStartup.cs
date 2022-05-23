@@ -26,16 +26,14 @@ public class BenchmarkDriverStartup
     {
         app.UseCors();
 
-        app.Run(
-            async context =>
-            {
-                var result = await JsonSerializer.DeserializeAsync<BenchmarkResult>(
-                    context.Request.Body,
-                    new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, }
-                );
-                await context.Response.WriteAsync("OK");
-                Program.BenchmarkResultTask.TrySetResult(result);
-            }
-        );
+        app.Run(async context =>
+        {
+            var result = await JsonSerializer.DeserializeAsync<BenchmarkResult>(
+                context.Request.Body,
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase, }
+            );
+            await context.Response.WriteAsync("OK");
+            Program.BenchmarkResultTask.TrySetResult(result);
+        });
     }
 }

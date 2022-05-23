@@ -34,39 +34,35 @@ public class StartupForDynamic
     public void Configure(IApplicationBuilder app)
     {
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapDynamicControllerRoute<Transformer>(
-                    "v1/dynamic/{**slug}",
-                    new DynamicVersion { Version = "V1" }
-                );
-                endpoints.MapDynamicControllerRoute<Transformer>(
-                    "v2/dynamic/{**slug}",
-                    new DynamicVersion { Version = "V2" }
-                );
-                endpoints.MapDynamicPageRoute<Transformer>(
-                    "v1/dynamicpage/{**slug}",
-                    new DynamicVersion { Version = "V1" }
-                );
-                endpoints.MapDynamicPageRoute<Transformer>(
-                    "v2/dynamicpage/{**slug}",
-                    new DynamicVersion { Version = "V2" }
-                );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapDynamicControllerRoute<Transformer>(
+                "v1/dynamic/{**slug}",
+                new DynamicVersion { Version = "V1" }
+            );
+            endpoints.MapDynamicControllerRoute<Transformer>(
+                "v2/dynamic/{**slug}",
+                new DynamicVersion { Version = "V2" }
+            );
+            endpoints.MapDynamicPageRoute<Transformer>(
+                "v1/dynamicpage/{**slug}",
+                new DynamicVersion { Version = "V1" }
+            );
+            endpoints.MapDynamicPageRoute<Transformer>(
+                "v2/dynamicpage/{**slug}",
+                new DynamicVersion { Version = "V2" }
+            );
 
-                endpoints.MapControllerRoute("link", "link_generation/{controller}/{action}/{id?}");
-            }
-        );
+            endpoints.MapControllerRoute("link", "link_generation/{controller}/{action}/{id?}");
+        });
 
         app.Map(
             "/afterrouting",
             b =>
-                b.Run(
-                    c =>
-                    {
-                        return c.Response.WriteAsync("Hello from middleware after routing");
-                    }
-                )
+                b.Run(c =>
+                {
+                    return c.Response.WriteAsync("Hello from middleware after routing");
+                })
         );
     }
 

@@ -78,16 +78,14 @@ public class RemoteJSDataStreamTest
         var random = new Random();
         random.NextBytes(chunk);
 
-        var sendDataTask = Task.Run(
-            async () =>
-            {
-                // Act 1
-                var success = await RemoteJSDataStream
-                    .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
-                    .DefaultTimeout();
-                return success;
-            }
-        );
+        var sendDataTask = Task.Run(async () =>
+        {
+            // Act 1
+            var success = await RemoteJSDataStream
+                .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
+                .DefaultTimeout();
+            return success;
+        });
 
         // Act & Assert 2
         using var memoryStream = new MemoryStream();
@@ -114,16 +112,14 @@ public class RemoteJSDataStreamTest
         var random = new Random();
         random.NextBytes(chunk);
 
-        var sendDataTask = Task.Run(
-            async () =>
-            {
-                // Act 1
-                var success = await RemoteJSDataStream
-                    .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
-                    .DefaultTimeout();
-                return success;
-            }
-        );
+        var sendDataTask = Task.Run(async () =>
+        {
+            // Act 1
+            var success = await RemoteJSDataStream
+                .ReceiveData(jsRuntime, streamId, chunkId: 0, chunk, error: null)
+                .DefaultTimeout();
+            return success;
+        });
 
         // Act & Assert 2
         using var memoryStream = new MemoryStream();

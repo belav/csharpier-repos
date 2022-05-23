@@ -38,13 +38,11 @@ namespace System.Reflection.Metadata.Tests
                 () => MetadataReaderProvider.FromMetadataImage(null, 10)
             );
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    fixed (byte* p = new byte[] { 0 })
-                        MetadataReaderProvider.FromMetadataImage(p, -1);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                fixed (byte* p = new byte[] { 0 })
+                    MetadataReaderProvider.FromMetadataImage(p, -1);
+            });
 
             Assert.Throws<ArgumentNullException>(
                 () => MetadataReaderProvider.FromMetadataImage(default(ImmutableArray<byte>))

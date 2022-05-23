@@ -25,22 +25,20 @@ public class StartupRoutingDifferentBranches
         services
             .AddMvc(ConfigureMvcOptions)
             .AddNewtonsoftJson()
-            .AddRazorPagesOptions(
-                options =>
-                {
-                    options.Conventions.AddPageRoute(
-                        "/PageRouteTransformer/PageWithConfiguredRoute",
-                        "/PageRouteTransformer/NewConventionRoute/{id?}"
-                    );
-                    options.Conventions.AddFolderRouteModelConvention(
-                        "/PageRouteTransformer",
-                        model =>
-                        {
-                            pageRouteTransformerConvention.Apply(model);
-                        }
-                    );
-                }
-            );
+            .AddRazorPagesOptions(options =>
+            {
+                options.Conventions.AddPageRoute(
+                    "/PageRouteTransformer/PageWithConfiguredRoute",
+                    "/PageRouteTransformer/NewConventionRoute/{id?}"
+                );
+                options.Conventions.AddFolderRouteModelConvention(
+                    "/PageRouteTransformer",
+                    model =>
+                    {
+                        pageRouteTransformerConvention.Apply(model);
+                    }
+                );
+            });
 
         ConfigureRoutingServices(services);
 
@@ -58,19 +56,14 @@ public class StartupRoutingDifferentBranches
             {
                 branch.UseRouting();
 
-                branch.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapRazorPages();
-                        endpoints.MapControllerRoute(
-                            null,
-                            "literal/{controller}/{action}/{subdir}"
-                        );
-                        endpoints.MapDynamicControllerRoute<BranchesTransformer>(
-                            "literal/dynamic/controller/{**slug}"
-                        );
-                    }
-                );
+                branch.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapControllerRoute(null, "literal/{controller}/{action}/{subdir}");
+                    endpoints.MapDynamicControllerRoute<BranchesTransformer>(
+                        "literal/dynamic/controller/{**slug}"
+                    );
+                });
             }
         );
 
@@ -80,39 +73,30 @@ public class StartupRoutingDifferentBranches
             {
                 branch.UseRouting();
 
-                branch.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapControllerRoute(
-                            null,
-                            "{controller}/{action}/{common}/literal"
-                        );
-                        endpoints.MapDynamicControllerRoute<BranchesTransformer>(
-                            "dynamic/controller/literal/{**slug}"
-                        );
-                    }
-                );
+                branch.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapControllerRoute(null, "{controller}/{action}/{common}/literal");
+                    endpoints.MapDynamicControllerRoute<BranchesTransformer>(
+                        "dynamic/controller/literal/{**slug}"
+                    );
+                });
             }
         );
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapControllers();
-                endpoints.MapDynamicControllerRoute<BranchesTransformer>(
-                    "dynamicattributeorder/dynamic/route/{**slug}"
-                );
-                endpoints.MapControllerRoute(null, "{controller}/literal/{action}/{default}");
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapControllers();
+            endpoints.MapDynamicControllerRoute<BranchesTransformer>(
+                "dynamicattributeorder/dynamic/route/{**slug}"
+            );
+            endpoints.MapControllerRoute(null, "{controller}/literal/{action}/{default}");
+        });
 
-        app.Run(
-            c =>
-            {
-                return c.Response.WriteAsync("Hello from middleware after routing");
-            }
-        );
+        app.Run(c =>
+        {
+            return c.Response.WriteAsync("Hello from middleware after routing");
+        });
     }
 
     protected virtual void ConfigureMvcOptions(MvcOptions options)

@@ -28,12 +28,10 @@ public class StaticFileMiddlewareTests
     public async Task ReturnsNotFoundWithoutWwwroot()
     {
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder.UseTestServer().Configure(app => app.UseStaticFiles());
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer().Configure(app => app.UseStaticFiles());
+            })
             .Build();
 
         await host.StartAsync();
@@ -58,20 +56,18 @@ public class StaticFileMiddlewareTests
         try
         {
             using var host = new HostBuilder()
-                .ConfigureWebHost(
-                    webHostBuilder =>
-                    {
-                        webHostBuilder
-                            .UseTestServer()
-                            .Configure(
-                                app =>
-                                    app.UseStaticFiles(
-                                        new StaticFileOptions { ServeUnknownFileTypes = true }
-                                    )
-                            )
-                            .UseWebRoot(AppContext.BaseDirectory);
-                    }
-                )
+                .ConfigureWebHost(webHostBuilder =>
+                {
+                    webHostBuilder
+                        .UseTestServer()
+                        .Configure(
+                            app =>
+                                app.UseStaticFiles(
+                                    new StaticFileOptions { ServeUnknownFileTypes = true }
+                                )
+                        )
+                        .UseWebRoot(AppContext.BaseDirectory);
+                })
                 .Build();
 
             await host.StartAsync();
@@ -106,29 +102,23 @@ public class StaticFileMiddlewareTests
             .ThrowsAsync(new FileNotFoundException());
         mockSendFile.Setup(m => m.Stream).Returns(Stream.Null);
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.Use(
+                            async (ctx, next) =>
                             {
-                                app.Use(
-                                    async (ctx, next) =>
-                                    {
-                                        ctx.Features.Set(mockSendFile.Object);
-                                        await next(ctx);
-                                    }
-                                );
-                                app.UseStaticFiles(
-                                    new StaticFileOptions { ServeUnknownFileTypes = true }
-                                );
+                                ctx.Features.Set(mockSendFile.Object);
+                                await next(ctx);
                             }
-                        )
-                        .UseWebRoot(AppContext.BaseDirectory);
-                }
-            )
+                        );
+                        app.UseStaticFiles(new StaticFileOptions { ServeUnknownFileTypes = true });
+                    })
+                    .UseWebRoot(AppContext.BaseDirectory);
+            })
             .Build();
 
         await host.StartAsync();

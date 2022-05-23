@@ -44,24 +44,19 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             for (var i = 0; i < numSets; i++)
             {
                 var setNum = i;
-                var task = Task.Run(
-                    () =>
-                    {
-                        var (oldTokensSubset, newTokensSubset) = GetTokenSubsets(
-                            oldTokens,
-                            newTokens,
-                            setNum
-                        );
-                        var currentEditSet = s_instance.ComputeDiff(
-                            oldTokensSubset,
-                            newTokensSubset
-                        );
+                var task = Task.Run(() =>
+                {
+                    var (oldTokensSubset, newTokensSubset) = GetTokenSubsets(
+                        oldTokens,
+                        newTokens,
+                        setNum
+                    );
+                    var currentEditSet = s_instance.ComputeDiff(oldTokensSubset, newTokensSubset);
 
-                        // Adjust the indices of our results since we partitioned them earlier into smaller sets.
-                        var adjustedEdits = AdjustEditPositions(oldTokens, setNum, currentEditSet);
-                        return adjustedEdits;
-                    }
-                );
+                    // Adjust the indices of our results since we partitioned them earlier into smaller sets.
+                    var adjustedEdits = AdjustEditPositions(oldTokens, setNum, currentEditSet);
+                    return adjustedEdits;
+                });
 
                 tasks.Add(task);
             }
@@ -108,34 +103,31 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
                 IReadOnlyList<DiffEdit> currentEditSet
             )
             {
-                var adjustedEdits = currentEditSet.SelectAsArray(
-                    edit =>
-                    {
-                        // Due to the way partitioning works, we may have to adjust the position of the edit.
-                        // For example, let's say we have a partition size of 50, old array 'O' with size 30, and
-                        // new array 'N' with size 90. The first partition would be (O[0..30), N[0..50)), while the
-                        // second partition would be (empty, N[50..90)). Any insertion or deletion within the second
-                        // partition would be considered out of bounds when the LSP client applies the edit since the
-                        // client applies edits in reverse order from largest->smallest index.
-                        // In this case, what we want to do instead is set the position to be at the very end of the
-                        // old array's boundary.
-                        var position = edit.Position + (setNum * MaxArraySize);
-                        position = Math.Min(position, oldTokens.Length);
+                var adjustedEdits = currentEditSet.SelectAsArray(edit =>
+                {
+                    // Due to the way partitioning works, we may have to adjust the position of the edit.
+                    // For example, let's say we have a partition size of 50, old array 'O' with size 30, and
+                    // new array 'N' with size 90. The first partition would be (O[0..30), N[0..50)), while the
+                    // second partition would be (empty, N[50..90)). Any insertion or deletion within the second
+                    // partition would be considered out of bounds when the LSP client applies the edit since the
+                    // client applies edits in reverse order from largest->smallest index.
+                    // In this case, what we want to do instead is set the position to be at the very end of the
+                    // old array's boundary.
+                    var position = edit.Position + (setNum * MaxArraySize);
+                    position = Math.Min(position, oldTokens.Length);
 
-                        return edit.Operation switch
-                        {
-                            DiffEdit.Type.Insert
-                                => new DiffEdit(
-                                    DiffEdit.Type.Insert,
-                                    position,
-                                    newTextPosition: edit.NewTextPosition + (setNum * MaxArraySize)
-                                ),
-                            DiffEdit.Type.Delete
-                                => new DiffEdit(DiffEdit.Type.Delete, position, null),
-                            _ => throw ExceptionUtilities.UnexpectedValue(edit.Operation),
-                        };
-                    }
-                );
+                    return edit.Operation switch
+                    {
+                        DiffEdit.Type.Insert
+                            => new DiffEdit(
+                                DiffEdit.Type.Insert,
+                                position,
+                                newTextPosition: edit.NewTextPosition + (setNum * MaxArraySize)
+                            ),
+                        DiffEdit.Type.Delete => new DiffEdit(DiffEdit.Type.Delete, position, null),
+                        _ => throw ExceptionUtilities.UnexpectedValue(edit.Operation),
+                    };
+                });
 
                 return adjustedEdits;
             }

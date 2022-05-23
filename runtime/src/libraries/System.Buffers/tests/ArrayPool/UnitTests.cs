@@ -506,174 +506,162 @@ namespace System.Buffers.ArrayPool.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void RentBufferFiresRentedDiagnosticEvent()
         {
-            RemoteInvokeWithTrimming(
-                () =>
-                {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
+            RemoteInvokeWithTrimming(() =>
+            {
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
 
-                    byte[] buffer = pool.Rent(16);
-                    pool.Return(buffer);
+                byte[] buffer = pool.Rent(16);
+                pool.Return(buffer);
 
-                    Assert.Equal(
-                        1,
-                        RunWithListener(
-                            () => pool.Rent(16),
-                            EventLevel.Verbose,
-                            e =>
-                            {
-                                Assert.Equal(1, e.EventId);
-                                Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
-                                Assert.Equal(buffer.Length, e.Payload[1]);
-                                Assert.Equal(pool.GetHashCode(), e.Payload[2]);
-                            }
-                        )
-                    );
-                }
-            );
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Rent(16),
+                        EventLevel.Verbose,
+                        e =>
+                        {
+                            Assert.Equal(1, e.EventId);
+                            Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
+                            Assert.Equal(buffer.Length, e.Payload[1]);
+                            Assert.Equal(pool.GetHashCode(), e.Payload[2]);
+                        }
+                    )
+                );
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void ReturnBufferWhenFullFiresDroppedDiagnosticEvent()
         {
-            RemoteInvokeWithTrimming(
-                () =>
+            RemoteInvokeWithTrimming(() =>
+            {
+                var buffers = new List<byte[]>();
+                for (int i = 0; i < 1000; i++)
                 {
-                    var buffers = new List<byte[]>();
-                    for (int i = 0; i < 1000; i++)
-                    {
-                        buffers.Add(ArrayPool<byte>.Shared.Rent(1));
-                    }
-
-                    var events = new ConcurrentQueue<EventWrittenEventArgs>();
-                    RunWithListener(
-                        () =>
-                        {
-                            foreach (byte[] buffer in buffers)
-                            {
-                                ArrayPool<byte>.Shared.Return(buffer);
-                            }
-                        },
-                        EventLevel.Informational,
-                        events.Enqueue
-                    );
-
-                    Assert.Contains(events, e => e.EventId == 6);
+                    buffers.Add(ArrayPool<byte>.Shared.Rent(1));
                 }
-            );
+
+                var events = new ConcurrentQueue<EventWrittenEventArgs>();
+                RunWithListener(
+                    () =>
+                    {
+                        foreach (byte[] buffer in buffers)
+                        {
+                            ArrayPool<byte>.Shared.Return(buffer);
+                        }
+                    },
+                    EventLevel.Informational,
+                    events.Enqueue
+                );
+
+                Assert.Contains(events, e => e.EventId == 6);
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void ReturnBufferFiresDiagnosticEvent()
         {
-            RemoteInvokeWithTrimming(
-                () =>
-                {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
-                    byte[] buffer = pool.Rent(16);
-                    Assert.Equal(
-                        1,
-                        RunWithListener(
-                            () => pool.Return(buffer),
-                            EventLevel.Verbose,
-                            e =>
-                            {
-                                Assert.Equal(3, e.EventId);
-                                Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
-                                Assert.Equal(buffer.Length, e.Payload[1]);
-                                Assert.Equal(pool.GetHashCode(), e.Payload[2]);
-                            }
-                        )
-                    );
-                }
-            );
+            RemoteInvokeWithTrimming(() =>
+            {
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
+                byte[] buffer = pool.Rent(16);
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Return(buffer),
+                        EventLevel.Verbose,
+                        e =>
+                        {
+                            Assert.Equal(3, e.EventId);
+                            Assert.Equal(buffer.GetHashCode(), e.Payload[0]);
+                            Assert.Equal(buffer.Length, e.Payload[1]);
+                            Assert.Equal(pool.GetHashCode(), e.Payload[2]);
+                        }
+                    )
+                );
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void RentingNonExistentBufferFiresAllocatedDiagnosticEvent()
         {
-            RemoteInvokeWithTrimming(
-                () =>
-                {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
-                    Assert.Equal(
-                        1,
-                        RunWithListener(
-                            () => pool.Rent(16),
-                            EventLevel.Informational,
-                            e => Assert.Equal(2, e.EventId)
-                        )
-                    );
-                }
-            );
+            RemoteInvokeWithTrimming(() =>
+            {
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Rent(16),
+                        EventLevel.Informational,
+                        e => Assert.Equal(2, e.EventId)
+                    )
+                );
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void RentingBufferOverConfiguredMaximumSizeFiresDiagnosticEvent()
         {
-            RemoteInvokeWithTrimming(
-                () =>
-                {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 1
-                    );
-                    Assert.Equal(
-                        1,
-                        RunWithListener(
-                            () => pool.Rent(64),
-                            EventLevel.Informational,
-                            e => Assert.Equal(2, e.EventId)
-                        )
-                    );
-                }
-            );
+            RemoteInvokeWithTrimming(() =>
+            {
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 1
+                );
+                Assert.Equal(
+                    1,
+                    RunWithListener(
+                        () => pool.Rent(64),
+                        EventLevel.Informational,
+                        e => Assert.Equal(2, e.EventId)
+                    )
+                );
+            });
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void RentingManyBuffersFiresExpectedDiagnosticEvents()
         {
-            RemoteInvokeWithTrimming(
-                () =>
-                {
-                    ArrayPool<byte> pool = ArrayPool<byte>.Create(
-                        maxArrayLength: 16,
-                        maxArraysPerBucket: 10
-                    );
-                    var list = new List<EventWrittenEventArgs>();
+            RemoteInvokeWithTrimming(() =>
+            {
+                ArrayPool<byte> pool = ArrayPool<byte>.Create(
+                    maxArrayLength: 16,
+                    maxArraysPerBucket: 10
+                );
+                var list = new List<EventWrittenEventArgs>();
 
-                    Assert.Equal(
-                        60,
-                        RunWithListener(
-                            () =>
-                            {
-                                for (int i = 0; i < 10; i++)
-                                    pool.Return(pool.Rent(16)); // 10 rents + 10 allocations, 10 returns
-                                for (int i = 0; i < 10; i++)
-                                    pool.Return(pool.Rent(0)); // 0 events for empty arrays
-                                for (int i = 0; i < 10; i++)
-                                    pool.Rent(16); // 10 rents
-                                for (int i = 0; i < 10; i++)
-                                    pool.Rent(16); // 10 rents + 10 allocations
-                            },
-                            EventLevel.Verbose,
-                            list.Add
-                        )
-                    );
+                Assert.Equal(
+                    60,
+                    RunWithListener(
+                        () =>
+                        {
+                            for (int i = 0; i < 10; i++)
+                                pool.Return(pool.Rent(16)); // 10 rents + 10 allocations, 10 returns
+                            for (int i = 0; i < 10; i++)
+                                pool.Return(pool.Rent(0)); // 0 events for empty arrays
+                            for (int i = 0; i < 10; i++)
+                                pool.Rent(16); // 10 rents
+                            for (int i = 0; i < 10; i++)
+                                pool.Rent(16); // 10 rents + 10 allocations
+                        },
+                        EventLevel.Verbose,
+                        list.Add
+                    )
+                );
 
-                    Assert.Equal(30, list.Where(e => e.EventId == 1).Count()); // rents
-                    Assert.Equal(20, list.Where(e => e.EventId == 2).Count()); // allocations
-                    Assert.Equal(10, list.Where(e => e.EventId == 3).Count()); // returns
-                }
-            );
+                Assert.Equal(30, list.Where(e => e.EventId == 1).Count()); // rents
+                Assert.Equal(20, list.Where(e => e.EventId == 2).Count()); // allocations
+                Assert.Equal(10, list.Where(e => e.EventId == 3).Count()); // returns
+            });
         }
 
         [Theory]

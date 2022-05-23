@@ -227,12 +227,10 @@ namespace System.Text.Json.Serialization.Tests
                 token
             );
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () =>
-                {
-                    await foreach (int element in cancellableAsyncEnumerable) { }
-                }
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+            {
+                await foreach (int element in cancellableAsyncEnumerable) { }
+            });
         }
 
         [Fact]
@@ -248,12 +246,10 @@ namespace System.Text.Json.Serialization.Tests
                 .DeserializeAsyncEnumerable<int>(stream, options)
                 .WithCancellation(token);
 
-            await Assert.ThrowsAsync<TaskCanceledException>(
-                async () =>
-                {
-                    await foreach (int element in cancellableAsyncEnumerable) { }
-                }
-            );
+            await Assert.ThrowsAsync<TaskCanceledException>(async () =>
+            {
+                await foreach (int element in cancellableAsyncEnumerable) { }
+            });
         }
 
         public static IEnumerable<object[]> GetAsyncEnumerableSources()

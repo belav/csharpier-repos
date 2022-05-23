@@ -128,126 +128,122 @@ internal class Program
 
                     c.HelpOption("-h|--help");
 
-                    c.OnExecute(
-                        () =>
+                    c.OnExecute(() =>
+                    {
+                        var reporter = new ConsoleReporter(
+                            PhysicalConsole.Singleton,
+                            verbose.HasValue(),
+                            quiet.HasValue()
+                        );
+
+                        if (verbose.HasValue())
                         {
-                            var reporter = new ConsoleReporter(
-                                PhysicalConsole.Singleton,
-                                verbose.HasValue(),
-                                quiet.HasValue()
-                            );
-
-                            if (verbose.HasValue())
-                            {
-                                var listener = new ReporterEventListener(reporter);
-                                listener.EnableEvents(
-                                    CertificateManager.Log,
-                                    System.Diagnostics.Tracing.EventLevel.Verbose
-                                );
-                            }
-
-                            if (clean.HasValue())
-                            {
-                                if (
-                                    exportPath.HasValue()
-                                    || trust?.HasValue() == true
-                                    || format.HasValue()
-                                    || noPassword.HasValue()
-                                    || check.HasValue()
-                                    || (!import.HasValue() && password.HasValue())
-                                    || (import.HasValue() && !password.HasValue())
-                                )
-                                {
-                                    reporter.Error(InvalidUsageErrorMessage);
-                                    return CriticalError;
-                                }
-                            }
-
-                            if (check.HasValue())
-                            {
-                                if (
-                                    exportPath.HasValue()
-                                    || password.HasValue()
-                                    || noPassword.HasValue()
-                                    || clean.HasValue()
-                                    || format.HasValue()
-                                    || import.HasValue()
-                                )
-                                {
-                                    reporter.Error(InvalidUsageErrorMessage);
-                                    return CriticalError;
-                                }
-                            }
-
-                            if (!clean.HasValue() && !check.HasValue())
-                            {
-                                if (password.HasValue() && noPassword.HasValue())
-                                {
-                                    reporter.Error(InvalidUsageErrorMessage);
-                                    return CriticalError;
-                                }
-
-                                if (
-                                    noPassword.HasValue()
-                                    && !(
-                                        format.HasValue()
-                                        && string.Equals(
-                                            format.Value(),
-                                            "PEM",
-                                            StringComparison.OrdinalIgnoreCase
-                                        )
-                                    )
-                                )
-                                {
-                                    reporter.Error(InvalidUsageErrorMessage);
-                                    return CriticalError;
-                                }
-
-                                if (import.HasValue())
-                                {
-                                    reporter.Error(InvalidUsageErrorMessage);
-                                    return CriticalError;
-                                }
-                            }
-
-                            if (check.HasValue())
-                            {
-                                return CheckHttpsCertificate(trust, reporter);
-                            }
-
-                            if (clean.HasValue())
-                            {
-                                var clean = CleanHttpsCertificates(reporter);
-                                if (clean != Success || !import.HasValue())
-                                {
-                                    return clean;
-                                }
-
-                                return ImportCertificate(import, password, reporter);
-                            }
-
-                            return EnsureHttpsCertificate(
-                                exportPath,
-                                password,
-                                noPassword,
-                                trust,
-                                format,
-                                reporter
+                            var listener = new ReporterEventListener(reporter);
+                            listener.EnableEvents(
+                                CertificateManager.Log,
+                                System.Diagnostics.Tracing.EventLevel.Verbose
                             );
                         }
-                    );
+
+                        if (clean.HasValue())
+                        {
+                            if (
+                                exportPath.HasValue()
+                                || trust?.HasValue() == true
+                                || format.HasValue()
+                                || noPassword.HasValue()
+                                || check.HasValue()
+                                || (!import.HasValue() && password.HasValue())
+                                || (import.HasValue() && !password.HasValue())
+                            )
+                            {
+                                reporter.Error(InvalidUsageErrorMessage);
+                                return CriticalError;
+                            }
+                        }
+
+                        if (check.HasValue())
+                        {
+                            if (
+                                exportPath.HasValue()
+                                || password.HasValue()
+                                || noPassword.HasValue()
+                                || clean.HasValue()
+                                || format.HasValue()
+                                || import.HasValue()
+                            )
+                            {
+                                reporter.Error(InvalidUsageErrorMessage);
+                                return CriticalError;
+                            }
+                        }
+
+                        if (!clean.HasValue() && !check.HasValue())
+                        {
+                            if (password.HasValue() && noPassword.HasValue())
+                            {
+                                reporter.Error(InvalidUsageErrorMessage);
+                                return CriticalError;
+                            }
+
+                            if (
+                                noPassword.HasValue()
+                                && !(
+                                    format.HasValue()
+                                    && string.Equals(
+                                        format.Value(),
+                                        "PEM",
+                                        StringComparison.OrdinalIgnoreCase
+                                    )
+                                )
+                            )
+                            {
+                                reporter.Error(InvalidUsageErrorMessage);
+                                return CriticalError;
+                            }
+
+                            if (import.HasValue())
+                            {
+                                reporter.Error(InvalidUsageErrorMessage);
+                                return CriticalError;
+                            }
+                        }
+
+                        if (check.HasValue())
+                        {
+                            return CheckHttpsCertificate(trust, reporter);
+                        }
+
+                        if (clean.HasValue())
+                        {
+                            var clean = CleanHttpsCertificates(reporter);
+                            if (clean != Success || !import.HasValue())
+                            {
+                                return clean;
+                            }
+
+                            return ImportCertificate(import, password, reporter);
+                        }
+
+                        return EnsureHttpsCertificate(
+                            exportPath,
+                            password,
+                            noPassword,
+                            trust,
+                            format,
+                            reporter
+                        );
+                    });
                 }
             );
 
             app.HelpOption("-h|--help");
 
-            app.OnExecute(
-                () =>
-                {
-                    app.ShowHelp();
-                    return Success;
-                }
-            );
+            app.OnExecute(() =>
+            {
+                app.ShowHelp();
+                return Success;
+            });
 
             return app.Execute(args);
         }

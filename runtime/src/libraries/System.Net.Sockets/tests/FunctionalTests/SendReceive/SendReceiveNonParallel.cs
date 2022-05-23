@@ -65,38 +65,36 @@ namespace System.Net.Sockets.Tests
             );
 
             var receivedChecksums = new uint?[DatagramsToSend];
-            Task leftThread = Task.Run(
-                async () =>
+            Task leftThread = Task.Run(async () =>
+            {
+                EndPoint remote = leftEndpoint.Create(leftEndpoint.Serialize());
+                var recvBuffer = new byte[DatagramSize];
+                for (int i = 0; i < DatagramsToSend; i++)
                 {
-                    EndPoint remote = leftEndpoint.Create(leftEndpoint.Serialize());
-                    var recvBuffer = new byte[DatagramSize];
-                    for (int i = 0; i < DatagramsToSend; i++)
-                    {
-                        SocketReceiveFromResult result = await ReceiveFromAsync(
-                            left,
-                            new ArraySegment<byte>(recvBuffer),
-                            remote
-                        );
-                        Assert.Equal(DatagramSize, result.ReceivedBytes);
-                        Assert.Equal(rightEndpoint, result.RemoteEndPoint);
+                    SocketReceiveFromResult result = await ReceiveFromAsync(
+                        left,
+                        new ArraySegment<byte>(recvBuffer),
+                        remote
+                    );
+                    Assert.Equal(DatagramSize, result.ReceivedBytes);
+                    Assert.Equal(rightEndpoint, result.RemoteEndPoint);
 
-                        int datagramId = recvBuffer[0];
-                        Assert.Null(receivedChecksums[datagramId]);
-                        receivedChecksums[datagramId] = Fletcher32.Checksum(
-                            recvBuffer,
-                            0,
-                            result.ReceivedBytes
-                        );
+                    int datagramId = recvBuffer[0];
+                    Assert.Null(receivedChecksums[datagramId]);
+                    receivedChecksums[datagramId] = Fletcher32.Checksum(
+                        recvBuffer,
+                        0,
+                        result.ReceivedBytes
+                    );
 
-                        receiverAck.Release();
-                        bool gotAck = await senderAck.WaitAsync(SenderAckTimeout);
-                        Assert.True(
-                            gotAck,
-                            $"{DateTime.Now}: Timeout waiting {SenderAckTimeout} for senderAck in iteration {i}"
-                        );
-                    }
+                    receiverAck.Release();
+                    bool gotAck = await senderAck.WaitAsync(SenderAckTimeout);
+                    Assert.True(
+                        gotAck,
+                        $"{DateTime.Now}: Timeout waiting {SenderAckTimeout} for senderAck in iteration {i}"
+                    );
                 }
-            );
+            });
 
             var sentChecksums = new uint[DatagramsToSend];
             using (right)

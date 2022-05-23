@@ -31,12 +31,10 @@ public class BlazorClient : IAsyncDisposable
         CancellationToken = CancellationTokenSource.Token;
         TaskCompletionSource = new TaskCompletionSource<object?>();
 
-        CancellationTokenSource.Token.Register(
-            () =>
-            {
-                TaskCompletionSource.TrySetCanceled();
-            }
-        );
+        CancellationTokenSource.Token.Register(() =>
+        {
+            TaskCompletionSource.TrySetCanceled();
+        });
     }
 
     public TimeSpan? DefaultConnectionTimeout { get; set; } =
@@ -415,16 +413,14 @@ public class BlazorClient : IAsyncDisposable
         );
         var hubUrl = GetHubUrl(uri);
         builder.WithUrl(hubUrl);
-        builder.ConfigureLogging(
-            l =>
+        builder.ConfigureLogging(l =>
+        {
+            l.SetMinimumLevel(LogLevel.Trace);
+            if (LoggerProvider != null)
             {
-                l.SetMinimumLevel(LogLevel.Trace);
-                if (LoggerProvider != null)
-                {
-                    l.AddProvider(LoggerProvider);
-                }
+                l.AddProvider(LoggerProvider);
             }
-        );
+        });
 
         configure?.Invoke(builder, hubUrl);
 
@@ -643,14 +639,12 @@ public class BlazorClient : IAsyncDisposable
         var matches = Regex.Matches(content, MarkerPattern);
         var markers = matches
             .Select(s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value)))
-            .Where(
-                s =>
-                {
-                    return s.parsed.RootElement.TryGetProperty("type", out var markerType)
-                        && markerType.ValueKind != JsonValueKind.Undefined
-                        && markerType.GetString() == "server";
-                }
-            )
+            .Where(s =>
+            {
+                return s.parsed.RootElement.TryGetProperty("type", out var markerType)
+                    && markerType.ValueKind != JsonValueKind.Undefined
+                    && markerType.GetString() == "server";
+            })
             .OrderBy(p => p.parsed.RootElement.GetProperty("sequence").GetInt32())
             .Select(p => p.value)
             .ToArray();

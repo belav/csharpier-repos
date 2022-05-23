@@ -43,16 +43,14 @@ namespace System.Net.WebSockets.Client.Tests
         {
             using (var cws = new ClientWebSocket())
             {
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        Task t = cws.CloseAsync(
-                            WebSocketCloseStatus.Empty,
-                            "",
-                            new CancellationToken()
-                        );
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    Task t = cws.CloseAsync(
+                        WebSocketCloseStatus.Empty,
+                        "",
+                        new CancellationToken()
+                    );
+                });
 
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -98,12 +96,10 @@ namespace System.Net.WebSockets.Client.Tests
                 var segment = new ArraySegment<byte>(buffer);
                 var ct = new CancellationToken();
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        Task t = cws.ReceiveAsync(segment, ct);
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    Task t = cws.ReceiveAsync(segment, ct);
+                });
 
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -149,12 +145,10 @@ namespace System.Net.WebSockets.Client.Tests
                 var segment = new ArraySegment<byte>(buffer);
                 var ct = new CancellationToken();
 
-                Assert.Throws<InvalidOperationException>(
-                    () =>
-                    {
-                        Task t = cws.SendAsync(segment, WebSocketMessageType.Text, false, ct);
-                    }
-                );
+                Assert.Throws<InvalidOperationException>(() =>
+                {
+                    Task t = cws.SendAsync(segment, WebSocketMessageType.Text, false, ct);
+                });
 
                 Assert.Equal(WebSocketState.None, cws.State);
             }
@@ -220,16 +214,10 @@ namespace System.Net.WebSockets.Client.Tests
             var cws = new ClientWebSocket();
             cws.Dispose();
 
-            Assert.Throws<ObjectDisposedException>(
-                () =>
-                {
-                    Task t = cws.CloseAsync(
-                        WebSocketCloseStatus.Empty,
-                        "",
-                        new CancellationToken()
-                    );
-                }
-            );
+            Assert.Throws<ObjectDisposedException>(() =>
+            {
+                Task t = cws.CloseAsync(WebSocketCloseStatus.Empty, "", new CancellationToken());
+            });
 
             Assert.Equal(WebSocketState.Closed, cws.State);
         }

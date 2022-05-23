@@ -29,20 +29,18 @@
             }
 
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Destination>()
-                            .ForMember(
-                                dest => dest.Value,
-                                opt =>
-                                {
-                                    opt.PreCondition(src => src.Value.Count > 1);
-                                    opt.MapFrom(src => src.Value[1].SubValue);
-                                }
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>()
+                        .ForMember(
+                            dest => dest.Value,
+                            opt =>
+                            {
+                                opt.PreCondition(src => src.Value.Count > 1);
+                                opt.MapFrom(src => src.Value[1].SubValue);
+                            }
+                        );
+                });
 
             [Fact]
             public void Should_skip_the_mapping_when_the_condition_is_false()
@@ -188,17 +186,14 @@
         public class ConditionTests : AutoMapperSpecBase
         {
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                d => d.Value,
-                                opt =>
-                                    opt.Condition((src, dest, srcVal, destVal) => destVal == null)
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(
+                            d => d.Value,
+                            opt => opt.Condition((src, dest, srcVal, destVal) => destVal == null)
+                        );
+                });
 
             [Fact]
             public void Should_map_value_when_null()
@@ -296,32 +291,27 @@
         public class ConditionTests : NonValidatingSpecBase
         {
             protected override MapperConfiguration Configuration { get; } =
-                new MapperConfiguration(
-                    cfg =>
-                    {
-                        cfg.CreateMap<Source, Dest>()
-                            .ForMember(
-                                d => d.Value1,
-                                opt => opt.PreCondition((Source src) => false)
-                            )
-                            .ForMember(
-                                d => d.Value2,
-                                opt => opt.PreCondition((ResolutionContext rc) => false)
-                            )
-                            .ForMember(d => d.Value3, opt => opt.PreCondition((src, rc) => false)) //;
-                            .ForMember(
-                                d => d.Value4,
-                                opt =>
-                                    opt.PreCondition(
-                                        (src, dest, rc) =>
-                                        {
-                                            dest.MarkerBool = true;
-                                            return false;
-                                        }
-                                    )
-                            );
-                    }
-                );
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForMember(d => d.Value1, opt => opt.PreCondition((Source src) => false))
+                        .ForMember(
+                            d => d.Value2,
+                            opt => opt.PreCondition((ResolutionContext rc) => false)
+                        )
+                        .ForMember(d => d.Value3, opt => opt.PreCondition((src, rc) => false)) //;
+                        .ForMember(
+                            d => d.Value4,
+                            opt =>
+                                opt.PreCondition(
+                                    (src, dest, rc) =>
+                                    {
+                                        dest.MarkerBool = true;
+                                        return false;
+                                    }
+                                )
+                        );
+                });
 
             [Fact]
             public void Should_not_map_when_precondition_with_source_parameter_is_false()

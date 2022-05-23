@@ -47,14 +47,12 @@ public class PrerenderedStartup
                 app.UseAuthentication();
 
                 app.UseRouting();
-                app.UseEndpoints(
-                    endpoints =>
-                    {
-                        endpoints.MapRazorPages();
-                        endpoints.MapFallbackToPage("/PrerenderedHost");
-                        endpoints.MapBlazorHub();
-                    }
-                );
+                app.UseEndpoints(endpoints =>
+                {
+                    endpoints.MapRazorPages();
+                    endpoints.MapFallbackToPage("/PrerenderedHost");
+                    endpoints.MapBlazorHub();
+                });
             }
         );
     }

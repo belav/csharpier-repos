@@ -313,15 +313,13 @@ public class NativeLibraryTest
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(
-            () =>
-            {
-                handle = NativeLibrary.Load(libPath);
-                if (handle == IntPtr.Zero)
-                    return TestResult.ReturnNull;
-                return TestResult.Success;
-            }
-        );
+        TestResult result = Run(() =>
+        {
+            handle = NativeLibrary.Load(libPath);
+            if (handle == IntPtr.Zero)
+                return TestResult.ReturnNull;
+            return TestResult.Success;
+        });
 
         NativeLibrary.Free(handle);
 
@@ -334,17 +332,15 @@ public class NativeLibraryTest
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(
-            () =>
-            {
-                bool success = NativeLibrary.TryLoad(libPath, out handle);
-                if (!success)
-                    return TestResult.ReturnFailure;
-                if (handle == IntPtr.Zero)
-                    return TestResult.ReturnNull;
-                return TestResult.Success;
-            }
-        );
+        TestResult result = Run(() =>
+        {
+            bool success = NativeLibrary.TryLoad(libPath, out handle);
+            if (!success)
+                return TestResult.ReturnFailure;
+            if (handle == IntPtr.Zero)
+                return TestResult.ReturnNull;
+            return TestResult.Success;
+        });
 
         NativeLibrary.Free(handle);
 
@@ -361,15 +357,13 @@ public class NativeLibraryTest
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(
-            () =>
-            {
-                handle = NativeLibrary.Load(libName, assembly, searchPath);
-                if (handle == IntPtr.Zero)
-                    return TestResult.ReturnNull;
-                return TestResult.Success;
-            }
-        );
+        TestResult result = Run(() =>
+        {
+            handle = NativeLibrary.Load(libName, assembly, searchPath);
+            if (handle == IntPtr.Zero)
+                return TestResult.ReturnNull;
+            return TestResult.Success;
+        });
 
         NativeLibrary.Free(handle);
 
@@ -386,17 +380,15 @@ public class NativeLibraryTest
 
         IntPtr handle = IntPtr.Zero;
 
-        TestResult result = Run(
-            () =>
-            {
-                bool success = NativeLibrary.TryLoad(libName, assembly, searchPath, out handle);
-                if (!success)
-                    return TestResult.ReturnFailure;
-                if (handle == IntPtr.Zero)
-                    return TestResult.ReturnNull;
-                return TestResult.Success;
-            }
-        );
+        TestResult result = Run(() =>
+        {
+            bool success = NativeLibrary.TryLoad(libName, assembly, searchPath, out handle);
+            if (!success)
+                return TestResult.ReturnFailure;
+            if (handle == IntPtr.Zero)
+                return TestResult.ReturnNull;
+            return TestResult.Success;
+        });
 
         NativeLibrary.Free(handle);
 
@@ -407,50 +399,44 @@ public class NativeLibraryTest
     {
         CurrentTest = String.Format("FreeLibrary({0})", handle);
 
-        return Run(
-            () =>
-            {
-                NativeLibrary.Free(handle);
-                return TestResult.Success;
-            }
-        );
+        return Run(() =>
+        {
+            NativeLibrary.Free(handle);
+            return TestResult.Success;
+        });
     }
 
     static TestResult GetLibraryExport(IntPtr handle, string name)
     {
         CurrentTest = String.Format("GetLibraryExport({0}, {1})", handle, name);
 
-        return Run(
-            () =>
-            {
-                IntPtr address = NativeLibrary.GetExport(handle, name);
-                if (address == IntPtr.Zero)
-                    return TestResult.ReturnNull;
-                if (RunExportedFunction(address, 1, 1) != 2)
-                    return TestResult.IncorrectEvaluation;
-                return TestResult.Success;
-            }
-        );
+        return Run(() =>
+        {
+            IntPtr address = NativeLibrary.GetExport(handle, name);
+            if (address == IntPtr.Zero)
+                return TestResult.ReturnNull;
+            if (RunExportedFunction(address, 1, 1) != 2)
+                return TestResult.IncorrectEvaluation;
+            return TestResult.Success;
+        });
     }
 
     static TestResult TryGetLibraryExport(IntPtr handle, string name)
     {
         CurrentTest = String.Format("TryGetLibraryExport({0}, {1})", handle, name);
 
-        return Run(
-            () =>
-            {
-                IntPtr address = IntPtr.Zero;
-                bool success = NativeLibrary.TryGetExport(handle, name, out address);
-                if (!success)
-                    return TestResult.ReturnFailure;
-                if (address == IntPtr.Zero)
-                    return TestResult.ReturnNull;
-                if (RunExportedFunction(address, 1, 1) != 2)
-                    return TestResult.IncorrectEvaluation;
-                return TestResult.Success;
-            }
-        );
+        return Run(() =>
+        {
+            IntPtr address = IntPtr.Zero;
+            bool success = NativeLibrary.TryGetExport(handle, name, out address);
+            if (!success)
+                return TestResult.ReturnFailure;
+            if (address == IntPtr.Zero)
+                return TestResult.ReturnNull;
+            if (RunExportedFunction(address, 1, 1) != 2)
+                return TestResult.IncorrectEvaluation;
+            return TestResult.Success;
+        });
     }
 
     [DllImport(NativeLibraryToLoad.Name)]

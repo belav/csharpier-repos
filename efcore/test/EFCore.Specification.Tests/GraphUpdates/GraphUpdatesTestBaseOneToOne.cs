@@ -25,23 +25,21 @@ namespace Microsoft.EntityFrameworkCore
             CascadeTiming? deleteOrphansTiming
         )
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.ChangeTracker.DeleteOrphansTiming =
-                        deleteOrphansTiming ?? CascadeTiming.Never;
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var root = context.Set<Root>().Single(IsTheRoot);
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    Assert.False(context.ChangeTracker.HasChanges());
+                Assert.False(context.ChangeTracker.HasChanges());
 
-                    root.OptionalSingle = new OptionalSingle1();
+                root.OptionalSingle = new OptionalSingle1();
 
-                    Assert.True(context.ChangeTracker.HasChanges());
+                Assert.True(context.ChangeTracker.HasChanges());
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalTheory]
@@ -1069,23 +1067,21 @@ namespace Microsoft.EntityFrameworkCore
             CascadeTiming? deleteOrphansTiming
         )
         {
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    context.ChangeTracker.DeleteOrphansTiming =
-                        deleteOrphansTiming ?? CascadeTiming.Never;
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                context.ChangeTracker.DeleteOrphansTiming =
+                    deleteOrphansTiming ?? CascadeTiming.Never;
 
-                    var root = context.Set<Root>().Single(IsTheRoot);
+                var root = context.Set<Root>().Single(IsTheRoot);
 
-                    Assert.False(context.ChangeTracker.HasChanges());
+                Assert.False(context.ChangeTracker.HasChanges());
 
-                    root.RequiredSingle = new RequiredSingle1();
+                root.RequiredSingle = new RequiredSingle1();
 
-                    Assert.True(context.ChangeTracker.HasChanges());
+                Assert.True(context.ChangeTracker.HasChanges());
 
-                    Assert.Throws<DbUpdateException>(() => context.SaveChanges());
-                }
-            );
+                Assert.Throws<DbUpdateException>(() => context.SaveChanges());
+            });
         }
 
         [ConditionalTheory]
@@ -1159,15 +1155,13 @@ namespace Microsoft.EntityFrameworkCore
             IReadOnlyList<EntityEntry> entries = null;
             RequiredSingle1 old1 = null;
             RequiredSingle2 old2 = null;
-            ExecuteWithStrategyInTransaction(
-                context =>
-                {
-                    oldRoot = LoadRequiredGraph(context);
+            ExecuteWithStrategyInTransaction(context =>
+            {
+                oldRoot = LoadRequiredGraph(context);
 
-                    old1 = oldRoot.RequiredSingle;
-                    old2 = oldRoot.RequiredSingle.Single;
-                }
-            );
+                old1 = oldRoot.RequiredSingle;
+                old2 = oldRoot.RequiredSingle.Single;
+            });
 
             var new2 = new RequiredSingle2();
             var new1 = new RequiredSingle1 { Single = new2 };
@@ -2030,29 +2024,27 @@ namespace Microsoft.EntityFrameworkCore
                     Assert.Equal(
                         CoreStrings.KeyReadOnly("Id", typeof(RequiredSingle1).Name),
                         Assert
-                            .Throws<InvalidOperationException>(
-                                () =>
+                            .Throws<InvalidOperationException>(() =>
+                            {
+                                if ((changeMechanism & ChangeMechanism.Principal) != 0)
                                 {
-                                    if ((changeMechanism & ChangeMechanism.Principal) != 0)
-                                    {
-                                        newRoot.RequiredSingle = root.RequiredSingle;
-                                    }
-
-                                    if ((changeMechanism & ChangeMechanism.Dependent) != 0)
-                                    {
-                                        root.RequiredSingle.Root = newRoot;
-                                    }
-
-                                    if ((changeMechanism & ChangeMechanism.Fk) != 0)
-                                    {
-                                        root.RequiredSingle.Id = newRoot.Id;
-                                    }
-
                                     newRoot.RequiredSingle = root.RequiredSingle;
-
-                                    context.SaveChanges();
                                 }
-                            )
+
+                                if ((changeMechanism & ChangeMechanism.Dependent) != 0)
+                                {
+                                    root.RequiredSingle.Root = newRoot;
+                                }
+
+                                if ((changeMechanism & ChangeMechanism.Fk) != 0)
+                                {
+                                    root.RequiredSingle.Id = newRoot.Id;
+                                }
+
+                                newRoot.RequiredSingle = root.RequiredSingle;
+
+                                context.SaveChanges();
+                            })
                             .Message
                     );
                 }

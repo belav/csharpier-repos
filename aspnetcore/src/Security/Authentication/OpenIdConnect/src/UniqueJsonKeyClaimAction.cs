@@ -43,17 +43,14 @@ public class UniqueJsonKeyClaimAction : JsonKeyClaimAction
             return;
         }
 
-        claim = identity.FindFirst(
-            c =>
-            {
-                // If this claimType is mapped by the JwtSeurityTokenHandler, then this property will be set
-                return c.Properties.TryGetValue(
-                        JwtSecurityTokenHandler.ShortClaimTypeProperty,
-                        out var shortType
-                    )
-                    && string.Equals(shortType, JsonKey, System.StringComparison.OrdinalIgnoreCase);
-            }
-        );
+        claim = identity.FindFirst(c =>
+        {
+            // If this claimType is mapped by the JwtSeurityTokenHandler, then this property will be set
+            return c.Properties.TryGetValue(
+                    JwtSecurityTokenHandler.ShortClaimTypeProperty,
+                    out var shortType
+                ) && string.Equals(shortType, JsonKey, System.StringComparison.OrdinalIgnoreCase);
+        });
         if (claim != null && string.Equals(claim.Value, value, System.StringComparison.Ordinal))
         {
             // Duplicate with an alternate name.

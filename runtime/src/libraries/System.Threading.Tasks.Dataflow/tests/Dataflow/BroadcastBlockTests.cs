@@ -207,14 +207,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
 
                 int result = 0;
-                var target = new ActionBlock<int>(
-                    i =>
-                    {
-                        Assert.Equal(expected: 0, actual: result);
-                        result = i;
-                        Assert.Equal(expected: -data, actual: i);
-                    }
-                );
+                var target = new ActionBlock<int>(i =>
+                {
+                    Assert.Equal(expected: 0, actual: result);
+                    result = i;
+                    Assert.Equal(expected: -data, actual: i);
+                });
                 bb.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
                 bb.Complete();
                 await target.Completion;
@@ -240,14 +238,12 @@ namespace System.Threading.Tasks.Dataflow.Tests
                 }
 
                 result = null;
-                var target = new ActionBlock<object>(
-                    o =>
-                    {
-                        Assert.Null(result);
-                        result = o;
-                        Assert.Equal(expected: data, actual: o);
-                    }
-                );
+                var target = new ActionBlock<object>(o =>
+                {
+                    Assert.Null(result);
+                    result = o;
+                    Assert.Equal(expected: data, actual: o);
+                });
                 bb.LinkTo(target, new DataflowLinkOptions { PropagateCompletion = true });
                 bb.Complete();
                 await target.Completion;

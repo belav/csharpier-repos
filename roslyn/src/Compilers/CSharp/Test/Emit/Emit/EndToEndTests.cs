@@ -153,15 +153,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.Emit
                 );
 
                 var source = builder.ToString();
-                RunInThread(
-                    () =>
-                    {
-                        var options = TestOptions.DebugDll.WithConcurrentBuild(false);
-                        var compilation = CreateCompilation(source, options: options);
-                        compilation.VerifyDiagnostics();
-                        compilation.EmitToArray();
-                    }
-                );
+                RunInThread(() =>
+                {
+                    var options = TestOptions.DebugDll.WithConcurrentBuild(false);
+                    var compilation = CreateCompilation(source, options: options);
+                    compilation.VerifyDiagnostics();
+                    compilation.EmitToArray();
+                });
             }
         }
 
@@ -241,24 +239,22 @@ public class Test
                 }
 
                 var source = builder.ToString();
-                RunInThread(
-                    () =>
-                    {
-                        var compilation = CreateCompilation(
-                            source,
-                            options: TestOptions.DebugExe.WithConcurrentBuild(false)
-                        );
-                        compilation.VerifyDiagnostics();
+                RunInThread(() =>
+                {
+                    var compilation = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugExe.WithConcurrentBuild(false)
+                    );
+                    compilation.VerifyDiagnostics();
 
-                        // PEVerify is skipped here as it doesn't scale to this level of nested generics. After
-                        // about 600 levels of nesting it will not return in any reasonable amount of time.
-                        CompileAndVerify(
-                            compilation,
-                            expectedOutput: "Pass",
-                            verify: Verification.Skipped
-                        );
-                    }
-                );
+                    // PEVerify is skipped here as it doesn't scale to this level of nested generics. After
+                    // about 600 levels of nesting it will not return in any reasonable amount of time.
+                    CompileAndVerify(
+                        compilation,
+                        expectedOutput: "Pass",
+                        verify: Verification.Skipped
+                    );
+                });
             }
         }
 
@@ -308,16 +304,14 @@ public class Test
 }"
                 );
                 var source = builder.ToString();
-                RunInThread(
-                    () =>
-                    {
-                        var comp = CreateCompilation(
-                            source,
-                            options: TestOptions.DebugDll.WithConcurrentBuild(false)
-                        );
-                        comp.VerifyDiagnostics();
-                    }
-                );
+                RunInThread(() =>
+                {
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
+                    comp.VerifyDiagnostics();
+                });
             }
         }
 
@@ -362,19 +356,17 @@ public class Test
                 var source = sourceBuilder.ToString();
                 var diagnostics = diagnosticsBuilder.ToArrayAndFree();
 
-                RunInThread(
-                    () =>
-                    {
-                        var comp = CreateCompilation(
-                            source,
-                            options: TestOptions.DebugDll.WithConcurrentBuild(false)
-                        );
-                        var type = comp.GetMember<NamedTypeSymbol>("C0");
-                        var typeParameter = type.TypeParameters[0];
-                        Assert.True(typeParameter.IsReferenceType);
-                        comp.VerifyDiagnostics(diagnostics);
-                    }
-                );
+                RunInThread(() =>
+                {
+                    var comp = CreateCompilation(
+                        source,
+                        options: TestOptions.DebugDll.WithConcurrentBuild(false)
+                    );
+                    var type = comp.GetMember<NamedTypeSymbol>("C0");
+                    var typeParameter = type.TypeParameters[0];
+                    Assert.True(typeParameter.IsReferenceType);
+                    comp.VerifyDiagnostics(diagnostics);
+                });
             }
         }
     }

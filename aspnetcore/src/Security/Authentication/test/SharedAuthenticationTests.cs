@@ -39,13 +39,11 @@ public abstract class SharedAuthenticationTests<TOptions>
     {
         var services = new ServiceCollection().AddLogging();
 
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler>("auth1", "auth1");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler>("auth1", "auth1");
+        });
         RegisterAuth(builder, o => o.ForwardDefault = "auth1");
 
         var forwardDefault = new TestHandler();
@@ -100,14 +98,12 @@ public abstract class SharedAuthenticationTests<TOptions>
         {
             var services = new ServiceCollection().AddLogging();
 
-            var builder = services.AddAuthentication(
-                o =>
-                {
-                    o.DefaultScheme = DefaultScheme;
-                    o.AddScheme<TestHandler2>("auth1", "auth1");
-                    o.AddScheme<TestHandler>("specific", "specific");
-                }
-            );
+            var builder = services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = DefaultScheme;
+                o.AddScheme<TestHandler2>("auth1", "auth1");
+                o.AddScheme<TestHandler>("specific", "specific");
+            });
             RegisterAuth(
                 builder,
                 o =>
@@ -147,14 +143,12 @@ public abstract class SharedAuthenticationTests<TOptions>
         if (SupportsSignOut)
         {
             var services = new ServiceCollection().AddLogging();
-            var builder = services.AddAuthentication(
-                o =>
-                {
-                    o.DefaultScheme = DefaultScheme;
-                    o.AddScheme<TestHandler2>("auth1", "auth1");
-                    o.AddScheme<TestHandler>("specific", "specific");
-                }
-            );
+            var builder = services.AddAuthentication(o =>
+            {
+                o.DefaultScheme = DefaultScheme;
+                o.AddScheme<TestHandler2>("auth1", "auth1");
+                o.AddScheme<TestHandler>("specific", "specific");
+            });
             RegisterAuth(
                 builder,
                 o =>
@@ -192,14 +186,12 @@ public abstract class SharedAuthenticationTests<TOptions>
     public async Task ForwardForbidWinsOverDefault()
     {
         var services = new ServiceCollection().AddLogging();
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler2>("auth1", "auth1");
-                o.AddScheme<TestHandler>("specific", "specific");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler2>("auth1", "auth1");
+            o.AddScheme<TestHandler>("specific", "specific");
+        });
         RegisterAuth(
             builder,
             o =>
@@ -250,14 +242,12 @@ public abstract class SharedAuthenticationTests<TOptions>
         var transform = new RunOnce();
         var builder = services
             .AddSingleton<IClaimsTransformation>(transform)
-            .AddAuthentication(
-                o =>
-                {
-                    o.DefaultScheme = DefaultScheme;
-                    o.AddScheme<TestHandler2>("auth1", "auth1");
-                    o.AddScheme<TestHandler>("specific", "specific");
-                }
-            );
+            .AddAuthentication(o =>
+            {
+                o.DefaultScheme = DefaultScheme;
+                o.AddScheme<TestHandler2>("auth1", "auth1");
+                o.AddScheme<TestHandler>("specific", "specific");
+            });
         RegisterAuth(
             builder,
             o =>
@@ -284,14 +274,12 @@ public abstract class SharedAuthenticationTests<TOptions>
     public async Task ForwardAuthenticateWinsOverDefault()
     {
         var services = new ServiceCollection().AddLogging();
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler2>("auth1", "auth1");
-                o.AddScheme<TestHandler>("specific", "specific");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler2>("auth1", "auth1");
+            o.AddScheme<TestHandler>("specific", "specific");
+        });
         RegisterAuth(
             builder,
             o =>
@@ -328,14 +316,12 @@ public abstract class SharedAuthenticationTests<TOptions>
     public async Task ForwardChallengeWinsOverDefault()
     {
         var services = new ServiceCollection().AddLogging();
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler2>("auth1", "auth1");
-                o.AddScheme<TestHandler>("specific", "specific");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler2>("auth1", "auth1");
+            o.AddScheme<TestHandler>("specific", "specific");
+        });
         RegisterAuth(
             builder,
             o =>
@@ -372,15 +358,13 @@ public abstract class SharedAuthenticationTests<TOptions>
     public async Task ForwardSelectorWinsOverDefault()
     {
         var services = new ServiceCollection().AddLogging();
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler2>("auth1", "auth1");
-                o.AddScheme<TestHandler3>("selector", "selector");
-                o.AddScheme<TestHandler>("specific", "specific");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler2>("auth1", "auth1");
+            o.AddScheme<TestHandler3>("selector", "selector");
+            o.AddScheme<TestHandler>("specific", "specific");
+        });
         RegisterAuth(
             builder,
             o =>
@@ -448,15 +432,13 @@ public abstract class SharedAuthenticationTests<TOptions>
     public async Task NullForwardSelectorUsesDefault()
     {
         var services = new ServiceCollection().AddLogging();
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler2>("auth1", "auth1");
-                o.AddScheme<TestHandler3>("selector", "selector");
-                o.AddScheme<TestHandler>("specific", "specific");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler2>("auth1", "auth1");
+            o.AddScheme<TestHandler3>("selector", "selector");
+            o.AddScheme<TestHandler>("specific", "specific");
+        });
         RegisterAuth(
             builder,
             o =>
@@ -524,15 +506,13 @@ public abstract class SharedAuthenticationTests<TOptions>
     public async Task SpecificForwardWinsOverSelectorAndDefault()
     {
         var services = new ServiceCollection().AddLogging();
-        var builder = services.AddAuthentication(
-            o =>
-            {
-                o.DefaultScheme = DefaultScheme;
-                o.AddScheme<TestHandler2>("auth1", "auth1");
-                o.AddScheme<TestHandler3>("selector", "selector");
-                o.AddScheme<TestHandler>("specific", "specific");
-            }
-        );
+        var builder = services.AddAuthentication(o =>
+        {
+            o.DefaultScheme = DefaultScheme;
+            o.AddScheme<TestHandler2>("auth1", "auth1");
+            o.AddScheme<TestHandler3>("selector", "selector");
+            o.AddScheme<TestHandler>("specific", "specific");
+        });
         RegisterAuth(
             builder,
             o =>

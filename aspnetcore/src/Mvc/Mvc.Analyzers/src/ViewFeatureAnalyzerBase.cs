@@ -25,20 +25,18 @@ public abstract class ViewFeatureAnalyzerBase : DiagnosticAnalyzer
         context.ConfigureGeneratedCodeAnalysis(
             GeneratedCodeAnalysisFlags.Analyze | GeneratedCodeAnalysisFlags.ReportDiagnostics
         );
-        context.RegisterCompilationStartAction(
-            compilationContext =>
+        context.RegisterCompilationStartAction(compilationContext =>
+        {
+            var analyzerContext = new ViewFeaturesAnalyzerContext(compilationContext);
+
+            // Only do work if we can locate IHtmlHelper.
+            if (analyzerContext.HtmlHelperType == null)
             {
-                var analyzerContext = new ViewFeaturesAnalyzerContext(compilationContext);
-
-                // Only do work if we can locate IHtmlHelper.
-                if (analyzerContext.HtmlHelperType == null)
-                {
-                    return;
-                }
-
-                InitializeWorker(analyzerContext);
+                return;
             }
-        );
+
+            InitializeWorker(analyzerContext);
+        });
     }
 
     protected abstract void InitializeWorker(ViewFeaturesAnalyzerContext analyzerContext);

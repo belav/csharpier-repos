@@ -1802,45 +1802,41 @@ namespace System.Data.Tests
         [Fact]
         public void Merge_MissingEventHandler()
         {
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    var ds = new DataSet();
-                    DataTable table1 = ds.Tables.Add("table1");
+            Assert.Throws<DataException>(() =>
+            {
+                var ds = new DataSet();
+                DataTable table1 = ds.Tables.Add("table1");
 
-                    DataColumn pcol = table1.Columns.Add("col1", typeof(int));
-                    DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
+                DataColumn pcol = table1.Columns.Add("col1", typeof(int));
+                DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
 
-                    DataSet ds1 = ds.Copy();
-                    table1.PrimaryKey = new DataColumn[] { pcol };
-                    ds1.Tables[0].PrimaryKey = new DataColumn[] { ds1.Tables[0].Columns[1] };
+                DataSet ds1 = ds.Copy();
+                table1.PrimaryKey = new DataColumn[] { pcol };
+                ds1.Tables[0].PrimaryKey = new DataColumn[] { ds1.Tables[0].Columns[1] };
 
-                    // Exception shud be raised when handler is not set for MergeFailed Event
-                    ds1.Merge(ds);
-                }
-            );
+                // Exception shud be raised when handler is not set for MergeFailed Event
+                ds1.Merge(ds);
+            });
         }
 
         [Fact]
         public void Merge_MissingColumn()
         {
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    var ds = new DataSet();
-                    DataTable table1 = ds.Tables.Add("table1");
-                    DataTable table2 = ds.Tables.Add("table2");
+            Assert.Throws<DataException>(() =>
+            {
+                var ds = new DataSet();
+                DataTable table1 = ds.Tables.Add("table1");
+                DataTable table2 = ds.Tables.Add("table2");
 
-                    table1.Columns.Add("col1", typeof(int));
-                    table2.Columns.Add("col1", typeof(int));
+                table1.Columns.Add("col1", typeof(int));
+                table2.Columns.Add("col1", typeof(int));
 
-                    DataSet ds1 = ds.Copy();
+                DataSet ds1 = ds.Copy();
 
-                    ds1.Tables[0].Columns.Add("col2");
+                ds1.Tables[0].Columns.Add("col2");
 
-                    ds.Merge(ds1, true, MissingSchemaAction.Error);
-                }
-            );
+                ds.Merge(ds1, true, MissingSchemaAction.Error);
+            });
         }
 
         [Fact]
@@ -1852,74 +1848,61 @@ namespace System.Data.Tests
             table1.Columns.Add("col1", typeof(int));
             table2.Columns.Add("col1", typeof(int));
 
-            Assert.Throws<DataException>(
-                () =>
-                {
-                    DataSet ds1 = ds.Copy();
-                    DataSet ds2 = ds.Copy();
-                    ds2.Tables[0].Constraints.Add("uc", ds2.Tables[0].Columns[0], false);
-                    ds1.Merge(ds2, true, MissingSchemaAction.Error);
-                }
-            );
+            Assert.Throws<DataException>(() =>
+            {
+                DataSet ds1 = ds.Copy();
+                DataSet ds2 = ds.Copy();
+                ds2.Tables[0].Constraints.Add("uc", ds2.Tables[0].Columns[0], false);
+                ds1.Merge(ds2, true, MissingSchemaAction.Error);
+            });
 
             //"This constraint cannot be added since ForeignKey doesn't belong to table table1."
-            Assert.ThrowsAny<DataException>(
-                () =>
-                {
-                    DataSet ds1 = ds.Copy();
-                    DataSet ds2 = ds.Copy();
-                    ds2.Tables[0].Constraints.Add(
-                        "fk",
-                        ds2.Tables[0].Columns[0],
-                        ds2.Tables[1].Columns[0]
-                    );
-                    ds1.Tables[0].Constraints.Add("uc", ds1.Tables[0].Columns[0], false);
-                    ds1.Merge(ds2, true, MissingSchemaAction.Error);
-                }
-            );
+            Assert.ThrowsAny<DataException>(() =>
+            {
+                DataSet ds1 = ds.Copy();
+                DataSet ds2 = ds.Copy();
+                ds2.Tables[0].Constraints.Add(
+                    "fk",
+                    ds2.Tables[0].Columns[0],
+                    ds2.Tables[1].Columns[0]
+                );
+                ds1.Tables[0].Constraints.Add("uc", ds1.Tables[0].Columns[0], false);
+                ds1.Merge(ds2, true, MissingSchemaAction.Error);
+            });
 
-            Assert.Throws<ArgumentException>(
-                () =>
-                {
-                    DataSet ds1 = ds.Copy();
-                    DataSet ds2 = ds.Copy();
-                    ds2.Relations.Add(
-                        "rel",
-                        ds2.Tables[0].Columns[0],
-                        ds2.Tables[1].Columns[0],
-                        false
-                    );
-                    ds1.Merge(ds2, true, MissingSchemaAction.Error);
-                }
-            );
+            Assert.Throws<ArgumentException>(() =>
+            {
+                DataSet ds1 = ds.Copy();
+                DataSet ds2 = ds.Copy();
+                ds2.Relations.Add("rel", ds2.Tables[0].Columns[0], ds2.Tables[1].Columns[0], false);
+                ds1.Merge(ds2, true, MissingSchemaAction.Error);
+            });
         }
 
         [Fact]
         public void Merge_PrimaryKeys_IncorrectOrder()
         {
-            Assert.Throws<DataException>(
-                () =>
+            Assert.Throws<DataException>(() =>
+            {
+                var ds = new DataSet();
+                DataTable table1 = ds.Tables.Add("table1");
+                DataTable table2 = ds.Tables.Add("table2");
+                DataColumn pcol = table1.Columns.Add("col1", typeof(int));
+                DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
+                DataColumn ccol = table2.Columns.Add("col1", typeof(int));
+
+                DataSet ds1 = ds.Copy();
+                table1.PrimaryKey = new DataColumn[] { pcol, pcol1 };
+                ds1.Tables[0].PrimaryKey = new DataColumn[]
                 {
-                    var ds = new DataSet();
-                    DataTable table1 = ds.Tables.Add("table1");
-                    DataTable table2 = ds.Tables.Add("table2");
-                    DataColumn pcol = table1.Columns.Add("col1", typeof(int));
-                    DataColumn pcol1 = table1.Columns.Add("col2", typeof(int));
-                    DataColumn ccol = table2.Columns.Add("col1", typeof(int));
+                    ds1.Tables[0].Columns[1],
+                    ds1.Tables[0].Columns[0]
+                };
 
-                    DataSet ds1 = ds.Copy();
-                    table1.PrimaryKey = new DataColumn[] { pcol, pcol1 };
-                    ds1.Tables[0].PrimaryKey = new DataColumn[]
-                    {
-                        ds1.Tables[0].Columns[1],
-                        ds1.Tables[0].Columns[0]
-                    };
-
-                    // Though the key columns are the same, if the order is incorrect
-                    // Exception must be raised
-                    ds1.Merge(ds);
-                }
-            );
+                // Though the key columns are the same, if the order is incorrect
+                // Exception must be raised
+                ds1.Merge(ds);
+            });
         }
 
         private void CompareResults_1(string Msg, DataSet ds, DataSet dsTarget)

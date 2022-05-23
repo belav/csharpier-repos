@@ -53,17 +53,15 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             ThisCanBeCalledOnAnyThread();
 
             // We can be called from any thread since errors can occur anywhere, however we can only construct and InfoBar from the UI thread.
-            this.ThreadingContext.JoinableTaskFactory.RunAsync(
-                async () =>
-                {
-                    using var _ = _listener.BeginAsyncOperation(nameof(ShowInfoBar));
-                    await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
-                        ThreadingContext.DisposalToken
-                    );
-                    if (TryGetInfoBarData(out var infoBarHost))
-                        CreateInfoBar(infoBarHost, message, items);
-                }
-            );
+            this.ThreadingContext.JoinableTaskFactory.RunAsync(async () =>
+            {
+                using var _ = _listener.BeginAsyncOperation(nameof(ShowInfoBar));
+                await this.ThreadingContext.JoinableTaskFactory.SwitchToMainThreadAsync(
+                    ThreadingContext.DisposalToken
+                );
+                if (TryGetInfoBarData(out var infoBarHost))
+                    CreateInfoBar(infoBarHost, message, items);
+            });
         }
 
         private bool TryGetInfoBarData(out IVsInfoBarHost infoBarHost)

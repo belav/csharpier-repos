@@ -166,13 +166,11 @@ public class RemoteAuthenticatorCoreTests
 
         await Assert.ThrowsAsync<InvalidOperationException>(
             async () =>
-                await renderer.Dispatcher.InvokeAsync<object>(
-                    async () =>
-                    {
-                        await remoteAuthenticator.SetParametersAsync(parameters);
-                        return null;
-                    }
-                )
+                await renderer.Dispatcher.InvokeAsync<object>(async () =>
+                {
+                    await remoteAuthenticator.SetParametersAsync(parameters);
+                    return null;
+                })
         );
     }
 
@@ -482,13 +480,11 @@ public class RemoteAuthenticatorCoreTests
 
         await Assert.ThrowsAsync<InvalidOperationException>(
             async () =>
-                await renderer.Dispatcher.InvokeAsync<object>(
-                    async () =>
-                    {
-                        await remoteAuthenticator.SetParametersAsync(parameters);
-                        return null;
-                    }
-                )
+                await renderer.Dispatcher.InvokeAsync<object>(async () =>
+                {
+                    await remoteAuthenticator.SetParametersAsync(parameters);
+                    return null;
+                })
         );
     }
 

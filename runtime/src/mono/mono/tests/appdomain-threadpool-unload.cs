@@ -31,39 +31,35 @@ class Driver
                 .Range(0, 100)
                 .AsParallel()
                 .WithDegreeOfParallelism(Environment.ProcessorCount)
-                .Select(
-                    i =>
+                .Select(i =>
+                {
+                    AppDomain ad;
+
+                    ad = AppDomain.CreateDomain("testdomain" + i);
+                    ad.CreateInstance(
+                        typeof(ThreadPoolLauncherObject).Assembly.FullName,
+                        typeof(ThreadPoolLauncherObject).FullName
+                    );
+
+                    Thread.Sleep(10);
+
+                    AppDomain.Unload(ad);
+
+                    return i;
+                })
+                .Select(i =>
+                {
+                    lock (o)
                     {
-                        AppDomain ad;
+                        count += 1;
 
-                        ad = AppDomain.CreateDomain("testdomain" + i);
-                        ad.CreateInstance(
-                            typeof(ThreadPoolLauncherObject).Assembly.FullName,
-                            typeof(ThreadPoolLauncherObject).FullName
-                        );
-
-                        Thread.Sleep(10);
-
-                        AppDomain.Unload(ad);
-
-                        return i;
+                        Console.Write(".");
+                        if (count % 25 == 0)
+                            Console.WriteLine();
                     }
-                )
-                .Select(
-                    i =>
-                    {
-                        lock (o)
-                        {
-                            count += 1;
 
-                            Console.Write(".");
-                            if (count % 25 == 0)
-                                Console.WriteLine();
-                        }
-
-                        return i;
-                    }
-                )
+                    return i;
+                })
         ) { }
     }
 }

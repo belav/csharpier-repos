@@ -17,16 +17,14 @@ class Program
         // Configure
         var services = new ServiceCollection()
             .AddLogging(o => o.AddConsole().SetMinimumLevel(LogLevel.Debug))
-            .AddDbContext<DataProtectionKeyContext>(
-                o =>
-                {
-                    o.UseInMemoryDatabase("DataProtection_EntityFrameworkCore");
-                    // Make sure to create a sql server called DataProtectionApp
-                    //o.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=DataProtectionApp;Trusted_Connection=True;Connect Timeout=5;ConnectRetryCount=0");
-                    o.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
-                    o.EnableSensitiveDataLogging();
-                }
-            )
+            .AddDbContext<DataProtectionKeyContext>(o =>
+            {
+                o.UseInMemoryDatabase("DataProtection_EntityFrameworkCore");
+                // Make sure to create a sql server called DataProtectionApp
+                //o.UseSqlServer(@"Server=(localdb)\mssqllocaldb;Database=DataProtectionApp;Trusted_Connection=True;Connect Timeout=5;ConnectRetryCount=0");
+                o.UseQueryTrackingBehavior(QueryTrackingBehavior.NoTracking);
+                o.EnableSensitiveDataLogging();
+            })
             .AddDataProtection()
             .PersistKeysToDbContext<DataProtectionKeyContext>()
             .SetDefaultKeyLifetime(TimeSpan.FromDays(7))

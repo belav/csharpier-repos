@@ -1470,12 +1470,10 @@ public static partial class XmlSerializerTests
     public static void Xml_TypeWithNonParameterlessConstructor()
     {
         var obj = new TypeWithNonParameterlessConstructor("string value");
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                SerializeAndDeserialize(obj, string.Empty);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            SerializeAndDeserialize(obj, string.Empty);
+        });
     }
 
     [Fact]
@@ -1557,12 +1555,10 @@ public static partial class XmlSerializerTests
         );
         Assert.Equal(expected.Instruments[0].Name, actual.Instruments[0].Name);
 
-        Assert.Throws<ArgumentNullException>(
-            () =>
-            {
-                new XmlSerializer(null, overrides);
-            }
-        );
+        Assert.Throws<ArgumentNullException>(() =>
+        {
+            new XmlSerializer(null, overrides);
+        });
     }
 
     [ConditionalFact(nameof(IsTimeSpanSerializationAvailable))]
@@ -2529,12 +2525,10 @@ public static partial class XmlSerializerTests
     [Fact]
     public static void Xml_Soap_Dictionary()
     {
-        Assert.Throws<NotSupportedException>(
-            () =>
-            {
-                new SoapReflectionImporter().ImportTypeMapping(typeof(MyGroup3));
-            }
-        );
+        Assert.Throws<NotSupportedException>(() =>
+        {
+            new SoapReflectionImporter().ImportTypeMapping(typeof(MyGroup3));
+        });
     }
 
     [Fact]
@@ -3639,12 +3633,10 @@ public static partial class XmlSerializerTests
         Assert.Equal(myGroup3.CreationTime, actual3.CreationTime);
 
         var myGroup4 = new Group4WithXmlTextAttr();
-        Assert.Throws<InvalidOperationException>(
-            () =>
-            {
-                SerializeAndDeserialize(myGroup4, null, null, true);
-            }
-        );
+        Assert.Throws<InvalidOperationException>(() =>
+        {
+            SerializeAndDeserialize(myGroup4, null, null, true);
+        });
     }
 
     [Fact]

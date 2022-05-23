@@ -19,27 +19,21 @@ public class HttpMethodOverrideMiddlewareTest
     {
         var assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHttpMethodOverride();
-                                app.Run(
-                                    context =>
-                                    {
-                                        assertsExecuted = true;
-                                        Assert.Equal("DELETE", context.Request.Method);
-                                        return Task.FromResult(0);
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHttpMethodOverride();
+                        app.Run(context =>
+                        {
+                            assertsExecuted = true;
+                            Assert.Equal("DELETE", context.Request.Method);
+                            return Task.FromResult(0);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -57,27 +51,21 @@ public class HttpMethodOverrideMiddlewareTest
     {
         var assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHttpMethodOverride();
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Equal("POST", context.Request.Method);
-                                        assertsExecuted = true;
-                                        return Task.FromResult(0);
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHttpMethodOverride();
+                        app.Run(context =>
+                        {
+                            Assert.Equal("POST", context.Request.Method);
+                            assertsExecuted = true;
+                            return Task.FromResult(0);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -94,27 +82,21 @@ public class HttpMethodOverrideMiddlewareTest
     {
         var assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHttpMethodOverride();
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Equal("GET", context.Request.Method);
-                                        assertsExecuted = true;
-                                        return Task.FromResult(0);
-                                    }
-                                );
-                            }
-                        );
-                }
-            )
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHttpMethodOverride();
+                        app.Run(context =>
+                        {
+                            Assert.Equal("GET", context.Request.Method);
+                            assertsExecuted = true;
+                            return Task.FromResult(0);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -131,29 +113,23 @@ public class HttpMethodOverrideMiddlewareTest
     {
         var assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHttpMethodOverride(
-                                    new HttpMethodOverrideOptions() { FormFieldName = "_METHOD" }
-                                );
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Equal("DELETE", context.Request.Method);
-                                        assertsExecuted = true;
-                                        return Task.FromResult(0);
-                                    }
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHttpMethodOverride(
+                            new HttpMethodOverrideOptions() { FormFieldName = "_METHOD" }
                         );
-                }
-            )
+                        app.Run(context =>
+                        {
+                            Assert.Equal("DELETE", context.Request.Method);
+                            assertsExecuted = true;
+                            return Task.FromResult(0);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -174,29 +150,23 @@ public class HttpMethodOverrideMiddlewareTest
     {
         var assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHttpMethodOverride(
-                                    new HttpMethodOverrideOptions() { FormFieldName = "_METHOD" }
-                                );
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Equal("POST", context.Request.Method);
-                                        assertsExecuted = true;
-                                        return Task.FromResult(0);
-                                    }
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHttpMethodOverride(
+                            new HttpMethodOverrideOptions() { FormFieldName = "_METHOD" }
                         );
-                }
-            )
+                        app.Run(context =>
+                        {
+                            Assert.Equal("POST", context.Request.Method);
+                            assertsExecuted = true;
+                            return Task.FromResult(0);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();
@@ -215,29 +185,23 @@ public class HttpMethodOverrideMiddlewareTest
     {
         var assertsExecuted = false;
         using var host = new HostBuilder()
-            .ConfigureWebHost(
-                webHostBuilder =>
-                {
-                    webHostBuilder
-                        .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseHttpMethodOverride(
-                                    new HttpMethodOverrideOptions() { FormFieldName = "_METHOD" }
-                                );
-                                app.Run(
-                                    context =>
-                                    {
-                                        Assert.Equal("POST", context.Request.Method);
-                                        assertsExecuted = true;
-                                        return Task.FromResult(0);
-                                    }
-                                );
-                            }
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder
+                    .UseTestServer()
+                    .Configure(app =>
+                    {
+                        app.UseHttpMethodOverride(
+                            new HttpMethodOverrideOptions() { FormFieldName = "_METHOD" }
                         );
-                }
-            )
+                        app.Run(context =>
+                        {
+                            Assert.Equal("POST", context.Request.Method);
+                            assertsExecuted = true;
+                            return Task.FromResult(0);
+                        });
+                    });
+            })
             .Build();
 
         await host.StartAsync();

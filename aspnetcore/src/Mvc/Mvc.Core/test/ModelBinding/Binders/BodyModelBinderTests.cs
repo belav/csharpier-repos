@@ -136,15 +136,13 @@ public class BodyModelBinderTests
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<Person>()
-            .BindingDetails(
-                d =>
-                {
-                    d.BindingSource = BindingSource.Body;
-                    d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(
-                        () => "Customized error message"
-                    );
-                }
-            );
+            .BindingDetails(d =>
+            {
+                d.BindingSource = BindingSource.Body;
+                d.ModelBindingMessageProvider.SetMissingRequestBodyRequiredValueAccessor(
+                    () => "Customized error message"
+                );
+            });
 
         var bindingContext = GetBindingContext(typeof(Person), metadataProvider: provider);
         bindingContext.BinderModelName = "custom";

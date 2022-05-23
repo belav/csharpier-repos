@@ -277,28 +277,24 @@ namespace System.IO.Tests
             var contentBytes = new byte[] { 1, 2, 3 };
 
             await Task.WhenAll(
-                Task.Run(
-                    async () =>
+                Task.Run(async () =>
+                {
+                    byte[] readBytes = await File.ReadAllBytesAsync(fifoPath);
+                    Assert.Equal<byte>(contentBytes, readBytes);
+                }),
+                Task.Run(() =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
+                    foreach (byte content in contentBytes)
                     {
-                        byte[] readBytes = await File.ReadAllBytesAsync(fifoPath);
-                        Assert.Equal<byte>(contentBytes, readBytes);
+                        fs.WriteByte(content);
                     }
-                ),
-                Task.Run(
-                    () =>
-                    {
-                        using var fs = new FileStream(
-                            fifoPath,
-                            FileMode.Open,
-                            FileAccess.Write,
-                            FileShare.Read
-                        );
-                        foreach (byte content in contentBytes)
-                        {
-                            fs.WriteByte(content);
-                        }
-                    }
-                )
+                })
             );
         }
     }

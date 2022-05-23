@@ -101,12 +101,10 @@ internal class ComponentTagHelperDescriptorProvider
     )
     {
         var builder = CreateDescriptorBuilder(symbols, type);
-        builder.TagMatchingRule(
-            r =>
-            {
-                r.TagName = type.Name;
-            }
-        );
+        builder.TagMatchingRule(r =>
+        {
+            r.TagName = type.Name;
+        });
 
         return builder.Build();
     }
@@ -119,12 +117,10 @@ internal class ComponentTagHelperDescriptorProvider
         var builder = CreateDescriptorBuilder(symbols, type);
         var containingNamespace = type.ContainingNamespace.ToDisplayString();
         var fullName = $"{containingNamespace}.{type.Name}";
-        builder.TagMatchingRule(
-            r =>
-            {
-                r.TagName = fullName;
-            }
-        );
+        builder.TagMatchingRule(r =>
+        {
+            r.TagName = fullName;
+        });
         builder.Metadata[ComponentMetadata.Component.NameMatchKey] = ComponentMetadata
             .Component
             .FullyQualifiedNameMatch;
@@ -226,55 +222,50 @@ internal class ComponentTagHelperDescriptorProvider
         PropertyKind kind
     )
     {
-        builder.BindAttribute(
-            pb =>
+        builder.BindAttribute(pb =>
+        {
+            pb.Name = property.Name;
+            pb.TypeName = property.Type.ToDisplayString(FullNameTypeDisplayFormat);
+            pb.SetPropertyName(property.Name);
+            pb.IsEditorRequired = property
+                .GetAttributes()
+                .Any(
+                    a =>
+                        a.AttributeClass.ToDisplayString()
+                        == "Microsoft.AspNetCore.Components.EditorRequiredAttribute"
+                );
+
+            if (kind == PropertyKind.Enum)
             {
-                pb.Name = property.Name;
-                pb.TypeName = property.Type.ToDisplayString(FullNameTypeDisplayFormat);
-                pb.SetPropertyName(property.Name);
-                pb.IsEditorRequired = property
-                    .GetAttributes()
-                    .Any(
-                        a =>
-                            a.AttributeClass.ToDisplayString()
-                            == "Microsoft.AspNetCore.Components.EditorRequiredAttribute"
-                    );
-
-                if (kind == PropertyKind.Enum)
-                {
-                    pb.IsEnum = true;
-                }
-
-                if (kind == PropertyKind.ChildContent)
-                {
-                    pb.Metadata.Add(ComponentMetadata.Component.ChildContentKey, bool.TrueString);
-                }
-
-                if (kind == PropertyKind.EventCallback)
-                {
-                    pb.Metadata.Add(ComponentMetadata.Component.EventCallbackKey, bool.TrueString);
-                }
-
-                if (kind == PropertyKind.Delegate)
-                {
-                    pb.Metadata.Add(
-                        ComponentMetadata.Component.DelegateSignatureKey,
-                        bool.TrueString
-                    );
-                }
-
-                if (HasTypeParameter(property.Type))
-                {
-                    pb.Metadata.Add(ComponentMetadata.Component.GenericTypedKey, bool.TrueString);
-                }
-
-                var xml = property.GetDocumentationCommentXml();
-                if (!string.IsNullOrEmpty(xml))
-                {
-                    pb.Documentation = xml;
-                }
+                pb.IsEnum = true;
             }
-        );
+
+            if (kind == PropertyKind.ChildContent)
+            {
+                pb.Metadata.Add(ComponentMetadata.Component.ChildContentKey, bool.TrueString);
+            }
+
+            if (kind == PropertyKind.EventCallback)
+            {
+                pb.Metadata.Add(ComponentMetadata.Component.EventCallbackKey, bool.TrueString);
+            }
+
+            if (kind == PropertyKind.Delegate)
+            {
+                pb.Metadata.Add(ComponentMetadata.Component.DelegateSignatureKey, bool.TrueString);
+            }
+
+            if (HasTypeParameter(property.Type))
+            {
+                pb.Metadata.Add(ComponentMetadata.Component.GenericTypedKey, bool.TrueString);
+            }
+
+            var xml = property.GetDocumentationCommentXml();
+            if (!string.IsNullOrEmpty(xml))
+            {
+                pb.Documentation = xml;
+            }
+        });
 
         bool HasTypeParameter(ITypeSymbol type)
         {
@@ -329,65 +320,63 @@ internal class ComponentTagHelperDescriptorProvider
         bool cascade
     )
     {
-        builder.BindAttribute(
-            pb =>
+        builder.BindAttribute(pb =>
+        {
+            pb.DisplayName = typeParameter.Name;
+            pb.Name = typeParameter.Name;
+            pb.TypeName = typeof(Type).FullName;
+            pb.SetPropertyName(typeParameter.Name);
+
+            pb.Metadata[ComponentMetadata.Component.TypeParameterKey] = bool.TrueString;
+            pb.Metadata[ComponentMetadata.Component.TypeParameterIsCascadingKey] =
+                cascade.ToString();
+
+            // Type constraints (like "Image" or "Foo") are stored indepenently of
+            // things like constructor constraints and not null constraints in the
+            // type parameter so we create a single string representation of all the constraints
+            // here.
+            var constraintString = new StringBuilder();
+            if (typeParameter.ConstraintTypes.Any())
             {
-                pb.DisplayName = typeParameter.Name;
-                pb.Name = typeParameter.Name;
-                pb.TypeName = typeof(Type).FullName;
-                pb.SetPropertyName(typeParameter.Name);
-
-                pb.Metadata[ComponentMetadata.Component.TypeParameterKey] = bool.TrueString;
-                pb.Metadata[ComponentMetadata.Component.TypeParameterIsCascadingKey] =
-                    cascade.ToString();
-
-                // Type constraints (like "Image" or "Foo") are stored indepenently of
-                // things like constructor constraints and not null constraints in the
-                // type parameter so we create a single string representation of all the constraints
-                // here.
-                var constraintString = new StringBuilder();
-                if (typeParameter.ConstraintTypes.Any())
-                {
-                    constraintString.Append(
-                        string.Join(", ", typeParameter.ConstraintTypes.Select(t => t.Name))
-                    );
-                }
-                if (typeParameter.HasConstructorConstraint)
-                {
-                    constraintString.Append(", new()");
-                }
-                if (typeParameter.HasNotNullConstraint)
-                {
-                    constraintString.Append(", notnull");
-                }
-                if (typeParameter.HasReferenceTypeConstraint)
-                {
-                    constraintString.Append(", class");
-                }
-                if (typeParameter.HasUnmanagedTypeConstraint)
-                {
-                    constraintString.Append(", unmanaged");
-                }
-                if (typeParameter.HasValueTypeConstraint)
-                {
-                    constraintString.Append(", struct");
-                }
-
-                if (constraintString.Length > 0)
-                {
-                    constraintString.Insert(0, "where " + typeParameter.Name + " : ");
-                    pb.Metadata[ComponentMetadata.Component.TypeParameterConstraintsKey] =
-                        constraintString.ToString();
-                }
-
-                pb.Documentation = string.Format(
-                    CultureInfo.InvariantCulture,
-                    ComponentResources.ComponentTypeParameter_Documentation,
-                    typeParameter.Name,
-                    builder.Name
+                constraintString.Append(
+                    string.Join(", ", typeParameter.ConstraintTypes.Select(t => t.Name))
                 );
             }
-        );
+            if (typeParameter.HasConstructorConstraint)
+            {
+                constraintString.Append(", new()");
+            }
+            if (typeParameter.HasNotNullConstraint)
+            {
+                constraintString.Append(", notnull");
+            }
+            if (typeParameter.HasReferenceTypeConstraint)
+            {
+                constraintString.Append(", class");
+            }
+            if (typeParameter.HasUnmanagedTypeConstraint)
+            {
+                constraintString.Append(", unmanaged");
+            }
+            if (typeParameter.HasValueTypeConstraint)
+            {
+                constraintString.Append(", struct");
+            }
+
+            if (constraintString.Length > 0)
+            {
+                constraintString.Insert(0, "where " + typeParameter.Name + " : ");
+                pb.Metadata[ComponentMetadata.Component.TypeParameterConstraintsKey] =
+                    constraintString.ToString();
+            }
+
+            pb.Documentation = string.Format(
+                CultureInfo.InvariantCulture,
+                ComponentResources.ComponentTypeParameter_Documentation,
+                typeParameter.Name,
+                builder.Name
+            );
+        });
     }
 
     private TagHelperDescriptor CreateChildContentDescriptor(
@@ -425,13 +414,11 @@ internal class ComponentTagHelperDescriptorProvider
         }
 
         // Child content matches the property name, but only as a direct child of the component.
-        builder.TagMatchingRule(
-            r =>
-            {
-                r.TagName = attribute.Name;
-                r.ParentTag = component.TagMatchingRules[0].TagName;
-            }
-        );
+        builder.TagMatchingRule(r =>
+        {
+            r.TagName = attribute.Name;
+            r.ParentTag = component.TagMatchingRules[0].TagName;
+        });
 
         if (attribute.IsParameterizedChildContentProperty())
         {
@@ -454,32 +441,30 @@ internal class ComponentTagHelperDescriptorProvider
 
     private void CreateContextParameter(TagHelperDescriptorBuilder builder, string childContentName)
     {
-        builder.BindAttribute(
-            b =>
-            {
-                b.Name = ComponentMetadata.ChildContent.ParameterAttributeName;
-                b.TypeName = typeof(string).FullName;
-                b.Metadata.Add(
-                    ComponentMetadata.Component.ChildContentParameterNameKey,
-                    bool.TrueString
-                );
-                b.Metadata.Add(TagHelperMetadata.Common.PropertyName, b.Name);
+        builder.BindAttribute(b =>
+        {
+            b.Name = ComponentMetadata.ChildContent.ParameterAttributeName;
+            b.TypeName = typeof(string).FullName;
+            b.Metadata.Add(
+                ComponentMetadata.Component.ChildContentParameterNameKey,
+                bool.TrueString
+            );
+            b.Metadata.Add(TagHelperMetadata.Common.PropertyName, b.Name);
 
-                if (childContentName == null)
-                {
-                    b.Documentation =
-                        ComponentResources.ChildContentParameterName_TopLevelDocumentation;
-                }
-                else
-                {
-                    b.Documentation = string.Format(
-                        CultureInfo.InvariantCulture,
-                        ComponentResources.ChildContentParameterName_Documentation,
-                        childContentName
-                    );
-                }
+            if (childContentName == null)
+            {
+                b.Documentation =
+                    ComponentResources.ChildContentParameterName_TopLevelDocumentation;
             }
-        );
+            else
+            {
+                b.Documentation = string.Format(
+                    CultureInfo.InvariantCulture,
+                    ComponentResources.ChildContentParameterName_Documentation,
+                    childContentName
+                );
+            }
+        });
     }
 
     // Does a walk up the inheritance chain to determine the set of parameters by using

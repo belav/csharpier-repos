@@ -17,13 +17,11 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                c =>
-                {
-                    c.IncludeSourceExtensionMethods(typeof(BarExtensions));
-                    c.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(c =>
+            {
+                c.IncludeSourceExtensionMethods(typeof(BarExtensions));
+                c.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void It_should_be_used() => Map<Destination>(new Source()).Value.ShouldBe(12);
@@ -62,14 +60,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.IncludeSourceExtensionMethods(typeof(BarExtensions));
-                    cfg.CreateMap<Foo, FooDto>()
-                        .ForMember(d => d.Value, o => o.MapFrom(s => Guid.NewGuid()));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.IncludeSourceExtensionMethods(typeof(BarExtensions));
+                cfg.CreateMap<Foo, FooDto>()
+                    .ForMember(d => d.Value, o => o.MapFrom(s => Guid.NewGuid()));
+            });
 
         [Fact]
         public void Should_work()
@@ -102,15 +98,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.IncludeSourceExtensionMethods(
-                        typeof(When_extension_method_returns_value_type_SourceExtensions)
-                    );
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.IncludeSourceExtensionMethods(
+                    typeof(When_extension_method_returns_value_type_SourceExtensions)
+                );
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -164,15 +158,13 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.IncludeSourceExtensionMethods(
-                        typeof(When_extension_method_returns_object_SourceExtensions)
-                    );
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.IncludeSourceExtensionMethods(
+                    typeof(When_extension_method_returns_object_SourceExtensions)
+                );
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -207,12 +199,10 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -248,14 +238,12 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.Internal().FieldMappingEnabled = false;
-                    cfg.Internal().MethodMappingEnabled = false;
-                    cfg.CreateMap<Source, Destination>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.Internal().FieldMappingEnabled = false;
+                cfg.Internal().MethodMappingEnabled = false;
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_fail_validation()
@@ -292,16 +280,14 @@ namespace AutoMapper.UnitTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateMap<CombinedNames, FullName>()
-                        .ForMember(
-                            dst => dst.Name,
-                            o => o.MapFrom(src => string.Concat(src.First.Name, src.Last.Name))
-                        );
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateMap<CombinedNames, FullName>()
+                    .ForMember(
+                        dst => dst.Name,
+                        o => o.MapFrom(src => string.Concat(src.First.Name, src.Last.Name))
+                    );
+            });
 
         [Fact]
         public void It_should_not_be_null_checked()

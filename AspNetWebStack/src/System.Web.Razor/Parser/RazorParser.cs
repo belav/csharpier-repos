@@ -144,19 +144,17 @@ namespace System.Web.Razor.Parser
         )]
         public virtual Task CreateParseTask(TextReader input, ParserVisitor consumer)
         {
-            return new Task(
-                () =>
+            return new Task(() =>
+            {
+                try
                 {
-                    try
-                    {
-                        Parse(input, consumer);
-                    }
-                    catch (OperationCanceledException)
-                    {
-                        return; // Just return if we're cancelled.
-                    }
+                    Parse(input, consumer);
                 }
-            );
+                catch (OperationCanceledException)
+                {
+                    return; // Just return if we're cancelled.
+                }
+            });
         }
 
         private ParserResults ParseCore(ITextDocument input)

@@ -37,13 +37,11 @@
         }
 
         protected override MapperConfiguration Configuration { get; } =
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.AddProfile<GoodProfile>();
-                    cfg.AddProfile<BadProfile>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.AddProfile<GoodProfile>();
+                cfg.AddProfile<BadProfile>();
+            });
 
         [Fact]
         public void Should_pass_specific_profile_assertion()

@@ -30,19 +30,15 @@ class Gen<T>
             // new MonitorDelegate(myHelper.Consumer).BeginInvoke(monitorT,null,null);
             // new MonitorDelegate(myHelper2.Consumer).BeginInvoke(monitorU,null,null);
 
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper.Consumer(monitorT);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper.Consumer(monitorT);
+            });
 
-            ThreadPool.QueueUserWorkItem(
-                state =>
-                {
-                    myHelper2.Consumer(monitorU);
-                }
-            );
+            ThreadPool.QueueUserWorkItem(state =>
+            {
+                myHelper2.Consumer(monitorU);
+            });
         }
 
         for (int i = 0; i < 6; i++)

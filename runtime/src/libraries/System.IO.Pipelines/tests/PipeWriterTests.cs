@@ -235,13 +235,11 @@ namespace System.IO.Pipelines.Tests
             var pipe = new Pipe();
             pipe.Reader.Complete();
 
-            var task = Task.Run(
-                async () =>
-                {
-                    await Task.Delay(10);
-                    pipe.Writer.Complete();
-                }
-            );
+            var task = Task.Run(async () =>
+            {
+                await Task.Delay(10);
+                pipe.Writer.Complete();
+            });
 
             try
             {

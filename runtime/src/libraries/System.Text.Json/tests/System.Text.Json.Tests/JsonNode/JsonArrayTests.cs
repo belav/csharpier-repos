@@ -463,20 +463,16 @@ namespace System.Text.Json.Nodes.Tests
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[-1]);
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[0]);
             Assert.Throws<ArgumentOutOfRangeException>(() => new JsonArray()[1]);
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var jArray = new JsonArray { 1, 2, 3 };
-                    jArray.Insert(4, 17);
-                }
-            );
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    var jArray = new JsonArray { 1, 2, 3 };
-                    jArray.Insert(-1, 17);
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var jArray = new JsonArray { 1, 2, 3 };
+                jArray.Insert(4, 17);
+            });
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                var jArray = new JsonArray { 1, 2, 3 };
+                jArray.Insert(-1, 17);
+            });
         }
 
         [Fact]

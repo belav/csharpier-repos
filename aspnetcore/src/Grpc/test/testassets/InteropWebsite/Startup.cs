@@ -39,30 +39,26 @@ public class Startup
     public void Configure(IApplicationBuilder app, IHostApplicationLifetime applicationLifetime)
     {
         // Required to notify test infrastructure that it can begin tests
-        applicationLifetime.ApplicationStarted.Register(
-            () =>
-            {
-                Console.WriteLine("Application started.");
+        applicationLifetime.ApplicationStarted.Register(() =>
+        {
+            Console.WriteLine("Application started.");
 
-                var runtimeVersion =
-                    typeof(object).Assembly
-                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                        ?.InformationalVersion ?? "Unknown";
-                Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
-                var aspNetCoreVersion =
-                    typeof(HeaderNames).Assembly
-                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
-                        ?.InformationalVersion ?? "Unknown";
-                Console.WriteLine($"AspNetCoreAppVersion: {aspNetCoreVersion}");
-            }
-        );
+            var runtimeVersion =
+                typeof(object).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    ?.InformationalVersion ?? "Unknown";
+            Console.WriteLine($"NetCoreAppVersion: {runtimeVersion}");
+            var aspNetCoreVersion =
+                typeof(HeaderNames).Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>()
+                    ?.InformationalVersion ?? "Unknown";
+            Console.WriteLine($"AspNetCoreAppVersion: {aspNetCoreVersion}");
+        });
 
         app.UseRouting();
-        app.UseEndpoints(
-            endpoints =>
-            {
-                endpoints.MapGrpcService<TestServiceImpl>();
-            }
-        );
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGrpcService<TestServiceImpl>();
+        });
     }
 }

@@ -89,22 +89,20 @@ namespace System.Net.Http
             // Look for the child with a Content-ID header that corresponds to the "start" value.
             // If no matching child is found then we return null.
             string startValue = FormattingUtilities.UnquoteToken(startNameValue.Value);
-            return children.FirstOrDefault(
-                content =>
+            return children.FirstOrDefault(content =>
+            {
+                IEnumerable<string> values;
+                if (content.Headers.TryGetValues(ContentID, out values))
                 {
-                    IEnumerable<string> values;
-                    if (content.Headers.TryGetValues(ContentID, out values))
-                    {
-                        return String.Equals(
-                            FormattingUtilities.UnquoteToken(values.ElementAt(0)),
-                            startValue,
-                            StringComparison.OrdinalIgnoreCase
-                        );
-                    }
-
-                    return false;
+                    return String.Equals(
+                        FormattingUtilities.UnquoteToken(values.ElementAt(0)),
+                        startValue,
+                        StringComparison.OrdinalIgnoreCase
+                    );
                 }
-            );
+
+                return false;
+            });
         }
 
         /// <summary>

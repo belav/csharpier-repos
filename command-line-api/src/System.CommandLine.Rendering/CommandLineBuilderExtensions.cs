@@ -14,19 +14,17 @@ namespace System.CommandLine.Rendering
             this CommandLineBuilder builder
         )
         {
-            builder.ConfigureConsole(
-                context =>
-                {
-                    var console = context.Console;
+            builder.ConfigureConsole(context =>
+            {
+                var console = context.Console;
 
-                    var terminal = console.GetTerminal(
-                        PreferVirtualTerminal(context),
-                        OutputMode(context)
-                    );
+                var terminal = console.GetTerminal(
+                    PreferVirtualTerminal(context),
+                    OutputMode(context)
+                );
 
-                    return terminal ?? console;
-                }
-            );
+                return terminal ?? console;
+            });
 
             return builder;
         }

@@ -139,17 +139,11 @@ namespace System.Security.AccessControl.Tests
             CommonSecurityDescriptor commonSecurityDescriptor = null;
 
             // Case1, null sddl string
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    commonSecurityDescriptor = new CommonSecurityDescriptor(
-                        false,
-                        false,
-                        (string)null
-                    );
-                    // expect to throw exception but not
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                commonSecurityDescriptor = new CommonSecurityDescriptor(false, false, (string)null);
+                // expect to throw exception but not
+            });
 
             // Case 3, sddl form owner symbol exists but no content
             AssertExtensions.Throws<ArgumentException>(

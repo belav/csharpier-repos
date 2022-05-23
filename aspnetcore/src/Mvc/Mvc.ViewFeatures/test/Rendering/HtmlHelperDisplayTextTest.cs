@@ -46,12 +46,10 @@ public class HtmlHelperDisplayTextTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<OverriddenToStringModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.NullDisplayText = "Null display Text";
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "Null display Text";
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
             model: null,
@@ -72,12 +70,10 @@ public class HtmlHelperDisplayTextTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<OverriddenToStringModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.NullDisplayText = "Null display Text";
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.NullDisplayText = "Null display Text";
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
             model: null,
@@ -147,12 +143,10 @@ public class HtmlHelperDisplayTextTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<OverriddenToStringModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
             model: model,
@@ -178,12 +172,10 @@ public class HtmlHelperDisplayTextTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<OverriddenToStringModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
             model: model,
@@ -210,12 +202,10 @@ public class HtmlHelperDisplayTextTest
         var provider = new TestModelMetadataProvider();
         provider
             .ForType<OverriddenToStringModel>()
-            .DisplayDetails(
-                dd =>
-                {
-                    dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
-                }
-            );
+            .DisplayDetails(dd =>
+            {
+                dd.SimpleDisplayProperty = nameof(OverriddenToStringModel.SimpleDisplay);
+            });
 
         var helper = DefaultTemplatesUtilities.GetHtmlHelper<OverriddenToStringModel>(
             model: model,

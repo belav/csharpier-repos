@@ -265,12 +265,10 @@ namespace Moq.Tests
         {
             var mockRepository = new MockRepository(MockBehavior.Default);
 
-            Assert.Throws<ArgumentOutOfRangeException>(
-                () =>
-                {
-                    mockRepository.DefaultValue = defaultValue;
-                }
-            );
+            Assert.Throws<ArgumentOutOfRangeException>(() =>
+            {
+                mockRepository.DefaultValue = defaultValue;
+            });
         }
 
         [Fact]
@@ -278,12 +276,10 @@ namespace Moq.Tests
         {
             var mockRepository = new MockRepository(MockBehavior.Default);
 
-            Assert.Throws<ArgumentNullException>(
-                () =>
-                {
-                    mockRepository.DefaultValueProvider = null;
-                }
-            );
+            Assert.Throws<ArgumentNullException>(() =>
+            {
+                mockRepository.DefaultValueProvider = null;
+            });
         }
 
         [Fact]

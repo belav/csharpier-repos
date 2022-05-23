@@ -59,37 +59,29 @@ public class ServerDeferralTests
     )
     {
         var builder = new HostBuilder()
-            .ConfigureServices(
-                services =>
-                {
-                    services
-                        .AddAuthentication(NegotiateDefaults.AuthenticationScheme)
-                        .AddNegotiate();
+            .ConfigureServices(services =>
+            {
+                services.AddAuthentication(NegotiateDefaults.AuthenticationScheme).AddNegotiate();
 
-                    if (supportsAuth)
-                    {
-                        services.AddSingleton<IServerIntegratedAuth>(
-                            new ServerIntegratedAuth()
-                            {
-                                IsEnabled = isEnabled,
-                                AuthenticationScheme = authScheme,
-                            }
-                        );
-                    }
-                }
-            )
-            .ConfigureWebHost(
-                webHostBuilder =>
+                if (supportsAuth)
                 {
-                    webHostBuilder.UseTestServer();
-                    webHostBuilder.Configure(
-                        app =>
+                    services.AddSingleton<IServerIntegratedAuth>(
+                        new ServerIntegratedAuth()
                         {
-                            app.UseAuthentication();
+                            IsEnabled = isEnabled,
+                            AuthenticationScheme = authScheme,
                         }
                     );
                 }
-            );
+            })
+            .ConfigureWebHost(webHostBuilder =>
+            {
+                webHostBuilder.UseTestServer();
+                webHostBuilder.Configure(app =>
+                {
+                    app.UseAuthentication();
+                });
+            });
 
         return await builder.StartAsync();
     }

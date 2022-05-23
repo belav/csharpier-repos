@@ -55,13 +55,11 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>()
-                        .ForMember(d => d.Value, o => o.NullSubstitute(5));
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>()
+                    .ForMember(d => d.Value, o => o.NullSubstitute(5));
+            });
 
         [Fact]
         public void Can_map_with_projection()
@@ -181,14 +179,12 @@ namespace AutoMapper.IntegrationTests
         }
 
         protected override MapperConfiguration Configuration =>
-            new MapperConfiguration(
-                cfg =>
-                {
-                    cfg.CreateProjection<Customer, CustomerViewModel>()
-                        .ForMember(d => d.Value, o => o.NullSubstitute(new Value()));
-                    cfg.CreateProjection<Value, ValueViewModel>();
-                }
-            );
+            new MapperConfiguration(cfg =>
+            {
+                cfg.CreateProjection<Customer, CustomerViewModel>()
+                    .ForMember(d => d.Value, o => o.NullSubstitute(new Value()));
+                cfg.CreateProjection<Value, ValueViewModel>();
+            });
 
         [Fact]
         public void Can_map_with_projection()

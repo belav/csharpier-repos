@@ -95,63 +95,61 @@ namespace System.Net.Sockets.Tests
                 server.BindToAnonymousPort(listenAt);
                 server.Listen(ListenBacklog);
 
-                Task serverProcessingTask = Task.Run(
-                    async () =>
+                Task serverProcessingTask = Task.Run(async () =>
+                {
+                    using (Socket remote = await AcceptAsync(server))
                     {
-                        using (Socket remote = await AcceptAsync(server))
+                        if (!useMultipleBuffers)
                         {
-                            if (!useMultipleBuffers)
+                            var recvBuffer = new byte[256];
+                            while (true)
                             {
-                                var recvBuffer = new byte[256];
-                                while (true)
+                                int received = await ReceiveAsync(
+                                    remote,
+                                    new ArraySegment<byte>(recvBuffer)
+                                );
+                                if (received == 0)
                                 {
-                                    int received = await ReceiveAsync(
-                                        remote,
-                                        new ArraySegment<byte>(recvBuffer)
-                                    );
-                                    if (received == 0)
-                                    {
-                                        break;
-                                    }
-
-                                    bytesReceived += received;
-                                    receivedChecksum.Add(recvBuffer, 0, received);
+                                    break;
                                 }
-                            }
-                            else
-                            {
-                                var recvBuffers = new List<ArraySegment<byte>>
-                                {
-                                    new ArraySegment<byte>(new byte[123]),
-                                    new ArraySegment<byte>(new byte[256], 2, 100),
-                                    new ArraySegment<byte>(new byte[1], 0, 0),
-                                    new ArraySegment<byte>(new byte[64], 9, 33)
-                                };
-                                while (true)
-                                {
-                                    int received = await ReceiveAsync(remote, recvBuffers);
-                                    if (received == 0)
-                                    {
-                                        break;
-                                    }
 
-                                    bytesReceived += received;
-                                    for (
-                                        int i = 0, remaining = received;
-                                        i < recvBuffers.Count && remaining > 0;
-                                        i++
-                                    )
-                                    {
-                                        ArraySegment<byte> buffer = recvBuffers[i];
-                                        int toAdd = Math.Min(buffer.Count, remaining);
-                                        receivedChecksum.Add(buffer.Array, buffer.Offset, toAdd);
-                                        remaining -= toAdd;
-                                    }
+                                bytesReceived += received;
+                                receivedChecksum.Add(recvBuffer, 0, received);
+                            }
+                        }
+                        else
+                        {
+                            var recvBuffers = new List<ArraySegment<byte>>
+                            {
+                                new ArraySegment<byte>(new byte[123]),
+                                new ArraySegment<byte>(new byte[256], 2, 100),
+                                new ArraySegment<byte>(new byte[1], 0, 0),
+                                new ArraySegment<byte>(new byte[64], 9, 33)
+                            };
+                            while (true)
+                            {
+                                int received = await ReceiveAsync(remote, recvBuffers);
+                                if (received == 0)
+                                {
+                                    break;
+                                }
+
+                                bytesReceived += received;
+                                for (
+                                    int i = 0, remaining = received;
+                                    i < recvBuffers.Count && remaining > 0;
+                                    i++
+                                )
+                                {
+                                    ArraySegment<byte> buffer = recvBuffers[i];
+                                    int toAdd = Math.Min(buffer.Count, remaining);
+                                    receivedChecksum.Add(buffer.Array, buffer.Offset, toAdd);
+                                    remaining -= toAdd;
                                 }
                             }
                         }
                     }
-                );
+                });
 
                 EndPoint clientEndpoint = server.LocalEndPoint;
                 using (
@@ -310,60 +308,54 @@ namespace System.Net.Sockets.Tests
                 server.BindToAnonymousPort(listenAt);
                 server.Listen(1);
 
-                Task serverProcessingTask = Task.Run(
-                    async () =>
+                Task serverProcessingTask = Task.Run(async () =>
+                {
+                    using (Socket remote = await AcceptAsync(server))
                     {
-                        using (Socket remote = await AcceptAsync(server))
+                        byte[] recvBuffer1 = new byte[256],
+                            recvBuffer2 = new byte[256];
+                        long iter = 0;
+                        while (true)
                         {
-                            byte[] recvBuffer1 = new byte[256],
-                                recvBuffer2 = new byte[256];
-                            long iter = 0;
-                            while (true)
+                            ArraySegment<byte> seg1 = new ArraySegment<byte>(recvBuffer1),
+                                seg2 = new ArraySegment<byte>(recvBuffer2);
+                            int received;
+                            switch (iter++ % 3)
                             {
-                                ArraySegment<byte> seg1 = new ArraySegment<byte>(recvBuffer1),
-                                    seg2 = new ArraySegment<byte>(recvBuffer2);
-                                int received;
-                                switch (iter++ % 3)
-                                {
-                                    case 0: // single buffer
-                                        received = await ReceiveAsync(remote, seg1);
-                                        break;
-                                    case 1: // buffer list with a single buffer
-                                        received = await ReceiveAsync(
-                                            remote,
-                                            new List<ArraySegment<byte>> { seg1 }
-                                        );
-                                        break;
-                                    default: // buffer list with multiple buffers
-                                        received = await ReceiveAsync(
-                                            remote,
-                                            new List<ArraySegment<byte>> { seg1, seg2 }
-                                        );
-                                        break;
-                                }
-                                if (received == 0)
-                                {
+                                case 0: // single buffer
+                                    received = await ReceiveAsync(remote, seg1);
                                     break;
-                                }
-
-                                bytesReceived += received;
-                                receivedChecksum.Add(
-                                    recvBuffer1,
-                                    0,
-                                    Math.Min(received, recvBuffer1.Length)
-                                );
-                                if (received > recvBuffer1.Length)
-                                {
-                                    receivedChecksum.Add(
-                                        recvBuffer2,
-                                        0,
-                                        received - recvBuffer1.Length
+                                case 1: // buffer list with a single buffer
+                                    received = await ReceiveAsync(
+                                        remote,
+                                        new List<ArraySegment<byte>> { seg1 }
                                     );
-                                }
+                                    break;
+                                default: // buffer list with multiple buffers
+                                    received = await ReceiveAsync(
+                                        remote,
+                                        new List<ArraySegment<byte>> { seg1, seg2 }
+                                    );
+                                    break;
+                            }
+                            if (received == 0)
+                            {
+                                break;
+                            }
+
+                            bytesReceived += received;
+                            receivedChecksum.Add(
+                                recvBuffer1,
+                                0,
+                                Math.Min(received, recvBuffer1.Length)
+                            );
+                            if (received > recvBuffer1.Length)
+                            {
+                                receivedChecksum.Add(recvBuffer2, 0, received - recvBuffer1.Length);
                             }
                         }
                     }
-                );
+                });
 
                 EndPoint clientEndpoint = server.LocalEndPoint;
                 using (
@@ -715,106 +707,102 @@ namespace System.Net.Sockets.Tests
                 var receivedChecksum = new Fletcher32();
 
                 _output?.WriteLine($"{DateTime.Now} Starting listener at {listener.LocalEndpoint}");
-                Task serverTask = Task.Run(
-                    async () =>
+                Task serverTask = Task.Run(async () =>
+                {
+                    using (Socket remote = await listener.AcceptSocketAsync())
                     {
-                        using (Socket remote = await listener.AcceptSocketAsync())
+                        var recvBuffer = new byte[256];
+                        int count = 0;
+
+                        while (true)
                         {
-                            var recvBuffer = new byte[256];
-                            int count = 0;
-
-                            while (true)
+                            if (pollBeforeOperation)
                             {
-                                if (pollBeforeOperation)
-                                {
-                                    Assert.True(
-                                        remote.Poll(-1, SelectMode.SelectRead),
-                                        "Read poll before completion should have succeeded"
-                                    );
-                                }
-                                int received = remote.Receive(
-                                    recvBuffer,
-                                    0,
-                                    recvBuffer.Length,
-                                    SocketFlags.None
+                                Assert.True(
+                                    remote.Poll(-1, SelectMode.SelectRead),
+                                    "Read poll before completion should have succeeded"
                                 );
-                                count++;
-                                if (received == 0)
-                                {
-                                    Assert.True(
-                                        remote.Poll(0, SelectMode.SelectRead),
-                                        "Read poll after completion should have succeeded"
-                                    );
-                                    _output?.WriteLine(
-                                        $"{DateTime.Now} Received 0 bytes. Stopping receiving loop after {count} iterations."
-                                    );
-                                    break;
-                                }
-
-                                bytesReceived += received;
-                                receivedChecksum.Add(recvBuffer, 0, received);
                             }
+                            int received = remote.Receive(
+                                recvBuffer,
+                                0,
+                                recvBuffer.Length,
+                                SocketFlags.None
+                            );
+                            count++;
+                            if (received == 0)
+                            {
+                                Assert.True(
+                                    remote.Poll(0, SelectMode.SelectRead),
+                                    "Read poll after completion should have succeeded"
+                                );
+                                _output?.WriteLine(
+                                    $"{DateTime.Now} Received 0 bytes. Stopping receiving loop after {count} iterations."
+                                );
+                                break;
+                            }
+
+                            bytesReceived += received;
+                            receivedChecksum.Add(recvBuffer, 0, received);
                         }
                     }
-                );
+                });
 
                 int bytesSent = 0;
                 var sentChecksum = new Fletcher32();
-                Task clientTask = Task.Run(
-                    async () =>
-                    {
-                        var clientEndpoint = (IPEndPoint)listener.LocalEndpoint;
+                Task clientTask = Task.Run(async () =>
+                {
+                    var clientEndpoint = (IPEndPoint)listener.LocalEndpoint;
 
-                        using (
-                            var client = new Socket(
-                                clientEndpoint.AddressFamily,
-                                SocketType.Stream,
-                                ProtocolType.Tcp
-                            )
+                    using (
+                        var client = new Socket(
+                            clientEndpoint.AddressFamily,
+                            SocketType.Stream,
+                            ProtocolType.Tcp
+                        )
+                    )
+                    {
+                        await ConnectAsync(client, clientEndpoint);
+
+                        if (pollBeforeOperation)
+                        {
+                            Assert.False(
+                                client.Poll(TestTimeout, SelectMode.SelectRead),
+                                "Expected writer's read poll to fail after timeout"
+                            );
+                        }
+
+                        var random = new Random();
+                        var sendBuffer = new byte[512];
+                        for (
+                            int remaining = BytesToSend, sent = 0;
+                            remaining > 0;
+                            remaining -= sent
                         )
                         {
-                            await ConnectAsync(client, clientEndpoint);
+                            random.NextBytes(sendBuffer);
 
                             if (pollBeforeOperation)
                             {
-                                Assert.False(
-                                    client.Poll(TestTimeout, SelectMode.SelectRead),
-                                    "Expected writer's read poll to fail after timeout"
+                                Assert.True(
+                                    client.Poll(-1, SelectMode.SelectWrite),
+                                    "Write poll should have succeeded"
                                 );
                             }
+                            sent = client.Send(
+                                sendBuffer,
+                                0,
+                                Math.Min(sendBuffer.Length, remaining),
+                                SocketFlags.None
+                            );
 
-                            var random = new Random();
-                            var sendBuffer = new byte[512];
-                            for (
-                                int remaining = BytesToSend, sent = 0;
-                                remaining > 0;
-                                remaining -= sent
-                            )
-                            {
-                                random.NextBytes(sendBuffer);
-
-                                if (pollBeforeOperation)
-                                {
-                                    Assert.True(
-                                        client.Poll(-1, SelectMode.SelectWrite),
-                                        "Write poll should have succeeded"
-                                    );
-                                }
-                                sent = client.Send(
-                                    sendBuffer,
-                                    0,
-                                    Math.Min(sendBuffer.Length, remaining),
-                                    SocketFlags.None
-                                );
-
-                                bytesSent += sent;
-                                sentChecksum.Add(sendBuffer, 0, sent);
-                            }
-
-                            client.Shutdown(SocketShutdown.Send);
+                            bytesSent += sent;
+                            sentChecksum.Add(sendBuffer, 0, sent);
                         }
+
+                        client.Shutdown(SocketShutdown.Send);
                     }
-                );
+                });
 
                 await (new[] { serverTask, clientTask }).WhenAllOrAnyFailed(TestTimeout);
 
@@ -1520,23 +1508,21 @@ namespace System.Net.Sockets.Tests
                         }
                         else
                         {
-                            socketOperation = Task.Run(
-                                () =>
+                            socketOperation = Task.Run(() =>
+                            {
+                                var buffer = new ArraySegment<byte>(new byte[4096]);
+                                while (true)
                                 {
-                                    var buffer = new ArraySegment<byte>(new byte[4096]);
-                                    while (true)
-                                    {
-                                        SendAsync(socket1, buffer)
-                                            .WaitAsync(
-                                                TimeSpan.FromMilliseconds(
-                                                    TestSettings.PassingTestTimeout
-                                                )
+                                    SendAsync(socket1, buffer)
+                                        .WaitAsync(
+                                            TimeSpan.FromMilliseconds(
+                                                TestSettings.PassingTestTimeout
                                             )
-                                            .GetAwaiter()
-                                            .GetResult();
-                                    }
+                                        )
+                                        .GetAwaiter()
+                                        .GetResult();
                                 }
-                            );
+                            });
                         }
 
                         // Wait a little so the operation is started.
@@ -1675,66 +1661,61 @@ namespace System.Net.Sockets.Tests
         public void BlockingRead_DoesntRequireAnotherThreadPoolThread()
         {
             RemoteExecutor
-                .Invoke(
-                    () =>
+                .Invoke(() =>
+                {
+                    // Set the max number of worker threads to a low value.
+                    ThreadPool.GetMaxThreads(out int workerThreads, out int completionPortThreads);
+                    ThreadPool.SetMaxThreads(Environment.ProcessorCount, completionPortThreads);
+
+                    // Create twice that many socket pairs, for good measure.
+                    (Socket, Socket)[] socketPairs = Enumerable
+                        .Range(0, Environment.ProcessorCount * 2)
+                        .Select(_ => SocketTestExtensions.CreateConnectedSocketPair())
+                        .ToArray();
+                    try
                     {
-                        // Set the max number of worker threads to a low value.
-                        ThreadPool.GetMaxThreads(
-                            out int workerThreads,
-                            out int completionPortThreads
-                        );
-                        ThreadPool.SetMaxThreads(Environment.ProcessorCount, completionPortThreads);
-
-                        // Create twice that many socket pairs, for good measure.
-                        (Socket, Socket)[] socketPairs = Enumerable
-                            .Range(0, Environment.ProcessorCount * 2)
-                            .Select(_ => SocketTestExtensions.CreateConnectedSocketPair())
-                            .ToArray();
-                        try
+                        // Ensure that on Unix all of the first socket in each pair are configured for sync-over-async.
+                        foreach ((Socket, Socket) pair in socketPairs)
                         {
-                            // Ensure that on Unix all of the first socket in each pair are configured for sync-over-async.
-                            foreach ((Socket, Socket) pair in socketPairs)
-                            {
-                                pair.Item1.ForceNonBlocking(force: true);
-                            }
-
-                            // Queue a work item for each first socket to do a blocking receive.
-                            Task[] receives = (
-                                from pair in socketPairs
-                                select Task.Factory.StartNew(
-                                    () => pair.Item1.Receive(new byte[1]),
-                                    CancellationToken.None,
-                                    TaskCreationOptions.PreferFairness,
-                                    TaskScheduler.Default
-                                )
-                            ).ToArray();
-
-                            // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,
-                            // in which case the test we could get a false negative on the test, but we won't get spurious failures.
-                            Thread.Sleep(1000);
-
-                            // Now send to each socket.
-                            foreach ((Socket, Socket) pair in socketPairs)
-                            {
-                                pair.Item2.Send(new byte[1]);
-                            }
-
-                            // And wait for all the receives to complete.
-                            Assert.True(
-                                Task.WaitAll(receives, 60_000),
-                                "Expected all receives to complete within timeout"
-                            );
+                            pair.Item1.ForceNonBlocking(force: true);
                         }
-                        finally
+
+                        // Queue a work item for each first socket to do a blocking receive.
+                        Task[] receives = (
+                            from pair in socketPairs
+                            select Task.Factory.StartNew(
+                                () => pair.Item1.Receive(new byte[1]),
+                                CancellationToken.None,
+                                TaskCreationOptions.PreferFairness,
+                                TaskScheduler.Default
+                            )
+                        ).ToArray();
+
+                        // Give a bit of time for the pool to start executing the receives.  It's possible this won't be enough,
+                        // in which case the test we could get a false negative on the test, but we won't get spurious failures.
+                        Thread.Sleep(1000);
+
+                        // Now send to each socket.
+                        foreach ((Socket, Socket) pair in socketPairs)
                         {
-                            foreach ((Socket, Socket) pair in socketPairs)
-                            {
-                                pair.Item1.Dispose();
-                                pair.Item2.Dispose();
-                            }
+                            pair.Item2.Send(new byte[1]);
+                        }
+
+                        // And wait for all the receives to complete.
+                        Assert.True(
+                            Task.WaitAll(receives, 60_000),
+                            "Expected all receives to complete within timeout"
+                        );
+                    }
+                    finally
+                    {
+                        foreach ((Socket, Socket) pair in socketPairs)
+                        {
+                            pair.Item1.Dispose();
+                            pair.Item2.Dispose();
                         }
                     }
-                )
+                })
                 .Dispose();
         }
     }

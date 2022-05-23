@@ -56,12 +56,10 @@ public class CorsOptionsTest
                 policyBuilder.AllowAnyOrigin().Build();
             }
         );
-        corsOptions.AddDefaultPolicy(
-            policyBuilder =>
-            {
-                expectedPolicy = policyBuilder.AllowAnyOrigin().Build();
-            }
-        );
+        corsOptions.AddDefaultPolicy(policyBuilder =>
+        {
+            expectedPolicy = policyBuilder.AllowAnyOrigin().Build();
+        });
         corsOptions.AddPolicy("policy3", new CorsPolicy());
 
         // Assert

@@ -14,18 +14,15 @@ internal static class Program
         // Verify crst levels with GCs triggered during R2R code lookup in the Prestub on the main thread, during which dynamic
         // code from a background thread is deleted at the start of the GC in the main thread
 
-        var t = new Thread(
-            () =>
+        var t = new Thread(() =>
+        {
+            for (uint i = 0; ; ++i)
             {
-                for (uint i = 0; ; ++i)
-                {
-                    DynamicMethod dynamicMethod = CreateDynamicMethod($"DynMethod{i}");
-                    var dynamicMethodDelegate = (Action)
-                        dynamicMethod.CreateDelegate(typeof(Action));
-                    dynamicMethodDelegate();
-                }
+                DynamicMethod dynamicMethod = CreateDynamicMethod($"DynMethod{i}");
+                var dynamicMethodDelegate = (Action)dynamicMethod.CreateDelegate(typeof(Action));
+                dynamicMethodDelegate();
             }
-        );
+        });
         t.IsBackground = true;
         t.Start();
 

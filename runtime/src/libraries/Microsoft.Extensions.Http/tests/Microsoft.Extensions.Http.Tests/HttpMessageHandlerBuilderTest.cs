@@ -23,15 +23,10 @@ namespace Microsoft.Extensions.Http.Test
             var additionalHandlers = new DelegatingHandler[] { null, };
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    HttpMessageHandlerBuilder.CreateHandlerPipeline(
-                        primaryHandler,
-                        additionalHandlers
-                    );
-                }
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+            {
+                HttpMessageHandlerBuilder.CreateHandlerPipeline(primaryHandler, additionalHandlers);
+            });
             Assert.Equal(
                 "The 'additionalHandlers' must not contain a null entry.",
                 exception.Message
@@ -54,15 +49,10 @@ namespace Microsoft.Extensions.Http.Test
             };
 
             // Act & Assert
-            var exception = Assert.Throws<InvalidOperationException>(
-                () =>
-                {
-                    HttpMessageHandlerBuilder.CreateHandlerPipeline(
-                        primaryHandler,
-                        additionalHandlers
-                    );
-                }
-            );
+            var exception = Assert.Throws<InvalidOperationException>(() =>
+            {
+                HttpMessageHandlerBuilder.CreateHandlerPipeline(primaryHandler, additionalHandlers);
+            });
             Assert.Equal(
                 "The 'InnerHandler' property must be null. "
                     + "'DelegatingHandler' instances provided to 'HttpMessageHandlerBuilder' must not be reused or cached."

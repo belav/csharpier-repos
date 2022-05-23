@@ -15,19 +15,17 @@ class Driver
 
         ManualResetEvent mre = new ManualResetEvent(false);
 
-        var a = new Action(
-            () =>
+        var a = new Action(() =>
+        {
+            try
             {
-                try
-                {
-                    throw new CustomException();
-                }
-                finally
-                {
-                    mre.Set();
-                }
+                throw new CustomException();
             }
-        );
+            finally
+            {
+                mre.Set();
+            }
+        });
         var ares = a.BeginInvoke(null, null);
 
         if (!mre.WaitOne(5000))

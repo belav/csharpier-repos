@@ -23,90 +23,86 @@ namespace System.Net.Test.Common
         )
         {
             List<string> lines = null;
-            await AcceptConnectionAsync(
-                    async connection =>
+            await AcceptConnectionAsync(async connection =>
+                {
+                    string headerName = _options.IsProxy ? "Proxy-Authorization" : "Authorization";
+                    lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
+                    if (GetRequestHeaderValue(lines, headerName) == null)
                     {
-                        string headerName = _options.IsProxy
-                            ? "Proxy-Authorization"
-                            : "Authorization";
+                        await connection
+                            .SendResponseAsync(
+                                _options.IsProxy
+                                    ? HttpStatusCode.ProxyAuthenticationRequired
+                                    : HttpStatusCode.Unauthorized,
+                                authenticateHeaders
+                            )
+                            .ConfigureAwait(false);
+
                         lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
-                        if (GetRequestHeaderValue(lines, headerName) == null)
-                        {
-                            await connection
-                                .SendResponseAsync(
-                                    _options.IsProxy
-                                        ? HttpStatusCode.ProxyAuthenticationRequired
-                                        : HttpStatusCode.Unauthorized,
-                                    authenticateHeaders
-                                )
-                                .ConfigureAwait(false);
+                    }
+                    Debug.Assert(lines.Count > 0);
 
-                            lines = await connection.ReadRequestHeaderAsync().ConfigureAwait(false);
-                        }
-                        Debug.Assert(lines.Count > 0);
+                    int index = lines[0] != null ? lines[0].IndexOf(' ') : -1;
+                    string requestMethod = null;
+                    if (index != -1)
+                    {
+                        requestMethod = lines[0].Substring(0, index);
+                    }
 
-                        int index = lines[0] != null ? lines[0].IndexOf(' ') : -1;
-                        string requestMethod = null;
-                        if (index != -1)
+                    // Read the authorization header from client.
+                    AuthenticationProtocols protocol = AuthenticationProtocols.None;
+                    string clientResponse = null;
+                    for (int i = 1; i < lines.Count; i++)
+                    {
+                        if (lines[i].StartsWith(headerName))
                         {
-                            requestMethod = lines[0].Substring(0, index);
-                        }
-
-                        // Read the authorization header from client.
-                        AuthenticationProtocols protocol = AuthenticationProtocols.None;
-                        string clientResponse = null;
-                        for (int i = 1; i < lines.Count; i++)
-                        {
-                            if (lines[i].StartsWith(headerName))
+                            clientResponse = lines[i];
+                            if (lines[i].Contains(nameof(AuthenticationProtocols.Basic)))
                             {
-                                clientResponse = lines[i];
-                                if (lines[i].Contains(nameof(AuthenticationProtocols.Basic)))
-                                {
-                                    protocol = AuthenticationProtocols.Basic;
-                                    break;
-                                }
-                                else if (lines[i].Contains(nameof(AuthenticationProtocols.Digest)))
-                                {
-                                    protocol = AuthenticationProtocols.Digest;
-                                    break;
-                                }
+                                protocol = AuthenticationProtocols.Basic;
+                                break;
+                            }
+                            else if (lines[i].Contains(nameof(AuthenticationProtocols.Digest)))
+                            {
+                                protocol = AuthenticationProtocols.Digest;
+                                break;
                             }
                         }
-
-                        bool success = false;
-                        switch (protocol)
-                        {
-                            case AuthenticationProtocols.Basic:
-                                success = IsBasicAuthTokenValid(clientResponse, _options);
-                                break;
-
-                            case AuthenticationProtocols.Digest:
-                                // Read the request content.
-                                success = IsDigestAuthTokenValid(
-                                    clientResponse,
-                                    requestMethod,
-                                    _options
-                                );
-                                break;
-                        }
-
-                        if (success)
-                        {
-                            await connection
-                                .SendResponseAsync(additionalHeaders: "Connection: close\r\n")
-                                .ConfigureAwait(false);
-                        }
-                        else
-                        {
-                            await connection
-                                .SendResponseAsync(
-                                    HttpStatusCode.Unauthorized,
-                                    "Connection: close\r\n" + authenticateHeaders
-                                )
-                                .ConfigureAwait(false);
-                        }
                     }
-                )
+
+                    bool success = false;
+                    switch (protocol)
+                    {
+                        case AuthenticationProtocols.Basic:
+                            success = IsBasicAuthTokenValid(clientResponse, _options);
+                            break;
+
+                        case AuthenticationProtocols.Digest:
+                            // Read the request content.
+                            success = IsDigestAuthTokenValid(
+                                clientResponse,
+                                requestMethod,
+                                _options
+                            );
+                            break;
+                    }
+
+                    if (success)
+                    {
+                        await connection
+                            .SendResponseAsync(additionalHeaders: "Connection: close\r\n")
+                            .ConfigureAwait(false);
+                    }
+                    else
+                    {
+                        await connection
+                            .SendResponseAsync(
+                                HttpStatusCode.Unauthorized,
+                                "Connection: close\r\n" + authenticateHeaders
+                            )
+                            .ConfigureAwait(false);
+                    }
+                })
                 .ConfigureAwait(false);
 
             return lines;

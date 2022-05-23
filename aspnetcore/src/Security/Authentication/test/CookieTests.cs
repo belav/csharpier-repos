@@ -154,13 +154,11 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         using var host = await CreateHostWithServices(
             s =>
                 s.AddAuthentication()
-                    .AddCookie(
-                        o =>
-                        {
-                            o.LoginPath = new PathString("/login");
-                            o.Cookie.Name = "TestCookie";
-                        }
-                    ),
+                    .AddCookie(o =>
+                    {
+                        o.LoginPath = new PathString("/login");
+                        o.Cookie.Name = "TestCookie";
+                    }),
             SignInAsAlice
         );
 
@@ -228,12 +226,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
         var services = new ServiceCollection();
         services
             .AddAuthentication()
-            .AddCookie(
-                o =>
-                {
-                    o.Cookie.Expiration = TimeSpan.FromDays(10);
-                }
-            );
+            .AddCookie(o =>
+            {
+                o.Cookie.Expiration = TimeSpan.FromDays(10);
+            });
         var options = services
             .BuildServiceProvider()
             .GetRequiredService<IOptionsMonitor<CookieAuthenticationOptions>>();
@@ -1467,12 +1463,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieChallengeRedirectsWithLoginPath()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.LoginPath = new PathString("/page");
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.LoginPath = new PathString("/page");
+        });
         using var server = host.GetTestServer();
 
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
@@ -1489,12 +1483,10 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
     [Fact]
     public async Task CookieChallengeWithUnauthorizedRedirectsToLoginIfNotAuthenticated()
     {
-        using var host = await CreateHost(
-            o =>
-            {
-                o.LoginPath = new PathString("/page");
-            }
-        );
+        using var host = await CreateHost(o =>
+        {
+            o.LoginPath = new PathString("/page");
+        });
         using var server = host.GetTestServer();
 
         var transaction1 = await SendAsync(server, "http://example.com/testpath");
@@ -1518,29 +1510,24 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
+                        .Configure(app =>
+                        {
+                            if (useAuth)
                             {
-                                if (useAuth)
-                                {
-                                    app.UseAuthentication();
-                                }
-                                app.Map(
-                                    "/login",
-                                    signoutApp =>
-                                        signoutApp.Run(
-                                            context =>
-                                                context.ChallengeAsync(
-                                                    "Cookies",
-                                                    new AuthenticationProperties()
-                                                    {
-                                                        RedirectUri = "/"
-                                                    }
-                                                )
-                                        )
-                                );
+                                app.UseAuthentication();
                             }
-                        )
+                            app.Map(
+                                "/login",
+                                signoutApp =>
+                                    signoutApp.Run(
+                                        context =>
+                                            context.ChallengeAsync(
+                                                "Cookies",
+                                                new AuthenticationProperties() { RedirectUri = "/" }
+                                            )
+                                    )
+                            );
+                        })
                         .ConfigureServices(
                             s =>
                                 s.AddAuthentication()
@@ -1575,23 +1562,19 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(async context =>
                             {
-                                app.UseAuthentication();
-                                app.Run(
-                                    async context =>
-                                    {
-                                        await Assert.ThrowsAsync<InvalidOperationException>(
-                                            () =>
-                                                context.ChallengeAsync(
-                                                    CookieAuthenticationDefaults.AuthenticationScheme
-                                                )
-                                        );
-                                    }
+                                await Assert.ThrowsAsync<InvalidOperationException>(
+                                    () =>
+                                        context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        )
                                 );
-                            }
-                        )
+                            });
+                        })
                         .ConfigureServices(services => services.AddAuthentication().AddCookie())
             )
             .Build();
@@ -1611,29 +1594,25 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Run(
-                                    context =>
-                                        context.SignInAsync(
-                                            CookieAuthenticationDefaults.AuthenticationScheme,
-                                            new ClaimsPrincipal(new ClaimsIdentity("whatever"))
-                                        )
-                                );
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddAuthentication().AddCookie();
-                                services.Configure<CookieAuthenticationOptions>(
-                                    CookieAuthenticationDefaults.AuthenticationScheme,
-                                    o => o.Cookie.Name = "One"
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                context =>
+                                    context.SignInAsync(
+                                        CookieAuthenticationDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                    )
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddAuthentication().AddCookie();
+                            services.Configure<CookieAuthenticationOptions>(
+                                CookieAuthenticationDefaults.AuthenticationScheme,
+                                o => o.Cookie.Name = "One"
+                            );
+                        })
             )
             .Build();
 
@@ -1654,29 +1633,25 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Run(
-                                    context =>
-                                        context.SignInAsync(
-                                            "Cookie1",
-                                            new ClaimsPrincipal(new ClaimsIdentity("whatever"))
-                                        )
-                                );
-                            }
-                        )
-                        .ConfigureServices(
-                            services =>
-                            {
-                                services.AddAuthentication().AddCookie("Cookie1");
-                                services.Configure<CookieAuthenticationOptions>(
-                                    "Cookie1",
-                                    o => o.Cookie.Name = "One"
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                context =>
+                                    context.SignInAsync(
+                                        "Cookie1",
+                                        new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                    )
+                            );
+                        })
+                        .ConfigureServices(services =>
+                        {
+                            services.AddAuthentication().AddCookie("Cookie1");
+                            services.Configure<CookieAuthenticationOptions>(
+                                "Cookie1",
+                                o => o.Cookie.Name = "One"
+                            );
+                        })
             )
             .Build();
 
@@ -1697,25 +1672,21 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Map(
-                                    "/notlogin",
-                                    signoutApp =>
-                                        signoutApp.Run(
-                                            context =>
-                                                context.SignInAsync(
-                                                    "Cookies",
-                                                    new ClaimsPrincipal(
-                                                        new ClaimsIdentity("whatever")
-                                                    )
-                                                )
-                                        )
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/notlogin",
+                                signoutApp =>
+                                    signoutApp.Run(
+                                        context =>
+                                            context.SignInAsync(
+                                                "Cookies",
+                                                new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                            )
+                                    )
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
@@ -1741,25 +1712,21 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Map(
-                                    "/login",
-                                    signoutApp =>
-                                        signoutApp.Run(
-                                            context =>
-                                                context.SignInAsync(
-                                                    "Cookies",
-                                                    new ClaimsPrincipal(
-                                                        new ClaimsIdentity("whatever")
-                                                    )
-                                                )
-                                        )
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/login",
+                                signoutApp =>
+                                    signoutApp.Run(
+                                        context =>
+                                            context.SignInAsync(
+                                                "Cookies",
+                                                new ClaimsPrincipal(new ClaimsIdentity("whatever"))
+                                            )
+                                    )
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
@@ -1789,17 +1756,15 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Map(
-                                    "/notlogout",
-                                    signoutApp =>
-                                        signoutApp.Run(context => context.SignOutAsync("Cookies"))
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/notlogout",
+                                signoutApp =>
+                                    signoutApp.Run(context => context.SignOutAsync("Cookies"))
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
@@ -1825,17 +1790,15 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Map(
-                                    "/logout",
-                                    signoutApp =>
-                                        signoutApp.Run(context => context.SignOutAsync("Cookies"))
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/logout",
+                                signoutApp =>
+                                    signoutApp.Run(context => context.SignOutAsync("Cookies"))
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
@@ -1865,17 +1828,15 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Map(
-                                    "/forbid",
-                                    signoutApp =>
-                                        signoutApp.Run(context => context.ForbidAsync("Cookies"))
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Map(
+                                "/forbid",
+                                signoutApp =>
+                                    signoutApp.Run(context => context.ForbidAsync("Cookies"))
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
@@ -2140,35 +2101,31 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Run(
-                                    (context) =>
-                                        context.SignInAsync(
-                                            "Cookies",
-                                            new ClaimsPrincipal(
-                                                new ClaimsIdentity(
-                                                    new GenericIdentity("Alice", "Cookies")
-                                                )
-                                            ),
-                                            new AuthenticationProperties()
-                                        )
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                (context) =>
+                                    context.SignInAsync(
+                                        "Cookies",
+                                        new ClaimsPrincipal(
+                                            new ClaimsIdentity(
+                                                new GenericIdentity("Alice", "Cookies")
+                                            )
+                                        ),
+                                        new AuthenticationProperties()
+                                    )
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
                                     .AddAuthentication()
-                                    .AddCookie(
-                                        o =>
-                                        {
-                                            o.TicketDataFormat = new TicketDataFormat(dp);
-                                            o.Cookie.Name = "Cookie";
-                                        }
-                                    )
+                                    .AddCookie(o =>
+                                    {
+                                        o.TicketDataFormat = new TicketDataFormat(dp);
+                                        o.Cookie.Name = "Cookie";
+                                    })
                         )
             )
             .Build();
@@ -2184,19 +2141,17 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Run(
-                                    async (context) =>
-                                    {
-                                        var result = await context.AuthenticateAsync("Cookies");
-                                        await DescribeAsync(context.Response, result);
-                                    }
-                                );
-                            }
-                        )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Run(
+                                async (context) =>
+                                {
+                                    var result = await context.AuthenticateAsync("Cookies");
+                                    await DescribeAsync(context.Response, result);
+                                }
+                            );
+                        })
                         .ConfigureServices(
                             services =>
                                 services
@@ -2235,48 +2190,42 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                             services =>
                                 services
                                     .AddAuthentication()
-                                    .AddCookie(
-                                        o =>
-                                        {
-                                            o.Events = new CookieAuthenticationEvents
-                                            {
-                                                OnValidatePrincipal = context =>
-                                                {
-                                                    context.Properties.ExpiresUtc = null;
-                                                    context.ShouldRenew = true;
-                                                    return Task.FromResult(0);
-                                                }
-                                            };
-                                        }
-                                    )
-                        )
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-
-                                app.Run(
-                                    async context =>
+                                    .AddCookie(o =>
                                     {
-                                        if (context.Request.Path == "/signin")
+                                        o.Events = new CookieAuthenticationEvents
                                         {
-                                            await context.SignInAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                                new ClaimsPrincipal(
-                                                    new ClaimsIdentity(
-                                                        new GenericIdentity("Alice", "Cookies")
-                                                    )
-                                                )
-                                            );
-                                        }
-                                        else
-                                        {
-                                            await context.Response.WriteAsync("ha+1");
-                                        }
-                                    }
-                                );
-                            }
+                                            OnValidatePrincipal = context =>
+                                            {
+                                                context.Properties.ExpiresUtc = null;
+                                                context.ShouldRenew = true;
+                                                return Task.FromResult(0);
+                                            }
+                                        };
+                                    })
                         )
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+
+                            app.Run(async context =>
+                            {
+                                if (context.Request.Path == "/signin")
+                                {
+                                    await context.SignInAsync(
+                                        CookieAuthenticationDefaults.AuthenticationScheme,
+                                        new ClaimsPrincipal(
+                                            new ClaimsIdentity(
+                                                new GenericIdentity("Alice", "Cookies")
+                                            )
+                                        )
+                                    );
+                                }
+                                else
+                                {
+                                    await context.Response.WriteAsync("ha+1");
+                                }
+                            });
+                        })
             )
             .Build();
 
@@ -2398,111 +2347,108 @@ public class CookieTests : SharedAuthenticationTests<CookieAuthenticationOptions
                 builder =>
                     builder
                         .UseTestServer()
-                        .Configure(
-                            app =>
-                            {
-                                app.UseAuthentication();
-                                app.Use(
-                                    async (context, next) =>
+                        .Configure(app =>
+                        {
+                            app.UseAuthentication();
+                            app.Use(
+                                async (context, next) =>
+                                {
+                                    var req = context.Request;
+                                    var res = context.Response;
+                                    PathString remainder;
+                                    if (req.Path == new PathString("/normal"))
                                     {
-                                        var req = context.Request;
-                                        var res = context.Response;
-                                        PathString remainder;
-                                        if (req.Path == new PathString("/normal"))
-                                        {
-                                            res.StatusCode = 200;
-                                        }
-                                        else if (req.Path == new PathString("/forbid")) // Simulate forbidden
-                                        {
-                                            await context.ForbidAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/challenge"))
-                                        {
-                                            await context.ChallengeAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/signout"))
-                                        {
-                                            await context.SignOutAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/unauthorized"))
-                                        {
-                                            await context.ChallengeAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                                new AuthenticationProperties()
-                                            );
-                                        }
-                                        else if (
-                                            req.Path == new PathString("/protected/CustomRedirect")
-                                        )
-                                        {
-                                            await context.ChallengeAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme,
-                                                new AuthenticationProperties()
-                                                {
-                                                    RedirectUri = "/CustomRedirect"
-                                                }
-                                            );
-                                        }
-                                        else if (req.Path == new PathString("/me"))
-                                        {
-                                            await DescribeAsync(
-                                                res,
-                                                AuthenticateResult.Success(
-                                                    new AuthenticationTicket(
-                                                        context.User,
-                                                        new AuthenticationProperties(),
-                                                        CookieAuthenticationDefaults.AuthenticationScheme
-                                                    )
-                                                )
-                                            );
-                                        }
-                                        else if (
-                                            req.Path.StartsWithSegments(
-                                                new PathString("/me"),
-                                                out remainder
-                                            )
-                                        )
-                                        {
-                                            var ticket = await context.AuthenticateAsync(
-                                                remainder.Value.Substring(1)
-                                            );
-                                            await DescribeAsync(res, ticket);
-                                        }
-                                        else if (
-                                            req.Path == new PathString("/testpath")
-                                            && testpath != null
-                                        )
-                                        {
-                                            await testpath(context);
-                                        }
-                                        else if (req.Path == new PathString("/checkforerrors"))
-                                        {
-                                            var result = await context.AuthenticateAsync(
-                                                CookieAuthenticationDefaults.AuthenticationScheme
-                                            ); // this used to be "Automatic"
-                                            if (result.Failure != null)
-                                            {
-                                                throw new Exception(
-                                                    "Failed to authenticate",
-                                                    result.Failure
-                                                );
-                                            }
-                                            return;
-                                        }
-                                        else
-                                        {
-                                            await next(context);
-                                        }
+                                        res.StatusCode = 200;
                                     }
-                                );
-                            }
-                        )
+                                    else if (req.Path == new PathString("/forbid")) // Simulate forbidden
+                                    {
+                                        await context.ForbidAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/challenge"))
+                                    {
+                                        await context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/signout"))
+                                    {
+                                        await context.SignOutAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/unauthorized"))
+                                    {
+                                        await context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme,
+                                            new AuthenticationProperties()
+                                        );
+                                    }
+                                    else if (
+                                        req.Path == new PathString("/protected/CustomRedirect")
+                                    )
+                                    {
+                                        await context.ChallengeAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme,
+                                            new AuthenticationProperties()
+                                            {
+                                                RedirectUri = "/CustomRedirect"
+                                            }
+                                        );
+                                    }
+                                    else if (req.Path == new PathString("/me"))
+                                    {
+                                        await DescribeAsync(
+                                            res,
+                                            AuthenticateResult.Success(
+                                                new AuthenticationTicket(
+                                                    context.User,
+                                                    new AuthenticationProperties(),
+                                                    CookieAuthenticationDefaults.AuthenticationScheme
+                                                )
+                                            )
+                                        );
+                                    }
+                                    else if (
+                                        req.Path.StartsWithSegments(
+                                            new PathString("/me"),
+                                            out remainder
+                                        )
+                                    )
+                                    {
+                                        var ticket = await context.AuthenticateAsync(
+                                            remainder.Value.Substring(1)
+                                        );
+                                        await DescribeAsync(res, ticket);
+                                    }
+                                    else if (
+                                        req.Path == new PathString("/testpath") && testpath != null
+                                    )
+                                    {
+                                        await testpath(context);
+                                    }
+                                    else if (req.Path == new PathString("/checkforerrors"))
+                                    {
+                                        var result = await context.AuthenticateAsync(
+                                            CookieAuthenticationDefaults.AuthenticationScheme
+                                        ); // this used to be "Automatic"
+                                        if (result.Failure != null)
+                                        {
+                                            throw new Exception(
+                                                "Failed to authenticate",
+                                                result.Failure
+                                            );
+                                        }
+                                        return;
+                                    }
+                                    else
+                                    {
+                                        await next(context);
+                                    }
+                                }
+                            );
+                        })
                         .ConfigureServices(configureServices)
             )
             .Build();

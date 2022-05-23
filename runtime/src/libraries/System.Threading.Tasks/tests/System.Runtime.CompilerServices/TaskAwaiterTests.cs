@@ -870,14 +870,12 @@ namespace System.Threading.Tasks.Tests
 
                         bool ranOnScheduler = false;
                         bool ranWithoutSyncCtx = false;
-                        awaiter.OnCompleted(
-                            () =>
-                            {
-                                ranOnScheduler = (TaskScheduler.Current == quwi);
-                                ranWithoutSyncCtx = SynchronizationContext.Current == null;
-                                mres.Set();
-                            }
-                        );
+                        awaiter.OnCompleted(() =>
+                        {
+                            ranOnScheduler = (TaskScheduler.Current == quwi);
+                            ranWithoutSyncCtx = SynchronizationContext.Current == null;
+                            mres.Set();
+                        });
                         Assert.False(mres.IsSet, "Callback should not yet have run.");
 
                         Task.Run(
@@ -924,13 +922,11 @@ namespace System.Threading.Tasks.Tests
 
             // Scheduled Task
             Task<int> generic = Task.Run<int>(
-                new Func<int>(
-                    () =>
-                    {
-                        cts.Cancel();
-                        throw oce;
-                    }
-                ),
+                new Func<int>(() =>
+                {
+                    cts.Cancel();
+                    throw oce;
+                }),
                 cts.Token
             );
             yield return new object[] { LineNumber(), generic, oce };
@@ -987,12 +983,10 @@ namespace System.Threading.Tasks.Tests
                 LineNumber(),
                 Task.Factory.FromAsync(
                     generic,
-                    new Action<IAsyncResult>(
-                        ar =>
-                        {
-                            throw oce;
-                        }
-                    )
+                    new Action<IAsyncResult>(ar =>
+                    {
+                        throw oce;
+                    })
                 ),
                 oce
             };
@@ -1001,12 +995,10 @@ namespace System.Threading.Tasks.Tests
                 LineNumber(),
                 Task<int>.Factory.FromAsync(
                     nonGeneric,
-                    new Func<IAsyncResult, int>(
-                        ar =>
-                        {
-                            throw oce;
-                        }
-                    )
+                    new Func<IAsyncResult, int>(ar =>
+                    {
+                        throw oce;
+                    })
                 ),
                 oce
             };
@@ -1030,22 +1022,20 @@ namespace System.Threading.Tasks.Tests
             public override void Post(SendOrPostCallback d, object state)
             {
                 Interlocked.Increment(ref PostCount);
-                Task.Run(
-                    () =>
+                Task.Run(() =>
+                {
+                    SetSynchronizationContext(this);
+                    try
                     {
-                        SetSynchronizationContext(this);
-                        try
-                        {
-                            t_isPostedInContext = true;
-                            d(state);
-                        }
-                        finally
-                        {
-                            t_isPostedInContext = false;
-                            SetSynchronizationContext(null);
-                        }
+                        t_isPostedInContext = true;
+                        d(state);
                     }
-                );
+                    finally
+                    {
+                        t_isPostedInContext = false;
+                        SetSynchronizationContext(null);
+                    }
+                });
             }
 
             public override void Send(SendOrPostCallback d, object state)

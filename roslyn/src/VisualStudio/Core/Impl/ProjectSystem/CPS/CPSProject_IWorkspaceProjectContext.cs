@@ -70,27 +70,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ProjectSystem.C
             _visualStudioProject = visualStudioProject;
             _visualStudioWorkspace = visualStudioWorkspace;
 
-            _externalErrorReporter = new Lazy<ProjectExternalErrorReporter?>(
-                () =>
+            _externalErrorReporter = new Lazy<ProjectExternalErrorReporter?>(() =>
+            {
+                var prefix = visualStudioProject.Language switch
                 {
-                    var prefix = visualStudioProject.Language switch
-                    {
-                        LanguageNames.CSharp => "CS",
-                        LanguageNames.VisualBasic => "BC",
-                        LanguageNames.FSharp => "FS",
-                        _ => null
-                    };
+                    LanguageNames.CSharp => "CS",
+                    LanguageNames.VisualBasic => "BC",
+                    LanguageNames.FSharp => "FS",
+                    _ => null
+                };
 
-                    return (prefix != null)
-                        ? new ProjectExternalErrorReporter(
-                            visualStudioProject.Id,
-                            prefix,
-                            visualStudioProject.Language,
-                            visualStudioWorkspace
-                        )
-                        : null;
-                }
-            );
+                return (prefix != null)
+                    ? new ProjectExternalErrorReporter(
+                        visualStudioProject.Id,
+                        prefix,
+                        visualStudioProject.Language,
+                        visualStudioWorkspace
+                    )
+                    : null;
+            });
 
             visualStudioWorkspace.SubscribeExternalErrorDiagnosticUpdateSourceToSolutionBuildEvents();
 
