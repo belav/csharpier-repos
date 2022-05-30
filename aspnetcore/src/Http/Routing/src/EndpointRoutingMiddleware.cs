@@ -1,11 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.Extensions.Logging;
@@ -83,7 +81,6 @@ internal sealed partial class EndpointRoutingMiddleware
             await matchTask;
             await middleware.SetRoutingAndContinue(httpContext);
         }
-
     }
 
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -100,14 +97,21 @@ internal sealed partial class EndpointRoutingMiddleware
             // Raise an event if the route matched
             if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled(DiagnosticsEndpointMatchedKey))
             {
-                // We're just going to send the HttpContext since it has all of the relevant information
-                _diagnosticListener.Write(DiagnosticsEndpointMatchedKey, httpContext);
+                Write(_diagnosticListener, httpContext);
             }
 
             Log.MatchSuccess(_logger, endpoint);
         }
 
         return _next(httpContext);
+
+        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
+            Justification = "The values being passed into Write are being consumed by the application already.")]
+        static void Write(DiagnosticListener diagnosticListener, HttpContext httpContext)
+        {
+            // We're just going to send the HttpContext since it has all of the relevant information
+            diagnosticListener.Write(DiagnosticsEndpointMatchedKey, httpContext);
+        }
     }
 
     // Initialization is async to avoid blocking threads while reflection and things

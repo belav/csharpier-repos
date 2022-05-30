@@ -11,6 +11,7 @@ namespace System.Diagnostics
     {
         [UnsupportedOSPlatform("ios")]
         [UnsupportedOSPlatform("tvos")]
+        [SupportedOSPlatform("maccatalyst")]
         public void Kill(bool entireProcessTree)
         {
             if (!entireProcessTree)
@@ -68,7 +69,7 @@ namespace System.Diagnostics
         /// <summary>
         /// Returns all immediate child processes.
         /// </summary>
-        private IReadOnlyList<Process> GetChildProcesses(Process[]? processes = null)
+        private List<Process> GetChildProcesses(Process[]? processes = null)
         {
             bool internallyInitializedProcesses = processes == null;
             processes = processes ?? GetProcesses();

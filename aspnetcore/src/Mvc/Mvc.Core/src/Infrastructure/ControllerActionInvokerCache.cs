@@ -3,7 +3,6 @@
 
 #nullable enable
 
-using System.Collections.Generic;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.Controllers;
 using Microsoft.AspNetCore.Mvc.Filters;
@@ -13,7 +12,7 @@ using Microsoft.Extensions.Options;
 
 namespace Microsoft.AspNetCore.Mvc.Infrastructure;
 
-internal class ControllerActionInvokerCache
+internal sealed class ControllerActionInvokerCache
 {
     private readonly ParameterBinder _parameterBinder;
     private readonly IModelBinderFactory _modelBinderFactory;

@@ -1,12 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
@@ -14,58 +9,11 @@ using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Identity.Test;
 
 public class SignInManagerTest
 {
-    //[Theory]
-    //[InlineData(true)]
-    //[InlineData(false)]
-    //public async Task VerifyAccountControllerSignInFunctional(bool isPersistent)
-    //{
-    //    var app = new ApplicationBuilder(new ServiceCollection().BuildServiceProvider());
-    //    app.UseCookieAuthentication(new CookieAuthenticationOptions
-    //    {
-    //        AuthenticationScheme = ClaimsIdentityOptions.DefaultAuthenticationScheme
-    //    });
-
-    // TODO: how to functionally test context?
-    //    var context = new DefaultHttpContext(new FeatureCollection());
-    //    var contextAccessor = new Mock<IHttpContextAccessor>();
-    //    contextAccessor.Setup(a => a.Value).Returns(context);
-    //    app.UseServices(services =>
-    //    {
-    //        services.AddSingleton(contextAccessor.Object);
-    //        services.AddSingleton<Ilogger>(new Nulllogger());
-    //        services.AddIdentity<ApplicationUser, IdentityRole>(s =>
-    //        {
-    //            s.AddUserStore(() => new InMemoryUserStore<ApplicationUser>());
-    //            s.AddUserManager<ApplicationUserManager>();
-    //            s.AddRoleStore(() => new InMemoryRoleStore<IdentityRole>());
-    //            s.AddRoleManager<ApplicationRoleManager>();
-    //        });
-    //        services.AddTransient<ApplicationHttpSignInManager>();
-    //    });
-
-    //    // Act
-    //    var user = new ApplicationUser
-    //    {
-    //        UserName = "Yolo"
-    //    };
-    //    const string password = "[PLACEHOLDER]-1a";
-    //    var userManager = app.ApplicationServices.GetRequiredService<ApplicationUserManager>();
-    //    var HttpSignInManager = app.ApplicationServices.GetRequiredService<ApplicationHttpSignInManager>();
-
-    //    IdentityResultAssert.IsSuccess(await userManager.CreateAsync(user, password));
-    //    var result = await HttpSignInManager.PasswordSignInAsync(user.UserName, password, isPersistent, false);
-
-    //    // Assert
-    //    Assert.Equal(SignInStatus.Success, result);
-    //    contextAccessor.Verify();
-    //}
-
     [Fact]
     public void ConstructorNullChecks()
     {
@@ -77,34 +25,6 @@ public class SignInManagerTest
         contextAccessor.Setup(a => a.HttpContext).Returns(context.Object);
         Assert.Throws<ArgumentNullException>("claimsFactory", () => new SignInManager<PocoUser>(userManager, contextAccessor.Object, null, null, null, null, null));
     }
-
-    //[Fact]
-    //public async Task EnsureClaimsPrincipalFactoryCreateIdentityCalled()
-    //{
-    //    // Setup
-    //    var user = new TestUser { UserName = "Foo" };
-    //    var userManager = MockHelpers.TestUserManager<TestUser>();
-    //    var identityFactory = new Mock<IUserClaimsPrincipalFactory<TestUser>>();
-    //    const string authType = "Test";
-    //    var testIdentity = new ClaimsPrincipal();
-    //    identityFactory.Setup(s => s.CreateAsync(user)).ReturnsAsync(testIdentity).Verifiable();
-    //    var context = new Mock<HttpContext>();
-    //    var response = new Mock<HttpResponse>();
-    //    context.Setup(c => c.Response).Returns(response.Object).Verifiable();
-    //    response.Setup(r => r.SignIn(testIdentity, It.IsAny<AuthenticationProperties>())).Verifiable();
-    //    var contextAccessor = new Mock<IHttpContextAccessor>();
-    //    contextAccessor.Setup(a => a.Value).Returns(context.Object);
-    //    var helper = new HttpAuthenticationManager(contextAccessor.Object);
-
-    //    // Act
-    //    helper.SignIn(user, false);
-
-    //    // Assert
-    //    identityFactory.Verify();
-    //    context.Verify();
-    //    contextAccessor.Verify();
-    //    response.Verify();
-    //}
 
     [Fact]
     public async Task PasswordSignInReturnsLockedOutWhenLockedOut()
@@ -240,7 +160,6 @@ public class SignInManagerTest
         auth.Verify();
     }
 
-
     [Fact]
     public async Task PasswordSignInWorksWithNonTwoFactorStore()
     {
@@ -286,7 +205,7 @@ public class SignInManagerTest
         if (tfaEnabled)
         {
             manager.Setup(m => m.GetTwoFactorEnabledAsync(user)).ReturnsAsync(true).Verifiable();
-            manager.Setup(m => m.GetValidTwoFactorProvidersAsync(user)).ReturnsAsync(new string[1] {"Fake"}).Verifiable();
+            manager.Setup(m => m.GetValidTwoFactorProvidersAsync(user)).ReturnsAsync(new string[1] { "Fake" }).Verifiable();
         }
 
         if (tfaRemembered)
@@ -450,7 +369,7 @@ public class SignInManagerTest
         {
             helper.Options.Tokens.AuthenticatorTokenProvider = providerName;
         }
-        var id = helper.StoreTwoFactorInfo(user.Id, null);
+        var id = SignInManager<PocoUser>.StoreTwoFactorInfo(user.Id, null);
         SetupSignIn(context, auth, user.Id, isPersistent);
         auth.Setup(a => a.AuthenticateAsync(context, IdentityConstants.TwoFactorUserIdScheme))
             .ReturnsAsync(AuthenticateResult.Success(new AuthenticationTicket(id, null, IdentityConstants.TwoFactorUserIdScheme))).Verifiable();
@@ -492,7 +411,7 @@ public class SignInManagerTest
         {
             helper.Options.Tokens.AuthenticatorTokenProvider = providerName;
         }
-        var id = helper.StoreTwoFactorInfo(user.Id, null);
+        var id = SignInManager<PocoUser>.StoreTwoFactorInfo(user.Id, null);
         auth.Setup(a => a.AuthenticateAsync(context, IdentityConstants.TwoFactorUserIdScheme))
             .ReturnsAsync(AuthenticateResult.Success(new AuthenticationTicket(id, null, IdentityConstants.TwoFactorUserIdScheme))).Verifiable();
 
@@ -527,7 +446,7 @@ public class SignInManagerTest
         var helper = SetupSignInManager(manager.Object, context);
         var twoFactorInfo = new SignInManager<PocoUser>.TwoFactorAuthenticationInfo { UserId = user.Id };
         var loginProvider = "loginprovider";
-        var id = helper.StoreTwoFactorInfo(user.Id, externalLogin ? loginProvider : null);
+        var id = SignInManager<PocoUser>.StoreTwoFactorInfo(user.Id, externalLogin ? loginProvider : null);
         if (externalLogin)
         {
             auth.Setup(a => a.SignInAsync(context,
@@ -670,7 +589,7 @@ public class SignInManagerTest
         var helper = SetupSignInManager(manager.Object, context);
         var twoFactorInfo = new SignInManager<PocoUser>.TwoFactorAuthenticationInfo { UserId = user.Id };
         var loginProvider = "loginprovider";
-        var id = helper.StoreTwoFactorInfo(user.Id, externalLogin ? loginProvider : null);
+        var id = SignInManager<PocoUser>.StoreTwoFactorInfo(user.Id, externalLogin ? loginProvider : null);
         if (externalLogin)
         {
             auth.Setup(a => a.SignInAsync(context,
@@ -724,7 +643,6 @@ public class SignInManagerTest
             It.Is<ClaimsPrincipal>(i => i.FindFirstValue(ClaimTypes.Name) == user.Id
                 && i.Identities.First().AuthenticationType == IdentityConstants.TwoFactorRememberMeScheme),
             It.Is<AuthenticationProperties>(v => v.IsPersistent == true))).Returns(Task.FromResult(0)).Verifiable();
-
 
         // Act
         await helper.RememberTwoFactorClientAsync(user);

@@ -1,14 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
-using System.Linq;
 using System.ServiceProcess;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 using Microsoft.Extensions.Logging;
@@ -29,10 +23,13 @@ public class IISDeployer : IISDeployerBase
     private readonly CancellationTokenSource _hostShutdownToken = new CancellationTokenSource();
 
     private string _configPath;
+    private string _applicationHostConfig;
     private string _debugLogFile;
     private bool _disposed;
 
     public Process HostProcess { get; set; }
+
+    protected override string ApplicationHostConfigPath => _applicationHostConfig;
 
     public IISDeployer(DeploymentParameters deploymentParameters, ILoggerFactory loggerFactory)
         : base(new IISDeploymentParameters(deploymentParameters), loggerFactory)
@@ -267,17 +264,17 @@ public class IISDeployer : IISDeployerBase
             var workerProcess = appPool.WorkerProcesses.SingleOrDefault();
             if (workerProcess == null)
             {
-                throw new InvalidOperationException("Site is started but no worked process found");
+                throw new InvalidOperationException("Site is started but no worker process found");
             }
 
             HostProcess = Process.GetProcessById(workerProcess.ProcessId);
 
-                // Ensure w3wp.exe is killed if test process termination is non-graceful.
-                // Prevents locked files when stop debugging unit test.
-                ProcessTracker.Add(HostProcess);
+            // Ensure w3wp.exe is killed if test process termination is non-graceful.
+            // Prevents locked files when stop debugging unit test.
+            ProcessTracker.Add(HostProcess);
 
-                // cache the process start time for verifying log file name.
-                var _ = HostProcess.StartTime;
+            // cache the process start time for verifying log file name.
+            var _ = HostProcess.StartTime;
 
             Logger.LogInformation("Site has started.");
         });
@@ -286,13 +283,13 @@ public class IISDeployer : IISDeployerBase
     private void AddTemporaryAppHostConfig(string contentRoot, int port)
     {
         _configPath = Path.Combine(Path.GetTempPath(), Guid.NewGuid().ToString("D"));
-        var appHostConfigPath = Path.Combine(_configPath, "applicationHost.config");
+        _applicationHostConfig = Path.Combine(_configPath, "applicationHost.config");
         Directory.CreateDirectory(_configPath);
         var config = XDocument.Parse(DeploymentParameters.ServerConfigTemplateContent ?? File.ReadAllText("IIS.config"));
 
         ConfigureAppHostConfig(config.Root, contentRoot, port);
 
-        config.Save(appHostConfigPath);
+        config.Save(_applicationHostConfig);
 
         RetryServerManagerAction(serverManager =>
         {
@@ -301,8 +298,8 @@ public class IISDeployer : IISDeployerBase
 
             if ((bool)redirectionSection.Attributes["enabled"].Value)
             {
-                    // redirection wasn't removed before starting another site.
-                    redirectionSection.Attributes["enabled"].Value = false;
+                // redirection wasn't removed before starting another site.
+                redirectionSection.Attributes["enabled"].Value = false;
                 var redirectedFilePath = (string)redirectionSection.Attributes["path"].Value;
                 Logger.LogWarning($"Name of redirected file: {redirectedFilePath}");
 
@@ -404,10 +401,10 @@ public class IISDeployer : IISDeployerBase
                     }
 
                 }
-                    // If WAS was stopped for some reason appPool.WorkerProcesses
-                    // would throw UnauthorizedAccessException.
-                    // check if it's the case and continue shutting down deployer
-                    catch (UnauthorizedAccessException)
+                // If WAS was stopped for some reason appPool.WorkerProcesses
+                // would throw UnauthorizedAccessException.
+                // check if it's the case and continue shutting down deployer
+                catch (UnauthorizedAccessException)
                 {
                     var serviceController = new ServiceController("was");
                     if (serviceController.Status != ServiceControllerStatus.Stopped)
@@ -416,7 +413,7 @@ public class IISDeployer : IISDeployerBase
                     }
                 }
 
-                if (!HostProcess.HasExited)
+                if (HostProcess is not null && !HostProcess.HasExited)
                 {
                     throw new InvalidOperationException("Site is stopped but host process is not");
                 }
@@ -443,7 +440,7 @@ public class IISDeployer : IISDeployerBase
         }
     }
 
-    private void RetryServerManagerAction(Action<ServerManager> action)
+    private static void RetryServerManagerAction(Action<ServerManager> action)
     {
         List<Exception> exceptions = null;
         var sw = Stopwatch.StartNew();

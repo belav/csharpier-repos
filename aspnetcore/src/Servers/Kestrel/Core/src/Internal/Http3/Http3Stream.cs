@@ -7,28 +7,34 @@ using System.IO.Pipelines;
 using System.Net.Http;
 using System.Net.Http.QPack;
 using System.Runtime.CompilerServices;
+using System.Threading.Tasks.Sources;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Http.Features;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Primitives;
 using Microsoft.Net.Http.Headers;
+using HttpCharacters = Microsoft.AspNetCore.Http.HttpCharacters;
+using HttpMethod = Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http.HttpMethod;
+using HttpMethods = Microsoft.AspNetCore.Http.HttpMethods;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpHeadersHandler, IThreadPoolWorkItem
+internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpStreamHeadersHandler, IThreadPoolWorkItem
 {
-    private static ReadOnlySpan<byte> AuthorityBytes => new byte[10] { (byte)':', (byte)'a', (byte)'u', (byte)'t', (byte)'h', (byte)'o', (byte)'r', (byte)'i', (byte)'t', (byte)'y' };
-    private static ReadOnlySpan<byte> MethodBytes => new byte[7] { (byte)':', (byte)'m', (byte)'e', (byte)'t', (byte)'h', (byte)'o', (byte)'d' };
-    private static ReadOnlySpan<byte> PathBytes => new byte[5] { (byte)':', (byte)'p', (byte)'a', (byte)'t', (byte)'h' };
-    private static ReadOnlySpan<byte> SchemeBytes => new byte[7] { (byte)':', (byte)'s', (byte)'c', (byte)'h', (byte)'e', (byte)'m', (byte)'e' };
-    private static ReadOnlySpan<byte> StatusBytes => new byte[7] { (byte)':', (byte)'s', (byte)'t', (byte)'a', (byte)'t', (byte)'u', (byte)'s' };
-    private static ReadOnlySpan<byte> ConnectionBytes => new byte[10] { (byte)'c', (byte)'o', (byte)'n', (byte)'n', (byte)'e', (byte)'c', (byte)'t', (byte)'i', (byte)'o', (byte)'n' };
-    private static ReadOnlySpan<byte> TeBytes => new byte[2] { (byte)'t', (byte)'e' };
-    private static ReadOnlySpan<byte> TrailersBytes => new byte[8] { (byte)'t', (byte)'r', (byte)'a', (byte)'i', (byte)'l', (byte)'e', (byte)'r', (byte)'s' };
-    private static ReadOnlySpan<byte> ConnectBytes => new byte[7] { (byte)'C', (byte)'O', (byte)'N', (byte)'N', (byte)'E', (byte)'C', (byte)'T' };
+    private static ReadOnlySpan<byte> AuthorityBytes => ":authority"u8;
+    private static ReadOnlySpan<byte> MethodBytes => ":method"u8;
+    private static ReadOnlySpan<byte> PathBytes => ":path"u8;
+    private static ReadOnlySpan<byte> SchemeBytes => ":scheme"u8;
+    private static ReadOnlySpan<byte> StatusBytes => ":status"u8;
+    private static ReadOnlySpan<byte> ConnectionBytes => "connection"u8;
+    private static ReadOnlySpan<byte> TeBytes => "te"u8;
+    private static ReadOnlySpan<byte> TrailersBytes => "trailers"u8;
+    private static ReadOnlySpan<byte> ConnectBytes => "CONNECT"u8;
 
     private const PseudoHeaderFields _mandatoryRequestPseudoHeaderFields =
         PseudoHeaderFields.Method | PseudoHeaderFields.Path | PseudoHeaderFields.Scheme;
@@ -46,8 +52,7 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
     private int _totalParsedHeaderSize;
     private bool _isMethodConnect;
 
-    // TODO: Change to resetable ValueTask source
-    private TaskCompletionSource? _appCompleted;
+    private readonly ManualResetValueTaskSource<object?> _appCompletedTaskSource = new ManualResetValueTaskSource<object?>();
 
     private StreamCompletionFlags _completionState;
     private readonly object _completionLock = new object();
@@ -69,8 +74,8 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
     public long StreamId => _streamIdFeature.StreamId;
 
     public long StreamTimeoutTicks { get; set; }
-    public bool IsReceivingHeader => _appCompleted == null; // TCS is assigned once headers are received
-    public bool IsDraining => _appCompleted?.Task.IsCompleted ?? false; // Draining starts once app is complete
+    public bool IsReceivingHeader => _requestHeaderParsingState <= RequestHeaderParsingState.Headers; // Assigned once headers are received
+    public bool IsDraining => _appCompletedTaskSource.GetStatus() != ValueTaskSourceStatus.Pending; // Draining starts once app is complete
 
     public bool IsRequestStream => true;
 
@@ -82,11 +87,11 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
 
         _context = context;
 
-        _errorCodeFeature = _context.ConnectionFeatures.Get<IProtocolErrorCodeFeature>()!;
-        _streamIdFeature = _context.ConnectionFeatures.Get<IStreamIdFeature>()!;
-        _streamAbortFeature = _context.ConnectionFeatures.Get<IStreamAbortFeature>()!;
+        _errorCodeFeature = _context.ConnectionFeatures.GetRequiredFeature<IProtocolErrorCodeFeature>();
+        _streamIdFeature = _context.ConnectionFeatures.GetRequiredFeature<IStreamIdFeature>();
+        _streamAbortFeature = _context.ConnectionFeatures.GetRequiredFeature<IStreamAbortFeature>();
 
-        _appCompleted = null;
+        _appCompletedTaskSource.Reset();
         _isClosed = 0;
         _requestHeaderParsingState = default;
         _parsedPseudoHeaderFields = default;
@@ -190,19 +195,83 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
 
     public void OnStaticIndexedHeader(int index)
     {
-        var knownHeader = H3StaticTable.GetHeaderFieldAt(index);
-        OnHeader(knownHeader.Name, knownHeader.Value);
+        Debug.Assert(index <= H3StaticTable.Count);
+
+        ref readonly var entry = ref H3StaticTable.Get(index);
+        OnHeaderCore(HeaderType.Static, index, entry.Name, entry.Value);
     }
 
     public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
     {
-        var knownHeader = H3StaticTable.GetHeaderFieldAt(index);
-        OnHeader(knownHeader.Name, value);
+        Debug.Assert(index <= H3StaticTable.Count);
+
+        OnHeaderCore(HeaderType.StaticAndValue, index, H3StaticTable.Get(index).Name, value);
     }
 
-    public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value) => OnHeader(name, value, checkForNewlineChars: true);
+    public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        OnHeaderCore(HeaderType.Dynamic, index, name, value);
+    }
 
-    public override void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value, bool checkForNewlineChars)
+    public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        OnHeaderCore(HeaderType.NameAndValue, staticTableIndex: null, name, value);
+    }
+
+    private enum HeaderType
+    {
+        Static,
+        StaticAndValue,
+        Dynamic,
+        NameAndValue
+    }
+
+    public override void OnHeader(int index, bool indexOnly, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        base.OnHeader(index, indexOnly, name, value);
+
+        if (indexOnly)
+        {
+            // Special case setting headers when the value is indexed for performance.
+            switch (index)
+            {
+                case H3StaticTable.MethodGet:
+                    HttpRequestHeaders.HeaderMethod = HttpMethods.Get;
+                    Method = HttpMethod.Get;
+                    _methodText = HttpMethods.Get;
+                    return;
+                case H3StaticTable.MethodPost:
+                    HttpRequestHeaders.HeaderMethod = HttpMethods.Post;
+                    Method = HttpMethod.Post;
+                    _methodText = HttpMethods.Post;
+                    return;
+                case H3StaticTable.SchemeHttp:
+                    HttpRequestHeaders.HeaderScheme = SchemeHttp;
+                    return;
+                case H3StaticTable.SchemeHttps:
+                    HttpRequestHeaders.HeaderScheme = SchemeHttps;
+                    return;
+            }
+        }
+
+        // QPack append will return false if the index is not a known request header.
+        // For example, someone could send the index of "Server" (a response header) in the request.
+        // If that happens then fallback to using Append with the name bytes.
+        //
+        // If the value is indexed then we know it doesn't contain new lines and can skip checking.
+        if (!HttpRequestHeaders.TryQPackAppend(index, value, checkForNewlineChars: !indexOnly))
+        {
+            AppendHeader(name, value);
+        }
+    }
+
+    [MethodImpl(MethodImplOptions.NoInlining)]
+    private void AppendHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        HttpRequestHeaders.Append(name, value, checkForNewlineChars: true);
+    }
+
+    private void OnHeaderCore(HeaderType headerType, int? staticTableIndex, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
         // https://tools.ietf.org/html/rfc7540#section-6.5.2
         // "The value is based on the uncompressed size of header fields, including the length of the name and value in octets plus an overhead of 32 octets for each header field.";
@@ -212,18 +281,60 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
             throw new Http3StreamErrorException(CoreStrings.BadRequest_HeadersExceedMaxTotalSize, Http3ErrorCode.RequestRejected);
         }
 
-        ValidateHeader(name, value);
         try
         {
             if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
             {
+                // Just use name + value bytes and do full validation for request trailers.
+                // Potential performance improvement here to check for indexed headers and optimize validation.
+                UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
+                ValidateHeaderContent(name, value);
+
                 OnTrailer(name, value);
             }
             else
             {
                 // Throws BadRequest for header count limit breaches.
                 // Throws InvalidOperation for bad encoding.
-                base.OnHeader(name, value, checkForNewlineChars);
+                switch (headerType)
+                {
+                    case HeaderType.Static:
+                        UpdateHeaderParsingState(value, GetPseudoHeaderField(staticTableIndex.GetValueOrDefault()));
+
+                        OnHeader(staticTableIndex.GetValueOrDefault(), indexOnly: true, name, value);
+                        break;
+                    case HeaderType.StaticAndValue:
+                        UpdateHeaderParsingState(value, GetPseudoHeaderField(staticTableIndex.GetValueOrDefault()));
+
+                        // Value is new will get validated (i.e. check value doesn't contain newlines)
+                        OnHeader(staticTableIndex.GetValueOrDefault(), indexOnly: false, name, value);
+                        break;
+                    case HeaderType.Dynamic:
+                        // It is faster to set a header using a static table index than a name.
+                        if (staticTableIndex != null)
+                        {
+                            UpdateHeaderParsingState(value, GetPseudoHeaderField(staticTableIndex.GetValueOrDefault()));
+
+                            OnHeader(staticTableIndex.GetValueOrDefault(), indexOnly: false, name, value);
+                        }
+                        else
+                        {
+                            UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
+
+                            OnHeader(name, value, checkForNewlineChars: false);
+                        }
+                        break;
+                    case HeaderType.NameAndValue:
+                        UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
+
+                        // Header and value are new and will get validated (i.e. check name is lower-case, check value doesn't contain newlines)
+                        ValidateHeaderContent(name, value);
+                        OnHeader(name, value, checkForNewlineChars: true);
+                        break;
+                    default:
+                        Debug.Fail($"Unexpected header type: {headerType}");
+                        break;
+                }
             }
         }
         catch (Microsoft.AspNetCore.Http.BadHttpRequestException bre)
@@ -236,14 +347,40 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         }
     }
 
-    private void ValidateHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    private void ValidateHeaderContent(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        if (IsConnectionSpecificHeaderField(name, value))
+        {
+            throw new Http3StreamErrorException(CoreStrings.HttpErrorConnectionSpecificHeaderField, Http3ErrorCode.MessageError);
+        }
+
+        // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2
+        // A request or response containing uppercase header field names MUST be treated as malformed (Section 8.1.2.6).
+        for (var i = 0; i < name.Length; i++)
+        {
+            if (((uint)name[i] - 65) <= (90 - 65))
+            {
+                if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
+                {
+                    throw new Http3StreamErrorException(CoreStrings.HttpErrorTrailerNameUppercase, Http3ErrorCode.MessageError);
+                }
+                else
+                {
+                    throw new Http3StreamErrorException(CoreStrings.HttpErrorHeaderNameUppercase, Http3ErrorCode.MessageError);
+                }
+            }
+        }
+    }
+
+    private void UpdateHeaderParsingState(ReadOnlySpan<byte> value, PseudoHeaderFields headerField)
     {
         // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2.1
         /*
-           Intermediaries that process HTTP requests or responses
-           (i.e., any intermediary not acting as a tunnel) MUST NOT forward a
-           malformed request or response. Malformed requests or responses that
-           are detected MUST be treated as a stream error of type H3_MESSAGE_ERROR.
+           Intermediaries that process HTTP requests or responses (i.e., any
+           intermediary not acting as a tunnel) MUST NOT forward a malformed
+           request or response.  Malformed requests or responses that are
+           detected MUST be treated as a stream error (Section 5.4.2) of type
+           PROTOCOL_ERROR.
 
            For malformed requests, a server MAY send an HTTP response prior to
            closing or resetting the stream.  Clients MUST NOT accept a malformed
@@ -251,14 +388,14 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
            against several types of common attacks against HTTP; they are
            deliberately strict because being permissive can expose
            implementations to these vulnerabilities.*/
-        if (IsPseudoHeaderField(name, out var headerField))
+        if (headerField != PseudoHeaderFields.None)
         {
             if (_requestHeaderParsingState == RequestHeaderParsingState.Headers)
             {
                 // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1.1.1-4
                 // All pseudo-header fields MUST appear in the header block before regular header fields.
                 // Any request or response that contains a pseudo-header field that appears in a header
-                // block after a regular header field MUST be treated as malformed.
+                // block after a regular header field MUST be treated as malformed (Section 8.1.2.6).
                 throw new Http3StreamErrorException(CoreStrings.HttpErrorPseudoHeaderFieldAfterRegularHeaders, Http3ErrorCode.MessageError);
             }
 
@@ -305,65 +442,75 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         {
             _requestHeaderParsingState = RequestHeaderParsingState.Headers;
         }
-
-        if (IsConnectionSpecificHeaderField(name, value))
-        {
-            throw new Http3StreamErrorException(CoreStrings.HttpErrorConnectionSpecificHeaderField, Http3ErrorCode.MessageError);
-        }
-
-        // https://quicwg.org/base-drafts/draft-ietf-quic-http.html#section-4.1.1-3
-        // A request or response containing uppercase header field names MUST be treated as malformed.
-        for (var i = 0; i < name.Length; i++)
-        {
-            if (name[i] >= 65 && name[i] <= 90)
-            {
-                if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
-                {
-                    throw new Http3StreamErrorException(CoreStrings.HttpErrorTrailerNameUppercase, Http3ErrorCode.MessageError);
-                }
-                else
-                {
-                    throw new Http3StreamErrorException(CoreStrings.HttpErrorHeaderNameUppercase, Http3ErrorCode.MessageError);
-                }
-            }
-        }
     }
 
-    private static bool IsPseudoHeaderField(ReadOnlySpan<byte> name, out PseudoHeaderFields headerField)
+    private static PseudoHeaderFields GetPseudoHeaderField(int staticTableIndex)
     {
-        headerField = PseudoHeaderFields.None;
+        Debug.Assert(staticTableIndex >= 0, "Static table starts at 0.");
 
+        var headerField = staticTableIndex switch
+        {
+            0 => PseudoHeaderFields.Authority,
+            1 => PseudoHeaderFields.Path,
+            15 => PseudoHeaderFields.Method,
+            16 => PseudoHeaderFields.Method,
+            17 => PseudoHeaderFields.Method,
+            18 => PseudoHeaderFields.Method,
+            19 => PseudoHeaderFields.Method,
+            20 => PseudoHeaderFields.Method,
+            21 => PseudoHeaderFields.Method,
+            22 => PseudoHeaderFields.Scheme,
+            23 => PseudoHeaderFields.Scheme,
+            24 => PseudoHeaderFields.Status,
+            25 => PseudoHeaderFields.Status,
+            26 => PseudoHeaderFields.Status,
+            27 => PseudoHeaderFields.Status,
+            28 => PseudoHeaderFields.Status,
+            63 => PseudoHeaderFields.Status,
+            64 => PseudoHeaderFields.Status,
+            65 => PseudoHeaderFields.Status,
+            66 => PseudoHeaderFields.Status,
+            67 => PseudoHeaderFields.Status,
+            68 => PseudoHeaderFields.Status,
+            69 => PseudoHeaderFields.Status,
+            70 => PseudoHeaderFields.Status,
+            71 => PseudoHeaderFields.Status,
+            _ => PseudoHeaderFields.None
+        };
+
+        return headerField;
+    }
+
+    private static PseudoHeaderFields GetPseudoHeaderField(ReadOnlySpan<byte> name)
+    {
         if (name.IsEmpty || name[0] != (byte)':')
         {
-            return false;
+            return PseudoHeaderFields.None;
         }
-
-        if (name.SequenceEqual(PathBytes))
+        else if (name.SequenceEqual(PathBytes))
         {
-            headerField = PseudoHeaderFields.Path;
+            return PseudoHeaderFields.Path;
         }
         else if (name.SequenceEqual(MethodBytes))
         {
-            headerField = PseudoHeaderFields.Method;
+            return PseudoHeaderFields.Method;
         }
         else if (name.SequenceEqual(SchemeBytes))
         {
-            headerField = PseudoHeaderFields.Scheme;
+            return PseudoHeaderFields.Scheme;
         }
         else if (name.SequenceEqual(StatusBytes))
         {
-            headerField = PseudoHeaderFields.Status;
+            return PseudoHeaderFields.Status;
         }
         else if (name.SequenceEqual(AuthorityBytes))
         {
-            headerField = PseudoHeaderFields.Authority;
+            return PseudoHeaderFields.Authority;
         }
         else
         {
-            headerField = PseudoHeaderFields.Unknown;
+            return PseudoHeaderFields.Unknown;
         }
-
-        return true;
     }
 
     private static bool IsConnectionSpecificHeaderField(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
@@ -402,8 +549,7 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
 
         // Stream will be pooled after app completed.
         // Wait to signal app completed after any potential aborts on the stream.
-        Debug.Assert(_appCompleted != null);
-        _appCompleted.SetResult();
+        _appCompletedTaskSource.SetResult(null);
     }
 
     private bool TryClose()
@@ -491,8 +637,12 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
 
             await Input.CompleteAsync();
 
-            var appCompleted = _appCompleted?.Task ?? Task.CompletedTask;
-            if (!appCompleted.IsCompletedSuccessfully)
+            // Once the header is finished being received then the app has started.
+            var appCompletedTask = !IsReceivingHeader
+                ? new ValueTask(_appCompletedTaskSource, _appCompletedTaskSource.Version)
+                : ValueTask.CompletedTask;
+
+            if (!appCompletedTask.IsCompletedSuccessfully)
             {
                 // At this point in the stream's read-side is complete. However, with HTTP/3
                 // the write-side of the stream can still be aborted by the client on request
@@ -518,8 +668,8 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
 
                     if (!stream.IsCompleted)
                     {
-                            // An error code value other than -1 indicates a value was set and the request didn't gracefully complete.
-                            var errorCode = stream._errorCodeFeature.Error;
+                        // An error code value other than -1 indicates a value was set and the request didn't gracefully complete.
+                        var errorCode = stream._errorCodeFeature.Error;
                         if (errorCode >= 0)
                         {
                             stream.AbortCore(new IOException(CoreStrings.HttpStreamResetByClient), (Http3ErrorCode)errorCode);
@@ -528,7 +678,7 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
                 }, this);
 
                 // Make sure application func is completed before completing writer.
-                await appCompleted;
+                await appCompletedTask;
             }
 
             try
@@ -629,14 +779,14 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
             throw new Http3ConnectionErrorException(CoreStrings.FormatHttp3StreamErrorFrameReceivedAfterTrailers(Http3Formatting.ToFormattedType(Http3FrameType.Headers)), Http3ErrorCode.UnexpectedFrame);
         }
 
-        if (_requestHeaderParsingState == RequestHeaderParsingState.Headers)
+        if (_requestHeaderParsingState == RequestHeaderParsingState.Body)
         {
             _requestHeaderParsingState = RequestHeaderParsingState.Trailers;
         }
 
         try
         {
-            QPackDecoder.Decode(payload, handler: this);
+            QPackDecoder.Decode(payload, endHeaders: true, handler: this);
             QPackDecoder.Reset();
         }
         catch (QPackDecodingException ex)
@@ -662,6 +812,8 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
 
         InputRemaining = HttpRequestHeaders.ContentLength;
 
+        OnHeadersComplete();
+
         // If the stream is complete after receiving the headers then run OnEndStreamReceived.
         // If there is a bad content length then this will throw before the request delegate is called.
         if (isCompleted)
@@ -678,7 +830,7 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
             throw new Http3StreamErrorException(CoreStrings.HttpErrorMissingMandatoryPseudoHeaderFields, Http3ErrorCode.MessageError);
         }
 
-        _appCompleted = new TaskCompletionSource();
+        _requestHeaderParsingState = RequestHeaderParsingState.Body;
         StreamTimeoutTicks = default;
         _context.StreamLifetimeHandler.OnStreamHeaderReceived(this);
 
@@ -718,8 +870,7 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
             RequestBodyPipe.Writer.Write(segment.Span);
         }
 
-        // TODO this can be better.
-        return RequestBodyPipe.Writer.FlushAsync().AsTask();
+        return RequestBodyPipe.Writer.FlushAsync().GetAsTask();
     }
 
     protected override void OnReset()
@@ -752,6 +903,14 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
     protected override bool TryParseRequest(ReadResult result, out bool endConnection)
     {
         endConnection = !TryValidatePseudoHeaders();
+
+        // Suppress pseudo headers from the public headers collection.
+        HttpRequestHeaders.ClearPseudoRequestHeaders();
+
+        // Cookies should be merged into a single string separated by "; "
+        // https://datatracker.ietf.org/doc/html/draft-ietf-quic-http-34#section-4.1.1.2
+        HttpRequestHeaders.MergeCookies();
+
         return true;
     }
 
@@ -788,7 +947,6 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         // proxy or gateway can translate requests for non - HTTP schemes,
         // enabling the use of HTTP to interact with non - HTTP services.
         var headerScheme = HttpRequestHeaders.HeaderScheme.ToString();
-        HttpRequestHeaders.HeaderScheme = default; // Suppress pseduo headers from the public headers collection.
         if (!ReferenceEquals(headerScheme, Scheme) &&
             !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase))
         {
@@ -805,7 +963,6 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         // :path (and query) - Required
         // Must start with / except may be * for OPTIONS
         var path = HttpRequestHeaders.HeaderPath.ToString();
-        HttpRequestHeaders.HeaderPath = default; // Suppress pseduo headers from the public headers collection.
         RawTarget = path;
 
         // OPTIONS - https://tools.ietf.org/html/rfc7540#section-8.1.2.3
@@ -839,12 +996,10 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         return TryValidatePath(pathSegment);
     }
 
-
     private bool TryValidateMethod()
     {
         // :method
         _methodText = HttpRequestHeaders.HeaderMethod.ToString();
-        HttpRequestHeaders.HeaderMethod = default; // Suppress pseduo headers from the public headers collection.
         Method = HttpUtilities.GetKnownMethod(_methodText);
 
         if (Method == Http.HttpMethod.None)
@@ -871,7 +1026,6 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         // Prefer this over Host
 
         var authority = HttpRequestHeaders.HeaderAuthority;
-        HttpRequestHeaders.HeaderAuthority = default; // Suppress pseduo headers from the public headers collection.
         var host = HttpRequestHeaders.HeaderHost;
         if (!StringValues.IsNullOrEmpty(authority))
         {
@@ -990,6 +1144,7 @@ internal abstract partial class Http3Stream : HttpProtocol, IHttp3Stream, IHttpH
         Ready,
         PseudoHeaderFields,
         Headers,
+        Body,
         Trailers
     }
 

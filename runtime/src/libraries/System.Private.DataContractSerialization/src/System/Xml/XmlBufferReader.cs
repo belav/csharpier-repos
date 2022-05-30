@@ -234,14 +234,13 @@ namespace System.Xml
                 }
                 int needed = newOffsetMax - _offsetMax;
                 DiagnosticUtility.DebugAssert(needed > 0, "");
-                do
+                int read = _stream.ReadAtLeast(_buffer.AsSpan(_offsetMax, needed), needed, throwOnEndOfStream: false);
+                _offsetMax += read;
+
+                if (read < needed)
                 {
-                    int actual = _stream.Read(_buffer, _offsetMax, needed);
-                    if (actual == 0)
-                        return false;
-                    _offsetMax += actual;
-                    needed -= actual;
-                } while (needed > 0);
+                    return false;
+                }
             } while (true);
         }
 
@@ -662,7 +661,7 @@ namespace System.Xml
             return charCount;
         }
 
-        private bool IsAttrChar(int ch)
+        private static bool IsAttrChar(int ch)
         {
             switch (ch)
             {
@@ -1151,8 +1150,7 @@ namespace System.Xml
                 if (_session == null)
                     XmlExceptionHelper.ThrowInvalidBinaryFormat(_reader);
                 int sessionKey = (key >> 1);
-                XmlDictionaryString? xmlString;
-                if (!_session.TryLookup(sessionKey, out xmlString))
+                if (!_session.TryLookup(sessionKey, out _))
                 {
                     if (sessionKey < XmlDictionaryString.MinKey || sessionKey > XmlDictionaryString.MaxKey)
                         XmlExceptionHelper.ThrowXmlDictionaryStringIDOutOfRange(_reader);
@@ -1164,8 +1162,7 @@ namespace System.Xml
                 if (_dictionary == null)
                     XmlExceptionHelper.ThrowInvalidBinaryFormat(_reader);
                 int staticKey = (key >> 1);
-                XmlDictionaryString? xmlString;
-                if (!_dictionary.TryLookup(staticKey, out xmlString))
+                if (!_dictionary.TryLookup(staticKey, out _))
                 {
                     if (staticKey < XmlDictionaryString.MinKey || staticKey > XmlDictionaryString.MaxKey)
                         XmlExceptionHelper.ThrowXmlDictionaryStringIDOutOfRange(_reader);

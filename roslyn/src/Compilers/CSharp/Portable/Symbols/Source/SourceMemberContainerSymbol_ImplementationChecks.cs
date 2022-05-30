@@ -712,6 +712,12 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
                         AddHidingAbstractDiagnostic(symbol, symbolLocation, hiddenMember, diagnostics, ref unused);
 
+                        if (hiddenMember.IsRequired())
+                        {
+                            // Required member '{0}' cannot be hidden by '{1}'.
+                            diagnostics.Add(ErrorCode.ERR_RequiredMemberCannotBeHidden, symbolLocation, hiddenMember, symbol);
+                        }
+
                         return;
                     }
                 }
@@ -899,6 +905,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     // it is ok to override with no tuple names, for compatibility with C# 6, but otherwise names should match
                     diagnostics.Add(ErrorCode.ERR_CantChangeTupleNamesOnOverride, overridingMemberLocation, overridingMember, overriddenMember);
+                }
+                else if (overriddenMember is PropertySymbol { IsRequired: true } && overridingMember is PropertySymbol { IsRequired: false })
+                {
+                    // '{0}' must be required because it overrides required member '{1}'
+                    diagnostics.Add(ErrorCode.ERR_OverrideMustHaveRequired, overridingMemberLocation, overridingMember, overriddenMember);
                 }
                 else
                 {
@@ -1410,6 +1421,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                             diagnosticAdded = true;
                         }
 
+                        if (hiddenMember.IsRequired())
+                        {
+                            // Required member '{0}' cannot be hidden by '{1}'.
+                            diagnostics.Add(ErrorCode.ERR_RequiredMemberCannotBeHidden, hidingMemberLocation, hiddenMember, hidingMember);
+                            diagnosticAdded = true;
+                        }
+
                         if (diagnosticAdded)
                         {
                             break;
@@ -1651,7 +1669,8 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             {
                 if (implementingMethod.ContainingType != (object)this)
                 {
-                    if (implementingMethod.Equals(this.BaseTypeNoUseSiteDiagnostics?.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(interfaceMethod).Symbol, TypeCompareKind.CLRSignatureCompareOptions))
+                    if (implementingMethod.ContainingType.IsInterface ||
+                        implementingMethod.Equals(this.BaseTypeNoUseSiteDiagnostics?.FindImplementationForInterfaceMemberInNonInterfaceWithDiagnostics(interfaceMethod).Symbol, TypeCompareKind.CLRSignatureCompareOptions))
                     {
                         return default;
                     }

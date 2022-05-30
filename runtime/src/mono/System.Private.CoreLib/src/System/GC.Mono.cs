@@ -3,7 +3,6 @@
 
 using System.Runtime;
 using System.Runtime.CompilerServices;
-using Internal.Runtime.CompilerServices;
 using System.Diagnostics.Tracing;
 
 namespace System
@@ -134,8 +133,7 @@ namespace System
 
         public static void SuppressFinalize(object obj)
         {
-            if (obj == null)
-                throw new ArgumentNullException(nameof(obj));
+            ArgumentNullException.ThrowIfNull(obj);
             _SuppressFinalize(obj);
         }
 
@@ -144,8 +142,7 @@ namespace System
 
         public static void ReRegisterForFinalize(object obj)
         {
-            if (obj == null)
-                throw new ArgumentNullException(nameof(obj));
+            ArgumentNullException.ThrowIfNull(obj);
             _ReRegisterForFinalize(obj);
         }
 
@@ -312,6 +309,11 @@ namespace System
         internal static int GetLastGCPercentTimeInGC()
         {
             return (int)EventPipeInternal.GetRuntimeCounterValue(EventPipeInternal.RuntimeCounters.GC_LAST_PERCENT_TIME_IN_GC);
+        }
+
+        public static TimeSpan GetTotalPauseDuration()
+        {
+            return TimeSpan.Zero;
         }
     }
 }

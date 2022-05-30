@@ -1,7 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
+#pragma warning disable CA1810 // Initialize all static fields inline.
+
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Net;
 using System.Reflection;
@@ -11,7 +13,8 @@ using System.Security.Principal;
 
 namespace Microsoft.AspNetCore.Authentication.Negotiate;
 
-internal class ReflectedNegotiateState : INegotiateState
+[RequiresUnreferencedCode("Negotiate authentication uses types that cannot be statically analyzed.")]
+internal sealed class ReflectedNegotiateState : INegotiateState
 {
     // https://www.gnu.org/software/gss/reference/gss.pdf
     private const uint GSS_S_NO_CRED = 7 << 16;
@@ -174,7 +177,7 @@ internal class ReflectedNegotiateState : INegotiateState
         _closeContext.Invoke(_instance, Array.Empty<object>());
     }
 
-    private bool IsCredentialError(SecurityStatusPalErrorCode error)
+    private static bool IsCredentialError(SecurityStatusPalErrorCode error)
     {
         return error == SecurityStatusPalErrorCode.LogonDenied ||
             error == SecurityStatusPalErrorCode.UnknownCredentials ||
@@ -186,7 +189,7 @@ internal class ReflectedNegotiateState : INegotiateState
             error == SecurityStatusPalErrorCode.BadBinding;
     }
 
-    private bool IsClientError(SecurityStatusPalErrorCode error)
+    private static bool IsClientError(SecurityStatusPalErrorCode error)
     {
         return error == SecurityStatusPalErrorCode.InvalidToken ||
             error == SecurityStatusPalErrorCode.CannotPack ||

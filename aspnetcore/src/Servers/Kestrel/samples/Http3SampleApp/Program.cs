@@ -4,9 +4,9 @@
 using System.Net.Security;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Connections;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
-using Microsoft.AspNetCore.Testing;
 
 namespace Http3SampleApp;
 
@@ -30,9 +30,9 @@ public class Program
                     options.ConfigureHttpsDefaults(httpsOptions =>
                     {
                         httpsOptions.ServerCertificate = cert;
-                            // httpsOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate;
-                            // httpsOptions.AllowAnyClientCertificate();
-                        });
+                        // httpsOptions.ClientCertificateMode = ClientCertificateMode.AllowCertificate;
+                        // httpsOptions.AllowAnyClientCertificate();
+                    });
 
                     options.ListenAnyIP(5000, listenOptions =>
                     {
@@ -58,15 +58,15 @@ public class Program
                     {
                         listenOptions.UseHttps(httpsOptions =>
                         {
-                                // ConnectionContext is null
-                                httpsOptions.ServerCertificateSelector = (context, host) => cert;
+                            // ConnectionContext is null
+                            httpsOptions.ServerCertificateSelector = (context, host) => cert;
                         });
                         listenOptions.UseConnectionLogging();
                         listenOptions.Protocols = HttpProtocols.Http1AndHttp2AndHttp3;
                     });
 
-                        // No SslServerAuthenticationOptions callback is currently supported by QuicListener
-                        options.ListenAnyIP(5004, listenOptions =>
+                    // No SslServerAuthenticationOptions callback is currently supported by QuicListener
+                    options.ListenAnyIP(5004, listenOptions =>
                     {
                         listenOptions.UseHttps(httpsOptions =>
                         {
@@ -76,8 +76,8 @@ public class Program
                         listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
                     });
 
-                        // ServerOptionsSelectionCallback isn't currently supported by QuicListener
-                        options.ListenAnyIP(5005, listenOptions =>
+                    // ServerOptionsSelectionCallback isn't currently supported by QuicListener
+                    options.ListenAnyIP(5005, listenOptions =>
                     {
                         ServerOptionsSelectionCallback callback = (SslStream stream, SslClientHelloInfo clientHelloInfo, object state, CancellationToken cancellationToken) =>
                         {
@@ -91,8 +91,8 @@ public class Program
                         listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
                     });
 
-                        // TlsHandshakeCallbackOptions (ServerOptionsSelectionCallback) isn't currently supported by QuicListener
-                        options.ListenAnyIP(5006, listenOptions =>
+                    // TlsHandshakeCallbackOptions (ServerOptionsSelectionCallback) isn't currently supported by QuicListener
+                    options.ListenAnyIP(5006, listenOptions =>
                     {
                         listenOptions.UseHttps(new TlsHandshakeCallbackOptions()
                         {

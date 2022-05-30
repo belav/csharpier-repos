@@ -1,9 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using System.Reflection;
 
 namespace Microsoft.AspNetCore;
@@ -313,8 +310,10 @@ public static class TestData
 
     public static string GetAspNetCoreTargetingPackDependencies() => GetTestDataValue("AspNetCoreTargetingPackDependencies");
 
+    public static string GetPackagesFolder() => GetTestDataValue("PackagesFolder");
+
     public static bool VerifyAncmBinary() => string.Equals(GetTestDataValue("VerifyAncmBinary"), "true", StringComparison.OrdinalIgnoreCase);
 
-    public static string GetTestDataValue(string key)
+    private static string GetTestDataValue(string key)
          => typeof(TestData).Assembly.GetCustomAttributes<TestDataAttribute>().Single(d => d.Key == key).Value;
 }

@@ -5,6 +5,7 @@ using System.Buffers;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
+using System.Runtime.CompilerServices;
 using System.Runtime.ExceptionServices;
 using System.Runtime.Versioning;
 using System.Text;
@@ -27,13 +28,13 @@ namespace System.IO
         internal const int DefaultBufferSize = 4096;
 
         public static StreamReader OpenText(string path)
-            => new StreamReader(path ?? throw new ArgumentNullException(nameof(path)));
+            => new StreamReader(path);
 
         public static StreamWriter CreateText(string path)
-            => new StreamWriter(path ?? throw new ArgumentNullException(nameof(path)), append: false);
+            => new StreamWriter(path, append: false);
 
         public static StreamWriter AppendText(string path)
-            => new StreamWriter(path ?? throw new ArgumentNullException(nameof(path)), append: true);
+            => new StreamWriter(path, append: true);
 
         /// <summary>
         /// Copies an existing file to a new file.
@@ -49,14 +50,8 @@ namespace System.IO
         /// </summary>
         public static void Copy(string sourceFileName, string destFileName, bool overwrite)
         {
-            if (sourceFileName == null)
-                throw new ArgumentNullException(nameof(sourceFileName), SR.ArgumentNull_FileName);
-            if (destFileName == null)
-                throw new ArgumentNullException(nameof(destFileName), SR.ArgumentNull_FileName);
-            if (sourceFileName.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyFileName, nameof(sourceFileName));
-            if (destFileName.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyFileName, nameof(destFileName));
+            ArgumentException.ThrowIfNullOrEmpty(sourceFileName);
+            ArgumentException.ThrowIfNullOrEmpty(destFileName);
 
             FileSystem.CopyFile(Path.GetFullPath(sourceFileName), Path.GetFullPath(destFileName), overwrite);
         }
@@ -85,7 +80,10 @@ namespace System.IO
         // On Windows, Delete will fail for a file that is open for normal I/O
         // or a file that is memory mapped.
         public static void Delete(string path)
-            => FileSystem.DeleteFile(Path.GetFullPath(path ?? throw new ArgumentNullException(nameof(path))));
+        {
+            ArgumentNullException.ThrowIfNull(path);
+            FileSystem.DeleteFile(Path.GetFullPath(path));
+        }
 
         // Tests whether a file exists. The result is true if the file
         // given by the specified path exists; otherwise, the result is
@@ -251,19 +249,25 @@ namespace System.IO
 
         public static byte[] ReadAllBytes(string path)
         {
-            // bufferSize == 1 used to avoid unnecessary buffer in FileStream
-            using (FileStream fs = new FileStream(path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1, FileOptions.SequentialScan))
+            // SequentialScan is a perf hint that requires extra sys-call on non-Windows OSes.
+            FileOptions options = OperatingSystem.IsWindows() ? FileOptions.SequentialScan : FileOptions.None;
+            using (SafeFileHandle sfh = OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.Read, options))
             {
                 long fileLength = 0;
-                if (fs.CanSeek && (fileLength = fs.Length) > int.MaxValue)
+                if (sfh.CanSeek && (fileLength = sfh.GetFileLength()) > Array.MaxLength)
                 {
                     throw new IOException(SR.IO_FileTooLong2GB);
                 }
+
+#if DEBUG
+                fileLength = 0; // improve the test coverage for ReadAllBytesUnknownLength
+#endif
+
                 if (fileLength == 0)
                 {
-                    // Some file systems (e.g. procfs on Linux) return 0 for length even when there's content; also there is non-seekable file stream.
+                    // Some file systems (e.g. procfs on Linux) return 0 for length even when there's content; also there are non-seekable files.
                     // Thus we need to assume 0 doesn't mean empty.
-                    return ReadAllBytesUnknownLength(fs);
+                    return ReadAllBytesUnknownLength(sfh);
                 }
 
                 int index = 0;
@@ -271,7 +275,7 @@ namespace System.IO
                 byte[] bytes = new byte[count];
                 while (count > 0)
                 {
-                    int n = fs.Read(bytes, index, count);
+                    int n = RandomAccess.ReadAtOffset(sfh, bytes.AsSpan(index, count), index);
                     if (n == 0)
                     {
                         ThrowHelper.ThrowEndOfFileException();
@@ -286,12 +290,8 @@ namespace System.IO
 
         public static void WriteAllBytes(string path, byte[] bytes)
         {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path), SR.ArgumentNull_Path);
-            if (path.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
-            if (bytes == null)
-                throw new ArgumentNullException(nameof(bytes));
+            ArgumentException.ThrowIfNullOrEmpty(path);
+            ArgumentNullException.ThrowIfNull(bytes);
 
             using SafeFileHandle sfh = OpenHandle(path, FileMode.Create, FileAccess.Write, FileShare.Read);
             RandomAccess.WriteAtOffset(sfh, bytes, 0);
@@ -326,6 +326,30 @@ namespace System.IO
             return ReadLinesIterator.CreateIterator(path, encoding);
         }
 
+        /// <summary>
+        /// Asynchronously reads the lines of a file.
+        /// </summary>
+        /// <param name="path">The file to read.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <returns>The async enumerable that represents all the lines of the file, or the lines that are the result of a query.</returns>
+        public static IAsyncEnumerable<string> ReadLinesAsync(string path, CancellationToken cancellationToken = default)
+            => ReadLinesAsync(path, Encoding.UTF8, cancellationToken);
+
+        /// <summary>
+        /// Asynchronously reads the lines of a file that has a specified encoding.
+        /// </summary>
+        /// <param name="path">The file to read.</param>
+        /// <param name="encoding">The encoding that is applied to the contents of the file.</param>
+        /// <param name="cancellationToken">The token to monitor for cancellation requests. The default value is <see cref="CancellationToken.None"/>.</param>
+        /// <returns>The async enumerable that represents all the lines of the file, or the lines that are the result of a query.</returns>
+        public static IAsyncEnumerable<string> ReadLinesAsync(string path, Encoding encoding, CancellationToken cancellationToken = default)
+        {
+            Validate(path, encoding);
+
+            StreamReader sr = AsyncStreamReader(path, encoding); // Move first streamReader allocation here so to throw related file exception upfront, which will cause known leaking if user never actually foreach's over the enumerable
+            return IterateFileLinesAsync(sr, path, encoding, cancellationToken);
+        }
+
         public static void WriteAllLines(string path, string[] contents)
             => WriteAllLines(path, (IEnumerable<string>)contents);
 
@@ -338,10 +362,7 @@ namespace System.IO
         public static void WriteAllLines(string path, IEnumerable<string> contents, Encoding encoding)
         {
             Validate(path, encoding);
-
-            if (contents == null)
-                throw new ArgumentNullException(nameof(contents));
-
+            ArgumentNullException.ThrowIfNull(contents);
             InternalWriteAllLines(new StreamWriter(path, false, encoding), contents);
         }
 
@@ -375,10 +396,7 @@ namespace System.IO
         public static void AppendAllLines(string path, IEnumerable<string> contents, Encoding encoding)
         {
             Validate(path, encoding);
-
-            if (contents == null)
-                throw new ArgumentNullException(nameof(contents));
-
+            ArgumentNullException.ThrowIfNull(contents);
             InternalWriteAllLines(new StreamWriter(path, true, encoding), contents);
         }
 
@@ -387,10 +405,8 @@ namespace System.IO
 
         public static void Replace(string sourceFileName, string destinationFileName, string? destinationBackupFileName, bool ignoreMetadataErrors)
         {
-            if (sourceFileName == null)
-                throw new ArgumentNullException(nameof(sourceFileName));
-            if (destinationFileName == null)
-                throw new ArgumentNullException(nameof(destinationFileName));
+            ArgumentNullException.ThrowIfNull(sourceFileName);
+            ArgumentNullException.ThrowIfNull(destinationFileName);
 
             FileSystem.ReplaceFile(
                 Path.GetFullPath(sourceFileName),
@@ -412,14 +428,8 @@ namespace System.IO
 
         public static void Move(string sourceFileName, string destFileName, bool overwrite)
         {
-            if (sourceFileName == null)
-                throw new ArgumentNullException(nameof(sourceFileName), SR.ArgumentNull_FileName);
-            if (destFileName == null)
-                throw new ArgumentNullException(nameof(destFileName), SR.ArgumentNull_FileName);
-            if (sourceFileName.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyFileName, nameof(sourceFileName));
-            if (destFileName.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyFileName, nameof(destFileName));
+            ArgumentException.ThrowIfNullOrEmpty(sourceFileName);
+            ArgumentException.ThrowIfNullOrEmpty(destFileName);
 
             string fullSourceFileName = Path.GetFullPath(sourceFileName);
             string fullDestFileName = Path.GetFullPath(destFileName);
@@ -434,11 +444,17 @@ namespace System.IO
 
         [SupportedOSPlatform("windows")]
         public static void Encrypt(string path)
-            => FileSystem.Encrypt(path ?? throw new ArgumentNullException(nameof(path)));
+        {
+            ArgumentNullException.ThrowIfNull(path);
+            FileSystem.Encrypt(path);
+        }
 
         [SupportedOSPlatform("windows")]
         public static void Decrypt(string path)
-            => FileSystem.Decrypt(path ?? throw new ArgumentNullException(nameof(path)));
+        {
+            ArgumentNullException.ThrowIfNull(path);
+            FileSystem.Decrypt(path);
+        }
 
         // If we use the path-taking constructors we will not have FileOptions.Asynchronous set and
         // we will have asynchronous file access faked by the thread pool. We want the real thing.
@@ -519,44 +535,35 @@ namespace System.IO
                 return Task.FromCanceled<byte[]>(cancellationToken);
             }
 
-            var fs = new FileStream(
-                path, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1, // bufferSize == 1 used to avoid unnecessary buffer in FileStream
-                FileOptions.Asynchronous | FileOptions.SequentialScan);
+            // SequentialScan is a perf hint that requires extra sys-call on non-Windows OSes.
+            FileOptions options = FileOptions.Asynchronous | (OperatingSystem.IsWindows() ? FileOptions.SequentialScan : FileOptions.None);
+            SafeFileHandle sfh = OpenHandle(path, FileMode.Open, FileAccess.Read, FileShare.Read, options);
 
-            bool returningInternalTask = false;
-            try
+            long fileLength = 0L;
+            if (sfh.CanSeek && (fileLength = sfh.GetFileLength()) > Array.MaxLength)
             {
-                long fileLength = 0L;
-                if (fs.CanSeek && (fileLength = fs.Length) > int.MaxValue)
-                {
-                    var e = new IOException(SR.IO_FileTooLong2GB);
-                    ExceptionDispatchInfo.SetCurrentStackTrace(e);
-                    return Task.FromException<byte[]>(e);
-                }
+                sfh.Dispose();
+                return Task.FromException<byte[]>(ExceptionDispatchInfo.SetCurrentStackTrace(new IOException(SR.IO_FileTooLong2GB)));
+            }
 
-                returningInternalTask = true;
-                return fileLength > 0 ?
-                    InternalReadAllBytesAsync(fs, (int)fileLength, cancellationToken) :
-                    InternalReadAllBytesUnknownLengthAsync(fs, cancellationToken);
-            }
-            finally
-            {
-                if (!returningInternalTask)
-                {
-                    fs.Dispose();
-                }
-            }
+#if DEBUG
+            fileLength = 0; // improve the test coverage for InternalReadAllBytesUnknownLengthAsync
+#endif
+
+            return fileLength > 0 ?
+                InternalReadAllBytesAsync(sfh, (int)fileLength, cancellationToken) :
+                InternalReadAllBytesUnknownLengthAsync(sfh, cancellationToken);
         }
 
-        private static async Task<byte[]> InternalReadAllBytesAsync(FileStream fs, int count, CancellationToken cancellationToken)
+        private static async Task<byte[]> InternalReadAllBytesAsync(SafeFileHandle sfh, int count, CancellationToken cancellationToken)
         {
-            using (fs)
+            using (sfh)
             {
                 int index = 0;
                 byte[] bytes = new byte[count];
                 do
                 {
-                    int n = await fs.ReadAsync(new Memory<byte>(bytes, index, count - index), cancellationToken).ConfigureAwait(false);
+                    int n = await RandomAccess.ReadAtOffsetAsync(sfh, bytes.AsMemory(index), index, cancellationToken).ConfigureAwait(false);
                     if (n == 0)
                     {
                         ThrowHelper.ThrowEndOfFileException();
@@ -569,7 +576,7 @@ namespace System.IO
             }
         }
 
-        private static async Task<byte[]> InternalReadAllBytesUnknownLengthAsync(FileStream fs, CancellationToken cancellationToken)
+        private static async Task<byte[]> InternalReadAllBytesUnknownLengthAsync(SafeFileHandle sfh, CancellationToken cancellationToken)
         {
             byte[] rentedArray = ArrayPool<byte>.Shared.Rent(512);
             try
@@ -595,7 +602,7 @@ namespace System.IO
                     }
 
                     Debug.Assert(bytesRead < rentedArray.Length);
-                    int n = await fs.ReadAsync(rentedArray.AsMemory(bytesRead), cancellationToken).ConfigureAwait(false);
+                    int n = await RandomAccess.ReadAtOffsetAsync(sfh, rentedArray.AsMemory(bytesRead), bytesRead, cancellationToken).ConfigureAwait(false);
                     if (n == 0)
                     {
                         return rentedArray.AsSpan(0, bytesRead).ToArray();
@@ -605,19 +612,15 @@ namespace System.IO
             }
             finally
             {
-                fs.Dispose();
+                sfh.Dispose();
                 ArrayPool<byte>.Shared.Return(rentedArray);
             }
         }
 
         public static Task WriteAllBytesAsync(string path, byte[] bytes, CancellationToken cancellationToken = default(CancellationToken))
         {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path), SR.ArgumentNull_Path);
-            if (path.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
-            if (bytes == null)
-                throw new ArgumentNullException(nameof(bytes));
+            ArgumentException.ThrowIfNullOrEmpty(path);
+            ArgumentNullException.ThrowIfNull(bytes);
 
             return cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled(cancellationToken)
@@ -652,7 +655,7 @@ namespace System.IO
                 cancellationToken.ThrowIfCancellationRequested();
                 string? line;
                 List<string> lines = new List<string>();
-                while ((line = await sr.ReadLineAsync().ConfigureAwait(false)) != null)
+                while ((line = await sr.ReadLineAsync(cancellationToken).ConfigureAwait(false)) != null)
                 {
                     lines.Add(line);
                     cancellationToken.ThrowIfCancellationRequested();
@@ -668,10 +671,7 @@ namespace System.IO
         public static Task WriteAllLinesAsync(string path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken))
         {
             Validate(path, encoding);
-
-            if (contents == null)
-                throw new ArgumentNullException(nameof(contents));
-
+            ArgumentNullException.ThrowIfNull(contents);
             return cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled(cancellationToken)
                 : InternalWriteAllLinesAsync(AsyncStreamWriter(path, encoding, append: false), contents, cancellationToken);
@@ -716,10 +716,7 @@ namespace System.IO
         public static Task AppendAllLinesAsync(string path, IEnumerable<string> contents, Encoding encoding, CancellationToken cancellationToken = default(CancellationToken))
         {
             Validate(path, encoding);
-
-            if (contents == null)
-                throw new ArgumentNullException(nameof(contents));
-
+            ArgumentNullException.ThrowIfNull(contents);
             return cancellationToken.IsCancellationRequested
                 ? Task.FromCanceled(cancellationToken)
                 : InternalWriteAllLinesAsync(AsyncStreamWriter(path, encoding, append: true), contents, cancellationToken);
@@ -767,15 +764,11 @@ namespace System.IO
 
         private static void Validate(string path, Encoding encoding)
         {
-            if (path == null)
-                throw new ArgumentNullException(nameof(path));
-            if (encoding == null)
-                throw new ArgumentNullException(nameof(encoding));
-            if (path.Length == 0)
-                throw new ArgumentException(SR.Argument_EmptyPath, nameof(path));
+            ArgumentException.ThrowIfNullOrEmpty(path);
+            ArgumentNullException.ThrowIfNull(encoding);
         }
 
-        private static byte[] ReadAllBytesUnknownLength(FileStream fs)
+        private static byte[] ReadAllBytesUnknownLength(SafeFileHandle sfh)
         {
             byte[]? rentedArray = null;
             Span<byte> buffer = stackalloc byte[512];
@@ -803,7 +796,7 @@ namespace System.IO
                     }
 
                     Debug.Assert(bytesRead < buffer.Length);
-                    int n = fs.Read(buffer.Slice(bytesRead));
+                    int n = RandomAccess.ReadAtOffset(sfh, buffer.Slice(bytesRead), bytesRead);
                     if (n == 0)
                     {
                         return buffer.Slice(0, bytesRead).ToArray();
@@ -944,6 +937,24 @@ namespace System.IO
             }
 
             return preambleSize + encoding.GetByteCount(contents);
+        }
+
+        private static async IAsyncEnumerable<string> IterateFileLinesAsync(StreamReader sr, string path, Encoding encoding, CancellationToken ctEnumerable, [EnumeratorCancellation] CancellationToken ctEnumerator = default)
+        {
+            if (!sr.BaseStream.CanRead)
+            {
+                sr = AsyncStreamReader(path, encoding);
+            }
+
+            using (sr)
+            {
+                using CancellationTokenSource cts = CancellationTokenSource.CreateLinkedTokenSource(ctEnumerable, ctEnumerator);
+                string? line;
+                while ((line = await sr.ReadLineAsync(cts.Token).ConfigureAwait(false)) is not null)
+                {
+                    yield return line;
+                }
+            }
         }
     }
 }

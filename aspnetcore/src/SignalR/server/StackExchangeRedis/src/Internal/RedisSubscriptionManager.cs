@@ -1,14 +1,11 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections.Concurrent;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.SignalR.StackExchangeRedis.Internal;
 
-internal class RedisSubscriptionManager
+internal sealed class RedisSubscriptionManager
 {
     private readonly ConcurrentDictionary<string, HubConnectionStore> _subscriptions = new ConcurrentDictionary<string, HubConnectionStore>(StringComparer.Ordinal);
     private readonly SemaphoreSlim _lock = new SemaphoreSlim(1, 1);

@@ -27,11 +27,11 @@ namespace Internal.TypeSystem
         /// <summary>
         /// Cross-platform console model
         /// </summary>
-        CoreRT,
+        NativeAot,
         /// <summary>
         /// model for armel execution model
         /// </summary>
-        CoreRTArmel,
+        NativeAotArmel,
         /// <summary>
         /// Jit runtime ABI
         /// </summary>
@@ -322,21 +322,6 @@ namespace Internal.TypeSystem
                     Architecture == TargetArchitecture.X86);
 
                 return 4;
-            }
-        }
-
-        public int MaximumAutoLayoutPackingSize
-        {
-            get
-            {
-                if (Abi == TargetAbi.CoreRT)
-                {
-                    if (Architecture == TargetArchitecture.X86)
-                    {
-                        return PointerSize;
-                    }
-                }
-                return MaximumAlignment;
             }
         }
     }

@@ -15,6 +15,8 @@ namespace ServerComparison.FunctionalTests;
 
 public class HelloWorldTests : LoggedTest
 {
+    private const string DebugEnvironmentVariable = "ASPNETCORE_MODULE_DEBUG";
+
     public HelloWorldTests(ITestOutputHelper output) : base(output)
     {
     }
@@ -47,6 +49,11 @@ public class HelloWorldTests : LoggedTest
                 deploymentParameters.ServerConfigTemplateContent = Helpers.GetNginxConfigContent("nginx.conf");
             }
 
+            if (variant.Server == ServerType.IISExpress)
+            {
+                deploymentParameters.EnvironmentVariables[DebugEnvironmentVariable] = "console";
+            }
+
             using (var deployer = IISApplicationDeployerFactory.Create(deploymentParameters, loggerFactory))
             {
                 var deploymentResult = await deployer.DeployAsync();
@@ -60,14 +67,9 @@ public class HelloWorldTests : LoggedTest
                 var responseText = await response.Content.ReadAsStringAsync();
                 try
                 {
-                    if (variant.Architecture == RuntimeArchitecture.x64)
-                    {
-                        Assert.Equal("Hello World X64", responseText);
-                    }
-                    else
-                    {
-                        Assert.Equal("Hello World X86", responseText);
-                    }
+                    string expectedName = Enum.GetName(typeof(RuntimeArchitecture), variant.Architecture);
+                    expectedName = char.ToUpperInvariant(expectedName[0]) + expectedName.Substring(1);
+                    Assert.Equal($"Hello World {expectedName}", responseText);
                 }
                 catch (XunitException)
                 {

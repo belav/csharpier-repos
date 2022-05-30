@@ -341,10 +341,10 @@ namespace System
 new DS[] { DS.BEGIN,  DS.ERROR,   DS.TX_N,    DS.N,       DS.D_Nd,    DS.T_Nt,    DS.ERROR,   DS.D_M,     DS.D_M,     DS.D_S,     DS.T_S,         DS.BEGIN,     DS.D_Y,     DS.D_Y,     DS.ERROR,   DS.BEGIN,  DS.BEGIN,    DS.ERROR },
 
 // DS.N                                                                                 // DS.N
-new DS[] { DS.ERROR,  DS.DX_NN,   DS.ERROR,   DS.NN,      DS.D_NNd,   DS.ERROR,   DS.DX_NM,   DS.D_NM,    DS.D_MNd,   DS.D_NDS,   DS.ERROR,       DS.N,         DS.D_YN,    DS.D_YNd,   DS.DX_YN,   DS.N,      DS.N,        DS.ERROR },
+new DS[] { DS.ERROR,  DS.DX_NN,   DS.TX_NN,   DS.NN,      DS.D_NNd,   DS.ERROR,   DS.DX_NM,   DS.D_NM,    DS.D_MNd,   DS.D_NDS,   DS.ERROR,       DS.N,         DS.D_YN,    DS.D_YNd,   DS.DX_YN,   DS.N,      DS.N,        DS.ERROR },
 
 // DS.NN                                                                                // DS.NN
-new DS[] { DS.DX_NN,  DS.DX_NNN,  DS.TX_N,    DS.DX_NNN,  DS.ERROR,   DS.T_Nt,    DS.DX_MNN,  DS.DX_MNN,  DS.ERROR,   DS.ERROR,   DS.T_S,         DS.NN,        DS.DX_NNY,  DS.ERROR,   DS.DX_NNY,  DS.NN,     DS.NN,       DS.ERROR },
+new DS[] { DS.DX_NN,  DS.DX_NNN,  DS.TX_NNN,  DS.DX_NNN,  DS.ERROR,   DS.T_Nt,    DS.DX_MNN,  DS.DX_MNN,  DS.ERROR,   DS.ERROR,   DS.T_S,         DS.NN,        DS.DX_NNY,  DS.ERROR,   DS.DX_NNY,  DS.NN,     DS.NN,       DS.ERROR },
 
 // DS.D_Nd                                                                              // DS.D_Nd
 new DS[] { DS.ERROR,  DS.DX_NN,   DS.ERROR,   DS.D_NN,    DS.D_NNd,   DS.ERROR,   DS.DX_NM,   DS.D_MN,    DS.D_MNd,   DS.ERROR,   DS.ERROR,       DS.D_Nd,      DS.D_YN,    DS.D_YNd,   DS.DX_YN,   DS.ERROR,  DS.D_Nd,     DS.ERROR },
@@ -454,8 +454,6 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             return false;
         }
 
-        internal static bool IsDigit(char ch) => (uint)(ch - '0') <= 9;
-
         /*=================================ParseFraction==========================
         **Action: Starting at the str.Index, which should be a decimal symbol.
         ** if the current character is a digit, parse the remaining
@@ -473,8 +471,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             double decimalBase = 0.1;
             int digits = 0;
             char ch;
-            while (str.GetNext()
-                   && IsDigit(ch = str.m_current))
+            while (str.GetNext() && char.IsAsciiDigit(ch = str.m_current))
             {
                 result += (ch - '0') * decimalBase;
                 decimalBase *= 0.1;
@@ -3192,8 +3189,8 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
 
         /*=================================ParseSign==================================
         **Action: Parse a positive or a negative sign.
-        **Returns:      true if postive sign.  flase if negative sign.
-        **Arguments:    str: a __DTString.  The parsing will start from the
+        **Returns:      true if positive sign. false if negative sign.
+        **Arguments:    str: a __DTString. The parsing will start from the
         **              next character after str.Index.
         **Exceptions:   FormatException if end of string is encountered or a sign
         **              symbol is not found.
@@ -4226,12 +4223,12 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
                     break;
                 case '\"':
                 case '\'':
-                    StringBuilder enquotedString = StringBuilderCache.Acquire();
+                    var enquotedString = new ValueStringBuilder(stackalloc char[128]);
                     // Use ParseQuoteString so that we can handle escape characters within the quoted string.
-                    if (!TryParseQuoteString(format.Value, format.Index, enquotedString, out tokenLen))
+                    if (!TryParseQuoteString(format.Value, format.Index, ref enquotedString, out tokenLen))
                     {
                         result.SetFailure(ParseFailureKind.FormatWithParameter, nameof(SR.Format_BadQuote), ch);
-                        StringBuilderCache.Release(enquotedString);
+                        enquotedString.Dispose();
                         return false;
                     }
                     format.Index += tokenLen - 1;
@@ -4239,7 +4236,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
                     // Some cultures uses space in the quoted string.  E.g. Spanish has long date format as:
                     // "dddd, dd' de 'MMMM' de 'yyyy".  When inner spaces flag is set, we should skip whitespaces if there is space
                     // in the quoted string.
-                    string quotedStr = StringBuilderCache.GetStringAndRelease(enquotedString);
+                    string quotedStr = enquotedString.ToString();
 
                     for (int i = 0; i < quotedStr.Length; i++)
                     {
@@ -4385,18 +4382,14 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
         // The pos should point to a quote character. This method will
         // get the string enclosed by the quote character.
         //
-        internal static bool TryParseQuoteString(ReadOnlySpan<char> format, int pos, StringBuilder result, out int returnValue)
+        internal static bool TryParseQuoteString(ReadOnlySpan<char> format, int pos, ref ValueStringBuilder result, out int returnValue)
         {
-            //
-            // NOTE : pos will be the index of the quote character in the 'format' string.
-            //
-            returnValue = 0;
-            int formatLen = format.Length;
+            // NOTE: pos will be the index of the quote character in the 'format' string.
             int beginPos = pos;
             char quoteChar = format[pos++]; // Get the character used to quote the following string.
 
             bool foundQuote = false;
-            while (pos < formatLen)
+            while ((uint)pos < (uint)format.Length)
             {
                 char ch = format[pos++];
                 if (ch == quoteChar)
@@ -4411,15 +4404,14 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
                     // Therefore, someone can use a format like "'minute:' mm\"" to display:
                     //  minute: 45"
                     // because the second double quote is escaped.
-                    if (pos < formatLen)
+                    if ((uint)pos < (uint)format.Length)
                     {
                         result.Append(format[pos++]);
                     }
                     else
                     {
-                        //
                         // This means that '\' is at the end of the formatting string.
-                        //
+                        returnValue = 0;
                         return false;
                     }
                 }
@@ -4432,6 +4424,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             if (!foundQuote)
             {
                 // Here we can't find the matching quote.
+                returnValue = 0;
                 return false;
             }
 
@@ -5227,10 +5220,12 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
                 return "\\u" + ((int)c).ToString("x4", CultureInfo.InvariantCulture);
         }
 
+#pragma warning disable IDE0060
         private static void Trace(string s)
         {
-            // Internal.Console.WriteLine(s);
+            //Internal.Console.WriteLine(s);
         }
+#pragma warning restore IDE0060
 
         // for testing; do not make this readonly
         private static bool s_tracingEnabled;
@@ -5244,6 +5239,8 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
     //
     internal ref struct __DTString
     {
+        internal const char RightToLeftMark = '\u200F';
+
         //
         // Value property: stores the real string to be parsed.
         //
@@ -5332,7 +5329,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             }
 
         Start:
-            if (DateTimeParse.IsDigit(m_current))
+            if (char.IsAsciiDigit(m_current))
             {
                 // This is a digit.
                 tokenValue = m_current - '0';
@@ -5382,7 +5379,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
                     {
                         tokenType = tempType;
                         tokenValue = tempValue;
-                        // This is a token, so the Index has been advanced propertly in DTFI.Tokenizer().
+                        // This is a token, so the Index has been advanced properly in DTFI.Tokenizer().
                     }
                     else
                     {
@@ -5418,12 +5415,12 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             indexBeforeSeparator = Index;
             charBeforeSeparator = m_current;
             TokenType tokenType;
-            if (!SkipWhiteSpaceCurrent())
+            if (!SkipWhiteSpaceAndRtlMarkCurrent())
             {
                 // Reach the end of the string.
                 return TokenType.SEP_End;
             }
-            if (!DateTimeParse.IsDigit(m_current))
+            if (!char.IsAsciiDigit(m_current))
             {
                 // Not a digit.  Tokenize it.
                 bool found = dtfi.Tokenize(TokenType.SeparatorTokenMask, out tokenType, out _, ref this);
@@ -5459,7 +5456,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
                 int targetPosition = 0;                 // Where we are in the target string
                 int thisPosition = Index;         // Where we are in this string
                 int wsIndex = target.IndexOfAny(WhiteSpaceChecks, targetPosition);
-                if (wsIndex == -1)
+                if (wsIndex < 0)
                 {
                     return false;
                 }
@@ -5629,7 +5626,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         internal bool GetNextDigit() =>
             ++Index < Length &&
-            DateTimeParse.IsDigit(Value[Index]);
+            char.IsAsciiDigit(Value[Index]);
 
         //
         // Get the current character.
@@ -5646,7 +5643,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
         internal int GetDigit()
         {
             Debug.Assert(Index >= 0 && Index < Length, "Index >= 0 && Index < len");
-            Debug.Assert(DateTimeParse.IsDigit(Value[Index]), "IsDigit(Value[Index])");
+            Debug.Assert(char.IsAsciiDigit(Value[Index]), "IsDigit(Value[Index])");
             return Value[Index] - '0';
         }
 
@@ -5672,18 +5669,20 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
         }
 
         //
-        // Skip white spaces from the current position
+        // Skip white spaces and right-to-left Mark from the current position
         //
+        // U+200F is the Unicode right-to-left mark. In some Bidi cultures, this mark gets inserted inside the formatted date or time to have the output displayed in the correct layout.
+        // This mark does not affect the date or the time component values. Ignoring this mark during parsing wouldn't affect the result but will avoid having the parsing fail.
         // Return false if end of string is encountered.
         //
-        internal bool SkipWhiteSpaceCurrent()
+        internal bool SkipWhiteSpaceAndRtlMarkCurrent()
         {
             if (Index >= Length)
             {
                 return false;
             }
 
-            if (!char.IsWhiteSpace(m_current))
+            if (!char.IsWhiteSpace(m_current) && m_current != RightToLeftMark)
             {
                 return true;
             }
@@ -5691,7 +5690,7 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             while (++Index < Length)
             {
                 m_current = Value[Index];
-                if (!char.IsWhiteSpace(m_current))
+                if (!char.IsWhiteSpace(m_current) && m_current != RightToLeftMark)
                 {
                     return true;
                 }
@@ -5774,26 +5773,17 @@ new DS[] { DS.ERROR,  DS.TX_NNN,  DS.TX_NNN,  DS.TX_NNN,  DS.ERROR,   DS.ERROR, 
             {
                 DTSubStringType currentType;
                 char ch = Value[Index + sub.length];
-                if (ch >= '0' && ch <= '9')
-                {
-                    currentType = DTSubStringType.Number;
-                }
-                else
-                {
-                    currentType = DTSubStringType.Other;
-                }
+                currentType = char.IsAsciiDigit(ch) ? DTSubStringType.Number : DTSubStringType.Other;
 
                 if (sub.length == 0)
                 {
                     sub.type = currentType;
                 }
-                else
+                else if (sub.type != currentType)
                 {
-                    if (sub.type != currentType)
-                    {
-                        break;
-                    }
+                    break;
                 }
+
                 sub.length++;
                 if (currentType == DTSubStringType.Number)
                 {

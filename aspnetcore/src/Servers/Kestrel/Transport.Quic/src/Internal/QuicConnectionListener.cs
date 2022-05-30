@@ -1,13 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Net;
 using System.Net.Quic;
 using System.Net.Security;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Logging;
@@ -17,7 +13,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 /// <summary>
 /// Listens for new Quic Connections.
 /// </summary>
-internal class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDisposable
+internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDisposable
 {
     private readonly ILogger _log;
     private bool _disposed;
@@ -40,17 +36,6 @@ internal class QuicConnectionListener : IMultiplexedConnectionListener, IAsyncDi
         if (listenEndPoint == null)
         {
             throw new InvalidOperationException($"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}.");
-        }
-
-        // Workaround for issue in System.Net.Quic
-        // https://github.com/dotnet/runtime/issues/57241
-        if (listenEndPoint.Address.Equals(IPAddress.Any) && listenEndPoint.Address != IPAddress.Any)
-        {
-            listenEndPoint = new IPEndPoint(IPAddress.Any, listenEndPoint.Port);
-        }
-        if (listenEndPoint.Address.Equals(IPAddress.IPv6Any) && listenEndPoint.Address != IPAddress.IPv6Any)
-        {
-            listenEndPoint = new IPEndPoint(IPAddress.IPv6Any, listenEndPoint.Port);
         }
 
         quicListenerOptions.ServerAuthenticationOptions = sslServerAuthenticationOptions;

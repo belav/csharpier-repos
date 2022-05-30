@@ -2,11 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Collections.Concurrent;
-using System.Threading;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal class CancellationTokenSourcePool
+internal sealed class CancellationTokenSourcePool
 {
     private const int MaxQueueSize = 1024;
 
@@ -39,7 +38,7 @@ internal class CancellationTokenSourcePool
     /// A <see cref="CancellationTokenSource"/> with a back pointer to the pool it came from.
     /// Dispose will return it to the pool.
     /// </summary>
-    public class PooledCancellationTokenSource : CancellationTokenSource
+    public sealed class PooledCancellationTokenSource : CancellationTokenSource
     {
         private readonly CancellationTokenSourcePool _pool;
 

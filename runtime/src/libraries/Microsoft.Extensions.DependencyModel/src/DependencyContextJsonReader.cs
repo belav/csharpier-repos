@@ -21,10 +21,7 @@ namespace Microsoft.Extensions.DependencyModel
 
         public DependencyContext Read(Stream stream)
         {
-            if (stream == null)
-            {
-                throw new ArgumentNullException(nameof(stream));
-            }
+            ThrowHelper.ThrowIfNull(stream);
 
             ArraySegment<byte> buffer = ReadToEnd(stream);
             try
@@ -150,7 +147,7 @@ namespace Microsoft.Extensions.DependencyModel
                     case DependencyContextStrings.RuntimeTargetPropertyName:
                         ReadRuntimeTarget(ref reader, out runtimeTargetName, out runtimeSignature);
                         break;
-                    case DependencyContextStrings.CompilationOptionsPropertName:
+                    case DependencyContextStrings.CompilationOptionsPropertyName:
                         compilationOptions = ReadCompilationOptions(ref reader);
                         break;
                     case DependencyContextStrings.TargetsPropertyName:

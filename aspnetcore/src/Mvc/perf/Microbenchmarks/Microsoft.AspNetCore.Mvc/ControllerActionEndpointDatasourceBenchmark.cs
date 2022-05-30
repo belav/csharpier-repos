@@ -1,11 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
 using BenchmarkDotNet.Attributes;
-using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.Infrastructure;
 using Microsoft.AspNetCore.Mvc.Routing;
@@ -117,7 +113,7 @@ public class ControllerActionEndpointDataSourceBenchmark
         return dataSource;
     }
 
-    private class MockRoutePatternTransformer : RoutePatternTransformer
+    private sealed class MockRoutePatternTransformer : RoutePatternTransformer
     {
         public override RoutePattern SubstituteRequiredValues(RoutePattern original, object requiredValues)
         {
@@ -125,7 +121,7 @@ public class ControllerActionEndpointDataSourceBenchmark
         }
     }
 
-    private class MockActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
+    private sealed class MockActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
     {
         public MockActionDescriptorCollectionProvider(List<ActionDescriptor> actionDescriptors)
         {
@@ -135,7 +131,7 @@ public class ControllerActionEndpointDataSourceBenchmark
         public ActionDescriptorCollection ActionDescriptors { get; }
     }
 
-    private class MockParameterPolicyFactory : ParameterPolicyFactory
+    private sealed class MockParameterPolicyFactory : ParameterPolicyFactory
     {
         public override IParameterPolicy Create(RoutePatternParameterPart parameter, string inlineText)
         {

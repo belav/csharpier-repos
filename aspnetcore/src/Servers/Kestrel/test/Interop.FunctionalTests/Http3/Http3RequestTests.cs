@@ -88,7 +88,7 @@ public class Http3RequestTests : LoggedTest
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -190,7 +190,7 @@ public class Http3RequestTests : LoggedTest
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -229,7 +229,7 @@ public class Http3RequestTests : LoggedTest
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -273,7 +273,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -331,8 +331,8 @@ public class Http3RequestTests : LoggedTest
             Logger.LogInformation("Server reading content");
             await body.ReadAtLeastLengthAsync(TestData.Length).DefaultTimeout();
 
-                // Sync with client
-                await syncPoint.WaitToContinue();
+            // Sync with client
+            await syncPoint.WaitToContinue();
 
             Logger.LogInformation("Server waiting for cancellation");
             await cancelledTcs.Task;
@@ -341,7 +341,7 @@ public class Http3RequestTests : LoggedTest
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -407,14 +407,14 @@ public class Http3RequestTests : LoggedTest
 
             context.Abort();
 
-                // Sync with client
-                await syncPoint.WaitToContinue();
+            // Sync with client
+            await syncPoint.WaitToContinue();
 
             readAsyncTask.SetResult(context.Request.Body.ReadAsync(new byte[1024]).AsTask());
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -473,14 +473,14 @@ public class Http3RequestTests : LoggedTest
 
             context.Abort();
 
-                // Sync with client
-                await syncPoint.WaitToContinue();
+            // Sync with client
+            await syncPoint.WaitToContinue();
 
             writeAsyncTask.SetResult(context.Response.Body.WriteAsync(TestData).AsTask());
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -526,7 +526,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient(expect100ContinueTimeout: TimeSpan.FromMinutes(20)))
+        using (var client = HttpHelpers.CreateClient(expect100ContinueTimeout: TimeSpan.FromMinutes(20)))
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -554,7 +554,6 @@ public class Http3RequestTests : LoggedTest
             await host.StopAsync().DefaultTimeout();
         }
     }
-
 
     private static Version GetProtocol(HttpProtocols protocol)
     {
@@ -591,7 +590,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -652,8 +651,8 @@ public class Http3RequestTests : LoggedTest
             var requestBody = context.Request.Body;
             var responseBody = context.Response.Body;
 
-                // Read content
-                Logger.LogInformation("Server reading request body.");
+            // Read content
+            Logger.LogInformation("Server reading request body.");
             var data = await requestBody.ReadAtLeastLengthAsync(TestData.Length);
 
             Logger.LogInformation("Server writing response body.");
@@ -841,8 +840,8 @@ public class Http3RequestTests : LoggedTest
             await responseBody.WriteAsync(TestData);
             await responseBody.FlushAsync();
 
-                // Wait for task cancellation
-                await cancelledTcs.Task;
+            // Wait for task cancellation
+            await cancelledTcs.Task;
         }, protocol: protocol);
 
         var httpClientHandler = new HttpClientHandler();
@@ -901,7 +900,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -954,7 +953,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1020,7 +1019,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1073,7 +1072,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1081,7 +1080,6 @@ public class Http3RequestTests : LoggedTest
             var request1 = new HttpRequestMessage(HttpMethod.Get, $"https://127.0.0.1:{host.GetPort()}/");
             request1.Version = HttpVersion.Version30;
             request1.VersionPolicy = HttpVersionPolicy.RequestVersionExact;
-
 
             // TODO: There is a race between CompleteAsync and Reset.
             // https://github.com/dotnet/aspnetcore/issues/34915
@@ -1134,7 +1132,7 @@ public class Http3RequestTests : LoggedTest
             });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1199,7 +1197,7 @@ public class Http3RequestTests : LoggedTest
         {
             await host.StartAsync();
 
-            var client = Http3Helpers.CreateClient();
+            var client = HttpHelpers.CreateClient();
             try
             {
                 var port = host.GetPort();
@@ -1259,7 +1257,7 @@ public class Http3RequestTests : LoggedTest
             });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1309,9 +1307,9 @@ public class Http3RequestTests : LoggedTest
                     return false;
                 }
 
-                    // This message says the client closed the connection because the server
-                    // sends a GOAWAY and the client then closes the connection once all requests are finished.
-                    Assert.Contains("The client closed the connection.", connectionAbortLog.Message);
+                // This message says the client closed the connection because the server
+                // sends a GOAWAY and the client then closes the connection once all requests are finished.
+                Assert.Contains("The client closed the connection.", connectionAbortLog.Message);
                 return true;
             }, "Wait for connection abort.");
 
@@ -1364,7 +1362,7 @@ public class Http3RequestTests : LoggedTest
             });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1441,7 +1439,7 @@ public class Http3RequestTests : LoggedTest
         });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync();
 
@@ -1473,7 +1471,7 @@ public class Http3RequestTests : LoggedTest
     [MsQuicSupported]
     [InlineData(HttpProtocols.Http3)]
     [InlineData(HttpProtocols.Http2)]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/35070")]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/39985")]
     public async Task GET_GracefulServerShutdown_AbortRequestsAfterHostTimeout(HttpProtocols protocol)
     {
         // Arrange
@@ -1496,10 +1494,24 @@ public class Http3RequestTests : LoggedTest
             readAsyncTask.SetResult(readTask);
 
             await readTask;
-        }, protocol: protocol);
+        },
+        protocol: protocol,
+        configureKestrel: kestrel =>
+        {
+            // Disable the min rate limit to ensure a shutdown timeout aborts an ongoing read and not the rate limit.
+            // This could also be fixed by sending more data from the client.
+            kestrel.Limits.MinRequestBodyDataRate = null;
+
+            // This would normally be done automatically for us if the "configureKestrel" callback we're in was left null.
+            kestrel.Listen(IPAddress.Loopback, 0, listenOptions =>
+            {
+                listenOptions.Protocols = protocol;
+                listenOptions.UseHttps();
+            });
+        });
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -1595,7 +1607,7 @@ public class Http3RequestTests : LoggedTest
         }, protocol: protocol);
 
         using (var host = builder.Build())
-        using (var client = Http3Helpers.CreateClient())
+        using (var client = HttpHelpers.CreateClient())
         {
             await host.StartAsync().DefaultTimeout();
 
@@ -1640,6 +1652,6 @@ public class Http3RequestTests : LoggedTest
 
     private IHostBuilder CreateHostBuilder(RequestDelegate requestDelegate, HttpProtocols? protocol = null, Action<KestrelServerOptions> configureKestrel = null)
     {
-        return Http3Helpers.CreateHostBuilder(AddTestLogging, requestDelegate, protocol, configureKestrel);
+        return HttpHelpers.CreateHostBuilder(AddTestLogging, requestDelegate, protocol, configureKestrel);
     }
 }

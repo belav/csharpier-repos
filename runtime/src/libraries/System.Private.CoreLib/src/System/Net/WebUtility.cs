@@ -42,7 +42,7 @@ namespace System.Net
 
             // Don't create ValueStringBuilder if we don't have anything to encode
             int index = IndexOfHtmlEncodingChars(valueSpan);
-            if (index == -1)
+            if (index < 0)
             {
                 return value;
             }
@@ -64,10 +64,8 @@ namespace System.Net
 
         public static void HtmlEncode(string? value, TextWriter output)
         {
-            if (output == null)
-            {
-                throw new ArgumentNullException(nameof(output));
-            }
+            ArgumentNullException.ThrowIfNull(output);
+
             if (string.IsNullOrEmpty(value))
             {
                 output.Write(value);
@@ -78,7 +76,7 @@ namespace System.Net
 
             // Don't create ValueStringBuilder if we don't have anything to encode
             int index = IndexOfHtmlEncodingChars(valueSpan);
-            if (index == -1)
+            if (index < 0)
             {
                 output.Write(value);
                 return;
@@ -188,7 +186,7 @@ namespace System.Net
             ReadOnlySpan<char> valueSpan = value.AsSpan();
 
             int index = IndexOfHtmlDecodingChars(valueSpan);
-            if (index == -1)
+            if (index < 0)
             {
                 return value;
             }
@@ -207,10 +205,7 @@ namespace System.Net
 
         public static void HtmlDecode(string? value, TextWriter output)
         {
-            if (output == null)
-            {
-                throw new ArgumentNullException(nameof(output));
-            }
+            ArgumentNullException.ThrowIfNull(output);
 
             if (string.IsNullOrEmpty(value))
             {
@@ -684,23 +679,16 @@ namespace System.Net
                 1 << ((int)'-' - 0x20) | // 0x2D
                 1 << ((int)'.' - 0x20); // 0x2E
 
-            unchecked
-            {
-                return ((uint)(code - 'a') <= (uint)('z' - 'a')) ||
-                       ((uint)(code - 'A') <= (uint)('Z' - 'A')) ||
-                       ((uint)(code - 0x20) <= (uint)('9' - 0x20) && ((1 << (code - 0x20)) & safeSpecialCharMask) != 0) ||
-                       (code == (int)'_');
-            }
+            return char.IsAsciiLetter(ch) ||
+                   ((uint)(code - 0x20) <= (uint)('9' - 0x20) && ((1 << (code - 0x20)) & safeSpecialCharMask) != 0) ||
+                   (code == (int)'_');
         }
 
         private static bool ValidateUrlEncodingParameters(byte[]? bytes, int offset, int count)
         {
             if (bytes == null && count == 0)
                 return false;
-            if (bytes == null)
-            {
-                throw new ArgumentNullException(nameof(bytes));
-            }
+            ArgumentNullException.ThrowIfNull(bytes);
             if (offset < 0 || offset > bytes.Length)
             {
                 throw new ArgumentOutOfRangeException(nameof(offset));

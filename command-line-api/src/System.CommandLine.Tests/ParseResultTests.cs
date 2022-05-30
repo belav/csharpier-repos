@@ -26,7 +26,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void HasOption_can_be_used_to_check_the_presence_of_an_option()
         {
-            var option = new Option(new[] { "-h", "--help" });
+            var option = new Option<bool>(new[] { "-h", "--help" });
 
             var command = new Command("the-command")
             {
@@ -59,14 +59,14 @@ namespace System.CommandLine.Tests
             {
                 new Command("inner-one")
                 {
-                    new Argument
+                    new Argument<bool>
                     {
                         Arity = ArgumentArity.Zero
                     }
                 },
                 new Command("inner-two")
                 {
-                    new Argument
+                    new Argument<bool>
                     {
                         Arity = ArgumentArity.Zero
                     }
@@ -82,21 +82,6 @@ namespace System.CommandLine.Tests
 
             result2.CommandResult.Symbol.Name.Should().Be("inner-two");
             result2.Errors.Count.Should().Be(1);
-        }
-
-        [Fact]
-        public void ValueForOption_throws_with_empty_alias()
-        {
-            var command = new Command("one");
-
-            var result = command.Parse("");
-
-            Action action = () =>
-            {
-                result.ValueForOption<string>(string.Empty);
-            };
-
-            action.Should().Throw<ArgumentException>("Value cannot be null or whitespace.");
         }
     }
 }

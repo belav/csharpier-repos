@@ -224,7 +224,7 @@ namespace System.Threading
                         double adjacentPeriod2 = sampleCount / (((double)sampleCount / _wavePeriod) - 1);
 
                         //
-                        // Get the the three different frequency components of the throughput (scaled by average
+                        // Get the three different frequency components of the throughput (scaled by average
                         // throughput).  Our "error" estimate (the amount of noise that might be present in the
                         // frequency band we're really interested in) is the average of the adjacent bands.
                         //
@@ -447,7 +447,7 @@ namespace System.Threading
                 double w = 2 * Math.PI / period;
                 double cos = Math.Cos(w);
                 double coeff = 2 * cos;
-                double q0 = 0, q1 = 0, q2 = 0;
+                double q0, q1 = 0, q2 = 0;
                 for (int i = 0; i < numSamples; ++i)
                 {
                     q0 = coeff * q1 - q2 + samples[(_totalSamples - numSamples + i) % _samplesToMeasure];

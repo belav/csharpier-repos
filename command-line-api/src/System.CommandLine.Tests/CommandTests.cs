@@ -2,7 +2,6 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using FluentAssertions;
-using System.Collections.Generic;
 using System.CommandLine.Parsing;
 using System.Linq;
 using Xunit;
@@ -20,7 +19,7 @@ namespace System.CommandLine.Tests
                 {
                     new Command("inner")
                     {
-                        new Option("--option", arity: ArgumentArity.ExactlyOne)
+                        new Option<string>("--option")
                     }
                 });
         }
@@ -97,18 +96,12 @@ namespace System.CommandLine.Tests
         {
             var outer = new Command("outer")
             {
-                new Argument
-                {
-                    Arity = ArgumentArity.ExactlyOne
-                }
+                new Argument<string>()
             };
             outer.AddCommand(
                 new Command("inner")
                 {
-                    new Argument
-                    {
-                        Arity = ArgumentArity.ZeroOrMore
-                    }
+                    new Argument<string[]>()
                 });
 
             var parser = new Parser(outer);
@@ -155,7 +148,7 @@ namespace System.CommandLine.Tests
                   .Which
                   .Message
                   .Should()
-                  .Contain($"Command alias cannot contain whitespace: \"{alias}\"");
+                  .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -175,7 +168,7 @@ namespace System.CommandLine.Tests
                 .Which
                 .Message
                 .Should()
-                .Contain($"Command alias cannot contain whitespace: \"{alias}\"");
+                .Contain($"Alias cannot contain whitespace: \"{alias}\"");
         }
 
         [Theory]
@@ -215,7 +208,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("that");
 
-            result.CommandResult.Command.Should().Be(command);
+            result.CommandResult.Command.Should().BeSameAs(command);
             result.Errors.Should().BeEmpty();
         }
 
@@ -229,7 +222,7 @@ namespace System.CommandLine.Tests
 
             var result = command.Parse("that");
 
-            result.CommandResult.Command.Should().Be(command);
+            result.CommandResult.Command.Should().BeSameAs(command);
             result.Errors.Should().BeEmpty();
         }
 
@@ -246,7 +239,7 @@ namespace System.CommandLine.Tests
 
             var result = rootCommand.Parse("that");
 
-            result.CommandResult.Command.Should().Be(subcommand);
+            result.CommandResult.Command.Should().BeSameAs(subcommand);
             result.Errors.Should().BeEmpty();
         }
 
@@ -255,55 +248,13 @@ namespace System.CommandLine.Tests
         {
             var command = new Command("-alias")
             {
-                new Argument
+                new Argument<bool>
                 {
-                    Name = "arg", Arity = ArgumentArity.ZeroOrOne
+                    Name = "arg"
                 }
             };
 
             command.Arguments.Single().Name.Should().Be("arg");
-        }
-  
-        [Fact]
-        public void When_multiple_arguments_are_configured_then_they_must_differ_by_name()
-        {
-            var command = new Command("the-command")
-            {
-                new Argument<string>
-                {
-                    Name = "same"
-                }
-            };
-
-            command
-                .Invoking(c => c.Add(new Argument<string>
-                {
-                    Name = "same"
-                }))
-                .Should()
-                .Throw<ArgumentException>()
-                .And
-                .Message
-                .Should()
-                .Be("Alias 'same' is already in use.");
-        }
-
-        [Fact]
-        public void When_multiple_options_are_configured_then_they_must_differ_by_name()
-        {
-            var command = new Command("the-command")
-            {
-                new Option("--same")
-            };
-
-            command
-                .Invoking(c => c.Add(new Option("--same")))
-                .Should()
-                .Throw<ArgumentException>()
-                .And
-                .Message
-                .Should()
-                .Be("Alias '--same' is already in use.");
         }
 
         [Fact]
@@ -319,161 +270,15 @@ namespace System.CommandLine.Tests
         }
 
         [Fact]
-        public void Command_argument_of_string_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<string>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeNull();
-        }
-
-        [Fact]
-        public void Command_argument_of_IEnumerable_of_T_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<IEnumerable<string>>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_Array_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<string[]>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_List_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<List<string>>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_IList_of_T_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<IList<string>>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_IList_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<System.Collections.IList>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_ICollection_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<System.Collections.ICollection>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_IEnumerable_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<System.Collections.IEnumerable>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void Command_argument_of_ICollection_of_T_defaults_to_empty_when_not_specified()
-        {
-            var argument = new Argument<ICollection<string>>();
-            var command = new Command("mycommand")
-            {
-                argument
-            };
-
-            var result = command.Parse("mycommand");
-
-            result.GetValueForArgument(argument)
-                  .Should()
-                  .BeEmpty();
-        }
-
-        [Fact]
-        public void AddGlobalOption_updates_Options_and_GlobalOptions_property()
+        public void AddGlobalOption_updates_Options_property()
         {
             var option = new Option<string>("-x");
             var command = new Command("mycommand");
             command.AddGlobalOption(option);
 
-            command.GlobalOptions
-                .Should()
-                .Contain(option);
-
             command.Options
-                .Should()
-                .Contain(option);
+                   .Should()
+                   .Contain(option);
         }
 
         // https://github.com/dotnet/command-line-api/issues/1437
@@ -491,15 +296,10 @@ namespace System.CommandLine.Tests
 
             command.AddGlobalOption(option);
 
-            command.GlobalOptions
-                .Should()
-                .Contain(option);
-
             command.Options
                 .Should()
                 .Contain(option);
         }
-
 
         protected override Symbol CreateSymbol(string name) => new Command(name);
     }

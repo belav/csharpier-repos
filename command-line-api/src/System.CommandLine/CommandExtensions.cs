@@ -1,8 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Generic;
-using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Linq;
@@ -27,7 +25,7 @@ namespace System.CommandLine
             string[] args,
             IConsole? console = null)
         {
-            return GetInvocationPipeline(command, args).Invoke(console);
+            return GetDefaultInvocationPipeline(command, args).Invoke(console);
         }
 
         /// <summary>
@@ -56,7 +54,7 @@ namespace System.CommandLine
             string[] args,
             IConsole? console = null)
         {
-            return await GetInvocationPipeline(command, args).InvokeAsync(console);
+            return await GetDefaultInvocationPipeline(command, args).InvokeAsync(console);
         }
 
         /// <summary>
@@ -73,14 +71,9 @@ namespace System.CommandLine
             IConsole? console = null) =>
             command.InvokeAsync(CommandLineStringSplitter.Instance.Split(commandLine).ToArray(), console);
 
-        private static InvocationPipeline GetInvocationPipeline(Command command, string[] args)
+        private static InvocationPipeline GetDefaultInvocationPipeline(Command command, string[] args)
         {
-            var parser = command.ImplicitParser ??
-                         new CommandLineBuilder(command)
-                             .UseDefaults()
-                             .Build();
-
-            var parseResult = parser.Parse(args);
+            var parseResult = command.GetOrCreateDefaultInvocationParser().Parse(args);
 
             return new InvocationPipeline(parseResult);
         }
@@ -94,7 +87,7 @@ namespace System.CommandLine
         public static ParseResult Parse(
             this Command command,
             params string[] args) =>
-            command.GetOrCreateDefaultParser().Parse(args);
+            command.GetOrCreateDefaultSimpleParser().Parse(args);
 
         /// <summary>
         /// Parses a command line string value using the specified command.
@@ -106,24 +99,6 @@ namespace System.CommandLine
         public static ParseResult Parse(
             this Command command,
             string commandLine) =>
-            command.GetOrCreateDefaultParser().Parse(commandLine);
-
-        private const string _messageForWhenGeneratorIsNotInUse =
-            "This overload should not be called. You should reference the System.CommandLine.Generator package which will generate a more specific overload for your delegate.";
-
-        /// <summary>
-        /// Sets a command handler.
-        /// </summary>
-        /// <remarks>Currently, this method only works with C# source generators.</remarks>
-        /// <param name="command">The command on which to set the handler.</param>
-        /// <param name="delegate">A delegate implementing the handler for the command.</param>
-        /// <param name="symbols">The symbols used to bind the handler's parameters.</param>
-        public static void SetHandler<TDelegate>(
-            this Command command,
-            TDelegate @delegate,
-            params ISymbol[] symbols)
-        {
-            throw new InvalidOperationException(_messageForWhenGeneratorIsNotInUse);
-        }
+            command.GetOrCreateDefaultSimpleParser().Parse(commandLine);
     }
 }

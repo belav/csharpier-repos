@@ -63,7 +63,7 @@ namespace System.Configuration
         protected const string LocationInheritInChildApplicationsAttribute = "inheritInChildApplications";
 
         protected const string ConfigSourceAttribute = "configSource";
-        internal const string ProtectionProviderAttibute = "configProtectionProvider";
+        internal const string ProtectionProviderAttribute = "configProtectionProvider";
 
         protected const string FormatNewConfigFile = "<?xml version=\"1.0\" encoding=\"{0}\"?>\r\n";
         protected const string FormatConfiguration = "<configuration>\r\n";
@@ -748,7 +748,6 @@ namespace System.Configuration
 
         private object GetSection(string configKey, bool getLkg, bool checkPermission)
         {
-            object result;
             object resultRuntimeObject;
 
             // Note that GetSectionRecursive may invalidate this record,
@@ -759,7 +758,7 @@ namespace System.Configuration
                 checkPermission,
                 getRuntimeObject: true,
                 requestIsHere: true,
-                result: out result,
+                result: out _,
                 resultRuntimeObject: out resultRuntimeObject);
 
             return resultRuntimeObject;
@@ -804,7 +803,7 @@ namespace System.Configuration
                     }
                     catch
                     {
-                        // Ignore the error if we are attempting to retreive
+                        // Ignore the error if we are attempting to retrieve
                         // the last known good configuration.
                         if (!getLkg) throw;
                     }
@@ -849,7 +848,7 @@ namespace System.Configuration
                     //
                     // It WILL be common in web scenarios for there to be
                     // deep hierarchies of config files, most of which have
-                    // sparse input. Therefore we do not want to retreive a
+                    // sparse input. Therefore we do not want to retrieve a
                     // factory record if it is not necessary to do so, as
                     // it would always lead to an order N-squared operation,
                     // where N is the depth of the config hierarchy.
@@ -1076,7 +1075,7 @@ namespace System.Configuration
                 }
                 catch
                 {
-                    // Ignore the error if we are attempting to retreive
+                    // Ignore the error if we are attempting to retrieve
                     // the last known good configuration.
                     if (!getLkg) throw;
                 }
@@ -1190,7 +1189,7 @@ namespace System.Configuration
                     }
                     catch
                     {
-                        // Ignore the error if we are attempting to retreive
+                        // Ignore the error if we are attempting to retrieve
                         // the last known good configuration.
                         if (!getLkg) throw;
                     }
@@ -1505,7 +1504,7 @@ namespace System.Configuration
                         throw new ConfigurationErrorsException(SR.Config_source_file_format, xmlUtil);
 
                     // Check for protectionProvider
-                    string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(ProtectionProviderAttibute);
+                    string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(ProtectionProviderAttribute);
                     if (protectionProviderAttribute != null)
                     {
                         if (xmlUtil.Reader.AttributeCount != 1)
@@ -1688,8 +1687,7 @@ namespace System.Configuration
 
         internal FactoryRecord FindFactoryRecord(string configKey, bool permitErrors)
         {
-            BaseConfigurationRecord dummy;
-            return FindFactoryRecord(configKey, permitErrors, out dummy);
+            return FindFactoryRecord(configKey, permitErrors, out _);
         }
 
         // - Find the nearest factory record
@@ -2287,8 +2285,7 @@ namespace System.Configuration
 
         protected OverrideMode GetSectionLockedMode(string configKey)
         {
-            OverrideMode dummy;
-            return GetSectionLockedMode(configKey, out dummy);
+            return GetSectionLockedMode(configKey, out _);
         }
 
         // Return the current lock mode for a section
@@ -2541,7 +2538,7 @@ namespace System.Configuration
                                 }
                             }
 
-                            string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(ProtectionProviderAttibute);
+                            string protectionProviderAttribute = xmlUtil.Reader.GetAttribute(ProtectionProviderAttribute);
                             if (protectionProviderAttribute != null)
                             {
                                 try
@@ -3698,7 +3695,7 @@ namespace System.Configuration
                 StringUtil.StartsWithOrdinal(name, "lock");
         }
 
-        protected class ConfigRecordStreamInfo
+        protected sealed class ConfigRecordStreamInfo
         {
             private HybridDictionary _streamInfos;
 

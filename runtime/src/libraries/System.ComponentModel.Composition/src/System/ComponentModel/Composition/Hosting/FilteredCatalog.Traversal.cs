@@ -11,7 +11,7 @@ namespace System.ComponentModel.Composition.Hosting
     public partial class FilteredCatalog
     {
         /// <summary>
-        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependecies.
+        /// Creates a new instance of the <see cref="FilteredCatalog"/> that conatains all the parts from the orignal filtered catalog and all their dependencies.
         /// </summary>
         /// <returns></returns>
         public FilteredCatalog IncludeDependencies()
@@ -58,10 +58,7 @@ namespace System.ComponentModel.Composition.Hosting
 
         private FilteredCatalog Traverse(IComposablePartCatalogTraversal traversal)
         {
-            if (traversal == null)
-            {
-                throw new ArgumentNullException(nameof(traversal));
-            }
+            ArgumentNullException.ThrowIfNull(traversal);
 
             // we make sure that the underlyiong catalog cannot change while we are doing the trasversal
             // After thaty traversal is done, the freeze is lifted, and the catalog is free to change, but the changes
@@ -82,10 +79,8 @@ namespace System.ComponentModel.Composition.Hosting
 
         private static HashSet<ComposablePartDefinition> GetTraversalClosure(IEnumerable<ComposablePartDefinition> parts, IComposablePartCatalogTraversal traversal)
         {
-            if (traversal == null)
-            {
-                throw new ArgumentNullException(nameof(traversal));
-            }
+            ArgumentNullException.ThrowIfNull(traversal);
+
             var traversedParts = new HashSet<ComposablePartDefinition>();
             GetTraversalClosure(parts, traversedParts, traversal);
             return traversedParts;

@@ -4,8 +4,6 @@
 using System.Net;
 using System.Net.Http;
 using System.Text;
-using System.Threading.Tasks;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
@@ -14,6 +12,7 @@ public class FiltersTest : IClassFixture<MvcTestFixture<BasicWebSite.StartupWith
     public FiltersTest(MvcTestFixture<BasicWebSite.StartupWithoutEndpointRouting> fixture)
     {
         Client = fixture.CreateDefaultClient();
+        Client.DefaultRequestHeaders.Add("Authorization", "Bearer key");
     }
 
     public HttpClient Client { get; }

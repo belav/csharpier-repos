@@ -13,7 +13,7 @@ using System.Text.RegularExpressions;
 
 namespace Microsoft.AspNetCore.Certificates.Generation;
 
-internal class MacOSCertificateManager : CertificateManager
+internal sealed class MacOSCertificateManager : CertificateManager
 {
     private const string CertificateSubjectRegex = "CN=(.*[^,]+).*";
     private static readonly string MacOSUserKeyChain = Environment.GetEnvironmentVariable("HOME") + "/Library/Keychains/login.keychain-db";
@@ -129,7 +129,6 @@ internal class MacOSCertificateManager : CertificateManager
         }
     }
 
-
     internal override void CorrectCertificateState(X509Certificate2 candidate)
     {
         var status = CheckCertificateState(candidate, true);
@@ -138,7 +137,6 @@ internal class MacOSCertificateManager : CertificateManager
             throw new InvalidOperationException(InvalidCertificateState);
         }
     }
-
 
     public override bool IsTrusted(X509Certificate2 certificate)
     {

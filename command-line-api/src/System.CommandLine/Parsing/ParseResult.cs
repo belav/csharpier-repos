@@ -3,6 +3,7 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Binding;
+using System.CommandLine.Completions;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
@@ -17,19 +18,18 @@ namespace System.CommandLine.Parsing
         private readonly RootCommandResult _rootCommandResult;
         private readonly IReadOnlyList<Token> _unparsedTokens;
         private readonly IReadOnlyList<Token> _unmatchedTokens;
-
-        internal static ParseResult Empty() => new RootCommand().Parse(Array.Empty<string>());
+        private CompletionContext? _completionContext;
 
         internal ParseResult(
             Parser parser,
             RootCommandResult rootCommandResult,
             CommandResult commandResult,
-            IDirectiveCollection directives,
+            DirectiveCollection directives,
             TokenizeResult tokenizeResult,
-            IReadOnlyList<Token> unparsedTokens,
-            IReadOnlyList<Token> unmatchedTokens,
-            List<ParseError>? errors = null,
-            string? rawInput = null)
+            IReadOnlyList<Token>? unparsedTokens,
+            IReadOnlyList<Token>? unmatchedTokens,
+            List<ParseError>? errors,
+            string? commandLineText = null)
         {
             Parser = parser;
             _rootCommandResult = rootCommandResult;
@@ -53,24 +53,30 @@ namespace System.CommandLine.Parsing
                 Tokens = Array.Empty<Token>();
             }
 
-            _unparsedTokens = unparsedTokens;
-            _unmatchedTokens = unmatchedTokens;
+            _unparsedTokens = unparsedTokens ?? Array.Empty<Token>();
+            _errors = errors ?? new List<ParseError>();
+            CommandLineText = commandLineText;
 
-            RawInput = rawInput;
-
-            _errors = errors ?? (parser.Configuration.RootCommand.TreatUnmatchedTokensAsErrors
-                                     ? new List<ParseError>(unmatchedTokens.Count)
-                                     : new List<ParseError>());
-
-            if (parser.Configuration.RootCommand.TreatUnmatchedTokensAsErrors)
+            if (unmatchedTokens is null)
             {
-                for (var i = 0; i < unmatchedTokens.Count; i++)
+                _unmatchedTokens = Array.Empty<Token>();
+            }
+            else
+            {
+                _unmatchedTokens = unmatchedTokens;
+
+                if (parser.Configuration.RootCommand.TreatUnmatchedTokensAsErrors)
                 {
-                    var token = unmatchedTokens[i];
-                    _errors.Add(new ParseError(parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(token.Value), rootCommandResult));
+                    for (var i = 0; i < _unmatchedTokens.Count; i++)
+                    {
+                        var token = _unmatchedTokens[i];
+                        _errors.Add(new ParseError(parser.Configuration.LocalizationResources.UnrecognizedCommandOrArgument(token.Value), rootCommandResult));
+                    }
                 }
             }
         }
+
+        internal static ParseResult Empty() => new RootCommand().Parse(Array.Empty<string>());
 
         /// <summary>
         /// A result indicating the command specified in the command line input.
@@ -90,13 +96,13 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// Gets the parse errors found while parsing command line input.
         /// </summary>
-        public IReadOnlyCollection<ParseError> Errors => _errors;
+        public IReadOnlyList<ParseError> Errors => _errors;
 
         /// <summary>
         /// Gets the directives found while parsing command line input.
         /// </summary>
         /// <remarks>If <see cref="CommandLineConfiguration.EnableDirectives"/> is set to <see langword="false"/>, then this collection will be empty.</remarks>
-        public IDirectiveCollection Directives { get; }
+        public DirectiveCollection Directives { get; }
 
         /// <summary>
         /// Gets the tokens identified while parsing command line input.
@@ -107,7 +113,7 @@ namespace System.CommandLine.Parsing
         /// Holds the value of a complete command line input prior to splitting and tokenization, when provided.
         /// </summary>
         /// <remarks>This will not be set when the parser is called from <c>Program.Main</c>. It is primarily used when calculating suggestions via the <c>dotnet-suggest</c> tool.</remarks>
-        internal string? RawInput { get; }
+        internal string? CommandLineText { get; }
 
         /// <summary>
         /// Gets the list of tokens used on the command line that were not matched by the parser.
@@ -120,8 +126,16 @@ namespace System.CommandLine.Parsing
         /// <remarks>This list will contain all of the tokens following the first occurrence of a <c>--</c> token if <see cref="CommandLineConfiguration.EnableLegacyDoubleDashBehavior"/> is set to <see langword="true"/>.</remarks>
         public IReadOnlyList<string> UnparsedTokens => _unparsedTokens.Select(t => t.Value).ToArray();
 
-        [return: MaybeNull]
-        internal T GetValueFor<T>(IValueDescriptor<T> symbol) =>
+        /// <summary>
+        /// Gets the completion context for the parse result.
+        /// </summary>
+        public CompletionContext GetCompletionContext() =>
+            _completionContext ??=
+                CommandLineText is null
+                    ? new TokenCompletionContext(this)
+                    : new TextCompletionContext(this, CommandLineText);
+
+        internal T? GetValueFor<T>(IValueDescriptor<T> symbol) =>
             symbol switch
             {
                 Argument<T> argument => GetValueForArgument(argument),
@@ -129,162 +143,29 @@ namespace System.CommandLine.Parsing
                 _ => throw new ArgumentOutOfRangeException()
             };
 
-        /// <inheritdoc cref="GetValueForOption"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForOption(string alias) =>
-            ValueForOption<object?>(alias);
-
-        /// <inheritdoc cref="GetValueForOption"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(IOption) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForOption(Option option) =>
-            GetValueForOption<object?>(option);
-
         /// <summary>
         /// Gets the parsed or default value for the specified option.
         /// </summary>
         /// <param name="option">The option for which to get a value.</param>
         /// <returns>The parsed value or a configured default.</returns>
         public object? GetValueForOption(Option option) =>
-            GetValueForOption<object?>(option);
-
-        /// <inheritdoc cref="GetValueForArgument"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForArgument(string alias) =>
-            ValueForArgument<object?>(alias);
-
-        /// <inheritdoc cref="GetValueForArgument"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public object? ValueForArgument(Argument argument) =>
-            GetValueForArgument<object?>(argument);
+            RootCommandResult.GetValueForOption(option);
 
         /// <summary>
         /// Gets the parsed or default value for the specified argument.
         /// </summary>
         /// <param name="argument">The argument for which to get a value.</param>
         /// <returns>The parsed value or a configured default.</returns>
-        public object? GetValueForArgument(IArgument argument) =>
-            GetValueForArgument<object?>(argument);
+        public object? GetValueForArgument(Argument argument) =>
+            RootCommandResult.GetValueForArgument(argument);
 
         /// <inheritdoc cref="GetValueForArgument"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Argument<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        [return: MaybeNull]
-        public T ValueForArgument<T>(Argument<T> argument) =>
-            GetValueForArgument(argument);
-
-        /// <inheritdoc cref="GetValueForArgument"/>
-        [return: MaybeNull]
         public T GetValueForArgument<T>(Argument<T> argument)
-        {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
-            {
-                return t;
-            }
-
-            return (T)Binder.GetDefaultValue(argument.ValueType)!;
-        }
-
-        /// <inheritdoc cref="GetValueForArgument"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(IArgument) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        [return: MaybeNull]
-        internal T ValueForArgument<T>(Argument argument) =>
-            GetValueForArgument<T>(argument);
-
-        /// <inheritdoc cref="GetValueForArgument"/>
-        [return: MaybeNull]
-        public T GetValueForArgument<T>(IArgument argument)
-        {
-            if (FindResultFor(argument) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
-            {
-                return t;
-            }
-
-            return (T)Binder.GetDefaultValue(argument.ValueType)!;
-        }
-
-        /// <inheritdoc cref="GetValueForArgument"/>
-        [return: MaybeNull]
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForArgument<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public T ValueForArgument<T>(string name)
-        {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
-            }
-
-            if (CommandResult.Children.GetByAlias(name) is ArgumentResult argumentResult)
-            {
-                return argumentResult.GetValueOrDefault<T>();
-            }
-            else
-            {
-                return default;
-            }
-        }
-
+            => RootCommandResult.GetValueForArgument(argument);
+        
         /// <inheritdoc cref="GetValueForOption"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        [return: MaybeNull]
-        public T ValueForOption<T>(Option<T> option) =>
-            GetValueForOption(option);
-
-        /// <inheritdoc cref="GetValueForOption"/>
-        [return: MaybeNull]
-        public T GetValueForOption<T>(Option<T> option)
-        {
-            if (FindResultFor(option) is { } result &&
-                result.GetValueOrDefault<T>() is { } t)
-            {
-                return t;
-            }
-
-            return (T)Binder.GetDefaultValue(option.Argument.ValueType)!;
-        }
-
-        /// <inheritdoc cref="GetValueForOption"/>
-        [return: MaybeNull]
-        public T GetValueForOption<T>(IOption option)
-        {
-            if (FindResultFor(option) is { } result)
-            {
-                if (result.GetValueOrDefault<T>() is { } t)
-                {
-                    return t;
-                }
-            }
-
-            return (T)Binder.GetDefaultValue(option.Argument.ValueType)!;
-        }
-
-        /// <inheritdoc cref="GetValueForOption"/>
-        [Obsolete(
-            "This method is obsolete and will be removed in a future version. Please use ParseResult.GetValueForOption<T>(Option<T>) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        [return: MaybeNull]
-        public T ValueForOption<T>(string alias)
-        {
-            if (string.IsNullOrWhiteSpace(alias))
-            {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(alias));
-            }
-
-            if (CommandResult.Children.GetByAlias(alias) is OptionResult optionResult)
-            {
-                return optionResult.GetValueOrDefault<T>();
-            }
-            else
-            {
-                return default;
-            }
-        }
+        public T? GetValueForOption<T>(Option<T> option)
+            => RootCommandResult.GetValueForOption(option);
 
         /// <inheritdoc />
         public override string ToString() => $"{nameof(ParseResult)}: {this.Diagram()}";
@@ -294,7 +175,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="argument">The argument for which to find a result.</param>
         /// <returns>A result for the specified argument, or <see langword="null"/> if it was not provided and no default was configured.</returns>
-        public ArgumentResult? FindResultFor(IArgument argument) =>
+        public ArgumentResult? FindResultFor(Argument argument) =>
             _rootCommandResult.FindResultFor(argument);
 
         /// <summary>
@@ -302,7 +183,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="command">The command for which to find a result.</param>
         /// <returns>A result for the specified command, or <see langword="null"/> if it was not provided.</returns>
-        public CommandResult? FindResultFor(ICommand command) =>
+        public CommandResult? FindResultFor(Command command) =>
             _rootCommandResult.FindResultFor(command);
 
         /// <summary>
@@ -310,7 +191,7 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="option">The option for which to find a result.</param>
         /// <returns>A result for the specified option, or <see langword="null"/> if it was not provided and no default was configured.</returns>
-        public OptionResult? FindResultFor(IOption option) =>
+        public OptionResult? FindResultFor(Option option) =>
             _rootCommandResult.FindResultFor(option);
 
         /// <summary>
@@ -318,13 +199,117 @@ namespace System.CommandLine.Parsing
         /// </summary>
         /// <param name="symbol">The symbol for which to find a result.</param>
         /// <returns>A result for the specified symbol, or <see langword="null"/> if it was not provided and no default was configured.</returns>
-        public SymbolResult? FindResultFor(ISymbol symbol) =>
+        public SymbolResult? FindResultFor(Symbol symbol) =>
             symbol switch
             {
-                IArgument argument => FindResultFor(argument),
-                ICommand command => FindResultFor(command),
-                IOption option => FindResultFor(option),
+                Argument argument => FindResultFor(argument),
+                Command command => FindResultFor(command),
+                Option option => FindResultFor(option),
                 _ => throw new ArgumentOutOfRangeException(nameof(symbol))
             };
+
+        /// <summary>
+        /// Gets completions based on a given parse result.
+        /// </summary>
+        /// <param name="position">The position at which completions are requested.</param>
+        /// <returns>A set of completions for completion.</returns>
+        public IEnumerable<CompletionItem> GetCompletions(
+            int? position = null)
+        {
+            var currentSymbolResult = SymbolToComplete(position);
+
+            var currentSymbol = currentSymbolResult.Symbol;
+
+            var context = GetCompletionContext();
+
+            if (position is not null &&
+                context is TextCompletionContext tcc)
+            {
+                context = tcc.AtCursorPosition(position.Value);
+            }
+
+            var completions =
+                currentSymbol is ICompletionSource currentCompletionSource
+                    ? currentCompletionSource.GetCompletions(context)
+                    : Array.Empty<CompletionItem>();
+
+            completions =
+                completions.Where(item => OptionsWithArgumentLimitReached(currentSymbolResult).All(s => s != item.Label));
+
+            return completions;
+
+            static IEnumerable<string> OptionsWithArgumentLimitReached(SymbolResult symbolResult) =>
+                symbolResult
+                    .Children
+                    .Where(c => c.IsArgumentLimitReached)
+                    .OfType<OptionResult>()
+                    .Select(o => o.Symbol)
+                    .OfType<IdentifierSymbol>()
+                    .SelectMany(c => c.Aliases);
+        }
+
+        private SymbolResult SymbolToComplete(int? position = null)
+        {
+            var commandResult = CommandResult;
+
+            var allSymbolResultsForCompletion = AllSymbolResultsForCompletion().ToArray();
+
+            var currentSymbol = allSymbolResultsForCompletion.Last();
+
+            return currentSymbol;
+
+            IEnumerable<SymbolResult> AllSymbolResultsForCompletion()
+            {
+                foreach (var item in commandResult.AllSymbolResults())
+                {
+                    if (item is CommandResult command)
+                    {
+                        yield return command;
+                    }
+                    else if (item is OptionResult option)
+                    {
+                        if (WillAcceptAnArgument(this, position, option))
+                        {
+                            yield return option;
+                        }
+                    }
+                }
+            }
+
+            static bool WillAcceptAnArgument(
+                ParseResult parseResult,
+                int? position,
+                OptionResult optionResult)
+            {
+                if (optionResult.IsImplicit)
+                {
+                    return false;
+                }
+
+                if (!optionResult.IsArgumentLimitReached)
+                {
+                    return true;
+                }
+
+                var completionContext = parseResult.GetCompletionContext();
+
+                if (completionContext is TextCompletionContext textCompletionContext)
+                {
+                    if (position.HasValue)
+                    {
+                        textCompletionContext = textCompletionContext.AtCursorPosition(position.Value);
+                    }
+
+                    if (textCompletionContext.WordToComplete.Length > 0)
+                    {
+                        var tokenToComplete = parseResult.Tokens.Last(t => t.Value == textCompletionContext.WordToComplete);
+
+                        return optionResult.Tokens.Contains(tokenToComplete);
+                    }
+                }
+
+                return !optionResult.IsArgumentLimitReached;
+            }
+        }
     }
 }

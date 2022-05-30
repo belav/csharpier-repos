@@ -3,7 +3,7 @@
 
 using System.Collections.Generic;
 using System.CommandLine.Parsing;
-using System.CommandLine.Suggestions;
+using System.CommandLine.Completions;
 using System.IO;
 using System.Linq;
 
@@ -27,41 +27,58 @@ namespace System.CommandLine
             where TOption : Option
         {
             option.Argument.AddAllowedValues(values);
-            option.Argument.Suggestions.Add(values);
+            option.Argument.Completions.Add(values);
 
             return option;
         }
 
         /// <summary>
-        /// Adds suggestions for an option.
+        /// Adds completions for an option.
         /// </summary>
         /// <typeparam name="TOption">The type of the <see cref="Option" />.</typeparam>
-        /// <param name="option">The option for which to add suggestions.</param>
-        /// <param name="values">The suggestions to add.</param>
+        /// <param name="option">The option for which to add completions.</param>
+        /// <param name="values">The completions to add.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption AddSuggestions<TOption>(
+        public static TOption AddCompletions<TOption>(
             this TOption option,
             params string[] values)
             where TOption : Option
         {
-            option.Argument.Suggestions.Add(values);
+            option.Argument.Completions.Add(values);
 
             return option;
         }
-
+        
         /// <summary>
-        /// Adds suggestions for an option.
+        /// Adds completions for an option.
         /// </summary>
-        /// <typeparam name="TOption">The type of the <see cref="Option" />.</typeparam>
-        /// <param name="option">The option for which to add suggestions.</param>
-        /// <param name="suggest">A <see cref="SuggestDelegate"/> that will be called to provide suggestions.</param>
+        /// <typeparam name="TOption">The type of the option.</typeparam>
+        /// <param name="option">The option for which to add completions.</param>
+        /// <param name="complete">A <see cref="CompletionDelegate"/> that will be called to provide completions.</param>
         /// <returns>The option being extended.</returns>
-        public static TOption AddSuggestions<TOption>(
+        public static TOption AddCompletions<TOption>(
             this TOption option,
-            SuggestDelegate suggest)
+            Func<CompletionContext, IEnumerable<string>> complete)
             where TOption : Option
         {
-            option.Argument.Suggestions.Add(suggest);
+            option.Argument.Completions.Add(complete);
+
+            return option;
+        }
+   
+        /// <summary>
+        /// Adds completions for an option.
+        /// </summary>
+        /// <typeparam name="TOption">The type of the option.</typeparam>
+        /// <param name="option">The option for which to add completions.</param>
+        /// <param name="complete">A <see cref="CompletionDelegate"/> that will be called to provide completions.</param>
+        /// <returns>The option being extended.</returns>
+        public static TOption AddCompletions<TOption>(
+            this TOption option,
+            CompletionDelegate complete)
+            where TOption : Option
+        {
+            option.Argument.Completions.Add(complete);
 
             return option;
         }
@@ -73,14 +90,7 @@ namespace System.CommandLine
         /// <returns>The option being extended.</returns>
         public static Option<FileInfo> ExistingOnly(this Option<FileInfo> option)
         {
-            option.Argument.AddValidator(
-                a =>
-                    a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !File.Exists(filePath))
-                     .Select(a.LocalizationResources.FileDoesNotExist)
-                     .FirstOrDefault());
-
+            option.Argument.AddValidator(Validate.FileExists);
             return option;
         }
 
@@ -91,14 +101,7 @@ namespace System.CommandLine
         /// <returns>The option being extended.</returns>
         public static Option<DirectoryInfo> ExistingOnly(this Option<DirectoryInfo> option)
         {
-            option.Argument.AddValidator(
-                a =>
-                    a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !Directory.Exists(filePath))
-                     .Select(a.LocalizationResources.DirectoryDoesNotExist)
-                     .FirstOrDefault());
-
+            option.Argument.AddValidator(Validate.DirectoryExists);
             return option;
         }
 
@@ -109,14 +112,7 @@ namespace System.CommandLine
         /// <returns>The option being extended.</returns>
         public static Option<FileSystemInfo> ExistingOnly(this Option<FileSystemInfo> option)
         {
-            option.Argument.AddValidator(
-                a =>
-                    a.Tokens
-                     .Select(t => t.Value)
-                     .Where(filePath => !Directory.Exists(filePath) && !File.Exists(filePath))
-                     .Select(a.LocalizationResources.FileOrDirectoryDoesNotExist)
-                     .FirstOrDefault());
-
+            option.Argument.AddValidator(Validate.FileOrDirectoryExists);
             return option;
         }
 
@@ -175,7 +171,7 @@ namespace System.CommandLine
         public static ParseResult Parse(
             this Option option,
             string commandLine) =>
-            option.GetOrCreateDefaultParser().Parse(commandLine);
+            option.GetOrCreateDefaultSimpleParser().Parse(commandLine);
 
         /// <summary>
         /// Parses a command line string value using an option.
@@ -186,6 +182,6 @@ namespace System.CommandLine
         public static ParseResult Parse(
             this Option option,
             string[] args) =>
-            option.GetOrCreateDefaultParser().Parse(args);
+            option.GetOrCreateDefaultSimpleParser().Parse(args);
     }
 }

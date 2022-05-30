@@ -1,22 +1,21 @@
-﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
+// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
 using System.CommandLine.Binding;
-using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 
 namespace System.CommandLine.Parsing
 {
     /// <summary>
-    /// A result produced when parsing an <see cref="IArgument"/>.
+    /// A result produced when parsing an <see cref="Argument"/>.
     /// </summary>
     public class ArgumentResult : SymbolResult
     {
         private ArgumentConversionResult? _conversionResult;
 
         internal ArgumentResult(
-            IArgument argument,
+            Argument argument,
             SymbolResult? parent) : base(argument, parent)
         {
             Argument = argument;
@@ -25,7 +24,7 @@ namespace System.CommandLine.Parsing
         /// <summary>
         /// The argument to which the result applies.
         /// </summary>
-        public IArgument Argument { get; }
+        public Argument Argument { get; }
 
         internal bool IsImplicit => Argument.HasDefaultValue && Tokens.Count == 0;
 
@@ -42,7 +41,6 @@ namespace System.CommandLine.Parsing
         /// Gets the parsed value or the default value for <see cref="Argument"/>.
         /// </summary>
         /// <returns>The parsed value or the default value for <see cref="Argument"/></returns>
-        [return: MaybeNull]
         public T GetValueOrDefault<T>() =>
             GetArgumentConversionResult()
                 .ConvertIfNeeded(this, typeof(T))
@@ -66,11 +64,6 @@ namespace System.CommandLine.Parsing
                 throw new InvalidOperationException($"{nameof(OnlyTake)} can only be called once.");
             }
 
-            if (numberOfTokens == 0)
-            {
-                return;
-            }
-
             var passedOnTokensCount = _tokens.Count - numberOfTokens;
 
             PassedOnTokens = new List<Token>(_tokens.GetRange(numberOfTokens, passedOnTokensCount));
@@ -90,108 +83,88 @@ namespace System.CommandLine.Parsing
 
             for (var i = 0; i < argument.Validators.Count; i++)
             {
-                var symbolValidator = argument.Validators[i];
-                var errorMessage = symbolValidator(this);
+                var validateSymbolResult = argument.Validators[i];
+                validateSymbolResult(this);
 
-                if (!string.IsNullOrWhiteSpace(errorMessage))
+                if (!string.IsNullOrWhiteSpace(ErrorMessage))
                 {
-                    return new ParseError(errorMessage!, this);
+                    return new ParseError(ErrorMessage!, this);
                 }
             }
 
             return null;
         }
 
-        private ArgumentConversionResult Convert(IArgument argument)
+        private ArgumentConversionResult Convert(Argument argument)
         {
             if (ShouldCheckArity() &&
                 Parent is { } &&
                 ArgumentArity.Validate(Parent,
-                                       argument,
-                                       argument.Arity.MinimumNumberOfValues,
-                                       argument.Arity.MaximumNumberOfValues) is FailedArgumentConversionResult failedResult)
+                    argument,
+                    argument.Arity.MinimumNumberOfValues,
+                    argument.Arity.MaximumNumberOfValues) is ArgumentConversionResult failed &&
+                    failed is not null) // returns null on success
             {
-                return failedResult;
+                return failed;
             }
 
-            if (argument is Argument arg)
+            if (Parent!.UseDefaultValueFor(argument))
             {
-                if (Parent!.UseDefaultValueFor(argument))
-                {
-                    var argumentResult = new ArgumentResult(arg, Parent);
+                var argumentResult = new ArgumentResult(argument, Parent);
 
-                    var defaultValue = arg.GetDefaultValue(argumentResult);
+                var defaultValue = argument.GetDefaultValue(argumentResult);
 
-                    if (string.IsNullOrEmpty(argumentResult.ErrorMessage))
-                    {
-                        return ArgumentConversionResult.Success(
-                            arg,
-                            defaultValue);
-                    }
-                    else
-                    {
-                        return ArgumentConversionResult.Failure(
-                            arg,
-                            argumentResult.ErrorMessage!);
-                    }
-                }
-
-                if (arg.ConvertArguments is null)
-                {
-                    return argument.Arity.MaximumNumberOfValues switch
-                    {
-                        1 => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).SingleOrDefault()),
-                        _ => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).ToArray())
-                    };
-                }
-
-                if (_conversionResult is not null)
-                {
-                    return _conversionResult;
-                }
-
-                var success = arg.ConvertArguments(this, out var value);
-
-                if (value is ArgumentConversionResult conversionResult)
-                {
-                    return conversionResult;
-                }
-
-                if (success)
+                if (string.IsNullOrEmpty(argumentResult.ErrorMessage))
                 {
                     return ArgumentConversionResult.Success(
-                        arg,
-                        value);
-                }
-
-                if (ErrorMessage is not null)
-                {
-                    return new FailedArgumentConversionResult(arg, ErrorMessage);
-                }
-
-                if (Binder.GetItemTypeIfEnumerable(argument.ValueType) is { } itemType)
-                {
-                    return new FailedArgumentTypeConversionResult(
                         argument,
-                        itemType,
-                        Tokens[0].Value,
-                        LocalizationResources);
+                        defaultValue);
                 }
                 else
                 {
-                    return new FailedArgumentTypeConversionResult(
+                    return ArgumentConversionResult.Failure(
                         argument,
-                        argument.ValueType,
-                        Tokens[0].Value,
-                        LocalizationResources);
+                        argumentResult.ErrorMessage!,
+                        ArgumentConversionResultType.Failed);
                 }
             }
 
-            return argument.Arity.MaximumNumberOfValues switch
+            if (argument.ConvertArguments is null)
             {
-                1 => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).SingleOrDefault()),
-                _ => ArgumentConversionResult.Success(argument, Tokens.Select(t => t.Value).ToArray())
-            };
+                return argument.Arity.MaximumNumberOfValues switch
+                {
+                    1 => ArgumentConversionResult.Success(argument, Tokens.SingleOrDefault()),
+                    _ => ArgumentConversionResult.Success(argument, Tokens)
+                };
+            }
+
+            if (_conversionResult is not null)
+            {
+                return _conversionResult;
+            }
+
+            var success = argument.ConvertArguments(this, out var value);
+
+            if (value is ArgumentConversionResult conversionResult)
+            {
+                return conversionResult;
+            }
+
+            if (success)
+            {
+                return ArgumentConversionResult.Success(argument, value);
+            }
+
+            if (ErrorMessage is not null)
+            {
+                return ArgumentConversionResult.Failure(argument, ErrorMessage, ArgumentConversionResultType.Failed);
+            }
+
+            return new ArgumentConversionResult(
+                argument,
+                argument.ValueType,
+                Tokens[0].Value,
+                LocalizationResources);
 
             bool ShouldCheckArity() => 
                 Parent is not OptionResult { IsImplicit: true };

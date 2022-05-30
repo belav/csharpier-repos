@@ -2,8 +2,10 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Diagnostics;
+using System.Text;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Server.Kestrel.Core;
+using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.InMemory.FunctionalTests.TestTransport;
 using Microsoft.AspNetCore.Testing;
@@ -191,6 +193,32 @@ public class BadHttpRequestTests : LoggedTest
                 await client.Receive("HTTP/1.1 400");
             }
         }
+    }
+
+    [Fact]
+    public async Task BadRequestForHttp2()
+    {
+        await using (var server = new TestServer(context => Task.CompletedTask, new TestServiceContext(LoggerFactory)))
+        {
+            using (var client = server.CreateConnection())
+            {
+                await client.Stream.WriteAsync(Core.Internal.Http2.Http2Connection.ClientPreface.ToArray()).DefaultTimeout();
+
+                var data = await client.Stream.ReadAtLeastLengthAsync(17);
+
+                Assert.Equal(Http1Connection.Http2GoAwayHttp11RequiredBytes.ToArray(), data);
+                Assert.Empty(await client.Stream.ReadUntilEndAsync().DefaultTimeout());
+            }
+        }
+    }
+
+    [Fact]
+    public Task BadRequestForAbsoluteFormTargetWithNonAsciiChars()
+    {
+        return TestBadRequest(
+            $"GET http://localhost/ÿÿÿ HTTP/1.1\r\n",
+            "400 Bad Request",
+            CoreStrings.FormatBadRequest_InvalidRequestTarget_Detail("http://localhost/\\xFF\\xFF\\xFF"));
     }
 
     private class BadRequestEventListener : IObserver<KeyValuePair<string, object>>, IDisposable

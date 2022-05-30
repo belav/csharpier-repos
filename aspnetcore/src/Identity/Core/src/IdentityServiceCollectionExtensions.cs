@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -25,7 +24,7 @@ public static class IdentityServiceCollectionExtensions
         this IServiceCollection services)
         where TUser : class
         where TRole : class
-        => services.AddIdentity<TUser, TRole>(setupAction: null);
+        => services.AddIdentity<TUser, TRole>(setupAction: null!);
 
     /// <summary>
     /// Adds and configures the identity system for the specified User and Role types.

@@ -15,15 +15,16 @@ namespace System.CommandLine.Benchmarks.CommandLine
     [BenchmarkCategory(Categories.CommandLine)]
     public class Perf_Parser_Options_Bare
     {
-        private IEnumerable<Symbol> _testSymbols;
+        private IEnumerable<Option> _testSymbols;
         private string _testSymbolsAsString;
         private Parser _testParser;
 
-        private IEnumerable<Option> GenerateTestOptions(int count, IArgumentArity arity)
+        private IEnumerable<Option> GenerateTestOptions(int count, ArgumentArity arity)
             => Enumerable.Range(0, count)
                          .Select(i =>
-                                     new Option($"-option{i}", arity: arity)
+                                     new Option<string>($"-option{i}")
                                      {
+                                         Arity = arity,
                                          Description = $"Description for -option {i} ...."
                                      }
                          );
@@ -50,7 +51,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
         [Benchmark]
         public Parser ParserFromOptions_Ctor()
         {
-            return Utils.CreateParser(_testSymbols);
+            return _testSymbols.CreateParser();
         }
 
         [GlobalSetup(Target = nameof(ParserFromOptions_Parse))]

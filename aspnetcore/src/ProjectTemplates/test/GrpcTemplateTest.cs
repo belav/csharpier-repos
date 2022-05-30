@@ -34,14 +34,18 @@ public class GrpcTemplateTest : LoggedTest
         }
     }
 
-    [ConditionalFact]
-    [SkipOnHelix("Not supported queues", Queues = "Windows.7.Amd64;Windows.7.Amd64.Open;Windows.81.Amd64.Open;All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
+    [ConditionalTheory]
+    [SkipOnHelix("Not supported queues", Queues = "All.OSX;" + HelixConstants.Windows10Arm64 + HelixConstants.DebianArm64)]
     [SkipOnAlpine("https://github.com/grpc/grpc/issues/18338")]
-    public async Task GrpcTemplate()
+    [InlineData(true)]
+    [InlineData(false)]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41716")]
+    public async Task GrpcTemplate(bool useProgramMain)
     {
-        var project = await ProjectFactory.GetOrCreateProject("grpc", Output);
+        var project = await ProjectFactory.CreateProject(Output);
 
-        var createResult = await project.RunDotNetNewAsync("grpc");
+        var args = useProgramMain ? new[] { ArgConstants.UseProgramMain } : null;
+        var createResult = await project.RunDotNetNewAsync("grpc", args: args);
         Assert.True(0 == createResult.ExitCode, ErrorMessages.GetFailedProcessMessage("create/restore", project, createResult));
 
         var publishResult = await project.RunDotNetPublishAsync();

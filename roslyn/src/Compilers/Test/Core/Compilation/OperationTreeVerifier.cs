@@ -97,17 +97,7 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
             // Type
             LogString(", ");
-            if (operation.Language == LanguageNames.CSharp && operation is NoneOperation)
-            {
-                //TODO: this should be removed!
-                //We need to update the tests to allow Types on NoneOperations
-                //(see: https://github.com/dotnet/roslyn/issues/57531)
-                LogType(null);
-            }
-            else
-            {
-                LogType(operation.Type);
-            }
+            LogType(operation.Type);
 
             // ConstantValue
             if (operation.ConstantValue.HasValue)
@@ -397,9 +387,9 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
 
         private void VisitChildren(IOperation operation)
         {
-            Debug.Assert(operation.Children.All(o => o != null));
+            Debug.Assert(operation.ChildOperations.All(o => o != null));
 
-            var children = operation.Children.ToImmutableArray();
+            var children = operation.ChildOperations.ToImmutableArray();
             if (!children.IsEmpty || operation.Kind != OperationKind.None)
             {
                 VisitArray(children, "Children", logElementCount: true);
@@ -938,6 +928,23 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             VisitArray(operation.Indices, "Indices", logElementCount: true);
         }
 
+        public override void VisitImplicitIndexerReference(IImplicitIndexerReferenceOperation operation)
+        {
+            LogString(nameof(IImplicitIndexerReferenceOperation));
+            LogCommonPropertiesAndNewLine(operation);
+
+            Visit(operation.Instance, "Instance");
+            Visit(operation.Argument, "Argument");
+
+            Indent();
+            LogSymbol(operation.LengthSymbol, $"{nameof(operation.LengthSymbol)}");
+            LogNewLine();
+
+            LogSymbol(operation.IndexerSymbol, $"{nameof(operation.IndexerSymbol)}");
+            LogNewLine();
+            Unindent();
+        }
+
         internal override void VisitPointerIndirectionReference(IPointerIndirectionReferenceOperation operation)
         {
             LogString(nameof(IPointerIndirectionReferenceOperation));
@@ -1333,6 +1340,15 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
         public override void VisitLiteral(ILiteralOperation operation)
         {
             LogString(nameof(ILiteralOperation));
+            LogCommonPropertiesAndNewLine(operation);
+        }
+
+        public override void VisitUTF8String(IUTF8StringOperation operation)
+        {
+            LogString(nameof(IUTF8StringOperation));
+            LogString(" (");
+            LogString(operation.Value);
+            LogString(")");
             LogCommonPropertiesAndNewLine(operation);
         }
 
@@ -1904,6 +1920,29 @@ namespace Microsoft.CodeAnalysis.Test.Utilities
             LogConstant((object)operation.MatchesNull, $", {nameof(operation.MatchesNull)}");
             LogString(")");
             LogNewLine();
+        }
+
+        public override void VisitSlicePattern(ISlicePatternOperation operation)
+        {
+            LogString(nameof(ISlicePatternOperation));
+            LogPatternProperties(operation);
+            LogSymbol(operation.SliceSymbol, $", {nameof(operation.SliceSymbol)}");
+            LogNewLine();
+
+            Visit(operation.Pattern, $"{nameof(operation.Pattern)}");
+        }
+
+        public override void VisitListPattern(IListPatternOperation operation)
+        {
+            LogString(nameof(IListPatternOperation));
+            LogPatternProperties(operation);
+            LogSymbol(operation.DeclaredSymbol, $", {nameof(operation.DeclaredSymbol)}");
+            LogSymbol(operation.LengthSymbol, $", {nameof(operation.LengthSymbol)}");
+            LogSymbol(operation.IndexerSymbol, $", {nameof(operation.IndexerSymbol)}");
+            LogString(")");
+            LogNewLine();
+
+            VisitArray(operation.Patterns, $"{nameof(operation.Patterns)} ", true, true);
         }
 
         public override void VisitRecursivePattern(IRecursivePatternOperation operation)

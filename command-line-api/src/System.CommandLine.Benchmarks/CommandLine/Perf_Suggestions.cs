@@ -29,7 +29,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
 
         private IEnumerable<Option> GenerateOptionsArray(int count)
             => Enumerable.Range(0, count)
-                         .Select(i => new Option($"suggestion{i}"));
+                         .Select(i => new Option<string>($"suggestion{i}"));
 
         [Params(1, 5, 20, 100)]
         public int TestSuggestionsCount;
@@ -37,14 +37,14 @@ namespace System.CommandLine.Benchmarks.CommandLine
         [GlobalSetup(Target = nameof(SuggestionsFromSymbol))]
         public void Setup_FromSymbol()
         {
-            _testSymbol = new Option("--hello", arity: ArgumentArity.ExactlyOne)
-                .AddSuggestions(GenerateSuggestionsArray(TestSuggestionsCount));
+            _testSymbol = new Option<string>("--hello")
+                .AddCompletions(GenerateSuggestionsArray(TestSuggestionsCount));
         }
 
         [Benchmark]
         public void SuggestionsFromSymbol()
         {
-            _testSymbol.GetSuggestions().Consume(new Consumer());
+            _testSymbol.GetCompletions().Consume(new Consumer());
         }
 
         [GlobalSetup(Target = nameof(SuggestionsFromParseResult))]
@@ -63,7 +63,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
         [Benchmark]
         public void SuggestionsFromParseResult()
         {
-            _testParseResult.GetSuggestions("--wrong".Length + 1).Consume(new Consumer());
+            _testParseResult.GetCompletions("--wrong".Length + 1).Consume(new Consumer());
         }
     }
 }

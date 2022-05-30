@@ -1,19 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.IO.Pipelines;
 using System.Net.Http;
 using System.Net.Http.HPack;
-using System.Runtime.CompilerServices;
 using System.Security.Authentication;
-using System.Threading;
-using System.Threading.Tasks;
+using System.Text;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -26,9 +21,10 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
 
-internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeadersHandler, IRequestProcessor
+internal sealed partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpStreamHeadersHandler, IRequestProcessor
 {
     public static ReadOnlySpan<byte> ClientPreface => ClientPrefaceBytes;
+    public static byte[]? InvalidHttp1xErrorResponseBytes;
 
     private const PseudoHeaderFields _mandatoryRequestPseudoHeaderFields =
         PseudoHeaderFields.Method | PseudoHeaderFields.Path | PseudoHeaderFields.Scheme;
@@ -44,7 +40,6 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
     private readonly int _minAllocBufferSize;
     private readonly HPackDecoder _hpackDecoder;
     private readonly InputFlowControl _inputFlowControl;
-    private readonly OutputFlowControl _outputFlowControl = new OutputFlowControl(new MultipleAwaitableProvider(), Http2PeerSettings.DefaultInitialWindowSize);
 
     private readonly Http2PeerSettings _serverSettings = new Http2PeerSettings();
     private readonly Http2PeerSettings _clientSettings = new Http2PeerSettings();
@@ -76,6 +71,7 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
     internal readonly Http2KeepAlive? _keepAlive;
     internal readonly Dictionary<int, Http2Stream> _streams = new Dictionary<int, Http2Stream>();
     internal PooledStreamStack<Http2Stream> StreamPool;
+    internal IHttp2StreamLifetimeHandler _streamLifetimeHandler;
 
     public Http2Connection(HttpConnectionContext context)
     {
@@ -83,30 +79,13 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         var http2Limits = httpLimits.Http2;
 
         _context = context;
+        _streamLifetimeHandler = this;
 
         // Capture the ExecutionContext before dispatching HTTP/2 middleware. Will be restored by streams when processing request
         _context.InitialExecutionContext = ExecutionContext.Capture();
 
-        _frameWriter = new Http2FrameWriter(
-            context.Transport.Output,
-            context.ConnectionContext,
-            this,
-            _outputFlowControl,
-            context.TimeoutControl,
-            httpLimits.MinResponseDataRate,
-            context.ConnectionId,
-            context.MemoryPool,
-            context.ServiceContext);
+        _input = new Pipe(GetInputPipeOptions());
 
-        var inputOptions = new PipeOptions(pool: context.MemoryPool,
-            readerScheduler: context.ServiceContext.Scheduler,
-            writerScheduler: PipeScheduler.Inline,
-            pauseWriterThreshold: 1,
-            resumeWriterThreshold: 1,
-            minimumSegmentSize: context.MemoryPool.GetMinimumSegmentSize(),
-            useSynchronizationContext: false);
-
-        _input = new Pipe(inputOptions);
         _minAllocBufferSize = context.MemoryPool.GetMinimumAllocSize();
 
         _hpackDecoder = new HPackDecoder(http2Limits.HeaderTableSize, http2Limits.MaxRequestHeaderFieldSize);
@@ -133,7 +112,18 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
 
         _scheduleInline = context.ServiceContext.Scheduler == PipeScheduler.Inline;
 
-        _inputTask = ReadInputAsync();
+        _inputTask = CopyPipeAsync(_context.Transport.Input, _input.Writer);
+
+        _frameWriter = new Http2FrameWriter(
+            context.Transport.Output,
+            context.ConnectionContext,
+            this,
+            (int)Math.Min(MaxTrackedStreams, int.MaxValue),
+            context.TimeoutControl,
+            httpLimits.MinResponseDataRate,
+            context.ConnectionId,
+            context.MemoryPool,
+            context.ServiceContext);
     }
 
     public string ConnectionId => _context.ConnectionId;
@@ -387,6 +377,7 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
                 Input.Complete();
                 _context.Transport.Input.CancelPendingRead();
                 await _inputTask;
+                await _frameWriter.ShutdownAsync();
             }
         }
     }
@@ -408,8 +399,40 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         }
     }
 
+    [Flags]
+    private enum ReadPrefaceState
+    {
+        None = 0,
+        Preface = 1,
+        Http1x = 2,
+        All = Preface | Http1x
+    }
+
     private async Task<bool> TryReadPrefaceAsync()
     {
+        // HTTP/1.x and HTTP/2 support connections without TLS. That means ALPN hasn't been used to ensure both sides are
+        // using the same protocol. A common problem is someone using HTTP/1.x to talk to a HTTP/2 only endpoint.
+        //
+        // HTTP/2 starts a connection with a preface. This method reads and validates it. If the connection doesn't start
+        // with the preface, and it isn't using TLS, then we attempt to detect what the client is trying to do and send
+        // back a friendly error message.
+        //
+        // Outcomes from this method:
+        // 1. Successfully read HTTP/2 preface. Connection continues to be established.
+        // 2. Detect HTTP/1.x request. Send back HTTP/1.x 400 response.
+        // 3. Unknown content. Report HTTP/2 PROTOCOL_ERROR to client.
+        // 4. Timeout while waiting for content.
+        //
+        // Future improvement: Detect TLS frame. Useful for people starting TLS connection with a non-TLS endpoint.
+        var state = ReadPrefaceState.All;
+
+        // With TLS, ALPN should have already errored if the wrong HTTP version is used.
+        // Only perform additional validation if endpoint doesn't use TLS.
+        if (ConnectionFeatures.Get<ITlsHandshakeFeature>() != null)
+        {
+            state ^= ReadPrefaceState.Http1x;
+        }
+
         while (_isClosed == 0)
         {
             var result = await Input.ReadAsync();
@@ -421,9 +444,55 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
             {
                 if (!readableBuffer.IsEmpty)
                 {
-                    if (ParsePreface(readableBuffer, out consumed, out examined))
+                    if (state.HasFlag(ReadPrefaceState.Preface))
                     {
-                        return true;
+                        if (readableBuffer.Length >= ClientPreface.Length)
+                        {
+                            if (IsPreface(readableBuffer, out consumed, out examined))
+                            {
+                                return true;
+                            }
+                            else
+                            {
+                                state ^= ReadPrefaceState.Preface;
+                            }
+                        }
+                    }
+
+                    if (state.HasFlag(ReadPrefaceState.Http1x))
+                    {
+                        if (ParseHttp1x(readableBuffer, out var detectedVersion))
+                        {
+                            if (detectedVersion == HttpVersion.Http10 || detectedVersion == HttpVersion.Http11)
+                            {
+                                Log.PossibleInvalidHttpVersionDetected(ConnectionId, HttpVersion.Http2, detectedVersion);
+
+                                var responseBytes = InvalidHttp1xErrorResponseBytes ??= Encoding.ASCII.GetBytes(
+                                    "HTTP/1.1 400 Bad Request\r\n" +
+                                    "Connection: close\r\n" +
+                                    "Content-Type: text/plain\r\n" +
+                                    "Content-Length: 56\r\n" +
+                                    "\r\n" +
+                                    "An HTTP/1.x request was sent to an HTTP/2 only endpoint.");
+
+                                await _context.Transport.Output.WriteAsync(responseBytes);
+
+                                // Close connection here so a GOAWAY frame isn't written.
+                                TryClose();
+
+                                return false;
+                            }
+                            else
+                            {
+                                state ^= ReadPrefaceState.Http1x;
+                            }
+                        }
+                    }
+
+                    // Tested all states. Return HTTP/2 protocol error.
+                    if (state == ReadPrefaceState.None)
+                    {
+                        throw new Http2ConnectionErrorException(CoreStrings.Http2ErrorInvalidPreface, Http2ErrorCode.PROTOCOL_ERROR);
                     }
                 }
 
@@ -443,22 +512,44 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         return false;
     }
 
-    private static bool ParsePreface(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
+    private bool ParseHttp1x(ReadOnlySequence<byte> buffer, out HttpVersion httpVersion)
+    {
+        httpVersion = HttpVersion.Unknown;
+
+        var reader = new SequenceReader<byte>(buffer.Length > Limits.MaxRequestLineSize ? buffer.Slice(0, Limits.MaxRequestLineSize) : buffer);
+        if (reader.TryReadTo(out ReadOnlySpan<byte> requestLine, (byte)'\n'))
+        {
+            // Line should be long enough for HTTP/1.X and end with \r\n
+            if (requestLine.Length > 10 && requestLine[requestLine.Length - 1] == (byte)'\r')
+            {
+                httpVersion = HttpUtilities.GetKnownVersion(requestLine.Slice(requestLine.Length - 9, 8));
+            }
+
+            return true;
+        }
+
+        // Couldn't find newline within max request line size so this isn't valid HTTP/1.x.
+        if (buffer.Length > Limits.MaxRequestLineSize)
+        {
+            return true;
+        }
+
+        return false;
+    }
+
+    private static bool IsPreface(in ReadOnlySequence<byte> buffer, out SequencePosition consumed, out SequencePosition examined)
     {
         consumed = buffer.Start;
         examined = buffer.End;
 
-        if (buffer.Length < ClientPreface.Length)
-        {
-            return false;
-        }
+        Debug.Assert(buffer.Length >= ClientPreface.Length, "Not enough content to match preface.");
 
         var preface = buffer.Slice(0, ClientPreface.Length);
         var span = preface.ToSpan();
 
         if (!span.SequenceEqual(ClientPreface))
         {
-            throw new Http2ConnectionErrorException(CoreStrings.Http2ErrorInvalidPreface, Http2ErrorCode.PROTOCOL_ERROR);
+            return false;
         }
 
         consumed = examined = preface.End;
@@ -663,12 +754,11 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
             _context.LocalEndPoint,
             _context.RemoteEndPoint,
             _incomingFrame.StreamId,
-            streamLifetimeHandler: this,
+            _streamLifetimeHandler,
             _clientSettings,
             _serverSettings,
             _frameWriter,
-            _inputFlowControl,
-            _outputFlowControl);
+            _inputFlowControl);
         streamContext.TimeoutControl = _context.TimeoutControl;
         streamContext.InitialExecutionContext = _context.InitialExecutionContext;
 
@@ -983,6 +1073,8 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
 
             if (endHeaders)
             {
+                _currentHeadersStream.OnHeadersComplete();
+
                 StartStream();
                 ResetRequestHeaderParsingState();
             }
@@ -1265,7 +1357,12 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
 
     public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
-        OnHeaderCore(index: null, indexedValue: false, name, value);
+        OnHeaderCore(HeaderType.NameAndValue, staticTableIndex: null, name, value);
+    }
+
+    public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        OnHeaderCore(HeaderType.Dynamic, index, name, value);
     }
 
     public void OnStaticIndexedHeader(int index)
@@ -1273,20 +1370,28 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         Debug.Assert(index <= H2StaticTable.Count);
 
         ref readonly var entry = ref H2StaticTable.Get(index - 1);
-        OnHeaderCore(index, indexedValue: true, entry.Name, entry.Value);
+        OnHeaderCore(HeaderType.Static, index, entry.Name, entry.Value);
     }
 
     public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
     {
         Debug.Assert(index <= H2StaticTable.Count);
 
-        OnHeaderCore(index, indexedValue: false, H2StaticTable.Get(index - 1).Name, value);
+        OnHeaderCore(HeaderType.StaticAndValue, index, H2StaticTable.Get(index - 1).Name, value);
+    }
+
+    private enum HeaderType
+    {
+        Static,
+        StaticAndValue,
+        Dynamic,
+        NameAndValue
     }
 
     // We can't throw a Http2StreamErrorException here, it interrupts the header decompression state and may corrupt subsequent header frames on other streams.
     // For now these either need to be connection errors or BadRequests. If we want to downgrade any of them to stream errors later then we need to
     // rework the flow so that the remaining headers are drained and the decompression state is maintained.
-    private void OnHeaderCore(int? index, bool indexedValue, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    private void OnHeaderCore(HeaderType headerType, int? staticTableIndex, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
         Debug.Assert(_currentHeadersStream != null);
 
@@ -1298,32 +1403,59 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
             throw new Http2ConnectionErrorException(CoreStrings.BadRequest_HeadersExceedMaxTotalSize, Http2ErrorCode.PROTOCOL_ERROR);
         }
 
-        if (index != null)
-        {
-            ValidateStaticHeader(index.Value, value);
-        }
-        else
-        {
-            ValidateHeader(name, value);
-        }
-
         try
         {
             if (_requestHeaderParsingState == RequestHeaderParsingState.Trailers)
             {
+                // Just use name + value bytes and do full validation for request trailers.
+                // Potential performance improvement here to check for indexed headers and optimize validation.
+                UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
+                ValidateHeaderContent(name, value);
+
                 _currentHeadersStream.OnTrailer(name, value);
             }
             else
             {
                 // Throws BadRequest for header count limit breaches.
                 // Throws InvalidOperation for bad encoding.
-                if (index != null)
+                switch (headerType)
                 {
-                    _currentHeadersStream.OnHeader(index.Value, indexedValue, name, value);
-                }
-                else
-                {
-                    _currentHeadersStream.OnHeader(name, value, checkForNewlineChars : true);
+                    case HeaderType.Static:
+                        UpdateHeaderParsingState(value, GetPseudoHeaderField(staticTableIndex.GetValueOrDefault()));
+
+                        _currentHeadersStream.OnHeader(staticTableIndex.GetValueOrDefault(), indexOnly: true, name, value);
+                        break;
+                    case HeaderType.StaticAndValue:
+                        UpdateHeaderParsingState(value, GetPseudoHeaderField(staticTableIndex.GetValueOrDefault()));
+
+                        // Value is new will get validated (i.e. check value doesn't contain newlines)
+                        _currentHeadersStream.OnHeader(staticTableIndex.GetValueOrDefault(), indexOnly: false, name, value);
+                        break;
+                    case HeaderType.Dynamic:
+                        // It is faster to set a header using a static table index than a name.
+                        if (staticTableIndex != null)
+                        {
+                            UpdateHeaderParsingState(value, GetPseudoHeaderField(staticTableIndex.GetValueOrDefault()));
+
+                            _currentHeadersStream.OnHeader(staticTableIndex.GetValueOrDefault(), indexOnly: false, name, value);
+                        }
+                        else
+                        {
+                            UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
+
+                            _currentHeadersStream.OnHeader(name, value, checkForNewlineChars: false);
+                        }
+                        break;
+                    case HeaderType.NameAndValue:
+                        UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
+
+                        // Header and value are new and will get validated (i.e. check name is lower-case, check value doesn't contain newlines)
+                        ValidateHeaderContent(name, value);
+                        _currentHeadersStream.OnHeader(name, value, checkForNewlineChars: true);
+                        break;
+                    default:
+                        Debug.Fail($"Unexpected header type: {headerType}");
+                        break;
                 }
             }
         }
@@ -1340,12 +1472,8 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
     public void OnHeadersComplete(bool endStream)
         => _currentHeadersStream!.OnHeadersComplete();
 
-    private void ValidateHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    private void ValidateHeaderContent(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
-        // Clients will normally send pseudo headers as an indexed header.
-        // Because pseudo headers can still be sent by name we need to check for them.
-        UpdateHeaderParsingState(value, GetPseudoHeaderField(name));
-
         if (IsConnectionSpecificHeaderField(name, value))
         {
             throw new Http2ConnectionErrorException(CoreStrings.HttpErrorConnectionSpecificHeaderField, Http2ErrorCode.PROTOCOL_ERROR);
@@ -1367,33 +1495,6 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
                 }
             }
         }
-    }
-
-    private void ValidateStaticHeader(int index, ReadOnlySpan<byte> value)
-    {
-        var headerField = index switch
-        {
-            1 => PseudoHeaderFields.Authority,
-            2 => PseudoHeaderFields.Method,
-            3 => PseudoHeaderFields.Method,
-            4 => PseudoHeaderFields.Path,
-            5 => PseudoHeaderFields.Path,
-            6 => PseudoHeaderFields.Scheme,
-            7 => PseudoHeaderFields.Scheme,
-            8 => PseudoHeaderFields.Status,
-            9 => PseudoHeaderFields.Status,
-            10 => PseudoHeaderFields.Status,
-            11 => PseudoHeaderFields.Status,
-            12 => PseudoHeaderFields.Status,
-            13 => PseudoHeaderFields.Status,
-            14 => PseudoHeaderFields.Status,
-            _ => PseudoHeaderFields.None
-        };
-
-        UpdateHeaderParsingState(value, headerField);
-
-        // http://httpwg.org/specs/rfc7540.html#rfc.section.8.1.2
-        // No need to validate if header name if it is specified using a static index.
     }
 
     private void UpdateHeaderParsingState(ReadOnlySpan<byte> value, PseudoHeaderFields headerField)
@@ -1464,6 +1565,32 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         }
     }
 
+    private static PseudoHeaderFields GetPseudoHeaderField(int staticTableIndex)
+    {
+        Debug.Assert(staticTableIndex > 0, "Static table starts at 1.");
+
+        var headerField = staticTableIndex switch
+        {
+            1 => PseudoHeaderFields.Authority,
+            2 => PseudoHeaderFields.Method,
+            3 => PseudoHeaderFields.Method,
+            4 => PseudoHeaderFields.Path,
+            5 => PseudoHeaderFields.Path,
+            6 => PseudoHeaderFields.Scheme,
+            7 => PseudoHeaderFields.Scheme,
+            8 => PseudoHeaderFields.Status,
+            9 => PseudoHeaderFields.Status,
+            10 => PseudoHeaderFields.Status,
+            11 => PseudoHeaderFields.Status,
+            12 => PseudoHeaderFields.Status,
+            13 => PseudoHeaderFields.Status,
+            14 => PseudoHeaderFields.Status,
+            _ => PseudoHeaderFields.None
+        };
+
+        return headerField;
+    }
+
     private static PseudoHeaderFields GetPseudoHeaderField(ReadOnlySpan<byte> name)
     {
         if (name.IsEmpty || name[0] != (byte)':')
@@ -1522,16 +1649,21 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         Interlocked.Decrement(ref _clientActiveStreamCount);
     }
 
-    private async Task ReadInputAsync()
+    private PipeOptions GetInputPipeOptions() => new PipeOptions(pool: _context.MemoryPool,
+            readerScheduler: _context.ServiceContext.Scheduler,
+            writerScheduler: PipeScheduler.Inline,
+            pauseWriterThreshold: 1,
+            resumeWriterThreshold: 1,
+            minimumSegmentSize: _context.MemoryPool.GetMinimumSegmentSize(),
+            useSynchronizationContext: false);
+
+    private async Task CopyPipeAsync(PipeReader reader, PipeWriter writer)
     {
         Exception? error = null;
         try
         {
             while (true)
             {
-                var reader = _context.Transport.Input;
-                var writer = _input.Writer;
-
                 var readResult = await reader.ReadAsync();
 
                 if ((readResult.IsCompleted && readResult.Buffer.Length == 0) || readResult.IsCanceled)
@@ -1547,10 +1679,11 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
 
                 bufferSlice.CopyTo(outputBuffer.Span);
 
-                reader.AdvanceTo(bufferSlice.End);
                 writer.Advance(copyAmount);
 
                 var result = await writer.FlushAsync();
+
+                reader.AdvanceTo(bufferSlice.End);
 
                 if (result.IsCompleted || result.IsCanceled)
                 {
@@ -1566,8 +1699,8 @@ internal partial class Http2Connection : IHttp2StreamLifetimeHandler, IHttpHeade
         }
         finally
         {
-            await _context.Transport.Input.CompleteAsync();
-            _input.Writer.Complete(error);
+            await reader.CompleteAsync(error);
+            await writer.CompleteAsync(error);
         }
     }
 

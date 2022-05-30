@@ -1,15 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Runtime.InteropServices;
 using System.Security.Claims;
 using System.Security.Principal;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Logging;
@@ -22,6 +19,7 @@ namespace Microsoft.AspNetCore.Authentication.Negotiate;
 /// <summary>
 /// Authenticates requests using Negotiate, Kerberos, or NTLM.
 /// </summary>
+[RequiresUnreferencedCode("Negotiate authentication uses types that cannot be statically analyzed.")]
 public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthenticationRequestHandler
 {
     private const string AuthPersistenceKey = nameof(AuthPersistence);
@@ -186,8 +184,8 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
             {
                 Response.OnStarting(() =>
                 {
-                        // Only include it if the response ultimately succeeds. This avoids adding it twice if Challenge is called again.
-                        if (Response.StatusCode < StatusCodes.Status400BadRequest)
+                    // Only include it if the response ultimately succeeds. This avoids adding it twice if Challenge is called again.
+                    if (Response.StatusCode < StatusCodes.Status400BadRequest)
                     {
                         Response.Headers.Append(HeaderNames.WWWAuthenticate, AuthHeaderPrefix + outgoing);
                     }
@@ -420,7 +418,7 @@ public class NegotiateHandler : AuthenticationHandler<NegotiateOptions>, IAuthen
     }
 
     // This allows us to have one disposal registration per connection and limits churn on the Items collection.
-    private class AuthPersistence : IDisposable
+    private sealed class AuthPersistence : IDisposable
     {
         internal INegotiateState? State { get; set; }
 

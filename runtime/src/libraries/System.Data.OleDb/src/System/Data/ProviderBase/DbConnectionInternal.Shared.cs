@@ -486,7 +486,7 @@ namespace System.Data.ProviderBase
             // ?->Connecting: prevent set_ConnectionString during Open
             if (connectionFactory.SetInnerConnectionFrom(outerConnection, DbConnectionClosedConnecting.SingletonInstance, this))
             {
-                DbConnectionInternal? openConnection = null;
+                DbConnectionInternal? openConnection;
                 try
                 {
                     connectionFactory.PermissionDemand(outerConnection);
@@ -497,7 +497,7 @@ namespace System.Data.ProviderBase
                 }
                 catch
                 {
-                    // This should occure for all exceptions, even ADP.UnCatchableExceptions.
+                    // This should occur for all exceptions, even ADP.UnCatchableExceptions.
                     connectionFactory.SetInnerConnectionTo(outerConnection, this);
                     throw;
                 }

@@ -4,10 +4,13 @@
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
-/// A collection of constants for HTTP status codes.
-///
-/// Status Codes listed at http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml
+/// A collection of constants for
+/// <see href="http://www.iana.org/assignments/http-status-codes/http-status-codes.xhtml" >HTTP status codes</see >.
 /// </summary>
+/// <remarks>
+/// Descriptions for status codes are available from
+/// <see cref="M:Microsoft.AspNetCore.WebUtilitiesReasonPhrases.GetReasonPhrase(Int32)" />.
+/// </remarks>
 public static class StatusCodes
 {
     /// <summary>
@@ -123,7 +126,6 @@ public static class StatusCodes
     /// <summary>
     /// HTTP status code 400.
     /// </summary>
-
     public const int Status400BadRequest = 400;
 
     /// <summary>
@@ -284,7 +286,6 @@ public static class StatusCodes
     /// <summary>
     /// HTTP status code 500.
     /// </summary>
-
     public const int Status500InternalServerError = 500;
 
     /// <summary>

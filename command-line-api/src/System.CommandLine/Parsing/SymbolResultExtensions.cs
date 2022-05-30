@@ -25,18 +25,17 @@ namespace System.CommandLine.Parsing
             return symbolResult switch
             {
                 CommandResult commandResult => commandResult.Token,
-                OptionResult optionResult => optionResult.Token ??
-                                             CreateImplicitToken(optionResult.Option),
+                OptionResult optionResult => optionResult.Token ?? CreateImplicitToken(optionResult.Option),
                 _ => throw new ArgumentOutOfRangeException(nameof(symbolResult))
             };
 
-            Token CreateImplicitToken(IOption option)
+            Token CreateImplicitToken(Option option)
             {
                 var optionName = option.Name;
 
                 var defaultAlias = option.Aliases.First(alias => alias.RemovePrefix() == optionName);
 
-                return new ImplicitToken(defaultAlias, TokenType.Option);
+                return new Token(defaultAlias, TokenType.Option, option, Parsing.Token.ImplicitPosition);
             }
         }
     }

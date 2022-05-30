@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Diagnostics;
 using System.Text;
 using Microsoft.Extensions.Logging;
@@ -10,7 +9,7 @@ using Microsoft.JSInterop.WebAssembly;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 
-internal class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
+internal sealed class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
 {
     private const string _loglevelPadding = ": ";
     private static readonly string _messagePadding = new(' ', GetLogLevelString(LogLevel.Information).Length + _loglevelPadding.Length);
@@ -31,7 +30,7 @@ internal class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
         _jsRuntime = jsRuntime ?? throw new ArgumentNullException(nameof(jsRuntime));
     }
 
-    public IDisposable BeginScope<TState>(TState state)
+    public IDisposable? BeginScope<TState>(TState state) where TState : notnull
     {
         return NoOpDisposable.Instance;
     }
@@ -107,7 +106,7 @@ internal class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
         }
     }
 
-    private void CreateDefaultLogMessage(StringBuilder logBuilder, LogLevel logLevel, string logName, int eventId, string message, Exception? exception)
+    private static void CreateDefaultLogMessage(StringBuilder logBuilder, LogLevel logLevel, string logName, int eventId, string message, Exception? exception)
     {
         logBuilder.Append(GetLogLevelString(logLevel));
         logBuilder.Append(_loglevelPadding);
@@ -159,7 +158,7 @@ internal class WebAssemblyConsoleLogger<T> : ILogger<T>, ILogger
         }
     }
 
-    private class NoOpDisposable : IDisposable
+    private sealed class NoOpDisposable : IDisposable
     {
         public static NoOpDisposable Instance = new NoOpDisposable();
 

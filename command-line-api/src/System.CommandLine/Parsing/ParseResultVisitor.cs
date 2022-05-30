@@ -8,20 +8,22 @@ using System.Linq;
 
 namespace System.CommandLine.Parsing
 {
-    internal class ParseResultVisitor : SyntaxVisitor
+    internal sealed class ParseResultVisitor
     {
         private readonly Parser _parser;
         private readonly TokenizeResult _tokenizeResult;
         private readonly string? _rawInput;
 
         private readonly DirectiveCollection _directives = new();
-        private readonly List<Token> _unparsedTokens;
-        private readonly List<Token> _unmatchedTokens;
+        private List<Token>? _unparsedTokens;
+        private readonly List<Token>? _unmatchedTokens;
         private readonly List<ParseError> _errors;
 
-        private readonly Dictionary<IArgument, ArgumentResult> _allArgumentResults = new();
-        private readonly Dictionary<ICommand, CommandResult> _allCommandResults = new();
-        private readonly Dictionary<IOption, OptionResult> _allOptionResults = new();
+        private readonly Dictionary<Symbol, SymbolResult> _symbolResults = new();
+
+        private readonly List<OptionResult> _optionResults = new();
+        private readonly List<ArgumentResult> _argumentResults = new();
+
         private RootCommandResult? _rootCommandResult;
         private CommandResult? _innermostCommandResult;
         private bool _isHelpRequested;
@@ -29,9 +31,8 @@ namespace System.CommandLine.Parsing
         public ParseResultVisitor(
             Parser parser,
             TokenizeResult tokenizeResult,
-            List<Token> unparsedTokens,
-            List<Token> unmatchedTokens,
-            IReadOnlyCollection<ParseError> parseErrors,
+            List<Token>? unparsedTokens,
+            List<Token>? unmatchedTokens,
             string? rawInput)
         {
             _parser = parser;
@@ -39,51 +40,107 @@ namespace System.CommandLine.Parsing
             _unparsedTokens = unparsedTokens;
             _unmatchedTokens = unmatchedTokens;
             _rawInput = rawInput;
-
-            _errors = new List<ParseError>(_tokenizeResult.Errors.Count + parseErrors.Count);
+            _errors = new List<ParseError>(_tokenizeResult.Errors.Count);
 
             for (var i = 0; i < _tokenizeResult.Errors.Count; i++)
             {
                 var error = _tokenizeResult.Errors[i];
-                _errors.Add(new ParseError(error.Message));
+                _errors.Add(new ParseError(error));
             }
+        }
 
-            _errors.AddRange(parseErrors);
+        public void Visit(SyntaxNode node)
+        {
+            VisitInternal(node);
+
+            Stop();
+        }
+
+        private void VisitInternal(SyntaxNode node)
+        {
+            switch (node)
+            {
+                case DirectiveNode directiveNode:
+                    VisitDirectiveNode(directiveNode);
+
+                    break;
+
+                case CommandNode commandNode:
+                    if (commandNode.Parent is null)
+                    {
+                        VisitRootCommandNode(commandNode);
+                    }
+                    else
+                    {
+                        VisitCommandNode(commandNode);
+                    }
+
+                    for (var i = 0; i < commandNode.Children.Count; i++)
+                    {
+                        VisitInternal(commandNode.Children[i]);
+                    }
+
+                    break;
+
+                case OptionNode optionNode:
+                    VisitOptionNode(optionNode);
+
+                    for (var i = 0; i < optionNode.Children.Count; i++)
+                    {
+                        VisitInternal(optionNode.Children[i]);
+                    }
+
+                    break;
+
+                case CommandArgumentNode commandArgumentNode:
+                    VisitCommandArgumentNode(commandArgumentNode);
+
+                    break;
+
+                case OptionArgumentNode optionArgumentNode:
+                    VisitOptionArgumentNode(optionArgumentNode);
+
+                    break;
+            }
         }
 
         private void AddToResult(CommandResult result)
         {
-            _innermostCommandResult?.Children.Add(result);
-            _allCommandResults.Add(result.Command, result);
+            _innermostCommandResult?.AddChild(result);
+            _symbolResults.Add(result.Command, result);
         }
 
         private void AddToResult(OptionResult result)
         {
-            _innermostCommandResult?.Children.Add(result);
-            _allOptionResults.Add(result.Option, result);
+            _innermostCommandResult?.AddChild(result);
+            if (_symbolResults.TryAdd(result.Option, result))
+            {
+                _optionResults.Add(result);
+            }
         }
 
         private void AddToResult(ArgumentResult result)
         {
-            _innermostCommandResult?.Children.Add(result);
-            _allArgumentResults.TryAdd(result.Argument, result);
+            _innermostCommandResult?.AddChild(result);
+            if (_symbolResults.TryAdd(result.Argument, result))
+            {
+                _argumentResults.Add(result);
+            }
         }
 
-        protected override void VisitRootCommandNode(RootCommandNode rootCommandNode)
+        private void VisitRootCommandNode(CommandNode rootCommandNode)
         {
             _rootCommandResult = new RootCommandResult(
                 rootCommandNode.Command,
                 rootCommandNode.Token,
-                _allArgumentResults,
-                _allCommandResults,
-                _allOptionResults
-            );
+                _symbolResults);
+
             _rootCommandResult.LocalizationResources = _parser.Configuration.LocalizationResources;
 
             _innermostCommandResult = _rootCommandResult;
         }
 
-        protected override void VisitCommandNode(CommandNode commandNode)
+        private void VisitCommandNode(CommandNode commandNode)
         {
             var commandResult = new CommandResult(
                 commandNode.Command,
@@ -95,11 +152,11 @@ namespace System.CommandLine.Parsing
             _innermostCommandResult = commandResult;
         }
 
-        protected override void VisitCommandArgumentNode(CommandArgumentNode argumentNode)
+        private void VisitCommandArgumentNode(CommandArgumentNode argumentNode)
         {
-            _allArgumentResults.TryGetValue(argumentNode.Argument, out var argumentResult);
+            _symbolResults.TryGetValue(argumentNode.Argument, out var symbolResult);
 
-            if (argumentResult is null)
+            if (symbolResult is not ArgumentResult argumentResult)
             {
                 argumentResult =
                     new ArgumentResult(
@@ -109,15 +166,20 @@ namespace System.CommandLine.Parsing
                 AddToResult(argumentResult);
             }
 
-            argumentResult.AddToken(argumentNode.Token);
-            _innermostCommandResult?.AddToken(argumentNode.Token);
+            var token = argumentNode.Token.Symbol is null
+                            ? new Token(argumentNode.Token.Value, TokenType.Argument, argumentResult.Argument)
+                            : argumentNode.Token;
+
+            argumentResult.AddToken(token);
+
+            _innermostCommandResult?.AddToken(token);
         }
 
-        protected override void VisitOptionNode(OptionNode optionNode)
+        private void VisitOptionNode(OptionNode optionNode)
         {
-            _allOptionResults.TryGetValue(optionNode.Option, out var symbolResult);
+            _symbolResults.TryGetValue(optionNode.Option, out var symbolResult);
 
-            if (symbolResult is null)
+            if (symbolResult is not OptionResult)
             {
                 if (optionNode.Option is HelpOption)
                 {
@@ -133,45 +195,40 @@ namespace System.CommandLine.Parsing
             }
         }
 
-        protected override void VisitOptionArgumentNode(
+        private void VisitOptionArgumentNode(
             OptionArgumentNode argumentNode)
         {
-            _allOptionResults.TryGetValue(
+            _symbolResults.TryGetValue(
                 argumentNode.ParentOptionNode.Option,
                 out var optionResult);
 
-            if (optionResult is null)
+            if (optionResult is not OptionResult)
             {
                 return;
             }
 
             var argument = argumentNode.Argument;
 
-            if (optionResult.FindResultFor(argument) is not { } argumentResult)
+            if (!_symbolResults.TryGetValue(argument, out var argumentResult))
             {
                 argumentResult =
                     new ArgumentResult(
                         argumentNode.Argument,
                         optionResult);
-                optionResult.Children.Add(argumentResult);
-                _allArgumentResults.TryAdd(argumentResult.Argument, argumentResult);
+                optionResult.AddChild(argumentResult);
+                _symbolResults.TryAdd(argument, argumentResult);
             }
 
             argumentResult.AddToken(argumentNode.Token);
             optionResult.AddToken(argumentNode.Token);
         }
 
-        protected override void VisitDirectiveNode(DirectiveNode directiveNode)
+        private void VisitDirectiveNode(DirectiveNode directiveNode)
         {
             _directives.Add(directiveNode.Name, directiveNode.Value);
         }
 
-        protected override void VisitUnknownNode(SyntaxNode node)
-        {
-            _unmatchedTokens.Add(node.Token);
-        }
-
-        protected override void Stop(SyntaxNode node)
+        private void Stop()
         {
             if (_isHelpRequested)
             {
@@ -184,83 +241,80 @@ namespace System.CommandLine.Parsing
 
             ValidateCommandResult();
 
-            foreach (var optionResult in _rootCommandResult!.AllOptionResults)
+            foreach (var optionResult in _optionResults)
             {
                 ValidateAndConvertOptionResult(optionResult);
             }
 
-            var argumentResults = new List<ArgumentResult>();
-            foreach (var result in _rootCommandResult.AllArgumentResults)
+            if (_argumentResults.Count > 0)
             {
-                if (result.Parent is not OptionResult)  
-                {
-                    argumentResults.Add(result);
-                }
+                ValidateAndConvertArgumentResults(_innermostCommandResult!.Command.Arguments, _argumentResults.Count);
             }
+        }
 
-            if (argumentResults.Count > 0)
+        private void ValidateAndConvertArgumentResults(IReadOnlyList<Argument> arguments, int commandArgumentResultCount)
+        {
+            for (var i = 0; i < arguments.Count; i++)
             {
-                var arguments = _innermostCommandResult!.Command.Arguments;
-
-                var commandArgumentResultCount = argumentResults.Count;
-
-                for (var i = 0; i < arguments.Count; i++)
+                // If this is the current last result but there are more arguments, see if we can shift tokens to the next argument
+                if (commandArgumentResultCount == i)
                 {
-                    // If this is the current last result but there are more arguments, see if we can shift tokens to the next argument
-                    if (commandArgumentResultCount == i)
+                    var nextArgument = arguments[i];
+                    var nextArgumentResult = new ArgumentResult(
+                        nextArgument,
+                        _innermostCommandResult);
+
+                    var previousArgumentResult = _argumentResults[i - 1];
+
+                    var passedOnTokensCount = _innermostCommandResult?.Tokens.Count;
+
+                    for (var j = previousArgumentResult.Tokens.Count; j < passedOnTokensCount; j++)
                     {
-                        var nextArgument = arguments[i];
-                        var nextArgumentResult = new ArgumentResult(
-                            nextArgument,
-                            _innermostCommandResult);
-
-                        var previousArgumentResult = argumentResults[i - 1];
-
-                        var passedOnTokensCount = _innermostCommandResult?.Tokens.Count;
-
-                        for (var j = previousArgumentResult.Tokens.Count; j < passedOnTokensCount; j++)
+                        if (nextArgumentResult.IsArgumentLimitReached)
                         {
-                            if (nextArgumentResult.IsArgumentLimitReached)
-                            {
-                                break;
-                            }
-
-                            var token = _innermostCommandResult?.Tokens[j];
-
-                            nextArgumentResult.AddToken(token!);
+                            break;
                         }
 
-                        argumentResults.Add(nextArgumentResult);
-
-                        if (previousArgumentResult.Parent is CommandResult)
+                        if (_innermostCommandResult is not null)
                         {
-                            AddToResult(nextArgumentResult);
+                            nextArgumentResult.AddToken(_innermostCommandResult.Tokens[j]);
                         }
-
-                        _rootCommandResult.AddToSymbolMap(nextArgumentResult);
                     }
 
-                    var argumentResult = argumentResults[i];
+                    _argumentResults.Add(nextArgumentResult);
+
+                    if (previousArgumentResult.Parent is CommandResult)
+                    {
+                        AddToResult(nextArgumentResult);
+                    }
+
+                    _symbolResults.TryAdd(nextArgumentResult.Symbol, nextArgumentResult);
+                }
+
+                if (commandArgumentResultCount >= _argumentResults.Count)
+                {
+                    var argumentResult = _argumentResults[i];
 
                     ValidateAndConvertArgumentResult(argumentResult);
 
                     if (argumentResult.PassedOnTokens is { } &&
                         i == arguments.Count - 1)
                     {
+                        _unparsedTokens ??= new List<Token>();
                         _unparsedTokens.AddRange(argumentResult.PassedOnTokens);
                     }
                 }
+            }
 
-                if (argumentResults.Count > arguments.Count)
+            if (_argumentResults.Count > arguments.Count)
+            {
+                for (var i = arguments.Count; i < _argumentResults.Count - 1; i++)
                 {
-                    for (var i = arguments.Count; i < argumentResults.Count; i++)
-                    {
-                        var result = argumentResults[i];
+                    var result = _argumentResults[i];
 
-                        if (result.Parent is CommandResult)
-                        {
-                            ValidateAndConvertArgumentResult(result);
-                        }
+                    if (result.Parent is CommandResult)
+                    {
+                        ValidateAndConvertArgumentResult(result);
                     }
                 }
             }
@@ -268,69 +322,89 @@ namespace System.CommandLine.Parsing
 
         private void ValidateCommandResult()
         {
-            if (_innermostCommandResult!.Command is Command command)
-            {
-                for (var i = 0; i < command.Validators.Count; i++)
-                {
-                    var validator = command.Validators[i];
-                    var errorMessage = validator(_innermostCommandResult);
+            var command = _innermostCommandResult!.Command;
 
-                    if (!string.IsNullOrWhiteSpace(errorMessage))
+            if (command.HasValidators && UseValidators(command, _innermostCommandResult))
+            {
+                return;
+            }
+
+            bool checkOnlyGlobalOptions = false;
+            Command? currentCommand = command;
+            while (currentCommand is not null)
+            {
+                var options = currentCommand.Options;
+                for (var i = 0; i < options.Count; i++)
+                {
+                    var option = options[i];
+                    if (option.IsRequired && (!checkOnlyGlobalOptions || (checkOnlyGlobalOptions && option.IsGlobal)))
                     {
-                        _errors.Add(
-                            new ParseError(errorMessage!, _innermostCommandResult));
+                        if (_rootCommandResult!.FindResultFor(option) is null)
+                        {
+                            AddErrorToResult(
+                                _innermostCommandResult,
+                                new ParseError($"Option '{option.Aliases.First()}' is required.",
+                                               _innermostCommandResult));
+                        }
                     }
                 }
+
+                currentCommand = currentCommand.FirstParent?.Symbol as Command;
+                checkOnlyGlobalOptions = true;
             }
 
-            var options = _innermostCommandResult.Command.Options;
-
-            for (var i = 0;
-                i < options.Count;
-                i++)
+            if (command.HasArguments)
             {
-                var option = options[i];
+                ValidateArguments(command.Arguments, _innermostCommandResult);
+            }
+        }
 
-                if (option is Option o &&
-                    o.IsRequired &&
-                    _rootCommandResult!.FindResultFor(o) is null)
+        private bool UseValidators(Command command, CommandResult innermostCommandResult)
+        {
+            for (var i = 0; i < command.Validators.Count; i++)
+            {
+                var validateSymbolResult = command.Validators[i];
+                validateSymbolResult(innermostCommandResult);
+
+                if (!string.IsNullOrWhiteSpace(innermostCommandResult.ErrorMessage))
                 {
-                    _errors.Add(
-                        new ParseError($"Option '{o.Aliases.First()}' is required.",
-                                       _innermostCommandResult));
+                    AddErrorToResult(
+                        innermostCommandResult,
+                        new ParseError(innermostCommandResult.ErrorMessage!, _innermostCommandResult));
+
+                    return true;
                 }
             }
+            return false;
+        }
 
-            var arguments = _innermostCommandResult.Command.Arguments;
-
-            for (var i = 0;
-                i < arguments.Count;
-                i++)
+        private void ValidateArguments(IReadOnlyList<Argument> arguments, CommandResult innermostCommandResult)
+        {
+            for (var i = 0; i < arguments.Count; i++)
             {
                 var symbol = arguments[i];
 
                 var arityFailure = ArgumentArity.Validate(
-                    _innermostCommandResult,
+                    innermostCommandResult,
                     symbol,
                     symbol.Arity.MinimumNumberOfValues,
                     symbol.Arity.MaximumNumberOfValues);
 
                 if (arityFailure is not null)
                 {
-                    _errors.Add(
-                        new ParseError(arityFailure.ErrorMessage!, _innermostCommandResult));
+                    AddErrorToResult(innermostCommandResult, new ParseError(arityFailure.ErrorMessage!, innermostCommandResult));
                 }
             }
         }
 
         private void ValidateCommandHandler()
         {
-            if (_innermostCommandResult!.Command is not Command { Handler: null } cmd)
+            if (_innermostCommandResult!.Command is not { Handler: null } cmd)
             {
                 return;
             }
 
-            if (!cmd.Children.HasAnyOfType<ICommand>())
+            if (cmd.Subcommands.Count == 0)
             {
                 return;
             }
@@ -354,32 +428,34 @@ namespace System.CommandLine.Parsing
 
             if (arityFailure is { })
             {
-                _errors.Add(
-                    new ParseError(arityFailure.ErrorMessage!, optionResult));
+                AddErrorToResult(optionResult, new ParseError(arityFailure.ErrorMessage!, optionResult));
+                return;
             }
 
-            if (optionResult.Option is Option option)
+            if (optionResult.Option.HasValidators)
             {
-                for (var i = 0; i < option.Validators.Count; i++)
+                for (var i = 0; i < optionResult.Option.Validators.Count; i++)
                 {
-                    var validate = option.Validators[i];
-                    var message = validate(optionResult);
+                    var validate = optionResult.Option.Validators[i];
+                    validate(optionResult);
 
-                    if (!string.IsNullOrWhiteSpace(message))
+                    if (!string.IsNullOrWhiteSpace(optionResult.ErrorMessage))
                     {
-                        _errors.Add(new ParseError(message!, optionResult));
+                        AddErrorToResult(optionResult, new ParseError(optionResult.ErrorMessage!, optionResult));
+
+                        return;
                     }
                 }
             }
 
             if (optionResult.Children.Count == 0)
             {
-                if (optionResult.Option.Argument is Argument { HasCustomParser: true })
+                if (optionResult.Option.Argument is { HasCustomParser: true })
                 {
-                    if (optionResult.Option is Option opt)
+                    if (optionResult.Option is { } opt)
                     {
                         var argResult = optionResult.GetOrCreateDefaultArgumentResult(opt.Argument);
-                        optionResult.Children.Add(argResult);
+                        optionResult.AddChild(argResult);
                         ValidateAndConvertArgumentResult(argResult);
                     }
                 }
@@ -399,86 +475,125 @@ namespace System.CommandLine.Parsing
 
         private void ValidateAndConvertArgumentResult(ArgumentResult argumentResult)
         {
-            if (argumentResult.Argument is Argument argument)
-            {
-                var parseError =
-                    argumentResult.Parent?.UnrecognizedArgumentError(argument) ??
-                    argumentResult.CustomError(argument);
+            var argument = argumentResult.Argument;
 
-                if (parseError is { })
-                {
-                    _errors.Add(parseError);
-                    return;
-                }
+            var parseError =
+                argumentResult.Parent?.UnrecognizedArgumentError(argument) ??
+                argumentResult.CustomError(argument);
+
+            if (parseError is { })
+            {
+                AddErrorToResult(argumentResult, parseError);
+                return;
             }
 
-            if (argumentResult.GetArgumentConversionResult() is FailedArgumentConversionResult failed)
+            ArgumentConversionResult argumentConversionResult = argumentResult.GetArgumentConversionResult();
+            if (argumentConversionResult.Result >= ArgumentConversionResultType.Failed
+                && argumentConversionResult.Result !=  ArgumentConversionResultType.FailedArity)
             {
-                _errors.Add(
-                    new ParseError(
-                        failed.ErrorMessage!,
-                        argumentResult));
+                if (argument.FirstParent?.Symbol is Option option)
+                {
+                    var completions = option.GetCompletions().ToArray();
+
+                    if (completions.Length > 0)
+                    {
+                        argumentConversionResult = ArgumentConversionResult.Failure(
+                            argumentConversionResult.Argument,
+                            argumentConversionResult.ErrorMessage + " Did you mean one of the following?" + Environment.NewLine + string.Join(Environment.NewLine, completions.Select(c => c.Label)),
+                            argumentConversionResult.Result);
+                    }
+                }
+
+                AddErrorToResult(argumentResult, new ParseError(argumentConversionResult.ErrorMessage!, argumentResult));
             }
         }
 
         private void PopulateDefaultValues()
         {
             CommandResult? commandResult = _innermostCommandResult;
-
+            
             while (commandResult is { })
             {
-                for (var symbolIndex = 0; symbolIndex < commandResult.Command.Children.Count; symbolIndex++)
+                IReadOnlyList<Option> options = commandResult.Command.Options;
+                for (int i = 0; i < options.Count; i++)
                 {
-                    var symbol = commandResult.Command.Children[symbolIndex];
-                    var symbolResult = _rootCommandResult!.FindResultForSymbol(symbol);
+                    Symbol symbol = options[i];
+                    Handle(_rootCommandResult!.FindResultForSymbol(symbol), symbol);
+                }
 
-                    switch (symbolResult)
-                    {
-                        case OptionResult o when o.Option.Argument.ValueType == typeof(bool) && o.Children.Count == 0:
-                            o.Children.Add(
-                                new ArgumentResult(
-                                    o.Option.Argument,
-                                    o));
-                            break;
-
-                        case null:
-                            switch (symbol)
-                            {
-                                case Option option when option.Argument.HasDefaultValue:
-
-                                    var optionResult = new OptionResult(
-                                        option,
-                                        null,
-                                        commandResult);
-
-                                    var childArgumentResult = optionResult.GetOrCreateDefaultArgumentResult(
-                                        option.Argument);
-
-                                    optionResult.Children.Add(childArgumentResult);
-                                    commandResult.Children.Add(optionResult);
-                                    _rootCommandResult.AddToSymbolMap(optionResult);
-
-                                    break;
-
-                                case Argument { HasDefaultValue: true } argument:
-
-                                    var argumentResult = commandResult.GetOrCreateDefaultArgumentResult(argument);
-
-                                    commandResult.Children.Add(argumentResult);
-                                    _rootCommandResult.AddToSymbolMap(argumentResult);
-
-                                    break;
-                            }
-
-                            break;
-                    }
+                IReadOnlyList<Argument> arguments = commandResult.Command.Arguments;
+                for (int i = 0; i < arguments.Count; i++)
+                {
+                    Symbol symbol = arguments[i];
+                    Handle(_rootCommandResult!.FindResultForSymbol(symbol), symbol);
                 }
 
                 commandResult = commandResult.Parent as CommandResult;
             }
+
+            void Handle(SymbolResult? symbolResult, Symbol symbol)
+            {
+                switch (symbolResult)
+                {
+                    case OptionResult o:
+
+                        if (o.Children.Count == 0 &&
+                            o.Option.Argument.ValueType == typeof(bool))
+                        {
+                            o.AddChild(
+                                new ArgumentResult(o.Option.Argument, o));
+                        }
+
+                        break;
+
+                    case null:
+                        switch (symbol)
+                        {
+                            case Option option when option.Argument.HasDefaultValue:
+
+                                var optionResult = new OptionResult(
+                                    option,
+                                    null,
+                                    commandResult);
+
+                                var childArgumentResult = optionResult.GetOrCreateDefaultArgumentResult(
+                                    option.Argument);
+
+                                optionResult.AddChild(childArgumentResult);
+                                commandResult.AddChild(optionResult);
+                                if (_symbolResults.TryAdd(optionResult.Symbol, optionResult))
+                                {
+                                    _optionResults.Add(optionResult);
+                                }
+
+                                break;
+
+                            case Argument { HasDefaultValue: true } argument:
+
+                                var argumentResult = commandResult.GetOrCreateDefaultArgumentResult(argument);
+
+                                AddToResult(argumentResult);
+                                break;
+                        }
+
+                        break;
+                }
+            }
         }
 
-        public ParseResult Result =>
+        private void AddErrorToResult(SymbolResult symbolResult, ParseError parseError)
+        {
+            symbolResult.ErrorMessage ??= parseError.Message;
+
+            if (symbolResult.Parent is OptionResult optionResult)
+            {
+                optionResult.ErrorMessage ??= symbolResult.ErrorMessage;
+            }
+
+            _errors.Add(parseError);
+        }
+
+        public ParseResult GetResult() =>
             new(_parser,
                 _rootCommandResult ?? throw new InvalidOperationException("No root command was found"),
                 _innermostCommandResult ?? throw new InvalidOperationException("No command was found"),

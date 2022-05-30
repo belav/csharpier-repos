@@ -537,7 +537,7 @@ namespace System.Net.Http.Headers
             // We need the string to be at least 3 chars long: 2x quotes and at least 1 character. Also make sure we
             // have a quoted string. Note that NameValueHeaderValue will never have leading/trailing whitespace.
             string valueString = nameValue.Value;
-            if ((valueString.Length < 3) || (valueString[0] != '\"') || (valueString[valueString.Length - 1] != '\"'))
+            if ((valueString.Length < 3) || !valueString.StartsWith('\"') || !valueString.EndsWith('\"'))
             {
                 return false;
             }
@@ -545,12 +545,11 @@ namespace System.Net.Http.Headers
             // We have a quoted string. Now verify that the string contains a list of valid tokens separated by ','.
             int current = 1; // skip the initial '"' character.
             int maxLength = valueString.Length - 1; // -1 because we don't want to parse the final '"'.
-            bool separatorFound = false;
             int originalValueCount = destination == null ? 0 : destination.Count;
             while (current < maxLength)
             {
                 current = HeaderUtilities.GetNextNonEmptyOrWhitespaceIndex(valueString, current, true,
-                    out separatorFound);
+                    out _);
 
                 if (current == maxLength)
                 {

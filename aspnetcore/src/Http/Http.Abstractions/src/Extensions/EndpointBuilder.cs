@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System.Collections.Generic;
 using Microsoft.AspNetCore.Http;
 
 namespace Microsoft.AspNetCore.Builder;
@@ -25,6 +24,11 @@ public abstract class EndpointBuilder
     /// Gets the collection of metadata associated with this endpoint.
     /// </summary>
     public IList<object> Metadata { get; } = new List<object>();
+
+    /// <summary>
+    /// Gets the <see cref="IServiceProvider"/> associated with the endpoint.
+    /// </summary>
+    public IServiceProvider? ServiceProvider { get; set; }
 
     /// <summary>
     /// Creates an instance of <see cref="Endpoint"/> from the <see cref="EndpointBuilder"/>.

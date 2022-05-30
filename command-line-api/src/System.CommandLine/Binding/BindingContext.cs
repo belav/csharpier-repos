@@ -1,10 +1,8 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.Collections.Generic;
 using System.CommandLine.Help;
 using System.CommandLine.Invocation;
-using System.CommandLine.IO;
 using System.CommandLine.Parsing;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
@@ -16,72 +14,36 @@ namespace System.CommandLine.Binding
     /// <summary>
     /// Creates object instances based on command line parser results, injected services, and other value sources.
     /// </summary>
-    public sealed class BindingContext
+    public sealed class BindingContext : IServiceProvider
     {
-        private IConsole _console;
-        private readonly Dictionary<Type, ModelBinder> _modelBindersByValueDescriptor = new();
+        private HelpBuilder? _helpBuilder;
 
-        /// <param name="parseResult">The parse result used for binding to command line input.</param>
-        /// <param name="console">A console instance used for writing output.</param>
-        public BindingContext(
-            ParseResult parseResult,
-            IConsole? console = default)
+        internal BindingContext(InvocationContext invocationContext)
         {
-            _console = console ?? new SystemConsole();
-
-            ParseResult = parseResult ?? throw new ArgumentNullException(nameof(parseResult));
+            InvocationContext = invocationContext;
             ServiceProvider = new ServiceProvider(this);
+            ServiceProvider.AddService(_ => InvocationContext);
+            ServiceProvider.AddService(_ => InvocationContext.GetCancellationToken());
         }
+
+        internal InvocationContext InvocationContext { get; }
 
         /// <summary>
         /// The parse result for the current invocation.
         /// </summary>
-        public ParseResult ParseResult { get; set; }
-
-        internal IConsoleFactory? ConsoleFactory { get; set; }
-
-        internal IHelpBuilder HelpBuilder => (IHelpBuilder)ServiceProvider.GetService(typeof(IHelpBuilder))!;
+        public ParseResult ParseResult => InvocationContext.ParseResult;
+        
+        internal HelpBuilder HelpBuilder => _helpBuilder ??= (HelpBuilder)ServiceProvider.GetService(typeof(HelpBuilder))!;
 
         /// <summary>
         /// The console to which output should be written during the current invocation.
         /// </summary>
-        public IConsole Console
-        {
-            get
-            {
-                if (ConsoleFactory is not null)
-                {
-                    var consoleFactory = ConsoleFactory;
-                    ConsoleFactory = null;
-                    _console = consoleFactory.CreateConsole(this);
-                }
-
-                return _console;
-            }
-        }
+        public IConsole Console => InvocationContext.Console;
 
         internal ServiceProvider ServiceProvider { get; }
 
-        /// <summary>
-        /// Adds a model binder which can be used to bind a specific type.
-        /// </summary>
-        /// <param name="binder">The model binder to add.</param>
-        public void AddModelBinder(ModelBinder binder) => 
-            _modelBindersByValueDescriptor.Add(binder.ValueDescriptor.ValueType, binder);
-
-        /// <summary>
-        /// Gets a model binder for the specified value descriptor.
-        /// </summary>
-        /// <param name="valueDescriptor">The value descriptor for which to get a model binder.</param>
-        /// <returns>A model binder for the specified value descriptor.</returns>
-        public ModelBinder GetModelBinder(IValueDescriptor valueDescriptor)
-        {
-            if (_modelBindersByValueDescriptor.TryGetValue(valueDescriptor.ValueType, out ModelBinder binder))
-            {
-                return binder;
-            }
-            return new ModelBinder(valueDescriptor);
-        }
+        /// <inheritdoc />
+        public object? GetService(Type serviceType) => ServiceProvider.GetService(serviceType);
 
         /// <summary>
         /// Adds the specified service factory to the binding context.
@@ -138,14 +100,14 @@ namespace System.CommandLine.Binding
                 else
                 {
                     var parsed = ArgumentConverter.ConvertObject(
-                        valueDescriptor as IArgument ?? new Argument(valueDescriptor.ValueName), 
-                        valueDescriptor.ValueType, 
+                        valueDescriptor as Argument ?? new Argument<string>(valueDescriptor.ValueName),
+                        valueDescriptor.ValueType,
                         value,
                         localizationResources);
 
-                    if (parsed is SuccessfulArgumentConversionResult successful)
+                    if (parsed.Result == ArgumentConversionResultType.Successful)
                     {
-                        boundValue = new BoundValue(successful.Value, valueDescriptor, valueSource);
+                        boundValue = new BoundValue(parsed.Value, valueDescriptor, valueSource);
                         return true;
                     }
                 }

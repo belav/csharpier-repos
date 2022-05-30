@@ -3,7 +3,7 @@
 
 using System.Collections;
 using System.Collections.Generic;
-using System.CommandLine.Collections;
+using System.CommandLine.Completions;
 using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Linq;
@@ -18,12 +18,12 @@ namespace System.CommandLine
     /// <see cref="RootCommand"/> for simple applications that only have one action. For example, <c>dotnet run</c>
     /// uses <c>run</c> as the command.
     /// </remarks>
-    public class Command : 
-        IdentifierSymbol, 
-        ICommand, 
-        IEnumerable<Symbol>
+    public class Command : IdentifierSymbol, IEnumerable<Symbol>
     {
-        private readonly SymbolSet _globalOptions = new();
+        private List<Argument>? _arguments;
+        private List<Option>? _options;
+        private List<Command>? _subcommands;
+        private List<ValidateSymbolResult<CommandResult>>? _validators;
 
         /// <summary>
         /// Initializes a new instance of the Command class.
@@ -35,38 +35,75 @@ namespace System.CommandLine
         }
 
         /// <summary>
+        /// Gets the child symbols.
+        /// </summary>
+        public IEnumerable<Symbol> Children
+        {
+            get
+            {
+                foreach (var command in Subcommands)
+                    yield return command;
+
+                foreach (var option in Options)
+                    yield return option;
+
+                foreach (var argument in Arguments)
+                    yield return argument;
+            }
+        }
+
+        /// <summary>
         /// Represents all of the arguments for the command.
         /// </summary>
-        public IReadOnlyList<Argument> Arguments => Children.Arguments;
+        public IReadOnlyList<Argument> Arguments => _arguments is not null ? _arguments : Array.Empty<Argument>();
+
+        internal bool HasArguments => _arguments is not null;
 
         /// <summary>
-        /// Represents all of the options for the command, including global options.
+        /// Represents all of the options for the command, including global options that have been applied to any of the command's ancestors.
         /// </summary>
-        public IReadOnlyList<Option> Options => Children.Options;
+        public IReadOnlyList<Option> Options => _options is not null ? _options : Array.Empty<Option>();
 
         /// <summary>
-        /// Represents all of the global options for the command
+        /// Represents all of the subcommands for the command.
         /// </summary>
-        public IReadOnlyList<Option> GlobalOptions => _globalOptions.Options;
+        public IReadOnlyList<Command> Subcommands => _subcommands is not null ? _subcommands : Array.Empty<Command>();
+
+        internal IReadOnlyList<ValidateSymbolResult<CommandResult>> Validators
+            => _validators is not null ? _validators : Array.Empty<ValidateSymbolResult<CommandResult>>();
+
+        internal bool HasValidators => _validators is not null; // initialized by Add method, so when it's not null the Count is always > 0
 
         /// <summary>
         /// Adds an <see cref="Argument"/> to the command.
         /// </summary>
         /// <param name="argument">The argument to add to the command.</param>
-        public void AddArgument(Argument argument) => AddArgumentInner(argument);
+        public void AddArgument(Argument argument)
+        {
+            argument.AddParent(this);
+            (_arguments ??= new()).Add(argument);
+        }
 
         /// <summary>
         /// Adds a subcommand to the command.
         /// </summary>
         /// <param name="command">The subcommand to add to the command.</param>
         /// <remarks>Commands can be nested to an arbitrary depth.</remarks>
-        public void AddCommand(Command command) => AddSymbol(command);
+        public void AddCommand(Command command)
+        {
+            command.AddParent(this);
+            (_subcommands ??= new()).Add(command);
+        }
 
         /// <summary>
         /// Adds an <see cref="Option"/> to the command.
         /// </summary>
         /// <param name="option">The option to add to the command.</param>
-        public void AddOption(Option option) => AddSymbol(option);
+        public void AddOption(Option option)
+        {
+            option.AddParent(this);
+            (_options ??= new()).Add(option);
+        }
 
         /// <summary>
         /// Adds a global <see cref="Option"/> to the command.
@@ -76,37 +113,14 @@ namespace System.CommandLine
         /// parent commands.</remarks>
         public void AddGlobalOption(Option option)
         {
-            _globalOptions.Add(option);
-            Children.AddWithoutAliasCollisionCheck(option);
+            option.IsGlobal = true;
+            AddOption(option);
         }
-        
         /// <summary>
-        /// Adds a global <see cref="Option"/> to the command. A return value indicates whether the option alias is
-        /// already in use.
+        /// Adds an <see cref="Option"/> to the command.
         /// </summary>
-        /// <param name="option">The global option to add to the command.</param>
-        /// <returns><see langword="true"/> if the option was added;<see langword="false"/> if it was already in use.</returns>
-        /// <remarks>Global options are applied to the command and recursively to subcommands. They do not apply to
-        /// parent commands.</remarks>
-        internal bool TryAddGlobalOption(Option option)
-        {
-            if (!_globalOptions.IsAnyAliasInUse(option, out _))
-            {
-                _globalOptions.Add(option);
-                Children.AddWithoutAliasCollisionCheck(option);
-                return true;
-            }
-            else
-            {
-                return false;
-            }
-        }
-
-        /// <summary>
-        /// Adds a <see cref="Symbol"/> to the command.
-        /// </summary>
-        /// <param name="symbol">The symbol to add to the command.</param>
-        public void Add(Symbol symbol) => AddSymbol(symbol);
+        /// <param name="option">The option to add to the command.</param>
+        public void Add(Option option) => AddOption(option);
 
         /// <summary>
         /// Adds an <see cref="Argument"/> to the command.
@@ -115,39 +129,20 @@ namespace System.CommandLine
         public void Add(Argument argument) => AddArgument(argument);
 
         /// <summary>
-        /// Adds an alias to the command. Multiple aliases can be added to a command, most often used to provide a
-        /// shorthand alternative.
+        /// Adds a subcommand to the command.
         /// </summary>
-        /// <param name="alias">The alias to add to the command.</param>
-        public virtual void AddAlias(string alias) => AddAliasInner(alias);
-
-        private protected override void AddAliasInner(string alias)
-        {
-            ThrowIfAliasIsInvalid(alias);
-
-            base.AddAliasInner(alias);
-        }
-
-        private protected override void AddSymbol(Symbol symbol)
-        {
-            if (symbol is IOption option)
-            {
-                _globalOptions.ThrowIfAnyAliasIsInUse(option);
-            }
-            
-            base.AddSymbol(symbol);
-        }
+        /// <param name="command">The subcommand to add to the command.</param>
+        /// <remarks>Commands can be nested to an arbitrary depth.</remarks>
+        public void Add(Command command) => AddCommand(command);
 
         private protected override string DefaultName => throw new NotImplementedException();
-
-        internal List<ValidateSymbolResult<CommandResult>> Validators { get; } = new();
 
         /// <summary>
         /// Adds a custom validator to the command. Validators can be used
         /// to create custom validation logic.
         /// </summary>
         /// <param name="validate">The delegate to validate the symbols during parsing.</param>
-        public void AddValidator(ValidateSymbolResult<CommandResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbolResult<CommandResult> validate) => (_validators ??= new()).Add(validate);
 
         /// <summary>
         /// Gets or sets a value that indicates whether unmatched tokens should be treated as errors. For example,
@@ -160,7 +155,7 @@ namespace System.CommandLine
         /// that will be performed when the command is invoked.
         /// </summary>
         /// <remarks>
-        /// <para>Use one of the <see cref="CommandHandler.Create(Action)" /> overloads to construct a handler.</para>
+        /// <para>Use one of the <see cref="Handler.SetHandler(Command, Action)" /> overloads to construct a handler.</para>
         /// <para>If the handler is not specified, parser errors will be generated for command line input that
         /// invokes this command.</para></remarks>
         public ICommandHandler? Handler { get; set; }
@@ -168,17 +163,82 @@ namespace System.CommandLine
         /// <summary>
         /// Represents all of the symbols for the command.
         /// </summary>
-        public IEnumerator<Symbol> GetEnumerator() => Children.OfType<Symbol>().GetEnumerator();
+        public IEnumerator<Symbol> GetEnumerator() => Children.GetEnumerator();
 
         /// <inheritdoc />
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        /// <inheritdoc />
-        IReadOnlyList<IArgument> ICommand.Arguments => Arguments;
+        internal Parser? ImplicitInvocationParser { get; set; }
+
+        internal Parser? ImplicitSimpleParser { get; set; }
 
         /// <inheritdoc />
-        IReadOnlyList<IOption> ICommand.Options => Options;
+        public override IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
+        {
+            var completions = new List<CompletionItem>();
 
-        internal Parser? ImplicitParser { get; set; }
+            if (context.WordToComplete is { } textToMatch)
+            {
+                var commands = Subcommands;
+                for (int i = 0; i < commands.Count; i++)
+                {
+                    AddCompletionsFor(commands[i]);
+                }
+
+                var options = Options;
+                for (int i = 0; i < options.Count; i++)
+                {
+                    AddCompletionsFor(options[i]);
+                }
+
+                var arguments = Arguments;
+                for (int i = 0; i < arguments.Count; i++)
+                {
+                    var argument = arguments[i];
+                    foreach (var completion in argument.GetCompletions(context))
+                    {
+                        if (completion.Label.ContainsCaseInsensitive(textToMatch))
+                        {
+                            completions.Add(completion);
+                        }
+                    }
+                }
+
+                foreach (var parent in Parents.FlattenBreadthFirst(p => p.Parents))
+                {
+                    if (parent is Command parentCommand)
+                    {
+                        for (var i = 0; i < parentCommand.Options.Count; i++)
+                        {
+                            var option = parentCommand.Options[i];
+
+                            if (option.IsGlobal)
+                            {
+                                AddCompletionsFor(option);
+                            }
+                        }
+                    }
+                }
+            }
+
+            return completions
+                   .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
+                   .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
+
+            void AddCompletionsFor(IdentifierSymbol identifier)
+            {
+                if (!identifier.IsHidden)
+                {
+                    foreach (var alias in identifier.Aliases)
+                    {
+                        if (alias is { } &&
+                            alias.ContainsCaseInsensitive(textToMatch))
+                        {
+                            completions.Add(new CompletionItem(alias, CompletionItemKind.Keyword, detail: identifier.Description));
+                        }
+                    }
+                }
+            }
+        }
     }
 }

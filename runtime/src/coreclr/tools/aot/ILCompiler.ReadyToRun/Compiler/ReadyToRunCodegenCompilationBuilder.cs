@@ -23,8 +23,6 @@ namespace ILCompiler
 
         private readonly IEnumerable<string> _inputFiles;
         private readonly string _compositeRootPath;
-        private bool _ibcTuning;
-        private bool _resilient;
         private bool _generateMapFile;
         private bool _generateMapCsvFile;
         private bool _generatePdbFile;
@@ -33,7 +31,6 @@ namespace ILCompiler
         private string _perfMapPath;
         private int _perfMapFormatVersion;
         private bool _generateProfileFile;
-        private int _parallelism;
         Func<MethodDesc, string> _printReproInstructions;
         private InstructionSetSupport _instructionSetSupport;
         private ProfileDataManager _profileData;
@@ -42,6 +39,7 @@ namespace ILCompiler
         private int _customPESectionAlignment;
         private bool _verifyTypeAndFieldLayout;
         private CompositeImageSettings _compositeImageSettings;
+        private ulong _imageBase;
 
         private string _jitPath;
         private string _outputFile;
@@ -56,7 +54,7 @@ namespace ILCompiler
             ReadyToRunCompilationModuleGroupBase group,
             IEnumerable<string> inputFiles,
             string compositeRootPath)
-            : base(context, group, new CoreRTNameMangler())
+            : base(context, group, new NativeAotNameMangler())
         {
             _inputFiles = inputFiles;
             _compositeRootPath = compositeRootPath;
@@ -85,7 +83,7 @@ namespace ILCompiler
                 builder.Add(new KeyValuePair<string, string>(name, value));
             }
 
-            if (_context.Target.Abi == TargetAbi.CoreRTArmel)
+            if (_context.Target.Abi == TargetAbi.NativeAotArmel)
             {
                 builder.Add(new KeyValuePair<string, string>("JitSoftFP", "1"));
             }
@@ -109,18 +107,6 @@ namespace ILCompiler
         public ReadyToRunCodegenCompilationBuilder UseJitPath(string jitPath)
         {
             _jitPath = jitPath;
-            return this;
-        }
-
-        public ReadyToRunCodegenCompilationBuilder UseIbcTuning(bool ibcTuning)
-        {
-            _ibcTuning = ibcTuning;
-            return this;
-        }
-
-        public ReadyToRunCodegenCompilationBuilder UseResilience(bool resilient)
-        {
-            _resilient = resilient;
             return this;
         }
 
@@ -170,12 +156,6 @@ namespace ILCompiler
             return this;
         }
 
-        public ReadyToRunCodegenCompilationBuilder UseParallelism(int parallelism)
-        {
-            _parallelism = parallelism;
-            return this;
-        }
-
         public ReadyToRunCodegenCompilationBuilder UsePrintReproInstructions(Func<MethodDesc, string> printReproInstructions)
         {
             _printReproInstructions = printReproInstructions;
@@ -209,6 +189,12 @@ namespace ILCompiler
         public ReadyToRunCodegenCompilationBuilder UseCompositeImageSettings(CompositeImageSettings compositeImageSettings)
         {
             _compositeImageSettings = compositeImageSettings;
+            return this;
+        }
+
+        public ReadyToRunCodegenCompilationBuilder UseImageBase(ulong imageBase)
+        {
+            _imageBase = imageBase;
             return this;
         }
 
@@ -254,11 +240,13 @@ namespace ILCompiler
                 corHeaderNode,
                 debugDirectoryNode,
                 win32Resources,
-                flags);
+                flags,
+                _imageBase
+                );
 
             factory.CompositeImageSettings = _compositeImageSettings;
 
-            IComparer<DependencyNodeCore<NodeFactory>> comparer = new SortableDependencyNode.ObjectNodeComparer(new CompilerComparer());
+            IComparer<DependencyNodeCore<NodeFactory>> comparer = new SortableDependencyNode.ObjectNodeComparer(CompilerComparer.Instance);
             DependencyAnalyzerBase<NodeFactory> graph = CreateDependencyGraph(factory, comparer);
 
             List<CorJitFlag> corJitFlags = new List<CorJitFlag> { CorJitFlag.CORJIT_FLAG_DEBUG_INFO };
@@ -284,9 +272,6 @@ namespace ILCompiler
                     corJitFlags.Add(CorJitFlag.CORJIT_FLAG_BBOPT);
                     break;
             }
-
-            if (_ibcTuning)
-                corJitFlags.Add(CorJitFlag.CORJIT_FLAG_BBINSTR);
 
             if (!_isJitInitialized)
             {

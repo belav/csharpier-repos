@@ -8,7 +8,7 @@ using Microsoft.CodeAnalysis;
 
 namespace System.Text.Json.Reflection
 {
-    internal class PropertyInfoWrapper : PropertyInfo
+    internal sealed class PropertyInfoWrapper : PropertyInfo
     {
         private readonly IPropertySymbol _property;
         private MetadataLoadContextInternal _metadataLoadContext;
@@ -92,5 +92,7 @@ namespace System.Text.Json.Reflection
         {
             throw new NotSupportedException();
         }
+
+        public Location? Location => _property.Locations.Length > 0 ? _property.Locations[0] : null;
     }
 }

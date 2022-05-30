@@ -55,7 +55,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                 }
 
-                return new BoundNullCoalescingOperator(syntax, rewrittenLeft, rewrittenRight, leftPlaceholder, leftConversion, resultKind, rewrittenResultType);
+                return new BoundNullCoalescingOperator(syntax, rewrittenLeft, rewrittenRight, leftPlaceholder, leftConversion, resultKind, @checked: false, rewrittenResultType);
             }
 
             var isUnconstrainedTypeParameter = rewrittenLeft.Type is { IsReferenceType: false, IsValueType: false };
@@ -95,7 +95,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             {
                 rewrittenLeft = ApplyConversionIfNotIdentity(leftConversion, leftPlaceholder, rewrittenLeft);
 
-                return new BoundNullCoalescingOperator(syntax, rewrittenLeft, rewrittenRight, leftPlaceholder: null, leftConversion: null, resultKind, rewrittenResultType);
+                return new BoundNullCoalescingOperator(syntax, rewrittenLeft, rewrittenRight, leftPlaceholder: null, leftConversion: null, resultKind, @checked: false, rewrittenResultType);
             }
 
             if (BoundNode.GetConversion(leftConversion, leftPlaceholder) is { IsIdentity: true } or { Kind: ConversionKind.ExplicitNullable })
@@ -150,7 +150,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundLocal boundTemp = _factory.StoreToTemp(rewrittenLeft, out tempAssignment);
 
             // temp != null
-            BoundExpression nullCheck = MakeNullCheck(syntax, boundTemp, BinaryOperatorKind.NotEqual);
+            BoundExpression nullCheck = _factory.MakeNullCheck(syntax, boundTemp, BinaryOperatorKind.NotEqual);
 
             // MakeConversion(temp, rewrittenResultType)
             BoundExpression convertedLeft = GetConvertedLeftForNullCoalescingOperator(boundTemp, leftPlaceholder, leftConversion, rewrittenResultType);
@@ -237,7 +237,11 @@ namespace Microsoft.CodeAnalysis.CSharp
             // before performing the leftConversion.
             // See comments in Binder.BindNullCoalescingOperator referring to GetConvertedLeftForNullCoalescingOperator for more details.
 
-            if (!TypeSymbol.Equals(rewrittenLeftType, rewrittenResultType, TypeCompareKind.ConsiderEverything2) && rewrittenLeftType.IsNullableType())
+            var conversionTakesNullableType = leftPlaceholder?.Type?.IsNullableType() == true;
+
+            if (!TypeSymbol.Equals(rewrittenLeftType, rewrittenResultType, TypeCompareKind.ConsiderEverything2)
+                && rewrittenLeftType.IsNullableType()
+                && !conversionTakesNullableType)
             {
                 TypeSymbol strippedLeftType = rewrittenLeftType.GetNullableUnderlyingType();
                 MethodSymbol getValueOrDefault = UnsafeGetNullableMethod(rewrittenLeft.Syntax, rewrittenLeftType, SpecialMember.System_Nullable_T_GetValueOrDefault);

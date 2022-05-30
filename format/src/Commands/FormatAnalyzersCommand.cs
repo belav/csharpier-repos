@@ -14,11 +14,12 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
     {
         private static readonly FormatAnalyzersHandler s_analyzerHandler = new();
 
-        internal static Symbol GetCommand()
+        internal static Command GetCommand()
         {
             var command = new Command("analyzers", Resources.Run_3rd_party_analyzers__and_apply_fixes)
             {
                 DiagnosticsOption,
+                ExcludeDiagnosticsOption,
                 SeverityOption,
             };
             command.AddCommonOptions();
@@ -28,6 +29,8 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         private class FormatAnalyzersHandler : ICommandHandler
         {
+            public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+
             public async Task<int> InvokeAsync(InvocationContext context)
             {
                 var parseResult = context.ParseResult;
@@ -37,15 +40,21 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
                 if (parseResult.HasOption(SeverityOption) &&
-                    parseResult.ValueForOption(SeverityOption) is string { Length: > 0 } analyzerSeverity)
+                    parseResult.GetValueForOption(SeverityOption) is string { Length: > 0 } analyzerSeverity)
                 {
                     formatOptions = formatOptions with { AnalyzerSeverity = GetSeverity(analyzerSeverity) };
                 }
 
                 if (parseResult.HasOption(DiagnosticsOption) &&
-                    parseResult.ValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
+                    parseResult.GetValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
                 {
                     formatOptions = formatOptions with { Diagnostics = diagnostics.ToImmutableHashSet() };
+                }
+
+                if (parseResult.HasOption(ExcludeDiagnosticsOption) &&
+                    parseResult.GetValueForOption(ExcludeDiagnosticsOption) is string[] { Length: > 0 } excludeDiagnostics)
+                {
+                    formatOptions = formatOptions with { ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet() };
                 }
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.Analyzers };

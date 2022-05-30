@@ -1,10 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Text.Encodings.Web;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -349,7 +346,7 @@ public interface IHtmlHelper
     /// </summary>
     /// <param name="value">The value.</param>
     /// <param name="format">
-    /// The format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to format the return
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the return
     /// value.
     /// </param>
     /// <returns>A <see cref="string"/> containing the formatted value.</returns>
@@ -375,7 +372,9 @@ public interface IHtmlHelper
     /// <typeparam name="TEnum">Type to generate a select list for.</typeparam>
     /// <returns>
     /// An <see cref="IEnumerable{SelectListItem}"/> containing the select list for the given
-    /// <typeparamref name="TEnum"/>.
+    /// <typeparamref name="TEnum"/>,
+    /// with a decimal representation of the ordinal as <see cref="SelectListItem.Value"/>
+    /// and the display name as <see cref="SelectListItem.Text"/>.
     /// </returns>
     /// <exception cref="ArgumentException">
     /// Thrown if <typeparamref name="TEnum"/> is not an <see cref="Enum"/> or if it has a
@@ -646,7 +645,7 @@ public interface IHtmlHelper
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="value">If non-<c>null</c>, value to include in the element.</param>
     /// <param name="format">
-    /// The format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to format the "value"
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the "value"
     /// attribute unless that came from model binding.
     /// </param>
     /// <param name="htmlAttributes">
@@ -723,7 +722,7 @@ public interface IHtmlHelper
     /// </summary>
     /// <param name="expression">Expression name, relative to the current model.</param>
     /// <param name="format">
-    /// The format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to format the return
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the return
     /// value unless that came from model binding.
     /// </param>
     /// <returns>A <see cref="string"/> containing the formatted value.</returns>

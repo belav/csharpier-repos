@@ -4,7 +4,10 @@
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
+using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using System.Runtime.InteropServices.Marshalling;
+using System.Text;
 
 namespace SharedTypes
 {
@@ -15,7 +18,7 @@ namespace SharedTypes
         public string str2;
     }
 
-    [BlittableType]
+    [CustomTypeMarshaller(typeof(StringContainer), Features = CustomTypeMarshallerFeatures.UnmanagedResources)]
     public struct StringContainerNative
     {
         public IntPtr str1;
@@ -43,6 +46,7 @@ namespace SharedTypes
         }
     }
 
+    [CustomTypeMarshaller(typeof(double), Features = CustomTypeMarshallerFeatures.TwoStageMarshalling)]
     public struct DoubleToLongMarshaler
     {
         public long l;
@@ -54,11 +58,9 @@ namespace SharedTypes
 
         public double ToManaged() => MemoryMarshal.Cast<long, double>(MemoryMarshal.CreateSpan(ref l, 1))[0];
 
-        public long Value
-        {
-            get => l;
-            set => l = value;
-        }
+        public long ToNativeValue() => l;
+
+        public void FromNativeValue(long value) => l = value;
     }
 
     [NativeMarshalling(typeof(BoolStructNative))]
@@ -69,7 +71,7 @@ namespace SharedTypes
         public bool b3;
     }
 
-    [BlittableType]
+    [CustomTypeMarshaller(typeof(BoolStruct))]
     public struct BoolStructNative
     {
         public byte b1;
@@ -101,6 +103,7 @@ namespace SharedTypes
         public ref int GetPinnableReference() => ref i;
     }
 
+    [CustomTypeMarshaller(typeof(IntWrapper), Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling)]
     public unsafe struct IntWrapperMarshaler
     {
         public IntWrapperMarshaler(IntWrapper managed)
@@ -109,7 +112,10 @@ namespace SharedTypes
             *Value = managed.i;
         }
 
-        public int* Value { get; set; }
+        private int* Value { get; set; }
+
+        public int* ToNativeValue() => Value;
+        public void FromNativeValue(int* value) => Value = value;
 
         public IntWrapper ToManaged() => new IntWrapper { i = *Value };
 
@@ -119,99 +125,13 @@ namespace SharedTypes
         }
     }
 
-    public unsafe ref struct Utf16StringMarshaler
-    {
-        private ushort* ptr;
-        private Span<ushort> span;
-
-        public Utf16StringMarshaler(string str)
-        {
-            ptr = str is null ? null : (ushort*)Marshal.StringToCoTaskMemUni(str);
-            span = default;
-        }
-
-        public Utf16StringMarshaler(string str, Span<byte> buffer)
-        {
-            if (str is null)
-            {
-                ptr = null;
-                span = default;
-            }
-            else if ((str.Length + 1) < StackBufferSize)
-            {
-                span = MemoryMarshal.Cast<byte, ushort>(buffer);
-                str.AsSpan().CopyTo(MemoryMarshal.Cast<byte, char>(buffer));
-                // Supplied memory is in an undefined state so ensure
-                // there is a trailing null in the buffer.
-                span[str.Length] = '\0';
-                ptr = null;
-            }
-            else
-            {
-                span = default;
-                ptr = (ushort*)Marshal.StringToCoTaskMemUni(str);
-            }
-        }
-
-        public ref ushort GetPinnableReference()
-        {
-            if (ptr != null)
-            {
-                return ref *ptr;
-            }
-            return ref span.GetPinnableReference();
-        }
-
-        public ushort* Value
-        {
-            get
-            {
-                if (ptr == null && span != default)
-                {
-                    throw new InvalidOperationException();
-                }
-                return ptr;
-            }
-            set
-            {
-                ptr = value;
-                span = default;
-            }
-        }
-
-        public string ToManaged()
-        {
-            if (ptr == null && span == default)
-            {
-                return null;
-            }
-            else if (ptr != null)
-            {
-                return Marshal.PtrToStringUni((IntPtr)ptr);
-            }
-            else
-            {
-                return MemoryMarshal.Cast<ushort, char>(span).ToString();
-            }
-        }
-
-        public void FreeNative()
-        {
-            if (ptr != null)
-            {
-                Marshal.FreeCoTaskMem((IntPtr)ptr);
-            }
-        }
-
-        public const int StackBufferSize = 0x100;
-    }
-
     [NativeMarshalling(typeof(IntStructWrapperNative))]
     public struct IntStructWrapper
     {
         public int Value;
     }
 
+    [CustomTypeMarshaller(typeof(IntStructWrapper))]
     public struct IntStructWrapperNative
     {
         public int value;
@@ -223,7 +143,7 @@ namespace SharedTypes
         public IntStructWrapper ToManaged() => new IntStructWrapper { Value = value };
     }
 
-    [GenericContiguousCollectionMarshaller]
+    [CustomTypeMarshaller(typeof(List<>), CustomTypeMarshallerKind.LinearCollection, Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling | CustomTypeMarshallerFeatures.CallerAllocatedBuffer, BufferSize = 0x200)]
     public unsafe ref struct ListMarshaller<T>
     {
         private List<T> managedList;
@@ -237,21 +157,8 @@ namespace SharedTypes
         }
 
         public ListMarshaller(List<T> managed, int sizeOfNativeElement)
+            :this(managed, Span<byte>.Empty, sizeOfNativeElement)
         {
-            allocatedMemory = default;
-            this.sizeOfNativeElement = sizeOfNativeElement;
-            if (managed is null)
-            {
-                managedList = null;
-                NativeValueStorage = default;
-                return;
-            }
-            managedList = managed;
-            this.sizeOfNativeElement = sizeOfNativeElement;
-            // Always allocate at least one byte when the array is zero-length.
-            int spaceToAllocate = Math.Max(managed.Count * sizeOfNativeElement, 1);
-            allocatedMemory = Marshal.AllocCoTaskMem(spaceToAllocate);
-            NativeValueStorage = new Span<byte>((void*)allocatedMemory, spaceToAllocate);
         }
 
         public ListMarshaller(List<T> managed, Span<byte> stackSpace, int sizeOfNativeElement)
@@ -265,7 +172,7 @@ namespace SharedTypes
                 return;
             }
             managedList = managed;
-            // Always allocate at least one byte when the array is zero-length.
+            // Always allocate at least one byte when the list is zero-length.
             int spaceToAllocate = Math.Max(managed.Count * sizeOfNativeElement, 1);
             if (spaceToAllocate <= stackSpace.Length)
             {
@@ -278,58 +185,99 @@ namespace SharedTypes
             }
         }
 
-        /// <summary>
-        /// Stack-alloc threshold set to 256 bytes to enable small arrays to be passed on the stack.
-        /// Number kept small to ensure that P/Invokes with a lot of array parameters doesn't
-        /// blow the stack since this is a new optimization in the code-generated interop.
-        /// </summary>
-        public const int StackBufferSize = 0x200;
+        public ReadOnlySpan<T> GetManagedValuesSource() => CollectionsMarshal.AsSpan(managedList);
 
-        public Span<T> ManagedValues => CollectionsMarshal.AsSpan(managedList);
-
-        public Span<byte> NativeValueStorage { get; private set; }
-
-        public ref byte GetPinnableReference() => ref NativeValueStorage.GetPinnableReference();
-
-        public void SetUnmarshalledCollectionLength(int length)
+        public Span<T> GetManagedValuesDestination(int length)
         {
+            if (allocatedMemory == IntPtr.Zero)
+            {
+                managedList = null;
+                return default;
+            }
             managedList = new List<T>(length);
             for (int i = 0; i < length; i++)
             {
                 managedList.Add(default);
             }
+            return CollectionsMarshal.AsSpan(managedList);
         }
 
-        public byte* Value
+        private Span<byte> NativeValueStorage { get; set; }
+
+        public Span<byte> GetNativeValuesDestination() => NativeValueStorage;
+
+        public ReadOnlySpan<byte> GetNativeValuesSource(int length)
         {
-            get
-            {
-                Debug.Assert(managedList is null || allocatedMemory != IntPtr.Zero);
-                return (byte*)allocatedMemory;
-            }
-            set
-            {
-                if (value == null)
-                {
-                    managedList = null;
-                    NativeValueStorage = default;
-                }
-                else
-                {
-                    allocatedMemory = (IntPtr)value;
-                    NativeValueStorage = new Span<byte>(value, (managedList?.Count ?? 0) * sizeOfNativeElement);
-                }
-            }
+            return allocatedMemory == IntPtr.Zero ? default : NativeValueStorage = new Span<byte>((void*)allocatedMemory, length * sizeOfNativeElement);
+        }
+
+        public ref byte GetPinnableReference() => ref NativeValueStorage.GetPinnableReference();
+
+        public byte* ToNativeValue() => (byte*)Unsafe.AsPointer(ref GetPinnableReference());
+
+        public void FromNativeValue(byte* value)
+        {
+            allocatedMemory = (IntPtr)value;
         }
 
         public List<T> ToManaged() => managedList;
 
         public void FreeNative()
         {
-            if (allocatedMemory != IntPtr.Zero)
-            {
-                Marshal.FreeCoTaskMem(allocatedMemory);
-            }
+            Marshal.FreeCoTaskMem(allocatedMemory);
         }
+    }
+
+    [NativeMarshalling(typeof(WrappedListMarshaller<>))]
+    public struct WrappedList<T>
+    {
+        public WrappedList(List<T> list)
+        {
+            Wrapped = list;
+        }
+
+        public List<T> Wrapped { get; }
+
+        public ref T GetPinnableReference() => ref CollectionsMarshal.AsSpan(Wrapped).GetPinnableReference();
+    }
+
+    [CustomTypeMarshaller(typeof(WrappedList<>), CustomTypeMarshallerKind.LinearCollection, Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling | CustomTypeMarshallerFeatures.CallerAllocatedBuffer, BufferSize = 0x200)]
+    public unsafe ref struct WrappedListMarshaller<T>
+    {
+        private ListMarshaller<T> _marshaller;
+
+        public WrappedListMarshaller(int sizeOfNativeElement)
+            : this()
+        {
+            this._marshaller = new ListMarshaller<T>(sizeOfNativeElement);
+        }
+
+        public WrappedListMarshaller(WrappedList<T> managed, int sizeOfNativeElement)
+            : this(managed, Span<byte>.Empty, sizeOfNativeElement)
+        {
+        }
+
+        public WrappedListMarshaller(WrappedList<T> managed, Span<byte> stackSpace, int sizeOfNativeElement)
+        {
+            this._marshaller = new ListMarshaller<T>(managed.Wrapped, stackSpace, sizeOfNativeElement);
+        }
+
+        public ReadOnlySpan<T> GetManagedValuesSource() => _marshaller.GetManagedValuesSource();
+
+        public Span<T> GetManagedValuesDestination(int length) => _marshaller.GetManagedValuesDestination(length);
+
+        public Span<byte> GetNativeValuesDestination() => _marshaller.GetNativeValuesDestination();
+
+        public ReadOnlySpan<byte> GetNativeValuesSource(int length) => _marshaller.GetNativeValuesSource(length);
+
+        public ref byte GetPinnableReference() => ref _marshaller.GetPinnableReference();
+
+        public byte* ToNativeValue() => _marshaller.ToNativeValue();
+
+        public void FromNativeValue(byte* value) => _marshaller.FromNativeValue(value);
+
+        public WrappedList<T> ToManaged() => new(_marshaller.ToManaged());
+
+        public void FreeNative() => _marshaller.FreeNative();
     }
 }

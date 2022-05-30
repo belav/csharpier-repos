@@ -1,16 +1,17 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
+using System.Collections.Generic;
 using System.CommandLine.Builder;
 using System.CommandLine.Help;
-using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
 using System.CommandLine.Tests.Utility;
-using System.IO;
+using System.Linq;
 using System.Threading.Tasks;
 using FluentAssertions;
 using Xunit;
+using static System.Environment;
 
 namespace System.CommandLine.Tests
 {
@@ -46,7 +47,7 @@ namespace System.CommandLine.Tests
             var wasCalled = false;
             var command = new Command("command");
             var subcommand = new Command("subcommand");
-            subcommand.Handler = CommandHandler.Create(() => wasCalled = true);
+            subcommand.SetHandler(() => wasCalled = true);
             command.AddCommand(subcommand);
 
             var parser =
@@ -86,7 +87,7 @@ namespace System.CommandLine.Tests
         public async Task UseHelp_does_not_display_when_option_defined_with_same_alias()
         {
             var command = new Command("command");
-            command.AddOption(new Option("-h"));
+            command.AddOption(new Option<bool>("-h"));
             
             var parser =
                 new CommandLineBuilder(new RootCommand
@@ -255,12 +256,191 @@ namespace System.CommandLine.Tests
             _console.Out.ToString().Should().Be("");
         }
 
-        private class CustomHelpBuilder : IHelpBuilder
+        [Fact]
+        public void Individual_symbols_can_be_customized()
         {
-            public void Write(ICommand command, TextWriter writer, ParseResult parseResult)
+            var subcommand = new Command("subcommand", "The default command description");
+            var option = new Option<int>("-x", "The default option description");
+            var argument = new Argument<int>("int-value", "The default argument description");
+
+            var rootCommand = new RootCommand
             {
-                throw new NotImplementedException();
+                subcommand,
+                option,
+                argument
+            };
+
+            var parser = new CommandLineBuilder(rootCommand)
+                         .UseHelp(ctx =>
+                         {
+                             ctx.HelpBuilder.CustomizeSymbol(subcommand, secondColumnText: "The custom command description");
+                             ctx.HelpBuilder.CustomizeSymbol(option, secondColumnText: "The custom option description");
+                             ctx.HelpBuilder.CustomizeSymbol(argument, secondColumnText: "The custom argument description");
+                         })
+                         .Build();
+
+            var console = new TestConsole();
+            parser.Invoke("-h", console);
+
+            console.Out
+                   .ToString()
+                   .Should()
+                   .ContainAll("The custom command description",
+                               "The custom option description",
+                               "The custom argument description");
+        }
+
+        [Fact]
+        public void Help_sections_can_be_replaced()
+        {
+            var parser = new CommandLineBuilder()
+                         .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout))
+                         .Build();
+
+            var console = new TestConsole();
+            parser.Invoke("-h", console);
+
+            console.Out.ToString().Should().Be($"one{NewLine}{NewLine}two{NewLine}{NewLine}three{NewLine}{NewLine}{NewLine}");
+
+            IEnumerable<HelpSectionDelegate> CustomLayout(HelpContext _)
+            {
+                yield return ctx => ctx.Output.WriteLine("one");
+                yield return ctx => ctx.Output.WriteLine("two");
+                yield return ctx => ctx.Output.WriteLine("three");
             }
+        }
+
+        [Fact]
+        public void Help_sections_can_be_supplemented()
+        {
+            var command = new RootCommand("hello");
+            var parser = new CommandLineBuilder(command)
+                         .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout))
+                         .Build();
+
+            var console = new TestConsole();
+            parser.Invoke("-h", console);
+
+            var output = console.Out.ToString();
+            var defaultHelp = GetDefaultHelp(command);
+
+            var expected = $"first{NewLine}{NewLine}{defaultHelp}last{NewLine}{NewLine}";
+
+            output.Should().Be(expected);
+
+            IEnumerable<HelpSectionDelegate> CustomLayout(HelpContext _)
+            {
+                yield return ctx => ctx.Output.WriteLine("first");
+
+                foreach (var section in HelpBuilder.Default.GetLayout())
+                {
+                    yield return section;
+                }
+
+                yield return ctx => ctx.Output.WriteLine("last");
+            }
+        }
+
+        [Fact]
+        public void Layout_can_be_composed_dynamically_based_on_context()
+        {
+            var commandWithTypicalHelp = new Command("typical");
+            var commandWithCustomHelp = new Command("custom");
+            var command = new RootCommand
+            {
+                commandWithTypicalHelp,
+                commandWithCustomHelp
+            };
+
+            var parser = new CommandLineBuilder(command)
+                         .UseHelp(
+                             ctx =>
+                                 ctx.HelpBuilder
+                                    .CustomizeLayout(c =>
+                                                         c.Command == commandWithTypicalHelp
+                                                             ? HelpBuilder.Default.GetLayout()
+                                                             : new HelpSectionDelegate[]
+                                                                 {
+                                                                     c => c.Output.WriteLine("Custom layout!")
+                                                                 }
+                                                                 .Concat(HelpBuilder.Default.GetLayout())))
+                         .Build();
+
+            var typicalOutput = new TestConsole();
+            parser.Invoke("typical -h", typicalOutput);
+
+            var customOutput = new TestConsole();
+            parser.Invoke("custom -h", customOutput);
+
+            typicalOutput.Out.ToString().Should().Be(GetDefaultHelp(commandWithTypicalHelp, false));
+            customOutput.Out.ToString().Should().Be($"Custom layout!{NewLine}{NewLine}{GetDefaultHelp(commandWithCustomHelp, false)}");
+        }
+
+        [Fact]
+        public void Help_default_sections_can_be_wrapped()
+        {
+            Command command = new Command("test")
+            {
+                new Option<string>("--option", "option description")
+            };
+
+            var parser = new CommandLineBuilder(command)
+                         .UseHelp(maxWidth: 30)
+                         .Build();
+
+            var console = new TestConsole();
+            parser.Invoke("test -h", console);
+
+            string result = console.Out.ToString();
+            result.Should().Be(
+        $"Description:{NewLine}{NewLine}" +
+        $"Usage:{NewLine}  test [options]{NewLine}{NewLine}" +
+        $"Options:{NewLine}" +
+        $"  --option   option {NewLine}" +
+        $"  <option>   description{NewLine}" +
+        $"  -?, -h,    Show help and {NewLine}" +
+        $"  --help     usage {NewLine}" +
+        $"             information{NewLine}{NewLine}{NewLine}");
+        }
+
+
+
+        [Fact]
+        public void Help_customized_sections_can_be_wrapped()
+        {
+            var parser = new CommandLineBuilder()
+                         .UseHelp(ctx => ctx.HelpBuilder.CustomizeLayout(CustomLayout), maxWidth: 10)
+                         .Build();
+
+            var console = new TestConsole();
+            parser.Invoke("-h", console);
+
+            string result = console.Out.ToString();
+            result.Should().Be($"  123  123{NewLine}  456  456{NewLine}  78   789{NewLine}       0{NewLine}{NewLine}{NewLine}");
+
+            IEnumerable<HelpSectionDelegate> CustomLayout(HelpContext _)
+            {
+                yield return ctx => ctx.HelpBuilder.WriteColumns(new[] { new TwoColumnHelpRow("12345678", "1234567890") }, ctx);
+            }
+        }
+
+        private string GetDefaultHelp(Command command, bool trimOneNewline = true)
+        {
+            var console = new TestConsole();
+
+            var parser = new CommandLineBuilder(command)
+                         .UseHelp()
+                         .Build();
+
+            parser.Invoke("-h", console);
+
+            var output = console.Out.ToString();
+
+            if (trimOneNewline)
+            {
+                output = output.Substring(0, output.Length - NewLine.Length);
+            }
+            return output;
         }
     }
 }

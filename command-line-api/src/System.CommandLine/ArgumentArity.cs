@@ -3,15 +3,18 @@
 
 using System.Collections;
 using System.CommandLine.Binding;
-using System.CommandLine.Collections;
 using System.CommandLine.Parsing;
 using System.Diagnostics;
 
 namespace System.CommandLine
 {
-    /// <inheritdoc />
+    /// <summary>
+    /// Defines the arity of an option or argument.
+    /// </summary>
+    /// <remarks>The arity refers to the number of values that can be passed on the command line.
+    /// </remarks>
     [DebuggerDisplay("\\{{" + nameof(MinimumNumberOfValues) + "},{" + nameof(MaximumNumberOfValues) + "}\\}")]
-    public class ArgumentArity : IArgumentArity
+    public readonly struct ArgumentArity : IEquatable<ArgumentArity>
     {
         private const int MaximumArity = 100_000;
 
@@ -41,17 +44,37 @@ namespace System.CommandLine
 
             MinimumNumberOfValues = minimumNumberOfValues;
             MaximumNumberOfValues = maximumNumberOfValues;
+            IsNonDefault = true;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets the minimum number of values required for an <see cref="Argument">argument</see>.
+        /// </summary>
         public int MinimumNumberOfValues { get; }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets the maximum number of values allowed for an <see cref="Argument">argument</see>.
+        /// </summary>
         public int MaximumNumberOfValues { get; }
 
-        internal static FailedArgumentConversionArityResult? Validate(
+        internal bool IsNonDefault { get;  }
+
+        /// <inheritdoc />
+        public bool Equals(ArgumentArity other) => 
+            other.MaximumNumberOfValues == MaximumNumberOfValues && 
+            other.MinimumNumberOfValues == MinimumNumberOfValues &&
+            other.IsNonDefault == IsNonDefault;
+
+        /// <inheritdoc />
+        public override bool Equals(object? obj) => obj is ArgumentArity arity && Equals(arity);
+
+        /// <inheritdoc />
+        public override int GetHashCode()
+            => MaximumNumberOfValues ^ MinimumNumberOfValues ^ IsNonDefault.GetHashCode();
+
+        internal static ArgumentConversionResult? Validate(
             SymbolResult symbolResult,
-            IArgument argument,
+            Argument argument,
             int minimumNumberOfValues,
             int maximumNumberOfValues)
         {
@@ -70,9 +93,10 @@ namespace System.CommandLine
                     return null;
                 }
 
-                return new MissingArgumentConversionResult(
+                return ArgumentConversionResult.Failure(
                     argument,
-                    symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult));
+                    symbolResult.LocalizationResources.RequiredArgumentMissing(symbolResult),
+                    ArgumentConversionResultType.FailedMissingArgument);
             }
 
             if (tokenCount > maximumNumberOfValues)
@@ -81,9 +105,10 @@ namespace System.CommandLine
                 {
                     if (!optionResult.Option.AllowMultipleArgumentsPerToken)
                     {
-                        return new TooManyArgumentsConversionResult(
+                        return ArgumentConversionResult.Failure(
                             argument,
-                            symbolResult!.LocalizationResources.ExpectsOneArgument(symbolResult));
+                            symbolResult!.LocalizationResources.ExpectsOneArgument(symbolResult),
+                            ArgumentConversionResultType.FailedTooManyArguments);
                     }
                 }
             }
@@ -94,46 +119,45 @@ namespace System.CommandLine
         /// <summary>
         /// An arity that does not allow any values.
         /// </summary>
-        public static IArgumentArity Zero => new ArgumentArity(0, 0);
+        public static ArgumentArity Zero => new(0, 0);
 
         /// <summary>
         /// An arity that may have one value, but no more than one.
         /// </summary>
-        public static IArgumentArity ZeroOrOne => new ArgumentArity(0, 1);
+        public static ArgumentArity ZeroOrOne => new(0, 1);
 
         /// <summary>
         /// An arity that must have exactly one value.
         /// </summary>
-        public static IArgumentArity ExactlyOne => new ArgumentArity(1, 1);
+        public static ArgumentArity ExactlyOne => new(1, 1);
 
         /// <summary>
         /// An arity that may have multiple values.
         /// </summary>
-        public static IArgumentArity ZeroOrMore => new ArgumentArity(0, MaximumArity);
+        public static ArgumentArity ZeroOrMore => new(0, MaximumArity);
 
         /// <summary>
         /// An arity that must have at least one value.
         /// </summary>
-        public static IArgumentArity OneOrMore => new ArgumentArity(1, MaximumArity);
+        public static ArgumentArity OneOrMore => new(1, MaximumArity);
 
-        internal static IArgumentArity Default(Type type, Argument argument, ISymbolSet parents)
+        internal static ArgumentArity Default(Type type, Argument argument, ParentNode? firstParent)
         {
-            if (type == typeof(bool))
+            if (type == typeof(bool) || type == typeof(bool?))
             {
                 return ZeroOrOne;
             }
 
-            var parent = parents.Count > 0 ? parents[0] : default;
+            var parent = firstParent?.Symbol;
 
-            if (typeof(IEnumerable).IsAssignableFrom(type) &&
-                type != typeof(string))
+            if (type != typeof(string) && typeof(IEnumerable).IsAssignableFrom(type))
             {
-                return parent is ICommand
+                return parent is Command
                            ? ZeroOrMore
                            : OneOrMore;
             }
 
-            if (parent is ICommand &&
+            if (parent is Command &&
                 (argument.HasDefaultValue ||
                  type.IsNullable()))
             {

@@ -179,8 +179,7 @@ namespace System.Net
             }
             else
             {
-                SecurityStatusPal statusCode;
-                decodedOutgoingBlob = GetOutgoingBlob(decodedIncomingBlob, true, out statusCode);
+                decodedOutgoingBlob = GetOutgoingBlob(decodedIncomingBlob, true);
             }
 
             string? outgoingBlob = null;
@@ -197,10 +196,9 @@ namespace System.Net
             return outgoingBlob;
         }
 
-        internal byte[]? GetOutgoingBlob(byte[]? incomingBlob, bool thrownOnError)
+        internal byte[]? GetOutgoingBlob(byte[]? incomingBlob, bool throwOnError)
         {
-            SecurityStatusPal statusCode;
-            return GetOutgoingBlob(incomingBlob, thrownOnError, out statusCode);
+            return GetOutgoingBlob(incomingBlob, throwOnError, out _);
         }
 
         // Accepts an incoming binary security blob and returns an outgoing binary security blob.

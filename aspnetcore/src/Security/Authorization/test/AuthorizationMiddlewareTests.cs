@@ -1,17 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Linq;
 using System.Security.Claims;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Authorization.Test.TestObjects;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.DependencyInjection;
 using Moq;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Authorization.Test;
 
@@ -209,6 +205,28 @@ public class AuthorizationMiddlewareTests
         Assert.Equal(3, getPolicyCount);
         Assert.Equal(0, getFallbackPolicyCount);
         Assert.Equal(3, next.CalledCount);
+    }
+
+    [Fact]
+    public async Task CanApplyPolicyDirectlyToEndpoint()
+    {
+        // Arrange
+        var calledPolicy = false;
+        var policy = new AuthorizationPolicyBuilder().RequireAssertion(_ =>
+        {
+            calledPolicy = true;
+            return true;
+        }).Build();
+
+        var policyProvider = new Mock<IAuthorizationPolicyProvider>();
+        policyProvider.Setup(p => p.GetDefaultPolicyAsync()).ReturnsAsync(new AuthorizationPolicyBuilder().RequireAuthenticatedUser().Build());
+        var next = new TestRequestDelegate();
+        var middleware = CreateMiddleware(next.Invoke, policyProvider.Object);
+        var context = GetHttpContext(anonymous: false, endpoint: CreateEndpoint(new AuthorizeAttribute(), policy));
+
+        // Act & Assert
+        await middleware.Invoke(context);
+        Assert.True(calledPolicy);
     }
 
     [Fact]

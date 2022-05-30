@@ -136,14 +136,14 @@ namespace System.CommandLine.Generator.Tests
             InvocationContext? boundInvocationContext = null;
             IConsole? boundConsole = null;
             ParseResult? boundParseResult = null;
-            IHelpBuilder? boundHelpBuilder = null;
+            HelpBuilder? boundHelpBuilder = null;
             BindingContext? boundBindingContext = null;
 
             void Execute(
                 InvocationContext invocationContext,
                 IConsole console,
                 ParseResult parseResult,
-                IHelpBuilder helpBuilder,
+                HelpBuilder helpBuilder,
                 BindingContext bindingContext)
             {
                 boundInvocationContext = invocationContext;
@@ -155,7 +155,7 @@ namespace System.CommandLine.Generator.Tests
 
             var command = new Command("command");
 
-            command.SetHandler<Action<InvocationContext, IConsole, ParseResult, IHelpBuilder, BindingContext>>(Execute);
+            command.SetHandler<Action<InvocationContext, IConsole, ParseResult, HelpBuilder, BindingContext>>(Execute);
 
             await command.InvokeAsync("command", _console);
 
@@ -257,6 +257,100 @@ namespace System.CommandLine.Generator.Tests
 
             firstValue.Should().Be("v1");
             secondValue.Should().Be("v2");
+        }
+
+        [Fact]
+        public async Task Can_generate_handler_natural_type_delegates()
+        {
+            string? boundName = default;
+            int boundAge = default;
+            IConsole? boundConsole = null;
+
+            void Execute(string fullnameOrNickname, IConsole console, int age)
+            {
+                boundName = fullnameOrNickname;
+                boundConsole = console;
+                boundAge = age;
+            }
+
+            var nameArgument = new Argument<string>();
+            var ageOption = new Option<int>("--age");
+
+            var command = new Command("command")
+            {
+                nameArgument,
+                ageOption
+            };
+
+            command.SetHandler(Execute, nameArgument, ageOption);
+
+            await command.InvokeAsync("command Gandalf --age 425", _console);
+
+            boundName.Should().Be("Gandalf");
+            boundAge.Should().Be(425);
+            boundConsole.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Can_generate_handler_for_lambda()
+        {
+            string? boundName = default;
+            int boundAge = default;
+            IConsole? boundConsole = null;
+
+            var nameArgument = new Argument<string>();
+            var ageOption = new Option<int>("--age");
+
+            var command = new Command("command")
+            {
+                nameArgument,
+                ageOption
+            };
+
+            command.SetHandler((string fullnameOrNickname, IConsole console, int age) =>
+            {
+                boundName = fullnameOrNickname;
+                boundConsole = console;
+                boundAge = age;
+            }, nameArgument, ageOption);
+
+            await command.InvokeAsync("command Gandalf --age 425", _console);
+
+            boundName.Should().Be("Gandalf");
+            boundAge.Should().Be(425);
+            boundConsole.Should().NotBeNull();
+        }
+
+        [Fact]
+        public async Task Can_generate_handler_for_lambda_wth_return_type_specified()
+        {
+            string? boundName = default;
+            int boundAge = default;
+            IConsole? boundConsole = null;
+
+            var nameArgument = new Argument<string>();
+            var ageOption = new Option<int>("--age");
+
+            var command = new Command("command")
+            {
+                nameArgument,
+                ageOption
+            };
+
+            command.SetHandler(int (string fullnameOrNickname, IConsole console, int age) =>
+            {
+                boundName = fullnameOrNickname;
+                boundConsole = console;
+                boundAge = age;
+                return 42;
+            }, nameArgument, ageOption);
+
+            int rv = await command.InvokeAsync("command Gandalf --age 425", _console);
+
+            rv.Should().Be(42);
+            boundName.Should().Be("Gandalf");
+            boundAge.Should().Be(425);
+            boundConsole.Should().NotBeNull();
         }
 
         public class Character

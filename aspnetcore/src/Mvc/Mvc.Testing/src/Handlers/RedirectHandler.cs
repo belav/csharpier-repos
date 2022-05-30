@@ -1,14 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Diagnostics;
-using System.IO;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
-using System.Threading;
-using System.Threading.Tasks;
+using Microsoft.Net.Http.Headers;
 
 namespace Microsoft.AspNetCore.Mvc.Testing.Handlers;
 
@@ -100,11 +97,17 @@ public class RedirectHandler : DelegatingHandler
 
     private static void CopyRequestHeaders(
         HttpRequestHeaders originalRequestHeaders,
-        HttpRequestHeaders newRequestHeaders)
+        HttpRequestHeaders redirectRequestHeaders)
     {
         foreach (var header in originalRequestHeaders)
         {
-            newRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
+            // Avoid copying the Authorization header to match the behavior
+            // in the HTTP client when processing redirects
+            // https://github.com/dotnet/runtime/blob/69b5d67d9418d672609aa6e2c418a3d4ae00ad18/src/libraries/System.Net.Http/src/System/Net/Http/SocketsHttpHandler/SocketsHttpHandler.cs#L509-L517
+            if (!header.Key.Equals(HeaderNames.Authorization, StringComparison.OrdinalIgnoreCase))
+            {
+                redirectRequestHeaders.TryAddWithoutValidation(header.Key, header.Value);
+            }
         }
     }
 
@@ -170,7 +173,7 @@ public class RedirectHandler : DelegatingHandler
         response.StatusCode == HttpStatusCode.RedirectKeepVerb ||
             (int)response.StatusCode == 308;
 
-    private bool IsRedirect(HttpResponseMessage response) =>
+    private static bool IsRedirect(HttpResponseMessage response) =>
         response.StatusCode == HttpStatusCode.MovedPermanently ||
             response.StatusCode == HttpStatusCode.Redirect ||
             response.StatusCode == HttpStatusCode.RedirectMethod ||

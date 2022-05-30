@@ -1,15 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Net.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
@@ -18,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal class SniOptionsSelector
+internal sealed class SniOptionsSelector
 {
     private const string WildcardHost = "*";
     private const string WildcardPrefix = "*.";
@@ -200,7 +196,7 @@ internal class SniOptionsSelector
             ServerCertificateSelectionCallback = sslOptions.ServerCertificateSelectionCallback,
         };
 
-    private class SniOptions
+    private sealed class SniOptions
     {
         public SniOptions(SslServerAuthenticationOptions sslOptions, HttpProtocols httpProtocols, ClientCertificateMode clientCertificateMode)
         {
@@ -214,7 +210,7 @@ internal class SniOptionsSelector
         public ClientCertificateMode ClientCertificateMode { get; }
     }
 
-    private class LongestStringFirstComparer : IComparer<string>
+    private sealed class LongestStringFirstComparer : IComparer<string>
     {
         public static LongestStringFirstComparer Instance { get; } = new LongestStringFirstComparer();
 
@@ -225,7 +221,15 @@ internal class SniOptionsSelector
         public int Compare(string? x, string? y)
         {
             // Flip x and y to put the longest instead of the shortest string first in the SortedList.
-            return y!.Length.CompareTo(x!.Length);
+            var lengthResult = y!.Length.CompareTo(x!.Length);
+            if (lengthResult != 0)
+            {
+                return lengthResult;
+            }
+            else
+            {
+                return string.Compare(x, y, StringComparison.OrdinalIgnoreCase);
+            }
         }
     }
 }

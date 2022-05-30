@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
-using Internal.TypeSystem;
 
 // If any of these constants change, update src/coreclr/inc/readytorun.h and
 // src/coreclr/tools/Common/Internal/Runtime/ModuleHeaders.cs with the new R2R minor version
@@ -18,6 +17,21 @@ namespace Internal.ReadyToRunConstants
         READYTORUN_FLAG_NonSharedPInvokeStubs = 0x00000008,     // PInvoke stubs compiled into image are non-shareable (no secret parameter)
         READYTORUN_FLAG_EmbeddedMSIL = 0x00000010,              // MSIL is embedded in the composite R2R executable
         READYTORUN_FLAG_Component = 0x00000020,                 // This is the header describing a component assembly of composite R2R
+    }
+
+    public enum ReadyToRunImportSectionType : byte
+    {
+        Unknown      = 0,
+        StubDispatch = 2,
+        StringHandle = 3,
+    }
+
+    [Flags]
+    public enum ReadyToRunImportSectionFlags : ushort
+    {
+        None     = 0x0000,
+        Eager    = 0x0001, // Section at module load time.
+        PCode    = 0x0004, // Section contains pointers to code
     }
 
     /// <summary>
@@ -214,7 +228,6 @@ namespace Internal.ReadyToRunConstants
         Unbox                       = 0x5A,
         Unbox_Nullable              = 0x5B,
         NewMultiDimArr              = 0x5C,
-        NewMultiDimArr_NonVarArg    = 0x5D,
 
         // Helpers used with generic handle lookup cases
         NewObject                   = 0x60,
@@ -345,6 +358,7 @@ namespace Internal.ReadyToRunConstants
     public static class ReadyToRunRuntimeConstants
     {
         public const int READYTORUN_PInvokeTransitionFrameSizeInPointerUnits = 11;
-        public static int READYTORUN_ReversePInvokeTransitionFrameSizeInPointerUnits(TargetArchitecture target) => target == TargetArchitecture.X86 ? 5 : 2;
+        public const int READYTORUN_ReversePInvokeTransitionFrameSizeInPointerUnits_X86 = 5;
+        public const int READYTORUN_ReversePInvokeTransitionFrameSizeInPointerUnits_Universal = 2;
     }
 }

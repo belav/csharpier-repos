@@ -4,7 +4,6 @@
 using System;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Cryptography;
-using Microsoft.AspNetCore.Cryptography.Cng;
 using Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.ConfigurationModel;
 using Microsoft.AspNetCore.DataProtection.KeyManagement;
 using Microsoft.AspNetCore.DataProtection.Managed;
@@ -122,7 +121,7 @@ public sealed class ManagedAuthenticatedEncryptorFactory : IAuthenticatedEncrypt
             Func<T> Creator { get; }
         }
 
-        private class AlgorithmActivatorCore<T> : IActivator<T> where T : new()
+        private sealed class AlgorithmActivatorCore<T> : IActivator<T> where T : new()
         {
             public Func<T> Creator { get; } = Activator.CreateInstance<T>;
         }

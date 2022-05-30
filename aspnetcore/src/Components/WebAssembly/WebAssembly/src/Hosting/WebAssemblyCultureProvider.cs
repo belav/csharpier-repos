@@ -1,20 +1,18 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Globalization;
-using System.IO;
 using System.Runtime.Loader;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Components.WebAssembly.Services;
 using Microsoft.JSInterop;
 
 namespace Microsoft.AspNetCore.Components.WebAssembly.Hosting;
 
 [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026", Justification = "This type loads resx files. We don't expect it's dependencies to be trimmed in the ordinary case.")]
+#pragma warning disable CA1852 // Seal internal types
 internal class WebAssemblyCultureProvider
+#pragma warning restore CA1852 // Seal internal types
 {
     internal const string GetSatelliteAssemblies = "window.Blazor._internal.getSatelliteAssemblies";
     internal const string ReadSatelliteAssemblies = "window.Blazor._internal.readSatelliteAssemblies";

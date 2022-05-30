@@ -39,12 +39,12 @@ namespace System.CommandLine.Invocation
             }
         }
 
-        private IEnumerable<string> GetPossibleTokens(ISymbol targetSymbol, string token)
+        private IEnumerable<string> GetPossibleTokens(Command targetSymbol, string token)
         {
             IEnumerable<string> possibleMatches = targetSymbol
                 .Children
+                .OfType<IdentifierSymbol>()
                 .Where(x => !x.IsHidden)
-                .OfType<IIdentifierSymbol>()
                 .Where(x => x.Aliases.Count > 0)
                 .Select(symbol => 
                     symbol.Aliases

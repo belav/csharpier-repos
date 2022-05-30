@@ -2,8 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
-using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
+using System.CommandLine.Tests.Utility;
 using System.IO;
 using FluentAssertions;
 using System.Linq;
@@ -17,7 +17,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void By_default_there_is_no_default_value()
         {
-            var argument = new Argument();
+            var argument = new Argument<string>();
 
             argument.HasDefaultValue.Should().BeFalse();
         }
@@ -25,7 +25,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_default_value_is_set_to_null_then_HasDefaultValue_is_true()
         {
-            var argument = new Argument();
+            var argument = new Argument<string>();
 
             argument.SetDefaultValue(null);
 
@@ -35,7 +35,7 @@ namespace System.CommandLine.Tests
         [Fact]
         public void When_default_value_factory_is_set_then_HasDefaultValue_is_true()
         {
-            var argument = new Argument();
+            var argument = new Argument<string[]>();
 
             argument.SetDefaultValueFactory(() => null);
 
@@ -54,26 +54,6 @@ namespace System.CommandLine.Tests
                     .Message
                     .Should()
                     .Be("Argument \"the-arg\" does not have a default value");
-        }
-
-        [Fact]
-        public void When_argument_type_is_set_to_null_then_it_throws()
-        {
-            var argument = new Argument();
-
-            argument.Invoking(a => a.ValueType = null)
-                    .Should()
-                    .Throw<ArgumentNullException>();
-        }
-
-        [Fact]
-        public void By_default_the_argument_type_is_string()
-        {
-            var argument = new Argument();
-
-            argument.ValueType
-                    .Should()
-                    .Be(typeof(string));
         }
 
         public class CustomParsing
@@ -363,22 +343,20 @@ namespace System.CommandLine.Tests
                 var callCount = 0;
                 var handlerWasCalled = false;
 
-                var command = new RootCommand
-                {
-                    Handler = CommandHandler.Create<int>(Run)
-                };
-                command.AddOption(new Option<int>("--value", result =>
+                var option = new Option<int>("--value", result =>
                 {
                     callCount++;
                     return int.Parse(result.Tokens.Single().Value);
-                }));
+                });
+
+                var command = new RootCommand();
+                command.SetHandler((int value) => handlerWasCalled = true, option);
+                command.AddOption(option);
 
                 await command.InvokeAsync("--value 42");
 
                 callCount.Should().Be(1);
                 handlerWasCalled.Should().BeTrue();
-
-                void Run(int value) => handlerWasCalled = true;
             }
 
             [Fact]
@@ -533,7 +511,7 @@ namespace System.CommandLine.Tests
                     opt
                 };
 
-                rootCommand.Parse(commandLine).ValueForOption(opt).Should().Be(expectedValue);
+                rootCommand.Parse(commandLine).GetValueForOption(opt).Should().Be(expectedValue);
             }
 
             [Theory]
@@ -695,11 +673,33 @@ namespace System.CommandLine.Tests
                          .Should()
                          .Be("OnlyTake can only be called once.");
             }
+
+            [Fact]
+            public void OnlyTake_can_pass_on_all_tokens()
+            {
+                var argument1 = new Argument<int[]>(result =>
+                {
+                    result.OnlyTake(0);
+                    return null;
+                });
+                var argument2 = new Argument<int[]>();
+                var command = new RootCommand
+                {
+                    argument1,
+                    argument2
+                };
+
+                var result = command.Parse("1 2 3");
+
+                result.GetValueForArgument(argument1).Should().BeEmpty();
+
+                result.GetValueForArgument(argument2).Should().BeEquivalentSequenceTo(1, 2, 3);
+            }
         }
 
         protected override Symbol CreateSymbol(string name)
         {
-            return new Argument(name);
+            return new Argument<string>(name);
         }
     }
 }

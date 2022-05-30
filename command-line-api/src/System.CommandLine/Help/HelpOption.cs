@@ -1,42 +1,42 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.CommandLine.Builder;
-
 namespace System.CommandLine.Help
 {
-    internal class HelpOption : Option
+    internal class HelpOption : Option<bool>
     {
-        private readonly CommandLineBuilder _builder;
+        private readonly Func<LocalizationResources> _localizationResources;
         private string? _description;
 
-        public HelpOption(string[] aliases, CommandLineBuilder builder)
+        public HelpOption(string[] aliases, Func<LocalizationResources> getLocalizationResources)
             : base(aliases)
         {
-            _builder = builder ?? throw new ArgumentNullException(nameof(builder));
+            _localizationResources = getLocalizationResources;
             DisallowBinding = true;
         }
 
-        public HelpOption(CommandLineBuilder builder) : this(new[]
+        public HelpOption(Func<LocalizationResources> getLocalizationResources) : this(new[]
         {
             "-h",
             "/h",
             "--help",
             "-?",
             "/?"
-        }, builder)
+        }, getLocalizationResources)
         {
         }
 
         public override string? Description
         {
-            get => _description ??= _builder.LocalizationResources.HelpOptionDescription();
+            get => _description ??= _localizationResources().HelpOptionDescription();
             set => _description = value;
         }
 
         internal override Argument Argument => Argument.None();
 
-        public override bool Equals(object obj)
+        internal override bool IsGreedy => false;
+
+        public override bool Equals(object? obj)
         {
             return obj is HelpOption;
         }

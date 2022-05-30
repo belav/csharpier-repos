@@ -8,7 +8,7 @@ using System.Globalization;
 
 namespace System.Text.Json.Reflection
 {
-    internal class FieldInfoWrapper : FieldInfo
+    internal sealed class FieldInfoWrapper : FieldInfo
     {
         private readonly IFieldSymbol _field;
         private readonly MetadataLoadContextInternal _metadataLoadContext;
@@ -100,5 +100,7 @@ namespace System.Text.Json.Reflection
         {
             throw new NotImplementedException();
         }
+
+        public Location? Location => _field.Locations.Length > 0 ? _field.Locations[0] : null;
     }
 }

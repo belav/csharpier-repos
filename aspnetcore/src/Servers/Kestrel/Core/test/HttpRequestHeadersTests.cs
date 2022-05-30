@@ -4,6 +4,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Reflection;
 using System.Text;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
@@ -110,6 +111,23 @@ public class HttpRequestHeadersTests
         EnumerateEntries((IHeaderDictionary)headers);
         headers.Reset();
         EnumerateEntries((IDictionary<string, StringValues>)headers);
+    }
+
+    [Fact]
+    public void ClearPseudoRequestHeadersPlusResetClearsHeaderReferenceValue()
+    {
+        const BindingFlags privateFlags = BindingFlags.NonPublic | BindingFlags.Instance;
+
+        HttpRequestHeaders headers = new HttpRequestHeaders(reuseHeaderValues: false);
+        headers.HeaderMethod = "GET";
+        headers.ClearPseudoRequestHeaders();
+        headers.Reset();
+
+        // Hacky but required because header references is private.
+        var headerReferences = typeof(HttpRequestHeaders).GetField("_headers", privateFlags).GetValue(headers);
+        var methodValue = (StringValues)headerReferences.GetType().GetField("_Method").GetValue(headerReferences);
+
+        Assert.Equal(StringValues.Empty, methodValue);
     }
 
     [Fact]
@@ -639,8 +657,8 @@ public class HttpRequestHeadersTests
 
         var headers = new HttpRequestHeaders(encodingSelector: headerName =>
         {
-                // For known headers, the HeaderNames value is passed in.
-                if (ReferenceEquals(headerName, HeaderNames.Accept))
+            // For known headers, the HeaderNames value is passed in.
+            if (ReferenceEquals(headerName, HeaderNames.Accept))
             {
                 return Encoding.GetEncoding("ASCII", EncoderFallback.ExceptionFallback, DecoderFallback.ExceptionFallback);
             }

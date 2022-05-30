@@ -102,23 +102,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     // Collectors are in priority order.  So just walk them from highest to lowest.
                     foreach (var collector in collectors)
                     {
-                        var priority = collector.Priority switch
-                        {
-                            VisualStudio.Utilities.DefaultOrderings.Highest => CodeActionRequestPriority.High,
-                            VisualStudio.Utilities.DefaultOrderings.Default => CodeActionRequestPriority.Normal,
-                            _ => (CodeActionRequestPriority?)null,
-                        };
+                        var priority = TryGetPriority(collector.Priority);
 
                         if (priority != null)
                         {
-                            // Only request suppression fixes if we're in the lowest priority group.  The other groups
-                            // should not show suppressions them as that would cause them to not appear at the end.
-
                             var allSets = GetCodeFixesAndRefactoringsAsync(
                                 state, requestedActionCategories, document,
                                 range, selection,
                                 addOperationScope: _ => null,
-                                includeSuppressionFixes: priority.Value == CodeActionRequestPriority.Normal,
                                 priority.Value,
                                 currentActionCount, cancellationToken).WithCancellation(cancellationToken).ConfigureAwait(false);
 
@@ -164,7 +155,6 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 SnapshotSpan range,
                 TextSpan? selection,
                 Func<string, IDisposable?> addOperationScope,
-                bool includeSuppressionFixes,
                 CodeActionRequestPriority priority,
                 int currentActionCount,
                 [EnumeratorCancellation] CancellationToken cancellationToken)
@@ -172,12 +162,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 var workspace = document.Project.Solution.Workspace;
                 var supportsFeatureService = workspace.Services.GetRequiredService<ITextBufferSupportsFeatureService>();
 
+                var options = GlobalOptions.GetCodeActionOptionsProvider();
+
                 var fixesTask = GetCodeFixesAsync(
                     state, supportsFeatureService, requestedActionCategories, workspace, document, range,
-                    addOperationScope, includeSuppressionFixes, priority, isBlocking: false, cancellationToken);
+                    addOperationScope, priority, options, isBlocking: false, cancellationToken);
                 var refactoringsTask = GetRefactoringsAsync(
                     state, supportsFeatureService, requestedActionCategories, GlobalOptions, workspace, document, selection,
-                    addOperationScope, priority, isBlocking: false, cancellationToken);
+                    addOperationScope, priority, options, isBlocking: false, cancellationToken);
 
                 await Task.WhenAll(fixesTask, refactoringsTask).ConfigureAwait(false);
 

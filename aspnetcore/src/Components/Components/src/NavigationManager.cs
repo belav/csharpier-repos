@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using Microsoft.AspNetCore.Components.Routing;
 
 namespace Microsoft.AspNetCore.Components;
@@ -11,6 +10,8 @@ namespace Microsoft.AspNetCore.Components;
 /// </summary>
 public abstract class NavigationManager
 {
+    private static readonly char[] UriPathEndChar = new[] { '#', '?' };
+
     /// <summary>
     /// An event that fires when the navigation location has changed.
     /// </summary>
@@ -218,9 +219,9 @@ public abstract class NavigationManager
             return uri.Substring(_baseUri.OriginalString.Length);
         }
 
-        var hashIndex = uri.IndexOf('#');
-        var uriWithoutHash = hashIndex < 0 ? uri : uri.Substring(0, hashIndex);
-        if ($"{uriWithoutHash}/".Equals(_baseUri.OriginalString, StringComparison.Ordinal))
+        var pathEndIndex = uri.IndexOfAny(UriPathEndChar);
+        var uriPathOnly = pathEndIndex < 0 ? uri : uri.Substring(0, pathEndIndex);
+        if ($"{uriPathOnly}/".Equals(_baseUri.OriginalString, StringComparison.Ordinal))
         {
             // Special case: for the base URI "/something/", if you're at
             // "/something" then treat it as if you were at "/something/" (i.e.,
@@ -284,9 +285,9 @@ public abstract class NavigationManager
             return true;
         }
 
-        var hashIndex = uri.IndexOf('#');
-        var uriWithoutHash = hashIndex < 0 ? uri : uri.Substring(0, hashIndex);
-        if ($"{uriWithoutHash}/".Equals(baseUri.OriginalString, StringComparison.Ordinal))
+        var pathEndIndex = uri.IndexOfAny(UriPathEndChar);
+        var uriPathOnly = pathEndIndex < 0 ? uri : uri.Substring(0, pathEndIndex);
+        if ($"{uriPathOnly}/".Equals(baseUri.OriginalString, StringComparison.Ordinal))
         {
             // Special case: for the base URI "/something/", if you're at
             // "/something" then treat it as if you were at "/something/" (i.e.,

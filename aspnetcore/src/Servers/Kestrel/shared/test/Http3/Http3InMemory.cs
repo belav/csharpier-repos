@@ -107,7 +107,7 @@ internal class Http3InMemory
         if (_inboundControlStream == null)
         {
             var reader = MultiplexedConnectionContext.ToClientAcceptQueue.Reader;
-#if IS_FUNCTIONAL_TESTS
+#if IS_TESTS
             while (await reader.WaitToReadAsync().DefaultTimeout())
 #else
             while (await reader.WaitToReadAsync())
@@ -147,7 +147,7 @@ internal class Http3InMemory
         AssertConnectionError<TException>(expectedErrorCode, matchExpectedErrorMessage, expectedErrorMessage);
 
         // Verify HttpConnection.ProcessRequestsAsync has exited.
-#if IS_FUNCTIONAL_TESTS
+#if IS_TESTS
         await _connectionTask.DefaultTimeout();
 #else
         await _connectionTask;
@@ -461,7 +461,7 @@ internal class Http3StreamBase
     protected static Task FlushAsync(PipeWriter writableBuffer)
     {
         var task = writableBuffer.FlushAsync();
-#if IS_FUNCTIONAL_TESTS
+#if IS_TESTS
         return task.AsTask().DefaultTimeout();
 #else
         return task.GetAsTask();
@@ -477,7 +477,7 @@ internal class Http3StreamBase
         }
     }
 
-#if IS_FUNCTIONAL_TESTS
+#if IS_TESTS
     protected Task<ReadResult> ReadApplicationInputAsync()
     {
         return Pair.Application.Input.ReadAsync().AsTask().DefaultTimeout();
@@ -596,7 +596,7 @@ internal class Http3RequestHeaderHandler
     public readonly Dictionary<string, string> DecodedHeaders = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
 }
 
-internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
+internal class Http3RequestStream : Http3StreamBase, IHttpStreamHeadersHandler
 {
     private readonly TestStreamContext _testStreamContext;
     private readonly Http3RequestHeaderHandler _headerHandler;
@@ -637,7 +637,7 @@ internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
         var headersTotalSize = 0;
 
         var buffer = _headerHandler.HeaderEncodingBuffer.AsMemory();
-        var done = QPackHeaderWriter.BeginEncode(headers, buffer.Span, ref headersTotalSize, out var length);
+        var done = QPackHeaderWriter.BeginEncodeHeaders(headers, buffer.Span, ref headersTotalSize, out var length);
         if (!done)
         {
             throw new InvalidOperationException("Headers not sent.");
@@ -676,7 +676,7 @@ internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
         Http3InMemory.AssertFrameType(http3WithPayload.Type, Http3FrameType.Headers);
 
         _headerHandler.DecodedHeaders.Clear();
-        _headerHandler.QpackDecoder.Decode(http3WithPayload.PayloadSequence, this);
+        _headerHandler.QpackDecoder.Decode(http3WithPayload.PayloadSequence, endHeaders: true, this);
         _headerHandler.QpackDecoder.Reset();
         return _headerHandler.DecodedHeaders.ToDictionary(kvp => kvp.Key, kvp => kvp.Value, _headerHandler.DecodedHeaders.Comparer);
     }
@@ -693,7 +693,7 @@ internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
         Http3InMemory.AssertFrameType(http3WithPayload.Type, Http3FrameType.Headers);
 
         _headerHandler.DecodedHeaders.Clear();
-        _headerHandler.QpackDecoder.Decode(http3WithPayload.PayloadSequence, this);
+        _headerHandler.QpackDecoder.Decode(http3WithPayload.PayloadSequence, endHeaders: true, this);
         _headerHandler.QpackDecoder.Reset();
         return _headerHandler.DecodedHeaders.ToDictionary(kvp => kvp.Key, kvp => kvp.Value, _headerHandler.DecodedHeaders.Comparer);
     }
@@ -718,18 +718,23 @@ internal class Http3RequestStream : Http3StreamBase, IHttpHeadersHandler
 
     public void OnStaticIndexedHeader(int index)
     {
-        var knownHeader = H3StaticTable.GetHeaderFieldAt(index);
+        var knownHeader = H3StaticTable.Get(index);
         _headerHandler.DecodedHeaders[((Span<byte>)knownHeader.Name).GetAsciiStringNonNullCharacters()] = HttpUtilities.GetAsciiOrUTF8StringNonNullCharacters((ReadOnlySpan<byte>)knownHeader.Value);
     }
 
     public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
     {
-        _headerHandler.DecodedHeaders[((Span<byte>)H3StaticTable.GetHeaderFieldAt(index).Name).GetAsciiStringNonNullCharacters()] = value.GetAsciiOrUTF8StringNonNullCharacters();
+        _headerHandler.DecodedHeaders[((Span<byte>)H3StaticTable.Get(index).Name).GetAsciiStringNonNullCharacters()] = value.GetAsciiOrUTF8StringNonNullCharacters();
     }
 
     public void Complete()
     {
         _testStreamContext.Complete();
+    }
+
+    public void OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        _headerHandler.DecodedHeaders[name.GetAsciiStringNonNullCharacters()] = value.GetAsciiOrUTF8StringNonNullCharacters();
     }
 }
 

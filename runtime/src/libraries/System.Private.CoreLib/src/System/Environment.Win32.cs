@@ -123,7 +123,7 @@ namespace System
 
                 ReadOnlySpan<char> name = builder.AsSpan();
                 int index = name.IndexOf('\\');
-                if (index != -1)
+                if (index >= 0)
                 {
                     // In the form of DOMAIN\User, cut off DOMAIN\
                     name = name.Slice(index + 1);
@@ -164,7 +164,7 @@ namespace System
 
                 ReadOnlySpan<char> name = builder.AsSpan();
                 int index = name.IndexOf('\\');
-                if (index != -1)
+                if (index >= 0)
                 {
                     // In the form of DOMAIN\User, cut off \User and return
                     builder.Length = index;
@@ -379,7 +379,7 @@ namespace System
             return path;
         }
 
-        // Seperate type so a .cctor is not created for Enviroment which then would be triggered during startup
+        // Separate type so a .cctor is not created for Environment which then would be triggered during startup
         private static class WindowsVersion
         {
             // Cache the value in static readonly that can be optimized out by the JIT

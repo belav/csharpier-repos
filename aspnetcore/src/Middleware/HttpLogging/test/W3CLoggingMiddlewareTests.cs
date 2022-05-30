@@ -1,21 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Diagnostics;
 using System.Globalization;
-using System.Linq;
-using System.Security.Claims;
-using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Testing;
 using Microsoft.Extensions.Hosting.Internal;
 using Microsoft.Extensions.Logging.Abstractions;
 using Microsoft.Extensions.Options;
 using Moq;
-using Xunit;
 
 namespace Microsoft.AspNetCore.HttpLogging;
 
@@ -36,7 +28,6 @@ public class W3CLoggingMiddlewareTests
             },
             null,
             new TestW3CLogger(options, new HostingEnvironment(), NullLoggerFactory.Instance)));
-
 
         Assert.Throws<ArgumentNullException>(() => new W3CLoggingMiddleware(c =>
             {
@@ -94,7 +85,7 @@ public class W3CLoggingMiddlewareTests
         httpContext.Request.Headers["Cookie"] = "Snickerdoodle";
         httpContext.Response.StatusCode = 200;
 
-        var now = DateTime.Now;
+        var now = DateTime.UtcNow;
         await middleware.Invoke(httpContext);
         await logger.Processor.WaitForWrites(4).DefaultTimeout();
 
@@ -104,7 +95,9 @@ public class W3CLoggingMiddlewareTests
         Assert.StartsWith("#Start-Date: ", lines[1]);
         var startDate = DateTime.Parse(lines[1].Substring(13), CultureInfo.InvariantCulture);
         // Assert that the log was written in the last 10 seconds
-        Assert.True(now.Subtract(startDate).TotalSeconds < 10);
+        // W3CLogger writes start-time to second precision, so delta could be as low as -0.999...
+        var delta = startDate.Subtract(now).TotalSeconds;
+        Assert.InRange(delta, -1, 10);
 
         Assert.Equal("#Fields: date time c-ip s-computername s-ip s-port cs-method cs-uri-stem cs-uri-query sc-status time-taken cs-version cs-host cs(User-Agent) cs(Referer)", lines[2]);
         Assert.DoesNotContain(lines[3], "Snickerdoodle");
@@ -128,7 +121,7 @@ public class W3CLoggingMiddlewareTests
 
         var httpContext = new DefaultHttpContext();
 
-        var now = DateTime.Now;
+        var now = DateTime.UtcNow;
         await middleware.Invoke(httpContext);
         await logger.Processor.WaitForWrites(4).DefaultTimeout();
 
@@ -138,7 +131,9 @@ public class W3CLoggingMiddlewareTests
         Assert.StartsWith("#Start-Date: ", lines[1]);
         var startDate = DateTime.Parse(lines[1].Substring(13), CultureInfo.InvariantCulture);
         // Assert that the log was written in the last 10 seconds
-        Assert.True(now.Subtract(startDate).TotalSeconds < 10);
+        // W3CLogger writes start-time to second precision, so delta could be as low as -0.999...
+        var delta = startDate.Subtract(now).TotalSeconds;
+        Assert.InRange(delta, -1, 10);
 
         Assert.Equal("#Fields: time-taken", lines[2]);
         double num;

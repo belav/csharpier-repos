@@ -1,6 +1,7 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
+using System.CodeDom.Compiler;
 using System.Collections.Generic;
 using System.Collections.Immutable;
 using System.Globalization;
@@ -22,27 +23,30 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             // workaround https://github.com/dotnet/roslyn/pull/55866. We can remove "LangVersion=Preview" when we get a Roslyn build with that change.
             .WithLanguageVersion(LanguageVersion.Preview);
 
+#if NETCOREAPP
+        private static readonly Assembly systemRuntimeAssembly = Assembly.Load(new AssemblyName("System.Runtime"));
+#endif
+
         public static Compilation CreateCompilation(
             string source,
             MetadataReference[] additionalReferences = null,
             string assemblyName = "TestAssembly",
             bool includeSTJ = true)
         {
-            // Bypass System.Runtime error.
-            Assembly systemRuntimeAssembly = Assembly.Load("System.Runtime, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            Assembly systemCollectionsAssembly = Assembly.Load("System.Collections, Version=5.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a");
-            string systemRuntimeAssemblyPath = systemRuntimeAssembly.Location;
-            string systemCollectionsAssemblyPath = systemCollectionsAssembly.Location;
 
             List<MetadataReference> references = new List<MetadataReference> {
                 MetadataReference.CreateFromFile(typeof(object).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Attribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(Type).Assembly.Location),
-                MetadataReference.CreateFromFile(typeof(KeyValuePair).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(KeyValuePair<,>).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(ContractNamespaceAttribute).Assembly.Location),
                 MetadataReference.CreateFromFile(typeof(JavaScriptEncoder).Assembly.Location),
-                MetadataReference.CreateFromFile(systemRuntimeAssemblyPath),
-                MetadataReference.CreateFromFile(systemCollectionsAssemblyPath),
+                MetadataReference.CreateFromFile(typeof(GeneratedCodeAttribute).Assembly.Location),
+                MetadataReference.CreateFromFile(typeof(ReadOnlySpan<>).Assembly.Location),
+#if NETCOREAPP
+                MetadataReference.CreateFromFile(typeof(LinkedList<>).Assembly.Location),
+                MetadataReference.CreateFromFile(systemRuntimeAssembly.Location),
+#endif
             };
 
             if (includeSTJ)
@@ -274,7 +278,7 @@ namespace System.Text.Json.SourceGeneration.UnitTests
 
             return CreateCompilation(source);
         }
-
+        
         public static Compilation CreateCompilationWithInitOnlyProperties()
         {
             string source = @"
@@ -305,6 +309,91 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             return CreateCompilation(source);
         }
 
+        public static Compilation CreateCompilationWithConstructorInitOnlyProperties()
+        {
+            string source = @"
+            using System;
+            using System.Text.Json.Serialization;
+
+            namespace HelloWorld
+            { 
+                public class MyClass
+                {
+                    public MyClass(int value)
+                    {
+                        Value = value;
+                    }
+
+                    public int Value { get; init; }
+                }
+
+                [JsonSerializable(typeof(MyClass))]
+                public partial class MyJsonContext : JsonSerializerContext
+                {
+                }
+            }";
+
+            return CreateCompilation(source);
+        }
+        
+        public static Compilation CreateCompilationWithMixedInitOnlyProperties()
+        {
+            string source = @"
+            using System;
+            using System.Text.Json.Serialization;
+
+            namespace HelloWorld
+            {
+                public class MyClass
+                {
+                    public MyClass(int value)
+                    {
+                        Value = value;
+                    }
+
+                    public int Value { get; init; }
+                    public string Orphaned { get; init; }
+                }
+
+                [JsonSerializable(typeof(MyClass))]
+                public partial class MyJsonContext : JsonSerializerContext
+                {
+                }
+            }";
+
+            return CreateCompilation(source);
+        }
+        
+        public static Compilation CreateCompilationWithRecordPositionalParameters()
+        {
+            string source = @"
+            using System;
+            using System.Text.Json.Serialization;
+
+            namespace HelloWorld
+            {                
+                public record Location
+                (
+                    int Id,
+                    string Address1,
+                    string Address2,
+                    string City,
+                    string State,
+                    string PostalCode,
+                    string Name,
+                    string PhoneNumber,
+                    string Country
+                );
+
+                [JsonSerializable(typeof(Location))]
+                public partial class MyJsonContext : JsonSerializerContext
+                {
+                }
+            }";
+
+            return CreateCompilation(source);
+        }
+        
         public static Compilation CreateCompilationWithInaccessibleJsonIncludeProperties()
         {
             string source = @"
@@ -336,22 +425,85 @@ namespace System.Text.Json.SourceGeneration.UnitTests
             return CreateCompilation(source);
         }
 
-        internal static void CheckDiagnosticMessages(ImmutableArray<Diagnostic> diagnostics, DiagnosticSeverity level, string[] expectedMessages)
+        public static Compilation CreateReferencedLibRecordCompilation()
         {
-            string[] actualMessages = diagnostics.Where(diagnostic => diagnostic.Severity == level).Select(diagnostic => diagnostic.GetMessage()).ToArray();
+            string source = @"
+            using System.Text.Json.Serialization;
 
-            // Can't depend on reflection order when generating type metadata.
-            Array.Sort(actualMessages);
-            Array.Sort(expectedMessages);
+            namespace ReferencedAssembly
+            {
+                public record LibRecord(int Id)
+                {
+                    public string Address1 { get; set; }
+                    public string Address2 { get; set; }
+                    public string City { get; set; }
+                    public string State { get; set; }
+                    public string PostalCode { get; set; }
+                    public string Name { get; set; }
+                    [JsonInclude]
+                    public string PhoneNumber;
+                    [JsonInclude]
+                    public string Country;
+                }
+            }
+";
+
+            return CreateCompilation(source);
+        }
+
+            public static Compilation CreateReferencedSimpleLibRecordCompilation()
+            {
+                string source = @"
+            using System.Text.Json.Serialization;
+
+            namespace ReferencedAssembly
+            {
+                public record LibRecord
+                {
+                    public int Id { get; set; }
+                    public string Address1 { get; set; }
+                    public string Address2 { get; set; }
+                    public string City { get; set; }
+                    public string State { get; set; }
+                    public string PostalCode { get; set; }
+                    public string Name { get; set; }
+                    [JsonInclude]
+                    public string PhoneNumber;
+                    [JsonInclude]
+                    public string Country;
+                }
+            }
+";
+
+                return CreateCompilation(source);
+        }
+
+        internal static void CheckDiagnosticMessages(
+            DiagnosticSeverity level,
+            ImmutableArray<Diagnostic> diagnostics,
+            (Location Location, string Message)[] expectedDiags,
+            bool sort = true)
+        {
+            (Location Location, string Message)[] actualDiags = diagnostics
+                .Where(diagnostic => diagnostic.Severity == level)
+                .Select(diagnostic => (diagnostic.Location, diagnostic.GetMessage()))
+                .ToArray();
+
+            if (sort)
+            {
+                // Can't depend on reflection order when generating type metadata.
+                Array.Sort(actualDiags);
+                Array.Sort(expectedDiags);
+            }
 
             if (CultureInfo.CurrentUICulture.Name.StartsWith("en", StringComparison.OrdinalIgnoreCase))
             {
-                Assert.Equal(expectedMessages, actualMessages);
+                Assert.Equal(expectedDiags, actualDiags);
             }
             else
             {
                 // for non-English runs, just compare the number of messages are the same
-                Assert.Equal(expectedMessages.Length, actualMessages.Length);
+                Assert.Equal(expectedDiags.Length, actualDiags.Length);
             }
         }
     }

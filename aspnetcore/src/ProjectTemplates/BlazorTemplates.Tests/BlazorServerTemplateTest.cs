@@ -8,7 +8,7 @@ using System.Net;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.BrowserTesting;
 using Microsoft.AspNetCore.Testing;
-using PlaywrightSharp;
+using Microsoft.Playwright;
 using ProjectTemplates.Tests.Infrastructure;
 using Templates.Test.Helpers;
 using Xunit;
@@ -25,12 +25,11 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
 
     public override string ProjectType { get; } = "blazorserver";
 
-    [Theory]
+    [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/30761")]
     [InlineData(BrowserKind.Chromium)]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/30761")]
     public async Task BlazorServerTemplateWorks_NoAuth(BrowserKind browserKind)
     {
-        var project = await CreateBuildPublishAsync("blazorservernoauth" + browserKind);
+        var project = await CreateBuildPublishAsync();
 
         await using var browser = BrowserManager.IsAvailable(browserKind) ?
             await BrowserManager.GetBrowserInstance(browserKind, BrowserContextInfo) :
@@ -48,7 +47,7 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
             {
                 var page = await browser.NewPageAsync();
                 await aspNetProcess.VisitInBrowserAsync(page);
-                await TestBasicNavigation(project, page);
+                await TestBasicNavigation(page);
                 await page.CloseAsync();
             }
             else
@@ -68,7 +67,7 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
             {
                 var page = await browser.NewPageAsync();
                 await aspNetProcess.VisitInBrowserAsync(page);
-                await TestBasicNavigation(project, page);
+                await TestBasicNavigation(page);
                 await page.CloseAsync();
             }
             else
@@ -81,13 +80,12 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
     public static IEnumerable<object[]> BlazorServerTemplateWorks_IndividualAuthData =>
             BrowserManager.WithBrowsers(new[] { BrowserKind.Chromium }, true, false);
 
-    [Theory]
+    [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/30882")]
     [MemberData(nameof(BlazorServerTemplateWorks_IndividualAuthData))]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/30882")]
     [SkipOnHelix("https://github.com/dotnet/aspnetcore/issues/30825", Queues = "All.OSX")]
-    public async Task BlazorServerTemplateWorks_IndividualAuth(BrowserKind browserKind, bool useLocalDB)
+    public async Task BlazorServerTemplateWorks_IndividualAuth(BrowserKind browserKind)
     {
-        var project = await CreateBuildPublishAsync("blazorserverindividual" + browserKind + (useLocalDB ? "uld" : ""));
+        var project = await CreateBuildPublishAsync();
 
         var browser = !BrowserManager.IsAvailable(browserKind) ?
             null :
@@ -104,7 +102,7 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
             {
                 var page = await browser.NewPageAsync();
                 await aspNetProcess.VisitInBrowserAsync(page);
-                await TestBasicNavigation(project, page);
+                await TestBasicNavigation(page);
                 await page.CloseAsync();
             }
             else
@@ -124,7 +122,7 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
             {
                 var page = await browser.NewPageAsync();
                 await aspNetProcess.VisitInBrowserAsync(page);
-                await TestBasicNavigation(project, page);
+                await TestBasicNavigation(page);
                 await page.CloseAsync();
             }
             else
@@ -134,22 +132,33 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
         }
     }
 
-    private async Task TestBasicNavigation(Project project, IPage page)
+    private async Task TestBasicNavigation(IPage page)
     {
-        var socket = BrowserContextInfo.Pages[page].WebSockets.SingleOrDefault() ??
-            (await page.WaitForEventAsync(PageEvent.WebSocket)).WebSocket;
+        var socket = await page.WaitForWebSocketAsync();
+
+        var framesReceived = 0;
+        var framesSent = 0;
+
+        void FrameReceived(object sender, IWebSocketFrame frame) { framesReceived++; }
+        void FrameSent(object sender, IWebSocketFrame frame) { framesSent++; }
+
+        socket.FrameReceived += FrameReceived;
+        socket.FrameSent += FrameSent;
 
         // Receive render batch
-        await socket.WaitForEventAsync(WebSocketEvent.FrameReceived);
-        await socket.WaitForEventAsync(WebSocketEvent.FrameSent);
+        await page.WaitForWebSocketAsync(new() { Predicate = (s) => framesReceived == 1 });
+        await page.WaitForWebSocketAsync(new() { Predicate = (s) => framesSent == 1 });
 
         // JS interop call to intercept navigation
-        await socket.WaitForEventAsync(WebSocketEvent.FrameReceived);
-        await socket.WaitForEventAsync(WebSocketEvent.FrameSent);
+        await page.WaitForWebSocketAsync(new() { Predicate = (s) => framesReceived == 2 });
+        await page.WaitForWebSocketAsync(new() { Predicate = (s) => framesSent == 2 });
+
+        socket.FrameReceived -= FrameReceived;
+        socket.FrameSent -= FrameSent;
 
         await page.WaitForSelectorAsync("nav");
         // <title> element gets project ID injected into it during template execution
-        Assert.Equal("Index", (await page.GetTitleAsync()).Trim());
+        Assert.Equal("Index", (await page.TitleAsync()).Trim());
 
         // Initially displays the home page
         await page.WaitForSelectorAsync("h1 >> text=Hello, world!");
@@ -168,17 +177,15 @@ public class BlazorServerTemplateTest : BlazorTemplateTest
 
         // Asynchronously loads and displays the table of weather forecasts
         await page.WaitForSelectorAsync("table>tbody>tr");
-        Assert.Equal(5, (await page.QuerySelectorAllAsync("p+table>tbody>tr")).Count());
+        Assert.Equal(5, await page.Locator("p+table>tbody>tr").CountAsync());
     }
 
-    [Theory]
+    [Theory(Skip = "https://github.com/dotnet/aspnetcore/issues/30882")]
     [InlineData("IndividualB2C", null)]
     [InlineData("IndividualB2C", new string[] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
     [InlineData("SingleOrg", null)]
     [InlineData("SingleOrg", new string[] { "--called-api-url \"https://graph.microsoft.com\"", "--called-api-scopes user.readwrite" })]
     [InlineData("SingleOrg", new string[] { "--calls-graph" })]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/30882")]
     public Task BlazorServerTemplate_IdentityWeb_BuildAndPublish(string auth, string[] args)
-        => CreateBuildPublishAsync("blazorserveridweb" + Guid.NewGuid().ToString().Substring(0, 10).ToLowerInvariant(), auth, args);
-
+        => CreateBuildPublishAsync(auth, args);
 }

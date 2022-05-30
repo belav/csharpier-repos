@@ -1,13 +1,9 @@
 ﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Linq;
 using System.Net;
 using System.Net.Http;
 using System.Net.Http.Formatting;
-using System.Threading;
-using System.Threading.Tasks;
 using BasicWebSite;
 using BasicWebSite.Controllers;
 using Microsoft.AspNetCore.Hosting;
@@ -17,7 +13,6 @@ using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using RazorPagesClassLibrary;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Mvc.FunctionalTests;
 
@@ -203,6 +198,20 @@ public class TestingInfrastructureTests : IClassFixture<WebApplicationFactory<Ba
 
         Assert.NotNull(factory.Services);
         Assert.NotNull(factory.Services.GetService(typeof(IConfiguration)));
+    }
+
+    [Fact]
+    public async Task TestingInfrastructure_RedirectHandlerDoesNotCopyAuthorizationHeaders()
+    {
+        // Act
+        var request = new HttpRequestMessage(HttpMethod.Get, "Testing/RedirectHandler/RedirectToAuthorized");
+        var client = Factory.CreateDefaultClient(
+            new RedirectHandler(), new TestHandler());
+        request.Headers.Add("Authorization", "Bearer key");
+        var response = await client.SendAsync(request);
+
+        // Assert
+        Assert.Equal(HttpStatusCode.Unauthorized, response.StatusCode);
     }
 
     private class OverridenService : TestService

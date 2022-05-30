@@ -1,13 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Builder.Internal;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Builder.Extensions;
 
@@ -131,11 +126,23 @@ public class UsePathBaseExtensionsTests
         return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
     }
 
+    [Theory]
+    [InlineData("/b%42", "", "/b%42/something%42", "/b%42", "/something%42")]
+    [InlineData("/b%42", "", "/B%42/something%42", "/B%42", "/something%42")]
+    [InlineData("/b%42", "", "/b%42/Something%42", "/b%42", "/Something%42")]
+    [InlineData("/b%42", "/oldb%42", "/b%42/something%42", "/oldb%42/b%42", "/something%42")]
+    [InlineData("/b%42", "/oldb%42", "/b%42/Something%42", "/oldb%42/b%42", "/Something%42")]
+    [InlineData("/b%42", "/oldb%42", "/B%42/something%42", "/oldb%42/B%42", "/something%42")]
+    public Task PathBaseCanHavePercentCharacters(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
+    {
+        return TestPathBase(registeredPathBase, pathBase, requestPath, expectedPathBase, expectedPath);
+    }
+
     private static async Task TestPathBase(string registeredPathBase, string pathBase, string requestPath, string expectedPathBase, string expectedPath)
     {
         HttpContext requestContext = CreateRequest(pathBase, requestPath);
         var builder = CreateBuilder()
-            .UsePathBase(registeredPathBase);
+            .UsePathBase(new PathString(registeredPathBase));
         builder.Run(context =>
         {
             context.Items["test.Path"] = context.Request.Path;

@@ -17,7 +17,7 @@ namespace Wasm.Build.Tests
         {
         }
 
-        [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
+        [Theory]
         [BuildAndRun(host: RunHost.V8)]
         public void NativeLibraryWithVariadicFunctions(BuildArgs buildArgs, RunHost host, string id)
         {
@@ -54,7 +54,7 @@ namespace Wasm.Build.Tests
             Assert.Contains("Main running", output);
         }
 
-        [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
+        [Theory]
         [BuildAndRun(host: RunHost.V8)]
         public void DllImportWithFunctionPointersCompilesWithWarning(BuildArgs buildArgs, RunHost host, string id)
         {
@@ -86,7 +86,7 @@ namespace Wasm.Build.Tests
             Assert.Contains("Main running", output);
         }
 
-        [ConditionalTheory(typeof(BuildTestBase), nameof(IsUsingWorkloads))]
+        [Theory]
         [BuildAndRun(host: RunHost.V8)]
         public void DllImportWithFunctionPointers_ForVariadicFunction_CompilesWithWarning(BuildArgs buildArgs, RunHost host, string id)
         {
@@ -123,15 +123,16 @@ namespace Wasm.Build.Tests
                                         extraProperties: "<AllowUnsafeBlocks>true</AllowUnsafeBlocks><_WasmDevel>true</_WasmDevel>");
 
             (_, string output) = BuildProject(buildArgs,
-                                        initProject: () =>
-                                        {
-                                            File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText);
-                                            File.Copy(Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", filename),
-                                                        Path.Combine(_projectDir!, filename));
-                                        },
-                                        publish: buildArgs.AOT,
                                         id: id,
-                                        dotnetWasmFromRuntimePack: false);
+                                        new BuildProjectOptions(
+                                            InitProject: () =>
+                                            {
+                                                File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText);
+                                                File.Copy(Path.Combine(BuildEnvironment.TestAssetsPath, "native-libs", filename),
+                                                            Path.Combine(_projectDir!, filename));
+                                            },
+                                            Publish: buildArgs.AOT,
+                                            DotnetWasmFromRuntimePack: false));
 
             return (buildArgs, output);
         }

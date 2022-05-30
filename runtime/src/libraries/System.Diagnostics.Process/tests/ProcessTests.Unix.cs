@@ -20,6 +20,8 @@ namespace System.Diagnostics.Tests
 {
     public partial class ProcessTests : ProcessTestBase
     {
+        private static bool IsRemoteExecutorSupportedAndOnUnixAndSuperUser => RemoteExecutor.IsSupported && PlatformDetection.IsUnixAndSuperUser;
+
         [Fact]
         private void TestWindowApisUnix()
         {
@@ -78,6 +80,7 @@ namespace System.Diagnostics.Tests
 
         [Fact]
         [OuterLoop("Opens program")]
+        [SkipOnPlatform(TestPlatforms.MacCatalyst, "In App Sandbox mode, the process doesn't have read access to the binary.")]
         public void ProcessStart_DirectoryNameInCurDirectorySameAsFileNameInExecDirectory_Success()
         {
             string fileToOpen = "dotnet";
@@ -157,8 +160,8 @@ namespace System.Diagnostics.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.OSX, "On OSX, ProcessName returns the script interpreter.")]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on iOS, MacCatalyst, or tvOS.")]
+        [SkipOnPlatform(TestPlatforms.OSX | TestPlatforms.MacCatalyst, "On OSX, ProcessName returns the script interpreter.")]
+        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Not supported on iOS or tvOS.")]
         public void ProcessNameMatchesScriptName()
         {
             string scriptName = GetTestFileName();
@@ -379,7 +382,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory, InlineData("/usr/bin/open"), InlineData("/usr/bin/nano")]
-        [PlatformSpecific(TestPlatforms.OSX)]
+        [PlatformSpecific(TestPlatforms.OSX | TestPlatforms.MacCatalyst)]
         [OuterLoop("Opens program")]
         public void ProcessStart_OpenFileOnOsx_UsesSpecifiedProgram(string programToOpenWith)
         {
@@ -396,7 +399,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory, InlineData("Safari"), InlineData("\"Google Chrome\"")]
-        [PlatformSpecific(TestPlatforms.OSX)]
+        [PlatformSpecific(TestPlatforms.OSX | TestPlatforms.MacCatalyst)]
         [OuterLoop("Opens browser")]
         public void ProcessStart_OpenUrl_UsesSpecifiedApplication(string applicationToOpenWith)
         {
@@ -410,7 +413,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Theory, InlineData("-a Safari"), InlineData("-a \"Google Chrome\"")]
-        [PlatformSpecific(TestPlatforms.OSX)]
+        [PlatformSpecific(TestPlatforms.OSX | TestPlatforms.MacCatalyst)]
         [OuterLoop("Opens browser")]
         public void ProcessStart_UseShellExecuteTrue_OpenUrl_SuccessfullyReadsArgument(string arguments)
         {
@@ -432,7 +435,7 @@ namespace System.Diagnostics.Tests
 
         [Theory,
             MemberData(nameof(StartOSXProcessWithArgumentList))]
-        [PlatformSpecific(TestPlatforms.OSX)]
+        [PlatformSpecific(TestPlatforms.OSX | TestPlatforms.MacCatalyst)]
         [OuterLoop("Opens browser")]
         public void ProcessStart_UseShellExecuteTrue_OpenUrl_SuccessfullyReadsArgumentArray(string[] argumentList)
         {
@@ -452,8 +455,7 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [Trait(XunitConstants.Category, XunitConstants.RequiresElevation)]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsUnixAndSuperUser))]
         public void TestPriorityClassUnix()
         {
             CreateDefaultProcess();
@@ -479,8 +481,7 @@ namespace System.Diagnostics.Tests
             }
         }
 
-        [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
-        [Trait(XunitConstants.Category, XunitConstants.RequiresElevation)]
+        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsUnixAndSuperUser))]
         public void TestBasePriorityOnUnix()
         {
             CreateDefaultProcess();
@@ -502,7 +503,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on iOS, MacCatalyst, or tvOS.")]
+        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Not supported on iOS or tvOS.")]
         public void TestStartOnUnixWithBadPermissions()
         {
             string path = GetTestFilePath();
@@ -514,7 +515,7 @@ namespace System.Diagnostics.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.MacCatalyst | TestPlatforms.tvOS, "Not supported on iOS, MacCatalyst, or tvOS.")]
+        [SkipOnPlatform(TestPlatforms.iOS | TestPlatforms.tvOS, "Not supported on iOS or tvOS.")]
         public void TestStartOnUnixWithBadFormat()
         {
             string path = GetTestFilePath();
@@ -570,6 +571,7 @@ namespace System.Diagnostics.Tests
         }
 
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
+        [SkipOnPlatform(TestPlatforms.LinuxBionic, "Bionic is not normal Linux, has no normal users/groups")]
         public void TestCheckChildProcessUserAndGroupIds()
         {
             string userName = GetCurrentRealUserName();
@@ -593,9 +595,8 @@ namespace System.Diagnostics.Tests
         /// Tests when running as root and starting a new process as a normal user,
         /// the new process doesn't have elevated privileges.
         /// </summary>
-        [ConditionalTheory(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
+        [ConditionalTheory(nameof(IsRemoteExecutorSupportedAndOnUnixAndSuperUser))]
         [OuterLoop("Needs sudo access")]
-        [Trait(XunitConstants.Category, XunitConstants.RequiresElevation)]
         [InlineData(true)]
         [InlineData(false)]
         public unsafe void TestCheckChildProcessUserAndGroupIdsElevated(bool useRootGroups)

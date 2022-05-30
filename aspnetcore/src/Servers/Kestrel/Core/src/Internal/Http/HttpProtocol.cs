@@ -1,18 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.IO.Pipelines;
 using System.Linq;
 using System.Net;
 using System.Runtime.CompilerServices;
 using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting.Server;
 using Microsoft.AspNetCore.Http;
@@ -598,7 +593,10 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         {
             try
             {
-                await TryProduceInvalidRequestResponse();
+                if (_requestRejectedException != null)
+                {
+                    await TryProduceInvalidRequestResponse();
+                }
             }
             catch (Exception ex)
             {
@@ -655,7 +653,6 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
             IsUpgradableRequest = messageBody.RequestUpgrade;
 
             InitializeBodyControl(messageBody);
-
 
             var context = application.CreateContext(this);
 
@@ -990,10 +987,12 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         VerifyAndUpdateWrite(firstWriteByteCount);
     }
 
-    protected Task TryProduceInvalidRequestResponse()
+    protected virtual Task TryProduceInvalidRequestResponse()
     {
-        // If _requestAborted is set, the connection has already been closed.
-        if (_requestRejectedException != null && !_connectionAborted)
+        Debug.Assert(_requestRejectedException != null);
+
+        // If _connectionAborted is set, the connection has already been closed.
+        if (!_connectionAborted)
         {
             return ProduceEnd();
         }
@@ -1321,6 +1320,16 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
                 ? target.GetAsciiStringEscaped(Constants.MaxExceptionDetailSize)
                 : string.Empty);
 
+    // This is called during certain bad requests so the automatic Connection: close header gets sent with custom responses.
+    // If no response is written, SetBadRequestState(BadHttpRequestException) will later also modify the status code.
+    public void DisableHttp1KeepAlive()
+    {
+        if (_httpVersion == Http.HttpVersion.Http10 || _httpVersion == Http.HttpVersion.Http11)
+        {
+            _keepAlive = false;
+        }
+    }
+
     public void SetBadRequestState(BadHttpRequestException ex)
     {
         Log.ConnectionBadRequest(ConnectionId, ex);
@@ -1334,10 +1343,17 @@ internal abstract partial class HttpProtocol : IHttpResponseControl
         const string badRequestEventName = "Microsoft.AspNetCore.Server.Kestrel.BadRequest";
         if (ServiceContext.DiagnosticSource?.IsEnabled(badRequestEventName) == true)
         {
-            ServiceContext.DiagnosticSource.Write(badRequestEventName, this);
+            WriteDiagnosticEvent(ServiceContext.DiagnosticSource, badRequestEventName, this);
         }
 
         _keepAlive = false;
+    }
+
+    [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:UnrecognizedReflectionPattern",
+        Justification = "The values being passed into Write are being consumed by the application already.")]
+    private static void WriteDiagnosticEvent(DiagnosticSource diagnosticSource, string name, HttpProtocol value)
+    {
+        diagnosticSource.Write(name, value);
     }
 
     public void ReportApplicationError(Exception? ex)

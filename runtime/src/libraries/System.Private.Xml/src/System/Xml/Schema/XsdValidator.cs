@@ -142,7 +142,7 @@ namespace System.Xml.Schema
             { // Done
                 _inlineSchemaParser.FinishParsing();
                 XmlSchema? schema = _inlineSchemaParser.XmlSchema;
-                string? inlineNS = null;
+                string? inlineNS;
                 if (schema != null && schema.ErrorCount == 0)
                 {
                     try
@@ -187,7 +187,7 @@ namespace System.Xml.Schema
         private object? ValidateChildElement()
         {
             object? particle = null;
-            int errorCode = 0;
+            int errorCode;
             if (context!.NeedValidateChildren)
             {
                 if (context.IsNill)
@@ -638,7 +638,7 @@ namespace System.Xml.Schema
             {
                 if (schemaInfo.SchemaType != SchemaType.XSD)
                 {
-                    throw new XmlException(SR.Xml_MultipleValidaitonTypes, string.Empty, this.PositionInfo.LineNumber, this.PositionInfo.LinePosition);
+                    throw new XmlException(SR.Xml_MultipleValidationTypes, string.Empty, this.PositionInfo.LineNumber, this.PositionInfo.LinePosition);
                 }
                 SchemaInfo.Add(schemaInfo, EventHandler);
                 return;
@@ -864,7 +864,7 @@ namespace System.Xml.Schema
             } // foreach constraint /constraintstruct
 
             // added on June 19, make connections between new keyref tables with key/unique tables in stack
-            // i can't put it in the above loop, coz there will be key on the same level
+            // i can't put it in the above loop, because there will be key on the same level
             for (int i = 0; i < context.Constr.Length; ++i)
             {
                 if (context.Constr[i].constraint.Role == CompiledIdentityConstraint.ConstraintRole.Keyref)
@@ -1012,7 +1012,7 @@ namespace System.Xml.Schema
             }
         }
 
-        private object? UnWrapUnion(object? typedValue)
+        private static object? UnWrapUnion(object? typedValue)
         {
             XsdSimpleValue? simpleValue = typedValue as XsdSimpleValue;
             if (simpleValue != null)
@@ -1087,7 +1087,7 @@ namespace System.Xml.Schema
                                 else if (constraints[i].qualifiedTable!.Contains(ks))
                                 {
                                     // unique or key checking value confliction
-                                    // for redundant key, reporting both occurings
+                                    // for redundant key, reporting both occurrings
                                     // doesn't work... how can i retrieve value out??
                                     SendValidationEvent(new XmlSchemaException(SR.Sch_DuplicateKey,
                                         new string[2] { ks.ToString(), constraints[i].constraint.name.ToString() },

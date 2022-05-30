@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Http;
@@ -59,11 +57,26 @@ public class AuthenticationOptions
     /// <param name="name">The name of the scheme being added.</param>
     /// <param name="displayName">The display name for the scheme.</param>
     public void AddScheme<[DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] THandler>(string name, string? displayName) where THandler : IAuthenticationHandler
-        => AddScheme(name, b =>
+    {
+        var state = new AddSchemeState(typeof(THandler));
+        AddScheme(name, b =>
         {
             b.DisplayName = displayName;
-            b.HandlerType = typeof(THandler);
+            b.HandlerType = state.HandlerType;
         });
+    }
+
+    // Workaround for linker bug: https://github.com/dotnet/linker/issues/1981
+    private readonly struct AddSchemeState
+    {
+        public AddSchemeState([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)] Type handlerType)
+        {
+            HandlerType = handlerType;
+        }
+
+        [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
+        public Type HandlerType { get; }
+    }
 
     /// <summary>
     /// Used as the fallback default scheme for all the other defaults.

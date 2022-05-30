@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Http;
 using Microsoft.Extensions.Options;
@@ -9,7 +8,7 @@ using Microsoft.Extensions.Options;
 namespace Microsoft.AspNetCore.Authentication.AzureADB2C.UI;
 
 [Obsolete("This is obsolete and will be removed in a future version. Use Microsoft.Identity.Web instead. See https://aka.ms/ms-identity-web.")]
-internal class AzureADB2CCookieOptionsConfiguration : IConfigureNamedOptions<CookieAuthenticationOptions>
+internal sealed class AzureADB2CCookieOptionsConfiguration : IConfigureNamedOptions<CookieAuthenticationOptions>
 {
     private readonly IOptions<AzureADB2CSchemeOptions> _schemeOptions;
     private readonly IOptionsMonitor<AzureADB2COptions> _azureADB2COptions;

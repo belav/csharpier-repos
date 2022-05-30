@@ -34,6 +34,7 @@ internal static partial class Interop
         internal const int ERROR_CALL_NOT_IMPLEMENTED = 0x78;
         internal const int ERROR_INSUFFICIENT_BUFFER = 0x7A;
         internal const int ERROR_INVALID_NAME = 0x7B;
+        internal const int ERROR_MOD_NOT_FOUND = 0x7E;
         internal const int ERROR_NEGATIVE_SEEK = 0x83;
         internal const int ERROR_DIR_NOT_EMPTY = 0x91;
         internal const int ERROR_BAD_PATHNAME = 0xA1;
@@ -90,6 +91,7 @@ internal static partial class Interop
         internal const int ERROR_TIMEOUT = 0x5B4;
         internal const int ERROR_EVENTLOG_FILE_CHANGED = 0x5DF;
         internal const int ERROR_TRUSTED_RELATIONSHIP_FAILURE = 0x6FD;
+        internal const int ERROR_RESOURCE_TYPE_NOT_FOUND = 0x715;
         internal const int ERROR_RESOURCE_LANG_NOT_FOUND = 0x717;
         internal const int ERROR_NOT_A_REPARSE_POINT = 0x1126;
     }

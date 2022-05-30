@@ -11,6 +11,9 @@ builder.Services.AddControllers();
 
 var app = builder.Build();
 
+// just to make sure that it does not cause exceptions
+app.Urls.Add("http://localhost:8080");
+
 app.MapControllers();
 
 app.MapGet("/", () => "Hello World");
@@ -40,6 +43,12 @@ app.MapGet("/greeting", (IConfiguration config) => config["Greeting"]);
 
 app.MapPost("/accepts-default", (Person person) => Results.Ok(person.Name));
 app.MapPost("/accepts-xml", () => Accepted()).Accepts<Person>("application/xml");
+
+app.MapPost("/fileupload", async (IFormFile file) =>
+{
+    await using var uploadStream = file.OpenReadStream();
+    return uploadStream.Length;
+});
 
 app.Run();
 

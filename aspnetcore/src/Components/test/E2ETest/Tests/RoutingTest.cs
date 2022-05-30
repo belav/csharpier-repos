@@ -52,7 +52,7 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
 
         var app = Browser.MountTestComponent<TestRouter>();
         Assert.Equal("This is the default page.", app.FindElement(By.Id("test-info")).Text);
-        AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)");
+        AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)", "Default, no trailing slash (matches all)");
     }
 
     [Fact]
@@ -277,6 +277,17 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     }
 
     [Fact]
+    public void CanFollowLinkToDefaultPage_NoTrailingSlash()
+    {
+        SetUrlViaPushState("/Other");
+
+        var app = Browser.MountTestComponent<TestRouter>();
+        app.FindElement(By.LinkText("Default, no trailing slash (matches all)")).Click();
+        Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
+        AssertHighlightedLinks("Default (matches all)", "Default with base-relative URL (matches all)", "Default, no trailing slash (matches all)");
+    }
+
+    [Fact]
     public void CanFollowLinkToOtherPageWithQueryString()
     {
         SetUrlViaPushState("/");
@@ -299,6 +310,17 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     }
 
     [Fact]
+    public void CanFollowLinkToDefaultPageWithQueryString_NoTrailingSlash()
+    {
+        SetUrlViaPushState("/Other");
+
+        var app = Browser.MountTestComponent<TestRouter>();
+        app.FindElement(By.LinkText("Default with query, no trailing slash")).Click();
+        Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
+        AssertHighlightedLinks("Default with query, no trailing slash");
+    }
+
+    [Fact]
     public void CanFollowLinkToOtherPageWithHash()
     {
         SetUrlViaPushState("/");
@@ -318,6 +340,17 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
         app.FindElement(By.LinkText("Default with hash")).Click();
         Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
         AssertHighlightedLinks("Default with hash");
+    }
+
+    [Fact]
+    public void CanFollowLinkToDefaultPageWithHash_NoTrailingSlash()
+    {
+        SetUrlViaPushState("/Other");
+
+        var app = Browser.MountTestComponent<TestRouter>();
+        app.FindElement(By.LinkText("Default with hash, no trailing slash")).Click();
+        Browser.Equal("This is the default page.", () => app.FindElement(By.Id("test-info")).Text);
+        AssertHighlightedLinks("Default with hash, no trailing slash");
     }
 
     [Fact]
@@ -784,7 +817,7 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     [Fact]
     public void CanArriveAtQueryStringPageWithStringQuery()
     {
-        SetUrlViaPushState("/WithQueryParameters/Abc?stringvalue=Hello+there");
+        SetUrlViaPushState("/WithQueryParameters/Abc?stringvalue=Hello+there#123");
 
         var app = Browser.MountTestComponent<TestRouter>();
         Assert.Equal("Hello Abc .", app.FindElement(By.Id("test-info")).Text);
@@ -799,6 +832,7 @@ public class RoutingTest : ServerTestBase<ToggleExecutionModeServerFixture<Progr
     }
 
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanArriveAtQueryStringPageWithDateTimeQuery()
     {
         var dateTime = new DateTime(2000, 1, 2, 3, 4, 5, 6);

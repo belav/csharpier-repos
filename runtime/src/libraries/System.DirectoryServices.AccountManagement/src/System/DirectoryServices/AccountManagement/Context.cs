@@ -44,7 +44,7 @@ namespace System.DirectoryServices.AccountManagement
         public const string LDAP_CAP_ACTIVE_DIRECTORY_V61_OID = "1.2.840.113556.1.4.1935";
     }
 
-    internal sealed class CredentialValidator
+    internal sealed class CredentialValidator : IDisposable
     {
         private enum AuthMethod
         {
@@ -85,10 +85,7 @@ namespace System.DirectoryServices.AccountManagement
 
         private bool BindSam(string target, string userName, string password)
         {
-            StringBuilder adsPath = new StringBuilder();
-            adsPath.Append("WinNT://");
-            adsPath.Append(_serverName);
-            adsPath.Append(",computer");
+            string adsPath = $"WinNT://{_serverName},computer";
             Guid g = new Guid("fd8256d0-fd15-11ce-abc4-02608c9e7553"); // IID_IUnknown
             object value = null;
             // always attempt secure auth..
@@ -110,7 +107,7 @@ namespace System.DirectoryServices.AccountManagement
                     }
                 }
 
-                int hr = UnsafeNativeMethods.ADsOpenObject(adsPath.ToString(), userName, password, (int)authenticationType, ref g, out value);
+                int hr = UnsafeNativeMethods.ADsOpenObject(adsPath, userName, password, (int)authenticationType, ref g, out value);
 
                 if (hr != 0)
                 {
@@ -339,6 +336,14 @@ namespace System.DirectoryServices.AccountManagement
             else
             {
                 return (BindSam(_serverName, userName, password));
+            }
+        }
+
+        public void Dispose()
+        {
+            foreach (LdapConnection connection in _connCache.Values)
+            {
+                connection.Dispose();
             }
         }
     }
@@ -885,7 +890,7 @@ namespace System.DirectoryServices.AccountManagement
                 // The Users container will also be used as the default for Groups.
                 // The reason there are different contexts for groups, users and computers is so that
                 // when a principal is created it will go into the appropriate default container.  This is so users don't
-                // be default create principals in the root of their directory.  When a search happens the base context is used so that
+                // by default create principals in the root of their directory.  When a search happens the base context is used so that
                 // the whole directory will be covered.
                 //
                 deUserGroupOrg = new DirectoryEntry(adsPathUserGroupOrg, _username, _password, authTypes);
@@ -1014,6 +1019,8 @@ namespace System.DirectoryServices.AccountManagement
                 if (_queryCtx != null)
                     _queryCtx.Dispose();
 
+                _credValidate.Dispose();
+
                 _disposed = true;
                 GC.SuppressFinalize(this);
             }
@@ -1107,7 +1114,7 @@ namespace System.DirectoryServices.AccountManagement
 
                 ldapConnection.AutoBind = false;
                 // If SSL was enabled on the initial connection then turn it on for the search.
-                // This is requried bc the appended port number will be SSL and we don't know what port LDAP is running on.
+                // This is required bc the appended port number will be SSL and we don't know what port LDAP is running on.
                 ldapConnection.SessionOptions.SecureSocketLayer = useSSL;
 
                 string baseDN = null; // specify base as null for RootDSE search

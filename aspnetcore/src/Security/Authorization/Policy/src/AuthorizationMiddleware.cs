@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization.Policy;
 using Microsoft.AspNetCore.Http;
@@ -59,7 +57,11 @@ public class AuthorizationMiddleware
 
         // IMPORTANT: Changes to authorization logic should be mirrored in MVC's AuthorizeFilter
         var authorizeData = endpoint?.Metadata.GetOrderedMetadata<IAuthorizeData>() ?? Array.Empty<IAuthorizeData>();
-        var policy = await AuthorizationPolicy.CombineAsync(_policyProvider, authorizeData);
+
+        var policies = endpoint?.Metadata.GetOrderedMetadata<AuthorizationPolicy>() ?? Array.Empty<AuthorizationPolicy>();
+
+        var policy = await AuthorizationPolicy.CombineAsync(_policyProvider, authorizeData, policies);
+
         if (policy == null)
         {
             await _next(context);

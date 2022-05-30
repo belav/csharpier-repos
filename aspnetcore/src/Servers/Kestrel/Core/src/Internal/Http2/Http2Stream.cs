@@ -1,21 +1,17 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
 using System.Diagnostics;
-using System.IO;
 using System.IO.Pipelines;
 using System.Net.Http.HPack;
 using System.Runtime.CompilerServices;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2.FlowControl;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.Extensions.Primitives;
-using Microsoft.Net.Http.Headers;
+using HttpCharacters = Microsoft.AspNetCore.Http.HttpCharacters;
 using HttpMethods = Microsoft.AspNetCore.Http.HttpMethods;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http2;
@@ -25,7 +21,6 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
     private Http2StreamContext _context = default!;
     private Http2OutputProducer _http2Output = default!;
     private StreamInputFlowControl _inputFlowControl = default!;
-    private StreamOutputFlowControl _outputFlowControl = default!;
     private Http2MessageBody? _messageBody;
 
     private bool _decrementCalled;
@@ -60,11 +55,7 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
                 context.ServerPeerSettings.InitialWindowSize,
                 context.ServerPeerSettings.InitialWindowSize / 2);
 
-            _outputFlowControl = new StreamOutputFlowControl(
-                context.ConnectionOutputFlowControl,
-                context.ClientPeerSettings.InitialWindowSize);
-
-            _http2Output = new Http2OutputProducer(this, context, _outputFlowControl);
+            _http2Output = new Http2OutputProducer(this, context);
 
             RequestBodyPipe = CreateRequestBodyPipe();
 
@@ -73,8 +64,7 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         else
         {
             _inputFlowControl.Reset();
-            _outputFlowControl.Reset(context.ClientPeerSettings.InitialWindowSize);
-            _http2Output.StreamReset();
+            _http2Output.StreamReset(context.ClientPeerSettings.InitialWindowSize);
             RequestBodyPipe.Reset();
         }
     }
@@ -133,7 +123,7 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
 
     protected override void OnRequestProcessingEnded()
     {
-        CompleteStream(errored: false);
+        _http2Output.OnRequestProcessingEnded();
     }
 
     public void CompleteStream(bool errored)
@@ -172,7 +162,6 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
             // The app can no longer read any more of the request body, so return any bytes that weren't read to the
             // connection's flow-control window.
             _inputFlowControl.Abort();
-
         }
         finally
         {
@@ -208,6 +197,14 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // We don't need any of the parameters because we don't implement BeginRead to actually
         // do the reading from a pipeline, nor do we use endConnection to report connection-level errors.
         endConnection = !TryValidatePseudoHeaders();
+
+        // Suppress pseudo headers from the public headers collection.
+        HttpRequestHeaders.ClearPseudoRequestHeaders();
+
+        // Cookies should be merged into a single string separated by "; "
+        // https://datatracker.ietf.org/doc/html/rfc7540#section-8.1.2.5
+        HttpRequestHeaders.MergeCookies();
+
         return true;
     }
 
@@ -249,7 +246,6 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // enabling the use of HTTP to interact with non - HTTP services.
         // A common example is TLS termination.
         var headerScheme = HttpRequestHeaders.HeaderScheme.ToString();
-        HttpRequestHeaders.HeaderScheme = default; // Suppress pseduo headers from the public headers collection.
         if (!ReferenceEquals(headerScheme, Scheme) &&
             !string.Equals(headerScheme, Scheme, StringComparison.OrdinalIgnoreCase))
         {
@@ -266,7 +262,6 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // :path (and query) - Required
         // Must start with / except may be * for OPTIONS
         var path = HttpRequestHeaders.HeaderPath.ToString();
-        HttpRequestHeaders.HeaderPath = default; // Suppress pseduo headers from the public headers collection.
         RawTarget = path;
 
         // OPTIONS - https://tools.ietf.org/html/rfc7540#section-8.1.2.3
@@ -304,7 +299,6 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
     {
         // :method
         _methodText = HttpRequestHeaders.HeaderMethod.ToString();
-        HttpRequestHeaders.HeaderMethod = default; // Suppress pseduo headers from the public headers collection.
         Method = HttpUtilities.GetKnownMethod(_methodText);
 
         if (Method == HttpMethod.None)
@@ -331,7 +325,6 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // Prefer this over Host
 
         var authority = HttpRequestHeaders.HeaderAuthority;
-        HttpRequestHeaders.HeaderAuthority = default; // Suppress pseduo headers from the public headers collection.
         var host = HttpRequestHeaders.HeaderHost;
         if (!StringValues.IsNullOrEmpty(authority))
         {
@@ -511,7 +504,7 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
 
     public bool TryUpdateOutputWindow(int bytes)
     {
-        return _context.FrameWriter.TryUpdateStreamWindow(_outputFlowControl, bytes);
+        return _http2Output.TryUpdateStreamWindow(bytes);
     }
 
     public void AbortRstStreamReceived()
@@ -644,11 +637,11 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         Aborted = 4,
     }
 
-    public override void OnHeader(int index, bool indexedValue, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    public override void OnHeader(int index, bool indexOnly, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
-        base.OnHeader(index, indexedValue, name, value);
+        base.OnHeader(index, indexOnly, name, value);
 
-        if (indexedValue)
+        if (indexOnly)
         {
             // Special case setting headers when the value is indexed for performance.
             switch (index)
@@ -675,7 +668,9 @@ internal abstract partial class Http2Stream : HttpProtocol, IThreadPoolWorkItem,
         // HPack append will return false if the index is not a known request header.
         // For example, someone could send the index of "Server" (a response header) in the request.
         // If that happens then fallback to using Append with the name bytes.
-        if (!HttpRequestHeaders.TryHPackAppend(index, value))
+        //
+        // If the value is indexed then we know it doesn't contain new lines and can skip checking.
+        if (!HttpRequestHeaders.TryHPackAppend(index, value, checkForNewlineChars: !indexOnly))
         {
             AppendHeader(name, value);
         }

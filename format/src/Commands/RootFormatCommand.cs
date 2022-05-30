@@ -22,6 +22,7 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 FormatStyleCommand.GetCommand(),
                 FormatAnalyzersCommand.GetCommand(),
                 DiagnosticsOption,
+                ExcludeDiagnosticsOption,
                 SeverityOption,
             };
             formatCommand.AddCommonOptions();
@@ -31,6 +32,8 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         private class FormatCommandDefaultHandler : ICommandHandler
         {
+            public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+
             public async Task<int> InvokeAsync(InvocationContext context)
             {
                 var parseResult = context.ParseResult;
@@ -40,16 +43,22 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
                 if (parseResult.HasOption(SeverityOption) &&
-                    parseResult.ValueForOption(SeverityOption) is string { Length: > 0 } defaultSeverity)
+                    parseResult.GetValueForOption(SeverityOption) is string { Length: > 0 } defaultSeverity)
                 {
                     formatOptions = formatOptions with { AnalyzerSeverity = GetSeverity(defaultSeverity) };
                     formatOptions = formatOptions with { CodeStyleSeverity = GetSeverity(defaultSeverity) };
                 }
 
                 if (parseResult.HasOption(DiagnosticsOption) &&
-                    parseResult.ValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
+                    parseResult.GetValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
                 {
                     formatOptions = formatOptions with { Diagnostics = diagnostics.ToImmutableHashSet() };
+                }
+
+                if (parseResult.HasOption(ExcludeDiagnosticsOption) &&
+                    parseResult.GetValueForOption(ExcludeDiagnosticsOption) is string[] { Length: > 0 } excludeDiagnostics)
+                {
+                    formatOptions = formatOptions with { ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet() };
                 }
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.Whitespace | FixCategory.CodeStyle | FixCategory.Analyzers };

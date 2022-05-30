@@ -177,15 +177,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     Func<string, IDisposable?> addOperationScope =
                         description => operationContext?.AddScope(allowCancellation: true, string.Format(EditorFeaturesResources.Gathering_Suggestions_0, description));
 
+                    var options = GlobalOptions.GetCodeActionOptionsProvider();
+
                     // We convert the code fixes and refactorings to UnifiedSuggestedActionSets instead of
                     // SuggestedActionSets so that we can share logic between local Roslyn and LSP.
                     var fixesTask = GetCodeFixesAsync(
                         state, supportsFeatureService, requestedActionCategories, workspace, document, range,
-                        addOperationScope, includeSuppressionFixes: true, CodeActionRequestPriority.None,
-                        isBlocking: true, cancellationToken);
+                        addOperationScope, CodeActionRequestPriority.None,
+                        options, isBlocking: true, cancellationToken);
+
                     var refactoringsTask = GetRefactoringsAsync(
                         state, supportsFeatureService, requestedActionCategories, GlobalOptions, workspace, document, selection,
-                        addOperationScope, CodeActionRequestPriority.None, isBlocking: true, cancellationToken);
+                        addOperationScope, CodeActionRequestPriority.None, options, isBlocking: true, cancellationToken);
 
                     Task.WhenAll(fixesTask, refactoringsTask).WaitAndGetResult(cancellationToken);
 
@@ -232,10 +235,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                             ConvertToSuggestedActionSet(codeFixAction.FixAllFlavors, owner, subjectBuffer)),
                         UnifiedCodeRefactoringSuggestedAction codeRefactoringAction => new CodeRefactoringSuggestedAction(
                             ThreadingContext, owner, codeRefactoringAction.Workspace, subjectBuffer,
-                            codeRefactoringAction.CodeRefactoringProvider, codeRefactoringAction.OriginalCodeAction),
-                        UnifiedFixAllSuggestedAction fixAllAction => new FixAllSuggestedAction(
+                            codeRefactoringAction.CodeRefactoringProvider, codeRefactoringAction.OriginalCodeAction,
+                            ConvertToSuggestedActionSet(codeRefactoringAction.FixAllFlavors, owner, subjectBuffer)),
+                        UnifiedFixAllCodeFixSuggestedAction fixAllAction => new FixAllCodeFixSuggestedAction(
                             ThreadingContext, owner, fixAllAction.Workspace, subjectBuffer,
                             fixAllAction.FixAllState, fixAllAction.Diagnostic, fixAllAction.OriginalCodeAction),
+                        UnifiedFixAllCodeRefactoringSuggestedAction fixAllCodeRefactoringAction => new FixAllCodeRefactoringSuggestedAction(
+                            ThreadingContext, owner, fixAllCodeRefactoringAction.Workspace, subjectBuffer,
+                            fixAllCodeRefactoringAction.FixAllState, fixAllCodeRefactoringAction.OriginalCodeAction),
                         UnifiedSuggestedActionWithNestedActions nestedAction => new SuggestedActionWithNestedActions(
                             ThreadingContext, owner, nestedAction.Workspace, subjectBuffer,
                             nestedAction.Provider ?? this, nestedAction.OriginalCodeAction,
@@ -262,8 +269,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 Document document,
                 SnapshotSpan range,
                 Func<string, IDisposable?> addOperationScope,
-                bool includeSuppressionFixes,
                 CodeActionRequestPriority priority,
+                CodeActionOptionsProvider fallbackOptions,
                 bool isBlocking,
                 CancellationToken cancellationToken)
             {
@@ -276,7 +283,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                 return UnifiedSuggestedActionsSource.GetFilterAndOrderCodeFixesAsync(
                     workspace, state.Target.Owner._codeFixService, document, range.Span.ToTextSpan(),
-                    includeSuppressionFixes, priority, isBlocking, addOperationScope, cancellationToken).AsTask();
+                    priority, fallbackOptions, isBlocking, addOperationScope, cancellationToken).AsTask();
             }
 
             private static string GetFixCategory(DiagnosticSeverity severity)
@@ -304,6 +311,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 TextSpan? selection,
                 Func<string, IDisposable?> addOperationScope,
                 CodeActionRequestPriority priority,
+                CodeActionOptionsProvider fallbackOptions,
                 bool isBlocking,
                 CancellationToken cancellationToken)
             {
@@ -321,12 +329,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     return SpecializedTasks.EmptyImmutableArray<UnifiedSuggestedActionSet>();
                 }
 
+                // 'CodeActionRequestPriority.Lowest' is reserved for suppression/configuration code fixes.
+                // No code refactoring should have this request priority.
+                if (priority == CodeActionRequestPriority.Lowest)
+                {
+                    return SpecializedTasks.EmptyImmutableArray<UnifiedSuggestedActionSet>();
+                }
+
                 // If we are computing refactorings outside the 'Refactoring' context, i.e. for example, from the lightbulb under a squiggle or selection,
                 // then we want to filter out refactorings outside the selection span.
                 var filterOutsideSelection = !requestedActionCategories.Contains(PredefinedSuggestedActionCategoryNames.Refactoring);
 
                 return UnifiedSuggestedActionsSource.GetFilterAndOrderCodeRefactoringsAsync(
-                    workspace, state.Target.Owner._codeRefactoringService, document, selection.Value, priority, isBlocking,
+                    workspace, state.Target.Owner._codeRefactoringService, document, selection.Value, priority, fallbackOptions, isBlocking,
                     addOperationScope, filterOutsideSelection, cancellationToken);
             }
 
@@ -405,34 +420,51 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 ReferenceCountedDisposable<State> state,
                 Document document,
                 SnapshotSpan range,
+                CodeActionOptionsProvider fallbackOptions,
                 CancellationToken cancellationToken)
             {
-                if (state.Target.Owner._codeFixService != null &&
-                    state.Target.SubjectBuffer.SupportsCodeFixes())
+                foreach (var order in Orderings)
                 {
-                    var result = await state.Target.Owner._codeFixService.GetMostSevereFixableDiagnosticAsync(
-                            document, range.Span.ToTextSpan(), cancellationToken).ConfigureAwait(false);
+                    var priority = TryGetPriority(order);
+                    Contract.ThrowIfNull(priority);
 
-                    if (result.HasFix)
-                    {
-                        Logger.Log(FunctionId.SuggestedActions_HasSuggestedActionsAsync);
-                        return GetFixCategory(result.Diagnostic.Severity);
-                    }
-
-                    if (result.PartialResult)
-                    {
-                        // reset solution version number so that we can raise suggested action changed event
-                        Volatile.Write(ref state.Target.LastSolutionVersionReported, InvalidSolutionVersion);
-                        return null;
-                    }
+                    var result = await GetFixLevelAsync(priority.Value).ConfigureAwait(false);
+                    if (result != null)
+                        return result;
                 }
 
                 return null;
+
+                async Task<string?> GetFixLevelAsync(CodeActionRequestPriority priority)
+                {
+                    if (state.Target.Owner._codeFixService != null &&
+                        state.Target.SubjectBuffer.SupportsCodeFixes())
+                    {
+                        var result = await state.Target.Owner._codeFixService.GetMostSevereFixAsync(
+                            document, range.Span.ToTextSpan(), priority, fallbackOptions, isBlocking: false, cancellationToken).ConfigureAwait(false);
+
+                        if (result.HasFix)
+                        {
+                            Logger.Log(FunctionId.SuggestedActions_HasSuggestedActionsAsync);
+                            return GetFixCategory(result.CodeFixCollection.FirstDiagnostic.Severity);
+                        }
+
+                        if (!result.UpToDate)
+                        {
+                            // reset solution version number so that we can raise suggested action changed event
+                            Volatile.Write(ref state.Target.LastSolutionVersionReported, InvalidSolutionVersion);
+                            return null;
+                        }
+                    }
+
+                    return null;
+                }
             }
 
             private async Task<string?> TryGetRefactoringSuggestedActionCategoryAsync(
                 Document document,
                 TextSpan? selection,
+                CodeActionOptionsProvider fallbackOptions,
                 CancellationToken cancellationToken)
             {
                 using var state = _state.TryAddReference();
@@ -451,7 +483,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                     state.Target.SubjectBuffer.SupportsRefactorings())
                 {
                     if (await state.Target.Owner._codeRefactoringService.HasRefactoringsAsync(
-                            document, selection.Value, cancellationToken).ConfigureAwait(false))
+                            document, selection.Value, fallbackOptions, cancellationToken).ConfigureAwait(false))
                     {
                         return PredefinedSuggestedActionCategoryNames.Refactoring;
                     }
@@ -604,10 +636,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 if (document == null)
                     return null;
 
+                var fallbackOptions = GlobalOptions.GetCodeActionOptionsProvider();
+
                 using var linkedTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
                 var linkedToken = linkedTokenSource.Token;
 
-                var errorTask = Task.Run(() => GetFixLevelAsync(state, document, range, linkedToken), linkedToken);
+                var errorTask = Task.Run(() => GetFixLevelAsync(state, document, range, fallbackOptions, linkedToken), linkedToken);
 
                 var selection = await GetSpanAsync(state, range, linkedToken).ConfigureAwait(false);
 
@@ -615,7 +649,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 if (selection != null)
                 {
                     refactoringTask = Task.Run(
-                        () => TryGetRefactoringSuggestedActionCategoryAsync(document, selection, linkedToken), linkedToken);
+                        () => TryGetRefactoringSuggestedActionCategoryAsync(document, selection, fallbackOptions, linkedToken), linkedToken);
                 }
 
                 // If we happen to get the result of the error task before the refactoring task,

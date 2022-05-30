@@ -3,8 +3,6 @@
 
 #nullable enable
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -12,7 +10,7 @@ using Microsoft.AspNetCore.Mvc.ViewFeatures;
 namespace Microsoft.AspNetCore.Mvc.ViewEngines;
 
 /// <summary>
-/// Represents the result of a view engine.
+/// Represents the result of an <see cref="IViewEngine" />.
 /// </summary>
 public class ViewEngineResult
 {

@@ -6,7 +6,7 @@ using System.Runtime.InteropServices;
 
 internal static partial class Interop
 {
-    internal static partial class libc
+    internal static partial class @libc
     {
         [StructLayout(LayoutKind.Sequential)]
         internal struct AttrList
@@ -23,7 +23,9 @@ internal static partial class Interop
             public const uint ATTR_CMN_CRTIME = 0x00000200;
         }
 
-        [DllImport(Libraries.libc, EntryPoint = "setattrlist", SetLastError = true)]
-        internal static unsafe extern int setattrlist(string path, AttrList* attrList, void* attrBuf, nint attrBufSize, CULong options);
+        [LibraryImport(Libraries.libc, EntryPoint = "setattrlist", StringMarshalling = StringMarshalling.Utf8, SetLastError = true)]
+        internal static unsafe partial int setattrlist(string path, AttrList* attrList, void* attrBuf, nint attrBufSize, CULong options);
+
+        internal const uint FSOPT_NOFOLLOW = 0x00000001;
     }
 }

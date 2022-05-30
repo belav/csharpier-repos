@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Routing;
 
@@ -38,15 +37,8 @@ public static class FallbackEndpointRouteBuilderExtensions
     /// </remarks>
     public static IEndpointConventionBuilder MapFallback(this IEndpointRouteBuilder endpoints, RequestDelegate requestDelegate)
     {
-        if (endpoints == null)
-        {
-            throw new ArgumentNullException(nameof(endpoints));
-        }
-
-        if (requestDelegate == null)
-        {
-            throw new ArgumentNullException(nameof(requestDelegate));
-        }
+        ArgumentNullException.ThrowIfNull(endpoints);
+        ArgumentNullException.ThrowIfNull(requestDelegate);
 
         return endpoints.MapFallback("{*path:nonfile}", requestDelegate);
     }
@@ -77,20 +69,9 @@ public static class FallbackEndpointRouteBuilderExtensions
         string pattern,
         RequestDelegate requestDelegate)
     {
-        if (endpoints == null)
-        {
-            throw new ArgumentNullException(nameof(endpoints));
-        }
-
-        if (pattern == null)
-        {
-            throw new ArgumentNullException(nameof(pattern));
-        }
-
-        if (requestDelegate == null)
-        {
-            throw new ArgumentNullException(nameof(requestDelegate));
-        }
+        ArgumentNullException.ThrowIfNull(endpoints);
+        ArgumentNullException.ThrowIfNull(pattern);
+        ArgumentNullException.ThrowIfNull(requestDelegate);
 
         var conventionBuilder = endpoints.Map(pattern, requestDelegate);
         conventionBuilder.WithDisplayName("Fallback " + pattern);

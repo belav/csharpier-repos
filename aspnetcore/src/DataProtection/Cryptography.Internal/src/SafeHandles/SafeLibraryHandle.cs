@@ -39,8 +39,7 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
         const uint GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS = 0x00000004U;
         const uint GET_MODULE_HANDLE_EX_FLAG_PIN = 0x00000001U;
 
-        IntPtr unused;
-        bool retVal = UnsafeNativeMethods.GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN, this, out unused);
+        bool retVal = UnsafeNativeMethods.GetModuleHandleEx(GET_MODULE_HANDLE_EX_FLAG_FROM_ADDRESS | GET_MODULE_HANDLE_EX_FLAG_PIN, this, out _);
         if (!retVal)
         {
             UnsafeNativeMethods.ThrowExceptionForLastWin32Error();
@@ -143,7 +142,7 @@ internal sealed unsafe class SafeLibraryHandle : SafeHandleZeroOrMinusOneIsInval
         // http://msdn.microsoft.com/en-us/library/ms683152(v=vs.85).aspx
         [return: MarshalAs(UnmanagedType.Bool)]
 #if NETSTANDARD2_0
-            [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
+        [ReliabilityContract(Consistency.WillNotCorruptState, Cer.Success)]
 #endif
         [DllImport("kernel32.dll", CallingConvention = CallingConvention.Winapi, CharSet = CharSet.Unicode)]
         internal static extern bool FreeLibrary(IntPtr hModule);

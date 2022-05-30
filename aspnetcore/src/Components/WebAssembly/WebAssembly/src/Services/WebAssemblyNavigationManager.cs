@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Diagnostics.CodeAnalysis;
 using Microsoft.JSInterop;
 using Interop = Microsoft.AspNetCore.Components.Web.BrowserNavigationManagerInterop;
@@ -11,7 +10,7 @@ namespace Microsoft.AspNetCore.Components.WebAssembly.Services;
 /// <summary>
 /// Default client-side implementation of <see cref="NavigationManager"/>.
 /// </summary>
-internal class WebAssemblyNavigationManager : NavigationManager
+internal sealed class WebAssemblyNavigationManager : NavigationManager
 {
     /// <summary>
     /// Gets the instance of <see cref="WebAssemblyNavigationManager"/>.

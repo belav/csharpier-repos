@@ -1,17 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using System.Linq;
 using System.Text;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Diagnostics.RazorViews;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Routing;
 using Microsoft.Extensions.FileProviders;
 using Microsoft.Extensions.Logging;
@@ -119,9 +116,10 @@ public class DeveloperExceptionPageMiddleware
 
                 await _exceptionHandler(new ErrorContext(context, ex));
 
-                if (_diagnosticSource.IsEnabled("Microsoft.AspNetCore.Diagnostics.UnhandledException"))
+                const string eventName = "Microsoft.AspNetCore.Diagnostics.UnhandledException";
+                if (_diagnosticSource.IsEnabled(eventName))
                 {
-                    _diagnosticSource.Write("Microsoft.AspNetCore.Diagnostics.UnhandledException", new { httpContext = context, exception = ex });
+                    WriteDiagnosticEvent(_diagnosticSource, eventName, new { httpContext = context, exception = ex });
                 }
 
                 return;
@@ -133,6 +131,11 @@ public class DeveloperExceptionPageMiddleware
             }
             throw;
         }
+
+        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026",
+            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency.")]
+        static void WriteDiagnosticEvent<TValue>(DiagnosticSource diagnosticSource, string name, TValue value)
+            => diagnosticSource.Write(name, value);
     }
 
     // Assumes the response headers have not been sent.  If they have, still attempt to write to the body.

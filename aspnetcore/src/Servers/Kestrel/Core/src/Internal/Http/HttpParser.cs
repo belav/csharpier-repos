@@ -1,25 +1,39 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
 using System.Diagnostics;
 using System.Runtime.CompilerServices;
 using System.Runtime.InteropServices;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 
 using BadHttpRequestException = Microsoft.AspNetCore.Http.BadHttpRequestException;
 
+/// <summary>
+/// This API supports framework infrastructure and is not intended to be used
+/// directly from application code.
+/// </summary>
+/// <typeparam name="TRequestHandler">This API supports framework infrastructure and is not intended to be used
+/// directly from application code.</typeparam>
 public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TRequestHandler : IHttpHeadersHandler, IHttpRequestLineHandler
 {
     private readonly bool _showErrorDetails;
 
+    /// <summary>
+    /// This API supports framework infrastructure and is not intended to be used
+    /// directly from application code.
+    /// </summary>
     public HttpParser() : this(showErrorDetails: true)
     {
     }
 
+    /// <summary>
+    /// This API supports framework infrastructure and is not intended to be used
+    /// directly from application code.
+    /// </summary>
     public HttpParser(bool showErrorDetails)
     {
         _showErrorDetails = showErrorDetails;
@@ -35,8 +49,20 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
     private const byte BytePercentage = (byte)'%';
     private const int MinTlsRequestSize = 1; // We need at least 1 byte to check for a proper TLS request line
 
+    /// <summary>
+    /// This API supports framework infrastructure and is not intended to be used
+    /// directly from application code.
+    /// </summary>
     public bool ParseRequestLine(TRequestHandler handler, ref SequenceReader<byte> reader)
     {
+        // Skip any leading \r or \n on the request line. This is not technically allowed,
+        // but apparently there are enough clients relying on this that it's worth allowing.
+        // Peek first as a minor performance optimization; it's a quick inlined check.
+        if (reader.TryPeek(out byte b) && (b == ByteCR || b == ByteLF))
+        {
+            reader.AdvancePastAny(ByteCR, ByteLF);
+        }
+
         if (reader.TryReadTo(out ReadOnlySpan<byte> requestLine, ByteLF, advancePastDelimiter: true))
         {
             ParseRequestLine(handler, requestLine);
@@ -138,6 +164,10 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
         handler.OnStartLine(versionAndMethod, path, startLine);
     }
 
+    /// <summary>
+    /// This API supports framework infrastructure and is not intended to be used
+    /// directly from application code.
+    /// </summary>
     public bool ParseHeaders(TRequestHandler handler, ref SequenceReader<byte> reader)
     {
         while (!reader.End)
@@ -145,7 +175,7 @@ public class HttpParser<TRequestHandler> : IHttpParser<TRequestHandler> where TR
             var span = reader.UnreadSpan;
             while (span.Length > 0)
             {
-                var ch1 = (byte)0;
+                byte ch1;
                 var ch2 = (byte)0;
                 var readAhead = 0;
 

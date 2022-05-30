@@ -13,12 +13,11 @@ namespace System.Text
 
         public void AppendFormat(string format, params object?[] args)
         {
-            if (args == null)
+            if (args is null)
             {
                 // To preserve the original exception behavior, throw an exception about format if both
                 // args and format are null. The actual null check for format is in AppendFormatHelper.
-                string paramName = (format == null) ? nameof(format) : nameof(args);
-                throw new ArgumentNullException(paramName);
+                ArgumentNullException.Throw(format is null ? nameof(format) : nameof(args));
             }
 
             AppendFormatHelper(null, format, new ParamsArray(args));
@@ -32,41 +31,25 @@ namespace System.Text
 
         public void AppendFormat(IFormatProvider? provider, string format, params object?[] args)
         {
-            if (args == null)
+            if (args is null)
             {
                 // To preserve the original exception behavior, throw an exception about format if both
                 // args and format are null. The actual null check for format is in AppendFormatHelper.
-                string paramName = (format == null) ? nameof(format) : nameof(args);
-                throw new ArgumentNullException(paramName);
+                ArgumentNullException.Throw(format is null ? nameof(format) : nameof(args));
             }
 
             AppendFormatHelper(provider, format, new ParamsArray(args));
-        }
-
-        internal void AppendSpanFormattable<T>(T value, string? format, IFormatProvider? provider) where T : ISpanFormattable
-        {
-            if (value.TryFormat(_chars.Slice(_pos), out int charsWritten, format, provider))
-            {
-                _pos += charsWritten;
-            }
-            else
-            {
-                Append(value.ToString(format, provider));
-            }
         }
 
         // Copied from StringBuilder, can't be done via generic extension
         // as ValueStringBuilder is a ref struct and cannot be used in a generic.
         internal void AppendFormatHelper(IFormatProvider? provider, string format, ParamsArray args)
         {
+            ArgumentNullException.ThrowIfNull(format);
+
             // Undocumented exclusive limits on the range for Argument Hole Index and Argument Hole Alignment.
             const int IndexLimit = 1000000; // Note:            0 <= ArgIndex < IndexLimit
             const int WidthLimit = 1000000; // Note:  -WidthLimit <  ArgAlign < WidthLimit
-
-            if (format == null)
-            {
-                throw new ArgumentNullException(nameof(format));
-            }
 
             int pos = 0;
             int len = format.Length;
@@ -129,7 +112,7 @@ namespace System.Text
                 pos++;
                 // If reached end of text then error (Unexpected end of text)
                 // or character is not a digit then error (Unexpected Character)
-                if (pos == len || (ch = format[pos]) < '0' || ch > '9') ThrowFormatError();
+                if (pos == len || !char.IsAsciiDigit(ch = format[pos])) ThrowFormatError();
                 int index = 0;
                 do
                 {
@@ -143,7 +126,7 @@ namespace System.Text
                     ch = format[pos];
                     // so long as character is digit and value of the index is less than 1000000 ( index limit )
                 }
-                while (ch >= '0' && ch <= '9' && index < IndexLimit);
+                while (char.IsAsciiDigit(ch) && index < IndexLimit);
 
                 // If value of index is not within the range of the arguments passed in then error (Index out of range)
                 if (index >= args.Length)
@@ -191,7 +174,7 @@ namespace System.Text
                     }
 
                     // If current character is not a digit then error (Unexpected character)
-                    if (ch < '0' || ch > '9')
+                    if (!char.IsAsciiDigit(ch))
                     {
                         ThrowFormatError();
                     }
@@ -208,7 +191,7 @@ namespace System.Text
                         ch = format[pos];
                         // So long a current character is a digit and the value of width is less than 100000 ( width limit )
                     }
-                    while (ch >= '0' && ch <= '9' && width < WidthLimit);
+                    while (char.IsAsciiDigit(ch) && width < WidthLimit);
                     // end of parsing Argument Alignment
                 }
 

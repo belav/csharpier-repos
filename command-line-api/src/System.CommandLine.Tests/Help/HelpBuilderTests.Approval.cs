@@ -4,14 +4,15 @@
 using Xunit;
 using System.IO;
 using ApprovalTests;
-using System.CommandLine.Help;
+using ApprovalTests.Reporters;
 
 namespace System.CommandLine.Tests.Help
 {
     public partial class HelpBuilderTests
     {
         [Fact]
-        public void Help_describes_default_values_for_complex_root_command_scenario()
+        [UseReporter(typeof(DiffReporter))]
+        public void Help_layout_has_not_changed()
         {
             var command = new RootCommand(description: "Test description")
             {
@@ -31,7 +32,7 @@ namespace System.CommandLine.Tests.Help
                 {
                     Description = "the-root-arg-enum-default-description"
                 },
-                new Option(aliases: new string[] {"--the-root-option-no-arg", "-trna"}) {
+                new Option<bool>(aliases: new string[] {"--the-root-option-no-arg", "-trna"}) {
                     Description = "the-root-option-no-arg-description",
                     IsRequired = true
                 },
@@ -59,7 +60,7 @@ namespace System.CommandLine.Tests.Help
                     Description = "the-root-option-description",
                     IsRequired = true
                 },
-                new Option(aliases: new string[] {"--the-root-option-multi-line-description", "-tromld"}) {
+                new Option<bool>(aliases: new string[] {"--the-root-option-multi-line-description", "-tromld"}) {
                     Description = "the-root-option\r\nmulti-line\ndescription"
                 }
             };

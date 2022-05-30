@@ -414,7 +414,7 @@ namespace System.Data
         /// <remarks>
         /// Arrays returned from this property will never contain <see langword="null" />.
         /// When setting this property, <see langword="null" /> indicates that the current column value
-        /// should be left as-is. <see cref="DBNull.Value" /> can be used to set the the value to null.
+        /// should be left as-is. <see cref="DBNull.Value" /> can be used to set the value to null.
         /// </remarks>
         public object?[] ItemArray
         {
@@ -1204,7 +1204,7 @@ namespace System.Data
                     }
                     foreach (DataColumn dc in _columns.ColumnsImplementingIChangeTracking)
                     {
-                        object? value = null;
+                        object? value;
                         if (RowState != DataRowState.Deleted)
                             value = this[dc];
                         else
@@ -1426,7 +1426,6 @@ namespace System.Data
                     _columns[i].CopyValueIntoStore(_tempRecord, storeList[i]!, (BitArray)nullbitList[i]!, storeIndex);
                 }
                 recordCount++;
-                storeIndex++;
             }
 
             return recordCount;

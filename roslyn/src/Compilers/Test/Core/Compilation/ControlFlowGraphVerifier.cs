@@ -1928,6 +1928,7 @@ endRegion:
                 case OperationKind.Stop:
                 case OperationKind.RaiseEvent:
                 case OperationKind.Literal:
+                case OperationKind.UTF8String:
                 case OperationKind.Conversion:
                 case OperationKind.Invocation:
                 case OperationKind.ArrayElementReference:
@@ -1993,6 +1994,9 @@ endRegion:
                 case OperationKind.InterpolatedStringAppendFormatted:
                 case OperationKind.InterpolatedStringAppendLiteral:
                 case OperationKind.InterpolatedStringAppendInvalid:
+                case OperationKind.SlicePattern:
+                case OperationKind.ListPattern:
+                case OperationKind.ImplicitIndexerReference:
                     return true;
             }
 

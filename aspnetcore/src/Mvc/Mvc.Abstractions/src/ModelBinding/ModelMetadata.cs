@@ -1,15 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.ComponentModel;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Reflection;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc.Abstractions;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Metadata;
 using Microsoft.AspNetCore.Mvc.ModelBinding.Validation;
@@ -27,6 +26,9 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     /// The default value of <see cref="ModelMetadata.Order"/>.
     /// </summary>
     public static readonly int DefaultOrder = 10000;
+
+    private static readonly ParameterBindingMethodCache ParameterBindingMethodCache
+        = new(throwOnInvalidMethod: false);
 
     private int? _hashCode;
     private IReadOnlyList<ModelMetadata>? _boundProperties;
@@ -215,7 +217,7 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     public abstract string? Description { get; }
 
     /// <summary>
-    /// Gets the format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to display the
+    /// Gets the format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to display the
     /// model.
     /// </summary>
     public abstract string? DisplayFormatString { get; }
@@ -226,7 +228,7 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     public abstract string? DisplayName { get; }
 
     /// <summary>
-    /// Gets the format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to edit the model.
+    /// Gets the format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to edit the model.
     /// </summary>
     public abstract string? EditFormatString { get; }
 
@@ -364,6 +366,7 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
 
     /// <summary>
     /// Gets the text to display as a placeholder value for an editor.
+    /// By default, this is configured using <see cref="System.ComponentModel.DataAnnotations.DisplayAttribute.Prompt" />.
     /// </summary>
     public abstract string? Placeholder { get; }
 
@@ -395,6 +398,7 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
 
     /// <summary>
     /// Gets a string used by the templating system to discover display-templates and editor-templates.
+    /// Use <see cref="System.ComponentModel.DataAnnotations.UIHintAttribute" /> to specify.
     /// </summary>
     public abstract string? TemplateHint { get; }
 
@@ -411,7 +415,7 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     public abstract bool ValidateChildren { get; }
 
     /// <summary>
-    /// Gets a value that indicates if the model, or one of it's properties, or elements has associated validators.
+    /// Gets a value that indicates if the model, or one of its properties or elements, has associated validators.
     /// </summary>
     /// <remarks>
     /// When <see langword="false"/>, validation can be assume that the model is valid (<see cref="ModelValidationState.Valid"/>) without
@@ -435,10 +439,10 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     /// </summary>
     /// <remarks>
     /// A complex type is defined as a <see cref="Type"/> without a <see cref="TypeConverter"/> that can convert
-    /// from <see cref="string"/>. Most POCO and <see cref="IEnumerable"/> types are therefore complex. Most, if
-    /// not all, BCL value types are simple types.
+    /// from <see cref="string"/> and without a <c>TryParse</c> method. Most POCO and <see cref="IEnumerable"/> types are therefore complex.
+    /// Most, if not all, BCL value types are simple types.
     /// </remarks>
-    public bool IsComplexType { get; private set; }
+    public bool IsComplexType => !IsConvertibleType && !IsParseableType;
 
     /// <summary>
     /// Gets a value indicating whether or not <see cref="ModelType"/> is a <see cref="Nullable{T}"/>.
@@ -477,6 +481,26 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     public Type UnderlyingOrModelType { get; private set; } = default!;
 
     /// <summary>
+    /// Gets a value indicating whether or not <see cref="ModelType"/> has a TryParse method.
+    /// </summary>
+    internal virtual bool IsParseableType { get; private set; }
+
+    /// <summary>
+    /// Gets a value indicating whether or not <see cref="ModelType"/> has a <see cref="TypeConverter"/>
+    /// from <see cref="string"/>.
+    /// </summary>
+    internal bool IsConvertibleType { get; private set; }
+
+    /// <summary>
+    /// Gets a value indicating the NullabilityState of the value or reference type.
+    /// </summary>
+    /// <remarks>
+    /// The state will be set for Parameters and Properties <see cref="ModelMetadataKind"/>
+    /// otherwise the state will be <c>NullabilityState.Unknown</c>
+    /// </remarks>
+    internal NullabilityState NullabilityState { get; set; }
+
+    /// <summary>
     /// Gets a property getter delegate to get the property value from a model object.
     /// </summary>
     public abstract Func<object, object?>? PropertyGetter { get; }
@@ -497,6 +521,17 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     internal virtual bool PropertyHasValidators => false;
 
     /// <summary>
+    /// Gets the name of a model, if specified explicitly, to be used on <see cref="ValidationEntry"/>
+    /// </summary>
+    internal virtual string? ValidationModelName { get; }
+
+    /// <summary>
+    /// Gets the value that indicates if the parameter has a default value set.
+    /// This is only available when <see cref="MetadataKind"/> is <see cref="ModelMetadataKind.Parameter"/> otherwise it will be false.
+    /// </summary>
+    internal bool HasDefaultValue { get; private set; }
+
+    /// <summary>
     /// Throws if the ModelMetadata is for a record type with validation on properties.
     /// </summary>
     internal void ThrowIfRecordTypeHasValidationOnProperties()
@@ -506,6 +541,12 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
         {
             throw _recordTypeValidatorsOnPropertiesError;
         }
+    }
+
+    internal static Func<ParameterExpression, Expression, Expression>? FindTryParseMethod(Type modelType)
+    {
+        modelType = Nullable.GetUnderlyingType(modelType) ?? modelType;
+        return ParameterBindingMethodCache.FindTryParseMethod(modelType);
     }
 
     [MemberNotNull(nameof(_parameterMapping), nameof(_boundConstructorPropertyMapping))]
@@ -603,13 +644,24 @@ public abstract class ModelMetadata : IEquatable<ModelMetadata?>, IModelMetadata
     {
         Debug.Assert(ModelType != null);
 
-        IsComplexType = !TypeDescriptor.GetConverter(ModelType).CanConvertFrom(typeof(string));
+        IsConvertibleType = TypeDescriptor.GetConverter(ModelType).CanConvertFrom(typeof(string));
+        IsParseableType = FindTryParseMethod(ModelType) is not null;
         IsNullableValueType = Nullable.GetUnderlyingType(ModelType) != null;
         IsReferenceOrNullableType = !ModelType.IsValueType || IsNullableValueType;
         UnderlyingOrModelType = Nullable.GetUnderlyingType(ModelType) ?? ModelType;
+        HasDefaultValue = MetadataKind == ModelMetadataKind.Parameter && Identity.ParameterInfo!.HasDefaultValue;
 
         var collectionType = ClosedGenericMatcher.ExtractGenericInterface(ModelType, typeof(ICollection<>));
         IsCollectionType = collectionType != null;
+
+        var nullabilityContext = new NullabilityInfoContext();
+        var nullability = MetadataKind switch
+        {
+            ModelMetadataKind.Parameter => Identity.ParameterInfo != null ? nullabilityContext.Create(Identity.ParameterInfo!) : null,
+            ModelMetadataKind.Property => Identity.PropertyInfo != null ? nullabilityContext.Create(Identity.PropertyInfo!) : null,
+            _ => null
+        };
+        NullabilityState = nullability?.ReadState ?? NullabilityState.Unknown;
 
         if (ModelType == typeof(string) || !typeof(IEnumerable).IsAssignableFrom(ModelType))
         {

@@ -8,7 +8,7 @@ internal static partial class Interop
 {
     internal static partial class Winsock
     {
-        [GeneratedDllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
+        [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static unsafe partial SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
@@ -16,7 +16,7 @@ internal static partial class Interop
             byte* optionValue,
             ref int optionLength);
 
-        [GeneratedDllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
+        [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static partial SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
@@ -24,7 +24,7 @@ internal static partial class Interop
             out Linger optionValue,
             ref int optionLength);
 
-        [GeneratedDllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
+        [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
         internal static partial SocketError getsockopt(
             SafeSocketHandle socketHandle,
             SocketOptionLevel optionLevel,
@@ -32,12 +32,12 @@ internal static partial class Interop
             out IPMulticastRequest optionValue,
             ref int optionLength);
 
-        [DllImport(Interop.Libraries.Ws2_32, SetLastError = true)]
-        internal static extern SocketError getsockopt(
-            [In] SafeSocketHandle socketHandle,
-            [In] SocketOptionLevel optionLevel,
-            [In] SocketOptionName optionName,
-            [Out] out IPv6MulticastRequest optionValue,
-            [In, Out] ref int optionLength);
+        [LibraryImport(Interop.Libraries.Ws2_32, SetLastError = true)]
+        internal static partial SocketError getsockopt(
+            SafeSocketHandle socketHandle,
+            SocketOptionLevel optionLevel,
+            SocketOptionName optionName,
+            out IPv6MulticastRequest optionValue,
+            ref int optionLength);
     }
 }

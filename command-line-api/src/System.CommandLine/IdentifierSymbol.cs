@@ -2,15 +2,16 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace System.CommandLine
 {
     /// <summary>
     /// A symbol, such as an option or command, having one or more fixed names in a command line interface.
     /// </summary>
-    public abstract class IdentifierSymbol : Symbol, IIdentifierSymbol
+    public abstract class IdentifierSymbol : Symbol
     {
-        private readonly HashSet<string> _aliases = new();
+        private protected readonly HashSet<string> _aliases = new(StringComparer.Ordinal);
         private string? _specifiedName;
 
         /// <summary>
@@ -33,44 +34,69 @@ namespace System.CommandLine
             Description = description;
         }
 
-        /// <inheritdoc />
+        /// <summary>
+        /// Gets the set of strings that can be used on the command line to specify the symbol.
+        /// </summary>
         public IReadOnlyCollection<string> Aliases => _aliases;
 
         /// <inheritdoc/>
         public override string Name
         {
-            get => _specifiedName ?? DefaultName;
+            get => _specifiedName ??= DefaultName;
             set
             {
-                if (string.IsNullOrWhiteSpace(value))
+                if (_specifiedName is null || !string.Equals(_specifiedName, value, StringComparison.Ordinal))
                 {
-                    throw new ArgumentException("Value cannot be null or whitespace.", nameof(value));
+                    AddAlias(value);
+
+                    if (_specifiedName is { })
+                    {
+                        RemoveAlias(_specifiedName);
+                    }
+
+                    _specifiedName = value;
                 }
-
-                if (_specifiedName is { })
-                {
-                    RemoveAlias(_specifiedName);
-                }
-
-                _specifiedName = value;
-
-                AddAliasInner(value);
             }
         }
 
-        private protected virtual void AddAliasInner(string alias)
+        /// <summary>
+        /// Adds an <see href="/dotnet/standard/commandline/syntax#aliases">alias</see>.
+        /// </summary>
+        /// <param name="alias">The alias to add.</param>
+        /// <remarks>
+        /// You can add multiple aliases for a symbol.
+        /// </remarks>
+        public void AddAlias(string alias)
         {
+            ThrowIfAliasIsInvalid(alias);
+
             _aliases.Add(alias);
-
-            OnNameOrAliasChanged?.Invoke(this);
         }
 
-        private protected virtual void RemoveAlias(string alias)
+        private protected virtual void RemoveAlias(string alias) => _aliases.Remove(alias);
+
+        /// <summary>
+        /// Determines whether the specified alias has already been defined.
+        /// </summary>
+        /// <param name="alias">The alias to search for.</param>
+        /// <returns><see langword="true" /> if the alias has already been defined; otherwise <see langword="false" />.</returns>
+        public bool HasAlias(string alias) => _aliases.Contains(alias);
+
+        [DebuggerStepThrough]
+        private void ThrowIfAliasIsInvalid(string alias)
         {
-            _aliases.Remove(alias);
-        }
+            if (string.IsNullOrWhiteSpace(alias))
+            {
+                throw new ArgumentException("An alias cannot be null, empty, or consist entirely of whitespace.");
+            }
 
-        /// <inheritdoc />
-        public virtual bool HasAlias(string alias) => _aliases.Contains(alias);
+            for (var i = 0; i < alias.Length; i++)
+            {
+                if (char.IsWhiteSpace(alias[i]))
+                {
+                    throw new ArgumentException($"Alias cannot contain whitespace: \"{alias}\"", nameof(alias));
+                }
+            }
+        }
     }
 }

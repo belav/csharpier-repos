@@ -379,7 +379,7 @@ namespace System.Tests
         }
 
         [Fact]
-        [SkipOnPlatform(TestPlatforms.Browser, "Throws PNSE")]
+        [SkipOnPlatform(TestPlatforms.Browser | TestPlatforms.iOS | TestPlatforms.tvOS, "Throws PNSE")]
         public void MonitoringIsEnabled()
         {
             Assert.True(AppDomain.MonitoringIsEnabled);
@@ -815,6 +815,7 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(TestingCreateInstanceFromObjectHandleData))]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/65560", TestPlatforms.iOS | TestPlatforms.tvOS)]
         public static void TestingCreateInstanceFromObjectHandle(string physicalFileName, string assemblyFile, string type, string returnedFullNameType, Type exceptionType)
         {
             ObjectHandle oh = null;

@@ -17,7 +17,7 @@ internal static partial class Interop
 
         internal const int NS_ALL = 0;
 
-        [GeneratedDllImport(Libraries.Ws2_32, CharSet = CharSet.Unicode, ExactSpelling = true, SetLastError = true)]
+        [LibraryImport(Libraries.Ws2_32, SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
         internal static unsafe partial int GetAddrInfoExW(
             string pName,
             string? pServiceName,
@@ -30,11 +30,11 @@ internal static partial class Interop
             delegate* unmanaged<int, int, NativeOverlapped*, void> lpCompletionRoutine,
             IntPtr* lpNameHandle);
 
-        [DllImport(Libraries.Ws2_32, ExactSpelling = true)]
-        internal static extern unsafe int GetAddrInfoExCancel([In] IntPtr* lpHandle);
+        [LibraryImport(Libraries.Ws2_32)]
+        internal static unsafe partial int GetAddrInfoExCancel(IntPtr* lpHandle);
 
-        [DllImport(Libraries.Ws2_32, ExactSpelling = true)]
-        internal static extern unsafe void FreeAddrInfoExW(AddressInfoEx* pAddrInfo);
+        [LibraryImport(Libraries.Ws2_32)]
+        internal static unsafe partial void FreeAddrInfoExW(AddressInfoEx* pAddrInfo);
 
         [StructLayout(LayoutKind.Sequential)]
         internal unsafe struct AddressInfoEx

@@ -1,9 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Globalization;
-using System.IO;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
 using Microsoft.AspNetCore.Server.Kestrel.Https;
@@ -12,7 +10,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Certificates;
 
-internal class CertificateConfigLoader : ICertificateConfigLoader
+internal sealed class CertificateConfigLoader : ICertificateConfigLoader
 {
     public CertificateConfigLoader(IHostEnvironment hostEnvironment, ILogger<KestrelServer> logger)
     {

@@ -1272,26 +1272,16 @@ namespace System.Runtime.Serialization
             return type;
         }
 
-        private static bool IsAlpha(char ch)
-        {
-            return (ch >= 'A' && ch <= 'Z' || ch >= 'a' && ch <= 'z');
-        }
-
-        private static bool IsDigit(char ch)
-        {
-            return (ch >= '0' && ch <= '9');
-        }
-
         private static bool IsAsciiLocalName(string localName)
         {
             if (localName.Length == 0)
                 return false;
-            if (!IsAlpha(localName[0]))
+            if (!char.IsAsciiLetter(localName[0]))
                 return false;
             for (int i = 1; i < localName.Length; i++)
             {
                 char ch = localName[i];
-                if (!IsAlpha(ch) && !IsDigit(ch))
+                if (!char.IsAsciiLetterOrDigit(ch))
                     return false;
             }
             return true;
@@ -1328,8 +1318,7 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         internal static XmlQualifiedName GetStableName(Type type)
         {
-            bool hasDataContract;
-            return GetStableName(type, out hasDataContract);
+            return GetStableName(type, out _);
         }
 
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
@@ -1362,7 +1351,7 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         private static XmlQualifiedName GetDCTypeStableName(Type type, DataContractAttribute dataContractAttribute)
         {
-            string? name = null, ns = null;
+            string? name, ns;
             if (dataContractAttribute.IsNameSetExplicitly)
             {
                 name = dataContractAttribute.Name;
@@ -1391,12 +1380,11 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         private static XmlQualifiedName GetNonDCTypeStableName(Type type)
         {
-            string? name = null, ns = null;
+            string? name, ns;
 
             Type? itemType;
-            CollectionDataContractAttribute? collectionContractAttribute;
             if (CollectionDataContract.IsCollection(type, out itemType))
-                return GetCollectionStableName(type, itemType, out collectionContractAttribute);
+                return GetCollectionStableName(type, itemType, out _);
             name = GetDefaultStableLocalName(type);
 
             // ensures that ContractNamespaceAttribute is honored when used with non-attributed types
@@ -1423,16 +1411,13 @@ namespace System.Runtime.Serialization
             }
             else if (Globals.TypeOfIXmlSerializable.IsAssignableFrom(type))
             {
-                bool hasRoot;
-                XmlSchemaType? xsdType;
                 XmlQualifiedName xmlTypeStableName;
-                SchemaExporter.GetXmlTypeInfo(type, out xmlTypeStableName, out xsdType, out hasRoot);
+                SchemaExporter.GetXmlTypeInfo(type, out xmlTypeStableName, out _, out _);
                 stableName = xmlTypeStableName;
             }
             else if (type.IsArray)
             {
-                CollectionDataContractAttribute? collectionContractAttribute;
-                stableName = GetCollectionStableName(type, type.GetElementType()!, out collectionContractAttribute);
+                stableName = GetCollectionStableName(type, type.GetElementType()!, out _);
             }
             return stableName != null;
         }
@@ -2220,7 +2205,7 @@ namespace System.Runtime.Serialization
                 string internalsVisibleAttributeAssemblyName = internalsVisibleAttribute.AssemblyName;
 
                 if (internalsVisibleAttributeAssemblyName.Trim().Equals("System.Runtime.Serialization") ||
-                    Regex.IsMatch(internalsVisibleAttributeAssemblyName, Globals.FullSRSInternalsVisiblePattern))
+                    Globals.FullSRSInternalsVisibleRegex().IsMatch(internalsVisibleAttributeAssemblyName))
                 {
                     return true;
                 }
@@ -2243,7 +2228,8 @@ namespace System.Runtime.Serialization
         [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
         string GetNamespaces();
         string GetGenericTypeName();
-        bool ParametersFromBuiltInNamespaces {
+        bool ParametersFromBuiltInNamespaces
+        {
             [RequiresUnreferencedCode(DataContract.SerializerTrimmerWarning)]
             get;
         }
@@ -2265,8 +2251,8 @@ namespace System.Runtime.Serialization
             _genericParams = new object[genericParams.Length];
             genericParams.CopyTo(_genericParams, 0);
 
-            string name, ns;
-            DataContract.GetClrNameAndNamespace(genericTypeName, out name, out ns);
+            string name;
+            DataContract.GetClrNameAndNamespace(genericTypeName, out name, out _);
             _nestedParamCounts = DataContract.GetDataContractNameForGenericName(name, null);
         }
 

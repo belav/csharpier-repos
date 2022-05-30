@@ -4,7 +4,6 @@
 using System.Collections.Generic;
 using System.CommandLine.Builder;
 using System.CommandLine.Parsing;
-using System.Linq;
 
 namespace System.CommandLine
 {
@@ -13,18 +12,18 @@ namespace System.CommandLine
     /// </summary>
     internal static class SymbolExtensions
     {
-        internal static IReadOnlyList<IArgument> Arguments(this ISymbol symbol)
+        internal static IReadOnlyList<Argument> Arguments(this Symbol symbol)
         {
             switch (symbol)
             {
-                case IOption option:
+                case Option option:
                     return new[]
                     {
                         option.Argument
                     };
-                case ICommand command:
+                case Command command:
                     return command.Arguments;
-                case IArgument argument:
+                case Argument argument:
                     return new[]
                     {
                         argument
@@ -34,23 +33,30 @@ namespace System.CommandLine
             }
         }
 
-        internal static Parser GetOrCreateDefaultParser(this Symbol symbol)
+        internal static Parser GetOrCreateDefaultSimpleParser(this Symbol symbol)
         {
             var root = GetOrCreateRootCommand(symbol);
 
-            if (root.ImplicitParser is { } parser)
+            if (root.ImplicitSimpleParser is not { } parser)
             {
-                return parser;
-            }
-            else
-            {
-                return BuildParser(root);
+                parser = new Parser(new CommandLineConfiguration(root));
+                root.ImplicitSimpleParser = parser;
             }
 
-            static Parser BuildParser(Command cmd)
+            return parser;
+        }
+        
+        internal static Parser GetOrCreateDefaultInvocationParser(this Symbol symbol)
+        {
+            var root = GetOrCreateRootCommand(symbol);
+
+            if (root.ImplicitInvocationParser is not { } parser)
             {
-                return new Parser(new CommandLineConfiguration(cmd));
+                parser = new CommandLineBuilder(root).UseDefaults().Build();
+                root.ImplicitInvocationParser = parser;
             }
+
+            return parser;
         }
 
         internal static Command GetOrCreateRootCommand(Symbol symbol)
@@ -60,21 +66,29 @@ namespace System.CommandLine
                 return cmd;
             }
 
-            if (symbol.Parents.Count == 0)
+            if (symbol.FirstParent is null)
             {
-                return new RootCommand { symbol };
+                return Create(symbol);
             }
 
-            var root = symbol.Parents
-                             .OfType<RootCommand>()
-                             .FirstOrDefault();
-
-            if (root is null)
+            ParentNode? current = symbol.FirstParent;
+            while (current is not null)
             {
-                root = new RootCommand { symbol };
+                if (current.Symbol is RootCommand root)
+                {
+                    return root;
+                }
+
+                current = current.Next;
             }
 
-            return root;
+            return Create(symbol);
+
+            static RootCommand Create(Symbol notCommand)
+                => notCommand is Option option
+                    ? new RootCommand { option }
+                    // we know it's not a Command and not an Option, so it can only be an Argument
+                    : new RootCommand { (Argument)notCommand };
         }
     }
 }

@@ -1,19 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.Diagnostics;
-using System.IO;
 using System.IO.Pipelines;
 using System.Net.Security;
 using System.Security;
 using System.Security.Authentication;
 using System.Security.Cryptography;
 using System.Security.Cryptography.X509Certificates;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;
@@ -26,7 +21,7 @@ using Microsoft.Extensions.Logging.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Https.Internal;
 
-internal class HttpsConnectionMiddleware
+internal sealed class HttpsConnectionMiddleware
 {
     private const string EnableWindows81Http2 = "Microsoft.AspNetCore.Server.Kestrel.EnableWindows81Http2";
 
@@ -196,7 +191,6 @@ internal class HttpsConnectionMiddleware
             await sslStream.DisposeAsync();
             return;
         }
-
 
         KestrelEventSource.Log.TlsHandshakeStop(context, feature);
 
@@ -529,8 +523,8 @@ internal class HttpsConnectionMiddleware
             sslServerAuthenticationOptions.ServerCertificate = null;
             sslServerAuthenticationOptions.ServerCertificateSelectionCallback = (sender, host) =>
             {
-                    // There is no ConnectionContext available durring the QUIC handshake.
-                    var cert = httpsOptions.ServerCertificateSelector(null, host);
+                // There is no ConnectionContext available durring the QUIC handshake.
+                var cert = httpsOptions.ServerCertificateSelector(null, host);
                 if (cert != null)
                 {
                     EnsureCertificateIsAllowedForServerAuth(cert);

@@ -8,7 +8,8 @@ using Microsoft.AspNetCore.E2ETesting;
 using Microsoft.AspNetCore.Testing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Interactions;
-using Xunit;
+using OpenQA.Selenium.Support.Extensions;
+using OpenQA.Selenium.Support.UI;
 using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
@@ -41,13 +42,13 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         // Focus the target, verify onfocusin is fired
         input.Click();
 
-        Browser.Equal("onfocus,onfocusin,", () => output.Text);
+        Browser.Equal("focus,focusin,", () => output.Text);
 
         // Focus something else, verify onfocusout is also fired
         var other = Browser.Exists(By.Id("other"));
         other.Click();
 
-        Browser.Equal("onfocus,onfocusin,onblur,onfocusout,", () => output.Text);
+        Browser.Equal("focus,focusin,blur,focusout,", () => output.Text);
     }
 
     [Fact]
@@ -79,7 +80,28 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
             .MoveToElement(other);
 
         actions.Perform();
-        Browser.Equal("onmouseover,onmouseout,", () => output.Text);
+        Browser.Equal("mouseover,mouseout,", () => output.Text);
+    }
+
+    [Fact]
+    public void MouseEnterAndMouseLeave_CanTrigger()
+    {
+        Browser.MountTestComponent<MouseEventComponent>();
+
+        var input = Browser.Exists(By.Id("mouseenter_input"));
+
+        var output = Browser.Exists(By.Id("output"));
+        Assert.Equal(string.Empty, output.Text);
+
+        // Mouse enter the button and then mouse leave
+        Browser.ExecuteJavaScript($@"
+            var mouseEnterElement = document.getElementById('mouseenter_input');
+            var mouseEnterEvent = new MouseEvent('mouseenter');
+            var mouseLeaveEvent = new MouseEvent('mouseleave');
+            mouseEnterElement.dispatchEvent(mouseEnterEvent);
+            mouseEnterElement.dispatchEvent(mouseLeaveEvent);");
+
+        Browser.Equal("mouseenter,mouseleave,", () => output.Text);
     }
 
     [Fact]
@@ -98,7 +120,7 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
             .MoveToElement(input, 10, 10);
 
         actions.Perform();
-        Browser.Contains("onmousemove,", () => output.Text);
+        Browser.Contains("mousemove,", () => output.Text);
     }
 
     [Fact]
@@ -117,14 +139,13 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var actions = new Actions(Browser).ClickAndHold(input);
 
         actions.Perform();
-        Browser.Equal("onmousedown,", () => output.Text);
+        Browser.Equal("mousedown,", () => output.Text);
 
         actions = new Actions(Browser).Release(input);
 
         actions.Perform();
-        Browser.Equal("onmousedown,onmouseup,", () => output.Text);
+        Browser.Equal("mousedown,mouseup,", () => output.Text);
     }
-
 
     [Fact]
     public void Toggle_CanTrigger()
@@ -156,7 +177,7 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var actions = new Actions(Browser).ClickAndHold(input);
 
         actions.Perform();
-        Browser.Equal("onpointerdown", () => output.Text);
+        Browser.Equal("pointerdown,", () => output.Text);
     }
 
     [Fact]
@@ -174,9 +195,12 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
 
         actions.Perform();
         // drop doesn't seem to trigger in Selenium. But it's sufficient to determine "any" drag event works
-        Browser.Equal("ondragstart,", () => output.Text);
+        Browser.Equal("dragstart,", () => output.Text);
     }
 
+    // Skipped because it will never pass because Selenium doesn't support this kind of event
+    // The linked issue tracks the desire to find a way of testing this
+    // There's no point quarantining it - we know it will always fail
     [Fact(Skip = "https://github.com/dotnet/aspnetcore/issues/32373")]
     public void TouchEvent_CanTrigger()
     {
@@ -190,7 +214,7 @@ public class EventTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var actions = new TouchActions(Browser).SingleTap(input);
 
         actions.Perform();
-        Browser.Equal("touchstarttouchend,", () => output.Text);
+        Browser.Equal("touchstart,touchend,", () => output.Text);
     }
 
     [Fact]

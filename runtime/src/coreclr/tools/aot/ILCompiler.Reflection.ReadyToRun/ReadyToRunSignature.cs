@@ -14,7 +14,7 @@ using Internal.ReadyToRunConstants;
 namespace ILCompiler.Reflection.ReadyToRun
 {
     /// <summary>
-    /// This represents all possible signatures that is 
+    /// This represents all possible signatures that is
     /// </summary>
     public abstract class ReadyToRunSignature
     {
@@ -1724,10 +1724,6 @@ namespace ILCompiler.Reflection.ReadyToRun
 
                 case ReadyToRunHelper.NewMultiDimArr:
                     builder.Append("NEW_MULTI_DIM_ARR");
-                    break;
-
-                case ReadyToRunHelper.NewMultiDimArr_NonVarArg:
-                    builder.Append("NEW_MULTI_DIM_ARR__NON_VAR_ARG");
                     break;
 
                 case ReadyToRunHelper.MonitorEnter:

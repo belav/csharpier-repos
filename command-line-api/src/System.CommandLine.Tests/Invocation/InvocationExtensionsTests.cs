@@ -1,7 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -51,7 +50,7 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create(() => wasCalled = true);
+            rootCommand.SetHandler(() => wasCalled = true);
 
             var result = await rootCommand.InvokeAsync("");
 
@@ -65,7 +64,7 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create(() => wasCalled = true);
+            rootCommand.SetHandler(() => wasCalled = true);
 
             int result = rootCommand.Invoke("");
 
@@ -79,14 +78,14 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create(() =>
+            rootCommand.SetHandler(() =>
             {
                 wasCalled = true;
                 throw new Exception("oops!");
 
                 // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                return 0;
+                return Task.FromResult(0);
 #pragma warning restore CS0162
             });
 
@@ -102,14 +101,14 @@ namespace System.CommandLine.Tests.Invocation
             var wasCalled = false;
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create(() =>
+            rootCommand.SetHandler(() =>
             {
                 wasCalled = true;
                 throw new Exception("oops!");
 
                 // Help the compiler pick a CommandHandler.Create overload.
 #pragma warning disable CS0162 // Unreachable code detected
-                return 0;
+                return Task.FromResult(0);
 #pragma warning restore CS0162
             });
 
@@ -124,9 +123,10 @@ namespace System.CommandLine.Tests.Invocation
         {
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create<InvocationContext>(context =>
+            rootCommand.SetHandler(context =>
             {
                 context.ExitCode = 123;
+                return Task.CompletedTask;
             });
 
             var resultCode = await rootCommand.InvokeAsync("");
@@ -139,9 +139,10 @@ namespace System.CommandLine.Tests.Invocation
         {
             var rootCommand = new RootCommand();
 
-            rootCommand.Handler = CommandHandler.Create<InvocationContext>(context =>
+            rootCommand.SetHandler(context =>
             {
                 context.ExitCode = 123;
+                return Task.CompletedTask;
             });
 
             int resultCode = rootCommand.Invoke("");

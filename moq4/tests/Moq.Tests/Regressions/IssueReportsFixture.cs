@@ -970,7 +970,6 @@ namespace Moq.Tests.Regressions
 
 		public class Issue193
 		{
-			[Fact(Skip = "Fails due to a bug in Castle DynamicProxy. Try enabling this test once we reference Castle.Core > 4.4.0.")]
 			public void Can_mock_class_type_where_generic_type_parameter_name_diverges_from_name_in_interface()
 			{
 				var mock = new Mock<C>();
@@ -3549,6 +3548,36 @@ namespace Moq.Tests.Regressions
 
 		#endregion
 
+		#region 1066
+
+		public class Issue1066
+		{
+			public interface IX
+			{
+				int Property { get; set; }
+			}
+
+			[Fact]
+			public void Stubbed_property_set_before_SetupGet()
+			{
+				var mock = Mock.Get(Mock.Of<IX>());
+				mock.Object.Property = 4;
+				mock.SetupGet(m => m.Property).Returns(3);
+				Assert.Equal(3, mock.Object.Property);
+			}
+
+			[Fact]
+			public void Stubbed_property_set_after_SetupGet()
+			{
+				var mock = Mock.Get(Mock.Of<IX>());
+				mock.SetupGet(m => m.Property).Returns(3);
+				mock.Object.Property = 4;
+				Assert.Equal(3, mock.Object.Property);
+			}
+		}
+
+		#endregion
+
 		#region 1071
 
 		public class Issue1071
@@ -3654,6 +3683,208 @@ namespace Moq.Tests.Regressions
 				public virtual void SecondCall()
 				{
 				}
+			}
+		}
+
+		#endregion
+
+		#region 1217
+
+		public class Issue1217
+		{
+			[Fact]
+			public void It_Is_predicates_are_evaluated_lazily()
+			{
+				var patternKey = "";
+				var exeKey = "";
+
+				var mock = new Mock<ISettingsService>();
+				mock.Setup(x => x.GetSetting(It.Is<string>(y => y == patternKey))).Returns(() => patternKey);
+				mock.Setup(x => x.GetSetting(It.Is<string>(y => y == exeKey))).Returns(() => exeKey);
+
+				patternKey = "foo";
+				exeKey = "bar";
+
+				Assert.Equal("foo", mock.Object.GetSetting(patternKey));
+				Assert.Equal("bar", mock.Object.GetSetting(exeKey));
+			}
+
+			public interface ISettingsService
+			{
+				string GetSetting(string key);
+			}
+		}
+
+		#endregion
+
+		#region 1225
+
+		public class Issue1225
+		{
+			public interface IHardware
+			{
+				void Transmit(IntPtr ptr, byte[] send, byte[] recv);
+			}
+
+			public class MyImpl : IHardware
+			{
+				public void Transmit(IntPtr ptr, byte[] send, byte[] recv)
+				{
+					Console.WriteLine(ptr);
+					Console.WriteLine(BitConverter.ToString(send));
+					Console.WriteLine(BitConverter.ToString(recv));
+				}
+			}
+
+			private static void DoWork(IHardware hw, byte[] send)
+			{
+				hw.Transmit((IntPtr)1, send, new byte[8]);
+			}
+
+			[Fact]
+			public void Pass_byte_array_directly()
+			{
+				Mock<IHardware> hwMock = new Mock<IHardware>();
+				hwMock.Setup(m => m.Transmit(It.IsAny<IntPtr>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()));
+
+				DoWork(hwMock.Object, new byte[] { 1, 2, 3 });
+
+				hwMock.Verify(m => m.Transmit((IntPtr)1, new byte[] { 1, 2, 3 }, It.IsAny<byte[]>()));
+			}
+
+			[Fact]
+			public void Pass_byte_array_indirectly_via_method_call()
+			{
+				Mock<IHardware> hwMock = new Mock<IHardware>();
+				hwMock.Setup(m => m.Transmit(It.IsAny<IntPtr>(), It.IsAny<byte[]>(), It.IsAny<byte[]>()));
+
+				DoWork(hwMock.Object, new byte[] { 1, 2, 3 });
+
+				string inputAsString = Convert.ToBase64String(new byte[] { 1, 2, 3 });
+
+				hwMock.Verify(m => m.Transmit((IntPtr)1, Convert.FromBase64String(inputAsString), It.IsAny<byte[]>()));
+			}
+		}
+
+		#endregion
+
+		#region 1240
+
+		public class Issue1240
+		{
+			public interface IFoo { IBar Bar { get; } }
+			public interface IBar
+			{
+				string Prop1 { get; }
+				string Prop2 { get; set; }
+			}
+
+			[Fact]
+			public void Property_on_submock_should_be_stubbed_1()
+			{
+				const string prop2 = "Prop2";
+				var mock = new Mock<IFoo>();
+
+				// mock.SetupGet(m => m.Bar.Prop1).Returns("Prop1");
+				//  ^ This line being commented out is the only difference from the test below.
+				//    Its absence would cause a `NullReferenceException` later.
+
+				mock.SetupProperty(m => m.Bar.Prop2);
+				mock.Object.Bar.Prop2 = prop2;
+				Assert.Equal(prop2, mock.Object.Bar.Prop2);
+			}
+
+			[Fact]
+			public void Property_on_submock_should_be_stubbed_2()
+			{
+				const string prop2 = "Prop2";
+				var mock = new Mock<IFoo>();
+
+				mock.SetupGet(m => m.Bar.Prop1).Returns("Prop1");
+
+				mock.SetupProperty(m => m.Bar.Prop2);
+				mock.Object.Bar.Prop2 = prop2;
+				Assert.Equal(prop2, mock.Object.Bar.Prop2);
+			}
+		}
+
+		#endregion
+
+		#region 1248
+
+		public class Issue1248
+		{
+			public interface IBase
+			{
+				bool Property { get; set; }
+			}
+
+			public interface IDerived : IBase
+			{
+			}
+
+			public class Base : IBase
+			{
+				public virtual bool Property { get; set; }
+			}
+
+			[Fact]
+			public void Test()
+			{
+				var mock = new Mock<Base>();
+				var mockAsDerived = mock.As<IDerived>();
+				mockAsDerived.SetupProperty(x => x.Property, false);
+
+				mockAsDerived.Object.Property = true;
+
+				mock.VerifySet(x => x.Property = true, Times.Once());
+				mockAsDerived.VerifySet(x => x.Property = true, Times.Once());
+				Assert.True(mockAsDerived.Object.Property);
+				Assert.True(mock.Object.Property);
+			}
+		}
+
+		#endregion
+
+		#region 1249
+
+		public class Issue1249
+		{
+			public class NonSealedType { }
+
+			public interface IFoo
+			{
+				NonSealedType Method(in int arg);
+			}
+
+			[Fact]
+			public void No_ArgumentException_due_to_parameter_refness()
+			{
+				var mock = new Mock<IFoo>() { CallBase = true, DefaultValue = DefaultValue.Mock };
+				_ = mock.Object.Method(default);
+			}
+		}
+
+		#endregion
+
+		#region 1253
+
+		public class Issue1253
+		{
+			public interface IFoo
+			{
+				Task<string> Bar();
+			}
+
+			[Fact]
+			public async Task Test()
+			{
+				var mock = new Mock<IFoo>();
+				mock.Setup(x => x.Bar().Result).Returns((string)null);
+
+				var result = await mock.Object.Bar();
+
+				Assert.Null(result);
 			}
 		}
 

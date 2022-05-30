@@ -43,8 +43,8 @@ public partial class HttpConnectionTests
             {
                 Assert.Equal("Bearer", request.Headers.Authorization.Scheme);
 
-                    // Call count increments with each call and is used as the access token
-                    Assert.Equal(callCount.ToString(CultureInfo.InvariantCulture), request.Headers.Authorization.Parameter);
+                // Call count increments with each call and is used as the access token
+                Assert.Equal(callCount.ToString(CultureInfo.InvariantCulture), request.Headers.Authorization.Parameter);
 
                 requestsExecuted = true;
 
@@ -108,7 +108,6 @@ public partial class HttpConnectionTests
             var testHttpHandler = new TestHttpMessageHandler(autoNegotiate: false);
             var requestsExecuted = false;
 
-
             testHttpHandler.OnNegotiate((_, cancellationToken) =>
             {
                 return ResponseUtils.CreateResponse(HttpStatusCode.OK, ResponseUtils.CreateNegotiationContent());
@@ -121,10 +120,10 @@ public partial class HttpConnectionTests
                 Assert.NotNull(userAgentHeader);
                 Assert.StartsWith("Microsoft SignalR/", userAgentHeader);
 
-                    // user agent version should come from version embedded in assembly metadata
-                    var assemblyVersion = typeof(Constants)
-                        .Assembly
-                        .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
+                // user agent version should come from version embedded in assembly metadata
+                var assemblyVersion = typeof(Constants)
+                    .Assembly
+                    .GetCustomAttribute<AssemblyInformationalVersionAttribute>();
 
                 Assert.Contains(assemblyVersion.InformationalVersion, userAgentHeader);
 
@@ -291,9 +290,9 @@ public partial class HttpConnectionTests
                     await connection.StartAsync().DefaultTimeout();
                     await connection.DisposeAsync().DefaultTimeout();
 
-                        // This will throw OperationCanceledException if it's forcibly terminated
-                        // which we don't want
-                        await transport.Receiving.DefaultTimeout();
+                    // This will throw OperationCanceledException if it's forcibly terminated
+                    // which we don't want
+                    await transport.Receiving.DefaultTimeout();
                 });
         }
 

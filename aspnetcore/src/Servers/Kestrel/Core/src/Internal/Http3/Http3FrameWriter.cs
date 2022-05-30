@@ -1,26 +1,21 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.IO.Pipelines;
 using System.Net.Http;
 using System.Net.Http.QPack;
-using System.Text;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
-using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure;
 using Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Infrastructure.PipeWriterHelpers;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http3;
 
-internal class Http3FrameWriter
+internal sealed class Http3FrameWriter
 {
     // These bytes represent a ":status: 100" continue response header frame encoded with
     // QPACK. To arrive at this, we first take the index in the QPACK static table for status
@@ -129,7 +124,7 @@ internal class Http3FrameWriter
         _outgoingFrame.Length = totalLength;
         _outputWriter.Advance(totalLength);
 
-        return _outputWriter.FlushAsync().AsTask();
+        return _outputWriter.FlushAsync().GetAsTask();
     }
 
     internal static int CalculateSettingsSize(List<Http3PeerSetting> settings)
@@ -159,7 +154,7 @@ internal class Http3FrameWriter
     {
         var buffer = _outputWriter.GetSpan(8);
         _outputWriter.Advance(VariableLengthIntegerHelper.WriteInteger(buffer, id));
-        return _outputWriter.FlushAsync().AsTask();
+        return _outputWriter.FlushAsync().GetAsTask();
     }
 
     public ValueTask<FlushResult> WriteDataAsync(in ReadOnlySequence<byte> data)
@@ -315,7 +310,7 @@ internal class Http3FrameWriter
 
                 _outgoingFrame.PrepareHeaders();
                 var buffer = _headerEncodingBuffer.GetSpan(HeaderBufferSize);
-                var done = QPackHeaderWriter.BeginEncode(_headersEnumerator, buffer, ref _headersTotalSize, out var payloadLength);
+                var done = QPackHeaderWriter.BeginEncodeHeaders(_headersEnumerator, buffer, ref _headersTotalSize, out var payloadLength);
                 FinishWritingHeaders(payloadLength, done);
             }
             // Any exception from the QPack encoder can leave the dynamic table in a corrupt state.
@@ -370,7 +365,7 @@ internal class Http3FrameWriter
 
                 _outgoingFrame.PrepareHeaders();
                 var buffer = _headerEncodingBuffer.GetSpan(HeaderBufferSize);
-                var done = QPackHeaderWriter.BeginEncode(statusCode, _headersEnumerator, buffer, ref _headersTotalSize, out var payloadLength);
+                var done = QPackHeaderWriter.BeginEncodeHeaders(statusCode, _headersEnumerator, buffer, ref _headersTotalSize, out var payloadLength);
                 FinishWritingHeaders(payloadLength, done);
             }
             // Any exception from the QPack encoder can leave the dynamic table in a corrupt state.

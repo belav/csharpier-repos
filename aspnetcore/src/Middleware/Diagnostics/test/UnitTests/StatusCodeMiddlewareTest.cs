@@ -1,18 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Linq;
 using System.Net;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Hosting;
-using Moq;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Diagnostics;
 
@@ -282,5 +278,39 @@ public class StatusCodeMiddlewareTest
         var response = await client.GetAsync("/");
         var content = await response.Content.ReadAsStringAsync();
         Assert.Equal("errorPage", content);
+    }
+
+    [Fact]
+    public async Task SkipStatusCodePages_SupportsEndpoints()
+    {
+        var builder = WebApplication.CreateBuilder();
+        builder.WebHost.UseTestServer();
+        await using var app = builder.Build();
+
+        app.UseRouting();
+
+        app.UseStatusCodePages();
+
+        app.UseEndpoints(endpoints =>
+        {
+            endpoints.MapGet("/", [SkipStatusCodePages] (c) =>
+            {
+                c.Response.StatusCode = 404;
+                return Task.CompletedTask;
+            });
+        });
+
+        app.Run((context) =>
+        {
+            throw new InvalidOperationException("Invalid input provided.");
+        });
+
+        await app.StartAsync();
+
+        using var server = app.GetTestServer();
+        var client = server.CreateClient();
+        var response = await client.GetAsync("/");
+        var content = await response.Content.ReadAsStringAsync();
+        Assert.Empty(content);
     }
 }

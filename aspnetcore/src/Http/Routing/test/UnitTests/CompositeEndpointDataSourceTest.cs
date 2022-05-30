@@ -1,16 +1,10 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Routing.Matching;
 using Microsoft.AspNetCore.Routing.Patterns;
 using Microsoft.AspNetCore.Routing.TestObjects;
 using Microsoft.Extensions.Primitives;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Routing;
 
@@ -159,20 +153,5 @@ public class CompositeEndpointDataSourceTest
             order,
             EndpointMetadataCollection.Empty,
             null);
-    }
-
-    private class CustomEndpointDataSource : EndpointDataSource
-    {
-        private readonly CancellationTokenSource _cts;
-        private readonly CancellationChangeToken _token;
-
-        public CustomEndpointDataSource()
-        {
-            _cts = new CancellationTokenSource();
-            _token = new CancellationChangeToken(_cts.Token);
-        }
-
-        public override IChangeToken GetChangeToken() => _token;
-        public override IReadOnlyList<Endpoint> Endpoints => Array.Empty<Endpoint>();
     }
 }

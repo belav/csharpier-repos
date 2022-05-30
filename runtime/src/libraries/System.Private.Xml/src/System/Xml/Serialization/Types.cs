@@ -11,7 +11,6 @@ namespace System.Xml.Serialization
     using System.Reflection;
     using System.Text;
     using System.Xml;
-    using System.Xml.Extensions;
     using System.Xml.Schema;
 
     // These classes provide a higher level view on reflection specific to
@@ -152,7 +151,7 @@ namespace System.Xml.Serialization
             get { return _isXsdType; }
         }
 
-        internal bool IsMappedType
+        internal static bool IsMappedType
         {
             get { return false; }
         }
@@ -686,12 +685,12 @@ namespace System.Xml.Serialization
             AddNonXsdPrimitive(type, dataTypeName, ns, formatterName, baseTypeName, Array.Empty<XmlSchemaFacet>(), flags);
         }
 
-        internal TypeDesc? GetTypeDesc(string name, string ns)
+        internal static TypeDesc? GetTypeDesc(string name, string ns)
         {
             return GetTypeDesc(name, ns, TypeFlags.CanBeElementValue | TypeFlags.CanBeTextValue | TypeFlags.CanBeAttributeValue);
         }
 
-        internal TypeDesc? GetTypeDesc(string name, string? ns, TypeFlags flags)
+        internal static TypeDesc? GetTypeDesc(string name, string? ns, TypeFlags flags)
         {
             TypeDesc? typeDesc = (TypeDesc?)s_primitiveNames[name, ns];
             if (typeDesc != null)
@@ -704,7 +703,7 @@ namespace System.Xml.Serialization
             return null;
         }
 
-        internal TypeDesc? GetTypeDesc(XmlSchemaSimpleType dataType)
+        internal static TypeDesc? GetTypeDesc(XmlSchemaSimpleType dataType)
         {
             return (TypeDesc?)s_primitiveDataTypes[dataType];
         }
@@ -784,7 +783,7 @@ namespace System.Xml.Serialization
         [RequiresUnreferencedCode("calls GetEnumeratorElementType")]
         private TypeDesc ImportTypeDesc(Type type, MemberInfo? memberInfo, bool directReference)
         {
-            TypeDesc? typeDesc = null;
+            TypeDesc? typeDesc;
             TypeKind kind;
             Type? arrayElementType = null;
             Type? baseType = null;
@@ -1164,7 +1163,7 @@ namespace System.Xml.Serialization
             // 2) Do the same thing for the memberMapping array. Note that we need to create a new copy of MemberMapping object since the old one could still be referenced
             //    by the StructMapping of the baseclass, so updating it directly could lead to other issues.
             Dictionary<string, MemberInfo>? replaceList = null;
-            MemberInfo? replacedInfo = null;
+            MemberInfo? replacedInfo;
             foreach (KeyValuePair<string, MemberInfo> pair in memberInfos)
             {
                 if (ShouldBeReplaced(pair.Value, structMapping.TypeDesc!.Type!, out replacedInfo))
@@ -1196,12 +1195,13 @@ namespace System.Xml.Serialization
             }
         }
 
+        // The DynamicallyAccessedMemberTypes.All annotation is required here because the method
+        // tries to access private members on base types (which is normally blocked by reflection)
+        // This doesn't make the requirements worse since the only callers already have the type
+        // annotated as All anyway.
         private static bool ShouldBeReplaced(
             MemberInfo memberInfoToBeReplaced,
-            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicProperties
-                | DynamicallyAccessedMemberTypes.NonPublicProperties
-                | DynamicallyAccessedMemberTypes.PublicFields
-                | DynamicallyAccessedMemberTypes.NonPublicFields)] Type derivedType,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type derivedType,
             out MemberInfo replacedInfo)
         {
             replacedInfo = memberInfoToBeReplaced;
@@ -1224,7 +1224,7 @@ namespace System.Xml.Serialization
                             {
                                 // The property name is a match. It might be an override, or
                                 // it might be hiding. Either way, check to see if the derived
-                                // property has a getter that is useable for serialization.
+                                // property has a getter that is usable for serialization.
                                 if (info.GetMethod != null && !info.GetMethod!.IsPublic
                                     && memberInfoToBeReplaced is PropertyInfo
                                     && ((PropertyInfo)memberInfoToBeReplaced).GetMethod!.IsPublic

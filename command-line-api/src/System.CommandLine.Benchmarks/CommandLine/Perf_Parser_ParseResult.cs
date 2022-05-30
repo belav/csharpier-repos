@@ -20,7 +20,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
 
         public Perf_Parser_ParseResult()
         {
-            var option = new Option("-opt");
+            var option = new Option<bool>("-opt");
 
             _testParser =
                 new CommandLineBuilder(new RootCommand { option })
@@ -44,7 +44,7 @@ namespace System.CommandLine.Benchmarks.CommandLine
 
         [Benchmark]
         [ArgumentsSource(nameof(GenerateTestInputs))]
-        public IDirectiveCollection ParseResult_Directives(string input)
+        public DirectiveCollection ParseResult_Directives(string input)
             => _testParser.Parse(input).Directives;
 
         [Benchmark]

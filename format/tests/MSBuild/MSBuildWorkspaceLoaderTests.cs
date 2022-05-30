@@ -33,11 +33,11 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
         // Skip="https://github.com/dotnet/format/issues/1402"
         // [InlineData("wpf")]
         // [InlineData("wpfusercontrollib")]
-        [InlineData("wpflib")]
-        [InlineData("wpfcustomcontrollib")]
-        public async Task CSharpTemplateProject_WindowsOnly_LoadWithNoDiagnostics(string templateName)
+        // [InlineData("wpflib")]
+        // [InlineData("wpfcustomcontrollib")]
+        public async Task CSharpTemplateProject_WindowsOnly_LoadWithNoDiagnostics(string templateName, string ignoredDiagnostics = "")
         {
-            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.CSharp);
+            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.CSharp, ignoredDiagnostics.Split(";", StringSplitOptions.TrimEntries));
         }
 
         [MSBuildTheory]
@@ -45,7 +45,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
         [InlineData("grpc")]
         [InlineData("webapi")]
         [InlineData("razor")]
-        [InlineData("mvc")]
+        [InlineData("mvc", "CS8602")]
         [InlineData("angular")]
         [InlineData("react")]
         // Skip="https://github.com/dotnet/format/issues/1402"
@@ -59,20 +59,20 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
         [InlineData("razorclasslib")]
         [InlineData("worker")]
         [InlineData("xunit")]
-        public async Task CSharpTemplateProject_LoadWithNoDiagnostics(string templateName)
+        public async Task CSharpTemplateProject_LoadWithNoDiagnostics(string templateName, string ignoredDiagnostics = "")
         {
-            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.CSharp);
+            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.CSharp, ignoredDiagnostics.Split(";", StringSplitOptions.TrimEntries));
         }
 
         [MSBuildTheory]
-        [InlineData("classlib")]
-        [InlineData("console")]
-        [InlineData("mstest")]
-        [InlineData("nunit")]
-        [InlineData("xunit")]
-        public async Task VisualBasicTemplateProject_LoadWithNoDiagnostics(string templateName)
+        [InlineData("classlib", "BC30002")]
+        [InlineData("console", "BC30002")]
+        [InlineData("mstest", "BC30002")]
+        [InlineData("nunit", "BC30002")]
+        [InlineData("xunit", "BC30002")]
+        public async Task VisualBasicTemplateProject_LoadWithNoDiagnostics(string templateName, string ignoredDiagnostics)
         {
-            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.VisualBasic, ignoredDiagnostics: new[] { "BC30002" });
+            await AssertTemplateProjectLoadsCleanlyAsync(templateName, LanguageNames.VisualBasic, ignoredDiagnostics.Split(";", StringSplitOptions.TrimEntries));
         }
 
         private async Task AssertTemplateProjectLoadsCleanlyAsync(string templateName, string languageName, string[] ignoredDiagnostics = null)
@@ -108,7 +108,7 @@ namespace Microsoft.CodeAnalysis.Tools.Tests.MSBuild
             var projectPath = GetProjectPath(templateName, languageName);
             var projectFilePath = GetProjectFilePath(projectPath, languageName);
 
-            var exitCode = await DotNetHelper.NewProject(templateName, projectPath, languageName, outputHelper);
+            var exitCode = await DotNetHelper.NewProjectAsync(templateName, projectPath, languageName, outputHelper);
             Assert.Equal(0, exitCode);
 
             return projectFilePath;

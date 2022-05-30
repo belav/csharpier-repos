@@ -1,7 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using Microsoft.AspNetCore.Http.Abstractions;
 
 namespace Microsoft.AspNetCore.Http;
@@ -28,7 +27,7 @@ public class CookieBuilder
     /// The cookie path.
     /// </summary>
     /// <remarks>
-    /// Determines the value that will set on <see cref="CookieOptions.Path"/>.
+    /// Determines the value that will be set for <see cref="CookieOptions.Path"/>.
     /// </remarks>
     public virtual string? Path { get; set; }
 
@@ -36,15 +35,15 @@ public class CookieBuilder
     /// The domain to associate the cookie with.
     /// </summary>
     /// <remarks>
-    /// Determines the value that will set on <see cref="CookieOptions.Domain"/>.
+    /// Determines the value that will be set for <see cref="CookieOptions.Domain"/>.
     /// </remarks>
     public virtual string? Domain { get; set; }
 
     /// <summary>
-    /// Indicates whether a cookie is accessible by client-side script.
+    /// Indicates whether a cookie is inaccessible by client-side script.
     /// </summary>
     /// <remarks>
-    /// Determines the value that will set on <see cref="CookieOptions.HttpOnly"/>.
+    /// Determines the value that will be set on <see cref="CookieOptions.HttpOnly"/>.
     /// </remarks>
     public virtual bool HttpOnly { get; set; }
 
@@ -52,7 +51,7 @@ public class CookieBuilder
     /// The SameSite attribute of the cookie. The default value is <see cref="SameSiteMode.Unspecified"/>
     /// </summary>
     /// <remarks>
-    /// Determines the value that will set on <see cref="CookieOptions.SameSite"/>.
+    /// Determines the value that will be set for <see cref="CookieOptions.SameSite"/>.
     /// </remarks>
     public virtual SameSiteMode SameSite { get; set; } = SameSiteMode.Unspecified;
 

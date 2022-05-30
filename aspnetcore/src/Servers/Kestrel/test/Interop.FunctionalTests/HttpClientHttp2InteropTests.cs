@@ -105,7 +105,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     {
         var requestsReceived = 0;
         var requestCount = 10;
-        var allRequestsReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var allRequestsReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -115,7 +115,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 {
                     if (Interlocked.Increment(ref requestsReceived) == requestCount)
                     {
-                        allRequestsReceived.SetResult(0);
+                        allRequestsReceived.SetResult();
                     }
                     await allRequestsReceived.Task;
                     var content = new BulkContent();
@@ -154,7 +154,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     {
         var requestsReceived = 0;
         var requestCount = 10;
-        var allRequestsReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var allRequestsReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -164,7 +164,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 {
                     if (Interlocked.Increment(ref requestsReceived) == requestCount)
                     {
-                        allRequestsReceived.SetResult(0);
+                        allRequestsReceived.SetResult();
                     }
                     await allRequestsReceived.Task;
                     await context.Request.BodyReader.CopyToAsync(context.Response.BodyWriter).DefaultTimeout();
@@ -270,8 +270,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 .Configure(app => app.Run(async context =>
                 {
                     var reader = context.Request.BodyReader;
-                        // Read Hello World and echo it back to the client, twice
-                        for (var i = 0; i < 2; i++)
+                    // Read Hello World and echo it back to the client, twice
+                    for (var i = 0; i < 2; i++)
                     {
                         var readResult = await reader.ReadAsync().DefaultTimeout();
                         while (!readResult.IsCompleted && readResult.Buffer.Length < "Hello World".Length)
@@ -345,8 +345,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
                     try
                     {
-                            // The client sends one more packet after the server completes
-                            readResult = await reader.ReadAsync().DefaultTimeout();
+                        // The client sends one more packet after the server completes
+                        readResult = await reader.ReadAsync().DefaultTimeout();
                         while (!readResult.IsCompleted && readResult.Buffer.Length < "Hello World".Length)
                         {
                             reader.AdvanceTo(readResult.Buffer.Start, readResult.Buffer.End);
@@ -453,9 +453,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
     private class StreamingContent : HttpContent
     {
-        private readonly TaskCompletionSource<int> _sendStarted = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        private readonly TaskCompletionSource _sendStarted = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         private Func<string, Task> _sendContent;
-        private TaskCompletionSource<int> _sendComplete;
+        private TaskCompletionSource _sendComplete;
 
         public StreamingContent()
         {
@@ -475,12 +475,12 @@ public class HttpClientHttp2InteropTests : LoggedTest
             {
                 throw new InvalidOperationException("Sending hasn't started yet.");
             }
-            _sendComplete.TrySetResult(0);
+            _sendComplete.TrySetResult();
         }
 
         protected override Task SerializeToStreamAsync(Stream stream, TransportContext context)
         {
-            _sendComplete = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+            _sendComplete = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
             _sendContent = async text =>
             {
                 try
@@ -495,7 +495,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     throw;
                 }
             };
-            _sendStarted.SetResult(0);
+            _sendStarted.SetResult();
             return _sendComplete.Task;
         }
 
@@ -548,7 +548,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ResponseTrailersWithData(string scheme)
     {
-        var headersReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var headersReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -572,7 +572,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
         Assert.Equal("TestTrailer", response.Headers.Trailer.Single());
         // The server has not sent trailers yet.
         Assert.False(response.TrailingHeaders.TryGetValues("TestTrailer", out var none));
-        headersReceived.SetResult(0);
+        headersReceived.SetResult();
         var responseBody = await response.Content.ReadAsStringAsync().DefaultTimeout();
         Assert.Equal("Hello World", responseBody);
         // The response is buffered, we must already have the trailers.
@@ -592,7 +592,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 .Configure(app => app.Run(context =>
                 {
                     context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                        return Task.CompletedTask;
+                    return Task.CompletedTask;
                 }));
             });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -608,7 +608,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ServerReset_AfterHeaders_ClientBodyThrows(string scheme)
     {
-        var receivedHeaders = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var receivedHeaders = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -619,7 +619,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     await context.Response.BodyWriter.FlushAsync();
                     await receivedHeaders.Task.DefaultTimeout();
                     context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                    }));
+                }));
             });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
 
@@ -627,7 +627,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
         using var client = CreateClient();
         var response = await client.GetAsync(url, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
         response.EnsureSuccessStatusCode();
-        receivedHeaders.SetResult(0);
+        receivedHeaders.SetResult();
         var exception = await Assert.ThrowsAsync<HttpRequestException>(() => response.Content.ReadAsStringAsync()).DefaultTimeout();
         Assert.Equal("The HTTP/2 server reset the stream. HTTP/2 error code 'CANCEL' (0x8).", exception?.InnerException?.InnerException.Message);
         await host.StopAsync().DefaultTimeout();
@@ -635,6 +635,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(SupportedSchemes))]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41843")]
     public async Task ServerReset_AfterEndStream_NoError(string scheme)
     {
         var hostBuilder = new HostBuilder()
@@ -647,7 +648,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     await context.Response.WriteAsync("Hello World");
                     await context.Response.CompleteAsync();
                     context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                    }));
+                }));
             });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
 
@@ -676,7 +677,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     context.Response.AppendTrailer("TestTrailer", "TestValue");
                     await context.Response.CompleteAsync();
                     context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                    }));
+                }));
             });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
 
@@ -697,8 +698,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
     public async Task ServerReset_BeforeRequestBody_ClientBodyThrows(string scheme)
     {
         var clientEcho = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverReset = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var headersReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverReset = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var headersReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -710,7 +711,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     await context.Response.BodyWriter.FlushAsync();
                     await headersReceived.Task.DefaultTimeout();
                     context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                        serverReset.SetResult(0);
+                    serverReset.SetResult();
 
                     try
                     {
@@ -735,7 +736,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
         var streamingContent = new StreamingContent();
         var request = CreateRequestMessage(HttpMethod.Post, url, streamingContent);
         using var response = await client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
-        headersReceived.SetResult(0);
+        headersReceived.SetResult();
 
         Assert.Equal(HttpVersion.Version20, response.Version);
 
@@ -753,8 +754,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
     public async Task ServerReset_BeforeRequestBodyEnd_ClientBodyThrows(string scheme)
     {
         var clientEcho = new TaskCompletionSource<string>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverReset = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var responseHeadersReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverReset = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var responseHeadersReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -769,7 +770,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     await context.Response.BodyWriter.FlushAsync();
                     await responseHeadersReceived.Task.DefaultTimeout();
                     context.Features.Get<IHttpResetFeature>().Reset(8); // Cancel
-                        serverReset.SetResult(0);
+                    serverReset.SetResult();
 
                     try
                     {
@@ -794,7 +795,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
         var requestTask = client.SendAsync(request, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
         await streamingContent.SendAsync("Hello World").DefaultTimeout();
         using var response = await requestTask;
-        responseHeadersReceived.SetResult(0);
+        responseHeadersReceived.SetResult();
 
         Assert.Equal(HttpVersion.Version20, response.Version);
 
@@ -811,8 +812,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ClientReset_BeforeRequestData_ReadThrows(string scheme)
     {
-        var requestReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -823,9 +824,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     try
                     {
                         var readTask = context.Request.Body.ReadAsync(new byte[11], 0, 11);
-                        requestReceived.SetResult(0);
+                        requestReceived.SetResult();
                         var ex = await Assert.ThrowsAsync<IOException>(() => readTask).DefaultTimeout();
-                        serverResult.SetResult(0);
+                        serverResult.SetResult();
                     }
                     catch (Exception ex)
                     {
@@ -857,8 +858,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ClientReset_BeforeRequestDataEnd_ReadThrows(string scheme)
     {
-        var requestReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -870,9 +871,9 @@ public class HttpClientHttp2InteropTests : LoggedTest
                     {
                         await ReadStreamHelloWorld(context.Request.Body);
                         var readTask = context.Request.Body.ReadAsync(new byte[11], 0, 11);
-                        requestReceived.SetResult(0);
+                        requestReceived.SetResult();
                         var ex = await Assert.ThrowsAsync<IOException>(() => readTask).DefaultTimeout();
-                        serverResult.SetResult(0);
+                        serverResult.SetResult();
                     }
                     catch (Exception ex)
                     {
@@ -902,8 +903,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ClientReset_BeforeResponse_ResponseSuppressed(string scheme)
     {
-        var requestReceived = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestReceived = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -913,8 +914,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 {
                     try
                     {
-                        context.RequestAborted.Register(() => serverResult.SetResult(0));
-                        requestReceived.SetResult(0);
+                        context.RequestAborted.Register(() => serverResult.SetResult());
+                        requestReceived.SetResult();
                         await serverResult.Task.DefaultTimeout();
                         await context.Response.WriteAsync("Hello World").DefaultTimeout();
                     }
@@ -944,7 +945,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ClientReset_BeforeEndStream_WritesSuppressed(string scheme)
     {
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -954,7 +955,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 {
                     try
                     {
-                        context.RequestAborted.Register(() => serverResult.SetResult(0));
+                        context.RequestAborted.Register(() => serverResult.SetResult());
                         await context.Response.WriteAsync("Hello World").DefaultTimeout();
                         await serverResult.Task.DefaultTimeout();
                         await context.Response.WriteAsync("Hello World").DefaultTimeout();
@@ -984,7 +985,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ClientReset_BeforeTrailers_TrailersSuppressed(string scheme)
     {
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -994,7 +995,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 {
                     try
                     {
-                        context.RequestAborted.Register(() => serverResult.SetResult(0));
+                        context.RequestAborted.Register(() => serverResult.SetResult());
                         await context.Response.WriteAsync("Hello World").DefaultTimeout();
                         await serverResult.Task.DefaultTimeout();
                         context.Response.AppendTrailer("foo", "bar");
@@ -1026,7 +1027,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     public async Task RequestHeaders_MultipleFrames_Accepted(string scheme)
     {
         var oneKbString = new string('a', 1024);
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1040,7 +1041,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                         {
                             Assert.Equal(oneKbString + i, context.Request.Headers["header" + i]);
                         }
-                        serverResult.SetResult(0);
+                        serverResult.SetResult();
                     }
                     catch (Exception ex)
                     {
@@ -1078,7 +1079,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     public async Task ResponseHeaders_MultipleFrames_Accepted(string scheme)
     {
         var oneKbString = new string('a', 1024);
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1088,12 +1089,12 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 {
                     try
                     {
-                            // The default frame size limit is 16kb, and the total header size limit is 64kb.
-                            for (var i = 0; i < 59; i++)
+                        // The default frame size limit is 16kb, and the total header size limit is 64kb.
+                        for (var i = 0; i < 59; i++)
                         {
                             context.Response.Headers.Append("header" + i, oneKbString + i);
                         }
-                        serverResult.SetResult(0);
+                        serverResult.SetResult();
                     }
                     catch (Exception ex)
                     {
@@ -1130,15 +1131,15 @@ public class HttpClientHttp2InteropTests : LoggedTest
     public async Task Settings_HeaderTableSize_CanBeReduced_Server(string scheme)
     {
         var oneKbString = new string('a', 1024);
-        var serverResult = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var serverResult = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
                 ConfigureKestrel(webHostBuilder, scheme);
                 webHostBuilder.ConfigureKestrel(options =>
                 {
-                        // Must be larger than 0, should disable header compression
-                        options.Limits.Http2.HeaderTableSize = 1;
+                    // Must be larger than 0, should disable header compression
+                    options.Limits.Http2.HeaderTableSize = 1;
                 });
                 webHostBuilder.ConfigureServices(AddTestLogging)
                 .Configure(app => app.Run(context =>
@@ -1149,7 +1150,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
                         {
                             Assert.Equal(oneKbString + i, context.Request.Headers["header" + i]);
                         }
-                        serverResult.SetResult(0);
+                        serverResult.SetResult();
                     }
                     catch (Exception ex)
                     {
@@ -1191,7 +1192,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     {
         var sync = new SemaphoreSlim(5);
         var requestCount = 0;
-        var requestBlock = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestBlock = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1203,13 +1204,13 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 webHostBuilder.ConfigureServices(AddTestLogging)
                 .Configure(app => app.Run(async context =>
                 {
-                        // The stream limit should mean we never hit the semaphore limit.
-                        Assert.True(sync.Wait(0));
+                    // The stream limit should mean we never hit the semaphore limit.
+                    Assert.True(sync.Wait(0));
                     var count = Interlocked.Increment(ref requestCount);
 
                     if (count == 5)
                     {
-                        requestBlock.TrySetResult(0);
+                        requestBlock.TrySetResult();
                     }
                     else
                     {
@@ -1252,7 +1253,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     {
         var sync = new SemaphoreSlim(5);
         var requestCount = 0;
-        var requestBlock = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestBlock = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1264,13 +1265,13 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 webHostBuilder.ConfigureServices(AddTestLogging)
                 .Configure(app => app.Run(async context =>
                 {
-                        // The stream limit should mean we never hit the semaphore limit.
-                        Assert.True(sync.Wait(0));
+                    // The stream limit should mean we never hit the semaphore limit.
+                    Assert.True(sync.Wait(0));
                     var count = Interlocked.Increment(ref requestCount);
 
                     if (count == 5)
                     {
-                        requestBlock.TrySetResult(0);
+                        requestBlock.TrySetResult();
                     }
                     else
                     {
@@ -1311,6 +1312,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(SupportedSchemes))]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41363")]
     public async Task Settings_MaxFrameSize_Larger_Server(string scheme)
     {
         var hostBuilder = new HostBuilder()
@@ -1318,8 +1320,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
             {
                 ConfigureKestrel(webHostBuilder, scheme);
                 webHostBuilder.ConfigureKestrel(options => options.Limits.Http2.MaxFrameSize = 1024 * 20); // The default is 16kb
-                    webHostBuilder.ConfigureServices(AddTestLogging)
-                .Configure(app => app.Run(context => context.Response.WriteAsync("Hello World")));
+                webHostBuilder.ConfigureServices(AddTestLogging)
+            .Configure(app => app.Run(context => context.Response.WriteAsync("Hello World")));
             });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
 
@@ -1386,8 +1388,8 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 webHostBuilder.ConfigureServices(AddTestLogging)
                 .Configure(app => app.Run(context =>
                 {
-                        // The total header size limit is 64kb.
-                        for (var i = 0; i < 65; i++)
+                    // The total header size limit is 64kb.
+                    for (var i = 0; i < 65; i++)
                     {
                         context.Response.Headers.Append("header" + i, oneKbString + i);
                     }
@@ -1412,7 +1414,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task Settings_InitialWindowSize_Server(string scheme)
     {
-        var requestFinished = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestFinished = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1441,7 +1443,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
             await streamingContent.SendAsync(oneKbString).DefaultTimeout();
         }
         streamingContent.Complete();
-        requestFinished.SetResult(0);
+        requestFinished.SetResult();
 
         var response = await requestTask.DefaultTimeout();
         response.EnsureSuccessStatusCode();
@@ -1454,7 +1456,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task Settings_InitialWindowSize_Client(string scheme)
     {
-        var responseFinished = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var responseFinished = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1462,16 +1464,16 @@ public class HttpClientHttp2InteropTests : LoggedTest
                 webHostBuilder.ConfigureServices(AddTestLogging)
                 .Configure(app => app.Run(async context =>
                 {
-                        // The spec default window is 64kb - 1.
-                        // We should be able to send the entire response body without getting blocked by flow control.
-                        var oneKbString = new string('a', 1024);
+                    // The spec default window is 64kb - 1.
+                    // We should be able to send the entire response body without getting blocked by flow control.
+                    var oneKbString = new string('a', 1024);
                     for (var i = 0; i < 63; i++)
                     {
                         await context.Response.WriteAsync(oneKbString).DefaultTimeout();
                     }
                     await context.Response.WriteAsync(new string('a', 1023)).DefaultTimeout();
                     await context.Response.CompleteAsync().DefaultTimeout();
-                    responseFinished.SetResult(0);
+                    responseFinished.SetResult();
                 }));
             });
         using var host = await hostBuilder.StartAsync().DefaultTimeout();
@@ -1490,7 +1492,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
     [MemberData(nameof(SupportedSchemes))]
     public async Task ConnectionWindowSize_Server(string scheme)
     {
-        var requestFinished = new TaskCompletionSource<int>(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestFinished = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
         var hostBuilder = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
@@ -1529,7 +1531,7 @@ public class HttpClientHttp2InteropTests : LoggedTest
         }
         streamingContent0.Complete();
         streamingContent1.Complete();
-        requestFinished.SetResult(0);
+        requestFinished.SetResult();
 
         var response0 = await requestTask0.DefaultTimeout();
         var response1 = await requestTask0.DefaultTimeout();

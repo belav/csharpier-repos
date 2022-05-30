@@ -1,18 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Globalization;
-using System.IO;
-using System.Linq;
-using System.Reflection;
 using System.Runtime.InteropServices;
-using System.Text;
 using System.Text.RegularExpressions;
-using System.Threading;
-using System.Threading.Tasks;
 using System.Xml.Linq;
 using Microsoft.AspNetCore.Server.IntegrationTesting.Common;
 using Microsoft.AspNetCore.Testing;
@@ -29,7 +21,7 @@ public class IISExpressDeployer : IISDeployerBase
     private const string FailedToInitializeBindingsMessage = "Failed to initialize site bindings";
     private const string UnableToStartIISExpressMessage = "Unable to start iisexpress.";
     private const int MaximumAttempts = 5;
-    private readonly TimeSpan ShutdownTimeSpan = Debugger.IsAttached ? TimeSpan.FromMinutes(60) : TimeSpan.FromMinutes(1);
+    private readonly TimeSpan ShutdownTimeSpan = Debugger.IsAttached ? TimeSpan.FromMinutes(60) : TimeSpan.FromMinutes(2);
     private static readonly Regex UrlDetectorRegex = new Regex(@"^\s*Successfully registered URL ""(?<url>[^""]+)"" for site.*$");
 
     private Process _hostProcess;
@@ -44,6 +36,8 @@ public class IISExpressDeployer : IISDeployerBase
     {
     }
 
+    protected override string ApplicationHostConfigPath => DeploymentParameters.ServerConfigLocation;
+
     public override async Task<DeploymentResult> DeployAsync()
     {
         using (Logger.BeginScope("Deployment"))
@@ -57,7 +51,7 @@ public class IISExpressDeployer : IISDeployerBase
             // and contentRoot points to the project directory so you get things like static assets.
             // For a published app both point to the publish directory.
             var dllRoot = CheckIfPublishIsRequired();
-            var contentRoot = string.Empty;
+            string contentRoot;
             if (DeploymentParameters.PublishApplicationBeforeDeployment)
             {
                 DotnetPublish();
@@ -72,7 +66,7 @@ public class IISExpressDeployer : IISDeployerBase
                 var executableExtension = DeploymentParameters.ApplicationType == ApplicationType.Portable ? ".dll" : ".exe";
                 var entryPoint = Path.Combine(dllRoot, DeploymentParameters.ApplicationName + executableExtension);
 
-                var executableName = string.Empty;
+                string executableName;
                 var executableArgs = string.Empty;
 
                 if (DeploymentParameters.RuntimeFlavor == RuntimeFlavor.CoreClr && DeploymentParameters.ApplicationType == ApplicationType.Portable)
@@ -95,7 +89,6 @@ public class IISExpressDeployer : IISDeployerBase
             }
 
             RunWebConfigActions(contentRoot);
-
 
             // Launch the host process.
             var (actualUri, hostExitToken) = await StartIISExpressAsync(contentRoot);
@@ -199,8 +192,8 @@ public class IISExpressDeployer : IISDeployerBase
                 {
                     if (string.Equals(dataArgs.Data, UnableToStartIISExpressMessage, StringComparison.Ordinal))
                     {
-                            // We completely failed to start and we don't really know why
-                            started.TrySetException(new InvalidOperationException("Failed to start IIS Express"));
+                        // We completely failed to start and we don't really know why
+                        started.TrySetException(new InvalidOperationException("Failed to start IIS Express"));
                     }
                     else if (string.Equals(dataArgs.Data, FailedToInitializeBindingsMessage, StringComparison.Ordinal))
                     {
@@ -226,8 +219,8 @@ public class IISExpressDeployer : IISDeployerBase
                 {
                     Logger.LogInformation("iisexpress Process {pid} shut down", process.Id);
 
-                        // If TrySetResult was called above, this will just silently fail to set the new state, which is what we want
-                        started.TrySetException(new Exception($"Command exited unexpectedly with exit code: {process.ExitCode}"));
+                    // If TrySetResult was called above, this will just silently fail to set the new state, which is what we want
+                    started.TrySetException(new Exception($"Command exited unexpectedly with exit code: {process.ExitCode}"));
 
                     TriggerHostShutdown(hostExitTokenSource);
                 };
@@ -241,10 +234,10 @@ public class IISExpressDeployer : IISDeployerBase
                 }
 
                 // Wait for the app to start
-                // The timeout here is large, because we don't know how long the test could need
-                // We cover a lot of error cases above, but I want to make sure we eventually give up and don't hang the build
+                // The timeout here is large, because we don't know how long the test could need. We cover a lot
+                // of error cases above, but I want to make sure we eventually give up and don't hang the build
                 // just in case we missed one -anurse
-                if (!await started.Task.TimeoutAfter(TimeSpan.FromMinutes(10)))
+                if (!await started.Task.TimeoutAfter(TimeSpan.FromMinutes(15)))
                 {
                     Logger.LogInformation("iisexpress Process {pid} failed to bind to port {port}, trying again", process.Id, port);
 
@@ -447,7 +440,7 @@ public class IISExpressDeployer : IISDeployerBase
         }
     }
 
-    private class WindowsNativeMethods
+    private sealed class WindowsNativeMethods
     {
         internal delegate bool EnumWindowProc(IntPtr hwnd, IntPtr lParam);
         [DllImport("user32.dll")]

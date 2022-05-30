@@ -29,6 +29,7 @@ namespace Wasm.Build.Tests
                     .UnwrapItemsAsArrays();
 
         [Theory]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
         [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ false, RunHost.All })]
         [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ true,  RunHost.All })]
         [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ true,  /*relinking*/ false, RunHost.All })]
@@ -46,26 +47,33 @@ namespace Wasm.Build.Tests
             buildArgs = buildArgs with { ProjectName = projectName };
             buildArgs = ExpandBuildArgs(buildArgs,
                                         projectTemplate: s_resourcesProjectTemplate,
-                                        extraProperties: nativeRelink ? $"<WasmBuildNative>true</WasmBuildNative>" : string.Empty);
+                                        extraProperties: (nativeRelink ? $"<WasmBuildNative>true</WasmBuildNative>" : string.Empty)
+                                        // make ASSERTIONS=1 so that we test with it
+                                        + $"<EmccCompileOptimizationFlag>{ (buildArgs.Config == "Debug" ? "-O0 -sASSERTIONS=1" : "-O0 -sASSERTIONS=1")}</EmccCompileOptimizationFlag>"
+                                        );
 
             BuildProject(buildArgs,
-                        initProject: () =>
-                        {
-                            Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "resx"), Path.Combine(_projectDir!, "resx"));
-                            CreateProgramForCultureTest(_projectDir!, $"{projectName}.resx.words", "TestClass");
-                        },
-                        dotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
-                        id: id);
+                            id: id,
+                            new BuildProjectOptions(
+                                InitProject: () =>
+                                {
+                                    Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "resx"), Path.Combine(_projectDir!, "resx"));
+                                    CreateProgramForCultureTest(_projectDir!, $"{projectName}.resx.words", "TestClass");
+                                },
+                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack));
 
             string output = RunAndTestWasmApp(
                                 buildArgs, expectedExitCode: 42,
                                 args: argCulture,
-                                host: host, id: id);
+                                host: host, id: id,
+                                // check that downloading assets doesn't have timing race conditions
+                                extraXHarnessMonoArgs: "--fetch-random-delay=200");
 
             Assert.Contains(expectedOutput, output);
         }
 
         [Theory]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
         [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ false, RunHost.All })]
         [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ false, /*relinking*/ true,  RunHost.All })]
         [MemberData(nameof(SatelliteAssemblyTestData), parameters: new object[] { /*aot*/ true,  /*relinking*/ false, RunHost.All })]
@@ -86,17 +94,18 @@ namespace Wasm.Build.Tests
                                         extraItems: $"<ProjectReference Include=\"..\\LibraryWithResources\\LibraryWithResources.csproj\" />");
 
             BuildProject(buildArgs,
-                        dotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
-                        id: id,
-                        initProject: () =>
-                        {
-                            string rootDir = _projectDir!;
-                            _projectDir = Path.Combine(rootDir, projectName);
+                            id: id,
+                            new BuildProjectOptions(
+                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack,
+                                InitProject: () =>
+                                {
+                                    string rootDir = _projectDir!;
+                                    _projectDir = Path.Combine(rootDir, projectName);
 
-                            Directory.CreateDirectory(_projectDir);
-                            Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "SatelliteAssemblyFromProjectRef"), rootDir);
-                            CreateProgramForCultureTest(_projectDir, "LibraryWithResources.resx.words", "LibraryWithResources.Class1");
-                        });
+                                    Directory.CreateDirectory(_projectDir);
+                                    Utils.DirectoryCopy(Path.Combine(BuildEnvironment.TestAssetsPath, "SatelliteAssemblyFromProjectRef"), rootDir);
+                                    CreateProgramForCultureTest(_projectDir, "LibraryWithResources.resx.words", "LibraryWithResources.Class1");
+                                }));
 
             string output = RunAndTestWasmApp(buildArgs,
                                               expectedExitCode: 42,
@@ -121,9 +130,10 @@ namespace Wasm.Build.Tests
                                         extraItems: $"<EmbeddedResource Include=\"{BuildEnvironment.RelativeTestAssetsPath}resx\\*\" />");
 
             BuildProject(buildArgs,
-                        initProject: () => CreateProgramForCultureTest(_projectDir!, $"{projectName}.words", "TestClass"),
-                        dotnetWasmFromRuntimePack: false,
-                        id: id);
+                            id: id,
+                            new BuildProjectOptions(
+                                InitProject: () => CreateProgramForCultureTest(_projectDir!, $"{projectName}.words", "TestClass"),
+                                DotnetWasmFromRuntimePack: false));
 
             var bitCodeFileNames = Directory.GetFileSystemEntries(Path.Combine(_projectDir!, "obj"), "*.dll.bc", SearchOption.AllDirectories)
                                     .Select(path => Path.GetFileName(path))
@@ -145,10 +155,10 @@ namespace Wasm.Build.Tests
         private const string s_resourcesProjectTemplate =
             @$"<Project Sdk=""Microsoft.NET.Sdk"">
               <PropertyGroup>
-                <TargetFramework>{s_targetFramework}</TargetFramework>
+                <TargetFramework>{DefaultTargetFramework}</TargetFramework>
                 <OutputType>Exe</OutputType>
                 <WasmGenerateRunV8Script>true</WasmGenerateRunV8Script>
-                <WasmMainJSPath>runtime-test.js</WasmMainJSPath>
+                <WasmMainJSPath>test-main.js</WasmMainJSPath>
                 ##EXTRA_PROPERTIES##
               </PropertyGroup>
               <ItemGroup>

@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-
 namespace Microsoft.AspNetCore.Http;
 
 /// <summary>
@@ -49,7 +47,7 @@ public class CookieOptions
     public SameSiteMode SameSite { get; set; } = SameSiteMode.Unspecified;
 
     /// <summary>
-    /// Gets or sets a value that indicates whether a cookie is accessible by client-side script.
+    /// Gets or sets a value that indicates whether a cookie is inaccessible by client-side script.
     /// </summary>
     /// <returns>true if a cookie must not be accessible by client-side script; otherwise, false.</returns>
     public bool HttpOnly { get; set; }

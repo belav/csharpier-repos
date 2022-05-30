@@ -6,7 +6,7 @@ namespace System.CommandLine.Binding
     /// <summary>
     /// A value created by binding command line input.
     /// </summary>
-    public class BoundValue
+    public readonly struct BoundValue
     {
         internal BoundValue(
             object? value,
@@ -31,26 +31,9 @@ namespace System.CommandLine.Binding
         /// <summary>
         /// The value bound from the specified source.
         /// </summary>
-        public virtual object? Value { get; }
+        public object? Value { get; }
 
         /// <inheritdoc />
         public override string ToString() => $"{ValueDescriptor}: {Value}";
-
-        /// <summary>
-        /// Gets a <see cref="BoundValue"/> representing the default value for a specified <see cref="IValueDescriptor"/>.
-        /// </summary>
-        /// <param name="valueDescriptor">A value descriptor for which to get the default value.</param>
-        /// <returns>A <see cref="BoundValue"/> representing the default value for a specified <see cref="IValueDescriptor"/>.</returns>
-        public static BoundValue DefaultForValueDescriptor(IValueDescriptor valueDescriptor)
-        {
-            var valueSource = ValueDescriptorDefaultValueSource.Instance;
-
-            valueSource.TryGetValue(valueDescriptor, null, out var value);
-
-            return new BoundValue(
-                value,
-                valueDescriptor,
-                valueSource);
-        }
     }
 }

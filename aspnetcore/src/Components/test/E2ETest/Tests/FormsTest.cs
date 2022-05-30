@@ -1,20 +1,13 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.Json;
-using System.Threading.Tasks;
 using BasicTestApp;
 using BasicTestApp.FormsTest;
 using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
 using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 using Microsoft.AspNetCore.E2ETesting;
-using Microsoft.AspNetCore.Testing;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
@@ -82,11 +75,34 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
     }
 
     [Fact]
+    public void EditFormWorksWithDataAnnotationsValidatorAndDI()
+    {
+        var appElement = Browser.MountTestComponent<ValidationComponentDI>();
+        var form = appElement.FindElement(By.TagName("form"));
+        var userNameInput = appElement.FindElement(By.ClassName("the-quiz")).FindElement(By.TagName("input"));
+        var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
+        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
+
+        userNameInput.SendKeys("Bacon\t");
+        submitButton.Click();
+        //We can only have this errormessage when DI is working
+        Browser.Equal(new[] { "You should not put that in a salad!" }, messagesAccessor);
+
+        userNameInput.Clear();
+        userNameInput.SendKeys("Watermelon\t");
+        submitButton.Click();
+        Browser.Empty(messagesAccessor);
+    }
+
+    [Fact]
     public void InputTextInteractsWithEditContext()
     {
         var appElement = MountTypicalValidationComponent();
         var nameInput = appElement.FindElement(By.ClassName("name")).FindElement(By.TagName("input"));
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
+        var summaryMessagesAccessor = CreateValidationMessagesAccessor(
+            appElement.FindElement(By.ClassName("all-errors")),
+            ".validation-errors > .validation-message"); // Shows that the default class name for ValidationSummary is validation-errors
 
         // InputText emits unmatched attributes
         Browser.Equal("Enter your name", () => nameInput.GetAttribute("placeholder"));
@@ -102,6 +118,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Equal("modified invalid", () => nameInput.GetAttribute("class"));
         EnsureAttributeValue(nameInput, "aria-invalid", "true");
         Browser.Equal(new[] { "That name is too long" }, messagesAccessor);
+        Browser.True(() => summaryMessagesAccessor().Contains("That name is too long"));
 
         // Can become valid
         nameInput.Clear();
@@ -109,6 +126,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         Browser.Equal("modified valid", () => nameInput.GetAttribute("class"));
         EnsureAttributeNotRendered(nameInput, "aria-invalid");
         Browser.Empty(messagesAccessor);
+        Browser.False(() => summaryMessagesAccessor().Contains("That name is too long"));
     }
 
     [Fact]
@@ -192,220 +210,6 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         descriptionInput.SendKeys("Hello\t");
         Browser.Equal("modified valid", () => descriptionInput.GetAttribute("class"));
         Browser.Empty(messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338082&view=ms.vss-test-web.build-test-results-tab&runId=39213984&resultId=100373&paneView=debug")]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/35018")]
-    public void InputDateInteractsWithEditContext_NonNullableDateTime()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var renewalDateInput = appElement.FindElement(By.ClassName("renewal-date")).FindElement(By.TagName("input"));
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-
-        // InputDate emits unmatched attributes
-        Browser.Equal("Enter the date", () => renewalDateInput.GetAttribute("placeholder"));
-
-        // Validates on edit
-        Browser.Equal("valid", () => renewalDateInput.GetAttribute("class"));
-        renewalDateInput.SendKeys($"{Keys.Backspace}\t{Keys.Backspace}\t{Keys.Backspace}\t");
-        renewalDateInput.SendKeys("01/01/2000\t");
-        Browser.Equal("modified valid", () => renewalDateInput.GetAttribute("class"));
-
-        // Can become invalid
-        renewalDateInput.SendKeys("11-11-11111\t");
-        Browser.Equal("modified invalid", () => renewalDateInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The RenewalDate field must be a date." }, messagesAccessor);
-
-        // Empty is invalid, because it's not nullable
-        renewalDateInput.SendKeys($"{Keys.Backspace}\t{Keys.Backspace}\t{Keys.Backspace}\t");
-        Browser.Equal("modified invalid", () => renewalDateInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The RenewalDate field must be a date." }, messagesAccessor);
-
-        // Can become valid
-        renewalDateInput.SendKeys("01/01/01\t");
-        Browser.Equal("modified valid", () => renewalDateInput.GetAttribute("class"));
-        Browser.Empty(messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338290&view=ms.vss-test-web.build-test-results-tab")]
-    public void InputDateInteractsWithEditContext_NullableDateTimeOffset()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var expiryDateInput = appElement.FindElement(By.ClassName("expiry-date")).FindElement(By.TagName("input"));
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-
-        // Validates on edit
-        Browser.Equal("valid", () => expiryDateInput.GetAttribute("class"));
-        expiryDateInput.SendKeys("01-01-2000\t");
-        Browser.Equal("modified valid", () => expiryDateInput.GetAttribute("class"));
-
-        // Can become invalid
-        expiryDateInput.SendKeys("11-11-11111\t");
-        Browser.Equal("modified invalid", () => expiryDateInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The OptionalExpiryDate field must be a date." }, messagesAccessor);
-
-        // Empty is valid, because it's nullable
-        expiryDateInput.SendKeys($"{Keys.Backspace}\t{Keys.Backspace}\t{Keys.Backspace}\t");
-        Browser.Equal("modified valid", () => expiryDateInput.GetAttribute("class"));
-        Browser.Empty(messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338290&view=ms.vss-test-web.build-test-results-tab")]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/35018")]
-    public void InputDateInteractsWithEditContext_TimeInput()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var departureTimeInput = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-seconds-checkbox"));
-
-        // Ensure we're not using a custom step
-        if (includeSecondsCheckbox.Selected)
-        {
-            includeSecondsCheckbox.Click();
-        }
-
-        // Validates on edit
-        Browser.Equal("valid", () => departureTimeInput.GetAttribute("class"));
-        departureTimeInput.SendKeys("06:43\t");
-        Browser.Equal("modified valid", () => departureTimeInput.GetAttribute("class"));
-
-        // Can become invalid
-        // Stricly speaking the following is equivalent to the empty state, because that's how incomplete input is represented
-        // We don't know of any way to produce a different (non-empty-equivalent) state using UI gestures, so there's nothing else to test
-        departureTimeInput.SendKeys($"20{Keys.Backspace}\t");
-        Browser.Equal("modified invalid", () => departureTimeInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The DepartureTime field must be a time." }, messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338290&view=ms.vss-test-web.build-test-results-tab")]
-    public void InputDateInteractsWithEditContext_TimeInput_Step()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var departureTimeInput = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("departure-time")).FindElement(By.Id("time-seconds-checkbox"));
-
-        // Ensure we're using a custom step
-        if (!includeSecondsCheckbox.Selected)
-        {
-            includeSecondsCheckbox.Click();
-        }
-
-        // Input works with seconds value of zero and has the expected final value
-        Browser.Equal("valid", () => departureTimeInput.GetAttribute("class"));
-        departureTimeInput.SendKeys("111111");
-        Browser.Equal("modified valid", () => departureTimeInput.GetAttribute("class"));
-        Browser.Equal("11:11:11", () => departureTimeInput.GetAttribute("value"));
-
-        // Input works with non-zero seconds value
-        // Move to the beginning of the input and put the new time
-        departureTimeInput.SendKeys(string.Concat(Enumerable.Repeat(Keys.ArrowLeft, 3)) + "101010");
-        Browser.Equal("modified valid", () => departureTimeInput.GetAttribute("class"));
-        Browser.Equal("10:10:10", () => departureTimeInput.GetAttribute("value"));
-
-        // Can become invalid
-        departureTimeInput.SendKeys(Keys.Backspace);
-        Browser.Equal("modified invalid", () => departureTimeInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The DepartureTime field must be a time." }, messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338082&view=ms.vss-test-web.build-test-results-tab&runId=39213984&resultId=100373&paneView=debug")]
-    public void InputDateInteractsWithEditContext_MonthInput()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var visitMonthInput = appElement.FindElement(By.ClassName("visit-month")).FindElement(By.TagName("input"));
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-
-        // Validates on edit
-        Browser.Equal("valid", () => visitMonthInput.GetAttribute("class"));
-        visitMonthInput.SendKeys($"03{Keys.ArrowRight}2005\t");
-        Browser.Equal("modified valid", () => visitMonthInput.GetAttribute("class"));
-
-        // Empty is invalid because it's not nullable
-        visitMonthInput.Clear();
-        Browser.Equal("modified invalid", () => visitMonthInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The VisitMonth field must be a year and month." }, messagesAccessor);
-
-        // Invalid year (11111)
-        visitMonthInput.SendKeys($"11{Keys.ArrowRight}11111\t");
-        Browser.Equal("modified invalid", () => visitMonthInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The VisitMonth field must be a year and month." }, messagesAccessor);
-
-        // Can become valid again
-        visitMonthInput.Clear();
-        visitMonthInput.SendKeys($"11{Keys.ArrowRight}1111\t");
-        Browser.Equal("modified valid", () => visitMonthInput.GetAttribute("class"));
-        Browser.Empty(messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338290&view=ms.vss-test-web.build-test-results-tab")]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/34884")]
-    public void InputDateInteractsWithEditContext_DateTimeLocalInput()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var appointmentInput = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-seconds-checkbox"));
-
-        // Ensure we're not using a custom step
-        if (includeSecondsCheckbox.Selected)
-        {
-            includeSecondsCheckbox.Click();
-        }
-
-        // Validates on edit and has the expected value
-        Browser.Equal("valid", () => appointmentInput.GetAttribute("class"));
-        appointmentInput.SendKeys($"01011970{Keys.ArrowRight}05421");
-        Browser.Equal("modified valid", () => appointmentInput.GetAttribute("class"));
-
-        // Empty is invalid because it's not nullable
-        appointmentInput.Clear();
-        Browser.Equal("modified invalid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The AppointmentDateAndTime field must be a date and time." }, messagesAccessor);
-
-        // Invalid year (11111)
-        appointmentInput.SendKeys($"111111111{Keys.ArrowRight}11111");
-        Browser.Equal("modified invalid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The AppointmentDateAndTime field must be a date and time." }, messagesAccessor);
-
-        // Can become valid again
-        appointmentInput.Clear();
-        appointmentInput.SendKeys($"11111111{Keys.ArrowRight}11111");
-        Browser.Equal("modified valid", () => appointmentInput.GetAttribute("class"));
-        Browser.Empty(messagesAccessor);
-    }
-
-    [Fact(Skip = "Fails on Blazor Server when running in CI - https://dev.azure.com/dnceng/public/_build/results?buildId=1338082&view=ms.vss-test-web.build-test-results-tab&runId=39213984&resultId=100373&paneView=debug")]
-    public void InputDateInteractsWithEditContext_DateTimeLocalInput_Step()
-    {
-        var appElement = MountTypicalValidationComponent();
-        var messagesAccessor = CreateValidationMessagesAccessor(appElement);
-        var appointmentInput = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-input"));
-        var includeSecondsCheckbox = appElement.FindElement(By.ClassName("appointment-date-time")).FindElement(By.Id("datetime-local-seconds-checkbox"));
-
-        // Ensure we're using a custom step
-        if (!includeSecondsCheckbox.Selected)
-        {
-            includeSecondsCheckbox.Click();
-        }
-
-        // Input works with seconds value of zero and has the expected final value
-        Browser.Equal("valid", () => appointmentInput.GetAttribute("class"));
-        appointmentInput.SendKeys($"11111970{Keys.ArrowRight}114216");
-        Browser.Equal("modified valid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal("1970-11-11T11:42:16", () => appointmentInput.GetAttribute("value"));
-
-        // Input works with non-zero seconds value
-        // Move to the beginning of the input and put the new value
-        appointmentInput.SendKeys(string.Concat(Enumerable.Repeat(Keys.ArrowLeft, 6)) + $"10101970{Keys.ArrowRight}105321");
-        Browser.Equal("modified valid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal("1970-10-10T10:53:21", () => appointmentInput.GetAttribute("value"));
-
-        // Can become invalid
-        appointmentInput.SendKeys(Keys.Backspace);
-        Browser.Equal("modified invalid", () => appointmentInput.GetAttribute("class"));
-        Browser.Equal(new[] { "The AppointmentDateAndTime field must be a date and time." }, messagesAccessor);
     }
 
     [Fact]
@@ -556,37 +360,36 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var appElement = MountTypicalValidationComponent();
         var messagesAccessor = CreateValidationMessagesAccessor(appElement);
 
+        // By capturing the inputradio elements just once up front, we're implicitly showing
+        // that they are retained as their values change
+        var unknownAirlineInput = FindAirlineInputs().First(i => string.Equals("Unknown", i.GetAttribute("value")));
+        var bestAirlineInput = FindAirlineInputs().First(i => string.Equals("BestAirline", i.GetAttribute("value")));
+
         // Validate selected inputs
-        Browser.True(() => FindUnknownAirlineInput().Selected);
-        Browser.False(() => FindBestAirlineInput().Selected);
+        Browser.True(() => unknownAirlineInput.Selected);
+        Browser.False(() => bestAirlineInput.Selected);
 
         // InputRadio emits additional attributes
-        Browser.True(() => FindUnknownAirlineInput().GetAttribute("extra").Equals("additional"));
+        Browser.True(() => unknownAirlineInput.GetAttribute("extra").Equals("additional"));
 
         // Validates on edit
-        Browser.Equal("valid", () => FindUnknownAirlineInput().GetAttribute("class"));
-        Browser.Equal("valid", () => FindBestAirlineInput().GetAttribute("class"));
+        Browser.Equal("valid", () => unknownAirlineInput.GetAttribute("class"));
+        Browser.Equal("valid", () => bestAirlineInput.GetAttribute("class"));
 
-        FindBestAirlineInput().Click();
+        bestAirlineInput.Click();
 
-        Browser.Equal("modified valid", () => FindUnknownAirlineInput().GetAttribute("class"));
-        Browser.Equal("modified valid", () => FindBestAirlineInput().GetAttribute("class"));
+        Browser.Equal("modified valid", () => unknownAirlineInput.GetAttribute("class"));
+        Browser.Equal("modified valid", () => bestAirlineInput.GetAttribute("class"));
 
         // Can become invalid
-        FindUnknownAirlineInput().Click();
+        unknownAirlineInput.Click();
 
-        Browser.Equal("modified invalid", () => FindUnknownAirlineInput().GetAttribute("class"));
-        Browser.Equal("modified invalid", () => FindBestAirlineInput().GetAttribute("class"));
+        Browser.Equal("modified invalid", () => unknownAirlineInput.GetAttribute("class"));
+        Browser.Equal("modified invalid", () => bestAirlineInput.GetAttribute("class"));
         Browser.Equal(new[] { "Pick a valid airline." }, messagesAccessor);
 
         IReadOnlyCollection<IWebElement> FindAirlineInputs()
             => appElement.FindElement(By.ClassName("airline")).FindElements(By.TagName("input"));
-
-        IWebElement FindUnknownAirlineInput()
-            => FindAirlineInputs().First(i => string.Equals("Unknown", i.GetAttribute("value")));
-
-        IWebElement FindBestAirlineInput()
-            => FindAirlineInputs().First(i => string.Equals("BestAirline", i.GetAttribute("value")));
     }
 
     [Fact]
@@ -703,7 +506,7 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var appElement = MountTypicalValidationComponent();
         var emailContainer = appElement.FindElement(By.ClassName("email"));
         var emailInput = emailContainer.FindElement(By.TagName("input"));
-        var emailMessagesAccessor = CreateValidationMessagesAccessor(emailContainer);
+        var emailMessagesAccessor = CreateValidationMessagesAccessor(emailContainer, ".special-email-css-class-override");
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
 
         // Doesn't show messages for other fields
@@ -733,7 +536,6 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
         var confirmEmailContainer = appElement.FindElement(By.ClassName("confirm-email"));
         var confirmInput = confirmEmailContainer.FindElement(By.TagName("input"));
         var confirmEmailValidationMessage = CreateValidationMessagesAccessor(confirmEmailContainer);
-        CreateValidationMessagesAccessor(emailContainer);
         var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
 
         // Updates on edit
@@ -970,9 +772,46 @@ public class FormsTest : ServerTestBase<ToggleExecutionModeServerFixture<Program
             => appElement.FindElement(By.ClassName("airlines")).FindElements(By.TagName("input"));
     }
 
-    private Func<string[]> CreateValidationMessagesAccessor(IWebElement appElement)
+    [Fact]
+    public void CanHaveModelLevelValidationErrors()
     {
-        return () => appElement.FindElements(By.ClassName("validation-message"))
+        var appElement = Browser.MountTestComponent<ModelLevelValidationComponent>();
+        var isCatCheckbox = appElement.FindElement(By.ClassName("cattiness")).FindElement(By.TagName("input"));
+        var ageInput = appElement.FindElement(By.ClassName("age")).FindElement(By.TagName("input"));
+        var submitButton = appElement.FindElement(By.CssSelector("button[type=submit]"));
+        var modelMessagesAccessor = CreateValidationMessagesAccessor(
+            appElement.FindElement(By.ClassName("model-errors")),
+            "ul.model-summary-custom-class > .validation-message"); // This shows we can override the ul's CSS class
+        var allMessagesAccessor = CreateValidationMessagesAccessor(
+            appElement.FindElement(By.ClassName("all-errors")));
+
+        // Cause a property-level validation error
+        ageInput.Clear();
+        ageInput.SendKeys("-1");
+        submitButton.Click();
+        Browser.Collection(allMessagesAccessor, x => Assert.Equal("Under-zeros should not be filling out forms", x));
+        Browser.Empty(modelMessagesAccessor);
+
+        // Cause a model-level validation error
+        ageInput.Clear();
+        ageInput.SendKeys("10");
+        submitButton.Click();
+        Browser.Collection(allMessagesAccessor, x => Assert.Equal("Sorry, you're not old enough as a non-cat", x));
+        Browser.Collection(modelMessagesAccessor, x => Assert.Equal("Sorry, you're not old enough as a non-cat", x));
+
+        // Become valid
+        isCatCheckbox.Click();
+        submitButton.Click();
+        Browser.Empty(allMessagesAccessor);
+        Browser.Empty(modelMessagesAccessor);
+
+        Func<string[]> logEntries = () => appElement.FindElements(By.ClassName("submission-log-entry")).Select(x => x.Text).ToArray();
+        Browser.Collection(logEntries, x => Assert.Equal("OnValidSubmit", x));
+    }
+
+    private Func<string[]> CreateValidationMessagesAccessor(IWebElement appElement, string messageSelector = ".validation-message")
+    {
+        return () => appElement.FindElements(By.CssSelector(messageSelector))
             .Select(x => x.Text)
             .OrderBy(x => x)
             .ToArray();

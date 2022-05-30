@@ -112,11 +112,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             Assert.True(tlsFeature.CipherAlgorithm > CipherAlgorithmType.Null, "Cipher");
             Assert.True(tlsFeature.CipherStrength > 0, "CipherStrength");
             Assert.True(tlsFeature.HashAlgorithm >= HashAlgorithmType.None, "HashAlgorithm"); // May be None on Linux.
-                Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
-                Assert.True(tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm"); // Maybe None on Windows 7
-                Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
+            Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
+            Assert.True(tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm"); // Maybe None on Windows 7
+            Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
 
-                return context.Response.WriteAsync("hello world");
+            return context.Response.WriteAsync("hello world");
         }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
         {
             var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
@@ -148,11 +148,11 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             Assert.True(tlsFeature.CipherAlgorithm > CipherAlgorithmType.Null, "Cipher");
             Assert.True(tlsFeature.CipherStrength > 0, "CipherStrength");
             Assert.True(tlsFeature.HashAlgorithm >= HashAlgorithmType.None, "HashAlgorithm"); // May be None on Linux.
-                Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
-                Assert.True(tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm"); // Maybe None on Windows 7
-                Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
+            Assert.True(tlsFeature.HashStrength >= 0, "HashStrength"); // May be 0 for some algorithms
+            Assert.True(tlsFeature.KeyExchangeAlgorithm >= ExchangeAlgorithmType.None, "KeyExchangeAlgorithm"); // Maybe None on Windows 7
+            Assert.True(tlsFeature.KeyExchangeStrength >= 0, "KeyExchangeStrength"); // May be 0 on mac
 
-                return context.Response.WriteAsync("hello world");
+            return context.Response.WriteAsync("hello world");
         }, new TestServiceContext(LoggerFactory), ConfigureListenOptions))
         {
             var result = await server.HttpClientSlim.GetStringAsync($"https://localhost:{server.Port}/", validateCertificate: false);
@@ -384,8 +384,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStream(connection.Stream);
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                 await Assert.ThrowsAsync<IOException>(() =>
                     stream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.Tls12 | SslProtocols.Tls11, false));
+#pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
             }
         }
@@ -444,8 +446,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStream(connection.Stream);
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                 await Assert.ThrowsAsync<IOException>(() =>
                     stream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.Tls12 | SslProtocols.Tls11, false));
+#pragma warning restore SYSLIB0039
                 Assert.Equal(1, selectorCalled);
             }
         }
@@ -542,7 +546,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 options.ServerCertificate = _x509Certificate2;
                 options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
                 options.AllowAnyClientCertificate();
             });
         }
@@ -629,7 +633,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
                     {
                         ServerCertificate = _x509Certificate2,
                         EnabledSslProtocols = SslProtocols.Tls12, // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                            ClientCertificateRequired = false,
+                        ClientCertificateRequired = false,
                         RemoteCertificateValidationCallback = (_, _, _, _) => true,
                     });
                 }
@@ -673,7 +677,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 options.ServerCertificate = _x509Certificate2;
                 options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
                 options.AllowAnyClientCertificate();
             });
         }
@@ -702,7 +706,9 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         var clientOptions = new SslClientAuthenticationOptions()
         {
             TargetHost = Guid.NewGuid().ToString(),
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
             EnabledSslProtocols = SslProtocols.Tls | SslProtocols.Tls11 | SslProtocols.Tls12,
+#pragma warning restore SYSLIB0039
         };
         clientOptions.RemoteCertificateValidationCallback = (sender, certificate, chain, sslPolicyErrors) => true;
 
@@ -907,7 +913,7 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             {
                 options.ServerCertificate = _x509Certificate2;
                 options.SslProtocols = SslProtocols.Tls12; // Linux doesn't support renegotiate on TLS1.3 yet. https://github.com/dotnet/runtime/issues/55757
-                    options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
+                options.ClientCertificateMode = ClientCertificateMode.DelayCertificate;
                 options.AllowAnyClientCertificate();
             });
         }
@@ -921,8 +927,8 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             Assert.Null(tlsFeature.ClientCertificate);
             Assert.Null(context.Connection.ClientCertificate);
 
-                // Read the body before requesting the client cert
-                var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
+            // Read the body before requesting the client cert
+            var body = await new StreamReader(context.Request.Body).ReadToEndAsync();
             Assert.Equal(expectedBody, body);
 
             var clientCert = await context.Connection.GetClientCertificateAsync();
@@ -964,13 +970,14 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
         {
             listenOptions.UseHttps(options =>
             {
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                 options.SslProtocols = SslProtocols.Tls12 | SslProtocols.Tls11;
+#pragma warning restore SYSLIB0039
                 options.ServerCertificate = _x509Certificate2;
                 options.ClientCertificateMode = ClientCertificateMode.RequireCertificate;
                 options.AllowAnyClientCertificate();
             });
         }
-
 
         await using (var server = new TestServer(context => context.Response.WriteAsync("hello world"), new TestServiceContext(LoggerFactory), ConfigureListenOptions))
         {
@@ -980,8 +987,10 @@ public class HttpsConnectionMiddlewareTests : LoggedTest
             using (var connection = server.CreateConnection())
             {
                 var stream = OpenSslStreamWithCert(connection.Stream);
+#pragma warning disable SYSLIB0039 // TLS 1.0 and 1.1 are obsolete
                 var ex = await Assert.ThrowsAnyAsync<Exception>(
                     async () => await stream.AuthenticateAsClientAsync("localhost", new X509CertificateCollection(), SslProtocols.Tls, false));
+#pragma warning restore SYSLIB0039
             }
         }
     }

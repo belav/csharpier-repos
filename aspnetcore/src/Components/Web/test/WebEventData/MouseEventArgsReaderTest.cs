@@ -2,7 +2,6 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Text.Json;
-using Xunit;
 
 namespace Microsoft.AspNetCore.Components.Web;
 
@@ -29,6 +28,7 @@ public class MouseEventArgsReaderTest
             ScreenX = 0.1,
             ScreenY = 4.4,
             ShiftKey = false,
+            Type = "type",
         };
         var jsonElement = GetJsonElement(args);
 

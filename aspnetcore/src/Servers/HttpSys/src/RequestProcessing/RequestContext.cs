@@ -1,13 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Diagnostics;
-using System.IO;
 using System.Security.Authentication.ExtendedProtection;
 using System.Security.Principal;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.HttpSys.Internal;
 using Microsoft.Extensions.Logging;
@@ -289,10 +285,13 @@ internal partial class RequestContext : NativeRequestContext, IThreadPoolWorkIte
                 PropertyInfoLength = (uint)System.Text.Encoding.Unicode.GetByteCount(destination.UrlPrefix)
             };
 
+            // Passing 0 for delegateUrlGroupId allows http.sys to find the right group for the
+            // URL passed in via the property above. If we passed in the receiver's URL group id
+            // instead of 0, then delegation would fail if the receiver restarted.
             statusCode = HttpApi.HttpDelegateRequestEx(source.Handle,
                                                            destination.Queue.Handle,
                                                            Request.RequestId,
-                                                           destination.Queue.UrlGroup.Id,
+                                                           delegateUrlGroupId: 0,
                                                            propertyInfoSetSize: 1,
                                                            &property);
         }

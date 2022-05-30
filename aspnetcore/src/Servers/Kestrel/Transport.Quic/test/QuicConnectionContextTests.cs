@@ -7,9 +7,10 @@ using System.Net.Quic;
 using System.Text;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Connections.Features;
+using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Internal;
 using Microsoft.AspNetCore.Testing;
-using Xunit;
+using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Quic.Tests;
 
@@ -47,7 +48,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         // Wait for stream after cancellation
         acceptStreamTask = serverConnection.AcceptAsync();
 
-        await using var clientStream = clientConnection.OpenBidirectionalStream();
+        await using var clientStream = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData);
 
         // Assert
@@ -107,7 +108,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         // Act
         var acceptTask = serverConnection.AcceptAsync();
 
-        await using var clientStream = quicConnection.OpenUnidirectionalStream();
+        await using var clientStream = await quicConnection.OpenUnidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData);
 
         await using var serverStream = await acceptTask.DefaultTimeout();
@@ -150,7 +151,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         // Act
         var acceptTask = serverConnection.AcceptAsync();
 
-        await using var clientStream = quicConnection.OpenBidirectionalStream();
+        await using var clientStream = await quicConnection.OpenBidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData);
 
         await using var serverStream = await acceptTask.DefaultTimeout();
@@ -277,7 +278,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         var quicConnectionContext = Assert.IsType<QuicConnectionContext>(serverConnection);
         Assert.Equal(0, quicConnectionContext.StreamPool.Count);
 
-        var clientStream = clientConnection.OpenBidirectionalStream();
+        var clientStream = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData, endStream: true).DefaultTimeout();
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
         var readResult = await serverStream.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
@@ -321,7 +322,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         var quicConnectionContext = Assert.IsType<QuicConnectionContext>(serverConnection);
         Assert.Equal(0, quicConnectionContext.StreamPool.Count);
 
-        var clientStream = clientConnection.OpenBidirectionalStream();
+        var clientStream = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData, endStream: true).DefaultTimeout();
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
         var readResult = await serverStream.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
@@ -367,7 +368,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         var quicConnectionContext = Assert.IsType<QuicConnectionContext>(serverConnection);
         Assert.Equal(0, quicConnectionContext.StreamPool.Count);
 
-        var clientStream = clientConnection.OpenBidirectionalStream();
+        var clientStream = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
@@ -415,7 +416,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         var quicConnectionContext = Assert.IsType<QuicConnectionContext>(serverConnection);
         Assert.Equal(0, quicConnectionContext.StreamPool.Count);
 
-        var clientStream = clientConnection.OpenBidirectionalStream();
+        var clientStream = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream.WriteAsync(TestData).DefaultTimeout();
 
         var serverStream = await serverConnection.AcceptAsync().DefaultTimeout();
@@ -550,7 +551,7 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
         static async Task SendStream(RequestState requestState)
         {
-            var clientStream = requestState.QuicConnection.OpenBidirectionalStream();
+            var clientStream = await requestState.QuicConnection.OpenBidirectionalStreamAsync();
             await clientStream.WriteAsync(TestData, endStream: true).DefaultTimeout();
             var serverStream = await requestState.ServerConnection.AcceptAsync().DefaultTimeout();
             var readResult = await serverStream.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
@@ -586,8 +587,11 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
 
     [ConditionalFact]
     [MsQuicSupported]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/38998")]
     public async Task PersistentState_StreamsReused_StatePersisted()
     {
+        using var httpEventSource = new HttpEventSourceListener(LoggerFactory);
+
         // Arrange
         await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
 
@@ -598,9 +602,14 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         await using var serverConnection = await connectionListener.AcceptAndAddFeatureAsync().DefaultTimeout();
 
         // Act
-        var clientStream1 = clientConnection.OpenBidirectionalStream();
+        Logger.LogInformation("Client starting stream 1");
+        var clientStream1 = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream1.WriteAsync(TestData, endStream: true).DefaultTimeout();
+
+        Logger.LogInformation("Server accept stream 1");
         var serverStream1 = await serverConnection.AcceptAsync().DefaultTimeout();
+
+        Logger.LogInformation("Server reading stream 1");
         var readResult1 = await serverStream1.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
         serverStream1.Transport.Input.AdvanceTo(readResult1.Buffer.End);
 
@@ -611,17 +620,24 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         Assert.True(readResult1.IsCompleted);
 
         // Complete reading and writing.
+        Logger.LogInformation("Server complete stream 1");
         await serverStream1.Transport.Input.CompleteAsync();
         await serverStream1.Transport.Output.CompleteAsync();
 
+        Logger.LogInformation("Server disposing stream 1");
         var quicStreamContext1 = Assert.IsType<QuicStreamContext>(serverStream1);
         await quicStreamContext1._processingTask.DefaultTimeout();
         await quicStreamContext1.DisposeAsync();
         quicStreamContext1.Dispose();
 
-        var clientStream2 = clientConnection.OpenBidirectionalStream();
+        Logger.LogInformation("Client starting stream 2");
+        var clientStream2 = await clientConnection.OpenBidirectionalStreamAsync();
         await clientStream2.WriteAsync(TestData, endStream: true).DefaultTimeout();
+
+        Logger.LogInformation("Server accept stream 2");
         var serverStream2 = await serverConnection.AcceptAsync().DefaultTimeout();
+
+        Logger.LogInformation("Server reading stream 2");
         var readResult2 = await serverStream2.Transport.Input.ReadAtLeastAsync(TestData.Length).DefaultTimeout();
         serverStream2.Transport.Input.AdvanceTo(readResult2.Buffer.End);
 
@@ -632,9 +648,11 @@ public class QuicConnectionContextTests : TestApplicationErrorLoggerLoggedTest
         Assert.True(readResult2.IsCompleted);
 
         // Complete reading and writing.
+        Logger.LogInformation("Server complete stream 2");
         await serverStream2.Transport.Input.CompleteAsync();
         await serverStream2.Transport.Output.CompleteAsync();
 
+        Logger.LogInformation("Server disposing stream 2");
         var quicStreamContext2 = Assert.IsType<QuicStreamContext>(serverStream2);
         await quicStreamContext2._processingTask.DefaultTimeout();
         await quicStreamContext2.DisposeAsync();

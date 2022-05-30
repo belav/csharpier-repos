@@ -1,7 +1,5 @@
-﻿// Licensed to the .NET Foundation under one or more agreements.
+// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
-
-using System.Collections.Generic;
 
 namespace Microsoft.AspNetCore.SignalR;
 
@@ -11,6 +9,13 @@ namespace Microsoft.AspNetCore.SignalR;
 /// <typeparam name="T">The client invoker type.</typeparam>
 public interface IHubClients<T>
 {
+    /// <summary>
+    /// Gets a <typeparamref name="T" /> that can be used to invoke methods on a single client connected to the hub and receive results.
+    /// </summary>
+    /// <param name="connectionId">The connection ID.</param>
+    /// <returns>A client caller.</returns>
+    T Single(string connectionId) => throw new NotImplementedException();
+
     /// <summary>
     /// Gets a <typeparamref name="T" /> that can be used to invoke methods on all clients connected to the hub.
     /// </summary>
@@ -74,4 +79,3 @@ public interface IHubClients<T>
     /// <returns>A client caller.</returns>
     T Users(IReadOnlyList<string> userIds);
 }
-

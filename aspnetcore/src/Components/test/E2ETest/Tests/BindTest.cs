@@ -1,18 +1,14 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Globalization;
-using System.Text.Json;
 using BasicTestApp;
 using Microsoft.AspNetCore.Components.E2ETest.Infrastructure;
 using Microsoft.AspNetCore.Components.E2ETest.Infrastructure.ServerFixtures;
 using Microsoft.AspNetCore.E2ETesting;
 using Microsoft.AspNetCore.Testing;
-using Moq;
 using OpenQA.Selenium;
 using OpenQA.Selenium.Support.UI;
-using Xunit;
 using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Components.E2ETest.Tests;
@@ -723,6 +719,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxDateTime()
     {
         var target = Browser.Exists(By.Id("textbox-datetime"));
@@ -751,6 +748,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateTime()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-datetime"));
@@ -781,6 +779,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxDateTimeOffset()
     {
         var target = Browser.Exists(By.Id("textbox-datetimeoffset"));
@@ -809,6 +808,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateTimeOffset()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-datetimeoffset"));
@@ -839,6 +839,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxDateOnly()
     {
         var target = Browser.Exists(By.Id("textbox-dateonly"));
@@ -867,6 +868,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateOnly()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-dateonly"));
@@ -897,6 +899,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxTimeOnly()
     {
         var target = Browser.Exists(By.Id("textbox-timeonly"));
@@ -925,6 +928,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableTimeOnly()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-timeonly"));
@@ -1045,6 +1049,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // Guess what! Client-side and server-side also understand timezones differently. So for now we're comparing
     // the parsed output without consideration for the timezone
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateTimeOffsetWithFormat()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-datetimeoffset"));
@@ -1134,6 +1139,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxTimeOnlyWithFormat()
     {
         var target = Browser.Exists(By.Id("textbox-timeonly-format"));
@@ -1193,6 +1199,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateTime_InvalidValue()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-datetime-invalid"));
@@ -1229,6 +1236,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxDateTimeOffset_InvalidValue()
     {
         var target = Browser.Exists(By.Id("textbox-datetimeoffset-invalid"));
@@ -1298,6 +1306,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateTimeOffsetWithFormat_InvalidValue()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-datetimeoffset-format-invalid"));
@@ -1335,6 +1344,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableDateOnly_InvalidValue()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-dateonly-invalid"));
@@ -1402,6 +1412,7 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
     // For date comparisons, we parse (non-formatted) values to compare them. Client-side and server-side
     // Blazor have different formatting behaviour by default.
     [Fact]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41425")]
     public void CanBindTextboxNullableTimeOnly_InvalidValue()
     {
         var target = Browser.Exists(By.Id("textbox-nullable-timeonly-invalid"));
@@ -2008,6 +2019,78 @@ public class BindTest : ServerTestBase<ToggleExecutionModeServerFixture<Program>
         target.SendKeys("\t");
         Browser.Equal(string.Empty, () => boundValue.Text);
         Assert.Equal(string.Empty, mirrorValue.GetAttribute("value"));
+    }
+
+    [Fact]
+    public void CanBindDateTimeLocalDefaultStepTextboxDateTime()
+    {
+        // This test differs from the other "step"-related test in that the DOM element has no "step" attribute
+        // and hence defaults to step=60, and for this the framework has explicit logic to strip off the "seconds"
+        // part of the bound value (otherwise the browser reports it as invalid - issue #41731)
+
+        var target = Browser.Exists(By.Id("datetime-local-default-step-textbox-datetime"));
+        var boundValue = Browser.Exists(By.Id("datetime-local-default-step-textbox-datetime-value"));
+        var expected = DateTime.Now.Date.Add(new TimeSpan(8, 5, 0)); // Notice the "seconds" part is zero here, even though the original data has seconds=30
+        Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+
+        // Clear textbox; value updates to 00:00 because that's the default
+        target.Clear();
+        expected = default;
+        Browser.Equal(default, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+        Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
+
+        // We have to do it this way because the browser gets in the way when sending keys to the input element directly.
+        ApplyInputValue("#datetime-local-default-step-textbox-datetime", "2000-01-02T04:05");
+        expected = new DateTime(2000, 1, 2, 04, 05, 0);
+        Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void CanBindTimeDefaultStepTextboxDateTime()
+    {
+        // This test differs from the other "step"-related test in that the DOM element has no "step" attribute
+        // and hence defaults to step=60, and for this the framework has explicit logic to strip off the "seconds"
+        // part of the bound value (otherwise the browser reports it as invalid - issue #41731)
+
+        var target = Browser.Exists(By.Id("time-default-step-textbox-datetime"));
+        var boundValue = Browser.Exists(By.Id("time-default-step-textbox-datetime-value"));
+        var expected = DateTime.Now.Date.Add(new TimeSpan(8, 5, 0)); // Notice the "seconds" part is zero here, even though the original data has seconds=30
+        Assert.Equal(expected, DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+
+        // Clear textbox; value updates to 00:00 because that's the default
+        target.Clear();
+        expected = default;
+        Browser.Equal(DateTime.Now.Date, () => DateTime.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+        Assert.Equal(default, DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
+
+        // We have to do it this way because the browser gets in the way when sending keys to the input element directly.
+        ApplyInputValue("#time-default-step-textbox-datetime", "04:05");
+        expected = DateTime.Now.Date.Add(new TimeSpan(4, 5, 0));
+        Browser.Equal(expected, () => DateTime.Parse(boundValue.Text, CultureInfo.InvariantCulture));
+    }
+
+    [Fact]
+    public void CanBindTimeDefaultStepTextboxTimeOnly()
+    {
+        // This test differs from the other "step"-related test in that the DOM element has no "step" attribute
+        // and hence defaults to step=60, and for this the framework has explicit logic to strip off the "seconds"
+        // part of the bound value (otherwise the browser reports it as invalid - issue #41731)
+
+        var target = Browser.Exists(By.Id("time-default-step-textbox-timeonly"));
+        var boundValue = Browser.Exists(By.Id("time-default-step-textbox-timeonly-value"));
+        var expected = new TimeOnly(8, 5, 0); // Notice the "seconds" part is zero here, even though the original data has seconds=30
+        Assert.Equal(expected, TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+
+        // Clear textbox; value updates to 00:00 because that's the default
+        target.Clear();
+        expected = default;
+        Browser.Equal(default, () => TimeOnly.Parse(target.GetAttribute("value"), CultureInfo.InvariantCulture));
+        Assert.Equal(default, TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
+
+        // We have to do it this way because the browser gets in the way when sending keys to the input element directly.
+        ApplyInputValue("#time-default-step-textbox-timeonly", "04:05");
+        expected = new TimeOnly(4, 5, 0);
+        Browser.Equal(expected, () => TimeOnly.Parse(boundValue.Text, CultureInfo.InvariantCulture));
     }
 
     // Applies an input through javascript to datetime-local/month/time controls.

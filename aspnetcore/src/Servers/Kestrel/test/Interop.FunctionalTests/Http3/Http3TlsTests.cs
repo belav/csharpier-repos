@@ -34,7 +34,7 @@ public class Http3TlsTests : LoggedTest
                     httpsOptions.ServerCertificateSelector = (context, host) =>
                     {
                         Assert.Null(context); // The context isn't available durring the quic handshake.
-                            Assert.Equal("localhost", host);
+                        Assert.Equal("localhost", host);
                         return TestResources.GetTestCertificate();
                     };
                 });
@@ -42,7 +42,7 @@ public class Http3TlsTests : LoggedTest
         });
 
         using var host = builder.Build();
-        using var client = Http3Helpers.CreateClient();
+        using var client = HttpHelpers.CreateClient();
 
         await host.StartAsync().DefaultTimeout();
 
@@ -90,7 +90,7 @@ public class Http3TlsTests : LoggedTest
         });
 
         using var host = builder.Build();
-        using var client = Http3Helpers.CreateClient(includeClientCert: true);
+        using var client = HttpHelpers.CreateClient(includeClientCert: true);
 
         await host.StartAsync().DefaultTimeout();
 
@@ -112,6 +112,7 @@ public class Http3TlsTests : LoggedTest
     [InlineData(ClientCertificateMode.DelayCertificate)]
     [MsQuicSupported]
     [OSSkipCondition(OperatingSystems.MacOSX | OperatingSystems.Linux, SkipReason = "https://github.com/dotnet/aspnetcore/issues/35800")]
+    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/41131")]
     public async Task ClientCertificate_NoOrDelayed_Available_Ignored(ClientCertificateMode mode)
     {
         var builder = CreateHostBuilder(async context =>
@@ -133,7 +134,7 @@ public class Http3TlsTests : LoggedTest
         });
 
         using var host = builder.Build();
-        using var client = Http3Helpers.CreateClient(includeClientCert: true);
+        using var client = HttpHelpers.CreateClient(includeClientCert: true);
 
         await host.StartAsync().DefaultTimeout();
 
@@ -177,13 +178,13 @@ public class Http3TlsTests : LoggedTest
                     if (serverAllowInvalid)
                     {
                         httpsOptions.AllowAnyClientCertificate(); // The self-signed cert is invalid. Let it fail the default checks.
-                        }
+                    }
                 });
             });
         });
 
         using var host = builder.Build();
-        using var client = Http3Helpers.CreateClient(includeClientCert: true);
+        using var client = HttpHelpers.CreateClient(includeClientCert: true);
 
         await host.StartAsync().DefaultTimeout();
 
@@ -214,7 +215,6 @@ public class Http3TlsTests : LoggedTest
     [ConditionalFact]
     [MsQuicSupported]
     [OSSkipCondition(OperatingSystems.MacOSX | OperatingSystems.Linux, SkipReason = "https://github.com/dotnet/aspnetcore/issues/35800")]
-    [QuarantinedTest("https://github.com/dotnet/aspnetcore/issues/35070")]
     public async Task ClientCertificate_Allow_NotAvailable_Optional()
     {
         var builder = CreateHostBuilder(async context =>
@@ -236,7 +236,7 @@ public class Http3TlsTests : LoggedTest
         });
 
         using var host = builder.Build();
-        using var client = Http3Helpers.CreateClient(includeClientCert: false);
+        using var client = HttpHelpers.CreateClient(includeClientCert: false);
 
         await host.StartAsync().DefaultTimeout();
 
@@ -246,7 +246,7 @@ public class Http3TlsTests : LoggedTest
 
         // https://github.com/dotnet/runtime/issues/57308, optional client certs aren't supported.
         var ex = await Assert.ThrowsAsync<HttpRequestException>(() => client.SendAsync(request, CancellationToken.None).DefaultTimeout());
-        Assert.StartsWith("Connection has been shutdown by transport.", ex.Message);
+        Assert.StartsWith("Connection has been shutdown by transport:", ex.Message);
 
         await host.StopAsync().DefaultTimeout();
     }
@@ -271,7 +271,7 @@ public class Http3TlsTests : LoggedTest
         });
 
         using var host = builder.Build();
-        using var client = Http3Helpers.CreateClient();
+        using var client = HttpHelpers.CreateClient();
 
         var exception = await Assert.ThrowsAsync<NotSupportedException>(() =>
             host.StartAsync().DefaultTimeout());
@@ -280,6 +280,6 @@ public class Http3TlsTests : LoggedTest
 
     private IHostBuilder CreateHostBuilder(RequestDelegate requestDelegate, HttpProtocols? protocol = null, Action<KestrelServerOptions> configureKestrel = null)
     {
-        return Http3Helpers.CreateHostBuilder(AddTestLogging, requestDelegate, protocol, configureKestrel);
+        return HttpHelpers.CreateHostBuilder(AddTestLogging, requestDelegate, protocol, configureKestrel);
     }
 }

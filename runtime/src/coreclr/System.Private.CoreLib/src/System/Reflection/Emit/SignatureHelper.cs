@@ -169,11 +169,8 @@ namespace System.Reflection.Emit
 
         internal static SignatureHelper GetTypeSigToken(Module module, Type type)
         {
-            if (module == null)
-                throw new ArgumentNullException(nameof(module));
-
-            if (type == null)
-                throw new ArgumentNullException(nameof(type));
+            ArgumentNullException.ThrowIfNull(module);
+            ArgumentNullException.ThrowIfNull(type);
 
             return new SignatureHelper(module, type);
         }
@@ -308,8 +305,7 @@ namespace System.Reflection.Emit
                 {
                     Type t = requiredCustomModifiers[i];
 
-                    if (t == null)
-                        throw new ArgumentNullException(nameof(requiredCustomModifiers));
+                    ArgumentNullException.ThrowIfNull(t, nameof(requiredCustomModifiers));
 
                     if (t.HasElementType)
                         throw new ArgumentException(SR.Argument_ArraysInvalid, nameof(requiredCustomModifiers));
@@ -738,6 +734,61 @@ namespace System.Reflection.Emit
             return temp;
         }
 
+        internal void AddDynamicArgument(DynamicScope dynamicScope, Type clsArgument, Type[]? requiredCustomModifiers, Type[]? optionalCustomModifiers)
+        {
+            IncrementArgCounts();
+
+            Debug.Assert(clsArgument != null);
+
+            if (optionalCustomModifiers != null)
+            {
+                for (int i = 0; i < optionalCustomModifiers.Length; i++)
+                {
+                    Type t = optionalCustomModifiers[i];
+
+                    if (t is not RuntimeType rtType)
+                        throw new ArgumentException(SR.Argument_MustBeRuntimeType, nameof(optionalCustomModifiers));
+
+                    if (t.HasElementType)
+                        throw new ArgumentException(SR.Argument_ArraysInvalid, nameof(optionalCustomModifiers));
+
+                    if (t.ContainsGenericParameters)
+                        throw new ArgumentException(SR.Argument_GenericsInvalid, nameof(optionalCustomModifiers));
+
+                    AddElementType(CorElementType.ELEMENT_TYPE_CMOD_OPT);
+
+                    int token = dynamicScope.GetTokenFor(rtType.TypeHandle);
+                    Debug.Assert(!MetadataToken.IsNullToken(token));
+                    AddToken(token);
+                }
+            }
+
+            if (requiredCustomModifiers != null)
+            {
+                for (int i = 0; i < requiredCustomModifiers.Length; i++)
+                {
+                    Type t = requiredCustomModifiers[i];
+
+                    if (t is not RuntimeType rtType)
+                        throw new ArgumentException(SR.Argument_MustBeRuntimeType, nameof(requiredCustomModifiers));
+
+                    if (t.HasElementType)
+                        throw new ArgumentException(SR.Argument_ArraysInvalid, nameof(requiredCustomModifiers));
+
+                    if (t.ContainsGenericParameters)
+                        throw new ArgumentException(SR.Argument_GenericsInvalid, nameof(requiredCustomModifiers));
+
+                    AddElementType(CorElementType.ELEMENT_TYPE_CMOD_REQD);
+
+                    int token = dynamicScope.GetTokenFor(rtType.TypeHandle);
+                    Debug.Assert(!MetadataToken.IsNullToken(token));
+                    AddToken(token);
+                }
+            }
+
+            AddOneArgTypeHelper(clsArgument);
+        }
+
         #endregion
 
         #region Public Methods
@@ -748,8 +799,7 @@ namespace System.Reflection.Emit
 
         public void AddArgument(Type argument, bool pinned)
         {
-            if (argument == null)
-                throw new ArgumentNullException(nameof(argument));
+            ArgumentNullException.ThrowIfNull(argument);
 
             IncrementArgCounts();
             AddOneArgTypeHelper(argument, pinned);
@@ -777,8 +827,7 @@ namespace System.Reflection.Emit
             if (m_sigDone)
                 throw new ArgumentException(SR.Argument_SigIsFinalized);
 
-            if (argument == null)
-                throw new ArgumentNullException(nameof(argument));
+            ArgumentNullException.ThrowIfNull(argument);
 
             IncrementArgCounts();
 

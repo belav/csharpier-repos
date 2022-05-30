@@ -1,10 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Text.Json;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Components.Web;
 using Microsoft.JSInterop.Infrastructure;
 
 // Sync vs Async APIs for this.
@@ -24,7 +20,7 @@ namespace Microsoft.AspNetCore.Components.WebView;
 
 // This class is a "Proxy" or "front-controller" for the incoming messages from the Browser via the transport channel.
 // It receives messages on OnMessageReceived, interprets the payload and dispatches them to the appropriate method
-internal class IpcReceiver
+internal sealed class IpcReceiver
 {
     private readonly Func<string, string, Task> _onAttachMessage;
 
@@ -56,7 +52,7 @@ internal class IpcReceiver
                     BeginInvokeDotNet(pageContext, args[0].GetString(), args[1].GetString(), args[2].GetString(), args[3].GetInt64(), args[4].GetString());
                     break;
                 case IpcCommon.IncomingMessageType.EndInvokeJS:
-                    EndInvokeJS(pageContext, args[0].GetInt64(), args[1].GetBoolean(), args[2].GetString());
+                    EndInvokeJS(pageContext, args[2].GetString());
                     break;
                 case IpcCommon.IncomingMessageType.ReceiveByteArrayFromJS:
                     ReceiveByteArrayFromJS(pageContext, args[0].GetInt32(), args[1].GetBytesFromBase64());
@@ -73,7 +69,7 @@ internal class IpcReceiver
         }
     }
 
-    private void BeginInvokeDotNet(PageContext pageContext, string callId, string assemblyName, string methodIdentifier, long dotNetObjectId, string argsJson)
+    private static void BeginInvokeDotNet(PageContext pageContext, string callId, string assemblyName, string methodIdentifier, long dotNetObjectId, string argsJson)
     {
         DotNetDispatcher.BeginInvokeDotNet(
             pageContext.JSRuntime,
@@ -81,7 +77,7 @@ internal class IpcReceiver
             argsJson);
     }
 
-    private void EndInvokeJS(PageContext pageContext, long asyncHandle, bool succeeded, string argumentsOrError)
+    private static void EndInvokeJS(PageContext pageContext, string argumentsOrError)
     {
         DotNetDispatcher.EndInvokeJS(pageContext.JSRuntime, argumentsOrError);
     }
@@ -91,7 +87,7 @@ internal class IpcReceiver
         DotNetDispatcher.ReceiveByteArray(pageContext.JSRuntime, id, data);
     }
 
-    private void OnRenderCompleted(PageContext pageContext, long batchId, string errorMessageOrNull)
+    private static void OnRenderCompleted(PageContext pageContext, long batchId, string errorMessageOrNull)
     {
         if (errorMessageOrNull != null)
         {
@@ -101,7 +97,7 @@ internal class IpcReceiver
         pageContext.Renderer.NotifyRenderCompleted(batchId);
     }
 
-    private void OnLocationChanged(PageContext pageContext, string uri, bool intercepted)
+    private static void OnLocationChanged(PageContext pageContext, string uri, bool intercepted)
     {
         pageContext.NavigationManager.LocationUpdated(uri, intercepted);
     }

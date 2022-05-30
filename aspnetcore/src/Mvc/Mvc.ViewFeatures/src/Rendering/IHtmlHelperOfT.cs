@@ -1,8 +1,6 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Linq.Expressions;
 using Microsoft.AspNetCore.Html;
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
@@ -47,8 +45,9 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
 
     /// <summary>
     /// Returns HTML markup for the <paramref name="expression"/>, using a display template, specified HTML field
-    /// name, and additional view data. The template is found using the <paramref name="templateName"/> or the
-    /// <paramref name="expression"/>'s <see cref="ModelBinding.ModelMetadata"/>.
+    /// name, and additional view data. The template name is taken from the <paramref name="templateName"/> or the
+    /// <paramref name="expression"/>’s <see cref="Microsoft.AspNetCore.Mvc.ModelBinding.ModelMetadata.TemplateHint"/>.
+    /// If the template file is not found, a default template will be used.
     /// </summary>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="templateName">The name of the template used to create the HTML markup.</param>
@@ -69,8 +68,9 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// <paramref name="expression"/> result.
     /// </para>
     /// <para>
-    /// Custom templates are found under a <c>DisplayTemplates</c> folder. The folder name is case-sensitive on
-    /// case-sensitive file systems.
+    /// Custom templates are found under a <c>DisplayTemplates</c> folder within the
+    /// <see href="https://aka.ms/aspnet/7.0/razorpages-pages-folder">Pages</see> folder.
+    /// The folder name is case-sensitive on case-sensitive file systems.
     /// </para>
     /// </remarks>
     IHtmlContent DisplayFor<TResult>(
@@ -372,7 +372,7 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// </summary>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="format">
-    /// The format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to format the
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the
     /// <paramref name="expression"/> value when using that in the "value" attribute.
     /// </param>
     /// <param name="htmlAttributes">
@@ -429,7 +429,7 @@ public interface IHtmlHelper<TModel> : IHtmlHelper
     /// </summary>
     /// <param name="expression">An expression to be evaluated against the current model.</param>
     /// <param name="format">
-    /// The format string (see https://msdn.microsoft.com/en-us/library/txafckwd.aspx) used to format the
+    /// The format string (see <see href="https://msdn.microsoft.com/en-us/library/txafckwd.aspx"/>) used to format the
     /// <paramref name="expression"/> value when returning that value.
     /// </param>
     /// <typeparam name="TResult">The type of the <paramref name="expression"/> result.</typeparam>

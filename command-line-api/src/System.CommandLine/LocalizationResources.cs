@@ -13,10 +13,12 @@ namespace System.CommandLine
     /// </summary>
     public class LocalizationResources
     {
+        private static LocalizationResources? _instance;
+
         /// <summary>
         /// Gets a global instance of the <see cref="LocalizationResources"/> class.
         /// </summary>
-        public static LocalizationResources Instance { get; } = new();
+        public static LocalizationResources Instance => _instance ??= new();
 
         /// <summary>
         /// Initializes a new instance of the <see cref="LocalizationResources"/> class.
@@ -141,14 +143,14 @@ namespace System.CommandLine
         /// <summary>
         ///   Interpolates values into a localized string similar to [options].
         /// </summary>
-        public virtual string HelpUsageOptionsTitle() =>
-            GetResourceString(Properties.Resources.HelpUsageOptionsTitle);
+        public virtual string HelpUsageOptions() =>
+            GetResourceString(Properties.Resources.HelpUsageOptions);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to [command].
         /// </summary>
-        public virtual string HelpUsageCommandTitle() =>
-            GetResourceString(Properties.Resources.HelpUsageCommandTitle);
+        public virtual string HelpUsageCommand() =>
+            GetResourceString(Properties.Resources.HelpUsageCommand);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to [[--] &lt;additional arguments&gt;...]].
@@ -171,14 +173,14 @@ namespace System.CommandLine
         /// <summary>
         ///   Interpolates values into a localized string similar to (REQUIRED).
         /// </summary>
-        public virtual string HelpOptionsRequired() =>
-            GetResourceString(Properties.Resources.HelpOptionsRequired);
+        public virtual string HelpOptionsRequiredLabel() =>
+            GetResourceString(Properties.Resources.HelpOptionsRequiredLabel);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to default.
         /// </summary>
-        public virtual string HelpArgumentDefaultValueTitle() =>
-            GetResourceString(Properties.Resources.HelpArgumentDefaultValueTitle);
+        public virtual string HelpArgumentDefaultValueLabel() =>
+            GetResourceString(Properties.Resources.HelpArgumentDefaultValueLabel);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Commands:.
@@ -221,26 +223,6 @@ namespace System.CommandLine
         /// </summary>
         public virtual string ExceptionHandlerHeader()
             => GetResourceString(Properties.Resources.ExceptionHandlerHeader);
-
-        /// <summary>
-        ///   Interpolates values into a localized string similar to Debug directive specified, but no process names are listed as allowed for debug.
-        ///Add your process name to the &apos;{0}&apos; environment variable.
-        ///The value of the variable should be the name of the processes, separated by a semi-colon &apos;;&apos;, for example &apos;{0}={1}&apos;.
-        /// </summary>
-        public virtual string DebugDirectiveExecutableNotSpecified(string environmentVariableName, string processName)
-            => GetResourceString(Properties.Resources.DebugDirectiveExecutableNotSpecified, environmentVariableName, processName);
-
-        /// <summary>
-        ///   Interpolates values into a localized string similar to Attach your debugger to process {0} ({1})..
-        /// </summary>
-        public virtual string DebugDirectiveAttachToProcess(int processId, string processName)
-            => GetResourceString(Properties.Resources.DebugDirectiveAttachToProcess, processId, processName);
-
-        /// <summary>
-        ///   Interpolates values into a localized string similar to Process name &apos;{0}&apos; is not included in the list of debuggable process names in the {1} environment variable (&apos;{2}&apos;).
-        /// </summary>
-        public virtual string DebugDirectiveProcessNotIncludedInEnvironmentVariable(string processName, string environmentVariableName, string processNames)
-            => GetResourceString(Properties.Resources.DebugDirectiveProcessNotIncludedInEnvironmentVariable, processName, environmentVariableName, processNames);
 
         /// <summary>
         ///   Interpolates values into a localized string similar to Cannot parse argument &apos;{0}&apos; as expected type {1}..

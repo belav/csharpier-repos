@@ -7,6 +7,7 @@ using System.Collections.Concurrent;
 using System.Diagnostics;
 using System.Globalization;
 using System.IO.Pipelines;
+using System.Net.Http;
 using System.Net.Http.HPack;
 using System.Reflection;
 using System.Text;
@@ -28,7 +29,7 @@ using Xunit.Abstractions;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 
-public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, IHttpHeadersHandler
+public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, IHttpStreamHeadersHandler
 {
     protected static readonly int MaxRequestHeaderFieldSize = 16 * 1024;
     protected static readonly string _4kHeaderValue = new string('a', 4096);
@@ -166,12 +167,12 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
         _mockConnectionContext.Setup(c => c.Abort(It.IsAny<ConnectionAbortedException>())).Callback<ConnectionAbortedException>(ex =>
         {
-                // Emulate transport abort so the _connectionTask completes.
-                Task.Run(() =>
-            {
-                Logger.LogInformation(0, ex, "ConnectionContext.Abort() was called. Completing _pair.Application.Output.");
-                _pair.Application.Output.Complete(ex);
-            });
+            // Emulate transport abort so the _connectionTask completes.
+            Task.Run(() =>
+        {
+            Logger.LogInformation(0, ex, "ConnectionContext.Abort() was called. Completing _pair.Application.Output.");
+            _pair.Application.Output.Complete(ex);
+        });
         });
 
         _noopApplication = context => Task.CompletedTask;
@@ -182,6 +183,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             _receivedRequestFields.Scheme = context.Request.Scheme;
             _receivedRequestFields.Path = context.Request.Path.Value;
             _receivedRequestFields.RawTarget = context.Features.Get<IHttpRequestFeature>().RawTarget;
+            _receivedRequestFields.Authority = context.Request.Host.Value;
             foreach (var header in context.Request.Headers)
             {
                 _receivedHeaders[header.Key] = header.Value.ToString();
@@ -197,8 +199,8 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
             using (var ms = new MemoryStream())
             {
-                    // Consuming the entire request body guarantees trailers will be available
-                    await context.Request.Body.CopyToAsync(ms);
+                // Consuming the entire request body guarantees trailers will be available
+                await context.Request.Body.CopyToAsync(ms);
             }
 
             Assert.True(context.Request.SupportsTrailers(), "SupportsTrailers");
@@ -332,8 +334,8 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
 
             var stalledReadTask = context.Request.Body.ReadAsync(buffer, 0, buffer.Length);
 
-                // Write to the response so the test knows the app started the stalled read.
-                await context.Response.Body.WriteAsync(new byte[1], 0, 1);
+            // Write to the response so the test knows the app started the stalled read.
+            await context.Response.Body.WriteAsync(new byte[1], 0, 1);
 
             await stalledReadTask;
         };
@@ -412,7 +414,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         base.Dispose();
     }
 
-    void IHttpHeadersHandler.OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    void IHttpStreamHeadersHandler.OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
     {
         var nameStr = name.GetHeaderName();
         _decodedHeaders[nameStr] = value.GetRequestHeaderString(nameStr, _serviceContext.ServerOptions.RequestHeaderEncodingSelector, checkForNewlineChars: true);
@@ -423,17 +425,22 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         Debug.Assert(index <= H2StaticTable.Count);
 
         ref readonly var entry = ref H2StaticTable.Get(index - 1);
-        ((IHttpHeadersHandler)this).OnHeader(entry.Name, entry.Value);
+        ((IHttpStreamHeadersHandler)this).OnHeader(entry.Name, entry.Value);
     }
 
     public void OnStaticIndexedHeader(int index, ReadOnlySpan<byte> value)
     {
         Debug.Assert(index <= H2StaticTable.Count);
 
-        ((IHttpHeadersHandler)this).OnHeader(H2StaticTable.Get(index - 1).Name, value);
+        ((IHttpStreamHeadersHandler)this).OnHeader(H2StaticTable.Get(index - 1).Name, value);
     }
 
-    void IHttpHeadersHandler.OnHeadersComplete(bool endStream) { }
+    void IHttpStreamHeadersHandler.OnHeadersComplete(bool endStream) { }
+
+    void IHttpStreamHeadersHandler.OnDynamicIndexedHeader(int? index, ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
+    {
+        ((IHttpStreamHeadersHandler)this).OnHeader(name, value);
+    }
 
     protected void CreateConnection()
     {
@@ -454,6 +461,7 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             timeoutControl: _mockTimeoutControl.Object);
 
         _connection = new Http2Connection(httpConnectionContext);
+        _connection._streamLifetimeHandler = new LifetimeHandlerInterceptor(_connection._streamLifetimeHandler, this);
 
         var httpConnection = new HttpConnection(httpConnectionContext);
         httpConnection.Initialize(_connection);
@@ -463,7 +471,36 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         _timeoutControl.Initialize(_serviceContext.SystemClock.UtcNow.Ticks);
     }
 
-    protected async Task InitializeConnectionAsync(RequestDelegate application, int expectedSettingsCount = 3, bool expectedWindowUpdate = true)
+    private class LifetimeHandlerInterceptor : IHttp2StreamLifetimeHandler
+    {
+        private readonly IHttp2StreamLifetimeHandler _inner;
+        private readonly Http2TestBase _httpTestBase;
+
+        public LifetimeHandlerInterceptor(IHttp2StreamLifetimeHandler inner, Http2TestBase httpTestBase)
+        {
+            _inner = inner;
+            _httpTestBase = httpTestBase;
+        }
+
+        public void DecrementActiveClientStreamCount()
+        {
+            _inner.DecrementActiveClientStreamCount();
+        }
+
+        public void OnStreamCompleted(Http2Stream stream)
+        {
+            _inner.OnStreamCompleted(stream);
+
+            // Stream in test might not have been started with StartStream method.
+            // In that case there isn't a record of a running stream.
+            if (_httpTestBase._runningStreams.TryGetValue(stream.StreamId, out var tcs))
+            {
+                tcs.TrySetResult();
+            }
+        }
+    }
+
+    protected void InitializeConnectionWithoutPreface(RequestDelegate application)
     {
         if (_connection == null)
         {
@@ -486,9 +523,15 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         }
 
         _connectionTask = CompletePipeOnTaskCompletion();
+    }
+
+    protected async Task InitializeConnectionAsync(RequestDelegate application, int expectedSettingsCount = 3, bool expectedWindowUpdate = true)
+    {
+        InitializeConnectionWithoutPreface(application);
 
         // Lose xUnit's AsyncTestSyncContext so middleware always runs inline for better determinism.
         await ThreadPoolAwaitable.Instance;
+
         await SendPreambleAsync();
         await SendSettingsAsync();
 
@@ -666,6 +709,11 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         Http2FrameWriter.WriteHeader(frame, writableBuffer);
         writableBuffer.Write(buffer.Slice(0, frame.PayloadLength));
         return FlushAsync(writableBuffer);
+    }
+
+    protected Task WaitForStreamAsync(int streamId)
+    {
+        return _runningStreams[streamId].Task;
     }
 
     protected Task WaitForAllStreamsAsync()
@@ -1102,6 +1150,22 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         return FlushAsync(outputWriter);
     }
 
+    internal async Task<byte[]> ReadAllAsync()
+    {
+        while (true)
+        {
+            var result = await _pair.Application.Input.ReadAsync().AsTask().DefaultTimeout();
+
+            if (result.IsCompleted)
+            {
+                return result.Buffer.ToArray();
+            }
+
+            // Consume nothing, just wait for everything
+            _pair.Application.Input.AdvanceTo(result.Buffer.Start, result.Buffer.End);
+        }
+    }
+
     internal async Task<Http2FrameWithPayload> ReceiveFrameAsync(uint maxFrameSize = Http2PeerSettings.DefaultMaxFrameSize)
     {
         var frame = new Http2FrameWithPayload();
@@ -1349,7 +1413,6 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
             _realTimeoutControl.CancelTimeout();
         }
 
-
         public virtual void InitializeHttp2(InputFlowControl connectionInputFlowControl)
         {
             _realTimeoutControl.InitializeHttp2(connectionInputFlowControl);
@@ -1379,7 +1442,6 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         {
             _realTimeoutControl.BytesRead(count);
         }
-
 
         public virtual void StartTimingWrite()
         {
@@ -1413,5 +1475,6 @@ public class Http2TestBase : TestApplicationErrorLoggerLoggedTest, IDisposable, 
         public string Scheme { get; set; }
         public string Path { get; set; }
         public string RawTarget { get; set; }
+        public string Authority { get; set; }
     }
 }

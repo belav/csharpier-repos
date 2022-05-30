@@ -1,12 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Net.Http;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Hosting.Server;
+using Microsoft.AspNetCore.Hosting.Server.Features;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Http.Features;
 using Microsoft.Extensions.Options;
@@ -22,15 +20,21 @@ public class TestServer : IServer
     private bool _disposed;
     private ApplicationWrapper? _application;
 
+    private static FeatureCollection CreateTestFeatureCollection()
+    {
+        var features = new FeatureCollection();
+        features.Set<IServerAddressesFeature>(new ServerAddressesFeature());
+        return features;
+    }
+
     /// <summary>
     /// For use with IHostBuilder.
     /// </summary>
     /// <param name="services"></param>
     /// <param name="optionsAccessor"></param>
     public TestServer(IServiceProvider services, IOptions<TestServerOptions> optionsAccessor)
-        : this(services, new FeatureCollection(), optionsAccessor)
+        : this(services, CreateTestFeatureCollection(), optionsAccessor)
     {
-
     }
 
     /// <summary>
@@ -54,7 +58,7 @@ public class TestServer : IServer
     /// </summary>
     /// <param name="services"></param>
     public TestServer(IServiceProvider services)
-        : this(services, new FeatureCollection())
+        : this(services, CreateTestFeatureCollection())
     {
     }
 
@@ -75,7 +79,7 @@ public class TestServer : IServer
     /// </summary>
     /// <param name="builder"></param>
     public TestServer(IWebHostBuilder builder)
-        : this(builder, new FeatureCollection())
+        : this(builder, CreateTestFeatureCollection())
     {
     }
 
@@ -156,7 +160,11 @@ public class TestServer : IServer
     /// </summary>
     public HttpClient CreateClient()
     {
-        return new HttpClient(CreateHandler()) { BaseAddress = BaseAddress };
+        return new HttpClient(CreateHandler())
+        {
+            BaseAddress = BaseAddress,
+            Timeout = TimeSpan.FromSeconds(200),
+        };
     }
 
     /// <summary>
@@ -203,7 +211,7 @@ public class TestServer : IServer
             if (pathBase.HasValue && pathBase.Value.EndsWith('/'))
             {
                 pathBase = new PathString(pathBase.Value[..^1]); // All but the last character.
-                }
+            }
             request.PathBase = pathBase;
         });
         builder.Configure((context, reader) => configureContext(context));
@@ -212,7 +220,7 @@ public class TestServer : IServer
     }
 
     /// <summary>
-    /// Dispoes the <see cref="IWebHost" /> object associated with the test server.
+    /// Dispose the <see cref="IWebHost" /> object associated with the test server.
     /// </summary>
     public void Dispose()
     {

@@ -1,10 +1,7 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Collections;
-using System.Collections.Generic;
-using System.Linq;
 using System.Runtime.InteropServices;
 
 namespace Microsoft.AspNetCore.Server.IntegrationTesting;
@@ -53,10 +50,17 @@ public class TestMatrix : IEnumerable<object[]>
         return this;
     }
 
+    /// <summary>
+    /// With all architectures that are compatible with the currently running architecture
+    /// </summary>
+    /// <returns></returns>
     public TestMatrix WithAllArchitectures()
     {
-        Architectures.Add(RuntimeArchitecture.x64);
-        Architectures.Add(RuntimeArchitecture.x86);
+        Architectures.Add(RuntimeArchitectures.Current);
+        if (RuntimeInformation.OSArchitecture == Architecture.X64)
+        {
+            Architectures.Add(RuntimeArchitecture.x86);
+        }
         return this;
     }
 
@@ -122,19 +126,7 @@ public class TestMatrix : IEnumerable<object[]>
     {
         if (!Architectures.Any())
         {
-            switch (RuntimeInformation.OSArchitecture)
-            {
-                case Architecture.Arm:
-                case Architecture.X86:
-                    Architectures.Add(RuntimeArchitecture.x86);
-                    break;
-                case Architecture.Arm64:
-                case Architecture.X64:
-                    Architectures.Add(RuntimeArchitecture.x64);
-                    break;
-                default:
-                    throw new ArgumentException(RuntimeInformation.OSArchitecture.ToString());
-            }
+            Architectures.Add(RuntimeArchitectures.Current);
         }
     }
 
@@ -187,7 +179,7 @@ public class TestMatrix : IEnumerable<object[]>
         }
     }
 
-    private bool CheckTfmIsSupportedForServer(string tfm, ServerType server)
+    private static bool CheckTfmIsSupportedForServer(string tfm, ServerType server)
     {
         // Not a combination we test
         return !(Tfm.Matches(Tfm.Net462, tfm) && ServerType.Nginx == server);
@@ -253,7 +245,7 @@ public class TestMatrix : IEnumerable<object[]>
         }
     }
 
-    private string SkipIfArchitectureNotSupportedOnCurrentSystem(RuntimeArchitecture arch)
+    private static string SkipIfArchitectureNotSupportedOnCurrentSystem(RuntimeArchitecture arch)
     {
         if (arch == RuntimeArchitecture.x64)
         {
@@ -266,7 +258,7 @@ public class TestMatrix : IEnumerable<object[]>
         return OperatingSystem.IsWindows() ? null : $"No {arch} available for non-Windows systems.";
     }
 
-    private bool IsArchitectureSupportedOnServer(RuntimeArchitecture arch, ServerType server)
+    private static bool IsArchitectureSupportedOnServer(RuntimeArchitecture arch, ServerType server)
     {
         // No x86 Mac/Linux runtime, don't generate a test variation that will always be skipped.
         return !(arch == RuntimeArchitecture.x86 && ServerType.Nginx == server);

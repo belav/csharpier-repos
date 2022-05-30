@@ -1,15 +1,10 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Linq;
-using System.Reflection;
 using System.Runtime.ExceptionServices;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting.Builder;
 using Microsoft.AspNetCore.Hosting.Server;
@@ -79,16 +74,14 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
         _hostingServiceProvider = hostingServiceProvider;
         _applicationServiceCollection.AddSingleton<ApplicationLifetime>();
         // There's no way to to register multiple service types per definition. See https://github.com/aspnet/DependencyInjection/issues/360
-#pragma warning disable CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
-        _applicationServiceCollection.AddSingleton(services
-            => services.GetService<ApplicationLifetime>() as IHostApplicationLifetime);
+        _applicationServiceCollection.AddSingleton<IHostApplicationLifetime>(services
+            => services.GetService<ApplicationLifetime>()!);
 #pragma warning disable CS0618 // Type or member is obsolete
-        _applicationServiceCollection.AddSingleton(services
-            => services.GetService<ApplicationLifetime>() as AspNetCore.Hosting.IApplicationLifetime);
-        _applicationServiceCollection.AddSingleton(services
-            => services.GetService<ApplicationLifetime>() as Extensions.Hosting.IApplicationLifetime);
+        _applicationServiceCollection.AddSingleton<AspNetCore.Hosting.IApplicationLifetime>(services
+            => services.GetService<ApplicationLifetime>()!);
+        _applicationServiceCollection.AddSingleton<Extensions.Hosting.IApplicationLifetime>(services
+            => services.GetService<ApplicationLifetime>()!);
 #pragma warning restore CS0618 // Type or member is obsolete
-#pragma warning restore CS8634 // The type cannot be used as type parameter in the generic type or method. Nullability of type argument doesn't match 'class' constraint.
         _applicationServiceCollection.AddSingleton<HostedServiceExecutor>();
     }
 
@@ -282,7 +275,7 @@ internal sealed partial class WebHost : IWebHost, IAsyncDisposable
                 var urls = _config[WebHostDefaults.ServerUrlsKey] ?? _config[DeprecatedServerUrlsKey];
                 if (!string.IsNullOrEmpty(urls))
                 {
-                    serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(_config, WebHostDefaults.PreferHostingUrlsKey);
+                    serverAddressesFeature!.PreferHostingUrls = WebHostUtilities.ParseBool(_config[WebHostDefaults.PreferHostingUrlsKey]);
 
                     foreach (var value in urls.Split(';', StringSplitOptions.RemoveEmptyEntries))
                     {

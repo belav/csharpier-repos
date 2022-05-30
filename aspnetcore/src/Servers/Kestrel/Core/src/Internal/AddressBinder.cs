@@ -1,14 +1,9 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics.CodeAnalysis;
-using System.IO;
 using System.Linq;
 using System.Net;
-using System.Threading;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Connections;
 using Microsoft.AspNetCore.Hosting;
@@ -19,7 +14,7 @@ using Microsoft.Extensions.Logging;
 
 namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal;
 
-internal class AddressBinder
+internal sealed class AddressBinder
 {
     public static async Task BindAsync(IEnumerable<ListenOptions> listenOptions, AddressBindContext context, CancellationToken cancellationToken)
     {
@@ -75,7 +70,7 @@ internal class AddressBinder
     /// Returns an <see cref="IPEndPoint"/> for the given host an port.
     /// If the host parameter isn't "localhost" or an IP address, use IPAddress.Any.
     /// </summary>
-    protected internal static bool TryCreateIPEndPoint(BindingAddress address, [NotNullWhen(true)] out IPEndPoint? endpoint)
+    internal static bool TryCreateIPEndPoint(BindingAddress address, [NotNullWhen(true)] out IPEndPoint? endpoint)
     {
         if (!IPAddress.TryParse(address.Host, out var ip))
         {
@@ -148,7 +143,7 @@ internal class AddressBinder
         Task BindAsync(AddressBindContext context, CancellationToken cancellationToken);
     }
 
-    private class DefaultAddressStrategy : IStrategy
+    private sealed class DefaultAddressStrategy : IStrategy
     {
         public async Task BindAsync(AddressBindContext context, CancellationToken cancellationToken)
         {
@@ -174,7 +169,7 @@ internal class AddressBinder
         }
     }
 
-    private class OverrideWithAddressesStrategy : AddressesStrategy
+    private sealed class OverrideWithAddressesStrategy : AddressesStrategy
     {
         public OverrideWithAddressesStrategy(IReadOnlyCollection<string> addresses)
             : base(addresses)
@@ -190,7 +185,7 @@ internal class AddressBinder
         }
     }
 
-    private class OverrideWithEndpointsStrategy : EndpointsStrategy
+    private sealed class OverrideWithEndpointsStrategy : EndpointsStrategy
     {
         private readonly string[] _originalAddresses;
 

@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
 using System.Collections.Concurrent;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Diagnostics.CodeAnalysis;
 using System.Reflection;
@@ -12,24 +10,29 @@ using System.Reflection.Metadata;
 using System.Runtime.ExceptionServices;
 using System.Text;
 using System.Text.Json;
-using System.Threading.Tasks;
+using Microsoft.AspNetCore.Internal;
+using static Microsoft.AspNetCore.Internal.LinkerFlags;
 
-[assembly: MetadataUpdateHandler(typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher))]
+[assembly: MetadataUpdateHandler(typeof(Microsoft.JSInterop.Infrastructure.DotNetDispatcher.MetadataUpdateHandler))]
 
 namespace Microsoft.JSInterop.Infrastructure;
 
 /// <summary>
 /// Provides methods that receive incoming calls from JS to .NET.
 /// </summary>
-[UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070", Justification = "Linker does not propogate annotations to generated state machine. https://github.com/mono/linker/issues/1403")]
 public static class DotNetDispatcher
 {
     private const string DisposeDotNetObjectReferenceMethodName = "__Dispose";
+
     internal static readonly JsonEncodedText DotNetObjectRefKey = JsonEncodedText.Encode("__dotNetObject");
 
     private static readonly ConcurrentDictionary<AssemblyKey, IReadOnlyDictionary<string, (MethodInfo, Type[])>> _cachedMethodsByAssembly = new();
 
     private static readonly ConcurrentDictionary<Type, IReadOnlyDictionary<string, (MethodInfo, Type[])>> _cachedMethodsByType = new();
+
+    private static readonly ConcurrentDictionary<Type, Func<object, Task>> _cachedConvertToTaskByType = new();
+
+    private static readonly MethodInfo _taskConverterMethodInfo = typeof(DotNetDispatcher).GetMethod(nameof(CreateValueTaskConverter), BindingFlags.NonPublic | BindingFlags.Static)!;
 
     /// <summary>
     /// Receives a call from JS to .NET, locating and invoking the specified method.
@@ -111,6 +114,19 @@ public static class DotNetDispatcher
             // Returned a task - we need to continue that task and then report an exception
             // or return the value.
             task.ContinueWith(t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo), TaskScheduler.Current);
+
+        }
+        else if (syncResult is ValueTask valueTaskResult)
+        {
+            valueTaskResult.AsTask().ContinueWith(t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo), TaskScheduler.Current);
+        }
+        else if (syncResult?.GetType() is { IsGenericType: true } syncResultType
+            && syncResultType.GetGenericTypeDefinition() == typeof(ValueTask<>))
+        {
+            // It's a ValueTask<T>. We'll coerce it to a Task so that we can attach a continuation.
+            var innerTask = GetTaskByType(syncResultType.GenericTypeArguments[0], syncResult);
+
+            innerTask!.ContinueWith(t => EndInvokeDotNetAfterTask(t, jsRuntime, invocationInfo), TaskScheduler.Current);
         }
         else
         {
@@ -306,7 +322,10 @@ public static class DotNetDispatcher
         var success = reader.GetBoolean();
 
         reader.Read();
-        jsRuntime.EndInvokeJS(taskId, success, ref reader);
+        if (!jsRuntime.EndInvokeJS(taskId, success, ref reader))
+        {
+            return;
+        }
 
         if (!reader.Read() || reader.TokenType != JsonTokenType.EndArray)
         {
@@ -348,6 +367,20 @@ public static class DotNetDispatcher
         }
     }
 
+    [UnconditionalSuppressMessage(
+        "ReflectionAnalysis",
+        "IL2060:MakeGenericMethod",
+        Justification = "https://github.com/mono/linker/issues/1727")]
+    private static Task GetTaskByType(Type type, object obj)
+    {
+        var converterDelegate = _cachedConvertToTaskByType.GetOrAdd(type, (Type t, MethodInfo taskConverterMethodInfo) =>
+            taskConverterMethodInfo.MakeGenericMethod(t).CreateDelegate<Func<object, Task>>(), _taskConverterMethodInfo);
+
+        return converterDelegate.Invoke(obj);
+    }
+
+    private static Task CreateValueTaskConverter<[DynamicallyAccessedMembers(LinkerFlags.JsonSerialized)] T>(object result) => ((ValueTask<T>)result).AsTask();
+
     private static (MethodInfo methodInfo, Type[] parameterTypes) GetCachedMethodInfo(IDotNetObjectReference objectReference, string methodIdentifier)
     {
         var type = objectReference.Value.GetType();
@@ -361,7 +394,7 @@ public static class DotNetDispatcher
             throw new ArgumentException($"The type '{type.Name}' does not contain a public invokable method with [{nameof(JSInvokableAttribute)}(\"{methodIdentifier}\")].");
         }
 
-        static Dictionary<string, (MethodInfo, Type[])> ScanTypeForCallableMethods(Type type)
+        static Dictionary<string, (MethodInfo, Type[])> ScanTypeForCallableMethods([DynamicallyAccessedMembers(JSInvokable)] Type type)
         {
             var result = new Dictionary<string, (MethodInfo, Type[])>(StringComparer.Ordinal);
 
@@ -466,10 +499,16 @@ public static class DotNetDispatcher
             ?? throw new ArgumentException($"There is no loaded assembly with the name '{assemblyKey.AssemblyName}'.");
     }
 
-    private static void ClearCache(Type[]? _)
+    // don't point the MetadataUpdateHandlerAttribute at the DotNetDispatcher class, since the attribute has
+    // DynamicallyAccessedMemberTypes.All. This causes unnecessary trim warnings on the non-MetadataUpdateHandler methods.
+    internal static class MetadataUpdateHandler
     {
-        _cachedMethodsByAssembly.Clear();
-        _cachedMethodsByType.Clear();
+        public static void ClearCache(Type[]? _)
+        {
+            _cachedMethodsByAssembly.Clear();
+            _cachedMethodsByType.Clear();
+            _cachedConvertToTaskByType.Clear();
+        }
     }
 
     private readonly struct AssemblyKey : IEquatable<AssemblyKey>

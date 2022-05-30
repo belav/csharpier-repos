@@ -1,9 +1,6 @@
 ﻿// Copyright (c) .NET Foundation and contributors. All rights reserved.
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
-using System.CommandLine.Invocation;
-using System.CommandLine.IO;
-using System.CommandLine.Parsing;
 using System.Linq;
 using FluentAssertions;
 using Xunit;
@@ -125,12 +122,8 @@ namespace System.CommandLine.Tests
                 string commandLine,
                 string expectedParent)
             {
-                var reusedCommand = new Command("reused")
-                {
-                    Handler = CommandHandler.Create(() =>
-                    {
-                    })
-                };
+                var reusedCommand = new Command("reused");
+                reusedCommand.SetHandler(() => { });
                 reusedCommand.Add(new Option<string>("--the-option"));
 
                 var outer = new Command("outer")

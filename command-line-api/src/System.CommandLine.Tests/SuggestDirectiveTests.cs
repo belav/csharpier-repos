@@ -22,10 +22,10 @@ namespace System.CommandLine.Tests
         public SuggestDirectiveTests()
         {
             _fruitOption = new Option<string>("--fruit")
-                .AddSuggestions("apple", "banana", "cherry");
+                .AddCompletions("apple", "banana", "cherry");
 
             _vegetableOption = new Option<string>("--vegetable")
-                .AddSuggestions((_, _) => new[] { "asparagus", "broccoli", "carrot" });
+                .AddCompletions(_ => new[] { "asparagus", "broccoli", "carrot" });
 
             _eatCommand = new Command("eat")
             {
@@ -228,8 +228,8 @@ namespace System.CommandLine.Tests
             var parser = new CommandLineBuilder(new Command("parent")
                           {
                               new Command("child"),
-                              new Option("--option1"),
-                              new Option("--option2"),
+                              new Option<bool>("--option1"),
+                              new Option<bool>("--option2"),
                               new Argument<string>()
                           })
                           .UseSuggestDirective()

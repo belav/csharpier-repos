@@ -61,7 +61,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot parse argument &apos;{0}&apos; as expected type {1}..
+        ///   Looks up a localized string similar to Cannot parse argument &apos;{0}&apos; as expected type &apos;{1}&apos;..
         /// </summary>
         internal static string ArgumentConversionCannotParse {
             get {
@@ -70,7 +70,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot parse argument &apos;{0}&apos; for command &apos;{1}&apos; as expected type {2}..
+        ///   Looks up a localized string similar to Cannot parse argument &apos;{0}&apos; for command &apos;{1}&apos; as expected type &apos;{2}&apos;..
         /// </summary>
         internal static string ArgumentConversionCannotParseForCommand {
             get {
@@ -79,7 +79,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Cannot parse argument &apos;{0}&apos; for option &apos;{1}&apos; as expected type {2}..
+        ///   Looks up a localized string similar to Cannot parse argument &apos;{0}&apos; for option &apos;{1}&apos; as expected type &apos;{2}&apos;..
         /// </summary>
         internal static string ArgumentConversionCannotParseForOption {
             get {
@@ -115,7 +115,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Required argument missing for command: {0}.
+        ///   Looks up a localized string similar to Required argument missing for command: &apos;{0}&apos;..
         /// </summary>
         internal static string CommandRequiredArgumentMissing {
             get {
@@ -124,36 +124,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attach your debugger to process {0} ({1})..
-        /// </summary>
-        internal static string DebugDirectiveAttachToProcess {
-            get {
-                return ResourceManager.GetString("DebugDirectiveAttachToProcess", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Debug directive specified, but no process names are listed as allowed for debug.
-        ///Add your process name to the &apos;{0}&apos; environment variable.
-        ///The value of the variable should be the name of the processes, separated by a semi-colon &apos;;&apos;, for example &apos;{0}={1}&apos;.
-        /// </summary>
-        internal static string DebugDirectiveExecutableNotSpecified {
-            get {
-                return ResourceManager.GetString("DebugDirectiveExecutableNotSpecified", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Process name &apos;{0}&apos; is not included in the list of debuggable process names in the {1} environment variable (&apos;{2}&apos;).
-        /// </summary>
-        internal static string DebugDirectiveProcessNotIncludedInEnvironmentVariable {
-            get {
-                return ResourceManager.GetString("DebugDirectiveProcessNotIncludedInEnvironmentVariable", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Directory does not exist: {0}.
+        ///   Looks up a localized string similar to Directory does not exist: &apos;{0}&apos;..
         /// </summary>
         internal static string DirectoryDoesNotExist {
             get {
@@ -180,7 +151,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File does not exist: {0}.
+        ///   Looks up a localized string similar to File does not exist: &apos;{0}&apos;..
         /// </summary>
         internal static string FileDoesNotExist {
             get {
@@ -189,7 +160,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to File or directory does not exist: {0}.
+        ///   Looks up a localized string similar to File or directory does not exist: &apos;{0}&apos;..
         /// </summary>
         internal static string FileOrDirectoryDoesNotExist {
             get {
@@ -218,9 +189,9 @@ namespace System.CommandLine.Properties {
         /// <summary>
         ///   Looks up a localized string similar to default.
         /// </summary>
-        internal static string HelpArgumentDefaultValueTitle {
+        internal static string HelpArgumentDefaultValueLabel {
             get {
-                return ResourceManager.GetString("HelpArgumentDefaultValueTitle", resourceCulture);
+                return ResourceManager.GetString("HelpArgumentDefaultValueLabel", resourceCulture);
             }
         }
         
@@ -243,6 +214,15 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Description:.
+        /// </summary>
+        internal static string HelpDescriptionTitle {
+            get {
+                return ResourceManager.GetString("HelpDescriptionTitle", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Show help and usage information.
         /// </summary>
         internal static string HelpOptionDescription {
@@ -254,9 +234,9 @@ namespace System.CommandLine.Properties {
         /// <summary>
         ///   Looks up a localized string similar to (REQUIRED).
         /// </summary>
-        internal static string HelpOptionsRequired {
+        internal static string HelpOptionsRequiredLabel {
             get {
-                return ResourceManager.GetString("HelpOptionsRequired", resourceCulture);
+                return ResourceManager.GetString("HelpOptionsRequiredLabel", resourceCulture);
             }
         }
         
@@ -281,18 +261,18 @@ namespace System.CommandLine.Properties {
         /// <summary>
         ///   Looks up a localized string similar to [command].
         /// </summary>
-        internal static string HelpUsageCommandTitle {
+        internal static string HelpUsageCommand {
             get {
-                return ResourceManager.GetString("HelpUsageCommandTitle", resourceCulture);
+                return ResourceManager.GetString("HelpUsageCommand", resourceCulture);
             }
         }
         
         /// <summary>
         ///   Looks up a localized string similar to [options].
         /// </summary>
-        internal static string HelpUsageOptionsTitle {
+        internal static string HelpUsageOptions {
             get {
-                return ResourceManager.GetString("HelpUsageOptionsTitle", resourceCulture);
+                return ResourceManager.GetString("HelpUsageOptions", resourceCulture);
             }
         }
         
@@ -304,18 +284,9 @@ namespace System.CommandLine.Properties {
                 return ResourceManager.GetString("HelpUsageTitle", resourceCulture);
             }
         }
-
+        
         /// <summary>
-        ///   Looks up a localized string similar to Description:.
-        /// </summary>
-        internal static string HelpDescriptionTitle {
-            get {
-                return ResourceManager.GetString("HelpDescriptionTitle", resourceCulture);
-            }
-        }
-
-        /// <summary>
-        ///   Looks up a localized string similar to Character not allowed in a file name: {0}.
+        ///   Looks up a localized string similar to Character not allowed in a file name: &apos;{0}&apos;..
         /// </summary>
         internal static string InvalidCharactersInFileName {
             get {
@@ -324,7 +295,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Character not allowed in a path: {0}.
+        ///   Looks up a localized string similar to Character not allowed in a path: &apos;{0}&apos;..
         /// </summary>
         internal static string InvalidCharactersInPath {
             get {
@@ -360,7 +331,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Required argument missing for option: {0}.
+        ///   Looks up a localized string similar to Required argument missing for option: &apos;{0}&apos;..
         /// </summary>
         internal static string OptionRequiredArgumentMissing {
             get {
@@ -378,7 +349,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Response file not found &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Response file not found &apos;{0}&apos;..
         /// </summary>
         internal static string ResponseFileNotFound {
             get {
@@ -405,7 +376,7 @@ namespace System.CommandLine.Properties {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Unrecognized command or argument &apos;{0}&apos;.
+        ///   Looks up a localized string similar to Unrecognized command or argument &apos;{0}&apos;..
         /// </summary>
         internal static string UnrecognizedCommandOrArgument {
             get {

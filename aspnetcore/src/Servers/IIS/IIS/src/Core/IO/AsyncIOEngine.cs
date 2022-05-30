@@ -1,16 +1,12 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers;
 using System.Diagnostics;
-using System.IO;
-using System.Threading;
-using System.Threading.Tasks;
 
 namespace Microsoft.AspNetCore.Server.IIS.Core.IO;
 
-internal partial class AsyncIOEngine : IAsyncIOEngine
+internal sealed partial class AsyncIOEngine : IAsyncIOEngine
 {
     private readonly IISHttpContext _context;
     private readonly NativeSafeHandle _handler;

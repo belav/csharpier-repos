@@ -25,6 +25,30 @@ namespace System.Reflection
         private AssemblyVersionCompatibility _versionCompatibility;
         private AssemblyNameFlags _flags;
 
+        public AssemblyName(string assemblyName)
+            : this()
+        {
+            ArgumentException.ThrowIfNullOrEmpty(assemblyName);
+            if (assemblyName[0] == '\0')
+                throw new ArgumentException(SR.Format_StringZeroLength);
+
+            AssemblyNameParser.AssemblyNameParts parts = AssemblyNameParser.Parse(assemblyName);
+            _name = parts._name;
+            _version = parts._version;
+            _flags = parts._flags;
+            if ((parts._flags & AssemblyNameFlags.PublicKey) != 0)
+            {
+                _publicKey = parts._publicKeyOrToken;
+            }
+            else
+            {
+                _publicKeyToken = parts._publicKeyOrToken;
+            }
+
+            if (parts._cultureName != null)
+                _cultureInfo = new CultureInfo(parts._cultureName);
+        }
+
         public AssemblyName()
         {
             _versionCompatibility = AssemblyVersionCompatibility.SameMachine;
@@ -77,6 +101,7 @@ namespace System.Reflection
             }
         }
 
+        [Obsolete(Obsoletions.AssemblyNameMembersMessage, DiagnosticId = Obsoletions.AssemblyNameMembersDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
         public ProcessorArchitecture ProcessorArchitecture
         {
             get
@@ -135,6 +160,28 @@ namespace System.Reflection
             return name;
         }
 
+        private static Func<string, AssemblyName>? s_getAssemblyName;
+        private static Func<string, AssemblyName> InitGetAssemblyName()
+        {
+            Type readerType = Type.GetType(
+                    "System.Reflection.Metadata.MetadataReader, System.Reflection.Metadata",
+                    throwOnError: true)!;
+
+            MethodInfo? getAssemblyNameMethod = readerType.GetMethod(
+                "GetAssemblyName",
+                BindingFlags.NonPublic | BindingFlags.Public | BindingFlags.Static,
+                null,
+                new Type[] { typeof(string) },
+                null);
+
+            if (getAssemblyNameMethod == null)
+            {
+                throw new MissingMethodException(readerType.FullName, "GetAssemblyName");
+            }
+
+            return s_getAssemblyName = getAssemblyNameMethod.CreateDelegate<Func<string, AssemblyName>>();
+        }
+
         /*
          * Get the AssemblyName for a given file. This will only work
          * if the file contains an assembly manifest. This method causes
@@ -142,10 +189,7 @@ namespace System.Reflection
          */
         public static AssemblyName GetAssemblyName(string assemblyFile)
         {
-            if (assemblyFile == null)
-                throw new ArgumentNullException(nameof(assemblyFile));
-
-            return GetFileInformationCore(assemblyFile);
+            return (s_getAssemblyName ?? InitGetAssemblyName())(assemblyFile);
         }
 
         public byte[]? GetPublicKey()
@@ -165,7 +209,7 @@ namespace System.Reflection
 
         // The compressed version of the public key formed from a truncated hash.
         // Will throw a SecurityException if _publicKey is invalid
-        public byte[]? GetPublicKeyToken() => _publicKeyToken ??= ComputePublicKeyToken();
+        public byte[]? GetPublicKeyToken() => _publicKeyToken ??= AssemblyNameHelpers.ComputePublicKeyToken(_publicKey);
 
         public void SetPublicKeyToken(byte[]? publicKeyToken)
         {
@@ -189,12 +233,14 @@ namespace System.Reflection
             }
         }
 
+        [Obsolete(Obsoletions.AssemblyNameMembersMessage, DiagnosticId = Obsoletions.AssemblyNameMembersDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
         public AssemblyHashAlgorithm HashAlgorithm
         {
             get => _hashAlgorithm;
             set => _hashAlgorithm = value;
         }
 
+        [Obsolete(Obsoletions.AssemblyNameMembersMessage, DiagnosticId = Obsoletions.AssemblyNameMembersDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
         public AssemblyVersionCompatibility VersionCompatibility
         {
             get => _versionCompatibility;
@@ -216,7 +262,7 @@ namespace System.Reflection
                     return string.Empty;
 
                 // Do not call GetPublicKeyToken() here - that latches the result into AssemblyName which isn't a side effect we want.
-                byte[]? pkt = _publicKeyToken ?? ComputePublicKeyToken();
+                byte[]? pkt = _publicKeyToken ?? AssemblyNameHelpers.ComputePublicKeyToken(_publicKey);
                 return AssemblyNameFormatter.ComputeDisplayName(Name, Version, CultureName, pkt, Flags, ContentType);
             }
         }
@@ -249,12 +295,8 @@ namespace System.Reflection
         {
             if (object.ReferenceEquals(reference, definition))
                 return true;
-
-            if (reference == null)
-                throw new ArgumentNullException(nameof(reference));
-
-            if (definition == null)
-                throw new ArgumentNullException(nameof(definition));
+            ArgumentNullException.ThrowIfNull(reference);
+            ArgumentNullException.ThrowIfNull(definition);
 
             string refName = reference.Name ?? string.Empty;
             string defName = definition.Name ?? string.Empty;
@@ -343,7 +385,7 @@ namespace System.Reflection
                         // Means we don't reEncode '%' but check for the possible escaped sequence
                         dest = EnsureDestinationSize(pStr, dest, i, c_EncodedCharsPerByte,
                             c_MaxAsciiCharsReallocate * c_EncodedCharsPerByte, ref destPos, prevInputPos);
-                        if (i + 2 < end && HexConverter.IsHexChar(pStr[i + 1]) && HexConverter.IsHexChar(pStr[i + 2]))
+                        if (i + 2 < end && char.IsAsciiHexDigit(pStr[i + 1]) && char.IsAsciiHexDigit(pStr[i + 2]))
                         {
                             // leave it escaped
                             dest[destPos++] = '%';
@@ -417,23 +459,11 @@ namespace System.Reflection
 
         internal static bool IsUnreserved(char c)
         {
-            if (IsAsciiLetterOrDigit(c))
+            if (char.IsAsciiLetterOrDigit(c))
             {
                 return true;
             }
             return RFC3986UnreservedMarks.Contains(c);
-        }
-
-        // Only consider ASCII characters
-        internal static bool IsAsciiLetter(char character)
-        {
-            return (character >= 'a' && character <= 'z') ||
-                   (character >= 'A' && character <= 'Z');
-        }
-
-        internal static bool IsAsciiLetterOrDigit(char character)
-        {
-            return IsAsciiLetter(character) || (character >= '0' && character <= '9');
         }
 
         internal const char c_DummyChar = (char)0xFFFF;     // An Invalid Unicode character used as a dummy char passed into the parameter

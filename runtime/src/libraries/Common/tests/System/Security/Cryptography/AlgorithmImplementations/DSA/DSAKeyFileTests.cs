@@ -68,7 +68,7 @@ namespace System.Security.Cryptography.Dsa.Tests
             // Check encrypted import with the wrong password.
             // It shouldn't do enough work to realize it was wrong.
             pwBytes = Array.Empty<byte>();
-            Assert.Throws<ObjectDisposedException>(() => key.ImportEncryptedPkcs8PrivateKey("", pkcs8EncryptedPrivate, out _));
+            Assert.Throws<ObjectDisposedException>(() => key.ImportEncryptedPkcs8PrivateKey((ReadOnlySpan<char>)"", pkcs8EncryptedPrivate, out _));
             Assert.Throws<ObjectDisposedException>(() => key.ImportEncryptedPkcs8PrivateKey(pwBytes, pkcs8EncryptedPrivate, out _));
         }
 
@@ -565,6 +565,7 @@ vAB5Wz646GeWztKawSR/9xIqHq8IECV1FXI=",
         }
 
         [Fact]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/62547", TestPlatforms.Android)]
         public static void DecryptPkcs12PbeTooManyIterations()
         {
             // pbeWithSHAAnd3-KeyTripleDES-CBC with 600,001 iterations
@@ -580,11 +581,12 @@ KaC843/LqYiSNoD7rBPpSpkyLtldwhqc7o2Wz7tyb1Oj8WF47AJD5OI=");
             using (DSA key = DSAFactory.Create())
             {
                 Assert.ThrowsAny<CryptographicException>(
-                    () => key.ImportEncryptedPkcs8PrivateKey("test", high3DesIterationKey, out _));
+                    () => key.ImportEncryptedPkcs8PrivateKey((ReadOnlySpan<char>)"test", high3DesIterationKey, out _));
             }
         }
 
         [Fact]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/62547", TestPlatforms.Android)]
         public static void ReadWriteDsa1024EncryptedPkcs8_Pbes2HighIterations()
         {
             // pkcs5PBES2 hmacWithSHA256 aes128-CBC with 600,001 iterations

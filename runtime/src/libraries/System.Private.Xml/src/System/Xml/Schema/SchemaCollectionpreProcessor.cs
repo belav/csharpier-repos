@@ -174,7 +174,7 @@ namespace System.Xml.Schema
                             _schemaLocations.Add(include.Schema.BaseUri, include.Schema.BaseUri);
                         }
                         //To avoid re-including components that were already included through a different path
-                        Uri? subUri = null;
+                        Uri? subUri;
                         for (int j = 0; j < include.Schema.Includes.Count; ++j)
                         {
                             XmlSchemaExternal subInc = (XmlSchemaExternal)include.Schema.Includes[j];
@@ -1381,7 +1381,7 @@ namespace System.Xml.Schema
 
                 if (complexType.Particle != null || complexType.Attributes != null)
                 {
-                    // this is illigal
+                    // this is illegal
                 }
                 if (complexType.ContentModel is XmlSchemaSimpleContent)
                 {
@@ -1789,12 +1789,12 @@ namespace System.Xml.Schema
             }
         }
 
-        private void SetParent(XmlSchemaObject child, XmlSchemaObject parent)
+        private static void SetParent(XmlSchemaObject child, XmlSchemaObject parent)
         {
             child.Parent = parent;
         }
 
-        private void PreprocessAnnotation(XmlSchemaObject schemaObject)
+        private static void PreprocessAnnotation(XmlSchemaObject schemaObject)
         {
             XmlSchemaAnnotated? annotated = schemaObject as XmlSchemaAnnotated;
             if (annotated != null)

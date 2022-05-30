@@ -13,7 +13,7 @@ namespace System.Security.Cryptography
 {
     internal static partial class RSAImplementation
     {
-        public sealed partial class RSAAndroid : RSA
+        public sealed partial class RSAAndroid : RSA, IRuntimeAlgorithm
         {
             private const int BitsPerByte = 8;
 
@@ -75,12 +75,10 @@ namespace System.Security.Cryptography
 
             public override byte[] Decrypt(byte[] data, RSAEncryptionPadding padding)
             {
-                if (data == null)
-                    throw new ArgumentNullException(nameof(data));
-                if (padding == null)
-                    throw new ArgumentNullException(nameof(padding));
+                ArgumentNullException.ThrowIfNull(data);
+                ArgumentNullException.ThrowIfNull(padding);
 
-                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out RsaPaddingProcessor? oaepProcessor);
+                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out HashAlgorithmName? oaepHashAlgorithmName);
                 SafeRsaHandle key = GetKey();
 
                 int rsaSize = Interop.AndroidCrypto.RsaSize(key);
@@ -91,7 +89,7 @@ namespace System.Security.Cryptography
                 {
                     destination = new Span<byte>(buf, 0, rsaSize);
 
-                    if (!TryDecrypt(key, data, destination, rsaPadding, oaepProcessor, out int bytesWritten))
+                    if (!TryDecrypt(key, data, destination, rsaPadding, oaepHashAlgorithmName, out int bytesWritten))
                     {
                         Debug.Fail($"{nameof(TryDecrypt)} should not return false for RSA_size buffer");
                         throw new CryptographicException();
@@ -112,12 +110,9 @@ namespace System.Security.Cryptography
                 RSAEncryptionPadding padding,
                 out int bytesWritten)
             {
-                if (padding == null)
-                {
-                    throw new ArgumentNullException(nameof(padding));
-                }
+                ArgumentNullException.ThrowIfNull(padding);
 
-                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out RsaPaddingProcessor? oaepProcessor);
+                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out HashAlgorithmName? oaepHashAlgorithmName);
                 SafeRsaHandle key = GetKey();
 
                 int keySizeBytes = Interop.AndroidCrypto.RsaSize(key);
@@ -140,7 +135,7 @@ namespace System.Security.Cryptography
                         tmp = rent;
                     }
 
-                    bool ret = TryDecrypt(key, data, tmp, rsaPadding, oaepProcessor, out bytesWritten);
+                    bool ret = TryDecrypt(key, data, tmp, rsaPadding, oaepHashAlgorithmName, out bytesWritten);
 
                     if (ret)
                     {
@@ -168,7 +163,7 @@ namespace System.Security.Cryptography
                     return ret;
                 }
 
-                return TryDecrypt(key, data, destination, rsaPadding, oaepProcessor, out bytesWritten);
+                return TryDecrypt(key, data, destination, rsaPadding, oaepHashAlgorithmName, out bytesWritten);
             }
 
             private static bool TryDecrypt(
@@ -176,14 +171,14 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> data,
                 Span<byte> destination,
                 Interop.AndroidCrypto.RsaPadding rsaPadding,
-                RsaPaddingProcessor? rsaPaddingProcessor,
+                HashAlgorithmName? oaepHashAlgorithmName,
                 out int bytesWritten)
             {
                 // If rsaPadding is PKCS1 or OAEP-SHA1 then no depadding method should be present.
                 // If rsaPadding is NoPadding then a depadding method should be present.
                 Debug.Assert(
                     (rsaPadding == Interop.AndroidCrypto.RsaPadding.NoPadding) ==
-                    (rsaPaddingProcessor != null));
+                    (oaepHashAlgorithmName != null));
 
                 // Caller should have already checked this.
                 Debug.Assert(!key.IsInvalid);
@@ -204,7 +199,7 @@ namespace System.Security.Cryptography
                 Span<byte> decryptBuf = destination;
                 byte[]? paddingBuf = null;
 
-                if (rsaPaddingProcessor != null)
+                if (oaepHashAlgorithmName != null)
                 {
                     paddingBuf = CryptoPool.Rent(rsaSize);
                     decryptBuf = paddingBuf;
@@ -215,9 +210,9 @@ namespace System.Security.Cryptography
                     int returnValue = Interop.AndroidCrypto.RsaPrivateDecrypt(data.Length, data, decryptBuf, key, rsaPadding);
                     CheckReturn(returnValue);
 
-                    if (rsaPaddingProcessor != null)
+                    if (oaepHashAlgorithmName != null)
                     {
-                        return rsaPaddingProcessor.DepadOaep(paddingBuf, destination, out bytesWritten);
+                        return RsaPaddingProcessor.DepadOaep(oaepHashAlgorithmName.Value, paddingBuf, destination, out bytesWritten);
                     }
                     else
                     {
@@ -245,12 +240,10 @@ namespace System.Security.Cryptography
 
             public override byte[] Encrypt(byte[] data, RSAEncryptionPadding padding)
             {
-                if (data == null)
-                    throw new ArgumentNullException(nameof(data));
-                if (padding == null)
-                    throw new ArgumentNullException(nameof(padding));
+                ArgumentNullException.ThrowIfNull(data);
+                ArgumentNullException.ThrowIfNull(padding);
 
-                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out RsaPaddingProcessor? oaepProcessor);
+                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out HashAlgorithmName? oaepHashAlgorithmName);
                 SafeRsaHandle key = GetKey();
 
                 byte[] buf = new byte[Interop.AndroidCrypto.RsaSize(key)];
@@ -260,7 +253,7 @@ namespace System.Security.Cryptography
                     data,
                     buf,
                     rsaPadding,
-                    oaepProcessor,
+                    oaepHashAlgorithmName,
                     out int bytesWritten);
 
                 if (!encrypted || bytesWritten != buf.Length)
@@ -274,15 +267,12 @@ namespace System.Security.Cryptography
 
             public override bool TryEncrypt(ReadOnlySpan<byte> data, Span<byte> destination, RSAEncryptionPadding padding, out int bytesWritten)
             {
-                if (padding == null)
-                {
-                    throw new ArgumentNullException(nameof(padding));
-                }
+                ArgumentNullException.ThrowIfNull(padding);
 
-                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out RsaPaddingProcessor? oaepProcessor);
+                Interop.AndroidCrypto.RsaPadding rsaPadding = GetInteropPadding(padding, out HashAlgorithmName? oaepHashAlgorithmName);
                 SafeRsaHandle key = GetKey();
 
-                return TryEncrypt(key, data, destination, rsaPadding, oaepProcessor, out bytesWritten);
+                return TryEncrypt(key, data, destination, rsaPadding, oaepHashAlgorithmName, out bytesWritten);
             }
 
             private static bool TryEncrypt(
@@ -290,7 +280,7 @@ namespace System.Security.Cryptography
                 ReadOnlySpan<byte> data,
                 Span<byte> destination,
                 Interop.AndroidCrypto.RsaPadding rsaPadding,
-                RsaPaddingProcessor? rsaPaddingProcessor,
+                HashAlgorithmName? oaepHashAlgorithmName,
                 out int bytesWritten)
             {
                 int rsaSize = Interop.AndroidCrypto.RsaSize(key);
@@ -303,7 +293,7 @@ namespace System.Security.Cryptography
 
                 int returnValue;
 
-                if (rsaPaddingProcessor != null)
+                if (oaepHashAlgorithmName != null)
                 {
                     Debug.Assert(rsaPadding == Interop.AndroidCrypto.RsaPadding.NoPadding);
                     byte[] rented = CryptoPool.Rent(rsaSize);
@@ -311,7 +301,7 @@ namespace System.Security.Cryptography
 
                     try
                     {
-                        rsaPaddingProcessor.PadOaep(data, tmp);
+                        RsaPaddingProcessor.PadOaep(oaepHashAlgorithmName.Value, data, tmp);
                         returnValue = Interop.AndroidCrypto.RsaPublicEncrypt(tmp.Length, tmp, destination, key, rsaPadding);
                     }
                     finally
@@ -337,23 +327,23 @@ namespace System.Security.Cryptography
 
             private static Interop.AndroidCrypto.RsaPadding GetInteropPadding(
                 RSAEncryptionPadding padding,
-                out RsaPaddingProcessor? rsaPaddingProcessor)
+                out HashAlgorithmName? oaepHashAlgorithmName)
             {
                 if (padding == RSAEncryptionPadding.Pkcs1)
                 {
-                    rsaPaddingProcessor = null;
+                    oaepHashAlgorithmName = null;
                     return Interop.AndroidCrypto.RsaPadding.Pkcs1;
                 }
 
                 if (padding == RSAEncryptionPadding.OaepSHA1)
                 {
-                    rsaPaddingProcessor = null;
+                    oaepHashAlgorithmName = null;
                     return Interop.AndroidCrypto.RsaPadding.OaepSHA1;
                 }
 
                 if (padding.Mode == RSAEncryptionPaddingMode.Oaep)
                 {
-                    rsaPaddingProcessor = RsaPaddingProcessor.OpenProcessor(padding.OaepHashAlgorithm);
+                    oaepHashAlgorithmName = padding.OaepHashAlgorithm;
                     return Interop.AndroidCrypto.RsaPadding.NoPadding;
                 }
 
@@ -667,30 +657,18 @@ namespace System.Security.Cryptography
                 return key;
             }
 
-            protected override byte[] HashData(byte[] data, int offset, int count, HashAlgorithmName hashAlgorithm) =>
-                AsymmetricAlgorithmHelpers.HashData(data, offset, count, hashAlgorithm);
-
-            protected override byte[] HashData(Stream data, HashAlgorithmName hashAlgorithm) =>
-                AsymmetricAlgorithmHelpers.HashData(data, hashAlgorithm);
-
-            protected override bool TryHashData(ReadOnlySpan<byte> data, Span<byte> destination, HashAlgorithmName hashAlgorithm, out int bytesWritten) =>
-                AsymmetricAlgorithmHelpers.TryHashData(data, destination, hashAlgorithm, out bytesWritten);
-
             public override byte[] SignHash(byte[] hash, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
             {
-                if (hash == null)
-                    throw new ArgumentNullException(nameof(hash));
-                if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                    throw HashAlgorithmNameNullOrEmpty();
-                if (padding == null)
-                    throw new ArgumentNullException(nameof(padding));
+                ArgumentNullException.ThrowIfNull(hash);
+                ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
+                ArgumentNullException.ThrowIfNull(padding);
 
                 if (!TrySignHash(
                     hash,
                     Span<byte>.Empty,
                     hashAlgorithm, padding,
                     true,
-                    out int bytesWritten,
+                    out _,
                     out byte[]? signature))
                 {
                     Debug.Fail("TrySignHash should not return false in allocation mode");
@@ -708,14 +686,8 @@ namespace System.Security.Cryptography
                 RSASignaturePadding padding,
                 out int bytesWritten)
             {
-                if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                {
-                    throw HashAlgorithmNameNullOrEmpty();
-                }
-                if (padding == null)
-                {
-                    throw new ArgumentNullException(nameof(padding));
-                }
+                ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
+                ArgumentNullException.ThrowIfNull(padding);
 
                 bool ret = TrySignHash(
                     hash,
@@ -748,7 +720,6 @@ namespace System.Security.Cryptography
                     throw PaddingModeNotSupported();
                 }
 
-                RsaPaddingProcessor processor = RsaPaddingProcessor.OpenProcessor(hashAlgorithm);
                 SafeRsaHandle rsa = GetKey();
 
                 int bytesRequired = Interop.AndroidCrypto.RsaSize(rsa);
@@ -771,11 +742,11 @@ namespace System.Security.Cryptography
 
                 if (padding.Mode == RSASignaturePaddingMode.Pkcs1)
                 {
-                    processor.PadPkcs1Signature(hash, encodedBytes);
+                    RsaPaddingProcessor.PadPkcs1Signature(hashAlgorithm, hash, encodedBytes);
                 }
                 else if (padding.Mode == RSASignaturePaddingMode.Pss)
                 {
-                    processor.EncodePss(hash, encodedBytes, KeySize);
+                    RsaPaddingProcessor.EncodePss(hashAlgorithm, hash, encodedBytes, KeySize);
                 }
                 else
                 {
@@ -803,34 +774,21 @@ namespace System.Security.Cryptography
                 HashAlgorithmName hashAlgorithm,
                 RSASignaturePadding padding)
             {
-                if (hash == null)
-                {
-                    throw new ArgumentNullException(nameof(hash));
-                }
-                if (signature == null)
-                {
-                    throw new ArgumentNullException(nameof(signature));
-                }
+                ArgumentNullException.ThrowIfNull(hash);
+                ArgumentNullException.ThrowIfNull(signature);
 
                 return VerifyHash(new ReadOnlySpan<byte>(hash), new ReadOnlySpan<byte>(signature), hashAlgorithm, padding);
             }
 
             public override bool VerifyHash(ReadOnlySpan<byte> hash, ReadOnlySpan<byte> signature, HashAlgorithmName hashAlgorithm, RSASignaturePadding padding)
             {
-                if (string.IsNullOrEmpty(hashAlgorithm.Name))
-                {
-                    throw HashAlgorithmNameNullOrEmpty();
-                }
-                if (padding == null)
-                {
-                    throw new ArgumentNullException(nameof(padding));
-                }
+                ArgumentException.ThrowIfNullOrEmpty(hashAlgorithm.Name, nameof(hashAlgorithm));
+                ArgumentNullException.ThrowIfNull(padding);
                 if (padding != RSASignaturePadding.Pkcs1 && padding != RSASignaturePadding.Pss)
                 {
                     throw PaddingModeNotSupported();
                 }
 
-                RsaPaddingProcessor processor = RsaPaddingProcessor.OpenProcessor(hashAlgorithm);
                 SafeRsaHandle rsa = GetKey();
 
                 int requiredBytes = Interop.AndroidCrypto.RsaSize(rsa);
@@ -840,7 +798,7 @@ namespace System.Security.Cryptography
                     return false;
                 }
 
-                if (hash.Length != processor.HashLength)
+                if (hash.Length != RsaPaddingProcessor.HashLength(hashAlgorithm))
                 {
                     return false;
                 }
@@ -867,14 +825,14 @@ namespace System.Security.Cryptography
                     {
                         byte[] repadRent = CryptoPool.Rent(unwrapped.Length);
                         Span<byte> repadded = repadRent.AsSpan(0, requiredBytes);
-                        processor.PadPkcs1Signature(hash, repadded);
+                        RsaPaddingProcessor.PadPkcs1Signature(hashAlgorithm, hash, repadded);
                         bool valid = CryptographicOperations.FixedTimeEquals(repadded, unwrapped);
                         CryptoPool.Return(repadRent, requiredBytes);
                         return valid;
                     }
                     else if (padding == RSASignaturePadding.Pss)
                     {
-                        return processor.VerifyPss(hash, unwrapped, KeySize);
+                        return RsaPaddingProcessor.VerifyPss(hashAlgorithm, hash, unwrapped, KeySize);
                     }
                     else
                     {
@@ -894,9 +852,6 @@ namespace System.Security.Cryptography
 
             private static Exception PaddingModeNotSupported() =>
                 new CryptographicException(SR.Cryptography_InvalidPaddingMode);
-
-            private static Exception HashAlgorithmNameNullOrEmpty() =>
-                new ArgumentException(SR.Cryptography_HashAlgorithmNameNullOrEmpty, "hashAlgorithm");
         }
     }
 }

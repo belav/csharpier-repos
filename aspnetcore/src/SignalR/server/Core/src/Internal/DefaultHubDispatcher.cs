@@ -1,15 +1,11 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
-using System.Collections.Generic;
 using System.Diagnostics;
 using System.Linq;
 using System.Reflection;
 using System.Security.Claims;
-using System.Threading;
 using System.Threading.Channels;
-using System.Threading.Tasks;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Internal;
 using Microsoft.AspNetCore.SignalR.Protocol;
@@ -20,9 +16,10 @@ using Log = Microsoft.AspNetCore.SignalR.Internal.DefaultHubDispatcherLog;
 
 namespace Microsoft.AspNetCore.SignalR.Internal;
 
-internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where THub : Hub
+internal sealed partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where THub : Hub
 {
-    private readonly Dictionary<string, HubMethodDescriptor> _methods = new Dictionary<string, HubMethodDescriptor>(StringComparer.OrdinalIgnoreCase);
+    private readonly Dictionary<string, HubMethodDescriptor> _methods = new(StringComparer.OrdinalIgnoreCase);
+    private readonly Utf8HashLookup _cachedMethodNames = new();
     private readonly IServiceScopeFactory _serviceScopeFactory;
     private readonly IHubContext<THub> _hubContext;
     private readonly ILogger<HubDispatcher<THub>> _logger;
@@ -30,15 +27,17 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
     private readonly Func<HubInvocationContext, ValueTask<object?>>? _invokeMiddleware;
     private readonly Func<HubLifetimeContext, Task>? _onConnectedMiddleware;
     private readonly Func<HubLifetimeContext, Exception?, Task>? _onDisconnectedMiddleware;
+    private readonly HubLifetimeManager<THub> _hubLifetimeManager;
 
     public DefaultHubDispatcher(IServiceScopeFactory serviceScopeFactory, IHubContext<THub> hubContext, bool enableDetailedErrors,
-        ILogger<DefaultHubDispatcher<THub>> logger, List<IHubFilter>? hubFilters)
+        bool disableImplicitFromServiceParameters, ILogger<DefaultHubDispatcher<THub>> logger, List<IHubFilter>? hubFilters, HubLifetimeManager<THub> lifetimeManager)
     {
         _serviceScopeFactory = serviceScopeFactory;
         _hubContext = hubContext;
         _enableDetailedErrors = enableDetailedErrors;
         _logger = logger;
-        DiscoverHubMethods();
+        _hubLifetimeManager = lifetimeManager;
+        DiscoverHubMethods(disableImplicitFromServiceParameters);
 
         var count = hubFilters?.Count ?? 0;
         if (count != 0)
@@ -74,7 +73,7 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
     public override async Task OnConnectedAsync(HubConnectionContext connection)
     {
         await using var scope = _serviceScopeFactory.CreateAsyncScope();
-        connection.HubCallerClients = new HubCallerClients(_hubContext.Clients, connection.ConnectionId);
+        connection.HubCallerClients = new HubCallerClients(_hubContext.Clients, connection.ConnectionId, connection.ActiveInvocationLimit is not null);
 
         var hubActivator = scope.ServiceProvider.GetRequiredService<IHubActivator<THub>>();
         var hub = hubActivator.Create();
@@ -169,16 +168,21 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
             case StreamItemMessage streamItem:
                 return ProcessStreamItem(connection, streamItem);
 
-            case CompletionMessage streamCompleteMessage:
+            case CompletionMessage completionMessage:
                 // closes channels, removes from Lookup dict
                 // user's method can see the channel is complete and begin wrapping up
-                if (connection.StreamTracker.TryComplete(streamCompleteMessage))
+                if (connection.StreamTracker.TryComplete(completionMessage))
                 {
-                    Log.CompletingStream(_logger, streamCompleteMessage);
+                    Log.CompletingStream(_logger, completionMessage);
+                }
+                // InvocationId is always required on CompletionMessage, it's nullable because of the base type
+                else if (_hubLifetimeManager.TryGetReturnType(completionMessage.InvocationId!, out _))
+                {
+                    return _hubLifetimeManager.SetConnectionResultAsync(connection.ConnectionId, completionMessage);
                 }
                 else
                 {
-                    Log.UnexpectedStreamCompletion(_logger);
+                    Log.UnexpectedCompletion(_logger, completionMessage.InvocationId!);
                 }
                 break;
 
@@ -251,7 +255,7 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
             bool isStreamCall = descriptor.StreamingParameters != null;
             if (connection.ActiveInvocationLimit != null && !isStreamCall && !isStreamResponse)
             {
-                return connection.ActiveInvocationLimit.RunAsync(state =>
+                return connection.ActiveInvocationLimit.RunAsync(static state =>
                 {
                     var (dispatcher, descriptor, connection, invocationMessage) = state;
                     return dispatcher.Invoke(descriptor, connection, invocationMessage, isStreamResponse: false, isStreamCall: false);
@@ -311,7 +315,7 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
                 CancellationTokenSource? cts = null;
                 if (descriptor.HasSyntheticArguments)
                 {
-                    ReplaceArguments(descriptor, hubMethodInvocationMessage, isStreamCall, connection, ref arguments, out cts);
+                    ReplaceArguments(descriptor, hubMethodInvocationMessage, isStreamCall, connection, scope, ref arguments, out cts);
                 }
 
                 if (isStreamResponse)
@@ -605,7 +609,7 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
     }
 
     private void ReplaceArguments(HubMethodDescriptor descriptor, HubMethodInvocationMessage hubMethodInvocationMessage, bool isStreamCall,
-        HubConnectionContext connection, ref object?[] arguments, out CancellationTokenSource? cts)
+        HubConnectionContext connection, AsyncServiceScope scope, ref object?[] arguments, out CancellationTokenSource? cts)
     {
         cts = null;
         // In order to add the synthetic arguments we need a new array because the invocation array is too small (it doesn't know about synthetic arguments)
@@ -630,6 +634,10 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
                     cts = CancellationTokenSource.CreateLinkedTokenSource(connection.ConnectionAborted);
                     arguments[parameterPointer] = cts.Token;
                 }
+                else if (descriptor.IsServiceArgument(parameterPointer))
+                {
+                    arguments[parameterPointer] = scope.ServiceProvider.GetRequiredService(descriptor.OriginalParameterTypes[parameterPointer]);
+                }
                 else if (isStreamCall && ReflectionHelper.IsStreamingType(descriptor.OriginalParameterTypes[parameterPointer], mustBeDirectType: true))
                 {
                     Log.StartingParameterStream(_logger, hubMethodInvocationMessage.StreamIds![streamPointer]);
@@ -648,11 +656,19 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
         }
     }
 
-    private void DiscoverHubMethods()
+    private void DiscoverHubMethods(bool disableImplicitFromServiceParameters)
     {
         var hubType = typeof(THub);
         var hubTypeInfo = hubType.GetTypeInfo();
         var hubName = hubType.Name;
+
+        using var scope = _serviceScopeFactory.CreateScope();
+
+        IServiceProviderIsService? serviceProviderIsService = null;
+        if (!disableImplicitFromServiceParameters)
+        {
+            serviceProviderIsService = scope.ServiceProvider.GetService<IServiceProviderIsService>();
+        }
 
         foreach (var methodInfo in HubReflectionHelper.GetHubMethods(hubType))
         {
@@ -672,7 +688,8 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
 
             var executor = ObjectMethodExecutor.Create(methodInfo, hubTypeInfo);
             var authorizeAttributes = methodInfo.GetCustomAttributes<AuthorizeAttribute>(inherit: true);
-            _methods[methodName] = new HubMethodDescriptor(executor, authorizeAttributes);
+            _methods[methodName] = new HubMethodDescriptor(executor, serviceProviderIsService, authorizeAttributes);
+            _cachedMethodNames.Add(methodName);
 
             Log.HubMethodBound(_logger, hubName, methodName);
         }
@@ -685,5 +702,15 @@ internal partial class DefaultHubDispatcher<THub> : HubDispatcher<THub> where TH
             throw new HubException("Method does not exist.");
         }
         return descriptor.ParameterTypes;
+    }
+
+    public override string? GetTargetName(ReadOnlySpan<byte> targetUtf8Bytes)
+    {
+        if (_cachedMethodNames.TryGetValue(targetUtf8Bytes, out var targetName))
+        {
+            return targetName;
+        }
+
+        return null;
     }
 }

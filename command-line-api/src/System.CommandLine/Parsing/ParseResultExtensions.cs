@@ -2,10 +2,8 @@
 // Licensed under the MIT license. See LICENSE file in the project root for full license information.
 
 using System.Collections;
-using System.Collections.Generic;
 using System.CommandLine.Binding;
 using System.CommandLine.Invocation;
-using System.CommandLine.Suggestions;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -38,63 +36,6 @@ namespace System.CommandLine.Parsing
             this ParseResult parseResult,
             IConsole? console = null) =>
             new InvocationPipeline(parseResult).Invoke(console);
-
-        /// <summary>
-        /// Gets the text to be matched for completion, which can be used to filter a list of suggestions.
-        /// </summary>
-        /// <param name="parseResult">A parse result.</param>
-        /// <param name="position">The position within the raw input, if available, at which to provide suggestions.</param>
-        /// <returns>A string containing the user-entered text to be matched for suggestions.</returns>
-        public static string TextToMatch(
-            this ParseResult parseResult,
-            int? position = null)
-        {
-            Token? lastToken = parseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive);
-
-            string? textToMatch = null;
-            string? rawInput = parseResult.RawInput;
-
-            if (rawInput is not null)
-            {
-                if (position is not null)
-                {
-                    if (position > rawInput.Length)
-                    {
-                        rawInput += ' ';
-                        position = Math.Min(rawInput.Length, position.Value);
-                    }
-                }
-                else
-                {
-                    position = rawInput.Length;
-                }
-            }
-            else if (lastToken?.Value != null)
-            {
-                position = null;
-                textToMatch = lastToken.Value;
-            }
-
-            if (string.IsNullOrWhiteSpace(rawInput))
-            {
-                if (parseResult.UnmatchedTokens.Count > 0 ||
-                    lastToken?.Type == TokenType.Argument)
-                {
-                    return textToMatch ?? "";
-                }
-            }
-            else
-            {
-                var textBeforeCursor = rawInput!.Substring(0, position!.Value);
-
-                var textAfterCursor = rawInput.Substring(position.Value);
-
-                return textBeforeCursor.Split(' ').LastOrDefault() +
-                       textAfterCursor.Split(' ').FirstOrDefault();
-            }
-
-            return "";
-        }
 
         /// <summary>
         /// Formats a string explaining a parse result.
@@ -139,91 +80,99 @@ namespace System.CommandLine.Parsing
                 builder.Append("!");
             }
 
-            if (symbolResult is OptionResult optionResult &&
-                optionResult.IsImplicit)
+
+            switch (symbolResult)
             {
-                builder.Append("*");
-            }
-
-            if (symbolResult is ArgumentResult argumentResult)
-            {
-
-                var includeArgumentName =
-                    argumentResult.Argument is Argument argument &&
-                    argument.Parents[0] is ICommand command &&
-                    command.Arguments.Count > 1;
-
-                if (includeArgumentName)
+                case ArgumentResult argumentResult:
                 {
+                    var includeArgumentName =
+                        argumentResult.Argument.FirstParent!.Symbol is Command command &&
+                        command.Arguments.Count > 1;
+
+                    if (includeArgumentName)
+                    {
+                        builder.Append("[ ");
+                        builder.Append(argumentResult.Argument.Name);
+                        builder.Append(" ");
+                    }
+
+                    if (argumentResult.Argument.Arity.MaximumNumberOfValues > 0)
+                    {
+                        ArgumentConversionResult conversionResult = argumentResult.GetArgumentConversionResult();
+                        switch (conversionResult.Result)
+                        {
+                            case ArgumentConversionResultType.NoArgument:
+                                break;
+                            case ArgumentConversionResultType.Successful:
+                                switch (conversionResult.Value)
+                                {
+                                    case string s:
+                                        builder.Append($"<{s}>");
+                                        break;
+                                
+                                    case IEnumerable items:
+                                        builder.Append("<");
+                                        builder.Append(
+                                            string.Join("> <",
+                                                        items.Cast<object>().ToArray()));
+                                        builder.Append(">");
+                                        break;
+
+                                    default:
+                                        builder.Append("<");
+                                        builder.Append(conversionResult.Value);
+                                        builder.Append(">");
+                                        break;
+                                }
+
+                                break;
+
+                            default: // failures
+                                builder.Append("<");
+                                builder.Append(string.Join("> <", symbolResult.Tokens.Select(t => t.Value)));
+                                builder.Append(">");
+
+                                break;
+                        }
+                    }
+
+                    if (includeArgumentName)
+                    {
+                        builder.Append(" ]");
+                    }
+
+                    break;
+                }
+
+                default:
+                {
+                    if (symbolResult is OptionResult { IsImplicit: true })
+                    {
+                        builder.Append("*");
+                    }
+
                     builder.Append("[ ");
-                    builder.Append(argumentResult.Argument.Name);
-                    builder.Append(" ");
-                }
+                    builder.Append(symbolResult.Token().Value);
 
-                if (argumentResult.Argument.Arity.MaximumNumberOfValues > 0)
-                {
-                    switch (argumentResult.GetArgumentConversionResult())
+                    for (var i = 0; i < symbolResult.Children.Count; i++)
                     {
-                        case SuccessfulArgumentConversionResult successful:
+                        var child = symbolResult.Children[i];
 
-                            switch (successful.Value)
-                            {
-                                case string s:
-                                    builder.Append($"<{s}>");
-                                    break;
+                        if (child is ArgumentResult arg &&
+                            (arg.Argument.ValueType == typeof(bool) ||
+                             arg.Argument.Arity.MaximumNumberOfValues == 0))
+                        {
+                            continue;
+                        }
 
-                                case IEnumerable items:
-                                    builder.Append("<");
-                                    builder.Append(
-                                        string.Join("> <",
-                                                    items.Cast<object>().ToArray()));
-                                    builder.Append(">");
-                                    break;
+                        builder.Append(" ");
 
-                                default:
-                                    builder.Append("<");
-                                    builder.Append(successful.Value);
-                                    builder.Append(">");
-                                    break;
-                            }
-
-                            break;
-
-                        case FailedArgumentConversionResult _:
-
-                            builder.Append("<");
-                            builder.Append(string.Join("> <", symbolResult.Tokens.Select(t => t.Value)));
-                            builder.Append(">");
-
-                            break;
+                        builder.Diagram(child, parseResult);
                     }
-                }
 
-                if (includeArgumentName)
-                {
                     builder.Append(" ]");
+                    break;
                 }
-            }
-            else
-            {
-                builder.Append("[ ");
-                builder.Append(symbolResult.Token().Value);
-
-                for (var i = 0; i < symbolResult.Children.Count; i++)
-                {
-                    var child = symbolResult.Children[i];
-
-                    if (child is ArgumentResult arg && 
-                        arg.Argument.Arity.MaximumNumberOfValues == 0)
-                    {
-                        continue;
-                    }
-
-                    builder.Append(" ");
-                    builder.Diagram(child, parseResult);
-                }
-
-                builder.Append(" ]");
             }
         }
 
@@ -236,7 +185,7 @@ namespace System.CommandLine.Parsing
         /// <returns><see langword="true"/> if the option is present; otherwise,  <see langword="false"/>.</returns>
         public static bool HasOption(
             this ParseResult parseResult,
-            IOption option)
+            Option option)
         {
             if (parseResult is null)
             {
@@ -244,124 +193,6 @@ namespace System.CommandLine.Parsing
             }
 
             return parseResult.FindResultFor(option) is { };
-        }
-
-        /// <inheritdoc cref="HasOption(System.CommandLine.Parsing.ParseResult,System.CommandLine.IOption)"/>
-        [Obsolete("This method is obsolete and will be removed in a future version. Please use ParseResultExtensions.HasOption(ParseResult, IOption) instead. For details see https://github.com/dotnet/command-line-api/issues/1127")]
-        public static bool HasOption(
-            this ParseResult parseResult,
-            string alias)
-        {
-            if (parseResult is null)
-            {
-                throw new ArgumentNullException(nameof(parseResult));
-            }
-
-            return parseResult.CommandResult.Children.ContainsAlias(alias);
-        }
-
-        /// <summary>
-        /// Gets suggestions for command line completion based on a given parse result.
-        /// </summary>
-        /// <param name="parseResult">The parse result that provides context for the suggestions.</param>
-        /// <param name="position">The position at which suggestions are requested.</param>
-        /// <returns>A set of suggestions for completion.</returns>
-        public static IEnumerable<string?> GetSuggestions(
-            this ParseResult parseResult,
-            int? position = null)
-        {
-            var textToMatch = parseResult.TextToMatch(position);
-            var currentSymbolResult = parseResult.SymbolToComplete(position);
-            var currentSymbol = currentSymbolResult.Symbol;
-
-            var currentSymbolSuggestions =
-                currentSymbol is ISuggestionSource currentSuggestionSource
-                    ? currentSuggestionSource.GetSuggestions(parseResult, textToMatch)
-                    : Array.Empty<string>();
-
-            IEnumerable<string?> siblingSuggestions;
-            var parentSymbol = currentSymbolResult.Parent?.Symbol;
-
-            if (parentSymbol is null ||
-                !currentSymbolResult.IsArgumentLimitReached)
-            {
-                siblingSuggestions = Array.Empty<string?>();
-            }
-            else
-            {
-                siblingSuggestions = parentSymbol
-                                     .GetSuggestions(parseResult, textToMatch)
-                                     .Except(parentSymbol
-                                             .Children
-                                             .OfType<ICommand>()
-                                             .SelectMany(c => c.Aliases));
-            }
-
-            if (currentSymbolResult is CommandResult commandResult)
-            {
-                currentSymbolSuggestions = currentSymbolSuggestions
-                    .Except(OptionsWithArgumentLimitReached(currentSymbolResult));
-
-                if (currentSymbolResult.Parent is CommandResult parent)
-                {
-                    siblingSuggestions = siblingSuggestions.Except(OptionsWithArgumentLimitReached(parent));
-                }
-            }
-
-            return currentSymbolSuggestions.Concat(siblingSuggestions);
-
-            string[] OptionsWithArgumentLimitReached(SymbolResult symbolResult)
-            {
-                var optionsWithArgLimitReached =
-                    symbolResult
-                        .Children
-                        .Where(c => c.IsArgumentLimitReached);
-
-                var exclude = optionsWithArgLimitReached
-                              .OfType<OptionResult>()
-                              .Select(o => o.Symbol)
-                              .OfType<IIdentifierSymbol>()
-                              .SelectMany(c => c.Aliases)
-                              .Concat(commandResult.Command.Aliases)
-                              .ToArray();
-
-                return exclude;
-            }
-        }
-
-        internal static SymbolResult SymbolToComplete(
-            this ParseResult parseResult,
-            int? position = null)
-        {
-            var commandResult = parseResult.CommandResult;
-
-            var currentSymbol = AllSymbolResultsForCompletion()
-                .LastOrDefault();
-
-            return currentSymbol;
-
-            IEnumerable<SymbolResult> AllSymbolResultsForCompletion()
-            {
-                foreach (var item in commandResult.AllSymbolResults())
-                {
-                    if (item is CommandResult command)
-                    {
-                        yield return command;
-                    }
-                    else if (item is OptionResult option)
-                    {
-                        var willAcceptAnArgument =
-                            !option.IsImplicit &&
-                            (!option.IsArgumentLimitReached ||
-                             parseResult.TextToMatch(position).Length > 0);
-
-                        if (willAcceptAnArgument)
-                        {
-                            yield return option;
-                        }
-                    }
-                }
-            }
         }
     }
 }

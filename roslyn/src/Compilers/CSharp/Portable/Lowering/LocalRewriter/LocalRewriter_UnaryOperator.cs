@@ -5,6 +5,7 @@
 using System;
 using System.Collections.Immutable;
 using System.Diagnostics;
+using System.Diagnostics.CodeAnalysis;
 using Microsoft.CodeAnalysis.CSharp.Symbols;
 using Microsoft.CodeAnalysis.CSharp.Syntax;
 using Microsoft.CodeAnalysis.PooledObjects;
@@ -199,7 +200,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol getValueOrDefault = UnsafeGetNullableMethod(syntax, boundTemp.Type, SpecialMember.System_Nullable_T_GetValueOrDefault);
 
             // temp.HasValue
-            BoundExpression condition = MakeNullableHasValue(syntax, boundTemp);
+            BoundExpression condition = _factory.MakeNullableHasValue(syntax, boundTemp);
 
             // temp.GetValueOrDefault()
             BoundExpression call_GetValueOrDefault = BoundCall.Synthesized(syntax, boundTemp, getValueOrDefault);
@@ -585,7 +586,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         private BoundExpression ApplyConversionIfNotIdentity(BoundExpression? conversion, BoundValuePlaceholder? placeholder, BoundExpression replacement)
         {
-            if (conversion is BoundConversion { Conversion: { IsIdentity: false } })
+            if (hasNonIdentityConversion(conversion))
             {
                 Debug.Assert(placeholder is not null);
 
@@ -593,6 +594,21 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
 
             return replacement;
+
+            static bool hasNonIdentityConversion([NotNullWhen(true)] BoundExpression? expression)
+            {
+                while (expression is BoundConversion conversion)
+                {
+                    if (!conversion.Conversion.IsIdentity)
+                    {
+                        return true;
+                    }
+
+                    expression = conversion.Operand;
+                }
+
+                return false;
+            }
         }
 
         private BoundExpression ApplyConversion(BoundExpression conversion, BoundValuePlaceholder placeholder, BoundExpression replacement)
@@ -643,7 +659,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol ctor = UnsafeGetNullableMethod(syntax, type, SpecialMember.System_Nullable_T__ctor);
 
             // temp.HasValue
-            BoundExpression condition = MakeNullableHasValue(node.Syntax, boundTemp);
+            BoundExpression condition = _factory.MakeNullableHasValue(node.Syntax, boundTemp);
 
             // temp.GetValueOrDefault()
             BoundExpression call_GetValueOrDefault = BoundCall.Synthesized(syntax, boundTemp, getValueOrDefault);
@@ -804,7 +820,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             MethodSymbol ctor = UnsafeGetNullableMethod(syntax, operand.Type, SpecialMember.System_Nullable_T__ctor);
 
             // x.HasValue
-            BoundExpression condition = MakeNullableHasValue(syntax, operand);
+            BoundExpression condition = _factory.MakeNullableHasValue(syntax, operand);
             // x.GetValueOrDefault()
             BoundExpression getValueCall = BoundCall.Synthesized(syntax, operand, getValueOrDefault);
             // op_Inc(x.GetValueOrDefault())

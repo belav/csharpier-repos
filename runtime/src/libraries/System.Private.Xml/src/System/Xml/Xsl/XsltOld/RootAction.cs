@@ -78,7 +78,7 @@ namespace System.Xml.Xsl.XsltOld
         public Hashtable KeyTable { get { return _keyTable; } }
     }
 
-    internal class RootAction : TemplateBaseAction
+    internal sealed class RootAction : TemplateBaseAction
     {
         private const int QueryInitialized = 2;
         private const int RootProcessed = 3;
@@ -87,7 +87,6 @@ namespace System.Xml.Xsl.XsltOld
         private readonly Hashtable _decimalFormatTable = new Hashtable();
         private List<Key>? _keyList;
         private XsltOutput? _output;
-        public Stylesheet? builtInSheet;
 
         internal XsltOutput Output
         {
@@ -173,7 +172,7 @@ namespace System.Xml.Xsl.XsltOld
                     {
                         for (int src = srcAttList.Count - 1; 0 <= src; src--)
                         {
-                            // We can ignore duplicate attibutes here.
+                            // We can ignore duplicate attributes here.
                             dstAttList!.Add(srcAttList[src]);
                         }
                     }

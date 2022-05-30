@@ -12,7 +12,7 @@ using Microsoft.CodeAnalysis;
 
 namespace System.Text.Json.Reflection
 {
-    internal class TypeWrapper : Type
+    internal sealed class TypeWrapper : Type
     {
         private readonly ITypeSymbol _typeSymbol;
 
@@ -147,19 +147,18 @@ namespace System.Text.Json.Reflection
 
                         if (this.IsGenericType && !ContainsGenericParameters)
                         {
-                            sb.Append("[");
+                            sb.Append('[');
 
                             foreach (Type genericArg in GetGenericArguments())
                             {
-                                sb.Append("[");
+                                sb.Append('[');
                                 sb.Append(genericArg.AssemblyQualifiedName);
-                                sb.Append("]");
+                                sb.Append(']');
                             }
 
-                            sb.Append("]");
+                            sb.Append(']');
                         }
                     }
-                    
 
                     _fullName = sb.ToString();
                 }
@@ -396,12 +395,6 @@ namespace System.Text.Json.Reflection
             {
                 if (item is IPropertySymbol propertySymbol)
                 {
-                    // Skip auto-generated properties on records.
-                    if (_typeSymbol.IsRecord && propertySymbol.DeclaringSyntaxReferences.Length == 0)
-                    {
-                        continue;
-                    }
-
                     // Skip if:
                     if (
                         // we want a static property and this is not static
@@ -600,5 +593,7 @@ namespace System.Text.Json.Reflection
             }
             return base.Equals(o);
         }
+
+        public Location? Location => _typeSymbol.Locations.Length > 0 ? _typeSymbol.Locations[0] : null;
     }
 }

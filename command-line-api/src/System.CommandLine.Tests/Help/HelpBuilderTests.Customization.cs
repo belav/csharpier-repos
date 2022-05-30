@@ -42,7 +42,7 @@ namespace System.CommandLine.Tests.Help
                     option
                 };
 
-                _helpBuilder.Customize(option, defaultValue: "42");
+                _helpBuilder.CustomizeSymbol(option, defaultValue: "42");
 
                 _helpBuilder.Write(command, _console);
                 var expected =
@@ -61,7 +61,7 @@ namespace System.CommandLine.Tests.Help
                     option
                 };
 
-                _helpBuilder.Customize(option, firstColumnText: "other-name");
+                _helpBuilder.CustomizeSymbol(option, firstColumnText: "other-name");
 
                 _helpBuilder.Write(command, _console);
                 var expected =
@@ -69,45 +69,6 @@ namespace System.CommandLine.Tests.Help
                     $"{_indentation}other-name{_columnPadding}option description{NewLine}{NewLine}";
 
                 _console.ToString().Should().Contain(expected);
-            }
-
-            [Fact]
-            public void Option_can_customize_left_column_text_based_on_parse_result()
-            {
-                var option = new Option<bool>("option");
-                var commandA = new Command("a", "a command help")
-                {
-                    option
-                };
-                var commandB = new Command("b", "b command help")
-                {
-                    option
-                };
-                var command = new Command("root", "root command help")
-                {
-                    commandA, commandB
-                };
-                var optionADescription = "option a help";
-                var optionBDescription = "option b help";
-
-                var helpBuilder = new HelpBuilder(LocalizationResources.Instance, LargeMaxWidth);
-                helpBuilder.Customize(option, secondColumnText: parseResult =>
-                                          parseResult.CommandResult.Command.Equals(commandA)
-                                              ? optionADescription
-                                              : optionBDescription);
-
-                var parser = new CommandLineBuilder(command)
-                             .UseDefaults()
-                             .UseHelpBuilder(_ => helpBuilder)
-                             .Build();
-
-                var console = new TestConsole();
-                parser.Invoke("root a -h", console);
-                console.Out.ToString().Should().Contain($"option          {optionADescription}");
-
-                console = new TestConsole();
-                parser.Invoke("root b -h", console);
-                console.Out.ToString().Should().Contain($"option          {optionBDescription}");
             }
 
             [Fact]
@@ -130,8 +91,8 @@ namespace System.CommandLine.Tests.Help
                 var optionBFirstColumnText = "option b help";
 
                 var helpBuilder = new HelpBuilder(LocalizationResources.Instance, LargeMaxWidth);
-                helpBuilder.Customize(option, firstColumnText: parseResult =>
-                                          parseResult.CommandResult.Command.Equals(commandA) 
+                helpBuilder.CustomizeSymbol(option, firstColumnText: ctx =>
+                                          ctx.Command.Equals(commandA) 
                                               ? optionAFirstColumnText
                                               : optionBFirstColumnText);
                 var parser = new CommandLineBuilder(command)
@@ -149,6 +110,45 @@ namespace System.CommandLine.Tests.Help
             }
 
             [Fact]
+            public void Option_can_customize_second_column_text_based_on_parse_result()
+            {
+                var option = new Option<bool>("option");
+                var commandA = new Command("a", "a command help")
+                {
+                    option
+                };
+                var commandB = new Command("b", "b command help")
+                {
+                    option
+                };
+                var command = new Command("root", "root command help")
+                {
+                    commandA, commandB
+                };
+                var optionADescription = "option a help";
+                var optionBDescription = "option b help";
+
+                var helpBuilder = new HelpBuilder(LocalizationResources.Instance, LargeMaxWidth);
+                helpBuilder.CustomizeSymbol(option, secondColumnText: ctx =>
+                                          ctx.Command.Equals(commandA)
+                                              ? optionADescription
+                                              : optionBDescription);
+
+                var parser = new CommandLineBuilder(command)
+                             .UseDefaults()
+                             .UseHelpBuilder(_ => helpBuilder)
+                             .Build();
+
+                var console = new TestConsole();
+                parser.Invoke("root a -h", console);
+                console.Out.ToString().Should().Contain($"option          {optionADescription}");
+
+                console = new TestConsole();
+                parser.Invoke("root b -h", console);
+                console.Out.ToString().Should().Contain($"option          {optionBDescription}");
+            }
+
+            [Fact]
             public void Subcommand_can_customize_first_column_text()
             {
                 var subcommand = new Command("subcommand", "subcommand description");
@@ -157,12 +157,50 @@ namespace System.CommandLine.Tests.Help
                     subcommand
                 };
 
-                _helpBuilder.Customize(subcommand, firstColumnText: "other-name");
+                _helpBuilder.CustomizeSymbol(subcommand, firstColumnText: "other-name");
 
                 _helpBuilder.Write(command, _console);
                 var expected =
                     $"Commands:{NewLine}" +
                     $"{_indentation}other-name{_columnPadding}subcommand description{NewLine}{NewLine}";
+
+                _console.ToString().Should().Contain(expected);
+            }
+
+            [Fact]
+            public void Command_arguments_can_customize_first_column_text()
+            {
+                var argument = new Argument<string>("arg-name", "arg description");
+                var command = new Command("the-command", "command help")
+                {
+                    argument
+                };
+
+                _helpBuilder.CustomizeSymbol(argument, firstColumnText: "<CUSTOM-ARG-NAME>");
+
+                _helpBuilder.Write(command, _console);
+                var expected =
+                    $"Arguments:{NewLine}" +
+                    $"{_indentation}<CUSTOM-ARG-NAME>{_columnPadding}arg description{NewLine}{NewLine}";
+
+                _console.ToString().Should().Contain(expected);
+            }
+
+            [Fact]
+            public void Command_arguments_can_customize_second_column_text()
+            {
+                var argument = new Argument<string>("some-arg", description: "Default description", getDefaultValue: () => "not 42");
+                var command = new Command("the-command", "command help")
+                {
+                    argument
+                };
+
+                _helpBuilder.CustomizeSymbol(argument, secondColumnText: "Custom description");
+
+                _helpBuilder.Write(command, _console);
+                var expected =
+                    $"Arguments:{NewLine}" +
+                    $"{_indentation}<some-arg>{_columnPadding}Custom description [default: not 42]{NewLine}{NewLine}";
 
                 _console.ToString().Should().Contain(expected);
             }
@@ -176,7 +214,7 @@ namespace System.CommandLine.Tests.Help
                     argument
                 };
 
-                _helpBuilder.Customize(argument, defaultValue: "42");
+                _helpBuilder.CustomizeSymbol(argument, defaultValue: "42");
 
                 _helpBuilder.Write(command, _console);
                 var expected =
@@ -187,64 +225,80 @@ namespace System.CommandLine.Tests.Help
             }
 
             [Fact]
-            public void Command_arguments_can_customize_second_column_text()
+            public void Customize_throws_when_symbol_is_null()
             {
-                var argument = new Argument<string>("some-arg", getDefaultValue: () => "not 42");
-                var command = new Command("the-command", "command help")
-                {
-                    argument
-                };
-
-                _helpBuilder.Customize(argument, firstColumnText: "some-other-arg");
-
-                _helpBuilder.Write(command, _console);
-                var expected =
-                    $"Arguments:{NewLine}" +
-                    $"{_indentation}some-other-arg{_columnPadding}[default: not 42]{NewLine}{NewLine}";
-
-                _console.ToString().Should().Contain(expected);
+                Action action = () => new HelpBuilder(LocalizationResources.Instance).CustomizeSymbol(null!, "");
+                action.Should().Throw<ArgumentNullException>();
             }
 
-            [Fact]
-            public void Help_text_can_be_added_after_default_text_by_inheriting_HelpBuilder()
+
+            [Theory]
+            [InlineData(false, false, "--option <option>\\s*description")]
+            [InlineData(true, false, "custom 1st\\s*description")]
+            [InlineData(false, true, "--option <option>\\s*custom 2nd")]
+            [InlineData(true, true, "custom 1st\\s*custom 2nd")]
+            public void Option_can_fallback_to_default_when_customizing(bool conditionA, bool conditionB, string expected)
             {
-                var parser = new CommandLineBuilder()
+                var command = new Command("test");
+                var option = new Option<string>("--option", "description");
+
+                command.AddOption(option);
+
+                var helpBuilder = new HelpBuilder(LocalizationResources.Instance, LargeMaxWidth);
+                helpBuilder.CustomizeSymbol(option,
+                    firstColumnText: ctx => conditionA ? "custom 1st" : HelpBuilder.Default.GetIdentifierSymbolUsageLabel(option, ctx),
+                    secondColumnText: ctx => conditionB ? "custom 2nd" : HelpBuilder.Default.GetIdentifierSymbolDescription(option));
+
+
+                var parser = new CommandLineBuilder(command)
                              .UseDefaults()
-                             .UseHelpBuilder(context => new CustomHelpBuilderThatAddsTextAfterDefaultText("The text to add"))
+                             .UseHelpBuilder(_ => helpBuilder)
                              .Build();
 
                 var console = new TestConsole();
-
-                parser.Invoke("-h", console);
-
-                console.Out.ToString().Should().EndWith("The text to add");
+                parser.Invoke("test -h", console);
+                console.Out.ToString().Should().MatchRegex(expected);
             }
 
-            [Fact]
-            public void Customize_throws_when_symbol_is_null()
+            [Theory]
+            [InlineData(false, false, false, "\\<arg\\>\\s*description\\s*\\[default\\: default\\]")]
+            [InlineData(true, false, false, "custom 1st\\s*description\\s*\\[default\\: default\\]")]
+            [InlineData(false, true, false, "\\<arg\\>\\s*custom 2nd\\s*\\[default\\: default\\]")]
+            [InlineData(true, true, false, "custom 1st\\s*custom 2nd\\s*\\[default\\: default\\]")]
+            [InlineData(false, false, true, "\\<arg\\>\\s*description\\s*\\[default\\: custom def\\]")]
+            [InlineData(true, false, true, "custom 1st\\s*description\\s*\\[default\\: custom def\\]")]
+            [InlineData(false, true, true, "\\<arg\\>\\s*custom 2nd\\s*\\[default\\: custom def\\]")]
+            [InlineData(true, true, true, "custom 1st\\s*custom 2nd\\s*\\[default\\: custom def\\]")]
+            public void Argument_can_fallback_to_default_when_customizing(
+                bool conditionA, 
+                bool conditionB, 
+                bool conditionC, 
+                string expected)
             {
-                Action action = () => new HelpBuilder(LocalizationResources.Instance).Customize(null!, "");
-                action.Should().Throw<ArgumentNullException>();
+                var command = new Command("test");
+                var argument = new Argument<string>("arg", "description");
+                argument.SetDefaultValue("default");
+
+                command.AddArgument(argument);
+
+                var helpBuilder = new HelpBuilder(LocalizationResources.Instance, LargeMaxWidth);
+                helpBuilder.CustomizeSymbol(argument,
+                    firstColumnText: ctx => conditionA ? "custom 1st" : HelpBuilder.Default.GetArgumentUsageLabel(argument),
+                    secondColumnText: ctx => conditionB ? "custom 2nd" : HelpBuilder.Default.GetArgumentDescription(argument),
+                    defaultValue: ctx => conditionC ? "custom def" : HelpBuilder.Default.GetArgumentDefaultValue(argument));
+
+
+                var parser = new CommandLineBuilder(command)
+                             .UseDefaults()
+                             .UseHelpBuilder(_ => helpBuilder)
+                             .Build();
+
+                var console = new TestConsole();
+                parser.Invoke("test -h", console);
+                console.Out.ToString().Should().MatchRegex(expected);
             }
         }
-
-        private class CustomHelpBuilderThatAddsTextAfterDefaultText : HelpBuilder
-        {
-            private readonly string _theTextToAdd;
-
-            public CustomHelpBuilderThatAddsTextAfterDefaultText(string theTextToAdd)
-                : base(LocalizationResources.Instance)
-            {
-                _theTextToAdd = theTextToAdd;
-            }
-
-            public override void Write(ICommand command, TextWriter writer, ParseResult parseResult)
-            {
-                base.Write(command, writer, parseResult);
-                writer.Write(_theTextToAdd);
-            }
-        }
-
+        
         private class CustomLocalizationResources : LocalizationResources
         {
             public string OverrideHelpDescriptionTitle { get; set; }

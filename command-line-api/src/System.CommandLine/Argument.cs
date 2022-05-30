@@ -4,25 +4,26 @@
 using System.Collections.Generic;
 using System.CommandLine.Binding;
 using System.CommandLine.Parsing;
-using System.CommandLine.Suggestions;
-using System.Diagnostics.CodeAnalysis;
+using System.CommandLine.Completions;
 using System.Linq;
 
 namespace System.CommandLine
 {
-    /// <inheritdoc cref="IArgument"/>
-    public class Argument : Symbol, IArgument
+    /// <summary>
+    /// A symbol defining a value that can be passed on the command line to a <see cref="Command">command</see> or <see cref="Option">option</see>.
+    /// </summary>
+    public abstract class Argument : Symbol, IValueDescriptor
     {
         private Func<ArgumentResult, object?>? _defaultValueFactory;
-        private IArgumentArity? _arity;
+        private ArgumentArity _arity;
         private TryConvertArgument? _convertArguments;
-        private Type _valueType = typeof(string);
-        private SuggestionSourceList? _suggestions = null;
+        private CompletionSourceList? _completions = null;
+        private List<ValidateSymbolResult<ArgumentResult>>? _validators = null;
 
         /// <summary>
         /// Initializes a new instance of the Argument class.
         /// </summary>
-        public Argument()
+        protected Argument()
         {
         }
 
@@ -30,14 +31,11 @@ namespace System.CommandLine
         /// Initializes a new instance of the Argument class.
         /// </summary>
         /// <param name="name">The name of the argument.</param>
-        public Argument(string name)
+        /// <param name="description">The description of the argument, shown in help.</param>
+        protected Argument(string? name = null, string? description = null)
         {
-            if (string.IsNullOrWhiteSpace(name))
-            {
-                throw new ArgumentException("Value cannot be null or whitespace.", nameof(name));
-            }
-
             Name = name!;
+            Description = description;
         }
 
         internal HashSet<string>? AllowedValues { get; private set; }
@@ -45,17 +43,16 @@ namespace System.CommandLine
         /// <summary>
         /// Gets or sets the arity of the argument.
         /// </summary>
-        [NotNull]
-        public IArgumentArity Arity
+        public ArgumentArity Arity
         {
             get
             {
-                if (_arity is null)
+                if (!_arity.IsNonDefault)
                 {
-                    return ArgumentArity.Default(
+                    _arity = ArgumentArity.Default(
                         ValueType, 
                         this, 
-                        Parents);
+                        FirstParent);
                 }
 
                 return _arity;
@@ -64,9 +61,9 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// Argument help name
+        /// The name used in help output to describe the argument. 
         /// </summary>
-        internal string? HelpName { get; set; }
+        public string? HelpName { get; set; }
 
         internal TryConvertArgument? ConvertArguments
         {
@@ -75,30 +72,26 @@ namespace System.CommandLine
         }
 
         /// <summary>
-        /// Gets the list of suggestion sources for the argument.
+        /// Gets the list of completion sources for the argument.
         /// </summary>
-        public SuggestionSourceList Suggestions =>
-            _suggestions ??= new SuggestionSourceList
+        public CompletionSourceList Completions =>
+            _completions ??= new CompletionSourceList
             {
-                SuggestionSource.ForType(ValueType)
+                CompletionSource.ForType(ValueType)
             };
 
         /// <summary>
         /// Gets or sets the <see cref="Type" /> that the argument token(s) will be converted to.
         /// </summary>
-        public virtual Type ValueType
-        {
-            get => _valueType;
-            set => _valueType = value ?? throw new ArgumentNullException(nameof(value));
-        }
+        public abstract Type ValueType { get; }
 
         private protected override string DefaultName
         {
             get
             {
-                if (Parents.Count == 1)
+                if (FirstParent is not null && FirstParent.Next is null)
                 {
-                    switch (Parents[0])
+                    switch (FirstParent.Symbol)
                     {
                         case Option option:
                             return option.Name;
@@ -111,7 +104,7 @@ namespace System.CommandLine
             }
         }
 
-        internal List<ValidateSymbolResult<ArgumentResult>> Validators { get; } = new();
+        internal List<ValidateSymbolResult<ArgumentResult>> Validators => _validators ??= new ();
 
         /// <summary>
         /// Adds a custom <see cref="ValidateSymbolResult{ArgumentResult}"/> to the argument. Validators can be used
@@ -180,13 +173,12 @@ namespace System.CommandLine
 
         internal virtual bool HasCustomParser => false;
 
-        internal static Argument None() => new()
+        internal static Argument None() => new Argument<bool>
         {
-            Arity = ArgumentArity.Zero,
-            ValueType = typeof(bool)
+            Arity = ArgumentArity.Zero
         };
 
-        internal void AddAllowedValues(IEnumerable<string> values)
+        internal void AddAllowedValues(IReadOnlyList<string> values)
         {
             if (AllowedValues is null)
             {
@@ -197,20 +189,16 @@ namespace System.CommandLine
         }
 
         /// <inheritdoc />
-        public override IEnumerable<string> GetSuggestions(ParseResult? parseResult = null, string? textToMatch = null)
+        public override IEnumerable<CompletionItem> GetCompletions(CompletionContext context)
         {
-            return Suggestions
-                   .SelectMany(source => source.GetSuggestions(parseResult, textToMatch))
+            return Completions
+                   .SelectMany(source => source.GetCompletions(context))
                    .Distinct()
-                   .OrderBy(c => c, StringComparer.OrdinalIgnoreCase)
-                   .Containing(textToMatch ?? "");
+                   .OrderBy(c => c.SortText, StringComparer.OrdinalIgnoreCase);
         }
 
         /// <inheritdoc />
         public override string ToString() => $"{nameof(Argument)}: {Name}";
-
-        /// <inheritdoc />
-        IArgumentArity IArgument.Arity => Arity;
 
         /// <inheritdoc />
         string IValueDescriptor.ValueName => Name;

@@ -25,6 +25,7 @@ namespace Wasm.Build.Tests
             ).WithRunHosts(host).UnwrapItemsAsArrays();
 
         [Theory]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
         [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
         [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ true, RunHost.All })]
         public void AsyncMainWithArgs(BuildArgs buildArgs, string[] args, RunHost host, string id)
@@ -39,6 +40,7 @@ namespace Wasm.Build.Tests
                 buildArgs, args, host, id);
 
         [Theory]
+        [ActiveIssue("https://github.com/dotnet/runtime/issues/61725", TestPlatforms.Windows)]
         [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ false, RunHost.All })]
         [MemberData(nameof(MainWithArgsTestData), parameters: new object[] { /*aot*/ true, RunHost.All })]
         public void TopLevelWithArgs(BuildArgs buildArgs, string[] args, RunHost host, string id)
@@ -81,12 +83,13 @@ namespace Wasm.Build.Tests
             if (dotnetWasmFromRuntimePack == null)
                 dotnetWasmFromRuntimePack = !(buildArgs.AOT || buildArgs.Config == "Release");
 
-            Console.WriteLine ($"-- args: {buildArgs}, name: {projectName}");
+            _testOutput.WriteLine ($"-- args: {buildArgs}, name: {projectName}");
 
             BuildProject(buildArgs,
-                        initProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
-                        id: id,
-                        dotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack);
+                            id: id,
+                            new BuildProjectOptions(
+                                InitProject: () => File.WriteAllText(Path.Combine(_projectDir!, "Program.cs"), programText),
+                                DotnetWasmFromRuntimePack: dotnetWasmFromRuntimePack));
 
             RunAndTestWasmApp(buildArgs, buildDir: _projectDir, expectedExitCode: 42 + args.Length, args: string.Join(' ', args),
                 test: output =>

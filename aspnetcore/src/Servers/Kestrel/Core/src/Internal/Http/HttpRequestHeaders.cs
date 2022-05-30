@@ -1,10 +1,8 @@
 // Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
-using System;
 using System.Buffers.Text;
 using System.Collections;
-using System.Collections.Generic;
 using System.Globalization;
 using System.Numerics;
 using System.Runtime.CompilerServices;
@@ -19,6 +17,7 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
 {
     private EnumeratorCache? _enumeratorCache;
     private long _previousBits;
+    private long _pseudoBits;
 
     public bool ReuseHeaderValues { get; set; }
     public Func<string, Encoding?> EncodingSelector { get; set; }
@@ -49,21 +48,33 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
         Clear(headersToClear);
     }
 
+    [MethodImpl(MethodImplOptions.AggressiveInlining)]
+    public void MergeCookies()
+    {
+        if (HasCookie && _headers._Cookie.Count > 1)
+        {
+            _headers._Cookie = string.Join("; ", _headers._Cookie.ToArray());
+        }
+    }
+
     protected override void ClearFast()
     {
         if (!ReuseHeaderValues)
         {
             // If we aren't reusing headers clear them all
-            Clear(_bits);
+            Clear(_bits | _pseudoBits);
         }
         else
         {
             // If we are reusing headers, store the currently set headers for comparison later
-            _previousBits = _bits;
+            // Pseudo header bits were cleared at the start of a request to hide from the user.
+            // Keep those values for reuse.
+            _previousBits = _bits | _pseudoBits;
         }
 
         // Mark no headers as currently in use
         _bits = 0;
+        _pseudoBits = 0;
         // Clear ContentLength and any unknown headers as we will never reuse them
         _contentLength = null;
         MaybeUnknown?.Clear();
@@ -174,7 +185,7 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
         return enumerator;
     }
 
-    private class EnumeratorCache
+    private sealed class EnumeratorCache
     {
         /// <summary>
         /// Enumerator created from previous request
@@ -205,7 +216,7 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
     /// IEnumerator allocations across requests if the header collection is commonly
     /// enumerated for forwarding in a reverse-proxy type situation.
     /// </summary>
-    private class EnumeratorBox : IEnumerator<KeyValuePair<string, StringValues>>
+    private sealed class EnumeratorBox : IEnumerator<KeyValuePair<string, StringValues>>
     {
         public Enumerator Enumerator;
 
@@ -241,11 +252,11 @@ internal sealed partial class HttpRequestHeaders : HttpHeaders
                 : default;
         }
 
-        public KeyValuePair<string, StringValues> Current => _current;
+        public readonly KeyValuePair<string, StringValues> Current => _current;
 
-        object IEnumerator.Current => _current;
+        readonly object IEnumerator.Current => _current;
 
-        public void Dispose()
+        public readonly void Dispose()
         {
         }
 

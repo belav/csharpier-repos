@@ -1,7 +1,6 @@
 using System;
 using System.CommandLine;
 using System.CommandLine.Builder;
-using System.CommandLine.Invocation;
 using System.CommandLine.Parsing;
 using System.Threading.Tasks;
 
@@ -11,15 +10,25 @@ namespace EndToEndTestApp
     {
         static async Task Main(string[] args)
         {
+            var appleOption = new Option<string>("--apple" );
+            var bananaOption = new Option<string>("--banana");
+            var cherryOption = new Option<string>("--cherry");
+            var durianOption = new Option<string>("--durian");
+
             var rootCommand = new RootCommand
             {
-                new Option<string>("--apple" ),
-                new Option<string>("--banana"),
-                new Option<string>("--cherry"),
-                new Option<string>("--durian")
+                appleOption,          
+                bananaOption,          
+                cherryOption,          
+                durianOption,          
             };
 
-            rootCommand.Handler = CommandHandler.Create(typeof(Program).GetMethod(nameof(Run)));
+            rootCommand.SetHandler(
+                (string apple, string banana, string cherry, string durian) => Task.CompletedTask,
+                appleOption,
+                bananaOption,
+                cherryOption,
+                durianOption);
 
             var commandLine = new CommandLineBuilder(rootCommand)
                 .UseDefaults()
@@ -27,7 +36,5 @@ namespace EndToEndTestApp
 
             await commandLine.InvokeAsync(args);
         }
-
-        public static Task Run(string apple, string banana, string cherry, string durian) => Task.CompletedTask;
     }
 }

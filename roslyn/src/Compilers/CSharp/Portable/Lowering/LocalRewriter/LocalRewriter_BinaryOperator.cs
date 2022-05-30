@@ -243,7 +243,7 @@ namespace Microsoft.CodeAnalysis.CSharp
                 {
                     case BinaryOperatorKind.NullableNullEqual:
                     case BinaryOperatorKind.NullableNullNotEqual:
-                        return RewriteNullableNullEquality(syntax, operatorKind, loweredLeft, loweredRight, type);
+                        return _factory.RewriteNullableNullEquality(syntax, operatorKind, loweredLeft, loweredRight, type);
 
                     case BinaryOperatorKind.ObjectAndStringConcatenation:
                     case BinaryOperatorKind.StringAndObjectConcatenation:
@@ -364,12 +364,16 @@ namespace Microsoft.CodeAnalysis.CSharp
                     case BinaryOperatorKind.UIntLeftShift:
                     case BinaryOperatorKind.IntRightShift:
                     case BinaryOperatorKind.UIntRightShift:
+                    case BinaryOperatorKind.IntUnsignedRightShift:
+                    case BinaryOperatorKind.UIntUnsignedRightShift:
                         return RewriteBuiltInShiftOperation(oldNode, syntax, operatorKind, loweredLeft, loweredRight, type, 0x1F);
 
                     case BinaryOperatorKind.LongLeftShift:
                     case BinaryOperatorKind.ULongLeftShift:
                     case BinaryOperatorKind.LongRightShift:
                     case BinaryOperatorKind.ULongRightShift:
+                    case BinaryOperatorKind.LongUnsignedRightShift:
+                    case BinaryOperatorKind.ULongUnsignedRightShift:
                         return RewriteBuiltInShiftOperation(oldNode, syntax, operatorKind, loweredLeft, loweredRight, type, 0x3F);
 
                     case BinaryOperatorKind.DecimalAddition:
@@ -711,7 +715,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // If not the type has to implement IsTrue/IsFalse operator - we checked it during binding.
 
             CompoundUseSiteInfo<AssemblySymbol> useSiteInfo = GetNewCompoundUseSiteInfo();
-            var conversion = _compilation.Conversions.ClassifyConversionFromExpression(loweredLeft, boolean, ref useSiteInfo);
+            var conversion = _compilation.Conversions.ClassifyConversionFromExpression(loweredLeft, boolean, isChecked: false, ref useSiteInfo);
             _diagnostics.Add(loweredLeft.Syntax, useSiteInfo);
             if (conversion.IsImplicit)
             {
@@ -834,7 +838,7 @@ namespace Microsoft.CodeAnalysis.CSharp
 
                 if (operatorKind == BinaryOperatorKind.Equal || operatorKind == BinaryOperatorKind.NotEqual)
                 {
-                    BoundExpression callHasValue = MakeNullableHasValue(syntax, maybeNull);
+                    BoundExpression callHasValue = _factory.MakeNullableHasValue(syntax, maybeNull);
                     BoundExpression result = operatorKind == BinaryOperatorKind.Equal ?
                         MakeUnaryOperator(UnaryOperatorKind.BoolLogicalNegation, syntax, method: null, constrainedToTypeOpt: null, callHasValue, boolType) :
                         callHasValue;
@@ -877,7 +881,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // so return constant true.
             if (expression.Type.IsNullableType())
             {
-                return MakeNullableHasValue(syntax, expression);
+                return _factory.MakeNullableHasValue(syntax, expression);
             }
 
             return MakeBooleanConstant(syntax, true);
@@ -1739,7 +1743,7 @@ namespace Microsoft.CodeAnalysis.CSharp
             // tempy.GetValueOrDefault()
             BoundExpression callY_GetValueOrDefault = BoundCall.Synthesized(syntax, boundTempY, getValueOrDefaultY);
             // tempx.HasValue
-            BoundExpression callX_HasValue = MakeNullableHasValue(syntax, boundTempX);
+            BoundExpression callX_HasValue = _factory.MakeNullableHasValue(syntax, boundTempX);
 
             // (tempy.GetValueOrDefault || tempx.HasValue)
             BoundExpression innerOr = MakeBinaryOperator(
@@ -1799,7 +1803,7 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// Recommendation: Do not use, use <see cref="TryGetNullableMethod"/> instead! 
         /// If used, a unit-test with a missing member is absolutely a must have.
         /// </summary>
-        private static MethodSymbol UnsafeGetNullableMethod(SyntaxNode syntax, TypeSymbol nullableType, SpecialMember member, CSharpCompilation compilation, BindingDiagnosticBag diagnostics)
+        internal static MethodSymbol UnsafeGetNullableMethod(SyntaxNode syntax, TypeSymbol nullableType, SpecialMember member, CSharpCompilation compilation, BindingDiagnosticBag diagnostics)
         {
             var nullableType2 = nullableType as NamedTypeSymbol;
             Debug.Assert(nullableType2 is { });

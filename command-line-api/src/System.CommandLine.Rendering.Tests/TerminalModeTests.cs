@@ -5,7 +5,6 @@ using System.CommandLine.Builder;
 using System.CommandLine.Invocation;
 using System.CommandLine.IO;
 using System.CommandLine.Parsing;
-using System.CommandLine.Tests;
 using System.CommandLine.Tests.Utility;
 using System.Threading.Tasks;
 using FluentAssertions;
@@ -44,13 +43,12 @@ namespace System.CommandLine.Rendering.Tests
             var console = new TestConsole();
             OutputMode detectedOutputMode = OutputMode.Auto;
 
-            var command = new Command("hello")
-                          {
-                              Handler = CommandHandler.Create((IConsole c) =>
-                              {
-                                  detectedOutputMode = c.DetectOutputMode();
-                              })
-                          };
+            var command = new Command("hello");
+            command.SetHandler(ctx =>
+            {
+                detectedOutputMode = ctx.Console.DetectOutputMode();
+                return Task.FromResult(0);
+            });
 
             var parser = new CommandLineBuilder(command)
                          .UseAnsiTerminalWhenAvailable()
