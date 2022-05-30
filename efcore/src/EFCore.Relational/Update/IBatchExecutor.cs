@@ -35,7 +35,8 @@ public interface IBatchExecutor
     /// <returns>The total number of rows affected.</returns>
     int Execute(
         IEnumerable<(ModificationCommandBatch Batch, bool HasMore)> commandBatches,
-        IRelationalConnection connection);
+        IRelationalConnection connection
+    );
 
     /// <summary>
     ///     Executes the commands in the batches against the given database connection.
@@ -53,5 +54,6 @@ public interface IBatchExecutor
     Task<int> ExecuteAsync(
         IEnumerable<(ModificationCommandBatch Batch, bool HasMore)> commandBatches,
         IRelationalConnection connection,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

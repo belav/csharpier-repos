@@ -18,13 +18,15 @@ namespace RunTests
 {
     internal sealed partial class Program
     {
-        private static readonly ImmutableHashSet<string> PrimaryProcessNames = ImmutableHashSet.Create(
-            StringComparer.OrdinalIgnoreCase,
-            "devenv",
-            "xunit.console",
-            "xunit.console.x86",
-            "ServiceHub.RoslynCodeAnalysisService",
-            "ServiceHub.RoslynCodeAnalysisService32");
+        private static readonly ImmutableHashSet<string> PrimaryProcessNames =
+            ImmutableHashSet.Create(
+                StringComparer.OrdinalIgnoreCase,
+                "devenv",
+                "xunit.console",
+                "xunit.console.x86",
+                "ServiceHub.RoslynCodeAnalysisService",
+                "ServiceHub.RoslynCodeAnalysisService32"
+            );
 
         internal const int ExitSuccess = 0;
         internal const int ExitFailure = 1;
@@ -42,15 +44,23 @@ namespace RunTests
             }
 
             ConsoleUtil.WriteLine($"Running '{options.DotnetFilePath} --version'..");
-            var dotnetResult = await ProcessRunner.CreateProcess(options.DotnetFilePath, arguments: "--version", captureOutput: true).Result;
+            var dotnetResult = await ProcessRunner
+                .CreateProcess(options.DotnetFilePath, arguments: "--version", captureOutput: true)
+                .Result;
             ConsoleUtil.WriteLine(string.Join(Environment.NewLine, dotnetResult.OutputLines));
-            ConsoleUtil.WriteLine(ConsoleColor.Red, string.Join(Environment.NewLine, dotnetResult.ErrorLines));
+            ConsoleUtil.WriteLine(
+                ConsoleColor.Red,
+                string.Join(Environment.NewLine, dotnetResult.ErrorLines)
+            );
 
             if (options.CollectDumps)
             {
                 if (!DumpUtil.IsAdministrator())
                 {
-                    ConsoleUtil.WriteLine(ConsoleColor.Yellow, "Dump collection specified but user is not administrator so cannot modify registry");
+                    ConsoleUtil.WriteLine(
+                        ConsoleColor.Yellow,
+                        "Dump collection specified but user is not administrator so cannot modify registry"
+                    );
                 }
                 else
                 {
@@ -95,7 +105,11 @@ namespace RunTests
             }
         }
 
-        private static async Task<int> RunAsync(Options options, TimeSpan timeout, CancellationToken cancellationToken)
+        private static async Task<int> RunAsync(
+            Options options,
+            TimeSpan timeout,
+            CancellationToken cancellationToken
+        )
         {
             using var cts = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken);
             var runTask = RunAsync(options, cts.Token);
@@ -109,13 +123,13 @@ namespace RunTests
 
                 try
                 {
-                    // Need to await here to ensure that all of the child processes are properly 
+                    // Need to await here to ensure that all of the child processes are properly
                     // killed before we exit.
                     await runTask;
                 }
                 catch
                 {
-                    // Cancellation exceptions expected here. 
+                    // Cancellation exceptions expected here.
                 }
 
                 return ExitFailure;
@@ -124,7 +138,10 @@ namespace RunTests
             return await runTask;
         }
 
-        private static async Task<int> RunAsync(Options options, CancellationToken cancellationToken)
+        private static async Task<int> RunAsync(
+            Options options,
+            CancellationToken cancellationToken
+        )
         {
             var testExecutor = CreateTestExecutor(options);
             var testRunner = new TestRunner(options, testExecutor);
@@ -138,11 +155,17 @@ namespace RunTests
 
             var assemblyCount = assemblyInfoList.GroupBy(x => x.AssemblyPath).Count();
             ConsoleUtil.WriteLine($"Proc dump location: {options.ProcDumpFilePath}");
-            ConsoleUtil.WriteLine($"Running {assemblyCount} test assemblies in {assemblyInfoList.Count} partitions");
+            ConsoleUtil.WriteLine(
+                $"Running {assemblyCount} test assemblies in {assemblyInfoList.Count} partitions"
+            );
 
             var result = options.UseHelix
-                ? await testRunner.RunAllOnHelixAsync(assemblyInfoList, cancellationToken).ConfigureAwait(true)
-                : await testRunner.RunAllAsync(assemblyInfoList, cancellationToken).ConfigureAwait(true);
+                ? await testRunner
+                    .RunAllOnHelixAsync(assemblyInfoList, cancellationToken)
+                    .ConfigureAwait(true)
+                : await testRunner
+                    .RunAllAsync(assemblyInfoList, cancellationToken)
+                    .ConfigureAwait(true);
             var elapsed = DateTime.Now - start;
 
             ConsoleUtil.WriteLine($"Test execution time: {elapsed}");
@@ -208,12 +231,19 @@ namespace RunTests
         }
 
         /// <summary>
-        /// Invoked when a timeout occurs and we need to dump all of the test processes and shut down 
+        /// Invoked when a timeout occurs and we need to dump all of the test processes and shut down
         /// the runnner.
         /// </summary>
-        private static async Task HandleTimeout(Options options, CancellationToken cancellationToken)
+        private static async Task HandleTimeout(
+            Options options,
+            CancellationToken cancellationToken
+        )
         {
-            async Task DumpProcess(Process targetProcess, string procDumpExeFilePath, string dumpFilePath)
+            async Task DumpProcess(
+                Process targetProcess,
+                string procDumpExeFilePath,
+                string dumpFilePath
+            )
             {
                 var name = targetProcess.ProcessName;
 
@@ -228,21 +258,29 @@ namespace RunTests
                 try
                 {
                     var args = $"-accepteula -ma {targetProcess.Id} {dumpFilePath}";
-                    var processInfo = ProcessRunner.CreateProcess(procDumpExeFilePath, args, cancellationToken: cancellationToken);
+                    var processInfo = ProcessRunner.CreateProcess(
+                        procDumpExeFilePath,
+                        args,
+                        cancellationToken: cancellationToken
+                    );
                     var processOutput = await processInfo.Result;
 
                     // The exit code for procdump doesn't obey standard windows rules.  It will return non-zero
-                    // for successful cases (possibly returning the count of dumps that were written).  Best 
+                    // for successful cases (possibly returning the count of dumps that were written).  Best
                     // backup is to test for the dump file being present.
                     if (File.Exists(dumpFilePath))
                     {
-                        ConsoleUtil.WriteLine($"succeeded ({new FileInfo(dumpFilePath).Length} bytes)");
+                        ConsoleUtil.WriteLine(
+                            $"succeeded ({new FileInfo(dumpFilePath).Length} bytes)"
+                        );
                     }
                     else
                     {
                         ConsoleUtil.WriteLine($"FAILED with {processOutput.ExitCode}");
                         ConsoleUtil.WriteLine($"{procDumpExeFilePath} {args}");
-                        ConsoleUtil.WriteLine(string.Join(Environment.NewLine, processOutput.OutputLines));
+                        ConsoleUtil.WriteLine(
+                            string.Join(Environment.NewLine, processOutput.OutputLines)
+                        );
                     }
                 }
                 catch (Exception ex) when (!cancellationToken.IsCancellationRequested)
@@ -255,10 +293,16 @@ namespace RunTests
 
             if (options.CollectDumps && GetProcDumpInfo(options) is { } procDumpInfo)
             {
-                ConsoleUtil.WriteLine("Roslyn Error: test timeout exceeded, dumping remaining processes");
+                ConsoleUtil.WriteLine(
+                    "Roslyn Error: test timeout exceeded, dumping remaining processes"
+                );
 
                 var counter = 0;
-                foreach (var proc in ProcessUtil.GetProcessTree(Process.GetCurrentProcess()).OrderBy(x => x.ProcessName))
+                foreach (
+                    var proc in ProcessUtil
+                        .GetProcessTree(Process.GetCurrentProcess())
+                        .OrderBy(x => x.ProcessName)
+                )
                 {
                     var dumpDir = procDumpInfo.DumpDirectory;
                     var dumpFilePath = Path.Combine(dumpDir, $"{proc.ProcessName}-{counter}.dmp");
@@ -286,19 +330,42 @@ namespace RunTests
             var list = new List<AssemblyInfo>();
             var assemblyPaths = GetAssemblyFilePaths(options);
 
-            foreach (var assemblyPath in assemblyPaths.OrderByDescending(x => new FileInfo(x.FilePath).Length))
+            foreach (
+                var assemblyPath in assemblyPaths.OrderByDescending(
+                    x => new FileInfo(x.FilePath).Length
+                )
+            )
             {
-                list.AddRange(scheduler.Schedule(assemblyPath.FilePath).Select(x => new AssemblyInfo(x, assemblyPath.TargetFramework, options.Architecture)));
+                list.AddRange(
+                    scheduler
+                        .Schedule(assemblyPath.FilePath)
+                        .Select(
+                            x =>
+                                new AssemblyInfo(
+                                    x,
+                                    assemblyPath.TargetFramework,
+                                    options.Architecture
+                                )
+                        )
+                );
             }
 
             return list;
         }
 
-        private static List<(string FilePath, string TargetFramework)> GetAssemblyFilePaths(Options options)
+        private static List<(string FilePath, string TargetFramework)> GetAssemblyFilePaths(
+            Options options
+        )
         {
             var list = new List<(string, string)>();
             var binDirectory = Path.Combine(options.ArtifactsDirectory, "bin");
-            foreach (var project in Directory.EnumerateDirectories(binDirectory, "*", SearchOption.TopDirectoryOnly))
+            foreach (
+                var project in Directory.EnumerateDirectories(
+                    binDirectory,
+                    "*",
+                    SearchOption.TopDirectoryOnly
+                )
+            )
             {
                 var name = Path.GetFileName(project);
                 var include = false;
@@ -326,20 +393,32 @@ namespace RunTests
                 var fileName = $"{name}.dll";
                 foreach (var targetFramework in options.TargetFrameworks)
                 {
-                    var fileContainingDirectory = Path.Combine(project, options.Configuration, targetFramework);
+                    var fileContainingDirectory = Path.Combine(
+                        project,
+                        options.Configuration,
+                        targetFramework
+                    );
                     var filePath = Path.Combine(fileContainingDirectory, fileName);
                     if (File.Exists(filePath))
                     {
                         list.Add((filePath, targetFramework));
                     }
-                    else if (Directory.Exists(fileContainingDirectory) && Directory.GetFiles(fileContainingDirectory, searchPattern: "*.UnitTests.dll") is { Length: > 0 } matches)
+                    else if (
+                        Directory.Exists(fileContainingDirectory)
+                        && Directory.GetFiles(
+                            fileContainingDirectory,
+                            searchPattern: "*.UnitTests.dll"
+                        )
+                            is { Length: > 0 } matches
+                    )
                     {
                         // If the unit test assembly name doesn't match the project folder name, but still matches our "unit test" name pattern, we want to run it.
                         // If more than one such assembly is present in a project output folder, we assume something is wrong with the build configuration.
                         // For example, one unit test project might be referencing another unit test project.
                         if (matches.Length > 1)
                         {
-                            var message = $"Multiple unit test assemblies found in '{fileContainingDirectory}'. Please adjust the build to prevent this. Matches:{Environment.NewLine}{string.Join(Environment.NewLine, matches)}";
+                            var message =
+                                $"Multiple unit test assemblies found in '{fileContainingDirectory}'. Please adjust the build to prevent this. Matches:{Environment.NewLine}{string.Join(Environment.NewLine, matches)}";
                             throw new Exception(message);
                         }
                         list.Add((matches[0], targetFramework));
@@ -387,7 +466,8 @@ namespace RunTests
                 testFilter: options.TestFilter,
                 includeHtml: options.IncludeHtml,
                 retry: options.Retry,
-                collectDumps: options.CollectDumps);
+                collectDumps: options.CollectDumps
+            );
             return new ProcessTestExecutor(testExecutionOptions);
         }
 
@@ -397,7 +477,9 @@ namespace RunTests
         private static void CheckTotalDumpFilesSize()
         {
             var directory = Directory.GetCurrentDirectory();
-            var dumpFiles = Directory.EnumerateFiles(directory, "*.dmp", SearchOption.AllDirectories).ToArray();
+            var dumpFiles = Directory
+                .EnumerateFiles(directory, "*.dmp", SearchOption.AllDirectories)
+                .ToArray();
             long currentTotalSize = 0;
 
             foreach (var dumpFile in dumpFiles)
@@ -406,7 +488,9 @@ namespace RunTests
                 currentTotalSize += fileSizeInMegabytes;
                 if (currentTotalSize > MaxTotalDumpSizeInMegabytes)
                 {
-                    ConsoleUtil.WriteLine($"Deleting '{dumpFile}' because we have exceeded our total dump size of {MaxTotalDumpSizeInMegabytes} megabytes.");
+                    ConsoleUtil.WriteLine(
+                        $"Deleting '{dumpFile}' because we have exceeded our total dump size of {MaxTotalDumpSizeInMegabytes} megabytes."
+                    );
                     File.Delete(dumpFile);
                 }
             }

@@ -25,8 +25,10 @@ namespace Internal.Runtime.TypeLoader
 
         // Counter to keep track of generated offsets for TLS cells of dynamic types;
         private int _maxTlsCells;
-        private LowLevelDictionary<RuntimeTypeHandle, uint> _dynamicGenericsThreadStatics = new LowLevelDictionary<RuntimeTypeHandle, uint>();
-        private LowLevelDictionary<uint, int> _dynamicGenericsThreadStaticSizes = new LowLevelDictionary<uint, int>();
+        private LowLevelDictionary<RuntimeTypeHandle, uint> _dynamicGenericsThreadStatics =
+            new LowLevelDictionary<RuntimeTypeHandle, uint>();
+        private LowLevelDictionary<uint, int> _dynamicGenericsThreadStaticSizes =
+            new LowLevelDictionary<uint, int>();
 
         // Various functions in static access need to create permanent pointers for use by thread static lookup.
         #region GC/Non-GC Statics
@@ -45,10 +47,15 @@ namespace Internal.Runtime.TypeLoader
                     if (typeAsEEType->HasCctor)
                     {
                         // The non-gc area for a type is immediately following its cctor context if it has one
-                        IntPtr dataAddress = TryGetStaticClassConstructionContext(runtimeTypeHandle);
+                        IntPtr dataAddress = TryGetStaticClassConstructionContext(
+                            runtimeTypeHandle
+                        );
                         if (dataAddress != IntPtr.Zero)
                         {
-                            return (IntPtr)(((byte*)dataAddress.ToPointer()) + sizeof(System.Runtime.CompilerServices.StaticClassConstructionContext));
+                            return (IntPtr)(
+                                ((byte*)dataAddress.ToPointer())
+                                + sizeof(System.Runtime.CompilerServices.StaticClassConstructionContext)
+                            );
                         }
                     }
                     else
@@ -56,7 +63,13 @@ namespace Internal.Runtime.TypeLoader
                         // If the type does not have a Cctor context, search for the field on the type in the field map which has the lowest offset,
                         // yet has the correct type of storage.
                         IntPtr staticAddress;
-                        if (TryGetStaticFieldBaseFromFieldAccessMap(runtimeTypeHandle, FieldAccessStaticDataKind.NonGC, out staticAddress))
+                        if (
+                            TryGetStaticFieldBaseFromFieldAccessMap(
+                                runtimeTypeHandle,
+                                FieldAccessStaticDataKind.NonGC,
+                                out staticAddress
+                            )
+                        )
                         {
                             return staticAddress;
                         }
@@ -66,11 +79,16 @@ namespace Internal.Runtime.TypeLoader
 
             IntPtr nonGcStaticsAddress;
             IntPtr gcStaticsAddress;
-            if (TryGetStaticsInfoForNamedType(runtimeTypeHandle, out nonGcStaticsAddress, out gcStaticsAddress))
+            if (
+                TryGetStaticsInfoForNamedType(
+                    runtimeTypeHandle,
+                    out nonGcStaticsAddress,
+                    out gcStaticsAddress
+                )
+            )
             {
                 return nonGcStaticsAddress;
             }
-
             unsafe
             {
                 // Non-generic, non-dynamic static data is found via the FieldAccessMap
@@ -86,7 +104,9 @@ namespace Internal.Runtime.TypeLoader
             {
                 var index = parser.GetUnsignedForBagElementKind(BagElementKind.NonGcStaticData);
 
-                return index.HasValue ? staticInfoLookup.GetIntPtrFromIndex(index.Value) : IntPtr.Zero;
+                return index.HasValue
+                    ? staticInfoLookup.GetIntPtrFromIndex(index.Value)
+                    : IntPtr.Zero;
             }
 
             // Not found in hashtable... must be a dynamically created type
@@ -120,7 +140,13 @@ namespace Internal.Runtime.TypeLoader
                     //search for the field on the type in the field map which has the lowest offset,
                     // yet has the correct type of storage.
                     IntPtr staticAddress;
-                    if (TryGetStaticFieldBaseFromFieldAccessMap(runtimeTypeHandle, FieldAccessStaticDataKind.GC, out staticAddress))
+                    if (
+                        TryGetStaticFieldBaseFromFieldAccessMap(
+                            runtimeTypeHandle,
+                            FieldAccessStaticDataKind.GC,
+                            out staticAddress
+                        )
+                    )
                     {
                         return staticAddress;
                     }
@@ -133,11 +159,16 @@ namespace Internal.Runtime.TypeLoader
 
             IntPtr nonGcStaticsAddress;
             IntPtr gcStaticsAddress;
-            if (TryGetStaticsInfoForNamedType(runtimeTypeHandle, out nonGcStaticsAddress, out gcStaticsAddress))
+            if (
+                TryGetStaticsInfoForNamedType(
+                    runtimeTypeHandle,
+                    out nonGcStaticsAddress,
+                    out gcStaticsAddress
+                )
+            )
             {
                 return gcStaticsAddress;
             }
-
             unsafe
             {
                 // Non-generic, non-dynamic static data is found via the FieldAccessMap
@@ -153,7 +184,9 @@ namespace Internal.Runtime.TypeLoader
             {
                 var index = parser.GetUnsignedForBagElementKind(BagElementKind.GcStaticData);
 
-                return index.HasValue ? staticInfoLookup.GetIntPtrFromIndex(index.Value) : IntPtr.Zero;
+                return index.HasValue
+                    ? staticInfoLookup.GetIntPtrFromIndex(index.Value)
+                    : IntPtr.Zero;
             }
 
             // Not found in hashtable... must be a dynamically created type
@@ -194,7 +227,9 @@ namespace Internal.Runtime.TypeLoader
             {
                 var index = parser.GetUnsignedForBagElementKind(BagElementKind.ThreadStaticIndex);
 
-                return index.HasValue ? staticInfoLookup.GetIntPtrFromIndex(index.Value) : IntPtr.Zero;
+                return index.HasValue
+                    ? staticInfoLookup.GetIntPtrFromIndex(index.Value)
+                    : IntPtr.Zero;
             }
 
             // Not found in hashtable... must be a dynamically created type
@@ -231,7 +266,11 @@ namespace Internal.Runtime.TypeLoader
             return result;
         }
 
-        public void RegisterDynamicThreadStaticsInfo(RuntimeTypeHandle runtimeTypeHandle, uint offsetValue, int storageSize)
+        public void RegisterDynamicThreadStaticsInfo(
+            RuntimeTypeHandle runtimeTypeHandle,
+            uint offsetValue,
+            int storageSize
+        )
         {
             bool registered = false;
             Debug.Assert(offsetValue != 0 && storageSize > 0 && runtimeTypeHandle.IsDynamicType());
@@ -241,7 +280,10 @@ namespace Internal.Runtime.TypeLoader
             {
                 // Sanity check to make sure we do not register thread statics for the same type more than once
                 uint temp;
-                Debug.Assert(!_dynamicGenericsThreadStatics.TryGetValue(runtimeTypeHandle, out temp) && storageSize > 0);
+                Debug.Assert(
+                    !_dynamicGenericsThreadStatics.TryGetValue(runtimeTypeHandle, out temp)
+                        && storageSize > 0
+                );
 
                 _dynamicGenericsThreadStatics.Add(runtimeTypeHandle, offsetValue);
                 _dynamicGenericsThreadStaticSizes.Add(offsetValue, storageSize);
@@ -264,7 +306,12 @@ namespace Internal.Runtime.TypeLoader
         #region Privates
         // get the statics hash table, external references, and static info table for a module
         // TODO multi-file: consider whether we want to cache this info
-        private static unsafe bool GetStaticsInfoHashtable(NativeFormatModuleInfo module, out NativeHashtable staticsInfoHashtable, out ExternalReferencesTable externalReferencesLookup, out ExternalReferencesTable staticInfoLookup)
+        private static unsafe bool GetStaticsInfoHashtable(
+            NativeFormatModuleInfo module,
+            out NativeHashtable staticsInfoHashtable,
+            out ExternalReferencesTable externalReferencesLookup,
+            out ExternalReferencesTable staticInfoLookup
+        )
         {
             byte* pBlob;
             uint cbBlob;
@@ -290,13 +337,25 @@ namespace Internal.Runtime.TypeLoader
             return true;
         }
 
-        private static NativeParser GetStaticInfo(RuntimeTypeHandle instantiatedType, out ExternalReferencesTable staticsInfoLookup)
+        private static NativeParser GetStaticInfo(
+            RuntimeTypeHandle instantiatedType,
+            out ExternalReferencesTable staticsInfoLookup
+        )
         {
-            TypeManagerHandle moduleHandle = RuntimeAugments.GetModuleFromTypeHandle(instantiatedType);
+            TypeManagerHandle moduleHandle = RuntimeAugments.GetModuleFromTypeHandle(
+                instantiatedType
+            );
             NativeFormatModuleInfo module = ModuleList.Instance.GetModuleInfoByHandle(moduleHandle);
             NativeHashtable staticsInfoHashtable;
             ExternalReferencesTable externalReferencesLookup;
-            if (!GetStaticsInfoHashtable(module, out staticsInfoHashtable, out externalReferencesLookup, out staticsInfoLookup))
+            if (
+                !GetStaticsInfoHashtable(
+                    module,
+                    out staticsInfoHashtable,
+                    out externalReferencesLookup,
+                    out staticsInfoLookup
+                )
+            )
                 return new NativeParser();
 
             int lookupHashcode = instantiatedType.GetHashCode();
@@ -305,7 +364,10 @@ namespace Internal.Runtime.TypeLoader
             NativeParser entryParser;
             while (!(entryParser = enumerator.GetNext()).IsNull)
             {
-                RuntimeTypeHandle parsedInstantiatedType = externalReferencesLookup.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
+                RuntimeTypeHandle parsedInstantiatedType =
+                    externalReferencesLookup.GetRuntimeTypeHandleFromIndex(
+                        entryParser.GetUnsigned()
+                    );
 
                 if (!parsedInstantiatedType.Equals(instantiatedType))
                     continue;

@@ -21,14 +21,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommandHandlers
     [Export(typeof(VSCommanding.ICommandHandler))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(GoToMatchingBraceCommandHandler))]
-    internal class GoToMatchingBraceCommandHandler : VSCommanding.ICommandHandler<GotoBraceCommandArgs>
+    internal class GoToMatchingBraceCommandHandler
+        : VSCommanding.ICommandHandler<GotoBraceCommandArgs>
     {
         private readonly IBraceMatchingService _braceMatchingService;
         private readonly IGlobalOptionService _globalOptions;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public GoToMatchingBraceCommandHandler(IBraceMatchingService braceMatchingService, IGlobalOptionService globalOptions)
+        public GoToMatchingBraceCommandHandler(
+            IBraceMatchingService braceMatchingService,
+            IGlobalOptionService globalOptions
+        )
         {
             _braceMatchingService = braceMatchingService;
             _globalOptions = globalOptions;
@@ -36,23 +40,37 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CommandHandlers
 
         public string DisplayName => nameof(GoToMatchingBraceCommandHandler);
 
-        public bool ExecuteCommand(GotoBraceCommandArgs args, VSCommanding.CommandExecutionContext executionContext)
+        public bool ExecuteCommand(
+            GotoBraceCommandArgs args,
+            VSCommanding.CommandExecutionContext executionContext
+        )
         {
             var snapshot = args.SubjectBuffer.CurrentSnapshot;
             var document = snapshot.GetOpenDocumentInCurrentContextWithChanges();
             var options = _globalOptions.GetBraceMatchingOptions(document.Project.Language);
 
             var caretPosition = args.TextView.Caret.Position.BufferPosition.Position;
-            var task = _braceMatchingService.FindMatchingSpanAsync(document, caretPosition, options, executionContext.OperationContext.UserCancellationToken);
-            var span = task.WaitAndGetResult(executionContext.OperationContext.UserCancellationToken);
+            var task = _braceMatchingService.FindMatchingSpanAsync(
+                document,
+                caretPosition,
+                options,
+                executionContext.OperationContext.UserCancellationToken
+            );
+            var span = task.WaitAndGetResult(
+                executionContext.OperationContext.UserCancellationToken
+            );
 
             if (!span.HasValue)
                 return false;
 
             if (span.Value.Start < caretPosition)
-                args.TextView.TryMoveCaretToAndEnsureVisible(args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.Start));
+                args.TextView.TryMoveCaretToAndEnsureVisible(
+                    args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.Start)
+                );
             else if (span.Value.End > caretPosition)
-                args.TextView.TryMoveCaretToAndEnsureVisible(args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.End));
+                args.TextView.TryMoveCaretToAndEnsureVisible(
+                    args.SubjectBuffer.CurrentSnapshot.GetPoint(span.Value.End)
+                );
 
             return true;
         }

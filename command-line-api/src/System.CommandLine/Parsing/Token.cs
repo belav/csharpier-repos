@@ -20,7 +20,7 @@ namespace System.CommandLine.Parsing
             Symbol = symbol;
             Position = ImplicitPosition;
         }
-       
+
         internal Token(string? value, TokenType type, Symbol? symbol, int position)
         {
             Value = value ?? "";
@@ -52,7 +52,11 @@ namespace System.CommandLine.Parsing
         public override bool Equals(object? obj) => obj is Token other && Equals(other);
 
         /// <inheritdoc />
-        public bool Equals(Token? other) => other is not null && Value == other.Value && Type == other.Type && ReferenceEquals(Symbol, other.Symbol);
+        public bool Equals(Token? other) =>
+            other is not null
+            && Value == other.Value
+            && Type == other.Type
+            && ReferenceEquals(Symbol, other.Symbol);
 
         /// <inheritdoc />
         public override int GetHashCode() => Value.GetHashCode() ^ (int)Type;

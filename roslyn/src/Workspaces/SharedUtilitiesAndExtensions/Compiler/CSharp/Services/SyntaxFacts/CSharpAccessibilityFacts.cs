@@ -19,9 +19,7 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
     {
         public static readonly IAccessibilityFacts Instance = new CSharpAccessibilityFacts();
 
-        private CSharpAccessibilityFacts()
-        {
-        }
+        private CSharpAccessibilityFacts() { }
 
         public bool CanHaveAccessibility(SyntaxNode declaration)
         {
@@ -50,19 +48,26 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
 
                 case SyntaxKind.ConstructorDeclaration:
                     // Static constructor can't have accessibility
-                    return !((ConstructorDeclarationSyntax)declaration).Modifiers.Any(SyntaxKind.StaticKeyword);
+                    return !((ConstructorDeclarationSyntax)declaration).Modifiers.Any(
+                        SyntaxKind.StaticKeyword
+                    );
 
                 case SyntaxKind.PropertyDeclaration:
-                    return ((PropertyDeclarationSyntax)declaration).ExplicitInterfaceSpecifier == null;
+                    return ((PropertyDeclarationSyntax)declaration).ExplicitInterfaceSpecifier
+                        == null;
 
                 case SyntaxKind.IndexerDeclaration:
-                    return ((IndexerDeclarationSyntax)declaration).ExplicitInterfaceSpecifier == null;
+                    return ((IndexerDeclarationSyntax)declaration).ExplicitInterfaceSpecifier
+                        == null;
 
                 case SyntaxKind.OperatorDeclaration:
-                    return ((OperatorDeclarationSyntax)declaration).ExplicitInterfaceSpecifier == null;
+                    return ((OperatorDeclarationSyntax)declaration).ExplicitInterfaceSpecifier
+                        == null;
 
                 case SyntaxKind.ConversionOperatorDeclaration:
-                    return ((ConversionOperatorDeclarationSyntax)declaration).ExplicitInterfaceSpecifier == null;
+                    return (
+                            (ConversionOperatorDeclarationSyntax)declaration
+                        ).ExplicitInterfaceSpecifier == null;
 
                 case SyntaxKind.MethodDeclaration:
                     var method = (MethodDeclarationSyntax)declaration;
@@ -98,7 +103,12 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             return accessibility;
         }
 
-        public static void GetAccessibilityAndModifiers(SyntaxTokenList modifierList, out Accessibility accessibility, out DeclarationModifiers modifiers, out bool isDefault)
+        public static void GetAccessibilityAndModifiers(
+            SyntaxTokenList modifierList,
+            out Accessibility accessibility,
+            out DeclarationModifiers modifiers,
+            out bool isDefault
+        )
         {
             accessibility = Accessibility.NotApplicable;
             modifiers = DeclarationModifiers.None;
@@ -110,14 +120,18 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 {
                     (SyntaxKind.PublicKeyword, _) => Accessibility.Public,
 
-                    (SyntaxKind.PrivateKeyword, Accessibility.Protected) => Accessibility.ProtectedAndInternal,
+                    (SyntaxKind.PrivateKeyword, Accessibility.Protected)
+                        => Accessibility.ProtectedAndInternal,
                     (SyntaxKind.PrivateKeyword, _) => Accessibility.Private,
 
-                    (SyntaxKind.InternalKeyword, Accessibility.Protected) => Accessibility.ProtectedOrInternal,
+                    (SyntaxKind.InternalKeyword, Accessibility.Protected)
+                        => Accessibility.ProtectedOrInternal,
                     (SyntaxKind.InternalKeyword, _) => Accessibility.Internal,
 
-                    (SyntaxKind.ProtectedKeyword, Accessibility.Private) => Accessibility.ProtectedAndInternal,
-                    (SyntaxKind.ProtectedKeyword, Accessibility.Internal) => Accessibility.ProtectedOrInternal,
+                    (SyntaxKind.ProtectedKeyword, Accessibility.Private)
+                        => Accessibility.ProtectedAndInternal,
+                    (SyntaxKind.ProtectedKeyword, Accessibility.Internal)
+                        => Accessibility.ProtectedOrInternal,
                     (SyntaxKind.ProtectedKeyword, _) => Accessibility.Protected,
 
                     _ => accessibility,
@@ -233,42 +247,42 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                     }
 
                 case SyntaxKind.VariableDeclaration:
+                {
+                    var vd = (VariableDeclarationSyntax)declaration;
+                    if (vd.Variables.Count == 1 && vd.Parent == null)
                     {
-                        var vd = (VariableDeclarationSyntax)declaration;
-                        if (vd.Variables.Count == 1 && vd.Parent == null)
+                        // this node is the declaration if it contains only one variable and has no parent.
+                        return DeclarationKind.Variable;
+                    }
+                    else
+                    {
+                        return DeclarationKind.None;
+                    }
+                }
+
+                case SyntaxKind.VariableDeclarator:
+                {
+                    var vd = declaration.Parent as VariableDeclarationSyntax;
+
+                    // this node is considered the declaration if it is one among many, or it has no parent
+                    if (vd == null || vd.Variables.Count > 1)
+                    {
+                        if (ParentIsFieldDeclaration(vd))
                         {
-                            // this node is the declaration if it contains only one variable and has no parent.
-                            return DeclarationKind.Variable;
+                            return DeclarationKind.Field;
+                        }
+                        else if (ParentIsEventFieldDeclaration(vd))
+                        {
+                            return DeclarationKind.Event;
                         }
                         else
                         {
-                            return DeclarationKind.None;
+                            return DeclarationKind.Variable;
                         }
                     }
 
-                case SyntaxKind.VariableDeclarator:
-                    {
-                        var vd = declaration.Parent as VariableDeclarationSyntax;
-
-                        // this node is considered the declaration if it is one among many, or it has no parent
-                        if (vd == null || vd.Variables.Count > 1)
-                        {
-                            if (ParentIsFieldDeclaration(vd))
-                            {
-                                return DeclarationKind.Field;
-                            }
-                            else if (ParentIsEventFieldDeclaration(vd))
-                            {
-                                return DeclarationKind.Event;
-                            }
-                            else
-                            {
-                                return DeclarationKind.Variable;
-                            }
-                        }
-
-                        break;
-                    }
+                    break;
+                }
 
                 case SyntaxKind.AttributeList:
                     var list = (AttributeListSyntax)declaration;
@@ -280,7 +294,10 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                     break;
 
                 case SyntaxKind.Attribute:
-                    if (declaration.Parent is not AttributeListSyntax parentList || parentList.Attributes.Count > 1)
+                    if (
+                        declaration.Parent is not AttributeListSyntax parentList
+                        || parentList.Attributes.Count > 1
+                    )
                     {
                         return DeclarationKind.Attribute;
                     }
@@ -301,8 +318,8 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             return DeclarationKind.None;
         }
 
-        public static SyntaxTokenList GetModifierTokens(SyntaxNode declaration)
-            => declaration switch
+        public static SyntaxTokenList GetModifierTokens(SyntaxNode declaration) =>
+            declaration switch
             {
                 MemberDeclarationSyntax memberDecl => memberDecl.Modifiers,
                 ParameterSyntax parameter => parameter.Modifiers,
@@ -315,13 +332,14 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
                 _ => default,
             };
 
-        public static bool ParentIsFieldDeclaration([NotNullWhen(true)] SyntaxNode? node)
-            => node?.Parent.IsKind(SyntaxKind.FieldDeclaration) ?? false;
+        public static bool ParentIsFieldDeclaration([NotNullWhen(true)] SyntaxNode? node) =>
+            node?.Parent.IsKind(SyntaxKind.FieldDeclaration) ?? false;
 
-        public static bool ParentIsEventFieldDeclaration([NotNullWhen(true)] SyntaxNode? node)
-            => node?.Parent.IsKind(SyntaxKind.EventFieldDeclaration) ?? false;
+        public static bool ParentIsEventFieldDeclaration([NotNullWhen(true)] SyntaxNode? node) =>
+            node?.Parent.IsKind(SyntaxKind.EventFieldDeclaration) ?? false;
 
-        public static bool ParentIsLocalDeclarationStatement([NotNullWhen(true)] SyntaxNode? node)
-            => node?.Parent.IsKind(SyntaxKind.LocalDeclarationStatement) ?? false;
+        public static bool ParentIsLocalDeclarationStatement(
+            [NotNullWhen(true)] SyntaxNode? node
+        ) => node?.Parent.IsKind(SyntaxKind.LocalDeclarationStatement) ?? false;
     }
 }

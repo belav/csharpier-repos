@@ -24,9 +24,12 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         public static async ValueTask<ISymbolSearchUpdateEngine> CreateEngineAsync(
             Workspace workspace,
             ISymbolSearchLogService logService,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var client = await RemoteHostClient.TryGetClientAsync(workspace, cancellationToken).ConfigureAwait(false);
+            var client = await RemoteHostClient
+                .TryGetClientAsync(workspace, cancellationToken)
+                .ConfigureAwait(false);
             if (client != null)
             {
                 return new SymbolSearchUpdateEngineProxy(client, logService);
@@ -41,9 +44,9 @@ namespace Microsoft.CodeAnalysis.SymbolSearch
         /// </summary>
         public static ISymbolSearchUpdateEngine CreateEngineInProcess()
         {
-            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows) ?
-                new SymbolSearchUpdateEngine() :
-                SymbolSearchUpdateNoOpEngine.Instance;
+            return RuntimeInformation.IsOSPlatform(OSPlatform.Windows)
+                ? new SymbolSearchUpdateEngine()
+                : SymbolSearchUpdateNoOpEngine.Instance;
         }
     }
 }

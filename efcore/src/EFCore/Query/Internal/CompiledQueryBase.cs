@@ -11,8 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public abstract class CompiledQueryBase<TContext, TResult>
-    where TContext : DbContext
+public abstract class CompiledQueryBase<TContext, TResult> where TContext : DbContext
 {
     private readonly LambdaExpression _queryExpression;
 
@@ -35,10 +34,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected virtual TResult ExecuteCore(
-        TContext context,
-        params object?[] parameters)
-        => ExecuteCore(context, default, parameters);
+    protected virtual TResult ExecuteCore(TContext context, params object?[] parameters) =>
+        ExecuteCore(context, default, parameters);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -49,7 +46,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
     protected virtual TResult ExecuteCore(
         TContext context,
         CancellationToken cancellationToken,
-        params object?[] parameters)
+        params object?[] parameters
+    )
     {
         var executor = EnsureExecutor(context);
         var queryContextFactory = context.GetService<IQueryContextFactory>();
@@ -60,8 +58,10 @@ public abstract class CompiledQueryBase<TContext, TResult>
         for (var i = 0; i < parameters.Length; i++)
         {
             queryContext.AddParameter(
-                QueryCompilationContext.QueryParameterPrefix + _queryExpression.Parameters[i + 1].Name,
-                parameters[i]);
+                QueryCompilationContext.QueryParameterPrefix
+                    + _queryExpression.Parameters[i + 1].Name,
+                parameters[i]
+            );
         }
 
         return executor(queryContext);
@@ -75,10 +75,11 @@ public abstract class CompiledQueryBase<TContext, TResult>
     /// </summary>
     protected abstract Func<QueryContext, TResult> CreateCompiledQuery(
         IQueryCompiler queryCompiler,
-        Expression expression);
+        Expression expression
+    );
 
-    private Func<QueryContext, TResult> EnsureExecutor(TContext context)
-        => NonCapturingLazyInitializer.EnsureInitialized(
+    private Func<QueryContext, TResult> EnsureExecutor(TContext context) =>
+        NonCapturingLazyInitializer.EnsureInitialized(
             ref _executor,
             this,
             context,
@@ -89,7 +90,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
                 var expression = new QueryExpressionRewriter(c, q.Parameters).Visit(q.Body);
 
                 return t.CreateCompiledQuery(queryCompiler, expression);
-            });
+            }
+        );
 
     private sealed class QueryExpressionRewriter : ExpressionVisitor
     {
@@ -98,7 +100,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
 
         public QueryExpressionRewriter(
             TContext context,
-            IReadOnlyCollection<ParameterExpression> parameters)
+            IReadOnlyCollection<ParameterExpression> parameters
+        )
         {
             _context = context;
             _parameters = parameters;
@@ -114,7 +117,8 @@ public abstract class CompiledQueryBase<TContext, TResult>
             return _parameters.Contains(parameterExpression)
                 ? Expression.Parameter(
                     parameterExpression.Type,
-                    QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name)
+                    QueryCompilationContext.QueryParameterPrefix + parameterExpression.Name
+                )
                 : parameterExpression;
         }
     }

@@ -20,8 +20,8 @@ public class CandidateNamingService : ICandidateNamingService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string GenerateCandidateIdentifier(DatabaseTable originalTable)
-        => GenerateCandidateIdentifier(originalTable.Name);
+    public virtual string GenerateCandidateIdentifier(DatabaseTable originalTable) =>
+        GenerateCandidateIdentifier(originalTable.Name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -29,8 +29,8 @@ public class CandidateNamingService : ICandidateNamingService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string GenerateCandidateIdentifier(DatabaseColumn originalColumn)
-        => GenerateCandidateIdentifier(originalColumn.Name);
+    public virtual string GenerateCandidateIdentifier(DatabaseColumn originalColumn) =>
+        GenerateCandidateIdentifier(originalColumn.Name);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -38,11 +38,15 @@ public class CandidateNamingService : ICandidateNamingService
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string GetDependentEndCandidateNavigationPropertyName(IReadOnlyForeignKey foreignKey)
+    public virtual string GetDependentEndCandidateNavigationPropertyName(
+        IReadOnlyForeignKey foreignKey
+    )
     {
         var candidateName = FindCandidateNavigationName(foreignKey.Properties);
 
-        return !string.IsNullOrEmpty(candidateName) ? candidateName : foreignKey.PrincipalEntityType.ShortName();
+        return !string.IsNullOrEmpty(candidateName)
+            ? candidateName
+            : foreignKey.PrincipalEntityType.ShortName();
     }
 
     /// <summary>
@@ -53,15 +57,15 @@ public class CandidateNamingService : ICandidateNamingService
     /// </summary>
     public virtual string GetPrincipalEndCandidateNavigationPropertyName(
         IReadOnlyForeignKey foreignKey,
-        string dependentEndNavigationPropertyName)
+        string dependentEndNavigationPropertyName
+    )
     {
-        var allForeignKeysBetweenDependentAndPrincipal =
-            foreignKey.PrincipalEntityType.GetReferencingForeignKeys()
-                .Where(fk => foreignKey.DeclaringEntityType == fk.DeclaringEntityType);
+        var allForeignKeysBetweenDependentAndPrincipal = foreignKey.PrincipalEntityType
+            .GetReferencingForeignKeys()
+            .Where(fk => foreignKey.DeclaringEntityType == fk.DeclaringEntityType);
 
         return allForeignKeysBetweenDependentAndPrincipal?.Count() > 1
-            ? foreignKey.DeclaringEntityType.ShortName()
-            + dependentEndNavigationPropertyName
+            ? foreignKey.DeclaringEntityType.ShortName() + dependentEndNavigationPropertyName
             : foreignKey.DeclaringEntityType.ShortName();
     }
 
@@ -79,8 +83,7 @@ public class CandidateNamingService : ICandidateNamingService
         foreach (var c in originalIdentifier)
         {
             var isNotLetterOrDigit = !char.IsLetterOrDigit(c);
-            if (isNotLetterOrDigit
-                || (previousLetterCharInWordIsLowerCase && char.IsUpper(c)))
+            if (isNotLetterOrDigit || (previousLetterCharInWordIsLowerCase && char.IsUpper(c)))
             {
                 isFirstCharacterInWord = true;
                 previousLetterCharInWordIsLowerCase = false;
@@ -91,7 +94,8 @@ public class CandidateNamingService : ICandidateNamingService
             }
 
             candidateStringBuilder.Append(
-                isFirstCharacterInWord ? char.ToUpperInvariant(c) : char.ToLowerInvariant(c));
+                isFirstCharacterInWord ? char.ToUpperInvariant(c) : char.ToLowerInvariant(c)
+            );
             isFirstCharacterInWord = false;
             if (char.IsLower(c))
             {
@@ -114,7 +118,8 @@ public class CandidateNamingService : ICandidateNamingService
         return StripId(
             count == 1
                 ? firstProperty.Name
-                : FindCommonPrefix(firstProperty.Name, properties.Select(p => p.Name)));
+                : FindCommonPrefix(firstProperty.Name, properties.Select(p => p.Name))
+        );
     }
 
     private static string FindCommonPrefix(string firstName, IEnumerable<string> propertyNames)
@@ -124,8 +129,7 @@ public class CandidateNamingService : ICandidateNamingService
         {
             foreach (var s in propertyNames)
             {
-                if (s.Length <= prefixLength
-                    || s[prefixLength] != c)
+                if (s.Length <= prefixLength || s[prefixLength] != c)
                 {
                     return firstName[..prefixLength];
                 }
@@ -139,8 +143,10 @@ public class CandidateNamingService : ICandidateNamingService
 
     private static string StripId(string commonPrefix)
     {
-        if (commonPrefix.Length < 3
-            || !commonPrefix.EndsWith("id", StringComparison.OrdinalIgnoreCase))
+        if (
+            commonPrefix.Length < 3
+            || !commonPrefix.EndsWith("id", StringComparison.OrdinalIgnoreCase)
+        )
         {
             return commonPrefix;
         }
@@ -154,8 +160,6 @@ public class CandidateNamingService : ICandidateNamingService
             }
         }
 
-        return i != 0
-            ? commonPrefix[..(i + 1)]
-            : commonPrefix;
+        return i != 0 ? commonPrefix[..(i + 1)] : commonPrefix;
     }
 }

@@ -61,10 +61,18 @@ namespace System
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.array);
 
             ref byte ptr = ref MemoryMarshal.GetArrayDataReference(array);
-            nuint byteLength = array.NativeLength * (nuint)(uint)array.GetElementSize() /* force zero-extension */;
+            nuint byteLength =
+                array.NativeLength
+                * (nuint)
+                    (uint)
+                        array.GetElementSize() /* force zero-extension */
+            ;
 
             if (RuntimeHelpers.ObjectHasReferences(array))
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<byte, IntPtr>(ref ptr), byteLength / (uint)sizeof(IntPtr));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<byte, IntPtr>(ref ptr),
+                    byteLength / (uint)sizeof(IntPtr)
+                );
             else
                 SpanHelpers.ClearWithoutReferences(ref ptr, byteLength);
         }
@@ -80,19 +88,36 @@ namespace System
 
             int offset = index - lowerBound;
 
-            if (index < lowerBound || offset < 0 || length < 0 || (uint)(offset + length) > numComponents)
+            if (
+                index < lowerBound
+                || offset < 0
+                || length < 0
+                || (uint)(offset + length) > numComponents
+            )
                 ThrowHelper.ThrowIndexOutOfRangeException();
 
-            ref byte ptr = ref Unsafe.AddByteOffset(ref MemoryMarshal.GetArrayDataReference(array), (uint)offset * (nuint)elementSize);
+            ref byte ptr = ref Unsafe.AddByteOffset(
+                ref MemoryMarshal.GetArrayDataReference(array),
+                (uint)offset * (nuint)elementSize
+            );
             nuint byteLength = (uint)length * (nuint)elementSize;
 
             if (RuntimeHelpers.ObjectHasReferences(array))
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<byte, IntPtr>(ref ptr), byteLength / (uint)sizeof(IntPtr));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<byte, IntPtr>(ref ptr),
+                    byteLength / (uint)sizeof(IntPtr)
+                );
             else
                 SpanHelpers.ClearWithoutReferences(ref ptr, byteLength);
         }
 
-        public static void ConstrainedCopy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length)
+        public static void ConstrainedCopy(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        )
         {
             Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length, true);
         }
@@ -102,22 +127,43 @@ namespace System
             ArgumentNullException.ThrowIfNull(sourceArray);
             ArgumentNullException.ThrowIfNull(destinationArray);
 
-            Copy(sourceArray, sourceArray.GetLowerBound(0), destinationArray,
-                destinationArray.GetLowerBound(0), length);
+            Copy(
+                sourceArray,
+                sourceArray.GetLowerBound(0),
+                destinationArray,
+                destinationArray.GetLowerBound(0),
+                length
+            );
         }
 
-        public static void Copy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length)
+        public static void Copy(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length
+        )
         {
             Copy(sourceArray, sourceIndex, destinationArray, destinationIndex, length, false);
         }
 
-        private static void Copy(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static void Copy(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
             ArgumentNullException.ThrowIfNull(sourceArray);
             ArgumentNullException.ThrowIfNull(destinationArray);
 
             if (length < 0)
-                throw new ArgumentOutOfRangeException(nameof(length), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(length),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
 
             if (sourceArray.Rank != destinationArray.Rank)
                 throw new RankException(SR.Rank_MultiDimNotSupported);
@@ -126,24 +172,47 @@ namespace System
                 throw new ArgumentOutOfRangeException(nameof(sourceIndex), "Value has to be >= 0.");
 
             if (destinationIndex < 0)
-                throw new ArgumentOutOfRangeException(nameof(destinationIndex), "Value has to be >= 0.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(destinationIndex),
+                    "Value has to be >= 0."
+                );
 
             if (FastCopy(sourceArray, sourceIndex, destinationArray, destinationIndex, length))
                 return;
 
-            CopySlow(sourceArray, sourceIndex, destinationArray, destinationIndex, length, reliable);
+            CopySlow(
+                sourceArray,
+                sourceIndex,
+                destinationArray,
+                destinationIndex,
+                length,
+                reliable
+            );
         }
 
-        private static void CopySlow(Array sourceArray, int sourceIndex, Array destinationArray, int destinationIndex, int length, bool reliable)
+        private static void CopySlow(
+            Array sourceArray,
+            int sourceIndex,
+            Array destinationArray,
+            int destinationIndex,
+            int length,
+            bool reliable
+        )
         {
             int source_pos = sourceIndex - sourceArray.GetLowerBound(0);
             int dest_pos = destinationIndex - destinationArray.GetLowerBound(0);
 
             if (source_pos < 0)
-                throw new ArgumentOutOfRangeException(nameof(sourceIndex), SR.ArgumentOutOfRange_ArrayLB);
+                throw new ArgumentOutOfRangeException(
+                    nameof(sourceIndex),
+                    SR.ArgumentOutOfRange_ArrayLB
+                );
 
             if (dest_pos < 0)
-                throw new ArgumentOutOfRangeException(nameof(destinationIndex), SR.ArgumentOutOfRange_ArrayLB);
+                throw new ArgumentOutOfRangeException(
+                    nameof(destinationIndex),
+                    SR.ArgumentOutOfRange_ArrayLB
+                );
 
             // re-ordered to avoid possible integer overflow
             if (source_pos > sourceArray.Length - length)
@@ -167,8 +236,14 @@ namespace System
 
             if (reliable)
             {
-                if (!dst_type.Equals(src_type) &&
-                    !(dst_type.IsPrimitive && src_type.IsPrimitive && CanChangePrimitive(ref dst_type, ref src_type, true)))
+                if (
+                    !dst_type.Equals(src_type)
+                    && !(
+                        dst_type.IsPrimitive
+                        && src_type.IsPrimitive
+                        && CanChangePrimitive(ref dst_type, ref src_type, true)
+                    )
+                )
                 {
                     throw new ArrayTypeMismatchException(SR.ArrayTypeMismatch_CantAssignType);
                 }
@@ -187,7 +262,16 @@ namespace System
                 {
                     object srcval = sourceArray.GetValueImpl(source_pos + i);
 
-                    if (dst_type_vt && (srcval == null || (src_type == typeof(object) && !dst_elem_type.IsAssignableFrom (srcval.GetType()))))
+                    if (
+                        dst_type_vt
+                        && (
+                            srcval == null
+                            || (
+                                src_type == typeof(object)
+                                && !dst_elem_type.IsAssignableFrom(srcval.GetType())
+                            )
+                        )
+                    )
                         throw new InvalidCastException(SR.InvalidCast_DownCastArrayElement);
 
                     try
@@ -230,9 +314,10 @@ namespace System
                 if (!source.IsValueType && !source.IsPointer)
                 {
                     // Reference to reference copy
-                    return
-                        source.IsInterface || target.IsInterface ||
-                        source.IsAssignableFrom(target) || target.IsAssignableFrom(source);
+                    return source.IsInterface
+                        || target.IsInterface
+                        || source.IsAssignableFrom(target)
+                        || target.IsAssignableFrom(source);
                 }
                 else
                 {
@@ -254,7 +339,6 @@ namespace System
                 }
                 else if (source.IsPrimitive && target.IsPrimitive)
                 {
-
                     // Allow primitive type widening
                     return CanChangePrimitive(ref source, ref target, false);
                 }
@@ -270,16 +354,27 @@ namespace System
             return false;
         }
 
-        private static unsafe Array InternalCreate(RuntimeType elementType, int rank, int* lengths, int* lowerBounds)
+        private static unsafe Array InternalCreate(
+            RuntimeType elementType,
+            int rank,
+            int* lengths,
+            int* lowerBounds
+        )
         {
             Array? array = null;
-            InternalCreate(ref array, elementType._impl.Value,  rank, lengths, lowerBounds);
+            InternalCreate(ref array, elementType._impl.Value, rank, lengths, lowerBounds);
             GC.KeepAlive(elementType);
             return array!;
         }
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        private static extern unsafe void InternalCreate(ref Array? result, IntPtr elementType, int rank, int* lengths, int* lowerBounds);
+        private static extern unsafe void InternalCreate(
+            ref Array? result,
+            IntPtr elementType,
+            int rank,
+            int* lengths,
+            int* lowerBounds
+        );
 
         private unsafe nint GetFlattenedIndex(ReadOnlySpan<int> indices)
         {
@@ -315,9 +410,7 @@ namespace System
             SetValueImpl(value, (int)index);
         }
 
-        public void Initialize()
-        {
-        }
+        public void Initialize() { }
 
         private static int IndexOfImpl<T>(T[] array, T value, int startIndex, int count)
         {
@@ -347,10 +440,20 @@ namespace System
         private extern bool IsValueOfElementType(object value);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern bool CanChangePrimitive(ref Type srcType, ref Type dstType, bool reliable);
+        private static extern bool CanChangePrimitive(
+            ref Type srcType,
+            ref Type dstType,
+            bool reliable
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern bool FastCopy(Array source, int source_idx, Array dest, int dest_idx, int length);
+        internal static extern bool FastCopy(
+            Array source,
+            int source_idx,
+            Array dest,
+            int dest_idx,
+            int length
+        );
 
         [Intrinsic] // when dimension is `0` constant
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -413,22 +516,30 @@ namespace System
 
         internal IEnumerator<T> InternalArray__IEnumerable_GetEnumerator<T>()
         {
-            return Length == 0 ? SZGenericArrayEnumerator<T>.Empty : new SZGenericArrayEnumerator<T>(Unsafe.As<T[]>(this));
+            return Length == 0
+                ? SZGenericArrayEnumerator<T>.Empty
+                : new SZGenericArrayEnumerator<T>(Unsafe.As<T[]>(this));
         }
 
         internal void InternalArray__ICollection_Clear()
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_ReadOnlyCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_ReadOnlyCollection
+            );
         }
 
         internal void InternalArray__ICollection_Add<T>(T _)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
         }
 
         internal bool InternalArray__ICollection_Remove<T>(T _)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
             return default;
         }
 
@@ -460,12 +571,16 @@ namespace System
 
         internal void InternalArray__Insert<T>(int _, T _1)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
         }
 
         internal void InternalArray__RemoveAt(int _)
         {
-            ThrowHelper.ThrowNotSupportedException(ExceptionResource.NotSupported_FixedSizeCollection);
+            ThrowHelper.ThrowNotSupportedException(
+                ExceptionResource.NotSupported_FixedSizeCollection
+            );
         }
 
         internal int InternalArray__IndexOf<T>(T item)

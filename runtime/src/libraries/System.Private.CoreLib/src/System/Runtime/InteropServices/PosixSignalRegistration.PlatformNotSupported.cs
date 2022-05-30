@@ -10,8 +10,10 @@ namespace System.Runtime.InteropServices
         private PosixSignalRegistration() { }
 
         [DynamicDependency("#ctor")] // Prevent the private ctor and the IDisposable implementation from getting linked away
-        private static PosixSignalRegistration Register(PosixSignal signal, Action<PosixSignalContext> handler) =>
-            throw new PlatformNotSupportedException();
+        private static PosixSignalRegistration Register(
+            PosixSignal signal,
+            Action<PosixSignalContext> handler
+        ) => throw new PlatformNotSupportedException();
 
         partial void Unregister();
     }

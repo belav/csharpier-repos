@@ -23,9 +23,8 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
         : base(
             (a, b) => Compare(a, b, (ValueComparer<TElement>)elementComparer),
             o => GetHashCode(o, (ValueComparer<TElement>)elementComparer),
-            source => Snapshot(source, (ValueComparer<TElement>)elementComparer))
-    {
-    }
+            source => Snapshot(source, (ValueComparer<TElement>)elementComparer)
+        ) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -33,10 +32,13 @@ public sealed class SingleDimensionalArrayComparer<TElement> : ValueComparer<TEl
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override Type Type
-        => typeof(TElement[]);
+    public override Type Type => typeof(TElement[]);
 
-    private static bool Compare(TElement[]? a, TElement[]? b, ValueComparer<TElement> elementComparer)
+    private static bool Compare(
+        TElement[]? a,
+        TElement[]? b,
+        ValueComparer<TElement> elementComparer
+    )
     {
         if (a is null)
         {

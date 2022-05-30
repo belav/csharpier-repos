@@ -18,7 +18,8 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 {
-    internal abstract class AbstractFormatDocumentHandlerBase<RequestType, ResponseType> : IRequestHandler<RequestType, ResponseType>
+    internal abstract class AbstractFormatDocumentHandlerBase<RequestType, ResponseType>
+        : IRequestHandler<RequestType, ResponseType>
     {
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
@@ -28,30 +29,51 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             LSP.FormattingOptions options,
             IGlobalOptionService globalOptions,
             CancellationToken cancellationToken,
-            LSP.Range? range = null)
+            LSP.Range? range = null
+        )
         {
             var document = context.Document;
             if (document == null)
                 return null;
 
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
-            var rangeSpan = (range != null) ? ProtocolConversions.RangeToTextSpan(range, text) : new TextSpan(0, root.FullSpan.Length);
+            var rangeSpan =
+                (range != null)
+                    ? ProtocolConversions.RangeToTextSpan(range, text)
+                    : new TextSpan(0, root.FullSpan.Length);
             var formattingSpan = CommonFormattingHelpers.GetFormattingSpan(root, rangeSpan);
 
             // We should use the options passed in by LSP instead of the document's options.
-            var formattingOptions = await ProtocolConversions.GetFormattingOptionsAsync(options, document, globalOptions, cancellationToken).ConfigureAwait(false);
+            var formattingOptions = await ProtocolConversions
+                .GetFormattingOptionsAsync(options, document, globalOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             var services = document.Project.Solution.Workspace.Services;
-            var textChanges = Formatter.GetFormattedTextChanges(root, SpecializedCollections.SingletonEnumerable(formattingSpan), services, formattingOptions, rules: null, cancellationToken);
+            var textChanges = Formatter.GetFormattedTextChanges(
+                root,
+                SpecializedCollections.SingletonEnumerable(formattingSpan),
+                services,
+                formattingOptions,
+                rules: null,
+                cancellationToken
+            );
 
             var edits = new ArrayBuilder<LSP.TextEdit>();
-            edits.AddRange(textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text)));
+            edits.AddRange(
+                textChanges.Select(change => ProtocolConversions.TextChangeToTextEdit(change, text))
+            );
             return edits.ToArrayAndFree();
         }
 
         public abstract TextDocumentIdentifier? GetTextDocumentIdentifier(RequestType request);
-        public abstract Task<ResponseType> HandleRequestAsync(RequestType request, RequestContext context, CancellationToken cancellationToken);
+        public abstract Task<ResponseType> HandleRequestAsync(
+            RequestType request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -123,8 +123,11 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* AllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData) =>
-            AllocateNativeOverlapped(callback, state, pinData, flowExecutionContext: true);
+        public unsafe NativeOverlapped* AllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => AllocateNativeOverlapped(callback, state, pinData, flowExecutionContext: true);
 
         /// <summary>
         ///     Returns an unmanaged pointer to a <see cref="NativeOverlapped"/> structure, specifying
@@ -171,16 +174,30 @@ namespace System.Threading
         ///     This method was called after the <see cref="ThreadPoolBoundHandle"/> was disposed.
         /// </exception>
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* UnsafeAllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData) =>
-            AllocateNativeOverlapped(callback, state, pinData, flowExecutionContext: false);
+        public unsafe NativeOverlapped* UnsafeAllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => AllocateNativeOverlapped(callback, state, pinData, flowExecutionContext: false);
 
-        private unsafe NativeOverlapped* AllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData, bool flowExecutionContext)
+        private unsafe NativeOverlapped* AllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            bool flowExecutionContext
+        )
         {
             ArgumentNullException.ThrowIfNull(callback);
 
             EnsureNotDisposed();
 
-            ThreadPoolBoundHandleOverlapped overlapped = new ThreadPoolBoundHandleOverlapped(callback, state, pinData, preAllocated: null, flowExecutionContext);
+            ThreadPoolBoundHandleOverlapped overlapped = new ThreadPoolBoundHandleOverlapped(
+                callback,
+                state,
+                pinData,
+                preAllocated: null,
+                flowExecutionContext
+            );
             overlapped._boundHandle = this;
             return overlapped._nativeOverlapped;
         }
@@ -214,7 +231,9 @@ namespace System.Threading
         /// </exception>
         /// <seealso cref="PreAllocatedOverlapped"/>
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* AllocateNativeOverlapped(PreAllocatedOverlapped preAllocated)
+        public unsafe NativeOverlapped* AllocateNativeOverlapped(
+            PreAllocatedOverlapped preAllocated
+        )
         {
             ArgumentNullException.ThrowIfNull(preAllocated);
 
@@ -226,7 +245,10 @@ namespace System.Threading
                 ThreadPoolBoundHandleOverlapped overlapped = preAllocated._overlapped;
 
                 if (overlapped._boundHandle != null)
-                    throw new ArgumentException(SR.Argument_PreAllocatedAlreadyAllocated, nameof(preAllocated));
+                    throw new ArgumentException(
+                        SR.Argument_PreAllocatedAlreadyAllocated,
+                        nameof(preAllocated)
+                    );
 
                 overlapped._boundHandle = this;
 
@@ -272,7 +294,10 @@ namespace System.Threading
             ThreadPoolBoundHandleOverlapped wrapper = GetOverlappedWrapper(overlapped);
 
             if (wrapper._boundHandle != this)
-                throw new ArgumentException(SR.Argument_NativeOverlappedWrongBoundHandle, nameof(overlapped));
+                throw new ArgumentException(
+                    SR.Argument_NativeOverlappedWrongBoundHandle,
+                    nameof(overlapped)
+                );
 
             if (wrapper._preAllocated != null)
                 wrapper._preAllocated.Release();
@@ -306,7 +331,9 @@ namespace System.Threading
             return wrapper._userState;
         }
 
-        private static unsafe ThreadPoolBoundHandleOverlapped GetOverlappedWrapper(NativeOverlapped* overlapped)
+        private static unsafe ThreadPoolBoundHandleOverlapped GetOverlappedWrapper(
+            NativeOverlapped* overlapped
+        )
         {
             ThreadPoolBoundHandleOverlapped wrapper;
             try
@@ -315,7 +342,11 @@ namespace System.Threading
             }
             catch (NullReferenceException ex)
             {
-                throw new ArgumentException(SR.Argument_NativeOverlappedAlreadyFree, nameof(overlapped), ex);
+                throw new ArgumentException(
+                    SR.Argument_NativeOverlappedAlreadyFree,
+                    nameof(overlapped),
+                    ex
+                );
             }
 
             return wrapper;

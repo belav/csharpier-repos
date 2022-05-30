@@ -9,7 +9,6 @@ namespace Microsoft.CodeAnalysis.FindSymbols
     internal sealed class MetadataUnifyingSymbolHashSet : HashSet<ISymbol>
     {
         public MetadataUnifyingSymbolHashSet() : base(MetadataUnifyingEquivalenceComparer.Instance)
-        {
-        }
+        { }
     }
 }

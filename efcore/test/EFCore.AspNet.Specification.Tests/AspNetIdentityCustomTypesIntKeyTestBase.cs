@@ -7,15 +7,32 @@ using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 namespace Microsoft.EntityFrameworkCore;
 
 public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
-    : AspNetIdentityTestBase<TFixture, CustomTypesIdentityContextInt, CustomUserInt, CustomRoleInt, int, CustomUserClaimInt,
-        CustomUserRoleInt, CustomUserLoginInt, CustomRoleClaimInt, CustomUserTokenInt>
-    where TFixture : AspNetIdentityTestBase<TFixture, CustomTypesIdentityContextInt, CustomUserInt, CustomRoleInt, int, CustomUserClaimInt,
-        CustomUserRoleInt, CustomUserLoginInt, CustomRoleClaimInt, CustomUserTokenInt>.AspNetIdentityFixtureBase
+    : AspNetIdentityTestBase<
+        TFixture,
+        CustomTypesIdentityContextInt,
+        CustomUserInt,
+        CustomRoleInt,
+        int,
+        CustomUserClaimInt,
+        CustomUserRoleInt,
+        CustomUserLoginInt,
+        CustomRoleClaimInt,
+        CustomUserTokenInt
+    >
+    where TFixture : AspNetIdentityTestBase<
+            TFixture,
+            CustomTypesIdentityContextInt,
+            CustomUserInt,
+            CustomRoleInt,
+            int,
+            CustomUserClaimInt,
+            CustomUserRoleInt,
+            CustomUserLoginInt,
+            CustomRoleClaimInt,
+            CustomUserTokenInt
+        >.AspNetIdentityFixtureBase
 {
-    protected AspNetIdentityCustomTypesIntKeyTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    protected AspNetIdentityCustomTypesIntKeyTestBase(TFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
     public async Task Can_use_navigation_properties_on_User()
@@ -42,11 +59,12 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
                 Assert.Equal(2, user.Logins.Count);
                 Assert.Equal(1, user.Tokens.Count);
                 Assert.Equal(2, user.UserRoles.Count);
-            });
+            }
+        );
     }
 
-    protected override List<EntityTypeMapping> ExpectedMappings
-        => new()
+    protected override List<EntityTypeMapping> ExpectedMappings =>
+        new()
         {
             new EntityTypeMapping
             {
@@ -61,7 +79,10 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
                     "Property: CustomRoleClaimInt.RoleId (int) Required FK Index",
                 },
                 Indexes = { "{'RoleId'} ", },
-                FKs = { "ForeignKey: CustomRoleClaimInt {'RoleId'} -> CustomRoleInt {'Id'} Cascade", },
+                FKs =
+                {
+                    "ForeignKey: CustomRoleClaimInt {'RoleId'} -> CustomRoleInt {'Id'} Cascade",
+                },
             },
             new EntityTypeMapping
             {
@@ -90,7 +111,10 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
                     "Property: CustomUserClaimInt.UserId (int) Required FK Index",
                 },
                 Indexes = { "{'UserId'} ", },
-                FKs = { "ForeignKey: CustomUserClaimInt {'UserId'} -> CustomUserInt {'Id'} ToDependent: Claims Cascade", },
+                FKs =
+                {
+                    "ForeignKey: CustomUserClaimInt {'UserId'} -> CustomUserInt {'Id'} ToDependent: Claims Cascade",
+                },
             },
             new EntityTypeMapping
             {
@@ -116,10 +140,7 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
                     "Property: CustomUserInt.TwoFactorEnabled (bool) Required",
                     "Property: CustomUserInt.UserName (string) MaxLength(256)",
                 },
-                Indexes =
-                {
-                    "{'NormalizedEmail'} ", "{'NormalizedUserName'} Unique",
-                },
+                Indexes = { "{'NormalizedEmail'} ", "{'NormalizedUserName'} Unique", },
                 Navigations =
                 {
                     "Navigation: CustomUserInt.Claims (ICollection<CustomUserClaimInt>) Collection ToDependent CustomUserClaimInt",
@@ -132,7 +153,8 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
             {
                 Name = "Microsoft.EntityFrameworkCore.CustomUserLoginInt",
                 TableName = "AspNetUserLogins",
-                PrimaryKey = "Key: CustomUserLoginInt.LoginProvider, CustomUserLoginInt.ProviderKey PK",
+                PrimaryKey =
+                    "Key: CustomUserLoginInt.LoginProvider, CustomUserLoginInt.ProviderKey PK",
                 Properties =
                 {
                     "Property: CustomUserLoginInt.LoginProvider (string) Required PK AfterSave:Throw",
@@ -141,7 +163,10 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
                     "Property: CustomUserLoginInt.UserId (int) Required FK Index",
                 },
                 Indexes = { "{'UserId'} ", },
-                FKs = { "ForeignKey: CustomUserLoginInt {'UserId'} -> CustomUserInt {'Id'} ToDependent: Logins Cascade", },
+                FKs =
+                {
+                    "ForeignKey: CustomUserLoginInt {'UserId'} -> CustomUserInt {'Id'} ToDependent: Logins Cascade",
+                },
             },
             new EntityTypeMapping
             {
@@ -164,7 +189,8 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
             {
                 Name = "Microsoft.EntityFrameworkCore.CustomUserTokenInt",
                 TableName = "AspNetUserTokens",
-                PrimaryKey = "Key: CustomUserTokenInt.UserId, CustomUserTokenInt.LoginProvider, CustomUserTokenInt.Name PK",
+                PrimaryKey =
+                    "Key: CustomUserTokenInt.UserId, CustomUserTokenInt.LoginProvider, CustomUserTokenInt.Name PK",
                 Properties =
                 {
                     "Property: CustomUserTokenInt.UserId (int) Required PK FK AfterSave:Throw",
@@ -172,31 +198,39 @@ public abstract class AspNetIdentityCustomTypesIntKeyTestBase<TFixture>
                     "Property: CustomUserTokenInt.Name (string) Required PK AfterSave:Throw",
                     "Property: CustomUserTokenInt.Value (string)",
                 },
-                FKs = { "ForeignKey: CustomUserTokenInt {'UserId'} -> CustomUserInt {'Id'} ToDependent: Tokens Cascade", },
+                FKs =
+                {
+                    "ForeignKey: CustomUserTokenInt {'UserId'} -> CustomUserInt {'Id'} ToDependent: Tokens Cascade",
+                },
             },
         };
 }
 
-public class CustomTypesIdentityContextInt : IdentityDbContext<CustomUserInt, CustomRoleInt, int, CustomUserClaimInt, CustomUserRoleInt,
-    CustomUserLoginInt, CustomRoleClaimInt, CustomUserTokenInt>
+public class CustomTypesIdentityContextInt
+    : IdentityDbContext<
+        CustomUserInt,
+        CustomRoleInt,
+        int,
+        CustomUserClaimInt,
+        CustomUserRoleInt,
+        CustomUserLoginInt,
+        CustomRoleClaimInt,
+        CustomUserTokenInt
+    >
 {
-    public CustomTypesIdentityContextInt(DbContextOptions options)
-        : base(options)
-    {
-    }
+    public CustomTypesIdentityContextInt(DbContextOptions options) : base(options) { }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
     {
         base.OnModelCreating(modelBuilder);
 
-        modelBuilder.Entity<CustomUserInt>(
-            b =>
-            {
-                b.HasMany(e => e.Claims).WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
-                b.HasMany(e => e.Logins).WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
-                b.HasMany(e => e.Tokens).WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
-                b.HasMany(e => e.UserRoles).WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
-            });
+        modelBuilder.Entity<CustomUserInt>(b =>
+        {
+            b.HasMany(e => e.Claims).WithOne().HasForeignKey(uc => uc.UserId).IsRequired();
+            b.HasMany(e => e.Logins).WithOne().HasForeignKey(ul => ul.UserId).IsRequired();
+            b.HasMany(e => e.Tokens).WithOne().HasForeignKey(ut => ut.UserId).IsRequired();
+            b.HasMany(e => e.UserRoles).WithOne().HasForeignKey(ur => ur.UserId).IsRequired();
+        });
     }
 }
 
@@ -209,26 +243,14 @@ public class CustomUserInt : IdentityUser<int>
     public virtual ICollection<CustomUserRoleInt> UserRoles { get; set; }
 }
 
-public class CustomRoleInt : IdentityRole<int>
-{
-}
+public class CustomRoleInt : IdentityRole<int> { }
 
-public class CustomUserClaimInt : IdentityUserClaim<int>
-{
-}
+public class CustomUserClaimInt : IdentityUserClaim<int> { }
 
-public class CustomUserRoleInt : IdentityUserRole<int>
-{
-}
+public class CustomUserRoleInt : IdentityUserRole<int> { }
 
-public class CustomUserLoginInt : IdentityUserLogin<int>
-{
-}
+public class CustomUserLoginInt : IdentityUserLogin<int> { }
 
-public class CustomRoleClaimInt : IdentityRoleClaim<int>
-{
-}
+public class CustomRoleClaimInt : IdentityRoleClaim<int> { }
 
-public class CustomUserTokenInt : IdentityUserToken<int>
-{
-}
+public class CustomUserTokenInt : IdentityUserToken<int> { }

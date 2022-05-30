@@ -27,10 +27,14 @@ namespace System.Threading.RateLimiting
 
         private static readonly RateLimitLease SuccessfulLease = new FixedWindowLease(true, null);
         private static readonly RateLimitLease FailedLease = new FixedWindowLease(false, null);
-        private static readonly double TickFrequency = (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
+        private static readonly double TickFrequency =
+            (double)TimeSpan.TicksPerSecond / Stopwatch.Frequency;
 
         /// <inheritdoc />
-        public override TimeSpan? IdleDuration => _idleSince is null ? null : new TimeSpan((long)((Stopwatch.GetTimestamp() - _idleSince) * TickFrequency));
+        public override TimeSpan? IdleDuration =>
+            _idleSince is null
+                ? null
+                : new TimeSpan((long)((Stopwatch.GetTimestamp() - _idleSince) * TickFrequency));
 
         /// <inheritdoc />
         public override bool IsAutoReplenishing => _options.AutoReplenishment;
@@ -65,7 +69,11 @@ namespace System.Threading.RateLimiting
             // Raises a PermitLimitExceeded ArgumentOutOFRangeException
             if (requestCount > _options.PermitLimit)
             {
-                throw new ArgumentOutOfRangeException(nameof(requestCount), requestCount, SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit));
+                throw new ArgumentOutOfRangeException(
+                    nameof(requestCount),
+                    requestCount,
+                    SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit)
+                );
             }
 
             // Return SuccessfulLease or FailedLease depending to indicate limiter state
@@ -93,12 +101,19 @@ namespace System.Threading.RateLimiting
         }
 
         /// <inheritdoc/>
-        protected override ValueTask<RateLimitLease> WaitAsyncCore(int requestCount, CancellationToken cancellationToken = default)
+        protected override ValueTask<RateLimitLease> WaitAsyncCore(
+            int requestCount,
+            CancellationToken cancellationToken = default
+        )
         {
             // These amounts of resources can never be acquired
             if (requestCount > _options.PermitLimit)
             {
-                throw new ArgumentOutOfRangeException(nameof(requestCount), requestCount, SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit));
+                throw new ArgumentOutOfRangeException(
+                    nameof(requestCount),
+                    requestCount,
+                    SR.Format(SR.PermitLimitExceeded, requestCount, _options.PermitLimit)
+                );
             }
 
             ThrowIfDisposed();
@@ -120,7 +135,10 @@ namespace System.Threading.RateLimiting
                 Debug.Assert(_options.QueueLimit >= _queueCount);
                 if (_options.QueueLimit - _queueCount < requestCount)
                 {
-                    if (_options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst && requestCount <= _options.QueueLimit)
+                    if (
+                        _options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst
+                        && requestCount <= _options.QueueLimit
+                    )
                     {
                         // remove oldest items from queue until there is space for the newest acquisition request
                         do
@@ -132,8 +150,7 @@ namespace System.Threading.RateLimiting
                             {
                                 _queueCount += oldestRequest.Count;
                             }
-                        }
-                        while (_options.QueueLimit - _queueCount < requestCount);
+                        } while (_options.QueueLimit - _queueCount < requestCount);
                     }
                     else
                     {
@@ -146,10 +163,13 @@ namespace System.Threading.RateLimiting
                 CancellationTokenRegistration ctr = default;
                 if (cancellationToken.CanBeCanceled)
                 {
-                    ctr = cancellationToken.Register(static obj =>
-                    {
-                        ((CancelQueueState)obj!).TrySetCanceled();
-                    }, tcs);
+                    ctr = cancellationToken.Register(
+                        static obj =>
+                        {
+                            ((CancelQueueState)obj!).TrySetCanceled();
+                        },
+                        tcs
+                    );
                 }
 
                 RequestRegistration registration = new RequestRegistration(requestCount, tcs, ctr);
@@ -167,10 +187,16 @@ namespace System.Threading.RateLimiting
             // can't have 0 replenish window, that would mean it should be a successful lease
             int replenishWindow = Math.Max(replenishAmount / _options.PermitLimit, 1);
 
-            return new FixedWindowLease(false, TimeSpan.FromTicks(_options.Window.Ticks * replenishWindow));
+            return new FixedWindowLease(
+                false,
+                TimeSpan.FromTicks(_options.Window.Ticks * replenishWindow)
+            );
         }
 
-        private bool TryLeaseUnsynchronized(int requestCount, [NotNullWhen(true)] out RateLimitLease? lease)
+        private bool TryLeaseUnsynchronized(
+            int requestCount,
+            [NotNullWhen(true)] out RateLimitLease? lease
+        )
         {
             ThrowIfDisposed();
 
@@ -186,7 +212,13 @@ namespace System.Threading.RateLimiting
 
                 // a. If there are no items queued we can lease
                 // b. If there are items queued but the processing order is newest first, then we can lease the incoming request since it is the newest
-                if (_queueCount == 0 || (_queueCount > 0 && _options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst))
+                if (
+                    _queueCount == 0
+                    || (
+                        _queueCount > 0
+                        && _options.QueueProcessingOrder == QueueProcessingOrder.NewestFirst
+                    )
+                )
                 {
                     _idleSince = null;
                     _requestCount -= requestCount;
@@ -238,7 +270,10 @@ namespace System.Threading.RateLimiting
                     return;
                 }
 
-                if ((long)((nowTicks - _lastReplenishmentTick) * TickFrequency) < _options.Window.Ticks)
+                if (
+                    (long)((nowTicks - _lastReplenishmentTick) * TickFrequency)
+                    < _options.Window.Ticks
+                )
                 {
                     return;
                 }
@@ -266,17 +301,17 @@ namespace System.Threading.RateLimiting
                 while (_queue.Count > 0)
                 {
                     RequestRegistration nextPendingRequest =
-                          _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
-                          ? _queue.PeekHead()
-                          : _queue.PeekTail();
+                        _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
+                            ? _queue.PeekHead()
+                            : _queue.PeekTail();
 
                     if (_requestCount >= nextPendingRequest.Count)
                     {
                         // Request can be fulfilled
                         nextPendingRequest =
                             _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
-                            ? _queue.DequeueHead()
-                            : _queue.DequeueTail();
+                                ? _queue.DequeueHead()
+                                : _queue.DequeueTail();
 
                         _queueCount -= nextPendingRequest.Count;
                         _requestCount -= nextPendingRequest.Count;
@@ -325,9 +360,10 @@ namespace System.Threading.RateLimiting
                 _renewTimer?.Dispose();
                 while (_queue.Count > 0)
                 {
-                    RequestRegistration next = _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
-                        ? _queue.DequeueHead()
-                        : _queue.DequeueTail();
+                    RequestRegistration next =
+                        _options.QueueProcessingOrder == QueueProcessingOrder.OldestFirst
+                            ? _queue.DequeueHead()
+                            : _queue.DequeueTail();
                     next.CancellationTokenRegistration.Dispose();
                     next.Tcs.TrySetResult(FailedLease);
                 }
@@ -351,7 +387,10 @@ namespace System.Threading.RateLimiting
 
         private sealed class FixedWindowLease : RateLimitLease
         {
-            private static readonly string[] s_allMetadataNames = new[] { MetadataName.RetryAfter.Name };
+            private static readonly string[] s_allMetadataNames = new[]
+            {
+                MetadataName.RetryAfter.Name
+            };
 
             private readonly TimeSpan? _retryAfter;
 
@@ -380,7 +419,11 @@ namespace System.Threading.RateLimiting
 
         private readonly struct RequestRegistration
         {
-            public RequestRegistration(int requestCount, TaskCompletionSource<RateLimitLease> tcs, CancellationTokenRegistration cancellationTokenRegistration)
+            public RequestRegistration(
+                int requestCount,
+                TaskCompletionSource<RateLimitLease> tcs,
+                CancellationTokenRegistration cancellationTokenRegistration
+            )
             {
                 Count = requestCount;
                 // Use VoidAsyncOperationWithData<T> instead
@@ -401,8 +444,11 @@ namespace System.Threading.RateLimiting
             private readonly FixedWindowRateLimiter _limiter;
             private readonly CancellationToken _cancellationToken;
 
-            public CancelQueueState(int requestCount, FixedWindowRateLimiter limiter, CancellationToken cancellationToken)
-                : base(TaskCreationOptions.RunContinuationsAsynchronously)
+            public CancelQueueState(
+                int requestCount,
+                FixedWindowRateLimiter limiter,
+                CancellationToken cancellationToken
+            ) : base(TaskCreationOptions.RunContinuationsAsynchronously)
             {
                 _requestCount = requestCount;
                 _limiter = limiter;

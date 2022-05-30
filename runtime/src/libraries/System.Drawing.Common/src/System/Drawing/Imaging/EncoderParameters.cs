@@ -22,14 +22,8 @@ namespace System.Drawing.Imaging
 
         public EncoderParameter[] Param
         {
-            get
-            {
-                return _param;
-            }
-            set
-            {
-                _param = value;
-            }
+            get { return _param; }
+            set { _param = value; }
         }
 
         /// <summary>
@@ -82,13 +76,20 @@ namespace System.Drawing.Imaging
             }
 
             int count = *(int*)memory;
-            EncoderParameterPrivate* parameters = (EncoderParameterPrivate*)((byte*)memory + IntPtr.Size);
+            EncoderParameterPrivate* parameters = (EncoderParameterPrivate*)(
+                (byte*)memory + IntPtr.Size
+            );
             EncoderParameters p = new EncoderParameters(count);
             for (int i = 0; i < count; i++)
             {
                 ref readonly EncoderParameterPrivate param = ref parameters[i];
 
-                p._param[i] = new EncoderParameter(new Encoder(param.ParameterGuid), param.NumberOfValues, param.ParameterValueType, param.ParameterValue);
+                p._param[i] = new EncoderParameter(
+                    new Encoder(param.ParameterGuid),
+                    param.NumberOfValues,
+                    param.ParameterValueType,
+                    param.ParameterValue
+                );
             }
 
             return p;

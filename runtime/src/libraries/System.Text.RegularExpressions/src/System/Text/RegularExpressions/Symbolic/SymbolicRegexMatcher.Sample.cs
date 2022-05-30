@@ -37,14 +37,21 @@ namespace System.Text.RegularExpressions.Symbolic
             CharSetSolver charSetSolver = _builder._charSetSolver;
 
             // Create helper BDDs for handling anchors and preferentially generating ASCII inputs
-            BDD asciiWordCharacters = charSetSolver.Or(new BDD[] {
-                charSetSolver.CreateSetFromRange('A', 'Z'),
-                charSetSolver.CreateSetFromRange('a', 'z'),
-                charSetSolver.CreateFromChar('_'),
-                charSetSolver.CreateSetFromRange('0', '9')});
+            BDD asciiWordCharacters = charSetSolver.Or(
+                new BDD[]
+                {
+                    charSetSolver.CreateSetFromRange('A', 'Z'),
+                    charSetSolver.CreateSetFromRange('a', 'z'),
+                    charSetSolver.CreateFromChar('_'),
+                    charSetSolver.CreateSetFromRange('0', '9')
+                }
+            );
             // Visible ASCII range for input character generation
             BDD ascii = charSetSolver.CreateSetFromRange('\x20', '\x7E');
-            BDD asciiNonWordCharacters = charSetSolver.And(ascii, charSetSolver.Not(asciiWordCharacters));
+            BDD asciiNonWordCharacters = charSetSolver.And(
+                ascii,
+                charSetSolver.Not(asciiWordCharacters)
+            );
 
             // Set up two sets of minterms, one with the additional special minterm for the last end-of-line
             Debug.Assert(_builder._minterms is not null);
@@ -82,8 +89,10 @@ namespace System.Text.RegularExpressions.Symbolic
                     if (NfaStateHandler.CanBeNullable(ref statesWrapper))
                     {
                         // Unconditionally final state or end of the input due to \Z anchor for example
-                        if (NfaStateHandler.IsNullable(ref statesWrapper) ||
-                            NfaStateHandler.IsNullable(ref statesWrapper, CharKind.BeginningEnd))
+                        if (
+                            NfaStateHandler.IsNullable(ref statesWrapper)
+                            || NfaStateHandler.IsNullable(ref statesWrapper, CharKind.BeginningEnd)
+                        )
                         {
                             possibleEndings.Add("");
                         }
@@ -97,13 +106,19 @@ namespace System.Text.RegularExpressions.Symbolic
                         // Related to wordborder due to \b or \B
                         if (NfaStateHandler.IsNullable(ref statesWrapper, CharKind.WordLetter))
                         {
-                            possibleEndings.Add(ChooseChar(random, asciiWordCharacters, ascii, charSetSolver).ToString());
+                            possibleEndings.Add(
+                                ChooseChar(random, asciiWordCharacters, ascii, charSetSolver)
+                                    .ToString()
+                            );
                         }
 
                         // Related to wordborder due to \b or \B
                         if (NfaStateHandler.IsNullable(ref statesWrapper, CharKind.General))
                         {
-                            possibleEndings.Add(ChooseChar(random, asciiNonWordCharacters, ascii, charSetSolver).ToString());
+                            possibleEndings.Add(
+                                ChooseChar(random, asciiNonWordCharacters, ascii, charSetSolver)
+                                    .ToString()
+                            );
                         }
                     }
 
@@ -125,18 +140,29 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
 
                     // Shuffle the minterms, including the last end-of-line marker if appropriate
-                    int[] mintermIds = NfaStateHandler.StartsWithLineAnchor(ref statesWrapper) ?
-                        Shuffle(random, mintermIdsWithZ) :
-                        Shuffle(random, mintermIdsWithoutZ);
+                    int[] mintermIds = NfaStateHandler.StartsWithLineAnchor(ref statesWrapper)
+                        ? Shuffle(random, mintermIdsWithZ)
+                        : Shuffle(random, mintermIdsWithoutZ);
                     foreach (int mintermId in mintermIds)
                     {
-                        bool success = NfaStateHandler.TakeTransition(_builder, ref statesWrapper, mintermId);
+                        bool success = NfaStateHandler.TakeTransition(
+                            _builder,
+                            ref statesWrapper,
+                            mintermId
+                        );
                         Debug.Assert(success);
                         if (states.NfaStateSet.Count > 0)
                         {
                             TSet minterm = _builder.GetMinterm(mintermId);
                             // Append a random member of the minterm
-                            inputSoFar.Append(ChooseChar(random, ToBDD(minterm, solver, charSetSolver), ascii, charSetSolver));
+                            inputSoFar.Append(
+                                ChooseChar(
+                                    random,
+                                    ToBDD(minterm, solver, charSetSolver),
+                                    ascii,
+                                    charSetSolver
+                                )
+                            );
                             break;
                         }
                         else
@@ -147,7 +173,10 @@ namespace System.Text.RegularExpressions.Symbolic
                     }
 
                     // In the case that there are no next states or input has become too large: stop here
-                    if (states.NfaStateSet.Count == 0 || inputSoFar.Length > SampleMatchesMaxInputLength)
+                    if (
+                        states.NfaStateSet.Count == 0
+                        || inputSoFar.Length > SampleMatchesMaxInputLength
+                    )
                     {
                         // Ending up here without an ending is unlikely but possible for example for infeasible patterns
                         // such as @"no\bway" or due to poor choice of c -- no anchor is enabled -- so this is a deadend.
@@ -160,7 +189,8 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            static BDD ToBDD(TSet set, ISolver<TSet> solver, CharSetSolver charSetSolver) => solver.ConvertToBDD(set, charSetSolver);
+            static BDD ToBDD(TSet set, ISolver<TSet> solver, CharSetSolver charSetSolver) =>
+                solver.ConvertToBDD(set, charSetSolver);
 
             static T Choose<T>(Random random, IList<T> elems) => elems[random.Next(elems.Count)];
 
@@ -169,11 +199,15 @@ namespace System.Text.RegularExpressions.Symbolic
                 Debug.Assert(!bdd.IsEmpty);
                 // Select characters from the visible ASCII range whenever possible
                 BDD bdd1 = charSetSolver.And(bdd, ascii);
-                (uint, uint) range = Choose(random, BDDRangeConverter.ToRanges(bdd1.IsEmpty ? bdd : bdd1));
+                (uint, uint) range = Choose(
+                    random,
+                    BDDRangeConverter.ToRanges(bdd1.IsEmpty ? bdd : bdd1)
+                );
                 return (char)random.Next((int)range.Item1, (int)range.Item2 + 1);
             }
 
-            static bool FlipBiasedCoin(Random random, double probTrue) => random.NextDouble() < probTrue;
+            static bool FlipBiasedCoin(Random random, double probTrue) =>
+                random.NextDouble() < probTrue;
 
             static T[] Shuffle<T>(Random random, T[] array)
             {

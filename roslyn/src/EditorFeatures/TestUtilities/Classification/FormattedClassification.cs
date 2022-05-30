@@ -19,7 +19,8 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
         public FormattedClassification(string text, string classificationName)
         {
             Text = text ?? throw new ArgumentNullException(nameof(text));
-            ClassificationName = classificationName ?? throw new ArgumentNullException(nameof(classificationName));
+            ClassificationName =
+                classificationName ?? throw new ArgumentNullException(nameof(classificationName));
         }
 
         public override bool Equals(object obj)
@@ -33,8 +34,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             return false;
         }
 
-        public override int GetHashCode()
-            => ClassificationName.GetHashCode() ^ Text.GetHashCode();
+        public override int GetHashCode() => ClassificationName.GetHashCode() ^ Text.GetHashCode();
 
         public override string ToString()
         {
@@ -104,7 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Classification
             }
         }
 
-        private static string Capitalize(string val)
-            => char.ToUpperInvariant(val[0]) + val.Substring(1);
+        private static string Capitalize(string val) =>
+            char.ToUpperInvariant(val[0]) + val.Substring(1);
     }
 }

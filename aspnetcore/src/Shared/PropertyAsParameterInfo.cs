@@ -18,7 +18,10 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
     private readonly NullabilityInfoContext _nullabilityContext;
     private NullabilityInfo? _nullabilityInfo;
 
-    public PropertyAsParameterInfo(PropertyInfo propertyInfo, NullabilityInfoContext? nullabilityContext = null)
+    public PropertyAsParameterInfo(
+        PropertyInfo propertyInfo,
+        NullabilityInfoContext? nullabilityContext = null
+    )
     {
         Debug.Assert(null != propertyInfo);
 
@@ -35,19 +38,22 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
         _underlyingProperty = propertyInfo;
     }
 
-    public PropertyAsParameterInfo(PropertyInfo property, ParameterInfo parameterInfo, NullabilityInfoContext? nullabilityContext = null)
-        : this(property, nullabilityContext)
+    public PropertyAsParameterInfo(
+        PropertyInfo property,
+        ParameterInfo parameterInfo,
+        NullabilityInfoContext? nullabilityContext = null
+    ) : this(property, nullabilityContext)
     {
         _constructionParameterInfo = parameterInfo;
     }
 
-    public override bool HasDefaultValue
-        => _constructionParameterInfo is not null && _constructionParameterInfo.HasDefaultValue;
-    public override object? DefaultValue
-        => _constructionParameterInfo is not null ? _constructionParameterInfo.DefaultValue : null;
+    public override bool HasDefaultValue =>
+        _constructionParameterInfo is not null && _constructionParameterInfo.HasDefaultValue;
+    public override object? DefaultValue =>
+        _constructionParameterInfo is not null ? _constructionParameterInfo.DefaultValue : null;
     public override int MetadataToken => _underlyingProperty.MetadataToken;
-    public override object? RawDefaultValue
-        => _constructionParameterInfo is not null ? _constructionParameterInfo.RawDefaultValue : null;
+    public override object? RawDefaultValue =>
+        _constructionParameterInfo is not null ? _constructionParameterInfo.RawDefaultValue : null;
 
     /// <summary>
     /// Unwraps all parameters that contains <see cref="AsParametersAttribute"/> and
@@ -58,8 +64,15 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
     /// <param name="parameters">List of parameters to be flattened.</param>
     /// <param name="cache">An instance of the method cache class.</param>
     /// <returns>Flat list of parameters.</returns>
-    [UnconditionalSuppressMessage("Trimmer", "IL2075", Justification = "PropertyAsParameterInfo.Flatten requires unreferenced code.")]
-    public static ReadOnlySpan<ParameterInfo> Flatten(ParameterInfo[] parameters, ParameterBindingMethodCache cache)
+    [UnconditionalSuppressMessage(
+        "Trimmer",
+        "IL2075",
+        Justification = "PropertyAsParameterInfo.Flatten requires unreferenced code."
+    )]
+    public static ReadOnlySpan<ParameterInfo> Flatten(
+        ParameterInfo[] parameters,
+        ParameterBindingMethodCache cache
+    )
     {
         ArgumentNullException.ThrowIfNull(nameof(parameters));
         ArgumentNullException.ThrowIfNull(nameof(cache));
@@ -76,17 +89,25 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
         {
             if (parameters[i].Name is null)
             {
-                throw new InvalidOperationException($"Encountered a parameter of type '{parameters[i].ParameterType}' without a name. Parameters must have a name.");
+                throw new InvalidOperationException(
+                    $"Encountered a parameter of type '{parameters[i].ParameterType}' without a name. Parameters must have a name."
+                );
             }
 
-            if (parameters[i].CustomAttributes.Any(a => a.AttributeType == typeof(AsParametersAttribute)))
+            if (
+                parameters[i].CustomAttributes.Any(
+                    a => a.AttributeType == typeof(AsParametersAttribute)
+                )
+            )
             {
                 // Initialize the list with all parameter already processed
                 // to keep the same parameter ordering
                 flattenedParameters ??= new(parameters[0..i]);
                 nullabilityContext ??= new();
 
-                var (constructor, constructorParameters) = cache.FindConstructor(parameters[i].ParameterType);
+                var (constructor, constructorParameters) = cache.FindConstructor(
+                    parameters[i].ParameterType
+                );
                 if (constructor is not null && constructorParameters is { Length: > 0 })
                 {
                     foreach (var constructorParameter in constructorParameters)
@@ -95,7 +116,9 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
                             new PropertyAsParameterInfo(
                                 constructorParameter.PropertyInfo,
                                 constructorParameter.ParameterInfo,
-                                nullabilityContext));
+                                nullabilityContext
+                            )
+                        );
                     }
                 }
                 else
@@ -106,7 +129,9 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
                     {
                         if (property.CanWrite)
                         {
-                            flattenedParameters.Add(new PropertyAsParameterInfo(property, nullabilityContext));
+                            flattenedParameters.Add(
+                                new PropertyAsParameterInfo(property, nullabilityContext)
+                            );
                         }
                     }
                 }
@@ -117,7 +142,9 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
             }
         }
 
-        return flattenedParameters is not null ? CollectionsMarshal.AsSpan(flattenedParameters) : parameters.AsSpan();
+        return flattenedParameters is not null
+            ? CollectionsMarshal.AsSpan(flattenedParameters)
+            : parameters.AsSpan();
     }
 
     public override object[] GetCustomAttributes(Type attributeType, bool inherit)
@@ -147,7 +174,13 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
         // as we usually call it as First() or FirstOrDefault() in the argument creation
         var mergedAttributes = new object[constructorAttributes.Length + propertyAttributes.Length];
         Array.Copy(constructorAttributes, mergedAttributes, constructorAttributes.Length);
-        Array.Copy(propertyAttributes, 0, mergedAttributes, constructorAttributes.Length, propertyAttributes.Length);
+        Array.Copy(
+            propertyAttributes,
+            0,
+            mergedAttributes,
+            constructorAttributes.Length,
+            propertyAttributes.Length
+        );
 
         return mergedAttributes;
     }
@@ -155,28 +188,33 @@ internal sealed class PropertyAsParameterInfo : ParameterInfo
     public override IList<CustomAttributeData> GetCustomAttributesData()
     {
         var attributes = new List<CustomAttributeData>(
-            _constructionParameterInfo?.GetCustomAttributesData() ?? Array.Empty<CustomAttributeData>());
+            _constructionParameterInfo?.GetCustomAttributesData()
+                ?? Array.Empty<CustomAttributeData>()
+        );
         attributes.AddRange(_underlyingProperty.GetCustomAttributesData());
 
         return attributes.AsReadOnly();
     }
 
-    public override Type[] GetOptionalCustomModifiers()
-        => _underlyingProperty.GetOptionalCustomModifiers();
+    public override Type[] GetOptionalCustomModifiers() =>
+        _underlyingProperty.GetOptionalCustomModifiers();
 
-    public override Type[] GetRequiredCustomModifiers()
-        => _underlyingProperty.GetRequiredCustomModifiers();
+    public override Type[] GetRequiredCustomModifiers() =>
+        _underlyingProperty.GetRequiredCustomModifiers();
 
     public override bool IsDefined(Type attributeType, bool inherit)
     {
-        return (_constructionParameterInfo is not null && _constructionParameterInfo.IsDefined(attributeType, inherit)) ||
-            _underlyingProperty.IsDefined(attributeType, inherit);
+        return (
+                _constructionParameterInfo is not null
+                && _constructionParameterInfo.IsDefined(attributeType, inherit)
+            ) || _underlyingProperty.IsDefined(attributeType, inherit);
     }
 
-    public new bool IsOptional => HasDefaultValue || NullabilityInfo.ReadState != NullabilityState.NotNull;
+    public new bool IsOptional =>
+        HasDefaultValue || NullabilityInfo.ReadState != NullabilityState.NotNull;
 
-    public NullabilityInfo NullabilityInfo
-        => _nullabilityInfo ??= _constructionParameterInfo is not null ?
-        _nullabilityContext.Create(_constructionParameterInfo) :
-        _nullabilityContext.Create(_underlyingProperty);
+    public NullabilityInfo NullabilityInfo =>
+        _nullabilityInfo ??= _constructionParameterInfo is not null
+            ? _nullabilityContext.Create(_constructionParameterInfo)
+            : _nullabilityContext.Create(_underlyingProperty);
 }

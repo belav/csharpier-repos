@@ -13,21 +13,26 @@ namespace System.Reflection.TypeLoading.Ecma
         private readonly MethodDefinitionHandle _handle;
         private readonly EcmaModule _module;
 
-        internal EcmaMethodDecoder(MethodDefinitionHandle handle, EcmaModule module)
-            : this()
+        internal EcmaMethodDecoder(MethodDefinitionHandle handle, EcmaModule module) : this()
         {
             _handle = handle;
             _module = module;
-            _neverAccessThisExceptThroughMethodDefinitionProperty = handle.GetMethodDefinition(Reader);
+            _neverAccessThisExceptThroughMethodDefinitionProperty = handle.GetMethodDefinition(
+                Reader
+            );
         }
 
         public RoModule GetRoModule() => _module;
 
         public string ComputeName() => MethodDefinition.Name.GetString(Reader);
+
         public int MetadataToken => _handle.GetToken();
-        public IEnumerable<CustomAttributeData> ComputeTrueCustomAttributes() => MethodDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
+
+        public IEnumerable<CustomAttributeData> ComputeTrueCustomAttributes() =>
+            MethodDefinition.GetCustomAttributes().ToTrueCustomAttributes(_module);
 
         public int ComputeGenericParameterCount() => MethodDefinition.GetGenericParameters().Count;
+
         public RoType[] ComputeGenericArgumentsOrParameters()
         {
             GenericParameterHandleCollection gphs = MethodDefinition.GetGenericParameters();
@@ -66,13 +71,17 @@ namespace System.Reflection.TypeLoading.Ecma
             return result;
         }
 
-        public MethodImplAttributes ComputeMethodImplementationFlags() => MethodDefinition.ImplAttributes;
+        public MethodImplAttributes ComputeMethodImplementationFlags() =>
+            MethodDefinition.ImplAttributes;
 
         public MethodSig<RoParameter> SpecializeMethodSig(IRoMethodBase roMethodBase)
         {
             MetadataReader reader = Reader;
             MethodDefinition methodDefinition = MethodDefinition;
-            MethodSignature<RoType> sig = methodDefinition.DecodeSignature(_module, roMethodBase.TypeContext);
+            MethodSignature<RoType> sig = methodDefinition.DecodeSignature(
+                _module,
+                roMethodBase.TypeContext
+            );
             int numParameters = sig.RequiredParameterCount;
             MethodSig<RoParameter> methodSig = new MethodSig<RoParameter>(numParameters);
             foreach (ParameterHandle ph in methodDefinition.GetParameters())
@@ -80,14 +89,23 @@ namespace System.Reflection.TypeLoading.Ecma
                 Parameter p = ph.GetParameter(reader);
                 int position = p.SequenceNumber - 1;
                 Type parameterType = position == -1 ? sig.ReturnType : sig.ParameterTypes[position];
-                methodSig[position] = new EcmaFatMethodParameter(roMethodBase, position, parameterType, ph);
+                methodSig[position] = new EcmaFatMethodParameter(
+                    roMethodBase,
+                    position,
+                    parameterType,
+                    ph
+                );
             }
 
             for (int position = -1; position < numParameters; position++)
             {
                 Type parameterType = position == -1 ? sig.ReturnType : sig.ParameterTypes[position];
                 if (methodSig[position] == null)
-                    methodSig[position] = new RoThinMethodParameter(roMethodBase, position, parameterType);
+                    methodSig[position] = new RoThinMethodParameter(
+                        roMethodBase,
+                        position,
+                        parameterType
+                    );
             }
 
             return methodSig;
@@ -95,7 +113,10 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public MethodSig<RoType> SpecializeCustomModifiers(in TypeContext typeContext)
         {
-            MethodSignature<RoType> sig = MethodDefinition.DecodeSignature(new EcmaModifiedTypeProvider(_module), typeContext);
+            MethodSignature<RoType> sig = MethodDefinition.DecodeSignature(
+                new EcmaModifiedTypeProvider(_module),
+                typeContext
+            );
             int numParameters = sig.RequiredParameterCount;
             MethodSig<RoType> methodSig = new MethodSig<RoType>(numParameters);
             for (int position = -1; position < numParameters; position++)
@@ -108,8 +129,12 @@ namespace System.Reflection.TypeLoading.Ecma
 
         public MethodSig<string> SpecializeMethodSigStrings(in TypeContext typeContext)
         {
-            ISignatureTypeProvider<string, TypeContext> typeProvider = EcmaSignatureTypeProviderForToString.Instance;
-            MethodSignature<string> sig = MethodDefinition.DecodeSignature(typeProvider, typeContext);
+            ISignatureTypeProvider<string, TypeContext> typeProvider =
+                EcmaSignatureTypeProviderForToString.Instance;
+            MethodSignature<string> sig = MethodDefinition.DecodeSignature(
+                typeProvider,
+                typeContext
+            );
             int parameterCount = sig.ParameterTypes.Length;
             MethodSig<string> results = new MethodSig<string>(parameterCount);
             results[-1] = sig.ReturnType;
@@ -125,7 +150,10 @@ namespace System.Reflection.TypeLoading.Ecma
             int rva = MethodDefinition.RelativeVirtualAddress;
             if (rva == 0)
                 return null;
-            return new EcmaMethodBody(owner, ((EcmaModule)(owner.MethodBase.Module)).PEReader.GetMethodBody(rva));
+            return new EcmaMethodBody(
+                owner,
+                ((EcmaModule)(owner.MethodBase.Module)).PEReader.GetMethodBody(rva)
+            );
         }
 
         public DllImportAttribute ComputeDllImportAttribute()
@@ -157,18 +185,31 @@ namespace System.Reflection.TypeLoading.Ecma
                 ExactSpelling = (a & MethodImportAttributes.ExactSpelling) != 0,
                 CharSet = charSet,
                 CallingConvention = callConv,
-                PreserveSig = (ComputeMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0,
+                PreserveSig =
+                    (ComputeMethodImplementationFlags() & MethodImplAttributes.PreserveSig) != 0,
                 SetLastError = (a & MethodImportAttributes.SetLastError) != 0,
-                BestFitMapping = (a & MethodImportAttributes.BestFitMappingMask) == MethodImportAttributes.BestFitMappingEnable,
-                ThrowOnUnmappableChar = (a & MethodImportAttributes.ThrowOnUnmappableCharMask) == MethodImportAttributes.ThrowOnUnmappableCharEnable,
+                BestFitMapping =
+                    (a & MethodImportAttributes.BestFitMappingMask)
+                    == MethodImportAttributes.BestFitMappingEnable,
+                ThrowOnUnmappableChar =
+                    (a & MethodImportAttributes.ThrowOnUnmappableCharMask)
+                    == MethodImportAttributes.ThrowOnUnmappableCharEnable,
             };
         }
 
         private MetadataReader Reader => _module.Reader;
         private MetadataLoadContext Loader => GetRoModule().Loader;
 
-        private MethodDefinition MethodDefinition { get { Loader.DisposeCheck(); return _neverAccessThisExceptThroughMethodDefinitionProperty; } }
-        [DebuggerBrowsable(DebuggerBrowsableState.Never)]  // Block from debugger watch windows so they don't AV the debugged process.
+        private MethodDefinition MethodDefinition
+        {
+            get
+            {
+                Loader.DisposeCheck();
+                return _neverAccessThisExceptThroughMethodDefinitionProperty;
+            }
+        }
+
+        [DebuggerBrowsable(DebuggerBrowsableState.Never)] // Block from debugger watch windows so they don't AV the debugged process.
         private readonly MethodDefinition _neverAccessThisExceptThroughMethodDefinitionProperty;
     }
 }

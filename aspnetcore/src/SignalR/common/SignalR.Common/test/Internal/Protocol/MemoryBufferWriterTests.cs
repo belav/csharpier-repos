@@ -417,7 +417,8 @@ public class MemoryBufferWriterTests
 
             // Verify the data was all written correctly
             var expectedOutput = new byte[MinimumSegmentSize + (MinimumSegmentSize / 2)];
-            data.AsSpan(0, MinimumSegmentSize / 2).CopyTo(expectedOutput.AsSpan(0, MinimumSegmentSize / 2));
+            data.AsSpan(0, MinimumSegmentSize / 2)
+                .CopyTo(expectedOutput.AsSpan(0, MinimumSegmentSize / 2));
             data.CopyTo(expectedOutput, MinimumSegmentSize / 2);
             Assert.Equal(expectedOutput, bufferWriter.ToArray());
         }

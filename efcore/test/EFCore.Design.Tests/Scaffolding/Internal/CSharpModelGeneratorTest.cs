@@ -34,9 +34,13 @@ public class CSharpModelGeneratorTest
                 ContextDir = Path.Combine("..", "TestContextDir" + Path.DirectorySeparatorChar),
                 ContextName = "TestContext",
                 ConnectionString = "Data Source=Test"
-            });
+            }
+        );
 
-        Assert.Equal(Path.Combine("..", "TestContextDir", "TestContext.cs"), result.ContextFile.Path);
+        Assert.Equal(
+            Path.Combine("..", "TestContextDir", "TestContext.cs"),
+            result.ContextFile.Path
+        );
         Assert.NotEmpty(result.ContextFile.Code);
 
         Assert.Equal(1, result.AdditionalFiles.Count);

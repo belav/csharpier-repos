@@ -30,11 +30,17 @@ namespace System.Threading
     internal sealed unsafe partial class _IOCompletionCallback
     {
         // call back helper
-        internal static void PerformIOCompletionCallback(uint errorCode, uint numBytes, NativeOverlapped* pNativeOverlapped)
+        internal static void PerformIOCompletionCallback(
+            uint errorCode,
+            uint numBytes,
+            NativeOverlapped* pNativeOverlapped
+        )
         {
             do
             {
-                OverlappedData overlapped = OverlappedData.GetOverlappedFromNative(pNativeOverlapped);
+                OverlappedData overlapped = OverlappedData.GetOverlappedFromNative(
+                    pNativeOverlapped
+                );
 
                 if (overlapped._callback is IOCompletionCallback iocb)
                 {
@@ -45,15 +51,26 @@ namespace System.Threading
                 {
                     // We got here because of Pack
                     var helper = (_IOCompletionCallback?)overlapped._callback;
-                    Debug.Assert(helper != null, "Should only be receiving a completion callback if a delegate was provided.");
+                    Debug.Assert(
+                        helper != null,
+                        "Should only be receiving a completion callback if a delegate was provided."
+                    );
                     helper._errorCode = errorCode;
                     helper._numBytes = numBytes;
                     helper._pNativeOverlapped = pNativeOverlapped;
-                    ExecutionContext.RunInternal(helper._executionContext, IOCompletionCallback_Context_Delegate, helper);
+                    ExecutionContext.RunInternal(
+                        helper._executionContext,
+                        IOCompletionCallback_Context_Delegate,
+                        helper
+                    );
                 }
 
                 // Quickly check the VM again, to see if a packet has arrived.
-                OverlappedData.CheckVMForIOPacket(out pNativeOverlapped, out errorCode, out numBytes);
+                OverlappedData.CheckVMForIOPacket(
+                    out pNativeOverlapped,
+                    out errorCode,
+                    out numBytes
+                );
             } while (pNativeOverlapped != null);
         }
     }
@@ -77,9 +94,14 @@ namespace System.Threading
 
         internal OverlappedData(Overlapped overlapped) => _overlapped = overlapped;
 
-        internal ref int OffsetLow => ref (_pNativeOverlapped != null) ? ref _pNativeOverlapped->OffsetLow : ref _offsetLow;
-        internal ref int OffsetHigh => ref (_pNativeOverlapped != null) ? ref _pNativeOverlapped->OffsetHigh : ref _offsetHigh;
-        internal ref IntPtr EventHandle => ref (_pNativeOverlapped != null) ? ref _pNativeOverlapped->EventHandle : ref _eventHandle;
+        internal ref int OffsetLow =>
+            ref (_pNativeOverlapped != null) ? ref _pNativeOverlapped->OffsetLow : ref _offsetLow;
+        internal ref int OffsetHigh =>
+            ref (_pNativeOverlapped != null) ? ref _pNativeOverlapped->OffsetHigh : ref _offsetHigh;
+        internal ref IntPtr EventHandle =>
+            ref (_pNativeOverlapped != null)
+                ? ref _pNativeOverlapped->EventHandle
+                : ref _eventHandle;
 
         internal NativeOverlapped* Pack(IOCompletionCallback? iocb, object? userData)
         {
@@ -91,7 +113,10 @@ namespace System.Threading
             if (iocb != null)
             {
                 ExecutionContext? ec = ExecutionContext.Capture();
-                _callback = (ec != null && !ec.IsDefault) ? new _IOCompletionCallback(iocb, ec) : (object)iocb;
+                _callback =
+                    (ec != null && !ec.IsDefault)
+                        ? new _IOCompletionCallback(iocb, ec)
+                        : (object)iocb;
             }
             else
             {
@@ -119,10 +144,16 @@ namespace System.Threading
         internal static extern void FreeNativeOverlapped(NativeOverlapped* nativeOverlappedPtr);
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern OverlappedData GetOverlappedFromNative(NativeOverlapped* nativeOverlappedPtr);
+        internal static extern OverlappedData GetOverlappedFromNative(
+            NativeOverlapped* nativeOverlappedPtr
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
-        internal static extern void CheckVMForIOPacket(out NativeOverlapped* pNativeOverlapped, out uint errorCode, out uint numBytes);
+        internal static extern void CheckVMForIOPacket(
+            out NativeOverlapped* pNativeOverlapped,
+            out uint errorCode,
+            out uint numBytes
+        );
     }
 
     #endregion class OverlappedData
@@ -149,10 +180,11 @@ namespace System.Threading
             _overlappedData._asyncResult = ar;
         }
 
-        [Obsolete("This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead.")]
-        public Overlapped(int offsetLo, int offsetHi, int hEvent, IAsyncResult? ar) : this(offsetLo, offsetHi, new IntPtr(hEvent), ar)
-        {
-        }
+        [Obsolete(
+            "This constructor is not 64-bit compatible and has been deprecated. Use the constructor that accepts an IntPtr for the event handle instead."
+        )]
+        public Overlapped(int offsetLo, int offsetHi, int hEvent, IAsyncResult? ar)
+            : this(offsetLo, offsetHi, new IntPtr(hEvent), ar) { }
 
         public IAsyncResult? AsyncResult
         {
@@ -172,7 +204,9 @@ namespace System.Threading
             set => _overlappedData!.OffsetHigh = value;
         }
 
-        [Obsolete("Overlapped.EventHandle is not 64-bit compatible and has been deprecated. Use EventHandleIntPtr instead.")]
+        [Obsolete(
+            "Overlapped.EventHandle is not 64-bit compatible and has been deprecated. Use EventHandleIntPtr instead."
+        )]
         public int EventHandle
         {
             get => EventHandleIntPtr.ToInt32();
@@ -190,7 +224,9 @@ namespace System.Threading
         *  Roots the iocb and stores it in the ReservedCOR field of native Overlapped
         *  Pins the native Overlapped struct and returns the pinned index.
         ====================================================================*/
-        [Obsolete("This overload is not safe and has been deprecated. Use Pack(IOCompletionCallback?, object?) instead.")]
+        [Obsolete(
+            "This overload is not safe and has been deprecated. Use Pack(IOCompletionCallback?, object?) instead."
+        )]
         [CLSCompliant(false)]
         public unsafe NativeOverlapped* Pack(IOCompletionCallback? iocb)
         {
@@ -203,7 +239,9 @@ namespace System.Threading
             return _overlappedData!.Pack(iocb, userData);
         }
 
-        [Obsolete("This overload is not safe and has been deprecated. Use UnsafePack(IOCompletionCallback?, object?) instead.")]
+        [Obsolete(
+            "This overload is not safe and has been deprecated. Use UnsafePack(IOCompletionCallback?, object?) instead."
+        )]
         [CLSCompliant(false)]
         public unsafe NativeOverlapped* UnsafePack(IOCompletionCallback? iocb)
         {
@@ -233,7 +271,9 @@ namespace System.Threading
         {
             ArgumentNullException.ThrowIfNull(nativeOverlappedPtr);
 
-            OverlappedData.GetOverlappedFromNative(nativeOverlappedPtr)._overlapped._overlappedData = null;
+            OverlappedData
+                .GetOverlappedFromNative(nativeOverlappedPtr)
+                ._overlapped._overlappedData = null;
             OverlappedData.FreeNativeOverlapped(nativeOverlappedPtr);
         }
     }

@@ -26,16 +26,35 @@ public class HostingTests
 
         using (var host = builder.Build())
         {
-            var contentRootPath = host.Services.GetRequiredService<IWebHostEnvironment>().ContentRootPath;
-            Assert.True(contentRootPath.EndsWith(Path.DirectorySeparatorChar), "expected contentRootPath to end with a slash");
+            var contentRootPath = host.Services
+                .GetRequiredService<IWebHostEnvironment>()
+                .ContentRootPath;
+            Assert.True(
+                contentRootPath.EndsWith(Path.DirectorySeparatorChar),
+                "expected contentRootPath to end with a slash"
+            );
 
-            var appDisc = host.Services.GetRequiredService<IApplicationDiscriminator>().Discriminator;
-            Assert.False(appDisc.EndsWith(Path.DirectorySeparatorChar), "expected appDiscriminator to have slash trimmed");
-            Assert.False(appDisc.EndsWith(Path.AltDirectorySeparatorChar), "expected appDiscriminator to have slash trimmed");
+            var appDisc = host.Services
+                .GetRequiredService<IApplicationDiscriminator>()
+                .Discriminator;
+            Assert.False(
+                appDisc.EndsWith(Path.DirectorySeparatorChar),
+                "expected appDiscriminator to have slash trimmed"
+            );
+            Assert.False(
+                appDisc.EndsWith(Path.AltDirectorySeparatorChar),
+                "expected appDiscriminator to have slash trimmed"
+            );
 
             var appId = host.Services.GetApplicationUniqueIdentifier();
-            Assert.False(appId.EndsWith(Path.DirectorySeparatorChar), "expected appId to have slash trimmed");
-            Assert.False(appId.EndsWith(Path.AltDirectorySeparatorChar), "expected appId to have slash trimmed");
+            Assert.False(
+                appId.EndsWith(Path.DirectorySeparatorChar),
+                "expected appId to have slash trimmed"
+            );
+            Assert.False(
+                appId.EndsWith(Path.AltDirectorySeparatorChar),
+                "expected appId to have slash trimmed"
+            );
         }
     }
 
@@ -44,18 +63,28 @@ public class HostingTests
     {
         var tcs = new TaskCompletionSource();
         var mockKeyRing = new Mock<IKeyRingProvider>();
-        mockKeyRing.Setup(m => m.GetCurrentKeyRing())
+        mockKeyRing
+            .Setup(m => m.GetCurrentKeyRing())
             .Returns(Mock.Of<IKeyRing>())
             .Callback(() => tcs.TrySetResult());
 
         var builder = new WebHostBuilder()
             .UseStartup<TestStartup>()
-            .ConfigureServices(s =>
-                s.AddDataProtection()
-                .Services
-                .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                .AddSingleton<IServer>(
-                    new FakeServer(onStart: () => tcs.TrySetException(new InvalidOperationException("Server was started before key ring was initialized")))));
+            .ConfigureServices(
+                s =>
+                    s.AddDataProtection()
+                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                        .AddSingleton<IServer>(
+                            new FakeServer(
+                                onStart: () =>
+                                    tcs.TrySetException(
+                                        new InvalidOperationException(
+                                            "Server was started before key ring was initialized"
+                                        )
+                                    )
+                            )
+                        )
+            );
 
         using (var host = builder.Build())
         {
@@ -71,17 +100,27 @@ public class HostingTests
     {
         var tcs = new TaskCompletionSource();
         var mockKeyRing = new Mock<IKeyRingProvider>();
-        mockKeyRing.Setup(m => m.GetCurrentKeyRing())
+        mockKeyRing
+            .Setup(m => m.GetCurrentKeyRing())
             .Returns(Mock.Of<IKeyRing>())
             .Callback(() => tcs.TrySetResult());
 
         var builder = new HostBuilder()
-            .ConfigureServices(s =>
-                s.AddDataProtection()
-                .Services
-                .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                .AddSingleton<IServer>(
-                    new FakeServer(onStart: () => tcs.TrySetException(new InvalidOperationException("Server was started before key ring was initialized")))))
+            .ConfigureServices(
+                s =>
+                    s.AddDataProtection()
+                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                        .AddSingleton<IServer>(
+                            new FakeServer(
+                                onStart: () =>
+                                    tcs.TrySetException(
+                                        new InvalidOperationException(
+                                            "Server was started before key ring was initialized"
+                                        )
+                                    )
+                            )
+                        )
+            )
             .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
         using (var host = builder.Build())
@@ -97,20 +136,26 @@ public class HostingTests
     public async Task StartupContinuesOnFailureToLoadKey()
     {
         var mockKeyRing = new Mock<IKeyRingProvider>();
-        mockKeyRing.Setup(m => m.GetCurrentKeyRing())
-            .Throws(new NotSupportedException("This mock doesn't actually work, but shouldn't kill the server"))
+        mockKeyRing
+            .Setup(m => m.GetCurrentKeyRing())
+            .Throws(
+                new NotSupportedException(
+                    "This mock doesn't actually work, but shouldn't kill the server"
+                )
+            )
             .Verifiable();
 
         var mockServer = new Mock<IServer>();
         mockServer.Setup(m => m.Features).Returns(new FeatureCollection());
 
         var builder = new HostBuilder()
-            .ConfigureServices(s =>
-                s.AddDataProtection()
-                .Services
-                .Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
-                .AddSingleton(mockServer.Object))
-                .ConfigureWebHost(b => b.UseStartup<TestStartup>());
+            .ConfigureServices(
+                s =>
+                    s.AddDataProtection()
+                        .Services.Replace(ServiceDescriptor.Singleton(mockKeyRing.Object))
+                        .AddSingleton(mockServer.Object)
+            )
+            .ConfigureWebHost(b => b.UseStartup<TestStartup>());
 
         using (var host = builder.Build())
         {
@@ -122,9 +167,7 @@ public class HostingTests
 
     private class TestStartup
     {
-        public void Configure(IApplicationBuilder app)
-        {
-        }
+        public void Configure(IApplicationBuilder app) { }
     }
 
     public class FakeServer : IServer
@@ -138,7 +181,10 @@ public class HostingTests
 
         public IFeatureCollection Features => new FeatureCollection();
 
-        public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken)
+        public Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        )
         {
             _onStart();
             return Task.CompletedTask;
@@ -146,8 +192,6 @@ public class HostingTests
 
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

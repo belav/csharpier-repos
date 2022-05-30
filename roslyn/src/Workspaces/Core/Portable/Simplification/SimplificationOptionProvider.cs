@@ -17,11 +17,9 @@ namespace Microsoft.CodeAnalysis.Simplification
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public SimplificationOptionsProvider()
-        {
-        }
+        public SimplificationOptionsProvider() { }
 
-        public ImmutableArray<IOption> Options { get; } = ImmutableArray.Create<IOption>(
-            NamingStyleOptions.NamingPreferences);
+        public ImmutableArray<IOption> Options { get; } =
+            ImmutableArray.Create<IOption>(NamingStyleOptions.NamingPreferences);
     }
 }

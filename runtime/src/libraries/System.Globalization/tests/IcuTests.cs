@@ -9,16 +9,22 @@ namespace System.Globalization.Tests
 {
     public class IcuTests
     {
-        private static bool IsIcuCompatiblePlatform => PlatformDetection.IsNotWindows ||
-                                                       (PlatformDetection.IsWindows10Version1903OrGreater &&
-                                                        // Server core doesn't have icu.dll on SysWOW64
-                                                        !(PlatformDetection.IsWindowsServerCore && PlatformDetection.IsX86Process));
+        private static bool IsIcuCompatiblePlatform =>
+            PlatformDetection.IsNotWindows
+            || (
+                PlatformDetection.IsWindows10Version1903OrGreater
+                &&
+                // Server core doesn't have icu.dll on SysWOW64
+                !(PlatformDetection.IsWindowsServerCore && PlatformDetection.IsX86Process)
+            );
 
         [ConditionalFact(nameof(IsIcuCompatiblePlatform))]
         public static void IcuShouldBeUsedByDefault()
         {
             Type globalizationMode = Type.GetType("System.Globalization.GlobalizationMode");
-            MethodInfo methodInfo = globalizationMode?.GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)?.GetMethod;
+            MethodInfo methodInfo = globalizationMode
+                ?.GetProperty("UseNls", BindingFlags.NonPublic | BindingFlags.Static)
+                ?.GetMethod;
 
             if (methodInfo != null)
             {
@@ -31,10 +37,16 @@ namespace System.Globalization.Tests
                 Type cultureDataType = Type.GetType("System.Globalization.CultureData");
                 Assert.NotNull(cultureDataType);
 
-                methodInfo = cultureDataType.GetMethod("NlsGetCultureDataFromRegionName", BindingFlags.NonPublic | BindingFlags.Static);
+                methodInfo = cultureDataType.GetMethod(
+                    "NlsGetCultureDataFromRegionName",
+                    BindingFlags.NonPublic | BindingFlags.Static
+                );
                 Assert.Null(methodInfo);
 
-                methodInfo = cultureDataType.GetMethod("InitIcuCultureDataCore", BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance);
+                methodInfo = cultureDataType.GetMethod(
+                    "InitIcuCultureDataCore",
+                    BindingFlags.NonPublic | BindingFlags.Static | BindingFlags.Instance
+                );
                 Assert.NotNull(methodInfo);
             }
         }

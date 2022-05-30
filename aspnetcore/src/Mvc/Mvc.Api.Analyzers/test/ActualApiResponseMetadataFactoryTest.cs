@@ -12,14 +12,17 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers;
 
 public class ActualApiResponseMetadataFactoryTest
 {
-    private static readonly string Namespace = typeof(ActualApiResponseMetadataFactoryTest).Namespace;
+    private static readonly string Namespace =
+        typeof(ActualApiResponseMetadataFactoryTest).Namespace;
 
     [Fact]
     public async Task GetDefaultStatusCode_ReturnsValueDefinedUsingStatusCodeConstants()
     {
         // Arrange
         var compilation = await GetCompilation("GetDefaultStatusCodeTest");
-        var attribute = compilation.GetTypeByMetadataName(typeof(TestActionResultUsingStatusCodesConstants).FullName).GetAttributes()[0];
+        var attribute = compilation
+            .GetTypeByMetadataName(typeof(TestActionResultUsingStatusCodesConstants).FullName)
+            .GetAttributes()[0];
 
         // Act
         var actual = ActualApiResponseMetadataFactory.GetDefaultStatusCode(attribute);
@@ -33,7 +36,9 @@ public class ActualApiResponseMetadataFactoryTest
     {
         // Arrange
         var compilation = await GetCompilation("GetDefaultStatusCodeTest");
-        var attribute = compilation.GetTypeByMetadataName(typeof(TestActionResultUsingHttpStatusCodeCast).FullName).GetAttributes()[0];
+        var attribute = compilation
+            .GetTypeByMetadataName(typeof(TestActionResultUsingHttpStatusCodeCast).FullName)
+            .GetAttributes()[0];
 
         // Act
         var actual = ActualApiResponseMetadataFactory.GetDefaultStatusCode(attribute);
@@ -46,7 +51,8 @@ public class ActualApiResponseMetadataFactoryTest
     public async Task InspectReturnExpression_ReturnsNull_IfReturnExpressionCannotBeFound()
     {
         // Arrange & Act
-        var source = @"
+        var source =
+            @"
             using Microsoft.AspNetCore.Mvc;
 
 namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
@@ -60,7 +66,10 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         }
     }
 }";
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { source }
+        );
         var compilation = await project.GetCompilationAsync();
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -69,12 +78,17 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         var method = (IMethodSymbol)returnType.GetMembers().First();
         var methodSyntax = syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var returnStatement = methodSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().First();
-        var returnOperation = (IReturnOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
+        var returnStatement = methodSyntax
+            .DescendantNodes()
+            .OfType<ReturnStatementSyntax>()
+            .First();
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         var actualResponseMetadata = ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
-            returnOperation);
+            returnOperation
+        );
 
         // Assert
         Assert.Null(actualResponseMetadata);
@@ -229,10 +243,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResult);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResult
+        );
 
         // Act
-        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -242,7 +261,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 Assert.False(metadata.IsDefaultResponse);
                 Assert.Equal(200, metadata.StatusCode);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -250,10 +270,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningModel);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningModel
+        );
 
         // Act
-        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -262,7 +287,8 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             metadata =>
             {
                 Assert.True(metadata.IsDefaultResponse);
-            });
+            }
+        );
     }
 
     [Fact]
@@ -270,10 +296,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionReturningNotFoundAndModel);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionReturningNotFoundAndModel
+        );
 
         // Act
-        var (success, responseMetadatas, testSource) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, testSource) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -283,13 +314,20 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 Assert.False(metadata.IsDefaultResponse);
                 Assert.Equal(204, metadata.StatusCode);
-                AnalyzerAssert.DiagnosticLocation(testSource.MarkerLocations["MM1"], metadata.ReturnOperation.Syntax.GetLocation());
+                AnalyzerAssert.DiagnosticLocation(
+                    testSource.MarkerLocations["MM1"],
+                    metadata.ReturnOperation.Syntax.GetLocation()
+                );
             },
             metadata =>
             {
                 Assert.True(metadata.IsDefaultResponse);
-                AnalyzerAssert.DiagnosticLocation(testSource.MarkerLocations["MM2"], metadata.ReturnOperation.Syntax.GetLocation());
-            });
+                AnalyzerAssert.DiagnosticLocation(
+                    testSource.MarkerLocations["MM2"],
+                    metadata.ReturnOperation.Syntax.GetLocation()
+                );
+            }
+        );
     }
 
     [Fact]
@@ -297,10 +335,15 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
     {
         // Arrange
         var typeName = typeof(TryGetActualResponseMetadataController).FullName;
-        var methodName = nameof(TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResultExpression);
+        var methodName = nameof(
+            TryGetActualResponseMetadataController.ActionWithActionResultOfTReturningOkResultExpression
+        );
 
         // Act
-        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(typeName, methodName);
+        var (success, responseMetadatas, _) = await TryGetActualResponseMetadata(
+            typeName,
+            methodName
+        );
 
         // Assert
         Assert.True(success);
@@ -310,13 +353,20 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
             {
                 Assert.False(metadata.IsDefaultResponse);
                 Assert.Equal(200, metadata.StatusCode);
-            });
+            }
+        );
     }
 
-    private async Task<(bool result, IList<ActualApiResponseMetadata> responseMetadatas, TestSource testSource)> TryGetActualResponseMetadata(string typeName, string methodName)
+    private async Task<(bool result, IList<ActualApiResponseMetadata> responseMetadatas, TestSource testSource)> TryGetActualResponseMetadata(
+        string typeName,
+        string methodName
+    )
     {
         var testSource = MvcTestSource.Read(GetType().Name, "TryGetActualResponseMetadataTests");
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { testSource.Source }
+        );
 
         var compilation = await GetCompilation("TryGetActualResponseMetadataTests");
 
@@ -325,36 +375,57 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
         var syntaxTree = method.DeclaringSyntaxReferences[0].SyntaxTree;
-        var methodSyntax = (MethodDeclarationSyntax)syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var methodOperation = (IMethodBodyBaseOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(methodSyntax);
+        var methodSyntax = (MethodDeclarationSyntax)
+            syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
+        var methodOperation = (IMethodBodyBaseOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(methodSyntax);
 
-        var result = ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(symbolCache, methodOperation, out var responseMetadatas);
+        var result = ActualApiResponseMetadataFactory.TryGetActualResponseMetadata(
+            symbolCache,
+            methodOperation,
+            out var responseMetadatas
+        );
 
         return (result, responseMetadatas, testSource);
     }
 
-    private async Task<ActualApiResponseMetadata?> RunInspectReturnStatementSyntax([CallerMemberName] string test = null)
+    private async Task<ActualApiResponseMetadata?> RunInspectReturnStatementSyntax(
+        [CallerMemberName] string test = null
+    )
     {
         // Arrange
         var compilation = await GetCompilation("InspectReturnExpressionTests");
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
-        var controllerType = compilation.GetTypeByMetadataName(typeof(TestFiles.InspectReturnExpressionTests.TestController).FullName);
+        var controllerType = compilation.GetTypeByMetadataName(
+            typeof(TestFiles.InspectReturnExpressionTests.TestController).FullName
+        );
         var syntaxTree = controllerType.DeclaringSyntaxReferences[0].SyntaxTree;
 
         var method = (IMethodSymbol)Assert.Single(controllerType.GetMembers(test));
         var methodSyntax = syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var returnStatement = methodSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().First();
-        var returnOperation = (IReturnOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
+        var returnStatement = methodSyntax
+            .DescendantNodes()
+            .OfType<ReturnStatementSyntax>()
+            .First();
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         return ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
-            returnOperation);
+            returnOperation
+        );
     }
 
-    private async Task<ActualApiResponseMetadata?> RunInspectReturnStatementSyntax(string source, string test)
+    private async Task<ActualApiResponseMetadata?> RunInspectReturnStatementSyntax(
+        string source,
+        string test
+    )
     {
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { source }
+        );
         var compilation = await project.GetCompilationAsync();
         Assert.True(ApiControllerSymbolCache.TryCreate(compilation, out var symbolCache));
 
@@ -363,18 +434,26 @@ namespace Microsoft.AspNetCore.Mvc.Api.Analyzers
 
         var method = (IMethodSymbol)returnType.GetMembers().First();
         var methodSyntax = syntaxTree.GetRoot().FindNode(method.Locations[0].SourceSpan);
-        var returnStatement = methodSyntax.DescendantNodes().OfType<ReturnStatementSyntax>().First();
-        var returnOperation = (IReturnOperation)compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
+        var returnStatement = methodSyntax
+            .DescendantNodes()
+            .OfType<ReturnStatementSyntax>()
+            .First();
+        var returnOperation = (IReturnOperation)
+            compilation.GetSemanticModel(syntaxTree).GetOperation(returnStatement);
 
         return ActualApiResponseMetadataFactory.InspectReturnOperation(
             symbolCache,
-            returnOperation);
+            returnOperation
+        );
     }
 
     private Task<Compilation> GetCompilation(string test)
     {
         var testSource = MvcTestSource.Read(GetType().Name, test);
-        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(GetType().Assembly, new[] { testSource.Source });
+        var project = MvcDiagnosticAnalyzerRunner.CreateProjectWithReferencesInBinDir(
+            GetType().Assembly,
+            new[] { testSource.Source }
+        );
 
         return project.GetCompilationAsync();
     }

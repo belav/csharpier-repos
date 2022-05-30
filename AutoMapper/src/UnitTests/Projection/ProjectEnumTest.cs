@@ -16,18 +16,31 @@ namespace AutoMapper.UnitTests.Projection
             _config = new MapperConfiguration(cfg =>
             {
                 cfg.CreateProjection<Customer, CustomerDto>();
-                cfg.CreateProjection<CustomerType, string>().ConvertUsing(ct => ct.ToString().ToUpper());
+                cfg.CreateProjection<CustomerType, string>()
+                    .ConvertUsing(ct => ct.ToString().ToUpper());
             });
         }
 
         [Fact]
         public void ProjectingEnumToString()
         {
-            var customers = new[] { new Customer() { FirstName = "Bill", LastName = "White", CustomerType = CustomerType.Vip } }.AsQueryable();
+            var customers = new[]
+            {
+                new Customer()
+                {
+                    FirstName = "Bill",
+                    LastName = "White",
+                    CustomerType = CustomerType.Vip
+                }
+            }.AsQueryable();
 
             var projected = customers.ProjectTo<CustomerDto>(_config);
             projected.ShouldNotBeNull();
-            Assert.Equal(customers.Single().CustomerType.ToString(), projected.Single().CustomerType, StringComparer.OrdinalIgnoreCase);
+            Assert.Equal(
+                customers.Single().CustomerType.ToString(),
+                projected.Single().CustomerType,
+                StringComparer.OrdinalIgnoreCase
+            );
         }
 
         public class Customer
@@ -57,20 +70,17 @@ namespace AutoMapper.UnitTests.Projection
 
     public class ProjectionOverrides : AutoMapperSpecBase
     {
-        public class Source
-        {
-            
-        }
+        public class Source { }
 
         public class Dest
         {
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>()
-                .ConvertUsing(src => new Dest {Value = 10});
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>().ConvertUsing(src => new Dest { Value = 10 });
+            });
     }
 }

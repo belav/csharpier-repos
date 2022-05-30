@@ -27,7 +27,10 @@ public interface IEntityFinder
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    ValueTask<object?> FindAsync(object?[]? keyValues, CancellationToken cancellationToken = default);
+    ValueTask<object?> FindAsync(
+        object?[]? keyValues,
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,7 +49,8 @@ public interface IEntityFinder
     Task LoadAsync(
         INavigation navigation,
         InternalEntityEntry entry,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,5 +76,6 @@ public interface IEntityFinder
     /// </summary>
     Task<object[]?> GetDatabaseValuesAsync(
         InternalEntityEntry entry,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

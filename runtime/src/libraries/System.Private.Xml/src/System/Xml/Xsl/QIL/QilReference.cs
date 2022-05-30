@@ -27,10 +27,7 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Construct a reference
         /// </summary>
-        public QilReference(QilNodeType nodeType) : base(nodeType)
-        {
-        }
-
+        public QilReference(QilNodeType nodeType) : base(nodeType) { }
 
         //-----------------------------------------------
         // QilReference methods

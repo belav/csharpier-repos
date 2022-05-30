@@ -18,7 +18,7 @@ public class RenameIntentTests : IntentTestsBase
     public async Task TestRenameIntentAsync()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -27,7 +27,7 @@ public class RenameIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -36,14 +36,15 @@ public class RenameIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedRenameAsync(initialText, expectedText, "thing", "something").ConfigureAwait(false);
+        await VerifyExpectedRenameAsync(initialText, expectedText, "thing", "something")
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestRenameIntentAsync_Insert()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -52,7 +53,7 @@ public class RenameIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -61,14 +62,15 @@ public class RenameIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedRenameAsync(initialText, expectedText, string.Empty, "something").ConfigureAwait(false);
+        await VerifyExpectedRenameAsync(initialText, expectedText, string.Empty, "something")
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestRenameIntentAsync_Delete()
     {
         var initialText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -77,7 +79,7 @@ public class RenameIntentTests : IntentTestsBase
     }
 }";
         var expectedText =
-@"class C
+            @"class C
 {
     void M()
     {
@@ -86,14 +88,15 @@ public class RenameIntentTests : IntentTestsBase
     }
 }";
 
-        await VerifyExpectedRenameAsync(initialText, expectedText, "some", "thing").ConfigureAwait(false);
+        await VerifyExpectedRenameAsync(initialText, expectedText, "some", "thing")
+            .ConfigureAwait(false);
     }
 
     [Fact]
     public async Task TestRenameIntentAsync_MultipleFiles()
     {
         var initialText =
-@"namespace M
+            @"namespace M
 {
     public class C
     {
@@ -107,7 +110,7 @@ public class RenameIntentTests : IntentTestsBase
 }";
         var additionalDocuments = new string[]
         {
-@"namespace M
+            @"namespace M
 {
     public class D
     {
@@ -121,7 +124,7 @@ public class RenameIntentTests : IntentTestsBase
 
         var expectedTexts = new string[]
         {
-@"namespace M
+            @"namespace M
 {
     public class C
     {
@@ -133,7 +136,7 @@ public class RenameIntentTests : IntentTestsBase
         }
     }
 }",
-@"namespace M
+            @"namespace M
 {
     public class D
     {
@@ -145,16 +148,47 @@ public class RenameIntentTests : IntentTestsBase
 }"
         };
 
-        await VerifyExpectedRenameAsync(initialText, additionalDocuments, expectedTexts, "SomeString", "BetterString").ConfigureAwait(false);
+        await VerifyExpectedRenameAsync(
+                initialText,
+                additionalDocuments,
+                expectedTexts,
+                "SomeString",
+                "BetterString"
+            )
+            .ConfigureAwait(false);
     }
 
-    private static Task VerifyExpectedRenameAsync(string initialText, string expectedText, string priorText, string newName)
+    private static Task VerifyExpectedRenameAsync(
+        string initialText,
+        string expectedText,
+        string priorText,
+        string newName
+    )
     {
-        return VerifyExpectedTextAsync(WellKnownIntents.Rename, initialText, expectedText, intentData: $"{{ \"newName\": \"{newName}\" }}", priorText: priorText);
+        return VerifyExpectedTextAsync(
+            WellKnownIntents.Rename,
+            initialText,
+            expectedText,
+            intentData: $"{{ \"newName\": \"{newName}\" }}",
+            priorText: priorText
+        );
     }
 
-    private static Task VerifyExpectedRenameAsync(string initialText, string[] additionalText, string[] expectedTexts, string priorText, string newName)
+    private static Task VerifyExpectedRenameAsync(
+        string initialText,
+        string[] additionalText,
+        string[] expectedTexts,
+        string priorText,
+        string newName
+    )
     {
-        return VerifyExpectedTextAsync(WellKnownIntents.Rename, initialText, additionalText, expectedTexts, intentData: $"{{ \"newName\": \"{newName}\" }}", priorText: priorText);
+        return VerifyExpectedTextAsync(
+            WellKnownIntents.Rename,
+            initialText,
+            additionalText,
+            expectedTexts,
+            intentData: $"{{ \"newName\": \"{newName}\" }}",
+            priorText: priorText
+        );
     }
 }

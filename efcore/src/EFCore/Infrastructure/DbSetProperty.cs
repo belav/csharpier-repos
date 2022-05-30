@@ -14,10 +14,7 @@ public readonly struct DbSetProperty
     /// <param name="name">The name of DbSet.</param>
     /// <param name="type">The entity clr type of DbSet.</param>
     /// <param name="setter">The setter for DbSet property.</param>
-    public DbSetProperty(
-        string name,
-        Type type,
-        IClrPropertySetter? setter)
+    public DbSetProperty(string name, Type type, IClrPropertySetter? setter)
     {
         Name = name;
         Type = type;

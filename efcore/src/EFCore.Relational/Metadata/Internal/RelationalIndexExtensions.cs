@@ -21,12 +21,12 @@ public static class RelationalIndexExtensions
         this IReadOnlyIndex index,
         IReadOnlyIndex duplicateIndex,
         in StoreObjectIdentifier storeObject,
-        bool shouldThrow)
+        bool shouldThrow
+    )
     {
         var columnNames = index.Properties.GetColumnNames(storeObject);
         var duplicateColumnNames = duplicateIndex.Properties.GetColumnNames(storeObject);
-        if (columnNames == null
-            || duplicateColumnNames == null)
+        if (columnNames == null || duplicateColumnNames == null)
         {
             if (shouldThrow)
             {
@@ -38,7 +38,9 @@ public static class RelationalIndexExtensions
                         duplicateIndex.DeclaringEntityType.DisplayName(),
                         index.GetDatabaseName(storeObject),
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        duplicateIndex.DeclaringEntityType.GetSchemaQualifiedTableName()));
+                        duplicateIndex.DeclaringEntityType.GetSchemaQualifiedTableName()
+                    )
+                );
             }
 
             return false;
@@ -57,7 +59,9 @@ public static class RelationalIndexExtensions
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         index.GetDatabaseName(storeObject),
                         index.Properties.FormatColumns(storeObject),
-                        duplicateIndex.Properties.FormatColumns(storeObject)));
+                        duplicateIndex.Properties.FormatColumns(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -74,16 +78,22 @@ public static class RelationalIndexExtensions
                         duplicateIndex.DisplayName(),
                         duplicateIndex.DeclaringEntityType.DisplayName(),
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        index.GetDatabaseName(storeObject)));
+                        index.GetDatabaseName(storeObject)
+                    )
+                );
             }
 
             return false;
         }
 
-        if (index.IsDescending is null != duplicateIndex.IsDescending is null
-            || (index.IsDescending is not null
+        if (
+            index.IsDescending is null != duplicateIndex.IsDescending is null
+            || (
+                index.IsDescending is not null
                 && duplicateIndex.IsDescending is not null
-                && !index.IsDescending.SequenceEqual(duplicateIndex.IsDescending)))
+                && !index.IsDescending.SequenceEqual(duplicateIndex.IsDescending)
+            )
+        )
         {
             if (shouldThrow)
             {
@@ -94,7 +104,9 @@ public static class RelationalIndexExtensions
                         duplicateIndex.DisplayName(),
                         duplicateIndex.DeclaringEntityType.DisplayName(),
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
-                        index.GetDatabaseName(storeObject)));
+                        index.GetDatabaseName(storeObject)
+                    )
+                );
             }
 
             return false;
@@ -113,7 +125,9 @@ public static class RelationalIndexExtensions
                         index.DeclaringEntityType.GetSchemaQualifiedTableName(),
                         index.GetDatabaseName(storeObject),
                         index.GetFilter(),
-                        duplicateIndex.GetFilter()));
+                        duplicateIndex.GetFilter()
+                    )
+                );
             }
 
             return false;

@@ -32,7 +32,8 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
     /// </summary>
     public CSharpEntityTypeGenerator(
         IAnnotationCodeGenerator annotationCodeGenerator,
-        ICSharpHelper cSharpHelper)
+        ICSharpHelper cSharpHelper
+    )
     {
         _annotationCodeGenerator = annotationCodeGenerator;
         _code = cSharpHelper;
@@ -44,7 +45,12 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual string WriteCode(IEntityType entityType, string? @namespace, bool useDataAnnotations, bool useNullableReferenceTypes)
+    public virtual string WriteCode(
+        IEntityType entityType,
+        string? @namespace,
+        bool useDataAnnotations,
+        bool useNullableReferenceTypes
+    )
     {
         _useDataAnnotations = useDataAnnotations;
         _useNullableReferenceTypes = useNullableReferenceTypes;
@@ -61,11 +67,14 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             _sb.AppendLine("using Microsoft.EntityFrameworkCore;"); // For attributes coming out of Abstractions
         }
 
-        foreach (var ns in entityType.GetProperties()
-                     .SelectMany(p => p.ClrType.GetNamespaces())
-                     .Where(ns => ns != "System" && ns != "System.Collections.Generic")
-                     .Distinct()
-                     .OrderBy(x => x, new NamespaceComparer()))
+        foreach (
+            var ns in entityType
+                .GetProperties()
+                .SelectMany(p => p.ClrType.GetNamespaces())
+                .Where(ns => ns != "System" && ns != "System.Collections.Generic")
+                .Distinct()
+                .OrderBy(x => x, new NamespaceComparer())
+        )
         {
             _sb.AppendLine($"using {ns};");
         }
@@ -137,7 +146,12 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             .ToDictionary(a => a.Name, a => a);
         _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(entityType, annotations);
 
-        foreach (var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(entityType, annotations))
+        foreach (
+            var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(
+                entityType,
+                annotations
+            )
+        )
         {
             var attributeWriter = new AttributeWriter(attribute.Type.Name);
             foreach (var argument in attribute.Arguments)
@@ -165,7 +179,11 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
         var schemaParameterNeeded = schema != null && schema != defaultSchema;
         var isView = entityType.GetViewName() != null;
-        var tableAttributeNeeded = !isView && (schemaParameterNeeded || tableName != null && tableName != entityType.GetDbSetName());
+        var tableAttributeNeeded =
+            !isView
+            && (
+                schemaParameterNeeded || tableName != null && tableName != entityType.GetDbSetName()
+            );
         if (tableAttributeNeeded)
         {
             var tableAttribute = new AttributeWriter(nameof(TableAttribute));
@@ -174,7 +192,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
             if (schemaParameterNeeded)
             {
-                tableAttribute.AddParameter($"{nameof(TableAttribute.Schema)} = {_code.Literal(schema!)}");
+                tableAttribute.AddParameter(
+                    $"{nameof(TableAttribute.Schema)} = {_code.Literal(schema!)}"
+                );
             }
 
             _sb.AppendLine(tableAttribute.ToString());
@@ -185,8 +205,15 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
     {
         // Do not generate IndexAttributes for indexes which
         // would be generated anyway by convention.
-        foreach (var index in entityType.GetIndexes().Where(
-                     i => ConfigurationSource.Convention != ((IConventionIndex)i).GetConfigurationSource()))
+        foreach (
+            var index in entityType
+                .GetIndexes()
+                .Where(
+                    i =>
+                        ConfigurationSource.Convention
+                        != ((IConventionIndex)i).GetConfigurationSource()
+                )
+        )
         {
             // If there are annotations that cannot be represented using an IndexAttribute then use fluent API instead.
             var annotations = _annotationCodeGenerator
@@ -205,17 +232,23 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
                 if (index.Name != null)
                 {
-                    indexAttribute.AddParameter($"{nameof(IndexAttribute.Name)} = {_code.Literal(index.Name)}");
+                    indexAttribute.AddParameter(
+                        $"{nameof(IndexAttribute.Name)} = {_code.Literal(index.Name)}"
+                    );
                 }
 
                 if (index.IsUnique)
                 {
-                    indexAttribute.AddParameter($"{nameof(IndexAttribute.IsUnique)} = {_code.Literal(index.IsUnique)}");
+                    indexAttribute.AddParameter(
+                        $"{nameof(IndexAttribute.IsUnique)} = {_code.Literal(index.IsUnique)}"
+                    );
                 }
 
                 if (index.IsDescending is not null)
                 {
-                    indexAttribute.AddParameter($"{nameof(IndexAttribute.IsDescending)} = {_code.UnknownLiteral(index.IsDescending)}");
+                    indexAttribute.AddParameter(
+                        $"{nameof(IndexAttribute.IsDescending)} = {_code.UnknownLiteral(index.IsDescending)}"
+                    );
                 }
 
                 _sb.AppendLine(indexAttribute.ToString());
@@ -231,7 +264,8 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
     /// </summary>
     protected virtual void GenerateConstructor(IEntityType entityType)
     {
-        var collectionNavigations = entityType.GetDeclaredNavigations()
+        var collectionNavigations = entityType
+            .GetDeclaredNavigations()
             .Cast<INavigationBase>()
             .Concat(entityType.GetDeclaredSkipNavigations())
             .Where(n => n.IsCollection)
@@ -246,7 +280,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             {
                 foreach (var navigation in collectionNavigations)
                 {
-                    _sb.AppendLine($"{navigation.Name} = new HashSet<{navigation.TargetEntityType.Name}>();");
+                    _sb.AppendLine(
+                        $"{navigation.Name} = new HashSet<{navigation.TargetEntityType.Name}>();"
+                    );
                 }
             }
 
@@ -277,7 +313,8 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
                     ? $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }}"
                     : property.IsNullable
                         ? $"public {_code.Reference(property.ClrType)}? {property.Name} {{ get; set; }}"
-                        : $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }} = null!;");
+                        : $"public {_code.Reference(property.ClrType)} {property.Name} {{ get; set; }} = null!;"
+            );
         }
     }
 
@@ -301,7 +338,12 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             .ToDictionary(a => a.Name, a => a);
         _annotationCodeGenerator.RemoveAnnotationsHandledByConventions(property, annotations);
 
-        foreach (var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(property, annotations))
+        foreach (
+            var attribute in _annotationCodeGenerator.GenerateDataAnnotationAttributes(
+                property,
+                annotations
+            )
+        )
         {
             var attributeWriter = new AttributeWriter(attribute.Type.Name);
             foreach (var argument in attribute.Arguments)
@@ -327,7 +369,8 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
         var columnName = property.GetColumnBaseName();
         var columnType = property.GetConfiguredColumnType();
 
-        var delimitedColumnName = columnName != null && columnName != property.Name ? _code.Literal(columnName) : null;
+        var delimitedColumnName =
+            columnName != null && columnName != property.Name ? _code.Literal(columnName) : null;
         var delimitedColumnType = columnType != null ? _code.Literal(columnType) : null;
 
         if ((delimitedColumnName ?? delimitedColumnType) != null)
@@ -341,7 +384,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
             if (delimitedColumnType != null)
             {
-                columnAttribute.AddParameter($"{nameof(ColumnAttribute.TypeName)} = {delimitedColumnType}");
+                columnAttribute.AddParameter(
+                    $"{nameof(ColumnAttribute.TypeName)} = {delimitedColumnType}"
+                );
             }
 
             _sb.AppendLine(columnAttribute.ToString());
@@ -350,10 +395,12 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
     private void GenerateRequiredAttribute(IProperty property)
     {
-        if ((!_useNullableReferenceTypes || property.ClrType.IsValueType)
+        if (
+            (!_useNullableReferenceTypes || property.ClrType.IsValueType)
             && !property.IsNullable
             && property.ClrType.IsNullableType()
-            && !property.IsPrimaryKey())
+            && !property.IsPrimaryKey()
+        )
         {
             _sb.AppendLine(new AttributeWriter(nameof(RequiredAttribute)).ToString());
         }
@@ -368,7 +415,8 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             var lengthAttribute = new AttributeWriter(
                 property.ClrType == typeof(string)
                     ? nameof(StringLengthAttribute)
-                    : nameof(MaxLengthAttribute));
+                    : nameof(MaxLengthAttribute)
+            );
 
             lengthAttribute.AddParameter(_code.Literal(maxLength.Value));
 
@@ -422,7 +470,8 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
     /// </summary>
     protected virtual void GenerateNavigationProperties(IEntityType entityType)
     {
-        var sortedNavigations = entityType.GetNavigations()
+        var sortedNavigations = entityType
+            .GetNavigations()
             .OrderBy(n => n.IsOnDependent ? 0 : 1)
             .ThenBy(n => n.IsCollection ? 1 : 0)
             .ToList();
@@ -439,14 +488,17 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
                 }
 
                 var referencedTypeName = navigation.TargetEntityType.Name;
-                var navigationType = navigation.IsCollection ? $"ICollection<{referencedTypeName}>" : referencedTypeName;
+                var navigationType = navigation.IsCollection
+                    ? $"ICollection<{referencedTypeName}>"
+                    : referencedTypeName;
 
                 _sb.AppendLine(
                     !_useNullableReferenceTypes || navigation.IsCollection
                         ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
                         : navigation.ForeignKey.IsRequired && navigation.IsOnDependent
                             ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }} = null!;"
-                            : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}");
+                            : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}"
+                );
             }
         }
     }
@@ -464,7 +516,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             var foreignKeyAttribute = new AttributeWriter(nameof(ForeignKeyAttribute));
             foreignKeyAttribute.AddParameter(
                 _code.Literal(
-                    string.Join(",", navigation.ForeignKey.Properties.Select(p => p.Name))));
+                    string.Join(",", navigation.ForeignKey.Properties.Select(p => p.Name))
+                )
+            );
             _sb.AppendLine(foreignKeyAttribute.ToString());
         }
     }
@@ -477,7 +531,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
             if (inverseNavigation != null)
             {
-                var inversePropertyAttribute = new AttributeWriter(nameof(InversePropertyAttribute));
+                var inversePropertyAttribute = new AttributeWriter(
+                    nameof(InversePropertyAttribute)
+                );
 
                 inversePropertyAttribute.AddParameter(_code.Literal(inverseNavigation.Name));
 
@@ -508,14 +564,17 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
                 }
 
                 var referencedTypeName = navigation.TargetEntityType.Name;
-                var navigationType = navigation.IsCollection ? $"ICollection<{referencedTypeName}>" : referencedTypeName;
+                var navigationType = navigation.IsCollection
+                    ? $"ICollection<{referencedTypeName}>"
+                    : referencedTypeName;
 
                 _sb.AppendLine(
                     !_useNullableReferenceTypes || navigation.IsCollection
                         ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }}"
                         : navigation.ForeignKey.IsRequired
                             ? $"public virtual {navigationType} {navigation.Name} {{ get; set; }} = null!;"
-                            : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}");
+                            : $"public virtual {navigationType}? {navigation.Name} {{ get; set; }}"
+                );
             }
         }
     }
@@ -537,7 +596,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
                 // Do NOT use nameof syntax
                 foreignKeyAttribute.AddParameter(
                     _code.Literal(
-                        string.Join(",", navigation.ForeignKey.Properties.Select(p => p.Name))));
+                        string.Join(",", navigation.ForeignKey.Properties.Select(p => p.Name))
+                    )
+                );
 
                 _sb.AppendLine(foreignKeyAttribute.ToString());
             }
@@ -552,7 +613,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
 
             if (inverseNavigation != null)
             {
-                var inversePropertyAttribute = new AttributeWriter(nameof(InversePropertyAttribute));
+                var inversePropertyAttribute = new AttributeWriter(
+                    nameof(InversePropertyAttribute)
+                );
 
                 // Do NOT use nameof for inverseNavigation.Name
                 inversePropertyAttribute.AddParameter(_code.Literal(inverseNavigation.Name));
@@ -568,7 +631,9 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
         {
             _sb.AppendLine("/// <summary>");
 
-            foreach (var line in comment.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None))
+            foreach (
+                var line in comment.Split(new[] { "\r\n", "\r", "\n" }, StringSplitOptions.None)
+            )
             {
                 _sb.AppendLine($"/// {SecurityElement.Escape(line)}");
             }
@@ -587,18 +652,19 @@ public class CSharpEntityTypeGenerator : ICSharpEntityTypeGenerator
             _attributeName = attributeName;
         }
 
-        public void AddParameter(string parameter)
-            => _parameters.Add(parameter);
+        public void AddParameter(string parameter) => _parameters.Add(parameter);
 
-        public override string ToString()
-            => "["
-                + (_parameters.Count == 0
+        public override string ToString() =>
+            "["
+            + (
+                _parameters.Count == 0
                     ? StripAttribute(_attributeName)
-                    : StripAttribute(_attributeName) + "(" + string.Join(", ", _parameters) + ")")
-                + "]";
+                    : StripAttribute(_attributeName) + "(" + string.Join(", ", _parameters) + ")"
+            )
+            + "]";
 
-        private static string StripAttribute(string attributeName)
-            => attributeName.EndsWith("Attribute", StringComparison.Ordinal)
+        private static string StripAttribute(string attributeName) =>
+            attributeName.EndsWith("Attribute", StringComparison.Ordinal)
                 ? attributeName[..^9]
                 : attributeName;
     }

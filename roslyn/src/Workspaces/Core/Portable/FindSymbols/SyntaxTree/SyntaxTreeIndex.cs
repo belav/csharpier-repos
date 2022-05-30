@@ -21,8 +21,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             LiteralInfo literalInfo,
             IdentifierInfo identifierInfo,
             ContextInfo contextInfo,
-            HashSet<(string alias, string name, int arity)>? globalAliasInfo)
-            : base(checksum)
+            HashSet<(string alias, string name, int arity)>? globalAliasInfo
+        ) : base(checksum)
         {
             _literalInfo = literalInfo;
             _identifierInfo = identifierInfo;
@@ -30,17 +30,29 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             _globalAliasInfo = globalAliasInfo;
         }
 
-        public static Task PrecalculateAsync(Document document, CancellationToken cancellationToken)
-            => PrecalculateAsync(document, CreateIndex, cancellationToken);
+        public static Task PrecalculateAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => PrecalculateAsync(document, CreateIndex, cancellationToken);
 
-        public static ValueTask<SyntaxTreeIndex> GetRequiredIndexAsync(Document document, CancellationToken cancellationToken)
-            => GetRequiredIndexAsync(document, ReadIndex, CreateIndex, cancellationToken);
+        public static ValueTask<SyntaxTreeIndex> GetRequiredIndexAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => GetRequiredIndexAsync(document, ReadIndex, CreateIndex, cancellationToken);
 
-        public static ValueTask<SyntaxTreeIndex?> GetIndexAsync(Document document, CancellationToken cancellationToken)
-            => GetIndexAsync(document, loadOnly: false, cancellationToken);
+        public static ValueTask<SyntaxTreeIndex?> GetIndexAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => GetIndexAsync(document, loadOnly: false, cancellationToken);
 
-        [PerformanceSensitive("https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834", OftenCompletesSynchronously = true)]
-        public static ValueTask<SyntaxTreeIndex?> GetIndexAsync(Document document, bool loadOnly, CancellationToken cancellationToken)
-            => GetIndexAsync(document, loadOnly, ReadIndex, CreateIndex, cancellationToken);
+        [PerformanceSensitive(
+            "https://devdiv.visualstudio.com/DevDiv/_workitems/edit/1224834",
+            OftenCompletesSynchronously = true
+        )]
+        public static ValueTask<SyntaxTreeIndex?> GetIndexAsync(
+            Document document,
+            bool loadOnly,
+            CancellationToken cancellationToken
+        ) => GetIndexAsync(document, loadOnly, ReadIndex, CreateIndex, cancellationToken);
     }
 }

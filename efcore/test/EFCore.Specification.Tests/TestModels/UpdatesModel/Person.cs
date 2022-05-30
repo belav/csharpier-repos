@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.UpdatesModel;
 
 public class Person
 {
-    protected Person()
-    {
-    }
+    protected Person() { }
 
     public Person(string name, Person parent)
     {

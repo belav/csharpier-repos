@@ -15,6 +15,7 @@ unsafe class ManagedSequential
         public byte b1;
         public long l1;
     }
+
     class AutoClassLayoutBase : LayoutClassObjectBase
     {
         public byte b2;

@@ -24,10 +24,7 @@ namespace System.Security.Cryptography
         ///     Create an ECDsaCng algorithm with a random 521 bit key pair.
         /// </summary>
         [SupportedOSPlatform("windows")]
-        public ECDsaCng()
-            : this(521)
-        {
-        }
+        public ECDsaCng() : this(521) { }
 
         /// <summary>
         ///     Creates a new ECDsaCng object that will use a randomly generated key of the specified size.
@@ -42,10 +39,7 @@ namespace System.Security.Cryptography
 
         public override int KeySize
         {
-            get
-            {
-                return base.KeySize;
-            }
+            get { return base.KeySize; }
             set
             {
                 if (KeySize == value)
@@ -80,7 +74,8 @@ namespace System.Security.Cryptography
             get
             {
                 // Return the three sizes that can be explicitly set (for backwards compatibility)
-                return new[] {
+                return new[]
+                {
                     new KeySizes(minSize: 256, maxSize: 384, skipSize: 128),
                     new KeySizes(minSize: 521, maxSize: 521, skipSize: 0),
                 };

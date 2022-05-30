@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor threadOperationExecutor,
             IAsynchronousOperationListenerProvider listenerProvider,
-            IGlyphService glyphService)
+            IGlyphService glyphService
+        )
         {
             AsyncListener = listenerProvider.GetListener(FeatureAttribute.CallHierarchy);
             ThreadingContext = threadingContext;
@@ -51,16 +52,24 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
         }
 
         public async Task<ICallHierarchyMemberItem> CreateItemAsync(
-            ISymbol symbol, Project project, ImmutableArray<Location> callsites, CancellationToken cancellationToken)
+            ISymbol symbol,
+            Project project,
+            ImmutableArray<Location> callsites,
+            CancellationToken cancellationToken
+        )
         {
-            if (symbol.Kind is SymbolKind.Method or
-                               SymbolKind.Property or
-                               SymbolKind.Event or
-                               SymbolKind.Field)
+            if (
+                symbol.Kind
+                is SymbolKind.Method
+                    or SymbolKind.Property
+                    or SymbolKind.Event
+                    or SymbolKind.Field
+            )
             {
                 symbol = GetTargetSymbol(symbol);
 
-                var finders = await CreateFindersAsync(symbol, project, cancellationToken).ConfigureAwait(false);
+                var finders = await CreateFindersAsync(symbol, project, cancellationToken)
+                    .ConfigureAwait(false);
 
                 ICallHierarchyMemberItem item = new CallHierarchyItem(
                     this,
@@ -69,7 +78,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
                     finders,
                     () => symbol.GetGlyph().GetImageSource(GlyphService),
                     callsites,
-                    project.Solution.Workspace);
+                    project.Solution.Workspace
+                );
 
                 return item;
             }
@@ -91,17 +101,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
         public FieldInitializerItem CreateInitializerItem(IEnumerable<CallHierarchyDetail> details)
         {
-            return new FieldInitializerItem(EditorFeaturesResources.Initializers,
-                                            "__" + EditorFeaturesResources.Initializers,
-                                            Glyph.FieldPublic.GetImageSource(GlyphService),
-                                            details);
+            return new FieldInitializerItem(
+                EditorFeaturesResources.Initializers,
+                "__" + EditorFeaturesResources.Initializers,
+                Glyph.FieldPublic.GetImageSource(GlyphService),
+                details
+            );
         }
 
-        public async Task<IEnumerable<AbstractCallFinder>> CreateFindersAsync(ISymbol symbol, Project project, CancellationToken cancellationToken)
+        public async Task<IEnumerable<AbstractCallFinder>> CreateFindersAsync(
+            ISymbol symbol,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            if (symbol.Kind is SymbolKind.Property or
-                    SymbolKind.Event or
-                    SymbolKind.Method)
+            if (symbol.Kind is SymbolKind.Property or SymbolKind.Event or SymbolKind.Method)
             {
                 var finders = new List<AbstractCallFinder>();
 
@@ -109,10 +123,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
                 if (symbol.IsVirtual || symbol.IsAbstract)
                 {
-                    finders.Add(new OverridingMemberFinder(symbol, project.Id, AsyncListener, this));
+                    finders.Add(
+                        new OverridingMemberFinder(symbol, project.Id, AsyncListener, this)
+                    );
                 }
 
-                var @overrides = await SymbolFinder.FindOverridesAsync(symbol, project.Solution, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var @overrides = await SymbolFinder
+                    .FindOverridesAsync(
+                        symbol,
+                        project.Solution,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (overrides.Any())
                 {
                     finders.Add(new CallToOverrideFinder(symbol, project.Id, AsyncListener, this));
@@ -120,13 +142,33 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
                 if (symbol.GetOverriddenMember() != null)
                 {
-                    finders.Add(new BaseMemberFinder(symbol.GetOverriddenMember(), project.Id, AsyncListener, this));
+                    finders.Add(
+                        new BaseMemberFinder(
+                            symbol.GetOverriddenMember(),
+                            project.Id,
+                            AsyncListener,
+                            this
+                        )
+                    );
                 }
 
-                var implementedInterfaceMembers = await SymbolFinder.FindImplementedInterfaceMembersAsync(symbol, project.Solution, cancellationToken: cancellationToken).ConfigureAwait(false);
+                var implementedInterfaceMembers = await SymbolFinder
+                    .FindImplementedInterfaceMembersAsync(
+                        symbol,
+                        project.Solution,
+                        cancellationToken: cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 foreach (var implementedInterfaceMember in implementedInterfaceMembers)
                 {
-                    finders.Add(new InterfaceImplementationCallFinder(implementedInterfaceMember, project.Id, AsyncListener, this));
+                    finders.Add(
+                        new InterfaceImplementationCallFinder(
+                            implementedInterfaceMember,
+                            project.Id,
+                            AsyncListener,
+                            this
+                        )
+                    );
                 }
 
                 if (symbol.IsImplementableMember())
@@ -139,23 +181,34 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.CallHierarchy
 
             if (symbol.Kind == SymbolKind.Field)
             {
-                return SpecializedCollections.SingletonEnumerable(new FieldReferenceFinder(symbol, project.Id, AsyncListener, this));
+                return SpecializedCollections.SingletonEnumerable(
+                    new FieldReferenceFinder(symbol, project.Id, AsyncListener, this)
+                );
             }
 
             return null;
         }
 
-        public async Task NavigateToAsync(SymbolKey id, Project project, CancellationToken cancellationToken)
+        public async Task NavigateToAsync(
+            SymbolKey id,
+            Project project,
+            CancellationToken cancellationToken
+        )
         {
-            var compilation = await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false);
+            var compilation = await project
+                .GetCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
             var resolution = id.Resolve(compilation, cancellationToken: cancellationToken);
             var workspace = project.Solution.Workspace;
             var options = NavigationOptions.Default with { PreferProvisionalTab = true };
             var symbolNavigationService = workspace.Services.GetService<ISymbolNavigationService>();
 
-            var location = await symbolNavigationService.GetNavigableLocationAsync(
-                resolution.Symbol, project, cancellationToken).ConfigureAwait(false);
-            await location.TryNavigateToAsync(this.ThreadingContext, options, cancellationToken).ConfigureAwait(false);
+            var location = await symbolNavigationService
+                .GetNavigableLocationAsync(resolution.Symbol, project, cancellationToken)
+                .ConfigureAwait(false);
+            await location
+                .TryNavigateToAsync(this.ThreadingContext, options, cancellationToken)
+                .ConfigureAwait(false);
         }
     }
 }

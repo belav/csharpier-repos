@@ -13,16 +13,20 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.Options
     {
         public string Style_NamingPreferences
         {
-            get { return GetOption(NamingStyleOptions.NamingPreferences).CreateXElement().ToString(); }
+            get
+            {
+                return GetOption(NamingStyleOptions.NamingPreferences).CreateXElement().ToString();
+            }
             set
             {
                 try
                 {
-                    SetOption(NamingStyleOptions.NamingPreferences, NamingStylePreferences.FromXElement(XElement.Parse(value)));
+                    SetOption(
+                        NamingStyleOptions.NamingPreferences,
+                        NamingStylePreferences.FromXElement(XElement.Parse(value))
+                    );
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
         }
     }

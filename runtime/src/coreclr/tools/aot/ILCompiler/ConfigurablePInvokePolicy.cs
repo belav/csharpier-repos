@@ -16,9 +16,15 @@ namespace ILCompiler
         private readonly TargetDetails _target;
         private readonly Dictionary<string, HashSet<string>> _directPInvokes;
 
-        public ConfigurablePInvokePolicy(TargetDetails target, IReadOnlyList<string> directPInvokes, IReadOnlyList<string> directPInvokeLists)
+        public ConfigurablePInvokePolicy(
+            TargetDetails target,
+            IReadOnlyList<string> directPInvokes,
+            IReadOnlyList<string> directPInvokeLists
+        )
         {
-            _directPInvokes = new Dictionary<string, HashSet<string>>(target.IsWindows ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal);
+            _directPInvokes = new Dictionary<string, HashSet<string>>(
+                target.IsWindows ? StringComparer.OrdinalIgnoreCase : StringComparer.Ordinal
+            );
 
             // * is always a direct call
             _directPInvokes.Add("*", null);
@@ -148,7 +154,12 @@ namespace ILCompiler
                         return true;
                     }
 
-                    foreach (var entryPointName in EntryPointNameVariations(entryPointMetadataName, pInvokeMetadata.Flags))
+                    foreach (
+                        var entryPointName in EntryPointNameVariations(
+                            entryPointMetadataName,
+                            pInvokeMetadata.Flags
+                        )
+                    )
                     {
                         if (entrypoints.Contains(entryPointName))
                         {

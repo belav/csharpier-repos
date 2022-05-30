@@ -14,7 +14,11 @@ namespace ILCompiler
 {
     public class RootingHelpers
     {
-        public static bool TryRootType(IRootingServiceProvider rootProvider, TypeDesc type, string reason)
+        public static bool TryRootType(
+            IRootingServiceProvider rootProvider,
+            TypeDesc type,
+            string reason
+        )
         {
             try
             {
@@ -27,7 +31,11 @@ namespace ILCompiler
             }
         }
 
-        public static void RootType(IRootingServiceProvider rootProvider, TypeDesc type, string reason)
+        public static void RootType(
+            IRootingServiceProvider rootProvider,
+            TypeDesc type,
+            string reason
+        )
         {
             rootProvider.AddCompilationRoot(type, reason);
 
@@ -36,13 +44,21 @@ namespace ILCompiler
             // Instantiate generic types over something that will be useful at runtime
             if (type.IsGenericDefinition)
             {
-                Instantiation canonInst = TypeExtensions.GetInstantiationThatMeetsConstraints(type.Instantiation, allowCanon: true);
+                Instantiation canonInst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                    type.Instantiation,
+                    allowCanon: true
+                );
                 if (canonInst.IsNull)
                     return;
 
-                Instantiation concreteInst = TypeExtensions.GetInstantiationThatMeetsConstraints(type.Instantiation, allowCanon: false);
+                Instantiation concreteInst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                    type.Instantiation,
+                    allowCanon: false
+                );
                 if (!concreteInst.IsNull)
-                    fallbackNonCanonicalOwningType = ((MetadataType)type).MakeInstantiatedType(concreteInst);
+                    fallbackNonCanonicalOwningType = ((MetadataType)type).MakeInstantiatedType(
+                        concreteInst
+                    );
 
                 type = ((MetadataType)type).MakeInstantiatedType(canonInst);
 
@@ -67,7 +83,10 @@ namespace ILCompiler
                         // Make a non-canonical instantiation.
                         // We currently have a file format limitation that requires generic methods to be concrete.
                         // A rooted canonical method body is not visible to the reflection mapping tables.
-                        Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(method.Instantiation, allowCanon: false);
+                        Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                            method.Instantiation,
+                            allowCanon: false
+                        );
 
                         if (inst.IsNull)
                         {
@@ -76,13 +95,25 @@ namespace ILCompiler
                         else if (!method.OwningType.IsCanonicalSubtype(CanonicalFormKind.Any))
                         {
                             // Owning type is not canonical, can use the instantiation directly.
-                            TryRootMethod(rootProvider, method.MakeInstantiatedMethod(inst), reason);
+                            TryRootMethod(
+                                rootProvider,
+                                method.MakeInstantiatedMethod(inst),
+                                reason
+                            );
                         }
                         else if (fallbackNonCanonicalOwningType != null)
                         {
                             // We have a fallback non-canonical type we can root a body on
-                            MethodDesc alternateMethod = method.Context.GetMethodForInstantiatedType(method.GetTypicalMethodDefinition(), fallbackNonCanonicalOwningType);
-                            TryRootMethod(rootProvider, alternateMethod.MakeInstantiatedMethod(inst), reason);
+                            MethodDesc alternateMethod =
+                                method.Context.GetMethodForInstantiatedType(
+                                    method.GetTypicalMethodDefinition(),
+                                    fallbackNonCanonicalOwningType
+                                );
+                            TryRootMethod(
+                                rootProvider,
+                                alternateMethod.MakeInstantiatedMethod(inst),
+                                reason
+                            );
                         }
                     }
                     else
@@ -93,7 +124,11 @@ namespace ILCompiler
             }
         }
 
-        public static bool TryRootMethod(IRootingServiceProvider rootProvider, MethodDesc method, string reason)
+        public static bool TryRootMethod(
+            IRootingServiceProvider rootProvider,
+            MethodDesc method,
+            string reason
+        )
         {
             try
             {
@@ -106,7 +141,11 @@ namespace ILCompiler
             }
         }
 
-        public static void RootMethod(IRootingServiceProvider rootProvider, MethodDesc method, string reason)
+        public static void RootMethod(
+            IRootingServiceProvider rootProvider,
+            MethodDesc method,
+            string reason
+        )
         {
             // Make sure we're not putting something into the graph that will crash later.
             LibraryRootProvider.CheckCanGenerateMethod(method);
@@ -114,7 +153,12 @@ namespace ILCompiler
             rootProvider.AddReflectionRoot(method, reason);
         }
 
-        public static bool TryGetDependenciesForReflectedMethod(ref DependencyList dependencies, NodeFactory factory, MethodDesc method, string reason)
+        public static bool TryGetDependenciesForReflectedMethod(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            MethodDesc method,
+            string reason
+        )
         {
             MethodDesc typicalMethod = method.GetTypicalMethodDefinition();
             if (factory.MetadataManager.IsReflectionBlocked(typicalMethod))
@@ -125,7 +169,10 @@ namespace ILCompiler
             // If this is a generic method, make sure we at minimum have the metadata
             // for it. This hedges against the risk that we fail to figure out a code body
             // for it below.
-            if (typicalMethod.IsGenericMethodDefinition || typicalMethod.OwningType.IsGenericDefinition)
+            if (
+                typicalMethod.IsGenericMethodDefinition
+                || typicalMethod.OwningType.IsGenericDefinition
+            )
             {
                 dependencies ??= new DependencyList();
                 dependencies.Add(factory.ReflectableMethod(typicalMethod), reason);
@@ -135,10 +182,18 @@ namespace ILCompiler
             // This is not a complete solution to the problem.
             // If we ever decide that MakeGenericType/MakeGenericMethod should simply be considered unsafe, this code can be deleted
             // and instantiations that are not fully closed can be ignored.
-            if (method.OwningType.IsGenericDefinition || method.OwningType.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true))
+            if (
+                method.OwningType.IsGenericDefinition
+                || method.OwningType.ContainsSignatureVariables(
+                    treatGenericParameterLikeSignatureVariable: true
+                )
+            )
             {
                 TypeDesc owningType = method.OwningType.GetTypeDefinition();
-                Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(owningType.Instantiation, allowCanon: false);
+                Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                    owningType.Instantiation,
+                    allowCanon: false
+                );
                 if (inst.IsNull)
                 {
                     return false;
@@ -146,14 +201,21 @@ namespace ILCompiler
 
                 method = method.Context.GetMethodForInstantiatedType(
                     method.GetTypicalMethodDefinition(),
-                    ((MetadataType)owningType).MakeInstantiatedType(inst));
+                    ((MetadataType)owningType).MakeInstantiatedType(inst)
+                );
             }
 
-            if (method.IsGenericMethodDefinition || method.Instantiation.ContainsSignatureVariables())
+            if (
+                method.IsGenericMethodDefinition
+                || method.Instantiation.ContainsSignatureVariables()
+            )
             {
                 method = method.GetMethodDefinition();
 
-                Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(method.Instantiation, allowCanon: false);
+                Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                    method.Instantiation,
+                    allowCanon: false
+                );
                 if (inst.IsNull)
                 {
                     return false;
@@ -178,16 +240,29 @@ namespace ILCompiler
             return true;
         }
 
-        public static bool TryGetDependenciesForReflectedField(ref DependencyList dependencies, NodeFactory factory, FieldDesc field, string reason)
+        public static bool TryGetDependenciesForReflectedField(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            FieldDesc field,
+            string reason
+        )
         {
             // If there's any genericness involved, try to create a fitting instantiation that would be usable at runtime.
             // This is not a complete solution to the problem.
             // If we ever decide that MakeGenericType/MakeGenericMethod should simply be considered unsafe, this code can be deleted
             // and instantiations that are not fully closed can be ignored.
-            if (field.OwningType.IsGenericDefinition || field.OwningType.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true))
+            if (
+                field.OwningType.IsGenericDefinition
+                || field.OwningType.ContainsSignatureVariables(
+                    treatGenericParameterLikeSignatureVariable: true
+                )
+            )
             {
                 TypeDesc owningType = field.OwningType.GetTypeDefinition();
-                Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(owningType.Instantiation, allowCanon: true);
+                Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                    owningType.Instantiation,
+                    allowCanon: true
+                );
                 if (inst.IsNull)
                 {
                     return false;
@@ -195,7 +270,8 @@ namespace ILCompiler
 
                 field = field.Context.GetFieldForInstantiatedType(
                     field.GetTypicalFieldDefinition(),
-                    ((MetadataType)owningType).MakeInstantiatedType(inst));
+                    ((MetadataType)owningType).MakeInstantiatedType(inst)
+                );
             }
 
             if (factory.MetadataManager.IsReflectionBlocked(field))
@@ -203,7 +279,14 @@ namespace ILCompiler
                 return false;
             }
 
-            if (!TryGetDependenciesForReflectedType(ref dependencies, factory, field.OwningType, reason))
+            if (
+                !TryGetDependenciesForReflectedType(
+                    ref dependencies,
+                    factory,
+                    field.OwningType,
+                    reason
+                )
+            )
             {
                 return false;
             }
@@ -220,33 +303,57 @@ namespace ILCompiler
                 bool cctorContextAdded = false;
                 if (field.IsThreadStatic)
                 {
-                    dependencies.Add(factory.TypeThreadStaticIndex((MetadataType)field.OwningType), reason);
+                    dependencies.Add(
+                        factory.TypeThreadStaticIndex((MetadataType)field.OwningType),
+                        reason
+                    );
                 }
                 else if (field.HasGCStaticBase)
                 {
-                    dependencies.Add(factory.TypeGCStaticsSymbol((MetadataType)field.OwningType), reason);
+                    dependencies.Add(
+                        factory.TypeGCStaticsSymbol((MetadataType)field.OwningType),
+                        reason
+                    );
                 }
                 else
                 {
-                    dependencies.Add(factory.TypeNonGCStaticsSymbol((MetadataType)field.OwningType), reason);
+                    dependencies.Add(
+                        factory.TypeNonGCStaticsSymbol((MetadataType)field.OwningType),
+                        reason
+                    );
                     cctorContextAdded = true;
                 }
 
-                if (!cctorContextAdded && factory.PreinitializationManager.HasLazyStaticConstructor(field.OwningType))
+                if (
+                    !cctorContextAdded
+                    && factory.PreinitializationManager.HasLazyStaticConstructor(field.OwningType)
+                )
                 {
-                    dependencies.Add(factory.TypeNonGCStaticsSymbol((MetadataType)field.OwningType), reason);
+                    dependencies.Add(
+                        factory.TypeNonGCStaticsSymbol((MetadataType)field.OwningType),
+                        reason
+                    );
                 }
             }
 
             return true;
         }
 
-        public static bool TryGetDependenciesForReflectedType(ref DependencyList dependencies, NodeFactory factory, TypeDesc type, string reason)
+        public static bool TryGetDependenciesForReflectedType(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type,
+            string reason
+        )
         {
             try
             {
                 // Instantiations with signature variables are not helpful - just use the definition.
-                if (type.ContainsSignatureVariables(treatGenericParameterLikeSignatureVariable: true))
+                if (
+                    type.ContainsSignatureVariables(
+                        treatGenericParameterLikeSignatureVariable: true
+                    )
+                )
                 {
                     type = type.GetTypeDefinition();
                 }
@@ -266,10 +373,18 @@ namespace ILCompiler
                 // and instantiations that are not fully closed can be ignored.
                 if (type.IsGenericDefinition)
                 {
-                    Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(type.Instantiation, allowCanon: true);
+                    Instantiation inst = TypeExtensions.GetInstantiationThatMeetsConstraints(
+                        type.Instantiation,
+                        allowCanon: true
+                    );
                     if (!inst.IsNull)
                     {
-                        dependencies.Add(factory.MaximallyConstructableType(((MetadataType)type).MakeInstantiatedType(inst)), reason);
+                        dependencies.Add(
+                            factory.MaximallyConstructableType(
+                                ((MetadataType)type).MakeInstantiatedType(inst)
+                            ),
+                            reason
+                        );
                     }
                 }
             }

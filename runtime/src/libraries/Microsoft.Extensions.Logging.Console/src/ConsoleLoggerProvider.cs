@@ -38,7 +38,10 @@ namespace Microsoft.Extensions.Logging.Console
         /// </summary>
         /// <param name="options">The options to create <see cref="ConsoleLogger"/> instances with.</param>
         /// <param name="formatters">Log formatters added for <see cref="ConsoleLogger"/> insteaces.</param>
-        public ConsoleLoggerProvider(IOptionsMonitor<ConsoleLoggerOptions> options, IEnumerable<ConsoleFormatter>? formatters)
+        public ConsoleLoggerProvider(
+            IOptionsMonitor<ConsoleLoggerOptions> options,
+            IEnumerable<ConsoleFormatter>? formatters
+        )
         {
             _options = options;
             _loggers = new ConcurrentDictionary<string, ConsoleLogger>();
@@ -77,13 +80,16 @@ namespace Microsoft.Extensions.Logging.Console
                 return false;
             }
 
-            return (consoleMode & Interop.Kernel32.ENABLE_VIRTUAL_TERMINAL_PROCESSING) == Interop.Kernel32.ENABLE_VIRTUAL_TERMINAL_PROCESSING;
+            return (consoleMode & Interop.Kernel32.ENABLE_VIRTUAL_TERMINAL_PROCESSING)
+                == Interop.Kernel32.ENABLE_VIRTUAL_TERMINAL_PROCESSING;
         }
 
         [MemberNotNull(nameof(_formatters))]
         private void SetFormatters(IEnumerable<ConsoleFormatter>? formatters = null)
         {
-            var cd = new ConcurrentDictionary<string, ConsoleFormatter>(StringComparer.OrdinalIgnoreCase);
+            var cd = new ConcurrentDictionary<string, ConsoleFormatter>(
+                StringComparer.OrdinalIgnoreCase
+            );
 
             bool added = false;
             if (formatters != null)
@@ -97,9 +103,30 @@ namespace Microsoft.Extensions.Logging.Console
 
             if (!added)
             {
-                cd.TryAdd(ConsoleFormatterNames.Simple, new SimpleConsoleFormatter(new FormatterOptionsMonitor<SimpleConsoleFormatterOptions>(new SimpleConsoleFormatterOptions())));
-                cd.TryAdd(ConsoleFormatterNames.Systemd, new SystemdConsoleFormatter(new FormatterOptionsMonitor<ConsoleFormatterOptions>(new ConsoleFormatterOptions())));
-                cd.TryAdd(ConsoleFormatterNames.Json, new JsonConsoleFormatter(new FormatterOptionsMonitor<JsonConsoleFormatterOptions>(new JsonConsoleFormatterOptions())));
+                cd.TryAdd(
+                    ConsoleFormatterNames.Simple,
+                    new SimpleConsoleFormatter(
+                        new FormatterOptionsMonitor<SimpleConsoleFormatterOptions>(
+                            new SimpleConsoleFormatterOptions()
+                        )
+                    )
+                );
+                cd.TryAdd(
+                    ConsoleFormatterNames.Systemd,
+                    new SystemdConsoleFormatter(
+                        new FormatterOptionsMonitor<ConsoleFormatterOptions>(
+                            new ConsoleFormatterOptions()
+                        )
+                    )
+                );
+                cd.TryAdd(
+                    ConsoleFormatterNames.Json,
+                    new JsonConsoleFormatter(
+                        new FormatterOptionsMonitor<JsonConsoleFormatterOptions>(
+                            new JsonConsoleFormatterOptions()
+                        )
+                    )
+                );
             }
 
             _formatters = cd;
@@ -108,7 +135,13 @@ namespace Microsoft.Extensions.Logging.Console
         // warning:  ReloadLoggerOptions can be called before the ctor completed,... before registering all of the state used in this method need to be initialized
         private void ReloadLoggerOptions(ConsoleLoggerOptions options)
         {
-            if (options.FormatterName == null || !_formatters.TryGetValue(options.FormatterName, out ConsoleFormatter? logFormatter))
+            if (
+                options.FormatterName == null
+                || !_formatters.TryGetValue(
+                    options.FormatterName,
+                    out ConsoleFormatter? logFormatter
+                )
+            )
             {
 #pragma warning disable CS0618
                 logFormatter = options.Format switch
@@ -133,7 +166,13 @@ namespace Microsoft.Extensions.Logging.Console
         /// <inheritdoc />
         public ILogger CreateLogger(string name)
         {
-            if (_options.CurrentValue.FormatterName == null || !_formatters.TryGetValue(_options.CurrentValue.FormatterName, out ConsoleFormatter? logFormatter))
+            if (
+                _options.CurrentValue.FormatterName == null
+                || !_formatters.TryGetValue(
+                    _options.CurrentValue.FormatterName,
+                    out ConsoleFormatter? logFormatter
+                )
+            )
             {
 #pragma warning disable CS0618
                 logFormatter = _options.CurrentValue.Format switch
@@ -149,27 +188,40 @@ namespace Microsoft.Extensions.Logging.Console
                 }
             }
 
-            return _loggers.TryGetValue(name, out ConsoleLogger? logger) ?
-                logger :
-                _loggers.GetOrAdd(name, new ConsoleLogger(name, _messageQueue, logFormatter, _scopeProvider, _options.CurrentValue));
+            return _loggers.TryGetValue(name, out ConsoleLogger? logger)
+                ? logger
+                : _loggers.GetOrAdd(
+                    name,
+                    new ConsoleLogger(
+                        name,
+                        _messageQueue,
+                        logFormatter,
+                        _scopeProvider,
+                        _options.CurrentValue
+                    )
+                );
         }
 
 #pragma warning disable CS0618
-        private static void UpdateFormatterOptions(ConsoleFormatter formatter, ConsoleLoggerOptions deprecatedFromOptions)
+        private static void UpdateFormatterOptions(
+            ConsoleFormatter formatter,
+            ConsoleLoggerOptions deprecatedFromOptions
+        )
         {
             // kept for deprecated apis:
             if (formatter is SimpleConsoleFormatter defaultFormatter)
             {
                 defaultFormatter.FormatterOptions = new SimpleConsoleFormatterOptions()
                 {
-                    ColorBehavior = deprecatedFromOptions.DisableColors ? LoggerColorBehavior.Disabled : LoggerColorBehavior.Enabled,
+                    ColorBehavior = deprecatedFromOptions.DisableColors
+                        ? LoggerColorBehavior.Disabled
+                        : LoggerColorBehavior.Enabled,
                     IncludeScopes = deprecatedFromOptions.IncludeScopes,
                     TimestampFormat = deprecatedFromOptions.TimestampFormat,
                     UseUtcTimestamp = deprecatedFromOptions.UseUtcTimestamp,
                 };
             }
-            else
-            if (formatter is SystemdConsoleFormatter systemdFormatter)
+            else if (formatter is SystemdConsoleFormatter systemdFormatter)
             {
                 systemdFormatter.FormatterOptions = new ConsoleFormatterOptions()
                 {
@@ -193,7 +245,9 @@ namespace Microsoft.Extensions.Logging.Console
         {
             _scopeProvider = scopeProvider;
 
-            foreach (System.Collections.Generic.KeyValuePair<string, ConsoleLogger> logger in _loggers)
+            foreach (
+                System.Collections.Generic.KeyValuePair<string, ConsoleLogger> logger in _loggers
+            )
             {
                 logger.Value.ScopeProvider = _scopeProvider;
             }

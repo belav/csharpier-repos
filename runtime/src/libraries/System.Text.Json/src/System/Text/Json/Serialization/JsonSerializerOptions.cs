@@ -68,10 +68,14 @@ namespace System.Text.Json
             _converters = new ConfigurationList<JsonConverter>(this);
 
 #pragma warning disable CA2252 // This API requires opting into preview features
-            _polymorphicTypeConfigurations = new ConfigurationList<JsonPolymorphicTypeConfiguration>(this)
-            {
-                OnElementAdded = static config => { config.IsAssignedToOptionsInstance = true; }
-            };
+            _polymorphicTypeConfigurations =
+                new ConfigurationList<JsonPolymorphicTypeConfiguration>(this)
+                {
+                    OnElementAdded = static config =>
+                    {
+                        config.IsAssignedToOptionsInstance = true;
+                    }
+                };
 #pragma warning restore CA2252 // This API requires opting into preview features
 
             TrackOptionsInstance(this);
@@ -98,7 +102,11 @@ namespace System.Text.Json
             _referenceHandler = options._referenceHandler;
             _converters = new ConfigurationList<JsonConverter>(this, options._converters);
 #pragma warning disable CA2252 // This API requires opting into preview features
-            _polymorphicTypeConfigurations = new ConfigurationList<JsonPolymorphicTypeConfiguration>(this, options._polymorphicTypeConfigurations);
+            _polymorphicTypeConfigurations =
+                new ConfigurationList<JsonPolymorphicTypeConfiguration>(
+                    this,
+                    options._polymorphicTypeConfigurations
+                );
 #pragma warning restore CA2252 // This API requires opting into preview features
             _encoder = options._encoder;
             _defaultIgnoreCondition = options._defaultIgnoreCondition;
@@ -125,7 +133,8 @@ namespace System.Text.Json
         }
 
         /// <summary>Tracks the options instance to enable all instances to be enumerated.</summary>
-        private static void TrackOptionsInstance(JsonSerializerOptions options) => TrackedOptionsInstances.All.Add(options, null);
+        private static void TrackOptionsInstance(JsonSerializerOptions options) =>
+            TrackedOptionsInstances.All.Add(options, null);
 
         internal static class TrackedOptionsInstances
         {
@@ -182,10 +191,7 @@ namespace System.Text.Json
         /// </remarks>
         public bool AllowTrailingCommas
         {
-            get
-            {
-                return _allowTrailingCommas;
-            }
+            get { return _allowTrailingCommas; }
             set
             {
                 VerifyMutable();
@@ -203,10 +209,7 @@ namespace System.Text.Json
         /// </exception>
         public int DefaultBufferSize
         {
-            get
-            {
-                return _defaultBufferSize;
-            }
+            get { return _defaultBufferSize; }
             set
             {
                 VerifyMutable();
@@ -225,10 +228,7 @@ namespace System.Text.Json
         /// </summary>
         public JavaScriptEncoder? Encoder
         {
-            get
-            {
-                return _encoder;
-            }
+            get { return _encoder; }
             set
             {
                 VerifyMutable();
@@ -246,10 +246,7 @@ namespace System.Text.Json
         /// </remarks>
         public JsonNamingPolicy? DictionaryKeyPolicy
         {
-            get
-            {
-                return _dictionaryKeyPolicy;
-            }
+            get { return _dictionaryKeyPolicy; }
             set
             {
                 VerifyMutable();
@@ -265,14 +262,15 @@ namespace System.Text.Json
         /// Thrown if this property is set after serialization or deserialization has occurred.
         /// or <see cref="DefaultIgnoreCondition"/> has been set to a non-default value. These properties cannot be used together.
         /// </exception>
-        [Obsolete(Obsoletions.JsonSerializerOptionsIgnoreNullValuesMessage, DiagnosticId = Obsoletions.JsonSerializerOptionsIgnoreNullValuesDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.JsonSerializerOptionsIgnoreNullValuesMessage,
+            DiagnosticId = Obsoletions.JsonSerializerOptionsIgnoreNullValuesDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public bool IgnoreNullValues
         {
-            get
-            {
-                return _ignoreNullValues;
-            }
+            get { return _ignoreNullValues; }
             set
             {
                 VerifyMutable();
@@ -299,10 +297,7 @@ namespace System.Text.Json
         /// </exception>
         public JsonIgnoreCondition DefaultIgnoreCondition
         {
-            get
-            {
-                return _defaultIgnoreCondition;
-            }
+            get { return _defaultIgnoreCondition; }
             set
             {
                 VerifyMutable();
@@ -355,10 +350,7 @@ namespace System.Text.Json
         /// </exception>
         public bool IgnoreReadOnlyProperties
         {
-            get
-            {
-                return _ignoreReadOnlyProperties;
-            }
+            get { return _ignoreReadOnlyProperties; }
             set
             {
                 VerifyMutable();
@@ -379,10 +371,7 @@ namespace System.Text.Json
         /// </exception>
         public bool IgnoreReadOnlyFields
         {
-            get
-            {
-                return _ignoreReadonlyFields;
-            }
+            get { return _ignoreReadonlyFields; }
             set
             {
                 VerifyMutable();
@@ -399,10 +388,7 @@ namespace System.Text.Json
         /// </exception>
         public bool IncludeFields
         {
-            get
-            {
-                return _includeFields;
-            }
+            get { return _includeFields; }
             set
             {
                 VerifyMutable();
@@ -431,7 +417,9 @@ namespace System.Text.Json
 
                 if (value < 0)
                 {
-                    ThrowHelper.ThrowArgumentOutOfRangeException_MaxDepthMustBePositive(nameof(value));
+                    ThrowHelper.ThrowArgumentOutOfRangeException_MaxDepthMustBePositive(
+                        nameof(value)
+                    );
                 }
 
                 _maxDepth = value;
@@ -452,10 +440,7 @@ namespace System.Text.Json
         /// </remarks>
         public JsonNamingPolicy? PropertyNamingPolicy
         {
-            get
-            {
-                return _jsonPropertyNamingPolicy;
-            }
+            get { return _jsonPropertyNamingPolicy; }
             set
             {
                 VerifyMutable();
@@ -470,10 +455,7 @@ namespace System.Text.Json
         /// <remarks>There is a performance cost associated when the value is true.</remarks>
         public bool PropertyNameCaseInsensitive
         {
-            get
-            {
-                return _propertyNameCaseInsensitive;
-            }
+            get { return _propertyNameCaseInsensitive; }
             set
             {
                 VerifyMutable();
@@ -495,17 +477,17 @@ namespace System.Text.Json
         /// </remarks>
         public JsonCommentHandling ReadCommentHandling
         {
-            get
-            {
-                return _readCommentHandling;
-            }
+            get { return _readCommentHandling; }
             set
             {
                 VerifyMutable();
 
                 Debug.Assert(value >= 0);
                 if (value > JsonCommentHandling.Skip)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.JsonSerializerDoesNotSupportComments);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.JsonSerializerDoesNotSupportComments
+                    );
 
                 _readCommentHandling = value;
             }
@@ -534,10 +516,7 @@ namespace System.Text.Json
         /// </exception>
         public bool WriteIndented
         {
-            get
-            {
-                return _writeIndented;
-            }
+            get { return _writeIndented; }
             set
             {
                 VerifyMutable();
@@ -555,7 +534,8 @@ namespace System.Text.Json
             {
                 VerifyMutable();
                 _referenceHandler = value;
-                ReferenceHandlingStrategy = value?.HandlingStrategy ?? ReferenceHandlingStrategy.None;
+                ReferenceHandlingStrategy =
+                    value?.HandlingStrategy ?? ReferenceHandlingStrategy.None;
             }
         }
 
@@ -570,10 +550,15 @@ namespace System.Text.Json
         }
 
         // The cached value used to determine if ReferenceHandler should use Preserve or IgnoreCycles semanitcs or None of them.
-        internal ReferenceHandlingStrategy ReferenceHandlingStrategy = ReferenceHandlingStrategy.None;
+        internal ReferenceHandlingStrategy ReferenceHandlingStrategy =
+            ReferenceHandlingStrategy.None;
+
         // Workaround https://github.com/dotnet/linker/issues/2715
-        [UnconditionalSuppressMessage("AotAnalysis", "IL3050:RequiresDynamicCode",
-            Justification = "Dynamic path is guarded by the runtime feature switch.")]
+        [UnconditionalSuppressMessage(
+            "AotAnalysis",
+            "IL3050:RequiresDynamicCode",
+            Justification = "Dynamic path is guarded by the runtime feature switch."
+        )]
         internal MemberAccessor MemberAccessorStrategy
         {
             get
@@ -582,9 +567,9 @@ namespace System.Text.Json
                 {
 #if NETCOREAPP
                     // if dynamic code isn't supported, fallback to reflection
-                    _memberAccessorStrategy = RuntimeFeature.IsDynamicCodeSupported ?
-                        new ReflectionEmitCachingMemberAccessor() :
-                        new ReflectionMemberAccessor();
+                    _memberAccessorStrategy = RuntimeFeature.IsDynamicCodeSupported
+                        ? new ReflectionEmitCachingMemberAccessor()
+                        : new ReflectionMemberAccessor();
 #elif NETFRAMEWORK
                     _memberAccessorStrategy = new ReflectionEmitCachingMemberAccessor();
 #else
@@ -624,7 +609,8 @@ namespace System.Text.Json
             {
                 Debug.Assert(
                     s_typeInfoCreationFunc != null,
-                    "Reflection-based JsonTypeInfo creator should be initialized if IsInitializedForReflectionSerializer is true.");
+                    "Reflection-based JsonTypeInfo creator should be initialized if IsInitializedForReflectionSerializer is true."
+                );
                 info = s_typeInfoCreationFunc(type, this);
             }
 
@@ -683,7 +669,9 @@ namespace System.Text.Json
         {
             if (_cachingContext != null || _serializerContext != null)
             {
-                ThrowHelper.ThrowInvalidOperationException_SerializerOptionsImmutable(_serializerContext);
+                ThrowHelper.ThrowInvalidOperationException_SerializerOptionsImmutable(
+                    _serializerContext
+                );
             }
         }
 

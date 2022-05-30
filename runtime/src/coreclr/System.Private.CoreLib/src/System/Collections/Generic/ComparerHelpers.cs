@@ -35,7 +35,10 @@ namespace System.Collections.Generic
             // If T implements IComparable<T> return a GenericComparer<T>
             if (typeof(IComparable<>).MakeGenericType(type).IsAssignableFrom(type))
             {
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(GenericComparer<int>), runtimeType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(GenericComparer<int>),
+                    runtimeType
+                );
             }
             // Nullable does not implement IComparable<T?> directly because that would add an extra interface call per comparison.
             // Instead, it relies on Comparer<T?>.Default to specialize for nullables and do the lifted comparisons if T implements IComparable.
@@ -52,7 +55,11 @@ namespace System.Collections.Generic
                 result = TryCreateEnumComparer(runtimeType);
             }
 
-            return result ?? CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(ObjectComparer<object>), runtimeType);
+            return result
+                ?? CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(ObjectComparer<object>),
+                    runtimeType
+                );
         }
 
         /// <summary>
@@ -62,13 +69,19 @@ namespace System.Collections.Generic
         private static object? TryCreateNullableComparer(RuntimeType nullableType)
         {
             Debug.Assert(nullableType != null);
-            Debug.Assert(nullableType.IsGenericType && nullableType.GetGenericTypeDefinition() == typeof(Nullable<>));
+            Debug.Assert(
+                nullableType.IsGenericType
+                    && nullableType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            );
 
             var embeddedType = (RuntimeType)nullableType.GetGenericArguments()[0];
 
             if (typeof(IComparable<>).MakeGenericType(embeddedType).IsAssignableFrom(embeddedType))
             {
-                return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(NullableComparer<int>), embeddedType);
+                return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(NullableComparer<int>),
+                    embeddedType
+                );
             }
 
             return null;
@@ -100,7 +113,10 @@ namespace System.Collections.Generic
                 case TypeCode.UInt32:
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
-                    return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(EnumComparer<>), enumType);
+                    return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                        (RuntimeType)typeof(EnumComparer<>),
+                        enumType
+                    );
             }
 
             return null;
@@ -133,7 +149,10 @@ namespace System.Collections.Generic
             else if (type.IsAssignableTo(typeof(IEquatable<>).MakeGenericType(type)))
             {
                 // If T implements IEquatable<T> return a GenericEqualityComparer<T>
-                result = CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(GenericEqualityComparer<string>), runtimeType);
+                result = CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(GenericEqualityComparer<string>),
+                    runtimeType
+                );
             }
             else if (type.IsGenericType)
             {
@@ -150,7 +169,11 @@ namespace System.Collections.Generic
                 result = TryCreateEnumEqualityComparer(runtimeType);
             }
 
-            return result ?? CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(ObjectEqualityComparer<object>), runtimeType);
+            return result
+                ?? CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(ObjectEqualityComparer<object>),
+                    runtimeType
+                );
         }
 
         /// <summary>
@@ -160,13 +183,19 @@ namespace System.Collections.Generic
         private static object? TryCreateNullableEqualityComparer(RuntimeType nullableType)
         {
             Debug.Assert(nullableType != null);
-            Debug.Assert(nullableType.IsGenericType && nullableType.GetGenericTypeDefinition() == typeof(Nullable<>));
+            Debug.Assert(
+                nullableType.IsGenericType
+                    && nullableType.GetGenericTypeDefinition() == typeof(Nullable<>)
+            );
 
             var embeddedType = (RuntimeType)nullableType.GetGenericArguments()[0];
 
             if (typeof(IEquatable<>).MakeGenericType(embeddedType).IsAssignableFrom(embeddedType))
             {
-                return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(NullableEqualityComparer<int>), embeddedType);
+                return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                    (RuntimeType)typeof(NullableEqualityComparer<int>),
+                    embeddedType
+                );
             }
 
             return null;
@@ -197,7 +226,10 @@ namespace System.Collections.Generic
                 case TypeCode.Int64:
                 case TypeCode.UInt64:
                 case TypeCode.UInt16:
-                    return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter((RuntimeType)typeof(EnumEqualityComparer<>), enumType);
+                    return RuntimeTypeHandle.CreateInstanceForAnotherGenericParameter(
+                        (RuntimeType)typeof(EnumEqualityComparer<>),
+                        enumType
+                    );
             }
 
             return null;

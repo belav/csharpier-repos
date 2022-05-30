@@ -25,7 +25,8 @@ namespace JIT.HardwareIntrinsics.Arm
             }
             catch (Exception e)
             {
-                testResult = (ArmBase.IsSupported || (e is not PlatformNotSupportedException)) ? Fail : Pass;
+                testResult =
+                    (ArmBase.IsSupported || (e is not PlatformNotSupportedException)) ? Fail : Pass;
             }
 
             return testResult;

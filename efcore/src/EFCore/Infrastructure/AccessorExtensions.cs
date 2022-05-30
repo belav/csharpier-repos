@@ -38,8 +38,7 @@ public static class AccessorExtensions
     /// <returns>The requested service.</returns>
     [DebuggerStepThrough]
     public static TService GetService<TService>(this IInfrastructure<IServiceProvider> accessor)
-        where TService : class
-        => InfrastructureExtensions.GetService<TService>(accessor);
+        where TService : class => InfrastructureExtensions.GetService<TService>(accessor);
 
     /// <summary>
     ///     <para>
@@ -58,6 +57,5 @@ public static class AccessorExtensions
     /// <param name="accessor">The object that exposes the property.</param>
     /// <returns>The object assigned to the property.</returns>
     [DebuggerStepThrough]
-    public static T GetInfrastructure<T>(this IInfrastructure<T> accessor)
-        => accessor.Instance;
+    public static T GetInfrastructure<T>(this IInfrastructure<T> accessor) => accessor.Instance;
 }

@@ -17,9 +17,12 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private const string CategoryPrefix = "category";
         private const string SeveritySuffix = "severity";
 
-        private const string DotnetAnalyzerDiagnosticSeverityKey = DotnetAnalyzerDiagnosticPrefix + "." + SeveritySuffix;
+        private const string DotnetAnalyzerDiagnosticSeverityKey =
+            DotnetAnalyzerDiagnosticPrefix + "." + SeveritySuffix;
 
-        public static ImmutableArray<string> ImmutableCustomTags(this DiagnosticDescriptor descriptor)
+        public static ImmutableArray<string> ImmutableCustomTags(
+            this DiagnosticDescriptor descriptor
+        )
         {
             Debug.Assert(descriptor.CustomTags is ImmutableArray<string>);
             return (ImmutableArray<string>)descriptor.CustomTags;
@@ -34,18 +37,34 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             this DiagnosticDescriptor descriptor,
             CompilationOptions compilationOptions,
             ImmutableDictionary<string, string>? analyzerOptions,
-            ImmutableDictionary<string, ReportDiagnostic>? treeOptions)
+            ImmutableDictionary<string, ReportDiagnostic>? treeOptions
+        )
         {
             var effectiveSeverity = descriptor.GetEffectiveSeverity(compilationOptions);
 
             // Apply analyzer config options, unless configured with a non-default value in compilation options.
             // Note that compilation options (/nowarn, /warnaserror) override analyzer config options.
-            if (treeOptions != null && analyzerOptions != null &&
-                (!compilationOptions.SpecificDiagnosticOptions.TryGetValue(descriptor.Id, out var reportDiagnostic) ||
-                 reportDiagnostic == ReportDiagnostic.Default))
+            if (
+                treeOptions != null
+                && analyzerOptions != null
+                && (
+                    !compilationOptions.SpecificDiagnosticOptions.TryGetValue(
+                        descriptor.Id,
+                        out var reportDiagnostic
+                    )
+                    || reportDiagnostic == ReportDiagnostic.Default
+                )
+            )
             {
-                if (treeOptions.TryGetValue(descriptor.Id, out reportDiagnostic) && reportDiagnostic != ReportDiagnostic.Default ||
-                    TryGetSeverityFromBulkConfiguration(descriptor, analyzerOptions, out reportDiagnostic))
+                if (
+                    treeOptions.TryGetValue(descriptor.Id, out reportDiagnostic)
+                        && reportDiagnostic != ReportDiagnostic.Default
+                    || TryGetSeverityFromBulkConfiguration(
+                        descriptor,
+                        analyzerOptions,
+                        out reportDiagnostic
+                    )
+                )
                 {
                     Debug.Assert(reportDiagnostic != ReportDiagnostic.Default);
                     effectiveSeverity = reportDiagnostic;
@@ -55,12 +74,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return effectiveSeverity;
         }
 
-        public static bool IsDefinedInEditorConfig(this DiagnosticDescriptor descriptor, AnalyzerConfigOptions analyzerConfigOptions)
+        public static bool IsDefinedInEditorConfig(
+            this DiagnosticDescriptor descriptor,
+            AnalyzerConfigOptions analyzerConfigOptions
+        )
         {
             // Check if the option is defined explicitly in the editorconfig
             var diagnosticKey = $"{DotnetDiagnosticPrefix}.{descriptor.Id}.{SeveritySuffix}";
-            if (analyzerConfigOptions.TryGetValue(diagnosticKey, out var value) &&
-                EditorConfigSeverityStrings.TryParse(value, out var severity))
+            if (
+                analyzerConfigOptions.TryGetValue(diagnosticKey, out var value)
+                && EditorConfigSeverityStrings.TryParse(value, out var severity)
+            )
             {
                 return true;
             }
@@ -70,25 +94,39 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //  1. Disabled by default diagnostics
             //  2. Compiler diagnostics
             //  3. Non-configurable diagnostics
-            if (!descriptor.IsEnabledByDefault ||
-                descriptor.ImmutableCustomTags().Any(tag => tag is WellKnownDiagnosticTags.Compiler or WellKnownDiagnosticTags.NotConfigurable))
+            if (
+                !descriptor.IsEnabledByDefault
+                || descriptor
+                    .ImmutableCustomTags()
+                    .Any(
+                        tag =>
+                            tag
+                                is WellKnownDiagnosticTags.Compiler
+                                    or WellKnownDiagnosticTags.NotConfigurable
+                    )
+            )
             {
                 return false;
             }
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
-            var categoryBasedKey = $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{descriptor.Category}.{SeveritySuffix}";
-            if (analyzerConfigOptions.TryGetValue(categoryBasedKey, out value) &&
-                EditorConfigSeverityStrings.TryParse(value, out severity))
+            var categoryBasedKey =
+                $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{descriptor.Category}.{SeveritySuffix}";
+            if (
+                analyzerConfigOptions.TryGetValue(categoryBasedKey, out value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
+            )
             {
                 return true;
             }
 
             // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
-            if (analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value) &&
-                EditorConfigSeverityStrings.TryParse(value, out severity))
+            if (
+                analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
+            )
             {
                 return true;
             }
@@ -97,12 +135,17 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static ReportDiagnostic GetEffectiveSeverity(this DiagnosticDescriptor descriptor, AnalyzerConfigOptions analyzerConfigOptions)
+        public static ReportDiagnostic GetEffectiveSeverity(
+            this DiagnosticDescriptor descriptor,
+            AnalyzerConfigOptions analyzerConfigOptions
+        )
         {
             // Check if the option is defined explicitly in the editorconfig
             var diagnosticKey = $"{DotnetDiagnosticPrefix}.{descriptor.Id}.{SeveritySuffix}";
-            if (analyzerConfigOptions.TryGetValue(diagnosticKey, out var value) &&
-                EditorConfigSeverityStrings.TryParse(value, out var severity))
+            if (
+                analyzerConfigOptions.TryGetValue(diagnosticKey, out var value)
+                && EditorConfigSeverityStrings.TryParse(value, out var severity)
+            )
             {
                 return severity;
             }
@@ -112,25 +155,39 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             //  1. Disabled by default diagnostics
             //  2. Compiler diagnostics
             //  3. Non-configurable diagnostics
-            if (!descriptor.IsEnabledByDefault ||
-                descriptor.ImmutableCustomTags().Any(tag => tag is WellKnownDiagnosticTags.Compiler or WellKnownDiagnosticTags.NotConfigurable))
+            if (
+                !descriptor.IsEnabledByDefault
+                || descriptor
+                    .ImmutableCustomTags()
+                    .Any(
+                        tag =>
+                            tag
+                                is WellKnownDiagnosticTags.Compiler
+                                    or WellKnownDiagnosticTags.NotConfigurable
+                    )
+            )
             {
                 return ReportDiagnostic.Default;
             }
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
-            var categoryBasedKey = $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{descriptor.Category}.{SeveritySuffix}";
-            if (analyzerConfigOptions.TryGetValue(categoryBasedKey, out value) &&
-                EditorConfigSeverityStrings.TryParse(value, out severity))
+            var categoryBasedKey =
+                $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{descriptor.Category}.{SeveritySuffix}";
+            if (
+                analyzerConfigOptions.TryGetValue(categoryBasedKey, out value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
+            )
             {
                 return severity;
             }
 
             // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
-            if (analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value) &&
-                EditorConfigSeverityStrings.TryParse(value, out severity))
+            if (
+                analyzerConfigOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
+            )
             {
                 return severity;
             }
@@ -150,14 +207,24 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
         private static bool TryGetSeverityFromBulkConfiguration(
             DiagnosticDescriptor descriptor,
             ImmutableDictionary<string, string> analyzerOptions,
-            out ReportDiagnostic severity)
+            out ReportDiagnostic severity
+        )
         {
             // Analyzer bulk configuration does not apply to:
             //  1. Disabled by default diagnostics
             //  2. Compiler diagnostics
             //  3. Non-configurable diagnostics
-            if (!descriptor.IsEnabledByDefault ||
-                descriptor.ImmutableCustomTags().Any(tag => tag is WellKnownDiagnosticTags.Compiler or WellKnownDiagnosticTags.NotConfigurable))
+            if (
+                !descriptor.IsEnabledByDefault
+                || descriptor
+                    .ImmutableCustomTags()
+                    .Any(
+                        tag =>
+                            tag
+                                is WellKnownDiagnosticTags.Compiler
+                                    or WellKnownDiagnosticTags.NotConfigurable
+                    )
+            )
             {
                 severity = default;
                 return false;
@@ -165,17 +232,22 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
 
             // If user has explicitly configured default severity for the diagnostic category, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.category-security.severity = error'
-            var categoryBasedKey = $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{descriptor.Category}.{SeveritySuffix}";
-            if (analyzerOptions.TryGetValue(categoryBasedKey, out var value) &&
-                EditorConfigSeverityStrings.TryParse(value, out severity))
+            var categoryBasedKey =
+                $"{DotnetAnalyzerDiagnosticPrefix}.{CategoryPrefix}-{descriptor.Category}.{SeveritySuffix}";
+            if (
+                analyzerOptions.TryGetValue(categoryBasedKey, out var value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
+            )
             {
                 return true;
             }
 
             // Otherwise, if user has explicitly configured default severity for all analyzer diagnostics, that should be respected.
             // For example, 'dotnet_analyzer_diagnostic.severity = error'
-            if (analyzerOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value) &&
-                EditorConfigSeverityStrings.TryParse(value, out severity))
+            if (
+                analyzerOptions.TryGetValue(DotnetAnalyzerDiagnosticSeverityKey, out value)
+                && EditorConfigSeverityStrings.TryParse(value, out severity)
+            )
             {
                 return true;
             }
@@ -184,12 +256,14 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             return false;
         }
 
-        public static bool IsCompilationEnd(this DiagnosticDescriptor descriptor)
-            => descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.CompilationEnd);
+        public static bool IsCompilationEnd(this DiagnosticDescriptor descriptor) =>
+            descriptor.ImmutableCustomTags().Contains(WellKnownDiagnosticTags.CompilationEnd);
 
         // TODO: the value stored in descriptor should already be valid URI (https://github.com/dotnet/roslyn/issues/59205)
-        internal static Uri? GetValidHelpLinkUri(this DiagnosticDescriptor descriptor)
-           => Uri.TryCreate(descriptor.HelpLinkUri, UriKind.Absolute, out var uri) &&
-              (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps) ? uri : null;
+        internal static Uri? GetValidHelpLinkUri(this DiagnosticDescriptor descriptor) =>
+            Uri.TryCreate(descriptor.HelpLinkUri, UriKind.Absolute, out var uri)
+            && (uri.Scheme == Uri.UriSchemeHttp || uri.Scheme == Uri.UriSchemeHttps)
+                ? uri
+                : null;
     }
 }

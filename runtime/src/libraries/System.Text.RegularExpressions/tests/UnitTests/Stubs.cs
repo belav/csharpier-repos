@@ -28,12 +28,14 @@ namespace System.Text.RegularExpressions.Generator
 {
     internal static class DiagnosticDescriptors
     {
-        public static DiagnosticDescriptor UseRegexSourceGeneration { get; } = new DiagnosticDescriptor(
-            id: "SYSLIB1046",
-            title: "Use the Regex source generator.",
-            messageFormat: "The inputs to your Regex are known at compile-time so you could be using the source generator to boost performance.",
-            category: "RegexGenerator",
-            DiagnosticSeverity.Info,
-            isEnabledByDefault: true);
+        public static DiagnosticDescriptor UseRegexSourceGeneration { get; } =
+            new DiagnosticDescriptor(
+                id: "SYSLIB1046",
+                title: "Use the Regex source generator.",
+                messageFormat: "The inputs to your Regex are known at compile-time so you could be using the source generator to boost performance.",
+                category: "RegexGenerator",
+                DiagnosticSeverity.Info,
+                isEnabledByDefault: true
+            );
     }
 }

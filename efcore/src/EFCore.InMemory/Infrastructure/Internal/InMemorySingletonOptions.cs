@@ -38,13 +38,14 @@ public class InMemorySingletonOptions : IInMemorySingletonOptions
     {
         var inMemoryOptions = options.FindExtension<InMemoryOptionsExtension>();
 
-        if (inMemoryOptions != null
-            && DatabaseRoot != inMemoryOptions.DatabaseRoot)
+        if (inMemoryOptions != null && DatabaseRoot != inMemoryOptions.DatabaseRoot)
         {
             throw new InvalidOperationException(
                 CoreStrings.SingletonOptionChanged(
                     nameof(InMemoryDbContextOptionsExtensions.UseInMemoryDatabase),
-                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)));
+                    nameof(DbContextOptionsBuilder.UseInternalServiceProvider)
+                )
+            );
         }
     }
 

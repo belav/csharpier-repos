@@ -22,5 +22,6 @@ public interface IEntityTypeIgnoredConvention : IConvention
         IConventionModelBuilder modelBuilder,
         string name,
         Type? type,
-        IConventionContext<string> context);
+        IConventionContext<string> context
+    );
 }

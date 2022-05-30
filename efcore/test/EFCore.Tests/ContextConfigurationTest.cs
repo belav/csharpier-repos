@@ -15,7 +15,10 @@ public class ContextConfigurationTest
         var contextServices1 = InMemoryTestHelpers.Instance.CreateContextServices(provider);
         var contextServices2 = InMemoryTestHelpers.Instance.CreateContextServices(provider);
 
-        Assert.Same(contextServices1.GetRequiredService<IDbSetSource>(), contextServices2.GetRequiredService<IDbSetSource>());
+        Assert.Same(
+            contextServices1.GetRequiredService<IDbSetSource>(),
+            contextServices2.GetRequiredService<IDbSetSource>()
+        );
     }
 
     [ConditionalFact]
@@ -24,7 +27,10 @@ public class ContextConfigurationTest
         var provider = InMemoryTestHelpers.Instance.CreateServiceProvider();
         var contextServices = InMemoryTestHelpers.Instance.CreateContextServices(provider);
 
-        Assert.Same(contextServices.GetRequiredService<IStateManager>(), contextServices.GetRequiredService<IStateManager>());
+        Assert.Same(
+            contextServices.GetRequiredService<IStateManager>(),
+            contextServices.GetRequiredService<IStateManager>()
+        );
     }
 
     [ConditionalFact]
@@ -34,7 +40,10 @@ public class ContextConfigurationTest
         var contextServices1 = InMemoryTestHelpers.Instance.CreateContextServices(provider);
         var contextServices2 = InMemoryTestHelpers.Instance.CreateContextServices(provider);
 
-        Assert.NotSame(contextServices1.GetRequiredService<IStateManager>(), contextServices2.GetRequiredService<IStateManager>());
+        Assert.NotSame(
+            contextServices1.GetRequiredService<IStateManager>(),
+            contextServices2.GetRequiredService<IStateManager>()
+        );
     }
 
     [ConditionalFact]
@@ -87,17 +96,15 @@ public class ContextConfigurationTest
     {
         private readonly IServiceProvider _serviceProvider;
 
-        public GiddyupContext()
-        {
-        }
+        public GiddyupContext() { }
 
         public GiddyupContext(IServiceProvider serviceProvider)
         {
             _serviceProvider = serviceProvider;
         }
 
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(Guid.NewGuid().ToString())
                 .EnableServiceProviderCaching(false)
                 .UseInternalServiceProvider(_serviceProvider);

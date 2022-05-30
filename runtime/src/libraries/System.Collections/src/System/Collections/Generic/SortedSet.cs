@@ -44,8 +44,17 @@ namespace System.Collections.Generic
     [DebuggerTypeProxy(typeof(ICollectionDebugView<>))]
     [DebuggerDisplay("Count = {Count}")]
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
-    public partial class SortedSet<T> : ISet<T>, ICollection<T>, ICollection, IReadOnlyCollection<T>, IReadOnlySet<T>, ISerializable, IDeserializationCallback
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
+    public partial class SortedSet<T>
+        : ISet<T>,
+            ICollection<T>,
+            ICollection,
+            IReadOnlyCollection<T>,
+            IReadOnlySet<T>,
+            ISerializable,
+            IDeserializationCallback
     {
         #region Local variables/constants
 
@@ -77,11 +86,9 @@ namespace System.Collections.Generic
             this.comparer = comparer ?? Comparer<T>.Default;
         }
 
-
         public SortedSet(IEnumerable<T> collection) : this(collection, Comparer<T>.Default) { }
 
-        public SortedSet(IEnumerable<T> collection, IComparer<T>? comparer)
-            : this(comparer)
+        public SortedSet(IEnumerable<T> collection, IComparer<T>? comparer) : this(comparer)
         {
             ArgumentNullException.ThrowIfNull(collection);
 
@@ -148,7 +155,10 @@ namespace System.Collections.Generic
             T? max = Max;
             foreach (T item in collection)
             {
-                if (!(comparer.Compare(item, min) < 0 || comparer.Compare(item, max) > 0) && Contains(item))
+                if (
+                    !(comparer.Compare(item, min) < 0 || comparer.Compare(item, max) > 0)
+                    && Contains(item)
+                )
                 {
                     Remove(item);
                 }
@@ -283,8 +293,12 @@ namespace System.Collections.Generic
 
         // Virtual function for TreeSubSet, which may need to update its count.
         internal virtual void VersionCheck(bool updateCount = false) { }
+
         // Virtual function for TreeSubSet, which may need the count variable of the parent set.
-        internal virtual int TotalCount() { return Count; }
+        internal virtual int TotalCount()
+        {
+            return Count;
+        }
 
         // Virtual function for TreeSubSet, which may need to do range checks.
         internal virtual bool IsWithinRange(T item) => true;
@@ -452,7 +466,9 @@ namespace System.Collections.Generic
                         {
                             // `current` is a 2-node and `sibling` is either a 3-node or a 4-node.
                             // We can change the color of `current` to red by some rotation.
-                            Node newGrandParent = parent.Rotate(parent.GetRotation(current, sibling))!;
+                            Node newGrandParent = parent.Rotate(
+                                parent.GetRotation(current, sibling)
+                            )!;
 
                             newGrandParent.Color = parent.Color;
                             parent.ColorBlack();
@@ -513,12 +529,19 @@ namespace System.Collections.Generic
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (count < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (count > array.Length - index)
@@ -556,7 +579,11 @@ namespace System.Collections.Generic
 
             if (index < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), index, SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    index,
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
 
             if (array.Length - index < Count)
@@ -610,7 +637,12 @@ namespace System.Collections.Generic
         // It doesn't matter if we keep `grandParent` and `greatGrandParent` up-to-date, because we won't
         // need to split again in the next node.
         // By the time we need to split again, everything will be correctly set.
-        private void InsertionBalance(Node current, ref Node parent, Node grandParent, Node greatGrandParent)
+        private void InsertionBalance(
+            Node current,
+            ref Node parent,
+            Node grandParent,
+            Node greatGrandParent
+        )
         {
             Debug.Assert(parent != null);
             Debug.Assert(grandParent != null);
@@ -622,12 +654,16 @@ namespace System.Collections.Generic
             if (parentIsOnRight == currentIsOnRight)
             {
                 // Same orientation, single rotation
-                newChildOfGreatGrandParent = currentIsOnRight ? grandParent.RotateLeft() : grandParent.RotateRight();
+                newChildOfGreatGrandParent = currentIsOnRight
+                    ? grandParent.RotateLeft()
+                    : grandParent.RotateRight();
             }
             else
             {
                 // Different orientation, double rotation
-                newChildOfGreatGrandParent = currentIsOnRight ? grandParent.RotateLeftRight() : grandParent.RotateRightLeft();
+                newChildOfGreatGrandParent = currentIsOnRight
+                    ? grandParent.RotateLeftRight()
+                    : grandParent.RotateRightLeft();
                 // Current node now becomes the child of `greatGrandParent`
                 parent = greatGrandParent;
             }
@@ -660,7 +696,12 @@ namespace System.Collections.Generic
         /// <summary>
         /// Replaces the matching node with its successor.
         /// </summary>
-        private void ReplaceNode(Node match, Node parentOfMatch, Node successor, Node parentOfSuccessor)
+        private void ReplaceNode(
+            Node match,
+            Node parentOfMatch,
+            Node successor,
+            Node parentOfSuccessor
+        )
         {
             Debug.Assert(match != null);
 
@@ -674,7 +715,10 @@ namespace System.Collections.Generic
             {
                 Debug.Assert(parentOfSuccessor != null);
                 Debug.Assert(successor.Left == null);
-                Debug.Assert((successor.Right == null && successor.IsRed) || (successor.Right!.IsRed && successor.IsBlack));
+                Debug.Assert(
+                    (successor.Right == null && successor.IsRed)
+                        || (successor.Right!.IsRed && successor.IsBlack)
+                );
 
                 successor.Right?.ColorBlack();
 
@@ -746,7 +790,8 @@ namespace System.Collections.Generic
             return -1;
         }
 
-        internal Node? FindRange(T? from, T? to) => FindRange(from, to, lowerBoundActive: true, upperBoundActive: true);
+        internal Node? FindRange(T? from, T? to) =>
+            FindRange(from, to, lowerBoundActive: true, upperBoundActive: true);
 
         internal Node? FindRange(T? from, T? to, bool lowerBoundActive, bool upperBoundActive)
         {
@@ -778,12 +823,15 @@ namespace System.Collections.Generic
         /// <summary>
         /// Returns an <see cref="IEqualityComparer{T}"/> object that can be used to create a collection that contains individual sets.
         /// </summary>
-        public static IEqualityComparer<SortedSet<T>> CreateSetComparer() => CreateSetComparer(memberEqualityComparer: null);
+        public static IEqualityComparer<SortedSet<T>> CreateSetComparer() =>
+            CreateSetComparer(memberEqualityComparer: null);
 
         /// <summary>
         /// Returns an <see cref="IEqualityComparer{T}"/> object, according to a specified comparer, that can be used to create a collection that contains individual sets.
         /// </summary>
-        public static IEqualityComparer<SortedSet<T>> CreateSetComparer(IEqualityComparer<T>? memberEqualityComparer)
+        public static IEqualityComparer<SortedSet<T>> CreateSetComparer(
+            IEqualityComparer<T>? memberEqualityComparer
+        )
         {
             return new SortedSetEqualityComparer<T>(memberEqualityComparer);
         }
@@ -795,7 +843,11 @@ namespace System.Collections.Generic
         /// <param name="set2">The second set.</param>
         /// <param name="comparer">The fallback comparer to use if the sets do not have equal comparers.</param>
         /// <returns><c>true</c> if the sets have equal contents; otherwise, <c>false</c>.</returns>
-        internal static bool SortedSetEquals(SortedSet<T>? set1, SortedSet<T>? set2, IComparer<T> comparer)
+        internal static bool SortedSetEquals(
+            SortedSet<T>? set1,
+            SortedSet<T>? set2,
+            IComparer<T> comparer
+        )
         {
             if (set1 == null)
             {
@@ -869,14 +921,20 @@ namespace System.Collections.Generic
             }
 
             // This actually hurts if N is much greater than M. The / 2 is arbitrary.
-            if (asSorted != null && treeSubset == null && HasEqualComparer(asSorted) && (asSorted.Count > this.Count / 2))
+            if (
+                asSorted != null
+                && treeSubset == null
+                && HasEqualComparer(asSorted)
+                && (asSorted.Count > this.Count / 2)
+            )
             {
                 // First do a merge sort to an array.
                 T[] merged = new T[asSorted.Count + this.Count];
                 int c = 0;
                 Enumerator mine = this.GetEnumerator();
                 Enumerator theirs = asSorted.GetEnumerator();
-                bool mineEnded = !mine.MoveNext(), theirsEnded = !theirs.MoveNext();
+                bool mineEnded = !mine.MoveNext(),
+                    theirsEnded = !theirs.MoveNext();
                 while (!mineEnded && !theirsEnded)
                 {
                     int comp = Comparer.Compare(mine.Current, theirs.Current);
@@ -904,8 +962,7 @@ namespace System.Collections.Generic
                     do
                     {
                         merged[c++] = remaining.Current;
-                    }
-                    while (remaining.MoveNext());
+                    } while (remaining.MoveNext());
                 }
 
                 // now merged has all c elements
@@ -923,7 +980,12 @@ namespace System.Collections.Generic
             }
         }
 
-        private static Node? ConstructRootFromSortedArray(T[] arr, int startIndex, int endIndex, Node? redNode)
+        private static Node? ConstructRootFromSortedArray(
+            T[] arr,
+            int startIndex,
+            int endIndex,
+            Node? redNode
+        )
         {
             // You're given a sorted array... say 1 2 3 4 5 6
             // There are 2 cases:
@@ -979,11 +1041,16 @@ namespace System.Collections.Generic
                     int midpt = ((startIndex + endIndex) / 2);
                     root = new Node(arr[midpt], NodeColor.Black);
                     root.Left = ConstructRootFromSortedArray(arr, startIndex, midpt - 1, redNode);
-                    root.Right = size % 2 == 0 ?
-                        ConstructRootFromSortedArray(arr, midpt + 2, endIndex, new Node(arr[midpt + 1], NodeColor.Red)) :
-                        ConstructRootFromSortedArray(arr, midpt + 1, endIndex, null);
+                    root.Right =
+                        size % 2 == 0
+                            ? ConstructRootFromSortedArray(
+                                arr,
+                                midpt + 2,
+                                endIndex,
+                                new Node(arr[midpt + 1], NodeColor.Red)
+                            )
+                            : ConstructRootFromSortedArray(arr, midpt + 1, endIndex, null);
                     break;
-
             }
 
             return root;
@@ -1015,7 +1082,8 @@ namespace System.Collections.Generic
                 int c = 0;
                 Enumerator mine = this.GetEnumerator();
                 Enumerator theirs = asSorted.GetEnumerator();
-                bool mineEnded = !mine.MoveNext(), theirsEnded = !theirs.MoveNext();
+                bool mineEnded = !mine.MoveNext(),
+                    theirsEnded = !theirs.MoveNext();
                 T? max = Max;
 
                 while (!mineEnded && !theirsEnded && Comparer.Compare(theirs.Current, max) <= 0)
@@ -1089,7 +1157,10 @@ namespace System.Collections.Generic
             if (asSorted != null && HasEqualComparer(asSorted))
             {
                 // Outside range, no point in doing anything
-                if (comparer.Compare(asSorted.Max, Min) >= 0 && comparer.Compare(asSorted.Min, Max) <= 0)
+                if (
+                    comparer.Compare(asSorted.Max, Min) >= 0
+                    && comparer.Compare(asSorted.Min, Max) <= 0
+                )
                 {
                     T? min = Min;
                     T? max = Max;
@@ -1333,7 +1404,14 @@ namespace System.Collections.Generic
                 return false;
 
             SortedSet<T>? asSorted = other as SortedSet<T>;
-            if (asSorted != null && HasEqualComparer(asSorted) && (comparer.Compare(Min, asSorted.Max) > 0 || comparer.Compare(Max, asSorted.Min) < 0))
+            if (
+                asSorted != null
+                && HasEqualComparer(asSorted)
+                && (
+                    comparer.Compare(Min, asSorted.Max) > 0
+                    || comparer.Compare(Max, asSorted.Min) < 0
+                )
+            )
             {
                 return false;
             }
@@ -1372,7 +1450,10 @@ namespace System.Collections.Generic
         /// An earlier implementation used delegates to perform these checks rather than returning
         /// an ElementCount struct; however this was changed due to the perf overhead of delegates.
         /// </summary>
-        private unsafe ElementCount CheckUniqueAndUnfoundElements(IEnumerable<T> other, bool returnIfUnfound)
+        private unsafe ElementCount CheckUniqueAndUnfoundElements(
+            IEnumerable<T> other,
+            bool returnIfUnfound
+        )
         {
             ElementCount result;
 
@@ -1395,9 +1476,10 @@ namespace System.Collections.Generic
             int intArrayLength = BitHelper.ToIntArrayLength(originalLastIndex);
 
             Span<int> span = stackalloc int[StackAllocThreshold];
-            BitHelper bitHelper = intArrayLength <= StackAllocThreshold ?
-                new BitHelper(span.Slice(0, intArrayLength), clear: true) :
-                new BitHelper(new int[intArrayLength], clear: false);
+            BitHelper bitHelper =
+                intArrayLength <= StackAllocThreshold
+                    ? new BitHelper(span.Slice(0, intArrayLength), clear: true)
+                    : new BitHelper(new int[intArrayLength], clear: false);
 
             // count of items in other not found in this
             int UnfoundCount = 0;
@@ -1518,7 +1600,10 @@ namespace System.Collections.Generic
         {
             if (Comparer.Compare(lowerValue, upperValue) > 0)
             {
-                throw new ArgumentException(SR.SortedSet_LowerValueGreaterThanUpperValue, nameof(lowerValue));
+                throw new ArgumentException(
+                    SR.SortedSet_LowerValueGreaterThanUpperValue,
+                    nameof(lowerValue)
+                );
             }
             return new TreeSubSet(this, lowerValue, upperValue, true, true);
         }
@@ -1534,7 +1619,8 @@ namespace System.Collections.Generic
         }
 #endif
 
-        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) => GetObjectData(info, context);
+        void ISerializable.GetObjectData(SerializationInfo info, StreamingContext context) =>
+            GetObjectData(info, context);
 
         protected virtual void GetObjectData(SerializationInfo info, StreamingContext context)
         {
@@ -1552,7 +1638,8 @@ namespace System.Collections.Generic
             }
         }
 
-        void IDeserializationCallback.OnDeserialization(object? sender) => OnDeserialization(sender);
+        void IDeserializationCallback.OnDeserialization(object? sender) =>
+            OnDeserialization(sender);
 
         protected virtual void OnDeserialization(object? sender)
         {
@@ -1674,9 +1761,9 @@ namespace System.Collections.Generic
 #endif
 
                 bool currentIsLeftChild = Left == current;
-                return IsNonNullRed(sibling.Left) ?
-                    (currentIsLeftChild ? TreeRotation.RightLeft : TreeRotation.Right) :
-                    (currentIsLeftChild ? TreeRotation.Left : TreeRotation.LeftRight);
+                return IsNonNullRed(sibling.Left)
+                    ? (currentIsLeftChild ? TreeRotation.RightLeft : TreeRotation.Right)
+                    : (currentIsLeftChild ? TreeRotation.Left : TreeRotation.LeftRight);
             }
 
             /// <summary>
@@ -1727,7 +1814,9 @@ namespace System.Collections.Generic
                         Debug.Assert(Left!.Right!.IsRed);
                         return RotateLeftRight();
                     default:
-                        Debug.Fail($"{nameof(rotation)}: {rotation} is not a defined {nameof(TreeRotation)} value.");
+                        Debug.Fail(
+                            $"{nameof(rotation)}: {rotation} is not a defined {nameof(TreeRotation)} value."
+                        );
                         return null;
                 }
             }
@@ -1829,13 +1918,16 @@ namespace System.Collections.Generic
             {
                 Debug.Assert(child1 != child2);
 
-                return (Left == child1 && Right == child2)
-                    || (Left == child2 && Right == child1);
+                return (Left == child1 && Right == child2) || (Left == child2 && Right == child1);
             }
 #endif
         }
 
-        public struct Enumerator : IEnumerator<T>, IEnumerator, ISerializable, IDeserializationCallback
+        public struct Enumerator
+            : IEnumerator<T>,
+                IEnumerator,
+                ISerializable,
+                IDeserializationCallback
         {
             private readonly SortedSet<T> _tree;
             private readonly int _version;
@@ -1845,10 +1937,7 @@ namespace System.Collections.Generic
 
             private readonly bool _reverse;
 
-            internal Enumerator(SortedSet<T> set)
-                : this(set, reverse: false)
-            {
-            }
+            internal Enumerator(SortedSet<T> set) : this(set, reverse: false) { }
 
             internal Enumerator(SortedSet<T> set, bool reverse)
             {
@@ -1878,7 +1967,8 @@ namespace System.Collections.Generic
             {
                 _current = null;
                 Node? node = _tree.root;
-                Node? next, other;
+                Node? next,
+                    other;
                 while (node != null)
                 {
                     next = (_reverse ? node.Right : node.Left);
@@ -1917,7 +2007,8 @@ namespace System.Collections.Generic
 
                 _current = _stack.Pop();
                 Node? node = (_reverse ? _current.Left : _current.Right);
-                Node? next, other;
+                Node? next,
+                    other;
                 while (node != null)
                 {
                     next = (_reverse ? node.Right : node.Left);
@@ -2017,7 +2108,7 @@ namespace System.Collections.Generic
         }
 
         // Used for set checking operations (using enumerables) that rely on counting
-        private static int Log2(int value) => BitOperations.Log2((uint) value);
+        private static int Log2(int value) => BitOperations.Log2((uint)value);
 
         #endregion
     }

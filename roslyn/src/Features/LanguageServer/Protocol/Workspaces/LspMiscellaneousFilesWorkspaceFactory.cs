@@ -9,14 +9,21 @@ using Microsoft.CodeAnalysis.LanguageServer.Handler;
 
 namespace Microsoft.CodeAnalysis.LanguageServer;
 
-[ExportCSharpVisualBasicLspServiceFactory(typeof(LspMiscellaneousFilesWorkspace), WellKnownLspServerKinds.CSharpVisualBasicLspServer), Shared]
+[
+    ExportCSharpVisualBasicLspServiceFactory(
+        typeof(LspMiscellaneousFilesWorkspace),
+        WellKnownLspServerKinds.CSharpVisualBasicLspServer
+    ),
+    Shared
+]
 internal class LspMiscellaneousFilesWorkspaceFactory : ILspServiceFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LspMiscellaneousFilesWorkspaceFactory()
-    {
-    }
+    public LspMiscellaneousFilesWorkspaceFactory() { }
 
-    public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind) => new LspMiscellaneousFilesWorkspace();
+    public ILspService CreateILspService(
+        LspServices lspServices,
+        WellKnownLspServerKinds serverKind
+    ) => new LspMiscellaneousFilesWorkspace();
 }

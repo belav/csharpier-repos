@@ -5,9 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ConcurrencyModel;
 
 public class Location
 {
-    public Location()
-    {
-    }
+    public Location() { }
 
     private Location(double latitude, double longitude)
     {

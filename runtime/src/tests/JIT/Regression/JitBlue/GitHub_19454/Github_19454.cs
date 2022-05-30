@@ -35,4 +35,3 @@ class GitHub_19454
         return 100;
     }
 }
-

@@ -47,8 +47,7 @@ public sealed class SqliteVersionConditionAttribute : Attribute, ITestCondition
             return new ValueTask<bool>(false);
         }
 
-        if (_min == null
-            && _max == null)
+        if (_min == null && _max == null)
         {
             return new ValueTask<bool>(true);
         }
@@ -58,7 +57,9 @@ public sealed class SqliteVersionConditionAttribute : Attribute, ITestCondition
             return new ValueTask<bool>(Current <= _max);
         }
 
-        return new ValueTask<bool>(_max == null ? Current >= _min : Current <= _max && Current >= _min);
+        return new ValueTask<bool>(
+            _max == null ? Current >= _min : Current <= _max && Current >= _min
+        );
     }
 
     private string _skipReason;
@@ -66,8 +67,9 @@ public sealed class SqliteVersionConditionAttribute : Attribute, ITestCondition
     public string SkipReason
     {
         set => _skipReason = value;
-        get => _skipReason
+        get =>
+            _skipReason
             ?? $"Test only runs for SQLite versions >= {Min ?? "Any"} and <= {Max ?? "Any"}"
-            + (Skip == null ? "" : "and skipping on " + Skip);
+                + (Skip == null ? "" : "and skipping on " + Skip);
     }
 }

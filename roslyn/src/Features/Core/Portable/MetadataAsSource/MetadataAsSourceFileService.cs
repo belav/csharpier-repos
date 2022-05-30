@@ -24,8 +24,8 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
     internal class MetadataAsSourceFileService : IMetadataAsSourceFileService
     {
         /// <summary>
-        /// A lock to guard parallel accesses to this type. In practice, we presume that it's not 
-        /// an important scenario that we can be generating multiple documents in parallel, and so 
+        /// A lock to guard parallel accesses to this type. In practice, we presume that it's not
+        /// an important scenario that we can be generating multiple documents in parallel, and so
         /// we simply take this lock around all public entrypoints to enforce sequential access.
         /// </summary>
         private readonly SemaphoreSlim _gate = new(initialCount: 1);
@@ -39,18 +39,25 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         private Mutex? _mutex;
         private string? _rootTemporaryPathWithGuid;
         private readonly string _rootTemporaryPath;
-        private readonly ImmutableArray<Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>> _providers;
+        private readonly ImmutableArray<
+            Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>
+        > _providers;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public MetadataAsSourceFileService([ImportMany] IEnumerable<Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>> providers)
+        public MetadataAsSourceFileService(
+            [ImportMany]
+                IEnumerable<
+                Lazy<IMetadataAsSourceFileProvider, MetadataAsSourceFileProviderMetadata>
+            > providers
+        )
         {
             _providers = ExtensionOrderer.Order(providers).ToImmutableArray();
             _rootTemporaryPath = Path.Combine(Path.GetTempPath(), "MetadataAsSource");
         }
 
-        private static string CreateMutexName(string directoryName)
-            => "MetadataAsSource-" + directoryName;
+        private static string CreateMutexName(string directoryName) =>
+            "MetadataAsSource-" + directoryName;
 
         private string GetRootPathWithGuid_NoLock()
         {
@@ -64,7 +71,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             return _rootTemporaryPathWithGuid;
         }
 
-        public async Task<MetadataAsSourceFile> GetGeneratedFileAsync(Project project, ISymbol symbol, bool signaturesOnly, MetadataAsSourceOptions options, CancellationToken cancellationToken = default)
+        public async Task<MetadataAsSourceFile> GetGeneratedFileAsync(
+            Project project,
+            ISymbol symbol,
+            bool signaturesOnly,
+            MetadataAsSourceOptions options,
+            CancellationToken cancellationToken = default
+        )
         {
             if (project == null)
             {
@@ -78,7 +91,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
             if (symbol.Kind == SymbolKind.Namespace)
             {
-                throw new ArgumentException(FeaturesResources.symbol_cannot_be_a_namespace, nameof(symbol));
+                throw new ArgumentException(
+                    FeaturesResources.symbol_cannot_be_a_namespace,
+                    nameof(symbol)
+                );
             }
 
             symbol = symbol.GetOriginalUnreducedDefinition();
@@ -93,7 +109,17 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                 {
                     var provider = lazyProvider.Value;
                     var providerTempPath = Path.Combine(tempPath, provider.GetType().Name);
-                    var result = await provider.GetGeneratedFileAsync(_workspace, project, symbol, signaturesOnly, options, providerTempPath, cancellationToken).ConfigureAwait(false);
+                    var result = await provider
+                        .GetGeneratedFileAsync(
+                            _workspace,
+                            project,
+                            symbol,
+                            signaturesOnly,
+                            options,
+                            providerTempPath,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                     if (result is not null)
                     {
                         return result;
@@ -105,7 +131,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             throw ExceptionUtilities.Unreachable;
         }
 
-        public bool TryAddDocumentToWorkspace(string filePath, SourceTextContainer sourceTextContainer)
+        public bool TryAddDocumentToWorkspace(
+            string filePath,
+            SourceTextContainer sourceTextContainer
+        )
         {
             using (_gate.DisposableWait())
             {
@@ -116,7 +145,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
 
                     Contract.ThrowIfNull(_workspace);
 
-                    if (provider.Value.TryAddDocumentToWorkspace(_workspace, filePath, sourceTextContainer))
+                    if (
+                        provider.Value.TryAddDocumentToWorkspace(
+                            _workspace,
+                            filePath,
+                            sourceTextContainer
+                        )
+                    )
                         return true;
                 }
             }
@@ -143,7 +178,10 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             return false;
         }
 
-        public bool ShouldCollapseOnOpen(string? filePath, BlockStructureOptions blockStructureOptions)
+        public bool ShouldCollapseOnOpen(
+            string? filePath,
+            BlockStructureOptions blockStructureOptions
+        )
         {
             if (filePath is null)
                 return false;
@@ -169,11 +207,18 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         {
             if (_workspace == null)
             {
-                _workspace = new MetadataAsSourceWorkspace(this, project.Solution.Workspace.Services.HostServices);
+                _workspace = new MetadataAsSourceWorkspace(
+                    this,
+                    project.Solution.Workspace.Services.HostServices
+                );
             }
         }
 
-        internal async Task<SymbolMappingResult?> MapSymbolAsync(Document document, SymbolKey symbolId, CancellationToken cancellationToken)
+        internal async Task<SymbolMappingResult?> MapSymbolAsync(
+            Document document,
+            SymbolKey symbolId,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(document.FilePath);
 
@@ -196,8 +241,14 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
             if (project is null)
                 return null;
 
-            var compilation = await project.GetRequiredCompilationAsync(cancellationToken).ConfigureAwait(false);
-            var resolutionResult = symbolId.Resolve(compilation, ignoreAssemblyKey: true, cancellationToken: cancellationToken);
+            var compilation = await project
+                .GetRequiredCompilationAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var resolutionResult = symbolId.Resolve(
+                compilation,
+                ignoreAssemblyKey: true,
+                cancellationToken: cancellationToken
+            );
             if (resolutionResult.Symbol == null)
                 return null;
 
@@ -233,11 +284,19 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         var deletedEverything = true;
 
                         // Let's look through directories to delete.
-                        foreach (var directoryInfo in new DirectoryInfo(_rootTemporaryPath).EnumerateDirectories())
+                        foreach (
+                            var directoryInfo in new DirectoryInfo(
+                                _rootTemporaryPath
+                            ).EnumerateDirectories()
+                        )
                         {
-
                             // Is there a mutex for this one?
-                            if (Mutex.TryOpenExisting(CreateMutexName(directoryInfo.Name), out var acquiredMutex))
+                            if (
+                                Mutex.TryOpenExisting(
+                                    CreateMutexName(directoryInfo.Name),
+                                    out var acquiredMutex
+                                )
+                            )
                             {
                                 acquiredMutex.Dispose();
                                 deletedEverything = false;
@@ -253,9 +312,7 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
                         }
                     }
                 }
-                catch (Exception)
-                {
-                }
+                catch (Exception) { }
             }
         }
 
@@ -263,16 +320,19 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         {
             try
             {
-                foreach (var fileInfo in new DirectoryInfo(directoryPath).EnumerateFiles("*", SearchOption.AllDirectories))
+                foreach (
+                    var fileInfo in new DirectoryInfo(directoryPath).EnumerateFiles(
+                        "*",
+                        SearchOption.AllDirectories
+                    )
+                )
                 {
                     fileInfo.IsReadOnly = false;
                 }
 
                 Directory.Delete(directoryPath, recursive: true);
             }
-            catch (Exception)
-            {
-            }
+            catch (Exception) { }
         }
 
         public bool IsNavigableMetadataSymbol(ISymbol symbol)

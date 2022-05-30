@@ -31,30 +31,38 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
 
         public int Count => _options.Count;
 
-        public void Set<T>(Option2<T> option, T value)
-            => _options[new OptionKey2(option)] = value;
+        public void Set<T>(Option2<T> option, T value) => _options[new OptionKey2(option)] = value;
 
-        public void Add<T>(Option2<T> option, T value)
-            => _options.Add(new OptionKey2(option), value);
+        public void Add<T>(Option2<T> option, T value) =>
+            _options.Add(new OptionKey2(option), value);
 
-        public void Add<T>(Option2<CodeStyleOption2<T>> option, T value)
-            => Add(option, value, option.DefaultValue.Notification);
+        public void Add<T>(Option2<CodeStyleOption2<T>> option, T value) =>
+            Add(option, value, option.DefaultValue.Notification);
 
-        public void Add<T>(Option2<CodeStyleOption2<T>> option, T value, NotificationOption2 notification)
-            => _options.Add(new OptionKey2(option), new CodeStyleOption2<T>(value, notification));
+        public void Add<T>(
+            Option2<CodeStyleOption2<T>> option,
+            T value,
+            NotificationOption2 notification
+        ) => _options.Add(new OptionKey2(option), new CodeStyleOption2<T>(value, notification));
 
-        public void Add<T>(PerLanguageOption2<T> option, T value)
-            => _options.Add(new OptionKey2(option, _languageName), value);
+        public void Add<T>(PerLanguageOption2<T> option, T value) =>
+            _options.Add(new OptionKey2(option, _languageName), value);
 
-        public void Add<T>(PerLanguageOption2<CodeStyleOption2<T>> option, T value)
-            => Add(option, value, option.DefaultValue.Notification);
+        public void Add<T>(PerLanguageOption2<CodeStyleOption2<T>> option, T value) =>
+            Add(option, value, option.DefaultValue.Notification);
 
-        public void Add<T>(PerLanguageOption2<CodeStyleOption2<T>> option, T value, NotificationOption2 notification)
-            => _options.Add(new OptionKey2(option, _languageName), new CodeStyleOption2<T>(value, notification));
+        public void Add<T>(
+            PerLanguageOption2<CodeStyleOption2<T>> option,
+            T value,
+            NotificationOption2 notification
+        ) =>
+            _options.Add(
+                new OptionKey2(option, _languageName),
+                new CodeStyleOption2<T>(value, notification)
+            );
 
         // 📝 This can be removed if/when collection initializers support AddRange.
-        public void Add(OptionsCollection options)
-            => AddRange(options);
+        public void Add(OptionsCollection options) => AddRange(options);
 
         public void AddRange(OptionsCollection options)
         {
@@ -64,19 +72,24 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.CodeActions
             }
         }
 
-        public IEnumerator<KeyValuePair<OptionKey2, object?>> GetEnumerator()
-            => _options.GetEnumerator();
+        public IEnumerator<KeyValuePair<OptionKey2, object?>> GetEnumerator() =>
+            _options.GetEnumerator();
 
-        IEnumerator IEnumerable.GetEnumerator()
-            => GetEnumerator();
+        IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
 #if !CODE_STYLE
-        public OptionSet ToOptionSet()
-            => new OptionValueSet(_options.ToImmutableDictionary(entry => new OptionKey(entry.Key.Option, entry.Key.Language), entry => entry.Value));
+        public OptionSet ToOptionSet() =>
+            new OptionValueSet(
+                _options.ToImmutableDictionary(
+                    entry => new OptionKey(entry.Key.Option, entry.Key.Language),
+                    entry => entry.Value
+                )
+            );
 
         public AnalyzerConfigOptions ToAnalyzerConfigOptions(HostLanguageServices languageServices)
         {
-            var optionService = languageServices.WorkspaceServices.GetRequiredService<IOptionService>();
+            var optionService =
+                languageServices.WorkspaceServices.GetRequiredService<IOptionService>();
             return ToOptionSet().AsAnalyzerConfigOptions(optionService, languageServices.Language);
         }
 

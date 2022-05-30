@@ -19,7 +19,11 @@ namespace Microsoft.CodeAnalysis.Options
             private readonly IOptionService _optionService;
             private readonly string? _language;
 
-            public AnalyzerConfigOptionsImpl(OptionSet optionSet, IOptionService optionService, string? language)
+            public AnalyzerConfigOptionsImpl(
+                OptionSet optionSet,
+                IOptionService optionService,
+                string? language
+            )
             {
                 _optionSet = optionSet;
                 _optionService = optionService;
@@ -28,7 +32,14 @@ namespace Microsoft.CodeAnalysis.Options
 
             public override bool TryGetValue(string key, [NotNullWhen(true)] out string? value)
             {
-                if (!_optionService.TryMapEditorConfigKeyToOption(key, _language, out var storageLocation, out var optionKey))
+                if (
+                    !_optionService.TryMapEditorConfigKeyToOption(
+                        key,
+                        _language,
+                        out var storageLocation,
+                        out var optionKey
+                    )
+                )
                 {
                     // There are couple of reasons this assert might fire:
                     //  1. Attempting to access an option which does not have an IEditorConfigStorageLocation.
@@ -44,8 +55,7 @@ namespace Microsoft.CodeAnalysis.Options
             }
 
             // no way to enumerate OptionSet
-            public override IEnumerable<string> Keys
-                => throw new NotImplementedException();
+            public override IEnumerable<string> Keys => throw new NotImplementedException();
         }
     }
 }

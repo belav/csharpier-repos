@@ -20,10 +20,24 @@ namespace System.IO.Pipes.Tests
             string pipeName = PipeStreamConformanceTests.GetUniquePipeName();
 
             using (var server = new NamedPipeServerStream(pipeName, PipeDirection.In))
-            using (var client = new NamedPipeClientStream(".", pipeName, PipeDirection.Out, PipeOptions.None, TokenImpersonationLevel.None, HandleInheritability.Inheritable))
+            using (
+                var client = new NamedPipeClientStream(
+                    ".",
+                    pipeName,
+                    PipeDirection.Out,
+                    PipeOptions.None,
+                    TokenImpersonationLevel.None,
+                    HandleInheritability.Inheritable
+                )
+            )
             {
                 Task.WaitAll(server.WaitForConnectionAsync(), client.ConnectAsync());
-                using (RemoteExecutor.Invoke(new Action<string>(ChildFunc), client.SafePipeHandle.DangerousGetHandle().ToString()))
+                using (
+                    RemoteExecutor.Invoke(
+                        new Action<string>(ChildFunc),
+                        client.SafePipeHandle.DangerousGetHandle().ToString()
+                    )
+                )
                 {
                     client.Dispose();
                     for (int i = 0; i < 5; i++)
@@ -35,7 +49,17 @@ namespace System.IO.Pipes.Tests
 
             void ChildFunc(string handle)
             {
-                using (var childClient = new NamedPipeClientStream(PipeDirection.Out, isAsync: false, isConnected: true, new SafePipeHandle((IntPtr)long.Parse(handle, CultureInfo.InvariantCulture), ownsHandle: true)))
+                using (
+                    var childClient = new NamedPipeClientStream(
+                        PipeDirection.Out,
+                        isAsync: false,
+                        isConnected: true,
+                        new SafePipeHandle(
+                            (IntPtr)long.Parse(handle, CultureInfo.InvariantCulture),
+                            ownsHandle: true
+                        )
+                    )
+                )
                 {
                     for (int i = 0; i < 5; i++)
                     {
@@ -57,7 +81,13 @@ namespace System.IO.Pipes.Tests
             // another process with which to communicate
             using (var outbound = new NamedPipeServerStream(outName, PipeDirection.Out))
             using (var inbound = new NamedPipeClientStream(".", inName, PipeDirection.In))
-            using (RemoteExecutor.Invoke(new Action<string, string>(PingPong_OtherProcess), outName, inName))
+            using (
+                RemoteExecutor.Invoke(
+                    new Action<string, string>(PingPong_OtherProcess),
+                    outName,
+                    inName
+                )
+            )
             {
                 // Wait for both pipes to be connected
                 Task.WaitAll(outbound.WaitForConnectionAsync(), inbound.ConnectAsync());
@@ -84,7 +114,13 @@ namespace System.IO.Pipes.Tests
             // another process with which to communicate
             using (var outbound = new NamedPipeServerStream(outName, PipeDirection.Out))
             using (var inbound = new NamedPipeClientStream(".", inName, PipeDirection.In))
-            using (RemoteExecutor.Invoke(new Action<string, string>(PingPong_OtherProcess), outName, inName))
+            using (
+                RemoteExecutor.Invoke(
+                    new Action<string, string>(PingPong_OtherProcess),
+                    outName,
+                    inName
+                )
+            )
             {
                 // Wait for both pipes to be connected
                 await Task.WhenAll(outbound.WaitForConnectionAsync(), inbound.ConnectAsync());

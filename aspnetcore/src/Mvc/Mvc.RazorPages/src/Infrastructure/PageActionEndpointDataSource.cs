@@ -19,8 +19,8 @@ internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBas
         PageActionEndpointDataSourceIdProvider dataSourceIdProvider,
         IActionDescriptorCollectionProvider actions,
         ActionEndpointFactory endpointFactory,
-        OrderedEndpointsSequenceProvider orderedEndpoints)
-        : base(actions)
+        OrderedEndpointsSequenceProvider orderedEndpoints
+    ) : base(actions)
     {
         DataSourceId = dataSourceIdProvider.CreateId();
         _endpointFactory = endpointFactory;
@@ -40,7 +40,10 @@ internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBas
     // selection. Set to true by builder methods that do dynamic/fallback selection.
     public bool CreateInertEndpoints { get; set; }
 
-    protected override List<Endpoint> CreateEndpoints(IReadOnlyList<ActionDescriptor> actions, IReadOnlyList<Action<EndpointBuilder>> conventions)
+    protected override List<Endpoint> CreateEndpoints(
+        IReadOnlyList<ActionDescriptor> actions,
+        IReadOnlyList<Action<EndpointBuilder>> conventions
+    )
     {
         var endpoints = new List<Endpoint>();
         var routeNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
@@ -48,30 +51,49 @@ internal sealed class PageActionEndpointDataSource : ActionEndpointDataSourceBas
         {
             if (actions[i] is PageActionDescriptor action)
             {
-                _endpointFactory.AddEndpoints(endpoints, routeNames, action, Array.Empty<ConventionalRouteEntry>(), conventions, CreateInertEndpoints);
+                _endpointFactory.AddEndpoints(
+                    endpoints,
+                    routeNames,
+                    action,
+                    Array.Empty<ConventionalRouteEntry>(),
+                    conventions,
+                    CreateInertEndpoints
+                );
             }
         }
 
         return endpoints;
     }
 
-    internal void AddDynamicPageEndpoint(IEndpointRouteBuilder endpoints, string pattern, Type transformerType, object? state, int? order = null)
+    internal void AddDynamicPageEndpoint(
+        IEndpointRouteBuilder endpoints,
+        string pattern,
+        Type transformerType,
+        object? state,
+        int? order = null
+    )
     {
         CreateInertEndpoints = true;
         lock (Lock)
         {
             order ??= _orderSequence.GetNext();
 
-            endpoints.Map(
-                pattern,
-                context =>
-                {
-                    throw new InvalidOperationException("This endpoint is not expected to be executed directly.");
-                })
+            endpoints
+                .Map(
+                    pattern,
+                    context =>
+                    {
+                        throw new InvalidOperationException(
+                            "This endpoint is not expected to be executed directly."
+                        );
+                    }
+                )
                 .Add(b =>
                 {
                     ((RouteEndpointBuilder)b).Order = order.Value;
-                    b.Metadata.Add(new DynamicPageRouteValueTransformerMetadata(transformerType, state));
+                    b.Metadata.Add(
+                        new DynamicPageRouteValueTransformerMetadata(transformerType, state)
+                    );
                     b.Metadata.Add(new PageEndpointDataSourceIdMetadata(DataSourceId));
                 });
         }

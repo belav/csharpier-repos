@@ -11,15 +11,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Completion.CompletionProviders
 {
-    public class ExplicitInterfaceMemberCompletionProviderTests : AbstractCSharpCompletionProviderTests
+    public class ExplicitInterfaceMemberCompletionProviderTests
+        : AbstractCSharpCompletionProviderTests
     {
-        internal override Type GetCompletionProviderType()
-            => typeof(ExplicitInterfaceMemberCompletionProvider);
+        internal override Type GetCompletionProviderType() =>
+            typeof(ExplicitInterfaceMemberCompletionProvider);
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ExplicitInterfaceMember_01()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     void Goo();
@@ -38,7 +40,11 @@ class Bar : IGoo
             await VerifyItemExistsAsync(markup, "Goo", displayTextSuffix: "()");
             await VerifyItemExistsAsync(markup, "Goo", displayTextSuffix: "(int x)");
             await VerifyItemExistsAsync(markup, "Prop");
-            await VerifyItemExistsAsync(markup, "Generic", displayTextSuffix: "<K, V>(K key, V value)");
+            await VerifyItemExistsAsync(
+                markup,
+                "Generic",
+                displayTextSuffix: "<K, V>(K key, V value)"
+            );
             await VerifyItemExistsAsync(markup, "this", displayTextSuffix: "[int i]");
             await VerifyItemExistsAsync(markup, "With_Underscore", displayTextSuffix: "()");
         }
@@ -46,7 +52,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ExplicitInterfaceMember_02()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     void Goo();
@@ -67,7 +74,8 @@ interface IBar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ExplicitInterfaceMember_03()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     virtual void Goo() {}
@@ -88,7 +96,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task ExplicitInterfaceMember_04()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     virtual void Goo() {}
@@ -110,7 +119,8 @@ interface IBar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CommitOnNotParen()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     void Goo();
@@ -121,7 +131,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     void Goo();
@@ -139,7 +150,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task CommitOnParen()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     void Goo();
@@ -150,7 +162,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     void Goo();
@@ -168,7 +181,8 @@ class Bar : IGoo
         [WorkItem(19947, "https://github.com/dotnet/roslyn/issues/19947")]
         public async Task ExplicitInterfaceMemberCompletionContainsOnlyValidValues()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I1
 {
     void Goo();
@@ -199,7 +213,8 @@ class Bar : I2
         [WorkItem(26595, "https://github.com/dotnet/roslyn/issues/26595")]
         public async Task ExplicitInterfaceMemberCompletionDoesNotContainAccessors()
         {
-            var markup = @"
+            var markup =
+                @"
 
 interface I1
 {
@@ -225,7 +240,8 @@ class Bar : I1
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotStaticMember_01()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     static void Goo() {}
@@ -244,7 +260,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotStaticMember_02()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     static void Goo() {}
@@ -263,7 +280,8 @@ interface IBar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotSealedMember_01()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     sealed void Goo() {}
@@ -282,7 +300,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotSealedMember_02()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     sealed void Goo() {}
@@ -301,7 +320,8 @@ interface IBar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotNestedType_01()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     public abstract class Goo
@@ -320,7 +340,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task NotNestedType_02()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     public abstract class Goo
@@ -341,7 +362,7 @@ interface IBar : IGoo
         public async Task NotInaccessibleMember_01()
         {
             var markup =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <ProjectReference>Assembly2</ProjectReference>
         <Document FilePath=""Test1.cs"">
@@ -377,7 +398,7 @@ public interface IGoo
         public async Task NotInaccessibleMember_02()
         {
             var markup =
-@"<Workspace>
+                @"<Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <ProjectReference>Assembly2</ProjectReference>
         <Document FilePath=""Test1.cs"">
@@ -411,7 +432,8 @@ public interface IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task VerifySignatureCommit_Generic_Tab()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     int Generic<K, V>(K key, V value);
@@ -422,7 +444,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     int Generic<K, V>(K key, V value);
@@ -433,13 +456,19 @@ class Bar : IGoo
      void IGoo.Generic<K, V>(K key, V value)
 }";
 
-            await VerifyProviderCommitAsync(markup, "Generic<K, V>(K key, V value)", expected, '\t');
+            await VerifyProviderCommitAsync(
+                markup,
+                "Generic<K, V>(K key, V value)",
+                expected,
+                '\t'
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task VerifySignatureCommit_Generic_OpenBrace()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     int Generic<K, V>(K key, V value);
@@ -450,7 +479,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     int Generic<K, V>(K key, V value);
@@ -467,7 +497,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task VerifySignatureCommit_Method_Tab()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     int Generic(K key, V value);
@@ -478,7 +509,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     int Generic(K key, V value);
@@ -495,7 +527,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task VerifySignatureCommit_Method_OpenBrace()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     int Generic(K key, V value);
@@ -506,7 +539,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     int Generic(K key, V value);
@@ -523,7 +557,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task VerifySignatureCommit_Indexer_Tab()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     int this[K key, V value] { get; }
@@ -534,7 +569,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     int this[K key, V value] { get; }
@@ -551,7 +587,8 @@ class Bar : IGoo
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task VerifySignatureCommit_Indexer_OpenBrace()
         {
-            var markup = @"
+            var markup =
+                @"
 interface IGoo
 {
     int this[K key, V value] { get; }
@@ -562,7 +599,8 @@ class Bar : IGoo
      void IGoo.$$
 }";
 
-            var expected = @"
+            var expected =
+                @"
 interface IGoo
 {
     int this[K key, V value] { get; }
@@ -582,7 +620,8 @@ class Bar : IGoo
         [InlineData("out")]
         public async Task TestWithRefKind(string refKind)
         {
-            var markup = $@"
+            var markup =
+                $@"
 interface I
 {{
     void M({refKind} string s);
@@ -594,7 +633,8 @@ class C : I
 }}
 ";
 
-            var expected = $@"
+            var expected =
+                $@"
 interface I
 {{
     void M({refKind} string s);
@@ -613,7 +653,8 @@ class C : I
         [WorkItem(53924, "https://github.com/dotnet/roslyn/issues/53924")]
         public async Task TestStaticAbstractInterfaceMember()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I2<T> where T : I2<T>
 {
     abstract static implicit operator int(T x);
@@ -625,7 +666,8 @@ class Test2 : I2<Test2>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I2<T> where T : I2<T>
 {
     abstract static implicit operator int(T x);
@@ -644,7 +686,8 @@ class Test2 : I2<Test2>
         [WorkItem(53924, "https://github.com/dotnet/roslyn/issues/53924")]
         public async Task TestStaticAbstractInterfaceMember_TrueOperator()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I<T> where T : I<T>
 {
     abstract static bool operator true(T x);
@@ -657,7 +700,8 @@ class C : I<C>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I<T> where T : I<T>
 {
     abstract static bool operator true(T x);
@@ -677,7 +721,8 @@ class C : I<C>
         [WorkItem(53924, "https://github.com/dotnet/roslyn/issues/53924")]
         public async Task TestStaticAbstractInterfaceMember_UnaryPlusOperator()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I<T> where T : I<T>
 {
     abstract static T operator +(T x);
@@ -689,7 +734,8 @@ class C : I<C>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I<T> where T : I<T>
 {
     abstract static T operator +(T x);
@@ -708,7 +754,8 @@ class C : I<C>
         [WorkItem(53924, "https://github.com/dotnet/roslyn/issues/53924")]
         public async Task TestStaticAbstractInterfaceMember_BinaryPlusOperator()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I<T> where T : I<T>
 {
     abstract static T operator +(T x, T y);
@@ -720,7 +767,8 @@ class C : I<C>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I<T> where T : I<T>
 {
     abstract static T operator +(T x, T y);
@@ -738,7 +786,8 @@ class C : I<C>
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestWithParamsParameter()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M(params string[] args);
@@ -750,7 +799,8 @@ class C : I
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I
 {
     void M(params string[] args);
@@ -768,7 +818,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestWithNullable()
         {
-            var markup = @"
+            var markup =
+                @"
 #nullable enable
 
 interface I
@@ -782,7 +833,8 @@ class C : I
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 #nullable enable
 
 interface I
@@ -802,7 +854,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestEscapeIdentifier()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M(string @class);
@@ -814,7 +867,8 @@ class C : I
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I
 {
     void M(string @class);
@@ -832,7 +886,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestEscapeIdentifier2()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M<@class>();
@@ -844,7 +899,8 @@ class C : I
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I
 {
     void M<@class>();
@@ -862,7 +918,8 @@ class C : I
         [Fact, Trait(Traits.Feature, Traits.Features.Completion)]
         public async Task TestParameterWithDefaultValue()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I
 {
     void M(int x = 10);
@@ -874,7 +931,8 @@ class C : I
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I
 {
     void M(int x = 10);
@@ -893,7 +951,8 @@ class C : I
         [WorkItem(60215, "https://github.com/dotnet/roslyn/issues/60215")]
         public async Task TestStaticAbstractCheckedUnaryOperator()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static T operator checked -(T x);
@@ -907,7 +966,8 @@ class C : I1<C>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static T operator checked -(T x);
@@ -928,7 +988,8 @@ class C : I1<C>
         [WorkItem(60215, "https://github.com/dotnet/roslyn/issues/60215")]
         public async Task TestStaticAbstractCheckedBinaryOperator()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static T operator checked +(T x, T y);
@@ -942,7 +1003,8 @@ class C : I1<C>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static T operator checked +(T x, T y);
@@ -963,7 +1025,8 @@ class C : I1<C>
         [WorkItem(60215, "https://github.com/dotnet/roslyn/issues/60215")]
         public async Task TestStaticAbstractCheckedCastOperator()
         {
-            var markup = @"
+            var markup =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static explicit operator checked string(T x);
@@ -977,7 +1040,8 @@ class C3 : I1<C3>
 }
 ";
 
-            var expected = @"
+            var expected =
+                @"
 interface I1<T> where T : I1<T>
 {
     abstract static explicit operator checked string(T x);
@@ -991,7 +1055,12 @@ class C3 : I1<C3>
 }
 ";
 
-            await VerifyProviderCommitAsync(markup, "operator checked string(C3 x)", expected, '\t');
+            await VerifyProviderCommitAsync(
+                markup,
+                "operator checked string(C3 x)",
+                expected,
+                '\t'
+            );
         }
     }
 }

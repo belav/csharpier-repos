@@ -31,16 +31,13 @@ public class ControllerActionEndpointDataSourceBenchmark
     {
         _conventionalActionProvider = new MockActionDescriptorCollectionProvider(
             Enumerable.Range(0, ActionCount).Select(i => CreateConventionalRoutedAction(i)).ToList()
-            );
+        );
 
         _attributeActionProvider = new MockActionDescriptorCollectionProvider(
             Enumerable.Range(0, ActionCount).Select(i => CreateAttributeRoutedAction(i)).ToList()
-            );
+        );
 
-        _routes = new List<(string routeName, string pattern)>
-            {
-                ("Default", DefaultRoute)
-            };
+        _routes = new List<(string routeName, string pattern)> { ("Default", DefaultRoute) };
     }
 
     [Benchmark]
@@ -59,7 +56,13 @@ public class ControllerActionEndpointDataSourceBenchmark
         for (var i = 0; i < _routes.Count; i++)
         {
             var (routeName, pattern) = _routes[i];
-            dataSource.AddRoute(routeName, pattern, defaults: null, constraints: null, dataTokens: null);
+            dataSource.AddRoute(
+                routeName,
+                pattern,
+                defaults: null,
+                constraints: null,
+                dataTokens: null
+            );
         }
 
         var endpoints = dataSource.Endpoints;
@@ -82,10 +85,7 @@ public class ControllerActionEndpointDataSourceBenchmark
         {
             RouteValues = routeValues,
             DisplayName = "Action " + id,
-            AttributeRouteInfo = new AttributeRouteInfo()
-            {
-                Template = template,
-            }
+            AttributeRouteInfo = new AttributeRouteInfo() { Template = template, }
         };
     }
 
@@ -102,26 +102,36 @@ public class ControllerActionEndpointDataSourceBenchmark
         };
     }
 
-    private ControllerActionEndpointDataSource CreateDataSource(IActionDescriptorCollectionProvider actionDescriptorCollectionProvider)
+    private ControllerActionEndpointDataSource CreateDataSource(
+        IActionDescriptorCollectionProvider actionDescriptorCollectionProvider
+    )
     {
         var dataSource = new ControllerActionEndpointDataSource(
             new ControllerActionEndpointDataSourceIdProvider(),
             actionDescriptorCollectionProvider,
-            new ActionEndpointFactory(new MockRoutePatternTransformer(), Enumerable.Empty<IRequestDelegateFactory>()),
-            new OrderedEndpointsSequenceProvider());
+            new ActionEndpointFactory(
+                new MockRoutePatternTransformer(),
+                Enumerable.Empty<IRequestDelegateFactory>()
+            ),
+            new OrderedEndpointsSequenceProvider()
+        );
 
         return dataSource;
     }
 
     private sealed class MockRoutePatternTransformer : RoutePatternTransformer
     {
-        public override RoutePattern SubstituteRequiredValues(RoutePattern original, object requiredValues)
+        public override RoutePattern SubstituteRequiredValues(
+            RoutePattern original,
+            object requiredValues
+        )
         {
             return original;
         }
     }
 
-    private sealed class MockActionDescriptorCollectionProvider : IActionDescriptorCollectionProvider
+    private sealed class MockActionDescriptorCollectionProvider
+        : IActionDescriptorCollectionProvider
     {
         public MockActionDescriptorCollectionProvider(List<ActionDescriptor> actionDescriptors)
         {
@@ -133,12 +143,18 @@ public class ControllerActionEndpointDataSourceBenchmark
 
     private sealed class MockParameterPolicyFactory : ParameterPolicyFactory
     {
-        public override IParameterPolicy Create(RoutePatternParameterPart parameter, string inlineText)
+        public override IParameterPolicy Create(
+            RoutePatternParameterPart parameter,
+            string inlineText
+        )
         {
             throw new NotImplementedException();
         }
 
-        public override IParameterPolicy Create(RoutePatternParameterPart parameter, IParameterPolicy parameterPolicy)
+        public override IParameterPolicy Create(
+            RoutePatternParameterPart parameter,
+            IParameterPolicy parameterPolicy
+        )
         {
             throw new NotImplementedException();
         }

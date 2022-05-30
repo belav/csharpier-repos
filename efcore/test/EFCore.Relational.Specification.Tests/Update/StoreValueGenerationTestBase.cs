@@ -23,33 +23,33 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_with_generated_values(bool async)
-        => Test(EntityState.Added, secondOperationType: null, GeneratedValues.Some, async);
+    public virtual Task Add_with_generated_values(bool async) =>
+        Test(EntityState.Added, secondOperationType: null, GeneratedValues.Some, async);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_with_no_generated_values(bool async)
-        => Test(EntityState.Added, secondOperationType: null, GeneratedValues.None, async);
+    public virtual Task Add_with_no_generated_values(bool async) =>
+        Test(EntityState.Added, secondOperationType: null, GeneratedValues.None, async);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_with_all_generated_values(bool async)
-        => Test(EntityState.Added, secondOperationType: null, GeneratedValues.All, async);
+    public virtual Task Add_with_all_generated_values(bool async) =>
+        Test(EntityState.Added, secondOperationType: null, GeneratedValues.All, async);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Modify_with_generated_values(bool async)
-        => Test(EntityState.Modified, secondOperationType: null, GeneratedValues.Some, async);
+    public virtual Task Modify_with_generated_values(bool async) =>
+        Test(EntityState.Modified, secondOperationType: null, GeneratedValues.Some, async);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Modify_with_no_generated_values(bool async)
-        => Test(EntityState.Modified, secondOperationType: null, GeneratedValues.None, async);
+    public virtual Task Modify_with_no_generated_values(bool async) =>
+        Test(EntityState.Modified, secondOperationType: null, GeneratedValues.None, async);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Delete(bool async)
-        => Test(EntityState.Deleted, secondOperationType: null, GeneratedValues.Some, async);
+    public virtual Task Delete(bool async) =>
+        Test(EntityState.Deleted, secondOperationType: null, GeneratedValues.Some, async);
 
     #endregion Single operation
 
@@ -57,33 +57,69 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_Add_with_same_entity_type_and_generated_values(bool async)
-        => Test(EntityState.Added, EntityState.Added, GeneratedValues.Some, async, withSameEntityType: true);
+    public virtual Task Add_Add_with_same_entity_type_and_generated_values(bool async) =>
+        Test(
+            EntityState.Added,
+            EntityState.Added,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: true
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_Add_with_same_entity_type_and_no_generated_values(bool async)
-        => Test(EntityState.Added, EntityState.Added, GeneratedValues.None, async, withSameEntityType: true);
+    public virtual Task Add_Add_with_same_entity_type_and_no_generated_values(bool async) =>
+        Test(
+            EntityState.Added,
+            EntityState.Added,
+            GeneratedValues.None,
+            async,
+            withSameEntityType: true
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_Add_with_same_entity_type_and_all_generated_values(bool async)
-        => Test(EntityState.Added, EntityState.Added, GeneratedValues.All, async, withSameEntityType: true);
+    public virtual Task Add_Add_with_same_entity_type_and_all_generated_values(bool async) =>
+        Test(
+            EntityState.Added,
+            EntityState.Added,
+            GeneratedValues.All,
+            async,
+            withSameEntityType: true
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Modify_Modify_with_same_entity_type_and_generated_values(bool async)
-        => Test(EntityState.Modified, EntityState.Modified, GeneratedValues.Some, async, withSameEntityType: true);
+    public virtual Task Modify_Modify_with_same_entity_type_and_generated_values(bool async) =>
+        Test(
+            EntityState.Modified,
+            EntityState.Modified,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: true
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Modify_Modify_with_same_entity_type_and_no_generated_values(bool async)
-        => Test(EntityState.Modified, EntityState.Modified, GeneratedValues.None, async, withSameEntityType: true);
+    public virtual Task Modify_Modify_with_same_entity_type_and_no_generated_values(bool async) =>
+        Test(
+            EntityState.Modified,
+            EntityState.Modified,
+            GeneratedValues.None,
+            async,
+            withSameEntityType: true
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Delete_Delete_with_same_entity_type(bool async)
-        => Test(EntityState.Deleted, EntityState.Deleted, GeneratedValues.Some, async, withSameEntityType: true);
+    public virtual Task Delete_Delete_with_same_entity_type(bool async) =>
+        Test(
+            EntityState.Deleted,
+            EntityState.Deleted,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: true
+        );
 
     #endregion Same two operations with same entity type
 
@@ -91,33 +127,73 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_Add_with_different_entity_types_and_generated_values(bool async)
-        => Test(EntityState.Added, EntityState.Added, GeneratedValues.Some, async, withSameEntityType: false);
+    public virtual Task Add_Add_with_different_entity_types_and_generated_values(bool async) =>
+        Test(
+            EntityState.Added,
+            EntityState.Added,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: false
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_Add_with_different_entity_types_and_no_generated_values(bool async)
-        => Test(EntityState.Added, EntityState.Added, GeneratedValues.None, async, withSameEntityType: false);
+    public virtual Task Add_Add_with_different_entity_types_and_no_generated_values(bool async) =>
+        Test(
+            EntityState.Added,
+            EntityState.Added,
+            GeneratedValues.None,
+            async,
+            withSameEntityType: false
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Add_Add_with_different_entity_types_and_all_generated_values(bool async)
-        => Test(EntityState.Added, EntityState.Added, GeneratedValues.All, async, withSameEntityType: false);
+    public virtual Task Add_Add_with_different_entity_types_and_all_generated_values(bool async) =>
+        Test(
+            EntityState.Added,
+            EntityState.Added,
+            GeneratedValues.All,
+            async,
+            withSameEntityType: false
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Modify_Modify_with_different_entity_types_and_generated_values(bool async)
-        => Test(EntityState.Modified, EntityState.Modified, GeneratedValues.Some, async, withSameEntityType: false);
+    public virtual Task Modify_Modify_with_different_entity_types_and_generated_values(
+        bool async
+    ) =>
+        Test(
+            EntityState.Modified,
+            EntityState.Modified,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: false
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Modify_Modify_with_different_entity_types_and_no_generated_values(bool async)
-        => Test(EntityState.Modified, EntityState.Modified, GeneratedValues.None, async, withSameEntityType: false);
+    public virtual Task Modify_Modify_with_different_entity_types_and_no_generated_values(
+        bool async
+    ) =>
+        Test(
+            EntityState.Modified,
+            EntityState.Modified,
+            GeneratedValues.None,
+            async,
+            withSameEntityType: false
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Delete_Delete_with_different_entity_types(bool async)
-        => Test(EntityState.Deleted, EntityState.Deleted, GeneratedValues.Some, async, withSameEntityType: false);
+    public virtual Task Delete_Delete_with_different_entity_types(bool async) =>
+        Test(
+            EntityState.Deleted,
+            EntityState.Deleted,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: false
+        );
 
     #endregion Same two operations with different entity types
 
@@ -125,8 +201,14 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Delete_Add_with_same_entity_types(bool async)
-        => Test(EntityState.Deleted, EntityState.Added, GeneratedValues.Some, async, withSameEntityType: true);
+    public virtual Task Delete_Add_with_same_entity_types(bool async) =>
+        Test(
+            EntityState.Deleted,
+            EntityState.Added,
+            GeneratedValues.Some,
+            async,
+            withSameEntityType: true
+        );
 
     #endregion Different two operations
 
@@ -135,7 +217,8 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
         bool async,
-        bool withSameEntityType = true)
+        bool withSameEntityType = true
+    )
     {
         await using var context = CreateContext();
 
@@ -173,7 +256,12 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
                         firstDbSet.Add(first);
                         break;
                     case GeneratedValues.None:
-                        first = new StoreValueGenerationData { Id = 100, Data1 = 1000, Data2 = 1000 };
+                        first = new StoreValueGenerationData
+                        {
+                            Id = 100,
+                            Data1 = 1000,
+                            Data2 = 1000
+                        };
                         firstDbSet.Add(first);
                         break;
                     case GeneratedValues.All:
@@ -231,7 +319,12 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
                         secondDbSet!.Add(second);
                         break;
                     case GeneratedValues.None:
-                        second = new StoreValueGenerationData { Id = 101, Data1 = 1001, Data2 = 1001 };
+                        second = new StoreValueGenerationData
+                        {
+                            Id = 101,
+                            Data1 = 1001,
+                            Data2 = 1001
+                        };
                         secondDbSet!.Add(second);
                         break;
                     case GeneratedValues.All:
@@ -296,21 +389,46 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
         }
 
         // Make sure a transaction was created (or not)
-        if (ShouldCreateImplicitTransaction(firstOperationType, secondOperationType, generatedValues, withSameEntityType))
+        if (
+            ShouldCreateImplicitTransaction(
+                firstOperationType,
+                secondOperationType,
+                generatedValues,
+                withSameEntityType
+            )
+        )
         {
-            Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
-            Assert.Contains(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionCommitted);
+            Assert.Contains(
+                Fixture.ListLoggerFactory.Log,
+                l => l.Id == RelationalEventId.TransactionStarted
+            );
+            Assert.Contains(
+                Fixture.ListLoggerFactory.Log,
+                l => l.Id == RelationalEventId.TransactionCommitted
+            );
         }
         else
         {
-            Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionStarted);
-            Assert.DoesNotContain(Fixture.ListLoggerFactory.Log, l => l.Id == RelationalEventId.TransactionCommitted);
+            Assert.DoesNotContain(
+                Fixture.ListLoggerFactory.Log,
+                l => l.Id == RelationalEventId.TransactionStarted
+            );
+            Assert.DoesNotContain(
+                Fixture.ListLoggerFactory.Log,
+                l => l.Id == RelationalEventId.TransactionCommitted
+            );
         }
 
         // Make sure the updates executed in the expected number of commands
         Assert.Equal(
-            ShouldExecuteInNumberOfCommands(firstOperationType, secondOperationType, generatedValues, withSameEntityType),
-            Fixture.ListLoggerFactory.Log.Count(l => l.Id == RelationalEventId.CommandExecuted));
+            ShouldExecuteInNumberOfCommands(
+                firstOperationType,
+                secondOperationType,
+                generatedValues,
+                withSameEntityType
+            ),
+            Fixture.ListLoggerFactory.Log.Count(l => l.Id == RelationalEventId.CommandExecuted)
+        );
 
         // To make sure generated values have been propagated, re-load the rows from the database and compare
         context.ChangeTracker.Clear();
@@ -337,8 +455,8 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
         EntityState firstOperationType,
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
-        bool withSameEntityType)
-        => secondOperationType is not null;
+        bool withSameEntityType
+    ) => secondOperationType is not null;
 
     /// <summary>
     ///     Providers can override this to specify how many commands (batches) are used to execute the update.
@@ -348,21 +466,23 @@ public abstract class StoreValueGenerationTestBase<TFixture> : IClassFixture<TFi
         EntityState firstOperationType,
         EntityState? secondOperationType,
         GeneratedValues generatedValues,
-        bool withSameEntityType)
-        => 1;
+        bool withSameEntityType
+    ) => 1;
 
     protected TFixture Fixture { get; }
 
-    protected StoreValueGenerationContext CreateContext()
-        => Fixture.CreateContext();
+    protected StoreValueGenerationContext CreateContext() => Fixture.CreateContext();
 
-    public static IEnumerable<object[]> IsAsyncData = new[] { new object[] { false }, new object[] { true } };
+    public static IEnumerable<object[]> IsAsyncData = new[]
+    {
+        new object[] { false },
+        new object[] { true }
+    };
 
-    protected virtual void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    protected virtual void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected virtual void ClearLog()
-        => Fixture.TestSqlLoggerFactory.Clear();
+    protected virtual void ClearLog() => Fixture.TestSqlLoggerFactory.Clear();
 
     protected enum GeneratedValues
     {

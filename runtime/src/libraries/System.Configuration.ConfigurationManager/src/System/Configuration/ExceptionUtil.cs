@@ -35,20 +35,28 @@ namespace System.Configuration
             return new InvalidOperationException(SR.Format(SR.Unexpected_Error, methodName));
         }
 
-        internal static ConfigurationErrorsException WrapAsConfigException(string outerMessage, Exception e,
-            IConfigErrorInfo errorInfo)
+        internal static ConfigurationErrorsException WrapAsConfigException(
+            string outerMessage,
+            Exception e,
+            IConfigErrorInfo errorInfo
+        )
         {
             return errorInfo != null
                 ? WrapAsConfigException(outerMessage, e, errorInfo.Filename, errorInfo.LineNumber)
                 : WrapAsConfigException(outerMessage, e, null, 0);
         }
 
-        internal static ConfigurationErrorsException WrapAsConfigException(string outerMessage, Exception e,
-            string filename, int line)
+        internal static ConfigurationErrorsException WrapAsConfigException(
+            string outerMessage,
+            Exception e,
+            string filename,
+            int line
+        )
         {
             // Preserve ConfigurationErrorsException
             ConfigurationErrorsException ce = e as ConfigurationErrorsException;
-            if (ce != null) return ce;
+            if (ce != null)
+                return ce;
 
             // Promote deprecated ConfigurationException to ConfigurationErrorsException
             ConfigurationException deprecatedException = e as ConfigurationException;
@@ -57,13 +65,15 @@ namespace System.Configuration
                     deprecatedException.BareMessage,
                     deprecatedException.InnerException,
                     deprecatedException.Filename,
-                    deprecatedException.Line);
+                    deprecatedException.Line
+                );
 
             // For XML exceptions, preserve the text of the exception in the outer message.
             XmlException xe = e as XmlException;
             if (xe != null)
             {
-                if (xe.LineNumber != 0) line = xe.LineNumber;
+                if (xe.LineNumber != 0)
+                    line = xe.LineNumber;
 
                 return new ConfigurationErrorsException(xe.Message, xe, filename, line);
             }
@@ -75,14 +85,16 @@ namespace System.Configuration
                     SR.Format(SR.Wrapped_exception_message, outerMessage, e.Message),
                     e,
                     filename,
-                    line);
+                    line
+                );
             }
 
             // If there is no exception, create a new exception with no further information.
             return new ConfigurationErrorsException(
                 SR.Format(SR.Wrapped_exception_message, outerMessage, NoExceptionInformation),
                 filename,
-                line);
+                line
+            );
         }
     }
 }

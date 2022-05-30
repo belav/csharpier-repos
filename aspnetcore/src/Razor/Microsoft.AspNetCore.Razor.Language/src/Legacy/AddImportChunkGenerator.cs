@@ -28,8 +28,7 @@ internal class AddImportChunkGenerator : SpanChunkGenerator
     public override bool Equals(object obj)
     {
         var other = obj as AddImportChunkGenerator;
-        return other != null &&
-            string.Equals(Namespace, other.Namespace, StringComparison.Ordinal);
+        return other != null && string.Equals(Namespace, other.Namespace, StringComparison.Ordinal);
     }
 
     public override int GetHashCode()

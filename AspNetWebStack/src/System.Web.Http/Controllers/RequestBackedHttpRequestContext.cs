@@ -45,8 +45,7 @@ namespace System.Web.Http.Controllers
             Principal = Thread.CurrentPrincipal;
         }
 
-        public RequestBackedHttpRequestContext(HttpRequestMessage request)
-            : this()
+        public RequestBackedHttpRequestContext(HttpRequestMessage request) : this()
         {
             if (request == null)
             {
@@ -58,14 +57,8 @@ namespace System.Web.Http.Controllers
 
         public HttpRequestMessage Request
         {
-            get
-            {
-                return _request;
-            }
-            set
-            {
-                _request = value;
-            }
+            get { return _request; }
+            set { _request = value; }
         }
 
         public override X509Certificate2 ClientCertificate

@@ -22,8 +22,17 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
         private readonly string _leftText;
         private readonly bool _isDeletion;
 
-        public SpanChange(ITrackingSpan span, ITextBuffer buffer, DocumentId id, string text, string leftText, string rightText, bool isDeletion, AbstractChange parent, PreviewEngine engine)
-            : base(engine)
+        public SpanChange(
+            ITrackingSpan span,
+            ITextBuffer buffer,
+            DocumentId id,
+            string text,
+            string leftText,
+            string rightText,
+            bool isDeletion,
+            AbstractChange parent,
+            PreviewEngine engine
+        ) : base(engine)
         {
             _span = span;
             _id = id;
@@ -52,18 +61,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
 
         public override int CanRecurse
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override int IsExpandable
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override int OnRequestSource(object pIUnknownTextView)
@@ -77,11 +80,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
             return VSConstants.S_OK;
         }
 
-        public override void UpdatePreview()
-            => engine.UpdatePreview(_id, this);
+        public override void UpdatePreview() => engine.UpdatePreview(_id, this);
 
-        internal override void GetDisplayData(VSTREEDISPLAYDATA[] pData)
-            => pData[0].Image = pData[0].SelectedImage = (ushort)StandardGlyphGroup.GlyphReference;
+        internal override void GetDisplayData(VSTREEDISPLAYDATA[] pData) =>
+            pData[0].Image = pData[0].SelectedImage = (ushort)StandardGlyphGroup.GlyphReference;
 
         internal string GetApplicableText()
         {
@@ -90,8 +92,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Preview
                 : _rightText;
         }
 
-        internal Span GetSpan()
-            => _span.GetSpan(_buffer.CurrentSnapshot).Span;
+        internal Span GetSpan() => _span.GetSpan(_buffer.CurrentSnapshot).Span;
 
         internal override uint GetDisplayState()
         {

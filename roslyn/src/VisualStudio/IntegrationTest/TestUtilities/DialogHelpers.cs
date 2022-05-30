@@ -21,39 +21,66 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// Throws an <see cref="InvalidOperationException"/> if an open dialog with that name cannot be
         /// found.
         /// </summary>
-        public static IUIAutomationElement GetOpenDialogById(IntPtr visualStudioHWnd, string dialogAutomationId)
+        public static IUIAutomationElement GetOpenDialogById(
+            IntPtr visualStudioHWnd,
+            string dialogAutomationId
+        )
         {
-            var dialogAutomationElement = FindDialogByAutomationId(visualStudioHWnd, dialogAutomationId, isOpen: true);
+            var dialogAutomationElement = FindDialogByAutomationId(
+                visualStudioHWnd,
+                dialogAutomationId,
+                isOpen: true
+            );
             if (dialogAutomationElement == null)
             {
-                throw new InvalidOperationException($"Expected the {dialogAutomationId} dialog to be open, but it is not.");
+                throw new InvalidOperationException(
+                    $"Expected the {dialogAutomationId} dialog to be open, but it is not."
+                );
             }
 
             return dialogAutomationElement;
         }
 
-        public static IUIAutomationElement FindDialogByAutomationId(IntPtr visualStudioHWnd, string dialogAutomationId, bool isOpen, bool wait = true)
+        public static IUIAutomationElement FindDialogByAutomationId(
+            IntPtr visualStudioHWnd,
+            string dialogAutomationId,
+            bool isOpen,
+            bool wait = true
+        )
         {
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
                 return Retry(
                     _ => FindDialogWorker(visualStudioHWnd, dialogAutomationId),
-                    stoppingCondition: (automationElement, _) => !wait || (isOpen ? automationElement != null : automationElement == null),
+                    stoppingCondition: (automationElement, _) =>
+                        !wait || (isOpen ? automationElement != null : automationElement == null),
                     delay: TimeSpan.FromMilliseconds(250),
-                    cancellationTokenSource.Token);
+                    cancellationTokenSource.Token
+                );
             }
         }
 
         /// <summary>
         /// Used to find legacy dialogs that don't have an AutomationId
         /// </summary>
-        public static IUIAutomationElement FindDialogByName(IntPtr visualStudioHWnd, string dialogName, bool isOpen, CancellationToken cancellationToken)
+        public static IUIAutomationElement FindDialogByName(
+            IntPtr visualStudioHWnd,
+            string dialogName,
+            bool isOpen,
+            CancellationToken cancellationToken
+        )
         {
             return Retry(
                 _ => FindDialogByNameWorker(visualStudioHWnd, dialogName),
-                stoppingCondition: (automationElement, _) => isOpen ? automationElement != null : automationElement == null,
+                stoppingCondition: (automationElement, _) =>
+                    isOpen ? automationElement != null : automationElement == null,
                 delay: TimeSpan.FromMilliseconds(250),
-                cancellationToken);
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -61,11 +88,17 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// The button is identified using its automation ID; see <see cref="PressButtonWithName(IntPtr, string, string)"/>
         /// for the equivalent method that finds the button by name.
         /// </summary>
-        public static void PressButton(IntPtr visualStudioHWnd, string dialogAutomationId, string buttonAutomationId)
+        public static void PressButton(
+            IntPtr visualStudioHWnd,
+            string dialogAutomationId,
+            string buttonAutomationId
+        )
         {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationId);
 
-            var buttonAutomationElement = dialogAutomationElement.FindDescendantByAutomationId(buttonAutomationId);
+            var buttonAutomationElement = dialogAutomationElement.FindDescendantByAutomationId(
+                buttonAutomationId
+            );
             buttonAutomationElement.Invoke();
         }
 
@@ -74,7 +107,11 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// The button is identified using its name; see <see cref="PressButton(IntPtr, string, string)"/>
         /// for the equivalent methods that finds the button by automation ID.
         /// </summary>
-        public static void PressButtonWithName(IntPtr visualStudioHWnd, string dialogAutomationId, string buttonName)
+        public static void PressButtonWithName(
+            IntPtr visualStudioHWnd,
+            string dialogAutomationId,
+            string buttonName
+        )
         {
             var dialogAutomationElement = GetOpenDialogById(visualStudioHWnd, dialogAutomationId);
 
@@ -87,28 +124,56 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
         /// The button is identified using its name; see <see cref="PressButton(IntPtr, string, string)"/>
         /// for the equivalent methods that finds the button by automation ID.
         /// </summary>
-        public static void PressButtonWithNameFromDialogWithName(IntPtr visualStudioHWnd, string dialogName, string buttonName)
+        public static void PressButtonWithNameFromDialogWithName(
+            IntPtr visualStudioHWnd,
+            string dialogName,
+            string buttonName
+        )
         {
             IUIAutomationElement dialogAutomationElement;
-            using (var cancellationTokenSource = new CancellationTokenSource(Helper.HangMitigatingTimeout))
+            using (
+                var cancellationTokenSource = new CancellationTokenSource(
+                    Helper.HangMitigatingTimeout
+                )
+            )
             {
-                dialogAutomationElement = FindDialogByName(visualStudioHWnd, dialogName, isOpen: true, cancellationTokenSource.Token);
+                dialogAutomationElement = FindDialogByName(
+                    visualStudioHWnd,
+                    dialogName,
+                    isOpen: true,
+                    cancellationTokenSource.Token
+                );
             }
 
             var buttonAutomationElement = dialogAutomationElement.FindDescendantByName(buttonName);
             buttonAutomationElement.Invoke();
         }
 
-        private static IUIAutomationElement FindDialogWorker(IntPtr visualStudioHWnd, string dialogAutomationName)
-            => FindDialogByPropertyWorker(visualStudioHWnd, dialogAutomationName, AutomationElementIdentifiers.AutomationIdProperty);
+        private static IUIAutomationElement FindDialogWorker(
+            IntPtr visualStudioHWnd,
+            string dialogAutomationName
+        ) =>
+            FindDialogByPropertyWorker(
+                visualStudioHWnd,
+                dialogAutomationName,
+                AutomationElementIdentifiers.AutomationIdProperty
+            );
 
-        private static IUIAutomationElement FindDialogByNameWorker(IntPtr visualStudioHWnd, string dialogName)
-            => FindDialogByPropertyWorker(visualStudioHWnd, dialogName, AutomationElementIdentifiers.NameProperty);
+        private static IUIAutomationElement FindDialogByNameWorker(
+            IntPtr visualStudioHWnd,
+            string dialogName
+        ) =>
+            FindDialogByPropertyWorker(
+                visualStudioHWnd,
+                dialogName,
+                AutomationElementIdentifiers.NameProperty
+            );
 
         private static IUIAutomationElement FindDialogByPropertyWorker(
             IntPtr visualStudioHWnd,
             string propertyValue,
-            AutomationProperty nameProperty)
+            AutomationProperty nameProperty
+        )
         {
             var vsAutomationElement = Helper.Automation.ElementFromHandle(visualStudioHWnd);
 
@@ -116,13 +181,22 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 new[]
                 {
                     Helper.Automation.CreatePropertyCondition(nameProperty.Id, propertyValue),
-                    Helper.Automation.CreatePropertyCondition(AutomationElementIdentifiers.ControlTypeProperty.Id, ControlType.Window.Id),
-                });
+                    Helper.Automation.CreatePropertyCondition(
+                        AutomationElementIdentifiers.ControlTypeProperty.Id,
+                        ControlType.Window.Id
+                    ),
+                }
+            );
 
             return vsAutomationElement.FindFirst(TreeScope.TreeScope_Children, elementCondition);
         }
 
-        private static T Retry<T>(Func<CancellationToken, T> action, Func<T, CancellationToken, bool> stoppingCondition, TimeSpan delay, CancellationToken cancellationToken)
+        private static T Retry<T>(
+            Func<CancellationToken, T> action,
+            Func<T, CancellationToken, bool> stoppingCondition,
+            TimeSpan delay,
+            CancellationToken cancellationToken
+        )
         {
             do
             {
@@ -148,8 +222,7 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities
                 {
                     Task.Delay(delay, cancellationToken).GetAwaiter().GetResult();
                 }
-            }
-            while (true);
+            } while (true);
         }
     }
 }

@@ -14,7 +14,8 @@ namespace Microsoft.Extensions.Logging.Console
     {
         private const int _maxQueuedMessages = 1024;
 
-        private readonly BlockingCollection<LogMessageEntry> _messageQueue = new BlockingCollection<LogMessageEntry>(_maxQueuedMessages);
+        private readonly BlockingCollection<LogMessageEntry> _messageQueue =
+            new BlockingCollection<LogMessageEntry>(_maxQueuedMessages);
         private readonly Thread _outputThread;
 
         public IConsole Console { get; }

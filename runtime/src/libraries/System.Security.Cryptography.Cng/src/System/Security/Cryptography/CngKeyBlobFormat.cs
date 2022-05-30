@@ -21,7 +21,10 @@ namespace System.Security.Cryptography
             if (format == null)
                 throw new ArgumentNullException(nameof(format));
             if (format.Length == 0)
-                throw new ArgumentException(SR.Format(SR.Cryptography_InvalidKeyBlobFormat, format), nameof(format));
+                throw new ArgumentException(
+                    SR.Format(SR.Cryptography_InvalidKeyBlobFormat, format),
+                    nameof(format)
+                );
 
             _format = format;
         }
@@ -31,10 +34,7 @@ namespace System.Security.Cryptography
         /// </summary>
         public string Format
         {
-            get
-            {
-                return _format;
-            }
+            get { return _format; }
         }
 
         public static bool operator ==(CngKeyBlobFormat? left, CngKeyBlobFormat? right)
@@ -110,7 +110,8 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_eccFullPrivate ?? (s_eccFullPrivate = new CngKeyBlobFormat("ECCFULLPRIVATEBLOB")); // BCRYPT_ECCFULLPRIVATE_BLOB
+                return s_eccFullPrivate
+                    ?? (s_eccFullPrivate = new CngKeyBlobFormat("ECCFULLPRIVATEBLOB")); // BCRYPT_ECCFULLPRIVATE_BLOB
             }
         }
 
@@ -118,7 +119,8 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_eccFullPublic ?? (s_eccFullPublic = new CngKeyBlobFormat("ECCFULLPUBLICBLOB")); // BCRYPT_ECCFULLPUBLIC_BLOB
+                return s_eccFullPublic
+                    ?? (s_eccFullPublic = new CngKeyBlobFormat("ECCFULLPUBLICBLOB")); // BCRYPT_ECCFULLPUBLIC_BLOB
             }
         }
 
@@ -142,7 +144,8 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_opaqueTransport ?? (s_opaqueTransport = new CngKeyBlobFormat("OpaqueTransport")); // NCRYPT_OPAQUETRANSPORT_BLOB
+                return s_opaqueTransport
+                    ?? (s_opaqueTransport = new CngKeyBlobFormat("OpaqueTransport")); // NCRYPT_OPAQUETRANSPORT_BLOB
             }
         }
 
@@ -150,10 +153,10 @@ namespace System.Security.Cryptography
         {
             get
             {
-                return s_pkcs8Private ?? (s_pkcs8Private = new CngKeyBlobFormat("PKCS8_PRIVATEKEY")); // NCRYPT_PKCS8_PRIVATE_KEY_BLOB
+                return s_pkcs8Private
+                    ?? (s_pkcs8Private = new CngKeyBlobFormat("PKCS8_PRIVATEKEY")); // NCRYPT_PKCS8_PRIVATE_KEY_BLOB
             }
         }
-
 
         private static CngKeyBlobFormat? s_eccPrivate;
         private static CngKeyBlobFormat? s_eccPublic;

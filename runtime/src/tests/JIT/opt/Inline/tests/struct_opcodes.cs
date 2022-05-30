@@ -19,7 +19,6 @@ public struct X
     public SingleInt f;
 }
 
-
 public class SingleInt
 {
     public int i1;
@@ -61,6 +60,7 @@ internal class TestStruct
         x.f = new SingleInt();
         x.f.i1 = 77;
     }
+
     public static int Main()
     {
         SimpleStruct st;
@@ -78,4 +78,3 @@ internal class TestStruct
         return 100;
     }
 }
-

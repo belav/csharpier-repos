@@ -23,28 +23,38 @@ namespace Microsoft.CodeAnalysis.Workspaces
         private readonly ITextBufferAssociatedViewService _associatedViewService;
         private readonly IThreadingContext _threadingContext;
 
-        private readonly Dictionary<ITextBuffer, VisibleTrackerData> _subjectBufferToCallbacks = new();
+        private readonly Dictionary<ITextBuffer, VisibleTrackerData> _subjectBufferToCallbacks =
+            new();
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public WpfTextBufferVisibilityTracker(
             ITextBufferAssociatedViewService associatedViewService,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _associatedViewService = associatedViewService;
             _threadingContext = threadingContext;
 
-            associatedViewService.SubjectBuffersConnected += AssociatedViewService_SubjectBuffersConnected;
-            associatedViewService.SubjectBuffersDisconnected += AssociatedViewService_SubjectBuffersDisconnected;
+            associatedViewService.SubjectBuffersConnected +=
+                AssociatedViewService_SubjectBuffersConnected;
+            associatedViewService.SubjectBuffersDisconnected +=
+                AssociatedViewService_SubjectBuffersDisconnected;
         }
 
-        private void AssociatedViewService_SubjectBuffersConnected(object sender, SubjectBuffersConnectedEventArgs e)
+        private void AssociatedViewService_SubjectBuffersConnected(
+            object sender,
+            SubjectBuffersConnectedEventArgs e
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             UpdateAllAssociatedViews(e.SubjectBuffers);
         }
 
-        private void AssociatedViewService_SubjectBuffersDisconnected(object sender, SubjectBuffersConnectedEventArgs e)
+        private void AssociatedViewService_SubjectBuffersDisconnected(
+            object sender,
+            SubjectBuffersConnectedEventArgs e
+        )
         {
             _threadingContext.ThrowIfNotOnUIThread();
             UpdateAllAssociatedViews(e.SubjectBuffers);
@@ -65,7 +75,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
         {
             _threadingContext.ThrowIfNotOnUIThread();
 
-            var views = _associatedViewService.GetAssociatedTextViews(subjectBuffer).ToImmutableArrayOrEmpty();
+            var views = _associatedViewService
+                .GetAssociatedTextViews(subjectBuffer)
+                .ToImmutableArrayOrEmpty();
 
             // If we don't have any views at all, then assume the buffer is visible.
             if (views.Length == 0)
@@ -98,7 +110,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
             _threadingContext.ThrowIfNotOnUIThread();
 
             // Both of these methods must succeed.  Otherwise we're somehow unregistering something we don't know about.
-            Contract.ThrowIfFalse(_subjectBufferToCallbacks.TryGetValue(subjectBuffer, out var data));
+            Contract.ThrowIfFalse(
+                _subjectBufferToCallbacks.TryGetValue(subjectBuffer, out var data)
+            );
             Contract.ThrowIfFalse(data.Callbacks.Remove(callback));
 
             // If we have nothing that wants to listen to information about this buffer anymore, then disconnect it
@@ -120,7 +134,8 @@ namespace Microsoft.CodeAnalysis.Workspaces
 
             public VisibleTrackerData(
                 WpfTextBufferVisibilityTracker tracker,
-                ITextBuffer subjectBuffer)
+                ITextBuffer subjectBuffer
+            )
             {
                 _tracker = tracker;
                 _subjectBuffer = subjectBuffer;
@@ -145,7 +160,9 @@ namespace Microsoft.CodeAnalysis.Workspaces
                 _tracker._threadingContext.ThrowIfNotOnUIThread();
 
                 // Update us to whatever the currently associated text views are for this buffer.
-                UpdateTextViews(_tracker._associatedViewService.GetAssociatedTextViews(_subjectBuffer));
+                UpdateTextViews(
+                    _tracker._associatedViewService.GetAssociatedTextViews(_subjectBuffer)
+                );
             }
 
             private void UpdateTextViews(IEnumerable<ITextView> associatedTextViews)
@@ -157,21 +174,26 @@ namespace Microsoft.CodeAnalysis.Workspaces
                 foreach (var removedView in removedViews)
                 {
                     if (removedView is IWpfTextView removedWpfView)
-                        removedWpfView.VisualElement.IsVisibleChanged -= VisualElement_IsVisibleChanged;
+                        removedWpfView.VisualElement.IsVisibleChanged -=
+                            VisualElement_IsVisibleChanged;
                 }
 
                 // Connect to hearing about visbility changes for any views we are associated with.
                 foreach (var addedView in addedViews)
                 {
                     if (addedView is IWpfTextView addedWpfView)
-                        addedWpfView.VisualElement.IsVisibleChanged += VisualElement_IsVisibleChanged;
+                        addedWpfView.VisualElement.IsVisibleChanged +=
+                            VisualElement_IsVisibleChanged;
                 }
 
                 TextViews.Clear();
                 TextViews.AddRange(associatedTextViews);
             }
 
-            private void VisualElement_IsVisibleChanged(object sender, System.Windows.DependencyPropertyChangedEventArgs e)
+            private void VisualElement_IsVisibleChanged(
+                object sender,
+                System.Windows.DependencyPropertyChangedEventArgs e
+            )
             {
                 _tracker._threadingContext.ThrowIfNotOnUIThread();
                 foreach (var callback in Callbacks)

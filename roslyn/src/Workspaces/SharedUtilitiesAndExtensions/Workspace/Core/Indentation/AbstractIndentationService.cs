@@ -13,11 +13,15 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Indentation
 {
     internal abstract partial class AbstractIndentationService<TSyntaxRoot>
-        : AbstractIndentation<TSyntaxRoot>, IIndentationService
-        where TSyntaxRoot : SyntaxNode, ICompilationUnitSyntax
+        : AbstractIndentation<TSyntaxRoot>,
+            IIndentationService where TSyntaxRoot : SyntaxNode, ICompilationUnitSyntax
     {
         public IndentationResult GetIndentation(
-            Document document, int lineNumber, IndentationOptions options, CancellationToken cancellationToken)
+            Document document,
+            int lineNumber,
+            IndentationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var indentStyle = options.IndentStyle;
 
@@ -29,8 +33,10 @@ namespace Microsoft.CodeAnalysis.Indentation
 
             var indenter = GetIndenter(document, lineNumber, options, cancellationToken);
 
-            if (indentStyle == FormattingOptions2.IndentStyle.Smart &&
-                indenter.TryGetSmartTokenIndentation(out var indentationResult))
+            if (
+                indentStyle == FormattingOptions2.IndentStyle.Smart
+                && indenter.TryGetSmartTokenIndentation(out var indentationResult)
+            )
             {
                 return indentationResult;
             }
@@ -39,12 +45,19 @@ namespace Microsoft.CodeAnalysis.Indentation
             return indenter.GetDesiredIndentation(indentStyle) ?? default;
         }
 
-        private Indenter GetIndenter(Document document, int lineNumber, IndentationOptions options, CancellationToken cancellationToken)
+        private Indenter GetIndenter(
+            Document document,
+            int lineNumber,
+            IndentationOptions options,
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFormatting = this.SyntaxFormatting;
 
 #if CODE_STYLE
-            var tree = document.GetSyntaxTreeAsync(cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+            var tree = document
+                .GetSyntaxTreeAsync(cancellationToken)
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
             Contract.ThrowIfNull(tree);
 #else
             var tree = document.GetRequiredSyntaxTreeSynchronously(cancellationToken);
@@ -57,18 +70,36 @@ namespace Microsoft.CodeAnalysis.Indentation
             var baseIndentationRule = NoOpFormattingRule.Instance;
 #else
             var workspace = document.Project.Solution.Workspace;
-            var formattingRuleFactory = workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
-            var baseIndentationRule = formattingRuleFactory.CreateRule(document, lineToBeIndented.Start);
+            var formattingRuleFactory =
+                workspace.Services.GetRequiredService<IHostDependentFormattingRuleFactoryService>();
+            var baseIndentationRule = formattingRuleFactory.CreateRule(
+                document,
+                lineToBeIndented.Start
+            );
 #endif
 
-            var formattingRules = ImmutableArray.Create(
-                baseIndentationRule,
-                this.GetSpecializedIndentationFormattingRule(options.IndentStyle)).AddRange(
-                syntaxFormatting.GetDefaultFormattingRules());
+            var formattingRules = ImmutableArray
+                .Create(
+                    baseIndentationRule,
+                    this.GetSpecializedIndentationFormattingRule(options.IndentStyle)
+                )
+                .AddRange(syntaxFormatting.GetDefaultFormattingRules());
 
             var smartTokenFormatter = CreateSmartTokenFormatter(
-                (TSyntaxRoot)tree.GetRoot(cancellationToken), lineToBeIndented, options, baseIndentationRule);
-            return new Indenter(this, tree, formattingRules, options, lineToBeIndented, smartTokenFormatter, cancellationToken);
+                (TSyntaxRoot)tree.GetRoot(cancellationToken),
+                lineToBeIndented,
+                options,
+                baseIndentationRule
+            );
+            return new Indenter(
+                this,
+                tree,
+                formattingRules,
+                options,
+                lineToBeIndented,
+                smartTokenFormatter,
+                cancellationToken
+            );
         }
     }
 }

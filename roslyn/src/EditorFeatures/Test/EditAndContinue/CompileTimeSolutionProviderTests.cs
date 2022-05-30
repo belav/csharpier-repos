@@ -36,30 +36,61 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             var additionalFilePath = Path.Combine(TempRoot.Root, "a", $"X.{kind}");
             var designTimeFilePath = Path.Combine(TempRoot.Root, "a", $"X.{kind}.g.cs");
 
-            var generator = new TestSourceGenerator() { ExecuteImpl = context => context.AddSource($"a_X_{kind}.g.cs", "") };
-            var sourceGeneratedPathPrefix = Path.Combine(typeof(TestSourceGenerator).Assembly.GetName().Name, typeof(TestSourceGenerator).FullName);
+            var generator = new TestSourceGenerator()
+            {
+                ExecuteImpl = context => context.AddSource($"a_X_{kind}.g.cs", "")
+            };
+            var sourceGeneratedPathPrefix = Path.Combine(
+                typeof(TestSourceGenerator).Assembly.GetName().Name,
+                typeof(TestSourceGenerator).FullName
+            );
             var analyzerConfigId = DocumentId.CreateNewId(projectId);
             var documentId = DocumentId.CreateNewId(projectId);
             var additionalDocumentId = DocumentId.CreateNewId(projectId);
             var designTimeDocumentId = DocumentId.CreateNewId(projectId);
 
-            var designTimeSolution = workspace.CurrentSolution.
-                AddProject(ProjectInfo.Create(projectId, VersionStamp.Default, "proj", "proj", LanguageNames.CSharp, filePath: projectFilePath)).
-                WithProjectMetadataReferences(projectId, TargetFrameworkUtil.GetReferences(TargetFramework.NetStandard20)).
-                AddAnalyzerReference(projectId, new TestGeneratorReference(generator)).
-                AddAdditionalDocument(additionalDocumentId, "additional", SourceText.From(""), filePath: additionalFilePath).
-                AddAnalyzerConfigDocument(analyzerConfigId, "config", SourceText.From(""), filePath: "RazorSourceGenerator.razorencconfig").
-                AddDocument(documentId, "a.cs", "").
-                AddDocument(DocumentInfo.Create(
-                    designTimeDocumentId,
-                    name: "a",
-                    folders: Array.Empty<string>(),
-                    sourceCodeKind: SourceCodeKind.Regular,
-                    loader: null,
-                    filePath: designTimeFilePath,
-                    isGenerated: true,
-                    designTimeOnly: true,
-                    documentServiceProvider: null));
+            var designTimeSolution = workspace.CurrentSolution
+                .AddProject(
+                    ProjectInfo.Create(
+                        projectId,
+                        VersionStamp.Default,
+                        "proj",
+                        "proj",
+                        LanguageNames.CSharp,
+                        filePath: projectFilePath
+                    )
+                )
+                .WithProjectMetadataReferences(
+                    projectId,
+                    TargetFrameworkUtil.GetReferences(TargetFramework.NetStandard20)
+                )
+                .AddAnalyzerReference(projectId, new TestGeneratorReference(generator))
+                .AddAdditionalDocument(
+                    additionalDocumentId,
+                    "additional",
+                    SourceText.From(""),
+                    filePath: additionalFilePath
+                )
+                .AddAnalyzerConfigDocument(
+                    analyzerConfigId,
+                    "config",
+                    SourceText.From(""),
+                    filePath: "RazorSourceGenerator.razorencconfig"
+                )
+                .AddDocument(documentId, "a.cs", "")
+                .AddDocument(
+                    DocumentInfo.Create(
+                        designTimeDocumentId,
+                        name: "a",
+                        folders: Array.Empty<string>(),
+                        sourceCodeKind: SourceCodeKind.Regular,
+                        loader: null,
+                        filePath: designTimeFilePath,
+                        isGenerated: true,
+                        designTimeOnly: true,
+                        documentServiceProvider: null
+                    )
+                );
 
             var designTimeDocument = designTimeSolution.GetRequiredDocument(designTimeDocumentId);
 
@@ -70,13 +101,27 @@ namespace Microsoft.CodeAnalysis.EditAndContinue.UnitTests
             Assert.False(compileTimeSolution.ContainsDocument(designTimeDocumentId));
             Assert.True(compileTimeSolution.ContainsDocument(documentId));
 
-            var sourceGeneratedDoc = (await compileTimeSolution.Projects.Single().GetSourceGeneratedDocumentsAsync()).Single();
+            var sourceGeneratedDoc = (
+                await compileTimeSolution.Projects.Single().GetSourceGeneratedDocumentsAsync()
+            ).Single();
 
-            var compileTimeDocument = await CompileTimeSolutionProvider.TryGetCompileTimeDocumentAsync(designTimeDocument, compileTimeSolution, CancellationToken.None, sourceGeneratedPathPrefix);
+            var compileTimeDocument =
+                await CompileTimeSolutionProvider.TryGetCompileTimeDocumentAsync(
+                    designTimeDocument,
+                    compileTimeSolution,
+                    CancellationToken.None,
+                    sourceGeneratedPathPrefix
+                );
             Assert.Same(sourceGeneratedDoc, compileTimeDocument);
 
-            var actualDesignTimeDocumentIds = await CompileTimeSolutionProvider.GetDesignTimeDocumentsAsync(
-                compileTimeSolution, ImmutableArray.Create(documentId, sourceGeneratedDoc.Id), designTimeSolution, CancellationToken.None, sourceGeneratedPathPrefix);
+            var actualDesignTimeDocumentIds =
+                await CompileTimeSolutionProvider.GetDesignTimeDocumentsAsync(
+                    compileTimeSolution,
+                    ImmutableArray.Create(documentId, sourceGeneratedDoc.Id),
+                    designTimeSolution,
+                    CancellationToken.None,
+                    sourceGeneratedPathPrefix
+                );
 
             AssertEx.Equal(new[] { documentId, designTimeDocumentId }, actualDesignTimeDocumentIds);
         }

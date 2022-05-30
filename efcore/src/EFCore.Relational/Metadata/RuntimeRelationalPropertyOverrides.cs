@@ -22,7 +22,8 @@ public class RuntimeRelationalPropertyOverrides : AnnotatableBase, IRelationalPr
     public RuntimeRelationalPropertyOverrides(
         RuntimeProperty property,
         bool columnNameOverridden,
-        string? columnName)
+        string? columnName
+    )
     {
         Property = property;
         if (columnNameOverridden)

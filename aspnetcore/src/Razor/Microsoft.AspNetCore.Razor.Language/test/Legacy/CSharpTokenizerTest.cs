@@ -23,7 +23,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             "\r\ra",
             SyntaxFactory.Token(SyntaxKind.NewLine, "\r"),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\r"),
-            IgnoreRemaining);
+            IgnoreRemaining
+        );
     }
 
     [Fact]
@@ -33,7 +34,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             "\n\na",
             SyntaxFactory.Token(SyntaxKind.NewLine, "\n"),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\n"),
-            IgnoreRemaining);
+            IgnoreRemaining
+        );
     }
 
     [Fact]
@@ -44,7 +46,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             "\u0085\u0085a",
             SyntaxFactory.Token(SyntaxKind.NewLine, "\u0085"),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\u0085"),
-            IgnoreRemaining);
+            IgnoreRemaining
+        );
     }
 
     [Fact]
@@ -55,7 +58,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             "\u2028\u2028a",
             SyntaxFactory.Token(SyntaxKind.NewLine, "\u2028"),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\u2028"),
-            IgnoreRemaining);
+            IgnoreRemaining
+        );
     }
 
     [Fact]
@@ -66,7 +70,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             "\u2029\u2029a",
             SyntaxFactory.Token(SyntaxKind.NewLine, "\u2029"),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\u2029"),
-            IgnoreRemaining);
+            IgnoreRemaining
+        );
     }
 
     [Fact]
@@ -76,7 +81,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             "\r\n\r\na",
             SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n"),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\r\n"),
-            IgnoreRemaining);
+            IgnoreRemaining
+        );
     }
 
     [Fact]
@@ -86,7 +92,8 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
             " \f\t\u000B \n ",
             SyntaxFactory.Token(SyntaxKind.Whitespace, " \f\t\u000B "),
             SyntaxFactory.Token(SyntaxKind.NewLine, "\n"),
-            SyntaxFactory.Token(SyntaxKind.Whitespace, " "));
+            SyntaxFactory.Token(SyntaxKind.Whitespace, " ")
+        );
     }
 
     [Fact]
@@ -101,6 +108,7 @@ public class CSharpTokenizerTest : CSharpTokenizerTestBase
         TestTokenizer(
             "@(",
             SyntaxFactory.Token(SyntaxKind.Transition, "@"),
-            SyntaxFactory.Token(SyntaxKind.LeftParenthesis, "("));
+            SyntaxFactory.Token(SyntaxKind.LeftParenthesis, "(")
+        );
     }
 }

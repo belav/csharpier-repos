@@ -26,7 +26,8 @@ public static class RelationalTypeMappingConfigurationBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TypeMappingConfigurationBuilder HasColumnType(
         this TypeMappingConfigurationBuilder scalarBuilder,
-        string typeName)
+        string typeName
+    )
     {
         Check.NotEmpty(typeName, nameof(typeName));
 
@@ -48,8 +49,10 @@ public static class RelationalTypeMappingConfigurationBuilderExtensions
     /// <returns>The same builder instance so that multiple calls can be chained.</returns>
     public static TypeMappingConfigurationBuilder<TScalar> HasColumnType<TScalar>(
         this TypeMappingConfigurationBuilder<TScalar> scalarBuilder,
-        string typeName)
-        => (TypeMappingConfigurationBuilder<TScalar>)HasColumnType((TypeMappingConfigurationBuilder)scalarBuilder, typeName);
+        string typeName
+    ) =>
+        (TypeMappingConfigurationBuilder<TScalar>)
+            HasColumnType((TypeMappingConfigurationBuilder)scalarBuilder, typeName);
 
     /// <summary>
     ///     Configures the scalar as capable of storing only fixed-length data, such as strings.
@@ -62,7 +65,8 @@ public static class RelationalTypeMappingConfigurationBuilderExtensions
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public static TypeMappingConfigurationBuilder IsFixedLength(
         this TypeMappingConfigurationBuilder scalarBuilder,
-        bool fixedLength = true)
+        bool fixedLength = true
+    )
     {
         scalarBuilder.HasAnnotation(RelationalAnnotationNames.IsFixedLength, fixedLength);
 
@@ -81,6 +85,8 @@ public static class RelationalTypeMappingConfigurationBuilderExtensions
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public static TypeMappingConfigurationBuilder<TScalar> IsFixedLength<TScalar>(
         this TypeMappingConfigurationBuilder<TScalar> scalarBuilder,
-        bool fixedLength = true)
-        => (TypeMappingConfigurationBuilder<TScalar>)IsFixedLength((TypeMappingConfigurationBuilder)scalarBuilder, fixedLength);
+        bool fixedLength = true
+    ) =>
+        (TypeMappingConfigurationBuilder<TScalar>)
+            IsFixedLength((TypeMappingConfigurationBuilder)scalarBuilder, fixedLength);
 }

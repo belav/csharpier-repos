@@ -49,9 +49,48 @@ namespace System.Security.Cryptography.Tests
         }
     }
 
-    public class HMACMD5Test : HMACMD5 { public int GetBlockSizeValue() { Dispose(); return BlockSizeValue; } }
-    public class HMACSHA1Test : HMACSHA1 { public int GetBlockSizeValue() { Dispose(); return BlockSizeValue; } }
-    public class HMACSHA256Test : HMACSHA256 { public int GetBlockSizeValue() { Dispose(); return BlockSizeValue; } }
-    public class HMACSHA384Test : HMACSHA384 { public int GetBlockSizeValue() { Dispose(); return BlockSizeValue; } }
-    public class HMACSHA512Test : HMACSHA512 { public int GetBlockSizeValue() { Dispose(); return BlockSizeValue; } }
+    public class HMACMD5Test : HMACMD5
+    {
+        public int GetBlockSizeValue()
+        {
+            Dispose();
+            return BlockSizeValue;
+        }
+    }
+
+    public class HMACSHA1Test : HMACSHA1
+    {
+        public int GetBlockSizeValue()
+        {
+            Dispose();
+            return BlockSizeValue;
+        }
+    }
+
+    public class HMACSHA256Test : HMACSHA256
+    {
+        public int GetBlockSizeValue()
+        {
+            Dispose();
+            return BlockSizeValue;
+        }
+    }
+
+    public class HMACSHA384Test : HMACSHA384
+    {
+        public int GetBlockSizeValue()
+        {
+            Dispose();
+            return BlockSizeValue;
+        }
+    }
+
+    public class HMACSHA512Test : HMACSHA512
+    {
+        public int GetBlockSizeValue()
+        {
+            Dispose();
+            return BlockSizeValue;
+        }
+    }
 }

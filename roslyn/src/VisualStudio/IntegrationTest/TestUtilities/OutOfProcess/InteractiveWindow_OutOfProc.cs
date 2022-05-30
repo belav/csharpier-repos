@@ -24,17 +24,14 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             Verify = new Verifier(this, visualStudioInstance);
         }
 
-        public void Initialize()
-            => _interactiveWindowInProc.Initialize();
+        public void Initialize() => _interactiveWindowInProc.Initialize();
 
         /// <summary>
         /// Gets the last input from the REPL.
         /// </summary>
-        public string GetLastReplInput()
-            => _interactiveWindowInProc.GetLastReplInput();
+        public string GetLastReplInput() => _interactiveWindowInProc.GetLastReplInput();
 
-        public string GetReplText()
-            => _interactiveWindowInProc.GetReplText();
+        public string GetReplText() => _interactiveWindowInProc.GetReplText();
 
         public void ClearReplText()
         {
@@ -45,34 +42,30 @@ namespace Microsoft.VisualStudio.IntegrationTest.Utilities.OutOfProcess
             _instance.ExecuteCommand(WellKnownCommandNames.Edit_SelectionCancel);
         }
 
-        public void ShowWindow(bool waitForPrompt = true)
-            => _interactiveWindowInProc.ShowWindow(waitForPrompt);
+        public void ShowWindow(bool waitForPrompt = true) =>
+            _interactiveWindowInProc.ShowWindow(waitForPrompt);
 
-        public void Reset(bool waitForPrompt = true)
-            => _interactiveWindowInProc.Reset(waitForPrompt);
+        public void Reset(bool waitForPrompt = true) =>
+            _interactiveWindowInProc.Reset(waitForPrompt);
 
-        public void SubmitText(string text)
-            => _interactiveWindowInProc.SubmitText(text);
+        public void SubmitText(string text) => _interactiveWindowInProc.SubmitText(text);
 
-        public void WaitForReplOutput(string outputText)
-            => _interactiveWindowInProc.WaitForReplOutput(outputText);
+        public void WaitForReplOutput(string outputText) =>
+            _interactiveWindowInProc.WaitForReplOutput(outputText);
 
-        public void WaitForLastReplOutputContains(string outputText)
-            => _interactiveWindowInProc.WaitForLastReplOutputContains(outputText);
+        public void WaitForLastReplOutputContains(string outputText) =>
+            _interactiveWindowInProc.WaitForLastReplOutputContains(outputText);
 
-        public void WaitForLastReplOutput(string outputText)
-            => _interactiveWindowInProc.WaitForLastReplOutput(outputText);
+        public void WaitForLastReplOutput(string outputText) =>
+            _interactiveWindowInProc.WaitForLastReplOutput(outputText);
 
-        public void WaitForLastReplInputContains(string outputText)
-            => _interactiveWindowInProc.WaitForLastReplInputContains(outputText);
+        public void WaitForLastReplInputContains(string outputText) =>
+            _interactiveWindowInProc.WaitForLastReplInputContains(outputText);
 
-        public void CloseInteractiveWindow()
-            => _interactiveWindowInProc.CloseWindow();
+        public void CloseInteractiveWindow() => _interactiveWindowInProc.CloseWindow();
 
-        public void ClearScreen()
-            => _interactiveWindowInProc.ClearScreen();
+        public void ClearScreen() => _interactiveWindowInProc.ClearScreen();
 
-        public void InsertCode(string text)
-            => _interactiveWindowInProc.InsertCode(text);
+        public void InsertCode(string text) => _interactiveWindowInProc.InsertCode(text);
     }
 }

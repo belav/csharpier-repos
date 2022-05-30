@@ -17,8 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
     [Trait(Traits.Feature, Traits.Features.CodeActionsIntroduceUsingStatement)]
     public sealed class IntroduceUsingStatementTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CSharpIntroduceUsingStatementCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new CSharpIntroduceUsingStatementCodeRefactoringProvider();
 
         [Theory]
         [InlineData("v[||]ar name = disposable;")]
@@ -36,14 +38,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         public async Task RefactoringIsAvailableForSelection(string declaration)
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
-        " + declaration + @"
+        "
+                    + declaration
+                    + @"
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -51,21 +55,23 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsAvailableForVerticalSelection()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
-    {                             [|    " + @"
+    {                             [|    "
+                    + @"
         var name = disposable;    |]
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -73,14 +79,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsAvailableForSelectionAtStartOfStatementWithPrecedingDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -88,7 +95,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         [||]var name = disposable;
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -97,14 +104,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsAvailableForSelectionAtStartOfLineWithPrecedingDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -112,7 +120,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
 [||]        var name = disposable;
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -121,14 +129,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsAvailableForSelectionAtEndOfStatementWithFollowingDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -136,7 +145,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         var ignore = disposable;
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -146,14 +155,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
 
         var ignore = disposable;
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsAvailableForSelectionAtEndOfLineWithFollowingDeclaration()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -161,7 +171,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         var ignore = disposable;
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -171,7 +181,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
 
         var ignore = disposable;
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -181,33 +192,37 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         public async Task RefactoringIsNotAvailableForSelection(string declaration)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
-        " + declaration + @"
+        "
+                    + declaration
+                    + @"
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsNotAvailableForDeclarationMissingInitializerExpression()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
         System.IDisposable name =[||]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsNotAvailableForUsingStatementDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -215,7 +230,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Theory]
@@ -226,27 +242,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         public async Task RefactoringIsNotAvailableForMultiVariableDeclaration(string declaration)
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
-        " + declaration + @"
+        "
+                    + declaration
+                    + @"
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsAvailableForConstrainedGenericTypeParameter()
         {
             await TestInRegularAndScriptAsync(
-@"class C<T> where T : System.IDisposable
+                @"class C<T> where T : System.IDisposable
 {
     void M(T disposable)
     {
         var x = disposable;[||]
     }
 }",
-@"class C<T> where T : System.IDisposable
+                @"class C<T> where T : System.IDisposable
 {
     void M(T disposable)
     {
@@ -254,27 +273,29 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsNotAvailableForUnconstrainedGenericTypeParameter()
         {
             await TestMissingAsync(
-@"class C<T>
+                @"class C<T>
 {
     void M(T disposable)
     {
         var x = disposable;[||]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task LeadingCommentTriviaIsPlacedOnUsingStatement()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -282,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         var x = disposable;[||]
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -291,21 +312,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task CommentOnTheSameLineStaysOnTheSameLine()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
         var x = disposable;[||] // Comment
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -313,14 +335,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task TrailingCommentTriviaOnNextLineGoesAfterBlock()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -328,7 +351,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         // Comment
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -337,14 +360,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         }
         // Comment
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task ValidPreprocessorStaysValid()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -353,7 +377,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
 #endif
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -363,14 +387,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         }
 #endif
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task InvalidPreprocessorStaysInvalid()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -380,7 +405,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         _ = x;
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -391,14 +416,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
             _ = x;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task StatementsAreSurroundedByMinimalScope()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -409,7 +435,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         M(null);
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -422,14 +448,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
 
         M(null);
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task CommentsAreSurroundedExceptLinesFollowingLastUsage()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -439,7 +466,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         // C
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -450,14 +477,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         }
         // C
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task WorksInSwitchSections()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -470,7 +498,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         }
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -485,14 +513,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
                 break;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task WorksOnStatementWithInvalidEmbeddingInIf()
         {
             await TestInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -500,7 +529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
             var x = disposable;[||]
     }
 }",
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
@@ -509,20 +538,22 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
             {
             }
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public async Task RefactoringIsNotAvailableOnStatementWithInvalidEmbeddingInLambda()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     void M(System.IDisposable disposable)
     {
         new Action(() => var x = disposable[||]);
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -530,7 +561,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.IntroduceUsingStatement
         public async Task ExpandsToIncludeSurroundedVariableDeclarations()
         {
             await TestInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -542,7 +573,7 @@ class C
         var a = 1;
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -556,7 +587,8 @@ class C
 
         var a = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -564,7 +596,7 @@ class C
         public async Task ExpandsToIncludeSurroundedOutVariableDeclarations()
         {
             await TestInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -581,7 +613,7 @@ class C
         var c = 1;
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -600,7 +632,8 @@ class C
 
         var c = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -608,7 +641,7 @@ class C
         public async Task ExpandsToIncludeSurroundedPatternVariableDeclarations()
         {
             await TestInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -625,7 +658,7 @@ class C
         var c = 1;
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -644,7 +677,8 @@ class C
 
         var c = 1;
     }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -652,7 +686,7 @@ class C
         public async Task ExpandsToIncludeSurroundedMultiVariableDeclarations()
         {
             await TestInRegularAndScriptAsync(
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -665,7 +699,7 @@ class C
         var d = 1;
     }
 }",
-@"using System.IO;
+                @"using System.IO;
 
 class C
 {
@@ -680,7 +714,8 @@ class C
 
         var d = 1;
     }
-}");
+}"
+            );
         }
     }
 }

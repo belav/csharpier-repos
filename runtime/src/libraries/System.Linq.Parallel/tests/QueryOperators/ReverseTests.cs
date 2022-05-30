@@ -82,7 +82,10 @@ namespace System.Linq.Parallel.Tests
         [Theory]
         [OuterLoop]
         [MemberData(nameof(Sources.OuterLoopRanges), MemberType = typeof(Sources))]
-        public static void Reverse_NotPipelined_Longrunning(Labeled<ParallelQuery<int>> labeled, int count)
+        public static void Reverse_NotPipelined_Longrunning(
+            Labeled<ParallelQuery<int>> labeled,
+            int count
+        )
         {
             Reverse_NotPipelined(labeled, count);
         }
@@ -90,7 +93,10 @@ namespace System.Linq.Parallel.Tests
         [Fact]
         public static void Reverse_ArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("source", () => ((ParallelQuery<object>)null).Reverse());
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => ((ParallelQuery<object>)null).Reverse()
+            );
         }
     }
 }

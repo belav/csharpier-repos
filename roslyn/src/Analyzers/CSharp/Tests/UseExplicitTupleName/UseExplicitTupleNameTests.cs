@@ -18,19 +18,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExplicitTupleName
 {
     public class UseExplicitTupleNameTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public UseExplicitTupleNameTests(ITestOutputHelper logger)
-          : base(logger)
-        {
-        }
+        public UseExplicitTupleNameTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new UseExplicitTupleNameDiagnosticAnalyzer(), new UseExplicitTupleNameCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new UseExplicitTupleNameDiagnosticAnalyzer(),
+                new UseExplicitTupleNameCodeFixProvider()
+            );
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestNamedTuple1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -39,7 +41,7 @@ class C
         var v2 = v1.[|Item1|];
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -47,14 +49,15 @@ class C
         (int i, string s) v1 = default((int, string));
         var v2 = v1.i;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestInArgument()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -65,7 +68,7 @@ class C
 
     void Goo(int i) { }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -75,14 +78,15 @@ class C
     }
 
     void Goo(int i) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestNamedTuple2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -91,7 +95,7 @@ class C
         var v2 = v1.[|Item2|];
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -99,14 +103,15 @@ class C
         (int i, string s) v1 = default((int, string));
         var v2 = v1.s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestMissingOnMatchingName1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -114,14 +119,15 @@ class C
         (int, string s) v1 = default((int, string));
         var v2 = v1.[|Item1|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestMissingOnMatchingName2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -129,14 +135,15 @@ class C
         (int Item1, string s) v1 = default((int, string));
         var v2 = v1.[|Item1|];
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestWrongCasing()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -145,7 +152,7 @@ class C
         var v2 = v1.[|Item1|];
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -153,14 +160,15 @@ class C
         (int item1, string s) v1 = default((int, string));
         var v2 = v1.item1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestFixAll1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -170,7 +178,7 @@ class C
         var v3 = v1.Item2;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -179,14 +187,15 @@ class C
         var v2 = v1.i;
         var v3 = v1.s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestFixAll2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -195,7 +204,7 @@ class C
         v1.{|FixAllInDocument:Item1|} = v1.Item2;
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -203,14 +212,15 @@ class C
         (int i, int s) v1 = default((int, int));
         v1.i = v1.s;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestFalseOptionImplicitTuple()
         {
             await TestDiagnosticMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -218,14 +228,22 @@ class C
         (int i, string s) v1 = default((int, string));
         var v2 = v1.[|Item1|];
     }
-}", new TestParameters(options: Option(CodeStyleOptions2.PreferExplicitTupleNames, false, NotificationOption2.Warning)));
+}",
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferExplicitTupleNames,
+                        false,
+                        NotificationOption2.Warning
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestFalseOptionExplicitTuple()
         {
             await TestDiagnosticMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -233,13 +251,22 @@ class C
         (int i, string s) v1 = default((int, string));
         var v2 = v1.[|i|];
     }
-}", new TestParameters(options: Option(CodeStyleOptions2.PreferExplicitTupleNames, false, NotificationOption2.Warning)));
+}",
+                new TestParameters(
+                    options: Option(
+                        CodeStyleOptions2.PreferExplicitTupleNames,
+                        false,
+                        NotificationOption2.Warning
+                    )
+                )
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExplicitTupleName)]
         public async Task TestOnRestField()
         {
-            var valueTuple8 = @"
+            var valueTuple8 =
+                @"
 namespace System
 {
     public struct ValueTuple<T1>
@@ -268,7 +295,7 @@ namespace System
 }
 ";
             await TestDiagnosticMissingAsync(
-@"
+                @"
 class C
 {
     void M()
@@ -276,7 +303,8 @@ class C
         (int, int, int, int, int, int, int, int) x = default;
         _ = x.[|Rest|];
     }
-}" + valueTuple8);
+}" + valueTuple8
+            );
         }
     }
 }

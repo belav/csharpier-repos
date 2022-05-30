@@ -8,9 +8,8 @@ namespace System.Numerics
     /// <typeparam name="TOther">The type that will be compared with <typeparamref name="TSelf" />.</typeparam>
     public interface IComparisonOperators<TSelf, TOther>
         : IComparable,
-          IComparable<TOther>,
-          IEqualityOperators<TSelf, TOther>
-        where TSelf : IComparisonOperators<TSelf, TOther>
+            IComparable<TOther>,
+            IEqualityOperators<TSelf, TOther> where TSelf : IComparisonOperators<TSelf, TOther>
     {
         /// <summary>Compares two values to determine which is less.</summary>
         /// <param name="left">The value to compare with <paramref name="right" />.</param>

@@ -26,7 +26,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
             connectionPointContainer.FindConnectionPoint(typeof(T).GUID, out var connectionPoint);
             if (connectionPoint == null)
             {
-                throw new InvalidOperationException("Could not find connection point for " + typeof(T).FullName);
+                throw new InvalidOperationException(
+                    "Could not find connection point for " + typeof(T).FullName
+                );
             }
 
             connectionPoint.Advise(sink, out var cookie);

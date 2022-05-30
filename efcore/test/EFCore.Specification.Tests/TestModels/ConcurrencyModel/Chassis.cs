@@ -8,14 +8,9 @@ public class Chassis
     private readonly ILazyLoader _loader;
     private Team _team;
 
-    public Chassis()
-    {
-    }
+    public Chassis() { }
 
-    private Chassis(
-        ILazyLoader loader,
-        int teamId,
-        string name)
+    private Chassis(ILazyLoader loader, int teamId, string name)
     {
         _loader = loader;
         TeamId = teamId;

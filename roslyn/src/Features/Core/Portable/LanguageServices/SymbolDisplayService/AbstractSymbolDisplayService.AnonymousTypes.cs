@@ -27,17 +27,27 @@ namespace Microsoft.CodeAnalysis.LanguageServices
                 // description.  Otherwise, replace it with 'a, 'b etc. and show its sig in the 'Types:' section.
 
                 if (firstSymbol.IsAnonymousDelegateType())
-                    directStructuralTypes = directStructuralTypes.Except(new[] { (INamedTypeSymbol)firstSymbol });
+                    directStructuralTypes = directStructuralTypes.Except(
+                        new[] { (INamedTypeSymbol)firstSymbol }
+                    );
 
                 var info = _structuralTypeDisplayService.GetTypeDisplayInfo(
-                    firstSymbol, directStructuralTypes.ToImmutableArrayOrEmpty(), _semanticModel, _position);
+                    firstSymbol,
+                    directStructuralTypes.ToImmutableArrayOrEmpty(),
+                    _semanticModel,
+                    _position
+                );
 
                 if (info.TypesParts.Count > 0)
                 {
                     AddToGroup(SymbolDescriptionGroups.StructuralTypes, info.TypesParts);
 
                     foreach (var (group, parts) in _groupMap.ToArray())
-                        _groupMap[group] = info.ReplaceStructuralTypes(parts, _semanticModel, _position);
+                        _groupMap[group] = info.ReplaceStructuralTypes(
+                            parts,
+                            _semanticModel,
+                            _position
+                        );
                 }
             }
         }

@@ -38,7 +38,10 @@ namespace Microsoft.VisualBasic.CompilerServices.Tests
         public void FromString(string value, DateTime expected)
         {
             Assert.Equal(expected, DateType.FromString(value));
-            Assert.Equal(expected, DateType.FromString(value, System.Globalization.CultureInfo.InvariantCulture));
+            Assert.Equal(
+                expected,
+                DateType.FromString(value, System.Globalization.CultureInfo.InvariantCulture)
+            );
         }
 
         // The following conversions are not supported.

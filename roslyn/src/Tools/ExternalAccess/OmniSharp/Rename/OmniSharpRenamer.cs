@@ -22,9 +22,20 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp
             string newName,
             OmniSharpRenameOptions options,
             ImmutableHashSet<ISymbol>? nonConflictSymbols,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var resolution = await Renamer.RenameSymbolAsync(solution, symbol, newName, options.ToRenameOptions(), CodeActionOptions.DefaultProvider, nonConflictSymbols, cancellationToken).ConfigureAwait(false);
+            var resolution = await Renamer
+                .RenameSymbolAsync(
+                    solution,
+                    symbol,
+                    newName,
+                    options.ToRenameOptions(),
+                    CodeActionOptions.DefaultProvider,
+                    nonConflictSymbols,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return new RenameResult(resolution.NewSolution, resolution.ErrorMessage);
         }
     }

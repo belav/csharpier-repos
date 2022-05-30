@@ -9,9 +9,15 @@ namespace Microsoft.EntityFrameworkCore.Metadata;
 /// <remarks>
 ///     See <see href="https://aka.ms/efcore-docs-modeling">Modeling entity types and relationships</see> for more information and examples.
 /// </remarks>
-public readonly struct StoreObjectIdentifier : IComparable<StoreObjectIdentifier>, IEquatable<StoreObjectIdentifier>
+public readonly struct StoreObjectIdentifier
+    : IComparable<StoreObjectIdentifier>,
+        IEquatable<StoreObjectIdentifier>
 {
-    private StoreObjectIdentifier(StoreObjectType storeObjectType, string name, string? schema = null)
+    private StoreObjectIdentifier(
+        StoreObjectType storeObjectType,
+        string name,
+        string? schema = null
+    )
     {
         StoreObjectType = storeObjectType;
         Name = name;
@@ -24,7 +30,10 @@ public readonly struct StoreObjectIdentifier : IComparable<StoreObjectIdentifier
     /// <param name="entityType">The entity type.</param>
     /// <param name="type">The store object type.</param>
     /// <returns>The store object id.</returns>
-    public static StoreObjectIdentifier? Create(IReadOnlyEntityType entityType, StoreObjectType type)
+    public static StoreObjectIdentifier? Create(
+        IReadOnlyEntityType entityType,
+        StoreObjectType type
+    )
     {
         Check.NotNull(entityType, nameof(entityType));
 
@@ -82,7 +91,10 @@ public readonly struct StoreObjectIdentifier : IComparable<StoreObjectIdentifier
     {
         Check.NotNull(entityType, nameof(entityType));
 
-        return new StoreObjectIdentifier(StoreObjectType.SqlQuery, entityType.GetDefaultSqlQueryName());
+        return new StoreObjectIdentifier(
+            StoreObjectType.SqlQuery,
+            entityType.GetDefaultSqlQueryName()
+        );
     }
 
     /// <summary>
@@ -145,24 +157,21 @@ public readonly struct StoreObjectIdentifier : IComparable<StoreObjectIdentifier
     /// <summary>
     ///     Gets the friendly display name for the store object.
     /// </summary>
-    public string DisplayName()
-        => Schema == null ? Name : Schema + "." + Name;
+    public string DisplayName() => Schema == null ? Name : Schema + "." + Name;
 
     /// <inheritdoc />
-    public override string ToString()
-        => StoreObjectType + " " + DisplayName();
+    public override string ToString() => StoreObjectType + " " + DisplayName();
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj is StoreObjectIdentifier identifier && Equals(identifier);
+    public override bool Equals(object? obj) =>
+        obj is StoreObjectIdentifier identifier && Equals(identifier);
 
     /// <inheritdoc />
-    public bool Equals(StoreObjectIdentifier other)
-        => StoreObjectType == other.StoreObjectType && Name == other.Name && Schema == other.Schema;
+    public bool Equals(StoreObjectIdentifier other) =>
+        StoreObjectType == other.StoreObjectType && Name == other.Name && Schema == other.Schema;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(StoreObjectType, Name, Schema);
+    public override int GetHashCode() => HashCode.Combine(StoreObjectType, Name, Schema);
 
     /// <summary>
     ///     Compares one id to another id to see if they represent the same store object.
@@ -170,8 +179,8 @@ public readonly struct StoreObjectIdentifier : IComparable<StoreObjectIdentifier
     /// <param name="left">The first id.</param>
     /// <param name="right">The second id.</param>
     /// <returns><see langword="true" /> if they represent the same store object; <see langword="false" /> otherwise.</returns>
-    public static bool operator ==(StoreObjectIdentifier left, StoreObjectIdentifier right)
-        => left.Equals(right);
+    public static bool operator ==(StoreObjectIdentifier left, StoreObjectIdentifier right) =>
+        left.Equals(right);
 
     /// <summary>
     ///     Compares one id to another id to see if they represent the same store object.
@@ -179,6 +188,6 @@ public readonly struct StoreObjectIdentifier : IComparable<StoreObjectIdentifier
     /// <param name="left">The first id.</param>
     /// <param name="right">The second id.</param>
     /// <returns><see langword="false" /> if they represent the same store object; <see langword="true" /> otherwise.</returns>
-    public static bool operator !=(StoreObjectIdentifier left, StoreObjectIdentifier right)
-        => !(left == right);
+    public static bool operator !=(StoreObjectIdentifier left, StoreObjectIdentifier right) =>
+        !(left == right);
 }

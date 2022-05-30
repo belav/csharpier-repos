@@ -10,7 +10,6 @@ namespace System.Xml.Xsl.Runtime
     using System.Xml.XPath;
     using System.Xml.Schema;
 
-
     /// <summary>
     /// This writer supports only writer methods which write attributes.  Attributes are stored in a
     /// data structure until StartElementContent() is called, at which time the attributes are flushed
@@ -19,11 +18,11 @@ namespace System.Xml.Xsl.Runtime
     internal sealed class XmlAttributeCache : XmlRawWriter, IRemovableWriter
     {
         private XmlRawWriter _wrapped;
-        private OnRemoveWriter _onRemove;        // Event handler that is called when cached attributes are flushed to wrapped writer
-        private AttrNameVal[] _arrAttrs;         // List of cached attribute names and value parts
-        private int _numEntries;                 // Number of attributes in the cache
-        private int _idxLastName;                // The entry containing the name of the last attribute to be cached
-        private int _hashCodeUnion;              // Set of hash bits that can quickly guarantee a name is not a duplicate
+        private OnRemoveWriter _onRemove; // Event handler that is called when cached attributes are flushed to wrapped writer
+        private AttrNameVal[] _arrAttrs; // List of cached attribute names and value parts
+        private int _numEntries; // Number of attributes in the cache
+        private int _idxLastName; // The entry containing the name of the last attribute to be cached
+        private int _hashCodeUnion; // Set of hash bits that can quickly guarantee a name is not a duplicate
 
         /// <summary>
         /// Initialize the cache.  Use this method instead of a constructor in order to reuse the cache.
@@ -45,7 +44,6 @@ namespace System.Xml.Xsl.Runtime
         {
             get { return _numEntries; }
         }
-
 
         //-----------------------------------------------
         // IRemovableWriter interface
@@ -74,7 +72,6 @@ namespace System.Xml.Xsl.Runtime
             _wrapped = writer;
         }
 
-
         //-----------------------------------------------
         // XmlWriter interface
         //-----------------------------------------------
@@ -86,7 +83,9 @@ namespace System.Xml.Xsl.Runtime
         {
             int hashCode;
             int idx = 0;
-            Debug.Assert(localName != null && localName.Length != 0 && prefix != null && ns != null);
+            Debug.Assert(
+                localName != null && localName.Length != 0 && prefix != null && ns != null
+            );
 
             // Compute hashcode based on first letter of the localName
             hashCode = (1 << ((int)localName[0] & 31));
@@ -104,8 +103,7 @@ namespace System.Xml.Xsl.Runtime
 
                     // Next attribute name
                     idx = _arrAttrs[idx].NextNameIndex;
-                }
-                while (idx != 0);
+                } while (idx != 0);
             }
             else
             {
@@ -124,9 +122,7 @@ namespace System.Xml.Xsl.Runtime
         /// <summary>
         /// No-op.
         /// </summary>
-        public override void WriteEndAttribute()
-        {
-        }
+        public override void WriteEndAttribute() { }
 
         /// <summary>
         /// Pass through namespaces to underlying writer.  If any attributes have been cached, flush them.
@@ -155,7 +151,10 @@ namespace System.Xml.Xsl.Runtime
         /// </summary>
         public override void WriteValue(object value)
         {
-            Debug.Assert(value is XmlAtomicValue, "value should always be an XmlAtomicValue, as XmlAttributeCache is only used by XmlQueryOutput");
+            Debug.Assert(
+                value is XmlAtomicValue,
+                "value should always be an XmlAtomicValue, as XmlAttributeCache is only used by XmlQueryOutput"
+            );
             Debug.Assert(_arrAttrs != null && _numEntries != 0);
             EnsureAttributeCache();
             _arrAttrs[_numEntries++].Init((XmlAtomicValue)value);
@@ -177,18 +176,22 @@ namespace System.Xml.Xsl.Runtime
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         internal override void WriteEndElement(string prefix, string localName, string ns)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         public override void WriteComment(string text)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         public override void WriteProcessingInstruction(string name, string text)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
         }
+
         public override void WriteEntityRef(string name)
         {
             Debug.Fail("Should never be called on XmlAttributeCache.");
@@ -215,14 +218,14 @@ namespace System.Xml.Xsl.Runtime
             _wrapped.Flush();
         }
 
-
         //-----------------------------------------------
         // Helper methods
         //-----------------------------------------------
 
         private void FlushAttributes()
         {
-            int idx = 0, idxNext;
+            int idx = 0,
+                idxNext;
             string localName;
 
             while (idx != _numEntries)
@@ -276,12 +279,31 @@ namespace System.Xml.Xsl.Runtime
             private int _hashCode;
             private int _nextNameIndex;
 
-            public string LocalName { get { return _localName; } }
-            public string Prefix { get { return _prefix; } }
-            public string Namespace { get { return _namespaceName; } }
-            public string Text { get { return _text; } }
-            public XmlAtomicValue Value { get { return _value; } }
-            public int NextNameIndex { get { return _nextNameIndex; } set { _nextNameIndex = value; } }
+            public string LocalName
+            {
+                get { return _localName; }
+            }
+            public string Prefix
+            {
+                get { return _prefix; }
+            }
+            public string Namespace
+            {
+                get { return _namespaceName; }
+            }
+            public string Text
+            {
+                get { return _text; }
+            }
+            public XmlAtomicValue Value
+            {
+                get { return _value; }
+            }
+            public int NextNameIndex
+            {
+                get { return _nextNameIndex; }
+                set { _nextNameIndex = value; }
+            }
 
             /// <summary>
             /// Cache an attribute's name and type.

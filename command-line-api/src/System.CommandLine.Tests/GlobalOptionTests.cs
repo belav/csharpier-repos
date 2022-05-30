@@ -30,30 +30,25 @@ namespace System.CommandLine.Tests
             var command = new Command("child");
             var rootCommand = new RootCommand { command };
             command.SetHandler(() => { });
-            var requiredOption = new Option<bool>("--i-must-be-set")
-            {
-                IsRequired = true
-            };
+            var requiredOption = new Option<bool>("--i-must-be-set") { IsRequired = true };
             rootCommand.AddGlobalOption(requiredOption);
 
             var result = rootCommand.Parse("child");
 
             result.Errors
-                  .Should()
-                  .ContainSingle()
-                  .Which.Message.Should().Be("Option '--i-must-be-set' is required.");
+                .Should()
+                .ContainSingle()
+                .Which.Message.Should()
+                .Be("Option '--i-must-be-set' is required.");
         }
-        
+
         [Fact]
         public void When_a_required_global_option_is_present_on_child_of_command_it_was_added_to_it_does_not_result_in_an_error()
         {
             var command = new Command("child");
             var rootCommand = new RootCommand { command };
             command.SetHandler(() => { });
-            var requiredOption = new Option<bool>("--i-must-be-set")
-            {
-                IsRequired = true
-            };
+            var requiredOption = new Option<bool>("--i-must-be-set") { IsRequired = true };
             rootCommand.AddGlobalOption(requiredOption);
 
             var result = rootCommand.Parse("child --i-must-be-set");
@@ -83,23 +78,23 @@ namespace System.CommandLine.Tests
         public void Subcommands_with_global_option_should_propagate_option_to_children()
         {
             var root = new Command("parent");
-            
+
             var firstChild = new Command("first");
-            
+
             root.AddCommand(firstChild);
-            
+
             var option = new Option<int>("--global");
-            
+
             firstChild.AddGlobalOption(option);
-            
+
             var secondChild = new Command("second");
-            
+
             firstChild.AddCommand(secondChild);
-            
+
             root.Parse("first second --global 123").GetValueForOption(option).Should().Be(123);
-            
+
             firstChild.Parse("second --global 123").GetValueForOption(option).Should().Be(123);
-            
+
             secondChild.Parse("--global 123").GetValueForOption(option).Should().Be(123);
         }
     }

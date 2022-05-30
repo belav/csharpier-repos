@@ -12,29 +12,30 @@ public class TransportConnectionFeatureCollection
 
         var allFeatures = new[]
         {
-                "IConnectionIdFeature",
-                "IConnectionTransportFeature",
-                "IConnectionItemsFeature",
-                "IPersistentStateFeature",
-                "IMemoryPoolFeature",
-                "IConnectionLifetimeFeature",
-                "IConnectionSocketFeature",
-                "IProtocolErrorCodeFeature",
-                "IStreamDirectionFeature",
-                "IStreamIdFeature",
-                "IStreamAbortFeature"
-            };
+            "IConnectionIdFeature",
+            "IConnectionTransportFeature",
+            "IConnectionItemsFeature",
+            "IPersistentStateFeature",
+            "IMemoryPoolFeature",
+            "IConnectionLifetimeFeature",
+            "IConnectionSocketFeature",
+            "IProtocolErrorCodeFeature",
+            "IStreamDirectionFeature",
+            "IStreamIdFeature",
+            "IStreamAbortFeature"
+        };
 
         var implementedFeatures = new[]
         {
-                "IConnectionIdFeature",
-                "IConnectionTransportFeature",
-                "IConnectionItemsFeature",
-                "IMemoryPoolFeature",
-                "IConnectionLifetimeFeature"
-            };
+            "IConnectionIdFeature",
+            "IConnectionTransportFeature",
+            "IConnectionItemsFeature",
+            "IMemoryPoolFeature",
+            "IConnectionLifetimeFeature"
+        };
 
-        var usings = $@"
+        var usings =
+            $@"
 using Microsoft.AspNetCore.Connections.Features;
 using Microsoft.AspNetCore.Http.Features;";
 
@@ -44,6 +45,7 @@ using Microsoft.AspNetCore.Http.Features;";
             allFeatures: allFeatures,
             implementedFeatures: implementedFeatures,
             extraUsings: usings,
-            fallbackFeatures: "MultiplexedConnectionFeatures");
+            fallbackFeatures: "MultiplexedConnectionFeatures"
+        );
     }
 }

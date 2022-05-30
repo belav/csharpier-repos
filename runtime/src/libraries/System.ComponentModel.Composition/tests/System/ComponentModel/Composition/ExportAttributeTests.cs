@@ -73,17 +73,24 @@ namespace System.ComponentModel.Composition
         public void ExportIndexers_ShouldThrowSomething()
         {
             var con = new CompositionContainer(
-                new TypeCatalog(typeof(WorkingType), typeof(Constants), typeof(ExportImplementer), typeof(ExportOnIndexer))
+                new TypeCatalog(
+                    typeof(WorkingType),
+                    typeof(Constants),
+                    typeof(ExportImplementer),
+                    typeof(ExportOnIndexer)
+                )
             );
 
             var v1 = con.GetExportedValue<WorkingType>();
 
-            ExceptionAssert.Throws<CompositionException>(RetryMode.DoNotRetry, () =>
-            {
-                var v2 = con.GetExportedValue<ExportOnIndexer>();
-                Console.WriteLine(v2.ToString());
-            });
+            ExceptionAssert.Throws<CompositionException>(
+                RetryMode.DoNotRetry,
+                () =>
+                {
+                    var v2 = con.GetExportedValue<ExportOnIndexer>();
+                    Console.WriteLine(v2.ToString());
+                }
+            );
         }
-
     }
 }

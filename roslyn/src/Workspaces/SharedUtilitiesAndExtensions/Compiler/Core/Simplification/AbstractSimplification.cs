@@ -13,5 +13,8 @@ namespace Microsoft.CodeAnalysis.Simplification;
 internal abstract class AbstractSimplification : ISimplification
 {
     public abstract SimplifierOptions DefaultOptions { get; }
-    public abstract SimplifierOptions GetSimplifierOptions(AnalyzerConfigOptions options, SimplifierOptions? fallbackOptions);
+    public abstract SimplifierOptions GetSimplifierOptions(
+        AnalyzerConfigOptions options,
+        SimplifierOptions? fallbackOptions
+    );
 }

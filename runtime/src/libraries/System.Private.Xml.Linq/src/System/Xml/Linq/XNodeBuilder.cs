@@ -47,9 +47,7 @@ namespace System.Xml.Linq
             _root.Add(_content);
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override string LookupPrefix(string namespaceName)
         {
@@ -101,9 +99,7 @@ namespace System.Xml.Linq
             }
         }
 
-        public override void WriteEndDocument()
-        {
-        }
+        public override void WriteEndDocument() { }
 
         public override void WriteEndElement()
         {
@@ -163,22 +159,28 @@ namespace System.Xml.Linq
             AddString(data);
         }
 
-        public override void WriteStartAttribute(string? prefix, string localName, string? namespaceName)
+        public override void WriteStartAttribute(
+            string? prefix,
+            string localName,
+            string? namespaceName
+        )
         {
             ArgumentNullException.ThrowIfNull(prefix);
-            _attrName = XNamespace.Get(prefix.Length == 0 ? string.Empty : namespaceName!).GetName(localName);
+            _attrName = XNamespace
+                .Get(prefix.Length == 0 ? string.Empty : namespaceName!)
+                .GetName(localName);
             _attrValue = string.Empty;
         }
 
-        public override void WriteStartDocument()
-        {
-        }
+        public override void WriteStartDocument() { }
 
-        public override void WriteStartDocument(bool standalone)
-        {
-        }
+        public override void WriteStartDocument(bool standalone) { }
 
-        public override void WriteStartElement(string? prefix, string localName, string? namespaceName)
+        public override void WriteStartElement(
+            string? prefix,
+            string localName,
+            string? namespaceName
+        )
         {
             AddNode(new XElement(XNamespace.Get(namespaceName!).GetName(localName)));
         }

@@ -88,7 +88,10 @@ public class XmlDocumentationIntegrationTests
 
         // Assert
         var path = swagger.Paths["/v1/greeter"];
-        Assert.Equal("Request XML param!", path.Operations[OperationType.Post].RequestBody.Description);
+        Assert.Equal(
+            "Request XML param!",
+            path.Operations[OperationType.Post].RequestBody.Description
+        );
     }
 
     [Fact]
@@ -133,7 +136,10 @@ public class XmlDocumentationIntegrationTests
         {
             c.SwaggerDoc("v1", new OpenApiInfo { Title = "My API", Version = "v1" });
 
-            var filePath = Path.Combine(System.AppContext.BaseDirectory, "Microsoft.AspNetCore.Grpc.Swagger.Tests.xml");
+            var filePath = Path.Combine(
+                System.AppContext.BaseDirectory,
+                "Microsoft.AspNetCore.Grpc.Swagger.Tests.xml"
+            );
             c.IncludeXmlComments(filePath);
             c.IncludeGrpcXmlComments(filePath, includeControllerXmlComments: true);
         });
@@ -169,7 +175,5 @@ public class XmlDocumentationIntegrationTests
         public string EnvironmentName { get; set; }
     }
 
-    private class GreeterService : Greeter.GreeterBase
-    {
-    }
+    private class GreeterService : Greeter.GreeterBase { }
 }

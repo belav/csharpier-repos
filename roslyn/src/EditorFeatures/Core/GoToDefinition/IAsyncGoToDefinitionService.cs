@@ -11,6 +11,10 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     internal interface IAsyncGoToDefinitionService : ILanguageService
     {
-        Task<INavigableLocation?> FindDefinitionLocationAsync(Document document, int position, CancellationToken cancellationToken);
+        Task<INavigableLocation?> FindDefinitionLocationAsync(
+            Document document,
+            int position,
+            CancellationToken cancellationToken
+        );
     }
 }

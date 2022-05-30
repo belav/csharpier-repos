@@ -9,9 +9,7 @@ namespace System.Threading
     {
         public SafeHandle Handle => null!;
 
-        private ThreadPoolBoundHandle()
-        {
-        }
+        private ThreadPoolBoundHandle() { }
 
         public static ThreadPoolBoundHandle BindHandle(SafeHandle handle)
         {
@@ -25,7 +23,11 @@ namespace System.Threading
         }
 
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* AllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData)
+        public unsafe NativeOverlapped* AllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        )
         {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
@@ -34,11 +36,16 @@ namespace System.Threading
         }
 
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* UnsafeAllocateNativeOverlapped(IOCompletionCallback callback, object? state, object? pinData) =>
-            AllocateNativeOverlapped(callback, state, pinData);
+        public unsafe NativeOverlapped* UnsafeAllocateNativeOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => AllocateNativeOverlapped(callback, state, pinData);
 
         [CLSCompliant(false)]
-        public unsafe NativeOverlapped* AllocateNativeOverlapped(PreAllocatedOverlapped preAllocated)
+        public unsafe NativeOverlapped* AllocateNativeOverlapped(
+            PreAllocatedOverlapped preAllocated
+        )
         {
             if (preAllocated == null)
                 throw new ArgumentNullException(nameof(preAllocated));
@@ -64,8 +71,6 @@ namespace System.Threading
             throw new PlatformNotSupportedException(SR.PlatformNotSupported_OverlappedIO);
         }
 
-        public void Dispose()
-        {
-        }
+        public void Dispose() { }
     }
 }

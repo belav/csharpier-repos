@@ -433,21 +433,21 @@ namespace Dynamic.Operator.Tests
         {
             dynamic d = "abc";
 
-            Assert.Throws<RuntimeBinderException>(() => d &=s_bool);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_byte);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_char);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_decimal);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_double);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_float);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_int);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_long);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_object);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_sbyte);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_short);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_string);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_uint);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_ulong);
-            Assert.Throws<RuntimeBinderException>(() => d &=s_ushort);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_bool);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_byte);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_char);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_decimal);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_double);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_float);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_int);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_long);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_object);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_sbyte);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_short);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_string);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_uint);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_ulong);
+            Assert.Throws<RuntimeBinderException>(() => d &= s_ushort);
         }
 
         [Fact]

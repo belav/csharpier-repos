@@ -36,7 +36,10 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_work()
         {
-            var extraProperties = typeof(ExtraProduct).GetProperties().Except(typeof(Product).GetProperties()).Select(p => new PropertyDescription(p));
+            var extraProperties = typeof(ExtraProduct)
+                .GetProperties()
+                .Except(typeof(Product).GetProperties())
+                .Select(p => new PropertyDescription(p));
             var similarType = ProxyGenerator.GetSimilarType(typeof(Product), extraProperties);
 
             similarType.Assembly.IsDynamic.ShouldBeTrue();

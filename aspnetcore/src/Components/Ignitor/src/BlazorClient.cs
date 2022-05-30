@@ -37,10 +37,10 @@ public class BlazorClient : IAsyncDisposable
         });
     }
 
-    public TimeSpan? DefaultConnectionTimeout { get; set; } = Debugger.IsAttached ?
-        Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(20);
-    public TimeSpan? DefaultOperationTimeout { get; set; } = Debugger.IsAttached ?
-        Timeout.InfiniteTimeSpan : TimeSpan.FromMilliseconds(500);
+    public TimeSpan? DefaultConnectionTimeout { get; set; } =
+        Debugger.IsAttached ? Timeout.InfiniteTimeSpan : TimeSpan.FromSeconds(20);
+    public TimeSpan? DefaultOperationTimeout { get; set; } =
+        Debugger.IsAttached ? Timeout.InfiniteTimeSpan : TimeSpan.FromMilliseconds(500);
 
     /// <summary>
     /// Gets or sets a value that determines whether the client will capture data such
@@ -92,7 +92,9 @@ public class BlazorClient : IAsyncDisposable
 
     public bool ImplicitWait => DefaultOperationTimeout != null;
 
-    public HubConnection HubConnection => _hubConnection ?? throw new InvalidOperationException("HubConnection has not been initialized.");
+    public HubConnection HubConnection =>
+        _hubConnection
+        ?? throw new InvalidOperationException("HubConnection has not been initialized.");
 
     public Task<CapturedRenderBatch?> PrepareForNextBatch(TimeSpan? timeout)
     {
@@ -101,7 +103,10 @@ public class BlazorClient : IAsyncDisposable
             throw new InvalidOperationException("Invalid state previous task not completed");
         }
 
-        NextBatchReceived = new CancellableOperation<CapturedRenderBatch?>(timeout, CancellationToken);
+        NextBatchReceived = new CancellableOperation<CapturedRenderBatch?>(
+            timeout,
+            CancellationToken
+        );
         return NextBatchReceived.Completion.Task;
     }
 
@@ -112,19 +117,28 @@ public class BlazorClient : IAsyncDisposable
             throw new InvalidOperationException("Invalid state previous task not completed");
         }
 
-        NextJSInteropReceived = new CancellableOperation<CapturedJSInteropCall?>(timeout, CancellationToken);
+        NextJSInteropReceived = new CancellableOperation<CapturedJSInteropCall?>(
+            timeout,
+            CancellationToken
+        );
 
         return NextJSInteropReceived.Completion.Task;
     }
 
     public Task<string?> PrepareForNextDotNetInterop(TimeSpan? timeout)
     {
-        if (NextDotNetInteropCompletionReceived != null && !NextDotNetInteropCompletionReceived.Disposed)
+        if (
+            NextDotNetInteropCompletionReceived != null
+            && !NextDotNetInteropCompletionReceived.Disposed
+        )
         {
             throw new InvalidOperationException("Invalid state previous task not completed");
         }
 
-        NextDotNetInteropCompletionReceived = new CancellableOperation<string?>(timeout, CancellationToken);
+        NextDotNetInteropCompletionReceived = new CancellableOperation<string?>(
+            timeout,
+            CancellationToken
+        );
 
         return NextDotNetInteropCompletionReceived.Completion.Task;
     }
@@ -181,10 +195,14 @@ public class BlazorClient : IAsyncDisposable
 
     public Task DispatchEventAsync(object descriptor, EventArgs eventArgs)
     {
-        var attachWebRendererInteropCall = Operations.JSInteropCalls.FirstOrDefault(c => c.Identifier == "Blazor._internal.attachWebRendererInterop");
+        var attachWebRendererInteropCall = Operations.JSInteropCalls.FirstOrDefault(
+            c => c.Identifier == "Blazor._internal.attachWebRendererInterop"
+        );
         if (attachWebRendererInteropCall is null)
         {
-            throw new InvalidOperationException("The server has not yet attached interop methods, so events cannot be dispatched.");
+            throw new InvalidOperationException(
+                "The server has not yet attached interop methods, so events cannot be dispatched."
+            );
         }
 
         var args = JsonSerializer.Deserialize<JsonElement>(attachWebRendererInteropCall.ArgsJson);
@@ -196,17 +214,27 @@ public class BlazorClient : IAsyncDisposable
             null,
             "DispatchEventAsync",
             dotNetObjectId,
-            JsonSerializer.Serialize(new object[] { descriptor, eventArgs }, new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }));
+            JsonSerializer.Serialize(
+                new object[] { descriptor, eventArgs },
+                new JsonSerializerOptions { PropertyNamingPolicy = JsonNamingPolicy.CamelCase }
+            )
+        );
     }
 
-    public async Task<CapturedRenderBatch?> ExpectRenderBatch(Func<Task> action, TimeSpan? timeout = null)
+    public async Task<CapturedRenderBatch?> ExpectRenderBatch(
+        Func<Task> action,
+        TimeSpan? timeout = null
+    )
     {
         var task = WaitForRenderBatch(timeout);
         await action();
         return await task;
     }
 
-    public async Task<CapturedJSInteropCall?> ExpectJSInterop(Func<Task> action, TimeSpan? timeout = null)
+    public async Task<CapturedJSInteropCall?> ExpectJSInterop(
+        Func<Task> action,
+        TimeSpan? timeout = null
+    )
     {
         var task = WaitForJSInterop(timeout);
         await action();
@@ -234,15 +262,21 @@ public class BlazorClient : IAsyncDisposable
         return await task;
     }
 
-    public async Task<(string? error, Exception? exception)> ExpectCircuitErrorAndDisconnect(Func<Task> action, TimeSpan? timeout = null)
+    public async Task<(string? error, Exception? exception)> ExpectCircuitErrorAndDisconnect(
+        Func<Task> action,
+        TimeSpan? timeout = null
+    )
     {
         string? error = default;
 
         // NOTE: timeout is used for each operation individually.
-        var exception = await ExpectDisconnect(async () =>
-        {
-            error = await ExpectCircuitError(action, timeout);
-        }, timeout);
+        var exception = await ExpectDisconnect(
+            async () =>
+            {
+                error = await ExpectCircuitError(action, timeout);
+            },
+            timeout
+        );
 
         return (error, exception);
     }
@@ -253,7 +287,9 @@ public class BlazorClient : IAsyncDisposable
         {
             if (DefaultOperationTimeout == null && timeout == null)
             {
-                throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                throw new InvalidOperationException(
+                    "Implicit wait without DefaultLatencyTimeout is not allowed."
+                );
             }
 
             try
@@ -275,7 +311,9 @@ public class BlazorClient : IAsyncDisposable
         {
             if (DefaultOperationTimeout == null && timeout == null)
             {
-                throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                throw new InvalidOperationException(
+                    "Implicit wait without DefaultLatencyTimeout is not allowed."
+                );
             }
 
             try
@@ -297,7 +335,9 @@ public class BlazorClient : IAsyncDisposable
         {
             if (DefaultOperationTimeout == null && timeout == null)
             {
-                throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                throw new InvalidOperationException(
+                    "Implicit wait without DefaultLatencyTimeout is not allowed."
+                );
             }
 
             try
@@ -319,7 +359,9 @@ public class BlazorClient : IAsyncDisposable
         {
             if (DefaultOperationTimeout == null && timeout == null)
             {
-                throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                throw new InvalidOperationException(
+                    "Implicit wait without DefaultLatencyTimeout is not allowed."
+                );
             }
 
             try
@@ -341,7 +383,9 @@ public class BlazorClient : IAsyncDisposable
         {
             if (DefaultOperationTimeout == null && timeout == null)
             {
-                throw new InvalidOperationException("Implicit wait without DefaultLatencyTimeout is not allowed.");
+                throw new InvalidOperationException(
+                    "Implicit wait without DefaultLatencyTimeout is not allowed."
+                );
             }
 
             try
@@ -357,10 +401,16 @@ public class BlazorClient : IAsyncDisposable
         return null;
     }
 
-    public async Task<bool> ConnectAsync(Uri uri, bool connectAutomatically = true, Action<HubConnectionBuilder, Uri>? configure = null)
+    public async Task<bool> ConnectAsync(
+        Uri uri,
+        bool connectAutomatically = true,
+        Action<HubConnectionBuilder, Uri>? configure = null
+    )
     {
         var builder = new HubConnectionBuilder();
-        builder.Services.TryAddEnumerable(ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>());
+        builder.Services.TryAddEnumerable(
+            ServiceDescriptor.Singleton<IHubProtocol, IgnitorMessagePackHubProtocol>()
+        );
         var hubUrl = GetHubUrl(uri);
         builder.WithUrl(hubUrl);
         builder.ConfigureLogging(l =>
@@ -404,8 +454,17 @@ public class BlazorClient : IAsyncDisposable
 
         var descriptors = await GetPrerenderDescriptors(uri);
         await ExpectRenderBatch(
-            async () => CircuitId = await HubConnection.InvokeAsync<string>("StartCircuit", uri, uri, descriptors, null, CancellationToken),
-            DefaultConnectionTimeout);
+            async () =>
+                CircuitId = await HubConnection.InvokeAsync<string>(
+                    "StartCircuit",
+                    uri,
+                    uri,
+                    descriptors,
+                    null,
+                    CancellationToken
+                ),
+            DefaultConnectionTimeout
+        );
         return CircuitId != null;
     }
 
@@ -425,9 +484,21 @@ public class BlazorClient : IAsyncDisposable
         NextAttachComponentReceived?.Completion?.TrySetResult(call);
     }
 
-    private void OnBeginInvokeJS(int asyncHandle, string identifier, string argsJson, int resultType, long targetInstanceId)
+    private void OnBeginInvokeJS(
+        int asyncHandle,
+        string identifier,
+        string argsJson,
+        int resultType,
+        long targetInstanceId
+    )
     {
-        var call = new CapturedJSInteropCall(asyncHandle, identifier, argsJson, resultType, targetInstanceId);
+        var call = new CapturedJSInteropCall(
+            asyncHandle,
+            identifier,
+            argsJson,
+            resultType,
+            targetInstanceId
+        );
         Operations?.JSInteropCalls.Enqueue(call);
         JSInterop?.Invoke(call);
 
@@ -499,27 +570,42 @@ public class BlazorClient : IAsyncDisposable
         else
         {
             var builder = new UriBuilder(uri);
-            builder.Path += builder.Path.EndsWith("/", StringComparison.Ordinal) ? "_blazor" : "/_blazor";
+            builder.Path += builder.Path.EndsWith("/", StringComparison.Ordinal)
+                ? "_blazor"
+                : "/_blazor";
             return builder.Uri;
         }
     }
 
-    public async Task InvokeDotNetMethod(object? callId, string? assemblyName, string methodIdentifier, object dotNetObjectId, string argsJson)
+    public async Task InvokeDotNetMethod(
+        object? callId,
+        string? assemblyName,
+        string methodIdentifier,
+        object dotNetObjectId,
+        string argsJson
+    )
     {
-        await ExpectDotNetInterop(() => HubConnection.InvokeAsync(
-            "BeginInvokeDotNetFromJS",
-            callId?.ToString(),
-            assemblyName,
-            methodIdentifier,
-            dotNetObjectId ?? 0,
-            argsJson,
-            CancellationToken));
+        await ExpectDotNetInterop(
+            () =>
+                HubConnection.InvokeAsync(
+                    "BeginInvokeDotNetFromJS",
+                    callId?.ToString(),
+                    assemblyName,
+                    methodIdentifier,
+                    dotNetObjectId ?? 0,
+                    argsJson,
+                    CancellationToken
+                )
+        );
     }
 
     public async Task<string> GetPrerenderDescriptors(Uri uri)
     {
         var httpClient = new HttpClient();
-        httpClient.DefaultRequestHeaders.TryAddWithoutValidation("Cookie", "__blazor_execution_mode=server");
+        httpClient.DefaultRequestHeaders.TryAddWithoutValidation(
+            "Cookie",
+            "__blazor_execution_mode=server"
+        );
         var response = await httpClient.GetAsync(uri);
         response.EnsureSuccessStatusCode();
         var content = await response.Content.ReadAsStringAsync();
@@ -551,12 +637,13 @@ public class BlazorClient : IAsyncDisposable
     {
         content = content.Replace("\r\n", "").Replace("\n", "");
         var matches = Regex.Matches(content, MarkerPattern);
-        var markers = matches.Select(s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value)))
+        var markers = matches
+            .Select(s => (value: s.Groups[1].Value, parsed: JsonDocument.Parse(s.Groups[1].Value)))
             .Where(s =>
             {
-                return s.parsed.RootElement.TryGetProperty("type", out var markerType) &&
-                    markerType.ValueKind != JsonValueKind.Undefined &&
-                    markerType.GetString() == "server";
+                return s.parsed.RootElement.TryGetProperty("type", out var markerType)
+                    && markerType.ValueKind != JsonValueKind.Undefined
+                    && markerType.GetString() == "server";
             })
             .OrderBy(p => p.parsed.RootElement.GetProperty("sequence").GetInt32())
             .Select(p => p.value)

@@ -42,15 +42,14 @@ public sealed class UnprocessableEntity<TValue> : IResult, IEndpointMetadataProv
 
         // Creating the logger with a string to preserve the category after the refactoring.
         var loggerFactory = httpContext.RequestServices.GetRequiredService<ILoggerFactory>();
-        var logger = loggerFactory.CreateLogger("Microsoft.AspNetCore.Http.Result.UnprocessableEntityObjectResult");
+        var logger = loggerFactory.CreateLogger(
+            "Microsoft.AspNetCore.Http.Result.UnprocessableEntityObjectResult"
+        );
 
         HttpResultsHelper.Log.WritingResultAsStatusCode(logger, StatusCode);
         httpContext.Response.StatusCode = StatusCode;
 
-        return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger: logger,
-                Value);
+        return HttpResultsHelper.WriteResultAsJsonAsync(httpContext, logger: logger, Value);
     }
 
     /// <inheritdoc/>
@@ -58,6 +57,12 @@ public sealed class UnprocessableEntity<TValue> : IResult, IEndpointMetadataProv
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(typeof(TValue), StatusCodes.Status422UnprocessableEntity, "application/json"));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(
+                typeof(TValue),
+                StatusCodes.Status422UnprocessableEntity,
+                "application/json"
+            )
+        );
     }
 }

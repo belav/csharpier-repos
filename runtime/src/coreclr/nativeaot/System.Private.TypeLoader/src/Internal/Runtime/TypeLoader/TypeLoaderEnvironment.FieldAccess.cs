@@ -50,9 +50,9 @@ namespace Internal.Runtime.TypeLoader
     [StructLayout(LayoutKind.Sequential)]
     struct ThreadStaticFieldOffsets
     {
-        public uint StartingOffsetInTlsBlock;    // Offset in the TLS block containing the thread static fields of a given type
-        public uint FieldOffset;                 // Offset of a thread static field from the start of its containing type's TLS fields block
-                                                 // (in other words, the address of a field is 'TLS block + StartingOffsetInTlsBlock + FieldOffset')
+        public uint StartingOffsetInTlsBlock; // Offset in the TLS block containing the thread static fields of a given type
+        public uint FieldOffset; // Offset of a thread static field from the start of its containing type's TLS fields block
+        // (in other words, the address of a field is 'TLS block + StartingOffsetInTlsBlock + FieldOffset')
     }
 
     public sealed partial class TypeLoaderEnvironment
@@ -69,26 +69,33 @@ namespace Internal.Runtime.TypeLoader
             MetadataReader metadataReader,
             RuntimeTypeHandle runtimeTypeHandle,
             FieldHandle fieldHandle,
-            out FieldAccessMetadata fieldAccessMetadata)
+            out FieldAccessMetadata fieldAccessMetadata
+        )
         {
             fieldAccessMetadata = default(FieldAccessMetadata);
 
-            if (TryGetFieldAccessMetadataFromFieldAccessMap(
-                metadataReader,
-                runtimeTypeHandle,
-                fieldHandle,
-                CanonicalFormKind.Specific,
-                ref fieldAccessMetadata))
+            if (
+                TryGetFieldAccessMetadataFromFieldAccessMap(
+                    metadataReader,
+                    runtimeTypeHandle,
+                    fieldHandle,
+                    CanonicalFormKind.Specific,
+                    ref fieldAccessMetadata
+                )
+            )
             {
                 return true;
             }
 
-            if (TryGetFieldAccessMetadataFromFieldAccessMap(
-                metadataReader,
-                runtimeTypeHandle,
-                fieldHandle,
-                CanonicalFormKind.Universal,
-                ref fieldAccessMetadata))
+            if (
+                TryGetFieldAccessMetadataFromFieldAccessMap(
+                    metadataReader,
+                    runtimeTypeHandle,
+                    fieldHandle,
+                    CanonicalFormKind.Universal,
+                    ref fieldAccessMetadata
+                )
+            )
             {
                 return true;
             }
@@ -100,7 +107,8 @@ namespace Internal.Runtime.TypeLoader
                 runtimeTypeHandle,
                 fieldHandle,
                 context,
-                ref fieldAccessMetadata);
+                ref fieldAccessMetadata
+            );
 
             TypeSystemContextFactory.Recycle(context);
 
@@ -121,16 +129,31 @@ namespace Internal.Runtime.TypeLoader
             RuntimeTypeHandle declaringTypeHandle,
             FieldHandle fieldHandle,
             CanonicalFormKind canonFormKind,
-            ref FieldAccessMetadata fieldAccessMetadata)
+            ref FieldAccessMetadata fieldAccessMetadata
+        )
         {
-            CanonicallyEquivalentEntryLocator canonWrapper = new CanonicallyEquivalentEntryLocator(declaringTypeHandle, canonFormKind);
+            CanonicallyEquivalentEntryLocator canonWrapper = new CanonicallyEquivalentEntryLocator(
+                declaringTypeHandle,
+                canonFormKind
+            );
             string fieldName = null;
-            RuntimeTypeHandle declaringTypeHandleDefinition = TypeLoaderEnvironment.GetTypeDefinition(declaringTypeHandle);
+            RuntimeTypeHandle declaringTypeHandleDefinition =
+                TypeLoaderEnvironment.GetTypeDefinition(declaringTypeHandle);
 
-            foreach (NativeFormatModuleInfo mappingTableModule in ModuleList.EnumerateModules(RuntimeAugments.GetModuleFromTypeHandle(declaringTypeHandle)))
+            foreach (
+                NativeFormatModuleInfo mappingTableModule in ModuleList.EnumerateModules(
+                    RuntimeAugments.GetModuleFromTypeHandle(declaringTypeHandle)
+                )
+            )
             {
                 NativeReader fieldMapReader;
-                if (!TryGetNativeReaderForBlob(mappingTableModule, ReflectionMapBlob.FieldAccessMap, out fieldMapReader))
+                if (
+                    !TryGetNativeReaderForBlob(
+                        mappingTableModule,
+                        ReflectionMapBlob.FieldAccessMap,
+                        out fieldMapReader
+                    )
+                )
                     continue;
 
                 NativeParser fieldMapParser = new NativeParser(fieldMapReader, 0);
@@ -152,17 +175,25 @@ namespace Internal.Runtime.TypeLoader
 
                     FieldTableFlags entryFlags = (FieldTableFlags)entryParser.GetUnsigned();
 
-                    if ((canonFormKind == CanonicalFormKind.Universal) != ((entryFlags & FieldTableFlags.IsUniversalCanonicalEntry) != 0))
+                    if (
+                        (canonFormKind == CanonicalFormKind.Universal)
+                        != ((entryFlags & FieldTableFlags.IsUniversalCanonicalEntry) != 0)
+                    )
                         continue;
 
-                    RuntimeTypeHandle entryDeclaringTypeHandle = externalReferences.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
-                    if (!entryDeclaringTypeHandle.Equals(declaringTypeHandle)
-                        && !canonWrapper.IsCanonicallyEquivalent(entryDeclaringTypeHandle))
+                    RuntimeTypeHandle entryDeclaringTypeHandle =
+                        externalReferences.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
+                    if (
+                        !entryDeclaringTypeHandle.Equals(declaringTypeHandle)
+                        && !canonWrapper.IsCanonicallyEquivalent(entryDeclaringTypeHandle)
+                    )
                         continue;
 
                     if ((entryFlags & FieldTableFlags.HasMetadataHandle) != 0)
                     {
-                        Handle entryFieldHandle = (((int)HandleType.Field << 24) | (int)entryParser.GetUnsigned()).AsHandle();
+                        Handle entryFieldHandle = (
+                            ((int)HandleType.Field << 24) | (int)entryParser.GetUnsigned()
+                        ).AsHandle();
                         if (!fieldHandle.Equals(entryFieldHandle))
                             continue;
                     }
@@ -174,12 +205,16 @@ namespace Internal.Runtime.TypeLoader
 
                             bool success = Instance.TryGetMetadataForNamedType(
                                 declaringTypeHandleDefinition,
-                                out qTypeDefinition);
+                                out qTypeDefinition
+                            );
                             Debug.Assert(success);
 
-                            MetadataReader nativeFormatMetadataReader = qTypeDefinition.NativeFormatReader;
+                            MetadataReader nativeFormatMetadataReader =
+                                qTypeDefinition.NativeFormatReader;
 
-                            fieldName = nativeFormatMetadataReader.GetString(fieldHandle.GetField(nativeFormatMetadataReader).Name);
+                            fieldName = nativeFormatMetadataReader.GetString(
+                                fieldHandle.GetField(nativeFormatMetadataReader).Name
+                            );
                         }
 
                         string entryFieldName = entryParser.GetString();
@@ -193,7 +228,14 @@ namespace Internal.Runtime.TypeLoader
 
                     if (canonFormKind == CanonicalFormKind.Universal)
                     {
-                        if (!TypeLoaderEnvironment.Instance.TryGetFieldOffset(declaringTypeHandle, entryParser.GetUnsigned() /* field ordinal */, out fieldOffset))
+                        if (
+                            !TypeLoaderEnvironment.Instance.TryGetFieldOffset(
+                                declaringTypeHandle,
+                                entryParser.GetUnsigned() /* field ordinal */
+                                ,
+                                out fieldOffset
+                            )
+                        )
                         {
                             Debug.Assert(false);
                             return false;
@@ -208,10 +250,16 @@ namespace Internal.Runtime.TypeLoader
                         else
                         {
                             fieldOffset = 0;
-                            fieldAddressCookie = externalReferences.GetAddressFromIndex(entryParser.GetUnsigned());
+                            fieldAddressCookie = externalReferences.GetAddressFromIndex(
+                                entryParser.GetUnsigned()
+                            );
 
-                            FieldTableFlags storageClass = entryFlags & FieldTableFlags.StorageClass;
-                            if (storageClass == FieldTableFlags.GCStatic || storageClass == FieldTableFlags.ThreadStatic)
+                            FieldTableFlags storageClass =
+                                entryFlags & FieldTableFlags.StorageClass;
+                            if (
+                                storageClass == FieldTableFlags.GCStatic
+                                || storageClass == FieldTableFlags.ThreadStatic
+                            )
                                 fieldOffset = (int)entryParser.GetUnsigned();
                         }
                     }
@@ -265,7 +313,10 @@ namespace Internal.Runtime.TypeLoader
         /// RVA of static field for local fields; for remote fields, RVA of a RemoteStaticFieldDescriptor
         /// structure for the field or-ed with the FieldAccessFlags.RemoteStaticFieldRVA bit
         /// </param>
-        public static unsafe IntPtr RvaToNonGenericStaticFieldAddress(TypeManagerHandle moduleHandle, int staticFieldRVA)
+        public static unsafe IntPtr RvaToNonGenericStaticFieldAddress(
+            TypeManagerHandle moduleHandle,
+            int staticFieldRVA
+        )
         {
             // TODO: implement
             throw new NotImplementedException();
@@ -281,21 +332,38 @@ namespace Internal.Runtime.TypeLoader
         private static unsafe bool TryGetStaticFieldBaseFromFieldAccessMap(
             RuntimeTypeHandle declaringTypeHandle,
             FieldAccessStaticDataKind fieldAccessKind,
-            out IntPtr staticsRegionAddress)
+            out IntPtr staticsRegionAddress
+        )
         {
             staticsRegionAddress = IntPtr.Zero;
             byte* comparableStaticRegionAddress = null;
 
-            CanonicallyEquivalentEntryLocator canonWrapper = new CanonicallyEquivalentEntryLocator(declaringTypeHandle, CanonicalFormKind.Specific);
+            CanonicallyEquivalentEntryLocator canonWrapper = new CanonicallyEquivalentEntryLocator(
+                declaringTypeHandle,
+                CanonicalFormKind.Specific
+            );
 
             // This function only finds results for non-dynamic, non-generic types
-            if (RuntimeAugments.IsDynamicType(declaringTypeHandle) || RuntimeAugments.IsGenericType(declaringTypeHandle))
+            if (
+                RuntimeAugments.IsDynamicType(declaringTypeHandle)
+                || RuntimeAugments.IsGenericType(declaringTypeHandle)
+            )
                 return false;
 
-            foreach (NativeFormatModuleInfo mappingTableModule in ModuleList.EnumerateModules(RuntimeAugments.GetModuleFromTypeHandle(declaringTypeHandle)))
+            foreach (
+                NativeFormatModuleInfo mappingTableModule in ModuleList.EnumerateModules(
+                    RuntimeAugments.GetModuleFromTypeHandle(declaringTypeHandle)
+                )
+            )
             {
                 NativeReader fieldMapReader;
-                if (!TryGetNativeReaderForBlob(mappingTableModule, ReflectionMapBlob.FieldAccessMap, out fieldMapReader))
+                if (
+                    !TryGetNativeReaderForBlob(
+                        mappingTableModule,
+                        ReflectionMapBlob.FieldAccessMap,
+                        out fieldMapReader
+                    )
+                )
                     continue;
 
                 NativeParser fieldMapParser = new NativeParser(fieldMapReader, 0);
@@ -341,7 +409,8 @@ namespace Internal.Runtime.TypeLoader
                             return false;
                     }
 
-                    RuntimeTypeHandle entryDeclaringTypeHandle = externalReferences.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
+                    RuntimeTypeHandle entryDeclaringTypeHandle =
+                        externalReferences.GetRuntimeTypeHandleFromIndex(entryParser.GetUnsigned());
                     if (!entryDeclaringTypeHandle.Equals(declaringTypeHandle))
                         continue;
 
@@ -357,12 +426,18 @@ namespace Internal.Runtime.TypeLoader
                     }
 
                     int cookieOrOffsetOrOrdinal = (int)entryParser.GetUnsigned();
-                    int fieldOffset = (int)externalReferences.GetRvaFromIndex((uint)cookieOrOffsetOrOrdinal);
+                    int fieldOffset = (int)
+                        externalReferences.GetRvaFromIndex((uint)cookieOrOffsetOrOrdinal);
 
                     IntPtr fieldAddress = RvaToNonGenericStaticFieldAddress(
-                        mappingTableModule.Handle, fieldOffset);
+                        mappingTableModule.Handle,
+                        fieldOffset
+                    );
 
-                    if ((comparableStaticRegionAddress == null) || (comparableStaticRegionAddress > fieldAddress.ToPointer()))
+                    if (
+                        (comparableStaticRegionAddress == null)
+                        || (comparableStaticRegionAddress > fieldAddress.ToPointer())
+                    )
                     {
                         comparableStaticRegionAddress = (byte*)fieldAddress.ToPointer();
                     }
@@ -398,7 +473,8 @@ namespace Internal.Runtime.TypeLoader
             RuntimeTypeHandle declaringTypeHandle,
             FieldHandle fieldHandle,
             TypeSystemContext context,
-            ref FieldAccessMetadata fieldAccessMetadata)
+            ref FieldAccessMetadata fieldAccessMetadata
+        )
         {
             Field field = metadataReader.GetField(fieldHandle);
             string fieldName = metadataReader.GetString(field.Name);
@@ -408,7 +484,11 @@ namespace Internal.Runtime.TypeLoader
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
             if (declaringType is MetadataType)
             {
-                return TryGetFieldAccessMetadataForNativeFormatType(declaringType, fieldName, ref fieldAccessMetadata);
+                return TryGetFieldAccessMetadataForNativeFormatType(
+                    declaringType,
+                    fieldName,
+                    ref fieldAccessMetadata
+                );
             }
 #endif
 
@@ -425,7 +505,8 @@ namespace Internal.Runtime.TypeLoader
         private static bool TryGetFieldAccessMetadataForNativeFormatType(
             TypeDesc type,
             string fieldName,
-            ref FieldAccessMetadata fieldAccessMetadata)
+            ref FieldAccessMetadata fieldAccessMetadata
+        )
         {
 #if SUPPORTS_NATIVE_METADATA_TYPE_LOADING
             FieldDesc fieldDesc = type.GetField(fieldName);
@@ -467,10 +548,11 @@ namespace Internal.Runtime.TypeLoader
 #endif
                     {
                         Environment.FailFast(
-                            "Failed to locate statics table entry for field '" +
-                            fieldName +
-                            "' on type " +
-                            type.ToString());
+                            "Failed to locate statics table entry for field '"
+                                + fieldName
+                                + "' on type "
+                                + type.ToString()
+                        );
                     }
                 }
 
@@ -479,10 +561,11 @@ namespace Internal.Runtime.TypeLoader
                     if ((gcStaticsRVA == 0) && nonGenericCase)
                     {
                         Environment.FailFast(
-                            "GC statics region was not found for field '" +
-                            fieldName +
-                            "' on type " +
-                            type.ToString());
+                            "GC statics region was not found for field '"
+                                + fieldName
+                                + "' on type "
+                                + type.ToString()
+                        );
                     }
                     fieldAccessMetadata.Offset += (int)gcStaticsRVA;
                     fieldAccessMetadata.Flags |= FieldTableFlags.GCStatic;
@@ -492,10 +575,11 @@ namespace Internal.Runtime.TypeLoader
                     if ((nonGcStaticsRVA == 0) && nonGenericCase)
                     {
                         Environment.FailFast(
-                            "Non-GC statics region was not found for field '" +
-                            fieldName +
-                            "' on type " +
-                            type.ToString());
+                            "Non-GC statics region was not found for field '"
+                                + fieldName
+                                + "' on type "
+                                + type.ToString()
+                        );
                     }
                     fieldAccessMetadata.Offset += (int)nonGcStaticsRVA;
                     fieldAccessMetadata.Flags |= FieldTableFlags.NonGCStatic;

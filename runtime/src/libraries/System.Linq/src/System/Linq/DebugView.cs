@@ -123,6 +123,7 @@ namespace System.Linq
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.RootHidden)]
-        public IGrouping<TKey, TElement>[] Groupings => _cachedGroupings ?? (_cachedGroupings = _lookup.ToArray());
+        public IGrouping<TKey, TElement>[] Groupings =>
+            _cachedGroupings ?? (_cachedGroupings = _lookup.ToArray());
     }
 }

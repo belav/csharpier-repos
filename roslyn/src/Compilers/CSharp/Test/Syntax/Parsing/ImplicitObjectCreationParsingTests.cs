@@ -20,10 +20,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNoRegressionOnNew()
         {
-            UsingExpression("new", DefaultParseOptions,
+            UsingExpression(
+                "new",
+                DefaultParseOptions,
                 // (1,4): error CS1526: A new expression requires an argument list or (), [], or {} after type
                 // new
-                Diagnostic(ErrorCode.ERR_BadNewExpr, "").WithLocation(1, 4));
+                Diagnostic(ErrorCode.ERR_BadNewExpr, "").WithLocation(1, 4)
+            );
 
             N(SyntaxKind.ObjectCreationExpression);
             {
@@ -85,14 +88,16 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNoRegressionOnImplicitArrayCreation()
         {
-            UsingExpression("new[]", DefaultParseOptions,
+            UsingExpression(
+                "new[]",
+                DefaultParseOptions,
                 // (1,6): error CS1514: { expected
                 // new[]
                 Diagnostic(ErrorCode.ERR_LbraceExpected, "").WithLocation(1, 6),
                 // (1,6): error CS1513: } expected
                 // new[]
                 Diagnostic(ErrorCode.ERR_RbraceExpected, "").WithLocation(1, 6)
-                );
+            );
 
             N(SyntaxKind.ImplicitArrayCreationExpression);
             {
@@ -111,8 +116,7 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNoRegressionOnAnonymousObjectCreation()
         {
-            UsingExpression("new{}", DefaultParseOptions
-                );
+            UsingExpression("new{}", DefaultParseOptions);
 
             N(SyntaxKind.AnonymousObjectCreationExpression);
             {
@@ -126,10 +130,12 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestNoRegressionOnConditional()
         {
-            UsingExpression("new (a, b) ? x : y",
+            UsingExpression(
+                "new (a, b) ? x : y",
                 // (1,12): error CS1526: A new expression requires (), [], or {} after type
                 // new (a, b) ? x : y
-                Diagnostic(ErrorCode.ERR_BadNewExpr, "?").WithLocation(1, 12));
+                Diagnostic(ErrorCode.ERR_BadNewExpr, "?").WithLocation(1, 12)
+            );
             N(SyntaxKind.ConditionalExpression);
             {
                 N(SyntaxKind.ObjectCreationExpression);
@@ -293,7 +299,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [InlineData(SyntaxKind.ModuloExpression, SyntaxKind.PercentToken)]
         [InlineData(SyntaxKind.LeftShiftExpression, SyntaxKind.LessThanLessThanToken)]
         [InlineData(SyntaxKind.RightShiftExpression, SyntaxKind.GreaterThanGreaterThanToken)]
-        [InlineData(SyntaxKind.UnsignedRightShiftExpression, SyntaxKind.GreaterThanGreaterThanGreaterThanToken)]
+        [InlineData(
+            SyntaxKind.UnsignedRightShiftExpression,
+            SyntaxKind.GreaterThanGreaterThanGreaterThanToken
+        )]
         [InlineData(SyntaxKind.LogicalOrExpression, SyntaxKind.BarBarToken)]
         [InlineData(SyntaxKind.LogicalAndExpression, SyntaxKind.AmpersandAmpersandToken)]
         [InlineData(SyntaxKind.BitwiseOrExpression, SyntaxKind.BarToken)]
@@ -307,10 +316,13 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [InlineData(SyntaxKind.GreaterThanOrEqualExpression, SyntaxKind.GreaterThanEqualsToken)]
         public void TestBinaryOperators(SyntaxKind expressionKind, SyntaxKind tokenKind)
         {
-            UsingExpression($"new(Int32,Int32){SyntaxFacts.GetText(tokenKind),3}", DefaultParseOptions,
+            UsingExpression(
+                $"new(Int32,Int32){SyntaxFacts.GetText(tokenKind), 3}",
+                DefaultParseOptions,
                 // (1,20): error CS1733: Expected expression
                 // new(Int32,Int32)  +
-                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 20));
+                Diagnostic(ErrorCode.ERR_ExpressionExpected, "").WithLocation(1, 20)
+            );
 
             N(expressionKind);
             {
@@ -346,7 +358,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
             }
             EOF();
 
-            UsingExpression($"new(Int32,Int32){SyntaxFacts.GetText(tokenKind),2}e", DefaultParseOptions);
+            UsingExpression(
+                $"new(Int32,Int32){SyntaxFacts.GetText(tokenKind), 2}e",
+                DefaultParseOptions
+            );
 
             N(expressionKind);
             {
@@ -402,11 +417,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestEmptyArgList_LangVersion()
         {
-            UsingExpression("new()", options: TestOptions.Regular8,
+            UsingExpression(
+                "new()",
+                options: TestOptions.Regular8,
                 // (1,1): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // new()
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new").WithArguments("target-typed object creation", "9.0").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new")
+                    .WithArguments("target-typed object creation", "9.0")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ImplicitObjectCreationExpression);
             {
@@ -444,11 +463,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestEmptyObjectInitializer_LangVersion()
         {
-            UsingExpression("new(){}", options: TestOptions.Regular8,
+            UsingExpression(
+                "new(){}",
+                options: TestOptions.Regular8,
                 // (1,1): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // new(){}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new").WithArguments("target-typed object creation", "9.0").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new")
+                    .WithArguments("target-typed object creation", "9.0")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ImplicitObjectCreationExpression);
             {
@@ -518,11 +541,15 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests
         [Fact]
         public void TestObjectInitializer_LangVersion()
         {
-            UsingExpression("new(a,b){x=y}", options: TestOptions.Regular8,
+            UsingExpression(
+                "new(a,b){x=y}",
+                options: TestOptions.Regular8,
                 // (1,1): error CS8400: Feature 'target-typed object creation' is not available in C# 8.0. Please use language version 9.0 or greater.
                 // new(a,b){x=y}
-                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new").WithArguments("target-typed object creation", "9.0").WithLocation(1, 1)
-                );
+                Diagnostic(ErrorCode.ERR_FeatureNotAvailableInVersion8, "new")
+                    .WithArguments("target-typed object creation", "9.0")
+                    .WithLocation(1, 1)
+            );
 
             N(SyntaxKind.ImplicitObjectCreationExpression);
             {

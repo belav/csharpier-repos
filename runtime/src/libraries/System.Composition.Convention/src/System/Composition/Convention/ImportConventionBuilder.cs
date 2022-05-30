@@ -12,7 +12,12 @@ namespace System.Composition.Convention
     /// </summary>
     public sealed class ImportConventionBuilder
     {
-        private static readonly Type[] s_supportedImportManyTypes = new[] { typeof(IList<>), typeof(ICollection<>), typeof(IEnumerable<>) };
+        private static readonly Type[] s_supportedImportManyTypes = new[]
+        {
+            typeof(IList<>),
+            typeof(ICollection<>),
+            typeof(IEnumerable<>)
+        };
 
         private string _contractName;
         private bool? _asMany;
@@ -37,7 +42,10 @@ namespace System.Composition.Convention
 
             if (contractName.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(contractName)), nameof(contractName));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(contractName)),
+                    nameof(contractName)
+                );
             }
             _contractName = contractName;
             return this;
@@ -48,7 +56,9 @@ namespace System.Composition.Convention
         /// </summary>
         /// <param name="getContractNameFromPartType">A Func to retrieve the contract name from the part typeThe contract name.</param>
         /// <returns>An export builder allowing further configuration.</returns>
-        public ImportConventionBuilder AsContractName(Func<Type, string> getContractNameFromPartType)
+        public ImportConventionBuilder AsContractName(
+            Func<Type, string> getContractNameFromPartType
+        )
         {
             if (getContractNameFromPartType is null)
             {
@@ -105,7 +115,10 @@ namespace System.Composition.Convention
 
             if (name.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(name)),
+                    nameof(name)
+                );
             }
             if (_metadataConstraintItems == null)
             {
@@ -121,7 +134,10 @@ namespace System.Composition.Convention
         /// <param name="name">The name of the constraint item.</param>
         /// <param name="getConstraintValueFromPartType">A function that calculates the value to match.</param>
         /// <returns>An export builder allowing further configuration.</returns>
-        public ImportConventionBuilder AddMetadataConstraint(string name, Func<Type, object> getConstraintValueFromPartType)
+        public ImportConventionBuilder AddMetadataConstraint(
+            string name,
+            Func<Type, object> getConstraintValueFromPartType
+        )
         {
             if (name is null)
             {
@@ -134,7 +150,10 @@ namespace System.Composition.Convention
 
             if (name.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(name)),
+                    nameof(name)
+                );
             }
 
             if (_metadataConstraintItemFuncs == null)
@@ -149,7 +168,10 @@ namespace System.Composition.Convention
         {
             Attribute importAttribute;
 
-            var contractName = (_getContractNameFromPartType != null) ? _getContractNameFromPartType(type) : _contractName;
+            var contractName =
+                (_getContractNameFromPartType != null)
+                    ? _getContractNameFromPartType(type)
+                    : _contractName;
 
             // Infer from Type when not explicitly set.
             var asMany = _asMany ?? IsSupportedImportManyType(type.GetTypeInfo());
@@ -169,7 +191,6 @@ namespace System.Composition.Convention
                 attributes = new List<Attribute>();
             }
             attributes.Add(importAttribute);
-
 
             //Add metadata attributes from direct specification
             if (_metadataConstraintItems != null)
@@ -195,9 +216,15 @@ namespace System.Composition.Convention
 
         private static bool IsSupportedImportManyType(TypeInfo typeInfo)
         {
-            return typeInfo.IsArray ||
-                (typeInfo.IsGenericTypeDefinition && s_supportedImportManyTypes.Contains(typeInfo.AsType())) ||
-                (typeInfo.AsType().IsConstructedGenericType && s_supportedImportManyTypes.Contains(typeInfo.GetGenericTypeDefinition()));
+            return typeInfo.IsArray
+                || (
+                    typeInfo.IsGenericTypeDefinition
+                    && s_supportedImportManyTypes.Contains(typeInfo.AsType())
+                )
+                || (
+                    typeInfo.AsType().IsConstructedGenericType
+                    && s_supportedImportManyTypes.Contains(typeInfo.GetGenericTypeDefinition())
+                );
         }
     }
 }

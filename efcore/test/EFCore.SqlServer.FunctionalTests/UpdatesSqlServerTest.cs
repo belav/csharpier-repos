@@ -22,22 +22,34 @@ public class UpdatesSqlServerTest : UpdatesRelationalTestBase<UpdatesSqlServerFi
             context =>
             {
                 context.AddRange(
-                    new ProductWithBytes { ProductCategories = new List<ProductCategory> { new() { CategoryId = 77 } } },
-                    new Category { Id = 77, PrincipalId = 777 });
+                    new ProductWithBytes
+                    {
+                        ProductCategories = new List<ProductCategory> { new() { CategoryId = 77 } }
+                    },
+                    new Category { Id = 77, PrincipalId = 777 }
+                );
 
                 context.SaveChanges();
             },
             context =>
             {
-                var product = context.Set<ProductBase>()
+                var product = context
+                    .Set<ProductBase>()
                     .Include(p => ((ProductWithBytes)p).ProductCategories)
                     .Include(p => ((Product)p).ProductCategories)
                     .OfType<ProductWithBytes>()
                     .Single();
                 var productCategory = product.ProductCategories.Single();
-                Assert.Equal(productCategory.CategoryId, context.Set<ProductCategory>().Single().CategoryId);
-                Assert.Equal(productCategory.CategoryId, context.Set<Category>().Single(c => c.PrincipalId == 777).Id);
-            });
+                Assert.Equal(
+                    productCategory.CategoryId,
+                    context.Set<ProductCategory>().Single().CategoryId
+                );
+                Assert.Equal(
+                    productCategory.CategoryId,
+                    context.Set<Category>().Single(c => c.PrincipalId == 777).Id
+                );
+            }
+        );
 
         AssertContainsSql(
             @"@p0='77'
@@ -52,7 +64,8 @@ INSERT INTO [Categories] ([Id], [Name], [PrincipalId])
 VALUES (@p0, @p1, @p2);
 INSERT INTO [ProductBase] ([Bytes], [Discriminator], [ProductWithBytes_Name])
 OUTPUT INSERTED.[Id]
-VALUES (@p3, @p4, @p5);");
+VALUES (@p3, @p4, @p5);"
+        );
     }
 
     [ConditionalFact]
@@ -61,7 +74,7 @@ VALUES (@p3, @p4, @p5);");
         base.Can_add_and_remove_self_refs();
 
         AssertContainsSql(
-                @"@p0='1' (Size = 4000)
+            @"@p0='1' (Size = 4000)
 @p1=NULL (DbType = Int32)
 
 SET IMPLICIT_TRANSACTIONS OFF;
@@ -69,8 +82,8 @@ SET NOCOUNT ON;
 INSERT INTO [Person] ([Name], [ParentId])
 OUTPUT INSERTED.[PersonId]
 VALUES (@p0, @p1);",
-                //
-                @"@p2='2' (Size = 4000)
+            //
+            @"@p2='2' (Size = 4000)
 @p3='1' (Nullable = true)
 @p4='3' (Size = 4000)
 @p5='1' (Nullable = true)
@@ -84,8 +97,8 @@ WHEN NOT MATCHED THEN
 INSERT ([Name], [ParentId])
 VALUES (i.[Name], i.[ParentId])
 OUTPUT INSERTED.[PersonId], i._Position;",
-                //
-                @"@p6='4' (Size = 4000)
+            //
+            @"@p6='4' (Size = 4000)
 @p7='2' (Nullable = true)
 @p8='5' (Size = 4000)
 @p9='2' (Nullable = true)
@@ -104,7 +117,8 @@ VALUES (@p6, @p7, 0),
 WHEN NOT MATCHED THEN
 INSERT ([Name], [ParentId])
 VALUES (i.[Name], i.[ParentId])
-OUTPUT INSERTED.[PersonId], i._Position;");
+OUTPUT INSERTED.[PersonId], i._Position;"
+        );
     }
 
     public override void Save_replaced_principal()
@@ -137,54 +151,59 @@ FROM [Categories] AS [c]",
 
 SELECT [p].[Id], [p].[Discriminator], [p].[DependentId], [p].[Name], [p].[Price]
 FROM [ProductBase] AS [p]
-WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0");
+WHERE [p].[Discriminator] = N'Product' AND [p].[DependentId] = @__category_PrincipalId_0"
+        );
     }
 
     public override void Identifiers_are_generated_correctly()
     {
         using var context = CreateContext();
         var entityType = context.Model.FindEntityType(
-            typeof(
-                LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly
-            ));
+            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectly)
+        );
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorking~",
-            entityType.GetTableName());
+            entityType.GetTableName()
+        );
         Assert.Equal(
             "PK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType.GetKeys().Single().GetName());
+            entityType.GetKeys().Single().GetName()
+        );
         Assert.Equal(
             "FK_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType.GetForeignKeys().Single().GetConstraintName());
+            entityType.GetForeignKeys().Single().GetConstraintName()
+        );
         Assert.Equal(
             "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWork~",
-            entityType.GetIndexes().Single().GetDatabaseName());
+            entityType.GetIndexes().Single().GetDatabaseName()
+        );
 
         var entityType2 = context.Model.FindEntityType(
-            typeof(
-                LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails
-            ));
+            typeof(LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCorrectlyDetails)
+        );
 
         Assert.Equal(
             "LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkin~1",
-            entityType2.GetTableName());
-        Assert.Equal(
-            "PK_LoginDetails",
-            entityType2.GetKeys().Single().GetName());
+            entityType2.GetTableName()
+        );
+        Assert.Equal("PK_LoginDetails", entityType2.GetKeys().Single().GetName());
         Assert.Equal(
             "ExtraPropertyWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingCo~",
-            entityType2.GetProperties().ElementAt(1).GetColumnBaseName());
+            entityType2.GetProperties().ElementAt(1).GetColumnBaseName()
+        );
         Assert.Equal(
             "ExtraPropertyWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWorkingC~1",
-            entityType2.GetProperties().ElementAt(2).GetColumnBaseName());
+            entityType2.GetProperties().ElementAt(2).GetColumnBaseName()
+        );
         Assert.Equal(
             "IX_LoginEntityTypeWithAnExtremelyLongAndOverlyConvolutedNameThatIsUsedToVerifyThatTheStoreIdentifierGenerationLengthLimitIsWor~1",
-            entityType2.GetIndexes().Single().GetDatabaseName());
+            entityType2.GetIndexes().Single().GetDatabaseName()
+        );
     }
 
-    private void AssertSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
+    private void AssertSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected);
 
-    protected void AssertContainsSql(params string[] expected)
-        => Fixture.TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
+    protected void AssertContainsSql(params string[] expected) =>
+        Fixture.TestSqlLoggerFactory.AssertBaseline(expected, assertOrder: false);
 }

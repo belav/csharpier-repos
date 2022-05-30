@@ -21,7 +21,7 @@ namespace System.Runtime.InteropServices
     enum StringMarshalling
     {
         Custom = 0,
-        Utf8,   // UTF-8
-        Utf16,  // UTF-16, machine-endian
+        Utf8, // UTF-8
+        Utf16, // UTF-16, machine-endian
     }
 }

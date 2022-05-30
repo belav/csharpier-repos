@@ -16,8 +16,9 @@ namespace Microsoft.AspNetCore.Http;
 /// </summary>
 public static partial class HttpResponseJsonExtensions
 {
-    private const string RequiresUnreferencedCodeMessage = "JSON serialization and deserialization might require types that cannot be statically analyzed. " +
-        "Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
+    private const string RequiresUnreferencedCodeMessage =
+        "JSON serialization and deserialization might require types that cannot be statically analyzed. "
+        + "Use the overload that takes a JsonTypeInfo or JsonSerializerContext, or make sure all of the required types are preserved.";
 
     /// <summary>
     /// Write the specified value as JSON to the response body. The response content-type will be set to
@@ -32,9 +33,15 @@ public static partial class HttpResponseJsonExtensions
     public static Task WriteAsJsonAsync<TValue>(
         this HttpResponse response,
         TValue value,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync(value, options: null, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync(
+            value,
+            options: null,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -52,7 +59,8 @@ public static partial class HttpResponseJsonExtensions
         this HttpResponse response,
         TValue value,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         return response.WriteAsJsonAsync(value, options, contentType: null, cancellationToken);
     }
@@ -74,7 +82,8 @@ public static partial class HttpResponseJsonExtensions
         TValue value,
         JsonSerializerOptions? options,
         string? contentType,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -88,7 +97,12 @@ public static partial class HttpResponseJsonExtensions
         // if no user provided token, pass the RequestAborted token and ignore OperationCanceledException
         if (!cancellationToken.CanBeCanceled)
         {
-            return WriteAsJsonAsyncSlow(response.Body, value, options, response.HttpContext.RequestAborted);
+            return WriteAsJsonAsyncSlow(
+                response.Body,
+                value,
+                options,
+                response.HttpContext.RequestAborted
+            );
         }
 
         return JsonSerializer.SerializeAsync(response.Body, value, options, cancellationToken);
@@ -113,7 +127,8 @@ public static partial class HttpResponseJsonExtensions
         TValue value,
         JsonTypeInfo<TValue> jsonTypeInfo,
         string? contentType = default,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -130,11 +145,20 @@ public static partial class HttpResponseJsonExtensions
 
         return JsonSerializer.SerializeAsync(response.Body, value, jsonTypeInfo, cancellationToken);
 
-        static async Task WriteAsJsonAsyncSlow(HttpResponse response, TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        static async Task WriteAsJsonAsyncSlow(
+            HttpResponse response,
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             try
             {
-                await JsonSerializer.SerializeAsync(response.Body, value, jsonTypeInfo, response.HttpContext.RequestAborted);
+                await JsonSerializer.SerializeAsync(
+                    response.Body,
+                    value,
+                    jsonTypeInfo,
+                    response.HttpContext.RequestAborted
+                );
             }
             catch (OperationCanceledException) { }
         }
@@ -145,7 +169,8 @@ public static partial class HttpResponseJsonExtensions
         Stream body,
         TValue value,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -168,9 +193,16 @@ public static partial class HttpResponseJsonExtensions
         this HttpResponse response,
         object? value,
         Type type,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync(value, type, options: null, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync(
+            value,
+            type,
+            options: null,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -189,9 +221,16 @@ public static partial class HttpResponseJsonExtensions
         object? value,
         Type type,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
-        return response.WriteAsJsonAsync(value, type, options, contentType: null, cancellationToken);
+        return response.WriteAsJsonAsync(
+            value,
+            type,
+            options,
+            contentType: null,
+            cancellationToken
+        );
     }
 
     /// <summary>
@@ -212,7 +251,8 @@ public static partial class HttpResponseJsonExtensions
         Type type,
         JsonSerializerOptions? options,
         string? contentType,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (response == null)
         {
@@ -230,10 +270,22 @@ public static partial class HttpResponseJsonExtensions
         // if no user provided token, pass the RequestAborted token and ignore OperationCanceledException
         if (!cancellationToken.CanBeCanceled)
         {
-            return WriteAsJsonAsyncSlow(response.Body, value, type, options, response.HttpContext.RequestAborted);
+            return WriteAsJsonAsyncSlow(
+                response.Body,
+                value,
+                type,
+                options,
+                response.HttpContext.RequestAborted
+            );
         }
 
-        return JsonSerializer.SerializeAsync(response.Body, value, type, options, cancellationToken);
+        return JsonSerializer.SerializeAsync(
+            response.Body,
+            value,
+            type,
+            options,
+            cancellationToken
+        );
     }
 
     [RequiresUnreferencedCode(RequiresUnreferencedCodeMessage)]
@@ -242,7 +294,8 @@ public static partial class HttpResponseJsonExtensions
         object? value,
         Type type,
         JsonSerializerOptions? options,
-        CancellationToken cancellationToken)
+        CancellationToken cancellationToken
+    )
     {
         try
         {
@@ -270,7 +323,8 @@ public static partial class HttpResponseJsonExtensions
         Type type,
         JsonSerializerContext context,
         string? contentType = default,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (response is null)
         {
@@ -295,13 +349,25 @@ public static partial class HttpResponseJsonExtensions
             return WriteAsJsonAsyncSlow();
         }
 
-        return JsonSerializer.SerializeAsync(response.Body, value, type, context, cancellationToken);
+        return JsonSerializer.SerializeAsync(
+            response.Body,
+            value,
+            type,
+            context,
+            cancellationToken
+        );
 
         async Task WriteAsJsonAsyncSlow()
         {
             try
             {
-                await JsonSerializer.SerializeAsync(response.Body, value, type, context, cancellationToken);
+                await JsonSerializer.SerializeAsync(
+                    response.Body,
+                    value,
+                    type,
+                    context,
+                    cancellationToken
+                );
             }
             catch (OperationCanceledException) { }
         }
@@ -310,6 +376,8 @@ public static partial class HttpResponseJsonExtensions
     private static JsonSerializerOptions ResolveSerializerOptions(HttpContext httpContext)
     {
         // Attempt to resolve options from DI then fallback to default options
-        return httpContext.RequestServices?.GetService<IOptions<JsonOptions>>()?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
+        return httpContext.RequestServices
+                ?.GetService<IOptions<JsonOptions>>()
+                ?.Value?.SerializerOptions ?? JsonOptions.DefaultSerializerOptions;
     }
 }

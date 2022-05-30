@@ -19,14 +19,13 @@ internal class RequiredMemberAttributesVisitor : TestAttributesVisitor
         return builder.ToString();
     }
 
-    private RequiredMemberAttributesVisitor(StringBuilder builder) : base(builder)
-    {
-    }
+    private RequiredMemberAttributesVisitor(StringBuilder builder) : base(builder) { }
 
     protected override SymbolDisplayFormat DisplayFormat => SymbolDisplayFormat.TestFormat;
 
-    protected override CSharpAttributeData? GetTargetAttribute(ImmutableArray<CSharpAttributeData> attributes)
-        => GetAttribute(attributes, "System.Runtime.CompilerServices", "RequiredMemberAttribute");
+    protected override CSharpAttributeData? GetTargetAttribute(
+        ImmutableArray<CSharpAttributeData> attributes
+    ) => GetAttribute(attributes, "System.Runtime.CompilerServices", "RequiredMemberAttribute");
 
     protected override bool TypeRequiresAttribute(TypeSymbol? type)
     {

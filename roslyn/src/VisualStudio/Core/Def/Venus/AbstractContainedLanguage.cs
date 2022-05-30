@@ -16,8 +16,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
     [Obsolete("This is a compatibility shim for TypeScript; please do not use it.")]
     internal sealed class AbstractContainedLanguage
     {
-        public AbstractContainedLanguage(IVsContainedLanguageHost host)
-            => ContainedLanguageHost = host;
+        public AbstractContainedLanguage(IVsContainedLanguageHost host) =>
+            ContainedLanguageHost = host;
 
         public IVsContainedLanguageHost ContainedLanguageHost { get; }
     }

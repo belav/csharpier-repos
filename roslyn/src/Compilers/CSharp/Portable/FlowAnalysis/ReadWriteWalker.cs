@@ -18,7 +18,12 @@ namespace Microsoft.CodeAnalysis.CSharp
     internal class ReadWriteWalker : AbstractRegionDataFlowPass
     {
         internal static void Analyze(
-            CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion, HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes,
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes,
             out IEnumerable<Symbol> readInside,
             out IEnumerable<Symbol> writtenInside,
             out IEnumerable<Symbol> readOutside,
@@ -27,16 +32,32 @@ namespace Microsoft.CodeAnalysis.CSharp
             out IEnumerable<Symbol> unsafeAddressTaken,
             out IEnumerable<Symbol> capturedInside,
             out IEnumerable<Symbol> capturedOutside,
-            out IEnumerable<MethodSymbol> usedLocalFunctions)
+            out IEnumerable<MethodSymbol> usedLocalFunctions
+        )
         {
-            var walker = new ReadWriteWalker(compilation, member, node, firstInRegion, lastInRegion, unassignedVariableAddressOfSyntaxes);
+            var walker = new ReadWriteWalker(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariableAddressOfSyntaxes
+            );
             try
             {
                 bool badRegion = false;
                 walker.Analyze(ref badRegion);
                 if (badRegion)
                 {
-                    readInside = writtenInside = readOutside = writtenOutside = captured = unsafeAddressTaken = capturedInside = capturedOutside = Enumerable.Empty<Symbol>();
+                    readInside =
+                        writtenInside =
+                        readOutside =
+                        writtenOutside =
+                        captured =
+                        unsafeAddressTaken =
+                        capturedInside =
+                        capturedOutside =
+                            Enumerable.Empty<Symbol>();
                     usedLocalFunctions = Enumerable.Empty<MethodSymbol>();
                 }
                 else
@@ -66,19 +87,35 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly HashSet<Symbol> _readOutside = new HashSet<Symbol>();
         private readonly HashSet<Symbol> _writtenOutside = new HashSet<Symbol>();
 
-        private ReadWriteWalker(CSharpCompilation compilation, Symbol member, BoundNode node, BoundNode firstInRegion, BoundNode lastInRegion,
-            HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes)
-            : base(compilation, member, node, firstInRegion, lastInRegion, unassignedVariableAddressOfSyntaxes: unassignedVariableAddressOfSyntaxes)
-        {
-        }
+        private ReadWriteWalker(
+            CSharpCompilation compilation,
+            Symbol member,
+            BoundNode node,
+            BoundNode firstInRegion,
+            BoundNode lastInRegion,
+            HashSet<PrefixUnaryExpressionSyntax> unassignedVariableAddressOfSyntaxes
+        )
+            : base(
+                compilation,
+                member,
+                node,
+                firstInRegion,
+                lastInRegion,
+                unassignedVariableAddressOfSyntaxes: unassignedVariableAddressOfSyntaxes
+            ) { }
 
         protected override void EnterRegion()
         {
-            for (var m = this.CurrentSymbol as MethodSymbol; (object)m != null; m = m.ContainingSymbol as MethodSymbol)
+            for (
+                var m = this.CurrentSymbol as MethodSymbol;
+                (object)m != null;
+                m = m.ContainingSymbol as MethodSymbol
+            )
             {
                 foreach (var p in m.Parameters)
                 {
-                    if (p.RefKind != RefKind.None) _readOutside.Add(p);
+                    if (p.RefKind != RefKind.None)
+                        _readOutside.Add(p);
                 }
 
                 var thisParameter = m.ThisParameter;
@@ -96,21 +133,31 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         /// <param name="variable">The variable</param>
         /// <param name="rangeVariableUnderlyingParameter">If variable.Kind is RangeVariable, its underlying lambda parameter. Else null.</param>
-        protected override void NoteRead(Symbol variable, ParameterSymbol rangeVariableUnderlyingParameter = null)
+        protected override void NoteRead(
+            Symbol variable,
+            ParameterSymbol rangeVariableUnderlyingParameter = null
+        )
         {
-            if ((object)variable == null) return;
-            if (variable.Kind != SymbolKind.Field) (IsInside ? _readInside : _readOutside).Add(variable);
+            if ((object)variable == null)
+                return;
+            if (variable.Kind != SymbolKind.Field)
+                (IsInside ? _readInside : _readOutside).Add(variable);
             base.NoteRead(variable, rangeVariableUnderlyingParameter);
         }
 
         protected override void NoteWrite(Symbol variable, BoundExpression value, bool read)
         {
-            if ((object)variable == null) return;
+            if ((object)variable == null)
+                return;
             (IsInside ? _writtenInside : _writtenOutside).Add(variable);
             base.NoteWrite(variable, value, read);
         }
 
-        protected override void CheckAssigned(BoundExpression expr, FieldSymbol fieldSymbol, SyntaxNode node)
+        protected override void CheckAssigned(
+            BoundExpression expr,
+            FieldSymbol fieldSymbol,
+            SyntaxNode node
+        )
         {
             base.CheckAssigned(expr, fieldSymbol, node);
             if (!IsInside && node.Span.Contains(RegionSpan) && (expr.Kind == BoundKind.FieldAccess))
@@ -138,12 +185,16 @@ namespace Microsoft.CodeAnalysis.CSharp
         /// </summary>
         private void NoteReceiverReadOrWritten(BoundFieldAccess expr, HashSet<Symbol> readOrWritten)
         {
-            if (expr.FieldSymbol.IsStatic) return;
-            if (expr.FieldSymbol.ContainingType.IsReferenceType) return;
+            if (expr.FieldSymbol.IsStatic)
+                return;
+            if (expr.FieldSymbol.ContainingType.IsReferenceType)
+                return;
             var receiver = expr.ReceiverOpt;
-            if (receiver == null) return;
+            if (receiver == null)
+                return;
             var receiverSyntax = receiver.Syntax;
-            if (receiverSyntax == null) return;
+            if (receiverSyntax == null)
+                return;
             switch (receiver.Kind)
             {
                 case BoundKind.Local:
@@ -177,7 +228,9 @@ namespace Microsoft.CodeAnalysis.CSharp
                     }
                     break;
                 case BoundKind.FieldAccess:
-                    if (receiver.Type.IsStructType() && receiverSyntax.Span.OverlapsWith(RegionSpan))
+                    if (
+                        receiver.Type.IsStructType() && receiverSyntax.Span.OverlapsWith(RegionSpan)
+                    )
                     {
                         NoteReceiverReadOrWritten(receiver as BoundFieldAccess, readOrWritten);
                     }
@@ -185,30 +238,44 @@ namespace Microsoft.CodeAnalysis.CSharp
             }
         }
 
-        protected override void AssignImpl(BoundNode node, BoundExpression value, bool isRef, bool written, bool read)
+        protected override void AssignImpl(
+            BoundNode node,
+            BoundExpression value,
+            bool isRef,
+            bool written,
+            bool read
+        )
         {
             switch (node.Kind)
             {
                 case BoundKind.RangeVariable:
-                    if (written) NoteWrite(((BoundRangeVariable)node).RangeVariableSymbol, value, read);
+                    if (written)
+                        NoteWrite(((BoundRangeVariable)node).RangeVariableSymbol, value, read);
                     break;
 
                 case BoundKind.QueryClause:
+
                     {
                         base.AssignImpl(node, value, isRef, written, read);
                         var symbol = ((BoundQueryClause)node).DefinedSymbol;
                         if ((object)symbol != null)
                         {
-                            if (written) NoteWrite(symbol, value, read);
+                            if (written)
+                                NoteWrite(symbol, value, read);
                         }
                     }
                     break;
 
                 case BoundKind.FieldAccess:
+
                     {
                         base.AssignImpl(node, value, isRef, written, read);
                         var fieldAccess = node as BoundFieldAccess;
-                        if (!IsInside && node.Syntax != null && node.Syntax.Span.Contains(RegionSpan))
+                        if (
+                            !IsInside
+                            && node.Syntax != null
+                            && node.Syntax.Span.Contains(RegionSpan)
+                        )
                         {
                             NoteReceiverWritten(fieldAccess);
                         }
@@ -229,7 +296,9 @@ namespace Microsoft.CodeAnalysis.CSharp
         public override BoundNode VisitRangeVariable(BoundRangeVariable node)
         {
             // Compute the "underlying symbol" for a read of the range variable
-            ParameterSymbol rangeVariableUnderlyingParameter = GetRangeVariableUnderlyingParameter(node.Value);
+            ParameterSymbol rangeVariableUnderlyingParameter = GetRangeVariableUnderlyingParameter(
+                node.Value
+            );
             NoteRead(node.RangeVariableSymbol, rangeVariableUnderlyingParameter);
             return null;
         }

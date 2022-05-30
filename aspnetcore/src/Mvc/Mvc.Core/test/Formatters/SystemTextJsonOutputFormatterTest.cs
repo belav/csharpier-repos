@@ -22,8 +22,10 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
     {
         // Arrange
         var formatter = GetOutputFormatter();
-        ((SystemTextJsonOutputFormatter)formatter).SerializerOptions.ReferenceHandler = ReferenceHandler.Preserve;
-        var expectedContent = "{\"$id\":\"1\",\"name\":\"Person\",\"child\":{\"$id\":\"2\",\"name\":\"Child\",\"child\":null,\"parent\":{\"$ref\":\"1\"}},\"parent\":null}";
+        ((SystemTextJsonOutputFormatter)formatter).SerializerOptions.ReferenceHandler =
+            ReferenceHandler.Preserve;
+        var expectedContent =
+            "{\"$id\":\"1\",\"name\":\"Person\",\"child\":{\"$id\":\"2\",\"name\":\"Child\",\"child\":null,\"parent\":{\"$ref\":\"1\"}},\"parent\":null}";
         var person = new Person
         {
             Name = "Person",
@@ -41,13 +43,17 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(Person),
-            person)
+            person
+        )
         {
             ContentType = new StringSegment(mediaType.ToString()),
         };
 
         // Act
-        await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding("utf-8"));
+        await formatter.WriteResponseBodyAsync(
+            outputFormatterContext,
+            Encoding.GetEncoding("utf-8")
+        );
 
         // Assert
         var actualContent = encoding.GetString(body.ToArray());
@@ -69,13 +75,20 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             typeof(Person),
-            new ThrowingFormatterModel())
+            new ThrowingFormatterModel()
+        )
         {
             ContentType = new StringSegment(mediaType.ToString()),
         };
 
         // Act & Assert
-        await Assert.ThrowsAsync<TimeZoneNotFoundException>(() => formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding("utf-16")));
+        await Assert.ThrowsAsync<TimeZoneNotFoundException>(
+            () =>
+                formatter.WriteResponseBodyAsync(
+                    outputFormatterContext,
+                    Encoding.GetEncoding("utf-16")
+                )
+        );
     }
 
     [Fact]
@@ -83,7 +96,11 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
     {
         // Arrange
         var expected = new MemoryStream();
-        await JsonSerializer.SerializeAsync(expected, LargeAsync(), new JsonSerializerOptions(JsonSerializerDefaults.Web));
+        await JsonSerializer.SerializeAsync(
+            expected,
+            LargeAsync(),
+            new JsonSerializerOptions(JsonSerializerDefaults.Web)
+        );
         var formatter = GetOutputFormatter();
         var mediaType = MediaTypeHeaderValue.Parse("application/json; charset=utf-8");
         var encoding = CreateOrGetSupportedEncoding(formatter, "utf-8", isDefaultEncoding: true);
@@ -96,13 +113,17 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             asyncEnumerable.GetType(),
-            asyncEnumerable)
+            asyncEnumerable
+        )
         {
             ContentType = new StringSegment(mediaType.ToString()),
         };
 
         // Act
-        await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding("utf-8"));
+        await formatter.WriteResponseBodyAsync(
+            outputFormatterContext,
+            Encoding.GetEncoding("utf-8")
+        );
 
         // Assert
         Assert.Equal(expected.ToArray(), body.ToArray());
@@ -125,21 +146,27 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
             actionContext.HttpContext,
             new TestHttpResponseStreamWriterFactory().CreateWriter,
             asyncEnumerable.GetType(),
-            asyncEnumerable)
+            asyncEnumerable
+        )
         {
             ContentType = new StringSegment(mediaType.ToString()),
         };
         var iterated = false;
 
         // Act
-        await formatter.WriteResponseBodyAsync(outputFormatterContext, Encoding.GetEncoding("utf-8"));
+        await formatter.WriteResponseBodyAsync(
+            outputFormatterContext,
+            Encoding.GetEncoding("utf-8")
+        );
 
         // Assert
         // System.Text.Json might write the '[' before cancellation is observed
         Assert.InRange(body.ToArray().Length, 0, 1);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerableClosedConnection([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerableClosedConnection(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -166,19 +193,24 @@ public class SystemTextJsonOutputFormatterTest : JsonOutputFormatterTestBase
     }
 
     [JsonConverter(typeof(ThrowingFormatterPersonConverter))]
-    private class ThrowingFormatterModel
-    {
-
-    }
+    private class ThrowingFormatterModel { }
 
     private class ThrowingFormatterPersonConverter : JsonConverter<ThrowingFormatterModel>
     {
-        public override ThrowingFormatterModel Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override ThrowingFormatterModel Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }
 
-        public override void Write(Utf8JsonWriter writer, ThrowingFormatterModel value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            ThrowingFormatterModel value,
+            JsonSerializerOptions options
+        )
         {
             throw new TimeZoneNotFoundException();
         }

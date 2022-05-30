@@ -42,7 +42,10 @@ namespace System.Text.RegularExpressions.Tests
                 return;
             }
 
-            MethodInfo? genUnicode = typeof(Regex).GetMethod("GenerateUnicodeTables", BindingFlags.NonPublic | BindingFlags.Static);
+            MethodInfo? genUnicode = typeof(Regex).GetMethod(
+                "GenerateUnicodeTables",
+                BindingFlags.NonPublic | BindingFlags.Static
+            );
             // GenerateUnicodeTables is not available in Release build
             if (genUnicode is not null)
             {
@@ -98,51 +101,80 @@ namespace System.Text.RegularExpressions.Tests
                 ViewDGML(pattern, "NFA", nfa: true, maxStates: 12);
                 ViewDGML(pattern, "NFA_DotStar", nfa: true, addDotStar: true, maxStates: 12);
 
-                static void ViewDGML(string pattern, string name, bool nfa = false, bool addDotStar = false, bool reverse = false, int maxStates = -1, int maxLabelLength = 20)
+                static void ViewDGML(
+                    string pattern,
+                    string name,
+                    bool nfa = false,
+                    bool addDotStar = false,
+                    bool reverse = false,
+                    int maxStates = -1,
+                    int maxLabelLength = 20
+                )
                 {
-                    var regex = new Regex(pattern, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
-                    if (regex.GetType().GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance) is MethodInfo saveDgml)
+                    var regex = new Regex(
+                        pattern,
+                        RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+                    );
+                    if (
+                        regex
+                            .GetType()
+                            .GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance)
+                        is MethodInfo saveDgml
+                    )
                     {
                         var sw = new StringWriter();
-                        saveDgml.Invoke(regex, new object[] { sw, nfa, addDotStar, reverse, maxStates, maxLabelLength });
+                        saveDgml.Invoke(
+                            regex,
+                            new object[] { sw, nfa, addDotStar, reverse, maxStates, maxLabelLength }
+                        );
                         string path = Path.Combine(DgmlOutputDirectoryPath, $"{name}.dgml");
                         File.WriteAllText(path, sw.ToString());
                         Console.WriteLine(path);
                     }
                 }
             }
-            catch (NotSupportedException e) when (e.Message.Contains("conditional"))
-            {
-            }
+            catch (NotSupportedException e) when (e.Message.Contains("conditional")) { }
         }
 
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [InlineData(".*a+", new string[] { ".*a+" }, false)]
         [InlineData("ann", new string[] { "nna" }, true)]
-        public void TestDGMLGeneration(string pattern, string[] expectedDgmlFragments, bool exploreAsNFA)
+        public void TestDGMLGeneration(
+            string pattern,
+            string[] expectedDgmlFragments,
+            bool exploreAsNFA
+        )
         {
             StringWriter sw = new StringWriter();
-            var re = new Regex(pattern, RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline);
+            var re = new Regex(
+                pattern,
+                RegexHelpers.RegexOptionNonBacktracking | RegexOptions.Singleline
+            );
             if (TryExplore(re, exploreAsNFA))
             {
                 if (TrySaveDGML(re, sw, maxLabelLength: -1))
-            {
-                string str = sw.ToString();
-                Assert.StartsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?>", str);
-                Assert.Contains("DirectedGraph", str);
-                foreach (string fragment in expectedDgmlFragments)
                 {
-                    Assert.Contains(fragment, str);
+                    string str = sw.ToString();
+                    Assert.StartsWith("<?xml version=\"1.0\" encoding=\"utf-8\"?>", str);
+                    Assert.Contains("DirectedGraph", str);
+                    foreach (string fragment in expectedDgmlFragments)
+                    {
+                        Assert.Contains(fragment, str);
+                    }
                 }
-            }
             }
 
             static bool TryExplore(Regex regex, bool exploreAsNFA)
             {
-                MethodInfo saveDgml = regex.GetType().GetMethod("Explore", BindingFlags.NonPublic | BindingFlags.Instance);
+                MethodInfo saveDgml = regex
+                    .GetType()
+                    .GetMethod("Explore", BindingFlags.NonPublic | BindingFlags.Instance);
                 if (saveDgml is not null)
                 {
-                    saveDgml.Invoke(regex, new object[] { true, true, true, !exploreAsNFA, exploreAsNFA});
+                    saveDgml.Invoke(
+                        regex,
+                        new object[] { true, true, true, !exploreAsNFA, exploreAsNFA }
+                    );
                     return true;
                 }
 
@@ -151,7 +183,9 @@ namespace System.Text.RegularExpressions.Tests
 
             static bool TrySaveDGML(Regex regex, TextWriter writer, int maxLabelLength)
             {
-                MethodInfo saveDgml = regex.GetType().GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
+                MethodInfo saveDgml = regex
+                    .GetType()
+                    .GetMethod("SaveDGML", BindingFlags.NonPublic | BindingFlags.Instance);
                 if (saveDgml is not null)
                 {
                     saveDgml.Invoke(regex, new object[] { writer, maxLabelLength });
@@ -184,18 +218,29 @@ namespace System.Text.RegularExpressions.Tests
         /// <summary>Test random input generation correctness</summary>
         [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsNetCore))]
         [MemberData(nameof(SampledMatchesMatchAsExpected_TestData))]
-        public async Task SampledMatchesMatchAsExpected(RegexEngine engine, string pattern, string input)
+        public async Task SampledMatchesMatchAsExpected(
+            RegexEngine engine,
+            string pattern,
+            string input
+        )
         {
             Regex regex = await RegexHelpers.GetRegexAsync(engine, pattern);
             Assert.True(regex.IsMatch(input));
         }
 
-        private static IEnumerable<string> SampleMatchesViaReflection(Regex regex, int how_many_inputs, int randomseed)
+        private static IEnumerable<string> SampleMatchesViaReflection(
+            Regex regex,
+            int how_many_inputs,
+            int randomseed
+        )
         {
-            MethodInfo? gen = regex.GetType().GetMethod("SampleMatches", BindingFlags.NonPublic | BindingFlags.Instance);
+            MethodInfo? gen = regex
+                .GetType()
+                .GetMethod("SampleMatches", BindingFlags.NonPublic | BindingFlags.Instance);
             if (gen is not null)
             {
-                return (IEnumerable<string>)gen.Invoke(regex, new object[] { how_many_inputs, randomseed });
+                return (IEnumerable<string>)
+                    gen.Invoke(regex, new object[] { how_many_inputs, randomseed });
             }
             else
             {

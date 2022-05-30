@@ -73,6 +73,7 @@ namespace System.Text.Json
 
         // Serialization state for the child value serialized by the current frame.
         public PolymorphicSerializationState PolymorphicSerializationState;
+
         // Holds the entered polymorphic type info and acts as an LRU cache for element/field serializations.
         private JsonPropertyInfo? PolymorphicJsonTypeInfo;
 
@@ -106,9 +107,10 @@ namespace System.Text.Json
         public JsonTypeInfo GetNestedJsonTypeInfo()
         {
             JsonPropertyInfo? propInfo =
-                PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntryStarted ?
-                PolymorphicJsonTypeInfo :
-                JsonPropertyInfo;
+                PolymorphicSerializationState
+                == PolymorphicSerializationState.PolymorphicReEntryStarted
+                    ? PolymorphicJsonTypeInfo
+                    : JsonPropertyInfo;
 
             return propInfo!.JsonTypeInfo;
         }
@@ -116,7 +118,10 @@ namespace System.Text.Json
         /// <summary>
         /// Configures the next stack frame for a polymorphic converter.
         /// </summary>
-        public JsonConverter InitializePolymorphicReEntry(Type runtimeType, JsonSerializerOptions options)
+        public JsonConverter InitializePolymorphicReEntry(
+            Type runtimeType,
+            JsonSerializerOptions options
+        )
         {
             Debug.Assert(PolymorphicSerializationState == PolymorphicSerializationState.None);
 
@@ -149,7 +154,10 @@ namespace System.Text.Json
         /// </summary>
         public JsonConverter ResumePolymorphicReEntry()
         {
-            Debug.Assert(PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntrySuspended);
+            Debug.Assert(
+                PolymorphicSerializationState
+                    == PolymorphicSerializationState.PolymorphicReEntrySuspended
+            );
             Debug.Assert(PolymorphicJsonTypeInfo is not null);
             PolymorphicSerializationState = PolymorphicSerializationState.PolymorphicReEntryStarted;
             return PolymorphicJsonTypeInfo.ConverterBase;
@@ -160,10 +168,13 @@ namespace System.Text.Json
         /// </summary>
         public void ExitPolymorphicConverter(bool success)
         {
-            PolymorphicSerializationState = success ? PolymorphicSerializationState.None : PolymorphicSerializationState.PolymorphicReEntrySuspended;
+            PolymorphicSerializationState = success
+                ? PolymorphicSerializationState.None
+                : PolymorphicSerializationState.PolymorphicReEntrySuspended;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"ConverterStrategy.{JsonTypeInfo?.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo?.Type.Name}";
+        private string DebuggerDisplay =>
+            $"ConverterStrategy.{JsonTypeInfo?.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo?.Type.Name}";
     }
 }

@@ -5,9 +5,7 @@ namespace System.Data.Odbc
 {
     internal sealed class DbSchemaInfo
     {
-        internal DbSchemaInfo()
-        {
-        }
+        internal DbSchemaInfo() { }
 
         internal string? _name;
         internal string? _typename;
@@ -76,10 +74,7 @@ namespace System.Data.Odbc
 
         internal int Count
         {
-            get
-            {
-                return _count;
-            }
+            get { return _count; }
         }
 
         internal void InvalidateValue(int i)
@@ -89,10 +84,7 @@ namespace System.Data.Odbc
 
         internal object?[] Values
         {
-            get
-            {
-                return _values;
-            }
+            get { return _values; }
         }
 
         internal object? AccessIndex(int i)

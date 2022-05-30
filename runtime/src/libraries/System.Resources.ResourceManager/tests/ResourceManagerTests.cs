@@ -13,15 +13,13 @@ using System.Diagnostics;
 using Microsoft.DotNet.RemoteExecutor;
 using Xunit;
 
-[assembly:NeutralResourcesLanguage("en")]
+[assembly: NeutralResourcesLanguage("en")]
 
 namespace System.Resources.Tests
 {
     namespace Resources
     {
-        internal class TestClassWithoutNeutralResources
-        {
-        }
+        internal class TestClassWithoutNeutralResources { }
     }
 
     public class ResourceManagerTests
@@ -29,12 +27,13 @@ namespace System.Resources.Tests
         [Fact]
         public static void ExpectMissingManifestResourceException()
         {
-            MissingManifestResourceException e = Assert.Throws<MissingManifestResourceException> (() =>
-            {
-                Type resourceType = typeof(Resources.TestClassWithoutNeutralResources);
-                ResourceManager resourceManager = new ResourceManager(resourceType);
-                string actual = resourceManager.GetString("Any");
-            });
+            MissingManifestResourceException e =
+                Assert.Throws<MissingManifestResourceException>(() =>
+                {
+                    Type resourceType = typeof(Resources.TestClassWithoutNeutralResources);
+                    ResourceManager resourceManager = new ResourceManager(resourceType);
+                    string actual = resourceManager.GetString("Any");
+                });
             Assert.NotNull(e.Message);
         }
 
@@ -51,7 +50,10 @@ namespace System.Resources.Tests
         [MemberData(nameof(EnglishResourceData))]
         public static void GetString_Basic(string key, string expectedValue)
         {
-            ResourceManager resourceManager = new ResourceManager("System.Resources.Tests.Resources.TestResx", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            ResourceManager resourceManager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             string actual = resourceManager.GetString(key);
             Assert.Equal(expectedValue, actual);
             Assert.Same(actual, resourceManager.GetString(key));
@@ -70,19 +72,23 @@ namespace System.Resources.Tests
 
         public static IEnumerable<object[]> CultureResourceData()
         {
-            yield return new object[] { "OneLoc", "es", "Value-One(es)" };       // Find language specific resource
-            yield return new object[] { "OneLoc", "es-ES", "Value-One(es)" };    // Finds parent language of culture specific resource
+            yield return new object[] { "OneLoc", "es", "Value-One(es)" }; // Find language specific resource
+            yield return new object[] { "OneLoc", "es-ES", "Value-One(es)" }; // Finds parent language of culture specific resource
             yield return new object[] { "OneLoc", "es-MX", "Value-One(es-MX)" }; // Finds culture specific resource
-            yield return new object[] { "OneLoc", "fr", "Value-One" };           // Find neutral resource when language resources are absent
-            yield return new object[] { "OneLoc", "fr-CA", "Value-One" };        // Find neutral resource when culture and language resources are absent
+            yield return new object[] { "OneLoc", "fr", "Value-One" }; // Find neutral resource when language resources are absent
+            yield return new object[] { "OneLoc", "fr-CA", "Value-One" }; // Find neutral resource when culture and language resources are absent
             yield return new object[] { "OneLoc", "fr-FR", "Value-One(fr-FR)" }; // Finds culture specific resource
-            yield return new object[] { "Lang", "es-MX", "es" };                 // Finds lang specific string when key is missing in culture resource
-            yield return new object[] { "NeutOnly", "es-MX", "Neutral" };        // Finds neutral string when key is missing in culture and lang resource
+            yield return new object[] { "Lang", "es-MX", "es" }; // Finds lang specific string when key is missing in culture resource
+            yield return new object[] { "NeutOnly", "es-MX", "Neutral" }; // Finds neutral string when key is missing in culture and lang resource
         }
 
         [Theory]
         [MemberData(nameof(CultureResourceData))]
-        public static void GetString_CultureFallback(string key, string cultureName, string expectedValue)
+        public static void GetString_CultureFallback(
+            string key,
+            string cultureName,
+            string expectedValue
+        )
         {
             Type resourceType = typeof(Resources.TestResx);
             ResourceManager resourceManager = new ResourceManager(resourceType);
@@ -108,7 +114,10 @@ namespace System.Resources.Tests
         static int ResourcesAfAZEvents = 0;
 
 #if NETCOREAPP
-        static System.Reflection.Assembly AssemblyResolvingEventHandler(System.Runtime.Loader.AssemblyLoadContext alc, System.Reflection.AssemblyName name)
+        static System.Reflection.Assembly AssemblyResolvingEventHandler(
+            System.Runtime.Loader.AssemblyLoadContext alc,
+            System.Reflection.AssemblyName name
+        )
         {
             if (name.FullName.StartsWith("System.Resources.ResourceManager.Tests.resources"))
             {
@@ -126,7 +135,10 @@ namespace System.Resources.Tests
         }
 #endif
 
-        static System.Reflection.Assembly AssemblyResolveEventHandler(object sender, ResolveEventArgs args)
+        static System.Reflection.Assembly AssemblyResolveEventHandler(
+            object sender,
+            ResolveEventArgs args
+        )
         {
             string name = args.Name;
             if (name.StartsWith("System.Resources.ResourceManager.Tests.resources"))
@@ -148,19 +160,24 @@ namespace System.Resources.Tests
         [ConditionalFact(typeof(RemoteExecutor), nameof(RemoteExecutor.IsSupported))]
         public static void GetString_ExpectEvents()
         {
-            RemoteExecutor.Invoke(() =>
-            {
-                // Events only fire first time.  Remote to make sure test runs in a separate process
-                Remote_ExpectEvents();
-            }).Dispose();
+            RemoteExecutor
+                .Invoke(() =>
+                {
+                    // Events only fire first time.  Remote to make sure test runs in a separate process
+                    Remote_ExpectEvents();
+                })
+                .Dispose();
         }
 
         private static void Remote_ExpectEvents()
         {
 #if NETCOREAPP
-            System.Runtime.Loader.AssemblyLoadContext.Default.Resolving += AssemblyResolvingEventHandler;
+            System.Runtime.Loader.AssemblyLoadContext.Default.Resolving +=
+                AssemblyResolvingEventHandler;
 #endif
-            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(AssemblyResolveEventHandler);
+            AppDomain.CurrentDomain.AssemblyResolve += new ResolveEventHandler(
+                AssemblyResolveEventHandler
+            );
 
             ResourcesAfAZEvents = 0;
 
@@ -193,14 +210,21 @@ namespace System.Resources.Tests
         [Fact]
         public static void UsingResourceSet()
         {
-            var resourceManager = new ResourceManager("System.Resources.Tests.Resources.TestResx", typeof(ResourceManagerTests).GetTypeInfo().Assembly, typeof(ResourceSet));
+            var resourceManager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly,
+                typeof(ResourceSet)
+            );
             Assert.Equal(typeof(ResourceSet), resourceManager.ResourceSetType);
         }
 
         [Fact]
         public static void BaseName()
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             Assert.Equal("System.Resources.Tests.Resources.TestResx", manager.BaseName);
         }
 
@@ -208,7 +232,10 @@ namespace System.Resources.Tests
         [MemberData(nameof(EnglishResourceData))]
         public static void IgnoreCase(string key, string expectedValue)
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             Assert.False(manager.IgnoreCase);
             Assert.Equal(expectedValue, manager.GetString(key, culture));
@@ -218,29 +245,38 @@ namespace System.Resources.Tests
             Assert.Equal(expectedValue, manager.GetString(key.ToLower(), culture));
         }
 
-
         public static IEnumerable<object[]> EnglishNonStringResourceData()
         {
             yield return new object[] { "Int", 42, false };
             yield return new object[] { "Float", 3.14159, false };
-            yield return new object[] { "Bytes", new byte[] { 41, 42, 43, 44, 192, 168, 1, 1 }, false };
+            yield return new object[]
+            {
+                "Bytes",
+                new byte[] { 41, 42, 43, 44, 192, 168, 1, 1 },
+                false
+            };
             yield return new object[] { "InvalidKeyName", null, false };
 
             yield return new object[] { "Point", new Point(50, 60), true };
             yield return new object[] { "Size", new Size(20, 30), true };
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(EnglishNonStringResourceData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50935", TestPlatforms.Android)]
         public static void GetObject(string key, object expectedValue, bool requiresBinaryFormatter)
         {
             _ = requiresBinaryFormatter;
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx.netstandard17", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx.netstandard17",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             Assert.Equal(expectedValue, manager.GetObject(key));
             Assert.Equal(expectedValue, manager.GetObject(key, new CultureInfo("en-US")));
         }
-
 
         private static byte[] GetImageData(object obj)
         {
@@ -262,7 +298,6 @@ namespace System.Resources.Tests
             }
         }
 
-
         public static IEnumerable<object[]> EnglishImageResourceData()
         {
             yield return new object[] { "Bitmap", new Bitmap("bitmap.bmp") };
@@ -270,33 +305,56 @@ namespace System.Resources.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34008", TestPlatforms.Linux | TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34008",
+            TestPlatforms.Linux | TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(EnglishImageResourceData))]
         public static void GetObject_Images(string key, object expectedValue)
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx.netstandard17", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx.netstandard17",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             Assert.Equal(GetImageData(expectedValue), GetImageData(manager.GetObject(key)));
-            Assert.Equal(GetImageData(expectedValue), GetImageData(manager.GetObject(key, new CultureInfo("en-US"))));
+            Assert.Equal(
+                GetImageData(expectedValue),
+                GetImageData(manager.GetObject(key, new CultureInfo("en-US")))
+            );
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34008", TestPlatforms.Linux | TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34008",
+            TestPlatforms.Linux | TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(EnglishImageResourceData))]
         public static void GetObject_Images_ResourceSet(string key, object expectedValue)
         {
             var manager = new ResourceManager(
                 "System.Resources.Tests.Resources.TestResx.netstandard17",
                 typeof(ResourceManagerTests).GetTypeInfo().Assembly,
-                typeof(ResourceSet));
+                typeof(ResourceSet)
+            );
             Assert.Equal(GetImageData(expectedValue), GetImageData(manager.GetObject(key)));
-            Assert.Equal(GetImageData(expectedValue), GetImageData(manager.GetObject(key, new CultureInfo("en-US"))));
+            Assert.Equal(
+                GetImageData(expectedValue),
+                GetImageData(manager.GetObject(key, new CultureInfo("en-US")))
+            );
         }
 
         [Theory]
         [MemberData(nameof(EnglishResourceData))]
         public static void GetResourceSet_Strings(string key, string expectedValue)
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             ResourceSet set = manager.GetResourceSet(culture, true, true);
             Assert.Equal(expectedValue, set.GetString(key));
@@ -304,26 +362,46 @@ namespace System.Resources.Tests
             Assert.Equal(expectedValue, set.GetString(key));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(EnglishNonStringResourceData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50935", TestPlatforms.Android)]
-        public static void GetResourceSet_NonStrings(string key, object expectedValue, bool requiresBinaryFormatter)
+        public static void GetResourceSet_NonStrings(
+            string key,
+            object expectedValue,
+            bool requiresBinaryFormatter
+        )
         {
             _ = requiresBinaryFormatter;
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx.netstandard17", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx.netstandard17",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             ResourceSet set = manager.GetResourceSet(culture, true, true);
             Assert.Equal(expectedValue, set.GetObject(key));
             Assert.Equal(expectedValue, set.GetObject(key));
         }
 
-        [ConditionalTheory(typeof(PlatformDetection), nameof(PlatformDetection.IsBinaryFormatterSupported))]
+        [ConditionalTheory(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsBinaryFormatterSupported)
+        )]
         [MemberData(nameof(EnglishNonStringResourceData))]
         [ActiveIssue("https://github.com/dotnet/runtime/issues/50935", TestPlatforms.Android)]
-        public static void GetResourceSet_NonStringsIgnoreCase(string key, object expectedValue, bool requiresBinaryFormatter)
+        public static void GetResourceSet_NonStringsIgnoreCase(
+            string key,
+            object expectedValue,
+            bool requiresBinaryFormatter
+        )
         {
             _ = requiresBinaryFormatter;
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx.netstandard17", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx.netstandard17",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             ResourceSet set = manager.GetResourceSet(culture, true, true);
             Assert.Equal(expectedValue, set.GetObject(key.ToLower(), true));
@@ -331,11 +409,19 @@ namespace System.Resources.Tests
         }
 
         [ConditionalTheory(Helpers.IsDrawingSupported)]
-        [ActiveIssue("https://github.com/dotnet/runtime/issues/34008", TestPlatforms.Linux | TestPlatforms.Windows, TargetFrameworkMonikers.Netcoreapp, TestRuntimes.Mono)]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtime/issues/34008",
+            TestPlatforms.Linux | TestPlatforms.Windows,
+            TargetFrameworkMonikers.Netcoreapp,
+            TestRuntimes.Mono
+        )]
         [MemberData(nameof(EnglishImageResourceData))]
         public static void GetResourceSet_Images(string key, object expectedValue)
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx.netstandard17", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx.netstandard17",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             ResourceSet set = manager.GetResourceSet(culture, true, true);
             Assert.Equal(GetImageData(expectedValue), GetImageData(set.GetObject(key)));
@@ -343,13 +429,23 @@ namespace System.Resources.Tests
 
         [Theory]
         [MemberData(nameof(EnglishNonStringResourceData))]
-        public static void File_GetObject(string key, object expectedValue, bool requiresBinaryFormatter)
+        public static void File_GetObject(
+            string key,
+            object expectedValue,
+            bool requiresBinaryFormatter
+        )
         {
-            var manager = ResourceManager.CreateFileBasedResourceManager("TestResx.netstandard17", Directory.GetCurrentDirectory(), null);
+            var manager = ResourceManager.CreateFileBasedResourceManager(
+                "TestResx.netstandard17",
+                Directory.GetCurrentDirectory(),
+                null
+            );
             if (requiresBinaryFormatter)
             {
                 Assert.Throws<NotSupportedException>(() => manager.GetObject(key));
-                Assert.Throws<NotSupportedException>(() => manager.GetObject(key, new CultureInfo("en-US")));
+                Assert.Throws<NotSupportedException>(
+                    () => manager.GetObject(key, new CultureInfo("en-US"))
+                );
             }
             else
             {
@@ -360,9 +456,17 @@ namespace System.Resources.Tests
 
         [Theory]
         [MemberData(nameof(EnglishNonStringResourceData))]
-        public static void File_GetResourceSet_NonStrings(string key, object expectedValue, bool requiresBinaryFormatter)
+        public static void File_GetResourceSet_NonStrings(
+            string key,
+            object expectedValue,
+            bool requiresBinaryFormatter
+        )
         {
-            var manager = ResourceManager.CreateFileBasedResourceManager("TestResx.netstandard17", Directory.GetCurrentDirectory(), null);
+            var manager = ResourceManager.CreateFileBasedResourceManager(
+                "TestResx.netstandard17",
+                Directory.GetCurrentDirectory(),
+                null
+            );
             var culture = new CultureInfo("en-US");
             ResourceSet set = manager.GetResourceSet(culture, true, true);
             if (requiresBinaryFormatter)
@@ -378,7 +482,10 @@ namespace System.Resources.Tests
         [Fact]
         public static void GetStream()
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx.netstandard17", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx.netstandard17",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             var expectedBytes = new byte[] { 41, 42, 43, 44, 192, 168, 1, 1 };
             using (Stream stream = manager.GetStream("ByteStream"))
@@ -408,17 +515,18 @@ namespace System.Resources.Tests
         [Fact]
         public static void GetStringAfterDispose()
         {
-            var manager = new ResourceManager("System.Resources.Tests.Resources.TestResx", typeof(ResourceManagerTests).GetTypeInfo().Assembly);
+            var manager = new ResourceManager(
+                "System.Resources.Tests.Resources.TestResx",
+                typeof(ResourceManagerTests).GetTypeInfo().Assembly
+            );
             var culture = new CultureInfo("en-US");
             ResourceSet set = manager.GetResourceSet(culture, true, true);
 
             set.GetString("Any");
             ((IDisposable)set).Dispose();
-            Assert.Throws<ObjectDisposedException> (() => set.GetString("Any"));
+            Assert.Throws<ObjectDisposedException>(() => set.GetString("Any"));
         }
 
-        private class MockAssembly : Assembly
-        {
-        }
+        private class MockAssembly : Assembly { }
     }
 }

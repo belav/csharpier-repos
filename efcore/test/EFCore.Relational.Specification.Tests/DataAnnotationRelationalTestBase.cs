@@ -7,16 +7,14 @@ using System.ComponentModel.DataAnnotations.Schema;
 namespace Microsoft.EntityFrameworkCore;
 
 public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotationTestBase<TFixture>
-    where TFixture : DataAnnotationRelationalTestBase<TFixture>.DataAnnotationRelationalFixtureBase, new()
+    where TFixture : DataAnnotationRelationalTestBase<TFixture>.DataAnnotationRelationalFixtureBase,
+        new()
 {
-    protected DataAnnotationRelationalTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    protected DataAnnotationRelationalTestBase(TFixture fixture) : base(fixture) { }
 
     [ConditionalFact]
-    public virtual void Table_can_configure_TPT_with_Owned()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Table_can_configure_TPT_with_Owned() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var model = context.Model;
@@ -36,7 +34,10 @@ public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotatio
 
                 var tagIdProperty = petTagType.FindProperty(nameof(PetTag.TagId));
                 Assert.False(tagIdProperty.IsNullable);
-                Assert.All(tagIdProperty.GetTableColumnMappings(), m => Assert.False(m.Column.IsNullable));
+                Assert.All(
+                    tagIdProperty.GetTableColumnMappings(),
+                    m => Assert.False(m.Column.IsNullable)
+                );
 
                 var catType = model.FindEntityType(typeof(Cat));
                 Assert.Equal("Cats", catType.GetTableMappings().Last().Table.Name);
@@ -53,7 +54,8 @@ public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotatio
                         Species = "Felis catus",
                         Tag = new PetTag { TagId = 2 },
                         FavoritePetFood = petFood
-                    });
+                    }
+                );
 
                 context.SaveChanges();
             },
@@ -62,7 +64,8 @@ public abstract class DataAnnotationRelationalTestBase<TFixture> : DataAnnotatio
                 var cat = context.Set<Cat>().Single();
                 Assert.Equal("Felis catus", cat.Species);
                 Assert.Equal(2u, cat.Tag.TagId);
-            });
+            }
+        );
 
     public abstract class DataAnnotationRelationalFixtureBase : DataAnnotationFixtureBase
     {

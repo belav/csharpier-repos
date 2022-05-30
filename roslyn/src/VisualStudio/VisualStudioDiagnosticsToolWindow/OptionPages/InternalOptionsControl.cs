@@ -36,8 +36,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             viewer.Content = optionsPanel;
 
-            // search 
-            var searchBox = new TextBox() { MinWidth = 200, HorizontalAlignment = HorizontalAlignment.Stretch };
+            // search
+            var searchBox = new TextBox()
+            {
+                MinWidth = 200,
+                HorizontalAlignment = HorizontalAlignment.Stretch
+            };
 
             var searchButton = new Button() { Content = "Search" };
             searchButton.Click += (o, a) =>
@@ -64,7 +68,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             };
 
             var clearButton = new Button() { Content = "Clear" };
-            clearButton.Click += (o, a) => optionsPanel.Children.OfType<CheckBox>().Do(c => c.Visibility = Visibility.Visible);
+            clearButton.Click += (o, a) =>
+                optionsPanel.Children.OfType<CheckBox>().Do(c => c.Visibility = Visibility.Visible);
 
             var searchPanel = new StackPanel()
             {
@@ -79,10 +84,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
             // button
             var checkAllButton = new Button() { Content = "Check All" };
-            checkAllButton.Click += (o, a) => optionsPanel.Children.OfType<CheckBox>().Where(c => c.Visibility == Visibility.Visible).Do(c => c.IsChecked = true);
+            checkAllButton.Click += (o, a) =>
+                optionsPanel.Children
+                    .OfType<CheckBox>()
+                    .Where(c => c.Visibility == Visibility.Visible)
+                    .Do(c => c.IsChecked = true);
 
             var uncheckAllButton = new Button() { Content = "Uncheck All" };
-            uncheckAllButton.Click += (o, a) => optionsPanel.Children.OfType<CheckBox>().Where(c => c.Visibility == Visibility.Visible).Do(c => c.IsChecked = false);
+            uncheckAllButton.Click += (o, a) =>
+                optionsPanel.Children
+                    .OfType<CheckBox>()
+                    .Where(c => c.Visibility == Visibility.Visible)
+                    .Do(c => c.IsChecked = false);
 
             var selectionPanel = new StackPanel()
             {
@@ -108,7 +121,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
 
         protected virtual void AddOptions(Panel panel)
         {
-            foreach (var option in OptionStore.GetRegisteredOptions().Where(o => o.Feature == _featureOptionName).OrderBy(o => o.Name))
+            foreach (
+                var option in OptionStore
+                    .GetRegisteredOptions()
+                    .Where(o => o.Feature == _featureOptionName)
+                    .OrderBy(o => o.Name)
+            )
             {
                 if (!option.IsPerLanguage)
                 {
@@ -131,7 +149,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        protected void AddPerLanguageOption(Panel panel, IOption option, string languageName, string additional = null)
+        protected void AddPerLanguageOption(
+            Panel panel,
+            IOption option,
+            string languageName,
+            string additional = null
+        )
         {
             var uiElement = CreateControl(option, languageName, additional);
             if (uiElement != null)
@@ -140,18 +163,30 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Options
             }
         }
 
-        private UIElement CreateControl(IOption option, string languageName = null, string additional = null)
+        private UIElement CreateControl(
+            IOption option,
+            string languageName = null,
+            string additional = null
+        )
         {
             if (option.Type == typeof(bool))
             {
-                var checkBox = new CheckBox() { Content = option.Name + GetLanguage(languageName) + GetAdditionalText(additional) };
+                var checkBox = new CheckBox()
+                {
+                    Content =
+                        option.Name + GetLanguage(languageName) + GetAdditionalText(additional)
+                };
                 BindToCheckBox(checkBox, option, languageName);
                 return checkBox;
             }
 
             if (option.Type == typeof(int))
             {
-                var label = new Label() { Content = option.Name + GetLanguage(languageName) + GetAdditionalText(additional) };
+                var label = new Label()
+                {
+                    Content =
+                        option.Name + GetLanguage(languageName) + GetAdditionalText(additional)
+                };
                 var textBox = new TextBox();
                 BindToTextBox(textBox, option, languageName);
 

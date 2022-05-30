@@ -4,45 +4,45 @@ using System;
 
 public static class Program
 {
-	public static int Main (string[] args)
-	{
-		// calling delegate on extension method with null target is allowed
-		Func<int> func = null;
-		if (CallFunc(func.CallFuncIfNotNull) != 0)
-			return 2;
+    public static int Main(string[] args)
+    {
+        // calling delegate on extension method with null target is allowed
+        Func<int> func = null;
+        if (CallFunc(func.CallFuncIfNotNull) != 0)
+            return 2;
 
-		// constructing delegate on instance method with null target should throw
-		ITest obj = null;
-		try
-		{
-			GC.KeepAlive((Action)obj.Func);
-		}
-		catch (NullReferenceException)
-		{
-			return 0;
-		}
+        // constructing delegate on instance method with null target should throw
+        ITest obj = null;
+        try
+        {
+            GC.KeepAlive((Action)obj.Func);
+        }
+        catch (NullReferenceException)
+        {
+            return 0;
+        }
 
-		return 1;
-	}
+        return 1;
+    }
 
-	interface ITest
-	{
-		void Func ();
-	}
+    interface ITest
+    {
+        void Func();
+    }
 
-	static int CallFunc(Func<int> func)
-	{
-		return func();
-	}
+    static int CallFunc(Func<int> func)
+    {
+        return func();
+    }
 }
 
 public static class FuncExtensions
 {
-	public static int CallFuncIfNotNull(this Func<int> func)
-	{
-		if (func != null)
-			return func();
+    public static int CallFuncIfNotNull(this Func<int> func)
+    {
+        if (func != null)
+            return func();
 
-		return 0;
-	}
+        return 0;
+    }
 }

@@ -17,7 +17,8 @@ namespace Microsoft.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => dro.baz,
-                "The property baz doesn't exist. There are no public properties on this object.");
+                "The property baz doesn't exist. There are no public properties on this object."
+            );
         }
 
         [Fact]
@@ -29,7 +30,8 @@ namespace Microsoft.Web.Mvc.Test
             // Act & Assert
             Assert.Throws<InvalidOperationException>(
                 () => dro.baz,
-                "The property baz doesn't exist. Supported properties are: bar, biff, foo.");
+                "The property baz doesn't exist. Supported properties are: bar, biff, foo."
+            );
         }
 
         [Fact]

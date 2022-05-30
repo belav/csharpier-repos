@@ -66,7 +66,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the requiredness was configured,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? ValueGenerated(ValueGenerated? valueGenerated, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? ValueGenerated(
+        ValueGenerated? valueGenerated,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the property value generation can be configured
@@ -93,7 +96,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? IsConcurrencyToken(bool? concurrencyToken, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? IsConcurrencyToken(
+        bool? concurrencyToken,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the property can be configured as a concurrency token
@@ -135,7 +141,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    new IConventionPropertyBuilder? UsePropertyAccessMode(PropertyAccessMode? propertyAccessMode, bool fromDataAnnotation = false);
+    new IConventionPropertyBuilder? UsePropertyAccessMode(
+        PropertyAccessMode? propertyAccessMode,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the maximum length of data that can be stored in this property.
@@ -229,7 +238,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? BeforeSave(PropertySaveBehavior? behavior, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? BeforeSave(
+        PropertySaveBehavior? behavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the ability to be modified before the entity is saved to the database
@@ -257,7 +269,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? AfterSave(PropertySaveBehavior? behavior, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? AfterSave(
+        PropertySaveBehavior? behavior,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the ability to be modified after the entity is saved to the database
@@ -282,7 +297,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasValueGenerator(Type? valueGeneratorType, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasValueGenerator(
+        Type? valueGeneratorType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="ValueGenerator" /> that will generate values for this property.
@@ -295,7 +313,8 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// </returns>
     IConventionPropertyBuilder? HasValueGenerator(
         Func<IProperty, IEntityType, ValueGenerator>? factory,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" /> that will
@@ -307,7 +326,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasValueGeneratorFactory(Type? valueGeneratorFactoryType, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasValueGeneratorFactory(
+        Type? valueGeneratorFactoryType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueGenerator" /> can be configured for this property
@@ -324,7 +346,8 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// </returns>
     bool CanSetValueGenerator(
         Func<IProperty, IEntityType, ValueGenerator>? factory,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueGeneratorFactory" /> can be configured for this property
@@ -341,7 +364,8 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// </returns>
     bool CanSetValueGeneratorFactory(
         Type? valueGeneratorFactoryType,
-        bool fromDataAnnotation = false);
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Configures the property so that the property value is converted to and from the database
@@ -353,7 +377,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasConversion(ValueConverter? converter, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasConversion(
+        ValueConverter? converter,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the <see cref="ValueConverter" /> can be configured for this property
@@ -376,7 +403,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasConversion(Type? providerClrType, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasConversion(
+        Type? providerClrType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given type to convert values to and from
@@ -427,7 +457,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     ///     The same builder instance if the configuration was applied,
     ///     <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasTypeMapping(CoreTypeMapping? typeMapping, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasTypeMapping(
+        CoreTypeMapping? typeMapping,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="CoreTypeMapping" />
@@ -448,7 +481,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// <returns>
     ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -472,7 +508,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// <returns>
     ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasValueComparer(Type? comparerType, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasValueComparer(
+        Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -496,7 +535,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// <returns>
     ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasProviderValueComparer(ValueComparer? comparer, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasProviderValueComparer(
+        ValueComparer? comparer,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />
@@ -520,7 +562,10 @@ public interface IConventionPropertyBuilder : IConventionPropertyBaseBuilder
     /// <returns>
     ///     The same builder instance if the configuration was applied, <see langword="null" /> otherwise.
     /// </returns>
-    IConventionPropertyBuilder? HasProviderValueComparer(Type? comparerType, bool fromDataAnnotation = false);
+    IConventionPropertyBuilder? HasProviderValueComparer(
+        Type? comparerType,
+        bool fromDataAnnotation = false
+    );
 
     /// <summary>
     ///     Returns a value indicating whether the given <see cref="ValueComparer" />

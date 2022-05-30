@@ -14,7 +14,10 @@ namespace Internal.TypeSystem
         {
             Debug.Assert(type.ContainsGCPointers);
 
-            GCPointerMapBuilder builder = new GCPointerMapBuilder(type.InstanceByteCount.AsInt, type.Context.Target.PointerSize);
+            GCPointerMapBuilder builder = new GCPointerMapBuilder(
+                type.InstanceByteCount.AsInt,
+                type.Context.Target.PointerSize
+            );
             FromInstanceLayoutHelper(ref builder, type);
 
             return builder.ToGCMap();
@@ -25,7 +28,10 @@ namespace Internal.TypeSystem
             if (!type.IsValueType && type.HasBaseType)
             {
                 DefType baseType = type.BaseType;
-                GCPointerMapBuilder baseLayoutBuilder = builder.GetInnerBuilder(0, baseType.InstanceByteCount.AsInt);
+                GCPointerMapBuilder baseLayoutBuilder = builder.GetInnerBuilder(
+                    0,
+                    baseType.InstanceByteCount.AsInt
+                );
                 FromInstanceLayoutHelper(ref baseLayoutBuilder, baseType);
             }
 
@@ -44,8 +50,10 @@ namespace Internal.TypeSystem
                     var fieldDefType = (DefType)fieldType;
                     if (fieldDefType.ContainsGCPointers)
                     {
-                        GCPointerMapBuilder innerBuilder =
-                            builder.GetInnerBuilder(field.Offset.AsInt, fieldDefType.InstanceByteCount.AsInt);
+                        GCPointerMapBuilder innerBuilder = builder.GetInnerBuilder(
+                            field.Offset.AsInt,
+                            fieldDefType.InstanceByteCount.AsInt
+                        );
                         FromInstanceLayoutHelper(ref innerBuilder, fieldDefType);
                     }
                 }
@@ -57,12 +65,20 @@ namespace Internal.TypeSystem
         /// </summary>
         public static GCPointerMap FromStaticLayout(DefType type)
         {
-            GCPointerMapBuilder builder = new GCPointerMapBuilder(type.GCStaticFieldSize.AsInt, type.Context.Target.PointerSize);
+            GCPointerMapBuilder builder = new GCPointerMapBuilder(
+                type.GCStaticFieldSize.AsInt,
+                type.Context.Target.PointerSize
+            );
 
             foreach (FieldDesc field in type.GetFields())
             {
-                if (!field.IsStatic || field.HasRva || field.IsLiteral
-                    || field.IsThreadStatic || !field.HasGCStaticBase)
+                if (
+                    !field.IsStatic
+                    || field.HasRva
+                    || field.IsLiteral
+                    || field.IsThreadStatic
+                    || !field.HasGCStaticBase
+                )
                     continue;
 
                 TypeDesc fieldType = field.FieldType;
@@ -76,14 +92,19 @@ namespace Internal.TypeSystem
                     var fieldDefType = (DefType)fieldType;
                     if (fieldDefType.ContainsGCPointers)
                     {
-                        GCPointerMapBuilder innerBuilder =
-                            builder.GetInnerBuilder(field.Offset.AsInt, fieldDefType.InstanceByteCount.AsInt);
+                        GCPointerMapBuilder innerBuilder = builder.GetInnerBuilder(
+                            field.Offset.AsInt,
+                            fieldDefType.InstanceByteCount.AsInt
+                        );
                         FromInstanceLayoutHelper(ref innerBuilder, fieldDefType);
                     }
                 }
             }
 
-            Debug.Assert(builder.ToGCMap().Size * type.Context.Target.PointerSize >= type.GCStaticFieldSize.AsInt);
+            Debug.Assert(
+                builder.ToGCMap().Size * type.Context.Target.PointerSize
+                    >= type.GCStaticFieldSize.AsInt
+            );
             return builder.ToGCMap();
         }
 
@@ -92,11 +113,20 @@ namespace Internal.TypeSystem
         /// </summary>
         public static GCPointerMap FromThreadStaticLayout(DefType type)
         {
-            GCPointerMapBuilder builder = new GCPointerMapBuilder(type.ThreadGcStaticFieldSize.AsInt, type.Context.Target.PointerSize);
+            GCPointerMapBuilder builder = new GCPointerMapBuilder(
+                type.ThreadGcStaticFieldSize.AsInt,
+                type.Context.Target.PointerSize
+            );
 
             foreach (FieldDesc field in type.GetFields())
             {
-                if (!field.IsStatic || field.HasRva || field.IsLiteral || !field.IsThreadStatic || !field.HasGCStaticBase)
+                if (
+                    !field.IsStatic
+                    || field.HasRva
+                    || field.IsLiteral
+                    || !field.IsThreadStatic
+                    || !field.HasGCStaticBase
+                )
                     continue;
 
                 TypeDesc fieldType = field.FieldType;
@@ -109,14 +139,19 @@ namespace Internal.TypeSystem
                     var fieldDefType = (DefType)fieldType;
                     if (fieldDefType.ContainsGCPointers)
                     {
-                        GCPointerMapBuilder innerBuilder =
-                            builder.GetInnerBuilder(field.Offset.AsInt, fieldDefType.InstanceByteCount.AsInt);
+                        GCPointerMapBuilder innerBuilder = builder.GetInnerBuilder(
+                            field.Offset.AsInt,
+                            fieldDefType.InstanceByteCount.AsInt
+                        );
                         FromInstanceLayoutHelper(ref innerBuilder, fieldDefType);
                     }
                 }
             }
 
-            Debug.Assert(builder.ToGCMap().Size * type.Context.Target.PointerSize >= type.ThreadGcStaticFieldSize.AsInt);
+            Debug.Assert(
+                builder.ToGCMap().Size * type.Context.Target.PointerSize
+                    >= type.ThreadGcStaticFieldSize.AsInt
+            );
             return builder.ToGCMap();
         }
     }

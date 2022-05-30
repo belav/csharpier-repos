@@ -42,7 +42,10 @@ namespace Microsoft.Diagnostics.Tools.Pgo.TypeRefTypeSystem
 
         protected override int ClassCode => throw new NotImplementedException();
 
-        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) => throw new NotImplementedException();
-        protected override int CompareToImpl(FieldDesc other, TypeSystemComparer comparer) => throw new NotImplementedException();
+        public override bool HasCustomAttribute(string attributeNamespace, string attributeName) =>
+            throw new NotImplementedException();
+
+        protected override int CompareToImpl(FieldDesc other, TypeSystemComparer comparer) =>
+            throw new NotImplementedException();
     }
 }

@@ -84,31 +84,27 @@ public class ColumnModification : IColumnModification
     public virtual bool IsKey { get; set; }
 
     /// <inheritdoc />
-    public virtual bool UseOriginalValueParameter
-        => UseParameter && UseOriginalValue;
+    public virtual bool UseOriginalValueParameter => UseParameter && UseOriginalValue;
 
     /// <inheritdoc />
-    public virtual bool UseCurrentValueParameter
-        => UseParameter && UseCurrentValue;
+    public virtual bool UseCurrentValueParameter => UseParameter && UseCurrentValue;
 
     /// <inheritdoc />
-    public virtual bool UseOriginalValue
-        => IsCondition;
+    public virtual bool UseOriginalValue => IsCondition;
 
     /// <inheritdoc />
-    public virtual bool UseCurrentValue
-        => IsWrite;
+    public virtual bool UseCurrentValue => IsWrite;
 
     /// <inheritdoc />
     public virtual bool UseParameter { get; }
 
     /// <inheritdoc />
-    public virtual string? ParameterName
-        => _parameterName ??= UseCurrentValueParameter ? _generateParameterName!() : null;
+    public virtual string? ParameterName =>
+        _parameterName ??= UseCurrentValueParameter ? _generateParameterName!() : null;
 
     /// <inheritdoc />
-    public virtual string? OriginalParameterName
-        => _originalParameterName ??= UseOriginalValueParameter ? _generateParameterName!() : null;
+    public virtual string? OriginalParameterName =>
+        _originalParameterName ??= UseOriginalValueParameter ? _generateParameterName!() : null;
 
     /// <inheritdoc />
     public virtual string ColumnName { get; }
@@ -119,11 +115,12 @@ public class ColumnModification : IColumnModification
     /// <inheritdoc />
     public virtual object? OriginalValue
     {
-        get => Entry == null
-            ? _originalValue
-            : Entry.SharedIdentityEntry == null
-                ? Entry.GetOriginalValue(Property!)
-                : Entry.SharedIdentityEntry.GetOriginalValue(Property!);
+        get =>
+            Entry == null
+                ? _originalValue
+                : Entry.SharedIdentityEntry == null
+                    ? Entry.GetOriginalValue(Property!)
+                    : Entry.SharedIdentityEntry.GetOriginalValue(Property!);
         set
         {
             if (Entry == null)
@@ -147,11 +144,12 @@ public class ColumnModification : IColumnModification
     /// <inheritdoc />
     public virtual object? Value
     {
-        get => Entry == null
-            ? _value
-            : Entry.EntityState == EntityState.Deleted
-                ? null
-                : Entry.GetCurrentValue(Property!);
+        get =>
+            Entry == null
+                ? _value
+                : Entry.EntityState == EntityState.Deleted
+                    ? null
+                    : Entry.GetCurrentValue(Property!);
         set
         {
             if (Entry == null)
@@ -182,8 +180,10 @@ public class ColumnModification : IColumnModification
 
         _sharedColumnModifications ??= new List<IColumnModification>();
 
-        if (UseCurrentValueParameter
-            && !modification.Property.GetValueComparer().Equals(Value, modification.Value))
+        if (
+            UseCurrentValueParameter
+            && !modification.Property.GetValueComparer().Equals(Value, modification.Value)
+        )
         {
             if (_sensitiveLoggingEnabled)
             {
@@ -191,10 +191,16 @@ public class ColumnModification : IColumnModification
                     RelationalStrings.ConflictingRowValuesSensitive(
                         Entry.EntityType.DisplayName(),
                         modification.Entry!.EntityType.DisplayName(),
-                        Entry.BuildCurrentValuesString(Entry.EntityType.FindPrimaryKey()!.Properties),
+                        Entry.BuildCurrentValuesString(
+                            Entry.EntityType.FindPrimaryKey()!.Properties
+                        ),
                         Entry.BuildCurrentValuesString(new[] { Property }),
-                        modification.Entry.BuildCurrentValuesString(new[] { modification.Property }),
-                        ColumnName));
+                        modification.Entry.BuildCurrentValuesString(
+                            new[] { modification.Property }
+                        ),
+                        ColumnName
+                    )
+                );
             }
 
             throw new InvalidOperationException(
@@ -203,15 +209,23 @@ public class ColumnModification : IColumnModification
                     modification.Entry.EntityType.DisplayName(),
                     new[] { Property }.Format(),
                     new[] { modification.Property }.Format(),
-                    ColumnName));
+                    ColumnName
+                )
+            );
         }
 
-        if (UseOriginalValueParameter
-            && !modification.Property.GetValueComparer().Equals(OriginalValue, modification.OriginalValue))
+        if (
+            UseOriginalValueParameter
+            && !modification.Property
+                .GetValueComparer()
+                .Equals(OriginalValue, modification.OriginalValue)
+        )
         {
-            if (Entry.EntityState == EntityState.Modified
+            if (
+                Entry.EntityState == EntityState.Modified
                 && modification.Entry.EntityState == EntityState.Added
-                && modification.Entry.SharedIdentityEntry == null)
+                && modification.Entry.SharedIdentityEntry == null
+            )
             {
                 modification.Entry.SetOriginalValue(modification.Property, OriginalValue);
             }
@@ -223,10 +237,16 @@ public class ColumnModification : IColumnModification
                         RelationalStrings.ConflictingOriginalRowValuesSensitive(
                             Entry.EntityType.DisplayName(),
                             modification.Entry.EntityType.DisplayName(),
-                            Entry.BuildCurrentValuesString(Entry.EntityType.FindPrimaryKey()!.Properties),
+                            Entry.BuildCurrentValuesString(
+                                Entry.EntityType.FindPrimaryKey()!.Properties
+                            ),
                             Entry.BuildOriginalValuesString(new[] { Property }),
-                            modification.Entry.BuildOriginalValuesString(new[] { modification.Property }),
-                            ColumnName));
+                            modification.Entry.BuildOriginalValuesString(
+                                new[] { modification.Property }
+                            ),
+                            ColumnName
+                        )
+                    );
                 }
 
                 throw new InvalidOperationException(
@@ -235,7 +255,9 @@ public class ColumnModification : IColumnModification
                         modification.Entry.EntityType.DisplayName(),
                         new[] { Property }.Format(),
                         new[] { modification.Property }.Format(),
-                        ColumnName));
+                        ColumnName
+                    )
+                );
             }
         }
 
@@ -243,6 +265,5 @@ public class ColumnModification : IColumnModification
     }
 
     /// <inheritdoc />
-    public virtual void ResetParameterNames()
-        => _parameterName = _originalParameterName = null;
+    public virtual void ResetParameterNames() => _parameterName = _originalParameterName = null;
 }

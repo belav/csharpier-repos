@@ -57,25 +57,31 @@ namespace System.Net.NetworkInformation
             return (IcmpV6MessageType)type switch
             {
                 IcmpV6MessageType.EchoReply => IPStatus.Success,
-                IcmpV6MessageType.DestinationUnreachable => (IcmpV6DestinationUnreachableCode)code switch
-                {
-                    IcmpV6DestinationUnreachableCode.NoRouteToDestination => IPStatus.BadRoute,
-                    IcmpV6DestinationUnreachableCode.SourceRoutingHeaderError => IPStatus.BadHeader,
-                    _ => IPStatus.DestinationUnreachable,
-                },
+                IcmpV6MessageType.DestinationUnreachable
+                    => (IcmpV6DestinationUnreachableCode)code switch
+                    {
+                        IcmpV6DestinationUnreachableCode.NoRouteToDestination => IPStatus.BadRoute,
+                        IcmpV6DestinationUnreachableCode.SourceRoutingHeaderError
+                            => IPStatus.BadHeader,
+                        _ => IPStatus.DestinationUnreachable,
+                    },
                 IcmpV6MessageType.PacketTooBig => IPStatus.PacketTooBig,
-                IcmpV6MessageType.TimeExceeded => (IcmpV6TimeExceededCode)code switch
-                {
-                    IcmpV6TimeExceededCode.FragmentReassemblyTimeExceeded => IPStatus.TtlReassemblyTimeExceeded,
-                    _ => IPStatus.TtlExpired,
-                },
-                IcmpV6MessageType.ParameterProblem => (IcmpV6ParameterProblemCode)code switch
-                {
-                    IcmpV6ParameterProblemCode.ErroneousHeaderField => IPStatus.BadHeader,
-                    IcmpV6ParameterProblemCode.UnrecognizedNextHeader => IPStatus.UnrecognizedNextHeader,
-                    IcmpV6ParameterProblemCode.UnrecognizedIpv6Option => IPStatus.BadOption,
-                    _ => IPStatus.ParameterProblem,
-                },
+                IcmpV6MessageType.TimeExceeded
+                    => (IcmpV6TimeExceededCode)code switch
+                    {
+                        IcmpV6TimeExceededCode.FragmentReassemblyTimeExceeded
+                            => IPStatus.TtlReassemblyTimeExceeded,
+                        _ => IPStatus.TtlExpired,
+                    },
+                IcmpV6MessageType.ParameterProblem
+                    => (IcmpV6ParameterProblemCode)code switch
+                    {
+                        IcmpV6ParameterProblemCode.ErroneousHeaderField => IPStatus.BadHeader,
+                        IcmpV6ParameterProblemCode.UnrecognizedNextHeader
+                            => IPStatus.UnrecognizedNextHeader,
+                        IcmpV6ParameterProblemCode.UnrecognizedIpv6Option => IPStatus.BadOption,
+                        _ => IPStatus.ParameterProblem,
+                    },
                 _ => IPStatus.Unknown,
             };
         }

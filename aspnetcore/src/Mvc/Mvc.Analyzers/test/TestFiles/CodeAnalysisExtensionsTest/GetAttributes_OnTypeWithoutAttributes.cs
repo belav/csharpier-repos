@@ -2,7 +2,5 @@
 
 namespace Microsoft.AspNetCore.Mvc.Analyzers
 {
-    public class GetAttributes_OnTypeWithoutAttributesType
-    {
-    }
+    public class GetAttributes_OnTypeWithoutAttributesType { }
 }

@@ -12,16 +12,33 @@ namespace Roslyn.VisualStudio.IntegrationTests.InProcess
     [TestService]
     internal partial class SolutionExplorerVerifierInProcess
     {
-        public async Task AssemblyReferencePresentAsync(string projectName, string assemblyName, string assemblyVersion, string assemblyPublicKeyToken, CancellationToken cancellationToken)
+        public async Task AssemblyReferencePresentAsync(
+            string projectName,
+            string assemblyName,
+            string assemblyVersion,
+            string assemblyPublicKeyToken,
+            CancellationToken cancellationToken
+        )
         {
-            var assemblyReferences = await TestServices.SolutionExplorer.GetAssemblyReferencesAsync(projectName, cancellationToken);
-            var expectedAssemblyReference = assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
+            var assemblyReferences = await TestServices.SolutionExplorer.GetAssemblyReferencesAsync(
+                projectName,
+                cancellationToken
+            );
+            var expectedAssemblyReference =
+                assemblyName + "," + assemblyVersion + "," + assemblyPublicKeyToken.ToUpper();
             Assert.Contains(expectedAssemblyReference, assemblyReferences);
         }
 
-        public async Task ProjectReferencePresentAsync(string projectName, string referencedProjectName, CancellationToken cancellationToken)
+        public async Task ProjectReferencePresentAsync(
+            string projectName,
+            string referencedProjectName,
+            CancellationToken cancellationToken
+        )
         {
-            var projectReferences = await TestServices.SolutionExplorer.GetProjectReferencesAsync(projectName, cancellationToken);
+            var projectReferences = await TestServices.SolutionExplorer.GetProjectReferencesAsync(
+                projectName,
+                cancellationToken
+            );
             Assert.Contains(referencedProjectName, projectReferences);
         }
     }

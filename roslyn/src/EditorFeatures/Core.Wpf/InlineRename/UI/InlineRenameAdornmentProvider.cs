@@ -45,7 +45,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             InlineRenameService renameService,
             IEditorFormatMapService editorFormatMapService,
             [Import(AllowDefault = true)] IInlineRenameColorUpdater? dashboardColorUpdater,
-            IGlobalOptionService globalOptionService)
+            IGlobalOptionService globalOptionService
+        )
         {
             _renameService = renameService;
             _editorFormatMapService = editorFormatMapService;
@@ -53,22 +54,48 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             _globalOptionService = globalOptionService;
         }
 
-        public void SubjectBuffersConnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        public void SubjectBuffersConnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             // Create it for the view if we don't already have one
-            textView.GetOrCreateAutoClosingProperty(v => new InlineRenameAdornmentManager(_renameService, _editorFormatMapService, _dashboardColorUpdater, v, _globalOptionService));
+            textView.GetOrCreateAutoClosingProperty(
+                v =>
+                    new InlineRenameAdornmentManager(
+                        _renameService,
+                        _editorFormatMapService,
+                        _dashboardColorUpdater,
+                        v,
+                        _globalOptionService
+                    )
+            );
         }
 
-        public void SubjectBuffersDisconnected(IWpfTextView textView, ConnectionReason reason, Collection<ITextBuffer> subjectBuffers)
+        public void SubjectBuffersDisconnected(
+            IWpfTextView textView,
+            ConnectionReason reason,
+            Collection<ITextBuffer> subjectBuffers
+        )
         {
             // Do we still have any buffers alive?
-            if (textView.BufferGraph.GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType)).Any())
+            if (
+                textView.BufferGraph
+                    .GetTextBuffers(b => b.ContentType.IsOfType(ContentTypeNames.RoslynContentType))
+                    .Any()
+            )
             {
                 // Yep, some are still attached
                 return;
             }
 
-            if (textView.Properties.TryGetProperty(typeof(InlineRenameAdornmentManager), out InlineRenameAdornmentManager manager))
+            if (
+                textView.Properties.TryGetProperty(
+                    typeof(InlineRenameAdornmentManager),
+                    out InlineRenameAdornmentManager manager
+                )
+            )
             {
                 manager.Dispose();
                 textView.Properties.RemoveProperty(typeof(InlineRenameAdornmentManager));

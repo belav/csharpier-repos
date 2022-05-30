@@ -10,20 +10,32 @@ using Microsoft.CodeAnalysis.Options;
 
 namespace Microsoft.CodeAnalysis.UseInferredMemberName
 {
-    internal abstract class AbstractUseInferredMemberNameDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal abstract class AbstractUseInferredMemberNameDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         protected abstract void AnalyzeSyntax(SyntaxNodeAnalysisContext context);
 
         public AbstractUseInferredMemberNameDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseInferredMemberNameDiagnosticId,
-                   EnforceOnBuildValues.UseInferredMemberName,
-                   options: ImmutableHashSet.Create<IPerLanguageOption>(CodeStyleOptions2.PreferInferredAnonymousTypeMemberNames, CodeStyleOptions2.PreferInferredTupleNames),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_inferred_member_name), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)),
-                   new LocalizableResourceString(nameof(AnalyzersResources.Member_name_can_be_simplified), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseInferredMemberNameDiagnosticId,
+                EnforceOnBuildValues.UseInferredMemberName,
+                options: ImmutableHashSet.Create<IPerLanguageOption>(
+                    CodeStyleOptions2.PreferInferredAnonymousTypeMemberNames,
+                    CodeStyleOptions2.PreferInferredTupleNames
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_inferred_member_name),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                ),
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Member_name_can_be_simplified),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

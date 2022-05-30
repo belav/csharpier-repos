@@ -40,11 +40,16 @@ public class GenerateMvcTestManifestTask : Task
             output[assemblyName] = contentRoot;
         }
 
-        var serializer = new DataContractJsonSerializer(typeof(Dictionary<string, string>), new DataContractJsonSerializerSettings
-        {
-            UseSimpleDictionaryFormat = true
-        });
-        using var writer = JsonReaderWriterFactory.CreateJsonWriter(fileStream, Encoding.UTF8, ownsStream: false, indent: true);
+        var serializer = new DataContractJsonSerializer(
+            typeof(Dictionary<string, string>),
+            new DataContractJsonSerializerSettings { UseSimpleDictionaryFormat = true }
+        );
+        using var writer = JsonReaderWriterFactory.CreateJsonWriter(
+            fileStream,
+            Encoding.UTF8,
+            ownsStream: false,
+            indent: true
+        );
         serializer.WriteObject(writer, output);
 
         return !Log.HasLoggedErrors;

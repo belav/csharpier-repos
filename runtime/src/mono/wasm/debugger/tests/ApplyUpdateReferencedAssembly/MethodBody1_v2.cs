@@ -2,11 +2,13 @@
 // The .NET Foundation licenses this file to you under the MIT license.
 using System.Diagnostics;
 using System;
+
 //keep the same line number for class in the original file and the updates ones
 namespace ApplyUpdateReferencedAssembly
 {
-    public class MethodBody1 {
-        public static string StaticMethod1 ()
+    public class MethodBody1
+    {
+        public static string StaticMethod1()
         {
             Console.WriteLine("v2");
             bool c = true;
@@ -15,8 +17,10 @@ namespace ApplyUpdateReferencedAssembly
         }
     }
 
-    public class MethodBody2 {
-        public static string StaticMethod1 () {
+    public class MethodBody2
+    {
+        public static string StaticMethod1()
+        {
             Console.WriteLine("original");
             int a = 10;
             Debugger.Break();
@@ -24,8 +28,10 @@ namespace ApplyUpdateReferencedAssembly
         }
     }
 
-    public class MethodBody3 {
-        public static string StaticMethod3 () {
+    public class MethodBody3
+    {
+        public static string StaticMethod3()
+        {
             bool c = true;
             int d = 10;
             int e = 20;
@@ -34,18 +40,15 @@ namespace ApplyUpdateReferencedAssembly
         }
     }
 
-    public class MethodBody4 {
-        public static void StaticMethod4 () {
-        }
+    public class MethodBody4
+    {
+        public static void StaticMethod4() { }
     }
 
-
-
-
-
-
-    public class MethodBody5 {
-        public static void StaticMethod1 () {
+    public class MethodBody5
+    {
+        public static void StaticMethod1()
+        {
             Console.WriteLine("beforeoriginal");
             Console.WriteLine("original");
         }

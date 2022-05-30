@@ -5,10 +5,7 @@ namespace Microsoft.EntityFrameworkCore;
 
 public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 {
-    protected SaveChangesInterceptionTestBase(InterceptionFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+    protected SaveChangesInterceptionTestBase(InterceptionFixtureBase fixture) : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]
@@ -19,7 +16,11 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
     [InlineData(true, false, true)]
     [InlineData(false, true, true)]
     [InlineData(true, true, true)]
-    public virtual async Task Intercept_SaveChanges_passively(bool async, bool inject, bool noAcceptChanges)
+    public virtual async Task Intercept_SaveChanges_passively(
+        bool async,
+        bool inject,
+        bool noAcceptChanges
+    )
     {
         var (context, interceptor) = CreateContext<PassiveSaveChangesInterceptor>(inject);
 
@@ -71,14 +72,13 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         listener.AssertEventsInOrder(
             CoreEventId.SaveChangesStarting.Name,
-            CoreEventId.SaveChangesCompleted.Name);
+            CoreEventId.SaveChangesCompleted.Name
+        );
 
         Assert.Equal(1, context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35));
     }
 
-    protected class PassiveSaveChangesInterceptor : SaveChangesInterceptorBase
-    {
-    }
+    protected class PassiveSaveChangesInterceptor : SaveChangesInterceptorBase { }
 
     [ConditionalTheory]
     [InlineData(false, false, false)]
@@ -89,7 +89,11 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
     [InlineData(true, false, true)]
     [InlineData(false, true, true)]
     [InlineData(true, true, true)]
-    public virtual async Task Intercept_SaveChanges_to_suppress_save(bool async, bool inject, bool noAcceptChanges)
+    public virtual async Task Intercept_SaveChanges_to_suppress_save(
+        bool async,
+        bool inject,
+        bool noAcceptChanges
+    )
     {
         var (context, interceptor) = CreateContext<SuppressingSaveChangesInterceptor>(inject);
 
@@ -141,14 +145,18 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         listener.AssertEventsInOrder(
             CoreEventId.SaveChangesStarting.Name,
-            CoreEventId.SaveChangesCompleted.Name);
+            CoreEventId.SaveChangesCompleted.Name
+        );
 
         Assert.Equal(0, context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35));
     }
 
     protected class SuppressingSaveChangesInterceptor : SaveChangesInterceptorBase
     {
-        public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+        public override InterceptionResult<int> SavingChanges(
+            DbContextEventData eventData,
+            InterceptionResult<int> result
+        )
         {
             base.SavingChanges(eventData, result);
 
@@ -158,7 +166,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         public override async ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
             InterceptionResult<int> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             await base.SavingChangesAsync(eventData, result, cancellationToken);
 
@@ -175,7 +184,11 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
     [InlineData(true, false, true)]
     [InlineData(false, true, true)]
     [InlineData(true, true, true)]
-    public virtual async Task Intercept_SaveChanges_to_change_result(bool async, bool inject, bool noAcceptChanges)
+    public virtual async Task Intercept_SaveChanges_to_change_result(
+        bool async,
+        bool inject,
+        bool noAcceptChanges
+    )
     {
         var (context, interceptor) = CreateContext<ResultMutatingSaveChangesInterceptor>(inject);
 
@@ -227,7 +240,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         listener.AssertEventsInOrder(
             CoreEventId.SaveChangesStarting.Name,
-            CoreEventId.SaveChangesCompleted.Name);
+            CoreEventId.SaveChangesCompleted.Name
+        );
 
         Assert.Equal(1, context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35));
     }
@@ -244,7 +258,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         public override async ValueTask<int> SavedChangesAsync(
             SaveChangesCompletedEventData eventData,
             int result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             await base.SavedChangesAsync(eventData, result, cancellationToken);
 
@@ -269,10 +284,14 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
     [InlineData(true, false, true, true)]
     [InlineData(false, true, true, true)]
     [InlineData(true, true, true, true)]
-    public virtual async Task Intercept_SaveChanges_failed(bool async, bool inject, bool noAcceptChanges, bool concurrencyError)
+    public virtual async Task Intercept_SaveChanges_failed(
+        bool async,
+        bool inject,
+        bool noAcceptChanges,
+        bool concurrencyError
+    )
     {
-        if (concurrencyError
-            && !SupportsOptimisticConcurrency)
+        if (concurrencyError && !SupportsOptimisticConcurrency)
         {
             return;
         }
@@ -312,8 +331,9 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
             exceptionFromEvent = args.Exception;
         };
 
-        context.Entry(new Singularity { Id = 35, Type = "Red Dwarf" }).State
-            = concurrencyError ? EntityState.Modified : EntityState.Added;
+        context.Entry(new Singularity { Id = 35, Type = "Red Dwarf" }).State = concurrencyError
+            ? EntityState.Modified
+            : EntityState.Added;
 
         using var listener = Fixture.SubscribeToDiagnosticListener(context.ContextId);
 
@@ -349,13 +369,15 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         {
             listener.AssertEventsInOrder(
                 CoreEventId.SaveChangesStarting.Name,
-                CoreEventId.OptimisticConcurrencyException.Name);
+                CoreEventId.OptimisticConcurrencyException.Name
+            );
         }
         else
         {
             listener.AssertEventsInOrder(
                 CoreEventId.SaveChangesStarting.Name,
-                CoreEventId.SaveChangesFailed.Name);
+                CoreEventId.SaveChangesFailed.Name
+            );
         }
     }
 
@@ -368,7 +390,11 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
     [InlineData(true, false, true)]
     [InlineData(false, true, true)]
     [InlineData(true, true, true)]
-    public virtual async Task Intercept_connection_with_multiple_interceptors(bool async, bool inject, bool noAcceptChanges)
+    public virtual async Task Intercept_connection_with_multiple_interceptors(
+        bool async,
+        bool inject,
+        bool noAcceptChanges
+    )
     {
         var interceptor1 = new PassiveSaveChangesInterceptor();
         var interceptor2 = new ResultMutatingSaveChangesInterceptor();
@@ -377,7 +403,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         using var context = CreateContext(
             new IInterceptor[] { new PassiveSaveChangesInterceptor(), interceptor1, interceptor2 },
-            new IInterceptor[] { interceptor3, interceptor4, new PassiveSaveChangesInterceptor() });
+            new IInterceptor[] { interceptor3, interceptor4, new PassiveSaveChangesInterceptor() }
+        );
 
         context.Add(new Singularity { Id = 35, Type = "Red Dwarf" });
 
@@ -402,7 +429,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         listener.AssertEventsInOrder(
             CoreEventId.SaveChangesStarting.Name,
-            CoreEventId.SaveChangesCompleted.Name);
+            CoreEventId.SaveChangesCompleted.Name
+        );
 
         Assert.Equal(1, context.Set<Singularity>().AsNoTracking().Count(e => e.Id == 35));
     }
@@ -418,7 +446,10 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         public bool SavedChangesCalled { get; set; }
         public bool SavingChangesCalled { get; set; }
 
-        public virtual InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
+        public virtual InterceptionResult<int> SavingChanges(
+            DbContextEventData eventData,
+            InterceptionResult<int> result
+        )
         {
             Assert.NotNull(eventData.Context);
 
@@ -463,7 +494,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         public virtual ValueTask<InterceptionResult<int>> SavingChangesAsync(
             DbContextEventData eventData,
             InterceptionResult<int> result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.NotNull(eventData.Context);
 
@@ -477,7 +509,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         public virtual ValueTask<int> SavedChangesAsync(
             SaveChangesCompletedEventData eventData,
             int result,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.NotNull(eventData.Context);
 
@@ -490,7 +523,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         public virtual Task SaveChangesFailedAsync(
             DbContextErrorEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.NotNull(eventData.Context);
             Assert.NotNull(eventData.Exception);
@@ -505,7 +539,8 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
 
         public virtual Task SaveChangesCanceledAsync(
             DbContextEventData eventData,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Assert.NotNull(eventData.Context);
 
@@ -517,7 +552,11 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         }
     }
 
-    private static void AssertNormalOutcome(DbContext context, SaveChangesInterceptorBase interceptor, bool async)
+    private static void AssertNormalOutcome(
+        DbContext context,
+        SaveChangesInterceptorBase interceptor,
+        bool async
+    )
     {
         Assert.Equal(async, interceptor.AsyncCalled);
         Assert.NotEqual(async, interceptor.SyncCalled);
@@ -526,6 +565,5 @@ public abstract class SaveChangesInterceptionTestBase : InterceptionTestBase
         Assert.Same(context, interceptor.Context);
     }
 
-    protected virtual bool SupportsOptimisticConcurrency
-        => true;
+    protected virtual bool SupportsOptimisticConcurrency => true;
 }

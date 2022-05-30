@@ -22,7 +22,10 @@ public static class RouteHandlerJsonServiceExtensions
     /// <param name="configureOptions">The <see cref="Action{JsonOptions}"/> to configure the
     /// <see cref="JsonOptions"/>.</param>
     /// <returns>The modified <see cref="IServiceCollection"/>.</returns>
-    public static IServiceCollection ConfigureRouteHandlerJsonOptions(this IServiceCollection services, Action<JsonOptions> configureOptions)
+    public static IServiceCollection ConfigureRouteHandlerJsonOptions(
+        this IServiceCollection services,
+        Action<JsonOptions> configureOptions
+    )
     {
         services.Configure<JsonOptions>(configureOptions);
         return services;

@@ -5,10 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.GearsOfWarModel;
 
 public class GearsOfWarContext : PoolableDbContext
 {
-    public GearsOfWarContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+    public GearsOfWarContext(DbContextOptions options) : base(options) { }
 
     public DbSet<Gear> Gears { get; set; }
     public DbSet<Squad> Squads { get; set; }
@@ -35,7 +32,17 @@ public class GearsOfWarContext : PoolableDbContext
         var locustHighCommands = GearsOfWarData.CreateHighCommands();
 
         GearsOfWarData.WireUp(
-            squads, missions, squadMissions, cities, weapons, tags, gears, locustLeaders, factions, locustHighCommands);
+            squads,
+            missions,
+            squadMissions,
+            cities,
+            weapons,
+            tags,
+            gears,
+            locustLeaders,
+            factions,
+            locustHighCommands
+        );
 
         context.Squads.AddRange(squads);
         context.Missions.AddRange(missions);

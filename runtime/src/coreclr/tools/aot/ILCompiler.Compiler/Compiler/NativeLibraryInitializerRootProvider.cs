@@ -22,7 +22,10 @@ namespace ILCompiler
         private ModuleDesc _module;
         private IReadOnlyCollection<MethodDesc> _libraryInitializers;
 
-        public NativeLibraryInitializerRootProvider(ModuleDesc module, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public NativeLibraryInitializerRootProvider(
+            ModuleDesc module,
+            IReadOnlyCollection<MethodDesc> libraryInitializers
+        )
         {
             _module = module;
             _libraryInitializers = libraryInitializers;
@@ -31,8 +34,15 @@ namespace ILCompiler
         public void AddCompilationRoots(IRootingServiceProvider rootProvider)
         {
             TypeDesc owningType = _module.GetGlobalModuleType();
-            NativeLibraryStartupMethod nativeLibStartupCode = new NativeLibraryStartupMethod(owningType, _libraryInitializers);
-            rootProvider.AddCompilationRoot(nativeLibStartupCode, "Startup Code Main Method", ManagedEntryPointMethodName);
+            NativeLibraryStartupMethod nativeLibStartupCode = new NativeLibraryStartupMethod(
+                owningType,
+                _libraryInitializers
+            );
+            rootProvider.AddCompilationRoot(
+                nativeLibStartupCode,
+                "Startup Code Main Method",
+                ManagedEntryPointMethodName
+            );
         }
     }
 }

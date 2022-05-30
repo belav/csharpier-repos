@@ -12,7 +12,12 @@ namespace System.CommandLine.Tests.Utility
         private const int FailWaitTimeoutMilliseconds = 60 * 1000;
         private readonly string _exceptionFile;
 
-        public RemoteExecution(Diagnostics.Process process, string className, string methodName, string exceptionFile)
+        public RemoteExecution(
+            Diagnostics.Process process,
+            string className,
+            string methodName,
+            string exceptionFile
+        )
         {
             Process = process;
             ClassName = className;
@@ -32,12 +37,17 @@ namespace System.CommandLine.Tests.Utility
 
         private void Dispose(bool disposing)
         {
-            Assert.True(disposing, $"A test {ClassName}.{MethodName} forgot to Dispose() the result of RemoteInvoke()");
+            Assert.True(
+                disposing,
+                $"A test {ClassName}.{MethodName} forgot to Dispose() the result of RemoteInvoke()"
+            );
 
             if (Process != null)
             {
-                Assert.True(Process.WaitForExit(FailWaitTimeoutMilliseconds),
-                    $"Timed out after {FailWaitTimeoutMilliseconds}ms waiting for remote process {Process.Id}");
+                Assert.True(
+                    Process.WaitForExit(FailWaitTimeoutMilliseconds),
+                    $"Timed out after {FailWaitTimeoutMilliseconds}ms waiting for remote process {Process.Id}"
+                );
 
                 // A bit unorthodox to do throwing operations in a Dispose, but by doing it here we avoid
                 // needing to do this in every derived test and keep each test much simpler.
@@ -56,7 +66,10 @@ namespace System.CommandLine.Tests.Utility
                     }
 
                     // Cleanup
-                    try { Process.Kill(); }
+                    try
+                    {
+                        Process.Kill();
+                    }
                     catch { } // ignore all cleanup errors
                 }
 

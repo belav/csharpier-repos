@@ -22,14 +22,21 @@ namespace Internal.Reflection.Extensions.NonPortable
                 throw new ArgumentException();
             Delegate[] invokeList = del.GetInvocationList();
             del = invokeList[invokeList.Length - 1];
-            IntPtr originalLdFtnResult = RuntimeAugments.GetDelegateLdFtnResult(del, out RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate, out bool isOpenResolver, out bool isInterpreterEntrypoint);
+            IntPtr originalLdFtnResult = RuntimeAugments.GetDelegateLdFtnResult(
+                del,
+                out RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate,
+                out bool isOpenResolver,
+                out bool isInterpreterEntrypoint
+            );
 
             if (isInterpreterEntrypoint)
             {
                 // This is a special kind of delegate where the invoke method is "ObjectArrayThunk". Typically,
                 // this will be a delegate that points the LINQ Expression interpreter. We could manufacture
                 // a MethodInfo based on the delegate's Invoke signature, but let's just throw for now.
-                throw new PlatformNotSupportedException(SR.DelegateGetMethodInfo_ObjectArrayDelegate);
+                throw new PlatformNotSupportedException(
+                    SR.DelegateGetMethodInfo_ObjectArrayDelegate
+                );
             }
 
             if (originalLdFtnResult == (IntPtr)0)
@@ -39,7 +46,6 @@ namespace Internal.Reflection.Extensions.NonPortable
             RuntimeTypeHandle[] genericMethodTypeArgumentHandles = null;
 
             bool callTryGetMethod = true;
-
             unsafe
             {
                 if (isOpenResolver)
@@ -53,38 +59,79 @@ namespace Internal.Reflection.Extensions.NonPortable
                     else if (resolver->ResolverType == OpenMethodResolver.DispatchResolve)
                     {
                         callTryGetMethod = false;
-                        methodHandle = QMethodDefinition.FromObjectAndInt(resolver->Reader, resolver->Handle);
+                        methodHandle = QMethodDefinition.FromObjectAndInt(
+                            resolver->Reader,
+                            resolver->Handle
+                        );
                         genericMethodTypeArgumentHandles = null;
                     }
                     else
                     {
-                        System.Diagnostics.Debug.Assert(resolver->ResolverType == OpenMethodResolver.GVMResolve);
+                        System.Diagnostics.Debug.Assert(
+                            resolver->ResolverType == OpenMethodResolver.GVMResolve
+                        );
 
                         callTryGetMethod = false;
-                        methodHandle = QMethodDefinition.FromObjectAndInt(resolver->Reader, resolver->Handle);
+                        methodHandle = QMethodDefinition.FromObjectAndInt(
+                            resolver->Reader,
+                            resolver->Handle
+                        );
 
                         RuntimeTypeHandle declaringTypeHandleIgnored;
                         MethodNameAndSignature nameAndSignatureIgnored;
-                        if (!TypeLoaderEnvironment.Instance.TryGetRuntimeMethodHandleComponents(resolver->GVMMethodHandle, out declaringTypeHandleIgnored, out nameAndSignatureIgnored, out genericMethodTypeArgumentHandles))
-                            throw new MissingRuntimeArtifactException(SR.DelegateGetMethodInfo_NoInstantiation);
+                        if (
+                            !TypeLoaderEnvironment.Instance.TryGetRuntimeMethodHandleComponents(
+                                resolver->GVMMethodHandle,
+                                out declaringTypeHandleIgnored,
+                                out nameAndSignatureIgnored,
+                                out genericMethodTypeArgumentHandles
+                            )
+                        )
+                            throw new MissingRuntimeArtifactException(
+                                SR.DelegateGetMethodInfo_NoInstantiation
+                            );
                     }
                 }
             }
 
             if (callTryGetMethod)
             {
-                if (!ReflectionExecution.ExecutionEnvironment.TryGetMethodForOriginalLdFtnResult(originalLdFtnResult, ref typeOfFirstParameterIfInstanceDelegate, out methodHandle, out genericMethodTypeArgumentHandles))
+                if (
+                    !ReflectionExecution.ExecutionEnvironment.TryGetMethodForOriginalLdFtnResult(
+                        originalLdFtnResult,
+                        ref typeOfFirstParameterIfInstanceDelegate,
+                        out methodHandle,
+                        out genericMethodTypeArgumentHandles
+                    )
+                )
                 {
-                    ReflectionExecution.ExecutionEnvironment.GetFunctionPointerAndInstantiationArgumentForOriginalLdFtnResult(originalLdFtnResult, out IntPtr ip, out IntPtr _);
+                    ReflectionExecution.ExecutionEnvironment.GetFunctionPointerAndInstantiationArgumentForOriginalLdFtnResult(
+                        originalLdFtnResult,
+                        out IntPtr ip,
+                        out IntPtr _
+                    );
 
-                    string methodDisplayString = RuntimeAugments.TryGetMethodDisplayStringFromIp(ip);
+                    string methodDisplayString = RuntimeAugments.TryGetMethodDisplayStringFromIp(
+                        ip
+                    );
                     if (methodDisplayString == null)
-                        throw new MissingRuntimeArtifactException(SR.DelegateGetMethodInfo_NoDynamic);
+                        throw new MissingRuntimeArtifactException(
+                            SR.DelegateGetMethodInfo_NoDynamic
+                        );
                     else
-                        throw new MissingRuntimeArtifactException(SR.Format(SR.DelegateGetMethodInfo_NoDynamic_WithDisplayString, methodDisplayString));
+                        throw new MissingRuntimeArtifactException(
+                            SR.Format(
+                                SR.DelegateGetMethodInfo_NoDynamic_WithDisplayString,
+                                methodDisplayString
+                            )
+                        );
                 }
             }
-            MethodBase methodBase = ReflectionCoreExecution.ExecutionDomain.GetMethod(typeOfFirstParameterIfInstanceDelegate, methodHandle, genericMethodTypeArgumentHandles);
+            MethodBase methodBase = ReflectionCoreExecution.ExecutionDomain.GetMethod(
+                typeOfFirstParameterIfInstanceDelegate,
+                methodHandle,
+                genericMethodTypeArgumentHandles
+            );
             MethodInfo methodInfo = methodBase as MethodInfo;
             if (methodInfo != null)
                 return methodInfo;

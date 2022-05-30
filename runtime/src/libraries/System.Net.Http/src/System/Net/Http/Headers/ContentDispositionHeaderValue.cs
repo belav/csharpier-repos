@@ -39,7 +39,8 @@ namespace System.Net.Http.Headers
             }
         }
 
-        public ICollection<NameValueHeaderValue> Parameters => _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
+        public ICollection<NameValueHeaderValue> Parameters =>
+            _parameters ??= new UnvalidatedObjectCollection<NameValueHeaderValue>();
 
         public string? Name
         {
@@ -86,7 +87,14 @@ namespace System.Net.Http.Headers
                 if (sizeParameter != null)
                 {
                     string? sizeString = sizeParameter.Value;
-                    if (ulong.TryParse(sizeString, NumberStyles.Integer, CultureInfo.InvariantCulture, out value))
+                    if (
+                        ulong.TryParse(
+                            sizeString,
+                            NumberStyles.Integer,
+                            CultureInfo.InvariantCulture,
+                            out value
+                        )
+                    )
                     {
                         return (long)value;
                     }
@@ -164,14 +172,18 @@ namespace System.Net.Http.Headers
                 return false;
             }
 
-            return string.Equals(_dispositionType, other._dispositionType, StringComparison.OrdinalIgnoreCase) &&
-                HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
+            return string.Equals(
+                    _dispositionType,
+                    other._dispositionType,
+                    StringComparison.OrdinalIgnoreCase
+                ) && HeaderUtilities.AreEqualCollections(_parameters, other._parameters);
         }
 
         public override int GetHashCode()
         {
             // The dispositionType string is case-insensitive.
-            return StringComparer.OrdinalIgnoreCase.GetHashCode(_dispositionType) ^ NameValueHeaderValue.GetHashCode(_parameters);
+            return StringComparer.OrdinalIgnoreCase.GetHashCode(_dispositionType)
+                ^ NameValueHeaderValue.GetHashCode(_parameters);
         }
 
         // Implement ICloneable explicitly to allow derived types to "override" the implementation.
@@ -187,16 +199,26 @@ namespace System.Net.Http.Headers
         public static ContentDispositionHeaderValue Parse(string? input)
         {
             int index = 0;
-            return (ContentDispositionHeaderValue)GenericHeaderParser.ContentDispositionParser.ParseValue(input,
-                null, ref index);
+            return (ContentDispositionHeaderValue)
+                GenericHeaderParser.ContentDispositionParser.ParseValue(input, null, ref index);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? input, [NotNullWhen(true)] out ContentDispositionHeaderValue? parsedValue)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true)] out ContentDispositionHeaderValue? parsedValue
+        )
         {
             int index = 0;
             parsedValue = null;
 
-            if (GenericHeaderParser.ContentDispositionParser.TryParseValue(input, null, ref index, out object? output))
+            if (
+                GenericHeaderParser.ContentDispositionParser.TryParseValue(
+                    input,
+                    null,
+                    ref index,
+                    out object? output
+                )
+            )
             {
                 parsedValue = (ContentDispositionHeaderValue)output!;
                 return true;
@@ -204,7 +226,11 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-        internal static int GetDispositionTypeLength(string? input, int startIndex, out object? parsedValue)
+        internal static int GetDispositionTypeLength(
+            string? input,
+            int startIndex,
+            out object? parsedValue
+        )
         {
             Debug.Assert(startIndex >= 0);
 
@@ -217,7 +243,11 @@ namespace System.Net.Http.Headers
 
             // Caller must remove leading whitespace. If not, we'll return 0.
             string? dispositionType;
-            int dispositionTypeLength = GetDispositionTypeExpressionLength(input, startIndex, out dispositionType);
+            int dispositionTypeLength = GetDispositionTypeExpressionLength(
+                input,
+                startIndex,
+                out dispositionType
+            );
 
             if (dispositionTypeLength == 0)
             {
@@ -226,15 +256,21 @@ namespace System.Net.Http.Headers
 
             int current = startIndex + dispositionTypeLength;
             current = current + HttpRuleParser.GetWhitespaceLength(input, current);
-            ContentDispositionHeaderValue contentDispositionHeader = new ContentDispositionHeaderValue();
+            ContentDispositionHeaderValue contentDispositionHeader =
+                new ContentDispositionHeaderValue();
             contentDispositionHeader._dispositionType = dispositionType!;
 
             // If we're not done and we have a parameter delimiter, then we have a list of parameters.
             if ((current < input.Length) && (input[current] == ';'))
             {
                 current++; // Skip delimiter.
-                int parameterLength = NameValueHeaderValue.GetNameValueListLength(input, current, ';',
-                    (UnvalidatedObjectCollection<NameValueHeaderValue>)contentDispositionHeader.Parameters);
+                int parameterLength = NameValueHeaderValue.GetNameValueListLength(
+                    input,
+                    current,
+                    ';',
+                    (UnvalidatedObjectCollection<NameValueHeaderValue>)
+                        contentDispositionHeader.Parameters
+                );
 
                 if (parameterLength == 0)
                 {
@@ -250,7 +286,11 @@ namespace System.Net.Http.Headers
             return current - startIndex;
         }
 
-        private static int GetDispositionTypeExpressionLength(string input, int startIndex, out string? dispositionType)
+        private static int GetDispositionTypeExpressionLength(
+            string input,
+            int startIndex,
+            out string? dispositionType
+        )
         {
             Debug.Assert((input != null) && (input.Length > 0) && (startIndex < input.Length));
 
@@ -278,11 +318,23 @@ namespace System.Net.Http.Headers
             }
 
             // When adding values using strongly typed objects, no leading/trailing LWS (whitespace) are allowed.
-            int dispositionTypeLength = GetDispositionTypeExpressionLength(dispositionType, 0, out string? tempDispositionType);
-            if ((dispositionTypeLength == 0) || (tempDispositionType!.Length != dispositionType.Length))
+            int dispositionTypeLength = GetDispositionTypeExpressionLength(
+                dispositionType,
+                0,
+                out string? tempDispositionType
+            );
+            if (
+                (dispositionTypeLength == 0)
+                || (tempDispositionType!.Length != dispositionType.Length)
+            )
             {
-                throw new FormatException(SR.Format(System.Globalization.CultureInfo.InvariantCulture,
-                    SR.net_http_headers_invalid_value, dispositionType));
+                throw new FormatException(
+                    SR.Format(
+                        System.Globalization.CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        dispositionType
+                    )
+                );
             }
         }
 
@@ -419,8 +471,13 @@ namespace System.Net.Http.Headers
 
             if (result.Contains('"')) // Only bounding quotes are allowed.
             {
-                throw new ArgumentException(SR.Format(CultureInfo.InvariantCulture,
-                    SR.net_http_headers_invalid_value, input));
+                throw new ArgumentException(
+                    SR.Format(
+                        CultureInfo.InvariantCulture,
+                        SR.net_http_headers_invalid_value,
+                        input
+                    )
+                );
             }
             else if (HeaderUtilities.ContainsNonAscii(result))
             {
@@ -443,10 +500,7 @@ namespace System.Net.Http.Headers
         // Returns true if the value starts and ends with a quote.
         private static bool IsQuoted(ReadOnlySpan<char> value)
         {
-            return
-                value.Length > 1 &&
-                value[0] == '"' &&
-                value[value.Length - 1] == '"';
+            return value.Length > 1 && value[0] == '"' && value[value.Length - 1] == '"';
         }
 
         // Encode using MIME encoding.
@@ -472,7 +526,12 @@ namespace System.Net.Http.Headers
 
             string[] parts = processedInput.Split('?');
             // "=, encodingName, encodingType, encodedData, ="
-            if (parts.Length != 5 || parts[0] != "\"=" || parts[4] != "=\"" || parts[2].ToLowerInvariant() != "b")
+            if (
+                parts.Length != 5
+                || parts[0] != "\"="
+                || parts[4] != "=\""
+                || parts[2].ToLowerInvariant() != "b"
+            )
             {
                 // Not encoded.
                 // This does not support multi-line encoding.
@@ -498,7 +557,6 @@ namespace System.Net.Http.Headers
             return false;
         }
 
-
         // Attempt to decode using RFC 5987 encoding.
         // encoding'language'my%20string
         private static bool TryDecode5987(string input, out string? output)
@@ -512,7 +570,10 @@ namespace System.Net.Http.Headers
             }
 
             int lastQuoteIndex = input.LastIndexOf('\'');
-            if (quoteIndex == lastQuoteIndex || input.IndexOf('\'', quoteIndex + 1) != lastQuoteIndex)
+            if (
+                quoteIndex == lastQuoteIndex
+                || input.IndexOf('\'', quoteIndex + 1) != lastQuoteIndex
+            )
             {
                 return false;
             }
@@ -532,7 +593,8 @@ namespace System.Net.Http.Headers
                     if (Uri.IsHexEncoding(dataString, index)) // %FF
                     {
                         // Unescape and cache bytes, multi-byte characters must be decoded all at once.
-                        unescapedBytes[unescapedBytesCount++] = (byte)Uri.HexUnescape(dataString, ref index);
+                        unescapedBytes[unescapedBytesCount++] = (byte)
+                            Uri.HexUnescape(dataString, ref index);
                         index--; // HexUnescape did +=3; Offset the for loop's ++
                     }
                     else
@@ -540,7 +602,9 @@ namespace System.Net.Http.Headers
                         if (unescapedBytesCount > 0)
                         {
                             // Decode any previously cached bytes.
-                            decoded.Append(encoding.GetString(unescapedBytes, 0, unescapedBytesCount));
+                            decoded.Append(
+                                encoding.GetString(unescapedBytes, 0, unescapedBytesCount)
+                            );
                             unescapedBytesCount = 0;
                         }
                         decoded.Append(dataString[index]); // Normal safe character.

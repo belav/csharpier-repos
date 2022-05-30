@@ -21,9 +21,7 @@ namespace System.Drawing.Imaging
         private byte[][]? _signaturePatterns;
         private byte[][]? _signatureMasks;
 
-        internal ImageCodecInfo()
-        {
-        }
+        internal ImageCodecInfo() { }
 
         public Guid Clsid
         {
@@ -45,14 +43,8 @@ namespace System.Drawing.Imaging
 
         public string? DllName
         {
-            get
-            {
-                return _dllName;
-            }
-            set
-            {
-                _dllName = value;
-            }
+            get { return _dllName; }
+            set { _dllName = value; }
         }
 
         public string? FormatDescription
@@ -177,7 +169,9 @@ namespace System.Drawing.Imaging
 
             for (index = 0; index < numCodecs; index++)
             {
-                ref readonly ImageCodecInfoPrivate codecp = ref ((ImageCodecInfoPrivate*)memoryStart)[index];
+                ref readonly ImageCodecInfoPrivate codecp = ref (
+                    (ImageCodecInfoPrivate*)memoryStart
+                )[index];
 
                 var codec = new ImageCodecInfo();
                 codec.Clsid = codecp.Clsid;
@@ -196,8 +190,14 @@ namespace System.Drawing.Imaging
 
                 for (int j = 0; j < codecp.SigCount; j++)
                 {
-                    codec.SignaturePatterns[j] = new ReadOnlySpan<byte>((byte*)codecp.SigPattern + j * codecp.SigSize, codecp.SigSize).ToArray();
-                    codec.SignatureMasks[j] = new ReadOnlySpan<byte>((byte*)codecp.SigMask + j * codecp.SigSize, codecp.SigSize).ToArray();
+                    codec.SignaturePatterns[j] = new ReadOnlySpan<byte>(
+                        (byte*)codecp.SigPattern + j * codecp.SigSize,
+                        codecp.SigSize
+                    ).ToArray();
+                    codec.SignatureMasks[j] = new ReadOnlySpan<byte>(
+                        (byte*)codecp.SigMask + j * codecp.SigSize,
+                        codecp.SigSize
+                    ).ToArray();
                 }
 
                 codecs[index] = codec;

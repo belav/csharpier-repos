@@ -16,38 +16,69 @@ public class SkipNavigationTest
         var joinEntityBuilder = model.AddEntityType(typeof(OrderProduct));
         var orderIdProperty = joinEntityBuilder.AddProperty(OrderProduct.OrderIdProperty);
 
-        var navigation = firstEntity.AddSkipNavigation(nameof(Order.Products), null, secondEntity, true, false);
+        var navigation = firstEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            secondEntity,
+            true,
+            false
+        );
 
         model.FinalizeModel();
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(
-                () => firstEntity.AddSkipNavigation(nameof(Order.Products), null, secondEntity, true, false)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        firstEntity.AddSkipNavigation(
+                            nameof(Order.Products),
+                            null,
+                            secondEntity,
+                            true,
+                            false
+                        )
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => firstEntity.RemoveSkipNavigation(navigation)).Message);
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => firstEntity.RemoveSkipNavigation(navigation)
+                )
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => navigation.SetInverse(null)).Message);
+            Assert.Throws<InvalidOperationException>(() => navigation.SetInverse(null)).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => navigation.SetForeignKey(null)).Message);
+            Assert.Throws<InvalidOperationException>(() => navigation.SetForeignKey(null)).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => navigation.SetField(null)).Message);
+            Assert.Throws<InvalidOperationException>(() => navigation.SetField(null)).Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => navigation.SetIsEagerLoaded(null)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => navigation.SetIsEagerLoaded(null))
+                .Message
+        );
 
         Assert.Equal(
             CoreStrings.ModelReadOnly,
-            Assert.Throws<InvalidOperationException>(() => navigation.SetPropertyAccessMode(null)).Message);
+            Assert
+                .Throws<InvalidOperationException>(() => navigation.SetPropertyAccessMode(null))
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -60,10 +91,19 @@ public class SkipNavigationTest
         var secondEntity = model.AddEntityType(typeof(Product));
         var joinEntityBuilder = model.AddEntityType(typeof(OrderProduct));
         var orderIdProperty = joinEntityBuilder.AddProperty(OrderProduct.OrderIdProperty);
-        var firstFk = joinEntityBuilder
-            .AddForeignKey(new[] { orderIdProperty }, firstKey, firstEntity);
+        var firstFk = joinEntityBuilder.AddForeignKey(
+            new[] { orderIdProperty },
+            firstKey,
+            firstEntity
+        );
 
-        var navigation = firstEntity.AddSkipNavigation(nameof(Order.Products), null, secondEntity, true, false);
+        var navigation = firstEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            secondEntity,
+            true,
+            false
+        );
         navigation.SetForeignKey(firstFk);
 
         Assert.True(navigation.IsCollection);
@@ -82,7 +122,10 @@ public class SkipNavigationTest
 
         Assert.Same(navigation, firstEntity.FindDeclaredSkipNavigation(navigation.Name));
         Assert.Same(navigation, firstEntity.FindSkipNavigation(navigation.Name));
-        Assert.Same(navigation, firstEntity.FindSkipNavigation(navigation.GetIdentifyingMemberInfo()));
+        Assert.Same(
+            navigation,
+            firstEntity.FindSkipNavigation(navigation.GetIdentifyingMemberInfo())
+        );
         Assert.Same(navigation, firstEntity.GetDeclaredSkipNavigations().Single());
     }
 
@@ -96,10 +139,19 @@ public class SkipNavigationTest
         var secondEntity = model.AddEntityType(typeof(Product));
         var joinEntityBuilder = model.AddEntityType(typeof(OrderProduct));
         var orderIdProperty = joinEntityBuilder.AddProperty(OrderProduct.OrderIdProperty);
-        var firstFk = joinEntityBuilder
-            .AddForeignKey(new[] { orderIdProperty }, firstKey, firstEntity);
+        var firstFk = joinEntityBuilder.AddForeignKey(
+            new[] { orderIdProperty },
+            firstKey,
+            firstEntity
+        );
 
-        var navigation = firstEntity.AddSkipNavigation(nameof(Order.Products), null, secondEntity, true, false);
+        var navigation = firstEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            secondEntity,
+            true,
+            false
+        );
 
         Assert.Null(navigation.ForeignKey);
         Assert.Null(navigation.GetForeignKeyConfigurationSource());
@@ -107,7 +159,10 @@ public class SkipNavigationTest
         navigation.SetForeignKey(firstFk, fromDataAnnotation: true);
 
         Assert.Same(firstFk, navigation.ForeignKey);
-        Assert.Equal(ConfigurationSource.DataAnnotation, navigation.GetForeignKeyConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.DataAnnotation,
+            navigation.GetForeignKeyConfigurationSource()
+        );
 
         navigation.SetForeignKey(null);
 
@@ -124,15 +179,37 @@ public class SkipNavigationTest
         var orderKey = orderEntity.AddKey(orderIdProperty);
         var productEntity = model.AddEntityType(typeof(Product));
         var orderProductEntity = model.AddEntityType(typeof(OrderProduct));
-        var orderProductFkProperty = orderProductEntity.AddProperty(nameof(OrderProduct.OrderId), typeof(int));
-        var orderProductForeignKey = orderProductEntity.AddForeignKey(orderProductFkProperty, orderKey, orderEntity);
+        var orderProductFkProperty = orderProductEntity.AddProperty(
+            nameof(OrderProduct.OrderId),
+            typeof(int)
+        );
+        var orderProductForeignKey = orderProductEntity.AddForeignKey(
+            orderProductFkProperty,
+            orderKey,
+            orderEntity
+        );
 
-        var navigation = orderEntity.AddSkipNavigation(nameof(Order.Products), null, productEntity, true, true);
+        var navigation = orderEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            productEntity,
+            true,
+            true
+        );
 
         Assert.Equal(
             CoreStrings.SkipNavigationForeignKeyWrongDependentType(
-                "{'" + nameof(OrderProduct.OrderId) + "'}", nameof(Order), nameof(Order.Products), nameof(OrderProduct)),
-            Assert.Throws<InvalidOperationException>(() => navigation.SetForeignKey(orderProductForeignKey)).Message);
+                "{'" + nameof(OrderProduct.OrderId) + "'}",
+                nameof(Order),
+                nameof(Order.Products),
+                nameof(OrderProduct)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => navigation.SetForeignKey(orderProductForeignKey)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -144,16 +221,37 @@ public class SkipNavigationTest
         var orderKey = orderEntity.AddKey(orderIdProperty);
         var productEntity = model.AddEntityType(typeof(Product));
         var orderProductEntity = model.AddEntityType(typeof(OrderProduct));
-        var orderProductFkProperty = orderProductEntity.AddProperty(nameof(OrderProduct.OrderId), typeof(int));
-        var orderProductForeignKey = orderProductEntity.AddForeignKey(orderProductFkProperty, orderKey, orderEntity);
+        var orderProductFkProperty = orderProductEntity.AddProperty(
+            nameof(OrderProduct.OrderId),
+            typeof(int)
+        );
+        var orderProductForeignKey = orderProductEntity.AddForeignKey(
+            orderProductFkProperty,
+            orderKey,
+            orderEntity
+        );
 
         var navigation = orderProductEntity.AddSkipNavigation(
-            nameof(OrderProduct.Order), null, orderEntity, false, false);
+            nameof(OrderProduct.Order),
+            null,
+            orderEntity,
+            false,
+            false
+        );
 
         Assert.Equal(
             CoreStrings.SkipNavigationForeignKeyWrongPrincipalType(
-                "{'" + nameof(OrderProduct.OrderId) + "'}", nameof(OrderProduct), nameof(OrderProduct.Order), nameof(Order)),
-            Assert.Throws<InvalidOperationException>(() => navigation.SetForeignKey(orderProductForeignKey)).Message);
+                "{'" + nameof(OrderProduct.OrderId) + "'}",
+                nameof(OrderProduct),
+                nameof(OrderProduct.Order),
+                nameof(Order)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => navigation.SetForeignKey(orderProductForeignKey)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -168,15 +266,33 @@ public class SkipNavigationTest
         var productKey = productEntity.AddKey(productIdProperty);
         var orderProductEntity = model.AddEntityType(typeof(OrderProduct));
         var orderProductFkProperty = orderProductEntity.AddProperty(OrderProduct.OrderIdProperty);
-        var orderProductForeignKey = orderProductEntity
-            .AddForeignKey(new[] { orderProductFkProperty }, orderKey, orderEntity);
+        var orderProductForeignKey = orderProductEntity.AddForeignKey(
+            new[] { orderProductFkProperty },
+            orderKey,
+            orderEntity
+        );
         var productFkProperty = productEntity.AddProperty("Fk", typeof(int));
-        var productOrderForeignKey = productEntity
-            .AddForeignKey(new[] { productFkProperty }, productKey, productEntity);
+        var productOrderForeignKey = productEntity.AddForeignKey(
+            new[] { productFkProperty },
+            productKey,
+            productEntity
+        );
 
-        var productsNavigation = orderEntity.AddSkipNavigation(nameof(Order.Products), null, productEntity, true, false);
+        var productsNavigation = orderEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            productEntity,
+            true,
+            false
+        );
 
-        var ordersNavigation = productEntity.AddSkipNavigation(nameof(Product.Orders), null, orderEntity, true, false);
+        var ordersNavigation = productEntity.AddSkipNavigation(
+            nameof(Product.Orders),
+            null,
+            orderEntity,
+            true,
+            false
+        );
         ordersNavigation.SetForeignKey(productOrderForeignKey);
 
         productsNavigation.SetInverse(ordersNavigation);
@@ -184,9 +300,17 @@ public class SkipNavigationTest
         Assert.Equal(
             CoreStrings.SkipInverseMismatchedForeignKey(
                 "{'" + orderProductFkProperty.Name + "'}",
-                nameof(Order.Products), nameof(OrderProduct),
-                nameof(Product.Orders), nameof(Product)),
-            Assert.Throws<InvalidOperationException>(() => productsNavigation.SetForeignKey(orderProductForeignKey)).Message);
+                nameof(Order.Products),
+                nameof(OrderProduct),
+                nameof(Product.Orders),
+                nameof(Product)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => productsNavigation.SetForeignKey(orderProductForeignKey)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -201,16 +325,34 @@ public class SkipNavigationTest
         var productKey = productEntity.AddKey(productIdProperty);
         var orderProductEntity = model.AddEntityType(typeof(OrderProduct));
         var orderProductFkProperty = orderProductEntity.AddProperty(OrderProduct.OrderIdProperty);
-        var orderProductForeignKey = orderProductEntity
-            .AddForeignKey(new[] { orderProductFkProperty }, orderKey, orderEntity);
+        var orderProductForeignKey = orderProductEntity.AddForeignKey(
+            new[] { orderProductFkProperty },
+            orderKey,
+            orderEntity
+        );
         var productOrderFkProperty = orderProductEntity.AddProperty(OrderProduct.ProductIdProperty);
-        var productOrderForeignKey = orderProductEntity
-            .AddForeignKey(new[] { productOrderFkProperty }, productKey, productEntity);
+        var productOrderForeignKey = orderProductEntity.AddForeignKey(
+            new[] { productOrderFkProperty },
+            productKey,
+            productEntity
+        );
 
-        var productsNavigation = orderEntity.AddSkipNavigation(nameof(Order.Products), null, productEntity, true, false);
+        var productsNavigation = orderEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            productEntity,
+            true,
+            false
+        );
         productsNavigation.SetForeignKey(orderProductForeignKey);
 
-        var ordersNavigation = productEntity.AddSkipNavigation(nameof(Product.Orders), null, orderEntity, true, false);
+        var ordersNavigation = productEntity.AddSkipNavigation(
+            nameof(Product.Orders),
+            null,
+            orderEntity,
+            true,
+            false
+        );
         ordersNavigation.SetForeignKey(productOrderForeignKey);
 
         productsNavigation.SetInverse(ordersNavigation);
@@ -218,20 +360,43 @@ public class SkipNavigationTest
 
         Assert.Same(ordersNavigation, productsNavigation.Inverse);
         Assert.Same(productsNavigation, ordersNavigation.Inverse);
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionSkipNavigation)productsNavigation).GetConfigurationSource());
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionSkipNavigation)ordersNavigation).GetConfigurationSource());
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionSkipNavigation)productsNavigation).GetInverseConfigurationSource());
-        Assert.Equal(ConfigurationSource.Explicit, ((IConventionSkipNavigation)ordersNavigation).GetInverseConfigurationSource());
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionSkipNavigation)productsNavigation).GetConfigurationSource()
+        );
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionSkipNavigation)ordersNavigation).GetConfigurationSource()
+        );
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionSkipNavigation)productsNavigation).GetInverseConfigurationSource()
+        );
+        Assert.Equal(
+            ConfigurationSource.Explicit,
+            ((IConventionSkipNavigation)ordersNavigation).GetInverseConfigurationSource()
+        );
 
         Assert.Equal(
             CoreStrings.SkipNavigationInUseBySkipNavigation(
-                nameof(Order), nameof(Order.Products), nameof(Product), nameof(Product.Orders)),
-            Assert.Throws<InvalidOperationException>(() => orderEntity.RemoveSkipNavigation(productsNavigation)).Message);
+                nameof(Order),
+                nameof(Order.Products),
+                nameof(Product),
+                nameof(Product.Orders)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => orderEntity.RemoveSkipNavigation(productsNavigation)
+                )
+                .Message
+        );
 
         productsNavigation.SetInverse(null);
         ordersNavigation.SetInverse(null);
 
-        Assert.Null(((IConventionSkipNavigation)productsNavigation).GetInverseConfigurationSource());
+        Assert.Null(
+            ((IConventionSkipNavigation)productsNavigation).GetInverseConfigurationSource()
+        );
         Assert.Null(((IConventionSkipNavigation)ordersNavigation).GetInverseConfigurationSource());
     }
 
@@ -247,22 +412,49 @@ public class SkipNavigationTest
         var productKey = productEntity.AddKey(productIdProperty);
         var orderProductEntity = model.AddEntityType(typeof(OrderProduct));
         var orderProductFkProperty = orderProductEntity.AddProperty(OrderProduct.OrderIdProperty);
-        var orderProductForeignKey = orderProductEntity
-            .AddForeignKey(new[] { orderProductFkProperty }, orderKey, orderEntity);
+        var orderProductForeignKey = orderProductEntity.AddForeignKey(
+            new[] { orderProductFkProperty },
+            orderKey,
+            orderEntity
+        );
         var productOrderFkProperty = orderProductEntity.AddProperty(OrderProduct.ProductIdProperty);
-        var productOrderForeignKey = orderProductEntity
-            .AddForeignKey(new[] { productOrderFkProperty }, productKey, productEntity);
+        var productOrderForeignKey = orderProductEntity.AddForeignKey(
+            new[] { productOrderFkProperty },
+            productKey,
+            productEntity
+        );
 
-        var productsNavigation = orderEntity.AddSkipNavigation(nameof(Order.Products), null, productEntity, true, false);
+        var productsNavigation = orderEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            productEntity,
+            true,
+            false
+        );
         productsNavigation.SetForeignKey(orderProductForeignKey);
 
-        var ordersNavigation = orderProductEntity.AddSkipNavigation(nameof(OrderProduct.Product), null, productEntity, false, true);
+        var ordersNavigation = orderProductEntity.AddSkipNavigation(
+            nameof(OrderProduct.Product),
+            null,
+            productEntity,
+            false,
+            true
+        );
         ordersNavigation.SetForeignKey(productOrderForeignKey);
 
         Assert.Equal(
             CoreStrings.SkipNavigationWrongInverse(
-                nameof(OrderProduct.Product), nameof(OrderProduct), nameof(Order.Products), nameof(Product)),
-            Assert.Throws<InvalidOperationException>(() => productsNavigation.SetInverse(ordersNavigation)).Message);
+                nameof(OrderProduct.Product),
+                nameof(OrderProduct),
+                nameof(Order.Products),
+                nameof(Product)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => productsNavigation.SetInverse(ordersNavigation)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -277,26 +469,52 @@ public class SkipNavigationTest
         var productKey = productEntity.AddKey(productIdProperty);
         var orderProductEntity = model.AddEntityType(typeof(OrderProduct));
         var orderProductFkProperty = orderProductEntity.AddProperty(OrderProduct.OrderIdProperty);
-        var orderProductForeignKey = orderProductEntity
-            .AddForeignKey(new[] { orderProductFkProperty }, orderKey, orderEntity);
+        var orderProductForeignKey = orderProductEntity.AddForeignKey(
+            new[] { orderProductFkProperty },
+            orderKey,
+            orderEntity
+        );
         var productFkProperty = productEntity.AddProperty("Fk", typeof(int));
-        var productOrderForeignKey = productEntity
-            .AddForeignKey(new[] { productFkProperty }, productKey, productEntity);
+        var productOrderForeignKey = productEntity.AddForeignKey(
+            new[] { productFkProperty },
+            productKey,
+            productEntity
+        );
 
-        var productsNavigation = orderEntity.AddSkipNavigation(nameof(Order.Products), null, productEntity, true, false);
+        var productsNavigation = orderEntity.AddSkipNavigation(
+            nameof(Order.Products),
+            null,
+            productEntity,
+            true,
+            false
+        );
         productsNavigation.SetForeignKey(orderProductForeignKey);
 
-        var ordersNavigation = productEntity.AddSkipNavigation(nameof(Product.Orders), null, orderEntity, true, false);
+        var ordersNavigation = productEntity.AddSkipNavigation(
+            nameof(Product.Orders),
+            null,
+            orderEntity,
+            true,
+            false
+        );
         ordersNavigation.SetForeignKey(productOrderForeignKey);
 
         Assert.Equal(
             CoreStrings.SkipInverseMismatchedJoinType(
-                nameof(Product.Orders), nameof(Product), nameof(Order.Products), nameof(OrderProduct)),
-            Assert.Throws<InvalidOperationException>(() => productsNavigation.SetInverse(ordersNavigation)).Message);
+                nameof(Product.Orders),
+                nameof(Product),
+                nameof(Order.Products),
+                nameof(OrderProduct)
+            ),
+            Assert
+                .Throws<InvalidOperationException>(
+                    () => productsNavigation.SetInverse(ordersNavigation)
+                )
+                .Message
+        );
     }
 
-    private static IMutableModel CreateModel()
-        => new Model();
+    private static IMutableModel CreateModel() => new Model();
 
     private class Order
     {
@@ -309,8 +527,12 @@ public class SkipNavigationTest
 
     private class OrderProduct
     {
-        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(nameof(OrderId));
-        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(nameof(ProductId));
+        public static readonly PropertyInfo OrderIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(OrderId)
+        );
+        public static readonly PropertyInfo ProductIdProperty = typeof(OrderProduct).GetProperty(
+            nameof(ProductId)
+        );
 
         public int OrderId { get; set; }
         public int ProductId { get; set; }

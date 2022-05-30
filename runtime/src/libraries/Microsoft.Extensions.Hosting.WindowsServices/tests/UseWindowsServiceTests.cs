@@ -13,9 +13,7 @@ namespace Microsoft.Extensions.Hosting
         [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsWindows))]
         public void DefaultsToOffOutsideOfService()
         {
-            var host = new HostBuilder()
-                .UseWindowsService()
-                .Build();
+            var host = new HostBuilder().UseWindowsService().Build();
 
             using (host)
             {

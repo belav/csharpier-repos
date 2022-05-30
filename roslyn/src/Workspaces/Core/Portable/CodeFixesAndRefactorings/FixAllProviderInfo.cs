@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
 
         private FixAllProviderInfo(
             IFixAllProvider fixAllProvider,
-            ImmutableArray<FixAllScope> supportedScopes)
+            ImmutableArray<FixAllScope> supportedScopes
+        )
         {
             FixAllProvider = fixAllProvider;
             SupportedScopes = supportedScopes;
@@ -73,7 +74,9 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         /// <summary>
         /// Gets an optional <see cref="FixAllProviderInfo"/> for the given code refactoring provider.
         /// </summary>
-        private static FixAllProviderInfo? CreateWithCodeRefactoring(CodeRefactoringProvider provider)
+        private static FixAllProviderInfo? CreateWithCodeRefactoring(
+            CodeRefactoringProvider provider
+        )
         {
             var fixAllProvider = provider.GetFixAllProvider();
             if (fixAllProvider == null)
@@ -93,7 +96,9 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
         /// <summary>
         /// Gets an optional <see cref="FixAllProviderInfo"/> for the given suppression fix provider.
         /// </summary>
-        private static FixAllProviderInfo? CreateWithSuppressionFixer(IConfigurationFixProvider provider)
+        private static FixAllProviderInfo? CreateWithSuppressionFixer(
+            IConfigurationFixProvider provider
+        )
         {
             var fixAllProvider = provider.GetFixAllProvider();
             if (fixAllProvider == null)
@@ -119,14 +124,14 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             public CodeFixerFixAllProviderInfo(
                 IFixAllProvider fixAllProvider,
                 IEnumerable<string> supportedDiagnosticIds,
-                ImmutableArray<FixAllScope> supportedScopes)
-                : base(fixAllProvider, supportedScopes)
+                ImmutableArray<FixAllScope> supportedScopes
+            ) : base(fixAllProvider, supportedScopes)
             {
                 _supportedDiagnosticIds = supportedDiagnosticIds;
             }
 
-            public override bool CanBeFixed(Diagnostic diagnostic)
-                => _supportedDiagnosticIds.Contains(diagnostic.Id);
+            public override bool CanBeFixed(Diagnostic diagnostic) =>
+                _supportedDiagnosticIds.Contains(diagnostic.Id);
         }
 
         private class SuppressionFixerFixAllProviderInfo : FixAllProviderInfo
@@ -136,27 +141,25 @@ namespace Microsoft.CodeAnalysis.CodeFixesAndRefactorings
             public SuppressionFixerFixAllProviderInfo(
                 IFixAllProvider fixAllProvider,
                 IConfigurationFixProvider suppressionFixer,
-                ImmutableArray<FixAllScope> supportedScopes)
-                : base(fixAllProvider, supportedScopes)
+                ImmutableArray<FixAllScope> supportedScopes
+            ) : base(fixAllProvider, supportedScopes)
             {
                 _canBeSuppressedOrUnsuppressed = suppressionFixer.IsFixableDiagnostic;
             }
 
-            public override bool CanBeFixed(Diagnostic diagnostic)
-                => _canBeSuppressedOrUnsuppressed(diagnostic);
+            public override bool CanBeFixed(Diagnostic diagnostic) =>
+                _canBeSuppressedOrUnsuppressed(diagnostic);
         }
 
         private class CodeRefactoringFixAllProviderInfo : FixAllProviderInfo
         {
             public CodeRefactoringFixAllProviderInfo(
                 IFixAllProvider fixAllProvider,
-                ImmutableArray<FixAllScope> supportedScopes)
-                : base(fixAllProvider, supportedScopes)
-            {
-            }
+                ImmutableArray<FixAllScope> supportedScopes
+            ) : base(fixAllProvider, supportedScopes) { }
 
-            public override bool CanBeFixed(Diagnostic diagnostic)
-                => throw ExceptionUtilities.Unreachable;
+            public override bool CanBeFixed(Diagnostic diagnostic) =>
+                throw ExceptionUtilities.Unreachable;
         }
     }
 }

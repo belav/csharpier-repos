@@ -30,20 +30,14 @@ namespace System.CommandLine.Benchmarks.CommandLine
                 new Option<string>("--vegetable").AddCompletions("asparagus", "broccoli", "carrot")
             };
 
-            _testParser = new CommandLineBuilder(eatCommand)
-                .UseSuggestDirective()
-                .Build();
+            _testParser = new CommandLineBuilder(eatCommand).UseSuggestDirective().Build();
         }
 
-        [Params(
-          "[suggest:4] \"eat\"",
-          "[suggest:13] \"eat --fruit\""
-        )]
+        [Params("[suggest:4] \"eat\"", "[suggest:13] \"eat --fruit\"")]
         public string TestCmdArgs;
 
         [Benchmark]
-        public async Task InvokeSuggest()
-            => await _testParser.InvokeAsync(TestCmdArgs, _nullConsole);
-
+        public async Task InvokeSuggest() =>
+            await _testParser.InvokeAsync(TestCmdArgs, _nullConsole);
     }
 }

@@ -13,14 +13,17 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 public class HttpSysOptions
 {
     private const uint MaximumRequestQueueNameLength = 260;
-    private const Http503VerbosityLevel DefaultRejectionVerbosityLevel = Http503VerbosityLevel.Basic; // Http.sys default.
+    private const Http503VerbosityLevel DefaultRejectionVerbosityLevel =
+        Http503VerbosityLevel.Basic; // Http.sys default.
     private const long DefaultRequestQueueLength = 1000; // Http.sys default.
     internal static readonly int DefaultMaxAccepts = 5 * Environment.ProcessorCount;
+
     // Matches the default maxAllowedContentLength in IIS (~28.6 MB)
     // https://www.iis.net/configreference/system.webserver/security/requestfiltering/requestlimits#005
     private const long DefaultMaxRequestBodySize = 30000000;
 
     private Http503VerbosityLevel _rejectionVebosityLevel = DefaultRejectionVerbosityLevel;
+
     // The native request queue
     private long _requestQueueLength = DefaultRequestQueueLength;
     private long? _maxConnections;
@@ -32,9 +35,7 @@ public class HttpSysOptions
     /// <summary>
     /// Initializes a new <see cref="HttpSysOptions"/>.
     /// </summary>
-    public HttpSysOptions()
-    {
-    }
+    public HttpSysOptions() { }
 
     /// <summary>
     /// The name of the Http.Sys request queue
@@ -46,9 +47,11 @@ public class HttpSysOptions
         {
             if (value?.Length > MaximumRequestQueueNameLength)
             {
-                throw new ArgumentOutOfRangeException(nameof(value),
-                                                      value,
-                                                      $"The request queue name should be fewer than {MaximumRequestQueueNameLength} characters in length");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    $"The request queue name should be fewer than {MaximumRequestQueueNameLength} characters in length"
+                );
             }
             _requestQueueName = value;
         }
@@ -65,7 +68,8 @@ public class HttpSysOptions
     /// This does not change the netsh 'clientcertnegotiation' binding option which will need to be enabled for
     /// ClientCertificateMethod.AllowCertificate to resolve a certificate.
     /// </summary>
-    public ClientCertificateMethod ClientCertificateMethod { get; set; } = ClientCertificateMethod.AllowCertificate;
+    public ClientCertificateMethod ClientCertificateMethod { get; set; } =
+        ClientCertificateMethod.AllowCertificate;
 
     /// <summary>
     /// Gets or sets the number of concurrent workers draining requests from the Http.sys queue.
@@ -120,7 +124,11 @@ public class HttpSysOptions
         {
             if (value.HasValue && value < -1)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The value must be positive, or -1 for infinite.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The value must be positive, or -1 for infinite."
+                );
             }
 
             if (value.HasValue && _urlGroup != null)
@@ -138,15 +146,16 @@ public class HttpSysOptions
     /// </summary>
     public long RequestQueueLimit
     {
-        get
-        {
-            return _requestQueueLength;
-        }
+        get { return _requestQueueLength; }
         set
         {
             if (value <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The value must be greater than zero.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The value must be greater than zero."
+                );
             }
 
             if (_requestQueue != null)
@@ -174,7 +183,11 @@ public class HttpSysOptions
         {
             if (value < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(value), value, "The value must be greater or equal to zero.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    value,
+                    "The value must be greater or equal to zero."
+                );
             }
             _maxRequestBodySize = value;
         }
@@ -194,10 +207,7 @@ public class HttpSysOptions
     /// </summary>
     public Http503VerbosityLevel Http503Verbosity
     {
-        get
-        {
-            return _rejectionVebosityLevel;
-        }
+        get { return _rejectionVebosityLevel; }
         set
         {
             if (value < Http503VerbosityLevel.Basic || value > Http503VerbosityLevel.Full)
@@ -205,7 +215,8 @@ public class HttpSysOptions
                 string message = String.Format(
                     CultureInfo.InvariantCulture,
                     "The value must be one of the values defined in the '{0}' enum.",
-                    typeof(Http503VerbosityLevel).Name);
+                    typeof(Http503VerbosityLevel).Name
+                );
 
                 throw new ArgumentOutOfRangeException(nameof(value), value, message);
             }

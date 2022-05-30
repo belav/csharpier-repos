@@ -23,8 +23,17 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void WriteEntry_FromUnseekableStream_AdvanceDataStream_WriteFromThatPosition()
         {
-            using MemoryStream source = GetTarMemoryStream(CompressionMethod.Uncompressed, TestTarFormat.ustar, "file");
-            using WrappedStream unseekable = new WrappedStream(source, canRead: true, canWrite: true, canSeek: false);
+            using MemoryStream source = GetTarMemoryStream(
+                CompressionMethod.Uncompressed,
+                TestTarFormat.ustar,
+                "file"
+            );
+            using WrappedStream unseekable = new WrappedStream(
+                source,
+                canRead: true,
+                canWrite: true,
+                canSeek: false
+            );
 
             using MemoryStream destination = new MemoryStream();
 
@@ -35,7 +44,9 @@ namespace System.Formats.Tar.Tests
                 Assert.NotNull(entry.DataStream);
                 entry.DataStream.ReadByte(); // Advance one byte, now the expected string would be "ello file"
 
-                using (TarWriter writer = new TarWriter(destination, TarFormat.Ustar, leaveOpen: true))
+                using (
+                    TarWriter writer = new TarWriter(destination, TarFormat.Ustar, leaveOpen: true)
+                )
                 {
                     writer.WriteEntry(entry);
                 }
@@ -48,7 +59,9 @@ namespace System.Formats.Tar.Tests
                 Assert.NotNull(entry);
                 Assert.NotNull(entry.DataStream);
 
-                using (StreamReader streamReader = new StreamReader(entry.DataStream, leaveOpen: true))
+                using (
+                    StreamReader streamReader = new StreamReader(entry.DataStream, leaveOpen: true)
+                )
                 {
                     string contents = streamReader.ReadLine();
                     Assert.Equal("ello file", contents);

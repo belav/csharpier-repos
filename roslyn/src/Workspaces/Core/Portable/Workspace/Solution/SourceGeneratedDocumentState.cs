@@ -21,7 +21,8 @@ namespace Microsoft.CodeAnalysis
             SourceText generatedSourceText,
             ParseOptions parseOptions,
             HostLanguageServices languageServices,
-            SolutionServices solutionServices)
+            SolutionServices solutionServices
+        )
         {
             var textAndVersion = TextAndVersion.Create(generatedSourceText, VersionStamp.Create());
             var textSource = new ConstantValueSource<TextAndVersion>(textAndVersion);
@@ -30,7 +31,8 @@ namespace Microsoft.CodeAnalysis
                 documentIdentity.DocumentId.ProjectId,
                 documentIdentity.FilePath,
                 parseOptions,
-                languageServices);
+                languageServices
+            );
 
             return new SourceGeneratedDocumentState(
                 documentIdentity,
@@ -44,10 +46,12 @@ namespace Microsoft.CodeAnalysis
                     parseOptions.Kind,
                     filePath: documentIdentity.FilePath,
                     isGenerated: true,
-                    designTimeOnly: false),
+                    designTimeOnly: false
+                ),
                 parseOptions,
                 textSource,
-                treeSource);
+                treeSource
+            );
         }
 
         private SourceGeneratedDocumentState(
@@ -58,8 +62,18 @@ namespace Microsoft.CodeAnalysis
             DocumentInfo.DocumentAttributes attributes,
             ParseOptions options,
             ValueSource<TextAndVersion> textSource,
-            ValueSource<TreeAndVersion> treeSource)
-            : base(languageServices, solutionServices, documentServiceProvider, attributes, options, sourceText: null, textSource, treeSource)
+            ValueSource<TreeAndVersion> treeSource
+        )
+            : base(
+                languageServices,
+                solutionServices,
+                documentServiceProvider,
+                attributes,
+                options,
+                sourceText: null,
+                textSource,
+                treeSource
+            )
         {
             Identity = documentIdentity;
         }
@@ -67,16 +81,28 @@ namespace Microsoft.CodeAnalysis
         // The base allows for parse options to be null for non-C#/VB languages, but we'll always have parse options
         public new ParseOptions ParseOptions => base.ParseOptions!;
 
-        protected override TextDocumentState UpdateText(ValueSource<TextAndVersion> newTextSource, PreservationMode mode, bool incremental)
+        protected override TextDocumentState UpdateText(
+            ValueSource<TextAndVersion> newTextSource,
+            PreservationMode mode,
+            bool incremental
+        )
         {
-            throw new NotSupportedException(WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed);
+            throw new NotSupportedException(
+                WorkspacesResources.The_contents_of_a_SourceGeneratedDocument_may_not_be_changed
+            );
         }
 
-        public SourceGeneratedDocumentState WithUpdatedGeneratedContent(SourceText sourceText, ParseOptions parseOptions)
+        public SourceGeneratedDocumentState WithUpdatedGeneratedContent(
+            SourceText sourceText,
+            ParseOptions parseOptions
+        )
         {
-            if (TryGetText(out var existingText) &&
-                Checksum.From(existingText.GetChecksum()) == Checksum.From(sourceText.GetChecksum()) &&
-                ParseOptions.Equals(parseOptions))
+            if (
+                TryGetText(out var existingText)
+                && Checksum.From(existingText.GetChecksum())
+                    == Checksum.From(sourceText.GetChecksum())
+                && ParseOptions.Equals(parseOptions)
+            )
             {
                 // We can reuse this instance directly
                 return this;
@@ -87,7 +113,8 @@ namespace Microsoft.CodeAnalysis
                 sourceText,
                 parseOptions,
                 this.LanguageServices,
-                this.solutionServices);
+                this.solutionServices
+            );
         }
 
         /// <summary>
@@ -99,14 +126,14 @@ namespace Microsoft.CodeAnalysis
         {
             public static readonly SourceGeneratedTextDocumentServiceProvider Instance = new();
 
-            private SourceGeneratedTextDocumentServiceProvider()
-            {
-            }
+            private SourceGeneratedTextDocumentServiceProvider() { }
 
-            public TService? GetService<TService>()
-                where TService : class, IDocumentService
+            public TService? GetService<TService>() where TService : class, IDocumentService
             {
-                if (SourceGeneratedDocumentOperationService.Instance is TService documentOperationService)
+                if (
+                    SourceGeneratedDocumentOperationService.Instance
+                    is TService documentOperationService
+                )
                 {
                     return documentOperationService;
                 }

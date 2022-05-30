@@ -12,11 +12,15 @@ namespace System.Formats.Tar
     // Writes header attributes of a tar archive entry.
     internal partial struct TarHeader
     {
-        private static ReadOnlySpan<byte> PaxMagicBytes => new byte[] { 0x75, 0x73, 0x74, 0x61, 0x72, 0x0 }; // "ustar\0"
-        private static ReadOnlySpan<byte> PaxVersionBytes => new byte[] { TarHelpers.ZeroChar, TarHelpers.ZeroChar }; // "00"
+        private static ReadOnlySpan<byte> PaxMagicBytes =>
+            new byte[] { 0x75, 0x73, 0x74, 0x61, 0x72, 0x0 }; // "ustar\0"
+        private static ReadOnlySpan<byte> PaxVersionBytes =>
+            new byte[] { TarHelpers.ZeroChar, TarHelpers.ZeroChar }; // "00"
 
-        private static ReadOnlySpan<byte> GnuMagicBytes => new byte[] { 0x75, 0x73, 0x74, 0x61, 0x72, TarHelpers.SpaceChar }; // "ustar "
-        private static ReadOnlySpan<byte> GnuVersionBytes => new byte[] { TarHelpers.SpaceChar, 0x0 }; // " \0"
+        private static ReadOnlySpan<byte> GnuMagicBytes =>
+            new byte[] { 0x75, 0x73, 0x74, 0x61, 0x72, TarHelpers.SpaceChar }; // "ustar "
+        private static ReadOnlySpan<byte> GnuVersionBytes =>
+            new byte[] { TarHelpers.SpaceChar, 0x0 }; // " \0"
 
         // Extended Attribute entries have a special format in the Name field:
         // "{dirName}/PaxHeaders.{processId}/{fileName}{trailingSeparator}"
@@ -30,7 +34,11 @@ namespace System.Formats.Tar
         private const string GnuLongMetadataName = "././@LongLink";
 
         // Creates a PAX Global Extended Attributes header and writes it into the specified archive stream.
-        internal static void WriteGlobalExtendedAttributesHeader(Stream archiveStream, Span<byte> buffer, IEnumerable<KeyValuePair<string, string>> globalExtendedAttributes)
+        internal static void WriteGlobalExtendedAttributesHeader(
+            Stream archiveStream,
+            Span<byte> buffer,
+            IEnumerable<KeyValuePair<string, string>> globalExtendedAttributes
+        )
         {
             TarHeader geaHeader = default;
             geaHeader._name = GenerateGlobalExtendedAttributeName();
@@ -41,7 +49,12 @@ namespace System.Formats.Tar
             geaHeader._version = string.Empty;
             geaHeader._gName = string.Empty;
             geaHeader._uName = string.Empty;
-            geaHeader.WriteAsPaxExtendedAttributes(archiveStream, buffer, globalExtendedAttributes, isGea: true);
+            geaHeader.WriteAsPaxExtendedAttributes(
+                archiveStream,
+                buffer,
+                globalExtendedAttributes,
+                isGea: true
+            );
         }
 
         // Writes the current header as a V7 entry into the archive stream.
@@ -91,7 +104,12 @@ namespace System.Formats.Tar
             // Fill the current header's dict
             CollectExtendedAttributesFromStandardFieldsIfNeeded();
             // And pass them to the extended attributes header for writing
-            extendedAttributesHeader.WriteAsPaxExtendedAttributes(archiveStream, buffer, _extendedAttributes, isGea: false);
+            extendedAttributesHeader.WriteAsPaxExtendedAttributes(
+                archiveStream,
+                buffer,
+                _extendedAttributes,
+                isGea: false
+            );
 
             buffer.Clear(); // Reset it to reuse it
             // Second, we write this header as a normal one
@@ -105,7 +123,10 @@ namespace System.Formats.Tar
             // First, we determine if we need a preceding LongLink, and write it if needed
             if (_linkName.Length > FieldLengths.LinkName)
             {
-                TarHeader longLinkHeader = GetGnuLongMetadataHeader(TarEntryType.LongLink, _linkName);
+                TarHeader longLinkHeader = GetGnuLongMetadataHeader(
+                    TarEntryType.LongLink,
+                    _linkName
+                );
                 longLinkHeader.WriteAsGnuInternal(archiveStream, buffer);
                 buffer.Clear(); // Reset it to reuse it
             }
@@ -125,8 +146,13 @@ namespace System.Formats.Tar
         // Creates and returns a GNU long metadata header, with the specified long text written into its data stream.
         private static TarHeader GetGnuLongMetadataHeader(TarEntryType entryType, string longText)
         {
-            Debug.Assert((entryType is TarEntryType.LongPath && longText.Length > FieldLengths.Name) ||
-                         (entryType is TarEntryType.LongLink && longText.Length > FieldLengths.LinkName));
+            Debug.Assert(
+                (entryType is TarEntryType.LongPath && longText.Length > FieldLengths.Name)
+                    || (
+                        entryType is TarEntryType.LongLink
+                        && longText.Length > FieldLengths.LinkName
+                    )
+            );
 
             TarHeader longMetadataHeader = default;
 
@@ -171,13 +197,20 @@ namespace System.Formats.Tar
         }
 
         // Writes the current header as a PAX Extended Attributes entry into the archive stream.
-        private void WriteAsPaxExtendedAttributes(Stream archiveStream, Span<byte> buffer, IEnumerable<KeyValuePair<string, string>> extendedAttributes, bool isGea)
+        private void WriteAsPaxExtendedAttributes(
+            Stream archiveStream,
+            Span<byte> buffer,
+            IEnumerable<KeyValuePair<string, string>> extendedAttributes,
+            bool isGea
+        )
         {
             // The ustar fields (uid, gid, linkName, uname, gname, devmajor, devminor) do not get written.
             // The mode gets the default value.
             _name = GenerateExtendedAttributeName();
             _mode = (int)TarHelpers.DefaultMode;
-            _typeFlag = isGea ? TarEntryType.GlobalExtendedAttributes : TarEntryType.ExtendedAttributes;
+            _typeFlag = isGea
+                ? TarEntryType.GlobalExtendedAttributes
+                : TarEntryType.ExtendedAttributes;
             _linkName = string.Empty;
             _magic = string.Empty;
             _version = string.Empty;
@@ -215,7 +248,10 @@ namespace System.Formats.Tar
         {
             fullNameBytes = Encoding.ASCII.GetBytes(_name);
             int nameBytesLength = Math.Min(fullNameBytes.Length, FieldLengths.Name);
-            int checksum = WriteLeftAlignedBytesAndGetChecksum(fullNameBytes.AsSpan(0, nameBytesLength), buffer.Slice(FieldLocations.Name, FieldLengths.Name));
+            int checksum = WriteLeftAlignedBytesAndGetChecksum(
+                fullNameBytes.AsSpan(0, nameBytesLength),
+                buffer.Slice(FieldLocations.Name, FieldLengths.Name)
+            );
             return checksum;
         }
 
@@ -225,14 +261,24 @@ namespace System.Formats.Tar
             int checksum = WriteName(buffer, out byte[] fullNameBytes);
             if (fullNameBytes.Length > FieldLengths.Name)
             {
-                int prefixBytesLength = Math.Min(fullNameBytes.Length - FieldLengths.Name, FieldLengths.Name);
-                checksum += WriteLeftAlignedBytesAndGetChecksum(fullNameBytes.AsSpan(FieldLengths.Name, prefixBytesLength), buffer.Slice(FieldLocations.Prefix, FieldLengths.Prefix));
+                int prefixBytesLength = Math.Min(
+                    fullNameBytes.Length - FieldLengths.Name,
+                    FieldLengths.Name
+                );
+                checksum += WriteLeftAlignedBytesAndGetChecksum(
+                    fullNameBytes.AsSpan(FieldLengths.Name, prefixBytesLength),
+                    buffer.Slice(FieldLocations.Prefix, FieldLengths.Prefix)
+                );
             }
             return checksum;
         }
 
         // Writes all the common fields shared by all formats into the specified spans.
-        private int WriteCommonFields(Span<byte> buffer, long actualLength, TarEntryType actualEntryType)
+        private int WriteCommonFields(
+            Span<byte> buffer,
+            long actualLength,
+            TarEntryType actualEntryType
+        )
         {
             int checksum = 0;
 
@@ -266,7 +312,12 @@ namespace System.Formats.Tar
 
             if (!string.IsNullOrEmpty(_linkName))
             {
-                checksum += WriteAsAsciiString(_linkName, buffer, FieldLocations.LinkName, FieldLengths.LinkName);
+                checksum += WriteAsAsciiString(
+                    _linkName,
+                    buffer,
+                    FieldLocations.LinkName,
+                    FieldLengths.LinkName
+                );
             }
 
             return checksum;
@@ -310,16 +361,28 @@ namespace System.Formats.Tar
         // Writes the magic and version fields of a ustar or pax entry into the specified spans.
         private static int WritePosixMagicAndVersion(Span<byte> buffer)
         {
-            int checksum = WriteLeftAlignedBytesAndGetChecksum(PaxMagicBytes, buffer.Slice(FieldLocations.Magic, FieldLengths.Magic));
-            checksum += WriteLeftAlignedBytesAndGetChecksum(PaxVersionBytes, buffer.Slice(FieldLocations.Version, FieldLengths.Version));
+            int checksum = WriteLeftAlignedBytesAndGetChecksum(
+                PaxMagicBytes,
+                buffer.Slice(FieldLocations.Magic, FieldLengths.Magic)
+            );
+            checksum += WriteLeftAlignedBytesAndGetChecksum(
+                PaxVersionBytes,
+                buffer.Slice(FieldLocations.Version, FieldLengths.Version)
+            );
             return checksum;
         }
 
         // Writes the magic and vresion fields of a gnu entry into the specified spans.
         private static int WriteGnuMagicAndVersion(Span<byte> buffer)
         {
-            int checksum = WriteLeftAlignedBytesAndGetChecksum(GnuMagicBytes, buffer.Slice(FieldLocations.Magic, FieldLengths.Magic));
-            checksum += WriteLeftAlignedBytesAndGetChecksum(GnuVersionBytes, buffer.Slice(FieldLocations.Version, FieldLengths.Version));
+            int checksum = WriteLeftAlignedBytesAndGetChecksum(
+                GnuMagicBytes,
+                buffer.Slice(FieldLocations.Magic, FieldLengths.Magic)
+            );
+            checksum += WriteLeftAlignedBytesAndGetChecksum(
+                GnuVersionBytes,
+                buffer.Slice(FieldLocations.Version, FieldLengths.Version)
+            );
             return checksum;
         }
 
@@ -330,22 +393,42 @@ namespace System.Formats.Tar
 
             if (!string.IsNullOrEmpty(_uName))
             {
-                checksum += WriteAsAsciiString(_uName, buffer, FieldLocations.UName, FieldLengths.UName);
+                checksum += WriteAsAsciiString(
+                    _uName,
+                    buffer,
+                    FieldLocations.UName,
+                    FieldLengths.UName
+                );
             }
 
             if (!string.IsNullOrEmpty(_gName))
             {
-                checksum += WriteAsAsciiString(_gName, buffer, FieldLocations.GName, FieldLengths.GName);
+                checksum += WriteAsAsciiString(
+                    _gName,
+                    buffer,
+                    FieldLocations.GName,
+                    FieldLengths.GName
+                );
             }
 
             if (_devMajor > 0)
             {
-                checksum += WriteAsOctal(_devMajor, buffer, FieldLocations.DevMajor, FieldLengths.DevMajor);
+                checksum += WriteAsOctal(
+                    _devMajor,
+                    buffer,
+                    FieldLocations.DevMajor,
+                    FieldLengths.DevMajor
+                );
             }
 
             if (_devMinor > 0)
             {
-                checksum += WriteAsOctal(_devMinor, buffer, FieldLocations.DevMinor, FieldLengths.DevMinor);
+                checksum += WriteAsOctal(
+                    _devMinor,
+                    buffer,
+                    FieldLocations.DevMinor,
+                    FieldLengths.DevMinor
+                );
             }
 
             return checksum;
@@ -354,12 +437,20 @@ namespace System.Formats.Tar
         // Saves the gnu-specific fields into the specified spans.
         private int WriteGnuFields(Span<byte> buffer)
         {
-            int checksum = WriteAsTimestamp(_aTime, buffer, FieldLocations.ATime, FieldLengths.ATime);
+            int checksum = WriteAsTimestamp(
+                _aTime,
+                buffer,
+                FieldLocations.ATime,
+                FieldLengths.ATime
+            );
             checksum += WriteAsTimestamp(_cTime, buffer, FieldLocations.CTime, FieldLengths.CTime);
 
             if (_gnuUnusedBytes != null)
             {
-                checksum += WriteLeftAlignedBytesAndGetChecksum(_gnuUnusedBytes, buffer.Slice(FieldLocations.GnuUnused, FieldLengths.AllGnuUnused));
+                checksum += WriteLeftAlignedBytesAndGetChecksum(
+                    _gnuUnusedBytes,
+                    buffer.Slice(FieldLocations.GnuUnused, FieldLengths.AllGnuUnused)
+                );
             }
 
             return checksum;
@@ -374,7 +465,9 @@ namespace System.Formats.Tar
         }
 
         // Dumps into the archive stream an extended attribute entry containing metadata of the entry it precedes.
-        private static Stream? GenerateExtendedAttributesDataStream(IEnumerable<KeyValuePair<string, string>> extendedAttributes)
+        private static Stream? GenerateExtendedAttributesDataStream(
+            IEnumerable<KeyValuePair<string, string>> extendedAttributes
+        )
         {
             MemoryStream? dataStream = null;
             foreach ((string attribute, string value) in extendedAttributes)
@@ -382,7 +475,10 @@ namespace System.Formats.Tar
                 // Need to do this because IEnumerable has no Count property
                 dataStream ??= new MemoryStream();
 
-                byte[] entryBytes = GenerateExtendedAttributeKeyValuePairAsByteArray(Encoding.UTF8.GetBytes(attribute), Encoding.UTF8.GetBytes(value));
+                byte[] entryBytes = GenerateExtendedAttributeKeyValuePairAsByteArray(
+                    Encoding.UTF8.GetBytes(attribute),
+                    Encoding.UTF8.GetBytes(value)
+                );
                 dataStream.Write(entryBytes);
             }
             dataStream?.Seek(0, SeekOrigin.Begin); // Ensure it gets written into the archive from the beginning
@@ -412,18 +508,32 @@ namespace System.Formats.Tar
             }
 
             // Adds the specified datetime to the dictionary as a decimal number.
-            static void AddTimestampAsUnixSeconds(Dictionary<string, string> extendedAttributes, string key, DateTimeOffset value)
+            static void AddTimestampAsUnixSeconds(
+                Dictionary<string, string> extendedAttributes,
+                string key,
+                DateTimeOffset value
+            )
             {
                 // Avoid overwriting if the user already added it before
                 if (!extendedAttributes.ContainsKey(key))
                 {
-                    double unixTimeSeconds = ((double)(value.UtcDateTime - DateTime.UnixEpoch).Ticks) / TimeSpan.TicksPerSecond;
-                    extendedAttributes.Add(key, unixTimeSeconds.ToString("F6", CultureInfo.InvariantCulture)); // 6 decimals, no commas
+                    double unixTimeSeconds =
+                        ((double)(value.UtcDateTime - DateTime.UnixEpoch).Ticks)
+                        / TimeSpan.TicksPerSecond;
+                    extendedAttributes.Add(
+                        key,
+                        unixTimeSeconds.ToString("F6", CultureInfo.InvariantCulture)
+                    ); // 6 decimals, no commas
                 }
             }
 
             // Adds the specified string to the dictionary if it's longer than the specified max byte length.
-            static void TryAddStringField(Dictionary<string, string> extendedAttributes, string key, string value, int maxLength)
+            static void TryAddStringField(
+                Dictionary<string, string> extendedAttributes,
+                string key,
+                string value,
+                int maxLength
+            )
             {
                 if (Encoding.UTF8.GetByteCount(value) > maxLength)
                 {
@@ -434,13 +544,19 @@ namespace System.Formats.Tar
 
         // Generates an extended attribute key value pair string saved into a byte array, following the ISO/IEC 10646-1:2000 standard UTF-8 encoding format.
         // https://pubs.opengroup.org/onlinepubs/9699919799/utilities/pax.html
-        private static byte[] GenerateExtendedAttributeKeyValuePairAsByteArray(byte[] keyBytes, byte[] valueBytes)
+        private static byte[] GenerateExtendedAttributeKeyValuePairAsByteArray(
+            byte[] keyBytes,
+            byte[] valueBytes
+        )
         {
             // Assuming key="ab" and value="cdef"
 
             // The " ab=cdef\n" attribute string has a length of 9 chars
-            int suffixByteCount = 3 + // leading space, equals sign and trailing newline
-                keyBytes.Length + valueBytes.Length;
+            int suffixByteCount =
+                3
+                + // leading space, equals sign and trailing newline
+                keyBytes.Length
+                + valueBytes.Length;
 
             // The count string "9" has a length of 1 char
             string suffixByteCountString = suffixByteCount.ToString();
@@ -455,7 +571,9 @@ namespace System.Formats.Tar
             string prefixAndSuffixByteCountString = firstPrefixAndSuffixByteCount.ToString();
             int realTotalCharCount = Encoding.ASCII.GetByteCount(prefixAndSuffixByteCountString);
 
-            byte[] finalTotalCharCountBytes = Encoding.ASCII.GetBytes(prefixAndSuffixByteCountString);
+            byte[] finalTotalCharCountBytes = Encoding.ASCII.GetBytes(
+                prefixAndSuffixByteCountString
+            );
 
             // The final string should contain the correct total length now
             List<byte> bytesList = new();
@@ -511,7 +629,10 @@ namespace System.Formats.Tar
         }
 
         // Writes the specified bytes into the specified destination, aligned to the left. Returns the sum of the value of all the bytes that were written.
-        private static int WriteLeftAlignedBytesAndGetChecksum(ReadOnlySpan<byte> bytesToWrite, Span<byte> destination)
+        private static int WriteLeftAlignedBytesAndGetChecksum(
+            ReadOnlySpan<byte> bytesToWrite,
+            Span<byte> destination
+        )
         {
             Debug.Assert(destination.Length > 1);
 
@@ -528,7 +649,10 @@ namespace System.Formats.Tar
 
         // Writes the specified bytes aligned to the right, filling all the leading bytes with the zero char 0x30,
         // ensuring a null terminator is included at the end of the specified span.
-        private static int WriteRightAlignedBytesAndGetChecksum(ReadOnlySpan<byte> bytesToWrite, Span<byte> destination)
+        private static int WriteRightAlignedBytesAndGetChecksum(
+            ReadOnlySpan<byte> bytesToWrite,
+            Span<byte> destination
+        )
         {
             int checksum = 0;
             int i = destination.Length - 1;
@@ -557,25 +681,46 @@ namespace System.Formats.Tar
         }
 
         // Writes the specified decimal number as a right-aligned octal number and returns its checksum.
-        internal static int WriteAsOctal(long tenBaseNumber, Span<byte> destination, int location, int length)
+        internal static int WriteAsOctal(
+            long tenBaseNumber,
+            Span<byte> destination,
+            int location,
+            int length
+        )
         {
             long octal = TarHelpers.ConvertDecimalToOctal(tenBaseNumber);
             byte[] bytes = Encoding.ASCII.GetBytes(octal.ToString());
-            return WriteRightAlignedBytesAndGetChecksum(bytes.AsSpan(), destination.Slice(location, length));
+            return WriteRightAlignedBytesAndGetChecksum(
+                bytes.AsSpan(),
+                destination.Slice(location, length)
+            );
         }
 
         // Writes the specified DateTimeOffset's Unix time seconds as a right-aligned octal number, and returns its checksum.
-        private static int WriteAsTimestamp(DateTimeOffset timestamp, Span<byte> destination, int location, int length)
+        private static int WriteAsTimestamp(
+            DateTimeOffset timestamp,
+            Span<byte> destination,
+            int location,
+            int length
+        )
         {
             long unixTimeSeconds = timestamp.ToUnixTimeSeconds();
             return WriteAsOctal(unixTimeSeconds, destination, location, length);
         }
 
         // Writes the specified text as an ASCII string aligned to the left, and returns its checksum.
-        private static int WriteAsAsciiString(string str, Span<byte> buffer, int location, int length)
+        private static int WriteAsAsciiString(
+            string str,
+            Span<byte> buffer,
+            int location,
+            int length
+        )
         {
             byte[] bytes = Encoding.ASCII.GetBytes(str);
-            return WriteLeftAlignedBytesAndGetChecksum(bytes.AsSpan(), buffer.Slice(location, length));
+            return WriteLeftAlignedBytesAndGetChecksum(
+                bytes.AsSpan(),
+                buffer.Slice(location, length)
+            );
         }
 
         // Gets the special name for the 'name' field in an extended attribute entry.
@@ -593,8 +738,10 @@ namespace System.Formats.Tar
             string? fileName = Path.GetFileName(_name);
             fileName = string.IsNullOrEmpty(fileName) ? "." : fileName;
 
-            string trailingSeparator = (_typeFlag is TarEntryType.Directory or TarEntryType.DirectoryList) ?
-                $"{Path.DirectorySeparatorChar}" : string.Empty;
+            string trailingSeparator =
+                (_typeFlag is TarEntryType.Directory or TarEntryType.DirectoryList)
+                    ? $"{Path.DirectorySeparatorChar}"
+                    : string.Empty;
 
             return string.Format(PaxHeadersFormat, dirName, processId, fileName, trailingSeparator);
         }

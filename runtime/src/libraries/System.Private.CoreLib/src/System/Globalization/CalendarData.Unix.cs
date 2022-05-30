@@ -9,8 +9,11 @@ namespace System.Globalization
             IcuLoadCalendarDataFromSystem(localeName, calendarId);
 
 #pragma warning disable IDE0060
-        internal static int GetCalendarsCore(string localeName, bool useUserOverride, CalendarId[] calendars) =>
-            IcuGetCalendars(localeName, calendars);
+        internal static int GetCalendarsCore(
+            string localeName,
+            bool useUserOverride,
+            CalendarId[] calendars
+        ) => IcuGetCalendars(localeName, calendars);
 #pragma warning restore IDE0060
-     }
+    }
 }

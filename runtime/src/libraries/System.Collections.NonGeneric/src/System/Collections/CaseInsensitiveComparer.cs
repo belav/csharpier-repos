@@ -33,10 +33,7 @@ namespace System.Collections
 
         public static CaseInsensitiveComparer Default
         {
-            get
-            {
-                return new CaseInsensitiveComparer(CultureInfo.CurrentCulture);
-            }
+            get { return new CaseInsensitiveComparer(CultureInfo.CurrentCulture); }
         }
 
         public static CaseInsensitiveComparer DefaultInvariant
@@ -45,7 +42,9 @@ namespace System.Collections
             {
                 if (s_InvariantCaseInsensitiveComparer == null)
                 {
-                    s_InvariantCaseInsensitiveComparer = new CaseInsensitiveComparer(CultureInfo.InvariantCulture);
+                    s_InvariantCaseInsensitiveComparer = new CaseInsensitiveComparer(
+                        CultureInfo.InvariantCulture
+                    );
                 }
                 return s_InvariantCaseInsensitiveComparer;
             }

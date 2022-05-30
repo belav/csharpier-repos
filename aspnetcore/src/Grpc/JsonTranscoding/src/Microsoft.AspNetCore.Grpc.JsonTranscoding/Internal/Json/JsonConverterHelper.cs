@@ -18,7 +18,10 @@ internal static class JsonConverterHelper
 {
     internal const int WrapperValueFieldNumber = Int32Value.ValueFieldNumber;
 
-    internal static JsonSerializerOptions CreateSerializerOptions(JsonContext context, bool isStreamingOptions = false)
+    internal static JsonSerializerOptions CreateSerializerOptions(
+        JsonContext context,
+        bool isStreamingOptions = false
+    )
     {
         // Streaming is line delimited between messages. That means JSON can't be indented as it adds new lines.
         // For streaming to work, indenting must be disabled when streaming.
@@ -93,7 +96,14 @@ internal static class JsonConverterHelper
 
     internal static MessageDescriptor? GetMessageDescriptor(Type typeToConvert)
     {
-        var property = typeToConvert.GetProperty("Descriptor", BindingFlags.Static | BindingFlags.Public, binder: null, typeof(MessageDescriptor), Type.EmptyTypes, modifiers: null);
+        var property = typeToConvert.GetProperty(
+            "Descriptor",
+            BindingFlags.Static | BindingFlags.Public,
+            binder: null,
+            typeof(MessageDescriptor),
+            Type.EmptyTypes,
+            modifiers: null
+        );
         if (property == null)
         {
             return null;
@@ -102,7 +112,12 @@ internal static class JsonConverterHelper
         return property.GetValue(null, null) as MessageDescriptor;
     }
 
-    public static void PopulateMap(ref Utf8JsonReader reader, JsonSerializerOptions options, IMessage message, FieldDescriptor fieldDescriptor)
+    public static void PopulateMap(
+        ref Utf8JsonReader reader,
+        JsonSerializerOptions options,
+        IMessage message,
+        FieldDescriptor fieldDescriptor
+    )
     {
         var mapFields = fieldDescriptor.MessageType.Fields.InFieldNumberOrder();
         var mapKey = mapFields[0];
@@ -112,7 +127,8 @@ internal static class JsonConverterHelper
         var valueType = GetFieldType(mapValue);
 
         var repeatedFieldType = typeof(Dictionary<,>).MakeGenericType(keyType, valueType);
-        var newValues = (IDictionary)JsonSerializer.Deserialize(ref reader, repeatedFieldType, options)!;
+        var newValues = (IDictionary)
+            JsonSerializer.Deserialize(ref reader, repeatedFieldType, options)!;
 
         var existingValue = (IDictionary)fieldDescriptor.Accessor.GetValue(message);
         foreach (DictionaryEntry item in newValues)
@@ -121,7 +137,12 @@ internal static class JsonConverterHelper
         }
     }
 
-    public static void PopulateList(ref Utf8JsonReader reader, JsonSerializerOptions options, IMessage message, FieldDescriptor fieldDescriptor)
+    public static void PopulateList(
+        ref Utf8JsonReader reader,
+        JsonSerializerOptions options,
+        IMessage message,
+        FieldDescriptor fieldDescriptor
+    )
     {
         var fieldType = GetFieldType(fieldDescriptor);
         var repeatedFieldType = typeof(List<>).MakeGenericType(fieldType);

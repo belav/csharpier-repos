@@ -76,8 +76,8 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IInternalServiceCollectionMap AddDependencySingleton<TDependencies>()
-        => AddDependency(typeof(TDependencies), ServiceLifetime.Singleton);
+    public virtual IInternalServiceCollectionMap AddDependencySingleton<TDependencies>() =>
+        AddDependency(typeof(TDependencies), ServiceLifetime.Singleton);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -85,8 +85,8 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IInternalServiceCollectionMap AddDependencyScoped<TDependencies>()
-        => AddDependency(typeof(TDependencies), ServiceLifetime.Scoped);
+    public virtual IInternalServiceCollectionMap AddDependencyScoped<TDependencies>() =>
+        AddDependency(typeof(TDependencies), ServiceLifetime.Scoped);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -94,17 +94,23 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IInternalServiceCollectionMap AddDependency(Type serviceType, ServiceLifetime lifetime)
+    public virtual IInternalServiceCollectionMap AddDependency(
+        Type serviceType,
+        ServiceLifetime lifetime
+    )
     {
         var indexes = GetOrCreateDescriptorIndexes(serviceType);
         if (!indexes.Any())
         {
             AddNewDescriptor(indexes, new ServiceDescriptor(serviceType, serviceType, lifetime));
         }
-        else if (indexes.Count > 1
-                 || ServiceCollection[indexes[0]].ImplementationType != serviceType)
+        else if (
+            indexes.Count > 1 || ServiceCollection[indexes[0]].ImplementationType != serviceType
+        )
         {
-            throw new InvalidOperationException(CoreStrings.BadDependencyRegistration(serviceType.Name));
+            throw new InvalidOperationException(
+                CoreStrings.BadDependencyRegistration(serviceType.Name)
+            );
         }
 
         return this;
@@ -131,8 +137,7 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
     /// </remarks>
     /// <typeparam name="TService">The service contract.</typeparam>
     /// <returns>The map, such that further calls can be chained.</returns>
-    public virtual InternalServiceCollectionMap DoPatchInjection<TService>()
-        where TService : class
+    public virtual InternalServiceCollectionMap DoPatchInjection<TService>() where TService : class
     {
         if (_serviceMap.TryGetValue(typeof(TService), out var indexes))
         {
@@ -149,13 +154,15 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
                     {
                         AddNewDescriptor(
                             implementationIndexes,
-                            new ServiceDescriptor(implementationType, implementationType, lifetime));
+                            new ServiceDescriptor(implementationType, implementationType, lifetime)
+                        );
                     }
 
                     var injectedDescriptor = new ServiceDescriptor(
                         typeof(TService),
                         p => InjectServices(p, implementationType),
-                        lifetime);
+                        lifetime
+                    );
 
                     ServiceCollection[index] = injectedDescriptor;
                 }
@@ -164,7 +171,8 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
                     var injectedDescriptor = new ServiceDescriptor(
                         typeof(TService),
                         p => InjectServices(p, descriptor.ImplementationFactory),
-                        lifetime);
+                        lifetime
+                    );
 
                     ServiceCollection[index] = injectedDescriptor;
                 }
@@ -174,7 +182,8 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
                         typeof(TService),
                         // TODO: What should we do here? Can annotate InjectServices to accept null, but then it has to return it too...
                         p => InjectServices(p, descriptor.ImplementationInstance!),
-                        lifetime);
+                        lifetime
+                    );
 
                     ServiceCollection[index] = injectedDescriptor;
                 }
@@ -200,7 +209,10 @@ public class InternalServiceCollectionMap : IInternalServiceCollectionMap
         return service;
     }
 
-    private static object InjectServices(IServiceProvider serviceProvider, Func<IServiceProvider, object> implementationFactory)
+    private static object InjectServices(
+        IServiceProvider serviceProvider,
+        Func<IServiceProvider, object> implementationFactory
+    )
     {
         var service = implementationFactory(serviceProvider);
 

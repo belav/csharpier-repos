@@ -24,7 +24,7 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
     internal static class RazorCSharpFormattingInteractionService
     {
         /// <summary>
-        /// Returns the text changes necessary to format the document after the user enters a 
+        /// Returns the text changes necessary to format the document after the user enters a
         /// character.  The position provided is the position of the caret in the document after
         /// the character been inserted into the document.
         /// </summary>
@@ -34,12 +34,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             char typedChar,
             int position,
             DocumentOptionSet documentOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
             var formattingService = document.GetRequiredLanguageService<ISyntaxFormattingService>();
 
-            if (!await formattingService.ShouldFormatOnTypedCharacterAsync(document, typedChar, position, cancellationToken).ConfigureAwait(false))
+            if (
+                !await formattingService
+                    .ShouldFormatOnTypedCharacterAsync(
+                        document,
+                        typedChar,
+                        position,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            )
             {
                 return ImmutableArray<TextChange>.Empty;
             }
@@ -48,21 +58,37 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
 
             var services = document.Project.Solution.Workspace.Services;
             var globalOptions = services.GetRequiredService<ILegacyGlobalOptionsWorkspaceService>();
-            var optionsProvider = (OptionsProvider<SyntaxFormattingOptions>)globalOptions.CleanCodeGenerationOptionsProvider;
-            var fallbackOptions = await optionsProvider.GetOptionsAsync(languageServices, cancellationToken).ConfigureAwait(false);
+            var optionsProvider =
+                (OptionsProvider<SyntaxFormattingOptions>)
+                    globalOptions.CleanCodeGenerationOptionsProvider;
+            var fallbackOptions = await optionsProvider
+                .GetOptionsAsync(languageServices, cancellationToken)
+                .ConfigureAwait(false);
             var optionService = services.GetRequiredService<IOptionService>();
-            var configOptions = documentOptions.AsAnalyzerConfigOptions(optionService, document.Project.Language);
+            var configOptions = documentOptions.AsAnalyzerConfigOptions(
+                optionService,
+                document.Project.Language
+            );
 
-            var indentationOptions = new IndentationOptions(formattingService.GetFormattingOptions(configOptions, fallbackOptions))
+            var indentationOptions = new IndentationOptions(
+                formattingService.GetFormattingOptions(configOptions, fallbackOptions)
+            )
             {
                 AutoFormattingOptions = globalOptions.GetAutoFormattingOptions(languageServices)
             };
 
-            return await formattingService.GetFormattingChangesOnTypedCharacterAsync(document, position, indentationOptions, cancellationToken).ConfigureAwait(false);
+            return await formattingService
+                .GetFormattingChangesOnTypedCharacterAsync(
+                    document,
+                    position,
+                    indentationOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         /// <summary>
-        /// Returns the text changes necessary to format the document after the user enters a 
+        /// Returns the text changes necessary to format the document after the user enters a
         /// character.  The position provided is the position of the caret in the document after
         /// the character been inserted into the document.
         /// </summary>
@@ -73,12 +99,22 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             RazorIndentationOptions indentationOptions,
             RazorAutoFormattingOptions autoFormattingOptions,
             FormattingOptions.IndentStyle indentStyle,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(document.Project.Language is LanguageNames.CSharp);
             var formattingService = document.GetRequiredLanguageService<ISyntaxFormattingService>();
 
-            if (!await formattingService.ShouldFormatOnTypedCharacterAsync(document, typedChar, position, cancellationToken).ConfigureAwait(false))
+            if (
+                !await formattingService
+                    .ShouldFormatOnTypedCharacterAsync(
+                        document,
+                        typedChar,
+                        position,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false)
+            )
             {
                 return ImmutableArray<TextChange>.Empty;
             }
@@ -90,7 +126,14 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
                 IndentStyle = (FormattingOptions2.IndentStyle)indentStyle
             };
 
-            return await formattingService.GetFormattingChangesOnTypedCharacterAsync(document, position, roslynIndentationOptions, cancellationToken).ConfigureAwait(false);
+            return await formattingService
+                .GetFormattingChangesOnTypedCharacterAsync(
+                    document,
+                    position,
+                    roslynIndentationOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public static IList<TextChange> GetFormattedTextChanges(
@@ -98,29 +141,46 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.Razor
             SyntaxNode root,
             TextSpan span,
             RazorIndentationOptions indentationOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(root.Language is LanguageNames.CSharp);
-            return Formatter.GetFormattedTextChanges(root, span, services, GetFormattingOptions(indentationOptions), cancellationToken);
+            return Formatter.GetFormattedTextChanges(
+                root,
+                span,
+                services,
+                GetFormattingOptions(indentationOptions),
+                cancellationToken
+            );
         }
 
         public static SyntaxNode Format(
             HostWorkspaceServices services,
             SyntaxNode root,
             RazorIndentationOptions indentationOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfFalse(root.Language is LanguageNames.CSharp);
-            return Formatter.Format(root, services, GetFormattingOptions(indentationOptions), cancellationToken: cancellationToken);
+            return Formatter.Format(
+                root,
+                services,
+                GetFormattingOptions(indentationOptions),
+                cancellationToken: cancellationToken
+            );
         }
 
-        private static SyntaxFormattingOptions GetFormattingOptions(RazorIndentationOptions indentationOptions)
-            => CSharpSyntaxFormattingOptions.Default.With(new LineFormattingOptions()
-            {
-                UseTabs = indentationOptions.UseTabs,
-                TabSize = indentationOptions.TabSize,
-                IndentationSize = indentationOptions.IndentationSize,
-                NewLine = CSharpSyntaxFormattingOptions.Default.NewLine
-            });
+        private static SyntaxFormattingOptions GetFormattingOptions(
+            RazorIndentationOptions indentationOptions
+        ) =>
+            CSharpSyntaxFormattingOptions.Default.With(
+                new LineFormattingOptions()
+                {
+                    UseTabs = indentationOptions.UseTabs,
+                    TabSize = indentationOptions.TabSize,
+                    IndentationSize = indentationOptions.IndentationSize,
+                    NewLine = CSharpSyntaxFormattingOptions.Default.NewLine
+                }
+            );
     }
 }

@@ -14,7 +14,11 @@ using LSP = Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.LanguageServer
 {
-    internal readonly record struct RequestHandlerMetadata(string MethodName, Type RequestType, Type ResponseType);
+    internal readonly record struct RequestHandlerMetadata(
+        string MethodName,
+        Type RequestType,
+        Type ResponseType
+    );
 
     /// <summary>
     /// Aggregates handlers for the specified languages and dispatches LSP requests
@@ -22,31 +26,49 @@ namespace Microsoft.CodeAnalysis.LanguageServer
     /// </summary>
     internal class RequestDispatcher : ILspService
     {
-        private readonly ImmutableDictionary<RequestHandlerMetadata, Lazy<IRequestHandler>> _requestHandlers;
+        private readonly ImmutableDictionary<
+            RequestHandlerMetadata,
+            Lazy<IRequestHandler>
+        > _requestHandlers;
 
         public RequestDispatcher(LspServices lspServices)
         {
             _requestHandlers = CreateMethodToHandlerMap(lspServices);
         }
 
-        private static ImmutableDictionary<RequestHandlerMetadata, Lazy<IRequestHandler>> CreateMethodToHandlerMap(LspServices lspServices)
+        private static ImmutableDictionary<
+            RequestHandlerMetadata,
+            Lazy<IRequestHandler>
+        > CreateMethodToHandlerMap(LspServices lspServices)
         {
-            var requestHandlerDictionary = ImmutableDictionary.CreateBuilder<RequestHandlerMetadata, Lazy<IRequestHandler>>();
+            var requestHandlerDictionary = ImmutableDictionary.CreateBuilder<
+                RequestHandlerMetadata,
+                Lazy<IRequestHandler>
+            >();
 
-            var requestHandlerTypes = lspServices.GetRegisteredServices().Where(type => IsTypeRequestHandler(type));
+            var requestHandlerTypes = lspServices
+                .GetRegisteredServices()
+                .Where(type => IsTypeRequestHandler(type));
 
             foreach (var handlerType in requestHandlerTypes)
             {
-                var (requestType, responseType) = ConvertHandlerTypeToRequestResponseTypes(handlerType);
+                var (requestType, responseType) = ConvertHandlerTypeToRequestResponseTypes(
+                    handlerType
+                );
                 var method = GetRequestHandlerMethod(handlerType);
 
                 // Using the lazy set of handlers, create a lazy instance that will resolve the set of handlers for the provider
                 // and then lookup the correct handler for the specified method.
-                requestHandlerDictionary.Add(new RequestHandlerMetadata(method, requestType, responseType), new Lazy<IRequestHandler>(() =>
-                {
-                    Contract.ThrowIfFalse(lspServices.TryGetService(handlerType, out var lspService));
-                    return (IRequestHandler)lspService;
-                }));
+                requestHandlerDictionary.Add(
+                    new RequestHandlerMetadata(method, requestType, responseType),
+                    new Lazy<IRequestHandler>(() =>
+                    {
+                        Contract.ThrowIfFalse(
+                            lspServices.TryGetService(handlerType, out var lspService)
+                        );
+                        return (IRequestHandler)lspService;
+                    })
+                );
             }
 
             return requestHandlerDictionary.ToImmutable();
@@ -54,8 +76,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             static string GetRequestHandlerMethod(Type handlerType)
             {
                 // Get the LSP method name from the handler's method name attribute.
-                var methodAttribute = Attribute.GetCustomAttribute(handlerType, typeof(MethodAttribute)) as MethodAttribute;
-                Contract.ThrowIfNull(methodAttribute, $"{handlerType.FullName} is missing Method attribute");
+                var methodAttribute =
+                    Attribute.GetCustomAttribute(handlerType, typeof(MethodAttribute))
+                    as MethodAttribute;
+                Contract.ThrowIfNull(
+                    methodAttribute,
+                    $"{handlerType.FullName} is missing Method attribute"
+                );
 
                 return methodAttribute.Method;
             }
@@ -69,13 +96,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         /// <summary>
         /// Retrieves the generic argument information from the request handler type without instantiating it.
         /// </summary>
-        private static (Type requestType, Type responseType) ConvertHandlerTypeToRequestResponseTypes(Type handlerType)
+        private static (Type requestType, Type responseType) ConvertHandlerTypeToRequestResponseTypes(
+            Type handlerType
+        )
         {
-            var requestHandlerGenericType = handlerType.GetInterfaces().Where(i => i.IsGenericType && i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>)).SingleOrDefault();
-            Contract.ThrowIfNull(requestHandlerGenericType, $"Provided handler type {handlerType.FullName} does not implement IRequestHandler<,>");
+            var requestHandlerGenericType = handlerType
+                .GetInterfaces()
+                .Where(
+                    i =>
+                        i.IsGenericType
+                        && i.GetGenericTypeDefinition() == typeof(IRequestHandler<,>)
+                )
+                .SingleOrDefault();
+            Contract.ThrowIfNull(
+                requestHandlerGenericType,
+                $"Provided handler type {handlerType.FullName} does not implement IRequestHandler<,>"
+            );
 
             var genericArguments = requestHandlerGenericType.GetGenericArguments();
-            Contract.ThrowIfFalse(genericArguments.Length == 2, $"Provided handler type {handlerType.FullName} does not have exactly two generic arguments");
+            Contract.ThrowIfFalse(
+                genericArguments.Length == 2,
+                $"Provided handler type {handlerType.FullName} does not have exactly two generic arguments"
+            );
             var requestType = genericArguments[0];
             var responseType = genericArguments[1];
 
@@ -87,10 +129,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             TRequestType request,
             LSP.ClientCapabilities clientCapabilities,
             RequestExecutionQueue queue,
-            CancellationToken cancellationToken) where TRequestType : class
+            CancellationToken cancellationToken
+        ) where TRequestType : class
         {
             // Get the handler matching the requested method.
-            var requestHandlerMetadata = new RequestHandlerMetadata(methodName, typeof(TRequestType), typeof(TResponseType));
+            var requestHandlerMetadata = new RequestHandlerMetadata(
+                methodName,
+                typeof(TRequestType),
+                typeof(TResponseType)
+            );
 
             var handler = _requestHandlers[requestHandlerMetadata].Value;
 
@@ -98,9 +145,22 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             var requiresLspSolution = handler.RequiresLSPSolution;
 
             var strongHandler = (IRequestHandler<TRequestType, TResponseType>?)handler;
-            Contract.ThrowIfNull(strongHandler, string.Format("Request handler not found for method {0}", methodName));
+            Contract.ThrowIfNull(
+                strongHandler,
+                string.Format("Request handler not found for method {0}", methodName)
+            );
 
-            var result = await ExecuteRequestAsync(queue, mutatesSolutionState, requiresLspSolution, strongHandler, request, clientCapabilities, methodName, cancellationToken).ConfigureAwait(false);
+            var result = await ExecuteRequestAsync(
+                    queue,
+                    mutatesSolutionState,
+                    requiresLspSolution,
+                    strongHandler,
+                    request,
+                    clientCapabilities,
+                    methodName,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             return result;
         }
 
@@ -112,9 +172,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer
             TRequestType request,
             LSP.ClientCapabilities clientCapabilities,
             string methodName,
-            CancellationToken cancellationToken) where TRequestType : class
+            CancellationToken cancellationToken
+        ) where TRequestType : class
         {
-            return queue.ExecuteAsync(mutatesSolutionState, requiresLSPSolution, handler, request, clientCapabilities, methodName, cancellationToken);
+            return queue.ExecuteAsync(
+                mutatesSolutionState,
+                requiresLSPSolution,
+                handler,
+                request,
+                clientCapabilities,
+                methodName,
+                cancellationToken
+            );
         }
 
         public ImmutableArray<RequestHandlerMetadata> GetRegisteredMethods()

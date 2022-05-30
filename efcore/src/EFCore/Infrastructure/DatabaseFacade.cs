@@ -11,7 +11,10 @@ namespace Microsoft.EntityFrameworkCore.Infrastructure;
 ///     Instances of this class are typically obtained from <see cref="DbContext.Database" /> and it is not designed
 ///     to be directly constructed in your application code.
 /// </summary>
-public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacadeDependenciesAccessor, IResettableService
+public class DatabaseFacade
+    : IInfrastructure<IServiceProvider>,
+        IDatabaseFacadeDependenciesAccessor,
+        IResettableService
 {
     private readonly DbContext _context;
     private IDatabaseFacadeDependencies? _dependencies;
@@ -27,8 +30,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
         _context = context;
     }
 
-    private IDatabaseFacadeDependencies Dependencies
-        => _dependencies ??= _context.GetService<IDatabaseFacadeDependencies>();
+    private IDatabaseFacadeDependencies Dependencies =>
+        _dependencies ??= _context.GetService<IDatabaseFacadeDependencies>();
 
     /// <summary>
     ///     Ensures that the database for the context exists.
@@ -71,8 +74,7 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     </para>
     /// </remarks>
     /// <returns><see langword="true" /> if the database is created, <see langword="false" /> if it already existed.</returns>
-    public virtual bool EnsureCreated()
-        => Dependencies.DatabaseCreator.EnsureCreated();
+    public virtual bool EnsureCreated() => Dependencies.DatabaseCreator.EnsureCreated();
 
     /// <summary>
     ///     Ensures that the database for the context exists.
@@ -127,8 +129,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     <see langword="false" /> if it already existed.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default)
-        => Dependencies.DatabaseCreator.EnsureCreatedAsync(cancellationToken);
+    public virtual Task<bool> EnsureCreatedAsync(CancellationToken cancellationToken = default) =>
+        Dependencies.DatabaseCreator.EnsureCreatedAsync(cancellationToken);
 
     /// <summary>
     ///     <para>
@@ -152,8 +154,7 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     </para>
     /// </remarks>
     /// <returns><see langword="true" /> if the database is deleted, <see langword="false" /> if it did not exist.</returns>
-    public virtual bool EnsureDeleted()
-        => Dependencies.DatabaseCreator.EnsureDeleted();
+    public virtual bool EnsureDeleted() => Dependencies.DatabaseCreator.EnsureDeleted();
 
     /// <summary>
     ///     <para>
@@ -189,8 +190,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     <see langword="false" /> if it did not exist.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default)
-        => Dependencies.DatabaseCreator.EnsureDeletedAsync(cancellationToken);
+    public virtual Task<bool> EnsureDeletedAsync(CancellationToken cancellationToken = default) =>
+        Dependencies.DatabaseCreator.EnsureDeletedAsync(cancellationToken);
 
     /// <summary>
     ///     Determines whether or not the database is available and can be connected to.
@@ -212,8 +213,7 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     </para>
     /// </remarks>
     /// <returns><see langword="true" /> if the database is available; <see langword="false" /> otherwise.</returns>
-    public virtual bool CanConnect()
-        => Dependencies.DatabaseCreator.CanConnect();
+    public virtual bool CanConnect() => Dependencies.DatabaseCreator.CanConnect();
 
     /// <summary>
     ///     Determines whether or not the database is available and can be connected to.
@@ -244,8 +244,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns><see langword="true" /> if the database is available; <see langword="false" /> otherwise.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default)
-        => Dependencies.DatabaseCreator.CanConnectAsync(cancellationToken);
+    public virtual Task<bool> CanConnectAsync(CancellationToken cancellationToken = default) =>
+        Dependencies.DatabaseCreator.CanConnectAsync(cancellationToken);
 
     /// <summary>
     ///     Starts a new transaction.
@@ -256,8 +256,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// <returns>
     ///     A <see cref="IDbContextTransaction" /> that represents the started transaction.
     /// </returns>
-    public virtual IDbContextTransaction BeginTransaction()
-        => Dependencies.TransactionManager.BeginTransaction();
+    public virtual IDbContextTransaction BeginTransaction() =>
+        Dependencies.TransactionManager.BeginTransaction();
 
     /// <summary>
     ///     Asynchronously starts a new transaction.
@@ -280,14 +280,14 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     that represents the started transaction.
     /// </returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task<IDbContextTransaction> BeginTransactionAsync(CancellationToken cancellationToken = default)
-        => Dependencies.TransactionManager.BeginTransactionAsync(cancellationToken);
+    public virtual Task<IDbContextTransaction> BeginTransactionAsync(
+        CancellationToken cancellationToken = default
+    ) => Dependencies.TransactionManager.BeginTransactionAsync(cancellationToken);
 
     /// <summary>
     ///     Applies the outstanding operations in the current transaction to the database.
     /// </summary>
-    public virtual void CommitTransaction()
-        => Dependencies.TransactionManager.CommitTransaction();
+    public virtual void CommitTransaction() => Dependencies.TransactionManager.CommitTransaction();
 
     /// <summary>
     ///     Applies the outstanding operations in the current transaction to the database.
@@ -307,8 +307,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A Task representing the asynchronous operation.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task CommitTransactionAsync(CancellationToken cancellationToken = default)
-        => Dependencies.TransactionManager.CommitTransactionAsync(cancellationToken);
+    public virtual Task CommitTransactionAsync(CancellationToken cancellationToken = default) =>
+        Dependencies.TransactionManager.CommitTransactionAsync(cancellationToken);
 
     /// <summary>
     ///     Discards the outstanding operations in the current transaction.
@@ -316,8 +316,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// <remarks>
     ///     See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
     /// </remarks>
-    public virtual void RollbackTransaction()
-        => Dependencies.TransactionManager.RollbackTransaction();
+    public virtual void RollbackTransaction() =>
+        Dependencies.TransactionManager.RollbackTransaction();
 
     /// <summary>
     ///     Discards the outstanding operations in the current transaction.
@@ -337,8 +337,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// <param name="cancellationToken">A <see cref="CancellationToken" /> to observe while waiting for the task to complete.</param>
     /// <returns>A Task representing the asynchronous operation.</returns>
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
-    public virtual Task RollbackTransactionAsync(CancellationToken cancellationToken = default)
-        => Dependencies.TransactionManager.RollbackTransactionAsync(cancellationToken);
+    public virtual Task RollbackTransactionAsync(CancellationToken cancellationToken = default) =>
+        Dependencies.TransactionManager.RollbackTransactionAsync(cancellationToken);
 
     /// <summary>
     ///     Creates an instance of the configured <see cref="IExecutionStrategy" />.
@@ -348,8 +348,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     for more information and examples.
     /// </remarks>
     /// <returns>An <see cref="IExecutionStrategy" /> instance.</returns>
-    public virtual IExecutionStrategy CreateExecutionStrategy()
-        => Dependencies.ExecutionStrategyFactory.Create();
+    public virtual IExecutionStrategy CreateExecutionStrategy() =>
+        Dependencies.ExecutionStrategyFactory.Create();
 
     /// <summary>
     ///     Gets the current <see cref="IDbContextTransaction" /> being used by the context, or null
@@ -372,8 +372,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///         See <see href="https://aka.ms/efcore-docs-transactions">Transactions in EF Core</see> for more information and examples.
     ///     </para>
     /// </remarks>
-    public virtual IDbContextTransaction? CurrentTransaction
-        => Dependencies.TransactionManager.CurrentTransaction;
+    public virtual IDbContextTransaction? CurrentTransaction =>
+        Dependencies.TransactionManager.CurrentTransaction;
 
     /// <summary>
     ///     Gets or sets a value indicating whether or not a transaction will be created
@@ -440,9 +440,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// </remarks>
     public virtual string? ProviderName
         // Needs to be lazy because used from OnModelCreating
-        => _context.GetService<IEnumerable<IDatabaseProvider>>()
-            .Select(p => p.Name)
-            .FirstOrDefault();
+        =>
+        _context.GetService<IEnumerable<IDatabaseProvider>>().Select(p => p.Name).FirstOrDefault();
 
     /// <summary>
     ///     <para>
@@ -457,8 +456,8 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     See <see href="https://aka.ms/efcore-docs-providers">Implementation of database providers and extensions</see>
     ///     for more information and examples.
     /// </remarks>
-    IServiceProvider IInfrastructure<IServiceProvider>.Instance
-        => ((IInfrastructure<IServiceProvider>)_context).Instance;
+    IServiceProvider IInfrastructure<IServiceProvider>.Instance =>
+        ((IInfrastructure<IServiceProvider>)_context).Instance;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -467,8 +466,7 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    IDatabaseFacadeDependencies IDatabaseFacadeDependenciesAccessor.Dependencies
-        => Dependencies;
+    IDatabaseFacadeDependencies IDatabaseFacadeDependenciesAccessor.Dependencies => Dependencies;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -477,8 +475,7 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    DbContext IDatabaseFacadeDependenciesAccessor.Context
-        => _context;
+    DbContext IDatabaseFacadeDependenciesAccessor.Context => _context;
 
     /// <inheritdoc />
     void IResettableService.ResetState()
@@ -501,8 +498,7 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -510,16 +506,14 @@ public class DatabaseFacade : IInfrastructure<IServiceProvider>, IDatabaseFacade
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

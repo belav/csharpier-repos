@@ -19,26 +19,27 @@ namespace TestUtilities;
 /// </summary>
 public sealed class TestEventListener : EventListener
 {
-    public static string[] NetworkingEvents => new[]
-    {
-        "System.Net.Http",
-        "System.Net.NameResolution",
-        "System.Net.Sockets",
-        "System.Net.Security",
-        "System.Net.TestLogging",
-        "Private.InternalDiagnostics.System.Net.Http",
-        "Private.InternalDiagnostics.System.Net.NameResolution",
-        "Private.InternalDiagnostics.System.Net.Sockets",
-        "Private.InternalDiagnostics.System.Net.Security",
-        "Private.InternalDiagnostics.System.Net.Quic",
-        "Private.InternalDiagnostics.System.Net.Http.WinHttpHandler",
-        "Private.InternalDiagnostics.System.Net.HttpListener",
-        "Private.InternalDiagnostics.System.Net.Mail",
-        "Private.InternalDiagnostics.System.Net.NetworkInformation",
-        "Private.InternalDiagnostics.System.Net.Ping",
-        "Private.InternalDiagnostics.System.Net.Primitives",
-        "Private.InternalDiagnostics.System.Net.Requests",
-    };
+    public static string[] NetworkingEvents =>
+        new[]
+        {
+            "System.Net.Http",
+            "System.Net.NameResolution",
+            "System.Net.Sockets",
+            "System.Net.Security",
+            "System.Net.TestLogging",
+            "Private.InternalDiagnostics.System.Net.Http",
+            "Private.InternalDiagnostics.System.Net.NameResolution",
+            "Private.InternalDiagnostics.System.Net.Sockets",
+            "Private.InternalDiagnostics.System.Net.Security",
+            "Private.InternalDiagnostics.System.Net.Quic",
+            "Private.InternalDiagnostics.System.Net.Http.WinHttpHandler",
+            "Private.InternalDiagnostics.System.Net.HttpListener",
+            "Private.InternalDiagnostics.System.Net.Mail",
+            "Private.InternalDiagnostics.System.Net.NetworkInformation",
+            "Private.InternalDiagnostics.System.Net.Ping",
+            "Private.InternalDiagnostics.System.Net.Primitives",
+            "Private.InternalDiagnostics.System.Net.Requests",
+        };
 
     private readonly Action<string> _writeFunc;
     private readonly HashSet<string> _sourceNames;
@@ -47,12 +48,10 @@ public sealed class TestEventListener : EventListener
     private List<EventSource> _eventSources = new List<EventSource>();
 
     public TestEventListener(TextWriter output, params string[] sourceNames)
-        : this(str => output.WriteLine(str), sourceNames)
-    { }
+        : this(str => output.WriteLine(str), sourceNames) { }
 
     public TestEventListener(ITestOutputHelper output, params string[] sourceNames)
-        : this(str => output.WriteLine(str), sourceNames)
-    { }
+        : this(str => output.WriteLine(str), sourceNames) { }
 
     public TestEventListener(Action<string> writeFunc, params string[] sourceNames)
     {
@@ -90,7 +89,9 @@ public sealed class TestEventListener : EventListener
     protected override void OnEventWritten(EventWrittenEventArgs eventData)
     {
 #if NETCOREAPP2_2_OR_GREATER || NETSTANDARD2_1_OR_GREATER
-        var sb = new StringBuilder().Append($"{eventData.TimeStamp:HH:mm:ss.fffffff}[{eventData.EventName}] ");
+        var sb = new StringBuilder().Append(
+            $"{eventData.TimeStamp:HH:mm:ss.fffffff}[{eventData.EventName}] "
+        );
 #else
         var sb = new StringBuilder().Append($"[{eventData.EventName}] ");
 #endif

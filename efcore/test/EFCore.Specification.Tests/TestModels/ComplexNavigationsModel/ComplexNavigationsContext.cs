@@ -5,10 +5,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.ComplexNavigationsModel;
 
 public class ComplexNavigationsContext : PoolableDbContext
 {
-    public ComplexNavigationsContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+    public ComplexNavigationsContext(DbContextOptions options) : base(options) { }
 
     public DbSet<Level1> LevelOne { get; set; }
     public DbSet<Level2> LevelTwo { get; set; }

@@ -14,8 +14,8 @@ public class TestIndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer<IR
         _compareAnnotations = compareAnnotations;
     }
 
-    public int Compare(IReadOnlyIndex x, IReadOnlyIndex y)
-        => PropertyListComparer.Instance.Compare(x.Properties, y.Properties);
+    public int Compare(IReadOnlyIndex x, IReadOnlyIndex y) =>
+        PropertyListComparer.Instance.Compare(x.Properties, y.Properties);
 
     public bool Equals(IReadOnlyIndex x, IReadOnlyIndex y)
     {
@@ -27,10 +27,14 @@ public class TestIndexComparer : IEqualityComparer<IReadOnlyIndex>, IComparer<IR
         return y == null
             ? false
             : PropertyListComparer.Instance.Equals(x.Properties, y.Properties)
-            && x.IsUnique == y.IsUnique
-            && (!_compareAnnotations || x.GetAnnotations().SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance));
+                && x.IsUnique == y.IsUnique
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
     }
 
-    public int GetHashCode(IReadOnlyIndex obj)
-        => PropertyListComparer.Instance.GetHashCode(obj.Properties);
+    public int GetHashCode(IReadOnlyIndex obj) =>
+        PropertyListComparer.Instance.GetHashCode(obj.Properties);
 }

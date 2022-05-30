@@ -19,7 +19,10 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
     private readonly CancellationToken _cancellationToken;
     private readonly CancellationTokenRegistration _cancellationRegistration;
 
-    internal ResponseStreamAsyncResult(ResponseBody responseStream, CancellationToken cancellationToken)
+    internal ResponseStreamAsyncResult(
+        ResponseBody responseStream,
+        CancellationToken cancellationToken
+    )
     {
         _responseStream = responseStream;
         _tcs = new TaskCompletionSource<object?>();
@@ -27,15 +30,20 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         var cancellationRegistration = default(CancellationTokenRegistration);
         if (cancellationToken.CanBeCanceled)
         {
-            cancellationRegistration = _responseStream.RequestContext.RegisterForCancellation(cancellationToken);
+            cancellationRegistration = _responseStream.RequestContext.RegisterForCancellation(
+                cancellationToken
+            );
         }
         _cancellationToken = cancellationToken;
         _cancellationRegistration = cancellationRegistration;
     }
 
-    internal ResponseStreamAsyncResult(ResponseBody responseStream, ArraySegment<byte> data, bool chunked,
-        CancellationToken cancellationToken)
-        : this(responseStream, cancellationToken)
+    internal ResponseStreamAsyncResult(
+        ResponseBody responseStream,
+        ArraySegment<byte> data,
+        bool chunked,
+        CancellationToken cancellationToken
+    ) : this(responseStream, cancellationToken)
     {
         var boundHandle = _responseStream.RequestContext.Server.RequestQueue.BoundHandle;
         object[] objectsToPin;
@@ -43,8 +51,10 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         if (data.Count == 0)
         {
             _dataChunks = null;
-            _overlapped = new SafeNativeOverlapped(boundHandle,
-                boundHandle.AllocateNativeOverlapped(IOCallback, this, null));
+            _overlapped = new SafeNativeOverlapped(
+                boundHandle,
+                boundHandle.AllocateNativeOverlapped(IOCallback, this, null)
+            );
             return;
         }
 
@@ -58,40 +68,68 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         if (chunked)
         {
             chunkHeaderBuffer = Helpers.GetChunkHeader(data.Count);
-            SetDataChunk(_dataChunks, ref currentChunk, objectsToPin, ref currentPin, chunkHeaderBuffer);
+            SetDataChunk(
+                _dataChunks,
+                ref currentChunk,
+                objectsToPin,
+                ref currentPin,
+                chunkHeaderBuffer
+            );
         }
 
         SetDataChunk(_dataChunks, ref currentChunk, objectsToPin, ref currentPin, data);
 
         if (chunked)
         {
-            SetDataChunk(_dataChunks, ref currentChunk, objectsToPin, ref currentPin, new ArraySegment<byte>(Helpers.CRLF));
+            SetDataChunk(
+                _dataChunks,
+                ref currentChunk,
+                objectsToPin,
+                ref currentPin,
+                new ArraySegment<byte>(Helpers.CRLF)
+            );
         }
 
         // This call will pin needed memory
-        _overlapped = new SafeNativeOverlapped(boundHandle,
-            boundHandle.AllocateNativeOverlapped(IOCallback, this, objectsToPin));
+        _overlapped = new SafeNativeOverlapped(
+            boundHandle,
+            boundHandle.AllocateNativeOverlapped(IOCallback, this, objectsToPin)
+        );
 
         currentChunk = 0;
         if (chunked)
         {
-            _dataChunks[currentChunk].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(chunkHeaderBuffer.Array!, chunkHeaderBuffer.Offset);
+            _dataChunks[currentChunk].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(
+                chunkHeaderBuffer.Array!,
+                chunkHeaderBuffer.Offset
+            );
             currentChunk++;
         }
 
-        _dataChunks[currentChunk].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(data.Array!, data.Offset);
+        _dataChunks[currentChunk].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(
+            data.Array!,
+            data.Offset
+        );
         currentChunk++;
 
         if (chunked)
         {
-            _dataChunks[currentChunk].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(Helpers.CRLF, 0);
+            _dataChunks[currentChunk].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(
+                Helpers.CRLF,
+                0
+            );
             currentChunk++;
         }
     }
 
-    internal ResponseStreamAsyncResult(ResponseBody responseStream, FileStream fileStream, long offset,
-        long count, bool chunked, CancellationToken cancellationToken)
-        : this(responseStream, cancellationToken)
+    internal ResponseStreamAsyncResult(
+        ResponseBody responseStream,
+        FileStream fileStream,
+        long offset,
+        long count,
+        bool chunked,
+        CancellationToken cancellationToken
+    ) : this(responseStream, cancellationToken)
     {
         var boundHandle = responseStream.RequestContext.Server.RequestQueue.BoundHandle;
 
@@ -100,8 +138,10 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         if (count == 0)
         {
             _dataChunks = null;
-            _overlapped = new SafeNativeOverlapped(boundHandle,
-                boundHandle.AllocateNativeOverlapped(IOCallback, this, null));
+            _overlapped = new SafeNativeOverlapped(
+                boundHandle,
+                boundHandle.AllocateNativeOverlapped(IOCallback, this, null)
+            );
         }
         else
         {
@@ -114,46 +154,72 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
             if (chunked)
             {
                 chunkHeaderBuffer = Helpers.GetChunkHeader(count);
-                _dataChunks[0].DataChunkType = HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                _dataChunks[0].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromMemory;
                 _dataChunks[0].fromMemory.BufferLength = (uint)chunkHeaderBuffer.Count;
                 objectsToPin[0] = chunkHeaderBuffer.Array!;
 
-                _dataChunks[1].DataChunkType = HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromFileHandle;
+                _dataChunks[1].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromFileHandle;
                 _dataChunks[1].fromFile.offset = (ulong)offset;
                 _dataChunks[1].fromFile.count = (ulong)count;
-                _dataChunks[1].fromFile.fileHandle = _fileStream.SafeFileHandle.DangerousGetHandle();
+                _dataChunks[1].fromFile.fileHandle =
+                    _fileStream.SafeFileHandle.DangerousGetHandle();
                 // Nothing to pin for the file handle.
 
-                _dataChunks[2].DataChunkType = HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+                _dataChunks[2].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromMemory;
                 _dataChunks[2].fromMemory.BufferLength = (uint)Helpers.CRLF.Length;
                 objectsToPin[1] = Helpers.CRLF;
             }
             else
             {
-                _dataChunks[0].DataChunkType = HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromFileHandle;
+                _dataChunks[0].DataChunkType = HttpApiTypes
+                    .HTTP_DATA_CHUNK_TYPE
+                    .HttpDataChunkFromFileHandle;
                 _dataChunks[0].fromFile.offset = (ulong)offset;
                 _dataChunks[0].fromFile.count = (ulong)count;
-                _dataChunks[0].fromFile.fileHandle = _fileStream.SafeFileHandle.DangerousGetHandle();
+                _dataChunks[0].fromFile.fileHandle =
+                    _fileStream.SafeFileHandle.DangerousGetHandle();
             }
 
             // This call will pin needed memory
-            _overlapped = new SafeNativeOverlapped(boundHandle,
-                boundHandle.AllocateNativeOverlapped(IOCallback, this, objectsToPin));
+            _overlapped = new SafeNativeOverlapped(
+                boundHandle,
+                boundHandle.AllocateNativeOverlapped(IOCallback, this, objectsToPin)
+            );
 
             if (chunked)
             {
                 // These must be set after pinning with Overlapped.
-                _dataChunks[0].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(chunkHeaderBuffer.Array!, chunkHeaderBuffer.Offset);
-                _dataChunks[2].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(Helpers.CRLF, 0);
+                _dataChunks[0].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(
+                    chunkHeaderBuffer.Array!,
+                    chunkHeaderBuffer.Offset
+                );
+                _dataChunks[2].fromMemory.pBuffer = Marshal.UnsafeAddrOfPinnedArrayElement(
+                    Helpers.CRLF,
+                    0
+                );
             }
         }
     }
 
-    private static void SetDataChunk(HttpApiTypes.HTTP_DATA_CHUNK[] chunks, ref int chunkIndex, object[] objectsToPin, ref int pinIndex, ArraySegment<byte> segment)
+    private static void SetDataChunk(
+        HttpApiTypes.HTTP_DATA_CHUNK[] chunks,
+        ref int chunkIndex,
+        object[] objectsToPin,
+        ref int pinIndex,
+        ArraySegment<byte> segment
+    )
     {
         objectsToPin[pinIndex] = segment.Array!;
         pinIndex++;
-        chunks[chunkIndex].DataChunkType = HttpApiTypes.HTTP_DATA_CHUNK_TYPE.HttpDataChunkFromMemory;
+        chunks[chunkIndex].DataChunkType = HttpApiTypes
+            .HTTP_DATA_CHUNK_TYPE
+            .HttpDataChunkFromMemory;
         // The address is not set until after we pin it with Overlapped
         chunks[chunkIndex].fromMemory.BufferLength = (uint)segment.Count;
         chunkIndex++;
@@ -200,7 +266,9 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
             }
             else
             {
-                return (HttpApiTypes.HTTP_DATA_CHUNK*)(Marshal.UnsafeAddrOfPinnedArrayElement(_dataChunks, 0));
+                return (HttpApiTypes.HTTP_DATA_CHUNK*)(
+                    Marshal.UnsafeAddrOfPinnedArrayElement(_dataChunks, 0)
+                );
             }
         }
     }
@@ -217,7 +285,10 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
         var logger = asyncResult._responseStream.RequestContext.Logger;
         try
         {
-            if (errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS && errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_HANDLE_EOF)
+            if (
+                errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS
+                && errorCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_HANDLE_EOF
+            )
             {
                 if (asyncResult._cancellationToken.IsCancellationRequested)
                 {
@@ -226,7 +297,10 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
                 }
                 else if (asyncResult._responseStream.ThrowWriteExceptions)
                 {
-                    var exception = new IOException(string.Empty, new HttpSysException((int)errorCode));
+                    var exception = new IOException(
+                        string.Empty,
+                        new HttpSysException((int)errorCode)
+                    );
                     Log.WriteError(logger, exception);
                     asyncResult.Fail(exception);
                 }
@@ -262,7 +336,8 @@ internal sealed unsafe partial class ResponseStreamAsyncResult : IAsyncResult, I
 
     private static unsafe void Callback(uint errorCode, uint _, NativeOverlapped* nativeOverlapped)
     {
-        var asyncResult = (ResponseStreamAsyncResult)ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
+        var asyncResult = (ResponseStreamAsyncResult)
+            ThreadPoolBoundHandle.GetNativeOverlappedState(nativeOverlapped)!;
         IOCompleted(asyncResult, errorCode);
     }
 

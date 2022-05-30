@@ -30,7 +30,9 @@ public class DeveloperExceptionPageMiddleware
     private readonly DiagnosticSource _diagnosticSource;
     private readonly ExceptionDetailsProvider _exceptionDetailsProvider;
     private readonly Func<ErrorContext, Task> _exceptionHandler;
-    private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue("text/html");
+    private static readonly MediaTypeHeaderValue _textHtmlMediaType = new MediaTypeHeaderValue(
+        "text/html"
+    );
 
     /// <summary>
     /// Initializes a new instance of the <see cref="DeveloperExceptionPageMiddleware"/> class
@@ -47,7 +49,8 @@ public class DeveloperExceptionPageMiddleware
         ILoggerFactory loggerFactory,
         IWebHostEnvironment hostingEnvironment,
         DiagnosticSource diagnosticSource,
-        IEnumerable<IDeveloperPageExceptionFilter> filters)
+        IEnumerable<IDeveloperPageExceptionFilter> filters
+    )
     {
         if (next == null)
         {
@@ -69,13 +72,18 @@ public class DeveloperExceptionPageMiddleware
         _logger = loggerFactory.CreateLogger<DeveloperExceptionPageMiddleware>();
         _fileProvider = _options.FileProvider ?? hostingEnvironment.ContentRootFileProvider;
         _diagnosticSource = diagnosticSource;
-        _exceptionDetailsProvider = new ExceptionDetailsProvider(_fileProvider, _logger, _options.SourceCodeLineCount);
+        _exceptionDetailsProvider = new ExceptionDetailsProvider(
+            _fileProvider,
+            _logger,
+            _options.SourceCodeLineCount
+        );
         _exceptionHandler = DisplayException;
 
         foreach (var filter in filters.Reverse())
         {
             var nextFilter = _exceptionHandler;
-            _exceptionHandler = errorContext => filter.HandleExceptionAsync(errorContext, nextFilter);
+            _exceptionHandler = errorContext =>
+                filter.HandleExceptionAsync(errorContext, nextFilter);
         }
     }
 
@@ -119,7 +127,11 @@ public class DeveloperExceptionPageMiddleware
                 const string eventName = "Microsoft.AspNetCore.Diagnostics.UnhandledException";
                 if (_diagnosticSource.IsEnabled(eventName))
                 {
-                    WriteDiagnosticEvent(_diagnosticSource, eventName, new { httpContext = context, exception = ex });
+                    WriteDiagnosticEvent(
+                        _diagnosticSource,
+                        eventName,
+                        new { httpContext = context, exception = ex }
+                    );
                 }
 
                 return;
@@ -132,10 +144,16 @@ public class DeveloperExceptionPageMiddleware
             throw;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026",
-            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency.")]
-        static void WriteDiagnosticEvent<TValue>(DiagnosticSource diagnosticSource, string name, TValue value)
-            => diagnosticSource.Write(name, value);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026",
+            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency."
+        )]
+        static void WriteDiagnosticEvent<TValue>(
+            DiagnosticSource diagnosticSource,
+            string name,
+            TValue value
+        ) => diagnosticSource.Write(name, value);
     }
 
     // Assumes the response headers have not been sent.  If they have, still attempt to write to the body.
@@ -173,7 +191,8 @@ public class DeveloperExceptionPageMiddleware
 
     private Task DisplayCompilationException(
         HttpContext context,
-        ICompilationException compilationException)
+        ICompilationException compilationException
+    )
     {
         var model = new CompilationErrorPageModel(_options);
 
@@ -192,7 +211,10 @@ public class DeveloperExceptionPageMiddleware
             }
 
             var stackFrames = new List<StackFrameSourceCodeInfo>();
-            var exceptionDetails = new ExceptionDetails(compilationFailure.FailureSummary!, stackFrames);
+            var exceptionDetails = new ExceptionDetails(
+                compilationFailure.FailureSummary!,
+                stackFrames
+            );
             model.ErrorDetails.Add(exceptionDetails);
             model.CompiledContent.Add(compilationFailure.CompiledContent);
 
@@ -201,9 +223,10 @@ public class DeveloperExceptionPageMiddleware
                 continue;
             }
 
-            var sourceLines = compilationFailure
-                    .SourceFileContent?
-                    .Split(new[] { Environment.NewLine }, StringSplitOptions.None);
+            var sourceLines = compilationFailure.SourceFileContent?.Split(
+                new[] { Environment.NewLine },
+                StringSplitOptions.None
+            );
 
             foreach (var item in compilationFailure.Messages)
             {
@@ -221,7 +244,12 @@ public class DeveloperExceptionPageMiddleware
 
                 if (sourceLines != null)
                 {
-                    _exceptionDetailsProvider.ReadFrameContent(frame, sourceLines, item.StartLine, item.EndLine);
+                    _exceptionDetailsProvider.ReadFrameContent(
+                        frame,
+                        sourceLines,
+                        item.StartLine,
+                        item.EndLine
+                    );
                 }
 
                 frame.ErrorDetails = item.Message;
@@ -261,7 +289,9 @@ public class DeveloperExceptionPageMiddleware
 
         if (ex is BadHttpRequestException badHttpRequestException)
         {
-            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(badHttpRequestException.StatusCode);
+            var badRequestReasonPhrase = WebUtilities.ReasonPhrases.GetReasonPhrase(
+                badHttpRequestException.StatusCode
+            );
 
             if (!string.IsNullOrEmpty(badRequestReasonPhrase))
             {

@@ -12,6 +12,7 @@ namespace Microsoft.NET.HostModel.ComHost
     public class ComHost
     {
         private const int E_INVALIDARG = unchecked((int)0x80070057);
+
         // These need to match RESOURCEID_CLSIDMAP and RESOURCETYPE_CLSIDMAP defined in comhost.h.
         private const int ClsidmapResourceId = 64;
         private const int ClsidmapResourceType = 1024;
@@ -27,7 +28,8 @@ namespace Microsoft.NET.HostModel.ComHost
             string comHostSourceFilePath,
             string comHostDestinationFilePath,
             string clsidmapFilePath,
-            IReadOnlyDictionary<int, string> typeLibraries = null)
+            IReadOnlyDictionary<int, string> typeLibraries = null
+        )
         {
             var destinationDirectory = new FileInfo(comHostDestinationFilePath).Directory.FullName;
             if (!Directory.Exists(destinationDirectory))
@@ -48,14 +50,21 @@ namespace Microsoft.NET.HostModel.ComHost
 
             using (ResourceUpdater updater = new ResourceUpdater(comHostDestinationFilePath))
             {
-                updater.AddResource(clsidMapBytes, (IntPtr)ClsidmapResourceType, (IntPtr)ClsidmapResourceId);
+                updater.AddResource(
+                    clsidMapBytes,
+                    (IntPtr)ClsidmapResourceType,
+                    (IntPtr)ClsidmapResourceId
+                );
                 if (typeLibraries is not null)
                 {
                     foreach (var typeLibrary in typeLibraries)
                     {
                         if (!ResourceUpdater.IsIntResource((IntPtr)typeLibrary.Key))
                         {
-                            throw new InvalidTypeLibraryIdException(typeLibrary.Value, typeLibrary.Key);
+                            throw new InvalidTypeLibraryIdException(
+                                typeLibrary.Value,
+                                typeLibrary.Key
+                            );
                         }
 
                         try

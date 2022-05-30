@@ -31,7 +31,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
         //
         // we want to provide better context based brace completion but IBraceCompletionContext is too simple for that.
         // fortunately, editor provides another extension point where we have more control over brace completion but we do not
-        // want to re-implement logics base session provider already provides. so I ported editor's default session and 
+        // want to re-implement logics base session provider already provides. so I ported editor's default session and
         // modified it little bit so that we can use it as base class.
         private class BraceCompletionSession : IBraceCompletionSession
         {
@@ -49,16 +49,26 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
             private readonly IThreadingContext _threadingContext;
 
             public BraceCompletionSession(
-                ITextView textView, ITextBuffer subjectBuffer,
-                SnapshotPoint openingPoint, char openingBrace, char closingBrace, ITextUndoHistory undoHistory,
-                IEditorOperationsFactoryService editorOperationsFactoryService, IBraceCompletionService service,
-                IGlobalOptionService globalOptions, IThreadingContext threadingContext)
+                ITextView textView,
+                ITextBuffer subjectBuffer,
+                SnapshotPoint openingPoint,
+                char openingBrace,
+                char closingBrace,
+                ITextUndoHistory undoHistory,
+                IEditorOperationsFactoryService editorOperationsFactoryService,
+                IBraceCompletionService service,
+                IGlobalOptionService globalOptions,
+                IThreadingContext threadingContext
+            )
             {
                 TextView = textView;
                 SubjectBuffer = subjectBuffer;
                 OpeningBrace = openingBrace;
                 ClosingBrace = closingBrace;
-                ClosingPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(openingPoint.Position, PointTrackingMode.Positive);
+                ClosingPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(
+                    openingPoint.Position,
+                    PointTrackingMode.Positive
+                );
                 _undoHistory = undoHistory;
                 _editorOperations = editorOperationsFactoryService.GetEditorOperations(textView);
                 _service = service;
@@ -99,7 +109,10 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                     return false;
                 }
 
-                OpeningPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(openingSnapshotPoint, PointTrackingMode.Positive);
+                OpeningPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(
+                    openingSnapshotPoint,
+                    PointTrackingMode.Positive
+                );
 
                 var context = GetBraceCompletionContext();
                 if (context == null)
@@ -107,27 +120,44 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                     return false;
                 }
 
-                var braceResult = _service.GetBraceCompletionAsync(context.Value, cancellationToken).WaitAndGetResult(cancellationToken);
+                var braceResult = _service
+                    .GetBraceCompletionAsync(context.Value, cancellationToken)
+                    .WaitAndGetResult(cancellationToken);
                 if (braceResult == null)
                 {
                     return false;
                 }
 
-                using var caretPreservingTransaction = new CaretPreservingEditTransaction(EditorFeaturesResources.Brace_Completion, _undoHistory, _editorOperations);
+                using var caretPreservingTransaction = new CaretPreservingEditTransaction(
+                    EditorFeaturesResources.Brace_Completion,
+                    _undoHistory,
+                    _editorOperations
+                );
 
                 // Apply the change to complete the brace.
                 ApplyBraceCompletionResult(braceResult.Value);
 
                 // switch the closing point from positive to negative tracking so that the closing point stays against the closing brace
-                ClosingPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot), PointTrackingMode.Negative);
+                ClosingPoint = SubjectBuffer.CurrentSnapshot.CreateTrackingPoint(
+                    ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot),
+                    PointTrackingMode.Negative
+                );
 
                 var contextAfterStart = GetBraceCompletionContext();
                 if (contextAfterStart != null)
                 {
                     var document = contextAfterStart.Value.Document;
-                    var indentationOptions = document.GetIndentationOptionsAsync(_globalOptions, cancellationToken).WaitAndGetResult(cancellationToken);
+                    var indentationOptions = document
+                        .GetIndentationOptionsAsync(_globalOptions, cancellationToken)
+                        .WaitAndGetResult(cancellationToken);
 
-                    var changesAfterStart = _service.GetTextChangesAfterCompletionAsync(contextAfterStart.Value, indentationOptions, cancellationToken).WaitAndGetResult(cancellationToken);
+                    var changesAfterStart = _service
+                        .GetTextChangesAfterCompletionAsync(
+                            contextAfterStart.Value,
+                            indentationOptions,
+                            cancellationToken
+                        )
+                        .WaitAndGetResult(cancellationToken);
                     if (changesAfterStart != null)
                     {
                         ApplyBraceCompletionResult(changesAfterStart.Value);
@@ -146,13 +176,20 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 var caretPos = this.GetCaretPosition();
                 var snapshot = SubjectBuffer.CurrentSnapshot;
 
-                if (caretPos.HasValue && caretPos.Value.Position > 0 && (caretPos.Value.Position - 1) == OpeningPoint.GetPoint(snapshot).Position
-                    && !HasForwardTyping)
+                if (
+                    caretPos.HasValue
+                    && caretPos.Value.Position > 0
+                    && (caretPos.Value.Position - 1) == OpeningPoint.GetPoint(snapshot).Position
+                    && !HasForwardTyping
+                )
                 {
                     using var undo = CreateUndoTransaction();
                     using var edit = SubjectBuffer.CreateEdit();
 
-                    var span = new SnapshotSpan(OpeningPoint.GetPoint(snapshot), ClosingPoint.GetPoint(snapshot));
+                    var span = new SnapshotSpan(
+                        OpeningPoint.GetPoint(snapshot),
+                        ClosingPoint.GetPoint(snapshot)
+                    );
 
                     edit.Delete(span);
 
@@ -164,7 +201,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                     }
                     else
                     {
-                        // handle the command so the backspace does 
+                        // handle the command so the backspace does
                         // not go through since we've already cleared the braces
                         handledCommand = true;
                         edit.ApplyAndLogExceptions();
@@ -174,9 +211,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
             }
 
-            public void PostBackspace()
-            {
-            }
+            public void PostBackspace() { }
 
             public void PreOverType(out bool handledCommand)
             {
@@ -197,16 +232,25 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 {
                     var caretPos = this.GetCaretPosition();
 
-                    Debug.Assert(caretPos.HasValue && caretPos.Value.Position < closingSnapshotPoint.Position);
+                    Debug.Assert(
+                        caretPos.HasValue && caretPos.Value.Position < closingSnapshotPoint.Position
+                    );
 
                     // ensure that we are within the session before clearing
-                    if (caretPos.HasValue && caretPos.Value.Position < closingSnapshotPoint.Position && closingSnapshotPoint.Position > 0)
+                    if (
+                        caretPos.HasValue
+                        && caretPos.Value.Position < closingSnapshotPoint.Position
+                        && closingSnapshotPoint.Position > 0
+                    )
                     {
                         using var undo = CreateUndoTransaction();
 
                         _editorOperations.AddBeforeTextBufferChangePrimitive();
 
-                        var span = new SnapshotSpan(caretPos.Value, closingSnapshotPoint.Subtract(1));
+                        var span = new SnapshotSpan(
+                            caretPos.Value,
+                            closingSnapshotPoint.Subtract(1)
+                        );
 
                         using var edit = SubjectBuffer.CreateEdit();
 
@@ -238,13 +282,14 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 bool AllowOverType()
                 {
                     var context = GetBraceCompletionContext();
-                    return context != null && _service.AllowOverTypeAsync(context.Value, cancellationToken).WaitAndGetResult(cancellationToken);
+                    return context != null
+                        && _service
+                            .AllowOverTypeAsync(context.Value, cancellationToken)
+                            .WaitAndGetResult(cancellationToken);
                 }
             }
 
-            public void PostOverType()
-            {
-            }
+            public void PostOverType() { }
 
             public void PreTab(out bool handledCommand)
             {
@@ -267,8 +312,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
             }
 
-            public void PreReturn(out bool handledCommand)
-                => handledCommand = false;
+            public void PreReturn(out bool handledCommand) => handledCommand = false;
 
             public void PostReturn()
             {
@@ -277,7 +321,13 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 {
                     var closingSnapshotPoint = ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot);
 
-                    if (closingSnapshotPoint.Position > 0 && HasNoForwardTyping(this.GetCaretPosition().Value, closingSnapshotPoint.Subtract(1)))
+                    if (
+                        closingSnapshotPoint.Position > 0
+                        && HasNoForwardTyping(
+                            this.GetCaretPosition().Value,
+                            closingSnapshotPoint.Subtract(1)
+                        )
+                    )
                     {
                         var context = GetBraceCompletionContext();
                         if (context == null)
@@ -285,11 +335,24 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                             return;
                         }
 
-                        var indentationOptions = context.Value.Document.GetIndentationOptionsAsync(_globalOptions, CancellationToken.None).WaitAndGetResult(CancellationToken.None);
-                        var changesAfterReturn = _service.GetTextChangeAfterReturnAsync(context.Value, indentationOptions, CancellationToken.None).WaitAndGetResult(CancellationToken.None);
+                        var indentationOptions = context.Value.Document
+                            .GetIndentationOptionsAsync(_globalOptions, CancellationToken.None)
+                            .WaitAndGetResult(CancellationToken.None);
+                        var changesAfterReturn = _service
+                            .GetTextChangeAfterReturnAsync(
+                                context.Value,
+                                indentationOptions,
+                                CancellationToken.None
+                            )
+                            .WaitAndGetResult(CancellationToken.None);
                         if (changesAfterReturn != null)
                         {
-                            using var caretPreservingTransaction = new CaretPreservingEditTransaction(EditorFeaturesResources.Brace_Completion, _undoHistory, _editorOperations);
+                            using var caretPreservingTransaction =
+                                new CaretPreservingEditTransaction(
+                                    EditorFeaturesResources.Brace_Completion,
+                                    _undoHistory,
+                                    _editorOperations
+                                );
                             ApplyBraceCompletionResult(changesAfterReturn.Value);
                             caretPreservingTransaction.Complete();
                         }
@@ -297,9 +360,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 }
             }
 
-            public void Finish()
-            {
-            }
+            public void Finish() { }
 
             #endregion
 
@@ -307,8 +368,7 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
 
             public void PostTab() { }
 
-            public void PreDelete(out bool handledCommand)
-                => handledCommand = false;
+            public void PreDelete(out bool handledCommand) => handledCommand = false;
 
             public void PostDelete() { }
 
@@ -337,7 +397,10 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                     {
                         var caretPos = this.GetCaretPosition();
 
-                        if (caretPos.HasValue && !HasNoForwardTyping(caretPos.Value, closingSnapshotPoint.Subtract(1)))
+                        if (
+                            caretPos.HasValue
+                            && !HasNoForwardTyping(caretPos.Value, closingSnapshotPoint.Subtract(1))
+                        )
                         {
                             return true;
                         }
@@ -370,8 +433,8 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 return false;
             }
 
-            internal ITextUndoTransaction CreateUndoTransaction()
-                => _undoHistory.CreateTransaction(EditorFeaturesResources.Brace_Completion);
+            internal ITextUndoTransaction CreateUndoTransaction() =>
+                _undoHistory.CreateTransaction(EditorFeaturesResources.Brace_Completion);
 
             private void MoveCaretToClosingPoint()
             {
@@ -379,8 +442,12 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 var closingSnapshotPoint = ClosingPoint.GetPoint(SubjectBuffer.CurrentSnapshot);
 
                 // find the position just after the closing brace in the view's text buffer
-                var afterBrace = TextView.BufferGraph.MapUpToBuffer(closingSnapshotPoint,
-                    PointTrackingMode.Negative, PositionAffinity.Predecessor, TextView.TextBuffer);
+                var afterBrace = TextView.BufferGraph.MapUpToBuffer(
+                    closingSnapshotPoint,
+                    PointTrackingMode.Negative,
+                    PositionAffinity.Predecessor,
+                    TextView.TextBuffer
+                );
 
                 Debug.Assert(afterBrace.HasValue, "Unable to move caret to closing point");
 
@@ -403,7 +470,12 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
                 var openingSnapshotPoint = OpeningPoint.GetPosition(snapshot);
                 // The user is actively typing so the caret position should not be null.
                 var caretPosition = this.GetCaretPosition().Value.Position;
-                return new BraceCompletionContext(document, openingSnapshotPoint, closingSnapshotPoint, caretPosition);
+                return new BraceCompletionContext(
+                    document,
+                    openingSnapshotPoint,
+                    closingSnapshotPoint,
+                    caretPosition
+                );
             }
 
             private void ApplyBraceCompletionResult(BraceCompletionResult result)
@@ -419,18 +491,30 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
 
                 try
                 {
-                    Contract.ThrowIfFalse(SubjectBuffer.CurrentSnapshot[OpeningPoint.GetPosition(SubjectBuffer.CurrentSnapshot)] == OpeningBrace,
-                        "The opening point does not match the opening brace character");
-                    Contract.ThrowIfFalse(SubjectBuffer.CurrentSnapshot[ClosingPoint.GetPosition(SubjectBuffer.CurrentSnapshot) - 1] == ClosingBrace,
-                        "The closing point does not match the closing brace character");
+                    Contract.ThrowIfFalse(
+                        SubjectBuffer.CurrentSnapshot[
+                            OpeningPoint.GetPosition(SubjectBuffer.CurrentSnapshot)
+                        ] == OpeningBrace,
+                        "The opening point does not match the opening brace character"
+                    );
+                    Contract.ThrowIfFalse(
+                        SubjectBuffer.CurrentSnapshot[
+                            ClosingPoint.GetPosition(SubjectBuffer.CurrentSnapshot) - 1
+                        ] == ClosingBrace,
+                        "The closing point does not match the closing brace character"
+                    );
                 }
                 catch (Exception e) when (FatalError.ReportAndCatch(e))
                 {
                     return;
                 }
 
-                var caretLine = SubjectBuffer.CurrentSnapshot.GetLineFromLineNumber(result.CaretLocation.Line);
-                TextView.TryMoveCaretToAndEnsureVisible(new VirtualSnapshotPoint(caretLine, result.CaretLocation.Character));
+                var caretLine = SubjectBuffer.CurrentSnapshot.GetLineFromLineNumber(
+                    result.CaretLocation.Line
+                );
+                TextView.TryMoveCaretToAndEnsureVisible(
+                    new VirtualSnapshotPoint(caretLine, result.CaretLocation.Character)
+                );
             }
 
             #endregion

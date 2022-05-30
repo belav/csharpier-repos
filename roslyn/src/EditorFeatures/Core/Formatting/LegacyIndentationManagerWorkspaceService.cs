@@ -14,27 +14,38 @@ using Microsoft.VisualStudio.Text.Editor;
 namespace Microsoft.CodeAnalysis.Formatting;
 
 [ExportWorkspaceService(typeof(ILegacyIndentationManagerWorkspaceService)), Shared]
-internal sealed class LegacyIndentationManagerWorkspaceService : ILegacyIndentationManagerWorkspaceService
+internal sealed class LegacyIndentationManagerWorkspaceService
+    : ILegacyIndentationManagerWorkspaceService
 {
     private readonly IIndentationManagerService _indentationManagerService;
 
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-    public LegacyIndentationManagerWorkspaceService(IIndentationManagerService indentationManagerService)
+    public LegacyIndentationManagerWorkspaceService(
+        IIndentationManagerService indentationManagerService
+    )
     {
         _indentationManagerService = indentationManagerService;
     }
 
-    private static ITextBuffer GetRequiredTextBuffer(SourceText text)
-        => text.Container.TryGetTextBuffer() ?? throw new InvalidOperationException(
-            "We had an open document but it wasn't associated with a buffer. That meant we couldn't apply formatting settings.");
+    private static ITextBuffer GetRequiredTextBuffer(SourceText text) =>
+        text.Container.TryGetTextBuffer()
+        ?? throw new InvalidOperationException(
+            "We had an open document but it wasn't associated with a buffer. That meant we couldn't apply formatting settings."
+        );
 
-    public bool UseSpacesForWhitespace(SourceText text)
-        => _indentationManagerService.UseSpacesForWhitespace(GetRequiredTextBuffer(text), explicitFormat: false);
+    public bool UseSpacesForWhitespace(SourceText text) =>
+        _indentationManagerService.UseSpacesForWhitespace(
+            GetRequiredTextBuffer(text),
+            explicitFormat: false
+        );
 
-    public int GetTabSize(SourceText text)
-        => _indentationManagerService.GetTabSize(GetRequiredTextBuffer(text), explicitFormat: false);
+    public int GetTabSize(SourceText text) =>
+        _indentationManagerService.GetTabSize(GetRequiredTextBuffer(text), explicitFormat: false);
 
-    public int GetIndentSize(SourceText text)
-        => _indentationManagerService.GetIndentSize(GetRequiredTextBuffer(text), explicitFormat: false);
+    public int GetIndentSize(SourceText text) =>
+        _indentationManagerService.GetIndentSize(
+            GetRequiredTextBuffer(text),
+            explicitFormat: false
+        );
 }

@@ -23,22 +23,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AddParameter
 {
     public class AddParameterTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public AddParameterTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public AddParameterTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (null, new CSharpAddParameterCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (null, new CSharpAddParameterCodeFixProvider());
 
-        protected override ImmutableArray<CodeAction> MassageActions(ImmutableArray<CodeAction> actions)
-            => FlattenActions(actions);
+        protected override ImmutableArray<CodeAction> MassageActions(
+            ImmutableArray<CodeAction> actions
+        ) => FlattenActions(actions);
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestMissingWithImplicitConstructor()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
 }
@@ -49,14 +48,15 @@ class D
     {
         new [|C|](1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestOnEmptyConstructor()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C() { }
@@ -69,7 +69,7 @@ class D
         new [|C|](1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(int v) { }
@@ -81,14 +81,15 @@ class D
     {
         new C(1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestNamedArg()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C() { }
@@ -101,7 +102,7 @@ class D
         new C([|p|]: 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(int p) { }
@@ -113,14 +114,15 @@ class D
     {
         new C(p: 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestMissingWithConstructorWithSameNumberOfParams()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     public C(bool b) { }
@@ -132,14 +134,15 @@ class D
     {
         new [|C|](1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestAddBeforeMatchingArg()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i) { }
@@ -152,7 +155,7 @@ class D
         new [|C|](true, 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(bool v, int i) { }
@@ -164,14 +167,15 @@ class D
     {
         new C(true, 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestAddAfterMatchingConstructorParam()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i) { }
@@ -184,7 +188,7 @@ class D
         new [|C|](1, true);
     }
 }",
-@"
+                @"
 class C
 {
     public C(int i, bool v) { }
@@ -196,14 +200,15 @@ class D
     {
         new C(1, true);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestParams1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(params int[] i) { }
@@ -216,7 +221,7 @@ class D
         new C([|true|], 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(bool v, params int[] i) { }
@@ -228,14 +233,15 @@ class D
     {
         new C(true, 1);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestParams2()
         {
             await TestMissingAsync(
-@"
+                @"
 class C
 {
     public C(params int[] i) { }
@@ -247,7 +253,8 @@ class D
     {
         new [|C|](1, true);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20708, "https://github.com/dotnet/roslyn/issues/20708")]
@@ -255,7 +262,7 @@ class D
         public async Task TestMultiLineParameters1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i,
@@ -269,7 +276,7 @@ class C
         new [|C|](true, 0, 0);
     }
 }",
-@"
+                @"
 class C
 {
     public C(bool v,
@@ -283,7 +290,8 @@ class C
     {
         new C(true, 0, 0);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20708, "https://github.com/dotnet/roslyn/issues/20708")]
@@ -291,7 +299,7 @@ class C
         public async Task TestMultiLineParameters2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i,
@@ -305,7 +313,7 @@ class C
         new [|C|](0, true, 0);
     }
 }",
-@"
+                @"
 class C
 {
     public C(int i,
@@ -319,7 +327,8 @@ class C
     {
         new C(0, true, 0);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20708, "https://github.com/dotnet/roslyn/issues/20708")]
@@ -327,7 +336,7 @@ class C
         public async Task TestMultiLineParameters3()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i,
@@ -341,7 +350,7 @@ class C
         new [|C|](0, 0, true);
     }
 }",
-@"
+                @"
 class C
 {
     public C(int i,
@@ -355,7 +364,8 @@ class C
     {
         new C(0, 0, true);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20708, "https://github.com/dotnet/roslyn/issues/20708")]
@@ -363,7 +373,7 @@ class C
         public async Task TestMultiLineParameters4()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(
@@ -378,7 +388,7 @@ class C
         new [|C|](true, 0, 0);
     }
 }",
-@"
+                @"
 class C
 {
     public C(
@@ -393,7 +403,8 @@ class C
     {
         new C(true, 0, 0);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20708, "https://github.com/dotnet/roslyn/issues/20708")]
@@ -401,7 +412,7 @@ class C
         public async Task TestMultiLineParameters5()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(
@@ -416,7 +427,7 @@ class C
         new [|C|](0, true, 0);
     }
 }",
-@"
+                @"
 class C
 {
     public C(
@@ -431,7 +442,8 @@ class C
     {
         new C(0, true, 0);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20708, "https://github.com/dotnet/roslyn/issues/20708")]
@@ -439,7 +451,7 @@ class C
         public async Task TestMultiLineParameters6()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(
@@ -454,7 +466,7 @@ class C
         new [|C|](0, 0, true);
     }
 }",
-@"
+                @"
 class C
 {
     public C(
@@ -469,7 +481,8 @@ class C
     {
         new C(0, 0, true);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20973, "https://github.com/dotnet/roslyn/issues/20973")]
@@ -477,7 +490,7 @@ class C
         public async Task TestNullArg1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i) { }
@@ -490,7 +503,7 @@ class D
         new [|C|](null, 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(object value, int i) { }
@@ -502,7 +515,8 @@ class D
     {
         new C(null, 1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20973, "https://github.com/dotnet/roslyn/issues/20973")]
@@ -510,7 +524,7 @@ class D
         public async Task TestNullArg2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(string s) { }
@@ -523,7 +537,7 @@ class D
         new [|C|](null, 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(string s, int v) { }
@@ -535,7 +549,8 @@ class D
     {
         new C(null, 1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20973, "https://github.com/dotnet/roslyn/issues/20973")]
@@ -543,7 +558,7 @@ class D
         public async Task TestDefaultArg1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(int i) { }
@@ -556,7 +571,7 @@ class D
         new [|C|](default, 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(int i, int v) { }
@@ -568,7 +583,8 @@ class D
     {
         new C(default, 1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(20973, "https://github.com/dotnet/roslyn/issues/20973")]
@@ -576,7 +592,7 @@ class D
         public async Task TestDefaultArg2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     public C(string s) { }
@@ -589,7 +605,7 @@ class D
         new [|C|](default, 1);
     }
 }",
-@"
+                @"
 class C
 {
     public C(string s, int v) { }
@@ -601,7 +617,8 @@ class D
     {
         new C(default, 1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -609,7 +626,7 @@ class D
         public async Task TestInvocationInstanceMethod1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C
 {
     void M1()
@@ -622,7 +639,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M1(int i)
@@ -634,7 +651,8 @@ class C
         M1(i);
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -642,7 +660,7 @@ class C
         public async Task TestInvocationInheritedMethodGetFixed()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class Base
 {
     protected void M1()
@@ -657,7 +675,7 @@ class C1 : Base
         [|M1|](i);
     }
 }",
-@"
+                @"
 class Base
 {
     protected void M1(int i)
@@ -671,7 +689,8 @@ class C1 : Base
         int i = 0;
         M1(i);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -679,7 +698,7 @@ class C1 : Base
         public async Task TestInvocationInheritedMethodInMetadatGetsNotFixed()
         {
             await TestMissingAsync(
-    @"
+                @"
 class C1
 {
     void M2()
@@ -687,7 +706,8 @@ class C1
         int i = 0;
         [|GetHashCode|](i);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -695,7 +715,7 @@ class C1
         public async Task TestInvocationLocalFunction()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C1
 {
     void M1()
@@ -704,7 +724,7 @@ class C1
         [|Local|](2);
     }
 }",
-@"
+                @"
 class C1
 {
     void M1()
@@ -712,7 +732,8 @@ class C1
         int Local(int v) => 1;
         Local(2);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -721,7 +742,7 @@ class C1
         public async Task TestInvocationLambda1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 using System;
 class C1
 {
@@ -730,7 +751,8 @@ class C1
         Action a = () => { };
         [|a|](2);
     }
-}");
+}"
+            );
             //Should be Action<int> a = (int v) => { };
         }
 
@@ -739,7 +761,7 @@ class C1
         public async Task TestInvocationStaticMethod()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C1
 {
     static void M1()
@@ -750,7 +772,7 @@ class C1
         [|M1|](1);
     }
 }",
-@"
+                @"
 class C1
 {
     static void M1(int v)
@@ -760,7 +782,8 @@ class C1
     {
         M1(1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -768,7 +791,7 @@ class C1
         public async Task TestInvocationExtensionMethod()
         {
             var code =
-@"
+                @"
 namespace N {
 static class Extensions
 {
@@ -784,7 +807,7 @@ class C1
     }
 }}";
             var fix =
-@"
+                @"
 namespace N {
 static class Extensions
 {
@@ -808,7 +831,7 @@ class C1
         {
             // error CS1501: No overload for method 'ExtensionM1' takes 2 arguments
             var code =
-@"
+                @"
 namespace N {
 static class Extensions
 {
@@ -824,7 +847,7 @@ class C1
     }
 }}";
             var fix =
-@"
+                @"
 namespace N {
 static class Extensions
 {
@@ -846,7 +869,8 @@ class C1
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestInvocationOverride()
         {
-            var code = @"
+            var code =
+                @"
 class Base
 {
     protected virtual void M1() { }
@@ -859,7 +883,8 @@ class C1 : Base
         [|M1|](1);
     }
 }";
-            var fix_DeclarationOnly = @"
+            var fix_DeclarationOnly =
+                @"
 class Base
 {
     protected virtual void M1() { }
@@ -872,7 +897,8 @@ class C1 : Base
         M1(1);
     }
 }";
-            var fix_All = @"
+            var fix_All =
+                @"
 class Base
 {
     protected virtual void M1(int v) { }
@@ -893,7 +919,8 @@ class C1 : Base
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestInvocationExplicitInterface()
         {
-            var code = @"
+            var code =
+                @"
 interface I1
 {
     void M1();
@@ -906,7 +933,8 @@ class C1 : I1
         ((I1)this).[|M1|](1);
     }
 }";
-            var fix_DeclarationOnly = @"
+            var fix_DeclarationOnly =
+                @"
 interface I1
 {
     void M1(int v);
@@ -919,7 +947,8 @@ class C1 : I1
         ((I1)this).M1(1);
     }
 }";
-            var fix_All = @"
+            var fix_All =
+                @"
 interface I1
 {
     void M1(int v);
@@ -941,7 +970,7 @@ class C1 : I1
         public async Task TestInvocationImplicitInterface()
         {
             var code =
-@"
+                @"
 interface I1
 {
     void M1();
@@ -954,7 +983,8 @@ class C1 : I1
         [|M1|](1);
     }
 }";
-            var fix_DeclarationOnly = @"
+            var fix_DeclarationOnly =
+                @"
 interface I1
 {
     void M1();
@@ -967,7 +997,8 @@ class C1 : I1
         M1(1);
     }
 }";
-            var fix_All = @"
+            var fix_All =
+                @"
 interface I1
 {
     void M1(int v);
@@ -989,7 +1020,7 @@ class C1 : I1
         public async Task TestInvocationImplicitInterfaces()
         {
             var code =
-@"
+                @"
 interface I1
 {
     void M1();
@@ -1006,7 +1037,8 @@ class C1 : I1, I2
         [|M1|](1);
     }
 }";
-            var fix_DeclarationOnly = @"
+            var fix_DeclarationOnly =
+                @"
 interface I1
 {
     void M1();
@@ -1023,7 +1055,8 @@ class C1 : I1, I2
         M1(1);
     }
 }";
-            var fix_All = @"
+            var fix_All =
+                @"
 interface I1
 {
     void M1(int v);
@@ -1050,7 +1083,7 @@ class C1 : I1, I2
         public async Task TestInvocationGenericMethod()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C1
 {
     void M1<T>(T arg) { }
@@ -1059,7 +1092,7 @@ class C1
         [|M1|](1, 2);
     }
 }",
-@"
+                @"
 class C1
 {
     void M1<T>(T arg, int v) { }
@@ -1067,7 +1100,8 @@ class C1
     {
         M1(1, 2);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -1075,7 +1109,7 @@ class C1
         public async Task TestInvocationRecursion()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class C1
 {
     void M1()
@@ -1083,14 +1117,15 @@ class C1
         [|M1|](1);
     }
 }",
-@"
+                @"
 class C1
 {
     void M1(int v)
     {
         M1(1);
     }
-}");
+}"
+            );
         }
 
         [WorkItem(21446, "https://github.com/dotnet/roslyn/issues/21446")]
@@ -1098,7 +1133,7 @@ class C1
         public async Task TestInvocationOverloads1()
         {
             var code =
-@"
+                @"
 class C1
 {
     void M1(string s) { }
@@ -1109,7 +1144,7 @@ class C1
     }
 }";
             var fix0 =
-@"
+                @"
 class C1
 {
     void M1(string s) { }
@@ -1120,7 +1155,7 @@ class C1
     }
 }";
             var fix1 =
-@"
+                @"
 class C1
 {
     void M1(int v, string s) { }
@@ -1139,7 +1174,7 @@ class C1
         public async Task TestInvocationOverloads2()
         {
             var code =
-@"
+                @"
 class C1
 {
     void M1(string s1, string s2) { }
@@ -1151,7 +1186,7 @@ class C1
     }
 }";
             var fix0 =
-@"
+                @"
 class C1
 {
     void M1(string s1, string s2) { }
@@ -1163,7 +1198,7 @@ class C1
     }
 }";
             var fix1 =
-@"
+                @"
 class C1
 {
     void M1(string s1, string s2) { }
@@ -1183,7 +1218,7 @@ class C1
         public async Task TestInvocationTuple1()
         {
             var code =
-@"
+                @"
 class C1
 {
     void M1((int, int) t1)
@@ -1195,7 +1230,7 @@ class C1
     }
 }";
             var fix0 =
-    @"
+                @"
 class C1
 {
     void M1((int, int) t1, (int, string) value)
@@ -1214,7 +1249,7 @@ class C1
         public async Task TestInvocationTuple2()
         {
             var code =
-@"
+                @"
 class C1
 {
     void M1((int, int) t1)
@@ -1227,7 +1262,7 @@ class C1
     }
 }";
             var fix0 =
-    @"
+                @"
 class C1
 {
     void M1((int, int) t1, (int, string) tup)
@@ -1247,7 +1282,7 @@ class C1
         public async Task TestInvocationTuple3()
         {
             var code =
-@"
+                @"
 class C1
 {
     void M1((int, int) t1)
@@ -1260,7 +1295,7 @@ class C1
     }
 }";
             var fix0 =
-    @"
+                @"
 class C1
 {
     void M1((int, int) t1, (int i, string s) tup)
@@ -1281,7 +1316,7 @@ class C1
         {
             // error CS0305: Using the generic method 'C1.M1<T>(T)' requires 1 type arguments
             var code =
-@"
+                @"
 class C1
 {
     void M1<T>(T i) { }
@@ -1300,7 +1335,7 @@ class C1
         {
             // error CS0308: The non-generic method 'C1.M1(int)' cannot be used with type arguments
             var code =
-@"
+                @"
 class C1
 {
     void M1(int i) { }
@@ -1320,7 +1355,7 @@ class C1
         {
             // error CS0539: 'C1.M1(int)' in explicit interface declaration is not a member of interface
             var code =
-@"
+                @"
 interface I1
 {
     void M1();
@@ -1340,7 +1375,7 @@ class C1 : I1
         {
             // error CS1503: Argument 1: cannot convert from 'double' to 'int'
             var code =
-@"
+                @"
     class C1
     {
         void M1(int i1, int i2) { }
@@ -1352,7 +1387,7 @@ class C1 : I1
     }
 ";
             var fix0 =
-@"
+                @"
     class C1
     {
         void M1(int i1, int i2) { }
@@ -1372,7 +1407,7 @@ class C1 : I1
         {
             // error CS1660: Cannot convert lambda expression to type 'int' because it is not a delegate type
             var code =
-@"
+                @"
     class C1
     {
         void M1(int i1, int i2) { }
@@ -1384,7 +1419,7 @@ class C1 : I1
     }
 ";
             var fix =
-@"
+                @"
     class C1
     {
         void M1(int i1, int i2) { }
@@ -1404,7 +1439,7 @@ class C1 : I1
         {
             // error CS1739: The best overload for 'M1' does not have a parameter named 'i2'
             var code =
-@"
+                @"
     class C1
     {
         void M1(int i1) { }
@@ -1415,7 +1450,7 @@ class C1 : I1
     }
 ";
             var fix =
-@"
+                @"
     class C1
     {
         void M1(int i1, int i2) { }
@@ -1433,7 +1468,7 @@ class C1 : I1
         public async Task TestInvocationAddTypeParameter_AddTypeParameterIfUserSpecifiesOne_OnlyTypeArgument()
         {
             var code =
-@"
+                @"
     class C1
     {
         void M1() { }
@@ -1452,7 +1487,7 @@ class C1 : I1
         public async Task TestInvocationAddTypeParameter_AddTypeParameterIfUserSpecifiesOne_TypeArgumentAndParameterArgument()
         {
             var code =
-@"
+                @"
     class C1
     {
         void M1() { }
@@ -1471,7 +1506,7 @@ class C1 : I1
         public async Task TestInvocation_ExisitingTypeArgumentIsNotGeneralized()
         {
             var code =
-@"
+                @"
     class C1
     {
         void M1<T>(T v) { }
@@ -1482,7 +1517,7 @@ class C1 : I1
     }
 ";
             var fix0 =
-@"
+                @"
     class C1
     {
         void M1<T>(T v, bool v1) { }
@@ -1501,7 +1536,7 @@ class C1 : I1
         {
             // error CS1503: Argument 1: cannot convert from 'bool' to 'int'
             var code =
-@"
+                @"
     class C1
     {
         static void M1(params int[] nums) { }
@@ -1512,7 +1547,7 @@ class C1 : I1
     }
 ";
             var fix0 =
-@"
+                @"
     class C1
     {
         static void M1(bool v, params int[] nums) { }
@@ -1531,7 +1566,7 @@ class C1 : I1
         {
             // error CS1501: No overload for method 'M1' takes 1 arguments
             var code =
-@"
+                @"
     class BaseClass
     {
         protected virtual void M1() { }
@@ -1549,7 +1584,7 @@ class C1 : I1
     }
 ";
             var fix_DeclarationOnly =
-@"
+                @"
     class BaseClass
     {
         protected virtual void M1(int v) { }
@@ -1567,7 +1602,7 @@ class C1 : I1
     }
 ";
             var fix_All =
-@"
+                @"
     class BaseClass
     {
         protected virtual void M1(int v) { }
@@ -1593,7 +1628,7 @@ class C1 : I1
         public async Task TestInvocation_Cascading_PartialMethods()
         {
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -1621,7 +1656,7 @@ namespace N1
     </Project>
 </Workspace>";
             var fix0 =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -1655,7 +1690,7 @@ namespace N1
         public async Task TestInvocation_Cascading_ExtendedPartialMethods()
         {
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -1683,7 +1718,7 @@ namespace N1
     </Project>
 </Workspace>";
             var fix0 =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -1718,7 +1753,7 @@ namespace N1
         public async Task TestInvocation_Cascading_PartialMethodsInSameDocument()
         {
             var code =
-@"
+                @"
 namespace N1
 {
     partial class C1
@@ -1735,7 +1770,7 @@ namespace N1
     }
 }";
             var fix0 =
-@"
+                @"
 namespace N1
 {
     partial class C1
@@ -1760,7 +1795,7 @@ namespace N1
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <MetadataReferenceFromSource Language=""C#"" CommonReferences=""true"">
@@ -1797,7 +1832,7 @@ namespace N
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"">
         <MetadataReferenceFromSource Language=""C#"" CommonReferences=""true"">
@@ -1829,7 +1864,8 @@ namespace N
         </Document>
     </Project>
 </Workspace>";
-            var fixedDocumentWithoutConflictAnnotation = @"
+            var fixedDocumentWithoutConflictAnnotation =
+                @"
 namespace N
 {
     public class Derived: BaseClass
@@ -1845,7 +1881,8 @@ namespace N
     }
 }
         ";
-            var fixedDocumentWithConflictAnnotation = @"
+            var fixedDocumentWithConflictAnnotation =
+                @"
 namespace N
 {
     public class Derived: BaseClass
@@ -1861,7 +1898,11 @@ namespace N
     }
 }
         ";
-            await TestInRegularAndScriptAsync(code, fixedDocumentWithoutConflictAnnotation, index: 0);
+            await TestInRegularAndScriptAsync(
+                code,
+                fixedDocumentWithoutConflictAnnotation,
+                index: 0
+            );
             await TestInRegularAndScriptAsync(code, fixedDocumentWithConflictAnnotation, index: 1);
         }
 
@@ -1871,7 +1912,7 @@ namespace N
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""A1"">
         <Document FilePath=""ReferencedDocument"">
@@ -1924,7 +1965,7 @@ namespace N
     </Project>
 </Workspace>";
             var fix_All =
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" CommonReferences=""true"" AssemblyName=""A1"">
         <Document FilePath=""ReferencedDocument"">
@@ -1985,7 +2026,7 @@ namespace N
         {
             // error CS1501: No overload for method 'M1' takes 1 arguments
             var code =
-@"
+                @"
     interface I1
     {
         void M1();
@@ -2000,7 +2041,7 @@ namespace N
     }
 ";
             var fix_DeclarationOnly =
-@"
+                @"
     interface I1
     {
         void M1();
@@ -2015,7 +2056,7 @@ namespace N
     }
 ";
             var fix_All =
-@"
+                @"
     interface I1
     {
         void M1(int v);
@@ -2038,7 +2079,7 @@ namespace N
         public async Task TestInvocation_Cascading_CrossLanguage()
         {
             var code =
-@"
+                @"
 <Workspace>
     <Project Language=""Visual Basic"" CommonReferences=""true"" AssemblyName=""VB1"">
         <Document FilePath=""ReferencedDocument"">
@@ -2070,7 +2111,7 @@ namespace N
     </Project>
 </Workspace>";
             var fix =
-@"
+                @"
 <Workspace>
     <Project Language=""Visual Basic"" CommonReferences=""true"" AssemblyName=""VB1"">
         <Document FilePath=""ReferencedDocument"">
@@ -2109,7 +2150,7 @@ namespace N
         public async Task TestInvocation_InvocationStyles_Positional_MoreThanOneArgumentToMuch()
         {
             var code =
-@"
+                @"
 class C
 {
     void M() { }
@@ -2119,7 +2160,7 @@ class C
     }
 }";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(int v) { }
@@ -2138,7 +2179,7 @@ class C
         {
             // error CS1501: No overload for method 'M' takes 2 arguments
             var code =
-@"
+                @"
 class C
 {
     void M(int i = 1) { }
@@ -2148,7 +2189,7 @@ class C
     }
 }";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(int i = 1, int v = 0) { }
@@ -2166,7 +2207,7 @@ class C
         {
             // error CS1739: The best overload for 'M' does not have a parameter named 'i3'
             var code =
-@"
+                @"
 class C
 {
     void M(int i1, int i2 = 1) { }
@@ -2176,7 +2217,7 @@ class C
     }
 }";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(int i1, int i2 = 1, int i3 = 0) { }
@@ -2194,7 +2235,7 @@ class C
         {
             // error CS1503: Argument 1: cannot convert from 'string' to 'int'
             var code =
-@"
+                @"
 class C
 {
     void M(params int[] ints) { }
@@ -2204,7 +2245,7 @@ class C
     }
 }";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(string v, params int[] ints) { }
@@ -2222,7 +2263,7 @@ class C
         {
             // error CS1503: Argument 1: cannot convert from 'string' to 'int'
             var code =
-@"
+                @"
 class C
 {
     void M(int i) { }
@@ -2240,7 +2281,7 @@ class C
         {
             // error CS1739: The best overload for 'M' does not have a parameter named 'i2'
             var code =
-@"
+                @"
 class C
 {
     void M(int i1, string s) { }
@@ -2250,7 +2291,7 @@ class C
     }
 }";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(int i1, string s, int i2) { }
@@ -2269,7 +2310,7 @@ class C
             // CS1744 is not yet a supported diagnostic (just declaring the diagnostic as supported does not work)
             // error CS1744: Named argument 's' specifies a parameter for which a positional argument has already been given
             var code =
-@"
+                @"
 class C
 {
     void M(string s) { }
@@ -2287,7 +2328,7 @@ class C
         {
             // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 class C
 {
     void M() { }
@@ -2297,7 +2338,7 @@ class C
     }
 }";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(int v) { }
@@ -2315,7 +2356,7 @@ class C
         {
             // error CS1503: Argument 1: cannot convert from 'string' to 'int'
             var code =
-@"
+                @"
 class C
 {
     void M(int v) { }
@@ -2324,7 +2365,7 @@ class C
         [|M|](""text"", 1
 ";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(string v1, int v) { }
@@ -2339,9 +2380,9 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestInvocation_InvocationStyles_RefParameter()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
+            // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 class C
 {
     void M() { }
@@ -2353,7 +2394,7 @@ class C
 }
 ";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(ref int i) { }
@@ -2371,9 +2412,9 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestInvocation_InvocationStyles_OutParameter_WithTypeDeclarationOutsideArgument()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
+            // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 class C
 {
     void M() { }
@@ -2385,7 +2426,7 @@ class C
 }
 ";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(out int i) { }
@@ -2403,9 +2444,9 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestInvocation_InvocationStyles_OutParameter_WithTypeDeclarationInArgument()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
+            // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 class C
 {
     void M() { }
@@ -2416,7 +2457,7 @@ class C
 }
 ";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(out int i) { }
@@ -2433,9 +2474,9 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestInvocation_InvocationStyles_OutParameter_WithVarTypeDeclarationInArgument()
         {
-            // error CS1501: No overload for method 'M' takes 1 arguments            
+            // error CS1501: No overload for method 'M' takes 1 arguments
             var code =
-@"
+                @"
 class C
 {
     void M() { }
@@ -2446,7 +2487,7 @@ class C
 }
 ";
             var fix0 =
-@"
+                @"
 class C
 {
     void M(out object i) { }
@@ -2467,7 +2508,7 @@ class C
             // in AbstractAddParameterCodeFixProvider.RegisterCodeFixesAsync.
             // error CS1501: No overload for method 'this' takes 2 arguments
             var code =
-@"
+                @"
 public class C {
     public int this[int i] 
     { 
@@ -2488,7 +2529,7 @@ public class C {
         {
             // error CS1729: 'C' does not contain a constructor that takes 1 arguments
             var code =
-@"
+                @"
 public class C {
     
     public C(): [|this|](1)
@@ -2503,7 +2544,7 @@ public class C {
         {
             // error CS1729: 'C' does not contain a constructor that takes 2 arguments
             var code =
-@"
+                @"
 class C 
 {
     public C(int i) { }
@@ -2512,7 +2553,7 @@ class C
     { }
 }";
             var fix0 =
-@"
+                @"
 class C 
 {
     public C(int i, int v) { }
@@ -2530,7 +2571,7 @@ class C
         {
             // error CS1729: 'B' does not contain a constructor that takes 1 arguments
             var code =
-@"
+                @"
 public class B
 {
     B() { }
@@ -2540,7 +2581,7 @@ public class C : B
     public C(int i) : [|base|](i) { }
 }";
             var fix0 =
-@"
+                @"
 public class B
 {
     B(int i) { }
@@ -2559,7 +2600,7 @@ public class C : B
         {
             // CS1501 No overload for method takes 2 arguments
             var code =
-@"
+                @"
 class Rsrp
 {
   public void M()
@@ -2572,7 +2613,7 @@ class Rsrp
   }
 }";
             var fix0 =
-@"
+                @"
 class Rsrp
 {
   public void M()
@@ -2593,7 +2634,7 @@ class Rsrp
         {
             // CS1739: The best overload for 'Local' does not have a parameter named 'mynewparameter'
             var code =
-@"
+                @"
 class Rsrp
 {
     public void M()
@@ -2607,7 +2648,7 @@ class Rsrp
 }
 ";
             var fix0 =
-@"
+                @"
 class Rsrp
 {
     public void M()
@@ -2628,7 +2669,7 @@ class Rsrp
         public async Task TestWithArgThatHasImplicitConversionToParamType1()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 class BaseClass { }
 
 class MyClass : BaseClass
@@ -2643,7 +2684,7 @@ class MyClass : BaseClass
 
     void MyFunc(BaseClass param1) { }
 }",
-@"
+                @"
 class BaseClass { }
 
 class MyClass : BaseClass
@@ -2657,14 +2698,15 @@ class MyClass : BaseClass
     }
 
     void MyFunc(BaseClass param1, int newparam) { }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestOnExtensionGetEnumerator()
         {
             var code =
-@"
+                @"
 using System.Collections.Generic;
 namespace N {
 static class Extensions
@@ -2682,7 +2724,7 @@ class C1
     }
 }}";
             var fix =
-@"
+                @"
 using System.Collections.Generic;
 namespace N {
 static class Extensions
@@ -2706,7 +2748,7 @@ class C1
         public async Task TestOnExtensionGetAsyncEnumerator()
         {
             var code =
-@"
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 namespace N {
@@ -2725,7 +2767,7 @@ class C1
     }
 }}" + IAsyncEnumerable;
             var fix =
-@"
+                @"
 using System.Collections.Generic;
 using System.Threading.Tasks;
 namespace N {
@@ -2750,27 +2792,31 @@ class C1
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TopLevelStatement()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 [|local|](1, 2, 3);
 
 void local(int x, int y)
 {
 }
 ",
-@"
+                @"
 [|local|](1, 2, 3);
 
 void local(int x, int y, int v)
 {
 }
-", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [WorkItem(44271, "https://github.com/dotnet/roslyn/issues/44271")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TopLevelStatement_Nested()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 void outer()
 {
     [|local|](1, 2, 3);
@@ -2780,7 +2826,7 @@ void outer()
     }
 }
 ",
-@"
+                @"
 void outer()
 {
     local(1, 2, 3);
@@ -2789,14 +2835,16 @@ void outer()
     {
     }
 }
-");
+"
+            );
         }
 
         [WorkItem(42559, "https://github.com/dotnet/roslyn/issues/42559")]
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         public async Task TestAddParameter_ImplicitObjectCreation()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 class C
 {
     C(int i) { }
@@ -2806,7 +2854,7 @@ class C
        C c = [||]new(1, 2);
     }
 }",
-@"
+                @"
 class C
 {
     C(int i, int v) { }
@@ -2815,7 +2863,8 @@ class C
     {
        C c = new(1, 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
@@ -2823,7 +2872,7 @@ class C
         public async Task TestNamedArgOnExtensionMethod()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 namespace r
 {
     static class AbcExtensions
@@ -2835,7 +2884,7 @@ namespace r
             => new Abc().Act([|param3|]: 123);
     }
 }",
-@"
+                @"
 namespace r
 {
     static class AbcExtensions
@@ -2846,14 +2895,16 @@ namespace r
         void Test()
             => new Abc().Act(param3: 123);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         [WorkItem(54408, "https://github.com/dotnet/roslyn/issues/54408")]
         public async Task TestPositionalRecord()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 var b = ""B"";
 var r = [|new R(1, b)|];
 
@@ -2863,7 +2914,8 @@ namespace System.Runtime.CompilerServices
 {
     public static class IsExternalInit { }
 }
-", @"
+",
+                @"
 var b = ""B"";
 var r = new R(1, b);
 
@@ -2873,14 +2925,17 @@ namespace System.Runtime.CompilerServices
 {
     public static class IsExternalInit { }
 }
-", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         [WorkItem(54408, "https://github.com/dotnet/roslyn/issues/54408")]
         public async Task TestPositionalRecordStruct()
         {
-            await TestInRegularAndScriptAsync(@"
+            await TestInRegularAndScriptAsync(
+                @"
 var b = ""B"";
 var r = [|new R(1, b)|];
 
@@ -2890,7 +2945,8 @@ namespace System.Runtime.CompilerServices
 {
     public static class IsExternalInit { }
 }
-", @"
+",
+                @"
 var b = ""B"";
 var r = new R(1, b);
 
@@ -2900,33 +2956,41 @@ namespace System.Runtime.CompilerServices
 {
     public static class IsExternalInit { }
 }
-", parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9));
+",
+                parseOptions: TestOptions.Regular.WithLanguageVersion(LanguageVersion.CSharp9)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         [WorkItem(56952, "https://github.com/dotnet/roslyn/issues/56952")]
         public async Task TestRecordsNamingConventions()
         {
-            await TestInRegularAndScript1Async(@"[|new Test(""repro"")|];
+            await TestInRegularAndScript1Async(
+                @"[|new Test(""repro"")|];
 
 record Test();
-", @"new Test(""repro"");
+",
+                @"new Test(""repro"");
 
 record Test(string V);
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsAddParameter)]
         [WorkItem(56952, "https://github.com/dotnet/roslyn/issues/56952")]
         public async Task TestRecordsNamingConventions_RecordStruct()
         {
-            await TestInRegularAndScript1Async(@"[|new Test(""repro"")|];
+            await TestInRegularAndScript1Async(
+                @"[|new Test(""repro"")|];
 
 record struct Test();
-", @"new Test(""repro"");
+",
+                @"new Test(""repro"");
 
 record struct Test(string V);
-");
+"
+            );
         }
     }
 }

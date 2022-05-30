@@ -11,21 +11,33 @@ namespace System.Threading
         private DeferredDisposableLifetime<PreAllocatedOverlapped> _lifetime;
 
         [CLSCompliant(false)]
-        public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData) :
-            this(callback, state, pinData, flowExecutionContext: true)
-        {
-        }
+        public PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData)
+            : this(callback, state, pinData, flowExecutionContext: true) { }
 
         [CLSCompliant(false)]
-        public static PreAllocatedOverlapped UnsafeCreate(IOCompletionCallback callback, object? state, object? pinData) =>
-            new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
+        public static PreAllocatedOverlapped UnsafeCreate(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData
+        ) => new PreAllocatedOverlapped(callback, state, pinData, flowExecutionContext: false);
 
-        private unsafe PreAllocatedOverlapped(IOCompletionCallback callback, object? state, object? pinData, bool flowExecutionContext)
+        private unsafe PreAllocatedOverlapped(
+            IOCompletionCallback callback,
+            object? state,
+            object? pinData,
+            bool flowExecutionContext
+        )
         {
             if (callback == null)
                 throw new ArgumentNullException(nameof(callback));
 
-            _overlapped = Win32ThreadPoolNativeOverlapped.Allocate(callback, state, pinData, this, flowExecutionContext);
+            _overlapped = Win32ThreadPoolNativeOverlapped.Allocate(
+                callback,
+                state,
+                pinData,
+                this,
+                flowExecutionContext
+            );
         }
 
         internal bool AddRef()
@@ -56,7 +68,8 @@ namespace System.Threading
                 if (disposed)
                     Win32ThreadPoolNativeOverlapped.Free(_overlapped);
                 else
-                    *Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(_overlapped) = default(NativeOverlapped);
+                    *Win32ThreadPoolNativeOverlapped.ToNativeOverlapped(_overlapped) =
+                        default(NativeOverlapped);
             }
         }
 

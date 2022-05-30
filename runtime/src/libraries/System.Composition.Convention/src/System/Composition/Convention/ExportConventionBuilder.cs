@@ -63,7 +63,10 @@ namespace System.Composition.Convention
 
             if (contractName.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(contractName)), nameof(contractName));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(contractName)),
+                    nameof(contractName)
+                );
             }
             _contractName = contractName;
             return this;
@@ -74,7 +77,9 @@ namespace System.Composition.Convention
         /// </summary>
         /// <param name="getContractNameFromPartType">A Func to retrieve the contract name from the part typeThe contract name.</param>
         /// <returns>An export builder allowing further configuration.</returns>
-        public ExportConventionBuilder AsContractName(Func<Type, string> getContractNameFromPartType)
+        public ExportConventionBuilder AsContractName(
+            Func<Type, string> getContractNameFromPartType
+        )
         {
             if (getContractNameFromPartType is null)
             {
@@ -100,7 +105,10 @@ namespace System.Composition.Convention
 
             if (name.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(name)),
+                    nameof(name)
+                );
             }
             if (_metadataItems == null)
             {
@@ -116,7 +124,10 @@ namespace System.Composition.Convention
         /// <param name="name">The name of the metadata item.</param>
         /// <param name="getValueFromPartType">A function that calculates the metadata value based on the type.</param>
         /// <returns>An export builder allowing further configuration.</returns>
-        public ExportConventionBuilder AddMetadata(string name, Func<Type, object> getValueFromPartType)
+        public ExportConventionBuilder AddMetadata(
+            string name,
+            Func<Type, object> getValueFromPartType
+        )
         {
             if (name is null)
             {
@@ -129,7 +140,10 @@ namespace System.Composition.Convention
 
             if (name.Length == 0)
             {
-                throw new ArgumentException(SR.Format(SR.ArgumentException_EmptyString, nameof(name)), nameof(name));
+                throw new ArgumentException(
+                    SR.Format(SR.ArgumentException_EmptyString, nameof(name)),
+                    nameof(name)
+                );
             }
 
             if (_metadataItemFuncs == null)
@@ -147,7 +161,10 @@ namespace System.Composition.Convention
                 attributes = new List<Attribute>();
             }
 
-            var contractName = (_getContractNameFromPartType != null) ? _getContractNameFromPartType(type) : _contractName;
+            var contractName =
+                (_getContractNameFromPartType != null)
+                    ? _getContractNameFromPartType(type)
+                    : _contractName;
             attributes.Add(new ExportAttribute(contractName, _contractType));
 
             //Add metadata attributes from direct specification

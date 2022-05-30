@@ -32,12 +32,13 @@ public class CookiePolicyOptions
     /// Gets or sets the <see cref="CookieBuilder"/> that is used to track if the user consented to the
     /// cookie use policy.
     /// </summary>
-    public CookieBuilder ConsentCookie { get; set; } = new CookieBuilder()
-    {
-        Name = ".AspNet.Consent",
-        Expiration = TimeSpan.FromDays(365),
-        IsEssential = true,
-    };
+    public CookieBuilder ConsentCookie { get; set; } =
+        new CookieBuilder()
+        {
+            Name = ".AspNet.Consent",
+            Expiration = TimeSpan.FromDays(365),
+            IsEssential = true,
+        };
 
     /// <summary>
     /// Gets or sets the value for the cookie used to track if the user consented to the

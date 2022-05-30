@@ -22,14 +22,12 @@ public class SingularModificationCommandBatch : AffectedCountModificationCommand
     ///     Creates a new <see cref="SingularModificationCommandBatch" /> instance.
     /// </summary>
     /// <param name="dependencies">Service dependencies.</param>
-    public SingularModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
-        : base(dependencies)
-    {
-    }
+    public SingularModificationCommandBatch(
+        ModificationCommandBatchFactoryDependencies dependencies
+    ) : base(dependencies) { }
 
     /// <summary>
     ///     The maximum number of <see cref="ModificationCommand"/> instances that can be added to a single batch; always returns 1.
     /// </summary>
-    protected override int MaxBatchSize
-        => 1;
+    protected override int MaxBatchSize => 1;
 }

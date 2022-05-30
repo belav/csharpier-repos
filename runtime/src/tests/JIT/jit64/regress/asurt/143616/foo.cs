@@ -9,7 +9,6 @@ public class foo
     }
 }
 
-
 public class bar
 {
     static bar()
@@ -25,7 +24,6 @@ public class bar
         return val;
     }
 }
-
 
 public class bar2
 {

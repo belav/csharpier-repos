@@ -30,9 +30,14 @@ namespace Microsoft.CodeAnalysis.Diagnostics
     [ContentType(ContentTypeNames.RoslynContentType)]
     [ContentType(ContentTypeNames.XamlContentType)]
     [TagType(typeof(ClassificationTag))]
-    internal partial class DiagnosticsClassificationTaggerProvider : AbstractDiagnosticsTaggerProvider<ClassificationTag>
+    internal partial class DiagnosticsClassificationTaggerProvider
+        : AbstractDiagnosticsTaggerProvider<ClassificationTag>
     {
-        private static readonly IEnumerable<Option2<bool>> s_tagSourceOptions = ImmutableArray.Create(EditorComponentOnOffOptions.Tagger, InternalFeatureOnOffOptions.Classification);
+        private static readonly IEnumerable<Option2<bool>> s_tagSourceOptions =
+            ImmutableArray.Create(
+                EditorComponentOnOffOptions.Tagger,
+                InternalFeatureOnOffOptions.Classification
+            );
 
         private readonly ClassificationTypeMap _typeMap;
         private readonly ClassificationTag _classificationTag;
@@ -49,34 +54,58 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             IEditorOptionsFactoryService editorOptionsFactoryService,
             IGlobalOptionService globalOptions,
             [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
-            : base(threadingContext, diagnosticService, globalOptions, visibilityTracker, listenerProvider.GetListener(FeatureAttribute.Classification))
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
+            : base(
+                threadingContext,
+                diagnosticService,
+                globalOptions,
+                visibilityTracker,
+                listenerProvider.GetListener(FeatureAttribute.Classification)
+            )
         {
             _typeMap = typeMap;
-            _classificationTag = new ClassificationTag(_typeMap.GetClassificationType(ClassificationTypeDefinitions.UnnecessaryCode));
+            _classificationTag = new ClassificationTag(
+                _typeMap.GetClassificationType(ClassificationTypeDefinitions.UnnecessaryCode)
+            );
             _editorOptionsFactoryService = editorOptionsFactoryService;
         }
 
         // If we are under high contrast mode, the editor ignores classification tags that fade things out,
         // because that reduces contrast. Since the editor will ignore them, there's no reason to produce them.
-        protected internal override bool IsEnabled
-            => !_editorOptionsFactoryService.GlobalOptions.GetOptionValue(DefaultTextViewHostOptions.IsInContrastModeId);
+        protected internal override bool IsEnabled =>
+            !_editorOptionsFactoryService.GlobalOptions.GetOptionValue(
+                DefaultTextViewHostOptions.IsInContrastModeId
+            );
 
-        protected internal override bool IncludeDiagnostic(DiagnosticData data)
-            => data.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
+        protected internal override bool IncludeDiagnostic(DiagnosticData data) =>
+            data.CustomTags.Contains(WellKnownDiagnosticTags.Unnecessary);
 
-        protected internal override ITagSpan<ClassificationTag> CreateTagSpan(Workspace workspace, bool isLiveUpdate, SnapshotSpan span, DiagnosticData data)
-            => new TagSpan<ClassificationTag>(span, _classificationTag);
+        protected internal override ITagSpan<ClassificationTag> CreateTagSpan(
+            Workspace workspace,
+            bool isLiveUpdate,
+            SnapshotSpan span,
+            DiagnosticData data
+        ) => new TagSpan<ClassificationTag>(span, _classificationTag);
 
-        protected internal override ImmutableArray<DiagnosticDataLocation> GetLocationsToTag(DiagnosticData diagnosticData)
+        protected internal override ImmutableArray<DiagnosticDataLocation> GetLocationsToTag(
+            DiagnosticData diagnosticData
+        )
         {
             // If there are 'unnecessary' locations specified in the property bag, use those instead of the main diagnostic location.
-            if (diagnosticData.AdditionalLocations.Length > 0
+            if (
+                diagnosticData.AdditionalLocations.Length > 0
                 && diagnosticData.Properties != null
-                && diagnosticData.Properties.TryGetValue(WellKnownDiagnosticTags.Unnecessary, out var unnecessaryIndices)
-                && unnecessaryIndices is object)
+                && diagnosticData.Properties.TryGetValue(
+                    WellKnownDiagnosticTags.Unnecessary,
+                    out var unnecessaryIndices
+                )
+                && unnecessaryIndices is object
+            )
             {
-                using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(out var locationsToTag);
+                using var _ = PooledObjects.ArrayBuilder<DiagnosticDataLocation>.GetInstance(
+                    out var locationsToTag
+                );
 
                 foreach (var index in GetLocationIndices(unnecessaryIndices))
                     locationsToTag.Add(diagnosticData.AdditionalLocations[index]);

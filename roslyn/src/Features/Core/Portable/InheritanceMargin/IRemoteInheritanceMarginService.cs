@@ -17,7 +17,8 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             DocumentId documentId,
             TextSpan spanToSearch,
             bool frozenPartialSemantics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
 
         ValueTask<ImmutableArray<InheritanceMarginItem>> GetSymbolItemsAsync(
             Checksum solutionChecksum,
@@ -25,6 +26,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             DocumentId? documentId,
             ImmutableArray<(SymbolKey symbolKey, int lineNumber)> symbolKeyAndLineNumbers,
             bool frozenPartialSemantics,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

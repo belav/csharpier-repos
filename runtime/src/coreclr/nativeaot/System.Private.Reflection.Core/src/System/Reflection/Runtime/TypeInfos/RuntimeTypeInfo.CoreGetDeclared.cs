@@ -26,7 +26,9 @@ namespace System.Reflection.Runtime.TypeInfos
 {
     internal abstract partial class RuntimeTypeInfo
     {
-        internal IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(NameFilter optionalNameFilter)
+        internal IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(
+            NameFilter optionalNameFilter
+        )
         {
             //
             // - It may sound odd to get a non-null name filter for a constructor search, but Type.GetMember() is an api that does this.
@@ -38,7 +40,12 @@ namespace System.Reflection.Runtime.TypeInfos
             if (definingType != null)
             {
                 // If there is a definingType, we do not support Synthetic constructors
-                Debug.Assert(object.ReferenceEquals(SyntheticConstructors, Empty<RuntimeConstructorInfo>.Enumerable));
+                Debug.Assert(
+                    object.ReferenceEquals(
+                        SyntheticConstructors,
+                        Empty<RuntimeConstructorInfo>.Enumerable
+                    )
+                );
 
                 return definingType.CoreGetDeclaredConstructors(optionalNameFilter, this);
             }
@@ -46,22 +53,36 @@ namespace System.Reflection.Runtime.TypeInfos
             return CoreGetDeclaredSyntheticConstructors(optionalNameFilter);
         }
 
-        private IEnumerable<ConstructorInfo> CoreGetDeclaredSyntheticConstructors(NameFilter optionalNameFilter)
+        private IEnumerable<ConstructorInfo> CoreGetDeclaredSyntheticConstructors(
+            NameFilter optionalNameFilter
+        )
         {
             foreach (RuntimeConstructorInfo syntheticConstructor in SyntheticConstructors)
             {
-                if (optionalNameFilter == null || optionalNameFilter.Matches(syntheticConstructor.IsStatic ? ConstructorInfo.TypeConstructorName : ConstructorInfo.ConstructorName))
+                if (
+                    optionalNameFilter == null
+                    || optionalNameFilter.Matches(
+                        syntheticConstructor.IsStatic
+                            ? ConstructorInfo.TypeConstructorName
+                            : ConstructorInfo.ConstructorName
+                    )
+                )
                     yield return syntheticConstructor;
             }
         }
 
-        internal IEnumerable<MethodInfo> CoreGetDeclaredMethods(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType)
+        internal IEnumerable<MethodInfo> CoreGetDeclaredMethods(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             RuntimeNamedTypeInfo definingType = AnchoringTypeDefinitionForDeclaredMembers;
             if (definingType != null)
             {
                 // If there is a definingType, we do not support Synthetic constructors
-                Debug.Assert(object.ReferenceEquals(SyntheticMethods, Empty<RuntimeMethodInfo>.Enumerable));
+                Debug.Assert(
+                    object.ReferenceEquals(SyntheticMethods, Empty<RuntimeMethodInfo>.Enumerable)
+                );
 
                 return definingType.CoreGetDeclaredMethods(optionalNameFilter, reflectedType, this);
             }
@@ -69,7 +90,9 @@ namespace System.Reflection.Runtime.TypeInfos
             return CoreGetDeclaredSyntheticMethods(optionalNameFilter);
         }
 
-        private IEnumerable<MethodInfo> CoreGetDeclaredSyntheticMethods(NameFilter optionalNameFilter)
+        private IEnumerable<MethodInfo> CoreGetDeclaredSyntheticMethods(
+            NameFilter optionalNameFilter
+        )
         {
             foreach (RuntimeMethodInfo syntheticMethod in SyntheticMethods)
             {
@@ -78,7 +101,10 @@ namespace System.Reflection.Runtime.TypeInfos
             }
         }
 
-        internal IEnumerable<EventInfo> CoreGetDeclaredEvents(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType)
+        internal IEnumerable<EventInfo> CoreGetDeclaredEvents(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             RuntimeNamedTypeInfo definingType = AnchoringTypeDefinitionForDeclaredMembers;
             if (definingType != null)
@@ -88,7 +114,10 @@ namespace System.Reflection.Runtime.TypeInfos
             return Empty<EventInfo>.Enumerable;
         }
 
-        internal IEnumerable<FieldInfo> CoreGetDeclaredFields(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType)
+        internal IEnumerable<FieldInfo> CoreGetDeclaredFields(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             RuntimeNamedTypeInfo definingType = AnchoringTypeDefinitionForDeclaredMembers;
             if (definingType != null)
@@ -98,12 +127,19 @@ namespace System.Reflection.Runtime.TypeInfos
             return Empty<FieldInfo>.Enumerable;
         }
 
-        internal IEnumerable<PropertyInfo> CoreGetDeclaredProperties(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType)
+        internal IEnumerable<PropertyInfo> CoreGetDeclaredProperties(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType
+        )
         {
             RuntimeNamedTypeInfo definingType = AnchoringTypeDefinitionForDeclaredMembers;
             if (definingType != null)
             {
-                return definingType.CoreGetDeclaredProperties(optionalNameFilter, reflectedType, this);
+                return definingType.CoreGetDeclaredProperties(
+                    optionalNameFilter,
+                    reflectedType,
+                    this
+                );
             }
 
             return Empty<PropertyInfo>.Enumerable;
@@ -125,16 +161,37 @@ namespace System.Reflection.Runtime.TypeInfos
         // Metadata providing implementations of RuntimeNamedTypeInfo implement the following methods
         // to provide filtered access to the various reflection objects by reading metadata directly.
         // The loop of examining methods is done in a metadata specific manner for greater efficiency.
-        internal abstract IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(NameFilter optionalNameFilter, RuntimeTypeInfo contextTypeInfo);
-        internal abstract IEnumerable<MethodInfo> CoreGetDeclaredMethods(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo);
-        internal abstract IEnumerable<EventInfo> CoreGetDeclaredEvents(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo);
-        internal abstract IEnumerable<FieldInfo> CoreGetDeclaredFields(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo);
-        internal abstract IEnumerable<PropertyInfo> CoreGetDeclaredProperties(NameFilter optionalNameFilter, RuntimeTypeInfo reflectedType, RuntimeTypeInfo contextTypeInfo);
+        internal abstract IEnumerable<ConstructorInfo> CoreGetDeclaredConstructors(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo contextTypeInfo
+        );
+        internal abstract IEnumerable<MethodInfo> CoreGetDeclaredMethods(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        );
+        internal abstract IEnumerable<EventInfo> CoreGetDeclaredEvents(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        );
+        internal abstract IEnumerable<FieldInfo> CoreGetDeclaredFields(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        );
+        internal abstract IEnumerable<PropertyInfo> CoreGetDeclaredProperties(
+            NameFilter optionalNameFilter,
+            RuntimeTypeInfo reflectedType,
+            RuntimeTypeInfo contextTypeInfo
+        );
     }
 
     internal sealed partial class RuntimeConstructedGenericTypeInfo
     {
-        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(NameFilter optionalNameFilter)
+        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
+            NameFilter optionalNameFilter
+        )
         {
             return GenericTypeDefinitionTypeInfo.CoreGetDeclaredNestedTypes(optionalNameFilter);
         }
@@ -142,7 +199,9 @@ namespace System.Reflection.Runtime.TypeInfos
 
     internal sealed partial class RuntimeBlockedTypeInfo
     {
-        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(NameFilter optionalNameFilter)
+        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
+            NameFilter optionalNameFilter
+        )
         {
             return Array.Empty<Type>();
         }
@@ -150,7 +209,9 @@ namespace System.Reflection.Runtime.TypeInfos
 
     internal sealed partial class RuntimeNoMetadataNamedTypeInfo
     {
-        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(NameFilter optionalNameFilter)
+        internal sealed override IEnumerable<Type> CoreGetDeclaredNestedTypes(
+            NameFilter optionalNameFilter
+        )
         {
             throw ReflectionCoreExecution.ExecutionDomain.CreateMissingMetadataException(this);
         }

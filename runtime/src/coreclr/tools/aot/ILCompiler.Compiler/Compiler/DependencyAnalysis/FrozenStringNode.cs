@@ -21,7 +21,9 @@ namespace ILCompiler.DependencyAnalysis
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__Str_").Append(nameMangler.GetMangledStringName(_data));
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__Str_")
+                .Append(nameMangler.GetMangledStringName(_data));
         }
 
         public override bool StaticDependenciesAreComputed => true;
@@ -39,7 +41,9 @@ namespace ILCompiler.DependencyAnalysis
 
         private static IEETypeNode GetEETypeNode(NodeFactory factory)
         {
-            DefType systemStringType = factory.TypeSystemContext.GetWellKnownType(WellKnownType.String);
+            DefType systemStringType = factory.TypeSystemContext.GetWellKnownType(
+                WellKnownType.String
+            );
 
             //
             // The GC requires a direct reference to frozen objects' EETypes. If System.String will be compiled into a separate
@@ -57,7 +61,11 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             dataBuilder.EmitZeroPointer(); // Sync block
 
@@ -72,16 +80,19 @@ namespace ILCompiler.DependencyAnalysis
 
             // Null-terminate for friendliness with interop
             dataBuilder.EmitShort(0);
-
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             return new DependencyListEntry[]
             {
-                new DependencyListEntry(GetEETypeNode(factory), "Frozen string literal MethodTable"),
+                new DependencyListEntry(
+                    GetEETypeNode(factory),
+                    "Frozen string literal MethodTable"
+                ),
             };
         }
 

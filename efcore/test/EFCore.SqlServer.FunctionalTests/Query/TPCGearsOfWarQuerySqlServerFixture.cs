@@ -7,8 +7,7 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public class TPCGearsOfWarQuerySqlServerFixture : TPCGearsOfWarQueryRelationalFixture
 {
-    protected override ITestStoreFactory TestStoreFactory
-        => SqlServerTestStoreFactory.Instance;
+    protected override ITestStoreFactory TestStoreFactory => SqlServerTestStoreFactory.Instance;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder, DbContext context)
     {
@@ -17,11 +16,10 @@ public class TPCGearsOfWarQuerySqlServerFixture : TPCGearsOfWarQueryRelationalFi
         modelBuilder.Entity<City>().Property(g => g.Location).HasColumnType("varchar(100)");
 
         // No support yet for DateOnly/TimeOnly (#24507)
-        modelBuilder.Entity<Mission>(
-            b =>
-            {
-                b.Ignore(m => m.Date);
-                b.Ignore(m => m.Time);
-            });
+        modelBuilder.Entity<Mission>(b =>
+        {
+            b.Ignore(m => m.Date);
+            b.Ignore(m => m.Time);
+        });
     }
 }

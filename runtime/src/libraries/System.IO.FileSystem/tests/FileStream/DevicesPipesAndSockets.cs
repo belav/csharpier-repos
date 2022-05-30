@@ -19,16 +19,31 @@ namespace System.IO.Tests
         [MemberData(nameof(DevicePath_FileOptions_TestData))]
         public void CharacterDevice_FileStream_Write(string devicePath, FileOptions fileOptions)
         {
-            FileStreamOptions options = new() { Options = fileOptions, Access = FileAccess.Write, Share = FileShare.Write };
+            FileStreamOptions options =
+                new()
+                {
+                    Options = fileOptions,
+                    Access = FileAccess.Write,
+                    Share = FileShare.Write
+                };
             using FileStream fs = new(devicePath, options);
             fs.Write(Encoding.UTF8.GetBytes("foo"));
         }
 
         [Theory]
         [MemberData(nameof(DevicePath_FileOptions_TestData))]
-        public async Task CharacterDevice_FileStream_WriteAsync(string devicePath, FileOptions fileOptions)
+        public async Task CharacterDevice_FileStream_WriteAsync(
+            string devicePath,
+            FileOptions fileOptions
+        )
         {
-            FileStreamOptions options = new() { Options = fileOptions, Access = FileAccess.Write, Share = FileShare.Write };
+            FileStreamOptions options =
+                new()
+                {
+                    Options = fileOptions,
+                    Access = FileAccess.Write,
+                    Share = FileShare.Write
+                };
             using FileStream fs = new(devicePath, options);
             await fs.WriteAsync(Encoding.UTF8.GetBytes("foo"));
         }
@@ -68,19 +83,36 @@ namespace System.IO.Tests
         public async Task NamedPipe_ReadWrite()
         {
             string fifoPath = GetTestFilePath();
-            Assert.Equal(0, mkfifo(fifoPath, 438 /* 666 in octal */ ));
+            Assert.Equal(
+                0,
+                mkfifo(
+                    fifoPath,
+                    438 /* 666 in octal */
+                )
+            );
 
             await Task.WhenAll(
-                Task.Run(() => 
+                Task.Run(() =>
                 {
-                    using var fs = new FileStream(fifoPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite
+                    );
                     ReadByte(fs, 42);
                 }),
-                Task.Run(() => 
+                Task.Run(() =>
                 {
-                    using var fs = new FileStream(fifoPath, FileMode.Open, FileAccess.Write, FileShare.Read);
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
                     WriteByte(fs, 42);
-                }));
+                })
+            );
         }
 
         [Fact]
@@ -90,18 +122,36 @@ namespace System.IO.Tests
         public async Task NamedPipe_ReadWrite_Async()
         {
             string fifoPath = GetTestFilePath();
-            Assert.Equal(0, mkfifo(fifoPath, 438 /* 666 in octal */ ));
+            Assert.Equal(
+                0,
+                mkfifo(
+                    fifoPath,
+                    438 /* 666 in octal */
+                )
+            );
 
             await Task.WhenAll(
-                Task.Run(async () => {
-                    using var fs = new FileStream(fifoPath, FileMode.Open, FileAccess.Read, FileShare.ReadWrite);
+                Task.Run(async () =>
+                {
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Read,
+                        FileShare.ReadWrite
+                    );
                     await ReadByteAsync(fs, 42);
                 }),
-                Task.Run(async () => 
+                Task.Run(async () =>
                 {
-                    using var fs = new FileStream(fifoPath, FileMode.Open, FileAccess.Write, FileShare.Read);
+                    using var fs = new FileStream(
+                        fifoPath,
+                        FileMode.Open,
+                        FileAccess.Write,
+                        FileShare.Read
+                    );
                     await WriteByteAsync(fs, 42);
-                }));
+                })
+            );
         }
 
         private const int AF_UNIX = 1;
@@ -114,12 +164,21 @@ namespace System.IO.Tests
             int* ptr = stackalloc int[2];
             Assert.Equal(0, socketpair(AF_UNIX, SOCK_STREAM, 0, ptr));
 
-            using var readFileStream = new FileStream(new SafeFileHandle((IntPtr)ptr[0], ownsHandle: true), FileAccess.Read);
-            using var writeFileStream = new FileStream(new SafeFileHandle((IntPtr)ptr[1], ownsHandle: true), FileAccess.Write);
+            using var readFileStream = new FileStream(
+                new SafeFileHandle((IntPtr)ptr[0], ownsHandle: true),
+                FileAccess.Read
+            );
+            using var writeFileStream = new FileStream(
+                new SafeFileHandle((IntPtr)ptr[1], ownsHandle: true),
+                FileAccess.Write
+            );
 
             Task.WhenAll(
-                Task.Run(() => ReadByte(readFileStream, 42)),
-                Task.Run(() => WriteByte(writeFileStream, 42))).GetAwaiter().GetResult();
+                    Task.Run(() => ReadByte(readFileStream, 42)),
+                    Task.Run(() => WriteByte(writeFileStream, 42))
+                )
+                .GetAwaiter()
+                .GetResult();
         }
 
         [Fact]
@@ -131,12 +190,18 @@ namespace System.IO.Tests
                 int* ptr = stackalloc int[2];
                 Assert.Equal(0, socketpair(AF_UNIX, SOCK_STREAM, 0, ptr));
 
-                using var readFileStream = new FileStream(new SafeFileHandle((IntPtr)ptr[0], ownsHandle: true), FileAccess.Read);
-                using var writeFileStream = new FileStream(new SafeFileHandle((IntPtr)ptr[1], ownsHandle: true), FileAccess.Write);
+                using var readFileStream = new FileStream(
+                    new SafeFileHandle((IntPtr)ptr[0], ownsHandle: true),
+                    FileAccess.Read
+                );
+                using var writeFileStream = new FileStream(
+                    new SafeFileHandle((IntPtr)ptr[1], ownsHandle: true),
+                    FileAccess.Write
+                );
 
-                Task.WhenAll(
-                    ReadByteAsync(readFileStream, 42),
-                    WriteByteAsync(writeFileStream, 42)).GetAwaiter().GetResult();
+                Task.WhenAll(ReadByteAsync(readFileStream, 42), WriteByteAsync(writeFileStream, 42))
+                    .GetAwaiter()
+                    .GetResult();
             }
         }
 
@@ -166,12 +231,17 @@ namespace System.IO.Tests
             await fs.FlushAsync();
         }
 
-        private static Lazy<IEnumerable<string>> AvailableDevicePaths = new Lazy<IEnumerable<string>>(() =>
-        { 
+        private static Lazy<IEnumerable<string>> AvailableDevicePaths = new Lazy<
+            IEnumerable<string>
+        >(() =>
+        {
             List<string> paths = new();
-            FileStreamOptions options = new() { Access = FileAccess.Write, Share = FileShare.Write };
+            FileStreamOptions options =
+                new() { Access = FileAccess.Write, Share = FileShare.Write };
 
-            foreach (string devicePath in new[] { "/dev/tty", "/dev/console", "/dev/null", "/dev/zero" })
+            foreach (
+                string devicePath in new[] { "/dev/tty", "/dev/console", "/dev/null", "/dev/zero" }
+            )
             {
                 if (!File.Exists(devicePath))
                 {
@@ -202,9 +272,11 @@ namespace System.IO.Tests
         {
             foreach (string devicePath in AvailableDevicePaths.Value)
             {
-                foreach (FileOptions options in new[] { FileOptions.None, FileOptions.Asynchronous })
+                foreach (
+                    FileOptions options in new[] { FileOptions.None, FileOptions.Asynchronous }
+                )
                 {
-                    yield return new object[] { devicePath, options};
+                    yield return new object[] { devicePath, options };
                 }
             }
         }

@@ -47,5 +47,9 @@ public interface IUserPhoneNumberStore<TUser> : IUserStore<TUser> where TUser : 
     /// <param name="confirmed">A flag indicating whether the user's telephone number has been confirmed.</param>
     /// <param name="cancellationToken">The <see cref="CancellationToken"/> used to propagate notifications that the operation should be canceled.</param>
     /// <returns>The <see cref="Task"/> that represents the asynchronous operation.</returns>
-    Task SetPhoneNumberConfirmedAsync(TUser user, bool confirmed, CancellationToken cancellationToken);
+    Task SetPhoneNumberConfirmedAsync(
+        TUser user,
+        bool confirmed,
+        CancellationToken cancellationToken
+    );
 }

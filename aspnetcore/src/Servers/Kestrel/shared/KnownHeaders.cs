@@ -32,12 +32,12 @@ public class KnownHeaders
         HeaderNames.Host,
     };
 
-    public static readonly string[] DefinedHeaderNames = typeof(HeaderNames).GetFields(BindingFlags.Static | BindingFlags.Public).Select(h => h.Name).ToArray();
+    public static readonly string[] DefinedHeaderNames = typeof(HeaderNames)
+        .GetFields(BindingFlags.Static | BindingFlags.Public)
+        .Select(h => h.Name)
+        .ToArray();
 
-    public static readonly string[] ObsoleteHeaderNames = new[]
-    {
-        HeaderNames.DNT,
-    };
+    public static readonly string[] ObsoleteHeaderNames = new[] { HeaderNames.DNT, };
 
     public static readonly string[] PseudoHeaderNames = new[]
     {
@@ -48,13 +48,11 @@ public class KnownHeaders
         "Status" // :status
     };
 
-    public static readonly string[] NonApiHeaders =
-        ObsoleteHeaderNames
+    public static readonly string[] NonApiHeaders = ObsoleteHeaderNames
         .Concat(PseudoHeaderNames)
         .ToArray();
 
-    public static readonly string[] ApiHeaderNames =
-        DefinedHeaderNames
+    public static readonly string[] ApiHeaderNames = DefinedHeaderNames
         .Except(NonApiHeaders)
         .ToArray();
 
@@ -105,64 +103,72 @@ public class KnownHeaders
             HeaderNames.Connection,
             HeaderNames.TransferEncoding,
         };
-        var requestHeadersCount = new[]
-        {
-            HeaderNames.Host
-        };
-        RequestHeaders = commonHeaders.Concat(new[]
-        {
-            HeaderNames.Authority,
-            HeaderNames.Method,
-            HeaderNames.Path,
-            HeaderNames.Scheme,
-            HeaderNames.Accept,
-            HeaderNames.AcceptCharset,
-            HeaderNames.AcceptEncoding,
-            HeaderNames.AcceptLanguage,
-            HeaderNames.Authorization,
-            HeaderNames.Cookie,
-            HeaderNames.Expect,
-            HeaderNames.From,
-            HeaderNames.GrpcAcceptEncoding,
-            HeaderNames.GrpcTimeout,
-            HeaderNames.Host,
-            HeaderNames.IfMatch,
-            HeaderNames.IfModifiedSince,
-            HeaderNames.IfNoneMatch,
-            HeaderNames.IfRange,
-            HeaderNames.IfUnmodifiedSince,
-            HeaderNames.MaxForwards,
-            HeaderNames.ProxyAuthorization,
-            HeaderNames.Referer,
-            HeaderNames.Range,
-            HeaderNames.TE,
-            HeaderNames.Translate,
-            HeaderNames.UserAgent,
-            HeaderNames.UpgradeInsecureRequests,
-            HeaderNames.RequestId,
-            HeaderNames.CorrelationContext,
-            HeaderNames.TraceParent,
-            HeaderNames.TraceState,
-            HeaderNames.Baggage,
-        })
-        .Concat(corsRequestHeaders)
-        .OrderBy(header => !requestPrimaryHeaders.Contains(header))
-        .ThenBy(header => header)
-        .Select((header, index) => new KnownHeader
-        {
-            Name = header,
-            Index = index,
-            PrimaryHeader = requestPrimaryHeaders.Contains(header),
-            ExistenceCheck = requestHeadersExistence.Contains(header),
-            FastCount = requestHeadersCount.Contains(header)
-        })
-        .Concat(new[] { new KnownHeader
-            {
-                Name = HeaderNames.ContentLength,
-                Index = -1,
-                PrimaryHeader = requestPrimaryHeaders.Contains(HeaderNames.ContentLength)
-            }})
-        .ToArray();
+        var requestHeadersCount = new[] { HeaderNames.Host };
+        RequestHeaders = commonHeaders
+            .Concat(
+                new[]
+                {
+                    HeaderNames.Authority,
+                    HeaderNames.Method,
+                    HeaderNames.Path,
+                    HeaderNames.Scheme,
+                    HeaderNames.Accept,
+                    HeaderNames.AcceptCharset,
+                    HeaderNames.AcceptEncoding,
+                    HeaderNames.AcceptLanguage,
+                    HeaderNames.Authorization,
+                    HeaderNames.Cookie,
+                    HeaderNames.Expect,
+                    HeaderNames.From,
+                    HeaderNames.GrpcAcceptEncoding,
+                    HeaderNames.GrpcTimeout,
+                    HeaderNames.Host,
+                    HeaderNames.IfMatch,
+                    HeaderNames.IfModifiedSince,
+                    HeaderNames.IfNoneMatch,
+                    HeaderNames.IfRange,
+                    HeaderNames.IfUnmodifiedSince,
+                    HeaderNames.MaxForwards,
+                    HeaderNames.ProxyAuthorization,
+                    HeaderNames.Referer,
+                    HeaderNames.Range,
+                    HeaderNames.TE,
+                    HeaderNames.Translate,
+                    HeaderNames.UserAgent,
+                    HeaderNames.UpgradeInsecureRequests,
+                    HeaderNames.RequestId,
+                    HeaderNames.CorrelationContext,
+                    HeaderNames.TraceParent,
+                    HeaderNames.TraceState,
+                    HeaderNames.Baggage,
+                }
+            )
+            .Concat(corsRequestHeaders)
+            .OrderBy(header => !requestPrimaryHeaders.Contains(header))
+            .ThenBy(header => header)
+            .Select(
+                (header, index) =>
+                    new KnownHeader
+                    {
+                        Name = header,
+                        Index = index,
+                        PrimaryHeader = requestPrimaryHeaders.Contains(header),
+                        ExistenceCheck = requestHeadersExistence.Contains(header),
+                        FastCount = requestHeadersCount.Contains(header)
+                    }
+            )
+            .Concat(
+                new[]
+                {
+                    new KnownHeader
+                    {
+                        Name = HeaderNames.ContentLength,
+                        Index = -1,
+                        PrimaryHeader = requestPrimaryHeaders.Contains(HeaderNames.ContentLength)
+                    }
+                }
+            )
+            .ToArray();
 
         var responseHeadersExistence = new[]
         {
@@ -190,49 +196,60 @@ public class KnownHeaders
             HeaderNames.AccessControlExposeHeaders,
             HeaderNames.AccessControlMaxAge,
         };
-        ResponseHeaders = commonHeaders.Concat(new[]
-        {
-            HeaderNames.AcceptRanges,
-            HeaderNames.Age,
-            HeaderNames.Allow,
-            HeaderNames.AltSvc,
-            HeaderNames.ETag,
-            HeaderNames.Location,
-            HeaderNames.ProxyAuthenticate,
-            HeaderNames.ProxyConnection,
-            HeaderNames.RetryAfter,
-            HeaderNames.Server,
-            HeaderNames.SetCookie,
-            HeaderNames.Vary,
-            HeaderNames.Expires,
-            HeaderNames.WWWAuthenticate,
-            HeaderNames.ContentRange,
-            HeaderNames.ContentEncoding,
-            HeaderNames.ContentLanguage,
-            HeaderNames.ContentLocation,
-            HeaderNames.ContentMD5,
-            HeaderNames.LastModified,
-            HeaderNames.Trailer,
-        })
-        .Concat(corsResponseHeaders)
-        .OrderBy(header => !responsePrimaryHeaders.Contains(header))
-        .ThenBy(header => header)
-        .Select((header, index) => new KnownHeader
-        {
-            Name = header,
-            Index = index,
-            EnhancedSetter = enhancedHeaders.Contains(header),
-            ExistenceCheck = responseHeadersExistence.Contains(header),
-            PrimaryHeader = responsePrimaryHeaders.Contains(header)
-        })
-        .Concat(new[] { new KnownHeader
-            {
-                Name = HeaderNames.ContentLength,
-                Index = 63,
-                EnhancedSetter = enhancedHeaders.Contains(HeaderNames.ContentLength),
-                PrimaryHeader = responsePrimaryHeaders.Contains(HeaderNames.ContentLength)
-            }})
-        .ToArray();
+        ResponseHeaders = commonHeaders
+            .Concat(
+                new[]
+                {
+                    HeaderNames.AcceptRanges,
+                    HeaderNames.Age,
+                    HeaderNames.Allow,
+                    HeaderNames.AltSvc,
+                    HeaderNames.ETag,
+                    HeaderNames.Location,
+                    HeaderNames.ProxyAuthenticate,
+                    HeaderNames.ProxyConnection,
+                    HeaderNames.RetryAfter,
+                    HeaderNames.Server,
+                    HeaderNames.SetCookie,
+                    HeaderNames.Vary,
+                    HeaderNames.Expires,
+                    HeaderNames.WWWAuthenticate,
+                    HeaderNames.ContentRange,
+                    HeaderNames.ContentEncoding,
+                    HeaderNames.ContentLanguage,
+                    HeaderNames.ContentLocation,
+                    HeaderNames.ContentMD5,
+                    HeaderNames.LastModified,
+                    HeaderNames.Trailer,
+                }
+            )
+            .Concat(corsResponseHeaders)
+            .OrderBy(header => !responsePrimaryHeaders.Contains(header))
+            .ThenBy(header => header)
+            .Select(
+                (header, index) =>
+                    new KnownHeader
+                    {
+                        Name = header,
+                        Index = index,
+                        EnhancedSetter = enhancedHeaders.Contains(header),
+                        ExistenceCheck = responseHeadersExistence.Contains(header),
+                        PrimaryHeader = responsePrimaryHeaders.Contains(header)
+                    }
+            )
+            .Concat(
+                new[]
+                {
+                    new KnownHeader
+                    {
+                        Name = HeaderNames.ContentLength,
+                        Index = 63,
+                        EnhancedSetter = enhancedHeaders.Contains(HeaderNames.ContentLength),
+                        PrimaryHeader = responsePrimaryHeaders.Contains(HeaderNames.ContentLength)
+                    }
+                }
+            )
+            .ToArray();
 
         ResponseTrailers = new[]
         {
@@ -240,17 +257,20 @@ public class KnownHeaders
             HeaderNames.GrpcMessage,
             HeaderNames.GrpcStatus
         }
-        .OrderBy(header => !responsePrimaryHeaders.Contains(header))
-        .ThenBy(header => header)
-        .Select((header, index) => new KnownHeader
-        {
-            Name = header,
-            Index = index,
-            EnhancedSetter = enhancedHeaders.Contains(header),
-            ExistenceCheck = responseHeadersExistence.Contains(header),
-            PrimaryHeader = responsePrimaryHeaders.Contains(header)
-        })
-        .ToArray();
+            .OrderBy(header => !responsePrimaryHeaders.Contains(header))
+            .ThenBy(header => header)
+            .Select(
+                (header, index) =>
+                    new KnownHeader
+                    {
+                        Name = header,
+                        Index = index,
+                        EnhancedSetter = enhancedHeaders.Contains(header),
+                        ExistenceCheck = responseHeadersExistence.Contains(header),
+                        PrimaryHeader = responsePrimaryHeaders.Contains(header)
+                    }
+            )
+            .ToArray();
 
         var invalidH2H3ResponseHeaders = new[]
         {
@@ -283,28 +303,28 @@ public class KnownHeaders
     }
 
     static string AppendSwitch(IEnumerable<IGrouping<int, KnownHeader>> values) =>
-         $@"switch (name.Length)
+        $@"switch (name.Length)
             {{{Each(values, byLength => $@"
                 case {byLength.Key}:{AppendSwitchSection(byLength.Key, byLength.OrderBy(h => h, KnownHeaderComparer.Instance).ToList())}
                     break;")}
             }}";
 
     static string AppendHPackSwitch(IEnumerable<HPackGroup> values) =>
-         $@"switch (index)
+        $@"switch (index)
             {{{Each(values, header => $@"{Each(header.HPackStaticTableIndexes, index => $@"
                 case {index}:")}
                     {AppendIndexedSwitchSection(header.Header)}")}
             }}";
 
     static string AppendQPackSwitch(IEnumerable<QPackGroup> values) =>
-         $@"switch (index)
+        $@"switch (index)
             {{{Each(values, header => $@"{Each(header.QPackStaticTableFields, fields => $@"
                 case {fields.Index}:")}
                     {AppendIndexedSwitchSection(header.Header)}")}
             }}";
 
     static string AppendValue(bool returnTrue = false) =>
-         $@"// Matched a known header
+        $@"// Matched a known header
                 if ((_previousBits & flag) != 0)
                 {{
                     // Had a previous string for this header, mark it as used so we don't clear it OnHeadersComplete or consider it if we get a second header
@@ -367,14 +387,19 @@ public class KnownHeaders
 
     static string AppendSwitchSection(int length, IList<KnownHeader> values)
     {
-        var useVarForFirstTerm = values.Count > 1 && values.Select(h => h.FirstNameIgnoreCaseSegment()).Distinct().Count() == 1;
-        var firstTermVarExpression = values.Select(h => h.FirstNameIgnoreCaseSegment()).FirstOrDefault();
+        var useVarForFirstTerm =
+            values.Count > 1
+            && values.Select(h => h.FirstNameIgnoreCaseSegment()).Distinct().Count() == 1;
+        var firstTermVarExpression = values
+            .Select(h => h.FirstNameIgnoreCaseSegment())
+            .FirstOrDefault();
         var firstTermVar = $"firstTerm{length}";
 
         var start = "";
         if (useVarForFirstTerm)
         {
-            start = $@"
+            start =
+                $@"
                     var {firstTermVar} = {firstTermVarExpression};";
         }
         else
@@ -410,11 +435,13 @@ public class KnownHeaders
 
         // Group headers together that have the same ignore equal case equals check for the first term.
         // There will probably only be more than one item in a group for Content-Encoding, Content-Language, Content-Location.
-        var groups = values.GroupBy(header => header.EqualIgnoreCaseBytesFirstTerm())
+        var groups = values
+            .GroupBy(header => header.EqualIgnoreCaseBytesFirstTerm())
             .OrderBy(g => g.First(), KnownHeaderComparer.Instance)
             .ToList();
 
-        return start + $@"{Each(groups, (byFirstTerm, i) => $@"{(byFirstTerm.Count() == 1 ? $@"{Each(byFirstTerm, header => $@"
+        return start
+            + $@"{Each(groups, (byFirstTerm, i) => $@"{(byFirstTerm.Count() == 1 ? $@"{Each(byFirstTerm, header => $@"
                     {(i > 0 ? "else " : "")}if ({header.EqualIgnoreCaseBytes(firstTermVar)})
                     {{{GenerateIfBody(header)}
                     }}")}" : $@"
@@ -440,23 +467,40 @@ public class KnownHeaders
         public bool FastCount { get; set; }
         public bool EnhancedSetter { get; set; }
         public bool PrimaryHeader { get; set; }
-        public string FlagBit() => $"{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
-        public string TestBitCore(string name) => $"({name} & {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) != 0";
+
+        public string FlagBit() =>
+            $"{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
+
+        public string TestBitCore(string name) =>
+            $"({name} & {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) != 0";
+
         public string TestBit() => TestBitCore("_bits");
+
         public string TestTempBit() => TestBitCore("tempBits");
-        public string TestNotTempBit() => $"(tempBits & ~{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) == 0";
-        public string TestNotBit() => $"(_bits & {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) == 0";
-        public string SetBit() => $"_bits |= {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
-        public string ClearBit() => $"_bits &= ~{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
+
+        public string TestNotTempBit() =>
+            $"(tempBits & ~{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) == 0";
+
+        public string TestNotBit() =>
+            $"(_bits & {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L) == 0";
+
+        public string SetBit() =>
+            $"_bits |= {"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
+
+        public string ClearBit() =>
+            $"_bits &= ~{"0x" + (1L << Index).ToString("x", CultureInfo.InvariantCulture)}L";
 
         private static string ResolveIdentifier(string name)
         {
             // Check the 3 lowercase headers
             switch (name)
             {
-                case "baggage": return "Baggage";
-                case "traceparent": return "TraceParent";
-                case "tracestate": return "TraceState";
+                case "baggage":
+                    return "Baggage";
+                case "traceparent":
+                    return "TraceParent";
+                case "tracestate":
+                    return "TraceState";
             }
 
             var identifier = name.Replace("-", "");
@@ -472,7 +516,13 @@ public class KnownHeaders
             return identifier;
         }
 
-        private static void GetMaskAndComp(string name, int offset, int count, out ulong mask, out ulong comp)
+        private static void GetMaskAndComp(
+            string name,
+            int offset,
+            int count,
+            out ulong mask,
+            out ulong comp
+        )
         {
             mask = 0;
             comp = 0;
@@ -485,7 +535,13 @@ public class KnownHeaders
             }
         }
 
-        private static string NameTerm(string name, int offset, int count, string type, string suffix)
+        private static string NameTerm(
+            string name,
+            int offset,
+            int count,
+            string type,
+            string suffix
+        )
         {
             GetMaskAndComp(name, offset, count, out var mask, out _);
 
@@ -515,7 +571,6 @@ public class KnownHeaders
                     return $"(ReadUnalignedLittleEndian_{type}(ref Unsafe.AddByteOffset(ref nameStart, (IntPtr)({offset / count} * sizeof({type})))) & 0x{mask:x}{suffix})";
                 }
             }
-
         }
 
         private static string EqualityTerm(string name, int offset, int count, string suffix)
@@ -746,33 +801,44 @@ public class KnownHeaders
 
         var responseTrailers = ResponseTrailers;
 
-        var allHeaderNames = RequestHeaders.Concat(ResponseHeaders).Concat(ResponseTrailers)
-            .Select(h => h.Identifier).Distinct().OrderBy(n => n, StringComparer.InvariantCulture).ToArray();
+        var allHeaderNames = RequestHeaders
+            .Concat(ResponseHeaders)
+            .Concat(ResponseTrailers)
+            .Select(h => h.Identifier)
+            .Distinct()
+            .OrderBy(n => n, StringComparer.InvariantCulture)
+            .ToArray();
 
         var loops = new[]
         {
-                new
-                {
-                    Headers = requestHeaders,
-                    HeadersByLength = requestHeaders.OrderBy(x => x.Name.Length).GroupBy(x => x.Name.Length),
-                    ClassName = "HttpRequestHeaders",
-                    Bytes = default(byte[])
-                },
-                new
-                {
-                    Headers = responseHeaders,
-                    HeadersByLength = responseHeaders.OrderBy(x => x.Name.Length).GroupBy(x => x.Name.Length),
-                    ClassName = "HttpResponseHeaders",
-                    Bytes = responseHeaders.SelectMany(header => header.Bytes).ToArray()
-                },
-                new
-                {
-                    Headers = responseTrailers,
-                    HeadersByLength = responseTrailers.OrderBy(x => x.Name.Length).GroupBy(x => x.Name.Length),
-                    ClassName = "HttpResponseTrailers",
-                    Bytes = responseTrailers.SelectMany(header => header.Bytes).ToArray()
-                }
-            };
+            new
+            {
+                Headers = requestHeaders,
+                HeadersByLength = requestHeaders
+                    .OrderBy(x => x.Name.Length)
+                    .GroupBy(x => x.Name.Length),
+                ClassName = "HttpRequestHeaders",
+                Bytes = default(byte[])
+            },
+            new
+            {
+                Headers = responseHeaders,
+                HeadersByLength = responseHeaders
+                    .OrderBy(x => x.Name.Length)
+                    .GroupBy(x => x.Name.Length),
+                ClassName = "HttpResponseHeaders",
+                Bytes = responseHeaders.SelectMany(header => header.Bytes).ToArray()
+            },
+            new
+            {
+                Headers = responseTrailers,
+                HeadersByLength = responseTrailers
+                    .OrderBy(x => x.Name.Length)
+                    .GroupBy(x => x.Name.Length),
+                ClassName = "HttpResponseTrailers",
+                Bytes = responseTrailers.SelectMany(header => header.Bytes).ToArray()
+            }
+        };
         foreach (var loop in loops.Where(l => l.Bytes != null))
         {
             var offset = 0;
@@ -783,7 +849,8 @@ public class KnownHeaders
                 offset += header.BytesCount;
             }
         }
-        var s = $@"// Licensed to the .NET Foundation under one or more agreements.
+        var s =
+            $@"// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System;
@@ -822,13 +889,11 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
     }}
 {Each(loops, loop => $@"
     internal partial class {loop.ClassName} : IHeaderDictionary
-    {{{(loop.Bytes != null ?
-        $@"
+    {{{(loop.Bytes != null ? $@"
         private static ReadOnlySpan<byte> HeaderBytes => new byte[]
         {{
             {Each(loop.Bytes, b => $"{b},")}
-        }};"
-        : "")}
+        }};" : "")}
         private HeaderReferences _headers;
 {Each(loop.Headers.Where(header => header.ExistenceCheck), header => $@"
         public bool Has{header.Identifier} => {header.TestBit()};")}
@@ -904,7 +969,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                     _headers._raw{header.Identifier} = null;")}
             }}
         }}")}
-        {Each(ApiHeaderNames.Where(header => header != "ContentLength" && !loop.Headers.Select(kh => kh.Identifier).Contains(header)), header => $@"
+        {Each(ApiHeaderNames.Where(header => header != "ContentLength" && !loop.Headers .Select(kh => kh.Identifier) .Contains(header)), header => $@"
         StringValues IHeaderDictionary.{header}
         {{
             get
@@ -1107,8 +1172,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
 
             return RemoveUnknown(key);
         }}
-{(loop.ClassName != "HttpRequestHeaders" ?
- $@"        protected override void ClearFast()
+{(loop.ClassName != "HttpRequestHeaders" ? $@"        protected override void ClearFast()
         {{
             MaybeUnknown?.Clear();
             _contentLength = null;
@@ -1119,7 +1183,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
                 _headers = default(HeaderReferences);
                 return;
             }}
-            {Each(loop.Headers.Where(header => header.Identifier != "ContentLength").OrderBy(h => !h.PrimaryHeader), header => $@"
+            {Each(loop.Headers .Where(header => header.Identifier != "ContentLength") .OrderBy(h => !h.PrimaryHeader), header => $@"
             if ({header.TestTempBit()})
             {{
                 _headers._{header.Identifier} = default;
@@ -1131,11 +1195,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Internal.Http
             }}
             ")}
         }}
-" :
-$@"        private void Clear(long bitsToClear)
+" : $@"        private void Clear(long bitsToClear)
         {{
             var tempBits = bitsToClear;
-            {Each(loop.Headers.Where(header => header.Identifier != "ContentLength").OrderBy(h => !h.PrimaryHeader), header => $@"
+            {Each(loop.Headers .Where(header => header.Identifier != "ContentLength") .OrderBy(h => !h.PrimaryHeader), header => $@"
             if ({header.TestTempBit()})
             {{
                 _headers._{header.Identifier} = default;
@@ -1207,7 +1270,7 @@ $@"        private void Clear(long bitsToClear)
                 int keyLength;
                 var headerName = string.Empty;
                 switch (next)
-                {{{Each(loop.Headers.OrderBy(h => h.Index).Where(h => h.Identifier != "ContentLength"), header => $@"
+                {{{Each(loop.Headers .OrderBy(h => h.Index) .Where(h => h.Identifier != "ContentLength"), header => $@"
                     case {header.Index}: // Header: ""{header.Name}""
                         Debug.Assert({header.TestTempBit()});{(header.EnhancedSetter == false ? $@"
                         values = ref _headers._{header.Identifier};
@@ -1431,7 +1494,9 @@ $@"        private void Clear(long bitsToClear)
         }}";
     }
 
-    private static string AppendQPackSwitch(IList<(int Index, System.Net.Http.QPack.HeaderField Field)> values)
+    private static string AppendQPackSwitch(
+        IList<(int Index, System.Net.Http.QPack.HeaderField Field)> values
+    )
     {
         if (values.Count == 1 && values[0].Field.Value.Length == 0)
         {
@@ -1454,42 +1519,68 @@ $@"        private void Clear(long bitsToClear)
 
     private static IEnumerable<QPackGroup> GroupQPack(KnownHeader[] headers)
     {
-        var staticHeaders = new (int Index, System.Net.Http.QPack.HeaderField HeaderField)[H3StaticTable.Count];
+        var staticHeaders = new (int Index, System.Net.Http.QPack.HeaderField HeaderField)[
+            H3StaticTable.Count
+        ];
         for (var i = 0; i < H3StaticTable.Count; i++)
         {
             staticHeaders[i] = (i, H3StaticTable.Get(i));
         }
 
-        var groupedHeaders = staticHeaders.GroupBy(h => Encoding.ASCII.GetString(h.HeaderField.Name)).Select(g =>
-        {
-            return new QPackGroup
+        var groupedHeaders = staticHeaders
+            .GroupBy(h => Encoding.ASCII.GetString(h.HeaderField.Name))
+            .Select(g =>
             {
-                Name = g.Key,
-                Header = headers.SingleOrDefault(knownHeader => string.Equals(knownHeader.Name, g.Key, StringComparison.OrdinalIgnoreCase)),
-                QPackStaticTableFields = g.ToArray()
-            };
-        }).Where(g => g.Header != null).ToList();
+                return new QPackGroup
+                {
+                    Name = g.Key,
+                    Header = headers.SingleOrDefault(
+                        knownHeader =>
+                            string.Equals(
+                                knownHeader.Name,
+                                g.Key,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    ),
+                    QPackStaticTableFields = g.ToArray()
+                };
+            })
+            .Where(g => g.Header != null)
+            .ToList();
 
         return groupedHeaders;
     }
 
     private static IEnumerable<HPackGroup> GroupHPack(KnownHeader[] headers)
     {
-        var staticHeaders = new (int Index, System.Net.Http.HPack.HeaderField HeaderField)[H2StaticTable.Count];
+        var staticHeaders = new (int Index, System.Net.Http.HPack.HeaderField HeaderField)[
+            H2StaticTable.Count
+        ];
         for (var i = 0; i < H2StaticTable.Count; i++)
         {
             staticHeaders[i] = (i + 1, H2StaticTable.Get(i));
         }
 
-        var groupedHeaders = staticHeaders.GroupBy(h => Encoding.ASCII.GetString(h.HeaderField.Name)).Select(g =>
-        {
-            return new HPackGroup
+        var groupedHeaders = staticHeaders
+            .GroupBy(h => Encoding.ASCII.GetString(h.HeaderField.Name))
+            .Select(g =>
             {
-                Name = g.Key,
-                Header = headers.SingleOrDefault(knownHeader => string.Equals(knownHeader.Name, g.Key, StringComparison.OrdinalIgnoreCase)),
-                HPackStaticTableIndexes = g.Select(h => h.Index).ToArray()
-            };
-        }).Where(g => g.Header != null).ToList();
+                return new HPackGroup
+                {
+                    Name = g.Key,
+                    Header = headers.SingleOrDefault(
+                        knownHeader =>
+                            string.Equals(
+                                knownHeader.Name,
+                                g.Key,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    ),
+                    HPackStaticTableIndexes = g.Select(h => h.Index).ToArray()
+                };
+            })
+            .Where(g => g.Header != null)
+            .ToList();
 
         return groupedHeaders;
     }

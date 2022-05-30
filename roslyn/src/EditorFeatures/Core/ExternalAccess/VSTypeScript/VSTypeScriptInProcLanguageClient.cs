@@ -37,18 +37,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, true)]
         public VSTypeScriptInProcLanguageClient(
-            [Import(AllowDefault = true)] IVSTypeScriptCapabilitiesProvider? typeScriptCapabilitiesProvider,
+            [Import(AllowDefault = true)]
+                IVSTypeScriptCapabilitiesProvider? typeScriptCapabilitiesProvider,
             VSTypeScriptLspServiceProvider lspServiceProvider,
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider listenerProvider,
             ILspLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(lspServiceProvider, globalOptions, listenerProvider, lspLoggerFactory, threadingContext)
+            IThreadingContext threadingContext
+        )
+            : base(
+                lspServiceProvider,
+                globalOptions,
+                listenerProvider,
+                lspLoggerFactory,
+                threadingContext
+            )
         {
             _typeScriptCapabilitiesProvider = typeScriptCapabilitiesProvider;
         }
 
-        protected override ImmutableArray<string> SupportedLanguages => ImmutableArray.Create(InternalLanguageNames.TypeScript);
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ImmutableArray.Create(InternalLanguageNames.TypeScript);
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
@@ -62,7 +71,9 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
             serverCapabilities.ProjectContextProvider = true;
 
-            var isPullDiagnostics = GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+            var isPullDiagnostics = GlobalOptions.IsPullDiagnostics(
+                InternalDiagnosticsOptions.NormalDiagnosticMode
+            );
             if (isPullDiagnostics)
             {
                 serverCapabilities.SupportsDiagnosticRequests = true;
@@ -76,17 +87,27 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
         /// they will get no diagnostics.  When not enabled we don't show the failure box (failure will still be recorded in the task status center)
         /// as the failure is not catastrophic.
         /// </summary>
-        public override bool ShowNotificationOnInitializeFailed => GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+        public override bool ShowNotificationOnInitializeFailed =>
+            GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.RoslynTypeScriptLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.RoslynTypeScriptLspServer;
 
-        private VSInternalServerCapabilities GetTypeScriptServerCapabilities(ClientCapabilities clientCapabilities)
+        private VSInternalServerCapabilities GetTypeScriptServerCapabilities(
+            ClientCapabilities clientCapabilities
+        )
         {
             if (_typeScriptCapabilitiesProvider != null)
             {
                 var serializedClientCapabilities = JsonConvert.SerializeObject(clientCapabilities);
-                var serializedServerCapabilities = _typeScriptCapabilitiesProvider.GetServerCapabilities(serializedClientCapabilities);
-                var typeScriptServerCapabilities = JsonConvert.DeserializeObject<VSInternalServerCapabilities>(serializedServerCapabilities);
+                var serializedServerCapabilities =
+                    _typeScriptCapabilitiesProvider.GetServerCapabilities(
+                        serializedClientCapabilities
+                    );
+                var typeScriptServerCapabilities =
+                    JsonConvert.DeserializeObject<VSInternalServerCapabilities>(
+                        serializedServerCapabilities
+                    );
                 Contract.ThrowIfNull(typeScriptServerCapabilities);
                 return typeScriptServerCapabilities;
             }

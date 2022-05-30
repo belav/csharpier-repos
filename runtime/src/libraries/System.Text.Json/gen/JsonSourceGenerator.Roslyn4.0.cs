@@ -24,17 +24,28 @@ namespace System.Text.Json.SourceGeneration
     {
         public void Initialize(IncrementalGeneratorInitializationContext context)
         {
-            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations = context.SyntaxProvider
-                .CreateSyntaxProvider(static (s, _) => Parser.IsSyntaxTargetForGeneration(s), static (s, c) => Parser.GetSemanticTargetForGeneration(s, c))
-                .Where(static c => c is not null);
+            IncrementalValuesProvider<ClassDeclarationSyntax> classDeclarations =
+                context.SyntaxProvider
+                    .CreateSyntaxProvider(
+                        static (s, _) => Parser.IsSyntaxTargetForGeneration(s),
+                        static (s, c) => Parser.GetSemanticTargetForGeneration(s, c)
+                    )
+                    .Where(static c => c is not null);
 
             IncrementalValueProvider<(Compilation, ImmutableArray<ClassDeclarationSyntax>)> compilationAndClasses =
                 context.CompilationProvider.Combine(classDeclarations.Collect());
 
-            context.RegisterSourceOutput(compilationAndClasses, (spc, source) => Execute(source.Item1, source.Item2, spc));
+            context.RegisterSourceOutput(
+                compilationAndClasses,
+                (spc, source) => Execute(source.Item1, source.Item2, spc)
+            );
         }
 
-        private void Execute(Compilation compilation, ImmutableArray<ClassDeclarationSyntax> contextClasses, SourceProductionContext sourceProductionContext)
+        private void Execute(
+            Compilation compilation,
+            ImmutableArray<ClassDeclarationSyntax> contextClasses,
+            SourceProductionContext sourceProductionContext
+        )
         {
 #if LAUNCH_DEBUGGER
             if (!Diagnostics.Debugger.IsAttached)
@@ -47,9 +58,14 @@ namespace System.Text.Json.SourceGeneration
                 return;
             }
 
-            JsonSourceGenerationContext context = new JsonSourceGenerationContext(sourceProductionContext);
+            JsonSourceGenerationContext context = new JsonSourceGenerationContext(
+                sourceProductionContext
+            );
             Parser parser = new(compilation, context);
-            SourceGenerationSpec? spec = parser.GetGenerationSpec(contextClasses, sourceProductionContext.CancellationToken);
+            SourceGenerationSpec? spec = parser.GetGenerationSpec(
+                contextClasses,
+                sourceProductionContext.CancellationToken
+            );
             if (spec != null)
             {
                 _rootTypes = spec.ContextGenerationSpecList[0].RootSerializableTypes;
@@ -62,7 +78,9 @@ namespace System.Text.Json.SourceGeneration
         /// <summary>
         /// Helper for unit tests.
         /// </summary>
-        public Dictionary<string, Type>? GetSerializableTypes() => _rootTypes?.ToDictionary(p => p.Type.FullName, p => p.Type);
+        public Dictionary<string, Type>? GetSerializableTypes() =>
+            _rootTypes?.ToDictionary(p => p.Type.FullName, p => p.Type);
+
         private List<TypeGenerationSpec>? _rootTypes;
     }
 

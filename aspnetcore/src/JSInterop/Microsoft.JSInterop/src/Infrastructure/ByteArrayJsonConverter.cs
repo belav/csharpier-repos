@@ -20,7 +20,11 @@ internal sealed class ByteArrayJsonConverter : JsonConverter<byte[]>
 
     public JSRuntime JSRuntime { get; }
 
-    public override byte[]? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+    public override byte[]? Read(
+        ref Utf8JsonReader reader,
+        Type typeToConvert,
+        JsonSerializerOptions options
+    )
     {
         // For back-compat reasons, try reading the input as a base-64 encoded string at first.
         if (reader.TokenType == JsonTokenType.String && reader.TryGetBytesFromBase64(out var bytes))
@@ -30,14 +34,18 @@ internal sealed class ByteArrayJsonConverter : JsonConverter<byte[]>
 
         if (JSRuntime.ByteArraysToBeRevived.Count == 0)
         {
-            throw new JsonException("JSON serialization is attempting to deserialize an unexpected byte array.");
+            throw new JsonException(
+                "JSON serialization is attempting to deserialize an unexpected byte array."
+            );
         }
 
         int byteArrayRef;
 
         if (reader.TokenType != JsonTokenType.StartObject)
         {
-            throw new JsonException($"Unexpected JSON Token {reader.TokenType}, expected 'StartObject'.");
+            throw new JsonException(
+                $"Unexpected JSON Token {reader.TokenType}, expected 'StartObject'."
+            );
         }
 
         if (reader.Read() && reader.TokenType == JsonTokenType.PropertyName)
@@ -48,7 +56,9 @@ internal sealed class ByteArrayJsonConverter : JsonConverter<byte[]>
             }
             else if (!reader.Read() || reader.TokenType != JsonTokenType.Number)
             {
-                throw new JsonException($"Unexpected JSON Token {reader.TokenType}, expected 'Number'.");
+                throw new JsonException(
+                    $"Unexpected JSON Token {reader.TokenType}, expected 'Number'."
+                );
             }
             else if (!reader.TryGetInt32(out byteArrayRef))
             {
@@ -57,12 +67,16 @@ internal sealed class ByteArrayJsonConverter : JsonConverter<byte[]>
         }
         else
         {
-            throw new JsonException($"Unexpected JSON Token {reader.TokenType}, expected 'PropertyName'.");
+            throw new JsonException(
+                $"Unexpected JSON Token {reader.TokenType}, expected 'PropertyName'."
+            );
         }
 
         if (reader.Read() && reader.TokenType != JsonTokenType.EndObject)
         {
-            throw new JsonException($"Unexpected JSON Token {reader.TokenType}, expected 'EndObject'.");
+            throw new JsonException(
+                $"Unexpected JSON Token {reader.TokenType}, expected 'EndObject'."
+            );
         }
 
         if (byteArrayRef >= JSRuntime.ByteArraysToBeRevived.Count || byteArrayRef < 0)

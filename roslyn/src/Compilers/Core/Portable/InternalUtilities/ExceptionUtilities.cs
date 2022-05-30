@@ -17,7 +17,11 @@ namespace Roslyn.Utilities
         /// <returns>The <see cref="InvalidOperationException"/>, which should be thrown by the caller.</returns>
         internal static Exception UnexpectedValue(object? o)
         {
-            string output = string.Format("Unexpected value '{0}' of type '{1}'", o, (o != null) ? o.GetType().FullName : "<unknown>");
+            string output = string.Format(
+                "Unexpected value '{0}' of type '{1}'",
+                o,
+                (o != null) ? o.GetType().FullName : "<unknown>"
+            );
             Debug.Assert(false, output);
 
             // We do not throw from here because we don't want all Watson reports to be bucketed to this call.
@@ -26,7 +30,12 @@ namespace Roslyn.Utilities
 
         internal static Exception Unreachable
         {
-            get { return new InvalidOperationException("This program location is thought to be unreachable."); }
+            get
+            {
+                return new InvalidOperationException(
+                    "This program location is thought to be unreachable."
+                );
+            }
         }
 
         /// <summary>
@@ -35,7 +44,9 @@ namespace Roslyn.Utilities
         /// <param name="exception">The exception to test.</param>
         /// <param name="cancellationToken">Checked to see if the provided token was cancelled.</param>
         /// <returns><see langword="true"/> if the exception was an <see cref="OperationCanceledException" /> and the token was canceled.</returns>
-        internal static bool IsCurrentOperationBeingCancelled(Exception exception, CancellationToken cancellationToken)
-            => exception is OperationCanceledException && cancellationToken.IsCancellationRequested;
+        internal static bool IsCurrentOperationBeingCancelled(
+            Exception exception,
+            CancellationToken cancellationToken
+        ) => exception is OperationCanceledException && cancellationToken.IsCancellationRequested;
     }
 }

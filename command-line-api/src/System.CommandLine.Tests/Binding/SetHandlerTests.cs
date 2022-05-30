@@ -20,16 +20,13 @@ namespace System.CommandLine.Tests.Binding
             var boolOption = new Option<int>("-i");
             var stringArg = new Argument<string>("value");
 
-            var command = new RootCommand
-            {
-                boolOption,
-                stringArg
-            };
+            var command = new RootCommand { boolOption, stringArg };
 
             CustomType boundInstance = default;
             command.SetHandler(
                 (CustomType instance) => boundInstance = instance,
-                new CustomBinder(boolOption, stringArg));
+                new CustomBinder(boolOption, stringArg)
+            );
 
             var console = new TestConsole();
             command.Invoke("-i 123 hi", console);
@@ -94,53 +91,48 @@ namespace System.CommandLine.Tests.Binding
             var receivedValues = new List<int>();
             Delegate handlerFunc = arity switch
             {
-                1 => new Action<int>(
-                    i1 =>
-                        Received(i1)),
-                2 => new Action<int, int>(
-                    (i1, i2) =>
-                        Received(i1, i2)),
-                3 => new Action<int, int, int>(
-                    (i1, i2, i3) =>
-                        Received(i1, i2, i3)),
-                4 => new Action<int, int, int, int>(
-                    (i1, i2, i3, i4) =>
-                        Received(i1, i2, i3, i4)),
-                5 => new Action<int, int, int, int, int>(
-                    (i1, i2, i3, i4, i5) =>
-                        Received(i1, i2, i3, i4, i5)),
-                6 => new Action<int, int, int, int, int, int>(
-                    (i1, i2, i3, i4, i5, i6) =>
-                        Received(i1, i2, i3, i4, i5, i6)),
-                7 => new Action<int, int, int, int, int, int, int>(
-                    (i1, i2, i3, i4, i5, i6, i7) =>
-                        Received(i1, i2, i3, i4, i5, i6, i7)),
-                8 => new Action<int, int, int, int, int, int, int, int>(
-                    (i1, i2, i3, i4, i5, i6, i7, i8) =>
-                        Received(i1, i2, i3, i4, i5, i6, i7, i8)),
-              
+                1 => new Action<int>(i1 => Received(i1)),
+                2 => new Action<int, int>((i1, i2) => Received(i1, i2)),
+                3 => new Action<int, int, int>((i1, i2, i3) => Received(i1, i2, i3)),
+                4 => new Action<int, int, int, int>((i1, i2, i3, i4) => Received(i1, i2, i3, i4)),
+                5
+                    => new Action<int, int, int, int, int>(
+                        (i1, i2, i3, i4, i5) => Received(i1, i2, i3, i4, i5)
+                    ),
+                6
+                    => new Action<int, int, int, int, int, int>(
+                        (i1, i2, i3, i4, i5, i6) => Received(i1, i2, i3, i4, i5, i6)
+                    ),
+                7
+                    => new Action<int, int, int, int, int, int, int>(
+                        (i1, i2, i3, i4, i5, i6, i7) => Received(i1, i2, i3, i4, i5, i6, i7)
+                    ),
+                8
+                    => new Action<int, int, int, int, int, int, int, int>(
+                        (i1, i2, i3, i4, i5, i6, i7, i8) => Received(i1, i2, i3, i4, i5, i6, i7, i8)
+                    ),
+
                 _ => throw new ArgumentOutOfRangeException()
             };
 
             // build up the method invocation
             var genericMethodDef = typeof(Handler)
-                                   .GetMethods()
-                                   .Where(m => m.Name == nameof(Handler.SetHandler))
-                                   .Where(m => m.IsGenericMethod /* symbols + handler Func */)
-                                   .Where(m => m.GetParameters().ElementAt(1).ParameterType.Name.StartsWith("Action"))
-                                   .Single(m => m.GetGenericArguments().Length == arity);
+                .GetMethods()
+                .Where(m => m.Name == nameof(Handler.SetHandler))
+                .Where(
+                    m => m.IsGenericMethod /* symbols + handler Func */
+                )
+                .Where(m => m.GetParameters().ElementAt(1).ParameterType.Name.StartsWith("Action"))
+                .Single(m => m.GetGenericArguments().Length == arity);
 
-            var genericParameterTypes = Enumerable.Range(1, arity)
-                                                  .Select(_ => typeof(int))
-                                                  .ToArray();
+            var genericParameterTypes = Enumerable
+                .Range(1, arity)
+                .Select(_ => typeof(int))
+                .ToArray();
 
             var setHandler = genericMethodDef.MakeGenericMethod(genericParameterTypes);
 
-            var parameters = new List<object>
-            {
-                command,
-                handlerFunc
-            };
+            var parameters = new List<object> { command, handlerFunc };
 
             parameters.AddRange(command.Arguments);
 
@@ -148,9 +140,9 @@ namespace System.CommandLine.Tests.Binding
 
             var exitCode = command.Invoke(commandLine);
 
-            receivedValues.Should().BeEquivalentTo(
-                Enumerable.Range(1, arity),
-                config => config.WithStrictOrdering());
+            receivedValues
+                .Should()
+                .BeEquivalentTo(Enumerable.Range(1, arity), config => config.WithStrictOrdering());
 
             exitCode.Should().Be(0);
 
@@ -185,62 +177,60 @@ namespace System.CommandLine.Tests.Binding
             var receivedValues = new List<int>();
             Delegate handlerFunc = arity switch
             {
-                1 => new Func<int, Task>(
-                    i1 =>
-                        Received(i1)),
-                2 => new Func<int, int, Task>(
-                    (i1, i2) =>
-                        Received(i1, i2)),
-                3 => new Func<int, int, int, Task>(
-                    (i1, i2, i3) =>
-                        Received(i1, i2, i3)),
-                4 => new Func<int, int, int, int, Task>(
-                    (i1, i2, i3, i4) =>
-                        Received(i1, i2, i3, i4)),
-                5 => new Func<int, int, int, int, int, Task>(
-                    (i1, i2, i3, i4, i5) =>
-                        Received(i1, i2, i3, i4, i5)),
-                6 => new Func<int, int, int, int, int, int, Task>(
-                    (i1, i2, i3, i4, i5, i6) =>
-                        Received(i1, i2, i3, i4, i5, i6)),
-                7 => new Func<int, int, int, int, int, int, int, Task>(
-                    (i1, i2, i3, i4, i5, i6, i7) =>
-                        Received(i1, i2, i3, i4, i5, i6, i7)),
-                8 => new Func<int, int, int, int, int, int, int, int, Task>(
-                    (i1, i2, i3, i4, i5, i6, i7, i8) =>
-                        Received(i1, i2, i3, i4, i5, i6, i7, i8)),
-             
+                1 => new Func<int, Task>(i1 => Received(i1)),
+                2 => new Func<int, int, Task>((i1, i2) => Received(i1, i2)),
+                3 => new Func<int, int, int, Task>((i1, i2, i3) => Received(i1, i2, i3)),
+                4
+                    => new Func<int, int, int, int, Task>(
+                        (i1, i2, i3, i4) => Received(i1, i2, i3, i4)
+                    ),
+                5
+                    => new Func<int, int, int, int, int, Task>(
+                        (i1, i2, i3, i4, i5) => Received(i1, i2, i3, i4, i5)
+                    ),
+                6
+                    => new Func<int, int, int, int, int, int, Task>(
+                        (i1, i2, i3, i4, i5, i6) => Received(i1, i2, i3, i4, i5, i6)
+                    ),
+                7
+                    => new Func<int, int, int, int, int, int, int, Task>(
+                        (i1, i2, i3, i4, i5, i6, i7) => Received(i1, i2, i3, i4, i5, i6, i7)
+                    ),
+                8
+                    => new Func<int, int, int, int, int, int, int, int, Task>(
+                        (i1, i2, i3, i4, i5, i6, i7, i8) => Received(i1, i2, i3, i4, i5, i6, i7, i8)
+                    ),
+
                 _ => throw new ArgumentOutOfRangeException()
             };
 
             // build up the method invocation
             var genericMethodDef = typeof(Handler)
-                                   .GetMethods()
-                                   .Where(m => m.Name == nameof(Handler.SetHandler))
-                                   .Where(m => m.IsGenericMethod /* symbols + handler Func */)
-                                   .Where(m => m.GetParameters().ElementAt(1).ParameterType.Name.StartsWith("Func"))
-                                   .Single(m => m.GetGenericArguments().Length == arity);
+                .GetMethods()
+                .Where(m => m.Name == nameof(Handler.SetHandler))
+                .Where(
+                    m => m.IsGenericMethod /* symbols + handler Func */
+                )
+                .Where(m => m.GetParameters().ElementAt(1).ParameterType.Name.StartsWith("Func"))
+                .Single(m => m.GetGenericArguments().Length == arity);
 
-            var genericParameterTypes = Enumerable.Range(1, arity)
-                                                  .Select(_ => typeof(int))
-                                                  .ToArray();
+            var genericParameterTypes = Enumerable
+                .Range(1, arity)
+                .Select(_ => typeof(int))
+                .ToArray();
 
             var setHandler = genericMethodDef.MakeGenericMethod(genericParameterTypes);
 
-            var parameters = new List<object>
-            {
-                command,
-                handlerFunc,
-            };
+            var parameters = new List<object> { command, handlerFunc, };
             parameters.AddRange(command.Arguments);
 
             setHandler.Invoke(null, parameters.ToArray());
-            
+
             var exitCode = command.Invoke(commandLine);
 
-            receivedValues.Should().BeEquivalentTo(
-                Enumerable.Range(1, arity),
-                config => config.WithStrictOrdering());
+            receivedValues
+                .Should()
+                .BeEquivalentTo(Enumerable.Range(1, arity), config => config.WithStrictOrdering());
 
             exitCode.Should().Be(123);
 

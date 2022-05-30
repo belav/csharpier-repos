@@ -29,6 +29,7 @@ namespace ILCompiler
         {
             public ModuleDesc Module { get; }
             public ModuleBlockingMode BlockingMode { get; }
+
             public ModuleBlockingState(ModuleDesc module, ModuleBlockingMode mode)
             {
                 Module = module;
@@ -36,21 +37,43 @@ namespace ILCompiler
             }
         }
 
-        private class BlockedModulesHashtable : LockFreeReaderHashtable<ModuleDesc, ModuleBlockingState>
+        private class BlockedModulesHashtable
+            : LockFreeReaderHashtable<ModuleDesc, ModuleBlockingState>
         {
             protected override int GetKeyHashCode(ModuleDesc key) => key.GetHashCode();
-            protected override int GetValueHashCode(ModuleBlockingState value) => value.Module.GetHashCode();
-            protected override bool CompareKeyToValue(ModuleDesc key, ModuleBlockingState value) => Object.ReferenceEquals(key, value.Module);
-            protected override bool CompareValueToValue(ModuleBlockingState value1, ModuleBlockingState value2) => Object.ReferenceEquals(value1.Module, value2.Module);
+
+            protected override int GetValueHashCode(ModuleBlockingState value) =>
+                value.Module.GetHashCode();
+
+            protected override bool CompareKeyToValue(ModuleDesc key, ModuleBlockingState value) =>
+                Object.ReferenceEquals(key, value.Module);
+
+            protected override bool CompareValueToValue(
+                ModuleBlockingState value1,
+                ModuleBlockingState value2
+            ) => Object.ReferenceEquals(value1.Module, value2.Module);
+
             protected override ModuleBlockingState CreateValueFromKey(ModuleDesc module)
             {
                 ModuleBlockingMode blockingMode = ModuleBlockingMode.None;
 
-                if (module.GetType("System.Runtime.CompilerServices", "__BlockAllReflectionAttribute", throwIfNotFound: false) != null)
+                if (
+                    module.GetType(
+                        "System.Runtime.CompilerServices",
+                        "__BlockAllReflectionAttribute",
+                        throwIfNotFound: false
+                    ) != null
+                )
                 {
                     blockingMode = ModuleBlockingMode.FullyBlocked;
                 }
-                else if (module.GetType("System.Runtime.CompilerServices", "__BlockReflectionAttribute", throwIfNotFound: false) != null)
+                else if (
+                    module.GetType(
+                        "System.Runtime.CompilerServices",
+                        "__BlockReflectionAttribute",
+                        throwIfNotFound: false
+                    ) != null
+                )
                 {
                     blockingMode = ModuleBlockingMode.BlockedInternals;
                 }
@@ -58,12 +81,14 @@ namespace ILCompiler
                 return new ModuleBlockingState(module, blockingMode);
             }
         }
+
         private BlockedModulesHashtable _blockedModules = new BlockedModulesHashtable();
 
         private class BlockingState
         {
             public EcmaType Type { get; }
             public bool IsBlocked { get; }
+
             public BlockingState(EcmaType type, bool isBlocked)
             {
                 Type = type;
@@ -81,12 +106,23 @@ namespace ILCompiler
             }
 
             protected override int GetKeyHashCode(EcmaType key) => key.GetHashCode();
-            protected override int GetValueHashCode(BlockingState value) => value.Type.GetHashCode();
-            protected override bool CompareKeyToValue(EcmaType key, BlockingState value) => Object.ReferenceEquals(key, value.Type);
-            protected override bool CompareValueToValue(BlockingState value1, BlockingState value2) => Object.ReferenceEquals(value1.Type, value2.Type);
+
+            protected override int GetValueHashCode(BlockingState value) =>
+                value.Type.GetHashCode();
+
+            protected override bool CompareKeyToValue(EcmaType key, BlockingState value) =>
+                Object.ReferenceEquals(key, value.Type);
+
+            protected override bool CompareValueToValue(
+                BlockingState value1,
+                BlockingState value2
+            ) => Object.ReferenceEquals(value1.Type, value2.Type);
+
             protected override BlockingState CreateValueFromKey(EcmaType type)
             {
-                ModuleBlockingMode moduleBlockingMode = _blockedModules.GetOrCreateValue(type.EcmaModule).BlockingMode;
+                ModuleBlockingMode moduleBlockingMode = _blockedModules
+                    .GetOrCreateValue(type.EcmaModule)
+                    .BlockingMode;
                 bool isBlocked = ComputeIsBlocked(type, moduleBlockingMode);
                 return new BlockingState(type, isBlocked);
             }
@@ -94,7 +130,12 @@ namespace ILCompiler
             private bool ComputeIsBlocked(EcmaType type, ModuleBlockingMode blockingMode)
             {
                 // If the type is explicitly blocked, it's always blocked.
-                if (type.HasCustomAttribute("System.Runtime.CompilerServices", "ReflectionBlockedAttribute"))
+                if (
+                    type.HasCustomAttribute(
+                        "System.Runtime.CompilerServices",
+                        "ReflectionBlockedAttribute"
+                    )
+                )
                     return true;
 
                 // If no blocking is applied to the module, the type is not blocked
@@ -106,8 +147,10 @@ namespace ILCompiler
                     return false;
 
                 // The various SR types used in Resource Manager always get metadata
-                if ((type.Name == "Strings" || type.Name == "SR") &&
-                    type.Namespace.Contains(type.Module.Assembly.GetName().Name))
+                if (
+                    (type.Name == "Strings" || type.Name == "SR")
+                    && type.Namespace.Contains(type.Module.Assembly.GetName().Name)
+                )
                     return false;
 
                 // Event sources are not blocked
@@ -120,7 +163,7 @@ namespace ILCompiler
 
                 DefType containingType = type.ContainingType;
                 var typeDefinition = type.MetadataReader.GetTypeDefinition(type.Handle);
-                
+
                 if (containingType == null)
                 {
                     if ((typeDefinition.Attributes & TypeAttributes.Public) == 0)
@@ -130,7 +173,10 @@ namespace ILCompiler
                 }
                 else
                 {
-                    if ((typeDefinition.Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedPublic)
+                    if (
+                        (typeDefinition.Attributes & TypeAttributes.VisibilityMask)
+                        == TypeAttributes.NestedPublic
+                    )
                     {
                         return ComputeIsBlocked((EcmaType)containingType, blockingMode);
                     }
@@ -143,6 +189,7 @@ namespace ILCompiler
                 return false;
             }
         }
+
         private BlockedTypeHashtable _blockedTypes;
 
         private MetadataType ArrayOfTType { get; }
@@ -152,8 +199,16 @@ namespace ILCompiler
         {
             _blockedTypes = new BlockedTypeHashtable(_blockedModules);
 
-            ArrayOfTType = context.SystemModule.GetType("System", "Array`1", throwIfNotFound: false);
-            AttributeType = context.SystemModule.GetType("System", "Attribute", throwIfNotFound: false);
+            ArrayOfTType = context.SystemModule.GetType(
+                "System",
+                "Array`1",
+                throwIfNotFound: false
+            );
+            AttributeType = context.SystemModule.GetType(
+                "System",
+                "Attribute",
+                throwIfNotFound: false
+            );
         }
 
         public override bool IsBlocked(MetadataType type)
@@ -175,7 +230,9 @@ namespace ILCompiler
             if (ecmaMethod == null)
                 return true;
 
-            ModuleBlockingMode moduleBlockingMode = _blockedModules.GetOrCreateValue(ecmaMethod.Module).BlockingMode;
+            ModuleBlockingMode moduleBlockingMode = _blockedModules
+                .GetOrCreateValue(ecmaMethod.Module)
+                .BlockingMode;
             if (moduleBlockingMode == ModuleBlockingMode.None)
                 return false;
             else if (moduleBlockingMode == ModuleBlockingMode.FullyBlocked)
@@ -189,9 +246,11 @@ namespace ILCompiler
                 return true;
 
             MethodAttributes accessibility = ecmaMethod.Attributes & MethodAttributes.Public;
-            if (accessibility != MethodAttributes.Family
+            if (
+                accessibility != MethodAttributes.Family
                 && accessibility != MethodAttributes.FamORAssem
-                && accessibility != MethodAttributes.Public)
+                && accessibility != MethodAttributes.Public
+            )
             {
                 return true;
             }
@@ -215,7 +274,9 @@ namespace ILCompiler
             if (ecmaField == null)
                 return true;
 
-            ModuleBlockingMode moduleBlockingMode = _blockedModules.GetOrCreateValue(ecmaField.Module).BlockingMode;
+            ModuleBlockingMode moduleBlockingMode = _blockedModules
+                .GetOrCreateValue(ecmaField.Module)
+                .BlockingMode;
             if (moduleBlockingMode == ModuleBlockingMode.None)
                 return false;
             else if (moduleBlockingMode == ModuleBlockingMode.FullyBlocked)
@@ -229,17 +290,18 @@ namespace ILCompiler
                 return true;
 
             FieldAttributes accessibility = ecmaField.Attributes & FieldAttributes.FieldAccessMask;
-            if (accessibility != FieldAttributes.Family
+            if (
+                accessibility != FieldAttributes.Family
                 && accessibility != FieldAttributes.FamORAssem
-                && accessibility != FieldAttributes.Public)
+                && accessibility != FieldAttributes.Public
+            )
             {
                 // Exempt fields on custom attributes from blocking.
                 // Attribute.Equals and Attribute.GetHashCode depends on being able to
                 // walk all fields on custom attributes using reflection.
                 // We're opening this hole in hopes that the fields won't have any "interesting"
                 // types (that would be themselves blocked). Doing that could be problematic.
-                if (AttributeType != null
-                    && owningType.CanCastTo(AttributeType))
+                if (AttributeType != null && owningType.CanCastTo(AttributeType))
                 {
                     return false;
                 }

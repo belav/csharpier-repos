@@ -16,7 +16,8 @@ public abstract class LocalDbContext : DbContext
             @"Data Source=(localdb)\{1};{0};Database={2}",
             baseConnectionString,
             _localDbVersion,
-            GetType().FullName);
+            GetType().FullName
+        );
 
         optionsBuilder.UseSqlServer(connectionString);
     }

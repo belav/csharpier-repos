@@ -34,11 +34,16 @@ public abstract class IntermediateNodePassBase : RazorEngineFeatureBase
 
         if (Engine == null)
         {
-            throw new InvalidOperationException(Resources.FormatPhaseMustBeInitialized(nameof(Engine)));
+            throw new InvalidOperationException(
+                Resources.FormatPhaseMustBeInitialized(nameof(Engine))
+            );
         }
 
         ExecuteCore(codeDocument, documentNode);
     }
 
-    protected abstract void ExecuteCore(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode);
+    protected abstract void ExecuteCore(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    );
 }

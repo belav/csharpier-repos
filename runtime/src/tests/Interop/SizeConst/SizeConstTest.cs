@@ -9,7 +9,11 @@ public struct S_CHARArray_ByValTStr
 {
     [MarshalAs(UnmanagedType.ByValTStr, SizeConst = 4)]
     public string arr;
-    public S_CHARArray_ByValTStr(string parr) { arr = parr; }
+
+    public S_CHARArray_ByValTStr(string parr)
+    {
+        arr = parr;
+    }
 }
 
 class Test
@@ -17,7 +21,11 @@ class Test
     internal const int ARRAY_SIZE = 100;
 
     //UnmanagedType.ByValTStr
-    [DllImport("SizeConstNative",CharSet = CharSet.Ansi, CallingConvention = CallingConvention.Cdecl)]
+    [DllImport(
+        "SizeConstNative",
+        CharSet = CharSet.Ansi,
+        CallingConvention = CallingConvention.Cdecl
+    )]
     static extern bool TakeByValTStr(S_CHARArray_ByValTStr s, int size);
 
     static bool SizeConstByValTStr()
@@ -27,10 +35,10 @@ class Test
         s.arr = "abcd";
         TakeByValTStr(s, s.arr.Length);
 
-        // off by one byte since  sizeconst == 4 and 
-        // number of bytes == 4 . We used to write 
+        // off by one byte since  sizeconst == 4 and
+        // number of bytes == 4 . We used to write
         // one past the buffer before but now we truncate at 3rd byte.
-        // In order to test this the locale of the machine need to 
+        // In order to test this the locale of the machine need to
         // a multibyte char set.
         s.arr = "个个";
         TakeByValTStr(s, s.arr.Length);

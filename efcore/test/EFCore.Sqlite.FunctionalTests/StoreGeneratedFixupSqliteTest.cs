@@ -6,13 +6,11 @@
 // ReSharper disable InconsistentNaming
 namespace Microsoft.EntityFrameworkCore;
 
-public class StoreGeneratedFixupSqliteTest : StoreGeneratedFixupRelationalTestBase<
-    StoreGeneratedFixupSqliteTest.StoreGeneratedFixupSqliteFixture>
+public class StoreGeneratedFixupSqliteTest
+    : StoreGeneratedFixupRelationalTestBase<StoreGeneratedFixupSqliteTest.StoreGeneratedFixupSqliteFixture>
 {
-    public StoreGeneratedFixupSqliteTest(StoreGeneratedFixupSqliteFixture fixture)
-        : base(fixture)
-    {
-    }
+    public StoreGeneratedFixupSqliteTest(StoreGeneratedFixupSqliteFixture fixture) : base(fixture)
+    { }
 
     [ConditionalFact]
     public void Temp_values_can_be_made_permanent()
@@ -33,15 +31,15 @@ public class StoreGeneratedFixupSqliteTest : StoreGeneratedFixupRelationalTestBa
         Assert.Equal(tempValue, entry.Property(e => e.Id).CurrentValue);
     }
 
-    protected override bool EnforcesFKs
-        => true;
+    protected override bool EnforcesFKs => true;
 
-    protected override void UseTransaction(DatabaseFacade facade, IDbContextTransaction transaction)
-        => facade.UseTransaction(transaction.GetDbTransaction());
+    protected override void UseTransaction(
+        DatabaseFacade facade,
+        IDbContextTransaction transaction
+    ) => facade.UseTransaction(transaction.GetDbTransaction());
 
     public class StoreGeneratedFixupSqliteFixture : StoreGeneratedFixupRelationalFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
     }
 }

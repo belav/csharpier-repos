@@ -13,13 +13,21 @@ namespace Microsoft.EntityFrameworkCore.Cosmos.Query.Internal;
 /// </summary>
 public class CosmosRegexTranslator : IMethodCallTranslator
 {
-    private static readonly MethodInfo IsMatch =
-        typeof(Regex).GetRuntimeMethod(nameof(Regex.IsMatch), new[] { typeof(string), typeof(string) })!;
+    private static readonly MethodInfo IsMatch = typeof(Regex).GetRuntimeMethod(
+        nameof(Regex.IsMatch),
+        new[] { typeof(string), typeof(string) }
+    )!;
 
-    private static readonly MethodInfo IsMatchWithRegexOptions =
-        typeof(Regex).GetRuntimeMethod(nameof(Regex.IsMatch), new[] { typeof(string), typeof(string), typeof(RegexOptions) })!;
+    private static readonly MethodInfo IsMatchWithRegexOptions = typeof(Regex).GetRuntimeMethod(
+        nameof(Regex.IsMatch),
+        new[] { typeof(string), typeof(string), typeof(RegexOptions) }
+    )!;
 
-    private const RegexOptions SupportedOptions = RegexOptions.Multiline | RegexOptions.Singleline | RegexOptions.IgnoreCase | RegexOptions.IgnorePatternWhitespace;
+    private const RegexOptions SupportedOptions =
+        RegexOptions.Multiline
+        | RegexOptions.Singleline
+        | RegexOptions.IgnoreCase
+        | RegexOptions.IgnorePatternWhitespace;
 
     private readonly ISqlExpressionFactory _sqlExpressionFactory;
 
@@ -44,7 +52,8 @@ public class CosmosRegexTranslator : IMethodCallTranslator
         SqlExpression? instance,
         MethodInfo method,
         IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
         if (method != IsMatch && method != IsMatchWithRegexOptions)
         {
@@ -58,11 +67,13 @@ public class CosmosRegexTranslator : IMethodCallTranslator
         {
             return _sqlExpressionFactory.Function(
                 "RegexMatch",
-                new[] {
+                new[]
+                {
                     _sqlExpressionFactory.ApplyTypeMapping(input, typeMapping),
                     _sqlExpressionFactory.ApplyTypeMapping(pattern, typeMapping)
                 },
-                typeof(bool));
+                typeof(bool)
+            );
         }
         else if (arguments[2] is SqlConstantExpression { Value: RegexOptions regexOptions })
         {
@@ -87,13 +98,14 @@ public class CosmosRegexTranslator : IMethodCallTranslator
             return (regexOptions & ~SupportedOptions) == 0
                 ? _sqlExpressionFactory.Function(
                     "RegexMatch",
-                     new[]
-                     {
+                    new[]
+                    {
                         _sqlExpressionFactory.ApplyTypeMapping(input, typeMapping),
                         _sqlExpressionFactory.ApplyTypeMapping(pattern, typeMapping),
                         _sqlExpressionFactory.Constant(modifier)
-                     },
-                     typeof(bool))
+                    },
+                    typeof(bool)
+                )
                 : null;
         }
 

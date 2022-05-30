@@ -10,7 +10,12 @@ namespace Microsoft.CodeAnalysis.Editor
 {
     internal interface IBraceMatchingService
     {
-        Task<BraceMatchingResult?> GetMatchingBracesAsync(Document document, int position, BraceMatchingOptions options, CancellationToken cancellationToken);
+        Task<BraceMatchingResult?> GetMatchingBracesAsync(
+            Document document,
+            int position,
+            BraceMatchingOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     internal readonly record struct BraceMatchingResult(TextSpan LeftSpan, TextSpan RightSpan);

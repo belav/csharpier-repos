@@ -24,18 +24,29 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 {
     [Method(VSInternalMethods.WorkspacePullDiagnosticName)]
-    internal sealed class WorkspacePullDiagnosticHandler : AbstractPullDiagnosticHandler<VSInternalWorkspaceDiagnosticsParams, VSInternalWorkspaceDiagnosticReport, VSInternalWorkspaceDiagnosticReport[]>
+    internal sealed class WorkspacePullDiagnosticHandler
+        : AbstractPullDiagnosticHandler<
+            VSInternalWorkspaceDiagnosticsParams,
+            VSInternalWorkspaceDiagnosticReport,
+            VSInternalWorkspaceDiagnosticReport[]
+        >
     {
-        public WorkspacePullDiagnosticHandler(IDiagnosticService diagnosticService, EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource, IGlobalOptionService globalOptions)
-            : base(diagnosticService, editAndContinueDiagnosticUpdateSource, globalOptions)
-        {
-        }
+        public WorkspacePullDiagnosticHandler(
+            IDiagnosticService diagnosticService,
+            EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
+            IGlobalOptionService globalOptions
+        ) : base(diagnosticService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
 
-        public override TextDocumentIdentifier? GetTextDocumentIdentifier(VSInternalWorkspaceDiagnosticsParams request)
-            => null;
+        public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+            VSInternalWorkspaceDiagnosticsParams request
+        ) => null;
 
-        protected override VSInternalWorkspaceDiagnosticReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics, string? resultId)
-            => new VSInternalWorkspaceDiagnosticReport
+        protected override VSInternalWorkspaceDiagnosticReport CreateReport(
+            TextDocumentIdentifier identifier,
+            VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics,
+            string? resultId
+        ) =>
+            new VSInternalWorkspaceDiagnosticReport
             {
                 TextDocument = identifier,
                 Diagnostics = diagnostics,
@@ -45,8 +56,13 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
                 Identifier = WorkspaceDiagnosticIdentifier,
             };
 
-        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(VSInternalWorkspaceDiagnosticsParams diagnosticsParams)
-            => diagnosticsParams.PreviousResults?.Where(d => d.PreviousResultId != null).Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!)).ToImmutableArray();
+        protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+            VSInternalWorkspaceDiagnosticsParams diagnosticsParams
+        ) =>
+            diagnosticsParams.PreviousResults
+                ?.Where(d => d.PreviousResultId != null)
+                .Select(d => new PreviousPullResult(d.PreviousResultId!, d.TextDocument!))
+                .ToImmutableArray();
 
         protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
         {
@@ -55,26 +71,50 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             return ConvertTags(diagnosticData, potentialDuplicate: true);
         }
 
-        protected override ValueTask<ImmutableArray<Document>> GetOrderedDocumentsAsync(RequestContext context, CancellationToken cancellationToken)
+        protected override ValueTask<ImmutableArray<Document>> GetOrderedDocumentsAsync(
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return GetWorkspacePullDocumentsAsync(context, DiagnosticService.GlobalOptions, cancellationToken);
+            return GetWorkspacePullDocumentsAsync(
+                context,
+                DiagnosticService.GlobalOptions,
+                cancellationToken
+            );
         }
 
         protected override Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
-            RequestContext context, Document document, DiagnosticMode diagnosticMode, CancellationToken cancellationToken)
+            RequestContext context,
+            Document document,
+            DiagnosticMode diagnosticMode,
+            CancellationToken cancellationToken
+        )
         {
             // For closed files, go to the IDiagnosticService for results.  These won't necessarily be totally up to
             // date.  However, that's fine as these are closed files and won't be in the process of being edited.  So
             // any deviations in the spans of diagnostics shouldn't be impactful for the user.
-            return DiagnosticService.GetPullDiagnosticsAsync(document, includeSuppressedDiagnostics: false, diagnosticMode, cancellationToken).AsTask();
+            return DiagnosticService
+                .GetPullDiagnosticsAsync(
+                    document,
+                    includeSuppressedDiagnostics: false,
+                    diagnosticMode,
+                    cancellationToken
+                )
+                .AsTask();
         }
 
-        protected override VSInternalWorkspaceDiagnosticReport[]? CreateReturn(BufferedProgress<VSInternalWorkspaceDiagnosticReport> progress)
+        protected override VSInternalWorkspaceDiagnosticReport[]? CreateReturn(
+            BufferedProgress<VSInternalWorkspaceDiagnosticReport> progress
+        )
         {
             return progress.GetValues();
         }
 
-        internal static async ValueTask<ImmutableArray<Document>> GetWorkspacePullDocumentsAsync(RequestContext context, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
+        internal static async ValueTask<ImmutableArray<Document>> GetWorkspacePullDocumentsAsync(
+            RequestContext context,
+            IGlobalOptionService globalOptions,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -88,7 +128,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
             var solution = context.Solution;
 
-            var documentTrackingService = solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
+            var documentTrackingService =
+                solution.Workspace.Services.GetRequiredService<IDocumentTrackingService>();
 
             // Collect all the documents from the solution in the order we'd like to get diagnostics for.  This will
             // prioritize the files from currently active projects, but then also include all other docs in all projects
@@ -98,19 +139,42 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
             var visibleDocuments = documentTrackingService.GetVisibleDocuments(solution);
 
             // Now, prioritize the projects related to the active/visible files.
-            await AddDocumentsFromProjectAsync(activeDocument?.Project, context.SupportedLanguages, isOpen: true, cancellationToken).ConfigureAwait(false);
+            await AddDocumentsFromProjectAsync(
+                    activeDocument?.Project,
+                    context.SupportedLanguages,
+                    isOpen: true,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             foreach (var doc in visibleDocuments)
-                await AddDocumentsFromProjectAsync(doc.Project, context.SupportedLanguages, isOpen: true, cancellationToken).ConfigureAwait(false);
+                await AddDocumentsFromProjectAsync(
+                        doc.Project,
+                        context.SupportedLanguages,
+                        isOpen: true,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             // finally, add the remainder of all documents.
             foreach (var project in solution.Projects)
-                await AddDocumentsFromProjectAsync(project, context.SupportedLanguages, isOpen: false, cancellationToken).ConfigureAwait(false);
+                await AddDocumentsFromProjectAsync(
+                        project,
+                        context.SupportedLanguages,
+                        isOpen: false,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
             // Ensure that we only process documents once.
             result.RemoveDuplicates();
             return result.ToImmutable();
 
-            async Task AddDocumentsFromProjectAsync(Project? project, ImmutableArray<string> supportedLanguages, bool isOpen, CancellationToken cancellationToken)
+            async Task AddDocumentsFromProjectAsync(
+                Project? project,
+                ImmutableArray<string> supportedLanguages,
+                bool isOpen,
+                CancellationToken cancellationToken
+            )
             {
                 if (project == null)
                     return;
@@ -132,9 +196,16 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics
 
                 // If all features are enabled for source generated documents, make sure they are included when FSA is on or a file in the project is open.
                 // This is done because for either scenario we've already run generators, so there shouldn't be much cost in getting the diagnostics.
-                if ((isFSAOn || isOpen) && solution.Workspace.Services.GetService<IWorkspaceConfigurationService>()?.Options.EnableOpeningSourceGeneratedFiles == true)
+                if (
+                    (isFSAOn || isOpen)
+                    && solution.Workspace.Services
+                        .GetService<IWorkspaceConfigurationService>()
+                        ?.Options.EnableOpeningSourceGeneratedFiles == true
+                )
                 {
-                    var sourceGeneratedDocuments = await project.GetSourceGeneratedDocumentsAsync(cancellationToken).ConfigureAwait(false);
+                    var sourceGeneratedDocuments = await project
+                        .GetSourceGeneratedDocumentsAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     documents = documents.AddRange(sourceGeneratedDocuments);
                 }
 

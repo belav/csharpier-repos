@@ -30,15 +30,25 @@ public class AcceptedResultTests
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        Accepted MyApi() { throw new NotImplementedException(); }
+        Accepted MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<Accepted>(context);
 
         // Assert
-        Assert.Contains(context.EndpointMetadata, m => m is ProducesResponseTypeMetadata { StatusCode: StatusCodes.Status202Accepted });
+        Assert.Contains(
+            context.EndpointMetadata,
+            m => m is ProducesResponseTypeMetadata { StatusCode: StatusCodes.Status202Accepted }
+        );
     }
 
     [Fact]
@@ -49,7 +59,10 @@ public class AcceptedResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]

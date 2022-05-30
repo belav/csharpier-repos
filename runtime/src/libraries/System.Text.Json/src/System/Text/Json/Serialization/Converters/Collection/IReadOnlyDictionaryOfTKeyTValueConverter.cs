@@ -11,9 +11,16 @@ namespace System.Text.Json.Serialization.Converters
         where TDictionary : IReadOnlyDictionary<TKey, TValue>
         where TKey : notnull
     {
-        private readonly bool _isDeserializable = typeof(TDictionary).IsAssignableFrom(typeof(Dictionary<TKey, TValue>));
+        private readonly bool _isDeserializable = typeof(TDictionary).IsAssignableFrom(
+            typeof(Dictionary<TKey, TValue>)
+        );
 
-        protected override void Add(TKey key, in TValue value, JsonSerializerOptions options, ref ReadStack state)
+        protected override void Add(
+            TKey key,
+            in TValue value,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             ((Dictionary<TKey, TValue>)state.Current.ReturnValue!)[key] = value;
         }
@@ -22,7 +29,11 @@ namespace System.Text.Json.Serialization.Converters
         {
             if (!_isDeserializable)
             {
-                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(TypeToConvert, ref reader, ref state);
+                ThrowHelper.ThrowNotSupportedException_CannotPopulateCollection(
+                    TypeToConvert,
+                    ref reader,
+                    ref state
+                );
             }
 
             state.Current.ReturnValue = new Dictionary<TKey, TValue>();

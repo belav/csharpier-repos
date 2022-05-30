@@ -20,18 +20,25 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
         : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public CSharpUseCompoundCoalesceAssignmentDiagnosticAnalyzer()
-            : base(IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId,
-                   EnforceOnBuildValues.UseCoalesceCompoundAssignment,
-                   CodeStyleOptions2.PreferCompoundAssignment,
-                   new LocalizableResourceString(nameof(AnalyzersResources.Use_compound_assignment), AnalyzersResources.ResourceManager, typeof(AnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.UseCoalesceCompoundAssignmentDiagnosticId,
+                EnforceOnBuildValues.UseCoalesceCompoundAssignment,
+                CodeStyleOptions2.PreferCompoundAssignment,
+                new LocalizableResourceString(
+                    nameof(AnalyzersResources.Use_compound_assignment),
+                    AnalyzersResources.ResourceManager,
+                    typeof(AnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(AnalyzeCoalesceExpression, SyntaxKind.CoalesceExpression);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(
+                AnalyzeCoalesceExpression,
+                SyntaxKind.CoalesceExpression
+            );
 
         private void AnalyzeCoalesceExpression(SyntaxNodeAnalysisContext context)
         {
@@ -70,19 +77,28 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCompoundAssignment
             // Syntactically looks promising.  But we can only safely do this if 'expr'
             // is side-effect-free since we will be changing the number of times it is
             // executed from twice to once.
-            if (!UseCompoundAssignmentUtilities.IsSideEffectFree(
-                    syntaxFacts, coalesceLeft, semanticModel, cancellationToken))
+            if (
+                !UseCompoundAssignmentUtilities.IsSideEffectFree(
+                    syntaxFacts,
+                    coalesceLeft,
+                    semanticModel,
+                    cancellationToken
+                )
+            )
             {
                 return;
             }
 
             // Good match.
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                coalesceExpression.OperatorToken.GetLocation(),
-                option.Notification.Severity,
-                additionalLocations: ImmutableArray.Create(coalesceExpression.GetLocation()),
-                properties: null));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    coalesceExpression.OperatorToken.GetLocation(),
+                    option.Notification.Severity,
+                    additionalLocations: ImmutableArray.Create(coalesceExpression.GetLocation()),
+                    properties: null
+                )
+            );
         }
     }
 }

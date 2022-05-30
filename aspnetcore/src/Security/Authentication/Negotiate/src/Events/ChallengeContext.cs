@@ -18,8 +18,8 @@ public class ChallengeContext : PropertiesContext<NegotiateOptions>
         HttpContext context,
         AuthenticationScheme scheme,
         NegotiateOptions options,
-        AuthenticationProperties properties)
-        : base(context, scheme, options, properties) { }
+        AuthenticationProperties properties
+    ) : base(context, scheme, options, properties) { }
 
     /// <summary>
     /// Gets a value that determines if this challenge was handled.

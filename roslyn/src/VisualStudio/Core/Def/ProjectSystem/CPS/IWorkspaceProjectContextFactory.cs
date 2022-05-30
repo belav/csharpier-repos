@@ -15,11 +15,26 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
     {
         /// <inheritdoc cref="CreateProjectContextAsync"/>
         [Obsolete("Use CreateProjectContextAsync instead")]
-        IWorkspaceProjectContext CreateProjectContext(string languageName, string projectUniqueName, string projectFilePath, Guid projectGuid, object? hierarchy, string? binOutputPath);
+        IWorkspaceProjectContext CreateProjectContext(
+            string languageName,
+            string projectUniqueName,
+            string projectFilePath,
+            Guid projectGuid,
+            object? hierarchy,
+            string? binOutputPath
+        );
 
         /// <inheritdoc cref="CreateProjectContextAsync"/>
         [Obsolete("Use CreateProjectContextAsync instead")]
-        IWorkspaceProjectContext CreateProjectContext(string languageName, string projectUniqueName, string projectFilePath, Guid projectGuid, object? hierarchy, string? binOutputPath, string? assemblyName);
+        IWorkspaceProjectContext CreateProjectContext(
+            string languageName,
+            string projectUniqueName,
+            string projectFilePath,
+            Guid projectGuid,
+            object? hierarchy,
+            string? binOutputPath,
+            string? assemblyName
+        );
 
         /// <summary>
         /// Creates and initializes a new Workspace project and returns a <see
@@ -41,6 +56,7 @@ namespace Microsoft.VisualStudio.LanguageServices.ProjectSystem
             object? hierarchy,
             string? binOutputPath,
             string? assemblyName,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

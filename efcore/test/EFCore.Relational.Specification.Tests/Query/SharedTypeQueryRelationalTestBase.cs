@@ -5,45 +5,44 @@ namespace Microsoft.EntityFrameworkCore.Query;
 
 public abstract class SharedTypeQueryRelationalTestBase : SharedTypeQueryTestBase
 {
-    protected TestSqlLoggerFactory TestSqlLoggerFactory
-        => (TestSqlLoggerFactory)ListLoggerFactory;
+    protected TestSqlLoggerFactory TestSqlLoggerFactory => (TestSqlLoggerFactory)ListLoggerFactory;
 
-    protected void ClearLog()
-        => TestSqlLoggerFactory.Clear();
+    protected void ClearLog() => TestSqlLoggerFactory.Clear();
 
-    protected void AssertSql(params string[] expected)
-        => TestSqlLoggerFactory.AssertBaseline(expected);
+    protected void AssertSql(params string[] expected) =>
+        TestSqlLoggerFactory.AssertBaseline(expected);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual async Task Can_use_shared_type_entity_type_in_query_filter_with_from_sql(bool async)
+    public virtual async Task Can_use_shared_type_entity_type_in_query_filter_with_from_sql(
+        bool async
+    )
     {
-        var contextFactory = await InitializeAsync<MyContextRelational24601>(
-            seed: c => c.Seed());
+        var contextFactory = await InitializeAsync<MyContextRelational24601>(seed: c => c.Seed());
 
         using var context = contextFactory.CreateContext();
         var query = context.Set<ViewQuery24601>();
-        var result = async
-            ? await query.ToListAsync()
-            : query.ToList();
+        var result = async ? await query.ToListAsync() : query.ToList();
 
         Assert.Empty(result);
     }
 
     protected class MyContextRelational24601 : MyContext24601
     {
-        public MyContextRelational24601(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public MyContextRelational24601(DbContextOptions options) : base(options) { }
 
         protected override void OnModelCreating(ModelBuilder modelBuilder)
         {
             base.OnModelCreating(modelBuilder);
-            modelBuilder.Entity<ViewQuery24601>()
+            modelBuilder
+                .Entity<ViewQuery24601>()
                 .HasQueryFilter(
-                    e => Set<Dictionary<string, object>>("STET")
-                        .FromSqlRaw("Select * from STET").Select(i => (string)i["Value"]).Contains(e.Value));
+                    e =>
+                        Set<Dictionary<string, object>>("STET")
+                            .FromSqlRaw("Select * from STET")
+                            .Select(i => (string)i["Value"])
+                            .Contains(e.Value)
+                );
         }
     }
 }

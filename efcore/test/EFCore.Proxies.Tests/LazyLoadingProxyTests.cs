@@ -14,8 +14,8 @@ public class LazyLoadingProxyTests
         using var context = new LazyContext<LazySealedEntity>();
         Assert.Equal(
             ProxiesStrings.ItsASeal(nameof(LazySealedEntity)),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -23,9 +23,12 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContext<LazyNonVirtualNavEntity>();
         Assert.Equal(
-            ProxiesStrings.NonVirtualProperty(nameof(LazyNonVirtualNavEntity.SelfRef), nameof(LazyNonVirtualNavEntity)),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+            ProxiesStrings.NonVirtualProperty(
+                nameof(LazyNonVirtualNavEntity.SelfRef),
+                nameof(LazyNonVirtualNavEntity)
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -40,9 +43,12 @@ public class LazyLoadingProxyTests
     {
         using var context = new LazyContext<LazyHiddenFieldEntity>();
         Assert.Equal(
-            CoreStrings.NoBackingFieldLazyLoading(nameof(LazyHiddenFieldEntity.SelfRef), nameof(LazyHiddenFieldEntity)),
-            Assert.Throws<InvalidOperationException>(
-                () => context.Model).Message);
+            CoreStrings.NoBackingFieldLazyLoading(
+                nameof(LazyHiddenFieldEntity.SelfRef),
+                nameof(LazyHiddenFieldEntity)
+            ),
+            Assert.Throws<InvalidOperationException>(() => context.Model).Message
+        );
     }
 
     [ConditionalFact]
@@ -55,7 +61,8 @@ public class LazyLoadingProxyTests
                 (p, b) =>
                     b.UseInMemoryDatabase("Jammie")
                         .UseInternalServiceProvider(p)
-                        .UseLazyLoadingProxies())
+                        .UseLazyLoadingProxies()
+            )
             .BuildServiceProvider(validateScopes: true);
 
         using (var scope = serviceProvider.CreateScope())
@@ -75,20 +82,20 @@ public class LazyLoadingProxyTests
         Assert.Equal(
             CoreStrings.WarningAsErrorTemplate(
                 CoreEventId.LazyLoadOnDisposedContextWarning.ToString(),
-                CoreResources.LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
+                CoreResources
+                    .LogLazyLoadOnDisposedContext(new TestLogger<TestLoggingDefinitions>())
                     .GenerateMessage("PhoneProxy", "Texts"),
-                "CoreEventId.LazyLoadOnDisposedContextWarning"),
-            Assert.Throws<InvalidOperationException>(
-                () => phone.Texts).Message);
+                "CoreEventId.LazyLoadOnDisposedContextWarning"
+            ),
+            Assert.Throws<InvalidOperationException>(() => phone.Texts).Message
+        );
     }
 
-    private class LazyContext<TEntity> : TestContext<TEntity>
-        where TEntity : class
+    private class LazyContext<TEntity> : TestContext<TEntity> where TEntity : class
     {
         public LazyContext()
             : base(dbName: "LazyLoadingContext", useLazyLoading: true, useChangeDetection: false)
-        {
-        }
+        { }
     }
 
     public sealed class LazySealedEntity
@@ -136,13 +143,10 @@ public class LazyLoadingProxyTests
 
     private class JammieDodgerContext : DbContext
     {
-        public JammieDodgerContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public JammieDodgerContext(DbContextOptions options) : base(options) { }
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Phone>();
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Phone>();
     }
 
     public class Phone

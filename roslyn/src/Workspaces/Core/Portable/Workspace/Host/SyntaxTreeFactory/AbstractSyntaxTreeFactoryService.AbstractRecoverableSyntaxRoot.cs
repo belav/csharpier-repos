@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Host
                 ValueSource<TextAndVersion> textSource,
                 Encoding encoding,
                 int length,
-                bool containsDirectives)
+                bool containsDirectives
+            )
             {
                 FilePath = filePath ?? string.Empty;
                 Options = options;
@@ -54,7 +55,9 @@ namespace Microsoft.CodeAnalysis.Host
 
             internal async Task<SourceText> GetTextAsync(CancellationToken cancellationToken)
             {
-                var textAndVersion = await TextSource.GetValueAsync(cancellationToken).ConfigureAwait(false);
+                var textAndVersion = await TextSource
+                    .GetValueAsync(cancellationToken)
+                    .ConfigureAwait(false);
                 return textAndVersion.Text;
             }
 
@@ -66,7 +69,8 @@ namespace Microsoft.CodeAnalysis.Host
                     TextSource,
                     Encoding,
                     Length,
-                    ContainsDirectives);
+                    ContainsDirectives
+                );
             }
 
             internal SyntaxTreeInfo WithOptionsAndLength(ParseOptions options, int length)
@@ -77,7 +81,8 @@ namespace Microsoft.CodeAnalysis.Host
                     TextSource,
                     Encoding,
                     length,
-                    ContainsDirectives);
+                    ContainsDirectives
+                );
             }
 
             internal SyntaxTreeInfo WithOptions(ParseOptions options)
@@ -88,12 +93,13 @@ namespace Microsoft.CodeAnalysis.Host
                     TextSource,
                     Encoding,
                     Length,
-                    ContainsDirectives);
+                    ContainsDirectives
+                );
             }
         }
 
-        internal sealed class RecoverableSyntaxRoot<TRoot> : WeaklyCachedRecoverableValueSource<TRoot>
-            where TRoot : SyntaxNode
+        internal sealed class RecoverableSyntaxRoot<TRoot>
+            : WeaklyCachedRecoverableValueSource<TRoot> where TRoot : SyntaxNode
         {
             private ITemporaryStreamStorage? _storage;
 
@@ -103,8 +109,8 @@ namespace Microsoft.CodeAnalysis.Host
             public RecoverableSyntaxRoot(
                 AbstractSyntaxTreeFactoryService service,
                 TRoot root,
-                IRecoverableSyntaxTree<TRoot> containingTree)
-                : base(new ConstantValueSource<TRoot>(containingTree.CloneNodeAsRoot(root)))
+                IRecoverableSyntaxTree<TRoot> containingTree
+            ) : base(new ConstantValueSource<TRoot>(containingTree.CloneNodeAsRoot(root)))
             {
                 _service = service;
                 _containingTree = containingTree;
@@ -112,8 +118,8 @@ namespace Microsoft.CodeAnalysis.Host
 
             private RecoverableSyntaxRoot(
                 RecoverableSyntaxRoot<TRoot> originalRoot,
-                IRecoverableSyntaxTree<TRoot> containingTree)
-                : base(originalRoot)
+                IRecoverableSyntaxTree<TRoot> containingTree
+            ) : base(originalRoot)
             {
                 Contract.ThrowIfNull(originalRoot._storage);
 
@@ -122,7 +128,9 @@ namespace Microsoft.CodeAnalysis.Host
                 _containingTree = containingTree;
             }
 
-            public RecoverableSyntaxRoot<TRoot> WithSyntaxTree(IRecoverableSyntaxTree<TRoot> containingTree)
+            public RecoverableSyntaxRoot<TRoot> WithSyntaxTree(
+                IRecoverableSyntaxTree<TRoot> containingTree
+            )
             {
                 // at this point, we should either have strongly held root or _storage should not be null
                 if (TryGetValue(out var root))
@@ -146,7 +154,9 @@ namespace Microsoft.CodeAnalysis.Host
                 root.SerializeTo(stream, cancellationToken);
                 stream.Position = 0;
 
-                _storage = _service.LanguageServices.WorkspaceServices.GetRequiredService<ITemporaryStorageService>().CreateTemporaryStreamStorage(cancellationToken);
+                _storage = _service.LanguageServices.WorkspaceServices
+                    .GetRequiredService<ITemporaryStorageService>()
+                    .CreateTemporaryStreamStorage(cancellationToken);
                 await _storage.WriteStreamAsync(stream, cancellationToken).ConfigureAwait(false);
             }
 
@@ -154,9 +164,17 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 Contract.ThrowIfNull(_storage);
 
-                using (RoslynEventSource.LogInformationalBlock(FunctionId.Workspace_Recoverable_RecoverRootAsync, _containingTree.FilePath, cancellationToken))
+                using (
+                    RoslynEventSource.LogInformationalBlock(
+                        FunctionId.Workspace_Recoverable_RecoverRootAsync,
+                        _containingTree.FilePath,
+                        cancellationToken
+                    )
+                )
                 {
-                    using var stream = await _storage.ReadStreamAsync(cancellationToken).ConfigureAwait(false);
+                    using var stream = await _storage
+                        .ReadStreamAsync(cancellationToken)
+                        .ConfigureAwait(false);
                     return RecoverRoot(stream, cancellationToken);
                 }
             }
@@ -165,19 +183,28 @@ namespace Microsoft.CodeAnalysis.Host
             {
                 Contract.ThrowIfNull(_storage);
 
-                using (RoslynEventSource.LogInformationalBlock(FunctionId.Workspace_Recoverable_RecoverRoot, _containingTree.FilePath, cancellationToken))
+                using (
+                    RoslynEventSource.LogInformationalBlock(
+                        FunctionId.Workspace_Recoverable_RecoverRoot,
+                        _containingTree.FilePath,
+                        cancellationToken
+                    )
+                )
                 {
                     using var stream = _storage.ReadStream(cancellationToken);
                     return RecoverRoot(stream, cancellationToken);
                 }
             }
 
-            private TRoot RecoverRoot(Stream stream, CancellationToken cancellationToken)
-                => _containingTree.CloneNodeAsRoot((TRoot)_service.DeserializeNodeFrom(stream, cancellationToken));
+            private TRoot RecoverRoot(Stream stream, CancellationToken cancellationToken) =>
+                _containingTree.CloneNodeAsRoot(
+                    (TRoot)_service.DeserializeNodeFrom(stream, cancellationToken)
+                );
         }
     }
 
-    internal interface IRecoverableSyntaxTree<TRoot> : IRecoverableSyntaxTree where TRoot : SyntaxNode
+    internal interface IRecoverableSyntaxTree<TRoot> : IRecoverableSyntaxTree
+        where TRoot : SyntaxNode
     {
         TRoot CloneNodeAsRoot(TRoot root);
     }

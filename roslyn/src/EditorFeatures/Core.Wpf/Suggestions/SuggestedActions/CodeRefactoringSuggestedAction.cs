@@ -16,7 +16,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// <summary>
     /// Represents light bulb menu item for code refactorings.
     /// </summary>
-    internal sealed class CodeRefactoringSuggestedAction : SuggestedActionWithNestedFlavors, ICodeRefactoringSuggestedAction
+    internal sealed class CodeRefactoringSuggestedAction
+        : SuggestedActionWithNestedFlavors,
+            ICodeRefactoringSuggestedAction
     {
         public CodeRefactoringProvider CodeRefactoringProvider { get; }
 
@@ -27,8 +29,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             ITextBuffer subjectBuffer,
             CodeRefactoringProvider provider,
             CodeAction codeAction,
-            SuggestedActionSet fixAllFlavors)
-            : base(threadingContext, sourceProvider, workspace, subjectBuffer, provider, codeAction, fixAllFlavors)
+            SuggestedActionSet fixAllFlavors
+        )
+            : base(
+                threadingContext,
+                sourceProvider,
+                workspace,
+                subjectBuffer,
+                provider,
+                codeAction,
+                fixAllFlavors
+            )
         {
             CodeRefactoringProvider = provider;
         }

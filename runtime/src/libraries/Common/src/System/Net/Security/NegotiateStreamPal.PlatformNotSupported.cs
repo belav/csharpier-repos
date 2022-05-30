@@ -43,7 +43,8 @@ namespace System.Net.Security
             byte[]? incomingBlob,
             ChannelBinding? channelBinding,
             ref byte[]? resultBlob,
-            ref ContextFlagsPal contextFlags)
+            ref ContextFlagsPal contextFlags
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -55,7 +56,8 @@ namespace System.Net.Security
             byte[]? incomingBlob,
             ChannelBinding? channelBinding,
             ref byte[] resultBlob,
-            ref ContextFlagsPal contextFlags)
+            ref ContextFlagsPal contextFlags
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -75,14 +77,19 @@ namespace System.Net.Security
             throw new PlatformNotSupportedException();
         }
 
-        internal static SafeFreeCredentials AcquireCredentialsHandle(string package, bool isServer, NetworkCredential credential)
+        internal static SafeFreeCredentials AcquireCredentialsHandle(
+            string package,
+            bool isServer,
+            NetworkCredential credential
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
         internal static SecurityStatusPal CompleteAuthToken(
             ref SafeDeleteContext? securityContext,
-            byte[]? incomingBlob)
+            byte[]? incomingBlob
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -93,7 +100,8 @@ namespace System.Net.Security
             bool isConfidential,
             bool isNtlm,
             [NotNull] ref byte[]? output,
-            uint sequenceNumber)
+            uint sequenceNumber
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -106,17 +114,29 @@ namespace System.Net.Security
             bool isConfidential,
             bool isNtlm,
             out int newOffset,
-            uint sequenceNumber)
+            uint sequenceNumber
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        internal static int VerifySignature(SafeDeleteContext securityContext, byte[] buffer, int offset, int count)
+        internal static int VerifySignature(
+            SafeDeleteContext securityContext,
+            byte[] buffer,
+            int offset,
+            int count
+        )
         {
             throw new PlatformNotSupportedException();
         }
 
-        internal static int MakeSignature(SafeDeleteContext securityContext, byte[] buffer, int offset, int count, [AllowNull] ref byte[] output)
+        internal static int MakeSignature(
+            SafeDeleteContext securityContext,
+            byte[] buffer,
+            int offset,
+            int count,
+            [AllowNull] ref byte[] output
+        )
         {
             throw new PlatformNotSupportedException();
         }

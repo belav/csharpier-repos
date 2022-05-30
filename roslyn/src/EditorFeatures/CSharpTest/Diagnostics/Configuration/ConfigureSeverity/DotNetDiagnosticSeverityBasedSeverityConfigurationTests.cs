@@ -19,7 +19,8 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configuration.ConfigureSeverity
 {
-    public abstract partial class DotNetDiagnosticSeverityBasedSeverityConfigurationTests : AbstractSuppressionDiagnosticTest
+    public abstract partial class DotNetDiagnosticSeverityBasedSeverityConfigurationTests
+        : AbstractSuppressionDiagnosticTest
     {
         private sealed class CustomDiagnosticAnalyzer : DiagnosticAnalyzer
         {
@@ -29,15 +30,18 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
                 messageFormat: "Message",
                 category: "Category",
                 defaultSeverity: DiagnosticSeverity.Info,
-                isEnabledByDefault: true);
+                isEnabledByDefault: true
+            );
 
-            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics => ImmutableArray.Create(Rule);
+            public override ImmutableArray<DiagnosticDescriptor> SupportedDiagnostics =>
+                ImmutableArray.Create(Rule);
 
             public override void Initialize(AnalysisContext context)
             {
                 context.RegisterSyntaxNodeAction(
                     c => c.ReportDiagnostic(Diagnostic.Create(Rule, c.Node.GetLocation())),
-                    SyntaxKind.ClassDeclaration);
+                    SyntaxKind.ClassDeclaration
+                );
             }
         }
 
@@ -45,20 +49,30 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
 
         protected override ParseOptions GetScriptOptions() => Options.Script;
 
-        internal override Tuple<DiagnosticAnalyzer, IConfigurationFixProvider> CreateDiagnosticProviderAndFixer(Workspace workspace)
+        internal override Tuple<
+            DiagnosticAnalyzer,
+            IConfigurationFixProvider
+        > CreateDiagnosticProviderAndFixer(Workspace workspace)
         {
             return new Tuple<DiagnosticAnalyzer, IConfigurationFixProvider>(
-                        new CustomDiagnosticAnalyzer(), new ConfigureSeverityLevelCodeFixProvider());
+                new CustomDiagnosticAnalyzer(),
+                new ConfigureSeverityLevelCodeFixProvider()
+            );
         }
 
-        public class NoneConfigurationTests : DotNetDiagnosticSeverityBasedSeverityConfigurationTests
+        public class NoneConfigurationTests
+            : DotNetDiagnosticSeverityBasedSeverityConfigurationTests
         {
             protected override int CodeActionIndex => 0;
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_Empty_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -68,7 +82,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Diagnostics.Configurati
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -88,7 +103,8 @@ dotnet_diagnostic.XYZ0001.severity = none
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_RuleExists_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -100,7 +116,8 @@ dotnet_diagnostic.XYZ0001.severity = suggestion   # Comment
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -115,10 +132,14 @@ dotnet_diagnostic.XYZ0001.severity = none   # Comment
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidHeader_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -130,7 +151,8 @@ dotnet_diagnostic.XYZ0001.severity = suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -153,7 +175,8 @@ dotnet_diagnostic.XYZ0001.severity = none
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureEditorconfig_MaintainExistingEntry_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -168,10 +191,14 @@ dotnet_diagnostic.XYZ0001.severity = none
                 await TestMissingInRegularAndScriptAsync(input);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_InvalidRule_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -183,7 +210,8 @@ dotnet_diagnostic.XYZ1111.severity = none
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -201,11 +229,15 @@ dotnet_diagnostic.XYZ0001.severity = none
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             [WorkItem(45446, "https://github.com/dotnet/roslyn/issues/45446")]
             public async Task ConfigureEditorconfig_MissingRule_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -217,7 +249,8 @@ dotnet_diagnostic.severity = none
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -235,10 +268,14 @@ dotnet_diagnostic.XYZ0001.severity = none
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_RegexHeaderMatch_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\Program/file.cs"">
@@ -251,7 +288,8 @@ dotnet_diagnostic.XYZ0001.severity = warning
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\Program/file.cs"">
@@ -267,10 +305,14 @@ dotnet_diagnostic.XYZ0001.severity = none
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureEditorconfig_RegexHeaderNonMatch_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\Program/file.cs"">
@@ -283,7 +325,8 @@ dotnet_diagnostic.XYZ0001.severity = warning
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\Program/file.cs"">
@@ -304,10 +347,14 @@ dotnet_diagnostic.XYZ0001.severity = none
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureGlobalconfig_Empty_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -317,7 +364,8 @@ dotnet_diagnostic.XYZ0001.severity = none
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -337,7 +385,8 @@ dotnet_diagnostic.XYZ0001.severity = none
             [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
             public async Task ConfigureGlobalconfig_RuleExists_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -349,7 +398,8 @@ dotnet_diagnostic.XYZ0001.severity = suggestion   # Comment
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
          <Document FilePath=""z:\\file.cs"">
@@ -364,10 +414,14 @@ dotnet_diagnostic.XYZ0001.severity = none   # Comment
                 await TestInRegularAndScriptAsync(input, expected, CodeActionIndex);
             }
 
-            [ConditionalFact(typeof(IsEnglishLocal)), Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)]
+            [
+                ConditionalFact(typeof(IsEnglishLocal)),
+                Trait(Traits.Feature, Traits.Features.CodeActionsConfiguration)
+            ]
             public async Task ConfigureGlobalconfig_InvalidHeader_None()
             {
-                var input = @"
+                var input =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">
@@ -379,7 +433,8 @@ dotnet_diagnostic.XYZ0001.severity = suggestion
     </Project>
 </Workspace>";
 
-                var expected = @"
+                var expected =
+                    @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document FilePath=""z:\\file.cs"">

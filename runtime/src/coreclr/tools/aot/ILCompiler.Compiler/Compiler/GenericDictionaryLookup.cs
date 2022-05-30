@@ -56,14 +56,11 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Gets a value indicating whether the lookup needs to be performed by calling a helper method. 
+        /// Gets a value indicating whether the lookup needs to be performed by calling a helper method.
         /// </summary>
         public bool UseHelper
         {
-            get
-            {
-                return _offset1 == UseHelperOffset;
-            }
+            get { return _offset1 == UseHelperOffset; }
         }
 
         /// <summary>
@@ -106,7 +103,13 @@ namespace ILCompiler
             }
         }
 
-        private GenericDictionaryLookup(GenericContextSource contextSource, int offset1, int offset2, object helperObject, bool indirectLastOffset)
+        private GenericDictionaryLookup(
+            GenericContextSource contextSource,
+            int offset1,
+            int offset2,
+            object helperObject,
+            bool indirectLastOffset
+        )
         {
             ContextSource = contextSource;
             _offset1 = checked((short)offset1);
@@ -115,15 +118,36 @@ namespace ILCompiler
             _indirectLastOffset = indirectLastOffset;
         }
 
-        public static GenericDictionaryLookup CreateFixedLookup(GenericContextSource contextSource, int offset1, int offset2 = UseHelperOffset, bool indirectLastOffset = false)
+        public static GenericDictionaryLookup CreateFixedLookup(
+            GenericContextSource contextSource,
+            int offset1,
+            int offset2 = UseHelperOffset,
+            bool indirectLastOffset = false
+        )
         {
             Debug.Assert(offset1 != UseHelperOffset);
-            return new GenericDictionaryLookup(contextSource, offset1, offset2, null, indirectLastOffset);
+            return new GenericDictionaryLookup(
+                contextSource,
+                offset1,
+                offset2,
+                null,
+                indirectLastOffset
+            );
         }
 
-        public static GenericDictionaryLookup CreateHelperLookup(GenericContextSource contextSource, ReadyToRunHelperId helperId, object helperObject)
+        public static GenericDictionaryLookup CreateHelperLookup(
+            GenericContextSource contextSource,
+            ReadyToRunHelperId helperId,
+            object helperObject
+        )
         {
-            return new GenericDictionaryLookup(contextSource, UseHelperOffset, checked((short)helperId), helperObject, indirectLastOffset: false);
+            return new GenericDictionaryLookup(
+                contextSource,
+                UseHelperOffset,
+                checked((short)helperId),
+                helperObject,
+                indirectLastOffset: false
+            );
         }
     }
 

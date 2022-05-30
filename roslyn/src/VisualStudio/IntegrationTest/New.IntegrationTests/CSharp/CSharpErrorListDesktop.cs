@@ -11,9 +11,6 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.ErrorList)]
     public class CSharpErrorListDesktop : CSharpErrorListCommon
     {
-        public CSharpErrorListDesktop()
-            : base(WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+        public CSharpErrorListDesktop() : base(WellKnownProjectTemplates.ClassLibrary) { }
     }
 }

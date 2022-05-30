@@ -19,40 +19,67 @@ using Xunit.Abstractions;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UsePatternCombinators
 {
-    public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
+    public class CSharpUsePatternCombinatorsDiagnosticAnalyzerTests
+        : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        private static readonly ParseOptions CSharp9 = TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
+        private static readonly ParseOptions CSharp9 =
+            TestOptions.RegularPreview.WithLanguageVersion(LanguageVersion.CSharp9);
 
-        private static readonly OptionsCollection s_disabled = new OptionsCollection(LanguageNames.CSharp)
+        private static readonly OptionsCollection s_disabled = new OptionsCollection(
+            LanguageNames.CSharp
+        )
         {
-            { CSharpCodeStyleOptions.PreferPatternMatching, new CodeStyleOption2<bool>(false, NotificationOption2.None) }
+            {
+                CSharpCodeStyleOptions.PreferPatternMatching,
+                new CodeStyleOption2<bool>(false, NotificationOption2.None)
+            }
         };
 
         public CSharpUsePatternCombinatorsDiagnosticAnalyzerTests(ITestOutputHelper logger)
-             : base(logger)
-        {
-        }
+            : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpUsePatternCombinatorsDiagnosticAnalyzer(), new CSharpUsePatternCombinatorsCodeFixProvider());
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) =>
+            (
+                new CSharpUsePatternCombinatorsDiagnosticAnalyzer(),
+                new CSharpUsePatternCombinatorsCodeFixProvider()
+            );
 
-        private Task TestAllMissingOnExpressionAsync(string expression, ParseOptions? parseOptions = null, bool enabled = true)
-            => TestMissingAsync(FromExpression(expression), parseOptions, enabled);
+        private Task TestAllMissingOnExpressionAsync(
+            string expression,
+            ParseOptions? parseOptions = null,
+            bool enabled = true
+        ) => TestMissingAsync(FromExpression(expression), parseOptions, enabled);
 
-        private Task TestMissingAsync(string initialMarkup, ParseOptions? parseOptions = null, bool enabled = true)
-            => TestMissingAsync(initialMarkup, new TestParameters(
-                parseOptions: parseOptions ?? CSharp9, options: enabled ? null : s_disabled));
+        private Task TestMissingAsync(
+            string initialMarkup,
+            ParseOptions? parseOptions = null,
+            bool enabled = true
+        ) =>
+            TestMissingAsync(
+                initialMarkup,
+                new TestParameters(
+                    parseOptions: parseOptions ?? CSharp9,
+                    options: enabled ? null : s_disabled
+                )
+            );
 
-        private Task TestAllAsync(string initialMarkup, string expectedMarkup)
-            => TestInRegularAndScriptAsync(initialMarkup, expectedMarkup,
-                parseOptions: CSharp9, options: null);
+        private Task TestAllAsync(string initialMarkup, string expectedMarkup) =>
+            TestInRegularAndScriptAsync(
+                initialMarkup,
+                expectedMarkup,
+                parseOptions: CSharp9,
+                options: null
+            );
 
-        private Task TestAllOnExpressionAsync(string expression, string expected)
-            => TestAllAsync(FromExpression(expression), FromExpression(expected));
+        private Task TestAllOnExpressionAsync(string expression, string expected) =>
+            TestAllAsync(FromExpression(expression), FromExpression(expected));
 
         private static string FromExpression(string expression)
         {
-            const string initialMarkup = @"
+            const string initialMarkup =
+                @"
 using System;
 using System.Collections.Generic;
 class C
@@ -106,7 +133,10 @@ class C
         [InlineData("!(o is C c)", "o is not C c")]
         [InlineData("o is int ii && o is long jj", "o is int ii and long jj")]
         [InlineData("o is string || o is Exception", "o is string or Exception")]
-        [InlineData("o is System.String || o is System.Exception", "o is System.String or System.Exception")]
+        [InlineData(
+            "o is System.String || o is System.Exception",
+            "o is System.String or System.Exception"
+        )]
         [InlineData("!(o is C)", "o is not C")]
         [InlineData("!(o is C _)", "o is not C _")]
         [InlineData("i == (0x02 | 0x04) || i != 0", "i is (0x02 | 0x04) or not 0")]
@@ -142,14 +172,17 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMissingOnCSharp8()
         {
-            await TestAllMissingOnExpressionAsync("o == 1 || o == 2", parseOptions: TestOptions.Regular8);
+            await TestAllMissingOnExpressionAsync(
+                "o == 1 || o == 2",
+                parseOptions: TestOptions.Regular8
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMultilineTrivia_01()
         {
             await TestAllAsync(
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -164,7 +197,7 @@ class C
                variable != 2; /*3*/
     }
 }",
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -178,14 +211,15 @@ class C
                not 1 and /*2*/
                not 2; /*3*/
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMultilineTrivia_02()
         {
             await TestAllAsync(
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -200,7 +234,7 @@ class C
             && variable != 2; /*3*/
     }
 }",
-@"class C
+                @"class C
 {
     bool M0(int variable)
     {
@@ -214,14 +248,15 @@ class C
             and not 1 /*2*/
             and not 2; /*3*/
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestParenthesized()
         {
             await TestAllAsync(
-@"class C
+                @"class C
 {
     bool M0(int v)
     {
@@ -232,7 +267,7 @@ class C
         return (v == 0) || (v == 1) || (v == 2);
     }
 }",
-@"class C
+                @"class C
 {
     bool M0(int v)
     {
@@ -242,21 +277,23 @@ class C
     {
         return v is 0 or 1 or 2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         public async Task TestMissingInExpressionTree()
         {
             await TestMissingAsync(
-@"using System.Linq;
+                @"using System.Linq;
 class C
 {
     void M0(IQueryable<int> q)
     {
         q.Where(item => item == 1 [||]|| item == 2);
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -264,7 +301,7 @@ class C
         public async Task TestMissingInPropertyAccess_NullCheckOnLeftSide()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -278,7 +315,8 @@ public class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -286,7 +324,7 @@ public class C
         public async Task TestMissingInPropertyAccess_NullCheckOnRightSide()
         {
             await TestMissingAsync(
-@"using System;
+                @"using System;
 
 public class C
 {
@@ -300,7 +338,8 @@ public class C
         {
         }
     }
-}");
+}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -310,7 +349,7 @@ public class C
         public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheck(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System.Diagnostics;
+                $@"using System.Diagnostics;
 
 public class C
 {{
@@ -321,17 +360,20 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
         [WorkItem(51691, "https://github.com/dotnet/roslyn/issues/51691")]
         [InlineData("&&")]
         [InlineData("||")]
-        public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(string logicalOperator)
+        public async Task TestMissingInPropertyAccess_EnumCheckAndNullCheckOnOtherType(
+            string logicalOperator
+        )
         {
             await TestMissingAsync(
-$@"using System.Diagnostics;
+                $@"using System.Diagnostics;
 
 public class C
 {{
@@ -342,7 +384,8 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -352,7 +395,7 @@ public class C
         public async Task TestMissingInPropertyAccess_IsCheckAndNullCheck(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 
 public class C
 {{
@@ -363,7 +406,8 @@ public class C
             {{
             }}
     }}
-}}");
+}}"
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -373,7 +417,7 @@ public class C
         public async Task TestMissingIntegerAndStringIndex(string logicalOperator)
         {
             await TestMissingAsync(
-$@"using System;
+                $@"using System;
 
 public class C
 {{
@@ -381,7 +425,8 @@ public class C
     {{
         return count == 1 [|{logicalOperator}|] ch[0] == 'S';
     }}
-}}");
+}}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -409,7 +454,6 @@ class C
     }
 }
 ",
-
                 @"
 class C
 {
@@ -430,7 +474,8 @@ class C
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -458,7 +503,6 @@ class C
     }
 }
 ",
-
                 @"
 class C
 {
@@ -479,7 +523,8 @@ class C
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -487,7 +532,7 @@ class C
         public async Task TestMissingInNonConvertibleTypePattern1()
         {
             await TestMissingAsync(
-@"
+                @"
 static class C
 {
     public struct S1 : I { }
@@ -500,7 +545,8 @@ class Test<T>
     public readonly T C;
     bool P => [|C is C.S1 || C is C.S2|];
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -508,7 +554,7 @@ class Test<T>
         public async Task TestMissingInNonConvertibleTypePattern2()
         {
             await TestMissingAsync(
-@"
+                @"
         class Goo
         {
             private class X { }
@@ -524,7 +570,8 @@ class Test<T>
                 }
             }
         }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -532,7 +579,7 @@ class Test<T>
         public async Task TestMissingInNonConvertibleTypePattern3()
         {
             await TestMissingAsync(
-@"
+                @"
         class Goo
         {
             private class X { }
@@ -546,7 +593,8 @@ class Test<T>
                 }
             }
         }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -554,7 +602,7 @@ class Test<T>
         public async Task TestInConvertibleTypePattern()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 static class C
 {
     public struct S1 : I { }
@@ -567,8 +615,7 @@ class Test<T>
     bool P => [|C is C.S1 || C is C.S2|];
 }
 ",
-
-@"
+                @"
 static class C
 {
     public struct S1 : I { }
@@ -580,7 +627,8 @@ class Test<T>
 {
     bool P => C is C.S1 or C.S2;
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUsePatternCombinators)]
@@ -588,7 +636,7 @@ class Test<T>
         public async Task TestInConvertibleTypePattern2()
         {
             await TestInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     private class X { }
@@ -606,7 +654,8 @@ public class Goo
         }
     }
 }
-", @"
+",
+                @"
 public class Goo
 {
     private class X { }
@@ -624,7 +673,8 @@ public class Goo
         }
     }
 }
-");
+"
+            );
         }
     }
 }

@@ -13,15 +13,15 @@ namespace System.Security.Cryptography.X509Certificates
 {
     internal static class OpenSslCrlCache
     {
-        private static readonly string s_crlDir =
-            PersistedFiles.GetUserFeatureDirectory(
-                X509Persistence.CryptographyFeatureName,
-                X509Persistence.CrlsSubFeatureName);
+        private static readonly string s_crlDir = PersistedFiles.GetUserFeatureDirectory(
+            X509Persistence.CryptographyFeatureName,
+            X509Persistence.CrlsSubFeatureName
+        );
 
-        private static readonly string s_ocspDir =
-            PersistedFiles.GetUserFeatureDirectory(
-                X509Persistence.CryptographyFeatureName,
-                X509Persistence.OcspSubFeatureName);
+        private static readonly string s_ocspDir = PersistedFiles.GetUserFeatureDirectory(
+            X509Persistence.CryptographyFeatureName,
+            X509Persistence.OcspSubFeatureName
+        );
 
         private const ulong X509_R_CERT_ALREADY_IN_HASH_TABLE = 0x0B07D065;
 
@@ -30,7 +30,8 @@ namespace System.Security.Cryptography.X509Certificates
             SafeX509StoreHandle store,
             X509RevocationMode revocationMode,
             DateTime verificationTime,
-            TimeSpan downloadTimeout)
+            TimeSpan downloadTimeout
+        )
         {
             // In Offline mode, accept any cached CRL we have.
             // "CRL is Expired" is a better match for Offline than "Could not find CRL"
@@ -72,7 +73,11 @@ namespace System.Security.Cryptography.X509Certificates
             DownloadAndAddCrl(url, crlFileName, store, downloadTimeout);
         }
 
-        private static bool AddCachedCrl(string crlFileName, SafeX509StoreHandle store, DateTime verificationTime)
+        private static bool AddCachedCrl(
+            string crlFileName,
+            SafeX509StoreHandle store,
+            DateTime verificationTime
+        )
         {
             string crlFile = GetCachedCrlPath(crlFileName);
 
@@ -94,7 +99,11 @@ namespace System.Security.Cryptography.X509Certificates
             }
         }
 
-        private static bool AddCachedCrlCore(string crlFile, SafeX509StoreHandle store, DateTime verificationTime)
+        private static bool AddCachedCrlCore(
+            string crlFile,
+            SafeX509StoreHandle store,
+            DateTime verificationTime
+        )
         {
             using (SafeBioHandle bio = Interop.Crypto.BioNewFile(crlFile, "rb"))
             {
@@ -156,14 +165,17 @@ namespace System.Security.Cryptography.X509Certificates
                     }
                     else
                     {
-                        nextUpdate = OpenSslX509CertificateReader.ExtractValidityDateTime(nextUpdatePtr);
+                        nextUpdate = OpenSslX509CertificateReader.ExtractValidityDateTime(
+                            nextUpdatePtr
+                        );
                     }
 
                     // OpenSSL is going to convert our input time to universal, so we should be in Local or
                     // Unspecified (local-assumed).
                     Debug.Assert(
                         verificationTime.Kind != DateTimeKind.Utc,
-                        "UTC verificationTime should have been normalized to Local");
+                        "UTC verificationTime should have been normalized to Local"
+                    );
 
                     // In the event that we're to-the-second accurate on the match, OpenSSL will consider this
                     // to be already expired.
@@ -171,7 +183,10 @@ namespace System.Security.Cryptography.X509Certificates
                     {
                         if (OpenSslX509ChainEventSource.Log.IsEnabled())
                         {
-                            OpenSslX509ChainEventSource.Log.CrlCacheExpired(nextUpdate, verificationTime);
+                            OpenSslX509ChainEventSource.Log.CrlCacheExpired(
+                                nextUpdate,
+                                verificationTime
+                            );
                         }
 
                         return false;
@@ -204,11 +219,17 @@ namespace System.Security.Cryptography.X509Certificates
             string url,
             string crlFileName,
             SafeX509StoreHandle store,
-            TimeSpan downloadTimeout)
+            TimeSpan downloadTimeout
+        )
         {
             // X509_STORE_add_crl will increase the refcount on the CRL object, so we should still
             // dispose our copy.
-            using (SafeX509CrlHandle? crl = OpenSslCertificateAssetDownloader.DownloadCrl(url, downloadTimeout))
+            using (
+                SafeX509CrlHandle? crl = OpenSslCertificateAssetDownloader.DownloadCrl(
+                    url,
+                    downloadTimeout
+                )
+            )
             {
                 // null is a valid return (e.g. no remainingDownloadTime)
                 if (crl != null && !crl.IsInvalid)
@@ -297,7 +318,7 @@ namespace System.Security.Cryptography.X509Certificates
             return $"{persistentHash:x8}.{urlHash:x8}.crl";
         }
 
-        private static string GetCachedCrlPath(string localFileName, bool mkDir=false)
+        private static string GetCachedCrlPath(string localFileName, bool mkDir = false)
         {
             if (mkDir)
             {
@@ -324,25 +345,41 @@ namespace System.Security.Cryptography.X509Certificates
 
             try
             {
-                AsnValueReader reader = new AsnValueReader(crlDistributionPoints, AsnEncodingRules.DER);
+                AsnValueReader reader = new AsnValueReader(
+                    crlDistributionPoints,
+                    AsnEncodingRules.DER
+                );
                 AsnValueReader sequenceReader = reader.ReadSequence();
                 reader.ThrowIfNotEmpty();
 
                 while (sequenceReader.HasData)
                 {
-                    DistributionPointAsn.Decode(ref sequenceReader, crlDistributionPoints, out DistributionPointAsn distributionPoint);
+                    DistributionPointAsn.Decode(
+                        ref sequenceReader,
+                        crlDistributionPoints,
+                        out DistributionPointAsn distributionPoint
+                    );
 
                     // Only distributionPoint is supported
                     // Only fullName is supported, nameRelativeToCRLIssuer is for LDAP-based lookup.
-                    if (distributionPoint.DistributionPoint.HasValue &&
-                        distributionPoint.DistributionPoint.Value.FullName != null)
+                    if (
+                        distributionPoint.DistributionPoint.HasValue
+                        && distributionPoint.DistributionPoint.Value.FullName != null
+                    )
                     {
-                        foreach (GeneralNameAsn name in distributionPoint.DistributionPoint.Value.FullName)
+                        foreach (
+                            GeneralNameAsn name in distributionPoint
+                                .DistributionPoint
+                                .Value
+                                .FullName
+                        )
                         {
                             if (name.Uri != null)
                             {
-                                if (Uri.TryCreate(name.Uri, UriKind.Absolute, out Uri? uri) &&
-                                    uri.Scheme == "http")
+                                if (
+                                    Uri.TryCreate(name.Uri, UriKind.Absolute, out Uri? uri)
+                                    && uri.Scheme == "http"
+                                )
                                 {
                                     return name.Uri;
                                 }

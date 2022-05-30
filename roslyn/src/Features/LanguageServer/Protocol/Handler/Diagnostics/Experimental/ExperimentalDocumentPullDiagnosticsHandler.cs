@@ -17,15 +17,26 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.Handler.Diagnostics.Experimental;
 
-using DocumentDiagnosticReport = SumType<FullDocumentDiagnosticReport, UnchangedDocumentDiagnosticReport>;
+using DocumentDiagnosticReport = SumType<
+    FullDocumentDiagnosticReport,
+    UnchangedDocumentDiagnosticReport
+>;
 
 // A document diagnostic partial report is defined as having the first literal send = DocumentDiagnosticReport (aka the sumtype of changed / unchanged) followed
 // by n DocumentDiagnosticPartialResult literals.
 // See https://github.com/microsoft/vscode-languageserver-node/blob/main/protocol/src/common/proposed.diagnostics.md#textDocument_diagnostic
-using DocumentDiagnosticPartialReport = SumType<SumType<FullDocumentDiagnosticReport, UnchangedDocumentDiagnosticReport>, DocumentDiagnosticPartialResult>;
+using DocumentDiagnosticPartialReport = SumType<
+    SumType<FullDocumentDiagnosticReport, UnchangedDocumentDiagnosticReport>,
+    DocumentDiagnosticPartialResult
+>;
 
 [Method(ExperimentalMethods.TextDocumentDiagnostic)]
-internal class ExperimentalDocumentPullDiagnosticsHandler : AbstractPullDiagnosticHandler<DocumentDiagnosticParams, DocumentDiagnosticPartialReport, DocumentDiagnosticReport?>
+internal class ExperimentalDocumentPullDiagnosticsHandler
+    : AbstractPullDiagnosticHandler<
+        DocumentDiagnosticParams,
+        DocumentDiagnosticPartialReport,
+        DocumentDiagnosticReport?
+    >
 {
     private readonly IDiagnosticAnalyzerService _analyzerService;
 
@@ -33,29 +44,40 @@ internal class ExperimentalDocumentPullDiagnosticsHandler : AbstractPullDiagnost
         IDiagnosticService diagnosticService,
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions)
-        : base(diagnosticService, editAndContinueDiagnosticUpdateSource, globalOptions)
+        IGlobalOptionService globalOptions
+    ) : base(diagnosticService, editAndContinueDiagnosticUpdateSource, globalOptions)
     {
         _analyzerService = analyzerService;
     }
 
-    public override TextDocumentIdentifier? GetTextDocumentIdentifier(DocumentDiagnosticParams diagnosticsParams) => diagnosticsParams.TextDocument;
+    public override TextDocumentIdentifier? GetTextDocumentIdentifier(
+        DocumentDiagnosticParams diagnosticsParams
+    ) => diagnosticsParams.TextDocument;
 
     protected override DiagnosticTag[] ConvertTags(DiagnosticData diagnosticData)
     {
         return ConvertTags(diagnosticData, potentialDuplicate: false);
     }
 
-    protected override DocumentDiagnosticPartialReport CreateReport(TextDocumentIdentifier identifier, VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics, string? resultId)
+    protected override DocumentDiagnosticPartialReport CreateReport(
+        TextDocumentIdentifier identifier,
+        VisualStudio.LanguageServer.Protocol.Diagnostic[]? diagnostics,
+        string? resultId
+    )
     {
         // We will only report once for document pull, so we only need to return the first literal send = DocumentDiagnosticReport.
-        var report = diagnostics == null
-            ? new DocumentDiagnosticReport(new UnchangedDocumentDiagnosticReport(resultId))
-            : new DocumentDiagnosticReport(new FullDocumentDiagnosticReport(resultId, diagnostics));
+        var report =
+            diagnostics == null
+                ? new DocumentDiagnosticReport(new UnchangedDocumentDiagnosticReport(resultId))
+                : new DocumentDiagnosticReport(
+                    new FullDocumentDiagnosticReport(resultId, diagnostics)
+                );
         return report;
     }
 
-    protected override DocumentDiagnosticReport? CreateReturn(BufferedProgress<DocumentDiagnosticPartialReport> progress)
+    protected override DocumentDiagnosticReport? CreateReturn(
+        BufferedProgress<DocumentDiagnosticPartialReport> progress
+    )
     {
         // We only ever report one result for document diagnostics, which is the first DocumentDiagnosticReport.
         var progressValues = progress.GetValues();
@@ -67,24 +89,45 @@ internal class ExperimentalDocumentPullDiagnosticsHandler : AbstractPullDiagnost
         return null;
     }
 
-    protected override Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(RequestContext context, Document document, DiagnosticMode diagnosticMode, CancellationToken cancellationToken)
+    protected override Task<ImmutableArray<DiagnosticData>> GetDiagnosticsAsync(
+        RequestContext context,
+        Document document,
+        DiagnosticMode diagnosticMode,
+        CancellationToken cancellationToken
+    )
     {
         // We are intentionally getting diagnostics for the up to date LSP snapshot instead of from the IDiagnosticService
         // as the solution crawler does not run in VSCode.  When the solution crawler is removed from VS, the VS LSP diagnostics
         // implementation will switch over to up to date calculation.
-        return _analyzerService.GetDiagnosticsForSpanAsync(document, range: null, cancellationToken: cancellationToken);
+        return _analyzerService.GetDiagnosticsForSpanAsync(
+            document,
+            range: null,
+            cancellationToken: cancellationToken
+        );
     }
 
-    protected override ValueTask<ImmutableArray<Document>> GetOrderedDocumentsAsync(RequestContext context, CancellationToken cancellationToken)
+    protected override ValueTask<ImmutableArray<Document>> GetOrderedDocumentsAsync(
+        RequestContext context,
+        CancellationToken cancellationToken
+    )
     {
-        return ValueTaskFactory.FromResult(DocumentPullDiagnosticHandler.GetRequestedDocument(context));
+        return ValueTaskFactory.FromResult(
+            DocumentPullDiagnosticHandler.GetRequestedDocument(context)
+        );
     }
 
-    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(DocumentDiagnosticParams diagnosticsParams)
+    protected override ImmutableArray<PreviousPullResult>? GetPreviousResults(
+        DocumentDiagnosticParams diagnosticsParams
+    )
     {
         if (diagnosticsParams.PreviousResultId != null && diagnosticsParams.TextDocument != null)
         {
-            return ImmutableArray.Create(new PreviousPullResult(diagnosticsParams.PreviousResultId, diagnosticsParams.TextDocument));
+            return ImmutableArray.Create(
+                new PreviousPullResult(
+                    diagnosticsParams.PreviousResultId,
+                    diagnosticsParams.TextDocument
+                )
+            );
         }
 
         return null;

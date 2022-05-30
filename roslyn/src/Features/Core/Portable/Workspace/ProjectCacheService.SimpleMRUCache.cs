@@ -72,8 +72,7 @@ namespace Microsoft.CodeAnalysis.Host
                 }
             }
 
-            public void Clear()
-                => Array.Clear(_nodes, 0, _nodes.Length);
+            public void Clear() => Array.Clear(_nodes, 0, _nodes.Length);
 
             private struct Node
             {
@@ -94,9 +93,11 @@ namespace Microsoft.CodeAnalysis.Host
             private readonly SemaphoreSlim _gate;
 
             public ImplicitCacheMonitor(ProjectCacheService owner, TimeSpan backOffTimeSpan)
-                : base(AsynchronousOperationListenerProvider.NullListener,
-                       backOffTimeSpan,
-                       CancellationToken.None)
+                : base(
+                    AsynchronousOperationListenerProvider.NullListener,
+                    backOffTimeSpan,
+                    CancellationToken.None
+                )
             {
                 _owner = owner;
                 _gate = new SemaphoreSlim(0);
@@ -104,9 +105,7 @@ namespace Microsoft.CodeAnalysis.Host
                 Start();
             }
 
-            protected override void OnPaused()
-            {
-            }
+            protected override void OnPaused() { }
 
             protected override Task ExecuteAsync()
             {

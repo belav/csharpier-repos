@@ -10,14 +10,18 @@ namespace System.Composition.Runtime.Util
     internal static class Formatters
     {
         public static string Format(object value) =>
-            value is null ? throw new ArgumentNullException(nameof(value)) :
-            value is string ? $"\"{value}\"" :
-            value.ToString();
+            value is null
+                ? throw new ArgumentNullException(nameof(value))
+                : value is string
+                    ? $"\"{value}\""
+                    : value.ToString();
 
         public static string Format(Type type) =>
-            type is null ? throw new ArgumentNullException(nameof(type)) :
-            type.IsConstructedGenericType ? FormatClosedGeneric(type) :
-            type.Name;
+            type is null
+                ? throw new ArgumentNullException(nameof(type))
+                : type.IsConstructedGenericType
+                    ? FormatClosedGeneric(type)
+                    : type.Name;
 
         private static string FormatClosedGeneric(Type closedGenericType)
         {
@@ -25,7 +29,9 @@ namespace System.Composition.Runtime.Util
             Debug.Assert(closedGenericType.IsConstructedGenericType);
 
             var name = closedGenericType.Name.Substring(0, closedGenericType.Name.IndexOf('`'));
-            IEnumerable<string> args = closedGenericType.GenericTypeArguments.Select(t => Format(t));
+            IEnumerable<string> args = closedGenericType.GenericTypeArguments.Select(
+                t => Format(t)
+            );
             return $"{name}<{string.Join(SR.Formatter_ListSeparatorWithSpace, args)}>";
         }
     }

@@ -21,8 +21,7 @@ public class SequentialGuidEndToEndTest : IDisposable
 
             for (var i = 0; i < 50; i++)
             {
-                context.Add(
-                    new Pegasus { Name = "Rainbow Dash " + i });
+                context.Add(new Pegasus { Name = "Rainbow Dash " + i });
             }
 
             await context.SaveChangesAsync();
@@ -55,13 +54,17 @@ public class SequentialGuidEndToEndTest : IDisposable
             for (var i = 0; i < 50; i++)
             {
                 guids.Add(
-                    context.Add(
-                        new Pegasus
-                        {
-                            Name = "Rainbow Dash " + i,
-                            Index = i,
-                            Id = Guid.NewGuid()
-                        }).Entity.Id);
+                    context
+                        .Add(
+                            new Pegasus
+                            {
+                                Name = "Rainbow Dash " + i,
+                                Index = i,
+                                Id = Guid.NewGuid()
+                            }
+                        )
+                        .Entity.Id
+                );
             }
 
             await context.SaveChangesAsync();
@@ -92,9 +95,12 @@ public class SequentialGuidEndToEndTest : IDisposable
 
         public DbSet<Pegasus> Pegasuses { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
-                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration())
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
+                .UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                )
                 .UseInternalServiceProvider(_serviceProvider);
     }
 
@@ -112,6 +118,5 @@ public class SequentialGuidEndToEndTest : IDisposable
 
     protected SqlServerTestStore TestStore { get; }
 
-    public virtual void Dispose()
-        => TestStore.Dispose();
+    public virtual void Dispose() => TestStore.Dispose();
 }

@@ -12,7 +12,11 @@ namespace Internal.Reflection.Execution
 {
     static class NativeFormatEnumInfo
     {
-        public static EnumInfo Create(RuntimeTypeHandle typeHandle, MetadataReader reader, TypeDefinitionHandle typeDefHandle)
+        public static EnumInfo Create(
+            RuntimeTypeHandle typeHandle,
+            MetadataReader reader,
+            TypeDefinitionHandle typeDefHandle
+        )
         {
             TypeDefinition typeDef = reader.GetTypeDefinition(typeDefHandle);
 
@@ -50,7 +54,12 @@ namespace Internal.Reflection.Execution
                     isFlags = true;
             }
 
-            return new EnumInfo(RuntimeAugments.GetEnumUnderlyingType(typeHandle), values, names, isFlags);
+            return new EnumInfo(
+                RuntimeAugments.GetEnumUnderlyingType(typeHandle),
+                values,
+                names,
+                isFlags
+            );
         }
     }
 }

@@ -74,9 +74,9 @@ namespace Microsoft.Extensions.Hosting
             finally
             {
                 // Wait until the task completes or the stop token triggers
-                await Task.WhenAny(_executeTask, Task.Delay(Timeout.Infinite, cancellationToken)).ConfigureAwait(false);
+                await Task.WhenAny(_executeTask, Task.Delay(Timeout.Infinite, cancellationToken))
+                    .ConfigureAwait(false);
             }
-
         }
 
         public virtual void Dispose()

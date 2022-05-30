@@ -8,9 +8,7 @@ namespace Microsoft.Interop
 {
     public sealed class UnsupportedMarshallingFactory : IMarshallingGeneratorFactory
     {
-        public IMarshallingGenerator Create(
-            TypePositionInfo info,
-            StubCodeContext context)
+        public IMarshallingGenerator Create(TypePositionInfo info, StubCodeContext context)
         {
             throw new MarshallingNotSupportedException(info, context);
         }

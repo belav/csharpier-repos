@@ -23,10 +23,12 @@ namespace Internal.Runtime.CompilerHelpers
             Monitor.TryAcquireContended(lck, obj, Timeout.Infinite);
             lockTaken = true;
         }
+
         private static void MonitorExit(object obj, ref bool lockTaken)
         {
             // Inlined Monitor.Exit with a few tweaks
-            if (!lockTaken) return;
+            if (!lockTaken)
+                return;
             Monitor.GetLock(obj).Release();
             lockTaken = false;
         }
@@ -44,10 +46,12 @@ namespace Internal.Runtime.CompilerHelpers
             Monitor.TryAcquireContended(lck, obj, Timeout.Infinite);
             lockTaken = true;
         }
+
         private static void MonitorExitStatic(IntPtr pEEType, ref bool lockTaken)
         {
             // Inlined Monitor.Exit with a few tweaks
-            if (!lockTaken) return;
+            if (!lockTaken)
+                return;
             object obj = GetStaticLockObject(pEEType);
             Monitor.GetLock(obj).Release();
             lockTaken = false;

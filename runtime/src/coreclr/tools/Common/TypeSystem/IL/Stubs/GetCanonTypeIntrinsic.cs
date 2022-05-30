@@ -23,7 +23,9 @@ namespace Internal.IL.Stubs
             var codeStream = emitter.NewCodeStream();
 
             TypeSystemContext context = target.Context;
-            TypeDesc runtimeTypeHandleType = context.GetWellKnownType(WellKnownType.RuntimeTypeHandle);
+            TypeDesc runtimeTypeHandleType = context.GetWellKnownType(
+                WellKnownType.RuntimeTypeHandle
+            );
             Debug.Assert(target.Signature.ReturnType == runtimeTypeHandleType);
 
             if (context.SupportsCanon)

@@ -12,7 +12,12 @@ internal static partial class Interop
     internal static partial class BCrypt
     {
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial NTSTATUS BCryptOpenAlgorithmProvider(out SafeBCryptAlgorithmHandle phAlgorithm, string pszAlgId, string? pszImplementation, BCryptOpenAlgorithmProviderFlags dwFlags);
+        internal static partial NTSTATUS BCryptOpenAlgorithmProvider(
+            out SafeBCryptAlgorithmHandle phAlgorithm,
+            string pszAlgId,
+            string? pszImplementation,
+            BCryptOpenAlgorithmProviderFlags dwFlags
+        );
 
         [Flags]
         internal enum BCryptOpenAlgorithmProviderFlags : int

@@ -28,7 +28,7 @@ namespace Microsoft.CodeAnalysis
         /// in PDB file size.
         ///
         /// Chosen as the point at which we start to see > 10% blob size reduction using all
-        /// current source files in corefx and roslyn as sample data. 
+        /// current source files in corefx and roslyn as sample data.
         /// </summary>
         internal const int CompressionThreshold = 200;
 
@@ -50,7 +50,12 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         public ImmutableArray<byte> Checksum { get; }
 
-        private EmbeddedText(string filePath, ImmutableArray<byte> checksum, SourceHashAlgorithm checksumAlgorithm, ImmutableArray<byte> blob)
+        private EmbeddedText(
+            string filePath,
+            ImmutableArray<byte> checksum,
+            SourceHashAlgorithm checksumAlgorithm,
+            ImmutableArray<byte> blob
+        )
         {
             Debug.Assert(filePath.Length > 0);
             Debug.Assert(SourceHashAlgorithms.IsSupportedAlgorithm(checksumAlgorithm));
@@ -70,7 +75,7 @@ namespace Microsoft.CodeAnalysis
         /// contract is that you can pass EmbeddedText instances to Emit.
         /// It just so happened that doing this up-front was most practical
         /// and efficient, but we don't want to be tied to it.
-        /// 
+        ///
         /// For efficiency, the format of this blob is exactly as it is written
         /// to the PDB,which prevents extra copies being made during emit.
         ///
@@ -106,15 +111,28 @@ namespace Microsoft.CodeAnalysis
 
             if (!text.CanBeEmbedded)
             {
-                throw new ArgumentException(CodeAnalysisResources.SourceTextCannotBeEmbedded, nameof(text));
+                throw new ArgumentException(
+                    CodeAnalysisResources.SourceTextCannotBeEmbedded,
+                    nameof(text)
+                );
             }
 
             if (!text.PrecomputedEmbeddedTextBlob.IsDefault)
             {
-                return new EmbeddedText(filePath, text.GetChecksum(), text.ChecksumAlgorithm, text.PrecomputedEmbeddedTextBlob);
+                return new EmbeddedText(
+                    filePath,
+                    text.GetChecksum(),
+                    text.ChecksumAlgorithm,
+                    text.PrecomputedEmbeddedTextBlob
+                );
             }
 
-            return new EmbeddedText(filePath, text.GetChecksum(), text.ChecksumAlgorithm, CreateBlob(text));
+            return new EmbeddedText(
+                filePath,
+                text.GetChecksum(),
+                text.ChecksumAlgorithm,
+                CreateBlob(text)
+            );
         }
 
         /// <summary>
@@ -134,7 +152,11 @@ namespace Microsoft.CodeAnalysis
         /// </exception>
         /// <exception cref="IOException">An I/O error occurs.</exception>
         /// <remarks>Reads from the beginning of the stream. Leaves the stream open.</remarks>
-        public static EmbeddedText FromStream(string filePath, Stream stream, SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1)
+        public static EmbeddedText FromStream(
+            string filePath,
+            Stream stream,
+            SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
+        )
         {
             ValidateFilePath(filePath);
 
@@ -145,7 +167,10 @@ namespace Microsoft.CodeAnalysis
 
             if (!stream.CanRead || !stream.CanSeek)
             {
-                throw new ArgumentException(CodeAnalysisResources.StreamMustSupportReadAndSeek, nameof(stream));
+                throw new ArgumentException(
+                    CodeAnalysisResources.StreamMustSupportReadAndSeek,
+                    nameof(stream)
+                );
             }
 
             SourceText.ValidateChecksumAlgorithm(checksumAlgorithm);
@@ -154,7 +179,8 @@ namespace Microsoft.CodeAnalysis
                 filePath,
                 SourceText.CalculateChecksum(stream, checksumAlgorithm),
                 checksumAlgorithm,
-                CreateBlob(stream));
+                CreateBlob(stream)
+            );
         }
 
         /// <summary>
@@ -173,7 +199,11 @@ namespace Microsoft.CodeAnalysis
         /// </exception>
         /// <exception cref="IOException">An I/O error occurs.</exception>
         /// <remarks>Reads from the beginning of the stream. Leaves the stream open.</remarks>
-        public static EmbeddedText FromBytes(string filePath, ArraySegment<byte> bytes, SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1)
+        public static EmbeddedText FromBytes(
+            string filePath,
+            ArraySegment<byte> bytes,
+            SourceHashAlgorithm checksumAlgorithm = SourceHashAlgorithm.Sha1
+        )
         {
             ValidateFilePath(filePath);
 
@@ -186,9 +216,15 @@ namespace Microsoft.CodeAnalysis
 
             return new EmbeddedText(
                 filePath,
-                SourceText.CalculateChecksum(bytes.Array, bytes.Offset, bytes.Count, checksumAlgorithm),
+                SourceText.CalculateChecksum(
+                    bytes.Array,
+                    bytes.Offset,
+                    bytes.Count,
+                    checksumAlgorithm
+                ),
                 checksumAlgorithm,
-                CreateBlob(bytes));
+                CreateBlob(bytes)
+            );
         }
 
         /// <exception cref="ArgumentNullException"><paramref name="filePath"/> is null.</exception>
@@ -202,7 +238,10 @@ namespace Microsoft.CodeAnalysis
 
             if (filePath.Length == 0)
             {
-                throw new ArgumentException(CodeAnalysisResources.ArgumentCannotBeEmpty, nameof(filePath));
+                throw new ArgumentException(
+                    CodeAnalysisResources.ArgumentCannotBeEmpty,
+                    nameof(filePath)
+                );
             }
         }
 
@@ -247,7 +286,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     builder.WriteInt32(length);
 
-                    using (var deflater = new CountingDeflateStream(builder, CompressionLevel.Optimal, leaveOpen: true))
+                    using (
+                        var deflater = new CountingDeflateStream(
+                            builder,
+                            CompressionLevel.Optimal,
+                            leaveOpen: true
+                        )
+                    )
                     {
                         stream.CopyTo(deflater);
 
@@ -281,7 +326,13 @@ namespace Microsoft.CodeAnalysis
                 {
                     builder.WriteInt32(bytes.Count);
 
-                    using (var deflater = new CountingDeflateStream(builder, CompressionLevel.Optimal, leaveOpen: true))
+                    using (
+                        var deflater = new CountingDeflateStream(
+                            builder,
+                            CompressionLevel.Optimal,
+                            leaveOpen: true
+                        )
+                    )
                     {
                         deflater.Write(bytes.Array, bytes.Offset, bytes.Count);
                     }
@@ -317,7 +368,14 @@ namespace Microsoft.CodeAnalysis
                 {
                     builder.WriteInt32(0);
 
-                    using (var writer = new StreamWriter(builder, text.Encoding, bufferSize: Math.Max(1, text.Length), leaveOpen: true))
+                    using (
+                        var writer = new StreamWriter(
+                            builder,
+                            text.Encoding,
+                            bufferSize: Math.Max(1, text.Length),
+                            leaveOpen: true
+                        )
+                    )
                     {
                         text.Write(writer);
                     }
@@ -326,9 +384,22 @@ namespace Microsoft.CodeAnalysis
                 {
                     Blob reserved = builder.ReserveBytes(4);
 
-                    using (var deflater = new CountingDeflateStream(builder, CompressionLevel.Optimal, leaveOpen: true))
+                    using (
+                        var deflater = new CountingDeflateStream(
+                            builder,
+                            CompressionLevel.Optimal,
+                            leaveOpen: true
+                        )
+                    )
                     {
-                        using (var writer = new StreamWriter(deflater, text.Encoding, bufferSize: 1024, leaveOpen: true))
+                        using (
+                            var writer = new StreamWriter(
+                                deflater,
+                                text.Encoding,
+                                bufferSize: 1024,
+                                leaveOpen: true
+                            )
+                        )
                         {
                             text.Write(writer);
                         }
@@ -348,33 +419,44 @@ namespace Microsoft.CodeAnalysis
 
         private sealed class CountingDeflateStream : DeflateStream
         {
-            public CountingDeflateStream(Stream stream, CompressionLevel compressionLevel, bool leaveOpen)
-                : base(stream, compressionLevel, leaveOpen)
-            {
-            }
+            public CountingDeflateStream(
+                Stream stream,
+                CompressionLevel compressionLevel,
+                bool leaveOpen
+            ) : base(stream, compressionLevel, leaveOpen) { }
 
             public int BytesWritten { get; private set; }
 
             public override void Write(byte[] array, int offset, int count)
             {
                 base.Write(array, offset, count);
-
-                // checked arithmetic is release-enabled quasi-assert. We start with at most 
+                // checked arithmetic is release-enabled quasi-assert. We start with at most
                 // int.MaxValue chars so compression or encoding would have to be abysmal for
                 // this to overflow. We'd probably be lucky to even get this far but if we do
                 // we should fail fast.
-                checked { BytesWritten += count; }
+                checked
+                {
+                    BytesWritten += count;
+                }
             }
 
             public override void WriteByte(byte value)
             {
                 base.WriteByte(value);
-
                 // same rationale for checked arithmetic as above.
-                checked { BytesWritten++; };
+                checked
+                {
+                    BytesWritten++;
+                }
+                ;
             }
 
-            public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+            public override Task WriteAsync(
+                byte[] buffer,
+                int offset,
+                int count,
+                CancellationToken cancellationToken
+            )
             {
                 throw ExceptionUtilities.Unreachable;
             }

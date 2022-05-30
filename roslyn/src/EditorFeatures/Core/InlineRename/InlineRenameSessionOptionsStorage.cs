@@ -10,10 +10,50 @@ namespace Microsoft.CodeAnalysis.InlineRename
     {
         private const string FeatureName = "InlineRenameSessionOptions";
 
-        public static readonly Option2<bool> RenameOverloads = new(FeatureName, "RenameOverloads", defaultValue: false, storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.RenameOverloads"));
-        public static readonly Option2<bool> RenameInStrings = new(FeatureName, "RenameInStrings", defaultValue: false, storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.RenameInStrings"));
-        public static readonly Option2<bool> RenameInComments = new(FeatureName, "RenameInComments", defaultValue: false, storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.RenameInComments"));
-        public static readonly Option2<bool> RenameFile = new(FeatureName, "RenameFile", defaultValue: true, storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.RenameFile"));
-        public static readonly Option2<bool> PreviewChanges = new(FeatureName, "PreviewChanges", defaultValue: false, storageLocation: new RoamingProfileStorageLocation("TextEditor.%LANGUAGE%.Specific.PreviewRename"));
+        public static readonly Option2<bool> RenameOverloads =
+            new(
+                FeatureName,
+                "RenameOverloads",
+                defaultValue: false,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.RenameOverloads"
+                )
+            );
+        public static readonly Option2<bool> RenameInStrings =
+            new(
+                FeatureName,
+                "RenameInStrings",
+                defaultValue: false,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.RenameInStrings"
+                )
+            );
+        public static readonly Option2<bool> RenameInComments =
+            new(
+                FeatureName,
+                "RenameInComments",
+                defaultValue: false,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.RenameInComments"
+                )
+            );
+        public static readonly Option2<bool> RenameFile =
+            new(
+                FeatureName,
+                "RenameFile",
+                defaultValue: true,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.RenameFile"
+                )
+            );
+        public static readonly Option2<bool> PreviewChanges =
+            new(
+                FeatureName,
+                "PreviewChanges",
+                defaultValue: false,
+                storageLocation: new RoamingProfileStorageLocation(
+                    "TextEditor.%LANGUAGE%.Specific.PreviewRename"
+                )
+            );
     }
 }

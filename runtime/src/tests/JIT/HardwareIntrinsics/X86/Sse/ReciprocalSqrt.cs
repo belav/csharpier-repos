@@ -21,20 +21,35 @@ namespace IntelHardwareIntrinsicTest
 
             if (Sse.IsSupported)
             {
-                using (TestTable<float> floatTable = new TestTable<float>(new float[4] { 1, -5, 100, 0 }, new float[4]))
+                using (
+                    TestTable<float> floatTable = new TestTable<float>(
+                        new float[4] { 1, -5, 100, 0 },
+                        new float[4]
+                    )
+                )
                 {
-
                     var vf1 = Unsafe.Read<Vector128<float>>(floatTable.inArrayPtr);
                     var vf2 = Sse.ReciprocalSqrt(vf1);
                     Unsafe.Write(floatTable.outArrayPtr, vf2);
 
-                    if (!floatTable.CheckResult((x, y) => {
-                        var expected = 1 / MathF.Sqrt(x);
-                        return (Math.Abs(expected - y) <= 0.0003662109375f) // |Relative Error| <= 1.5 * 2^-12
-                            || (float.IsNaN(expected) && float.IsNaN(y))
-                            || (float.IsNegativeInfinity(expected) && float.IsNegativeInfinity(y))
-                            || (float.IsPositiveInfinity(expected) && float.IsPositiveInfinity(y));
-                    }))
+                    if (
+                        !floatTable.CheckResult(
+                            (x, y) =>
+                            {
+                                var expected = 1 / MathF.Sqrt(x);
+                                return (Math.Abs(expected - y) <= 0.0003662109375f) // |Relative Error| <= 1.5 * 2^-12
+                                    || (float.IsNaN(expected) && float.IsNaN(y))
+                                    || (
+                                        float.IsNegativeInfinity(expected)
+                                        && float.IsNegativeInfinity(y)
+                                    )
+                                    || (
+                                        float.IsPositiveInfinity(expected)
+                                        && float.IsPositiveInfinity(y)
+                                    );
+                            }
+                        )
+                    )
                     {
                         Console.WriteLine("SSE ReciprocalSqrt failed on float:");
                         foreach (var item in floatTable.outArray)
@@ -46,7 +61,6 @@ namespace IntelHardwareIntrinsicTest
                     }
                 }
             }
-
 
             return testResult;
         }
@@ -61,6 +75,7 @@ namespace IntelHardwareIntrinsicTest
 
             GCHandle inHandle;
             GCHandle outHandle;
+
             public TestTable(T[] a, T[] b)
             {
                 this.inArray = a;
@@ -69,6 +84,7 @@ namespace IntelHardwareIntrinsicTest
                 inHandle = GCHandle.Alloc(inArray, GCHandleType.Pinned);
                 outHandle = GCHandle.Alloc(outArray, GCHandleType.Pinned);
             }
+
             public bool CheckResult(Func<T, T, bool> check)
             {
                 for (int i = 0; i < inArray.Length; i++)
@@ -87,6 +103,5 @@ namespace IntelHardwareIntrinsicTest
                 outHandle.Free();
             }
         }
-
     }
 }

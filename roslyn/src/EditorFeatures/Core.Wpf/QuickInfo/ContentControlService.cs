@@ -39,7 +39,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             ITextEditorFactoryService textEditorFactoryService,
             IContentTypeRegistryService contentTypeRegistryService,
             IProjectionBufferFactoryService projectionBufferFactoryService,
-            IEditorOptionsFactoryService editorOptionsFactoryService)
+            IEditorOptionsFactoryService editorOptionsFactoryService
+        )
         {
             _threadingContext = threadingContext;
             _textEditorFactoryService = textEditorFactoryService;
@@ -48,10 +49,17 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             _editorOptionsFactoryService = editorOptionsFactoryService;
         }
 
-        public void AttachToolTipToControl(FrameworkElement element, Func<DisposableToolTip> createToolTip)
-            => LazyToolTip.AttachTo(element, _threadingContext, createToolTip);
+        public void AttachToolTipToControl(
+            FrameworkElement element,
+            Func<DisposableToolTip> createToolTip
+        ) => LazyToolTip.AttachTo(element, _threadingContext, createToolTip);
 
-        public DisposableToolTip CreateDisposableToolTip(Document document, ITextBuffer textBuffer, Span contentSpan, object backgroundResourceKey)
+        public DisposableToolTip CreateDisposableToolTip(
+            Document document,
+            ITextBuffer textBuffer,
+            Span contentSpan,
+            object backgroundResourceKey
+        )
         {
             var control = CreateViewHostingControl(textBuffer, contentSpan);
 
@@ -62,9 +70,9 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
                 Background = (Brush)Application.Current.Resources[backgroundResourceKey]
             };
 
-            // Create a preview workspace for this text buffer and open it's corresponding 
-            // document. 
-            // 
+            // Create a preview workspace for this text buffer and open it's corresponding
+            // document.
+            //
             // our underlying preview tagger and mechanism to attach tagger to associated buffer of
             // opened document will light up automatically
             var workspace = new PreviewWorkspace(document.Project.Solution);
@@ -73,9 +81,15 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             return new DisposableToolTip(toolTip, workspace);
         }
 
-        public DisposableToolTip CreateDisposableToolTip(ITextBuffer textBuffer, object backgroundResourceKey)
+        public DisposableToolTip CreateDisposableToolTip(
+            ITextBuffer textBuffer,
+            object backgroundResourceKey
+        )
         {
-            var control = CreateViewHostingControl(textBuffer, textBuffer.CurrentSnapshot.GetFullSpan().Span);
+            var control = CreateViewHostingControl(
+                textBuffer,
+                textBuffer.CurrentSnapshot.GetFullSpan().Span
+            );
 
             // Create the actual tooltip around the region of that text buffer we want to show.
             var toolTip = new ToolTip
@@ -93,13 +107,15 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             var snapshotSpan = textBuffer.CurrentSnapshot.GetSpan(contentSpan);
 
             var contentType = _contentTypeRegistryService.GetContentType(
-                IProjectionBufferFactoryServiceExtensions.RoslynPreviewContentType);
+                IProjectionBufferFactoryServiceExtensions.RoslynPreviewContentType
+            );
 
             var roleSet = _textEditorFactoryService.CreateTextViewRoleSet(
                 TextViewRoles.PreviewRole,
                 PredefinedTextViewRoles.Analyzable,
                 PredefinedTextViewRoles.Document,
-                PredefinedTextViewRoles.Editable);
+                PredefinedTextViewRoles.Editable
+            );
 
             var contentControl = ProjectionBufferContent.Create(
                 _threadingContext,
@@ -108,7 +124,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
                 _editorOptionsFactoryService,
                 _textEditorFactoryService,
                 contentType,
-                roleSet);
+                roleSet
+            );
 
             return contentControl;
         }

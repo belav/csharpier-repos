@@ -47,7 +47,10 @@ internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisp
     }
 
     // Will be called with the lock.
-    protected abstract List<Endpoint> CreateEndpoints(IReadOnlyList<ActionDescriptor> actions, IReadOnlyList<Action<EndpointBuilder>> conventions);
+    protected abstract List<Endpoint> CreateEndpoints(
+        IReadOnlyList<ActionDescriptor> actions,
+        IReadOnlyList<Action<EndpointBuilder>> conventions
+    );
 
     protected void Subscribe()
     {
@@ -60,7 +63,8 @@ internal abstract class ActionEndpointDataSourceBase : EndpointDataSource, IDisp
         {
             _disposable = ChangeToken.OnChange(
                 () => collectionProviderWithChangeToken.GetChangeToken(),
-                UpdateEndpoints);
+                UpdateEndpoints
+            );
         }
     }
 

@@ -9,23 +9,36 @@ using Microsoft.CodeAnalysis.Collections;
 
 namespace Microsoft.CodeAnalysis.Diagnostics
 {
-    internal partial class AnalyzerDriver<TLanguageKindEnum> : AnalyzerDriver where TLanguageKindEnum : struct
+    internal partial class AnalyzerDriver<TLanguageKindEnum> : AnalyzerDriver
+        where TLanguageKindEnum : struct
     {
         private sealed class GroupedAnalyzerActionsForAnalyzer
         {
             private readonly DiagnosticAnalyzer _analyzer;
             private readonly bool _analyzerActionsNeedFiltering;
 
-            private ImmutableSegmentedDictionary<TLanguageKindEnum, ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>> _lazyNodeActionsByKind;
-            private ImmutableSegmentedDictionary<OperationKind, ImmutableArray<OperationAnalyzerAction>> _lazyOperationActionsByKind;
-            private ImmutableArray<CodeBlockStartAnalyzerAction<TLanguageKindEnum>> _lazyCodeBlockStartActions;
+            private ImmutableSegmentedDictionary<
+                TLanguageKindEnum,
+                ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>
+            > _lazyNodeActionsByKind;
+            private ImmutableSegmentedDictionary<
+                OperationKind,
+                ImmutableArray<OperationAnalyzerAction>
+            > _lazyOperationActionsByKind;
+            private ImmutableArray<
+                CodeBlockStartAnalyzerAction<TLanguageKindEnum>
+            > _lazyCodeBlockStartActions;
             private ImmutableArray<CodeBlockAnalyzerAction> _lazyCodeBlockEndActions;
             private ImmutableArray<CodeBlockAnalyzerAction> _lazyCodeBlockActions;
             private ImmutableArray<OperationBlockStartAnalyzerAction> _lazyOperationBlockStartActions;
             private ImmutableArray<OperationBlockAnalyzerAction> _lazyOperationBlockActions;
             private ImmutableArray<OperationBlockAnalyzerAction> _lazyOperationBlockEndActions;
 
-            public GroupedAnalyzerActionsForAnalyzer(DiagnosticAnalyzer analyzer, in AnalyzerActions analyzerActions, bool analyzerActionsNeedFiltering)
+            public GroupedAnalyzerActionsForAnalyzer(
+                DiagnosticAnalyzer analyzer,
+                in AnalyzerActions analyzerActions,
+                bool analyzerActionsNeedFiltering
+            )
             {
                 Debug.Assert(!analyzerActions.IsEmpty);
 
@@ -37,8 +50,10 @@ namespace Microsoft.CodeAnalysis.Diagnostics
             public AnalyzerActions AnalyzerActions { get; }
 
             [Conditional("DEBUG")]
-            private static void VerifyActions<TAnalyzerAction>(in ImmutableArray<TAnalyzerAction> actions, DiagnosticAnalyzer analyzer)
-                where TAnalyzerAction : AnalyzerAction
+            private static void VerifyActions<TAnalyzerAction>(
+                in ImmutableArray<TAnalyzerAction> actions,
+                DiagnosticAnalyzer analyzer
+            ) where TAnalyzerAction : AnalyzerAction
             {
                 foreach (var action in actions)
                 {
@@ -46,45 +61,61 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                 }
             }
 
-            private ImmutableArray<TAnalyzerAction> GetFilteredActions<TAnalyzerAction>(in ImmutableArray<TAnalyzerAction> actions)
-                where TAnalyzerAction : AnalyzerAction
-                => GetFilteredActions(actions, _analyzer, _analyzerActionsNeedFiltering);
+            private ImmutableArray<TAnalyzerAction> GetFilteredActions<TAnalyzerAction>(
+                in ImmutableArray<TAnalyzerAction> actions
+            ) where TAnalyzerAction : AnalyzerAction =>
+                GetFilteredActions(actions, _analyzer, _analyzerActionsNeedFiltering);
 
             private static ImmutableArray<TAnalyzerAction> GetFilteredActions<TAnalyzerAction>(
                 in ImmutableArray<TAnalyzerAction> actions,
                 DiagnosticAnalyzer analyzer,
-                bool analyzerActionsNeedFiltering)
-                where TAnalyzerAction : AnalyzerAction
+                bool analyzerActionsNeedFiltering
+            ) where TAnalyzerAction : AnalyzerAction
             {
                 if (!analyzerActionsNeedFiltering)
                 {
                     return actions;
                 }
 
-                return actions.WhereAsArray((action, analyzer) => action.Analyzer == analyzer, analyzer);
+                return actions.WhereAsArray(
+                    (action, analyzer) => action.Analyzer == analyzer,
+                    analyzer
+                );
             }
 
-            public ImmutableSegmentedDictionary<TLanguageKindEnum, ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>> NodeActionsByAnalyzerAndKind
+            public ImmutableSegmentedDictionary<
+                TLanguageKindEnum,
+                ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>
+            > NodeActionsByAnalyzerAndKind
             {
                 get
                 {
                     if (_lazyNodeActionsByKind == null)
                     {
-                        var nodeActions = _analyzerActionsNeedFiltering ?
-                            AnalyzerActions.GetSyntaxNodeActions<TLanguageKindEnum>(_analyzer) :
-                            AnalyzerActions.GetSyntaxNodeActions<TLanguageKindEnum>();
+                        var nodeActions = _analyzerActionsNeedFiltering
+                            ? AnalyzerActions.GetSyntaxNodeActions<TLanguageKindEnum>(_analyzer)
+                            : AnalyzerActions.GetSyntaxNodeActions<TLanguageKindEnum>();
                         VerifyActions(nodeActions, _analyzer);
-                        var analyzerActionsByKind = !nodeActions.IsEmpty ?
-                            AnalyzerExecutor.GetNodeActionsByKind(nodeActions) :
-                            ImmutableSegmentedDictionary<TLanguageKindEnum, ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>>.Empty;
-                        RoslynImmutableInterlocked.InterlockedInitialize(ref _lazyNodeActionsByKind, analyzerActionsByKind);
+                        var analyzerActionsByKind = !nodeActions.IsEmpty
+                            ? AnalyzerExecutor.GetNodeActionsByKind(nodeActions)
+                            : ImmutableSegmentedDictionary<
+                                TLanguageKindEnum,
+                                ImmutableArray<SyntaxNodeAnalyzerAction<TLanguageKindEnum>>
+                            >.Empty;
+                        RoslynImmutableInterlocked.InterlockedInitialize(
+                            ref _lazyNodeActionsByKind,
+                            analyzerActionsByKind
+                        );
                     }
 
                     return _lazyNodeActionsByKind;
                 }
             }
 
-            public ImmutableSegmentedDictionary<OperationKind, ImmutableArray<OperationAnalyzerAction>> OperationActionsByAnalyzerAndKind
+            public ImmutableSegmentedDictionary<
+                OperationKind,
+                ImmutableArray<OperationAnalyzerAction>
+            > OperationActionsByAnalyzerAndKind
             {
                 get
                 {
@@ -92,71 +123,120 @@ namespace Microsoft.CodeAnalysis.Diagnostics
                     {
                         var operationActions = GetFilteredActions(AnalyzerActions.OperationActions);
                         VerifyActions(operationActions, _analyzer);
-                        var analyzerActionsByKind = operationActions.Any() ?
-                            AnalyzerExecutor.GetOperationActionsByKind(operationActions) :
-                            ImmutableSegmentedDictionary<OperationKind, ImmutableArray<OperationAnalyzerAction>>.Empty;
-                        RoslynImmutableInterlocked.InterlockedInitialize(ref _lazyOperationActionsByKind, analyzerActionsByKind);
+                        var analyzerActionsByKind = operationActions.Any()
+                            ? AnalyzerExecutor.GetOperationActionsByKind(operationActions)
+                            : ImmutableSegmentedDictionary<
+                                OperationKind,
+                                ImmutableArray<OperationAnalyzerAction>
+                            >.Empty;
+                        RoslynImmutableInterlocked.InterlockedInitialize(
+                            ref _lazyOperationActionsByKind,
+                            analyzerActionsByKind
+                        );
                     }
 
                     return _lazyOperationActionsByKind;
                 }
             }
 
-            private ImmutableArray<CodeBlockStartAnalyzerAction<TLanguageKindEnum>> CodeBlockStartActions
+            private ImmutableArray<
+                CodeBlockStartAnalyzerAction<TLanguageKindEnum>
+            > CodeBlockStartActions
             {
                 get
                 {
                     if (_lazyCodeBlockStartActions.IsDefault)
                     {
-                        var codeBlockActions = GetFilteredActions(AnalyzerActions.GetCodeBlockStartActions<TLanguageKindEnum>());
+                        var codeBlockActions = GetFilteredActions(
+                            AnalyzerActions.GetCodeBlockStartActions<TLanguageKindEnum>()
+                        );
                         VerifyActions(codeBlockActions, _analyzer);
-                        ImmutableInterlocked.InterlockedInitialize(ref _lazyCodeBlockStartActions, codeBlockActions);
+                        ImmutableInterlocked.InterlockedInitialize(
+                            ref _lazyCodeBlockStartActions,
+                            codeBlockActions
+                        );
                     }
 
                     return _lazyCodeBlockStartActions;
                 }
             }
 
-            private ImmutableArray<CodeBlockAnalyzerAction> CodeBlockEndActions
-                => GetExecutableCodeActions(ref _lazyCodeBlockEndActions, AnalyzerActions.CodeBlockEndActions, _analyzer, _analyzerActionsNeedFiltering);
+            private ImmutableArray<CodeBlockAnalyzerAction> CodeBlockEndActions =>
+                GetExecutableCodeActions(
+                    ref _lazyCodeBlockEndActions,
+                    AnalyzerActions.CodeBlockEndActions,
+                    _analyzer,
+                    _analyzerActionsNeedFiltering
+                );
 
-            private ImmutableArray<CodeBlockAnalyzerAction> CodeBlockActions
-                => GetExecutableCodeActions(ref _lazyCodeBlockActions, AnalyzerActions.CodeBlockActions, _analyzer, _analyzerActionsNeedFiltering);
+            private ImmutableArray<CodeBlockAnalyzerAction> CodeBlockActions =>
+                GetExecutableCodeActions(
+                    ref _lazyCodeBlockActions,
+                    AnalyzerActions.CodeBlockActions,
+                    _analyzer,
+                    _analyzerActionsNeedFiltering
+                );
 
-            private ImmutableArray<OperationBlockStartAnalyzerAction> OperationBlockStartActions
-                => GetExecutableCodeActions(ref _lazyOperationBlockStartActions, AnalyzerActions.OperationBlockStartActions, _analyzer, _analyzerActionsNeedFiltering);
+            private ImmutableArray<OperationBlockStartAnalyzerAction> OperationBlockStartActions =>
+                GetExecutableCodeActions(
+                    ref _lazyOperationBlockStartActions,
+                    AnalyzerActions.OperationBlockStartActions,
+                    _analyzer,
+                    _analyzerActionsNeedFiltering
+                );
 
-            private ImmutableArray<OperationBlockAnalyzerAction> OperationBlockEndActions
-                => GetExecutableCodeActions(ref _lazyOperationBlockEndActions, AnalyzerActions.OperationBlockEndActions, _analyzer, _analyzerActionsNeedFiltering);
+            private ImmutableArray<OperationBlockAnalyzerAction> OperationBlockEndActions =>
+                GetExecutableCodeActions(
+                    ref _lazyOperationBlockEndActions,
+                    AnalyzerActions.OperationBlockEndActions,
+                    _analyzer,
+                    _analyzerActionsNeedFiltering
+                );
 
-            private ImmutableArray<OperationBlockAnalyzerAction> OperationBlockActions
-                => GetExecutableCodeActions(ref _lazyOperationBlockActions, AnalyzerActions.OperationBlockActions, _analyzer, _analyzerActionsNeedFiltering);
+            private ImmutableArray<OperationBlockAnalyzerAction> OperationBlockActions =>
+                GetExecutableCodeActions(
+                    ref _lazyOperationBlockActions,
+                    AnalyzerActions.OperationBlockActions,
+                    _analyzer,
+                    _analyzerActionsNeedFiltering
+                );
 
             private static ImmutableArray<ActionType> GetExecutableCodeActions<ActionType>(
                 ref ImmutableArray<ActionType> lazyCodeBlockActions,
                 ImmutableArray<ActionType> codeBlockActions,
                 DiagnosticAnalyzer analyzer,
-                bool analyzerActionsNeedFiltering)
-                where ActionType : AnalyzerAction
+                bool analyzerActionsNeedFiltering
+            ) where ActionType : AnalyzerAction
             {
                 if (lazyCodeBlockActions.IsDefault)
                 {
-                    codeBlockActions = GetFilteredActions(codeBlockActions, analyzer, analyzerActionsNeedFiltering);
+                    codeBlockActions = GetFilteredActions(
+                        codeBlockActions,
+                        analyzer,
+                        analyzerActionsNeedFiltering
+                    );
                     VerifyActions(codeBlockActions, analyzer);
-                    ImmutableInterlocked.InterlockedInitialize(ref lazyCodeBlockActions, codeBlockActions);
+                    ImmutableInterlocked.InterlockedInitialize(
+                        ref lazyCodeBlockActions,
+                        codeBlockActions
+                    );
                 }
 
                 return lazyCodeBlockActions;
             }
 
-            public bool TryGetExecutableCodeBlockActions(out ExecutableCodeBlockAnalyzerActions actions)
+            public bool TryGetExecutableCodeBlockActions(
+                out ExecutableCodeBlockAnalyzerActions actions
+            )
             {
-                if (!OperationBlockStartActions.IsEmpty ||
-                    !OperationBlockActions.IsEmpty ||
-                    !OperationBlockEndActions.IsEmpty ||
-                    !CodeBlockStartActions.IsEmpty ||
-                    !CodeBlockActions.IsEmpty ||
-                    !CodeBlockEndActions.IsEmpty)
+                if (
+                    !OperationBlockStartActions.IsEmpty
+                    || !OperationBlockActions.IsEmpty
+                    || !OperationBlockEndActions.IsEmpty
+                    || !CodeBlockStartActions.IsEmpty
+                    || !CodeBlockActions.IsEmpty
+                    || !CodeBlockEndActions.IsEmpty
+                )
                 {
                     actions = new ExecutableCodeBlockAnalyzerActions
                     {

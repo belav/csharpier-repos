@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
         private readonly ImmutableArray<ParameterSymbol> _targetParameters;
         private readonly Binder _sourceBinder;
 
-        internal EEMethodBinder(EEMethodSymbol method, MethodSymbol containingMethod, Binder next) : base(next, next.Flags | BinderFlags.InEEMethodBinder)
+        internal EEMethodBinder(EEMethodSymbol method, MethodSymbol containingMethod, Binder next)
+            : base(next, next.Flags | BinderFlags.InEEMethodBinder)
         {
             Debug.Assert(method.DeclaringCompilation is not null);
 
@@ -33,7 +34,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             //      a display class.  Any type parameters will have been replaced with the corresponding type parameters
             //      from (1).
             // So why do we need all these methods?
-            //   1) gives us the parameters that we need to actually bind to (it's no good to bind to the symbols 
+            //   1) gives us the parameters that we need to actually bind to (it's no good to bind to the symbols
             //      owned by (2) or (3)).  Also, it happens to contain (3), so we don't need to pass (3) explicitly.
             //   2) is where we want to pretend we're binding expressions, so we make it the containing symbol of
             //      this binder.
@@ -44,12 +45,33 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             var substitutedSourceMethod = method.SubstitutedSourceMethod;
             _parameterOffset = substitutedSourceMethod.IsStatic ? 0 : 1;
             _targetParameters = method.Parameters;
-            _sourceBinder = new InMethodBinder(substitutedSourceMethod, new BuckStopsHereBinder(next.Compilation));
+            _sourceBinder = new InMethodBinder(
+                substitutedSourceMethod,
+                new BuckStopsHereBinder(next.Compilation)
+            );
         }
 
-        internal override void LookupSymbolsInSingleBinder(LookupResult result, string name, int arity, ConsList<TypeSymbol> basesBeingResolved, LookupOptions options, Binder originalBinder, bool diagnose, ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo)
+        internal override void LookupSymbolsInSingleBinder(
+            LookupResult result,
+            string name,
+            int arity,
+            ConsList<TypeSymbol> basesBeingResolved,
+            LookupOptions options,
+            Binder originalBinder,
+            bool diagnose,
+            ref CompoundUseSiteInfo<AssemblySymbol> useSiteInfo
+        )
         {
-            _sourceBinder.LookupSymbolsInSingleBinder(result, name, arity, basesBeingResolved, options, this, diagnose, ref useSiteInfo);
+            _sourceBinder.LookupSymbolsInSingleBinder(
+                result,
+                name,
+                arity,
+                basesBeingResolved,
+                options,
+                this,
+                diagnose,
+                ref useSiteInfo
+            );
 
             var symbols = result.Symbols;
             for (int i = 0; i < symbols.Count; i++)
@@ -63,7 +85,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ExpressionEvaluator
             }
         }
 
-        internal override void AddLookupSymbolsInfoInSingleBinder(LookupSymbolsInfo info, LookupOptions options, Binder originalBinder)
+        internal override void AddLookupSymbolsInfoInSingleBinder(
+            LookupSymbolsInfo info,
+            LookupOptions options,
+            Binder originalBinder
+        )
         {
             throw new NotImplementedException();
         }

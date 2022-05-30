@@ -34,9 +34,7 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
 
                 stillExists = db.GetService<IRelationalDatabaseCreator>().Exists();
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 
@@ -51,9 +49,7 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
 
                 stillExists = await db.GetService<IRelationalDatabaseCreator>().ExistsAsync();
             }
-            catch
-            {
-            }
+            catch { }
         }
     }
 
@@ -72,7 +68,8 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
             history.GetAppliedMigrations(),
             x => Assert.Equal("00000000000001_Migration1", x.MigrationId),
             x => Assert.Equal("00000000000002_Migration2", x.MigrationId),
-            x => Assert.Equal("00000000000003_Migration3", x.MigrationId));
+            x => Assert.Equal("00000000000003_Migration3", x.MigrationId)
+        );
     }
 
     [ConditionalFact]
@@ -89,7 +86,8 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         var history = db.GetService<IHistoryRepository>();
         Assert.Collection(
             history.GetAppliedMigrations(),
-            x => Assert.Equal("00000000000001_Migration1", x.MigrationId));
+            x => Assert.Equal("00000000000001_Migration1", x.MigrationId)
+        );
     }
 
     [ConditionalFact]
@@ -125,7 +123,8 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         var history = db.GetService<IHistoryRepository>();
         Assert.Collection(
             history.GetAppliedMigrations(),
-            x => Assert.Equal("00000000000001_Migration1", x.MigrationId));
+            x => Assert.Equal("00000000000001_Migration1", x.MigrationId)
+        );
     }
 
     [ConditionalFact]
@@ -143,7 +142,8 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
             await history.GetAppliedMigrationsAsync(),
             x => Assert.Equal("00000000000001_Migration1", x.MigrationId),
             x => Assert.Equal("00000000000002_Migration2", x.MigrationId),
-            x => Assert.Equal("00000000000003_Migration3", x.MigrationId));
+            x => Assert.Equal("00000000000003_Migration3", x.MigrationId)
+        );
     }
 
     [ConditionalFact]
@@ -161,7 +161,12 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         using var db = Fixture.CreateContext();
         var migrator = db.GetService<IMigrator>();
 
-        SetSql(migrator.GenerateScript(fromMigration: Migration.InitialDatabase, toMigration: Migration.InitialDatabase));
+        SetSql(
+            migrator.GenerateScript(
+                fromMigration: Migration.InitialDatabase,
+                toMigration: Migration.InitialDatabase
+            )
+        );
     }
 
     [ConditionalFact]
@@ -188,7 +193,12 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         using var db = Fixture.CreateContext();
         var migrator = db.GetService<IMigrator>();
 
-        SetSql(migrator.GenerateScript(fromMigration: "00000000000001_Migration1", toMigration: "00000000000002_Migration2"));
+        SetSql(
+            migrator.GenerateScript(
+                fromMigration: "00000000000001_Migration1",
+                toMigration: "00000000000002_Migration2"
+            )
+        );
     }
 
     [ConditionalFact]
@@ -218,7 +228,9 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         SetSql(
             migrator.GenerateScript(
                 options: MigrationsSqlGenerationOptions.Idempotent
-                | MigrationsSqlGenerationOptions.NoTransactions));
+                    | MigrationsSqlGenerationOptions.NoTransactions
+            )
+        );
     }
 
     [ConditionalFact]
@@ -230,7 +242,9 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         SetSql(
             migrator.GenerateScript(
                 fromMigration: "Migration2",
-                toMigration: Migration.InitialDatabase));
+                toMigration: Migration.InitialDatabase
+            )
+        );
     }
 
     [ConditionalFact]
@@ -242,7 +256,9 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         SetSql(
             migrator.GenerateScript(
                 fromMigration: "00000000000002_Migration2",
-                toMigration: "00000000000001_Migration1"));
+                toMigration: "00000000000001_Migration1"
+            )
+        );
     }
 
     [ConditionalFact]
@@ -251,10 +267,7 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
         using var db = Fixture.CreateContext();
         var migrator = db.GetService<IMigrator>();
 
-        SetSql(
-            migrator.GenerateScript(
-                fromMigration: "Migration2",
-                toMigration: "Migration1"));
+        SetSql(migrator.GenerateScript(fromMigration: "Migration2", toMigration: "Migration1"));
     }
 
     [ConditionalFact]
@@ -267,7 +280,9 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
             migrator.GenerateScript(
                 fromMigration: "Migration2",
                 toMigration: Migration.InitialDatabase,
-                MigrationsSqlGenerationOptions.Idempotent));
+                MigrationsSqlGenerationOptions.Idempotent
+            )
+        );
     }
 
     [ConditionalFact]
@@ -296,58 +311,54 @@ public abstract class MigrationsInfrastructureTestBase<TFixture> : IClassFixture
 
     protected virtual void DiffSnapshot(ModelSnapshot snapshot, DbContext context)
     {
-        var sourceModel = context.GetService<IModelRuntimeInitializer>().Initialize(
-            snapshot.Model, designTime: true, validationLogger: null);
+        var sourceModel = context
+            .GetService<IModelRuntimeInitializer>()
+            .Initialize(snapshot.Model, designTime: true, validationLogger: null);
 
         var modelDiffer = context.GetService<IMigrationsModelDiffer>();
         var operations = modelDiffer.GetDifferences(
             sourceModel.GetRelationalModel(),
-            context.GetService<IDesignTimeModel>().Model.GetRelationalModel());
+            context.GetService<IDesignTimeModel>().Model.GetRelationalModel()
+        );
 
         Assert.Equal(0, operations.Count);
     }
 
-    private void SetSql(string value)
-        => Sql = value.Replace(ProductInfo.GetVersion(), "7.0.0-test");
+    private void SetSql(string value) =>
+        Sql = value.Replace(ProductInfo.GetVersion(), "7.0.0-test");
 }
 
-public abstract class
-    MigrationsInfrastructureFixtureBase : SharedStoreFixtureBase<MigrationsInfrastructureFixtureBase.MigrationsContext>
+public abstract class MigrationsInfrastructureFixtureBase
+    : SharedStoreFixtureBase<MigrationsInfrastructureFixtureBase.MigrationsContext>
 {
     public static string ActiveProvider { get; set; }
 
-    public new RelationalTestStore TestStore
-        => (RelationalTestStore)base.TestStore;
+    public new RelationalTestStore TestStore => (RelationalTestStore)base.TestStore;
 
     protected override string StoreName { get; } = "MigrationsTest";
 
-    public EmptyMigrationsContext CreateEmptyContext()
-        => new(
-            TestStore.AddProviderOptions(
-                    new DbContextOptionsBuilder())
+    public EmptyMigrationsContext CreateEmptyContext() =>
+        new(
+            TestStore
+                .AddProviderOptions(new DbContextOptionsBuilder())
                 .UseInternalServiceProvider(
-                    TestStoreFactory.AddProviderServices(
-                            new ServiceCollection())
-                        .BuildServiceProvider(validateScopes: true))
-                .Options);
+                    TestStoreFactory
+                        .AddProviderServices(new ServiceCollection())
+                        .BuildServiceProvider(validateScopes: true)
+                )
+                .Options
+        );
 
-    public new virtual MigrationsContext CreateContext()
-        => base.CreateContext();
+    public new virtual MigrationsContext CreateContext() => base.CreateContext();
 
     public class EmptyMigrationsContext : DbContext
     {
-        public EmptyMigrationsContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public EmptyMigrationsContext(DbContextOptions options) : base(options) { }
     }
 
     public class MigrationsContext : PoolableDbContext
     {
-        public MigrationsContext(DbContextOptions options)
-            : base(options)
-        {
-        }
+        public MigrationsContext(DbContextOptions options) : base(options) { }
 
         public DbSet<Foo> Foos { get; set; }
     }
@@ -368,31 +379,24 @@ public abstract class
             migrationBuilder
                 .CreateTable(
                     name: "Table1",
-                    columns: x => new { Id = x.Column<int>(), Foo = x.Column<int>() })
-                .PrimaryKey(
-                    name: "PK_Table1",
-                    columns: x => x.Id);
+                    columns: x => new { Id = x.Column<int>(), Foo = x.Column<int>() }
+                )
+                .PrimaryKey(name: "PK_Table1", columns: x => x.Id);
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-            => migrationBuilder.DropTable("Table1");
+        protected override void Down(MigrationBuilder migrationBuilder) =>
+            migrationBuilder.DropTable("Table1");
     }
 
     [DbContext(typeof(MigrationsContext))]
     [Migration("00000000000002_Migration2")]
     private class Migration2 : Migration
     {
-        protected override void Up(MigrationBuilder migrationBuilder)
-            => migrationBuilder.RenameColumn(
-                name: "Foo",
-                table: "Table1",
-                newName: "Bar");
+        protected override void Up(MigrationBuilder migrationBuilder) =>
+            migrationBuilder.RenameColumn(name: "Foo", table: "Table1", newName: "Bar");
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-            => migrationBuilder.RenameColumn(
-                name: "Bar",
-                table: "Table1",
-                newName: "Foo");
+        protected override void Down(MigrationBuilder migrationBuilder) =>
+            migrationBuilder.RenameColumn(name: "Bar", table: "Table1", newName: "Foo");
     }
 
     [DbContext(typeof(MigrationsContext))]
@@ -403,13 +407,17 @@ public abstract class
         {
             if (ActiveProvider == "Microsoft.EntityFrameworkCore.SqlServer")
             {
-                migrationBuilder.Sql("CREATE DATABASE TransactionSuppressed;", suppressTransaction: true);
-                migrationBuilder.Sql("DROP DATABASE TransactionSuppressed;", suppressTransaction: true);
+                migrationBuilder.Sql(
+                    "CREATE DATABASE TransactionSuppressed;",
+                    suppressTransaction: true
+                );
+                migrationBuilder.Sql(
+                    "DROP DATABASE TransactionSuppressed;",
+                    suppressTransaction: true
+                );
             }
         }
 
-        protected override void Down(MigrationBuilder migrationBuilder)
-        {
-        }
+        protected override void Down(MigrationBuilder migrationBuilder) { }
     }
 }

@@ -23,9 +23,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
     {
         public static CSharpUseExplicitTypeHelper Instance = new();
 
-        private CSharpUseExplicitTypeHelper()
-        {
-        }
+        private CSharpUseExplicitTypeHelper() { }
 
         protected override bool IsStylePreferred(in State state)
         {
@@ -45,7 +43,10 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
         }
 
-        public override bool ShouldAnalyzeVariableDeclaration(VariableDeclarationSyntax variableDeclaration, CancellationToken cancellationToken)
+        public override bool ShouldAnalyzeVariableDeclaration(
+            VariableDeclarationSyntax variableDeclaration,
+            CancellationToken cancellationToken
+        )
         {
             if (!variableDeclaration.Type.StripRefIfNeeded().IsVar)
             {
@@ -57,7 +58,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             return base.ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken);
         }
 
-        protected override bool ShouldAnalyzeForEachStatement(ForEachStatementSyntax forEachStatement, SemanticModel semanticModel, CancellationToken cancellationToken)
+        protected override bool ShouldAnalyzeForEachStatement(
+            ForEachStatementSyntax forEachStatement,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             if (!forEachStatement.Type.StripRefIfNeeded().IsVar)
             {
@@ -66,53 +71,91 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeForEachStatement(forEachStatement, semanticModel, cancellationToken);
+            return base.ShouldAnalyzeForEachStatement(
+                forEachStatement,
+                semanticModel,
+                cancellationToken
+            );
         }
 
         internal override bool TryAnalyzeVariableDeclaration(
-            TypeSyntax typeName, SemanticModel semanticModel,
-            CSharpSimplifierOptions options, CancellationToken cancellationToken)
+            TypeSyntax typeName,
+            SemanticModel semanticModel,
+            CSharpSimplifierOptions options,
+            CancellationToken cancellationToken
+        )
         {
             // var (x, y) = e;
             // foreach (var (x, y) in e) ...
-            if (typeName.IsParentKind(SyntaxKind.DeclarationExpression, out DeclarationExpressionSyntax? declExpression) &&
-                declExpression.Designation.IsKind(SyntaxKind.ParenthesizedVariableDesignation))
+            if (
+                typeName.IsParentKind(
+                    SyntaxKind.DeclarationExpression,
+                    out DeclarationExpressionSyntax? declExpression
+                ) && declExpression.Designation.IsKind(SyntaxKind.ParenthesizedVariableDesignation)
+            )
             {
                 return true;
             }
 
-            // If it is currently not var, explicit typing exists, return. 
+            // If it is currently not var, explicit typing exists, return.
             // this also takes care of cases where var is mapped to a named type via an alias or a class declaration.
             if (!typeName.StripRefIfNeeded().IsTypeInferred(semanticModel))
             {
                 return false;
             }
 
-            if (typeName.Parent.IsKind(SyntaxKind.VariableDeclaration, out VariableDeclarationSyntax? variableDeclaration) &&
-                typeName.Parent.Parent.IsKind(SyntaxKind.LocalDeclarationStatement, SyntaxKind.ForStatement, SyntaxKind.UsingStatement))
+            if (
+                typeName.Parent.IsKind(
+                    SyntaxKind.VariableDeclaration,
+                    out VariableDeclarationSyntax? variableDeclaration
+                )
+                && typeName.Parent.Parent.IsKind(
+                    SyntaxKind.LocalDeclarationStatement,
+                    SyntaxKind.ForStatement,
+                    SyntaxKind.UsingStatement
+                )
+            )
             {
                 // check assignment for variable declarations.
                 var variable = variableDeclaration.Variables.First();
                 RoslynDebug.AssertNotNull(variable.Initializer);
-                if (!AssignmentSupportsStylePreference(
-                        variable.Identifier, typeName, variable.Initializer.Value,
-                        semanticModel, options, cancellationToken))
+                if (
+                    !AssignmentSupportsStylePreference(
+                        variable.Identifier,
+                        typeName,
+                        variable.Initializer.Value,
+                        semanticModel,
+                        options,
+                        cancellationToken
+                    )
+                )
                 {
                     return false;
                 }
 
                 // This error case is handled by a separate code fix (UseExplicitTypeForConst).
-                if ((variableDeclaration.Parent as LocalDeclarationStatementSyntax)?.IsConst == true)
+                if (
+                    (variableDeclaration.Parent as LocalDeclarationStatementSyntax)?.IsConst == true
+                )
                 {
                     return false;
                 }
             }
-            else if (typeName.Parent is ForEachStatementSyntax foreachStatement &&
-                     foreachStatement.Type == typeName)
+            else if (
+                typeName.Parent is ForEachStatementSyntax foreachStatement
+                && foreachStatement.Type == typeName
+            )
             {
-                if (!AssignmentSupportsStylePreference(
-                        foreachStatement.Identifier, typeName, foreachStatement.Expression,
-                        semanticModel, options, cancellationToken))
+                if (
+                    !AssignmentSupportsStylePreference(
+                        foreachStatement.Identifier,
+                        typeName,
+                        foreachStatement.Expression,
+                        semanticModel,
+                        options,
+                        cancellationToken
+                    )
+                )
                 {
                     return false;
                 }
@@ -121,7 +164,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             return true;
         }
 
-        protected override bool ShouldAnalyzeDeclarationExpression(DeclarationExpressionSyntax declaration, SemanticModel semanticModel, CancellationToken cancellationToken)
+        protected override bool ShouldAnalyzeDeclarationExpression(
+            DeclarationExpressionSyntax declaration,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             if (!declaration.Type.IsVar)
             {
@@ -130,7 +177,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             }
 
             // The base analyzer may impose further limitations
-            return base.ShouldAnalyzeDeclarationExpression(declaration, semanticModel, cancellationToken);
+            return base.ShouldAnalyzeDeclarationExpression(
+                declaration,
+                semanticModel,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -146,13 +197,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             ExpressionSyntax initializer,
             SemanticModel semanticModel,
             CSharpSimplifierOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // is or contains an anonymous type
             // cases :
             //        var anon = new { Num = 1 };
             //        var enumerableOfAnons = from prod in products select new { prod.Color, prod.Price };
-            var declaredType = semanticModel.GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken).Type;
+            var declaredType = semanticModel
+                .GetTypeInfo(typeName.StripRefIfNeeded(), cancellationToken)
+                .Type;
             if (declaredType.ContainsAnonymousType())
             {
                 return false;

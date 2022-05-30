@@ -36,30 +36,40 @@ namespace System.Net.Http.Functional.Tests
             using (HttpClient client = CreateHttpClient())
             {
                 bool stopGCs = false;
-                await LoopbackServerFactory.CreateClientAndServerAsync(async url =>
-                {
-                    await GetAndDropResponse(client, url);
+                await LoopbackServerFactory.CreateClientAndServerAsync(
+                    async url =>
+                    {
+                        await GetAndDropResponse(client, url);
 
-                    while (!Volatile.Read(ref stopGCs))
-                    {
-                        await Task.Delay(10);
-                        GC.Collect();
-                        GC.WaitForPendingFinalizers();
-                    }
-                },
-                server => server.AcceptConnectionAsync(async connection =>
-                {
-                    try
-                    {
-                        HttpRequestData data = await connection.ReadRequestDataAsync(readBody: false);
-                        await connection.SendResponseHeadersAsync(headers: new HttpHeaderData[] { new HttpHeaderData("SomeHeaderName", "AndValue") });
-                        await connection.WaitForCancellationAsync();
-                    }
-                    finally
-                    {
-                        Volatile.Write(ref stopGCs, true);
-                    }
-                }));
+                        while (!Volatile.Read(ref stopGCs))
+                        {
+                            await Task.Delay(10);
+                            GC.Collect();
+                            GC.WaitForPendingFinalizers();
+                        }
+                    },
+                    server =>
+                        server.AcceptConnectionAsync(async connection =>
+                        {
+                            try
+                            {
+                                HttpRequestData data = await connection.ReadRequestDataAsync(
+                                    readBody: false
+                                );
+                                await connection.SendResponseHeadersAsync(
+                                    headers: new HttpHeaderData[]
+                                    {
+                                        new HttpHeaderData("SomeHeaderName", "AndValue")
+                                    }
+                                );
+                                await connection.WaitForCancellationAsync();
+                            }
+                            finally
+                            {
+                                Volatile.Write(ref stopGCs, true);
+                            }
+                        })
+                );
             }
         }
     }

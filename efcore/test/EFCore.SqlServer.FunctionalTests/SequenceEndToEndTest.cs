@@ -48,10 +48,8 @@ public class SequenceEndToEndTest : IDisposable
         using var context = new BronieContext(serviceProvider, name);
         for (var i = 0; i < 10; i++)
         {
-            context.Add(
-                new Pegasus { Name = "Rainbow Dash " + i });
-            context.Add(
-                new Pegasus { Name = "Fluttershy " + i });
+            context.Add(new Pegasus { Name = "Rainbow Dash " + i });
+            context.Add(new Pegasus { Name = "Fluttershy " + i });
         }
 
         context.SaveChanges();
@@ -96,7 +94,8 @@ public class SequenceEndToEndTest : IDisposable
             {
                 Assert.Equal(
                     dbName.EndsWith("1", StringComparison.Ordinal) ? 3 : 0,
-                    pegasuses.Count(p => p.Name == "Rainbow Dash " + i));
+                    pegasuses.Count(p => p.Name == "Rainbow Dash " + i)
+                );
                 Assert.Equal(3, pegasuses.Count(p => p.Name == "Fluttershy " + i));
             }
         }
@@ -105,20 +104,18 @@ public class SequenceEndToEndTest : IDisposable
     private static void AddEntitiesToMultipleContexts(
         IServiceProvider serviceProvider,
         string dbName1,
-        string dbName2)
+        string dbName2
+    )
     {
         using var context1 = new BronieContext(serviceProvider, dbName1);
         using var context2 = new BronieContext(serviceProvider, dbName2);
         for (var i = 0; i < 29; i++)
         {
-            context1.Add(
-                new Pegasus { Name = "Rainbow Dash " + i });
+            context1.Add(new Pegasus { Name = "Rainbow Dash " + i });
 
-            context2.Add(
-                new Pegasus { Name = "Fluttershy " + i });
+            context2.Add(new Pegasus { Name = "Fluttershy " + i });
 
-            context1.Add(
-                new Pegasus { Name = "Fluttershy " + i });
+            context1.Add(new Pegasus { Name = "Fluttershy " + i });
         }
 
         context1.SaveChanges();
@@ -160,15 +157,16 @@ public class SequenceEndToEndTest : IDisposable
         }
     }
 
-    private static async Task AddEntitiesAsync(IServiceProvider serviceProvider, string databaseName)
+    private static async Task AddEntitiesAsync(
+        IServiceProvider serviceProvider,
+        string databaseName
+    )
     {
         using var context = new BronieContext(serviceProvider, databaseName);
         for (var i = 0; i < 10; i++)
         {
-            await context.AddAsync(
-                new Pegasus { Name = "Rainbow Dash " + i });
-            await context.AddAsync(
-                new Pegasus { Name = "Fluttershy " + i });
+            await context.AddAsync(new Pegasus { Name = "Rainbow Dash " + i });
+            await context.AddAsync(new Pegasus { Name = "Fluttershy " + i });
         }
 
         await context.SaveChangesAsync();
@@ -254,15 +252,21 @@ public class SequenceEndToEndTest : IDisposable
         }
     }
 
-    private static void AddEntitiesWithIds(IServiceProvider serviceProvider, int idOffset, string name)
+    private static void AddEntitiesWithIds(
+        IServiceProvider serviceProvider,
+        int idOffset,
+        string name
+    )
     {
         using var context = new BronieContext(serviceProvider, name);
         for (var i = 1; i < 11; i++)
         {
             context.Add(
-                new Pegasus { Name = "Rainbow Dash " + i, Identifier = i * 100 + idOffset });
+                new Pegasus { Name = "Rainbow Dash " + i, Identifier = i * 100 + idOffset }
+            );
             context.Add(
-                new Pegasus { Name = "Fluttershy " + i, Identifier = i * 100 + idOffset + 1 });
+                new Pegasus { Name = "Fluttershy " + i, Identifier = i * 100 + idOffset + 1 }
+            );
         }
 
         context.SaveChanges();
@@ -281,18 +285,20 @@ public class SequenceEndToEndTest : IDisposable
 
         public DbSet<Pegasus> Pegasuses { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
-                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration());
+                .UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Pegasus>(
-                b =>
-                {
-                    b.HasKey(e => e.Identifier);
-                    b.Property(e => e.Identifier).UseHiLo();
-                });
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Pegasus>(b =>
+            {
+                b.HasKey(e => e.Identifier);
+                b.Property(e => e.Identifier).UseHiLo();
+            });
     }
 
     private class Pegasus
@@ -357,15 +363,17 @@ public class SequenceEndToEndTest : IDisposable
         }
     }
 
-    private static void AddEntitiesNullable(IServiceProvider serviceProvider, string databaseName, bool useSequence)
+    private static void AddEntitiesNullable(
+        IServiceProvider serviceProvider,
+        string databaseName,
+        bool useSequence
+    )
     {
         using var context = new NullableBronieContext(serviceProvider, databaseName, useSequence);
         for (var i = 0; i < 10; i++)
         {
-            context.Add(
-                new Unicon { Name = "Twilight Sparkle " + i });
-            context.Add(
-                new Unicon { Name = "Rarity " + i });
+            context.Add(new Unicon { Name = "Twilight Sparkle " + i });
+            context.Add(new Unicon { Name = "Rarity " + i });
         }
 
         context.SaveChanges();
@@ -377,7 +385,11 @@ public class SequenceEndToEndTest : IDisposable
         private readonly string _databaseName;
         private readonly bool _useSequence;
 
-        public NullableBronieContext(IServiceProvider serviceProvider, string databaseName, bool useSequence)
+        public NullableBronieContext(
+            IServiceProvider serviceProvider,
+            string databaseName,
+            bool useSequence
+        )
         {
             _serviceProvider = serviceProvider;
             _databaseName = databaseName;
@@ -386,25 +398,27 @@ public class SequenceEndToEndTest : IDisposable
 
         public DbSet<Unicon> Unicons { get; set; }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(_serviceProvider)
-                .UseSqlServer(SqlServerTestStore.CreateConnectionString(_databaseName), b => b.ApplyConfiguration());
+                .UseSqlServer(
+                    SqlServerTestStore.CreateConnectionString(_databaseName),
+                    b => b.ApplyConfiguration()
+                );
 
-        protected override void OnModelCreating(ModelBuilder modelBuilder)
-            => modelBuilder.Entity<Unicon>(
-                b =>
+        protected override void OnModelCreating(ModelBuilder modelBuilder) =>
+            modelBuilder.Entity<Unicon>(b =>
+            {
+                b.HasKey(e => e.Identifier);
+                if (_useSequence)
                 {
-                    b.HasKey(e => e.Identifier);
-                    if (_useSequence)
-                    {
-                        b.Property(e => e.Identifier).UseHiLo();
-                    }
-                    else
-                    {
-                        b.Property(e => e.Identifier).UseIdentityColumn();
-                    }
-                });
+                    b.Property(e => e.Identifier).UseHiLo();
+                }
+                else
+                {
+                    b.Property(e => e.Identifier).UseIdentityColumn();
+                }
+            });
     }
 
     private class Unicon
@@ -420,6 +434,5 @@ public class SequenceEndToEndTest : IDisposable
 
     protected SqlServerTestStore TestStore { get; }
 
-    public void Dispose()
-        => TestStore.Dispose();
+    public void Dispose() => TestStore.Dispose();
 }

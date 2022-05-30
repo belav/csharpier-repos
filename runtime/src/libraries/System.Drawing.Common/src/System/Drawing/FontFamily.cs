@@ -27,7 +27,10 @@ namespace System.Drawing
 
         private void SetNativeFamily(IntPtr family)
         {
-            Debug.Assert(_nativeFamily == IntPtr.Zero, "Setting GDI+ native font family when already initialized.");
+            Debug.Assert(
+                _nativeFamily == IntPtr.Zero,
+                "Setting GDI+ native font family when already initialized."
+            );
 
             _nativeFamily = family;
 #if DEBUG
@@ -62,16 +65,22 @@ namespace System.Drawing
         /// Initializes a new instance of the <see cref='FontFamily'/> class in the specified
         /// <see cref='FontCollection'/> and with the specified name.
         /// </summary>
-        public FontFamily(string name, FontCollection? fontCollection) => CreateFontFamily(name, fontCollection);
+        public FontFamily(string name, FontCollection? fontCollection) =>
+            CreateFontFamily(name, fontCollection);
 
         // Creates the native font family object.
         // Note: GDI+ creates singleton font family objects (from the corresponding font file) and reference count them.
         private void CreateFontFamily(string name, FontCollection? fontCollection)
         {
             IntPtr fontfamily;
-            IntPtr nativeFontCollection = (fontCollection == null) ? IntPtr.Zero : fontCollection._nativeFontCollection;
+            IntPtr nativeFontCollection =
+                (fontCollection == null) ? IntPtr.Zero : fontCollection._nativeFontCollection;
 
-            int status = Gdip.GdipCreateFontFamilyFromName(name, new HandleRef(fontCollection, nativeFontCollection), out fontfamily);
+            int status = Gdip.GdipCreateFontFamilyFromName(
+                name,
+                new HandleRef(fontCollection, nativeFontCollection),
+                out fontfamily
+            );
 
             if (status != Gdip.Ok)
             {
@@ -176,16 +185,19 @@ namespace System.Drawing
                 try
                 {
 #if DEBUG
-                    int status = !Gdip.Initialized ? Gdip.Ok :
+                    int status = !Gdip.Initialized
+                        ? Gdip.Ok
+                        :
 #endif
-                    Gdip.GdipDeleteFontFamily(new HandleRef(this, _nativeFamily));
+                        Gdip.GdipDeleteFontFamily(new HandleRef(this, _nativeFamily));
 #if DEBUG
-                    Debug.Assert(status == Gdip.Ok, $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}");
+                    Debug.Assert(
+                        status == Gdip.Ok,
+                        $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}"
+                    );
 #endif
                 }
-                catch (Exception ex) when (!ClientUtils.IsCriticalException(ex))
-                {
-                }
+                catch (Exception ex) when (!ClientUtils.IsCriticalException(ex)) { }
                 finally
                 {
                     _nativeFamily = IntPtr.Zero;
@@ -257,7 +269,11 @@ namespace System.Drawing
         public bool IsStyleAvailable(FontStyle style)
         {
             int bresult;
-            int status = Gdip.GdipIsStyleAvailable(new HandleRef(this, NativeFamily), style, out bresult);
+            int status = Gdip.GdipIsStyleAvailable(
+                new HandleRef(this, NativeFamily),
+                style,
+                out bresult
+            );
             Gdip.CheckStatus(status);
 
             return bresult != 0;
@@ -281,7 +297,11 @@ namespace System.Drawing
         public int GetCellAscent(FontStyle style)
         {
             int result;
-            int status = Gdip.GdipGetCellAscent(new HandleRef(this, NativeFamily), style, out result);
+            int status = Gdip.GdipGetCellAscent(
+                new HandleRef(this, NativeFamily),
+                style,
+                out result
+            );
             Gdip.CheckStatus(status);
 
             return result;
@@ -293,7 +313,11 @@ namespace System.Drawing
         public int GetCellDescent(FontStyle style)
         {
             int result;
-            int status = Gdip.GdipGetCellDescent(new HandleRef(this, NativeFamily), style, out result);
+            int status = Gdip.GdipGetCellDescent(
+                new HandleRef(this, NativeFamily),
+                style,
+                out result
+            );
             Gdip.CheckStatus(status);
 
             return result;
@@ -306,7 +330,11 @@ namespace System.Drawing
         public int GetLineSpacing(FontStyle style)
         {
             int result;
-            int status = Gdip.GdipGetLineSpacing(new HandleRef(this, NativeFamily), style, out result);
+            int status = Gdip.GdipGetLineSpacing(
+                new HandleRef(this, NativeFamily),
+                style,
+                out result
+            );
             Gdip.CheckStatus(status);
 
             return result;

@@ -23,7 +23,11 @@ namespace ILLink.Shared
             return string.Empty;
         }
 
-        public static string FormatRequiresAttributeMismatch(bool memberHasAttribute, bool isInterface, params object[] args)
+        public static string FormatRequiresAttributeMismatch(
+            bool memberHasAttribute,
+            bool isInterface,
+            params object[] args
+        )
         {
             string format = (memberHasAttribute, isInterface) switch
             {

@@ -96,21 +96,73 @@ namespace System.Tests
                 }
 
                 yield return new object[] { (byte)123, "D", emptyFormat, "123" };
-                yield return new object[] { (byte)123, "D99", emptyFormat, "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123" };
+                yield return new object[]
+                {
+                    (byte)123,
+                    "D99",
+                    emptyFormat,
+                    "000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000123"
+                };
 
                 yield return new object[] { (byte)0x24, "x", emptyFormat, "24" };
-                yield return new object[] { (byte)24, "N", emptyFormat, string.Format("{0:N}", 24.00) };
-
-
+                yield return new object[]
+                {
+                    (byte)24,
+                    "N",
+                    emptyFormat,
+                    string.Format("{0:N}", 24.00)
+                };
             }
             NumberFormatInfo invariantFormat = NumberFormatInfo.InvariantInfo;
-            yield return new object[] { (byte)32, "C100", invariantFormat, "¤32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (byte)32, "P100", invariantFormat, "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %" };
-            yield return new object[] { (byte)32, "D100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032" };
-            yield return new object[] { (byte)32, "E100", invariantFormat, "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001" };
-            yield return new object[] { (byte)32, "F100", invariantFormat, "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (byte)32, "N100", invariantFormat, "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000" };
-            yield return new object[] { (byte)32, "X100", invariantFormat, "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020" };
+            yield return new object[]
+            {
+                (byte)32,
+                "C100",
+                invariantFormat,
+                "¤32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                (byte)32,
+                "P100",
+                invariantFormat,
+                "3,200.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000 %"
+            };
+            yield return new object[]
+            {
+                (byte)32,
+                "D100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000032"
+            };
+            yield return new object[]
+            {
+                (byte)32,
+                "E100",
+                invariantFormat,
+                "3.2000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000E+001"
+            };
+            yield return new object[]
+            {
+                (byte)32,
+                "F100",
+                invariantFormat,
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                (byte)32,
+                "N100",
+                invariantFormat,
+                "32.0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000"
+            };
+            yield return new object[]
+            {
+                (byte)32,
+                "X100",
+                invariantFormat,
+                "0000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000000020"
+            };
 
             var customFormat = new NumberFormatInfo()
             {
@@ -132,7 +184,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ToString_TestData))]
-        public static void ToStringTest(byte b, string format, IFormatProvider provider, string expected)
+        public static void ToStringTest(
+            byte b,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             // Format is case insensitive
             string upperFormat = format.ToUpperInvariant();
@@ -198,7 +255,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Valid_TestData))]
-        public static void Parse_Valid(string value, NumberStyles style, IFormatProvider provider, byte expected)
+        public static void Parse_Valid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            byte expected
+        )
         {
             byte result;
 
@@ -242,14 +304,30 @@ namespace System.Tests
             }
 
             // > max value
-            yield return new object[] { "256", NumberStyles.Integer, null, typeof(OverflowException) };
-            yield return new object[] { "100", NumberStyles.HexNumber, null, typeof(OverflowException) };
-
+            yield return new object[]
+            {
+                "256",
+                NumberStyles.Integer,
+                null,
+                typeof(OverflowException)
+            };
+            yield return new object[]
+            {
+                "100",
+                NumberStyles.HexNumber,
+                null,
+                typeof(OverflowException)
+            };
         }
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             byte result;
 
@@ -269,7 +347,10 @@ namespace System.Tests
                 // Substitute default NumberFormatInfo
                 Assert.False(byte.TryParse(value, style, new NumberFormatInfo(), out result));
                 Assert.Equal(default, result);
-                Assert.Throws(exceptionType, () => byte.Parse(value, style, new NumberFormatInfo()));
+                Assert.Throws(
+                    exceptionType,
+                    () => byte.Parse(value, style, new NumberFormatInfo())
+                );
             }
 
             // Default style
@@ -287,21 +368,38 @@ namespace System.Tests
         [Theory]
         [InlineData(NumberStyles.HexNumber | NumberStyles.AllowParentheses, null)]
         [InlineData(unchecked((NumberStyles)0xFFFFFC00), "style")]
-        public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(NumberStyles style, string paramName)
+        public static void TryParse_InvalidNumberStyle_ThrowsArgumentException(
+            NumberStyles style,
+            string paramName
+        )
         {
             byte result = 0;
-            AssertExtensions.Throws<ArgumentException>(paramName, () => byte.TryParse("1", style, null, out result));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => byte.TryParse("1", style, null, out result)
+            );
             Assert.Equal(default(byte), result);
 
             AssertExtensions.Throws<ArgumentException>(paramName, () => byte.Parse("1", style));
-            AssertExtensions.Throws<ArgumentException>(paramName, () => byte.Parse("1", style, null));
+            AssertExtensions.Throws<ArgumentException>(
+                paramName,
+                () => byte.Parse("1", style, null)
+            );
         }
 
         public static IEnumerable<object[]> Parse_ValidWithOffsetCount_TestData()
         {
             foreach (object[] inputs in Parse_Valid_TestData())
             {
-                yield return new object[] { inputs[0], 0, ((string)inputs[0]).Length, inputs[1], inputs[2], inputs[3] };
+                yield return new object[]
+                {
+                    inputs[0],
+                    0,
+                    ((string)inputs[0]).Length,
+                    inputs[1],
+                    inputs[2],
+                    inputs[3]
+                };
             }
 
             yield return new object[] { "123", 0, 2, NumberStyles.Integer, null, (byte)12 };
@@ -310,13 +408,27 @@ namespace System.Tests
             yield return new object[] { "  123  ", 4, 1, NumberStyles.Integer, null, (byte)3 };
             yield return new object[] { "12", 1, 1, NumberStyles.HexNumber, null, (byte)0x2 };
             yield return new object[] { "10", 0, 1, NumberStyles.AllowThousands, null, (byte)1 };
-            yield return new object[] { "$100", 0, 2, NumberStyles.Currency, new NumberFormatInfo() { CurrencySymbol = "$" }, (byte)1 };
+            yield return new object[]
+            {
+                "$100",
+                0,
+                2,
+                NumberStyles.Currency,
+                new NumberFormatInfo() { CurrencySymbol = "$" },
+                (byte)1
+            };
         }
-
 
         [Theory]
         [MemberData(nameof(Parse_ValidWithOffsetCount_TestData))]
-        public static void Parse_Span_Valid(string value, int offset, int count, NumberStyles style, IFormatProvider provider, byte expected)
+        public static void Parse_Span_Valid(
+            string value,
+            int offset,
+            int count,
+            NumberStyles style,
+            IFormatProvider provider,
+            byte expected
+        )
         {
             byte result;
 
@@ -335,7 +447,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(Parse_Invalid_TestData))]
-        public static void Parse_Span_Invalid(string value, NumberStyles style, IFormatProvider provider, Type exceptionType)
+        public static void Parse_Span_Invalid(
+            string value,
+            NumberStyles style,
+            IFormatProvider provider,
+            Type exceptionType
+        )
         {
             if (value != null)
             {
@@ -357,7 +474,12 @@ namespace System.Tests
 
         [Theory]
         [MemberData(nameof(ToString_TestData))]
-        public static void TryFormat(byte i, string format, IFormatProvider provider, string expected)
+        public static void TryFormat(
+            byte i,
+            string format,
+            IFormatProvider provider,
+            string expected
+        )
         {
             char[] actual;
             int charsWritten;
@@ -386,13 +508,27 @@ namespace System.Tests
             {
                 // Upper format
                 actual = new char[expected.Length];
-                Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToUpperInvariant(), provider));
+                Assert.True(
+                    i.TryFormat(
+                        actual.AsSpan(),
+                        out charsWritten,
+                        format.ToUpperInvariant(),
+                        provider
+                    )
+                );
                 Assert.Equal(expected.Length, charsWritten);
                 Assert.Equal(expected.ToUpperInvariant(), new string(actual));
 
                 // Lower format
                 actual = new char[expected.Length];
-                Assert.True(i.TryFormat(actual.AsSpan(), out charsWritten, format.ToLowerInvariant(), provider));
+                Assert.True(
+                    i.TryFormat(
+                        actual.AsSpan(),
+                        out charsWritten,
+                        format.ToLowerInvariant(),
+                        provider
+                    )
+                );
                 Assert.Equal(expected.Length, charsWritten);
                 Assert.Equal(expected.ToLowerInvariant(), new string(actual));
             }

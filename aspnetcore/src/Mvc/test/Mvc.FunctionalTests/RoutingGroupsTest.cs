@@ -14,10 +14,13 @@ public class RoutingGroupsTests : IClassFixture<MvcTestFixture<StartupForGroups>
 {
     public RoutingGroupsTests(MvcTestFixture<StartupForGroups> fixture)
     {
-        Factory = fixture.Factories.FirstOrDefault() ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
+        Factory =
+            fixture.Factories.FirstOrDefault()
+            ?? fixture.WithWebHostBuilder(ConfigureWebHostBuilder);
     }
 
-    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) => builder.UseStartup<StartupForGroups>();
+    private static void ConfigureWebHostBuilder(IWebHostBuilder builder) =>
+        builder.UseStartup<StartupForGroups>();
 
     public WebApplicationFactory<StartupForGroups> Factory { get; }
 
@@ -48,5 +51,9 @@ public class RoutingGroupsTests : IClassFixture<MvcTestFixture<StartupForGroups>
         // TODO: Investigate why the #contactlink to the controller is empty.
     }
 
-    private record RouteInfo(string RouteName, IDictionary<string, string> RouteValues, string Link);
+    private record RouteInfo(
+        string RouteName,
+        IDictionary<string, string> RouteValues,
+        string Link
+    );
 }

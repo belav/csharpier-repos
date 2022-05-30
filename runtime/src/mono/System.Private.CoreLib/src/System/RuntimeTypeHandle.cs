@@ -49,10 +49,7 @@ namespace System
             value = val;
         }
 
-        internal RuntimeTypeHandle(RuntimeType type)
-            : this(type._impl.value)
-        {
-        }
+        internal RuntimeTypeHandle(RuntimeType type) : this(type._impl.value) { }
 
         private RuntimeTypeHandle(SerializationInfo info, StreamingContext context)
         {
@@ -61,10 +58,7 @@ namespace System
 
         public IntPtr Value
         {
-            get
-            {
-                return value;
-            }
+            get { return value; }
         }
 
         public void GetObjectData(SerializationInfo info, StreamingContext context)
@@ -96,22 +90,30 @@ namespace System
 
         public static bool operator ==(RuntimeTypeHandle left, object right)
         {
-            return (right != null) && (right is RuntimeTypeHandle) && left.Equals((RuntimeTypeHandle)right);
+            return (right != null)
+                && (right is RuntimeTypeHandle)
+                && left.Equals((RuntimeTypeHandle)right);
         }
 
         public static bool operator !=(RuntimeTypeHandle left, object right)
         {
-            return (right == null) || !(right is RuntimeTypeHandle) || !left.Equals((RuntimeTypeHandle)right);
+            return (right == null)
+                || !(right is RuntimeTypeHandle)
+                || !left.Equals((RuntimeTypeHandle)right);
         }
 
         public static bool operator ==(object left, RuntimeTypeHandle right)
         {
-            return (left != null) && (left is RuntimeTypeHandle) && ((RuntimeTypeHandle)left).Equals(right);
+            return (left != null)
+                && (left is RuntimeTypeHandle)
+                && ((RuntimeTypeHandle)left).Equals(right);
         }
 
         public static bool operator !=(object left, RuntimeTypeHandle right)
         {
-            return (left == null) || !(left is RuntimeTypeHandle) || !((RuntimeTypeHandle)left).Equals(right);
+            return (left == null)
+                || !(left is RuntimeTypeHandle)
+                || !((RuntimeTypeHandle)left).Equals(right);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -128,7 +130,9 @@ namespace System
             // The check is needed because Type.GetTypeFromHandle returns null
             // for zero handles.
             if (value == IntPtr.Zero)
-                throw new InvalidOperationException("Object fields may not be properly initialized");
+                throw new InvalidOperationException(
+                    "Object fields may not be properly initialized"
+                );
 
             return Type.GetTypeFromHandle(this)!.Module.ModuleHandle;
         }
@@ -142,12 +146,18 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void GetGenericTypeDefinition_impl(QCallTypeHandle type, ObjectHandleOnStack res);
+        private static extern void GetGenericTypeDefinition_impl(
+            QCallTypeHandle type,
+            ObjectHandleOnStack res
+        );
 
         internal static Type GetGenericTypeDefinition(RuntimeType type)
         {
             Type? res = null;
-            GetGenericTypeDefinition_impl(new QCallTypeHandle(ref type), ObjectHandleOnStack.Create (ref res));
+            GetGenericTypeDefinition_impl(
+                new QCallTypeHandle(ref type),
+                ObjectHandleOnStack.Create(ref res)
+            );
             if (res == null)
                 // The icall returns null if TYPE is a gtd
                 return type;
@@ -157,9 +167,12 @@ namespace System
         internal static bool IsPrimitive(RuntimeType type)
         {
             CorElementType corElemType = GetCorElementType(type);
-            return (corElemType >= CorElementType.ELEMENT_TYPE_BOOLEAN && corElemType <= CorElementType.ELEMENT_TYPE_R8) ||
-                corElemType == CorElementType.ELEMENT_TYPE_I ||
-                corElemType == CorElementType.ELEMENT_TYPE_U;
+            return (
+                    corElemType >= CorElementType.ELEMENT_TYPE_BOOLEAN
+                    && corElemType <= CorElementType.ELEMENT_TYPE_R8
+                )
+                || corElemType == CorElementType.ELEMENT_TYPE_I
+                || corElemType == CorElementType.ELEMENT_TYPE_U;
         }
 
         internal static bool IsByRef(RuntimeType type)
@@ -177,7 +190,8 @@ namespace System
         internal static bool IsArray(RuntimeType type)
         {
             CorElementType corElemType = GetCorElementType(type);
-            return corElemType == CorElementType.ELEMENT_TYPE_ARRAY || corElemType == CorElementType.ELEMENT_TYPE_SZARRAY;
+            return corElemType == CorElementType.ELEMENT_TYPE_ARRAY
+                || corElemType == CorElementType.ELEMENT_TYPE_SZARRAY;
         }
 
         internal static bool IsSzArray(RuntimeType type)
@@ -192,9 +206,14 @@ namespace System
         {
             CorElementType corElemType = GetCorElementType(type);
 
-            return ((corElemType == CorElementType.ELEMENT_TYPE_ARRAY || corElemType == CorElementType.ELEMENT_TYPE_SZARRAY) // IsArray
-                   || (corElemType == CorElementType.ELEMENT_TYPE_PTR)                                          // IsPointer
-                   || (corElemType == CorElementType.ELEMENT_TYPE_BYREF));                                      // IsByRef
+            return (
+                (
+                    corElemType == CorElementType.ELEMENT_TYPE_ARRAY
+                    || corElemType == CorElementType.ELEMENT_TYPE_SZARRAY
+                ) // IsArray
+                || (corElemType == CorElementType.ELEMENT_TYPE_PTR) // IsPointer
+                || (corElemType == CorElementType.ELEMENT_TYPE_BYREF)
+            ); // IsByRef
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -207,7 +226,10 @@ namespace System
         internal static extern bool IsComObject(QCallTypeHandle type);
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern bool IsInstanceOfType(QCallTypeHandle type, [NotNullWhen(true)] object? o);
+        internal static extern bool IsInstanceOfType(
+            QCallTypeHandle type,
+            [NotNullWhen(true)] object? o
+        );
 
         internal static bool IsInstanceOfType(RuntimeType type, [NotNullWhen(true)] object? o)
         {
@@ -224,12 +246,12 @@ namespace System
 
         internal static CorElementType GetCorElementType(RuntimeType type)
         {
-            return GetCorElementType (new QCallTypeHandle(ref type));
+            return GetCorElementType(new QCallTypeHandle(ref type));
         }
 
         internal static bool HasInstantiation(RuntimeType type)
         {
-            return HasInstantiation (new QCallTypeHandle(ref type));
+            return HasInstantiation(new QCallTypeHandle(ref type));
         }
 
         internal static bool IsComObject(RuntimeType type, bool isGenericCOM)
@@ -247,7 +269,8 @@ namespace System
 
         internal static bool IsInterface(RuntimeType type)
         {
-            return (type.Attributes & TypeAttributes.ClassSemanticsMask) == TypeAttributes.Interface;
+            return (type.Attributes & TypeAttributes.ClassSemanticsMask)
+                == TypeAttributes.Interface;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -267,7 +290,7 @@ namespace System
 
         internal static int GetArrayRank(RuntimeType type)
         {
-            return GetArrayRank(new QCallTypeHandle (ref type));
+            return GetArrayRank(new QCallTypeHandle(ref type));
         }
 
         internal static RuntimeAssembly GetAssembly(RuntimeType type)
@@ -300,13 +323,17 @@ namespace System
 
         internal static bool CanCastTo(RuntimeType type, RuntimeType target)
         {
-            return type_is_assignable_from(new QCallTypeHandle(ref target), new QCallTypeHandle(ref type));
+            return type_is_assignable_from(
+                new QCallTypeHandle(ref target),
+                new QCallTypeHandle(ref type)
+            );
         }
 
         internal static bool IsGenericVariable(RuntimeType type)
         {
             CorElementType corElemType = GetCorElementType(type);
-            return corElemType == CorElementType.ELEMENT_TYPE_VAR || corElemType == CorElementType.ELEMENT_TYPE_MVAR;
+            return corElemType == CorElementType.ELEMENT_TYPE_VAR
+                || corElemType == CorElementType.ELEMENT_TYPE_MVAR;
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -330,11 +357,17 @@ namespace System
 
         internal static bool IsSubclassOf(RuntimeType childType, RuntimeType baseType)
         {
-            return is_subclass_of(new QCallTypeHandle(ref childType), new QCallTypeHandle(ref baseType));
+            return is_subclass_of(
+                new QCallTypeHandle(ref childType),
+                new QCallTypeHandle(ref baseType)
+            );
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        internal static extern bool is_subclass_of(QCallTypeHandle childType, QCallTypeHandle baseType);
+        internal static extern bool is_subclass_of(
+            QCallTypeHandle childType,
+            QCallTypeHandle baseType
+        );
 
         [DynamicDependency("#ctor()", typeof(IsByRefLikeAttribute))]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
@@ -348,13 +381,20 @@ namespace System
         internal static bool IsTypeDefinition(RuntimeType type)
         {
             CorElementType corElemType = GetCorElementType(type);
-            if (!((corElemType >= CorElementType.ELEMENT_TYPE_VOID && corElemType < CorElementType.ELEMENT_TYPE_PTR) ||
-                    corElemType == CorElementType.ELEMENT_TYPE_VALUETYPE ||
-                    corElemType == CorElementType.ELEMENT_TYPE_CLASS ||
-                    corElemType == CorElementType.ELEMENT_TYPE_TYPEDBYREF ||
-                    corElemType == CorElementType.ELEMENT_TYPE_I ||
-                    corElemType == CorElementType.ELEMENT_TYPE_U ||
-                    corElemType == CorElementType.ELEMENT_TYPE_OBJECT))
+            if (
+                !(
+                    (
+                        corElemType >= CorElementType.ELEMENT_TYPE_VOID
+                        && corElemType < CorElementType.ELEMENT_TYPE_PTR
+                    )
+                    || corElemType == CorElementType.ELEMENT_TYPE_VALUETYPE
+                    || corElemType == CorElementType.ELEMENT_TYPE_CLASS
+                    || corElemType == CorElementType.ELEMENT_TYPE_TYPEDBYREF
+                    || corElemType == CorElementType.ELEMENT_TYPE_I
+                    || corElemType == CorElementType.ELEMENT_TYPE_U
+                    || corElemType == CorElementType.ELEMENT_TYPE_OBJECT
+                )
+            )
                 return false;
 
             if (HasInstantiation(type) && !IsGenericTypeDefinition(type))
@@ -364,32 +404,52 @@ namespace System
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern void internal_from_name(IntPtr name, ref StackCrawlMark stackMark, ObjectHandleOnStack res, bool throwOnError, bool ignoreCase);
+        private static extern void internal_from_name(
+            IntPtr name,
+            ref StackCrawlMark stackMark,
+            ObjectHandleOnStack res,
+            bool throwOnError,
+            bool ignoreCase
+        );
 
         [RequiresUnreferencedCode("Types might be removed")]
-        internal static RuntimeType? GetTypeByName(string typeName, bool throwOnError, bool ignoreCase, ref StackCrawlMark stackMark)
+        internal static RuntimeType? GetTypeByName(
+            string typeName,
+            bool throwOnError,
+            bool ignoreCase,
+            ref StackCrawlMark stackMark
+        )
         {
             ArgumentNullException.ThrowIfNull(typeName);
 
             if (typeName.Length == 0)
                 if (throwOnError)
-                    throw new TypeLoadException("A null or zero length string does not represent a valid Type.");
+                    throw new TypeLoadException(
+                        "A null or zero length string does not represent a valid Type."
+                    );
                 else
                     return null;
 
             RuntimeType? t = null;
-            using (var namePtr = new Mono.SafeStringMarshal(typeName)) {
+            using (var namePtr = new Mono.SafeStringMarshal(typeName))
+            {
                 internal_from_name(
-                                   namePtr.Value,
-                                   ref stackMark,
-                                   ObjectHandleOnStack.Create (ref t), throwOnError, ignoreCase);
+                    namePtr.Value,
+                    ref stackMark,
+                    ObjectHandleOnStack.Create(ref t),
+                    throwOnError,
+                    ignoreCase
+                );
                 if (throwOnError && t == null)
                     throw new TypeLoadException("Error loading '" + typeName + "'");
             }
             return t;
         }
 
-        internal static IntPtr[]? CopyRuntimeTypeHandles(RuntimeTypeHandle[]? inHandles, out int length)
+        internal static IntPtr[]? CopyRuntimeTypeHandles(
+            RuntimeTypeHandle[]? inHandles,
+            out int length
+        )
         {
             if (inHandles == null || inHandles.Length == 0)
             {

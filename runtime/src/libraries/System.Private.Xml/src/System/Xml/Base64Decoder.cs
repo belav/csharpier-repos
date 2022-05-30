@@ -18,7 +18,8 @@ namespace System.Xml
         private int _bits;
         private int _bitsFilled;
 
-        private const string CharsBase64 = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
+        private const string CharsBase64 =
+            "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789+/";
         private static readonly byte[] s_mapBase64 = ConstructMapBase64();
         private const int MaxValidChar = (int)'z';
         private const byte Invalid = unchecked((byte)-1);
@@ -28,18 +29,12 @@ namespace System.Xml
         //
         internal override int DecodedCount
         {
-            get
-            {
-                return _curIndex - _startIndex;
-            }
+            get { return _curIndex - _startIndex; }
         }
 
         internal override bool IsFull
         {
-            get
-            {
-                return _curIndex == _endIndex;
-            }
+            get { return _curIndex == _endIndex; }
         }
 
         internal override int Decode(char[] chars, int startPos, int len)
@@ -64,7 +59,12 @@ namespace System.Xml
                 return 0;
             }
 
-            Decode(chars.AsSpan(startPos, len), _buffer.AsSpan(_curIndex, _endIndex - _curIndex), out int charsDecoded, out int bytesDecoded);
+            Decode(
+                chars.AsSpan(startPos, len),
+                _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
+                out int charsDecoded,
+                out int bytesDecoded
+            );
 
             _curIndex += bytesDecoded;
             return charsDecoded;
@@ -92,7 +92,12 @@ namespace System.Xml
                 return 0;
             }
 
-            Decode(str.AsSpan(startPos, len), _buffer.AsSpan(_curIndex, _endIndex - _curIndex), out int charsDecoded, out int bytesDecoded);
+            Decode(
+                str.AsSpan(startPos, len),
+                _buffer.AsSpan(_curIndex, _endIndex - _curIndex),
+                out int charsDecoded,
+                out int bytesDecoded
+            );
 
             _curIndex += bytesDecoded;
             return charsDecoded;
@@ -135,7 +140,12 @@ namespace System.Xml
             return mapBase64;
         }
 
-        private void Decode(ReadOnlySpan<char> chars, Span<byte> bytes, out int charsDecoded, out int bytesDecoded)
+        private void Decode(
+            ReadOnlySpan<char> chars,
+            Span<byte> bytes,
+            out int charsDecoded,
+            out int bytesDecoded
+        )
         {
             // walk hex digits pairing them up and shoving the value of each pair into a byte
             int iByte = 0;
@@ -205,7 +215,7 @@ namespace System.Xml
                 }
             }
 
-        Return:
+            Return:
             _bits = b;
             _bitsFilled = bFilled;
 

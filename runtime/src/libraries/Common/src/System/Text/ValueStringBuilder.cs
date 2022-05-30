@@ -110,7 +110,9 @@ namespace System.Text
         }
 
         public ReadOnlySpan<char> AsSpan() => _chars.Slice(0, _pos);
+
         public ReadOnlySpan<char> AsSpan(int start) => _chars.Slice(start, _pos - start);
+
         public ReadOnlySpan<char> AsSpan(int start, int length) => _chars.Slice(start, length);
 
         public bool TryCopyTo(Span<char> destination, out int charsWritten)
@@ -160,9 +162,9 @@ namespace System.Text
             _chars.Slice(index, remaining).CopyTo(_chars.Slice(index + count));
             s
 #if !NETCOREAPP
-                .AsSpan()
+            .AsSpan()
 #endif
-                .CopyTo(_chars.Slice(index));
+            .CopyTo(_chars.Slice(index));
             _pos += count;
         }
 
@@ -211,9 +213,9 @@ namespace System.Text
 
             s
 #if !NETCOREAPP
-                .AsSpan()
+            .AsSpan()
 #endif
-                .CopyTo(_chars.Slice(pos));
+            .CopyTo(_chars.Slice(pos));
             _pos += s.Length;
         }
 
@@ -292,10 +294,15 @@ namespace System.Text
         private void Grow(int additionalCapacityBeyondPos)
         {
             Debug.Assert(additionalCapacityBeyondPos > 0);
-            Debug.Assert(_pos > _chars.Length - additionalCapacityBeyondPos, "Grow called incorrectly, no resize is needed.");
+            Debug.Assert(
+                _pos > _chars.Length - additionalCapacityBeyondPos,
+                "Grow called incorrectly, no resize is needed."
+            );
 
             // Make sure to let Rent throw an exception if the caller has a bug and the desired capacity is negative
-            char[] poolArray = ArrayPool<char>.Shared.Rent((int)Math.Max((uint)(_pos + additionalCapacityBeyondPos), (uint)_chars.Length * 2));
+            char[] poolArray = ArrayPool<char>.Shared.Rent(
+                (int)Math.Max((uint)(_pos + additionalCapacityBeyondPos), (uint)_chars.Length * 2)
+            );
 
             _chars.Slice(0, _pos).CopyTo(poolArray);
 

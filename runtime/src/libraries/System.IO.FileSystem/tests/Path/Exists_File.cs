@@ -16,12 +16,16 @@ namespace System.IO.Tests
             Directory.CreateDirectory(path);
 
             Assert.True(Exists(IOServices.RemoveTrailingSlash(path)));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path))));
-            Assert.True(Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path))));
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.RemoveTrailingSlash(path)))
+            );
+            Assert.True(
+                Exists(IOServices.RemoveTrailingSlash(IOServices.AddTrailingSlashIfNeeded(path)))
+            );
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)]  // Uses P/Invokes
+        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser)] // Uses P/Invokes
         [ActiveIssue("https://github.com/dotnet/runtime/issues/67853", TestPlatforms.tvOS)]
         public void TrueForNonRegularFile()
         {

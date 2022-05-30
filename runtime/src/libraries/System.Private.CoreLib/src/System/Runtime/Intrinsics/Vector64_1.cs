@@ -15,8 +15,7 @@ namespace System.Runtime.Intrinsics
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(Vector64DebugView<>))]
     [StructLayout(LayoutKind.Sequential, Size = Vector64.Size)]
-    public readonly struct Vector64<T> : IEquatable<Vector64<T>>
-        where T : struct
+    public readonly struct Vector64<T> : IEquatable<Vector64<T>> where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         // This also allows the debug view to work https://github.com/dotnet/runtime/issues/9495)
@@ -45,18 +44,19 @@ namespace System.Runtime.Intrinsics
         internal static bool IsTypeSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(double)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(nint)) ||
-                   (typeof(T) == typeof(nuint)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(ulong));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(double))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(nint))
+                || (typeof(T) == typeof(nuint))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(ulong));
         }
 
         /// <summary>Gets a new <see cref="Vector64{T}" /> with all elements initialized to zero.</summary>
@@ -99,7 +99,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Add(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Add(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -147,7 +150,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Divide(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Divide(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -192,8 +198,7 @@ namespace System.Runtime.Intrinsics
         /// <returns><c>true</c> if any elements in <paramref name="left" /> was not equal to the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator !=(Vector64<T> left, Vector64<T> right)
-            => !(left == right);
+        public static bool operator !=(Vector64<T> left, Vector64<T> right) => !(left == right);
 
         /// <summary>Multiplies two vectors to compute their element-wise product.</summary>
         /// <param name="left">The vector to multiply with <paramref name="right" />.</param>
@@ -206,7 +211,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Multiply(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Multiply(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -237,8 +245,7 @@ namespace System.Runtime.Intrinsics
         /// <returns>The product of <paramref name="left" /> and <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector64<T> operator *(T left, Vector64<T> right)
-            => right * left;
+        public static Vector64<T> operator *(T left, Vector64<T> right) => right * left;
 
         /// <summary>Computes the ones-complement of a vector.</summary>
         /// <param name="vector">The vector whose ones-complement is to be computed.</param>
@@ -258,7 +265,10 @@ namespace System.Runtime.Intrinsics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Subtract(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Subtract(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -283,8 +293,8 @@ namespace System.Runtime.Intrinsics
         /// <param name="obj">The object to compare with the current instance.</param>
         /// <returns><c>true</c> if <paramref name="obj" /> is a <see cref="Vector64{T}" /> and is equal to the current instance; otherwise, <c>false</c>.</returns>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
-        public override bool Equals([NotNullWhen(true)] object? obj)
-            => (obj is Vector64<T> other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector64<T> other) && Equals(other);
 
         /// <summary>Determines whether the specified <see cref="Vector64{T}" /> is equal to the current instance.</summary>
         /// <param name="other">The <see cref="Vector64{T}" /> to compare with the current instance.</param>
@@ -300,7 +310,9 @@ namespace System.Runtime.Intrinsics
             {
                 if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
                 {
-                    Vector64<T> result = Vector64.Equals(this, other) | ~(Vector64.Equals(this, this) | Vector64.Equals(other, other));
+                    Vector64<T> result =
+                        Vector64.Equals(this, other)
+                        | ~(Vector64.Equals(this, this) | Vector64.Equals(other, other));
                     return result.AsInt32() == Vector64<int>.AllBitsSet;
                 }
                 else
@@ -315,7 +327,12 @@ namespace System.Runtime.Intrinsics
             {
                 for (int index = 0; index < Count; index++)
                 {
-                    if (!Scalar<T>.ObjectEquals(self.GetElementUnsafe(index), other.GetElementUnsafe(index)))
+                    if (
+                        !Scalar<T>.ObjectEquals(
+                            self.GetElementUnsafe(index),
+                            other.GetElementUnsafe(index)
+                        )
+                    )
                     {
                         return false;
                     }
@@ -343,10 +360,12 @@ namespace System.Runtime.Intrinsics
         /// <summary>Converts the current instance to an equivalent string representation.</summary>
         /// <returns>An equivalent string representation of the current instance.</returns>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
-        public override string ToString()
-            => ToString("G", CultureInfo.InvariantCulture);
+        public override string ToString() => ToString("G", CultureInfo.InvariantCulture);
 
-        private string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        private string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             ThrowHelper.ThrowForUnsupportedIntrinsicsVector64BaseType<T>();
 

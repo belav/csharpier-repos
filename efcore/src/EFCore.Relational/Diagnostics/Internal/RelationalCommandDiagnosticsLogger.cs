@@ -16,7 +16,8 @@ namespace Microsoft.EntityFrameworkCore.Diagnostics.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 public class RelationalCommandDiagnosticsLogger
-    : DiagnosticsLogger<DbLoggerCategory.Database.Command>, IRelationalCommandDiagnosticsLogger
+    : DiagnosticsLogger<DbLoggerCategory.Database.Command>,
+        IRelationalCommandDiagnosticsLogger
 {
     private DateTimeOffset _suppressCommandCreateExpiration;
     private DateTimeOffset _suppressCommandExecuteExpiration;
@@ -37,12 +38,19 @@ public class RelationalCommandDiagnosticsLogger
         LoggingDefinitions loggingDefinitions,
         IDbContextLogger contextLogger,
         IDbContextOptions contextOptions,
-        IInterceptors? interceptors = null)
-        : base(loggerFactory, loggingOptions, diagnosticSource, loggingDefinitions, contextLogger, interceptors)
+        IInterceptors? interceptors = null
+    )
+        : base(
+            loggerFactory,
+            loggingOptions,
+            diagnosticSource,
+            loggingDefinitions,
+            contextLogger,
+            interceptors
+        )
     {
         var coreOptionsExtension =
-            contextOptions.FindExtension<CoreOptionsExtension>()
-            ?? new CoreOptionsExtension();
+            contextOptions.FindExtension<CoreOptionsExtension>() ?? new CoreOptionsExtension();
 
         _loggingCacheTime = coreOptionsExtension.LoggingCacheTime;
     }
@@ -62,7 +70,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         _suppressCommandCreateExpiration = startTime + _loggingCacheTime;
 
@@ -75,8 +84,14 @@ public class RelationalCommandDiagnosticsLogger
             definition.Log(this, commandMethod.ToString());
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandCreateExpiration = default;
 
@@ -91,7 +106,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -113,7 +129,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandCorrelatedEventData(
             definition,
@@ -125,7 +142,8 @@ public class RelationalCommandDiagnosticsLogger
             connectionId,
             async,
             startTime,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -158,7 +176,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogCommandCreated(this);
 
@@ -169,8 +188,14 @@ public class RelationalCommandDiagnosticsLogger
             definition.Log(this, commandMethod.ToString(), (int)duration.TotalMilliseconds);
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandCreateExpiration = default;
 
@@ -187,7 +212,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -211,7 +237,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string, int> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandEndEventData(
             definition,
@@ -226,7 +253,8 @@ public class RelationalCommandDiagnosticsLogger
             false,
             startTime,
             duration,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -259,7 +287,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogCommandInitialized(this);
 
@@ -270,8 +299,14 @@ public class RelationalCommandDiagnosticsLogger
             definition.Log(this, commandMethod.ToString(), (int)duration.TotalMilliseconds);
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandCreateExpiration = default;
 
@@ -288,7 +323,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -312,7 +348,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string, int> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandEndEventData(
             definition,
@@ -327,7 +364,8 @@ public class RelationalCommandDiagnosticsLogger
             false,
             startTime,
             duration,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -358,7 +396,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         _suppressCommandExecuteExpiration = startTime + _loggingCacheTime;
 
@@ -374,11 +413,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -394,7 +440,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -418,7 +465,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         _suppressCommandExecuteExpiration = startTime + _loggingCacheTime;
 
@@ -434,11 +482,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -454,7 +509,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -478,7 +534,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid commandId,
         Guid connectionId,
         DateTimeOffset startTime,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         _suppressCommandExecuteExpiration = startTime + _loggingCacheTime;
 
@@ -494,11 +551,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -514,7 +578,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -539,7 +604,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         _suppressCommandExecuteExpiration = startTime + _loggingCacheTime;
 
@@ -555,11 +621,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -575,11 +648,17 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ReaderExecutingAsync(command, eventData, default, cancellationToken);
+                return interceptor.ReaderExecutingAsync(
+                    command,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -600,7 +679,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         _suppressCommandExecuteExpiration = startTime + _loggingCacheTime;
 
@@ -616,11 +696,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -636,11 +723,17 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ScalarExecutingAsync(command, eventData, default, cancellationToken);
+                return interceptor.ScalarExecutingAsync(
+                    command,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -661,7 +754,8 @@ public class RelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         _suppressCommandExecuteExpiration = startTime + _loggingCacheTime;
 
@@ -677,11 +771,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -697,11 +798,17 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
-                return interceptor.NonQueryExecutingAsync(command, eventData, default, cancellationToken);
+                return interceptor.NonQueryExecutingAsync(
+                    command,
+                    eventData,
+                    default,
+                    cancellationToken
+                );
             }
         }
 
@@ -720,7 +827,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string, CommandType, int, string, string> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandEventData(
             definition,
@@ -734,7 +842,8 @@ public class RelationalCommandDiagnosticsLogger
             async,
             ShouldLogParameterValues(command),
             startTime,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -749,7 +858,8 @@ public class RelationalCommandDiagnosticsLogger
                 p.Command.CommandType,
                 p.Command.CommandTimeout,
                 Environment.NewLine,
-                p.Command.CommandText.TrimEnd());
+                p.Command.CommandText.TrimEnd()
+            );
         }
     }
 
@@ -772,7 +882,8 @@ public class RelationalCommandDiagnosticsLogger
         DbDataReader methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -787,11 +898,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -809,7 +927,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -835,7 +954,8 @@ public class RelationalCommandDiagnosticsLogger
         object? methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -850,11 +970,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -872,7 +999,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -898,7 +1026,8 @@ public class RelationalCommandDiagnosticsLogger
         int methodResult,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -913,11 +1042,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -935,7 +1071,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -962,7 +1099,8 @@ public class RelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -977,11 +1115,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -999,11 +1144,17 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ReaderExecutedAsync(command, eventData, methodResult, cancellationToken);
+                return interceptor.ReaderExecutedAsync(
+                    command,
+                    eventData,
+                    methodResult,
+                    cancellationToken
+                );
             }
         }
 
@@ -1026,7 +1177,8 @@ public class RelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -1041,11 +1193,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -1063,11 +1222,17 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
-                return interceptor.ScalarExecutedAsync(command, eventData, methodResult, cancellationToken);
+                return interceptor.ScalarExecutedAsync(
+                    command,
+                    eventData,
+                    methodResult,
+                    cancellationToken
+                );
             }
         }
 
@@ -1090,7 +1255,8 @@ public class RelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogExecutedCommand(this);
 
@@ -1105,11 +1271,18 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressCommandExecuteExpiration = default;
 
@@ -1127,11 +1300,17 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
-                return interceptor.NonQueryExecutedAsync(command, eventData, methodResult, cancellationToken);
+                return interceptor.NonQueryExecutedAsync(
+                    command,
+                    eventData,
+                    methodResult,
+                    cancellationToken
+                );
             }
         }
 
@@ -1152,7 +1331,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string, string, CommandType, int, string, string> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandExecutedEventData(
             definition,
@@ -1168,7 +1348,8 @@ public class RelationalCommandDiagnosticsLogger
             ShouldLogParameterValues(command),
             startTime,
             duration,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1184,7 +1365,8 @@ public class RelationalCommandDiagnosticsLogger
                 p.Command.CommandType,
                 p.Command.CommandTimeout,
                 Environment.NewLine,
-                p.Command.CommandText.TrimEnd());
+                p.Command.CommandText.TrimEnd()
+            );
         }
     }
 
@@ -1208,14 +1390,21 @@ public class RelationalCommandDiagnosticsLogger
         Exception exception,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogCommandFailed(this);
 
         LogCommandError(command, duration, definition);
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCommandError(
                 connection.DbConnection,
@@ -1231,7 +1420,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             interceptor?.CommandFailed(command, eventData);
         }
@@ -1240,7 +1430,8 @@ public class RelationalCommandDiagnosticsLogger
     private void LogCommandError(
         DbCommand command,
         TimeSpan duration,
-        EventDefinition<string, string, CommandType, int, string, string> definition)
+        EventDefinition<string, string, CommandType, int, string, string> definition
+    )
     {
         if (ShouldLog(definition))
         {
@@ -1251,7 +1442,8 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
     }
 
@@ -1272,14 +1464,21 @@ public class RelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogCommandFailed(this);
 
         LogCommandError(command, duration, definition);
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCommandError(
                 connection.DbConnection,
@@ -1295,7 +1494,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -1320,7 +1520,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string, string, CommandType, int, string, string> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandErrorEventData(
             definition,
@@ -1336,7 +1537,8 @@ public class RelationalCommandDiagnosticsLogger
             ShouldLogParameterValues(command),
             startTime,
             duration,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1352,7 +1554,8 @@ public class RelationalCommandDiagnosticsLogger
                 p.Command.CommandType,
                 p.Command.CommandTimeout,
                 Environment.NewLine,
-                p.Command.CommandText.TrimEnd());
+                p.Command.CommandText.TrimEnd()
+            );
         }
     }
 
@@ -1370,14 +1573,21 @@ public class RelationalCommandDiagnosticsLogger
         Guid connectionId,
         DateTimeOffset startTime,
         TimeSpan duration,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var definition = RelationalResources.LogCommandCanceled(this);
 
         LogCommandCanceled(command, duration, definition);
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCommandCanceled(
                 connection.DbConnection,
@@ -1392,7 +1602,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             interceptor?.CommandCanceled(command, eventData);
         }
@@ -1409,14 +1620,21 @@ public class RelationalCommandDiagnosticsLogger
         DateTimeOffset startTime,
         TimeSpan duration,
         CommandSource commandSource,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         var definition = RelationalResources.LogCommandCanceled(this);
 
         LogCommandCanceled(command, duration, definition);
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             var eventData = BroadcastCommandCanceled(
                 connection.DbConnection,
@@ -1431,7 +1649,8 @@ public class RelationalCommandDiagnosticsLogger
                 definition,
                 diagnosticSourceEnabled,
                 simpleLogEnabled,
-                commandSource);
+                commandSource
+            );
 
             if (interceptor != null)
             {
@@ -1445,7 +1664,8 @@ public class RelationalCommandDiagnosticsLogger
     private void LogCommandCanceled(
         DbCommand command,
         TimeSpan duration,
-        EventDefinition<string, string, CommandType, int, string, string> definition)
+        EventDefinition<string, string, CommandType, int, string, string> definition
+    )
     {
         if (ShouldLog(definition))
         {
@@ -1456,7 +1676,8 @@ public class RelationalCommandDiagnosticsLogger
                 command.CommandType,
                 command.CommandTimeout,
                 Environment.NewLine,
-                command.CommandText.TrimEnd());
+                command.CommandText.TrimEnd()
+            );
         }
     }
 
@@ -1473,7 +1694,8 @@ public class RelationalCommandDiagnosticsLogger
         EventDefinition<string, string, CommandType, int, string, string> definition,
         bool diagnosticSourceEnabled,
         bool simpleLogEnabled,
-        CommandSource commandSource)
+        CommandSource commandSource
+    )
     {
         var eventData = new CommandEndEventData(
             definition,
@@ -1488,7 +1710,8 @@ public class RelationalCommandDiagnosticsLogger
             ShouldLogParameterValues(command),
             startTime,
             duration,
-            commandSource);
+            commandSource
+        );
 
         DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1504,7 +1727,8 @@ public class RelationalCommandDiagnosticsLogger
                 p.Command.CommandType,
                 p.Command.CommandTimeout,
                 Environment.NewLine,
-                p.Command.CommandText.TrimEnd());
+                p.Command.CommandText.TrimEnd()
+            );
         }
     }
 
@@ -1526,7 +1750,8 @@ public class RelationalCommandDiagnosticsLogger
         int recordsAffected,
         int readCount,
         DateTimeOffset startTime,
-        TimeSpan duration)
+        TimeSpan duration
+    )
     {
         _suppressDataReaderDisposingExpiration = startTime + _loggingCacheTime;
 
@@ -1539,8 +1764,14 @@ public class RelationalCommandDiagnosticsLogger
             definition.Log(this);
         }
 
-        if (NeedsEventData<IDbCommandInterceptor>(
-                definition, out var interceptor, out var diagnosticSourceEnabled, out var simpleLogEnabled))
+        if (
+            NeedsEventData<IDbCommandInterceptor>(
+                definition,
+                out var interceptor,
+                out var diagnosticSourceEnabled,
+                out var simpleLogEnabled
+            )
+        )
         {
             _suppressDataReaderDisposingExpiration = default;
 
@@ -1555,7 +1786,8 @@ public class RelationalCommandDiagnosticsLogger
                 recordsAffected,
                 readCount,
                 startTime,
-                duration);
+                duration
+            );
 
             DispatchEventData(definition, eventData, diagnosticSourceEnabled, simpleLogEnabled);
 
@@ -1578,8 +1810,8 @@ public class RelationalCommandDiagnosticsLogger
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool ShouldLogCommandCreate(DateTimeOffset now)
-        => now > _suppressCommandCreateExpiration;
+    public virtual bool ShouldLogCommandCreate(DateTimeOffset now) =>
+        now > _suppressCommandCreateExpiration;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1587,8 +1819,8 @@ public class RelationalCommandDiagnosticsLogger
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool ShouldLogCommandExecute(DateTimeOffset now)
-        => now > _suppressCommandExecuteExpiration;
+    public virtual bool ShouldLogCommandExecute(DateTimeOffset now) =>
+        now > _suppressCommandExecuteExpiration;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -1596,11 +1828,11 @@ public class RelationalCommandDiagnosticsLogger
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool ShouldLogDataReaderDispose(DateTimeOffset now)
-        => now > _suppressDataReaderDisposingExpiration;
+    public virtual bool ShouldLogDataReaderDispose(DateTimeOffset now) =>
+        now > _suppressDataReaderDisposingExpiration;
 
-    private bool ShouldLogParameterValues(DbCommand command)
-        => command.Parameters.Count > 0 && ShouldLogSensitiveData();
+    private bool ShouldLogParameterValues(DbCommand command) =>
+        command.Parameters.Count > 0 && ShouldLogSensitiveData();
 
     #endregion ShouldLog checks
 }

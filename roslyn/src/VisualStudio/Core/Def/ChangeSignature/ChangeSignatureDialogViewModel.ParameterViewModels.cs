@@ -42,9 +42,7 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
             private static string ValueOrNone(string value)
             {
-                return !string.IsNullOrEmpty(value)
-                    ? value
-                    : ServicesVSResources.None;
+                return !string.IsNullOrEmpty(value) ? value : ServicesVSResources.None;
             }
 
             public Visibility HasParameterNameConflict { get; set; }
@@ -76,14 +74,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                         return true;
                     }
 
-                    if (this == ChangeSignatureDialogViewModel._parametersWithoutDefaultValues.LastOrDefault() &&
-                        (ChangeSignatureDialogViewModel._parametersWithDefaultValues.Any() || ChangeSignatureDialogViewModel._paramsParameter != null))
+                    if (
+                        this
+                            == ChangeSignatureDialogViewModel._parametersWithoutDefaultValues.LastOrDefault()
+                        && (
+                            ChangeSignatureDialogViewModel._parametersWithDefaultValues.Any()
+                            || ChangeSignatureDialogViewModel._paramsParameter != null
+                        )
+                    )
                     {
                         return true;
                     }
 
-                    if (this == ChangeSignatureDialogViewModel._parametersWithDefaultValues.LastOrDefault() &&
-                        ChangeSignatureDialogViewModel._paramsParameter != null)
+                    if (
+                        this
+                            == ChangeSignatureDialogViewModel._parametersWithDefaultValues.LastOrDefault()
+                        && ChangeSignatureDialogViewModel._paramsParameter != null
+                    )
                     {
                         return true;
                     }
@@ -100,15 +107,18 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
             public override Parameter Parameter => _addedParameter;
             private readonly AddedParameter _addedParameter;
 
-            public AddedParameterViewModel(ChangeSignatureDialogViewModel changeSignatureDialogViewModel, AddedParameter addedParameter)
-                : base(changeSignatureDialogViewModel)
+            public AddedParameterViewModel(
+                ChangeSignatureDialogViewModel changeSignatureDialogViewModel,
+                AddedParameter addedParameter
+            ) : base(changeSignatureDialogViewModel)
             {
                 _addedParameter = addedParameter;
             }
 
             public override string Type => _addedParameter.TypeName;
 
-            public override Visibility TypeWarningVisibility => _addedParameter.TypeBinds ? Visibility.Collapsed : Visibility.Visible;
+            public override Visibility TypeWarningVisibility =>
+                _addedParameter.TypeBinds ? Visibility.Collapsed : Visibility.Visible;
 
             public override string ParameterName => _addedParameter.Name;
 
@@ -123,7 +133,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 get
                 {
                     var baseText = base.FullAutomationText;
-                    return ServicesVSResources.Added_Parameter + baseText + string.Format(ServicesVSResources.Inserting_call_site_value_0, CallSite);
+                    return ServicesVSResources.Added_Parameter
+                        + baseText
+                        + string.Format(ServicesVSResources.Inserting_call_site_value_0, CallSite);
                 }
             }
 
@@ -160,8 +172,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
             public override Parameter Parameter => _existingParameter;
 
-            public ExistingParameterViewModel(ChangeSignatureDialogViewModel changeSignatureDialogViewModel, ExistingParameter existingParameter, int initialIndex)
-                : base(changeSignatureDialogViewModel)
+            public ExistingParameterViewModel(
+                ChangeSignatureDialogViewModel changeSignatureDialogViewModel,
+                ExistingParameter existingParameter,
+                int initialIndex
+            ) : base(changeSignatureDialogViewModel)
             {
                 _existingParameter = existingParameter;
                 InitialIndex = initialIndex.ToString();
@@ -185,7 +200,13 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                             return string.Empty;
                     }
 
-                    string ModifierText(string? @out, string? @ref, string? @in, string? @params, string? @this)
+                    string ModifierText(
+                        string? @out,
+                        string? @ref,
+                        string? @in,
+                        string? @params,
+                        string? @this
+                    )
                     {
                         switch (ParameterSymbol.RefKind)
                         {
@@ -202,8 +223,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                             return @params ?? string.Empty;
                         }
 
-                        if (ChangeSignatureDialogViewModel._thisParameter != null &&
-                            ParameterSymbol == ChangeSignatureDialogViewModel._thisParameter.ParameterSymbol)
+                        if (
+                            ChangeSignatureDialogViewModel._thisParameter != null
+                            && ParameterSymbol
+                                == ChangeSignatureDialogViewModel._thisParameter.ParameterSymbol
+                        )
                         {
                             return @this ?? string.Empty;
                         }
@@ -213,7 +237,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
                 }
             }
 
-            public override string Type => ParameterSymbol.Type.ToDisplayString(s_parameterDisplayFormat);
+            public override string Type =>
+                ParameterSymbol.Type.ToDisplayString(s_parameterDisplayFormat);
 
             public override string ParameterName => ParameterSymbol.Name;
 
@@ -238,9 +263,11 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.ChangeSignature
 
                     string NullText(string @null, string @default)
                     {
-                        return ParameterSymbol.ExplicitDefaultValue == null ? (ParameterSymbol.Type.IsReferenceType ? @null : @default) :
-                               ParameterSymbol.ExplicitDefaultValue is string ? "\"" + ParameterSymbol.ExplicitDefaultValue.ToString() + "\"" :
-                               ParameterSymbol.ExplicitDefaultValue.ToString();
+                        return ParameterSymbol.ExplicitDefaultValue == null
+                            ? (ParameterSymbol.Type.IsReferenceType ? @null : @default)
+                            : ParameterSymbol.ExplicitDefaultValue is string
+                                ? "\"" + ParameterSymbol.ExplicitDefaultValue.ToString() + "\""
+                                : ParameterSymbol.ExplicitDefaultValue.ToString();
                     }
                 }
             }

@@ -18,13 +18,27 @@ namespace Microsoft.CodeAnalysis.FindSymbols
 {
     internal sealed partial class TopLevelSyntaxTreeIndex : IObjectWritable
     {
-        public static Task PrecalculateAsync(Document document, CancellationToken cancellationToken)
-            => PrecalculateAsync(document, CreateIndex, cancellationToken);
+        public static Task PrecalculateAsync(
+            Document document,
+            CancellationToken cancellationToken
+        ) => PrecalculateAsync(document, CreateIndex, cancellationToken);
 
         public static Task<TopLevelSyntaxTreeIndex?> LoadAsync(
-            IChecksummedPersistentStorageService storageService, DocumentKey documentKey, Checksum? checksum, StringTable stringTable, CancellationToken cancellationToken)
+            IChecksummedPersistentStorageService storageService,
+            DocumentKey documentKey,
+            Checksum? checksum,
+            StringTable stringTable,
+            CancellationToken cancellationToken
+        )
         {
-            return LoadAsync(storageService, documentKey, checksum, stringTable, ReadIndex, cancellationToken);
+            return LoadAsync(
+                storageService,
+                documentKey,
+                checksum,
+                stringTable,
+                ReadIndex,
+                cancellationToken
+            );
         }
 
         public override void WriteTo(ObjectWriter writer)
@@ -34,7 +48,10 @@ namespace Microsoft.CodeAnalysis.FindSymbols
         }
 
         private static TopLevelSyntaxTreeIndex? ReadIndex(
-            StringTable stringTable, ObjectReader reader, Checksum? checksum)
+            StringTable stringTable,
+            ObjectReader reader,
+            Checksum? checksum
+        )
         {
             var declarationInfo = DeclarationInfo.TryReadFrom(stringTable, reader);
             var extensionMethodInfo = ExtensionMethodInfo.TryReadFrom(reader);
@@ -45,7 +62,8 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             return new TopLevelSyntaxTreeIndex(
                 checksum,
                 declarationInfo.Value,
-                extensionMethodInfo.Value);
+                extensionMethodInfo.Value
+            );
         }
     }
 }

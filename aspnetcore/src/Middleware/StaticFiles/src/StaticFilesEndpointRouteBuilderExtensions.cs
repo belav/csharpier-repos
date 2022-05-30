@@ -37,7 +37,8 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     /// </remarks>
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
-        string filePath)
+        string filePath
+    )
     {
         if (endpoints == null)
         {
@@ -76,7 +77,8 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
         string filePath,
-        StaticFileOptions options)
+        StaticFileOptions options
+    )
     {
         if (endpoints == null)
         {
@@ -121,7 +123,8 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapFallbackToFile(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        string filePath)
+        string filePath
+    )
     {
         if (endpoints == null)
         {
@@ -170,7 +173,8 @@ public static class StaticFilesEndpointRouteBuilderExtensions
         this IEndpointRouteBuilder endpoints,
         string pattern,
         string filePath,
-        StaticFileOptions options)
+        StaticFileOptions options
+    )
     {
         if (endpoints == null)
         {
@@ -193,18 +197,22 @@ public static class StaticFilesEndpointRouteBuilderExtensions
     private static RequestDelegate CreateRequestDelegate(
         IEndpointRouteBuilder endpoints,
         string filePath,
-        StaticFileOptions? options = null)
+        StaticFileOptions? options = null
+    )
     {
         var app = endpoints.CreateApplicationBuilder();
-        app.Use(next => context =>
-        {
-            context.Request.Path = "/" + filePath;
+        app.Use(
+            next =>
+                context =>
+                {
+                    context.Request.Path = "/" + filePath;
 
-            // Set endpoint to null so the static files middleware will handle the request.
-            context.SetEndpoint(null);
+                    // Set endpoint to null so the static files middleware will handle the request.
+                    context.SetEndpoint(null);
 
-            return next(context);
-        });
+                    return next(context);
+                }
+        );
 
         if (options == null)
         {

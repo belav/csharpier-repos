@@ -12,8 +12,21 @@ namespace System.Formats.Tar.Tests
         protected readonly string ModifiedEntryName = "ModifiedEntryName.ext";
 
         // Default values are what a TarEntry created with its constructor will set
-        protected const TarFileMode DefaultMode = TarFileMode.UserRead | TarFileMode.UserWrite | TarFileMode.GroupRead | TarFileMode.OtherRead; // 644 in octal, internally used as default
-        protected const TarFileMode DefaultWindowsMode = TarFileMode.UserRead | TarFileMode.UserWrite | TarFileMode.UserExecute | TarFileMode.GroupRead | TarFileMode.GroupWrite | TarFileMode.GroupExecute | TarFileMode.OtherRead | TarFileMode.OtherWrite | TarFileMode.UserExecute; // Creating archives in Windows always sets the mode to 777
+        protected const TarFileMode DefaultMode =
+            TarFileMode.UserRead
+            | TarFileMode.UserWrite
+            | TarFileMode.GroupRead
+            | TarFileMode.OtherRead; // 644 in octal, internally used as default
+        protected const TarFileMode DefaultWindowsMode =
+            TarFileMode.UserRead
+            | TarFileMode.UserWrite
+            | TarFileMode.UserExecute
+            | TarFileMode.GroupRead
+            | TarFileMode.GroupWrite
+            | TarFileMode.GroupExecute
+            | TarFileMode.OtherRead
+            | TarFileMode.OtherWrite
+            | TarFileMode.UserExecute; // Creating archives in Windows always sets the mode to 777
         protected const int DefaultGid = 0;
         protected const int DefaultUid = 0;
         protected const int DefaultDeviceMajor = 0;
@@ -29,11 +42,41 @@ namespace System.Formats.Tar.Tests
         protected const int TestBlockDeviceMinor = 65;
         protected const int TestCharacterDeviceMajor = 51;
         protected const int TestCharacterDeviceMinor = 42;
-        protected readonly DateTimeOffset TestModificationTime = new DateTimeOffset(2003, 3, 3, 3, 33, 33, TimeSpan.Zero);
-        protected readonly DateTimeOffset TestAccessTime = new DateTimeOffset(2022, 2, 2, 2, 22, 22, TimeSpan.Zero);
-        protected readonly DateTimeOffset TestChangeTime = new DateTimeOffset(2011, 11, 11, 11, 11, 11, TimeSpan.Zero);
+        protected readonly DateTimeOffset TestModificationTime = new DateTimeOffset(
+            2003,
+            3,
+            3,
+            3,
+            33,
+            33,
+            TimeSpan.Zero
+        );
+        protected readonly DateTimeOffset TestAccessTime = new DateTimeOffset(
+            2022,
+            2,
+            2,
+            2,
+            22,
+            22,
+            TimeSpan.Zero
+        );
+        protected readonly DateTimeOffset TestChangeTime = new DateTimeOffset(
+            2011,
+            11,
+            11,
+            11,
+            11,
+            11,
+            TimeSpan.Zero
+        );
         protected readonly string TestLinkName = "TestLinkName";
-        protected const TarFileMode TestMode = TarFileMode.UserRead | TarFileMode.UserWrite | TarFileMode.GroupRead | TarFileMode.GroupWrite | TarFileMode.OtherRead | TarFileMode.OtherWrite;
+        protected const TarFileMode TestMode =
+            TarFileMode.UserRead
+            | TarFileMode.UserWrite
+            | TarFileMode.GroupRead
+            | TarFileMode.GroupWrite
+            | TarFileMode.OtherRead
+            | TarFileMode.OtherWrite;
         protected readonly DateTimeOffset TestTimestamp = DateTimeOffset.Now;
         protected const string TestGName = "group";
         protected const string TestUName = "user";
@@ -47,9 +90,27 @@ namespace System.Formats.Tar.Tests
         protected const int AssetBlockDeviceMinor = 53;
         protected const int AssetCharacterDeviceMajor = 49;
         protected const int AssetCharacterDeviceMinor = 86;
-        protected const TarFileMode AssetMode = TarFileMode.UserRead | TarFileMode.UserWrite | TarFileMode.UserExecute | TarFileMode.GroupRead | TarFileMode.OtherRead;
-        protected const TarFileMode AssetSpecialFileMode = TarFileMode.UserRead | TarFileMode.UserWrite | TarFileMode.GroupRead | TarFileMode.OtherRead;
-        protected const TarFileMode AssetSymbolicLinkMode = TarFileMode.OtherExecute | TarFileMode.OtherWrite | TarFileMode.OtherRead | TarFileMode.GroupExecute | TarFileMode.GroupWrite | TarFileMode.GroupRead | TarFileMode.UserExecute | TarFileMode.UserWrite | TarFileMode.UserRead;
+        protected const TarFileMode AssetMode =
+            TarFileMode.UserRead
+            | TarFileMode.UserWrite
+            | TarFileMode.UserExecute
+            | TarFileMode.GroupRead
+            | TarFileMode.OtherRead;
+        protected const TarFileMode AssetSpecialFileMode =
+            TarFileMode.UserRead
+            | TarFileMode.UserWrite
+            | TarFileMode.GroupRead
+            | TarFileMode.OtherRead;
+        protected const TarFileMode AssetSymbolicLinkMode =
+            TarFileMode.OtherExecute
+            | TarFileMode.OtherWrite
+            | TarFileMode.OtherRead
+            | TarFileMode.GroupExecute
+            | TarFileMode.GroupWrite
+            | TarFileMode.GroupRead
+            | TarFileMode.UserExecute
+            | TarFileMode.UserWrite
+            | TarFileMode.UserRead;
         protected const string AssetGName = "devdiv";
         protected const string AssetUName = "dotnet";
         protected const string AssetPaxGeaKey = "globexthdr.MyGlobalExtendedAttribute";
@@ -59,6 +120,7 @@ namespace System.Formats.Tar.Tests
         {
             // Archiving only, no compression
             Uncompressed,
+
             // Archive compressed with Gzip
             GZip,
         }
@@ -68,14 +130,19 @@ namespace System.Formats.Tar.Tests
         {
             // V7 formatted files.
             v7,
+
             // UStar formatted files.
             ustar,
+
             // PAX formatted files.
             pax,
+
             // PAX formatted files that include a single Global Extended Attributes entry in the first position.
             pax_gea,
+
             // Old GNU formatted files. Format used by GNU tar of versions prior to 1.12.
             oldgnu,
+
             // GNU formatted files. Format used by GNU tar versions up to 1.13.25.
             gnu
         }
@@ -83,29 +150,45 @@ namespace System.Formats.Tar.Tests
         protected static string GetTestCaseUnarchivedFolderPath(string testCaseName) =>
             Path.Join(Directory.GetCurrentDirectory(), "unarchived", testCaseName);
 
-        protected static string GetTarFilePath(CompressionMethod compressionMethod, TestTarFormat format, string testCaseName)
+        protected static string GetTarFilePath(
+            CompressionMethod compressionMethod,
+            TestTarFormat format,
+            string testCaseName
+        )
         {
             (string compressionMethodFolder, string fileExtension) = compressionMethod switch
             {
                 CompressionMethod.Uncompressed => ("tar", ".tar"),
                 CompressionMethod.GZip => ("targz", ".tar.gz"),
-                _ => throw new InvalidOperationException($"Unexpected compression method: {compressionMethod}"),
+                _
+                    => throw new InvalidOperationException(
+                        $"Unexpected compression method: {compressionMethod}"
+                    ),
             };
 
-            return Path.Join(Directory.GetCurrentDirectory(), compressionMethodFolder, format.ToString(), testCaseName + fileExtension);
+            return Path.Join(
+                Directory.GetCurrentDirectory(),
+                compressionMethodFolder,
+                format.ToString(),
+                testCaseName + fileExtension
+            );
         }
 
         // MemoryStream containing the copied contents of the specified file. Meant for reading and writing.
-        protected static MemoryStream GetTarMemoryStream(CompressionMethod compressionMethod, TestTarFormat format, string testCaseName)
+        protected static MemoryStream GetTarMemoryStream(
+            CompressionMethod compressionMethod,
+            TestTarFormat format,
+            string testCaseName
+        )
         {
             string path = GetTarFilePath(compressionMethod, format, testCaseName);
-            FileStreamOptions options = new()
-            {
-                Access = FileAccess.Read,
-                Mode = FileMode.Open,
-                Share = FileShare.Read
-
-            };
+            FileStreamOptions options =
+                new()
+                {
+                    Access = FileAccess.Read,
+                    Mode = FileMode.Open,
+                    Share = FileShare.Read
+                };
             MemoryStream ms = new();
             using (FileStream fs = new FileStream(path, options))
             {
@@ -118,7 +201,9 @@ namespace System.Formats.Tar.Tests
         protected void SetCommonRegularFile(TarEntry regularFile, bool isV7RegularFile = false)
         {
             Assert.NotNull(regularFile);
-            TarEntryType entryType = isV7RegularFile ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+            TarEntryType entryType = isV7RegularFile
+                ? TarEntryType.V7RegularFile
+                : TarEntryType.RegularFile;
 
             Assert.Equal(entryType, regularFile.EntryType);
             SetCommonProperties(regularFile);
@@ -176,7 +261,9 @@ namespace System.Formats.Tar.Tests
             DateTimeOffset approxNow = DateTimeOffset.Now.Subtract(TimeSpan.FromHours(6));
             Assert.True(entry.ModificationTime > approxNow);
 
-            Assert.Throws<ArgumentOutOfRangeException>(() => entry.ModificationTime = DateTime.MinValue); // Minimum allowed is UnixEpoch, not MinValue
+            Assert.Throws<ArgumentOutOfRangeException>(
+                () => entry.ModificationTime = DateTime.MinValue
+            ); // Minimum allowed is UnixEpoch, not MinValue
             entry.ModificationTime = TestModificationTime;
 
             // Name
@@ -188,10 +275,16 @@ namespace System.Formats.Tar.Tests
             entry.Uid = TestUid;
         }
 
-        protected void VerifyCommonRegularFile(TarEntry regularFile, bool isFromWriter, bool isV7RegularFile = false)
+        protected void VerifyCommonRegularFile(
+            TarEntry regularFile,
+            bool isFromWriter,
+            bool isV7RegularFile = false
+        )
         {
             Assert.NotNull(regularFile);
-            TarEntryType entryType = isV7RegularFile ? TarEntryType.V7RegularFile : TarEntryType.RegularFile;
+            TarEntryType entryType = isV7RegularFile
+                ? TarEntryType.V7RegularFile
+                : TarEntryType.RegularFile;
             Assert.Equal(entryType, regularFile.EntryType);
             VerifyCommonProperties(regularFile);
             VerifyUnsupportedLinkProperty(regularFile);

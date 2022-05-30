@@ -22,18 +22,28 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignments
 {
-    [ExportLanguageService(typeof(IReplaceDiscardDeclarationsWithAssignmentsService), LanguageNames.CSharp), Shared]
-    internal sealed class CSharpReplaceDiscardDeclarationsWithAssignmentsService : IReplaceDiscardDeclarationsWithAssignmentsService
+    [
+        ExportLanguageService(
+            typeof(IReplaceDiscardDeclarationsWithAssignmentsService),
+            LanguageNames.CSharp
+        ),
+        Shared
+    ]
+    internal sealed class CSharpReplaceDiscardDeclarationsWithAssignmentsService
+        : IReplaceDiscardDeclarationsWithAssignmentsService
     {
         private const string DiscardVariableName = "_";
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public CSharpReplaceDiscardDeclarationsWithAssignmentsService()
-        {
-        }
+        public CSharpReplaceDiscardDeclarationsWithAssignmentsService() { }
 
-        public Task<SyntaxNode> ReplaceAsync(SyntaxNode memberDeclaration, SemanticModel semanticModel, HostWorkspaceServices services, CancellationToken cancellationToken)
+        public Task<SyntaxNode> ReplaceAsync(
+            SyntaxNode memberDeclaration,
+            SemanticModel semanticModel,
+            HostWorkspaceServices services,
+            CancellationToken cancellationToken
+        )
         {
             var editor = new SyntaxEditor(memberDeclaration, services);
             foreach (var child in memberDeclaration.DescendantNodes())
@@ -41,9 +51,16 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 switch (child)
                 {
                     case LocalDeclarationStatementSyntax localDeclarationStatement:
-                        if (localDeclarationStatement.Declaration.Variables.Any(IsDiscardDeclaration))
+                        if (
+                            localDeclarationStatement.Declaration.Variables.Any(
+                                IsDiscardDeclaration
+                            )
+                        )
                         {
-                            RemoveDiscardHelper.ProcessDeclarationStatement(localDeclarationStatement, editor);
+                            RemoveDiscardHelper.ProcessDeclarationStatement(
+                                localDeclarationStatement,
+                                editor
+                            );
                         }
 
                         break;
@@ -52,13 +69,19 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                         if (IsDiscardDeclaration(catchDeclaration))
                         {
                             // "catch (Exception _)" => "catch (Exception)"
-                            editor.ReplaceNode(catchDeclaration, catchDeclaration.WithIdentifier(default));
+                            editor.ReplaceNode(
+                                catchDeclaration,
+                                catchDeclaration.WithIdentifier(default)
+                            );
                         }
 
                         break;
 
                     case DeclarationExpressionSyntax declarationExpression:
-                        if (declarationExpression.Designation is DiscardDesignationSyntax discardSyntax)
+                        if (
+                            declarationExpression.Designation
+                            is DiscardDesignationSyntax discardSyntax
+                        )
                         {
                             // "M(out var _)" => "M(out _)"
                             // "M(out int _)" => "M(out _)"
@@ -68,15 +91,20 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                                 contextualKind: SyntaxKind.UnderscoreToken,
                                 text: discardSyntax.UnderscoreToken.Text,
                                 valueText: discardSyntax.UnderscoreToken.ValueText,
-                                trailing: declarationExpression.GetTrailingTrivia());
+                                trailing: declarationExpression.GetTrailingTrivia()
+                            );
                             var replacementNode = SyntaxFactory.IdentifierName(discardToken);
 
                             // Removing explicit type is possible only if there are no overloads of the method with same parameter.
                             // For example, if method "M" had overloads with signature "void M(int x)" and "void M(char x)",
                             // then the replacement "M(out int _)" => "M(out _)" will cause overload resolution error.
                             // Bail out if replacement changes semantics.
-                            var speculationAnalyzer = new SpeculationAnalyzer(declarationExpression,
-                                replacementNode, semanticModel, cancellationToken);
+                            var speculationAnalyzer = new SpeculationAnalyzer(
+                                declarationExpression,
+                                replacementNode,
+                                semanticModel,
+                                cancellationToken
+                            );
                             if (!speculationAnalyzer.ReplacementChangesSemantics())
                             {
                                 editor.ReplaceNode(declarationExpression, replacementNode);
@@ -86,15 +114,22 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                         break;
 
                     case DeclarationPatternSyntax declarationPattern:
-                        if (declarationPattern.Designation is DiscardDesignationSyntax discardDesignationSyntax &&
-                            declarationPattern.Parent is IsPatternExpressionSyntax isPatternExpression)
+                        if (
+                            declarationPattern.Designation
+                                is DiscardDesignationSyntax discardDesignationSyntax
+                            && declarationPattern.Parent
+                                is IsPatternExpressionSyntax isPatternExpression
+                        )
                         {
                             // "x is int _" => "x is int"
                             var replacementNode = SyntaxFactory.BinaryExpression(
                                 kind: SyntaxKind.IsExpression,
                                 left: isPatternExpression.Expression,
                                 operatorToken: isPatternExpression.IsKeyword,
-                                right: declarationPattern.Type.WithTrailingTrivia(declarationPattern.GetTrailingTrivia()));
+                                right: declarationPattern.Type.WithTrailingTrivia(
+                                    declarationPattern.GetTrailingTrivia()
+                                )
+                            );
                             editor.ReplaceNode(isPatternExpression, replacementNode);
                         }
 
@@ -105,19 +140,24 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
             return Task.FromResult(editor.GetChangedRoot());
         }
 
-        private static bool IsDiscardDeclaration(VariableDeclaratorSyntax variable)
-            => variable.Identifier.Text == DiscardVariableName;
-        private static bool IsDiscardDeclaration(CatchDeclarationSyntax catchDeclaration)
-            => catchDeclaration.Identifier.Text == DiscardVariableName;
+        private static bool IsDiscardDeclaration(VariableDeclaratorSyntax variable) =>
+            variable.Identifier.Text == DiscardVariableName;
+
+        private static bool IsDiscardDeclaration(CatchDeclarationSyntax catchDeclaration) =>
+            catchDeclaration.Identifier.Text == DiscardVariableName;
 
         private sealed class RemoveDiscardHelper : IDisposable
         {
             private readonly LocalDeclarationStatementSyntax _localDeclarationStatement;
             private readonly SyntaxEditor _editor;
             private readonly ArrayBuilder<StatementSyntax> _statementsBuilder;
-            private SeparatedSyntaxList<VariableDeclaratorSyntax> _currentNonDiscardVariables = new();
+            private SeparatedSyntaxList<VariableDeclaratorSyntax> _currentNonDiscardVariables =
+                new();
 
-            private RemoveDiscardHelper(LocalDeclarationStatementSyntax localDeclarationStatement, SyntaxEditor editor)
+            private RemoveDiscardHelper(
+                LocalDeclarationStatementSyntax localDeclarationStatement,
+                SyntaxEditor editor
+            )
             {
                 _localDeclarationStatement = localDeclarationStatement;
                 _editor = editor;
@@ -127,7 +167,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
             public static void ProcessDeclarationStatement(
                 LocalDeclarationStatementSyntax localDeclarationStatement,
-                SyntaxEditor editor)
+                SyntaxEditor editor
+            )
             {
                 using var helper = new RemoveDiscardHelper(localDeclarationStatement, editor);
                 helper.ProcessDeclarationStatement();
@@ -148,7 +189,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 // variable declaration at a line following the one we added a discard assignment in our fix.
 
                 // Process all the declared variables in the given local declaration statement,
-                // tracking the currently encountered non-discard variables. 
+                // tracking the currently encountered non-discard variables.
                 foreach (var variable in _localDeclarationStatement.Declaration.Variables)
                 {
                     if (!IsDiscardDeclaration(variable))
@@ -183,7 +224,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
 
                 // Move the leading trivia from original local declaration statement
                 // to the first statement of the replacement statement list.
-                var leadingTrivia = _localDeclarationStatement.Declaration.Type.GetLeadingTrivia()
+                var leadingTrivia = _localDeclarationStatement.Declaration.Type
+                    .GetLeadingTrivia()
                     .Concat(_localDeclarationStatement.Declaration.Type.GetTrailingTrivia());
                 _statementsBuilder[0] = _statementsBuilder[0].WithLeadingTrivia(leadingTrivia);
 
@@ -191,7 +233,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 // to the last statement of the replacement statement list.
                 var last = _statementsBuilder.Count - 1;
                 var trailingTrivia = _localDeclarationStatement.SemicolonToken.GetAllTrivia();
-                _statementsBuilder[last] = _statementsBuilder[last].WithTrailingTrivia(trailingTrivia);
+                _statementsBuilder[last] = _statementsBuilder[last].WithTrailingTrivia(
+                    trailingTrivia
+                );
 
                 // Replace the original local declaration statement with new statement list
                 // from _statementsBuilder.
@@ -206,7 +250,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 }
                 else
                 {
-                    _editor.ReplaceNode(_localDeclarationStatement, SyntaxFactory.Block(_statementsBuilder));
+                    _editor.ReplaceNode(
+                        _localDeclarationStatement,
+                        SyntaxFactory.Block(_statementsBuilder)
+                    );
                 }
             }
 
@@ -219,11 +266,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 // which are split by a single assignment statement "_ = M();"
                 if (_currentNonDiscardVariables.Count > 0)
                 {
-                    var statement = SyntaxFactory.LocalDeclarationStatement(
-                                        SyntaxFactory.VariableDeclaration(_localDeclarationStatement.Declaration.Type, _currentNonDiscardVariables))
-                                    .WithAdditionalAnnotations(Formatter.Annotation);
+                    var statement = SyntaxFactory
+                        .LocalDeclarationStatement(
+                            SyntaxFactory.VariableDeclaration(
+                                _localDeclarationStatement.Declaration.Type,
+                                _currentNonDiscardVariables
+                            )
+                        )
+                        .WithAdditionalAnnotations(Formatter.Annotation);
                     _statementsBuilder.Add(statement);
-                    _currentNonDiscardVariables = new SeparatedSyntaxList<VariableDeclaratorSyntax>();
+                    _currentNonDiscardVariables =
+                        new SeparatedSyntaxList<VariableDeclaratorSyntax>();
                 }
             }
 
@@ -236,13 +289,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ReplaceDiscardDeclarationsWithAssignment
                 if (variable.Initializer != null)
                 {
                     _statementsBuilder.Add(
-                        SyntaxFactory.ExpressionStatement(
-                            SyntaxFactory.AssignmentExpression(
-                                kind: SyntaxKind.SimpleAssignmentExpression,
-                                left: SyntaxFactory.IdentifierName(variable.Identifier),
-                                operatorToken: variable.Initializer.EqualsToken,
-                                right: variable.Initializer.Value))
-                        .WithAdditionalAnnotations(Formatter.Annotation));
+                        SyntaxFactory
+                            .ExpressionStatement(
+                                SyntaxFactory.AssignmentExpression(
+                                    kind: SyntaxKind.SimpleAssignmentExpression,
+                                    left: SyntaxFactory.IdentifierName(variable.Identifier),
+                                    operatorToken: variable.Initializer.EqualsToken,
+                                    right: variable.Initializer.Value
+                                )
+                            )
+                            .WithAdditionalAnnotations(Formatter.Annotation)
+                    );
                 }
             }
         }

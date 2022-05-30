@@ -19,11 +19,16 @@ namespace System.Security.Principal
 
         internal static SafeLsaPolicyHandle LsaOpenPolicy(
             string? systemName,
-            Interop.Advapi32.PolicyRights rights)
+            Interop.Advapi32.PolicyRights rights
+        )
         {
-
             Interop.OBJECT_ATTRIBUTES attributes = default;
-            uint error = Interop.Advapi32.LsaOpenPolicy(systemName, ref attributes, (int)rights, out SafeLsaPolicyHandle policyHandle);
+            uint error = Interop.Advapi32.LsaOpenPolicy(
+                systemName,
+                ref attributes,
+                (int)rights,
+                out SafeLsaPolicyHandle policyHandle
+            );
             if (error == 0)
             {
                 return policyHandle;
@@ -32,8 +37,10 @@ namespace System.Security.Principal
             {
                 throw new UnauthorizedAccessException();
             }
-            else if (error == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES ||
-                      error == Interop.StatusOptions.STATUS_NO_MEMORY)
+            else if (
+                error == Interop.StatusOptions.STATUS_INSUFFICIENT_RESOURCES
+                || error == Interop.StatusOptions.STATUS_NO_MEMORY
+            )
             {
                 throw new OutOfMemoryException();
             }
@@ -44,7 +51,6 @@ namespace System.Security.Principal
                 throw new Win32Exception(unchecked((int)win32ErrorCode));
             }
         }
-
 
         internal static byte[] ConvertIntPtrSidToByteArraySid(IntPtr binaryForm)
         {
@@ -58,7 +64,10 @@ namespace System.Security.Principal
 
             if (Revision != SecurityIdentifier.Revision)
             {
-                throw new ArgumentException(SR.IdentityReference_InvalidSidRevision, nameof(binaryForm));
+                throw new ArgumentException(
+                    SR.IdentityReference_InvalidSidRevision,
+                    nameof(binaryForm)
+                );
             }
 
             //
@@ -67,10 +76,15 @@ namespace System.Security.Principal
 
             byte SubAuthorityCount = Marshal.ReadByte(binaryForm, 1);
 
-            if (SubAuthorityCount < 0 ||
-                SubAuthorityCount > SecurityIdentifier.MaxSubAuthorities)
+            if (SubAuthorityCount < 0 || SubAuthorityCount > SecurityIdentifier.MaxSubAuthorities)
             {
-                throw new ArgumentException(SR.Format(SR.IdentityReference_InvalidNumberOfSubauthorities, SecurityIdentifier.MaxSubAuthorities), nameof(binaryForm));
+                throw new ArgumentException(
+                    SR.Format(
+                        SR.IdentityReference_InvalidNumberOfSubauthorities,
+                        SecurityIdentifier.MaxSubAuthorities
+                    ),
+                    nameof(binaryForm)
+                );
             }
 
             //
@@ -94,17 +108,17 @@ namespace System.Security.Principal
         //
 
 
-        internal static int CreateSidFromString(
-            string stringSid,
-            out byte[]? resultSid
-            )
+        internal static int CreateSidFromString(string stringSid, out byte[]? resultSid)
         {
             int ErrorCode;
             IntPtr ByteArray = IntPtr.Zero;
 
             try
             {
-                if (Interop.BOOL.FALSE == Interop.Advapi32.ConvertStringSidToSid(stringSid, out ByteArray))
+                if (
+                    Interop.BOOL.FALSE
+                    == Interop.Advapi32.ConvertStringSidToSid(stringSid, out ByteArray)
+                )
                 {
                     ErrorCode = Marshal.GetLastWin32Error();
                     goto Error;
@@ -127,7 +141,7 @@ namespace System.Security.Principal
 
             return Interop.Errors.ERROR_SUCCESS;
 
-        Error:
+            Error:
 
             resultSid = null;
             return ErrorCode;
@@ -142,7 +156,7 @@ namespace System.Security.Principal
             WellKnownSidType sidType,
             SecurityIdentifier? domainSid,
             out byte[]? resultSid
-            )
+        )
         {
             //
             // Passing an array as big as it can ever be is a small price to pay for
@@ -152,7 +166,15 @@ namespace System.Security.Principal
             uint length = (uint)SecurityIdentifier.MaxBinaryLength;
             resultSid = new byte[length];
 
-            if (FALSE != Interop.Advapi32.CreateWellKnownSid((int)sidType, domainSid?.BinaryForm, resultSid, ref length))
+            if (
+                FALSE
+                != Interop.Advapi32.CreateWellKnownSid(
+                    (int)sidType,
+                    domainSid?.BinaryForm,
+                    resultSid,
+                    ref length
+                )
+            )
             {
                 return Interop.Errors.ERROR_SUCCESS;
             }
@@ -183,7 +205,12 @@ namespace System.Security.Principal
                 byte[] BinaryForm2 = new byte[sid2.BinaryLength];
                 sid2.GetBinaryForm(BinaryForm2, 0);
 
-                return (Interop.Advapi32.IsEqualDomainSid(BinaryForm1, BinaryForm2, out bool result) == FALSE ? false : result);
+                return (
+                    Interop.Advapi32.IsEqualDomainSid(BinaryForm1, BinaryForm2, out bool result)
+                    == FALSE
+                        ? false
+                        : result
+                );
             }
         }
 
@@ -193,7 +220,7 @@ namespace System.Security.Principal
         internal static int GetWindowsAccountDomainSid(
             SecurityIdentifier sid,
             out SecurityIdentifier? resultSid
-            )
+        )
         {
             //
             // Passing an array as big as it can ever be is a small price to pay for
@@ -205,7 +232,14 @@ namespace System.Security.Principal
             uint sidLength = (uint)SecurityIdentifier.MaxBinaryLength;
             byte[] resultSidBinary = new byte[sidLength];
 
-            if (FALSE != Interop.Advapi32.GetWindowsAccountDomainSid(BinaryForm, resultSidBinary, ref sidLength))
+            if (
+                FALSE
+                != Interop.Advapi32.GetWindowsAccountDomainSid(
+                    BinaryForm,
+                    resultSidBinary,
+                    ref sidLength
+                )
+            )
             {
                 resultSid = new SecurityIdentifier(resultSidBinary, 0);
 
@@ -224,10 +258,7 @@ namespace System.Security.Principal
         //
 
 
-        internal static bool IsWellKnownSid(
-            SecurityIdentifier sid,
-            WellKnownSidType type
-            )
+        internal static bool IsWellKnownSid(SecurityIdentifier sid, WellKnownSidType type)
         {
             byte[] BinaryForm = new byte[sid.BinaryLength];
             sid.GetBinaryForm(BinaryForm, 0);

@@ -22,8 +22,10 @@ public class KeyValuePairModelBinderProvider : IModelBinderProvider
         }
 
         var modelType = context.Metadata.ModelType;
-        if (modelType.IsGenericType &&
-            modelType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>))
+        if (
+            modelType.IsGenericType
+            && modelType.GetGenericTypeDefinition() == typeof(KeyValuePair<,>)
+        )
         {
             var typeArguments = modelType.GenericTypeArguments;
 
@@ -35,7 +37,8 @@ public class KeyValuePairModelBinderProvider : IModelBinderProvider
 
             var binderType = typeof(KeyValuePairModelBinder<,>).MakeGenericType(typeArguments);
             var loggerFactory = context.Services.GetRequiredService<ILoggerFactory>();
-            return (IModelBinder)Activator.CreateInstance(binderType, keyBinder, valueBinder, loggerFactory)!;
+            return (IModelBinder)
+                Activator.CreateInstance(binderType, keyBinder, valueBinder, loggerFactory)!;
         }
 
         return null;

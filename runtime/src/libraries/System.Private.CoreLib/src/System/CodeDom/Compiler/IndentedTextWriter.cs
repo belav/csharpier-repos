@@ -21,7 +21,8 @@ namespace System.CodeDom.Compiler
 
         public IndentedTextWriter(TextWriter writer) : this(writer, DefaultTabString) { }
 
-        public IndentedTextWriter(TextWriter writer, string tabString) : base(CultureInfo.InvariantCulture)
+        public IndentedTextWriter(TextWriter writer, string tabString)
+            : base(CultureInfo.InvariantCulture)
         {
             ArgumentNullException.ThrowIfNull(writer);
 
@@ -144,19 +145,29 @@ namespace System.CodeDom.Compiler
             _writer.Write(value);
         }
 
-        public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public override void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             OutputTabs();
             _writer.Write(format, arg0);
         }
 
-        public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public override void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             OutputTabs();
             _writer.Write(format, arg0, arg1);
         }
 
-        public override void Write([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] arg)
+        public override void Write(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] arg
+        )
         {
             OutputTabs();
             _writer.Write(format, arg);
@@ -208,7 +219,10 @@ namespace System.CodeDom.Compiler
         /// <param name="buffer">The characters to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+        public override async Task WriteAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteAsync(buffer, cancellationToken).ConfigureAwait(false);
@@ -221,7 +235,10 @@ namespace System.CodeDom.Compiler
         /// <param name="value">The text to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+        public override async Task WriteAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        )
         {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteAsync(value, cancellationToken).ConfigureAwait(false);
@@ -319,21 +336,31 @@ namespace System.CodeDom.Compiler
             _tabsPending = true;
         }
 
-        public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0)
+        public override void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0
+        )
         {
             OutputTabs();
             _writer.WriteLine(format, arg0);
             _tabsPending = true;
         }
 
-        public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, object? arg0, object? arg1)
+        public override void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            object? arg0,
+            object? arg1
+        )
         {
             OutputTabs();
             _writer.WriteLine(format, arg0, arg1);
             _tabsPending = true;
         }
 
-        public override void WriteLine([StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format, params object?[] arg)
+        public override void WriteLine(
+            [StringSyntax(StringSyntaxAttribute.CompositeFormat)] string format,
+            params object?[] arg
+        )
         {
             OutputTabs();
             _writer.WriteLine(format, arg);
@@ -404,7 +431,10 @@ namespace System.CodeDom.Compiler
         /// <param name="buffer">The characters to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteLineAsync(ReadOnlyMemory<char> buffer, CancellationToken cancellationToken = default)
+        public override async Task WriteLineAsync(
+            ReadOnlyMemory<char> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteLineAsync(buffer, cancellationToken).ConfigureAwait(false);
@@ -418,7 +448,10 @@ namespace System.CodeDom.Compiler
         /// <param name="value">The text to write.</param>
         /// <param name="cancellationToken">Token for canceling the operation.</param>
         /// <returns>A <see cref="Task"/> representing the asynchronous operation.</returns>
-        public override async Task WriteLineAsync(StringBuilder? value, CancellationToken cancellationToken = default)
+        public override async Task WriteLineAsync(
+            StringBuilder? value,
+            CancellationToken cancellationToken = default
+        )
         {
             await OutputTabsAsync().ConfigureAwait(false);
             await _writer.WriteLineAsync(value, cancellationToken).ConfigureAwait(false);

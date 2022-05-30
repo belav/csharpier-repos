@@ -6,36 +6,34 @@ namespace Microsoft.EntityFrameworkCore;
 public abstract class TransactionInterceptionSqliteTestBase : TransactionInterceptionTestBase
 {
     protected TransactionInterceptionSqliteTestBase(InterceptionSqliteFixtureBase fixture)
-        : base(fixture)
-    {
-    }
+        : base(fixture) { }
 
     public abstract class InterceptionSqliteFixtureBase : InterceptionFixtureBase
     {
-        protected override string StoreName
-            => "TransactionInterception";
+        protected override string StoreName => "TransactionInterception";
 
-        protected override ITestStoreFactory TestStoreFactory
-            => SqliteTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => SqliteTestStoreFactory.Instance;
 
         protected override IServiceCollection InjectInterceptors(
             IServiceCollection serviceCollection,
-            IEnumerable<IInterceptor> injectedInterceptors)
-            => base.InjectInterceptors(serviceCollection.AddEntityFrameworkSqlite(), injectedInterceptors);
+            IEnumerable<IInterceptor> injectedInterceptors
+        ) =>
+            base.InjectInterceptors(
+                serviceCollection.AddEntityFrameworkSqlite(),
+                injectedInterceptors
+            );
     }
 
     public class TransactionInterceptionSqliteTest
-        : TransactionInterceptionSqliteTestBase, IClassFixture<TransactionInterceptionSqliteTest.InterceptionSqliteFixture>
+        : TransactionInterceptionSqliteTestBase,
+            IClassFixture<TransactionInterceptionSqliteTest.InterceptionSqliteFixture>
     {
-        public TransactionInterceptionSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+        public TransactionInterceptionSqliteTest(InterceptionSqliteFixture fixture) : base(fixture)
+        { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => false;
+            protected override bool ShouldSubscribeToDiagnosticListener => false;
         }
     }
 
@@ -44,14 +42,11 @@ public abstract class TransactionInterceptionSqliteTestBase : TransactionInterce
             IClassFixture<TransactionInterceptionWithDiagnosticsSqliteTest.InterceptionSqliteFixture>
     {
         public TransactionInterceptionWithDiagnosticsSqliteTest(InterceptionSqliteFixture fixture)
-            : base(fixture)
-        {
-        }
+            : base(fixture) { }
 
         public class InterceptionSqliteFixture : InterceptionSqliteFixtureBase
         {
-            protected override bool ShouldSubscribeToDiagnosticListener
-                => true;
+            protected override bool ShouldSubscribeToDiagnosticListener => true;
         }
     }
 }

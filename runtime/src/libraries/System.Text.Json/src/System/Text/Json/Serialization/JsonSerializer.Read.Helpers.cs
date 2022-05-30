@@ -9,7 +9,12 @@ namespace System.Text.Json
 {
     public static partial class JsonSerializer
     {
-        private static TValue? ReadCore<TValue>(JsonConverter jsonConverter, ref Utf8JsonReader reader, JsonSerializerOptions options, ref ReadStack state)
+        private static TValue? ReadCore<TValue>(
+            JsonConverter jsonConverter,
+            ref Utf8JsonReader reader,
+            JsonSerializerOptions options,
+            ref ReadStack state
+        )
         {
             if (jsonConverter is JsonConverter<TValue> converter)
             {
@@ -23,7 +28,11 @@ namespace System.Text.Json
             return (TValue?)value;
         }
 
-        private static TValue? ReadFromSpan<TValue>(ReadOnlySpan<byte> utf8Json, JsonTypeInfo jsonTypeInfo, int? actualByteCount = null)
+        private static TValue? ReadFromSpan<TValue>(
+            ReadOnlySpan<byte> utf8Json,
+            JsonTypeInfo jsonTypeInfo,
+            int? actualByteCount = null
+        )
         {
             JsonSerializerOptions options = jsonTypeInfo.Options;
 

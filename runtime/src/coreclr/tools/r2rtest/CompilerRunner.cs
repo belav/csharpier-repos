@@ -31,11 +31,22 @@ namespace R2RTest
         {
             new FrameworkExclusion(ExclusionType.Ignore, "CommandLine", "Not a framework assembly"),
             new FrameworkExclusion(ExclusionType.Ignore, "R2RDump", "Not a framework assembly"),
-
             // TODO (DavidWr): IBC-related failures
-            new FrameworkExclusion(ExclusionType.DontCrossgen2, "Microsoft.CodeAnalysis.CSharp", "Ibc TypeToken 6200019a has type token which resolves to a nil token"),
-            new FrameworkExclusion(ExclusionType.DontCrossgen2, "Microsoft.CodeAnalysis", "Ibc TypeToken 620001af unable to find external typedef"),
-            new FrameworkExclusion(ExclusionType.DontCrossgen2, "Microsoft.CodeAnalysis.VisualBasic", "Ibc TypeToken 620002ce unable to find external typedef"),
+            new FrameworkExclusion(
+                ExclusionType.DontCrossgen2,
+                "Microsoft.CodeAnalysis.CSharp",
+                "Ibc TypeToken 6200019a has type token which resolves to a nil token"
+            ),
+            new FrameworkExclusion(
+                ExclusionType.DontCrossgen2,
+                "Microsoft.CodeAnalysis",
+                "Ibc TypeToken 620001af unable to find external typedef"
+            ),
+            new FrameworkExclusion(
+                ExclusionType.DontCrossgen2,
+                "Microsoft.CodeAnalysis.VisualBasic",
+                "Ibc TypeToken 620002ce unable to find external typedef"
+            ),
         };
 
         public readonly ExclusionType ExclusionType;
@@ -51,15 +62,22 @@ namespace R2RTest
 
         public static FrameworkExclusion Find(string simpleName)
         {
-            return s_list.FirstOrDefault(fe => StringComparer.OrdinalIgnoreCase.Equals(simpleName, fe.SimpleName));
+            return s_list.FirstOrDefault(
+                fe => StringComparer.OrdinalIgnoreCase.Equals(simpleName, fe.SimpleName)
+            );
         }
 
         public static bool Exclude(string simpleName, CompilerIndex index, out string reason)
         {
             FrameworkExclusion exclusion = Find(simpleName);
-            if (exclusion != null &&
-                (exclusion.ExclusionType == ExclusionType.Ignore ||
-                exclusion.ExclusionType == ExclusionType.DontCrossgen2 && index == CompilerIndex.CPAOT))
+            if (
+                exclusion != null
+                && (
+                    exclusion.ExclusionType == ExclusionType.Ignore
+                    || exclusion.ExclusionType == ExclusionType.DontCrossgen2
+                        && index == CompilerIndex.CPAOT
+                )
+            )
             {
                 reason = exclusion.Reason;
                 return true;
@@ -87,7 +105,11 @@ namespace R2RTest
         protected readonly List<string> _referenceFolders = new List<string>();
         protected readonly string _overrideOutputPath;
 
-        public CompilerRunner(BuildOptions options, IEnumerable<string> references, string overrideOutputPath = null)
+        public CompilerRunner(
+            BuildOptions options,
+            IEnumerable<string> references,
+            string overrideOutputPath = null
+        )
         {
             _options = options;
             _overrideOutputPath = overrideOutputPath;
@@ -107,14 +129,25 @@ namespace R2RTest
 
         public string CompilerName => Index.ToString();
 
-        protected abstract string CompilerRelativePath { get;  }
+        protected abstract string CompilerRelativePath { get; }
         protected abstract string CompilerFileName { get; }
 
-        protected virtual string CompilerPath => Path.Combine(_options.CoreRootDirectory.FullName, CompilerRelativePath, CompilerFileName);
+        protected virtual string CompilerPath =>
+            Path.Combine(
+                _options.CoreRootDirectory.FullName,
+                CompilerRelativePath,
+                CompilerFileName
+            );
 
-        protected abstract IEnumerable<string> BuildCommandLineArguments(IEnumerable<string> assemblyFileNames, string outputFileName);
+        protected abstract IEnumerable<string> BuildCommandLineArguments(
+            IEnumerable<string> assemblyFileNames,
+            string outputFileName
+        );
 
-        public virtual ProcessParameters CompilationProcess(string outputFileName, IEnumerable<string> inputAssemblyFileNames)
+        public virtual ProcessParameters CompilationProcess(
+            string outputFileName,
+            IEnumerable<string> inputAssemblyFileNames
+        )
         {
             Directory.CreateDirectory(Path.GetDirectoryName(outputFileName));
 
@@ -127,11 +160,16 @@ namespace R2RTest
             processParameters.Arguments = $"@{responseFile}";
             if (_options.CompilationTimeoutMinutes != 0)
             {
-                processParameters.TimeoutMilliseconds = _options.CompilationTimeoutMinutes * 60 * 1000;
+                processParameters.TimeoutMilliseconds =
+                    _options.CompilationTimeoutMinutes * 60 * 1000;
             }
             else
             {
-                processParameters.TimeoutMilliseconds = (_options.Composite ? ProcessParameters.DefaultIlcCompositeTimeout : ProcessParameters.DefaultIlcTimeout);
+                processParameters.TimeoutMilliseconds = (
+                    _options.Composite
+                        ? ProcessParameters.DefaultIlcCompositeTimeout
+                        : ProcessParameters.DefaultIlcTimeout
+                );
             }
             processParameters.LogPath = outputFileName + ".ilc.log";
             processParameters.InputFileNames = inputAssemblyFileNames;
@@ -201,7 +239,11 @@ namespace R2RTest
             return param;
         }
 
-        protected virtual ProcessParameters ExecutionProcess(IEnumerable<string> modules, IEnumerable<string> folders, bool noEtw)
+        protected virtual ProcessParameters ExecutionProcess(
+            IEnumerable<string> modules,
+            IEnumerable<string> folders,
+            bool noEtw
+        )
         {
             ProcessParameters processParameters = new ProcessParameters();
 
@@ -212,7 +254,8 @@ namespace R2RTest
 
             if (_options.ExecutionTimeoutMinutes != 0)
             {
-                processParameters.TimeoutMilliseconds = _options.ExecutionTimeoutMinutes * 60 * 1000;
+                processParameters.TimeoutMilliseconds =
+                    _options.ExecutionTimeoutMinutes * 60 * 1000;
             }
             else if (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("__GCSTRESSLEVEL")))
             {
@@ -236,10 +279,19 @@ namespace R2RTest
             return processParameters;
         }
 
-        public virtual ProcessParameters ScriptExecutionProcess(string outputRoot, string scriptPath, IEnumerable<string> modules, IEnumerable<string> folders)
+        public virtual ProcessParameters ScriptExecutionProcess(
+            string outputRoot,
+            string scriptPath,
+            IEnumerable<string> modules,
+            IEnumerable<string> folders
+        )
         {
             string scriptToRun = GetOutputFileName(outputRoot, scriptPath);
-            ProcessParameters processParameters = ExecutionProcess(modules, folders, _options.NoEtw);
+            ProcessParameters processParameters = ExecutionProcess(
+                modules,
+                folders,
+                _options.NoEtw
+            );
 
             if (RuntimeInformation.IsOSPlatform(OSPlatform.Windows))
             {
@@ -271,10 +323,19 @@ namespace R2RTest
             return processParameters;
         }
 
-        public virtual ProcessParameters AppExecutionProcess(string outputRoot, string appPath, IEnumerable<string> modules, IEnumerable<string> folders)
+        public virtual ProcessParameters AppExecutionProcess(
+            string outputRoot,
+            string appPath,
+            IEnumerable<string> modules,
+            IEnumerable<string> folders
+        )
         {
             string exeToRun = GetOutputFileName(outputRoot, appPath);
-            ProcessParameters processParameters = ExecutionProcess(modules, folders, _options.NoEtw);
+            ProcessParameters processParameters = ExecutionProcess(
+                modules,
+                folders,
+                _options.NoEtw
+            );
             processParameters.ProcessPath = _options.CoreRunPath(Index, isFramework: false);
             processParameters.Arguments = exeToRun;
             processParameters.InputFileNames = new string[] { exeToRun };
@@ -293,7 +354,10 @@ namespace R2RTest
             }
         }
 
-        protected void CreateResponseFile(string responseFile, IEnumerable<string> commandLineArguments)
+        protected void CreateResponseFile(
+            string responseFile,
+            IEnumerable<string> commandLineArguments
+        )
         {
             using (TextWriter tw = File.CreateText(responseFile))
             {
@@ -304,7 +368,9 @@ namespace R2RTest
             }
         }
 
-        public string GetOutputPath(string outputRoot) => _overrideOutputPath ?? Path.Combine(outputRoot, CompilerName + _options.ConfigurationSuffix);
+        public string GetOutputPath(string outputRoot) =>
+            _overrideOutputPath
+            ?? Path.Combine(outputRoot, CompilerName + _options.ConfigurationSuffix);
 
         // <input>\a.dll -> <output>\a.dll
         public string GetOutputFileName(string outputRoot, string fileName) =>
@@ -329,8 +395,11 @@ namespace R2RTest
         private readonly string _outputFileName;
         private readonly IEnumerable<string> _inputAssemblyFileNames;
 
-        public CompilationProcessConstructor(CompilerRunner runner, string outputFileName, IEnumerable<string> inputAssemblyFileNames)
-            : base(runner)
+        public CompilationProcessConstructor(
+            CompilerRunner runner,
+            string outputFileName,
+            IEnumerable<string> inputAssemblyFileNames
+        ) : base(runner)
         {
             _outputFileName = outputFileName;
             _inputAssemblyFileNames = inputAssemblyFileNames;
@@ -347,8 +416,11 @@ namespace R2RTest
         private readonly string _compiledExecutable;
         private readonly bool _naked;
 
-        public R2RDumpProcessConstructor(CompilerRunner runner, string compiledExecutable, bool naked)
-            : base(runner)
+        public R2RDumpProcessConstructor(
+            CompilerRunner runner,
+            string compiledExecutable,
+            bool naked
+        ) : base(runner)
         {
             _compiledExecutable = compiledExecutable;
             _naked = naked;
@@ -367,8 +439,13 @@ namespace R2RTest
         private readonly IEnumerable<string> _modules;
         private readonly IEnumerable<string> _folders;
 
-        public ScriptExecutionProcessConstructor(CompilerRunner runner, string outputRoot, string scriptPath, IEnumerable<string> modules, IEnumerable<string> folders)
-            : base(runner)
+        public ScriptExecutionProcessConstructor(
+            CompilerRunner runner,
+            string outputRoot,
+            string scriptPath,
+            IEnumerable<string> modules,
+            IEnumerable<string> folders
+        ) : base(runner)
         {
             _outputRoot = outputRoot;
             _scriptPath = scriptPath;
@@ -378,7 +455,12 @@ namespace R2RTest
 
         public override ProcessParameters Construct()
         {
-            ProcessParameters processParameters = _runner.ScriptExecutionProcess(_outputRoot, _scriptPath, _modules, _folders);
+            ProcessParameters processParameters = _runner.ScriptExecutionProcess(
+                _outputRoot,
+                _scriptPath,
+                _modules,
+                _folders
+            );
             return processParameters;
         }
     }
@@ -390,8 +472,13 @@ namespace R2RTest
         private readonly IEnumerable<string> _modules;
         private readonly IEnumerable<string> _folders;
 
-        public AppExecutionProcessConstructor(CompilerRunner runner, string outputRoot, string appPath, IEnumerable<string> modules, IEnumerable<string> folders)
-            : base(runner)
+        public AppExecutionProcessConstructor(
+            CompilerRunner runner,
+            string outputRoot,
+            string appPath,
+            IEnumerable<string> modules,
+            IEnumerable<string> folders
+        ) : base(runner)
         {
             _outputRoot = outputRoot;
             _appPath = appPath;

@@ -15,7 +15,11 @@ using Xunit.Sdk;
 
 namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 {
-    [ExportCSharpVisualBasicStatelessLspService(typeof(LongRunningNonMutatingRequestHandler)), PartNotDiscoverable, Shared]
+    [
+        ExportCSharpVisualBasicStatelessLspService(typeof(LongRunningNonMutatingRequestHandler)),
+        PartNotDiscoverable,
+        Shared
+    ]
     [Method(MethodName)]
     internal class LongRunningNonMutatingRequestHandler : IRequestHandler<TestRequest, TestResponse>
     {
@@ -23,9 +27,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LongRunningNonMutatingRequestHandler()
-        {
-        }
+        public LongRunningNonMutatingRequestHandler() { }
 
         public bool MutatesSolutionState => false;
 
@@ -33,7 +35,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
 
         public TextDocumentIdentifier GetTextDocumentIdentifier(TestRequest request) => null;
 
-        public Task<TestResponse> HandleRequestAsync(TestRequest request, RequestContext context, CancellationToken cancellationToken)
+        public Task<TestResponse> HandleRequestAsync(
+            TestRequest request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             do
             {
@@ -45,7 +51,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.UnitTests.RequestOrdering
                 Thread.Sleep(100);
             } while (true);
 
-            throw new XunitException("Somehow we got past an infinite delay without cancelling. This is unexpected");
+            throw new XunitException(
+                "Somehow we got past an infinite delay without cancelling. This is unexpected"
+            );
         }
     }
 }

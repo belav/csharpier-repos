@@ -13,34 +13,56 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal abstract class AbstractProjectExtensionProvider<TProvider, TExtension, TExportAttribute>
-        where TProvider : AbstractProjectExtensionProvider<TProvider, TExtension, TExportAttribute>, new()
+    internal abstract class AbstractProjectExtensionProvider<
+        TProvider,
+        TExtension,
+        TExportAttribute
+    >
+        where TProvider : AbstractProjectExtensionProvider<TProvider, TExtension, TExportAttribute>,
+            new()
         where TExportAttribute : Attribute
         where TExtension : class
     {
         // Following CWTs are used to cache completion providers from projects' references,
         // so we can avoid the slow path unless there's any change to the references.
-        private static readonly ConditionalWeakTable<IReadOnlyList<AnalyzerReference>, StrongBox<ImmutableArray<TExtension>>> s_referencesToExtensionsMap = new();
-        private static readonly ConditionalWeakTable<AnalyzerReference, TProvider> s_referenceToProviderMap = new();
+        private static readonly ConditionalWeakTable<
+            IReadOnlyList<AnalyzerReference>,
+            StrongBox<ImmutableArray<TExtension>>
+        > s_referencesToExtensionsMap = new();
+        private static readonly ConditionalWeakTable<
+            AnalyzerReference,
+            TProvider
+        > s_referenceToProviderMap = new();
 
         private AnalyzerReference Reference { get; init; } = null!;
-        private ImmutableDictionary<string, ImmutableArray<TExtension>> _extensionsPerLanguage = ImmutableDictionary<string, ImmutableArray<TExtension>>.Empty;
+        private ImmutableDictionary<string, ImmutableArray<TExtension>> _extensionsPerLanguage =
+            ImmutableDictionary<string, ImmutableArray<TExtension>>.Empty;
 
         protected abstract ImmutableArray<string> GetLanguages(TExportAttribute exportAttribute);
-        protected abstract bool TryGetExtensionsFromReference(AnalyzerReference reference, out ImmutableArray<TExtension> extensions);
+        protected abstract bool TryGetExtensionsFromReference(
+            AnalyzerReference reference,
+            out ImmutableArray<TExtension> extensions
+        );
 
         public static ImmutableArray<TExtension> GetExtensions(Project? project)
         {
             if (project is null)
                 return ImmutableArray<TExtension>.Empty;
 
-            if (s_referencesToExtensionsMap.TryGetValue(project.AnalyzerReferences, out var providers))
+            if (
+                s_referencesToExtensionsMap.TryGetValue(
+                    project.AnalyzerReferences,
+                    out var providers
+                )
+            )
                 return providers.Value;
 
             return GetExtensionsSlow(project);
 
-            ImmutableArray<TExtension> GetExtensionsSlow(Project project)
-                => s_referencesToExtensionsMap.GetValue(project.AnalyzerReferences, _ => new(ComputeExtensions(project))).Value;
+            ImmutableArray<TExtension> GetExtensionsSlow(Project project) =>
+                s_referencesToExtensionsMap
+                    .GetValue(project.AnalyzerReferences, _ => new(ComputeExtensions(project)))
+                    .Value;
 
             ImmutableArray<TExtension> ComputeExtensions(Project project)
             {
@@ -48,7 +70,9 @@ namespace Microsoft.CodeAnalysis
                 foreach (var reference in project.AnalyzerReferences)
                 {
                     var provider = s_referenceToProviderMap.GetValue(
-                        reference, static reference => new TProvider() { Reference = reference });
+                        reference,
+                        static reference => new TProvider() { Reference = reference }
+                    );
                     foreach (var extension in provider.GetExtensions(project.Language))
                         builder.Add(extension);
                 }
@@ -57,8 +81,13 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        private ImmutableArray<TExtension> GetExtensions(string language)
-            => ImmutableInterlocked.GetOrAdd(ref _extensionsPerLanguage, language, (language, provider) => provider.CreateExtensions(language), this);
+        private ImmutableArray<TExtension> GetExtensions(string language) =>
+            ImmutableInterlocked.GetOrAdd(
+                ref _extensionsPerLanguage,
+                language,
+                (language, provider) => provider.CreateExtensions(language),
+                this
+            );
 
         private ImmutableArray<TExtension> CreateExtensions(string language)
         {
@@ -88,12 +117,12 @@ namespace Microsoft.CodeAnalysis
                             {
                                 var languages = GetLanguages(attribute);
                                 if (languages.Contains(language))
-                                    builder.AddIfNotNull((TExtension?)Activator.CreateInstance(typeInfo.AsType()));
+                                    builder.AddIfNotNull(
+                                        (TExtension?)Activator.CreateInstance(typeInfo.AsType())
+                                    );
                             }
                         }
-                        catch
-                        {
-                        }
+                        catch { }
                     }
                 }
             }

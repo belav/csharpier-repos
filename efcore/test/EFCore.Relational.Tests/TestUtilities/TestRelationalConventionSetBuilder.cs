@@ -7,11 +7,9 @@ public class TestRelationalConventionSetBuilder : RelationalConventionSetBuilder
 {
     public TestRelationalConventionSetBuilder(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies, relationalDependencies)
-    {
-    }
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies, relationalDependencies) { }
 
-    public static ConventionSet Build()
-        => ConventionSet.CreateConventionSet(RelationalTestHelpers.Instance.CreateContext());
+    public static ConventionSet Build() =>
+        ConventionSet.CreateConventionSet(RelationalTestHelpers.Instance.CreateContext());
 }

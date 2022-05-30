@@ -80,7 +80,11 @@ namespace System.Text.Json.Reflection
             return sb.ToString();
         }
 
-        public static bool IsNullableValueType(this Type type, Type nullableOfTType, out Type? underlyingType)
+        public static bool IsNullableValueType(
+            this Type type,
+            Type nullableOfTType,
+            out Type? underlyingType
+        )
         {
             Debug.Assert(nullableOfTType != null);
 
@@ -133,8 +137,10 @@ namespace System.Text.Json.Reflection
             return false;
         }
 
-        public static bool CanUseDefaultConstructorForDeserialization(this Type type)
-            => (type.GetConstructor(Type.EmptyTypes) != null || type.IsValueType) && !type.IsAbstract && !type.IsInterface;
+        public static bool CanUseDefaultConstructorForDeserialization(this Type type) =>
+            (type.GetConstructor(Type.EmptyTypes) != null || type.IsValueType)
+            && !type.IsAbstract
+            && !type.IsInterface;
 
         public static bool IsObjectType(this Type type) => type.FullName == "System.Object";
 

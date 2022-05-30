@@ -27,7 +27,10 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static TValue? Deserialize<TValue>(this JsonNode? node, JsonSerializerOptions? options = null)
+        public static TValue? Deserialize<TValue>(
+            this JsonNode? node,
+            JsonSerializerOptions? options = null
+        )
         {
             JsonTypeInfo jsonTypeInfo = GetTypeInfo(options, typeof(TValue));
             return ReadNode<TValue>(node, jsonTypeInfo);
@@ -49,7 +52,11 @@ namespace System.Text.Json
         /// </exception>
         [RequiresUnreferencedCode(SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(SerializationRequiresDynamicCodeMessage)]
-        public static object? Deserialize(this JsonNode? node, Type returnType, JsonSerializerOptions? options = null)
+        public static object? Deserialize(
+            this JsonNode? node,
+            Type returnType,
+            JsonSerializerOptions? options = null
+        )
         {
             if (returnType is null)
             {
@@ -77,7 +84,10 @@ namespace System.Text.Json
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
-        public static TValue? Deserialize<TValue>(this JsonNode? node, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static TValue? Deserialize<TValue>(
+            this JsonNode? node,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (jsonTypeInfo is null)
             {
@@ -119,7 +129,11 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static object? Deserialize(this JsonNode? node, Type returnType, JsonSerializerContext context)
+        public static object? Deserialize(
+            this JsonNode? node,
+            Type returnType,
+            JsonSerializerContext context
+        )
         {
             if (returnType is null)
             {

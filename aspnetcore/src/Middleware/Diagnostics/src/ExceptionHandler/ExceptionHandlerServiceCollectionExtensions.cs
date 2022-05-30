@@ -16,7 +16,10 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddExceptionHandler(this IServiceCollection services, Action<ExceptionHandlerOptions> configureOptions)
+    public static IServiceCollection AddExceptionHandler(
+        this IServiceCollection services,
+        Action<ExceptionHandlerOptions> configureOptions
+    )
     {
         if (services == null)
         {
@@ -36,7 +39,10 @@ public static class ExceptionHandlerServiceCollectionExtensions
     /// <param name="services">The <see cref="IServiceCollection"/> for adding services.</param>
     /// <param name="configureOptions">A delegate to configure the <see cref="ExceptionHandlerOptions"/>.</param>
     /// <returns></returns>
-    public static IServiceCollection AddExceptionHandler<TService>(this IServiceCollection services, Action<ExceptionHandlerOptions, TService> configureOptions) where TService : class
+    public static IServiceCollection AddExceptionHandler<TService>(
+        this IServiceCollection services,
+        Action<ExceptionHandlerOptions, TService> configureOptions
+    ) where TService : class
     {
         if (services == null)
         {

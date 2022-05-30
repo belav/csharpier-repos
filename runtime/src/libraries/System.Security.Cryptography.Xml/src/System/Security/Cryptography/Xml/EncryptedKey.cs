@@ -98,11 +98,17 @@ namespace System.Security.Cryptography.Xml
             CipherData.LoadXml(cipherDataNode as XmlElement);
 
             // EncryptionProperties
-            XmlNode encryptionPropertiesNode = value.SelectSingleNode("enc:EncryptionProperties", nsm);
+            XmlNode encryptionPropertiesNode = value.SelectSingleNode(
+                "enc:EncryptionProperties",
+                nsm
+            );
             if (encryptionPropertiesNode != null)
             {
                 // Select the EncryptionProperty elements inside the EncryptionProperties element
-                XmlNodeList encryptionPropertyNodes = encryptionPropertiesNode.SelectNodes("enc:EncryptionProperty", nsm);
+                XmlNodeList encryptionPropertyNodes = encryptionPropertiesNode.SelectNodes(
+                    "enc:EncryptionProperty",
+                    nsm
+                );
                 if (encryptionPropertyNodes != null)
                 {
                     foreach (XmlNode node in encryptionPropertyNodes)
@@ -126,7 +132,10 @@ namespace System.Security.Cryptography.Xml
             if (referenceListNode != null)
             {
                 // Select the DataReference elements inside the ReferenceList element
-                XmlNodeList dataReferenceNodes = referenceListNode.SelectNodes("enc:DataReference", nsm);
+                XmlNodeList dataReferenceNodes = referenceListNode.SelectNodes(
+                    "enc:DataReference",
+                    nsm
+                );
                 if (dataReferenceNodes != null)
                 {
                     foreach (XmlNode node in dataReferenceNodes)
@@ -137,7 +146,10 @@ namespace System.Security.Cryptography.Xml
                     }
                 }
                 // Select the KeyReference elements inside the ReferenceList element
-                XmlNodeList keyReferenceNodes = referenceListNode.SelectNodes("enc:KeyReference", nsm);
+                XmlNodeList keyReferenceNodes = referenceListNode.SelectNodes(
+                    "enc:KeyReference",
+                    nsm
+                );
                 if (keyReferenceNodes != null)
                 {
                     foreach (XmlNode node in keyReferenceNodes)
@@ -155,7 +167,8 @@ namespace System.Security.Cryptography.Xml
 
         public override XmlElement GetXml()
         {
-            if (CacheValid) return _cachedXml;
+            if (CacheValid)
+                return _cachedXml;
 
             XmlDocument document = new XmlDocument();
             document.PreserveWhitespace = true;
@@ -165,7 +178,8 @@ namespace System.Security.Cryptography.Xml
         internal XmlElement GetXml(XmlDocument document)
         {
             // Create the EncryptedKey element
-            XmlElement encryptedKeyElement = (XmlElement)document.CreateElement("EncryptedKey", EncryptedXml.XmlEncNamespaceUrl);
+            XmlElement encryptedKeyElement = (XmlElement)
+                document.CreateElement("EncryptedKey", EncryptedXml.XmlEncNamespaceUrl);
 
             // Deal with attributes
             if (!string.IsNullOrEmpty(Id))
@@ -195,7 +209,10 @@ namespace System.Security.Cryptography.Xml
             // EncryptionProperties
             if (EncryptionProperties.Count > 0)
             {
-                XmlElement encryptionPropertiesElement = document.CreateElement("EncryptionProperties", EncryptedXml.XmlEncNamespaceUrl);
+                XmlElement encryptionPropertiesElement = document.CreateElement(
+                    "EncryptionProperties",
+                    EncryptedXml.XmlEncNamespaceUrl
+                );
                 for (int index = 0; index < EncryptionProperties.Count; index++)
                 {
                     EncryptionProperty ep = EncryptionProperties.Item(index);
@@ -207,7 +224,10 @@ namespace System.Security.Cryptography.Xml
             // ReferenceList
             if (ReferenceList.Count > 0)
             {
-                XmlElement referenceListElement = document.CreateElement("ReferenceList", EncryptedXml.XmlEncNamespaceUrl);
+                XmlElement referenceListElement = document.CreateElement(
+                    "ReferenceList",
+                    EncryptedXml.XmlEncNamespaceUrl
+                );
                 for (int index = 0; index < ReferenceList.Count; index++)
                 {
                     referenceListElement.AppendChild(ReferenceList[index].GetXml(document));
@@ -218,7 +238,8 @@ namespace System.Security.Cryptography.Xml
             // CarriedKeyName
             if (CarriedKeyName != null)
             {
-                XmlElement carriedKeyNameElement = (XmlElement)document.CreateElement("CarriedKeyName", EncryptedXml.XmlEncNamespaceUrl);
+                XmlElement carriedKeyNameElement = (XmlElement)
+                    document.CreateElement("CarriedKeyName", EncryptedXml.XmlEncNamespaceUrl);
                 XmlText carriedKeyNameText = document.CreateTextNode(CarriedKeyName);
                 carriedKeyNameElement.AppendChild(carriedKeyNameText);
                 encryptedKeyElement.AppendChild(carriedKeyNameElement);

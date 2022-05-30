@@ -8,7 +8,7 @@ using Xunit;
 namespace AutoMapper.IntegrationTests;
 
 using UnitTests;
-        
+
 public class NullSubstitute : AutoMapperSpecBase, IAsyncLifetime
 {
     public class Customer
@@ -37,20 +37,18 @@ public class NullSubstitute : AutoMapperSpecBase, IAsyncLifetime
     {
         protected override void Seed(Context context)
         {
-            context.Customers.Add(new Customer
-            {
-                FirstName = "Bob",
-                LastName = "Smith",
-            });
+            context.Customers.Add(new Customer { FirstName = "Bob", LastName = "Smith", });
 
             base.Seed(context);
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.Value, o => o.NullSubstitute(5));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(d => d.Value, o => o.NullSubstitute(5));
+        });
 
     [Fact]
     public void Can_map_with_projection()
@@ -70,6 +68,7 @@ public class NullSubstitute : AutoMapperSpecBase, IAsyncLifetime
 
     public Task DisposeAsync() => Task.CompletedTask;
 }
+
 public class NullSubstituteWithStrings : AutoMapperSpecBase, IAsyncLifetime
 {
     public class Customer
@@ -79,16 +78,19 @@ public class NullSubstituteWithStrings : AutoMapperSpecBase, IAsyncLifetime
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
     public class CustomerViewModel
     {
         public string Value { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
     public class Context : LocalDbContext
     {
         public DbSet<Customer> Customers { get; set; }
     }
+
     public class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
     {
         protected override void Seed(Context context)
@@ -97,8 +99,14 @@ public class NullSubstituteWithStrings : AutoMapperSpecBase, IAsyncLifetime
             base.Seed(context);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.Value, o => o.NullSubstitute("5")));
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(
+            cfg =>
+                cfg.CreateProjection<Customer, CustomerViewModel>()
+                    .ForMember(d => d.Value, o => o.NullSubstitute("5"))
+        );
+
     [Fact]
     public void Can_map_with_projection()
     {
@@ -117,6 +125,7 @@ public class NullSubstituteWithStrings : AutoMapperSpecBase, IAsyncLifetime
 
     public Task DisposeAsync() => Task.CompletedTask;
 }
+
 public class NullSubstituteWithEntity : AutoMapperSpecBase, IAsyncLifetime
 {
     class Customer
@@ -126,24 +135,29 @@ public class NullSubstituteWithEntity : AutoMapperSpecBase, IAsyncLifetime
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
     class Value
     {
         public int Id { get; set; }
     }
+
     class CustomerViewModel
     {
         public ValueViewModel Value { get; set; }
         public string FirstName { get; set; }
         public string LastName { get; set; }
     }
+
     class ValueViewModel
     {
         public int Id { get; set; }
     }
+
     class Context : LocalDbContext
     {
         public DbSet<Customer> Customers { get; set; }
     }
+
     class DatabaseInitializer : CreateDatabaseIfNotExists<Context>
     {
         protected override void Seed(Context context)
@@ -152,11 +166,15 @@ public class NullSubstituteWithEntity : AutoMapperSpecBase, IAsyncLifetime
             base.Seed(context);
         }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Customer, CustomerViewModel>().ForMember(d => d.Value, o => o.NullSubstitute(new Value()));
-        cfg.CreateProjection<Value, ValueViewModel>();
-    });
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Customer, CustomerViewModel>()
+                .ForMember(d => d.Value, o => o.NullSubstitute(new Value()));
+            cfg.CreateProjection<Value, ValueViewModel>();
+        });
+
     [Fact]
     public void Can_map_with_projection()
     {

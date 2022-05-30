@@ -25,7 +25,11 @@ internal sealed partial class RateLimitingMiddleware
     /// <param name="next">The <see cref="RequestDelegate"/> representing the next middleware in the pipeline.</param>
     /// <param name="logger">The <see cref="ILogger"/> used for logging.</param>
     /// <param name="options">The options for the middleware.</param>
-    public RateLimitingMiddleware(RequestDelegate next, ILogger<RateLimitingMiddleware> logger, IOptions<RateLimiterOptions> options)
+    public RateLimitingMiddleware(
+        RequestDelegate next,
+        ILogger<RateLimitingMiddleware> logger,
+        IOptions<RateLimiterOptions> options
+    )
     {
         _next = next ?? throw new ArgumentNullException(nameof(next));
 
@@ -72,7 +76,12 @@ internal sealed partial class RateLimitingMiddleware
 
     private static partial class RateLimiterLog
     {
-        [LoggerMessage(1, LogLevel.Debug, "Rate limits exceeded, rejecting this request.", EventName = "RequestRejectedLimitsExceeded")]
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Rate limits exceeded, rejecting this request.",
+            EventName = "RequestRejectedLimitsExceeded"
+        )]
         internal static partial void RequestRejectedLimitsExceeded(ILogger logger);
     }
 }

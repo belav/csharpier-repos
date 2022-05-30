@@ -15,12 +15,10 @@ namespace Microsoft.CodeAnalysis.InlineHints
         [property: DataMember(Order = 4)] bool ForOtherParameters = false,
         [property: DataMember(Order = 5)] bool SuppressForParametersThatDifferOnlyBySuffix = true,
         [property: DataMember(Order = 6)] bool SuppressForParametersThatMatchMethodIntent = true,
-        [property: DataMember(Order = 7)] bool SuppressForParametersThatMatchArgumentName = true)
+        [property: DataMember(Order = 7)] bool SuppressForParametersThatMatchArgumentName = true
+    )
     {
-        public InlineParameterHintsOptions()
-            : this(EnabledForParameters: false)
-        {
-        }
+        public InlineParameterHintsOptions() : this(EnabledForParameters: false) { }
 
         public static readonly InlineParameterHintsOptions Default = new();
     }

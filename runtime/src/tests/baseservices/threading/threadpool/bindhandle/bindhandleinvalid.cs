@@ -35,6 +35,4 @@ class BindHandleInvalid
         Console.WriteLine("Didn't get argument null exception");
         return (99);
     }
-
-    
 }

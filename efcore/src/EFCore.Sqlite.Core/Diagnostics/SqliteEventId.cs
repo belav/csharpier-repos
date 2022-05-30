@@ -51,8 +51,7 @@ public static class SqliteEventId
 
     private static readonly string ValidationPrefix = DbLoggerCategory.Model.Validation.Name + ".";
 
-    private static EventId MakeValidationId(Id id)
-        => new((int)id, ValidationPrefix + id);
+    private static EventId MakeValidationId(Id id) => new((int)id, ValidationPrefix + id);
 
     /// <summary>
     ///     A schema was configured for an entity type, but SQLite does not support schemas.
@@ -65,7 +64,9 @@ public static class SqliteEventId
     ///         This event uses the <see cref="EntityTypeSchemaEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId SchemaConfiguredWarning = MakeValidationId(Id.SchemaConfiguredWarning);
+    public static readonly EventId SchemaConfiguredWarning = MakeValidationId(
+        Id.SchemaConfiguredWarning
+    );
 
     /// <summary>
     ///     A sequence was configured for an entity type, but SQLite does not support sequences.
@@ -78,12 +79,13 @@ public static class SqliteEventId
     ///         This event uses the <see cref="SequenceEventData" /> payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId SequenceConfiguredWarning = MakeValidationId(Id.SequenceConfiguredWarning);
+    public static readonly EventId SequenceConfiguredWarning = MakeValidationId(
+        Id.SequenceConfiguredWarning
+    );
 
     private static readonly string InfraPrefix = DbLoggerCategory.Infrastructure.Name + ".";
 
-    private static EventId MakeInfraId(Id id)
-        => new((int)id, InfraPrefix + id);
+    private static EventId MakeInfraId(Id id) => new((int)id, InfraPrefix + id);
 
     /// <summary>
     ///     A connection of an unexpected type is being used.
@@ -97,12 +99,13 @@ public static class SqliteEventId
     ///         payload when used with a <see cref="DiagnosticSource" />.
     ///     </para>
     /// </remarks>
-    public static readonly EventId UnexpectedConnectionTypeWarning = MakeInfraId(Id.UnexpectedConnectionTypeWarning);
+    public static readonly EventId UnexpectedConnectionTypeWarning = MakeInfraId(
+        Id.UnexpectedConnectionTypeWarning
+    );
 
     private static readonly string MigrationsPrefix = DbLoggerCategory.Migrations.Name + ".";
 
-    private static EventId MakeMigrationsId(Id id)
-        => new((int)id, MigrationsPrefix + id);
+    private static EventId MakeMigrationsId(Id id) => new((int)id, MigrationsPrefix + id);
 
     /// <summary>
     ///     An operation may fail due to a pending rebuild of the table.
@@ -110,12 +113,13 @@ public static class SqliteEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Migrations" /> category.
     /// </remarks>
-    public static readonly EventId TableRebuildPendingWarning = MakeMigrationsId(Id.TableRebuildPendingWarning);
+    public static readonly EventId TableRebuildPendingWarning = MakeMigrationsId(
+        Id.TableRebuildPendingWarning
+    );
 
     private static readonly string ScaffoldingPrefix = DbLoggerCategory.Scaffolding.Name + ".";
 
-    private static EventId MakeScaffoldingId(Id id)
-        => new((int)id, ScaffoldingPrefix + id);
+    private static EventId MakeScaffoldingId(Id id) => new((int)id, ScaffoldingPrefix + id);
 
     /// <summary>
     ///     A column was found.
@@ -131,7 +135,9 @@ public static class SqliteEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId SchemasNotSupportedWarning = MakeScaffoldingId(Id.SchemasNotSupportedWarning);
+    public static readonly EventId SchemasNotSupportedWarning = MakeScaffoldingId(
+        Id.SchemasNotSupportedWarning
+    );
 
     /// <summary>
     ///     A foreign key references a missing table.
@@ -139,8 +145,9 @@ public static class SqliteEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId ForeignKeyReferencesMissingTableWarning =
-        MakeScaffoldingId(Id.ForeignKeyReferencesMissingTableWarning);
+    public static readonly EventId ForeignKeyReferencesMissingTableWarning = MakeScaffoldingId(
+        Id.ForeignKeyReferencesMissingTableWarning
+    );
 
     /// <summary>
     ///     A table was found.
@@ -164,8 +171,9 @@ public static class SqliteEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId ForeignKeyPrincipalColumnMissingWarning =
-        MakeScaffoldingId(Id.ForeignKeyPrincipalColumnMissingWarning);
+    public static readonly EventId ForeignKeyPrincipalColumnMissingWarning = MakeScaffoldingId(
+        Id.ForeignKeyPrincipalColumnMissingWarning
+    );
 
     /// <summary>
     ///     An index was found.
@@ -197,5 +205,7 @@ public static class SqliteEventId
     /// <remarks>
     ///     This event is in the <see cref="DbLoggerCategory.Scaffolding" /> category.
     /// </remarks>
-    public static readonly EventId UniqueConstraintFound = MakeScaffoldingId(Id.UniqueConstraintFound);
+    public static readonly EventId UniqueConstraintFound = MakeScaffoldingId(
+        Id.UniqueConstraintFound
+    );
 }

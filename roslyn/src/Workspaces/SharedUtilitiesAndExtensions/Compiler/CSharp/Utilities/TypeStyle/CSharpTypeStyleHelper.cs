@@ -40,7 +40,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         public readonly bool IsStylePreferred;
         public readonly ReportDiagnostic Severity;
 
-        public TypeStyleResult(CSharpTypeStyleHelper helper, TypeSyntax typeName, SemanticModel semanticModel, CSharpSimplifierOptions options, bool isStylePreferred, ReportDiagnostic severity, CancellationToken cancellationToken) : this()
+        public TypeStyleResult(
+            CSharpTypeStyleHelper helper,
+            TypeSyntax typeName,
+            SemanticModel semanticModel,
+            CSharpSimplifierOptions options,
+            bool isStylePreferred,
+            ReportDiagnostic severity,
+            CancellationToken cancellationToken
+        ) : this()
         {
             _helper = helper;
             _typeName = typeName;
@@ -52,8 +60,13 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             Severity = severity;
         }
 
-        public bool CanConvert()
-            => _helper.TryAnalyzeVariableDeclaration(_typeName, _semanticModel, _options, _cancellationToken);
+        public bool CanConvert() =>
+            _helper.TryAnalyzeVariableDeclaration(
+                _typeName,
+                _semanticModel,
+                _options,
+                _cancellationToken
+            );
     }
 
     internal abstract partial class CSharpTypeStyleHelper
@@ -61,49 +74,102 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
         protected abstract bool IsStylePreferred(in State state);
 
         public virtual TypeStyleResult AnalyzeTypeName(
-            TypeSyntax typeName, SemanticModel semanticModel,
-            CSharpSimplifierOptions options, CancellationToken cancellationToken)
+            TypeSyntax typeName,
+            SemanticModel semanticModel,
+            CSharpSimplifierOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            if (typeName?.FirstAncestorOrSelf<SyntaxNode>(a => a.IsKind(SyntaxKind.DeclarationExpression, SyntaxKind.VariableDeclaration, SyntaxKind.ForEachStatement)) is not { } declaration)
+            if (
+                typeName?.FirstAncestorOrSelf<SyntaxNode>(
+                    a =>
+                        a.IsKind(
+                            SyntaxKind.DeclarationExpression,
+                            SyntaxKind.VariableDeclaration,
+                            SyntaxKind.ForEachStatement
+                        )
+                )
+                is not { } declaration
+            )
             {
                 return default;
             }
 
-            var state = new State(
-                declaration, semanticModel, options, cancellationToken);
+            var state = new State(declaration, semanticModel, options, cancellationToken);
             var isStylePreferred = this.IsStylePreferred(in state);
             var severity = state.GetDiagnosticSeverityPreference();
 
             return new TypeStyleResult(
-                this, typeName, semanticModel, options, isStylePreferred, severity, cancellationToken);
+                this,
+                typeName,
+                semanticModel,
+                options,
+                isStylePreferred,
+                severity,
+                cancellationToken
+            );
         }
 
         internal abstract bool TryAnalyzeVariableDeclaration(
-            TypeSyntax typeName, SemanticModel semanticModel, CSharpSimplifierOptions options, CancellationToken cancellationToken);
+            TypeSyntax typeName,
+            SemanticModel semanticModel,
+            CSharpSimplifierOptions options,
+            CancellationToken cancellationToken
+        );
 
         protected abstract bool AssignmentSupportsStylePreference(
-            SyntaxToken identifier, TypeSyntax typeName, ExpressionSyntax initializer, SemanticModel semanticModel, CSharpSimplifierOptions options, CancellationToken cancellationToken);
+            SyntaxToken identifier,
+            TypeSyntax typeName,
+            ExpressionSyntax initializer,
+            SemanticModel semanticModel,
+            CSharpSimplifierOptions options,
+            CancellationToken cancellationToken
+        );
 
-        internal TypeSyntax? FindAnalyzableType(SyntaxNode node, SemanticModel semanticModel, CancellationToken cancellationToken)
+        internal TypeSyntax? FindAnalyzableType(
+            SyntaxNode node,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
-            Debug.Assert(node.IsKind(SyntaxKind.VariableDeclaration, SyntaxKind.ForEachStatement, SyntaxKind.DeclarationExpression));
+            Debug.Assert(
+                node.IsKind(
+                    SyntaxKind.VariableDeclaration,
+                    SyntaxKind.ForEachStatement,
+                    SyntaxKind.DeclarationExpression
+                )
+            );
 
             return node switch
             {
-                VariableDeclarationSyntax variableDeclaration => ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken)
-                    ? variableDeclaration.Type
-                    : null,
-                ForEachStatementSyntax forEachStatement => ShouldAnalyzeForEachStatement(forEachStatement, semanticModel, cancellationToken)
-                    ? forEachStatement.Type
-                    : null,
-                DeclarationExpressionSyntax declarationExpression => ShouldAnalyzeDeclarationExpression(declarationExpression, semanticModel, cancellationToken)
-                    ? declarationExpression.Type
-                    : null,
+                VariableDeclarationSyntax variableDeclaration
+                    => ShouldAnalyzeVariableDeclaration(variableDeclaration, cancellationToken)
+                        ? variableDeclaration.Type
+                        : null,
+                ForEachStatementSyntax forEachStatement
+                    => ShouldAnalyzeForEachStatement(
+                        forEachStatement,
+                        semanticModel,
+                        cancellationToken
+                    )
+                        ? forEachStatement.Type
+                        : null,
+                DeclarationExpressionSyntax declarationExpression
+                    => ShouldAnalyzeDeclarationExpression(
+                        declarationExpression,
+                        semanticModel,
+                        cancellationToken
+                    )
+                        ? declarationExpression.Type
+                        : null,
                 _ => null,
             };
         }
 
-        public virtual bool ShouldAnalyzeVariableDeclaration(VariableDeclarationSyntax variableDeclaration, CancellationToken cancellationToken)
+        public virtual bool ShouldAnalyzeVariableDeclaration(
+            VariableDeclarationSyntax variableDeclaration,
+            CancellationToken cancellationToken
+        )
         {
             // implicit type is applicable only for local variables and
             // such declarations cannot have multiple declarators and
@@ -111,17 +177,27 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
             var isSupportedParentKind = variableDeclaration.IsParentKind(
                 SyntaxKind.LocalDeclarationStatement,
                 SyntaxKind.ForStatement,
-                SyntaxKind.UsingStatement);
+                SyntaxKind.UsingStatement
+            );
 
-            return isSupportedParentKind &&
-                variableDeclaration.Variables.Count == 1 &&
-                variableDeclaration.Variables.Single().Initializer.IsKind(SyntaxKind.EqualsValueClause);
+            return isSupportedParentKind
+                && variableDeclaration.Variables.Count == 1
+                && variableDeclaration.Variables
+                    .Single()
+                    .Initializer.IsKind(SyntaxKind.EqualsValueClause);
         }
 
-        protected virtual bool ShouldAnalyzeForEachStatement(ForEachStatementSyntax forEachStatement, SemanticModel semanticModel, CancellationToken cancellationToken)
-            => true;
+        protected virtual bool ShouldAnalyzeForEachStatement(
+            ForEachStatementSyntax forEachStatement,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        ) => true;
 
-        protected virtual bool ShouldAnalyzeDeclarationExpression(DeclarationExpressionSyntax declaration, SemanticModel semanticModel, CancellationToken cancellationToken)
+        protected virtual bool ShouldAnalyzeDeclarationExpression(
+            DeclarationExpressionSyntax declaration,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken
+        )
         {
             // Ensure that deconstruction assignment or foreach variable statement have a non-null deconstruct method.
             DeconstructionInfo? deconstructionInfoOpt = null;
@@ -130,17 +206,23 @@ namespace Microsoft.CodeAnalysis.CSharp.Utilities
                 case AssignmentExpressionSyntax assignmentExpression:
                     if (assignmentExpression.IsDeconstruction())
                     {
-                        deconstructionInfoOpt = semanticModel.GetDeconstructionInfo(assignmentExpression);
+                        deconstructionInfoOpt = semanticModel.GetDeconstructionInfo(
+                            assignmentExpression
+                        );
                     }
 
                     break;
 
                 case ForEachVariableStatementSyntax forEachVariableStatement:
-                    deconstructionInfoOpt = semanticModel.GetDeconstructionInfo(forEachVariableStatement);
+                    deconstructionInfoOpt = semanticModel.GetDeconstructionInfo(
+                        forEachVariableStatement
+                    );
                     break;
             }
 
-            return !deconstructionInfoOpt.HasValue || !deconstructionInfoOpt.Value.Nested.IsEmpty || deconstructionInfoOpt.Value.Method != null;
+            return !deconstructionInfoOpt.HasValue
+                || !deconstructionInfoOpt.Value.Nested.IsEmpty
+                || deconstructionInfoOpt.Value.Method != null;
         }
     }
 }

@@ -18,12 +18,14 @@ namespace System.Text.RegularExpressions.Symbolic
         /// <summary>BDD for each ASCII character that returns true for that one character.</summary>
         /// <remarks>This cache is shared amongst all CharSetSolver instances and is accessed in a thread-safe manner.</remarks>
         private static readonly BDD?[] s_asciiCache = new BDD[128];
+
         /// <summary>BDD that returns true for every non-ASCII character.</summary>
         /// <remarks>This instance is shared amongst all CharSetSolver instances and is accessed in a thread-safe manner.</remarks>
         private static BDD? s_nonAscii;
 
         /// <summary>Generator for minterms, lazily initialized on first use.</summary>
         private MintermGenerator<BDD>? _mintermGenerator;
+
         /// <summary>Cache of BDD instances created by this solver.</summary>
         /// <remarks>
         /// Cache of BDD instances created by this solver: two BDDs with the same ordinal and identical children references
@@ -33,18 +35,24 @@ namespace System.Text.RegularExpressions.Symbolic
         /// benefit from it; the more equal BDDs that are actually found to be equal, the better the algorithms will perform.
         /// </remarks>
         private readonly Dictionary<(int ordinal, BDD? one, BDD? zero), BDD> _bddCache = new();
+
         /// <summary>Cache of Boolean operations over BDDs and the BDDs they produce.</summary>
         /// <remarks>
         /// This cache is necessary for the recursive operation algorithms to be guaranteed linear time.
         /// A well-crafted character class could otherwise cause execution time to be exponential.
         /// </remarks>
-        private readonly Dictionary<(BooleanOperation op, BDD a, BDD? b), BDD> _operationCache = new();
+        private readonly Dictionary<(BooleanOperation op, BDD a, BDD? b), BDD> _operationCache =
+            new();
 
         /// <summary>Gets a BDD that contains every non-ASCII character.</summary>
         public BDD NonAscii =>
-            s_nonAscii ??
-            Interlocked.CompareExchange(ref s_nonAscii, CreateSetFromRange('\x80', '\uFFFF'), null) ??
-            s_nonAscii;
+            s_nonAscii
+            ?? Interlocked.CompareExchange(
+                ref s_nonAscii,
+                CreateSetFromRange('\x80', '\uFFFF'),
+                null
+            )
+            ?? s_nonAscii;
 
         /// <summary>Creates a BDD that contains only the specified character.</summary>
         public BDD CreateFromChar(char c)
@@ -53,10 +61,9 @@ namespace System.Text.RegularExpressions.Symbolic
             if (c < (uint)ascii.Length)
             {
                 // ASCII: return a cached BDD.
-                return
-                    ascii[c] ??
-                    Interlocked.CompareExchange(ref ascii[c], CreateBdd(c), null) ??
-                    ascii[c]!;
+                return ascii[c]
+                    ?? Interlocked.CompareExchange(ref ascii[c], CreateBdd(c), null)
+                    ?? ascii[c]!;
             }
 
             // Non-ascii: just create a new BDD.
@@ -67,9 +74,10 @@ namespace System.Text.RegularExpressions.Symbolic
                 BDD bdd = BDD.True;
                 for (int k = 0; k < 16; k++)
                 {
-                    bdd = (c & (1 << k)) != 0 ?
-                        GetOrCreateBDD(k, bdd, BDD.False) :
-                        GetOrCreateBDD(k, BDD.False, bdd);
+                    bdd =
+                        (c & (1 << k)) != 0
+                            ? GetOrCreateBDD(k, bdd, BDD.False)
+                            : GetOrCreateBDD(k, BDD.False, bdd);
                 }
 
                 return bdd;
@@ -100,7 +108,8 @@ namespace System.Text.RegularExpressions.Symbolic
         BDD[]? ISolver<BDD>.GetMinterms() => null;
 
         /// <summary>Formats the contents of the specified set for human consumption.</summary>
-        string ISolver<BDD>.PrettyPrint(BDD characterClass, CharSetSolver solver) => PrettyPrint(characterClass);
+        string ISolver<BDD>.PrettyPrint(BDD characterClass, CharSetSolver solver) =>
+            PrettyPrint(characterClass);
 
         /// <summary>Formats the contents of the specified set for human consumption.</summary>
         public string PrettyPrint(BDD set)
@@ -209,7 +218,11 @@ namespace System.Text.RegularExpressions.Symbolic
             Debug.Assert(!set.IsLeaf, "Did not expect multi-terminal");
             if (!_operationCache.TryGetValue((BooleanOperation.Not, set, null), out BDD? result))
             {
-                _operationCache[(BooleanOperation.Not, set, null)] = result = GetOrCreateBDD(set.Ordinal, Not(set.One), Not(set.Zero));
+                _operationCache[(BooleanOperation.Not, set, null)] = result = GetOrCreateBDD(
+                    set.Ordinal,
+                    Not(set.One),
+                    Not(set.Zero)
+                );
             }
 
             return result;
@@ -227,25 +240,38 @@ namespace System.Text.RegularExpressions.Symbolic
             switch (op)
             {
                 case BooleanOperation.Or:
-                    if (set1 == Empty) return set2;
-                    if (set2 == Empty) return set1;
-                    if (set1 == Full || set2 == Full) return Full;
-                    if (set1 == set2) return set1;
+                    if (set1 == Empty)
+                        return set2;
+                    if (set2 == Empty)
+                        return set1;
+                    if (set1 == Full || set2 == Full)
+                        return Full;
+                    if (set1 == set2)
+                        return set1;
                     break;
 
                 case BooleanOperation.And:
-                    if (set1 == Full) return set2;
-                    if (set2 == Full) return set1;
-                    if (set1 == Empty || set2 == Empty) return Empty;
-                    if (set1 == set2) return set1;
+                    if (set1 == Full)
+                        return set2;
+                    if (set2 == Full)
+                        return set1;
+                    if (set1 == Empty || set2 == Empty)
+                        return Empty;
+                    if (set1 == set2)
+                        return set1;
                     break;
 
                 case BooleanOperation.Xor:
-                    if (set1 == Empty) return set2;
-                    if (set2 == Empty) return set1;
-                    if (set1 == set2) return Empty;
-                    if (set1 == Full) return Not(set2);
-                    if (set2 == Full) return Not(set1);
+                    if (set1 == Empty)
+                        return set2;
+                    if (set2 == Empty)
+                        return set1;
+                    if (set1 == set2)
+                        return Empty;
+                    if (set1 == Full)
+                        return Not(set2);
+                    if (set2 == Full)
+                        return Not(set1);
                     break;
             }
 
@@ -258,7 +284,8 @@ namespace System.Text.RegularExpressions.Symbolic
             Debug.Assert(!set1.IsLeaf || !set2.IsLeaf, "Did not expect multi-terminal case");
             if (!_operationCache.TryGetValue((op, set1, set2), out BDD? result))
             {
-                BDD one, two;
+                BDD one,
+                    two;
                 int ordinal;
                 if (set1.IsLeaf || set2.Ordinal > set1.Ordinal)
                 {
@@ -280,7 +307,8 @@ namespace System.Text.RegularExpressions.Symbolic
                     ordinal = set1.Ordinal;
                 }
 
-                _operationCache[(op, set1, set2)] = result = one == two ? one : GetOrCreateBDD(ordinal, one, two);
+                _operationCache[(op, set1, set2)] = result =
+                    one == two ? one : GetOrCreateBDD(ordinal, one, two);
             }
 
             return result;
@@ -309,10 +337,11 @@ namespace System.Text.RegularExpressions.Symbolic
         public BDD CreateSetFromRange(char lower, char upper)
         {
             const int MaxBit = 15; // most significant bit of a 16-bit char
-            return
-                upper < lower ? Empty :
-                upper == lower ? CreateFromChar(lower) :
-                CreateSetFromRangeImpl(lower, upper, MaxBit);
+            return upper < lower
+                ? Empty
+                : upper == lower
+                    ? CreateFromChar(lower)
+                    : CreateSetFromRangeImpl(lower, upper, MaxBit);
 
             BDD CreateSetFromRangeImpl(uint lower, uint upper, int maxBit)
             {
@@ -321,10 +350,13 @@ namespace System.Text.RegularExpressions.Symbolic
 
                 if (mask == 1) // Base case for least significant bit
                 {
-                    return
-                        upper == 0 ? GetOrCreateBDD(maxBit, Empty, Full) : // lower must also be 0
-                        lower == 1 ? GetOrCreateBDD(maxBit, Full, Empty) : // upper must also be 1
-                        Full; // Otherwise both 0 and 1 are included
+                    return upper == 0
+                        ? GetOrCreateBDD(maxBit, Empty, Full)
+                        : // lower must also be 0
+                        lower == 1
+                            ? GetOrCreateBDD(maxBit, Full, Empty)
+                            : // upper must also be 1
+                            Full; // Otherwise both 0 and 1 are included
                 }
 
                 // Check if range includes all numbers up to bit
@@ -392,7 +424,11 @@ namespace System.Text.RegularExpressions.Symbolic
 
         private BDD GetOrCreateBDD(int ordinal, BDD? one, BDD? zero)
         {
-            ref BDD? bdd = ref CollectionsMarshal.GetValueRefOrAddDefault(_bddCache, (ordinal, one, zero), out _);
+            ref BDD? bdd = ref CollectionsMarshal.GetValueRefOrAddDefault(
+                _bddCache,
+                (ordinal, one, zero),
+                out _
+            );
             return bdd ??= new BDD(ordinal, one, zero);
         }
 

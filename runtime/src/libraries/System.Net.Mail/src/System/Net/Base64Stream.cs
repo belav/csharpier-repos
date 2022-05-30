@@ -10,26 +10,267 @@ namespace System.Net
 {
     internal sealed class Base64Stream : DelegatedStream, IEncodableStream
     {
-        private static ReadOnlySpan<byte> Base64DecodeMap => new byte[] // rely on C# compiler optimization to eliminate allocation
-        {
-            //0   1   2    3    4    5    6    7    8    9    A    B     C    D    E    F
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // 0
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // 1
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 62,   255, 255, 255,  63, // 2
-             52,  53,  54,  55,  56,  57,  58,  59,  60,  61, 255, 255,  255, 255, 255, 255, // 3
-            255,   0,   1,   2,   3,   4,   5,   6,   7,   8,   9,  10,   11,  12,  13,  14, // 4
-             15,  16,  17,  18,  19,  20,  21,  22,  23,  24,  25,  255, 255, 255, 255, 255, // 5
-            255,  26,  27,  28,  29,  30,  31,  32,  33,  34,  35,  36,   37,  38,  39,  40, // 6
-             41,  42,  43,  44,  45,  46,  47,  48,  49,  50,  51, 255,  255, 255, 255, 255, // 7
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // 8
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // 9
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // A
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // B
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // C
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // D
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // E
-            255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255, 255,  255, 255, 255, 255, // F
-        };
+        private static ReadOnlySpan<byte> Base64DecodeMap =>
+            new byte[] // rely on C# compiler optimization to eliminate allocation
+            {
+                //0   1   2    3    4    5    6    7    8    9    A    B     C    D    E    F
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 0
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 1
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                62,
+                255,
+                255,
+                255,
+                63, // 2
+                52,
+                53,
+                54,
+                55,
+                56,
+                57,
+                58,
+                59,
+                60,
+                61,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 3
+                255,
+                0,
+                1,
+                2,
+                3,
+                4,
+                5,
+                6,
+                7,
+                8,
+                9,
+                10,
+                11,
+                12,
+                13,
+                14, // 4
+                15,
+                16,
+                17,
+                18,
+                19,
+                20,
+                21,
+                22,
+                23,
+                24,
+                25,
+                255,
+                255,
+                255,
+                255,
+                255, // 5
+                255,
+                26,
+                27,
+                28,
+                29,
+                30,
+                31,
+                32,
+                33,
+                34,
+                35,
+                36,
+                37,
+                38,
+                39,
+                40, // 6
+                41,
+                42,
+                43,
+                44,
+                45,
+                46,
+                47,
+                48,
+                49,
+                50,
+                51,
+                255,
+                255,
+                255,
+                255,
+                255, // 7
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 8
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // 9
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // A
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // B
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // C
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // D
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // E
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255,
+                255, // F
+            };
 
         private readonly Base64WriteStateInfo _writeState;
         private ReadStateInfo? _readState;
@@ -61,7 +302,13 @@ namespace System.Net
             }
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -70,7 +317,13 @@ namespace System.Net
             return result;
         }
 
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -78,7 +331,6 @@ namespace System.Net
             result.Write();
             return result;
         }
-
 
         public override void Close()
         {
@@ -103,7 +355,13 @@ namespace System.Net
                 while (source < end)
                 {
                     //space and tab are ok because folding must include a whitespace char.
-                    if (*source == '\r' || *source == '\n' || *source == '=' || *source == ' ' || *source == '\t')
+                    if (
+                        *source == '\r'
+                        || *source == '\n'
+                        || *source == '='
+                        || *source == ' '
+                        || *source == '\t'
+                    )
                     {
                         source++;
                         continue;
@@ -147,12 +405,25 @@ namespace System.Net
         public int EncodeBytes(byte[] buffer, int offset, int count) =>
             EncodeBytes(buffer, offset, count, true, true);
 
-        internal int EncodeBytes(byte[] buffer, int offset, int count, bool dontDeferFinalBytes, bool shouldAppendSpaceToCRLF)
+        internal int EncodeBytes(
+            byte[] buffer,
+            int offset,
+            int count,
+            bool dontDeferFinalBytes,
+            bool shouldAppendSpaceToCRLF
+        )
         {
-            return _encoder.EncodeBytes(buffer, offset, count, dontDeferFinalBytes, shouldAppendSpaceToCRLF);
+            return _encoder.EncodeBytes(
+                buffer,
+                offset,
+                count,
+                dontDeferFinalBytes,
+                shouldAppendSpaceToCRLF
+            );
         }
 
-        public int EncodeString(string value, Encoding encoding) => _encoder.EncodeString(value, encoding);
+        public int EncodeString(string value, Encoding encoding) =>
+            _encoder.EncodeString(value, encoding);
 
         public string GetEncodedString() => _encoder.GetEncodedString();
 
@@ -245,7 +516,14 @@ namespace System.Net
 
             private static readonly AsyncCallback s_onRead = OnRead;
 
-            internal ReadAsyncResult(Base64Stream parent, byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) : base(null, state, callback)
+            internal ReadAsyncResult(
+                Base64Stream parent,
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;
@@ -282,7 +560,13 @@ namespace System.Net
             {
                 while (true)
                 {
-                    IAsyncResult result = _parent.BaseStream.BeginRead(_buffer, _offset, _count, s_onRead, this);
+                    IAsyncResult result = _parent.BaseStream.BeginRead(
+                        _buffer,
+                        _offset,
+                        _count,
+                        s_onRead,
+                        this
+                    );
                     if (!result.CompletedSynchronously || CompleteRead(result))
                     {
                         break;
@@ -331,7 +615,14 @@ namespace System.Net
             private readonly int _count;
             private int _written;
 
-            internal WriteAsyncResult(Base64Stream parent, byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) : base(null, state, callback)
+            internal WriteAsyncResult(
+                Base64Stream parent,
+                byte[] buffer,
+                int offset,
+                int count,
+                AsyncCallback? callback,
+                object? state
+            ) : base(null, state, callback)
             {
                 _parent = parent;
                 _buffer = buffer;
@@ -345,10 +636,22 @@ namespace System.Net
                 {
                     // do not append a space when writing from a stream since this means
                     // it's writing the email body
-                    _written += _parent.EncodeBytes(_buffer, _offset + _written, _count - _written, false, false);
+                    _written += _parent.EncodeBytes(
+                        _buffer,
+                        _offset + _written,
+                        _count - _written,
+                        false,
+                        false
+                    );
                     if (_written < _count)
                     {
-                        IAsyncResult result = _parent.BaseStream.BeginWrite(_parent.WriteState.Buffer, 0, _parent.WriteState.Length, s_onWrite, this);
+                        IAsyncResult result = _parent.BaseStream.BeginWrite(
+                            _parent.WriteState.Buffer,
+                            0,
+                            _parent.WriteState.Length,
+                            s_onWrite,
+                            this
+                        );
                         if (!result.CompletedSynchronously)
                         {
                             break;

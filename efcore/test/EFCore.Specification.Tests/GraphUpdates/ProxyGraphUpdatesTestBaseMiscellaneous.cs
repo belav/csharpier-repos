@@ -11,23 +11,22 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
     where TFixture : ProxyGraphUpdatesTestBase<TFixture>.ProxyGraphUpdatesFixtureBase, new()
 {
     [ConditionalFact]
-    public virtual void Save_two_entity_cycle_with_lazy_loading()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Save_two_entity_cycle_with_lazy_loading() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 context.AddRange(
-                    context.CreateProxy<Car>(
-                        car =>
-                        {
-                            car.Owner = context.CreateProxy<Person>();
-                            car.Id = Guid.NewGuid();
-                        }),
-                    context.CreateProxy<Car>(
-                        car =>
-                        {
-                            car.Owner = context.CreateProxy<Person>();
-                            car.Id = Guid.NewGuid();
-                        }));
+                    context.CreateProxy<Car>(car =>
+                    {
+                        car.Owner = context.CreateProxy<Person>();
+                        car.Id = Guid.NewGuid();
+                    }),
+                    context.CreateProxy<Car>(car =>
+                    {
+                        car.Owner = context.CreateProxy<Person>();
+                        car.Id = Guid.NewGuid();
+                    })
+                );
 
                 context.SaveChanges();
             },
@@ -53,22 +52,25 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
                 }
                 else
                 {
-                    var message = Assert.Throws<InvalidOperationException>(() => context.SaveChanges()).Message;
+                    var message = Assert
+                        .Throws<InvalidOperationException>(() => context.SaveChanges())
+                        .Message;
                     Assert.StartsWith(CoreStrings.CircularDependency("").Substring(0, 30), message);
                 }
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Can_use_record_proxies_with_base_types_to_load_reference()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Can_use_record_proxies_with_base_types_to_load_reference() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 context.AddRange(
-                    context.CreateProxy<RecordCar>(
-                        car =>
-                        {
-                            car.Owner = context.CreateProxy<RecordPerson>();
-                        }));
+                    context.CreateProxy<RecordCar>(car =>
+                    {
+                        car.Owner = context.CreateProxy<RecordPerson>();
+                    })
+                );
 
                 context.SaveChanges();
             },
@@ -82,19 +84,20 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
 
                 Assert.Equal(car.Owner.Id, car.OwnerId);
                 Assert.Same(car, car.Owner.Vehicles.Single());
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Can_use_record_proxies_with_base_types_to_load_collection()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Can_use_record_proxies_with_base_types_to_load_collection() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 context.AddRange(
-                    context.CreateProxy<RecordCar>(
-                        car =>
-                        {
-                            car.Owner = context.CreateProxy<RecordPerson>();
-                        }));
+                    context.CreateProxy<RecordCar>(car =>
+                    {
+                        car.Owner = context.CreateProxy<RecordPerson>();
+                    })
+                );
 
                 context.SaveChanges();
             },
@@ -108,11 +111,12 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
 
                 Assert.Equal(owner.Id, owner.Vehicles.Single().Id);
                 Assert.Same(owner, owner.Vehicles.Single().Owner);
-            });
+            }
+        );
 
     [ConditionalFact]
-    public virtual void Avoid_nulling_shared_FK_property_when_deleting()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Avoid_nulling_shared_FK_property_when_deleting() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var root = context
@@ -187,13 +191,16 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
 
                 Assert.Equal(root.Id, parent.RootId);
                 Assert.Null(parent.DependantId);
-            });
+            }
+        );
 
     [ConditionalTheory]
     [InlineData(false)]
     [InlineData(true)]
-    public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(bool nullPrincipal)
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Avoid_nulling_shared_FK_property_when_nulling_navigation(
+        bool nullPrincipal
+    ) =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var root = context
@@ -274,7 +281,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
                 Assert.Equal(root.Id, dependent.RootId);
                 Assert.Equal(root.Id, parent.RootId);
                 Assert.Null(parent.DependantId);
-            });
+            }
+        );
 
     [ConditionalFact]
     public virtual void No_fixup_to_Deleted_entities()
@@ -307,8 +315,8 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
     }
 
     [ConditionalFact]
-    public virtual void Sometimes_not_calling_DetectChanges_when_required_does_not_throw_for_null_ref()
-        => ExecuteWithStrategyInTransaction(
+    public virtual void Sometimes_not_calling_DetectChanges_when_required_does_not_throw_for_null_ref() =>
+        ExecuteWithStrategyInTransaction(
             context =>
             {
                 var dependent = context.Set<BadOrder>().Single();
@@ -337,5 +345,6 @@ public abstract partial class ProxyGraphUpdatesTestBase<TFixture>
                 Assert.Null(dependent.BadCustomerId);
                 Assert.Null(dependent.BadCustomer);
                 Assert.Empty(principal.BadOrders);
-            });
+            }
+        );
 }

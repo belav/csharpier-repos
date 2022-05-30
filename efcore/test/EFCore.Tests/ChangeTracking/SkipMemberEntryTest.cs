@@ -77,7 +77,8 @@ public class SkipMemberEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Cherry()).Entity;
-        var propertyBase = (IPropertyBase)context.Entry(entity).Metadata.FindSkipNavigation("Chunkies")!;
+        var propertyBase = (IPropertyBase)
+            context.Entry(entity).Metadata.FindSkipNavigation("Chunkies")!;
 
         var entry = context.Entry(entity).Member(propertyBase);
         Assert.Same(propertyBase, entry.Metadata);
@@ -87,7 +88,6 @@ public class SkipMemberEntryTest
         Assert.Same(propertyBase, entry.Metadata);
         Assert.IsType<CollectionEntry>(entry);
     }
-
 
     [ConditionalFact]
     public void Can_get_skip_collection_entry_by_name_using_Collection()
@@ -109,7 +109,8 @@ public class SkipMemberEntryTest
     {
         using var context = new FreezerContext();
         var entity = context.Add(new Cherry()).Entity;
-        var navigationBase = (INavigationBase)context.Entry(entity).Metadata.FindSkipNavigation("Chunkies")!;
+        var navigationBase = (INavigationBase)
+            context.Entry(entity).Metadata.FindSkipNavigation("Chunkies")!;
 
         var entry = context.Entry(entity).Collection(navigationBase);
         Assert.Same(navigationBase, entry.Metadata);
@@ -134,8 +135,8 @@ public class SkipMemberEntryTest
 
     private class FreezerContext : DbContext
     {
-        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected internal override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInternalServiceProvider(InMemoryFixture.DefaultServiceProvider)
                 .UseInMemoryDatabase(nameof(FreezerContext));
 

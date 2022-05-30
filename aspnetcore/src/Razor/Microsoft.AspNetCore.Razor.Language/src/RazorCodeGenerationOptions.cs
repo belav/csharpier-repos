@@ -20,7 +20,8 @@ public abstract class RazorCodeGenerationOptions
             suppressNullabilityEnforcement: false,
             omitMinimizedComponentAttributeValues: false,
             supportLocalizedComponentNames: false,
-            useEnhancedLinePragma: true);
+            useEnhancedLinePragma: true
+        );
     }
 
     public static RazorCodeGenerationOptions CreateDesignTimeDefault()
@@ -36,10 +37,13 @@ public abstract class RazorCodeGenerationOptions
             suppressNullabilityEnforcement: false,
             omitMinimizedComponentAttributeValues: false,
             supportLocalizedComponentNames: false,
-            useEnhancedLinePragma: true);
+            useEnhancedLinePragma: true
+        );
     }
 
-    public static RazorCodeGenerationOptions Create(Action<RazorCodeGenerationOptionsBuilder> configure)
+    public static RazorCodeGenerationOptions Create(
+        Action<RazorCodeGenerationOptionsBuilder> configure
+    )
     {
         if (configure == null)
         {
@@ -53,7 +57,9 @@ public abstract class RazorCodeGenerationOptions
         return options;
     }
 
-    public static RazorCodeGenerationOptions CreateDesignTime(Action<RazorCodeGenerationOptionsBuilder> configure)
+    public static RazorCodeGenerationOptions CreateDesignTime(
+        Action<RazorCodeGenerationOptionsBuilder> configure
+    )
     {
         if (configure == null)
         {

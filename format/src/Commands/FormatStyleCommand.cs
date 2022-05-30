@@ -29,37 +29,60 @@ namespace Microsoft.CodeAnalysis.Tools.Commands
 
         private class FormatStyleHandler : ICommandHandler
         {
-            public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+            public int Invoke(InvocationContext context) =>
+                InvokeAsync(context).GetAwaiter().GetResult();
 
             public async Task<int> InvokeAsync(InvocationContext context)
             {
                 var parseResult = context.ParseResult;
                 var formatOptions = parseResult.ParseVerbosityOption(FormatOptions.Instance);
-                var logger = context.Console.SetupLogging(minimalLogLevel: formatOptions.LogLevel, minimalErrorLevel: LogLevel.Warning);
+                var logger = context.Console.SetupLogging(
+                    minimalLogLevel: formatOptions.LogLevel,
+                    minimalErrorLevel: LogLevel.Warning
+                );
                 formatOptions = parseResult.ParseCommonOptions(formatOptions, logger);
                 formatOptions = parseResult.ParseWorkspaceOptions(formatOptions);
 
-                if (parseResult.HasOption(SeverityOption) &&
-                    parseResult.GetValueForOption(SeverityOption) is string { Length: > 0 } styleSeverity)
+                if (
+                    parseResult.HasOption(SeverityOption)
+                    && parseResult.GetValueForOption(SeverityOption)
+                        is string { Length: > 0 } styleSeverity
+                )
                 {
-                    formatOptions = formatOptions with { CodeStyleSeverity = GetSeverity(styleSeverity) };
+                    formatOptions = formatOptions with
+                    {
+                        CodeStyleSeverity = GetSeverity(styleSeverity)
+                    };
                 }
 
-                if (parseResult.HasOption(DiagnosticsOption) &&
-                    parseResult.GetValueForOption(DiagnosticsOption) is string[] { Length: > 0 } diagnostics)
+                if (
+                    parseResult.HasOption(DiagnosticsOption)
+                    && parseResult.GetValueForOption(DiagnosticsOption)
+                        is string[] { Length: > 0 } diagnostics
+                )
                 {
-                    formatOptions = formatOptions with { Diagnostics = diagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        Diagnostics = diagnostics.ToImmutableHashSet()
+                    };
                 }
 
-                if (parseResult.HasOption(ExcludeDiagnosticsOption) &&
-                    parseResult.GetValueForOption(ExcludeDiagnosticsOption) is string[] { Length: > 0 } excludeDiagnostics)
+                if (
+                    parseResult.HasOption(ExcludeDiagnosticsOption)
+                    && parseResult.GetValueForOption(ExcludeDiagnosticsOption)
+                        is string[] { Length: > 0 } excludeDiagnostics
+                )
                 {
-                    formatOptions = formatOptions with { ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet() };
+                    formatOptions = formatOptions with
+                    {
+                        ExcludeDiagnostics = excludeDiagnostics.ToImmutableHashSet()
+                    };
                 }
 
                 formatOptions = formatOptions with { FixCategory = FixCategory.CodeStyle };
 
-                return await FormatAsync(formatOptions, logger, context.GetCancellationToken()).ConfigureAwait(false);
+                return await FormatAsync(formatOptions, logger, context.GetCancellationToken())
+                    .ConfigureAwait(false);
             }
         }
     }

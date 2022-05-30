@@ -9,8 +9,7 @@ using System.Threading.Tasks;
 
 namespace Microsoft.WebAssembly.AppHost;
 
-internal sealed record WebServerOptions
-(
+internal sealed record WebServerOptions(
     Func<WebSocket, Task>? OnConsoleConnected,
     string? ContentRootPath,
     bool WebServerUseCors,

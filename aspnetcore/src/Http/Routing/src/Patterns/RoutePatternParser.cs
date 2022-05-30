@@ -45,7 +45,10 @@ internal static class RoutePatternParser
             {
                 // If we get here is means that there's a consecutive '/' character.
                 // Templates don't start with a '/' and parsing a segment consumes the separator.
-                throw new RoutePatternException(pattern, Resources.TemplateRoute_CannotHaveConsecutiveSeparators);
+                throw new RoutePatternException(
+                    pattern,
+                    Resources.TemplateRoute_CannotHaveConsecutiveSeparators
+                );
             }
 
             if (!ParseSegment(context, segments))
@@ -220,7 +223,10 @@ internal static class RoutePatternParser
         var templatePart = RouteParameterParser.ParseRouteParameter(decoded);
 
         // See #475 - this is here because InlineRouteParameterParser can't return errors
-        if (decoded.StartsWith("*", StringComparison.Ordinal) && decoded.EndsWith("?", StringComparison.Ordinal))
+        if (
+            decoded.StartsWith("*", StringComparison.Ordinal)
+            && decoded.EndsWith("?", StringComparison.Ordinal)
+        )
         {
             context.Error = Resources.TemplateRoute_CatchAllCannotBeOptional;
             return false;
@@ -328,9 +334,11 @@ internal static class RoutePatternParser
             for (var j = 0; j < segment.Parts.Count; j++)
             {
                 var part = segment.Parts[j];
-                if (part is RoutePatternParameterPart parameter
-                    && parameter.IsCatchAll &&
-                    (i != segments.Count - 1 || j != segment.Parts.Count - 1))
+                if (
+                    part is RoutePatternParameterPart parameter
+                    && parameter.IsCatchAll
+                    && (i != segments.Count - 1 || j != segment.Parts.Count - 1)
+                )
                 {
                     context.Error = Resources.TemplateRoute_CatchAllMustBeLast;
                     return false;
@@ -347,7 +355,11 @@ internal static class RoutePatternParser
         for (var i = 0; i < parts.Count; i++)
         {
             var part = parts[i];
-            if (part is RoutePatternParameterPart parameter && parameter.IsCatchAll && parts.Count > 1)
+            if (
+                part is RoutePatternParameterPart parameter
+                && parameter.IsCatchAll
+                && parts.Count > 1
+            )
             {
                 context.Error = Resources.TemplateRoute_CannotHaveCatchAllInMultiSegment;
                 return false;
@@ -360,7 +372,11 @@ internal static class RoutePatternParser
         {
             var part = parts[i];
 
-            if (part is RoutePatternParameterPart parameter && parameter.IsOptional && parts.Count > 1)
+            if (
+                part is RoutePatternParameterPart parameter
+                && parameter.IsOptional
+                && parts.Count > 1
+            )
             {
                 // This optional parameter is the last part in the segment
                 if (i == parts.Count - 1)
@@ -373,28 +389,37 @@ internal static class RoutePatternParser
                         // Example of error message:
                         // "In the segment '{RouteValue}{param?}', the optional parameter 'param' is preceded
                         // by an invalid segment '{RouteValue}'. Only a period (.) can precede an optional parameter.
-                        context.Error = Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
-                            RoutePatternPathSegment.DebuggerToString(parts),
-                            parameter.Name,
-                            parts[i - 1].DebuggerToString());
+                        context.Error =
+                            Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
+                                RoutePatternPathSegment.DebuggerToString(parts),
+                                parameter.Name,
+                                parts[i - 1].DebuggerToString()
+                            );
 
                         return false;
                     }
-                    else if (previousPart is RoutePatternLiteralPart literal && literal.Content != PeriodString)
+                    else if (
+                        previousPart is RoutePatternLiteralPart literal
+                        && literal.Content != PeriodString
+                    )
                     {
                         // The optional parameter is preceded by a literal other than period.
                         // Example of error message:
                         // "In the segment '{RouteValue}-{param?}', the optional parameter 'param' is preceded
                         // by an invalid segment '-'. Only a period (.) can precede an optional parameter.
-                        context.Error = Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
-                            RoutePatternPathSegment.DebuggerToString(parts),
-                            parameter.Name,
-                            parts[i - 1].DebuggerToString());
+                        context.Error =
+                            Resources.FormatTemplateRoute_OptionalParameterCanbBePrecededByPeriod(
+                                RoutePatternPathSegment.DebuggerToString(parts),
+                                parameter.Name,
+                                parts[i - 1].DebuggerToString()
+                            );
 
                         return false;
                     }
 
-                    parts[i - 1] = RoutePatternFactory.SeparatorPart(((RoutePatternLiteralPart)previousPart).Content);
+                    parts[i - 1] = RoutePatternFactory.SeparatorPart(
+                        ((RoutePatternLiteralPart)previousPart).Content
+                    );
                 }
                 else
                 {
@@ -405,7 +430,8 @@ internal static class RoutePatternParser
                     context.Error = Resources.FormatTemplateRoute_OptionalParameterHasTobeTheLast(
                         RoutePatternPathSegment.DebuggerToString(parts),
                         parameter.Name,
-                        parts[i + 1].DebuggerToString());
+                        parts[i + 1].DebuggerToString()
+                    );
 
                     return false;
                 }
@@ -472,7 +498,10 @@ internal static class RoutePatternParser
         }
         else if (routePattern.StartsWith("~", StringComparison.Ordinal))
         {
-            throw new RoutePatternException(routePattern, Resources.TemplateRoute_InvalidRouteTemplate);
+            throw new RoutePatternException(
+                routePattern,
+                Resources.TemplateRoute_InvalidRouteTemplate
+            );
         }
         return routePattern;
     }
@@ -484,7 +513,9 @@ internal static class RoutePatternParser
         private int _index;
         private int? _mark;
 
-        private readonly HashSet<string> _parameterNames = new HashSet<string>(StringComparer.OrdinalIgnoreCase);
+        private readonly HashSet<string> _parameterNames = new HashSet<string>(
+            StringComparer.OrdinalIgnoreCase
+        );
 
         public Context(string template)
         {
@@ -501,11 +532,7 @@ internal static class RoutePatternParser
 
         public int Index => _index;
 
-        public string Error
-        {
-            get;
-            set;
-        }
+        public string Error { get; set; }
 
         public HashSet<string> ParameterNames
         {
@@ -557,15 +584,19 @@ internal static class RoutePatternParser
             }
             else if (_mark.HasValue)
             {
-                return _template.Substring(0, _mark.Value) +
-                    "|" +
-                    _template.Substring(_mark.Value, _index - _mark.Value) +
-                    "|" +
-                    _template.Substring(_index);
+                return _template.Substring(0, _mark.Value)
+                    + "|"
+                    + _template.Substring(_mark.Value, _index - _mark.Value)
+                    + "|"
+                    + _template.Substring(_index);
             }
             else
             {
-                return string.Concat(_template.Substring(0, _index), "|", _template.Substring(_index));
+                return string.Concat(
+                    _template.Substring(0, _index),
+                    "|",
+                    _template.Substring(_index)
+                );
             }
         }
     }

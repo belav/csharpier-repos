@@ -18,9 +18,7 @@ public class GenericWebHostBuilderTests
     {
         var randomEnvKey = Guid.NewGuid().ToString();
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, "true");
-        using var host = new HostBuilder()
-            .ConfigureWebHost(_ => { })
-            .Build();
+        using var host = new HostBuilder().ConfigureWebHost(_ => { }).Build();
         var config = host.Services.GetRequiredService<IConfiguration>();
         Assert.Equal("true", config[randomEnvKey]);
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, null);
@@ -32,7 +30,13 @@ public class GenericWebHostBuilderTests
         var randomEnvKey = Guid.NewGuid().ToString();
         Environment.SetEnvironmentVariable("ASPNETCORE_" + randomEnvKey, "true");
         using var host = new HostBuilder()
-            .ConfigureWebHost(_ => { }, webHostBulderOptions => { webHostBulderOptions.SuppressEnvironmentConfiguration = true; })
+            .ConfigureWebHost(
+                _ => { },
+                webHostBulderOptions =>
+                {
+                    webHostBulderOptions.SuppressEnvironmentConfiguration = true;
+                }
+            )
             .Build();
         var config = host.Services.GetRequiredService<IConfiguration>();
         Assert.Null(config[randomEnvKey]);
@@ -47,10 +51,7 @@ public class GenericWebHostBuilderTests
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                    .UseServer(server)
-                    .UseUrls("TEST_URL")
-                    .Configure(_ => { });
+                webHostBuilder.UseServer(server).UseUrls("TEST_URL").Configure(_ => { });
             })
             .ConfigureAppConfiguration(configBuilder =>
             {
@@ -71,10 +72,7 @@ public class GenericWebHostBuilderTests
         using var host = new HostBuilder()
             .ConfigureWebHost(webHostBuilder =>
             {
-                webHostBuilder
-                    .UseServer(server)
-                    .UseUrls("TEST_URL")
-                    .Configure(_ => { });
+                webHostBuilder.UseServer(server).UseUrls("TEST_URL").Configure(_ => { });
             })
             .ConfigureHostConfiguration(configBuilder =>
             {
@@ -99,8 +97,13 @@ public class GenericWebHostBuilderTests
         public ICollection<string> Addresses { get; } = new List<string>();
         public bool PreferHostingUrls { get; set; }
 
-        public Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) => Task.CompletedTask;
+        public Task StartAsync<TContext>(
+            IHttpApplication<TContext> application,
+            CancellationToken cancellationToken
+        ) => Task.CompletedTask;
+
         public Task StopAsync(CancellationToken cancellationToken) => Task.CompletedTask;
+
         public void Dispose() { }
     }
 }

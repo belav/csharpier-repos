@@ -20,7 +20,9 @@ public class DataProtectionAdvancedExtensionsTests
         var plaintextAsBytes = Encoding.UTF8.GetBytes("this is plaintext");
         var expiration = StringToDateTime("2015-01-01 00:00:00Z");
         var mockDataProtector = new Mock<ITimeLimitedDataProtector>();
-        mockDataProtector.Setup(o => o.Protect(plaintextAsBytes, expiration)).Returns(new byte[] { 0x01, 0x02 });
+        mockDataProtector
+            .Setup(o => o.Protect(plaintextAsBytes, expiration))
+            .Returns(new byte[] { 0x01, 0x02 });
 
         // Act
         var plainText = "this is plaintext";
@@ -37,16 +39,22 @@ public class DataProtectionAdvancedExtensionsTests
         var plaintextAsBytes = Encoding.UTF8.GetBytes("this is plaintext");
         DateTimeOffset actualExpiration = default(DateTimeOffset);
         var mockDataProtector = new Mock<ITimeLimitedDataProtector>();
-        mockDataProtector.Setup(o => o.Protect(plaintextAsBytes, It.IsAny<DateTimeOffset>()))
-            .Returns<byte[], DateTimeOffset>((_, exp) =>
-            {
-                actualExpiration = exp;
-                return new byte[] { 0x01, 0x02 };
-            });
+        mockDataProtector
+            .Setup(o => o.Protect(plaintextAsBytes, It.IsAny<DateTimeOffset>()))
+            .Returns<byte[], DateTimeOffset>(
+                (_, exp) =>
+                {
+                    actualExpiration = exp;
+                    return new byte[] { 0x01, 0x02 };
+                }
+            );
 
         // Act
         DateTimeOffset lowerBound = DateTimeOffset.UtcNow.AddHours(48);
-        string protectedPayload = mockDataProtector.Object.Protect("this is plaintext", TimeSpan.FromHours(48));
+        string protectedPayload = mockDataProtector.Object.Protect(
+            "this is plaintext",
+            TimeSpan.FromHours(48)
+        );
         DateTimeOffset upperBound = DateTimeOffset.UtcNow.AddHours(48);
 
         // Assert
@@ -60,16 +68,22 @@ public class DataProtectionAdvancedExtensionsTests
         // Arrange
         DateTimeOffset actualExpiration = default(DateTimeOffset);
         var mockDataProtector = new Mock<ITimeLimitedDataProtector>();
-        mockDataProtector.Setup(o => o.Protect(new byte[] { 0x11, 0x22, 0x33 }, It.IsAny<DateTimeOffset>()))
-            .Returns<byte[], DateTimeOffset>((_, exp) =>
-            {
-                actualExpiration = exp;
-                return new byte[] { 0x01, 0x02 };
-            });
+        mockDataProtector
+            .Setup(o => o.Protect(new byte[] { 0x11, 0x22, 0x33 }, It.IsAny<DateTimeOffset>()))
+            .Returns<byte[], DateTimeOffset>(
+                (_, exp) =>
+                {
+                    actualExpiration = exp;
+                    return new byte[] { 0x01, 0x02 };
+                }
+            );
 
         // Act
         DateTimeOffset lowerBound = DateTimeOffset.UtcNow.AddHours(48);
-        byte[] protectedPayload = mockDataProtector.Object.Protect(new byte[] { 0x11, 0x22, 0x33 }, TimeSpan.FromHours(48));
+        byte[] protectedPayload = mockDataProtector.Object.Protect(
+            new byte[] { 0x11, 0x22, 0x33 },
+            TimeSpan.FromHours(48)
+        );
         DateTimeOffset upperBound = DateTimeOffset.UtcNow.AddHours(48);
 
         // Assert
@@ -84,11 +98,16 @@ public class DataProtectionAdvancedExtensionsTests
         var futureDate = DateTimeOffset.UtcNow.AddYears(1);
         var controlExpiration = futureDate;
         var mockDataProtector = new Mock<ITimeLimitedDataProtector>();
-        mockDataProtector.Setup(o => o.Unprotect(new byte[] { 0x01, 0x02 }, out controlExpiration)).Returns(Encoding.UTF8.GetBytes("this is plaintext"));
+        mockDataProtector
+            .Setup(o => o.Unprotect(new byte[] { 0x01, 0x02 }, out controlExpiration))
+            .Returns(Encoding.UTF8.GetBytes("this is plaintext"));
 
         // Act
         var sampleEncodedString = SampleEncodedString;
-        string unprotectedPayload = mockDataProtector.Object.Unprotect(sampleEncodedString, out var testExpiration);
+        string unprotectedPayload = mockDataProtector.Object.Unprotect(
+            sampleEncodedString,
+            out var testExpiration
+        );
 
         // Assert
         Assert.Equal("this is plaintext", unprotectedPayload);

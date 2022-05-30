@@ -29,9 +29,10 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
     /// <param name="routePattern">The <see cref="RoutePattern"/> to use in URL matching.</param>
     /// <param name="order">The order assigned to the endpoint.</param>
     public RouteEndpointBuilder(
-       RequestDelegate requestDelegate,
-       RoutePattern routePattern,
-       int order)
+        RequestDelegate requestDelegate,
+        RoutePattern routePattern,
+        int order
+    )
     {
         RequestDelegate = requestDelegate;
         RoutePattern = routePattern;
@@ -48,9 +49,7 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
     /// <see cref="RouteEndpointBuilder"/> after construction but before <see cref="Build"/>
     /// is invoked.
     /// </remarks>
-    internal RouteEndpointBuilder(
-        RoutePattern routePattern,
-        int order)
+    internal RouteEndpointBuilder(RoutePattern routePattern, int order)
     {
         RoutePattern = routePattern;
         Order = order;
@@ -61,7 +60,9 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
     {
         if (RequestDelegate is null)
         {
-            throw new InvalidOperationException($"{nameof(RequestDelegate)} must be specified to construct a {nameof(RouteEndpoint)}.");
+            throw new InvalidOperationException(
+                $"{nameof(RequestDelegate)} must be specified to construct a {nameof(RouteEndpoint)}."
+            );
         }
 
         var routeEndpoint = new RouteEndpoint(
@@ -69,7 +70,8 @@ public sealed class RouteEndpointBuilder : EndpointBuilder
             RoutePattern,
             Order,
             new EndpointMetadataCollection(Metadata),
-            DisplayName);
+            DisplayName
+        );
 
         return routeEndpoint;
     }

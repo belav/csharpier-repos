@@ -12,7 +12,11 @@ namespace System.Text.Json.Serialization.Converters
         private static readonly TimeSpanConverter s_timeSpanConverter = new TimeSpanConverter();
         private static readonly TimeSpan s_timeOnlyMaxValue = TimeOnly.MaxValue.ToTimeSpan();
 
-        public override TimeOnly Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeOnly Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             TimeSpan timespan = s_timeSpanConverter.Read(ref reader, typeToConvert, options);
 
@@ -24,7 +28,11 @@ namespace System.Text.Json.Serialization.Converters
             return TimeOnly.FromTimeSpan(timespan);
         }
 
-        public override void Write(Utf8JsonWriter writer, TimeOnly value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TimeOnly value,
+            JsonSerializerOptions options
+        )
         {
             s_timeSpanConverter.Write(writer, value.ToTimeSpan(), options);
         }

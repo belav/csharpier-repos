@@ -4,9 +4,7 @@ using System;
 
 public class LIA
 {
-    public LIA(byte[] zaoption, object[] zacnttb, string[] zaprgnm, string zaclsnm, Type zatype)
-    {
-    }
+    public LIA(byte[] zaoption, object[] zacnttb, string[] zaprgnm, string zaclsnm, Type zatype) { }
 }
 
 public sealed class ILI
@@ -21,8 +19,4 @@ public sealed class ILI
     }
 }
 
-internal
-class RCB
-{
-}
-
+internal class RCB { }

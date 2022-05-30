@@ -25,11 +25,11 @@ namespace Microsoft.CodeAnalysis.Options
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public OptionServiceFactory(IGlobalOptionService globalOptionService)
-            => _globalOptionService = globalOptionService;
+        public OptionServiceFactory(IGlobalOptionService globalOptionService) =>
+            _globalOptionService = globalOptionService;
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new OptionService(_globalOptionService, workspaceServices);
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new OptionService(_globalOptionService, workspaceServices);
 
         /// <summary>
         /// Wraps an underlying <see cref="IGlobalOptionService"/> and exposes its data to workspace
@@ -53,36 +53,49 @@ namespace Microsoft.CodeAnalysis.Options
 
             public OptionService(
                 IGlobalOptionService globalOptionService,
-                HostWorkspaceServices workspaceServices)
+                HostWorkspaceServices workspaceServices
+            )
             {
                 _globalOptionService = globalOptionService;
 
-                var schedulerProvider = workspaceServices.GetRequiredService<ITaskSchedulerProvider>();
-                var listenerProvider = workspaceServices.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
-                _taskQueue = new TaskQueue(listenerProvider.GetListener(), schedulerProvider.CurrentContextScheduler);
+                var schedulerProvider =
+                    workspaceServices.GetRequiredService<ITaskSchedulerProvider>();
+                var listenerProvider =
+                    workspaceServices.GetRequiredService<IWorkspaceAsynchronousOperationListenerProvider>();
+                _taskQueue = new TaskQueue(
+                    listenerProvider.GetListener(),
+                    schedulerProvider.CurrentContextScheduler
+                );
 
                 _globalOptionService.OptionChanged += OnGlobalOptionServiceOptionChanged;
             }
 
             public void OnWorkspaceDisposed(Workspace workspace)
             {
-                // Disconnect us from the underlying global service.  That way it doesn't 
+                // Disconnect us from the underlying global service.  That way it doesn't
                 // keep us around (and all the event handlers we're holding onto) forever.
                 _globalOptionService.OptionChanged -= OnGlobalOptionServiceOptionChanged;
             }
 
-            private void OnGlobalOptionServiceOptionChanged(object? sender, OptionChangedEventArgs e)
+            private void OnGlobalOptionServiceOptionChanged(
+                object? sender,
+                OptionChangedEventArgs e
+            )
             {
-                _taskQueue.ScheduleTask(nameof(OptionService) + "." + nameof(OnGlobalOptionServiceOptionChanged), () =>
-                {
-                    // Ensure we grab the event handlers inside the scheduled task to prevent a race of people unsubscribing
-                    // but getting the event later on the UI thread
-                    var eventHandlers = GetEventHandlers();
-                    foreach (var handler in eventHandlers)
+                _taskQueue.ScheduleTask(
+                    nameof(OptionService) + "." + nameof(OnGlobalOptionServiceOptionChanged),
+                    () =>
                     {
-                        handler(this, e);
-                    }
-                }, CancellationToken.None);
+                        // Ensure we grab the event handlers inside the scheduled task to prevent a race of people unsubscribing
+                        // but getting the event later on the UI thread
+                        var eventHandlers = GetEventHandlers();
+                        foreach (var handler in eventHandlers)
+                        {
+                            handler(this, e);
+                        }
+                    },
+                    CancellationToken.None
+                );
             }
 
             private ImmutableArray<EventHandler<OptionChangedEventArgs>> GetEventHandlers()
@@ -102,7 +115,6 @@ namespace Microsoft.CodeAnalysis.Options
                         _eventHandlers = _eventHandlers.Add(value);
                     }
                 }
-
                 remove
                 {
                     lock (_gate)
@@ -113,19 +125,54 @@ namespace Microsoft.CodeAnalysis.Options
             }
 
             // Simple forwarding functions.
-            public SerializableOptionSet GetOptions() => GetSerializableOptionsSnapshot(ImmutableHashSet<string>.Empty);
-            public SerializableOptionSet GetSerializableOptionsSnapshot(ImmutableHashSet<string> languages) => _globalOptionService.GetSerializableOptionsSnapshot(languages, this);
-            public object? GetOption(OptionKey optionKey) => _globalOptionService.GetOption(optionKey);
+            public SerializableOptionSet GetOptions() =>
+                GetSerializableOptionsSnapshot(ImmutableHashSet<string>.Empty);
+
+            public SerializableOptionSet GetSerializableOptionsSnapshot(
+                ImmutableHashSet<string> languages
+            ) => _globalOptionService.GetSerializableOptionsSnapshot(languages, this);
+
+            public object? GetOption(OptionKey optionKey) =>
+                _globalOptionService.GetOption(optionKey);
+
             public T? GetOption<T>(Option<T> option) => _globalOptionService.GetOption(option);
+
             public T? GetOption<T>(Option2<T> option) => _globalOptionService.GetOption(option);
-            public T? GetOption<T>(PerLanguageOption<T> option, string? languageName) => _globalOptionService.GetOption(option, languageName);
-            public T? GetOption<T>(PerLanguageOption2<T> option, string? languageName) => _globalOptionService.GetOption(option, languageName);
-            public IEnumerable<IOption> GetRegisteredOptions() => _globalOptionService.GetRegisteredOptions();
-            public bool TryMapEditorConfigKeyToOption(string key, string? language, [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation, out OptionKey optionKey) => _globalOptionService.TryMapEditorConfigKeyToOption(key, language, out storageLocation, out optionKey);
-            public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(ImmutableHashSet<string> languages) => _globalOptionService.GetRegisteredSerializableOptions(languages);
-            public void SetOptions(OptionSet optionSet) => _globalOptionService.SetOptions(optionSet);
-            public void RegisterWorkspace(Workspace workspace) => _globalOptionService.RegisterWorkspace(workspace);
-            public void UnregisterWorkspace(Workspace workspace) => _globalOptionService.UnregisterWorkspace(workspace);
+
+            public T? GetOption<T>(PerLanguageOption<T> option, string? languageName) =>
+                _globalOptionService.GetOption(option, languageName);
+
+            public T? GetOption<T>(PerLanguageOption2<T> option, string? languageName) =>
+                _globalOptionService.GetOption(option, languageName);
+
+            public IEnumerable<IOption> GetRegisteredOptions() =>
+                _globalOptionService.GetRegisteredOptions();
+
+            public bool TryMapEditorConfigKeyToOption(
+                string key,
+                string? language,
+                [NotNullWhen(true)] out IEditorConfigStorageLocation2? storageLocation,
+                out OptionKey optionKey
+            ) =>
+                _globalOptionService.TryMapEditorConfigKeyToOption(
+                    key,
+                    language,
+                    out storageLocation,
+                    out optionKey
+                );
+
+            public ImmutableHashSet<IOption> GetRegisteredSerializableOptions(
+                ImmutableHashSet<string> languages
+            ) => _globalOptionService.GetRegisteredSerializableOptions(languages);
+
+            public void SetOptions(OptionSet optionSet) =>
+                _globalOptionService.SetOptions(optionSet);
+
+            public void RegisterWorkspace(Workspace workspace) =>
+                _globalOptionService.RegisterWorkspace(workspace);
+
+            public void UnregisterWorkspace(Workspace workspace) =>
+                _globalOptionService.UnregisterWorkspace(workspace);
         }
     }
 }

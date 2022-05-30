@@ -9,12 +9,10 @@ namespace Microsoft.CodeAnalysis.FindUsages
 {
     [DataContract]
     internal readonly record struct FindUsagesOptions(
-        [property: DataMember(Order = 0)] ClassificationOptions ClassificationOptions)
+        [property: DataMember(Order = 0)] ClassificationOptions ClassificationOptions
+    )
     {
-        public FindUsagesOptions()
-            : this(ClassificationOptions.Default)
-        {
-        }
+        public FindUsagesOptions() : this(ClassificationOptions.Default) { }
 
         public static readonly FindUsagesOptions Default = new();
     }

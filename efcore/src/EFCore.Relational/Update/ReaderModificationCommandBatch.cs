@@ -24,14 +24,18 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     private readonly List<IReadOnlyModificationCommand> _modificationCommands = new();
     private readonly int _batchHeaderLength;
     private bool _requiresTransaction = true;
-    private int _sqlBuilderPosition, _commandResultSetCount, _resultsPositionalMappingEnabledLength;
+    private int _sqlBuilderPosition,
+        _commandResultSetCount,
+        _resultsPositionalMappingEnabledLength;
     private int _pendingParameters;
 
     /// <summary>
     ///     Creates a new <see cref="ReaderModificationCommandBatch" /> instance.
     /// </summary>
     /// <param name="dependencies">Service dependencies.</param>
-    protected ReaderModificationCommandBatch(ModificationCommandBatchFactoryDependencies dependencies)
+    protected ReaderModificationCommandBatch(
+        ModificationCommandBatchFactoryDependencies dependencies
+    )
     {
         Dependencies = dependencies;
 
@@ -60,8 +64,7 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     /// <summary>
     ///     The maximum number of <see cref="ModificationCommand"/> instances that can be added to a single batch.
     /// </summary>
-    protected virtual int MaxBatchSize
-        => 1000;
+    protected virtual int MaxBatchSize => 1000;
 
     /// <summary>
     ///     Gets the command text builder for the commands in the batch.
@@ -76,13 +79,14 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     /// <summary>
     ///     The list of conceptual insert/update/delete <see cref="ModificationCommands" />s in the batch.
     /// </summary>
-    public override IReadOnlyList<IReadOnlyModificationCommand> ModificationCommands
-        => _modificationCommands;
+    public override IReadOnlyList<IReadOnlyModificationCommand> ModificationCommands =>
+        _modificationCommands;
 
     /// <summary>
     ///     The <see cref="ResultSetMapping" />s for each command in <see cref="ModificationCommands" />.
     /// </summary>
-    protected virtual IList<ResultSetMapping> CommandResultSet { get; } = new List<ResultSetMapping>();
+    protected virtual IList<ResultSetMapping> CommandResultSet { get; } =
+        new List<ResultSetMapping>();
 
     /// <summary>
     ///     When rows with database-generated values are returned in non-deterministic ordering, it is necessary to project out a synthetic
@@ -101,7 +105,9 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     {
         if (StoreCommand is not null)
         {
-            throw new InvalidOperationException(RelationalStrings.ModificationCommandBatchAlreadyComplete);
+            throw new InvalidOperationException(
+                RelationalStrings.ModificationCommandBatchAlreadyComplete
+            );
         }
 
         if (_modificationCommands.Count >= MaxBatchSize)
@@ -168,26 +174,23 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     /// <summary>
     ///     Whether any SQL has already been added to the batch command text.
     /// </summary>
-    protected virtual bool IsCommandTextEmpty
-        => SqlBuilder.Length == _batchHeaderLength;
+    protected virtual bool IsCommandTextEmpty => SqlBuilder.Length == _batchHeaderLength;
 
     /// <inheritdoc />
-    public override bool RequiresTransaction
-        => _requiresTransaction;
+    public override bool RequiresTransaction => _requiresTransaction;
 
     /// <summary>
     ///     Sets whether the batch requires a transaction in order to execute correctly.
     /// </summary>
     /// <param name="requiresTransaction">Whether the batch requires a transaction in order to execute correctly.</param>
-    protected virtual void SetRequiresTransaction(bool requiresTransaction)
-        => _requiresTransaction = requiresTransaction;
+    protected virtual void SetRequiresTransaction(bool requiresTransaction) =>
+        _requiresTransaction = requiresTransaction;
 
     /// <summary>
     ///     Checks whether the command text is valid.
     /// </summary>
     /// <returns><see langword="true" /> if the command text is valid; <see langword="false" /> otherwise.</returns>
-    protected virtual bool IsValid()
-        => true;
+    protected virtual bool IsValid() => true;
 
     /// <summary>
     ///     Adds Updates the command text for the command at the given position in the <see cref="ModificationCommands" /> list.
@@ -204,24 +207,41 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
             case EntityState.Added:
                 CommandResultSet.Add(
                     UpdateSqlGenerator.AppendInsertOperation(
-                        SqlBuilder, modificationCommand, commandPosition, out requiresTransaction));
+                        SqlBuilder,
+                        modificationCommand,
+                        commandPosition,
+                        out requiresTransaction
+                    )
+                );
                 break;
             case EntityState.Modified:
                 CommandResultSet.Add(
                     UpdateSqlGenerator.AppendUpdateOperation(
-                        SqlBuilder, modificationCommand, commandPosition, out requiresTransaction));
+                        SqlBuilder,
+                        modificationCommand,
+                        commandPosition,
+                        out requiresTransaction
+                    )
+                );
                 break;
             case EntityState.Deleted:
                 CommandResultSet.Add(
                     UpdateSqlGenerator.AppendDeleteOperation(
-                        SqlBuilder, modificationCommand, commandPosition, out requiresTransaction));
+                        SqlBuilder,
+                        modificationCommand,
+                        commandPosition,
+                        out requiresTransaction
+                    )
+                );
                 break;
 
             default:
                 throw new InvalidOperationException(
                     RelationalStrings.ModificationCommandInvalidEntityState(
                         modificationCommand.Entries[0].EntityType,
-                        modificationCommand.EntityState));
+                        modificationCommand.EntityState
+                    )
+                );
         }
 
         AddParameters(modificationCommand);
@@ -234,7 +254,9 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     {
         if (StoreCommand is not null)
         {
-            throw new InvalidOperationException(RelationalStrings.ModificationCommandBatchAlreadyComplete);
+            throw new InvalidOperationException(
+                RelationalStrings.ModificationCommandBatchAlreadyComplete
+            );
         }
 
         // Some database have a mode where autocommit is off, and so executing a command outside of an explicit transaction implicitly
@@ -273,9 +295,12 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
         {
             RelationalCommandBuilder.AddParameter(
                 columnModification.ParameterName,
-                Dependencies.SqlGenerationHelper.GenerateParameterName(columnModification.ParameterName),
+                Dependencies.SqlGenerationHelper.GenerateParameterName(
+                    columnModification.ParameterName
+                ),
                 columnModification.TypeMapping!,
-                columnModification.IsNullable);
+                columnModification.IsNullable
+            );
 
             ParameterValues.Add(columnModification.ParameterName, columnModification.Value);
 
@@ -286,11 +311,17 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
         {
             RelationalCommandBuilder.AddParameter(
                 columnModification.OriginalParameterName,
-                Dependencies.SqlGenerationHelper.GenerateParameterName(columnModification.OriginalParameterName),
+                Dependencies.SqlGenerationHelper.GenerateParameterName(
+                    columnModification.OriginalParameterName
+                ),
                 columnModification.TypeMapping!,
-                columnModification.IsNullable);
+                columnModification.IsNullable
+            );
 
-            ParameterValues.Add(columnModification.OriginalParameterName, columnModification.OriginalValue);
+            ParameterValues.Add(
+                columnModification.OriginalParameterName,
+                columnModification.OriginalValue
+            );
 
             _pendingParameters++;
         }
@@ -304,7 +335,9 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     {
         if (StoreCommand is null)
         {
-            throw new InvalidOperationException(RelationalStrings.ModificationCommandBatchNotComplete);
+            throw new InvalidOperationException(
+                RelationalStrings.ModificationCommandBatchNotComplete
+            );
         }
 
         try
@@ -315,7 +348,10 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
                     StoreCommand.ParameterValues,
                     null,
                     Dependencies.CurrentContext.Context,
-                    Dependencies.Logger, CommandSource.SaveChanges));
+                    Dependencies.Logger,
+                    CommandSource.SaveChanges
+                )
+            );
             Consume(dataReader);
         }
         catch (Exception ex) when (ex is not DbUpdateException and not OperationCanceledException)
@@ -323,7 +359,8 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
             throw new DbUpdateException(
                 RelationalStrings.UpdateStoreException,
                 ex,
-                ModificationCommands.SelectMany(c => c.Entries).ToList());
+                ModificationCommands.SelectMany(c => c.Entries).ToList()
+            );
         }
     }
 
@@ -336,23 +373,31 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     public override async Task ExecuteAsync(
         IRelationalConnection connection,
-        CancellationToken cancellationToken = default)
+        CancellationToken cancellationToken = default
+    )
     {
         if (StoreCommand is null)
         {
-            throw new InvalidOperationException(RelationalStrings.ModificationCommandBatchNotComplete);
+            throw new InvalidOperationException(
+                RelationalStrings.ModificationCommandBatchNotComplete
+            );
         }
 
         try
         {
-            var dataReader = await StoreCommand.RelationalCommand.ExecuteReaderAsync(
-                new RelationalCommandParameterObject(
-                    connection,
-                    StoreCommand.ParameterValues,
-                    null,
-                    Dependencies.CurrentContext.Context,
-                    Dependencies.Logger, CommandSource.SaveChanges),
-                cancellationToken).ConfigureAwait(false);
+            var dataReader = await StoreCommand.RelationalCommand
+                .ExecuteReaderAsync(
+                    new RelationalCommandParameterObject(
+                        connection,
+                        StoreCommand.ParameterValues,
+                        null,
+                        Dependencies.CurrentContext.Context,
+                        Dependencies.Logger,
+                        CommandSource.SaveChanges
+                    ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             await using var _ = dataReader.ConfigureAwait(false);
             await ConsumeAsync(dataReader, cancellationToken).ConfigureAwait(false);
@@ -362,7 +407,8 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
             throw new DbUpdateException(
                 RelationalStrings.UpdateStoreException,
                 ex,
-                ModificationCommands.SelectMany(c => c.Entries).ToList());
+                ModificationCommands.SelectMany(c => c.Entries).ToList()
+            );
         }
     }
 
@@ -381,5 +427,6 @@ public abstract class ReaderModificationCommandBatch : ModificationCommandBatch
     /// <exception cref="OperationCanceledException">If the <see cref="CancellationToken" /> is canceled.</exception>
     protected abstract Task ConsumeAsync(
         RelationalDataReader reader,
-        CancellationToken cancellationToken = default);
+        CancellationToken cancellationToken = default
+    );
 }

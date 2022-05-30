@@ -10,6 +10,5 @@ internal static class NativeMethods
     private const string KERNEL32 = "kernel32.dll";
 
     [DllImport(KERNEL32, ExactSpelling = true, SetLastError = true)]
-
     public static extern bool CloseHandle(IntPtr handle);
 }

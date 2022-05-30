@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             Document document,
             LSP.Range range,
             ImmutableArray<UnifiedSuggestedActionSet> cachedSuggestedActionSets,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -59,7 +60,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
                     _cachedItems.RemoveAt(0);
                 }
 
-                _cachedItems.Add(new CodeActionsCacheItem(document, range, cachedSuggestedActionSets));
+                _cachedItems.Add(
+                    new CodeActionsCacheItem(document, range, cachedSuggestedActionSets)
+                );
             }
         }
 
@@ -70,7 +73,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
         public async Task<ImmutableArray<UnifiedSuggestedActionSet>?> GetActionSetsAsync(
             Document document,
             LSP.Range range,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {
@@ -86,11 +90,15 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             }
         }
 
-        private static bool IsMatch(Document document, LSP.Range range, CodeActionsCacheItem cachedItem)
-            => document == cachedItem.Document &&
-            document.Project.Solution == cachedItem.Document.Project.Solution &&
-            range.Start == cachedItem.Range.Start &&
-            range.End == cachedItem.Range.End;
+        private static bool IsMatch(
+            Document document,
+            LSP.Range range,
+            CodeActionsCacheItem cachedItem
+        ) =>
+            document == cachedItem.Document
+            && document.Project.Solution == cachedItem.Document.Project.Solution
+            && range.Start == cachedItem.Range.Start
+            && range.End == cachedItem.Range.End;
 
         /// <summary>
         /// Contains the necessary information for each cached item.
@@ -104,7 +112,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
             public CodeActionsCacheItem(
                 Document document,
                 LSP.Range range,
-                ImmutableArray<UnifiedSuggestedActionSet> cachedSuggestedActionSets)
+                ImmutableArray<UnifiedSuggestedActionSet> cachedSuggestedActionSets
+            )
             {
                 Document = document;
                 Range = range;
@@ -120,11 +129,11 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.CodeActions
 
             public static int MaximumCacheSize => MaxCacheSize;
 
-            public TestAccessor(CodeActionsCache codeActionsCache)
-                => _codeActionsCache = codeActionsCache;
+            public TestAccessor(CodeActionsCache codeActionsCache) =>
+                _codeActionsCache = codeActionsCache;
 
-            public List<(Document Document, LSP.Range Range)> GetDocumentsAndRangesInCache()
-                => _codeActionsCache._cachedItems.Select(c => (c.Document, c.Range)).ToList();
+            public List<(Document Document, LSP.Range Range)> GetDocumentsAndRangesInCache() =>
+                _codeActionsCache._cachedItems.Select(c => (c.Document, c.Range)).ToList();
         }
     }
 }

@@ -50,7 +50,8 @@ internal static class TextReaderExtensions
     public static string ReadUntil(
         this TextReader reader,
         bool inclusive,
-        params char[] terminators)
+        params char[] terminators
+    )
     {
         if (reader == null)
         {
@@ -83,7 +84,8 @@ internal static class TextReaderExtensions
     public static string ReadUntil(
         this TextReader reader,
         Predicate<char> condition,
-        bool inclusive)
+        bool inclusive
+    )
     {
         if (reader == null)
         {
@@ -129,7 +131,8 @@ internal static class TextReaderExtensions
     public static string ReadWhile(
         this TextReader reader,
         Predicate<char> condition,
-        bool inclusive)
+        bool inclusive
+    )
     {
         if (reader == null)
         {

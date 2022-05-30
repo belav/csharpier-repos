@@ -24,13 +24,11 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
         public CSharpTextStructureNavigatorProvider(
             ITextStructureNavigatorSelectorService selectorService,
             IContentTypeRegistryService contentTypeService,
-            IUIThreadOperationExecutor uIThreadOperationExecutor)
-            : base(selectorService, contentTypeService, uIThreadOperationExecutor)
-        {
-        }
+            IUIThreadOperationExecutor uIThreadOperationExecutor
+        ) : base(selectorService, contentTypeService, uIThreadOperationExecutor) { }
 
-        protected override bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia)
-            => trivia.IsRegularOrDocComment();
+        protected override bool ShouldSelectEntireTriviaFromStart(SyntaxTrivia trivia) =>
+            trivia.IsRegularOrDocComment();
 
         protected override bool IsWithinNaturalLanguage(SyntaxToken token, int position)
         {
@@ -46,12 +44,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
                 case SyntaxKind.MultiLineRawStringLiteralToken:
                 case SyntaxKind.UTF8SingleLineRawStringLiteralToken:
                 case SyntaxKind.UTF8MultiLineRawStringLiteralToken:
-                    {
-                        // Like with normal string literals, treat the closing quotes as as the end of the string so that
-                        // navigation ends there and doesn't go past them.
-                        var end = GetStartOfRawStringLiteralEndDelimiter(token);
-                        return position < end;
-                    }
+                {
+                    // Like with normal string literals, treat the closing quotes as as the end of the string so that
+                    // navigation ends there and doesn't go past them.
+                    var end = GetStartOfRawStringLiteralEndDelimiter(token);
+                    return position < end;
+                }
 
                 case SyntaxKind.CharacterLiteralToken:
                     // Before the ' is considered outside the character
@@ -71,7 +69,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
             var start = 0;
             var end = text.Length;
 
-            if (token.IsKind(SyntaxKind.UTF8MultiLineRawStringLiteralToken, SyntaxKind.UTF8SingleLineRawStringLiteralToken))
+            if (
+                token.IsKind(
+                    SyntaxKind.UTF8MultiLineRawStringLiteralToken,
+                    SyntaxKind.UTF8SingleLineRawStringLiteralToken
+                )
+            )
             {
                 // Skip past the u8 suffix
                 end -= "u8".Length;
@@ -86,31 +89,52 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.TextStructureNavigation
             return token.SpanStart + end;
         }
 
-        private static bool IsAtClosingQuote(SyntaxToken token, int position)
-            => token.Kind() switch
+        private static bool IsAtClosingQuote(SyntaxToken token, int position) =>
+            token.Kind() switch
             {
-                SyntaxKind.StringLiteralToken => position == token.Span.End - 1 && token.Text[^1] == '"',
-                SyntaxKind.UTF8StringLiteralToken => position == token.Span.End - 3 && token.Text is [.., '"', 'u' or 'U', '8'],
+                SyntaxKind.StringLiteralToken
+                    => position == token.Span.End - 1 && token.Text[^1] == '"',
+                SyntaxKind.UTF8StringLiteralToken
+                    => position == token.Span.End - 3 && token.Text is [.., '"', 'u' or 'U', '8'],
                 _ => throw ExceptionUtilities.Unreachable
             };
 
-        protected override TextExtent GetExtentOfWordFromToken(SyntaxToken token, SnapshotPoint position)
+        protected override TextExtent GetExtentOfWordFromToken(
+            SyntaxToken token,
+            SnapshotPoint position
+        )
         {
-            if (token.IsKind(SyntaxKind.StringLiteralToken, SyntaxKind.UTF8StringLiteralToken) && IsAtClosingQuote(token, position.Position))
+            if (
+                token.IsKind(SyntaxKind.StringLiteralToken, SyntaxKind.UTF8StringLiteralToken)
+                && IsAtClosingQuote(token, position.Position)
+            )
             {
                 // Special case to treat the closing quote of a string literal as a separate token.  This allows the
                 // cursor to stop during word navigation (Ctrl+LeftArrow, etc.) immediately before AND after the
                 // closing quote, just like it did in VS2013 and like it currently does for interpolated strings.
                 var span = new Span(position.Position, token.Span.End - position.Position);
-                return new TextExtent(new SnapshotSpan(position.Snapshot, span), isSignificant: true);
+                return new TextExtent(
+                    new SnapshotSpan(position.Snapshot, span),
+                    isSignificant: true
+                );
             }
-            else if (token.IsKind(SyntaxKind.SingleLineRawStringLiteralToken,
-                SyntaxKind.MultiLineRawStringLiteralToken,
-                SyntaxKind.UTF8SingleLineRawStringLiteralToken,
-                SyntaxKind.UTF8MultiLineRawStringLiteralToken))
+            else if (
+                token.IsKind(
+                    SyntaxKind.SingleLineRawStringLiteralToken,
+                    SyntaxKind.MultiLineRawStringLiteralToken,
+                    SyntaxKind.UTF8SingleLineRawStringLiteralToken,
+                    SyntaxKind.UTF8MultiLineRawStringLiteralToken
+                )
+            )
             {
                 var delimiterStart = GetStartOfRawStringLiteralEndDelimiter(token);
-                return new TextExtent(new SnapshotSpan(position.Snapshot, Span.FromBounds(delimiterStart, token.Span.End)), isSignificant: true);
+                return new TextExtent(
+                    new SnapshotSpan(
+                        position.Snapshot,
+                        Span.FromBounds(delimiterStart, token.Span.End)
+                    ),
+                    isSignificant: true
+                );
             }
             else
             {

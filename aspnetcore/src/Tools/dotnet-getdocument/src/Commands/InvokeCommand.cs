@@ -20,9 +20,7 @@ internal sealed class InvokeCommand : HelpCommandBase
     private readonly ProjectOptions _projectOptions = new ProjectOptions();
     private IList<string> _args;
 
-    public InvokeCommand(IConsole console) : base(console)
-    {
-    }
+    public InvokeCommand(IConsole console) : base(console) { }
 
     public override void Configure(CommandLineApplication command)
     {
@@ -40,7 +38,9 @@ internal sealed class InvokeCommand : HelpCommandBase
 
     protected override int Execute()
     {
-        var thisPath = Path.GetFullPath(Path.GetDirectoryName(typeof(InvokeCommand).Assembly.Location));
+        var thisPath = Path.GetFullPath(
+            Path.GetDirectoryName(typeof(InvokeCommand).Assembly.Location)
+        );
 
         var projectName = _projectOptions.ProjectName.Value();
         var assemblyPath = _projectOptions.AssemblyPath.Value();
@@ -59,7 +59,8 @@ internal sealed class InvokeCommand : HelpCommandBase
                     cleanupExecutable = true;
                     toolsDirectory = Path.Combine(
                         thisPath,
-                        _projectOptions.Platform.Value() == "x86" ? "net462-x86" : "net462");
+                        _projectOptions.Platform.Value() == "x86" ? "net462-x86" : "net462"
+                    );
 
                     var executableSource = Path.Combine(toolsDirectory, InsideManName + ".exe");
                     executable = Path.Combine(targetDirectory, InsideManName + ".exe");
@@ -75,9 +76,12 @@ internal sealed class InvokeCommand : HelpCommandBase
                 case ".NETCoreApp":
                     if (targetFramework.Version < new Version(2, 1))
                     {
-                        throw new CommandException(Resources.FormatOldNETCoreAppProject(
-                            projectName,
-                            targetFramework.Version));
+                        throw new CommandException(
+                            Resources.FormatOldNETCoreAppProject(
+                                projectName,
+                                targetFramework.Version
+                            )
+                        );
                     }
 
                     executable = DotNetMuxer.MuxerPathOrDefault();
@@ -103,7 +107,10 @@ internal sealed class InvokeCommand : HelpCommandBase
                         }
                     }
 
-                    var runtimeConfigPath = Path.ChangeExtension(assemblyPath, ".runtimeconfig.json");
+                    var runtimeConfigPath = Path.ChangeExtension(
+                        assemblyPath,
+                        ".runtimeconfig.json"
+                    );
                     if (File.Exists(runtimeConfigPath))
                     {
                         args.Add("--runtimeConfig");
@@ -111,7 +118,8 @@ internal sealed class InvokeCommand : HelpCommandBase
                     }
                     else
                     {
-                        var runtimeFrameworkVersion = _projectOptions.RuntimeFrameworkVersion.Value();
+                        var runtimeFrameworkVersion =
+                            _projectOptions.RuntimeFrameworkVersion.Value();
                         if (!string.IsNullOrEmpty(runtimeFrameworkVersion))
                         {
                             args.Add("--fx-version");
@@ -127,7 +135,11 @@ internal sealed class InvokeCommand : HelpCommandBase
 
                 default:
                     throw new CommandException(
-                        Resources.FormatUnsupportedFramework(projectName, targetFramework.Identifier));
+                        Resources.FormatUnsupportedFramework(
+                            projectName,
+                            targetFramework.Identifier
+                        )
+                    );
             }
 
             args.AddRange(_args);
@@ -164,17 +176,13 @@ internal sealed class InvokeCommand : HelpCommandBase
                 {
                     File.Delete(executable);
                 }
-                catch (UnauthorizedAccessException)
-                {
-                }
+                catch (UnauthorizedAccessException) { }
 
                 try
                 {
                     File.Delete(executable + ".config");
                 }
-                catch (UnauthorizedAccessException)
-                {
-                }
+                catch (UnauthorizedAccessException) { }
             }
         }
     }

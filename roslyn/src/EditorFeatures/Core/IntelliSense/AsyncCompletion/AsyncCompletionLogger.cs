@@ -16,15 +16,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         {
             // # of sessions where import completion is enabled by default
             SessionWithTypeImportCompletionEnabled,
+
             // # of sessions that we wait for import compeltion task to complete before return
             // curerntly it's decided by "responsive completion" options
             SessionWithImportCompletionBlocking,
-            // # of sessions where items from import completion are not included intially 
+
+            // # of sessions where items from import completion are not included intially
             SessionWithImportCompletionDelayed,
+
             // # of session among SessionWithImportCompletionDelayed where import completion items
             // are later included in list update. Note this doesn't include using of expander.
             SessionWithDelayedImportCompletionIncludedInUpdate,
-            // Among sessions in SessionWithImportCompletionDelayed, how much longer it takes 
+
+            // Among sessions in SessionWithImportCompletionDelayed, how much longer it takes
             // for import completion task to finish after regular item task is completed.
             // Knowing this would help us to decide whether a short wait would have ensure import completion
             // items to be included in the intial list.
@@ -34,13 +38,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             // For targeted type completion
             SessionHasTargetTypeFilterEnabled,
 
-            // TargetTypeFilterChosenInSession / SessionContainsTargetTypeFilter indicates % of the time 
+            // TargetTypeFilterChosenInSession / SessionContainsTargetTypeFilter indicates % of the time
             // the Target Type Completion Filter is chosen of the sessions offering it.
             SessionContainsTargetTypeFilter,
             TargetTypeFilterChosenInSession,
 
-            // CommitItemWithTargetTypeFilter / CommitWithTargetTypeCompletionExperimentEnabled indicates 
-            // % of the time a completion item is committed that could have been picked via the Target Type 
+            // CommitItemWithTargetTypeFilter / CommitWithTargetTypeCompletionExperimentEnabled indicates
+            // % of the time a completion item is committed that could have been picked via the Target Type
             // Completion Filter.
             CommitWithTargetTypeCompletionExperimentEnabled,
             CommitItemWithTargetTypeFilter,
@@ -68,10 +72,17 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         }
 
         internal static void LogSessionWithDelayedImportCompletionIncludedInUpdate() =>
-            s_logAggregator.IncreaseCount((int)ActionInfo.SessionWithDelayedImportCompletionIncludedInUpdate);
+            s_logAggregator.IncreaseCount(
+                (int)ActionInfo.SessionWithDelayedImportCompletionIncludedInUpdate
+            );
 
-        internal static void LogAdditionalTicksToCompleteDelayedImportCompletionDataPoint(int count) =>
-            s_histogramLogAggregator.IncreaseCount((int)ActionInfo.AdditionalTicksToCompleteDelayedImportCompletion, count);
+        internal static void LogAdditionalTicksToCompleteDelayedImportCompletionDataPoint(
+            int count
+        ) =>
+            s_histogramLogAggregator.IncreaseCount(
+                (int)ActionInfo.AdditionalTicksToCompleteDelayedImportCompletion,
+                count
+            );
 
         internal static void LogDelayedImportCompletionIncluded() =>
             s_logAggregator.IncreaseCount((int)ActionInfo.SessionWithTypeImportCompletionEnabled);
@@ -80,7 +91,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
             s_logAggregator.IncreaseCount((int)ActionInfo.ExpanderUsageCount);
 
         internal static void LogCommitWithTargetTypeCompletionExperimentEnabled() =>
-            s_logAggregator.IncreaseCount((int)ActionInfo.CommitWithTargetTypeCompletionExperimentEnabled);
+            s_logAggregator.IncreaseCount(
+                (int)ActionInfo.CommitWithTargetTypeCompletionExperimentEnabled
+            );
 
         internal static void LogCommitItemWithTargetTypeFilter() =>
             s_logAggregator.IncreaseCount((int)ActionInfo.CommitItemWithTargetTypeFilter);
@@ -100,7 +113,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
         internal static void LogSourceInitializationTicksDataPoint(int count)
         {
             s_statisticLogAggregator.AddDataPoint((int)ActionInfo.SourceInitializationTicks, count);
-            s_histogramLogAggregator.IncreaseCount((int)ActionInfo.SourceInitializationTicks, count);
+            s_histogramLogAggregator.IncreaseCount(
+                (int)ActionInfo.SourceInitializationTicks,
+                count
+            );
         }
 
         internal static void LogSourceGetContextTicksDataPoint(int count, bool isCanceled)
@@ -131,37 +147,41 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.IntelliSense.AsyncComplet
 
         internal static void ReportTelemetry()
         {
-            Logger.Log(FunctionId.Intellisense_AsyncCompletion_Data, KeyValueLogMessage.Create(m =>
-            {
-                foreach (var kv in s_statisticLogAggregator)
+            Logger.Log(
+                FunctionId.Intellisense_AsyncCompletion_Data,
+                KeyValueLogMessage.Create(m =>
                 {
-                    var info = ((ActionInfo)kv.Key).ToString("f");
-                    var statistics = kv.Value.GetStatisticResult();
+                    foreach (var kv in s_statisticLogAggregator)
+                    {
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        var statistics = kv.Value.GetStatisticResult();
 
-                    m[CreateProperty(info, nameof(StatisticResult.Maximum))] = statistics.Maximum;
-                    m[CreateProperty(info, nameof(StatisticResult.Minimum))] = statistics.Minimum;
-                    m[CreateProperty(info, nameof(StatisticResult.Mean))] = statistics.Mean;
-                    m[CreateProperty(info, nameof(StatisticResult.Range))] = statistics.Range;
-                    m[CreateProperty(info, nameof(StatisticResult.Count))] = statistics.Count;
-                }
+                        m[CreateProperty(info, nameof(StatisticResult.Maximum))] =
+                            statistics.Maximum;
+                        m[CreateProperty(info, nameof(StatisticResult.Minimum))] =
+                            statistics.Minimum;
+                        m[CreateProperty(info, nameof(StatisticResult.Mean))] = statistics.Mean;
+                        m[CreateProperty(info, nameof(StatisticResult.Range))] = statistics.Range;
+                        m[CreateProperty(info, nameof(StatisticResult.Count))] = statistics.Count;
+                    }
 
-                foreach (var kv in s_logAggregator)
-                {
-                    var mergeInfo = ((ActionInfo)kv.Key).ToString("f");
-                    m[mergeInfo] = kv.Value.GetCount();
-                }
+                    foreach (var kv in s_logAggregator)
+                    {
+                        var mergeInfo = ((ActionInfo)kv.Key).ToString("f");
+                        m[mergeInfo] = kv.Value.GetCount();
+                    }
 
-                foreach (var kv in s_histogramLogAggregator)
-                {
-                    var info = ((ActionInfo)kv.Key).ToString("f");
-                    m[$"{info}.BucketSize"] = kv.Value.BucketSize;
-                    m[$"{info}.MaxBucketValue"] = kv.Value.MaxBucketValue;
-                    m[$"{info}.Buckets"] = kv.Value.GetBucketsAsString();
-                }
-            }));
+                    foreach (var kv in s_histogramLogAggregator)
+                    {
+                        var info = ((ActionInfo)kv.Key).ToString("f");
+                        m[$"{info}.BucketSize"] = kv.Value.BucketSize;
+                        m[$"{info}.MaxBucketValue"] = kv.Value.MaxBucketValue;
+                        m[$"{info}.Buckets"] = kv.Value.GetBucketsAsString();
+                    }
+                })
+            );
         }
 
-        private static string CreateProperty(string parent, string child)
-            => parent + "." + child;
+        private static string CreateProperty(string parent, string child) => parent + "." + child;
     }
 }

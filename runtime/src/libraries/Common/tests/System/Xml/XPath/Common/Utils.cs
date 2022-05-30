@@ -24,7 +24,11 @@ namespace XPathTests.Common
             return _navigatorCreator.CreateNavigator(xml);
         }
 
-        private static XPathNavigator CreateNavigator(string xml, string startingNodePath, XmlNamespaceManager namespaceManager)
+        private static XPathNavigator CreateNavigator(
+            string xml,
+            string startingNodePath,
+            XmlNamespaceManager namespaceManager
+        )
         {
             var xPathNavigator = CreateNavigatorFromFile(xml);
 
@@ -43,13 +47,24 @@ namespace XPathTests.Common
             return xPathNodeIterator.Current;
         }
 
-        public static void XPathMatchTest(string xml, string testExpression, bool expected, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
+        public static void XPathMatchTest(
+            string xml,
+            string testExpression,
+            bool expected,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        )
         {
             var result = XPathMatch(xml, testExpression, namespaceManager, startingNodePath);
             Assert.Equal(expected, result);
         }
 
-        private static bool XPathMatch(string xml, string testExpression, XmlNamespaceManager namespaceManager, string startingNodePath)
+        private static bool XPathMatch(
+            string xml,
+            string testExpression,
+            XmlNamespaceManager namespaceManager,
+            string startingNodePath
+        )
         {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
 
@@ -63,16 +78,29 @@ namespace XPathTests.Common
             xPathNodeIterator.MoveNext();
             var current = xPathNodeIterator.Current;
 
-            return namespaceManager == null ? current.Matches(testExpression) : current.Matches(XPathExpression.Compile(testExpression, namespaceManager));
+            return namespaceManager == null
+                ? current.Matches(testExpression)
+                : current.Matches(XPathExpression.Compile(testExpression, namespaceManager));
         }
 
-        public static void XPathMatchTestThrows<T>(string xml, string testExpression, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
-            where T : Exception
+        public static void XPathMatchTestThrows<T>(
+            string xml,
+            string testExpression,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        ) where T : Exception
         {
-            Assert.Throws<T>(() => XPathMatch(xml, testExpression, namespaceManager, startingNodePath));
+            Assert.Throws<T>(
+                () => XPathMatch(xml, testExpression, namespaceManager, startingNodePath)
+            );
         }
 
-        private static T XPathObject<T>(string xml, string testExpression, XmlNamespaceManager namespaceManager, string startingNodePath)
+        private static T XPathObject<T>(
+            string xml,
+            string testExpression,
+            XmlNamespaceManager namespaceManager,
+            string startingNodePath
+        )
         {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
 
@@ -86,38 +114,83 @@ namespace XPathTests.Common
             return (T)Convert.ChangeType(evaluated, typeof(T), CultureInfo.InvariantCulture);
         }
 
-        internal static void XPathStringTest(string xml, string testExpression, object expected, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
+        internal static void XPathStringTest(
+            string xml,
+            string testExpression,
+            object expected,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        )
         {
-            var result = XPathObject<string>(xml, testExpression, namespaceManager, startingNodePath);
+            var result = XPathObject<string>(
+                xml,
+                testExpression,
+                namespaceManager,
+                startingNodePath
+            );
 
             Assert.Equal(expected, result);
         }
 
-        internal static void XPathStringTestThrows<T>(string xml, string testExpression, string startingNodePath = null)
-            where T : Exception
+        internal static void XPathStringTestThrows<T>(
+            string xml,
+            string testExpression,
+            string startingNodePath = null
+        ) where T : Exception
         {
-            Assert.Throws<T>(() => XPathObject<string>(xml, testExpression, null, startingNodePath));
+            Assert.Throws<T>(
+                () => XPathObject<string>(xml, testExpression, null, startingNodePath)
+            );
         }
 
-        internal static void XPathNumberTest(string xml, string testExpression, double expected, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
+        internal static void XPathNumberTest(
+            string xml,
+            string testExpression,
+            double expected,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        )
         {
-            var result = XPathObject<double>(xml, testExpression, namespaceManager, startingNodePath);
+            var result = XPathObject<double>(
+                xml,
+                testExpression,
+                namespaceManager,
+                startingNodePath
+            );
             Assert.Equal(expected, (double)result);
         }
 
-        internal static void XPathBooleanTest(string xml, string testExpression, bool expected, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
+        internal static void XPathBooleanTest(
+            string xml,
+            string testExpression,
+            bool expected,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        )
         {
             var result = XPathObject<bool>(xml, testExpression, namespaceManager, startingNodePath);
             Assert.Equal(expected, result);
         }
 
-        internal static void XPathNumberTestThrows<T>(string xml, string testExpression, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
-            where T : Exception
+        internal static void XPathNumberTestThrows<T>(
+            string xml,
+            string testExpression,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        ) where T : Exception
         {
-            Assert.Throws<T>(() => XPathObject<double>(xml, testExpression, namespaceManager, startingNodePath));
+            Assert.Throws<T>(
+                () => XPathObject<double>(xml, testExpression, namespaceManager, startingNodePath)
+            );
         }
 
-        internal static void XPathNodesetTest(string xml, string testExpression, XPathResult expected, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
+        internal static void XPathNodesetTest(
+            string xml,
+            string testExpression,
+            XPathResult expected,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        )
         {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
             var xExpression = xPathNavigator.Compile(testExpression);
@@ -149,12 +222,19 @@ namespace XPathTests.Common
                 if (string.IsNullOrWhiteSpace(xPathSelection.Current.Value))
                     Assert.Equal(expectedResult.Value.Trim(), xPathSelection.Current.Value.Trim());
                 else
-                    Assert.Equal(expectedResult.Value, xPathSelection.Current.Value.Replace("\r\n", "\n"));
+                    Assert.Equal(
+                        expectedResult.Value,
+                        xPathSelection.Current.Value.Replace("\r\n", "\n")
+                    );
             }
         }
 
-        internal static void XPathNodesetTestThrows<T>(string xml, string testExpression, XmlNamespaceManager namespaceManager = null, string startingNodePath = null)
-            where T : Exception
+        internal static void XPathNodesetTestThrows<T>(
+            string xml,
+            string testExpression,
+            XmlNamespaceManager namespaceManager = null,
+            string startingNodePath = null
+        ) where T : Exception
         {
             var xPathNavigator = CreateNavigator(xml, startingNodePath, namespaceManager);
 

@@ -16,7 +16,7 @@ namespace Internal.TypeSystem
             // to each other. This is a better heuristic than sorting by method definition
             // then by instantiation.
             //
-            // The goal is to sort methods like SomeClass.SomeMethod<UserStruct>, 
+            // The goal is to sort methods like SomeClass.SomeMethod<UserStruct>,
             // near SomeOtherClass.SomeOtherMethod<UserStruct, int>
             int result = 0;
             // Sort instantiations of the same type together

@@ -37,7 +37,10 @@ public sealed class Accepted : IResult, IEndpointMetadataProvider
         }
         else
         {
-            Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = locationUri.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
     }
 
@@ -76,6 +79,8 @@ public sealed class Accepted : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status202Accepted));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status202Accepted)
+        );
     }
 }

@@ -14,24 +14,23 @@ namespace System.IO.Pipes
         private SafePipeHandle _clientHandle = null!;
         private bool _clientHandleExposed;
 
-        public AnonymousPipeServerStream()
-            : this(PipeDirection.Out, HandleInheritability.None, 0)
-        {
-        }
+        public AnonymousPipeServerStream() : this(PipeDirection.Out, HandleInheritability.None, 0)
+        { }
 
         public AnonymousPipeServerStream(PipeDirection direction)
-            : this(direction, HandleInheritability.None, 0)
-        {
-        }
+            : this(direction, HandleInheritability.None, 0) { }
 
-        public AnonymousPipeServerStream(PipeDirection direction, HandleInheritability inheritability)
-            : this(direction, inheritability, 0)
-        {
-        }
+        public AnonymousPipeServerStream(
+            PipeDirection direction,
+            HandleInheritability inheritability
+        ) : this(direction, inheritability, 0) { }
 
         // Create an AnonymousPipeServerStream from two existing pipe handles.
-        public AnonymousPipeServerStream(PipeDirection direction, SafePipeHandle serverSafePipeHandle, SafePipeHandle clientSafePipeHandle)
-            : base(direction, 0)
+        public AnonymousPipeServerStream(
+            PipeDirection direction,
+            SafePipeHandle serverSafePipeHandle,
+            SafePipeHandle clientSafePipeHandle
+        ) : base(direction, 0)
         {
             if (direction == PipeDirection.InOut)
             {
@@ -42,11 +41,17 @@ namespace System.IO.Pipes
 
             if (serverSafePipeHandle.IsInvalid)
             {
-                throw new ArgumentException(SR.Argument_InvalidHandle, nameof(serverSafePipeHandle));
+                throw new ArgumentException(
+                    SR.Argument_InvalidHandle,
+                    nameof(serverSafePipeHandle)
+                );
             }
             if (clientSafePipeHandle.IsInvalid)
             {
-                throw new ArgumentException(SR.Argument_InvalidHandle, nameof(clientSafePipeHandle));
+                throw new ArgumentException(
+                    SR.Argument_InvalidHandle,
+                    nameof(clientSafePipeHandle)
+                );
             }
             ValidateHandleIsPipe(serverSafePipeHandle);
             ValidateHandleIsPipe(clientSafePipeHandle);
@@ -60,16 +65,25 @@ namespace System.IO.Pipes
 
         // bufferSize is used as a suggestion; specify 0 to let OS decide
         // This constructor instantiates the PipeSecurity using just the inheritability flag
-        public AnonymousPipeServerStream(PipeDirection direction, HandleInheritability inheritability, int bufferSize)
-            : base(direction, bufferSize)
+        public AnonymousPipeServerStream(
+            PipeDirection direction,
+            HandleInheritability inheritability,
+            int bufferSize
+        ) : base(direction, bufferSize)
         {
             if (direction == PipeDirection.InOut)
             {
                 throw new NotSupportedException(SR.NotSupported_AnonymousPipeUnidirectional);
             }
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(inheritability), SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inheritability),
+                    SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable
+                );
             }
 
             Create(direction, inheritability, bufferSize);
@@ -147,11 +161,16 @@ namespace System.IO.Pipes
 
                 if (value < PipeTransmissionMode.Byte || value > PipeTransmissionMode.Message)
                 {
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                    );
                 }
                 if (value == PipeTransmissionMode.Message)
                 {
-                    throw new NotSupportedException(SR.NotSupported_AnonymousPipeMessagesNotSupported);
+                    throw new NotSupportedException(
+                        SR.NotSupported_AnonymousPipeMessagesNotSupported
+                    );
                 }
             }
         }

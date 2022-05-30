@@ -17,17 +17,19 @@
 
         public class Dest
         {
-            public int? Value { get; set; }            
+            public int? Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>().ForMember(m => m.Value, opt => opt.NullSubstitute(5));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateProjection<Source, Dest>()
+                    .ForMember(m => m.Value, opt => opt.NullSubstitute(5));
+            });
 
         protected override void Because_of()
         {
-            var source = new[] {new Source()}.AsQueryable();
+            var source = new[] { new Source() }.AsQueryable();
 
             _dests = source.ProjectTo<Dest>(Configuration).ToList();
         }
@@ -50,21 +52,26 @@
 
         public class Dest
         {
-            public int? ValuePropertyNotMatching { get; set; }            
+            public int? ValuePropertyNotMatching { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateProjection<Source, Dest>().ForMember(m => m.ValuePropertyNotMatching, opt =>
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
             {
-                opt.MapFrom(src => src.Value);
-                opt.NullSubstitute(5);
+                cfg.CreateProjection<Source, Dest>()
+                    .ForMember(
+                        m => m.ValuePropertyNotMatching,
+                        opt =>
+                        {
+                            opt.MapFrom(src => src.Value);
+                            opt.NullSubstitute(5);
+                        }
+                    );
             });
-        });
 
         protected override void Because_of()
         {
-            var source = new[] {new Source()}.AsQueryable();
+            var source = new[] { new Source() }.AsQueryable();
 
             _dests = source.ProjectTo<Dest>(Configuration).ToList();
         }

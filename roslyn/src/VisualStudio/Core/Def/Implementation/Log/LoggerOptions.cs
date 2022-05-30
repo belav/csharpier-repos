@@ -18,24 +18,41 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public LoggerOptions()
-        {
-        }
+        public LoggerOptions() { }
 
-        ImmutableArray<IOption> IOptionProvider.Options { get; } = ImmutableArray.Create<IOption>(
-            EtwLoggerKey,
-            TraceLoggerKey,
-            OutputWindowLoggerKey);
+        ImmutableArray<IOption> IOptionProvider.Options { get; } =
+            ImmutableArray.Create<IOption>(EtwLoggerKey, TraceLoggerKey, OutputWindowLoggerKey);
 
         private const string LocalRegistryPath = @"Roslyn\Internal\Performance\Logger\";
 
-        public static readonly Option<bool> EtwLoggerKey = new(nameof(LoggerOptions), nameof(EtwLoggerKey), defaultValue: true,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "EtwLogger"));
+        public static readonly Option<bool> EtwLoggerKey =
+            new(
+                nameof(LoggerOptions),
+                nameof(EtwLoggerKey),
+                defaultValue: true,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + "EtwLogger"
+                )
+            );
 
-        public static readonly Option<bool> TraceLoggerKey = new(nameof(LoggerOptions), nameof(TraceLoggerKey), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "TraceLogger"));
+        public static readonly Option<bool> TraceLoggerKey =
+            new(
+                nameof(LoggerOptions),
+                nameof(TraceLoggerKey),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + "TraceLogger"
+                )
+            );
 
-        public static readonly Option<bool> OutputWindowLoggerKey = new(nameof(LoggerOptions), nameof(OutputWindowLoggerKey), defaultValue: false,
-            storageLocations: new LocalUserProfileStorageLocation(LocalRegistryPath + "OutputWindowLogger"));
+        public static readonly Option<bool> OutputWindowLoggerKey =
+            new(
+                nameof(LoggerOptions),
+                nameof(OutputWindowLoggerKey),
+                defaultValue: false,
+                storageLocations: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + "OutputWindowLogger"
+                )
+            );
     }
 }

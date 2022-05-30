@@ -92,7 +92,6 @@ namespace System.Security.Cryptography
                 // .NET Framework compat demands we return the array without copying.
                 return _rawData;
             }
-
             [MemberNotNull(nameof(_rawData))]
             set
             {

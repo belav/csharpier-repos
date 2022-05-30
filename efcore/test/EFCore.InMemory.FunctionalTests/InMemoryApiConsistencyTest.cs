@@ -5,26 +5,24 @@ using Microsoft.EntityFrameworkCore.InMemory.Storage.Internal;
 
 namespace Microsoft.EntityFrameworkCore;
 
-public class InMemoryApiConsistencyTest : ApiConsistencyTestBase<InMemoryApiConsistencyTest.InMemoryApiConsistencyFixture>
+public class InMemoryApiConsistencyTest
+    : ApiConsistencyTestBase<InMemoryApiConsistencyTest.InMemoryApiConsistencyFixture>
 {
-    public InMemoryApiConsistencyTest(InMemoryApiConsistencyFixture fixture)
-        : base(fixture)
-    {
-    }
+    public InMemoryApiConsistencyTest(InMemoryApiConsistencyFixture fixture) : base(fixture) { }
 
-    protected override void AddServices(ServiceCollection serviceCollection)
-        => serviceCollection.AddEntityFrameworkInMemoryDatabase();
+    protected override void AddServices(ServiceCollection serviceCollection) =>
+        serviceCollection.AddEntityFrameworkInMemoryDatabase();
 
-    protected override Assembly TargetAssembly
-        => typeof(InMemoryDatabase).Assembly;
+    protected override Assembly TargetAssembly => typeof(InMemoryDatabase).Assembly;
 
     public class InMemoryApiConsistencyFixture : ApiConsistencyFixtureBase
     {
-        public override HashSet<Type> FluentApiTypes { get; } = new()
-        {
-            typeof(InMemoryServiceCollectionExtensions),
-            typeof(InMemoryDbContextOptionsExtensions),
-            typeof(InMemoryDbContextOptionsBuilder)
-        };
+        public override HashSet<Type> FluentApiTypes { get; } =
+            new()
+            {
+                typeof(InMemoryServiceCollectionExtensions),
+                typeof(InMemoryDbContextOptionsExtensions),
+                typeof(InMemoryDbContextOptionsBuilder)
+            };
     }
 }

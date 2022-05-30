@@ -24,7 +24,12 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// <summary>
         /// Determines the desired indentation of a given line.
         /// </summary>
-        IndentationResult GetIndentation(Document document, int lineNumber, IndentationOptions options, CancellationToken cancellationToken);
+        IndentationResult GetIndentation(
+            Document document,
+            int lineNumber,
+            IndentationOptions options,
+            CancellationToken cancellationToken
+        );
     }
 
     internal static class IIndentationServiceExtensions
@@ -33,10 +38,17 @@ namespace Microsoft.CodeAnalysis.Indentation
         /// Get's the preferred indentation for <paramref name="token"/> if that token were on its own line.  This
         /// effectively simulates where the token would be if the user hit enter at the start of the token.
         /// </summary>
-        public static string GetPreferredIndentation(this SyntaxToken token, Document document, IndentationOptions options, CancellationToken cancellationToken)
+        public static string GetPreferredIndentation(
+            this SyntaxToken token,
+            Document document,
+            IndentationOptions options,
+            CancellationToken cancellationToken
+        )
         {
 #if CODE_STYLE
-            var sourceText = document.GetTextAsync(cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+            var sourceText = document
+                .GetTextAsync(cancellationToken)
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 #else
             var sourceText = document.GetTextSynchronously(cancellationToken);
 #endif
@@ -46,7 +58,9 @@ namespace Microsoft.CodeAnalysis.Indentation
             if (firstNonWhitespacePos.Value == token.SpanStart)
             {
                 // token was on it's own line.  Start the end delimiter at the same location as it.
-                return tokenLine.Text!.ToString(TextSpan.FromBounds(tokenLine.Start, token.SpanStart));
+                return tokenLine.Text!.ToString(
+                    TextSpan.FromBounds(tokenLine.Start, token.SpanStart)
+                );
             }
 
             // Token was on a line with something else.  Determine where we would indent the token if it was on the next
@@ -56,10 +70,16 @@ namespace Microsoft.CodeAnalysis.Indentation
             var newToken = token.WithAdditionalAnnotations(annotation);
 
             var syntaxGenerator = document.GetRequiredLanguageService<SyntaxGeneratorInternal>();
-            newToken = newToken.WithLeadingTrivia(newToken.LeadingTrivia.Add(syntaxGenerator.EndOfLine(options.FormattingOptions.NewLine)));
+            newToken = newToken.WithLeadingTrivia(
+                newToken.LeadingTrivia.Add(
+                    syntaxGenerator.EndOfLine(options.FormattingOptions.NewLine)
+                )
+            );
 
 #if CODE_STYLE
-            var root = document.GetSyntaxRootAsync(cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+            var root = document
+                .GetSyntaxRootAsync(cancellationToken)
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 #else
             var root = document.GetRequiredSyntaxRootSynchronously(cancellationToken);
 #endif
@@ -68,26 +88,41 @@ namespace Microsoft.CodeAnalysis.Indentation
             var newDocument = document.WithSyntaxRoot(newRoot);
 
 #if CODE_STYLE
-            var newText = newDocument.GetTextAsync(cancellationToken).WaitAndGetResult_CanCallOnBackground(cancellationToken);
+            var newText = newDocument
+                .GetTextAsync(cancellationToken)
+                .WaitAndGetResult_CanCallOnBackground(cancellationToken);
 #else
             var newText = newDocument.GetTextSynchronously(cancellationToken);
 #endif
 
-            var newTokenLine = newText.Lines.GetLineFromPosition(newRoot.GetAnnotatedTokens(annotation).Single().SpanStart);
+            var newTokenLine = newText.Lines.GetLineFromPosition(
+                newRoot.GetAnnotatedTokens(annotation).Single().SpanStart
+            );
 
             var indenter = document.GetRequiredLanguageService<IIndentationService>();
-            var indentation = indenter.GetIndentation(newDocument, newTokenLine.LineNumber, options, cancellationToken);
+            var indentation = indenter.GetIndentation(
+                newDocument,
+                newTokenLine.LineNumber,
+                options,
+                cancellationToken
+            );
 
             return indentation.GetIndentationString(
                 newText,
                 options.FormattingOptions.UseTabs,
-                options.FormattingOptions.TabSize);
+                options.FormattingOptions.TabSize
+            );
         }
     }
 
     internal static class IndentationResultExtensions
     {
-        public static string GetIndentationString(this IndentationResult indentationResult, SourceText sourceText, bool useTabs, int tabSize)
+        public static string GetIndentationString(
+            this IndentationResult indentationResult,
+            SourceText sourceText,
+            bool useTabs,
+            int tabSize
+        )
         {
             var baseLine = sourceText.Lines.GetLineFromPosition(indentationResult.BasePosition);
             var baseOffsetInLine = indentationResult.BasePosition - baseLine.Start;

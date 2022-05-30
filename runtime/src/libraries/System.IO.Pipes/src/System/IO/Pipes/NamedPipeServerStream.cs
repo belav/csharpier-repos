@@ -17,34 +17,99 @@ namespace System.IO.Pipes
         public const int MaxAllowedServerInstances = -1;
 
         public NamedPipeServerStream(string pipeName)
-            : this(pipeName, PipeDirection.InOut, 1, PipeTransmissionMode.Byte, PipeOptions.None, 0, 0, HandleInheritability.None)
-        {
-        }
+            : this(
+                pipeName,
+                PipeDirection.InOut,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.None,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
         public NamedPipeServerStream(string pipeName, PipeDirection direction)
-            : this(pipeName, direction, 1, PipeTransmissionMode.Byte, PipeOptions.None, 0, 0, HandleInheritability.None)
-        {
-        }
+            : this(
+                pipeName,
+                direction,
+                1,
+                PipeTransmissionMode.Byte,
+                PipeOptions.None,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeServerStream(string pipeName, PipeDirection direction, int maxNumberOfServerInstances)
-            : this(pipeName, direction, maxNumberOfServerInstances, PipeTransmissionMode.Byte, PipeOptions.None, 0, 0, HandleInheritability.None)
-        {
-        }
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                PipeTransmissionMode.Byte,
+                PipeOptions.None,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeServerStream(string pipeName, PipeDirection direction, int maxNumberOfServerInstances, PipeTransmissionMode transmissionMode)
-            : this(pipeName, direction, maxNumberOfServerInstances, transmissionMode, PipeOptions.None, 0, 0, HandleInheritability.None)
-        {
-        }
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                PipeOptions.None,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeServerStream(string pipeName, PipeDirection direction, int maxNumberOfServerInstances, PipeTransmissionMode transmissionMode, PipeOptions options)
-            : this(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, 0, 0, HandleInheritability.None)
-        {
-        }
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                0,
+                0,
+                HandleInheritability.None
+            ) { }
 
-        public NamedPipeServerStream(string pipeName, PipeDirection direction, int maxNumberOfServerInstances, PipeTransmissionMode transmissionMode, PipeOptions options, int inBufferSize, int outBufferSize)
-            : this(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize, outBufferSize, HandleInheritability.None)
-        {
-        }
+        public NamedPipeServerStream(
+            string pipeName,
+            PipeDirection direction,
+            int maxNumberOfServerInstances,
+            PipeTransmissionMode transmissionMode,
+            PipeOptions options,
+            int inBufferSize,
+            int outBufferSize
+        )
+            : this(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                HandleInheritability.None
+            ) { }
 
         /// <summary>
         /// Full named pipe server constructor
@@ -70,18 +135,37 @@ namespace System.IO.Pipes
         /// </param>
         /// <param name="outBufferSize">Outgoing buffer size, 0 or higher (see above)</param>
         /// <param name="inheritability">Whether handle is inheritable</param>
-        private NamedPipeServerStream(string pipeName,
+        private NamedPipeServerStream(
+            string pipeName,
             PipeDirection direction,
             int maxNumberOfServerInstances,
             PipeTransmissionMode transmissionMode,
             PipeOptions options,
             int inBufferSize,
             int outBufferSize,
-            HandleInheritability inheritability)
-            : base(direction, transmissionMode, outBufferSize)
+            HandleInheritability inheritability
+        ) : base(direction, transmissionMode, outBufferSize)
         {
-            ValidateParameters(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize, outBufferSize, inheritability);
-            Create(pipeName, direction, maxNumberOfServerInstances, transmissionMode, options, inBufferSize, outBufferSize, inheritability);
+            ValidateParameters(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                inheritability
+            );
+            Create(
+                pipeName,
+                direction,
+                maxNumberOfServerInstances,
+                transmissionMode,
+                options,
+                inBufferSize,
+                outBufferSize,
+                inheritability
+            );
         }
 
         private void ValidateParameters(
@@ -92,43 +176,83 @@ namespace System.IO.Pipes
             PipeOptions options,
             int inBufferSize,
             int outBufferSize,
-            HandleInheritability inheritability)
+            HandleInheritability inheritability
+        )
         {
             ArgumentException.ThrowIfNullOrEmpty(pipeName);
             if (direction < PipeDirection.In || direction > PipeDirection.InOut)
             {
-                throw new ArgumentOutOfRangeException(nameof(direction), SR.ArgumentOutOfRange_DirectionModeInOutOrInOut);
+                throw new ArgumentOutOfRangeException(
+                    nameof(direction),
+                    SR.ArgumentOutOfRange_DirectionModeInOutOrInOut
+                );
             }
-            if (transmissionMode < PipeTransmissionMode.Byte || transmissionMode > PipeTransmissionMode.Message)
+            if (
+                transmissionMode < PipeTransmissionMode.Byte
+                || transmissionMode > PipeTransmissionMode.Message
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(transmissionMode), SR.ArgumentOutOfRange_TransmissionModeByteOrMsg);
+                throw new ArgumentOutOfRangeException(
+                    nameof(transmissionMode),
+                    SR.ArgumentOutOfRange_TransmissionModeByteOrMsg
+                );
             }
-            if ((options & ~(PipeOptions.WriteThrough | PipeOptions.Asynchronous | PipeOptions.CurrentUserOnly)) != 0)
+            if (
+                (
+                    options
+                    & ~(
+                        PipeOptions.WriteThrough
+                        | PipeOptions.Asynchronous
+                        | PipeOptions.CurrentUserOnly
+                    )
+                ) != 0
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(options), SR.ArgumentOutOfRange_OptionsInvalid);
+                throw new ArgumentOutOfRangeException(
+                    nameof(options),
+                    SR.ArgumentOutOfRange_OptionsInvalid
+                );
             }
             if (inBufferSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(inBufferSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inBufferSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
             if (outBufferSize < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(outBufferSize), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(outBufferSize),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             }
-            if ((maxNumberOfServerInstances < 1 || maxNumberOfServerInstances > 254) && (maxNumberOfServerInstances != MaxAllowedServerInstances))
+            if (
+                (maxNumberOfServerInstances < 1 || maxNumberOfServerInstances > 254)
+                && (maxNumberOfServerInstances != MaxAllowedServerInstances)
+            )
             {
                 // win32 allows fixed values of 1-254 or 255 to mean max allowed by system. We expose 255 as -1 (unlimited)
                 // through the MaxAllowedServerInstances constant. This is consistent e.g. with -1 as infinite timeout, etc.
                 // We do this check for consistency on Unix, even though maxNumberOfServerInstances is otherwise ignored.
-                throw new ArgumentOutOfRangeException(nameof(maxNumberOfServerInstances), SR.ArgumentOutOfRange_MaxNumServerInstances);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxNumberOfServerInstances),
+                    SR.ArgumentOutOfRange_MaxNumServerInstances
+                );
             }
 
             // inheritability will always be None since this private constructor is only called from other constructors from which
             // inheritability is always set to None. Desktop has a public constructor to allow setting it to something else, but Core
             // doesn't.
-            if (inheritability < HandleInheritability.None || inheritability > HandleInheritability.Inheritable)
+            if (
+                inheritability < HandleInheritability.None
+                || inheritability > HandleInheritability.Inheritable
+            )
             {
-                throw new ArgumentOutOfRangeException(nameof(inheritability), SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable);
+                throw new ArgumentOutOfRangeException(
+                    nameof(inheritability),
+                    SR.ArgumentOutOfRange_HandleInheritabilityNoneOrInheritable
+                );
             }
 
             if ((options & PipeOptions.CurrentUserOnly) != 0)
@@ -138,8 +262,12 @@ namespace System.IO.Pipes
         }
 
         // Create a NamedPipeServerStream from an existing server pipe handle.
-        public NamedPipeServerStream(PipeDirection direction, bool isAsync, bool isConnected, SafePipeHandle safePipeHandle)
-            : base(direction, PipeTransmissionMode.Byte, 0)
+        public NamedPipeServerStream(
+            PipeDirection direction,
+            bool isAsync,
+            bool isConnected,
+            SafePipeHandle safePipeHandle
+        ) : base(direction, PipeTransmissionMode.Byte, 0)
         {
             ArgumentNullException.ThrowIfNull(safePipeHandle);
 
@@ -170,8 +298,7 @@ namespace System.IO.Pipes
         public System.IAsyncResult BeginWaitForConnection(AsyncCallback? callback, object? state) =>
             TaskToApm.Begin(WaitForConnectionAsync(), callback, state);
 
-        public void EndWaitForConnection(IAsyncResult asyncResult) =>
-            TaskToApm.End(asyncResult);
+        public void EndWaitForConnection(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
         // Server can only connect from Disconnected state
         private void CheckConnectOperationsServer()

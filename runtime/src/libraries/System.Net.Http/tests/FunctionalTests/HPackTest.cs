@@ -23,16 +23,18 @@ namespace System.Net.Http.Functional.Tests
     {
         protected override Version UseVersion => HttpVersion.Version20;
 
-        public HPackTest(ITestOutputHelper output) : base(output)
-        {
-        }
+        public HPackTest(ITestOutputHelper output) : base(output) { }
 
         private const string LiteralHeaderName = "x-literal-header";
         private const string LiteralHeaderValue = "testing 456";
 
         [Theory]
         [MemberData(nameof(HeaderEncodingTestData))]
-        public async Task HPack_HeaderEncoding(string headerName, string expectedValue, byte[] expectedEncoding)
+        public async Task HPack_HeaderEncoding(
+            string headerName,
+            string expectedValue,
+            byte[] expectedEncoding
+        )
         {
             await Http2LoopbackServer.CreateClientAndServerAsync(
                 async uri =>
@@ -51,14 +53,16 @@ namespace System.Net.Http.Functional.Tests
                 async server =>
                 {
                     Http2LoopbackConnection connection = await server.EstablishConnectionAsync();
-                    (int streamId, HttpRequestData requestData) = await connection.ReadAndParseRequestHeaderAsync();
+                    (int streamId, HttpRequestData requestData) =
+                        await connection.ReadAndParseRequestHeaderAsync();
 
                     HttpHeaderData header = requestData.Headers.Single(x => x.Name == headerName);
                     Assert.Equal(expectedValue, header.Value);
                     Assert.True(expectedEncoding.AsSpan().SequenceEqual(header.Raw));
 
                     await connection.SendDefaultResponseAsync(streamId);
-                });
+                }
+            );
         }
 
         public static IEnumerable<object[]> HeaderEncodingTestData()
@@ -68,10 +72,82 @@ namespace System.Net.Http.Functional.Tests
             yield return new object[] { ":path", "/", new byte[] { 0x84 } };
 
             // Indexed name, literal value.
-            yield return new object[] { "content-type", "text/plain; charset=utf-8", new byte[] { 0x0F, 0x10, 0x19, 0x74, 0x65, 0x78, 0x74, 0x2F, 0x70, 0x6C, 0x61, 0x69, 0x6E, 0x3B, 0x20, 0x63, 0x68, 0x61, 0x72, 0x73, 0x65, 0x74, 0x3D, 0x75, 0x74, 0x66, 0x2D, 0x38 } };
+            yield return new object[]
+            {
+                "content-type",
+                "text/plain; charset=utf-8",
+                new byte[]
+                {
+                    0x0F,
+                    0x10,
+                    0x19,
+                    0x74,
+                    0x65,
+                    0x78,
+                    0x74,
+                    0x2F,
+                    0x70,
+                    0x6C,
+                    0x61,
+                    0x69,
+                    0x6E,
+                    0x3B,
+                    0x20,
+                    0x63,
+                    0x68,
+                    0x61,
+                    0x72,
+                    0x73,
+                    0x65,
+                    0x74,
+                    0x3D,
+                    0x75,
+                    0x74,
+                    0x66,
+                    0x2D,
+                    0x38
+                }
+            };
 
             // Literal name, literal value.
-            yield return new object[] { LiteralHeaderName, LiteralHeaderValue, new byte[] { 0x00, 0x10, 0x78, 0x2D, 0x6C, 0x69, 0x74, 0x65, 0x72, 0x61, 0x6C, 0x2D, 0x68, 0x65, 0x61, 0x64, 0x65, 0x72, 0x0B, 0x74, 0x65, 0x73, 0x74, 0x69, 0x6E, 0x67, 0x20, 0x34, 0x35, 0x36 } };
+            yield return new object[]
+            {
+                LiteralHeaderName,
+                LiteralHeaderValue,
+                new byte[]
+                {
+                    0x00,
+                    0x10,
+                    0x78,
+                    0x2D,
+                    0x6C,
+                    0x69,
+                    0x74,
+                    0x65,
+                    0x72,
+                    0x61,
+                    0x6C,
+                    0x2D,
+                    0x68,
+                    0x65,
+                    0x61,
+                    0x64,
+                    0x65,
+                    0x72,
+                    0x0B,
+                    0x74,
+                    0x65,
+                    0x73,
+                    0x74,
+                    0x69,
+                    0x6E,
+                    0x67,
+                    0x20,
+                    0x34,
+                    0x35,
+                    0x36
+                }
+            };
         }
     }
 }

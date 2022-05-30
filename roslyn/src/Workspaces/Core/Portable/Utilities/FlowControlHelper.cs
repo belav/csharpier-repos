@@ -9,8 +9,8 @@ namespace Roslyn.Utilities
 {
     internal static class FlowControlHelper
     {
-        public static AsyncFlowControlHelper TrySuppressFlow()
-            => new(ExecutionContext.IsFlowSuppressed() ? default : ExecutionContext.SuppressFlow());
+        public static AsyncFlowControlHelper TrySuppressFlow() =>
+            new(ExecutionContext.IsFlowSuppressed() ? default : ExecutionContext.SuppressFlow());
 
         public struct AsyncFlowControlHelper : IDisposable
         {

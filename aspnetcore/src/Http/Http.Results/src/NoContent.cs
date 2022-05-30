@@ -16,9 +16,7 @@ public class NoContent : IResult, IEndpointMetadataProvider
     /// <summary>
     /// Initializes a new instance of the <see cref="NoContent"/> class.
     /// </summary>
-    internal NoContent()
-    {
-    }
+    internal NoContent() { }
 
     /// <summary>
     /// Gets the HTTP status code: <see cref="StatusCodes.Status204NoContent"/>
@@ -46,6 +44,8 @@ public class NoContent : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status204NoContent));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status204NoContent)
+        );
     }
 }

@@ -25,7 +25,10 @@ internal static class ReflectionHelper
 
         do
         {
-            if (nullableType.IsGenericType && nullableType.GetGenericTypeDefinition() == typeof(ChannelReader<>))
+            if (
+                nullableType.IsGenericType
+                && nullableType.GetGenericTypeDefinition() == typeof(ChannelReader<>)
+            )
             {
                 return true;
             }
@@ -46,16 +49,17 @@ internal static class ReflectionHelper
             }
         }
 
-        return type.GetInterfaces().Any(t =>
-        {
-            if (t.IsGenericType)
+        return type.GetInterfaces()
+            .Any(t =>
             {
-                return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
-            }
-            else
-            {
-                return false;
-            }
-        });
+                if (t.IsGenericType)
+                {
+                    return t.GetGenericTypeDefinition() == typeof(IAsyncEnumerable<>);
+                }
+                else
+                {
+                    return false;
+                }
+            });
     }
 }

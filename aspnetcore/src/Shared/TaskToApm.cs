@@ -67,6 +67,7 @@ internal static class TaskToApm
     {
         /// <summary>The wrapped Task.</summary>
         internal readonly Task _task;
+
         /// <summary>Callback to invoke when the wrapped task completes.</summary>
         private readonly AsyncCallback? _callback;
 
@@ -92,9 +93,10 @@ internal static class TaskToApm
                 // order to avoid running synchronously if the task has already completed by the time we get here but still run
                 // synchronously as part of the task's completion if the task completes after (the more common case).
                 _callback = callback;
-                _task.ConfigureAwait(continueOnCapturedContext: false)
-                     .GetAwaiter()
-                     .OnCompleted(InvokeCallback); // allocates a delegate, but avoids a closure
+                _task
+                    .ConfigureAwait(continueOnCapturedContext: false)
+                    .GetAwaiter()
+                    .OnCompleted(InvokeCallback); // allocates a delegate, but avoids a closure
             }
         }
 
@@ -108,11 +110,14 @@ internal static class TaskToApm
 
         /// <summary>Gets a user-defined object that qualifies or contains information about an asynchronous operation.</summary>
         public object? AsyncState { get; }
+
         /// <summary>Gets a value that indicates whether the asynchronous operation completed synchronously.</summary>
         /// <remarks>This is set lazily based on whether the <see cref="_task"/> has completed by the time this object is created.</remarks>
         public bool CompletedSynchronously { get; }
+
         /// <summary>Gets a value that indicates whether the asynchronous operation has completed.</summary>
         public bool IsCompleted => _task.IsCompleted;
+
         /// <summary>Gets a <see cref="WaitHandle"/> that is used to wait for an asynchronous operation to complete.</summary>
         public WaitHandle AsyncWaitHandle => ((IAsyncResult)_task).AsyncWaitHandle;
     }

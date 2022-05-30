@@ -36,8 +36,8 @@ public class CSharpModelGenerator : ModelCodeGenerator
     public CSharpModelGenerator(
         ModelCodeGeneratorDependencies dependencies,
         ICSharpDbContextGenerator cSharpDbContextGenerator,
-        ICSharpEntityTypeGenerator cSharpEntityTypeGenerator)
-        : base(dependencies)
+        ICSharpEntityTypeGenerator cSharpEntityTypeGenerator
+    ) : base(dependencies)
     {
         CSharpDbContextGenerator = cSharpDbContextGenerator;
         CSharpEntityTypeGenerator = cSharpEntityTypeGenerator;
@@ -51,8 +51,7 @@ public class CSharpModelGenerator : ModelCodeGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override string Language
-        => "C#";
+    public override string Language => "C#";
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -60,20 +59,22 @@ public class CSharpModelGenerator : ModelCodeGenerator
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public override ScaffoldedModel GenerateModel(
-        IModel model,
-        ModelCodeGenerationOptions options)
+    public override ScaffoldedModel GenerateModel(IModel model, ModelCodeGenerationOptions options)
     {
         if (options.ContextName == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ContextName), nameof(options)),
+                nameof(options)
+            );
         }
 
         if (options.ConnectionString == null)
         {
             throw new ArgumentException(
-                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)), nameof(options));
+                CoreStrings.ArgumentPropertyNull(nameof(options.ConnectionString), nameof(options)),
+                nameof(options)
+            );
         }
 
         var generatedCode = CSharpDbContextGenerator.WriteCode(
@@ -85,7 +86,8 @@ public class CSharpModelGenerator : ModelCodeGenerator
             options.UseDataAnnotations,
             options.UseNullableReferenceTypes,
             options.SuppressConnectionStringWarning,
-            options.SuppressOnConfiguring);
+            options.SuppressOnConfiguring
+        );
 
         // output DbContext .cs file
         var dbContextFileName = options.ContextName + FileExtension;
@@ -93,9 +95,10 @@ public class CSharpModelGenerator : ModelCodeGenerator
         {
             ContextFile = new ScaffoldedFile
             {
-                Path = options.ContextDir != null
-                    ? Path.Combine(options.ContextDir, dbContextFileName)
-                    : dbContextFileName,
+                Path =
+                    options.ContextDir != null
+                        ? Path.Combine(options.ContextDir, dbContextFileName)
+                        : dbContextFileName,
                 Code = generatedCode
             }
         };
@@ -111,12 +114,14 @@ public class CSharpModelGenerator : ModelCodeGenerator
                 entityType,
                 options.ModelNamespace,
                 options.UseDataAnnotations,
-                options.UseNullableReferenceTypes);
+                options.UseNullableReferenceTypes
+            );
 
             // output EntityType poco .cs file
             var entityTypeFileName = entityType.Name + FileExtension;
             resultingFiles.AdditionalFiles.Add(
-                new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode });
+                new ScaffoldedFile { Path = entityTypeFileName, Code = generatedCode }
+            );
         }
 
         return resultingFiles;

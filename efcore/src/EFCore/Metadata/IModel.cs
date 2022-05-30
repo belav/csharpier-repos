@@ -52,7 +52,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     IEntityType? FindEntityType(
         string name,
         string definingNavigationName,
-        IEntityType definingEntityType);
+        IEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Gets the entity that maps the given entity class, where the class may be a proxy derived from the
@@ -70,9 +71,7 @@ public interface IModel : IReadOnlyModel, IAnnotatable
         Check.NotNull(type, nameof(type));
 
         return FindEntityType(type)
-            ?? (type.BaseType == null
-                ? null
-                : FindEntityType(type.BaseType));
+            ?? (type.BaseType == null ? null : FindEntityType(type.BaseType));
     }
 
     /// <summary>
@@ -90,8 +89,15 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     [DisallowNull]
     RuntimeModelDependencies? ModelDependencies
     {
-        get => (RuntimeModelDependencies?)FindRuntimeAnnotationValue(CoreAnnotationNames.ModelDependencies);
-        set => SetRuntimeAnnotation(CoreAnnotationNames.ModelDependencies, Check.NotNull(value, nameof(value)));
+        get =>
+            (RuntimeModelDependencies?)FindRuntimeAnnotationValue(
+                CoreAnnotationNames.ModelDependencies
+            );
+        set =>
+            SetRuntimeAnnotation(
+                CoreAnnotationNames.ModelDependencies,
+                Check.NotNull(value, nameof(value))
+            );
     }
 
     /// <summary>
@@ -102,7 +108,9 @@ public interface IModel : IReadOnlyModel, IAnnotatable
         var dependencies = ModelDependencies;
         if (dependencies == null)
         {
-            throw new InvalidOperationException(CoreStrings.ModelNotFinalized(nameof(GetModelDependencies)));
+            throw new InvalidOperationException(
+                CoreStrings.ModelNotFinalized(nameof(GetModelDependencies))
+            );
         }
 
         return dependencies;
@@ -134,8 +142,10 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     IEntityType? FindEntityType(
         Type type,
         string definingNavigationName,
-        IEntityType definingEntityType)
-        => (IEntityType?)((IReadOnlyModel)this).FindEntityType(type, definingNavigationName, definingEntityType);
+        IEntityType definingEntityType
+    ) =>
+        (IEntityType?)
+            ((IReadOnlyModel)this).FindEntityType(type, definingNavigationName, definingEntityType);
 
     /// <summary>
     ///     Gets the entity types matching the given type.
@@ -159,9 +169,8 @@ public interface IModel : IReadOnlyModel, IAnnotatable
     /// <returns>List of entity types corresponding to the least derived types from the given.</returns>
     new IEnumerable<IEntityType> FindLeastDerivedEntityTypes(
         Type type,
-        Func<IReadOnlyEntityType, bool>? condition = null)
-        => ((IReadOnlyModel)this).FindLeastDerivedEntityTypes(type, condition)
-            .Cast<IEntityType>();
+        Func<IReadOnlyEntityType, bool>? condition = null
+    ) => ((IReadOnlyModel)this).FindLeastDerivedEntityTypes(type, condition).Cast<IEntityType>();
 
     /// <summary>
     ///     Gets a value indicating whether the given <see cref="MethodInfo" /> represents an indexer access.

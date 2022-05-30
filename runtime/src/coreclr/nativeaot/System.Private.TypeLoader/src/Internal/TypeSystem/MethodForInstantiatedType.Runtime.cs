@@ -11,10 +11,7 @@ namespace Internal.TypeSystem
     {
         public override MethodNameAndSignature NameAndSignature
         {
-            get
-            {
-                return _typicalMethodDef.NameAndSignature;
-            }
+            get { return _typicalMethodDef.NameAndSignature; }
         }
 
 #if DEBUG

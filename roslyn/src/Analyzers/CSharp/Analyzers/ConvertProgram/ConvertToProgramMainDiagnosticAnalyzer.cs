@@ -14,20 +14,24 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
     using static ConvertProgramAnalysis;
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal sealed class ConvertToProgramMainDiagnosticAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal sealed class ConvertToProgramMainDiagnosticAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public ConvertToProgramMainDiagnosticAnalyzer()
             : base(
-                  IDEDiagnosticIds.UseProgramMainId,
-                  EnforceOnBuildValues.UseProgramMain,
-                  CSharpCodeStyleOptions.PreferTopLevelStatements,
-                  LanguageNames.CSharp,
-                  new LocalizableResourceString(nameof(CSharpAnalyzersResources.Convert_to_Program_Main_style_program), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+                IDEDiagnosticIds.UseProgramMainId,
+                EnforceOnBuildValues.UseProgramMain,
+                CSharpCodeStyleOptions.PreferTopLevelStatements,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Convert_to_Program_Main_style_program),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticDocumentAnalysis;
 
         protected override void InitializeWorker(AnalysisContext context)
         {
@@ -36,7 +40,10 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
                 if (!IsApplication(context.Compilation))
                     return;
 
-                context.RegisterSyntaxNodeAction(ProcessCompilationUnit, SyntaxKind.CompilationUnit);
+                context.RegisterSyntaxNodeAction(
+                    ProcessCompilationUnit,
+                    SyntaxKind.CompilationUnit
+                );
             });
         }
 
@@ -50,13 +57,19 @@ namespace Microsoft.CodeAnalysis.CSharp.TopLevelStatements
 
             var severity = option.Notification.Severity;
 
-            context.ReportDiagnostic(DiagnosticHelper.Create(
-                this.Descriptor,
-                GetUseProgramMainDiagnosticLocation(
-                    root, isHidden: severity.WithDefaultSeverity(DiagnosticSeverity.Hidden) == ReportDiagnostic.Hidden),
-                severity,
-                ImmutableArray<Location>.Empty,
-                ImmutableDictionary<string, string?>.Empty));
+            context.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    this.Descriptor,
+                    GetUseProgramMainDiagnosticLocation(
+                        root,
+                        isHidden: severity.WithDefaultSeverity(DiagnosticSeverity.Hidden)
+                            == ReportDiagnostic.Hidden
+                    ),
+                    severity,
+                    ImmutableArray<Location>.Empty,
+                    ImmutableDictionary<string, string?>.Empty
+                )
+            );
         }
     }
 }

@@ -8,18 +8,18 @@ namespace TestRunningMono
     {
         public static int Main(string[] args)
         {
-             const int Pass = 100, Fail = 1;
-             bool isMono = typeof(object).Assembly.GetType("Mono.RuntimeStructs") != null;
+            const int Pass = 100,
+                Fail = 1;
+            bool isMono = typeof(object).Assembly.GetType("Mono.RuntimeStructs") != null;
 
-             if(isMono)
-             {
-                 return Pass;
-             }
-             else
-             {
-                 return Fail;
-             }
+            if (isMono)
+            {
+                return Pass;
+            }
+            else
+            {
+                return Fail;
+            }
         }
-   }
+    }
 }
-

@@ -22,7 +22,8 @@ namespace ILCompiler.IBC
 {
     static class MIbcProfileParser
     {
-        private class MetadataLoaderForPgoData : IPgoSchemaDataLoader<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>
+        private class MetadataLoaderForPgoData
+            : IPgoSchemaDataLoader<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>
         {
             private readonly EcmaMethodIL _ilBody;
 
@@ -30,7 +31,11 @@ namespace ILCompiler.IBC
             {
                 _ilBody = ilBody;
             }
-            TypeSystemEntityOrUnknown IPgoSchemaDataLoader<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>.TypeFromLong(long token)
+
+            TypeSystemEntityOrUnknown IPgoSchemaDataLoader<
+                TypeSystemEntityOrUnknown,
+                TypeSystemEntityOrUnknown
+            >.TypeFromLong(long token)
             {
                 try
                 {
@@ -41,7 +46,8 @@ namespace ILCompiler.IBC
                         // token type is 0, therefore it can't be a type
                         return new TypeSystemEntityOrUnknown((int)token);
                     }
-                    TypeDesc foundType = _ilBody.GetObject((int)token, NotFoundBehavior.ReturnNull) as TypeDesc;
+                    TypeDesc foundType =
+                        _ilBody.GetObject((int)token, NotFoundBehavior.ReturnNull) as TypeDesc;
                     if (foundType == null)
                     {
                         return new TypeSystemEntityOrUnknown((int)token & 0x00FFFFFF);
@@ -53,7 +59,11 @@ namespace ILCompiler.IBC
                     return new TypeSystemEntityOrUnknown((int)token);
                 }
             }
-            TypeSystemEntityOrUnknown IPgoSchemaDataLoader<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>.MethodFromLong(long token)
+
+            TypeSystemEntityOrUnknown IPgoSchemaDataLoader<
+                TypeSystemEntityOrUnknown,
+                TypeSystemEntityOrUnknown
+            >.MethodFromLong(long token)
             {
                 try
                 {
@@ -64,7 +74,8 @@ namespace ILCompiler.IBC
                         // token type is 0, therefore it can't be a method
                         return new TypeSystemEntityOrUnknown((int)token);
                     }
-                    MethodDesc foundMethod = _ilBody.GetObject((int)token, NotFoundBehavior.ReturnNull) as MethodDesc;
+                    MethodDesc foundMethod =
+                        _ilBody.GetObject((int)token, NotFoundBehavior.ReturnNull) as MethodDesc;
                     if (foundMethod == null)
                     {
                         return new TypeSystemEntityOrUnknown((int)token & 0x00FFFFFF);
@@ -84,7 +95,14 @@ namespace ILCompiler.IBC
             PEReader peReader = null;
 
             {
-                FileStream fsMibcFile = new FileStream(filename, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 0x1000, useAsync: false);
+                FileStream fsMibcFile = new FileStream(
+                    filename,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    bufferSize: 0x1000,
+                    useAsync: false
+                );
                 bool disposeOnException = true;
 
                 try
@@ -100,10 +118,19 @@ namespace ILCompiler.IBC
                     }
                     else
                     {
-                        using (var zipFile = new ZipArchive(fsMibcFile, ZipArchiveMode.Read, leaveOpen: false, entryNameEncoding: null))
+                        using (
+                            var zipFile = new ZipArchive(
+                                fsMibcFile,
+                                ZipArchiveMode.Read,
+                                leaveOpen: false,
+                                entryNameEncoding: null
+                            )
+                        )
                         {
                             disposeOnException = false;
-                            var mibcDataEntry = zipFile.GetEntry(Path.GetFileName(filename) + ".dll");
+                            var mibcDataEntry = zipFile.GetEntry(
+                                Path.GetFileName(filename) + ".dll"
+                            );
                             using (var mibcDataStream = mibcDataEntry.Open())
                             {
                                 peData = new byte[mibcDataEntry.Length];
@@ -124,7 +151,9 @@ namespace ILCompiler.IBC
 
             if (peData != null)
             {
-                peReader = new PEReader(System.Collections.Immutable.ImmutableArray.Create<byte>(peData));
+                peReader = new PEReader(
+                    System.Collections.Immutable.ImmutableArray.Create<byte>(peData)
+                );
             }
 
             return peReader;
@@ -148,15 +177,28 @@ namespace ILCompiler.IBC
         /// See comment above ReadMIbcGroup for details of the group format
         ///
         /// The mibcGroupName is in the following format "Assembly_{definingAssemblyName};{OtherAssemblyName};{OtherAssemblyName};...; (OtherAssemblyName is ; delimited)
-        /// 
+        ///
         /// </summary>
         /// <returns></returns>
-        public static ProfileData ParseMIbcFile(TypeSystemContext tsc, PEReader peReader, HashSet<string> assemblyNamesInVersionBubble, string onlyDefinedInAssembly)
+        public static ProfileData ParseMIbcFile(
+            TypeSystemContext tsc,
+            PEReader peReader,
+            HashSet<string> assemblyNamesInVersionBubble,
+            string onlyDefinedInAssembly
+        )
         {
-            var mibcModule = EcmaModule.Create(tsc, peReader, null, null, new CustomCanonResolver(tsc));
+            var mibcModule = EcmaModule.Create(
+                tsc,
+                peReader,
+                null,
+                null,
+                new CustomCanonResolver(tsc)
+            );
 
-            var assemblyDictionary = (EcmaMethod)mibcModule.GetGlobalModuleType().GetMethod("AssemblyDictionary", null);
-            IEnumerable<MethodProfileData> loadedMethodProfileData = Enumerable.Empty<MethodProfileData>();
+            var assemblyDictionary = (EcmaMethod)
+                mibcModule.GetGlobalModuleType().GetMethod("AssemblyDictionary", null);
+            IEnumerable<MethodProfileData> loadedMethodProfileData =
+                Enumerable.Empty<MethodProfileData>();
 
             EcmaMethodIL ilBody = EcmaMethodIL.Create(assemblyDictionary);
             ILReader ilReader = new ILReader(ilBody.GetILBytes());
@@ -184,7 +226,9 @@ namespace ILCompiler.IBC
 
                         string[] assembliesByName = mibcGroupName.Split(';');
 
-                        bool hasMatchingDefinition = (onlyDefinedInAssembly == null) || assembliesByName[0].Equals(onlyDefinedInAssembly);
+                        bool hasMatchingDefinition =
+                            (onlyDefinedInAssembly == null)
+                            || assembliesByName[0].Equals(onlyDefinedInAssembly);
 
                         if (!hasMatchingDefinition)
                             break;
@@ -208,7 +252,9 @@ namespace ILCompiler.IBC
                                 break;
                         }
 
-                        loadedMethodProfileData = loadedMethodProfileData.Concat(ReadMIbcGroup(tsc, (EcmaMethod)ilBody.GetObject(token)));
+                        loadedMethodProfileData = loadedMethodProfileData.Concat(
+                            ReadMIbcGroup(tsc, (EcmaMethod)ilBody.GetObject(token))
+                        );
                         break;
                     case ILOpcode.pop:
                         mibcGroupName = "";
@@ -257,7 +303,10 @@ namespace ILCompiler.IBC
         ///
         /// This format is designed to be extensible to hold more data as we add new per method profile data without breaking existing parsers.
         /// </summary>
-        static IEnumerable<MethodProfileData> ReadMIbcGroup(TypeSystemContext tsc, EcmaMethod method)
+        static IEnumerable<MethodProfileData> ReadMIbcGroup(
+            TypeSystemContext tsc,
+            EcmaMethod method
+        )
         {
             EcmaMethodIL ilBody = EcmaMethodIL.Create(method);
             MetadataLoaderForPgoData metadataLoader = new MetadataLoaderForPgoData(ilBody);
@@ -282,6 +331,7 @@ namespace ILCompiler.IBC
                 switch (opcode)
                 {
                     case ILOpcode.ldtoken:
+
                         {
                             int token = ilReader.ReadILToken();
                             if (state == MibcGroupParseState.ProcessingInstrumentationData)
@@ -293,7 +343,10 @@ namespace ILCompiler.IBC
                                 metadataObject = null;
                                 try
                                 {
-                                    metadataObject = ilBody.GetObject(token, NotFoundBehavior.ReturnNull);
+                                    metadataObject = ilBody.GetObject(
+                                        token,
+                                        NotFoundBehavior.ReturnNull
+                                    );
                                     if (metadataObject == null)
                                         metadataObject = metadataNotResolvable;
                                 }
@@ -321,41 +374,41 @@ namespace ILCompiler.IBC
                         break;
 
                     case ILOpcode.ldc_r4:
+                    {
+                        float fltValue = ilReader.ReadILFloat();
+
+                        switch (state)
                         {
-                            float fltValue = ilReader.ReadILFloat();
+                            case MibcGroupParseState.ProcessingExclusiveWeight:
+                                exclusiveWeight = fltValue;
+                                state = MibcGroupParseState.LookingForOptionalData;
+                                break;
 
-                            switch (state)
-                            {
-                                case MibcGroupParseState.ProcessingExclusiveWeight:
-                                    exclusiveWeight = fltValue;
-                                    state = MibcGroupParseState.LookingForOptionalData;
-                                    break;
-
-                                default:
-                                    state = MibcGroupParseState.LookingForOptionalData;
-                                    break;
-                            }
-
-                            break;
+                            default:
+                                state = MibcGroupParseState.LookingForOptionalData;
+                                break;
                         }
+
+                        break;
+                    }
 
                     case ILOpcode.ldc_r8:
+                    {
+                        double dblValue = ilReader.ReadILDouble();
+
+                        switch (state)
                         {
-                            double dblValue = ilReader.ReadILDouble();
+                            case MibcGroupParseState.ProcessingExclusiveWeight:
+                                exclusiveWeight = dblValue;
+                                state = MibcGroupParseState.LookingForOptionalData;
+                                break;
 
-                            switch (state)
-                            {
-                                case MibcGroupParseState.ProcessingExclusiveWeight:
-                                    exclusiveWeight = dblValue;
-                                    state = MibcGroupParseState.LookingForOptionalData;
-                                    break;
-
-                                default:
-                                    state = MibcGroupParseState.LookingForOptionalData;
-                                    break;
-                            }
-                            break;
+                            default:
+                                state = MibcGroupParseState.LookingForOptionalData;
+                                break;
                         }
+                        break;
+                    }
                     case ILOpcode.ldc_i4_0:
                         intValue = 0;
                         processIntValue = true;
@@ -413,6 +466,7 @@ namespace ILCompiler.IBC
                         break;
 
                     case ILOpcode.ldstr:
+
                         {
                             int userStringToken = ilReader.ReadILToken();
                             string optionalDataName = (string)ilBody.GetObject(userStringToken);
@@ -436,7 +490,12 @@ namespace ILCompiler.IBC
                                     {
                                         instrumentationDataLongs.Add(2); // MarshalMask 2 (Type)
                                         instrumentationDataLongs.Add(0); // PgoInstrumentationKind.Done (0)
-                                        pgoSchemaData = PgoProcessor.ParsePgoData<TypeSystemEntityOrUnknown, TypeSystemEntityOrUnknown>(metadataLoader, instrumentationDataLongs, false).ToArray();
+                                        pgoSchemaData = PgoProcessor
+                                            .ParsePgoData<
+                                                TypeSystemEntityOrUnknown,
+                                                TypeSystemEntityOrUnknown
+                                            >(metadataLoader, instrumentationDataLongs, false)
+                                            .ToArray();
                                     }
                                     state = MibcGroupParseState.LookingForOptionalData;
                                     break;
@@ -444,7 +503,6 @@ namespace ILCompiler.IBC
                                     state = MibcGroupParseState.LookingForOptionalData;
                                     break;
                             }
-
                         }
                         break;
                     case ILOpcode.pop:
@@ -454,12 +512,20 @@ namespace ILCompiler.IBC
                             if (exclusiveWeight == 0)
                             {
                                 // If no exclusive weight is found assign a non zero value that assumes the order in the pgo file is significant.
-                                exclusiveWeight = Math.Min(1000000.0 - profileEntryFound, 0.0) / 1000000.0;
+                                exclusiveWeight =
+                                    Math.Min(1000000.0 - profileEntryFound, 0.0) / 1000000.0;
                             }
                             if (methodInProgress != null)
                             {
                                 // If the method being loaded didn't have meaningful input, skip
-                                MethodProfileData mibcData = new MethodProfileData((MethodDesc)methodInProgress, MethodProfilingDataFlags.ReadMethodCode, exclusiveWeight, weights, 0xFFFFFFFF, pgoSchemaData);
+                                MethodProfileData mibcData = new MethodProfileData(
+                                    (MethodDesc)methodInProgress,
+                                    MethodProfilingDataFlags.ReadMethodCode,
+                                    exclusiveWeight,
+                                    weights,
+                                    0xFFFFFFFF,
+                                    pgoSchemaData
+                                );
                                 yield return mibcData;
                             }
                             state = MibcGroupParseState.LookingForNextMethod;
@@ -526,8 +592,7 @@ namespace ILCompiler.IBC
             private class CanonModule : ModuleDesc, IAssemblyDesc
             {
                 public CanonModule(TypeSystemContext wrappedContext) : base(wrappedContext, null)
-                {
-                }
+                { }
 
                 public override IEnumerable<MetadataType> GetAllTypes()
                 {
@@ -539,19 +604,35 @@ namespace ILCompiler.IBC
                     throw new NotImplementedException();
                 }
 
-                public override object GetType(string nameSpace, string name, NotFoundBehavior notFoundBehavior)
+                public override object GetType(
+                    string nameSpace,
+                    string name,
+                    NotFoundBehavior notFoundBehavior
+                )
                 {
                     TypeSystemContext context = Context;
 
-                    if (context.SupportsCanon && (nameSpace == context.CanonType.Namespace) && (name == context.CanonType.Name))
+                    if (
+                        context.SupportsCanon
+                        && (nameSpace == context.CanonType.Namespace)
+                        && (name == context.CanonType.Name)
+                    )
                         return Context.CanonType;
-                    if (context.SupportsUniversalCanon && (nameSpace == context.UniversalCanonType.Namespace) && (name == context.UniversalCanonType.Name))
+                    if (
+                        context.SupportsUniversalCanon
+                        && (nameSpace == context.UniversalCanonType.Namespace)
+                        && (name == context.UniversalCanonType.Name)
+                    )
                         return Context.UniversalCanonType;
                     else
                     {
                         if (notFoundBehavior != NotFoundBehavior.ReturnNull)
                         {
-                            var failure = ResolutionFailure.GetTypeLoadResolutionFailure(nameSpace, name, "System.Private.Canon");
+                            var failure = ResolutionFailure.GetTypeLoadResolutionFailure(
+                                nameSpace,
+                                name,
+                                "System.Private.Canon"
+                            );
                             if (notFoundBehavior == NotFoundBehavior.Throw)
                                 failure.Throw();
 
@@ -586,7 +667,11 @@ namespace ILCompiler.IBC
                     return _wrappedResolver.ResolveAssembly(name, throwIfNotFound);
             }
 
-            ModuleDesc IModuleResolver.ResolveModule(IAssemblyDesc referencingModule, string fileName, bool throwIfNotFound)
+            ModuleDesc IModuleResolver.ResolveModule(
+                IAssemblyDesc referencingModule,
+                string fileName,
+                bool throwIfNotFound
+            )
             {
                 return _wrappedResolver.ResolveModule(referencingModule, fileName, throwIfNotFound);
             }

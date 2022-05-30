@@ -16,9 +16,7 @@ public readonly struct ParameterBindingInfo
     /// </summary>
     /// <param name="entityType">The entity type for this binding.</param>
     /// <param name="materializationContextExpression">The expression tree from which the parameter value will come.</param>
-    public ParameterBindingInfo(
-        IEntityType entityType,
-        Expression materializationContextExpression)
+    public ParameterBindingInfo(IEntityType entityType, Expression materializationContextExpression)
     {
         Check.NotNull(entityType, nameof(entityType));
         Check.NotNull(entityType, nameof(materializationContextExpression));
@@ -42,6 +40,5 @@ public readonly struct ParameterBindingInfo
     /// </summary>
     /// <param name="property">The property.</param>
     /// <returns>The index where its value can be found.</returns>
-    public int GetValueBufferIndex(IPropertyBase property)
-        => property.GetIndex();
+    public int GetValueBufferIndex(IPropertyBase property) => property.GetIndex();
 }

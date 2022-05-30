@@ -28,7 +28,9 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         /// Given the syntax nodes to search,
         /// get all the method, event, property and type declaration syntax nodes.
         /// </summary>
-        protected abstract ImmutableArray<SyntaxNode> GetMembers(IEnumerable<SyntaxNode> nodesToSearch);
+        protected abstract ImmutableArray<SyntaxNode> GetMembers(
+            IEnumerable<SyntaxNode> nodesToSearch
+        );
 
         /// <summary>
         /// Get the token that represents declaration node.
@@ -38,13 +40,21 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
 
         protected abstract string GlobalImportsTitle { get; }
 
-        public async ValueTask<ImmutableArray<InheritanceMarginItem>> GetInheritanceMemberItemsAsync(
+        public async ValueTask<
+            ImmutableArray<InheritanceMarginItem>
+        > GetInheritanceMemberItemsAsync(
             Document document,
             TextSpan spanToSearch,
             bool includeGlobalImports,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var (remappedProject, symbolKeyAndLineNumbers) = await GetMemberSymbolKeysAsync(document, spanToSearch, cancellationToken).ConfigureAwait(false);
+            var (remappedProject, symbolKeyAndLineNumbers) = await GetMemberSymbolKeysAsync(
+                    document,
+                    spanToSearch,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // if we didn't remap the symbol to another project (e.g. remapping from a metadata-as-source symbol back to
             // the originating project), then we're in teh same project and we should try to get global import
@@ -54,16 +64,28 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             using var _ = ArrayBuilder<InheritanceMarginItem>.GetInstance(out var result);
 
             if (includeGlobalImports && !remapped)
-                result.AddRange(await GetGlobalImportItemsAsync(document, spanToSearch, frozenPartialSemantics: true, cancellationToken).ConfigureAwait(false));
+                result.AddRange(
+                    await GetGlobalImportItemsAsync(
+                            document,
+                            spanToSearch,
+                            frozenPartialSemantics: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
 
             if (!symbolKeyAndLineNumbers.IsEmpty)
             {
-                result.AddRange(await GetSymbolItemsAsync(
-                    remappedProject,
-                    document: remapped ? null : document,
-                    symbolKeyAndLineNumbers,
-                    frozenPartialSemantics: true,
-                    cancellationToken).ConfigureAwait(false));
+                result.AddRange(
+                    await GetSymbolItemsAsync(
+                            remappedProject,
+                            document: remapped ? null : document,
+                            symbolKeyAndLineNumbers,
+                            frozenPartialSemantics: true,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false)
+                );
             }
 
             return result.ToImmutable();
@@ -72,35 +94,59 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         private async ValueTask<(Project remapped, SymbolKeyAndLineNumberArray symbolKeyAndLineNumbers)> GetMemberSymbolKeysAsync(
             Document document,
             TextSpan spanToSearch,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var allDeclarationNodes = GetMembers(root.DescendantNodes(spanToSearch));
             if (!allDeclarationNodes.IsEmpty)
             {
-                var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
-                var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+                var sourceText = await document
+                    .GetTextAsync(cancellationToken)
+                    .ConfigureAwait(false);
+                var semanticModel = await document
+                    .GetRequiredSemanticModelAsync(cancellationToken)
+                    .ConfigureAwait(false);
 
-                var mappingService = document.Project.Solution.Workspace.Services.GetRequiredService<ISymbolMappingService>();
-                using var _ = ArrayBuilder<(SymbolKey symbolKey, int lineNumber)>.GetInstance(out var builder);
+                var mappingService =
+                    document.Project.Solution.Workspace.Services.GetRequiredService<ISymbolMappingService>();
+                using var _ = ArrayBuilder<(SymbolKey symbolKey, int lineNumber)>.GetInstance(
+                    out var builder
+                );
 
                 Project? project = null;
 
                 foreach (var memberDeclarationNode in allDeclarationNodes)
                 {
-                    var member = semanticModel.GetDeclaredSymbol(memberDeclarationNode, cancellationToken);
+                    var member = semanticModel.GetDeclaredSymbol(
+                        memberDeclarationNode,
+                        cancellationToken
+                    );
                     if (member == null || !CanHaveInheritanceTarget(member))
                         continue;
 
                     // Use mapping service to find correct solution & symbol. (e.g. metadata symbol)
-                    var mappingResult = await mappingService.MapSymbolAsync(document, member, cancellationToken).ConfigureAwait(false);
+                    var mappingResult = await mappingService
+                        .MapSymbolAsync(document, member, cancellationToken)
+                        .ConfigureAwait(false);
                     if (mappingResult == null)
                         continue;
 
                     // All the symbols here are declared in the same document, they should belong to the same project.
                     // So here it is enough to get the project once.
                     project ??= mappingResult.Project;
-                    builder.Add((mappingResult.Symbol.GetSymbolKey(cancellationToken), sourceText.Lines.GetLineFromPosition(GetDeclarationToken(memberDeclarationNode).SpanStart).LineNumber));
+                    builder.Add(
+                        (
+                            mappingResult.Symbol.GetSymbolKey(cancellationToken),
+                            sourceText.Lines
+                                .GetLineFromPosition(
+                                    GetDeclarationToken(memberDeclarationNode).SpanStart
+                                )
+                                .LineNumber
+                        )
+                    );
                 }
 
                 if (project != null)
@@ -114,14 +160,25 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
         {
             if (symbol is INamedTypeSymbol namedType)
             {
-                return !symbol.IsStatic && namedType.TypeKind is TypeKind.Interface or TypeKind.Class or TypeKind.Struct;
+                return !symbol.IsStatic
+                    && namedType.TypeKind
+                        is TypeKind.Interface
+                            or TypeKind.Class
+                            or TypeKind.Struct;
             }
 
-            if (symbol is IEventSymbol or IPropertySymbol
-                or IMethodSymbol
-                {
-                    MethodKind: MethodKind.Ordinary or MethodKind.ExplicitInterfaceImplementation or MethodKind.UserDefinedOperator or MethodKind.Conversion
-                })
+            if (
+                symbol
+                is IEventSymbol
+                    or IPropertySymbol
+                    or IMethodSymbol
+                    {
+                        MethodKind: MethodKind.Ordinary
+                            or MethodKind.ExplicitInterfaceImplementation
+                            or MethodKind.UserDefinedOperator
+                            or MethodKind.Conversion
+                    }
+            )
             {
                 return true;
             }

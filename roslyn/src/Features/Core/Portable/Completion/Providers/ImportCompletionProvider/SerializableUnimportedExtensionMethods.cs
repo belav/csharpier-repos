@@ -30,7 +30,8 @@ namespace Microsoft.CodeAnalysis.Completion.Providers
             bool isPartialResult,
             int getSymbolsTicks,
             int createItemsTicks,
-            bool isRemote)
+            bool isRemote
+        )
         {
             CompletionItems = completionItems;
             IsPartialResult = isPartialResult;

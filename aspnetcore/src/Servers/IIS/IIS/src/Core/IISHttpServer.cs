@@ -28,7 +28,9 @@ internal sealed class IISHttpServer : IServer
     private readonly IISNativeApplication _nativeApplication;
     private readonly ServerAddressesFeature _serverAddressesFeature;
 
-    private readonly TaskCompletionSource _shutdownSignal = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+    private readonly TaskCompletionSource _shutdownSignal = new TaskCompletionSource(
+        TaskCreationOptions.RunContinuationsAsynchronously
+    );
     private bool? _websocketAvailable;
     private CancellationTokenRegistration _cancellationTokenRegistration;
     private bool _disposed;
@@ -46,8 +48,12 @@ internal sealed class IISHttpServer : IServer
         // server variables a few extra times if a bunch of requests hit the server at the same time.
         if (!_websocketAvailable.HasValue)
         {
-            _websocketAvailable = NativeMethods.HttpTryGetServerVariable(pInProcessHandler, WebSocketVersionString, out var webSocketsSupported)
-                && !string.IsNullOrEmpty(webSocketsSupported);
+            _websocketAvailable =
+                NativeMethods.HttpTryGetServerVariable(
+                    pInProcessHandler,
+                    WebSocketVersionString,
+                    out var webSocketsSupported
+                ) && !string.IsNullOrEmpty(webSocketsSupported);
         }
 
         return _websocketAvailable.Value;
@@ -59,7 +65,7 @@ internal sealed class IISHttpServer : IServer
         IAuthenticationSchemeProvider authentication,
         IOptions<IISServerOptions> options,
         ILogger<IISHttpServer> logger
-        )
+    )
     {
         _nativeApplication = nativeApplication;
         _applicationLifetime = applicationLifetime;
@@ -69,7 +75,13 @@ internal sealed class IISHttpServer : IServer
 
         if (_options.ForwardWindowsAuthentication)
         {
-            authentication.AddScheme(new AuthenticationScheme(IISServerDefaults.AuthenticationScheme, _options.AuthenticationDisplayName, typeof(IISServerAuthenticationHandlerInternal)));
+            authentication.AddScheme(
+                new AuthenticationScheme(
+                    IISServerDefaults.AuthenticationScheme,
+                    _options.AuthenticationDisplayName,
+                    typeof(IISServerAuthenticationHandlerInternal)
+                )
+            );
         }
 
         Features.Set<IServerAddressesFeature>(_serverAddressesFeature);
@@ -80,11 +92,20 @@ internal sealed class IISHttpServer : IServer
         }
     }
 
-    public unsafe Task StartAsync<TContext>(IHttpApplication<TContext> application, CancellationToken cancellationToken) where TContext : notnull
+    public unsafe Task StartAsync<TContext>(
+        IHttpApplication<TContext> application,
+        CancellationToken cancellationToken
+    ) where TContext : notnull
     {
         _httpServerHandle = GCHandle.Alloc(this);
 
-        _iisContextFactory = new IISContextFactory<TContext>(_memoryPool, application, _options, this, _logger);
+        _iisContextFactory = new IISContextFactory<TContext>(
+            _memoryPool,
+            application,
+            _options,
+            this,
+            _logger
+        );
         _nativeApplication.RegisterCallbacks(
             &HandleRequest,
             &HandleShutdown,
@@ -92,7 +113,8 @@ internal sealed class IISHttpServer : IServer
             &OnAsyncCompletion,
             &OnRequestsDrained,
             (IntPtr)_httpServerHandle,
-            (IntPtr)_httpServerHandle);
+            (IntPtr)_httpServerHandle
+        );
 
         _serverAddressesFeature.Addresses = _options.ServerAddresses;
 
@@ -102,11 +124,13 @@ internal sealed class IISHttpServer : IServer
     public Task StopAsync(CancellationToken cancellationToken)
     {
         _nativeApplication.StopIncomingRequests();
-        _cancellationTokenRegistration = cancellationToken.Register((shutdownSignal) =>
-        {
-            ((TaskCompletionSource)shutdownSignal!).TrySetResult();
-        },
-        _shutdownSignal);
+        _cancellationTokenRegistration = cancellationToken.Register(
+            (shutdownSignal) =>
+            {
+                ((TaskCompletionSource)shutdownSignal!).TrySetResult();
+            },
+            _shutdownSignal
+        );
 
         return _shutdownSignal.Task;
     }
@@ -133,7 +157,10 @@ internal sealed class IISHttpServer : IServer
     }
 
     [UnmanagedCallersOnly]
-    private static NativeMethods.REQUEST_NOTIFICATION_STATUS HandleRequest(IntPtr pInProcessHandler, IntPtr pvRequestContext)
+    private static NativeMethods.REQUEST_NOTIFICATION_STATUS HandleRequest(
+        IntPtr pInProcessHandler,
+        IntPtr pvRequestContext
+    )
     {
         IISHttpServer? server = null;
         try
@@ -158,7 +185,11 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            server?._logger.LogError(0, ex, $"Unexpected exception in static {nameof(IISHttpServer)}.{nameof(HandleRequest)}.");
+            server?._logger.LogError(
+                0,
+                ex,
+                $"Unexpected exception in static {nameof(IISHttpServer)}.{nameof(HandleRequest)}."
+            );
 
             return NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
         }
@@ -183,7 +214,11 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            server?._logger.LogError(0, ex, $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(HandleShutdown)}.");
+            server?._logger.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(HandleShutdown)}."
+            );
         }
         return 1;
     }
@@ -206,12 +241,20 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            context?.Server._logger.LogError(0, ex, $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnDisconnect)}.");
+            context?.Server._logger.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnDisconnect)}."
+            );
         }
     }
 
     [UnmanagedCallersOnly]
-    private static NativeMethods.REQUEST_NOTIFICATION_STATUS OnAsyncCompletion(IntPtr pvManagedHttpContext, int hr, int bytes)
+    private static NativeMethods.REQUEST_NOTIFICATION_STATUS OnAsyncCompletion(
+        IntPtr pvManagedHttpContext,
+        int hr,
+        int bytes
+    )
     {
         IISHttpContext? context = null;
         try
@@ -229,7 +272,11 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            context?.Server._logger.LogError(0, ex, $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnAsyncCompletion)}.");
+            context?.Server._logger.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnAsyncCompletion)}."
+            );
 
             return NativeMethods.REQUEST_NOTIFICATION_STATUS.RQ_NOTIFICATION_FINISH_REQUEST;
         }
@@ -255,13 +302,18 @@ internal sealed class IISHttpServer : IServer
         }
         catch (Exception ex)
         {
-            server?._logger.LogError(0, ex, $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnRequestsDrained)}.");
+            server?._logger.LogError(
+                0,
+                ex,
+                $"Unexpected exception in {nameof(IISHttpServer)}.{nameof(OnRequestsDrained)}."
+            );
         }
     }
 
     private sealed class IISContextFactory<T> : IISContextFactory where T : notnull
     {
-        private const string Latin1Suppport = "Microsoft.AspNetCore.Server.IIS.Latin1RequestHeaders";
+        private const string Latin1Suppport =
+            "Microsoft.AspNetCore.Server.IIS.Latin1RequestHeaders";
 
         private readonly IHttpApplication<T> _application;
         private readonly MemoryPool<byte> _memoryPool;
@@ -270,7 +322,13 @@ internal sealed class IISHttpServer : IServer
         private readonly ILogger _logger;
         private readonly bool _useLatin1;
 
-        public IISContextFactory(MemoryPool<byte> memoryPool, IHttpApplication<T> application, IISServerOptions options, IISHttpServer server, ILogger logger)
+        public IISContextFactory(
+            MemoryPool<byte> memoryPool,
+            IHttpApplication<T> application,
+            IISServerOptions options,
+            IISHttpServer server,
+            ILogger logger
+        )
         {
             _application = application;
             _memoryPool = memoryPool;
@@ -282,7 +340,15 @@ internal sealed class IISHttpServer : IServer
 
         public IISHttpContext CreateHttpContext(NativeSafeHandle pInProcessHandler)
         {
-            return new IISHttpContextOfT<T>(_memoryPool, _application, pInProcessHandler, _options, _server, _logger, _useLatin1);
+            return new IISHttpContextOfT<T>(
+                _memoryPool,
+                _application,
+                pInProcessHandler,
+                _options,
+                _server,
+                _logger,
+                _useLatin1
+            );
         }
     }
 }

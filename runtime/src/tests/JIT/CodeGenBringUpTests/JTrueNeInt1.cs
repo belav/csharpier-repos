@@ -5,6 +5,7 @@
 
 using System;
 using System.Runtime.CompilerServices;
+
 public class BringUpTest_JTrueNeInt1
 {
     const int Pass = 100;
@@ -31,16 +32,22 @@ public class BringUpTest_JTrueNeInt1
                 {
                     if (x != 1)
                     {
-                        if (x != int.MaxValue) returnValue = 0;
-                        else returnValue = 5;
+                        if (x != int.MaxValue)
+                            returnValue = 0;
+                        else
+                            returnValue = 5;
                     }
-                    else returnValue = 4;
+                    else
+                        returnValue = 4;
                 }
-                else returnValue = 3;
+                else
+                    returnValue = 3;
             }
-            else returnValue = 2;
+            else
+                returnValue = 2;
         }
-        else returnValue = 1;
+        else
+            returnValue = 1;
 
         return returnValue;
     }
@@ -49,13 +56,20 @@ public class BringUpTest_JTrueNeInt1
     {
         int returnValue = Pass;
 
-        if (JTrueNeInt1(int.MinValue)   != 1) returnValue = Fail;
-        if (JTrueNeInt1(int.MinValue+1) != 0) returnValue = Fail;
-        if (JTrueNeInt1(-1)             != 2) returnValue = Fail;
-        if (JTrueNeInt1(0)              != 3) returnValue = Fail;
-        if (JTrueNeInt1(1)              != 4) returnValue = Fail;
-        if (JTrueNeInt1(int.MaxValue-1) != 0) returnValue = Fail;
-        if (JTrueNeInt1(int.MaxValue)   != 5) returnValue = Fail;
+        if (JTrueNeInt1(int.MinValue) != 1)
+            returnValue = Fail;
+        if (JTrueNeInt1(int.MinValue + 1) != 0)
+            returnValue = Fail;
+        if (JTrueNeInt1(-1) != 2)
+            returnValue = Fail;
+        if (JTrueNeInt1(0) != 3)
+            returnValue = Fail;
+        if (JTrueNeInt1(1) != 4)
+            returnValue = Fail;
+        if (JTrueNeInt1(int.MaxValue - 1) != 0)
+            returnValue = Fail;
+        if (JTrueNeInt1(int.MaxValue) != 5)
+            returnValue = Fail;
 
         return returnValue;
     }

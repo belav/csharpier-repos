@@ -21,38 +21,120 @@ internal interface ICodeStyleOptionsStorage : ILanguageService
 
 internal static class CodeStyleOptionsStorage
 {
-    public static IdeCodeStyleOptions GetCodeStyleOptions(this IGlobalOptionService globalOptions, HostLanguageServices languageServices)
-        => languageServices.GetRequiredService<ICodeStyleOptionsStorage>().GetOptions(globalOptions);
+    public static IdeCodeStyleOptions GetCodeStyleOptions(
+        this IGlobalOptionService globalOptions,
+        HostLanguageServices languageServices
+    ) => languageServices.GetRequiredService<ICodeStyleOptionsStorage>().GetOptions(globalOptions);
 
-    public static IdeCodeStyleOptions.CommonOptions GetCommonCodeStyleOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
+    public static IdeCodeStyleOptions.CommonOptions GetCommonCodeStyleOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) =>
+        new()
         {
-            PreferObjectInitializer = globalOptions.GetOption(CodeStyleOptions2.PreferObjectInitializer, language),
-            PreferCollectionInitializer = globalOptions.GetOption(CodeStyleOptions2.PreferCollectionInitializer, language),
-            PreferSimplifiedBooleanExpressions = globalOptions.GetOption(CodeStyleOptions2.PreferSimplifiedBooleanExpressions, language),
-            OperatorPlacementWhenWrapping = globalOptions.GetOption(CodeStyleOptions2.OperatorPlacementWhenWrapping, language),
-            PreferCoalesceExpression = globalOptions.GetOption(CodeStyleOptions2.PreferCoalesceExpression, language),
-            PreferNullPropagation = globalOptions.GetOption(CodeStyleOptions2.PreferNullPropagation, language),
-            PreferExplicitTupleNames = globalOptions.GetOption(CodeStyleOptions2.PreferExplicitTupleNames, language),
-            PreferAutoProperties = globalOptions.GetOption(CodeStyleOptions2.PreferAutoProperties, language),
-            PreferInferredTupleNames = globalOptions.GetOption(CodeStyleOptions2.PreferInferredTupleNames, language),
-            PreferInferredAnonymousTypeMemberNames = globalOptions.GetOption(CodeStyleOptions2.PreferInferredAnonymousTypeMemberNames, language),
-            PreferIsNullCheckOverReferenceEqualityMethod = globalOptions.GetOption(CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod, language),
-            PreferConditionalExpressionOverAssignment = globalOptions.GetOption(CodeStyleOptions2.PreferConditionalExpressionOverAssignment, language),
-            PreferConditionalExpressionOverReturn = globalOptions.GetOption(CodeStyleOptions2.PreferConditionalExpressionOverReturn, language),
-            PreferCompoundAssignment = globalOptions.GetOption(CodeStyleOptions2.PreferCompoundAssignment, language),
-            PreferSimplifiedInterpolation = globalOptions.GetOption(CodeStyleOptions2.PreferSimplifiedInterpolation, language),
-            UnusedParameters = globalOptions.GetOption(CodeStyleOptions2.UnusedParameters, language),
-            AccessibilityModifiersRequired = globalOptions.GetOption(CodeStyleOptions2.AccessibilityModifiersRequired, language),
+            PreferObjectInitializer = globalOptions.GetOption(
+                CodeStyleOptions2.PreferObjectInitializer,
+                language
+            ),
+            PreferCollectionInitializer = globalOptions.GetOption(
+                CodeStyleOptions2.PreferCollectionInitializer,
+                language
+            ),
+            PreferSimplifiedBooleanExpressions = globalOptions.GetOption(
+                CodeStyleOptions2.PreferSimplifiedBooleanExpressions,
+                language
+            ),
+            OperatorPlacementWhenWrapping = globalOptions.GetOption(
+                CodeStyleOptions2.OperatorPlacementWhenWrapping,
+                language
+            ),
+            PreferCoalesceExpression = globalOptions.GetOption(
+                CodeStyleOptions2.PreferCoalesceExpression,
+                language
+            ),
+            PreferNullPropagation = globalOptions.GetOption(
+                CodeStyleOptions2.PreferNullPropagation,
+                language
+            ),
+            PreferExplicitTupleNames = globalOptions.GetOption(
+                CodeStyleOptions2.PreferExplicitTupleNames,
+                language
+            ),
+            PreferAutoProperties = globalOptions.GetOption(
+                CodeStyleOptions2.PreferAutoProperties,
+                language
+            ),
+            PreferInferredTupleNames = globalOptions.GetOption(
+                CodeStyleOptions2.PreferInferredTupleNames,
+                language
+            ),
+            PreferInferredAnonymousTypeMemberNames = globalOptions.GetOption(
+                CodeStyleOptions2.PreferInferredAnonymousTypeMemberNames,
+                language
+            ),
+            PreferIsNullCheckOverReferenceEqualityMethod = globalOptions.GetOption(
+                CodeStyleOptions2.PreferIsNullCheckOverReferenceEqualityMethod,
+                language
+            ),
+            PreferConditionalExpressionOverAssignment = globalOptions.GetOption(
+                CodeStyleOptions2.PreferConditionalExpressionOverAssignment,
+                language
+            ),
+            PreferConditionalExpressionOverReturn = globalOptions.GetOption(
+                CodeStyleOptions2.PreferConditionalExpressionOverReturn,
+                language
+            ),
+            PreferCompoundAssignment = globalOptions.GetOption(
+                CodeStyleOptions2.PreferCompoundAssignment,
+                language
+            ),
+            PreferSimplifiedInterpolation = globalOptions.GetOption(
+                CodeStyleOptions2.PreferSimplifiedInterpolation,
+                language
+            ),
+            UnusedParameters = globalOptions.GetOption(
+                CodeStyleOptions2.UnusedParameters,
+                language
+            ),
+            AccessibilityModifiersRequired = globalOptions.GetOption(
+                CodeStyleOptions2.AccessibilityModifiersRequired,
+                language
+            ),
             PreferReadonly = globalOptions.GetOption(CodeStyleOptions2.PreferReadonly, language),
-            ArithmeticBinaryParentheses = globalOptions.GetOption(CodeStyleOptions2.ArithmeticBinaryParentheses, language),
-            OtherBinaryParentheses = globalOptions.GetOption(CodeStyleOptions2.OtherBinaryParentheses, language),
-            RelationalBinaryParentheses = globalOptions.GetOption(CodeStyleOptions2.RelationalBinaryParentheses, language),
-            OtherParentheses = globalOptions.GetOption(CodeStyleOptions2.OtherParentheses, language),
-            ForEachExplicitCastInSource = globalOptions.GetOption(CodeStyleOptions2.ForEachExplicitCastInSource, language),
-            PreferNamespaceAndFolderMatchStructure = globalOptions.GetOption(CodeStyleOptions2.PreferNamespaceAndFolderMatchStructure, language),
-            AllowMultipleBlankLines = globalOptions.GetOption(CodeStyleOptions2.AllowMultipleBlankLines, language),
-            AllowStatementImmediatelyAfterBlock = globalOptions.GetOption(CodeStyleOptions2.AllowStatementImmediatelyAfterBlock, language),
-            RemoveUnnecessarySuppressionExclusions = globalOptions.GetOption(CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions)
+            ArithmeticBinaryParentheses = globalOptions.GetOption(
+                CodeStyleOptions2.ArithmeticBinaryParentheses,
+                language
+            ),
+            OtherBinaryParentheses = globalOptions.GetOption(
+                CodeStyleOptions2.OtherBinaryParentheses,
+                language
+            ),
+            RelationalBinaryParentheses = globalOptions.GetOption(
+                CodeStyleOptions2.RelationalBinaryParentheses,
+                language
+            ),
+            OtherParentheses = globalOptions.GetOption(
+                CodeStyleOptions2.OtherParentheses,
+                language
+            ),
+            ForEachExplicitCastInSource = globalOptions.GetOption(
+                CodeStyleOptions2.ForEachExplicitCastInSource,
+                language
+            ),
+            PreferNamespaceAndFolderMatchStructure = globalOptions.GetOption(
+                CodeStyleOptions2.PreferNamespaceAndFolderMatchStructure,
+                language
+            ),
+            AllowMultipleBlankLines = globalOptions.GetOption(
+                CodeStyleOptions2.AllowMultipleBlankLines,
+                language
+            ),
+            AllowStatementImmediatelyAfterBlock = globalOptions.GetOption(
+                CodeStyleOptions2.AllowStatementImmediatelyAfterBlock,
+                language
+            ),
+            RemoveUnnecessarySuppressionExclusions = globalOptions.GetOption(
+                CodeStyleOptions2.RemoveUnnecessarySuppressionExclusions
+            )
         };
 }

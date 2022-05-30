@@ -29,7 +29,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// Gets the merged root namespace that contains all namespaces and types defined in the modules
-        /// of this assembly. If there is just one module in this assembly, this property just returns the 
+        /// of this assembly. If there is just one module in this assembly, this property just returns the
         /// GlobalNamespace of that module.
         /// </summary>
         INamespaceSymbol GlobalNamespace { get; }
@@ -51,7 +51,7 @@ namespace Microsoft.CodeAnalysis
         ICollection<string> NamespaceNames { get; }
 
         /// <summary>
-        /// Gets a value indicating whether this assembly gives 
+        /// Gets a value indicating whether this assembly gives
         /// <paramref name="toAssembly"/> access to internal symbols</summary>
         bool GivesAccessTo(IAssemblySymbol toAssembly);
 
@@ -82,7 +82,7 @@ namespace Microsoft.CodeAnalysis
 
         /// <summary>
         /// If this symbol represents a metadata assembly returns the underlying <see cref="AssemblyMetadata"/>.
-        /// 
+        ///
         /// Otherwise, this returns <see langword="null"/>.
         /// </summary>
         AssemblyMetadata? GetMetadata();

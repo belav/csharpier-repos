@@ -14,11 +14,24 @@ namespace System.Formats.Cbor
 {
     internal static partial class CborHelpers
     {
-        private const long UnixEpochTicks = 719162L /*Number of days from 1/1/0001 to 12/31/1969*/ * 10000 * 1000 * 60 * 60 * 24; /* Ticks per day.*/
+        private const long UnixEpochTicks =
+            719162L /*Number of days from 1/1/0001 to 12/31/1969*/
+            * 10000
+            * 1000
+            * 60
+            * 60
+            * 24; /* Ticks per day.*/
 
-        public static readonly DateTimeOffset UnixEpoch = new DateTimeOffset(UnixEpochTicks, TimeSpan.Zero);
+        public static readonly DateTimeOffset UnixEpoch = new DateTimeOffset(
+            UnixEpochTicks,
+            TimeSpan.Zero
+        );
 
-        public static unsafe int GetBytes(Encoding encoding, ReadOnlySpan<char> source, Span<byte> destination)
+        public static unsafe int GetBytes(
+            Encoding encoding,
+            ReadOnlySpan<char> source,
+            Span<byte> destination
+        )
         {
             if (source.IsEmpty || destination.IsEmpty)
             {
@@ -45,7 +58,11 @@ namespace System.Formats.Cbor
             }
         }
 
-        public static unsafe int GetChars(Encoding encoding, ReadOnlySpan<byte> source, Span<char> destination)
+        public static unsafe int GetChars(
+            Encoding encoding,
+            ReadOnlySpan<byte> source,
+            Span<char> destination
+        )
         {
             if (source.IsEmpty || destination.IsEmpty)
             {
@@ -150,7 +167,11 @@ namespace System.Formats.Cbor
 
         public delegate void SpanAction<T, in TArg>(Span<T> span, TArg arg);
 
-        public static string BuildStringFromIndefiniteLengthTextString<TState>(int length, TState state, SpanAction<char, TState> action)
+        public static string BuildStringFromIndefiniteLengthTextString<TState>(
+            int length,
+            TState state,
+            SpanAction<char, TState> action
+        )
         {
             char[] arr = new char[length];
             action(arr, state);
@@ -160,9 +181,9 @@ namespace System.Formats.Cbor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static ushort ReadHalfBigEndian(ReadOnlySpan<byte> source)
         {
-            ushort value = BitConverter.IsLittleEndian ?
-                BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<ushort>(source)) :
-                MemoryMarshal.Read<ushort>(source);
+            ushort value = BitConverter.IsLittleEndian
+                ? BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<ushort>(source))
+                : MemoryMarshal.Read<ushort>(source);
 
             return value;
         }
@@ -184,9 +205,11 @@ namespace System.Formats.Cbor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static unsafe float ReadSingleBigEndian(ReadOnlySpan<byte> source)
         {
-            return BitConverter.IsLittleEndian ?
-                Int32BitsToSingle(BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<int>(source))) :
-                MemoryMarshal.Read<float>(source);
+            return BitConverter.IsLittleEndian
+                ? Int32BitsToSingle(
+                    BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<int>(source))
+                )
+                : MemoryMarshal.Read<float>(source);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -206,9 +229,11 @@ namespace System.Formats.Cbor
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static double ReadDoubleBigEndian(ReadOnlySpan<byte> source)
         {
-            return BitConverter.IsLittleEndian ?
-                BitConverter.Int64BitsToDouble(BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<long>(source))) :
-                MemoryMarshal.Read<double>(source);
+            return BitConverter.IsLittleEndian
+                ? BitConverter.Int64BitsToDouble(
+                    BinaryPrimitives.ReverseEndianness(MemoryMarshal.Read<long>(source))
+                )
+                : MemoryMarshal.Read<double>(source);
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
@@ -216,7 +241,9 @@ namespace System.Formats.Cbor
         {
             if (BitConverter.IsLittleEndian)
             {
-                long tmp = BinaryPrimitives.ReverseEndianness(BitConverter.DoubleToInt64Bits(value));
+                long tmp = BinaryPrimitives.ReverseEndianness(
+                    BitConverter.DoubleToInt64Bits(value)
+                );
                 MemoryMarshal.Write(destination, ref tmp);
             }
             else
@@ -225,17 +252,13 @@ namespace System.Formats.Cbor
             }
         }
 
-        internal static uint SingleToUInt32Bits(float value)
-            => (uint)SingleToInt32Bits(value);
+        internal static uint SingleToUInt32Bits(float value) => (uint)SingleToInt32Bits(value);
 
-        internal static unsafe int SingleToInt32Bits(float value)
-            => *((int*)&value);
+        internal static unsafe int SingleToInt32Bits(float value) => *((int*)&value);
 
-        internal static float UInt32BitsToSingle(uint value)
-            => Int32BitsToSingle((int)value);
+        internal static float UInt32BitsToSingle(uint value) => Int32BitsToSingle((int)value);
 
-        internal static unsafe float Int32BitsToSingle(int value)
-            => *((float*)&value);
+        internal static unsafe float Int32BitsToSingle(int value) => *((float*)&value);
     }
 
     internal static class StackExtensions

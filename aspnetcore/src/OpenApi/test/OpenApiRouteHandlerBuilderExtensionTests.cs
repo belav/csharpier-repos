@@ -15,7 +15,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_CanSetOperationInMetadata()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests)
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -38,7 +41,10 @@ public class OpenApiRouteHandlerBuilderExtensionTests
     [Fact]
     public void WithOpenApi_CanSetOperationInMetadataWithOverride()
     {
-        var hostEnvironment = new HostEnvironment() { ApplicationName = nameof(OpenApiOperationGeneratorTests) };
+        var hostEnvironment = new HostEnvironment()
+        {
+            ApplicationName = nameof(OpenApiOperationGeneratorTests)
+        };
         var serviceProviderIsService = new ServiceProviderIsService();
         var serviceProvider = new ServiceCollection()
             .AddSingleton<IServiceProviderIsService>(serviceProviderIsService)
@@ -47,7 +53,9 @@ public class OpenApiRouteHandlerBuilderExtensionTests
 
         var builder = new DefaultEndpointRouteBuilder(new ApplicationBuilder(serviceProvider));
         string GetString() => "Foo";
-        _ = builder.MapDelete("/", GetString).WithOpenApi(generatedOperation => new OpenApiOperation());
+        _ = builder
+            .MapDelete("/", GetString)
+            .WithOpenApi(generatedOperation => new OpenApiOperation());
 
         var dataSource = GetBuilderEndpointDataSource(builder);
         // Trigger Endpoint build by calling getter.
@@ -58,8 +66,12 @@ public class OpenApiRouteHandlerBuilderExtensionTests
         Assert.Empty(operation.Responses);
     }
 
-    private ModelEndpointDataSource GetBuilderEndpointDataSource(IEndpointRouteBuilder endpointRouteBuilder)
+    private ModelEndpointDataSource GetBuilderEndpointDataSource(
+        IEndpointRouteBuilder endpointRouteBuilder
+    )
     {
-        return Assert.IsType<ModelEndpointDataSource>(Assert.Single(endpointRouteBuilder.DataSources));
+        return Assert.IsType<ModelEndpointDataSource>(
+            Assert.Single(endpointRouteBuilder.DataSources)
+        );
     }
 }

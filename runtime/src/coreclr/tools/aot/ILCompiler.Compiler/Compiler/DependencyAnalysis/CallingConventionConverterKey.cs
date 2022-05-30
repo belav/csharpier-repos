@@ -9,8 +9,10 @@ namespace ILCompiler.DependencyAnalysis
 {
     public struct CallingConventionConverterKey : IEquatable<CallingConventionConverterKey>
     {
-        public CallingConventionConverterKey(Internal.NativeFormat.CallingConventionConverterKind converterKind,
-                                             MethodSignature signature)
+        public CallingConventionConverterKey(
+            Internal.NativeFormat.CallingConventionConverterKind converterKind,
+            MethodSignature signature
+        )
         {
             ConverterKind = converterKind;
             Signature = signature;
@@ -21,7 +23,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public override bool Equals(object obj)
         {
-            return obj is CallingConventionConverterKey && Equals((CallingConventionConverterKey)obj);
+            return obj is CallingConventionConverterKey
+                && Equals((CallingConventionConverterKey)obj);
         }
 
         public bool Equals(CallingConventionConverterKey other)
@@ -48,7 +51,11 @@ namespace ILCompiler.DependencyAnalysis
 
     public static class MethodSignatureExtensions
     {
-        public static void AppendName(this MethodSignature signature, StringBuilder nameBuilder, UniqueTypeNameFormatter typeNameFormatter)
+        public static void AppendName(
+            this MethodSignature signature,
+            StringBuilder nameBuilder,
+            UniqueTypeNameFormatter typeNameFormatter
+        )
         {
             if (signature.GenericParameterCount > 0)
             {
@@ -186,7 +193,11 @@ namespace ILCompiler.DependencyAnalysis
             AppendEscapedIdentifier(sb, assembly.GetName().Name);
         }
 
-        protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+        protected override void AppendNameForNestedType(
+            StringBuilder sb,
+            DefType nestedType,
+            DefType containingType
+        )
         {
             AppendName(sb, containingType);
 
@@ -211,7 +222,19 @@ namespace ILCompiler.DependencyAnalysis
             return type.Namespace;
         }
 
-        private static char[] s_escapedChars = new char[] { ',', '=', '"', ']', '[', '*', '&', '+', '\\' };
+        private static char[] s_escapedChars = new char[]
+        {
+            ',',
+            '=',
+            '"',
+            ']',
+            '[',
+            '*',
+            '&',
+            '+',
+            '\\'
+        };
+
         private void AppendEscapedIdentifier(StringBuilder sb, string identifier)
         {
             if (identifier.IndexOfAny(s_escapedChars) < 0)
@@ -220,7 +243,10 @@ namespace ILCompiler.DependencyAnalysis
                 foreach (char escapedChar in s_escapedChars)
                 {
                     string escapedCharString = new string(escapedChar, 1);
-                    escapedIdentifier = escapedIdentifier.Replace(escapedCharString, "\\" + escapedCharString);
+                    escapedIdentifier = escapedIdentifier.Replace(
+                        escapedCharString,
+                        "\\" + escapedCharString
+                    );
                 }
                 sb.Append(escapedIdentifier);
             }

@@ -9,11 +9,8 @@ namespace Microsoft.WebAssembly.Diagnostics;
 
 public class DebuggerAgentException : Exception
 {
-    public DebuggerAgentException(string message) : base(message)
-    {
-    }
+    public DebuggerAgentException(string message) : base(message) { }
 
-    public DebuggerAgentException(string? message, Exception? innerException) : base(message, innerException)
-    {
-    }
+    public DebuggerAgentException(string? message, Exception? innerException)
+        : base(message, innerException) { }
 }

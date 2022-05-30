@@ -32,7 +32,7 @@ public abstract class BoundAttributeDescriptorBuilder
 
     public virtual IReadOnlyList<BoundAttributeParameterDescriptorBuilder> BoundAttributeParameters { get; }
 
-    public virtual void BindAttributeParameter(Action<BoundAttributeParameterDescriptorBuilder> configure)
-    {
-    }
+    public virtual void BindAttributeParameter(
+        Action<BoundAttributeParameterDescriptorBuilder> configure
+    ) { }
 }

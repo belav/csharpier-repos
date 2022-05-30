@@ -32,7 +32,9 @@ namespace System.Text.Json.SourceGeneration
             // (the one in GeneratorInitializationContext is not safe to capture).
             // In practice this should still be ok as the generator driver itself will
             // cancel after every file it processes.
-            context.RegisterForSyntaxNotifications(static () => new SyntaxContextReceiver(CancellationToken.None));
+            context.RegisterForSyntaxNotifications(
+                static () => new SyntaxContextReceiver(CancellationToken.None)
+            );
         }
 
         /// <summary>
@@ -47,7 +49,10 @@ namespace System.Text.Json.SourceGeneration
                 Diagnostics.Debugger.Launch();
             }
 #endif
-            if (executionContext.SyntaxContextReceiver is not SyntaxContextReceiver receiver || receiver.ClassDeclarationSyntaxList == null)
+            if (
+                executionContext.SyntaxContextReceiver is not SyntaxContextReceiver receiver
+                || receiver.ClassDeclarationSyntaxList == null
+            )
             {
                 // nothing to do yet
                 return;
@@ -55,7 +60,10 @@ namespace System.Text.Json.SourceGeneration
 
             JsonSourceGenerationContext context = new JsonSourceGenerationContext(executionContext);
             Parser parser = new(executionContext.Compilation, context);
-            SourceGenerationSpec? spec = parser.GetGenerationSpec(receiver.ClassDeclarationSyntaxList, executionContext.CancellationToken);
+            SourceGenerationSpec? spec = parser.GetGenerationSpec(
+                receiver.ClassDeclarationSyntaxList,
+                executionContext.CancellationToken
+            );
             if (spec != null)
             {
                 _rootTypes = spec.ContextGenerationSpecList[0].RootSerializableTypes;
@@ -80,10 +88,15 @@ namespace System.Text.Json.SourceGeneration
             {
                 if (Parser.IsSyntaxTargetForGeneration(context.Node))
                 {
-                    ClassDeclarationSyntax classSyntax = Parser.GetSemanticTargetForGeneration(context, _cancellationToken);
+                    ClassDeclarationSyntax classSyntax = Parser.GetSemanticTargetForGeneration(
+                        context,
+                        _cancellationToken
+                    );
                     if (classSyntax != null)
                     {
-                        (ClassDeclarationSyntaxList ??= new List<ClassDeclarationSyntax>()).Add(classSyntax);
+                        (ClassDeclarationSyntaxList ??= new List<ClassDeclarationSyntax>()).Add(
+                            classSyntax
+                        );
                     }
                 }
             }
@@ -92,7 +105,9 @@ namespace System.Text.Json.SourceGeneration
         /// <summary>
         /// Helper for unit tests.
         /// </summary>
-        public Dictionary<string, Type>? GetSerializableTypes() => _rootTypes?.ToDictionary(p => p.Type.FullName, p => p.Type);
+        public Dictionary<string, Type>? GetSerializableTypes() =>
+            _rootTypes?.ToDictionary(p => p.Type.FullName, p => p.Type);
+
         private List<TypeGenerationSpec>? _rootTypes;
     }
 

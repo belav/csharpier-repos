@@ -18,12 +18,9 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post>()
-            .Property(e => e.BlogId);
+        modelBuilder.Entity<Post>().Property(e => e.BlogId);
 
-        var fk = modelBuilder.Entity<Blog>()
-            .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog).Metadata;
+        var fk = modelBuilder.Entity<Blog>().HasMany(e => e.Posts).WithOne(e => e.Blog).Metadata;
 
         Assert.Equal(DeleteBehavior.ClientSetNull, fk.DeleteBehavior);
     }
@@ -33,12 +30,13 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_Restrict>()
-            .Property(e => e.BlogId);
+        modelBuilder.Entity<Post_Restrict>().Property(e => e.BlogId);
 
-        var fk = modelBuilder.Entity<Blog_Restrict>()
+        var fk = modelBuilder
+            .Entity<Blog_Restrict>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_Restrict).Metadata;
+            .WithOne(e => e.Blog_Restrict)
+            .Metadata;
 
         Assert.Equal(DeleteBehavior.Restrict, fk.DeleteBehavior);
     }
@@ -48,14 +46,14 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_Compound>()
-            .Property(e => e.BlogId);
-        modelBuilder.Entity<Post_Compound>()
-            .Property(e => e.BlogId2);
+        modelBuilder.Entity<Post_Compound>().Property(e => e.BlogId);
+        modelBuilder.Entity<Post_Compound>().Property(e => e.BlogId2);
 
-        var fk = modelBuilder.Entity<Blog_Compound>()
+        var fk = modelBuilder
+            .Entity<Blog_Compound>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_Compound).Metadata;
+            .WithOne(e => e.Blog_Compound)
+            .Metadata;
 
         Assert.Equal(DeleteBehavior.Cascade, fk.DeleteBehavior);
     }
@@ -65,18 +63,20 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_Both>()
-            .Property(e => e.Blog_OneId);
-        modelBuilder.Entity<Post_Both>()
-            .Property(e => e.Blog_TwoId);
+        modelBuilder.Entity<Post_Both>().Property(e => e.Blog_OneId);
+        modelBuilder.Entity<Post_Both>().Property(e => e.Blog_TwoId);
 
-        var fk_One = modelBuilder.Entity<Blog_One>()
+        var fk_One = modelBuilder
+            .Entity<Blog_One>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_One).Metadata;
+            .WithOne(e => e.Blog_One)
+            .Metadata;
 
-        var fk_Two = modelBuilder.Entity<Blog_Two>()
+        var fk_Two = modelBuilder
+            .Entity<Blog_Two>()
             .HasMany(e => e.Posts)
-            .WithOne(e => e.Blog_Two).Metadata;
+            .WithOne(e => e.Blog_Two)
+            .Metadata;
 
         Assert.Equal(DeleteBehavior.Restrict, fk_One.DeleteBehavior);
         Assert.Equal(DeleteBehavior.Cascade, fk_Two.DeleteBehavior);
@@ -89,10 +89,15 @@ public class DeleteBehaviorAttributeConventionTest
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeNotOnNavigationProperty,
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Entity<Post_On_FK_Property>()
-                    .Property(e => e.Blog_On_FK_PropertyId)).Message
-            );
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder
+                            .Entity<Post_On_FK_Property>()
+                            .Property(e => e.Blog_On_FK_PropertyId)
+                )
+                .Message
+        );
     }
 
     [ConditionalFact]
@@ -102,9 +107,12 @@ public class DeleteBehaviorAttributeConventionTest
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeNotOnNavigationProperty,
-            Assert.Throws<InvalidOperationException>(
-                () => modelBuilder.Entity<Post_On_Property>()
-                    .Property(e => e.Blog_On_PropertyId)).Message
+            Assert
+                .Throws<InvalidOperationException>(
+                    () =>
+                        modelBuilder.Entity<Post_On_Property>().Property(e => e.Blog_On_PropertyId)
+                )
+                .Message
         );
     }
 
@@ -113,8 +121,7 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_On_Principal>()
-            .Property(e => e.Blog_On_PrincipalId);
+        modelBuilder.Entity<Post_On_Principal>().Property(e => e.Blog_On_PrincipalId);
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeOnPrincipalProperty,
@@ -127,8 +134,7 @@ public class DeleteBehaviorAttributeConventionTest
     {
         var modelBuilder = CreateModelBuilder();
 
-        modelBuilder.Entity<Post_On_Principal_OneToOne>()
-            .Property(e => e.Blog_On_PrincipalId);
+        modelBuilder.Entity<Post_On_Principal_OneToOne>().Property(e => e.Blog_On_PrincipalId);
 
         Assert.Equal(
             CoreStrings.DeleteBehaviorAttributeOnPrincipalProperty,
@@ -136,8 +142,8 @@ public class DeleteBehaviorAttributeConventionTest
         );
     }
 
-    private static ModelBuilder CreateModelBuilder()
-        => InMemoryTestHelpers.Instance.CreateConventionBuilder();
+    private static ModelBuilder CreateModelBuilder() =>
+        InMemoryTestHelpers.Instance.CreateConventionBuilder();
 
     #region DeleteBehaviorAttribute not set
     private class Blog
@@ -178,10 +184,11 @@ public class DeleteBehaviorAttributeConventionTest
     private class Blog_Compound
     {
         [Key]
-        [Column(Order=0)]
+        [Column(Order = 0)]
         public int Id { get; set; }
+
         [Key]
-        [Column(Order=1)]
+        [Column(Order = 1)]
         public int Id2 { get; set; }
 
         public ICollection<Post_Compound> Posts { get; set; }
@@ -209,6 +216,7 @@ public class DeleteBehaviorAttributeConventionTest
 
         public ICollection<Post_Both> Posts { get; set; }
     }
+
     private class Blog_Two
     {
         public int Id { get; set; }

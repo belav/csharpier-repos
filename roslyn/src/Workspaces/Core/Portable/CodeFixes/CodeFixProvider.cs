@@ -34,8 +34,7 @@ namespace Microsoft.CodeAnalysis.CodeFixes
         /// Return null if the provider doesn't support fix all/multiple occurrences.
         /// Otherwise, you can return any of the well known fix all providers from <see cref="WellKnownFixAllProviders"/> or implement your own fix all provider.
         /// </summary>
-        public virtual FixAllProvider? GetFixAllProvider()
-            => null;
+        public virtual FixAllProvider? GetFixAllProvider() => null;
 
         /// <summary>
         /// What priority this provider should run at.
@@ -46,12 +45,17 @@ namespace Microsoft.CodeAnalysis.CodeFixes
             {
                 var priority = ComputeRequestPriority();
                 // Note: CodeActionRequestPriority.Lowest is reserved for IConfigurationFixProvider.
-                Contract.ThrowIfFalse(priority is CodeActionRequestPriority.Low or CodeActionRequestPriority.Normal or CodeActionRequestPriority.High);
+                Contract.ThrowIfFalse(
+                    priority
+                        is CodeActionRequestPriority.Low
+                            or CodeActionRequestPriority.Normal
+                            or CodeActionRequestPriority.High
+                );
                 return priority;
             }
         }
 
-        private protected virtual CodeActionRequestPriority ComputeRequestPriority()
-            => CodeActionRequestPriority.Normal;
+        private protected virtual CodeActionRequestPriority ComputeRequestPriority() =>
+            CodeActionRequestPriority.Normal;
     }
 }

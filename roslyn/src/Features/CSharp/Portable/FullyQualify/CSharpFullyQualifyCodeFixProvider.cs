@@ -16,7 +16,13 @@ using Microsoft.CodeAnalysis.Formatting;
 
 namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
 {
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.FullyQualify), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.FullyQualify
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.AddImport)]
     internal class CSharpFullyQualifyCodeFixProvider : AbstractFullyQualifyCodeFixProvider
     {
@@ -46,14 +52,26 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
         private const string CS0308 = nameof(CS0308);
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public CSharpFullyQualifyCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public CSharpFullyQualifyCodeFixProvider() { }
 
         public override ImmutableArray<string> FixableDiagnosticIds
         {
-            get { return ImmutableArray.Create(CS0103, CS0104, CS0246, CS0305, CS0308, IDEDiagnosticIds.UnboundIdentifierId); }
+            get
+            {
+                return ImmutableArray.Create(
+                    CS0103,
+                    CS0104,
+                    CS0246,
+                    CS0305,
+                    CS0308,
+                    IDEDiagnosticIds.UnboundIdentifierId
+                );
+            }
         }
 
         protected override bool IgnoreCase => false;
@@ -78,7 +96,12 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             return true;
         }
 
-        protected override async Task<SyntaxNode> ReplaceNodeAsync(SyntaxNode node, string containerName, bool resultingSymbolIsType, CancellationToken cancellationToken)
+        protected override async Task<SyntaxNode> ReplaceNodeAsync(
+            SyntaxNode node,
+            string containerName,
+            bool resultingSymbolIsType,
+            CancellationToken cancellationToken
+        )
         {
             var simpleName = (SimpleNameSyntax)node;
 
@@ -86,7 +109,9 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             var newName = simpleName.WithLeadingTrivia(SyntaxTriviaList.Empty);
 
             var qualifiedName = SyntaxFactory.QualifiedName(
-                SyntaxFactory.ParseName(containerName), newName);
+                SyntaxFactory.ParseName(containerName),
+                newName
+            );
 
             qualifiedName = qualifiedName.WithLeadingTrivia(leadingTrivia);
             qualifiedName = qualifiedName.WithAdditionalAnnotations(Formatter.Annotation);
@@ -98,8 +123,11 @@ namespace Microsoft.CodeAnalysis.CSharp.CodeFixes.FullyQualify
             // instead of just changing to "using System.Math", we can make it "using static System.Math" and avoid the
             // CS0138 that would result from the former.  Don't do this for using aliases though as `static` and using
             // aliases cannot be combined.
-            if (resultingSymbolIsType &&
-                node.Parent is UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: 0 } usingDirective)
+            if (
+                resultingSymbolIsType
+                && node.Parent
+                    is UsingDirectiveSyntax { Alias: null, StaticKeyword.RawKind: 0 } usingDirective
+            )
             {
                 var newUsingDirective = usingDirective
                     .WithStaticKeyword(SyntaxFactory.Token(SyntaxKind.StaticKeyword))

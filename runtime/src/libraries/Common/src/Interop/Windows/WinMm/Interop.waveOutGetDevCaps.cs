@@ -21,12 +21,14 @@ internal static partial class Interop
             private ushort wMid;
             private ushort wPid;
             private uint vDriverVersion;
+
             [MarshalAs(UnmanagedType.ByValTStr, SizeConst = szPnameLength)]
             internal string szPname;
             private uint dwFormats;
             private ushort wChannels;
             private ushort wReserved1;
             private ushort dwSupport;
+
 #if NET7_0_OR_GREATER
             [CustomTypeMarshaller(typeof(WAVEOUTCAPS))]
             internal unsafe struct Native
@@ -89,6 +91,10 @@ internal static partial class Interop
         /// <param name="cbwoc">Size, in bytes, of the WAVEOUTCAPS structure.</param>
         /// <returns>MMSYSERR</returns>
         [LibraryImport(Libraries.WinMM, EntryPoint = "waveOutGetDevCapsW")]
-        internal static partial MMSYSERR waveOutGetDevCaps(IntPtr uDeviceID, ref WAVEOUTCAPS caps, int cbwoc);
+        internal static partial MMSYSERR waveOutGetDevCaps(
+            IntPtr uDeviceID,
+            ref WAVEOUTCAPS caps,
+            int cbwoc
+        );
     }
 }

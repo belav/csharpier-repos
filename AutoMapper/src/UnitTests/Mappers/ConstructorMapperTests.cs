@@ -1,5 +1,6 @@
 ﻿using Shouldly;
 using Xunit;
+
 namespace AutoMapper.UnitTests.Mappers
 {
     public class ConstructorMapperTests : AutoMapperSpecBase
@@ -10,10 +11,14 @@ namespace AutoMapper.UnitTests.Mappers
             {
                 Value = value;
             }
+
             public string Value { get; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(_=> { });
+
+        protected override MapperConfiguration CreateConfiguration() => new(_ => { });
+
         [Fact]
-        public void Should_use_constructor() => Mapper.Map<Destination>("value").Value.ShouldBe("value");
+        public void Should_use_constructor() =>
+            Mapper.Map<Destination>("value").Value.ShouldBe("value");
     }
 }

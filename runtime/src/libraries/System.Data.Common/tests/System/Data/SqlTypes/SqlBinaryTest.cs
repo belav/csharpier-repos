@@ -244,6 +244,7 @@ namespace System.Data.Tests.SqlTypes
             SqlBinary testBinary = testByteArray;
             Assert.Equal((byte)15, testBinary[0]);
         }
+
         [Fact]
         public void GetXsdTypeTest()
         {

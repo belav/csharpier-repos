@@ -45,12 +45,20 @@ public sealed class WebApplicationFactoryContentRootAttribute : Attribute
         string key,
         string contentRootPath,
         string contentRootTest,
-        string priority)
+        string priority
+    )
     {
         Key = key;
         ContentRootPath = contentRootPath;
         ContentRootTest = contentRootTest;
-        if (int.TryParse(priority, NumberStyles.Integer, CultureInfo.InvariantCulture, out var parsedPriority))
+        if (
+            int.TryParse(
+                priority,
+                NumberStyles.Integer,
+                CultureInfo.InvariantCulture,
+                out var parsedPriority
+            )
+        )
         {
             Priority = parsedPriority;
         }

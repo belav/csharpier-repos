@@ -18,7 +18,11 @@ namespace System.Reflection
         public static Assembly Load(string assemblyString)
         {
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoad(assemblyString, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+            return RuntimeAssembly.InternalLoad(
+                assemblyString,
+                ref stackMark,
+                AssemblyLoadContext.CurrentContextualReflectionContext
+            );
         }
 
         [Obsolete("Assembly.LoadWithPartialName has been deprecated. Use Assembly.Load() instead.")]
@@ -33,7 +37,11 @@ namespace System.Reflection
             try
             {
                 StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-                return RuntimeAssembly.InternalLoad(partialName, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+                return RuntimeAssembly.InternalLoad(
+                    partialName,
+                    ref stackMark,
+                    AssemblyLoadContext.CurrentContextualReflectionContext
+                );
             }
             catch (FileNotFoundException)
             {
@@ -49,16 +57,26 @@ namespace System.Reflection
             ArgumentNullException.ThrowIfNull(assemblyRef);
 
             StackCrawlMark stackMark = StackCrawlMark.LookForMyCaller;
-            return RuntimeAssembly.InternalLoad(assemblyRef, ref stackMark, AssemblyLoadContext.CurrentContextualReflectionContext);
+            return RuntimeAssembly.InternalLoad(
+                assemblyRef,
+                ref stackMark,
+                AssemblyLoadContext.CurrentContextualReflectionContext
+            );
         }
 
         [LibraryImport(RuntimeHelpers.QCall, EntryPoint = "AssemblyNative_GetExecutingAssembly")]
-        private static partial void GetExecutingAssemblyNative(StackCrawlMarkHandle stackMark, ObjectHandleOnStack retAssembly);
+        private static partial void GetExecutingAssemblyNative(
+            StackCrawlMarkHandle stackMark,
+            ObjectHandleOnStack retAssembly
+        );
 
         internal static RuntimeAssembly GetExecutingAssembly(ref StackCrawlMark stackMark)
         {
             RuntimeAssembly? retAssembly = null;
-            GetExecutingAssemblyNative(new StackCrawlMarkHandle(ref stackMark), ObjectHandleOnStack.Create(ref retAssembly));
+            GetExecutingAssemblyNative(
+                new StackCrawlMarkHandle(ref stackMark),
+                ObjectHandleOnStack.Create(ref retAssembly)
+            );
             return retAssembly!;
         }
 

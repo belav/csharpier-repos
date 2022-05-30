@@ -13,7 +13,8 @@ internal static class HostingLoggerExtensions
         logger.ApplicationError(
             eventId: LoggerEventIds.ApplicationStartupException,
             message: "Application startup exception",
-            exception: exception);
+            exception: exception
+        );
     }
 
     public static void HostingStartupAssemblyError(this ILogger logger, Exception exception)
@@ -21,10 +22,16 @@ internal static class HostingLoggerExtensions
         logger.ApplicationError(
             eventId: LoggerEventIds.HostingStartupAssemblyException,
             message: "Hosting startup assembly exception",
-            exception: exception);
+            exception: exception
+        );
     }
 
-    public static void ApplicationError(this ILogger logger, EventId eventId, string message, Exception exception)
+    public static void ApplicationError(
+        this ILogger logger,
+        EventId eventId,
+        string message,
+        Exception exception
+    )
     {
         if (exception is ReflectionTypeLoadException reflectionTypeLoadException)
         {
@@ -37,10 +44,6 @@ internal static class HostingLoggerExtensions
             }
         }
 
-        logger.LogCritical(
-            eventId: eventId,
-            message: message,
-            exception: exception);
+        logger.LogCritical(eventId: eventId, message: message, exception: exception);
     }
 }
-

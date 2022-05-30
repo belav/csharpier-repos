@@ -34,7 +34,7 @@
 // using System.Collections.Generic;
 // using System.IO;
 // using System.Linq;
-// 
+//
 // class Program
 // {
 //     static void Main()
@@ -47,7 +47,7 @@
 //             .Where(s => s.Length >= 4 && !s[3].Contains("?"))
 //             .Where(s => !s[1].StartsWith("[["))
 //             .ToArray();
-// 
+//
 //         var seen = new HashSet<string>();
 //         foreach (string[] test in tests)
 //         {
@@ -74,7 +74,6 @@ namespace System.Text.RegularExpressions.Tests
     public class AttRegexTests
     {
         [Theory]
-
         // basic.dat
         [InlineData("abracadabra$", "abracadabracadabra", "(7,18)")]
         [InlineData("a...b", "abababbb", "(2,7)")]
@@ -131,18 +130,46 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("\na", "\na", "(0,2)")]
         [InlineData("(a)(b)(c)", "abc", "(0,3)(0,1)(1,2)(2,3)")]
         [InlineData("xxx", "xxx", "(0,3)")]
-        [InlineData("(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "feb 6,", "(0,6)")]
+        [InlineData(
+            "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+            "feb 6,",
+            "(0,6)"
+        )]
         [InlineData("(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "2/7", "(0,3)")]
-        [InlineData("(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)", "feb 1,Feb 6", "(5,11)")]
-        [InlineData("((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))", "x", "(0,1)(0,1)(0,1)")]
-        [InlineData("((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))*", "xx", "(0,2)(1,2)(1,2)")]
-        [InlineData("a?(ab|ba)*", "ababababababababababababababababababababababababababababababababababababababababa", "(0,81)(79,81)")]
+        [InlineData(
+            "(^|[ (,;])((([Ff]eb[^ ]* *|0*2/|\\* */?)0*[6-7]))([^0-9]|$)",
+            "feb 1,Feb 6",
+            "(5,11)"
+        )]
+        [InlineData(
+            "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))",
+            "x",
+            "(0,1)(0,1)(0,1)"
+        )]
+        [InlineData(
+            "((((((((((((((((((((((((((((((x))))))))))))))))))))))))))))))*",
+            "xx",
+            "(0,2)(1,2)(1,2)"
+        )]
+        [InlineData(
+            "a?(ab|ba)*",
+            "ababababababababababababababababababababababababababababababababababababababababa",
+            "(0,81)(79,81)"
+        )]
         [InlineData("abaa|abbaa|abbbaa|abbbbaa", "ababbabbbabbbabbbbabbbbaa", "(18,25)")]
         [InlineData("abaa|abbaa|abbbaa|abbbbaa", "ababbabbbabbbabbbbabaa", "(18,22)")]
         [InlineData("aaac|aabc|abac|abbc|baac|babc|bbac|bbbc", "baaabbbabac", "(7,11)")]
         [InlineData(".*", "\x0001\x00ff", "(0,2)")]
-        [InlineData("aaaa|bbbb|cccc|ddddd|eeeeee|fffffff|gggg|hhhh|iiiii|jjjjj|kkkkk|llll", "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa", "(53,57)")]
-        [InlineData("aaaa\nbbbb\ncccc\nddddd\neeeeee\nfffffff\ngggg\nhhhh\niiiii\njjjjj\nkkkkk\nllll", "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa", "NOMATCH")]
+        [InlineData(
+            "aaaa|bbbb|cccc|ddddd|eeeeee|fffffff|gggg|hhhh|iiiii|jjjjj|kkkkk|llll",
+            "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa",
+            "(53,57)"
+        )]
+        [InlineData(
+            "aaaa\nbbbb\ncccc\nddddd\neeeeee\nfffffff\ngggg\nhhhh\niiiii\njjjjj\nkkkkk\nllll",
+            "XaaaXbbbXcccXdddXeeeXfffXgggXhhhXiiiXjjjXkkkXlllXcbaXaaaa",
+            "NOMATCH"
+        )]
         [InlineData("a*a*a*a*a*b", "aaaaaaaaab", "(0,10)")]
         [InlineData("^", "NULL", "(0,0)")]
         [InlineData("$", "NULL", "(0,0)")]
@@ -219,7 +246,11 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(bc+d$|ef*g.|h?i(j|k))", "effgz", "(0,5)(0,5)")]
         [InlineData("(bc+d$|ef*g.|h?i(j|k))", "ij", "(0,2)(0,2)(1,2)")]
         [InlineData("(bc+d$|ef*g.|h?i(j|k))", "reffgz", "(1,6)(1,6)")]
-        [InlineData("(((((((((a)))))))))", "a", "(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)")]
+        [InlineData(
+            "(((((((((a)))))))))",
+            "a",
+            "(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)(0,1)"
+        )]
         [InlineData("multiple words", "multiple words yeah", "(0,14)")]
         [InlineData("(.*)c(.*)", "abcde", "(0,5)(0,2)(3,5)")]
         [InlineData("abcd", "abcd", "(0,4)")]
@@ -252,7 +283,6 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(".*(/000).*", "/000", "(0,4)(0,4)")]
         [InlineData(".*(\\\\000).*", "\\000", "(0,4)(0,4)")]
         [InlineData("\\\\000", "\\000", "(0,4)")]
-
         // repetition.dat
         [InlineData("((..)|(.))", "NULL", "NOMATCH")]
         [InlineData("((..)|(.))((..)|(.))", "NULL", "NOMATCH")]
@@ -309,7 +339,6 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(ab|a|c|bcd){4,10}(d*)", "ababcd", "NOMATCH")]
         [InlineData("(ab|a|c|bcd)*(d*)", "ababcd", "(0,6)(4,5)(5,6)")] // was "(0,6)(3,6)(6,6)"
         [InlineData("(ab|a|c|bcd)+(d*)", "ababcd", "(0,6)(4,5)(5,6)")] // was "(0,6)(3,6)(6,6)"
-
         // unknownassoc.dat
         [InlineData("(a|ab)(c|bcd)(d*)", "abcd", "(0,4)(0,1)(1,4)(4,4)")]
         [InlineData("(a|ab)(bcd|c)(d*)", "abcd", "(0,4)(0,1)(1,4)(4,4)")]
@@ -321,7 +350,6 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(a|ab)(bcd|c)(d|.*)", "abcd", "(0,4)(0,1)(1,4)(4,4)")]
         [InlineData("(ab|a)(c|bcd)(d|.*)", "abcd", "(0,4)(0,2)(2,3)(3,4)")]
         [InlineData("(ab|a)(bcd|c)(d|.*)", "abcd", "(0,4)(0,2)(2,3)(3,4)")]
-
         // nullsubexpr.dat
         [InlineData("(a*)*", "a", "(0,1)(0,1)")]
         [InlineData("(a*)*", "x", "(0,0)(0,0)")]
@@ -357,8 +385,18 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(a*)*(x)(\\1)", "x", "(0,1)(0,0)(0,1)(1,1)", "NONBACKTRACKINGINCOMPATIBLE")]
         [InlineData("(a*)*(x)(\\1)", "ax", "(0,2)(1,1)(1,2)(2,2)", "NONBACKTRACKINGINCOMPATIBLE")]
         [InlineData("(a*)*(x)(\\1)", "axa", "(0,2)(1,1)(1,2)(2,2)", "NONBACKTRACKINGINCOMPATIBLE")] // was "(0,3)(0,1)(1,2)(2,3)"
-        [InlineData("(a*)*(x)(\\1)(x)", "axax", "(0,4)(0,1)(1,2)(2,3)(3,4)", "NONBACKTRACKINGINCOMPATIBLE")]
-        [InlineData("(a*)*(x)(\\1)(x)", "axxa", "(0,3)(1,1)(1,2)(2,2)(2,3)", "NONBACKTRACKINGINCOMPATIBLE")]
+        [InlineData(
+            "(a*)*(x)(\\1)(x)",
+            "axax",
+            "(0,4)(0,1)(1,2)(2,3)(3,4)",
+            "NONBACKTRACKINGINCOMPATIBLE"
+        )]
+        [InlineData(
+            "(a*)*(x)(\\1)(x)",
+            "axxa",
+            "(0,3)(1,1)(1,2)(2,2)(2,3)",
+            "NONBACKTRACKINGINCOMPATIBLE"
+        )]
         [InlineData("(a*)*(x)", "ax", "(0,2)(1,1)(1,2)")]
         [InlineData("(a*)*(x)", "axa", "(0,2)(1,1)(1,2)")] // was "(0,2)(0,1)(1,2)"
         [InlineData("(a*)+(x)", "x", "(0,1)(0,0)(0,1)")]
@@ -367,7 +405,12 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData("(a*){2}(x)", "x", "(0,1)(0,0)(0,1)")]
         [InlineData("(a*){2}(x)", "ax", "(0,2)(1,1)(1,2)")]
         [InlineData("(a*){2}(x)", "axa", "(0,2)(1,1)(1,2)")]
-        public async Task Test(string pattern, string input, string captures, string nonBacktrackingCaptures = null)
+        public async Task Test(
+            string pattern,
+            string input,
+            string captures,
+            string nonBacktrackingCaptures = null
+        )
         {
             if (input == "NULL")
             {
@@ -376,23 +419,31 @@ namespace System.Text.RegularExpressions.Tests
 
             foreach (RegexEngine engine in RegexHelpers.AvailableEngines)
             {
-                foreach (RegexOptions options in new[] { RegexOptions.None, RegexOptions.Multiline })
+                foreach (
+                    RegexOptions options in new[] { RegexOptions.None, RegexOptions.Multiline }
+                )
                 {
                     bool nonBacktracking = engine == RegexEngine.NonBacktracking;
-                    string expected = nonBacktracking && nonBacktrackingCaptures != null ?
-                        nonBacktrackingCaptures : // nonBacktrackingCaptures value overrides the expected result in NonBacktracking mode
-                        captures;
+                    string expected =
+                        nonBacktracking && nonBacktrackingCaptures != null
+                            ? nonBacktrackingCaptures
+                            : // nonBacktrackingCaptures value overrides the expected result in NonBacktracking mode
+                            captures;
 
                     if (expected == "BADBR")
                     {
-                        await Assert.ThrowsAnyAsync<ArgumentException>(async () => await RegexHelpers.GetRegexAsync(engine, pattern, options));
+                        await Assert.ThrowsAnyAsync<ArgumentException>(
+                            async () => await RegexHelpers.GetRegexAsync(engine, pattern, options)
+                        );
                         return;
                     }
 
                     if (nonBacktracking && nonBacktrackingCaptures == "NONBACKTRACKINGINCOMPATIBLE")
                     {
                         // In particular: backreferences are not supported in NonBacktracking mode
-                        await Assert.ThrowsAnyAsync<NotSupportedException>(() => RegexHelpers.GetRegexAsync(engine, pattern, options));
+                        await Assert.ThrowsAnyAsync<NotSupportedException>(
+                            () => RegexHelpers.GetRegexAsync(engine, pattern, options)
+                        );
                         return;
                     }
 
@@ -409,26 +460,34 @@ namespace System.Text.RegularExpressions.Tests
 
                     var expectedSet = new HashSet<(int start, int end)>(
                         expected
-                        .Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
-                        .Select(s => s.Split(','))
-                        .Select(s => (start: int.Parse(s[0]), end: int.Parse(s[1])))
-                        .Distinct()
-                        .OrderBy(c => c.start)
-                        .ThenBy(c => c.end));
+                            .Split(new[] { '(', ')' }, StringSplitOptions.RemoveEmptyEntries)
+                            .Select(s => s.Split(','))
+                            .Select(s => (start: int.Parse(s[0]), end: int.Parse(s[1])))
+                            .Distinct()
+                            .OrderBy(c => c.start)
+                            .ThenBy(c => c.end)
+                    );
 
                     var actualSet = new HashSet<(int start, int end)>(
                         match.Groups
-                        .Cast<Group>()
-                        .Select(g => (start: g.Index, end: g.Index + g.Length))
-                        .Distinct()
-                        .OrderBy(g => g.start)
-                        .ThenBy(g => g.end));
+                            .Cast<Group>()
+                            .Select(g => (start: g.Index, end: g.Index + g.Length))
+                            .Distinct()
+                            .OrderBy(g => g.start)
+                            .ThenBy(g => g.end)
+                    );
 
                     // NonBacktracking mode only provides the top-level match.
                     // The .NET implementation sometimes has extra captures beyond what the original data specifies, so we assert a subset.
-                    if (nonBacktracking ? !actualSet.IsSubsetOf(expectedSet) : !expectedSet.IsSubsetOf(actualSet))
+                    if (
+                        nonBacktracking
+                            ? !actualSet.IsSubsetOf(expectedSet)
+                            : !expectedSet.IsSubsetOf(actualSet)
+                    )
                     {
-                        throw new Xunit.Sdk.XunitException($"Actual: {string.Join(", ", actualSet)}{Environment.NewLine}Expected: {string.Join(", ", expected)}");
+                        throw new Xunit.Sdk.XunitException(
+                            $"Actual: {string.Join(", ", actualSet)}{Environment.NewLine}Expected: {string.Join(", ", expected)}"
+                        );
                     }
                 }
             }

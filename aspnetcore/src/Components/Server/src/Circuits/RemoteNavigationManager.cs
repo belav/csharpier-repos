@@ -12,7 +12,9 @@ namespace Microsoft.AspNetCore.Components.Server.Circuits;
 /// <summary>
 /// A Server-Side Blazor implementation of <see cref="NavigationManager"/>.
 /// </summary>
-internal sealed partial class RemoteNavigationManager : NavigationManager, IHostEnvironmentNavigationManager
+internal sealed partial class RemoteNavigationManager
+    : NavigationManager,
+        IHostEnvironmentNavigationManager
 {
     private readonly ILogger<RemoteNavigationManager> _logger;
     private IJSRuntime _jsRuntime;
@@ -81,13 +83,35 @@ internal sealed partial class RemoteNavigationManager : NavigationManager, IHost
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug, "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}, replace={Replace}", EventName = "RequestingNavigation")]
-        private static partial void RequestingNavigation(ILogger logger, string uri, bool forceLoad, bool replace);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Requesting navigation to URI {Uri} with forceLoad={ForceLoad}, replace={Replace}",
+            EventName = "RequestingNavigation"
+        )]
+        private static partial void RequestingNavigation(
+            ILogger logger,
+            string uri,
+            bool forceLoad,
+            bool replace
+        );
 
-        public static void RequestingNavigation(ILogger logger, string uri, NavigationOptions options)
-            => RequestingNavigation(logger, uri, options.ForceLoad, options.ReplaceHistoryEntry);
+        public static void RequestingNavigation(
+            ILogger logger,
+            string uri,
+            NavigationOptions options
+        ) => RequestingNavigation(logger, uri, options.ForceLoad, options.ReplaceHistoryEntry);
 
-        [LoggerMessage(2, LogLevel.Debug, "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}", EventName = "ReceivedLocationChangedNotification")]
-        public static partial void ReceivedLocationChangedNotification(ILogger logger, string uri, bool isIntercepted);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Received notification that the URI has changed to {Uri} with isIntercepted={IsIntercepted}",
+            EventName = "ReceivedLocationChangedNotification"
+        )]
+        public static partial void ReceivedLocationChangedNotification(
+            ILogger logger,
+            string uri,
+            bool isIntercepted
+        );
     }
 }

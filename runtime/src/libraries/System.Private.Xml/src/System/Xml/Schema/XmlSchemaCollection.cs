@@ -10,7 +10,6 @@ namespace System.Xml.Schema
     using System.Xml.Schema;
     using System.Runtime.Versioning;
 
-
     /// <summary>
     /// The XmlSchemaCollection contains a set of namespace URI's.
     /// Each namespace also have an associated private data cache
@@ -20,7 +19,9 @@ namespace System.Xml.Schema
     /// The Validate method then uses this internal representation for
     /// efficient runtime validation of any given subtree.
     /// </summary>
-    [Obsolete("XmlSchemaCollection has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation instead.")]
+    [Obsolete(
+        "XmlSchemaCollection has been deprecated. Use System.Xml.Schema.XmlSchemaSet for schema compilation and validation instead."
+    )]
     public sealed class XmlSchemaCollection : ICollection
     {
         private readonly Hashtable _collection;
@@ -31,13 +32,10 @@ namespace System.Xml.Schema
         private ValidationEventHandler? _validationEventHandler;
         private XmlResolver? _xmlResolver;
 
-
         /// <summary>
         /// Construct a new empty schema collection.
         /// </summary>
-        public XmlSchemaCollection() : this(new NameTable())
-        {
-        }
+        public XmlSchemaCollection() : this(new NameTable()) { }
 
         /// <summary>
         /// Construct a new empty schema collection with associated XmlNameTable.
@@ -82,12 +80,8 @@ namespace System.Xml.Schema
 
         internal XmlResolver? XmlResolver
         {
-            set
-            {
-                _xmlResolver = value;
-            }
+            set { _xmlResolver = value; }
         }
-
 
         /// <summary>
         /// Add the schema located by the given URL into the schema collection.
@@ -105,7 +99,8 @@ namespace System.Xml.Schema
             try
             {
                 schema = Add(ns, reader, _xmlResolver);
-                while (reader.Read()) ; // wellformness check
+                while (reader.Read())
+                    ; // wellformness check
             }
             finally
             {
@@ -131,7 +126,12 @@ namespace System.Xml.Schema
             XmlNameTable readerNameTable = reader.NameTable;
             SchemaInfo schemaInfo = new SchemaInfo();
 
-            Parser parser = new Parser(SchemaType.None, readerNameTable, GetSchemaNames(readerNameTable), _validationEventHandler);
+            Parser parser = new Parser(
+                SchemaType.None,
+                readerNameTable,
+                GetSchemaNames(readerNameTable),
+                _validationEventHandler
+            );
             parser.XmlResolver = resolver;
             SchemaType schemaType;
             try
@@ -187,7 +187,6 @@ namespace System.Xml.Schema
             }
         }
 
-
         /// <summary>
         /// Looks up the schema by its associated namespace URI
         /// </summary>
@@ -195,7 +194,8 @@ namespace System.Xml.Schema
         {
             get
             {
-                XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)_collection[(ns != null) ? ns : string.Empty];
+                XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)
+                    _collection[(ns != null) ? ns : string.Empty];
                 return (node != null) ? node.Schema : null;
             }
         }
@@ -231,7 +231,7 @@ namespace System.Xml.Schema
 
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
-            for (XmlSchemaCollectionEnumerator e = this.GetEnumerator(); e.MoveNext();)
+            for (XmlSchemaCollectionEnumerator e = this.GetEnumerator(); e.MoveNext(); )
             {
                 if (index == array.Length)
                 {
@@ -247,7 +247,7 @@ namespace System.Xml.Schema
 
             if (index < 0)
                 throw new ArgumentOutOfRangeException(nameof(index));
-            for (XmlSchemaCollectionEnumerator e = this.GetEnumerator(); e.MoveNext();)
+            for (XmlSchemaCollectionEnumerator e = this.GetEnumerator(); e.MoveNext(); )
             {
                 XmlSchema? schema = e.Current;
                 if (schema != null)
@@ -279,7 +279,8 @@ namespace System.Xml.Schema
 
         internal SchemaInfo? GetSchemaInfo(string? ns)
         {
-            XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)_collection[(ns != null) ? ns : string.Empty];
+            XmlSchemaCollectionNode? node = (XmlSchemaCollectionNode?)
+                _collection[(ns != null) ? ns : string.Empty];
             return (node != null) ? node.SchemaInfo : null;
         }
 
@@ -304,14 +305,30 @@ namespace System.Xml.Schema
             return Add(ns, schemaInfo, schema, compile, _xmlResolver);
         }
 
-        private XmlSchema? Add(string? ns, SchemaInfo schemaInfo, XmlSchema? schema, bool compile, XmlResolver? resolver)
+        private XmlSchema? Add(
+            string? ns,
+            SchemaInfo schemaInfo,
+            XmlSchema? schema,
+            bool compile,
+            XmlResolver? resolver
+        )
         {
             int errorCount = 0;
             if (schema != null)
             {
                 if (schema.ErrorCount == 0 && compile)
                 {
-                    if (!schema.CompileSchema(this, resolver, schemaInfo, ns, _validationEventHandler, _nameTable, true))
+                    if (
+                        !schema.CompileSchema(
+                            this,
+                            resolver,
+                            schemaInfo,
+                            ns,
+                            _validationEventHandler,
+                            _nameTable,
+                            true
+                        )
+                    )
                     {
                         errorCount = 1;
                     }
@@ -375,14 +392,8 @@ namespace System.Xml.Schema
 
         internal ValidationEventHandler? EventHandler
         {
-            get
-            {
-                return _validationEventHandler;
-            }
-            set
-            {
-                _validationEventHandler = value;
-            }
+            get { return _validationEventHandler; }
+            set { _validationEventHandler = value; }
         }
     };
 

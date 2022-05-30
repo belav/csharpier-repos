@@ -29,7 +29,9 @@ namespace Internal.IL.Stubs
             if (result != 0)
                 return result;
 
-            result = _targetSignature.GetNumerOfReturnTypePointerIndirections() - otherMethod._targetSignature.GetNumerOfReturnTypePointerIndirections();
+            result =
+                _targetSignature.GetNumerOfReturnTypePointerIndirections()
+                - otherMethod._targetSignature.GetNumerOfReturnTypePointerIndirections();
             if (result != 0)
                 return result;
 
@@ -40,7 +42,9 @@ namespace Internal.IL.Stubs
                 if (result != 0)
                     return result;
 
-                result = _targetSignature.GetNumberOfParameterPointerIndirections(i) - otherMethod._targetSignature.GetNumberOfParameterPointerIndirections(i);
+                result =
+                    _targetSignature.GetNumberOfParameterPointerIndirections(i)
+                    - otherMethod._targetSignature.GetNumberOfParameterPointerIndirections(i);
                 if (result != 0)
                     return result;
             }

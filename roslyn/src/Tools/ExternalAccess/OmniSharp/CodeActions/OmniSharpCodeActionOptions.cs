@@ -11,15 +11,18 @@ using Microsoft.CodeAnalysis.SymbolSearch;
 namespace Microsoft.CodeAnalysis.ExternalAccess.OmniSharp.CodeActions
 {
     internal readonly record struct OmniSharpCodeActionOptions(
-        OmniSharpImplementTypeOptions ImplementTypeOptions)
+        OmniSharpImplementTypeOptions ImplementTypeOptions
+    )
     {
-        internal CodeActionOptions GetCodeActionOptions(HostLanguageServices languageServices)
-            => CodeActionOptions.GetDefault(languageServices) with
+        internal CodeActionOptions GetCodeActionOptions(HostLanguageServices languageServices) =>
+            CodeActionOptions.GetDefault(languageServices) with
             {
                 ImplementTypeOptions = new()
                 {
-                    InsertionBehavior = (ImplementTypeInsertionBehavior)ImplementTypeOptions.InsertionBehavior,
-                    PropertyGenerationBehavior = (ImplementTypePropertyGenerationBehavior)ImplementTypeOptions.PropertyGenerationBehavior
+                    InsertionBehavior = (ImplementTypeInsertionBehavior)
+                        ImplementTypeOptions.InsertionBehavior,
+                    PropertyGenerationBehavior = (ImplementTypePropertyGenerationBehavior)
+                        ImplementTypeOptions.PropertyGenerationBehavior
                 }
             };
     }

@@ -24,7 +24,10 @@ public interface IMemberClassifier
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    ImmutableSortedDictionary<PropertyInfo, (Type Type, bool? ShouldBeOwned)> GetNavigationCandidates(IConventionEntityType entityType);
+    ImmutableSortedDictionary<
+        PropertyInfo,
+        (Type Type, bool? ShouldBeOwned)
+    > GetNavigationCandidates(IConventionEntityType entityType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -32,7 +35,11 @@ public interface IMemberClassifier
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    Type? FindCandidateNavigationPropertyType(MemberInfo memberInfo, IConventionModel model, out bool? shouldBeOwned);
+    Type? FindCandidateNavigationPropertyType(
+        MemberInfo memberInfo,
+        IConventionModel model,
+        out bool? shouldBeOwned
+    );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -56,5 +63,8 @@ public interface IMemberClassifier
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    IParameterBindingFactory? FindServicePropertyCandidateBindingFactory(PropertyInfo propertyInfo, IConventionModel model);
+    IParameterBindingFactory? FindServicePropertyCandidateBindingFactory(
+        PropertyInfo propertyInfo,
+        IConventionModel model
+    );
 }

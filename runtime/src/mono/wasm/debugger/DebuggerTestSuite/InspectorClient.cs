@@ -17,17 +17,22 @@ namespace DebuggerTests
 {
     internal class InspectorClient : DevToolsClient
     {
-        protected Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds = new Dictionary<MessageId, TaskCompletionSource<Result>>();
+        protected Dictionary<MessageId, TaskCompletionSource<Result>> pending_cmds =
+            new Dictionary<MessageId, TaskCompletionSource<Result>>();
         protected Func<string, JObject, CancellationToken, Task> onEvent;
         protected int next_cmd_id;
 
         public InspectorClient(ILogger logger) : base(logger) { }
 
-        protected override async Task<WasmDebuggerConnection> SetupConnection(Uri webserverUri, CancellationToken token)
-            => new DevToolsDebuggerConnection(
-                        await ConnectToWebServer(webserverUri, token),
-                        "client",
-                         logger);
+        protected override async Task<WasmDebuggerConnection> SetupConnection(
+            Uri webserverUri,
+            CancellationToken token
+        ) =>
+            new DevToolsDebuggerConnection(
+                await ConnectToWebServer(webserverUri, token),
+                "client",
+                logger
+            );
 
         protected virtual Task HandleMessage(string msg, CancellationToken token)
         {
@@ -52,7 +57,8 @@ namespace DebuggerTests
         public virtual async Task Connect(
             Uri uri,
             Func<string, JObject, CancellationToken, Task> onEvent,
-            CancellationTokenSource cts)
+            CancellationTokenSource cts
+        )
         {
             this.onEvent = onEvent;
 
@@ -74,21 +80,21 @@ namespace DebuggerTests
             await ConnectAndStartRunLoopAsync(uri, HandleMessage, cts);
         }
 
-        public Task<Result> SendCommand(string method, JObject args, CancellationToken token)
-            => SendCommand(new SessionId(null), method, args, token);
+        public Task<Result> SendCommand(string method, JObject args, CancellationToken token) =>
+            SendCommand(new SessionId(null), method, args, token);
 
-        public virtual Task<Result> SendCommand(SessionId sessionId, string method, JObject args, CancellationToken token)
+        public virtual Task<Result> SendCommand(
+            SessionId sessionId,
+            string method,
+            JObject args,
+            CancellationToken token
+        )
         {
             int id = ++next_cmd_id;
             if (args == null)
                 args = new JObject();
 
-            var o = JObject.FromObject(new
-            {
-                id = id,
-                method = method,
-                @params = args
-            });
+            var o = JObject.FromObject(new { id = id, method = method, @params = args });
 
             var tcs = new TaskCompletionSource<Result>();
             pending_cmds[new MessageId(sessionId.sessionId, id)] = tcs;

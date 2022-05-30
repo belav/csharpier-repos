@@ -27,21 +27,26 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigationBar
         public NavigationBarControllerFactoryService(
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor uIThreadOperationExecutor,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _threadingContext = threadingContext;
             _uIThreadOperationExecutor = uIThreadOperationExecutor;
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigationBar);
         }
 
-        public IDisposable CreateController(INavigationBarPresenter presenter, ITextBuffer textBuffer)
+        public IDisposable CreateController(
+            INavigationBarPresenter presenter,
+            ITextBuffer textBuffer
+        )
         {
             return new NavigationBarController(
                 _threadingContext,
                 presenter,
                 textBuffer,
                 _uIThreadOperationExecutor,
-                _asyncListener);
+                _asyncListener
+            );
         }
     }
 }

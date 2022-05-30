@@ -15,12 +15,40 @@ namespace System.Xml.Tests
 
         public static IEnumerable<object[]> GetXmlReaderUrlCreateMethods()
         {
-            yield return new [] { new Func<string, XmlReader>(s => XmlReader.Create(s)) };
-            yield return new [] { new Func<string, XmlReader>(s => XmlReader.Create(File.OpenRead(s), new XmlReaderSettings { CloseInput = true }, s)) };
-            yield return new [] { new Func<string, XmlReader>(s => XmlReader.Create(new StreamReader(File.OpenRead(s)), new XmlReaderSettings { CloseInput = true }, s)) };
-            yield return new [] { new Func<string, XmlReader>(s => new XmlTextReader(s)) };
-            yield return new [] { new Func<string, XmlReader>(s => new XmlTextReader(s, File.OpenRead(s))) };
-            yield return new [] { new Func<string, XmlReader>(s => new XmlTextReader(s, new StreamReader(File.OpenRead(s)))) };
+            yield return new[] { new Func<string, XmlReader>(s => XmlReader.Create(s)) };
+            yield return new[]
+            {
+                new Func<string, XmlReader>(
+                    s =>
+                        XmlReader.Create(
+                            File.OpenRead(s),
+                            new XmlReaderSettings { CloseInput = true },
+                            s
+                        )
+                )
+            };
+            yield return new[]
+            {
+                new Func<string, XmlReader>(
+                    s =>
+                        XmlReader.Create(
+                            new StreamReader(File.OpenRead(s)),
+                            new XmlReaderSettings { CloseInput = true },
+                            s
+                        )
+                )
+            };
+            yield return new[] { new Func<string, XmlReader>(s => new XmlTextReader(s)) };
+            yield return new[]
+            {
+                new Func<string, XmlReader>(s => new XmlTextReader(s, File.OpenRead(s)))
+            };
+            yield return new[]
+            {
+                new Func<string, XmlReader>(
+                    s => new XmlTextReader(s, new StreamReader(File.OpenRead(s)))
+                )
+            };
         }
 
         [Theory]

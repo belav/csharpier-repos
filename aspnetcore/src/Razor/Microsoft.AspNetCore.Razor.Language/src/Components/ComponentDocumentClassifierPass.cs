@@ -37,12 +37,18 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
     // Ensure this runs before the MVC classifiers which have Order = 0
     public override int Order => -100;
 
-    protected override bool IsMatch(RazorCodeDocument codeDocument, DocumentIntermediateNode documentNode)
+    protected override bool IsMatch(
+        RazorCodeDocument codeDocument,
+        DocumentIntermediateNode documentNode
+    )
     {
         return FileKinds.IsComponent(codeDocument.GetFileKind());
     }
 
-    protected override CodeTarget CreateTarget(RazorCodeDocument codeDocument, RazorCodeGenerationOptions options)
+    protected override CodeTarget CreateTarget(
+        RazorCodeDocument codeDocument,
+        RazorCodeGenerationOptions options
+    )
     {
         return new ComponentCodeTarget(options, TargetExtensions);
     }
@@ -52,10 +58,15 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
         RazorCodeDocument codeDocument,
         NamespaceDeclarationIntermediateNode @namespace,
         ClassDeclarationIntermediateNode @class,
-        MethodDeclarationIntermediateNode method)
+        MethodDeclarationIntermediateNode method
+    )
     {
-        if (!codeDocument.TryComputeNamespace(fallbackToRootNamespace: true, out var computedNamespace) ||
-            !TryComputeClassName(codeDocument, out var computedClass))
+        if (
+            !codeDocument.TryComputeNamespace(
+                fallbackToRootNamespace: true,
+                out var computedNamespace
+            ) || !TryComputeClassName(codeDocument, out var computedClass)
+        )
         {
             // If we can't compute a nice namespace (no relative path) then just generate something
             // mangled.
@@ -69,7 +80,11 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
         {
             // We don't allow component names to start with a lowercase character.
             documentNode.Diagnostics.Add(
-                ComponentDiagnosticFactory.Create_ComponentNamesCannotStartWithLowerCase(computedClass, documentNode.Source));
+                ComponentDiagnosticFactory.Create_ComponentNamesCannotStartWithLowerCase(
+                    computedClass,
+                    documentNode.Source
+                )
+            );
         }
 
         if (MangleClassNames)
@@ -101,10 +116,12 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
             @class.BaseType = ComponentsApi.ComponentBase.FullTypeName;
 
             // Constrained type parameters are only supported in Razor language versions v6.0
-            var razorLanguageVersion = codeDocument.GetParserOptions()?.Version ?? RazorLanguageVersion.Latest;
-            var directiveType = razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_6_0) >= 0
-                ? ComponentConstrainedTypeParamDirective.Directive
-                : ComponentTypeParamDirective.Directive;
+            var razorLanguageVersion =
+                codeDocument.GetParserOptions()?.Version ?? RazorLanguageVersion.Latest;
+            var directiveType =
+                razorLanguageVersion.CompareTo(RazorLanguageVersion.Version_6_0) >= 0
+                    ? ComponentConstrainedTypeParamDirective.Directive
+                    : ComponentTypeParamDirective.Directive;
             var typeParamReferences = documentNode.FindDirectiveReferences(directiveType);
             for (var i = 0; i < typeParamReferences.Count; i++)
             {
@@ -114,11 +131,13 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
                     continue;
                 }
 
-                @class.TypeParameters.Add(new TypeParameter()
-                {
-                    ParameterName = typeParamNode.Tokens.First().Content,
-                    Constraints = typeParamNode.Tokens.Skip(1).FirstOrDefault()?.Content
-                });
+                @class.TypeParameters.Add(
+                    new TypeParameter()
+                    {
+                        ParameterName = typeParamNode.Tokens.First().Content,
+                        Constraints = typeParamNode.Tokens.Skip(1).FirstOrDefault()?.Content
+                    }
+                );
             }
 
             method.ReturnType = "void";
@@ -128,11 +147,13 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
             method.Modifiers.Add("override");
 
             method.Parameters.Clear();
-            method.Parameters.Add(new MethodParameter()
-            {
-                ParameterName = ComponentsApi.RenderTreeBuilder.BuilderParameter,
-                TypeName = ComponentsApi.RenderTreeBuilder.FullTypeName,
-            });
+            method.Parameters.Add(
+                new MethodParameter()
+                {
+                    ParameterName = ComponentsApi.RenderTreeBuilder.BuilderParameter,
+                    TypeName = ComponentsApi.RenderTreeBuilder.FullTypeName,
+                }
+            );
         }
     }
 
@@ -145,7 +166,9 @@ internal class ComponentDocumentClassifierPass : DocumentClassifierPassBase
         }
 
         var relativePath = NormalizePath(codeDocument.Source.RelativePath);
-        className = CSharpIdentifier.SanitizeIdentifier(Path.GetFileNameWithoutExtension(relativePath));
+        className = CSharpIdentifier.SanitizeIdentifier(
+            Path.GetFileNameWithoutExtension(relativePath)
+        );
         return true;
     }
 

@@ -46,15 +46,21 @@ namespace Internal.IL.Stubs
             // if the SetLastError flag is set in DllImport, clear the error code before doing P/Invoke
             if (_importMetadata.Flags.SetLastError)
             {
-                if (!MarshalHelpers.IsRuntimeMarshallingEnabled(((MetadataType)_targetMethod.OwningType).Module))
+                if (
+                    !MarshalHelpers.IsRuntimeMarshallingEnabled(
+                        ((MetadataType)_targetMethod.OwningType).Module
+                    )
+                )
                 {
                     // When runtime marshalling is disabled, we don't support generating the stub IL
                     // in Ready-to-Run so we can correctly throw an exception at runtime when the user tries to
                     // use SetLastError=true when marshalling is disabled.
                     throw new NotSupportedException();
                 }
-                callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                            stubHelpersType.GetKnownMethod("ClearLastError", null)));
+                callsiteSetupCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(stubHelpersType.GetKnownMethod("ClearLastError", null))
+                );
             }
 
             for (int i = 1; i < _marshallers.Length; i++)
@@ -63,8 +69,11 @@ namespace Internal.IL.Stubs
             }
 
             MethodSignature nativeSig = new MethodSignature(
-                _targetMethod.Signature.Flags, 0, nativeReturnType,
-                nativeParameterTypes);
+                _targetMethod.Signature.Flags,
+                0,
+                nativeReturnType,
+                nativeParameterTypes
+            );
 
             var rawTargetMethod = new PInvokeTargetNativeMethod(_targetMethod, nativeSig);
 
@@ -74,8 +83,10 @@ namespace Internal.IL.Stubs
             // so that last error can be used later by calling Marshal.GetLastPInvokeError
             if (_importMetadata.Flags.SetLastError)
             {
-                callsiteSetupCodeStream.Emit(ILOpcode.call, emitter.NewToken(
-                            stubHelpersType.GetKnownMethod("SetLastError", null)));
+                callsiteSetupCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(stubHelpersType.GetKnownMethod("SetLastError", null))
+                );
             }
         }
 
@@ -84,13 +95,23 @@ namespace Internal.IL.Stubs
             if (!_importMetadata.Flags.PreserveSig)
                 throw new NotSupportedException();
 
-            if (MarshalHelpers.ShouldCheckForPendingException(_targetMethod.Context.Target, _importMetadata))
+            if (
+                MarshalHelpers.ShouldCheckForPendingException(
+                    _targetMethod.Context.Target,
+                    _importMetadata
+                )
+            )
                 throw new NotSupportedException();
 
             if (_targetMethod.IsUnmanagedCallersOnly)
                 throw new NotSupportedException();
 
-            if (_targetMethod.HasCustomAttribute("System.Runtime.InteropServices", "LCIDConversionAttribute"))
+            if (
+                _targetMethod.HasCustomAttribute(
+                    "System.Runtime.InteropServices",
+                    "LCIDConversionAttribute"
+                )
+            )
                 throw new NotSupportedException();
 
             PInvokeILCodeStreams pInvokeILCodeStreams = new PInvokeILCodeStreams();

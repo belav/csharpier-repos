@@ -47,20 +47,19 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public string ApplyRename => EditorFeaturesResources.Apply1;
         public string CancelRename => EditorFeaturesResources.Cancel;
         public string PreviewChanges => EditorFeaturesResources.Preview_changes1;
-        public string SubmitText => EditorFeaturesWpfResources.Enter_to_rename_shift_enter_to_preview;
+        public string SubmitText =>
+            EditorFeaturesWpfResources.Enter_to_rename_shift_enter_to_preview;
 #pragma warning restore CA1822 // Mark members as static
 
-        private void TextView_CursorChanged(object sender, CaretPositionChangedEventArgs e)
-            => _viewModel.Cancel();
+        private void TextView_CursorChanged(object sender, CaretPositionChangedEventArgs e) =>
+            _viewModel.Cancel();
 
-        private void TextView_LostFocus(object sender, EventArgs e)
-            => _viewModel.Cancel();
+        private void TextView_LostFocus(object sender, EventArgs e) => _viewModel.Cancel();
 
-        private void TextView_ViewPortChanged(object sender, EventArgs e)
-            => PositionAdornment();
+        private void TextView_ViewPortChanged(object sender, EventArgs e) => PositionAdornment();
 
-        private void TextView_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e)
-            => PositionAdornment();
+        private void TextView_LayoutChanged(object sender, TextViewLayoutChangedEventArgs e) =>
+            PositionAdornment();
 
         private void PositionAdornment()
         {
@@ -103,7 +102,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
                     break;
 
                 case Key.Tab:
-                    // We don't want tab to lose focus for the adornment, so manually 
+                    // We don't want tab to lose focus for the adornment, so manually
                     // loop focus back to the first item that is focusable.
                     FrameworkElement lastItem = _viewModel.IsExpanded
                         ? FileRenameCheckbox

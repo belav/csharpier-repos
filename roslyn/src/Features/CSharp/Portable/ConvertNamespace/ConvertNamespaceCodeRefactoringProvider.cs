@@ -20,14 +20,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
     using static ConvertNamespaceAnalysis;
     using static ConvertNamespaceTransform;
 
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertNamespace), Shared]
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertNamespace
+        ),
+        Shared
+    ]
     internal class ConvertNamespaceCodeRefactoringProvider : CodeRefactoringProvider
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public ConvertNamespaceCodeRefactoringProvider()
-        {
-        }
+        public ConvertNamespaceCodeRefactoringProvider() { }
 
         public override async Task ComputeRefactoringsAsync(CodeRefactoringContext context)
         {
@@ -36,7 +40,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
                 return;
 
             var position = span.Start;
-            var root = (CompilationUnitSyntax)await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = (CompilationUnitSyntax)
+                await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
             var token = root.FindToken(position);
             var namespaceDecl = token.GetAncestor<BaseNamespaceDeclarationSyntax>();
             if (namespaceDecl == null)
@@ -45,20 +50,40 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertNamespace
             if (!IsValidPosition(namespaceDecl, position))
                 return;
 
-            var options = await document.GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetCSharpCodeFixOptionsProviderAsync(context.Options, cancellationToken)
+                .ConfigureAwait(false);
 
-            var info =
-                CanOfferUseBlockScoped(options.NamespaceDeclarations, namespaceDecl, forAnalyzer: false) ? GetInfo(NamespaceDeclarationPreference.BlockScoped) :
-                CanOfferUseFileScoped(options.NamespaceDeclarations, root, namespaceDecl, forAnalyzer: false) ? GetInfo(NamespaceDeclarationPreference.FileScoped) :
-                ((string title, string equivalenceKey)?)null;
+            var info = CanOfferUseBlockScoped(
+                options.NamespaceDeclarations,
+                namespaceDecl,
+                forAnalyzer: false
+            )
+                ? GetInfo(NamespaceDeclarationPreference.BlockScoped)
+                : CanOfferUseFileScoped(
+                    options.NamespaceDeclarations,
+                    root,
+                    namespaceDecl,
+                    forAnalyzer: false
+                )
+                    ? GetInfo(NamespaceDeclarationPreference.FileScoped)
+                    : ((string title, string equivalenceKey)?)null;
             if (info == null)
                 return;
 
-            context.RegisterRefactoring(CodeAction.Create(
-                info.Value.title, c => ConvertAsync(document, namespaceDecl, options.GetFormattingOptions(), c), info.Value.equivalenceKey));
+            context.RegisterRefactoring(
+                CodeAction.Create(
+                    info.Value.title,
+                    c => ConvertAsync(document, namespaceDecl, options.GetFormattingOptions(), c),
+                    info.Value.equivalenceKey
+                )
+            );
         }
 
-        private static bool IsValidPosition(BaseNamespaceDeclarationSyntax baseDeclaration, int position)
+        private static bool IsValidPosition(
+            BaseNamespaceDeclarationSyntax baseDeclaration,
+            int position
+        )
         {
             if (position < baseDeclaration.SpanStart)
                 return false;

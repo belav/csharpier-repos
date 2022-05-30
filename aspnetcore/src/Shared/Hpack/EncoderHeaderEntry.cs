@@ -27,7 +27,14 @@ internal sealed class EncoderHeaderEntry
     /// <summary>
     /// Initialize header values. An entry will be reinitialized when reused.
     /// </summary>
-    public void Initialize(int hash, string name, string value, uint size, int index, EncoderHeaderEntry? next)
+    public void Initialize(
+        int hash,
+        string name,
+        string value,
+        uint size,
+        int index,
+        EncoderHeaderEntry? next
+    )
     {
         Debug.Assert(name != null);
         Debug.Assert(value != null);

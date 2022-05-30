@@ -23,39 +23,36 @@ namespace Microsoft.EntityFrameworkCore.Query;
 /// </remarks>
 public class ExpressionPrinter : ExpressionVisitor
 {
-    private static readonly List<string> SimpleMethods = new()
-    {
-        "get_Item",
-        "TryReadValue",
-        "ReferenceEquals"
-    };
+    private static readonly List<string> SimpleMethods =
+        new() { "get_Item", "TryReadValue", "ReferenceEquals" };
 
     private readonly IndentedStringBuilder _stringBuilder;
     private readonly Dictionary<ParameterExpression, string?> _parametersInScope;
     private readonly List<ParameterExpression> _namelessParameters;
     private readonly List<ParameterExpression> _encounteredParameters;
 
-    private readonly Dictionary<ExpressionType, string> _binaryOperandMap = new()
-    {
-        { ExpressionType.Assign, " = " },
-        { ExpressionType.Equal, " == " },
-        { ExpressionType.NotEqual, " != " },
-        { ExpressionType.GreaterThan, " > " },
-        { ExpressionType.GreaterThanOrEqual, " >= " },
-        { ExpressionType.LessThan, " < " },
-        { ExpressionType.LessThanOrEqual, " <= " },
-        { ExpressionType.OrElse, " || " },
-        { ExpressionType.AndAlso, " && " },
-        { ExpressionType.Coalesce, " ?? " },
-        { ExpressionType.Add, " + " },
-        { ExpressionType.Subtract, " - " },
-        { ExpressionType.Multiply, " * " },
-        { ExpressionType.Divide, " / " },
-        { ExpressionType.Modulo, " % " },
-        { ExpressionType.And, " & " },
-        { ExpressionType.Or, " | " },
-        { ExpressionType.ExclusiveOr, " ^ " }
-    };
+    private readonly Dictionary<ExpressionType, string> _binaryOperandMap =
+        new()
+        {
+            { ExpressionType.Assign, " = " },
+            { ExpressionType.Equal, " == " },
+            { ExpressionType.NotEqual, " != " },
+            { ExpressionType.GreaterThan, " > " },
+            { ExpressionType.GreaterThanOrEqual, " >= " },
+            { ExpressionType.LessThan, " < " },
+            { ExpressionType.LessThanOrEqual, " <= " },
+            { ExpressionType.OrElse, " || " },
+            { ExpressionType.AndAlso, " && " },
+            { ExpressionType.Coalesce, " ?? " },
+            { ExpressionType.Add, " + " },
+            { ExpressionType.Subtract, " - " },
+            { ExpressionType.Multiply, " * " },
+            { ExpressionType.Divide, " / " },
+            { ExpressionType.Modulo, " % " },
+            { ExpressionType.And, " & " },
+            { ExpressionType.Or, " | " },
+            { ExpressionType.ExclusiveOr, " ^ " }
+        };
 
     /// <summary>
     ///     Creates a new instance of the <see cref="ExpressionPrinter" /> class.
@@ -78,8 +75,8 @@ public class ExpressionPrinter : ExpressionVisitor
     /// <param name="joinAction">A join action to use when joining printout of individual item in the collection.</param>
     public virtual void VisitCollection<T>(
         IReadOnlyCollection<T> items,
-        Action<ExpressionPrinter>? joinAction = null)
-        where T : Expression
+        Action<ExpressionPrinter>? joinAction = null
+    ) where T : Expression
     {
         joinAction ??= (p => p.Append(", "));
 
@@ -136,8 +133,7 @@ public class ExpressionPrinter : ExpressionVisitor
     ///     Creates a scoped indenter that will increment the indent, then decrement it when disposed.
     /// </summary>
     /// <returns>An indenter.</returns>
-    public virtual IDisposable Indent()
-        => _stringBuilder.Indent();
+    public virtual IDisposable Indent() => _stringBuilder.Indent();
 
     /// <summary>
     ///     Appends the given string to current output being built.
@@ -156,24 +152,18 @@ public class ExpressionPrinter : ExpressionVisitor
     /// <param name="expression">The expression to print.</param>
     /// <param name="characterLimit">An optional limit to the number of characters included. Additional output will be truncated.</param>
     /// <returns>The printable representation.</returns>
-    public virtual string Print(
-        Expression expression,
-        int? characterLimit = null)
-        => PrintCore(expression, characterLimit, verbose: false);
+    public virtual string Print(Expression expression, int? characterLimit = null) =>
+        PrintCore(expression, characterLimit, verbose: false);
 
     /// <summary>
     ///     Creates a printable verbose string representation of the given expression.
     /// </summary>
     /// <param name="expression">The expression to print.</param>
     /// <returns>The printable representation.</returns>
-    public virtual string PrintDebug(
-        Expression expression)
-        => PrintCore(expression, characterLimit: null, verbose: true);
+    public virtual string PrintDebug(Expression expression) =>
+        PrintCore(expression, characterLimit: null, verbose: true);
 
-    private string PrintCore(
-        Expression expression,
-        int? characterLimit,
-        bool verbose)
+    private string PrintCore(Expression expression, int? characterLimit, bool verbose)
     {
         _stringBuilder.Clear();
         _parametersInScope.Clear();
@@ -187,12 +177,12 @@ public class ExpressionPrinter : ExpressionVisitor
 
         var queryPlan = PostProcess(_stringBuilder.ToString());
 
-        if (characterLimit != null
-            && characterLimit.Value > 0)
+        if (characterLimit != null && characterLimit.Value > 0)
         {
-            queryPlan = queryPlan.Length > characterLimit
-                ? queryPlan[..characterLimit.Value] + "..."
-                : queryPlan;
+            queryPlan =
+                queryPlan.Length > characterLimit
+                    ? queryPlan[..characterLimit.Value] + "..."
+                    : queryPlan;
         }
 
         return queryPlan;
@@ -203,8 +193,8 @@ public class ExpressionPrinter : ExpressionVisitor
     /// </summary>
     /// <param name="expressionType">The expression type to generate binary operator for.</param>
     /// <returns>The binary operator string.</returns>
-    public virtual string GenerateBinaryOperator(ExpressionType expressionType)
-        => _binaryOperandMap[expressionType];
+    public virtual string GenerateBinaryOperator(ExpressionType expressionType) =>
+        _binaryOperandMap[expressionType];
 
     /// <inheritdoc />
     [return: NotNullIfNotNull("expression")]
@@ -215,8 +205,7 @@ public class ExpressionPrinter : ExpressionVisitor
             return null;
         }
 
-        if (CharacterLimit != null
-            && _stringBuilder.Length > CharacterLimit.Value)
+        if (CharacterLimit != null && _stringBuilder.Length > CharacterLimit.Value)
         {
             return expression;
         }
@@ -383,9 +372,10 @@ public class ExpressionPrinter : ExpressionVisitor
                 }
             }
 
-            var expressions = blockExpression.Result != null
-                ? blockExpression.Expressions.Except(new[] { blockExpression.Result })
-                : blockExpression.Expressions;
+            var expressions =
+                blockExpression.Result != null
+                    ? blockExpression.Expressions.Except(new[] { blockExpression.Result })
+                    : blockExpression.Expressions;
 
             foreach (var expression in expressions)
             {
@@ -439,8 +429,7 @@ public class ExpressionPrinter : ExpressionVisitor
 
     private void Print(object? value)
     {
-        if (value is IEnumerable enumerable
-            && !(value is string))
+        if (value is IEnumerable enumerable && !(value is string))
         {
             _stringBuilder.Append(value.GetType().ShortDisplayName() + " { ");
 
@@ -463,11 +452,12 @@ public class ExpressionPrinter : ExpressionVisitor
             return;
         }
 
-        var stringValue = value == null
-            ? "null"
-            : value.ToString() != value.GetType().ToString()
-                ? value.ToString()
-                : value.GetType().ShortDisplayName();
+        var stringValue =
+            value == null
+                ? "null"
+                : value.ToString() != value.GetType().ToString()
+                    ? value.ToString()
+                    : value.GetType().ShortDisplayName();
 
         if (value is string)
         {
@@ -480,7 +470,13 @@ public class ExpressionPrinter : ExpressionVisitor
     /// <inheritdoc />
     protected override Expression VisitGoto(GotoExpression gotoExpression)
     {
-        AppendLine("return (" + gotoExpression.Target.Type.ShortDisplayName() + ")" + gotoExpression.Target + " {");
+        AppendLine(
+            "return ("
+                + gotoExpression.Target.Type.ShortDisplayName()
+                + ")"
+                + gotoExpression.Target
+                + " {"
+        );
         using (_stringBuilder.Indent())
         {
             Visit(gotoExpression.Value);
@@ -547,8 +543,10 @@ public class ExpressionPrinter : ExpressionVisitor
     {
         if (memberExpression.Expression != null)
         {
-            if (memberExpression.Expression.NodeType == ExpressionType.Convert
-                || memberExpression.Expression is BinaryExpression)
+            if (
+                memberExpression.Expression.NodeType == ExpressionType.Convert
+                || memberExpression.Expression is BinaryExpression
+            )
             {
                 _stringBuilder.Append("(");
                 Visit(memberExpression.Expression);
@@ -562,7 +560,9 @@ public class ExpressionPrinter : ExpressionVisitor
         else
         {
             // ReSharper disable once PossibleNullReferenceException
-            _stringBuilder.Append(memberExpression.Member.DeclaringType?.Name ?? "MethodWithoutDeclaringType");
+            _stringBuilder.Append(
+                memberExpression.Member.DeclaringType?.Name ?? "MethodWithoutDeclaringType"
+            );
         }
 
         _stringBuilder.Append("." + memberExpression.Member.Name);
@@ -575,7 +575,10 @@ public class ExpressionPrinter : ExpressionVisitor
     {
         _stringBuilder.Append("new " + memberInitExpression.Type.ShortDisplayName());
 
-        var appendAction = memberInitExpression.Bindings.Count > 1 ? (Func<string, ExpressionVisitor>)AppendLine : Append;
+        var appendAction =
+            memberInitExpression.Bindings.Count > 1
+                ? (Func<string, ExpressionVisitor>)AppendLine
+                : Append;
         appendAction("{ ");
         using (_stringBuilder.Indent())
         {
@@ -622,7 +625,8 @@ public class ExpressionPrinter : ExpressionVisitor
         var methodArguments = methodCallExpression.Arguments.ToList();
         var method = methodCallExpression.Method;
 
-        var extensionMethod = !Verbose
+        var extensionMethod =
+            !Verbose
             && methodCallExpression.Arguments.Count > 0
             && method.IsDefined(typeof(ExtensionAttribute), inherit: false);
 
@@ -633,8 +637,7 @@ public class ExpressionPrinter : ExpressionVisitor
             _stringBuilder.AppendLine();
             _stringBuilder.Append($".{method.Name}");
             methodArguments = methodArguments.Skip(1).ToList();
-            if (method.Name == nameof(Enumerable.Cast)
-                || method.Name == nameof(Enumerable.OfType))
+            if (method.Name == nameof(Enumerable.Cast) || method.Name == nameof(Enumerable.OfType))
             {
                 PrintGenericArguments(method, _stringBuilder);
             }
@@ -652,22 +655,24 @@ public class ExpressionPrinter : ExpressionVisitor
 
         _stringBuilder.Append("(");
 
-        var isSimpleMethodOrProperty = SimpleMethods.Contains(method.Name)
+        var isSimpleMethodOrProperty =
+            SimpleMethods.Contains(method.Name)
             || methodArguments.Count < 2
             || method.IsEFPropertyMethod();
 
-        var appendAction = isSimpleMethodOrProperty ? (Func<string, ExpressionVisitor>)Append : AppendLine;
+        var appendAction = isSimpleMethodOrProperty
+            ? (Func<string, ExpressionVisitor>)Append
+            : AppendLine;
 
         if (methodArguments.Count > 0)
         {
             appendAction("");
 
-            var argumentNames
-                = !isSimpleMethodOrProperty
-                    ? extensionMethod
-                        ? method.GetParameters().Skip(1).Select(p => p.Name).ToList()
-                        : method.GetParameters().Select(p => p.Name).ToList()
-                    : new List<string?>();
+            var argumentNames = !isSimpleMethodOrProperty
+                ? extensionMethod
+                    ? method.GetParameters().Skip(1).Select(p => p.Name).ToList()
+                    : method.GetParameters().Select(p => p.Name).ToList()
+                : new List<string?>();
 
             IDisposable? indent = null;
 
@@ -942,7 +947,12 @@ public class ExpressionPrinter : ExpressionVisitor
         Visit(indexExpression.Object);
         _stringBuilder.Append("[");
         VisitArguments(
-            indexExpression.Arguments, s => { _stringBuilder.Append(s); });
+            indexExpression.Arguments,
+            s =>
+            {
+                _stringBuilder.Append(s);
+            }
+        );
         _stringBuilder.Append("]");
 
         return indexExpression;
@@ -1020,7 +1030,8 @@ public class ExpressionPrinter : ExpressionVisitor
         IReadOnlyList<Expression> arguments,
         Action<string> appendAction,
         string lastSeparator = "",
-        bool areConnected = false)
+        bool areConnected = false
+    )
     {
         for (var i = 0; i < arguments.Count; i++)
         {
@@ -1044,6 +1055,6 @@ public class ExpressionPrinter : ExpressionVisitor
         return processedPrintedExpression;
     }
 
-    private void UnhandledExpressionType(Expression expression)
-        => AppendLine(expression.ToString());
+    private void UnhandledExpressionType(Expression expression) =>
+        AppendLine(expression.ToString());
 }

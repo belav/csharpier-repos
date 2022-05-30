@@ -11,9 +11,14 @@ namespace System.Runtime.InteropServices.Marshalling
     /// </summary>
     /// <typeparam name="T">Array element pointer type</typeparam>
     [CLSCompliant(false)]
-    [CustomTypeMarshaller(typeof(CustomTypeMarshallerAttribute.GenericPlaceholder*[]),
-        CustomTypeMarshallerKind.LinearCollection, BufferSize = 0x200,
-        Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.CallerAllocatedBuffer | CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+    [CustomTypeMarshaller(
+        typeof(CustomTypeMarshallerAttribute.GenericPlaceholder*[]),
+        CustomTypeMarshallerKind.LinearCollection,
+        BufferSize = 0x200,
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.CallerAllocatedBuffer
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+    )]
     public unsafe ref struct PointerArrayMarshaller<T> where T : unmanaged
     {
         private readonly int _sizeOfNativeElement;
@@ -26,8 +31,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// Initializes a new instance of the <see cref="PointerArrayMarshaller{T}"/>.
         /// </summary>
         /// <param name="sizeOfNativeElement">Size of the native element in bytes.</param>
-        public PointerArrayMarshaller(int sizeOfNativeElement)
-            : this()
+        public PointerArrayMarshaller(int sizeOfNativeElement) : this()
         {
             _sizeOfNativeElement = sizeOfNativeElement;
         }
@@ -38,8 +42,7 @@ namespace System.Runtime.InteropServices.Marshalling
         /// <param name="array">Array to be marshalled.</param>
         /// <param name="sizeOfNativeElement">Size of the native element in bytes.</param>
         public PointerArrayMarshaller(T*[]? array, int sizeOfNativeElement)
-            : this(array, Span<byte>.Empty, sizeOfNativeElement)
-        { }
+            : this(array, Span<byte>.Empty, sizeOfNativeElement) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="PointerArrayMarshaller{T}"/>.

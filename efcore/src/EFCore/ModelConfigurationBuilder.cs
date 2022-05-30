@@ -48,8 +48,7 @@ public class ModelConfigurationBuilder
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual ModelConfiguration ModelConfiguration
-        => _modelConfiguration;
+    protected virtual ModelConfiguration ModelConfiguration => _modelConfiguration;
 
     /// <summary>
     ///     Prevents the conventions from the given type from discovering properties of the given or derived types.
@@ -62,8 +61,7 @@ public class ModelConfigurationBuilder
     /// <returns>
     ///     The same <see cref="ModelConfigurationBuilder" /> instance so that additional configuration calls can be chained.
     /// </returns>
-    public virtual ModelConfigurationBuilder IgnoreAny<T>()
-        => IgnoreAny(typeof(T));
+    public virtual ModelConfigurationBuilder IgnoreAny<T>() => IgnoreAny(typeof(T));
 
     /// <summary>
     ///     Prevents the conventions from the given type from discovering properties of the given or derived types.
@@ -124,7 +122,8 @@ public class ModelConfigurationBuilder
     ///     The same <see cref="ModelConfigurationBuilder" /> instance so that additional configuration calls can be chained.
     /// </returns>
     public virtual ModelConfigurationBuilder Properties<TProperty>(
-        Action<PropertiesConfigurationBuilder<TProperty>> buildAction)
+        Action<PropertiesConfigurationBuilder<TProperty>> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -178,7 +177,8 @@ public class ModelConfigurationBuilder
     /// </returns>
     public virtual ModelConfigurationBuilder Properties(
         Type propertyType,
-        Action<PropertiesConfigurationBuilder> buildAction)
+        Action<PropertiesConfigurationBuilder> buildAction
+    )
     {
         Check.NotNull(propertyType, nameof(propertyType));
         Check.NotNull(buildAction, nameof(buildAction));
@@ -240,7 +240,8 @@ public class ModelConfigurationBuilder
     ///     The same <see cref="ModelConfigurationBuilder" /> instance so that additional configuration calls can be chained.
     /// </returns>
     public virtual ModelConfigurationBuilder DefaultTypeMapping<TScalar>(
-        Action<TypeMappingConfigurationBuilder<TScalar>> buildAction)
+        Action<TypeMappingConfigurationBuilder<TScalar>> buildAction
+    )
     {
         Check.NotNull(buildAction, nameof(buildAction));
 
@@ -304,7 +305,8 @@ public class ModelConfigurationBuilder
     /// </returns>
     public virtual ModelConfigurationBuilder DefaultTypeMapping(
         Type scalarType,
-        Action<TypeMappingConfigurationBuilder> buildAction)
+        Action<TypeMappingConfigurationBuilder> buildAction
+    )
     {
         Check.NotNull(scalarType, nameof(scalarType));
         Check.NotNull(buildAction, nameof(buildAction));
@@ -326,8 +328,12 @@ public class ModelConfigurationBuilder
     /// </remarks>
     /// <param name="modelDependencies">The dependencies object used during model building.</param>
     /// <returns>The configured <see cref="ModelBuilder" />.</returns>
-    public virtual ModelBuilder CreateModelBuilder(ModelDependencies? modelDependencies)
-        => new(_conventions, modelDependencies, _modelConfiguration.IsEmpty() ? null : _modelConfiguration.Validate());
+    public virtual ModelBuilder CreateModelBuilder(ModelDependencies? modelDependencies) =>
+        new(
+            _conventions,
+            modelDependencies,
+            _modelConfiguration.IsEmpty() ? null : _modelConfiguration.Validate()
+        );
 
     #region Hidden System.Object members
 
@@ -336,8 +342,7 @@ public class ModelConfigurationBuilder
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -345,16 +350,14 @@ public class ModelConfigurationBuilder
     /// <param name="obj">The object to compare with the current object.</param>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
     /// </summary>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }

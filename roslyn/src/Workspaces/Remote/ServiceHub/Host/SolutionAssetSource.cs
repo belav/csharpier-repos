@@ -23,18 +23,44 @@ namespace Microsoft.CodeAnalysis.Remote
             _client = client;
         }
 
-        public async ValueTask<ImmutableArray<(Checksum, object)>> GetAssetsAsync(Checksum solutionChecksum, ISet<Checksum> checksums, ISerializerService serializerService, CancellationToken cancellationToken)
+        public async ValueTask<ImmutableArray<(Checksum, object)>> GetAssetsAsync(
+            Checksum solutionChecksum,
+            ISet<Checksum> checksums,
+            ISerializerService serializerService,
+            CancellationToken cancellationToken
+        )
         {
             // Make sure we are on the thread pool to avoid UI thread dependencies if external code uses ConfigureAwait(true)
             await TaskScheduler.Default;
 
-            using var provider = await _client.GetProxyAsync<ISolutionAssetProvider>(SolutionAssetProvider.ServiceDescriptor, cancellationToken).ConfigureAwait(false);
+            using var provider = await _client
+                .GetProxyAsync<ISolutionAssetProvider>(
+                    SolutionAssetProvider.ServiceDescriptor,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             Contract.ThrowIfNull(provider.Proxy);
 
-            return await new RemoteCallback<ISolutionAssetProvider>(provider.Proxy).InvokeAsync(
-                (proxy, pipeWriter, cancellationToken) => proxy.GetAssetsAsync(pipeWriter, solutionChecksum, checksums.ToArray(), cancellationToken),
-                (pipeReader, cancellationToken) => RemoteHostAssetSerialization.ReadDataAsync(pipeReader, solutionChecksum, checksums, serializerService, cancellationToken),
-                cancellationToken).ConfigureAwait(false);
+            return await new RemoteCallback<ISolutionAssetProvider>(provider.Proxy)
+                .InvokeAsync(
+                    (proxy, pipeWriter, cancellationToken) =>
+                        proxy.GetAssetsAsync(
+                            pipeWriter,
+                            solutionChecksum,
+                            checksums.ToArray(),
+                            cancellationToken
+                        ),
+                    (pipeReader, cancellationToken) =>
+                        RemoteHostAssetSerialization.ReadDataAsync(
+                            pipeReader,
+                            solutionChecksum,
+                            checksums,
+                            serializerService,
+                            cancellationToken
+                        ),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
         }
     }
 }

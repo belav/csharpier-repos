@@ -16,7 +16,7 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
     internal sealed class SynthesizedSimpleProgramEntryPointSymbol : SourceMemberMethodSymbol
     {
         /// <summary>
-        /// The corresponding <see cref="SingleTypeDeclaration"/>. 
+        /// The corresponding <see cref="SingleTypeDeclaration"/>.
         /// </summary>
         private readonly SingleTypeDeclaration _declaration;
 
@@ -25,8 +25,17 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
         private WeakReference<ExecutableCodeBinder>? _weakBodyBinder;
         private WeakReference<ExecutableCodeBinder>? _weakIgnoreAccessibilityBodyBinder;
 
-        internal SynthesizedSimpleProgramEntryPointSymbol(SourceMemberContainerTypeSymbol containingType, SingleTypeDeclaration declaration, BindingDiagnosticBag diagnostics)
-            : base(containingType, syntaxReferenceOpt: declaration.SyntaxReference, ImmutableArray.Create(declaration.SyntaxReference.GetLocation()), isIterator: declaration.IsIterator)
+        internal SynthesizedSimpleProgramEntryPointSymbol(
+            SourceMemberContainerTypeSymbol containingType,
+            SingleTypeDeclaration declaration,
+            BindingDiagnosticBag diagnostics
+        )
+            : base(
+                containingType,
+                syntaxReferenceOpt: declaration.SyntaxReference,
+                ImmutableArray.Create(declaration.SyntaxReference.GetLocation()),
+                isIterator: declaration.IsIterator
+            )
         {
             Debug.Assert(declaration.SyntaxReference.GetSyntax() is CompilationUnitSyntax);
             _declaration = declaration;
@@ -38,36 +47,91 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             switch (hasAwait, hasReturnWithExpression)
             {
                 case (true, false):
-                    _returnType = Binder.GetWellKnownType(compilation, WellKnownType.System_Threading_Tasks_Task, diagnostics, NoLocation.Singleton);
+                    _returnType = Binder.GetWellKnownType(
+                        compilation,
+                        WellKnownType.System_Threading_Tasks_Task,
+                        diagnostics,
+                        NoLocation.Singleton
+                    );
                     break;
                 case (false, false):
-                    _returnType = Binder.GetSpecialType(compilation, SpecialType.System_Void, NoLocation.Singleton, diagnostics);
+                    _returnType = Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Void,
+                        NoLocation.Singleton,
+                        diagnostics
+                    );
                     break;
                 case (true, true):
-                    _returnType = Binder.GetWellKnownType(compilation, WellKnownType.System_Threading_Tasks_Task_T, diagnostics, NoLocation.Singleton).
-                                      Construct(Binder.GetSpecialType(compilation, SpecialType.System_Int32, NoLocation.Singleton, diagnostics));
+                    _returnType = Binder
+                        .GetWellKnownType(
+                            compilation,
+                            WellKnownType.System_Threading_Tasks_Task_T,
+                            diagnostics,
+                            NoLocation.Singleton
+                        )
+                        .Construct(
+                            Binder.GetSpecialType(
+                                compilation,
+                                SpecialType.System_Int32,
+                                NoLocation.Singleton,
+                                diagnostics
+                            )
+                        );
                     break;
                 case (false, true):
-                    _returnType = Binder.GetSpecialType(compilation, SpecialType.System_Int32, NoLocation.Singleton, diagnostics);
+                    _returnType = Binder.GetSpecialType(
+                        compilation,
+                        SpecialType.System_Int32,
+                        NoLocation.Singleton,
+                        diagnostics
+                    );
                     break;
             }
 
-            bool isNullableAnalysisEnabled = IsNullableAnalysisEnabled(compilation, CompilationUnit);
+            bool isNullableAnalysisEnabled = IsNullableAnalysisEnabled(
+                compilation,
+                CompilationUnit
+            );
             this.MakeFlags(
                 MethodKind.Ordinary,
-                DeclarationModifiers.Static | DeclarationModifiers.Private | (hasAwait ? DeclarationModifiers.Async : DeclarationModifiers.None),
+                DeclarationModifiers.Static
+                    | DeclarationModifiers.Private
+                    | (hasAwait ? DeclarationModifiers.Async : DeclarationModifiers.None),
                 returnsVoid: !hasAwait && !hasReturnWithExpression,
                 isExtensionMethod: false,
                 isNullableAnalysisEnabled: isNullableAnalysisEnabled,
-                isMetadataVirtualIgnoringModifiers: false);
+                isMetadataVirtualIgnoringModifiers: false
+            );
 
-            _parameters = ImmutableArray.Create(SynthesizedParameterSymbol.Create(this,
-                              TypeWithAnnotations.Create(
-                                  ArrayTypeSymbol.CreateCSharpArray(compilation.Assembly,
-                                      TypeWithAnnotations.Create(Binder.GetSpecialType(compilation, SpecialType.System_String, NoLocation.Singleton, diagnostics)))), 0, RefKind.None, "args"));
+            _parameters = ImmutableArray.Create(
+                SynthesizedParameterSymbol.Create(
+                    this,
+                    TypeWithAnnotations.Create(
+                        ArrayTypeSymbol.CreateCSharpArray(
+                            compilation.Assembly,
+                            TypeWithAnnotations.Create(
+                                Binder.GetSpecialType(
+                                    compilation,
+                                    SpecialType.System_String,
+                                    NoLocation.Singleton,
+                                    diagnostics
+                                )
+                            )
+                        )
+                    ),
+                    0,
+                    RefKind.None,
+                    "args"
+                )
+            );
         }
 
-        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(CSharpCompilation compilation, CompilationUnitSyntax compilationUnit, bool fallbackToMainEntryPoint)
+        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(
+            CSharpCompilation compilation,
+            CompilationUnitSyntax compilationUnit,
+            bool fallbackToMainEntryPoint
+        )
         {
             var type = GetSimpleProgramNamedTypeSymbol(compilation);
             if (type is null)
@@ -75,11 +139,15 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 return null;
             }
 
-            ImmutableArray<SynthesizedSimpleProgramEntryPointSymbol> entryPoints = type.GetSimpleProgramEntryPoints();
+            ImmutableArray<SynthesizedSimpleProgramEntryPointSymbol> entryPoints =
+                type.GetSimpleProgramEntryPoints();
 
             foreach (var entryPoint in entryPoints)
             {
-                if (entryPoint.SyntaxTree == compilationUnit.SyntaxTree && entryPoint.SyntaxNode == compilationUnit)
+                if (
+                    entryPoint.SyntaxTree == compilationUnit.SyntaxTree
+                    && entryPoint.SyntaxNode == compilationUnit
+                )
                 {
                     return entryPoint;
                 }
@@ -88,22 +156,28 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return fallbackToMainEntryPoint ? entryPoints[0] : null;
         }
 
-        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(CSharpCompilation compilation)
+        internal static SynthesizedSimpleProgramEntryPointSymbol? GetSimpleProgramEntryPoint(
+            CSharpCompilation compilation
+        )
         {
-            return GetSimpleProgramNamedTypeSymbol(compilation)?.GetSimpleProgramEntryPoints().First();
+            return GetSimpleProgramNamedTypeSymbol(compilation)
+                ?.GetSimpleProgramEntryPoints()
+                .First();
         }
 
-        private static SourceNamedTypeSymbol? GetSimpleProgramNamedTypeSymbol(CSharpCompilation compilation)
+        private static SourceNamedTypeSymbol? GetSimpleProgramNamedTypeSymbol(
+            CSharpCompilation compilation
+        )
         {
-            return compilation.SourceModule.GlobalNamespace.GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName).OfType<SourceNamedTypeSymbol>().SingleOrDefault(s => s.IsSimpleProgram);
+            return compilation.SourceModule.GlobalNamespace
+                .GetTypeMembers(WellKnownMemberNames.TopLevelStatementsEntryPointTypeName)
+                .OfType<SourceNamedTypeSymbol>()
+                .SingleOrDefault(s => s.IsSimpleProgram);
         }
 
         public override string Name
         {
-            get
-            {
-                return WellKnownMemberNames.TopLevelStatementsEntryPointMethodName;
-            }
+            get { return WellKnownMemberNames.TopLevelStatementsEntryPointMethodName; }
         }
 
         internal override System.Reflection.MethodImplAttributes ImplementationAttributes
@@ -113,80 +187,56 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
 
         public override bool IsVararg
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override ImmutableArray<TypeParameterSymbol> TypeParameters
         {
-            get
-            {
-                return ImmutableArray<TypeParameterSymbol>.Empty;
-            }
+            get { return ImmutableArray<TypeParameterSymbol>.Empty; }
         }
 
         internal override int ParameterCount
         {
-            get
-            {
-                return 1;
-            }
+            get { return 1; }
         }
 
         public override ImmutableArray<ParameterSymbol> Parameters
         {
-            get
-            {
-                return _parameters;
-            }
+            get { return _parameters; }
         }
 
         public override RefKind RefKind
         {
-            get
-            {
-                return RefKind.None;
-            }
+            get { return RefKind.None; }
         }
 
         public override TypeWithAnnotations ReturnTypeWithAnnotations
         {
-            get
-            {
-                return TypeWithAnnotations.Create(_returnType);
-            }
+            get { return TypeWithAnnotations.Create(_returnType); }
         }
 
-        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations ReturnTypeFlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
-        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull => ImmutableHashSet<string>.Empty;
+        public override ImmutableHashSet<string> ReturnNotNullIfParameterNotNull =>
+            ImmutableHashSet<string>.Empty;
 
-        public override FlowAnalysisAnnotations FlowAnalysisAnnotations => FlowAnalysisAnnotations.None;
+        public override FlowAnalysisAnnotations FlowAnalysisAnnotations =>
+            FlowAnalysisAnnotations.None;
 
         public override ImmutableArray<CustomModifier> RefCustomModifiers
         {
-            get
-            {
-                return ImmutableArray<CustomModifier>.Empty;
-            }
+            get { return ImmutableArray<CustomModifier>.Empty; }
         }
 
         public sealed override bool IsImplicitlyDeclared
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         internal sealed override bool GenerateDebugInfo
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         internal override int CalculateLocalSyntaxOffset(int localPosition, SyntaxTree localTree)
@@ -194,23 +244,26 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return localPosition;
         }
 
-        protected override void MethodChecks(BindingDiagnosticBag diagnostics)
-        {
-        }
+        protected override void MethodChecks(BindingDiagnosticBag diagnostics) { }
 
         internal override bool IsExpressionBodied => false;
 
-        public override ImmutableArray<ImmutableArray<TypeWithAnnotations>> GetTypeParameterConstraintTypes()
-            => ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
+        public override ImmutableArray<
+            ImmutableArray<TypeWithAnnotations>
+        > GetTypeParameterConstraintTypes() =>
+            ImmutableArray<ImmutableArray<TypeWithAnnotations>>.Empty;
 
-        public override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds()
-            => ImmutableArray<TypeParameterConstraintKind>.Empty;
+        public override ImmutableArray<TypeParameterConstraintKind> GetTypeParameterConstraintKinds() =>
+            ImmutableArray<TypeParameterConstraintKind>.Empty;
 
         protected override object MethodChecksLockObject => _declaration;
 
         internal CompilationUnitSyntax CompilationUnit => (CompilationUnitSyntax)SyntaxNode;
 
-        internal override ExecutableCodeBinder TryGetBodyBinder(BinderFactory? binderFactoryOpt = null, bool ignoreAccessibility = false)
+        internal override ExecutableCodeBinder TryGetBodyBinder(
+            BinderFactory? binderFactoryOpt = null,
+            bool ignoreAccessibility = false
+        )
         {
             return GetBodyBinder(ignoreAccessibility);
         }
@@ -223,36 +276,57 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             var globalNamespace = compilation.GlobalNamespace;
             var declaringSymbol = (SourceNamespaceSymbol)compilation.SourceModule.GlobalNamespace;
             var syntaxNode = SyntaxNode;
-            result = WithExternAndUsingAliasesBinder.Create(declaringSymbol, syntaxNode, WithUsingNamespacesAndTypesBinder.Create(declaringSymbol, syntaxNode, result));
+            result = WithExternAndUsingAliasesBinder.Create(
+                declaringSymbol,
+                syntaxNode,
+                WithUsingNamespacesAndTypesBinder.Create(declaringSymbol, syntaxNode, result)
+            );
             result = new InContainerBinder(globalNamespace, result);
             result = new InContainerBinder(ContainingType, result);
             result = new InMethodBinder(this, result);
-            result = result.WithAdditionalFlags(ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None);
+            result = result.WithAdditionalFlags(
+                ignoreAccessibility ? BinderFlags.IgnoreAccessibility : BinderFlags.None
+            );
 
             return new ExecutableCodeBinder(syntaxNode, this, result);
         }
 
         internal ExecutableCodeBinder GetBodyBinder(bool ignoreAccessibility)
         {
-            ref WeakReference<ExecutableCodeBinder>? weakBinder = ref ignoreAccessibility ? ref _weakIgnoreAccessibilityBodyBinder : ref _weakBodyBinder;
+            ref WeakReference<ExecutableCodeBinder>? weakBinder = ref ignoreAccessibility
+                ? ref _weakIgnoreAccessibilityBodyBinder
+                : ref _weakBodyBinder;
 
             while (true)
             {
                 var previousWeakReference = weakBinder;
-                if (previousWeakReference != null && previousWeakReference.TryGetTarget(out ExecutableCodeBinder? previousBinder))
+                if (
+                    previousWeakReference != null
+                    && previousWeakReference.TryGetTarget(out ExecutableCodeBinder? previousBinder)
+                )
                 {
                     return previousBinder;
                 }
 
                 ExecutableCodeBinder newBinder = CreateBodyBinder(ignoreAccessibility);
-                if (Interlocked.CompareExchange(ref weakBinder, new WeakReference<ExecutableCodeBinder>(newBinder), previousWeakReference) == previousWeakReference)
+                if (
+                    Interlocked.CompareExchange(
+                        ref weakBinder,
+                        new WeakReference<ExecutableCodeBinder>(newBinder),
+                        previousWeakReference
+                    ) == previousWeakReference
+                )
                 {
                     return newBinder;
                 }
             }
         }
 
-        internal override bool IsDefinedInSourceTree(SyntaxTree tree, TextSpan? definedWithinSpan, CancellationToken cancellationToken)
+        internal override bool IsDefinedInSourceTree(
+            SyntaxTree tree,
+            TextSpan? definedWithinSpan,
+            CancellationToken cancellationToken
+        )
         {
             if (_declaration.SyntaxReference.SyntaxTree == tree)
             {
@@ -264,7 +338,11 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
                 {
                     var span = definedWithinSpan.GetValueOrDefault();
 
-                    foreach (var global in ((CompilationUnitSyntax)tree.GetRoot(cancellationToken)).Members.OfType<GlobalStatementSyntax>())
+                    foreach (
+                        var global in (
+                            (CompilationUnitSyntax)tree.GetRoot(cancellationToken)
+                        ).Members.OfType<GlobalStatementSyntax>()
+                    )
                     {
                         cancellationToken.ThrowIfCancellationRequested();
 
@@ -279,13 +357,20 @@ namespace Microsoft.CodeAnalysis.CSharp.Symbols
             return false;
         }
 
-        public SyntaxNode ReturnTypeSyntax => CompilationUnit.Members.First(m => m.Kind() == SyntaxKind.GlobalStatement);
+        public SyntaxNode ReturnTypeSyntax =>
+            CompilationUnit.Members.First(m => m.Kind() == SyntaxKind.GlobalStatement);
 
-        private static bool IsNullableAnalysisEnabled(CSharpCompilation compilation, CompilationUnitSyntax syntax)
+        private static bool IsNullableAnalysisEnabled(
+            CSharpCompilation compilation,
+            CompilationUnitSyntax syntax
+        )
         {
             foreach (var member in syntax.Members)
             {
-                if (member.Kind() == SyntaxKind.GlobalStatement && compilation.IsNullableAnalysisEnabledIn(member))
+                if (
+                    member.Kind() == SyntaxKind.GlobalStatement
+                    && compilation.IsNullableAnalysisEnabledIn(member)
+                )
                 {
                     return true;
                 }

@@ -17,30 +17,44 @@ namespace Microsoft.VisualStudio.LanguageServices.InheritanceMargin
             GetInheritanceMarginMembers,
         }
 
-        public static void LogGenerateBackgroundInheritanceInfo(TimeSpan elapsedTime)
-            => s_histogramLogAggregator.IncreaseCount(
-                ActionInfo.GetInheritanceMarginMembers, Convert.ToDecimal(elapsedTime.TotalMilliseconds));
+        public static void LogGenerateBackgroundInheritanceInfo(TimeSpan elapsedTime) =>
+            s_histogramLogAggregator.IncreaseCount(
+                ActionInfo.GetInheritanceMarginMembers,
+                Convert.ToDecimal(elapsedTime.TotalMilliseconds)
+            );
 
-        public static void LogInheritanceTargetsMenuOpen()
-            => Logger.Log(FunctionId.InheritanceMargin_TargetsMenuOpen, KeyValueLogMessage.Create(LogType.UserAction));
+        public static void LogInheritanceTargetsMenuOpen() =>
+            Logger.Log(
+                FunctionId.InheritanceMargin_TargetsMenuOpen,
+                KeyValueLogMessage.Create(LogType.UserAction)
+            );
 
-        public static void LogNavigateToTarget()
-            => Logger.Log(FunctionId.InheritanceMargin_NavigateToTarget, KeyValueLogMessage.Create(LogType.UserAction));
+        public static void LogNavigateToTarget() =>
+            Logger.Log(
+                FunctionId.InheritanceMargin_NavigateToTarget,
+                KeyValueLogMessage.Create(LogType.UserAction)
+            );
 
         public static void ReportTelemetry()
         {
-            Logger.Log(FunctionId.InheritanceMargin_GetInheritanceMemberItems,
-                KeyValueLogMessage.Create(
-                m =>
+            Logger.Log(
+                FunctionId.InheritanceMargin_GetInheritanceMemberItems,
+                KeyValueLogMessage.Create(m =>
                 {
-                    var histogramLogAggragator = s_histogramLogAggregator.GetValue(ActionInfo.GetInheritanceMarginMembers);
+                    var histogramLogAggragator = s_histogramLogAggregator.GetValue(
+                        ActionInfo.GetInheritanceMarginMembers
+                    );
                     if (histogramLogAggragator != null)
                     {
-                        m[$"{ActionInfo.GetInheritanceMarginMembers}.BucketSize"] = histogramLogAggragator.BucketSize;
-                        m[$"{ActionInfo.GetInheritanceMarginMembers}.BucketCount"] = histogramLogAggragator.BucketCount;
-                        m[$"{ActionInfo.GetInheritanceMarginMembers}.Bucket"] = histogramLogAggragator.GetBucketsAsString();
+                        m[$"{ActionInfo.GetInheritanceMarginMembers}.BucketSize"] =
+                            histogramLogAggragator.BucketSize;
+                        m[$"{ActionInfo.GetInheritanceMarginMembers}.BucketCount"] =
+                            histogramLogAggragator.BucketCount;
+                        m[$"{ActionInfo.GetInheritanceMarginMembers}.Bucket"] =
+                            histogramLogAggragator.GetBucketsAsString();
                     }
-                }));
+                })
+            );
         }
     }
 }

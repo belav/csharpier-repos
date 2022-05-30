@@ -39,11 +39,18 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
                 dataBuilder.AddSymbol(this);
 
                 EcmaModule targetModule = factory.SignatureContext.GetTargetModule(_typeDesc);
-                SignatureContext innerContext = dataBuilder.EmitFixup(factory, _fixupKind, targetModule, factory.SignatureContext);
+                SignatureContext innerContext = dataBuilder.EmitFixup(
+                    factory,
+                    _fixupKind,
+                    targetModule,
+                    factory.SignatureContext
+                );
                 dataBuilder.EmitTypeSignature(_typeDesc, innerContext);
 
-                if ((_fixupKind == ReadyToRunFixupKind.Check_TypeLayout) ||
-                    (_fixupKind == ReadyToRunFixupKind.Verify_TypeLayout))
+                if (
+                    (_fixupKind == ReadyToRunFixupKind.Check_TypeLayout)
+                    || (_fixupKind == ReadyToRunFixupKind.Verify_TypeLayout)
+                )
                 {
                     EncodeTypeLayout(dataBuilder, _typeDesc);
                 }
@@ -59,8 +66,12 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             int pointerSize = type.Context.Target.PointerSize;
             int size = defType.InstanceFieldSize.AsInt;
-            int alignment = Internal.JitInterface.CorInfoImpl.GetClassAlignmentRequirementStatic(defType);
-            ReadyToRunTypeLayoutFlags flags = ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment | ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_GCLayout;
+            int alignment = Internal.JitInterface.CorInfoImpl.GetClassAlignmentRequirementStatic(
+                defType
+            );
+            ReadyToRunTypeLayoutFlags flags =
+                ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment
+                | ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_GCLayout;
             if (alignment == pointerSize)
             {
                 flags |= ReadyToRunTypeLayoutFlags.READYTORUN_LAYOUT_Alignment_Native;
@@ -81,18 +92,23 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
 
             if (defType.IsHomogeneousAggregate)
             {
-                ReadyToRunHFAElemType hfaElementType = (defType.ValueTypeShapeCharacteristics & ValueTypeShapeCharacteristics.AggregateMask) switch
+                ReadyToRunHFAElemType hfaElementType = (
+                    defType.ValueTypeShapeCharacteristics
+                    & ValueTypeShapeCharacteristics.AggregateMask
+                ) switch
                 {
                     ValueTypeShapeCharacteristics.Float32Aggregate => ReadyToRunHFAElemType.Float32,
                     ValueTypeShapeCharacteristics.Float64Aggregate => ReadyToRunHFAElemType.Float64,
-                    ValueTypeShapeCharacteristics.Vector64Aggregate => ReadyToRunHFAElemType.Vector64,
+                    ValueTypeShapeCharacteristics.Vector64Aggregate
+                        => ReadyToRunHFAElemType.Vector64,
                     // See MethodTable::GetHFAType
-                    ValueTypeShapeCharacteristics.Vector128Aggregate => ReadyToRunHFAElemType.Vector128,
+                    ValueTypeShapeCharacteristics.Vector128Aggregate
+                        => ReadyToRunHFAElemType.Vector128,
                     _ => throw new NotSupportedException()
                 };
                 dataBuilder.EmitUInt((uint)hfaElementType);
             }
-            
+
             if (alignment != pointerSize)
             {
                 dataBuilder.EmitUInt((uint)alignment);
@@ -140,9 +156,16 @@ namespace ILCompiler.DependencyAnalysis.ReadyToRun
         {
             DependencyList dependencies = new DependencyList();
 
-            if (_typeDesc.HasInstantiation && !_typeDesc.IsGenericDefinition && (factory.CompilationCurrentPhase == 0))
+            if (
+                _typeDesc.HasInstantiation
+                && !_typeDesc.IsGenericDefinition
+                && (factory.CompilationCurrentPhase == 0)
+            )
             {
-                dependencies.Add(factory.AllMethodsOnType(_typeDesc), "Methods on generic type instantiation");
+                dependencies.Add(
+                    factory.AllMethodsOnType(_typeDesc),
+                    "Methods on generic type instantiation"
+                );
             }
             return dependencies;
         }

@@ -17,7 +17,8 @@ public sealed class TemplateTargetExtension : ITemplateTargetExtension
         const string TemplateWriterName = "__razor_template_writer";
 
         context.CodeWriter
-            .Write(ItemParameterName).Write(" => ")
+            .Write(ItemParameterName)
+            .Write(" => ")
             .WriteStartNewObject(TemplateTypeName);
 
         using (context.CodeWriter.BuildAsyncLambda(TemplateWriterName))

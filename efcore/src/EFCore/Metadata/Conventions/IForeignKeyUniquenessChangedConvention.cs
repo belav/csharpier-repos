@@ -18,5 +18,6 @@ public interface IForeignKeyUniquenessChangedConvention : IConvention
     /// <param name="context">Additional information associated with convention execution.</param>
     void ProcessForeignKeyUniquenessChanged(
         IConventionForeignKeyBuilder relationshipBuilder,
-        IConventionContext<bool?> context);
+        IConventionContext<bool?> context
+    );
 }

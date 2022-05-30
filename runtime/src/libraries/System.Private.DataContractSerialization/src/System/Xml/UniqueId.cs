@@ -16,62 +16,307 @@ namespace System.Xml
         private static readonly short[] s_char2val = new short[256]
         {
             /*    0-15 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   16-31 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   32-47 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   48-63 */
-                              0x000, 0x010, 0x020, 0x030, 0x040, 0x050, 0x060, 0x070, 0x080, 0x090, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x000,
+            0x010,
+            0x020,
+            0x030,
+            0x040,
+            0x050,
+            0x060,
+            0x070,
+            0x080,
+            0x090,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   64-79 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   80-95 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*  96-111 */
-                              0x100, 0x0A0, 0x0B0, 0x0C0, 0x0D0, 0x0E0, 0x0F0, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x0A0,
+            0x0B0,
+            0x0C0,
+            0x0D0,
+            0x0E0,
+            0x0F0,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /* 112-127 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
-
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*    0-15 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   16-31 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   32-47 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   48-63 */
-                              0x000, 0x001, 0x002, 0x003, 0x004, 0x005, 0x006, 0x007, 0x008, 0x009, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x000,
+            0x001,
+            0x002,
+            0x003,
+            0x004,
+            0x005,
+            0x006,
+            0x007,
+            0x008,
+            0x009,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   64-79 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*   80-95 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /*  96-111 */
-                              0x100, 0x00A, 0x00B, 0x00C, 0x00D, 0x00E, 0x00F, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x00A,
+            0x00B,
+            0x00C,
+            0x00D,
+            0x00E,
+            0x00F,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
             /* 112-127 */
-                              0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100, 0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
+            0x100,
         };
 
-        public UniqueId() : this(Guid.NewGuid())
-        {
-        }
+        public UniqueId() : this(Guid.NewGuid()) { }
 
-        public UniqueId(Guid guid) : this(guid.ToByteArray())
-        {
-        }
+        public UniqueId(Guid guid) : this(guid.ToByteArray()) { }
 
-        public UniqueId(byte[] guid) : this(guid, 0)
-        {
-        }
+        public UniqueId(byte[] guid) : this(guid, 0) { }
 
         public unsafe UniqueId(byte[] guid, int offset)
         {
             ArgumentNullException.ThrowIfNull(guid);
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > guid.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, guid.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, guid.Length)
+                    )
+                );
             if (guidLength > guid.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentException(SR.Format(SR.XmlArrayTooSmallInput, guidLength), nameof(guid)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentException(
+                        SR.Format(SR.XmlArrayTooSmallInput, guidLength),
+                        nameof(guid)
+                    )
+                );
             fixed (byte* pb = &guid[offset])
             {
                 _idLow = UnsafeGetInt64(pb);
@@ -84,7 +329,9 @@ namespace System.Xml
             ArgumentNullException.ThrowIfNull(value);
 
             if (value.Length == 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.XmlInvalidUniqueId));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.XmlInvalidUniqueId)
+                );
             fixed (char* pch = value)
             {
                 UnsafeParse(pch, value.Length);
@@ -97,15 +344,31 @@ namespace System.Xml
             ArgumentNullException.ThrowIfNull(chars);
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, chars.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                    )
+                );
             if (count < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(count), SR.ValueMustBeNonNegative)
+                );
             if (count > chars.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(count), SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(count),
+                        SR.Format(SR.SizeExceedsRemainingBufferSpace, chars.Length - offset)
+                    )
+                );
             if (count == 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new FormatException(SR.XmlInvalidUniqueId));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new FormatException(SR.XmlInvalidUniqueId)
+                );
             fixed (char* pch = &chars[offset])
             {
                 UnsafeParse(pch, count);
@@ -115,7 +378,6 @@ namespace System.Xml
                 _s = new string(chars, offset, count);
             }
         }
-
 
         public int CharArrayLength
         {
@@ -150,10 +412,22 @@ namespace System.Xml
             // 012345678901234567890123456789012345678901234
             // urn:uuid:xxxxxxxx-xxxx-xxxx-xxxx-xxxxxxxxxxxx
 
-            if (charCount != uuidLength ||
-                chars[0] != 'u' || chars[1] != 'r' || chars[2] != 'n' || chars[3] != ':' ||
-                chars[4] != 'u' || chars[5] != 'u' || chars[6] != 'i' || chars[7] != 'd' || chars[8] != ':' ||
-                chars[17] != '-' || chars[22] != '-' || chars[27] != '-' || chars[32] != '-')
+            if (
+                charCount != uuidLength
+                || chars[0] != 'u'
+                || chars[1] != 'r'
+                || chars[2] != 'n'
+                || chars[3] != ':'
+                || chars[4] != 'u'
+                || chars[5] != 'u'
+                || chars[6] != 'i'
+                || chars[7] != 'd'
+                || chars[8] != ':'
+                || chars[17] != '-'
+                || chars[22] != '-'
+                || chars[27] != '-'
+                || chars[32] != '-'
+            )
             {
                 return;
             }
@@ -173,22 +447,54 @@ namespace System.Xml
                 //   0 1 2 3 4 5 6 7 8 9 0 1 2 3 4 5
                 //   ddccbbaaffeehhgg0011223344556677
 
-                i = UnsafeDecode(_char2val, chars[15], chars[16]); bytes[0] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[13], chars[14]); bytes[1] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[11], chars[12]); bytes[2] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[9], chars[10]); bytes[3] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[20], chars[21]); bytes[4] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[18], chars[19]); bytes[5] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[25], chars[26]); bytes[6] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[23], chars[24]); bytes[7] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[28], chars[29]); bytes[8] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[30], chars[31]); bytes[9] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[33], chars[34]); bytes[10] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[35], chars[36]); bytes[11] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[37], chars[38]); bytes[12] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[39], chars[40]); bytes[13] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[41], chars[42]); bytes[14] = (byte)i; j |= i;
-                i = UnsafeDecode(_char2val, chars[43], chars[44]); bytes[15] = (byte)i; j |= i;
+                i = UnsafeDecode(_char2val, chars[15], chars[16]);
+                bytes[0] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[13], chars[14]);
+                bytes[1] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[11], chars[12]);
+                bytes[2] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[9], chars[10]);
+                bytes[3] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[20], chars[21]);
+                bytes[4] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[18], chars[19]);
+                bytes[5] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[25], chars[26]);
+                bytes[6] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[23], chars[24]);
+                bytes[7] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[28], chars[29]);
+                bytes[8] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[30], chars[31]);
+                bytes[9] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[33], chars[34]);
+                bytes[10] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[35], chars[36]);
+                bytes[11] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[37], chars[38]);
+                bytes[12] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[39], chars[40]);
+                bytes[13] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[41], chars[42]);
+                bytes[14] = (byte)i;
+                j |= i;
+                i = UnsafeDecode(_char2val, chars[43], chars[44]);
+                bytes[15] = (byte)i;
+                j |= i;
 
                 if (j >= 0x100)
                     return;
@@ -205,12 +511,24 @@ namespace System.Xml
             int count = CharArrayLength;
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > chars.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, chars.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, chars.Length)
+                    )
+                );
 
             if (count > chars.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(chars), SR.Format(SR.XmlArrayTooSmallOutput, count)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(chars),
+                        SR.Format(SR.XmlArrayTooSmallOutput, count)
+                    )
+                );
 
             ToSpan(chars.AsSpan(offset, count));
             return count;
@@ -286,12 +604,24 @@ namespace System.Xml
             ArgumentNullException.ThrowIfNull(buffer);
 
             if (offset < 0)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(nameof(offset), SR.ValueMustBeNonNegative)
+                );
             if (offset > buffer.Length)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(offset), SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(offset),
+                        SR.Format(SR.OffsetExceedsBufferSize, buffer.Length)
+                    )
+                );
 
             if (guidLength > buffer.Length - offset)
-                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(new ArgumentOutOfRangeException(nameof(buffer), SR.Format(SR.XmlArrayTooSmallOutput, guidLength)));
+                throw System.Runtime.Serialization.DiagnosticUtility.ExceptionUtility.ThrowHelperError(
+                    new ArgumentOutOfRangeException(
+                        nameof(buffer),
+                        SR.Format(SR.XmlArrayTooSmallOutput, guidLength)
+                    )
+                );
 
             fixed (byte* pb = &buffer[offset])
             {
@@ -303,7 +633,11 @@ namespace System.Xml
         }
 
         public override string ToString() =>
-            _s ??= string.Create(CharArrayLength, this, (destination, thisRef) => thisRef.ToSpan(destination));
+            _s ??= string.Create(
+                CharArrayLength,
+                this,
+                (destination, thisRef) => thisRef.ToSpan(destination)
+            );
 
         public static bool operator ==(UniqueId? id1, UniqueId? id2)
         {

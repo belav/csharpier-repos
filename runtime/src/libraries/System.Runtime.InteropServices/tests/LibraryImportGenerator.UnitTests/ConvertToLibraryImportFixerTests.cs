@@ -10,7 +10,8 @@ using static Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer;
 
 using VerifyCS = LibraryImportGenerator.UnitTests.Verifiers.CSharpCodeFixVerifier<
     Microsoft.Interop.Analyzers.ConvertToLibraryImportAnalyzer,
-    Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer>;
+    Microsoft.Interop.Analyzers.ConvertToLibraryImportFixer
+>;
 
 namespace LibraryImportGenerator.UnitTests
 {
@@ -22,7 +23,8 @@ namespace LibraryImportGenerator.UnitTests
         [Fact]
         public async Task Basic()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -30,22 +32,22 @@ partial class Test
     public static extern int [|Method|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"")]
     public static partial int {{|CS8795:Method|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task Comments()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -59,7 +61,8 @@ partial class Test
     public static extern int [|Method2|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -72,15 +75,14 @@ partial class Test
     // < ... >
     public static partial int {{|CS8795:Method2|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task MultipleAttributes()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -93,7 +95,8 @@ partial class Test
     public static extern int [|Method2|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -105,15 +108,14 @@ partial class Test
     [return: MarshalAs(UnmanagedType.I4)]
     public static partial int {{|CS8795:Method2|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task NamedArguments()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -124,7 +126,8 @@ partial class Test
     public static extern string [|Method2|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -134,15 +137,14 @@ partial class Test
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry"", StringMarshalling = StringMarshalling.Utf16)]
     public static partial string {{|CS8795:Method2|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task RemoveableNamedArguments()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -162,7 +164,8 @@ partial class Test
     public static extern int [|Method4|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -181,15 +184,14 @@ partial class Test
     [LibraryImport(""DoesNotExist"")]
     public static partial int {{|CS8795:Method4|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task ReplaceableExplicitPlatformDefaultCallingConvention()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -197,16 +199,15 @@ partial class Test
     public static extern int [|Method1|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry"")]
     public static partial int {{|CS8795:Method1|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Theory]
@@ -214,9 +215,13 @@ partial class Test
         [InlineData(CallingConvention.StdCall, typeof(CallConvStdcall))]
         [InlineData(CallingConvention.ThisCall, typeof(CallConvThiscall))]
         [InlineData(CallingConvention.FastCall, typeof(CallConvFastcall))]
-        public async Task ReplaceableCallingConvention(CallingConvention callConv, Type callConvType)
+        public async Task ReplaceableCallingConvention(
+            CallingConvention callConv,
+            Type callConvType
+        )
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -224,7 +229,8 @@ partial class Test
     public static extern int [|Method1|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -232,15 +238,14 @@ partial class Test
     [UnmanagedCallConv(CallConvs = new System.Type[] {{ typeof({callConvType.FullName}) }})]
     public static partial int {{|CS8795:Method1|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task PreferredAttributeOrder()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -248,116 +253,157 @@ partial class Test
     public static extern string [|Method|](out int ret);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry"", SetLastError = true, StringMarshalling = StringMarshalling.Utf16)]
     public static partial string {{|CS8795:Method|}}(out int ret);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [InlineData(CharSet.Ansi, 'A')]
         [InlineData(CharSet.Unicode, 'W')]
         [Theory]
-        public async Task ExactSpelling_False_NoAutoCharSet_Provides_No_Suffix_And_Suffix_Fix(CharSet charSet, char suffix)
+        public async Task ExactSpelling_False_NoAutoCharSet_Provides_No_Suffix_And_Suffix_Fix(
+            CharSet charSet,
+            char suffix
+        )
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", ExactSpelling = false, CharSet = CharSet.{charSet})]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceNoSuffix = $@"
+            string fixedSourceNoSuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceNoSuffix, ConvertToLibraryImportKey);
-            string fixedSourceWithSuffix = $@"
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ConvertToLibraryImportKey
+            );
+            string fixedSourceWithSuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry{suffix}"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithSuffix, $"{ConvertToLibraryImportKey}{suffix}");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithSuffix,
+                $"{ConvertToLibraryImportKey}{suffix}"
+            );
         }
 
         [Fact]
         public async Task ExactSpelling_False_AutoCharSet_Provides_No_Suffix_And_Both_Suffix_Fixes()
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", ExactSpelling = false, CharSet = CharSet.Auto)]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceNoSuffix = $@"
+            string fixedSourceNoSuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceNoSuffix, ConvertToLibraryImportKey);
-            string fixedSourceWithASuffix = $@"
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ConvertToLibraryImportKey
+            );
+            string fixedSourceWithASuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""EntryA"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithASuffix, $"{ConvertToLibraryImportKey}A");
-            string fixedSourceWithWSuffix = $@"
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                $"{ConvertToLibraryImportKey}A"
+            );
+            string fixedSourceWithWSuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""EntryW"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithWSuffix, $"{ConvertToLibraryImportKey}W");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithWSuffix,
+                $"{ConvertToLibraryImportKey}W"
+            );
         }
 
         [Fact]
         public async Task ExactSpelling_False_ImplicitAnsiCharSet_Provides_No_Suffix_And_Suffix_Fix()
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [DllImport(""DoesNotExist"", EntryPoint = ""Entry"", ExactSpelling = false)]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceNoSuffix = $@"
+            string fixedSourceNoSuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""Entry"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceNoSuffix, ConvertToLibraryImportKey);
-            string fixedSourceWithASuffix = $@"
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceNoSuffix,
+                ConvertToLibraryImportKey
+            );
+            string fixedSourceWithASuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""EntryA"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithASuffix, $"{ConvertToLibraryImportKey}A");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                $"{ConvertToLibraryImportKey}A"
+            );
         }
 
         [Fact]
         public async Task ExactSpelling_False_ConstantNonLiteralEntryPoint()
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -365,7 +411,8 @@ partial class Test
     [DllImport(""DoesNotExist"", EntryPoint = EntryPoint, CharSet = CharSet.Ansi, ExactSpelling = false)]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceWithASuffix = $@"
+            string fixedSourceWithASuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -373,33 +420,44 @@ partial class Test
     [LibraryImport(""DoesNotExist"", EntryPoint = EntryPoint + ""A"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithASuffix, $"{ConvertToLibraryImportKey}A");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                $"{ConvertToLibraryImportKey}A"
+            );
         }
 
         [Fact]
         public async Task Implicit_ExactSpelling_False_Offers_Suffix_Fix()
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [DllImport(""DoesNotExist"", CharSet = CharSet.Ansi)]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceWithASuffix = $@"
+            string fixedSourceWithASuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""MethodA"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithASuffix, $"{ConvertToLibraryImportKey}A");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                $"{ConvertToLibraryImportKey}A"
+            );
         }
 
         [Fact]
         public async Task ExactSpelling_False_NameOfEntryPoint()
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -407,7 +465,8 @@ partial class Test
     [DllImport(""DoesNotExist"", EntryPoint = nameof(Foo), CharSet = CharSet.Ansi, ExactSpelling = false)]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceWithASuffix = $@"
+            string fixedSourceWithASuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -415,33 +474,44 @@ partial class Test
     [LibraryImport(""DoesNotExist"", EntryPoint = nameof(Foo) + ""A"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithASuffix, $"{ConvertToLibraryImportKey}A");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                $"{ConvertToLibraryImportKey}A"
+            );
         }
 
         [Fact]
         public async Task ExactSpelling_False_ImplicitEntryPointName()
         {
-            string source = $@"
+            string source =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [DllImport(""DoesNotExist"", CharSet = CharSet.Ansi, ExactSpelling = false)]
     public static extern void [|Method|]();
 }}";
-            string fixedSourceWithASuffix = $@"
+            string fixedSourceWithASuffix =
+                $@"
 using System.Runtime.InteropServices;
 partial class Test
 {{
     [LibraryImport(""DoesNotExist"", EntryPoint = ""MethodA"")]
     public static partial void {{|CS8795:Method|}}();
 }}";
-            await VerifyCS.VerifyCodeFixAsync(source, fixedSourceWithASuffix, $"{ConvertToLibraryImportKey}A");
+            await VerifyCS.VerifyCodeFixAsync(
+                source,
+                fixedSourceWithASuffix,
+                $"{ConvertToLibraryImportKey}A"
+            );
         }
 
         [Fact]
         public async Task PreserveSigFalseSignatureModified()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -459,7 +529,8 @@ partial class Test
     }
 }";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System.Runtime.InteropServices;
 partial class Test
 {
@@ -476,15 +547,14 @@ partial class Test
         Marshal.ThrowExceptionForHR(Test.Method(1, out value));
     }
 }";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task MakeEnclosingTypesPartial()
         {
-            string source = @"
+            string source =
+                @"
 using System.Runtime.InteropServices;
 
 class Enclosing
@@ -512,7 +582,8 @@ partial class EnclosingPartial
     }
 }";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @"
+            string fixedSource =
+                @"
 using System.Runtime.InteropServices;
 
 partial class Enclosing
@@ -539,15 +610,14 @@ partial class EnclosingPartial
         public static partial int {|CS8795:Method3|}(out int ret);
     }
 }";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
 
         [Fact]
         public async Task BooleanMarshalAsAdded()
         {
-            string source = @$"
+            string source =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -555,7 +625,8 @@ partial class Test
     public static extern bool [|Method|](bool b);
 }}";
             // Fixed source will have CS8795 (Partial method must have an implementation) without generator run
-            string fixedSource = @$"
+            string fixedSource =
+                @$"
 using System.Runtime.InteropServices;
 partial class Test
 {{
@@ -563,9 +634,7 @@ partial class Test
     [return: MarshalAs(UnmanagedType.Bool)]
     public static partial bool {{|CS8795:Method|}}([MarshalAs(UnmanagedType.Bool)] bool b);
 }}";
-            await VerifyCS.VerifyCodeFixAsync(
-                source,
-                fixedSource);
+            await VerifyCS.VerifyCodeFixAsync(source, fixedSource);
         }
     }
 }

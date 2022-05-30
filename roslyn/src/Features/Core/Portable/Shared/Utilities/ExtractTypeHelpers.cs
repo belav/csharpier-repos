@@ -26,18 +26,39 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
 {
     internal static class ExtractTypeHelpers
     {
-        public static async Task<(Document containingDocument, SyntaxAnnotation typeAnnotation)> AddTypeToExistingFileAsync(Document document, INamedTypeSymbol newType, AnnotatedSymbolMapping symbolMapping, CodeGenerationOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        public static async Task<(Document containingDocument, SyntaxAnnotation typeAnnotation)> AddTypeToExistingFileAsync(
+            Document document,
+            INamedTypeSymbol newType,
+            AnnotatedSymbolMapping symbolMapping,
+            CodeGenerationOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var originalRoot = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
-            var typeDeclaration = originalRoot.GetAnnotatedNodes(symbolMapping.TypeNodeAnnotation).Single();
-            var editor = new SyntaxEditor(originalRoot, symbolMapping.AnnotatedSolution.Workspace.Services);
+            var originalRoot = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
+            var typeDeclaration = originalRoot
+                .GetAnnotatedNodes(symbolMapping.TypeNodeAnnotation)
+                .Single();
+            var editor = new SyntaxEditor(
+                originalRoot,
+                symbolMapping.AnnotatedSolution.Workspace.Services
+            );
 
             var context = new CodeGenerationContext(generateMethodBodies: true);
-            var options = await document.GetCodeGenerationOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetCodeGenerationOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
             var info = options.GetInfo(context, document.Project);
 
             var codeGenService = document.GetRequiredLanguageService<ICodeGenerationService>();
-            var newTypeNode = codeGenService.CreateNamedTypeDeclaration(newType, CodeGenerationDestination.Unspecified, info, cancellationToken)
+            var newTypeNode = codeGenService
+                .CreateNamedTypeDeclaration(
+                    newType,
+                    CodeGenerationDestination.Unspecified,
+                    info,
+                    cancellationToken
+                )
                 .WithAdditionalAnnotations(SimplificationHelpers.SimplifyModuleNameAnnotation);
 
             var typeAnnotation = new SyntaxAnnotation();
@@ -58,65 +79,119 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             INamedTypeSymbol newSymbol,
             Document hintDocument,
             CleanCodeGenerationOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var newDocumentId = DocumentId.CreateNewId(projectId, debugName: fileName);
-            var newDocumentPath = PathUtilities.CombinePaths(PathUtilities.GetDirectoryName(hintDocument.FilePath), fileName);
+            var newDocumentPath = PathUtilities.CombinePaths(
+                PathUtilities.GetDirectoryName(hintDocument.FilePath),
+                fileName
+            );
 
-            var solutionWithInterfaceDocument = solution.AddDocument(newDocumentId, fileName, text: "", folders: folders, filePath: newDocumentPath);
+            var solutionWithInterfaceDocument = solution.AddDocument(
+                newDocumentId,
+                fileName,
+                text: "",
+                folders: folders,
+                filePath: newDocumentPath
+            );
             var newDocument = solutionWithInterfaceDocument.GetRequiredDocument(newDocumentId);
-            var newSemanticModel = await newDocument.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var newSemanticModel = await newDocument
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var context = new CodeGenerationContext(
                 contextLocation: newSemanticModel.SyntaxTree.GetLocation(new TextSpan()),
-                generateMethodBodies: true);
+                generateMethodBodies: true
+            );
 
             // need to remove the root namespace from the containing namespace display because it is implied
             // For C# this does nothing as there is no root namespace (root namespace is empty string)
-            var generateTypeService = newDocument.GetRequiredLanguageService<IGenerateTypeService>();
-            var rootNamespace = generateTypeService.GetRootNamespace(newDocument.Project.CompilationOptions);
-            var index = rootNamespace.IsEmpty() ? -1 : containingNamespaceDisplay.IndexOf(rootNamespace);
+            var generateTypeService =
+                newDocument.GetRequiredLanguageService<IGenerateTypeService>();
+            var rootNamespace = generateTypeService.GetRootNamespace(
+                newDocument.Project.CompilationOptions
+            );
+            var index = rootNamespace.IsEmpty()
+                ? -1
+                : containingNamespaceDisplay.IndexOf(rootNamespace);
             // if we did find the root namespace as the first element, then we remove it
             // this may leave us with an extra "." character at the start, but when we split it shouldn't matter
-            var namespaceWithoutRoot = index == 0
-                ? containingNamespaceDisplay.Remove(index, rootNamespace.Length)
-                : containingNamespaceDisplay;
+            var namespaceWithoutRoot =
+                index == 0
+                    ? containingNamespaceDisplay.Remove(index, rootNamespace.Length)
+                    : containingNamespaceDisplay;
 
-            var namespaceParts = namespaceWithoutRoot.Split('.').Where(s => !string.IsNullOrEmpty(s));
-            var newTypeDocument = await CodeGenerator.AddNamespaceOrTypeDeclarationAsync(
-                new CodeGenerationSolutionContext(
-                    newDocument.Project.Solution,
-                    context,
-                    fallbackOptions),
-                newSemanticModel.GetEnclosingNamespace(0, cancellationToken),
-                newSymbol.GenerateRootNamespaceOrType(namespaceParts.ToArray()),
-                cancellationToken).ConfigureAwait(false);
+            var namespaceParts = namespaceWithoutRoot
+                .Split('.')
+                .Where(s => !string.IsNullOrEmpty(s));
+            var newTypeDocument = await CodeGenerator
+                .AddNamespaceOrTypeDeclarationAsync(
+                    new CodeGenerationSolutionContext(
+                        newDocument.Project.Solution,
+                        context,
+                        fallbackOptions
+                    ),
+                    newSemanticModel.GetEnclosingNamespace(0, cancellationToken),
+                    newSymbol.GenerateRootNamespaceOrType(namespaceParts.ToArray()),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
-            var newCleanupOptions = await newTypeDocument.GetCodeCleanupOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var newCleanupOptions = await newTypeDocument
+                .GetCodeCleanupOptionsAsync(fallbackOptions, cancellationToken)
+                .ConfigureAwait(false);
 
-            var formattingService = newTypeDocument.GetLanguageService<INewDocumentFormattingService>();
+            var formattingService =
+                newTypeDocument.GetLanguageService<INewDocumentFormattingService>();
             if (formattingService is not null)
             {
-                newTypeDocument = await formattingService.FormatNewDocumentAsync(newTypeDocument, hintDocument, newCleanupOptions, cancellationToken).ConfigureAwait(false);
+                newTypeDocument = await formattingService
+                    .FormatNewDocumentAsync(
+                        newTypeDocument,
+                        hintDocument,
+                        newCleanupOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             }
 
-            var syntaxRoot = await newTypeDocument.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var syntaxRoot = await newTypeDocument
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
 
             var typeAnnotation = new SyntaxAnnotation();
             var syntaxFacts = newTypeDocument.GetRequiredLanguageService<ISyntaxFactsService>();
 
             var declarationNode = syntaxRoot.DescendantNodes().First(syntaxFacts.IsTypeDeclaration);
-            var annotatedRoot = syntaxRoot.ReplaceNode(declarationNode, declarationNode.WithAdditionalAnnotations(typeAnnotation));
+            var annotatedRoot = syntaxRoot.ReplaceNode(
+                declarationNode,
+                declarationNode.WithAdditionalAnnotations(typeAnnotation)
+            );
 
             newTypeDocument = newTypeDocument.WithSyntaxRoot(annotatedRoot);
 
-            var simplified = await Simplifier.ReduceAsync(newTypeDocument, newCleanupOptions.SimplifierOptions, cancellationToken).ConfigureAwait(false);
-            var formattedDocument = await Formatter.FormatAsync(simplified, newCleanupOptions.FormattingOptions, cancellationToken).ConfigureAwait(false);
+            var simplified = await Simplifier
+                .ReduceAsync(
+                    newTypeDocument,
+                    newCleanupOptions.SimplifierOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var formattedDocument = await Formatter
+                .FormatAsync(simplified, newCleanupOptions.FormattingOptions, cancellationToken)
+                .ConfigureAwait(false);
 
             return (formattedDocument, typeAnnotation);
         }
 
-        public static string GetTypeParameterSuffix(Document document, SyntaxFormattingOptions formattingOptions, INamedTypeSymbol type, IEnumerable<ISymbol> extractableMembers, CancellationToken cancellationToken)
+        public static string GetTypeParameterSuffix(
+            Document document,
+            SyntaxFormattingOptions formattingOptions,
+            INamedTypeSymbol type,
+            IEnumerable<ISymbol> extractableMembers,
+            CancellationToken cancellationToken
+        )
         {
             var typeParameters = GetRequiredTypeParametersForMembers(type, extractableMembers);
 
@@ -128,20 +203,37 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             var typeParameterNames = typeParameters.SelectAsArray(p => p.Name);
             var syntaxGenerator = SyntaxGenerator.GetGenerator(document);
 
-            return Formatter.Format(syntaxGenerator.SyntaxGeneratorInternal.TypeParameterList(typeParameterNames), document.Project.Solution.Workspace.Services, formattingOptions, cancellationToken).ToString();
+            return Formatter
+                .Format(
+                    syntaxGenerator.SyntaxGeneratorInternal.TypeParameterList(typeParameterNames),
+                    document.Project.Solution.Workspace.Services,
+                    formattingOptions,
+                    cancellationToken
+                )
+                .ToString();
         }
 
-        public static ImmutableArray<ITypeParameterSymbol> GetRequiredTypeParametersForMembers(INamedTypeSymbol type, IEnumerable<ISymbol> includedMembers)
+        public static ImmutableArray<ITypeParameterSymbol> GetRequiredTypeParametersForMembers(
+            INamedTypeSymbol type,
+            IEnumerable<ISymbol> includedMembers
+        )
         {
             var potentialTypeParameters = GetPotentialTypeParameters(type);
 
-            var directlyReferencedTypeParameters = GetDirectlyReferencedTypeParameters(potentialTypeParameters, includedMembers);
+            var directlyReferencedTypeParameters = GetDirectlyReferencedTypeParameters(
+                potentialTypeParameters,
+                includedMembers
+            );
 
-            // The directly referenced TypeParameters may have constraints that reference other 
+            // The directly referenced TypeParameters may have constraints that reference other
             // type parameters.
 
-            var allReferencedTypeParameters = new HashSet<ITypeParameterSymbol>(directlyReferencedTypeParameters);
-            var unanalyzedTypeParameters = new Queue<ITypeParameterSymbol>(directlyReferencedTypeParameters);
+            var allReferencedTypeParameters = new HashSet<ITypeParameterSymbol>(
+                directlyReferencedTypeParameters
+            );
+            var unanalyzedTypeParameters = new Queue<ITypeParameterSymbol>(
+                directlyReferencedTypeParameters
+            );
 
             while (!unanalyzedTypeParameters.IsEmpty())
             {
@@ -151,8 +243,14 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                 {
                     foreach (var originalTypeParameter in potentialTypeParameters)
                     {
-                        if (!allReferencedTypeParameters.Contains(originalTypeParameter) &&
-                            DoesTypeReferenceTypeParameter(constraint, originalTypeParameter, new HashSet<ITypeSymbol>()))
+                        if (
+                            !allReferencedTypeParameters.Contains(originalTypeParameter)
+                            && DoesTypeReferenceTypeParameter(
+                                constraint,
+                                originalTypeParameter,
+                                new HashSet<ITypeSymbol>()
+                            )
+                        )
                         {
                             allReferencedTypeParameters.Add(originalTypeParameter);
                             unanalyzedTypeParameters.Enqueue(originalTypeParameter);
@@ -164,7 +262,9 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return potentialTypeParameters.WhereAsArray(allReferencedTypeParameters.Contains);
         }
 
-        private static ImmutableArray<ITypeParameterSymbol> GetPotentialTypeParameters(INamedTypeSymbol type)
+        private static ImmutableArray<ITypeParameterSymbol> GetPotentialTypeParameters(
+            INamedTypeSymbol type
+        )
         {
             using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(out var typeParameters);
 
@@ -185,12 +285,26 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return typeParameters.ToImmutable();
         }
 
-        private static ImmutableArray<ITypeParameterSymbol> GetDirectlyReferencedTypeParameters(IEnumerable<ITypeParameterSymbol> potentialTypeParameters, IEnumerable<ISymbol> includedMembers)
+        private static ImmutableArray<ITypeParameterSymbol> GetDirectlyReferencedTypeParameters(
+            IEnumerable<ITypeParameterSymbol> potentialTypeParameters,
+            IEnumerable<ISymbol> includedMembers
+        )
         {
-            using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(out var directlyReferencedTypeParameters);
+            using var _ = ArrayBuilder<ITypeParameterSymbol>.GetInstance(
+                out var directlyReferencedTypeParameters
+            );
             foreach (var typeParameter in potentialTypeParameters)
             {
-                if (includedMembers.Any(m => DoesMemberReferenceTypeParameter(m, typeParameter, new HashSet<ITypeSymbol>())))
+                if (
+                    includedMembers.Any(
+                        m =>
+                            DoesMemberReferenceTypeParameter(
+                                m,
+                                typeParameter,
+                                new HashSet<ITypeSymbol>()
+                            )
+                    )
+                )
                 {
                     directlyReferencedTypeParameters.Add(typeParameter);
                 }
@@ -199,7 +313,11 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             return directlyReferencedTypeParameters.ToImmutable();
         }
 
-        private static bool DoesMemberReferenceTypeParameter(ISymbol member, ITypeParameterSymbol typeParameter, HashSet<ITypeSymbol> checkedTypes)
+        private static bool DoesMemberReferenceTypeParameter(
+            ISymbol member,
+            ITypeParameterSymbol typeParameter,
+            HashSet<ITypeSymbol> checkedTypes
+        )
         {
             switch (member.Kind)
             {
@@ -208,23 +326,55 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
                     return DoesTypeReferenceTypeParameter(@event.Type, typeParameter, checkedTypes);
                 case SymbolKind.Method:
                     var method = member as IMethodSymbol;
-                    return method.Parameters.Any(t => DoesTypeReferenceTypeParameter(t.Type, typeParameter, checkedTypes)) ||
-                        method.TypeParameters.Any(t => t.ConstraintTypes.Any(c => DoesTypeReferenceTypeParameter(c, typeParameter, checkedTypes))) ||
-                        DoesTypeReferenceTypeParameter(method.ReturnType, typeParameter, checkedTypes);
+                    return method.Parameters.Any(
+                            t => DoesTypeReferenceTypeParameter(t.Type, typeParameter, checkedTypes)
+                        )
+                        || method.TypeParameters.Any(
+                            t =>
+                                t.ConstraintTypes.Any(
+                                    c =>
+                                        DoesTypeReferenceTypeParameter(
+                                            c,
+                                            typeParameter,
+                                            checkedTypes
+                                        )
+                                )
+                        )
+                        || DoesTypeReferenceTypeParameter(
+                            method.ReturnType,
+                            typeParameter,
+                            checkedTypes
+                        );
                 case SymbolKind.Property:
                     var property = member as IPropertySymbol;
-                    return property.Parameters.Any(t => DoesTypeReferenceTypeParameter(t.Type, typeParameter, checkedTypes)) ||
-                        DoesTypeReferenceTypeParameter(property.Type, typeParameter, checkedTypes);
+                    return property.Parameters.Any(
+                            t => DoesTypeReferenceTypeParameter(t.Type, typeParameter, checkedTypes)
+                        )
+                        || DoesTypeReferenceTypeParameter(
+                            property.Type,
+                            typeParameter,
+                            checkedTypes
+                        );
                 case SymbolKind.Field:
                     var field = member as IFieldSymbol;
                     return DoesTypeReferenceTypeParameter(field.Type, typeParameter, checkedTypes);
                 default:
-                    Debug.Assert(false, string.Format(FeaturesResources.Unexpected_interface_member_kind_colon_0, member.Kind.ToString()));
+                    Debug.Assert(
+                        false,
+                        string.Format(
+                            FeaturesResources.Unexpected_interface_member_kind_colon_0,
+                            member.Kind.ToString()
+                        )
+                    );
                     return false;
             }
         }
 
-        private static bool DoesTypeReferenceTypeParameter(ITypeSymbol type, ITypeParameterSymbol typeParameter, HashSet<ITypeSymbol> checkedTypes)
+        private static bool DoesTypeReferenceTypeParameter(
+            ITypeSymbol type,
+            ITypeParameterSymbol typeParameter,
+            HashSet<ITypeSymbol> checkedTypes
+        )
         {
             if (!checkedTypes.Add(type))
             {
@@ -232,15 +382,20 @@ namespace Microsoft.CodeAnalysis.Shared.Utilities
             }
 
             // We want to ignore nullability when comparing as T and T? both are references to the type parameter
-            if (type.Equals(typeParameter, SymbolEqualityComparer.Default) ||
-                type.GetTypeArguments().Any(t => DoesTypeReferenceTypeParameter(t, typeParameter, checkedTypes)))
+            if (
+                type.Equals(typeParameter, SymbolEqualityComparer.Default)
+                || type.GetTypeArguments()
+                    .Any(t => DoesTypeReferenceTypeParameter(t, typeParameter, checkedTypes))
+            )
             {
                 return true;
             }
 
-            if (type.ContainingType != null &&
-                type.Kind != SymbolKind.TypeParameter &&
-                DoesTypeReferenceTypeParameter(type.ContainingType, typeParameter, checkedTypes))
+            if (
+                type.ContainingType != null
+                && type.Kind != SymbolKind.TypeParameter
+                && DoesTypeReferenceTypeParameter(type.ContainingType, typeParameter, checkedTypes)
+            )
             {
                 return true;
             }

@@ -30,8 +30,14 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
         public const string CS1660 = nameof(CS1660); // CS1660: Cannot convert lambda expression to type 'string[]' because it is not a delegate type
         public const string CS7036 = nameof(CS7036); // CS7036: There is no argument given that corresponds to the required formal parameter 'v' of 'C.C(int)'
 
-        public static readonly ImmutableArray<string> AllDiagnosticIds =
-            ImmutableArray.Create(CS0122, CS1729, CS1739, CS1503, CS1660, CS7036);
+        public static readonly ImmutableArray<string> AllDiagnosticIds = ImmutableArray.Create(
+            CS0122,
+            CS1729,
+            CS1739,
+            CS1503,
+            CS1660,
+            CS7036
+        );
 
         public static readonly ImmutableArray<string> TooManyArgumentsDiagnosticIds =
             ImmutableArray.Create(CS1729);
@@ -47,35 +53,58 @@ namespace Microsoft.CodeAnalysis.CSharp.GenerateConstructor
     /// constructors.  Parameters for the constructor will be picked in a manner similar to Generate-
     /// Method.  However, this type will also attempt to hook up those parameters to existing fields
     /// and properties, or pass them to a this/base constructor if available.
-    /// 
-    /// Importantly, this type is not responsible for generating constructors for a type based on 
+    ///
+    /// Importantly, this type is not responsible for generating constructors for a type based on
     /// the user selecting some fields/properties of that type.  Nor is it responsible for generating
     /// derived class constructors for all unmatched base class constructors in a type hierarchy.
     /// </summary>
-    [ExportCodeFixProvider(LanguageNames.CSharp, Name = PredefinedCodeFixProviderNames.GenerateConstructor), Shared]
+    [
+        ExportCodeFixProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeFixProviderNames.GenerateConstructor
+        ),
+        Shared
+    ]
     [ExtensionOrder(After = PredefinedCodeFixProviderNames.FullyQualify)]
     internal class GenerateConstructorCodeFixProvider : AbstractGenerateMemberCodeFixProvider
     {
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public GenerateConstructorCodeFixProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public GenerateConstructorCodeFixProvider() { }
 
-        public override ImmutableArray<string> FixableDiagnosticIds => GenerateConstructorDiagnosticIds.AllDiagnosticIds;
+        public override ImmutableArray<string> FixableDiagnosticIds =>
+            GenerateConstructorDiagnosticIds.AllDiagnosticIds;
 
         protected override Task<ImmutableArray<CodeAction>> GetCodeActionsAsync(
-            Document document, SyntaxNode node, CleanCodeGenerationOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            SyntaxNode node,
+            CleanCodeGenerationOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             var service = document.GetLanguageService<IGenerateConstructorService>();
-            return service.GenerateConstructorAsync(document, node, fallbackOptions, cancellationToken);
+            return service.GenerateConstructorAsync(
+                document,
+                node,
+                fallbackOptions,
+                cancellationToken
+            );
         }
 
-        protected override bool IsCandidate(SyntaxNode node, SyntaxToken token, Diagnostic diagnostic)
+        protected override bool IsCandidate(
+            SyntaxNode node,
+            SyntaxToken token,
+            Diagnostic diagnostic
+        )
         {
-            return node is BaseObjectCreationExpressionSyntax or
-                   ConstructorInitializerSyntax or
-                   AttributeSyntax;
+            return node
+                is BaseObjectCreationExpressionSyntax
+                    or ConstructorInitializerSyntax
+                    or AttributeSyntax;
         }
 
         protected override SyntaxNode GetTargetNode(SyntaxNode node)

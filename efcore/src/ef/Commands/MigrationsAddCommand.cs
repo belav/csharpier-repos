@@ -23,7 +23,12 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         protected override int Execute(string[] args)
         {
             using var executor = CreateExecutor(args);
-            var files = executor.AddMigration(_name!.Value!, _outputDir!.Value(), Context!.Value(), _namespace!.Value());
+            var files = executor.AddMigration(
+                _name!.Value!,
+                _outputDir!.Value(),
+                Context!.Value(),
+                _namespace!.Value()
+            );
 
             if (_json!.HasValue())
             {
@@ -40,9 +45,15 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
         private static void ReportJson(IDictionary files)
         {
             Reporter.WriteData("{");
-            Reporter.WriteData("  \"migrationFile\": " + Json.Literal(files["MigrationFile"] as string) + ",");
-            Reporter.WriteData("  \"metadataFile\": " + Json.Literal(files["MetadataFile"] as string) + ",");
-            Reporter.WriteData("  \"snapshotFile\": " + Json.Literal(files["SnapshotFile"] as string));
+            Reporter.WriteData(
+                "  \"migrationFile\": " + Json.Literal(files["MigrationFile"] as string) + ","
+            );
+            Reporter.WriteData(
+                "  \"metadataFile\": " + Json.Literal(files["MetadataFile"] as string) + ","
+            );
+            Reporter.WriteData(
+                "  \"snapshotFile\": " + Json.Literal(files["SnapshotFile"] as string)
+            );
             Reporter.WriteData("}");
         }
     }

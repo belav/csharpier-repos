@@ -23,10 +23,7 @@ namespace Internal.TypeSystem
         [IndexerName("GenericParameters")]
         public TypeDesc this[int index]
         {
-            get
-            {
-                return _genericParameters[index];
-            }
+            get { return _genericParameters[index]; }
         }
 
         public static implicit operator ReadOnlySpan<TypeDesc>(Instantiation instantiation)
@@ -36,18 +33,12 @@ namespace Internal.TypeSystem
 
         public int Length
         {
-            get
-            {
-                return _genericParameters.Length;
-            }
+            get { return _genericParameters.Length; }
         }
 
         public bool IsNull
         {
-            get
-            {
-                return _genericParameters == null;
-            }
+            get { return _genericParameters == null; }
         }
 
         /// <summary>
@@ -56,7 +47,10 @@ namespace Internal.TypeSystem
         /// </summary>
         public int ComputeGenericInstanceHashCode(int genericDefinitionHashCode)
         {
-            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeGenericInstanceHashCode(genericDefinitionHashCode, _genericParameters);
+            return Internal.NativeFormat.TypeHashingAlgorithms.ComputeGenericInstanceHashCode(
+                genericDefinitionHashCode,
+                _genericParameters
+            );
         }
 
         public static readonly Instantiation Empty = new Instantiation(TypeDesc.EmptyTypes);
@@ -97,10 +91,7 @@ namespace Internal.TypeSystem
 
             public TypeDesc Current
             {
-                get
-                {
-                    return _collection[_currentIndex];
-                }
+                get { return _collection[_currentIndex]; }
             }
 
             public bool MoveNext()
@@ -126,12 +117,14 @@ namespace Internal.TypeSystem
             }
             return true;
         }
+
         public override bool Equals(object o)
         {
             if (o is Instantiation inst)
                 return Equals(inst);
             return false;
         }
+
         public override int GetHashCode() => ComputeGenericInstanceHashCode(1);
     }
 }

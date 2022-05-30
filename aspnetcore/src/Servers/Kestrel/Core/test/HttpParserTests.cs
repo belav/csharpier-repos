@@ -22,6 +22,7 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Core.Tests;
 public class HttpParserTests : LoggedTest
 {
     private static readonly KestrelTrace _nullTrace = new KestrelTrace(NullLoggerFactory.Instance);
+
     private KestrelTrace CreateEnabledTrace() => new KestrelTrace(LoggerFactory);
 
     [Theory]
@@ -31,19 +32,22 @@ public class HttpParserTests : LoggedTest
         string expectedMethod,
         string expectedRawTarget,
         string expectedRawPath,
-            // This warns that theory methods should use all of their parameters,
-            // but this method is using a shared data collection with Http1ConnectionTests.TakeStartLineSetsHttpProtocolProperties and others.
+        // This warns that theory methods should use all of their parameters,
+        // but this method is using a shared data collection with Http1ConnectionTests.TakeStartLineSetsHttpProtocolProperties and others.
 #pragma warning disable xUnit1026
-            string expectedDecodedPath,
+        string expectedDecodedPath,
         string expectedQueryString,
 #pragma warning restore xUnit1026
-            string expectedVersion)
+        string expectedVersion
+    )
     {
         var parser = CreateParser(_nullTrace);
         var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(requestLine));
         var requestHandler = new RequestHandler();
 
-        Assert.True(ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+        Assert.True(
+            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
         Assert.Equal(requestHandler.Method, expectedMethod);
         Assert.Equal(requestHandler.Version, expectedVersion);
@@ -62,7 +66,9 @@ public class HttpParserTests : LoggedTest
         var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(requestLine));
         var requestHandler = new RequestHandler();
 
-        Assert.False(ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+        Assert.False(
+            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
     }
 
     [Theory]
@@ -73,7 +79,9 @@ public class HttpParserTests : LoggedTest
         var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(requestLine));
         var requestHandler = new RequestHandler();
 
-        Assert.False(ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+        Assert.False(
+            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
         Assert.Equal(buffer.Start, consumed);
         Assert.True(buffer.Slice(examined).IsEmpty);
@@ -88,11 +96,18 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(() =>
+        var exception = Assert.Throws<BadHttpRequestException>(
+            () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+                ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
-        Assert.Equal(CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(requestLine[..^1].EscapeNonPrintable()), exception.Message);
+        Assert.Equal(
+            CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(
+                requestLine[..^1].EscapeNonPrintable()
+            ),
+            exception.Message
+        );
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
     }
 
@@ -107,11 +122,18 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(() =>
+        var exception = Assert.Throws<BadHttpRequestException>(
+            () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+                ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
-        Assert.Equal(CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(method.EscapeNonPrintable() + @" / HTTP/1.1\x0D"), exception.Message);
+        Assert.Equal(
+            CoreStrings.FormatBadRequest_InvalidRequestLine_Detail(
+                method.EscapeNonPrintable() + @" / HTTP/1.1\x0D"
+            ),
+            exception.Message
+        );
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
     }
 
@@ -126,11 +148,16 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(() =>
+        var exception = Assert.Throws<BadHttpRequestException>(
+            () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+                ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
-        Assert.Equal(CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(httpVersion), exception.Message);
+        Assert.Equal(
+            CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(httpVersion),
+            exception.Message
+        );
         Assert.Equal(StatusCodes.Status505HttpVersionNotsupported, exception.StatusCode);
     }
 
@@ -229,14 +256,17 @@ public class HttpParserTests : LoggedTest
         string expectedHeaderName1,
         string expectedHeaderValue1,
         string expectedHeaderName2,
-        string expectedHeaderValue2)
+        string expectedHeaderValue2
+    )
     {
-        var expectedHeaderNames = expectedHeaderName2 == null
-            ? new[] { expectedHeaderName1 }
-            : new[] { expectedHeaderName1, expectedHeaderName2 };
-        var expectedHeaderValues = expectedHeaderValue2 == null
-            ? new[] { expectedHeaderValue1 }
-            : new[] { expectedHeaderValue1, expectedHeaderValue2 };
+        var expectedHeaderNames =
+            expectedHeaderName2 == null
+                ? new[] { expectedHeaderName1 }
+                : new[] { expectedHeaderName1, expectedHeaderName2 };
+        var expectedHeaderValues =
+            expectedHeaderValue2 == null
+                ? new[] { expectedHeaderValue1 }
+                : new[] { expectedHeaderValue1, expectedHeaderValue2 };
 
         VerifyRawHeaders(rawHeaders, expectedHeaderNames, expectedHeaderValues);
     }
@@ -310,7 +340,10 @@ public class HttpParserTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(RequestHeaderInvalidData))]
-    public void ParseHeadersThrowsOnInvalidRequestHeaders(string rawHeaders, string expectedExceptionMessage)
+    public void ParseHeadersThrowsOnInvalidRequestHeaders(
+        string rawHeaders,
+        string expectedExceptionMessage
+    )
     {
         var parser = CreateParser(CreateEnabledTrace());
         var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(rawHeaders));
@@ -338,9 +371,11 @@ public class HttpParserTests : LoggedTest
         var requestHandler = new RequestHandler();
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        var exception = Assert.Throws<BadHttpRequestException>(() =>
+        var exception = Assert.Throws<BadHttpRequestException>(
+            () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+                ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
         Assert.Equal("Invalid request line: ''", exception.Message);
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
@@ -349,11 +384,16 @@ public class HttpParserTests : LoggedTest
         buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes("GET / HTTP/1.2\r\n"));
 
 #pragma warning disable CS0618 // Type or member is obsolete
-        exception = Assert.Throws<BadHttpRequestException>(() =>
+        exception = Assert.Throws<BadHttpRequestException>(
+            () =>
 #pragma warning restore CS0618 // Type or member is obsolete
-            ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined));
+                ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined)
+        );
 
-        Assert.Equal(CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(string.Empty), exception.Message);
+        Assert.Equal(
+            CoreStrings.FormatBadRequest_UnrecognizedHTTPVersion(string.Empty),
+            exception.Message
+        );
         Assert.Equal(StatusCodes.Status505HttpVersionNotsupported, exception.StatusCode);
 
         // Invalid request header
@@ -367,7 +407,10 @@ public class HttpParserTests : LoggedTest
             parser.ParseHeaders(requestHandler, ref reader);
         });
 
-        Assert.Equal(CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(string.Empty), exception.Message);
+        Assert.Equal(
+            CoreStrings.FormatBadRequest_InvalidRequestHeader_Detail(string.Empty),
+            exception.Message
+        );
         Assert.Equal(StatusCodes.Status400BadRequest, exception.StatusCode);
     }
 
@@ -377,10 +420,17 @@ public class HttpParserTests : LoggedTest
         var parser = CreateParser(_nullTrace);
         var buffer = ReadOnlySequenceFactory.CreateSegments(
             Encoding.ASCII.GetBytes("GET "),
-            Encoding.ASCII.GetBytes("/"));
+            Encoding.ASCII.GetBytes("/")
+        );
 
         var requestHandler = new RequestHandler();
-        var result = ParseRequestLine(parser, requestHandler, buffer, out var consumed, out var examined);
+        var result = ParseRequestLine(
+            parser,
+            requestHandler,
+            buffer,
+            out var consumed,
+            out var examined
+        );
 
         Assert.False(result);
         Assert.Equal(buffer.Start, consumed);
@@ -391,7 +441,26 @@ public class HttpParserTests : LoggedTest
     public void ParseRequestLineTlsOverHttp()
     {
         var parser = CreateParser(_nullTrace);
-        var buffer = ReadOnlySequenceFactory.CreateSegments(new byte[] { 0x16, 0x03, 0x01, 0x02, 0x00, 0x01, 0x00, 0xfc, 0x03, 0x03, 0x03, 0xca, 0xe0, 0xfd, 0x0a });
+        var buffer = ReadOnlySequenceFactory.CreateSegments(
+            new byte[]
+            {
+                0x16,
+                0x03,
+                0x01,
+                0x02,
+                0x00,
+                0x01,
+                0x00,
+                0xfc,
+                0x03,
+                0x03,
+                0x03,
+                0xca,
+                0xe0,
+                0xfd,
+                0x0a
+            }
+        );
 
         var requestHandler = new RequestHandler();
 
@@ -408,7 +477,10 @@ public class HttpParserTests : LoggedTest
 
     [Theory]
     [MemberData(nameof(RequestHeaderInvalidData))]
-    public void ParseHeadersThrowsOnInvalidRequestHeadersWithGratuitouslySplitBuffers(string rawHeaders, string expectedExceptionMessage)
+    public void ParseHeadersThrowsOnInvalidRequestHeadersWithGratuitouslySplitBuffers(
+        string rawHeaders,
+        string expectedExceptionMessage
+    )
     {
         var parser = CreateParser(CreateEnabledTrace());
         var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(rawHeaders);
@@ -430,7 +502,9 @@ public class HttpParserTests : LoggedTest
     public void ParseHeadersWithGratuitouslySplitBuffers()
     {
         var parser = CreateParser(_nullTrace);
-        var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent("Host:\r\nConnection: keep-alive\r\n\r\n");
+        var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(
+            "Host:\r\nConnection: keep-alive\r\n\r\n"
+        );
 
         var requestHandler = new RequestHandler();
         var reader = new SequenceReader<byte>(buffer);
@@ -443,7 +517,9 @@ public class HttpParserTests : LoggedTest
     public void ParseHeadersWithGratuitouslySplitBuffers2()
     {
         var parser = CreateParser(_nullTrace);
-        var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent("A:B\r\nB: C\r\n\r\n");
+        var buffer = BytePerSegmentTestSequenceFactory.Instance.CreateWithContent(
+            "A:B\r\nB: C\r\n\r\n"
+        );
 
         var requestHandler = new RequestHandler();
         var reader = new SequenceReader<byte>(buffer);
@@ -452,7 +528,13 @@ public class HttpParserTests : LoggedTest
         Assert.True(result);
     }
 
-    private bool ParseRequestLine(IHttpParser<RequestHandler> parser, RequestHandler requestHandler, ReadOnlySequence<byte> readableBuffer, out SequencePosition consumed, out SequencePosition examined)
+    private bool ParseRequestLine(
+        IHttpParser<RequestHandler> parser,
+        RequestHandler requestHandler,
+        ReadOnlySequence<byte> readableBuffer,
+        out SequencePosition consumed,
+        out SequencePosition examined
+    )
     {
         var reader = new SequenceReader<byte>(readableBuffer);
         if (parser.ParseRequestLine(requestHandler, ref reader))
@@ -469,13 +551,12 @@ public class HttpParserTests : LoggedTest
         }
     }
 
-    private void VerifyHeader(
-        string headerName,
-        string rawHeaderValue,
-        string expectedHeaderValue)
+    private void VerifyHeader(string headerName, string rawHeaderValue, string expectedHeaderValue)
     {
         var parser = CreateParser(_nullTrace);
-        var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes($"{headerName}:{rawHeaderValue}\r\n"));
+        var buffer = new ReadOnlySequence<byte>(
+            Encoding.ASCII.GetBytes($"{headerName}:{rawHeaderValue}\r\n")
+        );
 
         var requestHandler = new RequestHandler();
         var reader = new SequenceReader<byte>(buffer);
@@ -488,9 +569,16 @@ public class HttpParserTests : LoggedTest
         Assert.True(buffer.Slice(reader.Position).IsEmpty);
     }
 
-    private void VerifyRawHeaders(string rawHeaders, IEnumerable<string> expectedHeaderNames, IEnumerable<string> expectedHeaderValues)
+    private void VerifyRawHeaders(
+        string rawHeaders,
+        IEnumerable<string> expectedHeaderNames,
+        IEnumerable<string> expectedHeaderValues
+    )
     {
-        Assert.True(expectedHeaderNames.Count() == expectedHeaderValues.Count(), $"{nameof(expectedHeaderNames)} and {nameof(expectedHeaderValues)} sizes must match");
+        Assert.True(
+            expectedHeaderNames.Count() == expectedHeaderValues.Count(),
+            $"{nameof(expectedHeaderNames)} and {nameof(expectedHeaderValues)} sizes must match"
+        );
 
         var parser = CreateParser(_nullTrace);
         var buffer = new ReadOnlySequence<byte>(Encoding.ASCII.GetBytes(rawHeaders));
@@ -507,19 +595,26 @@ public class HttpParserTests : LoggedTest
         Assert.True(buffer.Slice(reader.Position).IsEmpty);
     }
 
-    private IHttpParser<RequestHandler> CreateParser(KestrelTrace log) => new HttpParser<RequestHandler>(log.IsEnabled(LogLevel.Information));
+    private IHttpParser<RequestHandler> CreateParser(KestrelTrace log) =>
+        new HttpParser<RequestHandler>(log.IsEnabled(LogLevel.Information));
 
-    public static IEnumerable<object[]> RequestLineValidData => HttpParsingData.RequestLineValidData;
+    public static IEnumerable<object[]> RequestLineValidData =>
+        HttpParsingData.RequestLineValidData;
 
-    public static IEnumerable<object[]> RequestLineIncompleteData => HttpParsingData.RequestLineIncompleteData.Select(requestLine => new[] { requestLine });
+    public static IEnumerable<object[]> RequestLineIncompleteData =>
+        HttpParsingData.RequestLineIncompleteData.Select(requestLine => new[] { requestLine });
 
-    public static IEnumerable<object[]> RequestLineInvalidData => HttpParsingData.RequestLineInvalidData.Select(requestLine => new[] { requestLine });
+    public static IEnumerable<object[]> RequestLineInvalidData =>
+        HttpParsingData.RequestLineInvalidData.Select(requestLine => new[] { requestLine });
 
-    public static IEnumerable<object[]> MethodWithNonTokenCharData => HttpParsingData.MethodWithNonTokenCharData.Select(method => new[] { method });
+    public static IEnumerable<object[]> MethodWithNonTokenCharData =>
+        HttpParsingData.MethodWithNonTokenCharData.Select(method => new[] { method });
 
-    public static TheoryData<string> UnrecognizedHttpVersionData => HttpParsingData.UnrecognizedHttpVersionData;
+    public static TheoryData<string> UnrecognizedHttpVersionData =>
+        HttpParsingData.UnrecognizedHttpVersionData;
 
-    public static IEnumerable<object[]> RequestHeaderInvalidData => HttpParsingData.RequestHeaderInvalidData;
+    public static IEnumerable<object[]> RequestHeaderInvalidData =>
+        HttpParsingData.RequestHeaderInvalidData;
 
     private class RequestHandler : IHttpRequestLineHandler, IHttpHeadersHandler
     {
@@ -539,14 +634,26 @@ public class HttpParserTests : LoggedTest
 
         public void OnHeader(ReadOnlySpan<byte> name, ReadOnlySpan<byte> value)
         {
-            Headers[name.GetAsciiStringNonNullCharacters()] = value.GetAsciiStringNonNullCharacters();
+            Headers[name.GetAsciiStringNonNullCharacters()] =
+                value.GetAsciiStringNonNullCharacters();
         }
 
         void IHttpHeadersHandler.OnHeadersComplete(bool endStream) { }
 
-        public void OnStartLine(HttpMethod method, HttpVersion version, Span<byte> target, Span<byte> path, Span<byte> query, Span<byte> customMethod, bool pathEncoded)
+        public void OnStartLine(
+            HttpMethod method,
+            HttpVersion version,
+            Span<byte> target,
+            Span<byte> path,
+            Span<byte> query,
+            Span<byte> customMethod,
+            bool pathEncoded
+        )
         {
-            Method = method != HttpMethod.Custom ? HttpUtilities.MethodToString(method) : customMethod.GetAsciiStringNonNullCharacters();
+            Method =
+                method != HttpMethod.Custom
+                    ? HttpUtilities.MethodToString(method)
+                    : customMethod.GetAsciiStringNonNullCharacters();
             Version = HttpUtilities.VersionToString(version);
             RawTarget = target.GetAsciiStringNonNullCharacters();
             RawPath = path.GetAsciiStringNonNullCharacters();
@@ -554,7 +661,11 @@ public class HttpParserTests : LoggedTest
             PathEncoded = pathEncoded;
         }
 
-        public void OnStartLine(HttpVersionAndMethod versionAndMethod, TargetOffsetPathLength targetPath, Span<byte> startLine)
+        public void OnStartLine(
+            HttpVersionAndMethod versionAndMethod,
+            TargetOffsetPathLength targetPath,
+            Span<byte> startLine
+        )
         {
             var method = versionAndMethod.Method;
             var version = versionAndMethod.Version;
@@ -564,7 +675,10 @@ public class HttpParserTests : LoggedTest
             var path = target[..targetPath.Length];
             var query = target[targetPath.Length..];
 
-            Method = method != HttpMethod.Custom ? HttpUtilities.MethodToString(method) : customMethod.GetAsciiStringNonNullCharacters();
+            Method =
+                method != HttpMethod.Custom
+                    ? HttpUtilities.MethodToString(method)
+                    : customMethod.GetAsciiStringNonNullCharacters();
             Version = HttpUtilities.VersionToString(version);
             RawTarget = target.GetAsciiStringNonNullCharacters();
             RawPath = path.GetAsciiStringNonNullCharacters();
@@ -586,7 +700,8 @@ public class HttpParserTests : LoggedTest
     // Doesn't put empty blocks in between every byte
     internal class BytePerSegmentTestSequenceFactory : ReadOnlySequenceFactory
     {
-        public static ReadOnlySequenceFactory Instance { get; } = new HttpParserTests.BytePerSegmentTestSequenceFactory();
+        public static ReadOnlySequenceFactory Instance { get; } =
+            new HttpParserTests.BytePerSegmentTestSequenceFactory();
 
         public override ReadOnlySequence<byte> CreateOfSize(int size)
         {

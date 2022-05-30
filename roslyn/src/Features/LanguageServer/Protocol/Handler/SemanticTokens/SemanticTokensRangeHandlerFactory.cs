@@ -22,18 +22,31 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public SemanticTokensRangeHandlerFactory(
             IGlobalOptionService globalOptions,
             IAsynchronousOperationListenerProvider asynchronousOperationListenerProvider,
-            LspWorkspaceRegistrationService lspWorkspaceRegistrationService)
+            LspWorkspaceRegistrationService lspWorkspaceRegistrationService
+        )
         {
             _globalOptions = globalOptions;
             _asyncListenerProvider = asynchronousOperationListenerProvider;
             _lspWorkspaceRegistrationService = lspWorkspaceRegistrationService;
         }
 
-        public ILspService CreateILspService(LspServices lspServices, WellKnownLspServerKinds serverKind)
+        public ILspService CreateILspService(
+            LspServices lspServices,
+            WellKnownLspServerKinds serverKind
+        )
         {
-            var clientCapabilities = lspServices.GetRequiredService<IClientCapabilitiesProvider>().GetClientCapabilities();
-            var notificationManager = lspServices.GetRequiredService<ILanguageServerNotificationManager>();
-            return new SemanticTokensRangeHandler(_globalOptions, _asyncListenerProvider, _lspWorkspaceRegistrationService, notificationManager, clientCapabilities);
+            var clientCapabilities = lspServices
+                .GetRequiredService<IClientCapabilitiesProvider>()
+                .GetClientCapabilities();
+            var notificationManager =
+                lspServices.GetRequiredService<ILanguageServerNotificationManager>();
+            return new SemanticTokensRangeHandler(
+                _globalOptions,
+                _asyncListenerProvider,
+                _lspWorkspaceRegistrationService,
+                notificationManager,
+                clientCapabilities
+            );
         }
     }
 }

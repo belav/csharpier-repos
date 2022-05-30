@@ -20,7 +20,11 @@ namespace System.IO.Compression
         private int _asyncOperations;
 
         // A specific constructor to allow decompression of Deflate64
-        internal DeflateManagedStream(Stream stream, ZipArchiveEntry.CompressionMethodValues method, long uncompressedSize = -1)
+        internal DeflateManagedStream(
+            Stream stream,
+            ZipArchiveEntry.CompressionMethodValues method,
+            long uncompressedSize = -1
+        )
         {
             ArgumentNullException.ThrowIfNull(stream);
 
@@ -29,7 +33,10 @@ namespace System.IO.Compression
 
             Debug.Assert(method == ZipArchiveEntry.CompressionMethodValues.Deflate64);
 
-            _inflater = new InflaterManaged(method == ZipArchiveEntry.CompressionMethodValues.Deflate64, uncompressedSize);
+            _inflater = new InflaterManaged(
+                method == ZipArchiveEntry.CompressionMethodValues.Deflate64,
+                uncompressedSize
+            );
 
             _stream = stream;
             _buffer = new byte[DefaultBufferSize];
@@ -50,10 +57,7 @@ namespace System.IO.Compression
 
         public override bool CanWrite
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override bool CanSeek => false;
@@ -77,9 +81,9 @@ namespace System.IO.Compression
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
             EnsureNotDisposed();
-            return cancellationToken.IsCancellationRequested ?
-                Task.FromCanceled(cancellationToken) :
-                Task.CompletedTask;
+            return cancellationToken.IsCancellationRequested
+                ? Task.FromCanceled(cancellationToken)
+                : Task.CompletedTask;
         }
 
         public override long Seek(long offset, SeekOrigin origin)
@@ -118,7 +122,10 @@ namespace System.IO.Compression
                 if (_inflater.Finished())
                 {
                     // if we finished decompressing, we can't have anything left in the outputwindow.
-                    Debug.Assert(_inflater.AvailableOutput == 0, "We should have copied all stuff out!");
+                    Debug.Assert(
+                        _inflater.AvailableOutput == 0,
+                        "We should have copied all stuff out!"
+                    );
                     break;
                 }
 
@@ -154,16 +161,31 @@ namespace System.IO.Compression
 
         private static void ThrowStreamClosedException()
         {
-            throw new ObjectDisposedException(nameof(DeflateStream), SR.ObjectDisposed_StreamClosed);
+            throw new ObjectDisposedException(
+                nameof(DeflateStream),
+                SR.ObjectDisposed_StreamClosed
+            );
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? asyncCallback, object? asyncState) =>
-            TaskToApm.Begin(ReadAsync(buffer, offset, count, CancellationToken.None), asyncCallback, asyncState);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? asyncCallback,
+            object? asyncState
+        ) =>
+            TaskToApm.Begin(
+                ReadAsync(buffer, offset, count, CancellationToken.None),
+                asyncCallback,
+                asyncState
+            );
 
-        public override int EndRead(IAsyncResult asyncResult) =>
-            TaskToApm.End<int>(asyncResult);
+        public override int EndRead(IAsyncResult asyncResult) => TaskToApm.End<int>(asyncResult);
 
-        private ValueTask<int> ReadAsyncInternal(Memory<byte> buffer, CancellationToken cancellationToken)
+        private ValueTask<int> ReadAsyncInternal(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -206,7 +228,11 @@ namespace System.IO.Compression
             }
         }
 
-        private async ValueTask<int> ReadAsyncCore(ValueTask<int> readTask, Memory<byte> buffer, CancellationToken cancellationToken)
+        private async ValueTask<int> ReadAsyncCore(
+            ValueTask<int> readTask,
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             try
             {
@@ -251,7 +277,12 @@ namespace System.IO.Compression
             }
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             // We use this checking order for compat to earlier versions:
             if (_asyncOperations != 0)
@@ -263,7 +294,10 @@ namespace System.IO.Compression
             return ReadAsyncInternal(buffer.AsMemory(offset, count), cancellationToken).AsTask();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             // We use this checking order for compat to earlier versions:
             if (_asyncOperations != 0)

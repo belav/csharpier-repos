@@ -17,5 +17,9 @@ public interface ITextTemplating : ITextTemplatingSessionHost
     /// <param name="content">The contents of the template file.</param>
     /// <param name="callback">The callback used to process errors and information.</param>
     /// <returns>The output.</returns>
-    string ProcessTemplate(string inputFile, string content, ITextTemplatingCallback? callback = null);
+    string ProcessTemplate(
+        string inputFile,
+        string content,
+        ITextTemplatingCallback? callback = null
+    );
 }

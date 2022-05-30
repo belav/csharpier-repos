@@ -15,16 +15,18 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
         where TTypeSymbol : class, ITypeSymbolInternal
         where TLocalSymbol : class, ILocalSymbolInternal
     {
-        public static readonly MethodDebugInfo<TTypeSymbol, TLocalSymbol> None = new MethodDebugInfo<TTypeSymbol, TLocalSymbol>(
-            ImmutableArray<HoistedLocalScopeRecord>.Empty,
-            ImmutableArray<ImmutableArray<ImportRecord>>.Empty,
-            ImmutableArray<ExternAliasRecord>.Empty,
-            dynamicLocalMap: null,
-            tupleLocalMap: null,
-            defaultNamespaceName: "",
-            localVariableNames: ImmutableArray<string>.Empty,
-            localConstants: ImmutableArray<TLocalSymbol>.Empty,
-            reuseSpan: ILSpan.MaxValue);
+        public static readonly MethodDebugInfo<TTypeSymbol, TLocalSymbol> None =
+            new MethodDebugInfo<TTypeSymbol, TLocalSymbol>(
+                ImmutableArray<HoistedLocalScopeRecord>.Empty,
+                ImmutableArray<ImmutableArray<ImportRecord>>.Empty,
+                ImmutableArray<ExternAliasRecord>.Empty,
+                dynamicLocalMap: null,
+                tupleLocalMap: null,
+                defaultNamespaceName: "",
+                localVariableNames: ImmutableArray<string>.Empty,
+                localConstants: ImmutableArray<TLocalSymbol>.Empty,
+                reuseSpan: ILSpan.MaxValue
+            );
 
         /// <summary>
         /// Hoisted local variable scopes.
@@ -51,7 +53,8 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             string defaultNamespaceName,
             ImmutableArray<string> localVariableNames,
             ImmutableArray<TLocalSymbol> localConstants,
-            ILSpan reuseSpan)
+            ILSpan reuseSpan
+        )
         {
             RoslynDebug.Assert(!importRecordGroups.IsDefault);
             RoslynDebug.Assert(!externAliasRecords.IsDefault);
@@ -71,7 +74,10 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             ReuseSpan = reuseSpan;
         }
 
-        public ImmutableSortedSet<int> GetInScopeHoistedLocalIndices(int ilOffset, ref ILSpan methodContextReuseSpan)
+        public ImmutableSortedSet<int> GetInScopeHoistedLocalIndices(
+            int ilOffset,
+            ref ILSpan methodContextReuseSpan
+        )
         {
             if (HoistedLocalScopeRecords.IsDefaultOrEmpty)
             {
@@ -81,7 +87,14 @@ namespace Microsoft.CodeAnalysis.ExpressionEvaluator
             methodContextReuseSpan = MethodContextReuseConstraints.CalculateReuseSpan(
                 ilOffset,
                 methodContextReuseSpan,
-                HoistedLocalScopeRecords.Select(record => new ILSpan((uint)record.StartOffset, (uint)(record.StartOffset + record.Length))));
+                HoistedLocalScopeRecords.Select(
+                    record =>
+                        new ILSpan(
+                            (uint)record.StartOffset,
+                            (uint)(record.StartOffset + record.Length)
+                        )
+                )
+            );
 
             var scopesBuilder = ArrayBuilder<int>.GetInstance();
             int i = 0;

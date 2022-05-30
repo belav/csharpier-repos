@@ -17,7 +17,11 @@ namespace System
         {
             if (s_specialFolders == null)
             {
-                Interlocked.CompareExchange(ref s_specialFolders, new Dictionary<SpecialFolder, string>(), null);
+                Interlocked.CompareExchange(
+                    ref s_specialFolders,
+                    new Dictionary<SpecialFolder, string>(),
+                    null
+                );
             }
 
             string? path;

@@ -13,20 +13,21 @@ internal static class StringBuilderExtensions
     public static StringBuilder AppendJoin(
         this StringBuilder stringBuilder,
         IEnumerable<string> values,
-        string separator = ", ")
-        => stringBuilder.AppendJoin(values, (sb, value) => sb.Append(value), separator);
+        string separator = ", "
+    ) => stringBuilder.AppendJoin(values, (sb, value) => sb.Append(value), separator);
 
     public static StringBuilder AppendJoin(
         this StringBuilder stringBuilder,
         string separator,
-        params string[] values)
-        => stringBuilder.AppendJoin(values, (sb, value) => sb.Append(value), separator);
+        params string[] values
+    ) => stringBuilder.AppendJoin(values, (sb, value) => sb.Append(value), separator);
 
     public static StringBuilder AppendJoin<T>(
         this StringBuilder stringBuilder,
         IEnumerable<T> values,
         Action<StringBuilder, T> joinAction,
-        string separator = ", ")
+        string separator = ", "
+    )
     {
         var appended = false;
 
@@ -49,7 +50,8 @@ internal static class StringBuilderExtensions
         this StringBuilder stringBuilder,
         IEnumerable<T> values,
         Func<StringBuilder, T, bool> joinFunc,
-        string separator = ", ")
+        string separator = ", "
+    )
     {
         var appended = false;
 
@@ -75,7 +77,8 @@ internal static class StringBuilderExtensions
         IEnumerable<T> values,
         TParam param,
         Action<StringBuilder, T, TParam> joinAction,
-        string separator = ", ")
+        string separator = ", "
+    )
     {
         var appended = false;
 

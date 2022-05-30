@@ -20,11 +20,18 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
     private readonly QuicTransportContext _context;
     private readonly QuicListener _listener;
 
-    public QuicConnectionListener(QuicTransportOptions options, ILogger log, EndPoint endpoint, SslServerAuthenticationOptions sslServerAuthenticationOptions)
+    public QuicConnectionListener(
+        QuicTransportOptions options,
+        ILogger log,
+        EndPoint endpoint,
+        SslServerAuthenticationOptions sslServerAuthenticationOptions
+    )
     {
         if (!QuicImplementationProviders.Default.IsSupported)
         {
-            throw new NotSupportedException("QUIC is not supported or enabled on this platform. See https://aka.ms/aspnet/kestrel/http3reqs for details.");
+            throw new NotSupportedException(
+                "QUIC is not supported or enabled on this platform. See https://aka.ms/aspnet/kestrel/http3reqs for details."
+            );
         }
 
         _log = log;
@@ -35,7 +42,9 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
 
         if (listenEndPoint == null)
         {
-            throw new InvalidOperationException($"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}.");
+            throw new InvalidOperationException(
+                $"QUIC doesn't support listening on the configured endpoint type. Expected {nameof(IPEndPoint)} but got {endpoint.GetType().Name}."
+            );
         }
 
         quicListenerOptions.ServerAuthenticationOptions = sslServerAuthenticationOptions;
@@ -53,7 +62,10 @@ internal sealed class QuicConnectionListener : IMultiplexedConnectionListener, I
 
     public EndPoint EndPoint { get; set; }
 
-    public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(IFeatureCollection? features = null, CancellationToken cancellationToken = default)
+    public async ValueTask<MultiplexedConnectionContext?> AcceptAsync(
+        IFeatureCollection? features = null,
+        CancellationToken cancellationToken = default
+    )
     {
         try
         {

@@ -32,7 +32,8 @@ public readonly record struct ModificationCommandParameters
         bool detailedErrorsEnabled = false,
         IComparer<IUpdateEntry>? comparer = null,
         Func<string>? generateParameterName = null,
-        IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null)
+        IDiagnosticsLogger<DbLoggerCategory.Update>? logger = null
+    )
     {
         Table = table;
         TableName = table.Name;

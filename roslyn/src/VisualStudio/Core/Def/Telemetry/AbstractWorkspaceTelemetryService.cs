@@ -33,23 +33,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
             TelemetrySessionInitialized();
         }
 
-        protected virtual void TelemetrySessionInitialized()
-        {
-        }
+        protected virtual void TelemetrySessionInitialized() { }
 
-        public bool HasActiveSession
-            => CurrentSession != null && CurrentSession.IsOptedIn;
+        public bool HasActiveSession => CurrentSession != null && CurrentSession.IsOptedIn;
 
-        public string? SerializeCurrentSessionSettings()
-            => CurrentSession?.SerializeSettings();
+        public string? SerializeCurrentSessionSettings() => CurrentSession?.SerializeSettings();
 
-        public void RegisterUnexpectedExceptionLogger(TraceSource logger)
-            => FaultReporter.RegisterLogger(logger);
+        public void RegisterUnexpectedExceptionLogger(TraceSource logger) =>
+            FaultReporter.RegisterLogger(logger);
 
-        public void UnregisterUnexpectedExceptionLogger(TraceSource logger)
-            => FaultReporter.UnregisterLogger(logger);
+        public void UnregisterUnexpectedExceptionLogger(TraceSource logger) =>
+            FaultReporter.UnregisterLogger(logger);
 
-        public void ReportApiUsage(HashSet<ISymbol> symbols, Guid solutionSessionId, Guid projectGuid)
+        public void ReportApiUsage(
+            HashSet<ISymbol> symbols,
+            Guid solutionSessionId,
+            Guid projectGuid
+        )
         {
             const string EventName = "vs/compilers/api";
             const string ApiPropertyName = "vs.compilers.api.pii";
@@ -58,31 +58,42 @@ namespace Microsoft.VisualStudio.LanguageServices.Telemetry
 
             var groupByAssembly = symbols.GroupBy(symbol => symbol.ContainingAssembly);
 
-            var apiPerAssembly = groupByAssembly.Select(assemblyGroup => new
-            {
-                // mark all string as PII (customer data)
-                AssemblyName = new TelemetryPiiProperty(assemblyGroup.Key.Identity.Name),
-                AssemblyVersion = assemblyGroup.Key.Identity.Version.ToString(),
-                Namespaces = assemblyGroup.GroupBy(symbol => symbol.ContainingNamespace)
-                    .Select(namespaceGroup =>
+            var apiPerAssembly = groupByAssembly.Select(
+                assemblyGroup =>
+                    new
                     {
-                        var namespaceName = namespaceGroup.Key?.ToString() ?? string.Empty;
+                        // mark all string as PII (customer data)
+                        AssemblyName = new TelemetryPiiProperty(assemblyGroup.Key.Identity.Name),
+                        AssemblyVersion = assemblyGroup.Key.Identity.Version.ToString(),
+                        Namespaces = assemblyGroup
+                            .GroupBy(symbol => symbol.ContainingNamespace)
+                            .Select(namespaceGroup =>
+                            {
+                                var namespaceName = namespaceGroup.Key?.ToString() ?? string.Empty;
 
-                        return new
-                        {
-                            Namespace = new TelemetryPiiProperty(namespaceName),
-                            Symbols = namespaceGroup.Select(symbol => symbol.GetDocumentationCommentId())
-                                .Where(id => id != null)
-                                .Select(id => new TelemetryPiiProperty(id))
-                        };
-                    })
-            });
+                                return new
+                                {
+                                    Namespace = new TelemetryPiiProperty(namespaceName),
+                                    Symbols = namespaceGroup
+                                        .Select(symbol => symbol.GetDocumentationCommentId())
+                                        .Where(id => id != null)
+                                        .Select(id => new TelemetryPiiProperty(id))
+                                };
+                            })
+                    }
+            );
 
             // use telemetry API directly rather than Logger abstraction for PII data
             var telemetryEvent = new TelemetryEvent(EventName);
-            telemetryEvent.Properties[ApiPropertyName] = new TelemetryComplexProperty(apiPerAssembly);
-            telemetryEvent.Properties[SessionIdPropertyName] = new TelemetryPiiProperty(solutionSessionId.ToString("B"));
-            telemetryEvent.Properties[ProjectIdPropertyName] = new TelemetryPiiProperty(projectGuid.ToString("B"));
+            telemetryEvent.Properties[ApiPropertyName] = new TelemetryComplexProperty(
+                apiPerAssembly
+            );
+            telemetryEvent.Properties[SessionIdPropertyName] = new TelemetryPiiProperty(
+                solutionSessionId.ToString("B")
+            );
+            telemetryEvent.Properties[ProjectIdPropertyName] = new TelemetryPiiProperty(
+                projectGuid.ToString("B")
+            );
 
             try
             {

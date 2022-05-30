@@ -66,7 +66,12 @@ public sealed class IndexAttribute : Attribute
             if (value is not null && value.Length != PropertyNames.Count)
             {
                 throw new ArgumentException(
-                    AbstractionsStrings.InvalidNumberOfIndexSortOrderValues(value.Length, PropertyNames.Count), nameof(IsDescending));
+                    AbstractionsStrings.InvalidNumberOfIndexSortOrderValues(
+                        value.Length,
+                        PropertyNames.Count
+                    ),
+                    nameof(IsDescending)
+                );
             }
 
             _isDescending = value;
@@ -76,6 +81,5 @@ public sealed class IndexAttribute : Attribute
     /// <summary>
     ///     Checks whether <see cref="IsUnique" /> has been explicitly set to a value.
     /// </summary>
-    public bool IsUniqueHasValue
-        => _isUnique.HasValue;
+    public bool IsUniqueHasValue => _isUnique.HasValue;
 }

@@ -56,12 +56,18 @@ public abstract class Http3ConnectionBenchmarkBase
         var serviceContext = TestContextFactory.CreateServiceContext(
             serverOptions: new KestrelServerOptions(),
             dateHeaderValueManager: new DateHeaderValueManager(),
-            systemClock: new MockSystemClock());
+            systemClock: new MockSystemClock()
+        );
         serviceContext.DateHeaderValueManager.OnHeartbeat(default);
 
         var mockSystemClock = new Microsoft.AspNetCore.Testing.MockSystemClock();
 
-        _http3 = new Http3InMemory(serviceContext, mockSystemClock, new DefaultTimeoutHandler(), NullLoggerFactory.Instance);
+        _http3 = new Http3InMemory(
+            serviceContext,
+            mockSystemClock,
+            new DefaultTimeoutHandler(),
+            NullLoggerFactory.Instance
+        );
 
         _http3.InitializeConnectionAsync(ProcessRequest).GetAwaiter().GetResult();
     }
@@ -99,7 +105,5 @@ public abstract class Http3ConnectionBenchmarkBase
     }
 
     [GlobalCleanup]
-    public void Dispose()
-    {
-    }
+    public void Dispose() { }
 }

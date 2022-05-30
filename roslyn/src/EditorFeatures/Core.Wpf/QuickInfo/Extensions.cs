@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// clone content of <paramref name="sourceText"/> to new <see cref="ITextBuffer"/>
         /// with <see cref="ContentTypeNames.RoslynContentType"/>
         /// </summary>
-        public static ITextBuffer CreateTextBufferWithRoslynContentType(this SourceText sourceText, Workspace workspace)
+        public static ITextBuffer CreateTextBufferWithRoslynContentType(
+            this SourceText sourceText,
+            Workspace workspace
+        )
         {
             var cloneService = workspace.Services.GetService<ITextBufferCloneService>();
             return cloneService.CloneWithRoslynContentType(sourceText);
@@ -29,17 +32,22 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         /// </summary>
         public static ITextBuffer CloneTextBuffer(this Document document, SourceText sourceText)
         {
-            var contentTypeService = document.Project.LanguageServices.GetService<IContentTypeLanguageService>();
+            var contentTypeService =
+                document.Project.LanguageServices.GetService<IContentTypeLanguageService>();
             var contentType = contentTypeService.GetDefaultContentType();
 
-            var cloneService = document.Project.Solution.Workspace.Services.GetService<ITextBufferCloneService>();
+            var cloneService =
+                document.Project.Solution.Workspace.Services.GetService<ITextBufferCloneService>();
             return cloneService.Clone(sourceText, contentType);
         }
 
         /// <summary>
         /// async version of <see cref="CloneTextBuffer(Document, SourceText)"/>
         /// </summary>
-        public static async Task<ITextBuffer> CloneTextBufferAsync(this Document document, CancellationToken cancellationToken)
+        public static async Task<ITextBuffer> CloneTextBufferAsync(
+            this Document document,
+            CancellationToken cancellationToken
+        )
         {
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return CloneTextBuffer(document, sourceText);

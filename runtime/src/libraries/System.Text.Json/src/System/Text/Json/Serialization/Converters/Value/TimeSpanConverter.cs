@@ -11,16 +11,27 @@ namespace System.Text.Json.Serialization.Converters
     {
         private const int MinimumTimeSpanFormatLength = 8; // hh:mm:ss
         private const int MaximumTimeSpanFormatLength = 26; // -dddddddd.hh:mm:ss.fffffff
-        private const int MaximumEscapedTimeSpanFormatLength = JsonConstants.MaxExpansionFactorWhileEscaping * MaximumTimeSpanFormatLength;
+        private const int MaximumEscapedTimeSpanFormatLength =
+            JsonConstants.MaxExpansionFactorWhileEscaping * MaximumTimeSpanFormatLength;
 
-        public override TimeSpan Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override TimeSpan Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             if (reader.TokenType != JsonTokenType.String)
             {
                 ThrowHelper.ThrowInvalidOperationException_ExpectedString(reader.TokenType);
             }
 
-            if (!JsonHelpers.IsInRangeInclusive(reader.ValueLength, MinimumTimeSpanFormatLength, MaximumEscapedTimeSpanFormatLength))
+            if (
+                !JsonHelpers.IsInRangeInclusive(
+                    reader.ValueLength,
+                    MinimumTimeSpanFormatLength,
+                    MaximumEscapedTimeSpanFormatLength
+                )
+            )
             {
                 ThrowHelper.ThrowFormatException(DataType.TimeSpan);
             }
@@ -45,7 +56,12 @@ namespace System.Text.Json.Serialization.Converters
                 ThrowHelper.ThrowFormatException(DataType.TimeSpan);
             }
 
-            bool result = Utf8Parser.TryParse(source, out TimeSpan tmpValue, out int bytesConsumed, 'c');
+            bool result = Utf8Parser.TryParse(
+                source,
+                out TimeSpan tmpValue,
+                out int bytesConsumed,
+                'c'
+            );
 
             // Note: Utf8Parser.TryParse will return true for invalid input so
             // long as it starts with an integer. Example: "2021-06-18" or
@@ -60,7 +76,11 @@ namespace System.Text.Json.Serialization.Converters
             return tmpValue;
         }
 
-        public override void Write(Utf8JsonWriter writer, TimeSpan value, JsonSerializerOptions options)
+        public override void Write(
+            Utf8JsonWriter writer,
+            TimeSpan value,
+            JsonSerializerOptions options
+        )
         {
             Span<byte> output = stackalloc byte[MaximumTimeSpanFormatLength];
 

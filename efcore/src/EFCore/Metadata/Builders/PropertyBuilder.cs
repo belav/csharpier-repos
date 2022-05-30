@@ -38,16 +38,14 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <summary>
     ///     The internal builder being used to configure the property.
     /// </summary>
-    IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance
-        => Builder;
+    IConventionPropertyBuilder IInfrastructure<IConventionPropertyBuilder>.Instance => Builder;
 
     private InternalPropertyBuilder Builder { get; }
 
     /// <summary>
     ///     The property being configured.
     /// </summary>
-    public virtual IMutableProperty Metadata
-        => Builder.Metadata;
+    public virtual IMutableProperty Metadata => Builder.Metadata;
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -169,8 +167,7 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// </remarks>
     /// <typeparam name="TGenerator">A type that inherits from <see cref="ValueGenerator" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasValueGenerator<TGenerator>()
-        where TGenerator : ValueGenerator
+    public virtual PropertyBuilder HasValueGenerator<TGenerator>() where TGenerator : ValueGenerator
     {
         Builder.HasValueGenerator(typeof(TGenerator), ConfigurationSource.Explicit);
 
@@ -231,7 +228,9 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// </remarks>
     /// <param name="factory">A delegate that will be used to create value generator instances.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasValueGenerator(Func<IProperty, IEntityType, ValueGenerator> factory)
+    public virtual PropertyBuilder HasValueGenerator(
+        Func<IProperty, IEntityType, ValueGenerator> factory
+    )
     {
         Check.NotNull(factory, nameof(factory));
 
@@ -267,8 +266,7 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <typeparam name="TFactory">A type that inherits from <see cref="ValueGeneratorFactory" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasValueGeneratorFactory<TFactory>()
-        where TFactory : ValueGeneratorFactory
-        => HasValueGeneratorFactory(typeof(TFactory));
+        where TFactory : ValueGeneratorFactory => HasValueGeneratorFactory(typeof(TFactory));
 
     /// <summary>
     ///     Configures the <see cref="ValueGeneratorFactory" /> for creating a <see cref="ValueGenerator" />
@@ -441,8 +439,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// </summary>
     /// <typeparam name="TConversion">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion<TConversion>()
-        => HasConversion(typeof(TConversion));
+    public virtual PropertyBuilder HasConversion<TConversion>() =>
+        HasConversion(typeof(TConversion));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -470,8 +468,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// </summary>
     /// <param name="converter">The converter to use.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(ValueConverter? converter)
-        => HasConversion(converter, null, null);
+    public virtual PropertyBuilder HasConversion(ValueConverter? converter) =>
+        HasConversion(converter, null, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -480,8 +478,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <typeparam name="TConversion">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion<TConversion>(ValueComparer? valueComparer)
-        => HasConversion(typeof(TConversion), valueComparer);
+    public virtual PropertyBuilder HasConversion<TConversion>(ValueComparer? valueComparer) =>
+        HasConversion(typeof(TConversion), valueComparer);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -491,8 +489,10 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="providerComparer">The comparer to use for the provider values.</param>
     /// <typeparam name="TConversion">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion<TConversion>(ValueComparer? valueComparer, ValueComparer? providerComparer)
-        => HasConversion(typeof(TConversion), valueComparer, providerComparer);
+    public virtual PropertyBuilder HasConversion<TConversion>(
+        ValueComparer? valueComparer,
+        ValueComparer? providerComparer
+    ) => HasConversion(typeof(TConversion), valueComparer, providerComparer);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -501,8 +501,10 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="conversionType">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</param>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(Type conversionType, ValueComparer? valueComparer)
-        => HasConversion(conversionType, valueComparer, null);
+    public virtual PropertyBuilder HasConversion(
+        Type conversionType,
+        ValueComparer? valueComparer
+    ) => HasConversion(conversionType, valueComparer, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -512,7 +514,11 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <param name="providerComparer">The comparer to use for the provider values.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(Type conversionType, ValueComparer? valueComparer, ValueComparer? providerComparer)
+    public virtual PropertyBuilder HasConversion(
+        Type conversionType,
+        ValueComparer? valueComparer,
+        ValueComparer? providerComparer
+    )
     {
         Check.NotNull(conversionType, nameof(conversionType));
 
@@ -538,8 +544,10 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="converter">The converter to use.</param>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(ValueConverter? converter, ValueComparer? valueComparer)
-        => HasConversion(converter, valueComparer, null);
+    public virtual PropertyBuilder HasConversion(
+        ValueConverter? converter,
+        ValueComparer? valueComparer
+    ) => HasConversion(converter, valueComparer, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted to and from the database
@@ -549,7 +557,11 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="valueComparer">The comparer to use for values before conversion.</param>
     /// <param name="providerComparer">The comparer to use for the provider values.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(ValueConverter? converter, ValueComparer? valueComparer, ValueComparer? providerComparer)
+    public virtual PropertyBuilder HasConversion(
+        ValueConverter? converter,
+        ValueComparer? valueComparer,
+        ValueComparer? providerComparer
+    )
     {
         Builder.HasConversion(converter, ConfigurationSource.Explicit);
         Builder.HasValueComparer(valueComparer, ConfigurationSource.Explicit);
@@ -566,8 +578,7 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <typeparam name="TComparer">A type that inherits from <see cref="ValueComparer" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasConversion<TConversion, TComparer>()
-        where TComparer : ValueComparer
-        => HasConversion(typeof(TConversion), typeof(TComparer));
+        where TComparer : ValueComparer => HasConversion(typeof(TConversion), typeof(TComparer));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -579,8 +590,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
     public virtual PropertyBuilder HasConversion<TConversion, TComparer, TProviderComparer>()
         where TComparer : ValueComparer
-        where TProviderComparer : ValueComparer
-        => HasConversion(typeof(TConversion), typeof(TComparer), typeof(TProviderComparer));
+        where TProviderComparer : ValueComparer =>
+        HasConversion(typeof(TConversion), typeof(TComparer), typeof(TProviderComparer));
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -589,8 +600,8 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="conversionType">The type to convert to and from or a type that inherits from <see cref="ValueConverter" />.</param>
     /// <param name="comparerType">A type that inherits from <see cref="ValueComparer" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(Type conversionType, Type? comparerType)
-        => HasConversion(conversionType, comparerType, null);
+    public virtual PropertyBuilder HasConversion(Type conversionType, Type? comparerType) =>
+        HasConversion(conversionType, comparerType, null);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -600,7 +611,11 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <param name="comparerType">A type that inherits from <see cref="ValueComparer" />.</param>
     /// <param name="providerComparerType">A type that inherits from <see cref="ValueComparer" /> to use for the provider values.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public virtual PropertyBuilder HasConversion(Type conversionType, Type? comparerType, Type? providerComparerType)
+    public virtual PropertyBuilder HasConversion(
+        Type conversionType,
+        Type? comparerType,
+        Type? providerComparerType
+    )
     {
         Check.NotNull(conversionType, nameof(conversionType));
 
@@ -626,8 +641,7 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
-    public override string? ToString()
-        => base.ToString();
+    public override string? ToString() => base.ToString();
 
     /// <summary>
     ///     Determines whether the specified object is equal to the current object.
@@ -636,8 +650,7 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <returns><see langword="true" /> if the specified object is equal to the current object; otherwise, <see langword="false" />.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectEqualsIsObjectEquals
-    public override bool Equals(object? obj)
-        => base.Equals(obj);
+    public override bool Equals(object? obj) => base.Equals(obj);
 
     /// <summary>
     ///     Serves as the default hash function.
@@ -645,8 +658,7 @@ public class PropertyBuilder : IInfrastructure<IConventionPropertyBuilder>
     /// <returns>A hash code for the current object.</returns>
     [EditorBrowsable(EditorBrowsableState.Never)]
     // ReSharper disable once BaseObjectGetHashCodeCallInGetHashCode
-    public override int GetHashCode()
-        => base.GetHashCode();
+    public override int GetHashCode() => base.GetHashCode();
 
     #endregion
 }
