@@ -87,7 +87,11 @@ internal sealed class SpaProxyMiddleware
 </head>
 <body>
   <h1>Launching the SPA proxy...</h1>
-  <p>This page will automatically redirect to <a href=""{HtmlEncoder.Default.Encode(options.ServerUrl)}"">{HtmlEncoder.Default.Encode(options.ServerUrl)}</a> when the SPA proxy is ready.</p>
+  <p>This page will automatically redirect to <a href=""{HtmlEncoder.Default.Encode(
+                options.ServerUrl
+            )}"">{HtmlEncoder.Default.Encode(
+                options.ServerUrl
+            )}</a> when the SPA proxy is ready.</p>
 </body>
 </html>";
         }

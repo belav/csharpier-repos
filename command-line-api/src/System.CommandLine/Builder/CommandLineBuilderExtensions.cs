@@ -196,7 +196,9 @@ namespace System.CommandLine.Builder
 
                             await dotnetSuggestProcess.CompleteAsync();
 
-                            return $@"{dotnetSuggestProcess.StartInfo.FileName} exited with code {dotnetSuggestProcess.ExitCode}
+                            return $@"{dotnetSuggestProcess
+                                .StartInfo
+                                .FileName} exited with code {dotnetSuggestProcess.ExitCode}
 OUT:
 {stdOut}
 ERR:

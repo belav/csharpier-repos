@@ -385,7 +385,9 @@ internal sealed class Program
                 if (!trustedCertificates.Any())
                 {
                     reporter.Output(
-                        $@"The following certificates were found, but none of them is trusted: {CertificateManager.ToCertificateDescription(certificates)}"
+                        $@"The following certificates were found, but none of them is trusted: {CertificateManager.ToCertificateDescription(
+                            certificates
+                        )}"
                     );
                     return ErrorCertificateNotTrusted;
                 }

@@ -3407,7 +3407,9 @@ namespace System.Text.Json.Serialization.Tests
                 };
 
             string expectedJson =
-                @$"{{ ""{JavaScriptEncoder.Default.Encode(propertyName)}"" : ""derivedClass"", ""Number"" : 42 }}";
+                @$"{{ ""{JavaScriptEncoder.Default.Encode(
+                    propertyName
+                )}"" : ""derivedClass"", ""Number"" : 42 }}";
             string actualJson = await Serializer.SerializeWrapper(value, options);
             JsonTestHelper.AssertJsonEqual(expectedJson, actualJson);
 

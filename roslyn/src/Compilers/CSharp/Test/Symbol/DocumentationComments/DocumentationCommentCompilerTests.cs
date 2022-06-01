@@ -7740,7 +7740,10 @@ class C {{ }}";
     </assembly>
     <members>
         <member name=""T:C"">
-            <!-- Badly formed XML file ""{Path.Combine(TestHelpers.AsXmlCommentText(path), "- - -.xml")}"" cannot be included -->
+            <!-- Badly formed XML file ""{Path.Combine(
+                    TestHelpers.AsXmlCommentText(path),
+                    "- - -.xml"
+                )}"" cannot be included -->
         </member>
     </members>
 </doc>";

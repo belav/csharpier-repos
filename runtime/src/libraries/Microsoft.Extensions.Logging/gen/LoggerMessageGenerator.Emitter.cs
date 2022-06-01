@@ -391,7 +391,9 @@ namespace {lc.Namespace}
                     GenDefineTypes(lm, brackets: true);
 
                     _builder.Append(
-                        @$"({level}, new global::Microsoft.Extensions.Logging.EventId({lm.EventId}, {eventName}), ""{ConvertEndOfLineAndQuotationCharactersToEscapeForm(lm.Message)}"", true); 
+                        @$"({level}, new global::Microsoft.Extensions.Logging.EventId({lm.EventId}, {eventName}), ""{ConvertEndOfLineAndQuotationCharactersToEscapeForm(
+                            lm.Message
+                        )}"", true); 
 "
                     );
                 }

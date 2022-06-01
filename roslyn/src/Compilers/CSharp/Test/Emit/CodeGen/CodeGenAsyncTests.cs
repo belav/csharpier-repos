@@ -3424,7 +3424,9 @@ public {(isStruct ? "struct" : "class")} {builderTypeName}{ofT}
     public void AwaitOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : INotifyCompletion where TStateMachine : IAsyncStateMachine {{ }}
     public void AwaitUnsafeOnCompleted<TAwaiter, TStateMachine>(ref TAwaiter awaiter, ref TStateMachine stateMachine) where TAwaiter : ICriticalNotifyCompletion where TStateMachine : IAsyncStateMachine {{ }}
     public void SetException(System.Exception exception) {{ }}
-    public void SetResult({(genericTypeParameter == null ? "" : genericTypeParameter + " result")}) {{ }}
+    public void SetResult({(
+                genericTypeParameter == null ? "" : genericTypeParameter + " result"
+            )}) {{ }}
     public void SetStateMachine(IAsyncStateMachine stateMachine) {{ }}
     public void Start<TStateMachine>(ref TStateMachine stateMachine) where TStateMachine : IAsyncStateMachine {{ }}
 }}
@@ -3838,12 +3840,29 @@ class Program {{
 
 {AsyncBuilderCode("B0", "T0").Replace("public static B0 Create()", "public static B0 Create()")}
 {AsyncBuilderCode("B1", "T1").Replace("public static B1 Create()", "private static B1 Create()")}
-{AsyncBuilderCode("B2", "T2") .Replace("public static B2 Create() => default(B2);", "public static void Create() { }")}
-{AsyncBuilderCode("B3", "T3") .Replace("public static B3 Create() => default(B3);", "public static B1 Create() => default(B1);")}
-{AsyncBuilderCode("B4", "T4") .Replace("public static B4 Create()", "public static B4 Create(int i)")}
+{AsyncBuilderCode("B2", "T2")
+                    .Replace(
+                        "public static B2 Create() => default(B2);",
+                        "public static void Create() { }"
+                    )}
+{AsyncBuilderCode("B3", "T3")
+                    .Replace(
+                        "public static B3 Create() => default(B3);",
+                        "public static B1 Create() => default(B1);"
+                    )}
+{AsyncBuilderCode("B4", "T4")
+                    .Replace("public static B4 Create()", "public static B4 Create(int i)")}
 {AsyncBuilderCode("B5", "T5").Replace("public static B5 Create()", "public static B5 Create<T>()")}
-{AsyncBuilderCode("B6", "T6") .Replace("public static B6 Create()", "public static B6 Create(object arg = null)")}
-{AsyncBuilderCode("B7", "T7") .Replace("public static B7 Create()", "public static B7 Create(params object[] arg)")}
+{AsyncBuilderCode("B6", "T6")
+                    .Replace(
+                        "public static B6 Create()",
+                        "public static B6 Create(object arg = null)"
+                    )}
+{AsyncBuilderCode("B7", "T7")
+                    .Replace(
+                        "public static B7 Create()",
+                        "public static B7 Create(params object[] arg)"
+                    )}
 {AsyncBuilderCode("B8", "T8").Replace("public static B8 Create()", "public B8 Create()")}
 
 namespace System.Runtime.CompilerServices {{ class AsyncMethodBuilderAttribute : System.Attribute {{ public AsyncMethodBuilderAttribute(System.Type t) {{ }} }} }}
@@ -3936,7 +3955,9 @@ using System.Threading.Tasks;
 
 {AsyncBuilderCode("B1", "T1").Replace("public class B1", "public class B1")}
 {AsyncBuilderCode("B2", "T2").Replace("public class B2", "internal class B2")}
-{AsyncBuilderCode("B3", "T3") .Replace("public class B3", "public class B3") .Replace("public T3 Task { get; }", "internal T3 Task {get; }")}
+{AsyncBuilderCode("B3", "T3")
+                    .Replace("public class B3", "public class B3")
+                    .Replace("public T3 Task { get; }", "internal T3 Task {get; }")}
 {AsyncBuilderCode("B4", "T4").Replace("public class B4", "internal class B4")}
 
 class Program {{

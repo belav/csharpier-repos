@@ -62,12 +62,24 @@ internal sealed class M
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Found_single_assembly_0,
+                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Found_single_assembly_0,
+                            "Microsoft.VisualBasic, Version=10.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
 {string.Format(CSharpEditorResources.Load_from_0, "Microsoft.VisualBasic.dll (net451)")}
 #endif",
                 };
@@ -499,31 +511,73 @@ namespace System
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System.Runtime, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "System.Runtime, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Found_single_assembly_0,
+                            "System.Runtime, Version=4.0.10.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
 {string.Format(CSharpEditorResources.WARN_Version_mismatch_Expected_0_Got_1, "4.0.0.0", "4.0.10.0")}
 {string.Format(CSharpEditorResources.Load_from_0, "System.Runtime.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System.Resources.ResourceManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
-{string.Format(CSharpEditorResources.Could_not_find_by_name_0, "System.Resources.ResourceManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "System.Resources.ResourceManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Could_not_find_by_name_0,
+                            "System.Resources.ResourceManager, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
-{string.Format(CSharpEditorResources.Could_not_find_by_name_0, "System.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "System.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Could_not_find_by_name_0,
+                            "System.Collections, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b03f5f7f11d50a3a"
+                        )}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Found_single_assembly_0,
+                            "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Found_single_assembly_0,
+                            "System.Core, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
 {string.Format(CSharpEditorResources.Load_from_0, "System.Core.v4_0_30319_17929.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Found_single_assembly_0,
+                            "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Could_not_find_by_name_0, "System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                            CSharpEditorResources.Resolve_0,
+                            "System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
+{string.Format(
+                            CSharpEditorResources.Could_not_find_by_name_0,
+                            "System.ComponentModel.Composition, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                        )}
 #endif",
                 };
 

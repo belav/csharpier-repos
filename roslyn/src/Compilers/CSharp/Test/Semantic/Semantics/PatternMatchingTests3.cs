@@ -8454,7 +8454,15 @@ class Q
     static int M(string s) => s switch
     {{
         """" => 0,
-        {Enumerable .Range((int)'A', (int)('z' - 'A') + 1) .Select(x => (char)x) .Aggregate("", (s, c) => s + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
+        {Enumerable
+                    .Range((int)'A', (int)('z' - 'A') + 1)
+                    .Select(x => (char)x)
+                    .Aggregate(
+                        "",
+                        (s, c) =>
+                            s
+                            + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, "
+                    )}
     }};
 }}";
             var compilation = CreateCompilation(
@@ -8479,8 +8487,23 @@ class Q
     static int M(string s) => s switch
     {{
         """" => 0,
-        {Enumerable .Range((int)'A', (int)('z' - 'A') + 1) .Select(x => (char)x) .Aggregate("", (s, c) => s + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
-        {Enumerable .Range(0, 20) .Aggregate("", (s, i) => s + $"{ObjectDisplay.FormatPrimitive(i.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, ")}
+        {Enumerable
+                    .Range((int)'A', (int)('z' - 'A') + 1)
+                    .Select(x => (char)x)
+                    .Aggregate(
+                        "",
+                        (s, c) =>
+                            s
+                            + $"{ObjectDisplay.FormatPrimitive(c.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, "
+                    )}
+        {Enumerable
+                    .Range(0, 20)
+                    .Aggregate(
+                        "",
+                        (s, i) =>
+                            s
+                            + $"{ObjectDisplay.FormatPrimitive(i.ToString(), ObjectDisplayOptions.EscapeNonPrintableCharacters | ObjectDisplayOptions.UseQuotes)} => 0, "
+                    )}
     }};
 }}";
             var compilation = CreateCompilation(

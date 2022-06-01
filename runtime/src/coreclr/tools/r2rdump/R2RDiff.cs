@@ -176,7 +176,10 @@ namespace R2RDump
                 $@"Left file:  {_leftDumper.Reader.Filename} ({_leftDumper.Reader.Image.Length} B)"
             );
             _writer.WriteLine(
-                $@"Right file: {_rightDumper.Reader.Filename} ({_rightDumper.Reader.Image.Length} B)"
+                $@"Right file: {_rightDumper.Reader.Filename} ({_rightDumper
+                    .Reader
+                    .Image
+                    .Length} B)"
             );
             _writer.WriteLine();
         }

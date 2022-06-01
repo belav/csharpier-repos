@@ -131,8 +131,11 @@ namespace System.Diagnostics.CodeAnalysis
                 "System.Exception",
                 exception.Message,
                 (IFormattable)
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
-ISymbol: C (NamedType)")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: TestProject
+ISymbol: C (NamedType)"
+                    )}
 
 {new LazyToString(() => exception.ToString())}
 -----
@@ -144,8 +147,11 @@ ISymbol: C (NamedType)")}
                 "System.Exception",
                 exception.Message,
                 (IFormattable)
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
-ISymbol: C1 (NamedType)")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: TestProject
+ISymbol: C1 (NamedType)"
+                    )}
 
 {new LazyToString(() => exception.ToString())}
 -----
@@ -157,8 +163,11 @@ ISymbol: C1 (NamedType)")}
                 "System.Exception",
                 exception.Message,
                 (IFormattable)
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: TestProject
-ISymbol: C2 (NamedType)")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: TestProject
+ISymbol: C2 (NamedType)"
+                    )}
 
 {new LazyToString(() => exception.ToString())}
 -----
@@ -202,7 +211,23 @@ public class C2
                     "System.Exception",
                     exception.Message,
                     (IFormattable)
-                        $@"{new LazyToString(() => exception.ToString().Substring(0, exception.ToString().IndexOf("---")) + "-----" + Environment.NewLine + Environment.NewLine + string.Format(CodeAnalysisResources.CompilerAnalyzerThrowsDescription, AnalyzerName, exception.ToString() + Environment.NewLine + "-----" + Environment.NewLine))}"
+                        $@"{new LazyToString(
+                            () =>
+                                exception
+                                    .ToString()
+                                    .Substring(0, exception.ToString().IndexOf("---"))
+                                + "-----"
+                                + Environment.NewLine
+                                + Environment.NewLine
+                                + string.Format(
+                                    CodeAnalysisResources.CompilerAnalyzerThrowsDescription,
+                                    AnalyzerName,
+                                    exception.ToString()
+                                        + Environment.NewLine
+                                        + "-----"
+                                        + Environment.NewLine
+                                )
+                        )}"
                 )
                 .WithLocation(1, 1);
 

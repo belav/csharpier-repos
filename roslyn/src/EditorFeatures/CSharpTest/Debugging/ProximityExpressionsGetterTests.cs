@@ -111,7 +111,12 @@ namespace ConsoleApplication1
 {{
     static void Main(string[] args)
     {{
-{string.Join(Environment.NewLine, body.ReplaceLineEndings("\n").Split('\n').Select(line => line == "" ? line : $"        {line}"))}
+{string.Join(
+                        Environment.NewLine,
+                        body.ReplaceLineEndings("\n")
+                            .Split('\n')
+                            .Select(line => line == "" ? line : $"        {line}")
+                    )}
     }}
 }}";
             }

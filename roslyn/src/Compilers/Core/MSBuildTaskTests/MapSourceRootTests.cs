@@ -162,8 +162,16 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
             bool result = task.Execute();
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 $@"
-ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslash, "SourceRoot", "C:")}
-ERROR : {string.Format(ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslash, "SourceRoot", "C")}
+ERROR : {string.Format(
+                    ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslash,
+                    "SourceRoot",
+                    "C:"
+                )}
+ERROR : {string.Format(
+                    ErrorString.MapSourceRoots_PathMustEndWithSlashOrBackslash,
+                    "SourceRoot",
+                    "C"
+                )}
 ",
                 engine.Log
             );

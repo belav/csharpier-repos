@@ -417,7 +417,9 @@ namespace {@namespace}
                 string typeFriendlyName = typeMetadata.TypeInfoPropertyName;
 
                 string metadataInitSource =
-                    $@"_{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(typeCompilableName)}({OptionsInstanceVariableName}, {JsonMetadataServicesTypeRef}.{typeFriendlyName}Converter);";
+                    $@"_{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(
+                        typeCompilableName
+                    )}({OptionsInstanceVariableName}, {JsonMetadataServicesTypeRef}.{typeFriendlyName}Converter);";
 
                 return GenerateForType(typeMetadata, metadataInitSource);
             }
@@ -469,7 +471,9 @@ namespace {@namespace}
 
                 metadataInitSource.Append(
                     $@"
-                    _{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(typeCompilableName)} ({OptionsInstanceVariableName}, converter); "
+                    _{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(
+                        typeCompilableName
+                    )} ({OptionsInstanceVariableName}, converter); "
                 );
 
                 return GenerateForType(typeMetadata, metadataInitSource.ToString());
@@ -491,7 +495,9 @@ namespace {@namespace}
                         : $"underlyingTypeInfo: {underlyingTypeFriendlyName}";
 
                 string metadataInitSource =
-                    @$"_{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(typeCompilableName)}(
+                    @$"_{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(
+                        typeCompilableName
+                    )}(
                         {OptionsInstanceVariableName},
                         {JsonMetadataServicesTypeRef}.GetNullableConverter<{underlyingTypeCompilableName}>({underlyingTypeInfoNamedArg}));
 ";
@@ -923,7 +929,11 @@ private static {JsonPropertyInfoTypeRef}[] {propInitMethodName}({JsonSerializerC
                         { CanUseGetter: true }
                             => $"static (obj) => (({declaringTypeCompilableName})obj).{clrPropertyName}{(memberMetadata.TypeGenerationSpec.CanContainNullableReferenceAnnotations ? "!" : "")}",
                         { CanUseGetter: false, HasJsonInclude: true }
-                            => @$"static (obj) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.Type.Name, memberMetadata.ClrName)}"")",
+                            => @$"static (obj) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(
+                                ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported,
+                                typeGenerationSpec.Type.Name,
+                                memberMetadata.ClrName
+                            )}"")",
                         _ => "null"
                     };
 
@@ -937,7 +947,11 @@ private static {JsonPropertyInfoTypeRef}[] {propInitMethodName}({JsonSerializerC
                         { CanUseSetter: true }
                             => @$"static (obj, value) => (({declaringTypeCompilableName})obj).{clrPropertyName} = value!",
                         { CanUseSetter: false, HasJsonInclude: true }
-                            => @$"static (obj, value) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported, typeGenerationSpec.Type.Name, memberMetadata.ClrName)}"")",
+                            => @$"static (obj, value) => throw new {InvalidOperationExceptionTypeRef}(""{string.Format(
+                                ExceptionMessages.InaccessibleJsonIncludePropertiesNotSupported,
+                                typeGenerationSpec.Type.Name,
+                                memberMetadata.ClrName
+                            )}"")",
                         _ => "null",
                     };
 
@@ -1415,7 +1429,12 @@ public {typeInfoPropertyTypeRef} {typeFriendlyName}
     {{
         if (_{typeFriendlyName} == null)
         {{
-            {WrapWithCheckForCustomConverter(metadataInitSource, typeCompilableName, typeFriendlyName, GetNumberHandlingAsStr(typeMetadata.NumberHandling))}
+            {WrapWithCheckForCustomConverter(
+                    metadataInitSource,
+                    typeCompilableName,
+                    typeFriendlyName,
+                    GetNumberHandlingAsStr(typeMetadata.NumberHandling)
+                )}
         }}
 
         return _{typeFriendlyName};
@@ -1432,7 +1451,9 @@ public {typeInfoPropertyTypeRef} {typeFriendlyName}
                 @$"{JsonConverterTypeRef}? customConverter;
             if ({OptionsInstanceVariableName}.Converters.Count > 0 && (customConverter = {RuntimeCustomConverterFetchingMethodName}(typeof({typeCompilableName}))) != null)
             {{
-                _{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(typeCompilableName)}({OptionsInstanceVariableName}, customConverter);
+                _{typeFriendlyName} = {JsonMetadataServicesTypeRef}.{GetCreateValueInfoMethodRef(
+                    typeCompilableName
+                )}({OptionsInstanceVariableName}, customConverter);
             }}
             else
             {{

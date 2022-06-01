@@ -318,7 +318,10 @@ namespace R2RDump
                     writer.WriteLine($@"EH info, #clauses = {theThis.EHInfo.EHClauses.Count}");
                 else
                     writer.WriteLine(
-                        $@"EH info @ {theThis.EHInfo.RelativeVirtualAddress:X4}, #clauses = {theThis.EHInfo.EHClauses.Count}"
+                        $@"EH info @ {theThis.EHInfo.RelativeVirtualAddress:X4}, #clauses = {theThis
+                            .EHInfo
+                            .EHClauses
+                            .Count}"
                     );
                 theThis.EHInfo.WriteTo(writer, !options.Naked);
                 writer.WriteLine();

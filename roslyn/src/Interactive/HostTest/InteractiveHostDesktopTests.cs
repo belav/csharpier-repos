@@ -874,7 +874,10 @@ Assembly1, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
 
             var error = await ReadErrorOutputToEnd();
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                @$"{initFile.Path}(1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, "Assembly.dll")}",
+                @$"{initFile.Path}(1,1): error CS0006: {string.Format(
+                    CSharpResources.ERR_NoMetadataFile,
+                    "Assembly.dll"
+                )}",
                 error
             );
         }
@@ -953,7 +956,10 @@ Console.Write(""OK"")
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences("", error);
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"{string.Format(InteractiveHostResources.Loading_context_from_0, Path.GetFileName(rspFile.Path))} 
+                $@"{string.Format(
+                    InteractiveHostResources.Loading_context_from_0,
+                    Path.GetFileName(rspFile.Path)
+                )} 
 OK
 ",
                 output
@@ -1030,7 +1036,10 @@ c
             var error = await ReadErrorOutputToEnd();
             Assert.Equal("", error);
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"{string.Format(InteractiveHostResources.Loading_context_from_0, Path.GetFileName(rspFile.Path))}
+                $@"{string.Format(
+                    InteractiveHostResources.Loading_context_from_0,
+                    Path.GetFileName(rspFile.Path)
+                )}
 ""a""
 ""b""
 ""c""
@@ -1045,7 +1054,11 @@ c
             await Execute("nameof(Microsoft.Missing)");
             var error = await ReadErrorOutputToEnd();
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"(1,8): error CS0234: {string.Format(CSharpResources.ERR_DottedTypeNameNotFoundInNS, "Missing", "Microsoft")}",
+                $@"(1,8): error CS0234: {string.Format(
+                    CSharpResources.ERR_DottedTypeNameNotFoundInNS,
+                    "Missing",
+                    "Microsoft"
+                )}",
                 error
             );
 

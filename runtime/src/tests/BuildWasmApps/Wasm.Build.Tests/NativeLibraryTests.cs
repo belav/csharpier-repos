@@ -78,7 +78,10 @@ namespace Wasm.Build.Tests
                                 <PackageReference Include=""SkiaSharp.NativeAssets.WebAssembly"" Version=""2.80.3"" />
 
                                 <NativeFileReference Include=""$(SkiaSharpStaticLibraryPath)\2.0.9\*.a"" />
-                                <WasmFilesToIncludeInFileSystem Include=""{Path.Combine(BuildEnvironment.TestAssetsPath, "mono.png")}"" />
+                                <WasmFilesToIncludeInFileSystem Include=""{Path.Combine(
+                    BuildEnvironment.TestAssetsPath,
+                    "mono.png"
+                )}"" />
                             "
             );
 

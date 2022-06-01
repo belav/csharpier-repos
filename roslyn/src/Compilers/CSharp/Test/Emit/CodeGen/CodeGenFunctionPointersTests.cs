@@ -6280,9 +6280,13 @@ unsafe class C
         _ = ptr1 {op} ptr2;
         _ = ptr1 {op} ptr3;
         _ = ptr1 {op} 1;
-        {(isLogical ? "" : $@"ptr1 {op}= ptr2;
+        {(
+                    isLogical
+                        ? ""
+                        : $@"ptr1 {op}= ptr2;
         ptr1 {op}= ptr3;
-        ptr1 {op}= 1;")}
+        ptr1 {op}= 1;"
+                )}
     }}
 }}"
             );

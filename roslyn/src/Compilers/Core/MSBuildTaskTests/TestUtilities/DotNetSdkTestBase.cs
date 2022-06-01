@@ -128,10 +128,19 @@ public class TestClass
                 $@"<Project>      
   <Target Name=""Test_EvaluateExpressions"">
     <PropertyGroup>
-      {string.Join(Environment.NewLine + "      ", expressions.SelectWithIndex((e, i) => $@"<_Value{i}>{e}</_Value{i}><_Value{i} Condition=""'$(_Value{i})' == ''"">{EmptyValueMarker}</_Value{i}>"))}
+      {string.Join(
+                    Environment.NewLine + "      ",
+                    expressions.SelectWithIndex(
+                        (e, i) =>
+                            $@"<_Value{i}>{e}</_Value{i}><_Value{i} Condition=""'$(_Value{i})' == ''"">{EmptyValueMarker}</_Value{i}>"
+                    )
+                )}
     </PropertyGroup>
     <ItemGroup>
-      <LinesToWrite Include=""{string.Join(";", expressions.SelectWithIndex((e, i) => $"$(_Value{i})"))}""/>
+      <LinesToWrite Include=""{string.Join(
+                    ";",
+                    expressions.SelectWithIndex((e, i) => $"$(_Value{i})")
+                )}""/>
     </ItemGroup>
     <MakeDir Directories=""{Path.GetDirectoryName(outputFile)}"" />
     <WriteLinesToFile File=""{outputFile}""
@@ -204,7 +213,10 @@ public class TestClass
 
             var restoreResult = ProcessUtilities.Run(
                 DotNetPath,
-                $@"msbuild ""{Project.Path}"" /t:restore /bl:{Path.Combine(ProjectDir.Path, "restore.binlog")}",
+                $@"msbuild ""{Project.Path}"" /t:restore /bl:{Path.Combine(
+                    ProjectDir.Path,
+                    "restore.binlog"
+                )}",
                 additionalEnvironmentVars: EnvironmentVariables
             );
             Assert.True(

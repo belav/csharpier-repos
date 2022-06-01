@@ -197,7 +197,9 @@ namespace {lc.Namespace}
                 GenVariableAssignments(lm, nestedIndentation);
                 _builder.Append(
                     $@"
-                {nestedIndentation}return $""{ConvertEndOfLineAndQuotationCharactersToEscapeForm(lm.Message)}"";
+                {nestedIndentation}return $""{ConvertEndOfLineAndQuotationCharactersToEscapeForm(
+                        lm.Message
+                    )}"";
             {nestedIndentation}}}
 "
                 );
@@ -443,7 +445,9 @@ namespace {lc.Namespace}
                     GenDefineTypes(lm, brackets: true);
 
                     _builder.Append(
-                        @$"({level}, new global::Microsoft.Extensions.Logging.EventId({lm.EventId}, {eventName}), ""{ConvertEndOfLineAndQuotationCharactersToEscapeForm(lm.Message)}"", new global::Microsoft.Extensions.Logging.LogDefineOptions() {{ SkipEnabledCheck = true }}); 
+                        @$"({level}, new global::Microsoft.Extensions.Logging.EventId({lm.EventId}, {eventName}), ""{ConvertEndOfLineAndQuotationCharactersToEscapeForm(
+                            lm.Message
+                        )}"", new global::Microsoft.Extensions.Logging.LogDefineOptions() {{ SkipEnabledCheck = true }}); 
 "
                     );
                 }

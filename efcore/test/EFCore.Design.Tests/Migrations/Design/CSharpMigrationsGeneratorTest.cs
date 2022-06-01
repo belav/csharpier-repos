@@ -256,7 +256,9 @@ public class CSharpMigrationsGeneratorTest
         };
 
         var columnMapping =
-            $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_int_mapping"")";
+            $@"{_nl}.{nameof(
+                RelationalPropertyBuilderExtensions.HasColumnType
+            )}(""default_int_mapping"")";
 
         // Add a line here if the code generator is supposed to handle this annotation
         // Note that other tests should be added to check code is generated correctly
@@ -279,28 +281,36 @@ public class CSharpMigrationsGeneratorTest
                 CoreAnnotationNames.ValueConverter,
                 (
                     new ValueConverter<int, long>(v => v, v => (int)v),
-                    $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_long_mapping"")"
+                    $@"{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasColumnType
+                    )}(""default_long_mapping"")"
                 )
             },
             {
                 CoreAnnotationNames.ProviderClrType,
                 (
                     typeof(long),
-                    $@"{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnType)}(""default_long_mapping"")"
+                    $@"{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasColumnType
+                    )}(""default_long_mapping"")"
                 )
             },
             {
                 RelationalAnnotationNames.ColumnName,
                 (
                     "MyColumn",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnName)}(""MyColumn"")"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasColumnName
+                    )}(""MyColumn"")"
                 )
             },
             {
                 RelationalAnnotationNames.ColumnOrder,
                 (
                     1,
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasColumnOrder)}(1)"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasColumnOrder
+                    )}(1)"
                 )
             },
             {
@@ -314,42 +324,54 @@ public class CSharpMigrationsGeneratorTest
                 RelationalAnnotationNames.DefaultValueSql,
                 (
                     "some SQL",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasDefaultValueSql)}(""some SQL"")"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasDefaultValueSql
+                    )}(""some SQL"")"
                 )
             },
             {
                 RelationalAnnotationNames.ComputedColumnSql,
                 (
                     "some SQL",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasComputedColumnSql)}(""some SQL"")"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasComputedColumnSql
+                    )}(""some SQL"")"
                 )
             },
             {
                 RelationalAnnotationNames.DefaultValue,
                 (
                     "1",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasDefaultValue)}(""1"")"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasDefaultValue
+                    )}(""1"")"
                 )
             },
             {
                 RelationalAnnotationNames.IsFixedLength,
                 (
                     true,
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.IsFixedLength)}()"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.IsFixedLength
+                    )}()"
                 )
             },
             {
                 RelationalAnnotationNames.Comment,
                 (
                     "My Comment",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.HasComment)}(""My Comment"")"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.HasComment
+                    )}(""My Comment"")"
                 )
             },
             {
                 RelationalAnnotationNames.Collation,
                 (
                     "Some Collation",
-                    $@"{columnMapping}{_nl}.{nameof(RelationalPropertyBuilderExtensions.UseCollation)}(""Some Collation"")"
+                    $@"{columnMapping}{_nl}.{nameof(
+                        RelationalPropertyBuilderExtensions.UseCollation
+                    )}(""Some Collation"")"
                 )
             },
             {

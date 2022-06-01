@@ -2211,7 +2211,9 @@ public class DefaultTagHelperDescriptorFactoryTest
             $@"
             public class DynamicTestTagHelper : {typeof(AspNetCore.Razor.TagHelpers.TagHelper).FullName}
             {{
-                [{typeof(AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute).FullName}({nameof(AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.DictionaryAttributePrefix)} = ""{prefix}"")]
+                [{typeof(AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute).FullName}({nameof(
+                AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.DictionaryAttributePrefix
+            )} = ""{prefix}"")]
                 public System.Collections.Generic.IDictionary<string, int> SomeAttribute {{ get; set; }}
             }}";
         var syntaxTree = CSharpSyntaxTree.ParseText(text);
@@ -2318,7 +2320,9 @@ public class DefaultTagHelperDescriptorFactoryTest
             $@"
             public class DynamicTestTagHelper : {typeof(AspNetCore.Razor.TagHelpers.TagHelper).FullName}
             {{
-                [{typeof(AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute).FullName}({nameof(AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.DictionaryAttributePrefix)} = ""{prefix}"")]
+                [{typeof(AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute).FullName}({nameof(
+                AspNetCore.Razor.TagHelpers.HtmlAttributeNameAttribute.DictionaryAttributePrefix
+            )} = ""{prefix}"")]
                 public System.Collections.Generic.IDictionary<System.String, System.Int32> InvalidProperty {{ get; set; }}
             }}";
         var syntaxTree = CSharpSyntaxTree.ParseText(text);
@@ -2429,7 +2433,9 @@ public class DefaultTagHelperDescriptorFactoryTest
         name = name.Replace("\n", "\\n").Replace("\r", "\\r").Replace("\"", "\\\"");
         var text =
             $@"
-            [{typeof(AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute).FullName}({nameof(AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.ParentTag)} = ""{name}"")]
+            [{typeof(AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute).FullName}({nameof(
+                AspNetCore.Razor.TagHelpers.HtmlTargetElementAttribute.ParentTag
+            )} = ""{name}"")]
             public class DynamicTestTagHelper : {typeof(AspNetCore.Razor.TagHelpers.TagHelper).FullName}
             {{
             }}";

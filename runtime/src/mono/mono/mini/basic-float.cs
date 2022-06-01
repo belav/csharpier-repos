@@ -38,6 +38,7 @@ class Tests
         return TestDriver.RunTests(typeof(Tests), args);
     }
 #endif
+
     public static int test_0_beq()
     {
         double a = 2.0;

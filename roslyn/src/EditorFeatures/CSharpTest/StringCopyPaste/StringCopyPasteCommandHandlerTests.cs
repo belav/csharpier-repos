@@ -72,10 +72,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.StringCopyPaste
     <Project Language=""C#"" CommonReferences=""true"">
         <Document Markup=""SpansOnly"">{pasteFileMarkup}</Document>
     </Project>
-    {(copyFileMarkup == null ? "" : $@"
+    {(
+                            copyFileMarkup == null
+                                ? ""
+                                : $@"
     <Project Language=""C#"" CommonReferences=""true"">
         <Document Markup=""SpansOnly"">{copyFileMarkup}</Document>
-    </Project>")}
+    </Project>"
+                        )}
 </Workspace>"
                     )
                 );

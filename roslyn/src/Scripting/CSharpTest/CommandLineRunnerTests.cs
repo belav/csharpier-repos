@@ -370,7 +370,10 @@ C<string>.div<bool>(10, 0)
             runner.RunInteractive();
 
             var error =
-                $@"error CS2001: {string.Format(CSharpResources.ERR_FileNotFound, Path.Combine(AppContext.BaseDirectory, "@arg1"))}";
+                $@"error CS2001: {string.Format(
+                    CSharpResources.ERR_FileNotFound,
+                    Path.Combine(AppContext.BaseDirectory, "@arg1")
+                )}";
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 error,
                 runner.Console.Out.ToString()
@@ -564,7 +567,10 @@ C<string>.div<bool>(10, 0)
             Assert.Equal(1, runner.RunInteractive());
 
             var error =
-                $@"error CS2001: {string.Format(CSharpResources.ERR_FileNotFound, Path.Combine(AppContext.BaseDirectory, "a + b"))}";
+                $@"error CS2001: {string.Format(
+                    CSharpResources.ERR_FileNotFound,
+                    Path.Combine(AppContext.BaseDirectory, "a + b")
+                )}";
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 error,
                 runner.Console.Out.ToString()
@@ -641,7 +647,10 @@ C<string>.div<bool>(10, 0)
             Assert.Equal(1, runner.RunInteractive());
 
             var error =
-                $@"error CS0246: {string.Format(CSharpResources.ERR_SingleTypeNameNotFound, "Alpha")}";
+                $@"error CS0246: {string.Format(
+                    CSharpResources.ERR_SingleTypeNameNotFound,
+                    "Alpha"
+                )}";
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 error,
                 runner.Console.Out.ToString()
@@ -665,7 +674,11 @@ C<string>.div<bool>(10, 0)
                 $@"{LogoAndHelpPrompt}
 > nameof(Microsoft.Missing)
 «Red»
-(1,8): error CS0234: {string.Format(CSharpResources.ERR_DottedTypeNameNotFoundInNS, "Missing", "Microsoft")}
+(1,8): error CS0234: {string.Format(
+                    CSharpResources.ERR_DottedTypeNameNotFoundInNS,
+                    "Missing",
+                    "Microsoft"
+                )}
 «Gray»
 > ",
                 runner.Console.Out.ToString()
@@ -854,7 +867,11 @@ X
 SearchPaths {{ }}
 > #load ""a.csx""
 «Red»
-(1,7): error CS1504: {string.Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}
+(1,7): error CS1504: {string.Format(
+                    CSharpResources.ERR_NoSourceFile,
+                    "a.csx",
+                    CSharpResources.CouldNotFindFile
+                )}
 «Gray»
 > SourcePaths.Add(@""{dir.Path}"")
 > #load ""a.csx""
@@ -866,7 +883,11 @@ SearchPaths {{ }}
             );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"(1,7): error CS1504: {string.Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}",
+                $@"(1,7): error CS1504: {string.Format(
+                    CSharpResources.ERR_NoSourceFile,
+                    "a.csx",
+                    CSharpResources.CouldNotFindFile
+                )}",
                 runner.Console.Error.ToString()
             );
         }
@@ -907,7 +928,10 @@ C {{ }}
             );
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
-                $@"(1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, "C.dll")}",
+                $@"(1,1): error CS0006: {string.Format(
+                    CSharpResources.ERR_NoMetadataFile,
+                    "C.dll"
+                )}",
                 runner.Console.Error.ToString()
             );
         }
@@ -1140,7 +1164,13 @@ var l2 = new Lib2();
 > #r ""{file2.Path}""
 > var l2 = new Lib2();
 «Red»
-{string.Format(ScriptingResources.AssemblyAlreadyLoaded, libBaseName, "0.0.0.0", fileBase1.Path, fileBase2.Path)}
+{string.Format(
+                    ScriptingResources.AssemblyAlreadyLoaded,
+                    libBaseName,
+                    "0.0.0.0",
+                    fileBase1.Path,
+                    fileBase2.Path
+                )}
 «Gray»
 > ",
                 runner.Console.Out.ToString()

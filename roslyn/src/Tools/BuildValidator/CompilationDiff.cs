@@ -524,7 +524,9 @@ namespace BuildValidator
                                 .ToString(info.CompressedHash.ToArray())
                                 .Replace("-", "");
                             writer.WriteLine(
-                                $@"\t""{Path.GetFileName(info.SourceTextInfo.OriginalSourceFilePath)}"" - {hashString}"
+                                $@"\t""{Path.GetFileName(
+                                    info.SourceTextInfo.OriginalSourceFilePath
+                                )}"" - {hashString}"
                             );
                         }
                     }
