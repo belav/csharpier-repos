@@ -16,12 +16,16 @@ class Program
         await Task.WhenAll(
             app.RunConnection(HttpTransportType.WebSockets),
             app.RunConnection(HttpTransportType.ServerSentEvents),
-            app.RunConnection(HttpTransportType.LongPolling));
+            app.RunConnection(HttpTransportType.LongPolling)
+        );
     }
 
     private const string ServerUrl = "http://localhost:54543";
 
-    private readonly ConcurrentDictionary<string, Task<string>> _tokens = new ConcurrentDictionary<string, Task<string>>(StringComparer.Ordinal);
+    private readonly ConcurrentDictionary<string, Task<string>> _tokens = new ConcurrentDictionary<
+        string,
+        Task<string>
+    >(StringComparer.Ordinal);
 
     private async Task RunConnection(HttpTransportType transportType)
     {
@@ -29,11 +33,14 @@ class Program
         _tokens[userId] = GetJwtToken(userId);
 
         var hubConnection = new HubConnectionBuilder()
-            .WithUrl(ServerUrl + "/broadcast", options =>
-            {
-                options.Transports = transportType;
-                options.AccessTokenProvider = () => _tokens[userId];
-            })
+            .WithUrl(
+                ServerUrl + "/broadcast",
+                options =>
+                {
+                    options.Transports = transportType;
+                    options.AccessTokenProvider = () => _tokens[userId];
+                }
+            )
             .Build();
 
         var closedTcs = new TaskCompletionSource();
@@ -43,7 +50,10 @@ class Program
             return Task.CompletedTask;
         };
 
-        hubConnection.On<string, string>("Message", (sender, message) => Console.WriteLine($"[{userId}] {sender}: {message}"));
+        hubConnection.On<string, string>(
+            "Message",
+            (sender, message) => Console.WriteLine($"[{userId}] {sender}: {message}")
+        );
         await hubConnection.StartAsync();
         Console.WriteLine($"[{userId}] Connection Started");
 
@@ -81,7 +91,9 @@ class Program
 
     private static async Task<string> GetJwtToken(string userId)
     {
-        var httpResponse = await new HttpClient().GetAsync(ServerUrl + $"/generatetoken?user={userId}");
+        var httpResponse = await new HttpClient().GetAsync(
+            ServerUrl + $"/generatetoken?user={userId}"
+        );
         httpResponse.EnsureSuccessStatusCode();
         return await httpResponse.Content.ReadAsStringAsync();
     }

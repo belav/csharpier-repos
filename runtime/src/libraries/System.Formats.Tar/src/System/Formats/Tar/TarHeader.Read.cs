@@ -74,7 +74,9 @@ namespace System.Formats.Tar
         // If any of the dictionary entries use the name of a standard attribute (not all of them), that attribute's value gets replaced with the one from the dictionary.
         // Unlike the historic header, numeric values in extended attributes are stored using decimal, not octal.
         // Throws if any conversion from string to the expected data type fails.
-        internal void ReplaceNormalAttributesWithGlobalExtended(IReadOnlyDictionary<string, string> gea)
+        internal void ReplaceNormalAttributesWithGlobalExtended(
+            IReadOnlyDictionary<string, string> gea
+        )
         {
             // First step: Insert or replace all the elements in the passed dictionary into the current header's dictionary.
             foreach ((string key, string value) in gea)
@@ -132,9 +134,13 @@ namespace System.Formats.Tar
         // If any of the dictionary entries use the name of a standard attribute, that attribute's value gets replaced with the one from the dictionary.
         // Unlike the historic header, numeric values in extended attributes are stored using decimal, not octal.
         // Throws if any conversion from string to the expected data type fails.
-        internal void ReplaceNormalAttributesWithExtended(IEnumerable<KeyValuePair<string, string>> extendedAttributesEnumerable)
+        internal void ReplaceNormalAttributesWithExtended(
+            IEnumerable<KeyValuePair<string, string>> extendedAttributesEnumerable
+        )
         {
-            Dictionary<string, string> ea = new Dictionary<string, string>(extendedAttributesEnumerable);
+            Dictionary<string, string> ea = new Dictionary<string, string>(
+                extendedAttributesEnumerable
+            );
             if (ea.Count == 0)
             {
                 return;
@@ -222,10 +228,12 @@ namespace System.Formats.Tar
 
             switch (_typeFlag)
             {
-                case TarEntryType.ExtendedAttributes or TarEntryType.GlobalExtendedAttributes:
+                case TarEntryType.ExtendedAttributes
+                or TarEntryType.GlobalExtendedAttributes:
                     ReadExtendedAttributesBlock(archiveStream);
                     break;
-                case TarEntryType.LongLink or TarEntryType.LongPath:
+                case TarEntryType.LongLink
+                or TarEntryType.LongPath:
                     ReadGnuLongPathDataBlock(archiveStream);
                     break;
                 case TarEntryType.BlockDevice:
@@ -317,7 +325,9 @@ namespace System.Formats.Tar
                 return false;
             }
 
-            _size = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.Size, FieldLengths.Size));
+            _size = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.Size, FieldLengths.Size)
+            );
             if (_size < 0)
             {
                 throw new FormatException(string.Format(SR.TarSizeFieldNegative, _name));
@@ -325,32 +335,47 @@ namespace System.Formats.Tar
 
             // Continue with the rest of the fields that require no special checks
 
-            _name = TarHelpers.GetTrimmedUtf8String(buffer.Slice(FieldLocations.Name, FieldLengths.Name));
-            _mode = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.Mode, FieldLengths.Mode));
-            _uid = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.Uid, FieldLengths.Uid));
-            _gid = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.Gid, FieldLengths.Gid));
-            int mTime = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.MTime, FieldLengths.MTime));
+            _name = TarHelpers.GetTrimmedUtf8String(
+                buffer.Slice(FieldLocations.Name, FieldLengths.Name)
+            );
+            _mode = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.Mode, FieldLengths.Mode)
+            );
+            _uid = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.Uid, FieldLengths.Uid)
+            );
+            _gid = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.Gid, FieldLengths.Gid)
+            );
+            int mTime = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.MTime, FieldLengths.MTime)
+            );
             _mTime = TarHelpers.GetDateTimeFromSecondsSinceEpoch(mTime);
             _typeFlag = (TarEntryType)buffer[FieldLocations.TypeFlag];
-            _linkName = TarHelpers.GetTrimmedUtf8String(buffer.Slice(FieldLocations.LinkName, FieldLengths.LinkName));
+            _linkName = TarHelpers.GetTrimmedUtf8String(
+                buffer.Slice(FieldLocations.LinkName, FieldLengths.LinkName)
+            );
 
             if (_format == TarFormat.Unknown)
             {
                 _format = _typeFlag switch
                 {
-                    TarEntryType.ExtendedAttributes or
-                    TarEntryType.GlobalExtendedAttributes => TarFormat.Pax,
+                    TarEntryType.ExtendedAttributes
+                    or TarEntryType.GlobalExtendedAttributes
+                        => TarFormat.Pax,
 
-                    TarEntryType.DirectoryList or
-                    TarEntryType.LongLink or
-                    TarEntryType.LongPath or
-                    TarEntryType.MultiVolume or
-                    TarEntryType.RenamedOrSymlinked or
-                    TarEntryType.SparseFile or
-                    TarEntryType.TapeVolume => TarFormat.Gnu,
+                    TarEntryType.DirectoryList
+                    or TarEntryType.LongLink
+                    or TarEntryType.LongPath
+                    or TarEntryType.MultiVolume
+                    or TarEntryType.RenamedOrSymlinked
+                    or TarEntryType.SparseFile
+                    or TarEntryType.TapeVolume
+                        => TarFormat.Gnu,
 
                     // V7 is the only one that uses 'V7RegularFile'.
-                    TarEntryType.V7RegularFile => TarFormat.V7,
+                    TarEntryType.V7RegularFile
+                        => TarFormat.V7,
 
                     // We can quickly determine the *minimum* possible format if the entry type
                     // is the POSIX 'RegularFile', although later we could upgrade it to PAX or GNU
@@ -419,18 +444,26 @@ namespace System.Formats.Tar
         private void ReadPosixAndGnuSharedAttributes(Span<byte> buffer)
         {
             // Convert the byte arrays
-            _uName = TarHelpers.GetTrimmedAsciiString(buffer.Slice(FieldLocations.UName, FieldLengths.UName));
-            _gName = TarHelpers.GetTrimmedAsciiString(buffer.Slice(FieldLocations.GName, FieldLengths.GName));
+            _uName = TarHelpers.GetTrimmedAsciiString(
+                buffer.Slice(FieldLocations.UName, FieldLengths.UName)
+            );
+            _gName = TarHelpers.GetTrimmedAsciiString(
+                buffer.Slice(FieldLocations.GName, FieldLengths.GName)
+            );
 
             // DevMajor and DevMinor only have values with character devices and block devices.
             // For all other typeflags, the values in these fields are irrelevant.
             if (_typeFlag is TarEntryType.CharacterDevice or TarEntryType.BlockDevice)
             {
                 // Major number for a character device or block device entry.
-                _devMajor = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.DevMajor, FieldLengths.DevMajor));
+                _devMajor = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                    buffer.Slice(FieldLocations.DevMajor, FieldLengths.DevMajor)
+                );
 
                 // Minor number for a character device or block device entry.
-                _devMinor = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.DevMinor, FieldLengths.DevMinor));
+                _devMinor = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                    buffer.Slice(FieldLocations.DevMinor, FieldLengths.DevMinor)
+                );
             }
         }
 
@@ -439,10 +472,14 @@ namespace System.Formats.Tar
         private void ReadGnuAttributes(Span<byte> buffer)
         {
             // Convert byte arrays
-            int aTime = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.ATime, FieldLengths.ATime));
+            int aTime = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.ATime, FieldLengths.ATime)
+            );
             _aTime = TarHelpers.GetDateTimeFromSecondsSinceEpoch(aTime);
 
-            int cTime = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(buffer.Slice(FieldLocations.CTime, FieldLengths.CTime));
+            int cTime = TarHelpers.GetTenBaseNumberFromOctalAsciiChars(
+                buffer.Slice(FieldLocations.CTime, FieldLengths.CTime)
+            );
             _cTime = TarHelpers.GetDateTimeFromSecondsSinceEpoch(cTime);
 
             // TODO: Read the bytes of the currently unsupported GNU fields, in case user wants to write this entry into another GNU archive, they need to be preserved. https://github.com/dotnet/runtime/issues/68230
@@ -452,7 +489,9 @@ namespace System.Formats.Tar
         // Throws if a conversion to an expected data type fails.
         private void ReadUstarAttributes(Span<byte> buffer)
         {
-            _prefix = TarHelpers.GetTrimmedUtf8String(buffer.Slice(FieldLocations.Prefix, FieldLengths.Prefix));
+            _prefix = TarHelpers.GetTrimmedUtf8String(
+                buffer.Slice(FieldLocations.Prefix, FieldLengths.Prefix)
+            );
 
             // In ustar, Prefix is used to store the *leading* path segments of
             // Name, if the full path did not fit in the Name byte array.
@@ -468,7 +507,11 @@ namespace System.Formats.Tar
         // Throws if end of stream is reached or if an attribute is malformed.
         private void ReadExtendedAttributesBlock(Stream archiveStream)
         {
-            Debug.Assert(_typeFlag is TarEntryType.ExtendedAttributes or TarEntryType.GlobalExtendedAttributes);
+            Debug.Assert(
+                _typeFlag
+                    is TarEntryType.ExtendedAttributes
+                        or TarEntryType.GlobalExtendedAttributes
+            );
 
             // Regardless of the size, this entry should always have a valid dictionary object
             _extendedAttributes ??= new Dictionary<string, string>();
@@ -482,7 +525,9 @@ namespace System.Formats.Tar
             // 4096 is a common max path length, and also the size field is 12 bytes long, which is under int.MaxValue.
             if (_size > int.MaxValue)
             {
-                throw new InvalidOperationException(string.Format(SR.TarSizeFieldTooLargeForExtendedAttribute, _typeFlag.ToString()));
+                throw new InvalidOperationException(
+                    string.Format(SR.TarSizeFieldTooLargeForExtendedAttribute, _typeFlag.ToString())
+                );
             }
 
             byte[] buffer = new byte[(int)_size];
@@ -498,7 +543,9 @@ namespace System.Formats.Tar
 
                 if (_extendedAttributes.ContainsKey(key))
                 {
-                    throw new FormatException(string.Format(SR.TarDuplicateExtendedAttribute, _name));
+                    throw new FormatException(
+                        string.Format(SR.TarDuplicateExtendedAttribute, _name)
+                    );
                 }
                 _extendedAttributes.Add(key, value);
             }
@@ -540,7 +587,8 @@ namespace System.Formats.Tar
         private static bool TryGetNextExtendedAttribute(
             StringReader reader,
             [NotNullWhen(returnValue: true)] out string? key,
-            [NotNullWhen(returnValue: true)] out string? value)
+            [NotNullWhen(returnValue: true)] out string? value
+        )
         {
             key = null;
             value = null;

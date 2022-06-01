@@ -54,7 +54,11 @@ namespace System.Security.Cryptography
             if (_rsaKey == null)
                 throw new CryptographicUnexpectedOperationException(SR.Cryptography_MissingKey);
 
-            return _rsaKey.SignHash(rgbHash, new HashAlgorithmName(_algName), RSASignaturePadding.Pkcs1);
+            return _rsaKey.SignHash(
+                rgbHash,
+                new HashAlgorithmName(_algName),
+                RSASignaturePadding.Pkcs1
+            );
         }
     }
 }

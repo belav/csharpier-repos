@@ -42,7 +42,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         public event PropertyChangedEventHandler PropertyChanged;
 
-        private void OnReferenceLocationsChanged(object sender, ImmutableArray<InlineRenameLocation> renameLocations)
+        private void OnReferenceLocationsChanged(
+            object sender,
+            ImmutableArray<InlineRenameLocation> renameLocations
+        )
         {
             var totalFilesCount = renameLocations.GroupBy(s => s.Document).Count();
             var totalSpansCount = renameLocations.Length;
@@ -65,7 +68,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         private void ComputeDefaultRenameFileFlag()
         {
             // If replacementText is invalid, we won't rename the file.
-            DefaultRenameFileFlag = _isReplacementTextValid && AllowFileRename && _session.Options.RenameFile;
+            DefaultRenameFileFlag =
+                _isReplacementTextValid && AllowFileRename && _session.Options.RenameFile;
         }
 
         private void OnReplacementsComputed(object sender, IInlineRenameReplacementInfo result)
@@ -112,11 +116,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             NotifyPropertyChanged(nameof(NewNameDescription));
         }
 
-        private void NotifyPropertyChanged([CallerMemberName] string name = null)
-            => this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
+        private void NotifyPropertyChanged([CallerMemberName] string name = null) =>
+            this.PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(name));
 
-        private void AllPropertiesChanged()
-            => NotifyPropertyChanged(string.Empty);
+        private void AllPropertiesChanged() => NotifyPropertyChanged(string.Empty);
 
         private void UpdateSearchText(int referenceCount, int fileCount)
         {
@@ -126,11 +129,18 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             }
             else if (fileCount == 1)
             {
-                _searchText = string.Format(EditorFeaturesResources.Rename_will_update_0_references_in_1_file, referenceCount);
+                _searchText = string.Format(
+                    EditorFeaturesResources.Rename_will_update_0_references_in_1_file,
+                    referenceCount
+                );
             }
             else
             {
-                _searchText = string.Format(EditorFeaturesResources.Rename_will_update_0_references_in_1_files, referenceCount, fileCount);
+                _searchText = string.Format(
+                    EditorFeaturesResources.Rename_will_update_0_references_in_1_files,
+                    referenceCount,
+                    fileCount
+                );
             }
 
             NotifyPropertyChanged("SearchText");
@@ -138,8 +148,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         private void UpdateSeverity()
         {
-            if (_errorText != null ||
-                _unresolvableConflictCount > 0)
+            if (_errorText != null || _unresolvableConflictCount > 0)
             {
                 _severity = RenameDashboardSeverity.Error;
             }
@@ -157,20 +166,29 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
 
         public RenameDashboardSeverity Severity => _severity;
 
-        public bool AllowFileRename => _session.FileRenameInfo == InlineRenameFileRenameInfo.Allowed && _isReplacementTextValid;
-        public bool ShowFileRename => _session.FileRenameInfo != InlineRenameFileRenameInfo.NotAllowed;
-        public string FileRenameString => _session.FileRenameInfo switch
-        {
-            InlineRenameFileRenameInfo.TypeDoesNotMatchFileName => EditorFeaturesResources.Rename_file_name_doesnt_match,
-            InlineRenameFileRenameInfo.TypeWithMultipleLocations => EditorFeaturesResources.Rename_file_partial_type,
-            _ => EditorFeaturesResources.Rename_symbols_file
-        };
+        public bool AllowFileRename =>
+            _session.FileRenameInfo == InlineRenameFileRenameInfo.Allowed
+            && _isReplacementTextValid;
+        public bool ShowFileRename =>
+            _session.FileRenameInfo != InlineRenameFileRenameInfo.NotAllowed;
+        public string FileRenameString =>
+            _session.FileRenameInfo switch
+            {
+                InlineRenameFileRenameInfo.TypeDoesNotMatchFileName
+                    => EditorFeaturesResources.Rename_file_name_doesnt_match,
+                InlineRenameFileRenameInfo.TypeWithMultipleLocations
+                    => EditorFeaturesResources.Rename_file_partial_type,
+                _ => EditorFeaturesResources.Rename_symbols_file
+            };
 
         public string HeaderText
         {
             get
             {
-                return string.Format(EditorFeaturesResources.Rename_colon_0, Session.OriginalSymbolName);
+                return string.Format(
+                    EditorFeaturesResources.Rename_colon_0,
+                    Session.OriginalSymbolName
+                );
             }
         }
 
@@ -178,24 +196,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         {
             get
             {
-                return string.Format(EditorFeaturesResources.New_name_colon_0, Session.ReplacementText);
+                return string.Format(
+                    EditorFeaturesResources.New_name_colon_0,
+                    Session.ReplacementText
+                );
             }
         }
 
         public bool ShouldShowInstructions
         {
-            get
-            {
-                return Session.OriginalSymbolName == Session.ReplacementText;
-            }
+            get { return Session.OriginalSymbolName == Session.ReplacementText; }
         }
 
         public bool ShouldShowNewName
         {
-            get
-            {
-                return !ShouldShowInstructions;
-            }
+            get { return !ShouldShowInstructions; }
         }
 
         public string SearchText => _searchText;
@@ -210,7 +225,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get
             {
                 return _resolvableConflictCount >= 1
-                    ? string.Format(EditorFeaturesResources._0_conflict_s_will_be_resolved, _resolvableConflictCount)
+                    ? string.Format(
+                        EditorFeaturesResources._0_conflict_s_will_be_resolved,
+                        _resolvableConflictCount
+                    )
                     : null;
             }
         }
@@ -225,32 +243,40 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get
             {
                 return _unresolvableConflictCount >= 1
-                   ? string.Format(EditorFeaturesResources._0_unresolvable_conflict_s, _unresolvableConflictCount)
-                   : null;
+                    ? string.Format(
+                        EditorFeaturesResources._0_unresolvable_conflict_s,
+                        _unresolvableConflictCount
+                    )
+                    : null;
             }
         }
 
-        public bool HasError
-            => _errorText != null;
+        public bool HasError => _errorText != null;
 
         public string ErrorText => _errorText;
 
-        public Visibility RenameOverloadsVisibility
-            => _session.HasRenameOverloads ? Visibility.Visible : Visibility.Collapsed;
+        public Visibility RenameOverloadsVisibility =>
+            _session.HasRenameOverloads ? Visibility.Visible : Visibility.Collapsed;
 
-        public bool IsRenameOverloadsEditable
-            => !_session.MustRenameOverloads;
+        public bool IsRenameOverloadsEditable => !_session.MustRenameOverloads;
 
         public bool DefaultRenameOverloadFlag
         {
             get => _session.Options.RenameOverloads;
-
             set
             {
                 if (IsRenameOverloadsEditable)
                 {
-                    _session.RenameService.GlobalOptions.SetGlobalOption(new OptionKey(InlineRenameSessionOptionsStorage.RenameOverloads), value);
-                    _session.RefreshRenameSessionWithOptionsChanged(_session.Options with { RenameOverloads = value });
+                    _session.RenameService.GlobalOptions.SetGlobalOption(
+                        new OptionKey(InlineRenameSessionOptionsStorage.RenameOverloads),
+                        value
+                    );
+                    _session.RefreshRenameSessionWithOptionsChanged(
+                        _session.Options with
+                        {
+                            RenameOverloads = value
+                        }
+                    );
                 }
             }
         }
@@ -258,22 +284,36 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
         public bool DefaultRenameInStringsFlag
         {
             get => _session.Options.RenameInStrings;
-
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(new OptionKey(InlineRenameSessionOptionsStorage.RenameInStrings), value);
-                _session.RefreshRenameSessionWithOptionsChanged(_session.Options with { RenameInStrings = value });
+                _session.RenameService.GlobalOptions.SetGlobalOption(
+                    new OptionKey(InlineRenameSessionOptionsStorage.RenameInStrings),
+                    value
+                );
+                _session.RefreshRenameSessionWithOptionsChanged(
+                    _session.Options with
+                    {
+                        RenameInStrings = value
+                    }
+                );
             }
         }
 
         public bool DefaultRenameInCommentsFlag
         {
             get => _session.Options.RenameInComments;
-
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(new OptionKey(InlineRenameSessionOptionsStorage.RenameInComments), value);
-                _session.RefreshRenameSessionWithOptionsChanged(_session.Options with { RenameInComments = value });
+                _session.RenameService.GlobalOptions.SetGlobalOption(
+                    new OptionKey(InlineRenameSessionOptionsStorage.RenameInComments),
+                    value
+                );
+                _session.RefreshRenameSessionWithOptionsChanged(
+                    _session.Options with
+                    {
+                        RenameInComments = value
+                    }
+                );
             }
         }
 
@@ -282,18 +322,28 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.InlineRename
             get => _session.Options.RenameFile;
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(new OptionKey(InlineRenameSessionOptionsStorage.RenameFile), value);
-                _session.RefreshRenameSessionWithOptionsChanged(_session.Options with { RenameFile = value });
+                _session.RenameService.GlobalOptions.SetGlobalOption(
+                    new OptionKey(InlineRenameSessionOptionsStorage.RenameFile),
+                    value
+                );
+                _session.RefreshRenameSessionWithOptionsChanged(
+                    _session.Options with
+                    {
+                        RenameFile = value
+                    }
+                );
             }
         }
 
         public bool DefaultPreviewChangesFlag
         {
             get => _session.PreviewChanges;
-
             set
             {
-                _session.RenameService.GlobalOptions.SetGlobalOption(new OptionKey(InlineRenameSessionOptionsStorage.PreviewChanges), value);
+                _session.RenameService.GlobalOptions.SetGlobalOption(
+                    new OptionKey(InlineRenameSessionOptionsStorage.PreviewChanges),
+                    value
+                );
                 _session.SetPreviewChanges(value);
             }
         }

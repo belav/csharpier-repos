@@ -35,13 +35,21 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
             IAsynchronousOperationListenerProvider listenerProvider,
             ExperimentalCapabilitiesProvider experimentalCapabilitiesProvider,
             ILspLoggerFactory lspLoggerFactory,
-            IThreadingContext threadingContext)
-            : base(lspServiceProvider, globalOptions, listenerProvider, lspLoggerFactory, threadingContext)
+            IThreadingContext threadingContext
+        )
+            : base(
+                lspServiceProvider,
+                globalOptions,
+                listenerProvider,
+                lspLoggerFactory,
+                threadingContext
+            )
         {
             _experimentalCapabilitiesProvider = experimentalCapabilitiesProvider;
         }
 
-        protected override ImmutableArray<string> SupportedLanguages => ProtocolConstants.RoslynLspLanguages;
+        protected override ImmutableArray<string> SupportedLanguages =>
+            ProtocolConstants.RoslynLspLanguages;
 
         public override ServerCapabilities GetCapabilities(ClientCapabilities clientCapabilities)
         {
@@ -61,12 +69,16 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
                 };
             }
 
-            var defaultCapabilities = _experimentalCapabilitiesProvider.GetCapabilities(clientCapabilities);
+            var defaultCapabilities = _experimentalCapabilitiesProvider.GetCapabilities(
+                clientCapabilities
+            );
 
             // If the LSP semantic tokens feature flag is enabled, advertise no semantic tokens capabilities for this Live Share
             // LSP server as LSP semantic tokens requests will be serviced by the AlwaysActiveInProcLanguageClient in both local and
             // remote scenarios.
-            var isLspSemanticTokenEnabled = GlobalOptions.GetOption(LspOptions.LspSemanticTokensFeatureFlag);
+            var isLspSemanticTokenEnabled = GlobalOptions.GetOption(
+                LspOptions.LspSemanticTokensFeatureFlag
+            );
             if (isLspSemanticTokenEnabled)
             {
                 defaultCapabilities.SemanticTokensOptions = null;
@@ -74,11 +86,14 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
 
             // When the lsp pull diagnostics feature flag is enabled we do not advertise pull diagnostics capabilities from here
             // as the AlwaysActivateInProcLanguageClient will provide pull diagnostics both locally and remote.
-            var isPullDiagnosticsEnabled = GlobalOptions.IsPullDiagnostics(InternalDiagnosticsOptions.NormalDiagnosticMode);
+            var isPullDiagnosticsEnabled = GlobalOptions.IsPullDiagnostics(
+                InternalDiagnosticsOptions.NormalDiagnosticMode
+            );
             if (!isPullDiagnosticsEnabled)
             {
                 // Pull diagnostics isn't enabled, let the live share server provide pull diagnostics.
-                ((VSInternalServerCapabilities)defaultCapabilities).SupportsDiagnosticRequests = true;
+                ((VSInternalServerCapabilities)defaultCapabilities).SupportsDiagnosticRequests =
+                    true;
             }
 
             return defaultCapabilities;
@@ -89,6 +104,7 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.LanguageClient
         /// </summary>
         public override bool ShowNotificationOnInitializeFailed => true;
 
-        public override WellKnownLspServerKinds ServerKind => WellKnownLspServerKinds.LiveShareLspServer;
+        public override WellKnownLspServerKinds ServerKind =>
+            WellKnownLspServerKinds.LiveShareLspServer;
     }
 }

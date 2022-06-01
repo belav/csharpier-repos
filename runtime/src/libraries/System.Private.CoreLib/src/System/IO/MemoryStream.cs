@@ -20,31 +20,32 @@ namespace System.IO
     // a stream "view" of the data.
     public class MemoryStream : Stream
     {
-        private byte[] _buffer;    // Either allocated internally or externally.
-        private readonly int _origin;       // For user-provided arrays, start at this origin
-        private int _position;     // read/write head.
-        private int _length;       // Number of bytes within the memory stream
-        private int _capacity;     // length of usable portion of buffer for stream
+        private byte[] _buffer; // Either allocated internally or externally.
+        private readonly int _origin; // For user-provided arrays, start at this origin
+        private int _position; // read/write head.
+        private int _length; // Number of bytes within the memory stream
+        private int _capacity; // length of usable portion of buffer for stream
+
         // Note that _capacity == _buffer.Length for non-user-provided byte[]'s
 
-        private bool _expandable;  // User-provided buffers aren't expandable.
-        private bool _writable;    // Can user write to this stream?
-        private readonly bool _exposable;   // Whether the array can be returned to the user.
-        private bool _isOpen;      // Is this stream open or closed?
+        private bool _expandable; // User-provided buffers aren't expandable.
+        private bool _writable; // Can user write to this stream?
+        private readonly bool _exposable; // Whether the array can be returned to the user.
+        private bool _isOpen; // Is this stream open or closed?
 
         private CachedCompletedInt32Task _lastReadTask; // The last successful task returned from ReadAsync
 
         private const int MemStreamMaxLength = int.MaxValue;
 
-        public MemoryStream()
-            : this(0)
-        {
-        }
+        public MemoryStream() : this(0) { }
 
         public MemoryStream(int capacity)
         {
             if (capacity < 0)
-                throw new ArgumentOutOfRangeException(nameof(capacity), SR.ArgumentOutOfRange_NegativeCapacity);
+                throw new ArgumentOutOfRangeException(
+                    nameof(capacity),
+                    SR.ArgumentOutOfRange_NegativeCapacity
+                );
 
             _buffer = capacity != 0 ? new byte[capacity] : Array.Empty<byte>();
             _capacity = capacity;
@@ -54,10 +55,7 @@ namespace System.IO
             _isOpen = true;
         }
 
-        public MemoryStream(byte[] buffer)
-            : this(buffer, true)
-        {
-        }
+        public MemoryStream(byte[] buffer) : this(buffer, true) { }
 
         public MemoryStream(byte[] buffer, bool writable)
         {
@@ -70,23 +68,31 @@ namespace System.IO
         }
 
         public MemoryStream(byte[] buffer, int index, int count)
-            : this(buffer, index, count, true, false)
-        {
-        }
+            : this(buffer, index, count, true, false) { }
 
         public MemoryStream(byte[] buffer, int index, int count, bool writable)
-            : this(buffer, index, count, writable, false)
-        {
-        }
+            : this(buffer, index, count, writable, false) { }
 
-        public MemoryStream(byte[] buffer, int index, int count, bool writable, bool publiclyVisible)
+        public MemoryStream(
+            byte[] buffer,
+            int index,
+            int count,
+            bool writable,
+            bool publiclyVisible
+        )
         {
             ArgumentNullException.ThrowIfNull(buffer);
 
             if (index < 0)
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (count < 0)
-                throw new ArgumentOutOfRangeException(nameof(count), SR.ArgumentOutOfRange_NeedNonNegNum);
+                throw new ArgumentOutOfRangeException(
+                    nameof(count),
+                    SR.ArgumentOutOfRange_NeedNonNegNum
+                );
             if (buffer.Length - index < count)
                 throw new ArgumentException(SR.Argument_InvalidOffLen);
 
@@ -94,7 +100,7 @@ namespace System.IO
             _origin = _position = index;
             _length = _capacity = index + count;
             _writable = writable;
-            _exposable = publiclyVisible;  // Can TryGetBuffer/GetBuffer return the array?
+            _exposable = publiclyVisible; // Can TryGetBuffer/GetBuffer return the array?
             _isOpen = true;
         }
 
@@ -159,9 +165,7 @@ namespace System.IO
             return false;
         }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override Task FlushAsync(CancellationToken cancellationToken)
         {
@@ -243,7 +247,7 @@ namespace System.IO
             if (n < 0)
                 n = 0;
 
-            Debug.Assert(_position + n >= 0, "_position + n >= 0");  // len is less than 2^31 -1.
+            Debug.Assert(_position + n >= 0, "_position + n >= 0"); // len is less than 2^31 -1.
             _position += n;
             return n;
         }
@@ -264,7 +268,10 @@ namespace System.IO
                 // Only update the capacity if the MS is expandable and the value is different than the current capacity.
                 // Special behavior if the MS isn't expandable: we don't throw if value is the same as the current capacity
                 if (value < Length)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_SmallCapacity);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_SmallCapacity
+                    );
 
                 EnsureNotClosed();
 
@@ -311,12 +318,18 @@ namespace System.IO
             set
             {
                 if (value < 0)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_NeedNonNegNum);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_NeedNonNegNum
+                    );
 
                 EnsureNotClosed();
 
                 if (value > MemStreamMaxLength)
-                    throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_StreamLength);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(value),
+                        SR.ArgumentOutOfRange_StreamLength
+                    );
                 _position = _origin + (int)value;
             }
         }
@@ -332,7 +345,7 @@ namespace System.IO
             if (n <= 0)
                 return 0;
 
-            Debug.Assert(_position + n >= 0, "_position + n >= 0");  // len is less than 2^31 -1.
+            Debug.Assert(_position + n >= 0, "_position + n >= 0"); // len is less than 2^31 -1.
 
             if (n <= 8)
             {
@@ -369,7 +382,12 @@ namespace System.IO
             return n;
         }
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -392,7 +410,10 @@ namespace System.IO
             }
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {
@@ -414,9 +435,14 @@ namespace System.IO
                 // something other than an array and this is a MemoryStream-derived type that doesn't override Read(Span<byte>) will
                 // it then fall back to doing the ArrayPool/copy behavior.
                 return new ValueTask<int>(
-                    MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> destinationArray) ?
-                        Read(destinationArray.Array!, destinationArray.Offset, destinationArray.Count) :
-                        Read(buffer.Span));
+                    MemoryMarshal.TryGetArray(buffer, out ArraySegment<byte> destinationArray)
+                        ? Read(
+                            destinationArray.Array!,
+                            destinationArray.Offset,
+                            destinationArray.Count
+                        )
+                        : Read(buffer.Span)
+                );
             }
             catch (OperationCanceledException oce)
             {
@@ -468,7 +494,11 @@ namespace System.IO
             }
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             // This implementation offers better performance compared to the base class version.
 
@@ -518,34 +548,37 @@ namespace System.IO
             EnsureNotClosed();
 
             if (offset > MemStreamMaxLength)
-                throw new ArgumentOutOfRangeException(nameof(offset), SR.ArgumentOutOfRange_StreamLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(offset),
+                    SR.ArgumentOutOfRange_StreamLength
+                );
 
             switch (loc)
             {
                 case SeekOrigin.Begin:
-                    {
-                        int tempPosition = unchecked(_origin + (int)offset);
-                        if (offset < 0 || tempPosition < _origin)
-                            throw new IOException(SR.IO_SeekBeforeBegin);
-                        _position = tempPosition;
-                        break;
-                    }
+                {
+                    int tempPosition = unchecked(_origin + (int)offset);
+                    if (offset < 0 || tempPosition < _origin)
+                        throw new IOException(SR.IO_SeekBeforeBegin);
+                    _position = tempPosition;
+                    break;
+                }
                 case SeekOrigin.Current:
-                    {
-                        int tempPosition = unchecked(_position + (int)offset);
-                        if (unchecked(_position + offset) < _origin || tempPosition < _origin)
-                            throw new IOException(SR.IO_SeekBeforeBegin);
-                        _position = tempPosition;
-                        break;
-                    }
+                {
+                    int tempPosition = unchecked(_position + (int)offset);
+                    if (unchecked(_position + offset) < _origin || tempPosition < _origin)
+                        throw new IOException(SR.IO_SeekBeforeBegin);
+                    _position = tempPosition;
+                    break;
+                }
                 case SeekOrigin.End:
-                    {
-                        int tempPosition = unchecked(_length + (int)offset);
-                        if (unchecked(_length + offset) < _origin || tempPosition < _origin)
-                            throw new IOException(SR.IO_SeekBeforeBegin);
-                        _position = tempPosition;
-                        break;
-                    }
+                {
+                    int tempPosition = unchecked(_length + (int)offset);
+                    if (unchecked(_length + offset) < _origin || tempPosition < _origin)
+                        throw new IOException(SR.IO_SeekBeforeBegin);
+                    _position = tempPosition;
+                    break;
+                }
                 default:
                     throw new ArgumentException(SR.Argument_InvalidSeekOrigin);
             }
@@ -567,14 +600,20 @@ namespace System.IO
         public override void SetLength(long value)
         {
             if (value < 0 || value > int.MaxValue)
-                throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_StreamLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    SR.ArgumentOutOfRange_StreamLength
+                );
 
             EnsureWriteable();
 
             // Origin wasn't publicly exposed above.
-            Debug.Assert(MemStreamMaxLength == int.MaxValue);  // Check parameter validation logic in this method if this fails.
+            Debug.Assert(MemStreamMaxLength == int.MaxValue); // Check parameter validation logic in this method if this fails.
             if (value > (int.MaxValue - _origin))
-                throw new ArgumentOutOfRangeException(nameof(value), SR.ArgumentOutOfRange_StreamLength);
+                throw new ArgumentOutOfRangeException(
+                    nameof(value),
+                    SR.ArgumentOutOfRange_StreamLength
+                );
 
             int newLength = _origin + (int)value;
             bool allocatedNewArray = EnsureCapacity(newLength);
@@ -679,7 +718,12 @@ namespace System.IO
             _position = i;
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ValidateBufferArguments(buffer, offset, count);
 
@@ -702,7 +746,10 @@ namespace System.IO
             }
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             if (cancellationToken.IsCancellationRequested)
             {

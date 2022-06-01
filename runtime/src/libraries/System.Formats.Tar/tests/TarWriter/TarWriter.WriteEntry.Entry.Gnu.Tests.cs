@@ -13,7 +13,13 @@ namespace System.Formats.Tar.Tests
         public void Write_V7RegularFileEntry_As_RegularFileEntry()
         {
             using MemoryStream archive = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archive, archiveFormat: TarFormat.Gnu, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(
+                    archive,
+                    archiveFormat: TarFormat.Gnu,
+                    leaveOpen: true
+                )
+            )
             {
                 V7TarEntry entry = new V7TarEntry(TarEntryType.V7RegularFile, InitialEntryName);
 
@@ -38,7 +44,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Gnu, leaveOpen: true))
             {
-                GnuTarEntry regularFile = new GnuTarEntry(TarEntryType.RegularFile, InitialEntryName);
+                GnuTarEntry regularFile = new GnuTarEntry(
+                    TarEntryType.RegularFile,
+                    InitialEntryName
+                );
                 SetRegularFile(regularFile);
                 VerifyRegularFile(regularFile, isWritable: true);
                 writer.WriteEntry(regularFile);
@@ -78,7 +87,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Gnu, leaveOpen: true))
             {
-                GnuTarEntry symbolicLink = new GnuTarEntry(TarEntryType.SymbolicLink, InitialEntryName);
+                GnuTarEntry symbolicLink = new GnuTarEntry(
+                    TarEntryType.SymbolicLink,
+                    InitialEntryName
+                );
                 SetSymbolicLink(symbolicLink);
                 VerifySymbolicLink(symbolicLink);
                 writer.WriteEntry(symbolicLink);
@@ -118,7 +130,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Gnu, leaveOpen: true))
             {
-                GnuTarEntry charDevice = new GnuTarEntry(TarEntryType.CharacterDevice, InitialEntryName);
+                GnuTarEntry charDevice = new GnuTarEntry(
+                    TarEntryType.CharacterDevice,
+                    InitialEntryName
+                );
                 SetCharacterDevice(charDevice);
                 VerifyCharacterDevice(charDevice);
                 writer.WriteEntry(charDevice);
@@ -138,7 +153,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Gnu, leaveOpen: true))
             {
-                GnuTarEntry blockDevice = new GnuTarEntry(TarEntryType.BlockDevice, InitialEntryName);
+                GnuTarEntry blockDevice = new GnuTarEntry(
+                    TarEntryType.BlockDevice,
+                    InitialEntryName
+                );
                 SetBlockDevice(blockDevice);
                 VerifyBlockDevice(blockDevice);
                 writer.WriteEntry(blockDevice);

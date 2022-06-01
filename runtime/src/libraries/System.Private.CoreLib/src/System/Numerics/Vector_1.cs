@@ -31,8 +31,7 @@ namespace System.Numerics
     [Intrinsic]
     [DebuggerDisplay("{DisplayString,nq}")]
     [DebuggerTypeProxy(typeof(VectorDebugView<>))]
-    public readonly struct Vector<T> : IEquatable<Vector<T>>, IFormattable
-        where T : struct
+    public readonly struct Vector<T> : IEquatable<Vector<T>>, IFormattable where T : struct
     {
         // These fields exist to ensure the alignment is 8, rather than 1.
         internal readonly ulong _00;
@@ -59,9 +58,7 @@ namespace System.Numerics
         /// <exception cref="NullReferenceException"><paramref name="values" /> is <c>null</c>.</exception>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" /> is less than <see cref="Vector128{T}.Count" />.</exception>
         [Intrinsic]
-        public unsafe Vector(T[] values) : this(values, 0)
-        {
-        }
+        public unsafe Vector(T[] values) : this(values, 0) { }
 
         /// <summary>Creates a new <see cref="Vector{T}" /> from a given array.</summary>
         /// <param name="values">The array from which the vector is created.</param>
@@ -101,7 +98,9 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentOutOfRangeException(ExceptionArgument.values);
             }
 
-            this = Unsafe.ReadUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values)));
+            this = Unsafe.ReadUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(values))
+            );
         }
 
         /// <summary>Creates a new <see cref="Vector{T}" /> from a given readonly span.</summary>
@@ -126,9 +125,7 @@ namespace System.Numerics
         /// <returns>A new <see cref="Vector{T}" /> with its elements set to the first <see cref="Vector{T}.Count" /> elements from <paramref name="values" />.</returns>
         /// <exception cref="ArgumentOutOfRangeException">The length of <paramref name="values" /> is less than <see cref="Vector{T}.Count" />.</exception>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public Vector(Span<T> values) : this((ReadOnlySpan<T>)values)
-        {
-        }
+        public Vector(Span<T> values) : this((ReadOnlySpan<T>)values) { }
 
         /// <summary>Gets a new <see cref="Vector{T}" /> with all bits set to 1.</summary>
         /// <exception cref="NotSupportedException">The type of the current instance (<typeparamref name="T" />) is not supported.</exception>
@@ -153,18 +150,19 @@ namespace System.Numerics
         internal static bool IsTypeSupported
         {
             [MethodImpl(MethodImplOptions.AggressiveInlining)]
-            get => (typeof(T) == typeof(byte)) ||
-                   (typeof(T) == typeof(double)) ||
-                   (typeof(T) == typeof(short)) ||
-                   (typeof(T) == typeof(int)) ||
-                   (typeof(T) == typeof(long)) ||
-                   (typeof(T) == typeof(nint)) ||
-                   (typeof(T) == typeof(nuint)) ||
-                   (typeof(T) == typeof(sbyte)) ||
-                   (typeof(T) == typeof(float)) ||
-                   (typeof(T) == typeof(ushort)) ||
-                   (typeof(T) == typeof(uint)) ||
-                   (typeof(T) == typeof(ulong));
+            get =>
+                (typeof(T) == typeof(byte))
+                || (typeof(T) == typeof(double))
+                || (typeof(T) == typeof(short))
+                || (typeof(T) == typeof(int))
+                || (typeof(T) == typeof(long))
+                || (typeof(T) == typeof(nint))
+                || (typeof(T) == typeof(nuint))
+                || (typeof(T) == typeof(sbyte))
+                || (typeof(T) == typeof(float))
+                || (typeof(T) == typeof(ushort))
+                || (typeof(T) == typeof(uint))
+                || (typeof(T) == typeof(ulong));
         }
 
         /// <summary>Gets a new <see cref="Vector{T}" /> with all elements initialized to one.</summary>
@@ -235,7 +233,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Add(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Add(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -285,7 +286,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Divide(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Divide(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -331,48 +335,42 @@ namespace System.Numerics
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{Byte}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<byte>(Vector<T> value)
-            => value.As<T, byte>();
+        public static explicit operator Vector<byte>(Vector<T> value) => value.As<T, byte>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{Double}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{Double}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<double>(Vector<T> value)
-            => value.As<T, double>();
+        public static explicit operator Vector<double>(Vector<T> value) => value.As<T, double>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{Int16}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{Int16}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<short>(Vector<T> value)
-            => value.As<T, short>();
+        public static explicit operator Vector<short>(Vector<T> value) => value.As<T, short>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{Int32}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{Int32}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<int>(Vector<T> value)
-            => value.As<T, int>();
+        public static explicit operator Vector<int>(Vector<T> value) => value.As<T, int>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{Int64}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{Int64}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<long>(Vector<T> value)
-            => value.As<T, long>();
+        public static explicit operator Vector<long>(Vector<T> value) => value.As<T, long>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{IntPtr}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{IntPtr}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<nint>(Vector<T> value)
-            => value.As<T, nint>();
+        public static explicit operator Vector<nint>(Vector<T> value) => value.As<T, nint>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{UIntPtr}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
@@ -380,8 +378,7 @@ namespace System.Numerics
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static explicit operator Vector<nuint>(Vector<T> value)
-            => value.As<T, nuint>();
+        public static explicit operator Vector<nuint>(Vector<T> value) => value.As<T, nuint>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{SByte}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
@@ -389,16 +386,14 @@ namespace System.Numerics
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static explicit operator Vector<sbyte>(Vector<T> value)
-            => value.As<T, sbyte>();
+        public static explicit operator Vector<sbyte>(Vector<T> value) => value.As<T, sbyte>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{Single}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
         /// <returns><paramref name="value" /> reinterpreted as a new <see cref="Vector{Single}" />.</returns>
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [Intrinsic]
-        public static explicit operator Vector<float>(Vector<T> value)
-            => value.As<T, float>();
+        public static explicit operator Vector<float>(Vector<T> value) => value.As<T, float>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{UInt16}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
@@ -406,8 +401,7 @@ namespace System.Numerics
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static explicit operator Vector<ushort>(Vector<T> value)
-            => value.As<T, ushort>();
+        public static explicit operator Vector<ushort>(Vector<T> value) => value.As<T, ushort>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{UInt32}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
@@ -415,8 +409,7 @@ namespace System.Numerics
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static explicit operator Vector<uint>(Vector<T> value)
-            => value.As<T, uint>();
+        public static explicit operator Vector<uint>(Vector<T> value) => value.As<T, uint>();
 
         /// <summary>Reinterprets a <see cref="Vector{T}" /> as a new <see cref="Vector{UInt64}" />.</summary>
         /// <param name="value">The vector to reinterpret.</param>
@@ -424,8 +417,7 @@ namespace System.Numerics
         /// <exception cref="NotSupportedException">The type of <paramref name="value" /> (<typeparamref name="T" />) is not supported.</exception>
         [CLSCompliant(false)]
         [Intrinsic]
-        public static explicit operator Vector<ulong>(Vector<T> value)
-            => value.As<T, ulong>();
+        public static explicit operator Vector<ulong>(Vector<T> value) => value.As<T, ulong>();
 
         /// <summary>Compares two vectors to determine if any elements are not equal.</summary>
         /// <param name="left">The vector to compare with <paramref name="right" />.</param>
@@ -433,8 +425,7 @@ namespace System.Numerics
         /// <returns><c>true</c> if any elements in <paramref name="left" /> was not equal to the corresponding element in <paramref name="right" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static bool operator !=(Vector<T> left, Vector<T> right)
-            => !(left == right);
+        public static bool operator !=(Vector<T> left, Vector<T> right) => !(left == right);
 
         /// <summary>Multiplies two vectors to compute their element-wise product.</summary>
         /// <param name="left">The vector to multiply with <paramref name="right" />.</param>
@@ -447,7 +438,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Multiply(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Multiply(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -478,8 +472,7 @@ namespace System.Numerics
         /// <returns>The product of <paramref name="factor" /> and <paramref name="value" />.</returns>
         [Intrinsic]
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static Vector<T> operator *(T factor, Vector<T> value)
-            => value * factor;
+        public static Vector<T> operator *(T factor, Vector<T> value) => value * factor;
 
         /// <summary>Computes the ones-complement of a vector.</summary>
         /// <param name="value">The vector whose ones-complement is to be computed.</param>
@@ -498,7 +491,10 @@ namespace System.Numerics
 
             for (int index = 0; index < Count; index++)
             {
-                T value = Scalar<T>.Subtract(left.GetElementUnsafe(index), right.GetElementUnsafe(index));
+                T value = Scalar<T>.Subtract(
+                    left.GetElementUnsafe(index),
+                    right.GetElementUnsafe(index)
+                );
                 result.SetElementUnsafe(index, value);
             }
 
@@ -544,7 +540,10 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref destination[startIndex]), this);
+            Unsafe.WriteUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref destination[startIndex]),
+                this
+            );
         }
 
         /// <summary>Copies a <see cref="Vector{T}" /> to a given span.</summary>
@@ -574,15 +573,18 @@ namespace System.Numerics
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }
 
-            Unsafe.WriteUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
         }
 
         /// <summary>Returns a boolean indicating whether the given Object is equal to this vector instance.</summary>
         /// <param name="obj">The Object to compare against.</param>
         /// <returns>True if the Object is equal to this vector; False otherwise.</returns>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public override bool Equals([NotNullWhen(true)] object? obj)
-            => (obj is Vector<T> other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is Vector<T> other) && Equals(other);
 
         /// <summary>Returns a boolean indicating whether the given vector is equal to this vector instance.</summary>
         /// <param name="other">The vector to compare this instance to.</param>
@@ -597,7 +599,9 @@ namespace System.Numerics
             {
                 if ((typeof(T) == typeof(double)) || (typeof(T) == typeof(float)))
                 {
-                    Vector<T> result = Vector.Equals(this, other) | ~(Vector.Equals(this, this) | Vector.Equals(other, other));
+                    Vector<T> result =
+                        Vector.Equals(this, other)
+                        | ~(Vector.Equals(this, this) | Vector.Equals(other, other));
                     return result.As<T, int>() == Vector<int>.AllBitsSet;
                 }
                 else
@@ -612,7 +616,12 @@ namespace System.Numerics
             {
                 for (int index = 0; index < Count; index++)
                 {
-                    if (!Scalar<T>.ObjectEquals(self.GetElementUnsafe(index), other.GetElementUnsafe(index)))
+                    if (
+                        !Scalar<T>.ObjectEquals(
+                            self.GetElementUnsafe(index),
+                            other.GetElementUnsafe(index)
+                        )
+                    )
                     {
                         return false;
                     }
@@ -638,20 +647,23 @@ namespace System.Numerics
 
         /// <summary>Returns a String representing this vector.</summary>
         /// <returns>The string representation.</returns>
-        public override string ToString()
-            => ToString("G", CultureInfo.CurrentCulture);
+        public override string ToString() => ToString("G", CultureInfo.CurrentCulture);
 
         /// <summary>Returns a String representing this vector, using the specified format string to format individual elements.</summary>
         /// <param name="format">The format of individual elements.</param>
         /// <returns>The string representation.</returns>
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format)
-            => ToString(format, CultureInfo.CurrentCulture);
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        ) => ToString(format, CultureInfo.CurrentCulture);
 
         /// <summary>Returns a String representing this vector, using the specified format string to format individual elements and the given IFormatProvider.</summary>
         /// <param name="format">The format of individual elements.</param>
         /// <param name="formatProvider">The format provider to use when formatting elements.</param>
         /// <returns>The string representation.</returns>
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? formatProvider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? formatProvider
+        )
         {
             ThrowHelper.ThrowForUnsupportedNumericsVectorBaseType<T>();
 
@@ -665,7 +677,9 @@ namespace System.Numerics
             {
                 sb.Append(separator);
                 sb.Append(' ');
-                sb.Append(((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider));
+                sb.Append(
+                    ((IFormattable)this.GetElementUnsafe(i)).ToString(format, formatProvider)
+                );
             }
             sb.Append('>');
 
@@ -700,7 +714,10 @@ namespace System.Numerics
                 return false;
             }
 
-            Unsafe.WriteUnaligned<Vector<T>>(ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)), this);
+            Unsafe.WriteUnaligned<Vector<T>>(
+                ref Unsafe.As<T, byte>(ref MemoryMarshal.GetReference(destination)),
+                this
+            );
             return true;
         }
     }

@@ -6,16 +6,17 @@ using System.Reflection;
 
 namespace Moq
 {
-	/// <summary>
-	///   Abstract base class for setups that target a single, specific method.
-	/// </summary>
-	internal abstract class MethodSetup : Setup
-	{
-		protected MethodSetup(Expression originalExpression, Mock mock, MethodExpectation expectation)
-			: base(originalExpression, mock, expectation)
-		{
-		}
+    /// <summary>
+    ///   Abstract base class for setups that target a single, specific method.
+    /// </summary>
+    internal abstract class MethodSetup : Setup
+    {
+        protected MethodSetup(
+            Expression originalExpression,
+            Mock mock,
+            MethodExpectation expectation
+        ) : base(originalExpression, mock, expectation) { }
 
-		public MethodInfo Method => ((MethodExpectation)this.Expectation).Method;
-	}
+        public MethodInfo Method => ((MethodExpectation)this.Expectation).Method;
+    }
 }

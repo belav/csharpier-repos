@@ -13,8 +13,8 @@ namespace ILCompiler.DependencyAnalysis
     /// <summary>
     /// Canonical type instantiations are emitted, not because they are used directly by the user code, but because
     /// they are used by the dynamic type loader when dynamically instantiating types at runtime.
-    /// The data that we emit on canonical type instantiations should just be the minimum that is needed by the template 
-    /// type loader. 
+    /// The data that we emit on canonical type instantiations should just be the minimum that is needed by the template
+    /// type loader.
     /// Similarly, the dependencies that we track for canonical type instantiations are minimal, and are just the ones used
     /// by the dynamic type loader
     /// </summary>
@@ -31,6 +31,7 @@ namespace ILCompiler.DependencyAnalysis
         public override bool StaticDependenciesAreComputed => true;
         public override bool IsShareable => IsTypeNodeShareable(_type);
         protected override bool EmitVirtualSlotsAndInterfaces => true;
+
         public override bool ShouldSkipEmittingObjectNode(NodeFactory factory) => false;
 
         protected override DependencyList ComputeNonRelocationBasedDependencies(NodeFactory factory)
@@ -40,22 +41,36 @@ namespace ILCompiler.DependencyAnalysis
             // Ensure that we track the necessary type symbol if we are working with a constructed type symbol.
             // The emitter will ensure we don't emit both, but this allows us assert that we only generate
             // relocs to nodes we emit.
-            dependencyList.Add(factory.NecessaryTypeSymbol(_type), "Necessary type symbol related to CanonicalEETypeNode");
+            dependencyList.Add(
+                factory.NecessaryTypeSymbol(_type),
+                "Necessary type symbol related to CanonicalEETypeNode"
+            );
 
             DefType closestDefType = _type.GetClosestDefType();
 
             if (MightHaveInterfaceDispatchMap(factory))
-                dependencyList.Add(factory.InterfaceDispatchMap(_type), "Canonical interface dispatch map");
+                dependencyList.Add(
+                    factory.InterfaceDispatchMap(_type),
+                    "Canonical interface dispatch map"
+                );
 
             dependencyList.Add(factory.VTable(closestDefType), "VTable");
 
             if (_type.IsCanonicalSubtype(CanonicalFormKind.Universal))
-                dependencyList.Add(factory.NativeLayout.TemplateTypeLayout(_type), "Universal generic types always have template layout");
+                dependencyList.Add(
+                    factory.NativeLayout.TemplateTypeLayout(_type),
+                    "Universal generic types always have template layout"
+                );
 
             // Track generic virtual methods that will get added to the GVM tables
             if (TypeGVMEntriesNode.TypeNeedsGVMTableEntries(_type))
             {
-                dependencyList.Add(new DependencyListEntry(factory.TypeGVMEntries(_type.GetTypeDefinition()), "Type with generic virtual methods"));
+                dependencyList.Add(
+                    new DependencyListEntry(
+                        factory.TypeGVMEntries(_type.GetTypeDefinition()),
+                        "Type with generic virtual methods"
+                    )
+                );
 
                 AddDependenciesForUniversalGVMSupport(factory, _type, ref dependencyList);
             }
@@ -64,9 +79,12 @@ namespace ILCompiler.DependencyAnalysis
             MethodDesc defaultCtor = closestDefType.GetDefaultConstructor();
             if (defaultCtor != null)
             {
-                dependencyList.Add(new DependencyListEntry(
-                    factory.CanonicalEntrypoint(defaultCtor),
-                    "DefaultConstructorNode"));
+                dependencyList.Add(
+                    new DependencyListEntry(
+                        factory.CanonicalEntrypoint(defaultCtor),
+                        "DefaultConstructorNode"
+                    )
+                );
             }
 
             return dependencyList;
@@ -74,7 +92,9 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override ISymbolNode GetBaseTypeNode(NodeFactory factory)
         {
-            return _type.BaseType != null ? factory.NecessaryTypeSymbol(_type.BaseType.NormalizeInstantiation()) : null;
+            return _type.BaseType != null
+                ? factory.NecessaryTypeSymbol(_type.BaseType.NormalizeInstantiation())
+                : null;
         }
 
         protected override int GCDescSize
@@ -100,7 +120,10 @@ namespace ILCompiler.DependencyAnalysis
             GCDescEncoder.EncodeGCDesc(ref builder, _type);
         }
 
-        protected override void OutputInterfaceMap(NodeFactory factory, ref ObjectDataBuilder objData)
+        protected override void OutputInterfaceMap(
+            NodeFactory factory,
+            ref ObjectDataBuilder objData
+        )
         {
             foreach (var itf in _type.RuntimeInterfaces)
             {
@@ -119,7 +142,7 @@ namespace ILCompiler.DependencyAnalysis
 
                     if (instanceByteCount.IsIndeterminate)
                     {
-                        // For USG types, they may be of indeterminate size, and the size of the type may be meaningless. 
+                        // For USG types, they may be of indeterminate size, and the size of the type may be meaningless.
                         // In that case emit a fixed constant.
                         return MinimumObjectSize;
                     }

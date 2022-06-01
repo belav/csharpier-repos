@@ -13,7 +13,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Shared.TestHooks
 {
-    internal sealed partial class AsynchronousOperationListener : IAsynchronousOperationListener, IAsynchronousOperationWaiter
+    internal sealed partial class AsynchronousOperationListener
+        : IAsynchronousOperationListener,
+            IAsynchronousOperationWaiter
     {
         private readonly NonReentrantLock _gate = new();
 
@@ -29,9 +31,7 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
         private bool _trackActiveTokens;
 
         public AsynchronousOperationListener()
-            : this(featureName: "noname", enableDiagnosticTokens: false)
-        {
-        }
+            : this(featureName: "noname", enableDiagnosticTokens: false) { }
 
         public AsynchronousOperationListener(string featureName, bool enableDiagnosticTokens)
         {
@@ -42,7 +42,8 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
 
         [PerformanceSensitive(
             "https://github.com/dotnet/roslyn/pull/58646",
-            Constraint = "Cannot use async/await because it produces large numbers of first-chance cancellation exceptions.")]
+            Constraint = "Cannot use async/await because it produces large numbers of first-chance cancellation exceptions."
+        )]
         public Task<bool> Delay(TimeSpan delay, CancellationToken cancellationToken)
         {
             if (cancellationToken.IsCancellationRequested)
@@ -55,7 +56,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 return SpecializedTasks.False;
             }
 
-            var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(cancellationToken, expeditedDelayCancellationToken);
+            var cancellationTokenSource = CancellationTokenSource.CreateLinkedTokenSource(
+                cancellationToken,
+                expeditedDelayCancellationToken
+            );
 
             var delayTask = Task.Delay(delay, cancellationTokenSource.Token);
             if (delayTask.IsCompleted)
@@ -72,26 +76,38 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             // Handle continuation in a local function to avoid capturing arguments when this path is avoided
             return DelaySlow(delayTask, cancellationTokenSource, cancellationToken);
 
-            static Task<bool> DelaySlow(Task delayTask, CancellationTokenSource cancellationTokenSourceToDispose, CancellationToken cancellationToken)
+            static Task<bool> DelaySlow(
+                Task delayTask,
+                CancellationTokenSource cancellationTokenSourceToDispose,
+                CancellationToken cancellationToken
+            )
             {
-                return delayTask.ContinueWith(
-                    task =>
-                    {
-                        cancellationTokenSourceToDispose.Dispose();
-                        if (task.Status == TaskStatus.RanToCompletion)
-                            return SpecializedTasks.True;
-                        else if (cancellationToken.IsCancellationRequested)
-                            return Task.FromCanceled<bool>(cancellationToken);
-                        else
-                            return SpecializedTasks.False;
-                    },
-                    CancellationToken.None,
-                    TaskContinuationOptions.ExecuteSynchronously,
-                    TaskScheduler.Default).Unwrap();
+                return delayTask
+                    .ContinueWith(
+                        task =>
+                        {
+                            cancellationTokenSourceToDispose.Dispose();
+                            if (task.Status == TaskStatus.RanToCompletion)
+                                return SpecializedTasks.True;
+                            else if (cancellationToken.IsCancellationRequested)
+                                return Task.FromCanceled<bool>(cancellationToken);
+                            else
+                                return SpecializedTasks.False;
+                        },
+                        CancellationToken.None,
+                        TaskContinuationOptions.ExecuteSynchronously,
+                        TaskScheduler.Default
+                    )
+                    .Unwrap();
             }
         }
 
-        public IAsyncToken BeginAsyncOperation(string name, object? tag = null, [CallerFilePath] string filePath = "", [CallerLineNumber] int lineNumber = 0)
+        public IAsyncToken BeginAsyncOperation(
+            string name,
+            object? tag = null,
+            [CallerFilePath] string filePath = "",
+            [CallerLineNumber] int lineNumber = 0
+        )
         {
             using (_gate.DisposableWait(CancellationToken.None))
             {
@@ -132,7 +148,10 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                 _pendingTasks.Clear();
 
                 // Replace the cancellation source used for expediting waits.
-                var oldSource = Interlocked.Exchange(ref _expeditedDelayCancellationTokenSource, new CancellationTokenSource());
+                var oldSource = Interlocked.Exchange(
+                    ref _expeditedDelayCancellationTokenSource,
+                    new CancellationTokenSource()
+                );
                 oldSource.Dispose();
             }
 
@@ -171,10 +190,12 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
                     _expeditedDelayCancellationTokenSource.CancelAfter(TimeSpan.Zero);
 
                     // Calling SetResult on a normal TaskCompletionSource can cause continuations to run synchronously
-                    // at that point. That's a problem as that may cause additional code to run while we're holding a lock. 
-                    // In order to prevent that, we pass along RunContinuationsAsynchronously in order to ensure that 
+                    // at that point. That's a problem as that may cause additional code to run while we're holding a lock.
+                    // In order to prevent that, we pass along RunContinuationsAsynchronously in order to ensure that
                     // all continuations will run at a future point when this thread has released the lock.
-                    var source = new TaskCompletionSource<bool>(TaskCreationOptions.RunContinuationsAsynchronously);
+                    var source = new TaskCompletionSource<bool>(
+                        TaskCreationOptions.RunContinuationsAsynchronously
+                    );
                     _pendingTasks.Add(source);
 
                     return source.Task;
@@ -182,7 +203,9 @@ namespace Microsoft.CodeAnalysis.Shared.TestHooks
             }
         }
 
-        public async Task WaitUntilConditionIsMetAsync(Func<IEnumerable<DiagnosticAsyncToken>, bool> condition)
+        public async Task WaitUntilConditionIsMetAsync(
+            Func<IEnumerable<DiagnosticAsyncToken>, bool> condition
+        )
         {
             Contract.ThrowIfFalse(TrackActiveTokens);
 

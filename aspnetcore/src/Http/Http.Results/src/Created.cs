@@ -41,7 +41,10 @@ public sealed class Created : IResult, IEndpointMetadataProvider
         }
         else
         {
-            Location = locationUri.GetComponents(UriComponents.SerializationInfoString, UriFormat.UriEscaped);
+            Location = locationUri.GetComponents(
+                UriComponents.SerializationInfoString,
+                UriFormat.UriEscaped
+            );
         }
     }
 
@@ -78,6 +81,8 @@ public sealed class Created : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(StatusCodes.Status201Created));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(StatusCodes.Status201Created)
+        );
     }
 }

@@ -8,29 +8,38 @@ namespace System.Text.Json.Serialization.Converters
     [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
     internal sealed class EnumConverterFactory : JsonConverterFactory
     {
-        public EnumConverterFactory()
-        {
-        }
+        public EnumConverterFactory() { }
 
         public override bool CanConvert(Type type)
         {
             return type.IsEnum;
         }
 
-        public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options)
-            => Create(type, EnumConverterOptions.AllowNumbers, namingPolicy: null, options);
+        public override JsonConverter CreateConverter(Type type, JsonSerializerOptions options) =>
+            Create(type, EnumConverterOptions.AllowNumbers, namingPolicy: null, options);
 
-        internal static JsonConverter Create(Type enumType, EnumConverterOptions converterOptions, JsonNamingPolicy? namingPolicy, JsonSerializerOptions options)
+        internal static JsonConverter Create(
+            Type enumType,
+            EnumConverterOptions converterOptions,
+            JsonNamingPolicy? namingPolicy,
+            JsonSerializerOptions options
+        )
         {
-            return (JsonConverter)Activator.CreateInstance(
-                GetEnumConverterType(enumType),
-                new object?[] { converterOptions, namingPolicy, options })!;
+            return (JsonConverter)
+                Activator.CreateInstance(
+                    GetEnumConverterType(enumType),
+                    new object?[] { converterOptions, namingPolicy, options }
+                )!;
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2055:MakeGenericType",
-            Justification = "'EnumConverter<T> where T : struct' implies 'T : new()', so the trimmer is warning calling MakeGenericType here because enumType's constructors are not annotated. " +
-            "But EnumConverter doesn't call new T(), so this is safe.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2055:MakeGenericType",
+            Justification = "'EnumConverter<T> where T : struct' implies 'T : new()', so the trimmer is warning calling MakeGenericType here because enumType's constructors are not annotated. "
+                + "But EnumConverter doesn't call new T(), so this is safe."
+        )]
         [return: DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.PublicConstructors)]
-        private static Type GetEnumConverterType(Type enumType) => typeof(EnumConverter<>).MakeGenericType(enumType);
+        private static Type GetEnumConverterType(Type enumType) =>
+            typeof(EnumConverter<>).MakeGenericType(enumType);
     }
 }

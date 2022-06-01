@@ -89,7 +89,9 @@ public class InitCommand : ICommand
             throw new ArgumentException(Resources.FormatError_InvalidSecretsId(newSecretsId));
         }
 
-        var existingUserSecretsId = projectDocument.XPathSelectElements("//UserSecretsId").FirstOrDefault();
+        var existingUserSecretsId = projectDocument
+            .XPathSelectElements("//UserSecretsId")
+            .FirstOrDefault();
 
         // Check if a UserSecretsId is already set
         if (existingUserSecretsId is object)
@@ -97,7 +99,9 @@ public class InitCommand : ICommand
             // Only set the UserSecretsId if the user specified an explicit value
             if (string.IsNullOrWhiteSpace(OverrideId))
             {
-                context.Reporter.Output(Resources.FormatMessage_ProjectAlreadyInitialized(projectPath));
+                context.Reporter.Output(
+                    Resources.FormatMessage_ProjectAlreadyInitialized(projectPath)
+                );
                 return;
             }
 
@@ -106,11 +110,15 @@ public class InitCommand : ICommand
         else
         {
             // Find the first non-conditional PropertyGroup
-            var propertyGroup = projectDocument.Root.DescendantNodes()
-                .FirstOrDefault(node => node is XElement el
-                    && el.Name == "PropertyGroup"
-                    && el.Attributes().All(attr =>
-                        attr.Name != "Condition")) as XElement;
+            var propertyGroup =
+                projectDocument.Root
+                    .DescendantNodes()
+                    .FirstOrDefault(
+                        node =>
+                            node is XElement el
+                            && el.Name == "PropertyGroup"
+                            && el.Attributes().All(attr => attr.Name != "Condition")
+                    ) as XElement;
 
             // No valid property group, create a new one
             if (propertyGroup == null)
@@ -125,15 +133,14 @@ public class InitCommand : ICommand
             propertyGroup.Add($"{Environment.NewLine}  ");
         }
 
-        var settings = new XmlWriterSettings
-        {
-            OmitXmlDeclaration = true,
-        };
+        var settings = new XmlWriterSettings { OmitXmlDeclaration = true, };
 
         using var xw = XmlWriter.Create(projectPath, settings);
         projectDocument.Save(xw);
 
-        context.Reporter.Output(Resources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath));
+        context.Reporter.Output(
+            Resources.FormatMessage_SetUserSecretsIdForProject(newSecretsId, projectPath)
+        );
     }
 
     private static string ResolveProjectPath(string name, string path)

@@ -11,6 +11,11 @@ namespace Microsoft.CodeAnalysis.AutomaticCompletion
 {
     internal interface IBraceCompletionServiceFactory : ILanguageService
     {
-        Task<IBraceCompletionService?> TryGetServiceAsync(Document document, int openingPosition, char openingBrace, CancellationToken cancellationToken);
+        Task<IBraceCompletionService?> TryGetServiceAsync(
+            Document document,
+            int openingPosition,
+            char openingBrace,
+            CancellationToken cancellationToken
+        );
     }
 }

@@ -58,7 +58,8 @@ public class DistributedSession : ISession
         TimeSpan ioTimeout,
         Func<bool> tryEstablishSession,
         ILoggerFactory loggerFactory,
-        bool isNewSessionKey)
+        bool isNewSessionKey
+    )
     {
         if (cache == null)
         {
@@ -160,17 +161,27 @@ public class DistributedSession : ISession
             var encodedKey = new EncodedKey(key);
             if (encodedKey.KeyBytes.Length > KeyLengthLimit)
             {
-                throw new ArgumentOutOfRangeException(nameof(key),
-                    Resources.FormatException_KeyLengthIsExceeded(KeyLengthLimit));
+                throw new ArgumentOutOfRangeException(
+                    nameof(key),
+                    Resources.FormatException_KeyLengthIsExceeded(KeyLengthLimit)
+                );
             }
 
             if (!_tryEstablishSession())
             {
-                throw new InvalidOperationException(Resources.Exception_InvalidSessionEstablishment);
+                throw new InvalidOperationException(
+                    Resources.Exception_InvalidSessionEstablishment
+                );
             }
             _isModified = true;
             var copy = new byte[value.Length];
-            Buffer.BlockCopy(src: value, srcOffset: 0, dst: copy, dstOffset: 0, count: value.Length);
+            Buffer.BlockCopy(
+                src: value,
+                srcOffset: 0,
+                dst: copy,
+                dstOffset: 0,
+                count: value.Length
+            );
             _store.SetValue(encodedKey, copy);
         }
     }
@@ -230,7 +241,10 @@ public class DistributedSession : ISession
         {
             using (var timeout = new CancellationTokenSource(_ioTimeout))
             {
-                var cts = CancellationTokenSource.CreateLinkedTokenSource(timeout.Token, cancellationToken);
+                var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                    timeout.Token,
+                    cancellationToken
+                );
                 try
                 {
                     cts.Token.ThrowIfCancellationRequested();
@@ -249,7 +263,11 @@ public class DistributedSession : ISession
                     if (timeout.Token.IsCancellationRequested)
                     {
                         _logger.SessionLoadingTimeout();
-                        throw new OperationCanceledException("Timed out loading the session.", oex, timeout.Token);
+                        throw new OperationCanceledException(
+                            "Timed out loading the session.",
+                            oex,
+                            timeout.Token
+                        );
                     }
                     throw;
                 }
@@ -270,7 +288,10 @@ public class DistributedSession : ISession
 
         using (var timeout = new CancellationTokenSource(_ioTimeout))
         {
-            var cts = CancellationTokenSource.CreateLinkedTokenSource(timeout.Token, cancellationToken);
+            var cts = CancellationTokenSource.CreateLinkedTokenSource(
+                timeout.Token,
+                cancellationToken
+            );
             if (_isModified)
             {
                 if (_logger.IsEnabled(LogLevel.Information))
@@ -286,9 +307,7 @@ public class DistributedSession : ISession
                             _logger.SessionStarted(_sessionKey, Id);
                         }
                     }
-                    catch (OperationCanceledException)
-                    {
-                    }
+                    catch (OperationCanceledException) { }
                     catch (Exception exception)
                     {
                         _logger.SessionCacheReadException(_sessionKey, exception);
@@ -305,7 +324,8 @@ public class DistributedSession : ISession
                         _sessionKey,
                         stream.ToArray(),
                         new DistributedCacheEntryOptions().SetSlidingExpiration(_idleTimeout),
-                        cts.Token);
+                        cts.Token
+                    );
                     _isModified = false;
                     _logger.SessionStored(_sessionKey, Id, _store.Count);
                 }
@@ -314,7 +334,11 @@ public class DistributedSession : ISession
                     if (timeout.Token.IsCancellationRequested)
                     {
                         _logger.SessionCommitTimeout();
-                        throw new OperationCanceledException("Timed out committing the session.", oex, timeout.Token);
+                        throw new OperationCanceledException(
+                            "Timed out committing the session.",
+                            oex,
+                            timeout.Token
+                        );
                     }
                     throw;
                 }
@@ -330,7 +354,11 @@ public class DistributedSession : ISession
                     if (timeout.Token.IsCancellationRequested)
                     {
                         _logger.SessionRefreshTimeout();
-                        throw new OperationCanceledException("Timed out refreshing the session.", oex, timeout.Token);
+                        throw new OperationCanceledException(
+                            "Timed out refreshing the session.",
+                            oex,
+                            timeout.Token
+                        );
                     }
                     throw;
                 }
@@ -394,7 +422,10 @@ public class DistributedSession : ISession
     {
         if (num < 0 || ushort.MaxValue < num)
         {
-            throw new ArgumentOutOfRangeException(nameof(num), Resources.Exception_InvalidToSerializeIn2Bytes);
+            throw new ArgumentOutOfRangeException(
+                nameof(num),
+                Resources.Exception_InvalidToSerializeIn2Bytes
+            );
         }
         output.WriteByte((byte)(num >> 8));
         output.WriteByte((byte)(0xFF & num));
@@ -409,7 +440,10 @@ public class DistributedSession : ISession
     {
         if (num < 0 || 0xFFFFFF < num)
         {
-            throw new ArgumentOutOfRangeException(nameof(num), Resources.Exception_InvalidToSerializeIn3Bytes);
+            throw new ArgumentOutOfRangeException(
+                nameof(num),
+                Resources.Exception_InvalidToSerializeIn3Bytes
+            );
         }
         output.WriteByte((byte)(num >> 16));
         output.WriteByte((byte)(0xFF & (num >> 8)));
@@ -425,7 +459,10 @@ public class DistributedSession : ISession
     {
         if (num < 0)
         {
-            throw new ArgumentOutOfRangeException(nameof(num), Resources.Exception_NumberShouldNotBeNegative);
+            throw new ArgumentOutOfRangeException(
+                nameof(num),
+                Resources.Exception_NumberShouldNotBeNegative
+            );
         }
         output.WriteByte((byte)(num >> 24));
         output.WriteByte((byte)(0xFF & (num >> 16)));
@@ -435,7 +472,10 @@ public class DistributedSession : ISession
 
     private static int DeserializeNumFrom4Bytes(Stream content)
     {
-        return content.ReadByte() << 24 | content.ReadByte() << 16 | content.ReadByte() << 8 | content.ReadByte();
+        return content.ReadByte() << 24
+            | content.ReadByte() << 16
+            | content.ReadByte() << 8
+            | content.ReadByte();
     }
 
     private static byte[] ReadBytes(Stream stream, int count)

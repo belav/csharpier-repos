@@ -3,10 +3,10 @@
 
 ////////////////////////////////////////////////////////////////
 //
-// Description 
+// Description
 // ____________
-// Code that walks arrays using for loops (or similar coding 
-// constructs) could incorrectly get IndexOutOfRangeException.  
+// Code that walks arrays using for loops (or similar coding
+// constructs) could incorrectly get IndexOutOfRangeException.
 //
 // Right Behavior
 // ________________

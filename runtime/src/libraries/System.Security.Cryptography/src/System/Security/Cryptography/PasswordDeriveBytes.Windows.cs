@@ -12,24 +12,43 @@ namespace System.Security.Cryptography
         private SafeProvHandle? _safeProvHandle;
 
         [SupportedOSPlatform("windows")]
-        public byte[] CryptDeriveKey(string? algname, string? alghashname, int keySize, byte[] rgbIV)
+        public byte[] CryptDeriveKey(
+            string? algname,
+            string? alghashname,
+            int keySize,
+            byte[] rgbIV
+        )
         {
             if (keySize < 0)
                 throw new CryptographicException(SR.Cryptography_InvalidKeySize);
 
             int algidhash = CapiHelper.NameOrOidToHashAlgId(alghashname, OidGroup.HashAlgorithm);
             if (algidhash == 0)
-                throw new CryptographicException(SR.Cryptography_PasswordDerivedBytes_InvalidAlgorithm);
+                throw new CryptographicException(
+                    SR.Cryptography_PasswordDerivedBytes_InvalidAlgorithm
+                );
 
             int algid = CapiHelper.NameOrOidToHashAlgId(algname, OidGroup.All);
             if (algid == 0)
-                throw new CryptographicException(SR.Cryptography_PasswordDerivedBytes_InvalidAlgorithm);
+                throw new CryptographicException(
+                    SR.Cryptography_PasswordDerivedBytes_InvalidAlgorithm
+                );
 
             if (rgbIV == null)
                 throw new CryptographicException(SR.Cryptography_PasswordDerivedBytes_InvalidIV);
 
             byte[]? key = null;
-            CapiHelper.DeriveKey(ProvHandle, algid, algidhash, _password, _password.Length, keySize << 16, rgbIV, rgbIV.Length, ref key);
+            CapiHelper.DeriveKey(
+                ProvHandle,
+                algid,
+                algidhash,
+                _password,
+                _password.Length,
+                keySize << 16,
+                rgbIV,
+                rgbIV.Length,
+                ref key
+            );
             return key;
         }
 

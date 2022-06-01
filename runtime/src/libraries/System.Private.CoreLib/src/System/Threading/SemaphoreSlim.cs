@@ -68,8 +68,11 @@ namespace System.Threading
         // Task in a linked list of asynchronous waiters
         private sealed class TaskNode : Task<bool>
         {
-            internal TaskNode? Prev, Next;
-            internal TaskNode() : base((object?)null, TaskCreationOptions.RunContinuationsAsynchronously) { }
+            internal TaskNode? Prev,
+                Next;
+
+            internal TaskNode()
+                : base((object?)null, TaskCreationOptions.RunContinuationsAsynchronously) { }
         }
         #endregion
 
@@ -129,10 +132,7 @@ namespace System.Threading
         /// concurrently.</param>
         /// <exception cref="System.ArgumentOutOfRangeException"><paramref name="initialCount"/>
         /// is less than 0.</exception>
-        public SemaphoreSlim(int initialCount)
-            : this(initialCount, NO_MAXIMUM)
-        {
-        }
+        public SemaphoreSlim(int initialCount) : this(initialCount, NO_MAXIMUM) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SemaphoreSlim"/> class, specifying
@@ -151,13 +151,20 @@ namespace System.Threading
             if (initialCount < 0 || initialCount > maxCount)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(initialCount), initialCount, SR.SemaphoreSlim_ctor_InitialCountWrong);
+                    nameof(initialCount),
+                    initialCount,
+                    SR.SemaphoreSlim_ctor_InitialCountWrong
+                );
             }
 
             // validate input
             if (maxCount <= 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(maxCount), maxCount, SR.SemaphoreSlim_ctor_MaxCountWrong);
+                throw new ArgumentOutOfRangeException(
+                    nameof(maxCount),
+                    maxCount,
+                    SR.SemaphoreSlim_ctor_MaxCountWrong
+                );
             }
 
             m_maxCount = maxCount;
@@ -217,7 +224,10 @@ namespace System.Threading
             if (totalMilliseconds < -1 || totalMilliseconds > int.MaxValue)
             {
                 throw new System.ArgumentOutOfRangeException(
-                    nameof(timeout), timeout, SR.SemaphoreSlim_Wait_TimeoutWrong);
+                    nameof(timeout),
+                    timeout,
+                    SR.SemaphoreSlim_Wait_TimeoutWrong
+                );
             }
 
             // Call wait with the timeout milliseconds
@@ -248,7 +258,10 @@ namespace System.Threading
             if (totalMilliseconds < -1 || totalMilliseconds > int.MaxValue)
             {
                 throw new System.ArgumentOutOfRangeException(
-                    nameof(timeout), timeout, SR.SemaphoreSlim_Wait_TimeoutWrong);
+                    nameof(timeout),
+                    timeout,
+                    SR.SemaphoreSlim_Wait_TimeoutWrong
+                );
             }
 
             // Call wait with the timeout milliseconds
@@ -291,7 +304,10 @@ namespace System.Threading
             if (millisecondsTimeout < -1)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(millisecondsTimeout), millisecondsTimeout, SR.SemaphoreSlim_Wait_TimeoutWrong);
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.SemaphoreSlim_Wait_TimeoutWrong
+                );
             }
 
             cancellationToken.ThrowIfCancellationRequested();
@@ -316,7 +332,8 @@ namespace System.Threading
             // Register for cancellation outside of the main lock.
             // NOTE: Register/unregister inside the lock can deadlock as different lock acquisition orders could
             //      occur for (1)this.m_lockObjAndDisposed and (2)cts.internalLock
-            CancellationTokenRegistration cancellationTokenRegistration = cancellationToken.UnsafeRegister(s_cancellationTokenCanceledEventHandler, this);
+            CancellationTokenRegistration cancellationTokenRegistration =
+                cancellationToken.UnsafeRegister(s_cancellationTokenCanceledEventHandler, this);
             try
             {
                 // Perf: first spin wait for the count to be positive.
@@ -370,9 +387,16 @@ namespace System.Threading
                         // wait until the count become greater than zero or the timeout is expired
                         try
                         {
-                            waitSuccessful = WaitUntilCountOrTimeout(millisecondsTimeout, startTime, cancellationToken);
+                            waitSuccessful = WaitUntilCountOrTimeout(
+                                millisecondsTimeout,
+                                startTime,
+                                cancellationToken
+                            );
                         }
-                        catch (OperationCanceledException e) { oce = e; }
+                        catch (OperationCanceledException e)
+                        {
+                            oce = e;
+                        }
                     }
 
                     // Now try to acquire.  We prioritize acquisition over cancellation/timeout so that we don't
@@ -380,8 +404,10 @@ namespace System.Threading
                     // defer to synchronous waiters in priority, which means that if it's possible an asynchronous
                     // waiter didn't get released because a synchronous waiter was present, we need to ensure
                     // that synchronous waiter succeeds so that they have a chance to release.
-                    Debug.Assert(!waitSuccessful || m_currentCount > 0,
-                        "If the wait was successful, there should be count available.");
+                    Debug.Assert(
+                        !waitSuccessful || m_currentCount > 0,
+                        "If the wait was successful, there should be count available."
+                    );
                     if (m_currentCount > 0)
                     {
                         waitSuccessful = true;
@@ -418,7 +444,9 @@ namespace System.Threading
             // wait, and whether we successfully acquired the semaphore is
             // stored in waitSuccessful.
 
-            return (asyncWaitTask is not null) ? asyncWaitTask.GetAwaiter().GetResult() : waitSuccessful;
+            return (asyncWaitTask is not null)
+                ? asyncWaitTask.GetAwaiter().GetResult()
+                : waitSuccessful;
         }
 
         /// <summary>
@@ -430,7 +458,11 @@ namespace System.Threading
         /// <param name="cancellationToken">The CancellationToken to observe.</param>
         /// <returns>true if the monitor received a signal, false if the timeout expired</returns>
         [UnsupportedOSPlatform("browser")]
-        private bool WaitUntilCountOrTimeout(int millisecondsTimeout, uint startTime, CancellationToken cancellationToken)
+        private bool WaitUntilCountOrTimeout(
+            int millisecondsTimeout,
+            uint startTime,
+            CancellationToken cancellationToken
+        )
         {
             int remainingWaitMilliseconds = Timeout.Infinite;
 
@@ -442,7 +474,10 @@ namespace System.Threading
 
                 if (millisecondsTimeout != Timeout.Infinite)
                 {
-                    remainingWaitMilliseconds = TimeoutHelper.UpdateTimeOut(startTime, millisecondsTimeout);
+                    remainingWaitMilliseconds = TimeoutHelper.UpdateTimeOut(
+                        startTime,
+                        millisecondsTimeout
+                    );
                     if (remainingWaitMilliseconds <= 0)
                     {
                         // The thread has expires its timeout
@@ -569,7 +604,10 @@ namespace System.Threading
             if (totalMilliseconds < -1 || totalMilliseconds > int.MaxValue)
             {
                 throw new System.ArgumentOutOfRangeException(
-                    nameof(timeout), timeout, SR.SemaphoreSlim_Wait_TimeoutWrong);
+                    nameof(timeout),
+                    timeout,
+                    SR.SemaphoreSlim_Wait_TimeoutWrong
+                );
             }
 
             // Call wait with the timeout milliseconds
@@ -601,7 +639,10 @@ namespace System.Threading
             if (millisecondsTimeout < -1)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(millisecondsTimeout), millisecondsTimeout, SR.SemaphoreSlim_Wait_TimeoutWrong);
+                    nameof(millisecondsTimeout),
+                    millisecondsTimeout,
+                    SR.SemaphoreSlim_Wait_TimeoutWrong
+                );
             }
 
             // Bail early for cancellation
@@ -614,7 +655,8 @@ namespace System.Threading
                 if (m_currentCount > 0)
                 {
                     --m_currentCount;
-                    if (m_waitHandle is not null && m_currentCount == 0) m_waitHandle.Reset();
+                    if (m_waitHandle is not null && m_currentCount == 0)
+                        m_waitHandle.Reset();
                     return Task.FromResult(true);
                 }
                 else if (millisecondsTimeout == 0)
@@ -629,9 +671,15 @@ namespace System.Threading
                 {
                     Debug.Assert(m_currentCount == 0, "m_currentCount should never be negative");
                     TaskNode asyncWaiter = CreateAndAddAsyncWaiter();
-                    return (millisecondsTimeout == Timeout.Infinite && !cancellationToken.CanBeCanceled) ?
-                        asyncWaiter :
-                        WaitUntilCountOrTimeoutAsync(asyncWaiter, millisecondsTimeout, cancellationToken);
+                    return (
+                        millisecondsTimeout == Timeout.Infinite && !cancellationToken.CanBeCanceled
+                    )
+                        ? asyncWaiter
+                        : WaitUntilCountOrTimeoutAsync(
+                            asyncWaiter,
+                            millisecondsTimeout,
+                            cancellationToken
+                        );
                 }
             }
         }
@@ -654,7 +702,10 @@ namespace System.Threading
             }
             else
             {
-                Debug.Assert(m_asyncTail is not null, "If head is not null, neither should be tail");
+                Debug.Assert(
+                    m_asyncTail is not null,
+                    "If head is not null, neither should be tail"
+                );
                 m_asyncTail.Next = task;
                 task.Prev = m_asyncTail;
                 m_asyncTail = task;
@@ -676,11 +727,18 @@ namespace System.Threading
             bool wasInList = m_asyncHead == task || task.Prev is not null;
 
             // Remove it from the linked list
-            if (task.Next is not null) task.Next.Prev = task.Prev;
-            if (task.Prev is not null) task.Prev.Next = task.Next;
-            if (m_asyncHead == task) m_asyncHead = task.Next;
-            if (m_asyncTail == task) m_asyncTail = task.Prev;
-            Debug.Assert((m_asyncHead is null) == (m_asyncTail is null), "Head is null iff tail is null");
+            if (task.Next is not null)
+                task.Next.Prev = task.Prev;
+            if (task.Prev is not null)
+                task.Prev.Next = task.Next;
+            if (m_asyncHead == task)
+                m_asyncHead = task.Next;
+            if (m_asyncTail == task)
+                m_asyncTail = task.Prev;
+            Debug.Assert(
+                (m_asyncHead is null) == (m_asyncTail is null),
+                "Head is null iff tail is null"
+            );
 
             // Make sure not to leak
             task.Next = task.Prev = null;
@@ -694,12 +752,21 @@ namespace System.Threading
         /// <param name="millisecondsTimeout">The timeout.</param>
         /// <param name="cancellationToken">The cancellation token.</param>
         /// <returns>The task to return to the caller.</returns>
-        private async Task<bool> WaitUntilCountOrTimeoutAsync(TaskNode asyncWaiter, int millisecondsTimeout, CancellationToken cancellationToken)
+        private async Task<bool> WaitUntilCountOrTimeoutAsync(
+            TaskNode asyncWaiter,
+            int millisecondsTimeout,
+            CancellationToken cancellationToken
+        )
         {
             Debug.Assert(asyncWaiter is not null, "Waiter should have been constructed");
             Debug.Assert(Monitor.IsEntered(m_lockObjAndDisposed), "Requires the lock be held");
 
-            await new ConfiguredNoThrowAwaiter<bool>(asyncWaiter.WaitAsync(TimeSpan.FromMilliseconds(millisecondsTimeout), cancellationToken));
+            await new ConfiguredNoThrowAwaiter<bool>(
+                asyncWaiter.WaitAsync(
+                    TimeSpan.FromMilliseconds(millisecondsTimeout),
+                    cancellationToken
+                )
+            );
 
             if (cancellationToken.IsCancellationRequested)
             {
@@ -740,12 +807,20 @@ namespace System.Threading
         private readonly struct ConfiguredNoThrowAwaiter<T> : ICriticalNotifyCompletion
         {
             private readonly Task<T> _task;
+
             public ConfiguredNoThrowAwaiter(Task<T> task) => _task = task;
+
             public ConfiguredNoThrowAwaiter<T> GetAwaiter() => this;
+
             public bool IsCompleted => _task.IsCompleted;
+
             public void GetResult() => _task.MarkExceptionsAsHandled();
-            public void UnsafeOnCompleted(Action continuation) => _task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(continuation);
-            public void OnCompleted(Action continuation) => _task.ConfigureAwait(false).GetAwaiter().OnCompleted(continuation);
+
+            public void UnsafeOnCompleted(Action continuation) =>
+                _task.ConfigureAwait(false).GetAwaiter().UnsafeOnCompleted(continuation);
+
+            public void OnCompleted(Action continuation) =>
+                _task.ConfigureAwait(false).GetAwaiter().OnCompleted(continuation);
         }
 
         /// <summary>
@@ -777,7 +852,10 @@ namespace System.Threading
             if (releaseCount < 1)
             {
                 throw new ArgumentOutOfRangeException(
-                    nameof(releaseCount), releaseCount, SR.SemaphoreSlim_Release_CountWrong);
+                    nameof(releaseCount),
+                    releaseCount,
+                    SR.SemaphoreSlim_Release_CountWrong
+                );
             }
             int returnCount;
 
@@ -800,7 +878,8 @@ namespace System.Threading
                 // but have not yet woken
                 int waitCount = m_waitCount;
                 Debug.Assert(m_countOfWaitersPulsedToWake <= waitCount);
-                int waitersToNotify = Math.Min(currentCount, waitCount) - m_countOfWaitersPulsedToWake;
+                int waitersToNotify =
+                    Math.Min(currentCount, waitCount) - m_countOfWaitersPulsedToWake;
                 if (waitersToNotify > 0)
                 {
                     // Ideally, limiting to a maximum of releaseCount would not be necessary and could be an assert instead, but
@@ -827,7 +906,10 @@ namespace System.Threading
                 // waits are canceled, but the wait code path will handle that.
                 if (m_asyncHead is not null)
                 {
-                    Debug.Assert(m_asyncTail is not null, "tail should not be null if head isn't null");
+                    Debug.Assert(
+                        m_asyncTail is not null,
+                        "tail should not be null if head isn't null"
+                    );
                     int maxAsyncToRelease = currentCount - waitCount;
                     while (maxAsyncToRelease > 0 && m_asyncHead is not null)
                     {
@@ -898,7 +980,9 @@ namespace System.Threading
         /// <summary>
         /// Private helper method to wake up waiters when a cancellationToken gets canceled.
         /// </summary>
-        private static readonly Action<object?> s_cancellationTokenCanceledEventHandler = new Action<object?>(CancellationTokenCanceledEventHandler);
+        private static readonly Action<object?> s_cancellationTokenCanceledEventHandler =
+            new Action<object?>(CancellationTokenCanceledEventHandler);
+
         private static void CancellationTokenCanceledEventHandler(object? obj)
         {
             Debug.Assert(obj is SemaphoreSlim, "Expected a SemaphoreSlim");

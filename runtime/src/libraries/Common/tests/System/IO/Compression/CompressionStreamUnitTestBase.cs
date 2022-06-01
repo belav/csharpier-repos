@@ -46,14 +46,20 @@ namespace System.IO.Compression
                         rand.NextBytes(buffer);
                         task = compressor.WriteAsync(buffer, 0, buffer.Length);
                     }
-                    Assert.Throws<InvalidOperationException>(() => { compressor.FlushAsync(); }); // "overlapping flushes"
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        compressor.FlushAsync();
+                    }); // "overlapping flushes"
                 }
                 finally
                 {
                     // Unblock Async operations
                     writeStream.manualResetEvent.Set();
                     // The original WriteAsync should be able to complete
-                    Assert.True(task.Wait(TaskTimeout), "Original WriteAsync Task did not complete in time");
+                    Assert.True(
+                        task.Wait(TaskTimeout),
+                        "Original WriteAsync Task did not complete in time"
+                    );
                     Assert.True(writeStream.WriteHit, "BaseStream Write function was not called");
                 }
             }
@@ -65,7 +71,12 @@ namespace System.IO.Compression
         {
             byte[] buffer = new byte[32];
             string testFilePath = CompressedTestFile(UncompressedTestFile());
-            using (var readStream = await ManualSyncMemoryStream.GetStreamFromFileAsync(testFilePath, false))
+            using (
+                var readStream = await ManualSyncMemoryStream.GetStreamFromFileAsync(
+                    testFilePath,
+                    false
+                )
+            )
             using (var decompressor = CreateStream(readStream, CompressionMode.Decompress, true))
             {
                 Task task = null;
@@ -75,14 +86,20 @@ namespace System.IO.Compression
                     readStream.ReadHit = false;
                     task = decompressor.ReadAsync(buffer, 0, 32);
                     Assert.True(readStream.ReadHit);
-                    Assert.Throws<InvalidOperationException>(() => { decompressor.FlushAsync(); }); // "overlapping read"
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        decompressor.FlushAsync();
+                    }); // "overlapping read"
                 }
                 finally
                 {
                     // Unblock Async operations
                     readStream.manualResetEvent.Set();
                     // The original ReadAsync should be able to complete
-                    Assert.True(task.Wait(TaskTimeout), "Original ReadAsync Task did not complete in time");
+                    Assert.True(
+                        task.Wait(TaskTimeout),
+                        "Original ReadAsync Task did not complete in time"
+                    );
                 }
             }
         }
@@ -115,16 +132,24 @@ namespace System.IO.Compression
                         task = zip.FlushAsync();
                     }
 
-                    Assert.Throws<InvalidOperationException>(() => { zip.FlushAsync(); }); // "overlapping flushes"
+                    Assert.Throws<InvalidOperationException>(() =>
+                    {
+                        zip.FlushAsync();
+                    }); // "overlapping flushes"
                 }
                 finally
                 {
                     // Unblock Async operations
                     writeStream.manualResetEvent.Set();
                     // The original WriteAsync should be able to complete
-                    Assert.True(task.Wait(TaskTimeout), "Original write Task did not complete in time");
-                    Assert.True(writeStream.WriteHit, "Underlying Writesync function was not called.");
-
+                    Assert.True(
+                        task.Wait(TaskTimeout),
+                        "Original write Task did not complete in time"
+                    );
+                    Assert.True(
+                        writeStream.WriteHit,
+                        "Underlying Writesync function was not called."
+                    );
                 }
             }
         }
@@ -137,7 +162,12 @@ namespace System.IO.Compression
             int uncompressedSize = (int)new FileInfo(UncompressedTestFile()).Length;
             byte[] uncompressedBytes = new byte[uncompressedSize];
 
-            using (var readStream = await ManualSyncMemoryStream.GetStreamFromFileAsync(compressedPath, false))
+            using (
+                var readStream = await ManualSyncMemoryStream.GetStreamFromFileAsync(
+                    compressedPath,
+                    false
+                )
+            )
             {
                 var decompressor = CreateStream(readStream, CompressionMode.Decompress, true);
                 Task task = decompressor.ReadAsync(uncompressedBytes, 0, uncompressedBytes.Length);
@@ -153,7 +183,9 @@ namespace System.IO.Compression
         public async Task Read(string testFile)
         {
             var uncompressedStream = await LocalMemoryStream.readAppFileAsync(testFile);
-            var compressedStream = await LocalMemoryStream.readAppFileAsync(CompressedTestFile(testFile));
+            var compressedStream = await LocalMemoryStream.readAppFileAsync(
+                CompressedTestFile(testFile)
+            );
             var decompressor = CreateStream(compressedStream, CompressionMode.Decompress);
             var decompressorOutput = new MemoryStream();
 
@@ -188,7 +220,9 @@ namespace System.IO.Compression
         [ActiveIssue("https://github.com/dotnet/runtime/issues/36845", TestPlatforms.Android)]
         public async Task Read_EndOfStreamPosition()
         {
-            var compressedStream = await LocalMemoryStream.readAppFileAsync(CompressedTestFile(UncompressedTestFile()));
+            var compressedStream = await LocalMemoryStream.readAppFileAsync(
+                CompressedTestFile(UncompressedTestFile())
+            );
             int compressedEndPosition = (int)compressedStream.Length;
             var rand = new Random(1024);
             int _bufferSize = BufferSize * 2 - 568;
@@ -200,8 +234,12 @@ namespace System.IO.Compression
             compressedStream.Position = 0;
             var decompressor = CreateStream(compressedStream, CompressionMode.Decompress);
 
-            while (decompressor.Read(bytes, 0, _bufferSize) > 0);
-            Assert.Equal(((compressedEndPosition / BufferSize) + 1) * BufferSize, compressedStream.Position);
+            while (decompressor.Read(bytes, 0, _bufferSize) > 0)
+                ;
+            Assert.Equal(
+                ((compressedEndPosition / BufferSize) + 1) * BufferSize,
+                compressedStream.Position
+            );
         }
 
         [Fact]
@@ -210,7 +248,10 @@ namespace System.IO.Compression
         {
             string testFile = UncompressedTestFile();
             var uncompressedStream = await LocalMemoryStream.readAppFileAsync(testFile);
-            var compressedStream = new BadWrappedStream(BadWrappedStream.Mode.ReadSlowly, File.ReadAllBytes(CompressedTestFile(testFile)));
+            var compressedStream = new BadWrappedStream(
+                BadWrappedStream.Mode.ReadSlowly,
+                File.ReadAllBytes(CompressedTestFile(testFile))
+            );
             var decompressor = CreateStream(compressedStream, CompressionMode.Decompress);
             var decompressorOutput = new MemoryStream();
 
@@ -281,62 +322,75 @@ namespace System.IO.Compression
             AssertExtensions.Throws<ArgumentException>("stream", () => CreateStream(ms, mode));
         }
 
-
-
         [Fact]
         public void TestCompressCtor()
         {
             IEnumerable<Func<Stream, Stream>> CtorFunctions()
             {
-                yield return new Func<Stream, Stream>((stream) => CreateStream(stream, CompressionMode.Compress));
+                yield return new Func<Stream, Stream>(
+                    (stream) => CreateStream(stream, CompressionMode.Compress)
+                );
 
-                foreach (CompressionLevel level in new[] { CompressionLevel.Optimal, CompressionLevel.Fastest, CompressionLevel.NoCompression, CompressionLevel.SmallestSize })
+                foreach (
+                    CompressionLevel level in new[]
+                    {
+                        CompressionLevel.Optimal,
+                        CompressionLevel.Fastest,
+                        CompressionLevel.NoCompression,
+                        CompressionLevel.SmallestSize
+                    }
+                )
                 {
                     yield return new Func<Stream, Stream>((stream) => CreateStream(stream, level));
 
                     foreach (bool remainsOpen in new[] { true, false })
                     {
-                        yield return new Func<Stream, Stream>((stream) => CreateStream(stream, level, remainsOpen));
+                        yield return new Func<Stream, Stream>(
+                            (stream) => CreateStream(stream, level, remainsOpen)
+                        );
                     }
                 }
             }
 
-            Assert.All(CtorFunctions(), (create) =>
-            {
-                //Create the Stream
-                int _bufferSize = 1024;
-                var bytes = new byte[_bufferSize];
-                var baseStream = new MemoryStream(bytes, writable: true);
-                Stream compressor = create(baseStream);
-
-                //Write some data and Close the stream
-                string strData = "Test Data";
-                var encoding = Encoding.UTF8;
-                byte[] data = encoding.GetBytes(strData);
-                compressor.Write(data, 0, data.Length);
-                compressor.Flush();
-                compressor.Dispose();
-                baseStream.Dispose();
-
-                //Read the data
-                byte[] data2 = new byte[_bufferSize];
-                baseStream = new MemoryStream(bytes, writable: false);
-                var decompressor = CreateStream(baseStream, CompressionMode.Decompress);
-                int size = decompressor.Read(data2, 0, _bufferSize - 5);
-
-                //Verify the data roundtripped
-                for (int i = 0; i < size + 5; i++)
+            Assert.All(
+                CtorFunctions(),
+                (create) =>
                 {
-                    if (i < data.Length)
+                    //Create the Stream
+                    int _bufferSize = 1024;
+                    var bytes = new byte[_bufferSize];
+                    var baseStream = new MemoryStream(bytes, writable: true);
+                    Stream compressor = create(baseStream);
+
+                    //Write some data and Close the stream
+                    string strData = "Test Data";
+                    var encoding = Encoding.UTF8;
+                    byte[] data = encoding.GetBytes(strData);
+                    compressor.Write(data, 0, data.Length);
+                    compressor.Flush();
+                    compressor.Dispose();
+                    baseStream.Dispose();
+
+                    //Read the data
+                    byte[] data2 = new byte[_bufferSize];
+                    baseStream = new MemoryStream(bytes, writable: false);
+                    var decompressor = CreateStream(baseStream, CompressionMode.Decompress);
+                    int size = decompressor.Read(data2, 0, _bufferSize - 5);
+
+                    //Verify the data roundtripped
+                    for (int i = 0; i < size + 5; i++)
                     {
-                        Assert.Equal(data[i], data2[i]);
-                    }
-                    else
-                    {
-                        Assert.Equal((byte)0, data2[i]);
+                        if (i < data.Length)
+                        {
+                            Assert.Equal(data[i], data2[i]);
+                        }
+                        else
+                        {
+                            Assert.Equal((byte)0, data2[i]);
+                        }
                     }
                 }
-            });
+            );
         }
 
         [Fact]
@@ -346,8 +400,14 @@ namespace System.IO.Compression
             //Create the Stream
             int _bufferSize = 1024;
             var bytes = new byte[_bufferSize];
-            Stream compressedStream = await LocalMemoryStream.readAppFileAsync(CompressedTestFile(UncompressedTestFile()));
-            Stream decompressor = CreateStream(compressedStream, CompressionMode.Decompress, leaveOpen: false);
+            Stream compressedStream = await LocalMemoryStream.readAppFileAsync(
+                CompressedTestFile(UncompressedTestFile())
+            );
+            Stream decompressor = CreateStream(
+                compressedStream,
+                CompressionMode.Decompress,
+                leaveOpen: false
+            );
 
             //Read some data and Close the stream
             decompressor.Read(bytes, 0, _bufferSize);
@@ -355,48 +415,117 @@ namespace System.IO.Compression
             decompressor.Dispose();
 
             //Check that Close has really closed the underlying stream
-            Assert.Throws<ObjectDisposedException>(() => compressedStream.Read(bytes, 0, bytes.Length));
+            Assert.Throws<ObjectDisposedException>(
+                () => compressedStream.Read(bytes, 0, bytes.Length)
+            );
         }
 
         [Fact]
         public void Ctor_ArgumentValidation()
         {
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionLevel.Fastest));
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionMode.Decompress));
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionMode.Compress));
+            Assert.Throws<ArgumentNullException>(
+                () => CreateStream(null, CompressionLevel.Fastest)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => CreateStream(null, CompressionMode.Decompress)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => CreateStream(null, CompressionMode.Compress)
+            );
 
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionLevel.Fastest, true));
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionMode.Decompress, false));
-            Assert.Throws<ArgumentNullException>(() => CreateStream(null, CompressionMode.Compress, true));
+            Assert.Throws<ArgumentNullException>(
+                () => CreateStream(null, CompressionLevel.Fastest, true)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => CreateStream(null, CompressionMode.Decompress, false)
+            );
+            Assert.Throws<ArgumentNullException>(
+                () => CreateStream(null, CompressionMode.Compress, true)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("mode", () => CreateStream(new MemoryStream(), (CompressionMode)42));
-            AssertExtensions.Throws<ArgumentException>("mode", () => CreateStream(new MemoryStream(), (CompressionMode)43, true));
+            AssertExtensions.Throws<ArgumentException>(
+                "mode",
+                () => CreateStream(new MemoryStream(), (CompressionMode)42)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                "mode",
+                () => CreateStream(new MemoryStream(), (CompressionMode)43, true)
+            );
 
-            AssertExtensions.Throws<ArgumentException>("stream", () => CreateStream(new MemoryStream(new byte[1], writable: false), CompressionLevel.Optimal));
+            AssertExtensions.Throws<ArgumentException>(
+                "stream",
+                () =>
+                    CreateStream(
+                        new MemoryStream(new byte[1], writable: false),
+                        CompressionLevel.Optimal
+                    )
+            );
         }
 
         [Fact]
         public async Task WrapNullReturningTasksStream()
         {
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnNullTasks), CompressionMode.Decompress))
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnNullTasks),
+                    CompressionMode.Decompress
+                )
+            )
                 Assert.Equal(0, await decompressor.ReadAsync(new byte[1024], 0, 1024));
         }
 
         [Fact]
         public async Task WrapStreamReturningBadReadValues()
         {
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts), CompressionMode.Decompress))
-                Assert.Throws<InvalidDataException>(() => decompressor.Read(new byte[1024], 0, 1024));
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts), CompressionMode.Decompress))
-                await Assert.ThrowsAsync<InvalidDataException>(() => decompressor.ReadAsync(new byte[1024], 0, 1024));
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts), CompressionMode.Decompress))
-                await Assert.ThrowsAsync<InvalidDataException>(async () => { await decompressor.ReadAsync(new Memory<byte>(new byte[1024])); });
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts),
+                    CompressionMode.Decompress
+                )
+            )
+                Assert.Throws<InvalidDataException>(
+                    () => decompressor.Read(new byte[1024], 0, 1024)
+                );
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts),
+                    CompressionMode.Decompress
+                )
+            )
+                await Assert.ThrowsAsync<InvalidDataException>(
+                    () => decompressor.ReadAsync(new byte[1024], 0, 1024)
+                );
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnTooLargeCounts),
+                    CompressionMode.Decompress
+                )
+            )
+                await Assert.ThrowsAsync<InvalidDataException>(async () =>
+                {
+                    await decompressor.ReadAsync(new Memory<byte>(new byte[1024]));
+                });
 
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnTooSmallCounts), CompressionMode.Decompress))
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnTooSmallCounts),
+                    CompressionMode.Decompress
+                )
+            )
                 Assert.Equal(0, decompressor.Read(new byte[1024], 0, 1024));
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnTooSmallCounts), CompressionMode.Decompress))
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnTooSmallCounts),
+                    CompressionMode.Decompress
+                )
+            )
                 Assert.Equal(0, await decompressor.ReadAsync(new byte[1024], 0, 1024));
-            using (var decompressor = CreateStream(new BadWrappedStream(BadWrappedStream.Mode.ReturnTooSmallCounts), CompressionMode.Decompress))
+            using (
+                var decompressor = CreateStream(
+                    new BadWrappedStream(BadWrappedStream.Mode.ReturnTooSmallCounts),
+                    CompressionMode.Decompress
+                )
+            )
                 Assert.Equal(0, await decompressor.ReadAsync(new Memory<byte>(new byte[1024])));
         }
 
@@ -418,7 +547,11 @@ namespace System.IO.Compression
         [ActiveIssue("https://github.com/dotnet/runtime/issues/36845", TestPlatforms.Android)]
         public async Task BaseStream_Modify(CompressionMode mode)
         {
-            using (var baseStream = await LocalMemoryStream.readAppFileAsync(CompressedTestFile(UncompressedTestFile())))
+            using (
+                var baseStream = await LocalMemoryStream.readAppFileAsync(
+                    CompressedTestFile(UncompressedTestFile())
+                )
+            )
             using (var compressor = CreateStream(baseStream, mode))
             {
                 int size = 1024;
@@ -450,7 +583,9 @@ namespace System.IO.Compression
         [ActiveIssue("https://github.com/dotnet/runtime/issues/36845", TestPlatforms.Android)]
         public async Task BaseStream_ValidAfterDisposeWithTrueLeaveOpen(CompressionMode mode)
         {
-            var ms = await LocalMemoryStream.readAppFileAsync(CompressedTestFile(UncompressedTestFile()));
+            var ms = await LocalMemoryStream.readAppFileAsync(
+                CompressedTestFile(UncompressedTestFile())
+            );
             var decompressor = CreateStream(ms, mode, leaveOpen: true);
             var baseStream = BaseStream(decompressor);
             Assert.Same(ms, baseStream);
@@ -518,7 +653,12 @@ namespace System.IO.Compression
                 bool expectException = i < compressedData.Length;
                 using (var compressedStream = new MemoryStream(compressedData.Take(i).ToArray()))
                 {
-                    using (Stream decompressor = CreateStream(compressedStream, CompressionMode.Decompress))
+                    using (
+                        Stream decompressor = CreateStream(
+                            compressedStream,
+                            CompressionMode.Decompress
+                        )
+                    )
                     {
                         var decompressedStream = new MemoryStream();
 
@@ -535,11 +675,27 @@ namespace System.IO.Compression
                                     break;
 
                                 case TestScenario.Read:
-                                    while (ZipFileTestBase.ReadAllBytes(decompressor, buffer, 0, buffer.Length) != 0) { };
+                                    while (
+                                        ZipFileTestBase.ReadAllBytes(
+                                            decompressor,
+                                            buffer,
+                                            0,
+                                            buffer.Length
+                                        ) != 0
+                                    ) { }
+                                    ;
                                     break;
 
                                 case TestScenario.ReadAsync:
-                                    while (await ZipFileTestBase.ReadAllBytesAsync(decompressor, buffer, 0, buffer.Length) != 0) { };
+                                    while (
+                                        await ZipFileTestBase.ReadAllBytesAsync(
+                                            decompressor,
+                                            buffer,
+                                            0,
+                                            buffer.Length
+                                        ) != 0
+                                    ) { }
+                                    ;
                                     break;
 
                                 case TestScenario.ReadByte:
@@ -556,12 +712,16 @@ namespace System.IO.Compression
                             if (expectException)
                                 continue;
 
-                            throw new XunitException($"An unexpected error occurred while decompressing data:{e}");
+                            throw new XunitException(
+                                $"An unexpected error occurred while decompressing data:{e}"
+                            );
                         }
 
                         if (expectException)
                         {
-                            throw new XunitException($"Truncated stream was decompressed successfully but exception was expected: length={i}/{compressedData.Length}");
+                            throw new XunitException(
+                                $"Truncated stream was decompressed successfully but exception was expected: length={i}/{compressedData.Length}"
+                            );
                         }
                     }
                 }
@@ -582,8 +742,15 @@ namespace System.IO.Compression
 
         private readonly Mode _mode;
 
-        public BadWrappedStream(Mode mode) { _mode = mode; }
-        public BadWrappedStream(Mode mode, byte[] buffer) : base(buffer) { _mode = mode; }
+        public BadWrappedStream(Mode mode)
+        {
+            _mode = mode;
+        }
+
+        public BadWrappedStream(Mode mode, byte[] buffer) : base(buffer)
+        {
+            _mode = mode;
+        }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -600,33 +767,69 @@ namespace System.IO.Compression
             }
         }
 
-        public override Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
-            return _mode == Mode.ReturnNullTasks ?
-               null :
-               base.WriteAsync(buffer, offset, count, cancellationToken);
+            return _mode == Mode.ReturnNullTasks
+                ? null
+                : base.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
         public override void Write(byte[] buffer, int offset, int count) { }
+
         public override void Flush() { }
-        public override bool CanRead { get { return true; } }
-        public override bool CanSeek { get { return false; } }
-        public override bool CanWrite { get { return true; } }
-        public override long Length { get { throw new NotSupportedException(); } }
-        public override long Position { get { throw new NotSupportedException(); } set { throw new NotSupportedException(); } }
-        public override long Seek(long offset, SeekOrigin origin) { throw new NotSupportedException(); }
-        public override void SetLength(long value) { throw new NotSupportedException(); }
+
+        public override bool CanRead
+        {
+            get { return true; }
+        }
+        public override bool CanSeek
+        {
+            get { return false; }
+        }
+        public override bool CanWrite
+        {
+            get { return true; }
+        }
+        public override long Length
+        {
+            get { throw new NotSupportedException(); }
+        }
+        public override long Position
+        {
+            get { throw new NotSupportedException(); }
+            set { throw new NotSupportedException(); }
+        }
+
+        public override long Seek(long offset, SeekOrigin origin)
+        {
+            throw new NotSupportedException();
+        }
+
+        public override void SetLength(long value)
+        {
+            throw new NotSupportedException();
+        }
     }
 
     internal partial class ManualSyncMemoryStream : MemoryStream
     {
         private bool isSync;
-        public ManualResetEventSlim manualResetEvent = new ManualResetEventSlim(initialState: false);
+        public ManualResetEventSlim manualResetEvent = new ManualResetEventSlim(
+            initialState: false
+        );
 
-        public bool ReadHit = false;  // For validation of the async methods we want to ensure they correctly delegate the async
+        public bool ReadHit = false; // For validation of the async methods we want to ensure they correctly delegate the async
         public bool WriteHit = false; // methods of the underlying stream. This bool acts as a toggle to check that they're being used.
 
-        public static async Task<ManualSyncMemoryStream> GetStreamFromFileAsync(string testFile, bool sync = false)
+        public static async Task<ManualSyncMemoryStream> GetStreamFromFileAsync(
+            string testFile,
+            bool sync = false
+        )
         {
             var baseStream = await StreamHelpers.CreateTempCopyStream(testFile);
             var ms = new ManualSyncMemoryStream(sync);
@@ -641,12 +844,32 @@ namespace System.IO.Compression
             isSync = sync;
         }
 
-        public override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback callback, object state) => TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
+        public override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        ) => TaskToApm.Begin(ReadAsync(buffer, offset, count), callback, state);
+
         public override int EndRead(IAsyncResult asyncResult) => TaskToApm.End<int>(asyncResult);
-        public override IAsyncResult BeginWrite(byte[] buffer, int offset, int count, AsyncCallback callback, object state) => TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
+
+        public override IAsyncResult BeginWrite(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback callback,
+            object state
+        ) => TaskToApm.Begin(WriteAsync(buffer, offset, count), callback, state);
+
         public override void EndWrite(IAsyncResult asyncResult) => TaskToApm.End(asyncResult);
 
-        public override async Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             ReadHit = true;
             if (isSync)
@@ -655,13 +878,19 @@ namespace System.IO.Compression
             }
             else
             {
-                await Task.Run(() => manualResetEvent.Wait(cancellationToken)).ConfigureAwait(false);
+                await Task.Run(() => manualResetEvent.Wait(cancellationToken))
+                    .ConfigureAwait(false);
             }
 
             return await base.ReadAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override async Task WriteAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override async Task WriteAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             WriteHit = true;
             if (isSync)
@@ -670,13 +899,17 @@ namespace System.IO.Compression
             }
             else
             {
-                await Task.Run(() => manualResetEvent.Wait(cancellationToken)).ConfigureAwait(false);
+                await Task.Run(() => manualResetEvent.Wait(cancellationToken))
+                    .ConfigureAwait(false);
             }
 
             await base.WriteAsync(buffer, offset, count, cancellationToken);
         }
 
-        public override async ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             ReadHit = true;
 
@@ -686,12 +919,16 @@ namespace System.IO.Compression
             }
             else
             {
-                await Task.Run(() => manualResetEvent.Wait(cancellationToken)).ConfigureAwait(false);
+                await Task.Run(() => manualResetEvent.Wait(cancellationToken))
+                    .ConfigureAwait(false);
             }
             return await base.ReadAsync(buffer, cancellationToken);
         }
 
-        public override async ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken)
+        public override async ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
             WriteHit = true;
 
@@ -701,7 +938,8 @@ namespace System.IO.Compression
             }
             else
             {
-                await Task.Run(() => manualResetEvent.Wait(cancellationToken)).ConfigureAwait(false);
+                await Task.Run(() => manualResetEvent.Wait(cancellationToken))
+                    .ConfigureAwait(false);
             }
 
             await base.WriteAsync(buffer, cancellationToken);

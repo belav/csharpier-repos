@@ -13,7 +13,10 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Conventions;
 ///     <see href="https://aka.ms/efcore-docs-sqlserver">Accessing SQL Server and SQL Azure databases with EF Core</see>
 ///     for more information and examples.
 /// </remarks>
-public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConvention, ISkipNavigationForeignKeyChangedConvention, IModelFinalizingConvention
+public class SqlServerTemporalConvention
+    : IEntityTypeAnnotationChangedConvention,
+        ISkipNavigationForeignKeyChangedConvention,
+        IModelFinalizingConvention
 {
     private const string DefaultPeriodStartName = "PeriodStart";
     private const string DefaultPeriodEndName = "PeriodEnd";
@@ -25,7 +28,8 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
     /// <param name="relationalDependencies">Parameter object containing relational dependencies for this convention.</param>
     public SqlServerTemporalConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    )
     {
         Dependencies = dependencies;
         Dependencies = dependencies;
@@ -48,7 +52,8 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
         string name,
         IConventionAnnotation? annotation,
         IConventionAnnotation? oldAnnotation,
-        IConventionContext<IConventionAnnotation> context)
+        IConventionContext<IConventionAnnotation> context
+    )
     {
         if (name == SqlServerAnnotationNames.IsTemporal)
         {
@@ -66,13 +71,16 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
 
                 foreach (var skipLevelNavigation in entityTypeBuilder.Metadata.GetSkipNavigations())
                 {
-                    if (skipLevelNavigation.DeclaringEntityType.IsTemporal()
+                    if (
+                        skipLevelNavigation.DeclaringEntityType.IsTemporal()
                         && skipLevelNavigation.Inverse is IConventionSkipNavigation inverse
                         && inverse.DeclaringEntityType.IsTemporal()
-                        && skipLevelNavigation.JoinEntityType is IConventionEntityType joinEntityType
+                        && skipLevelNavigation.JoinEntityType
+                            is IConventionEntityType joinEntityType
                         && joinEntityType.HasSharedClrType
                         && !joinEntityType.IsTemporal()
-                        && joinEntityType.GetConfigurationSource() == ConfigurationSource.Convention)
+                        && joinEntityType.GetConfigurationSource() == ConfigurationSource.Convention
+                    )
                     {
                         joinEntityType.SetIsTemporal(true);
                     }
@@ -85,22 +93,32 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
             }
         }
 
-        if (name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
-            || name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName)
+        if (
+            name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
+            || name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
+        )
         {
             if (oldAnnotation?.Value is string oldPeriodPropertyName)
             {
-                var oldPeriodProperty = entityTypeBuilder.Metadata.GetProperty(oldPeriodPropertyName);
+                var oldPeriodProperty = entityTypeBuilder.Metadata.GetProperty(
+                    oldPeriodPropertyName
+                );
                 entityTypeBuilder.RemoveUnusedImplicitProperties(new[] { oldPeriodProperty });
 
                 if (oldPeriodProperty.GetTypeConfigurationSource() == ConfigurationSource.Explicit)
                 {
-                    if ((name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
+                    if (
+                        (
+                            name == SqlServerAnnotationNames.TemporalPeriodStartPropertyName
                             && oldPeriodProperty.GetDefaultValue() is DateTime start
-                            && start == DateTime.MinValue)
-                        || (name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
+                            && start == DateTime.MinValue
+                        )
+                        || (
+                            name == SqlServerAnnotationNames.TemporalPeriodEndPropertyName
                             && oldPeriodProperty.GetDefaultValue() is DateTime end
-                            && end == DateTime.MaxValue))
+                            && end == DateTime.MaxValue
+                        )
+                    )
                     {
                         oldPeriodProperty.Builder.HasDefaultValue(null);
                     }
@@ -111,7 +129,8 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
             {
                 var periodPropertyBuilder = entityTypeBuilder.Property(
                     typeof(DateTime),
-                    periodPropertyName);
+                    periodPropertyName
+                );
 
                 // set column name explicitly so that we don't try to uniquify it to some other column
                 // in case another property is defined that maps to the same column
@@ -125,15 +144,18 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
         IConventionSkipNavigationBuilder skipNavigationBuilder,
         IConventionForeignKey? foreignKey,
         IConventionForeignKey? oldForeignKey,
-        IConventionContext<IConventionForeignKey> context)
+        IConventionContext<IConventionForeignKey> context
+    )
     {
-        if (skipNavigationBuilder.Metadata.JoinEntityType is IConventionEntityType joinEntityType
+        if (
+            skipNavigationBuilder.Metadata.JoinEntityType is IConventionEntityType joinEntityType
             && joinEntityType.HasSharedClrType
             && !joinEntityType.IsTemporal()
             && joinEntityType.GetConfigurationSource() == ConfigurationSource.Convention
             && skipNavigationBuilder.Metadata.DeclaringEntityType.IsTemporal()
             && skipNavigationBuilder.Metadata.Inverse is IConventionSkipNavigation inverse
-            && inverse.DeclaringEntityType.IsTemporal())
+            && inverse.DeclaringEntityType.IsTemporal()
+        )
         {
             joinEntityType.SetIsTemporal(true);
         }
@@ -142,9 +164,12 @@ public class SqlServerTemporalConvention : IEntityTypeAnnotationChangedConventio
     /// <inheritdoc />
     public virtual void ProcessModelFinalizing(
         IConventionModelBuilder modelBuilder,
-        IConventionContext<IConventionModelBuilder> context)
+        IConventionContext<IConventionModelBuilder> context
+    )
     {
-        foreach (var entityType in modelBuilder.Metadata.GetEntityTypes().Where(e => e.IsTemporal()))
+        foreach (
+            var entityType in modelBuilder.Metadata.GetEntityTypes().Where(e => e.IsTemporal())
+        )
         {
             // Needed for the annotation to show up in the model snapshot - issue #9329
             // history table name will always be non-null for temporal table case

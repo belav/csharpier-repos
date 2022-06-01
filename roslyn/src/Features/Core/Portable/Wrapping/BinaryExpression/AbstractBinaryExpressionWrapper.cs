@@ -17,8 +17,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
     using Microsoft.CodeAnalysis.Indentation;
     using Microsoft.CodeAnalysis.Precedence;
 
-    internal abstract partial class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax> : AbstractSyntaxWrapper
-        where TBinaryExpressionSyntax : SyntaxNode
+    internal abstract partial class AbstractBinaryExpressionWrapper<TBinaryExpressionSyntax>
+        : AbstractSyntaxWrapper where TBinaryExpressionSyntax : SyntaxNode
     {
         private readonly ISyntaxFacts _syntaxFacts;
         private readonly IPrecedenceService _precedenceService;
@@ -26,7 +26,8 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
         protected AbstractBinaryExpressionWrapper(
             IIndentationService indentationService,
             ISyntaxFacts syntaxFacts,
-            IPrecedenceService precedenceService) : base(indentationService)
+            IPrecedenceService precedenceService
+        ) : base(indentationService)
         {
             _syntaxFacts = syntaxFacts;
             _precedenceService = precedenceService;
@@ -37,10 +38,18 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
         /// user wants to wrap the operator to the next line.  For C# this is a simple newline-trivia.
         /// For VB, this will be a line-continuation char (<c>_</c>), followed by a newline.
         /// </summary>
-        protected abstract SyntaxTriviaList GetNewLineBeforeOperatorTrivia(SyntaxTriviaList newLine);
+        protected abstract SyntaxTriviaList GetNewLineBeforeOperatorTrivia(
+            SyntaxTriviaList newLine
+        );
 
         public sealed override async Task<ICodeActionComputer?> TryCreateComputerAsync(
-            Document document, int position, SyntaxNode node, SyntaxWrappingOptions options, bool containsSyntaxError, CancellationToken cancellationToken)
+            Document document,
+            int position,
+            SyntaxNode node,
+            SyntaxWrappingOptions options,
+            bool containsSyntaxError,
+            CancellationToken cancellationToken
+        )
         {
             if (containsSyntaxError)
                 return null;
@@ -62,8 +71,10 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             //
             // Note: we use `<=` when comparing precedence because lower precedence has a higher
             // value.
-            if (binaryExpr.Parent is TBinaryExpressionSyntax parentBinary &&
-                precedence <= _precedenceService.GetPrecedenceKind(parentBinary))
+            if (
+                binaryExpr.Parent is TBinaryExpressionSyntax parentBinary
+                && precedence <= _precedenceService.GetPrecedenceKind(parentBinary)
+            )
             {
                 return null;
             }
@@ -71,29 +82,43 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
             var exprsAndOperators = GetExpressionsAndOperators(precedence, binaryExpr);
 #if DEBUG
             Debug.Assert(exprsAndOperators.Length >= 3);
-            Debug.Assert(exprsAndOperators.Length % 2 == 1, "Should have odd number of exprs and operators");
+            Debug.Assert(
+                exprsAndOperators.Length % 2 == 1,
+                "Should have odd number of exprs and operators"
+            );
             for (var i = 0; i < exprsAndOperators.Length; i++)
             {
                 var item = exprsAndOperators[i];
-                Debug.Assert(((i % 2) == 0 && item.IsNode) ||
-                             ((i % 2) == 1 && item.IsToken));
+                Debug.Assert(((i % 2) == 0 && item.IsNode) || ((i % 2) == 1 && item.IsToken));
             }
 #endif
 
             var containsUnformattableContent = await ContainsUnformattableContentAsync(
-                document, exprsAndOperators, cancellationToken).ConfigureAwait(false);
+                    document,
+                    exprsAndOperators,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             if (containsUnformattableContent)
                 return null;
 
             var sourceText = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             return new BinaryExpressionCodeActionComputer(
-                this, document, sourceText, options, binaryExpr,
-                exprsAndOperators, cancellationToken);
+                this,
+                document,
+                sourceText,
+                options,
+                binaryExpr,
+                exprsAndOperators,
+                cancellationToken
+            );
         }
 
         private ImmutableArray<SyntaxNodeOrToken> GetExpressionsAndOperators(
-            PrecedenceKind precedence, TBinaryExpressionSyntax binaryExpr)
+            PrecedenceKind precedence,
+            TBinaryExpressionSyntax binaryExpr
+        )
         {
             using var _ = ArrayBuilder<SyntaxNodeOrToken>.GetInstance(out var result);
             AddExpressionsAndOperators(precedence, binaryExpr, result);
@@ -101,13 +126,22 @@ namespace Microsoft.CodeAnalysis.Wrapping.BinaryExpression
         }
 
         private void AddExpressionsAndOperators(
-            PrecedenceKind precedence, SyntaxNode expr, ArrayBuilder<SyntaxNodeOrToken> result)
+            PrecedenceKind precedence,
+            SyntaxNode expr,
+            ArrayBuilder<SyntaxNodeOrToken> result
+        )
         {
-            if (expr is TBinaryExpressionSyntax &&
-                precedence == _precedenceService.GetPrecedenceKind(expr))
+            if (
+                expr is TBinaryExpressionSyntax
+                && precedence == _precedenceService.GetPrecedenceKind(expr)
+            )
             {
                 _syntaxFacts.GetPartsOfBinaryExpression(
-                    expr, out var left, out var opToken, out var right);
+                    expr,
+                    out var left,
+                    out var opToken,
+                    out var right
+                );
                 AddExpressionsAndOperators(precedence, left, result);
                 result.Add(opToken);
                 AddExpressionsAndOperators(precedence, right, result);

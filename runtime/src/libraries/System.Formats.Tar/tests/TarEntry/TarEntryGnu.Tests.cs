@@ -12,30 +12,58 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void Constructor_InvalidEntryName()
         {
-            Assert.Throws<ArgumentNullException>(() => new GnuTarEntry(TarEntryType.RegularFile, entryName: null));
-            Assert.Throws<ArgumentException>(() => new GnuTarEntry(TarEntryType.RegularFile, entryName: string.Empty));
+            Assert.Throws<ArgumentNullException>(
+                () => new GnuTarEntry(TarEntryType.RegularFile, entryName: null)
+            );
+            Assert.Throws<ArgumentException>(
+                () => new GnuTarEntry(TarEntryType.RegularFile, entryName: string.Empty)
+            );
         }
 
         [Fact]
         public void Constructor_UnsupportedEntryTypes()
         {
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry((TarEntryType)byte.MaxValue, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry((TarEntryType)byte.MaxValue, InitialEntryName)
+            );
 
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.V7RegularFile, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.ExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.GlobalExtendedAttributes, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.V7RegularFile, InitialEntryName)
+            );
 
             // These are specific to GNU, but currently the user cannot create them manually
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.ContiguousFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.DirectoryList, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.MultiVolume, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.SparseFile, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.TapeVolume, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.ContiguousFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.DirectoryList, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.MultiVolume, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.RenamedOrSymlinked, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.SparseFile, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.TapeVolume, InitialEntryName)
+            );
 
             // The user should not create these entries manually
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.LongLink, InitialEntryName));
-            Assert.Throws<InvalidOperationException>(() => new GnuTarEntry(TarEntryType.LongPath, InitialEntryName));
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.LongLink, InitialEntryName)
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => new GnuTarEntry(TarEntryType.LongPath, InitialEntryName)
+            );
         }
 
         [Fact]
@@ -81,7 +109,10 @@ namespace System.Formats.Tar.Tests
         [Fact]
         public void SupportedEntryType_CharacterDevice()
         {
-            GnuTarEntry characterDevice = new GnuTarEntry(TarEntryType.CharacterDevice, InitialEntryName);
+            GnuTarEntry characterDevice = new GnuTarEntry(
+                TarEntryType.CharacterDevice,
+                InitialEntryName
+            );
             SetCharacterDevice(characterDevice);
             VerifyCharacterDevice(characterDevice);
         }
@@ -157,12 +188,16 @@ namespace System.Formats.Tar.Tests
             string fileName = "mylink";
             string fullPath = Path.Join(root.Path, fileName);
 
-            string linkTarget = PlatformDetection.IsWindows ? @"C:\Windows\system32\notepad.exe" : "/usr/bin/nano";
+            string linkTarget = PlatformDetection.IsWindows
+                ? @"C:\Windows\system32\notepad.exe"
+                : "/usr/bin/nano";
 
             GnuTarEntry entry = new GnuTarEntry(entryType, fileName);
             entry.LinkName = linkTarget;
 
-            Assert.Throws<InvalidOperationException>(() => entry.ExtractToFile(fileName, overwrite: false));
+            Assert.Throws<InvalidOperationException>(
+                () => entry.ExtractToFile(fileName, overwrite: false)
+            );
 
             Assert.Equal(0, Directory.GetFileSystemEntries(root.Path).Count());
         }

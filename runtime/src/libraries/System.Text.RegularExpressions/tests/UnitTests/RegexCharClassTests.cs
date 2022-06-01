@@ -30,7 +30,9 @@ namespace System.Text.RegularExpressions.Tests
         [InlineData(@"[\0-ad-\uFFFF-[a-d]]", @"[\0-ad-\uFFFF-[a-d]]")]
         public void DescribeSet(string set, string expected)
         {
-            RegexNode setNode = RegexParser.Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture).Root.Child(0);
+            RegexNode setNode = RegexParser
+                .Parse($"{set}", RegexOptions.None, CultureInfo.InvariantCulture)
+                .Root.Child(0);
             Assert.Equal(expected, RegexCharClass.DescribeSet(setNode.Str!));
         }
     }

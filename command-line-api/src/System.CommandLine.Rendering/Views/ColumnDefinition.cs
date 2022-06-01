@@ -32,7 +32,8 @@ namespace System.CommandLine.Rendering.Views
             }
             return new ColumnDefinition(SizeMode.Star, weight);
         }
-        
-        public static ColumnDefinition SizeToContent() => new ColumnDefinition(SizeMode.SizeToContent, 0);
+
+        public static ColumnDefinition SizeToContent() =>
+            new ColumnDefinition(SizeMode.SizeToContent, 0);
     }
 }

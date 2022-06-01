@@ -26,8 +26,8 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
         InternalEntityEntry entry,
         TState state,
         InternalEntityEntry? sourceEntry,
-        INavigationBase? inboundNavigation)
-        : base(entry, sourceEntry, inboundNavigation)
+        INavigationBase? inboundNavigation
+    ) : base(entry, sourceEntry, inboundNavigation)
     {
         NodeState = state;
     }
@@ -49,7 +49,8 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
     public override EntityEntryGraphNode CreateNode(
         EntityEntryGraphNode currentNode,
         InternalEntityEntry internalEntityEntry,
-        INavigationBase reachedVia)
+        INavigationBase reachedVia
+    )
     {
         Check.NotNull(currentNode, nameof(currentNode));
         Check.NotNull(internalEntityEntry, nameof(internalEntityEntry));
@@ -59,6 +60,7 @@ public class EntityEntryGraphNode<TState> : EntityEntryGraphNode
             internalEntityEntry,
             ((EntityEntryGraphNode<TState>)currentNode).NodeState,
             currentNode.Entry.GetInfrastructure(),
-            reachedVia);
+            reachedVia
+        );
     }
 }

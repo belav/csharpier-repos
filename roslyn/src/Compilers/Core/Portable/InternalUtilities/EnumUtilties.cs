@@ -16,11 +16,13 @@ namespace Roslyn.Utilities
         /// </summary>
         /// <remarks>
         /// </remarks>
-        internal static ulong ConvertEnumUnderlyingTypeToUInt64(object value, SpecialType specialType)
+        internal static ulong ConvertEnumUnderlyingTypeToUInt64(
+            object value,
+            SpecialType specialType
+        )
         {
             RoslynDebug.Assert(value != null);
             Debug.Assert(value.GetType().GetTypeInfo().IsPrimitive);
-
             unchecked
             {
                 switch (specialType)
@@ -45,7 +47,12 @@ namespace Roslyn.Utilities
                     default:
                         // not using ExceptionUtilities.UnexpectedValue() because this is used by the Services layer
                         // which doesn't have those utilities.
-                        throw new InvalidOperationException(string.Format("{0} is not a valid underlying type for an enum", specialType));
+                        throw new InvalidOperationException(
+                            string.Format(
+                                "{0} is not a valid underlying type for an enum",
+                                specialType
+                            )
+                        );
                 }
             }
         }

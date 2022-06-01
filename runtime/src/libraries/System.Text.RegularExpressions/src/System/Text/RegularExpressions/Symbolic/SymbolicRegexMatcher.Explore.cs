@@ -14,7 +14,13 @@ namespace System.Text.RegularExpressions.Symbolic
     {
         /// <inheritdoc cref="Regex.Explore(bool, bool, bool, bool, bool)"/>
         [ExcludeFromCodeCoverage(Justification = "Currently only used for testing")]
-        public override void Explore(bool includeDotStarred, bool includeReverse, bool includeOriginal, bool exploreDfa, bool exploreNfa)
+        public override void Explore(
+            bool includeDotStarred,
+            bool includeReverse,
+            bool includeOriginal,
+            bool exploreDfa,
+            bool exploreNfa
+        )
         {
             Debug.Assert(_builder._minterms is not null);
 
@@ -39,12 +45,22 @@ namespace System.Text.RegularExpressions.Symbolic
                     // Don't dequeue yet, because a transition might fail
                     DfaMatchingState<TSet> state = toExplore.Peek();
                     // Include the special minterm for the last end-of-line if the state is sensitive to it
-                    int maxMinterm = state.StartsWithLineAnchor ? _builder._minterms.Length : _builder._minterms.Length - 1;
+                    int maxMinterm = state.StartsWithLineAnchor
+                        ? _builder._minterms.Length
+                        : _builder._minterms.Length - 1;
                     // Explore successor states for each minterm
                     for (int mintermId = 0; mintermId <= maxMinterm; ++mintermId)
                     {
                         int offset = (state.Id << _builder._mintermsLog) | mintermId;
-                        if (!_builder.TryCreateNewTransition(state, mintermId, offset, true, out DfaMatchingState<TSet>? nextState))
+                        if (
+                            !_builder.TryCreateNewTransition(
+                                state,
+                                mintermId,
+                                offset,
+                                true,
+                                out DfaMatchingState<TSet>? nextState
+                            )
+                        )
                             goto DfaLimitReached;
                         EnqueueIfUnseen(nextState, seen, toExplore);
                     }
@@ -53,7 +69,7 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-        DfaLimitReached:
+            DfaLimitReached:
             if (exploreNfa && toExplore.Count > 0)
             {
                 // DFA states are broken up into NFA states when they are alternations
@@ -76,12 +92,20 @@ namespace System.Text.RegularExpressions.Symbolic
                     // NFA transitions can't fail, so its safe to dequeue here
                     DfaMatchingState<TSet> state = toExplore.Dequeue();
                     // Include the special minterm for the last end-of-line if the state is sensitive to it
-                    int maxMinterm = state.StartsWithLineAnchor ? _builder._minterms.Length : _builder._minterms.Length - 1;
+                    int maxMinterm = state.StartsWithLineAnchor
+                        ? _builder._minterms.Length
+                        : _builder._minterms.Length - 1;
                     // Explore successor states for each minterm
                     for (int mintermId = 0; mintermId <= maxMinterm; ++mintermId)
                     {
-                        int nfaOffset = (_builder._nfaStateArrayInverse[state.Id] << _builder._mintermsLog) | mintermId;
-                        int[] nextNfaStates = _builder.CreateNewNfaTransition(_builder._nfaStateArrayInverse[state.Id], mintermId, nfaOffset);
+                        int nfaOffset =
+                            (_builder._nfaStateArrayInverse[state.Id] << _builder._mintermsLog)
+                            | mintermId;
+                        int[] nextNfaStates = _builder.CreateNewNfaTransition(
+                            _builder._nfaStateArrayInverse[state.Id],
+                            mintermId,
+                            nfaOffset
+                        );
                         foreach (int nextNfaState in nextNfaStates)
                         {
                             EnqueueIfUnseen(_builder.GetCoreState(nextNfaState), seen, toExplore);
@@ -90,7 +114,11 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            static void EnqueueAll(DfaMatchingState<TSet>[] states, HashSet<DfaMatchingState<TSet>> seen, Queue<DfaMatchingState<TSet>> toExplore)
+            static void EnqueueAll(
+                DfaMatchingState<TSet>[] states,
+                HashSet<DfaMatchingState<TSet>> seen,
+                Queue<DfaMatchingState<TSet>> toExplore
+            )
             {
                 foreach (DfaMatchingState<TSet> state in states)
                 {
@@ -98,7 +126,11 @@ namespace System.Text.RegularExpressions.Symbolic
                 }
             }
 
-            static void EnqueueIfUnseen(DfaMatchingState<TSet> state, HashSet<DfaMatchingState<TSet>> seen, Queue<DfaMatchingState<TSet>> queue)
+            static void EnqueueIfUnseen(
+                DfaMatchingState<TSet> state,
+                HashSet<DfaMatchingState<TSet>> seen,
+                Queue<DfaMatchingState<TSet>> queue
+            )
             {
                 if (seen.Add(state))
                 {

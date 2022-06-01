@@ -7,9 +7,16 @@ namespace System.Linq
 {
     public static partial class Enumerable
     {
-        public static IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second) => Intersect(first, second, null);
+        public static IEnumerable<TSource> Intersect<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second
+        ) => Intersect(first, second, null);
 
-        public static IEnumerable<TSource> Intersect<TSource>(this IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
+        public static IEnumerable<TSource> Intersect<TSource>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             if (first == null)
             {
@@ -38,7 +45,11 @@ namespace System.Linq
         /// <para>When the object returned by this method is enumerated, `Intersect` yields distinct elements occurring in both sequences in the order in which they appear in <paramref name="first" />.</para>
         /// <para>The default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
         /// </remarks>
-        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector) => IntersectBy(first, second, keySelector, null);
+        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector
+        ) => IntersectBy(first, second, keySelector, null);
 
         /// <summary>Produces the set intersection of two sequences according to a specified key selector function.</summary>
         /// <typeparam name="TSource">The type of the elements of the input sequences.</typeparam>
@@ -55,7 +66,12 @@ namespace System.Linq
         /// <para>When the object returned by this method is enumerated, `Intersect` yields distinct elements occurring in both sequences in the order in which they appear in <paramref name="first" />.</para>
         /// <para>If <paramref name="comparer" /> is <see langword="null" />, the default equality comparer, <see cref="EqualityComparer{T}.Default" />, is used to compare values.</para>
         /// </remarks>
-        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(this IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        public static IEnumerable<TSource> IntersectBy<TSource, TKey>(
+            this IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             if (first is null)
             {
@@ -73,7 +89,11 @@ namespace System.Linq
             return IntersectByIterator(first, second, keySelector, comparer);
         }
 
-        private static IEnumerable<TSource> IntersectIterator<TSource>(IEnumerable<TSource> first, IEnumerable<TSource> second, IEqualityComparer<TSource>? comparer)
+        private static IEnumerable<TSource> IntersectIterator<TSource>(
+            IEnumerable<TSource> first,
+            IEnumerable<TSource> second,
+            IEqualityComparer<TSource>? comparer
+        )
         {
             var set = new HashSet<TSource>(second, comparer);
 
@@ -86,7 +106,12 @@ namespace System.Linq
             }
         }
 
-        private static IEnumerable<TSource> IntersectByIterator<TSource, TKey>(IEnumerable<TSource> first, IEnumerable<TKey> second, Func<TSource, TKey> keySelector, IEqualityComparer<TKey>? comparer)
+        private static IEnumerable<TSource> IntersectByIterator<TSource, TKey>(
+            IEnumerable<TSource> first,
+            IEnumerable<TKey> second,
+            Func<TSource, TKey> keySelector,
+            IEqualityComparer<TKey>? comparer
+        )
         {
             var set = new HashSet<TKey>(second, comparer);
 

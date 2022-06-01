@@ -18,7 +18,10 @@ namespace Internal.IL.Stubs.StartupCode
         private MethodSignature _signature;
         private IReadOnlyCollection<MethodDesc> _libraryInitializers;
 
-        public NativeLibraryStartupMethod(TypeDesc owningType, IReadOnlyCollection<MethodDesc> libraryInitializers)
+        public NativeLibraryStartupMethod(
+            TypeDesc owningType,
+            IReadOnlyCollection<MethodDesc> libraryInitializers
+        )
         {
             _owningType = owningType;
             _libraryInitializers = libraryInitializers;
@@ -26,34 +29,22 @@ namespace Internal.IL.Stubs.StartupCode
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         public override string Name
         {
-            get
-            {
-                return "NativeLibraryStartup";
-            }
+            get { return "NativeLibraryStartup"; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "NativeLibraryStartup";
-            }
+            get { return "NativeLibraryStartup"; }
         }
 
         public override MethodIL EmitIL()
@@ -89,9 +80,13 @@ namespace Internal.IL.Stubs.StartupCode
             {
                 if (_signature == null)
                 {
-                    _signature = new MethodSignature(MethodSignatureFlags.Static | MethodSignatureFlags.UnmanagedCallingConvention, 0,
-                            Context.GetWellKnownType(WellKnownType.Void),
-                            new TypeDesc[0]);
+                    _signature = new MethodSignature(
+                        MethodSignatureFlags.Static
+                            | MethodSignatureFlags.UnmanagedCallingConvention,
+                        0,
+                        Context.GetWellKnownType(WellKnownType.Void),
+                        new TypeDesc[0]
+                    );
                 }
 
                 return _signature;
@@ -100,10 +95,7 @@ namespace Internal.IL.Stubs.StartupCode
 
         public override bool IsUnmanagedCallersOnly
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
     }
 }

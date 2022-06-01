@@ -30,10 +30,14 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.DocumentationComments
             IUIThreadOperationExecutor uiThreadOperationExecutor,
             ITextUndoHistoryRegistry undoHistoryRegistry,
             IEditorOperationsFactoryService editorOperationsFactoryService,
-            IGlobalOptionService globalOptions)
-            : base(uiThreadOperationExecutor, undoHistoryRegistry, editorOperationsFactoryService, globalOptions)
-        {
-        }
+            IGlobalOptionService globalOptions
+        )
+            : base(
+                uiThreadOperationExecutor,
+                undoHistoryRegistry,
+                editorOperationsFactoryService,
+                globalOptions
+            ) { }
 
         protected override string ExteriorTriviaText => "///";
     }

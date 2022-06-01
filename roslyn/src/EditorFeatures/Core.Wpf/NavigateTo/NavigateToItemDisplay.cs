@@ -35,7 +35,8 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             IThreadingContext threadingContext,
             IUIThreadOperationExecutor threadOperationExecutor,
             IAsynchronousOperationListener asyncListener,
-            INavigateToSearchResult searchResult)
+            INavigateToSearchResult searchResult
+        )
         {
             _threadingContext = threadingContext;
             _threadOperationExecutor = threadOperationExecutor;
@@ -68,23 +69,37 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             var span = NavigateToUtilities.GetBoundedSpan(_searchResult.NavigableItem, sourceText);
 
             var items = new List<DescriptionItem>
-                    {
-                        new DescriptionItem(
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun("Project:", bold: true) }),
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun(document.Project.Name) })),
-                        new DescriptionItem(
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun("File:", bold: true) }),
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun(document.FilePath ?? document.Name) })),
-                        new DescriptionItem(
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun("Line:", bold: true) }),
-                            new ReadOnlyCollection<DescriptionRun>(
-                                new[] { new DescriptionRun((sourceText.Lines.IndexOf(span.Start) + 1).ToString()) }))
-                    };
+            {
+                new DescriptionItem(
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun("Project:", bold: true) }
+                    ),
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun(document.Project.Name) }
+                    )
+                ),
+                new DescriptionItem(
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun("File:", bold: true) }
+                    ),
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun(document.FilePath ?? document.Name) }
+                    )
+                ),
+                new DescriptionItem(
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[] { new DescriptionRun("Line:", bold: true) }
+                    ),
+                    new ReadOnlyCollection<DescriptionRun>(
+                        new[]
+                        {
+                            new DescriptionRun(
+                                (sourceText.Lines.IndexOf(span.Start) + 1).ToString()
+                            )
+                        }
+                    )
+                )
+            };
 
             var summary = _searchResult.Summary;
             if (!string.IsNullOrWhiteSpace(summary))
@@ -92,9 +107,13 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
                 items.Add(
                     new DescriptionItem(
                         new ReadOnlyCollection<DescriptionRun>(
-                            new[] { new DescriptionRun("Summary:", bold: true) }),
+                            new[] { new DescriptionRun("Summary:", bold: true) }
+                        ),
                         new ReadOnlyCollection<DescriptionRun>(
-                            new[] { new DescriptionRun(summary) })));
+                            new[] { new DescriptionRun(summary) }
+                        )
+                    )
+                );
             }
 
             return items.AsReadOnly();
@@ -126,15 +145,22 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
             // In the case of a stale item, don't require that the span be in bounds of the document
             // as it exists right now.
             using var context = _threadOperationExecutor.BeginExecute(
-                EditorFeaturesResources.Navigating_to_definition, EditorFeaturesResources.Navigating_to_definition, allowCancellation: true, showProgress: false);
-            await navigationService.TryNavigateToSpanAsync(
-                _threadingContext,
-                workspace,
-                document.Id,
-                _searchResult.NavigableItem.SourceSpan,
-                NavigationOptions.Default,
-                allowInvalidSpan: _searchResult.NavigableItem.IsStale,
-                context.UserCancellationToken).ConfigureAwait(false);
+                EditorFeaturesResources.Navigating_to_definition,
+                EditorFeaturesResources.Navigating_to_definition,
+                allowCancellation: true,
+                showProgress: false
+            );
+            await navigationService
+                .TryNavigateToSpanAsync(
+                    _threadingContext,
+                    workspace,
+                    document.Id,
+                    _searchResult.NavigableItem.SourceSpan,
+                    NavigationOptions.Default,
+                    allowInvalidSpan: _searchResult.NavigableItem.IsStale,
+                    context.UserCancellationToken
+                )
+                .ConfigureAwait(false);
         }
 
         public int GetProvisionalViewingStatus()
@@ -167,10 +193,10 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.NavigateTo
 
         public ImageMoniker GlyphMoniker => _searchResult.NavigableItem.Glyph.GetImageMoniker();
 
-        public IReadOnlyList<Span> GetNameMatchRuns(string searchValue)
-            => _searchResult.NameMatchSpans.NullToEmpty().SelectAsArray(ts => ts.ToSpan());
+        public IReadOnlyList<Span> GetNameMatchRuns(string searchValue) =>
+            _searchResult.NameMatchSpans.NullToEmpty().SelectAsArray(ts => ts.ToSpan());
 
-        public IReadOnlyList<Span> GetAdditionalInformationMatchRuns(string searchValue)
-            => SpecializedCollections.EmptyReadOnlyList<Span>();
+        public IReadOnlyList<Span> GetAdditionalInformationMatchRuns(string searchValue) =>
+            SpecializedCollections.EmptyReadOnlyList<Span>();
     }
 }

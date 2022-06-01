@@ -14,7 +14,8 @@ namespace System.Text.Json
             Utf8JsonWriter writer,
             in TValue value,
             JsonSerializerOptions options,
-            ref WriteStack state)
+            ref WriteStack state
+        )
         {
             Debug.Assert(writer != null);
 
@@ -35,13 +36,19 @@ namespace System.Text.Json
             return success;
         }
 
-        private static void WriteUsingGeneratedSerializer<TValue>(Utf8JsonWriter writer, in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static void WriteUsingGeneratedSerializer<TValue>(
+            Utf8JsonWriter writer,
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             Debug.Assert(writer != null);
 
-            if (jsonTypeInfo.HasSerialize &&
-                jsonTypeInfo is JsonTypeInfo<TValue> typedInfo &&
-                typedInfo.Options.JsonSerializerContext?.CanUseSerializationLogic == true)
+            if (
+                jsonTypeInfo.HasSerialize
+                && jsonTypeInfo is JsonTypeInfo<TValue> typedInfo
+                && typedInfo.Options.JsonSerializerContext?.CanUseSerializationLogic == true
+            )
             {
                 Debug.Assert(typedInfo.SerializeHandler != null);
                 typedInfo.SerializeHandler(writer, value);
@@ -53,15 +60,21 @@ namespace System.Text.Json
             }
         }
 
-        private static void WriteUsingSerializer<TValue>(Utf8JsonWriter writer, in TValue value, JsonTypeInfo jsonTypeInfo)
+        private static void WriteUsingSerializer<TValue>(
+            Utf8JsonWriter writer,
+            in TValue value,
+            JsonTypeInfo jsonTypeInfo
+        )
         {
             Debug.Assert(writer != null);
 
-            Debug.Assert(!jsonTypeInfo.HasSerialize ||
-                jsonTypeInfo is not JsonTypeInfo<TValue> ||
-                jsonTypeInfo.Options.JsonSerializerContext == null ||
-                !jsonTypeInfo.Options.JsonSerializerContext.CanUseSerializationLogic,
-                "Incorrect method called. WriteUsingGeneratedSerializer() should have been called instead.");
+            Debug.Assert(
+                !jsonTypeInfo.HasSerialize
+                    || jsonTypeInfo is not JsonTypeInfo<TValue>
+                    || jsonTypeInfo.Options.JsonSerializerContext == null
+                    || !jsonTypeInfo.Options.JsonSerializerContext.CanUseSerializationLogic,
+                "Incorrect method called. WriteUsingGeneratedSerializer() should have been called instead."
+            );
 
             WriteStack state = default;
             jsonTypeInfo.EnsureConfigured();

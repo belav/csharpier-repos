@@ -21,13 +21,16 @@ public class TemporaryValuesFactoryFactory : SidecarValuesFactoryFactory
         Type? entityType,
         ParameterExpression parameter,
         Type[] types,
-        IList<IPropertyBase> propertyBases)
+        IList<IPropertyBase> propertyBases
+    )
     {
         var constructorExpression = Expression.Convert(
             Expression.New(
                 Snapshot.CreateSnapshotType(types).GetDeclaredConstructor(types)!,
-                types.Select(e => Expression.Default(e)).ToArray()),
-            typeof(ISnapshot));
+                types.Select(e => Expression.Default(e)).ToArray()
+            ),
+            typeof(ISnapshot)
+        );
 
         return constructorExpression;
     }

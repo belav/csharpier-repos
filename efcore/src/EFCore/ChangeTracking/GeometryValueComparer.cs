@@ -18,9 +18,8 @@ public class GeometryValueComparer<TGeometry> : ValueComparer<TGeometry>
         : base(
             GetEqualsExpression(),
             CreateDefaultHashCodeExpression(favorStructuralComparisons: false),
-            GetSnapshotExpression())
-    {
-    }
+            GetSnapshotExpression()
+        ) { }
 
     private static Expression<Func<TGeometry?, TGeometry?, bool>> GetEqualsExpression()
     {
@@ -49,10 +48,19 @@ public class GeometryValueComparer<TGeometry> : ValueComparer<TGeometry>
                             Expression.IsFalse(yNull),
                             Expression.Call(
                                 x,
-                                typeof(TGeometry).GetRuntimeMethod("EqualsExact", new[] { typeof(TGeometry) })!,
-                                y))))),
+                                typeof(TGeometry).GetRuntimeMethod(
+                                    "EqualsExact",
+                                    new[] { typeof(TGeometry) }
+                                )!,
+                                y
+                            )
+                        )
+                    )
+                )
+            ),
             left,
-            right);
+            right
+        );
     }
 
     private static Expression<Func<TGeometry, TGeometry>> GetSnapshotExpression()
@@ -61,7 +69,8 @@ public class GeometryValueComparer<TGeometry> : ValueComparer<TGeometry>
 
         Expression body = Expression.Call(
             instance,
-            typeof(TGeometry).GetRuntimeMethod("Copy", Type.EmptyTypes)!);
+            typeof(TGeometry).GetRuntimeMethod("Copy", Type.EmptyTypes)!
+        );
 
         if (typeof(TGeometry).FullName != "NetTopologySuite.Geometries.Geometry")
         {

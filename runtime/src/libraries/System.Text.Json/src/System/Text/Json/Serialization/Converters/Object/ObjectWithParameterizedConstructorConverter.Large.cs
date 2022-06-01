@@ -12,18 +12,30 @@ namespace System.Text.Json.Serialization.Converters
     /// Implementation of <cref>JsonObjectConverter{T}</cref> that supports the deserialization
     /// of JSON objects using parameterized constructors.
     /// </summary>
-    internal class LargeObjectWithParameterizedConstructorConverter<T> : ObjectWithParameterizedConstructorConverter<T> where T : notnull
+    internal class LargeObjectWithParameterizedConstructorConverter<T>
+        : ObjectWithParameterizedConstructorConverter<T> where T : notnull
     {
-        protected sealed override bool ReadAndCacheConstructorArgument(ref ReadStack state, ref Utf8JsonReader reader, JsonParameterInfo jsonParameterInfo)
+        protected sealed override bool ReadAndCacheConstructorArgument(
+            ref ReadStack state,
+            ref Utf8JsonReader reader,
+            JsonParameterInfo jsonParameterInfo
+        )
         {
             Debug.Assert(jsonParameterInfo.ShouldDeserialize);
             Debug.Assert(jsonParameterInfo.Options != null);
 
-            bool success = jsonParameterInfo.ConverterBase.TryReadAsObject(ref reader, jsonParameterInfo.Options!, ref state, out object? arg);
+            bool success = jsonParameterInfo.ConverterBase.TryReadAsObject(
+                ref reader,
+                jsonParameterInfo.Options!,
+                ref state,
+                out object? arg
+            );
 
             if (success && !(arg == null && jsonParameterInfo.IgnoreDefaultValuesOnRead))
             {
-                ((object[])state.Current.CtorArgumentState!.Arguments)[jsonParameterInfo.ClrInfo.Position] = arg!;
+                ((object[])state.Current.CtorArgumentState!.Arguments)[
+                    jsonParameterInfo.ClrInfo.Position
+                ] = arg!;
             }
 
             return success;
@@ -48,7 +60,10 @@ namespace System.Text.Json.Serialization.Converters
             return obj;
         }
 
-        protected sealed override void InitializeConstructorArgumentCaches(ref ReadStack state, JsonSerializerOptions options)
+        protected sealed override void InitializeConstructorArgumentCaches(
+            ref ReadStack state,
+            JsonSerializerOptions options
+        )
         {
             JsonTypeInfo typeInfo = state.Current.JsonTypeInfo;
 

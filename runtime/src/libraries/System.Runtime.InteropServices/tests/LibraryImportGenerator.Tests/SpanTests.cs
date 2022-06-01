@@ -19,37 +19,70 @@ namespace LibraryImportGenerator.IntegrationTests
         public partial class Span
         {
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int Sum([MarshalUsing(typeof(SpanMarshaller<int>))] Span<int> values, int numValues);
+            public static partial int Sum(
+                [MarshalUsing(typeof(SpanMarshaller<int>))] Span<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int SumNeverNull([MarshalUsing(typeof(NeverNullSpanMarshaller<int>))] Span<int> values, int numValues);
+            public static partial int SumNeverNull(
+                [MarshalUsing(typeof(NeverNullSpanMarshaller<int>))] Span<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array")]
-            public static partial int SumNeverNull([MarshalUsing(typeof(NeverNullReadOnlySpanMarshaller<int>))] ReadOnlySpan<int> values, int numValues);
+            public static partial int SumNeverNull(
+                [MarshalUsing(typeof(NeverNullReadOnlySpanMarshaller<int>))]
+                    ReadOnlySpan<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "sum_int_array_ref")]
-            public static partial int SumInArray([MarshalUsing(typeof(SpanMarshaller<int>))] in Span<int> values, int numValues);
+            public static partial int SumInArray(
+                [MarshalUsing(typeof(SpanMarshaller<int>))] in Span<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void Duplicate([MarshalUsing(typeof(SpanMarshaller<int>), CountElementName = "numValues")] ref Span<int> values, int numValues);
+            public static partial void Duplicate(
+                [MarshalUsing(typeof(SpanMarshaller<int>), CountElementName = "numValues")]
+                    ref Span<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "duplicate_int_array")]
-            public static partial void DuplicateRaw([MarshalUsing(typeof(DirectSpanMarshaller<int>), CountElementName = "numValues")] ref Span<int> values, int numValues);
+            public static partial void DuplicateRaw(
+                [MarshalUsing(typeof(DirectSpanMarshaller<int>), CountElementName = "numValues")]
+                    ref Span<int> values,
+                int numValues
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array")]
             [return: MarshalUsing(typeof(SpanMarshaller<int>), CountElementName = "numValues")]
             public static partial Span<int> CreateRange(int start, int end, out int numValues);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "create_range_array_out")]
-            public static partial void CreateRange_Out(int start, int end, out int numValues, [MarshalUsing(typeof(SpanMarshaller<int>), CountElementName = "numValues")] out Span<int> res);
+            public static partial void CreateRange_Out(
+                int start,
+                int end,
+                out int numValues,
+                [MarshalUsing(typeof(SpanMarshaller<int>), CountElementName = "numValues")]
+                    out Span<int> res
+            );
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "get_long_bytes")]
-            [return: MarshalUsing(typeof(SpanMarshaller<byte>), ConstantElementCount = sizeof(long))]
+            [return: MarshalUsing(
+                typeof(SpanMarshaller<byte>),
+                ConstantElementCount = sizeof(long)
+            )]
             public static partial Span<byte> GetLongBytes(long l);
 
             [LibraryImport(NativeExportsNE_Binary, EntryPoint = "and_all_members")]
             [return: MarshalAs(UnmanagedType.U1)]
-            public static partial bool AndAllMembers([MarshalUsing(typeof(SpanMarshaller<BoolStruct>))] Span<BoolStruct> pArray, int length);
+            public static partial bool AndAllMembers(
+                [MarshalUsing(typeof(SpanMarshaller<BoolStruct>))] Span<BoolStruct> pArray,
+                int length
+            );
         }
     }
 

@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseImplicitObjectCreati
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseImplicitObjectCreationDiagnosticAnalyzer,
-        CSharpUseImplicitObjectCreationCodeFixProvider>;
+        CSharpUseImplicitObjectCreationCodeFixProvider
+    >;
 
     public class UseImplicitObjectCreationTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseImplicitObjectCreation)]
         public async Task TestMissingBeforeCSharp9()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     C c = new C();
@@ -40,12 +42,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C c = new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C c = new();
@@ -59,12 +63,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C c = new [|C|]() { };
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C c = new() { };
@@ -78,12 +84,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C c = new [|C|] { };
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C c = new() { };
@@ -97,12 +105,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C c = new /*x*/ [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C c = new /*x*/ ();
@@ -116,7 +126,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     object c = new C();
@@ -130,7 +141,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestState = {
+                TestState =
+                {
                     Sources =
                     {
                         @"
@@ -142,9 +154,15 @@ class C
                     ExpectedDiagnostics =
                     {
                         // /0/Test0.cs(4,5): error CS0246: The type or namespace name 'E' could not be found (are you missing a using directive or an assembly reference?)
-                        DiagnosticResult.CompilerError("CS0246").WithLocation(0).WithArguments("E"),
+                        DiagnosticResult
+                            .CompilerError("CS0246")
+                            .WithLocation(0)
+                            .WithArguments("E"),
                         // /0/Test0.cs(4,15): error CS0246: The type or namespace name 'E' could not be found (are you missing a using directive or an assembly reference?)
-                        DiagnosticResult.CompilerError("CS0246").WithLocation(1).WithArguments("E"),
+                        DiagnosticResult
+                            .CompilerError("CS0246")
+                            .WithLocation(1)
+                            .WithArguments("E"),
                     }
                 },
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
@@ -156,7 +174,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     dynamic c = new C();
@@ -170,7 +189,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     int[] c = new int[0];
@@ -184,12 +204,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C<T> where T : new()
 {
     T t = new [|T|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C<T> where T : new()
 {
     T t = new();
@@ -203,7 +225,8 @@ class C<T> where T : new()
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -211,7 +234,8 @@ class C
         C c = new [|C|]();
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -222,7 +246,10 @@ class C
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOptions2.FalseWithSuggestionEnforcement },
+                    {
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOptions2.FalseWithSuggestionEnforcement
+                    },
                 }
             }.RunAsync();
         }
@@ -232,7 +259,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -243,7 +271,10 @@ class C
                 LanguageVersion = CodeAnalysis.CSharp.LanguageVersion.CSharp9,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.VarWhenTypeIsApparent, CodeStyleOptions2.TrueWithSuggestionEnforcement },
+                    {
+                        CSharpCodeStyleOptions.VarWhenTypeIsApparent,
+                        CodeStyleOptions2.TrueWithSuggestionEnforcement
+                    },
                 }
             }.RunAsync();
         }
@@ -253,7 +284,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -263,7 +295,8 @@ class C
         }
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -282,7 +315,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void M()
@@ -290,7 +324,8 @@ class C
         C Func() => new [|C|]();
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     void M()
@@ -307,12 +342,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C Func() => new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C Func() => new();
@@ -326,12 +363,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     public static implicit operator C(int i) => new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     public static implicit operator C(int i) => new();
@@ -345,12 +384,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     public static C operator +(C c1, C c2) => new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     public static C operator +(C c1, C c2) => new();
@@ -364,12 +405,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C P => new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C P => new();
@@ -383,12 +426,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C P { get => new [|C|](); }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C P { get => new(); }
@@ -402,7 +447,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C P { set => new C(); }
@@ -416,12 +462,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C this[int i] => new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C this[int i] => new();
@@ -435,12 +483,14 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C this[int i] { get => new [|C|](); }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 class C
 {
     C this[int i] { get => new(); }
@@ -454,7 +504,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     C Func() { return new C(); }
@@ -468,7 +519,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void X() => Bar(new C());
@@ -483,7 +535,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 class C
 {
     void X()
@@ -501,13 +554,15 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
     List<int> list = new [|System.Collections.Generic.List<int>|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
@@ -522,13 +577,15 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
     System.Collections.Generic.List<int> list = new [|List<int>|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
@@ -543,14 +600,16 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System.Collections.Generic;
 using X = System.Collections.Generic.List<int>;
 class C
 {
     System.Collections.Generic.List<int> list = new [|X|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System.Collections.Generic;
 using X = System.Collections.Generic.List<int>;
 class C
@@ -566,7 +625,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System;
 class C
 {
@@ -578,7 +638,8 @@ class C
         C c2 = new [|C|]();
     });
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System;
 class C
 {
@@ -600,13 +661,15 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
     List<(int SomeName, int SomeOtherName, int YetAnotherName)> list = new [|List<(int SomeName, int SomeOtherName, int YetAnotherName)>|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
@@ -622,13 +685,15 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
     List<(int SomeName, int SomeOtherName, int YetAnotherName)> list = new [|List<(int, int, int)>|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
@@ -644,7 +709,8 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
@@ -653,7 +719,8 @@ class C
         List<(int SomeName, int SomeOtherName, int YetAnotherName)> list = new [|List<(int, int, int)>|]();
     }
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 using System.Collections.Generic;
 class C
 {
@@ -670,7 +737,8 @@ class C
         [WorkItem(57777, "https://github.com/dotnet/roslyn/issues/57777")]
         public async Task TestMissingOnNullableStruct()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     int? i = new int?();
@@ -688,13 +756,15 @@ class C
         {
             await new VerifyCS.Test
             {
-                TestCode = @"
+                TestCode =
+                    @"
 #nullable enable
 class C
 {
     C? c = new [|C|]();
 }",
-                FixedCode = @"
+                FixedCode =
+                    @"
 #nullable enable
 class C
 {

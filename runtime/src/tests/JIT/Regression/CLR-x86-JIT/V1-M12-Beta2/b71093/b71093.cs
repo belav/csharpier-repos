@@ -4,7 +4,6 @@
 
 using System;
 
-
 namespace Test
 {
     public class AA
@@ -26,6 +25,7 @@ namespace Test
             }
             finally { }
         }
+
         public static int Main()
         {
             try

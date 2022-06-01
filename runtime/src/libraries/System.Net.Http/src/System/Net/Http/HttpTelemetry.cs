@@ -28,10 +28,27 @@ namespace System.Net.Http
         // - A stop event's event id must be next one after its start event.
 
         [Event(1, Level = EventLevel.Informational)]
-        private void RequestStart(string scheme, string host, int port, string pathAndQuery, byte versionMajor, byte versionMinor, HttpVersionPolicy versionPolicy)
+        private void RequestStart(
+            string scheme,
+            string host,
+            int port,
+            string pathAndQuery,
+            byte versionMajor,
+            byte versionMinor,
+            HttpVersionPolicy versionPolicy
+        )
         {
             Interlocked.Increment(ref _startedRequests);
-            WriteEvent(eventId: 1, scheme, host, port, pathAndQuery, versionMajor, versionMinor, versionPolicy);
+            WriteEvent(
+                eventId: 1,
+                scheme,
+                host,
+                port,
+                pathAndQuery,
+                versionMajor,
+                versionMinor,
+                versionPolicy
+            );
         }
 
         [NonEvent]
@@ -46,7 +63,8 @@ namespace System.Net.Http
                 request.RequestUri.PathAndQuery,
                 (byte)request.Version.Major,
                 (byte)request.Version.Minor,
-                request.VersionPolicy);
+                request.VersionPolicy
+            );
         }
 
         [Event(2, Level = EventLevel.Informational)]
@@ -76,7 +94,11 @@ namespace System.Net.Http
         }
 
         [Event(6, Level = EventLevel.Informational)]
-        private void RequestLeftQueue(double timeOnQueueMilliseconds, byte versionMajor, byte versionMinor)
+        private void RequestLeftQueue(
+            double timeOnQueueMilliseconds,
+            byte versionMajor,
+            byte versionMinor
+        )
         {
             WriteEvent(eventId: 6, timeOnQueueMilliseconds, versionMajor, versionMinor);
         }
@@ -175,17 +197,32 @@ namespace System.Net.Http
         }
 
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe")]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe"
+        )]
 #endif
         [NonEvent]
-        private unsafe void WriteEvent(int eventId, string? arg1, string? arg2, int arg3, string? arg4, byte arg5, byte arg6, HttpVersionPolicy arg7)
+        private unsafe void WriteEvent(
+            int eventId,
+            string? arg1,
+            string? arg2,
+            int arg3,
+            string? arg4,
+            byte arg5,
+            byte arg6,
+            HttpVersionPolicy arg7
+        )
         {
             if (IsEnabled())
             {
-                if (arg1 == null) arg1 = "";
-                if (arg2 == null) arg2 = "";
-                if (arg4 == null) arg4 = "";
+                if (arg1 == null)
+                    arg1 = "";
+                if (arg2 == null)
+                    arg2 = "";
+                if (arg4 == null)
+                    arg4 = "";
 
                 fixed (char* arg1Ptr = arg1)
                 fixed (char* arg2Ptr = arg2)
@@ -204,11 +241,7 @@ namespace System.Net.Http
                         DataPointer = (IntPtr)(arg2Ptr),
                         Size = (arg2.Length + 1) * sizeof(char)
                     };
-                    descrs[2] = new EventData
-                    {
-                        DataPointer = (IntPtr)(&arg3),
-                        Size = sizeof(int)
-                    };
+                    descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(int) };
                     descrs[3] = new EventData
                     {
                         DataPointer = (IntPtr)(arg4Ptr),
@@ -236,8 +269,11 @@ namespace System.Net.Http
         }
 
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe")]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe"
+        )]
 #endif
         [NonEvent]
         private unsafe void WriteEvent(int eventId, double arg1, byte arg2, byte arg3)
@@ -247,29 +283,20 @@ namespace System.Net.Http
                 const int NumEventDatas = 3;
                 EventData* descrs = stackalloc EventData[NumEventDatas];
 
-                descrs[0] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg1),
-                    Size = sizeof(double)
-                };
-                descrs[1] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg2),
-                    Size = sizeof(byte)
-                };
-                descrs[2] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg3),
-                    Size = sizeof(byte)
-                };
+                descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(double) };
+                descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(byte) };
+                descrs[2] = new EventData { DataPointer = (IntPtr)(&arg3), Size = sizeof(byte) };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }
         }
 
 #if !ES_BUILD_STANDALONE
-        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Parameters to this method are primitive and are trimmer safe")]
+        [System.Diagnostics.CodeAnalysis.UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Parameters to this method are primitive and are trimmer safe"
+        )]
 #endif
         [NonEvent]
         private unsafe void WriteEvent(int eventId, byte arg1, byte arg2)
@@ -279,16 +306,8 @@ namespace System.Net.Http
                 const int NumEventDatas = 2;
                 EventData* descrs = stackalloc EventData[NumEventDatas];
 
-                descrs[0] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg1),
-                    Size = sizeof(byte)
-                };
-                descrs[1] = new EventData
-                {
-                    DataPointer = (IntPtr)(&arg2),
-                    Size = sizeof(byte)
-                };
+                descrs[0] = new EventData { DataPointer = (IntPtr)(&arg1), Size = sizeof(byte) };
+                descrs[1] = new EventData { DataPointer = (IntPtr)(&arg2), Size = sizeof(byte) };
 
                 WriteEventCore(eventId, NumEventDatas, descrs);
             }

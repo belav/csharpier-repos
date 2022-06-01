@@ -32,17 +32,15 @@ public sealed class NullableComparerAdapter<TNullableKey> : IEqualityComparer<TN
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public static IEqualityComparer<TNullableKey> Wrap(IEqualityComparer comparer)
-        => comparer is IEqualityComparer<TNullableKey> nullableComparer
+    public static IEqualityComparer<TNullableKey> Wrap(IEqualityComparer comparer) =>
+        comparer is IEqualityComparer<TNullableKey> nullableComparer
             ? nullableComparer
             : new NullableComparerAdapter<TNullableKey>(comparer);
 
     /// <inheritdoc />
-    public bool Equals(TNullableKey? x, TNullableKey? y)
-        => (x is null && y is null)
-            || (x is not null && y is not null && _comparer.Equals(x, y));
+    public bool Equals(TNullableKey? x, TNullableKey? y) =>
+        (x is null && y is null) || (x is not null && y is not null && _comparer.Equals(x, y));
 
     /// <inheritdoc />
-    public int GetHashCode(TNullableKey obj)
-        => obj is null ? 0 : _comparer.GetHashCode(obj);
+    public int GetHashCode(TNullableKey obj) => obj is null ? 0 : _comparer.GetHashCode(obj);
 }

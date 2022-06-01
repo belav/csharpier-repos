@@ -13,7 +13,10 @@ namespace ILCompiler.Metadata
 {
     partial class Transform<TPolicy>
     {
-        private MetadataRecord HandleConstant(Cts.Ecma.EcmaModule module, Ecma.ConstantHandle constantHandle)
+        private MetadataRecord HandleConstant(
+            Cts.Ecma.EcmaModule module,
+            Ecma.ConstantHandle constantHandle
+        )
         {
             Ecma.MetadataReader reader = module.MetadataReader;
             Ecma.Constant constant = reader.GetConstant(constantHandle);

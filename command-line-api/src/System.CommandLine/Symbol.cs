@@ -14,9 +14,7 @@ namespace System.CommandLine
         private string? _name;
         private ParentNode? _firstParent;
 
-        private protected Symbol()
-        {
-        }
+        private protected Symbol() { }
 
         /// <summary>
         /// Gets or sets the description of the symbol.
@@ -38,7 +36,7 @@ namespace System.CommandLine
         /// Represents the first parent node.
         /// </summary>
         internal ParentNode? FirstParent => _firstParent;
-        
+
         internal void AddParent(Symbol symbol)
         {
             if (_firstParent == null)
@@ -80,7 +78,7 @@ namespace System.CommandLine
         /// <summary>
         /// Gets completions for the symbol.
         /// </summary>
-        public IEnumerable<CompletionItem> GetCompletions() => 
+        public IEnumerable<CompletionItem> GetCompletions() =>
             GetCompletions(CompletionContext.Empty());
 
         /// <inheritdoc />

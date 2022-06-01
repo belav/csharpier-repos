@@ -22,35 +22,43 @@ using Roslyn.Utilities;
 
 namespace Microsoft.VisualStudio.LanguageServices.Implementation
 {
-    [ExportWorkspaceServiceFactory(typeof(IHostDependentFormattingRuleFactoryService), ServiceLayer.Host), Shared]
+    [
+        ExportWorkspaceServiceFactory(
+            typeof(IHostDependentFormattingRuleFactoryService),
+            ServiceLayer.Host
+        ),
+        Shared
+    ]
     internal sealed class VisualStudioFormattingRuleFactoryServiceFactory : IWorkspaceServiceFactory
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VisualStudioFormattingRuleFactoryServiceFactory()
-        {
-        }
+        public VisualStudioFormattingRuleFactoryServiceFactory() { }
 
-        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices)
-            => new Factory();
+        public IWorkspaceService CreateService(HostWorkspaceServices workspaceServices) =>
+            new Factory();
 
         private sealed class Factory : IHostDependentFormattingRuleFactoryService
         {
-            public bool ShouldUseBaseIndentation(Document document)
-                => IsContainedDocument(document);
+            public bool ShouldUseBaseIndentation(Document document) =>
+                IsContainedDocument(document);
 
-            public bool ShouldNotFormatOrCommitOnPaste(Document document)
-                => IsContainedDocument(document);
+            public bool ShouldNotFormatOrCommitOnPaste(Document document) =>
+                IsContainedDocument(document);
 
             private static bool IsContainedDocument(Document document)
             {
-                var visualStudioWorkspace = document.Project.Solution.Workspace as VisualStudioWorkspaceImpl;
+                var visualStudioWorkspace =
+                    document.Project.Solution.Workspace as VisualStudioWorkspaceImpl;
                 return visualStudioWorkspace?.TryGetContainedDocument(document.Id) != null;
             }
 
             public AbstractFormattingRule CreateRule(Document document, int position)
             {
-                if (document.Project.Solution.Workspace is not VisualStudioWorkspaceImpl visualStudioWorkspace)
+                if (
+                    document.Project.Solution.Workspace
+                    is not VisualStudioWorkspaceImpl visualStudioWorkspace
+                )
                 {
                     return NoOpFormattingRule.Instance;
                 }
@@ -102,14 +110,24 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation
                 }
 
                 FatalError.ReportAndCatch(
-                    new InvalidOperationException($"Can't find an intersection. Visible spans count: {spans.Count}"));
+                    new InvalidOperationException(
+                        $"Can't find an intersection. Visible spans count: {spans.Count}"
+                    )
+                );
 
                 return NoOpFormattingRule.Instance;
             }
 
-            public IEnumerable<TextChange> FilterFormattedChanges(Document document, TextSpan span, IList<TextChange> changes)
+            public IEnumerable<TextChange> FilterFormattedChanges(
+                Document document,
+                TextSpan span,
+                IList<TextChange> changes
+            )
             {
-                if (document.Project.Solution.Workspace is not VisualStudioWorkspaceImpl visualStudioWorkspace)
+                if (
+                    document.Project.Solution.Workspace
+                    is not VisualStudioWorkspaceImpl visualStudioWorkspace
+                )
                 {
                     return changes;
                 }

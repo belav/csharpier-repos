@@ -70,8 +70,7 @@ namespace Internal.Cryptography
         }
 
         // Encode a byte array as an upper case hex string.
-        internal static string ToHexStringUpper(this byte[] bytes) =>
-            Convert.ToHexString(bytes);
+        internal static string ToHexStringUpper(this byte[] bytes) => Convert.ToHexString(bytes);
 
         // Decode a hex string-encoded byte array passed to various X509 crypto api.
         // The parsing rules are overly forgiving but for compat reasons, they cannot be tightened.
@@ -147,17 +146,22 @@ namespace Internal.Cryptography
             return a1.AsSpan().SequenceEqual(a2);
         }
 
-        internal static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(ReadOnlyMemory<byte> encodedOctetString)
+        internal static ReadOnlyMemory<byte> DecodeOctetStringAsMemory(
+            ReadOnlyMemory<byte> encodedOctetString
+        )
         {
             try
             {
                 ReadOnlySpan<byte> input = encodedOctetString.Span;
 
-                if (AsnDecoder.TryReadPrimitiveOctetString(
+                if (
+                    AsnDecoder.TryReadPrimitiveOctetString(
                         input,
                         AsnEncodingRules.BER,
                         out ReadOnlySpan<byte> primitive,
-                        out int consumed))
+                        out int consumed
+                    )
+                )
                 {
                     if (consumed != input.Length)
                     {
@@ -169,7 +173,9 @@ namespace Internal.Cryptography
                         return encodedOctetString.Slice(offset, primitive.Length);
                     }
 
-                    Debug.Fail("input.Overlaps(primitive) failed after TryReadPrimitiveOctetString succeeded");
+                    Debug.Fail(
+                        "input.Overlaps(primitive) failed after TryReadPrimitiveOctetString succeeded"
+                    );
                 }
 
                 byte[] ret = AsnDecoder.ReadOctetString(input, AsnEncodingRules.BER, out consumed);
@@ -187,13 +193,18 @@ namespace Internal.Cryptography
             }
         }
 
-        internal static bool AreSamePublicECParameters(ECParameters aParameters, ECParameters bParameters)
+        internal static bool AreSamePublicECParameters(
+            ECParameters aParameters,
+            ECParameters bParameters
+        )
         {
             if (aParameters.Curve.CurveType != bParameters.Curve.CurveType)
                 return false;
 
-            if (!aParameters.Q.X!.ContentsEqual(bParameters.Q.X!) ||
-                !aParameters.Q.Y!.ContentsEqual(bParameters.Q.Y!))
+            if (
+                !aParameters.Q.X!.ContentsEqual(bParameters.Q.X!)
+                || !aParameters.Q.Y!.ContentsEqual(bParameters.Q.Y!)
+            )
             {
                 return false;
             }
@@ -204,7 +215,10 @@ namespace Internal.Cryptography
             if (aCurve.IsNamed)
             {
                 // On Windows we care about FriendlyName, on Unix we care about Value
-                return (aCurve.Oid.Value == bCurve.Oid.Value && aCurve.Oid.FriendlyName == bCurve.Oid.FriendlyName);
+                return (
+                    aCurve.Oid.Value == bCurve.Oid.Value
+                    && aCurve.Oid.FriendlyName == bCurve.Oid.FriendlyName
+                );
             }
 
             if (!aCurve.IsExplicit)
@@ -215,11 +229,13 @@ namespace Internal.Cryptography
 
             // Ignore Cofactor (which is derivable from the prime or polynomial and Order)
             // Ignore Seed and Hash (which are entirely optional, and about how A and B were built)
-            if (!aCurve.G.X!.ContentsEqual(bCurve.G.X!) ||
-                !aCurve.G.Y!.ContentsEqual(bCurve.G.Y!) ||
-                !aCurve.Order.ContentsEqual(bCurve.Order) ||
-                !aCurve.A.ContentsEqual(bCurve.A) ||
-                !aCurve.B.ContentsEqual(bCurve.B))
+            if (
+                !aCurve.G.X!.ContentsEqual(bCurve.G.X!)
+                || !aCurve.G.Y!.ContentsEqual(bCurve.G.Y!)
+                || !aCurve.Order.ContentsEqual(bCurve.Order)
+                || !aCurve.A.ContentsEqual(bCurve.A)
+                || !aCurve.B.ContentsEqual(bCurve.B)
+            )
             {
                 return false;
             }
@@ -238,19 +254,36 @@ namespace Internal.Cryptography
             return false;
         }
 
-        internal static bool IsValidDay(this Calendar calendar, int year, int month, int day, int era)
+        internal static bool IsValidDay(
+            this Calendar calendar,
+            int year,
+            int month,
+            int day,
+            int era
+        )
         {
-            return (calendar.IsValidMonth(year, month, era) && day >= 1 && day <= calendar.GetDaysInMonth(year, month, era));
+            return (
+                calendar.IsValidMonth(year, month, era)
+                && day >= 1
+                && day <= calendar.GetDaysInMonth(year, month, era)
+            );
         }
 
         private static bool IsValidMonth(this Calendar calendar, int year, int month, int era)
         {
-            return (calendar.IsValidYear(year, era) && month >= 1 && month <= calendar.GetMonthsInYear(year, era));
+            return (
+                calendar.IsValidYear(year, era)
+                && month >= 1
+                && month <= calendar.GetMonthsInYear(year, era)
+            );
         }
 
         private static bool IsValidYear(this Calendar calendar, int year, int era)
         {
-            return (year >= calendar.GetYear(calendar.MinSupportedDateTime) && year <= calendar.GetYear(calendar.MaxSupportedDateTime));
+            return (
+                year >= calendar.GetYear(calendar.MinSupportedDateTime)
+                && year <= calendar.GetYear(calendar.MaxSupportedDateTime)
+            );
         }
 
         internal static void DisposeAll(this IEnumerable<IDisposable> disposables)
@@ -287,14 +320,18 @@ namespace Internal.Cryptography
                             case UniversalTagNumber.UnrestrictedCharacterString:
                                 if (!tag.IsConstructed)
                                 {
-                                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                    throw new CryptographicException(
+                                        SR.Cryptography_Der_Invalid_Encoding
+                                    );
                                 }
 
                                 break;
                             default:
                                 if (tag.IsConstructed)
                                 {
-                                    throw new CryptographicException(SR.Cryptography_Der_Invalid_Encoding);
+                                    throw new CryptographicException(
+                                        SR.Cryptography_Der_Invalid_Encoding
+                                    );
                                 }
 
                                 break;
@@ -316,7 +353,11 @@ namespace Internal.Cryptography
             }
         }
 
-        public static int GetPaddingSize(this SymmetricAlgorithm algorithm, CipherMode mode, int feedbackSizeInBits)
+        public static int GetPaddingSize(
+            this SymmetricAlgorithm algorithm,
+            CipherMode mode,
+            int feedbackSizeInBits
+        )
         {
             return (mode == CipherMode.CFB ? feedbackSizeInBits : algorithm.BlockSize) / 8;
         }

@@ -35,21 +35,18 @@ namespace System.Diagnostics.Eventing.Reader
         private EventLogException asyncException;
 
         public EventLogWatcher(string path)
-            : this(new EventLogQuery(path, PathType.LogName), null, false)
-        {
-        }
+            : this(new EventLogQuery(path, PathType.LogName), null, false) { }
 
-        public EventLogWatcher(EventLogQuery eventQuery)
-            : this(eventQuery, null, false)
-        {
-        }
+        public EventLogWatcher(EventLogQuery eventQuery) : this(eventQuery, null, false) { }
 
         public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark)
-            : this(eventQuery, bookmark, false)
-        {
-        }
+            : this(eventQuery, bookmark, false) { }
 
-        public EventLogWatcher(EventLogQuery eventQuery, EventBookmark bookmark, bool readExistingEvents)
+        public EventLogWatcher(
+            EventLogQuery eventQuery,
+            EventBookmark bookmark,
+            bool readExistingEvents
+        )
         {
             ArgumentNullException.ThrowIfNull(eventQuery);
 
@@ -68,16 +65,17 @@ namespace System.Diagnostics.Eventing.Reader
             }
 
             _eventsBuffer = new IntPtr[64];
-            cachedMetadataInformation = new ProviderMetadataCachedInformation(eventQuery.Session, null, 50);
+            cachedMetadataInformation = new ProviderMetadataCachedInformation(
+                eventQuery.Session,
+                null,
+                50
+            );
             _bookmark = bookmark;
         }
 
         public bool Enabled
         {
-            get
-            {
-                return _isSubscribing;
-            }
+            get { return _isSubscribing; }
             set
             {
                 if (value && !_isSubscribing)
@@ -100,7 +98,6 @@ namespace System.Diagnostics.Eventing.Reader
 
             if (_registeredWaitHandle != null)
             {
-
                 _registeredWaitHandle.Unregister(_unregisterDoneHandle);
 
                 if (_callbackThreadId != Environment.CurrentManagedThreadId)
@@ -130,7 +127,6 @@ namespace System.Diagnostics.Eventing.Reader
 
             for (int i = 0; i < _numEventsInBuffer; i++)
             {
-
                 if (_eventsBuffer[i] != IntPtr.Zero)
                 {
                     UnsafeNativeMethods.EvtClose(_eventsBuffer[i]);
@@ -182,15 +178,16 @@ namespace System.Diagnostics.Eventing.Reader
 
             using (bookmarkHandle)
             {
-
-                _handle = UnsafeNativeMethods.EvtSubscribe(_eventQuery.Session.Handle,
+                _handle = UnsafeNativeMethods.EvtSubscribe(
+                    _eventQuery.Session.Handle,
                     _subscriptionWaitHandle.SafeWaitHandle,
                     _eventQuery.Path,
                     _eventQuery.Query,
                     bookmarkHandle,
                     IntPtr.Zero,
                     IntPtr.Zero,
-                    flag);
+                    flag
+                );
             }
 
             _isSubscribing = true;
@@ -202,7 +199,8 @@ namespace System.Diagnostics.Eventing.Reader
                 new WaitOrTimerCallback(SubscribedEventsAvailableCallback),
                 null,
                 -1,
-                false);
+                false
+            );
         }
 
         internal void SubscribedEventsAvailableCallback(object state, bool timedOut)
@@ -236,7 +234,14 @@ namespace System.Diagnostics.Eventing.Reader
 
                 try
                 {
-                    results = NativeWrapper.EvtNext(_handle, _eventsBuffer.Length, _eventsBuffer, 0, 0, ref _numEventsInBuffer);
+                    results = NativeWrapper.EvtNext(
+                        _handle,
+                        _eventsBuffer.Length,
+                        _eventsBuffer,
+                        0,
+                        0,
+                        ref _numEventsInBuffer
+                    );
 
                     if (!results)
                     {
@@ -250,7 +255,6 @@ namespace System.Diagnostics.Eventing.Reader
                 }
 
                 HandleEventsRequestCompletion();
-
             } while (results);
         }
 
@@ -266,7 +270,9 @@ namespace System.Diagnostics.Eventing.Reader
         {
             if (asyncException != null)
             {
-                EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(asyncException.Data["RealException"] as Exception);
+                EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(
+                    asyncException.Data["RealException"] as Exception
+                );
                 IssueCallback(args);
             }
 
@@ -277,9 +283,13 @@ namespace System.Diagnostics.Eventing.Reader
                     break;
                 }
 
-                EventLogRecord record = new EventLogRecord(new EventLogHandle(_eventsBuffer[i], true), _eventQuery.Session, cachedMetadataInformation);
+                EventLogRecord record = new EventLogRecord(
+                    new EventLogHandle(_eventsBuffer[i], true),
+                    _eventQuery.Session,
+                    cachedMetadataInformation
+                );
                 EventRecordWrittenEventArgs args = new EventRecordWrittenEventArgs(record);
-                _eventsBuffer[i] = IntPtr.Zero;  // user is responsible for calling Dispose().
+                _eventsBuffer[i] = IntPtr.Zero; // user is responsible for calling Dispose().
                 IssueCallback(args);
             }
         }
@@ -300,7 +310,6 @@ namespace System.Diagnostics.Eventing.Reader
 
             for (int i = 0; i < _numEventsInBuffer; i++)
             {
-
                 if (_eventsBuffer[i] != IntPtr.Zero)
                 {
                     NativeWrapper.EvtClose(_eventsBuffer[i]);

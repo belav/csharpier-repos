@@ -3,25 +3,26 @@
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public class Ef6GroupByInMemoryTest : Ef6GroupByTestBase<Ef6GroupByInMemoryTest.Ef6GroupByInMemoryFixture>
+public class Ef6GroupByInMemoryTest
+    : Ef6GroupByTestBase<Ef6GroupByInMemoryTest.Ef6GroupByInMemoryFixture>
 {
-    public Ef6GroupByInMemoryTest(Ef6GroupByInMemoryFixture fixture, ITestOutputHelper testOutputHelper)
-        : base(fixture)
-    {
-    }
+    public Ef6GroupByInMemoryTest(
+        Ef6GroupByInMemoryFixture fixture,
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture) { }
 
-    public override Task Average_Grouped_from_LINQ_101(bool async)
-        => AssertQuery(
+    public override Task Average_Grouped_from_LINQ_101(bool async) =>
+        AssertQuery(
             async,
-            ss => from p in ss.Set<ProductForLinq>()
-                  group p by p.Category
-                  into g
-                  select new { Category = g.Key, AveragePrice = g.Average(p => p.UnitPrice) },
-            elementSorter: e => (e.Category, e.AveragePrice));
+            ss =>
+                from p in ss.Set<ProductForLinq>()
+                group p by p.Category into g
+                select new { Category = g.Key, AveragePrice = g.Average(p => p.UnitPrice) },
+            elementSorter: e => (e.Category, e.AveragePrice)
+        );
 
     public class Ef6GroupByInMemoryFixture : Ef6GroupByFixtureBase
     {
-        protected override ITestStoreFactory TestStoreFactory
-            => InMemoryTestStoreFactory.Instance;
+        protected override ITestStoreFactory TestStoreFactory => InMemoryTestStoreFactory.Instance;
     }
 }

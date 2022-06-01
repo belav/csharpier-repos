@@ -27,7 +27,8 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
         OutputFormatterSelector formatterSelector,
         IHttpResponseStreamWriterFactory writerFactory,
         ILoggerFactory loggerFactory,
-        IOptions<MvcOptions> mvcOptions)
+        IOptions<MvcOptions> mvcOptions
+    )
     {
         if (formatterSelector == null)
         {
@@ -97,18 +98,25 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
         return ExecuteAsyncCore(context, result, objectType, value);
     }
 
-    private Task ExecuteAsyncCore(ActionContext context, ObjectResult result, Type? objectType, object? value)
+    private Task ExecuteAsyncCore(
+        ActionContext context,
+        ObjectResult result,
+        Type? objectType,
+        object? value
+    )
     {
         var formatterContext = new OutputFormatterWriteContext(
             context.HttpContext,
             WriterFactory,
             objectType,
-            value);
+            value
+        );
 
         var selectedFormatter = FormatterSelector.SelectFormatter(
             formatterContext,
             (IList<IOutputFormatter>)result.Formatters ?? Array.Empty<IOutputFormatter>(),
-            result.ContentTypes);
+            result.ContentTypes
+        );
         if (selectedFormatter == null)
         {
             // No formatter supports this.
@@ -159,10 +167,24 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
             }
         }
 
-        [LoggerMessage(1, LogLevel.Information, "Executing {ObjectResultType}, writing value of type '{Type}'.", EventName = "ObjectResultExecuting", SkipEnabledCheck = true)]
-        private static partial void ObjectResultExecuting(ILogger logger, string objectResultType, string? type);
+        [LoggerMessage(
+            1,
+            LogLevel.Information,
+            "Executing {ObjectResultType}, writing value of type '{Type}'.",
+            EventName = "ObjectResultExecuting",
+            SkipEnabledCheck = true
+        )]
+        private static partial void ObjectResultExecuting(
+            ILogger logger,
+            string objectResultType,
+            string? type
+        );
 
-        public static void NoFormatter(ILogger logger, OutputFormatterCanWriteContext context, MediaTypeCollection contentTypes)
+        public static void NoFormatter(
+            ILogger logger,
+            OutputFormatterCanWriteContext context,
+            MediaTypeCollection contentTypes
+        )
         {
             if (logger.IsEnabled(LogLevel.Warning))
             {
@@ -170,14 +192,22 @@ public partial class ObjectResultExecutor : IActionResultExecutor<ObjectResult>
 
                 if (context.ContentType.HasValue)
                 {
-                    considered.Add(Convert.ToString(context.ContentType, CultureInfo.InvariantCulture));
+                    considered.Add(
+                        Convert.ToString(context.ContentType, CultureInfo.InvariantCulture)
+                    );
                 }
 
                 NoFormatter(logger, considered);
             }
         }
 
-        [LoggerMessage(2, LogLevel.Warning, "No output formatter was found for content types '{ContentTypes}' to write the response.", EventName = "NoFormatter", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            2,
+            LogLevel.Warning,
+            "No output formatter was found for content types '{ContentTypes}' to write the response.",
+            EventName = "NoFormatter",
+            SkipEnabledCheck = true
+        )]
         private static partial void NoFormatter(ILogger logger, List<string?> contentTypes);
     }
 }

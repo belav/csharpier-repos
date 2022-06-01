@@ -16,14 +16,13 @@ namespace AutoMapper.UnitTests.Bug
             public SomeObject Value { get; set; }
         }
 
-        public class SomeObject
-        {
-        }
+        public class SomeObject { }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_not_validate()

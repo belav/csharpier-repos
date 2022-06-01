@@ -12,19 +12,12 @@ namespace Sample
 
         public VectorTask()
         {
-            measurements = new Measurement[] {
-                new Create(),
-                new Add(),
-                new Multiply(),
-            };
+            measurements = new Measurement[] { new Create(), new Add(), new Multiply(), };
         }
 
         public override Measurement[] Measurements
         {
-            get
-            {
-                return measurements;
-            }
+            get { return measurements; }
         }
 
         public abstract class VectorMeasurement : BenchTask.Measurement
@@ -43,7 +36,9 @@ namespace Sample
 
         class Add : VectorMeasurement
         {
-            Vector128<int> vector1, vector2, vector3;
+            Vector128<int> vector1,
+                vector2,
+                vector3;
 
             public override string Name => "Add 2 Vector128's";
 
@@ -58,7 +53,9 @@ namespace Sample
 
         class Multiply : VectorMeasurement
         {
-            Vector128<int> vector1, vector2, vector3;
+            Vector128<int> vector1,
+                vector2,
+                vector3;
 
             public override string Name => "Multiply 2 Vector128's";
 

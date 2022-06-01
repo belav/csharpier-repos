@@ -69,14 +69,25 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
         public static string GetFilePathFromHierarchyAndItemId(IVsHierarchy hierarchy, uint itemid)
         {
-            if (!ErrorHandler.Succeeded(((IVsProject)hierarchy).GetMkDocument(itemid, out var filePath)))
+            if (
+                !ErrorHandler.Succeeded(
+                    ((IVsProject)hierarchy).GetMkDocument(itemid, out var filePath)
+                )
+            )
             {
                 // we couldn't look up the document moniker from an hierarchy for an itemid.
                 // Since we only use this moniker as a key, we could fall back to something else, like the document name.
-                Debug.Assert(false, "Could not get the document moniker for an item from its hierarchy.");
+                Debug.Assert(
+                    false,
+                    "Could not get the document moniker for an item from its hierarchy."
+                );
                 if (!hierarchy.TryGetItemName(itemid, out filePath!))
                 {
-                    FatalError.ReportAndPropagate(new InvalidOperationException("Failed to get document moniker for a contained document"));
+                    FatalError.ReportAndPropagate(
+                        new InvalidOperationException(
+                            "Failed to get document moniker for a contained document"
+                        )
+                    );
                 }
             }
 
@@ -91,7 +102,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
             VisualStudioProject? project,
             string filePath,
             Guid languageServiceGuid,
-            AbstractFormattingRule? vbHelperFormattingRule = null)
+            AbstractFormattingRule? vbHelperFormattingRule = null
+        )
         {
             BufferCoordinator = bufferCoordinator;
             ComponentModel = componentModel;
@@ -100,37 +112,55 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
 
             Workspace = workspace;
 
-            _editorAdaptersFactoryService = componentModel.GetService<IVsEditorAdaptersFactoryService>();
+            _editorAdaptersFactoryService =
+                componentModel.GetService<IVsEditorAdaptersFactoryService>();
             _diagnosticAnalyzerService = componentModel.GetService<IDiagnosticAnalyzerService>();
 
             // Get the ITextBuffer for the secondary buffer
-            Marshal.ThrowExceptionForHR(bufferCoordinator.GetSecondaryBuffer(out var secondaryTextLines));
+            Marshal.ThrowExceptionForHR(
+                bufferCoordinator.GetSecondaryBuffer(out var secondaryTextLines)
+            );
             SubjectBuffer = _editorAdaptersFactoryService.GetDocumentBuffer(secondaryTextLines)!;
 
             // Get the ITextBuffer for the primary buffer
-            Marshal.ThrowExceptionForHR(bufferCoordinator.GetPrimaryBuffer(out var primaryTextLines));
+            Marshal.ThrowExceptionForHR(
+                bufferCoordinator.GetPrimaryBuffer(out var primaryTextLines)
+            );
             DataBuffer = _editorAdaptersFactoryService.GetDataBuffer(primaryTextLines)!;
 
             // Create our tagger
-            var bufferTagAggregatorFactory = ComponentModel.GetService<IBufferTagAggregatorFactoryService>();
-            _bufferTagAggregator = bufferTagAggregatorFactory.CreateTagAggregator<ITag>(SubjectBuffer);
+            var bufferTagAggregatorFactory =
+                ComponentModel.GetService<IBufferTagAggregatorFactoryService>();
+            _bufferTagAggregator = bufferTagAggregatorFactory.CreateTagAggregator<ITag>(
+                SubjectBuffer
+            );
 
             DocumentId documentId;
 
             if (this.Project != null)
             {
                 documentId = this.Project.AddSourceTextContainer(
-                    SubjectBuffer.AsTextContainer(), filePath,
-                    sourceCodeKind: SourceCodeKind.Regular, folders: default,
+                    SubjectBuffer.AsTextContainer(),
+                    filePath,
+                    sourceCodeKind: SourceCodeKind.Regular,
+                    folders: default,
                     designTimeOnly: true,
-                    documentServiceProvider: new ContainedDocument.DocumentServiceProvider(DataBuffer));
+                    documentServiceProvider: new ContainedDocument.DocumentServiceProvider(
+                        DataBuffer
+                    )
+                );
             }
             else
             {
-                documentId = DocumentId.CreateNewId(projectId, $"{nameof(ContainedDocument)}: {filePath}");
+                documentId = DocumentId.CreateNewId(
+                    projectId,
+                    $"{nameof(ContainedDocument)}: {filePath}"
+                );
 
                 // We must jam a document into an existing workspace, which we'll assume is safe to do with OnDocumentAdded
-                Workspace.OnDocumentAdded(DocumentInfo.Create(documentId, filePath, filePath: filePath));
+                Workspace.OnDocumentAdded(
+                    DocumentInfo.Create(documentId, filePath, filePath: filePath)
+                );
                 Workspace.OnDocumentOpened(documentId, SubjectBuffer.AsTextContainer());
             }
 
@@ -144,7 +174,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
                 _diagnosticAnalyzerService.GlobalOptions,
                 project,
                 componentModel,
-                vbHelperFormattingRule);
+                vbHelperFormattingRule
+            );
 
             // TODO: Can contained documents be linked or shared?
             this.DataBuffer.Changed += OnDataBufferChanged;
@@ -181,7 +212,10 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Venus
         {
             // we don't actually care what has changed in primary buffer. we just want to re-analyze secondary buffer
             // when primary buffer has changed to update diagnostic positions.
-            _diagnosticAnalyzerService.Reanalyze(this.Workspace, documentIds: SpecializedCollections.SingletonEnumerable(this.ContainedDocument.Id));
+            _diagnosticAnalyzerService.Reanalyze(
+                this.Workspace,
+                documentIds: SpecializedCollections.SingletonEnumerable(this.ContainedDocument.Id)
+            );
         }
     }
 }

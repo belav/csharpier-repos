@@ -39,7 +39,8 @@ namespace System.Text.RegularExpressions.Symbolic
 
         public bool IsEmpty(BitVector set) => set.Equals(Empty);
 
-        public List<BitVector> GenerateMinterms(HashSet<BitVector> constraints) => _mintermGenerator.GenerateMinterms(constraints);
+        public List<BitVector> GenerateMinterms(HashSet<BitVector> constraints) =>
+            _mintermGenerator.GenerateMinterms(constraints);
 
         public BitVector And(BitVector set1, BitVector set2) => BitVector.And(set1, set2);
 
@@ -95,6 +96,7 @@ namespace System.Text.RegularExpressions.Symbolic
         public BitVector[] GetMinterms() => _mintermVectors;
 
         /// <summary>Pretty print the bitvector bv as the character set it represents.</summary>
-        public string PrettyPrint(BitVector bv, CharSetSolver solver) => solver.PrettyPrint(ConvertToBDD(bv, solver));
+        public string PrettyPrint(BitVector bv, CharSetSolver solver) =>
+            solver.PrettyPrint(ConvertToBDD(bv, solver));
     }
 }

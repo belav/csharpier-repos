@@ -67,7 +67,8 @@ public class ResultsTests
         var value = new { };
 
         // Act
-        var result = Results.AcceptedAtRoute(routeName, routeValues, value) as AcceptedAtRoute<object>;
+        var result =
+            Results.AcceptedAtRoute(routeName, routeValues, value) as AcceptedAtRoute<object>;
 
         // Assert
         Assert.Equal(StatusCodes.Status202Accepted, result.StatusCode);
@@ -130,17 +131,41 @@ public class ResultsTests
 
     [Theory]
     [MemberData(nameof(BytesOrFile_ResultHasCorrectValues_Data))]
-    public void BytesOrFile_ResultHasCorrectValues(int bytesOrFile, string contentType, string fileDownloadName, bool enableRangeProcessing, DateTimeOffset lastModified, EntityTagHeaderValue entityTag)
+    public void BytesOrFile_ResultHasCorrectValues(
+        int bytesOrFile,
+        string contentType,
+        string fileDownloadName,
+        bool enableRangeProcessing,
+        DateTimeOffset lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         // Arrange
         var contents = new byte[0];
 
         // Act
-        var result = bytesOrFile switch
-        {
-            0 => Results.Bytes(contents, contentType, fileDownloadName, enableRangeProcessing, lastModified, entityTag),
-            _ => Results.File(contents, contentType, fileDownloadName, enableRangeProcessing, lastModified, entityTag)
-        } as FileContentHttpResult;
+        var result =
+            bytesOrFile switch
+            {
+                0
+                    => Results.Bytes(
+                        contents,
+                        contentType,
+                        fileDownloadName,
+                        enableRangeProcessing,
+                        lastModified,
+                        entityTag
+                    ),
+                _
+                    => Results.File(
+                        contents,
+                        contentType,
+                        fileDownloadName,
+                        enableRangeProcessing,
+                        lastModified,
+                        entityTag
+                    )
+            } as FileContentHttpResult;
 
         // Assert
         Assert.Equal(contents, result.FileContents);
@@ -151,17 +176,57 @@ public class ResultsTests
         Assert.Equal(entityTag, result.EntityTag);
     }
 
-    public static IEnumerable<object[]> BytesOrFile_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { 0, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 0, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { 1, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 1, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) }
-    };
+    public static IEnumerable<object[]> BytesOrFile_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                0,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any
+            },
+            new object[]
+            {
+                0,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue)
+            },
+            new object[]
+            {
+                1,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any
+            },
+            new object[]
+            {
+                1,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue)
+            }
+        };
 
     [Theory]
     [MemberData(nameof(Stream_ResultHasCorrectValues_Data))]
-    public void Stream_ResultHasCorrectValues(int overload, string contentType, string fileDownloadName, bool enableRangeProcessing, DateTimeOffset lastModified, EntityTagHeaderValue entityTag)
+    public void Stream_ResultHasCorrectValues(
+        int overload,
+        string contentType,
+        string fileDownloadName,
+        bool enableRangeProcessing,
+        DateTimeOffset lastModified,
+        EntityTagHeaderValue entityTag
+    )
     {
         // Arrange
         var stream = new MemoryStream();
@@ -169,9 +234,32 @@ public class ResultsTests
         // Act
         var result = overload switch
         {
-            0 => Results.Stream(stream, contentType, fileDownloadName, lastModified, entityTag, enableRangeProcessing),
-            1 => Results.Stream(PipeReader.Create(stream), contentType, fileDownloadName, lastModified, entityTag, enableRangeProcessing),
-            _ => Results.Stream((s) => Task.CompletedTask, contentType, fileDownloadName, lastModified, entityTag)
+            0
+                => Results.Stream(
+                    stream,
+                    contentType,
+                    fileDownloadName,
+                    lastModified,
+                    entityTag,
+                    enableRangeProcessing
+                ),
+            1
+                => Results.Stream(
+                    PipeReader.Create(stream),
+                    contentType,
+                    fileDownloadName,
+                    lastModified,
+                    entityTag,
+                    enableRangeProcessing
+                ),
+            _
+                => Results.Stream(
+                    (s) => Task.CompletedTask,
+                    contentType,
+                    fileDownloadName,
+                    lastModified,
+                    entityTag
+                )
         };
 
         // Assert
@@ -180,7 +268,10 @@ public class ResultsTests
             case <= 1:
                 var fileStreamResult = result as FileStreamHttpResult;
                 Assert.NotNull(fileStreamResult.FileStream);
-                Assert.Equal(contentType ?? "application/octet-stream", fileStreamResult.ContentType);
+                Assert.Equal(
+                    contentType ?? "application/octet-stream",
+                    fileStreamResult.ContentType
+                );
                 Assert.Equal(fileDownloadName, fileStreamResult.FileDownloadName);
                 Assert.Equal(enableRangeProcessing, fileStreamResult.EnableRangeProcessing);
                 Assert.Equal(lastModified, fileStreamResult.LastModified);
@@ -189,25 +280,76 @@ public class ResultsTests
 
             default:
                 var pushStreamResult = result as PushStreamHttpResult;
-                Assert.Equal(contentType ?? "application/octet-stream", pushStreamResult.ContentType);
+                Assert.Equal(
+                    contentType ?? "application/octet-stream",
+                    pushStreamResult.ContentType
+                );
                 Assert.Equal(fileDownloadName, pushStreamResult.FileDownloadName);
                 Assert.False(pushStreamResult.EnableRangeProcessing);
                 Assert.Equal(lastModified, pushStreamResult.LastModified);
                 Assert.Equal(entityTag, pushStreamResult.EntityTag);
                 break;
         }
-
     }
 
-    public static IEnumerable<object[]> Stream_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { 0, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 0, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { 1, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 1, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) },
-        new object[] { 2, "text/plain", "testfile", true, new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)), EntityTagHeaderValue.Any },
-        new object[] { 2, default(string), default(string), default(bool), default(DateTimeOffset?), default(EntityTagHeaderValue) }
-    };
+    public static IEnumerable<object[]> Stream_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                0,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any
+            },
+            new object[]
+            {
+                0,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue)
+            },
+            new object[]
+            {
+                1,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any
+            },
+            new object[]
+            {
+                1,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue)
+            },
+            new object[]
+            {
+                2,
+                "text/plain",
+                "testfile",
+                true,
+                new DateTimeOffset(2022, 1, 1, 0, 0, 1, TimeSpan.FromHours(-8)),
+                EntityTagHeaderValue.Any
+            },
+            new object[]
+            {
+                2,
+                default(string),
+                default(string),
+                default(bool),
+                default(DateTimeOffset?),
+                default(EntityTagHeaderValue)
+            }
+        };
 
     [Fact]
     public void Bytes_WithNullContents_ThrowsArgNullException()
@@ -236,60 +378,89 @@ public class ResultsTests
     [Fact]
     public void Stream_WithNullPipeReader_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("pipeReader", () => Results.Stream(default(PipeReader)));
+        Assert.Throws<ArgumentNullException>(
+            "pipeReader",
+            () => Results.Stream(default(PipeReader))
+        );
     }
 
     [Fact]
     public void Stream_WithNullCallback_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("streamWriterCallback", () => TypedResults.Stream(default(Func<Stream, Task>)));
+        Assert.Throws<ArgumentNullException>(
+            "streamWriterCallback",
+            () => TypedResults.Stream(default(Func<Stream, Task>))
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void Challenge_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void Challenge_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Act
         var result = Results.Challenge(properties, authenticationSchemes) as ChallengeHttpResult;
 
         // Assert
         Assert.Equal(properties, result.Properties);
-        Assert.Equal(authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()), result.AuthenticationSchemes);
+        Assert.Equal(
+            authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()),
+            result.AuthenticationSchemes
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void Forbid_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void Forbid_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Act
         var result = Results.Forbid(properties, authenticationSchemes) as ForbidHttpResult;
 
         // Assert
         Assert.Equal(properties, result.Properties);
-        Assert.Equal(authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()), result.AuthenticationSchemes);
+        Assert.Equal(
+            authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()),
+            result.AuthenticationSchemes
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void SignOut_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void SignOut_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Act
         var result = Results.SignOut(properties, authenticationSchemes) as SignOutHttpResult;
 
         // Assert
         Assert.Equal(properties, result.Properties);
-        Assert.Equal(authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()), result.AuthenticationSchemes);
+        Assert.Equal(
+            authenticationSchemes ?? new ReadOnlyCollection<string>(new List<string>()),
+            result.AuthenticationSchemes
+        );
     }
 
     [Theory]
     [MemberData(nameof(ChallengeForbidSignInOut_ResultHasCorrectValues_Data))]
-    public void SignIn_ResultHasCorrectValues(AuthenticationProperties properties, IList<string> authenticationSchemes)
+    public void SignIn_ResultHasCorrectValues(
+        AuthenticationProperties properties,
+        IList<string> authenticationSchemes
+    )
     {
         // Arrange
         var principal = new ClaimsPrincipal();
 
         // Act
-        var result = Results.SignIn(principal, properties, authenticationSchemes?.First()) as SignInHttpResult;
+        var result =
+            Results.SignIn(principal, properties, authenticationSchemes?.First())
+            as SignInHttpResult;
 
         // Assert
         Assert.Equal(principal, result.Principal);
@@ -297,13 +468,22 @@ public class ResultsTests
         Assert.Equal(authenticationSchemes?.First(), result.AuthenticationScheme);
     }
 
-    public static IEnumerable<object[]> ChallengeForbidSignInOut_ResultHasCorrectValues_Data => new List<object[]>
-    {
-        new object[] { new AuthenticationProperties(), new List<string> { "TestScheme" } },
-        new object[] { new AuthenticationProperties(), default(IList<string>) },
-        new object[] { default(AuthenticationProperties), new List<string> { "TestScheme" } },
-        new object[] { default(AuthenticationProperties), default(IList<string>) },
-    };
+    public static IEnumerable<object[]> ChallengeForbidSignInOut_ResultHasCorrectValues_Data =>
+        new List<object[]>
+        {
+            new object[]
+            {
+                new AuthenticationProperties(),
+                new List<string> { "TestScheme" }
+            },
+            new object[] { new AuthenticationProperties(), default(IList<string>) },
+            new object[]
+            {
+                default(AuthenticationProperties),
+                new List<string> { "TestScheme" }
+            },
+            new object[] { default(AuthenticationProperties), default(IList<string>) },
+        };
 
     [Fact]
     public void SignIn_WithNullPrincipal_ThrowsArgNullException()
@@ -378,7 +558,8 @@ public class ResultsTests
         var statusCode = 201;
 
         // Act
-        var result = Results.Content(content, contentType, encoding, statusCode) as ContentHttpResult;
+        var result =
+            Results.Content(content, contentType, encoding, statusCode) as ContentHttpResult;
 
         // Assert
         Assert.Equal(statusCode, result.StatusCode);
@@ -491,7 +672,8 @@ public class ResultsTests
         var value = new { };
 
         // Act
-        var result = Results.CreatedAtRoute(routeName, routeValues, value) as CreatedAtRoute<object>;
+        var result =
+            Results.CreatedAtRoute(routeName, routeValues, value) as CreatedAtRoute<object>;
 
         // Assert
         Assert.Equal(StatusCodes.Status201Created, result.StatusCode);
@@ -562,7 +744,7 @@ public class ResultsTests
         var options = new JsonSerializerOptions();
         var contentType = "application/custom+json";
         var statusCode = StatusCodes.Status208AlreadyReported;
-            
+
         // Act
         var result = Results.Json(data, options, contentType, statusCode) as JsonHttpResult<object>;
 
@@ -640,7 +822,8 @@ public class ResultsTests
         var preserveMethod = true;
 
         // Act
-        var result = Results.LocalRedirect(localUrl, permanent, preserveMethod) as RedirectHttpResult;
+        var result =
+            Results.LocalRedirect(localUrl, permanent, preserveMethod) as RedirectHttpResult;
 
         // Assert
         Assert.Equal(localUrl, result.Url);
@@ -658,7 +841,8 @@ public class ResultsTests
         var preserveMethod = true;
 
         // Act
-        var result = Results.LocalRedirect(localUrl, permanent, preserveMethod) as RedirectHttpResult;
+        var result =
+            Results.LocalRedirect(localUrl, permanent, preserveMethod) as RedirectHttpResult;
 
         // Assert
         Assert.Equal(localUrl, result.Url);
@@ -728,7 +912,10 @@ public class ResultsTests
     [Fact]
     public void Problem_WithNullProblem_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("problemDetails", () => Results.Problem(default(ProblemDetails)));
+        Assert.Throws<ArgumentNullException>(
+            "problemDetails",
+            () => Results.Problem(default(ProblemDetails))
+        );
     }
 
     [Fact]
@@ -743,7 +930,9 @@ public class ResultsTests
         var extensions = new Dictionary<string, object> { { "test", "value" } };
 
         // Act
-        var result = Results.Problem(detail, instance, statusCode, title, type, extensions) as ProblemHttpResult;
+        var result =
+            Results.Problem(detail, instance, statusCode, title, type, extensions)
+            as ProblemHttpResult;
 
         // Assert
         Assert.Equal(detail, result.ProblemDetails.Detail);
@@ -766,8 +955,14 @@ public class ResultsTests
         Assert.Null(result.ProblemDetails.Instance);
         Assert.Equal("application/problem+json", result.ContentType);
         Assert.Equal(StatusCodes.Status500InternalServerError, result.StatusCode);
-        Assert.Equal("An error occurred while processing your request.", result.ProblemDetails.Title);
-        Assert.Equal("https://tools.ietf.org/html/rfc7231#section-6.6.1", result.ProblemDetails.Type);
+        Assert.Equal(
+            "An error occurred while processing your request.",
+            result.ProblemDetails.Title
+        );
+        Assert.Equal(
+            "https://tools.ietf.org/html/rfc7231#section-6.6.1",
+            result.ProblemDetails.Type
+        );
         Assert.Empty(result.ProblemDetails.Extensions);
     }
 
@@ -806,7 +1001,10 @@ public class ResultsTests
     [Fact]
     public void ValidationProblem_WithNullErrors_ThrowsArgNullException()
     {
-        Assert.Throws<ArgumentNullException>("errors", () => Results.ValidationProblem(default(IDictionary<string, string[]>)));
+        Assert.Throws<ArgumentNullException>(
+            "errors",
+            () => Results.ValidationProblem(default(IDictionary<string, string[]>))
+        );
     }
 
     [Fact]
@@ -825,7 +1023,9 @@ public class ResultsTests
         // Note: Results.ValidationProblem returns ProblemHttpResult instead of ValidationProblem by design as
         //       as ValidationProblem doesn't allow setting a custom status code so that it can accurately report
         //       a single status code in endpoint metadata via its implementation of IEndpointMetadataProvider
-        var result = Results.ValidationProblem(errors, detail, instance, statusCode, title, type, extensions) as ProblemHttpResult;
+        var result =
+            Results.ValidationProblem(errors, detail, instance, statusCode, title, type, extensions)
+            as ProblemHttpResult;
 
         // Assert
         Assert.IsType<HttpValidationProblemDetails>(result.ProblemDetails);
@@ -909,7 +1109,9 @@ public class ResultsTests
         var fragment = "test";
 
         // Act
-        var result = Results.RedirectToRoute(routeName, routeValues, true, true, fragment) as RedirectToRouteHttpResult;
+        var result =
+            Results.RedirectToRoute(routeName, routeValues, true, true, fragment)
+            as RedirectToRouteHttpResult;
 
         // Assert
         Assert.Equal(routeName, result.RouteName);
@@ -1020,7 +1222,10 @@ public class ResultsTests
 
     [Theory]
     [MemberData(nameof(FactoryMethodsFromTuples))]
-    public void FactoryMethod_ReturnsCorrectResultType(Expression<Func<IResult>> expression, Type expectedReturnType)
+    public void FactoryMethod_ReturnsCorrectResultType(
+        Expression<Func<IResult>> expression,
+        Type expectedReturnType
+    )
     {
         var method = expression.Compile();
         Assert.IsType(expectedReturnType, method());
@@ -1029,10 +1234,15 @@ public class ResultsTests
     [Fact]
     public void TestTheTests()
     {
-        var testedMethods = new HashSet<string>(FactoryMethodsTuples.Select(t => GetMemberName(t.Item1.Body)));
-        var actualMethods = new HashSet<string>(typeof(Results).GetMethods(BindingFlags.Public | BindingFlags.Static)
-            .Where(m => !m.IsSpecialName)
-            .Select(m => m.Name));
+        var testedMethods = new HashSet<string>(
+            FactoryMethodsTuples.Select(t => GetMemberName(t.Item1.Body))
+        );
+        var actualMethods = new HashSet<string>(
+            typeof(Results)
+                .GetMethods(BindingFlags.Public | BindingFlags.Static)
+                .Where(m => !m.IsSpecialName)
+                .Select(m => m.Name)
+        );
 
         // Ensure every static method on Results type is covered by at least the default case for its parameters
         Assert.All(actualMethods, name => Assert.Single(testedMethods, name));
@@ -1048,52 +1258,104 @@ public class ResultsTests
         };
     }
 
-    private static IEnumerable<(Expression<Func<IResult>>, Type)> FactoryMethodsTuples { get; } = new List<(Expression<Func<IResult>>, Type)>
-    {
-        (() => Results.Accepted(null, null), typeof(Accepted)),
-        (() => Results.Accepted(null, new()), typeof(Accepted<object>)),
-        (() => Results.AcceptedAtRoute("routeName", null, null), typeof(AcceptedAtRoute)),
-        (() => Results.AcceptedAtRoute("routeName", null, new()), typeof(AcceptedAtRoute<object>)),
-        (() => Results.BadRequest(null), typeof(BadRequest)),
-        (() => Results.BadRequest(new()), typeof(BadRequest<object>)),
-        (() => Results.Bytes(new byte[0], null, null, false, null, null), typeof(FileContentHttpResult)),
-        (() => Results.Challenge(null, null), typeof(ChallengeHttpResult)),
-        (() => Results.Conflict(null), typeof(Conflict)),
-        (() => Results.Conflict(new()), typeof(Conflict<object>)),
-        (() => Results.Content("content", null, null), typeof(ContentHttpResult)),
-        (() => Results.Content("content", null, null, null), typeof(ContentHttpResult)),
-        (() => Results.Created("/path", null), typeof(Created)),
-        (() => Results.Created("/path", new()), typeof(Created<object>)),
-        (() => Results.CreatedAtRoute("routeName", null, null), typeof(CreatedAtRoute)),
-        (() => Results.CreatedAtRoute("routeName", null, new()), typeof(CreatedAtRoute<object>)),
-        (() => Results.Empty, typeof(EmptyHttpResult)),
-        (() => Results.File(new byte[0], null, null, false, null, null), typeof(FileContentHttpResult)),
-        (() => Results.File(new MemoryStream(), null, null, null, null, false), typeof(FileStreamHttpResult)),
-        (() => Results.File(Path.Join(Path.DirectorySeparatorChar.ToString(), "rooted", "path"), null, null, null, null, false), typeof(PhysicalFileHttpResult)),
-        (() => Results.File("path", null, null, null, null, false), typeof(VirtualFileHttpResult)),
-        (() => Results.Forbid(null, null), typeof(ForbidHttpResult)),
-        (() => Results.Json(new(), null, null, null), typeof(JsonHttpResult<object>)),
-        (() => Results.NoContent(), typeof(NoContent)),
-        (() => Results.NotFound(null), typeof(NotFound)),
-        (() => Results.NotFound(new()), typeof(NotFound<object>)),
-        (() => Results.Ok(null), typeof(Ok)),
-        (() => Results.Ok(new()), typeof(Ok<object>)),
-        (() => Results.Problem(new()), typeof(ProblemHttpResult)),
-        (() => Results.Stream(new MemoryStream(), null, null, null, null, false), typeof(FileStreamHttpResult)),
-        (() => Results.Stream(s => Task.CompletedTask, null, null, null, null), typeof(PushStreamHttpResult)),
-        (() => Results.Text("content", null, null), typeof(ContentHttpResult)),
-        (() => Results.Text("content", null, null, null), typeof(ContentHttpResult)),
-        (() => Results.Redirect("/path", false, false), typeof(RedirectHttpResult)),
-        (() => Results.LocalRedirect("/path", false, false), typeof(RedirectHttpResult)),
-        (() => Results.RedirectToRoute("routeName", null, false, false, null), typeof(RedirectToRouteHttpResult)),
-        (() => Results.SignIn(new(), null, null), typeof(SignInHttpResult)),
-        (() => Results.SignOut(new(), null), typeof(SignOutHttpResult)),
-        (() => Results.StatusCode(200), typeof(StatusCodeHttpResult)),
-        (() => Results.Unauthorized(), typeof(UnauthorizedHttpResult)),
-        (() => Results.UnprocessableEntity(null), typeof(UnprocessableEntity)),
-        (() => Results.UnprocessableEntity(new()), typeof(UnprocessableEntity<object>)),
-        (() => Results.ValidationProblem(new Dictionary<string, string[]>(), null, null, null, null, null, null), typeof(ProblemHttpResult))
-    };
+    private static IEnumerable<(Expression<Func<IResult>>, Type)> FactoryMethodsTuples { get; } =
+        new List<(Expression<Func<IResult>>, Type)>
+        {
+            (() => Results.Accepted(null, null), typeof(Accepted)),
+            (() => Results.Accepted(null, new()), typeof(Accepted<object>)),
+            (() => Results.AcceptedAtRoute("routeName", null, null), typeof(AcceptedAtRoute)),
+            (
+                () => Results.AcceptedAtRoute("routeName", null, new()),
+                typeof(AcceptedAtRoute<object>)
+            ),
+            (() => Results.BadRequest(null), typeof(BadRequest)),
+            (() => Results.BadRequest(new()), typeof(BadRequest<object>)),
+            (
+                () => Results.Bytes(new byte[0], null, null, false, null, null),
+                typeof(FileContentHttpResult)
+            ),
+            (() => Results.Challenge(null, null), typeof(ChallengeHttpResult)),
+            (() => Results.Conflict(null), typeof(Conflict)),
+            (() => Results.Conflict(new()), typeof(Conflict<object>)),
+            (() => Results.Content("content", null, null), typeof(ContentHttpResult)),
+            (() => Results.Content("content", null, null, null), typeof(ContentHttpResult)),
+            (() => Results.Created("/path", null), typeof(Created)),
+            (() => Results.Created("/path", new()), typeof(Created<object>)),
+            (() => Results.CreatedAtRoute("routeName", null, null), typeof(CreatedAtRoute)),
+            (
+                () => Results.CreatedAtRoute("routeName", null, new()),
+                typeof(CreatedAtRoute<object>)
+            ),
+            (() => Results.Empty, typeof(EmptyHttpResult)),
+            (
+                () => Results.File(new byte[0], null, null, false, null, null),
+                typeof(FileContentHttpResult)
+            ),
+            (
+                () => Results.File(new MemoryStream(), null, null, null, null, false),
+                typeof(FileStreamHttpResult)
+            ),
+            (
+                () =>
+                    Results.File(
+                        Path.Join(Path.DirectorySeparatorChar.ToString(), "rooted", "path"),
+                        null,
+                        null,
+                        null,
+                        null,
+                        false
+                    ),
+                typeof(PhysicalFileHttpResult)
+            ),
+            (
+                () => Results.File("path", null, null, null, null, false),
+                typeof(VirtualFileHttpResult)
+            ),
+            (() => Results.Forbid(null, null), typeof(ForbidHttpResult)),
+            (() => Results.Json(new(), null, null, null), typeof(JsonHttpResult<object>)),
+            (() => Results.NoContent(), typeof(NoContent)),
+            (() => Results.NotFound(null), typeof(NotFound)),
+            (() => Results.NotFound(new()), typeof(NotFound<object>)),
+            (() => Results.Ok(null), typeof(Ok)),
+            (() => Results.Ok(new()), typeof(Ok<object>)),
+            (() => Results.Problem(new()), typeof(ProblemHttpResult)),
+            (
+                () => Results.Stream(new MemoryStream(), null, null, null, null, false),
+                typeof(FileStreamHttpResult)
+            ),
+            (
+                () => Results.Stream(s => Task.CompletedTask, null, null, null, null),
+                typeof(PushStreamHttpResult)
+            ),
+            (() => Results.Text("content", null, null), typeof(ContentHttpResult)),
+            (() => Results.Text("content", null, null, null), typeof(ContentHttpResult)),
+            (() => Results.Redirect("/path", false, false), typeof(RedirectHttpResult)),
+            (() => Results.LocalRedirect("/path", false, false), typeof(RedirectHttpResult)),
+            (
+                () => Results.RedirectToRoute("routeName", null, false, false, null),
+                typeof(RedirectToRouteHttpResult)
+            ),
+            (() => Results.SignIn(new(), null, null), typeof(SignInHttpResult)),
+            (() => Results.SignOut(new(), null), typeof(SignOutHttpResult)),
+            (() => Results.StatusCode(200), typeof(StatusCodeHttpResult)),
+            (() => Results.Unauthorized(), typeof(UnauthorizedHttpResult)),
+            (() => Results.UnprocessableEntity(null), typeof(UnprocessableEntity)),
+            (() => Results.UnprocessableEntity(new()), typeof(UnprocessableEntity<object>)),
+            (
+                () =>
+                    Results.ValidationProblem(
+                        new Dictionary<string, string[]>(),
+                        null,
+                        null,
+                        null,
+                        null,
+                        null,
+                        null
+                    ),
+                typeof(ProblemHttpResult)
+            )
+        };
 
-    public static IEnumerable<object[]> FactoryMethodsFromTuples() => FactoryMethodsTuples.Select(t => new object[] { t.Item1, t.Item2 });
+    public static IEnumerable<object[]> FactoryMethodsFromTuples() =>
+        FactoryMethodsTuples.Select(t => new object[] { t.Item1, t.Item2 });
 }

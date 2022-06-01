@@ -6,7 +6,6 @@ using System.Runtime.CompilerServices;
 using System.Threading;
 using System.Threading.Tasks;
 
-
 namespace Sample
 {
     public class Test
@@ -21,20 +20,21 @@ namespace Sample
 
         public static CancellationToken GetCancellationToken()
         {
-            if (cts == null) {
-                cts = new CancellationTokenSource ();
+            if (cts == null)
+            {
+                cts = new CancellationTokenSource();
             }
             return cts.Token;
         }
 
         [MethodImpl(MethodImplOptions.NoInlining)]
-        private static long recursiveFib (int n)
+        private static long recursiveFib(int n)
         {
             if (n < 1)
                 return 0;
             if (n == 1)
                 return 1;
-            return recursiveFib (n - 1) + recursiveFib (n - 2);
+            return recursiveFib(n - 1) + recursiveFib(n - 2);
         }
 
         public static async Task<int> StartAsyncWork()
@@ -46,7 +46,7 @@ namespace Sample
             while (true)
             {
                 await Task.Delay(1).ConfigureAwait(false);
-                b = recursiveFib (N);
+                b = recursiveFib(N);
                 if (ct.IsCancellationRequested)
                     break;
                 iterations++;

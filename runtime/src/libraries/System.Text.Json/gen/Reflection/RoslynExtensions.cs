@@ -9,7 +9,10 @@ namespace System.Text.Json.Reflection
 {
     internal static class RoslynExtensions
     {
-        public static Type AsType(this ITypeSymbol typeSymbol, MetadataLoadContextInternal metadataLoadContext)
+        public static Type AsType(
+            this ITypeSymbol typeSymbol,
+            MetadataLoadContextInternal metadataLoadContext
+        )
         {
             if (typeSymbol == null)
             {
@@ -19,7 +22,15 @@ namespace System.Text.Json.Reflection
             return new TypeWrapper(typeSymbol, metadataLoadContext);
         }
 
-        public static MethodInfo AsMethodInfo(this IMethodSymbol methodSymbol, MetadataLoadContextInternal metadataLoadContext) => (methodSymbol == null ? null : new MethodInfoWrapper(methodSymbol, metadataLoadContext))!;
+        public static MethodInfo AsMethodInfo(
+            this IMethodSymbol methodSymbol,
+            MetadataLoadContextInternal metadataLoadContext
+        ) =>
+            (
+                methodSymbol == null
+                    ? null
+                    : new MethodInfoWrapper(methodSymbol, metadataLoadContext)
+            )!;
 
         public static IEnumerable<INamedTypeSymbol> BaseTypes(this INamedTypeSymbol typeSymbol)
         {

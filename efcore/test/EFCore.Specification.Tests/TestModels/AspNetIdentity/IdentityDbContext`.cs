@@ -6,12 +6,7 @@ namespace Microsoft.EntityFrameworkCore.TestModels.AspNetIdentity;
 public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, string>
     where TUser : IdentityUser
 {
-    public IdentityDbContext(DbContextOptions options)
-        : base(options)
-    {
-    }
+    public IdentityDbContext(DbContextOptions options) : base(options) { }
 
-    protected IdentityDbContext()
-    {
-    }
+    protected IdentityDbContext() { }
 }

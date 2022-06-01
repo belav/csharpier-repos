@@ -1,4 +1,4 @@
-using Xunit;
+﻿using Xunit;
 using Shouldly;
 
 namespace AutoMapper.UnitTests
@@ -24,14 +24,17 @@ namespace AutoMapper.UnitTests
                 public string CustomerÆøå { get; set; }
             }
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Order, OrderDto>();
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Order, OrderDto>();
+                });
 
             protected override void Because_of()
             {
-                _result = Mapper.Map<Order, OrderDto>(new Order {Customer = new Customer {Æøå = "Bob"}});
+                _result = Mapper.Map<Order, OrderDto>(
+                    new Order { Customer = new Customer { Æøå = "Bob" } }
+                );
             }
 
             [Fact]
@@ -40,6 +43,5 @@ namespace AutoMapper.UnitTests
                 _result.CustomerÆøå.ShouldBe("Bob");
             }
         }
-
     }
 }

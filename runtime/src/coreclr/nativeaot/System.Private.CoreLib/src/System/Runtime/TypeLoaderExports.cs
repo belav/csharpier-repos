@@ -20,8 +20,16 @@ namespace System.Runtime
                 return result;
 
             int numTlsCells;
-            int tlsStorageSize = RuntimeAugments.TypeLoaderCallbacks.GetThreadStaticsSizeForDynamicType(index, out numTlsCells);
-            result = RuntimeImports.RhGetThreadLocalStorageForDynamicType(index, tlsStorageSize, numTlsCells);
+            int tlsStorageSize =
+                RuntimeAugments.TypeLoaderCallbacks.GetThreadStaticsSizeForDynamicType(
+                    index,
+                    out numTlsCells
+                );
+            result = RuntimeImports.RhGetThreadLocalStorageForDynamicType(
+                index,
+                tlsStorageSize,
+                numTlsCells
+            );
 
             if (result == IntPtr.Zero)
                 throw new OutOfMemoryException();
@@ -29,7 +37,10 @@ namespace System.Runtime
             return result;
         }
 
-        public static unsafe void ActivatorCreateInstanceAny(ref object ptrToData, IntPtr pEETypePtr)
+        public static unsafe void ActivatorCreateInstanceAny(
+            ref object ptrToData,
+            IntPtr pEETypePtr
+        )
         {
             EETypePtr pEEType = new EETypePtr(pEETypePtr);
 
@@ -48,14 +59,25 @@ namespace System.Runtime
             Entry entry = LookupInCache(s_cache, pEETypePtr, pEETypePtr);
             if (entry == null)
             {
-                entry = CacheMiss(pEETypePtr, pEETypePtr,
-                    (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
+                entry = CacheMiss(
+                    pEETypePtr,
+                    pEETypePtr,
+                    (
+                        IntPtr context,
+                        IntPtr signature,
+                        object contextObject,
+                        ref IntPtr auxResult
+                    ) =>
                     {
-                        IntPtr result = RuntimeAugments.TypeLoaderCallbacks.TryGetDefaultConstructorForType(new RuntimeTypeHandle(new EETypePtr(context)));
+                        IntPtr result =
+                            RuntimeAugments.TypeLoaderCallbacks.TryGetDefaultConstructorForType(
+                                new RuntimeTypeHandle(new EETypePtr(context))
+                            );
                         if (result == IntPtr.Zero)
                             result = RuntimeAugments.GetFallbackDefaultConstructor();
                         return result;
-                    });
+                    }
+                );
             }
             RawCalliHelper.Call(entry.Result, ptrToData);
         }
@@ -116,7 +138,11 @@ namespace System.Runtime
             return RawCalliHelper.Call<object>(entry.Result, entry.AuxResult);
         }
 
-        public static object GenericLookupAndAllocArray(IntPtr context, IntPtr arg, IntPtr signature)
+        public static object GenericLookupAndAllocArray(
+            IntPtr context,
+            IntPtr arg,
+            IntPtr signature
+        )
         {
             Entry entry = LookupInCache(s_cache, context, signature);
             if (entry == null)
@@ -126,7 +152,11 @@ namespace System.Runtime
             return RawCalliHelper.Call<object>(entry.Result, entry.AuxResult, arg);
         }
 
-        public static void GenericLookupAndCheckArrayElemType(IntPtr context, object arg, IntPtr signature)
+        public static void GenericLookupAndCheckArrayElemType(
+            IntPtr context,
+            object arg,
+            IntPtr signature
+        )
         {
             Entry entry = LookupInCache(s_cache, context, signature);
             if (entry == null)
@@ -149,24 +179,45 @@ namespace System.Runtime
         public static IntPtr UpdateTypeFloatingDictionary(IntPtr eetypePtr, IntPtr dictionaryPtr)
         {
             // No caching needed. Update is in-place, and happens once per dictionary
-            return RuntimeAugments.TypeLoaderCallbacks.UpdateFloatingDictionary(eetypePtr, dictionaryPtr);
+            return RuntimeAugments.TypeLoaderCallbacks.UpdateFloatingDictionary(
+                eetypePtr,
+                dictionaryPtr
+            );
         }
 
         public static IntPtr UpdateMethodFloatingDictionary(IntPtr dictionaryPtr)
         {
             // No caching needed. Update is in-place, and happens once per dictionary
-            return RuntimeAugments.TypeLoaderCallbacks.UpdateFloatingDictionary(dictionaryPtr, dictionaryPtr);
+            return RuntimeAugments.TypeLoaderCallbacks.UpdateFloatingDictionary(
+                dictionaryPtr,
+                dictionaryPtr
+            );
         }
 
         public static unsafe IntPtr GetDelegateThunk(object delegateObj, int whichThunk)
         {
-            Entry entry = LookupInCache(s_cache, (IntPtr)delegateObj.GetMethodTable(), new IntPtr(whichThunk));
+            Entry entry = LookupInCache(
+                s_cache,
+                (IntPtr)delegateObj.GetMethodTable(),
+                new IntPtr(whichThunk)
+            );
             if (entry == null)
             {
-                entry = CacheMiss((IntPtr)delegateObj.GetMethodTable(), new IntPtr(whichThunk),
-                    (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult)
-                        => RuntimeAugments.TypeLoaderCallbacks.GetDelegateThunk((Delegate)contextObject, (int)signature),
-                    delegateObj);
+                entry = CacheMiss(
+                    (IntPtr)delegateObj.GetMethodTable(),
+                    new IntPtr(whichThunk),
+                    (
+                        IntPtr context,
+                        IntPtr signature,
+                        object contextObject,
+                        ref IntPtr auxResult
+                    ) =>
+                        RuntimeAugments.TypeLoaderCallbacks.GetDelegateThunk(
+                            (Delegate)contextObject,
+                            (int)signature
+                        ),
+                    delegateObj
+                );
             }
             return entry.Result;
         }
@@ -176,9 +227,20 @@ namespace System.Runtime
             Entry entry = LookupInCache(s_cache, (IntPtr)obj.GetMethodTable(), *(IntPtr*)&slot);
             if (entry == null)
             {
-                entry = CacheMiss((IntPtr)obj.GetMethodTable(), *(IntPtr*)&slot,
-                    (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult)
-                        => Internal.Runtime.CompilerServices.GenericVirtualMethodSupport.GVMLookupForSlot(new RuntimeTypeHandle(new EETypePtr(context)), *(RuntimeMethodHandle*)&signature));
+                entry = CacheMiss(
+                    (IntPtr)obj.GetMethodTable(),
+                    *(IntPtr*)&slot,
+                    (
+                        IntPtr context,
+                        IntPtr signature,
+                        object contextObject,
+                        ref IntPtr auxResult
+                    ) =>
+                        Internal.Runtime.CompilerServices.GenericVirtualMethodSupport.GVMLookupForSlot(
+                            new RuntimeTypeHandle(new EETypePtr(context)),
+                            *(RuntimeMethodHandle*)&signature
+                        )
+                );
             }
             return entry.Result;
         }
@@ -189,10 +251,21 @@ namespace System.Runtime
             Entry entry = LookupInCache(s_cache, (IntPtr)obj.GetMethodTable(), openResolver);
             if (entry == null)
             {
-                entry = CacheMiss((IntPtr)obj.GetMethodTable(), openResolver,
-                    (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult)
-                        => Internal.Runtime.CompilerServices.OpenMethodResolver.ResolveMethodWorker(signature, contextObject),
-                    obj);
+                entry = CacheMiss(
+                    (IntPtr)obj.GetMethodTable(),
+                    openResolver,
+                    (
+                        IntPtr context,
+                        IntPtr signature,
+                        object contextObject,
+                        ref IntPtr auxResult
+                    ) =>
+                        Internal.Runtime.CompilerServices.OpenMethodResolver.ResolveMethodWorker(
+                            signature,
+                            contextObject
+                        ),
+                    obj
+                );
             }
             return entry.Result;
         }
@@ -212,7 +285,13 @@ namespace System.Runtime
         }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static IntPtr RuntimeCacheLookupInCache(IntPtr context, IntPtr signature, RuntimeObjectFactory factory, object contextObject, out IntPtr auxResult)
+        internal static IntPtr RuntimeCacheLookupInCache(
+            IntPtr context,
+            IntPtr signature,
+            RuntimeObjectFactory factory,
+            object contextObject,
+            out IntPtr auxResult
+        )
         {
             Entry entry = LookupInCache(s_cache, context, signature);
             if (entry == null)
@@ -225,15 +304,27 @@ namespace System.Runtime
 
         private static Entry CacheMiss(IntPtr ctx, IntPtr sig)
         {
-            return CacheMiss(ctx, sig,
+            return CacheMiss(
+                ctx,
+                sig,
                 (IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult) =>
-                    RuntimeAugments.TypeLoaderCallbacks.GenericLookupFromContextAndSignature(context, signature, out auxResult)
-                );
+                    RuntimeAugments.TypeLoaderCallbacks.GenericLookupFromContextAndSignature(
+                        context,
+                        signature,
+                        out auxResult
+                    )
+            );
         }
 
-        private static unsafe Entry CacheMiss(IntPtr context, IntPtr signature, RuntimeObjectFactory factory, object contextObject = null)
+        private static unsafe Entry CacheMiss(
+            IntPtr context,
+            IntPtr signature,
+            RuntimeObjectFactory factory,
+            object contextObject = null
+        )
         {
-            IntPtr result = IntPtr.Zero, auxResult = IntPtr.Zero;
+            IntPtr result = IntPtr.Zero,
+                auxResult = IntPtr.Zero;
             bool previouslyCached = false;
 
             //
@@ -279,9 +370,17 @@ namespace System.Runtime
                 // Resize cache as necessary
                 Entry[] cache = ResizeCacheForNewEntryAsNecessary();
 
-                int key = ((context.GetHashCode() >> 4) ^ signature.GetHashCode()) & (cache.Length - 1);
+                int key =
+                    ((context.GetHashCode() >> 4) ^ signature.GetHashCode()) & (cache.Length - 1);
 
-                Entry newEntry = new Entry() { Context = context, Signature = signature, Result = result, AuxResult = auxResult, Next = cache[key] };
+                Entry newEntry = new Entry()
+                {
+                    Context = context,
+                    Signature = signature,
+                    Result = result,
+                    AuxResult = auxResult,
+                    Next = cache[key]
+                };
                 cache[key] = newEntry;
                 return newEntry;
             }
@@ -354,8 +453,7 @@ namespace System.Runtime
                     if (cache.Length < MaximumCacheSize)
                         growCache = true;
                 }
-                else
-                if (tickCountSinceLastOverflow > cache.Length * 16)
+                else if (tickCountSinceLastOverflow > cache.Length * 16)
                 {
                     // If the fill rate of the cache is slower than 16ms per entry, shrink it
                     if (cache.Length > DefaultCacheSize)
@@ -390,40 +488,48 @@ namespace System.Runtime
     }
 
     [ReflectionBlocked]
-    public delegate IntPtr RuntimeObjectFactory(IntPtr context, IntPtr signature, object contextObject, ref IntPtr auxResult);
+    public delegate IntPtr RuntimeObjectFactory(
+        IntPtr context,
+        IntPtr signature,
+        object contextObject,
+        ref IntPtr auxResult
+    );
 
     internal static unsafe class RawCalliHelper
     {
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static void Call(System.IntPtr pfn, ref byte data)
-            => ((delegate*<ref byte, void>)pfn)(ref data);
+        public static void Call(System.IntPtr pfn, ref byte data) =>
+            ((delegate* <ref byte, void>)pfn)(ref data);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, IntPtr arg)
-            => ((delegate*<IntPtr, T>)pfn)(arg);
+        public static T Call<T>(System.IntPtr pfn, IntPtr arg) => ((delegate* <IntPtr, T>)pfn)(arg);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static void Call(System.IntPtr pfn, object arg)
-            => ((delegate*<object, void>)pfn)(arg);
+        public static void Call(System.IntPtr pfn, object arg) =>
+            ((delegate* <object, void>)pfn)(arg);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, IntPtr arg1, IntPtr arg2)
-            => ((delegate*<IntPtr, IntPtr, T>)pfn)(arg1, arg2);
+        public static T Call<T>(System.IntPtr pfn, IntPtr arg1, IntPtr arg2) =>
+            ((delegate* <IntPtr, IntPtr, T>)pfn)(arg1, arg2);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, IntPtr arg1, IntPtr arg2, object arg3, out IntPtr arg4)
-            => ((delegate*<IntPtr, IntPtr, object, out IntPtr, T>)pfn)(arg1, arg2, arg3, out arg4);
+        public static T Call<T>(
+            System.IntPtr pfn,
+            IntPtr arg1,
+            IntPtr arg2,
+            object arg3,
+            out IntPtr arg4
+        ) => ((delegate* <IntPtr, IntPtr, object, out IntPtr, T>)pfn)(arg1, arg2, arg3, out arg4);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static void Call(System.IntPtr pfn, IntPtr arg1, object arg2)
-            => ((delegate*<IntPtr, object, void>)pfn)(arg1, arg2);
+        public static void Call(System.IntPtr pfn, IntPtr arg1, object arg2) =>
+            ((delegate* <IntPtr, object, void>)pfn)(arg1, arg2);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(System.IntPtr pfn, object arg1, IntPtr arg2)
-            => ((delegate*<object, IntPtr, T>)pfn)(arg1, arg2);
+        public static T Call<T>(System.IntPtr pfn, object arg1, IntPtr arg2) =>
+            ((delegate* <object, IntPtr, T>)pfn)(arg1, arg2);
 
         [MethodImplAttribute(MethodImplOptions.AggressiveInlining)]
-        public static T Call<T>(IntPtr pfn, string[] arg0)
-            => ((delegate*<string[], T>)pfn)(arg0);
+        public static T Call<T>(IntPtr pfn, string[] arg0) => ((delegate* <string[], T>)pfn)(arg0);
     }
 }

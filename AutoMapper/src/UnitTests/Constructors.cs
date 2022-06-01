@@ -11,74 +11,115 @@ namespace AutoMapper.UnitTests.Constructors
 {
     public class ConstructorValidation : AutoMapperSpecBase
     {
-        class Source
-        {
-        }
+        class Source { }
+
         class Destination
         {
             public Destination(int otherValue, int value = 2) { }
+
             public int Value { get; set; }
             public int OtherValue { get; set; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(c => 
-            c.CreateMap<Source, Destination>().ForCtorParam("otherValue", o=>o.MapFrom(s=>0)));
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(
+                c =>
+                    c.CreateMap<Source, Destination>()
+                        .ForCtorParam("otherValue", o => o.MapFrom(s => 0))
+            );
     }
+
     public class Nullable_enum_default_value : AutoMapperSpecBase
     {
-        public enum SourceEnum { A, B }
+        public enum SourceEnum
+        {
+            A,
+            B
+        }
+
         public class Source
         {
             public SourceEnum? Enum { get; set; }
         }
-        public enum TargetEnum { A, B }
+
+        public enum TargetEnum
+        {
+            A,
+            B
+        }
+
         public class Target
         {
             public TargetEnum? Enum { get; set; }
+
             public Target(TargetEnum? Enum = TargetEnum.A)
             {
                 this.Enum = Enum;
             }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg=>cfg.CreateMap<Source, Target>());
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<Source, Target>());
+
         [Fact]
-        void Should_work() => Mapper.Map<Target>(new Source { Enum = SourceEnum.B }).Enum.ShouldBe(TargetEnum.B);
+        void Should_work() =>
+            Mapper.Map<Target>(new Source { Enum = SourceEnum.B }).Enum.ShouldBe(TargetEnum.B);
     }
+
     public class Nullable_enum_default_value_null : AutoMapperSpecBase
     {
-        public class Source
+        public class Source { }
+
+        public enum TargetEnum
         {
+            A,
+            B
         }
-        public enum TargetEnum { A, B }
+
         public class Target
         {
             public TargetEnum? Enum { get; }
+
             public Target(TargetEnum? Enum = null)
             {
                 this.Enum = Enum;
             }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Target>());
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<Source, Target>());
+
         [Fact]
         void Should_work() => Mapper.Map<Target>(new Source()).Enum.ShouldBeNull();
     }
+
     public class Nullable_enum_default_value_not_null : AutoMapperSpecBase
     {
-        public class Source
+        public class Source { }
+
+        public enum TargetEnum
         {
+            A,
+            B
         }
-        public enum TargetEnum { A, B }
+
         public class Target
         {
             public TargetEnum? Enum { get; }
+
             public Target(TargetEnum? Enum = TargetEnum.B)
             {
                 this.Enum = Enum;
             }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Source, Target>());
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<Source, Target>());
+
         [Fact]
         void Should_work() => Mapper.Map<Target>(new Source()).Enum.ShouldBe(TargetEnum.B);
     }
+
     public class Dynamic_constructor_mapping : AutoMapperSpecBase
     {
         public class ParentDTO<T>
@@ -125,11 +166,12 @@ namespace AutoMapper.UnitTests.Constructors
             public ParentModel<T> Parent { get; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDTO<>)).ReverseMap();
-            cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDTO<>)).ReverseMap();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap(typeof(ParentModel<>), typeof(ParentDTO<>)).ReverseMap();
+                cfg.CreateMap(typeof(ChildModel<>), typeof(ChildDTO<>)).ReverseMap();
+            });
 
         [Fact]
         public void Should_work()
@@ -140,7 +182,9 @@ namespace AutoMapper.UnitTests.Constructors
                 parentDto.Children.Add(new ChildDTO<int> { IdChild = i, Parent = parentDto });
             }
             var parentModel = Mapper.Map<ParentModel<int>>(parentDto);
-            var mappedChildren = Mapper.Map<List<ChildDTO<int>>, List<ChildModel<int>>>(parentDto.Children);
+            var mappedChildren = Mapper.Map<List<ChildDTO<int>>, List<ChildModel<int>>>(
+                parentDto.Children
+            );
         }
     }
 
@@ -180,7 +224,7 @@ namespace AutoMapper.UnitTests.Constructors
                 get => _idChild;
                 set
                 {
-                    if(_idChild != 0)
+                    if (_idChild != 0)
                     {
                         throw new Exception("Set IdChild again.");
                     }
@@ -190,17 +234,18 @@ namespace AutoMapper.UnitTests.Constructors
             public ParentModel Parent { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<ChildDTO, ChildModel>().ForMember(c => c.Parent, o => o.Ignore());
-            cfg.CreateMap<ParentDTO, ParentModel>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<ChildDTO, ChildModel>().ForMember(c => c.Parent, o => o.Ignore());
+                cfg.CreateMap<ParentDTO, ParentModel>();
+            });
 
         [Fact]
         public void Should_work()
         {
             var parentDto = new ParentDTO { IdParent = 1 };
-            for(var i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
             }
@@ -245,7 +290,7 @@ namespace AutoMapper.UnitTests.Constructors
                 get => _idChild;
                 set
                 {
-                    if(_idChild != 0)
+                    if (_idChild != 0)
                     {
                         throw new Exception("Set IdChild again.");
                     }
@@ -255,17 +300,20 @@ namespace AutoMapper.UnitTests.Constructors
             public ParentModel Parent { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg=>
-        {
-            cfg.CreateMap<ParentDTO, ParentModel>().PreserveReferences();
-            cfg.CreateMap<ChildDTO, ChildModel>().ForMember(c => c.Parent, o => o.Ignore()).PreserveReferences();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<ParentDTO, ParentModel>().PreserveReferences();
+                cfg.CreateMap<ChildDTO, ChildModel>()
+                    .ForMember(c => c.Parent, o => o.Ignore())
+                    .PreserveReferences();
+            });
 
         [Fact]
         public void Should_work()
         {
             var parentDto = new ParentDTO { IdParent = 1 };
-            for(var i = 0; i < 5; i++)
+            for (var i = 0; i < 5; i++)
             {
                 parentDto.Children.Add(new ChildDTO { IdChild = i, Parent = parentDto });
             }
@@ -293,10 +341,11 @@ namespace AutoMapper.UnitTests.Constructors
             public string Property { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void Should_map_ok()
@@ -334,19 +383,17 @@ namespace AutoMapper.UnitTests.Constructors
             public Entity Property { get; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Dto, Entity>().ReverseMap();
-            cfg.CreateMap<Source, Destination>().ReverseMap();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Dto, Entity>().ReverseMap();
+                cfg.CreateMap<Source, Destination>().ReverseMap();
+            });
 
         [Fact]
         public void Should_map_ok()
         {
-            var source = new Source
-            {
-                Property = new Dto { Value = 5.0 }
-            };
+            var source = new Source { Property = new Dto { Value = 5.0 } };
             var destination = Mapper.Map<Destination>(source);
             destination.Property.Value.ShouldBe(5.0);
             Mapper.Map<Source>(destination).Property.Value.ShouldBe(5.0);
@@ -365,12 +412,15 @@ namespace AutoMapper.UnitTests.Constructors
             public int Value { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<Source, Destination>());
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(c => c.CreateMap<Source, Destination>());
 
         [Fact]
         public void Should_throw()
         {
-            new Action(() => Mapper.Map<Destination>(new Source())).ShouldThrow<ArgumentException>($"Cannot create an instance of abstract type {typeof(Destination)}.");
+            new Action(() => Mapper.Map<Destination>(new Source())).ShouldThrow<ArgumentException>(
+                $"Cannot create an instance of abstract type {typeof(Destination)}."
+            );
         }
     }
 
@@ -402,7 +452,8 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<PersonSource, PersonTarget>());
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(c => c.CreateMap<PersonSource, PersonTarget>());
 
         protected override void Because_of()
         {
@@ -446,15 +497,19 @@ namespace AutoMapper.UnitTests.Constructors
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(c =>
-        {
-            c.CreateMap<Source, Destination>().ForCtorParam("inner", o=>o.MapFrom(s=>s.InnerSource));
-            c.CreateMap<InnerSource, InnerDestination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(c =>
+            {
+                c.CreateMap<Source, Destination>()
+                    .ForCtorParam("inner", o => o.MapFrom(s => s.InnerSource));
+                c.CreateMap<InnerSource, InnerDestination>();
+            });
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Destination>(new Source { InnerSource = new InnerSource { Name = "Core" } });
+            _destination = Mapper.Map<Destination>(
+                new Source { InnerSource = new InnerSource { Name = "Core" } }
+            );
         }
 
         [Fact]
@@ -485,13 +540,14 @@ namespace AutoMapper.UnitTests.Constructors
             public string Name => name;
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.RecognizePostfixes("postfix");
-            cfg.RecognizePrefixes("prefix");
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.RecognizePostfixes("postfix");
+                cfg.RecognizePrefixes("prefix");
 
-            cfg.CreateMap<Person, PersonDto>();
-        });
+                cfg.CreateMap<Person, PersonDto>();
+            });
 
         protected override void Because_of()
         {
@@ -526,13 +582,14 @@ namespace AutoMapper.UnitTests.Constructors
             public string Name => name;
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.RecognizeDestinationPostfixes("postfix");
-            cfg.RecognizeDestinationPrefixes("prefix");
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.RecognizeDestinationPostfixes("postfix");
+                cfg.RecognizeDestinationPrefixes("prefix");
 
-            cfg.CreateMap<Person, PersonDto>();
-        });
+                cfg.CreateMap<Person, PersonDto>();
+            });
 
         protected override void Because_of()
         {
@@ -557,9 +614,7 @@ namespace AutoMapper.UnitTests.Constructors
 
         public class PersonDto
         {
-            public PersonDto()
-            {
-            }
+            public PersonDto() { }
 
             public PersonDto(string name)
             {
@@ -569,7 +624,8 @@ namespace AutoMapper.UnitTests.Constructors
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Person, PersonDto>().ConstructUsing(p=>new PersonDto()));
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<Person, PersonDto>().ConstructUsing(p => new PersonDto()));
 
         protected override void Because_of()
         {
@@ -603,7 +659,8 @@ namespace AutoMapper.UnitTests.Constructors
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateMap<Person, PersonDto>());
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg => cfg.CreateMap<Person, PersonDto>());
 
         protected override void Because_of()
         {
@@ -636,16 +693,18 @@ namespace AutoMapper.UnitTests.Constructors
                 Latitude = latitude;
                 HorizontalAccuracy = 0;
             }
+
             public double Longitude { get; set; }
             public double Latitude { get; set; }
             public double? HorizontalAccuracy { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<GeoCoordinate, GeolocationDTO>();
-            cfg.CreateMap<GeolocationDTO, GeoCoordinate>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<GeoCoordinate, GeolocationDTO>();
+                cfg.CreateMap<GeolocationDTO, GeoCoordinate>();
+            });
 
         protected override void Because_of()
         {
@@ -680,14 +739,14 @@ namespace AutoMapper.UnitTests.Constructors
 
         public class GeoCoordinate
         {
-            public GeoCoordinate()
-            {
-            }
+            public GeoCoordinate() { }
+
             public GeoCoordinate(double longitude, double latitude, double x)
             {
                 Longitude = longitude;
                 Latitude = latitude;
             }
+
             public double Longitude { get; set; }
             public double Latitude { get; set; }
             public double? HorizontalAccuracy { get; set; }
@@ -697,16 +756,17 @@ namespace AutoMapper.UnitTests.Constructors
             public double Course { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<GeoCoordinate, GeolocationDTO>();
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<GeoCoordinate, GeolocationDTO>();
 
-            cfg.CreateMap<GeolocationDTO, GeoCoordinate>()
-                .ForMember(dest => dest.Altitude, opt => opt.Ignore())
-                .ForMember(dest => dest.VerticalAccuracy, opt => opt.Ignore())
-                .ForMember(dest => dest.Speed, opt => opt.Ignore())
-                .ForMember(dest => dest.Course, opt => opt.Ignore());
-        });
+                cfg.CreateMap<GeolocationDTO, GeoCoordinate>()
+                    .ForMember(dest => dest.Altitude, opt => opt.Ignore())
+                    .ForMember(dest => dest.VerticalAccuracy, opt => opt.Ignore())
+                    .ForMember(dest => dest.Speed, opt => opt.Ignore())
+                    .ForMember(dest => dest.Course, opt => opt.Ignore());
+            });
 
         protected override void Because_of()
         {
@@ -737,18 +797,14 @@ namespace AutoMapper.UnitTests.Constructors
             public int MyTypeId { get; set; }
         }
 
-        public class MyType
-        {
-        }
+        public class MyType { }
 
         public class Destination
         {
             private MyType _myType;
 
-            public Destination()
-            {
+            public Destination() { }
 
-            }
             public Destination(MyType myType)
             {
                 _myType = myType;
@@ -761,12 +817,13 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.RecognizePostfixes("Id");
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<int, MyType>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.RecognizePostfixes("Id");
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<int, MyType>();
+            });
 
         protected override void Because_of()
         {
@@ -787,19 +844,16 @@ namespace AutoMapper.UnitTests.Constructors
             public int MyTypeId { get; set; }
         }
 
-        public class MyType
-        {
-        }
+        public class MyType { }
 
         Destination _destination;
+
         public class Destination
         {
             private MyType _myType;
 
-            private Destination()
-            {
+            private Destination() { }
 
-            }
             public Destination(MyType myType)
             {
                 _myType = myType;
@@ -808,19 +862,17 @@ namespace AutoMapper.UnitTests.Constructors
             public MyType MyType
             {
                 get { return _myType; }
-                private set
-                {
-                    throw new Exception("Should not set through setter.");
-                }
+                private set { throw new Exception("Should not set through setter."); }
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.RecognizePostfixes("Id");
-            cfg.CreateMap<Source, Destination>();
-            cfg.CreateMap<int, MyType>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.RecognizePostfixes("Id");
+                cfg.CreateMap<Source, Destination>();
+                cfg.CreateMap<int, MyType>();
+            });
 
         protected override void Because_of()
         {
@@ -840,7 +892,11 @@ namespace AutoMapper.UnitTests.Constructors
 
         public class Destination
         {
-            public Destination(Guid id = default(Guid)) { Id = id; }
+            public Destination(Guid id = default(Guid))
+            {
+                Id = id;
+            }
+
             public Guid Id { get; set; }
         }
 
@@ -849,7 +905,8 @@ namespace AutoMapper.UnitTests.Constructors
             public Guid Id { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(c=>c.CreateMap<Source, Destination>());
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(c => c.CreateMap<Source, Destination>());
 
         protected override void Because_of()
         {
@@ -887,14 +944,18 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>().ForCtorParam("foo", opt => opt.MapFrom(s => s.Nested.Foo));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>()
+                    .ForCtorParam("foo", opt => opt.MapFrom(s => s.Nested.Foo));
+            });
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Destination>(new Source { Nested = new NestedSource { Foo = 5 } });
+            _destination = Mapper.Map<Destination>(
+                new Source { Nested = new NestedSource { Foo = 5 } }
+            );
         }
 
         [Fact]
@@ -904,7 +965,8 @@ namespace AutoMapper.UnitTests.Constructors
         }
     }
 
-    public class When_the_destination_has_a_matching_constructor_with_optional_extra_parameters : AutoMapperSpecBase
+    public class When_the_destination_has_a_matching_constructor_with_optional_extra_parameters
+        : AutoMapperSpecBase
     {
         private Destination _destination;
 
@@ -922,7 +984,7 @@ namespace AutoMapper.UnitTests.Constructors
                 get { return _foo; }
             }
 
-            public string Bar { get;}
+            public string Bar { get; }
 
             public Destination(int foo, string bar = "bar")
             {
@@ -931,10 +993,11 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         protected override void Because_of()
         {
@@ -968,25 +1031,33 @@ namespace AutoMapper.UnitTests.Constructors
 
             public int Bar { get; set; }
 
-            public Dest(Dest foo)
-            {
-            }
+            public Dest(Dest foo) { }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+            });
 
         [Fact]
         public void Should_say_what_parameter_fails()
         {
-            new Action(AssertConfigurationIsValid).ShouldThrowException<AutoMapperConfigurationException>(ex =>
-                  ex.MemberMap.ToString().ShouldBe("AutoMapper.UnitTests.Constructors.When_mapping_constructor_argument_fails+Dest.Void .ctor(Dest).parameter foo"));
+            new Action(
+                AssertConfigurationIsValid
+            ).ShouldThrowException<AutoMapperConfigurationException>(
+                ex =>
+                    ex.MemberMap
+                        .ToString()
+                        .ShouldBe(
+                            "AutoMapper.UnitTests.Constructors.When_mapping_constructor_argument_fails+Dest.Void .ctor(Dest).parameter foo"
+                        )
+            );
         }
     }
 
-    public class When_mapping_to_an_object_with_a_constructor_with_a_matching_argument : AutoMapperSpecBase
+    public class When_mapping_to_an_object_with_a_constructor_with_a_matching_argument
+        : AutoMapperSpecBase
     {
         private Dest _dest;
 
@@ -1013,10 +1084,11 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+            });
 
         protected override void Because_of()
         {
@@ -1064,10 +1136,11 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>();
+            });
 
         protected override void Because_of()
         {
@@ -1106,18 +1179,15 @@ namespace AutoMapper.UnitTests.Constructors
                 _addend = addend;
             }
 
-            public Dest()
-                : this(0)
-            {
-            }
+            public Dest() : this(0) { }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.ConstructServicesUsing(t => new Dest(5));
-            cfg.CreateMap<Source, Dest>()
-                .ConstructUsingServiceLocator();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.ConstructServicesUsing(t => new Dest(5));
+                cfg.CreateMap<Source, Dest>().ConstructUsingServiceLocator();
+            });
 
         protected override void Because_of()
         {
@@ -1156,22 +1226,22 @@ namespace AutoMapper.UnitTests.Constructors
                 _addend = addend;
             }
 
-            public Dest()
-                : this(0)
-            {
-            }
+            public Dest() : this(0) { }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.ConstructServicesUsing(t => new Dest(5));
-            cfg.CreateMap<Source, Dest>()
-                .ConstructUsingServiceLocator();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.ConstructServicesUsing(t => new Dest(5));
+                cfg.CreateMap<Source, Dest>().ConstructUsingServiceLocator();
+            });
 
         protected override void Because_of()
         {
-            _dest = Mapper.Map<Source, Dest>(new Source { Foo = 5 }, opt => opt.ConstructServicesUsing(t => new Dest(6)));
+            _dest = Mapper.Map<Source, Dest>(
+                new Source { Foo = 5 },
+                opt => opt.ConstructServicesUsing(t => new Dest(6))
+            );
         }
 
         [Fact]
@@ -1181,7 +1251,8 @@ namespace AutoMapper.UnitTests.Constructors
         }
     }
 
-    public class When_mapping_to_an_object_with_multiple_constructors_and_constructor_mapping_is_disabled : AutoMapperSpecBase
+    public class When_mapping_to_an_object_with_multiple_constructors_and_constructor_mapping_is_disabled
+        : AutoMapperSpecBase
     {
         private Dest _dest;
 
@@ -1205,11 +1276,12 @@ namespace AutoMapper.UnitTests.Constructors
             public Dest() { }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.DisableConstructorMapping();
-            cfg.CreateMap<Source, Dest>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.DisableConstructorMapping();
+                cfg.CreateMap<Source, Dest>();
+            });
 
         protected override void Because_of()
         {
@@ -1223,7 +1295,9 @@ namespace AutoMapper.UnitTests.Constructors
             _dest.Bar.ShouldBe(10);
         }
     }
-    public class When_mapping_with_optional_parameters_and_constructor_mapping_is_disabled : AutoMapperSpecBase
+
+    public class When_mapping_with_optional_parameters_and_constructor_mapping_is_disabled
+        : AutoMapperSpecBase
     {
         public class Destination
         {
@@ -1231,16 +1305,21 @@ namespace AutoMapper.UnitTests.Constructors
             {
                 Dest = destination;
             }
+
             public Destination Dest { get; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.DisableConstructorMapping();
-            cfg.CreateMap<object, Destination>();
-        });
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.DisableConstructorMapping();
+                cfg.CreateMap<object, Destination>();
+            });
+
         [Fact]
         public void Should_map_ok() => Mapper.Map<Destination>(new object()).Dest.ShouldBeNull();
     }
+
     public class UsingMappingEngineToResolveConstructorArguments
     {
         [Fact]
@@ -1260,7 +1339,6 @@ namespace AutoMapper.UnitTests.Constructors
 
             destinationFoo.Bar.FooBar.ShouldBe(sourceBar.FooBar);
         }
-
 
         public class DestinationFoo
         {
@@ -1332,7 +1410,6 @@ namespace AutoMapper.UnitTests.Constructors
             destinationFoo.Bar.FooBar.ShouldBe(sourceBar.FooBar);
             destinationFoo.Bar2.FooBar.ShouldBe("fooBar2");
         }
-
 
         public class DestinationFoo
         {
@@ -1410,7 +1487,6 @@ namespace AutoMapper.UnitTests.Constructors
             destinationFoo.Str.ShouldBe("hello");
         }
 
-
         public class DestinationFoo
         {
             private readonly DestinationBar _bar;
@@ -1426,7 +1502,7 @@ namespace AutoMapper.UnitTests.Constructors
                 get { return _str; }
             }
 
-            public DestinationFoo(DestinationBar bar=null,string str="hello")
+            public DestinationFoo(DestinationBar bar = null, string str = "hello")
             {
                 _bar = bar;
                 _str = str;
@@ -1469,7 +1545,6 @@ namespace AutoMapper.UnitTests.Constructors
         }
     }
 
-
     public class When_mapping_to_an_object_with_a_constructor_with_single_optional_arguments
     {
         [Fact]
@@ -1488,7 +1563,6 @@ namespace AutoMapper.UnitTests.Constructors
 
             destinationFoo.Bar.FooBar.ShouldBe("fooBar");
         }
-
 
         public class DestinationFoo
         {
@@ -1558,7 +1632,6 @@ namespace AutoMapper.UnitTests.Constructors
             destinationFoo.C.ShouldBe(3);
         }
 
-
         public class DestinationFoo
         {
             private string _a;
@@ -1579,7 +1652,7 @@ namespace AutoMapper.UnitTests.Constructors
                 get { return _c; }
             }
 
-            public DestinationFoo(string a = "a",string b="b", int c = 3)
+            public DestinationFoo(string a = "a", string b = "b", int c = 3)
             {
                 _a = a;
                 _b = b;
@@ -1640,15 +1713,17 @@ namespace AutoMapper.UnitTests.Constructors
             public int Value1 { get; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>().ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>()
+                    .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
+            });
 
         [Fact]
         public void Should_redirect_value()
         {
-            var dest = Mapper.Map<Source, Dest>(new Source {Value = 5});
+            var dest = Mapper.Map<Source, Dest>(new Source { Value = 5 });
 
             dest.Value1.ShouldBe(5);
         }
@@ -1671,10 +1746,12 @@ namespace AutoMapper.UnitTests.Constructors
             public int? Value1 { get; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Dest>().ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Dest>()
+                    .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
+            });
 
         [Fact]
         public void Should_redirect_value()
@@ -1699,7 +1776,7 @@ namespace AutoMapper.UnitTests.Constructors
 
         public class Dest
         {
-            public string Result{ get; }
+            public string Result { get; }
             public dynamic Details { get; }
 
             public Dest(string result, DestInner1 inner1)
@@ -1707,6 +1784,7 @@ namespace AutoMapper.UnitTests.Constructors
                 Result = result;
                 Details = inner1;
             }
+
             public Dest(string result, DestInner2 inner2)
             {
                 Result = result;
@@ -1734,11 +1812,13 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(config =>
-        {
-            config.CreateMap<Source, Dest>()
-                .ForCtorParam("inner1", cfg => cfg.MapFrom(_ => new Dest.DestInner1(100)));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(config =>
+            {
+                config
+                    .CreateMap<Source, Dest>()
+                    .ForCtorParam("inner1", cfg => cfg.MapFrom(_ => new Dest.DestInner1(100)));
+            });
 
         [Fact]
         public void Should_redirect_value()
@@ -1764,7 +1844,7 @@ namespace AutoMapper.UnitTests.Constructors
 
         public class Dest
         {
-            public string Result{ get; }
+            public string Result { get; }
             public dynamic Details { get; }
 
             public Dest(string result, DestInner1 inner1)
@@ -1772,6 +1852,7 @@ namespace AutoMapper.UnitTests.Constructors
                 Result = result;
                 Details = inner1;
             }
+
             public Dest(string result, DestInner2 inner2)
             {
                 Result = result;
@@ -1799,11 +1880,13 @@ namespace AutoMapper.UnitTests.Constructors
             }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(config =>
-        {
-            config.CreateMap<Source, Dest>()
-                .ForCtorParam("inner2", cfg => cfg.MapFrom(_ => new Dest.DestInner2(100)));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(config =>
+            {
+                config
+                    .CreateMap<Source, Dest>()
+                    .ForCtorParam("inner2", cfg => cfg.MapFrom(_ => new Dest.DestInner2(100)));
+            });
 
         [Fact]
         public void Should_redirect_value()
@@ -1814,5 +1897,4 @@ namespace AutoMapper.UnitTests.Constructors
             Assert.Equal("100", dest.Details.Value.ToString());
         }
     }
-
 }

@@ -20,7 +20,8 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
         {
             var (document, span, cancellationToken) = context;
 
-            var service = document.Project.Solution.Workspace.Services.GetService<IMoveStaticMembersOptionsService>();
+            var service =
+                document.Project.Solution.Workspace.Services.GetService<IMoveStaticMembersOptionsService>();
             if (service == null)
             {
                 return;
@@ -32,7 +33,9 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 return;
             }
 
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             if (semanticModel == null)
             {
                 return;
@@ -44,10 +47,16 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
                 return;
             }
 
-            var selectedMembers = selectedType.GetMembers()
-                .WhereAsArray(m => m.IsStatic &&
-                    MemberAndDestinationValidator.IsMemberValid(m) &&
-                    m.DeclaringSyntaxReferences.Any(sr => memberDeclaration.FullSpan.Contains(sr.Span)));
+            var selectedMembers = selectedType
+                .GetMembers()
+                .WhereAsArray(
+                    m =>
+                        m.IsStatic
+                        && MemberAndDestinationValidator.IsMemberValid(m)
+                        && m.DeclaringSyntaxReferences.Any(
+                            sr => memberDeclaration.FullSpan.Contains(sr.Span)
+                        )
+                );
             if (selectedMembers.IsEmpty)
             {
                 return;
@@ -55,9 +64,19 @@ namespace Microsoft.CodeAnalysis.MoveStaticMembers
 
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
 
-            var action = new MoveStaticMembersWithDialogCodeAction(document, span, service, selectedType, context.Options, selectedMember: selectedMembers[0]);
+            var action = new MoveStaticMembersWithDialogCodeAction(
+                document,
+                span,
+                service,
+                selectedType,
+                context.Options,
+                selectedMember: selectedMembers[0]
+            );
 
-            context.RegisterRefactoring(action, selectedMembers[0].DeclaringSyntaxReferences[0].Span);
+            context.RegisterRefactoring(
+                action,
+                selectedMembers[0].DeclaringSyntaxReferences[0].Span
+            );
         }
     }
 }

@@ -16,8 +16,15 @@ using Microsoft.VisualStudio.LanguageServer.Protocol;
 
 namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript;
 
-[ExportLspServiceFactory(typeof(DocumentPullDiagnosticHandler), ProtocolConstants.TypeScriptLanguageContract), Shared]
-internal class VSTypeScriptDocumentPullDiagnosticHandlerFactory : DocumentPullDiagnosticHandlerFactory
+[
+    ExportLspServiceFactory(
+        typeof(DocumentPullDiagnosticHandler),
+        ProtocolConstants.TypeScriptLanguageContract
+    ),
+    Shared
+]
+internal class VSTypeScriptDocumentPullDiagnosticHandlerFactory
+    : DocumentPullDiagnosticHandlerFactory
 {
     [ImportingConstructor]
     [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -25,12 +32,23 @@ internal class VSTypeScriptDocumentPullDiagnosticHandlerFactory : DocumentPullDi
         IDiagnosticService diagnosticService,
         IDiagnosticAnalyzerService analyzerService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions) : base(diagnosticService, analyzerService, editAndContinueDiagnosticUpdateSource, globalOptions)
-    {
-    }
+        IGlobalOptionService globalOptions
+    )
+        : base(
+            diagnosticService,
+            analyzerService,
+            editAndContinueDiagnosticUpdateSource,
+            globalOptions
+        ) { }
 }
 
-[ExportLspServiceFactory(typeof(WorkspacePullDiagnosticHandler), ProtocolConstants.TypeScriptLanguageContract), Shared]
+[
+    ExportLspServiceFactory(
+        typeof(WorkspacePullDiagnosticHandler),
+        ProtocolConstants.TypeScriptLanguageContract
+    ),
+    Shared
+]
 internal class VSTypeScriptWorkspacePullDiagnosticHandler : WorkspacePullDiagnosticHandlerFactory
 {
     [ImportingConstructor]
@@ -38,7 +56,6 @@ internal class VSTypeScriptWorkspacePullDiagnosticHandler : WorkspacePullDiagnos
     public VSTypeScriptWorkspacePullDiagnosticHandler(
         IDiagnosticService diagnosticService,
         EditAndContinueDiagnosticUpdateSource editAndContinueDiagnosticUpdateSource,
-        IGlobalOptionService globalOptions) : base(diagnosticService, editAndContinueDiagnosticUpdateSource, globalOptions)
-    {
-    }
+        IGlobalOptionService globalOptions
+    ) : base(diagnosticService, editAndContinueDiagnosticUpdateSource, globalOptions) { }
 }

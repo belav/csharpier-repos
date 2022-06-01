@@ -10,82 +10,78 @@ namespace Microsoft.EntityFrameworkCore.Query;
 public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : QueryTestBase<TFixture>
     where TFixture : NorthwindQueryFixtureBase<NoopModelCustomizer>, new()
 {
-    protected NorthwindAsNoTrackingQueryTestBase(TFixture fixture)
-        : base(fixture)
-    {
-    }
+    protected NorthwindAsNoTrackingQueryTestBase(TFixture fixture) : base(fixture) { }
 
     [ConditionalTheory]
     [InlineData(false, false)]
     [InlineData(false, true)]
     [InlineData(true, false)]
     [InlineData(true, true)]
-    public virtual Task Entity_not_added_to_state_manager(bool useParam, bool async)
-        => useParam
+    public virtual Task Entity_not_added_to_state_manager(bool useParam, bool async) =>
+        useParam
             ? AssertQuery(
                 async,
                 ss => ss.Set<Customer>().AsTracking(QueryTrackingBehavior.NoTracking),
-                entryCount: 0)
-            : AssertQuery(
-                async,
-                ss => ss.Set<Customer>().AsNoTracking(),
-                entryCount: 0);
+                entryCount: 0
+            )
+            : AssertQuery(async, ss => ss.Set<Customer>().AsNoTracking(), entryCount: 0);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Applied_to_body_clause(bool async)
-        => AssertQuery(
+    public virtual Task Applied_to_body_clause(bool async) =>
+        AssertQuery(
             async,
-            ss => from c in ss.Set<Customer>()
-                  join o in ss.Set<Order>().AsNoTracking()
-                      on c.CustomerID equals o.CustomerID
-                  where c.CustomerID == "ALFKI"
-                  select o,
-            entryCount: 0);
+            ss =>
+                from c in ss.Set<Customer>()
+                join o in ss.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select o,
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Applied_to_multiple_body_clauses(bool async)
-        => AssertQuery(
+    public virtual Task Applied_to_multiple_body_clauses(bool async) =>
+        AssertQuery(
             async,
-            ss => from c in ss.Set<Customer>().AsNoTracking()
-                  from o in ss.Set<Order>().AsNoTracking()
-                  where c.CustomerID == o.CustomerID
-                  select new { c, o },
+            ss =>
+                from c in ss.Set<Customer>().AsNoTracking()
+                from o in ss.Set<Order>().AsNoTracking()
+                where c.CustomerID == o.CustomerID
+                select new { c, o },
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
-            entryCount: 0);
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Applied_to_body_clause_with_projection(bool async)
-        => AssertQuery(
+    public virtual Task Applied_to_body_clause_with_projection(bool async) =>
+        AssertQuery(
             async,
-            ss => from c in ss.Set<Customer>()
-                  join o in ss.Set<Order>().AsNoTracking()
-                      on c.CustomerID equals o.CustomerID
-                  where c.CustomerID == "ALFKI"
-                  select new
-                  {
-                      c.CustomerID,
-                      c,
-                      ocid = o.CustomerID,
-                      o
-                  },
+            ss =>
+                from c in ss.Set<Customer>()
+                join o in ss.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                where c.CustomerID == "ALFKI"
+                select new { c.CustomerID, c, ocid = o.CustomerID, o },
             elementSorter: e => (e.CustomerID, e.o.OrderID),
-            entryCount: 0);
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Applied_to_projection(bool async)
-        => AssertQuery(
+    public virtual Task Applied_to_projection(bool async) =>
+        AssertQuery(
             async,
-            ss => (from c in ss.Set<Customer>()
-                   join o in ss.Set<Order>().AsNoTracking()
-                       on c.CustomerID equals o.CustomerID
-                   where c.CustomerID == "ALFKI"
-                   select new { c, o }).AsNoTracking(),
+            ss =>
+                (
+                    from c in ss.Set<Customer>()
+                    join o in ss.Set<Order>().AsNoTracking() on c.CustomerID equals o.CustomerID
+                    where c.CustomerID == "ALFKI"
+                    select new { c, o }
+                ).AsNoTracking(),
             elementSorter: e => (e.c.CustomerID, e.o.OrderID),
-            entryCount: 0);
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
@@ -111,52 +107,57 @@ public abstract class NorthwindAsNoTrackingQueryTestBase<TFixture> : QueryTestBa
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Include_reference_and_collection(bool async)
-        => AssertQuery(
+    public virtual Task Include_reference_and_collection(bool async) =>
+        AssertQuery(
             async,
-            ss => ss.Set<Order>()
-                .Include(o => o.Customer)
-                .Include(o => o.OrderDetails)
-                .AsNoTracking(),
-            entryCount: 0);
+            ss =>
+                ss.Set<Order>()
+                    .Include(o => o.Customer)
+                    .Include(o => o.OrderDetails)
+                    .AsNoTracking(),
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Applied_after_navigation_expansion(bool async)
-        => AssertQuery(
+    public virtual Task Applied_after_navigation_expansion(bool async) =>
+        AssertQuery(
             async,
             ss => ss.Set<Order>().Where(o => o.Customer.City != "London").AsNoTracking(),
-            entryCount: 0);
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Where_simple_shadow(bool async)
-        => AssertQuery(
+    public virtual Task Where_simple_shadow(bool async) =>
+        AssertQuery(
             async,
-            ss => ss.Set<Employee>()
-                .Where(e => EF.Property<string>(e, "Title") == "Sales Representative")
-                .AsNoTracking(),
-            entryCount: 0);
+            ss =>
+                ss.Set<Employee>()
+                    .Where(e => EF.Property<string>(e, "Title") == "Sales Representative")
+                    .AsNoTracking(),
+            entryCount: 0
+        );
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task Query_fast_path_when_ctor_binding(bool async)
-        => AssertQuery(
-            async,
-            ss => ss.Set<Customer>().AsNoTracking(),
-            entryCount: 0);
+    public virtual Task Query_fast_path_when_ctor_binding(bool async) =>
+        AssertQuery(async, ss => ss.Set<Customer>().AsNoTracking(), entryCount: 0);
 
     [ConditionalTheory]
     [MemberData(nameof(IsAsyncData))]
-    public virtual Task SelectMany_simple(bool async)
-        => AssertQuery(
+    public virtual Task SelectMany_simple(bool async) =>
+        AssertQuery(
             async,
-            ss => (from e in ss.Set<Employee>()
-                   from c in ss.Set<Customer>()
-                   select new { c, e }).AsNoTracking(),
+            ss =>
+                (
+                    from e in ss.Set<Employee>()
+                    from c in ss.Set<Customer>()
+                    select new { c, e }
+                ).AsNoTracking(),
             elementSorter: e => (e.c.CustomerID, e.e.EmployeeID),
-            entryCount: 0);
+            entryCount: 0
+        );
 
-    protected NorthwindContext CreateContext()
-        => Fixture.CreateContext();
+    protected NorthwindContext CreateContext() => Fixture.CreateContext();
 }

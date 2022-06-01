@@ -31,10 +31,7 @@ namespace System.Text.Json.Serialization
 
         public TItem this[int index]
         {
-            get
-            {
-                return _list[index];
-            }
+            get { return _list[index]; }
             set
             {
                 if (value == null)

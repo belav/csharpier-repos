@@ -30,7 +30,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             IEditorOptionsFactoryService editorOptionsFactoryService,
             [ImportMany] IEnumerable<IRefactorNotifyService> refactorNotifyServices,
             IGlobalOptionService globalOptions,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _editorOptionsFactoryService = editorOptionsFactoryService;
             _refactorNotifyServices = refactorNotifyServices;
@@ -38,7 +39,13 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.CodeModel
             _threadingContext = threadingContext;
         }
 
-        public ILanguageService CreateLanguageService(HostLanguageServices provider)
-            => new CSharpCodeModelService(provider, _editorOptionsFactoryService, _refactorNotifyServices, _globalOptions, _threadingContext);
+        public ILanguageService CreateLanguageService(HostLanguageServices provider) =>
+            new CSharpCodeModelService(
+                provider,
+                _editorOptionsFactoryService,
+                _refactorNotifyServices,
+                _globalOptions,
+                _threadingContext
+            );
     }
 }

@@ -24,7 +24,10 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public OperatorPlacementWhenWrappingViewModelFactory()
         {
-            _key = new OptionKey2(CodeStyleOptions2.OperatorPlacementWhenWrapping, LanguageNames.CSharp);
+            _key = new OptionKey2(
+                CodeStyleOptions2.OperatorPlacementWhenWrapping,
+                LanguageNames.CSharp
+            );
         }
 
         public IEnumSettingViewModel CreateViewModel(WhitespaceSetting setting)
@@ -34,7 +37,8 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
 
         public bool IsSupported(OptionKey2 key) => _key == key;
 
-        private class OperatorPlacementWhenWrappingViewModel : EnumSettingViewModel<OperatorPlacementWhenWrappingPreference>
+        private class OperatorPlacementWhenWrappingViewModel
+            : EnumSettingViewModel<OperatorPlacementWhenWrappingPreference>
         {
             private readonly WhitespaceSetting _setting;
 
@@ -43,7 +47,9 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
                 _setting = setting;
             }
 
-            protected override void ChangePropertyTo(OperatorPlacementWhenWrappingPreference newValue)
+            protected override void ChangePropertyTo(
+                OperatorPlacementWhenWrappingPreference newValue
+            )
             {
                 switch (newValue)
                 {
@@ -62,19 +68,29 @@ namespace Microsoft.VisualStudio.LanguageServices.EditorConfigSettings.Whitespac
             {
                 return _setting.GetValue() switch
                 {
-                    OperatorPlacementWhenWrappingPreference.BeginningOfLine => OperatorPlacementWhenWrappingPreference.BeginningOfLine,
+                    OperatorPlacementWhenWrappingPreference.BeginningOfLine
+                        => OperatorPlacementWhenWrappingPreference.BeginningOfLine,
                     _ => OperatorPlacementWhenWrappingPreference.EndOfLine,
                 };
             }
 
-            protected override IReadOnlyDictionary<string, OperatorPlacementWhenWrappingPreference> GetValuesAndDescriptions()
+            protected override IReadOnlyDictionary<
+                string,
+                OperatorPlacementWhenWrappingPreference
+            > GetValuesAndDescriptions()
             {
                 return EnumerateOptions().ToDictionary(x => x.description, x => x.value);
 
                 static IEnumerable<(string description, OperatorPlacementWhenWrappingPreference value)> EnumerateOptions()
                 {
-                    yield return (ServicesVSResources.Beginning_of_line, OperatorPlacementWhenWrappingPreference.BeginningOfLine);
-                    yield return (ServicesVSResources.End_of_line, OperatorPlacementWhenWrappingPreference.EndOfLine);
+                    yield return (
+                        ServicesVSResources.Beginning_of_line,
+                        OperatorPlacementWhenWrappingPreference.BeginningOfLine
+                    );
+                    yield return (
+                        ServicesVSResources.End_of_line,
+                        OperatorPlacementWhenWrappingPreference.EndOfLine
+                    );
                 }
             }
         }

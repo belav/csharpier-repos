@@ -32,7 +32,10 @@ namespace System.Drawing.Printing
         /// Gets a value indicating whether this converter can
         /// convert an object to the given destination type using the context.
         /// </summary>
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
             if (destinationType == typeof(InstanceDescriptor))
             {
@@ -44,7 +47,11 @@ namespace System.Drawing.Printing
         /// <summary>
         /// Converts the given object to the converter's native type.
         /// </summary>
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is string strValue)
             {
@@ -68,11 +75,14 @@ namespace System.Drawing.Printing
                     for (int i = 0; i < values.Length; i++)
                     {
                         // Note: ConvertFromString will raise exception if value cannot be converted.
-                        values[i] = (int)intConverter.ConvertFromString(context, culture, tokens[i])!;
+                        values[i] = (int)
+                            intConverter.ConvertFromString(context, culture, tokens[i])!;
                     }
                     if (values.Length != 4)
                     {
-                        throw new ArgumentException(SR.Format(SR.TextParseFailedFormat, text, "left, right, top, bottom"));
+                        throw new ArgumentException(
+                            SR.Format(SR.TextParseFailedFormat, text, "left, right, top, bottom")
+                        );
                     }
                     return new Margins(values[0], values[1], values[2], values[3]);
                 }
@@ -80,8 +90,11 @@ namespace System.Drawing.Printing
             return base.ConvertFrom(context, culture, value);
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "TypeDescriptor.GetConverter is safe for primitive types.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "TypeDescriptor.GetConverter is safe for primitive types."
+        )]
         private static TypeConverter GetIntConverter() => TypeDescriptor.GetConverter(typeof(int));
 
         /// <summary>
@@ -91,7 +104,12 @@ namespace System.Drawing.Printing
         /// type is string. If this cannot convert to the desitnation type, this will
         /// throw a NotSupportedException.
         /// </summary>
-        public override object? ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object? ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             ArgumentNullException.ThrowIfNull(destinationType);
 
@@ -118,13 +136,22 @@ namespace System.Drawing.Printing
                 }
                 if (destinationType == typeof(InstanceDescriptor))
                 {
-                    ConstructorInfo? ctor = typeof(Margins).GetConstructor(new Type[] {
-                        typeof(int), typeof(int), typeof(int), typeof(int)});
+                    ConstructorInfo? ctor = typeof(Margins).GetConstructor(
+                        new Type[] { typeof(int), typeof(int), typeof(int), typeof(int) }
+                    );
 
                     if (ctor != null)
                     {
-                        return new InstanceDescriptor(ctor, new object[] {
-                            margins.Left, margins.Right, margins.Top, margins.Bottom});
+                        return new InstanceDescriptor(
+                            ctor,
+                            new object[]
+                            {
+                                margins.Left,
+                                margins.Right,
+                                margins.Top,
+                                margins.Bottom
+                            }
+                        );
                     }
                 }
             }
@@ -142,7 +169,10 @@ namespace System.Drawing.Printing
         /// for the object.  This is useful for objects that are immutable, but still
         /// want to provide changable properties.
         /// </summary>
-        public override object CreateInstance(ITypeDescriptorContext? context, IDictionary propertyValues)
+        public override object CreateInstance(
+            ITypeDescriptorContext? context,
+            IDictionary propertyValues
+        )
         {
             ArgumentNullException.ThrowIfNull(propertyValues);
 
@@ -151,16 +181,21 @@ namespace System.Drawing.Printing
             object? top = propertyValues["Top"];
             object? bottom = propertyValues["Bottom"];
 
-            if (left == null || right == null || bottom == null || top == null ||
-                !(left is int) || !(right is int) || !(bottom is int) || !(top is int))
+            if (
+                left == null
+                || right == null
+                || bottom == null
+                || top == null
+                || !(left is int)
+                || !(right is int)
+                || !(bottom is int)
+                || !(top is int)
+            )
             {
                 throw new ArgumentException(SR.PropertyValueInvalidEntry);
             }
 
-            return new Margins((int)left,
-                                (int)right,
-                                (int)top,
-                                (int)bottom);
+            return new Margins((int)left, (int)right, (int)top, (int)bottom);
         }
     }
 }

@@ -23,6 +23,7 @@ namespace System
     {
         /// <summary>A byref or a native ptr.</summary>
         internal readonly ByReference<T> _reference;
+
         /// <summary>The number of elements this Span contains.</summary>
         private readonly int _length;
 
@@ -80,7 +81,12 @@ namespace System
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 #endif
 
-            _reference = new ByReference<T>(ref Unsafe.Add(ref MemoryMarshal.GetArrayDataReference(array), (nint)(uint)start /* force zero-extension */));
+            _reference = new ByReference<T>(
+                ref Unsafe.Add(
+                    ref MemoryMarshal.GetArrayDataReference(array),
+                    (nint)(uint)start /* force zero-extension */
+                )
+            );
             _length = length;
         }
 
@@ -148,7 +154,10 @@ namespace System
             {
                 if ((uint)index >= (uint)_length)
                     ThrowHelper.ThrowIndexOutOfRangeException();
-                return ref Unsafe.Add(ref _reference.Value, (nint)(uint)index /* force zero-extension */);
+                return ref Unsafe.Add(
+                    ref _reference.Value,
+                    (nint)(uint)index /* force zero-extension */
+                );
             }
         }
 
@@ -183,7 +192,9 @@ namespace System
         /// Always thrown by this method.
         /// </exception>
         /// </summary>
-        [Obsolete("Equals() on Span will always throw an exception. Use the equality operator instead.")]
+        [Obsolete(
+            "Equals() on Span will always throw an exception. Use the equality operator instead."
+        )]
         [EditorBrowsable(EditorBrowsableState.Never)]
         public override bool Equals(object? obj) =>
             throw new NotSupportedException(SR.NotSupported_CannotCallEqualsOnSpan);
@@ -223,6 +234,7 @@ namespace System
         {
             /// <summary>The span being enumerated.</summary>
             private readonly Span<T> _span;
+
             /// <summary>The next index to yield.</summary>
             private int _index;
 
@@ -266,7 +278,8 @@ namespace System
         {
             // Ensure that the native code has just one forward branch that is predicted-not-taken.
             ref T ret = ref Unsafe.NullRef<T>();
-            if (_length != 0) ret = ref _reference.Value;
+            if (_length != 0)
+                ret = ref _reference.Value;
             return ref ret;
         }
 
@@ -278,11 +291,17 @@ namespace System
         {
             if (RuntimeHelpers.IsReferenceOrContainsReferences<T>())
             {
-                SpanHelpers.ClearWithReferences(ref Unsafe.As<T, IntPtr>(ref _reference.Value), (uint)_length * (nuint)(Unsafe.SizeOf<T>() / sizeof(nuint)));
+                SpanHelpers.ClearWithReferences(
+                    ref Unsafe.As<T, IntPtr>(ref _reference.Value),
+                    (uint)_length * (nuint)(Unsafe.SizeOf<T>() / sizeof(nuint))
+                );
             }
             else
             {
-                SpanHelpers.ClearWithoutReferences(ref Unsafe.As<T, byte>(ref _reference.Value), (uint)_length * (nuint)Unsafe.SizeOf<T>());
+                SpanHelpers.ClearWithoutReferences(
+                    ref Unsafe.As<T, byte>(ref _reference.Value),
+                    (uint)_length * (nuint)Unsafe.SizeOf<T>()
+                );
             }
         }
 
@@ -298,7 +317,11 @@ namespace System
                 // The runtime eventually calls memset, which can efficiently support large buffers.
                 // We don't need to check IsReferenceOrContainsReferences because no references
                 // can ever be stored in types this small.
-                Unsafe.InitBlockUnaligned(ref Unsafe.As<T, byte>(ref _reference.Value), Unsafe.As<T, byte>(ref value), (uint)_length);
+                Unsafe.InitBlockUnaligned(
+                    ref Unsafe.As<T, byte>(ref _reference.Value),
+                    Unsafe.As<T, byte>(ref value),
+                    (uint)_length
+                );
             }
             else
             {
@@ -325,7 +348,11 @@ namespace System
 
             if ((uint)_length <= (uint)destination.Length)
             {
-                Buffer.Memmove(ref destination._reference.Value, ref _reference.Value, (uint)_length);
+                Buffer.Memmove(
+                    ref destination._reference.Value,
+                    ref _reference.Value,
+                    (uint)_length
+                );
             }
             else
             {
@@ -346,7 +373,11 @@ namespace System
             bool retVal = false;
             if ((uint)_length <= (uint)destination.Length)
             {
-                Buffer.Memmove(ref destination._reference.Value, ref _reference.Value, (uint)_length);
+                Buffer.Memmove(
+                    ref destination._reference.Value,
+                    ref _reference.Value,
+                    (uint)_length
+                );
                 retVal = true;
             }
             return retVal;
@@ -357,8 +388,8 @@ namespace System
         /// this does *not* check to see if the *contents* are equal.
         /// </summary>
         public static bool operator ==(Span<T> left, Span<T> right) =>
-            left._length == right._length &&
-            Unsafe.AreSame<T>(ref left._reference.Value, ref right._reference.Value);
+            left._length == right._length
+            && Unsafe.AreSame<T>(ref left._reference.Value, ref right._reference.Value);
 
         /// <summary>
         /// Defines an implicit conversion of a <see cref="Span{T}"/> to a <see cref="ReadOnlySpan{T}"/>
@@ -374,7 +405,9 @@ namespace System
         {
             if (typeof(T) == typeof(char))
             {
-                return new string(new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference.Value), _length));
+                return new string(
+                    new ReadOnlySpan<char>(ref Unsafe.As<T, char>(ref _reference.Value), _length)
+                );
             }
             return $"System.Span<{typeof(T).Name}>[{_length}]";
         }
@@ -392,7 +425,13 @@ namespace System
             if ((uint)start > (uint)_length)
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 
-            return new Span<T>(ref Unsafe.Add(ref _reference.Value, (nint)(uint)start /* force zero-extension */), _length - start);
+            return new Span<T>(
+                ref Unsafe.Add(
+                    ref _reference.Value,
+                    (nint)(uint)start /* force zero-extension */
+                ),
+                _length - start
+            );
         }
 
         /// <summary>
@@ -420,7 +459,13 @@ namespace System
                 ThrowHelper.ThrowArgumentOutOfRangeException();
 #endif
 
-            return new Span<T>(ref Unsafe.Add(ref _reference.Value, (nint)(uint)start /* force zero-extension */), length);
+            return new Span<T>(
+                ref Unsafe.Add(
+                    ref _reference.Value,
+                    (nint)(uint)start /* force zero-extension */
+                ),
+                length
+            );
         }
 
         /// <summary>
@@ -435,7 +480,11 @@ namespace System
                 return Array.Empty<T>();
 
             var destination = new T[_length];
-            Buffer.Memmove(ref MemoryMarshal.GetArrayDataReference(destination), ref _reference.Value, (uint)_length);
+            Buffer.Memmove(
+                ref MemoryMarshal.GetArrayDataReference(destination),
+                ref _reference.Value,
+                (uint)_length
+            );
             return destination;
         }
     }

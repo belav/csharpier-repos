@@ -121,7 +121,9 @@ namespace System.Formats.Tar
                 }
                 else if (header._format != Format)
                 {
-                    throw new FormatException(string.Format(SR.TarEntriesInDifferentFormats, header._format, Format));
+                    throw new FormatException(
+                        string.Format(SR.TarEntriesInDifferentFormats, header._format, Format)
+                    );
                 }
 
                 TarEntry entry = Format switch
@@ -165,7 +167,9 @@ namespace System.Formats.Tar
             if (_archiveStream.CanSeek)
             {
                 Debug.Assert(_previouslyReadEntry._header._endOfHeaderAndDataAndBlockAlignment > 0);
-                _archiveStream.Position = _previouslyReadEntry._header._endOfHeaderAndDataAndBlockAlignment;
+                _archiveStream.Position = _previouslyReadEntry
+                    ._header
+                    ._endOfHeaderAndDataAndBlockAlignment;
             }
             else if (_previouslyReadEntry._header._size > 0)
             {
@@ -187,7 +191,10 @@ namespace System.Formats.Tar
                     {
                         long bytesToSkip = _previouslyReadEntry._header._size - dataStream.Position;
                         TarHelpers.AdvanceStream(_archiveStream, bytesToSkip);
-                        TarHelpers.SkipBlockAlignmentPadding(_archiveStream, _previouslyReadEntry._header._size);
+                        TarHelpers.SkipBlockAlignmentPadding(
+                            _archiveStream,
+                            _previouslyReadEntry._header._size
+                        );
                         dataStream.HasReachedEnd = true; // Now the pointer is beyond the limit, so any read attempts should throw
                     }
                 }
@@ -305,7 +312,11 @@ namespace System.Formats.Tar
             return true;
         }
 
-        private bool TryProcessExtendedAttributesHeader(TarHeader firstHeader, bool copyData, out TarHeader secondHeader)
+        private bool TryProcessExtendedAttributesHeader(
+            TarHeader firstHeader,
+            bool copyData,
+            out TarHeader secondHeader
+        )
         {
             secondHeader = default;
             secondHeader._format = TarFormat.Pax;
@@ -325,7 +336,13 @@ namespace System.Formats.Tar
             // Can't have two metadata entries in a row, no matter the archive format
             if (secondHeader._typeFlag is TarEntryType.ExtendedAttributes)
             {
-                throw new FormatException(string.Format(SR.TarUnexpectedMetadataEntry, TarEntryType.ExtendedAttributes, TarEntryType.ExtendedAttributes));
+                throw new FormatException(
+                    string.Format(
+                        SR.TarUnexpectedMetadataEntry,
+                        TarEntryType.ExtendedAttributes,
+                        TarEntryType.ExtendedAttributes
+                    )
+                );
             }
 
             Debug.Assert(firstHeader._extendedAttributes != null);
@@ -341,7 +358,11 @@ namespace System.Formats.Tar
             return true;
         }
 
-        private bool TryProcessGnuMetadataHeader(TarHeader header, bool copyData, out TarHeader finalHeader)
+        private bool TryProcessGnuMetadataHeader(
+            TarHeader header,
+            bool copyData,
+            out TarHeader finalHeader
+        )
         {
             finalHeader = default;
 
@@ -357,12 +378,26 @@ namespace System.Formats.Tar
             // Can't have two identical metadata entries in a row
             if (secondHeader._typeFlag == header._typeFlag)
             {
-                throw new FormatException(string.Format(SR.TarUnexpectedMetadataEntry, secondHeader._typeFlag, header._typeFlag));
+                throw new FormatException(
+                    string.Format(
+                        SR.TarUnexpectedMetadataEntry,
+                        secondHeader._typeFlag,
+                        header._typeFlag
+                    )
+                );
             }
 
             // It's possible to have the two different metadata entries in a row
-            if ((header._typeFlag is TarEntryType.LongLink && secondHeader._typeFlag is TarEntryType.LongPath) ||
-                (header._typeFlag is TarEntryType.LongPath && secondHeader._typeFlag is TarEntryType.LongLink))
+            if (
+                (
+                    header._typeFlag is TarEntryType.LongLink
+                    && secondHeader._typeFlag is TarEntryType.LongPath
+                )
+                || (
+                    header._typeFlag is TarEntryType.LongPath
+                    && secondHeader._typeFlag is TarEntryType.LongLink
+                )
+            )
             {
                 TarHeader thirdHeader = default;
                 thirdHeader._format = TarFormat.Gnu;
@@ -376,7 +411,13 @@ namespace System.Formats.Tar
                 // Can't have three GNU metadata entries in a row
                 if (thirdHeader._typeFlag is TarEntryType.LongLink or TarEntryType.LongPath)
                 {
-                    throw new FormatException(string.Format(SR.TarUnexpectedMetadataEntry, thirdHeader._typeFlag, secondHeader._typeFlag));
+                    throw new FormatException(
+                        string.Format(
+                            SR.TarUnexpectedMetadataEntry,
+                            thirdHeader._typeFlag,
+                            secondHeader._typeFlag
+                        )
+                    );
                 }
 
                 if (header._typeFlag is TarEntryType.LongLink)

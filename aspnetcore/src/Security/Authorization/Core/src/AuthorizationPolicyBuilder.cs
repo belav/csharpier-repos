@@ -36,7 +36,8 @@ public class AuthorizationPolicyBuilder
     /// Gets or sets a list of <see cref="IAuthorizationRequirement"/>s which must succeed for
     /// this policy to be successful.
     /// </summary>
-    public IList<IAuthorizationRequirement> Requirements { get; set; } = new List<IAuthorizationRequirement>();
+    public IList<IAuthorizationRequirement> Requirements { get; set; } =
+        new List<IAuthorizationRequirement>();
 
     /// <summary>
     /// Gets or sets a list authentication schemes the <see cref="AuthorizationPolicyBuilder.Requirements"/>
@@ -68,7 +69,9 @@ public class AuthorizationPolicyBuilder
     /// </summary>
     /// <param name="requirements">The authorization requirements to add.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public AuthorizationPolicyBuilder AddRequirements(params IAuthorizationRequirement[] requirements)
+    public AuthorizationPolicyBuilder AddRequirements(
+        params IAuthorizationRequirement[] requirements
+    )
     {
         foreach (var req in requirements)
         {
@@ -118,7 +121,10 @@ public class AuthorizationPolicyBuilder
     /// <param name="claimType">The claim type required.</param>
     /// <param name="allowedValues">Optional list of claim values. If specified, the claim must match one or more of these values.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public AuthorizationPolicyBuilder RequireClaim(string claimType, IEnumerable<string> allowedValues)
+    public AuthorizationPolicyBuilder RequireClaim(
+        string claimType,
+        IEnumerable<string> allowedValues
+    )
     {
         if (claimType == null)
         {
@@ -210,7 +216,9 @@ public class AuthorizationPolicyBuilder
     /// </summary>
     /// <param name="handler">The handler to evaluate during authorization.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public AuthorizationPolicyBuilder RequireAssertion(Func<AuthorizationHandlerContext, bool> handler)
+    public AuthorizationPolicyBuilder RequireAssertion(
+        Func<AuthorizationHandlerContext, bool> handler
+    )
     {
         if (handler == null)
         {
@@ -226,7 +234,9 @@ public class AuthorizationPolicyBuilder
     /// </summary>
     /// <param name="handler">The handler to evaluate during authorization.</param>
     /// <returns>A reference to this instance after the operation has completed.</returns>
-    public AuthorizationPolicyBuilder RequireAssertion(Func<AuthorizationHandlerContext, Task<bool>> handler)
+    public AuthorizationPolicyBuilder RequireAssertion(
+        Func<AuthorizationHandlerContext, Task<bool>> handler
+    )
     {
         if (handler == null)
         {

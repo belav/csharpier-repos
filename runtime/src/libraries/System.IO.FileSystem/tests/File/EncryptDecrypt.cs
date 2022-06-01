@@ -35,7 +35,11 @@ namespace System.IO.Tests
 
         // On Windows Nano Server and Home Edition, file encryption with File.Encrypt(string path) throws an IOException
         // because EFS (Encrypted File System), its underlying technology, is not available on these operating systems.
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsNotWindowsNanoServer), nameof(PlatformDetection.IsNotWindowsHomeEdition))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNotWindowsNanoServer),
+            nameof(PlatformDetection.IsNotWindowsHomeEdition)
+        )]
         [PlatformSpecific(TestPlatforms.Windows)]
         [OuterLoop] // Occasional failures: https://github.com/dotnet/runtime/issues/12339
         public void EncryptDecrypt_Read()
@@ -54,8 +58,10 @@ namespace System.IO.Tests
                 {
                     File.Encrypt(tmpFileName);
                 }
-                catch (IOException e) when (e.HResult == unchecked((int)0x80070490) ||
-                                           (e.HResult == unchecked((int)0x80071776)))
+                catch (IOException e)
+                    when (e.HResult == unchecked((int)0x80070490)
+                        || (e.HResult == unchecked((int)0x80071776))
+                    )
                 {
                     // Ignore ERROR_NOT_FOUND 1168 (0x490). It is reported when EFS is disabled by domain policy.
                     // Ignore ERROR_NO_USER_KEYS (0x1776). This occurs when no user key exists to encrypt with.
@@ -69,11 +75,17 @@ namespace System.IO.Tests
                 }
 
                 Assert.Equal(fileContentRead, File.ReadAllText(tmpFileName));
-                Assert.Equal(FileAttributes.Encrypted, (FileAttributes.Encrypted & File.GetAttributes(tmpFileName)));
+                Assert.Equal(
+                    FileAttributes.Encrypted,
+                    (FileAttributes.Encrypted & File.GetAttributes(tmpFileName))
+                );
 
                 File.Decrypt(tmpFileName);
                 Assert.Equal(fileContentRead, File.ReadAllText(tmpFileName));
-                Assert.NotEqual(FileAttributes.Encrypted, (FileAttributes.Encrypted & File.GetAttributes(tmpFileName)));
+                Assert.NotEqual(
+                    FileAttributes.Encrypted,
+                    (FileAttributes.Encrypted & File.GetAttributes(tmpFileName))
+                );
             }
             finally
             {

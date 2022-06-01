@@ -22,14 +22,25 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
         {
             Contract.ThrowIfNull(set);
             _set = set;
-            Locations = set.Locations?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan)).ToList();
+            Locations = set.Locations
+                ?.Select(x => new InlineRenameLocation(x.Document, x.TextSpan))
+                .ToList();
         }
 
         public IList<InlineRenameLocation> Locations { get; }
 
-        public async Task<IInlineRenameReplacementInfo> GetReplacementsAsync(string replacementText, OptionSet optionSet, CancellationToken cancellationToken)
+        public async Task<IInlineRenameReplacementInfo> GetReplacementsAsync(
+            string replacementText,
+            OptionSet optionSet,
+            CancellationToken cancellationToken
+        )
         {
-            var info = await _set.GetReplacementsAsync(replacementText, optionSet, cancellationToken).ConfigureAwait(false);
+            var info = await _set.GetReplacementsAsync(
+                    replacementText,
+                    optionSet,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (info != null)
             {
                 return new VSTypeScriptInlineRenameReplacementInfo(info);

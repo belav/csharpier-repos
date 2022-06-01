@@ -17,13 +17,13 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
     /// Notifies EnC service of host workspace events.
     /// </summary>
     [ExportEventListener(WellKnownEventListeners.Workspace, WorkspaceKind.Host), Shared]
-    internal sealed class EditAndContinueHostWorkspaceEventListener : IEventListener<object>, IEventListenerStoppable
+    internal sealed class EditAndContinueHostWorkspaceEventListener
+        : IEventListener<object>,
+            IEventListenerStoppable
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public EditAndContinueHostWorkspaceEventListener()
-        {
-        }
+        public EditAndContinueHostWorkspaceEventListener() { }
 
         public void StartListening(Workspace workspace, object serviceOpt)
         {
@@ -48,8 +48,11 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         [MethodImpl(MethodImplOptions.NoInlining)]
         private static void WorkspaceDocumentOpenedImpl(DocumentEventArgs e)
         {
-            var proxy = new RemoteEditAndContinueServiceProxy(e.Document.Project.Solution.Workspace);
-            _ = Task.Run(() => proxy.OnSourceFileUpdatedAsync(e.Document, CancellationToken.None)).ReportNonFatalErrorAsync();
+            var proxy = new RemoteEditAndContinueServiceProxy(
+                e.Document.Project.Solution.Workspace
+            );
+            _ = Task.Run(() => proxy.OnSourceFileUpdatedAsync(e.Document, CancellationToken.None))
+                .ReportNonFatalErrorAsync();
         }
     }
 }

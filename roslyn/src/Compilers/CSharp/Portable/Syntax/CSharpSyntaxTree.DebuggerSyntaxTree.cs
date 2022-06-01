@@ -10,7 +10,11 @@ namespace Microsoft.CodeAnalysis.CSharp
     {
         private class DebuggerSyntaxTree : ParsedSyntaxTree
         {
-            public DebuggerSyntaxTree(CSharpSyntaxNode root, SourceText text, CSharpParseOptions options)
+            public DebuggerSyntaxTree(
+                CSharpSyntaxNode root,
+                SourceText text,
+                CSharpParseOptions options
+            )
                 : base(
                     text,
                     text.Encoding,
@@ -20,9 +24,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                     root: root,
                     directives: Syntax.InternalSyntax.DirectiveStack.Empty,
                     diagnosticOptions: null,
-                    cloneRoot: true)
-            {
-            }
+                    cloneRoot: true
+                ) { }
 
             internal override bool SupportsLocations
             {

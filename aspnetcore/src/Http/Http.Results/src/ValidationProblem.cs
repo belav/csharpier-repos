@@ -18,11 +18,17 @@ public sealed class ValidationProblem : IResult, IEndpointMetadataProvider
         ArgumentNullException.ThrowIfNull(problemDetails, nameof(problemDetails));
         if (problemDetails is { Status: not null and not StatusCodes.Status400BadRequest })
         {
-            throw new ArgumentException($"{nameof(ValidationProblem)} only supports a 400 Bad Request response status code.", nameof(problemDetails));
+            throw new ArgumentException(
+                $"{nameof(ValidationProblem)} only supports a 400 Bad Request response status code.",
+                nameof(problemDetails)
+            );
         }
 
         ProblemDetails = problemDetails;
-        HttpResultsHelper.ApplyProblemDetailsDefaults(ProblemDetails, statusCode: StatusCodes.Status400BadRequest);
+        HttpResultsHelper.ApplyProblemDetailsDefaults(
+            ProblemDetails,
+            statusCode: StatusCodes.Status400BadRequest
+        );
     }
 
     /// <summary>
@@ -52,10 +58,11 @@ public sealed class ValidationProblem : IResult, IEndpointMetadataProvider
         httpContext.Response.StatusCode = StatusCode;
 
         return HttpResultsHelper.WriteResultAsJsonAsync(
-                httpContext,
-                logger,
-                value: ProblemDetails,
-                ContentType);
+            httpContext,
+            logger,
+            value: ProblemDetails,
+            ContentType
+        );
     }
 
     /// <inheritdoc/>
@@ -63,6 +70,12 @@ public sealed class ValidationProblem : IResult, IEndpointMetadataProvider
     {
         ArgumentNullException.ThrowIfNull(context);
 
-        context.EndpointMetadata.Add(new ProducesResponseTypeMetadata(typeof(HttpValidationProblemDetails), StatusCodes.Status400BadRequest, "application/problem+json"));
+        context.EndpointMetadata.Add(
+            new ProducesResponseTypeMetadata(
+                typeof(HttpValidationProblemDetails),
+                StatusCodes.Status400BadRequest,
+                "application/problem+json"
+            )
+        );
     }
 }

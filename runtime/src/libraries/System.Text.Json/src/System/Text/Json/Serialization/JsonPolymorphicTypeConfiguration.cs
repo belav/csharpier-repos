@@ -11,7 +11,9 @@ namespace System.Text.Json.Serialization
     /// <summary>
     /// Defines polymorphic configuration for a specified base type.
     /// </summary>
-    public class JsonPolymorphicTypeConfiguration : IJsonPolymorphicTypeConfiguration, ICollection<(Type DerivedType, object? TypeDiscriminator)>
+    public class JsonPolymorphicTypeConfiguration
+        : IJsonPolymorphicTypeConfiguration,
+            ICollection<(Type DerivedType, object? TypeDiscriminator)>
     {
         private readonly List<(Type DerivedType, object? TypeDiscriminator)> _derivedTypes = new();
         private string? _customTypeDiscriminatorPropertyName;
@@ -31,7 +33,10 @@ namespace System.Text.Json.Serialization
 
             if (!PolymorphicTypeResolver.IsSupportedPolymorphicBaseType(baseType))
             {
-                throw new ArgumentException(SR.Format(SR.Polymorphism_TypeDoesNotSupportPolymorphism, baseType), nameof(baseType));
+                throw new ArgumentException(
+                    SR.Format(SR.Polymorphism_TypeDoesNotSupportPolymorphism, baseType),
+                    nameof(baseType)
+                );
             }
 
             BaseType = baseType;
@@ -89,8 +94,8 @@ namespace System.Text.Json.Serialization
         /// </summary>
         /// <param name="derivedType">The derived type for which to enable polymorphism.</param>
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
-        public JsonPolymorphicTypeConfiguration WithDerivedType(Type derivedType)
-            => WithDerivedTypeCore(derivedType, null);
+        public JsonPolymorphicTypeConfiguration WithDerivedType(Type derivedType) =>
+            WithDerivedTypeCore(derivedType, null);
 
         /// <summary>
         /// Opts in polymorphic serialization for the specified derived type.
@@ -98,8 +103,10 @@ namespace System.Text.Json.Serialization
         /// <param name="derivedType">The derived type for which to enable polymorphism.</param>
         /// <param name="typeDiscriminator">The type discriminator id to use for the specified derived type.</param>
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
-        public JsonPolymorphicTypeConfiguration WithDerivedType(Type derivedType, string typeDiscriminator) =>
-            WithDerivedTypeCore(derivedType, typeDiscriminator);
+        public JsonPolymorphicTypeConfiguration WithDerivedType(
+            Type derivedType,
+            string typeDiscriminator
+        ) => WithDerivedTypeCore(derivedType, typeDiscriminator);
 
         /// <summary>
         /// Opts in polymorphic serialization for the specified derived type.
@@ -107,10 +114,15 @@ namespace System.Text.Json.Serialization
         /// <param name="derivedType">The derived type for which to enable polymorphism.</param>
         /// <param name="typeDiscriminator">The type discriminator id to use for the specified derived type.</param>
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
-        public JsonPolymorphicTypeConfiguration WithDerivedType(Type derivedType, int typeDiscriminator) =>
-            WithDerivedTypeCore(derivedType, typeDiscriminator);
+        public JsonPolymorphicTypeConfiguration WithDerivedType(
+            Type derivedType,
+            int typeDiscriminator
+        ) => WithDerivedTypeCore(derivedType, typeDiscriminator);
 
-        private JsonPolymorphicTypeConfiguration WithDerivedTypeCore(Type derivedType, object? typeDiscriminator)
+        private JsonPolymorphicTypeConfiguration WithDerivedTypeCore(
+            Type derivedType,
+            object? typeDiscriminator
+        )
         {
             Debug.Assert(typeDiscriminator is null or string or int);
 
@@ -123,7 +135,10 @@ namespace System.Text.Json.Serialization
 
             if (!PolymorphicTypeResolver.IsSupportedDerivedType(BaseType, derivedType))
             {
-                throw new ArgumentException(SR.Format(SR.Polymorphism_DerivedTypeIsNotSupported, derivedType, BaseType), nameof(derivedType));
+                throw new ArgumentException(
+                    SR.Format(SR.Polymorphism_DerivedTypeIsNotSupported, derivedType, BaseType),
+                    nameof(derivedType)
+                );
             }
 
             // Perform a linear traversal to determine any duplicate derived types or discriminator Id's
@@ -133,12 +148,26 @@ namespace System.Text.Json.Serialization
             {
                 if (entry.DerivedType == derivedType)
                 {
-                    throw new ArgumentException(SR.Format(SR.Polymorphism_DerivedTypeIsAlreadySpecified, BaseType, derivedType), nameof(derivedType));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Polymorphism_DerivedTypeIsAlreadySpecified,
+                            BaseType,
+                            derivedType
+                        ),
+                        nameof(derivedType)
+                    );
                 }
 
                 if (typeDiscriminator != null && typeDiscriminator.Equals(entry.TypeDiscriminator))
                 {
-                    throw new ArgumentException(SR.Format(SR.Polymorphism_TypeDicriminatorIdIsAlreadySpecified, BaseType, typeDiscriminator), nameof(typeDiscriminator));
+                    throw new ArgumentException(
+                        SR.Format(
+                            SR.Polymorphism_TypeDicriminatorIdIsAlreadySpecified,
+                            BaseType,
+                            typeDiscriminator
+                        ),
+                        nameof(typeDiscriminator)
+                    );
                 }
             }
 
@@ -161,21 +190,36 @@ namespace System.Text.Json.Serialization
         {
             if (IsAssignedToOptionsInstance)
             {
-                ThrowHelper.ThrowInvalidOperationException_SerializerOptionsImmutable(context: null);
+                ThrowHelper.ThrowInvalidOperationException_SerializerOptionsImmutable(
+                    context: null
+                );
             }
         }
 
-        bool ICollection<(Type DerivedType, object? TypeDiscriminator)>.Contains((Type DerivedType, object? TypeDiscriminator) item) => _derivedTypes.Contains(item);
-        void ICollection<(Type DerivedType, object? TypeDiscriminator)>.CopyTo((Type DerivedType, object? TypeDiscriminator)[] array, int arrayIndex) => _derivedTypes.CopyTo(array, arrayIndex);
-        bool ICollection<(Type DerivedType, object? TypeDiscriminator)>.Remove((Type DerivedType, object? TypeDiscriminator) item)
+        bool ICollection<(Type DerivedType, object? TypeDiscriminator)>.Contains(
+            (Type DerivedType, object? TypeDiscriminator) item
+        ) => _derivedTypes.Contains(item);
+
+        void ICollection<(Type DerivedType, object? TypeDiscriminator)>.CopyTo(
+            (Type DerivedType, object? TypeDiscriminator)[] array,
+            int arrayIndex
+        ) => _derivedTypes.CopyTo(array, arrayIndex);
+
+        bool ICollection<(Type DerivedType, object? TypeDiscriminator)>.Remove(
+            (Type DerivedType, object? TypeDiscriminator) item
+        )
         {
             VerifyMutable();
             return _derivedTypes.Remove(item);
         }
 
-        bool ICollection<(Type DerivedType, object? TypeDiscriminator)>.IsReadOnly => IsAssignedToOptionsInstance;
+        bool ICollection<(Type DerivedType, object? TypeDiscriminator)>.IsReadOnly =>
+            IsAssignedToOptionsInstance;
         int ICollection<(Type DerivedType, object? TypeDiscriminator)>.Count => _derivedTypes.Count;
-        void ICollection<(Type DerivedType, object? TypeDiscriminator)>.Add((Type DerivedType, object? TypeDiscriminator) item)
+
+        void ICollection<(Type DerivedType, object? TypeDiscriminator)>.Add(
+            (Type DerivedType, object? TypeDiscriminator) item
+        )
         {
             if (item.TypeDiscriminator is not (null or string or int))
             {
@@ -191,7 +235,9 @@ namespace System.Text.Json.Serialization
             _derivedTypes.Clear();
         }
 
-        IEnumerator<(Type DerivedType, object? TypeDiscriminator)> IEnumerable<(Type DerivedType, object? TypeDiscriminator)>.GetEnumerator() => _derivedTypes.GetEnumerator();
+        IEnumerator<(Type DerivedType, object? TypeDiscriminator)> IEnumerable<(Type DerivedType, object? TypeDiscriminator)>.GetEnumerator() =>
+            _derivedTypes.GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => _derivedTypes.GetEnumerator();
     }
 
@@ -199,21 +245,21 @@ namespace System.Text.Json.Serialization
     /// Defines polymorphic type configuration for a given type.
     /// </summary>
     /// <typeparam name="TBaseType">The type for which polymorphic configuration is provided.</typeparam>
-    public class JsonPolymorphicTypeConfiguration<TBaseType> : JsonPolymorphicTypeConfiguration where TBaseType : class
+    public class JsonPolymorphicTypeConfiguration<TBaseType> : JsonPolymorphicTypeConfiguration
+        where TBaseType : class
     {
         /// <summary>
         /// Creates a new polymorphic configuration instance for a given base type.
         /// </summary>
-        public JsonPolymorphicTypeConfiguration() : base(typeof(TBaseType))
-        {
-        }
+        public JsonPolymorphicTypeConfiguration() : base(typeof(TBaseType)) { }
 
         /// <summary>
         /// Associates specified derived type with supplied string identifier.
         /// </summary>
         /// <typeparam name="TDerivedType">The derived type with which to associate a type identifier.</typeparam>
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
-        public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>() where TDerivedType : TBaseType
+        public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>()
+            where TDerivedType : TBaseType
         {
             WithDerivedType(typeof(TDerivedType));
             return this;
@@ -225,7 +271,9 @@ namespace System.Text.Json.Serialization
         /// <typeparam name="TDerivedType">The derived type with which to associate a type identifier.</typeparam>
         /// <param name="typeDiscriminator">The type identifier to use for the specified derived type.</param>
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
-        public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>(string typeDiscriminator) where TDerivedType : TBaseType
+        public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>(
+            string typeDiscriminator
+        ) where TDerivedType : TBaseType
         {
             WithDerivedType(typeof(TDerivedType), typeDiscriminator);
             return this;
@@ -237,7 +285,9 @@ namespace System.Text.Json.Serialization
         /// <typeparam name="TDerivedType">The derived type with which to associate a type identifier.</typeparam>
         /// <param name="typeDiscriminator">The type identifier to use for the specified derived type.</param>
         /// <returns>The same <see cref="JsonPolymorphicTypeConfiguration"/> instance after it has been updated.</returns>
-        public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>(int typeDiscriminator) where TDerivedType : TBaseType
+        public JsonPolymorphicTypeConfiguration<TBaseType> WithDerivedType<TDerivedType>(
+            int typeDiscriminator
+        ) where TDerivedType : TBaseType
         {
             WithDerivedType(typeof(TDerivedType), typeDiscriminator);
             return this;

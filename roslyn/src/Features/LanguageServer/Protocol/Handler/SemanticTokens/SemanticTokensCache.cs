@@ -70,9 +70,7 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
             }
         }
 
-        public SemanticTokensCache()
-        {
-        }
+        public SemanticTokensCache() { }
 
         /// <summary>
         /// Updates the given document's token set cache. Removes old cache results if the document's
@@ -81,7 +79,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public async Task UpdateCacheAsync(
             Uri uri,
             LSP.SemanticTokens tokens,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(tokens.ResultId);
 
@@ -115,7 +114,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.SemanticTokens
         public async Task<int[]?> GetCachedTokensDataAsync(
             Uri uri,
             string resultId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             using (await _semaphore.DisposableWaitAsync(cancellationToken).ConfigureAwait(false))
             {

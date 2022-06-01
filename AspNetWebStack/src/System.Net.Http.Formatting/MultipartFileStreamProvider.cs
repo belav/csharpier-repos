@@ -29,10 +29,7 @@ namespace System.Net.Http
         /// Initializes a new instance of the <see cref="MultipartFileStreamProvider"/> class.
         /// </summary>
         /// <param name="rootPath">The root path where the content of MIME multipart body parts are written to.</param>
-        public MultipartFileStreamProvider(string rootPath)
-            : this(rootPath, DefaultBufferSize)
-        {
-        }
+        public MultipartFileStreamProvider(string rootPath) : this(rootPath, DefaultBufferSize) { }
 
         /// <summary>
         /// Initializes a new instance of the <see cref="MultipartFileStreamProvider"/> class.
@@ -48,7 +45,11 @@ namespace System.Net.Http
 
             if (bufferSize < MinBufferSize)
             {
-                throw Error.ArgumentMustBeGreaterThanOrEqualTo("bufferSize", bufferSize, MinBufferSize);
+                throw Error.ArgumentMustBeGreaterThanOrEqualTo(
+                    "bufferSize",
+                    bufferSize,
+                    MinBufferSize
+                );
             }
 
             _rootPath = Path.GetFullPath(rootPath);
@@ -56,7 +57,7 @@ namespace System.Net.Http
         }
 
         /// <summary>
-        /// Gets a collection containing the local files names and associated HTTP content headers of MIME 
+        /// Gets a collection containing the local files names and associated HTTP content headers of MIME
         /// body parts written to file.
         /// </summary>
         public Collection<MultipartFileData> FileData
@@ -80,7 +81,11 @@ namespace System.Net.Http
             get { return _bufferSize; }
         }
 
-        [SuppressMessage("Microsoft.Reliability", "CA2000:Dispose objects before losing scope", Justification = "Stream is closed by caller (MultipartWriteDelegatingStream is just a wrapper that calls into the inner stream.)")]
+        [SuppressMessage(
+            "Microsoft.Reliability",
+            "CA2000:Dispose objects before losing scope",
+            Justification = "Stream is closed by caller (MultipartWriteDelegatingStream is just a wrapper that calls into the inner stream.)"
+        )]
         public override Stream GetStream(HttpContent parent, HttpContentHeaders headers)
         {
             if (parent == null)
@@ -101,10 +106,13 @@ namespace System.Net.Http
             }
             catch (Exception e)
             {
-                throw Error.InvalidOperation(e, Properties.Resources.MultipartStreamProviderInvalidLocalFileName);
+                throw Error.InvalidOperation(
+                    e,
+                    Properties.Resources.MultipartStreamProviderInvalidLocalFileName
+                );
             }
 
-            // Add local file name 
+            // Add local file name
             MultipartFileData fileData = new MultipartFileData(headers, localFilePath);
             _fileData.Add(fileData);
 

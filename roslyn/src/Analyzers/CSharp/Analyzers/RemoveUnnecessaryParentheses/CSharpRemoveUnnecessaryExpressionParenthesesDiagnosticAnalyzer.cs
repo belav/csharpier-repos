@@ -16,29 +16,44 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     internal class CSharpRemoveUnnecessaryExpressionParenthesesDiagnosticAnalyzer
-        : AbstractRemoveUnnecessaryParenthesesDiagnosticAnalyzer<SyntaxKind, ParenthesizedExpressionSyntax>
+        : AbstractRemoveUnnecessaryParenthesesDiagnosticAnalyzer<
+            SyntaxKind,
+            ParenthesizedExpressionSyntax
+        >
     {
-        protected override SyntaxKind GetSyntaxKind()
-            => SyntaxKind.ParenthesizedExpression;
+        protected override SyntaxKind GetSyntaxKind() => SyntaxKind.ParenthesizedExpression;
 
-        protected override ISyntaxFacts GetSyntaxFacts()
-            => CSharpSyntaxFacts.Instance;
+        protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
 
         protected override bool CanRemoveParentheses(
             ParenthesizedExpressionSyntax parenthesizedExpression,
-            SemanticModel semanticModel, CancellationToken cancellationToken,
-            out PrecedenceKind precedence, out bool clarifiesPrecedence)
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out PrecedenceKind precedence,
+            out bool clarifiesPrecedence
+        )
         {
             return CanRemoveParenthesesHelper(
-                parenthesizedExpression, semanticModel, cancellationToken,
-                out precedence, out clarifiesPrecedence);
+                parenthesizedExpression,
+                semanticModel,
+                cancellationToken,
+                out precedence,
+                out clarifiesPrecedence
+            );
         }
 
         public static bool CanRemoveParenthesesHelper(
-            ParenthesizedExpressionSyntax parenthesizedExpression, SemanticModel semanticModel, CancellationToken cancellationToken,
-            out PrecedenceKind parentPrecedenceKind, out bool clarifiesPrecedence)
+            ParenthesizedExpressionSyntax parenthesizedExpression,
+            SemanticModel semanticModel,
+            CancellationToken cancellationToken,
+            out PrecedenceKind parentPrecedenceKind,
+            out bool clarifiesPrecedence
+        )
         {
-            var result = parenthesizedExpression.CanRemoveParentheses(semanticModel, cancellationToken);
+            var result = parenthesizedExpression.CanRemoveParentheses(
+                semanticModel,
+                cancellationToken
+            );
             if (!result)
             {
                 parentPrecedenceKind = default;
@@ -48,8 +63,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
 
             var inner = parenthesizedExpression.Expression;
             var innerPrecedence = inner.GetOperatorPrecedence();
-            var innerIsSimple = innerPrecedence is OperatorPrecedence.Primary or
-                                OperatorPrecedence.None;
+            var innerIsSimple =
+                innerPrecedence is OperatorPrecedence.Primary or OperatorPrecedence.None;
 
             ExpressionSyntax parentExpression;
             switch (parenthesizedExpression.Parent)
@@ -77,7 +92,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
                     parentExpression = isPatternExpression;
                     break;
 
-                case ConstantPatternSyntax constantPattern when constantPattern.Parent is IsPatternExpressionSyntax isPatternExpression:
+                case ConstantPatternSyntax constantPattern
+                    when constantPattern.Parent is IsPatternExpressionSyntax isPatternExpression:
                     // on the right side of an 'x is const_pattern' expression
                     parentExpression = isPatternExpression;
                     break;
@@ -88,8 +104,10 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
                     return true;
             }
 
-            // We're parented by something binary-like. 
-            parentPrecedenceKind = CSharpExpressionPrecedenceService.Instance.GetPrecedenceKind(parentExpression);
+            // We're parented by something binary-like.
+            parentPrecedenceKind = CSharpExpressionPrecedenceService.Instance.GetPrecedenceKind(
+                parentExpression
+            );
 
             // Precedence is clarified any time we have expression with different precedence
             // (and the inner expression is not a primary expression).  in other words, this
@@ -100,8 +118,8 @@ namespace Microsoft.CodeAnalysis.CSharp.RemoveUnnecessaryParentheses
             // However, this does not:
             //
             //      a + (b.Length)
-            clarifiesPrecedence = !innerIsSimple &&
-                                  parentExpression.GetOperatorPrecedence() != innerPrecedence;
+            clarifiesPrecedence =
+                !innerIsSimple && parentExpression.GetOperatorPrecedence() != innerPrecedence;
             return true;
         }
     }

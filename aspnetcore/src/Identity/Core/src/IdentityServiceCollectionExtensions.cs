@@ -20,11 +20,9 @@ public static class IdentityServiceCollectionExtensions
     /// <typeparam name="TRole">The type representing a Role in the system.</typeparam>
     /// <param name="services">The services available in the application.</param>
     /// <returns>An <see cref="IdentityBuilder"/> for creating and configuring the identity system.</returns>
-    public static IdentityBuilder AddIdentity<TUser, TRole>(
-        this IServiceCollection services)
+    public static IdentityBuilder AddIdentity<TUser, TRole>(this IServiceCollection services)
         where TUser : class
-        where TRole : class
-        => services.AddIdentity<TUser, TRole>(setupAction: null!);
+        where TRole : class => services.AddIdentity<TUser, TRole>(setupAction: null!);
 
     /// <summary>
     /// Adds and configures the identity system for the specified User and Role types.
@@ -36,43 +34,58 @@ public static class IdentityServiceCollectionExtensions
     /// <returns>An <see cref="IdentityBuilder"/> for creating and configuring the identity system.</returns>
     public static IdentityBuilder AddIdentity<TUser, TRole>(
         this IServiceCollection services,
-        Action<IdentityOptions> setupAction)
+        Action<IdentityOptions> setupAction
+    )
         where TUser : class
         where TRole : class
     {
         // Services used by identity
-        services.AddAuthentication(options =>
-        {
-            options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
-            options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
-            options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
-        })
-        .AddCookie(IdentityConstants.ApplicationScheme, o =>
-        {
-            o.LoginPath = new PathString("/Account/Login");
-            o.Events = new CookieAuthenticationEvents
+        services
+            .AddAuthentication(options =>
             {
-                OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
-            };
-        })
-        .AddCookie(IdentityConstants.ExternalScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.ExternalScheme;
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        })
-        .AddCookie(IdentityConstants.TwoFactorRememberMeScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
-            o.Events = new CookieAuthenticationEvents
-            {
-                OnValidatePrincipal = SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
-            };
-        })
-        .AddCookie(IdentityConstants.TwoFactorUserIdScheme, o =>
-        {
-            o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
-            o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
-        });
+                options.DefaultAuthenticateScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultChallengeScheme = IdentityConstants.ApplicationScheme;
+                options.DefaultSignInScheme = IdentityConstants.ExternalScheme;
+            })
+            .AddCookie(
+                IdentityConstants.ApplicationScheme,
+                o =>
+                {
+                    o.LoginPath = new PathString("/Account/Login");
+                    o.Events = new CookieAuthenticationEvents
+                    {
+                        OnValidatePrincipal = SecurityStampValidator.ValidatePrincipalAsync
+                    };
+                }
+            )
+            .AddCookie(
+                IdentityConstants.ExternalScheme,
+                o =>
+                {
+                    o.Cookie.Name = IdentityConstants.ExternalScheme;
+                    o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                }
+            )
+            .AddCookie(
+                IdentityConstants.TwoFactorRememberMeScheme,
+                o =>
+                {
+                    o.Cookie.Name = IdentityConstants.TwoFactorRememberMeScheme;
+                    o.Events = new CookieAuthenticationEvents
+                    {
+                        OnValidatePrincipal =
+                            SecurityStampValidator.ValidateAsync<ITwoFactorSecurityStampValidator>
+                    };
+                }
+            )
+            .AddCookie(
+                IdentityConstants.TwoFactorUserIdScheme,
+                o =>
+                {
+                    o.Cookie.Name = IdentityConstants.TwoFactorUserIdScheme;
+                    o.ExpireTimeSpan = TimeSpan.FromMinutes(5);
+                }
+            );
 
         // Hosting doesn't add IHttpContextAccessor by default
         services.AddHttpContextAccessor();
@@ -85,8 +98,14 @@ public static class IdentityServiceCollectionExtensions
         // No interface for the error describer so we can add errors without rev'ing the interface
         services.TryAddScoped<IdentityErrorDescriber>();
         services.TryAddScoped<ISecurityStampValidator, SecurityStampValidator<TUser>>();
-        services.TryAddScoped<ITwoFactorSecurityStampValidator, TwoFactorSecurityStampValidator<TUser>>();
-        services.TryAddScoped<IUserClaimsPrincipalFactory<TUser>, UserClaimsPrincipalFactory<TUser, TRole>>();
+        services.TryAddScoped<
+            ITwoFactorSecurityStampValidator,
+            TwoFactorSecurityStampValidator<TUser>
+        >();
+        services.TryAddScoped<
+            IUserClaimsPrincipalFactory<TUser>,
+            UserClaimsPrincipalFactory<TUser, TRole>
+        >();
         services.TryAddScoped<IUserConfirmation<TUser>, DefaultUserConfirmation<TUser>>();
         services.TryAddScoped<UserManager<TUser>>();
         services.TryAddScoped<SignInManager<TUser>>();
@@ -106,8 +125,10 @@ public static class IdentityServiceCollectionExtensions
     /// <param name="services">The services available in the application.</param>
     /// <param name="configure">An action to configure the <see cref="CookieAuthenticationOptions"/>.</param>
     /// <returns>The services.</returns>
-    public static IServiceCollection ConfigureApplicationCookie(this IServiceCollection services, Action<CookieAuthenticationOptions> configure)
-        => services.Configure(IdentityConstants.ApplicationScheme, configure);
+    public static IServiceCollection ConfigureApplicationCookie(
+        this IServiceCollection services,
+        Action<CookieAuthenticationOptions> configure
+    ) => services.Configure(IdentityConstants.ApplicationScheme, configure);
 
     /// <summary>
     /// Configure the external cookie.
@@ -115,6 +136,8 @@ public static class IdentityServiceCollectionExtensions
     /// <param name="services">The services available in the application.</param>
     /// <param name="configure">An action to configure the <see cref="CookieAuthenticationOptions"/>.</param>
     /// <returns>The services.</returns>
-    public static IServiceCollection ConfigureExternalCookie(this IServiceCollection services, Action<CookieAuthenticationOptions> configure)
-        => services.Configure(IdentityConstants.ExternalScheme, configure);
+    public static IServiceCollection ConfigureExternalCookie(
+        this IServiceCollection services,
+        Action<CookieAuthenticationOptions> configure
+    ) => services.Configure(IdentityConstants.ExternalScheme, configure);
 }

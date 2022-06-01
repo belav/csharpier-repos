@@ -22,18 +22,18 @@ namespace System.CommandLine.Benchmarks.CommandLine
         public int MinimalSync() => new CommandLineBuilder(BuildCommand()).Build().Invoke(Args);
 
         [Benchmark]
-        public Task<int> MinimalAsync() => new CommandLineBuilder(BuildCommand()).Build().InvokeAsync(Args);
+        public Task<int> MinimalAsync() =>
+            new CommandLineBuilder(BuildCommand()).Build().InvokeAsync(Args);
 
         private static RootCommand BuildCommand()
         {
             Option<bool> boolOption = new Option<bool>(new[] { "--bool", "-b" }, "Bool option");
-            Option<string> stringOption = new Option<string>(new[] { "--string", "-s" }, "String option");
+            Option<string> stringOption = new Option<string>(
+                new[] { "--string", "-s" },
+                "String option"
+            );
 
-            RootCommand command = new RootCommand
-            {
-                boolOption,
-                stringOption
-            };
+            RootCommand command = new RootCommand { boolOption, stringOption };
 
             command.SetHandler(static (bool _, string _) => { }, boolOption, stringOption);
 

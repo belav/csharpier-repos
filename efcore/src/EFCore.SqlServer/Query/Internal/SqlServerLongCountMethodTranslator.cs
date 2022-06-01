@@ -33,16 +33,24 @@ public class SqlServerLongCountMethodTranslator : IAggregateMethodCallTranslator
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     public virtual SqlExpression? Translate(
-        MethodInfo method, EnumerableExpression source, IReadOnlyList<SqlExpression> arguments,
-        IDiagnosticsLogger<DbLoggerCategory.Query> logger)
+        MethodInfo method,
+        EnumerableExpression source,
+        IReadOnlyList<SqlExpression> arguments,
+        IDiagnosticsLogger<DbLoggerCategory.Query> logger
+    )
     {
-        if (method.DeclaringType == typeof(Queryable)
+        if (
+            method.DeclaringType == typeof(Queryable)
             && method.IsGenericMethod
             && method.GetGenericMethodDefinition() is MethodInfo genericMethod
-            && (genericMethod == QueryableMethods.LongCountWithoutPredicate
-                || genericMethod == QueryableMethods.LongCountWithPredicate))
+            && (
+                genericMethod == QueryableMethods.LongCountWithoutPredicate
+                || genericMethod == QueryableMethods.LongCountWithPredicate
+            )
+        )
         {
-            var sqlExpression = (source.Selector as SqlExpression) ?? _sqlExpressionFactory.Fragment("*");
+            var sqlExpression =
+                (source.Selector as SqlExpression) ?? _sqlExpressionFactory.Fragment("*");
             if (source.Predicate != null)
             {
                 if (sqlExpression is SqlFragmentExpression)
@@ -52,7 +60,8 @@ public class SqlServerLongCountMethodTranslator : IAggregateMethodCallTranslator
 
                 sqlExpression = _sqlExpressionFactory.Case(
                     new List<CaseWhenClause> { new(source.Predicate, sqlExpression) },
-                    elseResult: null);
+                    elseResult: null
+                );
             }
 
             if (source.IsDistinct)
@@ -66,7 +75,9 @@ public class SqlServerLongCountMethodTranslator : IAggregateMethodCallTranslator
                     new[] { sqlExpression },
                     nullable: false,
                     argumentsPropagateNullability: new[] { false },
-                    typeof(long)));
+                    typeof(long)
+                )
+            );
         }
 
         return null;

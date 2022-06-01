@@ -47,7 +47,8 @@ public sealed record DatabaseDependencies
     [EntityFrameworkInternal]
     public DatabaseDependencies(
         IQueryCompilationContextFactory queryCompilationContextFactory,
-        IUpdateAdapterFactory updateAdapterFactory)
+        IUpdateAdapterFactory updateAdapterFactory
+    )
     {
         QueryCompilationContextFactory = queryCompilationContextFactory;
         UpdateAdapterFactory = updateAdapterFactory;

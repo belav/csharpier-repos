@@ -22,25 +22,37 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
     [Trait(Traits.Feature, Traits.Features.DebuggingBreakpoints)]
     public class BreakpointSpansTests
     {
-        #region Helpers 
+        #region Helpers
 
-        private static void TestSpan(string markup, ParseOptions options = null)
-            => Test(markup, isMissing: false, isLine: false, options: options);
+        private static void TestSpan(string markup, ParseOptions options = null) =>
+            Test(markup, isMissing: false, isLine: false, options: options);
 
-        private static void TestMissing(string markup)
-            => Test(markup, isMissing: true, isLine: false);
+        private static void TestMissing(string markup) =>
+            Test(markup, isMissing: true, isLine: false);
 
-        private static void TestLine(string markup)
-            => Test(markup, isMissing: false, isLine: true);
+        private static void TestLine(string markup) => Test(markup, isMissing: false, isLine: true);
 
-        private static void Test(string markup, bool isMissing, bool isLine, ParseOptions options = null)
+        private static void Test(
+            string markup,
+            bool isMissing,
+            bool isLine,
+            ParseOptions options = null
+        )
         {
             MarkupTestFile.GetPositionAndSpan(
-                markup, out var source, out var position, out TextSpan? expectedSpan);
+                markup,
+                out var source,
+                out var position,
+                out TextSpan? expectedSpan
+            );
             var tree = SyntaxFactory.ParseSyntaxTree(source, options);
 
             var hasBreakpoint = BreakpointSpans.TryGetBreakpointSpan(
-                tree, position.Value, CancellationToken.None, out var breakpointSpan);
+                tree,
+                position.Value,
+                CancellationToken.None,
+                out var breakpointSpan
+            );
 
             if (isLine)
             {
@@ -61,27 +73,37 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
         /// <summary>
         /// Verifies all breakpoint spans of the declaration node marked by $$ in <paramref name="markup"/>
         /// and it's breakpoint span envelope (span that contains all breakpoint span of the declaration).
-        /// 
+        ///
         /// Only test declarations that have a single possible body (e.g. <see cref="VariableDeclaratorSyntax"/>,
         /// not <see cref="FieldDeclarationSyntax"/> or <see cref="VariableDeclarationSyntax"/>).
         /// </summary>
         private static void VerifyAllSpansInDeclaration<TDeclaration>(string markup)
             where TDeclaration : SyntaxNode
         {
-            MarkupTestFile.GetPositionAndSpans(markup,
-                out var source, out var position, out ImmutableArray<TextSpan> expectedSpans);
+            MarkupTestFile.GetPositionAndSpans(
+                markup,
+                out var source,
+                out var position,
+                out ImmutableArray<TextSpan> expectedSpans
+            );
 
             var tree = SyntaxFactory.ParseSyntaxTree(source);
             var root = tree.GetRoot();
-            var declarationNode = root.FindToken(position).Parent.FirstAncestorOrSelf<TDeclaration>();
+            var declarationNode = root.FindToken(position)
+                .Parent.FirstAncestorOrSelf<TDeclaration>();
 
             var actualSpans = GetBreakpointSequence(declarationNode, position).ToArray();
 
-            AssertEx.Equal(expectedSpans, actualSpans,
+            AssertEx.Equal(
+                expectedSpans,
+                actualSpans,
                 itemSeparator: "\r\n",
-                itemInspector: span => "[|" + source.Substring(span.Start, span.Length) + "|]");
+                itemInspector: span => "[|" + source.Substring(span.Start, span.Length) + "|]"
+            );
 
-            var expectedEnvelope = expectedSpans.IsEmpty ? default : TextSpan.FromBounds(expectedSpans[0].Start, expectedSpans[^1].End);
+            var expectedEnvelope = expectedSpans.IsEmpty
+                ? default
+                : TextSpan.FromBounds(expectedSpans[0].Start, expectedSpans[^1].End);
             Assert.NotNull(declarationNode);
 
             var actualEnvelope = BreakpointSpans.GetEnvelope(declarationNode);
@@ -94,7 +116,10 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
             var endPosition = root.Span.End;
             for (var p = position; p < endPosition; p++)
             {
-                if (BreakpointSpans.TryGetClosestBreakpointSpan(root, p, out var span) && span.Start > lastSpan.Start)
+                if (
+                    BreakpointSpans.TryGetClosestBreakpointSpan(root, p, out var span)
+                    && span.Start > lastSpan.Start
+                )
                 {
                     lastSpan = span;
                     yield return span;
@@ -107,7 +132,8 @@ namespace Microsoft.VisualStudio.LanguageServices.CSharp.UnitTests.Debugging
         [Fact]
         public void GetBreakpointSequence1()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$void Goo()
@@ -135,13 +161,15 @@ class C
                     [|System.Console.WriteLine(c);|]
             [|}|]
     [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence2()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$void Goo()
@@ -161,13 +189,15 @@ class C
         [|while (a);|]
         [|goto label;|]
     [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence3()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$int Goo()
@@ -190,13 +220,15 @@ class C
         }
         [|return 2;|]
     [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence4()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$IEnumerable<int> Goo()
@@ -214,24 +246,28 @@ class C
         fixed([|int* a = new int[1]|], [|b = new int[1]|], [|c = new int[1]|]) [|{|][|}|]
         [|yield break;|]
     [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence5()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$IEnumerable<int> Goo()
     [|{|][|while(t)|][|{|][|}|][|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence6()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$IEnumerable<int> Goo()
@@ -252,37 +288,44 @@ class C
             [|}|]    
         [|}|]
     [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence_InstanceContructor_NoBody()
         {
-            VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
+                @"
 class Class
 {
     [|Clas$$s()|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence_StaticContructor_NoBody()
         {
-            VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
+                @"
 class Class
 {
     static Clas$$s()
-}");
+}"
+            );
         }
 
         [Fact]
         public void GetBreakpointSequence_Method_NoBody()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class Class
 {
     int F$$unction()
-}");
+}"
+            );
         }
 
         #region Switch Expression
@@ -290,7 +333,8 @@ class Class
         [Fact]
         public void SwitchExpression_All()
         {
-            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(@"
+            VerifyAllSpansInDeclaration<MethodDeclarationSyntax>(
+                @"
 class C
 {
     $$IEnumerable<int> Goo()
@@ -307,14 +351,15 @@ class C
             },
             M(5));|]
     [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression01()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -325,14 +370,15 @@ $$        [|_ = e switch
             _ => 5,
         };|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression02()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -343,14 +389,15 @@ $$        [|_ = e switch
             _ => 5,
         };|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression03()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -361,14 +408,15 @@ $$        [|_ = e switch
             _ => 5,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression04()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -379,14 +427,15 @@ $$        [|_ = e switch
             _ => 5,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression05()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -397,14 +446,15 @@ $$        [|_ = e switch
             _ => 5,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression06()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -415,14 +465,15 @@ $$        [|_ = e switch
             _ => 5,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression07()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -433,14 +484,15 @@ $$            3 [|when g|] => 4,
             _ => 5,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression08()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -451,14 +503,15 @@ $$            3 [|when g|] => 4,
             _ => 5,
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression09()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -469,14 +522,15 @@ $$            3 [|when g|] => 4,
 $$            _ => [|5|],
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression10()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -487,14 +541,15 @@ $$            _ => [|5|],
             _ => [|5|],$$
         };
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression11()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -505,14 +560,15 @@ $$            _ => [|5|],
             _ => [|5|],
         $$};
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchExpression12()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo()
     {
@@ -523,7 +579,8 @@ $$            _ => [|5|],
             _ => 5,
         }$$;|]
     }
-}");
+}"
+            );
         }
 
         #endregion
@@ -534,7 +591,7 @@ $$            _ => [|5|],
         public void ForStatementInitializer1a()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -542,14 +599,15 @@ $$    for ([|i = 0|], j = 0; i < 10 && j < 10; i++, j++)
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForStatementInitializer1b()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -557,14 +615,15 @@ $$    for ([|i = 0|], j = 0; i < 10 && j < 10; i++, j++)
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForStatementInitializer1c()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -572,14 +631,15 @@ $$    for ([|i = 0|], j = 0; i < 10 && j < 10; i++, j++)
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForStatementInitializer1d()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -589,14 +649,15 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForStatementInitializer2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -604,18 +665,19 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
-        public void ForStatementInitializer3()
-            => TestSpan("class C { void M() { for([|i = 0$$|]; ; }; }");
+        public void ForStatementInitializer3() =>
+            TestSpan("class C { void M() { for([|i = 0$$|]; ; }; }");
 
         [Fact]
         public void ForStatementCondition()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -623,14 +685,15 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForStatementIncrementor1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -638,14 +701,15 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForStatementIncrementor2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -653,14 +717,15 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForEachStatementExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -668,14 +733,15 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ForEachDeconstructionStatementExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -683,7 +749,8 @@ $$    (
     {
     }
   }
-}");
+}"
+            );
         }
 
         #endregion
@@ -694,52 +761,56 @@ $$    (
         public void SimpleLambdaBody()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     Func<string> f = s => [|G$$oo()|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ParenthesizedLambdaBody()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     Func<string> f = (s, i) => [|G$$oo()|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void AnonymousMethod1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     Func<int> f = delegate [|$${|] return 1; };
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void AnonymousMethod2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     Func<int> f = delegate { [|$$return 1;|] };
   }
-}");
+}"
+            );
         }
 
         #endregion
@@ -750,7 +821,7 @@ $$    (
         public void FirstFromClauseExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -758,14 +829,15 @@ $$    (
             from y in quux().z()
             select y;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SecondFromClauseExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -773,14 +845,15 @@ $$    (
             from y in [|quux().z$$()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void FromInQueryContinuation1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -790,14 +863,15 @@ $$    (
                 from m in [|g.C$$ount()|]
                 select m.Blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void FromInQueryContinuation2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -807,14 +881,15 @@ $$    (
      $$          from m in [|g.Count()|]
                 select m.Blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void JoinClauseLeftExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -822,14 +897,15 @@ $$    (
             join a in alpha on [|left().exp$$r()|] equals right().expr()
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void JoinClauseRightExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -837,14 +913,15 @@ $$    (
             join a in alpha on left().expr() equals [|righ$$t().expr()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void LetClauseExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -853,14 +930,15 @@ $$    (
             let a = [|expr().$$expr()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhereClauseExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -869,14 +947,15 @@ $$    (
             where [|expr().$$expr()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhereClauseKeyword()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -884,14 +963,15 @@ $$    (
             whe$$re [|expr().expr()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SimpleOrdering1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -900,14 +980,15 @@ $$    (
             orderby [|expr().$$expr()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SimpleOrdering2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -916,14 +997,15 @@ $$    (
             orderby goo, [|expr().$$expr()|]
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void AscendingOrdering1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -932,14 +1014,15 @@ $$    (
             orderby [|expr().$$expr()|] ascending
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void AscendingOrdering2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -948,14 +1031,15 @@ $$    (
             orderby goo, [|expr().$$expr()|] ascending
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void DescendingOrdering1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -964,14 +1048,15 @@ $$    (
             orderby [|expr().$$expr()|] descending
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void DescendingOrdering2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -980,22 +1065,23 @@ $$    (
             orderby goo, [|expr().$$expr()|] descending
             select y;
   }
-}");
+}"
+            );
         }
 
         [Fact]
-        public void OrderByKeyword()
-            => TestSpan("class C { void M() { from string s in null ord$$erby [|s.A|] ascending } }");
+        public void OrderByKeyword() =>
+            TestSpan("class C { void M() { from string s in null ord$$erby [|s.A|] ascending } }");
 
         [Fact]
-        public void AscendingKeyword()
-            => TestSpan("class C { void M() { from string s in null orderby [|s.A|] $$ascending } }");
+        public void AscendingKeyword() =>
+            TestSpan("class C { void M() { from string s in null orderby [|s.A|] $$ascending } }");
 
         [Fact]
         public void SelectExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1004,14 +1090,15 @@ $$    (
             orderby goo, expr().expr() descending
             select [|y.$$blah()|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void AnonymousTypeAfterSelect()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public void ()
     {
@@ -1020,14 +1107,15 @@ $$    (
             join p in products on c equals p.Category into ps
             select [|new { Category = c, $$Products = ps }|];
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void GroupExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1037,14 +1125,15 @@ $$    (
             group [|bar()$$.goo()|] by blah().zap()
             select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void GroupByKeyword()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1054,14 +1143,15 @@ $$    (
             group [|bar().goo()|] b$$y blah().zap()
             select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void GroupByExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1071,14 +1161,15 @@ $$    (
             group bar().goo() by [|blah()$$.zap()|]
             select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InFrontOfFirstFromClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1091,14 +1182,15 @@ $$    (
         group bar().goo() by blah().zap() into g
         select y.blah();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InFrontOfSecondFromClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1111,14 +1203,15 @@ $$    (
         group bar().goo() by blah().zap() into g
         select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InFrontOfLetClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1131,14 +1224,15 @@ $$    (
         group bar().goo() by blah().zap() into g
         select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InFrontOfJoinClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1151,14 +1245,15 @@ $$    (
         group bar().goo() by blah().zap() into g
         select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InFrontOfOrderByClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1171,14 +1266,15 @@ $$    (
         group bar().goo() by blah().zap() into g
         select y.blah();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InFrontOfGroupByClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1190,14 +1286,15 @@ $$    (
         orderby goo, expr().expr() descending
     $$   group [|bar().goo()|] by blah().zap() into g
         select y.blah();
-  }");
+  }"
+            );
         }
 
         [Fact]
         public void InFrontOfSelectClause()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1209,84 +1306,92 @@ $$    (
         orderby goo, expr().expr() descending
         group bar().goo() by blah().zap() into g
     $$   select [|y.blah()|];
-  }");
+  }"
+            );
         }
 
         [Fact]
         public void Select1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => from x in new[] { 1 } select [|$$x|];
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Select_NoLambda1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => [|from x in new[] { 1 } where x > 0 select $$x|];
 }
-");
+"
+            );
         }
 
         [Fact]
         public void Select_NoLambda2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => [|from x in new[] { 1 } select x into y orderby y select $$y|];
 }
-");
+"
+            );
         }
 
         [Fact]
         public void GroupBy1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => from x in new[] { 1 } group x by [|$$x|];
 }
-");
+"
+            );
         }
 
         [Fact]
         public void GroupBy_NoLambda1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => [|from x in new[] { 1 } group $$x by x|];
 }
-");
+"
+            );
         }
 
         [Fact]
         public void GroupBy_NoLambda2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => [|from x in new[] { 1 } group $$x by x + 1 into y group y by y.Key + 2|];
 }
-");
+"
+            );
         }
 
         [Fact]
         public void GroupBy_NoLambda3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   IEnumerable<int> Goo() => [|from x in new[] { 1 } group x by x + 1 into y group $$y by y.Key + 2|];
 }
-");
+"
+            );
         }
 
         #endregion
@@ -1297,575 +1402,620 @@ $$    (
         public void FieldDeclarator_WithoutInitializer_All()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     int $$i, j;
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_WithoutInitializer1()
         {
             TestMissing(
-@"class C
+                @"class C
 {
     int $$i;
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_WithoutInitializer2()
         {
             TestMissing(
-@"class C
+                @"class C
 {
     pri$$vate int i;
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_SingleVariable_Initializer_All1()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     private int $$i;
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_SingleVariable_Initializer_All2()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     [|int $$i = 0;|]
-}");
+}"
+            );
         }
+
         [Fact]
         public void FieldDeclarator_SingleVariable_Initializer_All3()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     [|private int $$i = 0;|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_MultiVariable_Initializer_All1()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     [|private int $$i = 0|], j = 2;
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_MultiVariable_Initializer_All2()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     [|int $$i = 0|], j = 2;
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_MultiVariable_Initializer_All3()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     private int i = 0, [|$$j = 0|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_Initializer1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|int $$i = 1;|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_Initializer2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|private int $$i = 1;|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_Initializer3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [Goo]
     [|private int $$i = 0;|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_Initializer4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|pri$$vate int i = 1;|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void FieldDeclarator_Initializer5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
 $$    [|private int i = 3;|]
-}");
+}"
+            );
         }
 
         [Fact]
-        public void ConstVariableDeclarator0()
-            => TestMissing("class C { void Goo() { const int a = $$1; } }");
+        public void ConstVariableDeclarator0() =>
+            TestMissing("class C { void Goo() { const int a = $$1; } }");
 
         [Fact]
-        public void ConstVariableDeclarator1()
-            => TestMissing("class C { void Goo() { const $$int a = 1; } }");
+        public void ConstVariableDeclarator1() =>
+            TestMissing("class C { void Goo() { const $$int a = 1; } }");
 
         [Fact]
-        public void ConstVariableDeclarator2()
-            => TestMissing("class C { void Goo() { $$const int a = 1; } }");
+        public void ConstVariableDeclarator2() =>
+            TestMissing("class C { void Goo() { $$const int a = 1; } }");
 
         [Fact]
         public void ConstFieldVariableDeclarator_All()
         {
             VerifyAllSpansInDeclaration<VariableDeclaratorSyntax>(
-@"class C
+                @"class C
 {
     [Goo]
     private const int i = 0, j, $$k = 0;
-}");
+}"
+            );
         }
 
         [Fact]
-        public void ConstFieldVariableDeclarator0()
-            => TestMissing("class C { const int a = $$1; }");
+        public void ConstFieldVariableDeclarator0() =>
+            TestMissing("class C { const int a = $$1; }");
 
         [Fact]
-        public void ConstFieldVariableDeclarator1()
-            => TestMissing("class C { const $$int a = 1; }");
+        public void ConstFieldVariableDeclarator1() =>
+            TestMissing("class C { const $$int a = 1; }");
 
         [Fact]
-        public void ConstFieldVariableDeclarator2()
-            => TestMissing("class C { $$const int a = 1; }");
+        public void ConstFieldVariableDeclarator2() =>
+            TestMissing("class C { $$const int a = 1; }");
 
         [Fact]
         [WorkItem(538777, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538777")]
-        public void VariableDeclarator0()
-            => TestMissing("class C { void Goo() { int$$ } }");
+        public void VariableDeclarator0() => TestMissing("class C { void Goo() { int$$ } }");
 
         [Fact]
         public void VariableDeclarator1()
         {
             TestMissing(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int $$i;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator2a()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|int $$i = 0;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator2b()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
   $$  [|int i = 0;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator2c()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|$$int i = 0;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator3a()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i = 0, [|$$j = 3|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator3b()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|int i = 0|], $$j;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator3c()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int $$i, [|j = 0|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i = 0, [|j = $$1|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   [|int $$i = 0;|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   [|int i = 0|], $$j;
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator7()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   private int i = 0, [|j = $$1|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator8()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   [|priv$$ate int i = 0|], j = 1;
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator9()
         {
             TestSpan(
-@"class C
+                @"class C
 {
 $$  [|private int i = 0|], j = 1;
-}");
+}"
+            );
         }
 
         [Fact]
-        public void VariableDeclarator10()
-            => TestSpan("class C { void M() { [|int i = 0$$;|] } }");
+        public void VariableDeclarator10() => TestSpan("class C { void M() { [|int i = 0$$;|] } }");
 
         [Fact]
         public void VariableDeclarator_Separators0()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
 $$    [|int i = 0|], j = 1, k = 2;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|int i = 0|]$$, j = 1, k = 2;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i = 0, [|j = 1|]$$, k = 2;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i = 0, j = 1,$$ [|k = 2|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i = 0, j = 1, [|k = 2|]$$;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|int i = 0|], j = 1, k = 2;$$
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i = 1, j, $$k, [|l = 2|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators7()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i$$, j, k, [|l = 2|];
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators8()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|int i = 2|], j, k, l$$;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void VariableDeclarator_Separators9()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     int i, j, [|k = 1|], m, l = 2;$$
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
 $$    [|public event EventHandler MyEvent = delegate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|pub$$lic event EventHandler MyEvent = delegate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|public ev$$ent EventHandler MyEvent = delegate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|public event EventHan$$dler MyEvent = delegate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|public event EventHandler MyE$$vent = delegate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|public event EventHandler MyEvent $$= delegate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator7()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [|public event EventHandler MyEvent = del$$egate { };|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void EventFieldDeclarator8()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public event EventHandler MyEvent = delegate [|{|] $$ };
-}");
+}"
+            );
         }
 
         #endregion
 
         [Fact]
-        public void EventAccessorAdd()
-            => TestSpan("class C { eve$$nt Action Goo { add [|{|] } remove { } } }");
+        public void EventAccessorAdd() =>
+            TestSpan("class C { eve$$nt Action Goo { add [|{|] } remove { } } }");
 
         [Fact]
-        public void EventAccessorAdd2()
-            => TestSpan("class C { event Action Goo { ad$$d [|{|] } remove { } } }");
+        public void EventAccessorAdd2() =>
+            TestSpan("class C { event Action Goo { ad$$d [|{|] } remove { } } }");
 
         [Fact]
-        public void EventAccessorRemove()
-            => TestSpan("class C { event Action Goo { add { } $$remove [|{|] } } }");
+        public void EventAccessorRemove() =>
+            TestSpan("class C { event Action Goo { add { } $$remove [|{|] } } }");
 
         [Fact]
         public void ElseClauseWithBlock()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1876,14 +2026,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ElseClauseWithStatement()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1893,14 +2044,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     el$$se
       [|Goo();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void ElseIf()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1910,14 +2062,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     el$$se [|if (baz)|]
       Goo();
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void EmptyCatch()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1928,14 +2081,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CatchWithType()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1946,14 +2100,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CatchWithTypeInType()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1964,14 +2119,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CatchWithTypeAndNameInType()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -1982,14 +2138,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void CatchWithTypeAndNameInName()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2000,14 +2157,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void Filter1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2018,14 +2176,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void Filter3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2036,14 +2195,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void Filter4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2054,14 +2214,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void Filter5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2072,14 +2233,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SimpleFinally()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2090,14 +2252,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void FinallyWithCatch()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2111,14 +2274,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchLabelWithBlock()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2129,14 +2293,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             }
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchLabelWithStatement()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2146,14 +2311,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             [|goo();|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void SwitchLabelWithStatement2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2164,18 +2330,19 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             bar();
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
-        public void SwitchLabelWithoutStatement()
-            => TestSpan("class C { void M() { [|switch |]{ case 1$$: } } }");
+        public void SwitchLabelWithoutStatement() =>
+            TestSpan("class C { void M() { [|switch |]{ case 1$$: } } }");
 
         [Fact]
         public void MultipleLabelsOnFirstLabel()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2190,14 +2357,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             bar();
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void MultipleLabelsOnSecondLabel()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2212,14 +2380,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             bar();
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void MultipleLabelsOnLabelWithDefault()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2234,14 +2403,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             [|bar();|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void MultipleLabelsOnDefault()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2256,154 +2426,166 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
             [|bar();|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockBeforeStartToken()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   [|$${|]
     
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockBeforeStartToken2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   $$ [|{|]
     
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockAfterStartToken()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   [|{$$|]
     
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockAfterStartToken2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   [|{|] $$
     
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockBeforeEndToken1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   { 
   $$[|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockBeforeEndToken2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   { 
   $$ [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockAfterEndToken1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   { 
   [|}|]$$
-}");
+}"
+            );
         }
 
         [Fact]
         public void BlockAfterEndToken2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   { 
   [|}|] $$
-}");
+}"
+            );
         }
 
         [Fact]
         public void SingleDeclarationOnType()
         {
             TestMissing(
-@"class C
+                @"class C
 {
   void Goo()
   {
     i$$nt i;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void MultipleDeclarationsOnType()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|i$$nt i = 0|], j = 1;
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void Label()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     go$$o:
         [|bar();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhileInWhile()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2411,14 +2593,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhileInExpr()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2426,14 +2609,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnWhileBlock()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2441,14 +2625,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
   $$ [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnDoKeyword()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2457,14 +2642,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     }
     while(expr);
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnDoBlock()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2473,14 +2659,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     }
     while(expr);
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnDoWhile()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2489,14 +2676,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     }
     [|wh$$ile(expr);|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnDoWhile_MissingSemicolon()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2505,14 +2693,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     }
     [|wh$$ile(expr)|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnDoExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2521,14 +2710,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     }
     [|while(ex$$pr);|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForWithDeclaration1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2536,14 +2726,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForWithDeclaration2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2551,14 +2742,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForWithCondition()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2566,14 +2758,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForWithIncrementor1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2581,14 +2774,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForWithIncrementor2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2596,14 +2790,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnEmptyFor()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2611,14 +2806,15 @@ $$    [|public event EventHandler MyEvent = delegate { };|]
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachKeyword1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2626,14 +2822,15 @@ $$    [|foreach|] (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachKeyword2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2641,14 +2838,15 @@ $$    [|foreach|] (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachKeyword3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2657,14 +2855,15 @@ $$    [|foreach|] (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachKeyword4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2673,14 +2872,15 @@ $$         (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachKeyword5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2688,14 +2888,15 @@ $$         (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachType1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2704,14 +2905,15 @@ $$         (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachType2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2719,14 +2921,15 @@ $$         (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachIdentifier()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2734,14 +2937,15 @@ $$         (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachIn1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2749,14 +2953,15 @@ $$         (var v in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachIn2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2765,14 +2970,15 @@ $$         [|in|] expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachIn3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2782,14 +2988,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachExpr1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2797,14 +3004,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachExpr2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2813,14 +3021,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachExpr3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2830,14 +3039,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachStatement()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2845,14 +3055,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachBlock1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2860,14 +3071,15 @@ expr().blah())
   $$ [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionKeyword1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2875,14 +3087,15 @@ $$    [|foreach|] (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionKeyword2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2890,14 +3103,15 @@ $$    [|foreach|] (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionKeyword3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2906,14 +3120,15 @@ $$    [|foreach|] (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionKeyword4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2922,14 +3137,15 @@ $$         (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionKeyword5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2937,14 +3153,15 @@ $$         (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionType1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2953,14 +3170,15 @@ $$         (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionType2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2968,14 +3186,15 @@ $$         (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionIdentifier()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2983,14 +3202,15 @@ $$         (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionIn1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -2998,14 +3218,15 @@ $$         (var (x, y) in expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionIn2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3014,14 +3235,15 @@ $$         [|in|] expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionIn3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3031,14 +3253,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionExpr1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3046,14 +3269,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionExpr2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3062,14 +3286,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionExpr3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3079,14 +3304,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionStatement()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3094,14 +3320,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnForEachDeconstructionBlock1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3109,14 +3336,15 @@ expr().blah())
   $$ [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDecl1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3124,14 +3352,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDecl2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3139,14 +3368,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDeclType()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3154,14 +3384,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDeclIdentifier1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3169,14 +3400,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDeclIdentifier2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3184,14 +3416,15 @@ expr().blah())
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDeclIdentifier3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3199,14 +3432,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithDeclExpression()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3214,14 +3448,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithExpression1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3229,14 +3464,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUsingWithExpression2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3244,14 +3480,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnFixed1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3259,14 +3496,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnFixed2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3274,14 +3512,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnFixed3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3289,14 +3528,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnFixed4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3304,14 +3544,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnFixed5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3319,14 +3560,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnFixed6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3334,14 +3576,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnChecked1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3349,14 +3592,15 @@ $$    using ([|var vv = goo()|])
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUnchecked1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3364,14 +3608,15 @@ $$    using ([|var vv = goo()|])
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnUnsafe1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3379,14 +3624,15 @@ $$    using ([|var vv = goo()|])
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnLock1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3394,14 +3640,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnLock2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3409,14 +3656,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIf1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3424,14 +3672,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIf2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3439,14 +3688,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIfBlock()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3454,14 +3704,15 @@ $$    using ([|var vv = goo()|])
    $$ [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnSwitch1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3471,14 +3722,15 @@ $$    using ([|var vv = goo()|])
             goo();
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnSwitch2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3488,14 +3740,15 @@ $$    using ([|var vv = goo()|])
             goo();
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnSwitch3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3505,14 +3758,15 @@ $$    using ([|var vv = goo()|])
             goo();
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnSwitch4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3522,14 +3776,15 @@ $$    using ([|var vv = goo()|])
             goo();
   $$ }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnTry1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3540,14 +3795,15 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnTry2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3558,40 +3814,43 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoStatement1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|g$$oto goo;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoStatement2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|goto go$$o;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoCaseStatement1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3601,14 +3860,15 @@ $$    using ([|var vv = goo()|])
             [|go$$to case 2;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoCaseStatement2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3618,14 +3878,15 @@ $$    using ([|var vv = goo()|])
             [|goto ca$$se 2;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoCaseStatement3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3635,14 +3896,15 @@ $$    using ([|var vv = goo()|])
             [|goto case $$2;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoDefault1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3652,14 +3914,15 @@ $$    using ([|var vv = goo()|])
             [|go$$to default;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnGotoDefault2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3669,14 +3932,15 @@ $$    using ([|var vv = goo()|])
             [|goto defau$$lt;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnBreak1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3685,14 +3949,15 @@ $$    using ([|var vv = goo()|])
         [|bre$$ak;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnContinue1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3701,196 +3966,211 @@ $$    using ([|var vv = goo()|])
         [|cont$$inue;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnReturn1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|retu$$rn;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnReturn2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|retu$$rn expr();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnReturn3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|return expr$$().bar();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnYieldReturn1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|yi$$eld return goo().bar();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnYieldReturn2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|yield re$$turn goo().bar();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnYieldReturn3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|yield return goo()$$.bar();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnYieldBreak1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|yi$$eld break;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnYieldBreak2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|yield brea$$k;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnThrow1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|th$$row;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnThrow2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|thr$$ow new Goo();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnThrow3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|throw ne$$w Goo();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnThrow4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|throw new Go$$o();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnExpressionStatement1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|goo().$$bar();|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnEmptyStatement1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|$$;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnEmptyStatement2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
@@ -3899,14 +4179,15 @@ $$    using ([|var vv = goo()|])
    $$ [|;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyAccessor1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int Goo
   {
@@ -3914,27 +4195,29 @@ $$    using ([|var vv = goo()|])
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyAccessor2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int Goo
   {
     [|g$$et;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyAccessor3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int Goo
   {
@@ -3946,20 +4229,22 @@ $$    using ([|var vv = goo()|])
     [|{|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyAccessor4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int Goo
   {
     [|s$$et;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
@@ -3967,20 +4252,21 @@ $$    using ([|var vv = goo()|])
         public void OnPropertyAccessor5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int Goo
   {
     [|in$$it;|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnProperty1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int G$$oo
   {
@@ -3992,21 +4278,23 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnProperty2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int G$$oo
   {
     [|get;|]
     set {} 
   }
-}");
+}"
+            );
         }
 
         [WorkItem(932711, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/932711")]
@@ -4014,91 +4302,101 @@ $$    using ([|var vv = goo()|])
         public void OnPropertyWithInitializer()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get; set; } = [|int.Pa$$rse(""42"")|];
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int$$ Id { [|get;|] set; } = int.Parse(""42"");
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get; [|set;|] $$} = int.Parse(""42"");
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get; [|set;|] }$$ = int.Parse(""42"");
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get; set; } =$$ [|int.Parse(""42"")|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id => [|12$$3|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id $$=> [|123|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     $$public int Id => [|123|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnPropertyExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id => [|123|];   $$
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexerExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int this[int a] => [|12$$3|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexer1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int this[int$$ a]
   {
@@ -4110,171 +4408,187 @@ $$    using ([|var vv = goo()|])
     {
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexer2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   int this[int$$ a]
   {
     [|get;|]
     set { }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexerExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int this[int a] $$=> [|123|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexerExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     $$public int this[int a] => [|123|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexerExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int this[int a] => [|123|];   $$
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnIndexerExpressionBody5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int this[int $$a] => [|123|];   
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethod1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     v$$oid Goo()
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethod2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void G$$oo()
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethod3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo(in$$t i)
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethod4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo(int $$i)
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethod5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo(int i = g$$oo)
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethodWithExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     v$$oid Goo() => [|123|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethodWithExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo() =>$$ [|123|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethodWithExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo() => [|123|]; $$
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnMethodWithExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     void Goo() => [|12$$3|]; 
-}");
+}"
+            );
         }
 
         [Fact]
         public void MissingOnMethod()
         {
             TestMissing(
-@"class C
+                @"class C
 {
     void Goo($$);
-}");
+}"
+            );
         }
 
         #region Constructors
@@ -4283,10 +4597,11 @@ $$    using ([|var vv = goo()|])
         public void InstanceConstructor_NoInitializer_BlockBody_All()
         {
             VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
-@"class C
+                @"class C
 {
     [Attribute1, Attribute2][Attribute3][|$$public C()|] [|{|] [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4294,32 +4609,35 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     [|pub$$lic C()|]
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InstanceConstructor_NoBody()
         {
             TestSpan(
-@"class Class
+                @"class Class
 {
     [|Cla$$ss()|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void InstanceConstructor_NoInitializer_ExpressionBody_All()
         {
             VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
-@"class C
+                @"class C
 {
     [Attribute1, Attribute2][Attribute3][|$$public C()|] => [|x = 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
@@ -4327,10 +4645,11 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     [|pub$$lic C()|] => F();
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
@@ -4338,10 +4657,11 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     [|public C()|] $$=> x = 1);
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
@@ -4349,10 +4669,11 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     public C() =$$> [|x = 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
@@ -4360,47 +4681,51 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     public C() => [|$$x = 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void InstanceConstructor_NoInitializer_ExpressionBody5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public C() => [|x =$$ 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void InstanceConstructor_NoInitializer_ExpressionBody6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public C() => [|x = 1|]$$;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void InstanceConstructor_NoInitializer_ExpressionBody7()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public C() => [|x = 1|];$$
-}");
+}"
+            );
         }
 
         [Fact]
         public void InstanceConstructor_NoInitializer_Attributes()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     [Attribute1,$$ Attribute2]
     [Attribute3]
@@ -4409,17 +4734,19 @@ $$    using ([|var vv = goo()|])
         C()|]
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InstanceConstructor_BaseInitializer_BlockBody_All()
         {
             VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
-@"class C
+                @"class C
 {
     [Attribute1, Attribute2][Attribute3]$$public C() : [|base(42)|] [|{|][|}|]
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4427,23 +4754,25 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     pub$$lic C()
         : [|base(42)|]
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void InstanceConstructor_BaseInitializer_ExpressionBody_All()
         {
             VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
-@"class C
+                @"class C
 {
     [Attribute1, Attribute2][Attribute3]$$public C() : [|base(42)|] => [|x = 1|];
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4451,11 +4780,12 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     pub$$lic C() : [|base(42)|] => F();
     
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4463,11 +4793,12 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     public C() : [|base(42)|] $$=> F();
     
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4475,11 +4806,12 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     public C() : base(42) =$$> [|F()|];
     
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4487,11 +4819,12 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     public C() : base(42) => [|$$F()|];
     
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4499,65 +4832,71 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for this constructor call
             TestSpan(
-@"class C
+                @"class C
 {
     pub$$lic C()
         : [|this(42)|]
     {
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void StaticConstructor_BlockBody_All()
         {
             VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
-@"class C
+                @"class C
 {
     [Attribute1, Attribute2][Attribute3]$$static public C() [|{|] [|}|]
-}");
+}"
+            );
         }
 
         [Fact]
         public void StaticConstructor_BlockBody()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     $$static C()
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void StaticConstructor_ExpressionBody_All()
         {
             VerifyAllSpansInDeclaration<ConstructorDeclarationSyntax>(
-@"class C
+                @"class C
 {
     [Attribute1, Attribute2][Attribute3]$$static public C() => [|x = 1|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void StaticConstructor_ExpressionBody()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static C() => [|$$F()|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void StaticConstructor_NoBody()
         {
             TestMissing(
-@"class Class
+                @"class Class
 {
     static Cla$$ss()
-}");
+}"
+            );
         }
 
         [Fact]
@@ -4565,13 +4904,14 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for this constructor call
             TestSpan(
-@"class Derived : Base
+                @"class Derived : Base
 {
     public Derived()
         : [|this($$42)|]
     {
     }
-}");
+}"
+            );
         }
 
         [WorkItem(543968, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/543968")]
@@ -4580,26 +4920,28 @@ $$    using ([|var vv = goo()|])
         {
             // a sequence point for base constructor call
             TestSpan(
-@"class Derived : Base
+                @"class Derived : Base
 {
     public Derived()
         : [|base($$42)|]
     {
     }
 }
-");
+"
+            );
         }
 
         [Fact]
         public void OnStaticConstructor()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     st$$atic C()
     [|{|]
     }
-}");
+}"
+            );
         }
 
         #endregion
@@ -4608,116 +4950,127 @@ $$    using ([|var vv = goo()|])
         public void OnDestructor()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     ~C$$()
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnOperator()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static int op$$erator+(C c1, C c2)
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnOperatorWithExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static int op$$erator+(C c1, C c2) => [|c1|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnOperatorWithExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static int operator+(C c1, C c2) =>$$ [|c1|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnOperatorWithExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static int operator+(C c1, C c2) => [|c1|]; $$
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnOperatorWithExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static int operator+(C c1, C c2) => [|c$$1|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnConversionOperator()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static op$$erator DateTime(C c1)
     [|{|]
     }
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnConversionOperatorWithExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static op$$erator DateTime(C c1) => [|DataTime.Now|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnConversionOperatorWithExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static operator DateTime(C c1) =>$$ [|DataTime.Now|];
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnConversionOperatorWithExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static operator DateTime(C c1) => [|DataTime.Now|];$$
-}");
+}"
+            );
         }
 
         [Fact]
         public void OnConversionOperatorWithExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public static operator DateTime(C c1) => [|DataTime$$.Now|];
-}");
+}"
+            );
         }
 
         [WorkItem(3557, "DevDiv_Projects/Roslyn")]
@@ -4725,13 +5078,14 @@ $$    using ([|var vv = goo()|])
         public void InFrontOfAttribute()
         {
             TestSpan(
-@"class C
+                @"class C
 {
 $$ [method: Obsolete]
   void Goo()
   [|{|]
   }
-}");
+}"
+            );
         }
 
         [WorkItem(538058, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538058")]
@@ -4739,11 +5093,12 @@ $$ [method: Obsolete]
         public void InInactivePPRegion()
         {
             TestLine(
-@"
+                @"
 
 #if blahblah
 $$gooby
-#endif");
+#endif"
+            );
         }
 
         [WorkItem(538777, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/538777")]
@@ -4751,14 +5106,15 @@ $$gooby
         public void WithIncompleteDeclaration()
         {
             TestMissing(
-@"
+                @"
 clas C
 {
     void Goo()
     {
 $$        int
     }
-}");
+}"
+            );
         }
 
         [WorkItem(937290, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/937290")]
@@ -4766,28 +5122,32 @@ $$        int
         public void OnGetter()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int $$Id { [|get;|] set; }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { [|g$$et;|] set; }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { g$$et [|{|] return 42; } set {} }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int$$ Id { get [|{|] return 42; } set {} }
-}");
+}"
+            );
         }
 
         [WorkItem(937290, "http://vstfdevdiv:8080/DevDiv2/DevDiv/_workitems/edit/937290")]
@@ -4795,41 +5155,46 @@ $$        int
         public void OnSetter()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get; [|se$$t;|] }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get; [|set;|] $$ }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int $$Id { [|set;|] get; }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get { return 42; } s$$et [|{|] } }
-}");
+}"
+            );
 
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get { return 42; } set { [|}|] $$}
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhenClause_1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   string s;
   bool b;
@@ -4841,14 +5206,15 @@ $$      case string s [|when b|]:
         break;
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhenClause_2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   string s;
   bool b;
@@ -4860,14 +5226,15 @@ $$      case string s [|when b|]:
         break;
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void WhenClause_3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   string s;
   bool b;
@@ -4879,14 +5246,15 @@ $$      case string s [|when b|]:
         break;
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void PatternSwitchCase_1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   string s;
   bool b;
@@ -4899,14 +5267,15 @@ $$      case string s:
         [|break;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void PatternSwitchCase_2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   string s;
   bool b;
@@ -4919,14 +5288,15 @@ $$      case string s:
         [|break;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void PatternSwitchCase_3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   string s;
   bool b;
@@ -4939,170 +5309,186 @@ $$      case string s:
         [|break;|]
     }
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void DeconstructionDeclarationStatement_1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
 $$    [|var (x, y) = (1, 2);|]
   }
-}");
+}"
+            );
         }
 
         [Fact]
         public void DeconstructionDeclarationStatement_2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|var (x, y) = $$(1, 2);|]
   }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get => [|12$$3|]; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get $$=> [|123|]; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     $$public int Id { get => [|123|]; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public int Id { get => [|123|];   $$ }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
 $$    public event Action Goo { add => [|123|]; remove => 456; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public event Action Goo { add => [|123|];$$ remove => 456; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody7()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public event Action Goo { add => 123; $$remove => [|456|]; }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnAccessorExpressionBody8()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public event Action Goo { add => 123; remove => [|456|]; }$$
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnDtorExpressionBody1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
 $$    public ~C() => [|x = 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnDtorExpressionBody2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public ~C() => $$[|x = 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnDtorExpressionBody3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public ~C() => [|x =$$ 1|];
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnDtorExpressionBody4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public ~C() => [|x = 1|]$$;
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14438, "https://github.com/dotnet/roslyn/issues/14438")]
         public void OnDtorExpressionBody5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     public ~C() => [|x = 1|];$$
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14437, "https://github.com/dotnet/roslyn/issues/14437")]
         public void OnLocalFunctionDecl_1()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -5111,14 +5497,15 @@ $$        int Local(object[] a)
             return a.Length;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14437, "https://github.com/dotnet/roslyn/issues/14437")]
         public void OnLocalFunctionDecl_2()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -5127,14 +5514,15 @@ $$        int Local(object[] a)
             return a.Length;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14437, "https://github.com/dotnet/roslyn/issues/14437")]
         public void OnLocalFunctionDecl_3()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static void M()
     {
@@ -5143,59 +5531,70 @@ $$        [|{|]
             return a.Length;
         }
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14437, "https://github.com/dotnet/roslyn/issues/14437")]
         public void OnLocalFunctionDecl_4()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static void M()
     {
 $$        int Local(object[] a) => [|a.Length|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14437, "https://github.com/dotnet/roslyn/issues/14437")]
         public void OnLocalFunctionDecl_5()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static void M()
     {
         int Local(object$$[] a) => [|a.Length|];
     }
-}");
+}"
+            );
         }
 
         [Fact, WorkItem(14437, "https://github.com/dotnet/roslyn/issues/14437")]
         public void OnLocalFunctionDecl_6()
         {
             TestSpan(
-@"class C
+                @"class C
 {
     static void M()
     {
         int Local(object[] a) => [|a.Length|];$$
     }
-}");
+}"
+            );
         }
 
-        [Fact, WorkItem(98990, "https://developercommunity.visualstudio.com/content/problem/98990/cant-set-breakpoint.html")]
+        [
+            Fact,
+            WorkItem(
+                98990,
+                "https://developercommunity.visualstudio.com/content/problem/98990/cant-set-breakpoint.html"
+            )
+        ]
         public void IncompleteExpressionStatement()
         {
             TestSpan(
-@"class C
+                @"class C
 {
   void Goo()
   {
     [|$$aaa|]
   }
-}");
+}"
+            );
         }
 
         #region Top Level Statements
@@ -5203,7 +5602,8 @@ $$        int Local(object[] a) => [|a.Length|];
         [Fact]
         public void TopLevelStatements()
         {
-            VerifyAllSpansInDeclaration<CompilationUnitSyntax>(@"
+            VerifyAllSpansInDeclaration<CompilationUnitSyntax>(
+                @"
 $$[|int d = 5;|]
 [|int a = 1|], [|b = 2|], [|c = 3|];
 for ([|int i = 0|], [|j = 1|], [|k = 2|]; [|i < 10|]; [|i++|], [|j++|], [|k--|])
@@ -5226,7 +5626,8 @@ for ([|int i = 0|], [|j = 1|], [|k = 2|]; [|i < 10|]; [|i++|], [|j++|], [|k--|])
         else
             [|System.Console.WriteLine(c);|]
     [|}|]
-");
+"
+            );
         }
 
         #endregion

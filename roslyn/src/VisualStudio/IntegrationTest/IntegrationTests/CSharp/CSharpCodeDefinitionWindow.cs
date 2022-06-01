@@ -15,9 +15,7 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
         protected override string LanguageName => LanguageNames.CSharp;
 
         public CSharpCodeDefinitionWindow(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, nameof(CSharpCodeDefinitionWindow))
-        {
-        }
+            : base(instanceFactory, nameof(CSharpCodeDefinitionWindow)) { }
 
         [WpfTheory(Skip = "https://github.com/dotnet/roslyn/issues/60364")]
         [CombinatorialData]
@@ -30,16 +28,26 @@ namespace Roslyn.VisualStudio.IntegrationTests.CSharp
             // our regular file.
             VisualStudio.Editor.Activate();
 
-            SetUpEditor(@"
+            SetUpEditor(
+                @"
 public class Test
 {
     $$int field;
 }
-");
+"
+            );
 
             // The structure line should be the same, and we'll check for the presence/absence of the decompilation marker
-            Assert.Contains("public struct Int32", VisualStudio.CodeDefinitionWindow.GetCurrentLineText());
-            Assert.Equal(enableDecompilation, VisualStudio.CodeDefinitionWindow.GetText().Contains("Decompiled with ICSharpCode.Decompiler"));
+            Assert.Contains(
+                "public struct Int32",
+                VisualStudio.CodeDefinitionWindow.GetCurrentLineText()
+            );
+            Assert.Equal(
+                enableDecompilation,
+                VisualStudio.CodeDefinitionWindow
+                    .GetText()
+                    .Contains("Decompiled with ICSharpCode.Decompiler")
+            );
         }
     }
 }

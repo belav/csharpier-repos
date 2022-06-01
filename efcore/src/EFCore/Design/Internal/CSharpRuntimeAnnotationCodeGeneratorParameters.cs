@@ -29,7 +29,8 @@ public sealed record CSharpRuntimeAnnotationCodeGeneratorParameters
         IndentedStringBuilder mainBuilder,
         IndentedStringBuilder methodBuilder,
         ISet<string> namespaces,
-        ISet<string> scopeVariables)
+        ISet<string> scopeVariables
+    )
     {
         TargetName = targetName;
         ClassName = className;

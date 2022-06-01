@@ -20,7 +20,9 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 {
     using Workspace = Microsoft.CodeAnalysis.Workspace;
 
-    internal sealed class GraphNavigatorExtension : ForegroundThreadAffinitizedObject, IGraphNavigateToItem
+    internal sealed class GraphNavigatorExtension
+        : ForegroundThreadAffinitizedObject,
+            IGraphNavigateToItem
     {
         private readonly Workspace _workspace;
 
@@ -32,16 +34,19 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
 
         public void NavigateTo(GraphObject graphObject)
         {
-
             if (graphObject is GraphNode graphNode)
             {
-                var sourceLocation = graphNode.GetValue<SourceLocation>(CodeNodeProperties.SourceLocation);
+                var sourceLocation = graphNode.GetValue<SourceLocation>(
+                    CodeNodeProperties.SourceLocation
+                );
                 if (sourceLocation.FileName == null)
                 {
                     return;
                 }
 
-                var projectId = graphNode.GetValue<ProjectId>(RoslynGraphProperties.ContextProjectId);
+                var projectId = graphNode.GetValue<ProjectId>(
+                    RoslynGraphProperties.ContextProjectId
+                );
                 var symbolId = graphNode.GetValue<SymbolKey?>(RoslynGraphProperties.SymbolId);
 
                 if (projectId != null)
@@ -55,36 +60,62 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                     }
 
                     var document = project.Documents.FirstOrDefault(
-                        d => string.Equals(
-                            d.FilePath,
-                            sourceLocation.FileName.LocalPath,
-                            StringComparison.OrdinalIgnoreCase));
+                        d =>
+                            string.Equals(
+                                d.FilePath,
+                                sourceLocation.FileName.LocalPath,
+                                StringComparison.OrdinalIgnoreCase
+                            )
+                    );
 
                     if (document == null)
                     {
                         return;
                     }
 
-                    this.ThreadingContext.JoinableTaskFactory.Run(() =>
-                        NavigateToAsync(sourceLocation, symbolId, project, document, CancellationToken.None));
+                    this.ThreadingContext.JoinableTaskFactory.Run(
+                        () =>
+                            NavigateToAsync(
+                                sourceLocation,
+                                symbolId,
+                                project,
+                                document,
+                                CancellationToken.None
+                            )
+                    );
                 }
             }
         }
 
         private async Task NavigateToAsync(
-            SourceLocation sourceLocation, SymbolKey? symbolId, Project project, Document document, CancellationToken cancellationToken)
+            SourceLocation sourceLocation,
+            SymbolKey? symbolId,
+            Project project,
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             // Notify of navigation so third parties can intercept the navigation
             if (symbolId != null)
             {
-                var symbolNavigationService = _workspace.Services.GetService<ISymbolNavigationService>();
-                var symbol = symbolId.Value.Resolve(await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false), cancellationToken: cancellationToken).Symbol;
+                var symbolNavigationService =
+                    _workspace.Services.GetService<ISymbolNavigationService>();
+                var symbol = symbolId.Value
+                    .Resolve(
+                        await project.GetCompilationAsync(cancellationToken).ConfigureAwait(false),
+                        cancellationToken: cancellationToken
+                    )
+                    .Symbol;
 
                 // Do not allow third party navigation to types or constructors
-                if (symbol != null &&
-                    symbol is not ITypeSymbol &&
-                    !symbol.IsConstructor() &&
-                    await symbolNavigationService.TrySymbolNavigationNotifyAsync(symbol, project, cancellationToken).ConfigureAwait(false))
+                if (
+                    symbol != null
+                    && symbol is not ITypeSymbol
+                    && !symbol.IsConstructor()
+                    && await symbolNavigationService
+                        .TrySymbolNavigationNotifyAsync(symbol, project, cancellationToken)
+                        .ConfigureAwait(false)
+                )
                 {
                     return;
                 }
@@ -99,17 +130,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
                 if (document != null)
                 {
                     var editorWorkspace = document.Project.Solution.Workspace;
-                    var navigationService = editorWorkspace.Services.GetService<IDocumentNavigationService>();
+                    var navigationService =
+                        editorWorkspace.Services.GetService<IDocumentNavigationService>();
 
                     // TODO: Get the platform to use and pass us an operation context, or create one ourselves.
-                    await navigationService.TryNavigateToLineAndOffsetAsync(
-                        this.ThreadingContext,
-                        editorWorkspace,
-                        document.Id,
-                        sourceLocation.StartPosition.Line,
-                        sourceLocation.StartPosition.Character,
-                        NavigationOptions.Default,
-                        cancellationToken).ConfigureAwait(false);
+                    await navigationService
+                        .TryNavigateToLineAndOffsetAsync(
+                            this.ThreadingContext,
+                            editorWorkspace,
+                            document.Id,
+                            sourceLocation.StartPosition.Line,
+                            sourceLocation.StartPosition.Character,
+                            NavigationOptions.Default,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
         }
@@ -118,8 +153,12 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.Progression
         {
             if (graphObject is GraphNode graphNode)
             {
-                var sourceLocation = graphNode.GetValue<SourceLocation>(CodeNodeProperties.SourceLocation);
-                var projectId = graphNode.GetValue<ProjectId>(RoslynGraphProperties.ContextProjectId);
+                var sourceLocation = graphNode.GetValue<SourceLocation>(
+                    CodeNodeProperties.SourceLocation
+                );
+                var projectId = graphNode.GetValue<ProjectId>(
+                    RoslynGraphProperties.ContextProjectId
+                );
 
                 if (sourceLocation.IsValid && projectId != null)
                 {

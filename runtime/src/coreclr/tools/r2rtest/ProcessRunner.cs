@@ -116,7 +116,13 @@ public class ProcessRunner : IDisposable
 
     private readonly StringBuilder _outputCapture;
 
-    public ProcessRunner(ProcessInfo processInfo, int processIndex, int processCount, ReadyToRunJittedMethods jittedMethods, AutoResetEvent processExitEvent)
+    public ProcessRunner(
+        ProcessInfo processInfo,
+        int processIndex,
+        int processCount,
+        ReadyToRunJittedMethods jittedMethods,
+        AutoResetEvent processExitEvent
+    )
     {
         _processInfo = processInfo;
         _processIndex = processIndex;
@@ -153,7 +159,11 @@ public class ProcessRunner : IDisposable
             RedirectStandardError = true,
         };
 
-        foreach (KeyValuePair<string, string> environmentOverride in _processInfo.Parameters.EnvironmentOverrides)
+        foreach (
+            KeyValuePair<string, string> environmentOverride in _processInfo
+                .Parameters
+                .EnvironmentOverrides
+        )
         {
             psi.EnvironmentVariables[environmentOverride.Key] = environmentOverride.Value;
         }
@@ -308,7 +318,10 @@ public class ProcessRunner : IDisposable
         string processSpec;
         if (!string.IsNullOrEmpty(_processInfo.Parameters.Arguments))
         {
-            processSpec = Path.GetFileName(_processInfo.Parameters.ProcessPath) + " " + _processInfo.Parameters.Arguments;
+            processSpec =
+                Path.GetFileName(_processInfo.Parameters.ProcessPath)
+                + " "
+                + _processInfo.Parameters.Arguments;
         }
         else
         {
@@ -321,7 +334,10 @@ public class ProcessRunner : IDisposable
             KillProcess();
         }
         _processInfo.ExitCode = (_processInfo.TimedOut ? TimeoutExitCode : _process.ExitCode);
-        _processInfo.Succeeded = (!_processInfo.TimedOut && _processInfo.ExitCode == _processInfo.Parameters.ExpectedExitCode);
+        _processInfo.Succeeded = (
+            !_processInfo.TimedOut
+            && _processInfo.ExitCode == _processInfo.Parameters.ExpectedExitCode
+        );
         WriteLog(">>>>");
 
         if (!_processInfo.Succeeded)
@@ -329,11 +345,13 @@ public class ProcessRunner : IDisposable
             failureCount++;
         }
 
-        string linePrefix = $"{_processIndex} / {_processCount} ({(++progressIndex * 100 / _processCount)}%, {failureCount} failed): ";
+        string linePrefix =
+            $"{_processIndex} / {_processCount} ({(++progressIndex * 100 / _processCount)}%, {failureCount} failed): ";
 
         if (_processInfo.Succeeded)
         {
-            string successMessage = linePrefix + $"succeeded in {_processInfo.DurationMilliseconds} msecs";
+            string successMessage =
+                linePrefix + $"succeeded in {_processInfo.DurationMilliseconds} msecs";
 
             WriteLog(successMessage);
 
@@ -345,11 +363,14 @@ public class ProcessRunner : IDisposable
             string failureMessage;
             if (_processInfo.TimedOut)
             {
-                failureMessage = linePrefix + $"timed out in {_processInfo.DurationMilliseconds} msecs";
+                failureMessage =
+                    linePrefix + $"timed out in {_processInfo.DurationMilliseconds} msecs";
             }
             else
             {
-                failureMessage = linePrefix + $"failed in {_processInfo.DurationMilliseconds} msecs, exit code {_processInfo.ExitCode}";
+                failureMessage =
+                    linePrefix
+                    + $"failed in {_processInfo.DurationMilliseconds} msecs, exit code {_processInfo.ExitCode}";
                 if (_processInfo.ExitCode < 0)
                 {
                     failureMessage += $" = 0x{_processInfo.ExitCode:X8}";

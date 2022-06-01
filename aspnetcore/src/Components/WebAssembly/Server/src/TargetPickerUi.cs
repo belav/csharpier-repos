@@ -57,7 +57,8 @@ public class TargetPickerUi
         }
         catch (Exception ex)
         {
-            await context.Response.WriteAsync($@"
+            await context.Response.WriteAsync(
+                $@"
 <h1>Unable to find debuggable browser tab</h1>
 <p>
     Could not get a list of browser tabs from <code>{debuggerTabsListUrl}</code>.
@@ -75,14 +76,17 @@ public class TargetPickerUi
 <strong>This should launch a new browser window with debugging enabled..</p>
 <h2>Underlying exception:</h2>
 <pre>{ex}</pre>
-                ");
+                "
+            );
 
             return;
         }
 
         var matchingTabs = string.IsNullOrEmpty(targetApplicationUrl)
             ? availableTabs.ToList()
-            : availableTabs.Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal)).ToList();
+            : availableTabs
+                .Where(t => t.Url.Equals(targetApplicationUrl, StringComparison.Ordinal))
+                .ToList();
 
         if (matchingTabs.Count == 1)
         {
@@ -97,13 +101,18 @@ public class TargetPickerUi
             var suffix = string.IsNullOrEmpty(targetApplicationUrl)
                 ? string.Empty
                 : $" matching the URL {WebUtility.HtmlEncode(targetApplicationUrl)}";
-            await context.Response.WriteAsync($"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>");
-            await context.Response.WriteAsync("<p>Make sure your browser is displaying the target application.</p>");
+            await context.Response.WriteAsync(
+                $"<p>The list of targets returned by {WebUtility.HtmlEncode(debuggerTabsListUrl)} contains no entries{suffix}.</p>"
+            );
+            await context.Response.WriteAsync(
+                "<p>Make sure your browser is displaying the target application.</p>"
+            );
         }
         else
         {
             await context.Response.WriteAsync("<h1>Inspectable pages</h1>");
-            await context.Response.WriteAsync(@"
+            await context.Response.WriteAsync(
+                @"
                     <style type='text/css'>
                         body {
                             font-family: Helvetica, Arial, sans-serif;
@@ -130,15 +139,17 @@ public class TargetPickerUi
                             color: black;
                         }
                     </style>
-                ");
+                "
+            );
 
             foreach (var tab in matchingTabs)
             {
                 var devToolsUrlWithProxy = GetDevToolsUrlWithProxy(tab);
                 await context.Response.WriteAsync(
                     $"<a class='inspectable-page' href='{WebUtility.HtmlEncode(devToolsUrlWithProxy)}'>"
-                    + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
-                    + $"</a>");
+                        + $"<h3>{WebUtility.HtmlEncode(tab.Title)}</h3>{WebUtility.HtmlEncode(tab.Url)}"
+                        + $"</a>"
+                );
             }
         }
     }
@@ -148,7 +159,8 @@ public class TargetPickerUi
         var underlyingV8Endpoint = new Uri(tabToDebug.WebSocketDebuggerUrl);
         var proxyEndpoint = new Uri(_debugProxyUrl);
         var devToolsUrlAbsolute = new Uri(_browserHost + tabToDebug.DevtoolsFrontendUrl);
-        var devToolsUrlWithProxy = $"{devToolsUrlAbsolute.Scheme}://{devToolsUrlAbsolute.Authority}{devToolsUrlAbsolute.AbsolutePath}?{underlyingV8Endpoint.Scheme}={proxyEndpoint.Authority}{underlyingV8Endpoint.PathAndQuery}";
+        var devToolsUrlWithProxy =
+            $"{devToolsUrlAbsolute.Scheme}://{devToolsUrlAbsolute.Authority}{devToolsUrlAbsolute.AbsolutePath}?{underlyingV8Endpoint.Scheme}={proxyEndpoint.Authority}{underlyingV8Endpoint.PathAndQuery}";
         return devToolsUrlWithProxy;
     }
 
@@ -206,8 +218,7 @@ public class TargetPickerUi
         return JsonSerializer.Deserialize<BrowserTab[]>(jsonResponse, JsonOptions)!;
     }
 
-    private sealed record BrowserTab
-    (
+    private sealed record BrowserTab(
         string Id,
         string Type,
         string Url,

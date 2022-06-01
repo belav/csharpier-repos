@@ -30,12 +30,11 @@ namespace System.CommandLine.Hosting.Tests
 
             var parser = new CommandLineBuilder(
                 new RootCommand { Handler = CommandHandler.Create<IHost>(Execute) }
-                )
+            )
                 .UseHost()
                 .Build();
 
-            parser.InvokeAsync(Array.Empty<string>())
-                .GetAwaiter().GetResult();
+            parser.InvokeAsync(Array.Empty<string>()).GetAwaiter().GetResult();
 
             hostFromHandler.Should().NotBeNull();
         }
@@ -53,8 +52,7 @@ namespace System.CommandLine.Hosting.Tests
                 })
                 .Build();
 
-            parser.InvokeAsync(Array.Empty<string>())
-                .GetAwaiter().GetResult();
+            parser.InvokeAsync(Array.Empty<string>()).GetAwaiter().GetResult();
 
             invocationContext.Should().NotBeNull();
         }
@@ -78,12 +76,11 @@ namespace System.CommandLine.Hosting.Tests
 
             var parser = new CommandLineBuilder(
                 new RootCommand { Handler = CommandHandler.Create<IHost>(Execute) }
-                )
+            )
                 .UseHost()
                 .Build();
 
-            parser.InvokeAsync(Array.Empty<string>())
-                .GetAwaiter().GetResult();
+            parser.InvokeAsync(Array.Empty<string>()).GetAwaiter().GetResult();
 
             invocationContext.Should().NotBeNull();
             bindingContext.Should().NotBeNull();
@@ -107,10 +104,8 @@ namespace System.CommandLine.Hosting.Tests
             }
 
             var parser = new CommandLineBuilder(
-                new RootCommand
-                {
-                    Handler = CommandHandler.Create<IHost>(Execute),
-                })
+                new RootCommand { Handler = CommandHandler.Create<IHost>(Execute), }
+            )
                 .EnableLegacyDoubleDashBehavior()
                 .UseHost(host =>
                 {
@@ -123,8 +118,7 @@ namespace System.CommandLine.Hosting.Tests
                 })
                 .Build();
 
-            parser.InvokeAsync(commandLineArgs)
-                .GetAwaiter().GetResult();
+            parser.InvokeAsync(commandLineArgs).GetAwaiter().GetResult();
 
             testConfigValue.Should().BeEquivalentTo(testArgument);
         }
@@ -145,10 +139,8 @@ namespace System.CommandLine.Hosting.Tests
             }
 
             var parser = new CommandLineBuilder(
-                new RootCommand
-                {
-                    Handler = CommandHandler.Create<IHost>(Execute),
-                })
+                new RootCommand { Handler = CommandHandler.Create<IHost>(Execute), }
+            )
                 .EnableLegacyDoubleDashBehavior()
                 .UseHost(args =>
                 {
@@ -163,8 +155,7 @@ namespace System.CommandLine.Hosting.Tests
                 })
                 .Build();
 
-            parser.InvokeAsync(commandLineArgs)
-                .GetAwaiter().GetResult();
+            parser.InvokeAsync(commandLineArgs).GetAwaiter().GetResult();
 
             testConfigValue.Should().BeEquivalentTo(testArgument);
         }
@@ -185,10 +176,8 @@ namespace System.CommandLine.Hosting.Tests
             }
 
             var parser = new CommandLineBuilder(
-                new RootCommand
-                {
-                    Handler = CommandHandler.Create<IHost>(Execute)
-                })
+                new RootCommand { Handler = CommandHandler.Create<IHost>(Execute) }
+            )
                 .UseHost()
                 .Build();
 
@@ -206,12 +195,12 @@ namespace System.CommandLine.Hosting.Tests
 
             var rootCmd = new RootCommand();
             rootCmd.AddOption(new Option<int>($"-{nameof(MyOptions.MyArgument)}"));
-            rootCmd.Handler = CommandHandler.Create((IHost host) =>
-            {
-                options = host.Services
-                    .GetRequiredService<IOptions<MyOptions>>()
-                    .Value;
-            });
+            rootCmd.Handler = CommandHandler.Create(
+                (IHost host) =>
+                {
+                    options = host.Services.GetRequiredService<IOptions<MyOptions>>().Value;
+                }
+            );
 
             int result = new CommandLineBuilder(rootCmd)
                 .UseHost(host =>
@@ -283,12 +272,14 @@ namespace System.CommandLine.Hosting.Tests
             var parser = new CommandLineBuilder()
                 .UseHost(hostBuilder =>
                 {
-                    hostBuilder.ConfigureServices((hostingCtx, services) =>
-                    {
-                        InvocationContext invocationCtx = hostingCtx.GetInvocationContext();
-                        invocationCtx.Should().NotBeNull();
-                        ctxAsserted = true;
-                    });
+                    hostBuilder.ConfigureServices(
+                        (hostingCtx, services) =>
+                        {
+                            InvocationContext invocationCtx = hostingCtx.GetInvocationContext();
+                            invocationCtx.Should().NotBeNull();
+                            ctxAsserted = true;
+                        }
+                    );
                 })
                 .Build();
 
@@ -303,11 +294,13 @@ namespace System.CommandLine.Hosting.Tests
             InvocationContext ctxHosting = null;
 
             var parser = new CommandLineBuilder()
-                .AddMiddleware((context, next) =>
-                {
-                    ctxCustom = context;
-                    return next(context);
-                })
+                .AddMiddleware(
+                    (context, next) =>
+                    {
+                        ctxCustom = context;
+                        return next(context);
+                    }
+                )
                 .UseHost(hostBuilder =>
                 {
                     ctxHosting = hostBuilder.GetInvocationContext();
@@ -326,17 +319,21 @@ namespace System.CommandLine.Hosting.Tests
             InvocationContext ctxConfigureServices = null;
 
             var parser = new CommandLineBuilder()
-                .AddMiddleware((context, next) =>
-                {
-                    ctxCustom = context;
-                    return next(context);
-                })
+                .AddMiddleware(
+                    (context, next) =>
+                    {
+                        ctxCustom = context;
+                        return next(context);
+                    }
+                )
                 .UseHost(hostBuilder =>
                 {
-                    hostBuilder.ConfigureServices((hostingCtx, services) =>
-                    {
-                        ctxConfigureServices = hostingCtx.GetInvocationContext();
-                    });
+                    hostBuilder.ConfigureServices(
+                        (hostingCtx, services) =>
+                        {
+                            ctxConfigureServices = hostingCtx.GetInvocationContext();
+                        }
+                    );
                 })
                 .Build();
 
@@ -349,25 +346,31 @@ namespace System.CommandLine.Hosting.Tests
         public static void GetInvocationContext_throws_if_not_within_invocation()
         {
             var hostBuilder = new HostBuilder();
-            hostBuilder.Invoking(b =>
-            {
-                _ = b.GetInvocationContext();
-            })
-                .Should().Throw<InvalidOperationException>();
+            hostBuilder
+                .Invoking(b =>
+                {
+                    _ = b.GetInvocationContext();
+                })
+                .Should()
+                .Throw<InvalidOperationException>();
         }
 
         [Fact]
         public static void GetInvocationContext_in_ConfigureServices_throws_if_not_within_invocation()
         {
-            new HostBuilder().Invoking(b =>
-            {
-                b.ConfigureServices((hostingCtx, services) =>
+            new HostBuilder()
+                .Invoking(b =>
                 {
-                    _ = hostingCtx.GetInvocationContext();
-                });
-                _ = b.Build();
-            })
-                .Should().Throw<InvalidOperationException>();
+                    b.ConfigureServices(
+                        (hostingCtx, services) =>
+                        {
+                            _ = hostingCtx.GetInvocationContext();
+                        }
+                    );
+                    _ = b.Build();
+                })
+                .Should()
+                .Throw<InvalidOperationException>();
         }
 
         [Fact]
@@ -376,14 +379,16 @@ namespace System.CommandLine.Hosting.Tests
             bool hostAsserted = false;
             var parser = new CommandLineBuilder()
                 .UseHost()
-                .AddMiddleware((invCtx, next) =>
-                {
-                    IHost host = invCtx.GetHost();
-                    host.Should().NotBeNull();
-                    hostAsserted = true;
+                .AddMiddleware(
+                    (invCtx, next) =>
+                    {
+                        IHost host = invCtx.GetHost();
+                        host.Should().NotBeNull();
+                        hostAsserted = true;
 
-                    return next(invCtx);
-                })
+                        return next(invCtx);
+                    }
+                )
                 .Build();
 
             _ = parser.Invoke(string.Empty);
@@ -396,14 +401,16 @@ namespace System.CommandLine.Hosting.Tests
         {
             bool hostAsserted = false;
             var parser = new CommandLineBuilder()
-                .AddMiddleware((invCtx, next) =>
-                {
-                    IHost host = invCtx.GetHost();
-                    host.Should().BeNull();
-                    hostAsserted = true;
+                .AddMiddleware(
+                    (invCtx, next) =>
+                    {
+                        IHost host = invCtx.GetHost();
+                        host.Should().BeNull();
+                        hostAsserted = true;
 
-                    return next(invCtx);
-                })
+                        return next(invCtx);
+                    }
+                )
                 .Build();
 
             _ = parser.Invoke(string.Empty);

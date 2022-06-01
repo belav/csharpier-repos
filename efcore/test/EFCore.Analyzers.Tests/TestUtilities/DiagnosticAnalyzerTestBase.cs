@@ -22,23 +22,24 @@ public abstract class DiagnosticAnalyzerTestBase
         Assert.Empty(diagnostics);
     }
 
-    protected virtual Task<(Diagnostic[], string)> GetDiagnosticsAsync(string source, params string[] extraUsings)
-        => GetDiagnosticsAsync(source, analyzerDiagnosticsOnly: true, extraUsings);
+    protected virtual Task<(Diagnostic[], string)> GetDiagnosticsAsync(
+        string source,
+        params string[] extraUsings
+    ) => GetDiagnosticsAsync(source, analyzerDiagnosticsOnly: true, extraUsings);
 
     protected virtual async Task<(Diagnostic[], string)> GetDiagnosticsAsync(
-            string source, bool analyzerDiagnosticsOnly, params string[] extraUsings)
+        string source,
+        bool analyzerDiagnosticsOnly,
+        params string[] extraUsings
+    )
     {
         var sb = new StringBuilder();
         foreach (var @using in _usings.Concat(extraUsings))
         {
-            sb
-                .Append("using ")
-                .Append(@using)
-                .AppendLine(";");
+            sb.Append("using ").Append(@using).AppendLine(";");
         }
 
-        sb
-            .AppendLine()
+        sb.AppendLine()
             .AppendLine("class C {")
             .AppendLine("void M() {")
             .AppendLine(source)
@@ -46,24 +47,37 @@ public abstract class DiagnosticAnalyzerTestBase
             .AppendLine("}");
 
         var fullSource = sb.ToString();
-        return (await GetDiagnosticsFullSourceAsync(fullSource, analyzerDiagnosticsOnly), fullSource);
+        return (
+            await GetDiagnosticsFullSourceAsync(fullSource, analyzerDiagnosticsOnly),
+            fullSource
+        );
     }
 
-    protected async Task<Diagnostic[]> GetDiagnosticsFullSourceAsync(string source, bool analyzerDiagnosticsOnly = true)
+    protected async Task<Diagnostic[]> GetDiagnosticsFullSourceAsync(
+        string source,
+        bool analyzerDiagnosticsOnly = true
+    )
     {
         var compilation = await CreateProject(source).GetCompilationAsync();
-        var errors = compilation.GetDiagnostics().Where(d => d.Severity == DiagnosticSeverity.Error);
+        var errors = compilation
+            .GetDiagnostics()
+            .Where(d => d.Severity == DiagnosticSeverity.Error);
 
         Assert.Empty(errors);
 
         var analyzer = CreateDiagnosticAnalyzer();
-        var compilationWithAnalyzers
-            = compilation
-                .WithOptions(
-                    compilation.Options.WithSpecificDiagnosticOptions(
-                        compilation.Options.SpecificDiagnosticOptions
-                            .AddRange(analyzer.SupportedDiagnostics.ToDictionary(d => d.Id, d => ReportDiagnostic.Default))))
-                .WithAnalyzers(ImmutableArray.Create(analyzer));
+        var compilationWithAnalyzers = compilation
+            .WithOptions(
+                compilation.Options.WithSpecificDiagnosticOptions(
+                    compilation.Options.SpecificDiagnosticOptions.AddRange(
+                        analyzer.SupportedDiagnostics.ToDictionary(
+                            d => d.Id,
+                            d => ReportDiagnostic.Default
+                        )
+                    )
+                )
+            )
+            .WithAnalyzers(ImmutableArray.Create(analyzer));
 
         var diagnostics = analyzerDiagnosticsOnly
             ? await compilationWithAnalyzers.GetAnalyzerDiagnosticsAsync()
@@ -81,21 +95,20 @@ public abstract class DiagnosticAnalyzerTestBase
         var projectId = ProjectId.CreateNewId(debugName: "TestProject");
         var documentId = DocumentId.CreateNewId(projectId, fileName);
 
-        var metadataReferences
-            = DependencyContext.Load(GetType().Assembly)
-                .CompileLibraries
-                .SelectMany(c => c.ResolveReferencePaths())
-                .Select(path => MetadataReference.CreateFromFile(path))
-                .Cast<MetadataReference>()
-                .ToList();
+        var metadataReferences = DependencyContext
+            .Load(GetType().Assembly)
+            .CompileLibraries.SelectMany(c => c.ResolveReferencePaths())
+            .Select(path => MetadataReference.CreateFromFile(path))
+            .Cast<MetadataReference>()
+            .ToList();
 
-        var solution = new AdhocWorkspace()
-            .CurrentSolution
+        var solution = new AdhocWorkspace().CurrentSolution
             .AddProject(projectId, "TestProject", "TestProject", LanguageNames.CSharp)
             .AddMetadataReferences(projectId, metadataReferences)
             .AddDocument(documentId, fileName, SourceText.From(source));
 
-        return solution.GetProject(projectId)
+        return solution
+            .GetProject(projectId)
             .WithCompilationOptions(
                 new CSharpCompilationOptions(
                     OutputKind.DynamicallyLinkedLibrary,
@@ -103,6 +116,8 @@ public abstract class DiagnosticAnalyzerTestBase
                     {
                         { "CS1701", ReportDiagnostic.Suppress }
                     },
-                    nullableContextOptions: NullableContextOptions.Enable));
+                    nullableContextOptions: NullableContextOptions.Enable
+                )
+            );
     }
 }

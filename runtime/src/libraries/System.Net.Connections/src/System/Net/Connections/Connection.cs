@@ -24,17 +24,33 @@ namespace System.Net.Connections
         /// The connection's <see cref="Stream"/>.
         /// </summary>
         public Stream Stream =>
-            _stream != null ? _stream :
-            _pipe != null ? throw new InvalidOperationException(SR.net_connections_stream_use_after_pipe) :
-            (_stream = CreateStream() ?? throw new InvalidOperationException(SR.net_connections_createstream_null));
+            _stream != null
+                ? _stream
+                : _pipe != null
+                    ? throw new InvalidOperationException(SR.net_connections_stream_use_after_pipe)
+                    : (
+                        _stream =
+                            CreateStream()
+                            ?? throw new InvalidOperationException(
+                                SR.net_connections_createstream_null
+                            )
+                    );
 
         /// <summary>
         /// The connection's <see cref="IDuplexPipe"/>.
         /// </summary>
         public IDuplexPipe Pipe =>
-            _pipe != null ? _pipe :
-            _stream != null ? throw new InvalidOperationException(SR.net_connections_pipe_use_after_stream) :
-            (_pipe = CreatePipe() ?? throw new InvalidOperationException(SR.net_connections_createpipe_null));
+            _pipe != null
+                ? _pipe
+                : _stream != null
+                    ? throw new InvalidOperationException(SR.net_connections_pipe_use_after_stream)
+                    : (
+                        _pipe =
+                            CreatePipe()
+                            ?? throw new InvalidOperationException(
+                                SR.net_connections_createpipe_null
+                            )
+                    );
 
         /// <summary>
         /// Initializes the <see cref="Stream"/> for the <see cref="Connection"/>.
@@ -46,14 +62,16 @@ namespace System.Net.Connections
         /// </remarks>
         protected virtual Stream CreateStream()
         {
-            if (_initializing) throw new InvalidOperationException(SR.net_connections_no_create_overrides);
+            if (_initializing)
+                throw new InvalidOperationException(SR.net_connections_no_create_overrides);
 
             try
             {
                 _initializing = true;
 
                 IDuplexPipe pipe = CreatePipe();
-                if (pipe == null) throw new InvalidOperationException(SR.net_connections_createpipe_null);
+                if (pipe == null)
+                    throw new InvalidOperationException(SR.net_connections_createpipe_null);
 
                 return new DuplexPipeStream(pipe);
             }
@@ -73,14 +91,16 @@ namespace System.Net.Connections
         /// </remarks>
         protected virtual IDuplexPipe CreatePipe()
         {
-            if (_initializing) throw new InvalidOperationException(SR.net_connections_no_create_overrides);
+            if (_initializing)
+                throw new InvalidOperationException(SR.net_connections_no_create_overrides);
 
             try
             {
                 _initializing = true;
 
                 Stream stream = CreateStream();
-                if (stream == null) throw new InvalidOperationException(SR.net_connections_createstream_null);
+                if (stream == null)
+                    throw new InvalidOperationException(SR.net_connections_createstream_null);
 
                 return new DuplexStreamPipe(stream);
             }
@@ -99,10 +119,23 @@ namespace System.Net.Connections
         /// <param name="localEndPoint">The connection's <see cref="ConnectionBase.LocalEndPoint"/>.</param>
         /// <param name="remoteEndPoint">The connection's <see cref="ConnectionBase.RemoteEndPoint"/>.</param>
         /// <returns>A new <see cref="Connection"/>.</returns>
-        public static Connection FromStream(Stream stream, bool leaveOpen = false, IConnectionProperties? properties = null, EndPoint? localEndPoint = null, EndPoint? remoteEndPoint = null)
+        public static Connection FromStream(
+            Stream stream,
+            bool leaveOpen = false,
+            IConnectionProperties? properties = null,
+            EndPoint? localEndPoint = null,
+            EndPoint? remoteEndPoint = null
+        )
         {
-            if (stream == null) throw new ArgumentNullException(nameof(stream));
-            return new ConnectionFromStream(stream, leaveOpen, properties, localEndPoint, remoteEndPoint);
+            if (stream == null)
+                throw new ArgumentNullException(nameof(stream));
+            return new ConnectionFromStream(
+                stream,
+                leaveOpen,
+                properties,
+                localEndPoint,
+                remoteEndPoint
+            );
         }
 
         /// <summary>
@@ -114,10 +147,23 @@ namespace System.Net.Connections
         /// <param name="localEndPoint">The connection's <see cref="ConnectionBase.LocalEndPoint"/>.</param>
         /// <param name="remoteEndPoint">The connection's <see cref="ConnectionBase.RemoteEndPoint"/>.</param>
         /// <returns>A new <see cref="Connection"/>.</returns>
-        public static Connection FromPipe(IDuplexPipe pipe, bool leaveOpen = false, IConnectionProperties? properties = null, EndPoint? localEndPoint = null, EndPoint? remoteEndPoint = null)
+        public static Connection FromPipe(
+            IDuplexPipe pipe,
+            bool leaveOpen = false,
+            IConnectionProperties? properties = null,
+            EndPoint? localEndPoint = null,
+            EndPoint? remoteEndPoint = null
+        )
         {
-            if (pipe == null) throw new ArgumentNullException(nameof(pipe));
-            return new ConnectionFromPipe(pipe, leaveOpen, properties, localEndPoint, remoteEndPoint);
+            if (pipe == null)
+                throw new ArgumentNullException(nameof(pipe));
+            return new ConnectionFromPipe(
+                pipe,
+                leaveOpen,
+                properties,
+                localEndPoint,
+                remoteEndPoint
+            );
         }
 
         private sealed class ConnectionFromStream : Connection, IConnectionProperties
@@ -132,7 +178,13 @@ namespace System.Net.Connections
 
             public override EndPoint? RemoteEndPoint { get; }
 
-            public ConnectionFromStream(Stream stream, bool leaveOpen, IConnectionProperties? properties, EndPoint? localEndPoint, EndPoint? remoteEndPoint)
+            public ConnectionFromStream(
+                Stream stream,
+                bool leaveOpen,
+                IConnectionProperties? properties,
+                EndPoint? localEndPoint,
+                EndPoint? remoteEndPoint
+            )
             {
                 _originalStream = stream;
                 _leaveOpen = leaveOpen;
@@ -141,9 +193,13 @@ namespace System.Net.Connections
                 RemoteEndPoint = remoteEndPoint;
             }
 
-            protected override Stream CreateStream() => _originalStream ?? throw new ObjectDisposedException(nameof(Connection));
+            protected override Stream CreateStream() =>
+                _originalStream ?? throw new ObjectDisposedException(nameof(Connection));
 
-            protected override async ValueTask CloseAsyncCore(ConnectionCloseMethod method, CancellationToken cancellationToken)
+            protected override async ValueTask CloseAsyncCore(
+                ConnectionCloseMethod method,
+                CancellationToken cancellationToken
+            )
             {
                 if (_originalStream == null)
                 {
@@ -163,7 +219,10 @@ namespace System.Net.Connections
                 _originalStream = null;
             }
 
-            bool IConnectionProperties.TryGet(Type propertyKey, [NotNullWhen(true)] out object? property)
+            bool IConnectionProperties.TryGet(
+                Type propertyKey,
+                [NotNullWhen(true)] out object? property
+            )
             {
                 property = null;
                 return false;
@@ -182,7 +241,13 @@ namespace System.Net.Connections
 
             public override EndPoint? RemoteEndPoint { get; }
 
-            public ConnectionFromPipe(IDuplexPipe pipe, bool leaveOpen, IConnectionProperties? properties, EndPoint? localEndPoint, EndPoint? remoteEndPoint)
+            public ConnectionFromPipe(
+                IDuplexPipe pipe,
+                bool leaveOpen,
+                IConnectionProperties? properties,
+                EndPoint? localEndPoint,
+                EndPoint? remoteEndPoint
+            )
             {
                 _originalPipe = pipe;
                 _leaveOpen = leaveOpen;
@@ -191,24 +256,32 @@ namespace System.Net.Connections
                 RemoteEndPoint = remoteEndPoint;
             }
 
-            protected override IDuplexPipe CreatePipe() => _originalPipe ?? throw new ObjectDisposedException(nameof(Connection));
+            protected override IDuplexPipe CreatePipe() =>
+                _originalPipe ?? throw new ObjectDisposedException(nameof(Connection));
 
-            protected override async ValueTask CloseAsyncCore(ConnectionCloseMethod method, CancellationToken cancellationToken)
+            protected override async ValueTask CloseAsyncCore(
+                ConnectionCloseMethod method,
+                CancellationToken cancellationToken
+            )
             {
                 if (_originalPipe == null)
                 {
                     return;
                 }
 
-                Exception? inputException, outputException;
+                Exception? inputException,
+                    outputException;
 
                 if (method == ConnectionCloseMethod.GracefulShutdown)
                 {
                     // Flush happens implicitly from CompleteAsync(null), so only flush here if we need cancellation.
                     if (cancellationToken.CanBeCanceled)
                     {
-                        FlushResult r = await _originalPipe.Output.FlushAsync(cancellationToken).ConfigureAwait(false);
-                        if (r.IsCanceled) cancellationToken.ThrowIfCancellationRequested();
+                        FlushResult r = await _originalPipe.Output
+                            .FlushAsync(cancellationToken)
+                            .ConfigureAwait(false);
+                        if (r.IsCanceled)
+                            cancellationToken.ThrowIfCancellationRequested();
                     }
 
                     inputException = null;
@@ -216,8 +289,12 @@ namespace System.Net.Connections
                 }
                 else
                 {
-                    inputException = ExceptionDispatchInfo.SetCurrentStackTrace(new ObjectDisposedException(nameof(Connection)));
-                    outputException = ExceptionDispatchInfo.SetCurrentStackTrace(new ObjectDisposedException(nameof(Connection)));
+                    inputException = ExceptionDispatchInfo.SetCurrentStackTrace(
+                        new ObjectDisposedException(nameof(Connection))
+                    );
+                    outputException = ExceptionDispatchInfo.SetCurrentStackTrace(
+                        new ObjectDisposedException(nameof(Connection))
+                    );
                 }
 
                 await _originalPipe.Input.CompleteAsync(inputException).ConfigureAwait(false);
@@ -239,7 +316,10 @@ namespace System.Net.Connections
                 _originalPipe = null;
             }
 
-            bool IConnectionProperties.TryGet(Type propertyKey, [NotNullWhen(true)] out object? property)
+            bool IConnectionProperties.TryGet(
+                Type propertyKey,
+                [NotNullWhen(true)] out object? property
+            )
             {
                 property = null;
                 return false;

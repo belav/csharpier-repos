@@ -24,8 +24,8 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsEmpty()
-        => _properties.Count == 0 && _ignoredTypes.Count == 0 && _typeMappings.Count == 0;
+    public virtual bool IsEmpty() =>
+        _properties.Count == 0 && _ignoredTypes.Count == 0 && _typeMappings.Count == 0;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,41 +37,48 @@ public class ModelConfiguration
     {
         Type? configuredType = null;
         var stringType = GetConfigurationType(typeof(string), null, ref configuredType);
-        if (stringType != null
-            && stringType != TypeConfigurationType.Property)
+        if (stringType != null && stringType != TypeConfigurationType.Property)
         {
             throw new InvalidOperationException(
                 CoreStrings.UnconfigurableType(
                     typeof(string).DisplayName(fullName: false),
                     stringType,
                     TypeConfigurationType.Property,
-                    configuredType!.DisplayName(fullName: false)));
+                    configuredType!.DisplayName(fullName: false)
+                )
+            );
         }
 
         configuredType = null;
         var intType = GetConfigurationType(typeof(int?), null, ref configuredType);
-        if (intType != null
-            && intType != TypeConfigurationType.Property)
+        if (intType != null && intType != TypeConfigurationType.Property)
         {
             throw new InvalidOperationException(
                 CoreStrings.UnconfigurableType(
                     typeof(int?).DisplayName(fullName: false),
                     intType,
                     TypeConfigurationType.Property,
-                    configuredType!.DisplayName(fullName: false)));
+                    configuredType!.DisplayName(fullName: false)
+                )
+            );
         }
 
         configuredType = null;
-        var propertyBagType = GetConfigurationType(Model.DefaultPropertyBagType, null, ref configuredType);
-        if (propertyBagType != null
-            && !propertyBagType.Value.IsEntityType())
+        var propertyBagType = GetConfigurationType(
+            Model.DefaultPropertyBagType,
+            null,
+            ref configuredType
+        );
+        if (propertyBagType != null && !propertyBagType.Value.IsEntityType())
         {
             throw new InvalidOperationException(
                 CoreStrings.UnconfigurableType(
                     Model.DefaultPropertyBagType.DisplayName(fullName: false),
                     propertyBagType,
                     TypeConfigurationType.SharedTypeEntityType,
-                    configuredType!.DisplayName(fullName: false)));
+                    configuredType!.DisplayName(fullName: false)
+                )
+            );
         }
 
         return this;
@@ -93,13 +100,19 @@ public class ModelConfiguration
         Type type,
         TypeConfigurationType? previousConfiguration,
         ref Type? previousType,
-        bool getBaseTypes = true)
+        bool getBaseTypes = true
+    )
     {
         if (_configurationTypes.TryGetValue(type, out var configurationType))
         {
             if (configurationType.HasValue)
             {
-                EnsureCompatible(configurationType.Value, type, previousConfiguration, previousType);
+                EnsureCompatible(
+                    configurationType.Value,
+                    type,
+                    previousConfiguration,
+                    previousType
+                );
                 previousType = type;
             }
 
@@ -111,13 +124,21 @@ public class ModelConfiguration
         if (type.IsNullableValueType())
         {
             configurationType = GetConfigurationType(
-                Nullable.GetUnderlyingType(type)!, configurationType, ref configuredType, getBaseTypes: false);
+                Nullable.GetUnderlyingType(type)!,
+                configurationType,
+                ref configuredType,
+                getBaseTypes: false
+            );
         }
 
         if (type.IsConstructedGenericType)
         {
             configurationType = GetConfigurationType(
-                type.GetGenericTypeDefinition(), configurationType, ref configuredType, getBaseTypes: false);
+                type.GetGenericTypeDefinition(),
+                configurationType,
+                ref configuredType,
+                getBaseTypes: false
+            );
         }
 
         if (getBaseTypes)
@@ -125,33 +146,55 @@ public class ModelConfiguration
             if (type.BaseType != null)
             {
                 configurationType = GetConfigurationType(
-                    type.BaseType, configurationType, ref configuredType);
+                    type.BaseType,
+                    configurationType,
+                    ref configuredType
+                );
             }
 
             foreach (var @interface in type.GetDeclaredInterfaces())
             {
                 configurationType = GetConfigurationType(
-                    @interface, configurationType, ref configuredType, getBaseTypes: false);
+                    @interface,
+                    configurationType,
+                    ref configuredType,
+                    getBaseTypes: false
+                );
             }
         }
 
         if (_ignoredTypes.Contains(type))
         {
-            EnsureCompatible(TypeConfigurationType.Ignored, type, configurationType, configuredType);
+            EnsureCompatible(
+                TypeConfigurationType.Ignored,
+                type,
+                configurationType,
+                configuredType
+            );
             configurationType = TypeConfigurationType.Ignored;
             configuredType = type;
         }
 
         if (_properties.ContainsKey(type))
         {
-            EnsureCompatible(TypeConfigurationType.Property, type, configurationType, configuredType);
+            EnsureCompatible(
+                TypeConfigurationType.Property,
+                type,
+                configurationType,
+                configuredType
+            );
             configurationType = TypeConfigurationType.Property;
             configuredType = type;
         }
 
         if (configurationType.HasValue)
         {
-            EnsureCompatible(configurationType.Value, configuredType!, previousConfiguration, previousType);
+            EnsureCompatible(
+                configurationType.Value,
+                configuredType!,
+                previousConfiguration,
+                previousType
+            );
             previousType = configuredType;
         }
 
@@ -163,15 +206,19 @@ public class ModelConfiguration
         TypeConfigurationType configurationType,
         Type type,
         TypeConfigurationType? previousConfiguration,
-        Type? previousType)
+        Type? previousType
+    )
     {
-        if (previousConfiguration != null
-            && previousConfiguration.Value != configurationType)
+        if (previousConfiguration != null && previousConfiguration.Value != configurationType)
         {
             throw new InvalidOperationException(
                 CoreStrings.TypeConfigurationConflict(
-                    type.DisplayName(fullName: false), configurationType,
-                    previousType?.DisplayName(fullName: false), previousConfiguration.Value));
+                    type.DisplayName(fullName: false),
+                    configurationType,
+                    previousType?.DisplayName(fullName: false),
+                    previousConfiguration.Value
+                )
+            );
         }
     }
 
@@ -181,8 +228,8 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual IEnumerable<ITypeMappingConfiguration> GetTypeMappingConfigurations()
-        => _typeMappings.Values;
+    public virtual IEnumerable<ITypeMappingConfiguration> GetTypeMappingConfigurations() =>
+        _typeMappings.Values;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -190,10 +237,8 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual ITypeMappingConfiguration? FindTypeMappingConfiguration(Type scalarType)
-        => _typeMappings.Count == 0
-            ? null
-            : _typeMappings.GetValueOrDefault(scalarType);
+    public virtual ITypeMappingConfiguration? FindTypeMappingConfiguration(Type scalarType) =>
+        _typeMappings.Count == 0 ? null : _typeMappings.GetValueOrDefault(scalarType);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -241,10 +286,8 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual PropertyConfiguration? FindProperty(Type type)
-        => _properties.TryGetValue(type, out var property)
-            ? property
-            : null;
+    public virtual PropertyConfiguration? FindProperty(Type type) =>
+        _properties.TryGetValue(type, out var property) ? property : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -252,8 +295,7 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool RemoveProperty(Type type)
-        => _properties.Remove(type);
+    public virtual bool RemoveProperty(Type type) => _properties.Remove(type);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -266,15 +308,18 @@ public class ModelConfiguration
         var typeMappingConfiguration = FindTypeMapping(type);
         if (typeMappingConfiguration == null)
         {
-            if (type == typeof(object)
+            if (
+                type == typeof(object)
                 || type == typeof(ExpandoObject)
                 || type == typeof(SortedDictionary<string, object>)
                 || type == typeof(Dictionary<string, object>)
                 || type.IsNullableValueType()
-                || !type.IsInstantiable())
+                || !type.IsInstantiable()
+            )
             {
                 throw new InvalidOperationException(
-                    CoreStrings.UnconfigurableTypeMapping(type.DisplayName(fullName: false)));
+                    CoreStrings.UnconfigurableTypeMapping(type.DisplayName(fullName: false))
+                );
             }
 
             typeMappingConfiguration = new PropertyConfiguration(type);
@@ -290,10 +335,8 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual PropertyConfiguration? FindTypeMapping(Type type)
-        => _typeMappings.TryGetValue(type, out var property)
-            ? property
-            : null;
+    public virtual PropertyConfiguration? FindTypeMapping(Type type) =>
+        _typeMappings.TryGetValue(type, out var property) ? property : null;
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -313,8 +356,7 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool IsIgnored(Type type)
-        => _ignoredTypes.Contains(type);
+    public virtual bool IsIgnored(Type type) => _ignoredTypes.Contains(type);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -322,6 +364,5 @@ public class ModelConfiguration
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool RemoveIgnored(Type type)
-        => _ignoredTypes.Remove(type);
+    public virtual bool RemoveIgnored(Type type) => _ignoredTypes.Remove(type);
 }

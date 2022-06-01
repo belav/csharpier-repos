@@ -11,6 +11,7 @@ namespace System.Numerics
     {
         [FieldOffset(0)]
         public double dbl;
+
         [FieldOffset(0)]
         public ulong uu;
     }
@@ -19,7 +20,13 @@ namespace System.Numerics
     {
         private const int kcbitUint = 32;
 
-        public static void GetDoubleParts(double dbl, out int sign, out int exp, out ulong man, out bool fFinite)
+        public static void GetDoubleParts(
+            double dbl,
+            out int sign,
+            out int exp,
+            out ulong man,
+            out bool fFinite
+        )
         {
             DoubleUlong du;
             du.uu = 0;

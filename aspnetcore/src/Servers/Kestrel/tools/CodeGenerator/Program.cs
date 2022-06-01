@@ -49,21 +49,30 @@ public class Program
         string httpUtilitiesPath,
         string http2ConnectionPath,
         string transportMultiplexedConnectionFeatureCollectionPath,
-        string transportConnectionFeatureCollectionPath)
+        string transportConnectionFeatureCollectionPath
+    )
     {
         var knownHeadersContent = KnownHeaders.GeneratedFile();
         var httpProtocolFeatureCollectionContent = HttpProtocolFeatureCollection.GenerateFile();
         var httpUtilitiesContent = HttpUtilities.HttpUtilities.GeneratedFile();
-        var transportMultiplexedConnectionFeatureCollectionContent = TransportMultiplexedConnectionFeatureCollection.GenerateFile();
-        var transportConnectionFeatureCollectionContent = TransportConnectionFeatureCollection.GenerateFile();
+        var transportMultiplexedConnectionFeatureCollectionContent =
+            TransportMultiplexedConnectionFeatureCollection.GenerateFile();
+        var transportConnectionFeatureCollectionContent =
+            TransportConnectionFeatureCollection.GenerateFile();
         var http2ConnectionContent = Http2Connection.GenerateFile();
 
         UpdateFile(knownHeadersPath, knownHeadersContent);
         UpdateFile(httpProtocolFeatureCollectionPath, httpProtocolFeatureCollectionContent);
         UpdateFile(httpUtilitiesPath, httpUtilitiesContent);
         UpdateFile(http2ConnectionPath, http2ConnectionContent);
-        UpdateFile(transportMultiplexedConnectionFeatureCollectionPath, transportMultiplexedConnectionFeatureCollectionContent);
-        UpdateFile(transportConnectionFeatureCollectionPath, transportConnectionFeatureCollectionContent);
+        UpdateFile(
+            transportMultiplexedConnectionFeatureCollectionPath,
+            transportMultiplexedConnectionFeatureCollectionContent
+        );
+        UpdateFile(
+            transportConnectionFeatureCollectionPath,
+            transportConnectionFeatureCollectionContent
+        );
     }
 
     public static void UpdateFile(string path, string content)

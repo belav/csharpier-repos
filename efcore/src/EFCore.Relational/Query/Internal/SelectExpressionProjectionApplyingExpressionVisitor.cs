@@ -21,7 +21,9 @@ public class SelectExpressionProjectionApplyingExpressionVisitor : ExpressionVis
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public SelectExpressionProjectionApplyingExpressionVisitor(QuerySplittingBehavior? querySplittingBehavior)
+    public SelectExpressionProjectionApplyingExpressionVisitor(
+        QuerySplittingBehavior? querySplittingBehavior
+    )
     {
         _querySplittingBehavior = querySplittingBehavior ?? QuerySplittingBehavior.SingleQuery;
     }
@@ -32,11 +34,15 @@ public class SelectExpressionProjectionApplyingExpressionVisitor : ExpressionVis
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override Expression VisitExtension(Expression extensionExpression)
-        => extensionExpression is ShapedQueryExpression shapedQueryExpression
-            && shapedQueryExpression.QueryExpression is SelectExpression selectExpression
-                ? shapedQueryExpression.UpdateShaperExpression(
-                    selectExpression.ApplyProjection(
-                        shapedQueryExpression.ShaperExpression, shapedQueryExpression.ResultCardinality, _querySplittingBehavior))
-                : base.VisitExtension(extensionExpression);
+    protected override Expression VisitExtension(Expression extensionExpression) =>
+        extensionExpression is ShapedQueryExpression shapedQueryExpression
+        && shapedQueryExpression.QueryExpression is SelectExpression selectExpression
+            ? shapedQueryExpression.UpdateShaperExpression(
+                selectExpression.ApplyProjection(
+                    shapedQueryExpression.ShaperExpression,
+                    shapedQueryExpression.ResultCardinality,
+                    _querySplittingBehavior
+                )
+            )
+            : base.VisitExtension(extensionExpression);
 }

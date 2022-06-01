@@ -44,31 +44,32 @@ namespace Microsoft.Extensions.Hosting.Tests
                 IHostBuilder hostBuilderFromEvent = null;
                 IHost hostFromEvent = null;
 
-                var listener = new HostingListener((pair) =>
-                {
-                    if (pair.Key == "HostBuilding")
+                var listener = new HostingListener(
+                    (pair) =>
                     {
-                        hostBuilderFromEvent = (IHostBuilder)pair.Value;
-
-                        hostBuilderFromEvent.ConfigureHostConfiguration(configBuilder =>
+                        if (pair.Key == "HostBuilding")
                         {
-                            configBuilder.AddInMemoryCollection(new KeyValuePair<string, string>[]
+                            hostBuilderFromEvent = (IHostBuilder)pair.Value;
+
+                            hostBuilderFromEvent.ConfigureHostConfiguration(configBuilder =>
                             {
-                                new("foo", "bar" ),
+                                configBuilder.AddInMemoryCollection(
+                                    new KeyValuePair<string, string>[] { new("foo", "bar"), }
+                                );
                             });
-                        });
 
-                        hostBuilderFromEvent.ConfigureServices(services =>
+                            hostBuilderFromEvent.ConfigureServices(services =>
+                            {
+                                services.AddSingleton(serviceA);
+                            });
+                        }
+
+                        if (pair.Key == "HostBuilt")
                         {
-                            services.AddSingleton(serviceA);
-                        });
+                            hostFromEvent = (IHost)pair.Value;
+                        }
                     }
-
-                    if (pair.Key == "HostBuilt")
-                    {
-                        hostFromEvent = (IHost)pair.Value;
-                    }
-                });
+                );
 
                 using var _ = DiagnosticListener.AllListeners.Subscribe(listener);
 
@@ -87,23 +88,27 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var _ = RemoteExecutor.Invoke(() =>
             {
-                var listener = new HostingListener((pair) =>
-                {
-                    if (pair.Key != "HostBuilding")
+                var listener = new HostingListener(
+                    (pair) =>
                     {
-                        return;
-                    }
-
-                    var hostBuilder = (IHostBuilder)pair.Value;
-
-                    hostBuilder.ConfigureHostConfiguration(configBuilder =>
-                    {
-                        configBuilder.AddInMemoryCollection(new KeyValuePair<string, string>[]
+                        if (pair.Key != "HostBuilding")
                         {
-                            new(HostDefaults.ApplicationKey, "Changed Name" ),
+                            return;
+                        }
+
+                        var hostBuilder = (IHostBuilder)pair.Value;
+
+                        hostBuilder.ConfigureHostConfiguration(configBuilder =>
+                        {
+                            configBuilder.AddInMemoryCollection(
+                                new KeyValuePair<string, string>[]
+                                {
+                                    new(HostDefaults.ApplicationKey, "Changed Name"),
+                                }
+                            );
                         });
-                    });
-                });
+                    }
+                );
 
                 using var _ = DiagnosticListener.AllListeners.Subscribe(listener);
 
@@ -117,22 +122,24 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var _ = RemoteExecutor.Invoke(() =>
             {
-                var listener = new HostingListener((pair) =>
-                {
-                    if (pair.Key != "HostBuilding")
+                var listener = new HostingListener(
+                    (pair) =>
                     {
-                        return;
+                        if (pair.Key != "HostBuilding")
+                        {
+                            return;
+                        }
+
+                        var hostBuilder = (IHostBuilder)pair.Value;
+
+                        hostBuilder.UseServiceProviderFactory(new FakeServiceProviderFactory());
+
+                        hostBuilder.ConfigureContainer<FakeServiceCollection>(fakeServices =>
+                        {
+                            fakeServices.State = "Hi!";
+                        });
                     }
-
-                    var hostBuilder = (IHostBuilder)pair.Value;
-
-                    hostBuilder.UseServiceProviderFactory(new FakeServiceProviderFactory());
-
-                    hostBuilder.ConfigureContainer<FakeServiceCollection>(fakeServices =>
-                    {
-                        fakeServices.State = "Hi!";
-                    });
-                });
+                );
 
                 using var _ = DiagnosticListener.AllListeners.Subscribe(listener);
 
@@ -150,17 +157,18 @@ namespace Microsoft.Extensions.Hosting.Tests
             HostApplicationBuilder builder = CreateEmptyBuilder();
 
             builder.Configuration.AddInMemoryCollection(
-                    new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key1", "value1")
-                    });
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("key1", "value1")
+                }
+            );
 
             builder.Configuration.AddInMemoryCollection(
-                    new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key2", "value2")
-                    });
-
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("key2", "value2")
+                }
+            );
 
             using IHost host = builder.Build();
 
@@ -171,10 +179,11 @@ namespace Microsoft.Extensions.Hosting.Tests
             Assert.Equal("value2", config["key2"]);
 
             builder.Configuration.AddInMemoryCollection(
-                    new KeyValuePair<string, string>[]
-                    {
-                        new KeyValuePair<string, string>("key2", "value3")
-                    });
+                new KeyValuePair<string, string>[]
+                {
+                    new KeyValuePair<string, string>("key2", "value3")
+                }
+            );
 
             Assert.Equal("value1", config["key1"]);
             Assert.Equal("value3", config["key2"]);
@@ -211,7 +220,9 @@ namespace Microsoft.Extensions.Hosting.Tests
 #error TFMs need to be updated
 #endif
             Assert.Equal(AppContext.BaseDirectory, builder.Environment.ContentRootPath);
-            Assert.IsAssignableFrom<PhysicalFileProvider>(builder.Environment.ContentRootFileProvider);
+            Assert.IsAssignableFrom<PhysicalFileProvider>(
+                builder.Environment.ContentRootFileProvider
+            );
 
             using IHost host = builder.Build();
 
@@ -234,17 +245,21 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var config = new ConfigurationManager();
 
-            config.AddInMemoryCollection(new KeyValuePair<string, string>[]
-            {
-                new(HostDefaults.ApplicationKey, "AppA" ),
-                new(HostDefaults.EnvironmentKey, "EnvA" ),
-            });
+            config.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new(HostDefaults.ApplicationKey, "AppA"),
+                    new(HostDefaults.EnvironmentKey, "EnvA"),
+                }
+            );
 
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                Configuration = config,
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    Configuration = config,
+                }
+            );
 
             Assert.Equal("AppA", builder.Configuration[HostDefaults.ApplicationKey]);
             Assert.Equal("EnvA", builder.Configuration[HostDefaults.EnvironmentKey]);
@@ -264,19 +279,23 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var config = new ConfigurationManager();
 
-            config.AddInMemoryCollection(new KeyValuePair<string, string>[]
-            {
-                new(HostDefaults.ApplicationKey, "AppA" ),
-                new(HostDefaults.EnvironmentKey, "EnvA" ),
-            });
+            config.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new(HostDefaults.ApplicationKey, "AppA"),
+                    new(HostDefaults.EnvironmentKey, "EnvA"),
+                }
+            );
 
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                Configuration = config,
-                ApplicationName = "AppB",
-                EnvironmentName = "EnvB",
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    Configuration = config,
+                    ApplicationName = "AppB",
+                    EnvironmentName = "EnvB",
+                }
+            );
 
             Assert.Equal("AppB", builder.Configuration[HostDefaults.ApplicationKey]);
             Assert.Equal("EnvB", builder.Configuration[HostDefaults.EnvironmentKey]);
@@ -296,23 +315,29 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             using var config = new ConfigurationManager();
 
-            config.AddInMemoryCollection(new KeyValuePair<string, string>[]
-            {
-                new(HostDefaults.ApplicationKey, "AppA" ),
-                new(HostDefaults.EnvironmentKey, "EnvA" ),
-            });
+            config.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new(HostDefaults.ApplicationKey, "AppA"),
+                    new(HostDefaults.EnvironmentKey, "EnvA"),
+                }
+            );
 
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                Configuration = config,
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    Configuration = config,
+                }
+            );
 
-            config.AddInMemoryCollection(new KeyValuePair<string, string>[]
-            {
-                new(HostDefaults.ApplicationKey, "AppB" ),
-                new(HostDefaults.EnvironmentKey, "EnvB" ),
-            });
+            config.AddInMemoryCollection(
+                new KeyValuePair<string, string>[]
+                {
+                    new(HostDefaults.ApplicationKey, "AppB"),
+                    new(HostDefaults.EnvironmentKey, "EnvB"),
+                }
+            );
 
             Assert.Equal("AppB", builder.Configuration[HostDefaults.ApplicationKey]);
             Assert.Equal("EnvB", builder.Configuration[HostDefaults.EnvironmentKey]);
@@ -336,11 +361,13 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void ContentRootConfiguresBasePath()
         {
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                ContentRootPath = "/",
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    ContentRootPath = "/",
+                }
+            );
 
             using IHost host = builder.Build();
             Assert.Equal("/", host.Services.GetService<IHostEnvironment>().ContentRootPath);
@@ -359,17 +386,19 @@ namespace Microsoft.Extensions.Hosting.Tests
             var config = new ConfigurationManager();
             config.AddInMemoryCollection(parameters);
 
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                Configuration = config
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    Configuration = config
+                }
+            );
 
             Assert.Equal("MyProjectReference", builder.Environment.ApplicationName);
             Assert.Equal(Environments.Development, builder.Environment.EnvironmentName);
             Assert.Equal(Path.GetFullPath("."), builder.Environment.ContentRootPath);
 
-            using IHost host = builder.Build(); 
+            using IHost host = builder.Build();
             var env = host.Services.GetRequiredService<IHostEnvironment>();
 
             Assert.Equal("MyProjectReference", env.ApplicationName);
@@ -380,14 +409,19 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void RelativeContentRootIsResolved()
         {
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                ContentRootPath = "testroot",
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    ContentRootPath = "testroot",
+                }
+            );
 
             Assert.True(Path.IsPathRooted(builder.Environment.ContentRootPath));
-            Assert.EndsWith(Path.DirectorySeparatorChar + "testroot", builder.Environment.ContentRootPath);
+            Assert.EndsWith(
+                Path.DirectorySeparatorChar + "testroot",
+                builder.Environment.ContentRootPath
+            );
         }
 
         [Fact]
@@ -426,12 +460,19 @@ namespace Microsoft.Extensions.Hosting.Tests
         public static IEnumerable<object[]> ConfigureHostOptionsTestInput = new[]
         {
             new object[] { BackgroundServiceExceptionBehavior.Ignore, TimeSpan.FromDays(3) },
-            new object[] { BackgroundServiceExceptionBehavior.StopHost, TimeSpan.FromTicks(long.MaxValue) },
+            new object[]
+            {
+                BackgroundServiceExceptionBehavior.StopHost,
+                TimeSpan.FromTicks(long.MaxValue)
+            },
         };
 
         [Theory]
         [MemberData(nameof(ConfigureHostOptionsTestInput))]
-        public void CanConfigureHostOptionsWithDefaults(BackgroundServiceExceptionBehavior testBehavior, TimeSpan testShutdown)
+        public void CanConfigureHostOptionsWithDefaults(
+            BackgroundServiceExceptionBehavior testBehavior,
+            TimeSpan testShutdown
+        )
         {
             var builder = new HostApplicationBuilder();
 
@@ -459,16 +500,18 @@ namespace Microsoft.Extensions.Hosting.Tests
             builder.Services.AddTransient<ServiceD>();
             builder.Services.AddScoped<ServiceC>();
 
-            var factory = new DefaultServiceProviderFactory(new ServiceProviderOptions
-            {
-                ValidateScopes = true
-            });
+            var factory = new DefaultServiceProviderFactory(
+                new ServiceProviderOptions { ValidateScopes = true }
+            );
 
             builder.ConfigureContainer(factory);
 
             IHost host = builder.Build();
 
-            Assert.Throws<InvalidOperationException>(() => { host.Services.GetRequiredService<ServiceC>(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                host.Services.GetRequiredService<ServiceC>();
+            });
         }
 
         [Fact]
@@ -479,14 +522,16 @@ namespace Microsoft.Extensions.Hosting.Tests
             builder.Services.AddTransient<ServiceD>();
             builder.Services.AddScoped<ServiceC>();
 
-            builder.ConfigureContainer(new FakeServiceProviderFactory(), container => container.State = "Hi!");
+            builder.ConfigureContainer(
+                new FakeServiceProviderFactory(),
+                container => container.State = "Hi!"
+            );
 
             using IHost host = builder.Build();
 
             var fakeServices = host.Services.GetRequiredService<FakeServiceCollection>();
             Assert.Equal("Hi!", fakeServices.State);
         }
-
 
         [Fact]
         public void Build_DoesNotAllowBuildingMuiltipleTimes()
@@ -502,11 +547,13 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public void SetsFullPathToContentRoot()
         {
-            var builder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-                ContentRootPath = Path.GetFullPath(".")
-            });
+            var builder = new HostApplicationBuilder(
+                new HostApplicationBuilderSettings
+                {
+                    DisableDefaults = true,
+                    ContentRootPath = Path.GetFullPath(".")
+                }
+            );
 
             using IHost host = builder.Build();
             var env = host.Services.GetRequiredService<IHostEnvironment>();
@@ -522,11 +569,13 @@ namespace Microsoft.Extensions.Hosting.Tests
             using IHost host = builder.Build();
 
             Type type = builder.GetType();
-            FieldInfo field = type.GetField("_appServices", BindingFlags.Instance | BindingFlags.NonPublic)!;
+            FieldInfo field = type.GetField(
+                "_appServices",
+                BindingFlags.Instance | BindingFlags.NonPublic
+            )!;
             var appServicesFromHostBuilder = (IServiceProvider)field.GetValue(builder)!;
             Assert.Same(appServicesFromHostBuilder, host.Services);
         }
-
 
         [Fact]
         public void HostApplicationBuilderThrowsExceptionIfServicesAlreadyBuilt()
@@ -534,22 +583,29 @@ namespace Microsoft.Extensions.Hosting.Tests
             HostApplicationBuilder builder = CreateEmptyBuilder();
             using IHost host = builder.Build();
 
-            Assert.Throws<InvalidOperationException>(() => builder.Services.AddSingleton(new ServiceA()));
-            Assert.Throws<InvalidOperationException>(() => builder.Services.Remove(ServiceDescriptor.Singleton(new ServiceA())));
-            Assert.Throws<InvalidOperationException>(() => builder.Services[0] = ServiceDescriptor.Singleton(new ServiceA()));
+            Assert.Throws<InvalidOperationException>(
+                () => builder.Services.AddSingleton(new ServiceA())
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => builder.Services.Remove(ServiceDescriptor.Singleton(new ServiceA()))
+            );
+            Assert.Throws<InvalidOperationException>(
+                () => builder.Services[0] = ServiceDescriptor.Singleton(new ServiceA())
+            );
             Assert.Throws<InvalidOperationException>(() => builder.Services.Clear());
             Assert.Throws<InvalidOperationException>(() => builder.Services.RemoveAt(0));
         }
 
         private static HostApplicationBuilder CreateEmptyBuilder()
         {
-            return new HostApplicationBuilder(new HostApplicationBuilderSettings
-            {
-                DisableDefaults = true,
-            });
+            return new HostApplicationBuilder(
+                new HostApplicationBuilderSettings { DisableDefaults = true, }
+            );
         }
 
-        private class HostingListener : IObserver<DiagnosticListener>, IObserver<KeyValuePair<string, object?>>
+        private class HostingListener
+            : IObserver<DiagnosticListener>,
+                IObserver<KeyValuePair<string, object?>>
         {
             private IDisposable? _disposable;
             private readonly Action<KeyValuePair<string, object?>> _callback;
@@ -559,8 +615,13 @@ namespace Microsoft.Extensions.Hosting.Tests
                 _callback = callback;
             }
 
-            public void OnCompleted() { _disposable?.Dispose(); }
+            public void OnCompleted()
+            {
+                _disposable?.Dispose();
+            }
+
             public void OnError(Exception error) { }
+
             public void OnNext(DiagnosticListener value)
             {
                 if (value.Name == "Microsoft.Extensions.Hosting")

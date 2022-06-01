@@ -18,7 +18,12 @@ namespace ILCompiler.Dataflow
             return method.OwningType.IsTypeOf(ns, name);
         }
 
-        public static bool HasParameterOfType(this MethodDesc method, int index, string ns, string name)
+        public static bool HasParameterOfType(
+            this MethodDesc method,
+            int index,
+            string ns,
+            string name
+        )
         {
             return index < method.Signature.Length && method.Signature[index].IsTypeOf(ns, name);
         }

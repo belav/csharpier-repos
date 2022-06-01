@@ -12,15 +12,11 @@ namespace System.Formats.Tar
     {
         // Constructor used when reading an existing archive.
         internal PosixTarEntry(TarHeader header, TarReader readerOfOrigin)
-            : base(header, readerOfOrigin)
-        {
-        }
+            : base(header, readerOfOrigin) { }
 
         // Constructor called when creating a new 'TarEntry*' instance that can be passed to a TarWriter.
         internal PosixTarEntry(TarEntryType entryType, string entryName, TarFormat format)
-            : base(entryType, entryName, format)
-        {
-        }
+            : base(entryType, entryName, format) { }
 
         /// <summary>
         /// When the current entry represents a character device or a block device, the major number identifies the driver associated with the device.
@@ -33,7 +29,11 @@ namespace System.Formats.Tar
             get => _header._devMajor;
             set
             {
-                if (_header._typeFlag is not TarEntryType.BlockDevice and not TarEntryType.CharacterDevice)
+                if (
+                    _header._typeFlag
+                    is not TarEntryType.BlockDevice
+                        and not TarEntryType.CharacterDevice
+                )
                 {
                     throw new InvalidOperationException(SR.TarEntryBlockOrCharacterExpected);
                 }
@@ -57,7 +57,11 @@ namespace System.Formats.Tar
             get => _header._devMinor;
             set
             {
-                if (_header._typeFlag is not TarEntryType.BlockDevice and not TarEntryType.CharacterDevice)
+                if (
+                    _header._typeFlag
+                    is not TarEntryType.BlockDevice
+                        and not TarEntryType.CharacterDevice
+                )
                 {
                     throw new InvalidOperationException(SR.TarEntryBlockOrCharacterExpected);
                 }

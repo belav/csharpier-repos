@@ -16,8 +16,10 @@ namespace ILCompiler.Metadata
 {
     partial class Transform<TPolicy>
     {
-        internal EntityMap<Cts.FieldDesc, MetadataRecord> _fields =
-            new EntityMap<Cts.FieldDesc, MetadataRecord>(EqualityComparer<Cts.FieldDesc>.Default);
+        internal EntityMap<Cts.FieldDesc, MetadataRecord> _fields = new EntityMap<
+            Cts.FieldDesc,
+            MetadataRecord
+        >(EqualityComparer<Cts.FieldDesc>.Default);
 
         private Action<Cts.FieldDesc, Field> _initFieldDef;
         private Action<Cts.FieldDesc, MemberReference> _initFieldRef;
@@ -41,7 +43,11 @@ namespace ILCompiler.Metadata
         {
             Debug.Assert(field.GetTypicalFieldDefinition() == field);
             Debug.Assert(_policy.GeneratesMetadata(field));
-            return (Field)_fields.GetOrCreate(field, _initFieldDef ?? (_initFieldDef = InitializeFieldDefinition));
+            return (Field)
+                _fields.GetOrCreate(
+                    field,
+                    _initFieldDef ?? (_initFieldDef = InitializeFieldDefinition)
+                );
         }
 
         private void InitializeFieldDefinition(Cts.FieldDesc entity, Field record)
@@ -65,10 +71,14 @@ namespace ILCompiler.Metadata
                     record.DefaultValue = HandleConstant(ecmaField.Module, defaultValueHandle);
                 }
 
-                Ecma.CustomAttributeHandleCollection customAttributes = fieldDef.GetCustomAttributes();
+                Ecma.CustomAttributeHandleCollection customAttributes =
+                    fieldDef.GetCustomAttributes();
                 if (customAttributes.Count > 0)
                 {
-                    record.CustomAttributes = HandleCustomAttributes(ecmaField.Module, customAttributes);
+                    record.CustomAttributes = HandleCustomAttributes(
+                        ecmaField.Module,
+                        customAttributes
+                    );
                 }
 
                 int offset = fieldDef.GetOffset();
@@ -79,7 +89,11 @@ namespace ILCompiler.Metadata
 
         private MemberReference HandleFieldReference(Cts.FieldDesc field)
         {
-            return (MemberReference)_fields.GetOrCreate(field, _initFieldRef ?? (_initFieldRef = InitializeFieldReference));
+            return (MemberReference)
+                _fields.GetOrCreate(
+                    field,
+                    _initFieldRef ?? (_initFieldRef = InitializeFieldReference)
+                );
         }
 
         private void InitializeFieldReference(Cts.FieldDesc entity, MemberReference record)

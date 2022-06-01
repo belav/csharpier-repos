@@ -19,7 +19,6 @@ namespace AutoMapper.UnitTests.Bug
             public string Name { get; set; }
         }
 
-
         public class FooDto
         {
             public int Id { get; set; }
@@ -31,20 +30,17 @@ namespace AutoMapper.UnitTests.Bug
             public string Name { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Bar, BarDto>();
-            cfg.CreateMap<Foo, FooDto>()
-                .ForMember(dest => dest.Bar, opts => opts.NullSubstitute(new Bar()));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Bar, BarDto>();
+                cfg.CreateMap<Foo, FooDto>()
+                    .ForMember(dest => dest.Bar, opts => opts.NullSubstitute(new Bar()));
+            });
 
         protected override void Because_of()
         {
-            _destination = Mapper.Map<Foo, FooDto>(new Foo()
-            {
-                Id = 5,
-                Bar = null
-            });
+            _destination = Mapper.Map<Foo, FooDto>(new Foo() { Id = 5, Bar = null });
         }
 
         [Fact]

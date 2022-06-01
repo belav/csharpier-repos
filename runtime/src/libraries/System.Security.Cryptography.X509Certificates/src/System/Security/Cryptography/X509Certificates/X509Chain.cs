@@ -70,7 +70,9 @@ namespace System.Security.Cryptography.X509Certificates
                 // We give the user a reference to the array since we'll never access it.
                 X509ChainStatus[]? chainStatus = _lazyChainStatus;
                 if (chainStatus == null)
-                    chainStatus = _lazyChainStatus = (_pal == null ? Array.Empty<X509ChainStatus>() : _pal.ChainStatus!);
+                    chainStatus = _lazyChainStatus = (
+                        _pal == null ? Array.Empty<X509ChainStatus>() : _pal.ChainStatus!
+                    );
                 return chainStatus;
             }
         }
@@ -112,18 +114,30 @@ namespace System.Security.Cryptography.X509Certificates
             lock (_syncRoot)
             {
                 if (certificate == null || certificate.Pal == null)
-                    throw new ArgumentException(SR.Cryptography_InvalidContextHandle, nameof(certificate));
+                    throw new ArgumentException(
+                        SR.Cryptography_InvalidContextHandle,
+                        nameof(certificate)
+                    );
 
                 if (_chainPolicy != null && _chainPolicy.CustomTrustStore != null)
                 {
-                    if (_chainPolicy.TrustMode == X509ChainTrustMode.System && _chainPolicy.CustomTrustStore.Count > 0)
-                        throw new CryptographicException(SR.Cryptography_CustomTrustCertsInSystemMode, nameof(_chainPolicy.TrustMode));
+                    if (
+                        _chainPolicy.TrustMode == X509ChainTrustMode.System
+                        && _chainPolicy.CustomTrustStore.Count > 0
+                    )
+                        throw new CryptographicException(
+                            SR.Cryptography_CustomTrustCertsInSystemMode,
+                            nameof(_chainPolicy.TrustMode)
+                        );
 
                     foreach (X509Certificate2 customCertificate in _chainPolicy.CustomTrustStore)
                     {
                         if (customCertificate == null || customCertificate.Handle == IntPtr.Zero)
                         {
-                            throw new CryptographicException(SR.Cryptography_InvalidTrustCertificate, nameof(_chainPolicy.CustomTrustStore));
+                            throw new CryptographicException(
+                                SR.Cryptography_InvalidTrustCertificate,
+                                nameof(_chainPolicy.CustomTrustStore)
+                            );
                         }
                     }
                 }
@@ -143,7 +157,8 @@ namespace System.Security.Cryptography.X509Certificates
                     chainPolicy.TrustMode,
                     chainPolicy.VerificationTime,
                     chainPolicy.UrlRetrievalTimeout,
-                    chainPolicy.DisableCertificateDownloads);
+                    chainPolicy.DisableCertificateDownloads
+                );
 
                 if (_pal == null)
                     return false;
@@ -151,7 +166,10 @@ namespace System.Security.Cryptography.X509Certificates
                 _chainElements = new X509ChainElementCollection(_pal.ChainElements!);
 
                 Exception? verificationException;
-                bool? verified = _pal.Verify(chainPolicy.VerificationFlags, out verificationException);
+                bool? verified = _pal.Verify(
+                    chainPolicy.VerificationFlags,
+                    out verificationException
+                );
                 if (!verified.HasValue)
                 {
                     if (throwOnException)

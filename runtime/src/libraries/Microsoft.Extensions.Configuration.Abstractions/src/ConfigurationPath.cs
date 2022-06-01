@@ -54,7 +54,10 @@ namespace Microsoft.Extensions.Configuration
                 return path;
             }
 
-            int lastDelimiterIndex = path.LastIndexOf(KeyDelimiter, StringComparison.OrdinalIgnoreCase);
+            int lastDelimiterIndex = path.LastIndexOf(
+                KeyDelimiter,
+                StringComparison.OrdinalIgnoreCase
+            );
             return lastDelimiterIndex == -1 ? path : path.Substring(lastDelimiterIndex + 1);
         }
 
@@ -70,7 +73,10 @@ namespace Microsoft.Extensions.Configuration
                 return null;
             }
 
-            int lastDelimiterIndex = path.LastIndexOf(KeyDelimiter, StringComparison.OrdinalIgnoreCase);
+            int lastDelimiterIndex = path.LastIndexOf(
+                KeyDelimiter,
+                StringComparison.OrdinalIgnoreCase
+            );
             return lastDelimiterIndex == -1 ? null : path.Substring(0, lastDelimiterIndex);
         }
     }

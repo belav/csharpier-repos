@@ -16,9 +16,13 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Workspace workspace,
             Document document,
             TextSpan span,
-            bool includeSuppressedDiagnostics = false)
+            bool includeSuppressedDiagnostics = false
+        )
         {
-            var testDriver = new TestDiagnosticAnalyzerDriver(workspace, includeSuppressedDiagnostics);
+            var testDriver = new TestDiagnosticAnalyzerDriver(
+                workspace,
+                includeSuppressedDiagnostics
+            );
             return await testDriver.GetAllDiagnosticsAsync(document, span);
         }
 
@@ -26,18 +30,26 @@ namespace Microsoft.CodeAnalysis.UnitTests.Diagnostics
             Workspace workspace,
             Document document,
             TextSpan span,
-            bool includeSuppressedDiagnostics = false)
+            bool includeSuppressedDiagnostics = false
+        )
         {
-            var testDriver = new TestDiagnosticAnalyzerDriver(workspace, includeSuppressedDiagnostics);
+            var testDriver = new TestDiagnosticAnalyzerDriver(
+                workspace,
+                includeSuppressedDiagnostics
+            );
             return await testDriver.GetDocumentDiagnosticsAsync(document, span);
         }
 
         public static async Task<IEnumerable<Diagnostic>> GetProjectDiagnosticsAsync(
             Workspace workspace,
             Project project,
-            bool includeSuppressedDiagnostics = false)
+            bool includeSuppressedDiagnostics = false
+        )
         {
-            var testDriver = new TestDiagnosticAnalyzerDriver(workspace, includeSuppressedDiagnostics);
+            var testDriver = new TestDiagnosticAnalyzerDriver(
+                workspace,
+                includeSuppressedDiagnostics
+            );
             return await testDriver.GetProjectDiagnosticsAsync(project);
         }
     }

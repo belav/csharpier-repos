@@ -22,7 +22,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
         switch (extensionExpression)
         {
             case ShapedQueryExpression shapedQueryExpression:
-                return shapedQueryExpression.UpdateQueryExpression(Visit(shapedQueryExpression.QueryExpression));
+                return shapedQueryExpression.UpdateQueryExpression(
+                    Visit(shapedQueryExpression.QueryExpression)
+                );
 
             case AtTimeZoneExpression atTimeZoneExpression:
                 return VisitAtTimeZone(atTimeZoneExpression);
@@ -117,7 +119,6 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
 
         return base.VisitExtension(extensionExpression);
     }
-
 
     /// <summary>
     ///     Visits the children of the sql "at time zone" expression.
@@ -250,7 +251,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     /// </summary>
     /// <param name="tableValuedFunctionExpression">The expression to visit.</param>
     /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-    protected abstract Expression VisitTableValuedFunction(TableValuedFunctionExpression tableValuedFunctionExpression);
+    protected abstract Expression VisitTableValuedFunction(
+        TableValuedFunctionExpression tableValuedFunctionExpression
+    );
 
     /// <summary>
     ///     Visits the children of the row number expression.
@@ -264,7 +267,9 @@ public abstract class SqlExpressionVisitor : ExpressionVisitor
     /// </summary>
     /// <param name="scalarSubqueryExpression">The expression to visit.</param>
     /// <returns>The modified expression, if it or any subexpression was modified; otherwise, returns the original expression.</returns>
-    protected abstract Expression VisitScalarSubquery(ScalarSubqueryExpression scalarSubqueryExpression);
+    protected abstract Expression VisitScalarSubquery(
+        ScalarSubqueryExpression scalarSubqueryExpression
+    );
 
     /// <summary>
     ///     Visits the children of the select expression.

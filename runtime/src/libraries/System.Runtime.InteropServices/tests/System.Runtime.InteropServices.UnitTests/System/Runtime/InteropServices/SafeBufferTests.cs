@@ -20,15 +20,24 @@ namespace System.Runtime.InteropServices.Tests
         public void Initialize_InvalidNumBytes_ThrowsArgumentOutOfRangeException()
         {
             var buffer = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("numBytes", () => buffer.Initialize(ulong.MaxValue));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "numBytes",
+                () => buffer.Initialize(ulong.MaxValue)
+            );
         }
 
         [Fact]
         public void Initialize_NumBytesTimesSizeOfEachElement_ThrowsArgumentOutOfRangeExceptionIfNot64Bit()
         {
             var buffer = new SubBuffer(true);
-            AssertExtensions.ThrowsIf<ArgumentOutOfRangeException>(!Environment.Is64BitProcess, () => buffer.Initialize(uint.MaxValue, uint.MaxValue));
-            AssertExtensions.ThrowsIf<ArgumentOutOfRangeException>(!Environment.Is64BitProcess, () => buffer.Initialize<int>(uint.MaxValue));
+            AssertExtensions.ThrowsIf<ArgumentOutOfRangeException>(
+                !Environment.Is64BitProcess,
+                () => buffer.Initialize(uint.MaxValue, uint.MaxValue)
+            );
+            AssertExtensions.ThrowsIf<ArgumentOutOfRangeException>(
+                !Environment.Is64BitProcess,
+                () => buffer.Initialize<int>(uint.MaxValue)
+            );
         }
 
         [Fact]
@@ -77,15 +86,24 @@ namespace System.Runtime.InteropServices.Tests
             buffer.Initialize(4);
 
             AssertExtensions.Throws<ArgumentException>(null, () => buffer.Read<int>(byteOffset));
-            AssertExtensions.Throws<ArgumentException>(null, () => buffer.Write<int>(byteOffset, 2));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => buffer.Write<int>(byteOffset, 2)
+            );
         }
 
         [Fact]
         public void ReadArray_NullArray_ThrowsArgumentNullException()
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentNullException>("array", () => wrapper.ReadArray<int>(0, null, 0, 0));
-            AssertExtensions.Throws<ArgumentNullException>("array", () => wrapper.WriteArray<int>(0, null, 0, 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => wrapper.ReadArray<int>(0, null, 0, 0)
+            );
+            AssertExtensions.Throws<ArgumentNullException>(
+                "array",
+                () => wrapper.WriteArray<int>(0, null, 0, 0)
+            );
         }
 
         [Fact]
@@ -102,16 +120,28 @@ namespace System.Runtime.InteropServices.Tests
         public void ReadArray_NegativeIndex_ThrowsArgumentOutOfRangeException()
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => wrapper.ReadArray(0, new int[0], -1, 0));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("index", () => wrapper.WriteArray(0, new int[0], -1, 0));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => wrapper.ReadArray(0, new int[0], -1, 0)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "index",
+                () => wrapper.WriteArray(0, new int[0], -1, 0)
+            );
         }
 
         [Fact]
         public void ReadWriteArray_NegativeCount_ThrowsArgumentOutOfRangeException()
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => wrapper.ReadArray(0, new int[0], 0, -1));
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("count", () => wrapper.WriteArray(0, new int[0], 0, -1));
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => wrapper.ReadArray(0, new int[0], 0, -1)
+            );
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "count",
+                () => wrapper.WriteArray(0, new int[0], 0, -1)
+            );
         }
 
         [Theory]
@@ -121,11 +151,21 @@ namespace System.Runtime.InteropServices.Tests
         [InlineData(2, 2, 1)]
         [InlineData(2, 1, 2)]
         [InlineData(2, 0, 3)]
-        public void ReadWriteArray_NegativeCount_ThrowsArgumentException(int arrayLength, int index, int count)
+        public void ReadWriteArray_NegativeCount_ThrowsArgumentException(
+            int arrayLength,
+            int index,
+            int count
+        )
         {
             var wrapper = new SubBuffer(true);
-            AssertExtensions.Throws<ArgumentException>(null, () => wrapper.ReadArray(0, new int[arrayLength], index, count));
-            AssertExtensions.Throws<ArgumentException>(null, () => wrapper.WriteArray(0, new int[arrayLength], index, count));
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => wrapper.ReadArray(0, new int[arrayLength], index, count)
+            );
+            AssertExtensions.Throws<ArgumentException>(
+                null,
+                () => wrapper.WriteArray(0, new int[arrayLength], index, count)
+            );
         }
 
         [Fact]
@@ -177,16 +217,35 @@ namespace System.Runtime.InteropServices.Tests
 
             TestStruct[] structArray = new TestStruct[]
             {
-                new TestStruct { I = 11, L = 22, D = 33 },
-                new TestStruct { I = 44, L = 55, D = 66 },
-                new TestStruct { I = 77, L = 88, D = 99 },
-                new TestStruct { I = 100, L = 200, D = 300 },
+                new TestStruct
+                {
+                    I = 11,
+                    L = 22,
+                    D = 33
+                },
+                new TestStruct
+                {
+                    I = 44,
+                    L = 55,
+                    D = 66
+                },
+                new TestStruct
+                {
+                    I = 77,
+                    L = 88,
+                    D = 99
+                },
+                new TestStruct
+                {
+                    I = 100,
+                    L = 200,
+                    D = 300
+                },
             };
             TestArray(structArray);
             TestSpan<TestStruct>(structArray);
 
-            void TestArray<T>(T[] data)
-                where T : struct
+            void TestArray<T>(T[] data) where T : struct
             {
                 T[] destination = new T[data.Length];
                 buffer.WriteArray(0, data, 0, data.Length);
@@ -194,8 +253,7 @@ namespace System.Runtime.InteropServices.Tests
                 Assert.Equal(data, destination);
             }
 
-            void TestSpan<T>(ReadOnlySpan<T> data)
-                where T : unmanaged
+            void TestSpan<T>(ReadOnlySpan<T> data) where T : unmanaged
             {
                 Span<T> destination = stackalloc T[data.Length];
                 buffer.WriteSpan(0, data);

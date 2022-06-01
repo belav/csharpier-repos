@@ -10,10 +10,8 @@ namespace Microsoft.AspNetCore.Server.HttpSys;
 
 internal sealed partial class UrlGroup : IDisposable
 {
-    private static readonly int BindingInfoSize =
-        Marshal.SizeOf<HttpApiTypes.HTTP_BINDING_INFO>();
-    private static readonly int QosInfoSize =
-        Marshal.SizeOf<HttpApiTypes.HTTP_QOS_SETTING_INFO>();
+    private static readonly int BindingInfoSize = Marshal.SizeOf<HttpApiTypes.HTTP_BINDING_INFO>();
+    private static readonly int QosInfoSize = Marshal.SizeOf<HttpApiTypes.HTTP_QOS_SETTING_INFO>();
     private static readonly int RequestPropertyInfoSize =
         Marshal.SizeOf<HttpApiTypes.HTTP_BINDING_INFO>();
 
@@ -33,7 +31,10 @@ internal sealed partial class UrlGroup : IDisposable
         ulong urlGroupId = 0;
         _created = true;
         var statusCode = HttpApi.HttpCreateUrlGroup(
-            _serverSession.Id.DangerousGetServerSessionId(), &urlGroupId, 0);
+            _serverSession.Id.DangerousGetServerSessionId(),
+            &urlGroupId,
+            0
+        );
 
         if (statusCode != UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
         {
@@ -56,7 +57,11 @@ internal sealed partial class UrlGroup : IDisposable
         qosSettings.QosType = HttpApiTypes.HTTP_QOS_SETTING_TYPE.HttpQosSettingTypeConnectionLimit;
         qosSettings.QosSetting = new IntPtr(&connectionLimit);
 
-        SetProperty(HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerQosProperty, new IntPtr(&qosSettings), (uint)QosInfoSize);
+        SetProperty(
+            HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerQosProperty,
+            new IntPtr(&qosSettings),
+            (uint)QosInfoSize
+        );
     }
 
     internal unsafe void SetDelegationProperty(RequestQueue destination)
@@ -65,7 +70,11 @@ internal sealed partial class UrlGroup : IDisposable
         propertyInfo.Flags = HttpApiTypes.HTTP_FLAGS.HTTP_PROPERTY_FLAG_PRESENT;
         propertyInfo.RequestQueueHandle = destination.Handle.DangerousGetHandle();
 
-        SetProperty(HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerDelegationProperty, new IntPtr(&propertyInfo), (uint)RequestPropertyInfoSize);
+        SetProperty(
+            HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerDelegationProperty,
+            new IntPtr(&propertyInfo),
+            (uint)RequestPropertyInfoSize
+        );
     }
 
     internal unsafe void UnSetDelegationProperty(RequestQueue destination, bool throwOnError = true)
@@ -74,10 +83,20 @@ internal sealed partial class UrlGroup : IDisposable
         propertyInfo.Flags = HttpApiTypes.HTTP_FLAGS.NONE;
         propertyInfo.RequestQueueHandle = destination.Handle.DangerousGetHandle();
 
-        SetProperty(HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerDelegationProperty, new IntPtr(&propertyInfo), (uint)RequestPropertyInfoSize, throwOnError);
+        SetProperty(
+            HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerDelegationProperty,
+            new IntPtr(&propertyInfo),
+            (uint)RequestPropertyInfoSize,
+            throwOnError
+        );
     }
 
-    internal void SetProperty(HttpApiTypes.HTTP_SERVER_PROPERTY property, IntPtr info, uint infosize, bool throwOnError = true)
+    internal void SetProperty(
+        HttpApiTypes.HTTP_SERVER_PROPERTY property,
+        IntPtr info,
+        uint infosize,
+        bool throwOnError = true
+    )
     {
         Debug.Assert(info != IntPtr.Zero, "SetUrlGroupProperty called with invalid pointer");
         CheckDisposed();
@@ -107,8 +126,11 @@ internal sealed partial class UrlGroup : IDisposable
 
         var infoptr = new IntPtr(&info);
 
-        SetProperty(HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
-            infoptr, (uint)BindingInfoSize);
+        SetProperty(
+            HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
+            infoptr,
+            (uint)BindingInfoSize
+        );
     }
 
     internal unsafe void DetachFromQueue()
@@ -126,8 +148,12 @@ internal sealed partial class UrlGroup : IDisposable
 
         var infoptr = new IntPtr(&info);
 
-        SetProperty(HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
-            infoptr, (uint)BindingInfoSize, throwOnError: false);
+        SetProperty(
+            HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerBindingProperty,
+            infoptr,
+            (uint)BindingInfoSize,
+            throwOnError: false
+        );
     }
 
     internal void RegisterPrefix(string uriPrefix, int contextId)
@@ -147,7 +173,11 @@ internal sealed partial class UrlGroup : IDisposable
                     unsafe
                     {
                         ulong urlGroupId;
-                        var findUrlStatusCode = HttpApi.HttpFindUrlGroupId(uriPrefix, _requestQueue.Handle, &urlGroupId);
+                        var findUrlStatusCode = HttpApi.HttpFindUrlGroupId(
+                            uriPrefix,
+                            _requestQueue.Handle,
+                            &urlGroupId
+                        );
                         if (findUrlStatusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_SUCCESS)
                         {
                             // Already registered for the desired queue, all good
@@ -156,11 +186,20 @@ internal sealed partial class UrlGroup : IDisposable
                     }
                 }
 
-                throw new HttpSysException((int)statusCode, Resources.FormatException_PrefixAlreadyRegistered(uriPrefix));
+                throw new HttpSysException(
+                    (int)statusCode,
+                    Resources.FormatException_PrefixAlreadyRegistered(uriPrefix)
+                );
             }
             if (statusCode == UnsafeNclNativeMethods.ErrorCodes.ERROR_ACCESS_DENIED)
             {
-                throw new HttpSysException((int)statusCode, Resources.FormatException_AccessDenied(uriPrefix, Environment.UserDomainName + @"\" + Environment.UserName));
+                throw new HttpSysException(
+                    (int)statusCode,
+                    Resources.FormatException_AccessDenied(
+                        uriPrefix,
+                        Environment.UserDomainName + @"\" + Environment.UserName
+                    )
+                );
             }
             throw new HttpSysException((int)statusCode);
         }
@@ -185,7 +224,6 @@ internal sealed partial class UrlGroup : IDisposable
 
         if (_created)
         {
-
             Debug.Assert(Id != 0, "HttpCloseUrlGroup called with invalid url group id");
 
             uint statusCode = HttpApi.HttpCloseUrlGroup(Id);
@@ -194,7 +232,6 @@ internal sealed partial class UrlGroup : IDisposable
             {
                 Log.CloseUrlGroupError(_logger, statusCode);
             }
-
         }
 
         Id = 0;

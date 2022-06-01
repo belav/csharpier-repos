@@ -30,7 +30,10 @@ namespace System.Security.Cryptography.X509Certificates
             return certificate.GetPrivateKey<DSA>();
         }
 
-        public static X509Certificate2 CopyWithPrivateKey(this X509Certificate2 certificate, DSA privateKey)
+        public static X509Certificate2 CopyWithPrivateKey(
+            this X509Certificate2 certificate,
+            DSA privateKey
+        )
         {
             ArgumentNullException.ThrowIfNull(certificate);
             ArgumentNullException.ThrowIfNull(privateKey);
@@ -46,12 +49,17 @@ namespace System.Security.Cryptography.X509Certificates
                 DSAParameters currentParameters = publicKey.ExportParameters(false);
                 DSAParameters newParameters = privateKey.ExportParameters(false);
 
-                if (!currentParameters.G.ContentsEqual(newParameters.G) ||
-                    !currentParameters.P.ContentsEqual(newParameters.P) ||
-                    !currentParameters.Q.ContentsEqual(newParameters.Q) ||
-                    !currentParameters.Y.ContentsEqual(newParameters.Y))
+                if (
+                    !currentParameters.G.ContentsEqual(newParameters.G)
+                    || !currentParameters.P.ContentsEqual(newParameters.P)
+                    || !currentParameters.Q.ContentsEqual(newParameters.Q)
+                    || !currentParameters.Y.ContentsEqual(newParameters.Y)
+                )
                 {
-                    throw new ArgumentException(SR.Cryptography_PrivateKey_DoesNotMatch, nameof(privateKey));
+                    throw new ArgumentException(
+                        SR.Cryptography_PrivateKey_DoesNotMatch,
+                        nameof(privateKey)
+                    );
                 }
             }
 

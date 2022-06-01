@@ -16,12 +16,13 @@ public class JsonResultTests
     public async Task JsonResult_ExecuteAsync_WithNullValue_Works()
     {
         // Arrange
-        var result = new JsonHttpResult<object>(value: null, statusCode: 411, jsonSerializerOptions: null);
+        var result = new JsonHttpResult<object>(
+            value: null,
+            statusCode: 411,
+            jsonSerializerOptions: null
+        );
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -34,12 +35,13 @@ public class JsonResultTests
     public async Task JsonResult_ExecuteAsync_SetsStatusCode()
     {
         // Arrange
-        var result = new JsonHttpResult<object>(value: null, statusCode: 407, jsonSerializerOptions: null);
+        var result = new JsonHttpResult<object>(
+            value: null,
+            statusCode: 407,
+            jsonSerializerOptions: null
+        );
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -52,15 +54,16 @@ public class JsonResultTests
     public async Task JsonResult_ExecuteAsync_JsonSerializesBody()
     {
         // Arrange
-        var result = new JsonHttpResult<string>(value: "Hello", statusCode: 407, jsonSerializerOptions: null);
+        var result = new JsonHttpResult<string>(
+            value: "Hello",
+            statusCode: 407,
+            jsonSerializerOptions: null
+        );
         var stream = new MemoryStream();
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -77,7 +80,12 @@ public class JsonResultTests
         var jsonOptions = new JsonSerializerOptions()
         {
             WriteIndented = true,
-            DefaultIgnoreCondition = System.Text.Json.Serialization.JsonIgnoreCondition.WhenWritingNull
+            DefaultIgnoreCondition = System
+                .Text
+                .Json
+                .Serialization
+                .JsonIgnoreCondition
+                .WhenWritingNull
         };
         var value = new Todo(10, "MyName") { Description = null };
         var result = new JsonHttpResult<object>(value, jsonSerializerOptions: jsonOptions);
@@ -85,10 +93,7 @@ public class JsonResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -104,7 +109,10 @@ public class JsonResultTests
         Assert.Equal(value.Description, responseDetails.Description);
 
         stream.Position = 0;
-        Assert.Equal(JsonSerializer.Serialize(value, options: jsonOptions), Encoding.UTF8.GetString(stream.ToArray()));
+        Assert.Equal(
+            JsonSerializer.Serialize(value, options: jsonOptions),
+            Encoding.UTF8.GetString(stream.ToArray())
+        );
     }
 
     [Fact]
@@ -118,10 +126,7 @@ public class JsonResultTests
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -142,15 +147,15 @@ public class JsonResultTests
         // Arrange
         var details = new HttpValidationProblemDetails();
 
-        var result = new JsonHttpResult<HttpValidationProblemDetails>(details, jsonSerializerOptions: null);
+        var result = new JsonHttpResult<HttpValidationProblemDetails>(
+            details,
+            jsonSerializerOptions: null
+        );
         var stream = new MemoryStream();
         var httpContext = new DefaultHttpContext()
         {
             RequestServices = CreateServices(),
-            Response =
-                {
-                    Body = stream,
-                },
+            Response = { Body = stream, },
         };
 
         // Act
@@ -171,11 +176,12 @@ public class JsonResultTests
         // Arrange
         var details = new HttpValidationProblemDetails();
 
-        var result = new JsonHttpResult<HttpValidationProblemDetails>(details, StatusCodes.Status422UnprocessableEntity, jsonSerializerOptions: null);
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var result = new JsonHttpResult<HttpValidationProblemDetails>(
+            details,
+            StatusCodes.Status422UnprocessableEntity,
+            jsonSerializerOptions: null
+        );
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -192,10 +198,7 @@ public class JsonResultTests
 
         var result = new JsonHttpResult<ProblemDetails>(details, jsonSerializerOptions: null);
 
-        var httpContext = new DefaultHttpContext()
-        {
-            RequestServices = CreateServices(),
-        };
+        var httpContext = new DefaultHttpContext() { RequestServices = CreateServices(), };
 
         // Act
         await result.ExecuteAsync(httpContext);
@@ -214,7 +217,10 @@ public class JsonResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     private static IServiceProvider CreateServices()

@@ -14,19 +14,26 @@ namespace ILCompiler.DependencyAnalysis
     /// Represents a section of the executable where interface dispatch cells and their slot information
     /// is stored.
     /// </summary>
-    public class InterfaceDispatchCellSectionNode : ArrayOfEmbeddedDataNode<InterfaceDispatchCellNode>
+    public class InterfaceDispatchCellSectionNode
+        : ArrayOfEmbeddedDataNode<InterfaceDispatchCellNode>
     {
         public InterfaceDispatchCellSectionNode(NodeFactory factory)
-            : base("__InterfaceDispatchCellSection_Start", "__InterfaceDispatchCellSection_End", new DispatchCellComparer(factory))
-        {
-        }
+            : base(
+                "__InterfaceDispatchCellSection_Start",
+                "__InterfaceDispatchCellSection_End",
+                new DispatchCellComparer(factory)
+            ) { }
 
-        protected override void GetElementDataForNodes(ref ObjectDataBuilder builder, NodeFactory factory, bool relocsOnly)
+        protected override void GetElementDataForNodes(
+            ref ObjectDataBuilder builder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             if (relocsOnly)
                 return;
 
-            // The interface dispatch cell has an alignment requirement of 2 * [Pointer size] as part of the 
+            // The interface dispatch cell has an alignment requirement of 2 * [Pointer size] as part of the
             // synchronization mechanism of the two values in the runtime.
             builder.RequireInitialAlignment(factory.Target.PointerSize * 2);
 
@@ -51,7 +58,11 @@ namespace ILCompiler.DependencyAnalysis
             foreach (InterfaceDispatchCellNode node in NodesList)
             {
                 MethodDesc targetMethod = node.TargetMethod;
-                int targetSlot = VirtualMethodSlotHelper.GetVirtualMethodSlot(factory, targetMethod, targetMethod.OwningType);
+                int targetSlot = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                    factory,
+                    targetMethod,
+                    targetMethod.OwningType
+                );
                 if (currentSlot == NoSlot)
                 {
                     // This is the first dispatch cell we're emitting
@@ -106,8 +117,16 @@ namespace ILCompiler.DependencyAnalysis
                 MethodDesc methodY = y.TargetMethod;
 
                 // The primary purpose of this comparer is to sort everything by slot
-                int slotX = VirtualMethodSlotHelper.GetVirtualMethodSlot(_factory, methodX, methodX.OwningType);
-                int slotY = VirtualMethodSlotHelper.GetVirtualMethodSlot(_factory, methodY, methodY.OwningType);
+                int slotX = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                    _factory,
+                    methodX,
+                    methodX.OwningType
+                );
+                int slotY = VirtualMethodSlotHelper.GetVirtualMethodSlot(
+                    _factory,
+                    methodY,
+                    methodY.OwningType
+                );
 
                 int result = slotX - slotY;
                 if (result != 0)

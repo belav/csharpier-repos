@@ -15,15 +15,21 @@ namespace System.Security.Cryptography.X509Certificates
             throw new PlatformNotSupportedException();
         }
 
-        internal static partial ILoaderPal FromBlob(ReadOnlySpan<byte> rawData, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ILoaderPal FromBlob(
+            ReadOnlySpan<byte> rawData,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             Debug.Assert(password != null);
 
             ICertificatePal? singleCert;
             bool ephemeralSpecified = keyStorageFlags.HasFlag(X509KeyStorageFlags.EphemeralKeySet);
 
-            if (OpenSslX509CertificateReader.TryReadX509Der(rawData, out singleCert) ||
-                OpenSslX509CertificateReader.TryReadX509Pem(rawData, out singleCert))
+            if (
+                OpenSslX509CertificateReader.TryReadX509Der(rawData, out singleCert)
+                || OpenSslX509CertificateReader.TryReadX509Pem(rawData, out singleCert)
+            )
             {
                 // The single X509 structure methods shouldn't return true and out null, only empty
                 // collections have that behavior.
@@ -35,9 +41,17 @@ namespace System.Security.Cryptography.X509Certificates
             List<ICertificatePal>? certPals;
             Exception? openSslException;
 
-            if (OpenSslPkcsFormatReader.TryReadPkcs7Der(rawData, out certPals) ||
-                OpenSslPkcsFormatReader.TryReadPkcs7Pem(rawData, out certPals) ||
-                OpenSslPkcsFormatReader.TryReadPkcs12(rawData, password, ephemeralSpecified, out certPals, out openSslException))
+            if (
+                OpenSslPkcsFormatReader.TryReadPkcs7Der(rawData, out certPals)
+                || OpenSslPkcsFormatReader.TryReadPkcs7Pem(rawData, out certPals)
+                || OpenSslPkcsFormatReader.TryReadPkcs12(
+                    rawData,
+                    password,
+                    ephemeralSpecified,
+                    out certPals,
+                    out openSslException
+                )
+            )
             {
                 Debug.Assert(certPals != null);
 
@@ -48,7 +62,11 @@ namespace System.Security.Cryptography.X509Certificates
             throw openSslException;
         }
 
-        internal static partial ILoaderPal FromFile(string fileName, SafePasswordHandle password, X509KeyStorageFlags keyStorageFlags)
+        internal static partial ILoaderPal FromFile(
+            string fileName,
+            SafePasswordHandle password,
+            X509KeyStorageFlags keyStorageFlags
+        )
         {
             bool ephemeralSpecified = keyStorageFlags.HasFlag(X509KeyStorageFlags.EphemeralKeySet);
 
@@ -64,7 +82,8 @@ namespace System.Security.Cryptography.X509Certificates
             string fileName,
             SafeBioHandle bio,
             SafePasswordHandle password,
-            bool ephemeralSpecified)
+            bool ephemeralSpecified
+        )
         {
             int bioPosition = Interop.Crypto.BioTell(bio);
             Debug.Assert(bioPosition >= 0);
@@ -108,7 +127,15 @@ namespace System.Security.Cryptography.X509Certificates
             // Capture the exception so in case of failure, the call to BioSeek does not override it.
             Exception? openSslException;
             byte[] data = File.ReadAllBytes(fileName);
-            if (OpenSslPkcsFormatReader.TryReadPkcs12(data, password, ephemeralSpecified, out certPals, out openSslException))
+            if (
+                OpenSslPkcsFormatReader.TryReadPkcs12(
+                    data,
+                    password,
+                    ephemeralSpecified,
+                    out certPals,
+                    out openSslException
+                )
+            )
             {
                 return ListToLoaderPal(certPals);
             }
@@ -132,16 +159,27 @@ namespace System.Security.Cryptography.X509Certificates
             return new OpenSslExportProvider(cert);
         }
 
-        internal static partial IExportPal LinkFromCertificateCollection(X509Certificate2Collection certificates)
+        internal static partial IExportPal LinkFromCertificateCollection(
+            X509Certificate2Collection certificates
+        )
         {
             return new OpenSslExportProvider(certificates);
         }
 
-        internal static partial IStorePal FromSystemStore(string storeName, StoreLocation storeLocation, OpenFlags openFlags)
+        internal static partial IStorePal FromSystemStore(
+            string storeName,
+            StoreLocation storeLocation,
+            OpenFlags openFlags
+        )
         {
             if (storeLocation == StoreLocation.CurrentUser)
             {
-                if (X509Store.DisallowedStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase))
+                if (
+                    X509Store.DisallowedStoreName.Equals(
+                        storeName,
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     return OpenSslDirectoryBasedStoreProvider.OpenDisallowedStore(openFlags);
                 }
@@ -155,7 +193,10 @@ namespace System.Security.Cryptography.X509Certificates
             {
                 throw new CryptographicException(
                     SR.Cryptography_Unix_X509_MachineStoresReadOnly,
-                    new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresReadOnly));
+                    new PlatformNotSupportedException(
+                        SR.Cryptography_Unix_X509_MachineStoresReadOnly
+                    )
+                );
             }
 
             // The static store approach here is making an optimization based on not
@@ -167,14 +208,20 @@ namespace System.Security.Cryptography.X509Certificates
                 return OpenSslCachedSystemStoreProvider.MachineRoot;
             }
 
-            if (X509Store.IntermediateCAStoreName.Equals(storeName, StringComparison.OrdinalIgnoreCase))
+            if (
+                X509Store.IntermediateCAStoreName.Equals(
+                    storeName,
+                    StringComparison.OrdinalIgnoreCase
+                )
+            )
             {
                 return OpenSslCachedSystemStoreProvider.MachineIntermediate;
             }
 
             throw new CryptographicException(
                 SR.Cryptography_Unix_X509_MachineStoresRootOnly,
-                new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresRootOnly));
+                new PlatformNotSupportedException(SR.Cryptography_Unix_X509_MachineStoresRootOnly)
+            );
         }
 
         private static ILoaderPal SingleCertToLoaderPal(ICertificatePal singleCert)

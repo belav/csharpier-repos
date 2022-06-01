@@ -33,7 +33,9 @@ namespace System.Xml.Linq
     ///   </list>
     /// </remarks>
     [XmlSchemaProvider(null, IsAny = true)]
-    [System.ComponentModel.TypeDescriptionProvider("MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1[[System.Xml.Linq.XElement, System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],System.ComponentModel.TypeConverter")]
+    [System.ComponentModel.TypeDescriptionProvider(
+        "MS.Internal.Xml.Linq.ComponentModel.XTypeDescriptionProvider`1[[System.Xml.Linq.XElement, System.Xml.Linq, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089]],System.ComponentModel.TypeConverter"
+    )]
     public class XElement : XContainer, IXmlSerializable
     {
         /// <summary>
@@ -41,10 +43,7 @@ namespace System.Xml.Linq
         /// </summary>
         public static IEnumerable<XElement> EmptySequence
         {
-            get
-            {
-                return Array.Empty<XElement>();
-            }
+            get { return Array.Empty<XElement>(); }
         }
 
         internal XName name = null!;
@@ -74,8 +73,7 @@ namespace System.Xml.Linq
         /// See XContainer.Add(object content) for details about the content that can be added
         /// using this method.
         /// </remarks>
-        public XElement(XName name, object? content)
-            : this(name)
+        public XElement(XName name, object? content) : this(name)
         {
             AddContentSkipNotify(content);
         }
@@ -104,8 +102,7 @@ namespace System.Xml.Linq
         /// <remarks>
         /// This constructor makes a deep copy from one element to another.
         /// </remarks>
-        public XElement(XElement other)
-            : base(other)
+        public XElement(XElement other) : base(other)
         {
             this.name = other.name;
             XAttribute? a = other.lastAttr;
@@ -134,15 +131,9 @@ namespace System.Xml.Linq
             AddContentSkipNotify(other.content);
         }
 
-        internal XElement()
-            : this("default"!)
-        {
-        }
+        internal XElement() : this("default"!) { }
 
-        internal XElement(XmlReader r)
-            : this(r, LoadOptions.None)
-        {
-        }
+        internal XElement(XmlReader r) : this(r, LoadOptions.None) { }
 
         private XElement(AsyncConstructionSentry s)
         {
@@ -153,6 +144,7 @@ namespace System.Xml.Linq
             // constructor (which doesn't do any processing) and then themselves
             // do the async processing.  This is because ctors can't be 'async'.
         }
+
         private struct AsyncConstructionSentry { }
 
         internal XElement(XmlReader r, LoadOptions o)
@@ -160,10 +152,14 @@ namespace System.Xml.Linq
             ReadElementFrom(r, o);
         }
 
-        internal static async Task<XElement> CreateAsync(XmlReader r, CancellationToken cancellationToken)
+        internal static async Task<XElement> CreateAsync(
+            XmlReader r,
+            CancellationToken cancellationToken
+        )
         {
             XElement xe = new XElement(default(AsyncConstructionSentry));
-            await xe.ReadElementFromAsync(r, LoadOptions.None, cancellationToken).ConfigureAwait(false);
+            await xe.ReadElementFromAsync(r, LoadOptions.None, cancellationToken)
+                .ConfigureAwait(false);
             return xe;
         }
 
@@ -238,7 +234,8 @@ namespace System.Xml.Linq
                 {
                     do
                     {
-                        if (n is XElement) return true;
+                        if (n is XElement)
+                            return true;
                         n = n.next!;
                     } while (n != content);
                 }
@@ -267,16 +264,14 @@ namespace System.Xml.Linq
         /// </summary>
         public XName Name
         {
-            get
-            {
-                return name;
-            }
+            get { return name; }
             set
             {
                 ArgumentNullException.ThrowIfNull(value);
                 bool notify = NotifyChanging(this, XObjectChangeEventArgs.Name);
                 name = value;
-                if (notify) NotifyChanged(this, XObjectChangeEventArgs.Name);
+                if (notify)
+                    NotifyChanged(this, XObjectChangeEventArgs.Name);
             }
         }
 
@@ -288,10 +283,7 @@ namespace System.Xml.Linq
         /// </remarks>
         public override XmlNodeType NodeType
         {
-            get
-            {
-                return XmlNodeType.Element;
-            }
+            get { return XmlNodeType.Element; }
         }
 
         /// <summary>
@@ -305,9 +297,11 @@ namespace System.Xml.Linq
         {
             get
             {
-                if (content == null) return string.Empty;
+                if (content == null)
+                    return string.Empty;
                 string? s = content as string;
-                if (s != null) return s;
+                if (s != null)
+                    return s;
                 StringBuilder sb = StringBuilderCache.Acquire();
                 AppendText(sb);
                 return StringBuilderCache.GetStringAndRelease(sb);
@@ -379,7 +373,8 @@ namespace System.Xml.Linq
                 do
                 {
                     a = a.next!;
-                    if (a.name == name) return a;
+                    if (a.name == name)
+                        return a;
                 } while (a != lastAttr);
             }
             return null;
@@ -481,10 +476,13 @@ namespace System.Xml.Linq
         public XNamespace? GetNamespaceOfPrefix(string prefix)
         {
             ArgumentException.ThrowIfNullOrEmpty(prefix);
-            if (prefix == "xmlns") return XNamespace.Xmlns;
+            if (prefix == "xmlns")
+                return XNamespace.Xmlns;
             string? namespaceName = GetNamespaceOfPrefixInScope(prefix, null);
-            if (namespaceName != null) return XNamespace.Get(namespaceName);
-            if (prefix == "xml") return XNamespace.Xml;
+            if (namespaceName != null)
+                return XNamespace.Get(namespaceName);
+            if (prefix == "xml")
+                return XNamespace.Xml;
             return null;
         }
 
@@ -513,25 +511,28 @@ namespace System.Xml.Linq
                         {
                             if (a.Value == namespaceName)
                             {
-                                if (a.Name.NamespaceName.Length != 0 &&
-                                    (!hasInScopeNamespace ||
-                                     GetNamespaceOfPrefixInScope(a.Name.LocalName, e) == null))
+                                if (
+                                    a.Name.NamespaceName.Length != 0
+                                    && (
+                                        !hasInScopeNamespace
+                                        || GetNamespaceOfPrefixInScope(a.Name.LocalName, e) == null
+                                    )
+                                )
                                 {
                                     return a.Name.LocalName;
                                 }
                             }
                             hasLocalNamespace = true;
                         }
-                    }
-                    while (a != e.lastAttr);
+                    } while (a != e.lastAttr);
                     hasInScopeNamespace |= hasLocalNamespace;
                 }
                 e = e.parent as XElement;
-            }
-            while (e != null);
+            } while (e != null);
             if ((object)namespaceName == (object)XNamespace.xmlPrefixNamespace)
             {
-                if (!hasInScopeNamespace || GetNamespaceOfPrefixInScope("xml", null) == null) return "xml";
+                if (!hasInScopeNamespace || GetNamespaceOfPrefixInScope("xml", null) == null)
+                    return "xml";
             }
             else if ((object)namespaceName == (object)XNamespace.xmlnsPrefixNamespace)
             {
@@ -600,7 +601,10 @@ namespace System.Xml.Linq
         /// in the passed uri parameter.  If LoadOptions.PreserveWhitespace is enabled then
         /// significant whitespace will be preserved.
         /// </returns>
-        public static XElement Load([StringSyntax(StringSyntaxAttribute.Uri)] string uri, LoadOptions options)
+        public static XElement Load(
+            [StringSyntax(StringSyntaxAttribute.Uri)] string uri,
+            LoadOptions options
+        )
         {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
             using (XmlReader r = XmlReader.Create(uri, rs))
@@ -679,7 +683,11 @@ namespace System.Xml.Linq
         /// A new <see cref="XElement"/> containing the contents of the passed in
         /// <see cref="Stream"/>.
         /// </returns>
-        public static async Task<XElement> LoadAsync(Stream stream, LoadOptions options, CancellationToken cancellationToken)
+        public static async Task<XElement> LoadAsync(
+            Stream stream,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
@@ -761,7 +769,11 @@ namespace System.Xml.Linq
         /// A new <see cref="XElement"/> containing the contents of the passed in
         /// <see cref="TextReader"/>.
         /// </returns>
-        public static async Task<XElement> LoadAsync(TextReader textReader, LoadOptions options, CancellationToken cancellationToken)
+        public static async Task<XElement> LoadAsync(
+            TextReader textReader,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlReaderSettings rs = GetXmlReaderSettings(options);
 
@@ -809,10 +821,18 @@ namespace System.Xml.Linq
         {
             ArgumentNullException.ThrowIfNull(reader);
 
-            if (reader.MoveToContent() != XmlNodeType.Element) throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ExpectedNodeType, XmlNodeType.Element, reader.NodeType));
+            if (reader.MoveToContent() != XmlNodeType.Element)
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.InvalidOperation_ExpectedNodeType,
+                        XmlNodeType.Element,
+                        reader.NodeType
+                    )
+                );
             XElement e = new XElement(reader, options);
             reader.MoveToContent();
-            if (!reader.EOF) throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
+            if (!reader.EOF)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
             return e;
         }
 
@@ -833,7 +853,11 @@ namespace System.Xml.Linq
         /// A new <see cref="XElement"/> containing the contents of the passed
         /// in <see cref="XmlReader"/>.
         /// </returns>
-        public static Task<XElement> LoadAsync(XmlReader reader, LoadOptions options, CancellationToken cancellationToken)
+        public static Task<XElement> LoadAsync(
+            XmlReader reader,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
             ArgumentNullException.ThrowIfNull(reader);
 
@@ -842,9 +866,20 @@ namespace System.Xml.Linq
             return LoadAsyncInternal(reader, options, cancellationToken);
         }
 
-        private static async Task<XElement> LoadAsyncInternal(XmlReader reader, LoadOptions options, CancellationToken cancellationToken)
+        private static async Task<XElement> LoadAsyncInternal(
+            XmlReader reader,
+            LoadOptions options,
+            CancellationToken cancellationToken
+        )
         {
-            if (await reader.MoveToContentAsync().ConfigureAwait(false) != XmlNodeType.Element) throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ExpectedNodeType, XmlNodeType.Element, reader.NodeType));
+            if (await reader.MoveToContentAsync().ConfigureAwait(false) != XmlNodeType.Element)
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.InvalidOperation_ExpectedNodeType,
+                        XmlNodeType.Element,
+                        reader.NodeType
+                    )
+                );
 
             XElement e = new XElement(default(AsyncConstructionSentry));
             await e.ReadElementFromAsync(reader, options, cancellationToken).ConfigureAwait(false);
@@ -852,7 +887,8 @@ namespace System.Xml.Linq
             cancellationToken.ThrowIfCancellationRequested();
             await reader.MoveToContentAsync().ConfigureAwait(false);
 
-            if (!reader.EOF) throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
+            if (!reader.EOF)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedEndOfFile);
             return e;
         }
 
@@ -939,7 +975,8 @@ namespace System.Xml.Linq
             {
                 XAttribute a = lastAttr.next!;
                 NotifyChanging(a, XObjectChangeEventArgs.Remove);
-                if (lastAttr == null || a != lastAttr.next) throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
+                if (lastAttr == null || a != lastAttr.next)
+                    throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
                 if (a != lastAttr)
                 {
                     lastAttr.next = a.next;
@@ -1028,7 +1065,6 @@ namespace System.Xml.Linq
             ReplaceAttributes((object)content);
         }
 
-
         /// <summary>
         /// Output this <see cref="XElement"/> to the passed in <see cref="Stream"/>.
         /// </summary>
@@ -1078,7 +1114,11 @@ namespace System.Xml.Linq
         /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
         /// </param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        public async Task SaveAsync(Stream stream, SaveOptions options, CancellationToken cancellationToken)
+        public async Task SaveAsync(
+            Stream stream,
+            SaveOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
@@ -1140,7 +1180,11 @@ namespace System.Xml.Linq
         /// If SaveOptions.OmitDuplicateNamespaces is enabled duplicate namespace declarations will be removed.
         /// </param>
         /// <param name="cancellationToken">A cancellation token.</param>
-        public async Task SaveAsync(TextWriter textWriter, SaveOptions options, CancellationToken cancellationToken)
+        public async Task SaveAsync(
+            TextWriter textWriter,
+            SaveOptions options,
+            CancellationToken cancellationToken
+        )
         {
             XmlWriterSettings ws = GetXmlWriterSettings(options);
 
@@ -1218,7 +1262,8 @@ namespace System.Xml.Linq
             XAttribute? a = Attribute(name);
             if (value == null)
             {
-                if (a != null) RemoveAttribute(a);
+                if (a != null)
+                    RemoveAttribute(a);
             }
             else
             {
@@ -1258,7 +1303,8 @@ namespace System.Xml.Linq
             XElement? e = Element(name);
             if (value == null)
             {
-                if (e != null) RemoveNode(e);
+                if (e != null)
+                    RemoveNode(e);
             }
             else
             {
@@ -1341,7 +1387,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator string?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return element.Value;
         }
 
@@ -1384,7 +1431,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator bool?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToBoolean(element.Value.ToLowerInvariant());
         }
 
@@ -1427,7 +1475,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator int?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToInt32(element.Value);
         }
 
@@ -1470,7 +1519,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator uint?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToUInt32(element.Value);
         }
 
@@ -1513,7 +1563,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator long?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToInt64(element.Value);
         }
 
@@ -1556,7 +1607,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator ulong?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToUInt64(element.Value);
         }
 
@@ -1599,7 +1651,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator float?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToSingle(element.Value);
         }
 
@@ -1642,7 +1695,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator double?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToDouble(element.Value);
         }
 
@@ -1685,7 +1739,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator decimal?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToDecimal(element.Value);
         }
 
@@ -1709,7 +1764,11 @@ namespace System.Xml.Linq
         {
             ArgumentNullException.ThrowIfNull(element);
 
-            return DateTime.Parse(element.Value, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind);
+            return DateTime.Parse(
+                element.Value,
+                CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.RoundtripKind
+            );
         }
 
         /// <summary>
@@ -1728,8 +1787,13 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator DateTime?(XElement? element)
         {
-            if (element == null) return null;
-            return DateTime.Parse(element.Value, CultureInfo.InvariantCulture, System.Globalization.DateTimeStyles.RoundtripKind);
+            if (element == null)
+                return null;
+            return DateTime.Parse(
+                element.Value,
+                CultureInfo.InvariantCulture,
+                System.Globalization.DateTimeStyles.RoundtripKind
+            );
         }
 
         /// <summary>
@@ -1771,7 +1835,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator DateTimeOffset?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToDateTimeOffset(element.Value);
         }
 
@@ -1814,7 +1879,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator TimeSpan?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToTimeSpan(element.Value);
         }
 
@@ -1857,7 +1923,8 @@ namespace System.Xml.Linq
         [return: NotNullIfNotNull("element")]
         public static explicit operator Guid?(XElement? element)
         {
-            if (element == null) return null;
+            if (element == null)
+                return null;
             return XmlConvert.ToGuid(element.Value);
         }
 
@@ -1880,8 +1947,16 @@ namespace System.Xml.Linq
         {
             ArgumentNullException.ThrowIfNull(reader);
 
-            if (parent != null || annotations != null || content != null || lastAttr != null) throw new InvalidOperationException(SR.InvalidOperation_DeserializeInstance);
-            if (reader.MoveToContent() != XmlNodeType.Element) throw new InvalidOperationException(SR.Format(SR.InvalidOperation_ExpectedNodeType, XmlNodeType.Element, reader.NodeType));
+            if (parent != null || annotations != null || content != null || lastAttr != null)
+                throw new InvalidOperationException(SR.InvalidOperation_DeserializeInstance);
+            if (reader.MoveToContent() != XmlNodeType.Element)
+                throw new InvalidOperationException(
+                    SR.Format(
+                        SR.InvalidOperation_ExpectedNodeType,
+                        XmlNodeType.Element,
+                        reader.NodeType
+                    )
+                );
             ReadElementFrom(reader, LoadOptions.None);
         }
 
@@ -1899,24 +1974,30 @@ namespace System.Xml.Linq
 
         internal override void AddAttribute(XAttribute a)
         {
-            if (Attribute(a.Name) != null) throw new InvalidOperationException(SR.InvalidOperation_DuplicateAttribute);
-            if (a.parent != null) a = new XAttribute(a);
+            if (Attribute(a.Name) != null)
+                throw new InvalidOperationException(SR.InvalidOperation_DuplicateAttribute);
+            if (a.parent != null)
+                a = new XAttribute(a);
             AppendAttribute(a);
         }
 
         internal override void AddAttributeSkipNotify(XAttribute a)
         {
-            if (Attribute(a.Name) != null) throw new InvalidOperationException(SR.InvalidOperation_DuplicateAttribute);
-            if (a.parent != null) a = new XAttribute(a);
+            if (Attribute(a.Name) != null)
+                throw new InvalidOperationException(SR.InvalidOperation_DuplicateAttribute);
+            if (a.parent != null)
+                a = new XAttribute(a);
             AppendAttributeSkipNotify(a);
         }
 
         internal void AppendAttribute(XAttribute a)
         {
             bool notify = NotifyChanging(a, XObjectChangeEventArgs.Add);
-            if (a.parent != null) throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
+            if (a.parent != null)
+                throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
             AppendAttributeSkipNotify(a);
-            if (notify) NotifyChanged(a, XObjectChangeEventArgs.Add);
+            if (notify)
+                NotifyChanged(a, XObjectChangeEventArgs.Add);
         }
 
         internal void AppendAttributeSkipNotify(XAttribute a)
@@ -1944,7 +2025,8 @@ namespace System.Xml.Linq
                 {
                     a1 = a1.next!;
                     a2 = a2.next!;
-                    if (a1.name != a2.name || a1.value != a2.value) return false;
+                    if (a1.name != a2.name || a1.value != a2.value)
+                        return false;
                 } while (a1 != lastAttr);
                 return a2 == e.lastAttr;
             }
@@ -1970,7 +2052,8 @@ namespace System.Xml.Linq
                 do
                 {
                     a = a.next!;
-                    if (name == null || a.name == name) yield return a;
+                    if (name == null || a.name == name)
+                        yield return a;
                 } while (a.parent == this && a != lastAttr);
             }
         }
@@ -1987,9 +2070,9 @@ namespace System.Xml.Linq
                     do
                     {
                         a = a.next!;
-                        if (a.IsNamespaceDeclaration && a.Name.LocalName == prefix) return a.Value;
-                    }
-                    while (a != e.lastAttr);
+                        if (a.IsNamespaceDeclaration && a.Name.LocalName == prefix)
+                            return a.Value;
+                    } while (a != e.lastAttr);
                 }
                 e = e.parent as XElement;
             }
@@ -2025,7 +2108,11 @@ namespace System.Xml.Linq
             r.Read();
         }
 
-        private async Task ReadElementFromAsync(XmlReader r, LoadOptions o, CancellationToken cancellationTokentoken)
+        private async Task ReadElementFromAsync(
+            XmlReader r,
+            LoadOptions o,
+            CancellationToken cancellationTokentoken
+        )
         {
             ReadElementFromImpl(r, o);
 
@@ -2046,7 +2133,8 @@ namespace System.Xml.Linq
         /// </summary>
         private void ReadElementFromImpl(XmlReader r, LoadOptions o)
         {
-            if (r.ReadState != ReadState.Interactive) throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
+            if (r.ReadState != ReadState.Interactive)
+                throw new InvalidOperationException(SR.InvalidOperation_ExpectedInteractive);
             name = XNamespace.Get(r.NamespaceURI).GetName(r.LocalName);
             if ((o & LoadOptions.SetBaseUri) != 0)
             {
@@ -2069,7 +2157,12 @@ namespace System.Xml.Linq
             {
                 do
                 {
-                    XAttribute a = new XAttribute(XNamespace.Get(r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI).GetName(r.LocalName), r.Value);
+                    XAttribute a = new XAttribute(
+                        XNamespace
+                            .Get(r.Prefix.Length == 0 ? string.Empty : r.NamespaceURI)
+                            .GetName(r.LocalName),
+                        r.Value
+                    );
                     if (li != null && li.HasLineInfo())
                     {
                         a.SetLineInfo(li.LineNumber, li.LinePosition);
@@ -2083,21 +2176,26 @@ namespace System.Xml.Linq
         internal void RemoveAttribute(XAttribute a)
         {
             bool notify = NotifyChanging(a, XObjectChangeEventArgs.Remove);
-            if (a.parent != this) throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
-            XAttribute? p = lastAttr!, n;
-            while ((n = p.next!) != a) p = n;
+            if (a.parent != this)
+                throw new InvalidOperationException(SR.InvalidOperation_ExternalCode);
+            XAttribute? p = lastAttr!,
+                n;
+            while ((n = p.next!) != a)
+                p = n;
             if (p == a)
             {
                 lastAttr = null;
             }
             else
             {
-                if (lastAttr == a) lastAttr = p;
+                if (lastAttr == a)
+                    lastAttr = p;
                 p.next = a.next;
             }
             a.parent = null;
             a.next = null;
-            if (notify) NotifyChanged(a, XObjectChangeEventArgs.Remove);
+            if (notify)
+                NotifyChanged(a, XObjectChangeEventArgs.Remove);
         }
 
         private void RemoveAttributesSkipNotify()
@@ -2123,8 +2221,12 @@ namespace System.Xml.Linq
 
         internal override void ValidateNode(XNode node, XNode? previous)
         {
-            if (node is XDocument) throw new ArgumentException(SR.Format(SR.Argument_AddNode, XmlNodeType.Document));
-            if (node is XDocumentType) throw new ArgumentException(SR.Format(SR.Argument_AddNode, XmlNodeType.DocumentType));
+            if (node is XDocument)
+                throw new ArgumentException(SR.Format(SR.Argument_AddNode, XmlNodeType.Document));
+            if (node is XDocumentType)
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_AddNode, XmlNodeType.DocumentType)
+                );
         }
     }
 }

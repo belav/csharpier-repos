@@ -22,22 +22,23 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     /// </summary>
     [ExportCSharpVisualBasicStatelessLspService(typeof(WorkspaceSymbolsHandler)), Shared]
     [Method(Methods.WorkspaceSymbolName)]
-    internal class WorkspaceSymbolsHandler : IRequestHandler<WorkspaceSymbolParams, SymbolInformation[]?>
+    internal class WorkspaceSymbolsHandler
+        : IRequestHandler<WorkspaceSymbolParams, SymbolInformation[]?>
     {
-        private static readonly IImmutableSet<string> s_supportedKinds =
-            ImmutableHashSet.Create(
-                NavigateToItemKind.Class,
-                NavigateToItemKind.Constant,
-                NavigateToItemKind.Delegate,
-                NavigateToItemKind.Enum,
-                NavigateToItemKind.EnumItem,
-                NavigateToItemKind.Event,
-                NavigateToItemKind.Field,
-                NavigateToItemKind.Interface,
-                NavigateToItemKind.Method,
-                NavigateToItemKind.Module,
-                NavigateToItemKind.Property,
-                NavigateToItemKind.Structure);
+        private static readonly IImmutableSet<string> s_supportedKinds = ImmutableHashSet.Create(
+            NavigateToItemKind.Class,
+            NavigateToItemKind.Constant,
+            NavigateToItemKind.Delegate,
+            NavigateToItemKind.Enum,
+            NavigateToItemKind.EnumItem,
+            NavigateToItemKind.Event,
+            NavigateToItemKind.Field,
+            NavigateToItemKind.Interface,
+            NavigateToItemKind.Method,
+            NavigateToItemKind.Module,
+            NavigateToItemKind.Property,
+            NavigateToItemKind.Structure
+        );
 
         private readonly IAsynchronousOperationListener _asyncListener;
         private readonly IThreadingContext _threadingContext;
@@ -46,7 +47,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public WorkspaceSymbolsHandler(
             IAsynchronousOperationListenerProvider listenerProvider,
-            IThreadingContext threadingContext)
+            IThreadingContext threadingContext
+        )
         {
             _asyncListener = listenerProvider.GetListener(FeatureAttribute.NavigateTo);
             _threadingContext = threadingContext;
@@ -55,9 +57,14 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
         public bool MutatesSolutionState => false;
         public bool RequiresLSPSolution => true;
 
-        public TextDocumentIdentifier? GetTextDocumentIdentifier(WorkspaceSymbolParams request) => null;
+        public TextDocumentIdentifier? GetTextDocumentIdentifier(WorkspaceSymbolParams request) =>
+            null;
 
-        public async Task<SymbolInformation[]?> HandleRequestAsync(WorkspaceSymbolParams request, RequestContext context, CancellationToken cancellationToken)
+        public async Task<SymbolInformation[]?> HandleRequestAsync(
+            WorkspaceSymbolParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             Contract.ThrowIfNull(context.Solution);
 
@@ -70,9 +77,12 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
                 new LSPNavigateToCallback(context, progress),
                 request.Query,
                 s_supportedKinds,
-                _threadingContext.DisposalToken);
+                _threadingContext.DisposalToken
+            );
 
-            await searcher.SearchAsync(searchCurrentDocument: false, cancellationToken).ConfigureAwait(false);
+            await searcher
+                .SearchAsync(searchCurrentDocument: false, cancellationToken)
+                .ConfigureAwait(false);
             return progress.GetValues();
         }
 
@@ -83,27 +93,43 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
 
             public LSPNavigateToCallback(
                 RequestContext context,
-                BufferedProgress<SymbolInformation> progress)
+                BufferedProgress<SymbolInformation> progress
+            )
             {
                 _context = context;
                 _progress = progress;
             }
 
-            public async Task AddItemAsync(Project project, INavigateToSearchResult result, CancellationToken cancellationToken)
+            public async Task AddItemAsync(
+                Project project,
+                INavigateToSearchResult result,
+                CancellationToken cancellationToken
+            )
             {
-                var location = await ProtocolConversions.TextSpanToLocationAsync(
-                    result.NavigableItem.Document, result.NavigableItem.SourceSpan, result.NavigableItem.IsStale, _context, cancellationToken).ConfigureAwait(false);
+                var location = await ProtocolConversions
+                    .TextSpanToLocationAsync(
+                        result.NavigableItem.Document,
+                        result.NavigableItem.SourceSpan,
+                        result.NavigableItem.IsStale,
+                        _context,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 if (location == null)
                     return;
 
-                _progress.Report(new VSSymbolInformation
-                {
-                    Name = result.Name,
-                    ContainerName = result.AdditionalInformation,
-                    Kind = ProtocolConversions.NavigateToKindToSymbolKind(result.Kind),
-                    Location = location,
-                    Icon = VSLspExtensionConversions.GetImageIdFromGlyph(result.NavigableItem.Glyph)
-                });
+                _progress.Report(
+                    new VSSymbolInformation
+                    {
+                        Name = result.Name,
+                        ContainerName = result.AdditionalInformation,
+                        Kind = ProtocolConversions.NavigateToKindToSymbolKind(result.Kind),
+                        Location = location,
+                        Icon = VSLspExtensionConversions.GetImageIdFromGlyph(
+                            result.NavigableItem.Glyph
+                        )
+                    }
+                );
             }
 
             public void Done(bool isFullyLoaded)

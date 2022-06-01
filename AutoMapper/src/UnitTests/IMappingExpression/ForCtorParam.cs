@@ -19,37 +19,56 @@ namespace AutoMapper.UnitTests
             public string Key { get; }
             public string Value { get; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(c => 
-            c.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
-                .ForCtorParam("value1", o => o.MapFrom("Value"))
-                .ForCtorParam("key1", o => o.MapFrom("Key")));
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(
+                c =>
+                    c.CreateMap(typeof(KeyValuePair<,>), typeof(Destination))
+                        .ForCtorParam("value1", o => o.MapFrom("Value"))
+                        .ForCtorParam("key1", o => o.MapFrom("Key"))
+            );
+
         [Fact]
         public void Should_map_ok()
         {
-            var destination = Map<Destination>(new KeyValuePair<int,int>(1,2));
+            var destination = Map<Destination>(new KeyValuePair<int, int>(1, 2));
             destination.Key.ShouldBe("1");
             destination.Value.ShouldBe("2");
         }
     }
+
     public class ForCtorParam_MapFrom_ProjectTo : AutoMapperSpecBase
     {
         public class Source
         {
             public string Value1 { get; set; }
         }
+
         public class Destination
         {
             public Destination(string value) => Value = value;
+
             public string Value { get; }
         }
-        protected override MapperConfiguration CreateConfiguration() => new(c => c.CreateProjection<Source, Destination>().ForCtorParam("value", o => o.MapFrom(s => s.Value1)));
+
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(
+                c =>
+                    c.CreateProjection<Source, Destination>()
+                        .ForCtorParam("value", o => o.MapFrom(s => s.Value1))
+            );
+
         [Fact]
         public void Should_map_ok()
         {
-            var destination = ProjectTo<Destination>(new[] { new Source { Value1 = "Core" }}.AsQueryable()).Single();
+            var destination = ProjectTo<Destination>(
+                    new[] { new Source { Value1 = "Core" } }.AsQueryable()
+                )
+                .Single();
             destination.Value.ShouldBe("Core");
         }
     }
+
     public class When_configuring__non_generic_ctor_param_members : AutoMapperSpecBase
     {
         public class Source
@@ -72,11 +91,12 @@ namespace AutoMapper.UnitTests
             public int Value1 { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap(typeof(Source), typeof(Dest))
-                .ForCtorParam("thing", opt => opt.MapFrom(src => ((Source)src).Value));
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap(typeof(Source), typeof(Dest))
+                    .ForCtorParam("thing", opt => opt.MapFrom(src => ((Source)src).Value));
+            });
 
         [Fact]
         public void Should_redirect_value()
@@ -90,12 +110,20 @@ namespace AutoMapper.UnitTests
         public void Should_resolve_using_custom_func()
         {
             var mapper = new MapperConfiguration(
-                cfg => cfg.CreateMap<Source, Dest>().ForCtorParam("thing", opt => opt.MapFrom((src, ctxt) =>
-                {
-                    var rev = src.Value + 3;
-                    return rev;
-                })))
-                .CreateMapper();
+                cfg =>
+                    cfg.CreateMap<Source, Dest>()
+                        .ForCtorParam(
+                            "thing",
+                            opt =>
+                                opt.MapFrom(
+                                    (src, ctxt) =>
+                                    {
+                                        var rev = src.Value + 3;
+                                        return rev;
+                                    }
+                                )
+                        )
+            ).CreateMapper();
 
             var dest = mapper.Map<Source, Dest>(new Source { Value = 5 });
 
@@ -107,13 +135,15 @@ namespace AutoMapper.UnitTests
         {
             const string itemKey = "key";
             var mapper = new MapperConfiguration(
-                cfg => cfg.CreateMap<Source, Dest>().ForCtorParam("thing", opt =>
-                    opt.MapFrom((src, ctx) => ctx.Items[itemKey])
-                ))
-                .CreateMapper();
+                cfg =>
+                    cfg.CreateMap<Source, Dest>()
+                        .ForCtorParam("thing", opt => opt.MapFrom((src, ctx) => ctx.Items[itemKey]))
+            ).CreateMapper();
 
-            var dest = mapper.Map<Source, Dest>(new Source { Value = 8 },
-                opts => opts.Items[itemKey] = 10);
+            var dest = mapper.Map<Source, Dest>(
+                new Source { Value = 8 },
+                opts => opts.Items[itemKey] = 10
+            );
 
             dest.Value1.ShouldBe(10);
         }
@@ -121,15 +151,19 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_throw_on_nonexistent_parameter()
         {
-            Action configuration = () => new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value))
-                    .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
-            });
+            Action configuration = () =>
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value))
+                        .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
+                });
             configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
             {
-                exception.Message.ShouldContain("does not have a constructor with a parameter named 'think'.", Case.Sensitive);
+                exception.Message.ShouldContain(
+                    "does not have a constructor with a parameter named 'think'.",
+                    Case.Sensitive
+                );
                 exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
             });
         }
@@ -137,12 +171,13 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_throw_when_no_constructor_is_present()
         {
-            Action configuration = () => new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, DestWithNoConstructor>()
-                    .ForMember(dest => dest.Value1, opt => opt.MapFrom(src => src.Value))
-                    .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
-            });
+            Action configuration = () =>
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, DestWithNoConstructor>()
+                        .ForMember(dest => dest.Value1, opt => opt.MapFrom(src => src.Value))
+                        .ForCtorParam("thing", opt => opt.MapFrom(src => src.Value));
+                });
 
             configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
             {
@@ -154,15 +189,19 @@ namespace AutoMapper.UnitTests
         [Fact]
         public void Should_throw_when_parameter_is_misspelt()
         {
-            Action configuration = () => new MapperConfiguration(cfg =>
-            {
-                cfg.CreateMap<Source, Dest>()
-                    .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
-            });
+            Action configuration = () =>
+                new MapperConfiguration(cfg =>
+                {
+                    cfg.CreateMap<Source, Dest>()
+                        .ForCtorParam("think", opt => opt.MapFrom(src => src.Value));
+                });
 
             configuration.ShouldThrowException<AutoMapperConfigurationException>(exception =>
             {
-                exception.Message.ShouldContain("does not have a constructor with a parameter named 'think'.", Case.Sensitive);
+                exception.Message.ShouldContain(
+                    "does not have a constructor with a parameter named 'think'.",
+                    Case.Sensitive
+                );
                 exception.Message.ShouldContain(typeof(Dest).FullName, Case.Sensitive);
             });
         }

@@ -28,8 +28,15 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 {
     using static ConvertToRawStringHelpers;
 
-    [ExportCodeRefactoringProvider(LanguageNames.CSharp, Name = PredefinedCodeRefactoringProviderNames.ConvertToRawString), Shared]
-    internal partial class ConvertRegularStringToRawStringCodeRefactoringProvider : SyntaxEditorBasedCodeRefactoringProvider
+    [
+        ExportCodeRefactoringProvider(
+            LanguageNames.CSharp,
+            Name = PredefinedCodeRefactoringProviderNames.ConvertToRawString
+        ),
+        Shared
+    ]
+    internal partial class ConvertRegularStringToRawStringCodeRefactoringProvider
+        : SyntaxEditorBasedCodeRefactoringProvider
     {
         private enum ConvertToRawKind
         {
@@ -38,22 +45,39 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             MultiLineWithoutLeadingWhitespace,
         }
 
-        private static readonly BidirectionalMap<ConvertToRawKind, string> s_kindToEquivalenceKeyMap =
-            new(new[]
-            {
-                KeyValuePairUtil.Create(ConvertToRawKind.SingleLine,
-                                        nameof(CSharpFeaturesResources.Convert_to_raw_string) + "-" + ConvertToRawKind.SingleLine),
-                KeyValuePairUtil.Create(ConvertToRawKind.MultiLineIndented,
-                                        nameof(CSharpFeaturesResources.Convert_to_raw_string)),
-                KeyValuePairUtil.Create(ConvertToRawKind.MultiLineWithoutLeadingWhitespace,
-                                        nameof(CSharpFeaturesResources.without_leading_whitespace_may_change_semantics)),
-            });
+        private static readonly BidirectionalMap<
+            ConvertToRawKind,
+            string
+        > s_kindToEquivalenceKeyMap =
+            new(
+                new[]
+                {
+                    KeyValuePairUtil.Create(
+                        ConvertToRawKind.SingleLine,
+                        nameof(CSharpFeaturesResources.Convert_to_raw_string)
+                            + "-"
+                            + ConvertToRawKind.SingleLine
+                    ),
+                    KeyValuePairUtil.Create(
+                        ConvertToRawKind.MultiLineIndented,
+                        nameof(CSharpFeaturesResources.Convert_to_raw_string)
+                    ),
+                    KeyValuePairUtil.Create(
+                        ConvertToRawKind.MultiLineWithoutLeadingWhitespace,
+                        nameof(
+                            CSharpFeaturesResources.without_leading_whitespace_may_change_semantics
+                        )
+                    ),
+                }
+            );
 
         [ImportingConstructor]
-        [SuppressMessage("RoslynDiagnosticsReliability", "RS0033:Importing constructor should be [Obsolete]", Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814")]
-        public ConvertRegularStringToRawStringCodeRefactoringProvider()
-        {
-        }
+        [SuppressMessage(
+            "RoslynDiagnosticsReliability",
+            "RS0033:Importing constructor should be [Obsolete]",
+            Justification = "Used in test code: https://github.com/dotnet/roslyn/issues/42814"
+        )]
+        public ConvertRegularStringToRawStringCodeRefactoringProvider() { }
 
         protected override ImmutableArray<FixAllScope> SupportedFixAllScopes => AllFixAllScopes;
 
@@ -61,7 +85,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
         {
             var (document, span, cancellationToken) = context;
 
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindToken(span.Start);
             if (!context.Span.IntersectsWith(token.Span))
                 return;
@@ -75,7 +101,9 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             // If we have escaped quotes in the string, then this is a good option to bubble up as something to convert
             // to a raw string.  Otherwise, still offer this refactoring, but at low priority as the user may be
             // invoking this on lots of strings that they have no interest in converting.
-            var priority = AllEscapesAreQuotes(convertParams.Characters) ? CodeActionPriority.Medium : CodeActionPriority.Low;
+            var priority = AllEscapesAreQuotes(convertParams.Characters)
+                ? CodeActionPriority.Medium
+                : CodeActionPriority.Low;
 
             var options = context.Options;
 
@@ -85,9 +113,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     CodeAction.CreateWithPriority(
                         priority,
                         CSharpFeaturesResources.Convert_to_raw_string,
-                        c => UpdateDocumentAsync(document, span, ConvertToRawKind.SingleLine, options, c),
-                        s_kindToEquivalenceKeyMap[ConvertToRawKind.SingleLine]),
-                    token.Span);
+                        c =>
+                            UpdateDocumentAsync(
+                                document,
+                                span,
+                                ConvertToRawKind.SingleLine,
+                                options,
+                                c
+                            ),
+                        s_kindToEquivalenceKeyMap[ConvertToRawKind.SingleLine]
+                    ),
+                    token.Span
+                );
             }
             else
             {
@@ -95,9 +132,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     CodeAction.CreateWithPriority(
                         priority,
                         CSharpFeaturesResources.Convert_to_raw_string,
-                        c => UpdateDocumentAsync(document, span, ConvertToRawKind.MultiLineIndented, options, c),
-                        s_kindToEquivalenceKeyMap[ConvertToRawKind.MultiLineIndented]),
-                    token.Span);
+                        c =>
+                            UpdateDocumentAsync(
+                                document,
+                                span,
+                                ConvertToRawKind.MultiLineIndented,
+                                options,
+                                c
+                            ),
+                        s_kindToEquivalenceKeyMap[ConvertToRawKind.MultiLineIndented]
+                    ),
+                    token.Span
+                );
 
                 if (convertParams.CanBeMultiLineWithoutLeadingWhiteSpaces)
                 {
@@ -105,14 +151,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                         CodeAction.CreateWithPriority(
                             priority,
                             CSharpFeaturesResources.without_leading_whitespace_may_change_semantics,
-                            c => UpdateDocumentAsync(document, span, ConvertToRawKind.MultiLineWithoutLeadingWhitespace, options, c),
-                            s_kindToEquivalenceKeyMap[ConvertToRawKind.MultiLineWithoutLeadingWhitespace]),
-                        token.Span);
+                            c =>
+                                UpdateDocumentAsync(
+                                    document,
+                                    span,
+                                    ConvertToRawKind.MultiLineWithoutLeadingWhitespace,
+                                    options,
+                                    c
+                                ),
+                            s_kindToEquivalenceKeyMap[
+                                ConvertToRawKind.MultiLineWithoutLeadingWhitespace
+                            ]
+                        ),
+                        token.Span
+                    );
                 }
             }
         }
 
-        private static bool CanConvertStringLiteral(SyntaxToken token, out CanConvertParams convertParams)
+        private static bool CanConvertStringLiteral(
+            SyntaxToken token,
+            out CanConvertParams convertParams
+        )
         {
             Debug.Assert(token.Kind() == SyntaxKind.StringLiteralToken);
 
@@ -124,7 +184,7 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 
             var characters = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
 
-            // TODO(cyrusn): Should we offer this on empty strings... seems undesirable as you'd end with a gigantic 
+            // TODO(cyrusn): Should we offer this on empty strings... seems undesirable as you'd end with a gigantic
             // three line alternative over just ""
             if (characters.IsDefaultOrEmpty)
                 return false;
@@ -161,12 +221,17 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 //
                 // This changes the contents of the literal, but that can be fine for the domain the user is working in.
                 // Offer this, but let the user know that this will change runtime semantics.
-                canBeMultiLineWithoutLeadingWhiteSpaces = token.IsVerbatimStringLiteral() &&
-                    HasLeadingWhitespace(characters) &&
-                    CleanupWhitespace(characters).Length > 0;
+                canBeMultiLineWithoutLeadingWhiteSpaces =
+                    token.IsVerbatimStringLiteral()
+                    && HasLeadingWhitespace(characters)
+                    && CleanupWhitespace(characters).Length > 0;
             }
 
-            convertParams = new CanConvertParams(characters, canBeSingleLine, canBeMultiLineWithoutLeadingWhiteSpaces);
+            convertParams = new CanConvertParams(
+                characters,
+                canBeSingleLine,
+                canBeMultiLineWithoutLeadingWhiteSpaces
+            );
             return true;
         }
 
@@ -180,15 +245,30 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
         }
 
         private static async Task<Document> UpdateDocumentAsync(
-            Document document, TextSpan span, ConvertToRawKind kind, CodeActionOptionsProvider optionsProvider, CancellationToken cancellationToken)
+            Document document,
+            TextSpan span,
+            ConvertToRawKind kind,
+            CodeActionOptionsProvider optionsProvider,
+            CancellationToken cancellationToken
+        )
         {
-            var options = await document.GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken).ConfigureAwait(false);
-            var root = await document.GetRequiredSyntaxRootAsync(cancellationToken).ConfigureAwait(false);
+            var options = await document
+                .GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken)
+                .ConfigureAwait(false);
+            var root = await document
+                .GetRequiredSyntaxRootAsync(cancellationToken)
+                .ConfigureAwait(false);
             var token = root.FindToken(span.Start);
             Contract.ThrowIfFalse(span.IntersectsWith(token.Span));
             Contract.ThrowIfFalse(token.Kind() == SyntaxKind.StringLiteralToken);
 
-            var replacement = GetReplacementToken(document, token, kind, options, cancellationToken);
+            var replacement = GetReplacementToken(
+                document,
+                token,
+                kind,
+                options,
+                cancellationToken
+            );
             return document.WithSyntaxRoot(root.ReplaceToken(token, replacement));
         }
 
@@ -198,19 +278,27 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             SyntaxEditor editor,
             CodeActionOptionsProvider optionsProvider,
             string? equivalenceKey,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Get the kind to be fixed from the equivalenceKey for the FixAll operation
             Debug.Assert(equivalenceKey != null);
             var kind = s_kindToEquivalenceKeyMap[equivalenceKey];
 
-            var options = await document.GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken).ConfigureAwait(false);
-            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(out var tokenReplacementMap);
+            var options = await document
+                .GetSyntaxFormattingOptionsAsync(optionsProvider, cancellationToken)
+                .ConfigureAwait(false);
+            using var _ = PooledDictionary<SyntaxToken, SyntaxToken>.GetInstance(
+                out var tokenReplacementMap
+            );
 
             foreach (var fixSpan in fixAllSpans)
             {
                 var node = editor.OriginalRoot.FindNode(fixSpan);
-                foreach (var stringLiteral in node.DescendantTokens().Where(token => token.Kind() == SyntaxKind.StringLiteralToken))
+                foreach (
+                    var stringLiteral in node.DescendantTokens()
+                        .Where(token => token.Kind() == SyntaxKind.StringLiteralToken)
+                )
                 {
                     // Ensure we can convert the string literal
                     if (!CanConvertStringLiteral(stringLiteral, out var canConvertParams))
@@ -221,19 +309,29 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     {
                         ConvertToRawKind.SingleLine => canConvertParams.CanBeSingleLine,
                         ConvertToRawKind.MultiLineIndented => !canConvertParams.CanBeSingleLine,
-                        ConvertToRawKind.MultiLineWithoutLeadingWhitespace => canConvertParams.CanBeMultiLineWithoutLeadingWhiteSpaces,
+                        ConvertToRawKind.MultiLineWithoutLeadingWhitespace
+                            => canConvertParams.CanBeMultiLineWithoutLeadingWhiteSpaces,
                         _ => throw ExceptionUtilities.UnexpectedValue(kind),
                     };
 
                     if (!hasMatchingKind)
                         continue;
 
-                    var replacement = GetReplacementToken(document, stringLiteral, kind, options, cancellationToken);
+                    var replacement = GetReplacementToken(
+                        document,
+                        stringLiteral,
+                        kind,
+                        options,
+                        cancellationToken
+                    );
                     tokenReplacementMap.Add(stringLiteral, replacement);
                 }
             }
 
-            var newRoot = editor.OriginalRoot.ReplaceTokens(tokenReplacementMap.Keys, (token, _) => tokenReplacementMap[token]);
+            var newRoot = editor.OriginalRoot.ReplaceTokens(
+                tokenReplacementMap.Keys,
+                (token, _) => tokenReplacementMap[token]
+            );
             editor.ReplaceNode(editor.OriginalRoot, newRoot);
         }
 
@@ -242,7 +340,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             SyntaxToken token,
             ConvertToRawKind kind,
             SyntaxFormattingOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var characters = CSharpVirtualCharService.Instance.TryConvertToVirtualChars(token);
             Contract.ThrowIfTrue(characters.IsDefaultOrEmpty);
@@ -253,7 +352,13 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 
             return kind == ConvertToRawKind.SingleLine
                 ? ConvertToSingleLineRawString(token, characters)
-                : ConvertToMultiLineRawIndentedString(document, token, options, characters, cancellationToken);
+                : ConvertToMultiLineRawIndentedString(
+                    document,
+                    token,
+                    options,
+                    characters,
+                    cancellationToken
+                );
         }
 
         private static VirtualCharSequence CleanupWhitespace(VirtualCharSequence characters)
@@ -293,13 +398,18 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             }
 
             // Remove all trailing whitespace and newlines from the final string.
-            while (result.Count > 0 && (IsCSharpNewLine(result[^1]) || IsCSharpWhitespace(result[^1])))
+            while (
+                result.Count > 0 && (IsCSharpNewLine(result[^1]) || IsCSharpWhitespace(result[^1]))
+            )
                 result.RemoveAt(result.Count - 1);
 
             return VirtualCharSequence.Create(result.ToImmutable());
         }
 
-        private static void AddRange(ImmutableSegmentedList<VirtualChar>.Builder result, VirtualCharSequence sequence)
+        private static void AddRange(
+            ImmutableSegmentedList<VirtualChar>.Builder result,
+            VirtualCharSequence sequence
+        )
         {
             foreach (var c in sequence)
                 result.Add(c);
@@ -319,19 +429,28 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                     continue;
 
                 var currentLineLeadingWhitespace = GetLeadingWhitespace(currentLine);
-                commonLeadingWhitespace = ComputeCommonWhitespacePrefix(commonLeadingWhitespace, currentLineLeadingWhitespace);
+                commonLeadingWhitespace = ComputeCommonWhitespacePrefix(
+                    commonLeadingWhitespace,
+                    currentLineLeadingWhitespace
+                );
             }
 
             return commonLeadingWhitespace.Length;
         }
 
         private static VirtualCharSequence ComputeCommonWhitespacePrefix(
-            VirtualCharSequence leadingWhitespace1, VirtualCharSequence leadingWhitespace2)
+            VirtualCharSequence leadingWhitespace1,
+            VirtualCharSequence leadingWhitespace2
+        )
         {
             var length = Math.Min(leadingWhitespace1.Length, leadingWhitespace2.Length);
 
             var current = 0;
-            while (current < length && IsCSharpWhitespace(leadingWhitespace1[current]) && leadingWhitespace1[current].Rune == leadingWhitespace2[current].Rune)
+            while (
+                current < length
+                && IsCSharpWhitespace(leadingWhitespace1[current])
+                && leadingWhitespace1[current].Rune == leadingWhitespace2[current].Rune
+            )
                 current++;
 
             return leadingWhitespace1.GetSubSequence(TextSpan.FromBounds(0, current));
@@ -346,7 +465,10 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             return line.GetSubSequence(TextSpan.FromBounds(0, current));
         }
 
-        private static void BreakIntoLines(VirtualCharSequence characters, ArrayBuilder<VirtualCharSequence> lines)
+        private static void BreakIntoLines(
+            VirtualCharSequence characters,
+            ArrayBuilder<VirtualCharSequence> lines
+        )
         {
             var index = 0;
 
@@ -356,7 +478,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 
         private static VirtualCharSequence GetNextLine(
             VirtualCharSequence characters,
-            ref int index)
+            ref int index
+        )
         {
             var end = index;
             while (end < characters.Length && !IsCSharpNewLine(characters[end]))
@@ -384,7 +507,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
             SyntaxToken token,
             SyntaxFormattingOptions formattingOptions,
             VirtualCharSequence characters,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // Have to make sure we have a delimiter longer than any quote sequence in the string.
             var longestQuoteSequence = GetLongestQuoteSequence(characters);
@@ -392,7 +516,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
 
             // Auto-formatting options are not relevant since they only control behavior on typing.
             var indentationOptions = new IndentationOptions(formattingOptions);
-            var indentation = token.GetPreferredIndentation(document, indentationOptions, cancellationToken);
+            var indentation = token.GetPreferredIndentation(
+                document,
+                indentationOptions,
+                cancellationToken
+            );
 
             using var _ = PooledStringBuilder.GetInstance(out var builder);
 
@@ -428,11 +556,14 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 SyntaxKind.MultiLineRawStringLiteralToken,
                 builder.ToString(),
                 characters.CreateString(),
-                token.TrailingTrivia);
+                token.TrailingTrivia
+            );
         }
 
         private static SyntaxToken ConvertToSingleLineRawString(
-            SyntaxToken token, VirtualCharSequence characters)
+            SyntaxToken token,
+            VirtualCharSequence characters
+        )
         {
             // Have to make sure we have a delimiter longer than any quote sequence in the string.
             var longestQuoteSequence = GetLongestQuoteSequence(characters);
@@ -452,7 +583,8 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertToRawString
                 SyntaxKind.SingleLineRawStringLiteralToken,
                 builder.ToString(),
                 characters.CreateString(),
-                token.TrailingTrivia);
+                token.TrailingTrivia
+            );
         }
     }
 }

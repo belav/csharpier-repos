@@ -18,56 +18,85 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.SignInResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            State = state,
-            Status = RemoteAuthenticationStatus.Success.ToString()
-        };
+        testJsRuntime.SignInResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                State = state,
+                Status = RemoteAuthenticationStatus.Success.ToString()
+            };
 
         // Act
-        await runtime.SignInAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state });
+        await runtime.SignInAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state }
+        );
 
         // Assert
         Assert.Equal(
-            new[] { "AuthenticationService.init", "AuthenticationService.signIn", "AuthenticationService.getUser" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            new[]
+            {
+                "AuthenticationService.init",
+                "AuthenticationService.signIn",
+                "AuthenticationService.getUser"
+            },
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Theory]
     [InlineData(RemoteAuthenticationStatus.Redirect)]
     [InlineData(RemoteAuthenticationStatus.Failure)]
     [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
-    public async Task RemoteAuthenticationService_SignIn_DoesNotUpdateUserOnOtherResult(RemoteAuthenticationStatus value)
+    public async Task RemoteAuthenticationService_SignIn_DoesNotUpdateUserOnOtherResult(
+        RemoteAuthenticationStatus value
+    )
     {
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.SignInResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            Status = value.ToString()
-        };
+        testJsRuntime.SignInResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                Status = value.ToString()
+            };
 
         // Act
-        await runtime.SignInAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state });
+        await runtime.SignInAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state }
+        );
 
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.signIn" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Fact]
@@ -76,56 +105,91 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.CompleteSignInResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            State = state,
-            Status = RemoteAuthenticationStatus.Success.ToString()
-        };
+        testJsRuntime.CompleteSignInResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                State = state,
+                Status = RemoteAuthenticationStatus.Success.ToString()
+            };
 
         // Act
-        await runtime.CompleteSignInAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { Url = "https://www.example.com/base/login-callback" });
+        await runtime.CompleteSignInAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState>
+            {
+                Url = "https://www.example.com/base/login-callback"
+            }
+        );
 
         // Assert
         Assert.Equal(
-            new[] { "AuthenticationService.init", "AuthenticationService.completeSignIn", "AuthenticationService.getUser" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            new[]
+            {
+                "AuthenticationService.init",
+                "AuthenticationService.completeSignIn",
+                "AuthenticationService.getUser"
+            },
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Theory]
     [InlineData(RemoteAuthenticationStatus.Redirect)]
     [InlineData(RemoteAuthenticationStatus.Failure)]
     [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
-    public async Task RemoteAuthenticationService_CompleteSignInAsync_DoesNotUpdateUserOnOtherResult(RemoteAuthenticationStatus value)
+    public async Task RemoteAuthenticationService_CompleteSignInAsync_DoesNotUpdateUserOnOtherResult(
+        RemoteAuthenticationStatus value
+    )
     {
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.CompleteSignInResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            Status = value.ToString().ToString()
-        };
+        testJsRuntime.CompleteSignInResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                Status = value.ToString().ToString()
+            };
 
         // Act
-        await runtime.CompleteSignInAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { Url = "https://www.example.com/base/login-callback" });
+        await runtime.CompleteSignInAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState>
+            {
+                Url = "https://www.example.com/base/login-callback"
+            }
+        );
 
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.completeSignIn" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Fact]
@@ -134,56 +198,85 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.SignOutResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            State = state,
-            Status = RemoteAuthenticationStatus.Success.ToString()
-        };
+        testJsRuntime.SignOutResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                State = state,
+                Status = RemoteAuthenticationStatus.Success.ToString()
+            };
 
         // Act
-        await runtime.SignOutAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state });
+        await runtime.SignOutAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state }
+        );
 
         // Assert
         Assert.Equal(
-            new[] { "AuthenticationService.init", "AuthenticationService.signOut", "AuthenticationService.getUser" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            new[]
+            {
+                "AuthenticationService.init",
+                "AuthenticationService.signOut",
+                "AuthenticationService.getUser"
+            },
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Theory]
     [InlineData(RemoteAuthenticationStatus.Redirect)]
     [InlineData(RemoteAuthenticationStatus.Failure)]
     [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
-    public async Task RemoteAuthenticationService_SignOut_DoesNotUpdateUserOnOtherResult(RemoteAuthenticationStatus value)
+    public async Task RemoteAuthenticationService_SignOut_DoesNotUpdateUserOnOtherResult(
+        RemoteAuthenticationStatus value
+    )
     {
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.SignOutResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            Status = value.ToString()
-        };
+        testJsRuntime.SignOutResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                Status = value.ToString()
+            };
 
         // Act
-        await runtime.SignOutAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state });
+        await runtime.SignOutAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState> { State = state }
+        );
 
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.signOut" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Fact]
@@ -192,56 +285,91 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.CompleteSignOutResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            State = state,
-            Status = RemoteAuthenticationStatus.Success.ToString()
-        };
+        testJsRuntime.CompleteSignOutResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                State = state,
+                Status = RemoteAuthenticationStatus.Success.ToString()
+            };
 
         // Act
-        await runtime.CompleteSignOutAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { Url = "https://www.example.com/base/login-callback" });
+        await runtime.CompleteSignOutAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState>
+            {
+                Url = "https://www.example.com/base/login-callback"
+            }
+        );
 
         // Assert
         Assert.Equal(
-            new[] { "AuthenticationService.init", "AuthenticationService.completeSignOut", "AuthenticationService.getUser" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            new[]
+            {
+                "AuthenticationService.init",
+                "AuthenticationService.completeSignOut",
+                "AuthenticationService.getUser"
+            },
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Theory]
     [InlineData(RemoteAuthenticationStatus.Redirect)]
     [InlineData(RemoteAuthenticationStatus.Failure)]
     [InlineData(RemoteAuthenticationStatus.OperationCompleted)]
-    public async Task RemoteAuthenticationService_CompleteSignOutAsync_DoesNotUpdateUserOnOtherResult(RemoteAuthenticationStatus value)
+    public async Task RemoteAuthenticationService_CompleteSignOutAsync_DoesNotUpdateUserOnOtherResult(
+        RemoteAuthenticationStatus value
+    )
     {
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
-        testJsRuntime.CompleteSignOutResult = new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
-        {
-            Status = value.ToString()
-        };
+        testJsRuntime.CompleteSignOutResult =
+            new InternalRemoteAuthenticationResult<RemoteAuthenticationState>
+            {
+                Status = value.ToString()
+            };
 
         // Act
-        await runtime.CompleteSignOutAsync(new RemoteAuthenticationContext<RemoteAuthenticationState> { Url = "https://www.example.com/base/login-callback" });
+        await runtime.CompleteSignOutAsync(
+            new RemoteAuthenticationContext<RemoteAuthenticationState>
+            {
+                Url = "https://www.example.com/base/login-callback"
+            }
+        );
 
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.completeSignOut" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Fact]
@@ -250,11 +378,18 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
         testJsRuntime.GetAccessTokenResult = new InternalAccessTokenResult
@@ -274,10 +409,17 @@ public class RemoteAuthenticationServiceTests
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.getAccessToken" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
 
         Assert.True(result.TryGetToken(out var token));
-        Assert.Equal(result.Status, Enum.Parse<AccessTokenResultStatus>(testJsRuntime.GetAccessTokenResult.Status, ignoreCase: true));
+        Assert.Equal(
+            result.Status,
+            Enum.Parse<AccessTokenResultStatus>(
+                testJsRuntime.GetAccessTokenResult.Status,
+                ignoreCase: true
+            )
+        );
         Assert.Equal(result.RedirectUrl, testJsRuntime.GetAccessTokenResult.RedirectUrl);
         Assert.Equal(token, testJsRuntime.GetAccessTokenResult.Token);
     }
@@ -288,11 +430,18 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
         testJsRuntime.GetAccessTokenResult = new InternalAccessTokenResult
@@ -300,12 +449,10 @@ public class RemoteAuthenticationServiceTests
             Status = "requiresRedirect",
         };
 
-        var tokenOptions = new AccessTokenRequestOptions
-        {
-            Scopes = new[] { "something" }
-        };
+        var tokenOptions = new AccessTokenRequestOptions { Scopes = new[] { "something" } };
 
-        var expectedRedirectUrl = "https://www.example.com/base/login?returnUrl=https%3A%2F%2Fwww.example.com%2Fbase%2Fadd-product";
+        var expectedRedirectUrl =
+            "https://www.example.com/base/login?returnUrl=https%3A%2F%2Fwww.example.com%2Fbase%2Fadd-product";
 
         // Act
         var result = await runtime.RequestAccessToken(tokenOptions);
@@ -313,13 +460,23 @@ public class RemoteAuthenticationServiceTests
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.getAccessToken" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
 
         Assert.False(result.TryGetToken(out var token));
         Assert.Null(token);
-        Assert.Equal(result.Status, Enum.Parse<AccessTokenResultStatus>(testJsRuntime.GetAccessTokenResult.Status, ignoreCase: true));
+        Assert.Equal(
+            result.Status,
+            Enum.Parse<AccessTokenResultStatus>(
+                testJsRuntime.GetAccessTokenResult.Status,
+                ignoreCase: true
+            )
+        );
         Assert.Equal(expectedRedirectUrl, result.RedirectUrl);
-        Assert.Equal(tokenOptions, (AccessTokenRequestOptions)testJsRuntime.PastInvocations[^1].args[0]);
+        Assert.Equal(
+            tokenOptions,
+            (AccessTokenRequestOptions)testJsRuntime.PastInvocations[^1].args[0]
+        );
     }
 
     [Fact]
@@ -328,11 +485,18 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         var state = new RemoteAuthenticationState();
         testJsRuntime.GetAccessTokenResult = new InternalAccessTokenResult
@@ -346,7 +510,8 @@ public class RemoteAuthenticationServiceTests
             ReturnUrl = "https://www.example.com/base/add-saved-product/123413241234"
         };
 
-        var expectedRedirectUrl = "https://www.example.com/base/login?returnUrl=https%3A%2F%2Fwww.example.com%2Fbase%2Fadd-saved-product%2F123413241234";
+        var expectedRedirectUrl =
+            "https://www.example.com/base/login?returnUrl=https%3A%2F%2Fwww.example.com%2Fbase%2Fadd-saved-product%2F123413241234";
 
         // Act
         var result = await runtime.RequestAccessToken(tokenOptions);
@@ -354,13 +519,23 @@ public class RemoteAuthenticationServiceTests
         // Assert
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.getAccessToken" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
 
         Assert.False(result.TryGetToken(out var token));
         Assert.Null(token);
-        Assert.Equal(result.Status, Enum.Parse<AccessTokenResultStatus>(testJsRuntime.GetAccessTokenResult.Status, ignoreCase: true));
+        Assert.Equal(
+            result.Status,
+            Enum.Parse<AccessTokenResultStatus>(
+                testJsRuntime.GetAccessTokenResult.Status,
+                ignoreCase: true
+            )
+        );
         Assert.Equal(expectedRedirectUrl, result.RedirectUrl);
-        Assert.Equal(tokenOptions, (AccessTokenRequestOptions)testJsRuntime.PastInvocations[^1].args[0]);
+        Assert.Equal(
+            tokenOptions,
+            (AccessTokenRequestOptions)testJsRuntime.PastInvocations[^1].args[0]
+        );
     }
 
     [Fact]
@@ -369,11 +544,18 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, RemoteUserAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            RemoteUserAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new AccountClaimsPrincipalFactory<RemoteUserAccount>(Mock.Of<IAccessTokenProviderAccessor>()));
+            new AccountClaimsPrincipalFactory<RemoteUserAccount>(
+                Mock.Of<IAccessTokenProviderAccessor>()
+            )
+        );
 
         testJsRuntime.GetUserResult = default;
 
@@ -387,7 +569,8 @@ public class RemoteAuthenticationServiceTests
 
         Assert.Equal(
             new[] { "AuthenticationService.init", "AuthenticationService.getUser" },
-            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray());
+            testJsRuntime.PastInvocations.Select(i => i.identifier).ToArray()
+        );
     }
 
     [Fact]
@@ -396,18 +579,25 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions();
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, CoolRoleAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            CoolRoleAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new TestAccountClaimsPrincipalFactory(Mock.Of<IAccessTokenProviderAccessor>()));
+            new TestAccountClaimsPrincipalFactory(Mock.Of<IAccessTokenProviderAccessor>())
+        );
 
         var account = new CoolRoleAccount
         {
             CoolRole = new[] { "admin", "cool", "fantastic" },
             AdditionalProperties = new Dictionary<string, object>
             {
-                ["CoolName"] = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize("Alfred"))
+                ["CoolName"] = JsonSerializer.Deserialize<JsonElement>(
+                    JsonSerializer.Serialize("Alfred")
+                )
             }
         };
 
@@ -432,18 +622,25 @@ public class RemoteAuthenticationServiceTests
         // Arrange
         var testJsRuntime = new TestJsRuntime();
         var options = CreateOptions("scope");
-        var runtime = new RemoteAuthenticationService<RemoteAuthenticationState, CoolRoleAccount, OidcProviderOptions>(
+        var runtime = new RemoteAuthenticationService<
+            RemoteAuthenticationState,
+            CoolRoleAccount,
+            OidcProviderOptions
+        >(
             testJsRuntime,
             options,
             new TestNavigationManager(),
-            new TestAccountClaimsPrincipalFactory(Mock.Of<IAccessTokenProviderAccessor>()));
+            new TestAccountClaimsPrincipalFactory(Mock.Of<IAccessTokenProviderAccessor>())
+        );
 
         var account = new CoolRoleAccount
         {
             CoolRole = new[] { "admin", "cool", "fantastic" },
             AdditionalProperties = new Dictionary<string, object>
             {
-                ["CoolName"] = JsonSerializer.Deserialize<JsonElement>(JsonSerializer.Serialize("Alfred")),
+                ["CoolName"] = JsonSerializer.Deserialize<JsonElement>(
+                    JsonSerializer.Serialize("Alfred")
+                ),
             }
         };
 
@@ -473,7 +670,9 @@ public class RemoteAuthenticationServiceTests
         Assert.Empty(result.FindAll("scope"));
     }
 
-    private static IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>> CreateOptions(string scopeClaim = null)
+    private static IOptionsSnapshot<RemoteAuthenticationOptions<OidcProviderOptions>> CreateOptions(
+        string scopeClaim = null
+    )
     {
         var options = new RemoteAuthenticationOptions<OidcProviderOptions>();
 
@@ -496,7 +695,8 @@ public class RemoteAuthenticationServiceTests
         options.ProviderOptions.ClientId = "a";
         options.ProviderOptions.DefaultScopes.Add("openid");
         options.ProviderOptions.RedirectUri = "https://www.example.com/base/custom-login";
-        options.ProviderOptions.PostLogoutRedirectUri = "https://www.example.com/base/custom-logout";
+        options.ProviderOptions.PostLogoutRedirectUri =
+            "https://www.example.com/base/custom-logout";
 
         var iOptions = Options.Create(options);
 
@@ -507,7 +707,8 @@ public class RemoteAuthenticationServiceTests
 
     private class TestJsRuntime : IJSRuntime
     {
-        public IList<(string identifier, object[] args)> PastInvocations { get; set; } = new List<(string, object[])>();
+        public IList<(string identifier, object[] args)> PastInvocations { get; set; } =
+            new List<(string, object[])>();
 
         public InternalRemoteAuthenticationResult<RemoteAuthenticationState> SignInResult { get; set; }
 
@@ -527,7 +728,11 @@ public class RemoteAuthenticationServiceTests
             return new ValueTask<TValue>((TValue)GetInvocationResult(identifier));
         }
 
-        public ValueTask<TValue> InvokeAsync<TValue>(string identifier, CancellationToken cancellationToken, object[] args)
+        public ValueTask<TValue> InvokeAsync<TValue>(
+            string identifier,
+            CancellationToken cancellationToken,
+            object[] args
+        )
         {
             PastInvocations.Add((identifier, args));
             return new ValueTask<TValue>((TValue)GetInvocationResult(identifier));
@@ -563,12 +768,12 @@ public class RemoteAuthenticationServiceTests
 internal class TestAccountClaimsPrincipalFactory : AccountClaimsPrincipalFactory<CoolRoleAccount>
 {
     public TestAccountClaimsPrincipalFactory(IAccessTokenProviderAccessor accessor) : base(accessor)
-    {
-    }
+    { }
 
     public override async ValueTask<ClaimsPrincipal> CreateUserAsync(
         CoolRoleAccount account,
-        RemoteAuthenticationUserOptions options)
+        RemoteAuthenticationUserOptions options
+    )
     {
         var user = await base.CreateUserAsync(account, options);
 
@@ -594,5 +799,6 @@ internal class TestNavigationManager : NavigationManager
     public TestNavigationManager() =>
         Initialize("https://www.example.com/base/", "https://www.example.com/base/add-product");
 
-    protected override void NavigateToCore(string uri, bool forceLoad) => throw new NotImplementedException();
+    protected override void NavigateToCore(string uri, bool forceLoad) =>
+        throw new NotImplementedException();
 }

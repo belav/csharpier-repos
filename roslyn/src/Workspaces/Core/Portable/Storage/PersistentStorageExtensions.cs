@@ -13,7 +13,9 @@ namespace Microsoft.CodeAnalysis.Storage
 {
     internal static class PersistentStorageExtensions
     {
-        public static IChecksummedPersistentStorageService GetPersistentStorageService(this HostWorkspaceServices services)
+        public static IChecksummedPersistentStorageService GetPersistentStorageService(
+            this HostWorkspaceServices services
+        )
         {
             var workspaceConfiguration = services.GetService<IWorkspaceConfigurationService>();
             var configuration = services.GetRequiredService<IPersistentStorageConfiguration>();
@@ -23,12 +25,12 @@ namespace Microsoft.CodeAnalysis.Storage
             {
 #if !DOTNET_BUILD_FROM_SOURCE
                 StorageDatabase.SQLite
-                    => services.GetService<SQLitePersistentStorageService>() ??
-                       NoOpPersistentStorageService.GetOrThrow(configuration),
+                    => services.GetService<SQLitePersistentStorageService>()
+                        ?? NoOpPersistentStorageService.GetOrThrow(configuration),
 #endif
                 StorageDatabase.CloudCache
-                    => services.GetService<ICloudCacheStorageService>() ??
-                       NoOpPersistentStorageService.GetOrThrow(configuration),
+                    => services.GetService<ICloudCacheStorageService>()
+                        ?? NoOpPersistentStorageService.GetOrThrow(configuration),
                 _ => NoOpPersistentStorageService.GetOrThrow(configuration),
             };
         }

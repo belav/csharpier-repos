@@ -90,7 +90,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     IMutableEntityType AddEntityType(
         string name,
         string definingNavigationName,
-        IMutableEntityType definingEntityType);
+        IMutableEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Adds an owned entity type with a defining navigation to the model.
@@ -102,7 +103,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     IMutableEntityType AddEntityType(
         Type type,
         string definingNavigationName,
-        IMutableEntityType definingEntityType);
+        IMutableEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Adds an owned entity type of default type to the model.
@@ -154,7 +156,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     IMutableEntityType? FindEntityType(
         string name,
         string definingNavigationName,
-        IMutableEntityType definingEntityType);
+        IMutableEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Gets the entity that maps the given entity class. Returns <see langword="null" /> if no entity type with
@@ -163,8 +166,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     /// </summary>
     /// <param name="type">The type to find the corresponding entity type for.</param>
     /// <returns>The entity type, or <see langword="null" /> if none is found.</returns>
-    new IMutableEntityType? FindEntityType(Type type)
-        => (IMutableEntityType?)((IReadOnlyModel)this).FindEntityType(type);
+    new IMutableEntityType? FindEntityType(Type type) =>
+        (IMutableEntityType?)((IReadOnlyModel)this).FindEntityType(type);
 
     /// <summary>
     ///     Gets the entity type for the given name, defining navigation name
@@ -177,8 +180,10 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     IMutableEntityType? FindEntityType(
         Type type,
         string definingNavigationName,
-        IMutableEntityType definingEntityType)
-        => (IMutableEntityType?)((IReadOnlyModel)this).FindEntityType(type, definingNavigationName, definingEntityType);
+        IMutableEntityType definingEntityType
+    ) =>
+        (IMutableEntityType?)
+            ((IReadOnlyModel)this).FindEntityType(type, definingNavigationName, definingEntityType);
 
     /// <summary>
     ///     Removes an entity type from the model.
@@ -205,7 +210,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     IMutableEntityType? RemoveEntityType(
         Type type,
         string definingNavigationName,
-        IMutableEntityType definingEntityType);
+        IMutableEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Removes an entity type without a defining navigation from the model.
@@ -225,7 +231,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     IMutableEntityType? RemoveEntityType(
         string name,
         string definingNavigationName,
-        IMutableEntityType definingEntityType);
+        IMutableEntityType definingEntityType
+    );
 
     /// <summary>
     ///     Gets all entity types defined in the model.
@@ -238,8 +245,8 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     /// </summary>
     /// <param name="type">The type of the entity type to find.</param>
     /// <returns>The entity types found.</returns>
-    new IEnumerable<IMutableEntityType> FindEntityTypes(Type type)
-        => ((IReadOnlyModel)this).FindEntityTypes(type).Cast<IMutableEntityType>();
+    new IEnumerable<IMutableEntityType> FindEntityTypes(Type type) =>
+        ((IReadOnlyModel)this).FindEntityTypes(type).Cast<IMutableEntityType>();
 
     /// <summary>
     ///     Returns the entity types corresponding to the least derived types from the given one.
@@ -249,8 +256,10 @@ public interface IMutableModel : IReadOnlyModel, IMutableAnnotatable
     /// <returns>List of entity types corresponding to the least derived types from the given one.</returns>
     new IEnumerable<IMutableEntityType> FindLeastDerivedEntityTypes(
         Type type,
-        Func<IReadOnlyEntityType, bool>? condition = null)
-        => ((IReadOnlyModel)this).FindLeastDerivedEntityTypes(type, condition)
+        Func<IReadOnlyEntityType, bool>? condition = null
+    ) =>
+        ((IReadOnlyModel)this)
+            .FindLeastDerivedEntityTypes(type, condition)
             .Cast<IMutableEntityType>();
 
     /// <summary>

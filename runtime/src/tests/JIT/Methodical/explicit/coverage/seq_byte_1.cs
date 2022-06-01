@@ -10,8 +10,7 @@ internal struct AA
 {
     public byte tmp1;
 
-
-    public byte q;  //this field is the testing subject
+    public byte q; //this field is the testing subject
 
     public sbyte tmp2;
 
@@ -27,15 +26,25 @@ internal struct AA
     public static AA[,,] aa_init = new AA[1, 101, 2];
     public static AA[,,] aa_zero = new AA[1, 101, 2];
     public static object b_init = new AA(100);
-    public static AA _init, _zero;
+    public static AA _init,
+        _zero;
 
-    public static byte call_target(byte arg) { return arg; }
-    public static byte call_target_ref(ref byte arg) { return arg; }
+    public static byte call_target(byte arg)
+    {
+        return arg;
+    }
+
+    public static byte call_target_ref(ref byte arg)
+    {
+        return arg;
+    }
 
     public void verify()
     {
-        if (tmp1 != 106) throw new Exception("tmp1 corrupted");
-        if (tmp2 != 107) throw new Exception("tmp2 corrupted");
+        if (tmp1 != 106)
+            throw new Exception("tmp1 corrupted");
+        if (tmp2 != 107)
+            throw new Exception("tmp2 corrupted");
     }
 
     public static void verify_all()
@@ -65,7 +74,8 @@ internal struct AA
 
 internal struct BB
 {
-    public static AA f_init, f_zero;
+    public static AA f_init,
+        f_zero;
 }
 
 public static class Test_seq_byte_1

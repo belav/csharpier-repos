@@ -19,22 +19,28 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler.DocumentChanges
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public DidChangeHandler()
-        {
-        }
+        public DidChangeHandler() { }
 
         public bool MutatesSolutionState => true;
         public bool RequiresLSPSolution => false;
 
-        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(LSP.DidChangeTextDocumentParams request) => request.TextDocument;
+        public LSP.TextDocumentIdentifier? GetTextDocumentIdentifier(
+            LSP.DidChangeTextDocumentParams request
+        ) => request.TextDocument;
 
-        public Task<object?> HandleRequestAsync(LSP.DidChangeTextDocumentParams request, RequestContext context, CancellationToken cancellationToken)
+        public Task<object?> HandleRequestAsync(
+            LSP.DidChangeTextDocumentParams request,
+            RequestContext context,
+            CancellationToken cancellationToken
+        )
         {
             var text = context.GetTrackedDocumentSourceText(request.TextDocument.Uri);
 
             // Per the LSP spec, each text change builds upon the previous, so we don't need to translate
             // any text positions between changes, which makes this quite easy.
-            var changes = request.ContentChanges.Select(change => ProtocolConversions.ContentChangeEventToTextChange(change, text));
+            var changes = request.ContentChanges.Select(
+                change => ProtocolConversions.ContentChangeEventToTextChange(change, text)
+            );
 
             text = text.WithChanges(changes);
 

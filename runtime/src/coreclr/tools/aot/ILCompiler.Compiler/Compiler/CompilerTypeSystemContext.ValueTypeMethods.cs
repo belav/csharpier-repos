@@ -17,9 +17,15 @@ namespace ILCompiler
         private class ValueTypeMethodHashtable : LockFreeReaderHashtable<DefType, MethodDesc>
         {
             protected override int GetKeyHashCode(DefType key) => key.GetHashCode();
-            protected override int GetValueHashCode(MethodDesc value) => value.OwningType.GetHashCode();
-            protected override bool CompareKeyToValue(DefType key, MethodDesc value) => key == value.OwningType;
-            protected override bool CompareValueToValue(MethodDesc v1, MethodDesc v2) => v1.OwningType == v2.OwningType;
+
+            protected override int GetValueHashCode(MethodDesc value) =>
+                value.OwningType.GetHashCode();
+
+            protected override bool CompareKeyToValue(DefType key, MethodDesc value) =>
+                key == value.OwningType;
+
+            protected override bool CompareValueToValue(MethodDesc v1, MethodDesc v2) =>
+                v1.OwningType == v2.OwningType;
 
             protected override MethodDesc CreateValueFromKey(DefType key)
             {
@@ -29,17 +35,25 @@ namespace ILCompiler
 
         private ValueTypeMethodHashtable _valueTypeMethodHashtable = new ValueTypeMethodHashtable();
 
-        protected virtual IEnumerable<MethodDesc> GetAllMethodsForValueType(TypeDesc valueType, bool virtualOnly)
+        protected virtual IEnumerable<MethodDesc> GetAllMethodsForValueType(
+            TypeDesc valueType,
+            bool virtualOnly
+        )
         {
             TypeDesc valueTypeDefinition = valueType.GetTypeDefinition();
 
             if (RequiresGetFieldHelperMethod((MetadataType)valueTypeDefinition))
             {
-                MethodDesc getFieldHelperMethod = _valueTypeMethodHashtable.GetOrCreateValue((DefType)valueTypeDefinition);
+                MethodDesc getFieldHelperMethod = _valueTypeMethodHashtable.GetOrCreateValue(
+                    (DefType)valueTypeDefinition
+                );
 
                 if (valueType != valueTypeDefinition)
                 {
-                    yield return GetMethodForInstantiatedType(getFieldHelperMethod, (InstantiatedType)valueType);
+                    yield return GetMethodForInstantiatedType(
+                        getFieldHelperMethod,
+                        (InstantiatedType)valueType
+                    );
                 }
                 else
                 {
@@ -47,7 +61,9 @@ namespace ILCompiler
                 }
             }
 
-            IEnumerable<MethodDesc> metadataMethods = virtualOnly ? valueType.GetVirtualMethods() : valueType.GetMethods();
+            IEnumerable<MethodDesc> metadataMethods = virtualOnly
+                ? valueType.GetVirtualMethods()
+                : valueType.GetMethods();
             foreach (MethodDesc method in metadataMethods)
                 yield return method;
         }
@@ -55,7 +71,8 @@ namespace ILCompiler
         private bool RequiresGetFieldHelperMethod(MetadataType valueType)
         {
             if (_objectEqualsMethod == null)
-                _objectEqualsMethod = GetWellKnownType(WellKnownType.Object).GetMethod("Equals", null);
+                _objectEqualsMethod = GetWellKnownType(WellKnownType.Object)
+                    .GetMethod("Equals", null);
 
             // If the classlib doesn't have Object.Equals, we don't need this.
             if (_objectEqualsMethod == null)
@@ -71,7 +88,10 @@ namespace ILCompiler
 
             // These need to provide an implementation of Equals/GetHashCode because of NaN handling.
             // The helper would be useless.
-            if (valueType.IsWellKnownType(WellKnownType.Double) || valueType.IsWellKnownType(WellKnownType.Single))
+            if (
+                valueType.IsWellKnownType(WellKnownType.Double)
+                || valueType.IsWellKnownType(WellKnownType.Single)
+            )
                 return false;
 
             return !_typeStateHashtable.GetOrCreateValue(valueType).CanCompareValueTypeBits;
@@ -81,7 +101,7 @@ namespace ILCompiler
         {
             private enum Flags
             {
-                CanCompareValueTypeBits         = 0x0000_0001,
+                CanCompareValueTypeBits = 0x0000_0001,
                 CanCompareValueTypeBitsComputed = 0x0000_0002,
             }
 
@@ -140,7 +160,12 @@ namespace ILCompiler
                     }
 
                     TypeDesc fieldType = field.FieldType;
-                    if (fieldType.IsPrimitive || fieldType.IsEnum || fieldType.IsPointer || fieldType.IsFunctionPointer)
+                    if (
+                        fieldType.IsPrimitive
+                        || fieldType.IsEnum
+                        || fieldType.IsPointer
+                        || fieldType.IsFunctionPointer
+                    )
                     {
                         TypeFlags category = fieldType.UnderlyingType.Category;
                         if (category == TypeFlags.Single || category == TypeFlags.Double)
@@ -155,16 +180,26 @@ namespace ILCompiler
                         // Would be a suprise if this wasn't a valuetype. We checked ContainsGCPointers above.
                         Debug.Assert(fieldType.IsValueType);
 
-                        MethodDesc objectEqualsMethod = ((CompilerTypeSystemContext)fieldType.Context)._objectEqualsMethod;
+                        MethodDesc objectEqualsMethod = (
+                            (CompilerTypeSystemContext)fieldType.Context
+                        )._objectEqualsMethod;
 
                         // If the field overrides Equals, we can't use the fast helper because we need to call the method.
-                        if (fieldType.FindVirtualFunctionTargetMethodOnObjectType(objectEqualsMethod).OwningType == fieldType)
+                        if (
+                            fieldType
+                                .FindVirtualFunctionTargetMethodOnObjectType(objectEqualsMethod)
+                                .OwningType == fieldType
+                        )
                         {
                             result = false;
                             break;
                         }
 
-                        if (!_hashtable.GetOrCreateValue((MetadataType)fieldType).CanCompareValueTypeBits)
+                        if (
+                            !_hashtable
+                                .GetOrCreateValue((MetadataType)fieldType)
+                                .CanCompareValueTypeBits
+                        )
                         {
                             result = false;
                             break;
@@ -183,15 +218,21 @@ namespace ILCompiler
         private class TypeStateHashtable : LockFreeReaderHashtable<TypeDesc, TypeState>
         {
             protected override int GetKeyHashCode(TypeDesc key) => key.GetHashCode();
+
             protected override int GetValueHashCode(TypeState value) => value.Type.GetHashCode();
-            protected override bool CompareKeyToValue(TypeDesc key, TypeState value) => key == value.Type;
-            protected override bool CompareValueToValue(TypeState v1, TypeState v2) => v1.Type == v2.Type;
+
+            protected override bool CompareKeyToValue(TypeDesc key, TypeState value) =>
+                key == value.Type;
+
+            protected override bool CompareValueToValue(TypeState v1, TypeState v2) =>
+                v1.Type == v2.Type;
 
             protected override TypeState CreateValueFromKey(TypeDesc key)
             {
                 return new TypeState(key, this);
             }
         }
+
         private TypeStateHashtable _typeStateHashtable = new TypeStateHashtable();
 
         private struct OverlappingFieldTracker

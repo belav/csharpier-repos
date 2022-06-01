@@ -16,7 +16,12 @@ namespace System.Web.Helpers.AntiXsrf
         private readonly ITokenStore _tokenStore;
         private readonly ITokenValidator _validator;
 
-        internal AntiForgeryWorker(IAntiForgeryTokenSerializer serializer, IAntiForgeryConfig config, ITokenStore tokenStore, ITokenValidator validator)
+        internal AntiForgeryWorker(
+            IAntiForgeryTokenSerializer serializer,
+            IAntiForgeryConfig config,
+            ITokenStore tokenStore,
+            ITokenValidator validator
+        )
         {
             _serializer = serializer;
             _config = config;
@@ -39,7 +44,11 @@ namespace System.Web.Helpers.AntiXsrf
                 : null;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Caller will just regenerate token in case of failure.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Caller will just regenerate token in case of failure."
+        )]
         private AntiForgeryToken DeserializeTokenNoThrow(string serializedToken)
         {
             try
@@ -66,7 +75,11 @@ namespace System.Web.Helpers.AntiXsrf
             return null;
         }
 
-        [SuppressMessage("Microsoft.Design", "CA1031:DoNotCatchGeneralExceptionTypes", Justification = "Caller will just regenerate token in case of failure.")]
+        [SuppressMessage(
+            "Microsoft.Design",
+            "CA1031:DoNotCatchGeneralExceptionTypes",
+            Justification = "Caller will just regenerate token in case of failure."
+        )]
         private AntiForgeryToken GetCookieTokenNoThrow(HttpContextBase httpContext)
         {
             try
@@ -90,7 +103,8 @@ namespace System.Web.Helpers.AntiXsrf
             CheckSSLConfig(httpContext);
 
             AntiForgeryToken oldCookieToken = GetCookieTokenNoThrow(httpContext);
-            AntiForgeryToken newCookieToken, formToken;
+            AntiForgeryToken newCookieToken,
+                formToken;
             GetTokens(httpContext, oldCookieToken, out newCookieToken, out formToken);
 
             if (newCookieToken != null)
@@ -125,19 +139,30 @@ namespace System.Web.Helpers.AntiXsrf
         // 'new cookie value' out param is non-null, the caller *must* persist
         // the new value to cookie storage since the original value was null or
         // invalid. This method is side-effect free.
-        public void GetTokens(HttpContextBase httpContext, string serializedOldCookieToken, out string serializedNewCookieToken, out string serializedFormToken)
+        public void GetTokens(
+            HttpContextBase httpContext,
+            string serializedOldCookieToken,
+            out string serializedNewCookieToken,
+            out string serializedFormToken
+        )
         {
             CheckSSLConfig(httpContext);
 
             AntiForgeryToken oldCookieToken = DeserializeTokenNoThrow(serializedOldCookieToken);
-            AntiForgeryToken newCookieToken, formToken;
+            AntiForgeryToken newCookieToken,
+                formToken;
             GetTokens(httpContext, oldCookieToken, out newCookieToken, out formToken);
 
             serializedNewCookieToken = Serialize(newCookieToken);
             serializedFormToken = Serialize(formToken);
         }
 
-        private void GetTokens(HttpContextBase httpContext, AntiForgeryToken oldCookieToken, out AntiForgeryToken newCookieToken, out AntiForgeryToken formToken)
+        private void GetTokens(
+            HttpContextBase httpContext,
+            AntiForgeryToken oldCookieToken,
+            out AntiForgeryToken newCookieToken,
+            out AntiForgeryToken formToken
+        )
         {
             newCookieToken = null;
             if (!_validator.IsCookieTokenValid(oldCookieToken))
@@ -147,7 +172,11 @@ namespace System.Web.Helpers.AntiXsrf
             }
 
             Contract.Assert(_validator.IsCookieTokenValid(oldCookieToken));
-            formToken = _validator.GenerateFormToken(httpContext, ExtractIdentity(httpContext), oldCookieToken);
+            formToken = _validator.GenerateFormToken(
+                httpContext,
+                ExtractIdentity(httpContext),
+                oldCookieToken
+            );
         }
 
         private string Serialize(AntiForgeryToken token)
@@ -167,7 +196,12 @@ namespace System.Web.Helpers.AntiXsrf
             AntiForgeryToken formToken = _tokenStore.GetFormToken(httpContext);
 
             // Validate
-            _validator.ValidateTokens(httpContext, ExtractIdentity(httpContext), cookieToken, formToken);
+            _validator.ValidateTokens(
+                httpContext,
+                ExtractIdentity(httpContext),
+                cookieToken,
+                formToken
+            );
         }
 
         // [ ENTRY POINT ]
@@ -182,7 +216,12 @@ namespace System.Web.Helpers.AntiXsrf
             AntiForgeryToken deserializedFormToken = DeserializeToken(formToken);
 
             // Validate
-            _validator.ValidateTokens(httpContext, ExtractIdentity(httpContext), deserializedCookieToken, deserializedFormToken);
+            _validator.ValidateTokens(
+                httpContext,
+                ExtractIdentity(httpContext),
+                deserializedCookieToken,
+                deserializedFormToken
+            );
         }
     }
 }

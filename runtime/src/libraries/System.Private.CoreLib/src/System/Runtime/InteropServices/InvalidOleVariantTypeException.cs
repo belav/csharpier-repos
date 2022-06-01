@@ -10,17 +10,17 @@ namespace System.Runtime.InteropServices
     /// runtime is invalid.
     /// </summary>
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class InvalidOleVariantTypeException : SystemException
     {
-        public InvalidOleVariantTypeException()
-            : base(SR.Arg_InvalidOleVariantTypeException)
+        public InvalidOleVariantTypeException() : base(SR.Arg_InvalidOleVariantTypeException)
         {
             HResult = HResults.COR_E_INVALIDOLEVARIANTTYPE;
         }
 
-        public InvalidOleVariantTypeException(string? message)
-            : base(message)
+        public InvalidOleVariantTypeException(string? message) : base(message)
         {
             HResult = HResults.COR_E_INVALIDOLEVARIANTTYPE;
         }
@@ -32,8 +32,6 @@ namespace System.Runtime.InteropServices
         }
 
         protected InvalidOleVariantTypeException(SerializationInfo info, StreamingContext context)
-            : base(info, context)
-        {
-        }
+            : base(info, context) { }
     }
 }

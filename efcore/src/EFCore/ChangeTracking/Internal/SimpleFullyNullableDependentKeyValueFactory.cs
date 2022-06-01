@@ -24,7 +24,8 @@ public class SimpleFullyNullableDependentKeyValueFactory<TKey> : IDependentKeyVa
     /// </summary>
     public SimpleFullyNullableDependentKeyValueFactory(
         IProperty property,
-        PropertyAccessors propertyAccessors)
+        PropertyAccessors propertyAccessors
+    )
     {
         _propertyAccessors = propertyAccessors;
         EqualityComparer = property.CreateKeyEqualityComparer<TKey>();
@@ -44,7 +45,10 @@ public class SimpleFullyNullableDependentKeyValueFactory<TKey> : IDependentKeyVa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromBuffer(in ValueBuffer valueBuffer, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromBuffer(
+        in ValueBuffer valueBuffer,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         key = (TKey)_propertyAccessors.ValueBufferGetter!(valueBuffer);
         return key != null;
@@ -56,7 +60,10 @@ public class SimpleFullyNullableDependentKeyValueFactory<TKey> : IDependentKeyVa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         key = ((Func<IUpdateEntry, TKey>)_propertyAccessors.CurrentValueGetter)(entry);
         return key != null;
@@ -68,9 +75,14 @@ public class SimpleFullyNullableDependentKeyValueFactory<TKey> : IDependentKeyVa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
-        key = ((Func<IUpdateEntry, TKey>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)(entry);
+        key = ((Func<IUpdateEntry, TKey>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)(
+            entry
+        );
         return key != null;
     }
 
@@ -80,7 +92,10 @@ public class SimpleFullyNullableDependentKeyValueFactory<TKey> : IDependentKeyVa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromOriginalValues(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromOriginalValues(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         key = ((Func<IUpdateEntry, TKey>)_propertyAccessors.OriginalValueGetter!)(entry);
         return key != null;
@@ -92,7 +107,10 @@ public class SimpleFullyNullableDependentKeyValueFactory<TKey> : IDependentKeyVa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, [NotNullWhen(true)] out TKey? key)
+    public virtual bool TryCreateFromRelationshipSnapshot(
+        IUpdateEntry entry,
+        [NotNullWhen(true)] out TKey? key
+    )
     {
         key = ((Func<IUpdateEntry, TKey>)_propertyAccessors.RelationshipSnapshotGetter)(entry);
         return key != null;

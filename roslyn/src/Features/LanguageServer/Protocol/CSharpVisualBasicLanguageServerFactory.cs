@@ -22,7 +22,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CSharpVisualBasicLanguageServerFactory(
             CSharpVisualBasicLspServiceProvider lspServiceProvider,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
         {
             _lspServiceProvider = lspServiceProvider;
             _listenerProvider = listenerProvider;
@@ -31,15 +32,18 @@ namespace Microsoft.CodeAnalysis.LanguageServer
         public ILanguageServerTarget Create(
             JsonRpc jsonRpc,
             ICapabilitiesProvider capabilitiesProvider,
-            ILspLogger logger)
+            ILspLogger logger
+        )
         {
             return new LanguageServerTarget(
-                _lspServiceProvider, jsonRpc,
+                _lspServiceProvider,
+                jsonRpc,
                 capabilitiesProvider,
                 _listenerProvider,
                 logger,
                 ProtocolConstants.RoslynLspLanguages,
-                WellKnownLspServerKinds.CSharpVisualBasicLspServer);
+                WellKnownLspServerKinds.CSharpVisualBasicLspServer
+            );
         }
     }
 }

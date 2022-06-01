@@ -11,18 +11,28 @@ namespace Microsoft.Interop.Analyzers
 {
     internal static class SyntaxGeneratorExtensions
     {
-        public static SyntaxNode GetEnumValueAsFlagsExpression(this SyntaxGenerator gen, ITypeSymbol enumType, object value, bool includeZeroValueFlags)
+        public static SyntaxNode GetEnumValueAsFlagsExpression(
+            this SyntaxGenerator gen,
+            ITypeSymbol enumType,
+            object value,
+            bool includeZeroValueFlags
+        )
         {
             if (enumType.TypeKind != TypeKind.Enum)
             {
                 throw new ArgumentException(nameof(enumType));
             }
 
-            SpecialType underlyingType = ((INamedTypeSymbol)enumType).EnumUnderlyingType.SpecialType;
+            SpecialType underlyingType = ((INamedTypeSymbol)enumType)
+                .EnumUnderlyingType
+                .SpecialType;
 
             if (!underlyingType.IsIntegralType())
             {
-                return gen.CastExpression(gen.TypeExpression(underlyingType), gen.LiteralExpression(value));
+                return gen.CastExpression(
+                    gen.TypeExpression(underlyingType),
+                    gen.LiteralExpression(value)
+                );
             }
 
             ulong valueToMatch = GetNumericValue(value);
@@ -42,8 +52,17 @@ namespace Microsoft.Interop.Analyzers
                     {
                         currentlyMatchedFlags |= fieldNumericValue;
                         enumValueSyntax = enumValueSyntax is null
-                            ? gen.MemberAccessExpression(gen.TypeExpression(enumType), enumValue.Name)
-                            : gen.BitwiseOrExpression(enumValueSyntax, gen.MemberAccessExpression(gen.TypeExpression(enumType), enumValue.Name));
+                            ? gen.MemberAccessExpression(
+                                gen.TypeExpression(enumType),
+                                enumValue.Name
+                            )
+                            : gen.BitwiseOrExpression(
+                                enumValueSyntax,
+                                gen.MemberAccessExpression(
+                                    gen.TypeExpression(enumType),
+                                    enumValue.Name
+                                )
+                            );
                     }
                 }
             }
@@ -51,17 +70,21 @@ namespace Microsoft.Interop.Analyzers
             // Unable to represent the value as the enum flags. Just use the literal value cast as the enum type.
             if (currentlyMatchedFlags != valueToMatch)
             {
-                return gen.CastExpression(gen.TypeExpression(underlyingType), gen.LiteralExpression(value));
+                return gen.CastExpression(
+                    gen.TypeExpression(underlyingType),
+                    gen.LiteralExpression(value)
+                );
             }
 
             return enumValueSyntax;
 
-            static ulong GetNumericValue(object value) => value switch
-            {
-                byte or ushort or uint or ulong => Convert.ToUInt64(value),
-                sbyte or short or int or long => (ulong)Convert.ToInt64(value),
-                _ => throw new UnreachableException()
-            };
+            static ulong GetNumericValue(object value) =>
+                value switch
+                {
+                    byte or ushort or uint or ulong => Convert.ToUInt64(value),
+                    sbyte or short or int or long => (ulong)Convert.ToInt64(value),
+                    _ => throw new UnreachableException()
+                };
         }
     }
 }

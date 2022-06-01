@@ -7,8 +7,10 @@ namespace System.ComponentModel.Composition
     {
         private readonly TMetadata _metadata;
 
-        public ExportFactory(Func<Tuple<T, Action>> exportLifetimeContextCreator, TMetadata metadata)
-            : base(exportLifetimeContextCreator)
+        public ExportFactory(
+            Func<Tuple<T, Action>> exportLifetimeContextCreator,
+            TMetadata metadata
+        ) : base(exportLifetimeContextCreator)
         {
             _metadata = metadata;
         }

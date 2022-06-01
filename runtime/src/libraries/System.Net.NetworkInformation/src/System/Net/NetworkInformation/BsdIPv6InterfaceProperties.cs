@@ -9,13 +9,15 @@ namespace System.Net.NetworkInformation
     {
         private readonly int _mtu;
 
-        public BsdIPv6InterfaceProperties(BsdNetworkInterface oni, int mtu)
-            : base(oni)
+        public BsdIPv6InterfaceProperties(BsdNetworkInterface oni, int mtu) : base(oni)
         {
             _mtu = mtu;
         }
 
-        public override int Mtu { get { return _mtu; } }
+        public override int Mtu
+        {
+            get { return _mtu; }
+        }
 
         [UnsupportedOSPlatform("osx")]
         [UnsupportedOSPlatform("ios")]

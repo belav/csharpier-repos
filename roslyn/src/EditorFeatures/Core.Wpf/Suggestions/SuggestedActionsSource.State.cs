@@ -28,7 +28,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 public Workspace? Workspace { get; set; }
                 public int LastSolutionVersionReported;
 
-                public State(SuggestedActionsSource source, SuggestedActionsSourceProvider owner, ITextView textView, ITextBuffer textBuffer)
+                public State(
+                    SuggestedActionsSource source,
+                    SuggestedActionsSourceProvider owner,
+                    ITextView textView,
+                    ITextBuffer textBuffer
+                )
                 {
                     _source = source;
 
@@ -49,7 +54,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
                     if (Workspace != null)
                     {
-                        Workspace.Services.GetRequiredService<IWorkspaceStatusService>().StatusChanged -= _source.OnWorkspaceStatusChanged;
+                        Workspace.Services
+                            .GetRequiredService<IWorkspaceStatusService>()
+                            .StatusChanged -= _source.OnWorkspaceStatusChanged;
                         Workspace.DocumentActiveContextChanged -= _source.OnActiveContextChanged;
                     }
 

@@ -57,7 +57,12 @@ namespace System.Web.Mvc
                 ViewPage viewPage = Page as ViewPage;
                 if (viewPage == null)
                 {
-                    throw new InvalidOperationException(String.Format(CultureInfo.CurrentCulture, MvcResources.ViewMasterPage_RequiresViewPage));
+                    throw new InvalidOperationException(
+                        String.Format(
+                            CultureInfo.CurrentCulture,
+                            MvcResources.ViewMasterPage_RequiresViewPage
+                        )
+                    );
                 }
                 return viewPage;
             }

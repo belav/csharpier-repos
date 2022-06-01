@@ -48,8 +48,8 @@ namespace System.Text.Json
         public JsonTypeInfo? PolymorphicJsonTypeInfo;
 
         // Gets the initial JsonTypeInfo metadata used when deserializing the current value.
-        public JsonTypeInfo BaseJsonTypeInfo
-            => PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntryStarted
+        public JsonTypeInfo BaseJsonTypeInfo =>
+            PolymorphicSerializationState == PolymorphicSerializationState.PolymorphicReEntryStarted
                 ? PolymorphicJsonTypeInfo!
                 : JsonTypeInfo;
 
@@ -94,7 +94,10 @@ namespace System.Text.Json
         /// </summary>
         public bool IsProcessingDictionary()
         {
-            return (JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy & ConverterStrategy.Dictionary) != 0;
+            return (
+                    JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy
+                    & ConverterStrategy.Dictionary
+                ) != 0;
         }
 
         /// <summary>
@@ -102,10 +105,14 @@ namespace System.Text.Json
         /// </summary>
         public bool IsProcessingEnumerable()
         {
-            return (JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy & ConverterStrategy.Enumerable) != 0;
+            return (
+                    JsonTypeInfo.PropertyInfoForTypeInfo.ConverterStrategy
+                    & ConverterStrategy.Enumerable
+                ) != 0;
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"ConverterStrategy.{JsonTypeInfo?.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo?.Type.Name}";
+        private string DebuggerDisplay =>
+            $"ConverterStrategy.{JsonTypeInfo?.PropertyInfoForTypeInfo.ConverterStrategy}, {JsonTypeInfo?.Type.Name}";
     }
 }

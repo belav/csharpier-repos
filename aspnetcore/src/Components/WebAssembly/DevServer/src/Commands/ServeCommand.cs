@@ -11,7 +11,6 @@ namespace Microsoft.AspNetCore.Components.Web.DevServer.Commands
     internal class ServeCommand : CommandLineApplication
     {
         public ServeCommand(CommandLineApplication parent)
-
             // We pass arbitrary arguments through to the ASP.NET Core configuration
             : base(throwOnUnexpectedArg: false)
         {

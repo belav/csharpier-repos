@@ -19,15 +19,16 @@ namespace Microsoft.EntityFrameworkCore
         protected abstract TEntity Find<TEntity>(DbContext context, params object[] keyValues)
             where TEntity : class;
 
-        protected abstract ValueTask<TEntity> FindAsync<TEntity>(DbContext context, params object[] keyValues)
-            where TEntity : class;
+        protected abstract ValueTask<TEntity> FindAsync<TEntity>(
+            DbContext context,
+            params object[] keyValues
+        ) where TEntity : class;
 
         [ConditionalFact]
         public virtual void Find_int_key_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new IntKey { Id = 88 }).Entity;
+            var entity = context.Attach(new IntKey { Id = 88 }).Entity;
 
             Assert.Same(entity, Find<IntKey>(context, 88));
         }
@@ -50,8 +51,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_nullable_int_key_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new NullableIntKey { Id = 88 }).Entity;
+            var entity = context.Attach(new NullableIntKey { Id = 88 }).Entity;
 
             Assert.Same(entity, Find<NullableIntKey>(context, 88));
         }
@@ -74,8 +74,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_string_key_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new StringKey { Id = "Rabbit" }).Entity;
+            var entity = context.Attach(new StringKey { Id = "Rabbit" }).Entity;
 
             Assert.Same(entity, Find<StringKey>(context, "Rabbit"));
         }
@@ -98,8 +97,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_composite_key_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new CompositeKey { Id1 = 88, Id2 = "Rabbit" }).Entity;
+            var entity = context.Attach(new CompositeKey { Id1 = 88, Id2 = "Rabbit" }).Entity;
 
             Assert.Same(entity, Find<CompositeKey>(context, 88, "Rabbit"));
         }
@@ -122,8 +120,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_base_type_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new BaseType { Id = 88 }).Entity;
+            var entity = context.Attach(new BaseType { Id = 88 }).Entity;
 
             Assert.Same(entity, Find<BaseType>(context, 88));
         }
@@ -146,8 +143,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_derived_type_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new DerivedType { Id = 88 }).Entity;
+            var entity = context.Attach(new DerivedType { Id = 88 }).Entity;
 
             Assert.Same(entity, Find<DerivedType>(context, 88));
         }
@@ -172,8 +168,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_base_type_using_derived_set_tracked()
         {
             using var context = CreateContext();
-            context.Attach(
-                new BaseType { Id = 88 });
+            context.Attach(new BaseType { Id = 88 });
 
             Assert.Null(Find<DerivedType>(context, 88));
         }
@@ -189,8 +184,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual void Find_derived_type_using_base_set_tracked()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new DerivedType { Id = 88 }).Entity;
+            var entity = context.Attach(new DerivedType { Id = 88 }).Entity;
 
             Assert.Same(entity, Find<BaseType>(context, 88));
         }
@@ -263,7 +257,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindNotCompositeKey("IntKey", 2),
-                Assert.Throws<ArgumentException>(() => Find<IntKey>(context, 77, 88)).Message);
+                Assert.Throws<ArgumentException>(() => Find<IntKey>(context, 77, 88)).Message
+            );
         }
 
         [ConditionalFact]
@@ -272,7 +267,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindValueCountMismatch("CompositeKey", 2, 1),
-                Assert.Throws<ArgumentException>(() => Find<CompositeKey>(context, 77)).Message);
+                Assert.Throws<ArgumentException>(() => Find<CompositeKey>(context, 77)).Message
+            );
         }
 
         [ConditionalFact]
@@ -281,7 +277,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(0, "IntKey", "string", "int"),
-                Assert.Throws<ArgumentException>(() => Find<IntKey>(context, "77")).Message);
+                Assert.Throws<ArgumentException>(() => Find<IntKey>(context, "77")).Message
+            );
         }
 
         [ConditionalFact]
@@ -290,7 +287,8 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(1, "CompositeKey", "int", "string"),
-                Assert.Throws<ArgumentException>(() => Find<CompositeKey>(context, 77, 88)).Message);
+                Assert.Throws<ArgumentException>(() => Find<CompositeKey>(context, 77, 88)).Message
+            );
         }
 
         [ConditionalFact]
@@ -300,7 +298,8 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.InvalidSetType(nameof(Random)),
-                Assert.Throws<InvalidOperationException>(() => Find<Random>(context, 77)).Message);
+                Assert.Throws<InvalidOperationException>(() => Find<Random>(context, 77)).Message
+            );
         }
 
         [ConditionalFact]
@@ -310,16 +309,22 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
-                    typeof(DifferentNamespace.ShadowKey).DisplayName(), typeof(ShadowKey).DisplayName()),
-                Assert.Throws<InvalidOperationException>(() => Find<DifferentNamespace.ShadowKey>(context, 77)).Message);
+                    typeof(DifferentNamespace.ShadowKey).DisplayName(),
+                    typeof(ShadowKey).DisplayName()
+                ),
+                Assert
+                    .Throws<InvalidOperationException>(
+                        () => Find<DifferentNamespace.ShadowKey>(context, 77)
+                    )
+                    .Message
+            );
         }
 
         [ConditionalFact]
         public virtual async Task Find_int_key_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new IntKey { Id = 88 }).Entity;
+            var entity = context.Attach(new IntKey { Id = 88 }).Entity;
 
             var valueTask = FindAsync<IntKey>(context, 88);
             Assert.True(valueTask.IsCompleted);
@@ -344,8 +349,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_nullable_int_key_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new NullableIntKey { Id = 88 }).Entity;
+            var entity = context.Attach(new NullableIntKey { Id = 88 }).Entity;
 
             Assert.Same(entity, await FindAsync<NullableIntKey>(context, 88));
         }
@@ -368,8 +372,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_string_key_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new StringKey { Id = "Rabbit" }).Entity;
+            var entity = context.Attach(new StringKey { Id = "Rabbit" }).Entity;
 
             Assert.Same(entity, await FindAsync<StringKey>(context, "Rabbit"));
         }
@@ -392,8 +395,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_composite_key_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new CompositeKey { Id1 = 88, Id2 = "Rabbit" }).Entity;
+            var entity = context.Attach(new CompositeKey { Id1 = 88, Id2 = "Rabbit" }).Entity;
 
             Assert.Same(entity, await FindAsync<CompositeKey>(context, 88, "Rabbit"));
         }
@@ -416,8 +418,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_base_type_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new BaseType { Id = 88 }).Entity;
+            var entity = context.Attach(new BaseType { Id = 88 }).Entity;
 
             Assert.Same(entity, await FindAsync<BaseType>(context, 88));
         }
@@ -440,8 +441,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_derived_type_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new DerivedType { Id = 88 }).Entity;
+            var entity = context.Attach(new DerivedType { Id = 88 }).Entity;
 
             Assert.Same(entity, await FindAsync<DerivedType>(context, 88));
         }
@@ -466,8 +466,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_base_type_using_derived_set_tracked_async()
         {
             using var context = CreateContext();
-            context.Attach(
-                new BaseType { Id = 88 });
+            context.Attach(new BaseType { Id = 88 });
 
             Assert.Null(await FindAsync<DerivedType>(context, 88));
         }
@@ -483,8 +482,7 @@ namespace Microsoft.EntityFrameworkCore
         public virtual async Task Find_derived_type_using_base_set_tracked_async()
         {
             using var context = CreateContext();
-            var entity = context.Attach(
-                new DerivedType { Id = 88 }).Entity;
+            var entity = context.Attach(new DerivedType { Id = 88 }).Entity;
 
             Assert.Same(entity, await FindAsync<BaseType>(context, 88));
         }
@@ -550,7 +548,12 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindNotCompositeKey("IntKey", 2),
-                (await Assert.ThrowsAsync<ArgumentException>(() => FindAsync<IntKey>(context, 77, 88).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<IntKey>(context, 77, 88).AsTask()
+                    )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -559,7 +562,12 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindValueCountMismatch("CompositeKey", 2, 1),
-                (await Assert.ThrowsAsync<ArgumentException>(() => FindAsync<CompositeKey>(context, 77).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<CompositeKey>(context, 77).AsTask()
+                    )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -568,7 +576,12 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(0, "IntKey", "string", "int"),
-                (await Assert.ThrowsAsync<ArgumentException>(() => FindAsync<IntKey>(context, "77").AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<IntKey>(context, "77").AsTask()
+                    )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -577,7 +590,12 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.FindValueTypeMismatch(1, "CompositeKey", "int", "string"),
-                (await Assert.ThrowsAsync<ArgumentException>(() => FindAsync<CompositeKey>(context, 77, 88).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<ArgumentException>(
+                        () => FindAsync<CompositeKey>(context, 77, 88).AsTask()
+                    )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -586,7 +604,12 @@ namespace Microsoft.EntityFrameworkCore
             using var context = CreateContext();
             Assert.Equal(
                 CoreStrings.InvalidSetType(nameof(Random)),
-                (await Assert.ThrowsAsync<InvalidOperationException>(() => FindAsync<Random>(context, 77).AsTask())).Message);
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => FindAsync<Random>(context, 77).AsTask()
+                    )
+                ).Message
+            );
         }
 
         [ConditionalFact]
@@ -596,9 +619,15 @@ namespace Microsoft.EntityFrameworkCore
 
             Assert.Equal(
                 CoreStrings.InvalidSetSameTypeWithDifferentNamespace(
-                    typeof(DifferentNamespace.ShadowKey).DisplayName(), typeof(ShadowKey).DisplayName()),
-                (await Assert.ThrowsAsync<InvalidOperationException>(() => FindAsync<DifferentNamespace.ShadowKey>(context, 77).AsTask()))
-                .Message);
+                    typeof(DifferentNamespace.ShadowKey).DisplayName(),
+                    typeof(ShadowKey).DisplayName()
+                ),
+                (
+                    await Assert.ThrowsAsync<InvalidOperationException>(
+                        () => FindAsync<DifferentNamespace.ShadowKey>(context, 77).AsTask()
+                    )
+                ).Message
+            );
         }
 
         protected class BaseType
@@ -649,8 +678,7 @@ namespace Microsoft.EntityFrameworkCore
             public string Foo { get; set; }
         }
 
-        protected DbContext CreateContext()
-            => Fixture.CreateContext();
+        protected DbContext CreateContext() => Fixture.CreateContext();
 
         public abstract class FindFixtureBase : SharedStoreFixtureBase<PoolableDbContext>
         {
@@ -661,8 +689,7 @@ namespace Microsoft.EntityFrameworkCore
                 modelBuilder.Entity<IntKey>();
                 modelBuilder.Entity<NullableIntKey>();
                 modelBuilder.Entity<StringKey>();
-                modelBuilder.Entity<CompositeKey>().HasKey(
-                    e => new { e.Id1, e.Id2 });
+                modelBuilder.Entity<CompositeKey>().HasKey(e => new { e.Id1, e.Id2 });
                 modelBuilder.Entity<BaseType>();
                 modelBuilder.Entity<DerivedType>();
                 modelBuilder.Entity<ShadowKey>().Property(typeof(int), "Id").ValueGeneratedNever();
@@ -686,10 +713,10 @@ namespace Microsoft.EntityFrameworkCore
                         Id = 78,
                         Foo = "Strawberry",
                         Boo = "Cheesecake"
-                    });
+                    }
+                );
 
-                var entry = context.Entry(
-                    new ShadowKey { Foo = "Clippy" });
+                var entry = context.Entry(new ShadowKey { Foo = "Clippy" });
                 entry.Property("Id").CurrentValue = 77;
                 entry.State = EntityState.Added;
 

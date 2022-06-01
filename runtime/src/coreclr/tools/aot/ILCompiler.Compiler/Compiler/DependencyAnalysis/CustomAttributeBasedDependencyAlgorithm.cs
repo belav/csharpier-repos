@@ -19,27 +19,48 @@ namespace ILCompiler.DependencyAnalysis
     /// </summary>
     internal class CustomAttributeBasedDependencyAlgorithm
     {
-        public static void AddDependenciesDueToCustomAttributes(ref DependencyList dependencies, NodeFactory factory, EcmaMethod method)
+        public static void AddDependenciesDueToCustomAttributes(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaMethod method
+        )
         {
             MetadataReader reader = method.MetadataReader;
             MethodDefinitionHandle methodHandle = method.Handle;
             MethodDefinition methodDef = reader.GetMethodDefinition(methodHandle);
 
             // Handle custom attributes on the method
-            AddDependenciesDueToCustomAttributes(ref dependencies, factory, method.Module, methodDef.GetCustomAttributes());
+            AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                method.Module,
+                methodDef.GetCustomAttributes()
+            );
 
             // Handle custom attributes on method parameters
             foreach (ParameterHandle parameterHandle in methodDef.GetParameters())
             {
                 Parameter parameter = reader.GetParameter(parameterHandle);
-                AddDependenciesDueToCustomAttributes(ref dependencies, factory, method.Module, parameter.GetCustomAttributes());
+                AddDependenciesDueToCustomAttributes(
+                    ref dependencies,
+                    factory,
+                    method.Module,
+                    parameter.GetCustomAttributes()
+                );
             }
 
             // Handle custom attributes on generic method parameters
-            foreach (GenericParameterHandle genericParameterHandle in methodDef.GetGenericParameters())
+            foreach (
+                GenericParameterHandle genericParameterHandle in methodDef.GetGenericParameters()
+            )
             {
                 GenericParameter parameter = reader.GetGenericParameter(genericParameterHandle);
-                AddDependenciesDueToCustomAttributes(ref dependencies, factory, method.Module, parameter.GetCustomAttributes());
+                AddDependenciesDueToCustomAttributes(
+                    ref dependencies,
+                    factory,
+                    method.Module,
+                    parameter.GetCustomAttributes()
+                );
             }
 
             // We don't model properties and events as separate entities within the compiler, so ensuring
@@ -51,7 +72,9 @@ namespace ILCompiler.DependencyAnalysis
             // care about emit accessors like this.
             if ((methodDef.Attributes & MethodAttributes.SpecialName) != 0)
             {
-                TypeDefinition declaringType = reader.GetTypeDefinition(methodDef.GetDeclaringType());
+                TypeDefinition declaringType = reader.GetTypeDefinition(
+                    methodDef.GetDeclaringType()
+                );
 
                 foreach (PropertyDefinitionHandle propertyHandle in declaringType.GetProperties())
                 {
@@ -59,7 +82,12 @@ namespace ILCompiler.DependencyAnalysis
                     PropertyAccessors accessors = property.GetAccessors();
 
                     if (accessors.Getter == methodHandle || accessors.Setter == methodHandle)
-                        AddDependenciesDueToCustomAttributes(ref dependencies, factory, method.Module, property.GetCustomAttributes());
+                        AddDependenciesDueToCustomAttributes(
+                            ref dependencies,
+                            factory,
+                            method.Module,
+                            property.GetCustomAttributes()
+                        );
                 }
 
                 foreach (EventDefinitionHandle eventHandle in declaringType.GetEvents())
@@ -67,47 +95,99 @@ namespace ILCompiler.DependencyAnalysis
                     EventDefinition @event = reader.GetEventDefinition(eventHandle);
                     EventAccessors accessors = @event.GetAccessors();
 
-                    if (accessors.Adder == methodHandle || accessors.Remover == methodHandle || accessors.Raiser == methodHandle)
-                        AddDependenciesDueToCustomAttributes(ref dependencies, factory, method.Module, @event.GetCustomAttributes());
+                    if (
+                        accessors.Adder == methodHandle
+                        || accessors.Remover == methodHandle
+                        || accessors.Raiser == methodHandle
+                    )
+                        AddDependenciesDueToCustomAttributes(
+                            ref dependencies,
+                            factory,
+                            method.Module,
+                            @event.GetCustomAttributes()
+                        );
                 }
             }
         }
 
-        public static void AddDependenciesDueToCustomAttributes(ref DependencyList dependencies, NodeFactory factory, EcmaType type)
+        public static void AddDependenciesDueToCustomAttributes(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaType type
+        )
         {
             MetadataReader reader = type.MetadataReader;
             TypeDefinition typeDef = reader.GetTypeDefinition(type.Handle);
-            AddDependenciesDueToCustomAttributes(ref dependencies, factory, type.EcmaModule, typeDef.GetCustomAttributes());
+            AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                type.EcmaModule,
+                typeDef.GetCustomAttributes()
+            );
 
             // Handle custom attributes on generic type parameters
-            foreach (GenericParameterHandle genericParameterHandle in typeDef.GetGenericParameters())
+            foreach (
+                GenericParameterHandle genericParameterHandle in typeDef.GetGenericParameters()
+            )
             {
                 GenericParameter parameter = reader.GetGenericParameter(genericParameterHandle);
-                AddDependenciesDueToCustomAttributes(ref dependencies, factory, type.EcmaModule, parameter.GetCustomAttributes());
+                AddDependenciesDueToCustomAttributes(
+                    ref dependencies,
+                    factory,
+                    type.EcmaModule,
+                    parameter.GetCustomAttributes()
+                );
             }
         }
 
-        public static void AddDependenciesDueToCustomAttributes(ref DependencyList dependencies, NodeFactory factory, EcmaField field)
+        public static void AddDependenciesDueToCustomAttributes(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaField field
+        )
         {
             FieldDefinition fieldDef = field.MetadataReader.GetFieldDefinition(field.Handle);
-            AddDependenciesDueToCustomAttributes(ref dependencies, factory, field.Module, fieldDef.GetCustomAttributes());
+            AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                field.Module,
+                fieldDef.GetCustomAttributes()
+            );
         }
 
-        public static void AddDependenciesDueToCustomAttributes(ref DependencyList dependencies, NodeFactory factory, EcmaAssembly assembly)
+        public static void AddDependenciesDueToCustomAttributes(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaAssembly assembly
+        )
         {
             AssemblyDefinition asmDef = assembly.MetadataReader.GetAssemblyDefinition();
-            AddDependenciesDueToCustomAttributes(ref dependencies, factory, assembly, asmDef.GetCustomAttributes());
+            AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                assembly,
+                asmDef.GetCustomAttributes()
+            );
 
             ModuleDefinition moduleDef = assembly.MetadataReader.GetModuleDefinition();
-            AddDependenciesDueToCustomAttributes(ref dependencies, factory, assembly, moduleDef.GetCustomAttributes());
+            AddDependenciesDueToCustomAttributes(
+                ref dependencies,
+                factory,
+                assembly,
+                moduleDef.GetCustomAttributes()
+            );
         }
 
-        private static void AddDependenciesDueToCustomAttributes(ref DependencyList dependencies, NodeFactory factory, EcmaModule module, CustomAttributeHandleCollection attributeHandles)
+        private static void AddDependenciesDueToCustomAttributes(
+            ref DependencyList dependencies,
+            NodeFactory factory,
+            EcmaModule module,
+            CustomAttributeHandleCollection attributeHandles
+        )
         {
             MetadataReader reader = module.MetadataReader;
             var mdManager = (UsageBasedMetadataManager)factory.MetadataManager;
             var attributeTypeProvider = new CustomAttributeTypeProvider(module);
-
 
             foreach (CustomAttributeHandle caHandle in attributeHandles)
             {
@@ -123,19 +203,44 @@ namespace ILCompiler.DependencyAnalysis
                     if (mdManager.IsReflectionBlocked(constructor))
                         continue;
 
-                    CustomAttributeValue<TypeDesc> decodedValue = attribute.DecodeValue(attributeTypeProvider);
+                    CustomAttributeValue<TypeDesc> decodedValue = attribute.DecodeValue(
+                        attributeTypeProvider
+                    );
 
                     // Make a new list in case we need to abort.
-                    var caDependencies = factory.MetadataManager.GetDependenciesForCustomAttribute(factory, constructor, decodedValue) ?? new DependencyList();
+                    var caDependencies =
+                        factory.MetadataManager.GetDependenciesForCustomAttribute(
+                            factory,
+                            constructor,
+                            decodedValue
+                        ) ?? new DependencyList();
 
-                    caDependencies.Add(factory.ReflectableMethod(constructor), "Attribute constructor");
-                    caDependencies.Add(factory.ConstructedTypeSymbol(constructor.OwningType), "Attribute type");
+                    caDependencies.Add(
+                        factory.ReflectableMethod(constructor),
+                        "Attribute constructor"
+                    );
+                    caDependencies.Add(
+                        factory.ConstructedTypeSymbol(constructor.OwningType),
+                        "Attribute type"
+                    );
 
-                    if (AddDependenciesFromCustomAttributeBlob(caDependencies, factory, constructor.OwningType, decodedValue))
+                    if (
+                        AddDependenciesFromCustomAttributeBlob(
+                            caDependencies,
+                            factory,
+                            constructor.OwningType,
+                            decodedValue
+                        )
+                    )
                     {
                         dependencies = dependencies ?? new DependencyList();
                         dependencies.AddRange(caDependencies);
-                        dependencies.Add(factory.CustomAttributeMetadata(new ReflectableCustomAttribute(module, caHandle)), "Attribute metadata");
+                        dependencies.Add(
+                            factory.CustomAttributeMetadata(
+                                new ReflectableCustomAttribute(module, caHandle)
+                            ),
+                            "Attribute metadata"
+                        );
                     }
                 }
                 catch (TypeSystemException)
@@ -154,13 +259,25 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        private static bool AddDependenciesFromCustomAttributeBlob(DependencyList dependencies, NodeFactory factory, TypeDesc attributeType, CustomAttributeValue<TypeDesc> value)
+        private static bool AddDependenciesFromCustomAttributeBlob(
+            DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc attributeType,
+            CustomAttributeValue<TypeDesc> value
+        )
         {
             MetadataManager mdManager = factory.MetadataManager;
 
             foreach (CustomAttributeTypedArgument<TypeDesc> decodedArgument in value.FixedArguments)
             {
-                if (!AddDependenciesFromCustomAttributeArgument(dependencies, factory, decodedArgument.Type, decodedArgument.Value))
+                if (
+                    !AddDependenciesFromCustomAttributeArgument(
+                        dependencies,
+                        factory,
+                        decodedArgument.Type,
+                        decodedArgument.Value
+                    )
+                )
                     return false;
             }
 
@@ -175,18 +292,37 @@ namespace ILCompiler.DependencyAnalysis
                     Debug.Assert(decodedArgument.Kind == CustomAttributeNamedArgumentKind.Property);
 
                     // Reflection will need to reflection-invoke the setter at runtime.
-                    if (!AddDependenciesFromPropertySetter(dependencies, factory, attributeType, decodedArgument.Name))
+                    if (
+                        !AddDependenciesFromPropertySetter(
+                            dependencies,
+                            factory,
+                            attributeType,
+                            decodedArgument.Name
+                        )
+                    )
                         return false;
                 }
 
-                if (!AddDependenciesFromCustomAttributeArgument(dependencies, factory, decodedArgument.Type, decodedArgument.Value))
+                if (
+                    !AddDependenciesFromCustomAttributeArgument(
+                        dependencies,
+                        factory,
+                        decodedArgument.Type,
+                        decodedArgument.Value
+                    )
+                )
                     return false;
             }
 
             return true;
         }
 
-        private static bool AddDependenciesFromPropertySetter(DependencyList dependencies, NodeFactory factory, TypeDesc attributeType, string propertyName)
+        private static bool AddDependenciesFromPropertySetter(
+            DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc attributeType,
+            string propertyName
+        )
         {
             EcmaType attributeTypeDefinition = (EcmaType)attributeType.GetTypeDefinition();
 
@@ -202,17 +338,24 @@ namespace ILCompiler.DependencyAnalysis
 
                     if (!accessors.Setter.IsNil)
                     {
-                        MethodDesc setterMethod = (MethodDesc)attributeTypeDefinition.EcmaModule.GetObject(accessors.Setter);
+                        MethodDesc setterMethod = (MethodDesc)
+                            attributeTypeDefinition.EcmaModule.GetObject(accessors.Setter);
                         if (factory.MetadataManager.IsReflectionBlocked(setterMethod))
                             return false;
 
                         // Method on a generic attribute
                         if (attributeType != attributeTypeDefinition)
                         {
-                            setterMethod = factory.TypeSystemContext.GetMethodForInstantiatedType(setterMethod, (InstantiatedType)attributeType);
+                            setterMethod = factory.TypeSystemContext.GetMethodForInstantiatedType(
+                                setterMethod,
+                                (InstantiatedType)attributeType
+                            );
                         }
 
-                        dependencies.Add(factory.ReflectableMethod(setterMethod), "Custom attribute blob");
+                        dependencies.Add(
+                            factory.ReflectableMethod(setterMethod),
+                            "Custom attribute blob"
+                        );
                     }
 
                     return true;
@@ -223,13 +366,23 @@ namespace ILCompiler.DependencyAnalysis
             TypeDesc baseType = attributeType.BaseType;
 
             if (baseType != null)
-                return AddDependenciesFromPropertySetter(dependencies, factory, baseType, propertyName);
+                return AddDependenciesFromPropertySetter(
+                    dependencies,
+                    factory,
+                    baseType,
+                    propertyName
+                );
 
             // Not found. This is bad metadata that will result in a runtime failure, but we shouldn't fail the compilation.
             return true;
         }
 
-        private static bool AddDependenciesFromCustomAttributeArgument(DependencyList dependencies, NodeFactory factory, TypeDesc type, object value)
+        private static bool AddDependenciesFromCustomAttributeArgument(
+            DependencyList dependencies,
+            NodeFactory factory,
+            TypeDesc type,
+            object value
+        )
         {
             // If this is an initializer that refers to e.g. a blocked enum, we can't encode this attribute.
             if (factory.MetadataManager.IsReflectionBlocked(type))
@@ -248,9 +401,21 @@ namespace ILCompiler.DependencyAnalysis
                 if (elementType.UnderlyingType.IsPrimitive || elementType.IsString)
                     return true;
 
-                foreach (CustomAttributeTypedArgument<TypeDesc> arrayElement in (ImmutableArray<CustomAttributeTypedArgument<TypeDesc>>)value)
+                foreach (
+                    CustomAttributeTypedArgument<TypeDesc> arrayElement in (ImmutableArray<
+                        CustomAttributeTypedArgument<TypeDesc>
+                    >)
+                        value
+                )
                 {
-                    if (!AddDependenciesFromCustomAttributeArgument(dependencies, factory, arrayElement.Type, arrayElement.Value))
+                    if (
+                        !AddDependenciesFromCustomAttributeArgument(
+                            dependencies,
+                            factory,
+                            arrayElement.Type,
+                            arrayElement.Value
+                        )
+                    )
                         return false;
                 }
 
@@ -267,7 +432,12 @@ namespace ILCompiler.DependencyAnalysis
                 return false;
 
             // Grab the metadata nodes that will be necessary to represent the typeof in the metadata blob
-            TypeMetadataNode.GetMetadataDependencies(ref dependencies, factory, typeofType, "Custom attribute blob");
+            TypeMetadataNode.GetMetadataDependencies(
+                ref dependencies,
+                factory,
+                typeofType,
+                "Custom attribute blob"
+            );
             return true;
         }
     }

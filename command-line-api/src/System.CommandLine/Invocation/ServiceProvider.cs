@@ -18,18 +18,23 @@ namespace System.CommandLine.Invocation
         public ServiceProvider(BindingContext bindingContext)
         {
             _services = new Dictionary<Type, Func<IServiceProvider, object?>>
-                        {
-                            [typeof(ParseResult)] = _ => bindingContext.ParseResult,
-                            [typeof(IConsole)] = _ => bindingContext.Console,
-                            [typeof(CancellationToken)] = _ => CancellationToken.None,
-                            [typeof(HelpBuilder)] = _ => bindingContext.ParseResult.Parser.Configuration.HelpBuilderFactory(bindingContext),
-                            [typeof(BindingContext)] = _ => bindingContext
-                        };
+            {
+                [typeof(ParseResult)] = _ => bindingContext.ParseResult,
+                [typeof(IConsole)] = _ => bindingContext.Console,
+                [typeof(CancellationToken)] = _ => CancellationToken.None,
+                [typeof(HelpBuilder)] = _ =>
+                    bindingContext.ParseResult.Parser.Configuration.HelpBuilderFactory(
+                        bindingContext
+                    ),
+                [typeof(BindingContext)] = _ => bindingContext
+            };
         }
 
-        public void AddService<T>(Func<IServiceProvider, T> factory) => _services[typeof(T)] = p => factory(p)!;
+        public void AddService<T>(Func<IServiceProvider, T> factory) =>
+            _services[typeof(T)] = p => factory(p)!;
 
-        public void AddService(Type serviceType, Func<IServiceProvider, object?> factory) => _services[serviceType] = factory;
+        public void AddService(Type serviceType, Func<IServiceProvider, object?> factory) =>
+            _services[serviceType] = factory;
 
         public IReadOnlyCollection<Type> AvailableServiceTypes => _services.Keys;
 

@@ -5,9 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines an integer type that is represented in a base-2 format.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
-    public interface IBinaryInteger<TSelf>
-        : IBinaryNumber<TSelf>,
-          IShiftOperators<TSelf, TSelf>
+    public interface IBinaryInteger<TSelf> : IBinaryNumber<TSelf>, IShiftOperators<TSelf, TSelf>
         where TSelf : IBinaryInteger<TSelf>
     {
         /// <summary>Computes the quotient and remainder of two values.</summary>

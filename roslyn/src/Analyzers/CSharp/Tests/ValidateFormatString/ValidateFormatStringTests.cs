@@ -18,170 +18,193 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.ValidateFormatString
 {
     public class ValidateFormatStringTests : AbstractCSharpDiagnosticProviderBasedUserDiagnosticTest
     {
-        public ValidateFormatStringTests(ITestOutputHelper logger)
-           : base(logger)
-        {
-        }
+        public ValidateFormatStringTests(ITestOutputHelper logger) : base(logger) { }
 
-        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(Workspace workspace)
-            => (new CSharpValidateFormatStringDiagnosticAnalyzer(), null);
+        internal override (DiagnosticAnalyzer, CodeFixProvider) CreateDiagnosticProviderAndFixer(
+            Workspace workspace
+        ) => (new CSharpValidateFormatStringDiagnosticAnalyzer(), null);
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task OnePlaceholder()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This {0[||]} works"", ""test""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task TwoPlaceholders()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This {0[||]} {1} works"", ""test"", ""also""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task ThreePlaceholders()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This {0} {1[||]} works {2} "", ""test"", ""also"", ""well""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task FourPlaceholders()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This {1} is {2} my {6[||]} test "", ""teststring1"", ""teststring2"",
             ""teststring3"", ""teststring4"", ""teststring5"", ""teststring6"", ""teststring7"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task ObjectArray()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         object[] objectArray = { 1.25, ""2"", ""teststring""};
         string.Format(""This {0} {1} {2[||]} works"", objectArray); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task MultipleObjectArrays()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         object[] objectArray = { 1.25, ""2"", ""teststring""};
         string.Format(""This {0} {1} {2[||]} works"", objectArray, objectArray, objectArray, objectArray); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IntArray()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         int[] intArray = {1, 2, 3};
         string.Format(""This {0[||]} works"", intArray); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task StringArray()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string[] stringArray = {""test1"", ""test2"", ""test3""};
         string.Format(""This {0} {1} {2[||]} works"", stringArray); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task LiteralArray()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This {0[||]} {1} {2} {3} works"", new [] {""test1"", ""test2"", ""test3"", ""test4""}); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task StringArrayOutOfBounds_NoDiagnostic()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string[] stringArray = {""test1"", ""test2""};
         string.Format(""This {0} {1} {2[||]} works"", stringArray); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndOnePlaceholder()
         {
-            await TestDiagnosticMissingAsync(@" using System.Globalization; 
+            await TestDiagnosticMissingAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
     {
         testStr = string.Format(new CultureInfo(""pt-BR"", useUserOverride: false), ""The current price is {0[||]:C2} per ounce"", 2.45);
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndTwoPlaceholders()
         {
-            await TestDiagnosticMissingAsync(@" using System.Globalization; 
+            await TestDiagnosticMissingAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
     {
         testStr = string.Format(new CultureInfo(""pt-BR"", useUserOverride: false), ""The current price is {0[||]:C2} per {1} "", 2.45, ""ounce"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndThreePlaceholders()
         {
-            await TestDiagnosticMissingAsync(@" using System.Globalization; 
+            await TestDiagnosticMissingAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -189,13 +212,15 @@ class Program
         testStr = string.Format(new CultureInfo(""pt-BR"", useUserOverride: false), ""The current price is {0} {[||]1} {2} "", 
             2.45, ""per"", ""ounce"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndFourPlaceholders()
         {
-            await TestDiagnosticMissingAsync(@" using System.Globalization; 
+            await TestDiagnosticMissingAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -203,13 +228,15 @@ class Program
         testStr = string.Format(new CultureInfo(""pt-BR"", useUserOverride: false), ""The current price is {0} {1[||]} {2} {3} "", 
             2.45, ""per"", ""ounce"", ""today only"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndObjectArray()
         {
-            await TestDiagnosticMissingAsync(@" using System.Globalization; 
+            await TestDiagnosticMissingAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -217,185 +244,215 @@ class Program
         object[] objectArray = { 1.25, ""2"", ""teststring""};
         string.Format(new CultureInfo(""pt-BR"", useUserOverride: false), ""This {0} {1} {[||]2} works"", objectArray); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithComma()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""{0[||],6}"", 34);
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithColon()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""{[||]0:N0}"", 34);
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithCommaAndColon()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""Test {0,[||]15:N0} output"", 34);
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithPlaceholderAtBeginning()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""{0[||]} is my test case"", ""This"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithPlaceholderAtEnd()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This is my {0[||]}"", ""test"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithDoubleBraces()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format("" {{ 2}} This {1[||]} is {2} {{ my {0} test }} "", ""teststring1"", ""teststring2"", ""teststring3"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithDoubleBracesAtBeginning()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""{{ 2}} This {1[||]} is {2} {{ my {0} test }} "", ""teststring1"", ""teststring2"", ""teststring3"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithDoubleBracesAtEnd()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format("" {{ 2}} This {1[||]} is {2} {{ my {0} test }}"", ""teststring1"", ""teststring2"", ""teststring3"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task WithTripleBraces()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format("" {{{2}} This {1[||]} is {2} {{ my {0} test }}"", ""teststring1"", ""teststring2"", ""teststring3"");
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task NamedParameters()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(arg0: ""test"", arg1: ""also"", format: ""This {0} {[||]1} works""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task NamedParametersWithIFormatProvider()
         {
-            await TestDiagnosticMissingAsync(@" using System.Globalization;
+            await TestDiagnosticMissingAsync(
+                @" using System.Globalization;
 class Program
 {
     static void Main(string[] args)
     {
         string.Format(arg0: ""test"", provider: new CultureInfo(""pt-BR"", useUserOverride: false), format: ""This {0[||]} works""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task NamespaceAliasForStringClass()
         {
-            await TestDiagnosticMissingAsync(@" using stringAlias = System.String;
+            await TestDiagnosticMissingAsync(
+                @" using stringAlias = System.String;
 class Program
 {
     static void Main(string[] args)
     {
         stringAlias.Format(""This {0[||]} works"", ""test""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task MethodCallAsAnArgumentToAnotherMethod()
         {
-            await TestDiagnosticMissingAsync(@" using System.IO;
+            await TestDiagnosticMissingAsync(
+                @" using System.IO;
 class Program
 {
     static void Main(string[] args)
     {
         Console.WriteLine(string.Format(format: ""This {0[||]} works"", arg0:""test"")); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task VerbatimMultipleLines()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(@""This {0} 
 {1} {2[||]} works"", ""multiple"", ""line"", ""test"")); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task Interpolated()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -404,98 +461,114 @@ class Program
        
         string.Format($""{Name,[||] 20} is {Age:D3} ""); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task Empty()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""[||]""); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task LeftParenOnly()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format([||]; 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task ParenthesesOnly()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format([||]); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task EmptyString()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""[||]""); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task FormatOnly_NoStringDot()
         {
-            await TestDiagnosticMissingAsync(@" using static System.String
+            await TestDiagnosticMissingAsync(
+                @" using static System.String
 class Program
 {
     static void Main(string[] args)
     {
         Format(""[||]""); 
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task NamedParameters_BlankName()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format( : ""value""[||])); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task DuplicateNamedArgs()
         {
-            await TestDiagnosticMissingAsync(@" class Program
+            await TestDiagnosticMissingAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(format:""This [||] "", format:"" test ""); 
     }     
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task GenericIdentifier()
         {
-            await TestDiagnosticMissingAsync(@"using System;
+            await TestDiagnosticMissingAsync(
+                @"using System;
 using System.Collections;
 using System.Collections.Generic;
 using System.Text;
@@ -519,13 +592,15 @@ namespace Generics_CSharp
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task ClassNamedString()
         {
-            await TestDiagnosticMissingAsync(@"using System;
+            await TestDiagnosticMissingAsync(
+                @"using System;
 
 namespace System
 {
@@ -542,7 +617,8 @@ class C
         Console.WriteLine(String.Format(""test {[||]5} "", 1));
     }
 }
-");
+"
+            );
         }
 
 #if CODE_STYLE
@@ -550,7 +626,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task TestOption_Ignored()
         {
-            var source = @" class Program
+            var source =
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -562,20 +639,28 @@ class C
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 #else
-        [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.ValidateFormatString)
+        ]
         public async Task TestOption_Enabled()
         {
-            var source = @" class Program
+            var source =
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This [|{1}|] is my test"", ""teststring1"");
     }     
 }";
-            var options = Option(IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls, true);
+            var options = Option(
+                IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls,
+                true
+            );
 
             await TestDiagnosticInfoAsync(
                 source,
@@ -583,28 +668,38 @@ class C
                 globalOptions: options,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task TestOption_Disabled()
         {
-            var source = @" class Program
+            var source =
+                @" class Program
 {
     static void Main(string[] args)
     {
         string.Format(""This [|{1}|] is my test"", ""teststring1"");
     }     
 }";
-            var options = Option(IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls, false);
+            var options = Option(
+                IdeAnalyzerOptionsStorage.ReportInvalidPlaceholdersInStringDotFormatCalls,
+                false
+            );
 
             await TestDiagnosticMissingAsync(source, new TestParameters(globalOptions: options));
         }
 #endif
-        [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
+
+        [
+            Fact,
+            Trait(Traits.Feature, Traits.Features.ValidateFormatString)
+        ]
         public async Task OnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -614,13 +709,15 @@ class C
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task TwoPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -630,13 +727,15 @@ class C
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task ThreePlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -646,13 +745,15 @@ class C
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task FourPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -663,13 +764,15 @@ class C
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task iFormatProviderAndOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using System.Globalization; 
+            await TestDiagnosticInfoAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -680,13 +783,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task iFormatProviderAndTwoPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using System.Globalization; 
+            await TestDiagnosticInfoAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -697,13 +802,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndThreePlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using System.Globalization; 
+            await TestDiagnosticInfoAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -715,13 +822,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IFormatProviderAndFourPlaceholdersWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using System.Globalization; 
+            await TestDiagnosticInfoAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -733,13 +842,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task PlaceholderAtBeginningWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -749,13 +860,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task PlaceholderAtEndWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -765,13 +878,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task DoubleBracesAtBeginningWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -781,13 +896,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task DoubleBracesAtEndWithOnePlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -797,13 +914,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task NamedParametersOneOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using System.Globalization; 
+            await TestDiagnosticInfoAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -814,13 +933,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task NamedParametersWithIFormatProviderOneOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using System.Globalization; 
+            await TestDiagnosticInfoAsync(
+                @" using System.Globalization; 
 class Program
 {
     static void Main(string[] args)
@@ -831,13 +952,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task FormatOnly_NoStringDot_OneOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" using static System.String
+            await TestDiagnosticInfoAsync(
+                @" using static System.String
 class Program
 {
     static void Main(string[] args)
@@ -848,13 +971,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task Net45TestOutOfBounds()
         {
-            var input = @" 
+            var input =
+                @" 
             < Workspace >
                 < Project Language = ""C#"" AssemblyName=""Assembly1"" CommonReferencesNet45=""true""> 
  <Document FilePath=""CurrentDocument.cs""><![CDATA[
@@ -870,17 +995,20 @@ class Program
         </Document>
                 </Project>
             </Workspace>";
-            await TestDiagnosticInfoAsync(input,
+            await TestDiagnosticInfoAsync(
+                input,
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task VerbatimMultipleLinesPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -891,13 +1019,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task IntArrayOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -908,13 +1038,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task FirstPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -925,13 +1057,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task SecondPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -942,13 +1076,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task FirstOfMultipleSameNamedPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -959,13 +1095,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task SecondOfMultipleSameNamedPlaceholderOutOfBounds()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -976,13 +1114,15 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task EmptyPlaceholder()
         {
-            await TestDiagnosticInfoAsync(@" class Program
+            await TestDiagnosticInfoAsync(
+                @" class Program
 {
     static void Main(string[] args)
     {
@@ -993,21 +1133,24 @@ class Program
                 options: null,
                 diagnosticId: IDEDiagnosticIds.ValidateFormatStringDiagnosticID,
                 diagnosticSeverity: DiagnosticSeverity.Info,
-                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder);
+                diagnosticMessage: AnalyzersResources.Format_string_contains_invalid_placeholder
+            );
         }
 
         [WorkItem(29398, "https://github.com/dotnet/roslyn/issues/29398")]
         [Fact, Trait(Traits.Feature, Traits.Features.ValidateFormatString)]
         public async Task LocalFunctionNamedFormat()
         {
-            await TestDiagnosticMissingAsync(@"public class C
+            await TestDiagnosticMissingAsync(
+                @"public class C
 {
     public void M()
     {
         Forma[||]t();
         void Format() { }
     }
-}");
+}"
+            );
         }
     }
 }

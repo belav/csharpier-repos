@@ -17,7 +17,11 @@ namespace System.Reflection.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtimelab/issues/155", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtimelab/issues/155",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public static void MethodTakesRefStructAsArg_ThrowsNSE()
         {
             MethodInfo mi = GetMethod(nameof(TestClass.TakesRefStructAsArg));
@@ -27,7 +31,11 @@ namespace System.Reflection.Tests
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtimelab/issues/155", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtimelab/issues/155",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public static void MethodTakesRefStructAsArgWithDefaultValue_ThrowsNSE()
         {
             MethodInfo mi = GetMethod(nameof(TestClass.TakesRefStructAsArgWithDefaultValue));
@@ -37,7 +45,10 @@ namespace System.Reflection.Tests
         }
 
         // Moq heavily utilizes RefEmit, which does not work on most aot workloads
-        [ConditionalFact(typeof(PlatformDetection), nameof(PlatformDetection.IsReflectionEmitSupported))]
+        [ConditionalFact(
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsReflectionEmitSupported)
+        )]
         [SkipOnMono("https://github.com/dotnet/runtime/issues/40738")]
         public static void MethodTakesRefToRefStructAsArg_ThrowsNSE()
         {
@@ -46,10 +57,21 @@ namespace System.Reflection.Tests
 
             Mock<Binder> mockBinder = new Mock<Binder>(MockBehavior.Strict);
             Type myRefStructType = typeof(MyRefStruct);
-            mockBinder.Setup(o => o.ChangeType("hello", myRefStructType.MakeByRefType(), null)).Returns((object)null);
+            mockBinder
+                .Setup(o => o.ChangeType("hello", myRefStructType.MakeByRefType(), null))
+                .Returns((object)null);
 
             MethodInfo mi = GetMethod(nameof(TestClass.TakesRefToRefStructAsArg));
-            Assert.Throws<NotSupportedException>(() => mi.Invoke(null, BindingFlags.InvokeMethod, mockBinder.Object, new object[] { "hello" }, null));
+            Assert.Throws<NotSupportedException>(
+                () =>
+                    mi.Invoke(
+                        null,
+                        BindingFlags.InvokeMethod,
+                        mockBinder.Object,
+                        new object[] { "hello" },
+                        null
+                    )
+            );
         }
 
         [Fact]
@@ -70,13 +92,19 @@ namespace System.Reflection.Tests
         [Fact]
         public static void PropertyTypedAsRefToRefStruct_AsPropInfo_ThrowsNSE()
         {
-            PropertyInfo pi = typeof(TestClass).GetProperty(nameof(TestClass.PropertyTypedAsRefToRefStruct));
+            PropertyInfo pi = typeof(TestClass).GetProperty(
+                nameof(TestClass.PropertyTypedAsRefToRefStruct)
+            );
             Assert.NotNull(pi);
             Assert.Throws<NotSupportedException>(() => pi.GetValue(null));
         }
 
         [Fact]
-        [ActiveIssue("https://github.com/dotnet/runtimelab/issues/155", typeof(PlatformDetection), nameof(PlatformDetection.IsNativeAot))]
+        [ActiveIssue(
+            "https://github.com/dotnet/runtimelab/issues/155",
+            typeof(PlatformDetection),
+            nameof(PlatformDetection.IsNativeAot)
+        )]
         public static void PropertyIndexerWithRefStructArg_ThrowsNSE()
         {
             PropertyInfo pi = typeof(TestClassWithIndexerWithRefStructArg).GetProperty("Item");
@@ -129,7 +157,10 @@ namespace System.Reflection.Tests
 
         private static MethodInfo GetMethod(string name)
         {
-            MethodInfo mi = typeof(TestClass).GetMethod(name, BindingFlags.Static | BindingFlags.Public);
+            MethodInfo mi = typeof(TestClass).GetMethod(
+                name,
+                BindingFlags.Static | BindingFlags.Public
+            );
             Assert.NotNull(mi);
             return mi;
         }

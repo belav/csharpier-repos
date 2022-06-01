@@ -34,29 +34,31 @@ public class BoolToTwoValuesConverter<TProvider> : ValueConverter<bool, TProvide
         TProvider falseValue,
         TProvider trueValue,
         Expression<Func<TProvider, bool>>? fromProvider = null,
-        ConverterMappingHints? mappingHints = null)
-        : base(ToProvider(falseValue, trueValue), fromProvider ?? ToBool(trueValue), mappingHints)
-    {
-    }
+        ConverterMappingHints? mappingHints = null
+    ) : base(ToProvider(falseValue, trueValue), fromProvider ?? ToBool(trueValue), mappingHints) { }
 
-    private static Expression<Func<bool, TProvider>> ToProvider(TProvider falseValue, TProvider trueValue)
+    private static Expression<Func<bool, TProvider>> ToProvider(
+        TProvider falseValue,
+        TProvider trueValue
+    )
     {
         var param = Expression.Parameter(typeof(bool), "v");
         return Expression.Lambda<Func<bool, TProvider>>(
             Expression.Condition(
                 param,
                 Expression.Constant(trueValue, typeof(TProvider)),
-                Expression.Constant(falseValue, typeof(TProvider))),
-            param);
+                Expression.Constant(falseValue, typeof(TProvider))
+            ),
+            param
+        );
     }
 
     private static Expression<Func<TProvider, bool>> ToBool(TProvider trueValue)
     {
         var param = Expression.Parameter(typeof(TProvider), "v");
         return Expression.Lambda<Func<TProvider, bool>>(
-            Expression.Equal(
-                param,
-                Expression.Constant(trueValue, typeof(TProvider))),
-            param);
+            Expression.Equal(param, Expression.Constant(trueValue, typeof(TProvider))),
+            param
+        );
     }
 }

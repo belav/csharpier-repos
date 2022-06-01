@@ -28,6 +28,7 @@ namespace Microsoft.CodeAnalysis.AddParameter
             string parameterName,
             int? newParameterIndex,
             bool fixAllReferences,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

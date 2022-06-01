@@ -112,7 +112,10 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             if (safeContents.ConfidentialityMode != Pkcs12ConfidentialityMode.None)
-                throw new ArgumentException(SR.Cryptography_Pkcs12_CannotProcessEncryptedSafeContents, nameof(safeContents));
+                throw new ArgumentException(
+                    SR.Cryptography_Pkcs12_CannotProcessEncryptedSafeContents,
+                    nameof(safeContents)
+                );
             if (IsReadOnly)
                 throw new InvalidOperationException(SR.Cryptography_Pkcs12_SafeContentsIsReadOnly);
 
@@ -124,19 +127,22 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12ShroudedKeyBag AddShroudedKey(
             AsymmetricAlgorithm key,
             byte[]? passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             return AddShroudedKey(
                 key,
                 // Allows null
                 new ReadOnlySpan<byte>(passwordBytes),
-                pbeParameters);
+                pbeParameters
+            );
         }
 
         public Pkcs12ShroudedKeyBag AddShroudedKey(
             AsymmetricAlgorithm key,
             ReadOnlySpan<byte> passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             if (key is null)
             {
@@ -146,7 +152,10 @@ namespace System.Security.Cryptography.Pkcs
             if (IsReadOnly)
                 throw new InvalidOperationException(SR.Cryptography_Pkcs12_SafeContentsIsReadOnly);
 
-            byte[] encryptedPkcs8 = key.ExportEncryptedPkcs8PrivateKey(passwordBytes, pbeParameters);
+            byte[] encryptedPkcs8 = key.ExportEncryptedPkcs8PrivateKey(
+                passwordBytes,
+                pbeParameters
+            );
             Pkcs12ShroudedKeyBag bag = new Pkcs12ShroudedKeyBag(encryptedPkcs8, skipCopy: true);
             AddSafeBag(bag);
             return bag;
@@ -155,19 +164,22 @@ namespace System.Security.Cryptography.Pkcs
         public Pkcs12ShroudedKeyBag AddShroudedKey(
             AsymmetricAlgorithm key,
             string? password,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             return AddShroudedKey(
                 key,
                 // This extension method invoke allows null.
                 password.AsSpan(),
-                pbeParameters);
+                pbeParameters
+            );
         }
 
         public Pkcs12ShroudedKeyBag AddShroudedKey(
             AsymmetricAlgorithm key,
             ReadOnlySpan<char> password,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             if (key is null)
             {
@@ -228,10 +240,15 @@ namespace System.Security.Cryptography.Pkcs
                     SR.Format(
                         SR.Cryptography_Pkcs12_WrongModeForDecrypt,
                         Pkcs12ConfidentialityMode.Password,
-                        ConfidentialityMode));
+                        ConfidentialityMode
+                    )
+                );
             }
 
-            EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(_encrypted, AsnEncodingRules.BER);
+            EncryptedDataAsn encryptedData = EncryptedDataAsn.Decode(
+                _encrypted,
+                AsnEncodingRules.BER
+            );
 
             // https://tools.ietf.org/html/rfc5652#section-8
             if (encryptedData.Version != 0 && encryptedData.Version != 2)
@@ -253,7 +270,11 @@ namespace System.Security.Cryptography.Pkcs
             }
 
             List<Pkcs12SafeBag> bags;
-            int encryptedValueLength = encryptedData.EncryptedContentInfo.EncryptedContent.Value.Length;
+            int encryptedValueLength = encryptedData
+                .EncryptedContentInfo
+                .EncryptedContent
+                .Value
+                .Length;
 
             // Don't use the array pool because the parsed bags are going to have ReadOnlyMemory projections
             // over this data.
@@ -264,7 +285,8 @@ namespace System.Security.Cryptography.Pkcs
                 password,
                 passwordBytes,
                 encryptedData.EncryptedContentInfo.EncryptedContent.Value.Span,
-                destination);
+                destination
+            );
 
             try
             {
@@ -353,19 +375,17 @@ namespace System.Security.Cryptography.Pkcs
                             break;
                     }
                 }
-                catch (AsnContentException)
-                {
-                }
-                catch (CryptographicException)
-                {
-                }
+                catch (AsnContentException) { }
+                catch (CryptographicException) { }
 
                 if (bag == null)
                 {
                     bag = new Pkcs12SafeBag.UnknownBag(serializedBags[i].BagId, bagValue);
                 }
 
-                bag.Attributes = SignerInfo.MakeAttributeCollection(serializedBags[i].BagAttributes);
+                bag.Attributes = SignerInfo.MakeAttributeCollection(
+                    serializedBags[i].BagAttributes
+                );
                 bags.Add(bag);
             }
 
@@ -375,7 +395,8 @@ namespace System.Security.Cryptography.Pkcs
         internal byte[] Encrypt(
             ReadOnlySpan<char> password,
             ReadOnlySpan<byte> passwordBytes,
-            PbeParameters pbeParameters)
+            PbeParameters pbeParameters
+        )
         {
             Debug.Assert(pbeParameters != null);
             Debug.Assert(pbeParameters.IterationCount >= 1);
@@ -387,10 +408,13 @@ namespace System.Security.Cryptography.Pkcs
                 out SymmetricAlgorithm cipher,
                 out string hmacOid,
                 out string encryptionAlgorithmOid,
-                out bool isPkcs12);
+                out bool isPkcs12
+            );
 
             int cipherBlockBytes = cipher.BlockSize / 8;
-            byte[] encryptedRent = CryptoPool.Rent(contentsWriter.GetEncodedLength() + cipherBlockBytes);
+            byte[] encryptedRent = CryptoPool.Rent(
+                contentsWriter.GetEncodedLength() + cipherBlockBytes
+            );
             Span<byte> encryptedSpan = Span<byte>.Empty;
             Span<byte> iv = stackalloc byte[cipherBlockBytes];
             Span<byte> salt = stackalloc byte[16];
@@ -407,7 +431,8 @@ namespace System.Security.Cryptography.Pkcs
                     pbeParameters,
                     salt,
                     encryptedRent,
-                    iv);
+                    iv
+                );
 
                 encryptedSpan = encryptedRent.AsSpan(0, written);
 
@@ -432,9 +457,13 @@ namespace System.Security.Cryptography.Pkcs
                         salt,
                         pbeParameters.IterationCount,
                         hmacOid,
-                        iv);
+                        iv
+                    );
 
-                    writer.WriteOctetString(encryptedSpan, new Asn1Tag(TagClass.ContextSpecific, 0));
+                    writer.WriteOctetString(
+                        encryptedSpan,
+                        new Asn1Tag(TagClass.ContextSpecific, 0)
+                    );
                     writer.PopSequence();
                 }
 
@@ -453,8 +482,10 @@ namespace System.Security.Cryptography.Pkcs
         {
             AsnWriter writer;
 
-            if (ConfidentialityMode == Pkcs12ConfidentialityMode.Password ||
-                ConfidentialityMode == Pkcs12ConfidentialityMode.PublicKey)
+            if (
+                ConfidentialityMode == Pkcs12ConfidentialityMode.Password
+                || ConfidentialityMode == Pkcs12ConfidentialityMode.PublicKey
+            )
             {
                 writer = new AsnWriter(AsnEncodingRules.BER);
                 writer.WriteEncodedValueForCrypto(_encrypted.Span);

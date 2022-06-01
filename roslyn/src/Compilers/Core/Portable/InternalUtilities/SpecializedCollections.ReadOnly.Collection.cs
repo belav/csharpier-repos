@@ -14,10 +14,7 @@ namespace Roslyn.Utilities
             internal class Collection<TUnderlying, T> : Enumerable<TUnderlying, T>, ICollection<T>
                 where TUnderlying : ICollection<T>
             {
-                public Collection(TUnderlying underlying)
-                    : base(underlying)
-                {
-                }
+                public Collection(TUnderlying underlying) : base(underlying) { }
 
                 public void Add(T item)
                 {
@@ -41,10 +38,7 @@ namespace Roslyn.Utilities
 
                 public int Count
                 {
-                    get
-                    {
-                        return this.Underlying.Count;
-                    }
+                    get { return this.Underlying.Count; }
                 }
 
                 public bool IsReadOnly => true;

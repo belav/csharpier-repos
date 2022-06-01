@@ -19,16 +19,21 @@ namespace Microsoft.Interop
             _innerMarshallingGenerator = innerMarshallingGenerator;
         }
 
-        public bool IsSupported(TargetFramework target, Version version)
-            => _innerMarshallingGenerator.IsSupported(target, version);
+        public bool IsSupported(TargetFramework target, Version version) =>
+            _innerMarshallingGenerator.IsSupported(target, version);
 
-        public ValueBoundaryBehavior GetValueBoundaryBehavior(TypePositionInfo info, StubCodeContext context)
+        public ValueBoundaryBehavior GetValueBoundaryBehavior(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (IsPinningPathSupported(info, context))
             {
-                if (AsNativeType(info) is PointerTypeSyntax pointerType
+                if (
+                    AsNativeType(info) is PointerTypeSyntax pointerType
                     && pointerType.ElementType is PredefinedTypeSyntax predefinedType
-                    && predefinedType.Keyword.IsKind(SyntaxKind.VoidKeyword))
+                    && predefinedType.Keyword.IsKind(SyntaxKind.VoidKeyword)
+                )
                 {
                     return ValueBoundaryBehavior.NativeIdentifier;
                 }
@@ -60,7 +65,10 @@ namespace Microsoft.Interop
             return _innerMarshallingGenerator.Generate(info, context);
         }
 
-        public bool SupportsByValueMarshalKind(ByValueContentsMarshalKind marshalKind, StubCodeContext context)
+        public bool SupportsByValueMarshalKind(
+            ByValueContentsMarshalKind marshalKind,
+            StubCodeContext context
+        )
         {
             return _innerMarshallingGenerator.SupportsByValueMarshalKind(marshalKind, context);
         }
@@ -74,12 +82,18 @@ namespace Microsoft.Interop
 
             return _innerMarshallingGenerator.UsesNativeIdentifier(info, context);
         }
+
         private static bool IsPinningPathSupported(TypePositionInfo info, StubCodeContext context)
         {
-            return context.SingleFrameSpansNativeContext && !info.IsByRef && !info.IsManagedReturnPosition;
+            return context.SingleFrameSpansNativeContext
+                && !info.IsByRef
+                && !info.IsManagedReturnPosition;
         }
 
-        private static IEnumerable<StatementSyntax> GeneratePinningPath(TypePositionInfo info, StubCodeContext context)
+        private static IEnumerable<StatementSyntax> GeneratePinningPath(
+            TypePositionInfo info,
+            StubCodeContext context
+        )
         {
             if (context.CurrentStage == StubCodeContext.Stage.Pin)
             {
@@ -91,12 +105,13 @@ namespace Microsoft.Interop
                         PointerType(PredefinedType(Token(SyntaxKind.VoidKeyword))),
                         SingletonSeparatedList(
                             VariableDeclarator(Identifier(nativeIdentifier))
-                                .WithInitializer(EqualsValueClause(
-                                    IdentifierName(managedIdentifier)
-                                ))
+                                .WithInitializer(
+                                    EqualsValueClause(IdentifierName(managedIdentifier))
+                                )
                         )
                     ),
-                    EmptyStatement());
+                    EmptyStatement()
+                );
             }
         }
     }

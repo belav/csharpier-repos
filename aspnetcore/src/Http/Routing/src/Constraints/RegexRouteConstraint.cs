@@ -43,7 +43,8 @@ public class RegexRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatch
         Constraint = new Regex(
             regexPattern,
             RegexOptions.CultureInvariant | RegexOptions.IgnoreCase,
-            RegexMatchTimeout);
+            RegexMatchTimeout
+        );
     }
 
     /// <summary>
@@ -57,7 +58,8 @@ public class RegexRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatch
         IRouter? route,
         string routeKey,
         RouteValueDictionary values,
-        RouteDirection routeDirection)
+        RouteDirection routeDirection
+    )
     {
         if (routeKey == null)
         {
@@ -69,8 +71,7 @@ public class RegexRouteConstraint : IRouteConstraint, IParameterLiteralNodeMatch
             throw new ArgumentNullException(nameof(values));
         }
 
-        if (values.TryGetValue(routeKey, out var routeValue)
-            && routeValue != null)
+        if (values.TryGetValue(routeKey, out var routeValue) && routeValue != null)
         {
             var parameterValueString = Convert.ToString(routeValue, CultureInfo.InvariantCulture)!;
 

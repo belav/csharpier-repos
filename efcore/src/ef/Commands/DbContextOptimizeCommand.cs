@@ -17,10 +17,7 @@ namespace Microsoft.EntityFrameworkCore.Tools.Commands
             }
 
             using var executor = CreateExecutor(args);
-            executor.OptimizeContext(
-                _outputDir!.Value(),
-                _namespace!.Value(),
-                Context!.Value());
+            executor.OptimizeContext(_outputDir!.Value(), _namespace!.Value(), Context!.Value());
 
             return base.Execute(args);
         }

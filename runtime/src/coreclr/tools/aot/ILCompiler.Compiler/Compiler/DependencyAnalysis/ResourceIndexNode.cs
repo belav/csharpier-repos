@@ -19,7 +19,12 @@ namespace ILCompiler.DependencyAnalysis
         public ResourceIndexNode(ResourceDataNode resourceDataNode)
         {
             _resourceDataNode = resourceDataNode;
-            _endSymbol = new ObjectAndOffsetSymbolNode(this, 0, "__embedded_resourceindex_End", true);
+            _endSymbol = new ObjectAndOffsetSymbolNode(
+                this,
+                0,
+                "__embedded_resourceindex_End",
+                true
+            );
         }
 
         private ObjectAndOffsetSymbolNode _endSymbol;
@@ -39,24 +44,27 @@ namespace ILCompiler.DependencyAnalysis
             sb.Append(nameMangler.CompilationUnitPrefix).Append("__embedded_resourceindex");
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override ObjectData GetData(NodeFactory factory, bool relocsOnly = false)
         {
             // This node has no relocations.
             if (relocsOnly)
-                return new ObjectData(Array.Empty<byte>(), Array.Empty<Relocation>(), 1, new ISymbolDefinitionNode[] { this });
+                return new ObjectData(
+                    Array.Empty<byte>(),
+                    Array.Empty<Relocation>(),
+                    1,
+                    new ISymbolDefinitionNode[] { this }
+                );
 
             byte[] blob = GenerateIndexBlob(factory);
             return new ObjectData(
                 blob,
                 Array.Empty<Relocation>(),
                 1,
-                new ISymbolDefinitionNode[]
-                {
-                    this,
-                    EndSymbol
-                });
+                new ISymbolDefinitionNode[] { this, EndSymbol }
+            );
         }
 
         /// <summary>
@@ -71,7 +79,7 @@ namespace ILCompiler.DependencyAnalysis
             indexHashtableSection.Place(indexHashtable);
 
             // Build a table with a tuple of Assembly Full Name, Resource Name, Offset within the resource data blob, Length
-            // for each resource. 
+            // for each resource.
             // This generates a hashtable for the convenience of managed code since there's
             // a reader for VertexHashtable, but not for VertexSequence.
 
@@ -79,7 +87,9 @@ namespace ILCompiler.DependencyAnalysis
             {
                 Vertex asmName = nativeWriter.GetStringConstant(indexData.AssemblyName);
                 Vertex resourceName = nativeWriter.GetStringConstant(indexData.ResourceName);
-                Vertex offsetVertex = nativeWriter.GetUnsignedConstant((uint)indexData.NativeOffset);
+                Vertex offsetVertex = nativeWriter.GetUnsignedConstant(
+                    (uint)indexData.NativeOffset
+                );
                 Vertex lengthVertex = nativeWriter.GetUnsignedConstant((uint)indexData.Length);
 
                 Vertex indexVertex = nativeWriter.GetTuple(asmName, resourceName);

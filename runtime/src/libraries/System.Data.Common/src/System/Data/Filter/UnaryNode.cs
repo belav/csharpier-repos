@@ -135,7 +135,7 @@ namespace System.Data
                         {
                             return SqlBoolean.False;
                         }
-                        throw ExprException.UnsupportedOperator(op);  // or should the result of not SQLNull  be SqlNull ?
+                        throw ExprException.UnsupportedOperator(op); // or should the result of not SQLNull  be SqlNull ?
                     }
                     else
                     {
@@ -174,8 +174,11 @@ namespace System.Data
             return (_right.DependsOn(column));
         }
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026:RequiresUnreferencedCode",
-            Justification = "Evaluating constant expression is safe")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026:RequiresUnreferencedCode",
+            Justification = "Evaluating constant expression is safe"
+        )]
         internal override ExpressionNode Optimize()
         {
             _right = _right.Optimize();

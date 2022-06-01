@@ -9,11 +9,16 @@ using System.Diagnostics;
 using System.Threading;
 using Microsoft.CodeAnalysis.PooledObjects;
 using Roslyn.Utilities;
-using TOutput = System.ValueTuple<System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.GeneratedSourceText>, System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.Diagnostic>>;
+using TOutput = System.ValueTuple<
+    System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.GeneratedSourceText>,
+    System.Collections.Generic.IEnumerable<Microsoft.CodeAnalysis.Diagnostic>
+>;
 
 namespace Microsoft.CodeAnalysis
 {
-    internal sealed class SourceOutputNode<TInput> : IIncrementalGeneratorOutputNode, IIncrementalGeneratorNode<TOutput>
+    internal sealed class SourceOutputNode<TInput>
+        : IIncrementalGeneratorOutputNode,
+            IIncrementalGeneratorNode<TOutput>
     {
         private readonly IIncrementalGeneratorNode<TInput> _source;
 
@@ -23,21 +28,36 @@ namespace Microsoft.CodeAnalysis
 
         private readonly string _sourceExtension;
 
-        public SourceOutputNode(IIncrementalGeneratorNode<TInput> source, Action<SourceProductionContext, TInput, CancellationToken> action, IncrementalGeneratorOutputKind outputKind, string sourceExtension)
+        public SourceOutputNode(
+            IIncrementalGeneratorNode<TInput> source,
+            Action<SourceProductionContext, TInput, CancellationToken> action,
+            IncrementalGeneratorOutputKind outputKind,
+            string sourceExtension
+        )
         {
             _source = source;
             _action = action;
 
-            Debug.Assert(outputKind == IncrementalGeneratorOutputKind.Source || outputKind == IncrementalGeneratorOutputKind.Implementation);
+            Debug.Assert(
+                outputKind == IncrementalGeneratorOutputKind.Source
+                    || outputKind == IncrementalGeneratorOutputKind.Implementation
+            );
             _outputKind = outputKind;
             _sourceExtension = sourceExtension;
         }
 
         public IncrementalGeneratorOutputKind Kind => _outputKind;
 
-        public NodeStateTable<TOutput> UpdateStateTable(DriverStateTable.Builder graphState, NodeStateTable<TOutput> previousTable, CancellationToken cancellationToken)
+        public NodeStateTable<TOutput> UpdateStateTable(
+            DriverStateTable.Builder graphState,
+            NodeStateTable<TOutput> previousTable,
+            CancellationToken cancellationToken
+        )
         {
-            string stepName = Kind == IncrementalGeneratorOutputKind.Source ? WellKnownGeneratorOutputs.SourceOutput : WellKnownGeneratorOutputs.ImplementationSourceOutput;
+            string stepName =
+                Kind == IncrementalGeneratorOutputKind.Source
+                    ? WellKnownGeneratorOutputs.SourceOutput
+                    : WellKnownGeneratorOutputs.ImplementationSourceOutput;
             var sourceTable = graphState.GetLatestStateTableForNode(_source);
             if (sourceTable.IsCached)
             {
@@ -51,28 +71,46 @@ namespace Microsoft.CodeAnalysis
             var nodeTable = graphState.CreateTableBuilder(previousTable, stepName);
             foreach (var entry in sourceTable)
             {
-                var inputs = nodeTable.TrackIncrementalSteps ? ImmutableArray.Create((entry.Step!, entry.OutputIndex)) : default;
+                var inputs = nodeTable.TrackIncrementalSteps
+                    ? ImmutableArray.Create((entry.Step!, entry.OutputIndex))
+                    : default;
                 if (entry.State == EntryState.Removed)
                 {
                     nodeTable.TryRemoveEntries(TimeSpan.Zero, inputs);
                 }
-                else if (entry.State != EntryState.Cached || !nodeTable.TryUseCachedEntries(TimeSpan.Zero, inputs))
+                else if (
+                    entry.State != EntryState.Cached
+                    || !nodeTable.TryUseCachedEntries(TimeSpan.Zero, inputs)
+                )
                 {
                     // we don't currently handle modified any differently than added at the output
                     // we just run the action and mark the new source as added. In theory we could compare
-                    // the diagnostics and sources produced and compare them, to see if they are any different 
+                    // the diagnostics and sources produced and compare them, to see if they are any different
                     // than before.
 
                     var sourcesBuilder = new AdditionalSourcesCollection(_sourceExtension);
                     var diagnostics = DiagnosticBag.GetInstance();
 
-                    SourceProductionContext context = new SourceProductionContext(sourcesBuilder, diagnostics, cancellationToken);
+                    SourceProductionContext context = new SourceProductionContext(
+                        sourcesBuilder,
+                        diagnostics,
+                        cancellationToken
+                    );
                     try
                     {
                         var stopwatch = SharedStopwatch.StartNew();
                         _action(context, entry.Item, cancellationToken);
-                        var sourcesAndDiagnostics = (sourcesBuilder.ToImmutable(), diagnostics.ToReadOnly());
-                        nodeTable.AddEntry(sourcesAndDiagnostics, EntryState.Added, stopwatch.Elapsed, inputs, EntryState.Added);
+                        var sourcesAndDiagnostics = (
+                            sourcesBuilder.ToImmutable(),
+                            diagnostics.ToReadOnly()
+                        );
+                        nodeTable.AddEntry(
+                            sourcesAndDiagnostics,
+                            EntryState.Added,
+                            stopwatch.Elapsed,
+                            inputs,
+                            EntryState.Added
+                        );
                     }
                     finally
                     {
@@ -85,13 +123,22 @@ namespace Microsoft.CodeAnalysis
             return nodeTable.ToImmutableAndFree();
         }
 
-        IIncrementalGeneratorNode<TOutput> IIncrementalGeneratorNode<TOutput>.WithComparer(IEqualityComparer<TOutput> comparer) => throw ExceptionUtilities.Unreachable;
+        IIncrementalGeneratorNode<TOutput> IIncrementalGeneratorNode<TOutput>.WithComparer(
+            IEqualityComparer<TOutput> comparer
+        ) => throw ExceptionUtilities.Unreachable;
 
-        public IIncrementalGeneratorNode<(IEnumerable<GeneratedSourceText>, IEnumerable<Diagnostic>)> WithTrackingName(string name) => throw ExceptionUtilities.Unreachable;
+        public IIncrementalGeneratorNode<(IEnumerable<GeneratedSourceText>, IEnumerable<Diagnostic>)> WithTrackingName(
+            string name
+        ) => throw ExceptionUtilities.Unreachable;
 
-        void IIncrementalGeneratorNode<TOutput>.RegisterOutput(IIncrementalGeneratorOutputNode output) => throw ExceptionUtilities.Unreachable;
+        void IIncrementalGeneratorNode<TOutput>.RegisterOutput(
+            IIncrementalGeneratorOutputNode output
+        ) => throw ExceptionUtilities.Unreachable;
 
-        public void AppendOutputs(IncrementalExecutionContext context, CancellationToken cancellationToken)
+        public void AppendOutputs(
+            IncrementalExecutionContext context,
+            CancellationToken cancellationToken
+        )
         {
             // get our own state table
             Debug.Assert(context.TableBuilder is not null);

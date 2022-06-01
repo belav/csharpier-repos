@@ -12,7 +12,8 @@ namespace Microsoft.AspNetCore.DataProtection.AuthenticatedEncryption.Configurat
 /// A class that can deserialize an <see cref="XElement"/> that represents the serialized version
 /// of an <see cref="ManagedAuthenticatedEncryptorDescriptor"/>.
 /// </summary>
-public sealed class ManagedAuthenticatedEncryptorDescriptorDeserializer : IAuthenticatedEncryptorDescriptorDeserializer
+public sealed class ManagedAuthenticatedEncryptorDescriptorDeserializer
+    : IAuthenticatedEncryptorDescriptorDeserializer
 {
     /// <summary>
     /// Imports the <see cref="ManagedAuthenticatedEncryptorDescriptor"/> from serialized XML.
@@ -34,11 +35,15 @@ public sealed class ManagedAuthenticatedEncryptorDescriptorDeserializer : IAuthe
         var configuration = new ManagedAuthenticatedEncryptorConfiguration();
 
         var encryptionElement = element.Element("encryption")!;
-        configuration.EncryptionAlgorithmType = FriendlyNameToType((string)encryptionElement.Attribute("algorithm")!);
+        configuration.EncryptionAlgorithmType = FriendlyNameToType(
+            (string)encryptionElement.Attribute("algorithm")!
+        );
         configuration.EncryptionAlgorithmKeySize = (int)encryptionElement.Attribute("keyLength")!;
 
         var validationElement = element.Element("validation")!;
-        configuration.ValidationAlgorithmType = FriendlyNameToType((string)validationElement.Attribute("algorithm")!);
+        configuration.ValidationAlgorithmType = FriendlyNameToType(
+            (string)validationElement.Attribute("algorithm")!
+        );
 
         Secret masterKey = ((string)element.Element("masterKey")!).ToSecret();
 

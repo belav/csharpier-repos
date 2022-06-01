@@ -19,7 +19,8 @@ namespace System.CommandLine.Help
             HelpBuilder helpBuilder,
             Command command,
             TextWriter output,
-            ParseResult? parseResult = null)
+            ParseResult? parseResult = null
+        )
         {
             HelpBuilder = helpBuilder ?? throw new ArgumentNullException(nameof(helpBuilder));
             Command = command ?? throw new ArgumentNullException(nameof(command));

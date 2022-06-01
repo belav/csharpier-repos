@@ -23,7 +23,9 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             _jsonRpc = jsonRpc;
         }
 
-        public async ValueTask SendNotificationAsync(string methodName, CancellationToken cancellationToken)
-            => await _jsonRpc.NotifyAsync(methodName).ConfigureAwait(false);
+        public async ValueTask SendNotificationAsync(
+            string methodName,
+            CancellationToken cancellationToken
+        ) => await _jsonRpc.NotifyAsync(methodName).ConfigureAwait(false);
     }
 }

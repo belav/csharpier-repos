@@ -18,18 +18,19 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.Remote
 {
-    internal sealed class RemoteSemanticClassificationCacheService : BrokeredServiceBase, IRemoteSemanticClassificationCacheService
+    internal sealed class RemoteSemanticClassificationCacheService
+        : BrokeredServiceBase,
+            IRemoteSemanticClassificationCacheService
     {
         internal sealed class Factory : FactoryBase<IRemoteSemanticClassificationCacheService>
         {
-            protected override IRemoteSemanticClassificationCacheService CreateService(in ServiceConstructionArguments arguments)
-                => new RemoteSemanticClassificationCacheService(arguments);
+            protected override IRemoteSemanticClassificationCacheService CreateService(
+                in ServiceConstructionArguments arguments
+            ) => new RemoteSemanticClassificationCacheService(arguments);
         }
 
         public RemoteSemanticClassificationCacheService(in ServiceConstructionArguments arguments)
-            : base(arguments)
-        {
-        }
+            : base(arguments) { }
 
         /// <summary>
         /// Key we use to look this up in the persistence store for a particular document.
@@ -52,32 +53,46 @@ namespace Microsoft.CodeAnalysis.Remote
         /// This can be read and updated from different threads.  To keep things safe, we use thsi object itself
         /// as the lock that is taken to serialize access.
         /// </summary>
-        private readonly LinkedList<(DocumentId id, Checksum checksum, ImmutableArray<ClassifiedSpan> classifiedSpans)> _cachedData = new();
+        private readonly LinkedList<(DocumentId id, Checksum checksum, ImmutableArray<ClassifiedSpan> classifiedSpans)> _cachedData =
+            new();
 
         public ValueTask CacheSemanticClassificationsAsync(
             PinnedSolutionInfo solutionInfo,
             DocumentId documentId,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                // We only get called to cache classifications once we're fully loaded.  At that point there's no need
-                // for us to keep around any of the data we cached in-memory during the time the solution was loading.
-                lock (_cachedData)
-                    _cachedData.Clear();
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    // We only get called to cache classifications once we're fully loaded.  At that point there's no need
+                    // for us to keep around any of the data we cached in-memory during the time the solution was loading.
+                    lock (_cachedData)
+                        _cachedData.Clear();
 
-                var solution = await GetSolutionAsync(solutionInfo, cancellationToken).ConfigureAwait(false);
-                var document = solution.GetRequiredDocument(documentId);
+                    var solution = await GetSolutionAsync(solutionInfo, cancellationToken)
+                        .ConfigureAwait(false);
+                    var document = solution.GetRequiredDocument(documentId);
 
-                await CacheSemanticClassificationsAsync(document, cancellationToken).ConfigureAwait(false);
-            }, cancellationToken);
+                    await CacheSemanticClassificationsAsync(document, cancellationToken)
+                        .ConfigureAwait(false);
+                },
+                cancellationToken
+            );
         }
 
-        private static async Task CacheSemanticClassificationsAsync(Document document, CancellationToken cancellationToken)
+        private static async Task CacheSemanticClassificationsAsync(
+            Document document,
+            CancellationToken cancellationToken
+        )
         {
             var solution = document.Project.Solution;
-            var persistenceService = solution.Workspace.Services.GetPersistentStorageService(solution.Options);
-            var storage = await persistenceService.GetStorageAsync(SolutionKey.ToSolutionKey(solution), cancellationToken).ConfigureAwait(false);
+            var persistenceService = solution.Workspace.Services.GetPersistentStorageService(
+                solution.Options
+            );
+            var storage = await persistenceService
+                .GetStorageAsync(SolutionKey.ToSolutionKey(solution), cancellationToken)
+                .ConfigureAwait(false);
             await using var _1 = storage.ConfigureAwait(false);
             if (storage == null)
                 return;
@@ -89,10 +104,13 @@ namespace Microsoft.CodeAnalysis.Remote
             // Very intentionally do our lookup with a special document key.  This doc key stores info independent of
             // project config.  So we can still lookup data regardless of things like if the project is in DEBUG or
             // RELEASE mode.
-            var (documentKey, checksum) = await SemanticClassificationCacheUtilities.GetDocumentKeyAndChecksumAsync(
-                document, cancellationToken).ConfigureAwait(false);
+            var (documentKey, checksum) = await SemanticClassificationCacheUtilities
+                .GetDocumentKeyAndChecksumAsync(document, cancellationToken)
+                .ConfigureAwait(false);
 
-            var matches = await storage.ChecksumMatchesAsync(documentKey, PersistenceName, checksum, cancellationToken).ConfigureAwait(false);
+            var matches = await storage
+                .ChecksumMatchesAsync(documentKey, PersistenceName, checksum, cancellationToken)
+                .ConfigureAwait(false);
             if (matches)
                 return;
 
@@ -101,7 +119,15 @@ namespace Microsoft.CodeAnalysis.Remote
             // Compute classifications for the full span.
             var text = await document.GetTextAsync(cancellationToken).ConfigureAwait(false);
             var options = ClassificationOptions.From(document.Project);
-            await classificationService.AddSemanticClassificationsAsync(document, new TextSpan(0, text.Length), options, classifiedSpans, cancellationToken).ConfigureAwait(false);
+            await classificationService
+                .AddSemanticClassificationsAsync(
+                    document,
+                    new TextSpan(0, text.Length),
+                    options,
+                    classifiedSpans,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             using var stream = SerializableBytes.CreateWritableStream();
             using (var writer = new ObjectWriter(stream, leaveOpen: true, cancellationToken))
@@ -110,10 +136,15 @@ namespace Microsoft.CodeAnalysis.Remote
             }
 
             stream.Position = 0;
-            await storage.WriteStreamAsync(documentKey, PersistenceName, stream, checksum, cancellationToken).ConfigureAwait(false);
+            await storage
+                .WriteStreamAsync(documentKey, PersistenceName, stream, checksum, cancellationToken)
+                .ConfigureAwait(false);
         }
 
-        private static void WriteTo(ArrayBuilder<ClassifiedSpan> classifiedSpans, ObjectWriter writer)
+        private static void WriteTo(
+            ArrayBuilder<ClassifiedSpan> classifiedSpans,
+            ObjectWriter writer
+        )
         {
             writer.WriteInt32(ClassificationFormat);
 
@@ -122,7 +153,9 @@ namespace Microsoft.CodeAnalysis.Remote
             // spans we emit.
 
             using var _1 = ArrayBuilder<string>.GetInstance(out var classificationTypes);
-            using var _2 = PooledDictionary<string, int>.GetInstance(out var seenClassificationTypes);
+            using var _2 = PooledDictionary<string, int>.GetInstance(
+                out var seenClassificationTypes
+            );
 
             foreach (var classifiedSpan in classifiedSpans)
             {
@@ -152,30 +185,50 @@ namespace Microsoft.CodeAnalysis.Remote
                 {
                     writer.WriteInt32(classifiedSpan.TextSpan.Start);
                     writer.WriteCompressedUInt((uint)classifiedSpan.TextSpan.Length);
-                    writer.WriteCompressedUInt((uint)seenClassificationTypes[classifiedSpan.ClassificationType]);
+                    writer.WriteCompressedUInt(
+                        (uint)seenClassificationTypes[classifiedSpan.ClassificationType]
+                    );
                 }
             }
         }
 
         public ValueTask<SerializableClassifiedSpans?> GetCachedSemanticClassificationsAsync(
-            DocumentKey documentKey, TextSpan textSpan, Checksum checksum, StorageDatabase database, CancellationToken cancellationToken)
+            DocumentKey documentKey,
+            TextSpan textSpan,
+            Checksum checksum,
+            StorageDatabase database,
+            CancellationToken cancellationToken
+        )
         {
-            return RunServiceAsync(async cancellationToken =>
-            {
-                var classifiedSpans = await TryGetOrReadCachedSemanticClassificationsAsync(
-                    documentKey, checksum, database, cancellationToken).ConfigureAwait(false);
-                if (classifiedSpans.IsDefault)
-                    return null;
+            return RunServiceAsync(
+                async cancellationToken =>
+                {
+                    var classifiedSpans = await TryGetOrReadCachedSemanticClassificationsAsync(
+                            documentKey,
+                            checksum,
+                            database,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
+                    if (classifiedSpans.IsDefault)
+                        return null;
 
-                return SerializableClassifiedSpans.Dehydrate(classifiedSpans.WhereAsArray(c => c.TextSpan.IntersectsWith(textSpan)));
-            }, cancellationToken);
+                    return SerializableClassifiedSpans.Dehydrate(
+                        classifiedSpans.WhereAsArray(c => c.TextSpan.IntersectsWith(textSpan))
+                    );
+                },
+                cancellationToken
+            );
         }
 
-        private async Task<ImmutableArray<ClassifiedSpan>> TryGetOrReadCachedSemanticClassificationsAsync(
+        private async Task<
+            ImmutableArray<ClassifiedSpan>
+        > TryGetOrReadCachedSemanticClassificationsAsync(
             DocumentKey documentKey,
             Checksum checksum,
             StorageDatabase database,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // See if we've loaded this into memory first.
             if (TryGetFromInMemoryCache(documentKey, checksum, out var classifiedSpans))
@@ -183,7 +236,12 @@ namespace Microsoft.CodeAnalysis.Remote
 
             // Otherwise, attempt to read in classifications from persistence store.
             classifiedSpans = await TryReadCachedSemanticClassificationsAsync(
-                documentKey, checksum, database, cancellationToken).ConfigureAwait(false);
+                    documentKey,
+                    checksum,
+                    database,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (classifiedSpans.IsDefault)
                 return default;
 
@@ -191,11 +249,17 @@ namespace Microsoft.CodeAnalysis.Remote
             return classifiedSpans;
         }
 
-        private bool TryGetFromInMemoryCache(DocumentKey documentKey, Checksum checksum, out ImmutableArray<ClassifiedSpan> classifiedSpans)
+        private bool TryGetFromInMemoryCache(
+            DocumentKey documentKey,
+            Checksum checksum,
+            out ImmutableArray<ClassifiedSpan> classifiedSpans
+        )
         {
             lock (_cachedData)
             {
-                var data = _cachedData.FirstOrNull(d => d.id == documentKey.Id && d.checksum == checksum);
+                var data = _cachedData.FirstOrNull(
+                    d => d.id == documentKey.Id && d.checksum == checksum
+                );
                 if (data != null)
                 {
                     classifiedSpans = data.Value.classifiedSpans;
@@ -210,12 +274,17 @@ namespace Microsoft.CodeAnalysis.Remote
         private void UpdateInMemoryCache(
             DocumentKey documentKey,
             Checksum checksum,
-            ImmutableArray<ClassifiedSpan> classifiedSpans)
+            ImmutableArray<ClassifiedSpan> classifiedSpans
+        )
         {
             lock (_cachedData)
             {
                 // First, remove any existing info for this doc.
-                for (var currentNode = _cachedData.First; currentNode != null; currentNode = currentNode.Next)
+                for (
+                    var currentNode = _cachedData.First;
+                    currentNode != null;
+                    currentNode = currentNode.Next
+                )
                 {
                     if (currentNode.Value.id == documentKey.Id)
                     {
@@ -233,20 +302,30 @@ namespace Microsoft.CodeAnalysis.Remote
             }
         }
 
-        private async Task<ImmutableArray<ClassifiedSpan>> TryReadCachedSemanticClassificationsAsync(
+        private async Task<
+            ImmutableArray<ClassifiedSpan>
+        > TryReadCachedSemanticClassificationsAsync(
             DocumentKey documentKey,
             Checksum checksum,
             StorageDatabase database,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var persistenceService = GetWorkspaceServices().GetPersistentStorageService(database);
-            var storage = await persistenceService.GetStorageAsync(documentKey.Project.Solution, cancellationToken).ConfigureAwait(false);
+            var storage = await persistenceService
+                .GetStorageAsync(documentKey.Project.Solution, cancellationToken)
+                .ConfigureAwait(false);
             await using var _ = storage.ConfigureAwait(false);
             if (storage == null)
                 return default;
 
-            using var stream = await storage.ReadStreamAsync(documentKey, PersistenceName, checksum, cancellationToken).ConfigureAwait(false);
-            using var reader = ObjectReader.TryGetReader(stream, cancellationToken: cancellationToken);
+            using var stream = await storage
+                .ReadStreamAsync(documentKey, PersistenceName, checksum, cancellationToken)
+                .ConfigureAwait(false);
+            using var reader = ObjectReader.TryGetReader(
+                stream,
+                cancellationToken: cancellationToken
+            );
             if (reader == null)
                 return default;
 
@@ -264,13 +343,19 @@ namespace Microsoft.CodeAnalysis.Remote
                 // For space efficiency, the unique classification types are emitted in one array up front, and then the
                 // specific classification type is referred to by index when emitting the individual spans.
                 var classificationTypesCount = reader.ReadInt32();
-                using var _1 = ArrayBuilder<string>.GetInstance(classificationTypesCount, out var classificationTypes);
+                using var _1 = ArrayBuilder<string>.GetInstance(
+                    classificationTypesCount,
+                    out var classificationTypes
+                );
 
                 for (var i = 0; i < classificationTypesCount; i++)
                     classificationTypes.Add(reader.ReadString());
 
                 var classifiedSpanCount = reader.ReadInt32();
-                using var _2 = ArrayBuilder<ClassifiedSpan>.GetInstance(classifiedSpanCount, out var classifiedSpans);
+                using var _2 = ArrayBuilder<ClassifiedSpan>.GetInstance(
+                    classifiedSpanCount,
+                    out var classifiedSpans
+                );
 
                 for (var i = 0; i < classifiedSpanCount; i++)
                 {
@@ -280,7 +365,12 @@ namespace Microsoft.CodeAnalysis.Remote
                         var length = (int)reader.ReadCompressedUInt();
                         var typeIndex = (int)reader.ReadCompressedUInt();
 
-                        classifiedSpans.Add(new ClassifiedSpan(classificationTypes[typeIndex], new TextSpan(start, length)));
+                        classifiedSpans.Add(
+                            new ClassifiedSpan(
+                                classificationTypes[typeIndex],
+                                new TextSpan(start, length)
+                            )
+                        );
                     }
                 }
 
@@ -289,7 +379,9 @@ namespace Microsoft.CodeAnalysis.Remote
             catch
             {
                 // We're reading and interpreting arbitrary data from disk.  This may be invalid for any reason.
-                Internal.Log.Logger.Log(FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead);
+                Internal.Log.Logger.Log(
+                    FunctionId.RemoteSemanticClassificationCacheService_ExceptionInCacheRead
+                );
                 return default;
             }
         }

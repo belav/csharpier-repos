@@ -19,8 +19,8 @@ public class OriginalValuesFactoryFactory : SnapshotFactoryFactory<InternalEntit
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyIndex(IPropertyBase propertyBase)
-        => propertyBase.GetOriginalValueIndex();
+    protected override int GetPropertyIndex(IPropertyBase propertyBase) =>
+        propertyBase.GetOriginalValueIndex();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -28,8 +28,8 @@ public class OriginalValuesFactoryFactory : SnapshotFactoryFactory<InternalEntit
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override int GetPropertyCount(IEntityType entityType)
-        => entityType.OriginalValueCount();
+    protected override int GetPropertyCount(IEntityType entityType) =>
+        entityType.OriginalValueCount();
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -37,6 +37,6 @@ public class OriginalValuesFactoryFactory : SnapshotFactoryFactory<InternalEntit
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override ValueComparer? GetValueComparer(IProperty property)
-        => property.GetValueComparer();
+    protected override ValueComparer? GetValueComparer(IProperty property) =>
+        property.GetValueComparer();
 }

@@ -33,7 +33,11 @@ internal sealed partial class WebSocketsTransport : ITransport
 
     public PipeWriter Output => _transport!.Output;
 
-    public WebSocketsTransport(HttpConnectionOptions httpConnectionOptions, ILoggerFactory loggerFactory, Func<Task<string?>> accessTokenProvider)
+    public WebSocketsTransport(
+        HttpConnectionOptions httpConnectionOptions,
+        ILoggerFactory loggerFactory,
+        Func<Task<string?>> accessTokenProvider
+    )
     {
         _logger = (loggerFactory ?? NullLoggerFactory.Instance).CreateLogger<WebSocketsTransport>();
         _httpConnectionOptions = httpConnectionOptions ?? new HttpConnectionOptions();
@@ -45,7 +49,10 @@ internal sealed partial class WebSocketsTransport : ITransport
         _httpConnectionOptions.AccessTokenProvider = accessTokenProvider;
     }
 
-    private async ValueTask<WebSocket> DefaultWebSocketFactory(WebSocketConnectionContext context, CancellationToken cancellationToken)
+    private async ValueTask<WebSocket> DefaultWebSocketFactory(
+        WebSocketConnectionContext context,
+        CancellationToken cancellationToken
+    )
     {
         var webSocket = new ClientWebSocket();
         var url = context.Uri;
@@ -59,7 +66,10 @@ internal sealed partial class WebSocketsTransport : ITransport
             webSocket.Options.SetRequestHeader("User-Agent", Constants.UserAgentHeader.ToString());
 #else
             // Set an alternative user agent header on Full framework
-            webSocket.Options.SetRequestHeader("X-SignalR-User-Agent", Constants.UserAgentHeader.ToString());
+            webSocket.Options.SetRequestHeader(
+                "X-SignalR-User-Agent",
+                Constants.UserAgentHeader.ToString()
+            );
 #endif
 
             // Set this header so the server auth middleware will set an Unauthorized instead of Redirect status code
@@ -93,7 +103,9 @@ internal sealed partial class WebSocketsTransport : ITransport
 
                 if (context.Options.ClientCertificates != null)
                 {
-                    webSocket.Options.ClientCertificates.AddRange(context.Options.ClientCertificates);
+                    webSocket.Options.ClientCertificates.AddRange(
+                        context.Options.ClientCertificates
+                    );
                 }
 
                 if (context.Options.Credentials != null)
@@ -108,7 +120,10 @@ internal sealed partial class WebSocketsTransport : ITransport
 
                 if (context.Options.UseDefaultCredentials != null)
                 {
-                    webSocket.Options.UseDefaultCredentials = context.Options.UseDefaultCredentials.Value;
+                    webSocket.Options.UseDefaultCredentials = context
+                        .Options
+                        .UseDefaultCredentials
+                        .Value;
                 }
 
                 context.Options.WebSocketConfiguration?.Invoke(webSocket.Options);
@@ -117,7 +132,9 @@ internal sealed partial class WebSocketsTransport : ITransport
 
         if (_httpConnectionOptions.AccessTokenProvider != null)
         {
-            var accessToken = await _httpConnectionOptions.AccessTokenProvider().ConfigureAwait(false);
+            var accessToken = await _httpConnectionOptions
+                .AccessTokenProvider()
+                .ConfigureAwait(false);
             if (!string.IsNullOrWhiteSpace(accessToken))
             {
                 // We can't use request headers in the browser, so instead append the token as a query string in that case
@@ -149,7 +166,11 @@ internal sealed partial class WebSocketsTransport : ITransport
         return webSocket;
     }
 
-    public async Task StartAsync(Uri url, TransferFormat transferFormat, CancellationToken cancellationToken = default)
+    public async Task StartAsync(
+        Uri url,
+        TransferFormat transferFormat,
+        CancellationToken cancellationToken = default
+    )
     {
         if (url == null)
         {
@@ -158,12 +179,16 @@ internal sealed partial class WebSocketsTransport : ITransport
 
         if (transferFormat != TransferFormat.Binary && transferFormat != TransferFormat.Text)
         {
-            throw new ArgumentException($"The '{transferFormat}' transfer format is not supported by this transport.", nameof(transferFormat));
+            throw new ArgumentException(
+                $"The '{transferFormat}' transfer format is not supported by this transport.",
+                nameof(transferFormat)
+            );
         }
 
-        _webSocketMessageType = transferFormat == TransferFormat.Binary
-            ? WebSocketMessageType.Binary
-            : WebSocketMessageType.Text;
+        _webSocketMessageType =
+            transferFormat == TransferFormat.Binary
+                ? WebSocketMessageType.Binary
+                : WebSocketMessageType.Text;
 
         var resolvedUrl = ResolveWebSocketsUrl(url);
 
@@ -175,13 +200,18 @@ internal sealed partial class WebSocketsTransport : ITransport
 
         if (_webSocket == null)
         {
-            throw new InvalidOperationException("Configured WebSocketFactory did not return a value.");
+            throw new InvalidOperationException(
+                "Configured WebSocketFactory did not return a value."
+            );
         }
 
         Log.StartedTransport(_logger);
 
         // Create the pipe pair (Application's writer is connected to Transport's reader, and vice versa)
-        var pair = DuplexPipe.CreateConnectionPair(_httpConnectionOptions.TransportPipeOptions, _httpConnectionOptions.AppPipeOptions);
+        var pair = DuplexPipe.CreateConnectionPair(
+            _httpConnectionOptions.TransportPipeOptions,
+            _httpConnectionOptions.AppPipeOptions
+        );
 
         _transport = pair.Transport;
         _application = pair.Application;
@@ -215,7 +245,11 @@ internal sealed partial class WebSocketsTransport : ITransport
 
                 using (var delayCts = new CancellationTokenSource())
                 {
-                    var resultTask = await Task.WhenAny(sending, Task.Delay(_closeTimeout, delayCts.Token)).ConfigureAwait(false);
+                    var resultTask = await Task.WhenAny(
+                            sending,
+                            Task.Delay(_closeTimeout, delayCts.Token)
+                        )
+                        .ConfigureAwait(false);
 
                     if (resultTask != sending)
                     {
@@ -258,7 +292,9 @@ internal sealed partial class WebSocketsTransport : ITransport
             {
 #if NETSTANDARD2_1 || NETCOREAPP
                 // Do a 0 byte read so that idle connections don't allocate a buffer when waiting for a read
-                var result = await socket.ReceiveAsync(Memory<byte>.Empty, CancellationToken.None).ConfigureAwait(false);
+                var result = await socket
+                    .ReceiveAsync(Memory<byte>.Empty, CancellationToken.None)
+                    .ConfigureAwait(false);
 
                 if (result.MessageType == WebSocketMessageType.Close)
                 {
@@ -266,7 +302,9 @@ internal sealed partial class WebSocketsTransport : ITransport
 
                     if (socket.CloseStatus != WebSocketCloseStatus.NormalClosure)
                     {
-                        throw new InvalidOperationException($"Websocket closed with error: {socket.CloseStatus}.");
+                        throw new InvalidOperationException(
+                            $"Websocket closed with error: {socket.CloseStatus}."
+                        );
                     }
 
                     return;
@@ -275,13 +313,17 @@ internal sealed partial class WebSocketsTransport : ITransport
                 var memory = _application.Output.GetMemory();
 #if NETSTANDARD2_1 || NETCOREAPP
                 // Because we checked the CloseStatus from the 0 byte read above, we don't need to check again after reading
-                var receiveResult = await socket.ReceiveAsync(memory, CancellationToken.None).ConfigureAwait(false);
+                var receiveResult = await socket
+                    .ReceiveAsync(memory, CancellationToken.None)
+                    .ConfigureAwait(false);
 #elif NETSTANDARD2_0 || NETFRAMEWORK
                 var isArray = MemoryMarshal.TryGetArray<byte>(memory, out var arraySegment);
                 Debug.Assert(isArray);
 
                 // Exceptions are handled above where the send and receive tasks are being run.
-                var receiveResult = await socket.ReceiveAsync(arraySegment, CancellationToken.None).ConfigureAwait(false);
+                var receiveResult = await socket
+                    .ReceiveAsync(arraySegment, CancellationToken.None)
+                    .ConfigureAwait(false);
 #else
 #error TFMs need to be updated
 #endif
@@ -292,13 +334,20 @@ internal sealed partial class WebSocketsTransport : ITransport
 
                     if (socket.CloseStatus != WebSocketCloseStatus.NormalClosure)
                     {
-                        throw new InvalidOperationException($"Websocket closed with error: {socket.CloseStatus}.");
+                        throw new InvalidOperationException(
+                            $"Websocket closed with error: {socket.CloseStatus}."
+                        );
                     }
 
                     return;
                 }
 
-                Log.MessageReceived(_logger, receiveResult.MessageType, receiveResult.Count, receiveResult.EndOfMessage);
+                Log.MessageReceived(
+                    _logger,
+                    receiveResult.MessageType,
+                    receiveResult.Count,
+                    receiveResult.EndOfMessage
+                );
 
                 _application.Output.Advance(receiveResult.Count);
 
@@ -362,7 +411,9 @@ internal sealed partial class WebSocketsTransport : ITransport
 
                             if (WebSocketCanSend(socket))
                             {
-                                await socket.SendAsync(buffer, _webSocketMessageType).ConfigureAwait(false);
+                                await socket
+                                    .SendAsync(buffer, _webSocketMessageType)
+                                    .ConfigureAwait(false);
                             }
                             else
                             {
@@ -400,7 +451,15 @@ internal sealed partial class WebSocketsTransport : ITransport
                 try
                 {
                     // We're done sending, send the close frame to the client if the websocket is still open
-                    await socket.CloseOutputAsync(error != null ? WebSocketCloseStatus.InternalServerError : WebSocketCloseStatus.NormalClosure, "", CancellationToken.None).ConfigureAwait(false);
+                    await socket
+                        .CloseOutputAsync(
+                            error != null
+                                ? WebSocketCloseStatus.InternalServerError
+                                : WebSocketCloseStatus.NormalClosure,
+                            "",
+                            CancellationToken.None
+                        )
+                        .ConfigureAwait(false);
                 }
                 catch (Exception ex)
                 {
@@ -416,9 +475,11 @@ internal sealed partial class WebSocketsTransport : ITransport
 
     private static bool WebSocketCanSend(WebSocket ws)
     {
-        return !(ws.State == WebSocketState.Aborted ||
-               ws.State == WebSocketState.Closed ||
-               ws.State == WebSocketState.CloseSent);
+        return !(
+            ws.State == WebSocketState.Aborted
+            || ws.State == WebSocketState.Closed
+            || ws.State == WebSocketState.CloseSent
+        );
     }
 
     private static Uri ResolveWebSocketsUrl(Uri url)

@@ -99,13 +99,10 @@ namespace Microsoft.AspNetCore.Server.Kestrel.Transport.Libuv.Internal.Networkin
 
         public uint ScopeId
         {
-            get
-            {
-                return (uint)_field3;
-            }
+            get { return (uint)_field3; }
             set
             {
-                _field3 &= unchecked ((long)0xFFFFFFFF00000000);
+                _field3 &= unchecked((long)0xFFFFFFFF00000000);
                 _field3 |= value;
             }
         }

@@ -18,7 +18,14 @@ namespace Microsoft.CodeAnalysis.CSharp
             var rewrittenTargetType = (BoundTypeExpression)VisitTypeExpression(node.TargetType);
             TypeSymbol rewrittenType = VisitType(node.Type);
 
-            return MakeIsOperator(node, node.Syntax, rewrittenOperand, rewrittenTargetType, node.ConversionKind, rewrittenType);
+            return MakeIsOperator(
+                node,
+                node.Syntax,
+                rewrittenOperand,
+                rewrittenTargetType,
+                node.ConversionKind,
+                rewrittenType
+            );
         }
 
         private BoundExpression MakeIsOperator(
@@ -27,7 +34,8 @@ namespace Microsoft.CodeAnalysis.CSharp
             BoundExpression rewrittenOperand,
             BoundTypeExpression rewrittenTargetType,
             ConversionKind conversionKind,
-            TypeSymbol rewrittenType)
+            TypeSymbol rewrittenType
+        )
         {
             if (rewrittenOperand.Kind == BoundKind.MethodGroup)
             {
@@ -36,7 +44,12 @@ namespace Microsoft.CodeAnalysis.CSharp
                 if (receiver != null && receiver.Kind != BoundKind.ThisReference)
                 {
                     // possible side-effect
-                    return RewriteConstantIsOperator(receiver.Syntax, receiver, ConstantValue.False, rewrittenType);
+                    return RewriteConstantIsOperator(
+                        receiver.Syntax,
+                        receiver,
+                        ConstantValue.False,
+                        rewrittenType
+                    );
                 }
                 else
                 {
@@ -54,30 +67,52 @@ namespace Microsoft.CodeAnalysis.CSharp
 
             if (!_inExpressionLambda)
             {
-                ConstantValue constantValue = Binder.GetIsOperatorConstantResult(operandType, targetType, conversionKind, rewrittenOperand.ConstantValue);
+                ConstantValue constantValue = Binder.GetIsOperatorConstantResult(
+                    operandType,
+                    targetType,
+                    conversionKind,
+                    rewrittenOperand.ConstantValue
+                );
 
                 if (constantValue != null)
                 {
-                    return RewriteConstantIsOperator(syntax, rewrittenOperand, constantValue, rewrittenType);
+                    return RewriteConstantIsOperator(
+                        syntax,
+                        rewrittenOperand,
+                        constantValue,
+                        rewrittenType
+                    );
                 }
                 else if (conversionKind.IsImplicitConversion())
                 {
                     // operand is a reference type with bound identity or implicit conversion
                     // We can replace the "is" instruction with a null check
-                    return _factory.MakeNullCheck(syntax, rewrittenOperand, BinaryOperatorKind.NotEqual);
+                    return _factory.MakeNullCheck(
+                        syntax,
+                        rewrittenOperand,
+                        BinaryOperatorKind.NotEqual
+                    );
                 }
             }
 
-            return oldNode.Update(rewrittenOperand, rewrittenTargetType, conversionKind, rewrittenType);
+            return oldNode.Update(
+                rewrittenOperand,
+                rewrittenTargetType,
+                conversionKind,
+                rewrittenType
+            );
         }
 
         private BoundExpression RewriteConstantIsOperator(
             SyntaxNode syntax,
             BoundExpression loweredOperand,
             ConstantValue constantValue,
-            TypeSymbol type)
+            TypeSymbol type
+        )
         {
-            Debug.Assert(constantValue == ConstantValue.True || constantValue == ConstantValue.False);
+            Debug.Assert(
+                constantValue == ConstantValue.True || constantValue == ConstantValue.False
+            );
             Debug.Assert((object)type != null);
 
             return new BoundSequence(
@@ -85,7 +120,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 locals: ImmutableArray<LocalSymbol>.Empty,
                 sideEffects: ImmutableArray.Create<BoundExpression>(loweredOperand),
                 value: MakeLiteral(syntax, constantValue, type),
-                type: type);
+                type: type
+            );
         }
     }
 }

@@ -60,16 +60,18 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void CreateDefaultBuilder_RegistersEventSourceLogger()
         {
             var listener = new TestEventListener();
-            using var host = Host.CreateDefaultBuilder()
-                .Build();
+            using var host = Host.CreateDefaultBuilder().Build();
 
             var logger = host.Services.GetRequiredService<ILogger<HostTests>>();
             logger.LogInformation("Request starting");
 
             var events = listener.EventData.ToArray();
-            Assert.Contains(events, args =>
-                args.EventSource.Name == "Microsoft-Extensions-Logging" &&
-                args.Payload.OfType<string>().Any(p => p.Contains("Request starting")));
+            Assert.Contains(
+                events,
+                args =>
+                    args.EventSource.Name == "Microsoft-Extensions-Logging"
+                    && args.Payload.OfType<string>().Any(p => p.Contains("Request starting"))
+            );
         }
 
         [Fact]
@@ -80,25 +82,38 @@ namespace Microsoft.Extensions.Hosting.Tests
             var activity = new Activity("ChildActivity");
             activity.Start();
             var id = activity.Id;
-            var logger = new ScopeDelegateLogger((scopeObjectList) =>
-            {
-                Assert.Equal(1, scopeObjectList.Count);
-                var activityDictionary = (scopeObjectList.FirstOrDefault() as IEnumerable<KeyValuePair<string, object>>)
-                                                .ToDictionary(x => x.Key, x => x.Value);
-                switch (activity.IdFormat)
+            var logger = new ScopeDelegateLogger(
+                (scopeObjectList) =>
                 {
-                    case ActivityIdFormat.Hierarchical:
-                        Assert.Equal(activity.Id, activityDictionary["SpanId"]);
-                        Assert.Equal(activity.RootId, activityDictionary["TraceId"]);
-                        Assert.Equal(activity.ParentId, activityDictionary["ParentId"]);
-                        break;
-                    case ActivityIdFormat.W3C:
-                        Assert.Equal(activity.SpanId.ToHexString(), activityDictionary["SpanId"]);
-                        Assert.Equal(activity.TraceId.ToHexString(), activityDictionary["TraceId"]);
-                        Assert.Equal(activity.ParentSpanId.ToHexString(), activityDictionary["ParentId"]);
-                        break;
+                    Assert.Equal(1, scopeObjectList.Count);
+                    var activityDictionary = (
+                        scopeObjectList.FirstOrDefault()
+                        as IEnumerable<KeyValuePair<string, object>>
+                    ).ToDictionary(x => x.Key, x => x.Value);
+                    switch (activity.IdFormat)
+                    {
+                        case ActivityIdFormat.Hierarchical:
+                            Assert.Equal(activity.Id, activityDictionary["SpanId"]);
+                            Assert.Equal(activity.RootId, activityDictionary["TraceId"]);
+                            Assert.Equal(activity.ParentId, activityDictionary["ParentId"]);
+                            break;
+                        case ActivityIdFormat.W3C:
+                            Assert.Equal(
+                                activity.SpanId.ToHexString(),
+                                activityDictionary["SpanId"]
+                            );
+                            Assert.Equal(
+                                activity.TraceId.ToHexString(),
+                                activityDictionary["TraceId"]
+                            );
+                            Assert.Equal(
+                                activity.ParentSpanId.ToHexString(),
+                                activityDictionary["ParentId"]
+                            );
+                            break;
+                    }
                 }
-            });
+            );
             var loggerProvider = new ScopeDelegateLoggerProvider(logger);
             using var host = Host.CreateDefaultBuilder()
                 .ConfigureLogging(logging =>
@@ -121,7 +136,10 @@ namespace Microsoft.Extensions.Hosting.Tests
                 })
                 .Build();
 
-            Assert.Throws<InvalidOperationException>(() => { host.Services.GetRequiredService<ServiceA>(); });
+            Assert.Throws<InvalidOperationException>(() =>
+            {
+                host.Services.GetRequiredService<ServiceA>();
+            });
         }
 
         [Fact]
@@ -146,11 +164,15 @@ namespace Microsoft.Extensions.Hosting.Tests
                 .UseEnvironment(environment)
                 .ConfigureHostConfiguration(configBuilder =>
                 {
-                    configBuilder.AddInMemoryCollection(new[]
-                    {
-                        new KeyValuePair<string, string>(
-                            HostDefaults.EnvironmentKey, expectedEnvironment)
-                    });
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>(
+                                HostDefaults.EnvironmentKey,
+                                expectedEnvironment
+                            )
+                        }
+                    );
                 }) // This overwrites the call to UseEnvironment
                 .Build();
 
@@ -166,11 +188,15 @@ namespace Microsoft.Extensions.Hosting.Tests
             using var host = new HostBuilder()
                 .ConfigureHostConfiguration(configBuilder =>
                 {
-                    configBuilder.AddInMemoryCollection(new[]
-                    {
-                        new KeyValuePair<string, string>(
-                            HostDefaults.EnvironmentKey, willBeOverwritten)
-                    });
+                    configBuilder.AddInMemoryCollection(
+                        new[]
+                        {
+                            new KeyValuePair<string, string>(
+                                HostDefaults.EnvironmentKey,
+                                willBeOverwritten
+                            )
+                        }
+                    );
                 })
                 .UseEnvironment(Guid.NewGuid().ToString())
                 .UseEnvironment(environment) // Last one wins...
@@ -184,7 +210,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/48696")]
         public async Task CreateDefaultBuilder_ConfigJsonDoesNotReload()
         {
-            var reloadFlagConfig = new Dictionary<string, string>() { { "hostbuilder:reloadConfigOnChange", "false" } };
+            var reloadFlagConfig = new Dictionary<string, string>()
+            {
+                { "hostbuilder:reloadConfigOnChange", "false" }
+            };
             var appSettingsPath = Path.Combine(Path.GetTempPath(), "appsettings.json");
 
             string SaveRandomConfig()
@@ -217,7 +246,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         [Fact]
         public async Task CreateDefaultBuilder_ConfigJsonDoesReload()
         {
-            var reloadFlagConfig = new Dictionary<string, string>() { { "hostbuilder:reloadConfigOnChange", "true" } };
+            var reloadFlagConfig = new Dictionary<string, string>()
+            {
+                { "hostbuilder:reloadConfigOnChange", "true" }
+            };
             var appSettingsPath = Path.Combine(Path.GetTempPath(), "appsettings.json");
 
             try
@@ -245,8 +277,9 @@ namespace Microsoft.Extensions.Hosting.Tests
                 var configReloadedCancelTokenSource = new CancellationTokenSource();
                 var configReloadedCancelToken = configReloadedCancelTokenSource.Token;
 
-                config.GetReloadToken().RegisterChangeCallback(
-                    _ => configReloadedCancelTokenSource.Cancel(), null);
+                config
+                    .GetReloadToken()
+                    .RegisterChangeCallback(_ => configReloadedCancelTokenSource.Cancel(), null);
 
                 // Only update the config after we've registered the change callback
                 var dynamicConfigMessage2 = SaveRandomConfig(appSettingsPath);
@@ -269,7 +302,10 @@ namespace Microsoft.Extensions.Hosting.Tests
         public async Task CreateDefaultBuilder_SecretsDoesReload()
         {
             var secretId = Assembly.GetExecutingAssembly().GetName().Name;
-            var reloadFlagConfig = new Dictionary<string, string>() { { "hostbuilder:reloadConfigOnChange", "true" } };
+            var reloadFlagConfig = new Dictionary<string, string>()
+            {
+                { "hostbuilder:reloadConfigOnChange", "true" }
+            };
             var secretPath = PathHelper.GetSecretsPathFromSecretsId(secretId);
             var secretFileInfo = new FileInfo(secretPath);
 
@@ -283,7 +319,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             }
 
             var dynamicSecretMessage1 = SaveRandomSecret(secretPath);
-            var host = Host.CreateDefaultBuilder(new[] { "environment=Development", $"applicationName={secretId}" })
+            var host = Host.CreateDefaultBuilder(
+                    new[] { "environment=Development", $"applicationName={secretId}" }
+                )
                 .ConfigureHostConfiguration(builder =>
                 {
                     builder.AddInMemoryCollection(reloadFlagConfig);
@@ -296,8 +334,9 @@ namespace Microsoft.Extensions.Hosting.Tests
             using CancellationTokenSource configReloadedCancelTokenSource = new();
             var configReloadedCancelToken = configReloadedCancelTokenSource.Token;
 
-            config.GetReloadToken().RegisterChangeCallback(
-                _ => configReloadedCancelTokenSource.Cancel(), null);
+            config
+                .GetReloadToken()
+                .RegisterChangeCallback(_ => configReloadedCancelTokenSource.Cancel(), null);
 
             // Only update the secrets after we've registered the change callback
             var dynamicSecretMessage2 = SaveRandomSecret(secretPath);
@@ -312,14 +351,24 @@ namespace Microsoft.Extensions.Hosting.Tests
         public void CreateDefaultBuilder_RespectShutdownTimeout()
         {
             var notDefaultTimeoutSeconds = 99;
-            Assert.True(notDefaultTimeoutSeconds != new HostOptions().ShutdownTimeout.TotalSeconds, "Test value must be not equal to default");
-            var host = Host.CreateDefaultBuilder().ConfigureHostConfiguration(configBuilder =>
-            {
-                configBuilder.AddInMemoryCollection(new KeyValuePair<string, string>[]
+            Assert.True(
+                notDefaultTimeoutSeconds != new HostOptions().ShutdownTimeout.TotalSeconds,
+                "Test value must be not equal to default"
+            );
+            var host = Host.CreateDefaultBuilder()
+                .ConfigureHostConfiguration(configBuilder =>
                 {
-                    new KeyValuePair<string, string>("SHUTDOWNTIMEOUTSECONDS", notDefaultTimeoutSeconds.ToString())
-                });
-            }).Build();
+                    configBuilder.AddInMemoryCollection(
+                        new KeyValuePair<string, string>[]
+                        {
+                            new KeyValuePair<string, string>(
+                                "SHUTDOWNTIMEOUTSECONDS",
+                                notDefaultTimeoutSeconds.ToString()
+                            )
+                        }
+                    );
+                })
+                .Build();
 
             var hostOptions = host.Services.GetRequiredService<IOptions<HostOptions>>();
             Assert.Equal(notDefaultTimeoutSeconds, hostOptions.Value.ShutdownTimeout.TotalSeconds);
@@ -329,10 +378,7 @@ namespace Microsoft.Extensions.Hosting.Tests
 
         internal class ServiceB
         {
-            public ServiceB(ServiceC c)
-            {
-
-            }
+            public ServiceB(ServiceC c) { }
         }
 
         internal class ServiceC { }
@@ -341,19 +387,19 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private ScopeDelegateLogger _logger;
             private IExternalScopeProvider _scopeProvider;
+
             public ScopeDelegateLoggerProvider(ScopeDelegateLogger logger)
             {
                 _logger = logger;
             }
+
             public ILogger CreateLogger(string categoryName)
             {
                 _logger.ScopeProvider = _scopeProvider;
                 return _logger;
             }
 
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
 
             public void SetScopeProvider(IExternalScopeProvider scopeProvider)
             {
@@ -365,10 +411,12 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private Action<List<object>> _logDelegate;
             internal IExternalScopeProvider ScopeProvider { get; set; }
+
             public ScopeDelegateLogger(Action<List<object>> logDelegate)
             {
                 _logDelegate = logDelegate;
             }
+
             public IDisposable BeginScope<TState>(TState state)
             {
                 Scopes.Add(state);
@@ -379,20 +427,27 @@ namespace Microsoft.Extensions.Hosting.Tests
 
             public bool IsEnabled(LogLevel logLevel) => true;
 
-            public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter)
+            public void Log<TState>(
+                LogLevel logLevel,
+                EventId eventId,
+                TState state,
+                Exception exception,
+                Func<TState, Exception, string> formatter
+            )
             {
-                ScopeProvider.ForEachScope((scopeObject, state) =>
-                {
-                    Scopes.Add(scopeObject);
-                }, 0);
+                ScopeProvider.ForEachScope(
+                    (scopeObject, state) =>
+                    {
+                        Scopes.Add(scopeObject);
+                    },
+                    0
+                );
                 _logDelegate(Scopes);
             }
 
             private class Scope : IDisposable
             {
-                public void Dispose()
-                {
-                }
+                public void Dispose() { }
             }
         }
 
@@ -400,7 +455,8 @@ namespace Microsoft.Extensions.Hosting.Tests
         {
             private volatile bool _disposed;
 
-            private ConcurrentQueue<EventWrittenEventArgs> _events = new ConcurrentQueue<EventWrittenEventArgs>();
+            private ConcurrentQueue<EventWrittenEventArgs> _events =
+                new ConcurrentQueue<EventWrittenEventArgs>();
 
             public IEnumerable<EventWrittenEventArgs> EventData => _events;
 

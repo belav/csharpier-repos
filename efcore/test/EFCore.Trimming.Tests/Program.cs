@@ -22,8 +22,8 @@ public class BlogContext : DbContext
 
     public DbSet<Blog> Blogs { get; set; }
 
-    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        => optionsBuilder.UseSqlServer(ConnectionString);
+    protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+        optionsBuilder.UseSqlServer(ConnectionString);
 
     static BlogContext()
     {
@@ -41,4 +41,3 @@ public class Blog
     public int Id { get; set; }
     public string Name { get; set; }
 }
-

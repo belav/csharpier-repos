@@ -109,7 +109,11 @@ public abstract class TagHelperContent : IHtmlContentBuilder
     /// </param>
     /// <param name="args">The object array to format.</param>
     /// <returns>A reference to this instance after the append operation has completed.</returns>
-    public TagHelperContent AppendFormat(IFormatProvider provider, string format, params object[] args)
+    public TagHelperContent AppendFormat(
+        IFormatProvider provider,
+        string format,
+        params object[] args
+    )
     {
         HtmlContentBuilderExtensions.AppendFormat(this, provider, format, args);
         return this;

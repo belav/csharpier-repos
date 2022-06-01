@@ -15,7 +15,10 @@ namespace System.Security.Cryptography
         ///     Wrap an existing key handle with a CngKey object
         /// </summary>
         [SupportedOSPlatform("windows")]
-        public static CngKey Open(SafeNCryptKeyHandle keyHandle, CngKeyHandleOpenOptions keyHandleOpenOptions)
+        public static CngKey Open(
+            SafeNCryptKeyHandle keyHandle,
+            CngKeyHandleOpenOptions keyHandleOpenOptions
+        )
         {
             ArgumentNullException.ThrowIfNull(keyHandle);
 
@@ -26,7 +29,10 @@ namespace System.Security.Cryptography
 
             // Get a handle to the key's provider.
             SafeNCryptProviderHandle providerHandle = new SafeNCryptProviderHandle();
-            IntPtr rawProviderHandle = keyHandle.GetPropertyAsIntPtr(KeyPropertyName.ProviderHandle, CngPropertyOptions.None);
+            IntPtr rawProviderHandle = keyHandle.GetPropertyAsIntPtr(
+                KeyPropertyName.ProviderHandle,
+                CngPropertyOptions.None
+            );
             providerHandle.SetHandleValue(rawProviderHandle);
 
             // Set up a key object wrapping the handle
@@ -34,7 +40,9 @@ namespace System.Security.Cryptography
             try
             {
                 key = new CngKey(providerHandle, keyHandleCopy);
-                bool openingEphemeralKey = (keyHandleOpenOptions & CngKeyHandleOpenOptions.EphemeralKey) == CngKeyHandleOpenOptions.EphemeralKey;
+                bool openingEphemeralKey =
+                    (keyHandleOpenOptions & CngKeyHandleOpenOptions.EphemeralKey)
+                    == CngKeyHandleOpenOptions.EphemeralKey;
 
                 //
                 // If we're wrapping a handle to an ephemeral key, we need to make sure that IsEphemeral is
@@ -59,7 +67,10 @@ namespace System.Security.Cryptography
                 }
                 else if (key.IsEphemeral && !openingEphemeralKey)
                 {
-                    throw new ArgumentException(SR.Cryptography_OpenEphemeralKeyHandleWithoutEphemeralFlag, nameof(keyHandleOpenOptions));
+                    throw new ArgumentException(
+                        SR.Cryptography_OpenEphemeralKeyHandleWithoutEphemeralFlag,
+                        nameof(keyHandleOpenOptions)
+                    );
                 }
             }
             catch

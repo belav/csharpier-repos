@@ -20,11 +20,23 @@ namespace System.Net.NetworkInformation
         [UnsupportedOSPlatform("freebsd")]
         [UnsupportedOSPlatform("illumos")]
         [UnsupportedOSPlatform("solaris")]
-        public override string DhcpScopeName { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override string DhcpScopeName
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override string DomainName { get { return HostInformation.DomainName; } }
+        public override string DomainName
+        {
+            get { return HostInformation.DomainName; }
+        }
 
-        public override string HostName { get { return HostInformation.HostName; } }
+        public override string HostName
+        {
+            get { return HostInformation.HostName; }
+        }
 
         [UnsupportedOSPlatform("linux")]
         [UnsupportedOSPlatform("android")]
@@ -34,25 +46,44 @@ namespace System.Net.NetworkInformation
         [UnsupportedOSPlatform("freebsd")]
         [UnsupportedOSPlatform("illumos")]
         [UnsupportedOSPlatform("solaris")]
-        public override bool IsWinsProxy { get { throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform); } }
+        public override bool IsWinsProxy
+        {
+            get
+            {
+                throw new PlatformNotSupportedException(SR.net_InformationUnavailableOnPlatform);
+            }
+        }
 
-        public override NetBiosNodeType NodeType { get { return NetBiosNodeType.Unknown; } }
+        public override NetBiosNodeType NodeType
+        {
+            get { return NetBiosNodeType.Unknown; }
+        }
 
-        public override IAsyncResult BeginGetUnicastAddresses(AsyncCallback? callback, object? state)
+        public override IAsyncResult BeginGetUnicastAddresses(
+            AsyncCallback? callback,
+            object? state
+        )
         {
             Task<UnicastIPAddressInformationCollection> t = GetUnicastAddressesAsync();
             return TaskToApm.Begin(t, callback, state);
         }
 
-        public override UnicastIPAddressInformationCollection EndGetUnicastAddresses(IAsyncResult asyncResult)
+        public override UnicastIPAddressInformationCollection EndGetUnicastAddresses(
+            IAsyncResult asyncResult
+        )
         {
             return TaskToApm.End<UnicastIPAddressInformationCollection>(asyncResult);
         }
 
         public sealed override Task<UnicastIPAddressInformationCollection> GetUnicastAddressesAsync()
         {
-            return Task.Factory.StartNew(s => ((UnixIPGlobalProperties)s!).GetUnicastAddresses(), this,
-                CancellationToken.None, TaskCreationOptions.DenyChildAttach, TaskScheduler.Default);
+            return Task.Factory.StartNew(
+                s => ((UnixIPGlobalProperties)s!).GetUnicastAddresses(),
+                this,
+                CancellationToken.None,
+                TaskCreationOptions.DenyChildAttach,
+                TaskScheduler.Default
+            );
         }
 
         private struct Context
@@ -71,7 +102,11 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ProcessIpv4Address(void* pContext, byte* ifaceName, Interop.Sys.IpAddressInfo* ipAddr)
+        private static unsafe void ProcessIpv4Address(
+            void* pContext,
+            byte* ifaceName,
+            Interop.Sys.IpAddressInfo* ipAddr
+        )
         {
             ref Context context = ref Unsafe.As<byte, Context>(ref *(byte*)pContext);
             try
@@ -79,7 +114,9 @@ namespace System.Net.NetworkInformation
                 IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddr);
                 if (!IPAddressUtil.IsMulticast(ipAddress))
                 {
-                    context._collection.InternalAdd(new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength));
+                    context._collection.InternalAdd(
+                        new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
+                    );
                 }
             }
             catch (Exception e)
@@ -89,7 +126,12 @@ namespace System.Net.NetworkInformation
         }
 
         [UnmanagedCallersOnly]
-        private static unsafe void ProcessIpv6Address(void* pContext, byte* ifaceName, Interop.Sys.IpAddressInfo* ipAddr, uint* scopeId)
+        private static unsafe void ProcessIpv6Address(
+            void* pContext,
+            byte* ifaceName,
+            Interop.Sys.IpAddressInfo* ipAddr,
+            uint* scopeId
+        )
         {
             ref Context context = ref Unsafe.As<byte, Context>(ref *(byte*)pContext);
             try
@@ -97,7 +139,9 @@ namespace System.Net.NetworkInformation
                 IPAddress ipAddress = IPAddressUtil.GetIPAddressFromNativeInfo(ipAddr);
                 if (!IPAddressUtil.IsMulticast(ipAddress))
                 {
-                    context._collection.InternalAdd(new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength));
+                    context._collection.InternalAdd(
+                        new UnixUnicastIPAddressInformation(ipAddress, ipAddr->PrefixLength)
+                    );
                 }
             }
             catch (Exception e)
@@ -113,10 +157,18 @@ namespace System.Net.NetworkInformation
             context._exceptions = null;
 
             // Ignore link-layer addresses that are discovered; don't create a callback.
-            Interop.Sys.EnumerateInterfaceAddresses(Unsafe.AsPointer(ref context), &ProcessIpv4Address, &ProcessIpv6Address, null);
+            Interop.Sys.EnumerateInterfaceAddresses(
+                Unsafe.AsPointer(ref context),
+                &ProcessIpv4Address,
+                &ProcessIpv6Address,
+                null
+            );
 
             if (context._exceptions != null)
-                throw new NetworkInformationException(SR.net_PInvokeError, new AggregateException(context._exceptions));
+                throw new NetworkInformationException(
+                    SR.net_PInvokeError,
+                    new AggregateException(context._exceptions)
+                );
 
             return context._collection;
         }

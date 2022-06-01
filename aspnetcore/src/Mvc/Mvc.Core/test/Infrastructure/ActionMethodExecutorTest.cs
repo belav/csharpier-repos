@@ -19,7 +19,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("VoidResultExecutor", actionMethodExecutor.GetType().Name);
@@ -37,7 +42,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("SyncActionResultExecutor", actionMethodExecutor.GetType().Name);
@@ -55,7 +65,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("SyncActionResultExecutor", actionMethodExecutor.GetType().Name);
@@ -72,7 +87,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         var result = Assert.IsType<ObjectResult>(valueTask.Result);
@@ -93,7 +113,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         var result = Assert.IsType<ObjectResult>(valueTask.Result);
@@ -114,7 +139,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         var result = Assert.IsType<ObjectResult>(valueTask.Result);
@@ -135,7 +165,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("SyncActionResultExecutor", actionMethodExecutor.GetType().Name);
@@ -152,10 +187,15 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
-        Assert.Equal("TaskResultExecutor", actionMethodExecutor.GetType().Name);  
+        Assert.Equal("TaskResultExecutor", actionMethodExecutor.GetType().Name);
         Assert.True(controller.Executed);
         Assert.IsType<EmptyResult>(valueTask.Result);
     }
@@ -170,7 +210,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var awaitableResult = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var awaitableResult = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("AwaitableResultExecutor", actionMethodExecutor.GetType().Name);
@@ -188,7 +233,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("TaskOfIActionResultExecutor", actionMethodExecutor.GetType().Name);
@@ -205,7 +255,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         await valueTask;
@@ -223,7 +278,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         var result = Assert.IsType<ObjectResult>(valueTask.Result);
@@ -244,7 +304,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         var result = Assert.IsType<ObjectResult>(valueTask.Result);
@@ -261,11 +326,18 @@ public class ActionMethodExecutorTest
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
-        var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnIActionResultAsObjectAsync));
+        var objectMethodExecutor = GetExecutor(
+            nameof(TestController.ReturnIActionResultAsObjectAsync)
+        );
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         Assert.Equal("AwaitableObjectResultExecutor", actionMethodExecutor.GetType().Name);
@@ -282,7 +354,12 @@ public class ActionMethodExecutorTest
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act
-        var valueTask = actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>());
+        var valueTask = actionMethodExecutor.Execute(
+            mapper,
+            objectMethodExecutor,
+            controller,
+            Array.Empty<object>()
+        );
 
         // Assert
         var result = Assert.IsType<ObjectResult>(valueTask.Result);
@@ -299,14 +376,26 @@ public class ActionMethodExecutorTest
         // Arrange
         var mapper = new ActionResultTypeMapper();
         var controller = new TestController();
-        var objectMethodExecutor = GetExecutor(nameof(TestController.ReturnsCustomConvertibleFromIActionResult));
+        var objectMethodExecutor = GetExecutor(
+            nameof(TestController.ReturnsCustomConvertibleFromIActionResult)
+        );
         var actionMethodExecutor = ActionMethodExecutor.GetExecutor(objectMethodExecutor);
 
         // Act & Assert
         var ex = Assert.Throws<InvalidOperationException>(
-            () => actionMethodExecutor.Execute(mapper, objectMethodExecutor, controller, Array.Empty<object>()));
+            () =>
+                actionMethodExecutor.Execute(
+                    mapper,
+                    objectMethodExecutor,
+                    controller,
+                    Array.Empty<object>()
+                )
+        );
 
-        Assert.Equal($"Cannot return null from an action method with a return type of '{typeof(CustomConvertibleFromAction)}'.", ex.Message);
+        Assert.Equal(
+            $"Cannot return null from an action method with a return type of '{typeof(CustomConvertibleFromAction)}'.",
+            ex.Message
+        );
     }
 
     private static ObjectMethodExecutor GetExecutor(string methodName)
@@ -327,9 +416,11 @@ public class ActionMethodExecutorTest
 
         public ContentResult ReturnsIActionResultSubType() => new ContentResult();
 
-        public ActionResult<TestModel> ReturnsActionResultOfT() => new ActionResult<TestModel>(new TestModel());
+        public ActionResult<TestModel> ReturnsActionResultOfT() =>
+            new ActionResult<TestModel>(new TestModel());
 
-        public CustomConvertibleFromAction ReturnsCustomConvertibleFromIActionResult() => new CustomConvertibleFromAction();
+        public CustomConvertibleFromAction ReturnsCustomConvertibleFromIActionResult() =>
+            new CustomConvertibleFromAction();
 
         public TestModel ReturnsModelAsModel() => new TestModel();
 
@@ -349,24 +440,27 @@ public class ActionMethodExecutorTest
             return Task.Yield();
         }
 
-        public Task<IActionResult> ReturnIActionResultAsync() => Task.FromResult((IActionResult)new StatusCodeResult(201));
+        public Task<IActionResult> ReturnIActionResultAsync() =>
+            Task.FromResult((IActionResult)new StatusCodeResult(201));
 
-        public Task<ViewResult> ReturnActionResultAsync() => Task.FromResult(new ViewResult { StatusCode = 200});
+        public Task<ViewResult> ReturnActionResultAsync() =>
+            Task.FromResult(new ViewResult { StatusCode = 200 });
 
-        public Task<StatusCodeResult> ReturnsIActionResultSubTypeAsync() => Task.FromResult(new StatusCodeResult(200));
+        public Task<StatusCodeResult> ReturnsIActionResultSubTypeAsync() =>
+            Task.FromResult(new StatusCodeResult(200));
 
         public Task<TestModel> ReturnsModelAsModelAsync() => Task.FromResult(new TestModel());
 
         public Task<object> ReturnsModelAsObjectAsync() => Task.FromResult((object)new TestModel());
 
-        public Task<object> ReturnIActionResultAsObjectAsync() => Task.FromResult((object)new OkResult());
+        public Task<object> ReturnIActionResultAsObjectAsync() =>
+            Task.FromResult((object)new OkResult());
 
-        public Task<ActionResult<TestModel>> ReturnActionResultOFTAsync() => Task.FromResult(new ActionResult<TestModel>(new TestModel()));
+        public Task<ActionResult<TestModel>> ReturnActionResultOFTAsync() =>
+            Task.FromResult(new ActionResult<TestModel>(new TestModel()));
     }
 
-    private class TestModel
-    {
-    }
+    private class TestModel { }
 
     private class CustomConvertibleFromAction : IConvertToActionResult
     {

@@ -27,10 +27,7 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public TypeMappingConfigurationBuilder(PropertyConfiguration scalar)
-        : base(scalar)
-    {
-    }
+    public TypeMappingConfigurationBuilder(PropertyConfiguration scalar) : base(scalar) { }
 
     /// <summary>
     ///     Adds or updates an annotation on the property. If an annotation with the key specified in
@@ -39,8 +36,10 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     /// <param name="annotation">The key of the annotation to be added or updated.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> HasAnnotation(string annotation, object value)
-        => (TypeMappingConfigurationBuilder<TProperty>)base.HasAnnotation(annotation, value);
+    public new virtual TypeMappingConfigurationBuilder<TProperty> HasAnnotation(
+        string annotation,
+        object value
+    ) => (TypeMappingConfigurationBuilder<TProperty>)base.HasAnnotation(annotation, value);
 
     /// <summary>
     ///     Configures the maximum length of data that can be stored in this property.
@@ -48,8 +47,8 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     /// </summary>
     /// <param name="maxLength">The maximum length of data allowed in the property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> HasMaxLength(int maxLength)
-        => (TypeMappingConfigurationBuilder<TProperty>)base.HasMaxLength(maxLength);
+    public new virtual TypeMappingConfigurationBuilder<TProperty> HasMaxLength(int maxLength) =>
+        (TypeMappingConfigurationBuilder<TProperty>)base.HasMaxLength(maxLength);
 
     /// <summary>
     ///     Configures the precision and scale of the property.
@@ -57,16 +56,18 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     /// <param name="precision">The precision of the property.</param>
     /// <param name="scale">The scale of the property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> HasPrecision(int precision, int scale)
-        => (TypeMappingConfigurationBuilder<TProperty>)base.HasPrecision(precision, scale);
+    public new virtual TypeMappingConfigurationBuilder<TProperty> HasPrecision(
+        int precision,
+        int scale
+    ) => (TypeMappingConfigurationBuilder<TProperty>)base.HasPrecision(precision, scale);
 
     /// <summary>
     ///     Configures the precision of the property.
     /// </summary>
     /// <param name="precision">The precision of the property.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> HasPrecision(int precision)
-        => (TypeMappingConfigurationBuilder<TProperty>)base.HasPrecision(precision);
+    public new virtual TypeMappingConfigurationBuilder<TProperty> HasPrecision(int precision) =>
+        (TypeMappingConfigurationBuilder<TProperty>)base.HasPrecision(precision);
 
     /// <summary>
     ///     Configures the property as capable of persisting unicode characters.
@@ -74,8 +75,8 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     /// </summary>
     /// <param name="unicode">A value indicating whether the property can contain unicode characters.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> IsUnicode(bool unicode = true)
-        => (TypeMappingConfigurationBuilder<TProperty>)base.IsUnicode(unicode);
+    public new virtual TypeMappingConfigurationBuilder<TProperty> IsUnicode(bool unicode = true) =>
+        (TypeMappingConfigurationBuilder<TProperty>)base.IsUnicode(unicode);
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -83,8 +84,8 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     /// </summary>
     /// <typeparam name="TConversion">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</typeparam>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> HasConversion<TConversion>()
-        => (TypeMappingConfigurationBuilder<TProperty>)base.HasConversion<TConversion>();
+    public new virtual TypeMappingConfigurationBuilder<TProperty> HasConversion<TConversion>() =>
+        (TypeMappingConfigurationBuilder<TProperty>)base.HasConversion<TConversion>();
 
     /// <summary>
     ///     Configures the property so that the property value is converted before
@@ -92,6 +93,7 @@ public class TypeMappingConfigurationBuilder<TProperty> : TypeMappingConfigurati
     /// </summary>
     /// <param name="conversionType">The type to convert to and from or a type that derives from <see cref="ValueConverter" />.</param>
     /// <returns>The same builder instance so that multiple configuration calls can be chained.</returns>
-    public new virtual TypeMappingConfigurationBuilder<TProperty> HasConversion(Type conversionType)
-        => (TypeMappingConfigurationBuilder<TProperty>)base.HasConversion(conversionType);
+    public new virtual TypeMappingConfigurationBuilder<TProperty> HasConversion(
+        Type conversionType
+    ) => (TypeMappingConfigurationBuilder<TProperty>)base.HasConversion(conversionType);
 }

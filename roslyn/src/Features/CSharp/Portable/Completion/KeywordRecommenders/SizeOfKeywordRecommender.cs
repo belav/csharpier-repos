@@ -10,18 +10,18 @@ namespace Microsoft.CodeAnalysis.CSharp.Completion.KeywordRecommenders
 {
     internal class SizeOfKeywordRecommender : AbstractSyntacticSingleKeywordRecommender
     {
-        public SizeOfKeywordRecommender()
-            : base(SyntaxKind.SizeOfKeyword)
-        {
-        }
+        public SizeOfKeywordRecommender() : base(SyntaxKind.SizeOfKeyword) { }
 
-        protected override bool IsValidContext(int position, CSharpSyntaxContext context, CancellationToken cancellationToken)
+        protected override bool IsValidContext(
+            int position,
+            CSharpSyntaxContext context,
+            CancellationToken cancellationToken
+        )
         {
-            return
-                context.IsNonAttributeExpressionContext ||
-                context.IsStatementContext ||
-                context.IsGlobalStatementContext ||
-                context.LeftToken.IsInCastExpressionTypeWhereExpressionIsMissingOrInNextLine();
+            return context.IsNonAttributeExpressionContext
+                || context.IsStatementContext
+                || context.IsGlobalStatementContext
+                || context.LeftToken.IsInCastExpressionTypeWhereExpressionIsMissingOrInNextLine();
         }
     }
 }

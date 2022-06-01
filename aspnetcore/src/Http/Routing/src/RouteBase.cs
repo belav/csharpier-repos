@@ -37,7 +37,8 @@ public abstract partial class RouteBase : IRouter, INamedRouter
         IInlineConstraintResolver constraintResolver,
         RouteValueDictionary? defaults,
         IDictionary<string, object>? constraints,
-        RouteValueDictionary? dataTokens)
+        RouteValueDictionary? dataTokens
+    )
     {
         if (constraintResolver == null)
         {
@@ -60,7 +61,10 @@ public abstract partial class RouteBase : IRouter, INamedRouter
         }
         catch (Exception exception)
         {
-            throw new RouteCreationException(Resources.FormatTemplateRoute_Exception(name, template), exception);
+            throw new RouteCreationException(
+                Resources.FormatTemplateRoute_Exception(name, template),
+                exception
+            );
         }
     }
 
@@ -131,13 +135,16 @@ public abstract partial class RouteBase : IRouter, INamedRouter
             MergeValues(context.RouteData.DataTokens, DataTokens);
         }
 
-        if (!RouteConstraintMatcher.Match(
-            Constraints,
-            context.RouteData.Values,
-            context.HttpContext,
-            this,
-            RouteDirection.IncomingRequest,
-            _constraintLogger))
+        if (
+            !RouteConstraintMatcher.Match(
+                Constraints,
+                context.RouteData.Values,
+                context.HttpContext,
+                this,
+                RouteDirection.IncomingRequest,
+                _constraintLogger
+            )
+        )
         {
             return Task.CompletedTask;
         }
@@ -159,13 +166,16 @@ public abstract partial class RouteBase : IRouter, INamedRouter
             return null;
         }
 
-        if (!RouteConstraintMatcher.Match(
-            Constraints,
-            values.CombinedValues,
-            context.HttpContext,
-            this,
-            RouteDirection.UrlGeneration,
-            _constraintLogger))
+        if (
+            !RouteConstraintMatcher.Match(
+                Constraints,
+                values.CombinedValues,
+                context.HttpContext,
+                this,
+                RouteDirection.UrlGeneration,
+                _constraintLogger
+            )
+        )
         {
             return null;
         }
@@ -210,9 +220,13 @@ public abstract partial class RouteBase : IRouter, INamedRouter
     protected static IDictionary<string, IRouteConstraint> GetConstraints(
         IInlineConstraintResolver inlineConstraintResolver,
         RouteTemplate parsedTemplate,
-        IDictionary<string, object>? constraints)
+        IDictionary<string, object>? constraints
+    )
     {
-        var constraintBuilder = new RouteConstraintBuilder(inlineConstraintResolver, parsedTemplate.TemplateText!);
+        var constraintBuilder = new RouteConstraintBuilder(
+            inlineConstraintResolver,
+            parsedTemplate.TemplateText!
+        );
 
         if (constraints != null)
         {
@@ -231,7 +245,10 @@ public abstract partial class RouteBase : IRouter, INamedRouter
 
             foreach (var inlineConstraint in parameter.InlineConstraints)
             {
-                constraintBuilder.AddResolvedConstraint(parameter.Name!, inlineConstraint.Constraint);
+                constraintBuilder.AddResolvedConstraint(
+                    parameter.Name!,
+                    inlineConstraint.Constraint
+                );
             }
         }
 
@@ -245,27 +262,33 @@ public abstract partial class RouteBase : IRouter, INamedRouter
     /// <param name="defaults">A collection of defaults for each parameter.</param>
     protected static RouteValueDictionary GetDefaults(
         RouteTemplate parsedTemplate,
-        RouteValueDictionary? defaults)
+        RouteValueDictionary? defaults
+    )
     {
-        var result = defaults == null ? new RouteValueDictionary() : new RouteValueDictionary(defaults);
+        var result =
+            defaults == null ? new RouteValueDictionary() : new RouteValueDictionary(defaults);
 
         foreach (var parameter in parsedTemplate.Parameters)
         {
             if (parameter.DefaultValue != null)
             {
 #if RVD_TryAdd
-                    if (!result.TryAdd(parameter.Name, parameter.DefaultValue))
-                    {
-                        throw new InvalidOperationException(
-                          Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
-                              parameter.Name));
-                    }
+                if (!result.TryAdd(parameter.Name, parameter.DefaultValue))
+                {
+                    throw new InvalidOperationException(
+                        Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
+                            parameter.Name
+                        )
+                    );
+                }
 #else
                 if (result.ContainsKey(parameter.Name!))
                 {
                     throw new InvalidOperationException(
-                      Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
-                          parameter.Name));
+                        Resources.FormatTemplateRoute_CannotHaveDefaultValueSpecifiedInlineAndExplicitly(
+                            parameter.Name
+                        )
+                    );
                 }
                 else
                 {
@@ -278,9 +301,7 @@ public abstract partial class RouteBase : IRouter, INamedRouter
         return result;
     }
 
-    private static void MergeValues(
-        RouteValueDictionary destination,
-        RouteValueDictionary values)
+    private static void MergeValues(RouteValueDictionary destination, RouteValueDictionary values)
     {
         foreach (var kvp in values)
         {
@@ -347,9 +368,16 @@ public abstract partial class RouteBase : IRouter, INamedRouter
 
     private static partial class Log
     {
-        [LoggerMessage(1, LogLevel.Debug,
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
             "Request successfully matched the route with name '{RouteName}' and template '{RouteTemplate}'",
-            EventName = "RequestMatchedRoute")]
-        public static partial void RequestMatchedRoute(ILogger logger, string? routeName, string? routeTemplate);
+            EventName = "RequestMatchedRoute"
+        )]
+        public static partial void RequestMatchedRoute(
+            ILogger logger,
+            string? routeName,
+            string? routeTemplate
+        );
     }
 }

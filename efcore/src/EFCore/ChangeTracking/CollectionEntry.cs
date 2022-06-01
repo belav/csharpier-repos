@@ -61,7 +61,8 @@ public class CollectionEntry : NavigationEntry
             var targetType = Metadata.TargetEntityType;
             var context = InternalEntry.StateManager.Context;
 
-            var changeDetector = context.ChangeTracker.AutoDetectChangesEnabled
+            var changeDetector =
+                context.ChangeTracker.AutoDetectChangesEnabled
                 && !((IRuntimeModel)context.Model).SkipDetectChanges
                     ? context.GetDependencies().ChangeDetector
                     : null;
@@ -108,8 +109,10 @@ public class CollectionEntry : NavigationEntry
 
             if (Metadata is ISkipNavigation skipNavigation)
             {
-                if (InternalEntry.EntityState != EntityState.Unchanged
-                    && InternalEntry.EntityState != EntityState.Detached)
+                if (
+                    InternalEntry.EntityState != EntityState.Unchanged
+                    && InternalEntry.EntityState != EntityState.Detached
+                )
                 {
                     return true;
                 }
@@ -119,13 +122,21 @@ public class CollectionEntry : NavigationEntry
                 var inverseForeignKey = skipNavigation.Inverse.ForeignKey;
                 foreach (var joinEntry in stateManager.Entries)
                 {
-                    if (joinEntry.EntityType == joinEntityType
+                    if (
+                        joinEntry.EntityType == joinEntityType
                         && stateManager.FindPrincipal(joinEntry, foreignKey) == InternalEntry
-                        && (joinEntry.EntityState == EntityState.Added
+                        && (
+                            joinEntry.EntityState == EntityState.Added
                             || joinEntry.EntityState == EntityState.Deleted
                             || foreignKey.Properties.Any(joinEntry.IsModified)
                             || inverseForeignKey.Properties.Any(joinEntry.IsModified)
-                            || (stateManager.FindPrincipal(joinEntry, inverseForeignKey)?.EntityState == EntityState.Deleted)))
+                            || (
+                                stateManager
+                                    .FindPrincipal(joinEntry, inverseForeignKey)
+                                    ?.EntityState == EntityState.Deleted
+                            )
+                        )
+                    )
                     {
                         return true;
                     }
@@ -141,12 +152,19 @@ public class CollectionEntry : NavigationEntry
 
                     foreach (var relatedEntity in navigationValue)
                     {
-                        var relatedEntry = stateManager.TryGetEntry(relatedEntity, targetEntityType);
+                        var relatedEntry = stateManager.TryGetEntry(
+                            relatedEntity,
+                            targetEntityType
+                        );
 
-                        if (relatedEntry != null
-                            && (relatedEntry.EntityState == EntityState.Added
+                        if (
+                            relatedEntry != null
+                            && (
+                                relatedEntry.EntityState == EntityState.Added
                                 || relatedEntry.EntityState == EntityState.Deleted
-                                || foreignKey.Properties.Any(relatedEntry.IsModified)))
+                                || foreignKey.Properties.Any(relatedEntry.IsModified)
+                            )
+                        )
                         {
                             return true;
                         }
@@ -164,11 +182,21 @@ public class CollectionEntry : NavigationEntry
             {
                 var joinEntityType = skipNavigation.JoinEntityType;
                 var foreignKey = skipNavigation.ForeignKey;
-                foreach (var joinEntry in stateManager
-                             .GetEntriesForState(added: !value, modified: !value, deleted: !value, unchanged: value).Where(
-                                 e => e.EntityType == joinEntityType
-                                     && stateManager.FindPrincipal(e, foreignKey) == InternalEntry)
-                             .ToList())
+                foreach (
+                    var joinEntry in stateManager
+                        .GetEntriesForState(
+                            added: !value,
+                            modified: !value,
+                            deleted: !value,
+                            unchanged: value
+                        )
+                        .Where(
+                            e =>
+                                e.EntityType == joinEntityType
+                                && stateManager.FindPrincipal(e, foreignKey) == InternalEntry
+                        )
+                        .ToList()
+                )
                 {
                     joinEntry.SetEntityState(value ? EntityState.Modified : EntityState.Unchanged);
                 }
@@ -181,16 +209,22 @@ public class CollectionEntry : NavigationEntry
                 {
                     foreach (var relatedEntity in navigationValue)
                     {
-                        var relatedEntry = InternalEntry.StateManager.TryGetEntry(relatedEntity, Metadata.TargetEntityType);
+                        var relatedEntry = InternalEntry.StateManager.TryGetEntry(
+                            relatedEntity,
+                            Metadata.TargetEntityType
+                        );
                         if (relatedEntry != null)
                         {
                             var anyNonPk = foreignKey.Properties.Any(p => !p.IsPrimaryKey());
                             foreach (var property in foreignKey.Properties)
                             {
-                                if (anyNonPk
-                                    && !property.IsPrimaryKey())
+                                if (anyNonPk && !property.IsPrimaryKey())
                                 {
-                                    relatedEntry.SetPropertyModified(property, isModified: value, acceptChanges: false);
+                                    relatedEntry.SetPropertyModified(
+                                        property,
+                                        isModified: value,
+                                        acceptChanges: false
+                                    );
                                 }
                             }
                         }
@@ -273,8 +307,10 @@ public class CollectionEntry : NavigationEntry
         return TargetLoader.Query(InternalEntry);
     }
 
-    private void EnsureInitialized()
-        => Metadata.GetCollectionAccessor()!.GetOrCreate(InternalEntry.Entity, forMaterialization: true);
+    private void EnsureInitialized() =>
+        Metadata
+            .GetCollectionAccessor()!
+            .GetOrCreate(InternalEntry.Entity, forMaterialization: true);
 
     /// <summary>
     ///     The <see cref="EntityEntry" /> of an entity this navigation targets.
@@ -288,9 +324,7 @@ public class CollectionEntry : NavigationEntry
     public virtual EntityEntry? FindEntry(object entity)
     {
         var entry = GetInternalTargetEntry(entity);
-        return entry == null
-            ? null
-            : new EntityEntry(entry);
+        return entry == null ? null : new EntityEntry(entry);
     }
 
     /// <summary>
@@ -300,16 +334,17 @@ public class CollectionEntry : NavigationEntry
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    protected virtual InternalEntityEntry? GetInternalTargetEntry(object entity)
-        => CurrentValue == null
-            || !Metadata.GetCollectionAccessor()!.Contains(InternalEntry.Entity, entity)
-                ? null
-                : InternalEntry.StateManager.GetOrCreateEntry(entity, Metadata.TargetEntityType);
+    protected virtual InternalEntityEntry? GetInternalTargetEntry(object entity) =>
+        CurrentValue == null
+        || !Metadata.GetCollectionAccessor()!.Contains(InternalEntry.Entity, entity)
+            ? null
+            : InternalEntry.StateManager.GetOrCreateEntry(entity, Metadata.TargetEntityType);
 
-    private ICollectionLoader TargetLoader
-        => _loader ??= Metadata is IRuntimeSkipNavigation skipNavigation
+    private ICollectionLoader TargetLoader =>
+        _loader ??= Metadata is IRuntimeSkipNavigation skipNavigation
             ? skipNavigation.GetManyToManyLoader()
             : new EntityFinderCollectionLoaderAdapter(
                 InternalEntry.StateManager.CreateEntityFinder(Metadata.TargetEntityType),
-                (INavigation)Metadata);
+                (INavigation)Metadata
+            );
 }

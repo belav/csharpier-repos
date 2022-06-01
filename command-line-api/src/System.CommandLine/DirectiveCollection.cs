@@ -15,7 +15,7 @@ namespace System.CommandLine
     /// <code>    > myapp [directive-one] [directive-two:value] arg1 arg2</code>
     /// The second has a value specified as well, <c>value</c>. Directive values can be read by calling using <see cref="TryGetValues"/>.
     /// </remarks>
-    public class DirectiveCollection  : IEnumerable<KeyValuePair<string, IEnumerable<string>>>
+    public class DirectiveCollection : IEnumerable<KeyValuePair<string, IEnumerable<string>>>
     {
         private Dictionary<string, List<string>>? _directives;
 
@@ -54,8 +54,7 @@ namespace System.CommandLine
         /// <returns><see langword="true"/> if a directive with the specified name was parsed; otherwise, <see langword="false"/>.</returns>
         public bool TryGetValues(string name, [NotNullWhen(true)] out IReadOnlyList<string>? values)
         {
-            if (_directives is not null &&
-                _directives.TryGetValue(name, out var v))
+            if (_directives is not null && _directives.TryGetValue(name, out var v))
             {
                 values = v;
                 return true;
@@ -72,12 +71,14 @@ namespace System.CommandLine
         {
             if (_directives is null)
             {
-                return Enumerable.Empty<KeyValuePair<string, IEnumerable<string>>>().GetEnumerator();
+                return Enumerable
+                    .Empty<KeyValuePair<string, IEnumerable<string>>>()
+                    .GetEnumerator();
             }
-            
+
             return _directives
-                   .Select(pair => new KeyValuePair<string, IEnumerable<string>>(pair.Key, pair.Value))
-                   .GetEnumerator();
+                .Select(pair => new KeyValuePair<string, IEnumerable<string>>(pair.Key, pair.Value))
+                .GetEnumerator();
         }
 
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();

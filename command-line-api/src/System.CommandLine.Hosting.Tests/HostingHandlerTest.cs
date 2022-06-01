@@ -13,30 +13,30 @@ using Microsoft.Extensions.Hosting;
 using Microsoft.Extensions.Options;
 using Xunit;
 
-
 namespace System.CommandLine.Hosting.Tests
 {
     public static class HostingHandlerTest
     {
-
         [Fact]
         public static async Task Constructor_Injection_Injects_Service()
         {
             var service = new MyService();
 
-            var parser = new CommandLineBuilder(
-                new MyCommand()
-                )
-                .UseHost((builder) => {
-                    builder.ConfigureServices(services =>
+            var parser = new CommandLineBuilder(new MyCommand())
+                .UseHost(
+                    (builder) =>
                     {
-                        services.AddTransient(x => service);
-                    })
-                    .UseCommandHandler<MyCommand, MyCommand.MyHandler>();
-                })
+                        builder
+                            .ConfigureServices(services =>
+                            {
+                                services.AddTransient(x => service);
+                            })
+                            .UseCommandHandler<MyCommand, MyCommand.MyHandler>();
+                    }
+                )
                 .Build();
 
-            var result = await parser.InvokeAsync(new string[] { "--int-option", "54"});
+            var result = await parser.InvokeAsync(new string[] { "--int-option", "54" });
 
             service.Value.Should().Be(54);
         }
@@ -48,14 +48,14 @@ namespace System.CommandLine.Hosting.Tests
                 .UseHost(host =>
                 {
                     host.ConfigureServices(services =>
-                    {
-                        services.AddTransient<MyService>();
-                    })
-                    .UseCommandHandler<MyCommand, MyCommand.MyHandler>();
+                        {
+                            services.AddTransient<MyService>();
+                        })
+                        .UseCommandHandler<MyCommand, MyCommand.MyHandler>();
                 })
                 .Build();
 
-            var result = await parser.InvokeAsync(new string[] { "--int-option", "54"});
+            var result = await parser.InvokeAsync(new string[] { "--int-option", "54" });
 
             result.Should().Be(54);
         }
@@ -71,22 +71,25 @@ namespace System.CommandLine.Hosting.Tests
                 .UseHost(host =>
                 {
                     host.ConfigureServices(services =>
-                    {
-                        services.AddTransient<MyService>(_ => new MyService()
                         {
-                            Action = () => 100
-                        });
-                    })
-                    .UseCommandHandler<MyCommand, MyCommand.MyHandler>()
-                    .UseCommandHandler<MyOtherCommand, MyOtherCommand.MyHandler>();
+                            services.AddTransient<MyService>(
+                                _ => new MyService() { Action = () => 100 }
+                            );
+                        })
+                        .UseCommandHandler<MyCommand, MyCommand.MyHandler>()
+                        .UseCommandHandler<MyOtherCommand, MyOtherCommand.MyHandler>();
                 })
                 .Build();
 
-            var result = await parser.InvokeAsync(new string[] { "mycommand", "--int-option", "54" });
+            var result = await parser.InvokeAsync(
+                new string[] { "mycommand", "--int-option", "54" }
+            );
 
             result.Should().Be(54);
 
-            result = await parser.InvokeAsync(new string[] { "myothercommand", "--int-option", "54" });
+            result = await parser.InvokeAsync(
+                new string[] { "myothercommand", "--int-option", "54" }
+            );
 
             result.Should().Be(100);
         }
@@ -101,10 +104,10 @@ namespace System.CommandLine.Hosting.Tests
                 .UseHost(host =>
                 {
                     host.ConfigureServices(services =>
-                    {
-                        services.AddSingleton<MyService>(service);
-                    })
-                    .UseCommandHandler<MyOtherCommand, MyOtherCommand.MyHandler>();
+                        {
+                            services.AddSingleton<MyService>(service);
+                        })
+                        .UseCommandHandler<MyOtherCommand, MyOtherCommand.MyHandler>();
                 })
                 .Build();
 
@@ -122,15 +125,19 @@ namespace System.CommandLine.Hosting.Tests
             cmd.AddCommand(new MyCommand());
             cmd.AddCommand(new MyOtherCommand());
             var parser = new CommandLineBuilder(cmd)
-                         .UseHost((builder) => {
-                             builder.ConfigureServices(services =>
-                             {
-                                 services.AddTransient(x => service);
-                             })
-                                    .UseCommandHandler<MyCommand, MyCommand.MyDerivedHandler>()
-                                    .UseCommandHandler<MyOtherCommand, MyOtherCommand.MyDerivedHandler>();
-                         })
-                         .Build();
+                .UseHost(
+                    (builder) =>
+                    {
+                        builder
+                            .ConfigureServices(services =>
+                            {
+                                services.AddTransient(x => service);
+                            })
+                            .UseCommandHandler<MyCommand, MyCommand.MyDerivedHandler>()
+                            .UseCommandHandler<MyOtherCommand, MyOtherCommand.MyDerivedHandler>();
+                    }
+                )
+                .Build();
 
             await parser.InvokeAsync(new string[] { "mycommand", "--int-option", "54" });
             service.Value.Should().Be(54);
@@ -228,7 +235,8 @@ namespace System.CommandLine.Hosting.Tests
 
                 public string One { get; set; }
 
-                public int Invoke(InvocationContext context) => InvokeAsync(context).GetAwaiter().GetResult();
+                public int Invoke(InvocationContext context) =>
+                    InvokeAsync(context).GetAwaiter().GetResult();
 
                 public Task<int> InvokeAsync(InvocationContext context)
                 {

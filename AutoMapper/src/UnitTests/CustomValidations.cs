@@ -10,13 +10,9 @@ namespace AutoMapper.UnitTests
 {
     public class CustomValidations
     {
-        public class Source
-        {
-        }
+        public class Source { }
 
-        public class Destination
-        {
-        }
+        public class Destination { }
 
         public class When_using_custom_validation
         {
@@ -81,22 +77,29 @@ namespace AutoMapper.UnitTests
             }
         }
 
-        public class When_using_custom_validation_for_convertusing_with_mappingfunction : NonValidatingSpecBase
+        public class When_using_custom_validation_for_convertusing_with_mappingfunction
+            : NonValidatingSpecBase
         {
             // Nullable so can see a false state
             private static bool? _validated;
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                Func<Source, Destination, Destination> mappingFunction = (source, destination) => new Destination();
-                cfg.CreateMap<Source, Destination>().ConvertUsing(mappingFunction);
-                cfg.Internal().Validator(SetValidated);
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    Func<Source, Destination, Destination> mappingFunction = (
+                        source,
+                        destination
+                    ) => new Destination();
+                    cfg.CreateMap<Source, Destination>().ConvertUsing(mappingFunction);
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {
-                if (context.TypeMap.SourceType == typeof(Source) &&
-                    context.TypeMap.DestinationTypeToUse == typeof(Destination))
+                if (
+                    context.TypeMap.SourceType == typeof(Source)
+                    && context.TypeMap.DestinationTypeToUse == typeof(Destination)
+                )
                 {
                     _validated = true;
                 }
@@ -113,60 +116,25 @@ namespace AutoMapper.UnitTests
             }
         }
 
-        public class When_using_custom_validation_for_convertusing_with_typeconvertertype : NonValidatingSpecBase
+        public class When_using_custom_validation_for_convertusing_with_typeconvertertype
+            : NonValidatingSpecBase
         {
             // Nullable so can see a false state
             private static bool? _validated;
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>().ConvertUsing<CustomTypeConverter>();
-                cfg.Internal().Validator(SetValidated);
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().ConvertUsing<CustomTypeConverter>();
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {
-                if (context.TypeMap.SourceType == typeof(Source) &&
-                    context.TypeMap.DestinationTypeToUse == typeof(Destination))
-                {
-                    _validated = true;
-                }
-            }
-
-            [Fact]
-            public void Validator_should_be_called_by_AssertConfigurationIsValid()
-            {
-                _validated.ShouldBeNull();
-
-                AssertConfigurationIsValid();
-
-                _validated.ShouldBe(true);
-            }
-
-            internal class CustomTypeConverter : ITypeConverter<Source, Destination>
-            {
-                public Destination Convert(Source source, Destination destination, ResolutionContext context)
-                {
-                    return new Destination();
-                }
-            }
-        }
-
-        public class When_using_custom_validation_for_convertusing_with_typeconverter_instance : NonValidatingSpecBase
-        {
-            // Nullable so can see a false state
-            private static bool? _validated;
-
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                cfg.CreateMap<Source, Destination>().ConvertUsing(new CustomTypeConverter());
-                cfg.Internal().Validator(SetValidated);
-            });
-
-            private static void SetValidated(ValidationContext context)
-            {
-                if (context.TypeMap.SourceType == typeof(Source) &&
-                    context.TypeMap.DestinationTypeToUse == typeof(Destination))
+                if (
+                    context.TypeMap.SourceType == typeof(Source)
+                    && context.TypeMap.DestinationTypeToUse == typeof(Destination)
+                )
                 {
                     _validated = true;
                 }
@@ -184,29 +152,85 @@ namespace AutoMapper.UnitTests
 
             internal class CustomTypeConverter : ITypeConverter<Source, Destination>
             {
-                public Destination Convert(Source source, Destination destination, ResolutionContext context)
+                public Destination Convert(
+                    Source source,
+                    Destination destination,
+                    ResolutionContext context
+                )
                 {
                     return new Destination();
                 }
             }
         }
 
-        public class When_using_custom_validation_for_convertusing_with_mappingexpression : NonValidatingSpecBase
+        public class When_using_custom_validation_for_convertusing_with_typeconverter_instance
+            : NonValidatingSpecBase
         {
             // Nullable so can see a false state
             private static bool? _validated;
 
-            protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-            {
-                Expression<Func<Source, Destination>> mappingExpression = source => new Destination();
-                cfg.CreateMap<Source, Destination>().ConvertUsing(mappingExpression);
-                cfg.Internal().Validator(SetValidated);
-            });
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    cfg.CreateMap<Source, Destination>().ConvertUsing(new CustomTypeConverter());
+                    cfg.Internal().Validator(SetValidated);
+                });
 
             private static void SetValidated(ValidationContext context)
             {
-                if (context.TypeMap.SourceType == typeof(Source) &&
-                    context.TypeMap.DestinationTypeToUse == typeof(Destination))
+                if (
+                    context.TypeMap.SourceType == typeof(Source)
+                    && context.TypeMap.DestinationTypeToUse == typeof(Destination)
+                )
+                {
+                    _validated = true;
+                }
+            }
+
+            [Fact]
+            public void Validator_should_be_called_by_AssertConfigurationIsValid()
+            {
+                _validated.ShouldBeNull();
+
+                AssertConfigurationIsValid();
+
+                _validated.ShouldBe(true);
+            }
+
+            internal class CustomTypeConverter : ITypeConverter<Source, Destination>
+            {
+                public Destination Convert(
+                    Source source,
+                    Destination destination,
+                    ResolutionContext context
+                )
+                {
+                    return new Destination();
+                }
+            }
+        }
+
+        public class When_using_custom_validation_for_convertusing_with_mappingexpression
+            : NonValidatingSpecBase
+        {
+            // Nullable so can see a false state
+            private static bool? _validated;
+
+            protected override MapperConfiguration CreateConfiguration() =>
+                new(cfg =>
+                {
+                    Expression<Func<Source, Destination>> mappingExpression = source =>
+                        new Destination();
+                    cfg.CreateMap<Source, Destination>().ConvertUsing(mappingExpression);
+                    cfg.Internal().Validator(SetValidated);
+                });
+
+            private static void SetValidated(ValidationContext context)
+            {
+                if (
+                    context.TypeMap.SourceType == typeof(Source)
+                    && context.TypeMap.DestinationTypeToUse == typeof(Destination)
+                )
                 {
                     _validated = true;
                 }

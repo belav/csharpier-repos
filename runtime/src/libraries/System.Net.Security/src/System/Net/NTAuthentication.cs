@@ -22,57 +22,63 @@ namespace System.Net
                 }
 
                 string? name = NegotiateStreamPal.QueryContextAssociatedName(_securityContext!);
-                if (NetEventSource.Log.IsEnabled()) NetEventSource.Info(this, $"NTAuthentication: The context is associated with [{name}]");
+                if (NetEventSource.Log.IsEnabled())
+                    NetEventSource.Info(
+                        this,
+                        $"NTAuthentication: The context is associated with [{name}]"
+                    );
                 return name;
             }
         }
 
         internal bool IsConfidentialityFlag
         {
-            get
-            {
-                return (_contextFlags & ContextFlagsPal.Confidentiality) != 0;
-            }
+            get { return (_contextFlags & ContextFlagsPal.Confidentiality) != 0; }
         }
 
         internal bool IsIntegrityFlag
         {
             get
             {
-                return (_contextFlags & (_isServer ? ContextFlagsPal.AcceptIntegrity : ContextFlagsPal.InitIntegrity)) != 0;
+                return (
+                        _contextFlags
+                        & (
+                            _isServer
+                                ? ContextFlagsPal.AcceptIntegrity
+                                : ContextFlagsPal.InitIntegrity
+                        )
+                    ) != 0;
             }
         }
 
         internal bool IsMutualAuthFlag
         {
-            get
-            {
-                return (_contextFlags & ContextFlagsPal.MutualAuth) != 0;
-            }
+            get { return (_contextFlags & ContextFlagsPal.MutualAuth) != 0; }
         }
 
         internal bool IsDelegationFlag
         {
-            get
-            {
-                return (_contextFlags & ContextFlagsPal.Delegate) != 0;
-            }
+            get { return (_contextFlags & ContextFlagsPal.Delegate) != 0; }
         }
 
         internal bool IsIdentifyFlag
         {
             get
             {
-                return (_contextFlags & (_isServer ? ContextFlagsPal.AcceptIdentify : ContextFlagsPal.InitIdentify)) != 0;
+                return (
+                        _contextFlags
+                        & (
+                            _isServer
+                                ? ContextFlagsPal.AcceptIdentify
+                                : ContextFlagsPal.InitIdentify
+                        )
+                    ) != 0;
             }
         }
 
         internal string? Spn
         {
-            get
-            {
-                return _spn;
-            }
+            get { return _spn; }
         }
 
         internal bool IsNTLM
@@ -88,7 +94,11 @@ namespace System.Net
             }
         }
 
-        internal int Encrypt(ReadOnlySpan<byte> buffer, [NotNull] ref byte[]? output, uint sequenceNumber)
+        internal int Encrypt(
+            ReadOnlySpan<byte> buffer,
+            [NotNull] ref byte[]? output,
+            uint sequenceNumber
+        )
         {
             return NegotiateStreamPal.Encrypt(
                 _securityContext!,
@@ -96,12 +106,28 @@ namespace System.Net
                 IsConfidentialityFlag,
                 IsNTLM,
                 ref output,
-                sequenceNumber);
+                sequenceNumber
+            );
         }
 
-        internal int Decrypt(byte[] payload, int offset, int count, out int newOffset, uint expectedSeqNumber)
+        internal int Decrypt(
+            byte[] payload,
+            int offset,
+            int count,
+            out int newOffset,
+            uint expectedSeqNumber
+        )
         {
-            return NegotiateStreamPal.Decrypt(_securityContext!, payload, offset, count, IsConfidentialityFlag, IsNTLM, out newOffset, expectedSeqNumber);
+            return NegotiateStreamPal.Decrypt(
+                _securityContext!,
+                payload,
+                offset,
+                count,
+                IsConfidentialityFlag,
+                IsNTLM,
+                out newOffset,
+                expectedSeqNumber
+            );
         }
     }
 }

@@ -20,24 +20,54 @@ internal interface ICodeGenerationOptionsStorage : ILanguageService
 
 internal static class CodeGenerationOptionsStorage
 {
-    public static ValueTask<CodeGenerationOptions> GetCodeGenerationOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetCodeGenerationOptionsAsync(globalOptions.GetCodeGenerationOptions(document.Project.LanguageServices), cancellationToken);
+    public static ValueTask<CodeGenerationOptions> GetCodeGenerationOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetCodeGenerationOptionsAsync(
+            globalOptions.GetCodeGenerationOptions(document.Project.LanguageServices),
+            cancellationToken
+        );
 
-    public static ValueTask<CleanCodeGenerationOptions> GetCleanCodeGenerationOptionsAsync(this Document document, IGlobalOptionService globalOptions, CancellationToken cancellationToken)
-        => document.GetCleanCodeGenerationOptionsAsync(globalOptions.GetCleanCodeGenerationOptions(document.Project.LanguageServices), cancellationToken);
+    public static ValueTask<CleanCodeGenerationOptions> GetCleanCodeGenerationOptionsAsync(
+        this Document document,
+        IGlobalOptionService globalOptions,
+        CancellationToken cancellationToken
+    ) =>
+        document.GetCleanCodeGenerationOptionsAsync(
+            globalOptions.GetCleanCodeGenerationOptions(document.Project.LanguageServices),
+            cancellationToken
+        );
 
-    public static CodeGenerationOptions.CommonOptions GetCommonCodeGenerationOptions(this IGlobalOptionService globalOptions, string language)
-        => new()
-        {
-            NamingStyle = globalOptions.GetNamingStylePreferences(language)
-        };
+    public static CodeGenerationOptions.CommonOptions GetCommonCodeGenerationOptions(
+        this IGlobalOptionService globalOptions,
+        string language
+    ) => new() { NamingStyle = globalOptions.GetNamingStylePreferences(language) };
 
-    public static CodeGenerationOptions GetCodeGenerationOptions(this IGlobalOptionService globalOptions, HostLanguageServices languageServices)
-        => languageServices.GetRequiredService<ICodeGenerationOptionsStorage>().GetOptions(globalOptions);
+    public static CodeGenerationOptions GetCodeGenerationOptions(
+        this IGlobalOptionService globalOptions,
+        HostLanguageServices languageServices
+    ) =>
+        languageServices
+            .GetRequiredService<ICodeGenerationOptionsStorage>()
+            .GetOptions(globalOptions);
 
-    public static CodeAndImportGenerationOptions GetCodeAndImportGenerationOptions(this IGlobalOptionService globalOptions, HostLanguageServices languageServices)
-        => new(globalOptions.GetCodeGenerationOptions(languageServices), globalOptions.GetAddImportPlacementOptions(languageServices));
+    public static CodeAndImportGenerationOptions GetCodeAndImportGenerationOptions(
+        this IGlobalOptionService globalOptions,
+        HostLanguageServices languageServices
+    ) =>
+        new(
+            globalOptions.GetCodeGenerationOptions(languageServices),
+            globalOptions.GetAddImportPlacementOptions(languageServices)
+        );
 
-    public static CleanCodeGenerationOptions GetCleanCodeGenerationOptions(this IGlobalOptionService globalOptions, HostLanguageServices languageServices)
-        => new(globalOptions.GetCodeGenerationOptions(languageServices), globalOptions.GetCodeCleanupOptions(languageServices));
+    public static CleanCodeGenerationOptions GetCleanCodeGenerationOptions(
+        this IGlobalOptionService globalOptions,
+        HostLanguageServices languageServices
+    ) =>
+        new(
+            globalOptions.GetCodeGenerationOptions(languageServices),
+            globalOptions.GetCodeCleanupOptions(languageServices)
+        );
 }

@@ -15,16 +15,8 @@ namespace System.CommandLine.Help
             DisallowBinding = true;
         }
 
-        public HelpOption(Func<LocalizationResources> getLocalizationResources) : this(new[]
-        {
-            "-h",
-            "/h",
-            "--help",
-            "-?",
-            "/?"
-        }, getLocalizationResources)
-        {
-        }
+        public HelpOption(Func<LocalizationResources> getLocalizationResources)
+            : this(new[] { "-h", "/h", "--help", "-?", "/?" }, getLocalizationResources) { }
 
         public override string? Description
         {

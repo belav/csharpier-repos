@@ -5,7 +5,12 @@
 
 namespace System.Runtime.InteropServices.Marshalling
 {
-    [CustomTypeMarshaller(typeof(HandleRef), Direction = CustomTypeMarshallerDirection.In, Features = CustomTypeMarshallerFeatures.UnmanagedResources | CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+    [CustomTypeMarshaller(
+        typeof(HandleRef),
+        Direction = CustomTypeMarshallerDirection.In,
+        Features = CustomTypeMarshallerFeatures.UnmanagedResources
+            | CustomTypeMarshallerFeatures.TwoStageMarshalling
+    )]
     internal struct HandleRefMarshaller
     {
         private HandleRef _handle;

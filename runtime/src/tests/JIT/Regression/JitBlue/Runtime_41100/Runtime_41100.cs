@@ -11,7 +11,7 @@ using System.Runtime.CompilerServices;
 class X
 {
     [MethodImpl(MethodImplOptions.NoInlining)]
-    public static void E(ImmutableArray<string> a) {}
+    public static void E(ImmutableArray<string> a) { }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
     public static ImmutableArray<string> G() => ImmutableArray<string>.Empty;
@@ -37,24 +37,26 @@ class X
 
         foreach (var s in a)
         {
-            if (s.Equals("hello")) r++;
+            if (s.Equals("hello"))
+                r++;
         }
 
         var aa = a;
 
         if (r > 0)
-
         {
             foreach (var s in a)
             {
-                if (s.Equals("hello")) r--;
+                if (s.Equals("hello"))
+                    r--;
             }
 
             aa = G();
 
             foreach (var s in a)
             {
-                if (s.Equals("hello")) r++;
+                if (s.Equals("hello"))
+                    r++;
             }
         }
 

@@ -18,8 +18,10 @@ using Xunit;
 
 #if SOCKETS
 namespace Microsoft.AspNetCore.Server.Kestrel.Sockets.FunctionalTests.Http2;
+
 #else
 namespace Microsoft.AspNetCore.Server.Kestrel.FunctionalTests.Http2;
+
 #endif
 
 public class HandshakeTests : LoggedTest
@@ -30,10 +32,13 @@ public class HandshakeTests : LoggedTest
 
     public HandshakeTests()
     {
-        Client = new HttpClient(new HttpClientHandler
-        {
-            ServerCertificateCustomValidationCallback = HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
-        })
+        Client = new HttpClient(
+            new HttpClientHandler
+            {
+                ServerCertificateCustomValidationCallback =
+                    HttpClientHandler.DangerousAcceptAnyServerCertificateValidator
+            }
+        )
         {
             DefaultRequestVersion = HttpVersion.Version20,
         };
@@ -44,20 +49,33 @@ public class HandshakeTests : LoggedTest
     // Mac SslStream is missing ALPN support: https://github.com/dotnet/runtime/issues/27727
     public void TlsAndHttp2NotSupportedOnMac()
     {
-        var ex = Assert.Throws<NotSupportedException>(() => new TestServer(context =>
-        {
-            throw new NotImplementedException();
-        }, new TestServiceContext(LoggerFactory),
-        kestrelOptions =>
-        {
-            kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
-            {
-                listenOptions.Protocols = HttpProtocols.Http2;
-                listenOptions.UseHttps(_x509Certificate2);
-            });
-        }));
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                new TestServer(
+                    context =>
+                    {
+                        throw new NotImplementedException();
+                    },
+                    new TestServiceContext(LoggerFactory),
+                    kestrelOptions =>
+                    {
+                        kestrelOptions.Listen(
+                            IPAddress.Loopback,
+                            0,
+                            listenOptions =>
+                            {
+                                listenOptions.Protocols = HttpProtocols.Http2;
+                                listenOptions.UseHttps(_x509Certificate2);
+                            }
+                        );
+                    }
+                )
+        );
 
-        Assert.Equal("HTTP/2 over TLS is not supported on macOS due to missing ALPN support.", ex.Message);
+        Assert.Equal(
+            "HTTP/2 over TLS is not supported on macOS due to missing ALPN support.",
+            ex.Message
+        );
     }
 
     [ConditionalFact]
@@ -66,44 +84,73 @@ public class HandshakeTests : LoggedTest
     // Win7 SslStream is missing ALPN support.
     public void TlsAndHttp2NotSupportedOnWin7()
     {
-        var ex = Assert.Throws<NotSupportedException>(() => new TestServer(context =>
-        {
-            throw new NotImplementedException();
-        }, new TestServiceContext(LoggerFactory),
-        kestrelOptions =>
-        {
-            kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
-            {
-                listenOptions.Protocols = HttpProtocols.Http2;
-                listenOptions.UseHttps(_x509Certificate2);
-            });
-        }));
+        var ex = Assert.Throws<NotSupportedException>(
+            () =>
+                new TestServer(
+                    context =>
+                    {
+                        throw new NotImplementedException();
+                    },
+                    new TestServiceContext(LoggerFactory),
+                    kestrelOptions =>
+                    {
+                        kestrelOptions.Listen(
+                            IPAddress.Loopback,
+                            0,
+                            listenOptions =>
+                            {
+                                listenOptions.Protocols = HttpProtocols.Http2;
+                                listenOptions.UseHttps(_x509Certificate2);
+                            }
+                        );
+                    }
+                )
+        );
 
-        Assert.Equal("HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.", ex.Message);
+        Assert.Equal(
+            "HTTP/2 over TLS is not supported on Windows 7 due to missing ALPN support.",
+            ex.Message
+        );
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX,
+        SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727"
+    )]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
     public async Task TlsAlpnHandshakeSelectsHttp2From1and2()
     {
-        await using (var server = new TestServer(context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.True(SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(tlsFeature.ApplicationProtocol.Span),
-                "ALPN: " + tlsFeature.ApplicationProtocol.Length);
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.True(
+                        SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(
+                            tlsFeature.ApplicationProtocol.Span
+                        ),
+                        "ALPN: " + tlsFeature.ApplicationProtocol.Length
+                    );
 
-            return context.Response.WriteAsync("hello world " + context.Request.Protocol);
-        }, new TestServiceContext(LoggerFactory),
-        kestrelOptions =>
-        {
-            kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
-            {
-                listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
-                listenOptions.UseHttps(_x509Certificate2);
-            });
-        }))
+                    return context.Response.WriteAsync("hello world " + context.Request.Protocol);
+                },
+                new TestServiceContext(LoggerFactory),
+                kestrelOptions =>
+                {
+                    kestrelOptions.Listen(
+                        IPAddress.Loopback,
+                        0,
+                        listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http1AndHttp2;
+                            listenOptions.UseHttps(_x509Certificate2);
+                        }
+                    );
+                }
+            )
+        )
         {
             var result = await Client.GetStringAsync($"https://localhost:{server.Port}/");
             Assert.Equal("hello world HTTP/2", result);
@@ -111,27 +158,43 @@ public class HandshakeTests : LoggedTest
     }
 
     [ConditionalFact]
-    [OSSkipCondition(OperatingSystems.MacOSX, SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727")]
+    [OSSkipCondition(
+        OperatingSystems.MacOSX,
+        SkipReason = "Missing SslStream ALPN support: https://github.com/dotnet/runtime/issues/27727"
+    )]
     [MinimumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10)]
     public async Task TlsAlpnHandshakeSelectsHttp2()
     {
-        await using (var server = new TestServer(context =>
-        {
-            var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
-            Assert.NotNull(tlsFeature);
-            Assert.True(SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(tlsFeature.ApplicationProtocol.Span),
-                "ALPN: " + tlsFeature.ApplicationProtocol.Length);
+        await using (
+            var server = new TestServer(
+                context =>
+                {
+                    var tlsFeature = context.Features.Get<ITlsApplicationProtocolFeature>();
+                    Assert.NotNull(tlsFeature);
+                    Assert.True(
+                        SslApplicationProtocol.Http2.Protocol.Span.SequenceEqual(
+                            tlsFeature.ApplicationProtocol.Span
+                        ),
+                        "ALPN: " + tlsFeature.ApplicationProtocol.Length
+                    );
 
-            return context.Response.WriteAsync("hello world " + context.Request.Protocol);
-        }, new TestServiceContext(LoggerFactory),
-        kestrelOptions =>
-        {
-            kestrelOptions.Listen(IPAddress.Loopback, 0, listenOptions =>
-            {
-                listenOptions.Protocols = HttpProtocols.Http2;
-                listenOptions.UseHttps(_x509Certificate2);
-            });
-        }))
+                    return context.Response.WriteAsync("hello world " + context.Request.Protocol);
+                },
+                new TestServiceContext(LoggerFactory),
+                kestrelOptions =>
+                {
+                    kestrelOptions.Listen(
+                        IPAddress.Loopback,
+                        0,
+                        listenOptions =>
+                        {
+                            listenOptions.Protocols = HttpProtocols.Http2;
+                            listenOptions.UseHttps(_x509Certificate2);
+                        }
+                    );
+                }
+            )
+        )
         {
             var result = await Client.GetStringAsync($"https://localhost:{server.Port}/");
             Assert.Equal("hello world HTTP/2", result);

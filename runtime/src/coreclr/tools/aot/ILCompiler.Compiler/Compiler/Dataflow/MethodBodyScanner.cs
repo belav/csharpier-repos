@@ -33,18 +33,21 @@ namespace ILCompiler.Dataflow
     {
         internal ValueNode MethodReturnValue { private set; get; }
 
-        protected virtual void WarnAboutInvalidILInMethod(MethodIL method, int ilOffset)
-        {
-        }
+        protected virtual void WarnAboutInvalidILInMethod(MethodIL method, int ilOffset) { }
 
-        private void CheckForInvalidStack(Stack<StackSlot> stack, int depthRequired, MethodIL method, int ilOffset)
+        private void CheckForInvalidStack(
+            Stack<StackSlot> stack,
+            int depthRequired,
+            MethodIL method,
+            int ilOffset
+        )
         {
             if (stack.Count < depthRequired)
             {
                 WarnAboutInvalidILInMethod(method, ilOffset);
                 while (stack.Count < depthRequired)
                     stack.Push(new StackSlot()); // Push dummy values to avoid crashes.
-                                                 // Analysis of this method will be incorrect.
+                // Analysis of this method will be incorrect.
             }
         }
 
@@ -53,13 +56,22 @@ namespace ILCompiler.Dataflow
             stack.Push(new StackSlot());
         }
 
-        private void PushUnknownAndWarnAboutInvalidIL(Stack<StackSlot> stack, MethodIL methodBody, int offset)
+        private void PushUnknownAndWarnAboutInvalidIL(
+            Stack<StackSlot> stack,
+            MethodIL methodBody,
+            int offset
+        )
         {
             WarnAboutInvalidILInMethod(methodBody, offset);
             PushUnknown(stack);
         }
 
-        private StackSlot PopUnknown(Stack<StackSlot> stack, int count, MethodIL method, int ilOffset)
+        private StackSlot PopUnknown(
+            Stack<StackSlot> stack,
+            int count,
+            MethodIL method,
+            int ilOffset
+        )
         {
             if (count < 1)
                 throw new InvalidOperationException();
@@ -126,7 +138,11 @@ namespace ILCompiler.Dataflow
             stack = null;
         }
 
-        private static void NewKnownStack(Dictionary<int, Stack<StackSlot>> knownStacks, int newOffset, Stack<StackSlot> newStack)
+        private static void NewKnownStack(
+            Dictionary<int, Stack<StackSlot>> knownStacks,
+            int newOffset,
+            Stack<StackSlot> newStack
+        )
         {
             // No need to merge in empty stacks
             if (newStack.Count == 0)
@@ -161,10 +177,7 @@ namespace ILCompiler.Dataflow
 
             public int CurrentBlockIndex
             {
-                get
-                {
-                    return _currentBlockIndex;
-                }
+                get { return _currentBlockIndex; }
             }
 
             public int MoveNext(int offset)
@@ -191,22 +204,25 @@ namespace ILCompiler.Dataflow
             ValueBasicBlockPair[] valueCollection,
             ValueNode valueToStore,
             int index,
-            int curBasicBlock)
+            int curBasicBlock
+        )
         {
-            ValueBasicBlockPair newValue = new ValueBasicBlockPair { BasicBlockIndex = curBasicBlock };
+            ValueBasicBlockPair newValue = new ValueBasicBlockPair
+            {
+                BasicBlockIndex = curBasicBlock
+            };
 
             ValueBasicBlockPair existingValue = valueCollection[index];
-            if (existingValue.Value != null
-                && existingValue.BasicBlockIndex == curBasicBlock)
+            if (existingValue.Value != null && existingValue.BasicBlockIndex == curBasicBlock)
             {
-                // If the previous value was stored in the current basic block, then we can safely 
+                // If the previous value was stored in the current basic block, then we can safely
                 // overwrite the previous value with the new one.
                 newValue.Value = valueToStore;
             }
             else
             {
-                // If the previous value came from a previous basic block, then some other use of 
-                // the local could see the previous value, so we must merge the new value with the 
+                // If the previous value came from a previous basic block, then some other use of
+                // the local could see the previous value, so we must merge the new value with the
                 // old value.
                 newValue.Value = MergePointValue.MergeValues(existingValue.Value, valueToStore);
             }
@@ -218,23 +234,27 @@ namespace ILCompiler.Dataflow
             ValueNode valueToStore,
             KeyType collectionKey,
             int curBasicBlock,
-            int? maxTrackedValues = null)
+            int? maxTrackedValues = null
+        )
         {
-            ValueBasicBlockPair newValue = new ValueBasicBlockPair { BasicBlockIndex = curBasicBlock };
+            ValueBasicBlockPair newValue = new ValueBasicBlockPair
+            {
+                BasicBlockIndex = curBasicBlock
+            };
 
             ValueBasicBlockPair existingValue;
             if (valueCollection.TryGetValue(collectionKey, out existingValue))
             {
                 if (existingValue.BasicBlockIndex == curBasicBlock)
                 {
-                    // If the previous value was stored in the current basic block, then we can safely 
+                    // If the previous value was stored in the current basic block, then we can safely
                     // overwrite the previous value with the new one.
                     newValue.Value = valueToStore;
                 }
                 else
                 {
-                    // If the previous value came from a previous basic block, then some other use of 
-                    // the local could see the previous value, so we must merge the new value with the 
+                    // If the previous value came from a previous basic block, then some other use of
+                    // the local could see the previous value, so we must merge the new value with the
                     // old value.
                     newValue.Value = MergePointValue.MergeValues(existingValue.Value, valueToStore);
                 }
@@ -327,7 +347,6 @@ namespace ILCompiler.Dataflow
                         currentStack.Push(new StackSlot(NullValue.Instance));
                         break;
 
-
                     case ILOpcode.ldc_i4_0:
                     case ILOpcode.ldc_i4_1:
                     case ILOpcode.ldc_i4_2:
@@ -337,6 +356,7 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.ldc_i4_6:
                     case ILOpcode.ldc_i4_7:
                     case ILOpcode.ldc_i4_8:
+
                         {
                             int value = opcode - ILOpcode.ldc_i4_0;
                             ConstIntValue civ = new ConstIntValue(value);
@@ -346,6 +366,7 @@ namespace ILCompiler.Dataflow
                         break;
 
                     case ILOpcode.ldc_i4_m1:
+
                         {
                             ConstIntValue civ = new ConstIntValue(-1);
                             StackSlot slot = new StackSlot(civ);
@@ -354,6 +375,7 @@ namespace ILCompiler.Dataflow
                         break;
 
                     case ILOpcode.ldc_i4:
+
                         {
                             int value = (int)reader.ReadILUInt32();
                             ConstIntValue civ = new ConstIntValue(value);
@@ -363,6 +385,7 @@ namespace ILCompiler.Dataflow
                         break;
 
                     case ILOpcode.ldc_i4_s:
+
                         {
                             int value = (sbyte)reader.ReadILByte();
                             ConstIntValue civ = new ConstIntValue(value);
@@ -389,14 +412,19 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.ldarg_s:
                     case ILOpcode.ldarga:
                     case ILOpcode.ldarga_s:
-                        ScanLdarg(opcode, opcode switch
-                        {
-                            ILOpcode.ldarg => reader.ReadILUInt16(),
-                            ILOpcode.ldarga => reader.ReadILUInt16(),
-                            ILOpcode.ldarg_s => reader.ReadILByte(),
-                            ILOpcode.ldarga_s => reader.ReadILByte(),
-                            _ => opcode - ILOpcode.ldarg_0
-                        }, currentStack, thisMethod);
+                        ScanLdarg(
+                            opcode,
+                            opcode switch
+                            {
+                                ILOpcode.ldarg => reader.ReadILUInt16(),
+                                ILOpcode.ldarga => reader.ReadILUInt16(),
+                                ILOpcode.ldarg_s => reader.ReadILByte(),
+                                ILOpcode.ldarga_s => reader.ReadILByte(),
+                                _ => opcode - ILOpcode.ldarg_0
+                            },
+                            currentStack,
+                            thisMethod
+                        );
                         break;
 
                     case ILOpcode.ldloc:
@@ -407,19 +435,31 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.ldloc_s:
                     case ILOpcode.ldloca:
                     case ILOpcode.ldloca_s:
-                        ScanLdloc(methodBody, offset, opcode, opcode switch
-                        {
-                            ILOpcode.ldloc => reader.ReadILUInt16(),
-                            ILOpcode.ldloca => reader.ReadILUInt16(),
-                            ILOpcode.ldloc_s => reader.ReadILByte(),
-                            ILOpcode.ldloca_s => reader.ReadILByte(),
-                            _ => opcode - ILOpcode.ldloc_0
-                        }, currentStack, locals);
+                        ScanLdloc(
+                            methodBody,
+                            offset,
+                            opcode,
+                            opcode switch
+                            {
+                                ILOpcode.ldloc => reader.ReadILUInt16(),
+                                ILOpcode.ldloca => reader.ReadILUInt16(),
+                                ILOpcode.ldloc_s => reader.ReadILByte(),
+                                ILOpcode.ldloca_s => reader.ReadILByte(),
+                                _ => opcode - ILOpcode.ldloc_0
+                            },
+                            currentStack,
+                            locals
+                        );
                         break;
 
                     case ILOpcode.ldstr:
+
                         {
-                            StackSlot slot = new StackSlot(new KnownStringValue((string)methodBody.GetObject(reader.ReadILToken())));
+                            StackSlot slot = new StackSlot(
+                                new KnownStringValue(
+                                    (string)methodBody.GetObject(reader.ReadILToken())
+                                )
+                            );
                             currentStack.Push(slot);
                         }
                         break;
@@ -502,14 +542,23 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.ldsfld:
                     case ILOpcode.ldflda:
                     case ILOpcode.ldsflda:
-                        ScanLdfld(methodBody, offset, opcode, (FieldDesc)methodBody.GetObject(reader.ReadILToken()), currentStack);
+                        ScanLdfld(
+                            methodBody,
+                            offset,
+                            opcode,
+                            (FieldDesc)methodBody.GetObject(reader.ReadILToken()),
+                            currentStack
+                        );
                         break;
 
                     case ILOpcode.newarr:
+
                         {
                             StackSlot count = PopUnknown(currentStack, 1, methodBody, offset);
                             var arrayElement = (TypeDesc)methodBody.GetObject(reader.ReadILToken());
-                            currentStack.Push(new StackSlot(new ArrayValue(count.Value, arrayElement)));
+                            currentStack.Push(
+                                new StackSlot(new ArrayValue(count.Value, arrayElement))
+                            );
                         }
                         break;
 
@@ -551,7 +600,13 @@ namespace ILCompiler.Dataflow
 
                     case ILOpcode.stfld:
                     case ILOpcode.stsfld:
-                        ScanStfld(methodBody, offset, opcode, (FieldDesc)methodBody.GetObject(reader.ReadILToken()), currentStack);
+                        ScanStfld(
+                            methodBody,
+                            offset,
+                            opcode,
+                            (FieldDesc)methodBody.GetObject(reader.ReadILToken()),
+                            currentStack
+                        );
                         break;
 
                     case ILOpcode.cpobj:
@@ -580,7 +635,12 @@ namespace ILCompiler.Dataflow
 
                     case ILOpcode.starg:
                     case ILOpcode.starg_s:
-                        ScanStarg(methodBody, offset, opcode == ILOpcode.starg ? reader.ReadILUInt16() : reader.ReadILByte(), currentStack);
+                        ScanStarg(
+                            methodBody,
+                            offset,
+                            opcode == ILOpcode.starg ? reader.ReadILUInt16() : reader.ReadILByte(),
+                            currentStack
+                        );
                         break;
 
                     case ILOpcode.stloc:
@@ -589,11 +649,19 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.stloc_1:
                     case ILOpcode.stloc_2:
                     case ILOpcode.stloc_3:
-                        ScanStloc(methodBody, offset, opcode switch {
-                            ILOpcode.stloc => reader.ReadILUInt16(),
-                            ILOpcode.stloc_s => reader.ReadILByte(),
-                            _ => opcode - ILOpcode.stloc_0,
-                        }, currentStack, locals, curBasicBlock);
+                        ScanStloc(
+                            methodBody,
+                            offset,
+                            opcode switch
+                            {
+                                ILOpcode.stloc => reader.ReadILUInt16(),
+                                ILOpcode.stloc_s => reader.ReadILByte(),
+                                _ => opcode - ILOpcode.stloc_0,
+                            },
+                            currentStack,
+                            locals,
+                            curBasicBlock
+                        );
                         break;
 
                     case ILOpcode.constrained:
@@ -610,12 +678,18 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.brtrue:
                     case ILOpcode.brtrue_s:
                         PopUnknown(currentStack, 1, methodBody, offset);
-                        NewKnownStack(knownStacks, reader.ReadBranchDestination(opcode), currentStack);
+                        NewKnownStack(
+                            knownStacks,
+                            reader.ReadBranchDestination(opcode),
+                            currentStack
+                        );
                         break;
 
                     case ILOpcode.calli:
+
                         {
-                            var signature = (MethodSignature)methodBody.GetObject(reader.ReadILToken());
+                            var signature = (MethodSignature)
+                                methodBody.GetObject(reader.ReadILToken());
                             if (!signature.IsStatic)
                             {
                                 PopUnknown(currentStack, 1, methodBody, offset);
@@ -637,7 +711,14 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.call:
                     case ILOpcode.callvirt:
                     case ILOpcode.newobj:
-                        HandleCall(methodBody, opcode, offset, (MethodDesc)methodBody.GetObject(reader.ReadILToken()), currentStack, curBasicBlock);
+                        HandleCall(
+                            methodBody,
+                            opcode,
+                            offset,
+                            (MethodDesc)methodBody.GetObject(reader.ReadILToken()),
+                            currentStack,
+                            curBasicBlock
+                        );
                         break;
 
                     case ILOpcode.jmp:
@@ -647,14 +728,22 @@ namespace ILCompiler.Dataflow
 
                     case ILOpcode.br:
                     case ILOpcode.br_s:
-                        NewKnownStack(knownStacks, reader.ReadBranchDestination(opcode), currentStack);
+                        NewKnownStack(
+                            knownStacks,
+                            reader.ReadBranchDestination(opcode),
+                            currentStack
+                        );
                         ClearStack(ref currentStack);
                         break;
 
                     case ILOpcode.leave:
                     case ILOpcode.leave_s:
                         ClearStack(ref currentStack);
-                        NewKnownStack(knownStacks, reader.ReadBranchDestination(opcode), new Stack<StackSlot>(methodBody.MaxStack));
+                        NewKnownStack(
+                            knownStacks,
+                            reader.ReadBranchDestination(opcode),
+                            new Stack<StackSlot>(methodBody.MaxStack)
+                        );
                         break;
 
                     case ILOpcode.endfilter:
@@ -665,33 +754,40 @@ namespace ILCompiler.Dataflow
                         break;
 
                     case ILOpcode.ret:
+                    {
+                        bool hasReturnValue = !methodBody.OwningMethod.Signature.ReturnType.IsVoid;
+                        if (currentStack.Count != (hasReturnValue ? 1 : 0))
                         {
-                            bool hasReturnValue = !methodBody.OwningMethod.Signature.ReturnType.IsVoid;
-                            if (currentStack.Count != (hasReturnValue ? 1 : 0))
-                            {
-                                WarnAboutInvalidILInMethod(methodBody, offset);
-                            }
-                            if (hasReturnValue)
-                            {
-                                StackSlot retValue = PopUnknown(currentStack, 1, methodBody, offset);
-                                MethodReturnValue = MergePointValue.MergeValues(MethodReturnValue, retValue.Value);
-                            }
-                            ClearStack(ref currentStack);
-                            break;
+                            WarnAboutInvalidILInMethod(methodBody, offset);
                         }
+                        if (hasReturnValue)
+                        {
+                            StackSlot retValue = PopUnknown(currentStack, 1, methodBody, offset);
+                            MethodReturnValue = MergePointValue.MergeValues(
+                                MethodReturnValue,
+                                retValue.Value
+                            );
+                        }
+                        ClearStack(ref currentStack);
+                        break;
+                    }
 
                     case ILOpcode.switch_:
-                        {
-                            PopUnknown(currentStack, 1, methodBody, offset);
+                    {
+                        PopUnknown(currentStack, 1, methodBody, offset);
 
-                            uint count = reader.ReadILUInt32();
-                            int jmpBase = reader.Offset + (int)(4 * count);
-                            for (uint i = 0; i < count; i++)
-                            {
-                                NewKnownStack(knownStacks, (int)reader.ReadILUInt32() + jmpBase, currentStack);
-                            }
-                            break;
+                        uint count = reader.ReadILUInt32();
+                        int jmpBase = reader.Offset + (int)(4 * count);
+                        for (uint i = 0; i < count; i++)
+                        {
+                            NewKnownStack(
+                                knownStacks,
+                                (int)reader.ReadILUInt32() + jmpBase,
+                                currentStack
+                            );
                         }
+                        break;
+                    }
 
                     case ILOpcode.beq:
                     case ILOpcode.beq_s:
@@ -714,7 +810,11 @@ namespace ILCompiler.Dataflow
                     case ILOpcode.blt_un:
                     case ILOpcode.blt_un_s:
                         PopUnknown(currentStack, 2, methodBody, offset);
-                        NewKnownStack(knownStacks, reader.ReadBranchDestination(opcode), currentStack);
+                        NewKnownStack(
+                            knownStacks,
+                            reader.ReadBranchDestination(opcode),
+                            currentStack
+                        );
                         break;
                     default:
                         reader.Skip(opcode);
@@ -723,7 +823,10 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        private static void ScanExceptionInformation(Dictionary<int, Stack<StackSlot>> knownStacks, MethodIL methodBody)
+        private static void ScanExceptionInformation(
+            Dictionary<int, Stack<StackSlot>> knownStacks,
+            MethodIL methodBody
+        )
         {
             foreach (ILExceptionRegion exceptionClause in methodBody.GetExceptionRegions())
             {
@@ -744,7 +847,12 @@ namespace ILCompiler.Dataflow
 
         protected abstract ValueNode GetMethodParameterValue(MethodDesc method, int parameterIndex);
 
-        private void ScanLdarg(ILOpcode opcode, int paramNum, Stack<StackSlot> currentStack, MethodDesc thisMethod)
+        private void ScanLdarg(
+            ILOpcode opcode,
+            int paramNum,
+            Stack<StackSlot> currentStack,
+            MethodDesc thisMethod
+        )
         {
             bool isByRef;
 
@@ -754,7 +862,9 @@ namespace ILCompiler.Dataflow
             }
             else
             {
-                isByRef = thisMethod.Signature[paramNum - (thisMethod.Signature.IsStatic ? 0 : 1)].IsByRefOrPointer();
+                isByRef = thisMethod.Signature[
+                    paramNum - (thisMethod.Signature.IsStatic ? 0 : 1)
+                ].IsByRefOrPointer();
             }
 
             isByRef |= opcode == ILOpcode.ldarga || opcode == ILOpcode.ldarga_s;
@@ -768,7 +878,7 @@ namespace ILCompiler.Dataflow
             int offset,
             int index,
             Stack<StackSlot> currentStack
-            )
+        )
         {
             var valueToStore = PopUnknown(currentStack, 1, methodBody, offset);
             HandleStoreParameter(methodBody, offset, index, valueToStore.Value);
@@ -780,9 +890,12 @@ namespace ILCompiler.Dataflow
             ILOpcode operation,
             int index,
             Stack<StackSlot> currentStack,
-            ValueBasicBlockPair[] locals)
+            ValueBasicBlockPair[] locals
+        )
         {
-            bool isByRef = operation == ILOpcode.ldloca || operation == ILOpcode.ldloca_s
+            bool isByRef =
+                operation == ILOpcode.ldloca
+                || operation == ILOpcode.ldloca_s
                 || methodBody.GetLocals()[index].Type.IsByRefOrPointer();
 
             ValueBasicBlockPair localValue = locals[index];
@@ -797,13 +910,19 @@ namespace ILCompiler.Dataflow
             }
         }
 
-        private static void ScanLdtoken(MethodIL methodBody, object operand, Stack<StackSlot> currentStack)
+        private static void ScanLdtoken(
+            MethodIL methodBody,
+            object operand,
+            Stack<StackSlot> currentStack
+        )
         {
             if (operand is TypeDesc type)
             {
                 if (type.IsGenericParameter)
                 {
-                    StackSlot slot = new StackSlot(new RuntimeTypeHandleForGenericParameterValue((GenericParameterDesc)type));
+                    StackSlot slot = new StackSlot(
+                        new RuntimeTypeHandleForGenericParameterValue((GenericParameterDesc)type)
+                    );
                     currentStack.Push(slot);
                 }
                 else
@@ -829,7 +948,8 @@ namespace ILCompiler.Dataflow
             int index,
             Stack<StackSlot> currentStack,
             ValueBasicBlockPair[] locals,
-            int curBasicBlock)
+            int curBasicBlock
+        )
         {
             StackSlot valueToStore = PopUnknown(currentStack, 1, methodBody, offset);
             StoreMethodLocalValue(locals, valueToStore.Value, index, curBasicBlock);
@@ -838,7 +958,8 @@ namespace ILCompiler.Dataflow
         private void ScanIndirectStore(
             MethodIL methodBody,
             int offset,
-            Stack<StackSlot> currentStack)
+            Stack<StackSlot> currentStack
+        )
         {
             StackSlot valueToStore = PopUnknown(currentStack, 1, methodBody, offset);
             StackSlot destination = PopUnknown(currentStack, 1, methodBody, offset);
@@ -847,14 +968,23 @@ namespace ILCompiler.Dataflow
             {
                 if (uniqueDestination.Kind == ValueNodeKind.LoadField)
                 {
-                    HandleStoreField(methodBody, offset, ((LoadFieldValue)uniqueDestination).Field, valueToStore.Value);
+                    HandleStoreField(
+                        methodBody,
+                        offset,
+                        ((LoadFieldValue)uniqueDestination).Field,
+                        valueToStore.Value
+                    );
                 }
                 else if (uniqueDestination.Kind == ValueNodeKind.MethodParameter)
                 {
-                    HandleStoreParameter(methodBody, offset, ((MethodParameterValue)uniqueDestination).ParameterIndex, valueToStore.Value);
+                    HandleStoreParameter(
+                        methodBody,
+                        offset,
+                        ((MethodParameterValue)uniqueDestination).ParameterIndex,
+                        valueToStore.Value
+                    );
                 }
             }
-
         }
 
         protected abstract ValueNode GetFieldValue(MethodIL method, FieldDesc field);
@@ -865,7 +995,7 @@ namespace ILCompiler.Dataflow
             ILOpcode opcode,
             FieldDesc field,
             Stack<StackSlot> currentStack
-            )
+        )
         {
             if (opcode == ILOpcode.ldfld || opcode == ILOpcode.ldflda)
                 PopUnknown(currentStack, 1, methodBody, offset);
@@ -876,20 +1006,27 @@ namespace ILCompiler.Dataflow
             currentStack.Push(slot);
         }
 
-        protected virtual void HandleStoreField(MethodIL method, int offset, FieldDesc field, ValueNode valueToStore)
-        {
-        }
+        protected virtual void HandleStoreField(
+            MethodIL method,
+            int offset,
+            FieldDesc field,
+            ValueNode valueToStore
+        ) { }
 
-        protected virtual void HandleStoreParameter(MethodIL method, int offset, int index, ValueNode valueToStore)
-        {
-        }
+        protected virtual void HandleStoreParameter(
+            MethodIL method,
+            int offset,
+            int index,
+            ValueNode valueToStore
+        ) { }
 
         private void ScanStfld(
             MethodIL methodBody,
             int offset,
             ILOpcode opcode,
             FieldDesc field,
-            Stack<StackSlot> currentStack)
+            Stack<StackSlot> currentStack
+        )
         {
             StackSlot valueToStoreSlot = PopUnknown(currentStack, 1, methodBody, offset);
             if (opcode == ILOpcode.stfld)
@@ -902,8 +1039,10 @@ namespace ILCompiler.Dataflow
             Stack<StackSlot> currentStack,
             MethodDesc methodCalled,
             MethodIL containingMethodBody,
-            bool isNewObj, int ilOffset,
-            out ValueNode newObjValue)
+            bool isNewObj,
+            int ilOffset,
+            out ValueNode newObjValue
+        )
         {
             newObjValue = null;
 
@@ -934,13 +1073,20 @@ namespace ILCompiler.Dataflow
             int offset,
             MethodDesc calledMethod,
             Stack<StackSlot> currentStack,
-            int curBasicBlock)
+            int curBasicBlock
+        )
         {
             bool isNewObj = opcode == ILOpcode.newobj;
 
             ValueNode newObjValue;
-            ValueNodeList methodParams = PopCallArguments(currentStack, calledMethod, callingMethodBody, isNewObj,
-                                                           offset, out newObjValue);
+            ValueNodeList methodParams = PopCallArguments(
+                currentStack,
+                calledMethod,
+                callingMethodBody,
+                isNewObj,
+                offset,
+                out newObjValue
+            );
 
             ValueNode methodReturnValue;
             bool handledFunction = HandleCall(
@@ -949,7 +1095,8 @@ namespace ILCompiler.Dataflow
                 opcode,
                 offset,
                 methodParams,
-                out methodReturnValue);
+                out methodReturnValue
+            );
 
             // Handle the return value or newobj result
             if (!handledFunction)
@@ -971,7 +1118,12 @@ namespace ILCompiler.Dataflow
             }
 
             if (methodReturnValue != null)
-                currentStack.Push(new StackSlot(methodReturnValue, calledMethod.Signature.ReturnType.IsByRefOrPointer()));
+                currentStack.Push(
+                    new StackSlot(
+                        methodReturnValue,
+                        calledMethod.Signature.ReturnType.IsByRefOrPointer()
+                    )
+                );
 
             foreach (var param in methodParams)
             {
@@ -988,7 +1140,8 @@ namespace ILCompiler.Dataflow
             ILOpcode operation,
             int offset,
             ValueNodeList methodParams,
-            out ValueNode methodReturnValue);
+            out ValueNode methodReturnValue
+        );
 
         // Limit tracking array values to 32 values for performance reasons. There are many arrays much longer than 32 elements in .NET, but the interesting ones for the linker are nearly always less than 32 elements.
         private const int MaxTrackedArrayValues = 32;
@@ -1000,7 +1153,12 @@ namespace ILCompiler.Dataflow
             foreach (var knownIndex in arrValue.IndexValues.Keys)
             {
                 // Don't pass MaxTrackedArrayValues since we are only looking at keys we've already seen.
-                StoreMethodLocalValue(arrValue.IndexValues, UnknownValue.Instance, knownIndex, curBasicBlock);
+                StoreMethodLocalValue(
+                    arrValue.IndexValues,
+                    UnknownValue.Instance,
+                    knownIndex,
+                    curBasicBlock
+                );
             }
         }
 
@@ -1008,7 +1166,8 @@ namespace ILCompiler.Dataflow
             int offset,
             Stack<StackSlot> currentStack,
             MethodIL methodBody,
-            int curBasicBlock)
+            int curBasicBlock
+        )
         {
             StackSlot valueToStore = PopUnknown(currentStack, 1, methodBody, offset);
             StackSlot indexToStoreAt = PopUnknown(currentStack, 1, methodBody, offset);
@@ -1025,7 +1184,13 @@ namespace ILCompiler.Dataflow
                     else
                     {
                         // When we know the index, we can record the value at that index.
-                        StoreMethodLocalValue(arrValue.IndexValues, valueToStore.Value, indexToStoreAtInt.Value, curBasicBlock, MaxTrackedArrayValues);
+                        StoreMethodLocalValue(
+                            arrValue.IndexValues,
+                            valueToStore.Value,
+                            indexToStoreAtInt.Value,
+                            curBasicBlock,
+                            MaxTrackedArrayValues
+                        );
                     }
                 }
             }
@@ -1036,7 +1201,8 @@ namespace ILCompiler.Dataflow
             int offset,
             Stack<StackSlot> currentStack,
             MethodIL methodBody,
-            int curBasicBlock)
+            int curBasicBlock
+        )
         {
             StackSlot indexToLoadFrom = PopUnknown(currentStack, 1, methodBody, offset);
             StackSlot arrayToLoadFrom = PopUnknown(currentStack, 1, methodBody, offset);
@@ -1057,7 +1223,6 @@ namespace ILCompiler.Dataflow
                 }
                 return;
             }
-
 
             ValueBasicBlockPair arrayIndexValue;
             arr.IndexValues.TryGetValue(index.Value, out arrayIndexValue);

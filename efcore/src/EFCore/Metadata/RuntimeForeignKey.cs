@@ -41,7 +41,8 @@ public class RuntimeForeignKey : AnnotatableBase, IRuntimeForeignKey
         bool unique,
         bool required,
         bool requiredDependent,
-        bool ownership)
+        bool ownership
+    )
     {
         Properties = dependentProperties;
         PrincipalKey = principalKey;
@@ -91,9 +92,7 @@ public class RuntimeForeignKey : AnnotatableBase, IRuntimeForeignKey
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual void AddNavigation(
-        RuntimeNavigation navigation,
-        bool onDependent)
+    public virtual void AddNavigation(RuntimeNavigation navigation, bool onDependent)
     {
         if (onDependent)
         {
@@ -121,17 +120,18 @@ public class RuntimeForeignKey : AnnotatableBase, IRuntimeForeignKey
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [EntityFrameworkInternal]
-    public virtual DebugView DebugView
-        => new(
+    public virtual DebugView DebugView =>
+        new(
             () => ((IReadOnlyForeignKey)this).ToDebugString(),
-            () => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault));
+            () => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.LongDefault)
+        );
 
     /// <summary>
     ///     Returns a string that represents the current object.
     /// </summary>
     /// <returns>A string that represents the current object.</returns>
-    public override string ToString()
-        => ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
+    public override string ToString() =>
+        ((IReadOnlyForeignKey)this).ToDebugString(MetadataDebugStringOptions.SingleLineDefault);
 
     /// <inheritdoc />
     IReadOnlyList<IReadOnlyProperty> IReadOnlyForeignKey.Properties
@@ -254,13 +254,13 @@ public class RuntimeForeignKey : AnnotatableBase, IRuntimeForeignKey
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IEnumerable<IReadOnlySkipNavigation> IReadOnlyForeignKey.GetReferencingSkipNavigations()
-        => ReferencingSkipNavigations ?? Enumerable.Empty<RuntimeSkipNavigation>();
+    IEnumerable<IReadOnlySkipNavigation> IReadOnlyForeignKey.GetReferencingSkipNavigations() =>
+        ReferencingSkipNavigations ?? Enumerable.Empty<RuntimeSkipNavigation>();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IDependentKeyValueFactory<TKey>? IForeignKey.GetDependentKeyValueFactory<TKey>()
-        => (IDependentKeyValueFactory<TKey>?)((IRuntimeForeignKey)this).DependentKeyValueFactory;
+    IDependentKeyValueFactory<TKey>? IForeignKey.GetDependentKeyValueFactory<TKey>() =>
+        (IDependentKeyValueFactory<TKey>?)((IRuntimeForeignKey)this).DependentKeyValueFactory;
 
     // Note: This is set and used only by IdentityMapFactoryFactory, which ensures thread-safety
     /// <inheritdoc />
@@ -268,7 +268,6 @@ public class RuntimeForeignKey : AnnotatableBase, IRuntimeForeignKey
     {
         [DebuggerStepThrough]
         get => _dependentKeyValueFactory!;
-
         [DebuggerStepThrough]
         set => _dependentKeyValueFactory = value;
     }
@@ -279,7 +278,6 @@ public class RuntimeForeignKey : AnnotatableBase, IRuntimeForeignKey
     {
         [DebuggerStepThrough]
         get => _dependentsMapFactory!;
-
         [DebuggerStepThrough]
         set => _dependentsMapFactory = value;
     }

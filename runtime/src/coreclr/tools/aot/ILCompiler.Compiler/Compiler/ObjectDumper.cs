@@ -27,11 +27,7 @@ namespace ILCompiler
 
         internal void Begin()
         {
-            var settings = new XmlWriterSettings
-            {
-                CloseOutput = true,
-                Indent = true,
-            };
+            var settings = new XmlWriterSettings { CloseOutput = true, Indent = true, };
 
             _sha256 = SHA256.Create();
             _writer = XmlWriter.Create(File.CreateText(_fileName), settings);
@@ -54,7 +50,11 @@ namespace ILCompiler
             return name;
         }
 
-        void IObjectDumper.DumpObjectNode(NameMangler mangler, ObjectNode node, ObjectData objectData)
+        void IObjectDumper.DumpObjectNode(
+            NameMangler mangler,
+            ObjectNode node,
+            ObjectData objectData
+        )
         {
             string name = null;
 
@@ -78,7 +78,10 @@ namespace ILCompiler
             {
                 _writer.WriteStartElement("GCInfo");
                 _writer.WriteAttributeString("Name", name);
-                _writer.WriteAttributeString("Length", nodeWithCodeInfo.GCInfo.Length.ToStringInvariant());
+                _writer.WriteAttributeString(
+                    "Length",
+                    nodeWithCodeInfo.GCInfo.Length.ToStringInvariant()
+                );
                 _writer.WriteAttributeString("Hash", HashData(nodeWithCodeInfo.GCInfo));
                 _writer.WriteEndElement();
             }

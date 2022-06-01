@@ -18,7 +18,11 @@ namespace Internal.TypeSystem.Ecma
     /// </summary>
     public sealed class PortablePdbSymbolReader : PdbSymbolReader
     {
-        private static unsafe MetadataReader TryOpenMetadataFile(string filePath, MetadataStringDecoder stringDecoder, out MemoryMappedViewAccessor mappedViewAccessor)
+        private static unsafe MetadataReader TryOpenMetadataFile(
+            string filePath,
+            MetadataStringDecoder stringDecoder,
+            out MemoryMappedViewAccessor mappedViewAccessor
+        )
         {
             FileStream fileStream = null;
             MemoryMappedFile mappedFile = null;
@@ -26,9 +30,21 @@ namespace Internal.TypeSystem.Ecma
             try
             {
                 // Create stream because CreateFromFile(string, ...) uses FileShare.None which is too strict
-                fileStream = new FileStream(filePath, FileMode.Open, FileAccess.Read, FileShare.Read, bufferSize: 1);
+                fileStream = new FileStream(
+                    filePath,
+                    FileMode.Open,
+                    FileAccess.Read,
+                    FileShare.Read,
+                    bufferSize: 1
+                );
                 mappedFile = MemoryMappedFile.CreateFromFile(
-                    fileStream, null, fileStream.Length, MemoryMappedFileAccess.Read, HandleInheritability.None, true);
+                    fileStream,
+                    null,
+                    fileStream.Length,
+                    MemoryMappedFileAccess.Read,
+                    HandleInheritability.None,
+                    true
+                );
 
                 accessor = mappedFile.CreateViewAccessor(0, 0, MemoryMappedFileAccess.Read);
 
@@ -36,16 +52,24 @@ namespace Internal.TypeSystem.Ecma
 
                 // Check whether this is a real metadata file to avoid thrown and caught exceptions
                 // for non-portable .pdbs
-                if (safeBuffer.Read<byte>(0) != 'B' || // COR20MetadataSignature
-                    safeBuffer.Read<byte>(1) != 'S' ||
-                    safeBuffer.Read<byte>(2) != 'J' ||
-                    safeBuffer.Read<byte>(3) != 'B')
+                if (
+                    safeBuffer.Read<byte>(0) != 'B'
+                    || // COR20MetadataSignature
+                    safeBuffer.Read<byte>(1) != 'S'
+                    || safeBuffer.Read<byte>(2) != 'J'
+                    || safeBuffer.Read<byte>(3) != 'B'
+                )
                 {
                     mappedViewAccessor = null;
                     return null;
                 }
 
-                var metadataReader = new MetadataReader((byte*)safeBuffer.DangerousGetHandle(), (int)safeBuffer.ByteLength, MetadataReaderOptions.Default, stringDecoder);
+                var metadataReader = new MetadataReader(
+                    (byte*)safeBuffer.DangerousGetHandle(),
+                    (int)safeBuffer.ByteLength,
+                    MetadataReaderOptions.Default,
+                    stringDecoder
+                );
 
                 // MemoryMappedFile does not need to be kept around. MemoryMappedViewAccessor is enough.
 
@@ -62,10 +86,18 @@ namespace Internal.TypeSystem.Ecma
             }
         }
 
-        public static PdbSymbolReader TryOpen(string pdbFilename, MetadataStringDecoder stringDecoder, BlobContentId expectedContentId)
+        public static PdbSymbolReader TryOpen(
+            string pdbFilename,
+            MetadataStringDecoder stringDecoder,
+            BlobContentId expectedContentId
+        )
         {
             MemoryMappedViewAccessor mappedViewAccessor;
-            MetadataReader reader = TryOpenMetadataFile(pdbFilename, stringDecoder, out mappedViewAccessor);
+            MetadataReader reader = TryOpenMetadataFile(
+                pdbFilename,
+                stringDecoder,
+                out mappedViewAccessor
+            );
             if (reader == null)
                 return null;
 
@@ -79,15 +111,22 @@ namespace Internal.TypeSystem.Ecma
             return new PortablePdbSymbolReader(reader, mappedViewAccessor);
         }
 
-        public static PdbSymbolReader TryOpenEmbedded(PEReader peReader, MetadataStringDecoder stringDecoder)
+        public static PdbSymbolReader TryOpenEmbedded(
+            PEReader peReader,
+            MetadataStringDecoder stringDecoder
+        )
         {
             foreach (DebugDirectoryEntry debugEntry in peReader.ReadDebugDirectory())
             {
                 if (debugEntry.Type != DebugDirectoryEntryType.EmbeddedPortablePdb)
                     continue;
 
-                MetadataReaderProvider embeddedReaderProvider = peReader.ReadEmbeddedPortablePdbDebugDirectoryData(debugEntry);
-                MetadataReader reader = embeddedReaderProvider.GetMetadataReader(MetadataReaderOptions.Default, stringDecoder);
+                MetadataReaderProvider embeddedReaderProvider =
+                    peReader.ReadEmbeddedPortablePdbDebugDirectoryData(debugEntry);
+                MetadataReader reader = embeddedReaderProvider.GetMetadataReader(
+                    MetadataReaderOptions.Default,
+                    stringDecoder
+                );
                 return new PortablePdbSymbolReader(reader, mappedViewAccessor: null);
             }
 
@@ -97,7 +136,10 @@ namespace Internal.TypeSystem.Ecma
         private MetadataReader _reader;
         private MemoryMappedViewAccessor _mappedViewAccessor;
 
-        private PortablePdbSymbolReader(MetadataReader reader, MemoryMappedViewAccessor mappedViewAccessor)
+        private PortablePdbSymbolReader(
+            MetadataReader reader,
+            MemoryMappedViewAccessor mappedViewAccessor
+        )
         {
             _reader = reader;
             _mappedViewAccessor = mappedViewAccessor;
@@ -111,7 +153,9 @@ namespace Internal.TypeSystem.Ecma
 
         public override int GetStateMachineKickoffMethod(int methodToken)
         {
-            var debugInformationHandle = ((MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken)).ToDebugInformationHandle();
+            var debugInformationHandle = (
+                (MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken)
+            ).ToDebugInformationHandle();
 
             var debugInformation = _reader.GetMethodDebugInformation(debugInformationHandle);
 
@@ -121,7 +165,9 @@ namespace Internal.TypeSystem.Ecma
 
         public override IEnumerable<ILSequencePoint> GetSequencePointsForMethod(int methodToken)
         {
-            var debugInformationHandle = ((MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken)).ToDebugInformationHandle();
+            var debugInformationHandle = (
+                (MethodDefinitionHandle)MetadataTokens.EntityHandle(methodToken)
+            ).ToDebugInformationHandle();
 
             var debugInformation = _reader.GetMethodDebugInformation(debugInformationHandle);
 
@@ -147,14 +193,21 @@ namespace Internal.TypeSystem.Ecma
                     previousDocumentUrl = url;
                 }
 
-                yield return new ILSequencePoint(sequencePoint.Offset, url, sequencePoint.StartLine);
+                yield return new ILSequencePoint(
+                    sequencePoint.Offset,
+                    url,
+                    sequencePoint.StartLine
+                );
             }
         }
 
         //
         // Gather the local details in a scope and then recurse to child scopes
         //
-        private void ProbeScopeForLocals(List<ILLocalVariable> variables, LocalScopeHandle localScopeHandle)
+        private void ProbeScopeForLocals(
+            List<ILLocalVariable> variables,
+            LocalScopeHandle localScopeHandle
+        )
         {
             var localScope = _reader.GetLocalScope(localScopeHandle);
 
@@ -163,7 +216,8 @@ namespace Internal.TypeSystem.Ecma
                 var localVariable = _reader.GetLocalVariable(localVariableHandle);
 
                 var name = _reader.GetString(localVariable.Name);
-                bool compilerGenerated = (localVariable.Attributes & LocalVariableAttributes.DebuggerHidden) != 0;
+                bool compilerGenerated =
+                    (localVariable.Attributes & LocalVariableAttributes.DebuggerHidden) != 0;
 
                 variables.Add(new ILLocalVariable(localVariable.Index, name, compilerGenerated));
             }
@@ -182,7 +236,9 @@ namespace Internal.TypeSystem.Ecma
         //
         public override IEnumerable<ILLocalVariable> GetLocalVariableNamesForMethod(int methodToken)
         {
-            var debugInformationHandle = MetadataTokens.MethodDefinitionHandle(methodToken).ToDebugInformationHandle();
+            var debugInformationHandle = MetadataTokens
+                .MethodDefinitionHandle(methodToken)
+                .ToDebugInformationHandle();
 
             var localScopes = _reader.GetLocalScopes(debugInformationHandle);
 

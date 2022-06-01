@@ -10,134 +10,83 @@ namespace Internal.TypeSystem.Interop
     public partial class NativeStructType : MetadataType
     {
         // The managed struct that this type will imitate
-        public MetadataType ManagedStructType
-        {
-            get;
-        }
+        public MetadataType ManagedStructType { get; }
 
-        public override ModuleDesc Module
-        {
-            get;
-        }
+        public override ModuleDesc Module { get; }
 
         public override string Name
         {
-            get
-            {
-                return "__NativeType__" + ManagedStructType.Name;
-            }
+            get { return "__NativeType__" + ManagedStructType.Name; }
         }
 
         public override string DiagnosticName
         {
-            get
-            {
-                return "__NativeType__" + ManagedStructType.DiagnosticName;
-            }
+            get { return "__NativeType__" + ManagedStructType.DiagnosticName; }
         }
 
         public override string Namespace
         {
-            get
-            {
-                return "Internal.CompilerGenerated";
-            }
+            get { return "Internal.CompilerGenerated"; }
         }
 
         public override string DiagnosticNamespace
         {
-            get
-            {
-                return "Internal.CompilerGenerated";
-            }
+            get { return "Internal.CompilerGenerated"; }
         }
 
         public override PInvokeStringFormat PInvokeStringFormat
         {
-            get
-            {
-                return ManagedStructType.PInvokeStringFormat;
-            }
+            get { return ManagedStructType.PInvokeStringFormat; }
         }
 
         public override bool IsExplicitLayout
         {
-            get
-            {
-                return ManagedStructType.IsExplicitLayout;
-            }
+            get { return ManagedStructType.IsExplicitLayout; }
         }
 
         public override bool IsSequentialLayout
         {
-            get
-            {
-                return ManagedStructType.IsSequentialLayout;
-            }
+            get { return ManagedStructType.IsSequentialLayout; }
         }
 
         public override bool IsBeforeFieldInit
         {
-            get
-            {
-                return ManagedStructType.IsBeforeFieldInit;
-            }
+            get { return ManagedStructType.IsBeforeFieldInit; }
         }
 
         public override DefType BaseType
         {
-            get
-            {
-                return (DefType)Context.GetWellKnownType(WellKnownType.ValueType);
-            }
+            get { return (DefType)Context.GetWellKnownType(WellKnownType.ValueType); }
         }
 
         public override MetadataType MetadataBaseType
         {
-            get
-            {
-                return (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType);
-            }
+            get { return (MetadataType)Context.GetWellKnownType(WellKnownType.ValueType); }
         }
 
         public override bool IsSealed
         {
-            get
-            {
-                return true;
-            }
+            get { return true; }
         }
 
         public override bool IsAbstract
         {
-            get
-            {
-                return false;
-            }
+            get { return false; }
         }
 
         public override DefType ContainingType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         public override DefType[] ExplicitlyImplementedInterfaces
         {
-            get
-            {
-                return Array.Empty<DefType>();
-            }
+            get { return Array.Empty<DefType>(); }
         }
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return ManagedStructType.Context;
-            }
+            get { return ManagedStructType.Context; }
         }
 
         private NativeStructField[] _fields;
@@ -146,21 +95,19 @@ namespace Internal.TypeSystem.Interop
 
         public bool HasInvalidLayout
         {
-            get
-            {
-                return _hasInvalidLayout;
-            }
+            get { return _hasInvalidLayout; }
         }
 
         public FieldDesc[] Fields
         {
-            get
-            {
-                return _fields;
-            }
+            get { return _fields; }
         }
 
-        public NativeStructType(ModuleDesc owningModule, MetadataType managedStructType, InteropStateManager interopStateManager)
+        public NativeStructType(
+            ModuleDesc owningModule,
+            MetadataType managedStructType,
+            InteropStateManager interopStateManager
+        )
         {
             Debug.Assert(!managedStructType.IsGenericDefinition);
 
@@ -201,7 +148,12 @@ namespace Internal.TypeSystem.Interop
                 TypeDesc nativeType;
                 try
                 {
-                    nativeType = MarshalHelpers.GetNativeStructFieldType(managedType, field.GetMarshalAsDescriptor(), _interopStateManager, isAnsi);
+                    nativeType = MarshalHelpers.GetNativeStructFieldType(
+                        managedType,
+                        field.GetMarshalAsDescriptor(),
+                        _interopStateManager,
+                        isAnsi
+                    );
                 }
                 catch (NotSupportedException)
                 {
@@ -234,7 +186,10 @@ namespace Internal.TypeSystem.Interop
                 {
                     if (_fields[index].Name == layout.Offsets[layoutIndex].Field.Name)
                     {
-                        result.Offsets[layoutIndex] = new FieldAndOffset(_fields[index], layout.Offsets[layoutIndex].Offset);
+                        result.Offsets[layoutIndex] = new FieldAndOffset(
+                            _fields[index],
+                            layout.Offsets[layoutIndex].Offset
+                        );
                         layoutIndex++;
                     }
                 }
@@ -278,7 +233,9 @@ namespace Internal.TypeSystem.Interop
 
         private void InitializeHashCode()
         {
-            var hashCodeBuilder = new Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder(Namespace);
+            var hashCodeBuilder = new Internal.NativeFormat.TypeHashingAlgorithms.HashCodeBuilder(
+                Namespace
+            );
 
             if (Namespace.Length > 0)
             {
@@ -334,67 +291,42 @@ namespace Internal.TypeSystem.Interop
 
             public override TypeSystemContext Context
             {
-                get
-                {
-                    return _owningType.Context;
-                }
+                get { return _owningType.Context; }
             }
 
             public override TypeDesc FieldType
             {
-                get
-                {
-                    return _fieldType;
-                }
+                get { return _fieldType; }
             }
 
             public override bool HasRva
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
-
 
             public override bool IsInitOnly
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsLiteral
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsStatic
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsThreadStatic
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override DefType OwningType
             {
-                get
-                {
-                    return _owningType;
-                }
+                get { return _owningType; }
             }
 
             public override bool HasCustomAttribute(string attributeNamespace, string attributeName)
@@ -404,19 +336,19 @@ namespace Internal.TypeSystem.Interop
 
             public override string Name
             {
-                get
-                {
-                    return _managedField.Name;
-                }
+                get { return _managedField.Name; }
             }
 
-            public NativeStructField(TypeDesc nativeType, MetadataType owningType, FieldDesc managedField)
+            public NativeStructField(
+                TypeDesc nativeType,
+                MetadataType owningType,
+                FieldDesc managedField
+            )
             {
                 _fieldType = nativeType;
                 _owningType = owningType;
                 _managedField = managedField;
             }
         }
-
     }
 }

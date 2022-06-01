@@ -15,7 +15,13 @@ namespace System.Formats.Tar.Tests
         public void Write_V7RegularFileEntry_As_RegularFileEntry()
         {
             using MemoryStream archive = new MemoryStream();
-            using (TarWriter writer = new TarWriter(archive, archiveFormat: TarFormat.Pax, leaveOpen: true))
+            using (
+                TarWriter writer = new TarWriter(
+                    archive,
+                    archiveFormat: TarFormat.Pax,
+                    leaveOpen: true
+                )
+            )
             {
                 V7TarEntry entry = new V7TarEntry(TarEntryType.V7RegularFile, InitialEntryName);
 
@@ -40,7 +46,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry regularFile = new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName);
+                PaxTarEntry regularFile = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    InitialEntryName
+                );
                 SetRegularFile(regularFile);
                 VerifyRegularFile(regularFile, isWritable: true);
                 writer.WriteEntry(regularFile);
@@ -80,7 +89,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry symbolicLink = new PaxTarEntry(TarEntryType.SymbolicLink, InitialEntryName);
+                PaxTarEntry symbolicLink = new PaxTarEntry(
+                    TarEntryType.SymbolicLink,
+                    InitialEntryName
+                );
                 SetSymbolicLink(symbolicLink);
                 VerifySymbolicLink(symbolicLink);
                 writer.WriteEntry(symbolicLink);
@@ -120,7 +132,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry charDevice = new PaxTarEntry(TarEntryType.CharacterDevice, InitialEntryName);
+                PaxTarEntry charDevice = new PaxTarEntry(
+                    TarEntryType.CharacterDevice,
+                    InitialEntryName
+                );
                 SetCharacterDevice(charDevice);
                 VerifyCharacterDevice(charDevice);
                 writer.WriteEntry(charDevice);
@@ -140,7 +155,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry blockDevice = new PaxTarEntry(TarEntryType.BlockDevice, InitialEntryName);
+                PaxTarEntry blockDevice = new PaxTarEntry(
+                    TarEntryType.BlockDevice,
+                    InitialEntryName
+                );
                 SetBlockDevice(blockDevice);
                 VerifyBlockDevice(blockDevice);
                 writer.WriteEntry(blockDevice);
@@ -186,7 +204,11 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry regularFile = new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName, extendedAttributes);
+                PaxTarEntry regularFile = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    InitialEntryName,
+                    extendedAttributes
+                );
                 SetRegularFile(regularFile);
                 VerifyRegularFile(regularFile, isWritable: true);
                 writer.WriteEntry(regularFile);
@@ -217,13 +239,25 @@ namespace System.Formats.Tar.Tests
         public void WritePaxAttributes_Timestamps()
         {
             Dictionary<string, string> extendedAttributes = new();
-            extendedAttributes.Add("atime", ConvertDateTimeOffsetToDouble(TestAccessTime).ToString("F6", CultureInfo.InvariantCulture));
-            extendedAttributes.Add("ctime", ConvertDateTimeOffsetToDouble(TestChangeTime).ToString("F6", CultureInfo.InvariantCulture));
+            extendedAttributes.Add(
+                "atime",
+                ConvertDateTimeOffsetToDouble(TestAccessTime)
+                    .ToString("F6", CultureInfo.InvariantCulture)
+            );
+            extendedAttributes.Add(
+                "ctime",
+                ConvertDateTimeOffsetToDouble(TestChangeTime)
+                    .ToString("F6", CultureInfo.InvariantCulture)
+            );
 
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry regularFile = new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName, extendedAttributes);
+                PaxTarEntry regularFile = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    InitialEntryName,
+                    extendedAttributes
+                );
                 SetRegularFile(regularFile);
                 VerifyRegularFile(regularFile, isWritable: true);
                 writer.WriteEntry(regularFile);
@@ -254,7 +288,10 @@ namespace System.Formats.Tar.Tests
             using MemoryStream archiveStream = new MemoryStream();
             using (TarWriter writer = new TarWriter(archiveStream, TarFormat.Pax, leaveOpen: true))
             {
-                PaxTarEntry regularFile = new PaxTarEntry(TarEntryType.RegularFile, InitialEntryName);
+                PaxTarEntry regularFile = new PaxTarEntry(
+                    TarEntryType.RegularFile,
+                    InitialEntryName
+                );
                 SetRegularFile(regularFile);
                 VerifyRegularFile(regularFile, isWritable: true);
                 regularFile.UserName = userName;

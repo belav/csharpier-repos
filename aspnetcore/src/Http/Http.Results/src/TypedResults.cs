@@ -32,8 +32,8 @@ public static class TypedResults
     /// <returns>The created <see cref="ChallengeHttpResult"/> for the response.</returns>
     public static ChallengeHttpResult Challenge(
         AuthenticationProperties? properties = null,
-        IList<string>? authenticationSchemes = null)
-        => new(authenticationSchemes: authenticationSchemes ?? Array.Empty<string>(), properties);
+        IList<string>? authenticationSchemes = null
+    ) => new(authenticationSchemes: authenticationSchemes ?? Array.Empty<string>(), properties);
 
     /// <summary>
     /// Creates a <see cref="ForbidHttpResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.ForbidAsync(HttpContext, string?, AuthenticationProperties?)"/>.
@@ -50,8 +50,10 @@ public static class TypedResults
     /// challenge.</param>
     /// <param name="authenticationSchemes">The authentication schemes to challenge.</param>
     /// <returns>The created <see cref="ForbidHttpResult"/> for the response.</returns>
-    public static ForbidHttpResult Forbid(AuthenticationProperties? properties = null, IList<string>? authenticationSchemes = null)
-        => new(authenticationSchemes: authenticationSchemes ?? Array.Empty<string>(), properties);
+    public static ForbidHttpResult Forbid(
+        AuthenticationProperties? properties = null,
+        IList<string>? authenticationSchemes = null
+    ) => new(authenticationSchemes: authenticationSchemes ?? Array.Empty<string>(), properties);
 
     /// <summary>
     /// Creates a <see cref="SignInHttpResult"/> that on execution invokes <see cref="AuthenticationHttpContextExtensions.SignInAsync(HttpContext, string?, ClaimsPrincipal, AuthenticationProperties?)" />.
@@ -63,7 +65,8 @@ public static class TypedResults
     public static SignInHttpResult SignIn(
         ClaimsPrincipal principal,
         AuthenticationProperties? properties = null,
-        string? authenticationScheme = null)
+        string? authenticationScheme = null
+    )
     {
         ArgumentNullException.ThrowIfNull(principal);
 
@@ -76,8 +79,10 @@ public static class TypedResults
     /// <param name="properties"><see cref="AuthenticationProperties"/> used to perform the sign-out operation.</param>
     /// <param name="authenticationSchemes">The authentication scheme to use for the sign-out operation.</param>
     /// <returns>The created <see cref="SignOutHttpResult"/> for the response.</returns>
-    public static SignOutHttpResult SignOut(AuthenticationProperties? properties = null, IList<string>? authenticationSchemes = null)
-        => new(authenticationSchemes ?? Array.Empty<string>(), properties);
+    public static SignOutHttpResult SignOut(
+        AuthenticationProperties? properties = null,
+        IList<string>? authenticationSchemes = null
+    ) => new(authenticationSchemes ?? Array.Empty<string>(), properties);
 
     /// <summary>
     /// Writes the <paramref name="content"/> string to the HTTP response.
@@ -93,8 +98,11 @@ public static class TypedResults
     /// <param name="contentType">The content type (MIME type).</param>
     /// <param name="contentEncoding">The content encoding.</param>
     /// <returns>The created <see cref="ContentHttpResult"/> object for the response.</returns>
-    public static ContentHttpResult Content(string? content, string? contentType, Encoding? contentEncoding)
-        => Content(content, contentType, contentEncoding, null);
+    public static ContentHttpResult Content(
+        string? content,
+        string? contentType,
+        Encoding? contentEncoding
+    ) => Content(content, contentType, contentEncoding, null);
 
     /// <summary>
     /// Writes the <paramref name="content"/> string to the HTTP response.
@@ -111,8 +119,12 @@ public static class TypedResults
     /// <param name="contentEncoding">The content encoding.</param>
     /// <param name="statusCode">The status code to return.</param>
     /// <returns>The created <see cref="ContentHttpResult"/> object for the response.</returns>
-    public static ContentHttpResult Content(string? content, string? contentType = null, Encoding? contentEncoding = null, int? statusCode = null)
-        => Text(content, contentType, contentEncoding, statusCode);
+    public static ContentHttpResult Content(
+        string? content,
+        string? contentType = null,
+        Encoding? contentEncoding = null,
+        int? statusCode = null
+    ) => Text(content, contentType, contentEncoding, statusCode);
 
     /// <summary>
     /// Writes the <paramref name="content"/> string to the HTTP response.
@@ -128,8 +140,11 @@ public static class TypedResults
     /// <param name="contentType">The content type (MIME type).</param>
     /// <param name="contentEncoding">The content encoding.</param>
     /// <returns>The created <see cref="ContentHttpResult"/> object for the response.</returns>
-    public static ContentHttpResult Text(string? content, string? contentType, Encoding? contentEncoding)
-        => Text(content, contentType, contentEncoding, null);
+    public static ContentHttpResult Text(
+        string? content,
+        string? contentType,
+        Encoding? contentEncoding
+    ) => Text(content, contentType, contentEncoding, null);
 
     /// <summary>
     /// Writes the <paramref name="content"/> string to the HTTP response.
@@ -146,7 +161,12 @@ public static class TypedResults
     /// <param name="contentEncoding">The content encoding.</param>
     /// <param name="statusCode">The status code to return.</param>
     /// <returns>The created <see cref="ContentHttpResult"/> object for the response.</returns>
-    public static ContentHttpResult Text(string? content, string? contentType = null, Encoding? contentEncoding = null, int? statusCode = null)
+    public static ContentHttpResult Text(
+        string? content,
+        string? contentType = null,
+        Encoding? contentEncoding = null,
+        int? statusCode = null
+    )
     {
         MediaTypeHeaderValue? mediaTypeHeaderValue = null;
         if (contentType is not null)
@@ -164,8 +184,8 @@ public static class TypedResults
     /// <param name="content">The content to write to the response.</param>
     /// <param name="contentType">The content type (MIME type).</param>
     /// <returns>The created <see cref="ContentHttpResult"/> object for the response.</returns>
-    public static ContentHttpResult Content(string? content, MediaTypeHeaderValue contentType)
-        => new(content, contentType.ToString());
+    public static ContentHttpResult Content(string? content, MediaTypeHeaderValue contentType) =>
+        new(content, contentType.ToString());
 
     /// <summary>
     /// Creates a <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/> object to JSON.
@@ -179,11 +199,12 @@ public static class TypedResults
     /// <param name="statusCode">The status code to set on the response.</param>
     /// <returns>The created <see cref="JsonHttpResult{TValue}"/> that serializes the specified <paramref name="data"/>
     /// as JSON format for the response.</returns>
-    public static JsonHttpResult<TValue> Json<TValue>(TValue? data, JsonSerializerOptions? options = null, string? contentType = null, int? statusCode = null)
-        => new(data, statusCode, options)
-        {
-            ContentType = contentType,
-        };
+    public static JsonHttpResult<TValue> Json<TValue>(
+        TValue? data,
+        JsonSerializerOptions? options = null,
+        string? contentType = null,
+        int? statusCode = null
+    ) => new(data, statusCode, options) { ContentType = contentType, };
 
     /// <summary>
     /// Writes the byte-array content to the response.
@@ -209,7 +230,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         bool enableRangeProcessing = false,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         ArgumentNullException.ThrowIfNull(fileContents);
 
@@ -246,7 +268,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         bool enableRangeProcessing = false,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         ArgumentNullException.ThrowIfNull(contents);
 
@@ -281,8 +304,9 @@ public static class TypedResults
         string? fileDownloadName = null,
         bool enableRangeProcessing = false,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
-        => new(contents, contentType)
+        EntityTagHeaderValue? entityTag = null
+    ) =>
+        new(contents, contentType)
         {
             FileDownloadName = fileDownloadName,
             EnableRangeProcessing = enableRangeProcessing,
@@ -320,7 +344,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue? entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         ArgumentNullException.ThrowIfNull(fileStream);
 
@@ -363,7 +388,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue? entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         ArgumentNullException.ThrowIfNull(stream);
 
@@ -403,7 +429,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue? entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         ArgumentNullException.ThrowIfNull(pipeReader);
 
@@ -438,7 +465,8 @@ public static class TypedResults
         string? contentType = null,
         string? fileDownloadName = null,
         DateTimeOffset? lastModified = null,
-        EntityTagHeaderValue? entityTag = null)
+        EntityTagHeaderValue? entityTag = null
+    )
     {
         ArgumentNullException.ThrowIfNull(streamWriterCallback);
 
@@ -472,7 +500,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue? entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -510,7 +539,8 @@ public static class TypedResults
         string? fileDownloadName = null,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue? entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         if (string.IsNullOrEmpty(path))
         {
@@ -539,7 +569,11 @@ public static class TypedResults
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
     /// <returns>The created <see cref="RedirectHttpResult"/> for the response.</returns>
-    public static RedirectHttpResult Redirect(string url, bool permanent = false, bool preserveMethod = false)
+    public static RedirectHttpResult Redirect(
+        string url,
+        bool permanent = false,
+        bool preserveMethod = false
+    )
     {
         if (string.IsNullOrEmpty(url))
         {
@@ -562,7 +596,11 @@ public static class TypedResults
     /// <param name="permanent">Specifies whether the redirect should be permanent (301) or temporary (302).</param>
     /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
     /// <returns>The created <see cref="RedirectHttpResult"/> for the response.</returns>
-    public static RedirectHttpResult LocalRedirect(string localUrl, bool permanent = false, bool preserveMethod = false)
+    public static RedirectHttpResult LocalRedirect(
+        string localUrl,
+        bool permanent = false,
+        bool preserveMethod = false
+    )
     {
         if (string.IsNullOrEmpty(localUrl))
         {
@@ -587,21 +625,28 @@ public static class TypedResults
     /// <param name="preserveMethod">If set to true, make the temporary redirect (307) or permanent redirect (308) preserve the initial request method.</param>
     /// <param name="fragment">The fragment to add to the URL.</param>
     /// <returns>The created <see cref="RedirectToRouteHttpResult"/> for the response.</returns>
-    public static RedirectToRouteHttpResult RedirectToRoute(string? routeName = null, object? routeValues = null, bool permanent = false, bool preserveMethod = false, string? fragment = null)
-        => new(
+    public static RedirectToRouteHttpResult RedirectToRoute(
+        string? routeName = null,
+        object? routeValues = null,
+        bool permanent = false,
+        bool preserveMethod = false,
+        string? fragment = null
+    ) =>
+        new(
             routeName: routeName,
             routeValues: routeValues,
             permanent: permanent,
             preserveMethod: preserveMethod,
-            fragment: fragment);
+            fragment: fragment
+        );
 
     /// <summary>
     /// Creates a <see cref="StatusCodeHttpResult"/> object by specifying a <paramref name="statusCode"/>.
     /// </summary>
     /// <param name="statusCode">The status code to set on the response.</param>
     /// <returns>The created <see cref="StatusCodeHttpResult"/> object for the response.</returns>
-    public static StatusCodeHttpResult StatusCode(int statusCode)
-        => ResultsCache.StatusCode(statusCode);
+    public static StatusCodeHttpResult StatusCode(int statusCode) =>
+        ResultsCache.StatusCode(statusCode);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status404NotFound"/> response.
@@ -683,7 +728,8 @@ public static class TypedResults
     /// <typeparam name="TValue">The type of object that will be JSON serialized to the response body.</typeparam>
     /// <param name="error">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.UnprocessableEntity{TValue}"/> for the response.</returns>
-    public static UnprocessableEntity<TValue> UnprocessableEntity<TValue>(TValue? error) => new(error);
+    public static UnprocessableEntity<TValue> UnprocessableEntity<TValue>(TValue? error) =>
+        new(error);
 
     /// <summary>
     /// Produces a <see cref="ProblemDetails"/> response.
@@ -701,7 +747,8 @@ public static class TypedResults
         int? statusCode = null,
         string? title = null,
         string? type = null,
-        IDictionary<string, object?>? extensions = null)
+        IDictionary<string, object?>? extensions = null
+    )
     {
         var problemDetails = new ProblemDetails
         {
@@ -751,7 +798,8 @@ public static class TypedResults
         string? instance = null,
         string? title = null,
         string? type = null,
-        IDictionary<string, object?>? extensions = null)
+        IDictionary<string, object?>? extensions = null
+    )
     {
         ArgumentNullException.ThrowIfNull(errors);
 
@@ -840,9 +888,13 @@ public static class TypedResults
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <returns>The created <see cref="HttpResults.CreatedAtRoute"/> for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
-    public static CreatedAtRoute CreatedAtRoute(string? routeName = null, object? routeValues = null)
+    public static CreatedAtRoute CreatedAtRoute(
+        string? routeName = null,
+        object? routeValues = null
+    )
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
-        => new(routeName, routeValues);
+        =>
+        new(routeName, routeValues);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status201Created"/> response.
@@ -853,17 +905,21 @@ public static class TypedResults
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.CreatedAtRoute{TValue}"/> for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
-    public static CreatedAtRoute<TValue> CreatedAtRoute<TValue>(TValue? value, string? routeName = null, object? routeValues = null)
+    public static CreatedAtRoute<TValue> CreatedAtRoute<TValue>(
+        TValue? value,
+        string? routeName = null,
+        object? routeValues = null
+    )
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
-        => new(routeName, routeValues, value);
+        =>
+        new(routeName, routeValues, value);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
     /// </summary>
     /// <param name="uri">The URI with the location at which the status of requested content can be monitored.</param>
     /// <returns>The created <see cref="HttpResults.Accepted"/> for the response.</returns>
-    public static Accepted Accepted(string? uri)
-        => new(uri);
+    public static Accepted Accepted(string? uri) => new(uri);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -872,8 +928,7 @@ public static class TypedResults
     /// <param name="uri">The URI with the location at which the status of requested content can be monitored.</param>
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.Accepted{TValue}"/> for the response.</returns>
-    public static Accepted<TValue> Accepted<TValue>(string? uri, TValue? value)
-        => new(uri, value);
+    public static Accepted<TValue> Accepted<TValue>(string? uri, TValue? value) => new(uri, value);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -908,9 +963,13 @@ public static class TypedResults
     /// <param name="routeValues">The route data to use for generating the URL.</param>
     /// <returns>The created <see cref="HttpResults.AcceptedAtRoute"/> for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
-    public static AcceptedAtRoute AcceptedAtRoute(string? routeName = null, object? routeValues = null)
+    public static AcceptedAtRoute AcceptedAtRoute(
+        string? routeName = null,
+        object? routeValues = null
+    )
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
-        => new(routeName, routeValues);
+        =>
+        new(routeName, routeValues);
 
     /// <summary>
     /// Produces a <see cref="StatusCodes.Status202Accepted"/> response.
@@ -921,9 +980,14 @@ public static class TypedResults
     /// <param name="value">The value to be included in the HTTP response body.</param>
     /// <returns>The created <see cref="HttpResults.AcceptedAtRoute{TValue}"/> for the response.</returns>
 #pragma warning disable RS0026 // Do not add multiple public overloads with optional parameters
-    public static AcceptedAtRoute<TValue> AcceptedAtRoute<TValue>(TValue? value, string? routeName = null, object? routeValues = null)
+    public static AcceptedAtRoute<TValue> AcceptedAtRoute<TValue>(
+        TValue? value,
+        string? routeName = null,
+        object? routeValues = null
+    )
 #pragma warning restore RS0026 // Do not add multiple public overloads with optional parameters
-        => new(routeName, routeValues, value);
+        =>
+        new(routeName, routeValues, value);
 
     /// <summary>
     /// Produces an empty result response, that when executed will do nothing.

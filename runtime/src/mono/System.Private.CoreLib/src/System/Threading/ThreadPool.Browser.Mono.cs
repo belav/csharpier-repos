@@ -14,9 +14,7 @@ namespace System.Threading
     [UnsupportedOSPlatform("browser")]
     public sealed class RegisteredWaitHandle : MarshalByRefObject
     {
-        internal RegisteredWaitHandle()
-        {
-        }
+        internal RegisteredWaitHandle() { }
 
         public bool Unregister(WaitHandle? waitObject)
         {
@@ -78,31 +76,31 @@ namespace System.Threading
             QueueCallback();
         }
 
-        internal static void NotifyWorkItemProgress()
-        {
-        }
+        internal static void NotifyWorkItemProgress() { }
 
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        internal static bool NotifyWorkItemComplete(object? threadLocalCompletionCountObject, int currentTimeMs)
+        internal static bool NotifyWorkItemComplete(
+            object? threadLocalCompletionCountObject,
+            int currentTimeMs
+        )
         {
             return true;
         }
 
         internal static bool NotifyThreadBlocked() => false;
 
-        internal static void NotifyThreadUnblocked()
-        {
-        }
+        internal static void NotifyThreadUnblocked() { }
 
         internal static object? GetOrCreateThreadLocalCompletionCountObject() => null;
 
         private static RegisteredWaitHandle RegisterWaitForSingleObject(
-             WaitHandle? waitObject,
-             WaitOrTimerCallback? callBack,
-             object? state,
-             uint millisecondsTimeOutInterval,
-             bool executeOnlyOnce,
-             bool flowExecutionContext)
+            WaitHandle? waitObject,
+            WaitOrTimerCallback? callBack,
+            object? state,
+            uint millisecondsTimeOutInterval,
+            bool executeOnlyOnce,
+            bool flowExecutionContext
+        )
         {
             throw new PlatformNotSupportedException();
         }
@@ -118,7 +116,11 @@ namespace System.Threading
         }
 
         private static unsafe void NativeOverlappedCallback(nint overlappedPtr) =>
-            _IOCompletionCallback.PerformSingleIOCompletionCallback(0, 0, (NativeOverlapped*)overlappedPtr);
+            _IOCompletionCallback.PerformSingleIOCompletionCallback(
+                0,
+                0,
+                (NativeOverlapped*)overlappedPtr
+            );
 
         [CLSCompliant(false)]
         [SupportedOSPlatform("windows")]
@@ -132,10 +134,16 @@ namespace System.Threading
             // OS doesn't signal handle, so do it here (CoreCLR does this assignment in ThreadPoolNative::CorPostQueuedCompletionStatus)
             overlapped->InternalLow = (IntPtr)0;
             // Both types of callbacks are executed on the same thread pool
-            return UnsafeQueueUserWorkItem(NativeOverlappedCallback, (nint)overlapped, preferLocal: false);
+            return UnsafeQueueUserWorkItem(
+                NativeOverlappedCallback,
+                (nint)overlapped,
+                preferLocal: false
+            );
         }
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {

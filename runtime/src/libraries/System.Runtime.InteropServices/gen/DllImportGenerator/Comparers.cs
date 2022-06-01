@@ -15,22 +15,54 @@ namespace Microsoft.Interop
         /// <summary>
         /// Comparer for the set of all of the generated stubs and diagnostics generated for each of them.
         /// </summary>
-        public static readonly IEqualityComparer<ImmutableArray<(string, ImmutableArray<Diagnostic>)>> GeneratedSourceSet = new ImmutableArraySequenceEqualComparer<(string, ImmutableArray<Diagnostic>)>(new CustomValueTupleElementComparer<string, ImmutableArray<Diagnostic>>(EqualityComparer<string>.Default, new ImmutableArraySequenceEqualComparer<Diagnostic>(EqualityComparer<Diagnostic>.Default)));
+        public static readonly IEqualityComparer<
+            ImmutableArray<(string, ImmutableArray<Diagnostic>)>
+        > GeneratedSourceSet =
+            new ImmutableArraySequenceEqualComparer<(string, ImmutableArray<Diagnostic>)>(
+                new CustomValueTupleElementComparer<string, ImmutableArray<Diagnostic>>(
+                    EqualityComparer<string>.Default,
+                    new ImmutableArraySequenceEqualComparer<Diagnostic>(
+                        EqualityComparer<Diagnostic>.Default
+                    )
+                )
+            );
 
         /// <summary>
         /// Comparer for an individual generated stub source as a string and the generated diagnostics for the stub.
         /// </summary>
-        public static readonly IEqualityComparer<(string, ImmutableArray<Diagnostic>)> GeneratedSource = new CustomValueTupleElementComparer<string, ImmutableArray<Diagnostic>>(EqualityComparer<string>.Default, new ImmutableArraySequenceEqualComparer<Diagnostic>(EqualityComparer<Diagnostic>.Default));
+        public static readonly IEqualityComparer<(string, ImmutableArray<Diagnostic>)> GeneratedSource =
+            new CustomValueTupleElementComparer<string, ImmutableArray<Diagnostic>>(
+                EqualityComparer<string>.Default,
+                new ImmutableArraySequenceEqualComparer<Diagnostic>(
+                    EqualityComparer<Diagnostic>.Default
+                )
+            );
 
         /// <summary>
         /// Comparer for an individual generated stub source as a syntax tree and the generated diagnostics for the stub.
         /// </summary>
-        public static readonly IEqualityComparer<(MemberDeclarationSyntax Syntax, ImmutableArray<Diagnostic> Diagnostics)> GeneratedSyntax = new CustomValueTupleElementComparer<MemberDeclarationSyntax, ImmutableArray<Diagnostic>>(SyntaxEquivalentComparer.Instance, new ImmutableArraySequenceEqualComparer<Diagnostic>(EqualityComparer<Diagnostic>.Default));
+        public static readonly IEqualityComparer<(MemberDeclarationSyntax Syntax, ImmutableArray<Diagnostic> Diagnostics)> GeneratedSyntax =
+            new CustomValueTupleElementComparer<
+                MemberDeclarationSyntax,
+                ImmutableArray<Diagnostic>
+            >(
+                SyntaxEquivalentComparer.Instance,
+                new ImmutableArraySequenceEqualComparer<Diagnostic>(
+                    EqualityComparer<Diagnostic>.Default
+                )
+            );
 
         /// <summary>
         /// Comparer for the context used to generate a stub and the original user-provided syntax that triggered stub creation.
         /// </summary>
-        public static readonly IEqualityComparer<(MethodDeclarationSyntax Syntax, DllImportGenerator.IncrementalStubGenerationContext StubContext)> CalculatedContextWithSyntax = new CustomValueTupleElementComparer<MethodDeclarationSyntax, DllImportGenerator.IncrementalStubGenerationContext>(SyntaxEquivalentComparer.Instance, EqualityComparer<DllImportGenerator.IncrementalStubGenerationContext>.Default);
+        public static readonly IEqualityComparer<(MethodDeclarationSyntax Syntax, DllImportGenerator.IncrementalStubGenerationContext StubContext)> CalculatedContextWithSyntax =
+            new CustomValueTupleElementComparer<
+                MethodDeclarationSyntax,
+                DllImportGenerator.IncrementalStubGenerationContext
+            >(
+                SyntaxEquivalentComparer.Instance,
+                EqualityComparer<DllImportGenerator.IncrementalStubGenerationContext>.Default
+            );
     }
 
     /// <summary>
@@ -83,7 +115,10 @@ namespace Microsoft.Interop
         private readonly IEqualityComparer<T> _item1Comparer;
         private readonly IEqualityComparer<U> _item2Comparer;
 
-        public CustomValueTupleElementComparer(IEqualityComparer<T> item1Comparer, IEqualityComparer<U> item2Comparer)
+        public CustomValueTupleElementComparer(
+            IEqualityComparer<T> item1Comparer,
+            IEqualityComparer<U> item2Comparer
+        )
         {
             _item1Comparer = item1Comparer;
             _item2Comparer = item2Comparer;
@@ -91,7 +126,8 @@ namespace Microsoft.Interop
 
         public bool Equals((T, U) x, (T, U) y)
         {
-            return _item1Comparer.Equals(x.Item1, y.Item1) && _item2Comparer.Equals(x.Item2, y.Item2);
+            return _item1Comparer.Equals(x.Item1, y.Item1)
+                && _item2Comparer.Equals(x.Item2, y.Item2);
         }
 
         public int GetHashCode((T, U) obj)

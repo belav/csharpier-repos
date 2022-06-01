@@ -26,14 +26,8 @@ namespace System.Configuration
         /// </summary>
         public override string ApplicationName
         {
-            get
-            {
-                return _appName;
-            }
-            set
-            {
-                _appName = value;
-            }
+            get { return _appName; }
+            set { _appName = value; }
         }
 
         private XmlEscaper Escaper
@@ -81,7 +75,10 @@ namespace System.Configuration
         /// <summary>
         /// Abstract SettingsProvider method
         /// </summary>
-        public override SettingsPropertyValueCollection GetPropertyValues(SettingsContext context, SettingsPropertyCollection properties)
+        public override SettingsPropertyValueCollection GetPropertyValues(
+            SettingsContext context,
+            SettingsPropertyCollection properties
+        )
         {
             SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
             string sectionName = GetSectionName(context);
@@ -89,7 +86,8 @@ namespace System.Configuration
             // Look for this section in both applicationSettingsGroup and userSettingsGroup
             IDictionary appSettings = ClientSettingsStore.ReadSettings(sectionName, false);
             IDictionary userSettings = ClientSettingsStore.ReadSettings(sectionName, true);
-            ConnectionStringSettingsCollection connStrings = ClientSettingsStore.ReadConnectionStrings();
+            ConnectionStringSettingsCollection connStrings =
+                ClientSettingsStore.ReadConnectionStrings();
 
             // Now map each SettingProperty to the right StoredSetting and deserialize the value if found.
             foreach (SettingsProperty setting in properties)
@@ -98,8 +96,12 @@ namespace System.Configuration
                 SettingsPropertyValue value = new SettingsPropertyValue(setting);
 
                 // First look for and handle "special" settings
-                SpecialSettingAttribute attr = setting.Attributes[typeof(SpecialSettingAttribute)] as SpecialSettingAttribute;
-                bool isConnString = (attr != null) ? (attr.SpecialSetting == SpecialSetting.ConnectionString) : false;
+                SpecialSettingAttribute attr =
+                    setting.Attributes[typeof(SpecialSettingAttribute)] as SpecialSettingAttribute;
+                bool isConnString =
+                    (attr != null)
+                        ? (attr.SpecialSetting == SpecialSetting.ConnectionString)
+                        : false;
 
                 if (isConnString)
                 {
@@ -126,7 +128,10 @@ namespace System.Configuration
                 // Not a "special" setting
                 bool isUserSetting = IsUserSetting(setting);
 
-                if (isUserSetting && !ConfigurationManagerInternalFactory.Instance.SupportsUserConfig)
+                if (
+                    isUserSetting
+                    && !ConfigurationManagerInternalFactory.Instance.SupportsUserConfig
+                )
                 {
                     // We encountered a user setting, but the current configuration system does not support
                     // user settings.
@@ -168,7 +173,10 @@ namespace System.Configuration
         /// <summary>
         ///     Abstract SettingsProvider method
         /// </summary>
-        public override void SetPropertyValues(SettingsContext context, SettingsPropertyValueCollection values)
+        public override void SetPropertyValues(
+            SettingsContext context,
+            SettingsPropertyValueCollection values
+        )
         {
             string sectionName = GetSectionName(context);
             IDictionary roamingUserSettings = new Hashtable();
@@ -184,7 +192,10 @@ namespace System.Configuration
                     if (isUserSetting)
                     {
                         bool isRoaming = IsRoamingSetting(setting);
-                        StoredSetting ss = new StoredSetting(setting.SerializeAs, SerializeToXmlElement(setting, value));
+                        StoredSetting ss = new StoredSetting(
+                            setting.SerializeAs,
+                            SerializeToXmlElement(setting, value)
+                        );
 
                         if (isRoaming)
                         {
@@ -271,7 +282,10 @@ namespace System.Configuration
         /// <summary>
         /// Implementation of IClientSettingsProvider.GetPreviousVersion.
         /// </summary>
-        public SettingsPropertyValue GetPreviousVersion(SettingsContext context, SettingsProperty property)
+        public SettingsPropertyValue GetPreviousVersion(
+            SettingsContext context,
+            SettingsProperty property
+        )
         {
             bool isRoaming = IsRoamingSetting(property);
             string prevConfig = GetPreviousConfigFileName(isRoaming);
@@ -280,7 +294,12 @@ namespace System.Configuration
             {
                 SettingsPropertyCollection properties = new SettingsPropertyCollection();
                 properties.Add(property);
-                SettingsPropertyValueCollection values = GetSettingValuesFromFile(prevConfig, GetSectionName(context), true, properties);
+                SettingsPropertyValueCollection values = GetSettingValuesFromFile(
+                    prevConfig,
+                    GetSectionName(context),
+                    true,
+                    properties
+                );
                 return values[property.Name];
             }
             else
@@ -303,7 +322,9 @@ namespace System.Configuration
                 throw new ConfigurationErrorsException(SR.UserSettingsNotSupported);
             }
 
-            string prevConfigFile = isRoaming ? _prevRoamingConfigFileName : _prevLocalConfigFileName;
+            string prevConfigFile = isRoaming
+                ? _prevRoamingConfigFileName
+                : _prevLocalConfigFileName;
 
             if (string.IsNullOrEmpty(prevConfigFile))
             {
@@ -312,7 +333,12 @@ namespace System.Configuration
                     : ConfigurationManagerInternalFactory.Instance.ExeLocalConfigDirectory;
 
                 Version currentVersion;
-                if (!Version.TryParse(ConfigurationManagerInternalFactory.Instance.ExeProductVersion, out currentVersion))
+                if (
+                    !Version.TryParse(
+                        ConfigurationManagerInternalFactory.Instance.ExeProductVersion,
+                        out currentVersion
+                    )
+                )
                 {
                     return null;
                 }
@@ -329,7 +355,10 @@ namespace System.Configuration
                     {
                         Version tempVersion;
 
-                        if (Version.TryParse(directory.Name, out tempVersion) && tempVersion < currentVersion)
+                        if (
+                            Version.TryParse(directory.Name, out tempVersion)
+                            && tempVersion < currentVersion
+                        )
                         {
                             if (previousVersion == null)
                             {
@@ -346,7 +375,10 @@ namespace System.Configuration
 
                     if (previousDirectory != null)
                     {
-                        file = Path.Combine(previousDirectory.FullName, ConfigurationManagerInternalFactory.Instance.UserConfigFilename);
+                        file = Path.Combine(
+                            previousDirectory.FullName,
+                            ConfigurationManagerInternalFactory.Instance.UserConfigFilename
+                        );
                     }
 
                     if (File.Exists(file))
@@ -393,10 +425,19 @@ namespace System.Configuration
         /// Retrieves the values of settings from the given config file (as opposed to using
         /// the configuration for the current context)
         /// </summary>
-        private SettingsPropertyValueCollection GetSettingValuesFromFile(string configFileName, string sectionName, bool userScoped, SettingsPropertyCollection properties)
+        private SettingsPropertyValueCollection GetSettingValuesFromFile(
+            string configFileName,
+            string sectionName,
+            bool userScoped,
+            SettingsPropertyCollection properties
+        )
         {
             SettingsPropertyValueCollection values = new SettingsPropertyValueCollection();
-            IDictionary settings = ClientSettingsStore.ReadSettingsFromFile(configFileName, sectionName, userScoped);
+            IDictionary settings = ClientSettingsStore.ReadSettingsFromFile(
+                configFileName,
+                sectionName,
+                userScoped
+            );
 
             // Map each SettingProperty to the right StoredSetting and deserialize the value if found.
             foreach (SettingsProperty setting in properties)
@@ -429,8 +470,14 @@ namespace System.Configuration
         /// </summary>
         private static bool IsRoamingSetting(SettingsProperty setting)
         {
-            SettingsManageabilityAttribute manageAttr = setting.Attributes[typeof(SettingsManageabilityAttribute)] as SettingsManageabilityAttribute;
-            return manageAttr != null && ((manageAttr.Manageability & SettingsManageability.Roaming) == SettingsManageability.Roaming);
+            SettingsManageabilityAttribute manageAttr =
+                setting.Attributes[typeof(SettingsManageabilityAttribute)]
+                as SettingsManageabilityAttribute;
+            return manageAttr != null
+                && (
+                    (manageAttr.Manageability & SettingsManageability.Roaming)
+                    == SettingsManageability.Roaming
+                );
         }
 
         /// <summary>
@@ -440,16 +487,24 @@ namespace System.Configuration
         /// </summary>
         private static bool IsUserSetting(SettingsProperty setting)
         {
-            bool isUser = setting.Attributes[typeof(UserScopedSettingAttribute)] is UserScopedSettingAttribute;
-            bool isApp = setting.Attributes[typeof(ApplicationScopedSettingAttribute)] is ApplicationScopedSettingAttribute;
+            bool isUser =
+                setting.Attributes[typeof(UserScopedSettingAttribute)]
+                is UserScopedSettingAttribute;
+            bool isApp =
+                setting.Attributes[typeof(ApplicationScopedSettingAttribute)]
+                is ApplicationScopedSettingAttribute;
 
             if (isUser && isApp)
             {
-                throw new ConfigurationErrorsException(SR.Format(SR.BothScopeAttributes, setting.Name));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.BothScopeAttributes, setting.Name)
+                );
             }
             else if (!(isUser || isApp))
             {
-                throw new ConfigurationErrorsException(SR.Format(SR.NoScopeAttributes, setting.Name));
+                throw new ConfigurationErrorsException(
+                    SR.Format(SR.NoScopeAttributes, setting.Name)
+                );
             }
 
             return isUser;
@@ -511,7 +566,11 @@ namespace System.Configuration
         /// <summary>
         /// Private version of upgrade that uses isRoaming to determine which config file to use.
         /// </summary>
-        private void Upgrade(SettingsContext context, SettingsPropertyCollection properties, bool isRoaming)
+        private void Upgrade(
+            SettingsContext context,
+            SettingsPropertyCollection properties,
+            bool isRoaming
+        )
         {
             string prevConfig = GetPreviousConfigFileName(isRoaming);
 
@@ -521,13 +580,23 @@ namespace System.Configuration
                 SettingsPropertyCollection upgradeProperties = new SettingsPropertyCollection();
                 foreach (SettingsProperty sp in properties)
                 {
-                    if (!(sp.Attributes[typeof(NoSettingsVersionUpgradeAttribute)] is NoSettingsVersionUpgradeAttribute))
+                    if (
+                        !(
+                            sp.Attributes[typeof(NoSettingsVersionUpgradeAttribute)]
+                            is NoSettingsVersionUpgradeAttribute
+                        )
+                    )
                     {
                         upgradeProperties.Add(sp);
                     }
                 }
 
-                SettingsPropertyValueCollection values = GetSettingValuesFromFile(prevConfig, GetSectionName(context), true, upgradeProperties);
+                SettingsPropertyValueCollection values = GetSettingValuesFromFile(
+                    prevConfig,
+                    GetSectionName(context),
+                    true,
+                    upgradeProperties
+                );
                 SetPropertyValues(context, values);
             }
         }

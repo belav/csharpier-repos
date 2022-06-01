@@ -13,12 +13,12 @@ namespace Microsoft.EntityFrameworkCore.Query.SqlExpressions;
 ///     application or database provider code. If this is a problem for your application or provider, then please file
 ///     an issue at <see href="https://github.com/dotnet/efcore">github.com/dotnet/efcore</see>.
 /// </remarks>
-public sealed class TableExpression : TableExpressionBase, IClonableTableExpressionBase, ITableBasedExpression
+public sealed class TableExpression
+    : TableExpressionBase,
+        IClonableTableExpressionBase,
+        ITableBasedExpression
 {
-    internal TableExpression(ITableBase table)
-        : this(table, annotations: null)
-    {
-    }
+    internal TableExpression(ITableBase table) : this(table, annotations: null) { }
 
     private TableExpression(ITableBase table, IEnumerable<IAnnotation>? annotations)
         : base(alias: table.Name[..1].ToLowerInvariant(), annotations)
@@ -71,15 +71,15 @@ public sealed class TableExpression : TableExpressionBase, IClonableTableExpress
     public ITableBase Table { get; }
 
     /// <inheritdoc />
-    public TableExpressionBase Clone()
-        => new TableExpression(Table, GetAnnotations()) { Alias = Alias };
+    public TableExpressionBase Clone() =>
+        new TableExpression(Table, GetAnnotations()) { Alias = Alias };
 
     /// <inheritdoc />
     public override bool Equals(object? obj)
         // This should be reference equal only.
-        => obj != null && ReferenceEquals(this, obj);
+        =>
+        obj != null && ReferenceEquals(this, obj);
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => HashCode.Combine(base.GetHashCode(), Name, Schema);
+    public override int GetHashCode() => HashCode.Combine(base.GetHashCode(), Name, Schema);
 }

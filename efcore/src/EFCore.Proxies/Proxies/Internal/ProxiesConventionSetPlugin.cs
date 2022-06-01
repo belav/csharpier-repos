@@ -24,11 +24,13 @@ public class ProxiesConventionSetPlugin : IConventionSetPlugin
         IProxyFactory proxyFactory,
         IDbContextOptions options,
         LazyLoaderParameterBindingFactoryDependencies lazyLoaderParameterBindingFactoryDependencies,
-        ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies)
+        ProviderConventionSetBuilderDependencies conventionSetBuilderDependencies
+    )
     {
         _proxyFactory = proxyFactory;
         _options = options;
-        LazyLoaderParameterBindingFactoryDependencies = lazyLoaderParameterBindingFactoryDependencies;
+        LazyLoaderParameterBindingFactoryDependencies =
+            lazyLoaderParameterBindingFactoryDependencies;
         ConventionSetBuilderDependencies = conventionSetBuilderDependencies;
     }
 
@@ -61,14 +63,17 @@ public class ProxiesConventionSetPlugin : IConventionSetPlugin
         ConventionSet.AddAfter(
             conventionSet.ModelInitializedConventions,
             new ProxyChangeTrackingConvention(extension),
-            typeof(DbSetFindingConvention));
+            typeof(DbSetFindingConvention)
+        );
 
         conventionSet.ModelFinalizingConventions.Add(
             new ProxyBindingRewriter(
                 _proxyFactory,
                 extension,
                 LazyLoaderParameterBindingFactoryDependencies,
-                ConventionSetBuilderDependencies));
+                ConventionSetBuilderDependencies
+            )
+        );
 
         return conventionSet;
     }

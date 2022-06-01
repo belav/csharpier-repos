@@ -10,19 +10,24 @@ using Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeRefactorings;
 using Microsoft.CodeAnalysis.Test.Utilities;
 using Roslyn.Test.Utilities;
 using Xunit;
+
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CodeActions.ConvertLinq
 {
     public class ConvertForEachToLinqQueryTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery.CSharpConvertForEachToLinqQueryProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) =>
+            new CodeAnalysis.CSharp.ConvertLinq.ConvertForEachToLinqQuery.CSharpConvertForEachToLinqQueryProvider();
 
         #region Query Expressions
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryForForWhere()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -44,7 +49,8 @@ class Query
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -63,7 +69,8 @@ class Query
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -83,7 +90,8 @@ class Query
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryWithEscapedSymbols()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -102,7 +110,8 @@ class Query
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -120,7 +129,8 @@ class Query
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class Query
@@ -140,7 +150,8 @@ class Query
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryForVarForWhere()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 
 class C
@@ -170,7 +181,8 @@ class C
         }
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Linq;
 
 class C
@@ -198,7 +210,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryForVarForWhere_02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -229,7 +242,8 @@ class C
         }
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -251,7 +265,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -274,7 +289,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryForVarForWhere_03()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -305,7 +321,8 @@ class C
         }
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -327,7 +344,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -359,7 +377,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryLet()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -378,7 +397,8 @@ class Query
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -404,7 +424,8 @@ class Query
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryEmptyDeclarations()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -430,7 +451,8 @@ class Query
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryWhereClause()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class C
@@ -447,7 +469,8 @@ class C
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -462,7 +485,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -480,7 +504,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryOverQueries()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class C
@@ -497,7 +522,8 @@ class C
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -514,7 +540,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -532,7 +559,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryNoVariablesUsed()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class C
@@ -548,7 +576,8 @@ class C
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -565,7 +594,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -585,7 +615,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryNoBlock()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class C
@@ -597,7 +628,8 @@ class C
                 System.Console.Write(a);|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -614,7 +646,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -634,7 +667,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QuerySelectExpression()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class C
@@ -646,7 +680,8 @@ class C
                 Console.Write(a + b);|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -663,7 +698,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -683,7 +719,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QuerySelectMultipleExpressions()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 class C
@@ -698,7 +735,8 @@ class C
             }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -716,7 +754,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 class C
@@ -737,7 +776,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task EmptyBody()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -753,7 +793,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -770,7 +811,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -790,7 +832,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task EmptyBodyNoBlock()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -804,7 +847,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -821,7 +865,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -841,7 +886,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task AddUsingToExistingList()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -854,7 +900,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -872,7 +919,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -893,7 +941,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task AddFirstUsing()
         {
-            var source = @"
+            var source =
+                @"
 class C
 {
     void M(int[] nums)
@@ -905,7 +954,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"using System.Linq;
+            var queryOutput =
+                @"using System.Linq;
 
 class C
 {
@@ -921,7 +971,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"using System.Linq;
+            var linqInvocationOutput =
+                @"using System.Linq;
 
 class C
 {
@@ -940,7 +991,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task EmptyBodyDeclarationAsLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -957,7 +1009,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -975,7 +1028,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -996,7 +1050,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task EmptyBodyMultipleDeclarationsAsLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1013,7 +1068,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1032,7 +1088,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1057,7 +1114,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ReturnInvocationAndYieldReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1077,7 +1135,8 @@ class C
     int N(int n) => n;
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1095,7 +1154,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1116,7 +1176,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task BlockBodiedProperty()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1125,7 +1186,8 @@ public class Test
     public IEnumerable<int> Query1 { get { [|foreach (var x in _nums) { yield return x + 1; }|] } }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1137,7 +1199,8 @@ public class Test
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -1153,7 +1216,8 @@ public class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ReturnIEnumerable()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1170,7 +1234,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1186,7 +1251,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1204,7 +1270,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ReturnIEnumerableWithYieldReturnAndLocalFunction()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1228,7 +1295,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1248,7 +1316,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1270,7 +1339,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ReturnIEnumerablePartialMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1293,7 +1363,8 @@ partial class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1312,7 +1383,8 @@ partial class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1334,7 +1406,8 @@ partial class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ReturnIEnumerableExtendedPartialMethod()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1357,7 +1430,8 @@ partial class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1376,7 +1450,8 @@ partial class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 partial class C
@@ -1399,7 +1474,8 @@ partial class C
         [WorkItem(31784, "https://github.com/dotnet/roslyn/issues/31784")]
         public async Task QueryWhichRequiresSelectManyWithIdentityLambda()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 
 class C
@@ -1417,7 +1493,8 @@ class C
 }
 ";
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1440,7 +1517,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryInForEachWithSameVariableNameAndDifferentType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1471,7 +1549,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1503,7 +1582,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1538,7 +1618,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryInForEachWithSameVariableNameAndSameType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1568,7 +1649,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1599,7 +1681,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1633,7 +1716,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task QueryInForEachWithConvertedType()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 
@@ -1663,7 +1747,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1694,7 +1779,8 @@ class C
 ";
             await TestAsync(source, queryOutput, parseOptions: null);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -1729,7 +1815,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task IQueryableConvertedToIEnumerableInReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1745,7 +1832,8 @@ class C
         yield break;
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1759,7 +1847,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1777,7 +1866,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ReturnIQueryableConvertedToIEnumerableInAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1791,7 +1881,8 @@ class C
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1805,7 +1896,8 @@ class C
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -1827,7 +1919,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListLastDeclarationMerge()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1847,7 +1940,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1864,7 +1958,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1883,7 +1978,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListParameterizedConstructor()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1903,7 +1999,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1921,7 +2018,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1941,7 +2039,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListWithListInitializer()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1961,7 +2060,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1979,7 +2079,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -1999,7 +2100,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListWithEmptyArgumentList()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2019,7 +2121,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2035,7 +2138,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2053,7 +2157,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListNotLastDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2073,7 +2178,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2091,7 +2197,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2111,7 +2218,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListAssignToParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2131,7 +2239,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2148,7 +2257,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2167,7 +2277,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListToArrayElement()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2184,7 +2295,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2199,7 +2311,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2217,7 +2330,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListToNewArrayElement()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2235,7 +2349,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2250,7 +2365,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2268,7 +2384,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListHashSetNoConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 class C
 {
@@ -2288,7 +2405,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListMergeWithReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2308,7 +2426,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2324,7 +2443,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2342,7 +2462,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListSeparateDeclarationAndAssignmentMergeWithReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2363,7 +2484,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2380,7 +2502,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2399,7 +2522,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListSeparateDeclarationAndAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2420,7 +2544,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2437,7 +2562,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2457,7 +2583,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListTypeReplacement01()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Linq;
 using C = System.Collections.Generic.List<int>;
@@ -2488,7 +2615,8 @@ class Query
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Linq;
 using C = System.Collections.Generic.List<int>;
@@ -2511,7 +2639,8 @@ class Query
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Linq;
 using C = System.Collections.Generic.List<int>;
@@ -2543,7 +2672,8 @@ class Query
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListTypeReplacement02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Linq;
 using System;
 using C = System.Collections.Generic.List<int>;
@@ -2570,7 +2700,8 @@ class Query
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Linq;
 using System;
 using C = System.Collections.Generic.List<int>;
@@ -2591,7 +2722,8 @@ class Query
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Linq;
 using System;
 using C = System.Collections.Generic.List<int>;
@@ -2619,7 +2751,8 @@ class Query
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListPropertyAssignment()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2640,7 +2773,8 @@ public class Test
         public List<int> A { get; set; }
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2660,7 +2794,8 @@ public class Test
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2684,7 +2819,8 @@ public class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListPropertyAssignmentNoDeclaration()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2704,7 +2840,8 @@ public class Test
         public List<int> A { get; set; }
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2724,7 +2861,8 @@ public class Test
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2748,7 +2886,8 @@ public class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListNoInitialization()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2763,7 +2902,8 @@ public class Test
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2778,7 +2918,8 @@ public class Test
 }";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 public class Test
@@ -2797,7 +2938,8 @@ public class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task ToListOverride()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -2826,7 +2968,8 @@ public class Test
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInMultipleDeclarationLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2844,7 +2987,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2860,7 +3004,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2878,7 +3023,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInMultipleDeclarationNotLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2896,7 +3042,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2913,7 +3060,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2932,7 +3080,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInParameter()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2949,7 +3098,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2964,7 +3114,8 @@ class C
 ";
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -2982,7 +3133,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInParameterAssignedToZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3000,7 +3152,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3016,7 +3169,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3034,7 +3188,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInParameterAssignedToNonZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3052,7 +3207,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3069,7 +3225,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3088,7 +3245,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInDeclarationMergeToReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3108,7 +3266,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3124,7 +3283,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3142,7 +3302,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInDeclarationConversion()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3162,7 +3323,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3178,7 +3340,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3196,7 +3359,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInMultipleDeclarationMergeToReturnLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3216,7 +3380,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3233,7 +3398,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3252,7 +3418,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInMultipleDeclarationLastButNotZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3272,7 +3439,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3290,7 +3458,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3310,7 +3479,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInMultipleDeclarationMergeToReturnNotLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3330,7 +3500,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3348,7 +3519,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3368,7 +3540,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInMultipleDeclarationNonZeroToReturnNotLast()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3388,7 +3561,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3406,7 +3580,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3426,7 +3601,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInAssignmentToZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3447,7 +3623,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3464,7 +3641,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3483,7 +3661,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInAssignmentToNonZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3504,7 +3683,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3523,7 +3703,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3544,7 +3725,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountInParameterAssignedToZeroAndReturned()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3563,7 +3745,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3580,7 +3763,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3599,7 +3783,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountDeclareWithNonZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3617,7 +3802,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3634,7 +3820,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3653,7 +3840,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountAssignWithZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3672,7 +3860,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3689,7 +3878,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3708,7 +3898,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountAssignWithNonZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3727,7 +3918,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3745,7 +3937,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -3765,7 +3958,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountAssignPropertyAssignedToZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3784,7 +3978,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3801,7 +3996,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3820,7 +4016,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountAssignPropertyAssignedToNonZero()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3839,7 +4036,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3857,7 +4055,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3877,7 +4076,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountAssignPropertyNotKnownAssigned()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3895,7 +4095,8 @@ class C
     }
 }
 ";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3912,7 +4113,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class A { public int B { get; set; }}
@@ -3931,7 +4133,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CountIQueryableInInvocation()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3946,7 +4149,8 @@ class C
         }|]
     }
 }";
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3961,7 +4165,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 
@@ -3983,7 +4188,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CommentsYieldReturn()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4013,7 +4219,8 @@ class C
     }
 }";
 
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4041,7 +4248,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4074,7 +4282,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CommentsToList()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4091,7 +4300,8 @@ class C
     }
 }";
 
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4121,7 +4331,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CommentsToList_02()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4138,7 +4349,8 @@ class C
     }
 }";
 
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4159,7 +4371,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4184,7 +4397,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CommentsCount()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4200,7 +4414,8 @@ class C
     }
 }";
 
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4221,7 +4436,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C
@@ -4245,7 +4461,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CommentsDefault()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4261,7 +4478,8 @@ class C
     }
 }";
 
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4292,7 +4510,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task CommentsDefault_02()
         {
-            var source = @"
+            var source =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4310,7 +4529,8 @@ class C
     }
 }";
 
-            var queryOutput = @"
+            var queryOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4336,7 +4556,8 @@ class C
 
             await TestInRegularAndScriptAsync(source, queryOutput, index: 0);
 
-            var linqInvocationOutput = @"
+            var linqInvocationOutput =
+                @"
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -4370,7 +4591,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsConvertForEachToQuery)]
         public async Task NoConversionPreprocessorDirectives()
         {
-            var source = @"
+            var source =
+                @"
 using System.Collections.Generic;
 using System.Linq;
 class C

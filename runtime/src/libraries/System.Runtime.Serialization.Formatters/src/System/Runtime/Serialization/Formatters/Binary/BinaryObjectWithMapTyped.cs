@@ -24,7 +24,16 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _binaryHeaderEnum = binaryHeaderEnum;
         }
 
-        internal void Set(int objectId, string name, int numMembers, string[] memberNames, BinaryTypeEnum[] binaryTypeEnumA, object?[] typeInformationA, int[] memberAssemIds, int assemId)
+        internal void Set(
+            int objectId,
+            string name,
+            int numMembers,
+            string[] memberNames,
+            BinaryTypeEnum[] binaryTypeEnumA,
+            object?[] typeInformationA,
+            int[] memberAssemIds,
+            int assemId
+        )
         {
             _objectId = objectId;
             _assemId = assemId;
@@ -36,14 +45,21 @@ namespace System.Runtime.Serialization.Formatters.Binary
             _memberAssemIds = memberAssemIds;
             _assemId = assemId;
 
-            _binaryHeaderEnum = assemId > 0 ?
-                 BinaryHeaderEnum.ObjectWithMapTypedAssemId :
-                 BinaryHeaderEnum.ObjectWithMapTyped;
+            _binaryHeaderEnum =
+                assemId > 0
+                    ? BinaryHeaderEnum.ObjectWithMapTypedAssemId
+                    : BinaryHeaderEnum.ObjectWithMapTyped;
         }
 
         public void Write(BinaryFormatterWriter output)
         {
-            Debug.Assert(_name != null && _memberNames != null && _binaryTypeEnumA != null && _typeInformationA != null && _memberAssemIds != null);
+            Debug.Assert(
+                _name != null
+                    && _memberNames != null
+                    && _binaryTypeEnumA != null
+                    && _typeInformationA != null
+                    && _memberAssemIds != null
+            );
             output.WriteByte((byte)_binaryHeaderEnum);
             output.WriteInt32(_objectId);
             output.WriteString(_name);
@@ -59,7 +75,12 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
             for (int i = 0; i < _numMembers; i++)
             {
-                BinaryTypeConverter.WriteTypeInfo(_binaryTypeEnumA[i], _typeInformationA[i], _memberAssemIds[i], output);
+                BinaryTypeConverter.WriteTypeInfo(
+                    _binaryTypeEnumA[i],
+                    _typeInformationA[i],
+                    _memberAssemIds[i],
+                    output
+                );
             }
 
             if (_assemId > 0)
@@ -88,13 +109,24 @@ namespace System.Runtime.Serialization.Formatters.Binary
             }
             for (int i = 0; i < _numMembers; i++)
             {
-                if (_binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt && _binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser)
+                if (
+                    _binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUrt
+                    && _binaryTypeEnumA[i] != BinaryTypeEnum.ObjectUser
+                )
                 {
-                    _typeInformationA[i] = BinaryTypeConverter.ReadTypeInfo(_binaryTypeEnumA[i], input, out _memberAssemIds[i]);
+                    _typeInformationA[i] = BinaryTypeConverter.ReadTypeInfo(
+                        _binaryTypeEnumA[i],
+                        input,
+                        out _memberAssemIds[i]
+                    );
                 }
                 else
                 {
-                    BinaryTypeConverter.ReadTypeInfo(_binaryTypeEnumA[i], input, out _memberAssemIds[i]);
+                    BinaryTypeConverter.ReadTypeInfo(
+                        _binaryTypeEnumA[i],
+                        input,
+                        out _memberAssemIds[i]
+                    );
                 }
             }
 

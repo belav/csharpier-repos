@@ -10,7 +10,8 @@ namespace JIT.HardwareIntrinsics.X86
     {
         static Program()
         {
-            TestList = new Dictionary<string, Action>() {
+            TestList = new Dictionary<string, Action>()
+            {
                 ["Extract.Int64.129"] = ExtractInt64129,
                 ["Extract.UInt64.129"] = ExtractUInt64129,
                 ["Extract.Int64.1"] = ExtractInt641,

@@ -5,26 +5,31 @@ using Microsoft.EntityFrameworkCore.TestModels.InheritanceRelationshipsModel;
 
 namespace Microsoft.EntityFrameworkCore.Query;
 
-public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixtureBase<InheritanceRelationshipsContext>,
-    IQueryFixtureBase
+public abstract class InheritanceRelationshipsQueryFixtureBase
+    : SharedStoreFixtureBase<InheritanceRelationshipsContext>,
+        IQueryFixtureBase
 {
     protected override string StoreName { get; } = "InheritanceRelationships";
 
-    public Func<DbContext> GetContextCreator()
-        => () => CreateContext();
+    public Func<DbContext> GetContextCreator() => () => CreateContext();
 
-    public virtual ISetSource GetExpectedData()
-        => new InheritanceRelationshipsData();
+    public virtual ISetSource GetExpectedData() => new InheritanceRelationshipsData();
 
-    public IReadOnlyDictionary<Type, object> GetEntitySorters()
-        => new Dictionary<Type, Func<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntitySorters() =>
+        new Dictionary<Type, Func<object, object>>
         {
             { typeof(BaseCollectionOnBase), e => ((BaseCollectionOnBase)e)?.Id },
             { typeof(DerivedCollectionOnBase), e => ((DerivedCollectionOnBase)e)?.Id },
             { typeof(BaseCollectionOnDerived), e => ((BaseCollectionOnDerived)e)?.Id },
             { typeof(DerivedCollectionOnDerived), e => ((DerivedCollectionOnDerived)e)?.Id },
-            { typeof(BaseInheritanceRelationshipEntity), e => ((BaseInheritanceRelationshipEntity)e)?.Id },
-            { typeof(DerivedInheritanceRelationshipEntity), e => ((DerivedInheritanceRelationshipEntity)e)?.Id },
+            {
+                typeof(BaseInheritanceRelationshipEntity),
+                e => ((BaseInheritanceRelationshipEntity)e)?.Id
+            },
+            {
+                typeof(DerivedInheritanceRelationshipEntity),
+                e => ((DerivedInheritanceRelationshipEntity)e)?.Id
+            },
             { typeof(BaseReferenceOnBase), e => ((BaseReferenceOnBase)e)?.Id },
             { typeof(DerivedReferenceOnBase), e => ((DerivedReferenceOnBase)e)?.Id },
             { typeof(BaseReferenceOnDerived), e => ((BaseReferenceOnDerived)e)?.Id },
@@ -42,11 +47,12 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
             { typeof(ReferenceOnDerived), e => ((ReferenceOnDerived)e)?.Id },
         }.ToDictionary(e => e.Key, e => (object)e.Value);
 
-    public IReadOnlyDictionary<Type, object> GetEntityAsserters()
-        => new Dictionary<Type, Action<object, object>>
+    public IReadOnlyDictionary<Type, object> GetEntityAsserters() =>
+        new Dictionary<Type, Action<object, object>>
         {
             {
-                typeof(BaseCollectionOnBase), (e, a) =>
+                typeof(BaseCollectionOnBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -62,7 +68,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(DerivedCollectionOnBase), (e, a) =>
+                typeof(DerivedCollectionOnBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -79,7 +86,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(BaseCollectionOnDerived), (e, a) =>
+                typeof(BaseCollectionOnDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -95,7 +103,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(DerivedCollectionOnDerived), (e, a) =>
+                typeof(DerivedCollectionOnDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -111,7 +120,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(BaseInheritanceRelationshipEntity), (e, a) =>
+                typeof(BaseInheritanceRelationshipEntity),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -126,11 +136,18 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                         Assert.Equal(ee.OwnedReferenceOnBase?.Id, aa.OwnedReferenceOnBase?.Id);
                         Assert.Equal(ee.OwnedReferenceOnBase?.Name, aa.OwnedReferenceOnBase?.Name);
 
-                        Assert.Equal(ee.OwnedCollectionOnBase?.Count, aa.OwnedCollectionOnBase?.Count);
+                        Assert.Equal(
+                            ee.OwnedCollectionOnBase?.Count,
+                            aa.OwnedCollectionOnBase?.Count
+                        );
                         if (ee.OwnedCollectionOnBase?.Count > 0)
                         {
-                            var orderedExpected = ee.OwnedCollectionOnBase.OrderBy(x => x.Id).ToList();
-                            var orderedActual = aa.OwnedCollectionOnBase.OrderBy(x => x.Id).ToList();
+                            var orderedExpected = ee.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
+                                .ToList();
+                            var orderedActual = aa.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
+                                .ToList();
                             for (var i = 0; i < orderedExpected.Count; i++)
                             {
                                 Assert.Equal(orderedExpected[i].Id, orderedActual[i].Id);
@@ -141,7 +158,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(DerivedInheritanceRelationshipEntity), (e, a) =>
+                typeof(DerivedInheritanceRelationshipEntity),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -157,14 +175,27 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                         Assert.Equal(ee.OwnedReferenceOnBase?.Id, aa.OwnedReferenceOnBase?.Id);
                         Assert.Equal(ee.OwnedReferenceOnBase?.Name, aa.OwnedReferenceOnBase?.Name);
 
-                        Assert.Equal(ee.OwnedReferenceOnDerived?.Id, aa.OwnedReferenceOnDerived?.Id);
-                        Assert.Equal(ee.OwnedReferenceOnDerived?.Name, aa.OwnedReferenceOnDerived?.Name);
+                        Assert.Equal(
+                            ee.OwnedReferenceOnDerived?.Id,
+                            aa.OwnedReferenceOnDerived?.Id
+                        );
+                        Assert.Equal(
+                            ee.OwnedReferenceOnDerived?.Name,
+                            aa.OwnedReferenceOnDerived?.Name
+                        );
 
-                        Assert.Equal(ee.OwnedCollectionOnBase?.Count, aa.OwnedCollectionOnBase?.Count);
+                        Assert.Equal(
+                            ee.OwnedCollectionOnBase?.Count,
+                            aa.OwnedCollectionOnBase?.Count
+                        );
                         if (ee.OwnedCollectionOnBase?.Count > 0)
                         {
-                            var orderedExpected = ee.OwnedCollectionOnBase.OrderBy(x => x.Id).ToList();
-                            var orderedActual = aa.OwnedCollectionOnBase.OrderBy(x => x.Id).ToList();
+                            var orderedExpected = ee.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
+                                .ToList();
+                            var orderedActual = aa.OwnedCollectionOnBase
+                                .OrderBy(x => x.Id)
+                                .ToList();
                             for (var i = 0; i < orderedExpected.Count; i++)
                             {
                                 Assert.Equal(orderedExpected[i].Id, orderedActual[i].Id);
@@ -172,11 +203,18 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                             }
                         }
 
-                        Assert.Equal(ee.OwnedCollectionOnDerived?.Count, aa.OwnedCollectionOnDerived?.Count);
+                        Assert.Equal(
+                            ee.OwnedCollectionOnDerived?.Count,
+                            aa.OwnedCollectionOnDerived?.Count
+                        );
                         if (ee.OwnedCollectionOnDerived?.Count > 0)
                         {
-                            var orderedExpected = ee.OwnedCollectionOnDerived.OrderBy(x => x.Id).ToList();
-                            var orderedActual = aa.OwnedCollectionOnDerived.OrderBy(x => x.Id).ToList();
+                            var orderedExpected = ee.OwnedCollectionOnDerived
+                                .OrderBy(x => x.Id)
+                                .ToList();
+                            var orderedActual = aa.OwnedCollectionOnDerived
+                                .OrderBy(x => x.Id)
+                                .ToList();
                             for (var i = 0; i < orderedExpected.Count; i++)
                             {
                                 Assert.Equal(orderedExpected[i].Id, orderedActual[i].Id);
@@ -187,7 +225,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(BaseReferenceOnBase), (e, a) =>
+                typeof(BaseReferenceOnBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -203,7 +242,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(DerivedReferenceOnBase), (e, a) =>
+                typeof(DerivedReferenceOnBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -219,7 +259,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(BaseReferenceOnDerived), (e, a) =>
+                typeof(BaseReferenceOnDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -235,7 +276,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(DerivedReferenceOnDerived), (e, a) =>
+                typeof(DerivedReferenceOnDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -251,7 +293,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(CollectionOnBase), (e, a) =>
+                typeof(CollectionOnBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -267,7 +310,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(CollectionOnDerived), (e, a) =>
+                typeof(CollectionOnDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -283,7 +327,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(NestedCollectionBase), (e, a) =>
+                typeof(NestedCollectionBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -300,7 +345,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(NestedCollectionDerived), (e, a) =>
+                typeof(NestedCollectionDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -317,7 +363,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(NestedReferenceBase), (e, a) =>
+                typeof(NestedReferenceBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -334,7 +381,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(NestedReferenceDerived), (e, a) =>
+                typeof(NestedReferenceDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -351,7 +399,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(NonEntityBase), (e, a) =>
+                typeof(NonEntityBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -366,7 +415,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(PrincipalEntity), (e, a) =>
+                typeof(PrincipalEntity),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -381,7 +431,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(ReferencedEntity), (e, a) =>
+                typeof(ReferencedEntity),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -396,7 +447,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(ReferenceOnBase), (e, a) =>
+                typeof(ReferenceOnBase),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -412,7 +464,8 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
                 }
             },
             {
-                typeof(ReferenceOnDerived), (e, a) =>
+                typeof(ReferenceOnDerived),
+                (e, a) =>
                 {
                     Assert.Equal(e == null, a == null);
 
@@ -441,7 +494,10 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
 
         modelBuilder.Entity<BaseCollectionOnBase>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<BaseCollectionOnDerived>().Property(e => e.Id).ValueGeneratedNever();
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>().Property(e => e.Id).ValueGeneratedNever();
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
+            .Property(e => e.Id)
+            .ValueGeneratedNever();
         modelBuilder.Entity<BaseReferenceOnBase>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<BaseReferenceOnDerived>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<CollectionOnBase>().Property(e => e.Id).ValueGeneratedNever();
@@ -453,117 +509,138 @@ public abstract class InheritanceRelationshipsQueryFixtureBase : SharedStoreFixt
         modelBuilder.Entity<ReferenceOnBase>().Property(e => e.Id).ValueGeneratedNever();
         modelBuilder.Entity<ReferenceOnDerived>().Property(e => e.Id).ValueGeneratedNever();
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
             .HasOne(e => e.DerivedSefReferenceOnBase)
             .WithOne(e => e.BaseSelfReferenceOnDerived)
             .HasForeignKey<DerivedInheritanceRelationshipEntity>(e => e.BaseId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
             .HasOne(e => e.BaseReferenceOnBase)
             .WithOne(e => e.BaseParent)
             .HasForeignKey<BaseReferenceOnBase>(e => e.BaseParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
             .HasOne(e => e.ReferenceOnBase)
             .WithOne(e => e.Parent)
             .HasForeignKey<ReferenceOnBase>(e => e.ParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
             .HasMany(e => e.BaseCollectionOnBase)
             .WithOne(e => e.BaseParent)
             .HasForeignKey(e => e.BaseParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
             .HasMany(e => e.CollectionOnBase)
             .WithOne(e => e.Parent)
             .HasForeignKey(e => e.ParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<BaseInheritanceRelationshipEntity>()
             .OwnsMany(e => e.OwnedCollectionOnBase)
-            .Property(e => e.Id).ValueGeneratedNever();
+            .Property(e => e.Id)
+            .ValueGeneratedNever();
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .HasOne(e => e.DerivedReferenceOnDerived)
             .WithOne()
             .HasForeignKey<DerivedReferenceOnDerived>("DerivedInheritanceRelationshipEntityId")
             .IsRequired(false);
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .HasOne(e => e.ReferenceOnDerived)
             .WithOne(e => e.Parent)
             .HasForeignKey<ReferenceOnDerived>(e => e.ParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .HasMany(e => e.BaseCollectionOnDerived)
             .WithOne(e => e.BaseParent)
             .HasForeignKey(e => e.ParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .HasMany(e => e.CollectionOnDerived)
             .WithOne(e => e.Parent)
             .HasForeignKey(e => e.ParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .HasMany(e => e.DerivedCollectionOnDerived)
             .WithOne()
             .HasForeignKey("DerivedInheritanceRelationshipEntityId")
             .IsRequired(false);
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .HasOne(e => e.BaseReferenceOnDerived)
             .WithOne(e => e.BaseParent)
             .HasForeignKey<BaseReferenceOnDerived>(e => e.BaseParentId)
             .IsRequired(false);
 
-        modelBuilder.Entity<DerivedInheritanceRelationshipEntity>()
+        modelBuilder
+            .Entity<DerivedInheritanceRelationshipEntity>()
             .OwnsMany(e => e.OwnedCollectionOnDerived)
-            .Property(e => e.Id).ValueGeneratedNever();
+            .Property(e => e.Id)
+            .ValueGeneratedNever();
 
-        modelBuilder.Entity<BaseReferenceOnBase>()
+        modelBuilder
+            .Entity<BaseReferenceOnBase>()
             .HasOne(e => e.NestedReference)
             .WithOne(e => e.ParentReference)
             .HasForeignKey<NestedReferenceBase>(e => e.ParentReferenceId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseReferenceOnBase>()
+        modelBuilder
+            .Entity<BaseReferenceOnBase>()
             .HasMany(e => e.NestedCollection)
             .WithOne(e => e.ParentReference)
             .HasForeignKey(e => e.ParentReferenceId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseCollectionOnBase>()
+        modelBuilder
+            .Entity<BaseCollectionOnBase>()
             .HasOne(e => e.NestedReference)
             .WithOne(e => e.ParentCollection)
             .HasForeignKey<NestedReferenceBase>(e => e.ParentCollectionId)
             .IsRequired(false);
 
-        modelBuilder.Entity<BaseCollectionOnBase>()
+        modelBuilder
+            .Entity<BaseCollectionOnBase>()
             .HasMany(e => e.NestedCollection)
             .WithOne(e => e.ParentCollection)
             .HasForeignKey(e => e.ParentCollectionId)
             .IsRequired(false);
 
-        modelBuilder.Entity<PrincipalEntity>()
+        modelBuilder
+            .Entity<PrincipalEntity>()
             .HasOne(e => e.Reference)
             .WithMany()
             .IsRequired(false);
 
-        modelBuilder.Entity<ReferencedEntity>()
+        modelBuilder
+            .Entity<ReferencedEntity>()
             .HasMany(e => e.Principals)
             .WithOne()
             .IsRequired(false);
     }
 
-    protected override void Seed(InheritanceRelationshipsContext context)
-        => InheritanceRelationshipsContext.Seed(context);
+    protected override void Seed(InheritanceRelationshipsContext context) =>
+        InheritanceRelationshipsContext.Seed(context);
 
     public override InheritanceRelationshipsContext CreateContext()
     {

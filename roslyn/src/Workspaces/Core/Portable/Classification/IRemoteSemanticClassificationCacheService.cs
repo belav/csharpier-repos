@@ -17,7 +17,10 @@ namespace Microsoft.CodeAnalysis.Classification
     internal interface IRemoteSemanticClassificationCacheService
     {
         ValueTask CacheSemanticClassificationsAsync(
-            PinnedSolutionInfo solutionInfo, DocumentId documentId, CancellationToken cancellationToken);
+            PinnedSolutionInfo solutionInfo,
+            DocumentId documentId,
+            CancellationToken cancellationToken
+        );
 
         /// <summary>
         /// Tries to get cached semantic classifications for the specified document and the specified <paramref
@@ -30,6 +33,7 @@ namespace Microsoft.CodeAnalysis.Classification
             TextSpan textSpan,
             Checksum checksum,
             StorageDatabase database,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

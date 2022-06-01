@@ -36,27 +36,35 @@ namespace System.Security.Cryptography.Tests
             ByteUtils.HexToByteArray("e8e99d0f45237d786d6bbaa7965c7808bbff1a91"),
         };
 
-        public HmacSha1Tests()
-            : base(s_testKeys2202, s_testMacs2202)
-        {
-        }
+        public HmacSha1Tests() : base(s_testKeys2202, s_testMacs2202) { }
 
         protected override int BlockSize => 64;
         protected override int MacSize => HMACSHA1.HashSizeInBytes;
 
         protected override HMAC Create() => new HMACSHA1();
+
         protected override HashAlgorithm CreateHashAlgorithm() => SHA1.Create();
+
         protected override byte[] HashDataOneShot(byte[] key, byte[] source) =>
             HMACSHA1.HashData(key, source);
 
-        protected override byte[] HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source) =>
-            HMACSHA1.HashData(key, source);
+        protected override byte[] HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source
+        ) => HMACSHA1.HashData(key, source);
 
-        protected override int HashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination) =>
-            HMACSHA1.HashData(key, source, destination);
+        protected override int HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination
+        ) => HMACSHA1.HashData(key, source, destination);
 
-        protected override bool TryHashDataOneShot(ReadOnlySpan<byte> key, ReadOnlySpan<byte> source, Span<byte> destination, out int written) =>
-            HMACSHA1.TryHashData(key, source, destination, out written);
+        protected override bool TryHashDataOneShot(
+            ReadOnlySpan<byte> key,
+            ReadOnlySpan<byte> source,
+            Span<byte> destination,
+            out int written
+        ) => HMACSHA1.TryHashData(key, source, destination, out written);
 
         protected override byte[] HashDataOneShot(ReadOnlySpan<byte> key, Stream source) =>
             HMACSHA1.HashData(key, source);
@@ -64,24 +72,30 @@ namespace System.Security.Cryptography.Tests
         protected override byte[] HashDataOneShot(byte[] key, Stream source) =>
             HMACSHA1.HashData(key, source);
 
-        protected override int HashDataOneShot(ReadOnlySpan<byte> key, Stream source, Span<byte> destination) =>
-            HMACSHA1.HashData(key, source, destination);
+        protected override int HashDataOneShot(
+            ReadOnlySpan<byte> key,
+            Stream source,
+            Span<byte> destination
+        ) => HMACSHA1.HashData(key, source, destination);
 
         protected override ValueTask<int> HashDataOneShotAsync(
             ReadOnlyMemory<byte> key,
             Stream source,
             Memory<byte> destination,
-            CancellationToken cancellationToken) => HMACSHA1.HashDataAsync(key, source, destination, cancellationToken);
+            CancellationToken cancellationToken
+        ) => HMACSHA1.HashDataAsync(key, source, destination, cancellationToken);
 
         protected override ValueTask<byte[]> HashDataOneShotAsync(
             ReadOnlyMemory<byte> key,
             Stream source,
-            CancellationToken cancellationToken) => HMACSHA1.HashDataAsync(key, source, cancellationToken);
+            CancellationToken cancellationToken
+        ) => HMACSHA1.HashDataAsync(key, source, cancellationToken);
 
         protected override ValueTask<byte[]> HashDataOneShotAsync(
             byte[] key,
             Stream source,
-            CancellationToken cancellationToken) => HMACSHA1.HashDataAsync(key, source, cancellationToken);
+            CancellationToken cancellationToken
+        ) => HMACSHA1.HashDataAsync(key, source, cancellationToken);
 
         [Fact]
         public void HmacSha1_Byte_Constructors()
@@ -170,7 +184,8 @@ namespace System.Security.Cryptography.Tests
                 input: "0102030405060708",
                 1024,
                 hexKey: "000102030405060708090A0B0C0D0E0F",
-                output: "3CE5AE476733905861F031DDC2DEDF8CBB1FAA0B");
+                output: "3CE5AE476733905861F031DDC2DEDF8CBB1FAA0B"
+            );
         }
 
         [Fact]
@@ -182,7 +197,8 @@ namespace System.Security.Cryptography.Tests
                 input: "0102030405060708",
                 1025,
                 hexKey: "000102030405060708090A0B0C0D0E0F",
-                output: "E18D7FB16A83CA17DB6CB0F1C083AA7A7094F627");
+                output: "E18D7FB16A83CA17DB6CB0F1C083AA7A7094F627"
+            );
         }
 
         [Fact]
@@ -194,7 +210,8 @@ namespace System.Security.Cryptography.Tests
                 input: "",
                 0,
                 hexKey: "000102030405060708090A0B0C0D0E0F",
-                output: "5433122F77BCF8A4D9B874B4149823EF5B7C207E");
+                output: "5433122F77BCF8A4D9B874B4149823EF5B7C207E"
+            );
         }
 
         [Fact]
@@ -206,7 +223,8 @@ namespace System.Security.Cryptography.Tests
                 input: "0102030405060708",
                 1024,
                 hexKey: "000102030405060708090A0B0C0D0E0F",
-                output: "3CE5AE476733905861F031DDC2DEDF8CBB1FAA0B");
+                output: "3CE5AE476733905861F031DDC2DEDF8CBB1FAA0B"
+            );
         }
 
         [Fact]
@@ -218,7 +236,8 @@ namespace System.Security.Cryptography.Tests
                 input: "0102030405060708",
                 1025,
                 hexKey: "000102030405060708090A0B0C0D0E0F",
-                output: "E18D7FB16A83CA17DB6CB0F1C083AA7A7094F627");
+                output: "E18D7FB16A83CA17DB6CB0F1C083AA7A7094F627"
+            );
         }
 
         [Fact]
@@ -230,7 +249,8 @@ namespace System.Security.Cryptography.Tests
                 input: "",
                 0,
                 hexKey: "000102030405060708090A0B0C0D0E0F",
-                output: "5433122F77BCF8A4D9B874B4149823EF5B7C207E");
+                output: "5433122F77BCF8A4D9B874B4149823EF5B7C207E"
+            );
         }
     }
 }

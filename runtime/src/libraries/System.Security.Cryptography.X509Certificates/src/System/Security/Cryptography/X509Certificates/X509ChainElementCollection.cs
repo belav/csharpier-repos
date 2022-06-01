@@ -44,7 +44,10 @@ namespace System.Security.Cryptography.X509Certificates
                 if (index < 0)
                     throw new InvalidOperationException(SR.InvalidOperation_EnumNotStarted);
                 if (index >= _elements.Length)
-                    throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_Index);
+                    throw new ArgumentOutOfRangeException(
+                        nameof(index),
+                        SR.ArgumentOutOfRange_Index
+                    );
 
                 return _elements[index];
             }
@@ -83,6 +86,7 @@ namespace System.Security.Cryptography.X509Certificates
             return new X509ChainElementEnumerator(this);
         }
 
-        IEnumerator<X509ChainElement> IEnumerable<X509ChainElement>.GetEnumerator() => GetEnumerator();
+        IEnumerator<X509ChainElement> IEnumerable<X509ChainElement>.GetEnumerator() =>
+            GetEnumerator();
     }
 }

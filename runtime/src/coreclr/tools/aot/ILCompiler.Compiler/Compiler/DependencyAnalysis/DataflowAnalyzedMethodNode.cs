@@ -25,13 +25,18 @@ namespace ILCompiler.DependencyAnalysis
             Debug.Assert(methodIL.OwningMethod.IsTypicalMethodDefinition);
             _methodIL = methodIL;
         }
-        
+
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             var mdManager = (UsageBasedMetadataManager)factory.MetadataManager;
             try
             {
-                return Dataflow.ReflectionMethodBodyScanner.ScanAndProcessReturnValue(factory, mdManager.FlowAnnotations, mdManager.Logger, _methodIL);
+                return Dataflow.ReflectionMethodBodyScanner.ScanAndProcessReturnValue(
+                    factory,
+                    mdManager.FlowAnnotations,
+                    mdManager.Logger,
+                    _methodIL
+                );
             }
             catch (TypeSystemException)
             {
@@ -43,14 +48,23 @@ namespace ILCompiler.DependencyAnalysis
 
         protected override string GetName(NodeFactory factory)
         {
-            return "Dataflow analysis for " + factory.NameMangler.GetMangledMethodName(_methodIL.OwningMethod).ToString();
+            return "Dataflow analysis for "
+                + factory.NameMangler.GetMangledMethodName(_methodIL.OwningMethod).ToString();
         }
 
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory context) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory context) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory context
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory context
+        ) => null;
     }
 }

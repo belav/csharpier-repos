@@ -25,9 +25,7 @@ public sealed class AuthenticationManager
     private AuthenticationSchemes _authSchemes;
     private bool _allowAnonymous = true;
 
-    internal AuthenticationManager()
-    {
-    }
+    internal AuthenticationManager() { }
 
     /// <summary>
     /// When attaching to an existing queue this setting must match the one used to create the queue.
@@ -98,7 +96,9 @@ public sealed class AuthenticationManager
 
             _urlGroup.SetProperty(
                 HttpApiTypes.HTTP_SERVER_PROPERTY.HttpServerAuthenticationProperty,
-                infoptr, (uint)AuthInfoSize);
+                infoptr,
+                (uint)AuthInfoSize
+            );
         }
     }
 
@@ -144,8 +144,10 @@ public sealed class AuthenticationManager
 
         if (challenges.Count > 0)
         {
-            context.Response.Headers[HeaderNames.WWWAuthenticate]
-                = StringValues.Concat(context.Response.Headers[HeaderNames.WWWAuthenticate], challenges.ToArray());
+            context.Response.Headers[HeaderNames.WWWAuthenticate] = StringValues.Concat(
+                context.Response.Headers[HeaderNames.WWWAuthenticate],
+                challenges.ToArray()
+            );
         }
     }
 }

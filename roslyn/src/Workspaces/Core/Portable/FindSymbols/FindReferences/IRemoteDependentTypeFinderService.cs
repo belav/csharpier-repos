@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.FindSymbols
             ImmutableArray<ProjectId> projectsOpt,
             bool transitive,
             DependentTypesKind kind,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

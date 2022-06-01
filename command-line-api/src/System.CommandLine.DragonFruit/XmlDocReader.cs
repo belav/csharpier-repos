@@ -46,7 +46,10 @@ namespace System.CommandLine.DragonFruit
             }
         }
 
-        public bool TryGetMethodDescription(MethodInfo info, out CommandHelpMetadata commandHelpMetadata)
+        public bool TryGetMethodDescription(
+            MethodInfo info,
+            out CommandHelpMetadata commandHelpMetadata
+        )
         {
             commandHelpMetadata = null;
 
@@ -54,9 +57,7 @@ namespace System.CommandLine.DragonFruit
 
             sb.Append("M:");
             AppendTypeName(sb, info.DeclaringType);
-            sb.Append(".")
-              .Append(info.Name)
-              .Append("(");
+            sb.Append(".").Append(info.Name).Append("(");
 
             bool first = true;
             foreach (ParameterInfo param in info.GetParameters())
@@ -77,8 +78,9 @@ namespace System.CommandLine.DragonFruit
 
             string name = sb.ToString();
 
-            XElement member = _members.Elements("member")
-                                     .FirstOrDefault(m => string.Equals(m.Attribute("name")?.Value, name));
+            XElement member = _members
+                .Elements("member")
+                .FirstOrDefault(m => string.Equals(m.Attribute("name")?.Value, name));
 
             if (member == null)
             {
@@ -94,10 +96,23 @@ namespace System.CommandLine.DragonFruit
                     case "summary":
                         if (element.HasElements)
                         {
-                            var val = string.Join(string.Empty,
-                                element.Elements().Select(e =>
-                                    e.Value + (e.Name.ToString().ToLower() == "para" ? Environment.NewLine : string.Empty)));
-                            commandHelpMetadata.Description = val.TrimEnd(Environment.NewLine.ToCharArray());
+                            var val = string.Join(
+                                string.Empty,
+                                element
+                                    .Elements()
+                                    .Select(
+                                        e =>
+                                            e.Value
+                                            + (
+                                                e.Name.ToString().ToLower() == "para"
+                                                    ? Environment.NewLine
+                                                    : string.Empty
+                                            )
+                                    )
+                            );
+                            commandHelpMetadata.Description = val.TrimEnd(
+                                Environment.NewLine.ToCharArray()
+                            );
                         }
                         else
                         {
@@ -107,8 +122,10 @@ namespace System.CommandLine.DragonFruit
                     case "param":
                         var value = element.Attribute("name")?.Value;
                         if (value != null)
-                            commandHelpMetadata.ParameterDescriptions.Add(value,
-                                element.Value.Trim());
+                            commandHelpMetadata.ParameterDescriptions.Add(
+                                value,
+                                element.Value.Trim()
+                            );
                         break;
                 }
             }

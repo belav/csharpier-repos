@@ -16,7 +16,13 @@ namespace System.Reflection
     {
         public readonly struct AssemblyNameParts
         {
-            public AssemblyNameParts(string name, Version? version, string? cultureName, AssemblyNameFlags flags, byte[]? publicKeyOrToken)
+            public AssemblyNameParts(
+                string name,
+                Version? version,
+                string? cultureName,
+                AssemblyNameFlags flags,
+                byte[]? publicKeyOrToken
+            )
             {
                 _name = name;
                 _version = version;
@@ -74,7 +80,10 @@ namespace System.Reflection
             return new AssemblyNameParser(name).Parse();
         }
 
-        private void RecordNewSeenOrThrow(ref AttributeKind seenAttributes, AttributeKind newAttribute)
+        private void RecordNewSeenOrThrow(
+            ref AttributeKind seenAttributes,
+            AttributeKind newAttribute
+        )
         {
             if ((seenAttributes & newAttribute) != 0)
             {
@@ -145,10 +154,17 @@ namespace System.Reflection
                     pkt = ParsePKT(attributeValue, isToken: true);
                 }
 
-                if (attributeName.Equals("ProcessorArchitecture", StringComparison.OrdinalIgnoreCase))
+                if (
+                    attributeName.Equals(
+                        "ProcessorArchitecture",
+                        StringComparison.OrdinalIgnoreCase
+                    )
+                )
                 {
                     RecordNewSeenOrThrow(ref alreadySeen, AttributeKind.ProcessorArchitecture);
-                    flags |= (AssemblyNameFlags)(((int)ParseProcessorArchitecture(attributeValue)) << 4);
+                    flags |= (AssemblyNameFlags)(
+                        ((int)ParseProcessorArchitecture(attributeValue)) << 4
+                    );
                 }
 
                 if (attributeName.Equals("Retargetable", StringComparison.OrdinalIgnoreCase))
@@ -173,7 +189,9 @@ namespace System.Reflection
                     RecordNewSeenOrThrow(ref alreadySeen, AttributeKind.ContentType);
                     if (attributeValue.Equals("WindowsRuntime", StringComparison.OrdinalIgnoreCase))
                     {
-                        flags |= (AssemblyNameFlags)(((int)AssemblyContentType.WindowsRuntime) << 9);
+                        flags |= (AssemblyNameFlags)(
+                            ((int)AssemblyContentType.WindowsRuntime) << 9
+                        );
                     }
                     else
                     {
@@ -219,7 +237,12 @@ namespace System.Reflection
                 return new Version(versionNumbers[0], versionNumbers[1]);
             if (versionNumbers[3] == ushort.MaxValue)
                 return new Version(versionNumbers[0], versionNumbers[1], versionNumbers[2]);
-            return new Version(versionNumbers[0], versionNumbers[1], versionNumbers[2], versionNumbers[3]);
+            return new Version(
+                versionNumbers[0],
+                versionNumbers[1],
+                versionNumbers[2],
+                versionNumbers[3]
+            );
         }
 
         private static string ParseCulture(string attributeValue)
@@ -234,7 +257,10 @@ namespace System.Reflection
 
         private byte[] ParsePKT(string attributeValue, bool isToken)
         {
-            if (attributeValue.Equals("null", StringComparison.OrdinalIgnoreCase) || attributeValue == string.Empty)
+            if (
+                attributeValue.Equals("null", StringComparison.OrdinalIgnoreCase)
+                || attributeValue == string.Empty
+            )
                 return Array.Empty<byte>();
 
             if (isToken && attributeValue.Length != 8 * 2)
@@ -371,12 +397,12 @@ namespace System.Reflection
                 }
 
                 if (quoteChar != 0 && c == quoteChar)
-                    break;  // Terminate: Found closing quote of quoted string.
+                    break; // Terminate: Found closing quote of quoted string.
 
                 if (quoteChar == 0 && (c == ',' || c == '='))
                 {
                     _index--;
-                    break;  // Terminate: Found start of a new ',' or '=' token.
+                    break; // Terminate: Found start of a new ',' or '=' token.
                 }
 
                 if (quoteChar == 0 && (c == '\'' || c == '\"'))
@@ -417,7 +443,6 @@ namespace System.Reflection
                 c = GetNextChar();
             }
 
-
             if (quoteChar == 0)
             {
                 while (sb.Length > 0 && IsWhiteSpace(sb[sb.Length - 1]))
@@ -429,7 +454,7 @@ namespace System.Reflection
         }
 
         [DoesNotReturn]
-        private void ThrowInvalidAssemblyName()
-            => throw new FileLoadException(SR.InvalidAssemblyName, _input.ToString());
+        private void ThrowInvalidAssemblyName() =>
+            throw new FileLoadException(SR.InvalidAssemblyName, _input.ToString());
     }
 }

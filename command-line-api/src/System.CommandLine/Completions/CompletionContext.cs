@@ -23,7 +23,8 @@ namespace System.CommandLine.Completions
         /// The parse result for which completions are being requested.
         public ParseResult ParseResult { get; }
 
-        internal static CompletionContext Empty() => new TokenCompletionContext(ParseResult.Empty());
+        internal static CompletionContext Empty() =>
+            new TokenCompletionContext(ParseResult.Empty());
 
         /// <summary>
         /// Gets the text to be matched for completion, which can be used to filter a list of completions.
@@ -31,9 +32,7 @@ namespace System.CommandLine.Completions
         /// <param name="parseResult">A parse result.</param>
         /// <param name="position">The position within the raw input, if available, at which to provide completions.</param>
         /// <returns>A string containing the user-entered text to be matched for completions.</returns>
-        protected static string GetWordToComplete(
-            ParseResult parseResult,
-            int? position = null)
+        protected static string GetWordToComplete(ParseResult parseResult, int? position = null)
         {
             Token? lastToken = parseResult.Tokens.LastOrDefault(t => t.Type != TokenType.Directive);
 
@@ -63,8 +62,7 @@ namespace System.CommandLine.Completions
 
             if (string.IsNullOrWhiteSpace(rawInput))
             {
-                if (parseResult.UnmatchedTokens.Count > 0 ||
-                    lastToken?.Type == TokenType.Argument)
+                if (parseResult.UnmatchedTokens.Count > 0 || lastToken?.Type == TokenType.Argument)
                 {
                     return textToMatch ?? "";
                 }
@@ -75,8 +73,8 @@ namespace System.CommandLine.Completions
 
                 var textAfterCursor = rawInput.Substring(position.Value);
 
-                return textBeforeCursor.Split(' ').LastOrDefault() +
-                       textAfterCursor.Split(' ').FirstOrDefault();
+                return textBeforeCursor.Split(' ').LastOrDefault()
+                    + textAfterCursor.Split(' ').FirstOrDefault();
             }
 
             return "";

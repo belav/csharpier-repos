@@ -35,7 +35,7 @@ public enum CommandSource
 
     /// <summary>
     ///     The command was generated from a call to <see cref="RelationalQueryableExtensions.FromSqlRaw{TEntity}"/> or
-    ///     <see cref="RelationalQueryableExtensions.FromSqlInterpolated{TEntity}"/> 
+    ///     <see cref="RelationalQueryableExtensions.FromSqlInterpolated{TEntity}"/>
     /// </summary>
     FromSqlQuery,
 

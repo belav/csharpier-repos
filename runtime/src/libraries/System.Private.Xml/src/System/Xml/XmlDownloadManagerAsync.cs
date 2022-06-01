@@ -11,12 +11,26 @@ namespace System.Xml
 {
     internal sealed partial class XmlDownloadManager
     {
-        internal static Task<Stream> GetStreamAsync(Uri uri, ICredentials? credentials, IWebProxy? proxy)
+        internal static Task<Stream> GetStreamAsync(
+            Uri uri,
+            ICredentials? credentials,
+            IWebProxy? proxy
+        )
         {
             if (uri.Scheme == "file")
             {
                 Uri fileUri = uri;
-                return Task.Run<Stream>(() => new FileStream(fileUri.LocalPath, FileMode.Open, FileAccess.Read, FileShare.Read, 1, useAsync: true));
+                return Task.Run<Stream>(
+                    () =>
+                        new FileStream(
+                            fileUri.LocalPath,
+                            FileMode.Open,
+                            FileAccess.Read,
+                            FileShare.Read,
+                            1,
+                            useAsync: true
+                        )
+                );
             }
             else
             {
@@ -24,7 +38,11 @@ namespace System.Xml
             }
         }
 
-        private static async Task<Stream> GetNonFileStreamAsync(Uri uri, ICredentials? credentials, IWebProxy? proxy)
+        private static async Task<Stream> GetNonFileStreamAsync(
+            Uri uri,
+            ICredentials? credentials,
+            IWebProxy? proxy
+        )
         {
             var handler = new HttpClientHandler();
             using (var client = new HttpClient(handler))

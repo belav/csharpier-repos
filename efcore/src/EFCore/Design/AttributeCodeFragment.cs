@@ -35,6 +35,5 @@ public class AttributeCodeFragment
     ///     Gets the method call's arguments.
     /// </summary>
     /// <value> The method call's arguments. </value>
-    public virtual IReadOnlyList<object> Arguments
-        => _arguments;
+    public virtual IReadOnlyList<object> Arguments => _arguments;
 }

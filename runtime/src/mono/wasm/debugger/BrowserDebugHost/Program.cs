@@ -23,21 +23,29 @@ namespace Microsoft.WebAssembly.Diagnostics
 
             using ILoggerFactory loggerFactory = LoggerFactory.Create(builder =>
             {
-                builder.AddSimpleConsole(options =>
-                        {
-                            options.TimestampFormat = "[HH:mm:ss] ";
-                        })
-                        .AddFilter("DevToolsProxy", LogLevel.Information)
-                        .AddFilter("FirefoxMonoProxy", LogLevel.Information)
-                        .AddFilter(null, LogLevel.Warning);
+                builder
+                    .AddSimpleConsole(options =>
+                    {
+                        options.TimestampFormat = "[HH:mm:ss] ";
+                    })
+                    .AddFilter("DevToolsProxy", LogLevel.Information)
+                    .AddFilter("FirefoxMonoProxy", LogLevel.Information)
+                    .AddFilter(null, LogLevel.Warning);
 
                 if (!string.IsNullOrEmpty(options.LogPath))
-                    builder.AddFile(Path.Combine(options.LogPath, "proxy.log"),
-                                minimumLevel: LogLevel.Trace,
-                                outputTemplate: "{Timestamp:o} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}");
+                    builder.AddFile(
+                        Path.Combine(options.LogPath, "proxy.log"),
+                        minimumLevel: LogLevel.Trace,
+                        outputTemplate: "{Timestamp:o} [{Level:u3}] {SourceContext}: {Message}{NewLine}{Exception}"
+                    );
             });
 
-            await DebugProxyHost.RunDebugProxyAsync(options, args, loggerFactory, CancellationToken.None);
+            await DebugProxyHost.RunDebugProxyAsync(
+                options,
+                args,
+                loggerFactory,
+                CancellationToken.None
+            );
         }
     }
 }

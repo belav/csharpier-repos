@@ -22,7 +22,9 @@ namespace System.Diagnostics
             {
                 EnsureState(State.HaveNonExitedId);
                 Interop.libproc.rusage_info_v3 info = Interop.libproc.proc_pid_rusage(_processId);
-                return new TimeSpan(Convert.ToInt64(info.ri_system_time / NanosecondsTo100NanosecondsFactor));
+                return new TimeSpan(
+                    Convert.ToInt64(info.ri_system_time / NanosecondsTo100NanosecondsFactor)
+                );
             }
         }
 
@@ -37,7 +39,12 @@ namespace System.Diagnostics
                 if (info == null)
                     throw new Win32Exception(SR.ProcessInformationUnavailable);
 
-                DateTime startTime = DateTime.UnixEpoch + TimeSpan.FromSeconds(info.Value.pbsd.pbi_start_tvsec + info.Value.pbsd.pbi_start_tvusec / (double)MicrosecondsToSecondsFactor);
+                DateTime startTime =
+                    DateTime.UnixEpoch
+                    + TimeSpan.FromSeconds(
+                        info.Value.pbsd.pbi_start_tvsec
+                            + info.Value.pbsd.pbi_start_tvusec / (double)MicrosecondsToSecondsFactor
+                    );
 
                 // The return value is expected to be in the local time zone.
                 return startTime.ToLocalTime();
@@ -64,7 +71,12 @@ namespace System.Diagnostics
             {
                 EnsureState(State.HaveNonExitedId);
                 Interop.libproc.rusage_info_v3 info = Interop.libproc.proc_pid_rusage(_processId);
-                return new TimeSpan(Convert.ToInt64((info.ri_system_time + info.ri_user_time) / NanosecondsTo100NanosecondsFactor));
+                return new TimeSpan(
+                    Convert.ToInt64(
+                        (info.ri_system_time + info.ri_user_time)
+                            / NanosecondsTo100NanosecondsFactor
+                    )
+                );
             }
         }
 
@@ -81,7 +93,9 @@ namespace System.Diagnostics
             {
                 EnsureState(State.HaveNonExitedId);
                 Interop.libproc.rusage_info_v3 info = Interop.libproc.proc_pid_rusage(_processId);
-                return new TimeSpan(Convert.ToInt64(info.ri_user_time / NanosecondsTo100NanosecondsFactor));
+                return new TimeSpan(
+                    Convert.ToInt64(info.ri_user_time / NanosecondsTo100NanosecondsFactor)
+                );
             }
         }
 

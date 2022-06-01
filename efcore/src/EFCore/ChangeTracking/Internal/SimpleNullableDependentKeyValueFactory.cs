@@ -24,7 +24,8 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : IDependentKeyValueFa
     /// </summary>
     public SimpleNullableDependentKeyValueFactory(
         IProperty property,
-        PropertyAccessors propertyAccessors)
+        PropertyAccessors propertyAccessors
+    )
     {
         _propertyAccessors = propertyAccessors;
         EqualityComparer = property.CreateKeyEqualityComparer<TKey>();
@@ -63,8 +64,11 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : IDependentKeyValueFa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromCurrentValues(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(((Func<IUpdateEntry, TKey?>)_propertyAccessors.CurrentValueGetter)(entry), out key);
+    public virtual bool TryCreateFromCurrentValues(IUpdateEntry entry, out TKey key) =>
+        HandleNullableValue(
+            ((Func<IUpdateEntry, TKey?>)_propertyAccessors.CurrentValueGetter)(entry),
+            out key
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,9 +76,16 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : IDependentKeyValueFa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(
-            ((Func<IUpdateEntry, TKey?>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)(entry), out key);
+    public virtual bool TryCreateFromPreStoreGeneratedCurrentValues(
+        IUpdateEntry entry,
+        out TKey key
+    ) =>
+        HandleNullableValue(
+            ((Func<IUpdateEntry, TKey?>)_propertyAccessors.PreStoreGeneratedCurrentValueGetter)(
+                entry
+            ),
+            out key
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -82,8 +93,11 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : IDependentKeyValueFa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromOriginalValues(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(((Func<IUpdateEntry, TKey?>)_propertyAccessors.OriginalValueGetter!)(entry), out key);
+    public virtual bool TryCreateFromOriginalValues(IUpdateEntry entry, out TKey key) =>
+        HandleNullableValue(
+            ((Func<IUpdateEntry, TKey?>)_propertyAccessors.OriginalValueGetter!)(entry),
+            out key
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -91,8 +105,11 @@ public class SimpleNullableDependentKeyValueFactory<TKey> : IDependentKeyValueFa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, out TKey key)
-        => HandleNullableValue(((Func<IUpdateEntry, TKey?>)_propertyAccessors.RelationshipSnapshotGetter)(entry), out key);
+    public virtual bool TryCreateFromRelationshipSnapshot(IUpdateEntry entry, out TKey key) =>
+        HandleNullableValue(
+            ((Func<IUpdateEntry, TKey?>)_propertyAccessors.RelationshipSnapshotGetter)(entry),
+            out key
+        );
 
     private static bool HandleNullableValue(TKey? value, out TKey key)
     {

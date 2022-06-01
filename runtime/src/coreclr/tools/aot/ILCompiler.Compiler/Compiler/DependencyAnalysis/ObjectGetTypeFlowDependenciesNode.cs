@@ -33,7 +33,7 @@ namespace ILCompiler.DependencyAnalysis
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {
             var mdManager = (UsageBasedMetadataManager)factory.MetadataManager;
-            
+
             // We don't mark any members on interfaces - these nodes are only used as conditional dependencies
             // of other nodes. Calling `object.GetType()` on something typed as an interface will return
             // something that implements the interface, not the interface itself. We're not reflecting on the
@@ -41,15 +41,27 @@ namespace ILCompiler.DependencyAnalysis
             if (_type.IsInterface)
                 return Array.Empty<DependencyListEntry>();
 
-            return Dataflow.ReflectionMethodBodyScanner.ProcessTypeGetTypeDataflow(factory, mdManager.FlowAnnotations, mdManager.Logger, _type);
+            return Dataflow.ReflectionMethodBodyScanner.ProcessTypeGetTypeDataflow(
+                factory,
+                mdManager.FlowAnnotations,
+                mdManager.Logger,
+                _type
+            );
         }
 
         public override bool InterestingForDynamicDependencyAnalysis => false;
         public override bool HasDynamicDependencies => false;
         public override bool HasConditionalStaticDependencies => false;
         public override bool StaticDependenciesAreComputed => true;
-        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
-        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
-        
+
+        public override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
+
+        public override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
     }
 }

@@ -18,15 +18,17 @@ public class Program
     public static int Main(string[] args)
     {
         bool warmup = new Foo().IsValid;
-        CatchIgnore(() =>
-        CatchRethrow(() =>
-        {
-            IFoo[] foos = {new Foo(), null};
-            foreach (var foo in foos)
-            {
-                bool check = foo.IsValid;
-            }
-        }));
+        CatchIgnore(
+            () =>
+                CatchRethrow(() =>
+                {
+                    IFoo[] foos = { new Foo(), null };
+                    foreach (var foo in foos)
+                    {
+                        bool check = foo.IsValid;
+                    }
+                })
+        );
 
         return 100;
     }

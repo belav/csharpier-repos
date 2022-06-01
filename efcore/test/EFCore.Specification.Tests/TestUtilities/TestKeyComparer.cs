@@ -14,8 +14,8 @@ public class TestKeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IReadO
         _compareAnnotations = compareAnnotations;
     }
 
-    public int Compare(IReadOnlyKey x, IReadOnlyKey y)
-        => PropertyListComparer.Instance.Compare(x.Properties, y.Properties);
+    public int Compare(IReadOnlyKey x, IReadOnlyKey y) =>
+        PropertyListComparer.Instance.Compare(x.Properties, y.Properties);
 
     public bool Equals(IReadOnlyKey x, IReadOnlyKey y)
     {
@@ -27,9 +27,13 @@ public class TestKeyComparer : IEqualityComparer<IReadOnlyKey>, IComparer<IReadO
         return y == null
             ? false
             : PropertyListComparer.Instance.Equals(x.Properties, y.Properties)
-            && (!_compareAnnotations || x.GetAnnotations().SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance));
+                && (
+                    !_compareAnnotations
+                    || x.GetAnnotations()
+                        .SequenceEqual(y.GetAnnotations(), AnnotationComparer.Instance)
+                );
     }
 
-    public int GetHashCode(IReadOnlyKey obj)
-        => PropertyListComparer.Instance.GetHashCode(obj.Properties);
+    public int GetHashCode(IReadOnlyKey obj) =>
+        PropertyListComparer.Instance.GetHashCode(obj.Properties);
 }

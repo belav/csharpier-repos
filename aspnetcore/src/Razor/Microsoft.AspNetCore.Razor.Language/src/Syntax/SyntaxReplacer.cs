@@ -12,8 +12,8 @@ internal static class SyntaxReplacer
     internal static SyntaxNode Replace<TNode>(
         SyntaxNode root,
         IEnumerable<TNode> nodes = null,
-        Func<TNode, TNode, SyntaxNode> computeReplacementNode = null)
-        where TNode : SyntaxNode
+        Func<TNode, TNode, SyntaxNode> computeReplacementNode = null
+    ) where TNode : SyntaxNode
     {
         var replacer = new Replacer<TNode>(nodes, computeReplacementNode);
 
@@ -27,14 +27,27 @@ internal static class SyntaxReplacer
         }
     }
 
-    internal static SyntaxNode ReplaceNodeInList(SyntaxNode root, SyntaxNode originalNode, IEnumerable<SyntaxNode> newNodes)
+    internal static SyntaxNode ReplaceNodeInList(
+        SyntaxNode root,
+        SyntaxNode originalNode,
+        IEnumerable<SyntaxNode> newNodes
+    )
     {
         return new NodeListEditor(originalNode, newNodes, ListEditKind.Replace).Visit(root);
     }
 
-    internal static SyntaxNode InsertNodeInList(SyntaxNode root, SyntaxNode nodeInList, IEnumerable<SyntaxNode> nodesToInsert, bool insertBefore)
+    internal static SyntaxNode InsertNodeInList(
+        SyntaxNode root,
+        SyntaxNode nodeInList,
+        IEnumerable<SyntaxNode> nodesToInsert,
+        bool insertBefore
+    )
     {
-        return new NodeListEditor(nodeInList, nodesToInsert, insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter).Visit(root);
+        return new NodeListEditor(
+            nodeInList,
+            nodesToInsert,
+            insertBefore ? ListEditKind.InsertBefore : ListEditKind.InsertAfter
+        ).Visit(root);
     }
 
     private class Replacer<TNode> : SyntaxRewriter where TNode : SyntaxNode
@@ -44,7 +57,10 @@ internal static class SyntaxReplacer
         private readonly HashSet<TextSpan> _spanSet;
         private readonly TextSpan _totalSpan;
 
-        public Replacer(IEnumerable<TNode> nodes, Func<TNode, TNode, SyntaxNode> computeReplacementNode)
+        public Replacer(
+            IEnumerable<TNode> nodes,
+            Func<TNode, TNode, SyntaxNode> computeReplacementNode
+        )
         {
             _computeReplacementNode = computeReplacementNode;
             _nodeSet = nodes != null ? new HashSet<SyntaxNode>(nodes) : new HashSet<SyntaxNode>();
@@ -132,7 +148,8 @@ internal static class SyntaxReplacer
         public NodeListEditor(
             SyntaxNode originalNode,
             IEnumerable<SyntaxNode> replacementNodes,
-            ListEditKind editKind)
+            ListEditKind editKind
+        )
         {
             _elementSpan = originalNode.Span;
             _originalNode = originalNode;

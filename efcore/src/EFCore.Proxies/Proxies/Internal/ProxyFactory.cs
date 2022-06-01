@@ -19,7 +19,8 @@ public class ProxyFactory : IProxyFactory
     private static readonly Type ProxyLazyLoaderInterface = typeof(IProxyLazyLoader);
     private static readonly Type NotifyPropertyChangedInterface = typeof(INotifyPropertyChanged);
     private static readonly Type NotifyPropertyChangingInterface = typeof(INotifyPropertyChanging);
-    private static readonly ProxyGenerationOptions GenerationOptions = new(new ClonelessProxyGenerationHook());
+    private static readonly ProxyGenerationOptions GenerationOptions =
+        new(new ClonelessProxyGenerationHook());
 
     private readonly ProxyGenerator _generator = new();
 
@@ -29,20 +30,21 @@ public class ProxyFactory : IProxyFactory
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual object Create(
-        DbContext context,
-        Type type,
-        params object[] constructorArguments)
+    public virtual object Create(DbContext context, Type type, params object[] constructorArguments)
     {
         var entityType = context.Model.FindRuntimeEntityType(type);
         if (entityType == null)
         {
             if (context.Model.IsShared(type))
             {
-                throw new InvalidOperationException(ProxiesStrings.EntityTypeNotFoundShared(type.ShortDisplayName()));
+                throw new InvalidOperationException(
+                    ProxiesStrings.EntityTypeNotFoundShared(type.ShortDisplayName())
+                );
             }
 
-            throw new InvalidOperationException(CoreStrings.EntityTypeNotFound(type.ShortDisplayName()));
+            throw new InvalidOperationException(
+                CoreStrings.EntityTypeNotFound(type.ShortDisplayName())
+            );
         }
 
         return CreateProxy(context, entityType, constructorArguments);
@@ -56,11 +58,13 @@ public class ProxyFactory : IProxyFactory
     /// </summary>
     public virtual Type CreateProxyType(
         ProxiesOptionsExtension options,
-        IReadOnlyEntityType entityType)
-        => _generator.ProxyBuilder.CreateClassProxyType(
+        IReadOnlyEntityType entityType
+    ) =>
+        _generator.ProxyBuilder.CreateClassProxyType(
             entityType.ClrType,
             GetInterfacesToProxy(options, entityType.ClrType),
-                GenerationOptions);
+            GenerationOptions
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -72,9 +76,12 @@ public class ProxyFactory : IProxyFactory
         DbContext context,
         IEntityType entityType,
         ILazyLoader loader,
-        object[] constructorArguments)
+        object[] constructorArguments
+    )
     {
-        var options = context.GetService<IDbContextOptions>().FindExtension<ProxiesOptionsExtension>();
+        var options = context
+            .GetService<IDbContextOptions>()
+            .FindExtension<ProxiesOptionsExtension>();
         if (options == null)
         {
             throw new InvalidOperationException(ProxiesStrings.ProxyServicesMissing);
@@ -84,20 +91,27 @@ public class ProxyFactory : IProxyFactory
             options,
             entityType,
             context.GetService<ILazyLoader>(),
-            constructorArguments);
+            constructorArguments
+        );
     }
 
     private object CreateLazyLoadingProxy(
         ProxiesOptionsExtension options,
         IEntityType entityType,
         ILazyLoader loader,
-        object[] constructorArguments)
-        => _generator.CreateClassProxy(
+        object[] constructorArguments
+    ) =>
+        _generator.CreateClassProxy(
             entityType.ClrType,
             GetInterfacesToProxy(options, entityType.ClrType),
-                GenerationOptions,
+            GenerationOptions,
             constructorArguments,
-            GetNotifyChangeInterceptors(options, entityType, new LazyLoadingInterceptor(entityType, loader)));
+            GetNotifyChangeInterceptors(
+                options,
+                entityType,
+                new LazyLoadingInterceptor(entityType, loader)
+            )
+        );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -108,9 +122,12 @@ public class ProxyFactory : IProxyFactory
     public virtual object CreateProxy(
         DbContext context,
         IEntityType entityType,
-        object[] constructorArguments)
+        object[] constructorArguments
+    )
     {
-        var options = context.GetService<IDbContextOptions>().FindExtension<ProxiesOptionsExtension>();
+        var options = context
+            .GetService<IDbContextOptions>()
+            .FindExtension<ProxiesOptionsExtension>();
         if (options == null)
         {
             throw new InvalidOperationException(ProxiesStrings.ProxyServicesMissing);
@@ -122,29 +139,27 @@ public class ProxyFactory : IProxyFactory
                 options,
                 entityType,
                 context.GetService<ILazyLoader>(),
-                constructorArguments);
+                constructorArguments
+            );
         }
 
-        return CreateProxy(
-            options,
-            entityType,
-            constructorArguments);
+        return CreateProxy(options, entityType, constructorArguments);
     }
 
     private object CreateProxy(
         ProxiesOptionsExtension options,
         IEntityType entityType,
-        object[] constructorArguments)
-        => _generator.CreateClassProxy(
+        object[] constructorArguments
+    ) =>
+        _generator.CreateClassProxy(
             entityType.ClrType,
             GetInterfacesToProxy(options, entityType.ClrType),
-                GenerationOptions,
+            GenerationOptions,
             constructorArguments,
-            GetNotifyChangeInterceptors(options, entityType));
+            GetNotifyChangeInterceptors(options, entityType)
+        );
 
-    private static Type[] GetInterfacesToProxy(
-        ProxiesOptionsExtension options,
-        Type type)
+    private static Type[] GetInterfacesToProxy(ProxiesOptionsExtension options, Type type)
     {
         var interfacesToProxy = new List<Type>();
 
@@ -172,7 +187,8 @@ public class ProxyFactory : IProxyFactory
     private static IInterceptor[] GetNotifyChangeInterceptors(
         ProxiesOptionsExtension options,
         IEntityType entityType,
-        LazyLoadingInterceptor? lazyLoadingInterceptor = null)
+        LazyLoadingInterceptor? lazyLoadingInterceptor = null
+    )
     {
         var interceptors = new List<IInterceptor>();
 
@@ -190,7 +206,9 @@ public class ProxyFactory : IProxyFactory
 
             if (!NotifyPropertyChangingInterface.IsAssignableFrom(entityType.ClrType))
             {
-                interceptors.Add(new PropertyChangingInterceptor(entityType, options.CheckEquality));
+                interceptors.Add(
+                    new PropertyChangingInterceptor(entityType, options.CheckEquality)
+                );
             }
         }
 
@@ -199,8 +217,7 @@ public class ProxyFactory : IProxyFactory
 
     private sealed class ClonelessProxyGenerationHook : AllMethodsHook
     {
-        public override bool ShouldInterceptMethod(Type type, MethodInfo methodInfo)
-            => methodInfo.Name != "<Clone>$"
-                && base.ShouldInterceptMethod(type, methodInfo);
+        public override bool ShouldInterceptMethod(Type type, MethodInfo methodInfo) =>
+            methodInfo.Name != "<Clone>$" && base.ShouldInterceptMethod(type, methodInfo);
     }
 }

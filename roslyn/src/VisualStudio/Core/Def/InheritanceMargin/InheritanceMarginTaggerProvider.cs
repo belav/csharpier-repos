@@ -35,7 +35,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
     [TagType(typeof(InheritanceMarginTag))]
     [ContentType(ContentTypeNames.RoslynContentType)]
     [Name(nameof(InheritanceMarginTaggerProvider))]
-    internal sealed class InheritanceMarginTaggerProvider : AsynchronousViewTaggerProvider<InheritanceMarginTag>
+    internal sealed class InheritanceMarginTaggerProvider
+        : AsynchronousViewTaggerProvider<InheritanceMarginTag>
     {
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
@@ -43,18 +44,21 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             IThreadingContext threadingContext,
             IGlobalOptionService globalOptions,
             [Import(AllowDefault = true)] ITextBufferVisibilityTracker? visibilityTracker,
-            IAsynchronousOperationListenerProvider listenerProvider)
+            IAsynchronousOperationListenerProvider listenerProvider
+        )
             : base(
                 threadingContext,
                 globalOptions,
                 visibilityTracker,
-                listenerProvider.GetListener(FeatureAttribute.InheritanceMargin))
-        {
-        }
+                listenerProvider.GetListener(FeatureAttribute.InheritanceMargin)
+            ) { }
 
         protected override TaggerDelay EventChangeDelay => TaggerDelay.OnIdle;
 
-        protected override ITaggerEventSource CreateEventSource(ITextView? textView, ITextBuffer subjectBuffer)
+        protected override ITaggerEventSource CreateEventSource(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        )
         {
             Contract.ThrowIfNull(textView);
             // Because we use frozen-partial documents for semantic classification, we may end up with incomplete
@@ -63,16 +67,26 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             // Note: Also generate tags when FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin is changed,
             // because we want to refresh the glyphs in indicator margin.
             return new CompilationAvailableTaggerEventSource(
-               subjectBuffer,
-               AsyncListener,
-               TaggerEventSources.OnWorkspaceChanged(subjectBuffer, AsyncListener),
-               TaggerEventSources.OnViewSpanChanged(ThreadingContext, textView),
-               TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer),
-               TaggerEventSources.OnOptionChanged(subjectBuffer, FeatureOnOffOptions.ShowInheritanceMargin),
-               TaggerEventSources.OnOptionChanged(subjectBuffer, FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin));
+                subjectBuffer,
+                AsyncListener,
+                TaggerEventSources.OnWorkspaceChanged(subjectBuffer, AsyncListener),
+                TaggerEventSources.OnViewSpanChanged(ThreadingContext, textView),
+                TaggerEventSources.OnDocumentActiveContextChanged(subjectBuffer),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    FeatureOnOffOptions.ShowInheritanceMargin
+                ),
+                TaggerEventSources.OnOptionChanged(
+                    subjectBuffer,
+                    FeatureOnOffOptions.InheritanceMarginCombinedWithIndicatorMargin
+                )
+            );
         }
 
-        protected override IEnumerable<SnapshotSpan> GetSpansToTag(ITextView? textView, ITextBuffer subjectBuffer)
+        protected override IEnumerable<SnapshotSpan> GetSpansToTag(
+            ITextView? textView,
+            ITextBuffer subjectBuffer
+        )
         {
             this.ThreadingContext.ThrowIfNotOnUIThread();
             Contract.ThrowIfNull(textView);
@@ -90,7 +104,8 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             TaggerContext<InheritanceMarginTag> context,
             DocumentSnapshotSpan spanToTag,
             int? caretPosition,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var document = spanToTag.Document;
             if (document == null)
@@ -99,14 +114,23 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
             if (document.Project.Solution.Workspace.Kind == WorkspaceKind.Interactive)
                 return;
 
-            var inheritanceMarginInfoService = document.GetLanguageService<IInheritanceMarginService>();
+            var inheritanceMarginInfoService =
+                document.GetLanguageService<IInheritanceMarginService>();
             if (inheritanceMarginInfoService == null)
                 return;
 
-            if (GlobalOptions.GetOption(FeatureOnOffOptions.ShowInheritanceMargin, document.Project.Language) == false)
+            if (
+                GlobalOptions.GetOption(
+                    FeatureOnOffOptions.ShowInheritanceMargin,
+                    document.Project.Language
+                ) == false
+            )
                 return;
 
-            var includeGlobalImports = GlobalOptions.GetOption(FeatureOnOffOptions.InheritanceMarginIncludeGlobalImports, document.Project.Language);
+            var includeGlobalImports = GlobalOptions.GetOption(
+                FeatureOnOffOptions.InheritanceMarginIncludeGlobalImports,
+                document.Project.Language
+            );
 
             // Use FrozenSemantics Version of document to get the semantics ready, therefore we could have faster
             // response. (Since the full load might take a long time)
@@ -115,11 +139,14 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
             var spanToSearch = spanToTag.SnapshotSpan.Span.ToTextSpan();
             var stopwatch = SharedStopwatch.StartNew();
-            var inheritanceMemberItems = await inheritanceMarginInfoService.GetInheritanceMemberItemsAsync(
-                document,
-                spanToSearch,
-                includeGlobalImports,
-                cancellationToken).ConfigureAwait(false);
+            var inheritanceMemberItems = await inheritanceMarginInfoService
+                .GetInheritanceMemberItemsAsync(
+                    document,
+                    spanToSearch,
+                    includeGlobalImports,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             var elapsed = stopwatch.Elapsed;
 
             if (inheritanceMemberItems.IsEmpty)
@@ -144,9 +171,16 @@ namespace Microsoft.VisualStudio.LanguageServices.Implementation.InheritanceMarg
 
                 var line = snapshot.GetLineFromLineNumber(lineNumber);
                 // We only care about the line, so just tag the start.
-                context.AddTag(new TagSpan<InheritanceMarginTag>(
-                    new SnapshotSpan(snapshot, line.Start, length: 0),
-                    new InheritanceMarginTag(document.Project.Solution.Workspace, lineNumber, membersOnTheLineArray)));
+                context.AddTag(
+                    new TagSpan<InheritanceMarginTag>(
+                        new SnapshotSpan(snapshot, line.Start, length: 0),
+                        new InheritanceMarginTag(
+                            document.Project.Solution.Workspace,
+                            lineNumber,
+                            membersOnTheLineArray
+                        )
+                    )
+                );
             }
         }
     }

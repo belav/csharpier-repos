@@ -18,7 +18,11 @@ namespace System.Text.RegularExpressions
 
         private static readonly char[] s_specialCasingSetBehaviors = new char[5]
         {
-            'I', 'i', '\u0130', 'I', '\u0131'
+            'I',
+            'i',
+            '\u0130',
+            'I',
+            '\u0131'
         };
 
         /// <summary>
@@ -33,7 +37,12 @@ namespace System.Text.RegularExpressions
         /// <param name="equivalences">If <paramref name="c"/> is involved in case conversion, then equivalences will contain the
         /// span of character which should be considered equal to <paramref name="c"/> in a case-insensitive comparison.</param>
         /// <returns><see langword="true"/> if <paramref name="c"/> is involved in case conversion; otherwise, <see langword="false"/></returns>
-        public static bool TryFindCaseEquivalencesForCharWithIBehavior(char c, CultureInfo culture, ref RegexCaseBehavior mappingBehavior, out ReadOnlySpan<char> equivalences)
+        public static bool TryFindCaseEquivalencesForCharWithIBehavior(
+            char c,
+            CultureInfo culture,
+            ref RegexCaseBehavior mappingBehavior,
+            out ReadOnlySpan<char> equivalences
+        )
         {
             if ((c | 0x20) == 'i' || (c | 0x01) == '\u0131')
             {
@@ -45,14 +54,23 @@ namespace System.Text.RegularExpressions
                 equivalences = c switch
                 {
                     // Invariant mappings
-                    'i' or 'I' when mappingBehavior is RegexCaseBehavior.Invariant => s_specialCasingSetBehaviors.AsSpan(0, 2), // 'I' and 'i'
+                    'i'
+                    or 'I' when mappingBehavior is RegexCaseBehavior.Invariant
+                        => s_specialCasingSetBehaviors.AsSpan(0, 2), // 'I' and 'i'
 
                     // Non-Turkish mappings
-                    'i' or 'I' or '\u0130' when mappingBehavior is RegexCaseBehavior.NonTurkish => s_specialCasingSetBehaviors.AsSpan(0, 3), // 'I', 'i', and '\u0130'
+                    'i'
+                    or 'I'
+                    or '\u0130' when mappingBehavior is RegexCaseBehavior.NonTurkish
+                        => s_specialCasingSetBehaviors.AsSpan(0, 3), // 'I', 'i', and '\u0130'
 
                     // Turkish mappings
-                    'I' or '\u0131' when mappingBehavior is RegexCaseBehavior.Turkish => s_specialCasingSetBehaviors.AsSpan(3, 2), // 'I' and '\u0131'
-                    'i' or '\u0130' when mappingBehavior is RegexCaseBehavior.Turkish => s_specialCasingSetBehaviors.AsSpan(1, 2), // 'i' and '\u0130'
+                    'I'
+                    or '\u0131' when mappingBehavior is RegexCaseBehavior.Turkish
+                        => s_specialCasingSetBehaviors.AsSpan(3, 2), // 'I' and '\u0131'
+                    'i'
+                    or '\u0130' when mappingBehavior is RegexCaseBehavior.Turkish
+                        => s_specialCasingSetBehaviors.AsSpan(1, 2), // 'i' and '\u0130'
 
                     // Default
                     _ => default
@@ -73,10 +91,11 @@ namespace System.Text.RegularExpressions
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public static RegexCaseBehavior GetRegexBehavior(CultureInfo culture)
         {
-            return
-                culture.Name.Length == 0 ? RegexCaseBehavior.Invariant :
-                IsTurkishOrAzeri(culture.Name) ? RegexCaseBehavior.Turkish :
-                RegexCaseBehavior.NonTurkish;
+            return culture.Name.Length == 0
+                ? RegexCaseBehavior.Invariant
+                : IsTurkishOrAzeri(culture.Name)
+                    ? RegexCaseBehavior.Turkish
+                    : RegexCaseBehavior.NonTurkish;
 
             static bool IsTurkishOrAzeri(string cultureName)
             {
@@ -88,9 +107,11 @@ namespace System.Text.RegularExpressions
                     switch (cultureName[0])
                     {
                         case 't':
-                            return cultureName[1] == 'r' && (cultureName.Length == 2 || cultureName[2] == '-');
+                            return cultureName[1] == 'r'
+                                && (cultureName.Length == 2 || cultureName[2] == '-');
                         case 'a':
-                            return cultureName[1] == 'z' && (cultureName.Length == 2 || cultureName[2] == '-');
+                            return cultureName[1] == 'z'
+                                && (cultureName.Length == 2 || cultureName[2] == '-');
                     }
                 }
                 return false;
@@ -132,7 +153,10 @@ namespace System.Text.RegularExpressions
         /// equivalent in a case comparison for 'A'.
         /// </remarks>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        private static bool TryFindCaseEquivalencesForChar(char c, out ReadOnlySpan<char> equivalences)
+        private static bool TryFindCaseEquivalencesForChar(
+            char c,
+            out ReadOnlySpan<char> equivalences
+        )
         {
             // Dividing by CharactersPerRange, in order to get the range index for c
             Debug.Assert((c / CharactersPerRange) < 0xFF);

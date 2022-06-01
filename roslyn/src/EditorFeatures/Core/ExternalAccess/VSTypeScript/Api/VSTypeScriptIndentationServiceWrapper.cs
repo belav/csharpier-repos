@@ -15,17 +15,29 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript.Api
     {
         private readonly IIndentationService _underlyingObject;
 
-        private VSTypeScriptIndentationServiceWrapper(IIndentationService underlyingObject)
-            => _underlyingObject = underlyingObject;
+        private VSTypeScriptIndentationServiceWrapper(IIndentationService underlyingObject) =>
+            _underlyingObject = underlyingObject;
 
-        public static VSTypeScriptIndentationServiceWrapper Create(Document document)
-            => new(document.Project.LanguageServices.GetRequiredService<IIndentationService>());
+        public static VSTypeScriptIndentationServiceWrapper Create(Document document) =>
+            new(document.Project.LanguageServices.GetRequiredService<IIndentationService>());
 
-        [SuppressMessage("Style", "VSTHRD200:Use \"Async\" suffix for async methods", Justification = "External access API.")]
-        public async Task<VSTypeScriptIndentationResultWrapper?> GetDesiredIndentation(Document document, int lineNumber, CancellationToken cancellationToken)
+        [SuppressMessage(
+            "Style",
+            "VSTHRD200:Use \"Async\" suffix for async methods",
+            Justification = "External access API."
+        )]
+        public async Task<VSTypeScriptIndentationResultWrapper?> GetDesiredIndentation(
+            Document document,
+            int lineNumber,
+            CancellationToken cancellationToken
+        )
         {
-            var result = await _underlyingObject.GetDesiredIndentation(document, lineNumber, cancellationToken).ConfigureAwait(false);
-            return result.HasValue ? new VSTypeScriptIndentationResultWrapper(result.Value) : (VSTypeScriptIndentationResultWrapper?)null;
+            var result = await _underlyingObject
+                .GetDesiredIndentation(document, lineNumber, cancellationToken)
+                .ConfigureAwait(false);
+            return result.HasValue
+                ? new VSTypeScriptIndentationResultWrapper(result.Value)
+                : (VSTypeScriptIndentationResultWrapper?)null;
         }
     }
 }

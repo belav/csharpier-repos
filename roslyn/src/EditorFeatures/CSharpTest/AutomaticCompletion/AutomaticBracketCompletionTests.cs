@@ -44,7 +44,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void InvalidLocation_String()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     string s = ""$$
 }";
@@ -55,7 +56,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.AutomaticCompletion
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void InvalidLocation_String2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     string s = @""
 $$
@@ -67,7 +69,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void InvalidLocation_Comment()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     //$$
 }";
@@ -78,7 +81,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void InvalidLocation_Comment2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     /* $$
 }";
@@ -89,7 +93,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void InvalidLocation_Comment3()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     /// $$
 }";
@@ -100,7 +105,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void InvalidLocation_Comment4()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     /** $$
 }";
@@ -111,7 +117,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void MultiLine_Comment()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -127,7 +134,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void MultiLine_DocComment()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -143,7 +151,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void String1()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -159,7 +168,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void String2()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     void Method()
     {
@@ -175,7 +185,8 @@ $$
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Attribute_OpenBracket()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C { }";
 
             using var session = CreateSession(code);
@@ -187,7 +198,8 @@ class C { }";
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Attribute_OpenBracket_Delete()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C { }";
 
             using var session = CreateSession(code);
@@ -200,7 +212,8 @@ class C { }";
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Attribute_OpenBracket_Tab()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C { }";
 
             using var session = CreateSession(code);
@@ -213,7 +226,8 @@ class C { }";
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Attribute_OpenBracket_CloseBracket()
         {
-            var code = @"$$
+            var code =
+                @"$$
 class C { }";
 
             using var session = CreateSession(code);
@@ -226,7 +240,8 @@ class C { }";
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Array_Multiple_Invalid()
         {
-            var code = @"class C 
+            var code =
+                @"class C 
 {
     int [$$]
 }";
@@ -240,7 +255,8 @@ class C { }";
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void Array_Nested()
         {
-            var code = @"class C
+            var code =
+                @"class C
 {
     int [] i = new int [arr$$]
 }";
@@ -253,7 +269,8 @@ class C { }";
         [WpfFact, Trait(Traits.Feature, Traits.Features.AutomaticCompletion)]
         public void ListPattern()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(object o)
@@ -262,7 +279,8 @@ class C
     }
 }
 ";
-            var expectedBeforeReturn = @"
+            var expectedBeforeReturn =
+                @"
 class C
 {
     void M(object o)
@@ -271,7 +289,8 @@ class C
     }
 }
 ";
-            var expected = @"
+            var expected =
+                @"
 class C
 {
     void M(object o)
@@ -293,7 +312,9 @@ class C
         {
             return CreateSession(
                 TestWorkspace.CreateCSharp(code),
-                Bracket.OpenCharacter, Bracket.CloseCharacter);
+                Bracket.OpenCharacter,
+                Bracket.CloseCharacter
+            );
         }
     }
 }

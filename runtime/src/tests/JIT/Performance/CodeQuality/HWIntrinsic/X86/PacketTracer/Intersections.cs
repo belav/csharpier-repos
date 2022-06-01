@@ -35,8 +35,7 @@ internal struct Intersections
         var cmp = Compare(dis, NullDistance, FloatComparisonMode.OrderedEqualNonSignaling);
         var zero = Vector256<int>.Zero;
         // efficiently generate an all-one mask vector by lower latency AVX2 ComapreEqual
-        var mask = Avx2.CompareEqual(zero, zero); 
+        var mask = Avx2.CompareEqual(zero, zero);
         return TestC(cmp, mask.AsSingle());
     }
-
 }

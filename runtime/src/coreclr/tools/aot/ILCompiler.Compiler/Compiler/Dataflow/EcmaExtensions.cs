@@ -16,34 +16,43 @@ namespace ILCompiler.Dataflow
         public static bool IsPublic(this MethodDesc method)
         {
             return method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod
-                && (ecmaMethod.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Public;
+                && (ecmaMethod.Attributes & MethodAttributes.MemberAccessMask)
+                    == MethodAttributes.Public;
         }
 
         public static bool IsPublic(this FieldDesc field)
         {
             return field.GetTypicalFieldDefinition() is EcmaField ecmaField
-                && (ecmaField.Attributes & FieldAttributes.FieldAccessMask) == FieldAttributes.Public;  
+                && (ecmaField.Attributes & FieldAttributes.FieldAccessMask)
+                    == FieldAttributes.Public;
         }
 
         public static bool IsPrivate(this MethodDesc method)
         {
             return method.GetTypicalMethodDefinition() is EcmaMethod ecmaMethod
-                && (ecmaMethod.Attributes & MethodAttributes.MemberAccessMask) == MethodAttributes.Private;
+                && (ecmaMethod.Attributes & MethodAttributes.MemberAccessMask)
+                    == MethodAttributes.Private;
         }
 
         public static bool IsPrivate(this FieldDesc field)
         {
             return field.GetTypicalFieldDefinition() is EcmaField ecmaField
-                && (ecmaField.Attributes & FieldAttributes.FieldAccessMask) == FieldAttributes.Private;
+                && (ecmaField.Attributes & FieldAttributes.FieldAccessMask)
+                    == FieldAttributes.Private;
         }
 
         public static bool IsNestedPublic(this MetadataType mdType)
         {
             return mdType.GetTypeDefinition() is EcmaType ecmaType
-                && (ecmaType.Attributes & TypeAttributes.VisibilityMask) == TypeAttributes.NestedPublic;
+                && (ecmaType.Attributes & TypeAttributes.VisibilityMask)
+                    == TypeAttributes.NestedPublic;
         }
 
-        public static PropertyPseudoDesc GetProperty(this MetadataType mdType, string name, PropertySignature? signature)
+        public static PropertyPseudoDesc GetProperty(
+            this MetadataType mdType,
+            string name,
+            PropertySignature? signature
+        )
         {
             Debug.Assert(signature == null);
 
@@ -51,7 +60,12 @@ namespace ILCompiler.Dataflow
             var reader = type.MetadataReader;
             foreach (var propertyHandle in reader.GetTypeDefinition(type.Handle).GetProperties())
             {
-                if (reader.StringComparer.Equals(reader.GetPropertyDefinition(propertyHandle).Name, name))
+                if (
+                    reader.StringComparer.Equals(
+                        reader.GetPropertyDefinition(propertyHandle).Name,
+                        name
+                    )
+                )
                 {
                     return new PropertyPseudoDesc(type, propertyHandle);
                 }
@@ -74,8 +88,10 @@ namespace ILCompiler.Dataflow
             foreach (var propertyHandle in reader.GetTypeDefinition(type.Handle).GetProperties())
             {
                 var accessors = reader.GetPropertyDefinition(propertyHandle).GetAccessors();
-                if (ecmaAccessor.Handle == accessors.Getter
-                    || ecmaAccessor.Handle == accessors.Setter)
+                if (
+                    ecmaAccessor.Handle == accessors.Getter
+                    || ecmaAccessor.Handle == accessors.Setter
+                )
                 {
                     return new PropertyPseudoDesc(type, propertyHandle);
                 }

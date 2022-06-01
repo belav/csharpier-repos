@@ -11,7 +11,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
     /// <summary>
     /// Defines a log aggregator to create a histogram
     /// </summary>
-    internal sealed class HistogramLogAggregator : AbstractLogAggregator<HistogramLogAggregator.HistogramCounter>
+    internal sealed class HistogramLogAggregator
+        : AbstractLogAggregator<HistogramLogAggregator.HistogramCounter>
     {
         private readonly int _bucketSize;
         private readonly int _maxBucketValue;
@@ -29,8 +30,8 @@ namespace Microsoft.CodeAnalysis.Internal.Log
             _bucketCount = maxBucketValue / bucketSize + 1;
         }
 
-        protected override HistogramCounter CreateCounter()
-            => new(_bucketSize, _maxBucketValue, _bucketCount);
+        protected override HistogramCounter CreateCounter() =>
+            new(_bucketSize, _maxBucketValue, _bucketCount);
 
         public void IncreaseCount(object key, decimal value)
         {

@@ -28,17 +28,26 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.AspNetCore.EmbeddedLanguages
         public AspNetCoreVirtualChar this[int index] => new(_virtualCharSequence[index]);
 
         /// <inheritdoc cref="VirtualCharSequence.GetSubSequence"/>
-        public AspNetCoreVirtualCharSequence GetSubSequence(TextSpan span) => new(_virtualCharSequence.GetSubSequence(span));
+        public AspNetCoreVirtualCharSequence GetSubSequence(TextSpan span) =>
+            new(_virtualCharSequence.GetSubSequence(span));
 
         /// <inheritdoc cref="VirtualCharSequence.Find"/>
-        public AspNetCoreVirtualChar? Find(int position) => (_virtualCharSequence.Find(position) is VirtualChar c) ? new(c) : null;
+        public AspNetCoreVirtualChar? Find(int position) =>
+            (_virtualCharSequence.Find(position) is VirtualChar c) ? new(c) : null;
 
         /// <inheritdoc cref="VirtualCharSequence.CreateString"/>
         public string CreateString() => _virtualCharSequence.CreateString();
 
         /// <inheritdoc cref="VirtualCharSequence.FromBounds"/>
         public static AspNetCoreVirtualCharSequence FromBounds(
-            AspNetCoreVirtualCharSequence chars1, AspNetCoreVirtualCharSequence chars2) =>
-            new(VirtualCharSequence.FromBounds(chars1._virtualCharSequence, chars2._virtualCharSequence));
+            AspNetCoreVirtualCharSequence chars1,
+            AspNetCoreVirtualCharSequence chars2
+        ) =>
+            new(
+                VirtualCharSequence.FromBounds(
+                    chars1._virtualCharSequence,
+                    chars2._virtualCharSequence
+                )
+            );
     }
 }

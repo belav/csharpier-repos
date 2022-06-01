@@ -11,12 +11,10 @@ namespace Microsoft.CodeAnalysis.InlineHints
         [property: DataMember(Order = 0)] bool EnabledForTypes = false,
         [property: DataMember(Order = 1)] bool ForImplicitVariableTypes = true,
         [property: DataMember(Order = 2)] bool ForLambdaParameterTypes = true,
-        [property: DataMember(Order = 3)] bool ForImplicitObjectCreation = true)
+        [property: DataMember(Order = 3)] bool ForImplicitObjectCreation = true
+    )
     {
-        public InlineTypeHintsOptions()
-            : this(EnabledForTypes: false)
-        {
-        }
+        public InlineTypeHintsOptions() : this(EnabledForTypes: false) { }
 
         public static readonly InlineTypeHintsOptions Default = new();
     }

@@ -9,8 +9,7 @@ using System.Text.Json.Serialization.Metadata;
 namespace System.Text.Json.Serialization.Converters
 {
     internal sealed class StackOrQueueConverterWithReflection<TCollection>
-        : StackOrQueueConverter<TCollection>
-        where TCollection : IEnumerable
+        : StackOrQueueConverter<TCollection> where TCollection : IEnumerable
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
@@ -18,9 +17,13 @@ namespace System.Text.Json.Serialization.Converters
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        internal override void ConfigureJsonTypeInfoUsingReflection(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfoUsingReflection(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.AddMethodDelegate = options.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
+            jsonTypeInfo.AddMethodDelegate =
+                options.MemberAccessorStrategy.CreateAddMethodDelegate<TCollection>();
         }
     }
 }

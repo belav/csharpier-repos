@@ -22,28 +22,38 @@ public sealed class WebApplicationBuilder
 
     private WebApplication? _builtApplication;
 
-    internal WebApplicationBuilder(WebApplicationOptions options, Action<IHostBuilder>? configureDefaults = null)
+    internal WebApplicationBuilder(
+        WebApplicationOptions options,
+        Action<IHostBuilder>? configureDefaults = null
+    )
     {
         var configuration = new ConfigurationManager();
 
         configuration.AddEnvironmentVariables(prefix: "ASPNETCORE_");
 
-        _hostApplicationBuilder = new HostApplicationBuilder(new HostApplicationBuilderSettings
-        {
-            Args = options.Args,
-            ApplicationName = options.ApplicationName,
-            EnvironmentName = options.EnvironmentName,
-            ContentRootPath = options.ContentRootPath,
-            Configuration = configuration,
-        });
+        _hostApplicationBuilder = new HostApplicationBuilder(
+            new HostApplicationBuilderSettings
+            {
+                Args = options.Args,
+                ApplicationName = options.ApplicationName,
+                EnvironmentName = options.EnvironmentName,
+                ContentRootPath = options.ContentRootPath,
+                Configuration = configuration,
+            }
+        );
 
         // Set WebRootPath if necessary
         if (options.WebRootPath is not null)
         {
-            Configuration.AddInMemoryCollection(new[]
-            {
-                new KeyValuePair<string, string?>(WebHostDefaults.WebRootKey, options.WebRootPath),
-            });
+            Configuration.AddInMemoryCollection(
+                new[]
+                {
+                    new KeyValuePair<string, string?>(
+                        WebHostDefaults.WebRootKey,
+                        options.WebRootPath
+                    ),
+                }
+            );
         }
 
         // Run methods to configure web host defaults early to populate services
@@ -52,21 +62,35 @@ public sealed class WebApplicationBuilder
         // This is for testing purposes
         configureDefaults?.Invoke(bootstrapHostBuilder);
 
-        bootstrapHostBuilder.ConfigureWebHostDefaults(webHostBuilder =>
-        {
-            // Runs inline.
-            webHostBuilder.Configure(ConfigureApplication);
+        bootstrapHostBuilder.ConfigureWebHostDefaults(
+            webHostBuilder =>
+            {
+                // Runs inline.
+                webHostBuilder.Configure(ConfigureApplication);
 
-            webHostBuilder.UseSetting(WebHostDefaults.ApplicationKey, _hostApplicationBuilder.Environment.ApplicationName ?? "");
-            webHostBuilder.UseSetting(WebHostDefaults.PreventHostingStartupKey, Configuration[WebHostDefaults.PreventHostingStartupKey]);
-            webHostBuilder.UseSetting(WebHostDefaults.HostingStartupAssembliesKey, Configuration[WebHostDefaults.HostingStartupAssembliesKey]);
-            webHostBuilder.UseSetting(WebHostDefaults.HostingStartupExcludeAssembliesKey, Configuration[WebHostDefaults.HostingStartupExcludeAssembliesKey]);
-        },
-        options =>
-        {
-            // We've already applied "ASPNETCORE_" environment variables to hosting config
-            options.SuppressEnvironmentConfiguration = true;
-        });
+                webHostBuilder.UseSetting(
+                    WebHostDefaults.ApplicationKey,
+                    _hostApplicationBuilder.Environment.ApplicationName ?? ""
+                );
+                webHostBuilder.UseSetting(
+                    WebHostDefaults.PreventHostingStartupKey,
+                    Configuration[WebHostDefaults.PreventHostingStartupKey]
+                );
+                webHostBuilder.UseSetting(
+                    WebHostDefaults.HostingStartupAssembliesKey,
+                    Configuration[WebHostDefaults.HostingStartupAssembliesKey]
+                );
+                webHostBuilder.UseSetting(
+                    WebHostDefaults.HostingStartupExcludeAssembliesKey,
+                    Configuration[WebHostDefaults.HostingStartupExcludeAssembliesKey]
+                );
+            },
+            options =>
+            {
+                // We've already applied "ASPNETCORE_" environment variables to hosting config
+                options.SuppressEnvironmentConfiguration = true;
+            }
+        );
 
         // This applies the config from ConfigureWebHostDefaults
         // Grab the GenericWebHostService ServiceDescriptor so we can append it after any user-added IHostedServices during Build();
@@ -74,7 +98,8 @@ public sealed class WebApplicationBuilder
 
         // Grab the WebHostBuilderContext from the property bag to use in the ConfigureWebHostBuilder. Then
         // grab the IWebHostEnvironment from the webHostContext. This also matches the instance in the IServiceCollection.
-        var webHostContext = (WebHostBuilderContext)bootstrapHostBuilder.Properties[typeof(WebHostBuilderContext)];
+        var webHostContext = (WebHostBuilderContext)
+            bootstrapHostBuilder.Properties[typeof(WebHostBuilderContext)];
         Environment = webHostContext.HostingEnvironment;
 
         Host = new ConfigureHostBuilder(bootstrapHostBuilder.Context, Configuration, Services);
@@ -155,7 +180,12 @@ public sealed class WebApplicationBuilder
         if (_builtApplication.DataSources.Count > 0)
         {
             // If this is set, someone called UseRouting() when a global route builder was already set
-            if (!_builtApplication.Properties.TryGetValue(EndpointRouteBuilderKey, out var localRouteBuilder))
+            if (
+                !_builtApplication.Properties.TryGetValue(
+                    EndpointRouteBuilderKey,
+                    out var localRouteBuilder
+                )
+            )
             {
                 app.UseRouting();
             }

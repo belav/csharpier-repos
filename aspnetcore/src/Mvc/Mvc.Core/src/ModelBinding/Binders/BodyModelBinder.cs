@@ -32,10 +32,10 @@ public partial class BodyModelBinder : IModelBinder
     /// The <see cref="IHttpRequestStreamReaderFactory"/>, used to create <see cref="System.IO.TextReader"/>
     /// instances for reading the request body.
     /// </param>
-    public BodyModelBinder(IList<IInputFormatter> formatters, IHttpRequestStreamReaderFactory readerFactory)
-        : this(formatters, readerFactory, loggerFactory: null)
-    {
-    }
+    public BodyModelBinder(
+        IList<IInputFormatter> formatters,
+        IHttpRequestStreamReaderFactory readerFactory
+    ) : this(formatters, readerFactory, loggerFactory: null) { }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinder"/>.
@@ -49,10 +49,8 @@ public partial class BodyModelBinder : IModelBinder
     public BodyModelBinder(
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
-        ILoggerFactory? loggerFactory)
-        : this(formatters, readerFactory, loggerFactory, options: null)
-    {
-    }
+        ILoggerFactory? loggerFactory
+    ) : this(formatters, readerFactory, loggerFactory, options: null) { }
 
     /// <summary>
     /// Creates a new <see cref="BodyModelBinder"/>.
@@ -68,7 +66,8 @@ public partial class BodyModelBinder : IModelBinder
         IList<IInputFormatter> formatters,
         IHttpRequestStreamReaderFactory readerFactory,
         ILoggerFactory? loggerFactory,
-        MvcOptions? options)
+        MvcOptions? options
+    )
     {
         if (formatters == null)
         {
@@ -83,7 +82,8 @@ public partial class BodyModelBinder : IModelBinder
         _formatters = formatters;
         _readerFactory = readerFactory.CreateReader;
 
-        _logger = loggerFactory?.CreateLogger<BodyModelBinder>() ?? NullLogger<BodyModelBinder>.Instance;
+        _logger =
+            loggerFactory?.CreateLogger<BodyModelBinder>() ?? NullLogger<BodyModelBinder>.Instance;
 
         _options = options;
     }
@@ -121,7 +121,8 @@ public partial class BodyModelBinder : IModelBinder
             bindingContext.ModelState,
             bindingContext.ModelMetadata,
             _readerFactory,
-            AllowEmptyBody);
+            AllowEmptyBody
+        );
 
         var formatter = (IInputFormatter?)null;
         for (var i = 0; i < _formatters.Count; i++)
@@ -142,8 +143,12 @@ public partial class BodyModelBinder : IModelBinder
         {
             if (AllowEmptyBody)
             {
-                var hasBody = httpContext.Features.Get<IHttpRequestBodyDetectionFeature>()?.CanHaveBody;
-                hasBody ??= httpContext.Request.ContentLength is not null && httpContext.Request.ContentLength == 0;
+                var hasBody = httpContext.Features
+                    .Get<IHttpRequestBodyDetectionFeature>()
+                    ?.CanHaveBody;
+                hasBody ??=
+                    httpContext.Request.ContentLength is not null
+                    && httpContext.Request.ContentLength == 0;
                 if (hasBody == false)
                 {
                     bindingContext.Result = ModelBindingResult.Success(model: null);
@@ -155,7 +160,11 @@ public partial class BodyModelBinder : IModelBinder
 
             var message = Resources.FormatUnsupportedContentType(httpContext.Request.ContentType);
             var exception = new UnsupportedContentTypeException(message);
-            bindingContext.ModelState.AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
+            bindingContext.ModelState.AddModelError(
+                modelBindingKey,
+                exception,
+                bindingContext.ModelMetadata
+            );
             _logger.DoneAttemptingToBindModel(bindingContext);
             return;
         }
@@ -183,16 +192,19 @@ public partial class BodyModelBinder : IModelBinder
                 // If instead the input formatter wants to treat the input as optional, it must do so by
                 // returning InputFormatterResult.Success(defaultForModelType), because input formatters
                 // are responsible for choosing a default value for the model type.
-                var message = bindingContext
-                    .ModelMetadata
-                    .ModelBindingMessageProvider
-                    .MissingRequestBodyRequiredValueAccessor();
+                var message =
+                    bindingContext.ModelMetadata.ModelBindingMessageProvider.MissingRequestBodyRequiredValueAccessor();
                 bindingContext.ModelState.AddModelError(modelBindingKey, message);
             }
         }
-        catch (Exception exception) when (exception is InputFormatterException || ShouldHandleException(formatter))
+        catch (Exception exception)
+            when (exception is InputFormatterException || ShouldHandleException(formatter))
         {
-            bindingContext.ModelState.AddModelError(modelBindingKey, exception, bindingContext.ModelMetadata);
+            bindingContext.ModelState.AddModelError(
+                modelBindingKey,
+                exception,
+                bindingContext.ModelMetadata
+            );
         }
 
         _logger.DoneAttemptingToBindModel(bindingContext);
@@ -201,15 +213,20 @@ public partial class BodyModelBinder : IModelBinder
     private static bool ShouldHandleException(IInputFormatter formatter)
     {
         // Any explicit policy on the formatters overrides the default.
-        var policy = (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy ??
-            InputFormatterExceptionPolicy.MalformedInputExceptions;
+        var policy =
+            (formatter as IInputFormatterExceptionPolicy)?.ExceptionPolicy
+            ?? InputFormatterExceptionPolicy.MalformedInputExceptions;
 
         return policy == InputFormatterExceptionPolicy.AllExceptions;
     }
 
     private sealed partial class Log
     {
-        public static void InputFormatterSelected(ILogger logger, IInputFormatter inputFormatter, InputFormatterContext formatterContext)
+        public static void InputFormatterSelected(
+            ILogger logger,
+            IInputFormatter inputFormatter,
+            InputFormatterContext formatterContext
+        )
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
@@ -218,10 +235,24 @@ public partial class BodyModelBinder : IModelBinder
             }
         }
 
-        [LoggerMessage(1, LogLevel.Debug, "Selected input formatter '{InputFormatter}' for content type '{ContentType}'.", EventName = "InputFormatterSelected", SkipEnabledCheck = true)]
-        private static partial void InputFormatterSelected(ILogger logger, IInputFormatter inputFormatter, string? contentType);
+        [LoggerMessage(
+            1,
+            LogLevel.Debug,
+            "Selected input formatter '{InputFormatter}' for content type '{ContentType}'.",
+            EventName = "InputFormatterSelected",
+            SkipEnabledCheck = true
+        )]
+        private static partial void InputFormatterSelected(
+            ILogger logger,
+            IInputFormatter inputFormatter,
+            string? contentType
+        );
 
-        public static void InputFormatterRejected(ILogger logger, IInputFormatter inputFormatter, InputFormatterContext formatterContext)
+        public static void InputFormatterRejected(
+            ILogger logger,
+            IInputFormatter inputFormatter,
+            InputFormatterContext formatterContext
+        )
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
@@ -230,10 +261,23 @@ public partial class BodyModelBinder : IModelBinder
             }
         }
 
-        [LoggerMessage(2, LogLevel.Debug, "Rejected input formatter '{InputFormatter}' for content type '{ContentType}'.", EventName = "InputFormatterRejected", SkipEnabledCheck = true)]
-        private static partial void InputFormatterRejected(ILogger logger, IInputFormatter inputFormatter, string? contentType);
+        [LoggerMessage(
+            2,
+            LogLevel.Debug,
+            "Rejected input formatter '{InputFormatter}' for content type '{ContentType}'.",
+            EventName = "InputFormatterRejected",
+            SkipEnabledCheck = true
+        )]
+        private static partial void InputFormatterRejected(
+            ILogger logger,
+            IInputFormatter inputFormatter,
+            string? contentType
+        );
 
-        public static void NoInputFormatterSelected(ILogger logger, InputFormatterContext formatterContext)
+        public static void NoInputFormatterSelected(
+            ILogger logger,
+            InputFormatterContext formatterContext
+        )
         {
             if (logger.IsEnabled(LogLevel.Debug))
             {
@@ -248,10 +292,26 @@ public partial class BodyModelBinder : IModelBinder
             }
         }
 
-        [LoggerMessage(3, LogLevel.Debug, "No input formatter was found to support the content type '{ContentType}' for use with the [FromBody] attribute.", EventName = "NoInputFormatterSelected", SkipEnabledCheck = true)]
+        [LoggerMessage(
+            3,
+            LogLevel.Debug,
+            "No input formatter was found to support the content type '{ContentType}' for use with the [FromBody] attribute.",
+            EventName = "NoInputFormatterSelected",
+            SkipEnabledCheck = true
+        )]
         private static partial void NoInputFormatterSelected(ILogger logger, string? contentType);
 
-        [LoggerMessage(4, LogLevel.Debug, "To use model binding, remove the [FromBody] attribute from the property or parameter named '{ModelName}' with model type '{ModelType}'.", EventName = "RemoveFromBodyAttribute", SkipEnabledCheck = true)]
-        private static partial void RemoveFromBodyAttribute(ILogger logger, string modelName, string? modelType);
+        [LoggerMessage(
+            4,
+            LogLevel.Debug,
+            "To use model binding, remove the [FromBody] attribute from the property or parameter named '{ModelName}' with model type '{ModelType}'.",
+            EventName = "RemoveFromBodyAttribute",
+            SkipEnabledCheck = true
+        )]
+        private static partial void RemoveFromBodyAttribute(
+            ILogger logger,
+            string modelName,
+            string? modelType
+        );
     }
 }

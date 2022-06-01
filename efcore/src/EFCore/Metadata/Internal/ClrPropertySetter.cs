@@ -12,8 +12,7 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 // Sealed for perf
-public sealed class ClrPropertySetter<TEntity, TValue> : IClrPropertySetter
-    where TEntity : class
+public sealed class ClrPropertySetter<TEntity, TValue> : IClrPropertySetter where TEntity : class
 {
     private readonly Action<TEntity, TValue> _setter;
 
@@ -35,6 +34,6 @@ public sealed class ClrPropertySetter<TEntity, TValue> : IClrPropertySetter
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     [MethodImpl(MethodImplOptions.AggressiveInlining)]
-    public void SetClrValue(object instance, object? value)
-        => _setter((TEntity)instance, (TValue?)value!);
+    public void SetClrValue(object instance, object? value) =>
+        _setter((TEntity)instance, (TValue?)value!);
 }

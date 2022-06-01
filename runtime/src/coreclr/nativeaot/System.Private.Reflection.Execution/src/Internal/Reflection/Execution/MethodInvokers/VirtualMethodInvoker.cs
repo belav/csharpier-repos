@@ -19,24 +19,36 @@ namespace Internal.Reflection.Execution.MethodInvokers
     //
     internal sealed class VirtualMethodInvoker : MethodInvokerWithMethodInvokeInfo
     {
-        public VirtualMethodInvoker(MethodInvokeInfo methodInvokeInfo, RuntimeTypeHandle declaringTypeHandle)
-            : base(methodInvokeInfo)
+        public VirtualMethodInvoker(
+            MethodInvokeInfo methodInvokeInfo,
+            RuntimeTypeHandle declaringTypeHandle
+        ) : base(methodInvokeInfo)
         {
             _declaringTypeHandle = declaringTypeHandle;
         }
 
-        public sealed override Delegate CreateDelegate(RuntimeTypeHandle delegateType, object target, bool isStatic, bool isVirtual, bool isOpen)
+        public sealed override Delegate CreateDelegate(
+            RuntimeTypeHandle delegateType,
+            object target,
+            bool isStatic,
+            bool isVirtual,
+            bool isOpen
+        )
         {
             if (!isOpen)
             {
                 // We're creating a delegate to a virtual override of this method, so resolve the virtual now.
-                IntPtr resolvedVirtual = OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, target);
+                IntPtr resolvedVirtual = OpenMethodResolver.ResolveMethod(
+                    MethodInvokeInfo.VirtualResolveData,
+                    target
+                );
                 return RuntimeAugments.CreateDelegate(
-                                delegateType,
-                                resolvedVirtual,
-                                target,
-                                isStatic: false,
-                                isOpen: isOpen);
+                    delegateType,
+                    resolvedVirtual,
+                    target,
+                    isStatic: false,
+                    isOpen: isOpen
+                );
             }
             else
             {
@@ -46,16 +58,25 @@ namespace Internal.Reflection.Execution.MethodInvokers
                     MethodInvokeInfo.VirtualResolveData,
                     target,
                     isStatic: false,
-                    isOpen: isOpen);
+                    isOpen: isOpen
+                );
             }
         }
 
         [DebuggerGuidedStepThroughAttribute]
-        protected sealed override object Invoke(object thisObject, object[] arguments, BinderBundle binderBundle, bool wrapInTargetInvocationException)
+        protected sealed override object Invoke(
+            object thisObject,
+            object[] arguments,
+            BinderBundle binderBundle,
+            bool wrapInTargetInvocationException
+        )
         {
             ValidateThis(thisObject, _declaringTypeHandle);
 
-            IntPtr resolvedVirtual = OpenMethodResolver.ResolveMethod(MethodInvokeInfo.VirtualResolveData, thisObject);
+            IntPtr resolvedVirtual = OpenMethodResolver.ResolveMethod(
+                MethodInvokeInfo.VirtualResolveData,
+                thisObject
+            );
 
             object result = RuntimeAugments.CallDynamicInvokeMethod(
                 thisObject,
@@ -66,7 +87,8 @@ namespace Internal.Reflection.Execution.MethodInvokers
                 arguments,
                 binderBundle,
                 wrapInTargetInvocationException: wrapInTargetInvocationException,
-                methodToCallIsThisCall: true);
+                methodToCallIsThisCall: true
+            );
             System.Diagnostics.DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
             return result;
         }
@@ -86,7 +108,10 @@ namespace Internal.Reflection.Execution.MethodInvokers
                     throw new PlatformNotSupportedException();
 
                 // Must be an abstract method
-                if (MethodInvokeInfo.LdFtnResult == IntPtr.Zero && MethodInvokeInfo.VirtualResolveData != IntPtr.Zero)
+                if (
+                    MethodInvokeInfo.LdFtnResult == IntPtr.Zero
+                    && MethodInvokeInfo.VirtualResolveData != IntPtr.Zero
+                )
                     throw new PlatformNotSupportedException();
 
                 return MethodInvokeInfo.LdFtnResult;

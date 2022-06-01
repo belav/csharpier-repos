@@ -16,14 +16,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseTupleSwap
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseTupleSwapDiagnosticAnalyzer,
-        CSharpUseTupleSwapCodeFixProvider>;
+        CSharpUseTupleSwapCodeFixProvider
+    >;
 
     public partial class UseTupleSwapTests
     {
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingBeforeCSharp7()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -46,7 +48,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestMissingWithFeatureOff()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -64,7 +67,11 @@ class C
                 FixedCode = code,
                 Options =
                 {
-                    { CSharpCodeStyleOptions.PreferTupleSwap, false, CodeStyle.NotificationOption2.Silent }
+                    {
+                        CSharpCodeStyleOptions.PreferTupleSwap,
+                        false,
+                        CodeStyle.NotificationOption2.Silent
+                    }
                 }
             }.RunAsync();
         }
@@ -73,7 +80,7 @@ class C
         public async Task TestBasicCase()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -84,7 +91,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -92,13 +99,15 @@ class C
         (args[1], args[0]) = (args[0], args[1]);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotWithRef()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(ref int a, ref int b)
@@ -110,18 +119,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestArbitraryParens()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -132,7 +137,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -140,14 +145,15 @@ class C
         (args[1], args[0]) = (args[0], args[1]);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestTrivia1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -159,7 +165,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -168,14 +174,15 @@ class C
         (args[1], args[0]) = (args[0], args[1]);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestTrivia2()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -186,7 +193,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -194,13 +201,15 @@ class C
         (args   [   1   ], args  [  0  ]) = (args  [  0  ], args   [   1   ]);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleAssignment1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -212,17 +221,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestSimpleAssignment2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -234,17 +240,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotSwap1()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args, string temp1)
@@ -256,17 +259,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotSwap2()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -278,17 +278,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotSwap3()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -300,17 +297,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotSwap4()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -322,17 +316,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotSwap5()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -344,18 +335,14 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestInSwitch()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(string[] args, int x)
@@ -371,7 +358,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M(string[] args, int x)
@@ -384,14 +371,15 @@ class C
         }
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestFixAll1()
         {
             await VerifyCS.VerifyCodeFixAsync(
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -408,7 +396,7 @@ class C
     }
 }
 ",
-@"
+                @"
 class C
 {
     void M(string[] args)
@@ -420,13 +408,15 @@ class C
         (args[3], args[2]) = (args[2], args[3]);
     }
 }
-");
+"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
         public async Task TestNotWithMultipleVariables()
         {
-            var code = @"
+            var code =
+                @"
 class C
 {
     void M(string[] args)
@@ -438,11 +428,7 @@ class C
 }
 ";
 
-            await new VerifyCS.Test
-            {
-                TestCode = code,
-                FixedCode = code,
-            }.RunAsync();
+            await new VerifyCS.Test { TestCode = code, FixedCode = code, }.RunAsync();
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseLocalFunction)]
@@ -465,7 +451,8 @@ args[1] = temp;
                     },
                     OutputKind = OutputKind.ConsoleApplication,
                 },
-                FixedCode = @"
+                FixedCode =
+                    @"
 (args[1], args[0]) = (args[0], args[1]);
 ",
             }.RunAsync();

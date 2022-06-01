@@ -11,10 +11,10 @@ namespace Microsoft.AspNetCore.Mvc.ModelBinding;
 /// <summary>
 /// An <see cref="IValueProvider"/> for jQuery formatted data.
 /// </summary>
-public abstract class JQueryValueProvider :
-    BindingSourceValueProvider,
-    IEnumerableValueProvider,
-    IKeyRewriterValueProvider
+public abstract class JQueryValueProvider
+    : BindingSourceValueProvider,
+        IEnumerableValueProvider,
+        IKeyRewriterValueProvider
 {
     private readonly IDictionary<string, StringValues> _values;
     private PrefixContainer? _prefixContainer;
@@ -28,8 +28,8 @@ public abstract class JQueryValueProvider :
     protected JQueryValueProvider(
         BindingSource bindingSource,
         IDictionary<string, StringValues> values,
-        CultureInfo? culture)
-        : base(bindingSource)
+        CultureInfo? culture
+    ) : base(bindingSource)
     {
         if (bindingSource == null)
         {

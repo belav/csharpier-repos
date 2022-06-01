@@ -17,7 +17,8 @@ public class FileContentResultTests : FileContentResultTestBase
         string contentType,
         DateTimeOffset? lastModified = null,
         EntityTagHeaderValue entityTag = null,
-        bool enableRangeProcessing = false)
+        bool enableRangeProcessing = false
+    )
     {
         var result = new FileContentHttpResult(buffer, contentType)
         {

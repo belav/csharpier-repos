@@ -16,10 +16,11 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
 {
-    internal abstract class AbstractConvertTypeOfToNameOfCodeFixProvider : SyntaxEditorBasedCodeFixProvider
+    internal abstract class AbstractConvertTypeOfToNameOfCodeFixProvider
+        : SyntaxEditorBasedCodeFixProvider
     {
-        public sealed override ImmutableArray<string> FixableDiagnosticIds
-           => ImmutableArray.Create(IDEDiagnosticIds.ConvertTypeOfToNameOfDiagnosticId);
+        public sealed override ImmutableArray<string> FixableDiagnosticIds =>
+            ImmutableArray.Create(IDEDiagnosticIds.ConvertTypeOfToNameOfDiagnosticId);
 
         public override Task RegisterCodeFixesAsync(CodeFixContext context)
         {
@@ -29,13 +30,22 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
         }
 
         protected override async Task FixAllAsync(
-            Document document, ImmutableArray<Diagnostic> diagnostics,
-            SyntaxEditor editor, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<Diagnostic> diagnostics,
+            SyntaxEditor editor,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var semanticModel = await document.GetRequiredSemanticModelAsync(cancellationToken).ConfigureAwait(false);
+            var semanticModel = await document
+                .GetRequiredSemanticModelAsync(cancellationToken)
+                .ConfigureAwait(false);
             foreach (var diagnostic in diagnostics)
             {
-                var node = editor.OriginalRoot.FindNode(diagnostic.Location.SourceSpan, getInnermostNodeForTie: true);
+                var node = editor.OriginalRoot.FindNode(
+                    diagnostic.Location.SourceSpan,
+                    getInnermostNodeForTie: true
+                );
                 ConvertTypeOfToNameOf(semanticModel, editor, node, cancellationToken);
             }
         }
@@ -43,14 +53,27 @@ namespace Microsoft.CodeAnalysis.ConvertTypeOfToNameOf
         /// <Summary>
         ///  Method converts typeof(...).Name to nameof(...)
         /// </Summary>
-        public void ConvertTypeOfToNameOf(SemanticModel semanticModel, SyntaxEditor editor, SyntaxNode nodeToReplace, CancellationToken cancellationToken)
+        public void ConvertTypeOfToNameOf(
+            SemanticModel semanticModel,
+            SyntaxEditor editor,
+            SyntaxNode nodeToReplace,
+            CancellationToken cancellationToken
+        )
         {
-            var typeExpression = GetSymbolTypeExpression(semanticModel, nodeToReplace, cancellationToken);
+            var typeExpression = GetSymbolTypeExpression(
+                semanticModel,
+                nodeToReplace,
+                cancellationToken
+            );
             var nameOfSyntax = editor.Generator.NameOfExpression(typeExpression);
             editor.ReplaceNode(nodeToReplace, nameOfSyntax);
         }
 
-        protected abstract SyntaxNode GetSymbolTypeExpression(SemanticModel model, SyntaxNode node, CancellationToken cancellationToken);
+        protected abstract SyntaxNode GetSymbolTypeExpression(
+            SemanticModel model,
+            SyntaxNode node,
+            CancellationToken cancellationToken
+        );
 
         protected abstract string GetCodeFixTitle();
     }

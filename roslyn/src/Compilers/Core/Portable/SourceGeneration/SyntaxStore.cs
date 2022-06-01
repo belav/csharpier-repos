@@ -15,7 +15,10 @@ namespace Microsoft.CodeAnalysis
     {
         private readonly StateTableStore _tables;
         private readonly Compilation? _compilation;
-        internal static readonly SyntaxStore Empty = new SyntaxStore(StateTableStore.Empty, compilation: null);
+        internal static readonly SyntaxStore Empty = new SyntaxStore(
+            StateTableStore.Empty,
+            compilation: null
+        );
 
         private SyntaxStore(StateTableStore tables, Compilation? compilation)
         {
@@ -23,12 +26,24 @@ namespace Microsoft.CodeAnalysis
             _compilation = compilation;
         }
 
-        public Builder ToBuilder(Compilation compilation, ImmutableArray<SyntaxInputNode> syntaxInputNodes, bool enableTracking, CancellationToken cancellationToken) => new Builder(compilation, syntaxInputNodes, enableTracking, this, cancellationToken);
+        public Builder ToBuilder(
+            Compilation compilation,
+            ImmutableArray<SyntaxInputNode> syntaxInputNodes,
+            bool enableTracking,
+            CancellationToken cancellationToken
+        ) => new Builder(compilation, syntaxInputNodes, enableTracking, this, cancellationToken);
 
         public sealed class Builder
         {
-            private readonly ImmutableDictionary<SyntaxInputNode, Exception>.Builder _syntaxExceptions = ImmutableDictionary.CreateBuilder<SyntaxInputNode, Exception>();
-            private readonly ImmutableDictionary<SyntaxInputNode, TimeSpan>.Builder _syntaxTimes = ImmutableDictionary.CreateBuilder<SyntaxInputNode, TimeSpan>();
+            private readonly ImmutableDictionary<
+                SyntaxInputNode,
+                Exception
+            >.Builder _syntaxExceptions = ImmutableDictionary.CreateBuilder<
+                SyntaxInputNode,
+                Exception
+            >();
+            private readonly ImmutableDictionary<SyntaxInputNode, TimeSpan>.Builder _syntaxTimes =
+                ImmutableDictionary.CreateBuilder<SyntaxInputNode, TimeSpan>();
             private readonly StateTableStore.Builder _tableBuilder = new StateTableStore.Builder();
             private readonly Compilation _compilation;
             private readonly ImmutableArray<SyntaxInputNode> _syntaxInputNodes;
@@ -36,7 +51,13 @@ namespace Microsoft.CodeAnalysis
             private readonly SyntaxStore _previous;
             private readonly CancellationToken _cancellationToken;
 
-            internal Builder(Compilation compilation, ImmutableArray<SyntaxInputNode> syntaxInputNodes, bool enableTracking, SyntaxStore previousStore, CancellationToken cancellationToken)
+            internal Builder(
+                Compilation compilation,
+                ImmutableArray<SyntaxInputNode> syntaxInputNodes,
+                bool enableTracking,
+                SyntaxStore previousStore,
+                CancellationToken cancellationToken
+            )
             {
                 _compilation = compilation;
                 _syntaxInputNodes = syntaxInputNodes;
@@ -45,7 +66,10 @@ namespace Microsoft.CodeAnalysis
                 _cancellationToken = cancellationToken;
             }
 
-            public IStateTable GetSyntaxInputTable(SyntaxInputNode syntaxInputNode, NodeStateTable<SyntaxTree> syntaxTreeTable)
+            public IStateTable GetSyntaxInputTable(
+                SyntaxInputNode syntaxInputNode,
+                NodeStateTable<SyntaxTree> syntaxTreeTable
+            )
             {
                 Debug.Assert(_syntaxInputNodes.Contains(syntaxInputNode));
 
@@ -58,18 +82,27 @@ namespace Microsoft.CodeAnalysis
                     var compilationIsCached = _compilation == _previous._compilation;
 
                     // get a builder for each input node
-                    var syntaxInputBuilders = ArrayBuilder<(SyntaxInputNode node, ISyntaxInputBuilder builder)>.GetInstance(_syntaxInputNodes.Length);
+                    var syntaxInputBuilders =
+                        ArrayBuilder<(SyntaxInputNode node, ISyntaxInputBuilder builder)>.GetInstance(
+                            _syntaxInputNodes.Length
+                        );
                     foreach (var node in _syntaxInputNodes)
                     {
                         // We don't cache the tracked incremental steps in a manner that we can easily rehydrate between runs,
                         // so we disable the cached compilation perf optimization when incremental step tracking is enabled.
-                        if (compilationIsCached && !_enableTracking && _previous._tables.TryGetValue(node, out var previousStateTable))
+                        if (
+                            compilationIsCached
+                            && !_enableTracking
+                            && _previous._tables.TryGetValue(node, out var previousStateTable)
+                        )
                         {
                             _tableBuilder.SetTable(node, previousStateTable);
                         }
                         else
                         {
-                            syntaxInputBuilders.Add((node, node.GetBuilder(_previous._tables, _enableTracking)));
+                            syntaxInputBuilders.Add(
+                                (node, node.GetBuilder(_previous._tables, _enableTracking))
+                            );
                             _syntaxTimes[node] = TimeSpan.Zero;
                         }
                     }
@@ -83,7 +116,12 @@ namespace Microsoft.CodeAnalysis
                         foreach (var (tree, state, syntaxTreeIndex, stepInfo) in syntaxTreeState)
                         {
                             var root = new Lazy<SyntaxNode>(() => tree.GetRoot(_cancellationToken));
-                            var model = state != EntryState.Removed ? new Lazy<SemanticModel>(() => _compilation.GetSemanticModel(tree)) : null;
+                            var model =
+                                state != EntryState.Removed
+                                    ? new Lazy<SemanticModel>(
+                                        () => _compilation.GetSemanticModel(tree)
+                                    )
+                                    : null;
                             for (int i = 0; i < syntaxInputBuilders.Count; i++)
                             {
                                 var currentNode = syntaxInputBuilders[i].node;
@@ -93,7 +131,12 @@ namespace Microsoft.CodeAnalysis
                                     try
                                     {
                                         _cancellationToken.ThrowIfCancellationRequested();
-                                        syntaxInputBuilders[i].builder.VisitTree(root, state, model, _cancellationToken);
+                                        syntaxInputBuilders[i].builder.VisitTree(
+                                            root,
+                                            state,
+                                            model,
+                                            _cancellationToken
+                                        );
                                     }
                                     finally
                                     {
@@ -102,8 +145,12 @@ namespace Microsoft.CodeAnalysis
                                         // if this node isn't the one that caused the update, ensure we remember it and remove the time it took from the requester
                                         if (currentNode != syntaxInputNode)
                                         {
-                                            _syntaxTimes[syntaxInputNode] = _syntaxTimes[syntaxInputNode].Subtract(elapsed);
-                                            _syntaxTimes[currentNode] = _syntaxTimes[currentNode].Add(elapsed);
+                                            _syntaxTimes[syntaxInputNode] = _syntaxTimes[
+                                                syntaxInputNode
+                                            ].Subtract(elapsed);
+                                            _syntaxTimes[currentNode] = _syntaxTimes[
+                                                currentNode
+                                            ].Add(elapsed);
                                         }
                                     }
                                 }
@@ -142,12 +189,12 @@ namespace Microsoft.CodeAnalysis
             /// </summary>
             /// <remarks>
             /// The syntax store updates all input nodes in parallel the first time an input node is asked to update,
-            /// so that it can share the semantic model between multiple nodes and improve perf. 
-            /// 
-            /// Unfortunately that means that the first generator to request the results of a syntax node will incorrectly 
-            /// have its wall clock time contain the time of all other syntax nodes. And conversely other input nodes will 
+            /// so that it can share the semantic model between multiple nodes and improve perf.
+            ///
+            /// Unfortunately that means that the first generator to request the results of a syntax node will incorrectly
+            /// have its wall clock time contain the time of all other syntax nodes. And conversely other input nodes will
             /// not have the true time taken.
-            /// 
+            ///
             /// This method gets the adjustment that should be applied to the wall clock time for a set of input nodes
             /// so that the correct time is attributed to each.
             /// </remarks>

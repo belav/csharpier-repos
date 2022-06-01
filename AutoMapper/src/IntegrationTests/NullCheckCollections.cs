@@ -11,6 +11,7 @@ namespace AutoMapper.IntegrationTests;
 
 using System;
 using UnitTests;
+
 public class NullCheckCollectionsFirstOrDefault : AutoMapperSpecBase, IAsyncLifetime
 {
     public class SourceType
@@ -18,26 +19,52 @@ public class NullCheckCollectionsFirstOrDefault : AutoMapperSpecBase, IAsyncLife
         public int Id { get; set; }
         public ICollection<Parameter> Parameters { get; set; } = new List<Parameter>();
     }
+
     public class Parameter
     {
         public int Id { get; set; }
         public string Name { get; set; }
         public int Value { get; set; }
     }
+
     public class DestinationType
     {
         public int? Index { get; set; }
     }
+
     class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
     {
-        protected override void Seed(TestContext context) => context.SourceTypes.Add(new SourceType { Parameters = { new Parameter { Name = "Index", Value = 101 } } });
+        protected override void Seed(TestContext context) =>
+            context.SourceTypes.Add(
+                new SourceType
+                {
+                    Parameters =
+                    {
+                        new Parameter { Name = "Index", Value = 101 }
+                    }
+                }
+            );
     }
+
     class TestContext : LocalDbContext
     {
         public DbSet<SourceType> SourceTypes { get; set; }
     }
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        cfg.CreateProjection<SourceType, DestinationType>().ForMember(d => d.Index, o => o.MapFrom(source => source.Parameters.FirstOrDefault(p => p.Name == "Index").Value)));
+
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(
+            cfg =>
+                cfg.CreateProjection<SourceType, DestinationType>()
+                    .ForMember(
+                        d => d.Index,
+                        o =>
+                            o.MapFrom(
+                                source =>
+                                    source.Parameters.FirstOrDefault(p => p.Name == "Index").Value
+                            )
+                    )
+        );
+
     [Fact]
     public void Should_project_ok()
     {
@@ -56,13 +83,17 @@ public class NullCheckCollectionsFirstOrDefault : AutoMapperSpecBase, IAsyncLife
 
     public Task DisposeAsync() => Task.CompletedTask;
 }
+
 public class NullChildItemTest : AutoMapperSpecBase, IAsyncLifetime
 {
-    protected override MapperConfiguration CreateConfiguration() => new(cfg => cfg.CreateProjection<Parent, ParentDto>());
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg => cfg.CreateProjection<Parent, ParentDto>());
+
     public class TestContext : LocalDbContext
     {
         public DbSet<Parent> Parents { get; set; }
     }
+
     public class DatabaseInitializer : DropCreateDatabaseAlways<TestContext>
     {
         protected override void Seed(TestContext testContext)
@@ -71,6 +102,7 @@ public class NullChildItemTest : AutoMapperSpecBase, IAsyncLifetime
             base.Seed(testContext);
         }
     }
+
     [Fact]
     public void Should_project_null_value()
     {
@@ -84,6 +116,7 @@ public class NullChildItemTest : AutoMapperSpecBase, IAsyncLifetime
             projected.Nephews.ShouldBeEmpty();
         }
     }
+
     public class ParentDto
     {
         public int? Value { get; set; }
@@ -91,6 +124,7 @@ public class NullChildItemTest : AutoMapperSpecBase, IAsyncLifetime
         public int? ChildGrandChildValue { get; set; }
         public List<Child> Nephews { get; set; }
     }
+
     public class Parent
     {
         public int Id { get; set; }
@@ -98,12 +132,14 @@ public class NullChildItemTest : AutoMapperSpecBase, IAsyncLifetime
         public Child Child { get; set; }
         public List<Child> Nephews { get; set; }
     }
+
     public class Child
     {
         public int Id { get; set; }
         public int Value { get; set; }
         public GrandChild GrandChild { get; set; }
     }
+
     public class GrandChild
     {
         public int Id { get; set; }
@@ -119,6 +155,7 @@ public class NullChildItemTest : AutoMapperSpecBase, IAsyncLifetime
 
     public Task DisposeAsync() => Task.CompletedTask;
 }
+
 public class NullCheckCollections : AutoMapperSpecBase, IAsyncLifetime
 {
     public class Student
@@ -128,6 +165,7 @@ public class NullCheckCollections : AutoMapperSpecBase, IAsyncLifetime
         public string Name { get; set; }
         public virtual ICollection<ScoreRecord> ScoreRecords { get; set; }
     }
+
     public class ScoreRecord
     {
         [Key, DatabaseGenerated(DatabaseGeneratedOption.Identity)]
@@ -137,11 +175,13 @@ public class NullCheckCollections : AutoMapperSpecBase, IAsyncLifetime
         public string Subject { get; set; }
         public int Score { get; set; }
     }
+
     public class ScoreModel
     {
         public int? MinScore { get; set; }
         public int? MaxScore { get; set; }
     }
+
     public class StudentViewModel
     {
         public int Id { get; set; }
@@ -158,17 +198,19 @@ public class NullCheckCollections : AutoMapperSpecBase, IAsyncLifetime
     {
         protected override void Seed(Context context)
         {
-            context.Students.Add(new Student{ Name = "Bob" });
+            context.Students.Add(new Student { Name = "Bob" });
         }
     }
 
-    protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-    {
-        cfg.CreateProjection<Student, StudentViewModel>().ForMember(d => d.Score, opts => opts.MapFrom(m => m.ScoreRecords));
-        cfg.CreateProjection<ICollection<ScoreRecord>, ScoreModel>()
-            .ForMember(d => d.MinScore, opts => opts.MapFrom(m => m.Min(s => s.Score)))
-            .ForMember(d => d.MaxScore, opts => opts.MapFrom(m => m.Max(s => s.Score)));
-    });
+    protected override MapperConfiguration CreateConfiguration() =>
+        new(cfg =>
+        {
+            cfg.CreateProjection<Student, StudentViewModel>()
+                .ForMember(d => d.Score, opts => opts.MapFrom(m => m.ScoreRecords));
+            cfg.CreateProjection<ICollection<ScoreRecord>, ScoreModel>()
+                .ForMember(d => d.MinScore, opts => opts.MapFrom(m => m.Min(s => s.Score)))
+                .ForMember(d => d.MaxScore, opts => opts.MapFrom(m => m.Max(s => s.Score)));
+        });
 
     [Fact]
     public void Can_map_with_projection()

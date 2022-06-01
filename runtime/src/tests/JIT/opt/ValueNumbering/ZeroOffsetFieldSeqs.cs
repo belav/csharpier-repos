@@ -84,6 +84,7 @@ struct UnionStruct
 {
     [FieldOffset(0)]
     public UnionPartOne UnionOne;
+
     [FieldOffset(0)]
     public UnionPartTwo UnionTwo;
 }
@@ -99,4 +100,3 @@ struct UnionPartTwo
     public long UnionTwoFldOne;
     public long UnionTwoFldTwo;
 }
-

@@ -56,7 +56,8 @@ internal static partial class Interop
             byte* pbIv,
             PAL_SymmetricOptions options,
             out SafeAppleCryptorHandle cryptor,
-            out int ccStatus);
+            out int ccStatus
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorUpdate")]
         internal static unsafe partial int CryptorUpdate(
@@ -66,7 +67,8 @@ internal static partial class Interop
             byte* pbOutput,
             int cbOutput,
             out int cbWritten,
-            out int ccStatus);
+            out int ccStatus
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorFinal")]
         internal static unsafe partial int CryptorFinal(
@@ -74,10 +76,15 @@ internal static partial class Interop
             byte* pbOutput,
             int cbOutput,
             out int cbWritten,
-            out int ccStatus);
+            out int ccStatus
+        );
 
         [LibraryImport(Libraries.AppleCryptoNative, EntryPoint = "AppleCryptoNative_CryptorReset")]
-        internal static unsafe partial int CryptorReset(SafeAppleCryptorHandle cryptor, byte* pbIv, out int ccStatus);
+        internal static unsafe partial int CryptorReset(
+            SafeAppleCryptorHandle cryptor,
+            byte* pbIv,
+            out int ccStatus
+        );
     }
 }
 
@@ -85,10 +92,7 @@ namespace System.Security.Cryptography
 {
     internal sealed class SafeAppleCryptorHandle : SafeHandle
     {
-        public SafeAppleCryptorHandle()
-            : base(IntPtr.Zero, ownsHandle: true)
-        {
-        }
+        public SafeAppleCryptorHandle() : base(IntPtr.Zero, ownsHandle: true) { }
 
         protected override bool ReleaseHandle()
         {

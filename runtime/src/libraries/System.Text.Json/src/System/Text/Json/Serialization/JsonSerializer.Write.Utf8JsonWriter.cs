@@ -28,7 +28,8 @@ namespace System.Text.Json
         public static void Serialize<TValue>(
             Utf8JsonWriter writer,
             TValue value,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (writer is null)
             {
@@ -63,7 +64,8 @@ namespace System.Text.Json
             Utf8JsonWriter writer,
             object? value,
             Type inputType,
-            JsonSerializerOptions? options = null)
+            JsonSerializerOptions? options = null
+        )
         {
             if (writer is null)
             {
@@ -89,7 +91,11 @@ namespace System.Text.Json
         /// There is no compatible <see cref="System.Text.Json.Serialization.JsonConverter"/>
         /// for <typeparamref name="TValue"/> or its serializable members.
         /// </exception>
-        public static void Serialize<TValue>(Utf8JsonWriter writer, TValue value, JsonTypeInfo<TValue> jsonTypeInfo)
+        public static void Serialize<TValue>(
+            Utf8JsonWriter writer,
+            TValue value,
+            JsonTypeInfo<TValue> jsonTypeInfo
+        )
         {
             if (writer is null)
             {
@@ -124,7 +130,12 @@ namespace System.Text.Json
         /// The <see cref="JsonSerializerContext.GetTypeInfo(Type)"/> method of the provided
         /// <paramref name="context"/> returns <see langword="null"/> for the type to convert.
         /// </exception>
-        public static void Serialize(Utf8JsonWriter writer, object? value, Type inputType, JsonSerializerContext context)
+        public static void Serialize(
+            Utf8JsonWriter writer,
+            object? value,
+            Type inputType,
+            JsonSerializerContext context
+        )
         {
             if (writer is null)
             {

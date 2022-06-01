@@ -50,16 +50,29 @@ namespace System.Runtime
 
         [RuntimeImport(RuntimeLibrary, "RhpGetModuleSection")]
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
-        private static extern IntPtr RhGetModuleSection(ref TypeManagerHandle module, ReadyToRunSectionType section, out int length);
+        private static extern IntPtr RhGetModuleSection(
+            ref TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        );
 
-        internal static IntPtr RhGetModuleSection(TypeManagerHandle module, ReadyToRunSectionType section, out int length)
+        internal static IntPtr RhGetModuleSection(
+            TypeManagerHandle module,
+            ReadyToRunSectionType section,
+            out int length
+        )
         {
             return RhGetModuleSection(ref module, section, out length);
         }
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpCreateTypeManager")]
-        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(IntPtr osModule, IntPtr moduleHeader, IntPtr* pClasslibFunctions, int nClasslibFunctions);
+        internal static extern unsafe TypeManagerHandle RhpCreateTypeManager(
+            IntPtr osModule,
+            IntPtr moduleHeader,
+            IntPtr* pClasslibFunctions,
+            int nClasslibFunctions
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpRegisterOsModule")]
@@ -75,18 +88,22 @@ namespace System.Runtime
         [RuntimeImport(RuntimeLibrary, "RhNewObject")]
         private static unsafe extern object RhNewObject(MethodTable* pEEType);
 
-        internal static unsafe object RhNewObject(EETypePtr pEEType)
-            => RhNewObject(pEEType.ToPointer());
+        internal static unsafe object RhNewObject(EETypePtr pEEType) =>
+            RhNewObject(pEEType.ToPointer());
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhNewArray")]
         private static unsafe extern Array RhNewArray(MethodTable* pEEType, int length);
 
-        internal static unsafe Array RhNewArray(EETypePtr pEEType, int length)
-            => RhNewArray(pEEType.ToPointer(), length);
+        internal static unsafe Array RhNewArray(EETypePtr pEEType, int length) =>
+            RhNewArray(pEEType.ToPointer(), length);
 
         [DllImport(RuntimeLibrary)]
-        internal static unsafe extern void RhAllocateNewObject(IntPtr pEEType, uint flags, void* pResult);
+        internal static unsafe extern void RhAllocateNewObject(
+            IntPtr pEEType,
+            uint flags,
+            void* pResult
+        );
 
         [MethodImpl(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpFallbackFailFast")]
@@ -97,7 +114,11 @@ namespace System.Runtime
         //
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpLockCmpXchg32")]
-        internal static extern int InterlockedCompareExchange(ref int location1, int value, int comparand);
+        internal static extern int InterlockedCompareExchange(
+            ref int location1,
+            int value,
+            int comparand
+        );
 
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhpMemoryBarrier")]
@@ -108,6 +129,10 @@ namespace System.Runtime
         // heap memory
         [MethodImplAttribute(MethodImplOptions.InternalCall)]
         [RuntimeImport(RuntimeLibrary, "RhBulkMoveWithWriteBarrier")]
-        internal static extern unsafe void RhBulkMoveWithWriteBarrier(ref byte dmem, ref byte smem, nuint size);
+        internal static extern unsafe void RhBulkMoveWithWriteBarrier(
+            ref byte dmem,
+            ref byte smem,
+            nuint size
+        );
     }
 }

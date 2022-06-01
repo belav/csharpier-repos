@@ -11,9 +11,6 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.VisualBasic
     [Trait(Traits.Feature, Traits.Features.ErrorSquiggles)]
     public class BasicSquigglesDesktop : BasicSquigglesCommon
     {
-        public BasicSquigglesDesktop()
-            : base(WellKnownProjectTemplates.ClassLibrary)
-        {
-        }
+        public BasicSquigglesDesktop() : base(WellKnownProjectTemplates.ClassLibrary) { }
     }
 }

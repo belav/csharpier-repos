@@ -23,7 +23,13 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource
         /// signatures.</param>
         /// <param name="options">Options to use when navigating. See <see cref="MetadataAsSourceOptions"/> for details.</param>
         /// <param name="cancellationToken">To cancel project and document operations</param>
-        Task<MetadataAsSourceFile> GetGeneratedFileAsync(Project project, ISymbol symbol, bool signaturesOnly, MetadataAsSourceOptions options, CancellationToken cancellationToken = default);
+        Task<MetadataAsSourceFile> GetGeneratedFileAsync(
+            Project project,
+            ISymbol symbol,
+            bool signaturesOnly,
+            MetadataAsSourceOptions options,
+            CancellationToken cancellationToken = default
+        );
 
         bool TryAddDocumentToWorkspace(string filePath, SourceTextContainer buffer);
 

@@ -22,8 +22,7 @@ namespace System.Text.Json.Serialization
         /// Constructor. Creates the <see cref="JsonStringEnumConverter"/> with the
         /// default naming policy and allows integer values.
         /// </summary>
-        public JsonStringEnumConverter()
-            : this(namingPolicy: null, allowIntegerValues: true)
+        public JsonStringEnumConverter() : this(namingPolicy: null, allowIntegerValues: true)
         {
             // An empty constructor is needed for construction via attributes
         }
@@ -38,7 +37,10 @@ namespace System.Text.Json.Serialization
         /// True to allow undefined enum values. When true, if an enum value isn't
         /// defined it will output as a number rather than a string.
         /// </param>
-        public JsonStringEnumConverter(JsonNamingPolicy? namingPolicy = null, bool allowIntegerValues = true)
+        public JsonStringEnumConverter(
+            JsonNamingPolicy? namingPolicy = null,
+            bool allowIntegerValues = true
+        )
         {
             _namingPolicy = namingPolicy;
             _converterOptions = allowIntegerValues
@@ -53,7 +55,9 @@ namespace System.Text.Json.Serialization
         }
 
         /// <inheritdoc />
-        public sealed override JsonConverter CreateConverter(Type typeToConvert, JsonSerializerOptions options) =>
-            EnumConverterFactory.Create(typeToConvert, _converterOptions, _namingPolicy, options);
+        public sealed override JsonConverter CreateConverter(
+            Type typeToConvert,
+            JsonSerializerOptions options
+        ) => EnumConverterFactory.Create(typeToConvert, _converterOptions, _namingPolicy, options);
     }
 }

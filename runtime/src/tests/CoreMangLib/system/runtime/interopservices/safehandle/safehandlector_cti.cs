@@ -4,30 +4,19 @@ using System.Security;
 using System;
 using System.Runtime.InteropServices;
 
-
-
 [SecurityCritical]
 public class MySafeHandle : SafeHandle
 {
     public IntPtr Handle
     {
-        get
-        {
-            return handle;
-        }
+        get { return handle; }
     }
 
     [SecurityCritical]
-    public MySafeHandle()
-        : base(IntPtr.Zero, true)
-    {
-    }
+    public MySafeHandle() : base(IntPtr.Zero, true) { }
 
     [SecurityCritical]
-    public MySafeHandle(IntPtr handleValue)
-        : base(handleValue, true)
-    {
-    }
+    public MySafeHandle(IntPtr handleValue) : base(handleValue, true) { }
 
     public override bool IsInvalid
     {
@@ -57,7 +46,7 @@ public class SafeHandleCtor
         TestLibrary.TestFramework.LogInformation("[Positive]");
         retVal = PosTest1() && retVal;
         retVal = PosTest2() && retVal;
-        
+
         return retVal;
     }
 
@@ -68,7 +57,9 @@ public class SafeHandleCtor
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest1: Verify ctor can set correct handle value");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest1: Verify ctor can set correct handle value"
+        );
 
         try
         {
@@ -76,8 +67,13 @@ public class SafeHandleCtor
 
             if (msf.Handle != IntPtr.Zero)
             {
-                TestLibrary.TestFramework.LogError("001.1", "Ctor can not set correct handle value");
-                TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] msf.Handle = " + msf.Handle.ToString());
+                TestLibrary.TestFramework.LogError(
+                    "001.1",
+                    "Ctor can not set correct handle value"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    "WARNING: [LOCAL VARIABLES] msf.Handle = " + msf.Handle.ToString()
+                );
                 retVal = false;
             }
         }
@@ -91,13 +87,14 @@ public class SafeHandleCtor
         return retVal;
     }
 
-
     [SecuritySafeCritical]
     public bool PosTest2()
     {
         bool retVal = true;
 
-        TestLibrary.TestFramework.BeginScenario("PosTest2: Verify ctor can set correct handle value for constructor with parameters");
+        TestLibrary.TestFramework.BeginScenario(
+            "PosTest2: Verify ctor can set correct handle value for constructor with parameters"
+        );
 
         try
         {
@@ -106,9 +103,16 @@ public class SafeHandleCtor
 
             if (msf.Handle != ptr)
             {
-                TestLibrary.TestFramework.LogError("002.1", "Ctor can not set correct handle value");
-                TestLibrary.TestFramework.LogInformation("WARNING: [LOCAL VARIABLES] msf.Handle = " + msf.Handle.ToString() +
-                                                                                                                   ", desiredValue = " + ptr.ToString());
+                TestLibrary.TestFramework.LogError(
+                    "002.1",
+                    "Ctor can not set correct handle value"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    "WARNING: [LOCAL VARIABLES] msf.Handle = "
+                        + msf.Handle.ToString()
+                        + ", desiredValue = "
+                        + ptr.ToString()
+                );
                 retVal = false;
             }
         }

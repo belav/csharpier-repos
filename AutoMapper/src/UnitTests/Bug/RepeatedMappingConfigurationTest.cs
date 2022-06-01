@@ -29,13 +29,11 @@ namespace AutoMapper.UnitTests.Bug
         {
             new MapperConfiguration(cfg =>
             {
-                cfg.CreateMap<ModelSubObject, DtoObject>()
-                    .Include<ModelSubObject, DtoSubObject>();
+                cfg.CreateMap<ModelSubObject, DtoObject>().Include<ModelSubObject, DtoSubObject>();
 
                 cfg.CreateMap<ModelSubObject, DtoSubObject>();
 
-                cfg.CreateMap<ModelSubObject, DtoObject>()
-                    .Include<ModelSubObject, DtoSubObject>();
+                cfg.CreateMap<ModelSubObject, DtoObject>().Include<ModelSubObject, DtoSubObject>();
 
                 cfg.CreateMap<ModelSubObject, DtoSubObject>();
             });

@@ -24,8 +24,8 @@ public class ConnectionCreatingEventData : DbContextEventData
         Func<EventDefinitionBase, EventData, string> messageGenerator,
         DbContext? context,
         Guid connectionId,
-        DateTimeOffset startTime)
-        : base(eventDefinition, messageGenerator, context)
+        DateTimeOffset startTime
+    ) : base(eventDefinition, messageGenerator, context)
     {
         ConnectionId = connectionId;
         StartTime = startTime;

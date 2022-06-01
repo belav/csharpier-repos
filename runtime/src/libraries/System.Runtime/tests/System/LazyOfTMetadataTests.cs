@@ -35,8 +35,15 @@ namespace System.Tests
         [Fact]
         public static void Ctor_TMetadata_LazyThreadSaftetyMode_InvalidMode_ThrowsArgumentOutOfRangeException()
         {
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<int, string>("test", LazyThreadSafetyMode.None - 1)); // Invalid mode
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<int, string>("test", LazyThreadSafetyMode.ExecutionAndPublication + 1)); // Invalid mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () => new Lazy<int, string>("test", LazyThreadSafetyMode.None - 1)
+            ); // Invalid mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () =>
+                    new Lazy<int, string>("test", LazyThreadSafetyMode.ExecutionAndPublication + 1)
+            ); // Invalid mode
         }
 
         [Fact]
@@ -49,7 +56,10 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_TMetadata_NullValueFactory_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () => new Lazy<int, string>(null, "test")); // Value factory is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueFactory",
+                () => new Lazy<int, string>(null, "test")
+            ); // Value factory is null
         }
 
         [Fact]
@@ -62,7 +72,10 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_TMetadata_Bool_NullValueFactory_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () => new Lazy<int, string>(null, "test", false)); // Value factory is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueFactory",
+                () => new Lazy<int, string>(null, "test", false)
+            ); // Value factory is null
         }
 
         [Fact]
@@ -75,13 +88,31 @@ namespace System.Tests
         [Fact]
         public static void Ctor_ValueFactory_TMetadata_LazyThreadSaftetyMode_Invalid()
         {
-            AssertExtensions.Throws<ArgumentNullException>("valueFactory", () => new Lazy<int, string>(null, "test", LazyThreadSafetyMode.PublicationOnly)); // Value factory is null
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueFactory",
+                () => new Lazy<int, string>(null, "test", LazyThreadSafetyMode.PublicationOnly)
+            ); // Value factory is null
 
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<int, string>(() => 42, "test", LazyThreadSafetyMode.None - 1)); // Invalid mode
-            AssertExtensions.Throws<ArgumentOutOfRangeException>("mode", () => new Lazy<int, string>(() => 42, "test", LazyThreadSafetyMode.ExecutionAndPublication + 1)); // Invalid mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () => new Lazy<int, string>(() => 42, "test", LazyThreadSafetyMode.None - 1)
+            ); // Invalid mode
+            AssertExtensions.Throws<ArgumentOutOfRangeException>(
+                "mode",
+                () =>
+                    new Lazy<int, string>(
+                        () => 42,
+                        "test",
+                        LazyThreadSafetyMode.ExecutionAndPublication + 1
+                    )
+            ); // Invalid mode
         }
 
-        private static void VerifyLazy<T, TMetadata>(Lazy<T, TMetadata> lazy, T expectedValue, TMetadata expectedMetadata)
+        private static void VerifyLazy<T, TMetadata>(
+            Lazy<T, TMetadata> lazy,
+            T expectedValue,
+            TMetadata expectedMetadata
+        )
         {
             // Accessing metadata doesn't create the value
             Assert.False(lazy.IsValueCreated);

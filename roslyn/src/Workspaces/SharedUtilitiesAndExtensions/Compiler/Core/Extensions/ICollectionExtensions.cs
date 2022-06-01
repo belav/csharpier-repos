@@ -25,7 +25,8 @@ namespace Microsoft.CodeAnalysis.Shared.Extensions
             }
         }
 
-        public static void AddIfNotNull<T>(this ICollection<T> collection, T? value) where T : struct
+        public static void AddIfNotNull<T>(this ICollection<T> collection, T? value)
+            where T : struct
         {
             if (value != null)
                 collection.Add(value.Value);

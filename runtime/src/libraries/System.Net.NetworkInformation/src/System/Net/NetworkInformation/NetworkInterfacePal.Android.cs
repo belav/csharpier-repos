@@ -9,21 +9,33 @@ namespace System.Net.NetworkInformation
     {
         /// Returns objects that describe the network interfaces on the local computer.
         public static NetworkInterface[] GetAllNetworkInterfaces() => GetAndroidNetworkInterfaces();
+
         public static bool GetIsNetworkAvailable() => TransformNetworkInterfacess(IsSomeNetworkUp);
+
         public static int IPv6LoopbackInterfaceIndex => LoopbackInterfaceIndex;
-        public static int LoopbackInterfaceIndex => TransformNetworkInterfacess(FindLoopbackInterfaceIndex);
+        public static int LoopbackInterfaceIndex =>
+            TransformNetworkInterfacess(FindLoopbackInterfaceIndex);
 
-        internal static unsafe AndroidNetworkInterface[] GetAndroidNetworkInterfaces()
-            => TransformNetworkInterfacess(ToAndroidNetworkInterfaceArray);
+        internal static unsafe AndroidNetworkInterface[] GetAndroidNetworkInterfaces() =>
+            TransformNetworkInterfacess(ToAndroidNetworkInterfaceArray);
 
-        private static unsafe T TransformNetworkInterfacess<T>(Func<int, IntPtr, int, IntPtr, T> transform)
+        private static unsafe T TransformNetworkInterfacess<T>(
+            Func<int, IntPtr, int, IntPtr, T> transform
+        )
         {
             int interfaceCount = 0;
             int addressCount = 0;
-            Interop.Sys.NetworkInterfaceInfo *networkInterfaceInfo = null;
-            Interop.Sys.IpAddressInfo *addressInfo = null;
+            Interop.Sys.NetworkInterfaceInfo* networkInterfaceInfo = null;
+            Interop.Sys.IpAddressInfo* addressInfo = null;
 
-            if (Interop.Sys.GetNetworkInterfaces(&interfaceCount, &networkInterfaceInfo, &addressCount, &addressInfo) != 0)
+            if (
+                Interop.Sys.GetNetworkInterfaces(
+                    &interfaceCount,
+                    &networkInterfaceInfo,
+                    &addressCount,
+                    &addressInfo
+                ) != 0
+            )
             {
                 string message = Interop.Sys.GetLastErrorInfo().GetErrorMessage();
                 throw new NetworkInformationException(message);
@@ -36,7 +48,12 @@ namespace System.Net.NetworkInformation
 
             try
             {
-                return transform(interfaceCount, (IntPtr)networkInterfaceInfo, addressCount, (IntPtr)addressInfo);
+                return transform(
+                    interfaceCount,
+                    (IntPtr)networkInterfaceInfo,
+                    addressCount,
+                    (IntPtr)addressInfo
+                );
             }
             finally
             {
@@ -44,7 +61,12 @@ namespace System.Net.NetworkInformation
             }
         }
 
-        private static unsafe AndroidNetworkInterface[] ToAndroidNetworkInterfaceArray(int interfaceCount, IntPtr networkInterfacesPtr, int addressCount, IntPtr addressPtr)
+        private static unsafe AndroidNetworkInterface[] ToAndroidNetworkInterfaceArray(
+            int interfaceCount,
+            IntPtr networkInterfacesPtr,
+            int addressCount,
+            IntPtr addressPtr
+        )
         {
             var networkInterfaces = new AndroidNetworkInterface[interfaceCount];
 
@@ -73,7 +95,12 @@ namespace System.Net.NetworkInformation
             return networkInterfaces;
         }
 
-        private static unsafe int FindLoopbackInterfaceIndex(int interfaceCount, IntPtr networkInterfacesPtr, int addressCount, IntPtr addressPtr)
+        private static unsafe int FindLoopbackInterfaceIndex(
+            int interfaceCount,
+            IntPtr networkInterfacesPtr,
+            int addressCount,
+            IntPtr addressPtr
+        )
         {
             var networkInterfaceInfo = (Interop.Sys.NetworkInterfaceInfo*)networkInterfacesPtr;
             for (int i = 0; i < interfaceCount; i++, networkInterfaceInfo++)
@@ -87,13 +114,20 @@ namespace System.Net.NetworkInformation
             throw new NetworkInformationException(SR.net_NoLoopback);
         }
 
-        private static unsafe bool IsSomeNetworkUp(int interfaceCount, IntPtr networkInterfacesPtr, int addressCount, IntPtr addressPtr)
+        private static unsafe bool IsSomeNetworkUp(
+            int interfaceCount,
+            IntPtr networkInterfacesPtr,
+            int addressCount,
+            IntPtr addressPtr
+        )
         {
             var networkInterfaceInfo = (Interop.Sys.NetworkInterfaceInfo*)networkInterfacesPtr;
             for (int i = 0; i < interfaceCount; i++, networkInterfaceInfo++)
             {
-                if (networkInterfaceInfo->HardwareType == (int)NetworkInterfaceType.Loopback
-                    || networkInterfaceInfo->HardwareType == (int)NetworkInterfaceType.Tunnel)
+                if (
+                    networkInterfaceInfo->HardwareType == (int)NetworkInterfaceType.Loopback
+                    || networkInterfaceInfo->HardwareType == (int)NetworkInterfaceType.Tunnel
+                )
                 {
                     continue;
                 }

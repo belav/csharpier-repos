@@ -12,7 +12,8 @@ namespace Microsoft.EntityFrameworkCore.SqlServer.Query.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQueryableMethodTranslatingExpressionVisitor
+public class SqlServerQueryableMethodTranslatingExpressionVisitor
+    : RelationalQueryableMethodTranslatingExpressionVisitor
 {
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -23,10 +24,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     public SqlServerQueryableMethodTranslatingExpressionVisitor(
         QueryableMethodTranslatingExpressionVisitorDependencies dependencies,
         RelationalQueryableMethodTranslatingExpressionVisitorDependencies relationalDependencies,
-        QueryCompilationContext queryCompilationContext)
-        : base(dependencies, relationalDependencies, queryCompilationContext)
-    {
-    }
+        QueryCompilationContext queryCompilationContext
+    ) : base(dependencies, relationalDependencies, queryCompilationContext) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -35,10 +34,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
     protected SqlServerQueryableMethodTranslatingExpressionVisitor(
-        SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor)
-        : base(parentVisitor)
-    {
-    }
+        SqlServerQueryableMethodTranslatingExpressionVisitor parentVisitor
+    ) : base(parentVisitor) { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -46,8 +43,8 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor()
-        => new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
+    protected override QueryableMethodTranslatingExpressionVisitor CreateSubqueryVisitor() =>
+        new SqlServerQueryableMethodTranslatingExpressionVisitor(this);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -59,7 +56,9 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
     {
         if (extensionExpression is TemporalQueryRootExpression queryRootExpression)
         {
-            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(queryRootExpression.EntityType);
+            var selectExpression = RelationalDependencies.SqlExpressionFactory.Select(
+                queryRootExpression.EntityType
+            );
 
             var tableExpressions = ExtractTableExpressions(selectExpression);
             ValidateAllTablesHaveSameAnnotations(tableExpressions);
@@ -68,30 +67,42 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                 switch (queryRootExpression)
                 {
                     case TemporalAllQueryRootExpression:
-                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] = TemporalOperationType.All;
+                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] =
+                            TemporalOperationType.All;
                         break;
 
                     case TemporalAsOfQueryRootExpression asOf:
-                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] = TemporalOperationType.AsOf;
-                        tableExpression[SqlServerAnnotationNames.TemporalAsOfPointInTime] = asOf.PointInTime;
+                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] =
+                            TemporalOperationType.AsOf;
+                        tableExpression[SqlServerAnnotationNames.TemporalAsOfPointInTime] =
+                            asOf.PointInTime;
                         break;
 
                     case TemporalBetweenQueryRootExpression between:
-                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] = TemporalOperationType.Between;
-                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom] = between.From;
-                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo] = between.To;
+                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] =
+                            TemporalOperationType.Between;
+                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom] =
+                            between.From;
+                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo] =
+                            between.To;
                         break;
 
                     case TemporalContainedInQueryRootExpression containedIn:
-                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] = TemporalOperationType.ContainedIn;
-                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom] = containedIn.From;
-                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo] = containedIn.To;
+                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] =
+                            TemporalOperationType.ContainedIn;
+                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom] =
+                            containedIn.From;
+                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo] =
+                            containedIn.To;
                         break;
 
                     case TemporalFromToQueryRootExpression fromTo:
-                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] = TemporalOperationType.FromTo;
-                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom] = fromTo.From;
-                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo] = fromTo.To;
+                        tableExpression[SqlServerAnnotationNames.TemporalOperationType] =
+                            TemporalOperationType.FromTo;
+                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationFrom] =
+                            fromTo.From;
+                        tableExpression[SqlServerAnnotationNames.TemporalRangeOperationTo] =
+                            fromTo.To;
                         break;
 
                     default:
@@ -106,14 +117,19 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
                     new ProjectionBindingExpression(
                         selectExpression,
                         new ProjectionMember(),
-                        typeof(ValueBuffer)),
-                    false));
+                        typeof(ValueBuffer)
+                    ),
+                    false
+                )
+            );
         }
 
         return base.VisitExtension(extensionExpression);
     }
 
-    private List<TableExpressionBase> ExtractTableExpressions(TableExpressionBase tableExpressionBase)
+    private List<TableExpressionBase> ExtractTableExpressions(
+        TableExpressionBase tableExpressionBase
+    )
     {
         if (tableExpressionBase is JoinExpressionBase joinExpression)
         {
@@ -155,15 +171,23 @@ public class SqlServerQueryableMethodTranslatingExpressionVisitor : RelationalQu
         {
             if (expectedAnnotations == null)
             {
-                expectedAnnotations = new List<IAnnotation>(tableExpression.GetAnnotations().OrderBy(x => x.Name));
+                expectedAnnotations = new List<IAnnotation>(
+                    tableExpression.GetAnnotations().OrderBy(x => x.Name)
+                );
             }
             else
             {
                 var annotations = tableExpression.GetAnnotations().OrderBy(x => x.Name).ToList();
-                if (expectedAnnotations.Count != annotations.Count
-                    || expectedAnnotations.Zip(annotations, (e, a) => e.Name != a.Name || e.Value != a.Value).Any())
+                if (
+                    expectedAnnotations.Count != annotations.Count
+                    || expectedAnnotations
+                        .Zip(annotations, (e, a) => e.Name != a.Name || e.Value != a.Value)
+                        .Any()
+                )
                 {
-                    throw new InvalidOperationException("Annotations for all tables representing an entity type must match.");
+                    throw new InvalidOperationException(
+                        "Annotations for all tables representing an entity type must match."
+                    );
                 }
             }
         }

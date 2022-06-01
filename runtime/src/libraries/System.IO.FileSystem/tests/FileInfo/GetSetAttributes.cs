@@ -7,8 +7,12 @@ namespace System.IO.Tests
 {
     public class FileInfo_GetSetAttributes : InfoGetSetAttributes<FileInfo>
     {
-        protected override FileAttributes GetAttributes(string path) => new FileInfo(path).Attributes;
-        protected override void SetAttributes(string path, FileAttributes attributes) => new FileInfo(path).Attributes = attributes;
+        protected override FileAttributes GetAttributes(string path) =>
+            new FileInfo(path).Attributes;
+
+        protected override void SetAttributes(string path, FileAttributes attributes) =>
+            new FileInfo(path).Attributes = attributes;
+
         protected override FileInfo CreateInfo(string path) => new FileInfo(path);
 
         [Fact]
@@ -38,7 +42,10 @@ namespace System.IO.Tests
             FileInfo fileInfo = new FileInfo(testFilePath);
             fileInfo.Create().Dispose();
 
-            Assert.Equal(hidden, (fileInfo.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden);
+            Assert.Equal(
+                hidden,
+                (fileInfo.Attributes & FileAttributes.Hidden) == FileAttributes.Hidden
+            );
         }
     }
 }

@@ -16,14 +16,13 @@ namespace System.Reflection.Metadata.Ecma335
         {
             private int _capacityExpansion;
 
-            public HeapBlobBuilder(int capacity)
-                : base(capacity)
-            {
-            }
+            public HeapBlobBuilder(int capacity) : base(capacity) { }
 
             protected override BlobBuilder AllocateChunk(int minimalSize)
             {
-                return new HeapBlobBuilder(Math.Max(Math.Max(minimalSize, ChunkCapacity), _capacityExpansion));
+                return new HeapBlobBuilder(
+                    Math.Max(Math.Max(minimalSize, ChunkCapacity), _capacityExpansion)
+                );
             }
 
             internal void SetCapacity(int capacity)
@@ -34,17 +33,26 @@ namespace System.Reflection.Metadata.Ecma335
 
         // #US heap
         private const int UserStringHeapSizeLimit = 0x01000000;
-        private readonly Dictionary<string, UserStringHandle> _userStrings = new Dictionary<string, UserStringHandle>(256);
+        private readonly Dictionary<string, UserStringHandle> _userStrings = new Dictionary<
+            string,
+            UserStringHandle
+        >(256);
         private readonly HeapBlobBuilder _userStringBuilder = new HeapBlobBuilder(4 * 1024);
         private readonly int _userStringHeapStartOffset;
 
         // #String heap
-        private readonly Dictionary<string, StringHandle> _strings = new Dictionary<string, StringHandle>(256);
+        private readonly Dictionary<string, StringHandle> _strings = new Dictionary<
+            string,
+            StringHandle
+        >(256);
         private readonly int _stringHeapStartOffset;
         private int _stringHeapCapacity = 4 * 1024;
 
         // #Blob heap
-        private readonly Dictionary<ImmutableArray<byte>, BlobHandle> _blobs = new Dictionary<ImmutableArray<byte>, BlobHandle>(1024, ByteSequenceComparer.Instance);
+        private readonly Dictionary<ImmutableArray<byte>, BlobHandle> _blobs = new Dictionary<
+            ImmutableArray<byte>,
+            BlobHandle
+        >(1024, ByteSequenceComparer.Instance);
         private readonly int _blobHeapStartOffset;
         private int _blobHeapSize;
 
@@ -78,7 +86,8 @@ namespace System.Reflection.Metadata.Ecma335
             int userStringHeapStartOffset = 0,
             int stringHeapStartOffset = 0,
             int blobHeapStartOffset = 0,
-            int guidHeapStartOffset = 0)
+            int guidHeapStartOffset = 0
+        )
         {
             // -1 for the 0 we always write at the beginning of the heap:
             if (userStringHeapStartOffset >= UserStringHeapSizeLimit - 1)
@@ -108,7 +117,10 @@ namespace System.Reflection.Metadata.Ecma335
 
             if (guidHeapStartOffset % BlobUtilities.SizeOfGuid != 0)
             {
-                throw new ArgumentException(SR.Format(SR.ValueMustBeMultiple, BlobUtilities.SizeOfGuid), nameof(guidHeapStartOffset));
+                throw new ArgumentException(
+                    SR.Format(SR.ValueMustBeMultiple, BlobUtilities.SizeOfGuid),
+                    nameof(guidHeapStartOffset)
+                );
             }
 
             // Add zero-th entry to all heaps, even in EnC delta.
@@ -175,9 +187,13 @@ namespace System.Reflection.Metadata.Ecma335
         }
 
         // internal for testing
-        internal static int SerializeHandle(ImmutableArray<int> map, StringHandle handle) => map[handle.GetWriterVirtualIndex()];
+        internal static int SerializeHandle(ImmutableArray<int> map, StringHandle handle) =>
+            map[handle.GetWriterVirtualIndex()];
+
         internal static int SerializeHandle(BlobHandle handle) => handle.GetHeapOffset();
+
         internal static int SerializeHandle(GuidHandle handle) => handle.Index;
+
         internal static int SerializeHandle(UserStringHandle handle) => handle.GetHeapOffset();
 
         /// <summary>
@@ -233,7 +249,8 @@ namespace System.Reflection.Metadata.Ecma335
                 handle = BlobHandle.FromOffset(_blobHeapStartOffset + _blobHeapSize);
                 _blobs.Add(value, handle);
 
-                _blobHeapSize += BlobWriterImpl.GetCompressedIntegerSize(value.Length) + value.Length;
+                _blobHeapSize +=
+                    BlobWriterImpl.GetCompressedIntegerSize(value.Length) + value.Length;
             }
 
             return handle;
@@ -320,7 +337,13 @@ namespace System.Reflection.Metadata.Ecma335
             {
                 int next = value.IndexOf(separator, i);
 
-                partBuilder.WriteUTF8(value, i, (next >= 0 ? next : value.Length) - i, allowUnpairedSurrogates: true, prependSize: false);
+                partBuilder.WriteUTF8(
+                    value,
+                    i,
+                    (next >= 0 ? next : value.Length) - i,
+                    allowUnpairedSurrogates: true,
+                    prependSize: false
+                );
                 resultBuilder.WriteCompressedInteger(GetOrAddBlob(partBuilder).GetHeapOffset());
 
                 if (next == -1)
@@ -351,7 +374,8 @@ namespace System.Reflection.Metadata.Ecma335
             const char s1 = '/';
             const char s2 = '\\';
 
-            int count1 = 0, count2 = 0;
+            int count1 = 0,
+                count2 = 0;
             foreach (var c in str)
             {
                 if (c == s1)
@@ -466,7 +490,9 @@ namespace System.Reflection.Metadata.Ecma335
 
             var handle = GetNewUserStringHandle();
             int encodedLength = BlobUtilities.GetUserStringByteLength(length);
-            var reservedUserString = _userStringBuilder.ReserveBytes(BlobWriterImpl.GetCompressedIntegerSize(encodedLength) + encodedLength);
+            var reservedUserString = _userStringBuilder.ReserveBytes(
+                BlobWriterImpl.GetCompressedIntegerSize(encodedLength) + encodedLength
+            );
             return new ReservedBlob<UserStringHandle>(handle, reservedUserString);
         }
 
@@ -520,7 +546,8 @@ namespace System.Reflection.Metadata.Ecma335
         private static ImmutableArray<int> SerializeStringHeap(
             BlobBuilder heapBuilder,
             Dictionary<string, StringHandle> strings,
-            int stringHeapStartOffset)
+            int stringHeapStartOffset
+        )
         {
             // Sort by suffix and remove stringIndex
             var sorted = new List<KeyValuePair<string, StringHandle>>(strings);
@@ -541,14 +568,19 @@ namespace System.Reflection.Metadata.Ecma335
                 int position = stringHeapStartOffset + heapBuilder.Count;
 
                 // It is important to use ordinal comparison otherwise we'll use the current culture!
-                if (prev.EndsWith(entry.Key, StringComparison.Ordinal) && !BlobUtilities.IsLowSurrogateChar(entry.Key[0]))
+                if (
+                    prev.EndsWith(entry.Key, StringComparison.Ordinal)
+                    && !BlobUtilities.IsLowSurrogateChar(entry.Key[0])
+                )
                 {
                     // Map over the tail of prev string. Watch for null-terminator of prev string.
-                    stringVirtualIndexToHeapOffsetMap[entry.Value.GetWriterVirtualIndex()] = position - (BlobUtilities.GetUTF8ByteCount(entry.Key) + 1);
+                    stringVirtualIndexToHeapOffsetMap[entry.Value.GetWriterVirtualIndex()] =
+                        position - (BlobUtilities.GetUTF8ByteCount(entry.Key) + 1);
                 }
                 else
                 {
-                    stringVirtualIndexToHeapOffsetMap[entry.Value.GetWriterVirtualIndex()] = position;
+                    stringVirtualIndexToHeapOffsetMap[entry.Value.GetWriterVirtualIndex()] =
+                        position;
                     heapBuilder.WriteUTF8(entry.Key, allowUnpairedSurrogates: false);
                     heapBuilder.WriteByte(0);
                 }
@@ -567,7 +599,10 @@ namespace System.Reflection.Metadata.Ecma335
         {
             internal static SuffixSort Instance = new SuffixSort();
 
-            public int Compare(KeyValuePair<string, StringHandle> xPair, KeyValuePair<string, StringHandle> yPair)
+            public int Compare(
+                KeyValuePair<string, StringHandle> xPair,
+                KeyValuePair<string, StringHandle> yPair
+            )
             {
                 string x = xPair.Key;
                 string y = yPair.Key;

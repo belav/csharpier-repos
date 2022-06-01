@@ -12,6 +12,14 @@ internal static partial class Interop
     internal static partial class BCrypt
     {
         [LibraryImport(Libraries.BCrypt, StringMarshalling = StringMarshalling.Utf16)]
-        internal static partial NTSTATUS BCryptExportKey(SafeBCryptKeyHandle hKey, IntPtr hExportKey, string pszBlobType, byte[]? pbOutput, int cbOutput, out int pcbResult, int dwFlags);
+        internal static partial NTSTATUS BCryptExportKey(
+            SafeBCryptKeyHandle hKey,
+            IntPtr hExportKey,
+            string pszBlobType,
+            byte[]? pbOutput,
+            int cbOutput,
+            out int pcbResult,
+            int dwFlags
+        );
     }
 }

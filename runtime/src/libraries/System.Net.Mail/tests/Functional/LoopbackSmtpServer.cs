@@ -16,8 +16,19 @@ namespace Systen.Net.Mail.Tests
 {
     public class LoopbackSmtpServer : IDisposable
     {
-        private static readonly ReadOnlyMemory<byte> s_messageTerminator = new byte[] { (byte)'\r', (byte)'\n' };
-        private static readonly ReadOnlyMemory<byte> s_bodyTerminator = new byte[] { (byte)'\r', (byte)'\n', (byte)'.', (byte)'\r', (byte)'\n' };
+        private static readonly ReadOnlyMemory<byte> s_messageTerminator = new byte[]
+        {
+            (byte)'\r',
+            (byte)'\n'
+        };
+        private static readonly ReadOnlyMemory<byte> s_bodyTerminator = new byte[]
+        {
+            (byte)'\r',
+            (byte)'\n',
+            (byte)'.',
+            (byte)'\r',
+            (byte)'\n'
+        };
 
         public bool ReceiveMultipleConnections = false;
         public bool SupportSmtpUTF8 = false;
@@ -29,6 +40,7 @@ namespace Systen.Net.Mail.Tests
         private long _messageCounter = Random.Shared.Next(1000, 2000);
 
         public readonly int Port;
+
         public SmtpClient CreateClient() => new SmtpClient("localhost", Port);
 
         public Action<Socket> OnConnected;
@@ -52,7 +64,11 @@ namespace Systen.Net.Mail.Tests
         public LoopbackSmtpServer()
         {
             _socketsToDispose = new ConcurrentBag<Socket>();
-            _listenSocket = new Socket(AddressFamily.InterNetwork, SocketType.Stream, ProtocolType.Tcp);
+            _listenSocket = new Socket(
+                AddressFamily.InterNetwork,
+                SocketType.Stream,
+                ProtocolType.Tcp
+            );
             _socketsToDispose.Add(_listenSocket);
 
             _listenSocket.Bind(new IPEndPoint(IPAddress.Any, 0));
@@ -67,8 +83,7 @@ namespace Systen.Net.Mail.Tests
                     _socketsToDispose.Add(socket);
                     ConnectionCount++;
                     _ = Task.Run(async () => await HandleConnectionAsync(socket));
-                }
-                while (ReceiveMultipleConnections);
+                } while (ReceiveMultipleConnections);
             });
         }
 
@@ -85,10 +100,13 @@ namespace Systen.Net.Mail.Tests
                 do
                 {
                     int read = await socket.ReceiveAsync(buffer.Slice(received), SocketFlags.None);
-                    if (read == 0) return null;
+                    if (read == 0)
+                        return null;
                     received += read;
-                }
-                while (received < suffix || !buffer.Slice(received - suffix, suffix).Span.SequenceEqual(terminator.Span));
+                } while (
+                    received < suffix
+                    || !buffer.Slice(received - suffix, suffix).Span.SequenceEqual(terminator.Span)
+                );
 
                 MessagesReceived++;
                 return Encoding.UTF8.GetString(buffer.Span.Slice(0, received - suffix));
@@ -107,20 +125,28 @@ namespace Systen.Net.Mail.Tests
                 await SendMessageAsync("220 localhost");
 
                 string message = await ReceiveMessageAsync();
-                Debug.Assert(message.ToLower().StartsWith("helo ") || message.ToLower().StartsWith("ehlo "));
+                Debug.Assert(
+                    message.ToLower().StartsWith("helo ") || message.ToLower().StartsWith("ehlo ")
+                );
                 ClientDomain = message.Substring(5).ToLower();
                 OnCommandReceived?.Invoke(message.Substring(0, 4), ClientDomain);
                 OnHelloReceived?.Invoke(ClientDomain);
 
                 await SendMessageAsync("250-localhost, mock server here");
-                if (SupportSmtpUTF8) await SendMessageAsync("250-SMTPUTF8");
-                await SendMessageAsync("250 AUTH PLAIN LOGIN" + (AdvertiseNtlmAuthSupport ? " NTLM" : ""));
+                if (SupportSmtpUTF8)
+                    await SendMessageAsync("250-SMTPUTF8");
+                await SendMessageAsync(
+                    "250 AUTH PLAIN LOGIN" + (AdvertiseNtlmAuthSupport ? " NTLM" : "")
+                );
 
                 while ((message = await ReceiveMessageAsync()) != null)
                 {
                     int colonIndex = message.IndexOf(':');
                     string command = colonIndex == -1 ? message : message.Substring(0, colonIndex);
-                    string argument = command.Length == message.Length ? string.Empty : message.Substring(colonIndex + 1).Trim();
+                    string argument =
+                        command.Length == message.Length
+                            ? string.Empty
+                            : message.Substring(colonIndex + 1).Trim();
 
                     OnCommandReceived?.Invoke(command, argument);
 
@@ -136,22 +162,31 @@ namespace Systen.Net.Mail.Tests
                             if (parts.Length == 2)
                             {
                                 await SendMessageAsync("334 VXNlcm5hbWU6");
-                                Username = Encoding.UTF8.GetString(Convert.FromBase64String(await ReceiveMessageAsync()));
+                                Username = Encoding.UTF8.GetString(
+                                    Convert.FromBase64String(await ReceiveMessageAsync())
+                                );
                             }
                             else
                             {
-                                Username = Encoding.UTF8.GetString(Convert.FromBase64String(parts[2]));
+                                Username = Encoding.UTF8.GetString(
+                                    Convert.FromBase64String(parts[2])
+                                );
                             }
                             await SendMessageAsync("334 UGFzc3dvcmQ6");
-                            Password = Encoding.UTF8.GetString(Convert.FromBase64String(await ReceiveMessageAsync()));
+                            Password = Encoding.UTF8.GetString(
+                                Convert.FromBase64String(await ReceiveMessageAsync())
+                            );
                             UsernamePassword = Username + Password;
                             await SendMessageAsync("235 Authentication successful");
                         }
                         else if (parts[1].Equals("NTLM", StringComparison.OrdinalIgnoreCase))
                         {
-                            await SendMessageAsync("12345 I lied, I can't speak NTLM - here's an invalid response");
+                            await SendMessageAsync(
+                                "12345 I lied, I can't speak NTLM - here's an invalid response"
+                            );
                         }
-                        else await SendMessageAsync("504 scheme not supported");
+                        else
+                            await SendMessageAsync("504 scheme not supported");
                         continue;
                     }
 
@@ -171,7 +206,9 @@ namespace Systen.Net.Mail.Tests
                             await SendMessageAsync("354 Start mail input; end with <CRLF>.<CRLF>");
                             string data = await ReceiveMessageAsync(true);
                             Message = ParsedMailMessage.Parse(data);
-                            await SendMessageAsync("250 Ok: queued as " + Interlocked.Increment(ref _messageCounter));
+                            await SendMessageAsync(
+                                "250 Ok: queued as " + Interlocked.Increment(ref _messageCounter)
+                            );
                             break;
 
                         case "QUIT":
@@ -217,13 +254,14 @@ namespace Systen.Net.Mail.Tests
             }
         }
 
-
         public class ParsedMailMessage
         {
             public readonly IReadOnlyDictionary<string, string> Headers;
             public readonly string Body;
 
-            private string GetHeader(string name) => Headers.TryGetValue(name, out string value) ? value : "NOT-PRESENT";
+            private string GetHeader(string name) =>
+                Headers.TryGetValue(name, out string value) ? value : "NOT-PRESENT";
+
             public string From => GetHeader("From");
             public string To => GetHeader("To");
             public string Subject => GetHeader("Subject");
@@ -236,7 +274,9 @@ namespace Systen.Net.Mail.Tests
 
             public static ParsedMailMessage Parse(string data)
             {
-                Dictionary<string, string> headers = new Dictionary<string, string>(StringComparer.OrdinalIgnoreCase);
+                Dictionary<string, string> headers = new Dictionary<string, string>(
+                    StringComparer.OrdinalIgnoreCase
+                );
 
                 ReadOnlySpan<char> dataSpan = data;
                 string body = null;
@@ -249,14 +289,20 @@ namespace Systen.Net.Mail.Tests
 
                     if (line.IsEmpty)
                     {
-                        body = dataSpan.Slice(endOfLine + 1).TrimEnd(stackalloc char[] { '\r', '\n' }).ToString();
+                        body = dataSpan
+                            .Slice(endOfLine + 1)
+                            .TrimEnd(stackalloc char[] { '\r', '\n' })
+                            .ToString();
                         break;
                     }
                     else
                     {
                         int colon = line.IndexOf(':');
                         Debug.Assert(colon != -1, "Expected a valid header");
-                        headers.Add(line.Slice(0, colon).Trim().ToString(), line.Slice(colon + 1).Trim().ToString());
+                        headers.Add(
+                            line.Slice(0, colon).Trim().ToString(),
+                            line.Slice(colon + 1).Trim().ToString()
+                        );
                         dataSpan = dataSpan.Slice(endOfLine + 1);
                     }
                 }

@@ -77,7 +77,7 @@ namespace ILCompiler
         }
 
         /// <summary>
-        /// Validates that it will be possible to generate '<paramref name="method"/>' based on the types 
+        /// Validates that it will be possible to generate '<paramref name="method"/>' based on the types
         /// in its signature. Unresolvable types in a method's signature prevent RyuJIT from generating
         /// even a stubbed out throwing implementation.
         /// </summary>
@@ -86,7 +86,10 @@ namespace ILCompiler
             MethodSignature signature = method.Signature;
 
             // Vararg methods are not supported in .NET Core
-            if ((signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask) == MethodSignatureFlags.CallingConventionVarargs)
+            if (
+                (signature.Flags & MethodSignatureFlags.UnmanagedCallingConventionMask)
+                == MethodSignatureFlags.CallingConventionVarargs
+            )
                 ThrowHelper.ThrowBadImageFormatException();
 
             CheckTypeCanBeUsedInSignature(signature.ReturnType);

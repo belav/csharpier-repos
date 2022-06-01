@@ -19,7 +19,7 @@ public class Program
         WithoutGCRef poisoned2;
         Unsafe.SkipInit(out poisoned2);
         result &= VerifyPoison(&poisoned2, sizeof(WithoutGCRef));
-        
+
         Massive poisoned3;
         Unsafe.SkipInit(out poisoned3);
         result &= VerifyPoison(&poisoned3, sizeof(Massive));
@@ -40,12 +40,12 @@ public class Program
     }
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static unsafe bool VerifyPoison(void* val, int size)
-        => AllEq(new Span<byte>(val, size), 0xCD);
+    private static unsafe bool VerifyPoison(void* val, int size) =>
+        AllEq(new Span<byte>(val, size), 0xCD);
 
     [MethodImpl(MethodImplOptions.NoInlining)]
-    private static unsafe bool VerifyZero(void* val, int size)
-        => AllEq(new Span<byte>(val, size), 0);
+    private static unsafe bool VerifyZero(void* val, int size) =>
+        AllEq(new Span<byte>(val, size), 0);
 
     private static unsafe bool AllEq(Span<byte> span, byte byteVal)
     {
@@ -69,7 +69,7 @@ public class Program
         public int ANumber;
         public float AFloat;
     }
-    
+
     private unsafe struct Massive
     {
         public fixed byte Bytes[0x10008];

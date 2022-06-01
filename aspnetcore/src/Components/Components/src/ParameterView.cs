@@ -16,22 +16,33 @@ public readonly struct ParameterView
 {
     private static readonly RenderTreeFrame[] _emptyFrames = new RenderTreeFrame[]
     {
-            RenderTreeFrame.Element(0, string.Empty).WithComponentSubtreeLength(1)
+        RenderTreeFrame.Element(0, string.Empty).WithComponentSubtreeLength(1)
     };
 
-    private static readonly ParameterView _empty = new ParameterView(ParameterViewLifetime.Unbound, _emptyFrames, 0, Array.Empty<CascadingParameterState>());
+    private static readonly ParameterView _empty = new ParameterView(
+        ParameterViewLifetime.Unbound,
+        _emptyFrames,
+        0,
+        Array.Empty<CascadingParameterState>()
+    );
 
     private readonly ParameterViewLifetime _lifetime;
     private readonly RenderTreeFrame[] _frames;
     private readonly int _ownerIndex;
     private readonly IReadOnlyList<CascadingParameterState> _cascadingParameters;
 
-    internal ParameterView(in ParameterViewLifetime lifetime, RenderTreeFrame[] frames, int ownerIndex)
-        : this(lifetime, frames, ownerIndex, Array.Empty<CascadingParameterState>())
-    {
-    }
+    internal ParameterView(
+        in ParameterViewLifetime lifetime,
+        RenderTreeFrame[] frames,
+        int ownerIndex
+    ) : this(lifetime, frames, ownerIndex, Array.Empty<CascadingParameterState>()) { }
 
-    private ParameterView(in ParameterViewLifetime lifetime, RenderTreeFrame[] frames, int ownerIndex, IReadOnlyList<CascadingParameterState> cascadingParameters)
+    private ParameterView(
+        in ParameterViewLifetime lifetime,
+        RenderTreeFrame[] frames,
+        int ownerIndex,
+        IReadOnlyList<CascadingParameterState> cascadingParameters
+    )
     {
         _lifetime = lifetime;
         _frames = frames;
@@ -85,8 +96,8 @@ public readonly struct ParameterView
     /// <typeparam name="TValue">The type of the value.</typeparam>
     /// <param name="parameterName">The name of the parameter.</param>
     /// <returns>The parameter value if found; otherwise the default value for the specified type.</returns>
-    public TValue? GetValueOrDefault<TValue>(string parameterName)
-        => GetValueOrDefault<TValue?>(parameterName, default);
+    public TValue? GetValueOrDefault<TValue>(string parameterName) =>
+        GetValueOrDefault<TValue?>(parameterName, default);
 
     /// <summary>
     /// Gets the value of the parameter with the specified name, or a specified default value
@@ -96,8 +107,8 @@ public readonly struct ParameterView
     /// <param name="parameterName">The name of the parameter.</param>
     /// <param name="defaultValue">The default value to return if no such parameter exists in the collection.</param>
     /// <returns>The parameter value if found; otherwise <paramref name="defaultValue"/>.</returns>
-    public TValue GetValueOrDefault<TValue>(string parameterName, TValue defaultValue)
-        => TryGetValue<TValue>(parameterName, out TValue? result) ? result : defaultValue;
+    public TValue GetValueOrDefault<TValue>(string parameterName, TValue defaultValue) =>
+        TryGetValue<TValue>(parameterName, out TValue? result) ? result : defaultValue;
 
     /// <summary>
     /// Returns a dictionary populated with the contents of the <see cref="ParameterView"/>.
@@ -128,8 +139,9 @@ public readonly struct ParameterView
         return new ParameterView(Lifetime, cloneBuffer, _ownerIndex);
     }
 
-    internal ParameterView WithCascadingParameters(IReadOnlyList<CascadingParameterState> cascadingParameters)
-        => new ParameterView(_lifetime, _frames, _ownerIndex, cascadingParameters);
+    internal ParameterView WithCascadingParameters(
+        IReadOnlyList<CascadingParameterState> cascadingParameters
+    ) => new ParameterView(_lifetime, _frames, _ownerIndex, cascadingParameters);
 
     // It's internal because there isn't a known use case for user code comparing
     // ParameterView instances, and even if there was, it's unlikely it should
@@ -153,7 +165,8 @@ public readonly struct ParameterView
 
         var oldIndex = oldParameters._ownerIndex;
         var newIndex = _ownerIndex;
-        var oldEndIndexExcl = oldIndex + oldParameters._frames[oldIndex].ComponentSubtreeLengthField;
+        var oldEndIndexExcl =
+            oldIndex + oldParameters._frames[oldIndex].ComponentSubtreeLengthField;
         var newEndIndexExcl = newIndex + _frames[newIndex].ComponentSubtreeLengthField;
         while (true)
         {
@@ -181,7 +194,13 @@ public readonly struct ParameterView
                 }
                 else
                 {
-                    if (!string.Equals(oldFrame.AttributeNameField, newFrame.AttributeNameField, StringComparison.Ordinal))
+                    if (
+                        !string.Equals(
+                            oldFrame.AttributeNameField,
+                            newFrame.AttributeNameField,
+                            StringComparison.Ordinal
+                        )
+                    )
                     {
                         return false; // Different names
                     }
@@ -268,7 +287,11 @@ public readonly struct ParameterView
         private CascadingParameterEnumerator _cascadingParameterEnumerator;
         private bool _isEnumeratingDirectParams;
 
-        internal Enumerator(RenderTreeFrame[] frames, int ownerIndex, IReadOnlyList<CascadingParameterState> cascadingParameters)
+        internal Enumerator(
+            RenderTreeFrame[] frames,
+            int ownerIndex,
+            IReadOnlyList<CascadingParameterState> cascadingParameters
+        )
         {
             _directParamsEnumerator = new RenderTreeFrameParameterEnumerator(frames, ownerIndex);
             _cascadingParameterEnumerator = new CascadingParameterEnumerator(cascadingParameters);
@@ -278,9 +301,10 @@ public readonly struct ParameterView
         /// <summary>
         /// Gets the current value of the enumerator.
         /// </summary>
-        public ParameterValue Current => _isEnumeratingDirectParams
-            ? _directParamsEnumerator.Current
-            : _cascadingParameterEnumerator.Current;
+        public ParameterValue Current =>
+            _isEnumeratingDirectParams
+                ? _directParamsEnumerator.Current
+                : _cascadingParameterEnumerator.Current;
 
         /// <summary>
         /// Instructs the enumerator to move to the next value in the sequence.
@@ -316,7 +340,8 @@ public readonly struct ParameterView
         {
             _frames = frames;
             _ownerIndex = ownerIndex;
-            _ownerDescendantsEndIndexExcl = ownerIndex + _frames[ownerIndex].ElementSubtreeLengthField;
+            _ownerDescendantsEndIndexExcl =
+                ownerIndex + _frames[ownerIndex].ElementSubtreeLengthField;
             _currentIndex = ownerIndex;
             _current = default;
         }
@@ -342,7 +367,11 @@ public readonly struct ParameterView
             _currentIndex = nextIndex;
 
             ref var frame = ref _frames[_currentIndex];
-            _current = new ParameterValue(frame.AttributeNameField, frame.AttributeValueField, false);
+            _current = new ParameterValue(
+                frame.AttributeNameField,
+                frame.AttributeValueField,
+                false
+            );
 
             return true;
         }
@@ -354,7 +383,9 @@ public readonly struct ParameterView
         private int _currentIndex;
         private ParameterValue _current;
 
-        public CascadingParameterEnumerator(IReadOnlyList<CascadingParameterState> cascadingParameters)
+        public CascadingParameterEnumerator(
+            IReadOnlyList<CascadingParameterState> cascadingParameters
+        )
         {
             _cascadingParameters = cascadingParameters;
             _currentIndex = -1;
@@ -371,7 +402,11 @@ public readonly struct ParameterView
                 _currentIndex = nextIndex;
 
                 var state = _cascadingParameters[_currentIndex];
-                _current = new ParameterValue(state.LocalValueName, state.ValueSupplier.CurrentValue!, true);
+                _current = new ParameterValue(
+                    state.LocalValueName,
+                    state.ValueSupplier.CurrentValue!,
+                    true
+                );
                 return true;
             }
             else

@@ -24,7 +24,9 @@ namespace Internal.TypeSystem
         public override bool Equals(object o)
         {
             // Its only valid to compare two TypeDescs in the same context
-            Debug.Assert(o is not TypeDesc || object.ReferenceEquals(((TypeDesc)o).Context, this.Context));
+            Debug.Assert(
+                o is not TypeDesc || object.ReferenceEquals(((TypeDesc)o).Context, this.Context)
+            );
             return object.ReferenceEquals(this, o);
         }
 
@@ -32,14 +34,18 @@ namespace Internal.TypeSystem
         public static bool operator ==(TypeDesc left, TypeDesc right)
         {
             // Its only valid to compare two TypeDescs in the same context
-            Debug.Assert(left is null || right is null || object.ReferenceEquals(left.Context, right.Context));
+            Debug.Assert(
+                left is null || right is null || object.ReferenceEquals(left.Context, right.Context)
+            );
             return object.ReferenceEquals(left, right);
         }
 
         public static bool operator !=(TypeDesc left, TypeDesc right)
         {
             // Its only valid to compare two TypeDescs in the same context
-            Debug.Assert(left is null || right is null || object.ReferenceEquals(left.Context, right.Context));
+            Debug.Assert(
+                left is null || right is null || object.ReferenceEquals(left.Context, right.Context)
+            );
             return !object.ReferenceEquals(left, right);
         }
 #endif
@@ -54,10 +60,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual Instantiation Instantiation
         {
-            get
-            {
-                return Instantiation.Empty;
-            }
+            get { return Instantiation.Empty; }
         }
 
         /// <summary>
@@ -66,10 +69,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasInstantiation
         {
-            get
-            {
-                return this.Instantiation.Length != 0;
-            }
+            get { return this.Instantiation.Length != 0; }
         }
 
         internal void SetWellKnownType(WellKnownType wellKnownType)
@@ -159,10 +159,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public TypeFlags Category
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask);
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask); }
         }
 
         /// <summary>
@@ -170,10 +167,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsInterface
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.Interface;
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.Interface; }
         }
 
         /// <summary>
@@ -181,10 +175,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsValueType
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask) < TypeFlags.Class;
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask) < TypeFlags.Class; }
         }
 
         /// <summary>
@@ -193,10 +184,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsPrimitive
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask) < TypeFlags.ValueType;
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask) < TypeFlags.ValueType; }
         }
 
         /// <summary>
@@ -235,10 +223,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsEnum
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.Enum;
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.Enum; }
         }
 
         /// <summary>
@@ -249,7 +234,9 @@ namespace Internal.TypeSystem
             get
             {
                 var baseType = this.BaseType;
-                return (baseType != null) ? baseType.IsWellKnownType(WellKnownType.MulticastDelegate) : false;
+                return (baseType != null)
+                    ? baseType.IsWellKnownType(WellKnownType.MulticastDelegate)
+                    : false;
             }
         }
 
@@ -258,10 +245,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsVoid
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.Void;
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.Void; }
         }
 
         /// <summary>
@@ -269,10 +253,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsString
         {
-            get
-            {
-                return this.IsWellKnownType(WellKnownType.String);
-            }
+            get { return this.IsWellKnownType(WellKnownType.String); }
         }
 
         /// <summary>
@@ -280,10 +261,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsObject
         {
-            get
-            {
-                return this.IsWellKnownType(WellKnownType.Object);
-            }
+            get { return this.IsWellKnownType(WellKnownType.Object); }
         }
 
         /// <summary>
@@ -292,10 +270,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsNullable
         {
-            get
-            {
-                return this.GetTypeDefinition().IsWellKnownType(WellKnownType.Nullable);
-            }
+            get { return this.GetTypeDefinition().IsWellKnownType(WellKnownType.Nullable); }
         }
 
         /// <summary>
@@ -304,10 +279,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsByReferenceOfT
         {
-            get
-            {
-                return this.GetTypeDefinition().IsWellKnownType(WellKnownType.ByReferenceOfT);
-            }
+            get { return this.GetTypeDefinition().IsWellKnownType(WellKnownType.ByReferenceOfT); }
         }
 
         /// <summary>
@@ -317,10 +289,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsArray
         {
-            get
-            {
-                return this is ArrayType;
-            }
+            get { return this is ArrayType; }
         }
 
         /// <summary>
@@ -329,10 +298,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsSzArray
         {
-            get
-            {
-                return this.IsArray && ((ArrayType)this).IsSzArray;
-            }
+            get { return this.IsArray && ((ArrayType)this).IsSzArray; }
         }
 
         /// <summary>
@@ -341,10 +307,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsMdArray
         {
-            get
-            {
-                return this.IsArray && ((ArrayType)this).IsMdArray;
-            }
+            get { return this.IsArray && ((ArrayType)this).IsMdArray; }
         }
 
         /// <summary>
@@ -352,10 +315,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsByRef
         {
-            get
-            {
-                return this is ByRefType;
-            }
+            get { return this is ByRefType; }
         }
 
         /// <summary>
@@ -363,10 +323,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsPointer
         {
-            get
-            {
-                return this is PointerType;
-            }
+            get { return this is PointerType; }
         }
 
         /// <summary>
@@ -374,10 +331,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsFunctionPointer
         {
-            get
-            {
-                return this is FunctionPointerType;
-            }
+            get { return this is FunctionPointerType; }
         }
 
         /// <summary>
@@ -385,10 +339,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsSignatureVariable
         {
-            get
-            {
-                return this is SignatureTypeVariable || this is SignatureMethodVariable;
-            }
+            get { return this is SignatureTypeVariable || this is SignatureMethodVariable; }
         }
 
         /// <summary>
@@ -396,10 +347,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsGenericParameter
         {
-            get
-            {
-                return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.GenericParameter;
-            }
+            get { return GetTypeFlags(TypeFlags.CategoryMask) == TypeFlags.GenericParameter; }
         }
 
         /// <summary>
@@ -411,7 +359,10 @@ namespace Internal.TypeSystem
             get
             {
                 TypeFlags flags = GetTypeFlags(TypeFlags.CategoryMask);
-                Debug.Assert((flags >= TypeFlags.Array && flags <= TypeFlags.Pointer) == (this is ParameterizedType));
+                Debug.Assert(
+                    (flags >= TypeFlags.Array && flags <= TypeFlags.Pointer)
+                        == (this is ParameterizedType)
+                );
                 return (flags >= TypeFlags.Array && flags <= TypeFlags.Pointer);
             }
         }
@@ -424,7 +375,9 @@ namespace Internal.TypeSystem
         {
             get
             {
-                Debug.Assert(GetTypeFlags(TypeFlags.CategoryMask) <= TypeFlags.Interface == this is DefType);
+                Debug.Assert(
+                    GetTypeFlags(TypeFlags.CategoryMask) <= TypeFlags.Interface == this is DefType
+                );
                 return GetTypeFlags(TypeFlags.CategoryMask) <= TypeFlags.Interface;
             }
         }
@@ -449,10 +402,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public virtual DefType BaseType
         {
-            get
-            {
-                return null;
-            }
+            get { return null; }
         }
 
         /// <summary>
@@ -460,10 +410,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool HasBaseType
         {
-            get
-            {
-                return BaseType != null;
-            }
+            get { return BaseType != null; }
         }
 
         /// <summary>
@@ -497,7 +444,11 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.HasStaticConstructor | TypeFlags.HasStaticConstructorComputed) & TypeFlags.HasStaticConstructor) != 0;
+                return (
+                        GetTypeFlags(
+                            TypeFlags.HasStaticConstructor | TypeFlags.HasStaticConstructorComputed
+                        ) & TypeFlags.HasStaticConstructor
+                    ) != 0;
             }
         }
 
@@ -538,13 +489,20 @@ namespace Internal.TypeSystem
         /// is returned. If substitution is not null, then substitution will be applied to
         /// possible target methods before signature comparison. Returns null if method not found.
         /// </summary>
-        public virtual MethodDesc GetMethod(string name, MethodSignature signature, Instantiation substitution)
+        public virtual MethodDesc GetMethod(
+            string name,
+            MethodSignature signature,
+            Instantiation substitution
+        )
         {
             foreach (var method in GetMethods())
             {
                 if (method.Name == name)
                 {
-                    if (signature == null || signature.Equals(method.Signature.ApplySubstitution(substitution)))
+                    if (
+                        signature == null
+                        || signature.Equals(method.Signature.ApplySubstitution(substitution))
+                    )
                         return method;
                 }
             }
@@ -592,7 +550,10 @@ namespace Internal.TypeSystem
             return null;
         }
 
-        public virtual TypeDesc InstantiateSignature(Instantiation typeInstantiation, Instantiation methodInstantiation)
+        public virtual TypeDesc InstantiateSignature(
+            Instantiation typeInstantiation,
+            Instantiation methodInstantiation
+        )
         {
             return this;
         }
@@ -612,10 +573,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsTypeDefinition
         {
-            get
-            {
-                return GetTypeDefinition() == this;
-            }
+            get { return GetTypeDefinition() == this; }
         }
 
         /// <summary>
@@ -634,7 +592,10 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.HasFinalizer | TypeFlags.HasFinalizerComputed) & TypeFlags.HasFinalizer) != 0;
+                return (
+                        GetTypeFlags(TypeFlags.HasFinalizer | TypeFlags.HasFinalizerComputed)
+                        & TypeFlags.HasFinalizer
+                    ) != 0;
             }
         }
 
@@ -655,7 +616,11 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.HasGenericVariance | TypeFlags.HasGenericVarianceComputed) & TypeFlags.HasGenericVariance) != 0;
+                return (
+                        GetTypeFlags(
+                            TypeFlags.HasGenericVariance | TypeFlags.HasGenericVarianceComputed
+                        ) & TypeFlags.HasGenericVariance
+                    ) != 0;
             }
         }
 
@@ -664,10 +629,7 @@ namespace Internal.TypeSystem
         /// </summary>
         public bool IsGenericDefinition
         {
-            get
-            {
-                return HasInstantiation && IsTypeDefinition;
-            }
+            get { return HasInstantiation && IsTypeDefinition; }
         }
 
         /// <summary>
@@ -678,7 +640,10 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.IsByRefLike | TypeFlags.AttributeCacheComputed) & TypeFlags.IsByRefLike) != 0;
+                return (
+                        GetTypeFlags(TypeFlags.IsByRefLike | TypeFlags.AttributeCacheComputed)
+                        & TypeFlags.IsByRefLike
+                    ) != 0;
             }
         }
 
@@ -689,7 +654,12 @@ namespace Internal.TypeSystem
         {
             get
             {
-                return (GetTypeFlags(TypeFlags.IsIDynamicInterfaceCastable | TypeFlags.IsIDynamicInterfaceCastableComputed) & TypeFlags.IsIDynamicInterfaceCastable) != 0;
+                return (
+                        GetTypeFlags(
+                            TypeFlags.IsIDynamicInterfaceCastable
+                                | TypeFlags.IsIDynamicInterfaceCastableComputed
+                        ) & TypeFlags.IsIDynamicInterfaceCastable
+                    ) != 0;
             }
         }
     }

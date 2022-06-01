@@ -13,11 +13,21 @@ namespace System.Net.Tests
         [ActiveIssue("https://github.com/dotnet/runtime/issues/37087", TestPlatforms.Android)]
         public void EventSource_ExistsWithCorrectId()
         {
-            Type esType = typeof(WebRequest).Assembly.GetType("System.Net.NetEventSource", throwOnError: true, ignoreCase: false);
+            Type esType = typeof(WebRequest).Assembly.GetType(
+                "System.Net.NetEventSource",
+                throwOnError: true,
+                ignoreCase: false
+            );
             Assert.NotNull(esType);
 
-            Assert.Equal("Private.InternalDiagnostics.System.Net.Requests", EventSource.GetName(esType));
-            Assert.Equal(Guid.Parse("de972c9f-4457-5dc5-e37b-aaf8033eb3a9"), EventSource.GetGuid(esType));
+            Assert.Equal(
+                "Private.InternalDiagnostics.System.Net.Requests",
+                EventSource.GetName(esType)
+            );
+            Assert.Equal(
+                Guid.Parse("de972c9f-4457-5dc5-e37b-aaf8033eb3a9"),
+                EventSource.GetGuid(esType)
+            );
 
             Assert.NotEmpty(EventSource.GenerateManifest(esType, esType.Assembly.Location));
         }

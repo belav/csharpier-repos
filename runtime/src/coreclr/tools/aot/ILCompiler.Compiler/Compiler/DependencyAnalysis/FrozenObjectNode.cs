@@ -16,7 +16,7 @@ namespace ILCompiler.DependencyAnalysis
     {
         private readonly FieldDesc _field;
         private readonly TypePreinit.ISerializableReference _data;
-        
+
         public FrozenObjectNode(FieldDesc field, TypePreinit.ISerializableReference data)
         {
             _field = field;
@@ -25,7 +25,8 @@ namespace ILCompiler.DependencyAnalysis
 
         public void AppendMangledName(NameMangler nameMangler, Utf8StringBuilder sb)
         {
-            sb.Append(nameMangler.CompilationUnitPrefix).Append("__FrozenObj_")
+            sb.Append(nameMangler.CompilationUnitPrefix)
+                .Append("__FrozenObj_")
                 .Append(nameMangler.GetMangledFieldName(_field));
         }
 
@@ -42,7 +43,11 @@ namespace ILCompiler.DependencyAnalysis
             }
         }
 
-        public override void EncodeData(ref ObjectDataBuilder dataBuilder, NodeFactory factory, bool relocsOnly)
+        public override void EncodeData(
+            ref ObjectDataBuilder dataBuilder,
+            NodeFactory factory,
+            bool relocsOnly
+        )
         {
             // Sync Block
             dataBuilder.EmitZeroPointer();
@@ -51,7 +56,8 @@ namespace ILCompiler.DependencyAnalysis
             _data.WriteContent(ref dataBuilder, this, factory);
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override IEnumerable<DependencyListEntry> GetStaticDependencies(NodeFactory factory)
         {

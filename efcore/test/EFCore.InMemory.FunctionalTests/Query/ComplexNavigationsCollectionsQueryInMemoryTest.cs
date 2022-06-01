@@ -8,8 +8,8 @@ public class ComplexNavigationsCollectionsQueryInMemoryTest
 {
     public ComplexNavigationsCollectionsQueryInMemoryTest(
         ComplexNavigationsQueryInMemoryFixture fixture,
-        ITestOutputHelper testOutputHelper)
-        : base(fixture)
+        ITestOutputHelper testOutputHelper
+    ) : base(fixture)
     {
         //TestLoggerFactory.TestOutputHelper = testOutputHelper;
     }

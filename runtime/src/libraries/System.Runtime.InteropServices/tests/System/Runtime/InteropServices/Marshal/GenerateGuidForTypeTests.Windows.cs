@@ -11,7 +11,10 @@ namespace System.Runtime.InteropServices.Tests
         [Fact]
         public void GenerateGuidForType_ComObject_ReturnsComGuid()
         {
-            Assert.Equal(new Guid("927971f5-0939-11d1-8be1-00c04fd8d503"), Marshal.GenerateGuidForType(typeof(ComImportObject)));
+            Assert.Equal(
+                new Guid("927971f5-0939-11d1-8be1-00c04fd8d503"),
+                Marshal.GenerateGuidForType(typeof(ComImportObject))
+            );
         }
     }
 }

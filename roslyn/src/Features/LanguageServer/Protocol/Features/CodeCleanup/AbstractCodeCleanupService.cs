@@ -36,7 +36,8 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             EnabledDiagnosticOptions enabledDiagnostics,
             IProgressTracker progressTracker,
             CodeActionOptionsProvider fallbackOptions,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             // add one item for the 'format' action we'll do last
             if (enabledDiagnostics.FormatDocument)
@@ -45,33 +46,49 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
             }
 
             // and one for 'remove/sort usings' if we're going to run that.
-            var organizeUsings = enabledDiagnostics.OrganizeUsings.IsRemoveUnusedImportEnabled ||
-                enabledDiagnostics.OrganizeUsings.IsSortImportsEnabled;
+            var organizeUsings =
+                enabledDiagnostics.OrganizeUsings.IsRemoveUnusedImportEnabled
+                || enabledDiagnostics.OrganizeUsings.IsSortImportsEnabled;
             if (organizeUsings)
             {
                 progressTracker.AddItems(1);
             }
 
             document = await ApplyCodeFixesAsync(
-                document, enabledDiagnostics.Diagnostics, progressTracker, fallbackOptions, cancellationToken).ConfigureAwait(false);
+                    document,
+                    enabledDiagnostics.Diagnostics,
+                    progressTracker,
+                    fallbackOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             // do the remove usings after code fix, as code fix might remove some code which can results in unused usings.
             if (organizeUsings)
             {
                 progressTracker.Description = this.OrganizeImportsDescription;
                 document = await RemoveSortUsingsAsync(
-                    document, enabledDiagnostics.OrganizeUsings, fallbackOptions, cancellationToken).ConfigureAwait(false);
+                        document,
+                        enabledDiagnostics.OrganizeUsings,
+                        fallbackOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
                 progressTracker.ItemCompleted();
             }
 
             if (enabledDiagnostics.FormatDocument)
             {
-                var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
+                var formattingOptions = await document
+                    .GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken)
+                    .ConfigureAwait(false);
 
                 progressTracker.Description = FeaturesResources.Formatting_document;
                 using (Logger.LogBlock(FunctionId.CodeCleanup_Format, cancellationToken))
                 {
-                    document = await Formatter.FormatAsync(document, formattingOptions, cancellationToken).ConfigureAwait(false);
+                    document = await Formatter
+                        .FormatAsync(document, formattingOptions, cancellationToken)
+                        .ConfigureAwait(false);
                     progressTracker.ItemCompleted();
                 }
             }
@@ -80,25 +97,49 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         private static async Task<Document> RemoveSortUsingsAsync(
-            Document document, OrganizeUsingsSet organizeUsingsSet, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            OrganizeUsingsSet organizeUsingsSet,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            if (organizeUsingsSet.IsRemoveUnusedImportEnabled &&
-                document.GetLanguageService<IRemoveUnnecessaryImportsService>() is { } removeUsingsService)
+            if (
+                organizeUsingsSet.IsRemoveUnusedImportEnabled
+                && document.GetLanguageService<IRemoveUnnecessaryImportsService>()
+                    is { } removeUsingsService
+            )
             {
-                using (Logger.LogBlock(FunctionId.CodeCleanup_RemoveUnusedImports, cancellationToken))
+                using (
+                    Logger.LogBlock(FunctionId.CodeCleanup_RemoveUnusedImports, cancellationToken)
+                )
                 {
-                    var formattingOptions = await document.GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
-                    document = await removeUsingsService.RemoveUnnecessaryImportsAsync(document, formattingOptions, cancellationToken).ConfigureAwait(false);
+                    var formattingOptions = await document
+                        .GetSyntaxFormattingOptionsAsync(fallbackOptions, cancellationToken)
+                        .ConfigureAwait(false);
+                    document = await removeUsingsService
+                        .RemoveUnnecessaryImportsAsync(
+                            document,
+                            formattingOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
-            if (organizeUsingsSet.IsSortImportsEnabled &&
-                document.GetLanguageService<IOrganizeImportsService>() is { } organizeImportsService)
+            if (
+                organizeUsingsSet.IsSortImportsEnabled
+                && document.GetLanguageService<IOrganizeImportsService>()
+                    is { } organizeImportsService
+            )
             {
                 using (Logger.LogBlock(FunctionId.CodeCleanup_SortImports, cancellationToken))
                 {
-                    var organizeOptions = await document.GetOrganizeImportsOptionsAsync(fallbackOptions, cancellationToken).ConfigureAwait(false);
-                    document = await organizeImportsService.OrganizeImportsAsync(document, organizeOptions, cancellationToken).ConfigureAwait(false);
+                    var organizeOptions = await document
+                        .GetOrganizeImportsOptionsAsync(fallbackOptions, cancellationToken)
+                        .ConfigureAwait(false);
+                    document = await organizeImportsService
+                        .OrganizeImportsAsync(document, organizeOptions, cancellationToken)
+                        .ConfigureAwait(false);
                 }
             }
 
@@ -106,8 +147,12 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         private async Task<Document> ApplyCodeFixesAsync(
-            Document document, ImmutableArray<DiagnosticSet> enabledDiagnosticSets,
-            IProgressTracker progressTracker, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<DiagnosticSet> enabledDiagnosticSets,
+            IProgressTracker progressTracker,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             // Add a progress item for each enabled option we're going to fixup.
             progressTracker.AddItems(enabledDiagnosticSets.Length);
@@ -118,7 +163,13 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
 
                 progressTracker.Description = diagnosticSet.Description;
                 document = await ApplyCodeFixesForSpecificDiagnosticIdsAsync(
-                    document, diagnosticSet.DiagnosticIds, progressTracker, fallbackOptions, cancellationToken).ConfigureAwait(false);
+                        document,
+                        diagnosticSet.DiagnosticIds,
+                        progressTracker,
+                        fallbackOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
 
                 // Mark this option as being completed.
                 progressTracker.ItemCompleted();
@@ -128,41 +179,84 @@ namespace Microsoft.CodeAnalysis.CodeCleanup
         }
 
         private async Task<Document> ApplyCodeFixesForSpecificDiagnosticIdsAsync(
-            Document document, ImmutableArray<string> diagnosticIds, IProgressTracker progressTracker, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+            Document document,
+            ImmutableArray<string> diagnosticIds,
+            IProgressTracker progressTracker,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
             foreach (var diagnosticId in diagnosticIds)
             {
-                using (Logger.LogBlock(FunctionId.CodeCleanup_ApplyCodeFixesAsync, diagnosticId, cancellationToken))
+                using (
+                    Logger.LogBlock(
+                        FunctionId.CodeCleanup_ApplyCodeFixesAsync,
+                        diagnosticId,
+                        cancellationToken
+                    )
+                )
                 {
                     document = await ApplyCodeFixesForSpecificDiagnosticIdAsync(
-                        document, diagnosticId, progressTracker, fallbackOptions, cancellationToken).ConfigureAwait(false);
+                            document,
+                            diagnosticId,
+                            progressTracker,
+                            fallbackOptions,
+                            cancellationToken
+                        )
+                        .ConfigureAwait(false);
                 }
             }
 
             return document;
         }
 
-        private async Task<Document> ApplyCodeFixesForSpecificDiagnosticIdAsync(Document document, string diagnosticId, IProgressTracker progressTracker, CodeActionOptionsProvider fallbackOptions, CancellationToken cancellationToken)
+        private async Task<Document> ApplyCodeFixesForSpecificDiagnosticIdAsync(
+            Document document,
+            string diagnosticId,
+            IProgressTracker progressTracker,
+            CodeActionOptionsProvider fallbackOptions,
+            CancellationToken cancellationToken
+        )
         {
-            var tree = await document.GetRequiredSyntaxTreeAsync(cancellationToken).ConfigureAwait(false);
+            var tree = await document
+                .GetRequiredSyntaxTreeAsync(cancellationToken)
+                .ConfigureAwait(false);
             var textSpan = new TextSpan(0, tree.Length);
 
-            var fixCollection = await _codeFixService.GetDocumentFixAllForIdInSpanAsync(
-                document, textSpan, diagnosticId, fallbackOptions, cancellationToken).ConfigureAwait(false);
+            var fixCollection = await _codeFixService
+                .GetDocumentFixAllForIdInSpanAsync(
+                    document,
+                    textSpan,
+                    diagnosticId,
+                    fallbackOptions,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
             if (fixCollection == null)
             {
                 return document;
             }
 
-            var fixAllService = document.Project.Solution.Workspace.Services.GetRequiredService<IFixAllGetFixesService>();
+            var fixAllService =
+                document.Project.Solution.Workspace.Services.GetRequiredService<IFixAllGetFixesService>();
 
-            var solution = await fixAllService.GetFixAllChangedSolutionAsync(
-                new FixAllContext(fixCollection.FixAllState, progressTracker, cancellationToken)).ConfigureAwait(false);
+            var solution = await fixAllService
+                .GetFixAllChangedSolutionAsync(
+                    new FixAllContext(fixCollection.FixAllState, progressTracker, cancellationToken)
+                )
+                .ConfigureAwait(false);
 
-            return solution.GetDocument(document.Id) ?? throw new NotSupportedException(FeaturesResources.Removal_of_document_not_supported);
+            return solution.GetDocument(document.Id)
+                ?? throw new NotSupportedException(
+                    FeaturesResources.Removal_of_document_not_supported
+                );
         }
 
-        public EnabledDiagnosticOptions GetAllDiagnostics()
-            => new EnabledDiagnosticOptions(formatDocument: true, GetDiagnosticSets(), new OrganizeUsingsSet(isRemoveUnusedImportEnabled: true, isSortImportsEnabled: true));
+        public EnabledDiagnosticOptions GetAllDiagnostics() =>
+            new EnabledDiagnosticOptions(
+                formatDocument: true,
+                GetDiagnosticSets(),
+                new OrganizeUsingsSet(isRemoveUnusedImportEnabled: true, isSortImportsEnabled: true)
+            );
     }
 }

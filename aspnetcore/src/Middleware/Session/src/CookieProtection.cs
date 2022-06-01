@@ -26,7 +26,11 @@ internal static class CookieProtection
         return Convert.ToBase64String(protectedData).TrimEnd('=');
     }
 
-    internal static string Unprotect(IDataProtector protector, string? protectedText, ILogger logger)
+    internal static string Unprotect(
+        IDataProtector protector,
+        string? protectedText,
+        ILogger logger
+    )
     {
         try
         {

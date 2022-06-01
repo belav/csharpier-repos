@@ -19,6 +19,7 @@ namespace Microsoft.CodeAnalysis.InheritanceMargin
             Document document,
             TextSpan spanToSearch,
             bool includeGlobalImports,
-            CancellationToken cancellationToken);
+            CancellationToken cancellationToken
+        );
     }
 }

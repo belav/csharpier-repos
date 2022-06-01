@@ -27,7 +27,13 @@ namespace System.IO
             }
             else if (error == Interop.Error.ENOTSUP)
             {
-                SetAccessOrWriteTimeCore(path, time, isAccessTime: false, checkCreationTime: false, asDirectory);
+                SetAccessOrWriteTimeCore(
+                    path,
+                    time,
+                    isAccessTime: false,
+                    checkCreationTime: false,
+                    asDirectory
+                );
             }
             else
             {
@@ -35,7 +41,11 @@ namespace System.IO
             }
         }
 
-        private static unsafe Interop.Error SetCreationTimeCore(string path, long seconds, long nanoseconds)
+        private static unsafe Interop.Error SetCreationTimeCore(
+            string path,
+            long seconds,
+            long nanoseconds
+        )
         {
             Interop.Sys.TimeSpec timeSpec = default;
 
@@ -47,14 +57,31 @@ namespace System.IO
             attrList.commonAttr = Interop.libc.AttrList.ATTR_CMN_CRTIME;
 
             Interop.Error error =
-                Interop.libc.setattrlist(path, &attrList, &timeSpec, sizeof(Interop.Sys.TimeSpec), new CULong(Interop.libc.FSOPT_NOFOLLOW)) == 0 ?
-                Interop.Error.SUCCESS :
-                Interop.Sys.GetLastErrorInfo().Error;
+                Interop.libc.setattrlist(
+                    path,
+                    &attrList,
+                    &timeSpec,
+                    sizeof(Interop.Sys.TimeSpec),
+                    new CULong(Interop.libc.FSOPT_NOFOLLOW)
+                ) == 0
+                    ? Interop.Error.SUCCESS
+                    : Interop.Sys.GetLastErrorInfo().Error;
 
             return error;
         }
 
-        private void SetAccessOrWriteTime(string path, DateTimeOffset time, bool isAccessTime, bool asDirectory) =>
-            SetAccessOrWriteTimeCore(path, time, isAccessTime, checkCreationTime: true, asDirectory);
+        private void SetAccessOrWriteTime(
+            string path,
+            DateTimeOffset time,
+            bool isAccessTime,
+            bool asDirectory
+        ) =>
+            SetAccessOrWriteTimeCore(
+                path,
+                time,
+                isAccessTime,
+                checkCreationTime: true,
+                asDirectory
+            );
     }
 }

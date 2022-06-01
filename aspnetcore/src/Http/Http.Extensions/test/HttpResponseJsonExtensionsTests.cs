@@ -1,4 +1,4 @@
-// Licensed to the .NET Foundation under one or more agreements.
+﻿// Licensed to the .NET Foundation under one or more agreements.
 // The .NET Foundation licenses this file to you under the MIT license.
 
 using System.Runtime.CompilerServices;
@@ -71,7 +71,11 @@ public class HttpResponseJsonExtensionsTests
 
     private class IntegerConverter : JsonConverter<int>
     {
-        public override int Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+        public override int Read(
+            ref Utf8JsonReader reader,
+            Type typeToConvert,
+            JsonSerializerOptions options
+        )
         {
             throw new NotImplementedException();
         }
@@ -108,7 +112,11 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act
-        await context.Response.WriteAsJsonAsync(1, options: null, contentType: "application/custom-type");
+        await context.Response.WriteAsJsonAsync(
+            1,
+            options: null,
+            contentType: "application/custom-type"
+        );
 
         // Assert
         Assert.Equal("application/custom-type", context.Response.ContentType);
@@ -140,10 +148,7 @@ public class HttpResponseJsonExtensionsTests
         var body = new MemoryStream();
         var context = new DefaultHttpContext();
         context.Response.Body = body;
-        var value = new TestObject
-        {
-            StringProperty = "激光這兩個字是甚麼意思"
-        };
+        var value = new TestObject { StringProperty = "激光這兩個字是甚麼意思" };
 
         // Act
         await context.Response.WriteAsJsonAsync(value);
@@ -199,7 +204,9 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(async () => await context.Response.WriteAsJsonAsync(value: null, type: null!));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            async () => await context.Response.WriteAsJsonAsync(value: null, type: null!)
+        );
     }
 
     [Fact]
@@ -211,7 +218,14 @@ public class HttpResponseJsonExtensionsTests
         context.Response.Body = body;
 
         // Act & Assert
-        await Assert.ThrowsAsync<ArgumentNullException>(async () => await HttpResponseJsonExtensions.WriteAsJsonAsync(response: null!, value: null, typeof(int?)));
+        await Assert.ThrowsAsync<ArgumentNullException>(
+            async () =>
+                await HttpResponseJsonExtensions.WriteAsJsonAsync(
+                    response: null!,
+                    value: null,
+                    typeof(int?)
+                )
+        );
     }
 
     [Fact]
@@ -221,10 +235,7 @@ public class HttpResponseJsonExtensionsTests
         var body = new MemoryStream();
         var context = new DefaultHttpContext();
         context.Response.Body = body;
-        var value = new TestObject
-        {
-            StringProperty = "激光這兩個字是甚麼意思"
-        };
+        var value = new TestObject { StringProperty = "激光這兩個字是甚麼意思" };
 
         // Act
         await context.Response.WriteAsJsonAsync(value, typeof(TestObject));
@@ -323,7 +334,9 @@ public class HttpResponseJsonExtensionsTests
         Assert.InRange(body.ToArray().Length, 0, 1);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerable([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerable(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -357,7 +370,9 @@ public class HttpResponseJsonExtensionsTests
         Assert.InRange(body.ToArray().Length, 0, 1);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerable([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerable(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -381,7 +396,14 @@ public class HttpResponseJsonExtensionsTests
         var iterated = false;
 
         // Act
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => context.Response.WriteAsJsonAsync(AsyncEnumerable(), typeof(IAsyncEnumerable<int>), cts.Token));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () =>
+                context.Response.WriteAsJsonAsync(
+                    AsyncEnumerable(),
+                    typeof(IAsyncEnumerable<int>),
+                    cts.Token
+                )
+        );
 
         // Assert
         Assert.Equal(JsonConstants.JsonContentTypeWithCharset, context.Response.ContentType);
@@ -391,7 +413,9 @@ public class HttpResponseJsonExtensionsTests
         Assert.InRange(body.ToArray().Length, 0, 1);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerable([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerable(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -415,7 +439,9 @@ public class HttpResponseJsonExtensionsTests
         var iterated = false;
 
         // Act
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(() => context.Response.WriteAsJsonAsync(AsyncEnumerable(), cts.Token));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () => context.Response.WriteAsJsonAsync(AsyncEnumerable(), cts.Token)
+        );
 
         // Assert
         Assert.Equal(JsonConstants.JsonContentTypeWithCharset, context.Response.ContentType);
@@ -425,7 +451,9 @@ public class HttpResponseJsonExtensionsTests
         Assert.InRange(body.ToArray().Length, 0, 1);
         Assert.False(iterated);
 
-        async IAsyncEnumerable<int> AsyncEnumerable([EnumeratorCancellation] CancellationToken cancellationToken = default)
+        async IAsyncEnumerable<int> AsyncEnumerable(
+            [EnumeratorCancellation] CancellationToken cancellationToken = default
+        )
         {
             await Task.Yield();
             cts.Cancel();
@@ -475,14 +503,20 @@ public class HttpResponseJsonExtensionsTests
             throw new NotImplementedException();
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             var tcs = new TaskCompletionSource<int>();
             cancellationToken.Register(s => ((TaskCompletionSource<int>)s!).SetCanceled(), tcs);
             return new ValueTask<int>(tcs.Task);
         }
 
-        public override ValueTask WriteAsync(ReadOnlyMemory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask WriteAsync(
+            ReadOnlyMemory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             var tcs = new TaskCompletionSource();
             cancellationToken.Register(s => ((TaskCompletionSource)s!).SetCanceled(), tcs);

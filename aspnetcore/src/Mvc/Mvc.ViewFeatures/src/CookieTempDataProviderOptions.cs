@@ -15,15 +15,12 @@ public class CookieTempDataProviderOptions
     {
         Name = CookieTempDataProvider.CookieName,
         HttpOnly = true,
-
         // Check the comment on CookieBuilder below for more details
         SameSite = SameSiteMode.Lax,
-
         // This cookie has been marked as non-essential because a user could use the SessionStateTempDataProvider,
         // which is more common in production scenarios. Check the comment on CookieBuilder below
         // for more information.
         IsEssential = false,
-
         // Some browsers do not allow non-secure endpoints to set cookies with a 'secure' flag or overwrite cookies
         // whose 'secure' flag is set (http://httpwg.org/http-extensions/draft-ietf-httpbis-cookie-alone.html).
         // Since mixing secure and non-secure endpoints is a common scenario in applications, we are relaxing the

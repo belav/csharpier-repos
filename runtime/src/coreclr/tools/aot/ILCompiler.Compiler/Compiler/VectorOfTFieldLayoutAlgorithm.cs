@@ -20,11 +20,15 @@ namespace ILCompiler
             _fallbackAlgorithm = fallbackAlgorithm;
         }
 
-        public override ComputedInstanceFieldLayout ComputeInstanceLayout(DefType defType, InstanceLayoutKind layoutKind)
+        public override ComputedInstanceFieldLayout ComputeInstanceLayout(
+            DefType defType,
+            InstanceLayoutKind layoutKind
+        )
         {
             TargetDetails targetDetails = defType.Context.Target;
 
-            ComputedInstanceFieldLayout layoutFromMetadata = _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
+            ComputedInstanceFieldLayout layoutFromMetadata =
+                _fallbackAlgorithm.ComputeInstanceLayout(defType, layoutKind);
 
             LayoutInt instanceFieldSize;
 
@@ -52,7 +56,10 @@ namespace ILCompiler
             };
         }
 
-        public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(DefType defType, StaticLayoutKind layoutKind)
+        public unsafe override ComputedStaticFieldLayout ComputeStaticFieldLayout(
+            DefType defType,
+            StaticLayoutKind layoutKind
+        )
         {
             return _fallbackAlgorithm.ComputeStaticFieldLayout(defType, layoutKind);
         }
@@ -62,10 +69,14 @@ namespace ILCompiler
             return false;
         }
 
-        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(DefType type)
+        public override ValueTypeShapeCharacteristics ComputeValueTypeShapeCharacteristics(
+            DefType type
+        )
         {
-            if (type.Context.Target.Architecture == TargetArchitecture.ARM64 &&
-                            type.Instantiation[0].IsPrimitiveNumeric)
+            if (
+                type.Context.Target.Architecture == TargetArchitecture.ARM64
+                && type.Instantiation[0].IsPrimitiveNumeric
+            )
             {
                 return type.InstanceFieldSize.AsInt switch
                 {
@@ -85,7 +96,9 @@ namespace ILCompiler
 
         public static bool IsVectorOfTType(DefType type)
         {
-            return type.IsIntrinsic && type.Namespace == "System.Numerics" && type.Name == "Vector`1";
+            return type.IsIntrinsic
+                && type.Namespace == "System.Numerics"
+                && type.Name == "Vector`1";
         }
     }
 }

@@ -17,33 +17,33 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     [NonVersionable] // This only applies to field layout
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly partial struct Guid
         : ISpanFormattable,
-          IComparable,
-          IComparable<Guid>,
-          IEquatable<Guid>,
-          ISpanParsable<Guid>
+            IComparable,
+            IComparable<Guid>,
+            IEquatable<Guid>,
+            ISpanParsable<Guid>
     {
         public static readonly Guid Empty;
 
-        private readonly int _a;   // Do not rename (binary serialization)
+        private readonly int _a; // Do not rename (binary serialization)
         private readonly short _b; // Do not rename (binary serialization)
         private readonly short _c; // Do not rename (binary serialization)
-        private readonly byte _d;  // Do not rename (binary serialization)
-        private readonly byte _e;  // Do not rename (binary serialization)
-        private readonly byte _f;  // Do not rename (binary serialization)
-        private readonly byte _g;  // Do not rename (binary serialization)
-        private readonly byte _h;  // Do not rename (binary serialization)
-        private readonly byte _i;  // Do not rename (binary serialization)
-        private readonly byte _j;  // Do not rename (binary serialization)
-        private readonly byte _k;  // Do not rename (binary serialization)
+        private readonly byte _d; // Do not rename (binary serialization)
+        private readonly byte _e; // Do not rename (binary serialization)
+        private readonly byte _f; // Do not rename (binary serialization)
+        private readonly byte _g; // Do not rename (binary serialization)
+        private readonly byte _h; // Do not rename (binary serialization)
+        private readonly byte _i; // Do not rename (binary serialization)
+        private readonly byte _j; // Do not rename (binary serialization)
+        private readonly byte _k; // Do not rename (binary serialization)
 
         // Creates a new guid from an array of bytes.
-        public Guid(byte[] b) :
-            this(new ReadOnlySpan<byte>(b ?? throw new ArgumentNullException(nameof(b))))
-        {
-        }
+        public Guid(byte[] b)
+            : this(new ReadOnlySpan<byte>(b ?? throw new ArgumentNullException(nameof(b)))) { }
 
         // Creates a new guid from a read-only span.
         public Guid(ReadOnlySpan<byte> b)
@@ -60,7 +60,7 @@ namespace System
             }
 
             // slower path for BigEndian:
-            _k = b[15];  // hoist bounds checks
+            _k = b[15]; // hoist bounds checks
             _a = BinaryPrimitives.ReadInt32LittleEndian(b);
             _b = BinaryPrimitives.ReadInt16LittleEndian(b.Slice(4));
             _c = BinaryPrimitives.ReadInt16LittleEndian(b.Slice(6));
@@ -74,7 +74,19 @@ namespace System
         }
 
         [CLSCompliant(false)]
-        public Guid(uint a, ushort b, ushort c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k)
+        public Guid(
+            uint a,
+            ushort b,
+            ushort c,
+            byte d,
+            byte e,
+            byte f,
+            byte g,
+            byte h,
+            byte i,
+            byte j,
+            byte k
+        )
         {
             _a = (int)a;
             _b = (short)b;
@@ -114,7 +126,19 @@ namespace System
 
         // Creates a new GUID initialized to the value represented by the
         // arguments.  The bytes are specified like this to avoid endianness issues.
-        public Guid(int a, short b, short c, byte d, byte e, byte f, byte g, byte h, byte i, byte j, byte k)
+        public Guid(
+            int a,
+            short b,
+            short c,
+            byte d,
+            byte e,
+            byte f,
+            byte g,
+            byte h,
+            byte i,
+            byte j,
+            byte k
+        )
         {
             _a = a;
             _b = b;
@@ -144,20 +168,28 @@ namespace System
         {
             [FieldOffset(0)]
             internal uint _a;
+
             [FieldOffset(4)]
             internal uint _bc;
+
             [FieldOffset(4)]
             internal ushort _b;
+
             [FieldOffset(6)]
             internal ushort _c;
+
             [FieldOffset(8)]
             internal uint _defg;
+
             [FieldOffset(8)]
             internal ushort _de;
+
             [FieldOffset(8)]
             internal byte _d;
+
             [FieldOffset(10)]
             internal ushort _fg;
+
             [FieldOffset(12)]
             internal uint _hijk;
 
@@ -262,7 +294,10 @@ namespace System
             }
         }
 
-        public static Guid ParseExact(string input, [StringSyntax(StringSyntaxAttribute.GuidFormat)] string format)
+        public static Guid ParseExact(
+            string input,
+            [StringSyntax(StringSyntaxAttribute.GuidFormat)] string format
+        )
         {
             ArgumentNullException.ThrowIfNull(input);
             ArgumentNullException.ThrowIfNull(format);
@@ -270,7 +305,10 @@ namespace System
             return ParseExact((ReadOnlySpan<char>)input, (ReadOnlySpan<char>)format);
         }
 
-        public static Guid ParseExact(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format)
+        public static Guid ParseExact(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format
+        )
         {
             if (format.Length != 1)
             {
@@ -294,7 +332,11 @@ namespace System
             return result.ToGuid();
         }
 
-        public static bool TryParseExact([NotNullWhen(true)] string? input, [NotNullWhen(true), StringSyntax(StringSyntaxAttribute.GuidFormat)] string? format, out Guid result)
+        public static bool TryParseExact(
+            [NotNullWhen(true)] string? input,
+            [NotNullWhen(true), StringSyntax(StringSyntaxAttribute.GuidFormat)] string? format,
+            out Guid result
+        )
         {
             if (input == null)
             {
@@ -305,7 +347,11 @@ namespace System
             return TryParseExact((ReadOnlySpan<char>)input, format, out result);
         }
 
-        public static bool TryParseExact(ReadOnlySpan<char> input, [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format, out Guid result)
+        public static bool TryParseExact(
+            ReadOnlySpan<char> input,
+            [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format,
+            out Guid result
+        )
         {
             if (format.Length != 1)
             {
@@ -365,12 +411,14 @@ namespace System
             return (guidString[0]) switch
             {
                 '(' => TryParseExactP(guidString, ref result),
-                '{' => guidString.Contains('-') ?
-                        TryParseExactB(guidString, ref result) :
-                        TryParseExactX(guidString, ref result),
-                _ => guidString.Contains('-') ?
-                        TryParseExactD(guidString, ref result) :
-                        TryParseExactN(guidString, ref result),
+                '{'
+                    => guidString.Contains('-')
+                        ? TryParseExactB(guidString, ref result)
+                        : TryParseExactX(guidString, ref result),
+                _
+                    => guidString.Contains('-')
+                        ? TryParseExactD(guidString, ref result)
+                        : TryParseExactN(guidString, ref result),
             };
         }
 
@@ -391,24 +439,35 @@ namespace System
         {
             // e.g. "d85b1407-351d-4694-9392-03acc5870eb1"
 
-            if ((uint)guidString.Length != 36 || guidString[8] != '-' || guidString[13] != '-' || guidString[18] != '-' || guidString[23] != '-')
+            if (
+                (uint)guidString.Length != 36
+                || guidString[8] != '-'
+                || guidString[13] != '-'
+                || guidString[18] != '-'
+                || guidString[23] != '-'
+            )
             {
-                result.SetFailure(overflow: false, guidString.Length != 36 ? nameof(SR.Format_GuidInvLen) : nameof(SR.Format_GuidDashes));
+                result.SetFailure(
+                    overflow: false,
+                    guidString.Length != 36
+                        ? nameof(SR.Format_GuidInvLen)
+                        : nameof(SR.Format_GuidDashes)
+                );
                 return false;
             }
 
             Span<byte> bytes = MemoryMarshal.AsBytes(new Span<GuidResult>(ref result));
             int invalidIfNegative = 0;
-            bytes[0] = DecodeByte(guidString[6],   guidString[7],  ref invalidIfNegative);
-            bytes[1] = DecodeByte(guidString[4],   guidString[5],  ref invalidIfNegative);
-            bytes[2] = DecodeByte(guidString[2],   guidString[3],  ref invalidIfNegative);
-            bytes[3] = DecodeByte(guidString[0],   guidString[1],  ref invalidIfNegative);
-            bytes[4] = DecodeByte(guidString[11],  guidString[12], ref invalidIfNegative);
-            bytes[5] = DecodeByte(guidString[9],   guidString[10], ref invalidIfNegative);
-            bytes[6] = DecodeByte(guidString[16],  guidString[17], ref invalidIfNegative);
-            bytes[7] = DecodeByte(guidString[14],  guidString[15], ref invalidIfNegative);
-            bytes[8] = DecodeByte(guidString[19],  guidString[20], ref invalidIfNegative);
-            bytes[9] = DecodeByte(guidString[21],  guidString[22], ref invalidIfNegative);
+            bytes[0] = DecodeByte(guidString[6], guidString[7], ref invalidIfNegative);
+            bytes[1] = DecodeByte(guidString[4], guidString[5], ref invalidIfNegative);
+            bytes[2] = DecodeByte(guidString[2], guidString[3], ref invalidIfNegative);
+            bytes[3] = DecodeByte(guidString[0], guidString[1], ref invalidIfNegative);
+            bytes[4] = DecodeByte(guidString[11], guidString[12], ref invalidIfNegative);
+            bytes[5] = DecodeByte(guidString[9], guidString[10], ref invalidIfNegative);
+            bytes[6] = DecodeByte(guidString[16], guidString[17], ref invalidIfNegative);
+            bytes[7] = DecodeByte(guidString[14], guidString[15], ref invalidIfNegative);
+            bytes[8] = DecodeByte(guidString[19], guidString[20], ref invalidIfNegative);
+            bytes[9] = DecodeByte(guidString[21], guidString[22], ref invalidIfNegative);
             bytes[10] = DecodeByte(guidString[24], guidString[25], ref invalidIfNegative);
             bytes[11] = DecodeByte(guidString[26], guidString[27], ref invalidIfNegative);
             bytes[12] = DecodeByte(guidString[28], guidString[29], ref invalidIfNegative);
@@ -434,7 +493,10 @@ namespace System
             // We continue to support these but expect them to be incredibly rare.  As such, we
             // optimize for correctly formed strings where all the digits are valid hex, and only
             // fall back to supporting these other forms if parsing fails.
-            if (guidString.IndexOfAny('X', 'x', '+') >= 0 && TryCompatParsing(guidString, ref result))
+            if (
+                guidString.IndexOfAny('X', 'x', '+') >= 0
+                && TryCompatParsing(guidString, ref result)
+            )
             {
                 return true;
             }
@@ -444,8 +506,11 @@ namespace System
 
             static bool TryCompatParsing(ReadOnlySpan<char> guidString, ref GuidResult result)
             {
-                if (TryParseHex(guidString.Slice(0, 8), out result._a) && // _a
-                    TryParseHex(guidString.Slice(9, 4), out uint uintTmp)) // _b
+                if (
+                    TryParseHex(guidString.Slice(0, 8), out result._a)
+                    && // _a
+                    TryParseHex(guidString.Slice(9, 4), out uint uintTmp)
+                ) // _b
                 {
                     result._b = (ushort)uintTmp;
                     if (TryParseHex(guidString.Slice(14, 4), out uintTmp)) // _c
@@ -453,15 +518,27 @@ namespace System
                         result._c = (ushort)uintTmp;
                         if (TryParseHex(guidString.Slice(19, 4), out uintTmp)) // _d, _e
                         {
-                            result._de = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness((ushort)uintTmp) : (ushort)uintTmp;
+                            result._de = BitConverter.IsLittleEndian
+                                ? BinaryPrimitives.ReverseEndianness((ushort)uintTmp)
+                                : (ushort)uintTmp;
                             if (TryParseHex(guidString.Slice(24, 4), out uintTmp)) // _f, _g
                             {
-                                result._fg = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness((ushort)uintTmp) : (ushort)uintTmp;
+                                result._fg = BitConverter.IsLittleEndian
+                                    ? BinaryPrimitives.ReverseEndianness((ushort)uintTmp)
+                                    : (ushort)uintTmp;
 
                                 // Unlike the other components, this one never allowed 0x or +, so we can parse it as straight hex.
-                                if (Number.TryParseUInt32HexNumberStyle(guidString.Slice(28, 8), NumberStyles.AllowHexSpecifier, out uintTmp) == Number.ParsingStatus.OK) // _h, _i, _j, _k
+                                if (
+                                    Number.TryParseUInt32HexNumberStyle(
+                                        guidString.Slice(28, 8),
+                                        NumberStyles.AllowHexSpecifier,
+                                        out uintTmp
+                                    ) == Number.ParsingStatus.OK
+                                ) // _h, _i, _j, _k
                                 {
-                                    result._hijk = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(uintTmp) : uintTmp;
+                                    result._hijk = BitConverter.IsLittleEndian
+                                        ? BinaryPrimitives.ReverseEndianness(uintTmp)
+                                        : uintTmp;
                                     return true;
                                 }
                             }
@@ -570,9 +647,15 @@ namespace System
             }
 
             bool overflow = false;
-            if (!TryParseHex(guidString.Slice(numStart, numLen), out result._a, ref overflow) || overflow)
+            if (
+                !TryParseHex(guidString.Slice(numStart, numLen), out result._a, ref overflow)
+                || overflow
+            )
             {
-                result.SetFailure(overflow, overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar));
+                result.SetFailure(
+                    overflow,
+                    overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar)
+                );
                 return false;
             }
 
@@ -592,9 +675,15 @@ namespace System
             }
 
             // Read in the number
-            if (!TryParseHex(guidString.Slice(numStart, numLen), out result._b, ref overflow) || overflow)
+            if (
+                !TryParseHex(guidString.Slice(numStart, numLen), out result._b, ref overflow)
+                || overflow
+            )
             {
-                result.SetFailure(overflow, overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar));
+                result.SetFailure(
+                    overflow,
+                    overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar)
+                );
                 return false;
             }
 
@@ -614,14 +703,23 @@ namespace System
             }
 
             // Read in the number
-            if (!TryParseHex(guidString.Slice(numStart, numLen), out result._c, ref overflow) || overflow)
+            if (
+                !TryParseHex(guidString.Slice(numStart, numLen), out result._c, ref overflow)
+                || overflow
+            )
             {
-                result.SetFailure(overflow, overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar));
+                result.SetFailure(
+                    overflow,
+                    overflow ? nameof(SR.Overflow_UInt32) : nameof(SR.Format_GuidInvalidChar)
+                );
                 return false;
             }
 
             // Check for '{'
-            if ((uint)guidString.Length <= (uint)(numStart + numLen + 1) || guidString[numStart + numLen + 1] != '{')
+            if (
+                (uint)guidString.Length <= (uint)(numStart + numLen + 1)
+                || guidString[numStart + numLen + 1] != '{'
+            )
             {
                 result.SetFailure(overflow: false, nameof(SR.Format_GuidBrace));
                 return false;
@@ -642,7 +740,7 @@ namespace System
                 numStart = numStart + numLen + 3;
 
                 // Calculate number length
-                if (i < 7)  // first 7 cases
+                if (i < 7) // first 7 cases
                 {
                     numLen = guidString.Slice(numStart).IndexOf(',');
                     if (numLen <= 0)
@@ -656,29 +754,43 @@ namespace System
                     numLen = guidString.Slice(numStart).IndexOf('}');
                     if (numLen <= 0)
                     {
-                        result.SetFailure(overflow: false, nameof(SR.Format_GuidBraceAfterLastNumber));
+                        result.SetFailure(
+                            overflow: false,
+                            nameof(SR.Format_GuidBraceAfterLastNumber)
+                        );
                         return false;
                     }
                 }
 
                 // Read in the number
-                if (!TryParseHex(guidString.Slice(numStart, numLen), out uint byteVal, ref overflow) || overflow || byteVal > byte.MaxValue)
+                if (
+                    !TryParseHex(guidString.Slice(numStart, numLen), out uint byteVal, ref overflow)
+                    || overflow
+                    || byteVal > byte.MaxValue
+                )
                 {
                     // The previous implementation had some odd inconsistencies, which are carried forward here.
                     // The byte values in the X format are treated as integers with regards to overflow, so
                     // a "byte" value like 0xddd in Guid's ctor results in a FormatException but 0xddddddddd results
                     // in OverflowException.
-                    result.SetFailure(overflow,
-                        overflow ? nameof(SR.Overflow_UInt32) :
-                        byteVal > byte.MaxValue ? nameof(SR.Overflow_Byte) :
-                        nameof(SR.Format_GuidInvalidChar));
+                    result.SetFailure(
+                        overflow,
+                        overflow
+                            ? nameof(SR.Overflow_UInt32)
+                            : byteVal > byte.MaxValue
+                                ? nameof(SR.Overflow_Byte)
+                                : nameof(SR.Format_GuidInvalidChar)
+                    );
                     return false;
                 }
                 Unsafe.Add(ref result._d, i) = (byte)byteVal;
             }
 
             // Check for last '}'
-            if (numStart + numLen + 1 >= guidString.Length || guidString[numStart + numLen + 1] != '}')
+            if (
+                numStart + numLen + 1 >= guidString.Length
+                || guidString[numStart + numLen + 1] != '}'
+            )
             {
                 result.SetFailure(overflow: false, nameof(SR.Format_GuidEndBrace));
                 return false;
@@ -720,7 +832,11 @@ namespace System
             return (byte)result;
         }
 
-        private static bool TryParseHex(ReadOnlySpan<char> guidString, out ushort result, ref bool overflow)
+        private static bool TryParseHex(
+            ReadOnlySpan<char> guidString,
+            out ushort result,
+            ref bool overflow
+        )
         {
             bool success = TryParseHex(guidString, out uint tmp, ref overflow);
             result = (ushort)tmp;
@@ -733,7 +849,11 @@ namespace System
             return TryParseHex(guidString, out result, ref overflowIgnored);
         }
 
-        private static bool TryParseHex(ReadOnlySpan<char> guidString, out uint result, ref bool overflow)
+        private static bool TryParseHex(
+            ReadOnlySpan<char> guidString,
+            out uint result,
+            ref bool overflow
+        )
         {
             if ((uint)guidString.Length > 0)
             {
@@ -742,7 +862,11 @@ namespace System
                     guidString = guidString.Slice(1);
                 }
 
-                if ((uint)guidString.Length > 1 && guidString[0] == '0' && (guidString[1] | 0x20) == 'x')
+                if (
+                    (uint)guidString.Length > 1
+                    && guidString[0] == '0'
+                    && (guidString[1] | 0x20) == 'x'
+                )
                 {
                     guidString = guidString.Slice(2);
                 }
@@ -750,7 +874,8 @@ namespace System
 
             // Skip past leading 0s.
             int i = 0;
-            for (; i < guidString.Length && guidString[i] == '0'; i++) ;
+            for (; i < guidString.Length && guidString[i] == '0'; i++)
+                ;
 
             int processedDigits = 0;
             uint tmp = 0;
@@ -760,7 +885,8 @@ namespace System
                 int numValue = HexConverter.FromChar(c);
                 if (numValue == 0xFF)
                 {
-                    if (processedDigits > 8) overflow = true;
+                    if (processedDigits > 8)
+                        overflow = true;
                     result = 0;
                     return false;
                 }
@@ -768,7 +894,8 @@ namespace System
                 processedDigits++;
             }
 
-            if (processedDigits > 8) overflow = true;
+            if (processedDigits > 8)
+                overflow = true;
             result = tmp;
             return true;
         }
@@ -777,7 +904,8 @@ namespace System
         {
             // Find the first whitespace character.  If there is none, just return the input.
             int i;
-            for (i = 0; i < str.Length && !char.IsWhiteSpace(str[i]); i++) ;
+            for (i = 0; i < str.Length && !char.IsWhiteSpace(str[i]); i++)
+                ;
             if (i == str.Length)
             {
                 return str;
@@ -807,9 +935,7 @@ namespace System
         }
 
         private static bool IsHexPrefix(ReadOnlySpan<char> str, int i) =>
-            i + 1 < str.Length &&
-            str[i] == '0' &&
-            (str[i + 1] | 0x20) == 'x';
+            i + 1 < str.Length && str[i] == '0' && (str[i + 1] | 0x20) == 'x';
 
         // Returns an unsigned byte array containing the GUID.
         public byte[] ToByteArray()
@@ -864,7 +990,8 @@ namespace System
 
         // Returns true if and only if the guid represented
         //  by o is the same as this instance.
-        public override bool Equals([NotNullWhen(true)] object? o) => o is Guid g && EqualsCore(this, g);
+        public override bool Equals([NotNullWhen(true)] object? o) =>
+            o is Guid g && EqualsCore(this, g);
 
         public bool Equals(Guid g) => EqualsCore(this, g);
 
@@ -872,7 +999,8 @@ namespace System
         {
             if (Vector128.IsHardwareAccelerated)
             {
-                return Vector128.LoadUnsafe(ref Unsafe.As<Guid, byte>(ref Unsafe.AsRef(in left))) == Vector128.LoadUnsafe(ref Unsafe.As<Guid, byte>(ref Unsafe.AsRef(in right)));
+                return Vector128.LoadUnsafe(ref Unsafe.As<Guid, byte>(ref Unsafe.AsRef(in left)))
+                    == Vector128.LoadUnsafe(ref Unsafe.As<Guid, byte>(ref Unsafe.AsRef(in right)));
             }
 
             ref int rA = ref Unsafe.AsRef(in left._a);
@@ -1058,7 +1186,10 @@ namespace System
 
         // IFormattable interface
         // We currently ignore provider
-        public string ToString([StringSyntax(StringSyntaxAttribute.GuidFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.GuidFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             if (string.IsNullOrEmpty(format))
             {
@@ -1098,14 +1229,25 @@ namespace System
 
             string guidString = string.FastAllocateString(guidSize);
 
-            bool result = TryFormat(new Span<char>(ref guidString.GetRawStringData(), guidString.Length), out int bytesWritten, format);
-            Debug.Assert(result && bytesWritten == guidString.Length, "Formatting guid should have succeeded.");
+            bool result = TryFormat(
+                new Span<char>(ref guidString.GetRawStringData(), guidString.Length),
+                out int bytesWritten,
+                format
+            );
+            Debug.Assert(
+                result && bytesWritten == guidString.Length,
+                "Formatting guid should have succeeded."
+            );
 
             return guidString;
         }
 
         // Returns whether the guid is successfully formatted as a span.
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format = default)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format = default
+        )
         {
             if (format.Length == 0)
             {
@@ -1160,7 +1302,6 @@ namespace System
                 charsWritten = 0;
                 return false;
             }
-
             unsafe
             {
                 fixed (char* guidChars = &MemoryMarshal.GetReference(destination))
@@ -1228,7 +1369,12 @@ namespace System
             return true;
         }
 
-        bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format, IFormatProvider? provider)
+        bool ISpanFormattable.TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.GuidFormat)] ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        )
         {
             // Like with the IFormattable implementation, provider is ignored.
             return TryFormat(destination, out charsWritten, format);
@@ -1490,7 +1636,11 @@ namespace System
         public static Guid Parse(string s, IFormatProvider? provider) => Parse(s);
 
         /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out Guid result) => TryParse(s, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out Guid result
+        ) => TryParse(s, out result);
 
         //
         // ISpanParsable
@@ -1500,6 +1650,10 @@ namespace System
         public static Guid Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out Guid result) => TryParse(s, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out Guid result
+        ) => TryParse(s, out result);
     }
 }

@@ -43,15 +43,15 @@ public partial class HelpBuilder
         /// <summary>
         /// Gets the description for an argument (typically used in the second column text in the arguments section).
         /// </summary>
-        public static string GetArgumentDescription(Argument argument) => argument.Description ?? string.Empty;
+        public static string GetArgumentDescription(Argument argument) =>
+            argument.Description ?? string.Empty;
 
         /// <summary>
         /// Gets the usage title for an argument (for example: <c>&lt;value&gt;</c>, typically used in the first column text in the arguments usage section, or within the synopsis.
         /// </summary>
         public static string GetArgumentUsageLabel(Argument argument)
         {
-            if (argument.ValueType == typeof(bool) ||
-                argument.ValueType == typeof(bool?))
+            if (argument.ValueType == typeof(bool) || argument.ValueType == typeof(bool?))
             {
                 if (argument.FirstParent?.Symbol is Command)
                 {
@@ -64,11 +64,11 @@ public partial class HelpBuilder
             }
 
             string firstColumn;
-            var completions = (argument is { } a
-                                   ? a.GetCompletions()
-                                   : Array.Empty<CompletionItem>())
-                              .Select(item => item.Label)
-                              .ToArray();
+            var completions = (
+                argument is { } a ? a.GetCompletions() : Array.Empty<CompletionItem>()
+            )
+                .Select(item => item.Label)
+                .ToArray();
 
             var arg = argument;
             var helpName = arg?.HelpName ?? string.Empty;
@@ -97,7 +97,8 @@ public partial class HelpBuilder
         /// Gets the description for the specified symbol (typically the used as the second column in help text).
         /// </summary>
         /// <param name="symbol">The symbol to get the description for.</param>
-        public static string GetIdentifierSymbolDescription(IdentifierSymbol symbol) => symbol.Description ?? string.Empty;
+        public static string GetIdentifierSymbolDescription(IdentifierSymbol symbol) =>
+            symbol.Description ?? string.Empty;
 
         /// <summary>
         /// Gets the usage label for the specified symbol (typically used as the first column text in help output).
@@ -105,15 +106,18 @@ public partial class HelpBuilder
         /// <param name="symbol">The symbol to get a help item for.</param>
         /// <param name="context">The help context, used for localization purposes.</param>
         /// <returns>Text to display.</returns>
-        public static string GetIdentifierSymbolUsageLabel(IdentifierSymbol symbol, HelpContext context)
+        public static string GetIdentifierSymbolUsageLabel(
+            IdentifierSymbol symbol,
+            HelpContext context
+        )
         {
             var aliases = symbol.Aliases
-                                .Select(r => r.SplitPrefix())
-                                .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
-                                .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
-                                .GroupBy(t => t.Alias)
-                                .Select(t => t.First())
-                                .Select(t => $"{t.Prefix}{t.Alias}");
+                .Select(r => r.SplitPrefix())
+                .OrderBy(r => r.Prefix, StringComparer.OrdinalIgnoreCase)
+                .ThenBy(r => r.Alias, StringComparer.OrdinalIgnoreCase)
+                .GroupBy(t => t.Alias)
+                .Select(t => t.First())
+                .Select(t => $"{t.Prefix}{t.Alias}");
 
             var firstColumnText = string.Join(", ", aliases);
 
@@ -132,7 +136,8 @@ public partial class HelpBuilder
 
             if (symbol is Option { IsRequired: true })
             {
-                firstColumnText += $" {context.HelpBuilder.LocalizationResources.HelpOptionsRequiredLabel()}";
+                firstColumnText +=
+                    $" {context.HelpBuilder.LocalizationResources.HelpOptionsRequiredLabel()}";
             }
 
             return firstColumnText;
@@ -157,7 +162,11 @@ public partial class HelpBuilder
         public static HelpSectionDelegate SynopsisSection() =>
             ctx =>
             {
-                ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpDescriptionTitle(), ctx.Command.Description, ctx.Output);
+                ctx.HelpBuilder.WriteHeading(
+                    ctx.HelpBuilder.LocalizationResources.HelpDescriptionTitle(),
+                    ctx.Command.Description,
+                    ctx.Output
+                );
             };
 
         /// <summary>
@@ -166,7 +175,11 @@ public partial class HelpBuilder
         public static HelpSectionDelegate CommandUsageSection() =>
             ctx =>
             {
-                ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpUsageTitle(), ctx.HelpBuilder.GetUsage(ctx.Command), ctx.Output);
+                ctx.HelpBuilder.WriteHeading(
+                    ctx.HelpBuilder.LocalizationResources.HelpUsageTitle(),
+                    ctx.HelpBuilder.GetUsage(ctx.Command),
+                    ctx.Output
+                );
             };
 
         ///  <summary>
@@ -175,7 +188,9 @@ public partial class HelpBuilder
         public static HelpSectionDelegate CommandArgumentsSection() =>
             ctx =>
             {
-                TwoColumnHelpRow[] commandArguments = ctx.HelpBuilder.GetCommandArgumentRows(ctx.Command, ctx).ToArray();
+                TwoColumnHelpRow[] commandArguments = ctx.HelpBuilder
+                    .GetCommandArgumentRows(ctx.Command, ctx)
+                    .ToArray();
 
                 if (commandArguments.Length <= 0)
                 {
@@ -183,7 +198,11 @@ public partial class HelpBuilder
                     return;
                 }
 
-                ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpArgumentsTitle(), null, ctx.Output);
+                ctx.HelpBuilder.WriteHeading(
+                    ctx.HelpBuilder.LocalizationResources.HelpArgumentsTitle(),
+                    null,
+                    ctx.Output
+                );
                 ctx.HelpBuilder.WriteColumns(commandArguments, ctx);
             };
 
@@ -222,7 +241,9 @@ public partial class HelpBuilder
                             foreach (var option in parentCommand.Options)
                             {
                                 // global help aliases may be duplicated, we just ignore them
-                                if (option.IsGlobal && !option.IsHidden && uniqueOptions.Add(option))
+                                if (
+                                    option.IsGlobal && !option.IsHidden && uniqueOptions.Add(option)
+                                )
                                 {
                                     options.Add(ctx.HelpBuilder.GetTwoColumnRow(option, ctx));
                                 }
@@ -241,7 +262,11 @@ public partial class HelpBuilder
                     return;
                 }
 
-                ctx.HelpBuilder.WriteHeading(ctx.HelpBuilder.LocalizationResources.HelpOptionsTitle(), null, ctx.Output);
+                ctx.HelpBuilder.WriteHeading(
+                    ctx.HelpBuilder.LocalizationResources.HelpOptionsTitle(),
+                    null,
+                    ctx.Output
+                );
                 ctx.HelpBuilder.WriteColumns(options, ctx);
                 ctx.Output.WriteLine();
             };

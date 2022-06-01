@@ -33,9 +33,7 @@ namespace Test
         {
             try
             {
-                AA.Static3(
-                    ref App.m_abFwd12,
-                    ref App.m_asuFwd6);
+                AA.Static3(ref App.m_abFwd12, ref App.m_asuFwd6);
                 return 101;
             }
             catch (IndexOutOfRangeException)
@@ -43,6 +41,7 @@ namespace Test
                 return 100;
             }
         }
+
         public static sbyte[] m_asuFwd6;
         public static bool[] m_abFwd12;
     }

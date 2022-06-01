@@ -19,7 +19,8 @@ namespace Microsoft.AspNetCore.Builder;
 /// </summary>
 public static class EndpointRouteBuilderExtensions
 {
-    internal const string MapEndpointTrimmerWarning = "This API may perform reflection on the supplied delegate and its parameters. These types may be trimmed if not directly referenced.";
+    internal const string MapEndpointTrimmerWarning =
+        "This API may perform reflection on the supplied delegate and its parameters. These types may be trimmed if not directly referenced.";
 
     // Avoid creating a new array every call
     private static readonly string[] GetVerb = new[] { HttpMethods.Get };
@@ -38,7 +39,9 @@ public static class EndpointRouteBuilderExtensions
     /// The same builder can be used to add endpoints with the given <paramref name="prefix"/>, and to customize those endpoints using conventions.
     /// </returns>
     public static RouteGroupBuilder MapGroup(this IEndpointRouteBuilder endpoints, string prefix) =>
-        endpoints.MapGroup(RoutePatternFactory.Parse(prefix ?? throw new ArgumentNullException(nameof(prefix))));
+        endpoints.MapGroup(
+            RoutePatternFactory.Parse(prefix ?? throw new ArgumentNullException(nameof(prefix)))
+        );
 
     /// <summary>
     /// Creates a <see cref="RouteGroupBuilder"/> for defining endpoints all prefixed with the specified <paramref name="prefix"/>.
@@ -49,7 +52,10 @@ public static class EndpointRouteBuilderExtensions
     /// A <see cref="RouteGroupBuilder"/> that is both an <see cref="IEndpointRouteBuilder"/> and an <see cref="IEndpointConventionBuilder"/>.
     /// The same builder can be used to add endpoints with the given <paramref name="prefix"/>, and to customize those endpoints using conventions.
     /// </returns>
-    public static RouteGroupBuilder MapGroup(this IEndpointRouteBuilder endpoints, RoutePattern prefix)
+    public static RouteGroupBuilder MapGroup(
+        this IEndpointRouteBuilder endpoints,
+        RoutePattern prefix
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(prefix);
@@ -69,10 +75,14 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapGet(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         var returnType = requestDelegate.Method.ReturnType;
-        if (returnType is { IsGenericType: true } && returnType.GetGenericTypeDefinition() == typeof(Task<>))
+        if (
+            returnType is { IsGenericType: true }
+            && returnType.GetGenericTypeDefinition() == typeof(Task<>)
+        )
         {
             return MapMethods(endpoints, pattern, GetVerb, requestDelegate as Delegate);
         }
@@ -90,7 +100,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapPost(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, PostVerb, requestDelegate);
     }
@@ -106,7 +117,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapPut(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, PutVerb, requestDelegate);
     }
@@ -122,7 +134,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapDelete(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, DeleteVerb, requestDelegate);
     }
@@ -138,7 +151,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder MapPatch(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return MapMethods(endpoints, pattern, PatchVerb, requestDelegate);
     }
@@ -153,10 +167,11 @@ public static class EndpointRouteBuilderExtensions
     /// <param name="httpMethods">HTTP methods that the endpoint will match.</param>
     /// <returns>A <see cref="IEndpointConventionBuilder"/> that can be used to further customize the endpoint.</returns>
     public static IEndpointConventionBuilder MapMethods(
-       this IEndpointRouteBuilder endpoints,
-       string pattern,
-       IEnumerable<string> httpMethods,
-       RequestDelegate requestDelegate)
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        IEnumerable<string> httpMethods,
+        RequestDelegate requestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(httpMethods);
 
@@ -177,7 +192,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder Map(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         return Map(endpoints, RoutePatternFactory.Parse(pattern), requestDelegate);
     }
@@ -193,7 +209,8 @@ public static class EndpointRouteBuilderExtensions
     public static IEndpointConventionBuilder Map(
         this IEndpointRouteBuilder endpoints,
         RoutePattern pattern,
-        RequestDelegate requestDelegate)
+        RequestDelegate requestDelegate
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);
@@ -201,10 +218,7 @@ public static class EndpointRouteBuilderExtensions
 
         const int defaultOrder = 0;
 
-        var builder = new RouteEndpointBuilder(
-            requestDelegate,
-            pattern,
-            defaultOrder)
+        var builder = new RouteEndpointBuilder(requestDelegate, pattern, defaultOrder)
         {
             DisplayName = pattern.RawText ?? pattern.DebuggerToString(),
         };
@@ -243,7 +257,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapGet(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, GetVerb, handler);
     }
@@ -260,7 +275,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapPost(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, PostVerb, handler);
     }
@@ -277,7 +293,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapPut(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, PutVerb, handler);
     }
@@ -294,7 +311,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapDelete(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, DeleteVerb, handler);
     }
@@ -311,7 +329,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapPatch(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return MapMethods(endpoints, pattern, PatchVerb, handler);
     }
@@ -327,10 +346,11 @@ public static class EndpointRouteBuilderExtensions
     /// <returns>A <see cref="RouteHandlerBuilder"/> that can be used to further customize the endpoint.</returns>
     [RequiresUnreferencedCode(MapEndpointTrimmerWarning)]
     public static RouteHandlerBuilder MapMethods(
-       this IEndpointRouteBuilder endpoints,
-       string pattern,
-       IEnumerable<string> httpMethods,
-       Delegate handler)
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        IEnumerable<string> httpMethods,
+        Delegate handler
+    )
     {
         ArgumentNullException.ThrowIfNull(httpMethods);
 
@@ -345,7 +365,12 @@ public static class EndpointRouteBuilderExtensions
         }
 
         var initialMetadata = new object[] { new HttpMethodMetadata(httpMethods) };
-        var builder = endpoints.Map(RoutePatternFactory.Parse(pattern), handler, disableInferredBody, initialMetadata);
+        var builder = endpoints.Map(
+            RoutePatternFactory.Parse(pattern),
+            handler,
+            disableInferredBody,
+            initialMetadata
+        );
 
         // Prepends the HTTP method to the DisplayName produced with pattern + method name
         builder.Add(b => b.DisplayName = $"HTTP: {string.Join(", ", httpMethods)} {b.DisplayName}");
@@ -355,12 +380,12 @@ public static class EndpointRouteBuilderExtensions
         static bool ShouldDisableInferredBody(string method)
         {
             // GET, DELETE, HEAD, CONNECT, TRACE, and OPTIONS normally do not contain bodies
-            return method.Equals(HttpMethods.Get, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Delete, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Head, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Options, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Trace, StringComparison.Ordinal) ||
-                   method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
+            return method.Equals(HttpMethods.Get, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Delete, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Head, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Options, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Trace, StringComparison.Ordinal)
+                || method.Equals(HttpMethods.Connect, StringComparison.Ordinal);
         }
     }
 
@@ -376,7 +401,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder Map(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return Map(endpoints, RoutePatternFactory.Parse(pattern), handler);
     }
@@ -393,7 +419,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder Map(
         this IEndpointRouteBuilder endpoints,
         RoutePattern pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         return Map(endpoints, pattern, handler, disableInferBodyFromParameters: false);
     }
@@ -418,7 +445,10 @@ public static class EndpointRouteBuilderExtensions
     /// </para>
     /// </remarks>
     [RequiresUnreferencedCode(MapEndpointTrimmerWarning)]
-    public static RouteHandlerBuilder MapFallback(this IEndpointRouteBuilder endpoints, Delegate handler)
+    public static RouteHandlerBuilder MapFallback(
+        this IEndpointRouteBuilder endpoints,
+        Delegate handler
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(handler);
@@ -451,7 +481,8 @@ public static class EndpointRouteBuilderExtensions
     public static RouteHandlerBuilder MapFallback(
         this IEndpointRouteBuilder endpoints,
         string pattern,
-        Delegate handler)
+        Delegate handler
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);
@@ -469,7 +500,8 @@ public static class EndpointRouteBuilderExtensions
         RoutePattern pattern,
         Delegate handler,
         bool disableInferBodyFromParameters,
-        IEnumerable<object>? initialEndpointMetadata = null)
+        IEnumerable<object>? initialEndpointMetadata = null
+    )
     {
         ArgumentNullException.ThrowIfNull(endpoints);
         ArgumentNullException.ThrowIfNull(pattern);
@@ -484,9 +516,7 @@ public static class EndpointRouteBuilderExtensions
             fullPattern = RoutePatternFactory.Combine(group.GroupPrefix, pattern);
         }
 
-        var builder = new RouteEndpointBuilder(
-            pattern,
-            defaultOrder)
+        var builder = new RouteEndpointBuilder(pattern, defaultOrder)
         {
             DisplayName = fullPattern.RawText ?? fullPattern.DebuggerToString(),
             ServiceProvider = endpoints.ServiceProvider,
@@ -495,8 +525,10 @@ public static class EndpointRouteBuilderExtensions
         // Methods defined in a top-level program are generated as statics so the delegate
         // target will be null. Inline lambdas are compiler generated method so they can
         // be filtered that way.
-        if (GeneratedNameParser.TryParseLocalFunctionName(handler.Method.Name, out var endpointName)
-            || !TypeHelper.IsCompilerGeneratedMethod(handler.Method))
+        if (
+            GeneratedNameParser.TryParseLocalFunctionName(handler.Method.Name, out var endpointName)
+            || !TypeHelper.IsCompilerGeneratedMethod(handler.Method)
+        )
         {
             endpointName ??= handler.Method.Name;
             builder.DisplayName = $"{builder.DisplayName} => {endpointName}";
@@ -512,8 +544,12 @@ public static class EndpointRouteBuilderExtensions
         var routeHandlerBuilder = new RouteHandlerBuilder(dataSource.AddEndpointBuilder(builder));
         routeHandlerBuilder.Add(RouteHandlerBuilderConvention);
 
-        [UnconditionalSuppressMessage("Trimmer", "IL2026", Justification = "We surface a RequireUnreferencedCode in the call to enclosing Map method. " +
-            "The trimmer is unable to infer this on the nested lambda.")]
+        [UnconditionalSuppressMessage(
+            "Trimmer",
+            "IL2026",
+            Justification = "We surface a RequireUnreferencedCode in the call to enclosing Map method. "
+                + "The trimmer is unable to infer this on the nested lambda."
+        )]
         void RouteHandlerBuilderConvention(EndpointBuilder endpointBuilder)
         {
             var routeParams = new List<string>(fullPattern.Parameters.Count);
@@ -522,7 +558,9 @@ public static class EndpointRouteBuilderExtensions
                 routeParams.Add(part.Name);
             }
 
-            var routeHandlerOptions = endpoints.ServiceProvider?.GetService<IOptions<RouteHandlerOptions>>();
+            var routeHandlerOptions = endpoints.ServiceProvider?.GetService<
+                IOptions<RouteHandlerOptions>
+            >();
             var options = new RequestDelegateFactoryOptions
             {
                 ServiceProvider = endpoints.ServiceProvider,

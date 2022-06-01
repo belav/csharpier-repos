@@ -19,7 +19,12 @@ namespace Microsoft.Extensions.Hosting.Systemd
         private CancellationTokenRegistration _applicationStartedRegistration;
         private CancellationTokenRegistration _applicationStoppingRegistration;
 
-        public SystemdLifetime(IHostEnvironment environment, IHostApplicationLifetime applicationLifetime, ISystemdNotifier systemdNotifier, ILoggerFactory loggerFactory)
+        public SystemdLifetime(
+            IHostEnvironment environment,
+            IHostApplicationLifetime applicationLifetime,
+            ISystemdNotifier systemdNotifier,
+            ILoggerFactory loggerFactory
+        )
         {
             ThrowHelper.ThrowIfNull(environment);
             ThrowHelper.ThrowIfNull(applicationLifetime);
@@ -43,16 +48,20 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
         public Task WaitForStartAsync(CancellationToken cancellationToken)
         {
-            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(state =>
-            {
-                ((SystemdLifetime)state!).OnApplicationStarted();
-            },
-            this);
-            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(state =>
-            {
-                ((SystemdLifetime)state!).OnApplicationStopping();
-            },
-            this);
+            _applicationStartedRegistration = ApplicationLifetime.ApplicationStarted.Register(
+                state =>
+                {
+                    ((SystemdLifetime)state!).OnApplicationStarted();
+                },
+                this
+            );
+            _applicationStoppingRegistration = ApplicationLifetime.ApplicationStopping.Register(
+                state =>
+                {
+                    ((SystemdLifetime)state!).OnApplicationStopping();
+                },
+                this
+            );
 
             RegisterShutdownHandlers();
 
@@ -63,8 +72,11 @@ namespace Microsoft.Extensions.Hosting.Systemd
 
         private void OnApplicationStarted()
         {
-            Logger.LogInformation("Application started. Hosting environment: {EnvironmentName}; Content root path: {ContentRoot}",
-                Environment.EnvironmentName, Environment.ContentRootPath);
+            Logger.LogInformation(
+                "Application started. Hosting environment: {EnvironmentName}; Content root path: {ContentRoot}",
+                Environment.EnvironmentName,
+                Environment.ContentRootPath
+            );
 
             SystemdNotifier.Notify(ServiceState.Ready);
         }

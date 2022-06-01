@@ -20,10 +20,7 @@ namespace System.CommandLine
         /// <param name="args">The arguments to parse.</param>
         /// <param name="console">The console to which output is written during invocation.</param>
         /// <returns>The exit code for the invocation.</returns>
-        public static int Invoke(
-            this Command command,
-            string[] args,
-            IConsole? console = null)
+        public static int Invoke(this Command command, string[] args, IConsole? console = null)
         {
             return GetDefaultInvocationPipeline(command, args).Invoke(console);
         }
@@ -39,8 +36,12 @@ namespace System.CommandLine
         public static int Invoke(
             this Command command,
             string commandLine,
-            IConsole? console = null) =>
-            command.Invoke(CommandLineStringSplitter.Instance.Split(commandLine).ToArray(), console);
+            IConsole? console = null
+        ) =>
+            command.Invoke(
+                CommandLineStringSplitter.Instance.Split(commandLine).ToArray(),
+                console
+            );
 
         /// <summary>
         /// Parses and invokes a command.
@@ -52,7 +53,8 @@ namespace System.CommandLine
         public static async Task<int> InvokeAsync(
             this Command command,
             string[] args,
-            IConsole? console = null)
+            IConsole? console = null
+        )
         {
             return await GetDefaultInvocationPipeline(command, args).InvokeAsync(console);
         }
@@ -68,10 +70,17 @@ namespace System.CommandLine
         public static Task<int> InvokeAsync(
             this Command command,
             string commandLine,
-            IConsole? console = null) =>
-            command.InvokeAsync(CommandLineStringSplitter.Instance.Split(commandLine).ToArray(), console);
+            IConsole? console = null
+        ) =>
+            command.InvokeAsync(
+                CommandLineStringSplitter.Instance.Split(commandLine).ToArray(),
+                console
+            );
 
-        private static InvocationPipeline GetDefaultInvocationPipeline(Command command, string[] args)
+        private static InvocationPipeline GetDefaultInvocationPipeline(
+            Command command,
+            string[] args
+        )
         {
             var parseResult = command.GetOrCreateDefaultInvocationParser().Parse(args);
 
@@ -84,9 +93,7 @@ namespace System.CommandLine
         /// <param name="command">The command to use to parse the command line input.</param>
         /// <param name="args">The string arguments to parse.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Command command,
-            params string[] args) =>
+        public static ParseResult Parse(this Command command, params string[] args) =>
             command.GetOrCreateDefaultSimpleParser().Parse(args);
 
         /// <summary>
@@ -96,9 +103,7 @@ namespace System.CommandLine
         /// <param name="command">The command to use to parse the command line input.</param>
         /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Command command,
-            string commandLine) =>
+        public static ParseResult Parse(this Command command, string commandLine) =>
             command.GetOrCreateDefaultSimpleParser().Parse(commandLine);
     }
 }

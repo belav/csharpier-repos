@@ -6,7 +6,6 @@ namespace Nullstone
 {
     public class Test
     {
-
         public static int Main()
         {
             Test t = new Test();
@@ -25,7 +24,6 @@ namespace Nullstone
         {
             short reg;
 
-
             short i1;
             short i2;
             short i3;
@@ -38,7 +36,6 @@ namespace Nullstone
             short i10;
             short i11;
             short i12;
-
 
             i1 = (((short)1));
             i2 = (((short)1));
@@ -55,12 +52,11 @@ namespace Nullstone
 
             reg = (short)(i1 << i2 << i3 << i4 << i5 << i6 << i7 << i8 << i9 << i10 << i11 << i12);
 
-            //System.Console.WriteLine("reg" + reg);  
+            //System.Console.WriteLine("reg" + reg);
 
             a[0] = reg;
 
             return;
-
         }
 
         public void Init()
@@ -71,7 +67,6 @@ namespace Nullstone
 
         public void Finish()
         {
-
             System.Console.WriteLine(a[0]);
 
             return;

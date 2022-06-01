@@ -27,7 +27,11 @@ namespace Test
     public class BaseClass
     {
         [MethodImpl(MethodImplOptions.NoInlining)]
-        public BaseClass(string arg) { Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg); return; }
+        public BaseClass(string arg)
+        {
+            Console.Write("BaseClass::.ctor -- `{0}'\r\n", arg);
+            return;
+        }
     }
 
     public class DerivedClass<T> : BaseClass
@@ -39,4 +43,3 @@ namespace Test
         private DerivedClass(string arg, int marker) : base(arg) { }
     }
 }
-

@@ -9,15 +9,35 @@ namespace AutoMapper.QueryableExtensions.Impl
     using static Expression;
     using static Execution.ExpressionBuilder;
     using static ReflectionHelper;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class EnumerableProjectionMapper : IProjectionMapper
     {
-        private static readonly MethodInfo SelectMethod = typeof(Enumerable).StaticGenericMethod("Select", parametersCount: 2);
-        private static readonly MethodInfo ToArrayMethod = typeof(Enumerable).GetStaticMethod("ToArray");
-        private static readonly MethodInfo ToListMethod = typeof(Enumerable).GetStaticMethod("ToList");
-        public bool IsMatch(MemberMap memberMap, TypeMap memberTypeMap, Expression resolvedSource) =>
-            memberMap.DestinationType.IsCollection() && memberMap.SourceType.IsCollection();
-        public Expression Project(IGlobalConfiguration configuration, MemberMap memberMap, TypeMap memberTypeMap, in ProjectionRequest request, Expression resolvedSource, LetPropertyMaps letPropertyMaps) 
+        private static readonly MethodInfo SelectMethod = typeof(Enumerable).StaticGenericMethod(
+            "Select",
+            parametersCount: 2
+        );
+        private static readonly MethodInfo ToArrayMethod = typeof(Enumerable).GetStaticMethod(
+            "ToArray"
+        );
+        private static readonly MethodInfo ToListMethod = typeof(Enumerable).GetStaticMethod(
+            "ToList"
+        );
+
+        public bool IsMatch(
+            MemberMap memberMap,
+            TypeMap memberTypeMap,
+            Expression resolvedSource
+        ) => memberMap.DestinationType.IsCollection() && memberMap.SourceType.IsCollection();
+
+        public Expression Project(
+            IGlobalConfiguration configuration,
+            MemberMap memberMap,
+            TypeMap memberTypeMap,
+            in ProjectionRequest request,
+            Expression resolvedSource,
+            LetPropertyMaps letPropertyMaps
+        )
         {
             var destinationListType = GetElementType(memberMap.DestinationType);
             var sourceListType = GetElementType(memberMap.SourceType);
@@ -25,8 +45,11 @@ namespace AutoMapper.QueryableExtensions.Impl
             if (sourceListType != destinationListType)
             {
                 var itemRequest = request.InnerRequest(sourceListType, destinationListType);
-                var transformedExpressions = configuration.ProjectionBuilder.CreateProjection(itemRequest, letPropertyMaps.New());
-                if(transformedExpressions.Empty)
+                var transformedExpressions = configuration.ProjectionBuilder.CreateProjection(
+                    itemRequest,
+                    letPropertyMaps.New()
+                );
+                if (transformedExpressions.Empty)
                 {
                     return null;
                 }
@@ -34,12 +57,22 @@ namespace AutoMapper.QueryableExtensions.Impl
             }
             if (!memberMap.DestinationType.IsAssignableFrom(sourceExpression.Type))
             {
-                var convertFunction = memberMap.DestinationType.IsArray ? ToArrayMethod : ToListMethod;
-                sourceExpression = Call(convertFunction.MakeGenericMethod(destinationListType), sourceExpression);
+                var convertFunction = memberMap.DestinationType.IsArray
+                    ? ToArrayMethod
+                    : ToListMethod;
+                sourceExpression = Call(
+                    convertFunction.MakeGenericMethod(destinationListType),
+                    sourceExpression
+                );
             }
             return sourceExpression;
         }
+
         private static Expression Select(Expression source, LambdaExpression lambda) =>
-            Call(SelectMethod.MakeGenericMethod(lambda.Parameters[0].Type, lambda.ReturnType), source, lambda);
+            Call(
+                SelectMethod.MakeGenericMethod(lambda.Parameters[0].Type, lambda.ReturnType),
+                source,
+                lambda
+            );
     }
 }

@@ -23,7 +23,11 @@ namespace ILCompiler
             {
                 if (_generatedAssembly == null)
                 {
-                    Interlocked.CompareExchange(ref _generatedAssembly, new CompilerGeneratedAssembly(this), null);
+                    Interlocked.CompareExchange(
+                        ref _generatedAssembly,
+                        new CompilerGeneratedAssembly(this),
+                        null
+                    );
                 }
 
                 return _generatedAssembly;
@@ -36,8 +40,7 @@ namespace ILCompiler
 
             public override IAssemblyDesc Assembly => this;
 
-            public CompilerGeneratedAssembly(TypeSystemContext context)
-                : base(context, null)
+            public CompilerGeneratedAssembly(TypeSystemContext context) : base(context, null)
             {
                 _globalModuleType = new CompilerGeneratedType(this, "<Module>");
             }
@@ -57,7 +60,11 @@ namespace ILCompiler
                 return new AssemblyName("System.Private.CompilerGenerated");
             }
 
-            public override object GetType(string nameSpace, string name, NotFoundBehavior notFoundBehavior)
+            public override object GetType(
+                string nameSpace,
+                string name,
+                NotFoundBehavior notFoundBehavior
+            )
             {
                 Debug.Fail("Resolving a TypeRef in the compiler generated assembly?");
                 throw new NotImplementedException();
@@ -80,39 +87,24 @@ namespace ILCompiler
 
             public override TypeSystemContext Context
             {
-                get
-                {
-                    return Module.Context;
-                }
+                get { return Module.Context; }
             }
 
-            public override string Name
-            {
-                get;
-            }
+            public override string Name { get; }
 
             public override string DiagnosticName
             {
-                get
-                {
-                    return Name;
-                }
+                get { return Name; }
             }
 
             public override string Namespace
             {
-                get
-                {
-                    return "Internal.CompilerGenerated";
-                }
+                get { return "Internal.CompilerGenerated"; }
             }
 
             public override string DiagnosticNamespace
             {
-                get
-                {
-                    return "Internal.CompilerGenerated";
-                }
+                get { return "Internal.CompilerGenerated"; }
             }
 
             public override int GetHashCode()
@@ -142,11 +134,11 @@ namespace ILCompiler
 
             protected override TypeFlags ComputeTypeFlags(TypeFlags mask)
             {
-                return TypeFlags.Class |
-                    TypeFlags.HasGenericVarianceComputed |
-                    TypeFlags.HasStaticConstructorComputed |
-                    TypeFlags.HasFinalizerComputed |
-                    TypeFlags.AttributeCacheComputed;
+                return TypeFlags.Class
+                    | TypeFlags.HasGenericVarianceComputed
+                    | TypeFlags.HasStaticConstructorComputed
+                    | TypeFlags.HasFinalizerComputed
+                    | TypeFlags.AttributeCacheComputed;
             }
 
             public override ClassLayoutMetadata GetClassLayout()
@@ -184,43 +176,27 @@ namespace ILCompiler
                 return Array.Empty<MethodImplRecord>();
             }
 
-            public override ModuleDesc Module
-            {
-                get;
-            }
+            public override ModuleDesc Module { get; }
 
             public override PInvokeStringFormat PInvokeStringFormat
             {
-                get
-                {
-                    return PInvokeStringFormat.AutoClass;
-                }
+                get { return PInvokeStringFormat.AutoClass; }
             }
 
             public override bool IsExplicitLayout
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsSequentialLayout
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override bool IsBeforeFieldInit
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
-
 
             public override DefType BaseType
             {
@@ -243,34 +219,22 @@ namespace ILCompiler
 
             public override bool IsSealed
             {
-                get
-                {
-                    return true;
-                }
+                get { return true; }
             }
 
             public override bool IsAbstract
             {
-                get
-                {
-                    return false;
-                }
+                get { return false; }
             }
 
             public override DefType ContainingType
             {
-                get
-                {
-                    return null;
-                }
+                get { return null; }
             }
 
             public override DefType[] ExplicitlyImplementedInterfaces
             {
-                get
-                {
-                    return Array.Empty<DefType>();
-                }
+                get { return Array.Empty<DefType>(); }
             }
         }
     }

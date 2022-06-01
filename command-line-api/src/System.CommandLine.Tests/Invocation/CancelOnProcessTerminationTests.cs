@@ -20,7 +20,7 @@ namespace System.CommandLine.Tests.Invocation
         private const int SIGTERM = 15;
 
         [LinuxOnlyTheory]
-        [InlineData(SIGINT, Skip = "https://github.com/dotnet/command-line-api/issues/1206")]  // Console.CancelKeyPress
+        [InlineData(SIGINT, Skip = "https://github.com/dotnet/command-line-api/issues/1206")] // Console.CancelKeyPress
         [InlineData(SIGTERM)] // AppDomain.CurrentDomain.ProcessExit
         public async Task CancelOnProcessTermination_cancels_on_process_termination(int signo)
         {
@@ -30,7 +30,7 @@ namespace System.CommandLine.Tests.Invocation
             Func<string[], Task<int>> childProgram = (string[] args) =>
             {
                 var command = new Command("the-command");
-            
+
                 command.SetHandler(async context =>
                 {
                     var cancellationToken = context.GetCancellationToken();
@@ -55,20 +55,19 @@ namespace System.CommandLine.Tests.Invocation
 
                         context.ExitCode = CancelledExitCode;
                     }
-
                 });
 
-                return new CommandLineBuilder(new RootCommand
-                       {
-                           command
-                       })
-                       .CancelOnProcessTermination()
-                       .Build()
-                       .InvokeAsync("the-command");
+                return new CommandLineBuilder(new RootCommand { command })
+                    .CancelOnProcessTermination()
+                    .Build()
+                    .InvokeAsync("the-command");
             };
 
-            using RemoteExecution program = RemoteExecutor.Execute(childProgram, psi: new ProcessStartInfo { RedirectStandardOutput = true });
-            
+            using RemoteExecution program = RemoteExecutor.Execute(
+                childProgram,
+                psi: new ProcessStartInfo { RedirectStandardOutput = true }
+            );
+
             Process process = program.Process;
 
             // Wait for the child to be in the command handler.

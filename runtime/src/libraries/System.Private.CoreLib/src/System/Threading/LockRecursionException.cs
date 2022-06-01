@@ -6,25 +6,19 @@ using System.Runtime.Serialization;
 namespace System.Threading
 {
     [Serializable]
-    [System.Runtime.CompilerServices.TypeForwardedFrom("System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [System.Runtime.CompilerServices.TypeForwardedFrom(
+        "System.Core, Version=3.5.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public class LockRecursionException : System.Exception
     {
-        public LockRecursionException()
-        {
-        }
+        public LockRecursionException() { }
 
-        public LockRecursionException(string? message)
-            : base(message)
-        {
-        }
+        public LockRecursionException(string? message) : base(message) { }
 
         public LockRecursionException(string? message, Exception? innerException)
-            : base(message, innerException)
-        {
-        }
+            : base(message, innerException) { }
 
-        protected LockRecursionException(SerializationInfo info, StreamingContext context) : base(info, context)
-        {
-        }
+        protected LockRecursionException(SerializationInfo info, StreamingContext context)
+            : base(info, context) { }
     }
 }

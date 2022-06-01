@@ -96,10 +96,15 @@ namespace System.Net.Http.HPack
         // TODO: The HeaderField constructor will allocate and copy again. We should avoid this.
         // Tackle as part of header table allocation strategy in general (see note in HeaderField constructor).
 
-        private static HeaderField CreateHeaderField(int staticTableIndex, string name, string value) =>
+        private static HeaderField CreateHeaderField(
+            int staticTableIndex,
+            string name,
+            string value
+        ) =>
             new HeaderField(
                 staticTableIndex,
                 Encoding.ASCII.GetBytes(name),
-                value.Length != 0 ? Encoding.ASCII.GetBytes(value) : Array.Empty<byte>());
+                value.Length != 0 ? Encoding.ASCII.GetBytes(value) : Array.Empty<byte>()
+            );
     }
 }

@@ -20,8 +20,7 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     ///     Creates a new instance of the <see cref="TableExpressionBase" /> class.
     /// </summary>
     /// <param name="alias">A string alias for the table source.</param>
-    protected TableExpressionBase(string? alias)
-        : this(alias, annotations: null)
+    protected TableExpressionBase(string? alias) : this(alias, annotations: null)
     {
         Alias = alias;
     }
@@ -50,16 +49,13 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     public virtual string? Alias { get; internal set; }
 
     /// <inheritdoc />
-    protected override Expression VisitChildren(ExpressionVisitor visitor)
-        => this;
+    protected override Expression VisitChildren(ExpressionVisitor visitor) => this;
 
     /// <inheritdoc />
-    public override Type Type
-        => typeof(object);
+    public override Type Type => typeof(object);
 
     /// <inheritdoc />
-    public sealed override ExpressionType NodeType
-        => ExpressionType.Extension;
+    public sealed override ExpressionType NodeType => ExpressionType.Extension;
 
     /// <summary>
     ///     Gets the value annotation with the given name, returning <see langword="null" /> if it does not exist.
@@ -72,7 +68,6 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     public virtual object? this[string name]
     {
         get => FindAnnotation(name)?.Value;
-
         set
         {
             Check.NotEmpty(name, nameof(name));
@@ -95,8 +90,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     protected abstract void Print(ExpressionPrinter expressionPrinter);
 
     /// <inheritdoc />
-    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter)
-        => Print(expressionPrinter);
+    void IPrintableExpression.Print(ExpressionPrinter expressionPrinter) =>
+        Print(expressionPrinter);
 
     /// <summary>
     ///     Creates a printable string representation of annotations associated with the given expression using <see cref="ExpressionPrinter" />.
@@ -114,18 +109,18 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     }
 
     /// <inheritdoc />
-    public override bool Equals(object? obj)
-        => obj != null
-            && (ReferenceEquals(this, obj)
-                || obj is TableExpressionBase tableExpressionBase
-                && Equals(tableExpressionBase));
+    public override bool Equals(object? obj) =>
+        obj != null
+        && (
+            ReferenceEquals(this, obj)
+            || obj is TableExpressionBase tableExpressionBase && Equals(tableExpressionBase)
+        );
 
-    private bool Equals(TableExpressionBase tableExpressionBase)
-        => Alias == tableExpressionBase.Alias;
+    private bool Equals(TableExpressionBase tableExpressionBase) =>
+        Alias == tableExpressionBase.Alias;
 
     /// <inheritdoc />
-    public override int GetHashCode()
-        => 0;
+    public override int GetHashCode() => 0;
 
     /// <summary>
     ///     Adds an annotation to this object. Throws if an annotation with the specified name already exists.
@@ -133,8 +128,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     /// <param name="name">The key of the annotation to be added.</param>
     /// <param name="value">The value to be stored in the annotation.</param>
     /// <returns>The newly added annotation.</returns>
-    public virtual Annotation AddAnnotation(string name, object? value)
-        => AddAnnotation(name, new(name, value));
+    public virtual Annotation AddAnnotation(string name, object? value) =>
+        AddAnnotation(name, new(name, value));
 
     /// <summary>
     ///     Adds an annotation to this object. Throws if an annotation with the specified name already exists.
@@ -163,8 +158,7 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     public virtual void SetAnnotation(string name, object? value)
     {
         var oldAnnotation = FindAnnotation(name);
-        if (oldAnnotation != null
-            && Equals(oldAnnotation.Value, value))
+        if (oldAnnotation != null && Equals(oldAnnotation.Value, value))
         {
             return;
         }
@@ -183,7 +177,8 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     protected virtual Annotation? SetAnnotation(
         string name,
         Annotation annotation,
-        Annotation? oldAnnotation)
+        Annotation? oldAnnotation
+    )
     {
         _annotations ??= new SortedDictionary<string, Annotation>(StringComparer.Ordinal);
         _annotations[name] = annotation;
@@ -235,26 +230,24 @@ public abstract class TableExpressionBase : Expression, IPrintableExpression, IM
     /// <summary>
     ///     Gets all annotations on the current object.
     /// </summary>
-    public virtual IEnumerable<IAnnotation> GetAnnotations()
-        => _annotations?.Values ?? Enumerable.Empty<Annotation>();
+    public virtual IEnumerable<IAnnotation> GetAnnotations() =>
+        _annotations?.Values ?? Enumerable.Empty<Annotation>();
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IAnnotation IMutableAnnotatable.AddAnnotation(string name, object? value)
-        => AddAnnotation(name, value);
+    IAnnotation IMutableAnnotatable.AddAnnotation(string name, object? value) =>
+        AddAnnotation(name, value);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IAnnotation? IMutableAnnotatable.RemoveAnnotation(string name)
-        => RemoveAnnotation(name);
+    IAnnotation? IMutableAnnotatable.RemoveAnnotation(string name) => RemoveAnnotation(name);
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    void IMutableAnnotatable.SetOrRemoveAnnotation(string name, object? value)
-        => this[name] = value;
+    void IMutableAnnotatable.SetOrRemoveAnnotation(string name, object? value) =>
+        this[name] = value;
 
     /// <inheritdoc />
     [DebuggerStepThrough]
-    IAnnotation? IReadOnlyAnnotatable.FindAnnotation(string name)
-        => FindAnnotation(name);
+    IAnnotation? IReadOnlyAnnotatable.FindAnnotation(string name) => FindAnnotation(name);
 }

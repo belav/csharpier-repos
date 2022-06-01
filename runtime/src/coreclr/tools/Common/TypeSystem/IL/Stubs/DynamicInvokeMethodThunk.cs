@@ -33,7 +33,8 @@ namespace Internal.IL.Stubs
 
         internal static bool SupportsDynamicInvoke(TypeSystemContext context)
         {
-            return context.SystemModule.GetType("System", "InvokeUtils", throwIfNotFound: false) != null;
+            return context.SystemModule.GetType("System", "InvokeUtils", throwIfNotFound: false)
+                != null;
         }
 
         private static TypeDesc UnwrapByRef(TypeDesc type)
@@ -77,7 +78,10 @@ namespace Internal.IL.Stubs
                 TypeDesc unwrappedParameterType = UnwrapByRef(signature[i]);
                 if (ContainsFunctionPointer(unwrappedParameterType))
                     return false;
-                if (!unwrappedParameterType.IsSignatureVariable && unwrappedParameterType.IsByRefLike)
+                if (
+                    !unwrappedParameterType.IsSignatureVariable
+                    && unwrappedParameterType.IsByRefLike
+                )
                     return false;
             }
 
@@ -89,7 +93,9 @@ namespace Internal.IL.Stubs
             MethodSignature sig = method.Signature;
 
             ParameterMetadata[] paramMetadata = null;
-            TypeDesc[] instantiation = new TypeDesc[sig.ReturnType.IsVoid ? sig.Length : sig.Length + 1];
+            TypeDesc[] instantiation = new TypeDesc[
+                sig.ReturnType.IsVoid ? sig.Length : sig.Length + 1
+            ];
 
             for (int i = 0; i < sig.Length; i++)
             {
@@ -165,42 +171,27 @@ namespace Internal.IL.Stubs
 
         public override TypeSystemContext Context
         {
-            get
-            {
-                return _owningType.Context;
-            }
+            get { return _owningType.Context; }
         }
 
         public override TypeDesc OwningType
         {
-            get
-            {
-                return _owningType;
-            }
+            get { return _owningType; }
         }
 
         private MetadataType InvokeUtilsType
         {
-            get
-            {
-                return Context.SystemModule.GetKnownType("System", "InvokeUtils");
-            }
+            get { return Context.SystemModule.GetKnownType("System", "InvokeUtils"); }
         }
 
         private MetadataType ArgSetupStateType
         {
-            get
-            {
-                return InvokeUtilsType.GetNestedType("ArgSetupState");
-            }
+            get { return InvokeUtilsType.GetNestedType("ArgSetupState"); }
         }
 
         public DynamicInvokeMethodSignature TargetSignature
         {
-            get
-            {
-                return _targetSignature;
-            }
+            get { return _targetSignature; }
         }
 
         public override MethodSignature Signature
@@ -215,11 +206,12 @@ namespace Internal.IL.Stubs
                         Context.GetWellKnownType(WellKnownType.Object),
                         new TypeDesc[]
                         {
-                            Context.GetWellKnownType(WellKnownType.Object),  // thisPtr
-                            Context.GetWellKnownType(WellKnownType.IntPtr),  // methodToCall
-                            ArgSetupStateType.MakeByRefType(),               // argSetupState
+                            Context.GetWellKnownType(WellKnownType.Object), // thisPtr
+                            Context.GetWellKnownType(WellKnownType.IntPtr), // methodToCall
+                            ArgSetupStateType.MakeByRefType(), // argSetupState
                             Context.GetWellKnownType(WellKnownType.Boolean), // targetIsThisCall
-                        });
+                        }
+                    );
                 }
 
                 return _signature;
@@ -232,8 +224,11 @@ namespace Internal.IL.Stubs
             {
                 if (_instantiation == null)
                 {
-                    TypeDesc[] instantiation =
-                        new TypeDesc[_targetSignature.HasReturnValue ? _targetSignature.Length + 1 : _targetSignature.Length];
+                    TypeDesc[] instantiation = new TypeDesc[
+                        _targetSignature.HasReturnValue
+                            ? _targetSignature.Length + 1
+                            : _targetSignature.Length
+                    ];
 
                     for (int i = 0; i < _targetSignature.Length; i++)
                         instantiation[i] = new DynamicInvokeThunkGenericParameter(this, i);
@@ -262,12 +257,20 @@ namespace Internal.IL.Stubs
                         break;
                     case DynamicInvokeMethodParameterKind.Pointer:
                         sb.Append('P');
-                        for (int i = 0; i < _targetSignature.GetNumerOfReturnTypePointerIndirections() - 1; i++)
+                        for (
+                            int i = 0;
+                            i < _targetSignature.GetNumerOfReturnTypePointerIndirections() - 1;
+                            i++
+                        )
                             sb.Append('p');
                         break;
                     case DynamicInvokeMethodParameterKind.Reference:
                         sb.Append("R");
-                        for (int i = 0; i < _targetSignature.GetNumerOfReturnTypePointerIndirections(); i++)
+                        for (
+                            int i = 0;
+                            i < _targetSignature.GetNumerOfReturnTypePointerIndirections();
+                            i++
+                        )
                             sb.Append('p');
                         break;
                     case DynamicInvokeMethodParameterKind.Value:
@@ -285,14 +288,22 @@ namespace Internal.IL.Stubs
                         case DynamicInvokeMethodParameterKind.Pointer:
                             sb.Append('P');
 
-                            for (int j = 0; j < _targetSignature.GetNumberOfParameterPointerIndirections(i) - 1; j++)
+                            for (
+                                int j = 0;
+                                j < _targetSignature.GetNumberOfParameterPointerIndirections(i) - 1;
+                                j++
+                            )
                                 sb.Append('p');
 
                             break;
                         case DynamicInvokeMethodParameterKind.Reference:
                             sb.Append("R");
 
-                            for (int j = 0; j < _targetSignature.GetNumberOfParameterPointerIndirections(i); j++)
+                            for (
+                                int j = 0;
+                                j < _targetSignature.GetNumberOfParameterPointerIndirections(i);
+                                j++
+                            )
                                 sb.Append('p');
                             break;
                         case DynamicInvokeMethodParameterKind.Value:
@@ -310,10 +321,7 @@ namespace Internal.IL.Stubs
 
         public override string DiagnosticName
         {
-            get
-            {
-                return Name;
-            }
+            get { return Name; }
         }
 
         public override MethodIL EmitIL()
@@ -400,10 +408,12 @@ namespace Internal.IL.Stubs
 
             thisCallSiteSetupStream.EmitLdArg(0); // thisPtr
 
-            ILToken tokDynamicInvokeParamHelperRef =
-                emitter.NewToken(InvokeUtilsType.GetKnownMethod("DynamicInvokeParamHelperRef", null));
-            ILToken tokDynamicInvokeParamHelperIn =
-                emitter.NewToken(InvokeUtilsType.GetKnownMethod("DynamicInvokeParamHelperIn", null));
+            ILToken tokDynamicInvokeParamHelperRef = emitter.NewToken(
+                InvokeUtilsType.GetKnownMethod("DynamicInvokeParamHelperRef", null)
+            );
+            ILToken tokDynamicInvokeParamHelperIn = emitter.NewToken(
+                InvokeUtilsType.GetKnownMethod("DynamicInvokeParamHelperIn", null)
+            );
 
             TypeDesc[] targetMethodSignature = new TypeDesc[_targetSignature.Length];
 
@@ -412,7 +422,11 @@ namespace Internal.IL.Stubs
                 TypeDesc paramType = Context.GetSignatureVariable(paramIndex, true);
                 DynamicInvokeMethodParameterKind paramKind = _targetSignature[paramIndex];
 
-                for (int i = 0; i < _targetSignature.GetNumberOfParameterPointerIndirections(paramIndex); i++)
+                for (
+                    int i = 0;
+                    i < _targetSignature.GetNumberOfParameterPointerIndirections(paramIndex);
+                    i++
+                )
                     paramType = paramType.MakePointerType();
 
                 ILToken tokParamType = emitter.NewToken(paramType);
@@ -443,15 +457,21 @@ namespace Internal.IL.Stubs
             }
 
             argSetupStream.EmitLdArg(2); // argSetupState
-            argSetupStream.Emit(ILOpcode.call, emitter.NewToken(InvokeUtilsType.GetKnownMethod("DynamicInvokeArgSetupComplete", null)));
+            argSetupStream.Emit(
+                ILOpcode.call,
+                emitter.NewToken(
+                    InvokeUtilsType.GetKnownMethod("DynamicInvokeArgSetupComplete", null)
+                )
+            );
 
             thisCallSiteSetupStream.EmitLdArg(1); // methodToCall
             staticCallSiteSetupStream.EmitLdArg(1); // methodToCall
 
             DynamicInvokeMethodParameterKind returnKind = _targetSignature.ReturnType;
-            TypeDesc returnType = returnKind != DynamicInvokeMethodParameterKind.None ?
-                Context.GetSignatureVariable(_targetSignature.Length, true) :
-                Context.GetWellKnownType(WellKnownType.Void);
+            TypeDesc returnType =
+                returnKind != DynamicInvokeMethodParameterKind.None
+                    ? Context.GetSignatureVariable(_targetSignature.Length, true)
+                    : Context.GetWellKnownType(WellKnownType.Void);
 
             for (int i = 0; i < _targetSignature.GetNumerOfReturnTypePointerIndirections(); i++)
                 returnType = returnType.MakePointerType();
@@ -459,11 +479,21 @@ namespace Internal.IL.Stubs
             if (returnKind == DynamicInvokeMethodParameterKind.Reference)
                 returnType = returnType.MakeByRefType();
 
-            MethodSignature thisCallMethodSig = new MethodSignature(0, 0, returnType, targetMethodSignature);
+            MethodSignature thisCallMethodSig = new MethodSignature(
+                0,
+                0,
+                returnType,
+                targetMethodSignature
+            );
             thisCallSiteSetupStream.Emit(ILOpcode.calli, emitter.NewToken(thisCallMethodSig));
             thisCallSiteSetupStream.Emit(ILOpcode.br, lProcessReturn);
 
-            MethodSignature staticCallMethodSig = new MethodSignature(MethodSignatureFlags.Static, 0, returnType, targetMethodSignature);
+            MethodSignature staticCallMethodSig = new MethodSignature(
+                MethodSignatureFlags.Static,
+                0,
+                returnType,
+                targetMethodSignature
+            );
             staticCallSiteSetupStream.Emit(ILOpcode.calli, emitter.NewToken(staticCallMethodSig));
 
             returnCodeStream.EmitLabel(lProcessReturn);
@@ -492,12 +522,14 @@ namespace Internal.IL.Stubs
                 {
                     // Pointers box differently
                     returnCodeStream.Emit(ILOpcode.ldtoken, emitter.NewToken(returnTypeForBoxing));
-                    MethodDesc getTypeFromHandleMethod =
-                        Context.SystemModule.GetKnownType("System", "Type").GetKnownMethod("GetTypeFromHandle", null);
+                    MethodDesc getTypeFromHandleMethod = Context.SystemModule
+                        .GetKnownType("System", "Type")
+                        .GetKnownMethod("GetTypeFromHandle", null);
                     returnCodeStream.Emit(ILOpcode.call, emitter.NewToken(getTypeFromHandleMethod));
 
-                    MethodDesc pointerBoxMethod =
-                        Context.SystemModule.GetKnownType("System.Reflection", "Pointer").GetKnownMethod("Box", null);
+                    MethodDesc pointerBoxMethod = Context.SystemModule
+                        .GetKnownType("System.Reflection", "Pointer")
+                        .GetKnownMethod("Box", null);
                     returnCodeStream.Emit(ILOpcode.call, emitter.NewToken(pointerBoxMethod));
                 }
                 else
@@ -513,7 +545,12 @@ namespace Internal.IL.Stubs
             {
                 returnCodeStream.EmitLabel(lByRefReturnNull);
                 returnCodeStream.Emit(ILOpcode.pop);
-                returnCodeStream.Emit(ILOpcode.call, emitter.NewToken(InvokeUtilsType.GetKnownMethod("get_NullByRefValueSentinel", null)));
+                returnCodeStream.Emit(
+                    ILOpcode.call,
+                    emitter.NewToken(
+                        InvokeUtilsType.GetKnownMethod("get_NullByRefValueSentinel", null)
+                    )
+                );
                 returnCodeStream.Emit(ILOpcode.ret);
             }
 
@@ -524,7 +561,10 @@ namespace Internal.IL.Stubs
         {
             private DynamicInvokeMethodThunk _owningMethod;
 
-            public DynamicInvokeThunkGenericParameter(DynamicInvokeMethodThunk owningMethod, int index)
+            public DynamicInvokeThunkGenericParameter(
+                DynamicInvokeMethodThunk owningMethod,
+                int index
+            )
             {
                 _owningMethod = owningMethod;
                 Index = index;
@@ -532,23 +572,14 @@ namespace Internal.IL.Stubs
 
             public override TypeSystemContext Context
             {
-                get
-                {
-                    return _owningMethod.Context;
-                }
+                get { return _owningMethod.Context; }
             }
 
-            public override int Index
-            {
-                get;
-            }
+            public override int Index { get; }
 
             public override GenericParameterKind Kind
             {
-                get
-                {
-                    return GenericParameterKind.Method;
-                }
+                get { return GenericParameterKind.Method; }
             }
         }
     }
@@ -572,18 +603,12 @@ namespace Internal.IL.Stubs
 
         public bool HasReturnValue
         {
-            get
-            {
-                return !_signature.ReturnType.IsVoid;
-            }
+            get { return !_signature.ReturnType.IsVoid; }
         }
 
         public int Length
         {
-            get
-            {
-                return _signature.Length;
-            }
+            get { return _signature.Length; }
         }
 
         internal DynamicInvokeMethodParameterKind this[int index]
@@ -673,9 +698,12 @@ namespace Internal.IL.Stubs
             if (thisReturnKind != other.ReturnType)
                 return false;
 
-            if (GetNumerOfReturnTypePointerIndirections() != other.GetNumerOfReturnTypePointerIndirections())
+            if (
+                GetNumerOfReturnTypePointerIndirections()
+                != other.GetNumerOfReturnTypePointerIndirections()
+            )
                 return false;
-            
+
             if (Length != other.Length)
                 return false;
 
@@ -685,7 +713,10 @@ namespace Internal.IL.Stubs
                 if (thisParamKind != other[i])
                     return false;
 
-                if (GetNumberOfParameterPointerIndirections(i) != other.GetNumberOfParameterPointerIndirections(i))
+                if (
+                    GetNumberOfParameterPointerIndirections(i)
+                    != other.GetNumberOfParameterPointerIndirections(i)
+                )
                     return false;
             }
 

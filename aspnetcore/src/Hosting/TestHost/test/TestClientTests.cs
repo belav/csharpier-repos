@@ -24,8 +24,7 @@ public class TestClientTests
     {
         // Arrange
         var expected = "GET Response";
-        RequestDelegate appDelegate = ctx =>
-            ctx.Response.WriteAsync(expected);
+        RequestDelegate appDelegate = ctx => ctx.Response.WriteAsync(expected);
         var builder = new WebHostBuilder().Configure(app => app.Run(appDelegate));
         var server = new TestServer(builder);
         var client = server.CreateClient();
@@ -99,7 +98,10 @@ public class TestClientTests
         var response = await client.PutAsync("http://localhost:12345", content).DefaultTimeout();
 
         // Assert
-        Assert.Equal("Hello world PUT Response", await response.Content.ReadAsStringAsync().DefaultTimeout());
+        Assert.Equal(
+            "Hello world PUT Response",
+            await response.Content.ReadAsStringAsync().DefaultTimeout()
+        );
     }
 
     [Fact]
@@ -107,7 +109,9 @@ public class TestClientTests
     {
         // Arrange
         RequestDelegate appDelegate = async ctx =>
-            await ctx.Response.WriteAsync(await new StreamReader(ctx.Request.Body).ReadToEndAsync() + " POST Response");
+            await ctx.Response.WriteAsync(
+                await new StreamReader(ctx.Request.Body).ReadToEndAsync() + " POST Response"
+            );
         var builder = new WebHostBuilder().Configure(app => app.Run(appDelegate));
         var server = new TestServer(builder);
         var client = server.CreateClient();
@@ -117,7 +121,10 @@ public class TestClientTests
         var response = await client.PostAsync("http://localhost:12345", content).DefaultTimeout();
 
         // Assert
-        Assert.Equal("Hello world POST Response", await response.Content.ReadAsStringAsync().DefaultTimeout());
+        Assert.Equal(
+            "Hello world POST Response",
+            await response.Content.ReadAsStringAsync().DefaultTimeout()
+        );
     }
 
     [Fact]
@@ -202,7 +209,9 @@ public class TestClientTests
         });
 
         // Act
-        var response = await client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
 
         await responseStartedSyncPoint.WaitForSyncPoint().DefaultTimeout();
         responseStartedSyncPoint.Continue();
@@ -219,7 +228,10 @@ public class TestClientTests
         Assert.Equal("STARTED", Encoding.UTF8.GetString(buffer, 0, length));
 
         // Send content and finish request body
-        await requestStream.WriteAsync(Encoding.UTF8.GetBytes("Hello world")).AsTask().DefaultTimeout();
+        await requestStream
+            .WriteAsync(Encoding.UTF8.GetBytes("Hello world"))
+            .AsTask()
+            .DefaultTimeout();
         await requestStream.FlushAsync().DefaultTimeout();
         requestStreamSyncPoint.Continue();
 
@@ -288,7 +300,9 @@ public class TestClientTests
         });
 
         // Act
-        var response = await client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
 
         await responseStartedSyncPoint.WaitForSyncPoint().DefaultTimeout();
         responseStartedSyncPoint.Continue();
@@ -321,7 +335,9 @@ public class TestClientTests
     public async Task ClientStreaming_ResponseCompletesWithoutReadingRequest()
     {
         // Arrange
-        var requestStreamTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestStreamTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
         var responseEndingSyncPoint = new SyncPoint();
 
         RequestDelegate appDelegate = async ctx =>
@@ -345,7 +361,9 @@ public class TestClientTests
         });
 
         // Act
-        var response = await client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
 
         var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
 
@@ -361,7 +379,10 @@ public class TestClientTests
         {
             try
             {
-                await requestStream.WriteAsync(Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50))).AsTask().DefaultTimeout();
+                await requestStream
+                    .WriteAsync(Encoding.UTF8.GetBytes(new string('!', 1024 * 1024 * 50)))
+                    .AsTask()
+                    .DefaultTimeout();
                 requestStreamTcs.SetResult();
             }
             catch (Exception ex)
@@ -383,7 +404,9 @@ public class TestClientTests
     public async Task ClientStreaming_ResponseCompletesWithPendingRead_ThrowError()
     {
         // Arrange
-        var requestStreamTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestStreamTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         RequestDelegate appDelegate = async ctx =>
         {
@@ -407,7 +430,9 @@ public class TestClientTests
         });
 
         // Act
-        var response = await client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
 
         var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
 
@@ -421,7 +446,10 @@ public class TestClientTests
             byte[] buffer = new byte[1024];
             var length = await responseContent.ReadAsync(buffer).AsTask().DefaultTimeout();
         });
-        Assert.Equal("An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.", ex.InnerException.Message);
+        Assert.Equal(
+            "An error occurred when completing the request. Request delegate may have finished while there is a pending read of the request body.",
+            ex.InnerException.Message
+        );
 
         // Unblock request
         requestStreamTcs.TrySetResult();
@@ -431,7 +459,9 @@ public class TestClientTests
     public async Task ClientStreaming_ResponseCompletesWithoutResponseBodyWrite()
     {
         // Arrange
-        var requestStreamTcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
+        var requestStreamTcs = new TaskCompletionSource(
+            TaskCreationOptions.RunContinuationsAsynchronously
+        );
 
         RequestDelegate appDelegate = ctx =>
         {
@@ -454,7 +484,9 @@ public class TestClientTests
         });
 
         // Act
-        var response = await client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
 
         var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
 
@@ -505,7 +537,9 @@ public class TestClientTests
         });
 
         // Act
-        var response = await client.SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead).DefaultTimeout();
+        var response = await client
+            .SendAsync(httpRequest, HttpCompletionOption.ResponseHeadersRead)
+            .DefaultTimeout();
 
         var responseContent = await response.Content.ReadAsStreamAsync().DefaultTimeout();
 
@@ -518,9 +552,12 @@ public class TestClientTests
         await requestStreamSyncPoint.WaitForSyncPoint();
 
         // Send content and finish request body
-        await ExceptionAssert.ThrowsAsync<OperationCanceledException>(
-            () => requestStream.WriteAsync(Encoding.UTF8.GetBytes("Hello world")).AsTask(),
-            "Flush was canceled on underlying PipeWriter.").DefaultTimeout();
+        await ExceptionAssert
+            .ThrowsAsync<OperationCanceledException>(
+                () => requestStream.WriteAsync(Encoding.UTF8.GetBytes("Hello world")).AsTask(),
+                "Flush was canceled on underlying PipeWriter."
+            )
+            .DefaultTimeout();
 
         responseEndingSyncPoint.Continue();
         requestStreamSyncPoint.Continue();
@@ -562,16 +599,32 @@ public class TestClientTests
                 var receiveArray = new byte[1024];
                 while (true)
                 {
-                    var receiveResult = await websocket.ReceiveAsync(new System.ArraySegment<byte>(receiveArray), CancellationToken.None);
+                    var receiveResult = await websocket.ReceiveAsync(
+                        new System.ArraySegment<byte>(receiveArray),
+                        CancellationToken.None
+                    );
                     if (receiveResult.MessageType == WebSocketMessageType.Close)
                     {
-                        await websocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure", CancellationToken.None);
+                        await websocket.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            "Normal Closure",
+                            CancellationToken.None
+                        );
                         break;
                     }
                     else
                     {
-                        var sendBuffer = new System.ArraySegment<byte>(receiveArray, 0, receiveResult.Count);
-                        await websocket.SendAsync(sendBuffer, receiveResult.MessageType, receiveResult.EndOfMessage, CancellationToken.None);
+                        var sendBuffer = new System.ArraySegment<byte>(
+                            receiveArray,
+                            0,
+                            receiveResult.Count
+                        );
+                        await websocket.SendAsync(
+                            sendBuffer,
+                            receiveResult.MessageType,
+                            receiveResult.EndOfMessage,
+                            CancellationToken.None
+                        );
                     }
                 }
             }
@@ -590,28 +643,54 @@ public class TestClientTests
         // Act
         var client = server.CreateWebSocketClient();
         // The HttpContext will be created and the logger will make sure that the HttpRequest exists and contains reasonable values
-        var clientSocket = await client.ConnectAsync(new System.Uri("http://localhost"), CancellationToken.None);
+        var clientSocket = await client.ConnectAsync(
+            new System.Uri("http://localhost"),
+            CancellationToken.None
+        );
         var hello = Encoding.UTF8.GetBytes("hello");
-        await clientSocket.SendAsync(new System.ArraySegment<byte>(hello), WebSocketMessageType.Text, true, CancellationToken.None);
+        await clientSocket.SendAsync(
+            new System.ArraySegment<byte>(hello),
+            WebSocketMessageType.Text,
+            true,
+            CancellationToken.None
+        );
         var world = Encoding.UTF8.GetBytes("world!");
-        await clientSocket.SendAsync(new System.ArraySegment<byte>(world), WebSocketMessageType.Binary, true, CancellationToken.None);
-        await clientSocket.CloseOutputAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure", CancellationToken.None);
+        await clientSocket.SendAsync(
+            new System.ArraySegment<byte>(world),
+            WebSocketMessageType.Binary,
+            true,
+            CancellationToken.None
+        );
+        await clientSocket.CloseOutputAsync(
+            WebSocketCloseStatus.NormalClosure,
+            "Normal Closure",
+            CancellationToken.None
+        );
 
         // Assert
         Assert.Equal(WebSocketState.CloseSent, clientSocket.State);
 
         var buffer = new byte[1024];
-        var result = await clientSocket.ReceiveAsync(new System.ArraySegment<byte>(buffer), CancellationToken.None);
+        var result = await clientSocket.ReceiveAsync(
+            new System.ArraySegment<byte>(buffer),
+            CancellationToken.None
+        );
         Assert.Equal(hello.Length, result.Count);
         Assert.True(hello.SequenceEqual(buffer.Take(hello.Length)));
         Assert.Equal(WebSocketMessageType.Text, result.MessageType);
 
-        result = await clientSocket.ReceiveAsync(new System.ArraySegment<byte>(buffer), CancellationToken.None);
+        result = await clientSocket.ReceiveAsync(
+            new System.ArraySegment<byte>(buffer),
+            CancellationToken.None
+        );
         Assert.Equal(world.Length, result.Count);
         Assert.True(world.SequenceEqual(buffer.Take(world.Length)));
         Assert.Equal(WebSocketMessageType.Binary, result.MessageType);
 
-        result = await clientSocket.ReceiveAsync(new System.ArraySegment<byte>(buffer), CancellationToken.None);
+        result = await clientSocket.ReceiveAsync(
+            new System.ArraySegment<byte>(buffer),
+            CancellationToken.None
+        );
         Assert.Equal(WebSocketMessageType.Close, result.MessageType);
         Assert.Equal(WebSocketState.Closed, clientSocket.State);
 
@@ -626,14 +705,20 @@ public class TestClientTests
         {
             if (ctx.WebSockets.IsWebSocketRequest)
             {
-                if (ctx.WebSockets.WebSocketRequestedProtocols.Contains("alpha") &&
-                    ctx.WebSockets.WebSocketRequestedProtocols.Contains("bravo"))
+                if (
+                    ctx.WebSockets.WebSocketRequestedProtocols.Contains("alpha")
+                    && ctx.WebSockets.WebSocketRequestedProtocols.Contains("bravo")
+                )
                 {
                     // according to rfc6455, the "server needs to include the same field and one of the selected subprotocol values"
                     // however, this isn't enforced by either our server or client so it's possible to accept an arbitrary protocol.
                     // Done here to demonstrate not "correct" behaviour, simply to show it's possible. Other clients may not allow this.
                     var websocket = await ctx.WebSockets.AcceptWebSocketAsync("charlie");
-                    await websocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure", CancellationToken.None);
+                    await websocket.CloseAsync(
+                        WebSocketCloseStatus.NormalClosure,
+                        "Normal Closure",
+                        CancellationToken.None
+                    );
                 }
                 else
                 {
@@ -642,24 +727,33 @@ public class TestClientTests
                         : "<none>";
                     var closeReason = "Unexpected subprotocols: " + subprotocols;
                     var websocket = await ctx.WebSockets.AcceptWebSocketAsync();
-                    await websocket.CloseAsync(WebSocketCloseStatus.InternalServerError, closeReason, CancellationToken.None);
+                    await websocket.CloseAsync(
+                        WebSocketCloseStatus.InternalServerError,
+                        closeReason,
+                        CancellationToken.None
+                    );
                 }
             }
         };
-        var builder = new WebHostBuilder()
-            .Configure(app =>
-            {
-                app.Run(appDelegate);
-            });
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(appDelegate);
+        });
         var server = new TestServer(builder);
 
         // Act
         var client = server.CreateWebSocketClient();
         client.SubProtocols.Add("alpha");
         client.SubProtocols.Add("bravo");
-        var clientSocket = await client.ConnectAsync(new Uri("wss://localhost"), CancellationToken.None);
+        var clientSocket = await client.ConnectAsync(
+            new Uri("wss://localhost"),
+            CancellationToken.None
+        );
         var buffer = new byte[1024];
-        var result = await clientSocket.ReceiveAsync(new ArraySegment<byte>(buffer), CancellationToken.None);
+        var result = await clientSocket.ReceiveAsync(
+            new ArraySegment<byte>(buffer),
+            CancellationToken.None
+        );
 
         // Assert
         Assert.Equal(WebSocketMessageType.Close, result.MessageType);
@@ -684,16 +778,32 @@ public class TestClientTests
                 var receiveArray = new byte[1024];
                 while (true)
                 {
-                    var receiveResult = await websocket.ReceiveAsync(new ArraySegment<byte>(receiveArray), CancellationToken.None);
+                    var receiveResult = await websocket.ReceiveAsync(
+                        new ArraySegment<byte>(receiveArray),
+                        CancellationToken.None
+                    );
                     if (receiveResult.MessageType == WebSocketMessageType.Close)
                     {
-                        await websocket.CloseAsync(WebSocketCloseStatus.NormalClosure, "Normal Closure", CancellationToken.None);
+                        await websocket.CloseAsync(
+                            WebSocketCloseStatus.NormalClosure,
+                            "Normal Closure",
+                            CancellationToken.None
+                        );
                         break;
                     }
                     else
                     {
-                        var sendBuffer = new System.ArraySegment<byte>(receiveArray, 0, receiveResult.Count);
-                        await websocket.SendAsync(sendBuffer, receiveResult.MessageType, receiveResult.EndOfMessage, CancellationToken.None);
+                        var sendBuffer = new System.ArraySegment<byte>(
+                            receiveArray,
+                            0,
+                            receiveResult.Count
+                        );
+                        await websocket.SendAsync(
+                            sendBuffer,
+                            receiveResult.MessageType,
+                            receiveResult.EndOfMessage,
+                            CancellationToken.None
+                        );
                     }
                 }
             }
@@ -709,7 +819,9 @@ public class TestClientTests
         tokenSource.Cancel();
 
         // Assert
-        await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await client.ConnectAsync(new Uri("http://localhost"), tokenSource.Token));
+        await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            async () => await client.ConnectAsync(new Uri("http://localhost"), tokenSource.Token)
+        );
     }
 
     private class VerifierLogger : ILogger<IWebHost>
@@ -719,13 +831,17 @@ public class TestClientTests
         public bool IsEnabled(LogLevel logLevel) => true;
 
         // This call verifies that fields of HttpRequest are accessed and valid
-        public void Log<TState>(LogLevel logLevel, EventId eventId, TState state, Exception exception, Func<TState, Exception, string> formatter) => formatter(state, exception);
+        public void Log<TState>(
+            LogLevel logLevel,
+            EventId eventId,
+            TState state,
+            Exception exception,
+            Func<TState, Exception, string> formatter
+        ) => formatter(state, exception);
 
         class NoopDispoasble : IDisposable
         {
-            public void Dispose()
-            {
-            }
+            public void Dispose() { }
         }
     }
 
@@ -749,9 +865,18 @@ public class TestClientTests
 
         // Act
         var client = server.CreateWebSocketClient();
-        var clientSocket = await client.ConnectAsync(new System.Uri("http://localhost"), CancellationToken.None);
+        var clientSocket = await client.ConnectAsync(
+            new System.Uri("http://localhost"),
+            CancellationToken.None
+        );
         var buffer = new byte[1024];
-        await Assert.ThrowsAsync<IOException>(async () => await clientSocket.ReceiveAsync(new System.ArraySegment<byte>(buffer), CancellationToken.None));
+        await Assert.ThrowsAsync<IOException>(
+            async () =>
+                await clientSocket.ReceiveAsync(
+                    new System.ArraySegment<byte>(buffer),
+                    CancellationToken.None
+                )
+        );
 
         clientSocket.Dispose();
     }
@@ -768,9 +893,21 @@ public class TestClientTests
                 var receiveArray = new byte[1024];
                 while (true)
                 {
-                    var receiveResult = await websocket.ReceiveAsync(new System.ArraySegment<byte>(receiveArray), CancellationToken.None);
-                    var sendBuffer = new System.ArraySegment<byte>(receiveArray, 0, receiveResult.Count);
-                    await websocket.SendAsync(sendBuffer, receiveResult.MessageType, receiveResult.EndOfMessage, CancellationToken.None);
+                    var receiveResult = await websocket.ReceiveAsync(
+                        new System.ArraySegment<byte>(receiveArray),
+                        CancellationToken.None
+                    );
+                    var sendBuffer = new System.ArraySegment<byte>(
+                        receiveArray,
+                        0,
+                        receiveResult.Count
+                    );
+                    await websocket.SendAsync(
+                        sendBuffer,
+                        receiveResult.MessageType,
+                        receiveResult.EndOfMessage,
+                        CancellationToken.None
+                    );
                 }
             }
         };
@@ -782,16 +919,27 @@ public class TestClientTests
 
         // Act
         var client = server.CreateWebSocketClient();
-        var clientSocket = await client.ConnectAsync(new System.Uri("http://localhost"), CancellationToken.None);
+        var clientSocket = await client.ConnectAsync(
+            new System.Uri("http://localhost"),
+            CancellationToken.None
+        );
         var hello = Encoding.UTF8.GetBytes("hello");
-        await clientSocket.SendAsync(new System.ArraySegment<byte>(hello), WebSocketMessageType.Text, true, CancellationToken.None);
+        await clientSocket.SendAsync(
+            new System.ArraySegment<byte>(hello),
+            WebSocketMessageType.Text,
+            true,
+            CancellationToken.None
+        );
 
         // Assert
         var buffer = new byte[1];
         for (var i = 0; i < hello.Length; i++)
         {
             bool last = i == (hello.Length - 1);
-            var result = await clientSocket.ReceiveAsync(new System.ArraySegment<byte>(buffer), CancellationToken.None);
+            var result = await clientSocket.ReceiveAsync(
+                new System.ArraySegment<byte>(buffer),
+                CancellationToken.None
+            );
             Assert.Equal(buffer.Length, result.Count);
             Assert.Equal(buffer[0], hello[i]);
             Assert.Equal(last, result.EndOfMessage);
@@ -831,33 +979,42 @@ public class TestClientTests
         response.Dispose();
 
         // Assert
-        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await tcs.Task);
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            async () => await tcs.Task
+        );
     }
 
     [Fact]
     public async Task ClientCancellationAbortsRequest()
     {
         var tcs = new TaskCompletionSource(TaskCreationOptions.RunContinuationsAsynchronously);
-        var builder = new WebHostBuilder().Configure(app => app.Run(async ctx =>
-        {
-            try
-            {
-                await Task.Delay(TimeSpan.FromSeconds(30), ctx.RequestAborted);
-                tcs.SetResult();
-            }
-            catch (Exception e)
-            {
-                tcs.SetException(e);
-                return;
-            }
-            throw new InvalidOperationException("The request was not aborted");
-        }));
+        var builder = new WebHostBuilder().Configure(
+            app =>
+                app.Run(async ctx =>
+                {
+                    try
+                    {
+                        await Task.Delay(TimeSpan.FromSeconds(30), ctx.RequestAborted);
+                        tcs.SetResult();
+                    }
+                    catch (Exception e)
+                    {
+                        tcs.SetException(e);
+                        return;
+                    }
+                    throw new InvalidOperationException("The request was not aborted");
+                })
+        );
         using var server = new TestServer(builder);
         using var client = server.CreateClient();
         using var cts = new CancellationTokenSource(TimeSpan.FromSeconds(1));
-        var response = await Assert.ThrowsAnyAsync<OperationCanceledException>(() => client.GetAsync("http://localhost:12345", cts.Token));
+        var response = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            () => client.GetAsync("http://localhost:12345", cts.Token)
+        );
 
-        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(async () => await tcs.Task);
+        var exception = await Assert.ThrowsAnyAsync<OperationCanceledException>(
+            async () => await tcs.Task
+        );
     }
 
     [Fact]
@@ -868,15 +1025,16 @@ public class TestClientTests
         asyncLocal.Value = value;
 
         object capturedValue = null;
-        var builder = new WebHostBuilder()
-            .Configure(app =>
-            {
-                app.Run((context) =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(
+                (context) =>
                 {
                     capturedValue = asyncLocal.Value;
                     return context.Response.WriteAsync("Done");
-                });
-            });
+                }
+            );
+        });
         var server = new TestServer(builder);
         var client = server.CreateClient();
 
@@ -893,19 +1051,17 @@ public class TestClientTests
         asyncLocal.Value = value;
 
         object capturedValue = null;
-        var builder = new WebHostBuilder()
-            .Configure(app =>
-            {
-                app.Run((context) =>
+        var builder = new WebHostBuilder().Configure(app =>
+        {
+            app.Run(
+                (context) =>
                 {
                     capturedValue = asyncLocal.Value;
                     return context.Response.WriteAsync("Done");
-                });
-            });
-        var server = new TestServer(builder)
-        {
-            PreserveExecutionContext = true
-        };
+                }
+            );
+        });
+        var server = new TestServer(builder) { PreserveExecutionContext = true };
         var client = server.CreateClient();
 
         var resp = await client.GetAsync("/");
@@ -996,25 +1152,30 @@ public class TestClientTests
     [Fact]
     public async Task VerifyWebSocketAndUpgradeFeaturesForNonWebSocket()
     {
-        using (var testServer = new TestServer(new WebHostBuilder()
-            .Configure(app =>
-            {
-                app.UseWebSockets();
-                app.Run(async c =>
+        using (
+            var testServer = new TestServer(
+                new WebHostBuilder().Configure(app =>
                 {
-                    var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
-                    // Feature needs to exist for SignalR to verify that the server supports WebSockets
-                    Assert.NotNull(upgradeFeature);
-                    Assert.False(upgradeFeature.IsUpgradableRequest);
-                    await Assert.ThrowsAsync<NotSupportedException>(() => upgradeFeature.UpgradeAsync());
+                    app.UseWebSockets();
+                    app.Run(async c =>
+                    {
+                        var upgradeFeature = c.Features.Get<IHttpUpgradeFeature>();
+                        // Feature needs to exist for SignalR to verify that the server supports WebSockets
+                        Assert.NotNull(upgradeFeature);
+                        Assert.False(upgradeFeature.IsUpgradableRequest);
+                        await Assert.ThrowsAsync<NotSupportedException>(
+                            () => upgradeFeature.UpgradeAsync()
+                        );
 
-                    var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
-                    Assert.NotNull(webSocketFeature);
-                    Assert.False(webSocketFeature.IsWebSocketRequest);
+                        var webSocketFeature = c.Features.Get<IHttpWebSocketFeature>();
+                        Assert.NotNull(webSocketFeature);
+                        Assert.False(webSocketFeature.IsWebSocketRequest);
 
-                    await c.Response.WriteAsync("test");
-                });
-            })))
+                        await c.Response.WriteAsync("test");
+                    });
+                })
+            )
+        )
         {
             var client = testServer.CreateClient();
 

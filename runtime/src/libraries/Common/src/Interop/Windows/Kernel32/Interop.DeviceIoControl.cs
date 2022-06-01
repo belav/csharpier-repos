@@ -22,6 +22,7 @@ internal static partial class Interop
             byte[] lpOutBuffer,
             uint nOutBufferSize,
             out uint lpBytesReturned,
-            IntPtr lpOverlapped);
+            IntPtr lpOverlapped
+        );
     }
 }

@@ -68,7 +68,10 @@ namespace System.Xml
             return str;
         }
 
-        public virtual bool TryLookup(string value, [NotNullWhen(true)] out XmlDictionaryString? result)
+        public virtual bool TryLookup(
+            string value,
+            [NotNullWhen(true)] out XmlDictionaryString? result
+        )
         {
             return _lookup.TryGetValue(value, out result);
         }
@@ -84,7 +87,10 @@ namespace System.Xml
             return true;
         }
 
-        public virtual bool TryLookup(XmlDictionaryString value, [NotNullWhen(true)] out XmlDictionaryString? result)
+        public virtual bool TryLookup(
+            XmlDictionaryString value,
+            [NotNullWhen(true)] out XmlDictionaryString? result
+        )
         {
             ArgumentNullException.ThrowIfNull(value);
 
@@ -111,7 +117,10 @@ namespace System.Xml
                 return false;
             }
 
-            public bool TryLookup(XmlDictionaryString value, [NotNullWhen(true)] out XmlDictionaryString? result)
+            public bool TryLookup(
+                XmlDictionaryString value,
+                [NotNullWhen(true)] out XmlDictionaryString? result
+            )
             {
                 result = null;
                 return false;

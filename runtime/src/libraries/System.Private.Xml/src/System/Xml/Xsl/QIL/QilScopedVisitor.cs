@@ -18,16 +18,12 @@ namespace System.Xml.Xsl.Qil
         /// <summary>
         /// Called when a variable, parameter, or function enters scope.
         /// </summary>
-        protected virtual void BeginScope(QilNode node)
-        {
-        }
+        protected virtual void BeginScope(QilNode node) { }
 
         /// <summary>
         /// Called when a variable, parameter, or function exits scope.
         /// </summary>
-        protected virtual void EndScope(QilNode node)
-        {
-        }
+        protected virtual void EndScope(QilNode node) { }
 
         /// <summary>
         /// Called at the beginning of Visit().
@@ -41,14 +37,18 @@ namespace System.Xml.Xsl.Qil
                 case QilNodeType.QilExpression:
                     // Put all global functions, variables, and parameters in scope
                     qil = (QilExpression)node;
-                    foreach (QilNode param in qil.GlobalParameterList) BeginScope(param);
-                    foreach (QilNode var in qil.GlobalVariableList) BeginScope(var);
-                    foreach (QilNode func in qil.FunctionList) BeginScope(func);
+                    foreach (QilNode param in qil.GlobalParameterList)
+                        BeginScope(param);
+                    foreach (QilNode var in qil.GlobalVariableList)
+                        BeginScope(var);
+                    foreach (QilNode func in qil.FunctionList)
+                        BeginScope(func);
                     break;
 
                 case QilNodeType.Function:
                     // Put all formal arguments in scope
-                    foreach (QilNode arg in ((QilFunction)node).Arguments) BeginScope(arg);
+                    foreach (QilNode arg in ((QilFunction)node).Arguments)
+                        BeginScope(arg);
                     break;
 
                 case QilNodeType.Loop:
@@ -72,14 +72,18 @@ namespace System.Xml.Xsl.Qil
                 case QilNodeType.QilExpression:
                     // Remove all global functions, variables, and parameters from scope
                     qil = (QilExpression)node;
-                    foreach (QilNode func in qil.FunctionList) EndScope(func);
-                    foreach (QilNode var in qil.GlobalVariableList) EndScope(var);
-                    foreach (QilNode param in qil.GlobalParameterList) EndScope(param);
+                    foreach (QilNode func in qil.FunctionList)
+                        EndScope(func);
+                    foreach (QilNode var in qil.GlobalVariableList)
+                        EndScope(var);
+                    foreach (QilNode param in qil.GlobalParameterList)
+                        EndScope(param);
                     break;
 
                 case QilNodeType.Function:
                     // Remove all formal arguments from scope
-                    foreach (QilNode arg in ((QilFunction)node).Arguments) EndScope(arg);
+                    foreach (QilNode arg in ((QilFunction)node).Arguments)
+                        EndScope(arg);
                     break;
 
                 case QilNodeType.Loop:
@@ -90,7 +94,6 @@ namespace System.Xml.Xsl.Qil
                     break;
             }
         }
-
 
         //-----------------------------------------------
         // QilVisitor overrides

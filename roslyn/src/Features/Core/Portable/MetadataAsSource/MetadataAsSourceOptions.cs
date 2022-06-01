@@ -19,8 +19,9 @@ namespace Microsoft.CodeAnalysis.MetadataAsSource;
 internal readonly record struct MetadataAsSourceOptions(
     CleanCodeGenerationOptions GenerationOptions,
     bool NavigateToDecompiledSources = true,
-    bool AlwaysUseDefaultSymbolServers = true)
+    bool AlwaysUseDefaultSymbolServers = true
+)
 {
-    public static MetadataAsSourceOptions GetDefault(HostLanguageServices languageServices)
-        => new(GenerationOptions: CleanCodeGenerationOptions.GetDefault(languageServices));
+    public static MetadataAsSourceOptions GetDefault(HostLanguageServices languageServices) =>
+        new(GenerationOptions: CleanCodeGenerationOptions.GetDefault(languageServices));
 }

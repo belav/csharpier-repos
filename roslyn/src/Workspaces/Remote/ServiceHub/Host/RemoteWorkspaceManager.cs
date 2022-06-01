@@ -16,7 +16,7 @@ using Roslyn.Utilities;
 namespace Microsoft.CodeAnalysis.Remote
 {
     /// <summary>
-    /// Manages remote workspaces. Currently supports only a single, primary workspace of kind <see cref="WorkspaceKind.RemoteWorkspace"/>. 
+    /// Manages remote workspaces. Currently supports only a single, primary workspace of kind <see cref="WorkspaceKind.RemoteWorkspace"/>.
     /// In future it should support workspaces of all kinds.
     /// </summary>
     internal class RemoteWorkspaceManager
@@ -26,7 +26,12 @@ namespace Microsoft.CodeAnalysis.Remote
         /// in order to override workspace services.
         /// </summary>
         internal static readonly RemoteWorkspaceManager Default = new RemoteWorkspaceManager(
-            new SolutionAssetCache(cleanupInterval: TimeSpan.FromMinutes(1), purgeAfter: TimeSpan.FromMinutes(3), gcAfter: TimeSpan.FromMinutes(5)));
+            new SolutionAssetCache(
+                cleanupInterval: TimeSpan.FromMinutes(1),
+                purgeAfter: TimeSpan.FromMinutes(3),
+                gcAfter: TimeSpan.FromMinutes(5)
+            )
+        );
 
         internal static readonly ImmutableArray<Assembly> RemoteHostAssemblies =
             MefHostServices.DefaultAssemblies
@@ -47,7 +52,11 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             var resolver = new Resolver(SimpleAssemblyLoader.Instance);
             var discovery = new AttributedPartDiscovery(resolver, isNonPublicSupported: true);
-            var parts = Task.Run(async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)).GetAwaiter().GetResult();
+            var parts = Task.Run(
+                    async () => await discovery.CreatePartsAsync(assemblies).ConfigureAwait(false)
+                )
+                .GetAwaiter()
+                .GetResult();
             return ComposableCatalog.Create(resolver).AddParts(parts);
         }
 
@@ -64,11 +73,13 @@ namespace Microsoft.CodeAnalysis.Remote
             var exportProviderFactory = CreateExportProviderFactory(catalog);
             var exportProvider = exportProviderFactory.CreateExportProvider();
 
-            return new RemoteWorkspace(VisualStudioMefHostServices.Create(exportProvider), WorkspaceKind.RemoteWorkspace);
+            return new RemoteWorkspace(
+                VisualStudioMefHostServices.Create(exportProvider),
+                WorkspaceKind.RemoteWorkspace
+            );
         }
 
-        public virtual RemoteWorkspace GetWorkspace()
-            => _lazyPrimaryWorkspace.Value;
+        public virtual RemoteWorkspace GetWorkspace() => _lazyPrimaryWorkspace.Value;
 
         /// <summary>
         /// Not ideal that we exposing the workspace solution, while not ensuring it stays alive for other calls using
@@ -76,17 +87,28 @@ namespace Microsoft.CodeAnalysis.Remote
         /// assume they can get that solution instance and use as desired by them.
         /// </summary>
         [Obsolete("Use RunServiceAsync (that is passsed a Solution) instead", error: false)]
-        public async ValueTask<Solution> GetSolutionAsync(ServiceBrokerClient client, Checksum solutionChecksum, CancellationToken cancellationToken)
+        public async ValueTask<Solution> GetSolutionAsync(
+            ServiceBrokerClient client,
+            Checksum solutionChecksum,
+            CancellationToken cancellationToken
+        )
         {
             var assetSource = new SolutionAssetSource(client);
             var workspace = GetWorkspace();
-            var assetProvider = workspace.CreateAssetProvider(solutionChecksum, SolutionAssetCache, assetSource);
-
-            var (solution, _) = await workspace.RunWithSolutionAsync(
-                assetProvider,
+            var assetProvider = workspace.CreateAssetProvider(
                 solutionChecksum,
-                static _ => ValueTaskFactory.FromResult(false),
-                cancellationToken).ConfigureAwait(false);
+                SolutionAssetCache,
+                assetSource
+            );
+
+            var (solution, _) = await workspace
+                .RunWithSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    static _ => ValueTaskFactory.FromResult(false),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return solution;
         }
@@ -95,17 +117,25 @@ namespace Microsoft.CodeAnalysis.Remote
             ServiceBrokerClient client,
             Checksum solutionChecksum,
             Func<Solution, ValueTask<T>> implementation,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var assetSource = new SolutionAssetSource(client);
             var workspace = GetWorkspace();
-            var assetProvider = workspace.CreateAssetProvider(solutionChecksum, SolutionAssetCache, assetSource);
-
-            var (_, result) = await workspace.RunWithSolutionAsync(
-                assetProvider,
+            var assetProvider = workspace.CreateAssetProvider(
                 solutionChecksum,
-                implementation,
-                cancellationToken).ConfigureAwait(false);
+                SolutionAssetCache,
+                assetSource
+            );
+
+            var (_, result) = await workspace
+                .RunWithSolutionAsync(
+                    assetProvider,
+                    solutionChecksum,
+                    implementation,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return result;
         }
@@ -114,8 +144,7 @@ namespace Microsoft.CodeAnalysis.Remote
         {
             public static readonly IAssemblyLoader Instance = new SimpleAssemblyLoader();
 
-            public Assembly LoadAssembly(AssemblyName assemblyName)
-                => Assembly.Load(assemblyName);
+            public Assembly LoadAssembly(AssemblyName assemblyName) => Assembly.Load(assemblyName);
 
             public Assembly LoadAssembly(string assemblyFullName, string codeBasePath)
             {

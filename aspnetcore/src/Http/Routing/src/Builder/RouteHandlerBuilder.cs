@@ -13,7 +13,9 @@ public sealed class RouteHandlerBuilder : IEndpointConventionBuilder
     private readonly IEnumerable<IEndpointConventionBuilder>? _endpointConventionBuilders;
     private readonly IEndpointConventionBuilder? _endpointConventionBuilder;
 
-    internal List<Func<RouteHandlerContext, RouteHandlerFilterDelegate, RouteHandlerFilterDelegate>> RouteHandlerFilterFactories { get; } = new();
+    internal List<
+        Func<RouteHandlerContext, RouteHandlerFilterDelegate, RouteHandlerFilterDelegate>
+    > RouteHandlerFilterFactories { get; } = new();
 
     /// <summary>
     /// Instantiates a new <see cref="RouteHandlerBuilder" /> given a single

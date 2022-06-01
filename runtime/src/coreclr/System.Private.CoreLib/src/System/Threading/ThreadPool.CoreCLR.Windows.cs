@@ -33,13 +33,17 @@ namespace System.Threading
         [MethodImpl(MethodImplOptions.InternalCall)]
         private static extern unsafe bool PostQueuedCompletionStatus(NativeOverlapped* overlapped);
 
-        [Obsolete("ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead.")]
+        [Obsolete(
+            "ThreadPool.BindHandle(IntPtr) has been deprecated. Use ThreadPool.BindHandle(SafeHandle) instead."
+        )]
         [SupportedOSPlatform("windows")]
         public static bool BindHandle(IntPtr osHandle)
         {
             if (UsePortableThreadPoolForIO)
             {
-                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(osHandle);
+                PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(
+                    osHandle
+                );
                 return true;
             }
 
@@ -58,7 +62,9 @@ namespace System.Threading
 
                 if (UsePortableThreadPoolForIO)
                 {
-                    PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(osHandle.DangerousGetHandle());
+                    PortableThreadPool.ThreadPoolInstance.RegisterForIOCompletionNotifications(
+                        osHandle.DangerousGetHandle()
+                    );
                     return true;
                 }
 

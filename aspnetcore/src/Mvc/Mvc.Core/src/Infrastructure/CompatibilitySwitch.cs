@@ -61,10 +61,7 @@ public class CompatibilitySwitch<TValue> : ICompatibilitySwitch where TValue : s
     /// <param name="name">
     /// The compatibility switch name. The name must match a property name on an options type.
     /// </param>
-    public CompatibilitySwitch(string name)
-        : this(name, default)
-    {
-    }
+    public CompatibilitySwitch(string name) : this(name, default) { }
 
     /// <summary>
     /// Creates a new compatibility switch with the provided name and initial value.

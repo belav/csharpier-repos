@@ -38,7 +38,8 @@ namespace ILCompiler.Dataflow
             Logger logger,
             bool reportingEnabled,
             TypeSystemEntity source,
-            Origin memberWithRequirements)
+            Origin memberWithRequirements
+        )
         {
             _logger = logger;
             ReportingEnabled = reportingEnabled;
@@ -58,8 +59,8 @@ namespace ILCompiler.Dataflow
             bool reportingEnabled,
             MethodIL source,
             int offset,
-            Origin memberWithRequirements)
-            : this(logger, reportingEnabled, source.OwningMethod, memberWithRequirements)
+            Origin memberWithRequirements
+        ) : this(logger, reportingEnabled, source.OwningMethod, memberWithRequirements)
         {
             _sourceIL = source;
             _ilOffset = offset;
@@ -87,7 +88,9 @@ namespace ILCompiler.Dataflow
         {
 #if DEBUG
             if (!_patternAnalysisAttempted)
-                throw new InvalidOperationException($"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}");
+                throw new InvalidOperationException(
+                    $"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}"
+                );
 
             _patternReported = true;
 #endif
@@ -99,7 +102,9 @@ namespace ILCompiler.Dataflow
         {
 #if DEBUG
             if (!_patternAnalysisAttempted)
-                throw new InvalidOperationException($"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}");
+                throw new InvalidOperationException(
+                    $"Internal error: To correctly report all patterns, when starting to analyze a pattern the AnalyzingPattern must be called first. {Source} -> {MemberWithRequirements}"
+                );
 
             _patternReported = true;
 #endif
@@ -107,9 +112,20 @@ namespace ILCompiler.Dataflow
             if (ReportingEnabled)
             {
                 if (_sourceIL != null)
-                    _logger.LogWarning(message, messageCode, _sourceIL, _ilOffset, MessageSubCategory.TrimAnalysis);
+                    _logger.LogWarning(
+                        message,
+                        messageCode,
+                        _sourceIL,
+                        _ilOffset,
+                        MessageSubCategory.TrimAnalysis
+                    );
                 else
-                    _logger.LogWarning(message, messageCode, Source, MessageSubCategory.TrimAnalysis);
+                    _logger.LogWarning(
+                        message,
+                        messageCode,
+                        Source,
+                        MessageSubCategory.TrimAnalysis
+                    );
             }
         }
 
@@ -117,7 +133,9 @@ namespace ILCompiler.Dataflow
         {
 #if DEBUG
             if (_patternAnalysisAttempted && !_patternReported)
-                throw new InvalidOperationException($"Internal error: A reflection pattern was analyzed, but no result was reported. {Source} -> {MemberWithRequirements}");
+                throw new InvalidOperationException(
+                    $"Internal error: A reflection pattern was analyzed, but no result was reported. {Source} -> {MemberWithRequirements}"
+                );
 #endif
         }
     }

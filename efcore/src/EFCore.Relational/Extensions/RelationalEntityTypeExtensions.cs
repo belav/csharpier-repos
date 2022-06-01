@@ -36,14 +36,15 @@ public static class RelationalEntityTypeExtensions
             return (string?)nameAnnotation.Value;
         }
 
-        return ((entityType as IConventionEntityType)?.GetViewNameConfigurationSource() == null)
+        return
+            ((entityType as IConventionEntityType)?.GetViewNameConfigurationSource() == null)
             && (entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource() == null
 #pragma warning disable CS0618 // Type or member is obsolete
             && (entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource() == null
 #pragma warning restore CS0618 // Type or member is obsolete
             && (entityType as IConventionEntityType)?.GetSqlQueryConfigurationSource() == null
-                ? GetDefaultTableName(entityType)
-                : null;
+            ? GetDefaultTableName(entityType)
+            : null;
     }
 
     /// <summary>
@@ -52,36 +53,46 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to get the table name for.</param>
     /// <param name="truncate">A value indicating whether the name should be truncated to the max identifier length.</param>
     /// <returns>The default name of the table to which the entity type would be mapped.</returns>
-    public static string? GetDefaultTableName(this IReadOnlyEntityType entityType, bool truncate = true)
+    public static string? GetDefaultTableName(
+        this IReadOnlyEntityType entityType,
+        bool truncate = true
+    )
     {
-        if (entityType.GetDiscriminatorPropertyName() != null
-            && entityType.BaseType != null)
+        if (entityType.GetDiscriminatorPropertyName() != null && entityType.BaseType != null)
         {
             return entityType.GetRootType().GetTableName();
         }
 
         var ownership = entityType.FindOwnership();
-        if (ownership != null
-            && ownership.IsUnique)
+        if (ownership != null && ownership.IsUnique)
         {
             return ownership.PrincipalEntityType.GetTableName();
         }
 
         var name = entityType.ShortName();
-        if (entityType.HasSharedClrType
+        if (
+            entityType.HasSharedClrType
             && ownership != null
 #pragma warning disable EF1001 // Internal EF Core API usage.
-            && entityType.Name == ownership.PrincipalEntityType.GetOwnedName(name, ownership.PrincipalToDependent!.Name))
+            && entityType.Name
+                == ownership.PrincipalEntityType.GetOwnedName(
+                    name,
+                    ownership.PrincipalToDependent!.Name
+                )
+        )
 #pragma warning restore EF1001 // Internal EF Core API usage.
         {
             var ownerTypeTable = ownership.PrincipalEntityType.GetTableName();
-            name = ownerTypeTable != null
-                ? $"{ownerTypeTable}_{ownership.PrincipalToDependent.Name}"
-                : $"{ownership.PrincipalToDependent.Name}_{name}";
+            name =
+                ownerTypeTable != null
+                    ? $"{ownerTypeTable}_{ownership.PrincipalToDependent.Name}"
+                    : $"{ownership.PrincipalToDependent.Name}_{name}";
         }
 
-        if (entityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
-            && !entityType.ClrType.IsInstantiable())
+        if (
+            entityType.GetMappingStrategy() == RelationalAnnotationNames.TpcMappingStrategy
+            && !entityType.ClrType.IsInstantiable()
+        )
         {
             return null;
         }
@@ -96,10 +107,11 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the table name for.</param>
     /// <param name="name">The name to set.</param>
-    public static void SetTableName(this IMutableEntityType entityType, string? name)
-        => entityType.SetAnnotation(
+    public static void SetTableName(this IMutableEntityType entityType, string? name) =>
+        entityType.SetAnnotation(
             RelationalAnnotationNames.TableName,
-            Check.NullButNotEmpty(name, nameof(name)));
+            Check.NullButNotEmpty(name, nameof(name))
+        );
 
     /// <summary>
     ///     Sets the name of the table to which the entity type is mapped.
@@ -111,12 +123,14 @@ public static class RelationalEntityTypeExtensions
     public static string? SetTableName(
         this IConventionEntityType entityType,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         entityType.SetAnnotation(
             RelationalAnnotationNames.TableName,
             Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
         return name;
     }
@@ -126,9 +140,9 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the table name.</returns>
-    public static ConfigurationSource? GetTableNameConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.TableName)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetTableNameConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(RelationalAnnotationNames.TableName)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the database schema that contains the mapped table.
@@ -166,13 +180,19 @@ public static class RelationalEntityTypeExtensions
             return ownership.PrincipalEntityType.GetSchema();
         }
 
-        var skipNavigationSchema = entityType.GetForeignKeys().SelectMany(fk => fk.GetReferencingSkipNavigations())
+        var skipNavigationSchema = entityType
+            .GetForeignKeys()
+            .SelectMany(fk => fk.GetReferencingSkipNavigations())
             .FirstOrDefault(n => !n.IsOnDependent)
             ?.DeclaringEntityType.GetSchema();
-        if (skipNavigationSchema != null
-            && entityType.GetForeignKeys().SelectMany(fk => fk.GetReferencingSkipNavigations())
+        if (
+            skipNavigationSchema != null
+            && entityType
+                .GetForeignKeys()
+                .SelectMany(fk => fk.GetReferencingSkipNavigations())
                 .Where(n => !n.IsOnDependent)
-                .All(n => n.DeclaringEntityType.GetSchema() == skipNavigationSchema))
+                .All(n => n.DeclaringEntityType.GetSchema() == skipNavigationSchema)
+        )
         {
             return skipNavigationSchema;
         }
@@ -185,10 +205,11 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the schema for.</param>
     /// <param name="value">The value to set.</param>
-    public static void SetSchema(this IMutableEntityType entityType, string? value)
-        => entityType.SetAnnotation(
+    public static void SetSchema(this IMutableEntityType entityType, string? value) =>
+        entityType.SetAnnotation(
             RelationalAnnotationNames.Schema,
-            Check.NullButNotEmpty(value, nameof(value)));
+            Check.NullButNotEmpty(value, nameof(value))
+        );
 
     /// <summary>
     ///     Sets the database schema that contains the mapped table.
@@ -200,12 +221,14 @@ public static class RelationalEntityTypeExtensions
     public static string? SetSchema(
         this IConventionEntityType entityType,
         string? value,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         entityType.SetAnnotation(
             RelationalAnnotationNames.Schema,
             Check.NullButNotEmpty(value, nameof(value)),
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
         return value;
     }
@@ -215,9 +238,9 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the database schema.</returns>
-    public static ConfigurationSource? GetSchemaConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.Schema)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetSchemaConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(RelationalAnnotationNames.Schema)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the name of the table to which the entity type is mapped prepended by the schema
@@ -260,20 +283,20 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to get the table mappings for.</param>
     /// <returns>The tables to which the entity type is mapped.</returns>
-    public static IEnumerable<ITableMappingBase> GetDefaultMappings(this IEntityType entityType)
-        => (IEnumerable<ITableMappingBase>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.DefaultMappings)
-            ?? Enumerable.Empty<ITableMappingBase>();
+    public static IEnumerable<ITableMappingBase> GetDefaultMappings(this IEntityType entityType) =>
+        (IEnumerable<ITableMappingBase>?)
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.DefaultMappings)
+        ?? Enumerable.Empty<ITableMappingBase>();
 
     /// <summary>
     ///     Returns the tables to which the entity type is mapped.
     /// </summary>
     /// <param name="entityType">The entity type to get the table mappings for.</param>
     /// <returns>The tables to which the entity type is mapped.</returns>
-    public static IEnumerable<ITableMapping> GetTableMappings(this IEntityType entityType)
-        => (IEnumerable<ITableMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.TableMappings)
-            ?? Enumerable.Empty<ITableMapping>();
+    public static IEnumerable<ITableMapping> GetTableMappings(this IEntityType entityType) =>
+        (IEnumerable<ITableMapping>?)
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.TableMappings)
+        ?? Enumerable.Empty<ITableMapping>();
 
     #endregion Table mapping
 
@@ -292,13 +315,16 @@ public static class RelationalEntityTypeExtensions
             return (string?)nameAnnotation.Value;
         }
 
-        return ((entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource() == null)
+        return
+            ((entityType as IConventionEntityType)?.GetFunctionNameConfigurationSource() == null)
 #pragma warning disable CS0618 // Type or member is obsolete
-            && ((entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource() == null)
+            && (
+                (entityType as IConventionEntityType)?.GetDefiningQueryConfigurationSource() == null
+            )
 #pragma warning restore CS0618 // Type or member is obsolete
             && ((entityType as IConventionEntityType)?.GetSqlQueryConfigurationSource() == null)
-                ? GetDefaultViewName(entityType)
-                : null;
+            ? GetDefaultViewName(entityType)
+            : null;
     }
 
     /// <summary>
@@ -308,17 +334,15 @@ public static class RelationalEntityTypeExtensions
     /// <returns>The default name of the table to which the entity type would be mapped.</returns>
     public static string? GetDefaultViewName(this IReadOnlyEntityType entityType)
     {
-        if (entityType.GetDiscriminatorPropertyName() != null
-            && entityType.BaseType != null)
+        if (entityType.GetDiscriminatorPropertyName() != null && entityType.BaseType != null)
         {
             return entityType.GetRootType().GetViewName();
         }
 
         var ownership = entityType.FindOwnership();
-        return ownership != null
-            && ownership.IsUnique
-                ? ownership.PrincipalEntityType.GetViewName()
-                : null;
+        return ownership != null && ownership.IsUnique
+            ? ownership.PrincipalEntityType.GetViewName()
+            : null;
     }
 
     /// <summary>
@@ -326,10 +350,11 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the view name for.</param>
     /// <param name="name">The name to set.</param>
-    public static void SetViewName(this IMutableEntityType entityType, string? name)
-        => entityType.SetAnnotation(
+    public static void SetViewName(this IMutableEntityType entityType, string? name) =>
+        entityType.SetAnnotation(
             RelationalAnnotationNames.ViewName,
-            Check.NullButNotEmpty(name, nameof(name)));
+            Check.NullButNotEmpty(name, nameof(name))
+        );
 
     /// <summary>
     ///     Sets the name of the view to which the entity type is mapped.
@@ -341,12 +366,14 @@ public static class RelationalEntityTypeExtensions
     public static string? SetViewName(
         this IConventionEntityType entityType,
         string? name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         entityType.SetAnnotation(
             RelationalAnnotationNames.ViewName,
             Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
         return name;
     }
@@ -356,9 +383,9 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the view name.</returns>
-    public static ConfigurationSource? GetViewNameConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.ViewName)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetViewNameConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(RelationalAnnotationNames.ViewName)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the database schema that contains the mapped view.
@@ -386,8 +413,7 @@ public static class RelationalEntityTypeExtensions
     public static string? GetDefaultViewSchema(this IReadOnlyEntityType entityType)
     {
         var ownership = entityType.FindOwnership();
-        if (ownership != null
-            && ownership.IsUnique)
+        if (ownership != null && ownership.IsUnique)
         {
             return ownership.PrincipalEntityType.GetViewSchema();
         }
@@ -400,10 +426,11 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to set the view schema for.</param>
     /// <param name="value">The value to set.</param>
-    public static void SetViewSchema(this IMutableEntityType entityType, string? value)
-        => entityType.SetAnnotation(
+    public static void SetViewSchema(this IMutableEntityType entityType, string? value) =>
+        entityType.SetAnnotation(
             RelationalAnnotationNames.ViewSchema,
-            Check.NullButNotEmpty(value, nameof(value)));
+            Check.NullButNotEmpty(value, nameof(value))
+        );
 
     /// <summary>
     ///     Sets the database schema that contains the mapped view.
@@ -415,12 +442,14 @@ public static class RelationalEntityTypeExtensions
     public static string? SetViewSchema(
         this IConventionEntityType entityType,
         string? value,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         entityType.SetAnnotation(
             RelationalAnnotationNames.ViewSchema,
             Check.NullButNotEmpty(value, nameof(value)),
-            fromDataAnnotation);
+            fromDataAnnotation
+        );
 
         return value;
     }
@@ -430,19 +459,19 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the view schema.</returns>
-    public static ConfigurationSource? GetViewSchemaConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.ViewSchema)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetViewSchemaConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(RelationalAnnotationNames.ViewSchema)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the views to which the entity type is mapped.
     /// </summary>
     /// <param name="entityType">The entity type to get the view mappings for.</param>
     /// <returns>The views to which the entity type is mapped.</returns>
-    public static IEnumerable<IViewMapping> GetViewMappings(this IEntityType entityType)
-        => (IEnumerable<IViewMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.ViewMappings)
-            ?? Enumerable.Empty<IViewMapping>();
+    public static IEnumerable<IViewMapping> GetViewMappings(this IEntityType entityType) =>
+        (IEnumerable<IViewMapping>?)
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.ViewMappings)
+        ?? Enumerable.Empty<IViewMapping>();
 
     #endregion View mapping
 
@@ -454,29 +483,28 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <returns>Gets the default SQL query name.</returns>
-    public static string GetDefaultSqlQueryName(this IReadOnlyEntityType entityType)
-        => entityType.Name + "." + DefaultQueryNameBase;
+    public static string GetDefaultSqlQueryName(this IReadOnlyEntityType entityType) =>
+        entityType.Name + "." + DefaultQueryNameBase;
 
     /// <summary>
     ///     Returns the SQL string used to provide data for the entity type or <see langword="null" /> if not mapped to a SQL string.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <returns>The SQL string used to provide data for the entity type.</returns>
-    public static string? GetSqlQuery(this IReadOnlyEntityType entityType)
-        => (string?)entityType[RelationalAnnotationNames.SqlQuery]
-            ?? (entityType.BaseType != null
-                ? entityType.GetRootType().GetSqlQuery()
-                : null);
+    public static string? GetSqlQuery(this IReadOnlyEntityType entityType) =>
+        (string?)entityType[RelationalAnnotationNames.SqlQuery]
+        ?? (entityType.BaseType != null ? entityType.GetRootType().GetSqlQuery() : null);
 
     /// <summary>
     ///     Sets the SQL string used to provide data for the entity type.
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="name">The SQL string to set.</param>
-    public static void SetSqlQuery(this IMutableEntityType entityType, string? name)
-        => entityType.SetAnnotation(
+    public static void SetSqlQuery(this IMutableEntityType entityType, string? name) =>
+        entityType.SetAnnotation(
             RelationalAnnotationNames.SqlQuery,
-            Check.NullButNotEmpty(name, nameof(name)));
+            Check.NullButNotEmpty(name, nameof(name))
+        );
 
     /// <summary>
     ///     Sets the SQL string used to provide data for the entity type.
@@ -488,30 +516,35 @@ public static class RelationalEntityTypeExtensions
     public static string? SetSqlQuery(
         this IConventionEntityType entityType,
         string? name,
-        bool fromDataAnnotation = false)
-        => (string?)entityType.SetAnnotation(
-            RelationalAnnotationNames.SqlQuery,
-            Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            entityType
+                .SetAnnotation(
+                    RelationalAnnotationNames.SqlQuery,
+                    Check.NullButNotEmpty(name, nameof(name)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for the query SQL string.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the query SQL string.</returns>
-    public static ConfigurationSource? GetSqlQueryConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.SqlQuery)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetSqlQueryConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(RelationalAnnotationNames.SqlQuery)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the SQL string mappings.
     /// </summary>
     /// <param name="entityType">The entity type to get the function mappings for.</param>
     /// <returns>The functions to which the entity type is mapped.</returns>
-    public static IEnumerable<ISqlQueryMapping> GetSqlQueryMappings(this IEntityType entityType)
-        => (IEnumerable<ISqlQueryMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.SqlQueryMappings)
-            ?? Enumerable.Empty<ISqlQueryMapping>();
+    public static IEnumerable<ISqlQueryMapping> GetSqlQueryMappings(this IEntityType entityType) =>
+        (IEnumerable<ISqlQueryMapping>?)
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.SqlQueryMappings)
+        ?? Enumerable.Empty<ISqlQueryMapping>();
 
     #endregion SQL query mapping
 
@@ -522,21 +555,20 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to get the function name for.</param>
     /// <returns>The name of the function to which the entity type is mapped.</returns>
-    public static string? GetFunctionName(this IReadOnlyEntityType entityType)
-        => (string?)entityType[RelationalAnnotationNames.FunctionName]
-            ?? (entityType.BaseType != null
-                ? entityType.GetRootType().GetFunctionName()
-                : null);
+    public static string? GetFunctionName(this IReadOnlyEntityType entityType) =>
+        (string?)entityType[RelationalAnnotationNames.FunctionName]
+        ?? (entityType.BaseType != null ? entityType.GetRootType().GetFunctionName() : null);
 
     /// <summary>
     ///     Sets the name of the function to which the entity type is mapped.
     /// </summary>
     /// <param name="entityType">The entity type to set the function name for.</param>
     /// <param name="name">The name to set.</param>
-    public static void SetFunctionName(this IMutableEntityType entityType, string? name)
-        => entityType.SetAnnotation(
+    public static void SetFunctionName(this IMutableEntityType entityType, string? name) =>
+        entityType.SetAnnotation(
             RelationalAnnotationNames.FunctionName,
-            Check.NullButNotEmpty(name, nameof(name)));
+            Check.NullButNotEmpty(name, nameof(name))
+        );
 
     /// <summary>
     ///     Sets the name of the function to which the entity type is mapped.
@@ -548,30 +580,36 @@ public static class RelationalEntityTypeExtensions
     public static string? SetFunctionName(
         this IConventionEntityType entityType,
         string? name,
-        bool fromDataAnnotation = false)
-        => (string?)entityType.SetAnnotation(
-            RelationalAnnotationNames.FunctionName,
-            Check.NullButNotEmpty(name, nameof(name)),
-            fromDataAnnotation)?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            entityType
+                .SetAnnotation(
+                    RelationalAnnotationNames.FunctionName,
+                    Check.NullButNotEmpty(name, nameof(name)),
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for the function name.
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the function name.</returns>
-    public static ConfigurationSource? GetFunctionNameConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.FunctionName)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetFunctionNameConfigurationSource(
+        this IConventionEntityType entityType
+    ) =>
+        entityType.FindAnnotation(RelationalAnnotationNames.FunctionName)?.GetConfigurationSource();
 
     /// <summary>
     ///     Returns the functions to which the entity type is mapped.
     /// </summary>
     /// <param name="entityType">The entity type to get the function mappings for.</param>
     /// <returns>The functions to which the entity type is mapped.</returns>
-    public static IEnumerable<IFunctionMapping> GetFunctionMappings(this IEntityType entityType)
-        => (IEnumerable<IFunctionMapping>?)entityType.FindRuntimeAnnotationValue(
-                RelationalAnnotationNames.FunctionMappings)
-            ?? Enumerable.Empty<IFunctionMapping>();
+    public static IEnumerable<IFunctionMapping> GetFunctionMappings(this IEntityType entityType) =>
+        (IEnumerable<IFunctionMapping>?)
+            entityType.FindRuntimeAnnotationValue(RelationalAnnotationNames.FunctionMappings)
+        ?? Enumerable.Empty<IFunctionMapping>();
 
     #endregion Function mapping
 
@@ -588,7 +626,8 @@ public static class RelationalEntityTypeExtensions
     /// </returns>
     public static IReadOnlyCheckConstraint? FindCheckConstraint(
         this IReadOnlyEntityType entityType,
-        string name)
+        string name
+    )
     {
         Check.NotEmpty(name, nameof(name));
 
@@ -606,8 +645,8 @@ public static class RelationalEntityTypeExtensions
     /// </returns>
     public static IMutableCheckConstraint? FindCheckConstraint(
         this IMutableEntityType entityType,
-        string name)
-        => (IMutableCheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
+        string name
+    ) => (IMutableCheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
 
     /// <summary>
     ///     Finds an <see cref="IConventionCheckConstraint" /> with the given name.
@@ -620,8 +659,8 @@ public static class RelationalEntityTypeExtensions
     /// </returns>
     public static IConventionCheckConstraint? FindCheckConstraint(
         this IConventionEntityType entityType,
-        string name)
-        => (IConventionCheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
+        string name
+    ) => (IConventionCheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
 
     /// <summary>
     ///     Finds an <see cref="ICheckConstraint" /> with the given name.
@@ -632,10 +671,8 @@ public static class RelationalEntityTypeExtensions
     ///     The <see cref="ICheckConstraint" /> or <see langword="null" /> if no check constraint with the
     ///     given name in the given entity type was found.
     /// </returns>
-    public static ICheckConstraint? FindCheckConstraint(
-        this IEntityType entityType,
-        string name)
-        => (ICheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
+    public static ICheckConstraint? FindCheckConstraint(this IEntityType entityType, string name) =>
+        (ICheckConstraint?)((IReadOnlyEntityType)entityType).FindCheckConstraint(name);
 
     /// <summary>
     ///     Creates a new check constraint with the given name on entity type. Throws an exception
@@ -648,7 +685,8 @@ public static class RelationalEntityTypeExtensions
     public static IMutableCheckConstraint AddCheckConstraint(
         this IMutableEntityType entityType,
         string name,
-        string sql)
+        string sql
+    )
     {
         Check.NotEmpty(name, nameof(name));
         Check.NotEmpty(sql, nameof(sql));
@@ -669,14 +707,18 @@ public static class RelationalEntityTypeExtensions
         this IConventionEntityType entityType,
         string name,
         string sql,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotEmpty(name, nameof(name));
         Check.NotEmpty(sql, nameof(sql));
 
         return new CheckConstraint(
-            (IMutableEntityType)entityType, name, sql,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            (IMutableEntityType)entityType,
+            name,
+            sql,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
     }
 
     /// <summary>
@@ -687,8 +729,8 @@ public static class RelationalEntityTypeExtensions
     /// <returns>The removed check constraint.</returns>
     public static IMutableCheckConstraint? RemoveCheckConstraint(
         this IMutableEntityType entityType,
-        string name)
-        => CheckConstraint.RemoveCheckConstraint(entityType, Check.NotEmpty(name, nameof(name)));
+        string name
+    ) => CheckConstraint.RemoveCheckConstraint(entityType, Check.NotEmpty(name, nameof(name)));
 
     /// <summary>
     ///     Removes the <see cref="IConventionCheckConstraint" /> with the given name.
@@ -698,37 +740,44 @@ public static class RelationalEntityTypeExtensions
     /// <returns>The removed check constraint.</returns>
     public static IConventionCheckConstraint? RemoveCheckConstraint(
         this IConventionEntityType entityType,
-        string name)
-        => (IConventionCheckConstraint?)CheckConstraint.RemoveCheckConstraint(
-            (IMutableEntityType)entityType, Check.NotEmpty(name, nameof(name)));
+        string name
+    ) =>
+        (IConventionCheckConstraint?)
+            CheckConstraint.RemoveCheckConstraint(
+                (IMutableEntityType)entityType,
+                Check.NotEmpty(name, nameof(name))
+            );
 
     /// <summary>
     ///     Returns all check constraints contained in the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<IReadOnlyCheckConstraint> GetCheckConstraints(this IReadOnlyEntityType entityType)
-        => CheckConstraint.GetCheckConstraints(entityType);
+    public static IEnumerable<IReadOnlyCheckConstraint> GetCheckConstraints(
+        this IReadOnlyEntityType entityType
+    ) => CheckConstraint.GetCheckConstraints(entityType);
 
     /// <summary>
     ///     Returns all check constraints contained in the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<IMutableCheckConstraint> GetCheckConstraints(this IMutableEntityType entityType)
-        => CheckConstraint.GetCheckConstraints(entityType).Cast<IMutableCheckConstraint>();
+    public static IEnumerable<IMutableCheckConstraint> GetCheckConstraints(
+        this IMutableEntityType entityType
+    ) => CheckConstraint.GetCheckConstraints(entityType).Cast<IMutableCheckConstraint>();
 
     /// <summary>
     ///     Returns all check constraints contained in the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<IConventionCheckConstraint> GetCheckConstraints(this IConventionEntityType entityType)
-        => CheckConstraint.GetCheckConstraints(entityType).Cast<IConventionCheckConstraint>();
+    public static IEnumerable<IConventionCheckConstraint> GetCheckConstraints(
+        this IConventionEntityType entityType
+    ) => CheckConstraint.GetCheckConstraints(entityType).Cast<IConventionCheckConstraint>();
 
     /// <summary>
     ///     Returns all check constraints contained in the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<ICheckConstraint> GetCheckConstraints(this IEntityType entityType)
-        => CheckConstraint.GetCheckConstraints(entityType).Cast<ICheckConstraint>();
+    public static IEnumerable<ICheckConstraint> GetCheckConstraints(this IEntityType entityType) =>
+        CheckConstraint.GetCheckConstraints(entityType).Cast<ICheckConstraint>();
 
     /// <summary>
     ///     Returns all check constraints declared on the entity type.
@@ -739,8 +788,9 @@ public static class RelationalEntityTypeExtensions
     ///     Use <see cref="GetCheckConstraints(IReadOnlyEntityType)" /> to also return check constraints declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<IReadOnlyCheckConstraint> GetDeclaredCheckConstraints(this IReadOnlyEntityType entityType)
-        => CheckConstraint.GetDeclaredCheckConstraints(entityType);
+    public static IEnumerable<IReadOnlyCheckConstraint> GetDeclaredCheckConstraints(
+        this IReadOnlyEntityType entityType
+    ) => CheckConstraint.GetDeclaredCheckConstraints(entityType);
 
     /// <summary>
     ///     Returns all check constraints declared on the entity type.
@@ -751,8 +801,9 @@ public static class RelationalEntityTypeExtensions
     ///     Use <see cref="GetCheckConstraints(IMutableEntityType)" /> to also return check constraints declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<IMutableCheckConstraint> GetDeclaredCheckConstraints(this IMutableEntityType entityType)
-        => CheckConstraint.GetDeclaredCheckConstraints(entityType).Cast<IMutableCheckConstraint>();
+    public static IEnumerable<IMutableCheckConstraint> GetDeclaredCheckConstraints(
+        this IMutableEntityType entityType
+    ) => CheckConstraint.GetDeclaredCheckConstraints(entityType).Cast<IMutableCheckConstraint>();
 
     /// <summary>
     ///     Returns all check constraints declared on the entity type.
@@ -763,8 +814,9 @@ public static class RelationalEntityTypeExtensions
     ///     Use <see cref="GetCheckConstraints(IConventionEntityType)" /> to also return check constraints declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<IConventionCheckConstraint> GetDeclaredCheckConstraints(this IConventionEntityType entityType)
-        => CheckConstraint.GetDeclaredCheckConstraints(entityType).Cast<IConventionCheckConstraint>();
+    public static IEnumerable<IConventionCheckConstraint> GetDeclaredCheckConstraints(
+        this IConventionEntityType entityType
+    ) => CheckConstraint.GetDeclaredCheckConstraints(entityType).Cast<IConventionCheckConstraint>();
 
     /// <summary>
     ///     Returns all check constraints declared on the entity type.
@@ -775,8 +827,9 @@ public static class RelationalEntityTypeExtensions
     ///     Use <see cref="GetCheckConstraints(IEntityType)" /> to also return check constraints declared on base types.
     /// </remarks>
     /// <param name="entityType">The entity type to get the check constraints for.</param>
-    public static IEnumerable<ICheckConstraint> GetDeclaredCheckConstraints(this IEntityType entityType)
-        => CheckConstraint.GetDeclaredCheckConstraints(entityType).Cast<ICheckConstraint>();
+    public static IEnumerable<ICheckConstraint> GetDeclaredCheckConstraints(
+        this IEntityType entityType
+    ) => CheckConstraint.GetDeclaredCheckConstraints(entityType).Cast<ICheckConstraint>();
 
     #endregion Check constraint
 
@@ -787,8 +840,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <returns>The comment for the table this entity is mapped to.</returns>
-    public static string? GetComment(this IReadOnlyEntityType entityType)
-        => (entityType is RuntimeEntityType)
+    public static string? GetComment(this IReadOnlyEntityType entityType) =>
+        (entityType is RuntimeEntityType)
             ? throw new InvalidOperationException(CoreStrings.RuntimeModelMissingData)
             : (string?)entityType[RelationalAnnotationNames.Comment];
 
@@ -797,8 +850,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="comment">The comment for the table this entity is mapped to.</param>
-    public static void SetComment(this IMutableEntityType entityType, string? comment)
-        => entityType.SetOrRemoveAnnotation(RelationalAnnotationNames.Comment, comment);
+    public static void SetComment(this IMutableEntityType entityType, string? comment) =>
+        entityType.SetOrRemoveAnnotation(RelationalAnnotationNames.Comment, comment);
 
     /// <summary>
     ///     Configures a comment to be applied to the table this entity is mapped to.
@@ -810,9 +863,14 @@ public static class RelationalEntityTypeExtensions
     public static string? SetComment(
         this IConventionEntityType entityType,
         string? comment,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
-        entityType.SetOrRemoveAnnotation(RelationalAnnotationNames.Comment, comment, fromDataAnnotation);
+        entityType.SetOrRemoveAnnotation(
+            RelationalAnnotationNames.Comment,
+            comment,
+            fromDataAnnotation
+        );
 
         return comment;
     }
@@ -822,9 +880,9 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for the table comment.</returns>
-    public static ConfigurationSource? GetCommentConfigurationSource(this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.Comment)
-            ?.GetConfigurationSource();
+    public static ConfigurationSource? GetCommentConfigurationSource(
+        this IConventionEntityType entityType
+    ) => entityType.FindAnnotation(RelationalAnnotationNames.Comment)?.GetConfigurationSource();
 
     #endregion Comment
 
@@ -836,7 +894,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="storeObject">The identifier of the store object.</param>
     public static IEnumerable<IReadOnlyForeignKey> FindRowInternalForeignKeys(
         this IReadOnlyEntityType entityType,
-        StoreObjectIdentifier storeObject)
+        StoreObjectIdentifier storeObject
+    )
     {
         var primaryKey = entityType.FindPrimaryKey();
         if (primaryKey == null)
@@ -847,11 +906,16 @@ public static class RelationalEntityTypeExtensions
         foreach (var foreignKey in entityType.GetForeignKeys())
         {
             var principalEntityType = foreignKey.PrincipalEntityType;
-            if (!foreignKey.PrincipalKey.IsPrimaryKey()
+            if (
+                !foreignKey.PrincipalKey.IsPrimaryKey()
                 || principalEntityType == foreignKey.DeclaringEntityType
                 || !foreignKey.IsUnique
 #pragma warning disable EF1001 // Internal EF Core API usage.
-                || !PropertyListComparer.Instance.Equals(foreignKey.Properties, primaryKey.Properties))
+                || !PropertyListComparer.Instance.Equals(
+                    foreignKey.Properties,
+                    primaryKey.Properties
+                )
+            )
 #pragma warning restore EF1001 // Internal EF Core API usage.
             {
                 continue;
@@ -860,16 +924,20 @@ public static class RelationalEntityTypeExtensions
             switch (storeObject.StoreObjectType)
             {
                 case StoreObjectType.Table:
-                    if (storeObject.Name == principalEntityType.GetTableName()
-                        && storeObject.Schema == principalEntityType.GetSchema())
+                    if (
+                        storeObject.Name == principalEntityType.GetTableName()
+                        && storeObject.Schema == principalEntityType.GetSchema()
+                    )
                     {
                         yield return foreignKey;
                     }
 
                     break;
                 case StoreObjectType.View:
-                    if (storeObject.Name == principalEntityType.GetViewName()
-                        && storeObject.Schema == principalEntityType.GetViewSchema())
+                    if (
+                        storeObject.Name == principalEntityType.GetViewName()
+                        && storeObject.Schema == principalEntityType.GetViewSchema()
+                    )
                     {
                         yield return foreignKey;
                     }
@@ -895,10 +963,14 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     public static IEnumerable<IMutableForeignKey> FindRowInternalForeignKeys(
-            this IMutableEntityType entityType,
-            in StoreObjectIdentifier storeObject)
+        this IMutableEntityType entityType,
+        in StoreObjectIdentifier storeObject
+    )
         // ReSharper disable once RedundantCast
-        => ((IReadOnlyEntityType)entityType).FindRowInternalForeignKeys(storeObject).Cast<IMutableForeignKey>();
+        =>
+        ((IReadOnlyEntityType)entityType)
+            .FindRowInternalForeignKeys(storeObject)
+            .Cast<IMutableForeignKey>();
 
     /// <summary>
     ///     Gets the foreign keys for the given entity type that point to other entity types
@@ -907,10 +979,14 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     public static IEnumerable<IConventionForeignKey> FindRowInternalForeignKeys(
-            this IConventionEntityType entityType,
-            in StoreObjectIdentifier storeObject)
+        this IConventionEntityType entityType,
+        in StoreObjectIdentifier storeObject
+    )
         // ReSharper disable once RedundantCast
-        => ((IReadOnlyEntityType)entityType).FindRowInternalForeignKeys(storeObject).Cast<IConventionForeignKey>();
+        =>
+        ((IReadOnlyEntityType)entityType)
+            .FindRowInternalForeignKeys(storeObject)
+            .Cast<IConventionForeignKey>();
 
     /// <summary>
     ///     Gets the foreign keys for the given entity type that point to other entity types
@@ -919,10 +995,14 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type.</param>
     /// <param name="storeObject">The identifier of the store object.</param>
     public static IEnumerable<IForeignKey> FindRowInternalForeignKeys(
-            this IEntityType entityType,
-            in StoreObjectIdentifier storeObject)
+        this IEntityType entityType,
+        in StoreObjectIdentifier storeObject
+    )
         // ReSharper disable once RedundantCast
-        => ((IReadOnlyEntityType)entityType).FindRowInternalForeignKeys(storeObject).Cast<IForeignKey>();
+        =>
+        ((IReadOnlyEntityType)entityType)
+            .FindRowInternalForeignKeys(storeObject)
+            .Cast<IForeignKey>();
 
     #region IsTableExcludedFromMigrations
 
@@ -950,8 +1030,7 @@ public static class RelationalEntityTypeExtensions
         }
 
         var ownership = entityType.FindOwnership();
-        if (ownership != null
-            && ownership.IsUnique)
+        if (ownership != null && ownership.IsUnique)
         {
             return ownership.PrincipalEntityType.IsTableExcludedFromMigrations();
         }
@@ -964,8 +1043,14 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="excluded">A value indicating whether the associated table is ignored by Migrations.</param>
-    public static void SetIsTableExcludedFromMigrations(this IMutableEntityType entityType, bool? excluded)
-        => entityType.SetOrRemoveAnnotation(RelationalAnnotationNames.IsTableExcludedFromMigrations, excluded);
+    public static void SetIsTableExcludedFromMigrations(
+        this IMutableEntityType entityType,
+        bool? excluded
+    ) =>
+        entityType.SetOrRemoveAnnotation(
+            RelationalAnnotationNames.IsTableExcludedFromMigrations,
+            excluded
+        );
 
     /// <summary>
     ///     Sets a value indicating whether the associated table is ignored by Migrations.
@@ -977,10 +1062,16 @@ public static class RelationalEntityTypeExtensions
     public static bool? SetIsTableExcludedFromMigrations(
         this IConventionEntityType entityType,
         bool? excluded,
-        bool fromDataAnnotation = false)
-        => (bool?)entityType.SetOrRemoveAnnotation(
-                RelationalAnnotationNames.IsTableExcludedFromMigrations, excluded, fromDataAnnotation)
-            ?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (bool?)
+            entityType
+                .SetOrRemoveAnnotation(
+                    RelationalAnnotationNames.IsTableExcludedFromMigrations,
+                    excluded,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations" />.
@@ -988,8 +1079,10 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for <see cref="IsTableExcludedFromMigrations" />.</returns>
     public static ConfigurationSource? GetIsTableExcludedFromMigrationsConfigurationSource(
-        this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.IsTableExcludedFromMigrations)
+        this IConventionEntityType entityType
+    ) =>
+        entityType
+            .FindAnnotation(RelationalAnnotationNames.IsTableExcludedFromMigrations)
             ?.GetConfigurationSource();
 
     /// <summary>
@@ -1022,8 +1115,8 @@ public static class RelationalEntityTypeExtensions
     /// </summary>
     /// <param name="entityType">The entity type.</param>
     /// <param name="strategy">The mapping strategy for the derived types.</param>
-    public static void SetMappingStrategy(this IMutableEntityType entityType, string? strategy)
-        => entityType.SetOrRemoveAnnotation(RelationalAnnotationNames.MappingStrategy, strategy);
+    public static void SetMappingStrategy(this IMutableEntityType entityType, string? strategy) =>
+        entityType.SetOrRemoveAnnotation(RelationalAnnotationNames.MappingStrategy, strategy);
 
     /// <summary>
     ///     Sets the mapping strategy for the derived types.
@@ -1035,10 +1128,16 @@ public static class RelationalEntityTypeExtensions
     public static string? SetMappingStrategy(
         this IConventionEntityType entityType,
         string? strategy,
-        bool fromDataAnnotation = false)
-        => (string?)entityType.SetOrRemoveAnnotation(
-                RelationalAnnotationNames.MappingStrategy, strategy, fromDataAnnotation)
-            ?.Value;
+        bool fromDataAnnotation = false
+    ) =>
+        (string?)
+            entityType
+                .SetOrRemoveAnnotation(
+                    RelationalAnnotationNames.MappingStrategy,
+                    strategy,
+                    fromDataAnnotation
+                )
+                ?.Value;
 
     /// <summary>
     ///     Gets the <see cref="ConfigurationSource" /> for <see cref="GetMappingStrategy" />.
@@ -1046,8 +1145,10 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find configuration source for.</param>
     /// <returns>The <see cref="ConfigurationSource" /> for <see cref="GetMappingStrategy" />.</returns>
     public static ConfigurationSource? GetMappingStrategyConfigurationSource(
-        this IConventionEntityType entityType)
-        => entityType.FindAnnotation(RelationalAnnotationNames.MappingStrategy)
+        this IConventionEntityType entityType
+    ) =>
+        entityType
+            .FindAnnotation(RelationalAnnotationNames.MappingStrategy)
             ?.GetConfigurationSource();
 
     #endregion Mapping strategy
@@ -1060,8 +1161,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the sequence on.</param>
     /// <param name="name">The trigger name.</param>
     /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was found.</returns>
-    public static IReadOnlyTrigger? FindTrigger(this IReadOnlyEntityType entityType, string name)
-        => Trigger.FindTrigger(entityType, Check.NotEmpty(name, nameof(name)));
+    public static IReadOnlyTrigger? FindTrigger(this IReadOnlyEntityType entityType, string name) =>
+        Trigger.FindTrigger(entityType, Check.NotEmpty(name, nameof(name)));
 
     /// <summary>
     ///     Finds a trigger with the given name.
@@ -1069,8 +1170,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the sequence on.</param>
     /// <param name="name">The trigger name.</param>
     /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was found.</returns>
-    public static IMutableTrigger? FindTrigger(this IMutableEntityType entityType, string name)
-        => (IMutableTrigger?)((IReadOnlyEntityType)entityType).FindTrigger(name);
+    public static IMutableTrigger? FindTrigger(this IMutableEntityType entityType, string name) =>
+        (IMutableTrigger?)((IReadOnlyEntityType)entityType).FindTrigger(name);
 
     /// <summary>
     ///     Finds a trigger with the given name.
@@ -1078,8 +1179,10 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the sequence on.</param>
     /// <param name="name">The trigger name.</param>
     /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was found.</returns>
-    public static IConventionTrigger? FindTrigger(this IConventionEntityType entityType, string name)
-        => (IConventionTrigger?)((IReadOnlyEntityType)entityType).FindTrigger(name);
+    public static IConventionTrigger? FindTrigger(
+        this IConventionEntityType entityType,
+        string name
+    ) => (IConventionTrigger?)((IReadOnlyEntityType)entityType).FindTrigger(name);
 
     /// <summary>
     ///     Finds a trigger with the given name.
@@ -1087,8 +1190,8 @@ public static class RelationalEntityTypeExtensions
     /// <param name="entityType">The entity type to find the sequence on.</param>
     /// <param name="name">The trigger name.</param>
     /// <returns>The trigger or <see langword="null" /> if no trigger with the given name was found.</returns>
-    public static ITrigger? FindTrigger(this IEntityType entityType, string name)
-        => (ITrigger?)((IReadOnlyEntityType)entityType).FindTrigger(name);
+    public static ITrigger? FindTrigger(this IEntityType entityType, string name) =>
+        (ITrigger?)((IReadOnlyEntityType)entityType).FindTrigger(name);
 
     /// <summary>
     ///     Creates a new trigger with the given name on entity type. Throws an exception if a trigger with the same name exists on the same
@@ -1101,7 +1204,13 @@ public static class RelationalEntityTypeExtensions
     {
         Check.NotEmpty(name, nameof(name));
 
-        return new Trigger(entityType, name, tableName: null, tableSchema: null, ConfigurationSource.Explicit);
+        return new Trigger(
+            entityType,
+            name,
+            tableName: null,
+            tableSchema: null,
+            ConfigurationSource.Explicit
+        );
     }
 
     /// <summary>
@@ -1113,7 +1222,12 @@ public static class RelationalEntityTypeExtensions
     /// <param name="tableName">The name of the table on which this trigger is defined.</param>
     /// <param name="tableSchema">The schema of the table on which this trigger is defined.</param>
     /// <returns>The trigger.</returns>
-    public static IMutableTrigger AddTrigger(this IMutableEntityType entityType, string name, string tableName, string? tableSchema = null)
+    public static IMutableTrigger AddTrigger(
+        this IMutableEntityType entityType,
+        string name,
+        string tableName,
+        string? tableSchema = null
+    )
     {
         Check.NotEmpty(name, nameof(name));
 
@@ -1131,13 +1245,18 @@ public static class RelationalEntityTypeExtensions
     public static IConventionTrigger AddTrigger(
         this IConventionEntityType entityType,
         string name,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotEmpty(name, nameof(name));
 
         return new Trigger(
-            (IMutableEntityType)entityType, name, tableName: null, tableSchema: null,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            (IMutableEntityType)entityType,
+            name,
+            tableName: null,
+            tableSchema: null,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
     }
 
     /// <summary>
@@ -1155,13 +1274,18 @@ public static class RelationalEntityTypeExtensions
         string name,
         string tableName,
         string? tableSchema,
-        bool fromDataAnnotation = false)
+        bool fromDataAnnotation = false
+    )
     {
         Check.NotEmpty(name, nameof(name));
 
         return new Trigger(
-            (IMutableEntityType)entityType, name, tableName, tableSchema,
-            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention);
+            (IMutableEntityType)entityType,
+            name,
+            tableName,
+            tableSchema,
+            fromDataAnnotation ? ConfigurationSource.DataAnnotation : ConfigurationSource.Convention
+        );
     }
 
     /// <summary>
@@ -1172,8 +1296,8 @@ public static class RelationalEntityTypeExtensions
     /// <returns>
     ///     The removed <see cref="IMutableTrigger" /> or <see langword="null" /> if no trigger with the given name was found.
     /// </returns>
-    public static IMutableTrigger? RemoveTrigger(this IMutableEntityType entityType, string name)
-        => Trigger.RemoveTrigger(entityType, name);
+    public static IMutableTrigger? RemoveTrigger(this IMutableEntityType entityType, string name) =>
+        Trigger.RemoveTrigger(entityType, name);
 
     /// <summary>
     ///     Removes the <see cref="IConventionTrigger" /> with the given name.
@@ -1183,36 +1307,39 @@ public static class RelationalEntityTypeExtensions
     /// <returns>
     ///     The removed <see cref="IMutableTrigger" /> or <see langword="null" /> if no trigger with the given name was found.
     /// </returns>
-    public static IConventionTrigger? RemoveTrigger(this IConventionEntityType entityType, string name)
-        => Trigger.RemoveTrigger((IMutableEntityType)entityType, name);
+    public static IConventionTrigger? RemoveTrigger(
+        this IConventionEntityType entityType,
+        string name
+    ) => Trigger.RemoveTrigger((IMutableEntityType)entityType, name);
 
     /// <summary>
     ///     Returns all triggers on the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the triggers on.</param>
-    public static IEnumerable<IReadOnlyTrigger> GetTriggers(this IReadOnlyEntityType entityType)
-        => Trigger.GetTriggers(entityType);
+    public static IEnumerable<IReadOnlyTrigger> GetTriggers(this IReadOnlyEntityType entityType) =>
+        Trigger.GetTriggers(entityType);
 
     /// <summary>
     ///     Returns all triggers on the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the triggers on.</param>
-    public static IEnumerable<IMutableTrigger> GetTriggers(this IMutableEntityType entityType)
-        => Trigger.GetTriggers(entityType).Cast<IMutableTrigger>();
+    public static IEnumerable<IMutableTrigger> GetTriggers(this IMutableEntityType entityType) =>
+        Trigger.GetTriggers(entityType).Cast<IMutableTrigger>();
 
     /// <summary>
     ///     Returns all triggers on the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the triggers on.</param>
-    public static IEnumerable<IConventionTrigger> GetTriggers(this IConventionEntityType entityType)
-        => Trigger.GetTriggers(entityType).Cast<IConventionTrigger>();
+    public static IEnumerable<IConventionTrigger> GetTriggers(
+        this IConventionEntityType entityType
+    ) => Trigger.GetTriggers(entityType).Cast<IConventionTrigger>();
 
     /// <summary>
     ///     Returns all triggers on the entity type.
     /// </summary>
     /// <param name="entityType">The entity type to get the triggers on.</param>
-    public static IEnumerable<ITrigger> GetTriggers(this IEntityType entityType)
-        => Trigger.GetTriggers(entityType).Cast<ITrigger>();
+    public static IEnumerable<ITrigger> GetTriggers(this IEntityType entityType) =>
+        Trigger.GetTriggers(entityType).Cast<ITrigger>();
 
     /// <summary>
     ///     Returns all triggers on the entity type.
@@ -1223,8 +1350,9 @@ public static class RelationalEntityTypeExtensions
     ///     It is useful when iterating over all entity types to avoid processing the same trigger more than once.
     ///     Use <see cref="GetTriggers(IReadOnlyEntityType)" /> to also return triggers declared on base types.
     /// </remarks>
-    public static IEnumerable<IReadOnlyTrigger> GetDeclaredTriggers(this IReadOnlyEntityType entityType)
-        => Trigger.GetDeclaredTriggers(entityType);
+    public static IEnumerable<IReadOnlyTrigger> GetDeclaredTriggers(
+        this IReadOnlyEntityType entityType
+    ) => Trigger.GetDeclaredTriggers(entityType);
 
     /// <summary>
     ///     Returns all triggers on the entity type.
@@ -1235,8 +1363,9 @@ public static class RelationalEntityTypeExtensions
     ///     It is useful when iterating over all entity types to avoid processing the same trigger more than once.
     ///     Use <see cref="GetTriggers(IMutableEntityType)" /> to also return triggers declared on base types.
     /// </remarks>
-    public static IEnumerable<IMutableTrigger> GetDeclaredTriggers(this IMutableEntityType entityType)
-        => Trigger.GetDeclaredTriggers(entityType).Cast<IMutableTrigger>();
+    public static IEnumerable<IMutableTrigger> GetDeclaredTriggers(
+        this IMutableEntityType entityType
+    ) => Trigger.GetDeclaredTriggers(entityType).Cast<IMutableTrigger>();
 
     /// <summary>
     ///     Returns all triggers on the entity type.
@@ -1247,8 +1376,9 @@ public static class RelationalEntityTypeExtensions
     ///     It is useful when iterating over all entity types to avoid processing the same trigger more than once.
     ///     Use <see cref="GetTriggers(IConventionEntityType)" /> to also return triggers declared on base types.
     /// </remarks>
-    public static IEnumerable<IConventionTrigger> GetDeclaredTriggers(this IConventionEntityType entityType)
-        => Trigger.GetDeclaredTriggers(entityType).Cast<IConventionTrigger>();
+    public static IEnumerable<IConventionTrigger> GetDeclaredTriggers(
+        this IConventionEntityType entityType
+    ) => Trigger.GetDeclaredTriggers(entityType).Cast<IConventionTrigger>();
 
     /// <summary>
     ///     Returns all triggers on the entity type.
@@ -1259,8 +1389,8 @@ public static class RelationalEntityTypeExtensions
     ///     It is useful when iterating over all entity types to avoid processing the same trigger more than once.
     ///     Use <see cref="GetTriggers(IEntityType)" /> to also return triggers declared on base types.
     /// </remarks>
-    public static IEnumerable<ITrigger> GetDeclaredTriggers(this IEntityType entityType)
-        => Trigger.GetDeclaredTriggers(entityType).Cast<ITrigger>();
+    public static IEnumerable<ITrigger> GetDeclaredTriggers(this IEntityType entityType) =>
+        Trigger.GetDeclaredTriggers(entityType).Cast<ITrigger>();
 
     #endregion Trigger
 }

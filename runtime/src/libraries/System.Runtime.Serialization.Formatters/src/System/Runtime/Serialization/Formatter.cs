@@ -20,7 +20,11 @@ namespace System.Runtime.Serialization
             m_idGenerator = new ObjectIDGenerator();
         }
 
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
         public abstract object Deserialize(Stream serializationStream);
 
@@ -61,7 +65,11 @@ namespace System.Runtime.Serialization
             return id;
         }
 
-        [Obsolete(Obsoletions.BinaryFormatterMessage, DiagnosticId = Obsoletions.BinaryFormatterDiagId, UrlFormat = Obsoletions.SharedUrlFormat)]
+        [Obsolete(
+            Obsoletions.BinaryFormatterMessage,
+            DiagnosticId = Obsoletions.BinaryFormatterDiagId,
+            UrlFormat = Obsoletions.SharedUrlFormat
+        )]
         [RequiresUnreferencedCode(IFormatter.RequiresUnreferencedCodeMessage)]
         public abstract void Serialize(Stream serializationStream, object graph);
 

@@ -51,7 +51,8 @@ namespace Microsoft.EntityFrameworkCore.Storage
         [EntityFrameworkInternal]
         public RelationalValueBufferFactoryDependencies(
             IRelationalTypeMappingSource typeMappingSource,
-            ICoreSingletonOptions coreOptions)
+            ICoreSingletonOptions coreOptions
+        )
         {
             TypeMappingSource = typeMappingSource;
             CoreOptions = coreOptions;

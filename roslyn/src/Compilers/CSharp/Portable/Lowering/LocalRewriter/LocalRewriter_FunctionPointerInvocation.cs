@@ -11,13 +11,18 @@ namespace Microsoft.CodeAnalysis.CSharp
 {
     internal sealed partial class LocalRewriter
     {
-        public override BoundNode? VisitFunctionPointerInvocation(BoundFunctionPointerInvocation node)
+        public override BoundNode? VisitFunctionPointerInvocation(
+            BoundFunctionPointerInvocation node
+        )
         {
             var rewrittenExpression = VisitExpression(node.InvokedExpression);
 
             // There are target types so we can have handler conversions, but there are no attributes so contexts cannot
             // be involved.
-            AssertNoImplicitInterpolatedStringHandlerConversions(node.Arguments, allowConversionsWithNoContext: true);
+            AssertNoImplicitInterpolatedStringHandlerConversions(
+                node.Arguments,
+                allowConversionsWithNoContext: true
+            );
             MethodSymbol functionPointer = node.FunctionPointer.Signature;
             var argumentRefKindsOpt = node.ArgumentRefKindsOpt;
             BoundExpression? discardedReceiver = null;
@@ -27,7 +32,8 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default,
                 argumentRefKindsOpt: argumentRefKindsOpt,
                 rewrittenReceiver: ref discardedReceiver,
-                temps: out ArrayBuilder<LocalSymbol>? temps);
+                temps: out ArrayBuilder<LocalSymbol>? temps
+            );
 
             rewrittenArgs = MakeArguments(
                 node.Syntax,
@@ -37,10 +43,17 @@ namespace Microsoft.CodeAnalysis.CSharp
                 argsToParamsOpt: default,
                 ref argumentRefKindsOpt,
                 ref temps,
-                invokedAsExtensionMethod: false);
+                invokedAsExtensionMethod: false
+            );
 
             Debug.Assert(rewrittenExpression != null);
-            node = node.Update(rewrittenExpression, rewrittenArgs, argumentRefKindsOpt, node.ResultKind, node.Type);
+            node = node.Update(
+                rewrittenExpression,
+                rewrittenArgs,
+                argumentRefKindsOpt,
+                node.ResultKind,
+                node.Type
+            );
 
             if (temps.Count == 0)
             {
@@ -48,7 +61,13 @@ namespace Microsoft.CodeAnalysis.CSharp
                 return node;
             }
 
-            return new BoundSequence(node.Syntax, temps.ToImmutableAndFree(), sideEffects: ImmutableArray<BoundExpression>.Empty, node, node.Type);
+            return new BoundSequence(
+                node.Syntax,
+                temps.ToImmutableAndFree(),
+                sideEffects: ImmutableArray<BoundExpression>.Empty,
+                node,
+                node.Type
+            );
         }
     }
 }

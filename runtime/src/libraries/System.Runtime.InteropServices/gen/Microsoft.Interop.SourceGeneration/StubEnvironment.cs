@@ -21,7 +21,8 @@ namespace Microsoft.Interop
         Compilation Compilation,
         TargetFramework TargetFramework,
         Version TargetFrameworkVersion,
-        bool ModuleSkipLocalsInit)
+        bool ModuleSkipLocalsInit
+    )
     {
         /// <summary>
         /// Override for determining if two StubEnvironment instances are

@@ -7,24 +7,24 @@ using System.Linq.Expressions;
 
 namespace Moq.Matchers
 {
-	internal class ExpressionMatcher : IMatcher
-	{
-		private Expression expression;
+    internal class ExpressionMatcher : IMatcher
+    {
+        private Expression expression;
 
-		public ExpressionMatcher(Expression expression)
-		{
-			this.expression = expression;
-		}
+        public ExpressionMatcher(Expression expression)
+        {
+            this.expression = expression;
+        }
 
-		public bool Matches(object argument, Type parameterType)
-		{
-			return argument is Expression valueExpression
-				&& ExpressionComparer.Default.Equals(this.expression, valueExpression);
-		}
+        public bool Matches(object argument, Type parameterType)
+        {
+            return argument is Expression valueExpression
+                && ExpressionComparer.Default.Equals(this.expression, valueExpression);
+        }
 
-		public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
-		{
-			Debug.Assert(this.Matches(argument, parameterType));
-		}
-	}
+        public void SetupEvaluatedSuccessfully(object argument, Type parameterType)
+        {
+            Debug.Assert(this.Matches(argument, parameterType));
+        }
+    }
 }

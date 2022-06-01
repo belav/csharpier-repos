@@ -23,22 +23,42 @@ namespace Microsoft.CodeAnalysis.Remote
         // Even if primary workspace is not updated, other OOP queries will work as expected. Updating primary workspace
         // on OOP should let latest data to be synced pre-emptively rather than on demand, and will kick off
         // incremental analyzer tasks.
-        public static readonly Option2<int> SolutionChecksumMonitorBackOffTimeSpanInMS = new(
-            FeatureName, nameof(SolutionChecksumMonitorBackOffTimeSpanInMS), defaultValue: 1000,
-            storageLocation: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(SolutionChecksumMonitorBackOffTimeSpanInMS)));
+        public static readonly Option2<int> SolutionChecksumMonitorBackOffTimeSpanInMS =
+            new(
+                FeatureName,
+                nameof(SolutionChecksumMonitorBackOffTimeSpanInMS),
+                defaultValue: 1000,
+                storageLocation: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(SolutionChecksumMonitorBackOffTimeSpanInMS)
+                )
+            );
 
         // use 64bit OOP
-        public static readonly Option2<bool> OOP64Bit = new(
-            FeatureName, nameof(OOP64Bit), defaultValue: true,
-            storageLocation: new LocalUserProfileStorageLocation(LocalRegistryPath + nameof(OOP64Bit)));
+        public static readonly Option2<bool> OOP64Bit =
+            new(
+                FeatureName,
+                nameof(OOP64Bit),
+                defaultValue: true,
+                storageLocation: new LocalUserProfileStorageLocation(
+                    LocalRegistryPath + nameof(OOP64Bit)
+                )
+            );
 
-        public static readonly Option2<bool> OOPServerGCFeatureFlag = new(
-            FeatureName, nameof(OOPServerGCFeatureFlag), defaultValue: false,
-            new FeatureFlagStorageLocation("Roslyn.OOPServerGC"));
+        public static readonly Option2<bool> OOPServerGCFeatureFlag =
+            new(
+                FeatureName,
+                nameof(OOPServerGCFeatureFlag),
+                defaultValue: false,
+                new FeatureFlagStorageLocation("Roslyn.OOPServerGC")
+            );
 
         // use coreclr host for OOP
-        public static readonly Option2<bool> OOPCoreClrFeatureFlag = new(
-            FeatureName, nameof(OOPCoreClrFeatureFlag), defaultValue: false,
-            new FeatureFlagStorageLocation("Roslyn.ServiceHubCore"));
+        public static readonly Option2<bool> OOPCoreClrFeatureFlag =
+            new(
+                FeatureName,
+                nameof(OOPCoreClrFeatureFlag),
+                defaultValue: false,
+                new FeatureFlagStorageLocation("Roslyn.ServiceHubCore")
+            );
     }
 }

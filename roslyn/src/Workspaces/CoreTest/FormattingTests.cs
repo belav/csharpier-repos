@@ -34,7 +34,9 @@ namespace Microsoft.CodeAnalysis.UnitTests
         {
             using var workspace = new AdhocWorkspace();
 
-            var service = workspace.Services.GetLanguageServices(LanguageNames.CSharp).GetService<ISyntaxFormattingService>();
+            var service = workspace.Services
+                .GetLanguageServices(LanguageNames.CSharp)
+                .GetService<ISyntaxFormattingService>();
             var rules = service.GetDefaultFormattingRules();
 
             Assert.NotEmpty(rules);
@@ -43,12 +45,14 @@ namespace Microsoft.CodeAnalysis.UnitTests
         [Fact, Trait(Traits.Feature, Traits.Features.Formatting)]
         public void TestVisualBasicFormatting()
         {
-            var text = @"
+            var text =
+                @"
 Public Class C
 Public X As Integer
 End Class
 ";
-            var expectedFormattedText = @"
+            var expectedFormattedText =
+                @"
 Public Class C
     Public X As Integer
 End Class
@@ -61,7 +65,9 @@ End Class
         public void TestVisualBasicDefaultFormattingRules()
         {
             using var workspace = new AdhocWorkspace();
-            var service = workspace.Services.GetLanguageServices(LanguageNames.VisualBasic).GetService<ISyntaxFormattingService>();
+            var service = workspace.Services
+                .GetLanguageServices(LanguageNames.VisualBasic)
+                .GetService<ISyntaxFormattingService>();
             var rules = service.GetDefaultFormattingRules();
 
             Assert.NotEmpty(rules);
@@ -79,11 +85,20 @@ End Class
             AssertFormat(expected, tree, VisualBasicSyntaxFormattingOptions.Default);
         }
 
-        private static void AssertFormat(string expected, SyntaxTree tree, SyntaxFormattingOptions options)
+        private static void AssertFormat(
+            string expected,
+            SyntaxTree tree,
+            SyntaxFormattingOptions options
+        )
         {
             using var workspace = new AdhocWorkspace();
 
-            var formattedRoot = Formatter.Format(tree.GetRoot(), workspace.Services, options, CancellationToken.None);
+            var formattedRoot = Formatter.Format(
+                tree.GetRoot(),
+                workspace.Services,
+                options,
+                CancellationToken.None
+            );
             var actualFormattedText = formattedRoot.ToFullString();
 
             Assert.Equal(expected, actualFormattedText);

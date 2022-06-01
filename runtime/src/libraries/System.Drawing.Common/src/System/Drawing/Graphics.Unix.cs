@@ -112,34 +112,73 @@ namespace System.Drawing
             return new GraphicsContainer(state);
         }
 
-        public GraphicsContainer BeginContainer(Rectangle dstrect, Rectangle srcrect, GraphicsUnit unit)
+        public GraphicsContainer BeginContainer(
+            Rectangle dstrect,
+            Rectangle srcrect,
+            GraphicsUnit unit
+        )
         {
             int state;
 
-            int status = Gdip.GdipBeginContainerI(new HandleRef(this, NativeGraphics), ref dstrect, ref srcrect, unit, out state);
+            int status = Gdip.GdipBeginContainerI(
+                new HandleRef(this, NativeGraphics),
+                ref dstrect,
+                ref srcrect,
+                unit,
+                out state
+            );
             Gdip.CheckStatus(status);
 
             return new GraphicsContainer(state);
         }
 
-        public GraphicsContainer BeginContainer(RectangleF dstrect, RectangleF srcrect, GraphicsUnit unit)
+        public GraphicsContainer BeginContainer(
+            RectangleF dstrect,
+            RectangleF srcrect,
+            GraphicsUnit unit
+        )
         {
             int state;
 
-            int status = Gdip.GdipBeginContainer(new HandleRef(this, NativeGraphics), ref dstrect, ref srcrect, unit, out state);
+            int status = Gdip.GdipBeginContainer(
+                new HandleRef(this, NativeGraphics),
+                ref dstrect,
+                ref srcrect,
+                unit,
+                out state
+            );
             Gdip.CheckStatus(status);
 
             return new GraphicsContainer(state);
         }
 
-        public void CopyFromScreen(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
+        public void CopyFromScreen(
+            int sourceX,
+            int sourceY,
+            int destinationX,
+            int destinationY,
+            Size blockRegionSize,
+            CopyPixelOperation copyPixelOperation
+        )
         {
             if (!Enum.IsDefined(typeof(CopyPixelOperation), copyPixelOperation))
-                throw new InvalidEnumArgumentException(string.Format("Enum argument value '{0}' is not valid for CopyPixelOperation", copyPixelOperation));
+                throw new InvalidEnumArgumentException(
+                    string.Format(
+                        "Enum argument value '{0}' is not valid for CopyPixelOperation",
+                        copyPixelOperation
+                    )
+                );
 
             if (Gdip.UseX11Drawable)
             {
-                CopyFromScreenX11(sourceX, sourceY, destinationX, destinationY, blockRegionSize, copyPixelOperation);
+                CopyFromScreenX11(
+                    sourceX,
+                    sourceY,
+                    destinationX,
+                    destinationY,
+                    blockRegionSize,
+                    copyPixelOperation
+                );
             }
             else
             {
@@ -147,10 +186,22 @@ namespace System.Drawing
             }
         }
 
-        private void CopyFromScreenX11(int sourceX, int sourceY, int destinationX, int destinationY, Size blockRegionSize, CopyPixelOperation copyPixelOperation)
+        private void CopyFromScreenX11(
+            int sourceX,
+            int sourceY,
+            int destinationX,
+            int destinationY,
+            Size blockRegionSize,
+            CopyPixelOperation copyPixelOperation
+        )
         {
-            IntPtr window, image, defvisual, vPtr;
-            int AllPlanes = ~0, nitems = 0, pixel;
+            IntPtr window,
+                image,
+                defvisual,
+                vPtr;
+            int AllPlanes = ~0,
+                nitems = 0,
+                pixel;
 
             if (copyPixelOperation != CopyPixelOperation.SourceCopy)
                 throw new NotImplementedException(SR.NotImplementedUnderX11);
@@ -166,19 +217,38 @@ namespace System.Drawing
 
             /* Get XVisualInfo for this visual */
             visual.visualid = LibX11Functions.XVisualIDFromVisual(defvisual);
-            vPtr = LibX11Functions.XGetVisualInfo(Gdip.Display, 0x1 /* VisualIDMask */, ref visual, ref nitems);
+            vPtr = LibX11Functions.XGetVisualInfo(
+                Gdip.Display,
+                0x1 /* VisualIDMask */
+                ,
+                ref visual,
+                ref nitems
+            );
             visual = (XVisualInfo)Marshal.PtrToStructure(vPtr, typeof(XVisualInfo))!;
-            image = LibX11Functions.XGetImage(Gdip.Display, window, sourceX, sourceY, blockRegionSize.Width,
-                blockRegionSize.Height, AllPlanes, 2 /* ZPixmap*/);
+            image = LibX11Functions.XGetImage(
+                Gdip.Display,
+                window,
+                sourceX,
+                sourceY,
+                blockRegionSize.Width,
+                blockRegionSize.Height,
+                AllPlanes,
+                2 /* ZPixmap*/
+            );
             if (image == IntPtr.Zero)
             {
-                string s = string.Format("XGetImage returned NULL when asked to for a {0}x{1} region block",
-                    blockRegionSize.Width, blockRegionSize.Height);
+                string s = string.Format(
+                    "XGetImage returned NULL when asked to for a {0}x{1} region block",
+                    blockRegionSize.Width,
+                    blockRegionSize.Height
+                );
                 throw new InvalidOperationException(s);
             }
 
             Bitmap bmp = new Bitmap(blockRegionSize.Width, blockRegionSize.Height);
-            int red, blue, green;
+            int red,
+                blue,
+                green;
             int red_mask = (int)visual.red_mask;
             int blue_mask = (int)visual.blue_mask;
             int green_mask = (int)visual.green_mask;
@@ -202,7 +272,10 @@ namespace System.Drawing
                             blue = (int)((pixel & blue_mask)) & 0xff;
                             break;
                         default:
-                            string text = string.Format("{0}bbp depth not supported.", visual.depth);
+                            string text = string.Format(
+                                "{0}bbp depth not supported.",
+                                visual.depth
+                            );
                             throw new NotImplementedException(text);
                     }
 
@@ -271,9 +344,17 @@ namespace System.Drawing
                 Point p4 = points[i + 3];
 
                 status = Gdip.GdipDrawBezier(
-                                        new HandleRef(this, NativeGraphics), new HandleRef(pen, pen.NativePen),
-                                        p1.X, p1.Y, p2.X, p2.Y,
-                                        p3.X, p3.Y, p4.X, p4.Y);
+                    new HandleRef(this, NativeGraphics),
+                    new HandleRef(pen, pen.NativePen),
+                    p1.X,
+                    p1.Y,
+                    p2.X,
+                    p2.Y,
+                    p3.X,
+                    p3.Y,
+                    p4.X,
+                    p4.Y
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -299,9 +380,17 @@ namespace System.Drawing
                 PointF p4 = points[i + 3];
 
                 status = Gdip.GdipDrawBezier(
-                                        new HandleRef(this, NativeGraphics), new HandleRef(pen, pen.NativePen),
-                                        p1.X, p1.Y, p2.X, p2.Y,
-                                        p3.X, p3.Y, p4.X, p4.Y);
+                    new HandleRef(this, NativeGraphics),
+                    new HandleRef(pen, pen.NativePen),
+                    p1.X,
+                    p1.Y,
+                    p2.X,
+                    p2.Y,
+                    p3.X,
+                    p3.Y,
+                    p4.X,
+                    p4.Y
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -334,10 +423,16 @@ namespace System.Drawing
         {
             if (pen == null)
                 throw new ArgumentNullException(nameof(pen));
-            if (!float.IsNaN(x1) && !float.IsNaN(y1) &&
-                !float.IsNaN(x2) && !float.IsNaN(y2))
+            if (!float.IsNaN(x1) && !float.IsNaN(y1) && !float.IsNaN(x2) && !float.IsNaN(y2))
             {
-                int status = Gdip.GdipDrawLine(new HandleRef(this, NativeGraphics), new HandleRef(pen, pen.NativePen), x1, y1, x2, y2);
+                int status = Gdip.GdipDrawLine(
+                    new HandleRef(this, NativeGraphics),
+                    new HandleRef(pen, pen.NativePen),
+                    x1,
+                    y1,
+                    x2,
+                    y2
+                );
                 Gdip.CheckStatus(status);
             }
         }
@@ -346,66 +441,153 @@ namespace System.Drawing
         {
             if (container == null)
                 throw new ArgumentNullException(nameof(container));
-            int status = Gdip.GdipEndContainer(new HandleRef(this, NativeGraphics), container.nativeGraphicsContainer);
+            int status = Gdip.GdipEndContainer(
+                new HandleRef(this, NativeGraphics),
+                container.nativeGraphicsContainer
+            );
             Gdip.CheckStatus(status);
         }
 
-        public void EnumerateMetafile(Metafile metafile, RectangleF destRect, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            RectangleF destRect,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, Point destPoint, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            Point destPoint,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, PointF destPoint, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            PointF destPoint,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, Point[] destPoints, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            Point[] destPoints,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, PointF[] destPoints, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            PointF[] destPoints,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, Rectangle destRect, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            Rectangle destRect,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, Point[] destPoints, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            Point[] destPoints,
+            Rectangle srcRect,
+            GraphicsUnit unit,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, Rectangle destRect, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            Rectangle destRect,
+            Rectangle srcRect,
+            GraphicsUnit unit,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, Point destPoint, Rectangle srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            Point destPoint,
+            Rectangle srcRect,
+            GraphicsUnit unit,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, RectangleF destRect, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            RectangleF destRect,
+            RectangleF srcRect,
+            GraphicsUnit unit,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, PointF[] destPoints, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            PointF[] destPoints,
+            RectangleF srcRect,
+            GraphicsUnit unit,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
 
-        public void EnumerateMetafile(Metafile metafile, PointF destPoint, RectangleF srcRect, GraphicsUnit unit, EnumerateMetafileProc callback, IntPtr callbackData, ImageAttributes? imageAttr)
+        public void EnumerateMetafile(
+            Metafile metafile,
+            PointF destPoint,
+            RectangleF srcRect,
+            GraphicsUnit unit,
+            EnumerateMetafileProc callback,
+            IntPtr callbackData,
+            ImageAttributes? imageAttr
+        )
         {
             throw new NotImplementedException();
         }
@@ -428,7 +610,12 @@ namespace System.Drawing
             if (region == null)
                 throw new ArgumentNullException(nameof(region));
 
-            int status = (int)Gdip.GdipFillRegion(new HandleRef(this, NativeGraphics), new HandleRef(brush, brush.NativeBrush), new HandleRef(region, region.NativeRegion));
+            int status = (int)
+                Gdip.GdipFillRegion(
+                    new HandleRef(this, NativeGraphics),
+                    new HandleRef(brush, brush.NativeBrush),
+                    new HandleRef(region, region.NativeRegion)
+                );
             Gdip.CheckStatus(status);
         }
 
@@ -464,7 +651,12 @@ namespace System.Drawing
             if (!Gdip.UseX11Drawable)
             {
                 CarbonContext context = MacSupport.GetCGContextForView(hwnd);
-                Gdip.GdipCreateFromContext_macosx(context.ctx, context.width, context.height, out graphics);
+                Gdip.GdipCreateFromContext_macosx(
+                    context.ctx,
+                    context.width,
+                    context.height,
+                    out graphics
+                );
 
                 Graphics g = new Graphics(graphics);
                 g.maccontext = context;
@@ -481,7 +673,10 @@ namespace System.Drawing
                 }
                 if (hwnd == IntPtr.Zero)
                 {
-                    hwnd = LibX11Functions.XRootWindow(Gdip.Display, LibX11Functions.XDefaultScreen(Gdip.Display));
+                    hwnd = LibX11Functions.XRootWindow(
+                        Gdip.Display,
+                        LibX11Functions.XDefaultScreen(Gdip.Display)
+                    );
                 }
 
                 return FromXDrawable(hwnd, Gdip.Display);
@@ -544,7 +739,10 @@ namespace System.Drawing
             int status = Gdip.InvalidParameter;
             if (hdc == _nativeHdc)
             {
-                status = Gdip.GdipReleaseDC(new HandleRef(this, NativeGraphics), new HandleRef(this, _nativeHdc));
+                status = Gdip.GdipReleaseDC(
+                    new HandleRef(this, NativeGraphics),
+                    new HandleRef(this, _nativeHdc)
+                );
                 _nativeHdc = IntPtr.Zero;
             }
             Gdip.CheckStatus(status);
@@ -569,7 +767,10 @@ namespace System.Drawing
         {
             get
             {
-                int status = Gdip.GdipGetVisibleClipBounds(new HandleRef(this, NativeGraphics), out RectangleF rect);
+                int status = Gdip.GdipGetVisibleClipBounds(
+                    new HandleRef(this, NativeGraphics),
+                    out RectangleF rect
+                );
                 Gdip.CheckStatus(status);
 
                 return rect;

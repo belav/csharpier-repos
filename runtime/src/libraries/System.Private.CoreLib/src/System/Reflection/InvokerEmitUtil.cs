@@ -22,15 +22,22 @@ namespace System.Reflection
             bool hasThis = !(emitNew || method.IsStatic);
 
             // The first parameter is unused but supports treating the DynamicMethod as an instance method which is slightly faster than a static.
-            Type[] delegateParameters = new Type[3] { typeof(object), typeof(object), typeof(IntPtr*) };
+            Type[] delegateParameters = new Type[3]
+            {
+                typeof(object),
+                typeof(object),
+                typeof(IntPtr*)
+            };
 
-            string declaringTypeName = method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
+            string declaringTypeName =
+                method.DeclaringType != null ? method.DeclaringType.Name + "." : string.Empty;
             var dm = new DynamicMethod(
                 InvokeStubPrefix + declaringTypeName + method.Name,
                 returnType: typeof(object),
                 delegateParameters,
                 typeof(object).Module, // Use system module to identify our DynamicMethods.
-                skipVisibility: true);
+                skipVisibility: true
+            );
 
             ILGenerator il = dm.GetILGenerator();
 
@@ -60,7 +67,10 @@ namespace System.Reflection
                 RuntimeType parameterType = (RuntimeType)parameters[i].ParameterType;
                 if (!parameterType.IsByRef)
                 {
-                    il.Emit(OpCodes.Ldobj, parameterType.IsPointer ? typeof(IntPtr) : parameterType);
+                    il.Emit(
+                        OpCodes.Ldobj,
+                        parameterType.IsPointer ? typeof(IntPtr) : parameterType
+                    );
                 }
             }
 
@@ -126,7 +136,10 @@ namespace System.Reflection
                     Label retValueOk = il.DefineLabel();
                     il.Emit(OpCodes.Dup);
                     il.Emit(OpCodes.Brtrue_S, retValueOk);
-                    il.Emit(OpCodes.Call, Methods.ThrowHelper_Throw_NullReference_InvokeNullRefReturned());
+                    il.Emit(
+                        OpCodes.Call,
+                        Methods.ThrowHelper_Throw_NullReference_InvokeNullRefReturned()
+                    );
                     il.MarkLabel(retValueOk);
 
                     // Handle per-type differences.
@@ -167,33 +180,58 @@ namespace System.Reflection
         private static class Methods
         {
             private static MethodInfo? s_ByReferenceOfByte_Value;
+
             [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(ByReference<>))]
             public static MethodInfo ByReferenceOfByte_Value() =>
-                                      s_ByReferenceOfByte_Value ??
-                                     (s_ByReferenceOfByte_Value = typeof(ByReference<byte>).GetMethod("get_Value")!);
+                s_ByReferenceOfByte_Value
+                ?? (s_ByReferenceOfByte_Value = typeof(ByReference<byte>).GetMethod("get_Value")!);
 
             private static MethodInfo? s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned;
+
             [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(ThrowHelper))]
             public static MethodInfo ThrowHelper_Throw_NullReference_InvokeNullRefReturned() =>
-                                      s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned ??
-                                     (s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned = typeof(ThrowHelper).GetMethod(nameof(ThrowHelper.Throw_NullReference_InvokeNullRefReturned))!);
+                s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned
+                ?? (
+                    s_ThrowHelper_Throw_NullReference_InvokeNullRefReturned =
+                        typeof(ThrowHelper).GetMethod(
+                            nameof(ThrowHelper.Throw_NullReference_InvokeNullRefReturned)
+                        )!
+                );
 
             private static MethodInfo? s_Pointer_Box;
+
             [DynamicDependency(DynamicallyAccessedMemberTypes.PublicMethods, typeof(Pointer))]
             public static MethodInfo Pointer_Box() =>
-                                      s_Pointer_Box ??
-                                     (s_Pointer_Box = typeof(Pointer).GetMethod(nameof(Pointer.Box), new[] { typeof(void*), typeof(Type) })!);
+                s_Pointer_Box
+                ?? (
+                    s_Pointer_Box = typeof(Pointer).GetMethod(
+                        nameof(Pointer.Box),
+                        new[] { typeof(void*), typeof(Type) }
+                    )!
+                );
 
             private static MethodInfo? s_Type_GetTypeFromHandle;
+
             public static MethodInfo Type_GetTypeFromHandle() =>
-                                      s_Type_GetTypeFromHandle ??
-                                     (s_Type_GetTypeFromHandle = typeof(Type).GetMethod(nameof(Type.GetTypeFromHandle), new[] { typeof(RuntimeTypeHandle) })!);
+                s_Type_GetTypeFromHandle
+                ?? (
+                    s_Type_GetTypeFromHandle = typeof(Type).GetMethod(
+                        nameof(Type.GetTypeFromHandle),
+                        new[] { typeof(RuntimeTypeHandle) }
+                    )!
+                );
 
 #if !MONO
             private static MethodInfo? s_NextCallReturnAddress;
+
             public static MethodInfo NextCallReturnAddress() =>
-                                      s_NextCallReturnAddress ??
-                                     (s_NextCallReturnAddress = typeof(System.StubHelpers.StubHelpers).GetMethod(nameof(System.StubHelpers.StubHelpers.NextCallReturnAddress), BindingFlags.NonPublic | BindingFlags.Static)!);
+                s_NextCallReturnAddress
+                ?? (
+                    s_NextCallReturnAddress = typeof(System.StubHelpers.StubHelpers).GetMethod(
+                        nameof(System.StubHelpers.StubHelpers.NextCallReturnAddress),
+                        BindingFlags.NonPublic | BindingFlags.Static
+                    )!
+                );
 #endif
         }
     }

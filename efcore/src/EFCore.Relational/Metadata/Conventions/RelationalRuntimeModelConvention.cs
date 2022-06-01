@@ -23,8 +23,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     /// <param name="relationalDependencies"> Parameter object containing relational dependencies for this convention.</param>
     public RelationalRuntimeModelConvention(
         ProviderConventionSetBuilderDependencies dependencies,
-        RelationalConventionSetBuilderDependencies relationalDependencies)
-        : base(dependencies)
+        RelationalConventionSetBuilderDependencies relationalDependencies
+    ) : base(dependencies)
     {
         RelationalDependencies = relationalDependencies;
     }
@@ -45,14 +45,18 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IModel model,
         RuntimeModel runtimeModel,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessModelAnnotations(annotations, model, runtimeModel, runtime);
 
         if (runtime)
         {
-            annotations[RelationalAnnotationNames.RelationalModel] =
-                RelationalModel.Create(runtimeModel, RelationalDependencies.RelationalAnnotationProvider, designTime: false);
+            annotations[RelationalAnnotationNames.RelationalModel] = RelationalModel.Create(
+                runtimeModel,
+                RelationalDependencies.RelationalAnnotationProvider,
+                designTime: false
+            );
         }
         else
         {
@@ -60,7 +64,9 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
 
             if (annotations.TryGetValue(RelationalAnnotationNames.DbFunctions, out var functions))
             {
-                var runtimeFunctions = new SortedDictionary<string, IDbFunction>(StringComparer.Ordinal);
+                var runtimeFunctions = new SortedDictionary<string, IDbFunction>(
+                    StringComparer.Ordinal
+                );
                 foreach (var (key, dbFunction) in (SortedDictionary<string, IDbFunction>)functions!)
                 {
                     var runtimeFunction = Create(dbFunction, runtimeModel);
@@ -71,13 +77,29 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
                         var runtimeParameter = Create(parameter, runtimeFunction);
 
                         CreateAnnotations(
-                            parameter, runtimeParameter, static (convention, annotations, source, target, runtime) =>
-                                convention.ProcessFunctionParameterAnnotations(annotations, source, target, runtime));
+                            parameter,
+                            runtimeParameter,
+                            static (convention, annotations, source, target, runtime) =>
+                                convention.ProcessFunctionParameterAnnotations(
+                                    annotations,
+                                    source,
+                                    target,
+                                    runtime
+                                )
+                        );
                     }
 
                     CreateAnnotations(
-                        dbFunction, runtimeFunction, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessFunctionAnnotations(annotations, source, target, runtime));
+                        dbFunction,
+                        runtimeFunction,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessFunctionAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
 
                 annotations[RelationalAnnotationNames.DbFunctions] = runtimeFunctions;
@@ -86,14 +108,24 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
             if (annotations.TryGetValue(RelationalAnnotationNames.Sequences, out var sequences))
             {
                 var runtimeSequences = new SortedDictionary<(string, string?), ISequence>();
-                foreach (var (key, value) in (SortedDictionary<(string, string?), ISequence>)sequences!)
+                foreach (
+                    var (key, value) in (SortedDictionary<(string, string?), ISequence>)sequences!
+                )
                 {
                     var runtimeSequence = Create(value, runtimeModel);
                     runtimeSequences[key] = runtimeSequence;
 
                     CreateAnnotations(
-                        value, runtimeSequence, static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessSequenceAnnotations(annotations, source, target, runtime));
+                        value,
+                        runtimeSequence,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessSequenceAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
 
                 annotations[RelationalAnnotationNames.Sequences] = runtimeSequences;
@@ -112,7 +144,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IDictionary<string, object?> annotations,
         IEntityType entityType,
         RuntimeEntityType runtimeEntityType,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessEntityTypeAnnotations(annotations, entityType, runtimeEntityType, runtime);
 
@@ -140,16 +173,25 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
 
             if (annotations.TryGetValue(RelationalAnnotationNames.Triggers, out var triggers))
             {
-                var runtimeTriggers = new SortedDictionary<string, ITrigger>(StringComparer.Ordinal);
+                var runtimeTriggers = new SortedDictionary<string, ITrigger>(
+                    StringComparer.Ordinal
+                );
                 foreach (var (key, trigger) in (SortedDictionary<string, ITrigger>)triggers!)
                 {
                     var runtimeTrigger = Create(trigger, runtimeEntityType);
                     runtimeTriggers[key] = runtimeTrigger;
 
                     CreateAnnotations(
-                        trigger, runtimeTrigger,
-                        static (convention, annotations, source, target, runtime)
-                            => convention.ProcessTriggerAnnotations(annotations, source, target, runtime));
+                        trigger,
+                        runtimeTrigger,
+                        static (convention, annotations, source, target, runtime) =>
+                            convention.ProcessTriggerAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
 
                 annotations[RelationalAnnotationNames.Triggers] = runtimeTriggers;
@@ -160,7 +202,14 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
     private void CreateAnnotations<TSource, TTarget>(
         TSource source,
         TTarget target,
-        Action<RelationalRuntimeModelConvention, Dictionary<string, object?>, TSource, TTarget, bool> process)
+        Action<
+            RelationalRuntimeModelConvention,
+            Dictionary<string, object?>,
+            TSource,
+            TTarget,
+            bool
+        > process
+    )
         where TSource : IAnnotatable
         where TTarget : AnnotatableBase
     {
@@ -173,8 +222,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         target.AddRuntimeAnnotations(annotations);
     }
 
-    private static RuntimeDbFunction Create(IDbFunction function, RuntimeModel runtimeModel)
-        => new(
+    private static RuntimeDbFunction Create(IDbFunction function, RuntimeModel runtimeModel) =>
+        new(
             function.ModelName,
             runtimeModel,
             function.ReturnType,
@@ -187,7 +236,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
             function.IsNullable,
             function.IsBuiltIn,
             function.TypeMapping,
-            function.Translation);
+            function.Translation
+        );
 
     /// <summary>
     ///     Updates the function annotations that will be set on the read-only object.
@@ -200,17 +250,20 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IDbFunction function,
         RuntimeDbFunction runtimeFunction,
-        bool runtime)
-    {
-    }
+        bool runtime
+    ) { }
 
-    private static RuntimeDbFunctionParameter Create(IDbFunctionParameter parameter, RuntimeDbFunction runtimeFunction)
-        => runtimeFunction.AddParameter(
+    private static RuntimeDbFunctionParameter Create(
+        IDbFunctionParameter parameter,
+        RuntimeDbFunction runtimeFunction
+    ) =>
+        runtimeFunction.AddParameter(
             parameter.Name,
             parameter.ClrType,
             parameter.PropagatesNullability,
             parameter.StoreType,
-            parameter.TypeMapping);
+            parameter.TypeMapping
+        );
 
     /// <summary>
     ///     Updates the function parameter annotations that will be set on the read-only object.
@@ -223,12 +276,11 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IDbFunctionParameter parameter,
         RuntimeDbFunctionParameter runtimeParameter,
-        bool runtime)
-    {
-    }
+        bool runtime
+    ) { }
 
-    private static RuntimeSequence Create(ISequence sequence, RuntimeModel runtimeModel)
-        => new(
+    private static RuntimeSequence Create(ISequence sequence, RuntimeModel runtimeModel) =>
+        new(
             sequence.Name,
             runtimeModel,
             sequence.Type,
@@ -237,7 +289,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
             sequence.IncrementBy,
             sequence.IsCyclic,
             sequence.MinValue,
-            sequence.MaxValue);
+            sequence.MaxValue
+        );
 
     /// <summary>
     ///     Updates the sequence annotations that will be set on the read-only object.
@@ -250,9 +303,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         ISequence sequence,
         RuntimeSequence runtimeSequence,
-        bool runtime)
-    {
-    }
+        bool runtime
+    ) { }
 
     /// <summary>
     ///     Updates the property annotations that will be set on the read-only object.
@@ -265,7 +317,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IProperty property,
         RuntimeProperty runtimeProperty,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessPropertyAnnotations(annotations, property, runtimeProperty, runtime);
 
@@ -283,32 +336,52 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
             annotations.Remove(RelationalAnnotationNames.Comment);
             annotations.Remove(RelationalAnnotationNames.Collation);
 
-            if (annotations.TryGetValue(RelationalAnnotationNames.RelationalOverrides, out var overrides))
+            if (
+                annotations.TryGetValue(
+                    RelationalAnnotationNames.RelationalOverrides,
+                    out var overrides
+                )
+            )
             {
-                var runtimePropertyOverrides = new SortedDictionary<StoreObjectIdentifier, object>();
-                foreach (var (storeObjectIdentifier, value) in (SortedDictionary<StoreObjectIdentifier, object>?)overrides!)
+                var runtimePropertyOverrides =
+                    new SortedDictionary<StoreObjectIdentifier, object>();
+                foreach (
+                    var (storeObjectIdentifier, value) in (SortedDictionary<
+                        StoreObjectIdentifier,
+                        object
+                    >?)
+                        overrides!
+                )
                 {
-                    var runtimeOverrides = Create((IRelationalPropertyOverrides)value, runtimeProperty);
+                    var runtimeOverrides = Create(
+                        (IRelationalPropertyOverrides)value,
+                        runtimeProperty
+                    );
                     runtimePropertyOverrides[storeObjectIdentifier] = runtimeOverrides;
 
                     CreateAnnotations(
-                        (IRelationalPropertyOverrides)value, runtimeOverrides,
+                        (IRelationalPropertyOverrides)value,
+                        runtimeOverrides,
                         static (convention, annotations, source, target, runtime) =>
-                            convention.ProcessPropertyOverridesAnnotations(annotations, source, target, runtime));
+                            convention.ProcessPropertyOverridesAnnotations(
+                                annotations,
+                                source,
+                                target,
+                                runtime
+                            )
+                    );
                 }
 
-                annotations[RelationalAnnotationNames.RelationalOverrides] = runtimePropertyOverrides;
+                annotations[RelationalAnnotationNames.RelationalOverrides] =
+                    runtimePropertyOverrides;
             }
         }
     }
 
     private static RuntimeRelationalPropertyOverrides Create(
         IRelationalPropertyOverrides propertyOverrides,
-        RuntimeProperty runtimeProperty)
-        => new(
-            runtimeProperty,
-            propertyOverrides.ColumnNameOverridden,
-            propertyOverrides.ColumnName);
+        RuntimeProperty runtimeProperty
+    ) => new(runtimeProperty, propertyOverrides.ColumnNameOverridden, propertyOverrides.ColumnName);
 
     /// <summary>
     ///     Updates the relational property overrides annotations that will be set on the read-only object.
@@ -321,9 +394,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IRelationalPropertyOverrides propertyOverrides,
         RuntimeRelationalPropertyOverrides runtimePropertyOverrides,
-        bool runtime)
-    {
-    }
+        bool runtime
+    ) { }
 
     /// <summary>
     ///     Updates the key annotations that will be set on the read-only object.
@@ -336,7 +408,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         IDictionary<string, object?> annotations,
         IKey key,
         RuntimeKey runtimeKey,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessKeyAnnotations(annotations, key, runtimeKey, runtime);
 
@@ -357,11 +430,16 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IIndex index,
         RuntimeIndex runtimeIndex,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessIndexAnnotations(annotations, index, runtimeIndex, runtime);
 
-        annotations.Remove(runtime ? RelationalAnnotationNames.TableIndexMappings : RelationalAnnotationNames.Filter);
+        annotations.Remove(
+            runtime
+                ? RelationalAnnotationNames.TableIndexMappings
+                : RelationalAnnotationNames.Filter
+        );
     }
 
     /// <summary>
@@ -375,7 +453,8 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         IForeignKey foreignKey,
         RuntimeForeignKey runtimeForeignKey,
-        bool runtime)
+        bool runtime
+    )
     {
         base.ProcessForeignKeyAnnotations(annotations, foreignKey, runtimeForeignKey, runtime);
 
@@ -385,8 +464,14 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         }
     }
 
-    private static RuntimeTrigger Create(ITrigger trigger, RuntimeEntityType runtimeEntityType)
-        => new(runtimeEntityType, trigger.ModelName, trigger.Name, trigger.TableName, trigger.TableSchema);
+    private static RuntimeTrigger Create(ITrigger trigger, RuntimeEntityType runtimeEntityType) =>
+        new(
+            runtimeEntityType,
+            trigger.ModelName,
+            trigger.Name,
+            trigger.TableName,
+            trigger.TableSchema
+        );
 
     /// <summary>
     ///     Updates the function annotations that will be set on the read-only object.
@@ -399,7 +484,6 @@ public class RelationalRuntimeModelConvention : RuntimeModelConvention
         Dictionary<string, object?> annotations,
         ITrigger trigger,
         RuntimeTrigger runtimeTrigger,
-        bool runtime)
-    {
-    }
+        bool runtime
+    ) { }
 }

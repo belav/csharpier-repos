@@ -32,7 +32,11 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task AddToGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
+    public override Task AddToGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    )
     {
         if (connectionId == null)
         {
@@ -56,7 +60,11 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task RemoveFromGroupAsync(string connectionId, string groupName, CancellationToken cancellationToken = default)
+    public override Task RemoveFromGroupAsync(
+        string connectionId,
+        string groupName,
+        CancellationToken cancellationToken = default
+    )
     {
         if (connectionId == null)
         {
@@ -80,12 +88,28 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendAllAsync(string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendAllAsync(
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
-        return SendToAllConnections(methodName, args, include: null, state: null, cancellationToken);
+        return SendToAllConnections(
+            methodName,
+            args,
+            include: null,
+            state: null,
+            cancellationToken
+        );
     }
 
-    private Task SendToAllConnections(string methodName, object?[] args, Func<HubConnectionContext, object?, bool>? include, object? state = null, CancellationToken cancellationToken = default)
+    private Task SendToAllConnections(
+        string methodName,
+        object?[] args,
+        Func<HubConnectionContext, object?, bool>? include,
+        object? state = null,
+        CancellationToken cancellationToken = default
+    )
     {
         List<Task>? tasks = null;
         SerializedHubMessage? message = null;
@@ -100,7 +124,10 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
 
             if (message == null)
             {
-                message = DefaultHubLifetimeManager<THub>.CreateSerializedInvocationMessage(methodName, args);
+                message = DefaultHubLifetimeManager<THub>.CreateSerializedInvocationMessage(
+                    methodName,
+                    args
+                );
             }
 
             var task = connection.WriteAsync(message, cancellationToken);
@@ -133,7 +160,16 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
 
     // Tasks and message are passed by ref so they can be lazily created inside the method post-filtering,
     // while still being re-usable when sending to multiple groups
-    private static void SendToGroupConnections(string methodName, object?[] args, ConcurrentDictionary<string, HubConnectionContext> connections, Func<HubConnectionContext, object?, bool>? include, object? state, ref List<Task>? tasks, ref SerializedHubMessage? message, CancellationToken cancellationToken)
+    private static void SendToGroupConnections(
+        string methodName,
+        object?[] args,
+        ConcurrentDictionary<string, HubConnectionContext> connections,
+        Func<HubConnectionContext, object?, bool>? include,
+        object? state,
+        ref List<Task>? tasks,
+        ref SerializedHubMessage? message,
+        CancellationToken cancellationToken
+    )
     {
         // foreach over ConcurrentDictionary avoids allocating an enumerator
         foreach (var connection in connections)
@@ -145,7 +181,10 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
 
             if (message == null)
             {
-                message = DefaultHubLifetimeManager<THub>.CreateSerializedInvocationMessage(methodName, args);
+                message = DefaultHubLifetimeManager<THub>.CreateSerializedInvocationMessage(
+                    methodName,
+                    args
+                );
             }
 
             var task = connection.Value.WriteAsync(message, cancellationToken);
@@ -169,7 +208,12 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendConnectionAsync(string connectionId, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendConnectionAsync(
+        string connectionId,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
         if (connectionId == null)
         {
@@ -191,7 +235,12 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendGroupAsync(string groupName, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendGroupAsync(
+        string groupName,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
         if (groupName == null)
         {
@@ -205,7 +254,16 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
             // group might be modified inbetween checking and sending
             List<Task>? tasks = null;
             SerializedHubMessage? message = null;
-            DefaultHubLifetimeManager<THub>.SendToGroupConnections(methodName, args, group, null, null, ref tasks, ref message, cancellationToken);
+            DefaultHubLifetimeManager<THub>.SendToGroupConnections(
+                methodName,
+                args,
+                group,
+                null,
+                null,
+                ref tasks,
+                ref message,
+                cancellationToken
+            );
 
             if (tasks != null)
             {
@@ -217,7 +275,12 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendGroupsAsync(IReadOnlyList<string> groupNames, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendGroupsAsync(
+        IReadOnlyList<string> groupNames,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
         // Each task represents the list of tasks for each of the writes within a group
         List<Task>? tasks = null;
@@ -233,7 +296,16 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
             var group = _groups[groupName];
             if (group != null)
             {
-                DefaultHubLifetimeManager<THub>.SendToGroupConnections(methodName, args, group, null, null, ref tasks, ref message, cancellationToken);
+                DefaultHubLifetimeManager<THub>.SendToGroupConnections(
+                    methodName,
+                    args,
+                    group,
+                    null,
+                    null,
+                    ref tasks,
+                    ref message,
+                    cancellationToken
+                );
             }
         }
 
@@ -246,7 +318,13 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendGroupExceptAsync(string groupName, string methodName, object?[] args, IReadOnlyList<string> excludedConnectionIds, CancellationToken cancellationToken = default)
+    public override Task SendGroupExceptAsync(
+        string groupName,
+        string methodName,
+        object?[] args,
+        IReadOnlyList<string> excludedConnectionIds,
+        CancellationToken cancellationToken = default
+    )
     {
         if (groupName == null)
         {
@@ -259,7 +337,17 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
             List<Task>? tasks = null;
             SerializedHubMessage? message = null;
 
-            DefaultHubLifetimeManager<THub>.SendToGroupConnections(methodName, args, group, (connection, state) => !((IReadOnlyList<string>)state!).Contains(connection.ConnectionId), excludedConnectionIds, ref tasks, ref message, cancellationToken);
+            DefaultHubLifetimeManager<THub>.SendToGroupConnections(
+                methodName,
+                args,
+                group,
+                (connection, state) =>
+                    !((IReadOnlyList<string>)state!).Contains(connection.ConnectionId),
+                excludedConnectionIds,
+                ref tasks,
+                ref message,
+                cancellationToken
+            );
 
             if (tasks != null)
             {
@@ -270,7 +358,10 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
         return Task.CompletedTask;
     }
 
-    private static SerializedHubMessage CreateSerializedInvocationMessage(string methodName, object?[] args)
+    private static SerializedHubMessage CreateSerializedInvocationMessage(
+        string methodName,
+        object?[] args
+    )
     {
         return new SerializedHubMessage(CreateInvocationMessage(methodName, args));
     }
@@ -281,9 +372,21 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendUserAsync(string userId, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendUserAsync(
+        string userId,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
-        return SendToAllConnections(methodName, args, (connection, state) => string.Equals(connection.UserIdentifier, (string)state!, StringComparison.Ordinal), userId, cancellationToken);
+        return SendToAllConnections(
+            methodName,
+            args,
+            (connection, state) =>
+                string.Equals(connection.UserIdentifier, (string)state!, StringComparison.Ordinal),
+            userId,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc />
@@ -303,25 +406,66 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
     }
 
     /// <inheritdoc />
-    public override Task SendAllExceptAsync(string methodName, object?[] args, IReadOnlyList<string> excludedConnectionIds, CancellationToken cancellationToken = default)
+    public override Task SendAllExceptAsync(
+        string methodName,
+        object?[] args,
+        IReadOnlyList<string> excludedConnectionIds,
+        CancellationToken cancellationToken = default
+    )
     {
-        return SendToAllConnections(methodName, args, (connection, state) => !((IReadOnlyList<string>)state!).Contains(connection.ConnectionId), excludedConnectionIds, cancellationToken);
+        return SendToAllConnections(
+            methodName,
+            args,
+            (connection, state) =>
+                !((IReadOnlyList<string>)state!).Contains(connection.ConnectionId),
+            excludedConnectionIds,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc />
-    public override Task SendConnectionsAsync(IReadOnlyList<string> connectionIds, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendConnectionsAsync(
+        IReadOnlyList<string> connectionIds,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
-        return SendToAllConnections(methodName, args, (connection, state) => ((IReadOnlyList<string>)state!).Contains(connection.ConnectionId), connectionIds, cancellationToken);
+        return SendToAllConnections(
+            methodName,
+            args,
+            (connection, state) =>
+                ((IReadOnlyList<string>)state!).Contains(connection.ConnectionId),
+            connectionIds,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc />
-    public override Task SendUsersAsync(IReadOnlyList<string> userIds, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override Task SendUsersAsync(
+        IReadOnlyList<string> userIds,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
-        return SendToAllConnections(methodName, args, (connection, state) => ((IReadOnlyList<string>)state!).Contains(connection.UserIdentifier), userIds, cancellationToken);
+        return SendToAllConnections(
+            methodName,
+            args,
+            (connection, state) =>
+                ((IReadOnlyList<string>)state!).Contains(connection.UserIdentifier),
+            userIds,
+            cancellationToken
+        );
     }
 
     /// <inheritdoc/>
-    public override async Task<T> InvokeConnectionAsync<T>(string connectionId, string methodName, object?[] args, CancellationToken cancellationToken = default)
+    public override async Task<T> InvokeConnectionAsync<T>(
+        string connectionId,
+        string methodName,
+        object?[] args,
+        CancellationToken cancellationToken = default
+    )
     {
         if (connectionId == null)
         {
@@ -335,9 +479,14 @@ public class DefaultHubLifetimeManager<THub> : HubLifetimeManager<THub> where TH
             throw new IOException($"Connection '{connectionId}' does not exist.");
         }
 
-        var invocationId = Interlocked.Increment(ref _lastInvocationId).ToString(NumberFormatInfo.InvariantInfo);
-        using var _ = CancellationTokenUtils.CreateLinkedToken(cancellationToken,
-            connection.ConnectionAborted, out var linkedToken);
+        var invocationId = Interlocked
+            .Increment(ref _lastInvocationId)
+            .ToString(NumberFormatInfo.InvariantInfo);
+        using var _ = CancellationTokenUtils.CreateLinkedToken(
+            cancellationToken,
+            connection.ConnectionAborted,
+            out var linkedToken
+        );
         var task = _clientResultsManager.AddInvocation<T>(connectionId, invocationId, linkedToken);
 
         try

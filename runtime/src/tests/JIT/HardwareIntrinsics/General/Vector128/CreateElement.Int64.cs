@@ -38,7 +38,8 @@ namespace JIT.HardwareIntrinsics.General
     {
         private static readonly int LargestVectorSize = 16;
 
-        private static readonly int ElementCount = Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
+        private static readonly int ElementCount =
+            Unsafe.SizeOf<Vector128<Int64>>() / sizeof(Int64);
 
         public bool Succeeded { get; set; } = true;
 
@@ -72,20 +73,28 @@ namespace JIT.HardwareIntrinsics.General
             }
 
             object result = typeof(Vector128)
-                                .GetMethod(nameof(Vector128.Create), operandTypes)
-                                .Invoke(null, new object[] { values[0], values[1] });
+                .GetMethod(nameof(Vector128.Create), operandTypes)
+                .Invoke(null, new object[] { values[0], values[1] });
 
             ValidateResult((Vector128<Int64>)(result), values);
         }
 
-        private void ValidateResult(Vector128<Int64> result, Int64[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Vector128<Int64> result,
+            Int64[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             Int64[] resultElements = new Int64[ElementCount];
             Unsafe.WriteUnaligned(ref Unsafe.As<Int64, byte>(ref resultElements[0]), result);
             ValidateResult(resultElements, expectedValues, method);
         }
 
-        private void ValidateResult(Int64[] resultElements, Int64[] expectedValues, [CallerMemberName] string method = "")
+        private void ValidateResult(
+            Int64[] resultElements,
+            Int64[] expectedValues,
+            [CallerMemberName] string method = ""
+        )
         {
             bool succeeded = true;
 
@@ -100,9 +109,15 @@ namespace JIT.HardwareIntrinsics.General
 
             if (!succeeded)
             {
-                TestLibrary.TestFramework.LogInformation($"Vector128.Create(Int64): {method} failed:");
-                TestLibrary.TestFramework.LogInformation($"   value: ({string.Join(", ", expectedValues)})");
-                TestLibrary.TestFramework.LogInformation($"  result: ({string.Join(", ", resultElements)})");
+                TestLibrary.TestFramework.LogInformation(
+                    $"Vector128.Create(Int64): {method} failed:"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"   value: ({string.Join(", ", expectedValues)})"
+                );
+                TestLibrary.TestFramework.LogInformation(
+                    $"  result: ({string.Join(", ", resultElements)})"
+                );
                 TestLibrary.TestFramework.LogInformation(string.Empty);
 
                 Succeeded = false;

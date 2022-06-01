@@ -16,15 +16,17 @@ namespace System.Text.Json.Serialization.Converters
     {
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        public LargeObjectWithParameterizedConstructorConverterWithReflection()
-        {
-        }
+        public LargeObjectWithParameterizedConstructorConverterWithReflection() { }
 
         [RequiresUnreferencedCode(JsonSerializer.SerializationUnreferencedCodeMessage)]
         [RequiresDynamicCode(JsonSerializer.SerializationRequiresDynamicCodeMessage)]
-        internal override void ConfigureJsonTypeInfoUsingReflection(JsonTypeInfo jsonTypeInfo, JsonSerializerOptions options)
+        internal override void ConfigureJsonTypeInfoUsingReflection(
+            JsonTypeInfo jsonTypeInfo,
+            JsonSerializerOptions options
+        )
         {
-            jsonTypeInfo.CreateObjectWithArgs = options.MemberAccessorStrategy.CreateParameterizedConstructor<T>(ConstructorInfo!);
+            jsonTypeInfo.CreateObjectWithArgs =
+                options.MemberAccessorStrategy.CreateParameterizedConstructor<T>(ConstructorInfo!);
         }
     }
 }

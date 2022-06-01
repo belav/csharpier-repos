@@ -18,41 +18,55 @@ namespace System.ComponentModel.Design.Tests
         {
             var service = new TestDesignerOptionService();
 
-            DesignerOptionService.DesignerOptionCollection options1 = service.DoCreateOptionCollection(service.Options, "name", "value");
+            DesignerOptionService.DesignerOptionCollection options1 =
+                service.DoCreateOptionCollection(service.Options, "name", "value");
             Assert.Equal(0, options1.Count);
             Assert.NotEmpty(options1.Properties);
             Assert.Same(options1.Properties, options1.Properties);
             Assert.Same(service.Options, options1.Parent);
 
-            DesignerOptionService.DesignerOptionCollection options2 = service.DoCreateOptionCollection(service.Options, "name", "value");
+            DesignerOptionService.DesignerOptionCollection options2 =
+                service.DoCreateOptionCollection(service.Options, "name", "value");
             Assert.Equal(2, service.Options.Count);
             Assert.Equal(0, options2.Count);
             Assert.NotEmpty(options2.Properties);
             Assert.Same(options2.Properties, options2.Properties);
             Assert.Same(service.Options, options2.Parent);
 
-            Assert.Equal(new DesignerOptionService.DesignerOptionCollection[] { options1, options2 }, service.Options.Cast<object>());
+            Assert.Equal(
+                new DesignerOptionService.DesignerOptionCollection[] { options1, options2 },
+                service.Options.Cast<object>()
+            );
         }
 
         [Fact]
         public void CreateOptionCollection_NullParent_ThrowsArgumentNullException()
         {
             var service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>("parent", () => service.DoCreateOptionCollection(null, "name", "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "parent",
+                () => service.DoCreateOptionCollection(null, "name", "value")
+            );
         }
 
         [Fact]
         public void CreateOptionCollection_NullName_ThrowsArgumentNullException()
         {
             var service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>("name", () => service.DoCreateOptionCollection(service.Options, null, "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "name",
+                () => service.DoCreateOptionCollection(service.Options, null, "value")
+            );
         }
 
         [Fact]
         public void CreateOptionCollection_EmptyName_ThrowsArgumentException()
         {
             var service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentException>("name", () => service.DoCreateOptionCollection(service.Options, string.Empty, "value"));
+            AssertExtensions.Throws<ArgumentException>(
+                "name",
+                () => service.DoCreateOptionCollection(service.Options, string.Empty, "value")
+            );
         }
 
         [Fact]
@@ -100,7 +114,8 @@ namespace System.ComponentModel.Design.Tests
         public void IndexOf_ValueExists_ReturnsExpected()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", "Value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", "Value");
 
             Assert.Equal(0, service.Options.IndexOf(options));
             Assert.Equal(0, ((IList)service.Options).IndexOf(options));
@@ -110,7 +125,8 @@ namespace System.ComponentModel.Design.Tests
         public void IndexOf_NoSuchOptions_ReturnsNegativeOne()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", "Value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", "Value");
 
             Assert.Equal(-1, service.Options.IndexOf(service.Options));
             Assert.Equal(-1, service.Options.IndexOf(null));
@@ -121,7 +137,8 @@ namespace System.ComponentModel.Design.Tests
         public void Contains_ValueExists_ReturnsExpected()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", "Value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", "Value");
 
             Assert.Equal(0, service.Options.IndexOf(options));
             Assert.Equal(0, ((IList)service.Options).IndexOf(options));
@@ -143,7 +160,8 @@ namespace System.ComponentModel.Design.Tests
         public void Indexer_ValidName_ReturnsExpected(string name)
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", "Value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", "Value");
 
             Assert.Same(options, service.Options[name]);
         }
@@ -163,7 +181,8 @@ namespace System.ComponentModel.Design.Tests
         public void Indexer_ValidIndex_ReturnsExpected()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", "Value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", "Value");
 
             Assert.Same(options, service.Options[0]);
             Assert.Same(options, ((IList)service.Options)[0]);
@@ -187,7 +206,8 @@ namespace System.ComponentModel.Design.Tests
             var service = new TestDesignerOptionService();
             Assert.Empty(service.Options.Properties);
 
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "name", "value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "name", "value");
             Assert.NotEmpty(service.Options.Properties);
         }
 
@@ -196,7 +216,8 @@ namespace System.ComponentModel.Design.Tests
         {
             var service = new TestDesignerOptionService();
 
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "name", "value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "name", "value");
             Assert.NotEmpty(service.Options.Properties);
         }
 
@@ -206,16 +227,27 @@ namespace System.ComponentModel.Design.Tests
             var value = new TestClass { Value = "Value" };
 
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", value);
-            PropertyDescriptor propertyDescriptor = Assert.IsAssignableFrom<PropertyDescriptor>(Assert.Single(options.Properties));
-            PropertyDescriptor actualProperty = Assert.IsAssignableFrom<PropertyDescriptor>(Assert.Single(TypeDescriptor.GetProperties(value)));
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", value);
+            PropertyDescriptor propertyDescriptor = Assert.IsAssignableFrom<PropertyDescriptor>(
+                Assert.Single(options.Properties)
+            );
+            PropertyDescriptor actualProperty = Assert.IsAssignableFrom<PropertyDescriptor>(
+                Assert.Single(TypeDescriptor.GetProperties(value))
+            );
 
             Assert.Equal(actualProperty.Attributes, propertyDescriptor.Attributes);
             Assert.Equal(actualProperty.ComponentType, propertyDescriptor.ComponentType);
             Assert.Equal(actualProperty.IsReadOnly, propertyDescriptor.IsReadOnly);
             Assert.Equal(actualProperty.PropertyType, propertyDescriptor.PropertyType);
-            Assert.Equal(actualProperty.CanResetValue(value), propertyDescriptor.CanResetValue("InvalidComponent"));
-            Assert.Equal(actualProperty.ShouldSerializeValue(value), propertyDescriptor.ShouldSerializeValue("InvalidComponent"));
+            Assert.Equal(
+                actualProperty.CanResetValue(value),
+                propertyDescriptor.CanResetValue("InvalidComponent")
+            );
+            Assert.Equal(
+                actualProperty.ShouldSerializeValue(value),
+                propertyDescriptor.ShouldSerializeValue("InvalidComponent")
+            );
 
             propertyDescriptor.ResetValue(null);
             Assert.Equal("Value", value.Value);
@@ -224,24 +256,35 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void DesignerOptionConverterGetPropertiesSupported_Invoke_ReturnsTrue()
         {
-            TypeConverter converter = TypeDescriptor.GetConverter(typeof(DesignerOptionService.DesignerOptionCollection));
+            TypeConverter converter = TypeDescriptor.GetConverter(
+                typeof(DesignerOptionService.DesignerOptionCollection)
+            );
             Assert.True(converter.GetPropertiesSupported());
         }
 
         [Fact]
         public void DesignerOptionConverterGetProperties_ValidValue_ReturnsExpected()
         {
-            TypeConverter converter = TypeDescriptor.GetConverter(typeof(DesignerOptionService.DesignerOptionCollection));
+            TypeConverter converter = TypeDescriptor.GetConverter(
+                typeof(DesignerOptionService.DesignerOptionCollection)
+            );
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", new TestClass());
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", new TestClass());
             service.DoCreateOptionCollection(options, "Name", null);
 
             PropertyDescriptorCollection properties = converter.GetProperties(options);
             Assert.Equal(2, properties.Count);
 
             PropertyDescriptor optionsDescriptor = properties[0];
-            Assert.Equal(typeof(DesignerOptionService.DesignerOptionCollection), optionsDescriptor.ComponentType);
-            Assert.Equal(typeof(DesignerOptionService.DesignerOptionCollection), optionsDescriptor.PropertyType);
+            Assert.Equal(
+                typeof(DesignerOptionService.DesignerOptionCollection),
+                optionsDescriptor.ComponentType
+            );
+            Assert.Equal(
+                typeof(DesignerOptionService.DesignerOptionCollection),
+                optionsDescriptor.PropertyType
+            );
             Assert.Same(options[0], optionsDescriptor.GetValue(null));
 
             Assert.True(optionsDescriptor.IsReadOnly);
@@ -260,7 +303,9 @@ namespace System.ComponentModel.Design.Tests
         [InlineData(null)]
         public void DesignerOptionConverterGetProperties_InvalidValue_ReturnsEmpty(object value)
         {
-            TypeConverter converter = TypeDescriptor.GetConverter(typeof(DesignerOptionService.DesignerOptionCollection));
+            TypeConverter converter = TypeDescriptor.GetConverter(
+                typeof(DesignerOptionService.DesignerOptionCollection)
+            );
             Assert.Empty(converter.GetProperties(value));
         }
 
@@ -269,7 +314,9 @@ namespace System.ComponentModel.Design.Tests
         {
             using (new ThreadCultureChange(null, CultureInfo.InvariantCulture))
             {
-                TypeConverter converter = TypeDescriptor.GetConverter(typeof(DesignerOptionService.DesignerOptionCollection));
+                TypeConverter converter = TypeDescriptor.GetConverter(
+                    typeof(DesignerOptionService.DesignerOptionCollection)
+                );
                 Assert.Equal("(Collection)", converter.ConvertToString(null));
             }
         }
@@ -277,7 +324,9 @@ namespace System.ComponentModel.Design.Tests
         [Fact]
         public void DesignerOptionConverter_ConvertToNonString_ThrowsNotSupportedException()
         {
-            TypeConverter converter = TypeDescriptor.GetConverter(typeof(DesignerOptionService.DesignerOptionCollection));
+            TypeConverter converter = TypeDescriptor.GetConverter(
+                typeof(DesignerOptionService.DesignerOptionCollection)
+            );
             Assert.Throws<NotSupportedException>(() => converter.ConvertTo(null, typeof(object)));
         }
 
@@ -286,8 +335,10 @@ namespace System.ComponentModel.Design.Tests
         {
             var service = new TestDesignerOptionService();
 
-            DesignerOptionService.DesignerOptionCollection options1 = service.DoCreateOptionCollection(service.Options, "name", "value");
-            DesignerOptionService.DesignerOptionCollection options2 = service.DoCreateOptionCollection(service.Options, "name", "value");
+            DesignerOptionService.DesignerOptionCollection options1 =
+                service.DoCreateOptionCollection(service.Options, "name", "value");
+            DesignerOptionService.DesignerOptionCollection options2 =
+                service.DoCreateOptionCollection(service.Options, "name", "value");
 
             var destination = new object[3];
             service.Options.CopyTo(destination, 1);
@@ -338,7 +389,8 @@ namespace System.ComponentModel.Design.Tests
 
             var service = new TestDesignerOptionService();
             IDesignerOptionService iService = service;
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", null);
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", null);
             service.DoCreateOptionCollection(options, "SubName", value);
 
             Assert.Equal("StringValue", iService.GetOptionValue("Name\\SubName", "Value"));
@@ -354,7 +406,8 @@ namespace System.ComponentModel.Design.Tests
 
             var service = new TestDesignerOptionService();
             IDesignerOptionService iService = service;
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", null);
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", null);
             service.DoCreateOptionCollection(options, "SubName", value);
 
             Assert.Null(iService.GetOptionValue(pageName, valueName));
@@ -364,14 +417,20 @@ namespace System.ComponentModel.Design.Tests
         public void GetOptionValue_NullPageName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>("pageName", () => service.GetOptionValue(null, "ValueName"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pageName",
+                () => service.GetOptionValue(null, "ValueName")
+            );
         }
 
         [Fact]
         public void GetOptionValue_NullValueName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>("valueName", () => service.GetOptionValue("PageName", null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueName",
+                () => service.GetOptionValue("PageName", null)
+            );
         }
 
         [Fact]
@@ -394,7 +453,8 @@ namespace System.ComponentModel.Design.Tests
 
             var service = new TestDesignerOptionService();
             IDesignerOptionService iService = service;
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", null);
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", null);
             service.DoCreateOptionCollection(options, "SubName", value);
 
             iService.SetOptionValue("Name\\SubName", "Value", "abc");
@@ -411,7 +471,8 @@ namespace System.ComponentModel.Design.Tests
 
             var service = new TestDesignerOptionService();
             IDesignerOptionService iService = service;
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", null);
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", null);
             service.DoCreateOptionCollection(options, "SubName", value);
 
             iService.SetOptionValue(pageName, valueName, "value");
@@ -421,21 +482,28 @@ namespace System.ComponentModel.Design.Tests
         public void SetOptionValue_NullPageName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>("pageName", () => service.SetOptionValue(null, "ValueName", "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "pageName",
+                () => service.SetOptionValue(null, "ValueName", "value")
+            );
         }
 
         [Fact]
         public void SetOptionValue_NullValueName_ThrowsArgumentNullException()
         {
             IDesignerOptionService service = new TestDesignerOptionService();
-            AssertExtensions.Throws<ArgumentNullException>("valueName", () => service.SetOptionValue("PageName", null, "value"));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "valueName",
+                () => service.SetOptionValue("PageName", null, "value")
+            );
         }
 
         [Fact]
         public void ShowDialog_NonNestedValue_Success()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", "Value");
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", "Value");
 
             Assert.True(options.ShowDialog());
             Assert.Equal("Value", service.ShowDialogValue);
@@ -445,7 +513,8 @@ namespace System.ComponentModel.Design.Tests
         public void ShowDialog_NestedValue_Success()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", null);
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", null);
             service.DoCreateOptionCollection(options, "Name", "Value");
 
             Assert.True(options.ShowDialog());
@@ -456,7 +525,8 @@ namespace System.ComponentModel.Design.Tests
         public void ShowDialog_NullValue_Success()
         {
             var service = new TestDesignerOptionService();
-            DesignerOptionService.DesignerOptionCollection options = service.DoCreateOptionCollection(service.Options, "Name", null);
+            DesignerOptionService.DesignerOptionCollection options =
+                service.DoCreateOptionCollection(service.Options, "Name", null);
             service.DoCreateOptionCollection(options, "Name", null);
 
             Assert.False(options.ShowDialog());
@@ -467,12 +537,19 @@ namespace System.ComponentModel.Design.Tests
         {
             public object ShowDialogValue { get; set; } = "Default";
 
-            public DesignerOptionCollection DoCreateOptionCollection(DesignerOptionCollection parent, string name, object value)
+            public DesignerOptionCollection DoCreateOptionCollection(
+                DesignerOptionCollection parent,
+                string name,
+                object value
+            )
             {
                 return CreateOptionCollection(parent, name, value);
             }
 
-            protected override bool ShowDialog(DesignerOptionCollection options, object optionObject)
+            protected override bool ShowDialog(
+                DesignerOptionCollection options,
+                object optionObject
+            )
             {
                 ShowDialogValue = optionObject;
                 return true;

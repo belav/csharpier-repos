@@ -27,10 +27,17 @@ namespace Microsoft.Interop
         {
             unsafe
             {
-                return IsBlittableWorker(type, ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default), &IsConsideredBlittableWorker);
+                return IsBlittableWorker(
+                    type,
+                    ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default),
+                    &IsConsideredBlittableWorker
+                );
             }
 
-            static bool IsConsideredBlittableWorker(ITypeSymbol t, ImmutableHashSet<ITypeSymbol> seenTypes)
+            static bool IsConsideredBlittableWorker(
+                ITypeSymbol t,
+                ImmutableHashSet<ITypeSymbol> seenTypes
+            )
             {
                 return t.IsUnmanagedType;
             }
@@ -51,10 +58,17 @@ namespace Microsoft.Interop
         {
             unsafe
             {
-                return IsBlittableWorker(type, ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default), &IsStrictlyBlittableWorker);
+                return IsBlittableWorker(
+                    type,
+                    ImmutableHashSet.Create<ITypeSymbol>(SymbolEqualityComparer.Default),
+                    &IsStrictlyBlittableWorker
+                );
             }
 
-            static unsafe bool IsStrictlyBlittableWorker(ITypeSymbol t, ImmutableHashSet<ITypeSymbol> seenTypes)
+            static unsafe bool IsStrictlyBlittableWorker(
+                ITypeSymbol t,
+                ImmutableHashSet<ITypeSymbol> seenTypes
+            )
             {
                 if (t.SpecialType is not SpecialType.None)
                 {
@@ -65,8 +79,10 @@ namespace Microsoft.Interop
                     // If the containing assembly for the type is backed by metadata (non-null),
                     // then the type is not internal and therefore coming from a reference assembly
                     // that we can not confirm is strictly blittable.
-                    if (t.ContainingAssembly is not null
-                        && t.ContainingAssembly.GetMetadata() is not null)
+                    if (
+                        t.ContainingAssembly is not null
+                        && t.ContainingAssembly.GetMetadata() is not null
+                    )
                     {
                         return false;
                     }
@@ -78,7 +94,11 @@ namespace Microsoft.Interop
             }
         }
 
-        private static unsafe bool IsBlittableWorker(this ITypeSymbol type, ImmutableHashSet<ITypeSymbol> seenTypes, delegate*<ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable)
+        private static unsafe bool IsBlittableWorker(
+            this ITypeSymbol type,
+            ImmutableHashSet<ITypeSymbol> seenTypes,
+            delegate* <ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable
+        )
         {
             // Assume that type parameters that can be blittable are blittable.
             // We'll re-evaluate blittability for generic fields of generic types at instantation time.
@@ -97,7 +117,10 @@ namespace Microsoft.Interop
                 {
                     continue;
                 }
-                else if (attr.AttributeClass.ToDisplayString() == "System.Runtime.InteropServices.NativeMarshallingAttribute")
+                else if (
+                    attr.AttributeClass.ToDisplayString()
+                    == "System.Runtime.InteropServices.NativeMarshallingAttribute"
+                )
                 {
                     // Types marked with NativeMarshallingAttribute require marshalling by definition.
                     return false;
@@ -110,15 +133,23 @@ namespace Microsoft.Interop
         {
             foreach (AttributeData attr in type.GetAttributes())
             {
-                if (attr.AttributeClass.ToDisplayString() == "System.Runtime.InteropServices.StructLayoutAttribute")
+                if (
+                    attr.AttributeClass.ToDisplayString()
+                    == "System.Runtime.InteropServices.StructLayoutAttribute"
+                )
                 {
-                    return attr.ConstructorArguments.Length == 1 && (LayoutKind)(int)attr.ConstructorArguments[0].Value! == LayoutKind.Auto;
+                    return attr.ConstructorArguments.Length == 1
+                        && (LayoutKind)(int)attr.ConstructorArguments[0].Value! == LayoutKind.Auto;
                 }
             }
             return type.IsReferenceType;
         }
 
-        private static unsafe bool HasOnlyBlittableFields(this ITypeSymbol type, ImmutableHashSet<ITypeSymbol> seenTypes, delegate*<ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable)
+        private static unsafe bool HasOnlyBlittableFields(
+            this ITypeSymbol type,
+            ImmutableHashSet<ITypeSymbol> seenTypes,
+            delegate* <ITypeSymbol, ImmutableHashSet<ITypeSymbol>, bool> isBlittable
+        )
         {
             if (seenTypes.Contains(type))
             {
@@ -143,26 +174,30 @@ namespace Microsoft.Interop
 
         public static TypeSyntax AsTypeSyntax(this ITypeSymbol type)
         {
-            return SyntaxFactory.ParseTypeName(type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat));
+            return SyntaxFactory.ParseTypeName(
+                type.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)
+            );
         }
 
         public static bool IsIntegralType(this SpecialType type)
         {
-            return type is SpecialType.System_SByte
-                or SpecialType.System_Byte
-                or SpecialType.System_Int16
-                or SpecialType.System_UInt16
-                or SpecialType.System_Int32
-                or SpecialType.System_UInt32
-                or SpecialType.System_Int64
-                or SpecialType.System_UInt64
-                or SpecialType.System_IntPtr
-                or SpecialType.System_UIntPtr;
+            return type
+                is SpecialType.System_SByte
+                    or SpecialType.System_Byte
+                    or SpecialType.System_Int16
+                    or SpecialType.System_UInt16
+                    or SpecialType.System_Int32
+                    or SpecialType.System_UInt32
+                    or SpecialType.System_Int64
+                    or SpecialType.System_UInt64
+                    or SpecialType.System_IntPtr
+                    or SpecialType.System_UIntPtr;
         }
 
         public static bool IsAlwaysBlittable(this SpecialType type)
         {
-            return type is SpecialType.System_Void
+            return type
+                is SpecialType.System_Void
                     or SpecialType.System_SByte
                     or SpecialType.System_Byte
                     or SpecialType.System_Int16

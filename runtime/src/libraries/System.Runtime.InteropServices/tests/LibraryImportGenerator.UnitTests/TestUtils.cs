@@ -31,22 +31,27 @@ namespace LibraryImportGenerator.UnitTests
         /// The latest supported .NET Framework version.
         /// </summary>
         Framework,
+
         /// <summary>
         /// The latest supported .NET Core version.
         /// </summary>
         Core,
+
         /// <summary>
         /// The latest supported .NET Standard version.
         /// </summary>
         Standard,
+
         /// <summary>
         /// The latest supported (live-built) .NET version.
         /// </summary>
         Net,
+
         /// <summary>
         /// .NET version 5.0.
         /// </summary>
         Net5,
+
         /// <summary>
         /// .NET version 6.0.
         /// </summary>
@@ -59,7 +64,11 @@ namespace LibraryImportGenerator.UnitTests
         /// Disable binding redirect warnings. They are disabled by default by the .NET SDK, but not by Roslyn.
         /// See https://github.com/dotnet/roslyn/issues/19640.
         /// </summary>
-        internal static ImmutableDictionary<string, ReportDiagnostic> BindingRedirectWarnings { get; } = new Dictionary<string, ReportDiagnostic>()
+        internal static ImmutableDictionary<
+            string,
+            ReportDiagnostic
+        > BindingRedirectWarnings { get; } =
+            new Dictionary<string, ReportDiagnostic>()
             {
                 { "CS1701", ReportDiagnostic.Suppress },
                 { "CS1702", ReportDiagnostic.Suppress },
@@ -70,7 +79,10 @@ namespace LibraryImportGenerator.UnitTests
         /// the expected failure diagnostics.
         /// </summary>
         /// <param name="comp"></param>
-        public static void AssertPreSourceGeneratorCompilation(Compilation comp, params string[] additionalAllowedDiagnostics)
+        public static void AssertPreSourceGeneratorCompilation(
+            Compilation comp,
+            params string[] additionalAllowedDiagnostics
+        )
         {
             var allowedDiagnostics = new HashSet<string>()
             {
@@ -86,10 +98,13 @@ namespace LibraryImportGenerator.UnitTests
             }
 
             var compDiags = comp.GetDiagnostics();
-            Assert.All(compDiags, diag =>
-            {
-                Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
-            });
+            Assert.All(
+                compDiags,
+                diag =>
+                {
+                    Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
+                }
+            );
         }
 
         /// <summary>
@@ -97,7 +112,10 @@ namespace LibraryImportGenerator.UnitTests
         /// the expected failure diagnostics.
         /// </summary>
         /// <param name="comp"></param>
-        public static void AssertPostSourceGeneratorCompilation(Compilation comp, params string[] additionalAllowedDiagnostics)
+        public static void AssertPostSourceGeneratorCompilation(
+            Compilation comp,
+            params string[] additionalAllowedDiagnostics
+        )
         {
             var allowedDiagnostics = new HashSet<string>()
             {
@@ -110,10 +128,13 @@ namespace LibraryImportGenerator.UnitTests
             }
 
             var compDiags = comp.GetDiagnostics();
-            Assert.All(compDiags, diag =>
-            {
-                Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
-            });
+            Assert.All(
+                compDiags,
+                diag =>
+                {
+                    Assert.Subset(allowedDiagnostics, new HashSet<string> { diag.Id });
+                }
+            );
         }
 
         /// <summary>
@@ -125,9 +146,21 @@ namespace LibraryImportGenerator.UnitTests
         /// <param name="refs">Addtional metadata references</param>
         /// <param name="preprocessorSymbols">Prepocessor symbols</param>
         /// <returns>The resulting compilation</returns>
-        public static Task<Compilation> CreateCompilation(string source, TestTargetFramework targetFramework = TestTargetFramework.Net, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<MetadataReference>? refs = null, IEnumerable<string>? preprocessorSymbols = null)
+        public static Task<Compilation> CreateCompilation(
+            string source,
+            TestTargetFramework targetFramework = TestTargetFramework.Net,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            IEnumerable<MetadataReference>? refs = null,
+            IEnumerable<string>? preprocessorSymbols = null
+        )
         {
-            return CreateCompilation(new[] { source }, targetFramework, outputKind, refs, preprocessorSymbols);
+            return CreateCompilation(
+                new[] { source },
+                targetFramework,
+                outputKind,
+                refs,
+                preprocessorSymbols
+            );
         }
 
         /// <summary>
@@ -139,14 +172,31 @@ namespace LibraryImportGenerator.UnitTests
         /// <param name="refs">Addtional metadata references</param>
         /// <param name="preprocessorSymbols">Prepocessor symbols</param>
         /// <returns>The resulting compilation</returns>
-        public static Task<Compilation> CreateCompilation(string[] sources, TestTargetFramework targetFramework = TestTargetFramework.Net, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<MetadataReference>? refs = null, IEnumerable<string>? preprocessorSymbols = null)
+        public static Task<Compilation> CreateCompilation(
+            string[] sources,
+            TestTargetFramework targetFramework = TestTargetFramework.Net,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            IEnumerable<MetadataReference>? refs = null,
+            IEnumerable<string>? preprocessorSymbols = null
+        )
         {
             return CreateCompilation(
-                sources.Select(source =>
-                    CSharpSyntaxTree.ParseText(source, new CSharpParseOptions(LanguageVersion.Preview, preprocessorSymbols: preprocessorSymbols))).ToArray(),
+                sources
+                    .Select(
+                        source =>
+                            CSharpSyntaxTree.ParseText(
+                                source,
+                                new CSharpParseOptions(
+                                    LanguageVersion.Preview,
+                                    preprocessorSymbols: preprocessorSymbols
+                                )
+                            )
+                    )
+                    .ToArray(),
                 targetFramework,
                 outputKind,
-                refs);
+                refs
+            );
         }
 
         /// <summary>
@@ -157,7 +207,12 @@ namespace LibraryImportGenerator.UnitTests
         /// <param name="outputKind">Output type</param>
         /// <param name="refs">Addtional metadata references</param>
         /// <returns>The resulting compilation</returns>
-        public static async Task<Compilation> CreateCompilation(SyntaxTree[] sources, TestTargetFramework targetFramework = TestTargetFramework.Net, OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary, IEnumerable<MetadataReference>? refs = null)
+        public static async Task<Compilation> CreateCompilation(
+            SyntaxTree[] sources,
+            TestTargetFramework targetFramework = TestTargetFramework.Net,
+            OutputKind outputKind = OutputKind.DynamicallyLinkedLibrary,
+            IEnumerable<MetadataReference>? refs = null
+        )
         {
             var referenceAssemblies = await GetReferenceAssemblies(targetFramework);
 
@@ -172,10 +227,16 @@ namespace LibraryImportGenerator.UnitTests
                 referenceAssemblies = referenceAssemblies.AddRange(refs);
             }
 
-            return CSharpCompilation.Create("compilation",
+            return CSharpCompilation.Create(
+                "compilation",
                 sources,
                 referenceAssemblies,
-                new CSharpCompilationOptions(outputKind, allowUnsafe: true, specificDiagnosticOptions: BindingRedirectWarnings));
+                new CSharpCompilationOptions(
+                    outputKind,
+                    allowUnsafe: true,
+                    specificDiagnosticOptions: BindingRedirectWarnings
+                )
+            );
         }
 
         /// <summary>
@@ -183,7 +244,9 @@ namespace LibraryImportGenerator.UnitTests
         /// </summary>
         /// <param name="targetFramework">The target framework.</param>
         /// <returns>The reference assembly collection and metadata references</returns>
-        private static async Task<ImmutableArray<MetadataReference>> GetReferenceAssemblies(TestTargetFramework targetFramework = TestTargetFramework.Net)
+        private static async Task<ImmutableArray<MetadataReference>> GetReferenceAssemblies(
+            TestTargetFramework targetFramework = TestTargetFramework.Net
+        )
         {
             // Compute the reference assemblies for the target framework.
             if (targetFramework == TestTargetFramework.Net)
@@ -203,8 +266,12 @@ namespace LibraryImportGenerator.UnitTests
                 };
 
                 // Update the reference assemblies to include details from the NuGet.config.
-                var referenceAssemblies = referenceAssembliesSdk
-                    .WithNuGetConfigFilePath(Path.Combine(Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!, "NuGet.config"));
+                var referenceAssemblies = referenceAssembliesSdk.WithNuGetConfigFilePath(
+                    Path.Combine(
+                        Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!,
+                        "NuGet.config"
+                    )
+                );
 
                 return await ResolveReferenceAssemblies(referenceAssemblies);
             }
@@ -229,9 +296,14 @@ namespace LibraryImportGenerator.UnitTests
         /// <param name="diagnostics">Resulting diagnostics</param>
         /// <param name="generators">Source generator instances</param>
         /// <returns>The resulting compilation</returns>
-        public static Compilation RunGenerators(Compilation comp, out ImmutableArray<Diagnostic> diagnostics, params IIncrementalGenerator[] generators)
+        public static Compilation RunGenerators(
+            Compilation comp,
+            out ImmutableArray<Diagnostic> diagnostics,
+            params IIncrementalGenerator[] generators
+        )
         {
-            CreateDriver(comp, null, generators).RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
+            CreateDriver(comp, null, generators)
+                .RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
             return d;
         }
 
@@ -242,25 +314,42 @@ namespace LibraryImportGenerator.UnitTests
         /// <param name="diagnostics">Resulting diagnostics</param>
         /// <param name="generators">Source generator instances</param>
         /// <returns>The resulting compilation</returns>
-        public static Compilation RunGenerators(Compilation comp, AnalyzerConfigOptionsProvider options, out ImmutableArray<Diagnostic> diagnostics, params IIncrementalGenerator[] generators)
+        public static Compilation RunGenerators(
+            Compilation comp,
+            AnalyzerConfigOptionsProvider options,
+            out ImmutableArray<Diagnostic> diagnostics,
+            params IIncrementalGenerator[] generators
+        )
         {
-            CreateDriver(comp, options, generators).RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
+            CreateDriver(comp, options, generators)
+                .RunGeneratorsAndUpdateCompilation(comp, out var d, out diagnostics);
             return d;
         }
 
-        public static GeneratorDriver CreateDriver(Compilation c, AnalyzerConfigOptionsProvider? options, IIncrementalGenerator[] generators, GeneratorDriverOptions driverOptions = default)
-            => CSharpGeneratorDriver.Create(
+        public static GeneratorDriver CreateDriver(
+            Compilation c,
+            AnalyzerConfigOptionsProvider? options,
+            IIncrementalGenerator[] generators,
+            GeneratorDriverOptions driverOptions = default
+        ) =>
+            CSharpGeneratorDriver.Create(
                 ImmutableArray.Create(generators.Select(gen => gen.AsSourceGenerator()).ToArray()),
                 parseOptions: (CSharpParseOptions)c.SyntaxTrees.First().Options,
                 optionsProvider: options,
-                driverOptions: driverOptions);
+                driverOptions: driverOptions
+            );
 
-        private static async Task<ImmutableArray<MetadataReference>> ResolveReferenceAssemblies(ReferenceAssemblies referenceAssemblies)
+        private static async Task<ImmutableArray<MetadataReference>> ResolveReferenceAssemblies(
+            ReferenceAssemblies referenceAssemblies
+        )
         {
             try
             {
                 ResolveRedirect.Instance.Start();
-                return await referenceAssemblies.ResolveAsync(LanguageNames.CSharp, CancellationToken.None);
+                return await referenceAssemblies.ResolveAsync(
+                    LanguageNames.CSharp,
+                    CancellationToken.None
+                );
             }
             finally
             {
@@ -280,7 +369,13 @@ namespace LibraryImportGenerator.UnitTests
             public void Start()
             {
                 // Set the NuGet package cache location to a subdirectory such that we should always have access to it
-                Environment.SetEnvironmentVariable(EnvVarName, Path.Combine(Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!, "packages"));
+                Environment.SetEnvironmentVariable(
+                    EnvVarName,
+                    Path.Combine(
+                        Path.GetDirectoryName(typeof(TestUtils).Assembly.Location)!,
+                        "packages"
+                    )
+                );
                 Interlocked.Increment(ref _count);
             }
 
@@ -289,7 +384,7 @@ namespace LibraryImportGenerator.UnitTests
                 int count = Interlocked.Decrement(ref _count);
                 if (count == 0)
                 {
-                   Environment.SetEnvironmentVariable(EnvVarName, null);
+                    Environment.SetEnvironmentVariable(EnvVarName, null);
                 }
             }
         }

@@ -9,6 +9,7 @@ namespace AutoMapper.UnitTests
     public class ConfigurationRules : SpecBase
     {
         public class Source { }
+
         public class Dest { }
 
         public class Profile1 : Profile
@@ -36,7 +37,9 @@ namespace AutoMapper.UnitTests
                 cfg.CreateMap<Source, Dest>();
             });
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(() => config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -49,7 +52,9 @@ namespace AutoMapper.UnitTests
                 cfg.Internal().AllowAdditiveTypeMapCreation = true;
             });
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(() => config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -61,7 +66,9 @@ namespace AutoMapper.UnitTests
                 cfg.AddProfile<Profile2>();
             });
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(() => config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -74,7 +81,9 @@ namespace AutoMapper.UnitTests
                 cfg.Internal().AllowAdditiveTypeMapCreation = true;
             });
 
-            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(() => config.AssertConfigurationIsValid());
+            typeof(DuplicateTypeMapConfigurationException).ShouldNotBeThrownBy(
+                () => config.AssertConfigurationIsValid()
+            );
         }
 
         [Fact]
@@ -86,11 +95,12 @@ namespace AutoMapper.UnitTests
                 cfg.AddProfile<Profile1>();
             });
 
-            new Action(() => config.AssertConfigurationIsValid()).ShouldThrowException<DuplicateTypeMapConfigurationException>(c =>
+            new Action(
+                () => config.AssertConfigurationIsValid()
+            ).ShouldThrowException<DuplicateTypeMapConfigurationException>(c =>
             {
                 c.Errors.SelectMany(t => t.ProfileNames).ShouldNotContain(string.Empty);
             });
         }
-
     }
 }

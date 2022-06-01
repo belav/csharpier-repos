@@ -5,9 +5,7 @@ namespace System.Numerics
 {
     /// <summary>Defines a floating-point type.</summary>
     /// <typeparam name="TSelf">The type that implements the interface.</typeparam>
-    public interface IFloatingPoint<TSelf>
-        : INumber<TSelf>,
-          ISignedNumber<TSelf>
+    public interface IFloatingPoint<TSelf> : INumber<TSelf>, ISignedNumber<TSelf>
         where TSelf : IFloatingPoint<TSelf>
     {
         /// <summary>Computes the ceiling of a value.</summary>
@@ -218,7 +216,12 @@ namespace System.Numerics
         /// <returns>The number of bytes written to <paramref name="destination" /> starting at <paramref name="startIndex" />.</returns>
         int WriteSignificandLittleEndian(byte[] destination, int startIndex)
         {
-            if (!TryWriteSignificandLittleEndian(destination.AsSpan(startIndex), out int bytesWritten))
+            if (
+                !TryWriteSignificandLittleEndian(
+                    destination.AsSpan(startIndex),
+                    out int bytesWritten
+                )
+            )
             {
                 ThrowHelper.ThrowArgumentException_DestinationTooShort();
             }

@@ -12,9 +12,7 @@ internal sealed class HostingApplicationDiscriminator : IApplicationDiscriminato
     private readonly IHostEnvironment? _hosting;
 
     // the optional constructor for when IHostingEnvironment is not available from DI
-    public HostingApplicationDiscriminator()
-    {
-    }
+    public HostingApplicationDiscriminator() { }
 
     public HostingApplicationDiscriminator(IHostEnvironment hosting)
     {
@@ -22,5 +20,9 @@ internal sealed class HostingApplicationDiscriminator : IApplicationDiscriminato
     }
 
     // Note: ContentRootPath behavior depends on the version, sometimes it has a trailing slash, we normalize by default by removing a trailing slash
-    public string? Discriminator => _hosting?.ContentRootPath?.TrimEnd(Path.DirectorySeparatorChar, Path.AltDirectorySeparatorChar);
+    public string? Discriminator =>
+        _hosting?.ContentRootPath?.TrimEnd(
+            Path.DirectorySeparatorChar,
+            Path.AltDirectorySeparatorChar
+        );
 }

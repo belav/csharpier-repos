@@ -136,7 +136,10 @@ namespace Microsoft.CodeAnalysis
         /// <param name="items">The array to map</param>
         /// <param name="map">The mapping delegate</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array</returns>
-        public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(this ImmutableArray<TItem> items, Func<TItem, TResult> map)
+        public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(
+            this ImmutableArray<TItem> items,
+            Func<TItem, TResult> map
+        )
         {
             return ImmutableArray.CreateRange(items, map);
         }
@@ -151,7 +154,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="map">The mapping delegate</param>
         /// <param name="arg">The extra input used by mapping delegate</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
-        public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(this ImmutableArray<TItem> items, Func<TItem, TArg, TResult> map, TArg arg)
+        public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(
+            this ImmutableArray<TItem> items,
+            Func<TItem, TArg, TResult> map,
+            TArg arg
+        )
         {
             return ImmutableArray.CreateRange(items, map, arg);
         }
@@ -166,7 +173,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="map">The mapping delegate</param>
         /// <param name="arg">The extra input used by mapping delegate</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
-        public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(this ImmutableArray<TItem> items, Func<TItem, int, TArg, TResult> map, TArg arg)
+        public static ImmutableArray<TResult> SelectAsArray<TItem, TArg, TResult>(
+            this ImmutableArray<TItem> items,
+            Func<TItem, int, TArg, TResult> map,
+            TArg arg
+        )
         {
             switch (items.Length)
             {
@@ -180,10 +191,19 @@ namespace Microsoft.CodeAnalysis
                     return ImmutableArray.Create(map(items[0], 0, arg), map(items[1], 1, arg));
 
                 case 3:
-                    return ImmutableArray.Create(map(items[0], 0, arg), map(items[1], 1, arg), map(items[2], 2, arg));
+                    return ImmutableArray.Create(
+                        map(items[0], 0, arg),
+                        map(items[1], 1, arg),
+                        map(items[2], 2, arg)
+                    );
 
                 case 4:
-                    return ImmutableArray.Create(map(items[0], 0, arg), map(items[1], 1, arg), map(items[2], 2, arg), map(items[3], 3, arg));
+                    return ImmutableArray.Create(
+                        map(items[0], 0, arg),
+                        map(items[1], 1, arg),
+                        map(items[2], 2, arg),
+                        map(items[3], 3, arg)
+                    );
 
                 default:
                     var builder = ArrayBuilder<TResult>.GetInstance(items.Length);
@@ -205,7 +225,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="predicate">The condition to use for filtering the array content.</param>
         /// <param name="selector">A transform function to apply to each element that is not filtered out by <paramref name="predicate"/>.</param>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
-        public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(this ImmutableArray<TItem> array, Func<TItem, bool> predicate, Func<TItem, TResult> selector)
+        public static ImmutableArray<TResult> SelectAsArray<TItem, TResult>(
+            this ImmutableArray<TItem> array,
+            Func<TItem, bool> predicate,
+            Func<TItem, TResult> selector
+        )
         {
             if (array.Length == 0)
             {
@@ -227,7 +251,11 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Maps an immutable array through a function that returns ValueTasks, returning the new ImmutableArray.
         /// </summary>
-        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(this ImmutableArray<TItem> array, Func<TItem, CancellationToken, ValueTask<TResult>> selector, CancellationToken cancellationToken)
+        public static async ValueTask<ImmutableArray<TResult>> SelectAsArrayAsync<TItem, TResult>(
+            this ImmutableArray<TItem> array,
+            Func<TItem, CancellationToken, ValueTask<TResult>> selector,
+            CancellationToken cancellationToken
+        )
         {
             var builder = ArrayBuilder<TResult>.GetInstance(array.Length);
 
@@ -239,7 +267,16 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutableAndFree();
         }
 
-        public static ValueTask<ImmutableArray<TResult>> SelectManyAsArrayAsync<TItem, TArg, TResult>(this ImmutableArray<TItem> source, Func<TItem, TArg, CancellationToken, ValueTask<ImmutableArray<TResult>>> selector, TArg arg, CancellationToken cancellationToken)
+        public static ValueTask<ImmutableArray<TResult>> SelectManyAsArrayAsync<
+            TItem,
+            TArg,
+            TResult
+        >(
+            this ImmutableArray<TItem> source,
+            Func<TItem, TArg, CancellationToken, ValueTask<ImmutableArray<TResult>>> selector,
+            TArg arg,
+            CancellationToken cancellationToken
+        )
         {
             if (source.Length == 0)
             {
@@ -259,7 +296,9 @@ namespace Microsoft.CodeAnalysis
 
                 foreach (var item in source)
                 {
-                    builder.AddRange(await selector(item, arg, cancellationToken).ConfigureAwait(false));
+                    builder.AddRange(
+                        await selector(item, arg, cancellationToken).ConfigureAwait(false)
+                    );
                 }
 
                 return builder.ToImmutableAndFree();
@@ -270,7 +309,11 @@ namespace Microsoft.CodeAnalysis
         /// Zips two immutable arrays together through a mapping function, producing another immutable array.
         /// </summary>
         /// <returns>If the items's length is 0, this will return an empty immutable array.</returns>
-        public static ImmutableArray<TResult> ZipAsArray<T1, T2, TResult>(this ImmutableArray<T1> self, ImmutableArray<T2> other, Func<T1, T2, TResult> map)
+        public static ImmutableArray<TResult> ZipAsArray<T1, T2, TResult>(
+            this ImmutableArray<T1> self,
+            ImmutableArray<T2> other,
+            Func<T1, T2, TResult> map
+        )
         {
             Debug.Assert(self.Length == other.Length);
             switch (self.Length)
@@ -285,10 +328,19 @@ namespace Microsoft.CodeAnalysis
                     return ImmutableArray.Create(map(self[0], other[0]), map(self[1], other[1]));
 
                 case 3:
-                    return ImmutableArray.Create(map(self[0], other[0]), map(self[1], other[1]), map(self[2], other[2]));
+                    return ImmutableArray.Create(
+                        map(self[0], other[0]),
+                        map(self[1], other[1]),
+                        map(self[2], other[2])
+                    );
 
                 case 4:
-                    return ImmutableArray.Create(map(self[0], other[0]), map(self[1], other[1]), map(self[2], other[2]), map(self[3], other[3]));
+                    return ImmutableArray.Create(
+                        map(self[0], other[0]),
+                        map(self[1], other[1]),
+                        map(self[2], other[2]),
+                        map(self[3], other[3])
+                    );
 
                 default:
                     var builder = ArrayBuilder<TResult>.GetInstance(self.Length);
@@ -301,7 +353,12 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static ImmutableArray<TResult> ZipAsArray<T1, T2, TArg, TResult>(this ImmutableArray<T1> self, ImmutableArray<T2> other, TArg arg, Func<T1, T2, int, TArg, TResult> map)
+        public static ImmutableArray<TResult> ZipAsArray<T1, T2, TArg, TResult>(
+            this ImmutableArray<T1> self,
+            ImmutableArray<T2> other,
+            TArg arg,
+            Func<T1, T2, int, TArg, TResult> map
+        )
         {
             Debug.Assert(self.Length == other.Length);
             if (self.IsEmpty)
@@ -322,18 +379,28 @@ namespace Microsoft.CodeAnalysis
         /// </summary>
         /// <param name="array">The array to process</param>
         /// <param name="predicate">The delegate that defines the conditions of the element to search for.</param>
-        public static ImmutableArray<T> WhereAsArray<T>(this ImmutableArray<T> array, Func<T, bool> predicate)
-            => WhereAsArrayImpl<T, object?>(array, predicate, predicateWithArg: null, arg: null);
+        public static ImmutableArray<T> WhereAsArray<T>(
+            this ImmutableArray<T> array,
+            Func<T, bool> predicate
+        ) => WhereAsArrayImpl<T, object?>(array, predicate, predicateWithArg: null, arg: null);
 
         /// <summary>
         /// Creates a new immutable array based on filtered elements by the predicate. The array must not be null.
         /// </summary>
         /// <param name="array">The array to process</param>
         /// <param name="predicate">The delegate that defines the conditions of the element to search for.</param>
-        public static ImmutableArray<T> WhereAsArray<T, TArg>(this ImmutableArray<T> array, Func<T, TArg, bool> predicate, TArg arg)
-            => WhereAsArrayImpl(array, predicateWithoutArg: null, predicate, arg);
+        public static ImmutableArray<T> WhereAsArray<T, TArg>(
+            this ImmutableArray<T> array,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        ) => WhereAsArrayImpl(array, predicateWithoutArg: null, predicate, arg);
 
-        private static ImmutableArray<T> WhereAsArrayImpl<T, TArg>(ImmutableArray<T> array, Func<T, bool>? predicateWithoutArg, Func<T, TArg, bool>? predicateWithArg, TArg arg)
+        private static ImmutableArray<T> WhereAsArrayImpl<T, TArg>(
+            ImmutableArray<T> array,
+            Func<T, bool>? predicateWithoutArg,
+            Func<T, TArg, bool>? predicateWithArg,
+            TArg arg
+        )
         {
             Debug.Assert(!array.IsDefault);
             Debug.Assert(predicateWithArg != null ^ predicateWithoutArg != null);
@@ -347,7 +414,11 @@ namespace Microsoft.CodeAnalysis
             {
                 var a = array[i];
 
-                if ((predicateWithoutArg != null) ? predicateWithoutArg(a) : predicateWithArg!(a, arg))
+                if (
+                    (predicateWithoutArg != null)
+                        ? predicateWithoutArg(a)
+                        : predicateWithArg!(a, arg)
+                )
                 {
                     none = false;
                     if (all)
@@ -402,7 +473,11 @@ namespace Microsoft.CodeAnalysis
             }
         }
 
-        public static bool Any<T, TArg>(this ImmutableArray<T> array, Func<T, TArg, bool> predicate, TArg arg)
+        public static bool Any<T, TArg>(
+            this ImmutableArray<T> array,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        )
         {
             int n = array.Length;
             for (int i = 0; i < n; i++)
@@ -418,7 +493,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static bool All<T, TArg>(this ImmutableArray<T> array, Func<T, TArg, bool> predicate, TArg arg)
+        public static bool All<T, TArg>(
+            this ImmutableArray<T> array,
+            Func<T, TArg, bool> predicate,
+            TArg arg
+        )
         {
             int n = array.Length;
             for (int i = 0; i < n; i++)
@@ -434,7 +513,10 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        public static async Task<bool> AnyAsync<T>(this ImmutableArray<T> array, Func<T, Task<bool>> predicateAsync)
+        public static async Task<bool> AnyAsync<T>(
+            this ImmutableArray<T> array,
+            Func<T, Task<bool>> predicateAsync
+        )
         {
             int n = array.Length;
             for (int i = 0; i < n; i++)
@@ -450,7 +532,11 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static async Task<bool> AnyAsync<T, TArg>(this ImmutableArray<T> array, Func<T, TArg, Task<bool>> predicateAsync, TArg arg)
+        public static async Task<bool> AnyAsync<T, TArg>(
+            this ImmutableArray<T> array,
+            Func<T, TArg, Task<bool>> predicateAsync,
+            TArg arg
+        )
         {
             int n = array.Length;
             for (int i = 0; i < n; i++)
@@ -466,7 +552,10 @@ namespace Microsoft.CodeAnalysis
             return false;
         }
 
-        public static async ValueTask<T?> FirstOrDefaultAsync<T>(this ImmutableArray<T> array, Func<T, Task<bool>> predicateAsync)
+        public static async ValueTask<T?> FirstOrDefaultAsync<T>(
+            this ImmutableArray<T> array,
+            Func<T, Task<bool>> predicateAsync
+        )
         {
             int n = array.Length;
             for (int i = 0; i < n; i++)
@@ -482,7 +571,11 @@ namespace Microsoft.CodeAnalysis
             return default;
         }
 
-        public static TValue? FirstOrDefault<TValue, TArg>(this ImmutableArray<TValue> array, Func<TValue, TArg, bool> predicate, TArg arg)
+        public static TValue? FirstOrDefault<TValue, TArg>(
+            this ImmutableArray<TValue> array,
+            Func<TValue, TArg, bool> predicate,
+            TArg arg
+        )
         {
             foreach (var val in array)
             {
@@ -499,8 +592,9 @@ namespace Microsoft.CodeAnalysis
         /// Casts the immutable array of a Type to an immutable array of its base type.
         /// </summary>
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        public static ImmutableArray<TBase> Cast<TDerived, TBase>(this ImmutableArray<TDerived> items)
-            where TDerived : class, TBase
+        public static ImmutableArray<TBase> Cast<TDerived, TBase>(
+            this ImmutableArray<TDerived> items
+        ) where TDerived : class, TBase
         {
             return ImmutableArray<TBase>.CastUp(items);
         }
@@ -513,7 +607,11 @@ namespace Microsoft.CodeAnalysis
         /// <param name="array2"></param>
         /// <param name="comparer">The comparer to determine if the two arrays are equal.</param>
         /// <returns>True if the two arrays are equal</returns>
-        public static bool SetEquals<T>(this ImmutableArray<T> array1, ImmutableArray<T> array2, IEqualityComparer<T> comparer)
+        public static bool SetEquals<T>(
+            this ImmutableArray<T> array1,
+            ImmutableArray<T> array2,
+            IEqualityComparer<T> comparer
+        )
         {
             if (array1.IsDefault)
             {
@@ -562,8 +660,8 @@ namespace Microsoft.CodeAnalysis
         /// <summary>
         /// Returns an empty array if the input nullable value type is null or the underlying array is null (default)
         /// </summary>
-        public static ImmutableArray<T> NullToEmpty<T>(this ImmutableArray<T>? array)
-            => array switch
+        public static ImmutableArray<T> NullToEmpty<T>(this ImmutableArray<T>? array) =>
+            array switch
             {
                 null or { IsDefault: true } => ImmutableArray<T>.Empty,
                 { } underlying => underlying
@@ -573,7 +671,10 @@ namespace Microsoft.CodeAnalysis
         /// Returns an array of distinct elements, preserving the order in the original array.
         /// If the array has no duplicates, the original array is returned. The original array must not be null.
         /// </summary>
-        public static ImmutableArray<T> Distinct<T>(this ImmutableArray<T> array, IEqualityComparer<T>? comparer = null)
+        public static ImmutableArray<T> Distinct<T>(
+            this ImmutableArray<T> array,
+            IEqualityComparer<T>? comparer = null
+        )
         {
             Debug.Assert(!array.IsDefault);
 
@@ -597,7 +698,8 @@ namespace Microsoft.CodeAnalysis
             return result;
         }
 
-        internal static bool HasAnyErrors<T>(this ImmutableArray<T> diagnostics) where T : Diagnostic
+        internal static bool HasAnyErrors<T>(this ImmutableArray<T> diagnostics)
+            where T : Diagnostic
         {
             foreach (var diagnostic in diagnostics)
             {
@@ -630,8 +732,8 @@ namespace Microsoft.CodeAnalysis
 
         internal static ImmutableArray<TValue> Flatten<TKey, TValue>(
             this Dictionary<TKey, ImmutableArray<TValue>> dictionary,
-            IComparer<TValue>? comparer = null)
-            where TKey : notnull
+            IComparer<TValue>? comparer = null
+        ) where TKey : notnull
         {
             if (dictionary.Count == 0)
             {
@@ -654,12 +756,19 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutableAndFree();
         }
 
-        internal static ImmutableArray<T> Concat<T>(this ImmutableArray<T> first, ImmutableArray<T> second)
+        internal static ImmutableArray<T> Concat<T>(
+            this ImmutableArray<T> first,
+            ImmutableArray<T> second
+        )
         {
             return first.AddRange(second);
         }
 
-        internal static ImmutableArray<T> Concat<T>(this ImmutableArray<T> first, ImmutableArray<T> second, ImmutableArray<T> third)
+        internal static ImmutableArray<T> Concat<T>(
+            this ImmutableArray<T> first,
+            ImmutableArray<T> second,
+            ImmutableArray<T> third
+        )
         {
             var builder = ArrayBuilder<T>.GetInstance(first.Length + second.Length + third.Length);
             builder.AddRange(first);
@@ -668,9 +777,16 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutableAndFree();
         }
 
-        internal static ImmutableArray<T> Concat<T>(this ImmutableArray<T> first, ImmutableArray<T> second, ImmutableArray<T> third, ImmutableArray<T> fourth)
+        internal static ImmutableArray<T> Concat<T>(
+            this ImmutableArray<T> first,
+            ImmutableArray<T> second,
+            ImmutableArray<T> third,
+            ImmutableArray<T> fourth
+        )
         {
-            var builder = ArrayBuilder<T>.GetInstance(first.Length + second.Length + third.Length + fourth.Length);
+            var builder = ArrayBuilder<T>.GetInstance(
+                first.Length + second.Length + third.Length + fourth.Length
+            );
             builder.AddRange(first);
             builder.AddRange(second);
             builder.AddRange(third);
@@ -678,9 +794,17 @@ namespace Microsoft.CodeAnalysis
             return builder.ToImmutableAndFree();
         }
 
-        internal static ImmutableArray<T> Concat<T>(this ImmutableArray<T> first, ImmutableArray<T> second, ImmutableArray<T> third, ImmutableArray<T> fourth, ImmutableArray<T> fifth)
+        internal static ImmutableArray<T> Concat<T>(
+            this ImmutableArray<T> first,
+            ImmutableArray<T> second,
+            ImmutableArray<T> third,
+            ImmutableArray<T> fourth,
+            ImmutableArray<T> fifth
+        )
         {
-            var builder = ArrayBuilder<T>.GetInstance(first.Length + second.Length + third.Length + fourth.Length + fifth.Length);
+            var builder = ArrayBuilder<T>.GetInstance(
+                first.Length + second.Length + third.Length + fourth.Length + fifth.Length
+            );
             builder.AddRange(first);
             builder.AddRange(second);
             builder.AddRange(third);
@@ -694,7 +818,10 @@ namespace Microsoft.CodeAnalysis
             return first.Add(second);
         }
 
-        internal static bool HasDuplicates<T>(this ImmutableArray<T> array, IEqualityComparer<T> comparer)
+        internal static bool HasDuplicates<T>(
+            this ImmutableArray<T> array,
+            IEqualityComparer<T> comparer
+        )
         {
             switch (array.Length)
             {
@@ -738,8 +865,11 @@ namespace Microsoft.CodeAnalysis
             return count;
         }
 
-        internal static Dictionary<K, ImmutableArray<T>> ToDictionary<K, T>(this ImmutableArray<T> items, Func<T, K> keySelector, IEqualityComparer<K>? comparer = null)
-            where K : notnull
+        internal static Dictionary<K, ImmutableArray<T>> ToDictionary<K, T>(
+            this ImmutableArray<T> items,
+            Func<T, K> keySelector,
+            IEqualityComparer<K>? comparer = null
+        ) where K : notnull
         {
             if (items.Length == 1)
             {
@@ -755,7 +885,7 @@ namespace Microsoft.CodeAnalysis
             }
 
             // bucketize
-            // prevent reallocation. it may not have 'count' entries, but it won't have more. 
+            // prevent reallocation. it may not have 'count' entries, but it won't have more.
             var accumulator = new Dictionary<K, ArrayBuilder<T>>(items.Length, comparer);
             for (int i = 0; i < items.Length; i++)
             {
@@ -786,7 +916,12 @@ namespace Microsoft.CodeAnalysis
             return items.IsEmpty ? Location.None : items[0];
         }
 
-        internal static bool SequenceEqual<TElement, TArg>(this ImmutableArray<TElement> array1, ImmutableArray<TElement> array2, TArg arg, Func<TElement, TElement, TArg, bool> predicate)
+        internal static bool SequenceEqual<TElement, TArg>(
+            this ImmutableArray<TElement> array1,
+            ImmutableArray<TElement> array2,
+            TArg arg,
+            Func<TElement, TElement, TArg, bool> predicate
+        )
         {
             // The framework implementation of SequenceEqual forces a NullRef for default array1 and 2, so we
             // maintain the same behavior in this extension
@@ -816,8 +951,11 @@ namespace Microsoft.CodeAnalysis
             return true;
         }
 
-        internal static int IndexOf<T>(this ImmutableArray<T> array, T item, IEqualityComparer<T> comparer)
-            => array.IndexOf(item, startIndex: 0, comparer);
+        internal static int IndexOf<T>(
+            this ImmutableArray<T> array,
+            T item,
+            IEqualityComparer<T> comparer
+        ) => array.IndexOf(item, startIndex: 0, comparer);
 
         internal static bool IsSorted<T>(this ImmutableArray<T> array, IComparer<T> comparer)
         {
@@ -833,10 +971,17 @@ namespace Microsoft.CodeAnalysis
         }
 
         // same as Array.BinarySearch but the ability to pass arbitrary value to the comparer without allocation
-        internal static int BinarySearch<TElement, TValue>(this ImmutableArray<TElement> array, TValue value, Func<TElement, TValue, int> comparer)
-            => BinarySearch(array.AsSpan(), value, comparer);
+        internal static int BinarySearch<TElement, TValue>(
+            this ImmutableArray<TElement> array,
+            TValue value,
+            Func<TElement, TValue, int> comparer
+        ) => BinarySearch(array.AsSpan(), value, comparer);
 
-        internal static int BinarySearch<TElement, TValue>(this ReadOnlySpan<TElement> array, TValue value, Func<TElement, TValue, int> comparer)
+        internal static int BinarySearch<TElement, TValue>(
+            this ReadOnlySpan<TElement> array,
+            TValue value,
+            Func<TElement, TValue, int> comparer
+        )
         {
             int low = 0;
             int high = array.Length - 1;
@@ -864,7 +1009,11 @@ namespace Microsoft.CodeAnalysis
             return ~low;
         }
 
-        internal static int BinarySearch<TElement, TValue>(this ImmutableSegmentedList<TElement> array, TValue value, Func<TElement, TValue, int> comparer)
+        internal static int BinarySearch<TElement, TValue>(
+            this ImmutableSegmentedList<TElement> array,
+            TValue value,
+            Func<TElement, TValue, int> comparer
+        )
         {
             int low = 0;
             int high = array.Count - 1;

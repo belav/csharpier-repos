@@ -19,7 +19,9 @@ using Roslyn.Utilities;
 
 namespace Microsoft.CodeAnalysis.CSharp
 {
-    internal sealed partial class CSharpSemanticFactsService : AbstractSemanticFactsService, ISemanticFactsService
+    internal sealed partial class CSharpSemanticFactsService
+        : AbstractSemanticFactsService,
+            ISemanticFactsService
     {
         internal static readonly CSharpSemanticFactsService Instance = new();
 
@@ -28,31 +30,45 @@ namespace Microsoft.CodeAnalysis.CSharp
 
         protected override ISemanticFacts SemanticFacts => CSharpSemanticFacts.Instance;
 
-        private CSharpSemanticFactsService()
-        {
-        }
+        private CSharpSemanticFactsService() { }
 
-        protected override SyntaxToken ToIdentifierToken(string identifier)
-            => identifier.ToIdentifierToken();
+        protected override SyntaxToken ToIdentifierToken(string identifier) =>
+            identifier.ToIdentifierToken();
 
-        protected override IEnumerable<ISymbol> GetCollidableSymbols(SemanticModel semanticModel, SyntaxNode location, SyntaxNode container, CancellationToken cancellationToken)
+        protected override IEnumerable<ISymbol> GetCollidableSymbols(
+            SemanticModel semanticModel,
+            SyntaxNode location,
+            SyntaxNode container,
+            CancellationToken cancellationToken
+        )
         {
             // Get all the symbols visible to the current location.
             var visibleSymbols = semanticModel.LookupSymbols(location.SpanStart);
 
             // Local function parameter is allowed to shadow variables since C# 8.
-            if (semanticModel.Compilation.LanguageVersion().MapSpecifiedToEffectiveVersion() >= LanguageVersion.CSharp8)
+            if (
+                semanticModel.Compilation.LanguageVersion().MapSpecifiedToEffectiveVersion()
+                >= LanguageVersion.CSharp8
+            )
             {
-                if (SyntaxFacts.IsParameterList(container) && SyntaxFacts.IsLocalFunctionStatement(container.Parent))
+                if (
+                    SyntaxFacts.IsParameterList(container)
+                    && SyntaxFacts.IsLocalFunctionStatement(container.Parent)
+                )
                 {
-                    visibleSymbols = visibleSymbols.WhereAsArray(s => !s.MatchesKind(SymbolKind.Local, SymbolKind.Parameter));
+                    visibleSymbols = visibleSymbols.WhereAsArray(
+                        s => !s.MatchesKind(SymbolKind.Local, SymbolKind.Parameter)
+                    );
                 }
             }
 
             // Some symbols in the enclosing block could cause conflicts even if they are not available at the location.
             // E.g. symbols inside if statements / try catch statements.
-            var symbolsInBlock = semanticModel.GetExistingSymbols(container, cancellationToken,
-                descendInto: n => ShouldDescendInto(n));
+            var symbolsInBlock = semanticModel.GetExistingSymbols(
+                container,
+                cancellationToken,
+                descendInto: n => ShouldDescendInto(n)
+            );
 
             return symbolsInBlock.Concat(visibleSymbols);
 
@@ -63,56 +79,113 @@ namespace Microsoft.CodeAnalysis.CSharp
             // Exclude lambdas as well when the language version is C# 8 or higher because symbols declared inside no longer collide with outer variables.
             bool ShouldDescendInto(SyntaxNode node)
             {
-                var isLanguageVersionGreaterOrEqualToCSharp8 = (semanticModel.Compilation as CSharpCompilation)?.LanguageVersion >= LanguageVersion.CSharp8;
-                return isLanguageVersionGreaterOrEqualToCSharp8 ? !SyntaxFacts.IsAnonymousOrLocalFunction(node) : !SyntaxFacts.IsLocalFunctionStatement(node);
+                var isLanguageVersionGreaterOrEqualToCSharp8 =
+                    (semanticModel.Compilation as CSharpCompilation)?.LanguageVersion
+                    >= LanguageVersion.CSharp8;
+                return isLanguageVersionGreaterOrEqualToCSharp8
+                    ? !SyntaxFacts.IsAnonymousOrLocalFunction(node)
+                    : !SyntaxFacts.IsLocalFunctionStatement(node);
             }
         }
 
-        public bool IsExpressionContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public bool IsExpressionContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.SyntaxTree.IsExpressionContext(
                 position,
                 semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
-                attributes: true, cancellationToken: cancellationToken, semanticModelOpt: semanticModel);
+                attributes: true,
+                cancellationToken: cancellationToken,
+                semanticModelOpt: semanticModel
+            );
         }
 
-        public bool IsStatementContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public bool IsStatementContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.SyntaxTree.IsStatementContext(
-                position, semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken), cancellationToken);
+                position,
+                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
+                cancellationToken
+            );
         }
 
-        public bool IsTypeContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.SyntaxTree.IsTypeContext(position, cancellationToken, semanticModel);
+        public bool IsTypeContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) => semanticModel.SyntaxTree.IsTypeContext(position, cancellationToken, semanticModel);
 
-        public bool IsNamespaceContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.SyntaxTree.IsNamespaceContext(position, cancellationToken, semanticModel);
+        public bool IsNamespaceContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            semanticModel.SyntaxTree.IsNamespaceContext(position, cancellationToken, semanticModel);
 
-        public bool IsNamespaceDeclarationNameContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.SyntaxTree.IsNamespaceDeclarationNameContext(position, cancellationToken);
+        public bool IsNamespaceDeclarationNameContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) =>
+            semanticModel.SyntaxTree.IsNamespaceDeclarationNameContext(position, cancellationToken);
 
-        public bool IsTypeDeclarationContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public bool IsTypeDeclarationContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.SyntaxTree.IsTypeDeclarationContext(
-                position, semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken), cancellationToken);
+                position,
+                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken),
+                cancellationToken
+            );
         }
 
-        public bool IsMemberDeclarationContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
+        public bool IsMemberDeclarationContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        )
         {
             return semanticModel.SyntaxTree.IsMemberDeclarationContext(
-                position, semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken));
+                position,
+                semanticModel.SyntaxTree.FindTokenOnLeftOfPosition(position, cancellationToken)
+            );
         }
 
-        public bool IsGlobalStatementContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.SyntaxTree.IsGlobalStatementContext(position, cancellationToken);
+        public bool IsGlobalStatementContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) => semanticModel.SyntaxTree.IsGlobalStatementContext(position, cancellationToken);
 
-        public bool IsLabelContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.SyntaxTree.IsLabelContext(position, cancellationToken);
+        public bool IsLabelContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) => semanticModel.SyntaxTree.IsLabelContext(position, cancellationToken);
 
-        public bool IsAttributeNameContext(SemanticModel semanticModel, int position, CancellationToken cancellationToken)
-            => semanticModel.SyntaxTree.IsAttributeNameContext(position, cancellationToken);
+        public bool IsAttributeNameContext(
+            SemanticModel semanticModel,
+            int position,
+            CancellationToken cancellationToken
+        ) => semanticModel.SyntaxTree.IsAttributeNameContext(position, cancellationToken);
 
-        public CommonConversion ClassifyConversion(SemanticModel semanticModel, SyntaxNode expression, ITypeSymbol destination)
-            => semanticModel.ClassifyConversion((ExpressionSyntax)expression, destination).ToCommonConversion();
+        public CommonConversion ClassifyConversion(
+            SemanticModel semanticModel,
+            SyntaxNode expression,
+            ITypeSymbol destination
+        ) =>
+            semanticModel
+                .ClassifyConversion((ExpressionSyntax)expression, destination)
+                .ToCommonConversion();
     }
 }

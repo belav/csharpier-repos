@@ -11,22 +11,21 @@ class TailRecursionWithOsrEntryInTry
     {
         int result = a;
 
-        try 
+        try
         {
             for (int i = from; i < to; i++)
             {
                 result += i;
             }
         }
-        catch(Exception)
-        {
-        }
+        catch (Exception) { }
 
-        if (n <= 0) return result;
+        if (n <= 0)
+            return result;
 
         int delta = to - from;
 
-        return F(to, to + to - from, n-1, result);
+        return F(to, to + to - from, n - 1, result);
     }
 
     public static int Main()
@@ -36,6 +35,6 @@ class TailRecursionWithOsrEntryInTry
         bool ok = (result == 1783293664);
         string msg = ok ? "Pass" : "Fail";
         Console.WriteLine($"done, sum is {result}, {msg}");
-        return  ok ? 100 : -1;
-    }  
+        return ok ? 100 : -1;
+    }
 }

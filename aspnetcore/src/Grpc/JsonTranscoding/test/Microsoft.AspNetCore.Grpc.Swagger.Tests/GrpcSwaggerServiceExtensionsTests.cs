@@ -83,7 +83,9 @@ public class GrpcSwaggerServiceExtensionsTests
         swagger = swaggerGenerator.GetSwagger("v2");
         Assert.Equal(2, swagger.Paths.Count);
         Assert.True(swagger.Paths["/v1/greeter/{name}"].Operations.ContainsKey(OperationType.Get));
-        Assert.True(swagger.Paths["/v1/add/{value1}/{value2}"].Operations.ContainsKey(OperationType.Get));
+        Assert.True(
+            swagger.Paths["/v1/add/{value1}/{value2}"].Operations.ContainsKey(OperationType.Get)
+        );
     }
 
     private class TestWebHostEnvironment : IWebHostEnvironment
@@ -96,12 +98,8 @@ public class GrpcSwaggerServiceExtensionsTests
         public string EnvironmentName { get; set; }
     }
 
-    private class GreeterService : Greeter.GreeterBase
-    {
-    }
+    private class GreeterService : Greeter.GreeterBase { }
 
     [ApiExplorerSettings(GroupName = "v2")]
-    private class CounterService : Counter.CounterBase
-    {
-    }
+    private class CounterService : Counter.CounterBase { }
 }

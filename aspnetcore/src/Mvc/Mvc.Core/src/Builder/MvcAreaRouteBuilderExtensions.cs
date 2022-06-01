@@ -25,9 +25,18 @@ public static class MvcAreaRouteBuilderExtensions
         this IRouteBuilder routeBuilder,
         string name,
         string areaName,
-        string? template)
+        string? template
+    )
     {
-        MapAreaRoute(routeBuilder, name, areaName, template, defaults: null, constraints: null, dataTokens: null);
+        MapAreaRoute(
+            routeBuilder,
+            name,
+            areaName,
+            template,
+            defaults: null,
+            constraints: null,
+            dataTokens: null
+        );
         return routeBuilder;
     }
 
@@ -50,9 +59,18 @@ public static class MvcAreaRouteBuilderExtensions
         string name,
         string areaName,
         string? template,
-        object? defaults)
+        object? defaults
+    )
     {
-        MapAreaRoute(routeBuilder, name, areaName, template, defaults, constraints: null, dataTokens: null);
+        MapAreaRoute(
+            routeBuilder,
+            name,
+            areaName,
+            template,
+            defaults,
+            constraints: null,
+            dataTokens: null
+        );
         return routeBuilder;
     }
 
@@ -80,9 +98,18 @@ public static class MvcAreaRouteBuilderExtensions
         string areaName,
         string? template,
         object? defaults,
-        object? constraints)
+        object? constraints
+    )
     {
-        MapAreaRoute(routeBuilder, name, areaName, template, defaults, constraints, dataTokens: null);
+        MapAreaRoute(
+            routeBuilder,
+            name,
+            areaName,
+            template,
+            defaults,
+            constraints,
+            dataTokens: null
+        );
         return routeBuilder;
     }
 
@@ -115,7 +142,8 @@ public static class MvcAreaRouteBuilderExtensions
         string? template,
         object? defaults,
         object? constraints,
-        object? dataTokens)
+        object? dataTokens
+    )
     {
         if (routeBuilder == null)
         {
@@ -131,9 +159,16 @@ public static class MvcAreaRouteBuilderExtensions
         defaultsDictionary["area"] = defaultsDictionary["area"] ?? areaName;
 
         var constraintsDictionary = new RouteValueDictionary(constraints);
-        constraintsDictionary["area"] = constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
+        constraintsDictionary["area"] =
+            constraintsDictionary["area"] ?? new StringRouteConstraint(areaName);
 
-        routeBuilder.MapRoute(name, template, defaultsDictionary, constraintsDictionary, dataTokens);
+        routeBuilder.MapRoute(
+            name,
+            template,
+            defaultsDictionary,
+            constraintsDictionary,
+            dataTokens
+        );
         return routeBuilder;
     }
 }

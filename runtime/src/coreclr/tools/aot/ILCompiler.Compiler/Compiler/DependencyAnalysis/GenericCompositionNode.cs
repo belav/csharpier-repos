@@ -47,10 +47,7 @@ namespace ILCompiler.DependencyAnalysis
 
         public int Offset
         {
-            get
-            {
-                return 0;
-            }
+            get { return 0; }
         }
 
         public override ObjectNodeSection Section
@@ -87,7 +84,9 @@ namespace ILCompiler.DependencyAnalysis
                 builder.EmitInt(0);
 
             foreach (var typeArg in _details.Instantiation)
-                builder.EmitPointerRelocOrIndirectionReference(factory.NecessaryTypeSymbol(typeArg));
+                builder.EmitPointerRelocOrIndirectionReference(
+                    factory.NecessaryTypeSymbol(typeArg)
+                );
 
             if (hasVariance)
             {
@@ -98,9 +97,11 @@ namespace ILCompiler.DependencyAnalysis
             return builder.ToObjectData();
         }
 
-        protected override string GetName(NodeFactory factory) => this.GetMangledName(factory.NameMangler);
+        protected override string GetName(NodeFactory factory) =>
+            this.GetMangledName(factory.NameMangler);
 
         public override int ClassCode => -762680703;
+
         public override int CompareToImpl(ISortableNode other, CompilerComparer comparer)
         {
             return _details.CompareToImpl(((GenericCompositionNode)other)._details, comparer);
@@ -113,16 +114,23 @@ namespace ILCompiler.DependencyAnalysis
 
         public readonly GenericVariance[] Variance;
 
-        public GenericCompositionDetails(TypeDesc genericTypeInstance, bool forceVarianceInfo = false)
+        public GenericCompositionDetails(
+            TypeDesc genericTypeInstance,
+            bool forceVarianceInfo = false
+        )
         {
             Debug.Assert(!genericTypeInstance.IsTypeDefinition);
-            
+
             Instantiation = genericTypeInstance.Instantiation;
 
             bool emitVarianceInfo = forceVarianceInfo;
             if (!emitVarianceInfo)
             {
-                foreach (GenericParameterDesc param in genericTypeInstance.GetTypeDefinition().Instantiation)
+                foreach (
+                    GenericParameterDesc param in genericTypeInstance
+                        .GetTypeDefinition()
+                        .Instantiation
+                )
                 {
                     if (param.Variance != Internal.TypeSystem.GenericVariance.None)
                     {
@@ -134,12 +142,22 @@ namespace ILCompiler.DependencyAnalysis
 
             if (emitVarianceInfo)
             {
-                Debug.Assert((byte)Internal.TypeSystem.GenericVariance.Contravariant == (byte)GenericVariance.Contravariant);
-                Debug.Assert((byte)Internal.TypeSystem.GenericVariance.Covariant == (byte)GenericVariance.Covariant);
+                Debug.Assert(
+                    (byte)Internal.TypeSystem.GenericVariance.Contravariant
+                        == (byte)GenericVariance.Contravariant
+                );
+                Debug.Assert(
+                    (byte)Internal.TypeSystem.GenericVariance.Covariant
+                        == (byte)GenericVariance.Covariant
+                );
 
                 Variance = new GenericVariance[Instantiation.Length];
                 int i = 0;
-                foreach (GenericParameterDesc param in genericTypeInstance.GetTypeDefinition().Instantiation)
+                foreach (
+                    GenericParameterDesc param in genericTypeInstance
+                        .GetTypeDefinition()
+                        .Instantiation
+                )
                 {
                     Variance[i++] = (GenericVariance)param.Variance;
                 }

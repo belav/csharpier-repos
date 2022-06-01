@@ -51,16 +51,19 @@ public abstract class LoginWithRecoveryCodeModel : PageModel
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnGetAsync(string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnGetAsync(string? returnUrl = null) =>
+        throw new NotImplementedException();
 
     /// <summary>
     ///     This API supports the ASP.NET Core Identity default UI infrastructure and is not intended to be used
     ///     directly from your code. This API may change or be removed in future releases.
     /// </summary>
-    public virtual Task<IActionResult> OnPostAsync(string? returnUrl = null) => throw new NotImplementedException();
+    public virtual Task<IActionResult> OnPostAsync(string? returnUrl = null) =>
+        throw new NotImplementedException();
 }
 
-internal sealed class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeModel where TUser : class
+internal sealed class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeModel
+    where TUser : class
 {
     private readonly SignInManager<TUser> _signInManager;
     private readonly UserManager<TUser> _userManager;
@@ -69,7 +72,8 @@ internal sealed class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeM
     public LoginWithRecoveryCodeModel(
         SignInManager<TUser> signInManager,
         UserManager<TUser> userManager,
-        ILogger<LoginWithRecoveryCodeModel> logger)
+        ILogger<LoginWithRecoveryCodeModel> logger
+    )
     {
         _signInManager = signInManager;
         _userManager = userManager;
@@ -111,7 +115,10 @@ internal sealed class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeM
 
         if (result.Succeeded)
         {
-            _logger.LogInformation(LoggerEventIds.UserLoginWithRecoveryCode, "User logged in with a recovery code.");
+            _logger.LogInformation(
+                LoggerEventIds.UserLoginWithRecoveryCode,
+                "User logged in with a recovery code."
+            );
             return LocalRedirect(returnUrl ?? Url.Content("~/"));
         }
         if (result.IsLockedOut)
@@ -121,7 +128,10 @@ internal sealed class LoginWithRecoveryCodeModel<TUser> : LoginWithRecoveryCodeM
         }
         else
         {
-            _logger.LogWarning(LoggerEventIds.InvalidRecoveryCode, "Invalid recovery code entered.");
+            _logger.LogWarning(
+                LoggerEventIds.InvalidRecoveryCode,
+                "Invalid recovery code entered."
+            );
             ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
             return Page();
         }

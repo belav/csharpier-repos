@@ -20,26 +20,32 @@ public class PolicySchemeHandler : SignInAuthenticationHandler<PolicySchemeOptio
     /// <param name="logger">The <see cref="ILoggerFactory"/>.</param>
     /// <param name="encoder">The <see cref="UrlEncoder"/>.</param>
     /// <param name="clock">The <see cref="ISystemClock"/>.</param>
-    public PolicySchemeHandler(IOptionsMonitor<PolicySchemeOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
-    { }
+    public PolicySchemeHandler(
+        IOptionsMonitor<PolicySchemeOptions> options,
+        ILoggerFactory logger,
+        UrlEncoder encoder,
+        ISystemClock clock
+    ) : base(options, logger, encoder, clock) { }
 
     /// <inheritdoc />
-    protected override Task HandleChallengeAsync(AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleChallengeAsync(AuthenticationProperties? properties) =>
+        throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task HandleForbiddenAsync(AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleForbiddenAsync(AuthenticationProperties? properties) =>
+        throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task HandleSignInAsync(ClaimsPrincipal user, AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleSignInAsync(
+        ClaimsPrincipal user,
+        AuthenticationProperties? properties
+    ) => throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task HandleSignOutAsync(AuthenticationProperties? properties)
-        => throw new NotImplementedException();
+    protected override Task HandleSignOutAsync(AuthenticationProperties? properties) =>
+        throw new NotImplementedException();
 
     /// <inheritdoc />
-    protected override Task<AuthenticateResult> HandleAuthenticateAsync()
-        => throw new NotImplementedException();
+    protected override Task<AuthenticateResult> HandleAuthenticateAsync() =>
+        throw new NotImplementedException();
 }

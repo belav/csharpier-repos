@@ -45,7 +45,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
         DbCommand command,
         DbDataReader reader,
         Guid commandId,
-        IRelationalCommandDiagnosticsLogger? logger)
+        IRelationalCommandDiagnosticsLogger? logger
+    )
     {
         _relationalConnection = relationalConnection;
         _command = command;
@@ -61,14 +62,12 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
     /// <summary>
     ///     Gets the underlying reader for the result set.
     /// </summary>
-    public virtual DbDataReader DbDataReader
-        => _reader;
+    public virtual DbDataReader DbDataReader => _reader;
 
     /// <summary>
     ///     Gets the underlying command for the result set.
     /// </summary>
-    public virtual DbCommand DbCommand
-        => _command;
+    public virtual DbCommand DbCommand => _command;
 
     /// <summary>
     ///     Calls <see cref="System.Data.Common.DbDataReader.Read" /> on the underlying <see cref="System.Data.Common.DbDataReader" />.
@@ -115,7 +114,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
                         _reader.RecordsAffected,
                         _readCount,
                         _startTime,
-                        _stopwatch.Elapsed); // can throw
+                        _stopwatch.Elapsed
+                    ); // can throw
                 }
             }
             finally
@@ -155,7 +155,8 @@ public class RelationalDataReader : IDisposable, IAsyncDisposable
                         _reader.RecordsAffected,
                         _readCount,
                         _startTime,
-                        _stopwatch.Elapsed); // can throw
+                        _stopwatch.Elapsed
+                    ); // can throw
                 }
             }
             finally

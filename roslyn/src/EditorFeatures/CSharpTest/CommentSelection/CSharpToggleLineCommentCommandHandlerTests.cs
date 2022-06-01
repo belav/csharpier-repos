@@ -42,7 +42,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.CommentSelection
         public void AddComment_CaretInUncommentedLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -51,7 +51,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -67,7 +67,7 @@ class C
         public void AddComment_CaretBeforeUncommentedLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -76,7 +76,7 @@ $$        var i = 1;
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -92,7 +92,7 @@ class C
         public void AddComment_SingleLineSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -101,7 +101,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -117,7 +117,7 @@ class C
         public void AddComment_PartialSingleLineSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -126,7 +126,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -142,7 +142,7 @@ class C
         public void AddComment_SingleLineWithWhitespaceSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -153,7 +153,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -171,7 +171,7 @@ class C
         public void AddComment_SelectionInsideCommentAtEndOfLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -180,7 +180,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -196,7 +196,7 @@ class C
         public void AddComment_SelectionAroundCommentAtEndOfLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -205,7 +205,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -221,7 +221,7 @@ class C
         public void AddComment_SelectionOutsideCommentAtEndOfLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -230,7 +230,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -246,7 +246,7 @@ class C
         public void AddComment_CaretOutsideCommentAtEndOfLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -255,7 +255,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -271,7 +271,7 @@ class C
         public void AddComment_CaretInsideCommentAtEndOfLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -280,7 +280,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -296,7 +296,7 @@ class C
         public void AddComment_CommentMarkerInString()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -305,7 +305,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -321,7 +321,7 @@ class C
         public void AddComment_MultipleLinesSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -331,7 +331,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -348,7 +348,7 @@ class C
         public void AddComment_MultipleLinesWithWhitespaceSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -361,7 +361,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -381,7 +381,7 @@ class C
         public void AddComment_MultipleLinesPartiallyCommentedSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -391,7 +391,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -408,7 +408,7 @@ class C
         public void AddComment_MultipleLinesWithCommentsInLineSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -418,7 +418,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -435,7 +435,7 @@ class C
         public void AddComment_MultipleLinesWithDifferentIndentationsSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
 [|    void M()
@@ -446,7 +446,7 @@ class C
     }|]
 }";
             var expected =
-@"
+                @"
 class C
 {
 [|    //void M()
@@ -464,7 +464,7 @@ class C
         public void AddComment_MultiCaret()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -474,7 +474,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -491,7 +491,7 @@ class C
         public void AddComment_MultiSeletion()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -501,7 +501,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -518,7 +518,7 @@ class C
         public void AddComment_MultiSeletionPartiallyCommented()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -528,7 +528,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -546,7 +546,7 @@ class C
         {
             var surfaceMarkup = @"&lt; html &gt;@{|S1:|}";
             var csharpMarkup =
-@"
+                @"
 {|S1:class C
 {
     void M()
@@ -555,7 +555,7 @@ class C
     }
 }|}";
             var expected =
-@"&lt; html &gt;@class C
+                @"&lt; html &gt;@class C
 {
     void M()
     {
@@ -570,7 +570,7 @@ class C
         public void RemoveComment_CaretInCommentedLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -579,7 +579,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -595,7 +595,7 @@ class C
         public void RemoveComment_CaretBeforeCommentedLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -604,7 +604,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -620,7 +620,7 @@ class C
         public void RemoveComment_CaretInCommentedLineWithEndComment()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -629,7 +629,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -645,7 +645,7 @@ class C
         public void RemoveComment_CaretInDoubleCommentedLine()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -654,7 +654,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -670,7 +670,7 @@ class C
         public void RemoveComment_CommentedLineSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -679,7 +679,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -695,7 +695,7 @@ class C
         public void RemoveComment_InsideCommentSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -704,7 +704,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -720,7 +720,7 @@ class C
         public void RemoveComment_CommentedLineWithWhitespaceSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -731,7 +731,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -749,7 +749,7 @@ class C
         public void RemoveComment_CommentMarkerInString()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -758,7 +758,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -774,7 +774,7 @@ class C
         public void RemoveComment_MultipleCommentedLinesSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -784,7 +784,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -801,7 +801,7 @@ class C
         public void RemoveComment_MultipleCommentedLinesAndWhitespaceSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -814,7 +814,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -834,7 +834,7 @@ class C
         public void RemoveComment_MultipleCommentedLinesWithEndCommentSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -844,7 +844,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -861,7 +861,7 @@ class C
         public void RemoveComment_MultipleLinesWithDifferentIndentationsSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
 [|    //void M()
@@ -872,7 +872,7 @@ class C
     //}|]
 }";
             var expected =
-@"
+                @"
 class C
 {
 [|    void M()
@@ -890,7 +890,7 @@ class C
         public void RemoveComment_MultiCaret()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -901,7 +901,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -919,7 +919,7 @@ class C
         public void RemoveComment_MultiSeletion()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -930,7 +930,7 @@ class C
     }
 }";
             var expected =
-@"
+                @"
 class C
 {
     void M()
@@ -949,7 +949,7 @@ class C
         {
             var surfaceMarkup = @"&lt; html &gt;@{|S1:|}";
             var csharpMarkup =
-@"
+                @"
 {|S1:class C
 {
     void M()
@@ -958,7 +958,7 @@ class C
     }
 }|}";
             var expected =
-@"&lt; html &gt;@class C
+                @"&lt; html &gt;@class C
 {
     void M()
     {
@@ -973,7 +973,7 @@ class C
         public void ToggleComment_MultipleLinesSelected()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -985,7 +985,7 @@ class C
 }";
             var expected = new string[]
             {
-@"
+                @"
 class C
 {
     void M()
@@ -995,7 +995,7 @@ class C
         //var j = 2;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -1005,7 +1005,7 @@ class C
         var j = 2;|]
     }
 }"
-        };
+            };
 
             ToggleCommentMultiple(markup, expected);
         }
@@ -1014,7 +1014,7 @@ class C
         public void ToggleComment_MultipleSelection()
         {
             var markup =
-@"
+                @"
 class C
 {
     void M()
@@ -1026,7 +1026,7 @@ class C
 }";
             var expected = new string[]
             {
-@"
+                @"
 class C
 {
     void M()
@@ -1036,7 +1036,7 @@ class C
         [|//var j = 2;|]
     }
 }",
-@"
+                @"
 class C
 {
     void M()
@@ -1046,18 +1046,24 @@ class C
         [|var j = 2;|]
     }
 }"
-        };
+            };
 
             ToggleCommentMultiple(markup, expected);
         }
 
-        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(TestWorkspace workspace)
+        internal override AbstractCommentSelectionBase<ValueTuple> GetToggleCommentCommandHandler(
+            TestWorkspace workspace
+        )
         {
-            return (AbstractCommentSelectionBase<ValueTuple>)workspace.ExportProvider.GetExportedValues<ICommandHandler>()
-                .First(export => typeof(ToggleLineCommentCommandHandler).Equals(export.GetType()));
+            return (AbstractCommentSelectionBase<ValueTuple>)
+                workspace.ExportProvider
+                    .GetExportedValues<ICommandHandler>()
+                    .First(
+                        export => typeof(ToggleLineCommentCommandHandler).Equals(export.GetType())
+                    );
         }
 
-        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition)
-            => TestWorkspace.CreateCSharp(markup, composition: composition);
+        internal override TestWorkspace GetWorkspace(string markup, TestComposition composition) =>
+            TestWorkspace.CreateCSharp(markup, composition: composition);
     }
 }

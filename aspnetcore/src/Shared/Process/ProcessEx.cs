@@ -28,7 +28,8 @@ internal sealed class ProcessEx : IDisposable
     private readonly object _testOutputLock = new object();
     private BlockingCollection<string> _stdoutLines;
     private readonly TaskCompletionSource<int> _exited;
-    private readonly CancellationTokenSource _stdoutLinesCancellationSource = new CancellationTokenSource(TimeSpan.FromMinutes(5));
+    private readonly CancellationTokenSource _stdoutLinesCancellationSource =
+        new CancellationTokenSource(TimeSpan.FromMinutes(5));
     private readonly CancellationTokenSource _processTimeoutCts;
     private bool _disposed;
 
@@ -51,7 +52,8 @@ internal sealed class ProcessEx : IDisposable
         // We greedily create a timeout exception message even though a timeout is unlikely to happen for two reasons:
         // 1. To make it less likely for Process getters to throw exceptions like "System.InvalidOperationException: Process has exited, ..."
         // 2. To ensure if/when exceptions are thrown from Process getters, these exceptions can easily be observed.
-        var timeoutExMessage = $"Process proc {proc.ProcessName} {proc.StartInfo.Arguments} timed out after {timeout}.";
+        var timeoutExMessage =
+            $"Process proc {proc.ProcessName} {proc.StartInfo.Arguments} timed out after {timeout}.";
 
         _processTimeoutCts = new CancellationTokenSource(timeout);
         _processTimeoutCts.Token.Register(() =>
@@ -88,13 +90,21 @@ internal sealed class ProcessEx : IDisposable
         }
     }
 
-    public IEnumerable<string> OutputLinesAsEnumerable => _stdoutLines.GetConsumingEnumerable(_stdoutLinesCancellationSource.Token);
+    public IEnumerable<string> OutputLinesAsEnumerable =>
+        _stdoutLines.GetConsumingEnumerable(_stdoutLinesCancellationSource.Token);
 
     public int ExitCode => _process.ExitCode;
 
     public object Id => _process.Id;
 
-    public static ProcessEx Run(ITestOutputHelper output, string workingDirectory, string command, string args = null, IDictionary<string, string> envVars = null, TimeSpan? timeout = default)
+    public static ProcessEx Run(
+        ITestOutputHelper output,
+        string workingDirectory,
+        string command,
+        string args = null,
+        IDictionary<string, string> envVars = null,
+        TimeSpan? timeout = default
+    )
     {
         var startInfo = new ProcessStartInfo(command, args)
         {
@@ -117,10 +127,13 @@ internal sealed class ProcessEx : IDisposable
 
         if (!string.IsNullOrEmpty(Environment.GetEnvironmentVariable("helix")))
         {
-            startInfo.EnvironmentVariables["NUGET_FALLBACK_PACKAGES"] = Environment.GetEnvironmentVariable("NUGET_FALLBACK_PACKAGES");
+            startInfo.EnvironmentVariables["NUGET_FALLBACK_PACKAGES"] =
+                Environment.GetEnvironmentVariable("NUGET_FALLBACK_PACKAGES");
         }
 
-        output.WriteLine($"==> {startInfo.FileName} {startInfo.Arguments} [{startInfo.WorkingDirectory}]");
+        output.WriteLine(
+            $"==> {startInfo.FileName} {startInfo.Arguments} [{startInfo.WorkingDirectory}]"
+        );
         var proc = Process.Start(startInfo);
 
         return new ProcessEx(output, proc, timeout ?? DefaultProcessTimeout);
@@ -192,7 +205,9 @@ internal sealed class ProcessEx : IDisposable
     {
         if (!_process.HasExited)
         {
-            throw new InvalidOperationException($"Process {_process.ProcessName} with pid: {_process.Id} has not finished running.");
+            throw new InvalidOperationException(
+                $"Process {_process.ProcessName} with pid: {_process.Id} has not finished running."
+            );
         }
 
         return $"Process exited with code {_process.ExitCode}\nStdErr: {Error}\nStdOut: {Output}";
@@ -210,23 +225,28 @@ internal sealed class ProcessEx : IDisposable
         {
             lock (_testOutputLock)
             {
-                _output.WriteLine($"The process didn't exit within the allotted time ({timeSpan.Value.TotalSeconds} seconds).");
+                _output.WriteLine(
+                    $"The process didn't exit within the allotted time ({timeSpan.Value.TotalSeconds} seconds)."
+                );
             }
 
             _process.Dispose();
         }
         else if (assertSuccess && _process.ExitCode != 0)
         {
-            throw new Exception($"Process exited with code {_process.ExitCode}\nStdErr: {Error}\nStdOut: {Output}");
+            throw new Exception(
+                $"Process exited with code {_process.ExitCode}\nStdErr: {Error}\nStdOut: {Output}"
+            );
         }
     }
 
-    private static string GetNugetPackagesRestorePath() => (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_RESTORE")))
-        ? typeof(ProcessEx).Assembly
-            .GetCustomAttributes<AssemblyMetadataAttribute>()
-            .FirstOrDefault(attribute => attribute.Key == "TestPackageRestorePath")
-            ?.Value
-        : Environment.GetEnvironmentVariable("NUGET_RESTORE");
+    private static string GetNugetPackagesRestorePath() =>
+        (string.IsNullOrEmpty(Environment.GetEnvironmentVariable("NUGET_RESTORE")))
+            ? typeof(ProcessEx).Assembly
+                .GetCustomAttributes<AssemblyMetadataAttribute>()
+                .FirstOrDefault(attribute => attribute.Key == "TestPackageRestorePath")
+                ?.Value
+            : Environment.GetEnvironmentVariable("NUGET_RESTORE");
 
     public void Dispose()
     {

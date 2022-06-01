@@ -20,7 +20,8 @@ public class BringUpTest_ArrayMD2
 
     static int Main()
     {
-        if (ArrayMD2(1, 1) != 42) return Fail;
+        if (ArrayMD2(1, 1) != 42)
+            return Fail;
         return Pass;
     }
 }

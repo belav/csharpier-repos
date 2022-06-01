@@ -12,8 +12,7 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
     {
         private readonly bool _isWrapper;
 
-        internal DispatchArgBuilder(Type parameterType)
-            : base(parameterType)
+        internal DispatchArgBuilder(Type parameterType) : base(parameterType)
         {
             _isWrapper = parameterType == typeof(DispatchWrapper);
         }
@@ -45,7 +44,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 Expression.Equal(parameter, Expression.Constant(null)),
                 Expression.Constant(IntPtr.Zero),
                 Expression.Call(
-                    typeof(Marshal).GetMethod(nameof(System.Runtime.InteropServices.Marshal.GetIDispatchForObject)),
+                    typeof(Marshal).GetMethod(
+                        nameof(System.Runtime.InteropServices.Marshal.GetIDispatchForObject)
+                    ),
                     parameter
                 )
             );
@@ -58,7 +59,9 @@ namespace Microsoft.CSharp.RuntimeBinder.ComInterop
                 Expression.Equal(value, Expression.Constant(IntPtr.Zero)),
                 Expression.Constant(null),
                 Expression.Call(
-                    typeof(Marshal).GetMethod(nameof(System.Runtime.InteropServices.Marshal.GetObjectForIUnknown)),
+                    typeof(Marshal).GetMethod(
+                        nameof(System.Runtime.InteropServices.Marshal.GetObjectForIUnknown)
+                    ),
                     value
                 )
             );

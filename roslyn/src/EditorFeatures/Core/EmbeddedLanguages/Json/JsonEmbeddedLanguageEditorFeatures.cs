@@ -7,7 +7,9 @@ using Microsoft.CodeAnalysis.Features.EmbeddedLanguages.Json.LanguageServices;
 
 namespace Microsoft.CodeAnalysis.Editor.EmbeddedLanguages.Json
 {
-    internal class JsonEmbeddedLanguageEditorFeatures : JsonEmbeddedLanguage, IEmbeddedLanguageEditorFeatures
+    internal class JsonEmbeddedLanguageEditorFeatures
+        : JsonEmbeddedLanguage,
+            IEmbeddedLanguageEditorFeatures
     {
         public IBraceMatcher BraceMatcher { get; }
 

@@ -10,7 +10,7 @@ using System.Linq;
 namespace System.CommandLine
 {
     /// <summary>
-    /// A symbol defining a named parameter and a value for that parameter. 
+    /// A symbol defining a named parameter and a value for that parameter.
     /// </summary>
     /// <seealso cref="IdentifierSymbol" />
     public abstract class Option : IdentifierSymbol, IValueDescriptor
@@ -19,11 +19,7 @@ namespace System.CommandLine
         private List<ValidateSymbolResult<OptionResult>>? _validators;
         private readonly Argument _argument;
 
-        internal Option(
-            string name,
-            string? description,
-            Argument argument)
-            : base(description)
+        internal Option(string name, string? description, Argument argument) : base(description)
         {
             if (name is null)
             {
@@ -38,10 +34,7 @@ namespace System.CommandLine
             _argument = argument;
         }
 
-        internal Option(
-            string[] aliases,
-            string? description,
-            Argument argument)
+        internal Option(string[] aliases, string? description, Argument argument)
             : base(description)
         {
             if (aliases is null)
@@ -51,7 +44,10 @@ namespace System.CommandLine
 
             if (aliases.Length == 0)
             {
-                throw new ArgumentException("An option must have at least one alias.", nameof(aliases));
+                throw new ArgumentException(
+                    "An option must have at least one alias.",
+                    nameof(aliases)
+                );
             }
 
             for (var i = 0; i < aliases.Length; i++)
@@ -120,7 +116,8 @@ namespace System.CommandLine
         /// Adds a validator that will be called when the option is matched by the parser.
         /// </summary>
         /// <param name="validate">A <see cref="ValidateSymbolResult{OptionResult}"/> delegate used to validate the <see cref="OptionResult"/> produced during parsing.</param>
-        public void AddValidator(ValidateSymbolResult<OptionResult> validate) => Validators.Add(validate);
+        public void AddValidator(ValidateSymbolResult<OptionResult> validate) =>
+            Validators.Add(validate);
 
         /// <summary>
         /// Indicates whether a given alias exists on the option, regardless of its prefix.
@@ -133,7 +130,13 @@ namespace System.CommandLine
 
             foreach (string existingAlias in _aliases)
             {
-                if (MemoryExtensions.Equals(existingAlias.AsSpan(existingAlias.GetPrefixLength()), rawAlias, StringComparison.CurrentCulture))
+                if (
+                    MemoryExtensions.Equals(
+                        existingAlias.AsSpan(existingAlias.GetPrefixLength()),
+                        rawAlias,
+                        StringComparison.CurrentCulture
+                    )
+                )
                 {
                     return true;
                 }
@@ -146,8 +149,7 @@ namespace System.CommandLine
         /// Sets the default value for the option.
         /// </summary>
         /// <param name="value">The default value for the option.</param>
-        public void SetDefaultValue(object? value) =>
-            Argument.SetDefaultValue(value);
+        public void SetDefaultValue(object? value) => Argument.SetDefaultValue(value);
 
         /// <summary>
         /// Sets a delegate to invoke when the default value for the option is required.
@@ -172,8 +174,10 @@ namespace System.CommandLine
         /// </example>
         public bool AllowMultipleArgumentsPerToken { get; set; }
 
-        internal virtual bool IsGreedy
-            => _argument is not null && _argument.Arity.MinimumNumberOfValues > 0 && _argument.ValueType != typeof(bool);
+        internal virtual bool IsGreedy =>
+            _argument is not null
+            && _argument.Arity.MinimumNumberOfValues > 0
+            && _argument.ValueType != typeof(bool);
 
         /// <summary>
         /// Indicates whether the option is required when its parent command is invoked.
@@ -193,7 +197,7 @@ namespace System.CommandLine
         object? IValueDescriptor.GetDefaultValue() => Argument.GetDefaultValue();
 
         private protected override string DefaultName => _name ??= GetLongestAlias();
-        
+
         private string GetLongestAlias()
         {
             string max = "";
@@ -231,8 +235,8 @@ namespace System.CommandLine
             }
 
             return completions
-                   .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
-                   .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
+                .OrderBy(item => item.SortText.IndexOfCaseInsensitive(context.WordToComplete))
+                .ThenBy(symbol => symbol.Label, StringComparer.OrdinalIgnoreCase);
         }
     }
 }

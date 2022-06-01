@@ -14,12 +14,22 @@ namespace System.Text.RegularExpressions.Tests
         /// </summary>
         /// <param name="regexOptionsArrayIndex">The index in the object array of the CompilationOptions enum.</param>
         /// <returns></returns>
-        public static IEnumerable<object[]> TransformRegexOptions(string testDataMethodName, int regexOptionsArrayIndex)
+        public static IEnumerable<object[]> TransformRegexOptions(
+            string testDataMethodName,
+            int regexOptionsArrayIndex
+        )
         {
-            IEnumerable<Type> types = Assembly.GetExecutingAssembly().GetTypes().Where(t => t.Namespace == typeof(RegexCompilationHelper).Namespace);
+            IEnumerable<Type> types = Assembly
+                .GetExecutingAssembly()
+                .GetTypes()
+                .Where(t => t.Namespace == typeof(RegexCompilationHelper).Namespace);
             foreach (Type type in types)
             {
-                IEnumerable<object[]> result = InvokeTransform(type, testDataMethodName, regexOptionsArrayIndex);
+                IEnumerable<object[]> result = InvokeTransform(
+                    type,
+                    testDataMethodName,
+                    regexOptionsArrayIndex
+                );
                 if (result != null)
                 {
                     return result;
@@ -29,14 +39,22 @@ namespace System.Text.RegularExpressions.Tests
             throw new Exception($"Test method '{testDataMethodName}' not found");
         }
 
-        private static IEnumerable<object[]> InvokeTransform(Type type, string methodName, int regexOptionsArrayIndex)
+        private static IEnumerable<object[]> InvokeTransform(
+            Type type,
+            string methodName,
+            int regexOptionsArrayIndex
+        )
         {
-            MethodInfo methodInfo = type.GetMethod(methodName, BindingFlags.Public | BindingFlags.Static);
+            MethodInfo methodInfo = type.GetMethod(
+                methodName,
+                BindingFlags.Public | BindingFlags.Static
+            );
             var data = methodInfo?.Invoke(null, null) as IEnumerable<object[]>;
 
             return data?.Select(obj =>
             {
-                obj[regexOptionsArrayIndex] = (RegexOptions)obj[regexOptionsArrayIndex] | RegexOptions.Compiled;
+                obj[regexOptionsArrayIndex] =
+                    (RegexOptions)obj[regexOptionsArrayIndex] | RegexOptions.Compiled;
                 return obj;
             });
         }

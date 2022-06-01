@@ -16,11 +16,9 @@ public class AcceptedAtRouteOfTResultTests
     public void AcceptedAtRouteResult_ProblemDetails_SetsStatusCodeAndValue()
     {
         // Arrange & Act
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-        {
-            { "test", "case" },
-            { "sample", "route" }
-        });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
         var obj = new HttpValidationProblemDetails();
         var result = new AcceptedAtRoute<HttpValidationProblemDetails>(routeValues, obj);
 
@@ -40,17 +38,16 @@ public class AcceptedAtRouteOfTResultTests
         var stream = new MemoryStream();
         httpContext.Response.Body = stream;
 
-        var routeValues = new RouteValueDictionary(new Dictionary<string, string>()
-            {
-                { "test", "case" },
-                { "sample", "route" }
-            });
+        var routeValues = new RouteValueDictionary(
+            new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+        );
 
         // Act
         var result = new AcceptedAtRoute<string>(
             routeName: "sample",
             routeValues: routeValues,
-            value: "Hello world");
+            value: "Hello world"
+        );
         await result.ExecuteAsync(httpContext);
 
         // Assert
@@ -63,19 +60,13 @@ public class AcceptedAtRouteOfTResultTests
         get
         {
             return new TheoryData<object>
-                {
-                    null,
-                    new Dictionary<string, string>()
-                    {
-                        { "hello", "world" }
-                    },
-                    new RouteValueDictionary(
-                        new Dictionary<string, string>()
-                        {
-                            { "test", "case" },
-                            { "sample", "route" }
-                        }),
-                    };
+            {
+                null,
+                new Dictionary<string, string>() { { "hello", "world" } },
+                new RouteValueDictionary(
+                    new Dictionary<string, string>() { { "test", "case" }, { "sample", "route" } }
+                ),
+            };
         }
     }
 
@@ -108,27 +99,38 @@ public class AcceptedAtRouteOfTResultTests
         var result = new AcceptedAtRoute<object>(
             routeName: null,
             routeValues: new Dictionary<string, object>(),
-            value: null);
+            value: null
+        );
 
         // Assert
-        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(() =>
-            result.ExecuteAsync(httpContext),
-            "No route matches the supplied values.");
+        await ExceptionAssert.ThrowsAsync<InvalidOperationException>(
+            () => result.ExecuteAsync(httpContext),
+            "No route matches the supplied values."
+        );
     }
 
     [Fact]
     public void PopulateMetadata_AddsResponseTypeMetadata()
     {
         // Arrange
-        AcceptedAtRoute<Todo> MyApi() { throw new NotImplementedException(); }
+        AcceptedAtRoute<Todo> MyApi()
+        {
+            throw new NotImplementedException();
+        }
         var metadata = new List<object>();
-        var context = new EndpointMetadataContext(((Delegate)MyApi).GetMethodInfo(), metadata, null);
+        var context = new EndpointMetadataContext(
+            ((Delegate)MyApi).GetMethodInfo(),
+            metadata,
+            null
+        );
 
         // Act
         PopulateMetadata<AcceptedAtRoute<Todo>>(context);
 
         // Assert
-        var producesResponseTypeMetadata = context.EndpointMetadata.OfType<ProducesResponseTypeMetadata>().Last();
+        var producesResponseTypeMetadata = context.EndpointMetadata
+            .OfType<ProducesResponseTypeMetadata>()
+            .Last();
         Assert.Equal(StatusCodes.Status202Accepted, producesResponseTypeMetadata.StatusCode);
         Assert.Equal(typeof(Todo), producesResponseTypeMetadata.Type);
         Assert.Single(producesResponseTypeMetadata.ContentTypes, "application/json");
@@ -142,14 +144,20 @@ public class AcceptedAtRouteOfTResultTests
         HttpContext httpContext = null;
 
         // Act & Assert
-        Assert.ThrowsAsync<ArgumentNullException>("httpContext", () => result.ExecuteAsync(httpContext));
+        Assert.ThrowsAsync<ArgumentNullException>(
+            "httpContext",
+            () => result.ExecuteAsync(httpContext)
+        );
     }
 
     [Fact]
     public void PopulateMetadata_ThrowsArgumentNullException_WhenContextIsNull()
     {
         // Act & Assert
-        Assert.Throws<ArgumentNullException>("context", () => PopulateMetadata<AcceptedAtRoute<object>>(null));
+        Assert.Throws<ArgumentNullException>(
+            "context",
+            () => PopulateMetadata<AcceptedAtRoute<object>>(null)
+        );
     }
 
     private static void PopulateMetadata<TResult>(EndpointMetadataContext context)

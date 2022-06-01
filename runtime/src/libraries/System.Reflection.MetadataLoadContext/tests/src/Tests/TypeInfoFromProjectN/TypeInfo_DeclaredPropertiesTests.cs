@@ -33,7 +33,6 @@ namespace System.Reflection.Tests
             VerifyProperty(typeof(TypeInfoPropertiesBaseClass).Project(), "Pubprop2");
         }
 
-
         // Verify Declared Properties for Base class
         [Fact]
         public static void TestBaseClassProperty4()
@@ -82,23 +81,54 @@ namespace System.Reflection.Tests
             }
 
             if (!found)
-                Assert.False(true, string.Format("Property {0} not found in Type {1}", name, t.Name));
+                Assert.False(
+                    true,
+                    string.Format("Property {0} not found in Type {1}", name, t.Name)
+                );
         }
     } //end class
 
     //Metadata for Reflection
     public class TypeInfoPropertiesBaseClass
     {
-        public string Pubprop1 { get { return ""; } set { } }
-        public string SubPubprop1 { get { return ""; } set { } }
-        public virtual string Pubprop2 { get { return ""; } set { } }
-        public static string Pubprop3 { get { return ""; } set { } }
+        public string Pubprop1
+        {
+            get { return ""; }
+            set { }
+        }
+        public string SubPubprop1
+        {
+            get { return ""; }
+            set { }
+        }
+        public virtual string Pubprop2
+        {
+            get { return ""; }
+            set { }
+        }
+        public static string Pubprop3
+        {
+            get { return ""; }
+            set { }
+        }
     }
 
     public class TypeInfoPropertiesSubClass : TypeInfoPropertiesBaseClass
     {
-        public new string Pubprop1 { get { return ""; } set { } }
-        public new virtual string Pubprop2 { get { return ""; } set { } }
-        public static new string Pubprop3 { get { return ""; } set { } }
+        public new string Pubprop1
+        {
+            get { return ""; }
+            set { }
+        }
+        public new virtual string Pubprop2
+        {
+            get { return ""; }
+            set { }
+        }
+        public static new string Pubprop3
+        {
+            get { return ""; }
+            set { }
+        }
     }
 }

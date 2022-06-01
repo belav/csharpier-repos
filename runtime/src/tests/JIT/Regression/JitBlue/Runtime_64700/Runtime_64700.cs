@@ -11,7 +11,10 @@ class Runtime_64700
 
     static int Main()
     {
-        _structWithVtorsStatic = new StructWithVtors { StructWithOneVtor = { OneVtor = new Vector2(1, 0) } };
+        _structWithVtorsStatic = new StructWithVtors
+        {
+            StructWithOneVtor = { OneVtor = new Vector2(1, 0) }
+        };
 
         if (ProblemWithCopyProp(0) != 0)
         {

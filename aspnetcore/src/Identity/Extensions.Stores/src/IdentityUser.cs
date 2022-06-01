@@ -147,6 +147,5 @@ public class IdentityUser<TKey> where TKey : IEquatable<TKey>
     /// <summary>
     /// Returns the username for this user.
     /// </summary>
-    public override string ToString()
-        => UserName ?? string.Empty;
+    public override string ToString() => UserName ?? string.Empty;
 }

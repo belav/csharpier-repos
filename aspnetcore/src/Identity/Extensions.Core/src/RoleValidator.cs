@@ -49,8 +49,11 @@ public class RoleValidator<TRole> : IRoleValidator<TRole> where TRole : class
         return IdentityResult.Success;
     }
 
-    private async Task ValidateRoleName(RoleManager<TRole> manager, TRole role,
-        ICollection<IdentityError> errors)
+    private async Task ValidateRoleName(
+        RoleManager<TRole> manager,
+        TRole role,
+        ICollection<IdentityError> errors
+    )
     {
         var roleName = await manager.GetRoleNameAsync(role).ConfigureAwait(false);
         if (string.IsNullOrWhiteSpace(roleName))
@@ -60,8 +63,13 @@ public class RoleValidator<TRole> : IRoleValidator<TRole> where TRole : class
         else
         {
             var owner = await manager.FindByNameAsync(roleName).ConfigureAwait(false);
-            if (owner != null &&
-                !string.Equals(await manager.GetRoleIdAsync(owner).ConfigureAwait(false), await manager.GetRoleIdAsync(role).ConfigureAwait(false)))
+            if (
+                owner != null
+                && !string.Equals(
+                    await manager.GetRoleIdAsync(owner).ConfigureAwait(false),
+                    await manager.GetRoleIdAsync(role).ConfigureAwait(false)
+                )
+            )
             {
                 errors.Add(Describer.DuplicateRoleName(roleName));
             }

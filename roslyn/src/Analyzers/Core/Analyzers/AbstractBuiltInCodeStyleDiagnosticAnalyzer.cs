@@ -43,8 +43,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
-            bool configurable = true)
-            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+            bool configurable = true
+        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             AddDiagnosticIdToOptionMapping(diagnosticId, option);
         }
@@ -75,8 +75,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
-            bool configurable = true)
-            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+            bool configurable = true
+        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             AddDiagnosticIdToOptionMapping(diagnosticId, option, language);
         }
@@ -104,8 +104,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
-            bool configurable = true)
-            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+            bool configurable = true
+        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             RoslynDebug.Assert(options != null);
             Debug.Assert(options.Count > 1);
@@ -137,8 +137,8 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             LocalizableString title,
             LocalizableString? messageFormat = null,
             bool isUnnecessary = false,
-            bool configurable = true)
-            : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
+            bool configurable = true
+        ) : this(diagnosticId, enforceOnBuild, title, messageFormat, isUnnecessary, configurable)
         {
             RoslynDebug.Assert(options != null);
             Debug.Assert(options.Count > 1);
@@ -148,8 +148,12 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// <summary>
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors with per-language options that can be used to configure each descriptor.
         /// </summary>
-        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(ImmutableDictionary<DiagnosticDescriptor, IPerLanguageOption> supportedDiagnosticsWithOptions)
-            : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
+        protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
+            ImmutableDictionary<
+                DiagnosticDescriptor,
+                IPerLanguageOption
+            > supportedDiagnosticsWithOptions
+        ) : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
         {
             foreach (var (descriptor, option) in supportedDiagnosticsWithOptions)
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option);
@@ -159,9 +163,12 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors with language-specific options that can be used to configure each descriptor.
         /// </summary>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
-            ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption> supportedDiagnosticsWithOptions,
-            string language)
-            : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
+            ImmutableDictionary<
+                DiagnosticDescriptor,
+                ILanguageSpecificOption
+            > supportedDiagnosticsWithOptions,
+            string language
+        ) : this(supportedDiagnosticsWithOptions.Keys.ToImmutableArray())
         {
             foreach (var (descriptor, option) in supportedDiagnosticsWithOptions)
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option, language);
@@ -171,10 +178,21 @@ namespace Microsoft.CodeAnalysis.CodeStyle
         /// Constructor for a code style analyzer with a multiple diagnostic descriptors with a mix of language-specific and per-language options that can be used to configure each descriptor.
         /// </summary>
         protected AbstractBuiltInCodeStyleDiagnosticAnalyzer(
-            ImmutableDictionary<DiagnosticDescriptor, ILanguageSpecificOption> supportedDiagnosticsWithLangaugeSpecificOptions,
-            ImmutableDictionary<DiagnosticDescriptor, IPerLanguageOption> supportedDiagnosticsWithPerLanguageOptions,
-            string language)
-            : this(supportedDiagnosticsWithLangaugeSpecificOptions.Keys.Concat(supportedDiagnosticsWithPerLanguageOptions.Keys).ToImmutableArray())
+            ImmutableDictionary<
+                DiagnosticDescriptor,
+                ILanguageSpecificOption
+            > supportedDiagnosticsWithLangaugeSpecificOptions,
+            ImmutableDictionary<
+                DiagnosticDescriptor,
+                IPerLanguageOption
+            > supportedDiagnosticsWithPerLanguageOptions,
+            string language
+        )
+            : this(
+                supportedDiagnosticsWithLangaugeSpecificOptions.Keys
+                    .Concat(supportedDiagnosticsWithPerLanguageOptions.Keys)
+                    .ToImmutableArray()
+            )
         {
             foreach (var (descriptor, option) in supportedDiagnosticsWithLangaugeSpecificOptions)
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option, language);
@@ -183,7 +201,10 @@ namespace Microsoft.CodeAnalysis.CodeStyle
                 AddDiagnosticIdToOptionMapping(descriptor.Id, option);
         }
 
-        private static void AddDiagnosticIdToOptionMapping(string diagnosticId, IPerLanguageOption? option)
+        private static void AddDiagnosticIdToOptionMapping(
+            string diagnosticId,
+            IPerLanguageOption? option
+        )
         {
             if (option != null)
             {
@@ -191,23 +212,35 @@ namespace Microsoft.CodeAnalysis.CodeStyle
             }
         }
 
-        private static void AddDiagnosticIdToOptionMapping(string diagnosticId, ILanguageSpecificOption? option, string language)
+        private static void AddDiagnosticIdToOptionMapping(
+            string diagnosticId,
+            ILanguageSpecificOption? option,
+            string language
+        )
         {
             if (option != null)
             {
-                AddDiagnosticIdToOptionMapping(diagnosticId, ImmutableHashSet.Create(option), language);
+                AddDiagnosticIdToOptionMapping(
+                    diagnosticId,
+                    ImmutableHashSet.Create(option),
+                    language
+                );
             }
         }
 
-        private static void AddDiagnosticIdToOptionMapping(string diagnosticId, ImmutableHashSet<IPerLanguageOption> options)
-            => IDEDiagnosticIdToOptionMappingHelper.AddOptionMapping(diagnosticId, options);
+        private static void AddDiagnosticIdToOptionMapping(
+            string diagnosticId,
+            ImmutableHashSet<IPerLanguageOption> options
+        ) => IDEDiagnosticIdToOptionMappingHelper.AddOptionMapping(diagnosticId, options);
 
-        private static void AddDiagnosticIdToOptionMapping(string diagnosticId, ImmutableHashSet<ILanguageSpecificOption> options, string language)
-            => IDEDiagnosticIdToOptionMappingHelper.AddOptionMapping(diagnosticId, options, language);
+        private static void AddDiagnosticIdToOptionMapping(
+            string diagnosticId,
+            ImmutableHashSet<ILanguageSpecificOption> options,
+            string language
+        ) => IDEDiagnosticIdToOptionMappingHelper.AddOptionMapping(diagnosticId, options, language);
 
         public abstract DiagnosticAnalyzerCategory GetAnalyzerCategory();
 
-        public virtual bool OpenFileOnly(SimplifierOptions? options)
-            => false;
+        public virtual bool OpenFileOnly(SimplifierOptions? options) => false;
     }
 }

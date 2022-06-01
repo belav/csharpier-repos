@@ -23,13 +23,19 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
     public async Task AcceptAsync_AfterUnbind_Error()
     {
         // Arrange
-        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(
+            LoggerFactory
+        );
 
         // Act
         await connectionListener.UnbindAsync().DefaultTimeout();
 
         // Assert
-        await Assert.ThrowsAsync<ObjectDisposedException>(() => connectionListener.AcceptAndAddFeatureAsync().AsTask()).DefaultTimeout();
+        await Assert
+            .ThrowsAsync<ObjectDisposedException>(
+                () => connectionListener.AcceptAndAddFeatureAsync().AsTask()
+            )
+            .DefaultTimeout();
     }
 
     [ConditionalFact]
@@ -37,14 +43,19 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
     public async Task AcceptAsync_ClientCreatesConnection_ServerAccepts()
     {
         // Arrange
-        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory);
+        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(
+            LoggerFactory
+        );
 
         // Act
         var acceptTask = connectionListener.AcceptAndAddFeatureAsync().DefaultTimeout();
 
         var options = QuicTestHelpers.CreateClientConnectionOptions(connectionListener.EndPoint);
 
-        using var clientConnection = new QuicConnection(QuicImplementationProviders.MsQuic, options);
+        using var clientConnection = new QuicConnection(
+            QuicImplementationProviders.MsQuic,
+            options
+        );
         await clientConnection.ConnectAsync().DefaultTimeout();
 
         // Assert
@@ -60,16 +71,25 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
     [ConditionalFact]
     [MsQuicSupported]
     [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
-    [MaximumOSVersion(OperatingSystems.Windows, WindowsVersions.Win10_20H2,
-        SkipReason = "Windows versions newer than 20H2 do not enable TLS 1.1: https://github.com/dotnet/aspnetcore/issues/37761")]
+    [MaximumOSVersion(
+        OperatingSystems.Windows,
+        WindowsVersions.Win10_20H2,
+        SkipReason = "Windows versions newer than 20H2 do not enable TLS 1.1: https://github.com/dotnet/aspnetcore/issues/37761"
+    )]
     public async Task ClientCertificate_Required_Sent_Populated()
     {
         // Arrange
-        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory, clientCertificateRequired: true);
+        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(
+            LoggerFactory,
+            clientCertificateRequired: true
+        );
 
         var options = QuicTestHelpers.CreateClientConnectionOptions(connectionListener.EndPoint);
         var testCert = TestResources.GetTestCertificate();
-        options.ClientAuthenticationOptions.ClientCertificates = new X509CertificateCollection { testCert };
+        options.ClientAuthenticationOptions.ClientCertificates = new X509CertificateCollection
+        {
+            testCert
+        };
 
         // Act
         using var quicConnection = new QuicConnection(options);
@@ -90,7 +110,10 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
         AssertTlsConnectionFeature(serverConnection.Features, testCert);
         AssertTlsConnectionFeature(serverStream.Features, testCert);
 
-        static void AssertTlsConnectionFeature(IFeatureCollection features, X509Certificate2 testCert)
+        static void AssertTlsConnectionFeature(
+            IFeatureCollection features,
+            X509Certificate2 testCert
+        )
         {
             var tlsFeature = features.Get<ITlsConnectionFeature>();
             Assert.NotNull(tlsFeature);
@@ -106,12 +129,17 @@ public class QuicConnectionListenerTests : TestApplicationErrorLoggerLoggedTest
     [OSSkipCondition(OperatingSystems.Linux | OperatingSystems.MacOSX)]
     public async Task ClientCertificate_Required_NotSent_ConnectionAborted()
     {
-        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(LoggerFactory, clientCertificateRequired: true);
+        await using var connectionListener = await QuicTestHelpers.CreateConnectionListenerFactory(
+            LoggerFactory,
+            clientCertificateRequired: true
+        );
 
         var options = QuicTestHelpers.CreateClientConnectionOptions(connectionListener.EndPoint);
         using var clientConnection = new QuicConnection(options);
 
-        var qex = await Assert.ThrowsAnyAsync<QuicException>(async () => await clientConnection.ConnectAsync().DefaultTimeout());
+        var qex = await Assert.ThrowsAnyAsync<QuicException>(
+            async () => await clientConnection.ConnectAsync().DefaultTimeout()
+        );
         Assert.StartsWith("Connection has been shutdown by transport:", qex.Message);
     }
 }

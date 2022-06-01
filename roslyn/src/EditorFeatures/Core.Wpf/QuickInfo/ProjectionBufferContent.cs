@@ -37,8 +37,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             IEditorOptionsFactoryService editorOptionsFactoryService,
             ITextEditorFactoryService textEditorFactoryService,
             IContentType contentType = null,
-            ITextViewRoleSet roleSet = null)
-            : base(threadingContext)
+            ITextViewRoleSet roleSet = null
+        ) : base(threadingContext)
         {
             _spans = spans;
             _projectionBufferFactoryService = projectionBufferFactoryService;
@@ -55,7 +55,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
             IEditorOptionsFactoryService editorOptionsFactoryService,
             ITextEditorFactoryService textEditorFactoryService,
             IContentType contentType = null,
-            ITextViewRoleSet roleSet = null)
+            ITextViewRoleSet roleSet = null
+        )
         {
             var content = new ProjectionBufferContent(
                 threadingContext,
@@ -64,7 +65,8 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
                 editorOptionsFactoryService,
                 textEditorFactoryService,
                 contentType,
-                roleSet);
+                roleSet
+            );
 
             return content.Create();
         }
@@ -95,7 +97,10 @@ namespace Microsoft.CodeAnalysis.Editor.QuickInfo
         private IProjectionBuffer CreateBuffer()
         {
             return _projectionBufferFactoryService.CreateProjectionBufferWithoutIndentation(
-                _editorOptionsFactoryService.GlobalOptions, _contentType, _spans.ToArray());
+                _editorOptionsFactoryService.GlobalOptions,
+                _contentType,
+                _spans.ToArray()
+            );
         }
     }
 }

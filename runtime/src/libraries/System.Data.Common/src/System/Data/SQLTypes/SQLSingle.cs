@@ -21,6 +21,7 @@ namespace System.Data.SqlTypes
     {
         private bool _fNotNull; // false if null
         private float _value;
+
         // constructor
         // construct a Null
         private SqlSingle(bool fNull)
@@ -42,9 +43,7 @@ namespace System.Data.SqlTypes
             }
         }
 
-        public SqlSingle(double value) : this(checked((float)value))
-        {
-        }
+        public SqlSingle(double value) : this(checked((float)value)) { }
 
         // INullable
         public bool IsNull
@@ -89,13 +88,11 @@ namespace System.Data.SqlTypes
                 return new SqlSingle(float.Parse(s, CultureInfo.InvariantCulture));
         }
 
-
         // Unary operators
         public static SqlSingle operator -(SqlSingle x)
         {
             return x.IsNull ? Null : new SqlSingle(-x._value);
         }
-
 
         // Binary operators
 
@@ -155,8 +152,6 @@ namespace System.Data.SqlTypes
             return new SqlSingle(value);
         }
 
-
-
         // Implicit conversions
 
         // Implicit conversion from SqlBoolean to SqlSingle
@@ -205,7 +200,6 @@ namespace System.Data.SqlTypes
             // Will not overflow
             return x.IsNull ? Null : new SqlSingle(x.ToDouble());
         }
-
 
         // Explicit conversions
 
@@ -265,6 +259,7 @@ namespace System.Data.SqlTypes
         {
             return x + y;
         }
+
         // Alternative method for operator -
         public static SqlSingle Subtract(SqlSingle x, SqlSingle y)
         {
@@ -366,7 +361,6 @@ namespace System.Data.SqlTypes
             return (SqlString)this;
         }
 
-
         // IComparable
         // Compares this object to another object, returning an integer that
         // indicates the relationship.
@@ -394,8 +388,10 @@ namespace System.Data.SqlTypes
             else if (value.IsNull)
                 return 1;
 
-            if (this < value) return -1;
-            if (this > value) return 1;
+            if (this < value)
+                return -1;
+            if (this > value)
+                return 1;
             return 0;
         }
 
@@ -407,13 +403,15 @@ namespace System.Data.SqlTypes
         /// <param name="other">An instance to compare with this instance.</param>
         /// <returns>true if the current instance is equal to the other instance; otherwise, false.</returns>
         public bool Equals(SqlSingle other) =>
-            other.IsNull || IsNull ? other.IsNull && IsNull :
-            (this == other).Value;
+            other.IsNull || IsNull ? other.IsNull && IsNull : (this == other).Value;
 
         // For hashing purpose
         public override int GetHashCode() => IsNull ? 0 : Value.GetHashCode();
 
-        XmlSchema? IXmlSerializable.GetSchema() { return null; }
+        XmlSchema? IXmlSerializable.GetSchema()
+        {
+            return null;
+        }
 
         void IXmlSerializable.ReadXml(XmlReader reader)
         {

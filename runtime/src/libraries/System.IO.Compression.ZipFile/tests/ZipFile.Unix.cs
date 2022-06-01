@@ -17,7 +17,9 @@ namespace System.IO.Compression.Tests
             // '7600' tests that S_ISUID, S_ISGID, and S_ISVTX bits get preserved in ExternalAttributes
             string[] testPermissions = new[] { "777", "755", "644", "600", "7600" };
 
-            using (var tempFolder = new TempDirectory(Path.Combine(GetTestFilePath(), "testFolder")))
+            using (
+                var tempFolder = new TempDirectory(Path.Combine(GetTestFilePath(), "testFolder"))
+            )
             {
                 string[] expectedPermissions = CreateFiles(tempFolder.Path, testPermissions);
 
@@ -31,17 +33,27 @@ namespace System.IO.Compression.Tests
                     foreach (ZipArchiveEntry entry in archive.Entries)
                     {
                         Assert.EndsWith(".txt", entry.Name, StringComparison.Ordinal);
-                        EnsureExternalAttributes(entry.Name.Substring(0, entry.Name.Length - 4), entry);
+                        EnsureExternalAttributes(
+                            entry.Name.Substring(0, entry.Name.Length - 4),
+                            entry
+                        );
                     }
 
                     void EnsureExternalAttributes(string permissions, ZipArchiveEntry entry)
                     {
-                        Assert.Equal(Convert.ToInt32(permissions, 8), (entry.ExternalAttributes >> 16) & 0xFFF);
+                        Assert.Equal(
+                            Convert.ToInt32(permissions, 8),
+                            (entry.ExternalAttributes >> 16) & 0xFFF
+                        );
                     }
                 }
 
                 // test that round tripping the archive has the same file permissions
-                using (var extractFolder = new TempDirectory(Path.Combine(GetTestFilePath(), "extract")))
+                using (
+                    var extractFolder = new TempDirectory(
+                        Path.Combine(GetTestFilePath(), "extract")
+                    )
+                )
                 {
                     ZipFile.ExtractToDirectory(archivePath, extractFolder.Path);
 
@@ -97,7 +109,7 @@ namespace System.IO.Compression.Tests
 
             for (int i = 0; i < testPermissions.Length; i++)
             {
-                string permissions =  testPermissions[i];
+                string permissions = testPermissions[i];
                 string filename = Path.Combine(folderPath, $"{permissions}.txt");
                 File.WriteAllText(filename, "contents");
 
@@ -132,7 +144,10 @@ namespace System.IO.Compression.Tests
 
             // note that we don't extract S_ISUID, S_ISGID, and S_ISVTX bits,
             // so only use the last 3 numbers of permissions to verify the file permissions
-            permissions = permissions.Length > 3 ? permissions.Substring(permissions.Length - 3) : permissions;
+            permissions =
+                permissions.Length > 3
+                    ? permissions.Substring(permissions.Length - 3)
+                    : permissions;
             Assert.Equal(Convert.ToInt32(permissions, 8), status.Mode & 0xFFF);
         }
 
@@ -162,8 +177,16 @@ namespace System.IO.Compression.Tests
         }
 
         [Fact]
-        [PlatformSpecific(TestPlatforms.AnyUnix & ~TestPlatforms.Browser & ~TestPlatforms.tvOS & ~TestPlatforms.iOS)]
-        [SkipOnPlatform(TestPlatforms.LinuxBionic, "Bionic is not normal Linux, has no normal file permissions")]
+        [PlatformSpecific(
+            TestPlatforms.AnyUnix
+                & ~TestPlatforms.Browser
+                & ~TestPlatforms.tvOS
+                & ~TestPlatforms.iOS
+        )]
+        [SkipOnPlatform(
+            TestPlatforms.LinuxBionic,
+            "Bionic is not normal Linux, has no normal file permissions"
+        )]
         public async Task CanZipNamedPipe()
         {
             string destPath = Path.Combine(TestDirectory, "dest.zip");
@@ -171,14 +194,27 @@ namespace System.IO.Compression.Tests
             string subFolderPath = Path.Combine(TestDirectory, "subfolder");
             string fifoPath = Path.Combine(subFolderPath, "namedPipe");
             Directory.CreateDirectory(subFolderPath); // mandatory before calling mkfifo
-            Assert.Equal(0, mkfifo(fifoPath, 438 /* 666 in octal */));
+            Assert.Equal(
+                0,
+                mkfifo(
+                    fifoPath,
+                    438 /* 666 in octal */
+                )
+            );
 
             byte[] contentBytes = { 1, 2, 3, 4, 5 };
 
             await Task.WhenAll(
                 Task.Run(() =>
                 {
-                    using FileStream fs = new (fifoPath, FileMode.Open, FileAccess.Write, FileShare.Read, bufferSize: 0);
+                    using FileStream fs =
+                        new(
+                            fifoPath,
+                            FileMode.Open,
+                            FileAccess.Write,
+                            FileShare.Read,
+                            bufferSize: 0
+                        );
                     foreach (byte content in contentBytes)
                     {
                         fs.WriteByte(content);
@@ -195,7 +231,8 @@ namespace System.IO.Compression.Tests
                     Assert.Equal(contentBytes.Length, unzippedPipe.Read(readBytes));
                     Assert.Equal<byte>(contentBytes, readBytes);
                     Assert.Equal(0, unzippedPipe.Read(readBytes)); // EOF
-                }));
+                })
+            );
         }
 
         private static string GetExpectedPermissions(string expectedPermissions)

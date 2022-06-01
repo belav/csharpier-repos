@@ -53,18 +53,28 @@ namespace System.Web.Http.Dispatcher
 
         private Dictionary<string, ILookup<string, Type>> InitializeCache()
         {
-            IAssembliesResolver assembliesResolver = _configuration.Services.GetAssembliesResolver();
-            IHttpControllerTypeResolver controllersResolver = _configuration.Services.GetHttpControllerTypeResolver();
+            IAssembliesResolver assembliesResolver =
+                _configuration.Services.GetAssembliesResolver();
+            IHttpControllerTypeResolver controllersResolver =
+                _configuration.Services.GetHttpControllerTypeResolver();
 
-            ICollection<Type> controllerTypes = controllersResolver.GetControllerTypes(assembliesResolver);
+            ICollection<Type> controllerTypes = controllersResolver.GetControllerTypes(
+                assembliesResolver
+            );
             var groupedByName = controllerTypes.GroupBy(
-                t => t.Name.Substring(0, t.Name.Length - DefaultHttpControllerSelector.ControllerSuffix.Length),
-                StringComparer.OrdinalIgnoreCase);
+                t =>
+                    t.Name.Substring(
+                        0,
+                        t.Name.Length - DefaultHttpControllerSelector.ControllerSuffix.Length
+                    ),
+                StringComparer.OrdinalIgnoreCase
+            );
 
             return groupedByName.ToDictionary(
                 g => g.Key,
                 g => g.ToLookup(t => t.Namespace ?? String.Empty, StringComparer.OrdinalIgnoreCase),
-                StringComparer.OrdinalIgnoreCase);
+                StringComparer.OrdinalIgnoreCase
+            );
         }
     }
 }

@@ -91,14 +91,16 @@ namespace System.Tests
         [Fact]
         public static void GetUnderlyingType_NullType_ThrowsArgumentNullException()
         {
-            AssertExtensions.Throws<ArgumentNullException>("nullableType", () => Nullable.GetUnderlyingType((Type)null));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "nullableType",
+                () => Nullable.GetUnderlyingType((Type)null)
+            );
         }
 
         [Fact]
         public static void GetValueRefOrDefaultRef_WithValue()
         {
-            static void Test<T>(T before, T after)
-                where T : struct
+            static void Test<T>(T before, T after) where T : struct
             {
                 T? nullable = before;
                 ref readonly T reference = ref Nullable.GetValueRefOrDefaultRef(nullable);
@@ -120,8 +122,7 @@ namespace System.Tests
         [Fact]
         public static void GetValueRefOrDefaultRef_WithDefault()
         {
-            static void Test<T>()
-                where T : struct
+            static void Test<T>() where T : struct
             {
                 T? nullable = null;
                 ref readonly T reference = ref Nullable.GetValueRefOrDefaultRef(nullable);
@@ -139,8 +140,7 @@ namespace System.Tests
         [Fact]
         public static void GetValueRefOrDefaultRef_UnsafeWriteToNullMaintainsExpectedBehavior()
         {
-            static void Test<T>(T after)
-               where T : struct
+            static void Test<T>(T after) where T : struct
             {
                 T? nullable = null;
                 ref readonly T reference = ref Nullable.GetValueRefOrDefaultRef(nullable);
@@ -216,8 +216,11 @@ namespace System.Tests
         private struct MutatingStruct
         {
             public int Value;
+
             public override string ToString() => Value++.ToString();
+
             public override bool Equals(object obj) => Value++.Equals(null);
+
             public override int GetHashCode() => Value++.GetHashCode();
         }
 

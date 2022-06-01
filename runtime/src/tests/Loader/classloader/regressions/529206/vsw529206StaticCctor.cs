@@ -16,70 +16,66 @@ class BadInit
     }
 }
 
-
 class Test
 {
-	public static bool pass;
-	
-    	public static void foo()
-    	{
-    		Console.WriteLine(new BadInit());
-   	}
+    public static bool pass;
 
-    	public static void One()
-    	{
-    		try
-        	{
-            		foo();
-        	}
-       		catch (TypeInitializationException e)
-        	{
-            		Console.WriteLine(e);
-        	}
-    	}
+    public static void foo()
+    {
+        Console.WriteLine(new BadInit());
+    }
 
+    public static void One()
+    {
+        try
+        {
+            foo();
+        }
+        catch (TypeInitializationException e)
+        {
+            Console.WriteLine(e);
+        }
+    }
 
-    	public static void Two()
-    	{
-    		try
-        	{
-            		foo();
-        	}
-        	catch (TypeInitializationException e)
-        	{
-            		Console.WriteLine(e);
+    public static void Two()
+    {
+        try
+        {
+            foo();
+        }
+        catch (TypeInitializationException e)
+        {
+            Console.WriteLine(e);
 
-			// if this string is found in the callstack it means we're appending callstack 
-			// instead of having a new one each time.
-			if (e.StackTrace.IndexOf("   at Test.One()") != -1)
-			{
-				Console.WriteLine("2nd time: Incorrect stack trace");
-				pass = false;
-			}
-        	}
+            // if this string is found in the callstack it means we're appending callstack
+            // instead of having a new one each time.
+            if (e.StackTrace.IndexOf("   at Test.One()") != -1)
+            {
+                Console.WriteLine("2nd time: Incorrect stack trace");
+                pass = false;
+            }
+        }
+    }
 
-    	}
+    public static int Main()
+    {
+        pass = true;
 
+        Console.WriteLine("Loading BadInit the first time...\n");
+        One();
 
-    	public static int Main()
-    	{
-    		pass = true;
-			
-    		Console.WriteLine("Loading BadInit the first time...\n");
-        	One();
+        Console.WriteLine("\nLoading BadInit the second time...\n");
+        Two();
 
-        	Console.WriteLine("\nLoading BadInit the second time...\n");
-        	Two();
-
-		if (pass)
-		{
-			Console.WriteLine("PASS");
-			return 100;
-		}
-		else
-		{
-			Console.WriteLine("FAIL");
-			return 101;
-		}
-    	}
+        if (pass)
+        {
+            Console.WriteLine("PASS");
+            return 100;
+        }
+        else
+        {
+            Console.WriteLine("FAIL");
+            return 101;
+        }
+    }
 }

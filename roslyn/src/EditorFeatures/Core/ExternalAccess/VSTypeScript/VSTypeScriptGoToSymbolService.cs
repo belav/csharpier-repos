@@ -18,10 +18,10 @@ namespace Microsoft.CodeAnalysis.ExternalAccess.VSTypeScript
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
-        public VSTypeScriptGoToSymbolService(IVSTypeScriptGoToSymbolServiceImplementation impl)
-            => _impl = impl;
+        public VSTypeScriptGoToSymbolService(IVSTypeScriptGoToSymbolServiceImplementation impl) =>
+            _impl = impl;
 
-        public Task GetSymbolsAsync(GoToSymbolContext context)
-            => _impl.GetSymbolsAsync(new VSTypeScriptGoToSymbolContext(context));
+        public Task GetSymbolsAsync(GoToSymbolContext context) =>
+            _impl.GetSymbolsAsync(new VSTypeScriptGoToSymbolContext(context));
     }
 }

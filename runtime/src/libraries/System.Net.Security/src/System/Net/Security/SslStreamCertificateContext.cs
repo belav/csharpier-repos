@@ -13,12 +13,21 @@ namespace System.Net.Security
         internal readonly SslCertificateTrust? Trust;
 
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public static SslStreamCertificateContext Create(X509Certificate2 target, X509Certificate2Collection? additionalCertificates, bool offline)
+        public static SslStreamCertificateContext Create(
+            X509Certificate2 target,
+            X509Certificate2Collection? additionalCertificates,
+            bool offline
+        )
         {
             return Create(target, additionalCertificates, offline, null);
         }
 
-        public static SslStreamCertificateContext Create(X509Certificate2 target, X509Certificate2Collection? additionalCertificates, bool offline = false, SslCertificateTrust? trust = null)
+        public static SslStreamCertificateContext Create(
+            X509Certificate2 target,
+            X509Certificate2Collection? additionalCertificates,
+            bool offline = false,
+            SslCertificateTrust? trust = null
+        )
         {
             if (!target.HasPrivateKey)
             {
@@ -94,7 +103,11 @@ namespace System.Net.Security
 
         internal SslStreamCertificateContext Duplicate()
         {
-            return new SslStreamCertificateContext(new X509Certificate2(Certificate), IntermediateCertificates, Trust);
+            return new SslStreamCertificateContext(
+                new X509Certificate2(Certificate),
+                IntermediateCertificates,
+                Trust
+            );
         }
     }
 }

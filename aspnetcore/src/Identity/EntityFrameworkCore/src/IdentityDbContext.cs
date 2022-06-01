@@ -26,7 +26,8 @@ public class IdentityDbContext : IdentityDbContext<IdentityUser, IdentityRole, s
 /// Base class for the Entity Framework database context used for identity.
 /// </summary>
 /// <typeparam name="TUser">The type of the user objects.</typeparam>
-public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, string> where TUser : IdentityUser
+public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, string>
+    where TUser : IdentityUser
 {
     /// <summary>
     /// Initializes a new instance of <see cref="IdentityDbContext"/>.
@@ -46,7 +47,17 @@ public class IdentityDbContext<TUser> : IdentityDbContext<TUser, IdentityRole, s
 /// <typeparam name="TUser">The type of user objects.</typeparam>
 /// <typeparam name="TRole">The type of role objects.</typeparam>
 /// <typeparam name="TKey">The type of the primary key for users and roles.</typeparam>
-public class IdentityDbContext<TUser, TRole, TKey> : IdentityDbContext<TUser, TRole, TKey, IdentityUserClaim<TKey>, IdentityUserRole<TKey>, IdentityUserLogin<TKey>, IdentityRoleClaim<TKey>, IdentityUserToken<TKey>>
+public class IdentityDbContext<TUser, TRole, TKey>
+    : IdentityDbContext<
+        TUser,
+        TRole,
+        TKey,
+        IdentityUserClaim<TKey>,
+        IdentityUserRole<TKey>,
+        IdentityUserLogin<TKey>,
+        IdentityRoleClaim<TKey>,
+        IdentityUserToken<TKey>
+    >
     where TUser : IdentityUser<TKey>
     where TRole : IdentityRole<TKey>
     where TKey : IEquatable<TKey>
@@ -74,7 +85,16 @@ public class IdentityDbContext<TUser, TRole, TKey> : IdentityDbContext<TUser, TR
 /// <typeparam name="TUserLogin">The type of the user login object.</typeparam>
 /// <typeparam name="TRoleClaim">The type of the role claim object.</typeparam>
 /// <typeparam name="TUserToken">The type of the user token object.</typeparam>
-public abstract class IdentityDbContext<TUser, TRole, TKey, TUserClaim, TUserRole, TUserLogin, TRoleClaim, TUserToken> : IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
+public abstract class IdentityDbContext<
+    TUser,
+    TRole,
+    TKey,
+    TUserClaim,
+    TUserRole,
+    TUserLogin,
+    TRoleClaim,
+    TUserToken
+> : IdentityUserContext<TUser, TKey, TUserClaim, TUserLogin, TUserToken>
     where TUser : IdentityUser<TKey>
     where TRole : IdentityRole<TKey>
     where TKey : IEquatable<TKey>

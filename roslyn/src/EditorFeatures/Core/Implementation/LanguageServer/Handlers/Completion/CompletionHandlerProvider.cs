@@ -20,14 +20,20 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
     [ProvidesMethod(LSP.Methods.TextDocumentCompletionResolveName)]
     internal class CompletionHandlerProvider : AbstractRequestHandlerProvider
     {
-        private readonly IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>> _completionProviders;
+        private readonly IEnumerable<
+            Lazy<CompletionProvider, CompletionProviderMetadata>
+        > _completionProviders;
         private readonly IGlobalOptionService _globalOptions;
 
         [ImportingConstructor]
         [Obsolete(MefConstruction.ImportingConstructorMessage, error: true)]
         public CompletionHandlerProvider(
             IGlobalOptionService globalOptions,
-            [ImportMany] IEnumerable<Lazy<CompletionProvider, CompletionProviderMetadata>> completionProviders)
+            [ImportMany]
+                IEnumerable<
+                Lazy<CompletionProvider, CompletionProviderMetadata>
+            > completionProviders
+        )
         {
             _globalOptions = globalOptions;
             _completionProviders = completionProviders;
@@ -38,7 +44,8 @@ namespace Microsoft.CodeAnalysis.LanguageServer.Handler
             var completionListCache = new CompletionListCache();
             return ImmutableArray.Create<IRequestHandler>(
                 new CompletionHandler(_globalOptions, _completionProviders, completionListCache),
-                new CompletionResolveHandler(completionListCache));
+                new CompletionResolveHandler(completionListCache)
+            );
         }
     }
 }

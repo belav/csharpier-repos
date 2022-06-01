@@ -14,11 +14,14 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type typeToConvert)
             {
-                return (typeToConvert == typeof(Customer) ||
-                    typeToConvert == typeof(int));
+                return (typeToConvert == typeof(Customer) || typeToConvert == typeof(int));
             }
 
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (typeToConvert == typeof(Customer))
                 {
@@ -36,7 +39,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new NotSupportedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 // Write the name of the type.
                 writer.WriteStringValue(value.GetType().ToString());
@@ -86,7 +93,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class ObjectToBoolConverter : JsonConverter<object>
         {
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.True)
                 {
@@ -99,7 +110,8 @@ namespace System.Text.Json.Serialization.Tests
                 }
 
                 // Use JsonElement as fallback.
-                var converter = options.GetConverter(typeof(JsonElement)) as JsonConverter<JsonElement>;
+                var converter =
+                    options.GetConverter(typeof(JsonElement)) as JsonConverter<JsonElement>;
                 if (converter != null)
                 {
                     return converter.Read(ref reader, typeToConvert, options);
@@ -109,7 +121,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 throw new InvalidOperationException("Directly writing object not supported");
             }
@@ -143,10 +159,16 @@ namespace System.Text.Json.Serialization.Tests
         {
             public override bool CanConvert(Type typeToConvert)
             {
-                return (typeToConvert == typeof(Customer) || typeToConvert == typeof(DerivedCustomer));
+                return (
+                    typeToConvert == typeof(Customer) || typeToConvert == typeof(DerivedCustomer)
+                );
             }
 
-            public override Customer Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override Customer Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 Customer customer = null;
                 if (typeToConvert == typeof(Customer))
@@ -180,7 +202,9 @@ namespace System.Text.Json.Serialization.Tests
                                     break;
                                 case "Address":
                                     string city = reader.GetString();
-                                    customer.Address.City = string.IsNullOrEmpty(city) ? "NA" : city;
+                                    customer.Address.City = string.IsNullOrEmpty(city)
+                                        ? "NA"
+                                        : city;
                                     break;
                                 case "Name":
                                     string name = reader.GetString().ToUpper();
@@ -195,7 +219,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new NotSupportedException();
             }
 
-            public override void Write(Utf8JsonWriter writer, Customer value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                Customer value,
+                JsonSerializerOptions options
+            )
             {
                 writer.WriteStartObject();
                 writer.WriteString("Name", value.Name);
@@ -208,36 +236,37 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithFieldHavingCustomConverterTest()
         {
-            TestClassWithFieldsHavingCustomConverter testObject = new TestClassWithFieldsHavingCustomConverter
-            {
-                IntValue = 32,
-                Name = "John Doe",
-                Customer = new Customer
+            TestClassWithFieldsHavingCustomConverter testObject =
+                new TestClassWithFieldsHavingCustomConverter
                 {
-                    Name = "Customer Doe",
-                    CreditLimit = 1000
-                },
-                DerivedCustomer = new DerivedCustomer
-                {
-                    Name = "Derived Doe",
-                    CreditLimit = 2000,
-                    Address = new Address { City = "UB" }
-                }
-            };
+                    IntValue = 32,
+                    Name = "John Doe",
+                    Customer = new Customer { Name = "Customer Doe", CreditLimit = 1000 },
+                    DerivedCustomer = new DerivedCustomer
+                    {
+                        Name = "Derived Doe",
+                        CreditLimit = 2000,
+                        Address = new Address { City = "UB" }
+                    }
+                };
 
             var options = new JsonSerializerOptions();
             options.Converters.Add(new ObjectToCustomerConverter());
 
             string json = JsonSerializer.Serialize(testObject, options);
 
-            Assert.Equal("{\"Name\":\"John Doe\"," +
-                "\"Customer\":{\"Name\":\"Customer Doe\",\"CreditLimit\":1000,\"Address\":null}," +
-                "\"DerivedCustomer\":{\"Name\":\"Derived Doe\",\"CreditLimit\":2000,\"Address\":\"UB\"}," +
-                "\"NullDerivedCustomer\":null," +
-                "\"IntValue\":32," +
-                "\"Message\":null}", json);
+            Assert.Equal(
+                "{\"Name\":\"John Doe\","
+                    + "\"Customer\":{\"Name\":\"Customer Doe\",\"CreditLimit\":1000,\"Address\":null},"
+                    + "\"DerivedCustomer\":{\"Name\":\"Derived Doe\",\"CreditLimit\":2000,\"Address\":\"UB\"},"
+                    + "\"NullDerivedCustomer\":null,"
+                    + "\"IntValue\":32,"
+                    + "\"Message\":null}",
+                json
+            );
 
-            TestClassWithFieldsHavingCustomConverter testObj = JsonSerializer.Deserialize<TestClassWithFieldsHavingCustomConverter>(json, options);
+            TestClassWithFieldsHavingCustomConverter testObj =
+                JsonSerializer.Deserialize<TestClassWithFieldsHavingCustomConverter>(json, options);
 
             Assert.Equal(32, testObj.IntValue);
             Assert.Equal("John Doe", testObj.Name);
@@ -265,7 +294,11 @@ namespace System.Text.Json.Serialization.Tests
         /// </summary>
         private class SystemObjectNewtonsoftCompatibleConverter : JsonConverter<object>
         {
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 if (reader.TokenType == JsonTokenType.True)
                 {
@@ -305,7 +338,11 @@ namespace System.Text.Json.Serialization.Tests
                 }
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 Assert.IsType<object>(value);
                 writer.WriteStartObject();
@@ -318,11 +355,15 @@ namespace System.Text.Json.Serialization.Tests
             public int ReadCallCount { get; private set; }
             public int WriteCallCount { get; private set; }
 
-            public override bool CanConvert(Type typeToConvert)
-                => typeToConvert != typeof(ClassWithPrimitives)
+            public override bool CanConvert(Type typeToConvert) =>
+                typeToConvert != typeof(ClassWithPrimitives)
                 && typeToConvert != typeof(ClassWithNullablePrimitives);
 
-            public override object Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options)
+            public override object Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            )
             {
                 ReadCallCount++;
 
@@ -359,7 +400,11 @@ namespace System.Text.Json.Serialization.Tests
                 throw new JsonException();
             }
 
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            )
             {
                 WriteCallCount++;
 
@@ -397,7 +442,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithPrimitivesObjectConverter()
         {
-            string expected = @"{
+            string expected =
+                @"{
 ""MyIntProperty"":123,
 ""MyBoolProperty"":true,
 ""MyStringProperty"":""Hello"",
@@ -408,10 +454,7 @@ namespace System.Text.Json.Serialization.Tests
 
             string json;
             var converter = new PrimitiveConverter();
-            var options = new JsonSerializerOptions
-            {
-                IncludeFields = true
-            };
+            var options = new JsonSerializerOptions { IncludeFields = true };
             options.Converters.Add(converter);
 
             {
@@ -459,7 +502,8 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void ClassWithNullablePrimitivesObjectConverter()
         {
-            string expected = @"{
+            string expected =
+                @"{
 ""MyIntProperty"":123,
 ""MyBoolProperty"":true,
 ""MyStringProperty"":""Hello"",
@@ -470,10 +514,7 @@ namespace System.Text.Json.Serialization.Tests
 
             string json;
             var converter = new PrimitiveConverter();
-            var options = new JsonSerializerOptions
-            {
-                IncludeFields = true
-            };
+            var options = new JsonSerializerOptions { IncludeFields = true };
             options.Converters.Add(converter);
 
             {
@@ -738,7 +779,10 @@ namespace System.Text.Json.Serialization.Tests
         [Fact]
         public static void CanCustomizeSystemObjectSerialization()
         {
-            var options = new JsonSerializerOptions { Converters = { new CustomSystemObjectConverter() } };
+            var options = new JsonSerializerOptions
+            {
+                Converters = { new CustomSystemObjectConverter() }
+            };
 
             string expectedJson = "42";
             string actualJson = JsonSerializer.Serialize(new object(), options);
@@ -747,10 +791,17 @@ namespace System.Text.Json.Serialization.Tests
 
         private class CustomSystemObjectConverter : JsonConverter<object>
         {
-            public override object? Read(ref Utf8JsonReader reader, Type typeToConvert, JsonSerializerOptions options) => throw new NotImplementedException();
-            public override void Write(Utf8JsonWriter writer, object value, JsonSerializerOptions options)
-                => writer.WriteNumberValue(42);
+            public override object? Read(
+                ref Utf8JsonReader reader,
+                Type typeToConvert,
+                JsonSerializerOptions options
+            ) => throw new NotImplementedException();
+
+            public override void Write(
+                Utf8JsonWriter writer,
+                object value,
+                JsonSerializerOptions options
+            ) => writer.WriteNumberValue(42);
         }
     }
-
 }

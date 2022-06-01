@@ -70,7 +70,9 @@ public class HostingApplicationTests
     {
         // Arrange
         var factory = new Mock<IHttpContextFactory>();
-        factory.Setup(m => m.Create(It.IsAny<IFeatureCollection>())).Returns<IFeatureCollection>(f => new DefaultHttpContext(f));
+        factory
+            .Setup(m => m.Create(It.IsAny<IFeatureCollection>()))
+            .Returns<IFeatureCollection>(f => new DefaultHttpContext(f));
         factory.Setup(m => m.Dispose(It.IsAny<HttpContext>())).Callback(() => { });
 
         var hostingApplication = CreateApplication(factory.Object);
@@ -95,9 +97,13 @@ public class HostingApplicationTests
         var dummySource = new ActivitySource(Path.GetRandomFileName());
         using var listener = new ActivityListener
         {
-            ShouldListenTo = activitySource => (ReferenceEquals(activitySource, testSource) ||
-                                                ReferenceEquals(activitySource, dummySource)),
-            Sample = (ref ActivityCreationOptions<ActivityContext> _) => ActivitySamplingResult.AllData
+            ShouldListenTo = activitySource =>
+                (
+                    ReferenceEquals(activitySource, testSource)
+                    || ReferenceEquals(activitySource, dummySource)
+                ),
+            Sample = (ref ActivityCreationOptions<ActivityContext> _) =>
+                ActivitySamplingResult.AllData
         };
         ActivitySource.AddActivityListener(listener);
 
@@ -108,7 +114,10 @@ public class HostingApplicationTests
         var activityFeature = context.HttpContext.Features.Get<IHttpActivityFeature>();
         Assert.NotNull(activityFeature);
         Assert.NotNull(activityFeature.Activity);
-        Assert.Equal(HostingApplicationDiagnostics.ActivityName, activityFeature.Activity.DisplayName);
+        Assert.Equal(
+            HostingApplicationDiagnostics.ActivityName,
+            activityFeature.Activity.DisplayName
+        );
         var initialActivity = Activity.Current;
 
         // Create nested dummy Activity
@@ -134,9 +143,13 @@ public class HostingApplicationTests
         var dummySource = new ActivitySource(Path.GetRandomFileName());
         using var listener = new ActivityListener
         {
-            ShouldListenTo = activitySource => (ReferenceEquals(activitySource, testSource) ||
-                                                ReferenceEquals(activitySource, dummySource)),
-            Sample = (ref ActivityCreationOptions<ActivityContext> _) => ActivitySamplingResult.AllData
+            ShouldListenTo = activitySource =>
+                (
+                    ReferenceEquals(activitySource, testSource)
+                    || ReferenceEquals(activitySource, dummySource)
+                ),
+            Sample = (ref ActivityCreationOptions<ActivityContext> _) =>
+                ActivitySamplingResult.AllData
         };
         ActivitySource.AddActivityListener(listener);
 
@@ -149,7 +162,10 @@ public class HostingApplicationTests
         Assert.NotNull(activityFeature);
         Assert.IsType<TestHttpActivityFeature>(activityFeature);
         Assert.NotNull(activityFeature.Activity);
-        Assert.Equal(HostingApplicationDiagnostics.ActivityName, activityFeature.Activity.DisplayName);
+        Assert.Equal(
+            HostingApplicationDiagnostics.ActivityName,
+            activityFeature.Activity.DisplayName
+        );
         var initialActivity = Activity.Current;
 
         // Create nested dummy Activity
@@ -178,8 +194,11 @@ public class HostingApplicationTests
         hostingApplication.DisposeContext(context, null);
     }
 
-    private static HostingApplication CreateApplication(IHttpContextFactory httpContextFactory = null, bool useHttpContextAccessor = false,
-        ActivitySource activitySource = null)
+    private static HostingApplication CreateApplication(
+        IHttpContextFactory httpContextFactory = null,
+        bool useHttpContextAccessor = false,
+        ActivitySource activitySource = null
+    )
     {
         var services = new ServiceCollection();
         services.AddOptions();
@@ -196,7 +215,8 @@ public class HostingApplicationTests
             new DiagnosticListener("Microsoft.AspNetCore"),
             activitySource ?? new ActivitySource("Microsoft.AspNetCore"),
             DistributedContextPropagator.CreateDefaultPropagator(),
-            httpContextFactory);
+            httpContextFactory
+        );
 
         return hostingApplication;
     }
@@ -210,7 +230,11 @@ public class HostingApplicationTests
 
         public IFeatureCollection Features { get; }
 
-        public object this[Type key] { get => Features[key]; set => Features[key] = value; }
+        public object this[Type key]
+        {
+            get => Features[key];
+            set => Features[key] = value;
+        }
 
         public T HostContext { get; set; }
 

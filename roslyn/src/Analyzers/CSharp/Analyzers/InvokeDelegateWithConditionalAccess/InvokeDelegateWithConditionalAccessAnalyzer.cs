@@ -22,23 +22,30 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
     }
 
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class InvokeDelegateWithConditionalAccessAnalyzer : AbstractBuiltInCodeStyleDiagnosticAnalyzer
+    internal class InvokeDelegateWithConditionalAccessAnalyzer
+        : AbstractBuiltInCodeStyleDiagnosticAnalyzer
     {
         public InvokeDelegateWithConditionalAccessAnalyzer()
-            : base(IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId,
-                   EnforceOnBuildValues.InvokeDelegateWithConditionalAccess,
-                   CSharpCodeStyleOptions.PreferConditionalDelegateCall,
-                   LanguageNames.CSharp,
-                   new LocalizableResourceString(nameof(CSharpAnalyzersResources.Delegate_invocation_can_be_simplified), CSharpAnalyzersResources.ResourceManager, typeof(CSharpAnalyzersResources)))
-        {
-        }
+            : base(
+                IDEDiagnosticIds.InvokeDelegateWithConditionalAccessId,
+                EnforceOnBuildValues.InvokeDelegateWithConditionalAccess,
+                CSharpCodeStyleOptions.PreferConditionalDelegateCall,
+                LanguageNames.CSharp,
+                new LocalizableResourceString(
+                    nameof(CSharpAnalyzersResources.Delegate_invocation_can_be_simplified),
+                    CSharpAnalyzersResources.ResourceManager,
+                    typeof(CSharpAnalyzersResources)
+                )
+            ) { }
 
-        protected override void InitializeWorker(AnalysisContext context)
-            => context.RegisterSyntaxNodeAction(SyntaxNodeAction, SyntaxKind.IfStatement);
+        protected override void InitializeWorker(AnalysisContext context) =>
+            context.RegisterSyntaxNodeAction(SyntaxNodeAction, SyntaxKind.IfStatement);
 
         private void SyntaxNodeAction(SyntaxNodeAnalysisContext syntaxContext)
         {
-            var styleOption = syntaxContext.GetCSharpAnalyzerOptions().PreferConditionalDelegateCall;
+            var styleOption = syntaxContext
+                .GetCSharpAnalyzerOptions()
+                .PreferConditionalDelegateCall;
             if (!styleOption.Value)
             {
                 // Bail if the user has disabled this feature.
@@ -77,31 +84,49 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 innerStatement = block.Statements[0];
             }
 
-            if (!innerStatement.IsKind(SyntaxKind.ExpressionStatement, out ExpressionStatementSyntax? expressionStatement))
+            if (
+                !innerStatement.IsKind(
+                    SyntaxKind.ExpressionStatement,
+                    out ExpressionStatementSyntax? expressionStatement
+                )
+            )
             {
                 return;
             }
 
             // Check that it's of the form: "if (a != null) { a(); }
-            if (expressionStatement.Expression is not InvocationExpressionSyntax invocationExpression)
+            if (
+                expressionStatement.Expression
+                is not InvocationExpressionSyntax invocationExpression
+            )
             {
                 return;
             }
 
             var severity = styleOption.Notification.Severity;
             var condition = (BinaryExpressionSyntax)ifStatement.Condition;
-            if (TryCheckVariableAndIfStatementForm(
-                    syntaxContext, ifStatement, condition,
-                    expressionStatement, invocationExpression,
-                    severity))
+            if (
+                TryCheckVariableAndIfStatementForm(
+                    syntaxContext,
+                    ifStatement,
+                    condition,
+                    expressionStatement,
+                    invocationExpression,
+                    severity
+                )
+            )
             {
                 return;
             }
 
             TryCheckSingleIfStatementForm(
-                syntaxContext, ifStatement, condition,
-                expressionStatement, invocationExpression,
-                severity);
+                syntaxContext,
+                ifStatement,
+                condition,
+                expressionStatement,
+                invocationExpression,
+                severity
+            );
         }
 
         private bool TryCheckSingleIfStatementForm(
@@ -110,20 +135,29 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             BinaryExpressionSyntax condition,
             ExpressionStatementSyntax expressionStatement,
             InvocationExpressionSyntax invocationExpression,
-            ReportDiagnostic severity)
+            ReportDiagnostic severity
+        )
         {
             var cancellationToken = syntaxContext.CancellationToken;
 
             // Look for the form:  "if (someExpr != null) someExpr()"
-            if (condition.Left.IsKind(SyntaxKind.NullLiteralExpression) ||
-                condition.Right.IsKind(SyntaxKind.NullLiteralExpression))
+            if (
+                condition.Left.IsKind(SyntaxKind.NullLiteralExpression)
+                || condition.Right.IsKind(SyntaxKind.NullLiteralExpression)
+            )
             {
                 var expr = condition.Left.IsKind(SyntaxKind.NullLiteralExpression)
                     ? condition.Right
                     : condition.Left;
 
                 cancellationToken.ThrowIfCancellationRequested();
-                if (SyntaxFactory.AreEquivalent(expr, invocationExpression.Expression, topLevel: false))
+                if (
+                    SyntaxFactory.AreEquivalent(
+                        expr,
+                        invocationExpression.Expression,
+                        topLevel: false
+                    )
+                )
                 {
                     cancellationToken.ThrowIfCancellationRequested();
 
@@ -131,12 +165,18 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                     var tree = syntaxContext.SemanticModel.SyntaxTree;
                     var additionalLocations = ImmutableArray.Create<Location>(
                         Location.Create(tree, ifStatement.Span),
-                        Location.Create(tree, expressionStatement.Span));
+                        Location.Create(tree, expressionStatement.Span)
+                    );
 
                     ReportDiagnostics(
-                        syntaxContext, ifStatement, ifStatement,
-                        expressionStatement, severity, additionalLocations,
-                        Constants.SingleIfStatementForm);
+                        syntaxContext,
+                        ifStatement,
+                        ifStatement,
+                        expressionStatement,
+                        severity,
+                        additionalLocations,
+                        Constants.SingleIfStatementForm
+                    );
 
                     return true;
                 }
@@ -152,44 +192,60 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             ExpressionStatementSyntax expressionStatement,
             ReportDiagnostic severity,
             ImmutableArray<Location> additionalLocations,
-            string kind)
+            string kind
+        )
         {
             var tree = syntaxContext.Node.SyntaxTree;
 
-            var properties = ImmutableDictionary<string, string?>.Empty.Add(
-                Constants.Kind, kind);
+            var properties = ImmutableDictionary<string, string?>.Empty.Add(Constants.Kind, kind);
 
             var previousToken = expressionStatement.GetFirstToken().GetPreviousToken();
             var nextToken = expressionStatement.GetLastToken().GetNextToken();
 
             // Fade out the code up to the expression statement.
-            var fadeLocation = Location.Create(tree, TextSpan.FromBounds(firstStatement.SpanStart, previousToken.Span.End));
-            syntaxContext.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
-                Descriptor,
-                fadeLocation,
-                ReportDiagnostic.Default,
-                additionalLocations,
-                additionalUnnecessaryLocations: ImmutableArray.Create(fadeLocation),
-                properties));
-
-            // Put a diagnostic with the appropriate severity on the expression-statement itself.
-            syntaxContext.ReportDiagnostic(DiagnosticHelper.Create(
-                Descriptor,
-                expressionStatement.GetLocation(),
-                severity,
-                additionalLocations, properties));
-
-            // If the if-statement extends past the expression statement, then fade out the rest.
-            if (nextToken.Span.Start < ifStatement.Span.End)
-            {
-                fadeLocation = Location.Create(tree, TextSpan.FromBounds(nextToken.Span.Start, ifStatement.Span.End));
-                syntaxContext.ReportDiagnostic(DiagnosticHelper.CreateWithLocationTags(
+            var fadeLocation = Location.Create(
+                tree,
+                TextSpan.FromBounds(firstStatement.SpanStart, previousToken.Span.End)
+            );
+            syntaxContext.ReportDiagnostic(
+                DiagnosticHelper.CreateWithLocationTags(
                     Descriptor,
                     fadeLocation,
                     ReportDiagnostic.Default,
                     additionalLocations,
                     additionalUnnecessaryLocations: ImmutableArray.Create(fadeLocation),
-                    properties));
+                    properties
+                )
+            );
+
+            // Put a diagnostic with the appropriate severity on the expression-statement itself.
+            syntaxContext.ReportDiagnostic(
+                DiagnosticHelper.Create(
+                    Descriptor,
+                    expressionStatement.GetLocation(),
+                    severity,
+                    additionalLocations,
+                    properties
+                )
+            );
+
+            // If the if-statement extends past the expression statement, then fade out the rest.
+            if (nextToken.Span.Start < ifStatement.Span.End)
+            {
+                fadeLocation = Location.Create(
+                    tree,
+                    TextSpan.FromBounds(nextToken.Span.Start, ifStatement.Span.End)
+                );
+                syntaxContext.ReportDiagnostic(
+                    DiagnosticHelper.CreateWithLocationTags(
+                        Descriptor,
+                        fadeLocation,
+                        ReportDiagnostic.Default,
+                        additionalLocations,
+                        additionalUnnecessaryLocations: ImmutableArray.Create(fadeLocation),
+                        properties
+                    )
+                );
             }
         }
 
@@ -199,7 +255,8 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             BinaryExpressionSyntax condition,
             ExpressionStatementSyntax expressionStatement,
             InvocationExpressionSyntax invocationExpression,
-            ReportDiagnostic severity)
+            ReportDiagnostic severity
+        )
         {
             var cancellationToken = syntaxContext.CancellationToken;
             cancellationToken.ThrowIfCancellationRequested();
@@ -210,8 +267,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 return false;
             }
 
-            if (!IsNullCheckExpression(condition.Left, condition.Right) &&
-                !IsNullCheckExpression(condition.Right, condition.Left))
+            if (
+                !IsNullCheckExpression(condition.Left, condition.Right)
+                && !IsNullCheckExpression(condition.Right, condition.Left)
+            )
             {
                 return false;
             }
@@ -222,9 +281,10 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 return false;
             }
 
-            var conditionName = condition.Left is IdentifierNameSyntax
-                ? (IdentifierNameSyntax)condition.Left
-                : (IdentifierNameSyntax)condition.Right;
+            var conditionName =
+                condition.Left is IdentifierNameSyntax
+                    ? (IdentifierNameSyntax)condition.Left
+                    : (IdentifierNameSyntax)condition.Right;
 
             var invocationName = (IdentifierNameSyntax)expression;
             if (!Equals(conditionName.Identifier.ValueText, invocationName.Identifier.ValueText))
@@ -241,7 +301,12 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             }
 
             var previousStatement = parentBlock.Statements[ifIndex - 1];
-            if (!previousStatement.IsKind(SyntaxKind.LocalDeclarationStatement, out LocalDeclarationStatementSyntax? localDeclarationStatement))
+            if (
+                !previousStatement.IsKind(
+                    SyntaxKind.LocalDeclarationStatement,
+                    out LocalDeclarationStatementSyntax? localDeclarationStatement
+                )
+            )
             {
                 return false;
             }
@@ -276,19 +341,26 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
                 return false;
             }
 
-            var initializerSymbol = semanticModel.GetSymbolInfo(initializer, cancellationToken).GetAnySymbol();
+            var initializerSymbol = semanticModel
+                .GetSymbolInfo(initializer, cancellationToken)
+                .GetAnySymbol();
             if (initializerSymbol is IMethodSymbol)
             {
                 return false;
             }
 
-            var localSymbol = (ILocalSymbol)semanticModel.GetRequiredDeclaredSymbol(declarator, cancellationToken);
+            var localSymbol = (ILocalSymbol)
+                semanticModel.GetRequiredDeclaredSymbol(declarator, cancellationToken);
 
             // Ok, we made a local just to check it for null and invoke it.  Looks like something
             // we can suggest an improvement for!
             // But first make sure we're only using the local only within the body of this if statement.
             var analysis = semanticModel.AnalyzeDataFlow(localDeclarationStatement, ifStatement);
-            if (analysis == null || analysis.ReadOutside.Contains(localSymbol) || analysis.WrittenOutside.Contains(localSymbol))
+            if (
+                analysis == null
+                || analysis.ReadOutside.Contains(localSymbol)
+                || analysis.WrittenOutside.Contains(localSymbol)
+            )
                 return false;
 
             // Looks good!
@@ -296,19 +368,27 @@ namespace Microsoft.CodeAnalysis.CSharp.InvokeDelegateWithConditionalAccess
             var additionalLocations = ImmutableArray.Create<Location>(
                 Location.Create(tree, localDeclarationStatement.Span),
                 Location.Create(tree, ifStatement.Span),
-                Location.Create(tree, expressionStatement.Span));
+                Location.Create(tree, expressionStatement.Span)
+            );
 
-            ReportDiagnostics(syntaxContext,
-                localDeclarationStatement, ifStatement, expressionStatement,
-                severity, additionalLocations, Constants.VariableAndIfStatementForm);
+            ReportDiagnostics(
+                syntaxContext,
+                localDeclarationStatement,
+                ifStatement,
+                expressionStatement,
+                severity,
+                additionalLocations,
+                Constants.VariableAndIfStatementForm
+            );
 
             return true;
         }
 
         private static bool IsNullCheckExpression(ExpressionSyntax left, ExpressionSyntax right) =>
-            left.IsKind(SyntaxKind.IdentifierName) && right.IsKind(SyntaxKind.NullLiteralExpression);
+            left.IsKind(SyntaxKind.IdentifierName)
+            && right.IsKind(SyntaxKind.NullLiteralExpression);
 
-        public override DiagnosticAnalyzerCategory GetAnalyzerCategory()
-            => DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
+        public override DiagnosticAnalyzerCategory GetAnalyzerCategory() =>
+            DiagnosticAnalyzerCategory.SemanticSpanAnalysis;
     }
 }

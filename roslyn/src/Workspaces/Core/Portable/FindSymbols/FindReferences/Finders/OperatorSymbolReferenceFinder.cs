@@ -11,40 +11,70 @@ using Microsoft.CodeAnalysis.Shared.Extensions;
 
 namespace Microsoft.CodeAnalysis.FindSymbols.Finders
 {
-    internal sealed class OperatorSymbolReferenceFinder : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
+    internal sealed class OperatorSymbolReferenceFinder
+        : AbstractMethodOrPropertyOrEventSymbolReferenceFinder<IMethodSymbol>
     {
-        protected override bool CanFind(IMethodSymbol symbol)
-            => symbol.MethodKind == MethodKind.UserDefinedOperator;
+        protected override bool CanFind(IMethodSymbol symbol) =>
+            symbol.MethodKind == MethodKind.UserDefinedOperator;
 
-        protected sealed override async Task<ImmutableArray<Document>> DetermineDocumentsToSearchAsync(
+        protected sealed override async Task<
+            ImmutableArray<Document>
+        > DetermineDocumentsToSearchAsync(
             IMethodSymbol symbol,
             HashSet<string>? globalAliases,
             Project project,
             IImmutableSet<Document>? documents,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var op = symbol.GetPredefinedOperator();
-            var documentsWithOp = await FindDocumentsAsync(project, documents, op, cancellationToken).ConfigureAwait(false);
-            var documentsWithGlobalAttributes = await FindDocumentsWithGlobalSuppressMessageAttributeAsync(project, documents, cancellationToken).ConfigureAwait(false);
+            var documentsWithOp = await FindDocumentsAsync(
+                    project,
+                    documents,
+                    op,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var documentsWithGlobalAttributes =
+                await FindDocumentsWithGlobalSuppressMessageAttributeAsync(
+                        project,
+                        documents,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false);
             return documentsWithOp.Concat(documentsWithGlobalAttributes);
         }
 
-        protected sealed override async ValueTask<ImmutableArray<FinderLocation>> FindReferencesInDocumentAsync(
+        protected sealed override async ValueTask<
+            ImmutableArray<FinderLocation>
+        > FindReferencesInDocumentAsync(
             IMethodSymbol symbol,
             HashSet<string>? globalAliases,
             Document document,
             SemanticModel semanticModel,
             FindReferencesSearchOptions options,
-            CancellationToken cancellationToken)
+            CancellationToken cancellationToken
+        )
         {
             var syntaxFacts = document.GetRequiredLanguageService<ISyntaxFactsService>();
             var op = symbol.GetPredefinedOperator();
 
-            var opReferences = await FindReferencesInDocumentAsync(symbol, document, semanticModel, t =>
-                IsPotentialReference(syntaxFacts, op, t),
-                cancellationToken).ConfigureAwait(false);
-            var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(document, semanticModel, symbol, cancellationToken).ConfigureAwait(false);
+            var opReferences = await FindReferencesInDocumentAsync(
+                    symbol,
+                    document,
+                    semanticModel,
+                    t => IsPotentialReference(syntaxFacts, op, t),
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
+            var suppressionReferences = await FindReferencesInDocumentInsideGlobalSuppressionsAsync(
+                    document,
+                    semanticModel,
+                    symbol,
+                    cancellationToken
+                )
+                .ConfigureAwait(false);
 
             return opReferences.Concat(suppressionReferences);
         }
@@ -52,9 +82,11 @@ namespace Microsoft.CodeAnalysis.FindSymbols.Finders
         private static bool IsPotentialReference(
             ISyntaxFactsService syntaxFacts,
             PredefinedOperator op,
-            SyntaxToken token)
+            SyntaxToken token
+        )
         {
-            return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator) && actualOperator == op;
+            return syntaxFacts.TryGetPredefinedOperator(token, out var actualOperator)
+                && actualOperator == op;
         }
     }
 }

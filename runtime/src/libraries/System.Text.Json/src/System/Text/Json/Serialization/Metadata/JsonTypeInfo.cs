@@ -23,7 +23,12 @@ namespace System.Text.Json.Serialization.Metadata
 
         internal delegate object? ConstructorDelegate();
 
-        internal delegate T ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>(TArg0 arg0, TArg1 arg1, TArg2 arg2, TArg3 arg3);
+        internal delegate T ParameterizedConstructorDelegate<T, TArg0, TArg1, TArg2, TArg3>(
+            TArg0 arg0,
+            TArg1 arg1,
+            TArg2 arg2,
+            TArg3 arg3
+        );
 
         internal ConstructorDelegate? CreateObject { get; set; }
 
@@ -51,7 +56,10 @@ namespace System.Text.Json.Serialization.Metadata
         {
             if (ThrowOnDeserialize)
             {
-                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(Options.JsonSerializerContext, Type);
+                ThrowHelper.ThrowInvalidOperationException_NoMetadataForTypeProperties(
+                    Options.JsonSerializerContext,
+                    Type
+                );
             }
         }
 
@@ -110,7 +118,10 @@ namespace System.Text.Json.Serialization.Metadata
                 {
                     if (KeyType != null)
                     {
-                        Debug.Assert(PropertyInfoForTypeInfo.ConverterStrategy == ConverterStrategy.Dictionary);
+                        Debug.Assert(
+                            PropertyInfoForTypeInfo.ConverterStrategy
+                                == ConverterStrategy.Dictionary
+                        );
 
                         // GetOrAddJsonTypeInfo already ensures JsonTypeInfo is configured
                         // also see comment on JsonPropertyInfo.JsonTypeInfo
@@ -159,7 +170,8 @@ namespace System.Text.Json.Serialization.Metadata
         /// <summary>
         /// Returns a helper class used for computing the default value.
         /// </summary>
-        internal DefaultValueHolder DefaultValueHolder => _defaultValueHolder ??= DefaultValueHolder.CreateHolder(Type);
+        internal DefaultValueHolder DefaultValueHolder =>
+            _defaultValueHolder ??= DefaultValueHolder.CreateHolder(Type);
         private DefaultValueHolder? _defaultValueHolder;
 
         internal JsonNumberHandling? NumberHandling { get; set; }
@@ -175,6 +187,7 @@ namespace System.Text.Json.Serialization.Metadata
             switch (PropertyInfoForTypeInfo.ConverterStrategy)
             {
                 case ConverterStrategy.Dictionary:
+
                     {
                         KeyType = converter.KeyType;
                     }
@@ -184,12 +197,15 @@ namespace System.Text.Json.Serialization.Metadata
                 case ConverterStrategy.Value:
                     break;
                 case ConverterStrategy.None:
+
                     {
                         ThrowHelper.ThrowNotSupportedException_SerializationNotSupported(type);
                     }
                     break;
                 default:
-                    Debug.Fail($"Unexpected class type: {PropertyInfoForTypeInfo.ConverterStrategy}");
+                    Debug.Fail(
+                        $"Unexpected class type: {PropertyInfoForTypeInfo.ConverterStrategy}"
+                    );
                     throw new InvalidOperationException();
             }
         }
@@ -215,10 +231,16 @@ namespace System.Text.Json.Serialization.Metadata
 
         internal virtual void Configure()
         {
-            Debug.Assert(Monitor.IsEntered(_configureLock), "Configure called directly, use EnsureConfigured which locks this method");
+            Debug.Assert(
+                Monitor.IsEntered(_configureLock),
+                "Configure called directly, use EnsureConfigured which locks this method"
+            );
             JsonConverter converter = PropertyInfoForTypeInfo.ConverterBase;
-            Debug.Assert(PropertyInfoForTypeInfo.ConverterStrategy == PropertyInfoForTypeInfo.ConverterBase.ConverterStrategy,
-                $"ConverterStrategy from PropertyInfoForTypeInfo.ConverterStrategy ({PropertyInfoForTypeInfo.ConverterStrategy}) does not match converter's ({PropertyInfoForTypeInfo.ConverterBase.ConverterStrategy})");
+            Debug.Assert(
+                PropertyInfoForTypeInfo.ConverterStrategy
+                    == PropertyInfoForTypeInfo.ConverterBase.ConverterStrategy,
+                $"ConverterStrategy from PropertyInfoForTypeInfo.ConverterStrategy ({PropertyInfoForTypeInfo.ConverterStrategy}) does not match converter's ({PropertyInfoForTypeInfo.ConverterBase.ConverterStrategy})"
+            );
 
             converter.ConfigureJsonTypeInfo(this, Options);
             PropertyInfoForTypeInfo.DeclaringTypeNumberHandling = NumberHandling;
@@ -243,7 +265,10 @@ namespace System.Text.Json.Serialization.Metadata
 
                 if (converter.ConstructorIsParameterized)
                 {
-                    InitializeConstructorParameters(GetParameterInfoValues(), sourceGenMode: Options.JsonSerializerContext != null);
+                    InitializeConstructorParameters(
+                        GetParameterInfoValues(),
+                        sourceGenMode: Options.JsonSerializerContext != null
+                    );
                 }
             }
         }
@@ -297,7 +322,11 @@ namespace System.Text.Json.Serialization.Metadata
             return null!;
         }
 
-        internal void CacheMember(JsonPropertyInfo jsonPropertyInfo, JsonPropertyDictionary<JsonPropertyInfo>? propertyCache, ref Dictionary<string, JsonPropertyInfo>? ignoredMembers)
+        internal void CacheMember(
+            JsonPropertyInfo jsonPropertyInfo,
+            JsonPropertyDictionary<JsonPropertyInfo>? propertyCache,
+            ref Dictionary<string, JsonPropertyInfo>? ignoredMembers
+        )
         {
             string memberName = jsonPropertyInfo.ClrName!;
 
@@ -313,23 +342,32 @@ namespace System.Text.Json.Serialization.Metadata
                 }
                 else if (
                     // Does the current property have `JsonIgnoreAttribute`?
-                    !jsonPropertyInfo.IsIgnored &&
+                    !jsonPropertyInfo.IsIgnored
+                    &&
                     // Is the current property hidden by the previously cached property
                     // (with `new` keyword, or by overriding)?
-                    other.ClrName != memberName &&
+                    other.ClrName != memberName
+                    &&
                     // Was a property with the same CLR name was ignored? That property hid the current property,
                     // thus, if it was ignored, the current property should be ignored too.
-                    ignoredMembers?.ContainsKey(memberName) != true)
+                    ignoredMembers?.ContainsKey(memberName) != true
+                )
                 {
                     // We throw if we have two public properties that have the same JSON property name, and neither have been ignored.
-                    ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(Type, jsonPropertyInfo);
+                    ThrowHelper.ThrowInvalidOperationException_SerializerPropertyNameConflict(
+                        Type,
+                        jsonPropertyInfo
+                    );
                 }
                 // Ignore the current property.
             }
 
             if (jsonPropertyInfo.IsIgnored)
             {
-                (ignoredMembers ??= new Dictionary<string, JsonPropertyInfo>()).Add(memberName, jsonPropertyInfo);
+                (ignoredMembers ??= new Dictionary<string, JsonPropertyInfo>()).Add(
+                    memberName,
+                    jsonPropertyInfo
+                );
             }
         }
 
@@ -354,7 +392,8 @@ namespace System.Text.Json.Serialization.Metadata
                 Debug.Assert(obj is ParameterLookupKey);
 
                 ParameterLookupKey other = (ParameterLookupKey)obj;
-                return Type == other.Type && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
+                return Type == other.Type
+                    && string.Equals(Name, other.Name, StringComparison.OrdinalIgnoreCase);
             }
         }
 
@@ -369,16 +408,24 @@ namespace System.Text.Json.Serialization.Metadata
             public JsonPropertyInfo JsonPropertyInfo { get; }
         }
 
-        internal void InitializeConstructorParameters(JsonParameterInfoValues[] jsonParameters, bool sourceGenMode = false)
+        internal void InitializeConstructorParameters(
+            JsonParameterInfoValues[] jsonParameters,
+            bool sourceGenMode = false
+        )
         {
-            var parameterCache = new JsonPropertyDictionary<JsonParameterInfo>(Options.PropertyNameCaseInsensitive, jsonParameters.Length);
+            var parameterCache = new JsonPropertyDictionary<JsonParameterInfo>(
+                Options.PropertyNameCaseInsensitive,
+                jsonParameters.Length
+            );
 
             // Cache the lookup from object property name to JsonPropertyInfo using a case-insensitive comparer.
             // Case-insensitive is used to support both camel-cased parameter names and exact matches when C#
             // record types or anonymous types are used.
             // The property name key does not use [JsonPropertyName] or PropertyNamingPolicy since we only bind
             // the parameter name to the object property name and do not use the JSON version of the name here.
-            var nameLookup = new Dictionary<ParameterLookupKey, ParameterLookupValue>(PropertyCache!.Count);
+            var nameLookup = new Dictionary<ParameterLookupKey, ParameterLookupValue>(
+                PropertyCache!.Count
+            );
 
             foreach (KeyValuePair<string, JsonPropertyInfo?> kvp in PropertyCache.List)
             {
@@ -399,7 +446,8 @@ namespace System.Text.Json.Serialization.Metadata
 
             foreach (JsonParameterInfoValues parameterInfo in jsonParameters)
             {
-                ParameterLookupKey paramToCheck = new(parameterInfo.Name, parameterInfo.ParameterType);
+                ParameterLookupKey paramToCheck =
+                    new(parameterInfo.Name, parameterInfo.ParameterType);
 
                 if (nameLookup.TryGetValue(paramToCheck, out ParameterLookupValue? matchingEntry))
                 {
@@ -410,19 +458,32 @@ namespace System.Text.Json.Serialization.Metadata
                             Type,
                             parameterInfo.Name!,
                             matchingEntry.JsonPropertyInfo.Name,
-                            matchingEntry.DuplicateName);
+                            matchingEntry.DuplicateName
+                        );
                     }
 
                     Debug.Assert(matchingEntry.JsonPropertyInfo != null);
                     JsonPropertyInfo jsonPropertyInfo = matchingEntry.JsonPropertyInfo;
-                    JsonParameterInfo jsonParameterInfo = CreateConstructorParameter(parameterInfo, jsonPropertyInfo, sourceGenMode, Options);
+                    JsonParameterInfo jsonParameterInfo = CreateConstructorParameter(
+                        parameterInfo,
+                        jsonPropertyInfo,
+                        sourceGenMode,
+                        Options
+                    );
                     parameterCache.Add(jsonPropertyInfo.Name, jsonParameterInfo);
                 }
                 // It is invalid for the extension data property to bind with a constructor argument.
-                else if (DataExtensionProperty != null &&
-                    StringComparer.OrdinalIgnoreCase.Equals(paramToCheck.Name, DataExtensionProperty.Name))
+                else if (
+                    DataExtensionProperty != null
+                    && StringComparer.OrdinalIgnoreCase.Equals(
+                        paramToCheck.Name,
+                        DataExtensionProperty.Name
+                    )
+                )
                 {
-                    ThrowHelper.ThrowInvalidOperationException_ExtensionDataCannotBindToCtorParam(DataExtensionProperty);
+                    ThrowHelper.ThrowInvalidOperationException_ExtensionDataCannotBindToCtorParam(
+                        DataExtensionProperty
+                    );
                 }
             }
 
@@ -430,11 +491,20 @@ namespace System.Text.Json.Serialization.Metadata
             Volatile.Write(ref ParameterCache, parameterCache);
         }
 
-        internal static void ValidateType(Type type, Type? parentClassType, MemberInfo? memberInfo, JsonSerializerOptions options)
+        internal static void ValidateType(
+            Type type,
+            Type? parentClassType,
+            MemberInfo? memberInfo,
+            JsonSerializerOptions options
+        )
         {
             if (IsInvalidForSerialization(type))
             {
-                ThrowHelper.ThrowInvalidOperationException_CannotSerializeInvalidType(type, parentClassType, memberInfo);
+                ThrowHelper.ThrowInvalidOperationException_CannotSerializeInvalidType(
+                    type,
+                    parentClassType,
+                    memberInfo
+                );
             }
         }
 
@@ -457,7 +527,10 @@ namespace System.Text.Json.Serialization.Metadata
 
             for (int i = 0; i < attributes.Length; i++)
             {
-                if (attributes[i].GetType().FullName == "System.Runtime.CompilerServices.IsByRefLikeAttribute")
+                if (
+                    attributes[i].GetType().FullName
+                    == "System.Runtime.CompilerServices.IsByRefLikeAttribute"
+                )
                 {
                     return true;
                 }
@@ -475,7 +548,9 @@ namespace System.Text.Json.Serialization.Metadata
             IJsonPolymorphicTypeConfiguration? configuration = null;
 
             // 1. Look up configuration from JsonSerializerOptions
-            foreach (JsonPolymorphicTypeConfiguration config in options.PolymorphicTypeConfigurations)
+            foreach (
+                JsonPolymorphicTypeConfiguration config in options.PolymorphicTypeConfigurations
+            )
             {
                 if (config.BaseType == Type)
                 {
@@ -489,7 +564,11 @@ namespace System.Text.Json.Serialization.Metadata
             // Construct the resolver from configuration.
             if (configuration != null)
             {
-                PolymorphicTypeResolver = new PolymorphicTypeResolver(converter, configuration, options);
+                PolymorphicTypeResolver = new PolymorphicTypeResolver(
+                    converter,
+                    configuration,
+                    options
+                );
             }
 #pragma warning restore CA2252 // This API requires opting into preview features
         }
@@ -498,10 +577,15 @@ namespace System.Text.Json.Serialization.Metadata
         {
             Type memberType = jsonPropertyInfo.PropertyType;
 
-            bool typeIsValid = typeof(IDictionary<string, object>).IsAssignableFrom(memberType) ||
-                typeof(IDictionary<string, JsonElement>).IsAssignableFrom(memberType) ||
+            bool typeIsValid =
+                typeof(IDictionary<string, object>).IsAssignableFrom(memberType)
+                || typeof(IDictionary<string, JsonElement>).IsAssignableFrom(memberType)
+                ||
                 // Avoid a reference to typeof(JsonNode) to support trimming.
-                (memberType.FullName == JsonObjectTypeName && ReferenceEquals(memberType.Assembly, GetType().Assembly));
+                (
+                    memberType.FullName == JsonObjectTypeName
+                    && ReferenceEquals(memberType.Assembly, GetType().Assembly)
+                );
 
             return typeIsValid && Options.GetConverterInternal(memberType) != null;
         }
@@ -510,11 +594,16 @@ namespace System.Text.Json.Serialization.Metadata
             JsonParameterInfoValues parameterInfo,
             JsonPropertyInfo jsonPropertyInfo,
             bool sourceGenMode,
-            JsonSerializerOptions options)
+            JsonSerializerOptions options
+        )
         {
             if (jsonPropertyInfo.IsIgnored)
             {
-                return JsonParameterInfo.CreateIgnoredParameterPlaceholder(parameterInfo, jsonPropertyInfo, sourceGenMode);
+                return JsonParameterInfo.CreateIgnoredParameterPlaceholder(
+                    parameterInfo,
+                    jsonPropertyInfo,
+                    sourceGenMode
+                );
             }
 
             JsonConverter converter = jsonPropertyInfo.ConverterBase;
@@ -526,6 +615,7 @@ namespace System.Text.Json.Serialization.Metadata
         }
 
         [DebuggerBrowsable(DebuggerBrowsableState.Never)]
-        private string DebuggerDisplay => $"ConverterStrategy.{PropertyInfoForTypeInfo.ConverterStrategy}, {Type.Name}";
+        private string DebuggerDisplay =>
+            $"ConverterStrategy.{PropertyInfoForTypeInfo.ConverterStrategy}, {Type.Name}";
     }
 }

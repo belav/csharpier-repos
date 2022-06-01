@@ -10,11 +10,11 @@ namespace Microsoft.EntityFrameworkCore.Metadata.Internal;
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
 // Sealed for perf
-public sealed class TableMappingBaseComparer : IEqualityComparer<ITableMappingBase>, IComparer<ITableMappingBase>
+public sealed class TableMappingBaseComparer
+    : IEqualityComparer<ITableMappingBase>,
+        IComparer<ITableMappingBase>
 {
-    private TableMappingBaseComparer()
-    {
-    }
+    private TableMappingBaseComparer() { }
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -89,12 +89,20 @@ public sealed class TableMappingBaseComparer : IEqualityComparer<ITableMappingBa
             return result;
         }
 
-        return x.ColumnMappings.Zip(
-                y.ColumnMappings, (xc, yc) =>
+        return x.ColumnMappings
+            .Zip(
+                y.ColumnMappings,
+                (xc, yc) =>
                 {
-                    var columnResult = StringComparer.Ordinal.Compare(xc.Property.Name, yc.Property.Name);
-                    return columnResult != 0 ? columnResult : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
-                })
+                    var columnResult = StringComparer.Ordinal.Compare(
+                        xc.Property.Name,
+                        yc.Property.Name
+                    );
+                    return columnResult != 0
+                        ? columnResult
+                        : StringComparer.Ordinal.Compare(xc.Column.Name, yc.Column.Name);
+                }
+            )
             .FirstOrDefault(r => r != 0);
     }
 
@@ -104,14 +112,16 @@ public sealed class TableMappingBaseComparer : IEqualityComparer<ITableMappingBa
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public bool Equals(ITableMappingBase? x, ITableMappingBase? y)
-        => ReferenceEquals(x, y)
-            || x is not null
+    public bool Equals(ITableMappingBase? x, ITableMappingBase? y) =>
+        ReferenceEquals(x, y)
+        || x is not null
             && y is not null
-            && (x.EntityType == y.EntityType
+            && (
+                x.EntityType == y.EntityType
                 && x.Table == y.Table
                 && x.IncludesDerivedTypes == y.IncludesDerivedTypes
-                && x.ColumnMappings.SequenceEqual(y.ColumnMappings));
+                && x.ColumnMappings.SequenceEqual(y.ColumnMappings)
+            );
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to

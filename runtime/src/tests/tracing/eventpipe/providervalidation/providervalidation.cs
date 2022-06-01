@@ -16,9 +16,14 @@ namespace Tracing.Tests.ProviderValidation
 {
     public sealed class MyEventSource : EventSource
     {
-        private MyEventSource() {}
+        private MyEventSource() { }
+
         public static MyEventSource Log = new MyEventSource();
-        public void MyEvent() { WriteEvent(1, "MyEvent"); }
+
+        public void MyEvent()
+        {
+            WriteEvent(1, "MyEvent");
+        }
     }
 
     public class ProviderValidation
@@ -35,21 +40,29 @@ namespace Tracing.Tests.ProviderValidation
                 new EventPipeProvider("Microsoft-DotNETCore-SampleProfiler", EventLevel.Verbose)
             };
 
-            var ret = IpcTraceTest.RunAndValidateEventCounts(_expectedEventCounts, _eventGeneratingAction, providers, 1024);
+            var ret = IpcTraceTest.RunAndValidateEventCounts(
+                _expectedEventCounts,
+                _eventGeneratingAction,
+                providers,
+                1024
+            );
             if (ret < 0)
                 return ret;
             else
                 return 100;
         }
 
-        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<string, ExpectedEventCount>()
+        private static Dictionary<string, ExpectedEventCount> _expectedEventCounts = new Dictionary<
+            string,
+            ExpectedEventCount
+        >()
         {
             { "MyEventSource", new ExpectedEventCount(100_000, 0.30f) },
             { "Microsoft-Windows-DotNETRuntimeRundown", -1 },
             { "Microsoft-DotNETCore-SampleProfiler", -1 }
         };
 
-        private static Action _eventGeneratingAction = () => 
+        private static Action _eventGeneratingAction = () =>
         {
             for (int i = 0; i < 100_000; i++)
             {

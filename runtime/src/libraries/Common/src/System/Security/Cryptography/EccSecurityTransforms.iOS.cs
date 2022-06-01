@@ -12,10 +12,12 @@ namespace System.Security.Cryptography
 {
     internal sealed partial class EccSecurityTransforms
     {
-        private static ECParameters ExportParametersFromLegacyKey(SecKeyPair keys, bool includePrivateParameters)
-            => throw new CryptographicException();
+        private static ECParameters ExportParametersFromLegacyKey(
+            SecKeyPair keys,
+            bool includePrivateParameters
+        ) => throw new CryptographicException();
 
-        private static void ExtractPublicKeyFromPrivateKey(ref ECParameters ecParameters)
-            => throw new PlatformNotSupportedException(SR.Cryptography_NotValidPublicOrPrivateKey);
+        private static void ExtractPublicKeyFromPrivateKey(ref ECParameters ecParameters) =>
+            throw new PlatformNotSupportedException(SR.Cryptography_NotValidPublicOrPrivateKey);
     }
 }

@@ -30,7 +30,10 @@ namespace System
         }
 
         // V1 API: Create open static delegates. Method name matching is case insensitive.
-        protected Delegate([DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method)
+        protected Delegate(
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method
+        )
         {
             // This constructor cannot be used by application code. To create a delegate by specifying the name of a method, an
             // overload of the public static CreateDelegate method is used. This will eventually end up calling into the internal
@@ -53,8 +56,8 @@ namespace System
         private protected const int OpenStaticThunk = 2;
         private protected const int ClosedInstanceThunkOverGenericMethod = 3; // This may not exist
         private protected const int DelegateInvokeThunk = 4;
-        private protected const int OpenInstanceThunk = 5;        // This may not exist
-        private protected const int ObjectArrayThunk = 6;         // This may not exist
+        private protected const int OpenInstanceThunk = 5; // This may not exist
+        private protected const int ObjectArrayThunk = 6; // This may not exist
 
         //
         // If the thunk does not exist, the function will return IntPtr.Zero.
@@ -86,7 +89,11 @@ namespace System
         ///   is typically a delegate pointing to the LINQ expression interpreter.
         /// </param>
         /// <returns></returns>
-        internal unsafe IntPtr GetFunctionPointer(out RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate, out bool isOpenResolver, out bool isInterpreterEntrypoint)
+        internal unsafe IntPtr GetFunctionPointer(
+            out RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate,
+            out bool isOpenResolver,
+            out bool isInterpreterEntrypoint
+        )
         {
             typeOfFirstParameterIfInstanceDelegate = default(RuntimeTypeHandle);
             isOpenResolver = false;
@@ -105,7 +112,9 @@ namespace System
             {
                 if (GetThunk(OpenInstanceThunk) == m_functionPointer)
                 {
-                    typeOfFirstParameterIfInstanceDelegate = ((OpenMethodResolver*)m_extraFunctionPointerOrData)->DeclaringType;
+                    typeOfFirstParameterIfInstanceDelegate = (
+                        (OpenMethodResolver*)m_extraFunctionPointerOrData
+                    )->DeclaringType;
                     isOpenResolver = true;
                 }
                 return m_extraFunctionPointerOrData;
@@ -113,7 +122,9 @@ namespace System
             else
             {
                 if (m_firstParameter != null)
-                    typeOfFirstParameterIfInstanceDelegate = new RuntimeTypeHandle(m_firstParameter.GetEETypePtr());
+                    typeOfFirstParameterIfInstanceDelegate = new RuntimeTypeHandle(
+                        m_firstParameter.GetEETypePtr()
+                    );
 
                 // TODO! Implementation issue for generic invokes here ... we need another IntPtr for uniqueness.
 
@@ -154,12 +165,18 @@ namespace System
         }
 
         // This function is known to the compiler.
-        private void InitializeClosedInstanceWithGVMResolution(object firstParameter, RuntimeMethodHandle tokenOfGenericVirtualMethod)
+        private void InitializeClosedInstanceWithGVMResolution(
+            object firstParameter,
+            RuntimeMethodHandle tokenOfGenericVirtualMethod
+        )
         {
             if (firstParameter is null)
                 throw new ArgumentException(SR.Arg_DlgtNullInst);
 
-            IntPtr functionResolution = TypeLoaderExports.GVMLookupForSlot(firstParameter, tokenOfGenericVirtualMethod);
+            IntPtr functionResolution = TypeLoaderExports.GVMLookupForSlot(
+                firstParameter,
+                tokenOfGenericVirtualMethod
+            );
 
             if (functionResolution == IntPtr.Zero)
             {
@@ -187,13 +204,19 @@ namespace System
             if (firstParameter is null)
                 throw new ArgumentException(SR.Arg_DlgtNullInst);
 
-            m_functionPointer = RuntimeImports.RhpResolveInterfaceMethod(firstParameter, dispatchCell);
+            m_functionPointer = RuntimeImports.RhpResolveInterfaceMethod(
+                firstParameter,
+                dispatchCell
+            );
             m_firstParameter = firstParameter;
         }
 
         // This is used to implement MethodInfo.CreateDelegate() in a desktop-compatible way. Yes, the desktop really
         // let you use that api to invoke an instance method with a null 'this'.
-        private void InitializeClosedInstanceWithoutNullCheck(object firstParameter, IntPtr functionPointer)
+        private void InitializeClosedInstanceWithoutNullCheck(
+            object firstParameter,
+            IntPtr functionPointer
+        )
         {
             if (!FunctionPointerOps.IsGenericMethodPointer(functionPointer))
             {
@@ -210,7 +233,11 @@ namespace System
         }
 
         // This function is known to the compiler backend.
-        private void InitializeClosedStaticThunk(object firstParameter, IntPtr functionPointer, IntPtr functionPointerThunk)
+        private void InitializeClosedStaticThunk(
+            object firstParameter,
+            IntPtr functionPointer,
+            IntPtr functionPointerThunk
+        )
         {
             m_extraFunctionPointerOrData = functionPointer;
             m_helperObject = firstParameter;
@@ -219,7 +246,11 @@ namespace System
         }
 
         // This function is known to the compiler backend.
-        private void InitializeOpenStaticThunk(object firstParameter, IntPtr functionPointer, IntPtr functionPointerThunk)
+        private void InitializeOpenStaticThunk(
+            object firstParameter,
+            IntPtr functionPointer,
+            IntPtr functionPointerThunk
+        )
         {
             // This sort of delegate is invoked by calling the thunk function pointer with the arguments to the delegate + a reference to the delegate object itself.
             m_firstParameter = this;
@@ -227,7 +258,10 @@ namespace System
             m_extraFunctionPointerOrData = functionPointer;
         }
 
-        private void InitializeOpenInstanceThunkDynamic(IntPtr functionPointer, IntPtr functionPointerThunk)
+        private void InitializeOpenInstanceThunkDynamic(
+            IntPtr functionPointer,
+            IntPtr functionPointerThunk
+        )
         {
             // This sort of delegate is invoked by calling the thunk function pointer with the arguments to the delegate + a reference to the delegate object itself.
             m_firstParameter = this;
@@ -284,13 +318,23 @@ namespace System
                 {
                     unsafe
                     {
-                        GenericMethodDescriptor* descriptor = FunctionPointerOps.ConvertToGenericDescriptor(invokeThunk);
+                        GenericMethodDescriptor* descriptor =
+                            FunctionPointerOps.ConvertToGenericDescriptor(invokeThunk);
                         genericDictionary = descriptor->InstantiationArgument;
                         invokeThunk = descriptor->MethodFunctionPointer;
                     }
                 }
 
-                object result = InvokeUtils.CallDynamicInvokeMethod(this.m_firstParameter, this.m_functionPointer, invokeThunk, genericDictionary, this, args, binderBundle: null, wrapInTargetInvocationException: true);
+                object result = InvokeUtils.CallDynamicInvokeMethod(
+                    this.m_firstParameter,
+                    this.m_functionPointer,
+                    invokeThunk,
+                    genericDictionary,
+                    this,
+                    args,
+                    binderBundle: null,
+                    wrapInTargetInvocationException: true
+                );
                 DebugAnnotations.PreviousCallContainsDebuggerStepInCode();
                 return result;
             }
@@ -322,9 +366,11 @@ namespace System
                 }
 
                 // Closed static delegates place a value in m_helperObject that they pass to the target method.
-                if (m_functionPointer == GetThunk(ClosedStaticThunk) ||
-                    m_functionPointer == GetThunk(ClosedInstanceThunkOverGenericMethod) ||
-                    m_functionPointer == GetThunk(ObjectArrayThunk))
+                if (
+                    m_functionPointer == GetThunk(ClosedStaticThunk)
+                    || m_functionPointer == GetThunk(ClosedInstanceThunkOverGenericMethod)
+                    || m_functionPointer == GetThunk(ObjectArrayThunk)
+                )
                     return m_helperObject;
 
                 // Other non-closed thunks can be identified as the m_firstParameter field points at this.
@@ -339,24 +385,67 @@ namespace System
         }
 
         // V2 api: Creates open or closed delegates to static or instance methods - relaxed signature checking allowed.
-        public static Delegate CreateDelegate(Type type, object? firstArgument, MethodInfo method, bool throwOnBindFailure) => ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(type, firstArgument, method, throwOnBindFailure);
+        public static Delegate CreateDelegate(
+            Type type,
+            object? firstArgument,
+            MethodInfo method,
+            bool throwOnBindFailure
+        ) =>
+            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
+                type,
+                firstArgument,
+                method,
+                throwOnBindFailure
+            );
 
         // V1 api: Creates open delegates to static or instance methods - relaxed signature checking allowed.
-        public static Delegate CreateDelegate(Type type, MethodInfo method, bool throwOnBindFailure) => ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(type, method, throwOnBindFailure);
+        public static Delegate CreateDelegate(
+            Type type,
+            MethodInfo method,
+            bool throwOnBindFailure
+        ) =>
+            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
+                type,
+                method,
+                throwOnBindFailure
+            );
 
         // V1 api: Creates closed delegates to instance methods only, relaxed signature checking disallowed.
         [RequiresUnreferencedCode("The target method might be removed")]
-        public static Delegate CreateDelegate(Type type, object target, string method, bool ignoreCase, bool throwOnBindFailure) => ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure);
+        public static Delegate CreateDelegate(
+            Type type,
+            object target,
+            string method,
+            bool ignoreCase,
+            bool throwOnBindFailure
+        ) =>
+            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
+                type,
+                target,
+                method,
+                ignoreCase,
+                throwOnBindFailure
+            );
 
         // V1 api: Creates open delegates to static methods only, relaxed signature checking disallowed.
-        public static Delegate CreateDelegate(Type type, [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target, string method, bool ignoreCase, bool throwOnBindFailure) => ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(type, target, method, ignoreCase, throwOnBindFailure);
+        public static Delegate CreateDelegate(
+            Type type,
+            [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type target,
+            string method,
+            bool ignoreCase,
+            bool throwOnBindFailure
+        ) =>
+            ReflectionAugments.ReflectionCoreCallbacks.CreateDelegate(
+                type,
+                target,
+                method,
+                ignoreCase,
+                throwOnBindFailure
+            );
 
         internal bool IsOpenStatic
         {
-            get
-            {
-                return GetThunk(OpenStaticThunk) == m_functionPointer;
-            }
+            get { return GetThunk(OpenStaticThunk) == m_functionPointer; }
         }
 
         internal static bool InternalEqualTypes(object a, object b)
@@ -399,7 +488,13 @@ namespace System
         // Note that delegates constructed the normal way do not come through here. The IL transformer generates the equivalent of
         // this code customized for each delegate type.
         //
-        internal static Delegate CreateDelegate(EETypePtr delegateEEType, IntPtr ldftnResult, object thisObject, bool isStatic, bool isOpen)
+        internal static Delegate CreateDelegate(
+            EETypePtr delegateEEType,
+            IntPtr ldftnResult,
+            object thisObject,
+            bool isStatic,
+            bool isOpen
+        )
         {
             Delegate del = (Delegate)(RuntimeImports.RhNewObject(delegateEEType));
 
@@ -455,23 +550,37 @@ namespace System
             else
             {
                 RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate;
-                IntPtr functionPointer = GetFunctionPointer(out typeOfFirstParameterIfInstanceDelegate, out bool _, out bool _);
+                IntPtr functionPointer = GetFunctionPointer(
+                    out typeOfFirstParameterIfInstanceDelegate,
+                    out bool _,
+                    out bool _
+                );
                 if (!FunctionPointerOps.IsGenericMethodPointer(functionPointer))
                 {
-                    return DebuggerFunctionPointerFormattingHook(functionPointer, typeOfFirstParameterIfInstanceDelegate);
+                    return DebuggerFunctionPointerFormattingHook(
+                        functionPointer,
+                        typeOfFirstParameterIfInstanceDelegate
+                    );
                 }
                 else
                 {
                     unsafe
                     {
-                        GenericMethodDescriptor* pointerDef = FunctionPointerOps.ConvertToGenericDescriptor(functionPointer);
-                        return DebuggerFunctionPointerFormattingHook(pointerDef->InstantiationArgument, typeOfFirstParameterIfInstanceDelegate);
+                        GenericMethodDescriptor* pointerDef =
+                            FunctionPointerOps.ConvertToGenericDescriptor(functionPointer);
+                        return DebuggerFunctionPointerFormattingHook(
+                            pointerDef->InstantiationArgument,
+                            typeOfFirstParameterIfInstanceDelegate
+                        );
                     }
                 }
             }
         }
 
-        private static string DebuggerFunctionPointerFormattingHook(IntPtr functionPointer, RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate)
+        private static string DebuggerFunctionPointerFormattingHook(
+            IntPtr functionPointer,
+            RuntimeTypeHandle typeOfFirstParameterIfInstanceDelegate
+        )
         {
             // This method will be hooked by the debugger and the debugger will cause it to return a description for the function pointer
             throw new NotSupportedException();

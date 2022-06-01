@@ -17,15 +17,31 @@ namespace AutoMapper
         private List<ValueTransformerConfiguration> _valueTransformerConfigs;
         private bool? _canResolveValue;
         private Type _sourceType;
-        public PropertyMap(MemberInfo destinationMember, Type destinationMemberType, TypeMap typeMap) : base(typeMap)
+
+        public PropertyMap(
+            MemberInfo destinationMember,
+            Type destinationMemberType,
+            TypeMap typeMap
+        ) : base(typeMap)
         {
             DestinationMember = destinationMember;
             DestinationType = destinationMemberType;
         }
+
         public PropertyMap(PropertyMap inheritedMappedProperty, TypeMap typeMap)
-            : this(inheritedMappedProperty.DestinationMember, inheritedMappedProperty.DestinationType, typeMap) => ApplyInheritedPropertyMap(inheritedMappedProperty);
-        public PropertyMap(PropertyMap includedMemberMap, TypeMap typeMap, IncludedMember includedMember)
-            : this(includedMemberMap, typeMap) => IncludedMember = includedMember.Chain(includedMemberMap.IncludedMember);
+            : this(
+                inheritedMappedProperty.DestinationMember,
+                inheritedMappedProperty.DestinationType,
+                typeMap
+            ) => ApplyInheritedPropertyMap(inheritedMappedProperty);
+
+        public PropertyMap(
+            PropertyMap includedMemberMap,
+            TypeMap typeMap,
+            IncludedMember includedMember
+        ) : this(includedMemberMap, typeMap) =>
+            IncludedMember = includedMember.Chain(includedMemberMap.IncludedMember);
+
         public MemberInfo DestinationMember { get; }
         public override string DestinationName => DestinationMember.Name;
         public override Type DestinationType { get; protected set; }
@@ -42,18 +58,27 @@ namespace AutoMapper
         public override object NullSubstitute { get; set; }
         public override ValueResolverConfiguration ValueResolverConfig { get; set; }
         public override ValueResolverConfiguration ValueConverterConfig { get; set; }
-        public override IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers => _valueTransformerConfigs.NullCheck();
+        public override IReadOnlyCollection<ValueTransformerConfiguration> ValueTransformers =>
+            _valueTransformerConfigs.NullCheck();
         public override Type SourceType
         {
-            get => _sourceType ??=
-                ValueConverterConfig?.ResolvedType ??
-                ValueResolverConfig?.ResolvedType ??
-                CustomMapFunction?.ReturnType ??
-                CustomMapExpression?.ReturnType ??
-                (_sourceMembers.Length > 0 ? _sourceMembers[_sourceMembers.Length - 1].GetMemberType() : typeof(object));
+            get =>
+                _sourceType ??=
+                    ValueConverterConfig?.ResolvedType
+                    ?? ValueResolverConfig?.ResolvedType
+                    ?? CustomMapFunction?.ReturnType
+                    ?? CustomMapExpression?.ReturnType
+                    ?? (
+                        _sourceMembers.Length > 0
+                            ? _sourceMembers[_sourceMembers.Length - 1].GetMemberType()
+                            : typeof(object)
+                    );
             protected set => _sourceType = value;
         }
-        public void MapByConvention(IEnumerable<MemberInfo> sourceMembers) => _sourceMembers = sourceMembers.ToArray();
+
+        public void MapByConvention(IEnumerable<MemberInfo> sourceMembers) =>
+            _sourceMembers = sourceMembers.ToArray();
+
         public void ApplyInheritedPropertyMap(PropertyMap inheritedMappedProperty)
         {
             if (Ignored)
@@ -93,12 +118,26 @@ namespace AutoMapper
             if (inheritedMappedProperty._valueTransformerConfigs != null)
             {
                 _valueTransformerConfigs ??= new();
-                _valueTransformerConfigs.InsertRange(0, inheritedMappedProperty._valueTransformerConfigs);
+                _valueTransformerConfigs.InsertRange(
+                    0,
+                    inheritedMappedProperty._valueTransformerConfigs
+                );
             }
         }
-        public override bool CanResolveValue => _canResolveValue ??= !Ignored && (_sourceMembers.Length > 0 || IsResolveConfigured);
-        private bool IsResolveConfigured => (ValueResolverConfig ?? CustomMapFunction ?? CustomMapExpression ?? (object)ValueConverterConfig) != null;
-        public void AddValueTransformation(ValueTransformerConfiguration valueTransformerConfiguration)
+
+        public override bool CanResolveValue =>
+            _canResolveValue ??= !Ignored && (_sourceMembers.Length > 0 || IsResolveConfigured);
+        private bool IsResolveConfigured =>
+            (
+                ValueResolverConfig
+                ?? CustomMapFunction
+                ?? CustomMapExpression
+                ?? (object)ValueConverterConfig
+            ) != null;
+
+        public void AddValueTransformation(
+            ValueTransformerConfiguration valueTransformerConfiguration
+        )
         {
             _valueTransformerConfigs ??= new();
             _valueTransformerConfigs.Add(valueTransformerConfiguration);

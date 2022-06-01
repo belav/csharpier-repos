@@ -9,9 +9,12 @@ namespace System.Linq.Expressions.Compiler
     /// A simple dictionary of stacks, keyed off a particular type
     /// This is useful for storing free lists of variables
     /// </summary>
-    internal sealed class KeyedStack<TKey, TValue> where TValue : class where TKey : notnull
+    internal sealed class KeyedStack<TKey, TValue>
+        where TValue : class
+        where TKey : notnull
     {
-        private readonly Dictionary<TKey, Stack<TValue>> _data = new Dictionary<TKey, Stack<TValue>>();
+        private readonly Dictionary<TKey, Stack<TValue>> _data =
+            new Dictionary<TKey, Stack<TValue>>();
 
         internal void Push(TKey key, TValue value)
         {
@@ -24,6 +27,8 @@ namespace System.Linq.Expressions.Compiler
         }
 
         internal TValue? TryPop(TKey key) =>
-            _data.TryGetValue(key, out Stack<TValue>? stack) && stack.TryPop(out TValue? value) ? value : null;
+            _data.TryGetValue(key, out Stack<TValue>? stack) && stack.TryPop(out TValue? value)
+                ? value
+                : null;
     }
 }

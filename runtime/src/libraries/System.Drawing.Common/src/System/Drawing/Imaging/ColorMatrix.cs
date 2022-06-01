@@ -85,6 +85,7 @@ namespace System.Drawing.Imaging
             get { return _matrix00; }
             set { _matrix00 = value; }
         }
+
         /// <summary>
         /// Represents the element at the 0th row and 1st column of this <see cref='ColorMatrix'/>.
         /// </summary>
@@ -301,7 +302,6 @@ namespace System.Drawing.Imaging
             set { _matrix44 = value; }
         }
 
-
         /// <summary>
         /// Initializes a new instance of the <see cref='ColorMatrix'/> class with the elements in the specified matrix.
         /// </summary>
@@ -381,11 +381,7 @@ namespace System.Drawing.Imaging
         /// </summary>
         public float this[int row, int column]
         {
-            get
-            {
-                return GetMatrix()[row][column];
-            }
-
+            get { return GetMatrix()[row][column]; }
             set
             {
                 float[][] tempMatrix = GetMatrix();
@@ -399,16 +395,26 @@ namespace System.Drawing.Imaging
         internal ref float GetPinnableReference() => ref _matrix00;
 
 #if NET7_0_OR_GREATER
-        [CustomTypeMarshaller(typeof(ColorMatrix), Direction = CustomTypeMarshallerDirection.In, Features = CustomTypeMarshallerFeatures.TwoStageMarshalling)]
+        [CustomTypeMarshaller(
+            typeof(ColorMatrix),
+            Direction = CustomTypeMarshallerDirection.In,
+            Features = CustomTypeMarshallerFeatures.TwoStageMarshalling
+        )]
         internal unsafe struct PinningMarshaller
         {
             private readonly ColorMatrix _managed;
+
             public PinningMarshaller(ColorMatrix managed)
             {
                 _managed = managed;
             }
 
-            public ref float GetPinnableReference() => ref (_managed is null ? ref Unsafe.NullRef<float>() : ref _managed.GetPinnableReference());
+            public ref float GetPinnableReference() =>
+                ref (
+                    _managed is null
+                        ? ref Unsafe.NullRef<float>()
+                        : ref _managed.GetPinnableReference()
+                );
 
             public void* ToNativeValue() => Unsafe.AsPointer(ref GetPinnableReference());
         }

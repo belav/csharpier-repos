@@ -18,16 +18,17 @@ namespace Roslyn.VisualStudio.IntegrationTests.VisualBasic
     public class BasicErrorListNetCore : BasicErrorListCommon
     {
         public BasicErrorListNetCore(VisualStudioInstanceFactory instanceFactory)
-            : base(instanceFactory, WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary)
-        {
-        }
+            : base(instanceFactory, WellKnownProjectTemplates.VisualBasicNetCoreClassLibrary) { }
 
         public override async Task InitializeAsync()
         {
             await base.InitializeAsync().ConfigureAwait(false);
 
             // The VisualBasicNetCoreClassLibrary template does not open a file automatically.
-            VisualStudio.SolutionExplorer.OpenFile(new Project(ProjectName), WellKnownProjectTemplates.VisualBasicNetCoreClassLibraryClassFileName);
+            VisualStudio.SolutionExplorer.OpenFile(
+                new Project(ProjectName),
+                WellKnownProjectTemplates.VisualBasicNetCoreClassLibraryClassFileName
+            );
         }
 
         [WorkItem(1825, "https://github.com/dotnet/roslyn-project-system/issues/1825")]

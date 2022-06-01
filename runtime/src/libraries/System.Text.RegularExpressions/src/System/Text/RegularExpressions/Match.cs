@@ -47,11 +47,12 @@ namespace System.Text.RegularExpressions
         // output from the match
         internal readonly int[][] _matches;
         internal readonly int[] _matchcount;
-        internal bool _balancing;        // whether we've done any balancing with this match.  If we
-                                         // have done balancing, we'll need to do extra work in Tidy().
+        internal bool _balancing; // whether we've done any balancing with this match.  If we
 
-        internal Match(Regex? regex, int capcount, string? text, int begpos, int len, int startpos) :
-            base(text, new int[2], 0, "0")
+        // have done balancing, we'll need to do extra work in Tidy().
+
+        internal Match(Regex? regex, int capcount, string? text, int begpos, int len, int startpos)
+            : base(text, new int[2], 0, "0")
         {
             _regex = regex;
             _matchcount = new int[capcount];
@@ -105,9 +106,16 @@ namespace System.Text.RegularExpressions
         {
             Regex? r = _regex;
             Debug.Assert(Text != null);
-            return r != null ?
-                r.RunSingleMatch(RegexRunnerMode.FullMatchRequired, Length, Text, _textbeg, _textend - _textbeg, _textpos)! :
-                this;
+            return r != null
+                ? r.RunSingleMatch(
+                    RegexRunnerMode.FullMatchRequired,
+                    Length,
+                    Text,
+                    _textbeg,
+                    _textend - _textbeg,
+                    _textpos
+                )!
+                : this;
         }
 
         /// <summary>
@@ -129,7 +137,14 @@ namespace System.Text.RegularExpressions
             }
 
             // Gets the weakly cached replacement helper or creates one if there isn't one already.
-            RegexReplacement repl = RegexReplacement.GetOrCreate(regex.RegexReplacementWeakReference, replacement, regex.caps!, regex.capsize, regex.capnames!, regex.roptions);
+            RegexReplacement repl = RegexReplacement.GetOrCreate(
+                regex.RegexReplacementWeakReference,
+                replacement,
+                regex.caps!,
+                regex.capsize,
+                regex.capnames!,
+                regex.roptions
+            );
             SegmentStringBuilder segments = SegmentStringBuilder.Create();
             repl.ReplacementImpl(ref segments, this);
             return segments.ToString();
@@ -232,7 +247,11 @@ namespace System.Text.RegularExpressions
             }
             else
             {
-                AddMatch(cap, -3 - target, -4 - target /* == -3 - (target + 1) */ );
+                AddMatch(
+                    cap,
+                    -3 - target,
+                    -4 - target /* == -3 - (target + 1) */
+                );
             }
         }
 
@@ -243,10 +262,9 @@ namespace System.Text.RegularExpressions
         internal bool IsMatched(int cap)
         {
             int[] matchcount = _matchcount;
-            return
-                (uint)cap < (uint)matchcount.Length &&
-                matchcount[cap] > 0 &&
-                _matches[cap][matchcount[cap] * 2 - 1] != (-3 + 1);
+            return (uint)cap < (uint)matchcount.Length
+                && matchcount[cap] > 0
+                && _matches[cap][matchcount[cap] * 2 - 1] != (-3 + 1);
         }
 
         /// <summary>
@@ -380,8 +398,15 @@ namespace System.Text.RegularExpressions
     {
         private new readonly Hashtable _caps;
 
-        internal MatchSparse(Regex regex, Hashtable caps, int capcount, string? text, int begpos, int len, int startpos) :
-            base(regex, capcount, text, begpos, len, startpos)
+        internal MatchSparse(
+            Regex regex,
+            Hashtable caps,
+            int capcount,
+            string? text,
+            int begpos,
+            int len,
+            int startpos
+        ) : base(regex, capcount, text, begpos, len, startpos)
         {
             _caps = caps;
         }

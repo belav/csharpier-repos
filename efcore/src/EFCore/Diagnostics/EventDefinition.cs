@@ -30,8 +30,8 @@ public class EventDefinition : EventDefinitionBase
         EventId eventId,
         LogLevel level,
         string eventIdCode,
-        Func<LogLevel, Action<ILogger, Exception?>> logActionFunc)
-        : base(loggingOptions, eventId, level, eventIdCode)
+        Func<LogLevel, Action<ILogger, Exception?>> logActionFunc
+    ) : base(loggingOptions, eventId, level, eventIdCode)
     {
         _logAction = logActionFunc(Level);
     }
@@ -56,8 +56,8 @@ public class EventDefinition : EventDefinitionBase
     /// <param name="exception">Optional exception associated with the event.</param>
     public virtual void Log<TLoggerCategory>(
         IDiagnosticsLogger<TLoggerCategory> logger,
-        Exception? exception = null)
-        where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
+        Exception? exception = null
+    ) where TLoggerCategory : LoggerCategory<TLoggerCategory>, new()
     {
         switch (WarningBehavior)
         {

@@ -45,7 +45,12 @@ namespace Tracing.Tests
                         Console.WriteLine(s);
                     Assert.True("listener.EventCount > 0", listener.EventCount > 0);
                     if (OperatingSystem.IsWindows())
-                        Assert.True("Saw the ThreadPoolIOPack event", listener.SeenProvidersAndEvents.Contains("Microsoft-Windows-DotNETRuntime/EVENTID(65)"));
+                        Assert.True(
+                            "Saw the ThreadPoolIOPack event",
+                            listener.SeenProvidersAndEvents.Contains(
+                                "Microsoft-Windows-DotNETRuntime/EVENTID(65)"
+                            )
+                        );
                 }
 
                 // Generate some more GC events.
@@ -62,7 +67,7 @@ namespace Tracing.Tests
         {
             while (true)
             {
-                for(int i=0; i<1000; i++)
+                for (int i = 0; i < 1000; i++)
                     GC.KeepAlive(new object());
 
                 Thread.Sleep(10);
@@ -84,11 +89,7 @@ namespace Tracing.Tests
         private string m_name;
 
         // Keep track of the set of keywords to be enabled.
-        public static EventKeywords EnableKeywords
-        {
-            get;
-            set;
-        }
+        public static EventKeywords EnableKeywords { get; set; }
 
         public SimpleEventListener(string name)
         {
@@ -116,20 +117,30 @@ namespace Tracing.Tests
 
         protected override void OnEventWritten(EventWrittenEventArgs eventData)
         {
-            Console.WriteLine($"[{m_name}] ThreadID = {eventData.OSThreadId} ID = {eventData.EventId} Name = {eventData.EventName}");
+            Console.WriteLine(
+                $"[{m_name}] ThreadID = {eventData.OSThreadId} ID = {eventData.EventId} Name = {eventData.EventName}"
+            );
             Console.WriteLine($"TimeStamp: {eventData.TimeStamp.ToLocalTime()}");
             Console.WriteLine($"LocalTime: {DateTime.Now}");
             Console.WriteLine($"Difference: {DateTime.UtcNow - eventData.TimeStamp}");
-            Assert.True("eventData.TimeStamp <= DateTime.UtcNow", eventData.TimeStamp <= DateTime.UtcNow);
+            Assert.True(
+                "eventData.TimeStamp <= DateTime.UtcNow",
+                eventData.TimeStamp <= DateTime.UtcNow
+            );
             for (int i = 0; i < eventData.Payload.Count; i++)
             {
-                string payloadString = eventData.Payload[i] != null ? eventData.Payload[i].ToString() : string.Empty;
-                Console.WriteLine($"\tName = \"{eventData.PayloadNames[i]}\" Value = \"{payloadString}\"");
+                string payloadString =
+                    eventData.Payload[i] != null ? eventData.Payload[i].ToString() : string.Empty;
+                Console.WriteLine(
+                    $"\tName = \"{eventData.PayloadNames[i]}\" Value = \"{payloadString}\""
+                );
             }
             Console.WriteLine("\n");
 
             SeenProvidersAndEvents.Add($"{eventData.EventSource.Name}");
-            SeenProvidersAndEvents.Add($"{eventData.EventSource.Name}/EVENTID({eventData.EventId})");
+            SeenProvidersAndEvents.Add(
+                $"{eventData.EventSource.Name}/EVENTID({eventData.EventId})"
+            );
 
             EventCount++;
         }

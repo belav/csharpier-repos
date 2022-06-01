@@ -11,8 +11,7 @@ namespace Microsoft.EntityFrameworkCore.Update.Internal;
 ///     any release. You should only use it directly in your code with extreme caution and knowing that
 ///     doing so can result in application failures when updating to a new Entity Framework Core release.
 /// </summary>
-public class RowIdentityMap<TKey> : IRowIdentityMap
-    where TKey : notnull
+public class RowIdentityMap<TKey> : IRowIdentityMap where TKey : notnull
 {
     private readonly IUniqueConstraint _key;
     private readonly Dictionary<TKey, INonTrackedModificationCommand> _identityMap;
@@ -27,8 +26,11 @@ public class RowIdentityMap<TKey> : IRowIdentityMap
     public RowIdentityMap(IUniqueConstraint key)
     {
         _key = key;
-        _principalKeyValueFactory = (IRowKeyValueFactory<TKey>)((UniqueConstraint)_key).GetRowKeyValueFactory();
-        _identityMap = new Dictionary<TKey, INonTrackedModificationCommand>(_principalKeyValueFactory.EqualityComparer);
+        _principalKeyValueFactory =
+            (IRowKeyValueFactory<TKey>)((UniqueConstraint)_key).GetRowKeyValueFactory();
+        _identityMap = new Dictionary<TKey, INonTrackedModificationCommand>(
+            _principalKeyValueFactory.EqualityComparer
+        );
     }
 
     /// <summary>
@@ -57,8 +59,8 @@ public class RowIdentityMap<TKey> : IRowIdentityMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Add(object?[] keyValues, INonTrackedModificationCommand command)
-        => Add(_principalKeyValueFactory.CreateKeyValue(keyValues), command);
+    public virtual void Add(object?[] keyValues, INonTrackedModificationCommand command) =>
+        Add(_principalKeyValueFactory.CreateKeyValue(keyValues), command);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -84,8 +86,8 @@ public class RowIdentityMap<TKey> : IRowIdentityMap
     ///     any release. You should only use it directly in your code with extreme caution and knowing that
     ///     doing so can result in application failures when updating to a new Entity Framework Core release.
     /// </summary>
-    public virtual void Remove(INonTrackedModificationCommand command)
-        => Remove(_principalKeyValueFactory.CreateKeyValue(command), command);
+    public virtual void Remove(INonTrackedModificationCommand command) =>
+        Remove(_principalKeyValueFactory.CreateKeyValue(command), command);
 
     /// <summary>
     ///     This is an internal API that supports the Entity Framework Core infrastructure and not subject to
@@ -95,8 +97,7 @@ public class RowIdentityMap<TKey> : IRowIdentityMap
     /// </summary>
     private void Remove(TKey key, INonTrackedModificationCommand command)
     {
-        if (_identityMap.TryGetValue(key, out var existingEntry)
-            && existingEntry == command)
+        if (_identityMap.TryGetValue(key, out var existingEntry) && existingEntry == command)
         {
             _identityMap.Remove(key);
         }

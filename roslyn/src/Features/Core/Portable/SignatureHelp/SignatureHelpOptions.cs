@@ -6,9 +6,9 @@ using Microsoft.CodeAnalysis.Completion;
 
 namespace Microsoft.CodeAnalysis.SignatureHelp
 {
-    internal readonly record struct SignatureHelpOptions(
-        bool HideAdvancedMembers)
+    internal readonly record struct SignatureHelpOptions(bool HideAdvancedMembers)
     {
-        public static readonly SignatureHelpOptions Default = new(CompletionOptions.Default.HideAdvancedMembers);
+        public static readonly SignatureHelpOptions Default =
+            new(CompletionOptions.Default.HideAdvancedMembers);
     }
 }

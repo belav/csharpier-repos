@@ -13,14 +13,17 @@ using Xunit;
 
 namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.Structure
 {
-    public class AnonymousMethodExpressionTests : AbstractCSharpSyntaxNodeStructureTests<AnonymousMethodExpressionSyntax>
+    public class AnonymousMethodExpressionTests
+        : AbstractCSharpSyntaxNodeStructureTests<AnonymousMethodExpressionSyntax>
     {
-        internal override AbstractSyntaxStructureProvider CreateProvider() => new AnonymousMethodExpressionStructureProvider();
+        internal override AbstractSyntaxStructureProvider CreateProvider() =>
+            new AnonymousMethodExpressionStructureProvider();
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestAnonymousMethod()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void Main()
@@ -31,14 +34,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestAnonymousMethodInForLoop()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void Main()
@@ -53,7 +59,8 @@ class C
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestAnonymousMethodInMethodCall1()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void Main()
@@ -64,14 +71,17 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.Outlining)]
         public async Task TestAnonymousMethodInMethodCall2()
         {
-            const string code = @"
+            const string code =
+                @"
 class C
 {
     void Main()
@@ -82,8 +92,10 @@ class C
     }
 }";
 
-            await VerifyBlockSpansAsync(code,
-                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false));
+            await VerifyBlockSpansAsync(
+                code,
+                Region("textspan", "hint", CSharpStructureHelpers.Ellipsis, autoCollapse: false)
+            );
         }
     }
 }

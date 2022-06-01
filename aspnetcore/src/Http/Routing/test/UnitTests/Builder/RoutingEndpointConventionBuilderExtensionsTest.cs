@@ -151,10 +151,13 @@ public class RoutingEndpointConventionBuilderExtensionsTest
 
     private TestEndpointConventionBuilder CreateBuilder()
     {
-        var conventionBuilder = new DefaultEndpointConventionBuilder(new RouteEndpointBuilder(
-            TestConstants.EmptyRequestDelegate,
-            RoutePatternFactory.Parse("/test"),
-            order: 0));
+        var conventionBuilder = new DefaultEndpointConventionBuilder(
+            new RouteEndpointBuilder(
+                TestConstants.EmptyRequestDelegate,
+                RoutePatternFactory.Parse("/test"),
+                order: 0
+            )
+        );
 
         return new TestEndpointConventionBuilder(conventionBuilder);
     }
@@ -164,7 +167,9 @@ public class RoutingEndpointConventionBuilderExtensionsTest
         private readonly DefaultEndpointConventionBuilder _endpointConventionBuilder;
         public bool TestProperty { get; } = true;
 
-        public TestEndpointConventionBuilder(DefaultEndpointConventionBuilder endpointConventionBuilder)
+        public TestEndpointConventionBuilder(
+            DefaultEndpointConventionBuilder endpointConventionBuilder
+        )
         {
             _endpointConventionBuilder = endpointConventionBuilder;
         }

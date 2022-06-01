@@ -29,15 +29,17 @@ internal static partial class Interop
             }
 
             internal fixed byte Address[MAX_IP_ADDRESS_BYTES]; // Buffer to fit an IPv4 or IPv6 address
-            private  uint _isIPv6;                             // Non-zero if this is an IPv6 address; zero for IPv4.
-            internal uint ScopeId;                             // Scope ID (IPv6 only)
+            private uint _isIPv6; // Non-zero if this is an IPv6 address; zero for IPv4.
+            internal uint ScopeId; // Scope ID (IPv6 only)
 
             public override unsafe int GetHashCode()
             {
                 HashCode h = default;
                 fixed (byte* ptr = Address)
                 {
-                    h.AddBytes(new ReadOnlySpan<byte>(ptr, IsIPv6 ? IPv6AddressBytes : IPv4AddressBytes));
+                    h.AddBytes(
+                        new ReadOnlySpan<byte>(ptr, IsIPv6 ? IPv6AddressBytes : IPv4AddressBytes)
+                    );
                 }
                 return h.ToHashCode();
             }

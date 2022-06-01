@@ -20,7 +20,11 @@ namespace System.IO.Compression
                 CompressionLevel.NoCompression => Quality_Min,
                 CompressionLevel.Fastest => 1,
                 CompressionLevel.SmallestSize => Quality_Max,
-                _ => throw new ArgumentException(SR.ArgumentOutOfRange_Enum, nameof(compressionLevel))
+                _
+                    => throw new ArgumentException(
+                        SR.ArgumentOutOfRange_Enum,
+                        nameof(compressionLevel)
+                    )
             };
     }
 }

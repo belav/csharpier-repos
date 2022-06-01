@@ -15,7 +15,11 @@ namespace System.Threading.RateLimiting
         /// <param name="queueProcessingOrder">Determines the behaviour of <see cref="RateLimiter.WaitAsync"/> when not enough resources can be leased.</param>
         /// <param name="queueLimit">Maximum number of permits that can be queued concurrently.</param>
         /// <exception cref="ArgumentOutOfRangeException">When <paramref name="permitLimit"/> or <paramref name="queueLimit"/> are less than 0.</exception>
-        public ConcurrencyLimiterOptions(int permitLimit, QueueProcessingOrder queueProcessingOrder, int queueLimit)
+        public ConcurrencyLimiterOptions(
+            int permitLimit,
+            QueueProcessingOrder queueProcessingOrder,
+            int queueLimit
+        )
         {
             if (permitLimit < 0)
             {
@@ -41,7 +45,8 @@ namespace System.Threading.RateLimiting
         /// <value>
         /// <see cref="QueueProcessingOrder.OldestFirst"/> by default.
         /// </value>
-        public QueueProcessingOrder QueueProcessingOrder { get; } = QueueProcessingOrder.OldestFirst;
+        public QueueProcessingOrder QueueProcessingOrder { get; } =
+            QueueProcessingOrder.OldestFirst;
 
         /// <summary>
         /// Maximum number of permits that can be queued concurrently.

@@ -4,6 +4,7 @@
 // Getter and Setter, simple, compiled debug+, both should NOT be inlined.
 
 using System;
+
 public class A
 {
     private int _prop;
@@ -13,6 +14,7 @@ public class A
         set { _prop = value; }
     }
 }
+
 internal class debug
 {
     public static int Main()

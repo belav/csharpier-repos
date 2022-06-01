@@ -13,7 +13,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<byte> salt,
             int iterations,
             HashAlgorithmName hashAlgorithmName,
-            Span<byte> destination)
+            Span<byte> destination
+        )
         {
             Debug.Assert(!destination.IsEmpty);
             Debug.Assert(hashAlgorithmName.Name is not null);
@@ -21,15 +22,22 @@ namespace System.Security.Cryptography
             if (!Helpers.HasHMAC)
             {
                 throw new CryptographicException(
-                    SR.Format(SR.Cryptography_AlgorithmNotSupported, "HMAC" + hashAlgorithmName.Name));
+                    SR.Format(
+                        SR.Cryptography_AlgorithmNotSupported,
+                        "HMAC" + hashAlgorithmName.Name
+                    )
+                );
             }
 
-            using (Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
-                password.ToArray(),
-                salt.ToArray(),
-                iterations,
-                hashAlgorithmName,
-                clearPassword: true))
+            using (
+                Rfc2898DeriveBytes deriveBytes = new Rfc2898DeriveBytes(
+                    password.ToArray(),
+                    salt.ToArray(),
+                    iterations,
+                    hashAlgorithmName,
+                    clearPassword: true
+                )
+            )
             {
                 byte[] result = deriveBytes.GetBytes(destination.Length);
                 result.AsSpan().CopyTo(destination);

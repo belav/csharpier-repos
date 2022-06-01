@@ -9,24 +9,28 @@ using System.Runtime.Versioning;
 
 namespace System.Security.Cryptography.Cose
 {
-    public sealed class CoseHeaderMap : IEnumerable<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)>
+    public sealed class CoseHeaderMap
+        : IEnumerable<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)>
     {
         private static readonly byte[] s_emptyBstrEncoded = new byte[] { 0x40 };
         private static readonly CoseHeaderMap s_emptyMap = new CoseHeaderMap(isReadOnly: true);
 
         public bool IsReadOnly { get; internal set; }
 
-        private readonly Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>> _headerParameters = new Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>>();
+        private readonly Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>> _headerParameters =
+            new Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>>();
 
-        public CoseHeaderMap() : this (isReadOnly: false) { }
+        public CoseHeaderMap() : this(isReadOnly: false) { }
 
         internal CoseHeaderMap(bool isReadOnly)
         {
             IsReadOnly = isReadOnly;
         }
 
-        public bool TryGetEncodedValue(CoseHeaderLabel label, out ReadOnlyMemory<byte> encodedValue)
-            => _headerParameters.TryGetValue(label, out encodedValue);
+        public bool TryGetEncodedValue(
+            CoseHeaderLabel label,
+            out ReadOnlyMemory<byte> encodedValue
+        ) => _headerParameters.TryGetValue(label, out encodedValue);
 
         public ReadOnlyMemory<byte> GetEncodedValue(CoseHeaderLabel label)
         {
@@ -35,7 +39,9 @@ namespace System.Security.Cryptography.Cose
                 return encodedValue;
             }
 
-            throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapLabelDoeNotExist, label.LabelName));
+            throw new InvalidOperationException(
+                SR.Format(SR.CoseHeaderMapLabelDoeNotExist, label.LabelName)
+            );
         }
 
         public int GetValueAsInt32(CoseHeaderLabel label)
@@ -62,8 +68,8 @@ namespace System.Security.Cryptography.Cose
             return retVal;
         }
 
-        public void SetEncodedValue(CoseHeaderLabel label, ReadOnlySpan<byte> encodedValue)
-            => SetEncodedValue(label, new ReadOnlyMemory<byte>(encodedValue.ToArray()));
+        public void SetEncodedValue(CoseHeaderLabel label, ReadOnlySpan<byte> encodedValue) =>
+            SetEncodedValue(label, new ReadOnlyMemory<byte>(encodedValue.ToArray()));
 
         internal void SetEncodedValue(CoseHeaderLabel label, ReadOnlyMemory<byte> encodedValue)
         {
@@ -76,7 +82,11 @@ namespace System.Security.Cryptography.Cose
         public void SetValue(CoseHeaderLabel label, int value)
         {
             ValidateIsReadOnly();
-            ValidateHeaderValue(label, value < 0 ? CborReaderState.NegativeInteger : CborReaderState.UnsignedInteger, null);
+            ValidateHeaderValue(
+                label,
+                value < 0 ? CborReaderState.NegativeInteger : CborReaderState.UnsignedInteger,
+                null
+            );
 
             var writer = new CborWriter();
             writer.WriteInt32(value);
@@ -113,11 +123,17 @@ namespace System.Security.Cryptography.Cose
         {
             if (IsReadOnly)
             {
-                throw new InvalidOperationException(SR.CoseHeaderMapDecodedMapIsReadOnlyCannotSetValue);
+                throw new InvalidOperationException(
+                    SR.CoseHeaderMapDecodedMapIsReadOnlyCannotSetValue
+                );
             }
         }
 
-        private static void ValidateHeaderValue(CoseHeaderLabel label, CborReaderState? state, ReadOnlyMemory<byte>? encodedValue)
+        private static void ValidateHeaderValue(
+            CoseHeaderLabel label,
+            CborReaderState? state,
+            ReadOnlyMemory<byte>? encodedValue
+        )
         {
             if (state != null)
             {
@@ -145,20 +161,30 @@ namespace System.Security.Cryptography.Cose
 
                 if (reader.BytesRemaining != 0)
                 {
-                    throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid, label));
+                    throw new InvalidOperationException(
+                        SR.Format(SR.CoseHeaderMapCborEncodedValueNotValid, label)
+                    );
                 }
             }
 
-            static void ValidateKnownHeaderValue(int label, CborReaderState? initialState, CborReader? reader)
+            static void ValidateKnownHeaderValue(
+                int label,
+                CborReaderState? initialState,
+                CborReader? reader
+            )
             {
                 switch (label)
                 {
                     case KnownHeaders.Alg:
-                        if (initialState != CborReaderState.NegativeInteger &&
-                            initialState != CborReaderState.UnsignedInteger &&
-                            initialState != CborReaderState.TextString)
+                        if (
+                            initialState != CborReaderState.NegativeInteger
+                            && initialState != CborReaderState.UnsignedInteger
+                            && initialState != CborReaderState.TextString
+                        )
                         {
-                            throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label)
+                            );
                         }
                         reader?.SkipValue();
                         break;
@@ -169,10 +195,14 @@ namespace System.Security.Cryptography.Cose
                         reader?.SkipValue(); // TODO
                         break;
                     case KnownHeaders.ContentType:
-                        if (initialState != CborReaderState.TextString &&
-                            initialState != CborReaderState.UnsignedInteger)
+                        if (
+                            initialState != CborReaderState.TextString
+                            && initialState != CborReaderState.UnsignedInteger
+                        )
                         {
-                            throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label)
+                            );
                         }
                         reader?.SkipValue();
                         break;
@@ -181,7 +211,9 @@ namespace System.Security.Cryptography.Cose
                     case KnownHeaders.PartialIV:
                         if (initialState != CborReaderState.ByteString)
                         {
-                            throw new InvalidOperationException(SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label));
+                            throw new InvalidOperationException(
+                                SR.Format(SR.CoseHeaderMapHeaderDoesNotAcceptSpecifiedValue, label)
+                            );
                         }
                         reader?.SkipValue();
                         break;
@@ -192,12 +224,21 @@ namespace System.Security.Cryptography.Cose
             }
         }
 
-        internal static int Encode(CoseHeaderMap? map, Span<byte> destination, bool mustReturnEmptyBstrIfEmpty = false, int? algHeaderValueToSlip = null)
+        internal static int Encode(
+            CoseHeaderMap? map,
+            Span<byte> destination,
+            bool mustReturnEmptyBstrIfEmpty = false,
+            int? algHeaderValueToSlip = null
+        )
         {
             map ??= s_emptyMap;
             bool shouldSlipAlgHeader = algHeaderValueToSlip.HasValue;
 
-            if (map._headerParameters.Count == 0 && mustReturnEmptyBstrIfEmpty && !shouldSlipAlgHeader)
+            if (
+                map._headerParameters.Count == 0
+                && mustReturnEmptyBstrIfEmpty
+                && !shouldSlipAlgHeader
+            )
             {
                 s_emptyBstrEncoded.CopyTo(destination);
                 return s_emptyBstrEncoded.Length;
@@ -262,24 +303,36 @@ namespace System.Security.Cryptography.Cose
         }
 
         public Enumerator GetEnumerator() => new Enumerator(_headerParameters.GetEnumerator());
-        IEnumerator<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)> IEnumerable<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)>.GetEnumerator() => GetEnumerator();
+
+        IEnumerator<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)> IEnumerable<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)>.GetEnumerator() =>
+            GetEnumerator();
+
         IEnumerator IEnumerable.GetEnumerator() => GetEnumerator();
 
-        public struct Enumerator : IEnumerator<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)>
+        public struct Enumerator
+            : IEnumerator<(CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue)>
         {
-            private Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>>.Enumerator _dictionaryEnumerator;
+            private Dictionary<
+                CoseHeaderLabel,
+                ReadOnlyMemory<byte>
+            >.Enumerator _dictionaryEnumerator;
 
-            internal Enumerator(Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>>.Enumerator dictionaryEnumerator)
+            internal Enumerator(
+                Dictionary<CoseHeaderLabel, ReadOnlyMemory<byte>>.Enumerator dictionaryEnumerator
+            )
             {
                 _dictionaryEnumerator = dictionaryEnumerator;
             }
 
-            public readonly (CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue) Current => (_dictionaryEnumerator.Current.Key, _dictionaryEnumerator.Current.Value);
+            public readonly (CoseHeaderLabel Label, ReadOnlyMemory<byte> EncodedValue) Current =>
+                (_dictionaryEnumerator.Current.Key, _dictionaryEnumerator.Current.Value);
 
             object IEnumerator.Current => Current;
 
             public void Dispose() => _dictionaryEnumerator.Dispose();
+
             public bool MoveNext() => _dictionaryEnumerator.MoveNext();
+
             public void Reset() => ((IEnumerator)_dictionaryEnumerator).Reset();
         }
     }

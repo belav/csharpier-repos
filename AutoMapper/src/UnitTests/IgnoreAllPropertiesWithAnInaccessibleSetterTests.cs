@@ -7,9 +7,7 @@ namespace AutoMapper.UnitTests
         public int IgnoreMe { get; set; }
     }
 
-    public class Destination : DestinationBase
-    {
-    }
+    public class Destination : DestinationBase { }
 
     public class DestinationBase
     {

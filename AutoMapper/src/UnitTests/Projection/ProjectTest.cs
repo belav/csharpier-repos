@@ -1,5 +1,5 @@
-﻿﻿using Xunit;
-﻿using Shouldly;
+﻿using Xunit;
+using Shouldly;
 
 namespace AutoMapper.UnitTests.Projection
 {
@@ -22,16 +22,21 @@ namespace AutoMapper.UnitTests.Projection
             public int A;
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateProjection<Foo, FooDto>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateProjection<Foo, FooDto>();
+            });
 
         [Fact]
         public void Should_work()
         {
-            new[] { new Foo() }.AsQueryable().ProjectTo<FooDto>(Configuration).Single().A.ShouldBe(0);
-        } 
+            new[] { new Foo() }
+                .AsQueryable()
+                .ProjectTo<FooDto>(Configuration)
+                .Single()
+                .A.ShouldBe(0);
+        }
     }
 
     public class ProjectTest
@@ -50,13 +55,21 @@ namespace AutoMapper.UnitTests.Projection
         [Fact]
         public void ProjectToWithUnmappedTypeShouldThrowException()
         {
-            var customers =
-                new[] { new Customer { FirstName = "Bill", LastName = "White", Address = new Address("Street1") } }
-                    .AsQueryable();
+            var customers = new[]
+            {
+                new Customer
+                {
+                    FirstName = "Bill",
+                    LastName = "White",
+                    Address = new Address("Street1")
+                }
+            }.AsQueryable();
 
             IList<Unmapped> projected = null;
 
-            typeof(InvalidOperationException).ShouldBeThrownBy(() => projected = customers.ProjectTo<Unmapped>(_config).ToList());
+            typeof(InvalidOperationException).ShouldBeThrownBy(
+                () => projected = customers.ProjectTo<Unmapped>(_config).ToList()
+            );
 
             projected.ShouldBeNull();
         }
@@ -64,9 +77,15 @@ namespace AutoMapper.UnitTests.Projection
         [Fact]
         public void DynamicProjectToShouldWork()
         {
-            var customers =
-                new[] { new Customer { FirstName = "Bill", LastName = "White", Address = new Address("Street1") } }
-                    .AsQueryable();
+            var customers = new[]
+            {
+                new Customer
+                {
+                    FirstName = "Bill",
+                    LastName = "White",
+                    Address = new Address("Street1")
+                }
+            }.AsQueryable();
 
             IQueryable projected = customers.ProjectTo(typeof(CustomerDto), _config);
 

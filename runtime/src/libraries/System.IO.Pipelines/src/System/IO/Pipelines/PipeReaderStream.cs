@@ -37,13 +37,15 @@ namespace System.IO.Pipelines
 
         public override long Length => throw new NotSupportedException();
 
-        public override long Position { get => throw new NotSupportedException(); set => throw new NotSupportedException(); }
+        public override long Position
+        {
+            get => throw new NotSupportedException();
+            set => throw new NotSupportedException();
+        }
 
         internal bool LeaveOpen { get; set; }
 
-        public override void Flush()
-        {
-        }
+        public override void Flush() { }
 
         public override int Read(byte[] buffer, int offset, int count)
         {
@@ -68,26 +70,39 @@ namespace System.IO.Pipelines
             return HandleReadResult(result, buffer);
         }
 
-        public override long Seek(long offset, SeekOrigin origin) => throw new NotSupportedException();
+        public override long Seek(long offset, SeekOrigin origin) =>
+            throw new NotSupportedException();
 
         public override void SetLength(long value) => throw new NotSupportedException();
 
-        public override void Write(byte[] buffer, int offset, int count) => throw new NotSupportedException();
+        public override void Write(byte[] buffer, int offset, int count) =>
+            throw new NotSupportedException();
 
-        public sealed override IAsyncResult BeginRead(byte[] buffer, int offset, int count, AsyncCallback? callback, object? state) =>
-            TaskToApm.Begin(ReadAsync(buffer, offset, count, default), callback, state);
+        public sealed override IAsyncResult BeginRead(
+            byte[] buffer,
+            int offset,
+            int count,
+            AsyncCallback? callback,
+            object? state
+        ) => TaskToApm.Begin(ReadAsync(buffer, offset, count, default), callback, state);
 
         public sealed override int EndRead(IAsyncResult asyncResult) =>
             TaskToApm.End<int>(asyncResult);
 
-        public override Task<int> ReadAsync(byte[] buffer, int offset, int count, CancellationToken cancellationToken)
+        public override Task<int> ReadAsync(
+            byte[] buffer,
+            int offset,
+            int count,
+            CancellationToken cancellationToken
+        )
         {
             if (buffer is null)
             {
                 ThrowHelper.ThrowArgumentNullException(ExceptionArgument.buffer);
             }
 
-            return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken).AsTask();
+            return ReadAsyncInternal(new Memory<byte>(buffer, offset, count), cancellationToken)
+                .AsTask();
         }
 
 #if (!NETSTANDARD2_0 && !NETFRAMEWORK)
@@ -96,15 +111,23 @@ namespace System.IO.Pipelines
             return ReadInternal(buffer);
         }
 
-        public override ValueTask<int> ReadAsync(Memory<byte> buffer, CancellationToken cancellationToken = default)
+        public override ValueTask<int> ReadAsync(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken = default
+        )
         {
             return ReadAsyncInternal(buffer, cancellationToken);
         }
 #endif
 
-        private async ValueTask<int> ReadAsyncInternal(Memory<byte> buffer, CancellationToken cancellationToken)
+        private async ValueTask<int> ReadAsyncInternal(
+            Memory<byte> buffer,
+            CancellationToken cancellationToken
+        )
         {
-            ReadResult result = await _pipeReader.ReadAsync(cancellationToken).ConfigureAwait(false);
+            ReadResult result = await _pipeReader
+                .ReadAsync(cancellationToken)
+                .ConfigureAwait(false);
             return HandleReadResult(result, buffer.Span);
         }
 
@@ -125,7 +148,8 @@ namespace System.IO.Pipelines
                 {
                     int actual = (int)Math.Min(bufferLength, buffer.Length);
 
-                    ReadOnlySequence<byte> slice = actual == bufferLength ? sequence : sequence.Slice(0, actual);
+                    ReadOnlySequence<byte> slice =
+                        actual == bufferLength ? sequence : sequence.Slice(0, actual);
                     consumed = slice.End;
                     slice.CopyTo(buffer);
 
@@ -148,7 +172,11 @@ namespace System.IO.Pipelines
             return 0;
         }
 
-        public override Task CopyToAsync(Stream destination, int bufferSize, CancellationToken cancellationToken)
+        public override Task CopyToAsync(
+            Stream destination,
+            int bufferSize,
+            CancellationToken cancellationToken
+        )
         {
             StreamHelpers.ValidateCopyToArgs(this, destination, bufferSize);
 

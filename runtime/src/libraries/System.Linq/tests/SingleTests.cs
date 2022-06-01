@@ -11,8 +11,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQuery()
         {
-            var q = from x in new[] { 999.9m }
-                    select x;
+            var q = from x in new[] { 999.9m } select x;
 
             Assert.Equal(q.Single(), q.Single());
         }
@@ -20,9 +19,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsStringQuery()
         {
-            var q = from x in new[] { "!@#$%^" }
-                    where !string.IsNullOrEmpty(x)
-                    select x;
+            var q = from x in new[] { "!@#$%^" } where !string.IsNullOrEmpty(x) select x;
 
             Assert.Equal(q.Single(), q.Single());
         }
@@ -30,8 +27,7 @@ namespace System.Linq.Tests
         [Fact]
         public void SameResultsRepeatCallsIntQueryWithZero()
         {
-            var q = from x in new[] { 0 }
-                    select x;
+            var q = from x in new[] { 0 } select x;
 
             Assert.Equal(q.Single(), q.Single());
         }
@@ -157,7 +153,10 @@ namespace System.Linq.Tests
         {
             int[] source = null;
             AssertExtensions.Throws<ArgumentNullException>("source", () => source.Single());
-            AssertExtensions.Throws<ArgumentNullException>("source", () => source.Single(i => i % 2 == 0));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "source",
+                () => source.Single(i => i % 2 == 0)
+            );
         }
 
         [Fact]
@@ -165,7 +164,10 @@ namespace System.Linq.Tests
         {
             int[] source = { };
             Func<int, bool> nullPredicate = null;
-            AssertExtensions.Throws<ArgumentNullException>("predicate", () => source.Single(nullPredicate));
+            AssertExtensions.Throws<ArgumentNullException>(
+                "predicate",
+                () => source.Single(nullPredicate)
+            );
         }
     }
 }

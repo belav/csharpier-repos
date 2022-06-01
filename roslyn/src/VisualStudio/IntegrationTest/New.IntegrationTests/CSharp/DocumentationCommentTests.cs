@@ -14,11 +14,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     [Trait(Traits.Feature, Traits.Features.DocumentationComments)]
     public class DocumentationCommentTests : AbstractEditorTest
     {
-        public DocumentationCommentTests()
-            : base(nameof(DocumentationCommentTests))
-        {
-
-        }
+        public DocumentationCommentTests() : base(nameof(DocumentationCommentTests)) { }
 
         protected override string LanguageName => LanguageNames.CSharp;
 
@@ -27,7 +23,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         public async Task TypingCharacter_MultiCaret()
         {
             var code =
-@"
+                @"
 //{|selection:|}
 class C1 { }
 
@@ -40,7 +36,7 @@ class C3 { }
             await SetUpEditorAsync(code, HangMitigatingCancellationToken);
             await TestServices.Input.SendAsync('/');
             var expected =
-@"
+                @"
 /// <summary>
 /// $$
 /// </summary>
@@ -57,7 +53,11 @@ class C2 { }
 class C3 { }
 ";
 
-            await TestServices.EditorVerifier.TextContainsAsync(expected, assertCaretPosition: true, cancellationToken: HangMitigatingCancellationToken);
+            await TestServices.EditorVerifier.TextContainsAsync(
+                expected,
+                assertCaretPosition: true,
+                cancellationToken: HangMitigatingCancellationToken
+            );
         }
     }
 }

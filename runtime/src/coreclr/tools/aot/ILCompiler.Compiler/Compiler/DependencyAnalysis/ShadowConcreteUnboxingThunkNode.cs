@@ -33,16 +33,20 @@ namespace ILCompiler.DependencyAnalysis
         {
             _canonicalThunk.AppendMangledName(nameMangler, sb);
         }
+
         public int Offset => _canonicalThunk.Offset;
         public bool RepresentsIndirectionCell => _canonicalThunk.RepresentsIndirectionCell;
 
         public override bool StaticDependenciesAreComputed => true;
+
         public ShadowConcreteUnboxingThunkNode(MethodDesc method, IMethodNode canonicalMethod)
         {
             Debug.Assert(!method.IsSharedByGenericInstantiations);
             Debug.Assert(!method.IsRuntimeDeterminedExactMethod);
             Debug.Assert(canonicalMethod.Method.IsSharedByGenericInstantiations);
-            Debug.Assert(canonicalMethod.Method == method.GetCanonMethodTarget(CanonicalFormKind.Specific));
+            Debug.Assert(
+                canonicalMethod.Method == method.GetCanonMethodTarget(CanonicalFormKind.Specific)
+            );
             Method = method;
             _canonicalThunk = canonicalMethod;
         }
@@ -55,19 +59,32 @@ namespace ILCompiler.DependencyAnalysis
             dependencies.Add(new DependencyListEntry(_canonicalThunk, "Canonical body"));
 
             // Make sure the target of the thunk gets modeled as a dependency
-            dependencies.Add(new DependencyListEntry(factory.ShadowConcreteMethod(Method), "Unboxing thunk target"));
+            dependencies.Add(
+                new DependencyListEntry(
+                    factory.ShadowConcreteMethod(Method),
+                    "Unboxing thunk target"
+                )
+            );
 
             return dependencies;
         }
 
-        protected override string GetName(NodeFactory factory) => $"{Method.ToString()} backed by {_canonicalThunk.GetMangledName(factory.NameMangler)}";
+        protected override string GetName(NodeFactory factory) =>
+            $"{Method.ToString()} backed by {_canonicalThunk.GetMangledName(factory.NameMangler)}";
 
         public sealed override bool HasConditionalStaticDependencies => false;
         public sealed override bool HasDynamicDependencies => false;
         public sealed override bool InterestingForDynamicDependencyAnalysis => false;
 
-        public sealed override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(List<DependencyNodeCore<NodeFactory>> markedNodes, int firstNode, NodeFactory factory) => null;
-        public sealed override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(NodeFactory factory) => null;
+        public sealed override IEnumerable<CombinedDependencyListEntry> SearchDynamicDependencies(
+            List<DependencyNodeCore<NodeFactory>> markedNodes,
+            int firstNode,
+            NodeFactory factory
+        ) => null;
+
+        public sealed override IEnumerable<CombinedDependencyListEntry> GetConditionalStaticDependencies(
+            NodeFactory factory
+        ) => null;
 
         int ISortableNode.ClassCode => -501699818;
 
@@ -77,7 +94,10 @@ namespace ILCompiler.DependencyAnalysis
             if (compare != 0)
                 return compare;
 
-            return comparer.Compare(_canonicalThunk, ((ShadowConcreteUnboxingThunkNode)other)._canonicalThunk);
+            return comparer.Compare(
+                _canonicalThunk,
+                ((ShadowConcreteUnboxingThunkNode)other)._canonicalThunk
+            );
         }
     }
 }

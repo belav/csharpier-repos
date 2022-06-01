@@ -18,9 +18,7 @@ public class GuidValueGeneratorEndToEndTest
         {
             for (var i = 0; i < 10; i++)
             {
-                guids.Add(
-                    context.Add(
-                        new Pegasus { Name = "Rainbow Dash " + i }).Entity.Id);
+                guids.Add(context.Add(new Pegasus { Name = "Rainbow Dash " + i }).Entity.Id);
                 guidsHash.Add(guids.Last());
             }
 
@@ -49,8 +47,8 @@ public class GuidValueGeneratorEndToEndTest
             _serviceProvider = serviceProvider;
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-            => optionsBuilder
+        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder) =>
+            optionsBuilder
                 .UseInMemoryDatabase(nameof(BronieContext))
                 .UseInternalServiceProvider(_serviceProvider);
 

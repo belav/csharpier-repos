@@ -7,13 +7,16 @@ namespace System.IO.Strategies
 {
     internal sealed partial class UnixFileStreamStrategy : OSFileStreamStrategy
     {
-        internal UnixFileStreamStrategy(SafeFileHandle handle, FileAccess access) : base(handle, access)
-        {
-        }
+        internal UnixFileStreamStrategy(SafeFileHandle handle, FileAccess access)
+            : base(handle, access) { }
 
-        internal UnixFileStreamStrategy(string path, FileMode mode, FileAccess access, FileShare share, FileOptions options, long preallocationSize) :
-            base(path, mode, access, share, options, preallocationSize)
-        {
-        }
+        internal UnixFileStreamStrategy(
+            string path,
+            FileMode mode,
+            FileAccess access,
+            FileShare share,
+            FileOptions options,
+            long preallocationSize
+        ) : base(path, mode, access, share, options, preallocationSize) { }
     }
 }

@@ -12,14 +12,15 @@ public struct S0
 {
     public uint F0;
     public long F1;
-    public S0(uint f0): this()
+
+    public S0(uint f0) : this()
     {
         F0 = f0;
     }
 
     public ulong M5()
     {
-        var vr1 = new ushort[]{0};
+        var vr1 = new ushort[] { 0 };
         M6(vr1);
         return 1;
     }
@@ -34,11 +35,12 @@ public class Runtime_68049_0
 {
     public static long s_result;
     public static IRuntime s_rt;
+
     public static int Main()
     {
         s_rt = new Runtime();
-        var vr4 = new S0[]{new S0(1)};
-        var vr5 = new short[]{0};
+        var vr4 = new S0[] { new S0(1) };
+        var vr5 = new short[] { 0 };
         bool vr6 = M1(vr4, vr5) <= 1;
         return (int)s_result;
     }

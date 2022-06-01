@@ -17,8 +17,11 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
     private readonly ISet<string> _keywords;
     private readonly IReadOnlyCollection<string> _readOnlyKeywords;
 
-    public ImplicitExpressionEditHandler(Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer, ISet<string> keywords, bool acceptTrailingDot)
-        : base(tokenizer)
+    public ImplicitExpressionEditHandler(
+        Func<string, IEnumerable<Syntax.InternalSyntax.SyntaxToken>> tokenizer,
+        ISet<string> keywords,
+        bool acceptTrailingDot
+    ) : base(tokenizer)
     {
         _keywords = keywords ?? new HashSet<string>();
 
@@ -33,22 +36,24 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
 
     public IReadOnlyCollection<string> Keywords
     {
-        get
-        {
-            return _readOnlyKeywords;
-        }
+        get { return _readOnlyKeywords; }
     }
 
     public override string ToString()
     {
-        return string.Format(CultureInfo.InvariantCulture, "{0};ImplicitExpression[{1}];K{2}", base.ToString(), AcceptTrailingDot ? "ATD" : "RTD", Keywords.Count);
+        return string.Format(
+            CultureInfo.InvariantCulture,
+            "{0};ImplicitExpression[{1}];K{2}",
+            base.ToString(),
+            AcceptTrailingDot ? "ATD" : "RTD",
+            Keywords.Count
+        );
     }
 
     public override bool Equals(object obj)
     {
         var other = obj as ImplicitExpressionEditHandler;
-        return base.Equals(other) &&
-            AcceptTrailingDot == other.AcceptTrailingDot;
+        return base.Equals(other) && AcceptTrailingDot == other.AcceptTrailingDot;
     }
 
     public override int GetHashCode()
@@ -60,7 +65,10 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         return hashCodeCombiner;
     }
 
-    protected override PartialParseResultInternal CanAcceptChange(SyntaxNode target, SourceChange change)
+    protected override PartialParseResultInternal CanAcceptChange(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         if (AcceptedCharacters == AcceptedCharactersInternal.Any)
         {
@@ -131,18 +139,25 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
     // A dotless commit is the process of inserting a '.' with an intellisense selection.
     private static bool IsDotlessCommitInsertion(SyntaxNode target, SourceChange change)
     {
-        return IsNewDotlessCommitInsertion(target, change) || IsSecondaryDotlessCommitInsertion(target, change);
+        return IsNewDotlessCommitInsertion(target, change)
+            || IsSecondaryDotlessCommitInsertion(target, change);
     }
 
     // Completing 'DateTime' in intellisense with a '.' could result in: '@DateT' -> '@DateT.' -> '@DateTime.' which is accepted.
     private static bool IsNewDotlessCommitInsertion(SyntaxNode target, SourceChange change)
     {
-        return !IsAtEndOfSpan(target, change) &&
-               change.Span.AbsoluteIndex > 0 &&
-               change.NewText.Length > 0 &&
-               target.GetContent().Last() == '.' &&
-               ParserHelpers.IsIdentifier(change.NewText, requireIdentifierStart: false) &&
-               (change.Span.Length == 0 || ParserHelpers.IsIdentifier(change.GetOriginalText(target), requireIdentifierStart: false));
+        return !IsAtEndOfSpan(target, change)
+            && change.Span.AbsoluteIndex > 0
+            && change.NewText.Length > 0
+            && target.GetContent().Last() == '.'
+            && ParserHelpers.IsIdentifier(change.NewText, requireIdentifierStart: false)
+            && (
+                change.Span.Length == 0
+                || ParserHelpers.IsIdentifier(
+                    change.GetOriginalText(target),
+                    requireIdentifierStart: false
+                )
+            );
     }
 
     // Once a dotless commit has been performed you then have something like '@DateTime.'.  This scenario is used to detect the
@@ -151,17 +166,17 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
     private static bool IsSecondaryDotlessCommitInsertion(SyntaxNode target, SourceChange change)
     {
         // Do not need to worry about other punctuation, just looking for double '.' (after change)
-        return change.NewText.Length == 1 &&
-               change.NewText == "." &&
-               !string.IsNullOrEmpty(target.GetContent()) &&
-               target.GetContent().Last() == '.' &&
-               change.Span.Length == 0;
+        return change.NewText.Length == 1
+            && change.NewText == "."
+            && !string.IsNullOrEmpty(target.GetContent())
+            && target.GetContent().Last() == '.'
+            && change.Span.Length == 0;
     }
 
     private static bool IsAcceptableReplace(SyntaxNode target, SourceChange change)
     {
-        return IsEndReplace(target, change) ||
-               (change.IsReplace && RemainingIsWhitespace(target, change));
+        return IsEndReplace(target, change)
+            || (change.IsReplace && RemainingIsWhitespace(target, change));
     }
 
     private bool IsAcceptableIdentifierReplacement(SyntaxNode target, SourceChange change)
@@ -187,12 +202,18 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
             // We're looking for the first token that contains the SourceChange.
             if (tokenEndIndex > change.Span.AbsoluteIndex)
             {
-                if (tokenEndIndex >= change.Span.AbsoluteIndex + change.Span.Length && token.Kind == SyntaxKind.Identifier)
+                if (
+                    tokenEndIndex >= change.Span.AbsoluteIndex + change.Span.Length
+                    && token.Kind == SyntaxKind.Identifier
+                )
                 {
                     // The token we're changing happens to be an identifier. Need to check if its transformed state is also one.
                     // We do this transformation logic to capture the case that the new text change happens to not be an identifier;
                     // i.e. "5". Alone, it's numeric, within an identifier it's classified as identifier.
-                    var transformedContent = change.GetEditedContent(token.Content, change.Span.AbsoluteIndex - tokenStartIndex);
+                    var transformedContent = change.GetEditedContent(
+                        token.Content,
+                        change.Span.AbsoluteIndex - tokenStartIndex
+                    );
                     var newTokens = Tokenizer(transformedContent);
 
                     if (newTokens.Count() != 1)
@@ -220,20 +241,25 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
 
     private static bool IsAcceptableDeletion(SyntaxNode target, SourceChange change)
     {
-        return IsEndDeletion(target, change) ||
-               (change.IsDelete && RemainingIsWhitespace(target, change));
+        return IsEndDeletion(target, change)
+            || (change.IsDelete && RemainingIsWhitespace(target, change));
     }
 
     // Acceptable insertions can occur at the end of a span or when a '.' is inserted within a span.
     private static bool IsAcceptableInsertion(SyntaxNode target, SourceChange change)
     {
-        return change.IsInsert &&
-            (IsAcceptableEndInsertion(target, change) ||
-            IsAcceptableInnerInsertion(target, change));
+        return change.IsInsert
+            && (
+                IsAcceptableEndInsertion(target, change)
+                || IsAcceptableInnerInsertion(target, change)
+            );
     }
 
     // Internal for testing
-    internal static bool IsAcceptableDeletionInBalancedParenthesis(SyntaxNode target, SourceChange change)
+    internal static bool IsAcceptableDeletionInBalancedParenthesis(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         if (!change.IsDelete)
         {
@@ -251,7 +277,11 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         }
 
         var relativePosition = changeStart - target.Position;
-        var deletionContent = new StringSegment(target.GetContent(), relativePosition, changeLength);
+        var deletionContent = new StringSegment(
+            target.GetContent(),
+            relativePosition,
+            changeLength
+        );
 
         if (deletionContent.IndexOfAny(new[] { '(', ')' }) >= 0)
         {
@@ -263,7 +293,10 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
     }
 
     // Internal for testing
-    internal static bool IsAcceptableInsertionInBalancedParenthesis(SyntaxNode target, SourceChange change)
+    internal static bool IsAcceptableInsertionInBalancedParenthesis(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         if (!change.IsInsert)
         {
@@ -425,8 +458,7 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
     {
         Debug.Assert(change.IsInsert);
 
-        return IsAtEndOfSpan(target, change) ||
-               RemainingIsWhitespace(target, change);
+        return IsAtEndOfSpan(target, change) || RemainingIsWhitespace(target, change);
     }
 
     // Accepts '.' insertions in the middle of spans. Ex: '@foo.baz.bar' -> '@foo..baz.bar'
@@ -439,8 +471,7 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         // This case will fail if the IsAcceptableEndInsertion does not capture an end insertion correctly.
         Debug.Assert(!IsAtEndOfSpan(target, change));
 
-        return change.Span.AbsoluteIndex > 0 &&
-               change.NewText == ".";
+        return change.Span.AbsoluteIndex > 0 && change.NewText == ".";
     }
 
     private static bool RemainingIsWhitespace(SyntaxNode target, SourceChange change)
@@ -480,12 +511,20 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         return result;
     }
 
-    private PartialParseResultInternal HandleDeletion(SyntaxNode target, char previousChar, SourceChange change)
+    private PartialParseResultInternal HandleDeletion(
+        SyntaxNode target,
+        char previousChar,
+        SourceChange change
+    )
     {
         // What's left after deleting?
         if (previousChar == '.')
         {
-            return TryAcceptChange(target, change, PartialParseResultInternal.Accepted | PartialParseResultInternal.Provisional);
+            return TryAcceptChange(
+                target,
+                change,
+                PartialParseResultInternal.Accepted | PartialParseResultInternal.Provisional
+            );
         }
         else if (ParserHelpers.IsIdentifierPart(previousChar))
         {
@@ -503,14 +542,22 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         return PartialParseResultInternal.Rejected;
     }
 
-    private PartialParseResultInternal HandleInsertion(SyntaxNode target, char previousChar, SourceChange change)
+    private PartialParseResultInternal HandleInsertion(
+        SyntaxNode target,
+        char previousChar,
+        SourceChange change
+    )
     {
         // What are we inserting after?
         if (previousChar == '.')
         {
             return HandleInsertionAfterDot(target, change);
         }
-        else if (ParserHelpers.IsIdentifierPart(previousChar) || previousChar == ')' || previousChar == ']')
+        else if (
+            ParserHelpers.IsIdentifierPart(previousChar)
+            || previousChar == ')'
+            || previousChar == ']'
+        )
         {
             return HandleInsertionAfterIdPart(target, change);
         }
@@ -524,7 +571,10 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         }
     }
 
-    private PartialParseResultInternal HandleInsertionAfterIdPart(SyntaxNode target, SourceChange change)
+    private PartialParseResultInternal HandleInsertionAfterIdPart(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         // If the insertion is a full identifier part, accept it
         if (ParserHelpers.IsIdentifier(change.NewText, requireIdentifierStart: false))
@@ -553,7 +603,10 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         }
     }
 
-    private PartialParseResultInternal HandleInsertionAfterOpenParenthesis(SyntaxNode target, SourceChange change)
+    private PartialParseResultInternal HandleInsertionAfterOpenParenthesis(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         if (IsCloseParenthesisInsertion(change))
         {
@@ -563,7 +616,10 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         return PartialParseResultInternal.Rejected;
     }
 
-    private PartialParseResultInternal HandleInsertionAfterDot(SyntaxNode target, SourceChange change)
+    private PartialParseResultInternal HandleInsertionAfterDot(
+        SyntaxNode target,
+        SourceChange change
+    )
     {
         // If the insertion is a full identifier or another dot, accept it
         if (ParserHelpers.IsIdentifier(change.NewText) || change.NewText == ".")
@@ -573,12 +629,17 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
         return PartialParseResultInternal.Rejected;
     }
 
-    private PartialParseResultInternal TryAcceptChange(SyntaxNode target, SourceChange change, PartialParseResultInternal acceptResult = PartialParseResultInternal.Accepted)
+    private PartialParseResultInternal TryAcceptChange(
+        SyntaxNode target,
+        SourceChange change,
+        PartialParseResultInternal acceptResult = PartialParseResultInternal.Accepted
+    )
     {
         var content = change.GetEditedContent(target);
         if (StartsWithKeyword(content))
         {
-            return PartialParseResultInternal.Rejected | PartialParseResultInternal.SpanContextChanged;
+            return PartialParseResultInternal.Rejected
+                | PartialParseResultInternal.SpanContextChanged;
         }
 
         return acceptResult;
@@ -586,33 +647,26 @@ internal class ImplicitExpressionEditHandler : SpanEditHandler
 
     private static bool IsDoubleParenthesisInsertion(SourceChange change)
     {
-        return
-            change.IsInsert &&
-            change.NewText.Length == 2 &&
-            change.NewText == "()";
+        return change.IsInsert && change.NewText.Length == 2 && change.NewText == "()";
     }
 
     private static bool IsOpenParenthesisInsertion(SourceChange change)
     {
-        return
-            change.IsInsert &&
-            change.NewText.Length == 1 &&
-            change.NewText == "(";
+        return change.IsInsert && change.NewText.Length == 1 && change.NewText == "(";
     }
 
     private static bool IsCloseParenthesisInsertion(SourceChange change)
     {
-        return
-            change.IsInsert &&
-            change.NewText.Length == 1 &&
-            change.NewText == ")";
+        return change.IsInsert && change.NewText.Length == 1 && change.NewText == ")";
     }
 
     private static bool EndsWithDot(string content)
     {
-        return (content.Length == 1 && content[0] == '.') ||
-               (content[content.Length - 1] == '.' &&
-                content.Take(content.Length - 1).All(ParserHelpers.IsIdentifierPart));
+        return (content.Length == 1 && content[0] == '.')
+            || (
+                content[content.Length - 1] == '.'
+                && content.Take(content.Length - 1).All(ParserHelpers.IsIdentifierPart)
+            );
     }
 
     private bool StartsWithKeyword(string newContent)

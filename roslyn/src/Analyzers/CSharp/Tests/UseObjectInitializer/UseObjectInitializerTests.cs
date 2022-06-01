@@ -14,7 +14,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
 {
     using VerifyCS = CSharpCodeFixVerifier<
         CSharpUseObjectInitializerDiagnosticAnalyzer,
-        CSharpUseObjectInitializerCodeFixProvider>;
+        CSharpUseObjectInitializerCodeFixProvider
+    >;
 
     public partial class UseObjectInitializerTests
     {
@@ -28,13 +29,12 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             }.RunAsync();
         }
 
-        private static async Task TestMissingInRegularAndScriptAsync(string testCode, LanguageVersion? languageVersion = null)
+        private static async Task TestMissingInRegularAndScriptAsync(
+            string testCode,
+            LanguageVersion? languageVersion = null
+        )
         {
-            var test = new VerifyCS.Test
-            {
-                TestCode = testCode,
-                FixedCode = testCode,
-            };
+            var test = new VerifyCS.Test { TestCode = testCode, FixedCode = testCode, };
 
             if (languageVersion != null)
                 test.LanguageVersion = languageVersion.Value;
@@ -46,7 +46,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         public async Task TestOnVariableDeclarator()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
 
@@ -56,7 +56,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.i = 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
 
@@ -67,14 +67,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             i = 1
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestDoNotUpdateAssignmentThatReferencesInitializedValue1Async()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
 
@@ -85,7 +86,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.i = c.i + 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
 
@@ -97,14 +98,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         };
         c.i = c.i + 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestDoNotUpdateAssignmentThatReferencesInitializedValue2Async()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int i;
 
@@ -113,14 +115,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         var c = new C();
         c.i = c.i + 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestDoNotUpdateAssignmentThatReferencesInitializedValue3Async()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
 
@@ -132,7 +135,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.i = c.i + 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
 
@@ -145,14 +148,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         };
         c.i = c.i + 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestDoNotUpdateAssignmentThatReferencesInitializedValue4Async()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int i;
 
@@ -162,14 +166,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c = new C();
         c.i = c.i + 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestOnAssignmentExpression()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
 
@@ -180,7 +185,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.i = 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
 
@@ -192,14 +197,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             i = 1
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestStopOnDuplicateMember()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
 
@@ -210,7 +216,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.i = 2;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
 
@@ -222,14 +228,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         };
         c.i = 2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestComplexInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -241,7 +248,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         array[0].j = 2;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -254,14 +261,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             j = 2
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestNotOnCompoundAssignment()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -273,7 +281,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.j += 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -286,7 +294,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         };
         c.j += 1;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -294,7 +303,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         public async Task TestWithExistingInitializer()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -305,7 +314,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.j = 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -318,7 +327,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             j = 1
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -326,7 +336,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         public async Task TestWithExistingInitializerComma()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -340,7 +350,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.j = 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -353,7 +363,8 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             j = 1
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
@@ -361,7 +372,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         public async Task TestWithExistingInitializerNotIfAlreadyInitialized()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -376,7 +387,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         c.i = 2;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -390,14 +401,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         };
         c.i = 2;
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestMissingBeforeCSharp3()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -407,14 +419,16 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         C c = new C();
         c.j = 1;
     }
-}", LanguageVersion.CSharp2);
+}",
+                LanguageVersion.CSharp2
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestFixAllInDocument1()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -431,7 +445,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         v.j = 2;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -452,14 +466,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             j = 2
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestFixAllInDocument2()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     System.Action j;
@@ -473,7 +488,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         };
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     System.Action j;
@@ -491,14 +506,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             }
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestFixAllInDocument3()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -513,7 +529,7 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
         array[1].j = 4;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
     int j;
@@ -531,14 +547,15 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseObjectInitializer
             j = 4
         };
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestTrivia1()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int i;
@@ -550,7 +567,7 @@ class C
         c.j = 2; // Bar
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -563,7 +580,8 @@ class C
             j = 2 // Bar
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(46670, "https://github.com/dotnet/roslyn/issues/46670")]
@@ -571,7 +589,7 @@ class C
         public async Task TestTriviaRemoveLeadingBlankLinesForFirstProperty()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class C
 {
     int i;
@@ -587,7 +605,7 @@ class C
         c.j = 2;
     }
 }",
-@"
+                @"
 class C
 {
     int i;
@@ -603,7 +621,8 @@ class C
             j = 2
         };
     }
-}");
+}"
+            );
         }
 
         [WorkItem(15459, "https://github.com/dotnet/roslyn/issues/15459")]
@@ -611,14 +630,15 @@ class C
         public async Task TestMissingInNonTopLevelObjectInitializer()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C {
+                @"class C {
 	int a;
 	C Add(int x) {
 		var c = Add(new int());
 		c.a = 1;
 		return c;
 	}
-}");
+}"
+            );
         }
 
         [WorkItem(17853, "https://github.com/dotnet/roslyn/issues/17853")]
@@ -626,7 +646,7 @@ class C
         public async Task TestMissingForDynamic()
         {
             await TestMissingInRegularAndScriptAsync(
-@"using System.Dynamic;
+                @"using System.Dynamic;
 
 class C
 {
@@ -635,7 +655,8 @@ class C
         dynamic body = new ExpandoObject();
         body.content = new ExpandoObject();
     }
-}");
+}"
+            );
         }
 
         [WorkItem(17953, "https://github.com/dotnet/roslyn/issues/17953")]
@@ -643,7 +664,7 @@ class C
         public async Task TestMissingAcrossPreprocessorDirective()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 public class Goo
 {
     public void M()
@@ -655,7 +676,8 @@ public class Goo
     }
 
     public string Value { get; set; }
-}");
+}"
+            );
         }
 
         [WorkItem(17953, "https://github.com/dotnet/roslyn/issues/17953")]
@@ -663,7 +685,7 @@ public class Goo
         public async Task TestAvailableInsidePreprocessorDirective()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 public class Goo
 {
     public void M()
@@ -676,7 +698,7 @@ public class Goo
 
     public string Value { get; set; }
 }",
-@"
+                @"
 public class Goo
 {
     public void M()
@@ -690,7 +712,8 @@ public class Goo
     }
 
     public string Value { get; set; }
-}");
+}"
+            );
         }
 
         [WorkItem(19253, "https://github.com/dotnet/roslyn/issues/19253")]
@@ -698,7 +721,7 @@ public class Goo
         public async Task TestKeepBlankLinesAfter()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 class Goo
 {
     public int Bar { get; set; }
@@ -714,7 +737,7 @@ class MyClass
         int horse = 1;
     }
 }",
-@"
+                @"
 class Goo
 {
     public int Bar { get; set; }
@@ -731,7 +754,8 @@ class MyClass
 
         int horse = 1;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23368, "https://github.com/dotnet/roslyn/issues/23368")]
@@ -739,7 +763,7 @@ class MyClass
         public async Task TestWithExplicitImplementedInterfaceMembers1()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 interface IExample {
     string Name { get; set; }
 }
@@ -755,7 +779,8 @@ class MyClass
         IExample e = new C();
         e.Name = string.Empty;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23368, "https://github.com/dotnet/roslyn/issues/23368")]
@@ -763,7 +788,7 @@ class MyClass
         public async Task TestWithExplicitImplementedInterfaceMembers2()
         {
             await TestMissingInRegularAndScriptAsync(
-@"
+                @"
 interface IExample {
     string Name { get; set; }
     string LastName { get; set; }
@@ -782,7 +807,8 @@ class MyClass
         e.Name = string.Empty;
         e.LastName = string.Empty;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(23368, "https://github.com/dotnet/roslyn/issues/23368")]
@@ -790,7 +816,7 @@ class MyClass
         public async Task TestWithExplicitImplementedInterfaceMembers3()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 interface IExample {
     string Name { get; set; }
     string LastName { get; set; }
@@ -810,7 +836,7 @@ class MyClass
         e.Name = string.Empty;
     }
 }",
-@"
+                @"
 interface IExample {
     string Name { get; set; }
     string LastName { get; set; }
@@ -831,7 +857,8 @@ class MyClass
         };
         e.Name = string.Empty;
     }
-}");
+}"
+            );
         }
 
         [WorkItem(37675, "https://github.com/dotnet/roslyn/issues/37675")]
@@ -839,7 +866,7 @@ class MyClass
         public async Task TestDoNotOfferForUsingDeclaration()
         {
             await TestMissingInRegularAndScriptAsync(
-@"class C : System.IDisposable
+                @"class C : System.IDisposable
 {
     int i;
 
@@ -852,14 +879,15 @@ class MyClass
     public void Dispose()
     {
     }
-}");
+}"
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseObjectInitializer)]
         public async Task TestImplicitObject()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     int i;
 
@@ -869,7 +897,7 @@ class MyClass
         c.i = 1;
     }
 }",
-@"class C
+                @"class C
 {
     int i;
 
@@ -880,7 +908,8 @@ class MyClass
             i = 1
         };
     }
-}");
+}"
+            );
         }
     }
 }

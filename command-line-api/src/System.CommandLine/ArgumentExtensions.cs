@@ -22,14 +22,14 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static TArgument AddCompletions<TArgument>(
             this TArgument argument,
-            params string[] values)
-            where TArgument : Argument
+            params string[] values
+        ) where TArgument : Argument
         {
             argument.Completions.Add(values);
 
             return argument;
         }
-    
+
         /// <summary>
         /// Adds completions for an option.
         /// </summary>
@@ -39,8 +39,8 @@ namespace System.CommandLine
         /// <returns>The option being extended.</returns>
         public static TArgument AddCompletions<TArgument>(
             this TArgument argument,
-            Func<CompletionContext, IEnumerable<string>> complete)
-            where TArgument : Argument
+            Func<CompletionContext, IEnumerable<string>> complete
+        ) where TArgument : Argument
         {
             argument.Completions.Add(complete);
 
@@ -56,8 +56,8 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static TArgument AddCompletions<TArgument>(
             this TArgument argument,
-            CompletionDelegate complete)
-            where TArgument : Argument
+            CompletionDelegate complete
+        ) where TArgument : Argument
         {
             argument.Completions.Add(complete);
 
@@ -73,8 +73,8 @@ namespace System.CommandLine
         /// <returns>The configured argument.</returns>
         public static TArgument FromAmong<TArgument>(
             this TArgument argument,
-            params string[] values)
-            where TArgument : Argument
+            params string[] values
+        ) where TArgument : Argument
         {
             argument.AddAllowedValues(values);
             argument.Completions.Add(values);
@@ -144,8 +144,7 @@ namespace System.CommandLine
         /// </summary>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static TArgument LegalFilePathsOnly<TArgument>(
-            this TArgument argument)
+        public static TArgument LegalFilePathsOnly<TArgument>(this TArgument argument)
             where TArgument : Argument
         {
             var invalidPathChars = Path.GetInvalidPathChars();
@@ -162,7 +161,9 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        result.ErrorMessage = result.LocalizationResources.InvalidCharactersInPath(token.Value[invalidCharactersIndex]);
+                        result.ErrorMessage = result.LocalizationResources.InvalidCharactersInPath(
+                            token.Value[invalidCharactersIndex]
+                        );
                     }
                 }
             });
@@ -176,8 +177,7 @@ namespace System.CommandLine
         /// <remarks>A parse error will result, for example, if file path separators are found in the parsed value.</remarks>
         /// <param name="argument">The argument to configure.</param>
         /// <returns>The configured argument.</returns>
-        public static TArgument LegalFileNamesOnly<TArgument>(
-            this TArgument argument)
+        public static TArgument LegalFileNamesOnly<TArgument>(this TArgument argument)
             where TArgument : Argument
         {
             var invalidFileNameChars = Path.GetInvalidFileNameChars();
@@ -191,14 +191,17 @@ namespace System.CommandLine
 
                     if (invalidCharactersIndex >= 0)
                     {
-                        result.ErrorMessage =  result.LocalizationResources.InvalidCharactersInFileName(token.Value[invalidCharactersIndex]);
+                        result.ErrorMessage =
+                            result.LocalizationResources.InvalidCharactersInFileName(
+                                token.Value[invalidCharactersIndex]
+                            );
                     }
                 }
             });
 
             return argument;
         }
-        
+
         /// <summary>
         /// Parses a command line string value using an argument.
         /// </summary>
@@ -206,9 +209,7 @@ namespace System.CommandLine
         /// <param name="argument">The argument to use to parse the command line input.</param>
         /// <param name="commandLine">A command line string to parse, which can include spaces and quotes equivalent to what can be entered into a terminal.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Argument argument,
-            string commandLine) =>
+        public static ParseResult Parse(this Argument argument, string commandLine) =>
             argument.GetOrCreateDefaultSimpleParser().Parse(commandLine);
 
         /// <summary>
@@ -217,9 +218,7 @@ namespace System.CommandLine
         /// <param name="argument">The argument to use to parse the command line input.</param>
         /// <param name="args">The string arguments to parse.</param>
         /// <returns>A parse result describing the outcome of the parse operation.</returns>
-        public static ParseResult Parse(
-            this Argument argument,
-            string[] args) =>
+        public static ParseResult Parse(this Argument argument, string[] args) =>
             argument.GetOrCreateDefaultSimpleParser().Parse(args);
     }
 }

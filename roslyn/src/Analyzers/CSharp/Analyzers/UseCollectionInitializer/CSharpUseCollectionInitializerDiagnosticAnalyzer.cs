@@ -12,8 +12,8 @@ using Microsoft.CodeAnalysis.UseCollectionInitializer;
 namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
 {
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
-    internal class CSharpUseCollectionInitializerDiagnosticAnalyzer :
-        AbstractUseCollectionInitializerDiagnosticAnalyzer<
+    internal class CSharpUseCollectionInitializerDiagnosticAnalyzer
+        : AbstractUseCollectionInitializerDiagnosticAnalyzer<
             SyntaxKind,
             ExpressionSyntax,
             StatementSyntax,
@@ -21,10 +21,11 @@ namespace Microsoft.CodeAnalysis.CSharp.UseCollectionInitializer
             MemberAccessExpressionSyntax,
             InvocationExpressionSyntax,
             ExpressionStatementSyntax,
-            VariableDeclaratorSyntax>
+            VariableDeclaratorSyntax
+        >
     {
-        protected override bool AreCollectionInitializersSupported(Compilation compilation)
-            => compilation.LanguageVersion() >= LanguageVersion.CSharp3;
+        protected override bool AreCollectionInitializersSupported(Compilation compilation) =>
+            compilation.LanguageVersion() >= LanguageVersion.CSharp3;
 
         protected override ISyntaxFacts GetSyntaxFacts() => CSharpSyntaxFacts.Instance;
     }

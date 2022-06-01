@@ -17,13 +17,14 @@ namespace Microsoft.DotNet.CoreSetup.Test.HostActivation.NativeUnitTests
         {
             RepoDirectoriesProvider repoDirectoriesProvider = new RepoDirectoriesProvider();
 
-            string testPath = Path.Combine(repoDirectoriesProvider.Artifacts, "corehost_test", RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("test_fx_ver"));
+            string testPath = Path.Combine(
+                repoDirectoriesProvider.Artifacts,
+                "corehost_test",
+                RuntimeInformationExtensions.GetExeFileNameForCurrentPlatform("test_fx_ver")
+            );
 
             Command testCommand = Command.Create(testPath);
-            testCommand
-                .Execute()
-                .Should()
-                .Pass();
+            testCommand.Execute().Should().Pass();
         }
     }
 }

@@ -12,8 +12,12 @@ namespace System.Web.Mvc
     /// </summary>
     internal class DataTypeAttributeAdapter : DataAnnotationsModelValidator
     {
-        public DataTypeAttributeAdapter(ModelMetadata metadata, ControllerContext context, DataTypeAttribute attribute, string ruleName)
-            : base(metadata, context, attribute)
+        public DataTypeAttributeAdapter(
+            ModelMetadata metadata,
+            ControllerContext context,
+            DataTypeAttribute attribute,
+            string ruleName
+        ) : base(metadata, context, attribute)
         {
             if (String.IsNullOrEmpty(ruleName))
             {

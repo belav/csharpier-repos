@@ -1,4 +1,3 @@
-
 using System;
 using System.Runtime.InteropServices;
 using System.Text;
@@ -54,7 +53,11 @@ namespace Microsoft.DiaSymReader
         {
             IntPtr strLocal = Marshal.StringToBSTR(pSymbol);
             var inst = ISymNGenWriter2Inst;
-            var func = (delegate* unmanaged<IntPtr, IntPtr, ushort, ulong, int>)(*(*(void***)inst + 3 /* ISymNGenWriter2.AddSymbol slot */));
+            var func = (delegate* unmanaged<IntPtr, IntPtr, ushort, ulong, int>)(
+                *(
+                    *(void***)inst + 3 /* ISymNGenWriter2.AddSymbol slot */
+                )
+            );
             int hr = func(inst, strLocal, iSection, rva);
             Marshal.FreeBSTR(strLocal);
             if (hr != 0)
@@ -66,7 +69,9 @@ namespace Microsoft.DiaSymReader
         public unsafe void AddSection(ushort iSection, OMF flags, int offset, int cb)
         {
             var inst = ISymNGenWriter2Inst;
-            var func = (delegate* unmanaged<IntPtr, ushort, OMF, int, int, int>)(*(*(void***)inst + 4));
+            var func = (delegate* unmanaged<IntPtr, ushort, OMF, int, int, int>)(
+                *(*(void***)inst + 4)
+            );
             int hr = func(inst, iSection, flags, offset, cb);
             if (hr != 0)
             {
@@ -81,7 +86,9 @@ namespace Microsoft.DiaSymReader
             fixed (char* wszObjFilePtr = wszObjFile)
             {
                 UIntPtr ppmodPtr;
-                var func = (delegate* unmanaged<IntPtr, char*, char*, UIntPtr*, int>)(*(*(void***)inst + 5));
+                var func = (delegate* unmanaged<IntPtr, char*, char*, UIntPtr*, int>)(
+                    *(*(void***)inst + 5)
+                );
                 int hr = func(inst, wszModulePtr, wszObjFilePtr, &ppmodPtr);
                 ppmod = ppmodPtr;
                 if (hr != 0)
@@ -108,7 +115,9 @@ namespace Microsoft.DiaSymReader
             {
                 var pbSymLocal = (IntPtr)pbSymPtr;
                 var inst = ISymNGenWriter2Inst;
-                var func = (delegate* unmanaged<IntPtr, UIntPtr, IntPtr, int, int>)(*(*(void***)inst + 7));
+                var func = (delegate* unmanaged<IntPtr, UIntPtr, IntPtr, int, int>)(
+                    *(*(void***)inst + 7)
+                );
                 int hr = func(inst, pmod, pbSymLocal, cb);
                 if (hr != 0)
                 {
@@ -117,10 +126,27 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        public unsafe void ModAddSecContribEx(UIntPtr pmod, ushort isect, int off, int cb, uint dwCharacteristics, uint dwDataCrc, uint dwRelocCrc)
+        public unsafe void ModAddSecContribEx(
+            UIntPtr pmod,
+            ushort isect,
+            int off,
+            int cb,
+            uint dwCharacteristics,
+            uint dwDataCrc,
+            uint dwRelocCrc
+        )
         {
             var inst = ISymNGenWriter2Inst;
-            var func = (delegate* unmanaged<IntPtr, UIntPtr, ushort, int, int, uint, uint, uint, int>)(*(*(void***)inst + 8));
+            var func = (delegate* unmanaged<
+                IntPtr,
+                UIntPtr,
+                ushort,
+                int,
+                int,
+                uint,
+                uint,
+                uint,
+                int>)(*(*(void***)inst + 8));
             int hr = func(inst, pmod, isect, off, cb, dwCharacteristics, dwDataCrc, dwRelocCrc);
             if (hr != 0)
             {
@@ -143,7 +169,10 @@ namespace Microsoft.DiaSymReader
             }
         }
 
-        void ISymNGenWriter.AddSymbol(string pSymbol, ushort iSection, ulong rva) => AddSymbol(pSymbol, iSection, rva);
-        void ISymNGenWriter.AddSection(ushort iSection, OMF flags, int offset, int cb) => AddSection(iSection, flags, offset, cb);
+        void ISymNGenWriter.AddSymbol(string pSymbol, ushort iSection, ulong rva) =>
+            AddSymbol(pSymbol, iSection, rva);
+
+        void ISymNGenWriter.AddSection(ushort iSection, OMF flags, int offset, int cb) =>
+            AddSection(iSection, flags, offset, cb);
     }
 }

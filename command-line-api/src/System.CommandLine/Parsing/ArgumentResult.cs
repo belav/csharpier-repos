@@ -14,9 +14,7 @@ namespace System.CommandLine.Parsing
     {
         private ArgumentConversionResult? _conversionResult;
 
-        internal ArgumentResult(
-            Argument argument,
-            SymbolResult? parent) : base(argument, parent)
+        internal ArgumentResult(Argument argument, SymbolResult? parent) : base(argument, parent)
         {
             Argument = argument;
         }
@@ -34,17 +32,14 @@ namespace System.CommandLine.Parsing
             _conversionResult ??= Convert(Argument);
 
         /// <inheritdoc cref="GetValueOrDefault{T}"/>
-        public object? GetValueOrDefault() =>
-            GetValueOrDefault<object?>();
+        public object? GetValueOrDefault() => GetValueOrDefault<object?>();
 
         /// <summary>
         /// Gets the parsed value or the default value for <see cref="Argument"/>.
         /// </summary>
         /// <returns>The parsed value or the default value for <see cref="Argument"/></returns>
         public T GetValueOrDefault<T>() =>
-            GetArgumentConversionResult()
-                .ConvertIfNeeded(this, typeof(T))
-                .GetValueOrDefault<T>();
+            GetArgumentConversionResult().ConvertIfNeeded(this, typeof(T)).GetValueOrDefault<T>();
 
         /// <summary>
         /// Specifies the maximum number of tokens to consume for the argument. Remaining tokens are passed on and can be consumed by later arguments, or will otherwise be added to <see cref="ParseResult.UnmatchedTokens"/>
@@ -56,7 +51,11 @@ namespace System.CommandLine.Parsing
         {
             if (numberOfTokens < 0)
             {
-                throw new ArgumentOutOfRangeException(nameof(numberOfTokens), numberOfTokens, "Value must be at least 1.");
+                throw new ArgumentOutOfRangeException(
+                    nameof(numberOfTokens),
+                    numberOfTokens,
+                    "Value must be at least 1."
+                );
             }
 
             if (PassedOnTokens is { })
@@ -72,7 +71,8 @@ namespace System.CommandLine.Parsing
         }
 
         /// <inheritdoc/>
-        public override string ToString() => $"{GetType().Name} {Argument.Name}: {string.Join(" ", Tokens.Select(t => $"<{t.Value}>"))}";
+        public override string ToString() =>
+            $"{GetType().Name} {Argument.Name}: {string.Join(" ", Tokens.Select(t => $"<{t.Value}>"))}";
 
         internal ParseError? CustomError(Argument argument)
         {
@@ -97,13 +97,18 @@ namespace System.CommandLine.Parsing
 
         private ArgumentConversionResult Convert(Argument argument)
         {
-            if (ShouldCheckArity() &&
-                Parent is { } &&
-                ArgumentArity.Validate(Parent,
+            if (
+                ShouldCheckArity()
+                && Parent is { }
+                && ArgumentArity.Validate(
+                    Parent,
                     argument,
                     argument.Arity.MinimumNumberOfValues,
-                    argument.Arity.MaximumNumberOfValues) is ArgumentConversionResult failed &&
-                    failed is not null) // returns null on success
+                    argument.Arity.MaximumNumberOfValues
+                )
+                    is ArgumentConversionResult failed
+                && failed is not null
+            ) // returns null on success
             {
                 return failed;
             }
@@ -116,16 +121,15 @@ namespace System.CommandLine.Parsing
 
                 if (string.IsNullOrEmpty(argumentResult.ErrorMessage))
                 {
-                    return ArgumentConversionResult.Success(
-                        argument,
-                        defaultValue);
+                    return ArgumentConversionResult.Success(argument, defaultValue);
                 }
                 else
                 {
                     return ArgumentConversionResult.Failure(
                         argument,
                         argumentResult.ErrorMessage!,
-                        ArgumentConversionResultType.Failed);
+                        ArgumentConversionResultType.Failed
+                    );
                 }
             }
 
@@ -157,17 +161,21 @@ namespace System.CommandLine.Parsing
 
             if (ErrorMessage is not null)
             {
-                return ArgumentConversionResult.Failure(argument, ErrorMessage, ArgumentConversionResultType.Failed);
+                return ArgumentConversionResult.Failure(
+                    argument,
+                    ErrorMessage,
+                    ArgumentConversionResultType.Failed
+                );
             }
 
             return new ArgumentConversionResult(
                 argument,
                 argument.ValueType,
                 Tokens[0].Value,
-                LocalizationResources);
+                LocalizationResources
+            );
 
-            bool ShouldCheckArity() => 
-                Parent is not OptionResult { IsImplicit: true };
+            bool ShouldCheckArity() => Parent is not OptionResult { IsImplicit: true };
         }
     }
 }

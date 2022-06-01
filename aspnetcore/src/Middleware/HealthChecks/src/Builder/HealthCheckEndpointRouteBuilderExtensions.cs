@@ -23,8 +23,9 @@ public static class HealthCheckEndpointRouteBuilderExtensions
     /// <param name="pattern">The URL pattern of the health checks endpoint.</param>
     /// <returns>A convention routes for the health checks endpoint.</returns>
     public static IEndpointConventionBuilder MapHealthChecks(
-       this IEndpointRouteBuilder endpoints,
-       string pattern)
+        this IEndpointRouteBuilder endpoints,
+        string pattern
+    )
     {
         if (endpoints == null)
         {
@@ -42,9 +43,10 @@ public static class HealthCheckEndpointRouteBuilderExtensions
     /// <param name="options">A <see cref="HealthCheckOptions"/> used to configure the health checks.</param>
     /// <returns>A convention routes for the health checks endpoint.</returns>
     public static IEndpointConventionBuilder MapHealthChecks(
-       this IEndpointRouteBuilder endpoints,
-       string pattern,
-       HealthCheckOptions options)
+        this IEndpointRouteBuilder endpoints,
+        string pattern,
+        HealthCheckOptions options
+    )
     {
         if (endpoints == null)
         {
@@ -59,21 +61,29 @@ public static class HealthCheckEndpointRouteBuilderExtensions
         return MapHealthChecksCore(endpoints, pattern, options);
     }
 
-    private static IEndpointConventionBuilder MapHealthChecksCore(IEndpointRouteBuilder endpoints, string pattern, HealthCheckOptions? options)
+    private static IEndpointConventionBuilder MapHealthChecksCore(
+        IEndpointRouteBuilder endpoints,
+        string pattern,
+        HealthCheckOptions? options
+    )
     {
         if (endpoints.ServiceProvider.GetService(typeof(HealthCheckService)) == null)
         {
-            throw new InvalidOperationException(Resources.FormatUnableToFindServices(
-                nameof(IServiceCollection),
-                nameof(HealthCheckServiceCollectionExtensions.AddHealthChecks),
-                "ConfigureServices(...)"));
+            throw new InvalidOperationException(
+                Resources.FormatUnableToFindServices(
+                    nameof(IServiceCollection),
+                    nameof(HealthCheckServiceCollectionExtensions.AddHealthChecks),
+                    "ConfigureServices(...)"
+                )
+            );
         }
 
         var args = options != null ? new[] { Options.Create(options) } : Array.Empty<object>();
 
-        var pipeline = endpoints.CreateApplicationBuilder()
-           .UseMiddleware<HealthCheckMiddleware>(args)
-           .Build();
+        var pipeline = endpoints
+            .CreateApplicationBuilder()
+            .UseMiddleware<HealthCheckMiddleware>(args)
+            .Build();
 
         return endpoints.Map(pattern, pipeline).WithDisplayName(DefaultDisplayName);
     }

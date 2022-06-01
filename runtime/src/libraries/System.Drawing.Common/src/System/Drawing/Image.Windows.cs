@@ -18,12 +18,19 @@ namespace System.Drawing
         private string allocationSite = Graphics.GetAllocationStack();
 #endif
 
-        public static Image FromStream(Stream stream, bool useEmbeddedColorManagement, bool validateImageData)
+        public static Image FromStream(
+            Stream stream,
+            bool useEmbeddedColorManagement,
+            bool validateImageData
+        )
         {
             if (stream == null)
                 throw new ArgumentNullException(nameof(stream));
 
-            IntPtr image = LoadGdipImageFromStream(new GPStream(stream), useEmbeddedColorManagement);
+            IntPtr image = LoadGdipImageFromStream(
+                new GPStream(stream),
+                useEmbeddedColorManagement
+            );
 
             if (validateImageData)
                 ValidateImage(image);
@@ -36,7 +43,10 @@ namespace System.Drawing
         // Used for serialization
         private IntPtr InitializeFromStream(Stream stream)
         {
-            IntPtr image = LoadGdipImageFromStream(new GPStream(stream), useEmbeddedColorManagement: false);
+            IntPtr image = LoadGdipImageFromStream(
+                new GPStream(stream),
+                useEmbeddedColorManagement: false
+            );
             ValidateImage(image);
 
             nativeImage = image;
@@ -48,7 +58,10 @@ namespace System.Drawing
             return image;
         }
 
-        private static unsafe IntPtr LoadGdipImageFromStream(GPStream stream, bool useEmbeddedColorManagement)
+        private static unsafe IntPtr LoadGdipImageFromStream(
+            GPStream stream,
+            bool useEmbeddedColorManagement
+        )
         {
             using DrawingCom.IStreamWrapper streamWrapper = DrawingCom.GetComWrapper(stream);
 
@@ -83,7 +96,9 @@ namespace System.Drawing
         {
 #if FINALIZATION_WATCH
             if (!disposing && nativeImage != IntPtr.Zero)
-                Debug.WriteLine("**********************\nDisposed through finalization:\n" + allocationSite);
+                Debug.WriteLine(
+                    "**********************\nDisposed through finalization:\n" + allocationSite
+                );
 #endif
             if (nativeImage == IntPtr.Zero)
                 return;
@@ -91,11 +106,16 @@ namespace System.Drawing
             try
             {
 #if DEBUG
-                int status = !Gdip.Initialized ? Gdip.Ok :
+                int status = !Gdip.Initialized
+                    ? Gdip.Ok
+                    :
 #endif
-                Gdip.GdipDisposeImage(new HandleRef(this, nativeImage));
+                    Gdip.GdipDisposeImage(new HandleRef(this, nativeImage));
 #if DEBUG
-                Debug.Assert(status == Gdip.Ok, $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}");
+                Debug.Assert(
+                    status == Gdip.Ok,
+                    $"GDI+ returned an error status: {status.ToString(CultureInfo.InvariantCulture)}"
+                );
 #endif
             }
             catch (Exception ex)
@@ -169,11 +189,14 @@ namespace System.Drawing
 
                 if (!saved)
                 {
-                    Gdip.CheckStatus(Gdip.GdipSaveImageToFile(
-                        new HandleRef(this, nativeImage),
-                        filename,
-                        ref g,
-                        new HandleRef(encoderParams, encoderParamsMemory)));
+                    Gdip.CheckStatus(
+                        Gdip.GdipSaveImageToFile(
+                            new HandleRef(this, nativeImage),
+                            filename,
+                            ref g,
+                            new HandleRef(encoderParams, encoderParamsMemory)
+                        )
+                    );
                 }
             }
             finally
@@ -245,14 +268,19 @@ namespace System.Drawing
 
                 if (!saved)
                 {
-                    using DrawingCom.IStreamWrapper streamWrapper = DrawingCom.GetComWrapper(new GPStream(stream, makeSeekable: false));
+                    using DrawingCom.IStreamWrapper streamWrapper = DrawingCom.GetComWrapper(
+                        new GPStream(stream, makeSeekable: false)
+                    );
                     unsafe
                     {
-                        Gdip.CheckStatus(Gdip.GdipSaveImageToStream(
-                            new HandleRef(this, nativeImage),
-                            streamWrapper.Ptr,
-                            &g,
-                            new HandleRef(encoderParams, encoderParamsMemory)));
+                        Gdip.CheckStatus(
+                            Gdip.GdipSaveImageToStream(
+                                new HandleRef(this, nativeImage),
+                                streamWrapper.Ptr,
+                                &g,
+                                new HandleRef(encoderParams, encoderParamsMemory)
+                            )
+                        );
                     }
                 }
             }
@@ -278,7 +306,12 @@ namespace System.Drawing
 
             try
             {
-                Gdip.CheckStatus(Gdip.GdipSaveAdd(new HandleRef(this, nativeImage), new HandleRef(encoderParams, encoder)));
+                Gdip.CheckStatus(
+                    Gdip.GdipSaveAdd(
+                        new HandleRef(this, nativeImage),
+                        new HandleRef(encoderParams, encoder)
+                    )
+                );
             }
             finally
             {
@@ -305,10 +338,13 @@ namespace System.Drawing
 
             try
             {
-                Gdip.CheckStatus(Gdip.GdipSaveAddImage(
-                    new HandleRef(this, nativeImage),
-                    new HandleRef(image, image.nativeImage),
-                    new HandleRef(encoderParams, encoder)));
+                Gdip.CheckStatus(
+                    Gdip.GdipSaveAddImage(
+                        new HandleRef(this, nativeImage),
+                        new HandleRef(image, image.nativeImage),
+                        new HandleRef(encoderParams, encoder)
+                    )
+                );
             }
             finally
             {
@@ -324,7 +360,13 @@ namespace System.Drawing
         /// </summary>
         public RectangleF GetBounds(ref GraphicsUnit pageUnit)
         {
-            Gdip.CheckStatus(Gdip.GdipGetImageBounds(new HandleRef(this, nativeImage), out RectangleF bounds, out pageUnit));
+            Gdip.CheckStatus(
+                Gdip.GdipGetImageBounds(
+                    new HandleRef(this, nativeImage),
+                    out RectangleF bounds,
+                    out pageUnit
+                )
+            );
             return bounds;
         }
 
@@ -336,7 +378,9 @@ namespace System.Drawing
         {
             get
             {
-                Gdip.CheckStatus(Gdip.GdipGetImagePaletteSize(new HandleRef(this, nativeImage), out int size));
+                Gdip.CheckStatus(
+                    Gdip.GdipGetImagePaletteSize(new HandleRef(this, nativeImage), out int size)
+                );
 
                 // "size" is total byte size:
                 // sizeof(ColorPalette) + (pal->Count-1)*sizeof(ARGB)
@@ -351,7 +395,9 @@ namespace System.Drawing
                 IntPtr memory = Marshal.AllocHGlobal(size);
                 try
                 {
-                    Gdip.CheckStatus(Gdip.GdipGetImagePalette(new HandleRef(this, nativeImage), memory, size));
+                    Gdip.CheckStatus(
+                        Gdip.GdipGetImagePalette(new HandleRef(this, nativeImage), memory, size)
+                    );
                     palette.ConvertFromMemory(memory);
                 }
                 finally
@@ -367,7 +413,9 @@ namespace System.Drawing
 
                 try
                 {
-                    Gdip.CheckStatus(Gdip.GdipSetImagePalette(new HandleRef(this, nativeImage), memory));
+                    Gdip.CheckStatus(
+                        Gdip.GdipSetImagePalette(new HandleRef(this, nativeImage), memory)
+                    );
                 }
                 finally
                 {
@@ -384,17 +432,25 @@ namespace System.Drawing
         /// <summary>
         /// Returns the thumbnail for this <see cref='Image'/>.
         /// </summary>
-        public Image GetThumbnailImage(int thumbWidth, int thumbHeight, GetThumbnailImageAbort? callback, IntPtr callbackData)
+        public Image GetThumbnailImage(
+            int thumbWidth,
+            int thumbHeight,
+            GetThumbnailImageAbort? callback,
+            IntPtr callbackData
+        )
         {
             IntPtr thumbImage = IntPtr.Zero;
 
-            Gdip.CheckStatus(Gdip.GdipGetImageThumbnail(
-                new HandleRef(this, nativeImage),
-                thumbWidth,
-                thumbHeight,
-                out thumbImage,
-                callback,
-                callbackData));
+            Gdip.CheckStatus(
+                Gdip.GdipGetImageThumbnail(
+                    new HandleRef(this, nativeImage),
+                    thumbWidth,
+                    thumbHeight,
+                    out thumbImage,
+                    callback,
+                    callbackData
+                )
+            );
 
             return CreateImageObject(thumbImage);
         }

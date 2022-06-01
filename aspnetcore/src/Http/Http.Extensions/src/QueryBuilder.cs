@@ -39,9 +39,12 @@ public class QueryBuilder : IEnumerable<KeyValuePair<string, string>>
     /// </summary>
     /// <param name="parameters">The parameters to initialize the instance with.</param>
     public QueryBuilder(IEnumerable<KeyValuePair<string, StringValues>> parameters)
-        : this(parameters.SelectMany(kvp => kvp.Value, (kvp, v) => KeyValuePair.Create(kvp.Key, v ?? string.Empty)))
-    {
-    }
+        : this(
+            parameters.SelectMany(
+                kvp => kvp.Value,
+                (kvp, v) => KeyValuePair.Create(kvp.Key, v ?? string.Empty)
+            )
+        ) { }
 
     /// <summary>
     /// Adds a query string token to the instance.

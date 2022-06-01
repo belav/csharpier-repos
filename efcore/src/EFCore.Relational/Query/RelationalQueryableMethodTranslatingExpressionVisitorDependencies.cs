@@ -49,9 +49,11 @@ public sealed record RelationalQueryableMethodTranslatingExpressionVisitorDepend
         IRelationalSqlTranslatingExpressionVisitorFactory relationalSqlTranslatingExpressionVisitorFactory,
         ISqlExpressionFactory sqlExpressionFactory,
         IModel model,
-        IAggregateMethodCallTranslatorProvider aggregateMethodCallTranslatorProvider)
+        IAggregateMethodCallTranslatorProvider aggregateMethodCallTranslatorProvider
+    )
     {
-        RelationalSqlTranslatingExpressionVisitorFactory = relationalSqlTranslatingExpressionVisitorFactory;
+        RelationalSqlTranslatingExpressionVisitorFactory =
+            relationalSqlTranslatingExpressionVisitorFactory;
         SqlExpressionFactory = sqlExpressionFactory;
         Model = model;
         AggregateMethodCallTranslatorProvider = aggregateMethodCallTranslatorProvider;

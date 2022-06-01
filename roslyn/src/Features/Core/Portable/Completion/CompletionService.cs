@@ -19,21 +19,19 @@ using Microsoft.CodeAnalysis.Text;
 namespace Microsoft.CodeAnalysis.Completion
 {
     /// <summary>
-    /// A per language service for constructing context dependent list of completions that 
+    /// A per language service for constructing context dependent list of completions that
     /// can be presented to a user during typing in an editor.
     /// </summary>
     public abstract class CompletionService : ILanguageService
     {
         // Prevent inheritance outside of Roslyn.
-        internal CompletionService()
-        {
-        }
+        internal CompletionService() { }
 
         /// <summary>
         /// Gets the service corresponding to the specified document.
         /// </summary>
-        public static CompletionService? GetService(Document? document)
-            => document?.GetLanguageService<CompletionService>();
+        public static CompletionService? GetService(Document? document) =>
+            document?.GetLanguageService<CompletionService>();
 
         /// <summary>
         /// The language from <see cref="LanguageNames"/> this service corresponds to.
@@ -43,8 +41,7 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <summary>
         /// Gets the current presentation and behavior rules.
         /// </summary>
-        public virtual CompletionRules GetRules()
-            => CompletionRules.Default;
+        public virtual CompletionRules GetRules() => CompletionRules.Default;
 
         internal abstract CompletionRules GetRules(CompletionOptions options);
 
@@ -64,7 +61,8 @@ namespace Microsoft.CodeAnalysis.Completion
             int caretPosition,
             CompletionTrigger trigger,
             ImmutableHashSet<string>? roles = null,
-            OptionSet? options = null)
+            OptionSet? options = null
+        )
         {
             return false;
         }
@@ -93,7 +91,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger,
             CompletionOptions options,
             OptionSet passThroughOptions,
-            ImmutableHashSet<string>? roles = null)
+            ImmutableHashSet<string>? roles = null
+        )
         {
             Debug.Fail("Backward compat only, should not be called");
             return ShouldTriggerCompletion(text, caretPosition, trigger, roles, passThroughOptions);
@@ -105,14 +104,21 @@ namespace Microsoft.CodeAnalysis.Completion
         /// </summary>
         /// <param name="text">The document text that completion is occurring within.</param>
         /// <param name="caretPosition">The position of the caret within the text.</param>
-        [Obsolete("Not used anymore. CompletionService.GetDefaultCompletionListSpan is used instead.", error: true)]
-        public virtual TextSpan GetDefaultItemSpan(SourceText text, int caretPosition)
-            => GetDefaultCompletionListSpan(text, caretPosition);
+        [Obsolete(
+            "Not used anymore. CompletionService.GetDefaultCompletionListSpan is used instead.",
+            error: true
+        )]
+        public virtual TextSpan GetDefaultItemSpan(SourceText text, int caretPosition) =>
+            GetDefaultCompletionListSpan(text, caretPosition);
 
         public virtual TextSpan GetDefaultCompletionListSpan(SourceText text, int caretPosition)
         {
             return CommonCompletionUtilities.GetWordSpan(
-                text, caretPosition, c => char.IsLetter(c), c => char.IsLetterOrDigit(c));
+                text,
+                caretPosition,
+                c => char.IsLetter(c),
+                c => char.IsLetterOrDigit(c)
+            );
         }
 
         /// <summary>
@@ -130,7 +136,8 @@ namespace Microsoft.CodeAnalysis.Completion
             CompletionTrigger trigger = default,
             ImmutableHashSet<string>? roles = null,
             OptionSet? options = null,
-            CancellationToken cancellationToken = default);
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Gets the completions available at the caret position.
@@ -142,16 +149,25 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="roles">Optional set of roles associated with the editor state.</param>
         /// <param name="cancellationToken"></param>
         internal virtual async Task<CompletionList> GetCompletionsAsync(
-             Document document,
-             int caretPosition,
-             CompletionOptions options,
-             OptionSet passThroughOptions,
-             CompletionTrigger trigger = default,
-             ImmutableHashSet<string>? roles = null,
-             CancellationToken cancellationToken = default)
+            Document document,
+            int caretPosition,
+            CompletionOptions options,
+            OptionSet passThroughOptions,
+            CompletionTrigger trigger = default,
+            ImmutableHashSet<string>? roles = null,
+            CancellationToken cancellationToken = default
+        )
         {
 #pragma warning disable RS0030 // Do not use banned APIs
-            return await GetCompletionsAsync(document, caretPosition, trigger, roles, passThroughOptions, cancellationToken).ConfigureAwait(false) ?? CompletionList.Empty;
+            return await GetCompletionsAsync(
+                        document,
+                        caretPosition,
+                        trigger,
+                        roles,
+                        passThroughOptions,
+                        cancellationToken
+                    )
+                    .ConfigureAwait(false) ?? CompletionList.Empty;
 #pragma warning restore
         }
 
@@ -165,12 +181,19 @@ namespace Microsoft.CodeAnalysis.Completion
         public Task<CompletionDescription?> GetDescriptionAsync(
             Document document,
             CompletionItem item,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
             Debug.Fail("For backwards API compat only, should not be called");
 
             // Publicly available options do not affect this API.
-            return GetDescriptionAsync(document, item, CompletionOptions.Default, SymbolDescriptionOptions.Default, cancellationToken);
+            return GetDescriptionAsync(
+                document,
+                item,
+                CompletionOptions.Default,
+                SymbolDescriptionOptions.Default,
+                cancellationToken
+            );
         }
 
         /// <summary>
@@ -182,77 +205,104 @@ namespace Microsoft.CodeAnalysis.Completion
         /// <param name="options">Completion options</param>
         /// <param name="displayOptions">Display options</param>
         /// <param name="cancellationToken"></param>
-        internal abstract Task<CompletionDescription?> GetDescriptionAsync(Document document, CompletionItem item, CompletionOptions options, SymbolDescriptionOptions displayOptions, CancellationToken cancellationToken = default);
+        internal abstract Task<CompletionDescription?> GetDescriptionAsync(
+            Document document,
+            CompletionItem item,
+            CompletionOptions options,
+            SymbolDescriptionOptions displayOptions,
+            CancellationToken cancellationToken = default
+        );
 
         /// <summary>
         /// Gets the change to be applied when the item is committed.
         /// </summary>
         /// <param name="document">The document that completion is occurring within.</param>
         /// <param name="item">The item to get the change for.</param>
-        /// <param name="commitCharacter">The typed character that caused the item to be committed. 
-        /// This character may be used as part of the change. 
+        /// <param name="commitCharacter">The typed character that caused the item to be committed.
+        /// This character may be used as part of the change.
         /// This value is null when the commit was caused by the [TAB] or [ENTER] keys.</param>
         /// <param name="cancellationToken"></param>
         public virtual Task<CompletionChange> GetChangeAsync(
             Document document,
             CompletionItem item,
             char? commitCharacter = null,
-            CancellationToken cancellationToken = default)
+            CancellationToken cancellationToken = default
+        )
         {
-            return Task.FromResult(CompletionChange.Create(new TextChange(item.Span, item.DisplayText)));
+            return Task.FromResult(
+                CompletionChange.Create(new TextChange(item.Span, item.DisplayText))
+            );
         }
 
         /// <summary>
         /// Given a list of completion items that match the current code typed by the user,
         /// returns the item that is considered the best match, and whether or not that
         /// item should be selected or not.
-        /// 
+        ///
         /// itemToFilterText provides the values that each individual completion item should
         /// be filtered against.
         /// </summary>
         public virtual ImmutableArray<CompletionItem> FilterItems(
             Document document,
             ImmutableArray<CompletionItem> items,
-            string filterText)
+            string filterText
+        )
         {
             var helper = CompletionHelper.GetHelper(document);
             return FilterItems(helper, items, filterText);
         }
 
         internal virtual ImmutableArray<CompletionItem> FilterItems(
-           Document document,
-           ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
-           string filterText)
+            Document document,
+            ImmutableArray<(CompletionItem, PatternMatch?)> itemsWithPatternMatch,
+            string filterText
+        )
         {
             // Default implementation just drops the pattern matches and
             // calls the public overload of FilterItems for compatibility.
-            return FilterItems(document, itemsWithPatternMatch.SelectAsArray(item => item.Item1), filterText);
+            return FilterItems(
+                document,
+                itemsWithPatternMatch.SelectAsArray(item => item.Item1),
+                filterText
+            );
         }
 
         internal static ImmutableArray<CompletionItem> FilterItems(
             CompletionHelper completionHelper,
             ImmutableArray<CompletionItem> items,
-            string filterText)
+            string filterText
+        )
         {
             var itemsWithPatternMatch = items.SelectAsArray(
-                item => (item, completionHelper.GetMatch(item.FilterText, filterText, includeMatchSpans: false, CultureInfo.CurrentCulture)));
+                item =>
+                    (
+                        item,
+                        completionHelper.GetMatch(
+                            item.FilterText,
+                            filterText,
+                            includeMatchSpans: false,
+                            CultureInfo.CurrentCulture
+                        )
+                    )
+            );
 
             return FilterItems(completionHelper, itemsWithPatternMatch, filterText);
         }
 
         /// <summary>
-        /// Determine among the provided items the best match w.r.t. the given filter text, 
+        /// Determine among the provided items the best match w.r.t. the given filter text,
         /// those returned would be considered equally good candidates for selection by controller.
         /// </summary>
         internal static ImmutableArray<CompletionItem> FilterItems(
             CompletionHelper completionHelper,
             ImmutableArray<(CompletionItem item, PatternMatch? match)> itemsWithPatternMatch,
-            string filterText)
+            string filterText
+        )
         {
             // It's very common for people to type expecting completion to fix up their casing,
             // so if no uppercase characters were typed so far, we'd loosen our standard on comparing items
             // in case-sensitive manner and take into consideration the MatchPriority as well.
-            // i.e. when everything else is equal, then if item1 is a better case-sensitive match but item2 has higher 
+            // i.e. when everything else is equal, then if item1 is a better case-sensitive match but item2 has higher
             // MatchPriority, we consider them equally good match, so the controller will later have a chance to
             // decide which is the best one to select.
             var filterTextContainsNoUpperLetters = true;
@@ -267,12 +317,16 @@ namespace Microsoft.CodeAnalysis.Completion
 
             // Keep track the highest MatchPriority of all items in the best list.
             var highestMatchPriorityInBest = int.MinValue;
-            using var _1 = ArrayBuilder<(CompletionItem item, PatternMatch? match)>.GetInstance(out var bestItems);
+            using var _1 = ArrayBuilder<(CompletionItem item, PatternMatch? match)>.GetInstance(
+                out var bestItems
+            );
 
             // This contains a list of items that are considered equally good match as bestItems except casing,
             // and they have higher MatchPriority than the ones in bestItems (although as a perf optimization we don't
             // actually guarantee this during the process, instead we check the MatchPriority again after the loop.)
-            using var _2 = ArrayBuilder<(CompletionItem item, PatternMatch? match)>.GetInstance(out var itemsWithCasingMismatchButHigherMatchPriority);
+            using var _2 = ArrayBuilder<(CompletionItem item, PatternMatch? match)>.GetInstance(
+                out var itemsWithCasingMismatchButHigherMatchPriority
+            );
 
             foreach (var pair in itemsWithPatternMatch)
             {
@@ -286,7 +340,12 @@ namespace Microsoft.CodeAnalysis.Completion
 
                 var (bestItem, bestItemMatch) = bestItems.First();
                 var comparison = completionHelper.CompareItems(
-                    pair.item, pair.match, bestItem, bestItemMatch, out var onlyDifferInCaseSensitivity);
+                    pair.item,
+                    pair.match,
+                    bestItem,
+                    bestItemMatch,
+                    out var onlyDifferInCaseSensitivity
+                );
 
                 if (comparison == 0)
                 {
@@ -295,18 +354,23 @@ namespace Microsoft.CodeAnalysis.Completion
                     // Also there's no need to remove items with lower MatchPriority from similarItemsWithHigerMatchPriority
                     // list, we will only add ones with higher value at the end.
                     bestItems.Add(pair);
-                    highestMatchPriorityInBest = Math.Max(highestMatchPriorityInBest, pair.item.Rules.MatchPriority);
+                    highestMatchPriorityInBest = Math.Max(
+                        highestMatchPriorityInBest,
+                        pair.item.Rules.MatchPriority
+                    );
                 }
                 else if (comparison < 0)
                 {
                     // This item is strictly better than the best items we've found so far.
-                    // However, if it's only better in terms of case-sensitivity, we'd like 
+                    // However, if it's only better in terms of case-sensitivity, we'd like
                     // to save the prior best items and consider their MatchPriority later.
                     itemsWithCasingMismatchButHigherMatchPriority.Clear();
 
-                    if (filterTextContainsNoUpperLetters &&
-                        onlyDifferInCaseSensitivity &&
-                        highestMatchPriorityInBest > pair.item.Rules.MatchPriority) // don't add if this item has higher MatchPriority than all prior best items
+                    if (
+                        filterTextContainsNoUpperLetters
+                        && onlyDifferInCaseSensitivity
+                        && highestMatchPriorityInBest > pair.item.Rules.MatchPriority
+                    ) // don't add if this item has higher MatchPriority than all prior best items
                     {
                         itemsWithCasingMismatchButHigherMatchPriority.AddRange(bestItems);
                     }
@@ -318,11 +382,13 @@ namespace Microsoft.CodeAnalysis.Completion
                 else
                 {
                     // otherwise, this item is strictly worse than the ones we've been collecting.
-                    // However, if it's only worse in terms of case-sensitivity, we'd like 
+                    // However, if it's only worse in terms of case-sensitivity, we'd like
                     // to save it and consider its MatchPriority later.
-                    if (filterTextContainsNoUpperLetters &&
-                        onlyDifferInCaseSensitivity &&
-                        pair.item.Rules.MatchPriority > highestMatchPriorityInBest)  // don't add if this item doesn't have higher MatchPriority
+                    if (
+                        filterTextContainsNoUpperLetters
+                        && onlyDifferInCaseSensitivity
+                        && pair.item.Rules.MatchPriority > highestMatchPriorityInBest
+                    ) // don't add if this item doesn't have higher MatchPriority
                     {
                         itemsWithCasingMismatchButHigherMatchPriority.Add(pair);
                     }
@@ -338,7 +404,9 @@ namespace Microsoft.CodeAnalysis.Completion
                 }
             }
 
-            return bestItems.ToImmutable().SelectAsArray(itemWithPatternMatch => itemWithPatternMatch.item);
+            return bestItems
+                .ToImmutable()
+                .SelectAsArray(itemWithPatternMatch => itemWithPatternMatch.item);
         }
     }
 }

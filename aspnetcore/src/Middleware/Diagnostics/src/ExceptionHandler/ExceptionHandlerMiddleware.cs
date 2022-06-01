@@ -34,7 +34,8 @@ public class ExceptionHandlerMiddleware
         RequestDelegate next,
         ILoggerFactory loggerFactory,
         IOptions<ExceptionHandlerOptions> options,
-        DiagnosticListener diagnosticListener)
+        DiagnosticListener diagnosticListener
+    )
     {
         _next = next;
         _options = options.Value;
@@ -45,7 +46,9 @@ public class ExceptionHandlerMiddleware
         {
             if (_options.ExceptionHandlingPath == null)
             {
-                throw new InvalidOperationException(Resources.ExceptionHandlerOptions_NotConfiguredCorrectly);
+                throw new InvalidOperationException(
+                    Resources.ExceptionHandlerOptions_NotConfiguredCorrectly
+                );
             }
             else
             {
@@ -79,7 +82,11 @@ public class ExceptionHandlerMiddleware
 
         return HandleException(context, edi);
 
-        static async Task Awaited(ExceptionHandlerMiddleware middleware, HttpContext context, Task task)
+        static async Task Awaited(
+            ExceptionHandlerMiddleware middleware,
+            HttpContext context,
+            Task task
+        )
         {
             ExceptionDispatchInfo? edi = null;
             try
@@ -134,20 +141,33 @@ public class ExceptionHandlerMiddleware
             await _options.ExceptionHandler!(context);
 
             // If the response has already started, assume exception handler was successful.
-            if (context.Response.HasStarted || context.Response.StatusCode != StatusCodes.Status404NotFound || _options.AllowStatusCode404Response)
+            if (
+                context.Response.HasStarted
+                || context.Response.StatusCode != StatusCodes.Status404NotFound
+                || _options.AllowStatusCode404Response
+            )
             {
                 const string eventName = "Microsoft.AspNetCore.Diagnostics.HandledException";
                 if (_diagnosticListener.IsEnabled() && _diagnosticListener.IsEnabled(eventName))
                 {
-                    WriteDiagnosticEvent(_diagnosticListener, eventName, new { httpContext = context, exception = edi.SourceException });
+                    WriteDiagnosticEvent(
+                        _diagnosticListener,
+                        eventName,
+                        new { httpContext = context, exception = edi.SourceException }
+                    );
                 }
 
                 return;
             }
 
-            edi = ExceptionDispatchInfo.Capture(new InvalidOperationException($"The exception handler configured on {nameof(ExceptionHandlerOptions)} produced a 404 status response. " +
-                $"This {nameof(InvalidOperationException)} containing the original exception was thrown since this is often due to a misconfigured {nameof(ExceptionHandlerOptions.ExceptionHandlingPath)}. " +
-                $"If the exception handler is expected to return 404 status responses then set {nameof(ExceptionHandlerOptions.AllowStatusCode404Response)} to true.", edi.SourceException));
+            edi = ExceptionDispatchInfo.Capture(
+                new InvalidOperationException(
+                    $"The exception handler configured on {nameof(ExceptionHandlerOptions)} produced a 404 status response. "
+                        + $"This {nameof(InvalidOperationException)} containing the original exception was thrown since this is often due to a misconfigured {nameof(ExceptionHandlerOptions.ExceptionHandlingPath)}. "
+                        + $"If the exception handler is expected to return 404 status responses then set {nameof(ExceptionHandlerOptions.AllowStatusCode404Response)} to true.",
+                    edi.SourceException
+                )
+            );
         }
         catch (Exception ex2)
         {
@@ -161,10 +181,16 @@ public class ExceptionHandlerMiddleware
 
         edi.Throw(); // Re-throw wrapped exception or the original if we couldn't handle it
 
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2026",
-            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency.")]
-        static void WriteDiagnosticEvent<TValue>(DiagnosticSource diagnosticSource, string name, TValue value)
-            => diagnosticSource.Write(name, value);
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2026",
+            Justification = "The values being passed into Write have the commonly used properties being preserved with DynamicDependency."
+        )]
+        static void WriteDiagnosticEvent<TValue>(
+            DiagnosticSource diagnosticSource,
+            string name,
+            TValue value
+        ) => diagnosticSource.Write(name, value);
     }
 
     private static void ClearHttpContext(HttpContext context)

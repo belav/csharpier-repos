@@ -19,11 +19,11 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
     {
         public static readonly IBlockFacts Instance = new CSharpBlockFacts();
 
-        public override bool IsScopeBlock([NotNullWhen(true)] SyntaxNode? node)
-            => node.IsKind(SyntaxKind.Block);
+        public override bool IsScopeBlock([NotNullWhen(true)] SyntaxNode? node) =>
+            node.IsKind(SyntaxKind.Block);
 
-        public override bool IsExecutableBlock([NotNullWhen(true)] SyntaxNode? node)
-            => node.IsKind(SyntaxKind.Block, SyntaxKind.SwitchSection, SyntaxKind.CompilationUnit);
+        public override bool IsExecutableBlock([NotNullWhen(true)] SyntaxNode? node) =>
+            node.IsKind(SyntaxKind.Block, SyntaxKind.SwitchSection, SyntaxKind.CompilationUnit);
 
         public override IReadOnlyList<SyntaxNode> GetExecutableBlockStatements(SyntaxNode? node)
         {
@@ -31,16 +31,20 @@ namespace Microsoft.CodeAnalysis.CSharp.LanguageServices
             {
                 BlockSyntax block => block.Statements,
                 SwitchSectionSyntax switchSection => switchSection.Statements,
-                CompilationUnitSyntax compilationUnit => compilationUnit.Members.OfType<GlobalStatementSyntax>().SelectAsArray(globalStatement => globalStatement.Statement),
+                CompilationUnitSyntax compilationUnit
+                    => compilationUnit.Members
+                        .OfType<GlobalStatementSyntax>()
+                        .SelectAsArray(globalStatement => globalStatement.Statement),
                 _ => throw ExceptionUtilities.UnexpectedValue(node),
             };
         }
 
-        public override SyntaxNode? FindInnermostCommonExecutableBlock(IEnumerable<SyntaxNode> nodes)
-            => nodes.FindInnermostCommonNode(node => IsExecutableBlock(node));
+        public override SyntaxNode? FindInnermostCommonExecutableBlock(
+            IEnumerable<SyntaxNode> nodes
+        ) => nodes.FindInnermostCommonNode(node => IsExecutableBlock(node));
 
-        public override bool IsStatementContainer([NotNullWhen(true)] SyntaxNode? node)
-            => IsExecutableBlock(node) || node.IsEmbeddedStatementOwner();
+        public override bool IsStatementContainer([NotNullWhen(true)] SyntaxNode? node) =>
+            IsExecutableBlock(node) || node.IsEmbeddedStatementOwner();
 
         public override IReadOnlyList<SyntaxNode> GetStatementContainerStatements(SyntaxNode? node)
         {

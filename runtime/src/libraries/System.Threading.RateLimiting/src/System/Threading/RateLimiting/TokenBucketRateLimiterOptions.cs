@@ -28,7 +28,8 @@ namespace System.Threading.RateLimiting
             int queueLimit,
             TimeSpan replenishmentPeriod,
             int tokensPerPeriod,
-            bool autoReplenishment = true)
+            bool autoReplenishment = true
+        )
         {
             if (tokenLimit < 0)
             {

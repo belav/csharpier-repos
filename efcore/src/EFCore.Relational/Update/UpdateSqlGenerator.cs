@@ -44,8 +44,7 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// <summary>
     ///     Helpers for generating update SQL.
     /// </summary>
-    protected virtual ISqlGenerationHelper SqlGenerationHelper
-        => Dependencies.SqlGenerationHelper;
+    protected virtual ISqlGenerationHelper SqlGenerationHelper => Dependencies.SqlGenerationHelper;
 
     /// <summary>
     ///     Appends a SQL command for inserting a row to the commands being built.
@@ -59,8 +58,14 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
-        => AppendInsertReturningOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        out bool requiresTransaction
+    ) =>
+        AppendInsertReturningOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
 
     /// <summary>
     ///     Appends SQL for inserting a row to the commands being built, via an INSERT containing an optional RETURNING clause to retrieve
@@ -75,7 +80,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         var name = command.TableName;
         var schema = command.Schema;
@@ -88,7 +94,9 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
 
         requiresTransaction = false;
 
-        return readOperations.Count > 0 ? ResultSetMapping.LastInResultSet : ResultSetMapping.NoResultSet;
+        return readOperations.Count > 0
+            ? ResultSetMapping.LastInResultSet
+            : ResultSetMapping.NoResultSet;
     }
 
     /// <summary>
@@ -103,8 +111,14 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
-        => AppendUpdateReturningOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        out bool requiresTransaction
+    ) =>
+        AppendUpdateReturningOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
 
     /// <summary>
     ///     Appends SQL for updating a row to the commands being built, via an UPDATE containing an RETURNING clause to retrieve any
@@ -119,7 +133,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         var name = command.TableName;
         var schema = command.Schema;
@@ -132,8 +147,14 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         requiresTransaction = false;
 
         AppendUpdateCommand(
-            commandStringBuilder, name, schema, writeOperations, readOperations, conditionOperations,
-            additionalReadValues: readOperations.Count == 0 ? "1" : null);
+            commandStringBuilder,
+            name,
+            schema,
+            writeOperations,
+            readOperations,
+            conditionOperations,
+            additionalReadValues: readOperations.Count == 0 ? "1" : null
+        );
 
         return ResultSetMapping.LastInResultSet;
     }
@@ -150,8 +171,14 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
-        => AppendDeleteReturningOperation(commandStringBuilder, command, commandPosition, out requiresTransaction);
+        out bool requiresTransaction
+    ) =>
+        AppendDeleteReturningOperation(
+            commandStringBuilder,
+            command,
+            commandPosition,
+            out requiresTransaction
+        );
 
     /// <summary>
     ///     Appends SQL for deleting a row to the commands being built, via a DELETE containing a RETURNING clause for concurrency checking.
@@ -165,7 +192,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IReadOnlyModificationCommand command,
         int commandPosition,
-        out bool requiresTransaction)
+        out bool requiresTransaction
+    )
     {
         var name = command.TableName;
         var schema = command.Schema;
@@ -174,7 +202,13 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         requiresTransaction = false;
 
         AppendDeleteCommand(
-            commandStringBuilder, name, schema, Array.Empty<IColumnModification>(), conditionOperations, additionalReadValues: "1");
+            commandStringBuilder,
+            name,
+            schema,
+            Array.Empty<IColumnModification>(),
+            conditionOperations,
+            additionalReadValues: "1"
+        );
 
         return ResultSetMapping.LastInResultSet;
     }
@@ -192,7 +226,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         string name,
         string? schema,
         IReadOnlyList<IColumnModification> writeOperations,
-        IReadOnlyList<IColumnModification> readOperations)
+        IReadOnlyList<IColumnModification> readOperations
+    )
     {
         AppendInsertCommandHeader(commandStringBuilder, name, schema, writeOperations);
         AppendValuesHeader(commandStringBuilder, writeOperations);
@@ -218,7 +253,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         IReadOnlyList<IColumnModification> writeOperations,
         IReadOnlyList<IColumnModification> readOperations,
         IReadOnlyList<IColumnModification> conditionOperations,
-        string? additionalReadValues = null)
+        string? additionalReadValues = null
+    )
     {
         AppendUpdateCommandHeader(commandStringBuilder, name, schema, writeOperations);
         AppendWhereClause(commandStringBuilder, conditionOperations);
@@ -241,7 +277,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         string? schema,
         IReadOnlyList<IColumnModification> readOperations,
         IReadOnlyList<IColumnModification> conditionOperations,
-        string? additionalReadValues = null)
+        string? additionalReadValues = null
+    )
     {
         AppendDeleteCommandHeader(commandStringBuilder, name, schema);
         AppendWhereClause(commandStringBuilder, conditionOperations);
@@ -260,7 +297,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         string name,
         string? schema,
-        IReadOnlyList<IColumnModification> operations)
+        IReadOnlyList<IColumnModification> operations
+    )
     {
         commandStringBuilder.Append("INSERT INTO ");
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
@@ -272,7 +310,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
                 .AppendJoin(
                     operations,
                     SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName))
+                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+                )
                 .Append(')');
         }
     }
@@ -286,7 +325,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     protected virtual void AppendDeleteCommandHeader(
         StringBuilder commandStringBuilder,
         string name,
-        string? schema)
+        string? schema
+    )
     {
         commandStringBuilder.Append("DELETE FROM ");
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
@@ -303,11 +343,13 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         string name,
         string? schema,
-        IReadOnlyList<IColumnModification> operations)
+        IReadOnlyList<IColumnModification> operations
+    )
     {
         commandStringBuilder.Append("UPDATE ");
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
-        commandStringBuilder.Append(" SET ")
+        commandStringBuilder
+            .Append(" SET ")
             .AppendJoin(
                 operations,
                 (this, name, schema),
@@ -324,7 +366,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
                     {
                         g.SqlGenerationHelper.GenerateParameterNamePlaceholder(sb, o.ParameterName);
                     }
-                });
+                }
+            );
     }
 
     /// <summary>
@@ -334,7 +377,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// <param name="operations">The operations for which there are values.</param>
     protected virtual void AppendValuesHeader(
         StringBuilder commandStringBuilder,
-        IReadOnlyList<IColumnModification> operations)
+        IReadOnlyList<IColumnModification> operations
+    )
     {
         commandStringBuilder.AppendLine();
         commandStringBuilder.Append(operations.Count > 0 ? "VALUES " : "DEFAULT VALUES");
@@ -351,7 +395,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         string name,
         string? schema,
-        IReadOnlyList<IColumnModification> operations)
+        IReadOnlyList<IColumnModification> operations
+    )
     {
         if (operations.Count > 0)
         {
@@ -371,14 +416,18 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
                             }
                             else
                             {
-                                g.SqlGenerationHelper.GenerateParameterNamePlaceholder(sb, o.ParameterName);
+                                g.SqlGenerationHelper.GenerateParameterNamePlaceholder(
+                                    sb,
+                                    o.ParameterName
+                                );
                             }
                         }
                         else
                         {
                             sb.Append("DEFAULT");
                         }
-                    })
+                    }
+                )
                 .Append(')');
         }
     }
@@ -392,7 +441,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     protected virtual void AppendReturningClause(
         StringBuilder commandStringBuilder,
         IReadOnlyList<IColumnModification> operations,
-        string? additionalValues = null)
+        string? additionalValues = null
+    )
     {
         if (operations.Count > 0 || additionalValues is not null)
         {
@@ -402,7 +452,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
                 .AppendJoin(
                     operations,
                     SqlGenerationHelper,
-                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName));
+                    (sb, o, helper) => helper.DelimitIdentifier(sb, o.ColumnName)
+                );
 
             if (additionalValues is not null)
             {
@@ -423,14 +474,19 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// <param name="operations">The operations from which to build the conditions.</param>
     protected virtual void AppendWhereClause(
         StringBuilder commandStringBuilder,
-        IReadOnlyList<IColumnModification> operations)
+        IReadOnlyList<IColumnModification> operations
+    )
     {
         if (operations.Count > 0)
         {
             commandStringBuilder
                 .AppendLine()
                 .Append("WHERE ")
-                .AppendJoin(operations, (sb, v) => AppendWhereCondition(sb, v, v.UseOriginalValueParameter), " AND ");
+                .AppendJoin(
+                    operations,
+                    (sb, v) => AppendWhereCondition(sb, v, v.UseOriginalValueParameter),
+                    " AND "
+                );
         }
     }
 
@@ -445,7 +501,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     protected virtual void AppendWhereCondition(
         StringBuilder commandStringBuilder,
         IColumnModification columnModification,
-        bool useOriginalValue)
+        bool useOriginalValue
+    )
     {
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, columnModification.ColumnName);
 
@@ -467,9 +524,11 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
             else
             {
                 SqlGenerationHelper.GenerateParameterNamePlaceholder(
-                    commandStringBuilder, useOriginalValue
+                    commandStringBuilder,
+                    useOriginalValue
                         ? columnModification.OriginalParameterName!
-                        : columnModification.ParameterName!);
+                        : columnModification.ParameterName!
+                );
             }
         }
     }
@@ -478,17 +537,13 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     ///     Appends SQL text that defines the start of a batch.
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be appended.</param>
-    public virtual void AppendBatchHeader(StringBuilder commandStringBuilder)
-    {
-    }
+    public virtual void AppendBatchHeader(StringBuilder commandStringBuilder) { }
 
     /// <summary>
     ///     Prepends a SQL command for turning on autocommit mode in the database, in case it is off.
     /// </summary>
     /// <param name="commandStringBuilder">The builder to which the SQL should be prepended.</param>
-    public virtual void PrependEnsureAutocommit(StringBuilder commandStringBuilder)
-    {
-    }
+    public virtual void PrependEnsureAutocommit(StringBuilder commandStringBuilder) { }
 
     /// <summary>
     ///     Generates SQL that will obtain the next value in the given sequence.
@@ -510,7 +565,11 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
     /// <param name="commandStringBuilder">The builder to which the SQL fragment should be appended.</param>
     /// <param name="name">The name of the sequence.</param>
     /// <param name="schema">The schema that contains the sequence, or <see langword="null" /> to use the default schema.</param>
-    public virtual void AppendNextSequenceValueOperation(StringBuilder commandStringBuilder, string name, string? schema)
+    public virtual void AppendNextSequenceValueOperation(
+        StringBuilder commandStringBuilder,
+        string name,
+        string? schema
+    )
     {
         commandStringBuilder.Append("SELECT NEXT VALUE FOR ");
         SqlGenerationHelper.DelimitIdentifier(commandStringBuilder, name, schema);
@@ -528,7 +587,8 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
         StringBuilder commandStringBuilder,
         IColumnModification modification,
         string? tableName,
-        string? schema)
+        string? schema
+    )
     {
         if (modification.TypeMapping == null)
         {
@@ -544,9 +604,15 @@ public abstract class UpdateSqlGenerator : IUpdateSqlGenerator
             }
 
             throw new InvalidOperationException(
-                RelationalStrings.UnsupportedDataOperationStoreType(modification.ColumnType, columnName));
+                RelationalStrings.UnsupportedDataOperationStoreType(
+                    modification.ColumnType,
+                    columnName
+                )
+            );
         }
 
-        commandStringBuilder.Append(modification.TypeMapping.GenerateProviderValueSqlLiteral(modification.Value));
+        commandStringBuilder.Append(
+            modification.TypeMapping.GenerateProviderValueSqlLiteral(modification.Value)
+        );
     }
 }

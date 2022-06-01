@@ -22,7 +22,8 @@ public static class PageConventionCollectionExtensions
     /// <returns></returns>
     public static IPageApplicationModelConvention ConfigureFilter(
         this PageConventionCollection conventions,
-        Func<PageApplicationModel, IFilterMetadata> factory)
+        Func<PageApplicationModel, IFilterMetadata> factory
+    )
     {
         if (conventions == null)
         {
@@ -34,7 +35,10 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentNullException(nameof(factory));
         }
 
-        return conventions.AddFolderApplicationModelConvention("/", model => model.Filters.Add(factory(model)));
+        return conventions.AddFolderApplicationModelConvention(
+            "/",
+            model => model.Filters.Add(factory(model))
+        );
     }
 
     /// <summary>
@@ -43,7 +47,10 @@ public static class PageConventionCollectionExtensions
     /// <param name="conventions">The <see cref="PageConventionCollection"/> to configure.</param>
     /// <param name="filter">The <see cref="IFilterMetadata"/> to add.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection ConfigureFilter(this PageConventionCollection conventions, IFilterMetadata filter)
+    public static PageConventionCollection ConfigureFilter(
+        this PageConventionCollection conventions,
+        IFilterMetadata filter
+    )
     {
         if (conventions == null)
         {
@@ -66,7 +73,10 @@ public static class PageConventionCollectionExtensions
     /// <param name="conventions">The <see cref="PageConventionCollection"/> to configure.</param>
     /// <param name="convention">The <see cref="IParameterModelBaseConvention"/> to apply.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection Add(this PageConventionCollection conventions, IParameterModelBaseConvention convention)
+    public static PageConventionCollection Add(
+        this PageConventionCollection conventions,
+        IParameterModelBaseConvention convention
+    )
     {
         if (conventions == null)
         {
@@ -89,7 +99,10 @@ public static class PageConventionCollectionExtensions
     /// <param name="conventions">The <see cref="PageConventionCollection"/> to configure.</param>
     /// <param name="pageName">The page name.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AllowAnonymousToPage(this PageConventionCollection conventions, string pageName)
+    public static PageConventionCollection AllowAnonymousToPage(
+        this PageConventionCollection conventions,
+        string pageName
+    )
     {
         if (conventions == null)
         {
@@ -101,17 +114,20 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddPageApplicationModelConvention(pageName, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddPageApplicationModelConvention(
+            pageName,
+            model =>
             {
-                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                }
+                else
+                {
+                    model.Filters.Add(new AllowAnonymousFilter());
+                }
             }
-            else
-            {
-                model.Filters.Add(new AllowAnonymousFilter());
-            }
-        });
+        );
         return conventions;
     }
 
@@ -131,7 +147,8 @@ public static class PageConventionCollectionExtensions
     public static PageConventionCollection AllowAnonymousToAreaPage(
         this PageConventionCollection conventions,
         string areaName,
-        string pageName)
+        string pageName
+    )
     {
         if (conventions == null)
         {
@@ -148,17 +165,21 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddAreaPageApplicationModelConvention(areaName, pageName, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddAreaPageApplicationModelConvention(
+            areaName,
+            pageName,
+            model =>
             {
-                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                }
+                else
+                {
+                    model.Filters.Add(new AllowAnonymousFilter());
+                }
             }
-            else
-            {
-                model.Filters.Add(new AllowAnonymousFilter());
-            }
-        });
+        );
         return conventions;
     }
 
@@ -168,7 +189,10 @@ public static class PageConventionCollectionExtensions
     /// <param name="conventions">The <see cref="PageConventionCollection"/> to configure.</param>
     /// <param name="folderPath">The folder path.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AllowAnonymousToFolder(this PageConventionCollection conventions, string folderPath)
+    public static PageConventionCollection AllowAnonymousToFolder(
+        this PageConventionCollection conventions,
+        string folderPath
+    )
     {
         if (conventions == null)
         {
@@ -180,17 +204,20 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddFolderApplicationModelConvention(folderPath, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddFolderApplicationModelConvention(
+            folderPath,
+            model =>
             {
-                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                }
+                else
+                {
+                    model.Filters.Add(new AllowAnonymousFilter());
+                }
             }
-            else
-            {
-                model.Filters.Add(new AllowAnonymousFilter());
-            }
-        });
+        );
         return conventions;
     }
 
@@ -210,7 +237,8 @@ public static class PageConventionCollectionExtensions
     public static PageConventionCollection AllowAnonymousToAreaFolder(
         this PageConventionCollection conventions,
         string areaName,
-        string folderPath)
+        string folderPath
+    )
     {
         if (conventions == null)
         {
@@ -227,17 +255,21 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddAreaFolderApplicationModelConvention(areaName, folderPath, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddAreaFolderApplicationModelConvention(
+            areaName,
+            folderPath,
+            model =>
             {
-                model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AllowAnonymousAttribute());
+                }
+                else
+                {
+                    model.Filters.Add(new AllowAnonymousFilter());
+                }
             }
-            else
-            {
-                model.Filters.Add(new AllowAnonymousFilter());
-            }
-        });
+        );
         return conventions;
     }
 
@@ -248,7 +280,11 @@ public static class PageConventionCollectionExtensions
     /// <param name="pageName">The page name.</param>
     /// <param name="policy">The authorization policy.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AuthorizePage(this PageConventionCollection conventions, string pageName, string policy)
+    public static PageConventionCollection AuthorizePage(
+        this PageConventionCollection conventions,
+        string pageName,
+        string policy
+    )
     {
         if (conventions == null)
         {
@@ -260,17 +296,20 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddPageApplicationModelConvention(pageName, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddPageApplicationModelConvention(
+            pageName,
+            model =>
             {
-                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                }
+                else
+                {
+                    model.Filters.Add(new AuthorizeFilter(policy));
+                }
             }
-            else
-            {
-                model.Filters.Add(new AuthorizeFilter(policy));
-            }
-        });
+        );
         return conventions;
     }
 
@@ -280,8 +319,10 @@ public static class PageConventionCollectionExtensions
     /// <param name="conventions">The <see cref="PageConventionCollection"/> to configure.</param>
     /// <param name="pageName">The page name.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AuthorizePage(this PageConventionCollection conventions, string pageName) =>
-        AuthorizePage(conventions, pageName, policy: string.Empty);
+    public static PageConventionCollection AuthorizePage(
+        this PageConventionCollection conventions,
+        string pageName
+    ) => AuthorizePage(conventions, pageName, policy: string.Empty);
 
     /// <summary>
     /// Requires authorization for the specified area page.
@@ -296,8 +337,11 @@ public static class PageConventionCollectionExtensions
     /// </para>
     /// </param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AuthorizeAreaPage(this PageConventionCollection conventions, string areaName, string pageName)
-        => AuthorizeAreaPage(conventions, areaName, pageName, policy: string.Empty);
+    public static PageConventionCollection AuthorizeAreaPage(
+        this PageConventionCollection conventions,
+        string areaName,
+        string pageName
+    ) => AuthorizeAreaPage(conventions, areaName, pageName, policy: string.Empty);
 
     /// <summary>
     /// Requires authorization for the specified area page with the specified policy.
@@ -317,7 +361,8 @@ public static class PageConventionCollectionExtensions
         this PageConventionCollection conventions,
         string areaName,
         string pageName,
-        string policy)
+        string policy
+    )
     {
         if (conventions == null)
         {
@@ -334,17 +379,21 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(pageName));
         }
 
-        conventions.AddAreaPageApplicationModelConvention(areaName, pageName, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddAreaPageApplicationModelConvention(
+            areaName,
+            pageName,
+            model =>
             {
-                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                }
+                else
+                {
+                    model.Filters.Add(new AuthorizeFilter(policy));
+                }
             }
-            else
-            {
-                model.Filters.Add(new AuthorizeFilter(policy));
-            }
-        });
+        );
         return conventions;
     }
 
@@ -355,7 +404,11 @@ public static class PageConventionCollectionExtensions
     /// <param name="folderPath">The folder path.</param>
     /// <param name="policy">The authorization policy.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AuthorizeFolder(this PageConventionCollection conventions, string folderPath, string policy)
+    public static PageConventionCollection AuthorizeFolder(
+        this PageConventionCollection conventions,
+        string folderPath,
+        string policy
+    )
     {
         if (conventions == null)
         {
@@ -367,17 +420,20 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddFolderApplicationModelConvention(folderPath, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddFolderApplicationModelConvention(
+            folderPath,
+            model =>
             {
-                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                }
+                else
+                {
+                    model.Filters.Add(new AuthorizeFilter(policy));
+                }
             }
-            else
-            {
-                model.Filters.Add(new AuthorizeFilter(policy));
-            }
-        });
+        );
         return conventions;
     }
 
@@ -387,8 +443,10 @@ public static class PageConventionCollectionExtensions
     /// <param name="conventions">The <see cref="PageConventionCollection"/> to configure.</param>
     /// <param name="folderPath">The folder path.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AuthorizeFolder(this PageConventionCollection conventions, string folderPath) =>
-        AuthorizeFolder(conventions, folderPath, policy: string.Empty);
+    public static PageConventionCollection AuthorizeFolder(
+        this PageConventionCollection conventions,
+        string folderPath
+    ) => AuthorizeFolder(conventions, folderPath, policy: string.Empty);
 
     /// <summary>
     /// Requires authorization with the default policy for all pages under the specified folder.
@@ -403,8 +461,11 @@ public static class PageConventionCollectionExtensions
     /// </para>
     /// </param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AuthorizeAreaFolder(this PageConventionCollection conventions, string areaName, string folderPath)
-        => AuthorizeAreaFolder(conventions, areaName, folderPath, policy: string.Empty);
+    public static PageConventionCollection AuthorizeAreaFolder(
+        this PageConventionCollection conventions,
+        string areaName,
+        string folderPath
+    ) => AuthorizeAreaFolder(conventions, areaName, folderPath, policy: string.Empty);
 
     /// <summary>
     /// Requires authorization with the specified policy for all pages under the specified folder.
@@ -424,7 +485,8 @@ public static class PageConventionCollectionExtensions
         this PageConventionCollection conventions,
         string areaName,
         string folderPath,
-        string policy)
+        string policy
+    )
     {
         if (conventions == null)
         {
@@ -441,17 +503,21 @@ public static class PageConventionCollectionExtensions
             throw new ArgumentException(Resources.ArgumentCannotBeNullOrEmpty, nameof(folderPath));
         }
 
-        conventions.AddAreaFolderApplicationModelConvention(areaName, folderPath, model =>
-        {
-            if (conventions.MvcOptions.EnableEndpointRouting)
+        conventions.AddAreaFolderApplicationModelConvention(
+            areaName,
+            folderPath,
+            model =>
             {
-                model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                if (conventions.MvcOptions.EnableEndpointRouting)
+                {
+                    model.EndpointMetadata.Add(new AuthorizeAttribute(policy));
+                }
+                else
+                {
+                    model.Filters.Add(new AuthorizeFilter(policy));
+                }
             }
-            else
-            {
-                model.Filters.Add(new AuthorizeFilter(policy));
-            }
-        });
+        );
         return conventions;
     }
 
@@ -466,7 +532,11 @@ public static class PageConventionCollectionExtensions
     /// <param name="pageName">The page name.</param>
     /// <param name="route">The route to associate with the page.</param>
     /// <returns>The <see cref="PageConventionCollection"/>.</returns>
-    public static PageConventionCollection AddPageRoute(this PageConventionCollection conventions, string pageName, string route)
+    public static PageConventionCollection AddPageRoute(
+        this PageConventionCollection conventions,
+        string pageName,
+        string route
+    )
     {
         if (conventions == null)
         {
@@ -511,7 +581,8 @@ public static class PageConventionCollectionExtensions
         this PageConventionCollection conventions,
         string areaName,
         string pageName,
-        string route)
+        string route
+    )
     {
         if (conventions == null)
         {
@@ -548,17 +619,18 @@ public static class PageConventionCollectionExtensions
                 selector.AttributeRouteModel!.SuppressLinkGeneration = true;
             }
 
-            model.Selectors.Add(new SelectorModel
-            {
-                AttributeRouteModel = new AttributeRouteModel
+            model.Selectors.Add(
+                new SelectorModel
                 {
-                    Template = route,
+                    AttributeRouteModel = new AttributeRouteModel { Template = route, }
                 }
-            });
+            );
         };
     }
 
-    private sealed class ParameterModelBaseConventionAdapter : IPageConvention, IParameterModelBaseConvention
+    private sealed class ParameterModelBaseConventionAdapter
+        : IPageConvention,
+            IParameterModelBaseConvention
     {
         private readonly IParameterModelBaseConvention _convention;
 

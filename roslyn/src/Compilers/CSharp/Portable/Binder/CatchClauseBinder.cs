@@ -18,7 +18,10 @@ namespace Microsoft.CodeAnalysis.CSharp
         private readonly CatchClauseSyntax _syntax;
 
         public CatchClauseBinder(Binder enclosing, CatchClauseSyntax syntax)
-            : base(enclosing, (enclosing.Flags | BinderFlags.InCatchBlock) & ~BinderFlags.InNestedFinallyBlock)
+            : base(
+                enclosing,
+                (enclosing.Flags | BinderFlags.InCatchBlock) & ~BinderFlags.InNestedFinallyBlock
+            )
         {
             Debug.Assert(syntax != null);
             _syntax = syntax;
@@ -31,18 +34,33 @@ namespace Microsoft.CodeAnalysis.CSharp
             var declarationOpt = _syntax.Declaration;
             if ((declarationOpt != null) && (declarationOpt.Identifier.Kind() != SyntaxKind.None))
             {
-                locals.Add(SourceLocalSymbol.MakeLocal(this.ContainingMemberOrLambda, this, false, declarationOpt.Type, declarationOpt.Identifier, LocalDeclarationKind.CatchVariable));
+                locals.Add(
+                    SourceLocalSymbol.MakeLocal(
+                        this.ContainingMemberOrLambda,
+                        this,
+                        false,
+                        declarationOpt.Type,
+                        declarationOpt.Identifier,
+                        LocalDeclarationKind.CatchVariable
+                    )
+                );
             }
 
             if (_syntax.Filter != null)
             {
-                ExpressionVariableFinder.FindExpressionVariables(this, locals, _syntax.Filter.FilterExpression);
+                ExpressionVariableFinder.FindExpressionVariables(
+                    this,
+                    locals,
+                    _syntax.Filter.FilterExpression
+                );
             }
 
             return locals.ToImmutableAndFree();
         }
 
-        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(SyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalSymbol> GetDeclaredLocalsForScope(
+            SyntaxNode scopeDesignator
+        )
         {
             if (_syntax == scopeDesignator)
             {
@@ -52,17 +70,16 @@ namespace Microsoft.CodeAnalysis.CSharp
             throw ExceptionUtilities.Unreachable;
         }
 
-        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(CSharpSyntaxNode scopeDesignator)
+        internal override ImmutableArray<LocalFunctionSymbol> GetDeclaredLocalFunctionsForScope(
+            CSharpSyntaxNode scopeDesignator
+        )
         {
             throw ExceptionUtilities.Unreachable;
         }
 
         internal override SyntaxNode ScopeDesignator
         {
-            get
-            {
-                return _syntax;
-            }
+            get { return _syntax; }
         }
     }
 }

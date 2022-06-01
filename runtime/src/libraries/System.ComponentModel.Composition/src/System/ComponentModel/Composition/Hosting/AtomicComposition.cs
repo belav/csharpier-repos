@@ -43,10 +43,7 @@ namespace System.ComponentModel.Composition.Hosting
         private bool _isCompleted;
         private bool _containsInnerAtomicComposition;
 
-        public AtomicComposition()
-            : this(null)
-        {
-        }
+        public AtomicComposition() : this(null) { }
 
         public AtomicComposition(AtomicComposition? outerAtomicComposition)
         {
@@ -75,7 +72,11 @@ namespace System.ComponentModel.Composition.Hosting
             return TryGetValue(key, false, out value);
         }
 
-        public bool TryGetValue<T>(object key, bool localAtomicCompositionOnly, [MaybeNullWhen(false)] out T value)
+        public bool TryGetValue<T>(
+            object key,
+            bool localAtomicCompositionOnly,
+            [MaybeNullWhen(false)] out T value
+        )
         {
             ThrowIfDisposed();
             ThrowIfCompleted();
@@ -121,11 +122,11 @@ namespace System.ComponentModel.Composition.Hosting
             ThrowIfCompleted();
 
             if (_outerAtomicComposition == null)
-            {   // Execute all the complete actions
+            { // Execute all the complete actions
                 FinalComplete();
             }
             else
-            {   // Copy the actions and state to the outer atomicComposition
+            { // Copy the actions and state to the outer atomicComposition
                 CopyComplete();
             }
 
@@ -185,7 +186,10 @@ namespace System.ComponentModel.Composition.Hosting
                     _revertActionList = null;
                     if (exceptions != null)
                     {
-                        throw new InvalidOperationException(SR.InvalidOperation_RevertAndCompleteActionsMustNotThrow, new AggregateException(exceptions));
+                        throw new InvalidOperationException(
+                            SR.InvalidOperation_RevertAndCompleteActionsMustNotThrow,
+                            new AggregateException(exceptions)
+                        );
                     }
                 }
             }
@@ -223,7 +227,10 @@ namespace System.ComponentModel.Composition.Hosting
                 _completeActionList = null;
                 if (exceptions != null)
                 {
-                    throw new InvalidOperationException(SR.InvalidOperation_RevertAndCompleteActionsMustNotThrow, new AggregateException(exceptions));
+                    throw new InvalidOperationException(
+                        SR.InvalidOperation_RevertAndCompleteActionsMustNotThrow,
+                        new AggregateException(exceptions)
+                    );
                 }
             }
         }
@@ -260,8 +267,7 @@ namespace System.ComponentModel.Composition.Hosting
             // overwrite by design and can now be completed or rolled back together
             for (var index = 0; index < _valueCount; index++)
             {
-                _outerAtomicComposition.SetValueInternal(
-                    _values![index].Key, _values[index].Value);
+                _outerAtomicComposition.SetValueInternal(_values![index].Key, _values[index].Value);
             }
         }
 
@@ -277,7 +283,11 @@ namespace System.ComponentModel.Composition.Hosting
             }
         }
 
-        private bool TryGetValueInternal<T>(object key, bool localAtomicCompositionOnly, [MaybeNullWhen(false)] out T value)
+        private bool TryGetValueInternal<T>(
+            object key,
+            bool localAtomicCompositionOnly,
+            [MaybeNullWhen(false)] out T value
+        )
         {
             for (var index = 0; index < _valueCount; index++)
             {
@@ -292,7 +302,11 @@ namespace System.ComponentModel.Composition.Hosting
             // scope, where upon we go ahead and return null
             if (!localAtomicCompositionOnly && _outerAtomicComposition != null)
             {
-                return _outerAtomicComposition.TryGetValueInternal<T>(key, localAtomicCompositionOnly, out value);
+                return _outerAtomicComposition.TryGetValueInternal<T>(
+                    key,
+                    localAtomicCompositionOnly,
+                    out value
+                );
             }
 
             value = default;
@@ -314,7 +328,9 @@ namespace System.ComponentModel.Composition.Hosting
             // Expand storage when needed
             if (_values == null || _valueCount == _values.Length)
             {
-                var newQueries = new KeyValuePair<object, object?>[_valueCount == 0 ? 5 : _valueCount * 2];
+                var newQueries = new KeyValuePair<object, object?>[
+                    _valueCount == 0 ? 5 : _valueCount * 2
+                ];
                 if (_values != null)
                 {
                     Array.Copy(_values, newQueries, _valueCount);
@@ -333,7 +349,9 @@ namespace System.ComponentModel.Composition.Hosting
         {
             if (_containsInnerAtomicComposition)
             {
-                throw new InvalidOperationException(SR.AtomicComposition_PartOfAnotherAtomicComposition);
+                throw new InvalidOperationException(
+                    SR.AtomicComposition_PartOfAnotherAtomicComposition
+                );
             }
         }
 

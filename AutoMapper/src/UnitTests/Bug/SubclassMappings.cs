@@ -19,15 +19,15 @@ namespace AutoMapper.UnitTests.Bug
             public string SubName { get; set; }
         }
 
-        protected override MapperConfiguration CreateConfiguration() => new(cfg =>
-        {
-            cfg.CreateMap<Source, Destination>();
-        });
+        protected override MapperConfiguration CreateConfiguration() =>
+            new(cfg =>
+            {
+                cfg.CreateMap<Source, Destination>();
+            });
 
         [Fact]
         public void TestCase()
         {
-
             var source = new Source() { Name = "Test" };
             var destination = new Destination();
 

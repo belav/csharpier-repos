@@ -312,7 +312,8 @@ public class ArrayBuilderTest
             ArrayPool.ReturnedBuffers,
             buffer => Assert.Equal(2, buffer.Length),
             buffer => Assert.Equal(4, buffer.Length),
-            buffer => Assert.Equal(8, buffer.Length));
+            buffer => Assert.Equal(8, buffer.Length)
+        );
 
         // Clear this because this is no longer interesting.
         ArrayPool.ReturnedBuffers.Clear();

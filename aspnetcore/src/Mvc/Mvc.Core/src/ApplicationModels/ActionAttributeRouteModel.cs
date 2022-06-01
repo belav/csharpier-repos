@@ -68,7 +68,8 @@ internal static class ActionAttributeRouteModel
 
                 selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 AddActionConstraints(selector, additionalSelector?.ActionConstraints);
                 AddEndpointMetadata(selector, additionalSelector?.EndpointMetadata);
@@ -86,7 +87,8 @@ internal static class ActionAttributeRouteModel
 
                     selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                         controllerSelector.AttributeRouteModel,
-                        actionRouteModel);
+                        actionRouteModel
+                    );
 
                     AddActionConstraints(selector, controllerSelector.ActionConstraints);
                     AddEndpointMetadata(selector, controllerSelector.EndpointMetadata);
@@ -105,7 +107,8 @@ internal static class ActionAttributeRouteModel
 
                 selector.AttributeRouteModel = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 AddActionConstraints(selector, additionalSelector?.ActionConstraints);
                 AddEndpointMetadata(selector, additionalSelector?.EndpointMetadata);
@@ -115,7 +118,10 @@ internal static class ActionAttributeRouteModel
         }
     }
 
-    private static void AddActionConstraints(SelectorModel selector, IList<IActionConstraintMetadata>? actionConstraints)
+    private static void AddActionConstraints(
+        SelectorModel selector,
+        IList<IActionConstraintMetadata>? actionConstraints
+    )
     {
         if (actionConstraints != null)
         {
@@ -126,7 +132,10 @@ internal static class ActionAttributeRouteModel
         }
     }
 
-    private static void AddEndpointMetadata(SelectorModel selector, IList<object>? controllerMetadata)
+    private static void AddEndpointMetadata(
+        SelectorModel selector,
+        IList<object>? controllerMetadata
+    )
     {
         if (controllerMetadata != null)
         {
@@ -140,7 +149,9 @@ internal static class ActionAttributeRouteModel
         }
     }
 
-    public static IEnumerable<(AttributeRouteModel? route, SelectorModel actionSelector, SelectorModel? controllerSelector)> GetAttributeRoutes(ActionModel actionModel)
+    public static IEnumerable<(AttributeRouteModel? route, SelectorModel actionSelector, SelectorModel? controllerSelector)> GetAttributeRoutes(
+        ActionModel actionModel
+    )
     {
         var controllerAttributeRoutes = actionModel.Controller.Selectors
             .Where(sm => sm.AttributeRouteModel != null)
@@ -158,7 +169,8 @@ internal static class ActionAttributeRouteModel
             {
                 var route = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 yield return (route, actionSelectorModel, null);
             }
@@ -171,7 +183,8 @@ internal static class ActionAttributeRouteModel
 
                     var route = AttributeRouteModel.CombineAttributeRouteModel(
                         controllerSelector.AttributeRouteModel,
-                        actionRouteModel);
+                        actionRouteModel
+                    );
 
                     yield return (route, actionSelectorModel, controllerSelector);
                 }
@@ -180,7 +193,8 @@ internal static class ActionAttributeRouteModel
             {
                 var route = AttributeRouteModel.CombineAttributeRouteModel(
                     left: null,
-                    right: actionRouteModel);
+                    right: actionRouteModel
+                );
 
                 yield return (route, actionSelectorModel, null);
             }

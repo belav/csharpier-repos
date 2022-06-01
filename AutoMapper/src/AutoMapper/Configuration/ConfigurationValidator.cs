@@ -4,9 +4,11 @@ using System.ComponentModel;
 using System.Linq;
 using AutoMapper.Internal;
 using AutoMapper.Internal.Mappers;
+
 namespace AutoMapper.Configuration
 {
     using Validator = Action<ValidationContext>;
+
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ConfigurationValidator
     {
@@ -14,7 +16,10 @@ namespace AutoMapper.Configuration
         private readonly IGlobalConfigurationExpression _expression;
         private readonly Validator[] _validators;
 
-        public ConfigurationValidator(IGlobalConfiguration config, IGlobalConfigurationExpression expression)
+        public ConfigurationValidator(
+            IGlobalConfiguration config,
+            IGlobalConfigurationExpression expression
+        )
         {
             _validators = expression.GetValidators();
             _config = config;
@@ -33,12 +38,25 @@ namespace AutoMapper.Configuration
         {
             if (!_expression.AllowAdditiveTypeMapCreation)
             {
-                var duplicateTypeMapConfigs = _expression.Profiles.Concat(new[] { (Profile)_expression })
+                var duplicateTypeMapConfigs = _expression.Profiles
+                    .Concat(new[] { (Profile)_expression })
                     .SelectMany(p => p.TypeMapConfigs, (profile, typeMap) => (profile, typeMap))
                     .GroupBy(x => x.typeMap.Types)
                     .Where(g => g.Count() > 1)
-                    .Select(g => (TypePair : g.Key, ProfileNames : g.Select(tmc => tmc.profile.ProfileName).ToArray()))
-                    .Select(g => new DuplicateTypeMapConfigurationException.TypeMapConfigErrors(g.TypePair, g.ProfileNames))
+                    .Select(
+                        g =>
+                            (
+                                TypePair: g.Key,
+                                ProfileNames: g.Select(tmc => tmc.profile.ProfileName).ToArray()
+                            )
+                    )
+                    .Select(
+                        g =>
+                            new DuplicateTypeMapConfigurationException.TypeMapConfigErrors(
+                                g.TypePair,
+                                g.ProfileNames
+                            )
+                    )
                     .ToArray();
                 if (duplicateTypeMapConfigs.Any())
                 {
@@ -51,14 +69,18 @@ namespace AutoMapper.Configuration
         public void AssertConfigurationIsValid(IEnumerable<TypeMap> typeMaps)
         {
             var maps = typeMaps as TypeMap[] ?? typeMaps.ToArray();
-            var badTypeMaps =
-                (from typeMap in maps
-                    where typeMap.ShouldCheckForValid
-                    let unmappedPropertyNames = typeMap.GetUnmappedPropertyNames()
-                    let canConstruct = typeMap.PassesCtorValidation
-                    where unmappedPropertyNames.Length > 0 || !canConstruct
-                    select new AutoMapperConfigurationException.TypeMapConfigErrors(typeMap, unmappedPropertyNames, canConstruct)
-                    ).ToArray();
+            var badTypeMaps = (
+                from typeMap in maps
+                where typeMap.ShouldCheckForValid
+                let unmappedPropertyNames = typeMap.GetUnmappedPropertyNames()
+                let canConstruct = typeMap.PassesCtorValidation
+                where unmappedPropertyNames.Length > 0 || !canConstruct
+                select new AutoMapperConfigurationException.TypeMapConfigErrors(
+                    typeMap,
+                    unmappedPropertyNames,
+                    canConstruct
+                )
+            ).ToArray();
 
             if (badTypeMaps.Any())
             {
@@ -90,9 +112,14 @@ namespace AutoMapper.Configuration
             }
         }
 
-        private void DryRunTypeMap(ICollection<TypeMap> typeMapsChecked, TypePair types, TypeMap typeMap, MemberMap memberMap)
+        private void DryRunTypeMap(
+            ICollection<TypeMap> typeMapsChecked,
+            TypePair types,
+            TypeMap typeMap,
+            MemberMap memberMap
+        )
         {
-            if(typeMap == null)
+            if (typeMap == null)
             {
                 if (types.ContainsGenericParameters)
                 {
@@ -111,7 +138,7 @@ namespace AutoMapper.Configuration
                 var context = new ValidationContext(types, memberMap, typeMap);
                 Validate(context);
 
-                if(!typeMap.ShouldCheckForValid)
+                if (!typeMap.ShouldCheckForValid)
                 {
                     return;
                 }
@@ -124,11 +151,14 @@ namespace AutoMapper.Configuration
                 var mapperToUse = _config.FindMapper(types);
                 if (mapperToUse == null)
                 {
-                    throw new AutoMapperConfigurationException(memberMap.TypeMap.Types) { MemberMap = memberMap };
+                    throw new AutoMapperConfigurationException(memberMap.TypeMap.Types)
+                    {
+                        MemberMap = memberMap
+                    };
                 }
                 var context = new ValidationContext(types, memberMap, mapperToUse);
                 Validate(context);
-                if(mapperToUse is IObjectMapperInfo mapperInfo)
+                if (mapperToUse is IObjectMapperInfo mapperInfo)
                 {
                     var newTypePair = mapperInfo.GetAssociatedTypes(types);
                     if (newTypePair != types)
@@ -143,7 +173,11 @@ namespace AutoMapper.Configuration
         {
             foreach (var memberMap in typeMap.MemberMaps)
             {
-                if(memberMap.Ignored || memberMap.ValueConverterConfig != null || memberMap.ValueResolverConfig != null)
+                if (
+                    memberMap.Ignored
+                    || memberMap.ValueConverterConfig != null
+                    || memberMap.ValueResolverConfig != null
+                )
                 {
                     continue;
                 }
@@ -154,10 +188,16 @@ namespace AutoMapper.Configuration
                     return;
                 }
                 var destinationType = memberMap.DestinationType;
-                DryRunTypeMap(typeMapsChecked, new TypePair(sourceType, destinationType), null, memberMap);
+                DryRunTypeMap(
+                    typeMapsChecked,
+                    new TypePair(sourceType, destinationType),
+                    null,
+                    memberMap
+                );
             }
         }
     }
+
     public readonly struct ValidationContext
     {
         public readonly IObjectMapper ObjectMapper { get; }
@@ -165,15 +205,18 @@ namespace AutoMapper.Configuration
         public readonly TypeMap TypeMap { get; }
         public readonly TypePair Types { get; }
 
-        public ValidationContext(TypePair types, MemberMap memberMap, IObjectMapper objectMapper) : this(types, memberMap, objectMapper, null)
-        {
-        }
+        public ValidationContext(TypePair types, MemberMap memberMap, IObjectMapper objectMapper)
+            : this(types, memberMap, objectMapper, null) { }
 
-        public ValidationContext(TypePair types, MemberMap memberMap, TypeMap typeMap) : this(types, memberMap, null, typeMap)
-        {
-        }
+        public ValidationContext(TypePair types, MemberMap memberMap, TypeMap typeMap)
+            : this(types, memberMap, null, typeMap) { }
 
-        private ValidationContext(TypePair types, MemberMap memberMap, IObjectMapper objectMapper, TypeMap typeMap)
+        private ValidationContext(
+            TypePair types,
+            MemberMap memberMap,
+            IObjectMapper objectMapper,
+            TypeMap typeMap
+        )
         {
             ObjectMapper = objectMapper;
             TypeMap = typeMap;

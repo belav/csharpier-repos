@@ -59,7 +59,7 @@ namespace System.Runtime.InteropServices.Tests.Common
     [ClassInterface(ClassInterfaceType.None)]
     public class IInspectableComObject : IInspectableInterface { }
 
-    public class IInspectableManagedObject : IInspectableInterface {}
+    public class IInspectableManagedObject : IInspectableInterface { }
 
     public class SubComImportObject : ComImportObject { }
 
@@ -99,7 +99,7 @@ namespace System.Runtime.InteropServices.Tests.Common
     public class ManagedAutoDispatchClass { }
 
     [ClassInterface(ClassInterfaceType.AutoDual)]
-    public class ManagedAutoDualClass{ }
+    public class ManagedAutoDualClass { }
 
     [InterfaceTypeAttribute(ComInterfaceType.InterfaceIsIUnknown)]
     [Guid("710D252E-22BF-4A33-9544-40D8D03C29FF")]

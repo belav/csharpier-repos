@@ -15,25 +15,39 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
 {
     public class UseExpressionBodyFixAllTests : AbstractCSharpCodeActionTest
     {
-        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(Workspace workspace, TestParameters parameters)
-            => new UseExpressionBodyCodeRefactoringProvider();
+        protected override CodeRefactoringProvider CreateCodeRefactoringProvider(
+            Workspace workspace,
+            TestParameters parameters
+        ) => new UseExpressionBodyCodeRefactoringProvider();
 
         private OptionsCollection UseBlockBody =>
-            this.Option(CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement);
+            this.Option(
+                CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                CSharpCodeStyleOptions.NeverWithSilentEnforcement
+            );
 
-        private OptionsCollection UseBlockBodyForMethodsAndAccessorsAndProperties
-            => new OptionsCollection(GetLanguage())
+        private OptionsCollection UseBlockBodyForMethodsAndAccessorsAndProperties =>
+            new OptionsCollection(GetLanguage())
             {
-                { CSharpCodeStyleOptions.PreferExpressionBodiedMethods, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedAccessors, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
-                { CSharpCodeStyleOptions.PreferExpressionBodiedProperties, CSharpCodeStyleOptions.NeverWithSilentEnforcement },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedMethods,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedAccessors,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
+                {
+                    CSharpCodeStyleOptions.PreferExpressionBodiedProperties,
+                    CSharpCodeStyleOptions.NeverWithSilentEnforcement
+                },
             };
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task FixAllInDocument()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M1()
     {
@@ -45,19 +59,21 @@ namespace Microsoft.CodeAnalysis.Editor.CSharp.UnitTests.UseExpressionBody
         Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void M1() => Bar();
 
     void M2() => Bar();
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task FixAllInProject()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -96,7 +112,7 @@ class C3
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -125,14 +141,16 @@ class C3
 }
         </Document>
     </Project>
-</Workspace>", parameters: new TestParameters(options: UseBlockBody));
+</Workspace>",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task FixAllInSolution()
         {
             await TestInRegularAndScript1Async(
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -171,7 +189,7 @@ class C3
         </Document>
     </Project>
 </Workspace>",
-@"
+                @"
 <Workspace>
     <Project Language=""C#"" AssemblyName=""Assembly1"" CommonReferences=""true"">
         <Document>
@@ -197,14 +215,16 @@ class C3
 }
         </Document>
     </Project>
-</Workspace>", parameters: new TestParameters(options: UseBlockBody));
+</Workspace>",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task FixAllInContainingMember()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M1()
     {
@@ -224,7 +244,7 @@ class C2
         Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void M1() => Bar();
 
@@ -240,14 +260,16 @@ class C2
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Fact, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
         public async Task FixAllInContainingType()
         {
             await TestInRegularAndScript1Async(
-@"class C
+                @"class C
 {
     void M1()
     {
@@ -267,7 +289,7 @@ class C2
         Bar();
     }
 }",
-@"class C
+                @"class C
 {
     void M1() => Bar();
 
@@ -280,7 +302,9 @@ class C2
     {
         Bar();
     }
-}", parameters: new TestParameters(options: UseBlockBody));
+}",
+                parameters: new TestParameters(options: UseBlockBody)
+            );
         }
 
         [Theory, Trait(Traits.Feature, Traits.Features.CodeActionsUseExpressionBody)]
@@ -290,7 +314,8 @@ class C2
             var fixAllAnnotationForMethods = forMethods ? "{|FixAllInDocument:|}" : string.Empty;
             var fixAllAnnotationForProperties = forMethods ? string.Empty : "{|FixAllInDocument:|}";
 
-            var source = @$"class C
+            var source =
+                @$"class C
 {{
     void M1()
     {{
@@ -318,7 +343,8 @@ class C2
         }}
     }}
 }}";
-            var fixedCodeForMethods = @"class C
+            var fixedCodeForMethods =
+                @"class C
 {
     void M1() => Bar();
 
@@ -340,7 +366,8 @@ class C2
         }
     }
 }";
-            var fixedCodeForProperties = @"class C
+            var fixedCodeForProperties =
+                @"class C
 {
     void M1()
     {
@@ -358,8 +385,13 @@ class C2
 }";
             var fixedCode = forMethods ? fixedCodeForMethods : fixedCodeForProperties;
 
-            await TestInRegularAndScript1Async(source, fixedCode,
-                parameters: new TestParameters(options: UseBlockBodyForMethodsAndAccessorsAndProperties));
+            await TestInRegularAndScript1Async(
+                source,
+                fixedCode,
+                parameters: new TestParameters(
+                    options: UseBlockBodyForMethodsAndAccessorsAndProperties
+                )
+            );
         }
     }
 }

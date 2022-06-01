@@ -44,7 +44,12 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
         [DataMember(Order = 3)]
         public readonly DocumentId? UnmappedDocumentId;
 
-        public ActiveStatementSpan(int ordinal, LinePositionSpan lineSpan, ActiveStatementFlags flags, DocumentId? unmappedDocumentId)
+        public ActiveStatementSpan(
+            int ordinal,
+            LinePositionSpan lineSpan,
+            ActiveStatementFlags flags,
+            DocumentId? unmappedDocumentId
+        )
         {
             Debug.Assert(ordinal >= 0);
 
@@ -54,16 +59,19 @@ namespace Microsoft.CodeAnalysis.EditAndContinue
             UnmappedDocumentId = unmappedDocumentId;
         }
 
-        public override bool Equals(object? obj)
-            => obj is ActiveStatementSpan other && Equals(other);
+        public override bool Equals(object? obj) =>
+            obj is ActiveStatementSpan other && Equals(other);
 
-        public bool Equals(ActiveStatementSpan other)
-            => Ordinal.Equals(other.Ordinal) &&
-               LineSpan.Equals(other.LineSpan) &&
-               Flags == other.Flags &&
-               UnmappedDocumentId == other.UnmappedDocumentId;
+        public bool Equals(ActiveStatementSpan other) =>
+            Ordinal.Equals(other.Ordinal)
+            && LineSpan.Equals(other.LineSpan)
+            && Flags == other.Flags
+            && UnmappedDocumentId == other.UnmappedDocumentId;
 
-        public override int GetHashCode()
-            => Hash.Combine(Ordinal, Hash.Combine(LineSpan.GetHashCode(), Hash.Combine(UnmappedDocumentId, (int)Flags)));
+        public override int GetHashCode() =>
+            Hash.Combine(
+                Ordinal,
+                Hash.Combine(LineSpan.GetHashCode(), Hash.Combine(UnmappedDocumentId, (int)Flags))
+            );
     }
 }

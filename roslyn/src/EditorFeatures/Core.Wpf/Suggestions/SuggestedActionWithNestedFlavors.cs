@@ -27,10 +27,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
     /// are presented as simple links, not as menu-items, in the light-bulb.  Examples of 'flavors'
     /// include 'preview changes' (for refactorings and fixes) and 'fix all in document, project, solution'
     /// (for refactorings and fixes).
-    /// 
+    ///
     /// Because all derivations support 'preview changes', we bake that logic into this base type.
     /// </summary>
-    internal abstract partial class SuggestedActionWithNestedFlavors : SuggestedAction, ISuggestedActionWithFlavors
+    internal abstract partial class SuggestedActionWithNestedFlavors
+        : SuggestedAction,
+            ISuggestedActionWithFlavors
     {
         private readonly SuggestedActionSet _additionalFlavors;
         private ImmutableArray<SuggestedActionSet> _nestedFlavors;
@@ -38,11 +40,12 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         public SuggestedActionWithNestedFlavors(
             IThreadingContext threadingContext,
             SuggestedActionsSourceProvider sourceProvider,
-            Workspace workspace, ITextBuffer subjectBuffer,
-            object provider, CodeAction codeAction,
-            SuggestedActionSet additionalFlavors)
-            : base(threadingContext, sourceProvider, workspace, subjectBuffer,
-                   provider, codeAction)
+            Workspace workspace,
+            ITextBuffer subjectBuffer,
+            object provider,
+            CodeAction codeAction,
+            SuggestedActionSet additionalFlavors
+        ) : base(threadingContext, sourceProvider, workspace, subjectBuffer, provider, codeAction)
         {
             _additionalFlavors = additionalFlavors;
         }
@@ -52,7 +55,9 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
         /// </summary>
         public sealed override bool HasActionSets => true;
 
-        public sealed override async Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(CancellationToken cancellationToken)
+        public sealed override async Task<IEnumerable<SuggestedActionSet>> GetActionSetsAsync(
+            CancellationToken cancellationToken
+        )
         {
             cancellationToken.ThrowIfCancellationRequested();
 
@@ -64,21 +69,30 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
                 var extensionManager = this.Workspace.Services.GetService<IExtensionManager>();
 
                 // We use ConfigureAwait(true) to stay on the UI thread.
-                _nestedFlavors = await extensionManager.PerformFunctionAsync(
-                    Provider, () => CreateAllFlavorsAsync(cancellationToken),
-                    defaultValue: ImmutableArray<SuggestedActionSet>.Empty).ConfigureAwait(true);
+                _nestedFlavors = await extensionManager
+                    .PerformFunctionAsync(
+                        Provider,
+                        () => CreateAllFlavorsAsync(cancellationToken),
+                        defaultValue: ImmutableArray<SuggestedActionSet>.Empty
+                    )
+                    .ConfigureAwait(true);
             }
 
             Contract.ThrowIfTrue(_nestedFlavors.IsDefault);
             return _nestedFlavors;
         }
 
-        private async Task<ImmutableArray<SuggestedActionSet>> CreateAllFlavorsAsync(CancellationToken cancellationToken)
+        private async Task<ImmutableArray<SuggestedActionSet>> CreateAllFlavorsAsync(
+            CancellationToken cancellationToken
+        )
         {
             var builder = ArrayBuilder<SuggestedActionSet>.GetInstance();
 
             // We use ConfigureAwait(true) to stay on the UI thread.
-            var previewChangesSuggestedActionSet = await GetPreviewChangesFlavorAsync(cancellationToken).ConfigureAwait(true);
+            var previewChangesSuggestedActionSet = await GetPreviewChangesFlavorAsync(
+                    cancellationToken
+                )
+                .ConfigureAwait(true);
             if (previewChangesSuggestedActionSet != null)
             {
                 builder.Add(previewChangesSuggestedActionSet);
@@ -92,17 +106,23 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
             return builder.ToImmutableAndFree();
         }
 
-        private async Task<SuggestedActionSet> GetPreviewChangesFlavorAsync(CancellationToken cancellationToken)
+        private async Task<SuggestedActionSet> GetPreviewChangesFlavorAsync(
+            CancellationToken cancellationToken
+        )
         {
             // We use ConfigureAwait(true) to stay on the UI thread.
-            var previewChangesAction = await PreviewChangesSuggestedAction.CreateAsync(
-                this, cancellationToken).ConfigureAwait(true);
+            var previewChangesAction = await PreviewChangesSuggestedAction
+                .CreateAsync(this, cancellationToken)
+                .ConfigureAwait(true);
             if (previewChangesAction == null)
             {
                 return null;
             }
 
-            return new SuggestedActionSet(categoryName: null, actions: ImmutableArray.Create(previewChangesAction));
+            return new SuggestedActionSet(
+                categoryName: null,
+                actions: ImmutableArray.Create(previewChangesAction)
+            );
         }
 
         // HasPreview is called synchronously on the UI thread. In order to avoid blocking the UI thread,
@@ -129,28 +149,43 @@ namespace Microsoft.CodeAnalysis.Editor.Implementation.Suggestions
 
             // after this point, this method should only return at GetPreviewPane. otherwise, DifferenceViewer will leak
             // since there is no one to close the viewer
-            var preferredDocumentId = Workspace.GetDocumentIdInCurrentContext(SubjectBuffer.AsTextContainer());
+            var preferredDocumentId = Workspace.GetDocumentIdInCurrentContext(
+                SubjectBuffer.AsTextContainer()
+            );
             var preferredProjectId = preferredDocumentId?.ProjectId;
 
             var extensionManager = this.Workspace.Services.GetService<IExtensionManager>();
-            var previewContents = await extensionManager.PerformFunctionAsync(Provider, async () =>
-            {
-                // We need to stay on UI thread after GetPreviewResultAsync() so that TakeNextPreviewAsync()
-                // below can execute on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
-                var previewResult = await GetPreviewResultAsync(cancellationToken).ConfigureAwait(true);
-                if (previewResult == null)
-                {
-                    return null;
-                }
-                else
-                {
-                    // TakeNextPreviewAsync() needs to run on UI thread.
-                    AssertIsForeground();
-                    return await previewResult.GetPreviewsAsync(preferredDocumentId, preferredProjectId, cancellationToken).ConfigureAwait(true);
-                }
+            var previewContents = await extensionManager
+                .PerformFunctionAsync(
+                    Provider,
+                    async () =>
+                    {
+                        // We need to stay on UI thread after GetPreviewResultAsync() so that TakeNextPreviewAsync()
+                        // below can execute on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
+                        var previewResult = await GetPreviewResultAsync(cancellationToken)
+                            .ConfigureAwait(true);
+                        if (previewResult == null)
+                        {
+                            return null;
+                        }
+                        else
+                        {
+                            // TakeNextPreviewAsync() needs to run on UI thread.
+                            AssertIsForeground();
+                            return await previewResult
+                                .GetPreviewsAsync(
+                                    preferredDocumentId,
+                                    preferredProjectId,
+                                    cancellationToken
+                                )
+                                .ConfigureAwait(true);
+                        }
 
-                // GetPreviewPane() below needs to run on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
-            }, defaultValue: null).ConfigureAwait(true);
+                        // GetPreviewPane() below needs to run on UI thread. We use ConfigureAwait(true) to stay on the UI thread.
+                    },
+                    defaultValue: null
+                )
+                .ConfigureAwait(true);
 
             // GetPreviewPane() needs to run on the UI thread.
             AssertIsForeground();

@@ -19,7 +19,10 @@ namespace Internal.Runtime
 #else
             fixed (MethodTable* pThis = &this)
             {
-                void* pGetArrayEEType = InternalCalls.RhpGetClasslibFunctionFromEEType(new IntPtr(pThis), ClassLibFunctionId.GetSystemArrayEEType);
+                void* pGetArrayEEType = InternalCalls.RhpGetClasslibFunctionFromEEType(
+                    new IntPtr(pThis),
+                    ClassLibFunctionId.GetSystemArrayEEType
+                );
                 return ((delegate* <MethodTable*>)pGetArrayEEType)();
             }
 #endif
@@ -33,7 +36,8 @@ namespace Internal.Runtime
             DynamicModule* dynamicModule = this.DynamicModule;
             if (dynamicModule != null)
             {
-                delegate* <System.Runtime.ExceptionIDs, System.Exception> getRuntimeException = dynamicModule->GetRuntimeException;
+                delegate* <System.Runtime.ExceptionIDs, System.Exception> getRuntimeException =
+                    dynamicModule->GetRuntimeException;
                 if (getRuntimeException != null)
                 {
                     return getRuntimeException(id);
@@ -51,12 +55,19 @@ namespace Internal.Runtime
 
         internal IntPtr GetClasslibFunction(ClassLibFunctionId id)
         {
-            return (IntPtr)InternalCalls.RhpGetClasslibFunctionFromEEType((MethodTable*)Unsafe.AsPointer(ref this), id);
+            return (IntPtr)
+                InternalCalls.RhpGetClasslibFunctionFromEEType(
+                    (MethodTable*)Unsafe.AsPointer(ref this),
+                    id
+                );
         }
 
         internal void SetToCloneOf(MethodTable* pOrigType)
         {
-            Debug.Assert((_usFlags & (ushort)EETypeFlags.EETypeKindMask) == 0, "should be a canonical type");
+            Debug.Assert(
+                (_usFlags & (ushort)EETypeFlags.EETypeKindMask) == 0,
+                "should be a canonical type"
+            );
             _usFlags |= (ushort)EETypeKind.ClonedEEType;
             _relatedType._pCanonicalType = pOrigType;
         }
@@ -103,7 +114,8 @@ namespace Internal.Runtime
         /// </summary>
         internal bool SimpleCasting()
         {
-            return (_usFlags & (ushort)EETypeFlags.ComplexCastingMask) == (ushort)EETypeKind.CanonicalEEType;
+            return (_usFlags & (ushort)EETypeFlags.ComplexCastingMask)
+                == (ushort)EETypeKind.CanonicalEEType;
         }
 
         /// <summary>
@@ -111,7 +123,8 @@ namespace Internal.Runtime
         /// </summary>
         internal static bool BothSimpleCasting(MethodTable* pThis, MethodTable* pOther)
         {
-            return ((pThis->_usFlags | pOther->_usFlags) & (ushort)EETypeFlags.ComplexCastingMask) == (ushort)EETypeKind.CanonicalEEType;
+            return ((pThis->_usFlags | pOther->_usFlags) & (ushort)EETypeFlags.ComplexCastingMask)
+                == (ushort)EETypeKind.CanonicalEEType;
         }
 
         internal bool IsEquivalentTo(MethodTable* pOtherEEType)
@@ -134,8 +147,11 @@ namespace Internal.Runtime
 
                 if (pThisEEType->IsParameterizedType && pOtherEEType->IsParameterizedType)
                 {
-                    return pThisEEType->RelatedParameterType->IsEquivalentTo(pOtherEEType->RelatedParameterType) &&
-                        pThisEEType->ParameterizedTypeShape == pOtherEEType->ParameterizedTypeShape;
+                    return pThisEEType->RelatedParameterType->IsEquivalentTo(
+                            pOtherEEType->RelatedParameterType
+                        )
+                        && pThisEEType->ParameterizedTypeShape
+                            == pOtherEEType->ParameterizedTypeShape;
                 }
             }
 

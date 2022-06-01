@@ -45,7 +45,5 @@ public sealed record QueryableMethodTranslatingExpressionVisitorDependencies
     ///     the constructor at any point in this process.
     /// </remarks>
     [EntityFrameworkInternal]
-    public QueryableMethodTranslatingExpressionVisitorDependencies()
-    {
-    }
+    public QueryableMethodTranslatingExpressionVisitorDependencies() { }
 }

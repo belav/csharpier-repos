@@ -22,19 +22,27 @@ namespace System.Xml.Serialization
 {
     internal sealed class CodeGenerator
     {
-        internal const BindingFlags InstancePublicBindingFlags = BindingFlags.Instance | BindingFlags.Public;
-        internal const BindingFlags InstanceBindingFlags = BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
-        internal const BindingFlags StaticBindingFlags = BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
-        internal const MethodAttributes PublicMethodAttributes = MethodAttributes.Public | MethodAttributes.HideBySig;
-        internal const MethodAttributes PublicOverrideMethodAttributes = MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.HideBySig;
-        internal const MethodAttributes ProtectedOverrideMethodAttributes = MethodAttributes.Family | MethodAttributes.Virtual | MethodAttributes.HideBySig;
-        internal const MethodAttributes PrivateMethodAttributes = MethodAttributes.Private | MethodAttributes.HideBySig;
+        internal const BindingFlags InstancePublicBindingFlags =
+            BindingFlags.Instance | BindingFlags.Public;
+        internal const BindingFlags InstanceBindingFlags =
+            BindingFlags.Instance | BindingFlags.Public | BindingFlags.NonPublic;
+        internal const BindingFlags StaticBindingFlags =
+            BindingFlags.Static | BindingFlags.Public | BindingFlags.NonPublic;
+        internal const MethodAttributes PublicMethodAttributes =
+            MethodAttributes.Public | MethodAttributes.HideBySig;
+        internal const MethodAttributes PublicOverrideMethodAttributes =
+            MethodAttributes.Public | MethodAttributes.Virtual | MethodAttributes.HideBySig;
+        internal const MethodAttributes ProtectedOverrideMethodAttributes =
+            MethodAttributes.Family | MethodAttributes.Virtual | MethodAttributes.HideBySig;
+        internal const MethodAttributes PrivateMethodAttributes =
+            MethodAttributes.Private | MethodAttributes.HideBySig;
 
         private readonly TypeBuilder _typeBuilder;
         private MethodBuilder? _methodBuilder;
         private ILGenerator? _ilGen;
         private Dictionary<string, ArgBuilder>? _argList;
         private LocalScope? _currentScope;
+
         // Stores a queue of free locals available in the context of the method, keyed by
         // type and name of the local
         private Dictionary<(Type, string), Queue<LocalBuilder>>? _freeLocals;
@@ -53,8 +61,11 @@ namespace System.Xml.Serialization
         }
 
         [Conditional("DEBUG")]
-        [UnconditionalSuppressMessage("ReflectionAnalysis", "IL2070:UnrecognizedReflectionPattern",
-            Justification = "Debug only code, we don't ship debug binaries.")]
+        [UnconditionalSuppressMessage(
+            "ReflectionAnalysis",
+            "IL2070:UnrecognizedReflectionPattern",
+            Justification = "Debug only code, we don't ship debug binaries."
+        )]
         internal static void AssertHasInterface(Type type, Type iType)
         {
             Debug.Assert(iType.IsInterface);
@@ -66,21 +77,46 @@ namespace System.Xml.Serialization
             Debug.Fail("Interface not found");
         }
 
-        internal void BeginMethod(Type returnType, string methodName, Type[] argTypes, string[] argNames, MethodAttributes methodAttributes)
+        internal void BeginMethod(
+            Type returnType,
+            string methodName,
+            Type[] argTypes,
+            string[] argNames,
+            MethodAttributes methodAttributes
+        )
         {
-            _methodBuilder = _typeBuilder.DefineMethod(methodName, methodAttributes, returnType, argTypes);
+            _methodBuilder = _typeBuilder.DefineMethod(
+                methodName,
+                methodAttributes,
+                returnType,
+                argTypes
+            );
             _ilGen = _methodBuilder.GetILGenerator();
-            InitILGeneration(argTypes, argNames, (_methodBuilder.Attributes & MethodAttributes.Static) == MethodAttributes.Static);
+            InitILGeneration(
+                argTypes,
+                argNames,
+                (_methodBuilder.Attributes & MethodAttributes.Static) == MethodAttributes.Static
+            );
         }
 
-        internal void BeginMethod(Type returnType, MethodBuilderInfo methodBuilderInfo, Type[] argTypes, string[] argNames, MethodAttributes methodAttributes)
+        internal void BeginMethod(
+            Type returnType,
+            MethodBuilderInfo methodBuilderInfo,
+            Type[] argTypes,
+            string[] argNames,
+            MethodAttributes methodAttributes
+        )
         {
 #if DEBUG
             methodBuilderInfo.Validate(returnType, argTypes, methodAttributes);
 #endif
             _methodBuilder = methodBuilderInfo.MethodBuilder;
             _ilGen = _methodBuilder.GetILGenerator();
-            InitILGeneration(argTypes, argNames, (_methodBuilder.Attributes & MethodAttributes.Static) == MethodAttributes.Static);
+            InitILGeneration(
+                argTypes,
+                argNames,
+                (_methodBuilder.Attributes & MethodAttributes.Static) == MethodAttributes.Static
+            );
         }
 
         private void InitILGeneration(Type[] argTypes, string[] argNames, bool isStatic)
@@ -134,7 +170,9 @@ namespace System.Xml.Serialization
 
         internal LocalBuilder GetLocal(string name)
         {
-            System.Diagnostics.Debug.Assert(_currentScope != null && _currentScope.ContainsKey(name));
+            System.Diagnostics.Debug.Assert(
+                _currentScope != null && _currentScope.ContainsKey(name)
+            );
             return _currentScope[name]!;
         }
 
@@ -154,7 +192,9 @@ namespace System.Xml.Serialization
             get { return retLabel; }
         }
 
-        private readonly Dictionary<Type, LocalBuilder> _tmpLocals = new Dictionary<Type, LocalBuilder>();
+        private readonly Dictionary<Type, LocalBuilder> _tmpLocals =
+            new Dictionary<Type, LocalBuilder>();
+
         internal LocalBuilder GetTempLocal(Type type)
         {
             LocalBuilder? localTmp;
@@ -222,7 +262,11 @@ namespace System.Xml.Serialization
             _currentScope = _currentScope.parent;
         }
 
-        private bool TryDequeueLocal(Type type, string name, [NotNullWhen(true)] out LocalBuilder? local)
+        private bool TryDequeueLocal(
+            Type type,
+            string name,
+            [NotNullWhen(true)] out LocalBuilder? local
+        )
         {
             // This method can only be called between BeginMethod and EndMethod (i.e.
             // while we are emitting code for a method
@@ -307,10 +351,10 @@ namespace System.Xml.Serialization
                     CodeGenerator.AssertHasInterface(varType, typeof(ICollection));
 #endif
                     MethodInfo ICollection_get_Count = typeof(ICollection).GetMethod(
-                          "get_Count",
-                          CodeGenerator.InstanceBindingFlags,
-                          Type.EmptyTypes
-                          )!;
+                        "get_Count",
+                        CodeGenerator.InstanceBindingFlags,
+                        Type.EmptyTypes
+                    )!;
                     Call(ICollection_get_Count);
                 }
                 Blt(forState.BeginLabel);
@@ -329,7 +373,8 @@ namespace System.Xml.Serialization
             InternalIf(true);
         }
 
-        private static readonly OpCode[] s_branchCodes = new OpCode[] {
+        private static readonly OpCode[] s_branchCodes = new OpCode[]
+        {
             OpCodes.Bge,
             OpCodes.Bne_Un,
             OpCodes.Bgt,
@@ -378,6 +423,7 @@ namespace System.Xml.Serialization
         }
 
         private readonly Stack<Label> _leaveLabels = new Stack<Label>();
+
         internal void BeginExceptionBlock()
         {
             _leaveLabels.Push(DefineLabel());
@@ -438,7 +484,12 @@ namespace System.Xml.Serialization
             _ilGen!.Emit(OpCodes.Conv_U);
             _ilGen!.Emit(OpCodes.Localloc);
             Ldc(len);
-            _ilGen!.Emit(OpCodes.Newobj, typeof(Span<>).MakeGenericType(elementType).GetConstructor(new Type[] { typeof(void*), typeof(int) })!);
+            _ilGen!.Emit(
+                OpCodes.Newobj,
+                typeof(Span<>)
+                    .MakeGenericType(elementType)
+                    .GetConstructor(new Type[] { typeof(void*), typeof(int) })!
+            );
         }
 
         internal void LoadArrayElement(object obj, object arrayIndex)
@@ -461,7 +512,9 @@ namespace System.Xml.Serialization
             if (arrayType == typeof(Array))
             {
                 Load(obj);
-                Call(typeof(Array).GetMethod("SetValue", new Type[] { typeof(object), typeof(int) })!);
+                Call(
+                    typeof(Array).GetMethod("SetValue", new Type[] { typeof(object), typeof(int) })!
+                );
             }
             else
             {
@@ -495,7 +548,10 @@ namespace System.Xml.Serialization
         }
 
         [RequiresUnreferencedCode("GetProperty on PropertyInfo type's base type")]
-        private static MethodInfo? GetPropertyMethodFromBaseType(PropertyInfo propertyInfo, bool isGetter)
+        private static MethodInfo? GetPropertyMethodFromBaseType(
+            PropertyInfo propertyInfo,
+            bool isGetter
+        )
         {
             // we only invoke this when the propertyInfo does not have a GET or SET method on it
 
@@ -671,7 +727,6 @@ namespace System.Xml.Serialization
                 Load(obj);
         }
 
-
         internal void ConvertAddress(Type source, Type target)
         {
             InternalConvert(source, target, true);
@@ -697,7 +752,8 @@ namespace System.Xml.Serialization
             _ilGen!.Emit(OpCodes.Unbox, type);
         }
 
-        private static readonly OpCode[] s_ldindOpCodes = new OpCode[] {
+        private static readonly OpCode[] s_ldindOpCodes = new OpCode[]
+        {
             OpCodes.Nop, //Empty = 0,
             OpCodes.Nop, //Object = 1,
             OpCodes.Nop, //DBNull = 2,
@@ -718,7 +774,6 @@ namespace System.Xml.Serialization
             OpCodes.Nop, //17
             OpCodes.Ldind_Ref, //String = 18,
         };
-
 
         private static OpCode GetLdindOpCode(TypeCode typeCode)
         {
@@ -791,7 +846,13 @@ namespace System.Xml.Serialization
             if (o is Type)
             {
                 Ldtoken((Type)o);
-                Call(typeof(Type).GetMethod("GetTypeFromHandle", BindingFlags.Static | BindingFlags.Public, new Type[] { typeof(RuntimeTypeHandle) })!);
+                Call(
+                    typeof(Type).GetMethod(
+                        "GetTypeFromHandle",
+                        BindingFlags.Static | BindingFlags.Public,
+                        new Type[] { typeof(RuntimeTypeHandle) }
+                    )!
+                );
             }
             else if (valueType.IsEnum)
             {
@@ -805,7 +866,9 @@ namespace System.Xml.Serialization
                         Ldc((bool)o);
                         break;
                     case TypeCode.Char:
-                        Debug.Fail("Char is not a valid schema primitive and should be treated as int in DataContract");
+                        Debug.Fail(
+                            "Char is not a valid schema primitive and should be treated as int in DataContract"
+                        );
                         throw new NotSupportedException(SR.XmlInvalidCharSchemaPrimitive);
                     case TypeCode.SByte:
                     case TypeCode.Byte:
@@ -836,9 +899,16 @@ namespace System.Xml.Serialization
                         break;
                     case TypeCode.Decimal:
                         ConstructorInfo Decimal_ctor = typeof(decimal).GetConstructor(
-                             CodeGenerator.InstanceBindingFlags,
-                             new Type[] { typeof(int), typeof(int), typeof(int), typeof(bool), typeof(byte) }
-                             )!;
+                            CodeGenerator.InstanceBindingFlags,
+                            new Type[]
+                            {
+                                typeof(int),
+                                typeof(int),
+                                typeof(int),
+                                typeof(bool),
+                                typeof(byte)
+                            }
+                        )!;
                         int[] bits = decimal.GetBits((decimal)o);
                         Ldc(bits[0]); // digit
                         Ldc(bits[1]); // digit
@@ -851,7 +921,7 @@ namespace System.Xml.Serialization
                         ConstructorInfo DateTime_ctor = typeof(DateTime).GetConstructor(
                             CodeGenerator.InstanceBindingFlags,
                             new Type[] { typeof(long) }
-                            )!;
+                        )!;
                         Ldc(((DateTime)o).Ticks); // ticks
                         New(DateTime_ctor);
                         break;
@@ -862,10 +932,10 @@ namespace System.Xml.Serialization
                         if (valueType == typeof(TimeSpan))
                         {
                             ConstructorInfo TimeSpan_ctor = typeof(TimeSpan).GetConstructor(
-                            CodeGenerator.InstanceBindingFlags,
-                            null,
-                            new Type[] { typeof(long) },
-                            null
+                                CodeGenerator.InstanceBindingFlags,
+                                null,
+                                new Type[] { typeof(long) },
+                                null
                             )!;
                             Ldc(((TimeSpan)o).Ticks); // ticks
                             New(TimeSpan_ctor);
@@ -873,12 +943,13 @@ namespace System.Xml.Serialization
                         }
                         else if (valueType == typeof(DateTimeOffset))
                         {
-                            ConstructorInfo DateTimeOffset_ctor = typeof(DateTimeOffset).GetConstructor(
-                            CodeGenerator.InstanceBindingFlags,
-                            null,
-                            new Type[] { typeof(long), typeof(TimeSpan) },
-                            null
-                            )!;
+                            ConstructorInfo DateTimeOffset_ctor =
+                                typeof(DateTimeOffset).GetConstructor(
+                                    CodeGenerator.InstanceBindingFlags,
+                                    null,
+                                    new Type[] { typeof(long), typeof(TimeSpan) },
+                                    null
+                                )!;
                             Ldc(((DateTimeOffset)o).Ticks); // ticks
                             Ldc(((DateTimeOffset)o).Offset); // offset
                             New(DateTimeOffset_ctor);
@@ -886,7 +957,9 @@ namespace System.Xml.Serialization
                         }
                         else
                         {
-                            throw new NotSupportedException(SR.Format(SR.UnknownConstantType, valueType.AssemblyQualifiedName));
+                            throw new NotSupportedException(
+                                SR.Format(SR.UnknownConstantType, valueType.AssemblyQualifiedName)
+                            );
                         }
                 }
             }
@@ -1020,7 +1093,8 @@ namespace System.Xml.Serialization
             _ilGen.Emit(OpCodes.Conv_I4);
         }
 
-        private static readonly OpCode[] s_ldelemOpCodes = new OpCode[] {
+        private static readonly OpCode[] s_ldelemOpCodes = new OpCode[]
+        {
             OpCodes.Nop, //Empty = 0,
             OpCodes.Ldelem_Ref, //Object = 1,
             OpCodes.Ldelem_Ref, //DBNull = 2,
@@ -1058,17 +1132,24 @@ namespace System.Xml.Serialization
                 OpCode opCode = GetLdelemOpCode(Type.GetTypeCode(arrayElementType));
                 Debug.Assert(!opCode.Equals(OpCodes.Nop));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw new InvalidOperationException(SR.Format(SR.ArrayTypeIsNotSupported, arrayElementType.AssemblyQualifiedName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.ArrayTypeIsNotSupported,
+                            arrayElementType.AssemblyQualifiedName
+                        )
+                    );
                 _ilGen!.Emit(opCode);
             }
         }
+
         internal void Ldelema(Type arrayElementType)
         {
             OpCode opCode = OpCodes.Ldelema;
             _ilGen!.Emit(opCode, arrayElementType);
         }
 
-        private static readonly OpCode[] s_stelemOpCodes = new OpCode[] {
+        private static readonly OpCode[] s_stelemOpCodes = new OpCode[]
+        {
             OpCodes.Nop, //Empty = 0,
             OpCodes.Stelem_Ref, //Object = 1,
             OpCodes.Stelem_Ref, //DBNull = 2,
@@ -1103,7 +1184,12 @@ namespace System.Xml.Serialization
             {
                 OpCode opCode = GetStelemOpCode(Type.GetTypeCode(arrayElementType));
                 if (opCode.Equals(OpCodes.Nop))
-                    throw new InvalidOperationException(SR.Format(SR.ArrayTypeIsNotSupported, arrayElementType.AssemblyQualifiedName));
+                    throw new InvalidOperationException(
+                        SR.Format(
+                            SR.ArrayTypeIsNotSupported,
+                            arrayElementType.AssemblyQualifiedName
+                        )
+                    );
                 _ilGen!.Emit(opCode);
             }
         }
@@ -1180,7 +1266,8 @@ namespace System.Xml.Serialization
             _blockStack!.Push(ifState);
         }
 
-        private static readonly OpCode[] s_convOpCodes = new OpCode[] {
+        private static readonly OpCode[] s_convOpCodes = new OpCode[]
+        {
             OpCodes.Nop, //Empty = 0,
             OpCodes.Nop, //Object = 1,
             OpCodes.Nop, //DBNull = 2,
@@ -1218,7 +1305,12 @@ namespace System.Xml.Serialization
                     OpCode opCode = GetConvOpCode(Type.GetTypeCode(target));
                     if (opCode.Equals(OpCodes.Nop))
                     {
-                        throw new CodeGeneratorConversionException(source, target, isAddress, "NoConversionPossibleTo");
+                        throw new CodeGeneratorConversionException(
+                            source,
+                            target,
+                            isAddress,
+                            "NoConversionPossibleTo"
+                        );
                     }
                     else
                     {
@@ -1233,7 +1325,12 @@ namespace System.Xml.Serialization
                 }
                 else
                 {
-                    throw new CodeGeneratorConversionException(source, target, isAddress, "IsNotAssignableFrom");
+                    throw new CodeGeneratorConversionException(
+                        source,
+                        target,
+                        isAddress,
+                        "IsNotAssignableFrom"
+                    );
                 }
             }
             else if (target.IsAssignableFrom(source))
@@ -1255,7 +1352,12 @@ namespace System.Xml.Serialization
             }
             else
             {
-                throw new CodeGeneratorConversionException(source, target, isAddress, "IsNotAssignableFrom");
+                throw new CodeGeneratorConversionException(
+                    source,
+                    target,
+                    isAddress,
+                    "IsNotAssignableFrom"
+                );
             }
         }
 
@@ -1275,7 +1377,10 @@ namespace System.Xml.Serialization
             return AssemblyBuilder.DefineDynamicAssembly(assemblyName, AssemblyBuilderAccess.Run);
         }
 
-        internal static ModuleBuilder CreateModuleBuilder(AssemblyBuilder assemblyBuilder, string name)
+        internal static ModuleBuilder CreateModuleBuilder(
+            AssemblyBuilder assemblyBuilder,
+            string name
+        )
         {
             return assemblyBuilder.DefineDynamicModule(name);
         }
@@ -1285,15 +1390,21 @@ namespace System.Xml.Serialization
             string name,
             TypeAttributes attributes,
             [DynamicallyAccessedMembers(DynamicallyAccessedMemberTypes.All)] Type parent,
-            Type[] interfaces)
+            Type[] interfaces
+        )
         {
             // parent is nullable if no base class
-            return moduleBuilder.DefineType($"{TempAssembly.GeneratedAssemblyNamespace}.{name}",
-                attributes, parent, interfaces);
+            return moduleBuilder.DefineType(
+                $"{TempAssembly.GeneratedAssemblyNamespace}.{name}",
+                attributes,
+                parent,
+                interfaces
+            );
         }
 
         private int _initElseIfStack = -1;
         private IfState? _elseIfState;
+
         internal void InitElseIf()
         {
             Debug.Assert(_initElseIfStack == -1);
@@ -1304,6 +1415,7 @@ namespace System.Xml.Serialization
         }
 
         private int _initIfStack = -1;
+
         internal void InitIf()
         {
             Debug.Assert(_initIfStack == -1);
@@ -1379,6 +1491,7 @@ namespace System.Xml.Serialization
             public Label StartLabel;
             public Label CondLabel;
             public Label EndLabel;
+
             public WhileState(CodeGenerator ilg)
             {
                 StartLabel = ilg.DefineLabel();
@@ -1396,6 +1509,7 @@ namespace System.Xml.Serialization
         // WhileEndCondition()
         // WhileEnd()
         private Stack<WhileState>? _whileStack;
+
         internal void WhileBegin()
         {
             WhileState whileState = new WhileState(this);
@@ -1441,12 +1555,12 @@ namespace System.Xml.Serialization
         }
     }
 
-
     internal sealed class ArgBuilder
     {
         internal string Name;
         internal int Index;
         internal Type ArgType;
+
         internal ArgBuilder(string name, int index, Type argType)
         {
             this.Name = name;
@@ -1472,34 +1586,22 @@ namespace System.Xml.Serialization
 
         internal LocalBuilder Index
         {
-            get
-            {
-                return _indexVar;
-            }
+            get { return _indexVar; }
         }
 
         internal Label BeginLabel
         {
-            get
-            {
-                return _beginLabel;
-            }
+            get { return _beginLabel; }
         }
 
         internal Label TestLabel
         {
-            get
-            {
-                return _testLabel;
-            }
+            get { return _testLabel; }
         }
 
         internal object End
         {
-            get
-            {
-                return _end;
-            }
+            get { return _end; }
         }
     }
 
@@ -1520,26 +1622,14 @@ namespace System.Xml.Serialization
 
         internal Label EndIf
         {
-            get
-            {
-                return _endIf;
-            }
-            set
-            {
-                _endIf = value;
-            }
+            get { return _endIf; }
+            set { _endIf = value; }
         }
 
         internal Label ElseBegin
         {
-            get
-            {
-                return _elseBegin;
-            }
-            set
-            {
-                _elseBegin = value;
-            }
+            get { return _elseBegin; }
+            set { _elseBegin = value; }
         }
     }
 
@@ -1590,10 +1680,7 @@ namespace System.Xml.Serialization
                 TryGetValue(key, out value);
                 return value;
             }
-            set
-            {
-                _locals[key] = value;
-            }
+            set { _locals[key] = value; }
         }
 
         public void AddToFreeLocals(Dictionary<(Type, string), Queue<LocalBuilder>> freeLocals)
@@ -1622,6 +1709,7 @@ namespace System.Xml.Serialization
     {
         public readonly MethodBuilder MethodBuilder;
         public readonly Type[] ParameterTypes;
+
         public MethodBuilderInfo(MethodBuilder methodBuilder, Type[] parameterTypes)
         {
             this.MethodBuilder = methodBuilder;
@@ -1648,8 +1736,12 @@ namespace System.Xml.Serialization
         private readonly bool _isAddress;
         private readonly string _reason;
 
-        public CodeGeneratorConversionException(Type sourceType, Type targetType, bool isAddress, string reason)
-            : base()
+        public CodeGeneratorConversionException(
+            Type sourceType,
+            Type targetType,
+            bool isAddress,
+            string reason
+        ) : base()
         {
             _sourceType = sourceType;
             _targetType = targetType;

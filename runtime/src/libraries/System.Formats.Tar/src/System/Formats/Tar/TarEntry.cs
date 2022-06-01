@@ -15,6 +15,7 @@ namespace System.Formats.Tar
     public abstract partial class TarEntry
     {
         internal TarHeader _header;
+
         // Used to access the data section of this entry in an unseekable file
         private TarReader? _readerOfOrigin;
 
@@ -94,7 +95,8 @@ namespace System.Formats.Tar
         /// When the <see cref="EntryType"/> indicates an entry that can contain data, this property returns the length in bytes of such data.
         /// </summary>
         /// <remarks>The entry type that commonly contains data is <see cref="TarEntryType.RegularFile"/> (or <see cref="TarEntryType.V7RegularFile"/> in the <see cref="TarFormat.V7"/> format). Other uncommon entry types that can also contain data are: <see cref="TarEntryType.ContiguousFile"/>, <see cref="TarEntryType.DirectoryList"/>, <see cref="TarEntryType.MultiVolume"/> and <see cref="TarEntryType.SparseFile"/>.</remarks>
-        public long Length => _header._dataStream != null ? _header._dataStream.Length : _header._size;
+        public long Length =>
+            _header._dataStream != null ? _header._dataStream.Length : _header._size;
 
         /// <summary>
         /// When the <see cref="EntryType"/> indicates a <see cref="TarEntryType.SymbolicLink"/> or a <see cref="TarEntryType.HardLink"/>, this property returns the link target path of such link.
@@ -105,7 +107,9 @@ namespace System.Formats.Tar
             get => _header._linkName;
             set
             {
-                if (_header._typeFlag is not TarEntryType.HardLink and not TarEntryType.SymbolicLink)
+                if (
+                    _header._typeFlag is not TarEntryType.HardLink and not TarEntryType.SymbolicLink
+                )
                 {
                     throw new InvalidOperationException(SR.TarEntryHardLinkOrSymLinkExpected);
                 }
@@ -176,7 +180,9 @@ namespace System.Formats.Tar
         {
             if (EntryType is TarEntryType.SymbolicLink or TarEntryType.HardLink)
             {
-                throw new InvalidOperationException(string.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType));
+                throw new InvalidOperationException(
+                    string.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType)
+                );
             }
             ExtractToFileInternal(destinationFileName, linkTargetPath: null, overwrite);
         }
@@ -222,7 +228,9 @@ namespace System.Formats.Tar
             {
                 if (!IsDataStreamSetterSupported())
                 {
-                    throw new InvalidOperationException(string.Format(SR.TarEntryDoesNotSupportDataStream, Name, EntryType));
+                    throw new InvalidOperationException(
+                        string.Format(SR.TarEntryDoesNotSupportDataStream, Name, EntryType)
+                    );
                 }
 
                 if (value != null && !value.CanRead)
@@ -261,9 +269,17 @@ namespace System.Formats.Tar
             Debug.Assert(!string.IsNullOrEmpty(destinationDirectoryPath));
             Debug.Assert(Path.IsPathFullyQualified(destinationDirectoryPath));
 
-            string destinationDirectoryFullPath = destinationDirectoryPath.EndsWith(Path.DirectorySeparatorChar) ? destinationDirectoryPath : destinationDirectoryPath + Path.DirectorySeparatorChar;
+            string destinationDirectoryFullPath = destinationDirectoryPath.EndsWith(
+                Path.DirectorySeparatorChar
+            )
+                ? destinationDirectoryPath
+                : destinationDirectoryPath + Path.DirectorySeparatorChar;
 
-            string fileDestinationPath = GetSanitizedFullPath(destinationDirectoryFullPath, Name, SR.TarExtractingResultsFileOutside);
+            string fileDestinationPath = GetSanitizedFullPath(
+                destinationDirectoryFullPath,
+                Name,
+                SR.TarExtractingResultsFileOutside
+            );
 
             string? linkTargetPath = null;
             if (EntryType is TarEntryType.SymbolicLink or TarEntryType.HardLink)
@@ -273,7 +289,11 @@ namespace System.Formats.Tar
                     throw new FormatException(SR.TarEntryHardLinkOrSymlinkLinkNameEmpty);
                 }
 
-                linkTargetPath = GetSanitizedFullPath(destinationDirectoryFullPath, LinkName, SR.TarExtractingResultsLinkOutside);
+                linkTargetPath = GetSanitizedFullPath(
+                    destinationDirectoryFullPath,
+                    LinkName,
+                    SR.TarExtractingResultsLinkOutside
+                );
             }
 
             if (EntryType == TarEntryType.Directory)
@@ -288,9 +308,16 @@ namespace System.Formats.Tar
             }
 
             // If the path can be extracted in the specified destination directory, returns the full path with sanitized file name. Otherwise, throws.
-            static string GetSanitizedFullPath(string destinationDirectoryFullPath, string path, string exceptionMessage)
+            static string GetSanitizedFullPath(
+                string destinationDirectoryFullPath,
+                string path,
+                string exceptionMessage
+            )
             {
-                string actualPath = Path.Join(Path.GetDirectoryName(path), ArchivingUtils.SanitizeEntryFilePath(Path.GetFileName(path)));
+                string actualPath = Path.Join(
+                    Path.GetDirectoryName(path),
+                    ArchivingUtils.SanitizeEntryFilePath(Path.GetFileName(path))
+                );
 
                 if (!Path.IsPathFullyQualified(actualPath))
                 {
@@ -299,9 +326,16 @@ namespace System.Formats.Tar
 
                 actualPath = Path.GetFullPath(actualPath);
 
-                if (!actualPath.StartsWith(destinationDirectoryFullPath, PathInternal.StringComparison))
+                if (
+                    !actualPath.StartsWith(
+                        destinationDirectoryFullPath,
+                        PathInternal.StringComparison
+                    )
+                )
                 {
-                    throw new IOException(string.Format(exceptionMessage, path, destinationDirectoryFullPath));
+                    throw new IOException(
+                        string.Format(exceptionMessage, path, destinationDirectoryFullPath)
+                    );
                 }
 
                 return actualPath;
@@ -355,7 +389,10 @@ namespace System.Formats.Tar
                 case TarEntryType.GlobalExtendedAttributes:
                 case TarEntryType.LongPath:
                 case TarEntryType.LongLink:
-                    Debug.Assert(false, $"Metadata entry type should not be visible: '{EntryType}'");
+                    Debug.Assert(
+                        false,
+                        $"Metadata entry type should not be visible: '{EntryType}'"
+                    );
                     break;
 
                 case TarEntryType.MultiVolume:
@@ -363,12 +400,18 @@ namespace System.Formats.Tar
                 case TarEntryType.SparseFile:
                 case TarEntryType.TapeVolume:
                 default:
-                    throw new InvalidOperationException(string.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType));
+                    throw new InvalidOperationException(
+                        string.Format(SR.TarEntryTypeNotSupportedForExtracting, EntryType)
+                    );
             }
         }
 
         // Verifies if the specified paths make sense for the current type of entry.
-        private void VerifyPathsForEntryType(string filePath, string? linkTargetPath, bool overwrite)
+        private void VerifyPathsForEntryType(
+            string filePath,
+            string? linkTargetPath,
+            bool overwrite
+        )
         {
             string? directoryPath = Path.GetDirectoryName(filePath);
             // If the destination contains a directory segment, need to check that it exists
@@ -401,20 +444,41 @@ namespace System.Formats.Tar
                 {
                     string? targetDirectoryPath = Path.GetDirectoryName(linkTargetPath);
                     // If the destination target contains a directory segment, need to check that it exists
-                    if (!string.IsNullOrEmpty(targetDirectoryPath) && !Path.Exists(targetDirectoryPath))
+                    if (
+                        !string.IsNullOrEmpty(targetDirectoryPath)
+                        && !Path.Exists(targetDirectoryPath)
+                    )
                     {
-                        throw new IOException(string.Format(SR.TarSymbolicLinkTargetNotExists, filePath, linkTargetPath));
+                        throw new IOException(
+                            string.Format(
+                                SR.TarSymbolicLinkTargetNotExists,
+                                filePath,
+                                linkTargetPath
+                            )
+                        );
                     }
 
                     if (EntryType is TarEntryType.HardLink)
                     {
                         if (!Path.Exists(linkTargetPath))
                         {
-                            throw new IOException(string.Format(SR.TarHardLinkTargetNotExists, filePath, linkTargetPath));
+                            throw new IOException(
+                                string.Format(
+                                    SR.TarHardLinkTargetNotExists,
+                                    filePath,
+                                    linkTargetPath
+                                )
+                            );
                         }
                         else if (Directory.Exists(linkTargetPath))
                         {
-                            throw new IOException(string.Format(SR.TarHardLinkToDirectoryNotAllowed, filePath, linkTargetPath));
+                            throw new IOException(
+                                string.Format(
+                                    SR.TarHardLinkToDirectoryNotAllowed,
+                                    filePath,
+                                    linkTargetPath
+                                )
+                            );
                         }
                     }
                 }

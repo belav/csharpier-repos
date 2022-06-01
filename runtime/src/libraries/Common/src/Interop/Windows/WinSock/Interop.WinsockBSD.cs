@@ -87,18 +87,21 @@ internal static partial class Interop
                     Debug.Assert(managed.MulticastAddress.Length == MulticastAddressLength);
                     fixed (void* dest = _multicastAddress)
                     {
-                        managed.MulticastAddress.CopyTo(new Span<byte>(dest, MulticastAddressLength));
+                        managed.MulticastAddress.CopyTo(
+                            new Span<byte>(dest, MulticastAddressLength)
+                        );
                     }
                     _interfaceIndex = managed.InterfaceIndex;
                 }
 
                 public IPv6MulticastRequest ToManaged()
                 {
-                    IPv6MulticastRequest managed = new()
-                    {
-                        MulticastAddress = new byte[MulticastAddressLength],
-                        InterfaceIndex = _interfaceIndex
-                    };
+                    IPv6MulticastRequest managed =
+                        new()
+                        {
+                            MulticastAddress = new byte[MulticastAddressLength],
+                            InterfaceIndex = _interfaceIndex
+                        };
                     fixed (void* src = _multicastAddress)
                     {
                         new Span<byte>(src, 16).CopyTo(managed.MulticastAddress);

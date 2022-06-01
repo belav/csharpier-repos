@@ -9,7 +9,6 @@ using Internal.TypeSystem;
 
 namespace ILCompiler.Logging
 {
-
     public sealed partial class DocumentationSignatureGenerator
     {
         /// <summary>
@@ -22,9 +21,7 @@ namespace ILCompiler.Logging
         {
             internal static readonly PartVisitor Instance = new PartVisitor();
 
-            private PartVisitor()
-            {
-            }
+            private PartVisitor() { }
 
             public override void AppendName(StringBuilder builder, ArrayType arrayType)
             {
@@ -121,7 +118,10 @@ namespace ILCompiler.Logging
                 // https://github.com/dotnet/roslyn/issues/48363
             }
 
-            public override void AppendName(StringBuilder builder, GenericParameterDesc genericParameter)
+            public override void AppendName(
+                StringBuilder builder,
+                GenericParameterDesc genericParameter
+            )
             {
                 // Is this a type parameter on a type?
                 if (genericParameter.Kind == GenericParameterKind.Method)
@@ -134,7 +134,7 @@ namespace ILCompiler.Logging
 
                     // If the containing type is nested within other types.
                     // e.g. A<T>.B<U>.M<V>(T t, U u, V v) should be M(`0, `1, ``0).
-                    // Roslyn needs to add generic arities of parents, but the innermost type redeclares 
+                    // Roslyn needs to add generic arities of parents, but the innermost type redeclares
                     // all generic parameters so we don't need to add them.
                     builder.Append('`');
                 }
@@ -142,10 +142,17 @@ namespace ILCompiler.Logging
                 builder.Append(genericParameter.Index);
             }
 
-            public override void AppendName(StringBuilder builder, SignatureMethodVariable type) => builder.Append("``").Append(type.Index);
-            public override void AppendName(StringBuilder builder, SignatureTypeVariable type) => builder.Append('`').Append(type.Index);
+            public override void AppendName(StringBuilder builder, SignatureMethodVariable type) =>
+                builder.Append("``").Append(type.Index);
 
-            protected override void AppendNameForNestedType(StringBuilder sb, DefType nestedType, DefType containingType)
+            public override void AppendName(StringBuilder builder, SignatureTypeVariable type) =>
+                builder.Append('`').Append(type.Index);
+
+            protected override void AppendNameForNestedType(
+                StringBuilder sb,
+                DefType nestedType,
+                DefType containingType
+            )
             {
                 AppendName(sb, containingType);
                 sb.Append('.');
@@ -160,7 +167,10 @@ namespace ILCompiler.Logging
                 sb.Append(type.Name);
             }
 
-            protected override void AppendNameForInstantiatedType(StringBuilder builder, DefType type)
+            protected override void AppendNameForInstantiatedType(
+                StringBuilder builder,
+                DefType type
+            )
             {
                 int containingArity = 0;
                 DefType containingType = type.ContainingType;
@@ -180,7 +190,10 @@ namespace ILCompiler.Logging
                 int totalArity = type.Instantiation.Length;
                 string expectedSuffix = $"`{totalArity.ToString()}";
                 if (unmangledName.EndsWith(expectedSuffix))
-                    unmangledName = unmangledName.Substring(0, unmangledName.Length - expectedSuffix.Length);
+                    unmangledName = unmangledName.Substring(
+                        0,
+                        unmangledName.Length - expectedSuffix.Length
+                    );
 
                 builder.Append(unmangledName);
 

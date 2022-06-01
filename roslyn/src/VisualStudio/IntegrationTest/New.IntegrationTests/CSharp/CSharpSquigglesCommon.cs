@@ -12,9 +12,7 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
     public abstract class CSharpSquigglesCommon : AbstractEditorTest
     {
         protected CSharpSquigglesCommon(string projectTemplate)
-            : base(nameof(CSharpSquigglesCommon), projectTemplate)
-        {
-        }
+            : base(nameof(CSharpSquigglesCommon), projectTemplate) { }
 
         protected abstract bool SupportsGlobalUsings { get; }
 
@@ -23,7 +21,8 @@ namespace Roslyn.VisualStudio.NewIntegrationTests.CSharp
         [IdeFact]
         public virtual async Task VerifySyntaxErrorSquiggles()
         {
-            await TestServices.Editor.SetTextAsync(@"using System;
+            await TestServices.Editor.SetTextAsync(
+                @"using System;
 using System.Collections.Generic;
 using System.Text;
 
@@ -41,36 +40,44 @@ namespace ConsoleApplication1
         private static void Sub()
         {
     }
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
 
-            var usingsErrorTags = SupportsGlobalUsings ? "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;\\r\\nusing System.Collections.Generic;\\r\\nusing System.Text;'[0-68]"
+            var usingsErrorTags = SupportsGlobalUsings
+                ? "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;\\r\\nusing System.Collections.Generic;\\r\\nusing System.Text;'[0-68]"
                 : "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System.Collections.Generic;\\r\\nusing System.Text;'[15-68]";
 
             await TestServices.EditorVerifier.ErrorTagsAsync(
-              new[]
-              {
-                  usingsErrorTags,
-                  "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
-                  "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]",
-              },
-              HangMitigatingCancellationToken);
+                new[]
+                {
+                    usingsErrorTags,
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'\\r'[286-287]",
+                    "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'}'[354-355]",
+                },
+                HangMitigatingCancellationToken
+            );
         }
 
         [IdeFact]
         public virtual async Task VerifySemanticErrorSquiggles()
         {
-            await TestServices.Editor.SetTextAsync(@"using System;
+            await TestServices.Editor.SetTextAsync(
+                @"using System;
 
 class C  : Bar
 {
-}", HangMitigatingCancellationToken);
+}",
+                HangMitigatingCancellationToken
+            );
             await TestServices.EditorVerifier.ErrorTagsAsync(
                 new[]
                 {
                     "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'using System;'[0-13]",
                     "Microsoft.VisualStudio.Text.Tagging.ErrorTag:'Bar'[28-31]",
                 },
-                HangMitigatingCancellationToken);
+                HangMitigatingCancellationToken
+            );
         }
     }
 }

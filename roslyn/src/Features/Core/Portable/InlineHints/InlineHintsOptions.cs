@@ -11,5 +11,6 @@ namespace Microsoft.CodeAnalysis.InlineHints
     internal readonly record struct InlineHintsOptions(
         [property: DataMember(Order = 0)] InlineParameterHintsOptions ParameterOptions,
         [property: DataMember(Order = 1)] InlineTypeHintsOptions TypeOptions,
-        [property: DataMember(Order = 2)] SymbolDescriptionOptions DisplayOptions);
+        [property: DataMember(Order = 2)] SymbolDescriptionOptions DisplayOptions
+    );
 }
