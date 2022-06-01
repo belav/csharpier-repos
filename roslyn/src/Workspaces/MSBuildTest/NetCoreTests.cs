@@ -56,14 +56,20 @@ namespace Microsoft.CodeAnalysis.MSBuild.UnitTests
         private void DotNetRestore(string solutionOrProjectFileName)
         {
             var arguments =
-                $@"msbuild ""{solutionOrProjectFileName}"" /t:restore /bl:{Path.Combine(SolutionDirectory.Path, "restore.binlog")}";
+                $@"msbuild ""{solutionOrProjectFileName}"" /t:restore /bl:{Path.Combine(
+                    SolutionDirectory.Path,
+                    "restore.binlog"
+                )}";
             RunDotNet(arguments);
         }
 
         private void DotNetBuild(string solutionOrProjectFileName, string configuration = null)
         {
             var arguments =
-                $@"msbuild ""{solutionOrProjectFileName}"" /bl:{Path.Combine(SolutionDirectory.Path, "build.binlog")}";
+                $@"msbuild ""{solutionOrProjectFileName}"" /bl:{Path.Combine(
+                    SolutionDirectory.Path,
+                    "build.binlog"
+                )}";
 
             if (configuration != null)
             {

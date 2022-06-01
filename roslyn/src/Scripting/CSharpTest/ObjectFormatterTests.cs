@@ -1063,8 +1063,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 
                 var expected =
                     $@"{new Exception().Message}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture.Method(){string.Format(ScriptingResources.AtFileLine, filePath, 10006)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_NonGeneric(){string.Format(ScriptingResources.AtFileLine, filePath, 10036)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture.Method(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10006
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_NonGeneric(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10036
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);
@@ -1087,8 +1095,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 // TODO (DevDiv #173210): Should show Fixture.Method<char>
                 var expected =
                     $@"{new Exception().Message}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture.Method<U>(){string.Format(ScriptingResources.AtFileLine, filePath, 10012)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericMethod(){string.Format(ScriptingResources.AtFileLine, filePath, 10057)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture.Method<U>(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10012
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericMethod(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10057
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);
@@ -1111,8 +1127,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 // TODO (DevDiv #173210): Should show Fixture<int>.Method
                 var expected =
                     $@"{new Exception().Message}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture<T>.Method(){string.Format(ScriptingResources.AtFileLine, filePath, 10021)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericType(){string.Format(ScriptingResources.AtFileLine, filePath, 10079)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture<T>.Method(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10021
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericType(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10079
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);
@@ -1135,8 +1159,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 // TODO (DevDiv #173210): Should show Fixture<int>.Method<char>
                 var expected =
                     $@"{new Exception().Message}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture<T>.Method<U>(){string.Format(ScriptingResources.AtFileLine, filePath, 10027)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericMethodInGenericType(){string.Format(ScriptingResources.AtFileLine, filePath, 10101)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture<T>.Method<U>(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10027
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericMethodInGenericType(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10101
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);
@@ -1171,8 +1203,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 var expected =
                     $@"'object' does not contain a definition for 'x'
   + System.Dynamic.UpdateDelegates.UpdateAndExecuteVoid1<T0>(System.Runtime.CompilerServices.CallSite, T0)
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture2.MethodDynamic(){string.Format(ScriptingResources.AtFileLine, filePath, 10123)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_Dynamic(){string.Format(ScriptingResources.AtFileLine, filePath, 10132)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.Fixture2.MethodDynamic(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10123
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_Dynamic(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10132
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);
@@ -1211,8 +1251,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
 
                 var expected =
                     $@"{new Exception().Message}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.ParametersFixture.Method(ref char, out System.DateTime){string.Format(ScriptingResources.AtFileLine, filePath, 10155)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_RefOutParameters(){string.Format(ScriptingResources.AtFileLine, filePath, 10172)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.ParametersFixture.Method(ref char, out System.DateTime){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10155
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_RefOutParameters(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10172
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);
@@ -1236,8 +1284,16 @@ namespace Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests
                 // TODO (DevDiv #173210): Should show ParametersFixture.Method<char>(ref char)
                 var expected =
                     $@"{new Exception().Message}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.ParametersFixture.Method<U>(ref U){string.Format(ScriptingResources.AtFileLine, filePath, 10161)}
-  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericRefParameter(){string.Format(ScriptingResources.AtFileLine, filePath, 10194)}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.ParametersFixture.Method<U>(ref U){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10161
+                    )}
+  + Microsoft.CodeAnalysis.CSharp.Scripting.Hosting.UnitTests.ObjectFormatterTests.StackTrace_GenericRefParameter(){string.Format(
+                        ScriptingResources.AtFileLine,
+                        filePath,
+                        10194
+                    )}
 ";
                 var actual = s_formatter.FormatException(e);
                 Assert.Equal(expected, actual);

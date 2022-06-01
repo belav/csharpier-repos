@@ -34,24 +34,49 @@ using System.Runtime.CompilerServices;
 
 namespace {namespaceName}
 {{
-    internal partial class {className} : IFeatureCollection{Each(implementedFeatures, feature => $@",
-                              {new string(' ', className.Length)}{feature}")}
+    internal partial class {className} : IFeatureCollection{Each(
+                implementedFeatures,
+                feature =>
+                    $@",
+                              {new string(' ', className.Length)}{feature}"
+            )}
     {{
-        // Implemented features{Each(implementedFeatures, feature => $@"
-        internal protected {feature}? _current{feature};")}{(allFeatures .Where(f => !implementedFeatures.Contains(f)) .FirstOrDefault() is not null ? @"
+        // Implemented features{Each(
+                implementedFeatures,
+                feature =>
+                    $@"
+        internal protected {feature}? _current{feature};"
+            )}{(
+                allFeatures.Where(f => !implementedFeatures.Contains(f)).FirstOrDefault()
+                    is not null
+                    ? @"
 
-        // Other reserved feature slots" : "")}{Each(allFeatures.Where(f => !implementedFeatures.Contains(f)), feature => $@"
-        internal protected {feature}? _current{feature};")}
+        // Other reserved feature slots"
+                    : ""
+            )}{Each(
+                allFeatures.Where(f => !implementedFeatures.Contains(f)),
+                feature =>
+                    $@"
+        internal protected {feature}? _current{feature};"
+            )}
 
         private int _featureRevision;
 
         private List<KeyValuePair<Type, object>>? MaybeExtra;
 
         private void FastReset()
-        {{{Each(implementedFeatures, feature => $@"
-            _current{feature} = this;")}
-{Each(allFeatures.Where(f => !implementedFeatures.Contains(f)), feature => $@"
-            _current{feature} = null;")}
+        {{{Each(
+                implementedFeatures,
+                feature =>
+                    $@"
+            _current{feature} = this;"
+            )}
+{Each(
+                allFeatures.Where(f => !implementedFeatures.Contains(f)),
+                feature =>
+                    $@"
+            _current{feature} = null;"
+            )}
         }}
 
         // Internal for testing
@@ -122,27 +147,37 @@ namespace {namespaceName}
         {{
             get
             {{
-                object? feature = null;{Each(features, feature => $@"
+                object? feature = null;{Each(
+                features,
+                feature =>
+                    $@"
                 {(feature.Index != 0 ? "else " : "")}if (key == typeof({feature.Name}))
                 {{
                     feature = _current{feature.Name};
-                }}")}
+                }}"
+            )}
                 else if (MaybeExtra != null)
                 {{
                     feature = ExtraFeatureGet(key);
                 }}
 
-                return feature{(string.IsNullOrEmpty(fallbackFeatures) ? "" : $" ?? {fallbackFeatures}?[key]")};
+                return feature{(
+                string.IsNullOrEmpty(fallbackFeatures) ? "" : $" ?? {fallbackFeatures}?[key]"
+            )};
             }}
 
             set
             {{
                 _featureRevision++;
-{Each(features, feature => $@"
+{Each(
+                features,
+                feature =>
+                    $@"
                 {(feature.Index != 0 ? "else " : "")}if (key == typeof({feature.Name}))
                 {{
                     _current{feature.Name} = ({feature.Name}?)value;
-                }}")}
+                }}"
+            )}
                 else
                 {{
                     ExtraFeatureSet(key, value);
@@ -156,20 +191,28 @@ namespace {namespaceName}
             // The type of TFeature is confirmed by the typeof() check and the As cast only accepts
             // that type; however the Jit does not eliminate a regular cast in a shared generic.
 
-            TFeature? feature = default;{Each(features, feature => $@"
+            TFeature? feature = default;{Each(
+                features,
+                feature =>
+                    $@"
             {(feature.Index != 0 ? "else " : "")}if (typeof(TFeature) == typeof({feature.Name}))
             {{
                 feature = Unsafe.As<{feature.Name}?, TFeature?>(ref _current{feature.Name});
-            }}")}
+            }}"
+            )}
             else if (MaybeExtra != null)
             {{
                 feature = (TFeature?)(ExtraFeatureGet(typeof(TFeature)));
-            }}{(string.IsNullOrEmpty(fallbackFeatures) ? "" : $@"
+            }}{(
+                string.IsNullOrEmpty(fallbackFeatures)
+                    ? ""
+                    : $@"
 
             if (feature == null && {fallbackFeatures} != null)
             {{
                 feature = {fallbackFeatures}.Get<TFeature>();
-            }}")}
+            }}"
+            )}
 
             return feature;
         }}
@@ -180,11 +223,15 @@ namespace {namespaceName}
             // The type of TFeature is confirmed by the typeof() check and the As cast only accepts
             // that type; however the Jit does not eliminate a regular cast in a shared generic.
 
-            _featureRevision++;{Each(features, feature => $@"
+            _featureRevision++;{Each(
+                features,
+                feature =>
+                    $@"
             {(feature.Index != 0 ? "else " : "")}if (typeof(TFeature) == typeof({feature.Name}))
             {{
                 _current{feature.Name} = Unsafe.As<TFeature?, {feature.Name}?>(ref feature);
-            }}")}
+            }}"
+            )}
             else
             {{
                 ExtraFeatureSet(typeof(TFeature), feature);
@@ -192,11 +239,15 @@ namespace {namespaceName}
         }}
 
         private IEnumerable<KeyValuePair<Type, object>> FastEnumerable()
-        {{{Each(features, feature => $@"
+        {{{Each(
+                features,
+                feature =>
+                    $@"
             if (_current{feature.Name} != null)
             {{
                 yield return new KeyValuePair<Type, object>(typeof({feature.Name}), _current{feature.Name});
-            }}")}
+            }}"
+            )}
 
             if (MaybeExtra != null)
             {{

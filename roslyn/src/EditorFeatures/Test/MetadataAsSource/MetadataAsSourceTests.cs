@@ -78,8 +78,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -94,8 +100,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -146,8 +158,14 @@ public interface [|I|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -162,8 +180,14 @@ public interface [|I|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -215,8 +239,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -231,8 +261,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -291,8 +327,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -310,8 +352,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -368,8 +416,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -385,8 +439,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -444,8 +504,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -461,8 +527,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -527,8 +599,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -546,8 +624,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -611,8 +695,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -630,8 +720,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -694,8 +790,14 @@ public enum [|E|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -713,8 +815,14 @@ public enum [|E|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -780,8 +888,14 @@ public enum E
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -799,8 +913,14 @@ public enum E
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -863,8 +983,14 @@ public enum E : short
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -882,8 +1008,14 @@ public enum E : short
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -940,8 +1072,14 @@ public enum E : ulong
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -957,8 +1095,14 @@ public enum E : ulong
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1020,8 +1164,14 @@ public enum E : short
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1039,8 +1189,14 @@ public enum E : short
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1104,8 +1260,14 @@ namespace N
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1123,8 +1285,14 @@ namespace N
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1270,8 +1438,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1287,8 +1461,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1355,8 +1535,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1372,8 +1558,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1430,8 +1622,14 @@ public struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1449,8 +1647,14 @@ public struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1513,8 +1717,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1533,8 +1743,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1592,8 +1808,14 @@ public class [|G|]<SomeType>
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1609,8 +1831,14 @@ public class [|G|]<SomeType>
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1681,8 +1909,14 @@ public class [|C|]<[My] T>
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1700,8 +1934,14 @@ public class [|C|]<[My] T>
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1769,8 +2009,14 @@ public interface [|C|]<T>
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1786,8 +2032,14 @@ public interface [|C|]<T>
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1847,8 +2099,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1864,8 +2122,14 @@ public class C
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -1941,8 +2205,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -1960,8 +2230,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -2382,8 +2658,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -2471,8 +2753,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -2657,8 +2945,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -2737,8 +3031,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -2837,12 +3137,24 @@ public interface [|IGoo|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -2862,12 +3174,24 @@ public interface [|IGoo|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -2948,8 +3272,14 @@ public class [|Test|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -2969,8 +3299,14 @@ public class [|Test|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -3050,8 +3386,14 @@ public class [|TestAttribute|] : Attribute
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -3072,8 +3414,14 @@ public class [|TestAttribute|] : Attribute
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -3263,8 +3611,14 @@ public class [|Program|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -3294,8 +3648,14 @@ public class [|Program|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -3385,8 +3745,14 @@ public interface [|IComImport|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -3412,8 +3778,14 @@ public interface [|IComImport|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -3487,8 +3859,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -3508,8 +3886,14 @@ public class [|C|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -3622,12 +4006,24 @@ public interface [|IGoo|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -3647,12 +4043,24 @@ public interface [|IGoo|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "System, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "System.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -3958,8 +4366,14 @@ public readonly struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -3975,8 +4389,14 @@ public readonly struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4039,8 +4459,14 @@ public struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4056,8 +4482,14 @@ public struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4119,8 +4551,14 @@ public ref struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4138,8 +4576,14 @@ public ref struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4204,8 +4648,14 @@ public readonly ref struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4223,8 +4673,14 @@ public readonly ref struct [|S|]
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4293,8 +4749,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4315,8 +4777,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4386,8 +4854,14 @@ public readonly struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4408,8 +4882,14 @@ public readonly struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4472,8 +4952,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4489,8 +4975,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4553,8 +5045,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4570,8 +5068,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4642,8 +5146,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4659,8 +5169,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4725,8 +5241,14 @@ public readonly struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4742,8 +5264,14 @@ public readonly struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4818,8 +5346,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4847,8 +5381,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -4923,8 +5463,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -4952,8 +5498,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -5028,8 +5580,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -5057,8 +5615,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -5130,8 +5694,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -5150,8 +5720,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -5232,8 +5808,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -5261,8 +5843,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -5341,8 +5929,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -5370,8 +5964,14 @@ public struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,
@@ -5451,8 +6051,14 @@ public readonly struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 6)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 (OriginatingProjectLanguage.VisualBasic, false)
@@ -5480,8 +6086,14 @@ public readonly struct S
 #if false // {CSharpEditorResources.Decompilation_log}
 {string.Format(CSharpEditorResources._0_items_in_cache, 9)}
 ------------------
-{string.Format(CSharpEditorResources.Resolve_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
-{string.Format(CSharpEditorResources.Found_single_assembly_0, "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")}
+{string.Format(
+                        CSharpEditorResources.Resolve_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
+{string.Format(
+                        CSharpEditorResources.Found_single_assembly_0,
+                        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+                    )}
 {string.Format(CSharpEditorResources.Load_from_0, "mscorlib.v4_6_1038_0.dll")}
 #endif",
                 _ => throw ExceptionUtilities.Unreachable,

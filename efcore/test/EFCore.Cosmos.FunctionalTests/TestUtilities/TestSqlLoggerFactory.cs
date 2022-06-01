@@ -77,7 +77,10 @@ public class TestSqlLoggerFactory : ListLoggerFactory
 
             var newBaseLine =
                 $@"            AssertSql(
-                {string.Join("," + indent + "//" + indent, SqlStatements.Take(9).Select(sql => "@\"" + sql.Replace("\"", "\"\"") + "\""))});
+                {string.Join(
+                    "," + indent + "//" + indent,
+                    SqlStatements.Take(9).Select(sql => "@\"" + sql.Replace("\"", "\"\"") + "\"")
+                )});
 
 ";
 

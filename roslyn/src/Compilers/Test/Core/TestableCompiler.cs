@@ -204,7 +204,10 @@ namespace Roslyn.Test.Utilities
                 case BasicRuntimeOption.Include:
                     // VB will just find this in the SDK path and auto-add it
                     args.Add(
-                        $@"-vbruntime:""{Path.Combine(buildPaths.SdkDirectory, "Microsoft.VisualBasic.dll")}"""
+                        $@"-vbruntime:""{Path.Combine(
+                            buildPaths.SdkDirectory,
+                            "Microsoft.VisualBasic.dll"
+                        )}"""
                     );
                     break;
                 case BasicRuntimeOption.Exclude:

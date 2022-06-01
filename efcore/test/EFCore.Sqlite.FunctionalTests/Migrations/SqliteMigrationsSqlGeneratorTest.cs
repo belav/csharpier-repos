@@ -158,7 +158,9 @@ public class SqliteMigrationsSqlGeneratorTest : MigrationsSqlGeneratorTestBase
 
         AssertSql(
             $@"CREATE TABLE ""People"" (
-    ""Id"" INTEGER NOT NULL{(pkName != null ? $@" CONSTRAINT ""{pkName}""" : "")} PRIMARY KEY{(autoincrement ? " AUTOINCREMENT," : ",")}
+    ""Id"" INTEGER NOT NULL{(pkName != null ? $@" CONSTRAINT ""{pkName}""" : "")} PRIMARY KEY{(
+                autoincrement ? " AUTOINCREMENT," : ","
+            )}
     ""EmployerId"" int NULL,
     ""SSN"" char(11) NULL,
     UNIQUE (""SSN""),

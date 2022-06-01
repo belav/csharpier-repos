@@ -86,7 +86,11 @@ Environment.Exit(0)
 
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 $@"
-(1,7): error CS1504: {string.Format(CSharpResources.ERR_NoSourceFile, "a.csx", CSharpResources.CouldNotFindFile)}
+(1,7): error CS1504: {string.Format(
+                    CSharpResources.ERR_NoSourceFile,
+                    "a.csx",
+                    CSharpResources.CouldNotFindFile
+                )}
 (1,1): error CS0006: {string.Format(CSharpResources.ERR_NoMetadataFile, "C.dll")}
 ",
                 result.Errors
@@ -182,7 +186,11 @@ throw new Exception(""Error!"");
             AssertEx.AssertEqualToleratingWhitespaceDifferences(
                 $@"
 System.Exception: Error!
-   + <Initialize>.MoveNext(){string.Format(ScriptingResources.AtFileLine, $"{cwd}{Path.DirectorySeparatorChar}a.csx", "2")}
+   + <Initialize>.MoveNext(){string.Format(
+                    ScriptingResources.AtFileLine,
+                    $"{cwd}{Path.DirectorySeparatorChar}a.csx",
+                    "2"
+                )}
 ",
                 result.Errors
             );

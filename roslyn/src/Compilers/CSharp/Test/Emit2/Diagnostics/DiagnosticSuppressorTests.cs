@@ -503,7 +503,10 @@ class C { }";
                 AppDomain.CurrentDomain.FirstChanceException += firstChanceException;
 
                 IFormattable context =
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: {compilation.AssemblyName}"
+                    )}
 
 {new LazyToString(() => exceptions[0])}
 -----";
@@ -575,7 +578,10 @@ class C { }";
                 AppDomain.CurrentDomain.FirstChanceException += firstChanceException;
 
                 IFormattable context =
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: {compilation.AssemblyName}"
+                    )}
 
 {new LazyToString(() => exceptions[0])}
 -----";
@@ -644,7 +650,10 @@ class C { }";
                 AppDomain.CurrentDomain.FirstChanceException += firstChanceException;
 
                 IFormattable context =
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: {compilation.AssemblyName}"
+                    )}
 
 {new LazyToString(() => exceptions[0])}
 -----";
@@ -712,7 +721,10 @@ class C { }";
                 AppDomain.CurrentDomain.FirstChanceException += firstChanceException;
 
                 IFormattable context =
-                    $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}")}
+                    $@"{string.Format(
+                        CodeAnalysisResources.ExceptionContext,
+                        $@"Compilation: {compilation.AssemblyName}"
+                    )}
 
 {new LazyToString(() => exceptions[0])}
 -----";

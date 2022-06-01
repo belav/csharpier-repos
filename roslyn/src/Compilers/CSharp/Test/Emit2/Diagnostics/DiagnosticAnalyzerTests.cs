@@ -1247,7 +1247,10 @@ public class B
                 "diagnostic"
             ).Message;
             IFormattable context =
-                $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}")}
+                $@"{string.Format(
+                    CodeAnalysisResources.ExceptionContext,
+                    $@"Compilation: {compilation.AssemblyName}"
+                )}
 
 {new LazyToString(() => analyzer.ThrownException)}
 -----
@@ -1336,7 +1339,10 @@ public class B
             ).Message;
             Exception analyzerException = null;
             IFormattable context =
-                $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}")}
+                $@"{string.Format(
+                    CodeAnalysisResources.ExceptionContext,
+                    $@"Compilation: {compilation.AssemblyName}"
+                )}
 
 {new LazyToString(() => analyzerException)}
 -----
@@ -1606,8 +1612,11 @@ SyntaxTree: ";
                 "diagnostic"
             ).Message;
             IFormattable context =
-                $@"{string.Format(CodeAnalysisResources.ExceptionContext, $@"Compilation: {compilation.AssemblyName}
-SyntaxTree: ")}
+                $@"{string.Format(
+                    CodeAnalysisResources.ExceptionContext,
+                    $@"Compilation: {compilation.AssemblyName}
+SyntaxTree: "
+                )}
 
 {new LazyToString(() => analyzer.ThrownException)}
 -----

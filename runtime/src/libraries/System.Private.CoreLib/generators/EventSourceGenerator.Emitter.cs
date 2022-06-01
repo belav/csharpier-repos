@@ -79,7 +79,10 @@ namespace {ec.Namespace}
             {
                 _builder.AppendLine(
                     $@"
-        private {ec.ClassName}() : base(new Guid({ec.Guid.ToString("x").Replace("{", "").Replace("}", "")}), ""{ec.SourceName}"") {{ }}"
+        private {ec.ClassName}() : base(new Guid({ec.Guid
+                        .ToString("x")
+                        .Replace("{", "")
+                        .Replace("}", "")}), ""{ec.SourceName}"") {{ }}"
                 );
             }
 

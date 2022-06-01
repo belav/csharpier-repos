@@ -50,7 +50,10 @@ namespace System.IO.Tests
                                 *[System[Provider/@Name='Microsoft-Windows-EFS']]
                             </Select>
                             <Suppress Path='System'>
-                                *[System[TimeCreated[timediff(@SystemTime) &gt;= {hours * 60 * 60 * 1000L}]]]
+                                *[System[TimeCreated[timediff(@SystemTime) &gt;= {hours
+                    * 60
+                    * 60
+                    * 1000L}]]]
                             </Suppress>
                           </Query>
                         </QueryList> ";

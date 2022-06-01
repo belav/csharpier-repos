@@ -1142,13 +1142,19 @@ class Class
 [|class Class
 {{
     [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""CS0168"")] // Variable is declared but never used - Unnecessary, but suppressed
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer .Descriptor0168 .Id}"")] // Variable is declared but never used - Unnecessary, but suppressed
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id}"")] // Variable is declared but never used - Unnecessary, but suppressed
     void M()
     {{
 #pragma warning disable CS0168 // Variable is declared but never used - Unnecessary, but suppressed
-#pragma warning disable {UserDiagnosticAnalyzer .Descriptor0168 .Id} // Variable is declared but never used - Unnecessary, but suppressed
+#pragma warning disable {UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id} // Variable is declared but never used - Unnecessary, but suppressed
         int y;
-#pragma warning restore {UserDiagnosticAnalyzer .Descriptor0168 .Id} // Variable is declared but never used - Unnecessary, but suppressed
+#pragma warning restore {UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id} // Variable is declared but never used - Unnecessary, but suppressed
 #pragma warning restore CS0168 // Variable is declared but never used - Unnecessary, but suppressed
         y = 1;
     }}
@@ -1238,13 +1244,19 @@ class Class
 [|class Class
 {{
     [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""CS0168"")] // Variable is declared but never used - Unnecessary, but suppressed
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer .Descriptor0168 .Id}"")] // Variable is declared but never used - Unnecessary, but suppressed
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id}"")] // Variable is declared but never used - Unnecessary, but suppressed
     void M()
     {{
 #pragma warning disable CS0168 // Variable is declared but never used - Unnecessary, but suppressed
-#pragma warning disable {UserDiagnosticAnalyzer .Descriptor0168 .Id} // Variable is declared but never used - Unnecessary, but suppressed
+#pragma warning disable {UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id} // Variable is declared but never used - Unnecessary, but suppressed
         int y;
-#pragma warning restore {UserDiagnosticAnalyzer .Descriptor0168 .Id} // Variable is declared but never used - Unnecessary, but suppressed
+#pragma warning restore {UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id} // Variable is declared but never used - Unnecessary, but suppressed
 #pragma warning restore CS0168 // Variable is declared but never used - Unnecessary, but suppressed
         y = 1;
     }}
@@ -1332,17 +1344,25 @@ class Class
 #pragma warning disable CS0168 // Variable is declared but never used - Unnecessary
 #pragma warning disable {UserDiagnosticAnalyzer.Descriptor0168.Id}
 [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""CS0168"")]
-[System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer .Descriptor0168 .Id}"")]
+[System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id}"")]
 class Class
 {{
     [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""CS0168"")]
-    [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer .Descriptor0168 .Id}"")]
+    [System.Diagnostics.CodeAnalysis.SuppressMessage(""Category"", ""{UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id}"")]
     void M()
     {{
-{disablePrefix}#pragma warning disable {UserDiagnosticAnalyzer .Descriptor0168 .Id} // Variable is declared but never used - Unnecessary{disableSuffix}
+{disablePrefix}#pragma warning disable {UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id} // Variable is declared but never used - Unnecessary{disableSuffix}
 #pragma warning disable CS0168 // Variable is declared but never used - Unnecessary
         int y;
-{restorePrefix}#pragma warning restore {UserDiagnosticAnalyzer .Descriptor0168 .Id} // Variable is declared but never used - Unnecessary{restoreSuffix}
+{restorePrefix}#pragma warning restore {UserDiagnosticAnalyzer
+                        .Descriptor0168
+                        .Id} // Variable is declared but never used - Unnecessary{restoreSuffix}
 #pragma warning restore CS0168 // Variable is declared but never used
         y = 1;
     }}

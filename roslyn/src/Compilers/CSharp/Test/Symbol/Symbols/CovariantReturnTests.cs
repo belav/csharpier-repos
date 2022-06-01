@@ -5178,12 +5178,20 @@ public class Program
 public class Base1<Ptring>
 {{
     public virtual {overriddenMethodReturnType} M(ref Ptring x, out string y) {{ y = null; return null; }}
-    {(overriddenRuntimeSignatureAmbiguity ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}" : "")}
+    {(
+                    overriddenRuntimeSignatureAmbiguity
+                        ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}"
+                        : ""
+                )}
 }}
 public class Base2<Ptring> : Base1<Ptring>
 {{
     public virtual string M(out string x, ref Ptring y) {{ x = null; return null; }}
-    {(methodRuntimeOverriddenSignatureAmbiguity ? "public virtual string M(out string x, out string y) { x = y = null; return null; }" : "")}
+    {(
+                    methodRuntimeOverriddenSignatureAmbiguity
+                        ? "public virtual string M(out string x, out string y) { x = y = null; return null; }"
+                        : ""
+                )}
 }}
 ";
             var source =
@@ -5346,12 +5354,20 @@ public class Derived : Base2<string>
                 $@"
 public class Base1<Ptring>
 {{
-    {(overriddenRuntimeSignatureAmbiguity ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}" : "")}
+    {(
+                    overriddenRuntimeSignatureAmbiguity
+                        ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}"
+                        : ""
+                )}
     public virtual {overriddenMethodReturnType} M(ref Ptring x, out string y) {{ y = null; return null; }}
 }}
 public class Base2<Ptring> : Base1<Ptring>
 {{
-    {(methodRuntimeOverriddenSignatureAmbiguity ? "public virtual string M(out string x, out string y) { x = y = null; return null; }" : "")}
+    {(
+                    methodRuntimeOverriddenSignatureAmbiguity
+                        ? "public virtual string M(out string x, out string y) { x = y = null; return null; }"
+                        : ""
+                )}
     public virtual string M(out string x, ref Ptring y) {{ x = null; return null; }}
 }}
 ";
@@ -5528,9 +5544,17 @@ public class Derived : Base2<string>
 public class Base<Ptring>
 {{
     public virtual {overriddenMethodReturnType} M(ref Ptring x, out string y) {{ y = null; return null; }}
-    {(overriddenRuntimeSignatureAmbiguity ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}" : "")}
+    {(
+                    overriddenRuntimeSignatureAmbiguity
+                        ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}"
+                        : ""
+                )}
     public virtual string M(out string x, ref Ptring y) {{ x = null; return null; }}
-    {(methodRuntimeOverriddenSignatureAmbiguity ? "public virtual string M(out string x, out string y) { x = y = null; return null; }" : "")}
+    {(
+                    methodRuntimeOverriddenSignatureAmbiguity
+                        ? "public virtual string M(out string x, out string y) { x = y = null; return null; }"
+                        : ""
+                )}
 }}
 ";
             var source =
@@ -5688,9 +5712,17 @@ public class Derived : Base<string>
                 $@"
 public class Base<Ptring>
 {{
-    {(overriddenRuntimeSignatureAmbiguity ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}" : "")}
+    {(
+                    overriddenRuntimeSignatureAmbiguity
+                        ? @$"public virtual {overriddenMethodReturnType} M(ref Ptring x, ref Ptring y) {{ return null; }}"
+                        : ""
+                )}
     public virtual {overriddenMethodReturnType} M(ref Ptring x, out string y) {{ y = null; return null; }}
-    {(methodRuntimeOverriddenSignatureAmbiguity ? "public virtual string M(out string x, out string y) { x = y = null; return null; }" : "")}
+    {(
+                    methodRuntimeOverriddenSignatureAmbiguity
+                        ? "public virtual string M(out string x, out string y) { x = y = null; return null; }"
+                        : ""
+                )}
     public virtual string M(out string x, ref Ptring y) {{ x = null; return null; }}
 }}
 ";

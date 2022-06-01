@@ -444,7 +444,9 @@ namespace R2RDump
                         )
                         {
                             _writer.WriteLine(
-                                $@"{MetadataTokens.GetToken(method.MethodHandle):X8}: {method.SignatureString}"
+                                $@"{MetadataTokens.GetToken(
+                                    method.MethodHandle
+                                ):X8}: {method.SignatureString}"
                             );
                         }
                     }
@@ -469,7 +471,9 @@ namespace R2RDump
                     foreach (InstanceMethod instanceMethod in _r2r.InstanceMethods)
                     {
                         _writer.WriteLine(
-                            $@"0x{instanceMethod.Bucket:X2} -> {instanceMethod.Method.SignatureString}"
+                            $@"0x{instanceMethod.Bucket:X2} -> {instanceMethod
+                                .Method
+                                .SignatureString}"
                         );
                     }
                     break;

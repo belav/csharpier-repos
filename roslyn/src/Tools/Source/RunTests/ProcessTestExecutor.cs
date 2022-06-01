@@ -83,7 +83,10 @@ namespace RunTests
             if (Options.IncludeHtml)
             {
                 builder.AppendFormat(
-                    $@" --logger {sep}html;LogFileName={GetResultsFilePath(assemblyInfo, "html")}{sep}"
+                    $@" --logger {sep}html;LogFileName={GetResultsFilePath(
+                        assemblyInfo,
+                        "html"
+                    )}{sep}"
                 );
             }
 

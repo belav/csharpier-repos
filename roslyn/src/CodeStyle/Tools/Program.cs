@@ -286,9 +286,15 @@ namespace CodeStyleConfigFileGenerator
       <!-- Set the default analysis mode, if not set by the user -->
       <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>$(AnalysisLevelSuffixStyle)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
       <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == ''"">$(AnalysisModeStyle)</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
-      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllEnabledByDefault'"">{nameof(AnalysisMode.All)}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
-      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllDisabledByDefault'"">{nameof(AnalysisMode.None)}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
-      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == ''"">{nameof(AnalysisMode.Default)}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllEnabledByDefault'"">{nameof(
+                    AnalysisMode.All
+                )}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == 'AllDisabledByDefault'"">{nameof(
+                    AnalysisMode.None
+                )}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
+      <_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle Condition=""'$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle)' == ''"">{nameof(
+                    AnalysisMode.Default
+                )}</_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle>
 
       <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>AnalysisLevelStyle_$(_GlobalAnalyzerConfigAnalysisMode_MicrosoftCodeAnalysis{language}CodeStyle).editorconfig</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>
       <_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>$(_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle.ToLowerInvariant())</_GlobalAnalyzerConfigFileName_MicrosoftCodeAnalysis{language}CodeStyle>

@@ -37,7 +37,9 @@ public class InferParameterBindingInfoConventionTest
         // Arrange
         var actionName = nameof(MultipleFromBodyController.MultipleInferred);
         var expected =
-            $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' "
+            $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly
+                .GetName()
+                .Name})' "
             + "has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:"
             + Environment.NewLine
             + "TestModel a"
@@ -60,7 +62,9 @@ public class InferParameterBindingInfoConventionTest
         // Arrange
         var actionName = nameof(MultipleFromBodyController.InferredAndSpecified);
         var expected =
-            $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' "
+            $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly
+                .GetName()
+                .Name})' "
             + "has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:"
             + Environment.NewLine
             + "TestModel a"
@@ -83,7 +87,9 @@ public class InferParameterBindingInfoConventionTest
         // Arrange
         var actionName = nameof(MultipleFromBodyController.MultipleSpecified);
         var expected =
-            $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly.GetName().Name})' "
+            $@"Action '{typeof(MultipleFromBodyController).FullName}.{actionName} ({typeof(MultipleFromBodyController).Assembly
+                .GetName()
+                .Name})' "
             + "has more than one parameter that was specified or inferred as bound from request body. Only one parameter per action may be bound from body. Inspect the following parameters, and use 'FromQueryAttribute' to specify bound from query, 'FromRouteAttribute' to specify bound from route, and 'FromBodyAttribute' for parameters to be bound from body:"
             + Environment.NewLine
             + "decimal a"

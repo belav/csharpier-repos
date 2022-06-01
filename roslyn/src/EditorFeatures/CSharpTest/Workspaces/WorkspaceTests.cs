@@ -933,7 +933,9 @@ class D { }
             var workspaceElement =
                 $@"<Workspace>
   <Project AssemblyName=""Test"" Language=""C#"" CommonReferences=""true"">
-    <DocumentFromSourceGenerator FilePath=""test1.cs"">{new XText(doc1Text)}</DocumentFromSourceGenerator>
+    <DocumentFromSourceGenerator FilePath=""test1.cs"">{new XText(
+                    doc1Text
+                )}</DocumentFromSourceGenerator>
   </Project>
 </Workspace>";
             using var workspace = TestWorkspace.Create(

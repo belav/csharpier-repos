@@ -85,7 +85,9 @@ namespace System.CommandLine
         private class GeneratedHandler_{handlerCount} : {ICommandHandlerType}
         {{
             public GeneratedHandler_{handlerCount}(
-                {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
+                {invocation.DelegateType.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat
+                )} method"
             );
 
             if (methodParameters.Length > 0)
@@ -128,7 +130,9 @@ namespace System.CommandLine
                 $@"
             }}
                 
-            public {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} Method {{ get; }}"
+            public {invocation.DelegateType.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat
+                )} Method {{ get; }}"
             );
 
             foreach (
@@ -200,7 +204,9 @@ namespace System.CommandLine
 
             builder.Append(
                 $@"
-            {invocation.DelegateType.ToDisplayString(SymbolDisplayFormat.FullyQualifiedFormat)} method"
+            {invocation.DelegateType.ToDisplayString(
+                    SymbolDisplayFormat.FullyQualifiedFormat
+                )} method"
             );
 
             if (methodParameters.Length > 0)

@@ -1286,7 +1286,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{string.Format(FeaturesResources.Reference_to_undefined_group_name_0, "Open")}"" Span=""[20..24)"" Text=""Open"" />
+    <Diagnostic Message=""{string.Format(
+                    FeaturesResources.Reference_to_undefined_group_name_0,
+                    "Open"
+                )}"" Span=""[20..24)"" Text=""Open"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..35)"" Text=""((?'Close-Open'&gt;)[^&lt;&gt;]*)+"" />
@@ -1978,7 +1981,10 @@ namespace Microsoft.CodeAnalysis.CSharp.UnitTests.EmbeddedLanguages.RegularExpre
     <EndOfFile />
   </CompilationUnit>
   <Diagnostics>
-    <Diagnostic Message=""{string.Format(FeaturesResources.Reference_to_undefined_group_name_0, "Open")}"" Span=""[19..23)"" Text=""Open"" />
+    <Diagnostic Message=""{string.Format(
+                    FeaturesResources.Reference_to_undefined_group_name_0,
+                    "Open"
+                )}"" Span=""[19..23)"" Text=""Open"" />
   </Diagnostics>
   <Captures>
     <Capture Name=""0"" Span=""[10..26)"" Text=""(?'Close-Open'&gt;)"" />

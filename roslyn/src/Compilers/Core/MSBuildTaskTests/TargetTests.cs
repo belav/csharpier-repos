@@ -776,7 +776,9 @@ namespace Microsoft.CodeAnalysis.BuildTasks.UnitTests
                     $@"
 <Project>
     <PropertyGroup>
-        <EmitCompilerGeneratedFiles>{(emitGeneratedFiles .ToString() .ToLower())}</EmitCompilerGeneratedFiles>
+        <EmitCompilerGeneratedFiles>{(
+                        emitGeneratedFiles.ToString().ToLower()
+                    )}</EmitCompilerGeneratedFiles>
         <CompilerGeneratedFilesOutputPath>{generatedFilesDir}</CompilerGeneratedFilesOutputPath>
         <IntermediateOutputPath>fallbackDirectory</IntermediateOutputPath>
     </PropertyGroup>

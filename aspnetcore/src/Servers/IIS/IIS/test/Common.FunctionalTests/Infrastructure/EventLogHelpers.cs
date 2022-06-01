@@ -341,11 +341,15 @@ public class EventLogHelpers
     {
         if (DeployerSelector.HasNewShim)
         {
-            return $@"Application '{Regex.Escape(deploymentResult.ContentRoot)}\\' failed to start. Exception message:\r\n{subError}";
+            return $@"Application '{Regex.Escape(
+                deploymentResult.ContentRoot
+            )}\\' failed to start. Exception message:\r\n{subError}";
         }
         else
         {
-            return $@"Application '{Regex.Escape(deploymentResult.ContentRoot)}\\' wasn't able to start. {subError}";
+            return $@"Application '{Regex.Escape(
+                deploymentResult.ContentRoot
+            )}\\' wasn't able to start. {subError}";
         }
     }
 

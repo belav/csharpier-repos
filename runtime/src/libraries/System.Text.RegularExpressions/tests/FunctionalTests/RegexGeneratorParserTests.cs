@@ -135,7 +135,9 @@ namespace System.Text.RegularExpressions.Tests
                 using System.Text.RegularExpressions;
                 partial class C
                 {{
-                    [RegexGenerator(""ab"", RegexOptions.None, {matchTimeout.ToString(CultureInfo.InvariantCulture)})]
+                    [RegexGenerator(""ab"", RegexOptions.None, {matchTimeout.ToString(
+                    CultureInfo.InvariantCulture
+                )})]
                     private static partial Regex InvalidPattern();
                 }}
             "

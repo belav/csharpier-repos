@@ -854,7 +854,9 @@ public sealed class XUnitWrapperGenerator : IIncrementalGenerator
                     const string argumentVariableIdentifier = "testArguments";
                     // The display name for the test is an interpolated string that includes the arguments.
                     string displayNameOverride =
-                        $@"$""{alias}::{method.ContainingType.ToDisplayString(FullyQualifiedWithoutGlobalNamespace)}.{method.Name}({{string.Join("","", {argumentVariableIdentifier})}})""";
+                        $@"$""{alias}::{method.ContainingType.ToDisplayString(
+                            FullyQualifiedWithoutGlobalNamespace
+                        )}.{method.Name}({{string.Join("","", {argumentVariableIdentifier})}})""";
                     var argsAsCode = method.Parameters
                         .Select(
                             (p, i) =>

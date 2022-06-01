@@ -37,7 +37,10 @@ namespace R2RTest
             if (inputAssemblyFileNames.Count() != 1)
             {
                 throw new Exception(
-                    $@"JIT builder doesn't support composite mode for building input assemblies: {string.Join("; ", inputAssemblyFileNames)}"
+                    $@"JIT builder doesn't support composite mode for building input assemblies: {string.Join(
+                        "; ",
+                        inputAssemblyFileNames
+                    )}"
                 );
             }
 

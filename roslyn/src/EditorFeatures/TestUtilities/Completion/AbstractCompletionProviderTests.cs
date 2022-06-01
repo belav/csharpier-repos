@@ -1324,7 +1324,9 @@ namespace Microsoft.CodeAnalysis.Editor.UnitTests.Completion
                     builder.Append(
                         $@"
 <Project Language=""{language}"" CommonReferences=""true"" AssemblyName=""ReferencedProject{i}"" IncludeXmlDocComments=""true"" DocumentationMode=""Diagnose"">
-  <Document FilePath=""ReferencedDocument{i}"">{SecurityElement.Escape(referencedTexts[i])}</Document>
+  <Document FilePath=""ReferencedDocument{i}"">{SecurityElement.Escape(
+                            referencedTexts[i]
+                        )}</Document>
 </Project>"
                     );
                 }

@@ -56,7 +56,10 @@ namespace R2RTest
             if (assemblyFileNames.Count() > 1)
             {
                 throw new NotImplementedException(
-                    $@"Crossgen1 doesn't support composite build mode for compiling multiple input assemblies: {string.Join("; ", assemblyFileNames)}"
+                    $@"Crossgen1 doesn't support composite build mode for compiling multiple input assemblies: {string.Join(
+                        "; ",
+                        assemblyFileNames
+                    )}"
                 );
             }
 

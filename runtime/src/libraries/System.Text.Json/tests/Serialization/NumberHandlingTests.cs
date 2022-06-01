@@ -356,7 +356,9 @@ namespace System.Text.Json.Serialization.Tests
             Guid? nullableGuid = Guid.NewGuid();
 
             string expected =
-                @$"{{""MyDateTime"":{JsonSerializer.Serialize(dateTime)},""MyNullableGuid"":{JsonSerializer.Serialize(nullableGuid)}}}";
+                @$"{{""MyDateTime"":{JsonSerializer.Serialize(
+                    dateTime
+                )},""MyNullableGuid"":{JsonSerializer.Serialize(nullableGuid)}}}";
 
             var obj = new Class_With_BoxedNonNumbers
             {
@@ -429,7 +431,9 @@ namespace System.Text.Json.Serialization.Tests
             Guid? nullableGuid = Guid.NewGuid();
 
             string expected =
-                @$"{{""MyDateTimes"":[{JsonSerializer.Serialize(dateTime)}],""MyNullableGuids"":[{JsonSerializer.Serialize(nullableGuid)}]}}";
+                @$"{{""MyDateTimes"":[{JsonSerializer.Serialize(
+                    dateTime
+                )}],""MyNullableGuids"":[{JsonSerializer.Serialize(nullableGuid)}]}}";
 
             var obj = new Class_With_ListsOfBoxedNonNumbers
             {
