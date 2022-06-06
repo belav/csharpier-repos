@@ -6,8 +6,7 @@ namespace System.Numerics
     /// <summary>Defines a mechanism for shifting a value by another value.</summary>
     /// <typeparam name="TSelf">The type that implements this interface.</typeparam>
     /// <typeparam name="TResult">The type that contains the result of shifting <typeparamref name="TSelf" /> by <typeparamref name="TResult" />.</typeparam>
-    public interface IShiftOperators<TSelf, TResult>
-        where TSelf : IShiftOperators<TSelf, TResult>
+    public interface IShiftOperators<TSelf, TResult> where TSelf : IShiftOperators<TSelf, TResult>
     {
         /// <summary>Shifts a value left by a given amount.</summary>
         /// <param name="value">The value which is shifted left by <paramref name="shiftAmount" />.</param>

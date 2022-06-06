@@ -24,12 +24,19 @@ namespace System.Drawing
             return sourceType == typeof(byte[]) || sourceType == typeof(Icon);
         }
 
-        public override bool CanConvertTo(ITypeDescriptorContext? context, [NotNullWhen(true)] Type? destinationType)
+        public override bool CanConvertTo(
+            ITypeDescriptorContext? context,
+            [NotNullWhen(true)] Type? destinationType
+        )
         {
             return destinationType == typeof(byte[]) || destinationType == typeof(string);
         }
 
-        public override object? ConvertFrom(ITypeDescriptorContext? context, CultureInfo? culture, object value)
+        public override object? ConvertFrom(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object value
+        )
         {
             if (value is Icon icon)
             {
@@ -49,7 +56,12 @@ namespace System.Drawing
             }
         }
 
-        public override object ConvertTo(ITypeDescriptorContext? context, CultureInfo? culture, object? value, Type destinationType)
+        public override object ConvertTo(
+            ITypeDescriptorContext? context,
+            CultureInfo? culture,
+            object? value,
+            Type destinationType
+        )
         {
             if (destinationType == typeof(string))
             {
@@ -103,8 +115,14 @@ namespace System.Drawing
             return null;
         }
 
-        [RequiresUnreferencedCode("The Type of value cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type.")]
-        public override PropertyDescriptorCollection GetProperties(ITypeDescriptorContext? context, object? value, Attribute[]? attributes)
+        [RequiresUnreferencedCode(
+            "The Type of value cannot be statically discovered. The public parameterless constructor or the 'Default' static field may be trimmed from the Attribute's Type."
+        )]
+        public override PropertyDescriptorCollection GetProperties(
+            ITypeDescriptorContext? context,
+            object? value,
+            Attribute[]? attributes
+        )
         {
             return TypeDescriptor.GetProperties(typeof(Image), attributes);
         }
@@ -145,8 +163,10 @@ namespace System.Drawing
 
                 // pHeader.signature will always be 0x1c15.
                 // "PBrush" should be the 6 chars after position 12 as well.
-                if (rawData.Length <= headersize + 18 ||
-                    !rawData.Slice(headersize + 12, 6).SequenceEqual(PBrush))
+                if (
+                    rawData.Length <= headersize + 18
+                    || !rawData.Slice(headersize + 12, 6).SequenceEqual(PBrush)
+                )
                 {
                     return null;
                 }
@@ -156,11 +176,9 @@ namespace System.Drawing
                 return new MemoryStream(rawData.Slice(78).ToArray());
             }
             catch (OutOfMemoryException) // This exception may be caused by creating a new MemoryStream.
-            {
-            }
+            { }
             catch (ArgumentOutOfRangeException) // This exception may get thrown by MemoryMarshal when input array size is less than the size of the output type.
-            {
-            }
+            { }
 
             return null;
         }

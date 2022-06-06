@@ -23,12 +23,30 @@ namespace System.Security.Cryptography
             ArgumentNullException.ThrowIfNull(format);
 
             int numBytesNeeded;
-            ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(_keyHandle, IntPtr.Zero, format.Format, IntPtr.Zero, null, 0, out numBytesNeeded, 0);
+            ErrorCode errorCode = Interop.NCrypt.NCryptExportKey(
+                _keyHandle,
+                IntPtr.Zero,
+                format.Format,
+                IntPtr.Zero,
+                null,
+                0,
+                out numBytesNeeded,
+                0
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
 
             byte[] buffer = new byte[numBytesNeeded];
-            errorCode = Interop.NCrypt.NCryptExportKey(_keyHandle, IntPtr.Zero, format.Format, IntPtr.Zero, buffer, buffer.Length, out numBytesNeeded, 0);
+            errorCode = Interop.NCrypt.NCryptExportKey(
+                _keyHandle,
+                IntPtr.Zero,
+                format.Format,
+                IntPtr.Zero,
+                buffer,
+                buffer.Length,
+                out numBytesNeeded,
+                0
+            );
             if (errorCode != ErrorCode.ERROR_SUCCESS)
                 throw errorCode.ToCryptographicException();
 
@@ -39,7 +57,8 @@ namespace System.Security.Cryptography
         internal bool TryExportKeyBlob(
             string blobType,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             // Sanity check the current bounds
             Span<byte> empty = default;
@@ -52,7 +71,8 @@ namespace System.Security.Cryptography
                 ref MemoryMarshal.GetReference(empty),
                 empty.Length,
                 out int written,
-                0);
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -73,7 +93,8 @@ namespace System.Security.Cryptography
                 ref MemoryMarshal.GetReference(destination),
                 destination.Length,
                 out written,
-                0);
+                0
+            );
 
             if (errorCode != ErrorCode.ERROR_SUCCESS)
             {
@@ -84,9 +105,7 @@ namespace System.Security.Cryptography
             return true;
         }
 
-        internal byte[] ExportPkcs8KeyBlob(
-            ReadOnlySpan<char> password,
-            int kdfCount)
+        internal byte[] ExportPkcs8KeyBlob(ReadOnlySpan<char> password, int kdfCount)
         {
             bool ret = ExportPkcs8KeyBlob(
                 allocate: true,
@@ -95,7 +114,8 @@ namespace System.Security.Cryptography
                 kdfCount,
                 Span<byte>.Empty,
                 out _,
-                out byte[]? allocated);
+                out byte[]? allocated
+            );
 
             Debug.Assert(ret);
             Debug.Assert(allocated != null); // since `allocate: true`
@@ -106,7 +126,8 @@ namespace System.Security.Cryptography
             ReadOnlySpan<char> password,
             int kdfCount,
             Span<byte> destination,
-            out int bytesWritten)
+            out int bytesWritten
+        )
         {
             return ExportPkcs8KeyBlob(
                 false,
@@ -115,7 +136,8 @@ namespace System.Security.Cryptography
                 kdfCount,
                 destination,
                 out bytesWritten,
-                out _);
+                out _
+            );
         }
 
         internal static unsafe bool ExportPkcs8KeyBlob(
@@ -125,17 +147,22 @@ namespace System.Security.Cryptography
             int kdfCount,
             Span<byte> destination,
             out int bytesWritten,
-            out byte[]? allocated)
+            out byte[]? allocated
+        )
         {
             using (SafeUnicodeStringHandle stringHandle = new SafeUnicodeStringHandle(password))
             {
                 ReadOnlySpan<byte> pkcs12TripleDesOidBytes = "1.2.840.113549.1.12.1.3\0"u8; // the Windows APIs for OID strings are ASCII-only
                 fixed (byte* oidPtr = &MemoryMarshal.GetReference(pkcs12TripleDesOidBytes))
                 {
-                    Interop.NCrypt.NCryptBuffer* buffers = stackalloc Interop.NCrypt.NCryptBuffer[3];
+                    Interop.NCrypt.NCryptBuffer* buffers =
+                        stackalloc Interop.NCrypt.NCryptBuffer[3];
 
                     Interop.NCrypt.PBE_PARAMS pbeParams = default;
-                    Span<byte> salt = new Span<byte>(pbeParams.rgbSalt, Interop.NCrypt.PBE_PARAMS.RgbSaltSize);
+                    Span<byte> salt = new Span<byte>(
+                        pbeParams.rgbSalt,
+                        Interop.NCrypt.PBE_PARAMS.RgbSaltSize
+                    );
                     RandomNumberGenerator.Fill(salt);
                     pbeParams.Params.cbSalt = salt.Length;
                     pbeParams.Params.iIterations = kdfCount;
@@ -183,7 +210,8 @@ namespace System.Security.Cryptography
                         ref MemoryMarshal.GetReference(empty),
                         0,
                         out int numBytesNeeded,
-                        0);
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {
@@ -211,7 +239,8 @@ namespace System.Security.Cryptography
                         ref MemoryMarshal.GetReference(destination),
                         destination.Length,
                         out numBytesNeeded,
-                        0);
+                        0
+                    );
 
                     if (errorCode != ErrorCode.ERROR_SUCCESS)
                     {

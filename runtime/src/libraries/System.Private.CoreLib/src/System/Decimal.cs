@@ -58,17 +58,19 @@ namespace System
     [StructLayout(LayoutKind.Sequential)]
     [Serializable]
     [NonVersionable] // This only applies to field layout
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly partial struct Decimal
         : ISpanFormattable,
-          IComparable,
-          IConvertible,
-          IComparable<decimal>,
-          IEquatable<decimal>,
-          ISerializable,
-          IDeserializationCallback,
-          IFloatingPoint<decimal>,
-          IMinMaxValue<decimal>
+            IComparable,
+            IConvertible,
+            IComparable<decimal>,
+            IEquatable<decimal>,
+            ISerializable,
+            IDeserializationCallback,
+            IFloatingPoint<decimal>,
+            IMinMaxValue<decimal>
     {
         // Sign mask for the flags field. A value of zero in this bit indicates a
         // positive Decimal value, and a value of one in this bit indicates a
@@ -239,7 +241,7 @@ namespace System
             // in which case, for compatibility with .Net, we reduce the Scale by the number of zeros. While the result is still numerically equivalent, the scale does
             // affect the ToString() value. In particular, it prevents a converted currency value of $12.95 from printing uglily as "12.9500".
             int scale = 4;
-            if (absoluteCy != 0)  // For compatibility, a currency of 0 emits the Decimal "0.0000" (scale set to 4).
+            if (absoluteCy != 0) // For compatibility, a currency of 0 emits the Decimal "0.0000" (scale set to 4).
             {
                 while (scale != 0 && ((absoluteCy % 10) == 0))
                 {
@@ -248,7 +250,13 @@ namespace System
                 }
             }
 
-            return new decimal((int)absoluteCy, (int)(absoluteCy >> 32), 0, isNegative, (byte)scale);
+            return new decimal(
+                (int)absoluteCy,
+                (int)(absoluteCy >> 32),
+                0,
+                isNegative,
+                (byte)scale
+            );
         }
 
         public static long ToOACurrency(decimal value)
@@ -256,7 +264,9 @@ namespace System
             return DecCalc.VarCyFromDec(ref AsMutable(ref value));
         }
 
-        private static bool IsValid(int flags) => (flags & ~(SignMask | ScaleMask)) == 0 && ((uint)(flags & ScaleMask) <= (28 << ScaleShift));
+        private static bool IsValid(int flags) =>
+            (flags & ~(SignMask | ScaleMask)) == 0
+            && ((uint)(flags & ScaleMask) <= (28 << ScaleShift));
 
         // Constructs a Decimal from an integer array containing a binary
         // representation. The bits argument must be a non-null integer
@@ -277,10 +287,8 @@ namespace System
         // The possible binary representations of a particular value are all
         // equally valid, and all are numerically equivalent.
         //
-        public Decimal(int[] bits) :
-            this((ReadOnlySpan<int>)(bits ?? throw new ArgumentNullException(nameof(bits))))
-        {
-        }
+        public Decimal(int[] bits)
+            : this((ReadOnlySpan<int>)(bits ?? throw new ArgumentNullException(nameof(bits)))) { }
 
         /// <summary>
         /// Initializes a new instance of <see cref="decimal"/> to a decimal value represented in binary and contained in the specified span.
@@ -308,7 +316,10 @@ namespace System
         public Decimal(int lo, int mid, int hi, bool isNegative, byte scale)
         {
             if (scale > 28)
-                throw new ArgumentOutOfRangeException(nameof(scale), SR.ArgumentOutOfRange_DecimalScale);
+                throw new ArgumentOutOfRangeException(
+                    nameof(scale),
+                    SR.ArgumentOutOfRange_DecimalScale
+                );
             _lo64 = (uint)lo + ((ulong)(uint)mid << 32);
             _hi32 = (uint)hi;
             _flags = ((int)scale) << 16;
@@ -398,7 +409,11 @@ namespace System
         {
             int flags = d._flags;
             if ((flags & ScaleMask) != 0)
-                DecCalc.InternalRound(ref AsMutable(ref d), (byte)(flags >> ScaleShift), MidpointRounding.ToPositiveInfinity);
+                DecCalc.InternalRound(
+                    ref AsMutable(ref d),
+                    (byte)(flags >> ScaleShift),
+                    MidpointRounding.ToPositiveInfinity
+                );
             return d;
         }
 
@@ -445,11 +460,9 @@ namespace System
         // value of this Decimal. Returns false otherwise.
         //
         public override bool Equals([NotNullWhen(true)] object? value) =>
-            value is decimal other &&
-            DecCalc.VarDecCmp(in this, in other) == 0;
+            value is decimal other && DecCalc.VarDecCmp(in this, in other) == 0;
 
-        public bool Equals(decimal value) =>
-            DecCalc.VarDecCmp(in this, in value) == 0;
+        public bool Equals(decimal value) => DecCalc.VarDecCmp(in this, in value) == 0;
 
         // Returns the hash code for this Decimal.
         //
@@ -470,7 +483,11 @@ namespace System
         {
             int flags = d._flags;
             if ((flags & ScaleMask) != 0)
-                DecCalc.InternalRound(ref AsMutable(ref d), (byte)(flags >> ScaleShift), MidpointRounding.ToNegativeInfinity);
+                DecCalc.InternalRound(
+                    ref AsMutable(ref d),
+                    (byte)(flags >> ScaleShift),
+                    MidpointRounding.ToNegativeInfinity
+                );
             return d;
         }
 
@@ -494,14 +511,28 @@ namespace System
             return Number.FormatDecimal(this, null, NumberFormatInfo.GetInstance(provider));
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatDecimal(this, format, NumberFormatInfo.GetInstance(provider));
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
-            return Number.TryFormatDecimal(this, format, NumberFormatInfo.GetInstance(provider), destination, out charsWritten);
+            return Number.TryFormatDecimal(
+                this,
+                format,
+                NumberFormatInfo.GetInstance(provider),
+                destination,
+                out charsWritten
+            );
         }
 
         // Converts a string to a Decimal. The string must consist of an optional
@@ -513,31 +544,43 @@ namespace System
         //
         public static decimal Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseDecimal(s, NumberStyles.Number, NumberFormatInfo.CurrentInfo);
         }
 
         public static decimal Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseDecimal(s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static decimal Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseDecimal(s, NumberStyles.Number, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseDecimal(
+                s,
+                NumberStyles.Number,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static decimal Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseDecimal(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static decimal Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Number, IFormatProvider? provider = null)
+        public static decimal Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Number,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseDecimal(s, style, NumberFormatInfo.GetInstance(provider));
@@ -551,15 +594,30 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseDecimal(s, NumberStyles.Number, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseDecimal(
+                    s,
+                    NumberStyles.Number,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out decimal result)
         {
-            return Number.TryParseDecimal(s, NumberStyles.Number, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseDecimal(
+                    s,
+                    NumberStyles.Number,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out decimal result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out decimal result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
@@ -569,13 +627,28 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseDecimal(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseDecimal(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out decimal result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out decimal result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            return Number.TryParseDecimal(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseDecimal(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         // Returns a binary representation of a Decimal. The return value is an
@@ -688,16 +761,27 @@ namespace System
         // passed in, it can also round away from zero.
 
         public static decimal Round(decimal d) => Round(ref d, 0, MidpointRounding.ToEven);
-        public static decimal Round(decimal d, int decimals) => Round(ref d, decimals, MidpointRounding.ToEven);
+
+        public static decimal Round(decimal d, int decimals) =>
+            Round(ref d, decimals, MidpointRounding.ToEven);
+
         public static decimal Round(decimal d, MidpointRounding mode) => Round(ref d, 0, mode);
-        public static decimal Round(decimal d, int decimals, MidpointRounding mode) => Round(ref d, decimals, mode);
+
+        public static decimal Round(decimal d, int decimals, MidpointRounding mode) =>
+            Round(ref d, decimals, mode);
 
         private static decimal Round(ref decimal d, int decimals, MidpointRounding mode)
         {
             if ((uint)decimals > 28)
-                throw new ArgumentOutOfRangeException(nameof(decimals), SR.ArgumentOutOfRange_DecimalRound);
+                throw new ArgumentOutOfRangeException(
+                    nameof(decimals),
+                    SR.ArgumentOutOfRange_DecimalRound
+                );
             if ((uint)mode > (uint)MidpointRounding.ToPositiveInfinity)
-                throw new ArgumentException(SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)), nameof(mode));
+                throw new ArgumentException(
+                    SR.Format(SR.Argument_InvalidEnumValue, mode, nameof(MidpointRounding)),
+                    nameof(mode)
+                );
 
             int scale = d.Scale - decimals;
             if (scale > 0)
@@ -729,7 +813,8 @@ namespace System
                 Number.ThrowOverflowException(TypeCode.Byte);
                 throw;
             }
-            if (temp != (byte)temp) Number.ThrowOverflowException(TypeCode.Byte);
+            if (temp != (byte)temp)
+                Number.ThrowOverflowException(TypeCode.Byte);
             return (byte)temp;
         }
 
@@ -750,7 +835,8 @@ namespace System
                 Number.ThrowOverflowException(TypeCode.SByte);
                 throw;
             }
-            if (temp != (sbyte)temp) Number.ThrowOverflowException(TypeCode.SByte);
+            if (temp != (sbyte)temp)
+                Number.ThrowOverflowException(TypeCode.SByte);
             return (sbyte)temp;
         }
 
@@ -770,7 +856,8 @@ namespace System
                 Number.ThrowOverflowException(TypeCode.Int16);
                 throw;
             }
-            if (temp != (short)temp) Number.ThrowOverflowException(TypeCode.Int16);
+            if (temp != (short)temp)
+                Number.ThrowOverflowException(TypeCode.Int16);
             return (short)temp;
         }
 
@@ -794,12 +881,14 @@ namespace System
                 int i = (int)d.Low;
                 if (!IsNegative(d))
                 {
-                    if (i >= 0) return i;
+                    if (i >= 0)
+                        return i;
                 }
                 else
                 {
                     i = -i;
-                    if (i <= 0) return i;
+                    if (i <= 0)
+                        return i;
                 }
             }
             throw new OverflowException(SR.Overflow_Int32);
@@ -817,12 +906,14 @@ namespace System
                 long l = (long)d.Low64;
                 if (!IsNegative(d))
                 {
-                    if (l >= 0) return l;
+                    if (l >= 0)
+                        return l;
                 }
                 else
                 {
                     l = -l;
-                    if (l <= 0) return l;
+                    if (l <= 0)
+                        return l;
                 }
             }
             throw new OverflowException(SR.Overflow_Int64);
@@ -845,7 +936,8 @@ namespace System
                 Number.ThrowOverflowException(TypeCode.UInt16);
                 throw;
             }
-            if (temp != (ushort)temp) Number.ThrowOverflowException(TypeCode.UInt16);
+            if (temp != (ushort)temp)
+                Number.ThrowOverflowException(TypeCode.UInt16);
             return (ushort)temp;
         }
 
@@ -857,7 +949,7 @@ namespace System
         public static uint ToUInt32(decimal d)
         {
             Truncate(ref d);
-            if ((d.High| d.Mid) == 0)
+            if ((d.High | d.Mid) == 0)
             {
                 uint i = d.Low;
                 if (!IsNegative(d) || i == 0)
@@ -906,7 +998,11 @@ namespace System
         {
             int flags = d._flags;
             if ((flags & ScaleMask) != 0)
-                DecCalc.InternalRound(ref AsMutable(ref d), (byte)(flags >> ScaleShift), MidpointRounding.ToZero);
+                DecCalc.InternalRound(
+                    ref AsMutable(ref d),
+                    (byte)(flags >> ScaleShift),
+                    MidpointRounding.ToZero
+                );
         }
 
         public static implicit operator decimal(byte value) => new decimal((uint)value);
@@ -1017,22 +1113,28 @@ namespace System
         }
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Equality(TSelf, TOther)" />
-        public static bool operator ==(decimal d1, decimal d2) => DecCalc.VarDecCmp(in d1, in d2) == 0;
+        public static bool operator ==(decimal d1, decimal d2) =>
+            DecCalc.VarDecCmp(in d1, in d2) == 0;
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Inequality(TSelf, TOther)" />
-        public static bool operator !=(decimal d1, decimal d2) => DecCalc.VarDecCmp(in d1, in d2) != 0;
+        public static bool operator !=(decimal d1, decimal d2) =>
+            DecCalc.VarDecCmp(in d1, in d2) != 0;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        public static bool operator <(decimal d1, decimal d2) => DecCalc.VarDecCmp(in d1, in d2) < 0;
+        public static bool operator <(decimal d1, decimal d2) =>
+            DecCalc.VarDecCmp(in d1, in d2) < 0;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        public static bool operator <=(decimal d1, decimal d2) => DecCalc.VarDecCmp(in d1, in d2) <= 0;
+        public static bool operator <=(decimal d1, decimal d2) =>
+            DecCalc.VarDecCmp(in d1, in d2) <= 0;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        public static bool operator >(decimal d1, decimal d2) => DecCalc.VarDecCmp(in d1, in d2) > 0;
+        public static bool operator >(decimal d1, decimal d2) =>
+            DecCalc.VarDecCmp(in d1, in d2) > 0;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        public static bool operator >=(decimal d1, decimal d2) => DecCalc.VarDecCmp(in d1, in d2) >= 0;
+        public static bool operator >=(decimal d1, decimal d2) =>
+            DecCalc.VarDecCmp(in d1, in d2) >= 0;
 
         //
         // IConvertible implementation
@@ -1123,7 +1225,7 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static decimal IAdditionOperators<decimal, decimal, decimal>.operator checked +(decimal left, decimal right) => left + right;
+        static decimal operator +(decimal left, decimal right) => left + right;
 
         //
         // IAdditiveIdentity
@@ -1137,14 +1239,14 @@ namespace System
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_CheckedDecrement(TSelf)" />
-        static decimal IDecrementOperators<decimal>.operator checked --(decimal value) => --value;
+        static decimal operator --(decimal value) => --value;
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static decimal IDivisionOperators<decimal, decimal, decimal>.operator checked /(decimal left, decimal right) => left / right;
+        static decimal operator /(decimal left, decimal right) => left / right;
 
         //
         // IFloatingPoint
@@ -1167,7 +1269,10 @@ namespace System
         int IFloatingPoint<decimal>.GetSignificandBitLength() => 96;
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteExponentBigEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<decimal>.TryWriteExponentBigEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<decimal>.TryWriteExponentBigEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(sbyte))
             {
@@ -1185,7 +1290,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteExponentLittleEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<decimal>.TryWriteExponentLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<decimal>.TryWriteExponentLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(sbyte))
             {
@@ -1203,7 +1311,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteSignificandBigEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<decimal>.TryWriteSignificandBigEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<decimal>.TryWriteSignificandBigEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= (sizeof(uint) + sizeof(ulong)))
             {
@@ -1232,7 +1343,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteSignificandLittleEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<decimal>.TryWriteSignificandLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<decimal>.TryWriteSignificandLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= (sizeof(ulong) + sizeof(uint)))
             {
@@ -1265,7 +1379,7 @@ namespace System
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static decimal IIncrementOperators<decimal>.operator checked ++(decimal value) => ++value;
+        static decimal operator ++(decimal value) => ++value;
 
         //
         // IMinMaxValue
@@ -1282,21 +1396,23 @@ namespace System
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static decimal IMultiplicativeIdentity<decimal, decimal>.MultiplicativeIdentity => MultiplicativeIdentity;
+        static decimal IMultiplicativeIdentity<decimal, decimal>.MultiplicativeIdentity =>
+            MultiplicativeIdentity;
 
         //
         // IMultiplyOperators
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        public static decimal operator checked *(decimal left, decimal right) => left * right;
+        public static decimal operator *(decimal left, decimal right) => left * right;
 
         //
         // INumber
         //
 
         /// <inheritdoc cref="INumber{TSelf}.Clamp(TSelf, TSelf, TSelf)" />
-        public static decimal Clamp(decimal value, decimal min, decimal max) => Math.Clamp(value, min, max);
+        public static decimal Clamp(decimal value, decimal min, decimal max) =>
+            Math.Clamp(value, min, max);
 
         /// <inheritdoc cref="INumber{TSelf}.CopySign(TSelf, TSelf)" />
         public static decimal CopySign(decimal value, decimal sign)
@@ -1443,7 +1559,8 @@ namespace System
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.MaxMagnitudeNumber(TSelf, TSelf)" />
-        static decimal INumberBase<decimal>.MaxMagnitudeNumber(decimal x, decimal y) => MaxMagnitude(x, y);
+        static decimal INumberBase<decimal>.MaxMagnitudeNumber(decimal x, decimal y) =>
+            MaxMagnitude(x, y);
 
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitude(TSelf, TSelf)" />
         public static decimal MinMagnitude(decimal x, decimal y)
@@ -1465,11 +1582,15 @@ namespace System
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitudeNumber(TSelf, TSelf)" />
-        static decimal INumberBase<decimal>.MinMagnitudeNumber(decimal x, decimal y) => MinMagnitude(x, y);
+        static decimal INumberBase<decimal>.MinMagnitudeNumber(decimal x, decimal y) =>
+            MinMagnitude(x, y);
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromChecked{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<decimal>.TryConvertFromChecked<TOther>(TOther value, out decimal result)
+        static bool INumberBase<decimal>.TryConvertFromChecked<TOther>(
+            TOther value,
+            out decimal result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1531,14 +1652,20 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<decimal>.TryConvertFromSaturating<TOther>(TOther value, out decimal result)
+        static bool INumberBase<decimal>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out decimal result
+        )
         {
             return TryConvertFrom<TOther>(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<decimal>.TryConvertFromTruncating<TOther>(TOther value, out decimal result)
+        static bool INumberBase<decimal>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out decimal result
+        )
         {
             return TryConvertFrom<TOther>(value, out result);
         }
@@ -1588,7 +1715,10 @@ namespace System
             else if (typeof(TOther) == typeof(UInt128))
             {
                 UInt128 actualValue = (UInt128)(object)value;
-                result = (actualValue >= new UInt128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF)) ? MaxValue : (decimal)actualValue;
+                result =
+                    (actualValue >= new UInt128(0x0000_0000_FFFF_FFFF, 0xFFFF_FFFF_FFFF_FFFF))
+                        ? MaxValue
+                        : (decimal)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(nuint))
@@ -1606,7 +1736,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<decimal>.TryConvertToChecked<TOther>(decimal value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<decimal>.TryConvertToChecked<TOther>(
+            decimal value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1680,20 +1813,28 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<decimal>.TryConvertToSaturating<TOther>(decimal value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<decimal>.TryConvertToSaturating<TOther>(
+            decimal value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             return TryConvertTo<TOther>(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<decimal>.TryConvertToTruncating<TOther>(decimal value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<decimal>.TryConvertToTruncating<TOther>(
+            decimal value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             return TryConvertTo<TOther>(value, out result);
         }
 
-        private static bool TryConvertTo<TOther>(decimal value, [NotNullWhen(true)] out TOther result)
-            where TOther : INumberBase<TOther>
+        private static bool TryConvertTo<TOther>(
+            decimal value,
+            [NotNullWhen(true)] out TOther result
+        ) where TOther : INumberBase<TOther>
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1718,22 +1859,34 @@ namespace System
             }
             else if (typeof(TOther) == typeof(short))
             {
-                short actualResult = (value >= short.MaxValue) ? short.MaxValue :
-                                     (value <= short.MinValue) ? short.MinValue : (short)value;
+                short actualResult =
+                    (value >= short.MaxValue)
+                        ? short.MaxValue
+                        : (value <= short.MinValue)
+                            ? short.MinValue
+                            : (short)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(int))
             {
-                int actualResult = (value >= int.MaxValue) ? int.MaxValue :
-                                   (value <= int.MinValue) ? int.MinValue : (int)value;
+                int actualResult =
+                    (value >= int.MaxValue)
+                        ? int.MaxValue
+                        : (value <= int.MinValue)
+                            ? int.MinValue
+                            : (int)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(long))
             {
-                long actualResult = (value >= long.MaxValue) ? long.MaxValue :
-                                    (value <= long.MinValue) ? long.MinValue : (long)value;
+                long actualResult =
+                    (value >= long.MaxValue)
+                        ? long.MaxValue
+                        : (value <= long.MinValue)
+                            ? long.MinValue
+                            : (long)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1745,15 +1898,23 @@ namespace System
             }
             else if (typeof(TOther) == typeof(nint))
             {
-                nint actualResult = (value >= nint.MaxValue) ? nint.MaxValue :
-                                    (value <= nint.MinValue) ? nint.MinValue : (nint)value;
+                nint actualResult =
+                    (value >= nint.MaxValue)
+                        ? nint.MaxValue
+                        : (value <= nint.MinValue)
+                            ? nint.MinValue
+                            : (nint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(sbyte))
             {
-                sbyte actualResult = (value >= sbyte.MaxValue) ? sbyte.MaxValue :
-                                     (value <= sbyte.MinValue) ? sbyte.MinValue : (sbyte)value;
+                sbyte actualResult =
+                    (value >= sbyte.MaxValue)
+                        ? sbyte.MaxValue
+                        : (value <= sbyte.MinValue)
+                            ? sbyte.MinValue
+                            : (sbyte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1774,7 +1935,11 @@ namespace System
         // IParsable
         //
 
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out decimal result) => TryParse(s, NumberStyles.Number, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out decimal result
+        ) => TryParse(s, NumberStyles.Number, provider, out result);
 
         //
         // ISignedNumber
@@ -1788,23 +1953,28 @@ namespace System
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static decimal Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Number, provider);
+        public static decimal Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Number, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out decimal result) => TryParse(s, NumberStyles.Number, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out decimal result
+        ) => TryParse(s, NumberStyles.Number, provider, out result);
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static decimal ISubtractionOperators<decimal, decimal, decimal>.operator checked -(decimal left, decimal right) => left - right;
+        static decimal operator -(decimal left, decimal right) => left - right;
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static decimal IUnaryNegationOperators<decimal, decimal>.operator checked -(decimal value) => -value;
+        static decimal operator -(decimal value) => -value;
     }
 }

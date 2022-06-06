@@ -12,16 +12,18 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Byte
         : IComparable,
-          IConvertible,
-          ISpanFormattable,
-          IComparable<byte>,
-          IEquatable<byte>,
-          IBinaryInteger<byte>,
-          IMinMaxValue<byte>,
-          IUnsignedNumber<byte>
+            IConvertible,
+            ISpanFormattable,
+            IComparable<byte>,
+            IEquatable<byte>,
+            IBinaryInteger<byte>,
+            IMinMaxValue<byte>,
+            IUnsignedNumber<byte>
     {
         private readonly byte m_value; // Do not rename (binary serialization)
 
@@ -92,21 +94,28 @@ namespace System
 
         public static byte Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse((ReadOnlySpan<char>)s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static byte Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse((ReadOnlySpan<char>)s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static byte Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Parse((ReadOnlySpan<char>)s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Parse(
+                (ReadOnlySpan<char>)s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         // Parses an unsigned byte from a String in the given style.  If
@@ -115,11 +124,16 @@ namespace System
         public static byte Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Parse((ReadOnlySpan<char>)s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static byte Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static byte Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Parse(s, style, NumberFormatInfo.GetInstance(provider));
@@ -133,7 +147,8 @@ namespace System
                 Number.ThrowOverflowOrFormatException(status, TypeCode.Byte);
             }
 
-            if (i > MaxValue) Number.ThrowOverflowException(TypeCode.Byte);
+            if (i > MaxValue)
+                Number.ThrowOverflowException(TypeCode.Byte);
             return (byte)i;
         }
 
@@ -145,7 +160,12 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                NumberStyles.Integer,
+                NumberFormatInfo.CurrentInfo,
+                out result
+            );
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out byte result)
@@ -153,7 +173,12 @@ namespace System
             return TryParse(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result);
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out byte result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out byte result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
@@ -163,19 +188,36 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, style, NumberFormatInfo.GetInstance(provider), out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                style,
+                NumberFormatInfo.GetInstance(provider),
+                out result
+            );
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out byte result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out byte result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
 
-        private static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, NumberFormatInfo info, out byte result)
+        private static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            NumberFormatInfo info,
+            out byte result
+        )
         {
-            if (Number.TryParseUInt32(s, style, info, out uint i) != Number.ParsingStatus.OK
-                || i > MaxValue)
+            if (
+                Number.TryParseUInt32(s, style, info, out uint i) != Number.ParsingStatus.OK
+                || i > MaxValue
+            )
             {
                 result = 0;
                 return false;
@@ -199,12 +241,20 @@ namespace System
             return Number.UInt32ToDecStr(m_value);
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatUInt32(m_value, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
             return Number.TryFormatUInt32(m_value, format, provider, destination, out charsWritten);
         }
@@ -298,10 +348,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static byte IAdditionOperators<byte, byte, byte>.operator +(byte left, byte right) => (byte)(left + right);
+        static byte operator +(byte left, byte right) => (byte)(left + right);
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_CheckedAddition(TSelf, TOther)" />
-        static byte IAdditionOperators<byte, byte, byte>.operator checked +(byte left, byte right) => checked((byte)(left + right));
+        static byte operator checked +(byte left, byte right) => checked((byte)(left + right));
 
         //
         // IAdditiveIdentity
@@ -315,25 +365,31 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />
-        public static (byte Quotient, byte Remainder) DivRem(byte left, byte right) => Math.DivRem(left, right);
+        public static (byte Quotient, byte Remainder) DivRem(byte left, byte right) =>
+            Math.DivRem(left, right);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.LeadingZeroCount(TSelf)" />
-        public static byte LeadingZeroCount(byte value) => (byte)(BitOperations.LeadingZeroCount(value) - 24);
+        public static byte LeadingZeroCount(byte value) =>
+            (byte)(BitOperations.LeadingZeroCount(value) - 24);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
         public static byte PopCount(byte value) => (byte)BitOperations.PopCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        public static byte RotateLeft(byte value, int rotateAmount) => (byte)((value << (rotateAmount & 7)) | (value >> ((8 - rotateAmount) & 7)));
+        public static byte RotateLeft(byte value, int rotateAmount) =>
+            (byte)((value << (rotateAmount & 7)) | (value >> ((8 - rotateAmount) & 7)));
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        public static byte RotateRight(byte value, int rotateAmount) => (byte)((value >> (rotateAmount & 7)) | (value << ((8 - rotateAmount) & 7)));
+        public static byte RotateRight(byte value, int rotateAmount) =>
+            (byte)((value >> (rotateAmount & 7)) | (value << ((8 - rotateAmount) & 7)));
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
-        public static byte TrailingZeroCount(byte value) => (byte)(BitOperations.TrailingZeroCount(value << 24) - 24);
+        public static byte TrailingZeroCount(byte value) =>
+            (byte)(BitOperations.TrailingZeroCount(value << 24) - 24);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetShortestBitLength()" />
-        int IBinaryInteger<byte>.GetShortestBitLength() => (sizeof(byte) * 8) - LeadingZeroCount(m_value);
+        int IBinaryInteger<byte>.GetShortestBitLength() =>
+            (sizeof(byte) * 8) - LeadingZeroCount(m_value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetByteCount()" />
         int IBinaryInteger<byte>.GetByteCount() => sizeof(byte);
@@ -389,72 +445,72 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static byte IBitwiseOperators<byte, byte, byte>.operator &(byte left, byte right) => (byte)(left & right);
+        static byte operator &(byte left, byte right) => (byte)(left & right);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static byte IBitwiseOperators<byte, byte, byte>.operator |(byte left, byte right) => (byte)(left | right);
+        static byte operator |(byte left, byte right) => (byte)(left | right);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static byte IBitwiseOperators<byte, byte, byte>.operator ^(byte left, byte right) => (byte)(left ^ right);
+        static byte operator ^(byte left, byte right) => (byte)(left ^ right);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static byte IBitwiseOperators<byte, byte, byte>.operator ~(byte value) => (byte)(~value);
+        static byte operator ~(byte value) => (byte)(~value);
 
         //
         // IComparisonOperators
         //
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        static bool IComparisonOperators<byte, byte>.operator <(byte left, byte right) => left < right;
+        static bool operator <(byte left, byte right) => left < right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<byte, byte>.operator <=(byte left, byte right) => left <= right;
+        static bool operator <=(byte left, byte right) => left <= right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        static bool IComparisonOperators<byte, byte>.operator >(byte left, byte right) => left > right;
+        static bool operator >(byte left, byte right) => left > right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<byte, byte>.operator >=(byte left, byte right) => left >= right;
+        static bool operator >=(byte left, byte right) => left >= right;
 
         //
         // IDecrementOperators
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static byte IDecrementOperators<byte>.operator --(byte value) => --value;
+        static byte operator --(byte value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_CheckedDecrement(TSelf)" />
-        static byte IDecrementOperators<byte>.operator checked --(byte value) => checked(--value);
+        static byte operator checked --(byte value) => checked(--value);
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static byte IDivisionOperators<byte, byte, byte>.operator /(byte left, byte right) => (byte)(left / right);
+        static byte operator /(byte left, byte right) => (byte)(left / right);
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static byte IDivisionOperators<byte, byte, byte>.operator checked /(byte left, byte right) => (byte)(left / right);
+        static byte operator checked /(byte left, byte right) => (byte)(left / right);
 
         //
         // IEqualityOperators
         //
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Equality(TSelf, TOther)" />
-        static bool IEqualityOperators<byte, byte>.operator ==(byte left, byte right) => left == right;
+        static bool operator ==(byte left, byte right) => left == right;
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Inequality(TSelf, TOther)" />
-        static bool IEqualityOperators<byte, byte>.operator !=(byte left, byte right) => left != right;
+        static bool operator !=(byte left, byte right) => left != right;
 
         //
         // IIncrementOperators
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static byte IIncrementOperators<byte>.operator ++(byte value) => ++value;
+        static byte operator ++(byte value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static byte IIncrementOperators<byte>.operator checked ++(byte value) => checked(++value);
+        static byte operator checked ++(byte value) => checked(++value);
 
         //
         // IMinMaxValue
@@ -471,24 +527,25 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static byte IModulusOperators<byte, byte, byte>.operator %(byte left, byte right) => (byte)(left % right);
+        static byte operator %(byte left, byte right) => (byte)(left % right);
 
         //
         // IMultiplicativeIdentity
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static byte IMultiplicativeIdentity<byte, byte>.MultiplicativeIdentity => MultiplicativeIdentity;
+        static byte IMultiplicativeIdentity<byte, byte>.MultiplicativeIdentity =>
+            MultiplicativeIdentity;
 
         //
         // IMultiplyOperators
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static byte IMultiplyOperators<byte, byte, byte>.operator *(byte left, byte right) => (byte)(left * right);
+        static byte operator *(byte left, byte right) => (byte)(left * right);
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static byte IMultiplyOperators<byte, byte, byte>.operator checked *(byte left, byte right) => checked((byte)(left * right));
+        static byte operator checked *(byte left, byte right) => checked((byte)(left * right));
 
         //
         // INumber
@@ -658,7 +715,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<byte>.TryConvertFromSaturating<TOther>(TOther value, out byte result)
+        static bool INumberBase<byte>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out byte result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -678,8 +738,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (byte)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (byte)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -721,7 +785,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<byte>.TryConvertFromTruncating<TOther>(TOther value, out byte result)
+        static bool INumberBase<byte>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out byte result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -741,8 +808,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (byte)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (byte)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -784,7 +855,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<byte>.TryConvertToChecked<TOther>(byte value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<byte>.TryConvertToChecked<TOther>(
+            byte value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -858,7 +932,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<byte>.TryConvertToSaturating<TOther>(byte value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<byte>.TryConvertToSaturating<TOther>(
+            byte value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -932,7 +1009,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<byte>.TryConvertToTruncating<TOther>(byte value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<byte>.TryConvertToTruncating<TOther>(
+            byte value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1009,56 +1089,65 @@ namespace System
         //
 
         /// <inheritdoc cref="IParsable{TSelf}.TryParse(string?, IFormatProvider?, out TSelf)" />
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out byte result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out byte result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // IShiftOperators
         //
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_LeftShift(TSelf, int)" />
-        static byte IShiftOperators<byte, byte>.operator <<(byte value, int shiftAmount) => (byte)(value << shiftAmount);
+        static byte operator <<(byte value, int shiftAmount) => (byte)(value << shiftAmount);
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_RightShift(TSelf, int)" />
-        static byte IShiftOperators<byte, byte>.operator >>(byte value, int shiftAmount) => (byte)(value >> shiftAmount);
+        static byte operator >>(byte value, int shiftAmount) => (byte)(value >> shiftAmount);
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_UnsignedRightShift(TSelf, int)" />
-        static byte IShiftOperators<byte, byte>.operator >>>(byte value, int shiftAmount) => (byte)(value >>> shiftAmount);
+        static byte operator >>>(byte value, int shiftAmount) => (byte)(value >>> shiftAmount);
 
         //
         // ISpanParsable
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static byte Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+        public static byte Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Integer, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out byte result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out byte result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static byte ISubtractionOperators<byte, byte, byte>.operator -(byte left, byte right) => (byte)(left - right);
+        static byte operator -(byte left, byte right) => (byte)(left - right);
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static byte ISubtractionOperators<byte, byte, byte>.operator checked -(byte left, byte right) => checked((byte)(left - right));
+        static byte operator checked -(byte left, byte right) => checked((byte)(left - right));
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static byte IUnaryNegationOperators<byte, byte>.operator -(byte value) => (byte)(-value);
+        static byte operator -(byte value) => (byte)(-value);
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static byte IUnaryNegationOperators<byte, byte>.operator checked -(byte value) => checked((byte)(-value));
+        static byte operator checked -(byte value) => checked((byte)(-value));
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static byte IUnaryPlusOperators<byte, byte>.operator +(byte value) => (byte)(+value);
+        static byte operator +(byte value) => (byte)(+value);
     }
 }

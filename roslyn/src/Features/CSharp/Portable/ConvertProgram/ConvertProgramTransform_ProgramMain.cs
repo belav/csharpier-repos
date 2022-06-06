@@ -171,7 +171,11 @@ namespace Microsoft.CodeAnalysis.CSharp.ConvertProgram
                     triviaToMove = statement.GetLeadingTrivia();
                     while (
                         triviaToMove
-                            is [.., { RawKind: (int)SyntaxKind.SingleLineCommentTrivia }, { RawKind: (int)SyntaxKind.EndOfLineTrivia }]
+                            is [
+                                ..,
+                                { RawKind: (int)SyntaxKind.SingleLineCommentTrivia },
+                                { RawKind: (int)SyntaxKind.EndOfLineTrivia }
+                            ]
                     )
                         triviaToMove = TriviaList(triviaToMove.Take(triviaToMove.Count - 2));
 

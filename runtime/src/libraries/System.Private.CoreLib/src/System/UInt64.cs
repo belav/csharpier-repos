@@ -14,16 +14,18 @@ namespace System
     [Serializable]
     [CLSCompliant(false)]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct UInt64
         : IComparable,
-          IConvertible,
-          ISpanFormattable,
-          IComparable<ulong>,
-          IEquatable<ulong>,
-          IBinaryInteger<ulong>,
-          IMinMaxValue<ulong>,
-          IUnsignedNumber<ulong>
+            IConvertible,
+            ISpanFormattable,
+            IComparable<ulong>,
+            IEquatable<ulong>,
+            IBinaryInteger<ulong>,
+            IMinMaxValue<ulong>,
+            IUnsignedNumber<ulong>
     {
         private readonly ulong m_value; // Do not rename (binary serialization)
 
@@ -59,8 +61,10 @@ namespace System
             // to positive for very large neg numbers, etc.
             if (value is ulong i)
             {
-                if (m_value < i) return -1;
-                if (m_value > i) return 1;
+                if (m_value < i)
+                    return -1;
+                if (m_value > i)
+                    return 1;
                 return 0;
             }
 
@@ -71,8 +75,10 @@ namespace System
         {
             // Need to use compare because subtraction will wrap
             // to positive for very large neg numbers, etc.
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
             return 0;
         }
 
@@ -112,43 +118,63 @@ namespace System
             return Number.FormatUInt64(m_value, format, null);
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatUInt64(m_value, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
             return Number.TryFormatUInt64(m_value, format, provider, destination, out charsWritten);
         }
 
         public static ulong Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseUInt64(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static ulong Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseUInt64(s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static ulong Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseUInt64(s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseUInt64(
+                s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static ulong Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseUInt64(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static ulong Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static ulong Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseUInt64(s, style, NumberFormatInfo.GetInstance(provider));
@@ -162,15 +188,30 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseUInt64IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out ulong result)
         {
-            return Number.TryParseUInt64IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out ulong result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out ulong result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
@@ -180,13 +221,28 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseUInt64(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out ulong result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out ulong result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            return Number.TryParseUInt64(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseUInt64(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         //
@@ -278,10 +334,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static ulong IAdditionOperators<ulong, ulong, ulong>.operator +(ulong left, ulong right) => left + right;
+        static ulong operator +(ulong left, ulong right) => left + right;
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static ulong IAdditionOperators<ulong, ulong, ulong>.operator checked +(ulong left, ulong right) => checked(left + right);
+        static ulong operator checked +(ulong left, ulong right) => checked(left + right);
 
         //
         // IAdditiveIdentity
@@ -295,25 +351,31 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />
-        public static (ulong Quotient, ulong Remainder) DivRem(ulong left, ulong right) => Math.DivRem(left, right);
+        public static (ulong Quotient, ulong Remainder) DivRem(ulong left, ulong right) =>
+            Math.DivRem(left, right);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.LeadingZeroCount(TSelf)" />
-        public static ulong LeadingZeroCount(ulong value) => (ulong)BitOperations.LeadingZeroCount(value);
+        public static ulong LeadingZeroCount(ulong value) =>
+            (ulong)BitOperations.LeadingZeroCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
         public static ulong PopCount(ulong value) => (ulong)BitOperations.PopCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        public static ulong RotateLeft(ulong value, int rotateAmount) => BitOperations.RotateLeft(value, rotateAmount);
+        public static ulong RotateLeft(ulong value, int rotateAmount) =>
+            BitOperations.RotateLeft(value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        public static ulong RotateRight(ulong value, int rotateAmount) => BitOperations.RotateRight(value, rotateAmount);
+        public static ulong RotateRight(ulong value, int rotateAmount) =>
+            BitOperations.RotateRight(value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
-        public static ulong TrailingZeroCount(ulong value) => (ulong)BitOperations.TrailingZeroCount(value);
+        public static ulong TrailingZeroCount(ulong value) =>
+            (ulong)BitOperations.TrailingZeroCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetShortestBitLength()" />
-        int IBinaryInteger<ulong>.GetShortestBitLength() => (sizeof(ulong) * 8) - BitOperations.LeadingZeroCount(m_value);
+        int IBinaryInteger<ulong>.GetShortestBitLength() =>
+            (sizeof(ulong) * 8) - BitOperations.LeadingZeroCount(m_value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetByteCount()" />
         int IBinaryInteger<ulong>.GetByteCount() => sizeof(ulong);
@@ -323,7 +385,9 @@ namespace System
         {
             if (destination.Length >= sizeof(ulong))
             {
-                ulong value = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(m_value) : m_value;
+                ulong value = BitConverter.IsLittleEndian
+                    ? BinaryPrimitives.ReverseEndianness(m_value)
+                    : m_value;
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(ulong);
@@ -337,11 +401,16 @@ namespace System
         }
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TryWriteLittleEndian(Span{byte}, out int)" />
-        bool IBinaryInteger<ulong>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IBinaryInteger<ulong>.TryWriteLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(ulong))
             {
-                ulong value = BitConverter.IsLittleEndian ? m_value : BinaryPrimitives.ReverseEndianness(m_value);
+                ulong value = BitConverter.IsLittleEndian
+                    ? m_value
+                    : BinaryPrimitives.ReverseEndianness(m_value);
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(ulong);
@@ -369,72 +438,72 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static ulong IBitwiseOperators<ulong, ulong, ulong>.operator &(ulong left, ulong right) => left & right;
+        static ulong operator &(ulong left, ulong right) => left & right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static ulong IBitwiseOperators<ulong, ulong, ulong>.operator |(ulong left, ulong right) => left | right;
+        static ulong operator |(ulong left, ulong right) => left | right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static ulong IBitwiseOperators<ulong, ulong, ulong>.operator ^(ulong left, ulong right) => left ^ right;
+        static ulong operator ^(ulong left, ulong right) => left ^ right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static ulong IBitwiseOperators<ulong, ulong, ulong>.operator ~(ulong value) => ~value;
+        static ulong operator ~(ulong value) => ~value;
 
         //
         // IComparisonOperators
         //
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        static bool IComparisonOperators<ulong, ulong>.operator <(ulong left, ulong right) => left < right;
+        static bool operator <(ulong left, ulong right) => left < right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<ulong, ulong>.operator <=(ulong left, ulong right) => left <= right;
+        static bool operator <=(ulong left, ulong right) => left <= right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        static bool IComparisonOperators<ulong, ulong>.operator >(ulong left, ulong right) => left > right;
+        static bool operator >(ulong left, ulong right) => left > right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<ulong, ulong>.operator >=(ulong left, ulong right) => left >= right;
+        static bool operator >=(ulong left, ulong right) => left >= right;
 
         //
         // IDecrementOperators
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static ulong IDecrementOperators<ulong>.operator --(ulong value) => --value;
+        static ulong operator --(ulong value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static ulong IDecrementOperators<ulong>.operator checked --(ulong value) => checked(--value);
+        static ulong operator checked --(ulong value) => checked(--value);
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static ulong IDivisionOperators<ulong, ulong, ulong>.operator /(ulong left, ulong right) => left / right;
+        static ulong operator /(ulong left, ulong right) => left / right;
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static ulong IDivisionOperators<ulong, ulong, ulong>.operator checked /(ulong left, ulong right) => left / right;
+        static ulong operator checked /(ulong left, ulong right) => left / right;
 
         //
         // IEqualityOperators
         //
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Equality(TSelf, TOther)" />
-        static bool IEqualityOperators<ulong, ulong>.operator ==(ulong left, ulong right) => left == right;
+        static bool operator ==(ulong left, ulong right) => left == right;
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Inequality(TSelf, TOther)" />
-        static bool IEqualityOperators<ulong, ulong>.operator !=(ulong left, ulong right) => left != right;
+        static bool operator !=(ulong left, ulong right) => left != right;
 
         //
         // IIncrementOperators
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static ulong IIncrementOperators<ulong>.operator ++(ulong value) => ++value;
+        static ulong operator ++(ulong value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static ulong IIncrementOperators<ulong>.operator checked ++(ulong value) => checked(++value);
+        static ulong operator checked ++(ulong value) => checked(++value);
 
         //
         // IMinMaxValue
@@ -451,24 +520,25 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static ulong IModulusOperators<ulong, ulong, ulong>.operator %(ulong left, ulong right) => left % right;
+        static ulong operator %(ulong left, ulong right) => left % right;
 
         //
         // IMultiplicativeIdentity
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static ulong IMultiplicativeIdentity<ulong, ulong>.MultiplicativeIdentity => MultiplicativeIdentity;
+        static ulong IMultiplicativeIdentity<ulong, ulong>.MultiplicativeIdentity =>
+            MultiplicativeIdentity;
 
         //
         // IMultiplyOperators
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static ulong IMultiplyOperators<ulong, ulong, ulong>.operator *(ulong left, ulong right) => left * right;
+        static ulong operator *(ulong left, ulong right) => left * right;
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static ulong IMultiplyOperators<ulong, ulong, ulong>.operator checked *(ulong left, ulong right) => checked(left * right);
+        static ulong operator checked *(ulong left, ulong right) => checked(left * right);
 
         //
         // INumber
@@ -638,7 +708,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<ulong>.TryConvertFromSaturating<TOther>(TOther value, out ulong result)
+        static bool INumberBase<ulong>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out ulong result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -664,8 +737,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (ulong)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (ulong)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -701,7 +778,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<ulong>.TryConvertFromTruncating<TOther>(TOther value, out ulong result)
+        static bool INumberBase<ulong>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out ulong result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -727,8 +807,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (ulong)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (ulong)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -764,7 +848,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<ulong>.TryConvertToChecked<TOther>(ulong value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<ulong>.TryConvertToChecked<TOther>(
+            ulong value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -838,7 +925,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<ulong>.TryConvertToSaturating<TOther>(ulong value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<ulong>.TryConvertToSaturating<TOther>(
+            ulong value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -863,7 +953,8 @@ namespace System
             }
             else if (typeof(TOther) == typeof(short))
             {
-                short actualResult = (value >= (ulong)short.MaxValue) ? short.MaxValue : (short)value;
+                short actualResult =
+                    (value >= (ulong)short.MaxValue) ? short.MaxValue : (short)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -893,7 +984,8 @@ namespace System
             }
             else if (typeof(TOther) == typeof(sbyte))
             {
-                sbyte actualResult = (value >= (ulong)sbyte.MaxValue) ? sbyte.MaxValue : (sbyte)value;
+                sbyte actualResult =
+                    (value >= (ulong)sbyte.MaxValue) ? sbyte.MaxValue : (sbyte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -912,7 +1004,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<ulong>.TryConvertToTruncating<TOther>(ulong value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<ulong>.TryConvertToTruncating<TOther>(
+            ulong value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -988,56 +1083,65 @@ namespace System
         // IParsable
         //
 
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out ulong result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out ulong result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // IShiftOperators
         //
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_LeftShift(TSelf, int)" />
-        static ulong IShiftOperators<ulong, ulong>.operator <<(ulong value, int shiftAmount) => value << shiftAmount;
+        static ulong operator <<(ulong value, int shiftAmount) => value << shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_RightShift(TSelf, int)" />
-        static ulong IShiftOperators<ulong, ulong>.operator >>(ulong value, int shiftAmount) => value >> shiftAmount;
+        static ulong operator >>(ulong value, int shiftAmount) => value >> shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_UnsignedRightShift(TSelf, int)" />
-        static ulong IShiftOperators<ulong, ulong>.operator >>>(ulong value, int shiftAmount) => value >>> shiftAmount;
+        static ulong operator >>>(ulong value, int shiftAmount) => value >>> shiftAmount;
 
         //
         // ISpanParsable
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static ulong Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+        public static ulong Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Integer, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out ulong result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out ulong result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static ulong ISubtractionOperators<ulong, ulong, ulong>.operator -(ulong left, ulong right) => left - right;
+        static ulong operator -(ulong left, ulong right) => left - right;
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static ulong ISubtractionOperators<ulong, ulong, ulong>.operator checked -(ulong left, ulong right) => checked(left - right);
+        static ulong operator checked -(ulong left, ulong right) => checked(left - right);
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static ulong IUnaryNegationOperators<ulong, ulong>.operator -(ulong value) => 0UL - value;
+        static ulong operator -(ulong value) => 0UL - value;
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static ulong IUnaryNegationOperators<ulong, ulong>.operator checked -(ulong value) => checked(0UL - value);
+        static ulong operator checked -(ulong value) => checked(0UL - value);
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static ulong IUnaryPlusOperators<ulong, ulong>.operator +(ulong value) => +value;
+        static ulong operator +(ulong value) => +value;
     }
 }
