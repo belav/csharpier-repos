@@ -13,16 +13,18 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Int64
         : IComparable,
-          IConvertible,
-          ISpanFormattable,
-          IComparable<long>,
-          IEquatable<long>,
-          IBinaryInteger<long>,
-          IMinMaxValue<long>,
-          ISignedNumber<long>
+            IConvertible,
+            ISpanFormattable,
+            IComparable<long>,
+            IEquatable<long>,
+            IBinaryInteger<long>,
+            IMinMaxValue<long>,
+            ISignedNumber<long>
     {
         private readonly long m_value; // Do not rename (binary serialization)
 
@@ -61,8 +63,10 @@ namespace System
             // to positive for very large neg numbers, etc.
             if (value is long i)
             {
-                if (m_value < i) return -1;
-                if (m_value > i) return 1;
+                if (m_value < i)
+                    return -1;
+                if (m_value > i)
+                    return 1;
                 return 0;
             }
 
@@ -73,8 +77,10 @@ namespace System
         {
             // Need to use compare because subtraction will wrap
             // to positive for very large neg numbers, etc.
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
             return 0;
         }
 
@@ -114,33 +120,48 @@ namespace System
             return Number.FormatInt64(m_value, format, null);
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatInt64(m_value, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
             return Number.TryFormatInt64(m_value, format, provider, destination, out charsWritten);
         }
 
         public static long Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt64(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static long Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt64(s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static long Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseInt64(s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseInt64(
+                s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         // Parses a long from a String in the given style.  If
@@ -150,11 +171,16 @@ namespace System
         public static long Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt64(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static long Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static long Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseInt64(s, style, NumberFormatInfo.GetInstance(provider));
@@ -168,15 +194,30 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseInt64IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt64IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out long result)
         {
-            return Number.TryParseInt64IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt64IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out long result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out long result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
@@ -186,13 +227,28 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseInt64(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt64(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out long result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out long result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            return Number.TryParseInt64(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt64(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         //
@@ -284,10 +340,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static long IAdditionOperators<long, long, long>.operator +(long left, long right) => left + right;
+        static long operator +(long left, long right) => left + right;
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static long IAdditionOperators<long, long, long>.operator checked +(long left, long right) => checked(left + right);
+        static long operator checked +(long left, long right) => checked(left + right);
 
         //
         // IAdditiveIdentity
@@ -301,19 +357,23 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />
-        public static (long Quotient, long Remainder) DivRem(long left, long right) => Math.DivRem(left, right);
+        public static (long Quotient, long Remainder) DivRem(long left, long right) =>
+            Math.DivRem(left, right);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.LeadingZeroCount(TSelf)" />
-        public static long LeadingZeroCount(long value) => BitOperations.LeadingZeroCount((ulong)value);
+        public static long LeadingZeroCount(long value) =>
+            BitOperations.LeadingZeroCount((ulong)value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
         public static long PopCount(long value) => BitOperations.PopCount((ulong)value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        public static long RotateLeft(long value, int rotateAmount) => (long)BitOperations.RotateLeft((ulong)value, rotateAmount);
+        public static long RotateLeft(long value, int rotateAmount) =>
+            (long)BitOperations.RotateLeft((ulong)value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        public static long RotateRight(long value, int rotateAmount) => (long)BitOperations.RotateRight((ulong)value, rotateAmount);
+        public static long RotateRight(long value, int rotateAmount) =>
+            (long)BitOperations.RotateRight((ulong)value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
         public static long TrailingZeroCount(long value) => BitOperations.TrailingZeroCount(value);
@@ -341,7 +401,9 @@ namespace System
         {
             if (destination.Length >= sizeof(long))
             {
-                long value = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(m_value) : m_value;
+                long value = BitConverter.IsLittleEndian
+                    ? BinaryPrimitives.ReverseEndianness(m_value)
+                    : m_value;
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(long);
@@ -359,7 +421,9 @@ namespace System
         {
             if (destination.Length >= sizeof(long))
             {
-                long value = BitConverter.IsLittleEndian ? m_value : BinaryPrimitives.ReverseEndianness(m_value);
+                long value = BitConverter.IsLittleEndian
+                    ? m_value
+                    : BinaryPrimitives.ReverseEndianness(m_value);
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(long);
@@ -394,72 +458,72 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static long IBitwiseOperators<long, long, long>.operator &(long left, long right) => left & right;
+        static long operator &(long left, long right) => left & right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static long IBitwiseOperators<long, long, long>.operator |(long left, long right) => left | right;
+        static long operator |(long left, long right) => left | right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static long IBitwiseOperators<long, long, long>.operator ^(long left, long right) => left ^ right;
+        static long operator ^(long left, long right) => left ^ right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static long IBitwiseOperators<long, long, long>.operator ~(long value) => ~value;
+        static long operator ~(long value) => ~value;
 
         //
         // IComparisonOperators
         //
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        static bool IComparisonOperators<long, long>.operator <(long left, long right) => left < right;
+        static bool operator <(long left, long right) => left < right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<long, long>.operator <=(long left, long right) => left <= right;
+        static bool operator <=(long left, long right) => left <= right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        static bool IComparisonOperators<long, long>.operator >(long left, long right) => left > right;
+        static bool operator >(long left, long right) => left > right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<long, long>.operator >=(long left, long right) => left >= right;
+        static bool operator >=(long left, long right) => left >= right;
 
         //
         // IDecrementOperators
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static long IDecrementOperators<long>.operator --(long value) => --value;
+        static long operator --(long value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static long IDecrementOperators<long>.operator checked --(long value) => checked(--value);
+        static long operator checked --(long value) => checked(--value);
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static long IDivisionOperators<long, long, long>.operator /(long left, long right) => left / right;
+        static long operator /(long left, long right) => left / right;
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static long IDivisionOperators<long, long, long>.operator checked /(long left, long right) => left / right;
+        static long operator checked /(long left, long right) => left / right;
 
         //
         // IEqualityOperators
         //
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Equality(TSelf, TOther)" />
-        static bool IEqualityOperators<long, long>.operator ==(long left, long right) => left == right;
+        static bool operator ==(long left, long right) => left == right;
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Inequality(TSelf, TOther)" />
-        static bool IEqualityOperators<long, long>.operator !=(long left, long right) => left != right;
+        static bool operator !=(long left, long right) => left != right;
 
         //
         // IIncrementOperators
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static long IIncrementOperators<long>.operator ++(long value) => ++value;
+        static long operator ++(long value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static long IIncrementOperators<long>.operator checked ++(long value) => checked(++value);
+        static long operator checked ++(long value) => checked(++value);
 
         //
         // IMinMaxValue
@@ -476,24 +540,25 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static long IModulusOperators<long, long, long>.operator %(long left, long right) => left % right;
+        static long operator %(long left, long right) => left % right;
 
         //
         // IMultiplicativeIdentity
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static long IMultiplicativeIdentity<long, long>.MultiplicativeIdentity => MultiplicativeIdentity;
+        static long IMultiplicativeIdentity<long, long>.MultiplicativeIdentity =>
+            MultiplicativeIdentity;
 
         //
         // IMultiplyOperators
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static long IMultiplyOperators<long, long, long>.operator *(long left, long right) => left * right;
+        static long operator *(long left, long right) => left * right;
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static long IMultiplyOperators<long, long, long>.operator checked *(long left, long right) => checked(left * right);
+        static long operator checked *(long left, long right) => checked(left * right);
 
         //
         // INumber
@@ -763,7 +828,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<long>.TryConvertFromSaturating<TOther>(TOther value, out long result)
+        static bool INumberBase<long>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out long result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -777,15 +845,23 @@ namespace System
             if (typeof(TOther) == typeof(double))
             {
                 double actualValue = (double)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Half))
             {
                 Half actualValue = (Half)(object)value;
-                result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-                         (actualValue == Half.NegativeInfinity) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue == Half.PositiveInfinity)
+                        ? MaxValue
+                        : (actualValue == Half.NegativeInfinity)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(short))
@@ -803,8 +879,12 @@ namespace System
             else if (typeof(TOther) == typeof(Int128))
             {
                 Int128 actualValue = (Int128)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(nint))
@@ -822,8 +902,12 @@ namespace System
             else if (typeof(TOther) == typeof(float))
             {
                 float actualValue = (float)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else
@@ -835,7 +919,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<long>.TryConvertFromTruncating<TOther>(TOther value, out long result)
+        static bool INumberBase<long>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out long result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -849,15 +936,23 @@ namespace System
             if (typeof(TOther) == typeof(double))
             {
                 double actualValue = (double)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Half))
             {
                 Half actualValue = (Half)(object)value;
-                result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-                         (actualValue == Half.NegativeInfinity) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue == Half.PositiveInfinity)
+                        ? MaxValue
+                        : (actualValue == Half.NegativeInfinity)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(short))
@@ -893,8 +988,12 @@ namespace System
             else if (typeof(TOther) == typeof(float))
             {
                 float actualValue = (float)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (long)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (long)actualValue;
                 return true;
             }
             else
@@ -906,7 +1005,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<long>.TryConvertToChecked<TOther>(long value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<long>.TryConvertToChecked<TOther>(
+            long value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -974,7 +1076,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<long>.TryConvertToSaturating<TOther>(long value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<long>.TryConvertToSaturating<TOther>(
+            long value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -987,15 +1092,23 @@ namespace System
 
             if (typeof(TOther) == typeof(byte))
             {
-                byte actualResult = (value >= byte.MaxValue) ? byte.MaxValue :
-                                    (value <= byte.MinValue) ? byte.MinValue : (byte)value;
+                byte actualResult =
+                    (value >= byte.MaxValue)
+                        ? byte.MaxValue
+                        : (value <= byte.MinValue)
+                            ? byte.MinValue
+                            : (byte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(char))
             {
-                char actualResult = (value >= char.MaxValue) ? char.MaxValue :
-                                    (value <= char.MinValue) ? char.MinValue : (char)value;
+                char actualResult =
+                    (value >= char.MaxValue)
+                        ? char.MaxValue
+                        : (value <= char.MinValue)
+                            ? char.MinValue
+                            : (char)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1007,15 +1120,23 @@ namespace System
             }
             else if (typeof(TOther) == typeof(ushort))
             {
-                ushort actualResult = (value >= ushort.MaxValue) ? ushort.MaxValue :
-                                      (value <= ushort.MinValue) ? ushort.MinValue : (ushort)value;
+                ushort actualResult =
+                    (value >= ushort.MaxValue)
+                        ? ushort.MaxValue
+                        : (value <= ushort.MinValue)
+                            ? ushort.MinValue
+                            : (ushort)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(uint))
             {
-                uint actualResult = (value >= uint.MaxValue) ? uint.MaxValue :
-                                    (value <= uint.MinValue) ? uint.MinValue : (uint)value;
+                uint actualResult =
+                    (value >= uint.MaxValue)
+                        ? uint.MaxValue
+                        : (value <= uint.MinValue)
+                            ? uint.MinValue
+                            : (uint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1034,8 +1155,12 @@ namespace System
             else if (typeof(TOther) == typeof(nuint))
             {
 #if TARGET_32BIT
-                nuint actualResult = (value >= uint.MaxValue) ? uint.MaxValue :
-                                     (value <= uint.MinValue) ? uint.MinValue : (nuint)value;
+                nuint actualResult =
+                    (value >= uint.MaxValue)
+                        ? uint.MaxValue
+                        : (value <= uint.MinValue)
+                            ? uint.MinValue
+                            : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
 #else
@@ -1053,7 +1178,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<long>.TryConvertToTruncating<TOther>(long value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<long>.TryConvertToTruncating<TOther>(
+            long value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1123,20 +1251,24 @@ namespace System
         // IParsable
         //
 
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out long result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out long result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // IShiftOperators
         //
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_LeftShift(TSelf, int)" />
-        static long IShiftOperators<long, long>.operator <<(long value, int shiftAmount) => value << shiftAmount;
+        static long operator <<(long value, int shiftAmount) => value << shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_RightShift(TSelf, int)" />
-        static long IShiftOperators<long, long>.operator >>(long value, int shiftAmount) => value >> shiftAmount;
+        static long operator >>(long value, int shiftAmount) => value >> shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_UnsignedRightShift(TSelf, int)" />
-        static long IShiftOperators<long, long>.operator >>>(long value, int shiftAmount) => value >>> shiftAmount;
+        static long operator >>>(long value, int shiftAmount) => value >>> shiftAmount;
 
         //
         // ISignedNumber
@@ -1150,36 +1282,41 @@ namespace System
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static long Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+        public static long Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Integer, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out long result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out long result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static long ISubtractionOperators<long, long, long>.operator -(long left, long right) => left - right;
+        static long operator -(long left, long right) => left - right;
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static long ISubtractionOperators<long, long, long>.operator checked -(long left, long right) => checked(left - right);
+        static long operator checked -(long left, long right) => checked(left - right);
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static long IUnaryNegationOperators<long, long>.operator -(long value) => -value;
+        static long operator -(long value) => -value;
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static long IUnaryNegationOperators<long, long>.operator checked -(long value) => checked(-value);
+        static long operator checked -(long value) => checked(-value);
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static long IUnaryPlusOperators<long, long>.operator +(long value) => +value;
+        static long operator +(long value) => +value;
     }
 }

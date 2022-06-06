@@ -25,16 +25,18 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Char
         : IComparable,
-          IComparable<char>,
-          IEquatable<char>,
-          IConvertible,
-          ISpanFormattable,
-          IBinaryInteger<char>,
-          IMinMaxValue<char>,
-          IUnsignedNumber<char>
+            IComparable<char>,
+            IEquatable<char>,
+            IConvertible,
+            ISpanFormattable,
+            IBinaryInteger<char>,
+            IMinMaxValue<char>,
+            IUnsignedNumber<char>
     {
         //
         // Member Variables
@@ -46,6 +48,7 @@ namespace System
         //
         // The maximum character value.
         public const char MaxValue = (char)0xFFFF;
+
         // The minimum character value.
         public const char MinValue = (char)0x00;
 
@@ -59,26 +62,267 @@ namespace System
         // - 0x40 bit if set means 'is uppercase letter'
         // - 0x20 bit if set means 'is lowercase letter'
         // - bottom 5 bits are the UnicodeCategory of the character
-        private static ReadOnlySpan<byte> Latin1CharInfo => new byte[]
-        {
-        //  0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x8E, 0x8E, 0x8E, 0x8E, 0x8E, 0x0E, 0x0E, // U+0000..U+000F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, // U+0010..U+001F
-            0x8B, 0x18, 0x18, 0x18, 0x1A, 0x18, 0x18, 0x18, 0x14, 0x15, 0x18, 0x19, 0x18, 0x13, 0x18, 0x18, // U+0020..U+002F
-            0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x08, 0x18, 0x18, 0x19, 0x19, 0x19, 0x18, // U+0030..U+003F
-            0x18, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, // U+0040..U+004F
-            0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x14, 0x18, 0x15, 0x1B, 0x12, // U+0050..U+005F
-            0x1B, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, // U+0060..U+006F
-            0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x14, 0x19, 0x15, 0x19, 0x0E, // U+0070..U+007F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x8E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, // U+0080..U+008F
-            0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, 0x0E, // U+0090..U+009F
-            0x8B, 0x18, 0x1A, 0x1A, 0x1A, 0x1A, 0x1C, 0x18, 0x1B, 0x1C, 0x04, 0x16, 0x19, 0x0F, 0x1C, 0x1B, // U+00A0..U+00AF
-            0x1C, 0x19, 0x0A, 0x0A, 0x1B, 0x21, 0x18, 0x18, 0x1B, 0x0A, 0x04, 0x17, 0x0A, 0x0A, 0x0A, 0x18, // U+00B0..U+00BF
-            0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, // U+00C0..U+00CF
-            0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x19, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x40, 0x21, // U+00D0..U+00DF
-            0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, // U+00E0..U+00EF
-            0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x19, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, 0x21, // U+00F0..U+00FF
-        };
+        private static ReadOnlySpan<byte> Latin1CharInfo =>
+            new byte[]
+            {
+                //  0     1     2     3     4     5     6     7     8     9     A     B     C     D     E     F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x8E,
+                0x8E,
+                0x8E,
+                0x8E,
+                0x8E,
+                0x0E,
+                0x0E, // U+0000..U+000F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E, // U+0010..U+001F
+                0x8B,
+                0x18,
+                0x18,
+                0x18,
+                0x1A,
+                0x18,
+                0x18,
+                0x18,
+                0x14,
+                0x15,
+                0x18,
+                0x19,
+                0x18,
+                0x13,
+                0x18,
+                0x18, // U+0020..U+002F
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x08,
+                0x18,
+                0x18,
+                0x19,
+                0x19,
+                0x19,
+                0x18, // U+0030..U+003F
+                0x18,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40, // U+0040..U+004F
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x14,
+                0x18,
+                0x15,
+                0x1B,
+                0x12, // U+0050..U+005F
+                0x1B,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21, // U+0060..U+006F
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x14,
+                0x19,
+                0x15,
+                0x19,
+                0x0E, // U+0070..U+007F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x8E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E, // U+0080..U+008F
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E,
+                0x0E, // U+0090..U+009F
+                0x8B,
+                0x18,
+                0x1A,
+                0x1A,
+                0x1A,
+                0x1A,
+                0x1C,
+                0x18,
+                0x1B,
+                0x1C,
+                0x04,
+                0x16,
+                0x19,
+                0x0F,
+                0x1C,
+                0x1B, // U+00A0..U+00AF
+                0x1C,
+                0x19,
+                0x0A,
+                0x0A,
+                0x1B,
+                0x21,
+                0x18,
+                0x18,
+                0x1B,
+                0x0A,
+                0x04,
+                0x17,
+                0x0A,
+                0x0A,
+                0x0A,
+                0x18, // U+00B0..U+00BF
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40, // U+00C0..U+00CF
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x19,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x40,
+                0x21, // U+00D0..U+00DF
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21, // U+00E0..U+00EF
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x19,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21,
+                0x21, // U+00F0..U+00FF
+            };
 
         // Return true for all characters below or equal U+00ff, which is ASCII + Latin-1 Supplement.
         private static bool IsLatin1(char c) => (uint)c < (uint)Latin1CharInfo.Length;
@@ -178,7 +422,12 @@ namespace System
         // Provides a string representation of a character.
         public static string ToString(char c) => string.CreateFromChar(c);
 
-        bool ISpanFormattable.TryFormat(Span<char> destination, out int charsWritten, ReadOnlySpan<char> format, IFormatProvider? provider)
+        bool ISpanFormattable.TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            ReadOnlySpan<char> format,
+            IFormatProvider? provider
+        )
         {
             if (!destination.IsEmpty)
             {
@@ -191,7 +440,8 @@ namespace System
             return false;
         }
 
-        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) => ToString(m_value);
+        string IFormattable.ToString(string? format, IFormatProvider? formatProvider) =>
+            ToString(m_value);
 
         public static char Parse(string s)
         {
@@ -266,7 +516,8 @@ namespace System
         /// This determines whether the character is in the range 'A' through 'Z', inclusive,
         /// 'a' through 'z', inclusive, or '0' through '9', inclusive.
         /// </remarks>
-        public static bool IsAsciiLetterOrDigit(char c) => IsAsciiLetter(c) | IsBetween(c, '0', '9');
+        public static bool IsAsciiLetterOrDigit(char c) =>
+            IsAsciiLetter(c) | IsBetween(c, '0', '9');
 
         /// <summary>Indicates whether a character is categorized as an ASCII hexademical digit.</summary>
         /// <param name="c">The character to evaluate.</param>
@@ -322,8 +573,11 @@ namespace System
         public static bool IsBetween(char c, char minInclusive, char maxInclusive) =>
             (uint)(c - minInclusive) <= (uint)(maxInclusive - minInclusive);
 
-        private static bool IsBetween(UnicodeCategory c, UnicodeCategory min, UnicodeCategory max) =>
-            (uint)(c - min) <= (uint)(max - min);
+        private static bool IsBetween(
+            UnicodeCategory c,
+            UnicodeCategory min,
+            UnicodeCategory max
+        ) => (uint)(c - min) <= (uint)(max - min);
 
         /*=================================CheckLetter=====================================
         ** Check if the specified UnicodeCategory belongs to the letter categories.
@@ -400,7 +654,11 @@ namespace System
 
         internal static bool CheckPunctuation(UnicodeCategory uc)
         {
-            return IsBetween(uc, UnicodeCategory.ConnectorPunctuation, UnicodeCategory.OtherPunctuation);
+            return IsBetween(
+                uc,
+                UnicodeCategory.ConnectorPunctuation,
+                UnicodeCategory.OtherPunctuation
+            );
         }
 
         /*================================IsPunctuation=================================
@@ -617,7 +875,8 @@ namespace System
                 return IsBetween(c, '0', '9');
             }
 
-            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index) == UnicodeCategory.DecimalDigitNumber;
+            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index)
+                == UnicodeCategory.DecimalDigitNumber;
         }
 
         public static bool IsLetter(string s, int index)
@@ -679,7 +938,8 @@ namespace System
                 return (Latin1CharInfo[c] & IsLowerCaseLetterFlag) != 0;
             }
 
-            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index) == UnicodeCategory.LowercaseLetter;
+            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index)
+                == UnicodeCategory.LowercaseLetter;
         }
 
         /*=================================CheckNumber=====================================
@@ -763,7 +1023,11 @@ namespace System
 
         internal static bool CheckSeparator(UnicodeCategory uc)
         {
-            return IsBetween(uc, UnicodeCategory.SpaceSeparator, UnicodeCategory.ParagraphSeparator);
+            return IsBetween(
+                uc,
+                UnicodeCategory.SpaceSeparator,
+                UnicodeCategory.ParagraphSeparator
+            );
         }
 
         private static bool IsSeparatorLatin1(char c)
@@ -804,7 +1068,11 @@ namespace System
 
         public static bool IsSurrogate(char c)
         {
-            return IsBetween(c, CharUnicodeInfo.HIGH_SURROGATE_START, CharUnicodeInfo.LOW_SURROGATE_END);
+            return IsBetween(
+                c,
+                CharUnicodeInfo.HIGH_SURROGATE_START,
+                CharUnicodeInfo.LOW_SURROGATE_END
+            );
         }
 
         public static bool IsSurrogate(string s, int index)
@@ -876,7 +1144,8 @@ namespace System
                 return (Latin1CharInfo[c] & IsUpperCaseLetterFlag) != 0;
             }
 
-            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index) == UnicodeCategory.UppercaseLetter;
+            return CharUnicodeInfo.GetUnicodeCategoryInternal(s, index)
+                == UnicodeCategory.UppercaseLetter;
         }
 
         public static bool IsWhiteSpace(string s, int index)
@@ -948,7 +1217,11 @@ namespace System
          ==============================================================================*/
         public static bool IsHighSurrogate(char c)
         {
-            return IsBetween(c, CharUnicodeInfo.HIGH_SURROGATE_START, CharUnicodeInfo.HIGH_SURROGATE_END);
+            return IsBetween(
+                c,
+                CharUnicodeInfo.HIGH_SURROGATE_START,
+                CharUnicodeInfo.HIGH_SURROGATE_END
+            );
         }
 
         public static bool IsHighSurrogate(string s, int index)
@@ -970,7 +1243,11 @@ namespace System
          ==============================================================================*/
         public static bool IsLowSurrogate(char c)
         {
-            return IsBetween(c, CharUnicodeInfo.LOW_SURROGATE_START, CharUnicodeInfo.LOW_SURROGATE_END);
+            return IsBetween(
+                c,
+                CharUnicodeInfo.LOW_SURROGATE_START,
+                CharUnicodeInfo.LOW_SURROGATE_END
+            );
         }
 
         public static bool IsLowSurrogate(string s, int index)
@@ -1018,12 +1295,15 @@ namespace System
 
             uint highSurrogateOffset = (uint)highSurrogate - CharUnicodeInfo.HIGH_SURROGATE_START;
             uint lowSurrogateOffset = (uint)lowSurrogate - CharUnicodeInfo.LOW_SURROGATE_START;
-            return (highSurrogateOffset | lowSurrogateOffset) <= CharUnicodeInfo.HIGH_SURROGATE_RANGE;
+            return (highSurrogateOffset | lowSurrogateOffset)
+                <= CharUnicodeInfo.HIGH_SURROGATE_RANGE;
         }
 
         internal const int UNICODE_PLANE00_END = 0x00ffff;
+
         // The starting codepoint for Unicode plane 1.  Plane 1 contains 0x010000 ~ 0x01ffff.
         internal const int UNICODE_PLANE01_START = 0x10000;
+
         // The end codepoint for Unicode plane 16.  This is the maximum code point value allowed for Unicode.
         // Plane 16 contains 0x100000 ~ 0x10ffff.
         internal const int UNICODE_PLANE16_END = 0x10ffff;
@@ -1036,7 +1316,10 @@ namespace System
         {
             if (!UnicodeUtility.IsValidUnicodeScalar((uint)utf32))
             {
-                throw new ArgumentOutOfRangeException(nameof(utf32), SR.ArgumentOutOfRange_InvalidUTF32);
+                throw new ArgumentOutOfRangeException(
+                    nameof(utf32),
+                    SR.ArgumentOutOfRange_InvalidUTF32
+                );
             }
 
             return Rune.UnsafeCreate((uint)utf32).ToString();
@@ -1064,7 +1347,9 @@ namespace System
             }
 
             // The 0x40u << 10 below is to account for uuuuu = wwww + 1 in the surrogate encoding.
-            return ((int)highSurrogateOffset << 10) + (lowSurrogate - CharUnicodeInfo.LOW_SURROGATE_START) + (0x40 << 10);
+            return ((int)highSurrogateOffset << 10)
+                + (lowSurrogate - CharUnicodeInfo.LOW_SURROGATE_START)
+                + (0x40 << 10);
         }
 
         [StackTraceHidden]
@@ -1078,13 +1363,15 @@ namespace System
             {
                 throw new ArgumentOutOfRangeException(
                     paramName: "highSurrogate",
-                    message: SR.ArgumentOutOfRange_InvalidHighSurrogate);
+                    message: SR.ArgumentOutOfRange_InvalidHighSurrogate
+                );
             }
             else
             {
                 throw new ArgumentOutOfRangeException(
                     paramName: "lowSurrogate",
-                    message: SR.ArgumentOutOfRange_InvalidLowSurrogate);
+                    message: SR.ArgumentOutOfRange_InvalidLowSurrogate
+                );
             }
         }
 
@@ -1105,7 +1392,10 @@ namespace System
 
             if (index < 0 || index >= s.Length)
             {
-                throw new ArgumentOutOfRangeException(nameof(index), SR.ArgumentOutOfRange_IndexMustBeLess);
+                throw new ArgumentOutOfRangeException(
+                    nameof(index),
+                    SR.ArgumentOutOfRange_IndexMustBeLess
+                );
             }
             // Check if the character at index is a high surrogate.
             int temp1 = (int)s[index] - CharUnicodeInfo.HIGH_SURROGATE_START;
@@ -1125,19 +1415,28 @@ namespace System
                         }
                         else
                         {
-                            throw new ArgumentException(SR.Format(SR.Argument_InvalidHighSurrogate, index), nameof(s));
+                            throw new ArgumentException(
+                                SR.Format(SR.Argument_InvalidHighSurrogate, index),
+                                nameof(s)
+                            );
                         }
                     }
                     else
                     {
                         // Found a high surrogate at the end of the string.
-                        throw new ArgumentException(SR.Format(SR.Argument_InvalidHighSurrogate, index), nameof(s));
+                        throw new ArgumentException(
+                            SR.Format(SR.Argument_InvalidHighSurrogate, index),
+                            nameof(s)
+                        );
                     }
                 }
                 else
                 {
                     // Find a low surrogate at the character pointed by index.
-                    throw new ArgumentException(SR.Format(SR.Argument_InvalidLowSurrogate, index), nameof(s));
+                    throw new ArgumentException(
+                        SR.Format(SR.Argument_InvalidLowSurrogate, index),
+                        nameof(s)
+                    );
                 }
             }
             // Not a high-surrogate or low-surrogate. Genereate the UTF32 value for the BMP characters.
@@ -1149,10 +1448,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static char IAdditionOperators<char, char, char>.operator +(char left, char right) => (char) (left + right);
+        static char operator +(char left, char right) => (char)(left + right);
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static char IAdditionOperators<char, char, char>.operator checked +(char left, char right) => checked((char)(left + right));
+        static char operator checked +(char left, char right) => checked((char)(left + right));
 
         //
         // IAdditiveIdentity
@@ -1166,25 +1465,32 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />
-        static (char Quotient, char Remainder) IBinaryInteger<char>.DivRem(char left, char right) => ((char, char))Math.DivRem(left, right);
+        static (char Quotient, char Remainder) IBinaryInteger<char>.DivRem(char left, char right) =>
+            ((char, char))Math.DivRem(left, right);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.LeadingZeroCount(TSelf)" />
-        static char IBinaryInteger<char>.LeadingZeroCount(char value) => (char)(BitOperations.LeadingZeroCount(value) - 16);
+        static char IBinaryInteger<char>.LeadingZeroCount(char value) =>
+            (char)(BitOperations.LeadingZeroCount(value) - 16);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
-        static char IBinaryInteger<char>.PopCount(char value) => (char)BitOperations.PopCount(value);
+        static char IBinaryInteger<char>.PopCount(char value) =>
+            (char)BitOperations.PopCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        static char IBinaryInteger<char>.RotateLeft(char value, int rotateAmount) => (char)((value << (rotateAmount & 15)) | (value >> ((16 - rotateAmount) & 15)));
+        static char IBinaryInteger<char>.RotateLeft(char value, int rotateAmount) =>
+            (char)((value << (rotateAmount & 15)) | (value >> ((16 - rotateAmount) & 15)));
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        static char IBinaryInteger<char>.RotateRight(char value, int rotateAmount) => (char)((value >> (rotateAmount & 15)) | (value << ((16 - rotateAmount) & 15)));
+        static char IBinaryInteger<char>.RotateRight(char value, int rotateAmount) =>
+            (char)((value >> (rotateAmount & 15)) | (value << ((16 - rotateAmount) & 15)));
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
-        static char IBinaryInteger<char>.TrailingZeroCount(char value) => (char)(BitOperations.TrailingZeroCount(value << 16) - 16);
+        static char IBinaryInteger<char>.TrailingZeroCount(char value) =>
+            (char)(BitOperations.TrailingZeroCount(value << 16) - 16);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetShortestBitLength()" />
-        int IBinaryInteger<char>.GetShortestBitLength() => (sizeof(char) * 8) - ushort.LeadingZeroCount(m_value);
+        int IBinaryInteger<char>.GetShortestBitLength() =>
+            (sizeof(char) * 8) - ushort.LeadingZeroCount(m_value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetByteCount()" />
         int IBinaryInteger<char>.GetByteCount() => sizeof(char);
@@ -1194,7 +1500,9 @@ namespace System
         {
             if (destination.Length >= sizeof(char))
             {
-                ushort value = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(m_value) : m_value;
+                ushort value = BitConverter.IsLittleEndian
+                    ? BinaryPrimitives.ReverseEndianness(m_value)
+                    : m_value;
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(char);
@@ -1212,7 +1520,9 @@ namespace System
         {
             if (destination.Length >= sizeof(char))
             {
-                ushort value = BitConverter.IsLittleEndian ? m_value : BinaryPrimitives.ReverseEndianness(m_value);
+                ushort value = BitConverter.IsLittleEndian
+                    ? m_value
+                    : BinaryPrimitives.ReverseEndianness(m_value);
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(char);
@@ -1240,72 +1550,72 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static char IBitwiseOperators<char, char, char>.operator &(char left, char right) => (char)(left & right);
+        static char operator &(char left, char right) => (char)(left & right);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static char IBitwiseOperators<char, char, char>.operator |(char left, char right) => (char)(left | right);
+        static char operator |(char left, char right) => (char)(left | right);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static char IBitwiseOperators<char, char, char>.operator ^(char left, char right) => (char)(left ^ right);
+        static char operator ^(char left, char right) => (char)(left ^ right);
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static char IBitwiseOperators<char, char, char>.operator ~(char value) => (char)(~value);
+        static char operator ~(char value) => (char)(~value);
 
         //
         // IComparisonOperators
         //
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        static bool IComparisonOperators<char, char>.operator <(char left, char right) => left < right;
+        static bool operator <(char left, char right) => left < right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<char, char>.operator <=(char left, char right) => left <= right;
+        static bool operator <=(char left, char right) => left <= right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        static bool IComparisonOperators<char, char>.operator >(char left, char right) => left > right;
+        static bool operator >(char left, char right) => left > right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<char, char>.operator >=(char left, char right) => left >= right;
+        static bool operator >=(char left, char right) => left >= right;
 
         //
         // IDecrementOperators
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static char IDecrementOperators<char>.operator --(char value) => --value;
+        static char operator --(char value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_CheckedDecrement(TSelf)" />
-        static char IDecrementOperators<char>.operator checked --(char value) => checked(--value);
+        static char operator checked --(char value) => checked(--value);
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static char IDivisionOperators<char, char, char>.operator /(char left, char right) => (char)(left / right);
+        static char operator /(char left, char right) => (char)(left / right);
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static char IDivisionOperators<char, char, char>.operator checked /(char left, char right) => (char)(left / right);
+        static char operator checked /(char left, char right) => (char)(left / right);
 
         //
         // IEqualityOperators
         //
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Equality(TSelf, TOther)" />
-        static bool IEqualityOperators<char, char>.operator ==(char left, char right) => left == right;
+        static bool operator ==(char left, char right) => left == right;
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Inequality(TSelf, TOther)" />
-        static bool IEqualityOperators<char, char>.operator !=(char left, char right) => left != right;
+        static bool operator !=(char left, char right) => left != right;
 
         //
         // IIncrementOperators
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static char IIncrementOperators<char>.operator ++(char value) => ++value;
+        static char operator ++(char value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static char IIncrementOperators<char>.operator checked ++(char value) => checked(++value);
+        static char operator checked ++(char value) => checked(++value);
 
         //
         // IMinMaxValue
@@ -1322,7 +1632,7 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static char IModulusOperators<char, char, char>.operator %(char left, char right) => (char)(left % right);
+        static char operator %(char left, char right) => (char)(left % right);
 
         //
         // IMultiplicativeIdentity
@@ -1336,17 +1646,18 @@ namespace System
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static char IMultiplyOperators<char, char, char>.operator *(char left, char right) => (char)(left * right);
+        static char operator *(char left, char right) => (char)(left * right);
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static char IMultiplyOperators<char, char, char>.operator checked *(char left, char right) => checked((char)(left * right));
+        static char operator checked *(char left, char right) => checked((char)(left * right));
 
         //
         // INumber
         //
 
         /// <inheritdoc cref="INumber{TSelf}.Clamp(TSelf, TSelf, TSelf)" />
-        static char INumber<char>.Clamp(char value, char min, char max) => (char)Math.Clamp(value, min, max);
+        static char INumber<char>.Clamp(char value, char min, char max) =>
+            (char)Math.Clamp(value, min, max);
 
         /// <inheritdoc cref="INumber{TSelf}.CopySign(TSelf, TSelf)" />
         static char INumber<char>.CopySign(char value, char sign) => value;
@@ -1445,9 +1756,17 @@ namespace System
         /// <inheritdoc cref="INumberBase{TSelf}.MinMagnitudeNumber(TSelf, TSelf)" />
         static char INumberBase<char>.MinMagnitudeNumber(char x, char y) => (char)Math.Min(x, y);
 
-        static char INumberBase<char>.Parse(string s, NumberStyles style, IFormatProvider? provider) => Parse(s);
+        static char INumberBase<char>.Parse(
+            string s,
+            NumberStyles style,
+            IFormatProvider? provider
+        ) => Parse(s);
 
-        static char INumberBase<char>.Parse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider)
+        static char INumberBase<char>.Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider
+        )
         {
             if (s.Length != 1)
             {
@@ -1520,7 +1839,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<char>.TryConvertFromSaturating<TOther>(TOther value, out char result)
+        static bool INumberBase<char>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out char result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1540,8 +1862,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (char)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (char)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -1583,7 +1909,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<char>.TryConvertFromTruncating<TOther>(TOther value, out char result)
+        static bool INumberBase<char>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out char result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1603,8 +1932,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (char)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (char)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -1646,7 +1979,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<char>.TryConvertToChecked<TOther>(char value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<char>.TryConvertToChecked<TOther>(
+            char value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1720,7 +2056,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<char>.TryConvertToSaturating<TOther>(char value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<char>.TryConvertToSaturating<TOther>(
+            char value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1794,7 +2133,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<char>.TryConvertToTruncating<TOther>(char value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<char>.TryConvertToTruncating<TOther>(
+            char value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1866,9 +2208,19 @@ namespace System
             }
         }
 
-        static bool INumberBase<char>.TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out char result) => TryParse(s, out result);
+        static bool INumberBase<char>.TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out char result
+        ) => TryParse(s, out result);
 
-        static bool INumberBase<char>.TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out char result)
+        static bool INumberBase<char>.TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out char result
+        )
         {
             if (s.Length != 1)
             {
@@ -1885,20 +2237,24 @@ namespace System
 
         static char IParsable<char>.Parse(string s, IFormatProvider? provider) => Parse(s);
 
-        static bool IParsable<char>.TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out char result) => TryParse(s, out result);
+        static bool IParsable<char>.TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out char result
+        ) => TryParse(s, out result);
 
         //
         // IShiftOperators
         //
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_LeftShift(TSelf, int)" />
-        static char IShiftOperators<char, char>.operator <<(char value, int shiftAmount) => (char)(value << shiftAmount);
+        static char operator <<(char value, int shiftAmount) => (char)(value << shiftAmount);
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_RightShift(TSelf, int)" />
-        static char IShiftOperators<char, char>.operator >>(char value, int shiftAmount) => (char)(value >> shiftAmount);
+        static char operator >>(char value, int shiftAmount) => (char)(value >> shiftAmount);
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_UnsignedRightShift(TSelf, int)" />
-        static char IShiftOperators<char, char>.operator >>>(char value, int shiftAmount) => (char)(value >>> shiftAmount);
+        static char operator >>>(char value, int shiftAmount) => (char)(value >>> shiftAmount);
 
         //
         // ISpanParsable
@@ -1913,7 +2269,11 @@ namespace System
             return s[0];
         }
 
-        static bool ISpanParsable<char>.TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out char result)
+        static bool ISpanParsable<char>.TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out char result
+        )
         {
             if (s.Length != 1)
             {
@@ -1929,26 +2289,26 @@ namespace System
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static char ISubtractionOperators<char, char, char>.operator -(char left, char right) => (char)(left - right);
+        static char operator -(char left, char right) => (char)(left - right);
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static char ISubtractionOperators<char, char, char>.operator checked -(char left, char right) => checked((char)(left - right));
+        static char operator checked -(char left, char right) => checked((char)(left - right));
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static char IUnaryNegationOperators<char, char>.operator -(char value) => (char)(-value);
+        static char operator -(char value) => (char)(-value);
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static char IUnaryNegationOperators<char, char>.operator checked -(char value) => checked((char)(-value));
+        static char operator checked -(char value) => checked((char)(-value));
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static char IUnaryPlusOperators<char, char>.operator +(char value) => (char)(+value);
+        static char operator +(char value) => (char)(+value);
     }
 }

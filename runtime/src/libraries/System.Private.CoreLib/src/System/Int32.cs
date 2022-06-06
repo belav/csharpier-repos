@@ -13,16 +13,18 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Int32
         : IComparable,
-          IConvertible,
-          ISpanFormattable,
-          IComparable<int>,
-          IEquatable<int>,
-          IBinaryInteger<int>,
-          IMinMaxValue<int>,
-          ISignedNumber<int>
+            IConvertible,
+            ISpanFormattable,
+            IComparable<int>,
+            IEquatable<int>,
+            IBinaryInteger<int>,
+            IMinMaxValue<int>,
+            ISignedNumber<int>
     {
         private readonly int m_value; // Do not rename (binary serialization)
 
@@ -64,8 +66,10 @@ namespace System
             // around in cases where _value - value > MaxValue.
             if (value is int i)
             {
-                if (m_value < i) return -1;
-                if (m_value > i) return 1;
+                if (m_value < i)
+                    return -1;
+                if (m_value > i)
+                    return 1;
                 return 0;
             }
 
@@ -76,8 +80,10 @@ namespace System
         {
             // NOTE: Cannot use return (_value - value) as this causes a wrap
             // around in cases where _value - value > MaxValue.
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
             return 0;
         }
 
@@ -117,26 +123,43 @@ namespace System
             return Number.FormatInt32(m_value, 0, null, provider);
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatInt32(m_value, ~0, format, provider);
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
-            return Number.TryFormatInt32(m_value, ~0, format, provider, destination, out charsWritten);
+            return Number.TryFormatInt32(
+                m_value,
+                ~0,
+                format,
+                provider,
+                destination,
+                out charsWritten
+            );
         }
 
         public static int Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt32(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo);
         }
 
         public static int Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt32(s, style, NumberFormatInfo.CurrentInfo);
         }
 
@@ -146,8 +169,13 @@ namespace System
         //
         public static int Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseInt32(s, NumberStyles.Integer, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseInt32(
+                s,
+                NumberStyles.Integer,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         // Parses an integer from a String in the given style.  If
@@ -157,11 +185,16 @@ namespace System
         public static int Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseInt32(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
-        public static int Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null)
+        public static int Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
             return Number.ParseInt32(s, style, NumberFormatInfo.GetInstance(provider));
@@ -178,18 +211,33 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseInt32IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out int result)
         {
-            return Number.TryParseInt32IntegerStyle(s, NumberStyles.Integer, NumberFormatInfo.CurrentInfo, out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32IntegerStyle(
+                    s,
+                    NumberStyles.Integer,
+                    NumberFormatInfo.CurrentInfo,
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         // Parses an integer from a String in the given style. Returns false rather
         // than throwing an exception if input is invalid.
         //
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out int result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out int result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
 
@@ -199,13 +247,28 @@ namespace System
                 return false;
             }
 
-            return Number.TryParseInt32(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out int result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out int result
+        )
         {
             NumberFormatInfo.ValidateParseStyleInteger(style);
-            return Number.TryParseInt32(s, style, NumberFormatInfo.GetInstance(provider), out result) == Number.ParsingStatus.OK;
+            return Number.TryParseInt32(
+                    s,
+                    style,
+                    NumberFormatInfo.GetInstance(provider),
+                    out result
+                ) == Number.ParsingStatus.OK;
         }
 
         //
@@ -297,10 +360,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static int IAdditionOperators<int, int, int>.operator +(int left, int right) => left + right;
+        static int operator +(int left, int right) => left + right;
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static int IAdditionOperators<int, int, int>.operator checked +(int left, int right) => checked(left + right);
+        static int operator checked +(int left, int right) => checked(left + right);
 
         //
         // IAdditiveIdentity
@@ -314,19 +377,23 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />
-        public static (int Quotient, int Remainder) DivRem(int left, int right) => Math.DivRem(left, right);
+        public static (int Quotient, int Remainder) DivRem(int left, int right) =>
+            Math.DivRem(left, right);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.LeadingZeroCount(TSelf)" />
-        public static int LeadingZeroCount(int value) => BitOperations.LeadingZeroCount((uint)value);
+        public static int LeadingZeroCount(int value) =>
+            BitOperations.LeadingZeroCount((uint)value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
         public static int PopCount(int value) => BitOperations.PopCount((uint)value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        public static int RotateLeft(int value, int rotateAmount) => (int)BitOperations.RotateLeft((uint)value, rotateAmount);
+        public static int RotateLeft(int value, int rotateAmount) =>
+            (int)BitOperations.RotateLeft((uint)value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        public static int RotateRight(int value, int rotateAmount) => (int)BitOperations.RotateRight((uint)value, rotateAmount);
+        public static int RotateRight(int value, int rotateAmount) =>
+            (int)BitOperations.RotateRight((uint)value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
         public static int TrailingZeroCount(int value) => BitOperations.TrailingZeroCount(value);
@@ -354,7 +421,9 @@ namespace System
         {
             if (destination.Length >= sizeof(int))
             {
-                int value = BitConverter.IsLittleEndian ? BinaryPrimitives.ReverseEndianness(m_value) : m_value;
+                int value = BitConverter.IsLittleEndian
+                    ? BinaryPrimitives.ReverseEndianness(m_value)
+                    : m_value;
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(int);
@@ -372,7 +441,9 @@ namespace System
         {
             if (destination.Length >= sizeof(int))
             {
-                int value = BitConverter.IsLittleEndian ? m_value : BinaryPrimitives.ReverseEndianness(m_value);
+                int value = BitConverter.IsLittleEndian
+                    ? m_value
+                    : BinaryPrimitives.ReverseEndianness(m_value);
                 Unsafe.WriteUnaligned(ref MemoryMarshal.GetReference(destination), value);
 
                 bytesWritten = sizeof(int);
@@ -407,72 +478,72 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static int IBitwiseOperators<int, int, int>.operator &(int left, int right) => left & right;
+        static int operator &(int left, int right) => left & right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static int IBitwiseOperators<int, int, int>.operator |(int left, int right) => left | right;
+        static int operator |(int left, int right) => left | right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static int IBitwiseOperators<int, int, int>.operator ^(int left, int right) => left ^ right;
+        static int operator ^(int left, int right) => left ^ right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static int IBitwiseOperators<int, int, int>.operator ~(int value) => ~value;
+        static int operator ~(int value) => ~value;
 
         //
         // IComparisonOperators
         //
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        static bool IComparisonOperators<int, int>.operator <(int left, int right) => left < right;
+        static bool operator <(int left, int right) => left < right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<int, int>.operator <=(int left, int right) => left <= right;
+        static bool operator <=(int left, int right) => left <= right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        static bool IComparisonOperators<int, int>.operator >(int left, int right) => left > right;
+        static bool operator >(int left, int right) => left > right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<int, int>.operator >=(int left, int right) => left >= right;
+        static bool operator >=(int left, int right) => left >= right;
 
         //
         // IDecrementOperators
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static int IDecrementOperators<int>.operator --(int value) => --value;
+        static int operator --(int value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static int IDecrementOperators<int>.operator checked --(int value) => checked(--value);
+        static int operator checked --(int value) => checked(--value);
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static int IDivisionOperators<int, int, int>.operator /(int left, int right) => left / right;
+        static int operator /(int left, int right) => left / right;
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static int IDivisionOperators<int, int, int>.operator checked /(int left, int right) => left / right;
+        static int operator checked /(int left, int right) => left / right;
 
         //
         // IEqualityOperators
         //
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Equality(TSelf, TOther)" />
-        static bool IEqualityOperators<int, int>.operator ==(int left, int right) => left == right;
+        static bool operator ==(int left, int right) => left == right;
 
         /// <inheritdoc cref="IEqualityOperators{TSelf, TOther}.op_Inequality(TSelf, TOther)" />
-        static bool IEqualityOperators<int, int>.operator !=(int left, int right) => left != right;
+        static bool operator !=(int left, int right) => left != right;
 
         //
         // IIncrementOperators
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static int IIncrementOperators<int>.operator ++(int value) => ++value;
+        static int operator ++(int value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static int IIncrementOperators<int>.operator checked ++(int value) => checked(++value);
+        static int operator checked ++(int value) => checked(++value);
 
         //
         // IMinMaxValue
@@ -489,24 +560,25 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static int IModulusOperators<int, int, int>.operator %(int left, int right) => left % right;
+        static int operator %(int left, int right) => left % right;
 
         //
         // IMultiplicativeIdentity
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static int IMultiplicativeIdentity<int, int>.MultiplicativeIdentity => MultiplicativeIdentity;
+        static int IMultiplicativeIdentity<int, int>.MultiplicativeIdentity =>
+            MultiplicativeIdentity;
 
         //
         // IMultiplyOperators
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static int IMultiplyOperators<int, int, int>.operator *(int left, int right) => left * right;
+        static int operator *(int left, int right) => left * right;
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static int IMultiplyOperators<int, int, int>.operator checked *(int left, int right) => checked(left * right);
+        static int operator checked *(int left, int right) => checked(left * right);
 
         //
         // INumber
@@ -790,15 +862,23 @@ namespace System
             if (typeof(TOther) == typeof(double))
             {
                 double actualValue = (double)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Half))
             {
                 Half actualValue = (Half)(object)value;
-                result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-                         (actualValue == Half.NegativeInfinity) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue == Half.PositiveInfinity)
+                        ? MaxValue
+                        : (actualValue == Half.NegativeInfinity)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(short))
@@ -810,22 +890,34 @@ namespace System
             else if (typeof(TOther) == typeof(long))
             {
                 long actualValue = (long)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Int128))
             {
                 Int128 actualValue = (Int128)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(nint))
             {
                 nint actualValue = (nint)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(sbyte))
@@ -837,8 +929,12 @@ namespace System
             else if (typeof(TOther) == typeof(float))
             {
                 float actualValue = (float)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else
@@ -864,15 +960,23 @@ namespace System
             if (typeof(TOther) == typeof(double))
             {
                 double actualValue = (double)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(Half))
             {
                 Half actualValue = (Half)(object)value;
-                result = (actualValue == Half.PositiveInfinity) ? MaxValue :
-                         (actualValue == Half.NegativeInfinity) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue == Half.PositiveInfinity)
+                        ? MaxValue
+                        : (actualValue == Half.NegativeInfinity)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(short))
@@ -908,8 +1012,12 @@ namespace System
             else if (typeof(TOther) == typeof(float))
             {
                 float actualValue = (float)(object)value;
-                result = (actualValue >= MaxValue) ? MaxValue :
-                         (actualValue <= MinValue) ? MinValue : (int)actualValue;
+                result =
+                    (actualValue >= MaxValue)
+                        ? MaxValue
+                        : (actualValue <= MinValue)
+                            ? MinValue
+                            : (int)actualValue;
                 return true;
             }
             else
@@ -921,7 +1029,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<int>.TryConvertToChecked<TOther>(int value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<int>.TryConvertToChecked<TOther>(
+            int value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -989,7 +1100,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<int>.TryConvertToSaturating<TOther>(int value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<int>.TryConvertToSaturating<TOther>(
+            int value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1002,15 +1116,23 @@ namespace System
 
             if (typeof(TOther) == typeof(byte))
             {
-                byte actualResult = (value >= byte.MaxValue) ? byte.MaxValue :
-                                    (value <= byte.MinValue) ? byte.MinValue : (byte)value;
+                byte actualResult =
+                    (value >= byte.MaxValue)
+                        ? byte.MaxValue
+                        : (value <= byte.MinValue)
+                            ? byte.MinValue
+                            : (byte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(char))
             {
-                char actualResult = (value >= char.MaxValue) ? char.MaxValue :
-                                    (value <= char.MinValue) ? char.MinValue : (char)value;
+                char actualResult =
+                    (value >= char.MaxValue)
+                        ? char.MaxValue
+                        : (value <= char.MinValue)
+                            ? char.MinValue
+                            : (char)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1022,8 +1144,12 @@ namespace System
             }
             else if (typeof(TOther) == typeof(ushort))
             {
-                ushort actualResult = (value >= ushort.MaxValue) ? ushort.MaxValue :
-                                      (value <= ushort.MinValue) ? ushort.MinValue : (ushort)value;
+                ushort actualResult =
+                    (value >= ushort.MaxValue)
+                        ? ushort.MaxValue
+                        : (value <= ushort.MinValue)
+                            ? ushort.MinValue
+                            : (ushort)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -1060,7 +1186,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<int>.TryConvertToTruncating<TOther>(int value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<int>.TryConvertToTruncating<TOther>(
+            int value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1130,20 +1259,24 @@ namespace System
         // IParsable
         //
 
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out int result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out int result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // IShiftOperators
         //
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_LeftShift(TSelf, int)" />
-        static int IShiftOperators<int, int>.operator <<(int value, int shiftAmount) => value << shiftAmount;
+        static int operator <<(int value, int shiftAmount) => value << shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_RightShift(TSelf, int)" />
-        static int IShiftOperators<int, int>.operator >>(int value, int shiftAmount) => value >> shiftAmount;
+        static int operator >>(int value, int shiftAmount) => value >> shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_UnsignedRightShift(TSelf, int)" />
-        static int IShiftOperators<int, int>.operator >>>(int value, int shiftAmount) => value >>> shiftAmount;
+        static int operator >>>(int value, int shiftAmount) => value >>> shiftAmount;
 
         //
         // ISignedNumber
@@ -1157,36 +1290,41 @@ namespace System
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static int Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Integer, provider);
+        public static int Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Integer, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out int result) => TryParse(s, NumberStyles.Integer, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out int result
+        ) => TryParse(s, NumberStyles.Integer, provider, out result);
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static int ISubtractionOperators<int, int, int>.operator -(int left, int right) => left - right;
+        static int operator -(int left, int right) => left - right;
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static int ISubtractionOperators<int, int, int>.operator checked -(int left, int right) => checked(left - right);
+        static int operator checked -(int left, int right) => checked(left - right);
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static int IUnaryNegationOperators<int, int>.operator -(int value) => -value;
+        static int operator -(int value) => -value;
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static int IUnaryNegationOperators<int, int>.operator checked -(int value) => checked(-value);
+        static int operator checked -(int value) => checked(-value);
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static int IUnaryPlusOperators<int, int>.operator +(int value) => +value;
+        static int operator +(int value) => +value;
     }
 }

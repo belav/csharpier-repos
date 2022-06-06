@@ -23,16 +23,18 @@ namespace System
     [Serializable]
     [CLSCompliant(false)]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct UIntPtr
         : IEquatable<nuint>,
-          IComparable,
-          IComparable<nuint>,
-          ISpanFormattable,
-          ISerializable,
-          IBinaryInteger<nuint>,
-          IMinMaxValue<nuint>,
-          IUnsignedNumber<nuint>
+            IComparable,
+            IComparable<nuint>,
+            ISpanFormattable,
+            ISerializable,
+            IBinaryInteger<nuint>,
+            IMinMaxValue<nuint>,
+            IUnsignedNumber<nuint>
     {
         private readonly nuint _value;
 
@@ -83,7 +85,8 @@ namespace System
             info.AddValue("value", value);
         }
 
-        public override bool Equals([NotNullWhen(true)] object? obj) => (obj is nuint other) && Equals(other);
+        public override bool Equals([NotNullWhen(true)] object? obj) =>
+            (obj is nuint other) && Equals(other);
 
         public override int GetHashCode()
         {
@@ -190,8 +193,10 @@ namespace System
 
         public int CompareTo(nuint value)
         {
-            if (_value < value) return -1;
-            if (_value > value) return 1;
+            if (_value < value)
+                return -1;
+            if (_value > value)
+                return 1;
             return 0;
         }
 
@@ -199,19 +204,43 @@ namespace System
         public bool Equals(nuint other) => _value == other;
 
         public override string ToString() => ((nuint_t)_value).ToString();
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format) => ((nuint_t)_value).ToString(format);
-        public string ToString(IFormatProvider? provider) => ((nuint_t)_value).ToString(provider);
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider) => ((nuint_t)_value).ToString(format, provider);
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null) =>
-            ((nuint_t)_value).TryFormat(destination, out charsWritten, format, provider);
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format
+        ) => ((nuint_t)_value).ToString(format);
+
+        public string ToString(IFormatProvider? provider) => ((nuint_t)_value).ToString(provider);
+
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        ) => ((nuint_t)_value).ToString(format, provider);
+
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        ) => ((nuint_t)_value).TryFormat(destination, out charsWritten, format, provider);
 
         public static nuint Parse(string s) => (nuint)nuint_t.Parse(s);
+
         public static nuint Parse(string s, NumberStyles style) => (nuint)nuint_t.Parse(s, style);
-        public static nuint Parse(string s, IFormatProvider? provider) => (nuint)nuint_t.Parse(s, provider);
-        public static nuint Parse(string s, NumberStyles style, IFormatProvider? provider) => (nuint)nuint_t.Parse(s, style, provider);
-        public static nuint Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => (nuint)nuint_t.Parse(s, provider);
-        public static nuint Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Integer, IFormatProvider? provider = null) => (nuint)nuint_t.Parse(s, style, provider);
+
+        public static nuint Parse(string s, IFormatProvider? provider) =>
+            (nuint)nuint_t.Parse(s, provider);
+
+        public static nuint Parse(string s, NumberStyles style, IFormatProvider? provider) =>
+            (nuint)nuint_t.Parse(s, style, provider);
+
+        public static nuint Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            (nuint)nuint_t.Parse(s, provider);
+
+        public static nuint Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Integer,
+            IFormatProvider? provider = null
+        ) => (nuint)nuint_t.Parse(s, style, provider);
 
         public static bool TryParse([NotNullWhen(true)] string? s, out nuint result)
         {
@@ -219,13 +248,22 @@ namespace System
             return nuint_t.TryParse(s, out Unsafe.As<nuint, nuint_t>(ref result));
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out nuint result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out nuint result
+        )
         {
             Unsafe.SkipInit(out result);
             return nuint_t.TryParse(s, provider, out Unsafe.As<nuint, nuint_t>(ref result));
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out nuint result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out nuint result
+        )
         {
             Unsafe.SkipInit(out result);
             return nuint_t.TryParse(s, style, provider, out Unsafe.As<nuint, nuint_t>(ref result));
@@ -237,13 +275,22 @@ namespace System
             return nuint_t.TryParse(s, out Unsafe.As<nuint, nuint_t>(ref result));
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out nuint result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out nuint result
+        )
         {
             Unsafe.SkipInit(out result);
             return nuint_t.TryParse(s, provider, out Unsafe.As<nuint, nuint_t>(ref result));
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out nuint result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out nuint result
+        )
         {
             Unsafe.SkipInit(out result);
             return nuint_t.TryParse(s, style, provider, out Unsafe.As<nuint, nuint_t>(ref result));
@@ -254,10 +301,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static nuint IAdditionOperators<nuint, nuint, nuint>.operator +(nuint left, nuint right) => left + right;
+        static nuint operator +(nuint left, nuint right) => left + right;
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static nuint IAdditionOperators<nuint, nuint, nuint>.operator checked +(nuint left, nuint right) => checked(left + right);
+        static nuint operator checked +(nuint left, nuint right) => checked(left + right);
 
         //
         // IAdditiveIdentity
@@ -271,25 +318,31 @@ namespace System
         //
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.DivRem(TSelf, TSelf)" />
-        public static (nuint Quotient, nuint Remainder) DivRem(nuint left, nuint right) => Math.DivRem(left, right);
+        public static (nuint Quotient, nuint Remainder) DivRem(nuint left, nuint right) =>
+            Math.DivRem(left, right);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.LeadingZeroCount(TSelf)" />
-        public static nuint LeadingZeroCount(nuint value) => (nuint)BitOperations.LeadingZeroCount(value);
+        public static nuint LeadingZeroCount(nuint value) =>
+            (nuint)BitOperations.LeadingZeroCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.PopCount(TSelf)" />
         public static nuint PopCount(nuint value) => (nuint)BitOperations.PopCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateLeft(TSelf, int)" />
-        public static nuint RotateLeft(nuint value, int rotateAmount) => BitOperations.RotateLeft(value, rotateAmount);
+        public static nuint RotateLeft(nuint value, int rotateAmount) =>
+            BitOperations.RotateLeft(value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.RotateRight(TSelf, int)" />
-        public static nuint RotateRight(nuint value, int rotateAmount) => BitOperations.RotateRight(value, rotateAmount);
+        public static nuint RotateRight(nuint value, int rotateAmount) =>
+            BitOperations.RotateRight(value, rotateAmount);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TrailingZeroCount(TSelf)" />
-        public static nuint TrailingZeroCount(nuint value) => (nuint)BitOperations.TrailingZeroCount(value);
+        public static nuint TrailingZeroCount(nuint value) =>
+            (nuint)BitOperations.TrailingZeroCount(value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetShortestBitLength()" />
-        int IBinaryInteger<nuint>.GetShortestBitLength() => (sizeof(nuint_t) * 8) - BitOperations.LeadingZeroCount(_value);
+        int IBinaryInteger<nuint>.GetShortestBitLength() =>
+            (sizeof(nuint_t) * 8) - BitOperations.LeadingZeroCount(_value);
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.GetByteCount()" />
         int IBinaryInteger<nuint>.GetByteCount() => sizeof(nuint_t);
@@ -318,7 +371,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IBinaryInteger{TSelf}.TryWriteLittleEndian(Span{byte}, out int)" />
-        bool IBinaryInteger<nuint>.TryWriteLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IBinaryInteger<nuint>.TryWriteLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(nuint_t))
             {
@@ -355,62 +411,62 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static nuint IBitwiseOperators<nuint, nuint, nuint>.operator &(nuint left, nuint right) => left & right;
+        static nuint operator &(nuint left, nuint right) => left & right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static nuint IBitwiseOperators<nuint, nuint, nuint>.operator |(nuint left, nuint right) => left | right;
+        static nuint operator |(nuint left, nuint right) => left | right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static nuint IBitwiseOperators<nuint, nuint, nuint>.operator ^(nuint left, nuint right) => left ^ right;
+        static nuint operator ^(nuint left, nuint right) => left ^ right;
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static nuint IBitwiseOperators<nuint, nuint, nuint>.operator ~(nuint value) => ~value;
+        static nuint operator ~(nuint value) => ~value;
 
         //
         // IComparisonOperators
         //
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThan(TSelf, TOther)" />
-        static bool IComparisonOperators<nuint, nuint>.operator <(nuint left, nuint right) => left < right;
+        static bool operator <(nuint left, nuint right) => left < right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_LessThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<nuint, nuint>.operator <=(nuint left, nuint right) => left <= right;
+        static bool operator <=(nuint left, nuint right) => left <= right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThan(TSelf, TOther)" />
-        static bool IComparisonOperators<nuint, nuint>.operator >(nuint left, nuint right) => left > right;
+        static bool operator >(nuint left, nuint right) => left > right;
 
         /// <inheritdoc cref="IComparisonOperators{TSelf, TOther}.op_GreaterThanOrEqual(TSelf, TOther)" />
-        static bool IComparisonOperators<nuint, nuint>.operator >=(nuint left, nuint right) => left >= right;
+        static bool operator >=(nuint left, nuint right) => left >= right;
 
         //
         // IDecrementOperators
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static nuint IDecrementOperators<nuint>.operator --(nuint value) => --value;
+        static nuint operator --(nuint value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static nuint IDecrementOperators<nuint>.operator checked --(nuint value) => checked(--value);
+        static nuint operator checked --(nuint value) => checked(--value);
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static nuint IDivisionOperators<nuint, nuint, nuint>.operator /(nuint left, nuint right) => left / right;
+        static nuint operator /(nuint left, nuint right) => left / right;
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static nuint IDivisionOperators<nuint, nuint, nuint>.operator checked /(nuint left, nuint right) => left / right;
+        static nuint operator checked /(nuint left, nuint right) => left / right;
 
         //
         // IIncrementOperators
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static nuint IIncrementOperators<nuint>.operator ++(nuint value) => ++value;
+        static nuint operator ++(nuint value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static nuint IIncrementOperators<nuint>.operator checked ++(nuint value) => checked(++value);
+        static nuint operator checked ++(nuint value) => checked(++value);
 
         //
         // IMinMaxValue
@@ -427,7 +483,7 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static nuint IModulusOperators<nuint, nuint, nuint>.operator %(nuint left, nuint right) => left % right;
+        static nuint operator %(nuint left, nuint right) => left % right;
 
         //
         // IMultiplicativeIdentity
@@ -441,10 +497,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static nuint IMultiplyOperators<nuint, nuint, nuint>.operator *(nuint left, nuint right) => left * right;
+        static nuint operator *(nuint left, nuint right) => left * right;
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static nuint IMultiplyOperators<nuint, nuint, nuint>.operator checked *(nuint left, nuint right) => checked(left * right);
+        static nuint operator checked *(nuint left, nuint right) => checked(left * right);
 
         //
         // INumber
@@ -614,7 +670,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<nuint>.TryConvertFromSaturating<TOther>(TOther value, out nuint result)
+        static bool INumberBase<nuint>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out nuint result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -640,8 +699,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= nuint_t.MaxValue) ? unchecked((nuint)nuint_t.MaxValue) :
-                         (actualValue <= nuint_t.MinValue) ? unchecked((nuint)nuint_t.MinValue) : (nuint)actualValue;
+                result =
+                    (actualValue >= nuint_t.MaxValue)
+                        ? unchecked((nuint)nuint_t.MaxValue)
+                        : (actualValue <= nuint_t.MinValue)
+                            ? unchecked((nuint)nuint_t.MinValue)
+                            : (nuint)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -659,13 +722,19 @@ namespace System
             else if (typeof(TOther) == typeof(ulong))
             {
                 ulong actualValue = (ulong)(object)value;
-                result = (actualValue >= nuint_t.MaxValue) ? unchecked((nuint)nuint_t.MaxValue) : (nuint)actualValue;
+                result =
+                    (actualValue >= nuint_t.MaxValue)
+                        ? unchecked((nuint)nuint_t.MaxValue)
+                        : (nuint)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(UInt128))
             {
                 UInt128 actualValue = (UInt128)(object)value;
-                result = (actualValue >= nuint_t.MaxValue) ? unchecked((nuint)nuint_t.MaxValue) : (nuint)actualValue;
+                result =
+                    (actualValue >= nuint_t.MaxValue)
+                        ? unchecked((nuint)nuint_t.MaxValue)
+                        : (nuint)actualValue;
                 return true;
             }
             else
@@ -677,7 +746,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<nuint>.TryConvertFromTruncating<TOther>(TOther value, out nuint result)
+        static bool INumberBase<nuint>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out nuint result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -703,8 +775,12 @@ namespace System
             else if (typeof(TOther) == typeof(decimal))
             {
                 decimal actualValue = (decimal)(object)value;
-                result = (actualValue >= nuint_t.MaxValue) ? unchecked((nuint)nuint_t.MaxValue) :
-                         (actualValue <= nuint_t.MinValue) ? unchecked((nuint)nuint_t.MinValue) : (nuint)actualValue;
+                result =
+                    (actualValue >= nuint_t.MaxValue)
+                        ? unchecked((nuint)nuint_t.MaxValue)
+                        : (actualValue <= nuint_t.MinValue)
+                            ? unchecked((nuint)nuint_t.MinValue)
+                            : (nuint)actualValue;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
@@ -740,7 +816,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<nuint>.TryConvertToChecked<TOther>(nuint value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<nuint>.TryConvertToChecked<TOther>(
+            nuint value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -814,7 +893,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<nuint>.TryConvertToSaturating<TOther>(nuint value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<nuint>.TryConvertToSaturating<TOther>(
+            nuint value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -839,7 +921,8 @@ namespace System
             }
             else if (typeof(TOther) == typeof(short))
             {
-                short actualResult = (value >= (nuint)short.MaxValue) ? short.MaxValue : (short)value;
+                short actualResult =
+                    (value >= (nuint)short.MaxValue) ? short.MaxValue : (short)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -869,7 +952,8 @@ namespace System
             }
             else if (typeof(TOther) == typeof(sbyte))
             {
-                sbyte actualResult = (value >= (nuint)sbyte.MaxValue) ? sbyte.MaxValue : (sbyte)value;
+                sbyte actualResult =
+                    (value >= (nuint)sbyte.MaxValue) ? sbyte.MaxValue : (sbyte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
@@ -888,7 +972,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<nuint>.TryConvertToTruncating<TOther>(nuint value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<nuint>.TryConvertToTruncating<TOther>(
+            nuint value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -965,39 +1052,39 @@ namespace System
         //
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_LeftShift(TSelf, int)" />
-        static nuint IShiftOperators<nuint, nuint>.operator <<(nuint value, int shiftAmount) => value << shiftAmount;
+        static nuint operator <<(nuint value, int shiftAmount) => value << shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_RightShift(TSelf, int)" />
-        static nuint IShiftOperators<nuint, nuint>.operator >>(nuint value, int shiftAmount) => value >> shiftAmount;
+        static nuint operator >>(nuint value, int shiftAmount) => value >> shiftAmount;
 
         /// <inheritdoc cref="IShiftOperators{TSelf, TResult}.op_UnsignedRightShift(TSelf, int)" />
-        static nuint IShiftOperators<nuint, nuint>.operator >>>(nuint value, int shiftAmount) => value >>> shiftAmount;
+        static nuint operator >>>(nuint value, int shiftAmount) => value >>> shiftAmount;
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static nuint ISubtractionOperators<nuint, nuint, nuint>.operator -(nuint left, nuint right) => left - right;
+        static nuint operator -(nuint left, nuint right) => left - right;
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static nuint ISubtractionOperators<nuint, nuint, nuint>.operator checked -(nuint left, nuint right) => checked(left - right);
+        static nuint operator checked -(nuint left, nuint right) => checked(left - right);
 
         //
         // IUnaryNegationOperators
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static nuint IUnaryNegationOperators<nuint, nuint>.operator -(nuint value) => (nuint)0 - value;
+        static nuint operator -(nuint value) => (nuint)0 - value;
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static nuint IUnaryNegationOperators<nuint, nuint>.operator checked -(nuint value) => checked((nuint)0 - value);
+        static nuint operator checked -(nuint value) => checked((nuint)0 - value);
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static nuint IUnaryPlusOperators<nuint, nuint>.operator +(nuint value) => +value;
+        static nuint operator +(nuint value) => +value;
     }
 }
