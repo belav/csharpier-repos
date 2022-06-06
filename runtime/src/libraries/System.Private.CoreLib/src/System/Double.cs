@@ -23,15 +23,17 @@ namespace System
 {
     [Serializable]
     [StructLayout(LayoutKind.Sequential)]
-    [TypeForwardedFrom("mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089")]
+    [TypeForwardedFrom(
+        "mscorlib, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089"
+    )]
     public readonly struct Double
         : IComparable,
-          IConvertible,
-          ISpanFormattable,
-          IComparable<double>,
-          IEquatable<double>,
-          IBinaryFloatingPointIeee754<double>,
-          IMinMaxValue<double>
+            IConvertible,
+            ISpanFormattable,
+            IComparable<double>,
+            IEquatable<double>,
+            IBinaryFloatingPointIeee754<double>,
+            IMinMaxValue<double>
     {
         private readonly double m_value; // Do not rename (binary serialization)
 
@@ -88,7 +90,9 @@ namespace System
 
         internal const ulong BiasedExponentMask = 0x7FF0_0000_0000_0000;
         internal const int BiasedExponentShift = 52;
-        internal const ushort ShiftedExponentMask = (ushort)(BiasedExponentMask >> BiasedExponentShift);
+        internal const ushort ShiftedExponentMask = (ushort)(
+            BiasedExponentMask >> BiasedExponentShift
+        );
 
         internal const ulong TrailingSignificandMask = 0x000F_FFFF_FFFF_FFFF;
 
@@ -117,17 +121,15 @@ namespace System
 
         internal short Exponent
         {
-            get
-            {
-                return (short)(BiasedExponent - ExponentBias);
-            }
+            get { return (short)(BiasedExponent - ExponentBias); }
         }
 
         internal ulong Significand
         {
             get
             {
-                return TrailingSignificand | ((BiasedExponent != 0) ? (1UL << BiasedExponentShift) : 0UL);
+                return TrailingSignificand
+                    | ((BiasedExponent != 0) ? (1UL << BiasedExponentShift) : 0UL);
             }
         }
 
@@ -176,9 +178,9 @@ namespace System
             // A NaN will never equal itself so this is an
             // easy and efficient way to check for NaN.
 
-            #pragma warning disable CS1718
+#pragma warning disable CS1718
             return d != d;
-            #pragma warning restore CS1718
+#pragma warning restore CS1718
         }
 
         /// <summary>Determines whether the specified value is negative.</summary>
@@ -241,9 +243,12 @@ namespace System
 
             if (value is double d)
             {
-                if (m_value < d) return -1;
-                if (m_value > d) return 1;
-                if (m_value == d) return 0;
+                if (m_value < d)
+                    return -1;
+                if (m_value > d)
+                    return 1;
+                if (m_value == d)
+                    return 0;
 
                 // At least one of the values is NaN.
                 if (IsNaN(m_value))
@@ -258,9 +263,12 @@ namespace System
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
         public int CompareTo(double value)
         {
-            if (m_value < value) return -1;
-            if (m_value > value) return 1;
-            if (m_value == value) return 0;
+            if (m_value < value)
+                return -1;
+            if (m_value > value)
+                return 1;
+            if (m_value == value)
+                return 0;
 
             // At least one of the values is NaN.
             if (IsNaN(m_value))
@@ -351,39 +359,65 @@ namespace System
             return Number.FormatDouble(m_value, null, NumberFormatInfo.GetInstance(provider));
         }
 
-        public string ToString([StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format, IFormatProvider? provider)
+        public string ToString(
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] string? format,
+            IFormatProvider? provider
+        )
         {
             return Number.FormatDouble(m_value, format, NumberFormatInfo.GetInstance(provider));
         }
 
-        public bool TryFormat(Span<char> destination, out int charsWritten, [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default, IFormatProvider? provider = null)
+        public bool TryFormat(
+            Span<char> destination,
+            out int charsWritten,
+            [StringSyntax(StringSyntaxAttribute.NumericFormat)] ReadOnlySpan<char> format = default,
+            IFormatProvider? provider = null
+        )
         {
-            return Number.TryFormatDouble(m_value, format, NumberFormatInfo.GetInstance(provider), destination, out charsWritten);
+            return Number.TryFormatDouble(
+                m_value,
+                format,
+                NumberFormatInfo.GetInstance(provider),
+                destination,
+                out charsWritten
+            );
         }
 
         public static double Parse(string s)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseDouble(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseDouble(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo
+            );
         }
 
         public static double Parse(string s, NumberStyles style)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseDouble(s, style, NumberFormatInfo.CurrentInfo);
         }
 
         public static double Parse(string s, IFormatProvider? provider)
         {
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
-            return Number.ParseDouble(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.GetInstance(provider));
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            return Number.ParseDouble(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.GetInstance(provider)
+            );
         }
 
         public static double Parse(string s, NumberStyles style, IFormatProvider? provider)
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
-            if (s == null) ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
+            if (s == null)
+                ThrowHelper.ThrowArgumentNullException(ExceptionArgument.s);
             return Number.ParseDouble(s, style, NumberFormatInfo.GetInstance(provider));
         }
 
@@ -395,7 +429,11 @@ namespace System
         // PositiveInfinity or NegativeInfinity for a number that is too
         // large or too small.
 
-        public static double Parse(ReadOnlySpan<char> s, NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands, IFormatProvider? provider = null)
+        public static double Parse(
+            ReadOnlySpan<char> s,
+            NumberStyles style = NumberStyles.Float | NumberStyles.AllowThousands,
+            IFormatProvider? provider = null
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return Number.ParseDouble(s, style, NumberFormatInfo.GetInstance(provider));
@@ -409,15 +447,30 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo,
+                out result
+            );
         }
 
         public static bool TryParse(ReadOnlySpan<char> s, out double result)
         {
-            return TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, NumberFormatInfo.CurrentInfo, out result);
+            return TryParse(
+                s,
+                NumberStyles.Float | NumberStyles.AllowThousands,
+                NumberFormatInfo.CurrentInfo,
+                out result
+            );
         }
 
-        public static bool TryParse([NotNullWhen(true)] string? s, NumberStyles style, IFormatProvider? provider, out double result)
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out double result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
 
@@ -427,16 +480,31 @@ namespace System
                 return false;
             }
 
-            return TryParse((ReadOnlySpan<char>)s, style, NumberFormatInfo.GetInstance(provider), out result);
+            return TryParse(
+                (ReadOnlySpan<char>)s,
+                style,
+                NumberFormatInfo.GetInstance(provider),
+                out result
+            );
         }
 
-        public static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, IFormatProvider? provider, out double result)
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            IFormatProvider? provider,
+            out double result
+        )
         {
             NumberFormatInfo.ValidateParseStyleFloatingPoint(style);
             return TryParse(s, style, NumberFormatInfo.GetInstance(provider), out result);
         }
 
-        private static bool TryParse(ReadOnlySpan<char> s, NumberStyles style, NumberFormatInfo info, out double result)
+        private static bool TryParse(
+            ReadOnlySpan<char> s,
+            NumberStyles style,
+            NumberFormatInfo info,
+            out double result
+        )
         {
             return Number.TryParseDouble(s, style, info, out result);
         }
@@ -530,10 +598,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static double IAdditionOperators<double, double, double>.operator +(double left, double right) => left + right;
+        static double operator +(double left, double right) => left + right;
 
         /// <inheritdoc cref="IAdditionOperators{TSelf, TOther, TResult}.op_Addition(TSelf, TOther)" />
-        static double IAdditionOperators<double, double, double>.operator checked +(double left, double right) => left + right;
+        static double operator +(double left, double right) => left + right;
 
         //
         // IAdditiveIdentity
@@ -551,11 +619,13 @@ namespace System
         {
             ulong bits = BitConverter.DoubleToUInt64Bits(value);
 
-            ushort biasedExponent = ExtractBiasedExponentFromBits(bits);;
+            ushort biasedExponent = ExtractBiasedExponentFromBits(bits);
+            ;
             ulong trailingSignificand = ExtractTrailingSignificandFromBits(bits);
 
             return (value > 0)
-                && (biasedExponent != MinBiasedExponent) && (biasedExponent != MaxBiasedExponent)
+                && (biasedExponent != MinBiasedExponent)
+                && (biasedExponent != MaxBiasedExponent)
                 && (trailingSignificand == MinTrailingSignificand);
         }
 
@@ -567,28 +637,31 @@ namespace System
         //
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseAnd(TSelf, TOther)" />
-        static double IBitwiseOperators<double, double, double>.operator &(double left, double right)
+        static double operator &(double left, double right)
         {
-            ulong bits = BitConverter.DoubleToUInt64Bits(left) & BitConverter.DoubleToUInt64Bits(right);
+            ulong bits =
+                BitConverter.DoubleToUInt64Bits(left) & BitConverter.DoubleToUInt64Bits(right);
             return BitConverter.UInt64BitsToDouble(bits);
         }
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_BitwiseOr(TSelf, TOther)" />
-        static double IBitwiseOperators<double, double, double>.operator |(double left, double right)
+        static double operator |(double left, double right)
         {
-            ulong bits = BitConverter.DoubleToUInt64Bits(left) | BitConverter.DoubleToUInt64Bits(right);
+            ulong bits =
+                BitConverter.DoubleToUInt64Bits(left) | BitConverter.DoubleToUInt64Bits(right);
             return BitConverter.UInt64BitsToDouble(bits);
         }
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_ExclusiveOr(TSelf, TOther)" />
-        static double IBitwiseOperators<double, double, double>.operator ^(double left, double right)
+        static double operator ^(double left, double right)
         {
-            ulong bits = BitConverter.DoubleToUInt64Bits(left) ^ BitConverter.DoubleToUInt64Bits(right);
+            ulong bits =
+                BitConverter.DoubleToUInt64Bits(left) ^ BitConverter.DoubleToUInt64Bits(right);
             return BitConverter.UInt64BitsToDouble(bits);
         }
 
         /// <inheritdoc cref="IBitwiseOperators{TSelf, TOther, TResult}.op_OnesComplement(TSelf)" />
-        static double IBitwiseOperators<double, double, double>.operator ~(double value)
+        static double operator ~(double value)
         {
             ulong bits = ~BitConverter.DoubleToUInt64Bits(value);
             return BitConverter.UInt64BitsToDouble(bits);
@@ -599,20 +672,20 @@ namespace System
         //
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_Decrement(TSelf)" />
-        static double IDecrementOperators<double>.operator --(double value) => --value;
+        static double operator --(double value) => --value;
 
         /// <inheritdoc cref="IDecrementOperators{TSelf}.op_CheckedDecrement(TSelf)" />
-        static double IDecrementOperators<double>.operator checked --(double value) => --value;
+        static double operator --(double value) => --value;
 
         //
         // IDivisionOperators
         //
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_Division(TSelf, TOther)" />
-        static double IDivisionOperators<double, double, double>.operator /(double left, double right) => left / right;
+        static double operator /(double left, double right) => left / right;
 
         /// <inheritdoc cref="IDivisionOperators{TSelf, TOther, TResult}.op_CheckedDivision(TSelf, TOther)" />
-        static double IDivisionOperators<double, double, double>.operator checked /(double left, double right) => left / right;
+        static double operator /(double left, double right) => left / right;
 
         //
         // IExponentialFunctions
@@ -656,7 +729,8 @@ namespace System
         public static double Round(double x, MidpointRounding mode) => Math.Round(x, mode);
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.Round(TSelf, int, MidpointRounding)" />
-        public static double Round(double x, int digits, MidpointRounding mode) => Math.Round(x, digits, mode);
+        public static double Round(double x, int digits, MidpointRounding mode) =>
+            Math.Round(x, digits, mode);
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.Truncate(TSelf)" />
         public static double Truncate(double x) => Math.Truncate(x);
@@ -686,7 +760,10 @@ namespace System
         int IFloatingPoint<double>.GetSignificandBitLength() => 53;
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteExponentBigEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<double>.TryWriteExponentBigEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<double>.TryWriteExponentBigEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(short))
             {
@@ -710,7 +787,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteExponentLittleEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<double>.TryWriteExponentLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<double>.TryWriteExponentLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(short))
             {
@@ -734,7 +814,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteSignificandBigEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<double>.TryWriteSignificandBigEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<double>.TryWriteSignificandBigEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(ulong))
             {
@@ -758,7 +841,10 @@ namespace System
         }
 
         /// <inheritdoc cref="IFloatingPoint{TSelf}.TryWriteSignificandLittleEndian(Span{byte}, out int)" />
-        bool IFloatingPoint<double>.TryWriteSignificandLittleEndian(Span<byte> destination, out int bytesWritten)
+        bool IFloatingPoint<double>.TryWriteSignificandLittleEndian(
+            Span<byte> destination,
+            out int bytesWritten
+        )
         {
             if (destination.Length >= sizeof(ulong))
             {
@@ -816,10 +902,12 @@ namespace System
         public static double BitIncrement(double x) => Math.BitIncrement(x);
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.FusedMultiplyAdd(TSelf, TSelf, TSelf)" />
-        public static double FusedMultiplyAdd(double left, double right, double addend) => Math.FusedMultiplyAdd(left, right, addend);
+        public static double FusedMultiplyAdd(double left, double right, double addend) =>
+            Math.FusedMultiplyAdd(left, right, addend);
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.Ieee754Remainder(TSelf, TSelf)" />
-        public static double Ieee754Remainder(double left, double right) => Math.IEEERemainder(left, right);
+        public static double Ieee754Remainder(double left, double right) =>
+            Math.IEEERemainder(left, right);
 
         /// <inheritdoc cref="IFloatingPointIeee754{TSelf}.ILogB(TSelf)" />
         public static int ILogB(double x) => Math.ILogB(x);
@@ -863,10 +951,10 @@ namespace System
         //
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_Increment(TSelf)" />
-        static double IIncrementOperators<double>.operator ++(double value) => ++value;
+        static double operator ++(double value) => ++value;
 
         /// <inheritdoc cref="IIncrementOperators{TSelf}.op_CheckedIncrement(TSelf)" />
-        static double IIncrementOperators<double>.operator checked ++(double value) => ++value;
+        static double operator ++(double value) => ++value;
 
         //
         // ILogarithmicFunctions
@@ -905,31 +993,33 @@ namespace System
         //
 
         /// <inheritdoc cref="IModulusOperators{TSelf, TOther, TResult}.op_Modulus(TSelf, TOther)" />
-        static double IModulusOperators<double, double, double>.operator %(double left, double right) => left % right;
+        static double operator %(double left, double right) => left % right;
 
         //
         // IMultiplicativeIdentity
         //
 
         /// <inheritdoc cref="IMultiplicativeIdentity{TSelf, TResult}.MultiplicativeIdentity" />
-        static double IMultiplicativeIdentity<double, double>.MultiplicativeIdentity => MultiplicativeIdentity;
+        static double IMultiplicativeIdentity<double, double>.MultiplicativeIdentity =>
+            MultiplicativeIdentity;
 
         //
         // IMultiplyOperators
         //
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_Multiply(TSelf, TOther)" />
-        static double IMultiplyOperators<double, double, double>.operator *(double left, double right) => left * right;
+        static double operator *(double left, double right) => left * right;
 
         /// <inheritdoc cref="IMultiplyOperators{TSelf, TOther, TResult}.op_CheckedMultiply(TSelf, TOther)" />
-        static double IMultiplyOperators<double, double, double>.operator checked *(double left, double right) => left * right;
+        static double operator *(double left, double right) => left * right;
 
         //
         // INumber
         //
 
         /// <inheritdoc cref="INumber{TSelf}.Clamp(TSelf, TSelf, TSelf)" />
-        public static double Clamp(double value, double min, double max) => Math.Clamp(value, min, max);
+        public static double Clamp(double value, double min, double max) =>
+            Math.Clamp(value, min, max);
 
         /// <inheritdoc cref="INumber{TSelf}.CopySign(TSelf, TSelf)" />
         public static double CopySign(double x, double y) => Math.CopySign(x, y);
@@ -1096,21 +1186,30 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromChecked{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<double>.TryConvertFromChecked<TOther>(TOther value, out double result)
+        static bool INumberBase<double>.TryConvertFromChecked<TOther>(
+            TOther value,
+            out double result
+        )
         {
             return TryConvertFrom<TOther>(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromSaturating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<double>.TryConvertFromSaturating<TOther>(TOther value, out double result)
+        static bool INumberBase<double>.TryConvertFromSaturating<TOther>(
+            TOther value,
+            out double result
+        )
         {
             return TryConvertFrom<TOther>(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertFromTruncating{TOther}(TOther, out TSelf)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<double>.TryConvertFromTruncating<TOther>(TOther value, out double result)
+        static bool INumberBase<double>.TryConvertFromTruncating<TOther>(
+            TOther value,
+            out double result
+        )
         {
             return TryConvertFrom<TOther>(value, out result);
         }
@@ -1184,7 +1283,10 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToChecked{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<double>.TryConvertToChecked<TOther>(double value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<double>.TryConvertToChecked<TOther>(
+            double value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1252,20 +1354,28 @@ namespace System
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToSaturating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<double>.TryConvertToSaturating<TOther>(double value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<double>.TryConvertToSaturating<TOther>(
+            double value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             return TryConvertTo<TOther>(value, out result);
         }
 
         /// <inheritdoc cref="INumberBase{TSelf}.TryConvertToTruncating{TOther}(TSelf, out TOther)" />
         [MethodImpl(MethodImplOptions.AggressiveInlining)]
-        static bool INumberBase<double>.TryConvertToTruncating<TOther>(double value, [NotNullWhen(true)] out TOther result)
+        static bool INumberBase<double>.TryConvertToTruncating<TOther>(
+            double value,
+            [NotNullWhen(true)] out TOther result
+        )
         {
             return TryConvertTo<TOther>(value, out result);
         }
 
-        private static bool TryConvertTo<TOther>(double value, [NotNullWhen(true)] out TOther result)
-            where TOther : INumberBase<TOther>
+        private static bool TryConvertTo<TOther>(
+            double value,
+            [NotNullWhen(true)] out TOther result
+        ) where TOther : INumberBase<TOther>
         {
             // In order to reduce overall code duplication and improve the inlinabilty of these
             // methods for the corelib types we have `ConvertFrom` handle the same sign and
@@ -1278,65 +1388,103 @@ namespace System
 
             if (typeof(TOther) == typeof(byte))
             {
-                byte actualResult = (value >= byte.MaxValue) ? byte.MaxValue :
-                                    (value <= byte.MinValue) ? byte.MinValue : (byte)value;
+                byte actualResult =
+                    (value >= byte.MaxValue)
+                        ? byte.MaxValue
+                        : (value <= byte.MinValue)
+                            ? byte.MinValue
+                            : (byte)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(char))
             {
-                char actualResult = (value >= char.MaxValue) ? char.MaxValue :
-                                    (value <= char.MinValue) ? char.MinValue : (char)value;
+                char actualResult =
+                    (value >= char.MaxValue)
+                        ? char.MaxValue
+                        : (value <= char.MinValue)
+                            ? char.MinValue
+                            : (char)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(decimal))
             {
-                decimal actualResult = (value >= +79228162514264337593543950336.0) ? decimal.MaxValue :
-                                       (value <= -79228162514264337593543950336.0) ? decimal.MinValue :
-                                       IsNaN(value) ? 0.0m : (decimal)value;
+                decimal actualResult =
+                    (value >= +79228162514264337593543950336.0)
+                        ? decimal.MaxValue
+                        : (value <= -79228162514264337593543950336.0)
+                            ? decimal.MinValue
+                            : IsNaN(value)
+                                ? 0.0m
+                                : (decimal)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(ushort))
             {
-                ushort actualResult = (value >= ushort.MaxValue) ? ushort.MaxValue :
-                                      (value <= ushort.MinValue) ? ushort.MinValue : (ushort)value;
+                ushort actualResult =
+                    (value >= ushort.MaxValue)
+                        ? ushort.MaxValue
+                        : (value <= ushort.MinValue)
+                            ? ushort.MinValue
+                            : (ushort)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(uint))
             {
-                uint actualResult = (value >= uint.MaxValue) ? uint.MaxValue :
-                                    (value <= uint.MinValue) ? uint.MinValue : (uint)value;
+                uint actualResult =
+                    (value >= uint.MaxValue)
+                        ? uint.MaxValue
+                        : (value <= uint.MinValue)
+                            ? uint.MinValue
+                            : (uint)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(ulong))
             {
-                ulong actualResult = (value >= ulong.MaxValue) ? ulong.MaxValue :
-                                     (value <= ulong.MinValue) ? ulong.MinValue :
-                                     IsNaN(value) ? 0 : (ulong)value;
+                ulong actualResult =
+                    (value >= ulong.MaxValue)
+                        ? ulong.MaxValue
+                        : (value <= ulong.MinValue)
+                            ? ulong.MinValue
+                            : IsNaN(value)
+                                ? 0
+                                : (ulong)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(UInt128))
             {
-                UInt128 actualResult = (value >= 340282366920938463463374607431768211455.0) ? UInt128.MaxValue :
-                                       (value <= 0.0) ? UInt128.MinValue : (UInt128)value;
+                UInt128 actualResult =
+                    (value >= 340282366920938463463374607431768211455.0)
+                        ? UInt128.MaxValue
+                        : (value <= 0.0)
+                            ? UInt128.MinValue
+                            : (UInt128)value;
                 result = (TOther)(object)actualResult;
                 return true;
             }
             else if (typeof(TOther) == typeof(nuint))
             {
 #if TARGET_64BIT
-                nuint actualResult = (value >= ulong.MaxValue) ? unchecked((nuint)ulong.MaxValue) :
-                                     (value <= ulong.MinValue) ? unchecked((nuint)ulong.MinValue) : (nuint)value;
+                nuint actualResult =
+                    (value >= ulong.MaxValue)
+                        ? unchecked((nuint)ulong.MaxValue)
+                        : (value <= ulong.MinValue)
+                            ? unchecked((nuint)ulong.MinValue)
+                            : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
 #else
-                nuint actualResult = (value >= uint.MaxValue) ? uint.MaxValue :
-                                     (value <= uint.MinValue) ? uint.MinValue : (nuint)value;
+                nuint actualResult =
+                    (value >= uint.MaxValue)
+                        ? uint.MaxValue
+                        : (value <= uint.MinValue)
+                            ? uint.MinValue
+                            : (nuint)value;
                 result = (TOther)(object)actualResult;
                 return true;
 #endif
@@ -1352,7 +1500,11 @@ namespace System
         // IParsable
         //
 
-        public static bool TryParse([NotNullWhen(true)] string? s, IFormatProvider? provider, out double result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+        public static bool TryParse(
+            [NotNullWhen(true)] string? s,
+            IFormatProvider? provider,
+            out double result
+        ) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
 
         //
         // IPowerFunctions
@@ -1389,20 +1541,25 @@ namespace System
         //
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.Parse(ReadOnlySpan{char}, IFormatProvider?)" />
-        public static double Parse(ReadOnlySpan<char> s, IFormatProvider? provider) => Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
+        public static double Parse(ReadOnlySpan<char> s, IFormatProvider? provider) =>
+            Parse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider);
 
         /// <inheritdoc cref="ISpanParsable{TSelf}.TryParse(ReadOnlySpan{char}, IFormatProvider?, out TSelf)" />
-        public static bool TryParse(ReadOnlySpan<char> s, IFormatProvider? provider, out double result) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
+        public static bool TryParse(
+            ReadOnlySpan<char> s,
+            IFormatProvider? provider,
+            out double result
+        ) => TryParse(s, NumberStyles.Float | NumberStyles.AllowThousands, provider, out result);
 
         //
         // ISubtractionOperators
         //
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_Subtraction(TSelf, TOther)" />
-        static double ISubtractionOperators<double, double, double>.operator -(double left, double right) => left - right;
+        static double operator -(double left, double right) => left - right;
 
         /// <inheritdoc cref="ISubtractionOperators{TSelf, TOther, TResult}.op_CheckedSubtraction(TSelf, TOther)" />
-        static double ISubtractionOperators<double, double, double>.operator checked -(double left, double right) => left - right;
+        static double operator -(double left, double right) => left - right;
 
         //
         // ITrigonometricFunctions
@@ -1458,16 +1615,16 @@ namespace System
         //
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_UnaryNegation(TSelf)" />
-        static double IUnaryNegationOperators<double, double>.operator -(double value) => -value;
+        static double operator -(double value) => -value;
 
         /// <inheritdoc cref="IUnaryNegationOperators{TSelf, TResult}.op_CheckedUnaryNegation(TSelf)" />
-        static double IUnaryNegationOperators<double, double>.operator checked -(double value) => -value;
+        static double operator -(double value) => -value;
 
         //
         // IUnaryPlusOperators
         //
 
         /// <inheritdoc cref="IUnaryPlusOperators{TSelf, TResult}.op_UnaryPlus(TSelf)" />
-        static double IUnaryPlusOperators<double, double>.operator +(double value) => (double)(+value);
+        static double operator +(double value) => (double)(+value);
     }
 }
